@@ -23,17 +23,17 @@ XR3Player is a pure Java+JavaFX program .
 
 Some of it's current/future features are/will :
 
-1)Media Player
+       1)Media Player
 
-2)Media File Organizer
+       2)Media File Organizer
 
-3) Online Radio Listening
+       3) Online Radio Listening
+ 
+       4) Audio and Video Analyzer
 
-4) Audio and Video Analyzer
+       5)Many more in every update
 
-5)Many more in every update
-
-Tested in Windows and Linux only!
+->Tested in Windows and Linux only!
 
 It contains bugs and a lot of work need to be done but you can have fun with it :)
 
@@ -44,7 +44,7 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
    
     <XR3Player Made from the Bro for Bros ( A Next Generation JavaFX Media Player)>
 
-    Copyright © <2016>
+    Copyright © <2015-2017>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,4 +75,4 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
 
      END OF TERMS AND CONDITIONS
 
-     Copyright © <2016>  (www.goxr3plus.co.nf) . All rights reserved.
+     Copyright © <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.
