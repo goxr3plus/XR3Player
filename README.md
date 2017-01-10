@@ -1,6 +1,7 @@
 # XR3Player ( A modern JavaFX Media Player)
 
 -----------------------Current status ##Alpha-------------------------------------
+
 A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
 #Download on SourceForge
@@ -23,12 +24,17 @@ XR3Player is a pure Java+JavaFX program .
 Some of it's current/future features are/will :
 
 1)Media Player
+
 2)Media File Organizer
+
 3) Online Radio Listening
+
 4) Audio and Video Analyzer
+
 5)Many more in every update
 
-Tested in Windows and Linux only . Current State Pre-Beta/Alpha .
+Tested in Windows and Linux only!
+
 It contains bugs and a lot of work need to be done but you can have fun with it :)
 
 ------------------------------------------------------------------------------------
@@ -36,7 +42,7 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
 #License
 
    
-<XR3Player Made from the Bro for Bros ( A Next Generation JavaFX Media Player)>
+    <XR3Player Made from the Bro for Bros ( A Next Generation JavaFX Media Player)>
 
     Copyright © <2016>
 
@@ -53,17 +59,20 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-   Also(warning!):
+  Also(warning!):
  
-1)You are not allowed to sell this product to third party.
-2)You can't change license and made it like you are the owner,author etc.
-3) All redistributions of source code files must contain all copyright
-   notices that are currently in this file, and this list of conditions without
-   modification.
+    1)You are not allowed to sell this product to third party.
+
+    2)You can't change license and made it like you are the owner,author etc.
+
+    3) All redistributions of source code files must contain all copyright
+       notices that are currently in this file, and this list of conditions without
+       modification.
    
-   Special thanks!
-   ->Images contained into this application are downloaded from < https://icons8.com >
+  Special thanks!
 
-END OF TERMS AND CONDITIONS
+    ->Images contained into this application are downloaded from < https://icons8.com >
 
- Copyright © <2016>  (www.goxr3plus.co.nf) . All rights reserved.
+     END OF TERMS AND CONDITIONS
+
+     Copyright © <2016>  (www.goxr3plus.co.nf) . All rights reserved.
