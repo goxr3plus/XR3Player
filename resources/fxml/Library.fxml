@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXBadge?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.fontawesome.Icon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root maxWidth="150.0" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" StackPane.alignment="CENTER">
+			<image>
+				<Image url="@../image/library.png" />
+			</image>
+		</ImageView>
+		<Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="oh damn null!" wrapText="true">
+			<tooltip>
+				<Tooltip />
+			</tooltip>
+		</Label>
+		<Label fx:id="goSettings" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../image/gear.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Label>
+		<JFXBadge fx:id="ratingLabel" maxHeight="20.0" maxWidth="60.0" style="-fx-background-color: rgb(255,255,255,0.8);" styleClass="icons-badge" text="0.5" StackPane.alignment="TOP_LEFT">
+			<Icon awesomeIcon="STAR" size="2em" style=";" styleClass="icon" />
+		</JFXBadge>
+		<Region fx:id="selectionRegion" style="-fx-background-color: rgb(255,255,255,0.3);" styleClass=".library-selection-region" />
+		<JFXCheckBox fx:id="selectionBox" alignment="CENTER" checkedColor="#e12f2f" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="0.0" text=" " unCheckedColor="#c6ed11">
+			<StackPane.margin>
+				<Insets />
+			</StackPane.margin>
+		</JFXCheckBox>
+	</children>
+	<cursor>
+		<Cursor fx:constant="HAND" />
+	</cursor>
+</fx:root>

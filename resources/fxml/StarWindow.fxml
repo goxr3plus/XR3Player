@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<fx:root prefHeight="44.0" prefWidth="253.0" style="-fx-background-color: rgb(16,26,24);" type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="166.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="42.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="44.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button fx:id="ok" alignment="CENTER" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <Canvas fx:id="canvas" height="33.0" style="-fx-cursor: hand;" width="160.0" />
+      <Button fx:id="close" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+         <tooltip>
+            <Tooltip text="Close Window" />
+         </tooltip>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../image/x.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</fx:root>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+
+<AnchorPane prefHeight="179.0" prefWidth="284.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="borderless.BorderlessController">
+   <children>
+      <Region />
+      <Pane fx:id="topLeftPane" prefHeight="10.0" prefWidth="10.0" styleClass="topLeftPane" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="NW_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="topRightPane" prefHeight="10.0" prefWidth="10.0" styleClass="topRightPane" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="NE_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="bottomRightPane" prefHeight="10.0" prefWidth="10.0" styleClass="bottomRightPane" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="SE_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="bottomLeftPane" prefHeight="10.0" prefWidth="10.0" styleClass="bottomLeftPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="SW_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="leftPane" prefWidth="8.0" styleClass="leftPane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+         <cursor>
+            <Cursor fx:constant="W_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="rightPane" prefWidth="8.0" styleClass="rightPane" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+         <cursor>
+            <Cursor fx:constant="E_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="topPane" prefHeight="8.0" styleClass="topPane" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="N_RESIZE" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="bottomPane" prefHeight="8.0" styleClass="bottomPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <cursor>
+            <Cursor fx:constant="S_RESIZE" />
+         </cursor>
+      </Pane>
+   </children>
+</AnchorPane>

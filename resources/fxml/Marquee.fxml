@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Rectangle?>
+
+<fx:root fx:id="root" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="100.0" style="-fx-border-color: orange; -fx-background-color: white;" type="Pane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+     <Text fx:id="text" layoutX="5.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: black; -fx-font-weight: bold;" text="Stopped" />
+  </children>
+  <clip>
+     <Rectangle width="${root.width}" height="${root.height}"/>
+  </clip>
+</fx:root>

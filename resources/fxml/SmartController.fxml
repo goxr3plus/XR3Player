@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root styleClass="smartController" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="mainBorder" style="-fx-background-color: transparent;">
+         <top>
+            <TitledPane fx:id="titledPane" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" minWidth="0.0" text="I am The TilePane and i don't like wrapping the text!" wrapText="true" BorderPane.alignment="CENTER">
+               <content>
+                  <GridPane fx:id="topGrid" hgap="5.0" style="-fx-background-color: rgb(0,0,0,0.85);;">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="70.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="40.0" percentWidth="15.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="15.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="current page" />
+                           </tooltip>
+                           <contextMenu>
+                              <ContextMenu />
+                           </contextMenu>
+                        </TextField>
+                        <MenuButton fx:id="settingsButton" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                           <items>
+                              <Menu fx:id="totalItemsShown" mnemonicParsing="false" text="Total Shown">
+                                 <items>
+                                    <RadioMenuItem mnemonicParsing="false" selected="true" text="50">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="totalShownGroup" />
+                                       </toggleGroup></RadioMenuItem>
+                                    <RadioMenuItem mnemonicParsing="false" text="100" toggleGroup="$totalShownGroup" />
+                                 </items>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/eye2.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Menu>
+                              <Menu mnemonicParsing="false" text="Actions">
+                                <items>
+                                  <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/import24.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></MenuItem>
+                                    <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/export24.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></MenuItem>
+                                </items>
+                              </Menu>
+                              <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></MenuItem>
+                           </items>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/gear.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuButton>
+                     </children>
+                  </GridPane>
+               </content>
+            </TitledPane>
+         </top>
+         <center>
+            <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" StackPane.alignment="CENTER_LEFT">
+                     <tooltip>
+                        <Tooltip text="Previous" />
+                     </tooltip>
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin>
+                     <graphic>
+                        <ImageView id="arrowButton" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" StackPane.alignment="CENTER_RIGHT">
+                     <StackPane.margin>
+                        <Insets right="15.0" />
+                     </StackPane.margin>
+                     <tooltip>
+                        <Tooltip text="Next" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView id="arrowButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+      <Region fx:id="region" visible="false" />
+      <ProgressIndicator fx:id="indicator" progress="0.0" visible="false" />
+      <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+         <tooltip>
+            <Tooltip text="Cancel" />
+         </tooltip>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</fx:root>

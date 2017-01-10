@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <TabPane style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab closable="false" text="Settings">
+                     <content>
+                        <ScrollPane styleClass="xPlayerSettingsTab">
+                           <content>
+                              <GridPane hgap="10.0" vgap="10.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="0.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                 </rowConstraints>
+                                 <children>
+                                    <JFXCheckBox fx:id="showFPS" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" selected="true" text="Show FPS " GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Checked=It will show the frames per second into the visualizer" />
+                                       </tooltip>
+                                    </JFXCheckBox>
+                                    <JFXCheckBox fx:id="startImmediately" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" selected="true" text="Start at once" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Checked=When you drop a song into the player it wil start immediately" />
+                                       </tooltip>
+                                    </JFXCheckBox>
+                                    <JFXCheckBox fx:id="askSecurityQuestion" layoutX="10.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" selected="true" text="Ask Security Question" wrapText="true" GridPane.rowIndex="2">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Checked=When you drop a song into the player it will ask security question" />
+                                       </tooltip>
+                                    </JFXCheckBox>
+                                 </children>
+                              </GridPane>
+                           </content>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="equalizerTab" closable="false" text="Equalizer">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" />
+                     </content>
+                  </Tab>
+                  <Tab fx:id="playListTab" closable="false" disable="true" text="PlayList">
+                     <content>
+                        <ScrollPane />
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <Button fx:id="closeSettings" mnemonicParsing="false" text="X" StackPane.alignment="TOP_RIGHT">
+               <tooltip>
+                  <Tooltip text="Close the Settings [!Tip -&gt; You can also press &gt;ESCAPE&lt; KEY]" />
+               </tooltip></Button>
+         </children>
+      </StackPane>
+   </center>
+</fx:root>

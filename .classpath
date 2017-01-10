@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="resources/libs/commons-io-2.5.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/commons-io-2.5-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/GoXr3PlusGenerator/XR3Player/Libraries%20Docs/commons-io-2.5-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Audio Analysis"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Graphics"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Database Connection"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JGroups"/>
+	<classpathentry kind="lib" path="resources/libs/jfoenix.jar"/>
+	<classpathentry kind="lib" path="resources/libs/easybind-1.0.3.jar"/>
+	<classpathentry kind="lib" path="resources/libs/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

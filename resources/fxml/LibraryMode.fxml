@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root fx:id="root" prefHeight="354.0" prefWidth="511.0" type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="65.0" prefWidth="352.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="273.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" percentHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" percentHeight="60.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <BorderPane fx:id="borderPane" GridPane.columnSpan="2">
+         <center>
+            <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" translateX="5.0" StackPane.alignment="BOTTOM_LEFT">
+                     <tooltip>
+                        <Tooltip text="Previous" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" translateX="-5.0" StackPane.alignment="BOTTOM_RIGHT">
+                     <tooltip>
+                        <Tooltip text="Next" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true" translateX="2.0">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Button fx:id="newLibrary" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create Library +">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
+            </StackPane>
+         </center>
+         <top>
+            <GridPane fx:id="topGrid" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="55.0" minWidth="10.0" percentWidth="10.0" prefWidth="41.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="462.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="462.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="createLibrary" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/add.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Create new Library" />
+                     </tooltip>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <JFXToggleButton fx:id="selectionModeToggle" disable="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Selection Mode" textFill="WHITE" GridPane.columnIndex="1">
+                     <tooltip>
+                        <Tooltip text="Enable Libraries Selection" />
+                     </tooltip>
+                  </JFXToggleButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
+            </GridPane>
+         </top>
+         <GridPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </GridPane.margin>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</fx:root>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="524.0" style="-fx-background-color: transparent;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="visualizerPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
+      <BorderPane fx:id="topBar" maxHeight="-Infinity" prefHeight="31.0" prefWidth="524.0" style="-fx-background-color: rgb(0,0,0,0.95);" StackPane.alignment="TOP_CENTER">
+         <StackPane.margin>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+         </StackPane.margin>
+         <left>
+            <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.25" max="1.0" min="0.1" minorTickCount="5" prefHeight="38.0" prefWidth="86.0" showTickLabels="true" showTickMarks="true" styleClass="transparency-slider" value="0.9" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="7.0" right="7.0" top="5.0" />
+               </BorderPane.margin>
+            </Slider>
+         </left>
+         <right>
+            <HBox alignment="CENTER" spacing="2.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="minimize" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                           <image>
+                              <Image url="@../image/extend.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <MenuButton mnemonicParsing="false" text="More">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Background">
+                          <items>
+                            <MenuItem fx:id="setBackground" mnemonicParsing="false" text="setImage" />
+                            <MenuItem fx:id="clearBackground" mnemonicParsing="false" text="clear" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Foreground">
+                           <items>
+                              <MenuItem fx:id="setForeground" mnemonicParsing="false" text="setImage" />
+                           </items>
+                        </Menu>
+                    </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </MenuButton>
+                  <ToggleButton fx:id="onTop" disable="true" mnemonicParsing="false" text="On Top">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="True=This Window is on top of all other windows" />
+                     </tooltip>
+                  </ToggleButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
+            </HBox>
+         </right>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15;" text="~Visualizer~" BorderPane.alignment="CENTER">
+                     <effect>
+                        <DropShadow color="#20c6a2" radius="10.7425" spread="0.91" width="23.97" />
+                     </effect>
+                  </Label>
+               </center>
+               <right>
+                  <StackPane prefHeight="48.0" prefWidth="70.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ProgressBar fx:id="progressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="35.0" />
+                        <Label fx:id="progressLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: black;" text="100%" />
+                     </children>
+                  </StackPane>
+               </right>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </children>
+</fx:root>

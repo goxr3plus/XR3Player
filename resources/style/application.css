@@ -1,0 +1,1005 @@
+
+.icon{
+	-fx-text-fill: #FE774D;
+	-fx-padding: 10.0;
+	-fx-cursor: hand;
+}
+
+.icons-badge .badge-pane {
+	-fx-background-color:#ff4081;
+	-fx-background-radius:23.0;	
+	-fx-pref-width: 23.0;
+	-fx-pref-height: 23.0;	
+	-fx-alignment: center;
+}
+
+.icons-badge Label{
+	-fx-font-weight: BOLD;
+	-fx-font-size: 13.0px !important;
+	-fx-text-fill: WHITE;
+}
+
+/*******************************************************************************
+
+*                           CheckBox                            *
+
+******************************************************************************/
+
+
+/*.check-box .box {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0.0 0.0 -1.0 0.0, 0.0, 1.0, 2.0;
+    -fx-background-radius: 2.0, 2.0, 1.0, 1.0;
+   
+    -fx-padding: 16.0;  3 -- padding from the outside edge to the mark 
+}
+*/
+
+
+/*******************************************************************************
+
+*                            TableView                               *
+
+******************************************************************************/
+
+
+
+.table-view{
+   /*-fx-background-color: transparent;*/
+}
+
+.table-view:focused{
+    /*-fx-background-color: transparent;*/
+}
+
+
+.table-view .column-header {
+     -fx-background-color: transparent;
+} 
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#131313 0.0%, #424141 100.0%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent; 
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+.table-view .table-column{
+	-fx-alignment:center;
+}
+
+ 
+/* .table-row-cell */
+
+.table-row-cell:disabled{
+	-fx-opacity:0.5;
+}
+
+.table-row-cell .text{
+	-fx-font-weight:bold;
+    -fx-fill: black ;
+} 
+
+.table-row-cell:focused .text {
+     -fx-fill: white ;
+}
+
+.table-row-cell:hover .text {
+     -fx-fill: white ;
+}
+
+.table-row-cell:focused{
+	-fx-background-color:purple;
+}
+
+.table-row-cell:focused:disabled{ 
+	-fx-background-color:blue;
+}
+
+.table-row-cell:hover{
+	-fx-background-color:magenta;
+}
+
+
+
+.table-view .filler {
+    -fx-text-fill: white;
+    -fx-border-width: 0.0, 0.0;
+    -fx-font-size: 12.0px;
+}
+
+
+
+/* 
+.table-view .table-cell{
+	-fx-font-weight:bold;
+	-fx-text-fill:black;	
+}
+
+ .table-row-cell{
+    -fx-background-color: white;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.0em; 
+}
+
+.table-row-cell:odd{
+    -fx-background-color: orange;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.0em;  
+}
+ 
+ .table-view {
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+    -fx-alignment: center;
+}
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.3) transparent;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-padding: 0 10 0 0;
+}
+.table-view .column-header, .table-view .filler {
+    -fx-border-color: transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: firebrick;
+    -fx-font-weight: bold;
+}
+.table-view .table-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: black;
+    -fx-alignment: center;
+}
+.table-view  .table-row-cell:filled:selected:focused,
+.table-view  .table-row-cell:filled:selected {
+    -fx-background-color: rgba(0,0,0,0.3);
+}
+
+*/
+
+/*******************************************************************************
+
+*                            ListView                               *
+
+******************************************************************************/
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0.0%, #207BCF 25.0%, #1973C9 75.0%, #0A65BF 100.0%);
+    -fx-text-fill: white;
+}
+
+.list-cell{
+	-fx-font-size:15.0;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #0093ff;
+    -fx-text-fill: white;
+}
+
+
+/*******************************************************************************
+
+*                            DialogPane                                *
+
+******************************************************************************/
+
+
+.dialog-pane{
+  -fx-border-color:black;
+  -fx-border-width:2.0px;
+ }
+
+.dialog-pane > .button-bar > .container {
+  -fx-background-color:black;
+}
+
+.dialog-pane > .content.label {
+   -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+   -fx-background-color: yellow;
+   -fx-text-fill:black;
+   -fx-font-size:15.0px;
+}
+
+.dialog-pane:header .header-panel {
+  -fx-background-color: black;
+}
+
+.dialog-pane:header .header-panel .label{
+  -fx-background-color: yellow;
+  -fx-background-radius:10.0px;
+  -fx-text-fill:black;
+  -fx-font-size:15.0px;
+}
+
+
+.dialog-pane .button{
+   -fx-background-color:black;
+   -fx-text-fill:white;
+   -fx-wrap-text: true;
+   -fx-effect: dropshadow( three-pass-box, yellow, 10.0, 0.0, 0.0, 0.0);
+   -fx-cursor:hand;
+ }
+
+.dialog-pane .button:hover{     
+  -fx-background-color:white;
+  -fx-text-fill:black;
+  -fx-font-weight:bold; 
+ }
+
+
+/*******************************************************************************
+
+*                           ToolTip                              *
+
+******************************************************************************/
+
+.tooltip{
+  -fx-background-color: yellow;
+  -fx-text-fill:black;
+  -fx-font-size:12.0;
+  -fx-effect: dropshadow( three-pass-box, black, 10.0, 0.0, 0.0, 0.0);
+  -fx-wrap-text:true;
+}
+
+
+
+/*******************************************************************************
+
+*                              TitledPane                                     *
+
+******************************************************************************/
+
+
+.titled-pane {
+	-fx-background-color:transparent;
+	-fx-font-weight:bold;
+	-fx-text-fill:black;
+}
+
+.titled-pane > *.content {
+	-fx-effect: innershadow(three-pass-box, white, 15.0, 0.0, 0.0, 0.0);
+    -fx-background-color:transparent;
+}
+
+.titled-pane > .title {
+    -fx-background-color:  -fx-box-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0.0, 1.0, 2.0;
+    -fx-background-radius: 5.0 5.0 0.0 0.0, 4.0 4.0 0.0 0.0, 3.0 3.0 0.0 0.0;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+}
+
+
+/*******************************************************************************
+
+*                             TabPane                                      *
+
+******************************************************************************/
+ 
+
+.tab-pane .tab-header-area .tab-header-background {
+    /*-fx-opacity: 0.0;*/
+    -fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);    	    
+}
+
+.tab-pane{	
+    -fx-tab-min-width:90.0px; 
+}
+
+
+.tab-pane .tab{
+    -fx-background-color: black;
+    -fx-background-radius: 20.0 0.0 20.0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;   
+}
+
+.tab-pane .tab:selected{
+    -fx-background-color: orange;
+}
+
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12.0px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill:brown ;
+    -fx-font-size:130.0%;
+}
+
+.tab:hover .tab-label{
+	-fx-text-fill:white;
+	-fx-background-color:firebrick;	
+	-fx-background-radius:8.0px;
+}
+
+
+/*Special Tab Pane */
+
+#SpecialTabPane .tab-header-area .tab-header-background {
+   -fx-background-color:transparent;
+}
+
+#SpecialTabPane .STab.tab .tab-label{
+   -fx-text-fill:white;
+   -fx-background-color: transparent;
+   -fx-background-radius:0.0px;
+   -fx-rotate:90.0; 
+}
+
+#SpecialTabPane .STab.tab:selected .tab-label{
+	-fx-text-fill:white;
+}
+
+#SpecialTabPane .STab.tab:hover .tab-label{
+	-fx-text-fill:black;
+	-fx-background-radius:5.0px;
+	-fx-background-color: white;   
+}
+
+#SpecialTabPane .STab.tab{
+   -fx-background-color:black;
+   -fx-background-radius:20.0 20.0 0.0 0.0;
+   -fx-padding:3.0em 0.0em 3.0em 0.0em; 
+   -fx-cursor:hand;	
+   -fx-effect: innershadow(two-pass-box, white, 15.0, 0.0, 0.0, 0.0);
+}
+
+#SpecialTabPane .STab.tab:selected{
+	-fx-effect: innershadow(two-pass-box, red, 15.0, 0.0, 0.0, 0.0);
+}
+
+
+/*  LibrariesTabPane */
+#LibrariesTabPane .tab-header-area .tab-header-background {
+    -fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);    	    
+}
+
+
+/*******************************************************************************
+
+* 						Button                                      *
+
+******************************************************************************/
+
+ /**About Button  ----------------------------------------*/
+
+ .button {
+ 	-fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  
+ 	-fx-background-radius: 5.0;
+    -fx-text-fill: white;  
+    /*-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );*/
+    -fx-font-size: 13.0px;
+ }
+ 
+ .button:hover{
+ 	-fx-background-color:rgb(255.0,119.0,0.0,0.7);
+    /*-fx-background-color: 
+        linear-gradient(from 0.0% 93.0% to 0.0% 100.0%, #a34313 0.0%, #903b12 100.0%),
+        #9d4024,
+        #d86e3a,
+        radial-gradient(center 50.0% 50.0%, radius 100.0%, #ea7f4b, #c54e2c);*/
+ }
+ 
+ 
+ /**About SongButton  ----------------------------------------*/
+ 
+ .songButton{
+ 	-fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  
+ 	-fx-background-radius: 5.0;
+    -fx-text-fill: white;
+    -fx-font-size: 13.0px;
+    
+ }
+ 
+ .songButton:hover{
+ 	-fx-background-color:orange;
+ 	-fx-text-fill:black;
+ }
+ 
+ .songButton:focused{
+ 	-fx-background-color: linear-gradient(to bottom,black 60.0, #141414 60.2%, orange 87.0%);   
+ 	-fx-text-fill:white;
+ }
+ 
+ .songButton:marked{
+ 	-fx-background-color:cyan;
+ 	-fx-background-radius:5.0;
+ 	-fx-text-fill:black;
+ 	-fx-font-size:13.0px;
+ }
+ 
+ 
+ /**About ArrowButon(in Libraries)  ----------------------------------------*/
+  
+  .arrowButton{
+  	-fx-background-color:rgb(255.0,255.0,255.0,0.2);
+  	-fx-background-radius:45.0;
+  	-fx-cursor:hand;
+  }
+  
+ 
+ 
+ 
+ 
+ /**About SpecialButton(in Navigation Bar) ----------------------------------------*/
+ 
+  .specialButton{	
+ 	-fx-background-color:black; 
+ 	-fx-text-fill:white;
+ 	-fx-background-radius:20.0px;	
+ 	-fx-effect: dropshadow( three-pass-box , orange , 5.0, 0.0 , 0.0 , 1.0 );
+ 	-fx-cursor:hand;	 
+  }
+  
+  .specialButton:hover{
+  	-fx-background-color:white;	  
+  	-fx-text-fill:black;	
+  }
+  
+  .windowButton{
+  	-fx-font-size:9.0;	
+  	-fx-font-weight:bold;
+  }
+  
+  
+   
+  
+   
+ 
+ 
+/*******************************************************************************
+
+* CSS Styles for the ContextMenu,MenuItem,..                                  *
+
+******************************************************************************/
+
+ 
+ .context-menu {
+  	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
+  	-fx-background-radius:4.0;
+  	-fx-border-color:white;
+  	-fx-border-width:2.0; 	
+    -fx-border-style:segments(4.0); 
+}
+
+ .menu-item .label{
+ 	-fx-text-fill:white;
+ 	-fx-font-weight:bold;
+ }
+ 
+ .menu-item:focused {
+ 	-fx-background-color:orange;
+ 	-fx-background-radius:10.0;
+ }
+ 
+
+ 
+ 
+/*******************************************************************************
+
+* 					ScrollPane                                 *
+
+******************************************************************************/
+  .scroll-pane .viewport {
+    -fx-background-color: transparent;
+  }
+
+  .scroll-pane {
+	-fx-background-color:transparent;
+  }
+  
+  
+  .scroll-bar{
+    -fx-background-color: transparent;
+    /*-fx-background-radius:2.0em;*/
+  }
+
+  .scroll-bar:horizontal .increment-arrow {
+  	-fx-background-color: black;
+   -fx-shape: "M 0 0 L 4 8 L 8 0 Z";  
+   -fx-padding: 0.3em;
+   -fx-rotate: -90.0;
+  }
+  
+   .scroll-bar:horizontal .decrement-arrow {
+   -fx-background-color: black;
+   -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+   -fx-padding: 0.3em;
+   -fx-rotate: 90.0;
+  }
+  
+  .scroll-bar:vertical .increment-arrow {
+   -fx-background-color: rgb(211.0,211.0,211.0);
+   -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+   -fx-padding: 0.3em;
+   -fx-rotate: 0.0;
+  }
+  
+  
+  
+  .scroll-bar:vertical .decrement-arrow {
+   -fx-background-color: rgb(211.0,211.0,211.0);
+   -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+   -fx-padding: 0.3em;
+   -fx-rotate: -180.0;
+  }
+
+  .scroll-bar:vertical .increment-button,
+  .scroll-bar:vertical .decrement-button {
+   -fx-background-color:transparent;
+  }
+  
+  .scroll-bar:horizontal .increment-button,
+  .scroll-bar:horizontal .decrement-button {
+   -fx-background-color:transparent;
+  }
+
+
+/*******************************************************************************
+
+* 							TreeView                                 *
+
+******************************************************************************/
+
+
+.tree-cell {
+    -fx-background-color: black ;
+    -fx-text-fill: white ;
+}
+
+.tree-cell:selected {
+    -fx-font-weight: bold ;
+    -fx-text-fill:orange; 
+}
+.tree-cell {
+    -fx-padding: 0.75em 0.0em 0.75em 0.0em ;
+}
+.tree-cell:sub-tree-item {
+    -fx-padding: 0.25em ;
+}
+
+
+
+
+/*******************************************************************************
+
+*			ProgressBar/ProgressIndicator                                 *
+
+******************************************************************************/
+
+.progress-indicator{
+	-fx-progress-color:orange;
+}
+
+.progress-bar{
+	-fx-progress-color:orange;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(
+        from 0.0px 0.75em to 0.75em 0.0px,
+        repeat,
+        -fx-accent 0.0%,
+        -fx-accent 49.0%,
+        derive(-fx-accent, 30.0%) 50.0%,
+        derive(-fx-accent, 30.0%) 99.0%
+    );
+}
+  
+  
+ /*******************************************************************************
+
+* 								TagsBar                        *
+
+******************************************************************************/
+   
+  .tags-bar {
+    -fx-background-color:white;
+    -fx-background-radius:15.0px;   
+    -fx-min-height: 45.0;
+    -fx-alignment:center-right;
+    -fx-spacing: 3.0px;
+    -fx-padding: 3.0px;
+ }
+
+ .tags-bar .tag {
+    -fx-background-color:black;
+    -fx-background-radius:10.0px;   
+    -fx-alignment: center;
+    -fx-padding:1.0px;
+    -fx-cursor:hand;
+ }
+ 
+  .tags-bar .tag .label{	
+  	-fx-text-fill:white;
+  	-fx-font-size:14.0px;
+  }
+   
+      
+/*******************************************************************************
+
+*								  Amazon                   *
+
+******************************************************************************/ 
+
+ .amazon{
+ 	-fx-background-color:orange;
+ 	-fx-background-radius:10.0;
+ }
+
+
+ .amazon .label{	
+ 	-fx-border-color: transparent black transparent transparent;
+ 	-fx-font-weight:bold;
+ 	-fx-text-fill:black;
+ }
+  
+   
+ /*******************************************************************************
+
+* 								 Library				                       *
+
+******************************************************************************/   
+
+.library .libraryNameLabel{
+	-fx-background-color:rgb(0.0,0.0,0.0,0.8);
+	-fx-text-fill:white;
+	-fx-font-size:14.0;
+	-fx-font-weight:bold;
+    -fx-font-family:"Younger than me";
+}
+
+.library:opened .libraryNameLabel{
+	-fx-text-fill:magenta !important;
+	-fx-font-size:15.0;
+}
+
+
+/*******************************************************************************
+
+* 								LibrarySettings                       *
+
+******************************************************************************/
+
+.librarySettings {
+	-fx-background-color:white;
+}
+
+
+.librarySettings .label{	
+	-fx-text-fill:black;
+	-fx-font-size:14.0px;
+	-fx-font-weight:bold;
+}
+
+.librarySettings .text-area{
+	-fx-background-color: white;	
+    -fx-background-radius:5.0;
+    -fx-text-fill:black;
+    -fx-font-size:14.0;  
+}
+
+.librarySettings .text-area .content{
+	-fx-background-color:transparent;
+}
+
+
+.librarySettings  .text-area:focused{	
+	-fx-background-color: orange, white;
+    -fx-background-insets: -0.1, 2.0;
+}
+
+/*******************************************************************************
+
+*                         search-box,libraries-search-box                      *
+
+******************************************************************************/
+
+.search-box .text-field, .libraries-search-box .text-field {
+	-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);
+    -fx-background-insets:3.0;
+    -fx-background-radius: 5.0;
+    -fx-prompt-text-fill:black;
+    -fx-text-fill:black;
+    -fx-font-size:12.0;
+    -fx-font-weight:bold; 
+        
+}
+
+
+.search-box .text-field:focused, .libraries-search-box .text-field:focused{
+	-fx-effect: null;
+	-fx-background-color: firebrick;
+	-fx-text-fill:white;
+	-fx-prompt-text-fill:white;
+    -fx-background-insets: -0.1, 2.0;
+     -fx-font-size:14.0;
+}
+
+.library-search-box-item{
+	-fx-background-color:orange;
+	-fx-background-radius:5.0px;
+	-fx-font-size:15.0;	
+	-fx-text-fill:black;
+	-fx-cursor:hand;
+	
+}
+
+.library-search-box-item:hover{
+	-fx-background-color:black;	
+	-fx-text-fill:white;
+}
+
+#library-search-box-label{
+	-fx-text-fill:black; 
+	-fx-font-weight:bold;
+	-fx-font-size:120.0%;
+}
+
+ /*******************************************************************************
+
+*								StationCofigurator                          *
+
+******************************************************************************/
+.station-configurator{
+	-fx-background-color:white;
+}
+ 
+.station-configurator .text-area {
+    -fx-prompt-text-fill:white;
+}  
+ 
+.station-configurator .jfx-text-field,.jfx-text-area{
+   	-fx-background-color:white;
+   	-fx-focus-color:yellow;
+   	-fx-unfocus-color:black;
+   	-fx-prompt-text-fill:black; 	
+   	-fx-font-weight:bold;  
+}
+
+  
+  
+/*******************************************************************************
+
+* 								  StarWindow                                  *
+
+******************************************************************************/
+
+.starWindow{
+	-fx-background-color:white;
+	-fx-background-radius:10.0;
+}
+
+/*******************************************************************************
+
+* 								 SearchSettings                               *
+
+******************************************************************************/
+
+.searchSettings .jfx-text-field{
+   	-fx-background-color:black;
+   	-fx-focus-color:black;
+   	-fx-unfocus-color:black;
+   	-fx-prompt-text-fill:black; 	
+   	-fx-font-weight:bold;  
+}
+
+
+/*******************************************************************************
+
+*                        xPlayerSecondLayerTabPane                             *
+
+******************************************************************************/
+
+.xPlayerSettingsTab{
+	-fx-font-weight:bold;
+	-fx-font-size:15.0;
+	-fx-text-fill:black;
+}
+
+
+
+/*******************************************************************************
+
+*                           DragAdjustableLabel                               *    
+
+******************************************************************************/
+
+@font-face{
+	src: url("../fonts/Younger than me Bold.ttf");
+}
+
+.drag-adjustable-label{
+  -fx-background-color:white;
+  -fx-background-radius:15.0;
+  -fx-font-size:18.0;
+  -fx-font-family:"Younger than me";
+  -fx-text-fill:black;
+  -fx-font-weight:bold;  
+}
+
+/*******************************************************************************
+
+*                           SideBar                             *    
+
+******************************************************************************/
+
+
+.miniControl{
+  -fx-text-fill:black;
+  -fx-background-color:white;
+  -fx-background-radius:10.0;
+  -fx-cursor:hand;
+}
+
+#sideBar{
+	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
+	-fx-border-color:white;
+}
+
+.sideBarSectionLabel{
+	-fx-border-width:2.0;
+	-fx-border-color:black transparent transparent transparent;
+	-fx-text-fill:black;
+	-fx-font-weight:bold;
+	-fx-font-size:15.0;	
+}
+
+
+.windowMode{
+  	-fx-background-color:black;
+  	-fx-border-radius:15.0;
+  	-fx-text-fill:white;
+  	-fx-font-weight:bold;
+  	-fx-cursor:hand;
+}
+  
+.windowMode:hover{
+	-fx-border-color:cyan;
+}
+  
+.windowMode:selected{
+	-fx-text-fill:cyan;
+}
+  
+    
+#xr3SettingsButton{
+  	-fx-background-color:white; 
+  	-fx-background-radius:15.0;
+ 	-fx-font-weight:bold;
+ 	-fx-cursor:hand;	
+ 	/*-fx-effect: dropshadow( three-pass-box , orange ,5.0, 0.0 , 0.0 , 2.0 );*/
+}
+   
+   
+.menu-button{
+    -fx-background-color:white; 
+ 	-fx-background-radius:20.0px;
+ 	-fx-font-weight:bold;
+ 	-fx-cursor:hand;	
+}
+
+
+/*******************************************************************************
+
+*                           VisualizerWindow                             *    
+
+******************************************************************************/
+
+
+.transparency-slider{
+	-fx-cursor:hand;
+}
+
+.transparency-slider .axis .axis-tick-mark, .slider .axis .axis-minor-tick-mark {
+    -fx-text-fill:white;
+	-fx-stroke:white;
+}
+
+
+.transparency-slider .axis {
+    -fx-tick-label-fill: white;
+    -fx-tick-label-font-weight: bold;
+    -fx-tick-length: 7.0px;
+}
+
+
+/*******************************************************************************
+
+*                           BorderLessScene                            *    
+
+******************************************************************************/
+
+
+/* Sides */
+.leftPane:hover{	
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:transparent transparent transparent black;
+}
+
+.rightPane:hover{
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:transparent black transparent transparent;
+}
+
+.topPane:hover{
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:black transparent transparent transparent;
+}
+
+.bottomPane:hover{	
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:transparent transparent black transparent;
+}
+
+/* Corners */
+
+.topLeftPane:hover{
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:black transparent transparent black;
+}
+
+
+.topRightPane:hover{
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:black black transparent transparent;
+}
+
+
+.bottomRightPane:hover{	
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:transparent black black transparent;	
+}
+
+.bottomLeftPane:hover{	
+	-fx-background-color:white;
+	-fx-border-width:2.0;
+	-fx-border-style:dotted ;
+	-fx-border-color:transparent transparent black black;
+}
+
+
+
+/*******************************************************************************
+
+*                         UpdateScreen                       *    
+
+******************************************************************************/
+
+#updateScreenButtonLabel{
+	
+	-fx-font-family:"Younger than me";
+	-fx-text-fill:blue;
+	
+}

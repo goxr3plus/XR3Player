@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<fx:root tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+  <columns>
+      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="?" />
+      <TableColumn fx:id="mediaType" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Type" />
+    <TableColumn fx:id="title" minWidth="120.0" prefWidth="200.0" text="Title">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../image/title.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="duration" maxWidth="500.0" minWidth="60.0" prefWidth="65.0" text="Duration">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/duration.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </TableColumn>
+      <TableColumn fx:id="timesPlayed" minWidth="60.0" prefWidth="90.0" text="Times Played">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/timesPlayed.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="stars" minWidth="60.0" prefWidth="70.0" text="Stars">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/smallStar.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="drive" prefWidth="75.0" text="Drive" visible="false">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../image/drive.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="filePath" prefWidth="75.0" text="File Path" visible="false" />
+      <TableColumn fx:id="fileName" prefWidth="75.0" text="File Name" visible="false" />
+      <TableColumn fx:id="fileType" prefWidth="75.0" text="File Type" visible="false" />
+      <TableColumn fx:id="fileSize" prefWidth="75.0" text="File Size" visible="false" />
+      <TableColumn fx:id="hourImported" prefWidth="106.0" text="Time Imported" visible="false">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/timeImported.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+    <TableColumn fx:id="dateImported" prefWidth="123.0" text="Date Imported" visible="false">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/dateImported.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn prefWidth="75.0" text="Artist-[Not implemented]" visible="false" />
+      <TableColumn fx:id="remix" prefWidth="75.0" text="Remix-[Not implemented]" visible="false" />
+      <TableColumn fx:id="album" prefWidth="75.0" text="Album-[Not implemented]" visible="false" />
+      <TableColumn fx:id="composer" prefWidth="75.0" text="Composer-[Not implemented]" visible="false" />
+      <TableColumn fx:id="comment" prefWidth="75.0" text="Comment-[Not implemented]" visible="false">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../image/comment.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="genre" prefWidth="75.0" text="Genre-[Not implemented]" visible="false" />
+      <TableColumn fx:id="bpm" prefWidth="75.0" text="Bpm-[Not implemented]" visible="false" />
+      <TableColumn fx:id="key" prefWidth="75.0" text="Key-[Not implemented]" visible="false" />
+      <TableColumn fx:id="harmonic" prefWidth="75.0" text="Harmonic-[Not implemented]" visible="false" />
+      <TableColumn fx:id="bitRate" prefWidth="75.0" text="Bit Rate-[Not implemented]" visible="false" />
+      <TableColumn fx:id="year" prefWidth="75.0" text="Year-[Not implemented]" visible="false" />
+      <TableColumn fx:id="albumArt" prefWidth="75.0" text="Album Art-[Not implemented]" visible="false" />
+      <TableColumn fx:id="singer" prefWidth="75.0" text="Singer-[Not implemented]" visible="false" />
+  </columns>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+   <columnResizePolicy>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+   </columnResizePolicy>
+</fx:root>
