@@ -11,6 +11,8 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PathTransition;
+import javafx.animation.PathTransition.OrientationType;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
@@ -25,8 +27,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
@@ -109,7 +115,7 @@ public class DJDisc extends StackPane {
 		
 		// StackPane
 		canvas.setCursor(Cursor.OPEN_HAND);
-		// setStyle("-fx-background-color:green;")
+		// setStyle("-fx-background-color:green;");
 		
 		this.arcColor = arcColor;
 		canvas.setEffect(new DropShadow(10, Color.WHITE));
@@ -158,6 +164,36 @@ public class DJDisc extends StackPane {
 		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
 		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isEqualTo(NULL_IMAGE));
 		
+		// Rectangle rect = new Rectangle(0,0, 10, 10);
+		// rect.setArcHeight(50);
+		// rect.setArcWidth(50);
+		// rect.setFill(Color.VIOLET);
+		//
+		// Path path = new Path();
+		//
+		// MoveTo moveTo = new MoveTo();
+		// moveTo.setX(0.0);
+		// moveTo.setY(0.0);
+		//
+		// ArcTo arcTo = new ArcTo();
+		// arcTo.setX(50);
+		// arcTo.setY(50);
+		// arcTo.setRadiusX(360);
+		// arcTo.setRadiusY(360);
+		//
+		// path.getElements().add(moveTo);
+		// path.getElements().add(arcTo);
+		//
+		// PathTransition pathT = new PathTransition();
+		// pathT.setNode(rect);
+		// pathT.setPath(path);
+		// pathT.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
+		// pathT.setDuration(Duration.millis(500));
+		// pathT.setAutoReverse(true);
+		// pathT.setCycleCount(Animation.INDEFINITE);
+		// pathT.play();
+		// rect.setTranslateY(-height/2);
+		
 		getChildren().addAll(canvas, imageView, noAlbumImageLabel, volumeLabel, timeField);
 		
 		// MouseListeners
@@ -166,6 +202,10 @@ public class DJDisc extends StackPane {
 		setOnScroll(this::onScroll);
 		
 		resizeDisc(width, height);
+		repaint();
+		repaint();
+		repaint();
+		repaint();
 	}
 	
 	/**
@@ -187,12 +227,15 @@ public class DJDisc extends StackPane {
 		if (width == height)
 			if ( ( width >= 80 && height >= 80 ) && ( width % 2 == 0 && height % 2 == 0 )) {
 				
+				double halfWidth = width / 2.00;
+				double halfHeight = height / 2.00;
+				
 				// {Maximum,Preferred} Size
 				setMaxSize(width, height);
 				setPrefSize(width, height);
 				canvas.setWidth(width);
 				canvas.setHeight(height);
-				canvas.setClip(new Circle(width / 2, height / 2, width / 2));
+				canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
 				
 				// ImageView
 				imageView.setTranslateX(5);
@@ -201,7 +244,7 @@ public class DJDisc extends StackPane {
 				imageView.setFitHeight(height - 10.00);
 				imageView.setSmooth(true);
 				imageView.setPreserveRatio(false);
-				imageView.setClip(new Circle(width / 2 - 10, height / 2 - 10, width / 2 - 10));
+				imageView.setClip(new Circle(halfWidth - 10, halfHeight - 10.00, halfWidth - 10.00));
 				
 				// timeField
 				timeField.setTranslateY(-height * 26 / 100.00);
@@ -211,7 +254,7 @@ public class DJDisc extends StackPane {
 				
 				repaint();
 			} else {
-				Main.logger.info("resizeDisc failed..");
+				Main.logger.info("DJDisc resizing failed..");
 			}
 	}
 	
@@ -233,10 +276,63 @@ public class DJDisc extends StackPane {
 		gc.setStroke(arcColor);
 		gc.strokeArc(5, 5, getWidth() - 10, getHeight() - 10, 90, angle, ArcType.OPEN);
 		
+		// --------------------------Maths to find the point on the circle
+		// circumference
+		// draw the progress oval
+		// if (m != null) {
+		
+		// here i add + 89 to the angle cause the Java has where i have 0
+		// degrees the 90 degrees.
+		// I am counting the 0 degrees from the top center of the circle and
+		// Java calculates them from the right mid of the circle and it is
+		// going left , i calculate them clock wise
+		int angle2 = this.angle + 89;
+		int minus = 8;
+		
+		// Find the point on the circle circumference
+		previousX = Math.round( ( (int) ( getWidth() - minus ) ) / 2
+		        + Math.cos(Math.toRadians(-angle2)) * ( (int) ( getWidth() - minus ) / 2 ));
+		previousY = Math.round( ( (int) ( getHeight() - minus ) ) / 2
+		        + Math.sin(Math.toRadians(-angle2)) * ( (int) ( getHeight() - minus ) / 2 ));
+		
+		int ovalWidth = 11;
+		int ovalHeight = 11;
+		
+		// fix the circle position
+		if (-angle > 0 && -angle <= 90) {
+			previousX = previousX - ovalWidth / 2 + 1;
+			previousY = previousY - 1;
+		} else if (-angle > 90 && -angle <= 180) {
+			previousX = previousX - ovalWidth / 2 + 4;
+			previousY = previousY - ovalWidth / 2 + 2;
+		} else if (-angle > 180 && -angle < 270) {
+			previousX = previousX - 2;
+			previousY = previousY - ovalWidth / 2 + 2;
+		} else if (-angle >= 270) {
+			//previousX = previousX
+			// previousY = previousY - 7
+		}
+		
+		gc.setLineWidth(2);
+		gc.setStroke(Color.BLACK);
+		gc.strokeOval(previousX, previousY, ovalWidth, ovalHeight);
+		
+		gc.setFill(Color.MEDIUMVIOLETRED);
+		gc.fillOval(previousX, previousY, ovalWidth, ovalHeight);
+		
+		// System.out.println("Angle is:" + ( -this.angle ))
+		// System.out.println("FormatedX is: " + previousX + ", FormatedY is: "
+		// + previousY)
+		// System.out.println("Relative Mouse X: " + m.getX() + " , Relative
+		// Mouse Y: " + m.getY())
+		// }
 		// Draw the drag able rectangle
 		// gc.setFill(Color.WHITE)
 		// gc.fillOval(getWidth() / 2, 0, 20, 20)
 		
+		// ----------------------------------------------------------------------------------------------
+		
+		// Repaint the TimeField
 		// System.out.println(time)
 		timeField.setText(time);
 		
@@ -424,6 +520,7 @@ public class DJDisc extends StackPane {
 		// pauseRotation()
 		double mouseX;
 		double mouseY;
+		this.m = m;
 		
 		if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY) {
 			mouseX = m.getX();
@@ -443,6 +540,31 @@ public class DJDisc extends StackPane {
 			Platform.runLater(this::repaint);
 		}
 	}
+	
+	/**
+	 * Check if this point is contained into the circle
+	 * 
+	 * @param mouseX
+	 * @param mouseY
+	 * @return
+	 */
+	private boolean isContainedInCircle(double mouseX , double mouseY) {
+		// Check if it is contained into the circle
+		if (Math.sqrt(Math.pow( ( (int) ( getWidth() - 5 ) / 2 ) - (int) mouseX, 2)
+		        + Math.pow( ( (int) ( getHeight() - 5 ) / 2 ) - (int) mouseY, 2)) <= Math
+		                .floorDiv((int) ( getWidth() - 5 ), 2)) {
+			System.out.println("The point is contained in the circle.");
+			return true;
+		} else {
+			System.out.println("The point is not contained in the circle.");
+			return false;
+			
+		}
+	}
+	
+	MouseEvent m;
+	double previousX;
+	double previousY;
 	
 	/**
 	 * On mouse dragged.

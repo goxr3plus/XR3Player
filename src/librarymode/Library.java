@@ -980,16 +980,18 @@ public class Library extends StackPane {
 		return saveMode;
 	}
 	
+	
+	//---------!!!!!!!!!!!!!Θέλει διόρθωση για να προηδοποιεί τον χρήστη εάν μία εικόνα λείπει!!!!!!!!!!!! -----------------
 	/**
 	 * Gets the image.
 	 *
 	 * @return The image of the Library
 	 */
 	public Image getImage() {
-		if (imagePath != null)
+		if (imagePath != null && new File(imagePath).exists())
 			return new Image(new File(imagePath).toURI().toString());
 		else
-			return Main.libraryMode.defaultImage;
+			return LibraryMode.defaultImage;
 	}
 	
 	/**

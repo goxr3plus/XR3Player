@@ -75,6 +75,8 @@ public class ExportWindowController extends ScrollPane {
 		}
 		
 		window.setScene(new Scene(this));
+		window.getScene().getStylesheets()
+		        .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
 	}
 	
 	/**

@@ -1055,12 +1055,12 @@ public class SmartController extends StackPane {
 				event.consume();
 			});
 			
-			setOnDragDone(d -> {
-				System.out.println(
-				        "Drag Done,is drop completed?" + d.isDropCompleted() + " , is accepted?" + d.isAccepted());
-				System.out.println("Accepted Mode:" + d.getAcceptedTransferMode());
-				System.out.println(" Target:" + d.getTarget() + " Gestoure Target:" + d.getGestureTarget());
-			});
+//			setOnDragDone(d -> {
+//				System.out.println(
+//				        "Drag Done,is drop completed?" + d.isDropCompleted() + " , is accepted?" + d.isAccepted());
+//				System.out.println("Accepted Mode:" + d.getAcceptedTransferMode());
+//				System.out.println(" Target:" + d.getTarget() + " Gestoure Target:" + d.getGestureTarget());
+//			});
 			
 			getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 				// Main.amazon.updateInformation((Media) newValue);

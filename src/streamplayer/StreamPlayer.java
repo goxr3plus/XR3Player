@@ -229,7 +229,7 @@ public class StreamPlayer implements Runnable {
 	 */
 	public void open(Object object) throws StreamPlayerException {
 		
-		Main.logger.info("open(" + object + ")");
+		Main.logger.info("open(" + object + ")\n");
 		if (object != null) {
 			dataSource = object;
 			initAudioInputStream();
@@ -309,6 +309,8 @@ public class StreamPlayer implements Runnable {
 	 */
 	private void determineProperties() {
 		
+		Main.logger.info("Entered determineProperties()!\n");
+		
 		// Add AudioFileFormat properties.
 		// Expect if it is null(something bad happened).
 		if (audioFileFormat != null) {
@@ -354,6 +356,8 @@ public class StreamPlayer implements Runnable {
 			
 			// Notify all registered StreamPlayerListeners
 			listeners.forEach(listener -> listener.opened(dataSource, audioProperties));
+			
+			Main.logger.info("Exited determineProperties()!\n");
 		}
 	}
 	
@@ -399,7 +403,7 @@ public class StreamPlayer implements Runnable {
 	 */
 	private void createLine() throws LineUnavailableException {
 		
-		Main.logger.info("Entered CreateLine():\n");
+		Main.logger.info("Entered CreateLine()!:\n");
 		
 		if (sourceDataLine == null) {
 			AudioFormat sourceFormat = audioInputStream.getFormat();
@@ -452,6 +456,8 @@ public class StreamPlayer implements Runnable {
 			Main.logger.info("Line Info : " + sourceDataLine.getLineInfo().toString());
 			// ------------------------------------------
 			Main.logger.info("Line AudioFormat: " + sourceDataLine.getFormat().toString() + "\n");
+			
+			Main.logger.info("Exited CREATELINE()!:\n");
 		} else {
 			Main.logger.warning("Warning Source DataLine is not null!\n");
 		}
@@ -463,6 +469,8 @@ public class StreamPlayer implements Runnable {
 	 * @throws LineUnavailableException the line unavailable exception
 	 */
 	private void openLine() throws LineUnavailableException {
+		
+		Main.logger.info("Entered OpenLine()!:\n");
 		
 		if (sourceDataLine != null) {
 			AudioFormat audioFormat = audioInputStream.getFormat();
@@ -508,6 +516,8 @@ public class StreamPlayer implements Runnable {
 			}
 			
 		}
+		
+		Main.logger.info("Exited OpenLine()!:\n");
 	}
 	
 	/**

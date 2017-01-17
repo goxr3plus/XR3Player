@@ -24,10 +24,11 @@ public class XPlayerVisualizer extends Visualizer {
 	 * @param xPlayerUI the x player UI
 	 */
 	public XPlayerVisualizer(int width, int height, XPlayerController xPlayerUI) {
+		super("XRPLAYER");
 		
 		this.xPlayerUI = xPlayerUI;
 		this.animationService.passDJDisc(xPlayerUI.disc);
-		resizeVisualizer(width, height);
+	//	resizeVisualizer(width, height);
 		
 		setScopeColor(xPlayerUI.disc.getArcColor());
 		addMouseListener();

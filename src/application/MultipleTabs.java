@@ -3,12 +3,12 @@
  */
 package application;
 
+import aaaradio_not_used_yet.RadioStationsController;
 import javafx.geometry.Side;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
-import radio.RadioStationsController;
 
 /**
  * Tabs System.

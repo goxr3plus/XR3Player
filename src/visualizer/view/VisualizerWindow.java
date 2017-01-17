@@ -154,11 +154,11 @@ public class VisualizerWindow extends StackPane {
 					removeVisualizer();
 		});
 		// width-height Listeners
-		window.widthProperty()
-		        .addListener(l -> xPlayerUI.visualizer.resizeVisualizer(window.getWidth(), window.getHeight()));
+		//window.widthProperty()
+		//        .addListener(l -> xPlayerUI.visualizer.resizeVisualizer(window.getWidth(), window.getHeight()));
 		
-		window.heightProperty()
-		        .addListener(l -> xPlayerUI.visualizer.resizeVisualizer(window.getWidth(), window.getHeight()));
+		//window.heightProperty()
+		//        .addListener(l -> xPlayerUI.visualizer.resizeVisualizer(window.getWidth(), window.getHeight()));
 		
 		// Drag && Drop Listeners
 		scene.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
@@ -298,7 +298,7 @@ public class VisualizerWindow extends StackPane {
 		setForeground.setOnAction(a -> changeImage(Type.foreground));
 		
 		// Add the visualizer
-		visualizerPane.setCenter(xPlayerUI.visualizer.resizeVisualizer(window.getWidth(), window.getHeight()));
+		visualizerPane.setCenter(xPlayerUI.visualizer);
 		
 		// show the window
 		window.show();

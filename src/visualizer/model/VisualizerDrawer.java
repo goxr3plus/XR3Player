@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import visualizer.model.MandelbrotBean.ColorSchema;
 
 /**
  * The Class VisualizerDrawer.
@@ -109,6 +111,15 @@ public class VisualizerDrawer extends VisualizerModel {
 	public Image redLight = new Image(VisualizerModel.class.getResourceAsStream("redLight.png"));
 	
 	/**
+	 * Constructor
+	 * 
+	 * @param text
+	 */
+	public VisualizerDrawer(String text) {
+		System.out.println("VisualizerDrawer Constructor called...{" + text + "}");
+	}
+	
+	/**
 	 * Returns an array which has length<array length> and contains frequencies
 	 * in every cell which has a value from 0.00 to 1.00.
 	 *
@@ -171,16 +182,15 @@ public class VisualizerDrawer extends VisualizerModel {
 		
 		// backgoundImage
 		if (backgroundImage != null)
-			gc.drawImage(backgroundImage, 0, 0, width, height);
+			gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 		
 		gc.setStroke(scopeColor);
 		// System.out.println(pSample.length)
 		
-		int yLast = (int) ( pSample[0] * (float) height_2 ) + height_2;
+		int yLast = (int) ( pSample[0] * (float) halfCanvasHeight ) + halfCanvasHeight;
 		int samIncrement = 1;
-		for (int a = samIncrement, c = 0; c < width; a += samIncrement, c++) {
-			System.out.println(pSample[a]);
-			int yNow = (int) ( pSample[a] * (float) height_2 ) + height_2;
+		for (int a = samIncrement, c = 0; c < canvasWidth; a += samIncrement, c++) {
+			int yNow = (int) ( pSample[a] * (float) halfCanvasHeight ) + halfCanvasHeight;
 			gc.strokeLine(c, yLast, c + 1.00, yNow);
 			yLast = yNow;
 		}
@@ -230,11 +240,11 @@ public class VisualizerDrawer extends VisualizerModel {
 		
 		// Set the background fill
 		gc.setFill(Color.rgb(0, 0, 0, array[0]));
-		gc.fillRect(0, 0, width, height);
+		gc.fillRect(0, 0, canvasWidth, canvasHeight);
 		
 		// Background image
 		if (backgroundImage != null)
-			gc.drawImage(backgroundImage, 0, 0, width, height);
+			gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 		
 		// Draw Random Ovals
 		/* Exception in thread "JavaFX Application Thread"
@@ -246,44 +256,44 @@ public class VisualizerDrawer extends VisualizerModel {
 		 * length + 2.00, length + 2.00);) */
 		gc.setFill(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
 		for (int i = 0; i < total; i++) {
-			gc.fillOval(random.nextInt(width), random.nextInt(height), length + 2.00, length + 2.00);
+			gc.fillOval(random.nextInt(canvasWidth), random.nextInt(canvasHeight), length + 2.00, length + 2.00);
 		}
 		
 		// Draw Lights
-		if (width > greyLight.getWidth() && height > greyLight.getHeight())
+		if (canvasWidth > greyLight.getWidth() && canvasHeight > greyLight.getHeight())
 			if (array[0] < 0.2) {
 				gc.drawImage(greyLight, 0, 0);
-				gc.drawImage(greyLight, 0, 0, greyLight.getWidth(), greyLight.getHeight(), width, 0,
+				gc.drawImage(greyLight, 0, 0, greyLight.getWidth(), greyLight.getHeight(), canvasWidth, 0,
 				        -greyLight.getWidth(), greyLight.getHeight());
 			} else if (array[0] < 0.3) {
 				gc.drawImage(lightBlueLight, 0, 0);
-				gc.drawImage(lightBlueLight, 0, 0, lightBlueLight.getWidth(), lightBlueLight.getHeight(), width, 0,
-				        -lightBlueLight.getWidth(), lightBlueLight.getHeight());
+				gc.drawImage(lightBlueLight, 0, 0, lightBlueLight.getWidth(), lightBlueLight.getHeight(), canvasWidth,
+				        0, -lightBlueLight.getWidth(), lightBlueLight.getHeight());
 			} else if (array[0] < 0.4) {
 				gc.drawImage(blueLight, 0, 0);
-				gc.drawImage(blueLight, 0, 0, blueLight.getWidth(), blueLight.getHeight(), width, 0,
+				gc.drawImage(blueLight, 0, 0, blueLight.getWidth(), blueLight.getHeight(), canvasWidth, 0,
 				        -blueLight.getWidth(), blueLight.getHeight());
 			} else if (array[0] < 0.6) {
 				gc.drawImage(yellowLight, 0, 0);
-				gc.drawImage(yellowLight, 0, 0, yellowLight.getWidth(), yellowLight.getHeight(), width, 0,
+				gc.drawImage(yellowLight, 0, 0, yellowLight.getWidth(), yellowLight.getHeight(), canvasWidth, 0,
 				        -yellowLight.getWidth(), yellowLight.getHeight());
 			} else if (array[0] < 0.9) {
 				gc.drawImage(redLight, 0, 0);
-				gc.drawImage(redLight, 0, 0, redLight.getWidth(), redLight.getHeight(), width, 0, -redLight.getWidth(),
-				        redLight.getHeight());
+				gc.drawImage(redLight, 0, 0, redLight.getWidth(), redLight.getHeight(), canvasWidth, 0,
+				        -redLight.getWidth(), redLight.getHeight());
 			}
 		
 		// Scope
-		if (width > greyLight.getWidth() && height > greyLight.getHeight()) {
+		if (canvasWidth > greyLight.getWidth() && canvasHeight > greyLight.getHeight()) {
 			gc.setStroke(scopeColor);
 			double coolW = coolEffect.getWidth();
-			double coolH = coolEffect.getHeight() < height ? coolEffect.getHeight() : height;
+			double coolH = coolEffect.getHeight() < canvasHeight ? coolEffect.getHeight() : canvasHeight;
 			
 			// ------------------------Draw Scope----------------------------
 			int zb = (int) ( 50 + 100 * array[0] );
 			int yLast = (int) ( pSample[0] * (float) zb ) + zb;
 			int angleIncrement = 1;
-			for (int a = angleIncrement, c = (int) ( coolW / 2 - 50 ); c < ( width
+			for (int a = angleIncrement, c = (int) ( coolW / 2 - 50 ); c < ( canvasWidth
 			        - coolW / 2 ); a += angleIncrement, c++) {
 				int yNow = (int) ( pSample[a] * (float) zb ) + zb;
 				gc.strokeLine(c, yLast, c + 1.00, yNow);
@@ -291,10 +301,10 @@ public class VisualizerDrawer extends VisualizerModel {
 			}
 			
 			gc.setStroke(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255), 1.0));
-			int zb2 = (int) ( height - 50 - 100 * array[0] );
+			int zb2 = (int) ( canvasHeight - 50 - 100 * array[0] );
 			int yLast2 = (int) ( pSample[0] * (float) zb2 ) + zb2;
 			int angleIncrement2 = 1;
-			for (int a = angleIncrement2, c = (int) ( coolW / 2 - 50 ); c < ( width
+			for (int a = angleIncrement2, c = (int) ( coolW / 2 - 50 ); c < ( canvasWidth
 			        - coolW / 2 ); a += angleIncrement2, c++) {
 				int yNow2 = (int) ( pSample[a] * (float) zb2 ) + zb2;
 				gc.strokeLine(c, yLast2, c + 1.00, yNow2);
@@ -303,14 +313,14 @@ public class VisualizerDrawer extends VisualizerModel {
 			
 			// Cool Effect1
 			gc.drawImage(coolEffect, ( coolW / 2 - 50 ) - coolW * array[0] / 2,
-			        ( height / 2 - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
-			gc.drawImage(coolEffect, ( width - coolW / 2 ) - coolW * array[0] / 2,
-			        ( height / 2 - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
+			        ( canvasHeight / 2 - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
+			gc.drawImage(coolEffect, ( canvasWidth - coolW / 2 ) - coolW * array[0] / 2,
+			        ( canvasHeight / 2 - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
 			
 			gc.drawImage(coolEffect, ( coolW / 2 - 50 ) - coolW * array[0] / 2,
-			        ( height - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
-			gc.drawImage(coolEffect, ( width - coolW / 2 ) - coolW * array[0] / 2,
-			        ( height - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
+			        ( canvasHeight - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
+			gc.drawImage(coolEffect, ( canvasWidth - coolW / 2 ) - coolW * array[0] / 2,
+			        ( canvasHeight - coolH / 2 ) - coolH * array[0] / 2, coolW * array[0], coolH * array[0]);
 		}
 		
 		// ------------------------Draw Rosette----------------------------
@@ -351,8 +361,8 @@ public class VisualizerDrawer extends VisualizerModel {
 				increment = (float) Math.random();
 			} while (polySpiralAngle == 0 || distance == 0.0F || increment == 0.0F);
 			
-			distance = (float) Math.random() * array[0];//(float) 0.2;// //
-			                       // array[0]*array[1]*100;
+			distance = (float) Math.random() * array[0];// (float) 0.2;// //
+			// array[0]*array[1]*100;
 			increment = (float) 0.07; // (float) Math.random() * array[1] * 100
 			                          // + (float) 0.07;
 			polySpiralAngle = array[1] < 0.35 ? array[0] * 360 : array[0] * 360 * (float) Math.random() * 100;
@@ -381,10 +391,10 @@ public class VisualizerDrawer extends VisualizerModel {
 		// Draw the foreground images
 		double imageW = foregroundImage.getWidth();
 		double imageH = foregroundImage.getHeight();
-		if (width < height)
-			imageW = imageH = width / 1.5;
-		else if (height < width)
-			imageW = imageH = height / 1.5;
+		if (canvasWidth < canvasHeight)
+			imageW = imageH = canvasWidth / 1.5;
+		else if (canvasHeight < canvasWidth)
+			imageW = imageH = canvasHeight / 1.5;
 		
 		else {
 			
@@ -392,8 +402,8 @@ public class VisualizerDrawer extends VisualizerModel {
 			imageH = getHeight() / 2;
 		}
 		// System.out.println(imageW + ", h:" + imageH);
-		gc.drawImage(foregroundImage, ( width / 2 - imageW / 2 ) - imageW * array[0] / 2,
-		        ( height / 2 - imageH / 2 ) - imageH * array[0] / 2, imageW + imageW * array[0],
+		gc.drawImage(foregroundImage, ( canvasWidth / 2 - imageW / 2 ) - imageW * array[0] / 2,
+		        ( canvasHeight / 2 - imageH / 2 ) - imageH * array[0] / 2, imageW + imageW * array[0],
 		        imageH + imageH * array[0]);
 		
 	}
@@ -402,8 +412,8 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Calculate.
 	 */
 	void calculate() {
-		int maxX = width - 1;
-		int maxY = height - 1;
+		int maxX = canvasWidth - 1;
+		int maxY = canvasHeight - 1;
 		pixelSize = Math.max(rWidth / maxX, rHeight / maxY);
 		centerX = maxX / 2;
 		centerY = maxY / 2;
@@ -448,15 +458,16 @@ public class VisualizerDrawer extends VisualizerModel {
 	public void drawSpectrumAnalyser() {
 		float[] pSample = stereoMerge(left, right);
 		
-		float barWidth = (float) width / (float) saBands;
+		float barWidth = (float) canvasWidth / (float) saBands;
 		float[] array = returnBandsArray(pSample, saBands);
 		float c = 0;
 		// BackgroundImage
 		if (backgroundImage != null)
-			gc.drawImage(backgroundImage, 0, 0, width, height);
+			gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 		
 		for (int band = 0; band < saBands; band++) {
-			drawSpectrumAnalyserBar((int) c, height, (int) barWidth - 1, (int) ( array[band] * height ), band);
+			drawSpectrumAnalyserBar((int) c, canvasHeight, (int) barWidth - 1, (int) ( array[band] * canvasHeight ),
+			        band);
 			c += barWidth;
 		}
 	}
@@ -522,7 +533,7 @@ public class VisualizerDrawer extends VisualizerModel {
 		
 		// BackgroundImage
 		if (backgroundImage != null)
-			gc.drawImage(backgroundImage, 0, 0, width, height);
+			gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 		
 		float wLeft = 0.0f;
 		float wRight = 0.0f;
@@ -557,9 +568,9 @@ public class VisualizerDrawer extends VisualizerModel {
 			
 		}
 		
-		int wHeight = ( height >> 1 ) - 20;
-		drawVolumeMeterBar(16, 16, (int) ( oldLeft * (float) ( width - 32 ) ), wHeight);
-		drawVolumeMeterBar(16, wHeight + 32, (int) ( oldRight * (float) ( width - 32 ) ), wHeight);
+		int wHeight = ( canvasHeight >> 1 ) - 20;
+		drawVolumeMeterBar(16, 16, (int) ( oldLeft * (float) ( canvasWidth - 32 ) ), wHeight);
+		drawVolumeMeterBar(16, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 32 ) ), wHeight);
 		
 	}
 	
@@ -609,13 +620,13 @@ public class VisualizerDrawer extends VisualizerModel {
 		
 		// backgoundImage
 		if (backgroundImage != null)
-			gc.drawImage(backgroundImage, 0, 0, width, height);
+			gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 		float[] array = returnBandsArray(pSample, 1);
-		int arcHeight = height / 2;
+		int arcHeight = canvasHeight / 2;
 		
 		gc.setFill(Color.WHITE);
 		// gc.fillOval(iX(-w*2), iY(w*2), w, w);
-		gc.fillArc(width / 2.00, height / 2.00, arcHeight, arcHeight, 0, 360 * array[0], ArcType.ROUND);
+		gc.fillArc(canvasWidth / 2.00, canvasHeight / 2.00, arcHeight, arcHeight, 0, 360 * array[0], ArcType.ROUND);
 	}
 	
 	/*-----------------------------------------------------------------------
@@ -643,7 +654,7 @@ public class VisualizerDrawer extends VisualizerModel {
 		
 		// Background image
 		if (backgroundImage != null)
-			gc.drawImage(backgroundImage, 0, 0, width, height);
+			gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 		
 		calcTriangles();
 		drawTriangles();
@@ -695,11 +706,11 @@ public class VisualizerDrawer extends VisualizerModel {
 		
 		sierpinskiRootHeight += acceleration;
 		
-		if (sierpinskiRootHeight >= 2 * height) {
-			sierpinskiRootHeight = height;
+		if (sierpinskiRootHeight >= 2 * canvasHeight) {
+			sierpinskiRootHeight = canvasHeight;
 		}
 		
-		Triangle root = new Triangle(width / 2, 0, sierpinskiRootHeight);
+		Triangle root = new Triangle(canvasWidth / 2, 0, sierpinskiRootHeight);
 		
 		shrink(root);
 	}
@@ -712,7 +723,7 @@ public class VisualizerDrawer extends VisualizerModel {
 		double topY = triangle.getTopY();
 		double triangleHeight = triangle.getHeight();
 		
-		if (topY >= height) {
+		if (topY >= canvasHeight) {
 			return;
 		}
 		
@@ -741,7 +752,7 @@ public class VisualizerDrawer extends VisualizerModel {
 		for (int i = 0; i < triangleCount; i++) {
 			Triangle tri = renderList.get(i);
 			
-			if (tri.getTopY() < height) {
+			if (tri.getTopY() < canvasHeight) {
 				drawTriangle(tri);
 			}
 		}
@@ -770,6 +781,121 @@ public class VisualizerDrawer extends VisualizerModel {
 		gc.fillPolygon(pointsX, pointsY, 3);
 		
 		// gc.strokePolygon(pointsX, pointsY, 3);
+	}
+	
+	/*-----------------------------------------------------------------------
+	 * 
+	 * -----------------------------------------------------------------------
+	 * 
+	 * 
+	 * 						    Julia Fractals
+	 * 
+	 * -----------------------------------------------------------------------
+	 * 
+	 * -----------------------------------------------------------------------
+	 */
+	
+	// Size of the coordinate system for the Julia set
+	private static double JULIA_RE_MIN = -1.5;
+	private static double JULIA_RE_MAX = 1.5;
+	private static double JULIA_IM_MIN = -1.5;
+	private static double JULIA_IM_MAX = 1.5;
+	
+	private MandelbrotBean bean = new MandelbrotBean(50, JULIA_RE_MIN, JULIA_RE_MAX, JULIA_IM_MIN, JULIA_IM_MAX, 0.3,
+	        -0.5);
+	
+	/**
+	 * Draws the Julia Fractals
+	 */
+	public void drawJuliaFractals() {
+		
+		int X_OFFSET = 50;
+		int Y_OFFSET = 50;
+		
+		// Move canvans to the middlepoint
+		setLayoutX(canvasWidth / 2);
+		setLayoutY(canvasHeight / 2);
+		// setLayoutX(canvasWidth / ( bean.getReMax() - bean.getReMin() ) / 2 +
+		// X_OFFSET / 2);
+		// setLayoutY(canvasHeight / ( bean.getImMax() - bean.getImMin() ) / 2 -
+		// Y_OFFSET * 2);
+		
+		bean.setColorSchema(ColorSchema.GREEN);
+		bean.setConvergenceColor(Color.BLUEVIOLET);
+		
+		// Calculations
+		float[] pSample = stereoMerge(left, right);
+		float[] array = returnBandsArray(pSample, 2);
+		
+		//System.out.println(array[0] + " , " + array[1]);
+		bean.setZ(-array[0]+ array[0]<0.5?-0.4:-0.1);// bean.setZ(0.3);
+		bean.setZi(array[1]+0.4);// bean.setZi(-0.5);
+		
+		// Paint it
+		double precision = Math.max( ( bean.getReMax() - bean.getReMin() ) / canvasWidth,
+		        ( bean.getImMax() - bean.getImMin() ) / canvasHeight); // 0.004
+		
+		double convergenceValue;
+		for (double c = bean.getReMin(), xR = 0; xR < canvasWidth; c = c + precision, xR++) {
+			for (double ci = bean.getImMin(), yR = 0; yR < canvasHeight; ci = ci + precision, yR++) {
+				if (bean.isIsMandelbrot()) {
+					convergenceValue = checkConvergence(ci, c, 0, 0, bean.getConvergenceSteps());
+				} else {
+					convergenceValue = checkConvergence(bean.getZi(), bean.getZ(), ci, c, bean.getConvergenceSteps());
+				}
+				double t1 = convergenceValue / bean.getConvergenceSteps(); // (50.0
+				                                                           // ..
+				                                                           // )
+				double c1 = Math.min(255 * 2 * t1, 255);
+				double c2 = Math.max(255 * ( 2 * t1 - 1 ), 0);
+				
+				if (convergenceValue != bean.getConvergenceSteps()) {
+					// Set color
+					gc.setFill(getColorSchema(c1, c2));
+				} else {
+					gc.setFill(bean.getConvergenceColor());
+				}
+				gc.fillRect(xR, yR, 1, 1);
+			}
+		}
+	}
+	
+	/**
+	 * Checks the convergence of a coordinate (c, ci) The convergence factor
+	 * determines the color of the point.
+	 */
+	private int checkConvergence(double ci , double c , double z , double zi , int convergenceSteps) {
+		for (int i = 0; i < convergenceSteps; i++) {
+			double ziT = 2 * ( z * zi );
+			double zT = z * z - ( zi * zi );
+			z = zT + c;
+			zi = ziT + ci;
+			
+			if (z * z + zi * zi >= 4.0) {
+				return i;
+			}
+		}
+		return convergenceSteps;
+	}
+	
+	private Color getColorSchema(double c1 , double c2) {
+		MandelbrotBean.ColorSchema colorSchema = bean.getColorSchema();
+		switch (colorSchema) {
+			case RED:
+				return Color.color(c1 / 255.0, c2 / 255.0, c2 / 255.0);
+			case YELLOW:
+				return Color.color(c1 / 255.0, c1 / 255.0, c2 / 255.0);
+			case MAGENTA:
+				return Color.color(c1 / 255.0, c2 / 255.0, c1 / 255.0);
+			case BLUE:
+				return Color.color(c2 / 255.0, c2 / 255.0, c1 / 255.0);
+			case GREEN:
+				return Color.color(c2 / 255.0, c1 / 255.0, c2 / 255.0);
+			case CYAN:
+				return Color.color(c2 / 255.0, c1 / 255.0, c1 / 255.0);
+			default:
+				return Color.color(c2 / 255.0, c1 / 255.0, c2 / 255.0);
+		}
 	}
 	
 }

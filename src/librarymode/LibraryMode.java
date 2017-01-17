@@ -103,7 +103,7 @@ public class LibraryMode extends GridPane {
 	 * Default image of a library(which has not a costume one selected by the
 	 * user.
 	 */
-	public final Image defaultImage = InfoTool.getImageFromDocuments("library.png");
+	public static final Image defaultImage = InfoTool.getImageFromDocuments("library.png");
 	
 	/** This variable is used during the creation of a new library. */
 	private final InvalidationListener creationInvalidator = new InvalidationListener() {

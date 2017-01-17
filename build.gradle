@@ -1,9 +1,0 @@
-buildscript {
-
-    repositories {
-      
-    }
-    dependencies {
-      
-    }
-}

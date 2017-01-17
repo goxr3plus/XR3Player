@@ -3,7 +3,6 @@
  */
 package disc;
 
-// TODO: Auto-generated Javadoc
 /**
  * The listener interface for receiving DJDisc events.
  * The class that is interested in processing a DJDisc
@@ -13,16 +12,15 @@ package disc;
  * the DJDisc event occurs, that object's appropriate
  * method is invoked.
  *
- * @see DJDiscEvent
  */
 @FunctionalInterface
 public interface DJDiscListener {
-
+	
 	/**
 	 * Volume changed.
 	 *
 	 * @param volume the volume
 	 */
 	void volumeChanged(int volume);
-
+	
 }

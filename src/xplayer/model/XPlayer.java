@@ -27,7 +27,8 @@ public class XPlayer extends StreamPlayer {
 	 */
 	@Override
 	public void stop() {
-		new Thread(super::stop).start();
+		//new Thread(super::stop).start();
+		super.stop();
 	}
 	
 }

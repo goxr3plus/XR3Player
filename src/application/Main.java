@@ -30,7 +30,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import librarymode.LibraryMode;
-import radio.RadioStationsController;
 import remote_communication.RemoteAppsController;
 import services.VacuumProgress;
 import smartcontroller.ExportWindowController;
@@ -156,7 +155,8 @@ public class Main extends Application {
 	public static final MultipleTabs multipleTabs = new MultipleTabs();
 	
 	/** The Constant stationsInfostructure. */
-	public static final RadioStationsController stationsInfostructure = new RadioStationsController();
+	// public static final RadioStationsController stationsInfostructure = new
+	// RadioStationsController()
 	
 	/** The Constant treeManager. */
 	public static final TreeViewManager treeManager = new TreeViewManager();
@@ -164,8 +164,6 @@ public class Main extends Application {
 	/** The can save data. */
 	// Variables
 	public static boolean canSaveData = true;
-	
-	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -245,6 +243,11 @@ public class Main extends Application {
 		// ScenicView.show(scene);
 	}
 	
+	@Override
+	public void init() {
+		System.out.println("Hello from init");
+	}
+	
 	/**
 	 * Terminate the application.
 	 *
@@ -311,7 +314,8 @@ public class Main extends Application {
 		alert.getDialogPane().getScene().setFill(Color.TRANSPARENT);
 		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
 		alert.getButtonTypes().setAll(cancel, justExit, vAndExit);
-		// alert.getDialogPane().getStylesheets().addAll(scene.getStylesheets())
+		alert.getDialogPane().getStylesheets()
+		        .add(Main.class.getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
 		alert.initStyle(StageStyle.TRANSPARENT);
 		alert.showAndWait().ifPresent(answer -> {
 			if (answer == vAndExit)
@@ -323,21 +327,26 @@ public class Main extends Application {
 	
 	/**
 	 * Calling this method restarts the application
+	 * 
+	 * @param askUser Ask the User if he/she wants to restart the application
 	 */
 	public static void restartTheApplication(boolean askUser) {
 		
 		// Restart XR3Player
 		new Thread(() -> {
-			String path = InfoTool.getCurrentDirectoryPath();
+			String path = InfoTool.getBasePathForClass(Main.class);
+			String applicationPath = new File(path + "XR3Player.jar").getAbsolutePath();
 			
 			Platform.runLater(Notifications.create().title("Processing")
-			        .text("Restarting XR3Player....\n Current directory path is: " + path
-			                + " \n If this takes more than 20 seconds either the computer is slow or it has failed....")
+			        .text("Restarting XR3Player....\n Current directory path is:[ " + applicationPath
+			                + " ] \n If this takes more than 20 seconds either the computer is slow or it has failed....")
 			        .hideAfter(Duration.seconds(25))::show);
 			
 			try {
 				
-				ProcessBuilder builder = new ProcessBuilder("java", "-jar", path + "XR3Player.jar");
+				System.out.println("XR3PlayerPath is : " + applicationPath);
+				
+				ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath);
 				builder.redirectErrorStream(true);
 				Process process = builder.start();
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -348,8 +357,8 @@ public class Main extends Application {
 					
 					// Show failed message
 					Platform.runLater(Notifications.create().title("Failed to restart!")
-					        .text("Failed to restart XR3Player!\nBuilder Directory:" + path + "\nTrying to start:"
-					                + path + "XR3Player.jar\nTry to do it manually...")
+					        .text("Failed to restart XR3Player!\nBuilder Directory:" + applicationPath
+					                + "\nTrying to start:" + path + "XR3Player.jar\nTry to do it manually...")
 					        .hideAfter(Duration.seconds(10))::showError);
 					
 					// Ask the user

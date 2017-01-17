@@ -5,9 +5,9 @@ package visualizer.view;
 
 import java.util.Map;
 
+import aaaradio_not_used_yet.RadioPlayer;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
-import radio.RadioPlayer;
 import streamplayer.StreamPlayerEvent;
 import streamplayer.StreamPlayerListener;
 import visualizer.model.VisualizerModel;
@@ -29,10 +29,11 @@ public class RadioVisualizer extends Visualizer implements StreamPlayerListener 
 	 * @param radioPlayer the radio player
 	 */
 	public RadioVisualizer(int width, int height, RadioPlayer radioPlayer) {
+		super("RADIOPLAYER");
 		this.radioPlayer = radioPlayer;
 		
 		radioPlayer.addStreamPlayerListener(this);
-		resizeVisualizer(width, height);
+	//	resizeVisualizer(width, height);
 		
 		addMouseListener();
 	}

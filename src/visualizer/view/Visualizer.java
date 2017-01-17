@@ -18,6 +18,44 @@ import visualizer.model.VisualizerDrawer;
  */
 public abstract class Visualizer extends VisualizerDrawer {
 	
+	/**
+	 * @param string
+	 */
+	public Visualizer(String string) {
+		super(string);
+		
+		// if i didn't add the draw to the @Override resize(double width, double
+		// height) then it must be into the below listeners
+		
+		// Make the magic happen when the width or height changes
+		// ----------
+		widthProperty().addListener((observable , oldValue , newValue) -> {
+			//System.out.println("New Visualizer Width is:" + newValue)
+			
+			// Canvas Width
+			canvasWidth = (int) widthProperty().get();
+			
+			// Compute the Color Scale
+			computeColorScale();
+			
+		});
+		// -------------
+		heightProperty().addListener((observable , oldValue , newValue) -> {
+			//System.out.println("New Visualizer Height is:" + newValue)
+			
+			// Canvas Height
+			canvasHeight = (int) heightProperty().get();
+			halfCanvasHeight = canvasHeight >> 1;
+			
+			// Sierpinski
+			sierpinskiRootHeight = canvasHeight;
+			
+			// Compute the Color Scale
+			computeColorScale();
+		});
+		
+	}
+	
 	/** The animation service. */
 	public PaintService animationService = new PaintService();
 	
@@ -35,38 +73,41 @@ public abstract class Visualizer extends VisualizerDrawer {
 		
 	}
 	
-	/**
-	 * Resizes the visualizer to the given values.
-	 *
-	 * @param width the width
-	 * @param height the height
-	 * @return The Visualizer
-	 */
-	public Visualizer resizeVisualizer(double width , double height) {
-		if (width > 0 && height > 0) {
-			
-			this.width = (int) width;
-			this.height = (int) height;
-			height_2 = this.height >> 1;
-			sierpinskiRootHeight = height;
-			
-			// Set the width and height of Canvas
-			setWidth(width);
-			setHeight(height);
-			
-			// Careful with contentBias here
-			prefWidth(-1);
-			prefHeight(-1);
-			
-			// autosize()
-			
-			// System.out.println("Content Bias is:"+this.getContentBias())
-			
-			computeColorScale();
-		}
-		
-		return this;
-	}
+	// /**
+	// * Resizes the visualizer to the given values.
+	// *
+	// * @param width the width
+	// * @param height the height
+	// * @return The Visualizer
+	// */
+	// public Visualizer resizeVisualizer(double width , double height) {
+	// if (width > 0 && height > 0) {
+	//
+	// this.canvasWidth = (int) width;
+	// this.canvasHeight = (int) height;
+	// halfCanvasHeight = this.canvasHeight >> 1;
+	// sierpinskiRootHeight = height;
+	//
+	// System.out.println(this.canvasWidth);
+	// System.out.println(this.canvasHeight);
+	//
+	// // Set the width and height of Canvas
+	// setWidth(width);
+	// setHeight(height);
+	//
+	// // Careful with contentBias here
+	// prefWidth(-1);
+	// prefHeight(-1);
+	//
+	// // autosize()
+	//
+	// // System.out.println("Content Bias is:"+this.getContentBias())
+	//
+	// computeColorScale();
+	// }
+	//
+	// return this;
+	// }
 	
 	/**
 	 * Stars the visualizer.
@@ -181,9 +222,13 @@ public abstract class Visualizer extends VisualizerDrawer {
 				case 4:
 					drawSierpinski();
 					break;
+				case 5:
+					drawJuliaFractals();
 				default:
 					break;
 			}
+			
+			// System.out.println("Running..");
 			
 			// -- Show FPS if necessary.
 			if (showFPS) {
@@ -201,7 +246,7 @@ public abstract class Visualizer extends VisualizerDrawer {
 				 * System.currentTimeMillis(); fps = framesPerSecond;
 				 * framesPerSecond = 0; } */
 				gc.setStroke(Color.YELLOW);
-				gc.strokeText("FPS: " + fps + " (FRRH: " + frameRateRatioHint + ")", 0, height - 1.00);
+				gc.strokeText("FPS: " + fps + " (FRRH: " + frameRateRatioHint + ")", 0, canvasHeight - 1.00);
 			}
 			
 			// player.analyserBox.repaintCanvas();

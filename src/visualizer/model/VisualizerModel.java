@@ -11,7 +11,6 @@ import javax.sound.sampled.SourceDataLine;
 import dsp.KJDSPAudioDataConsumer;
 import dsp.KJDigitalSignalProcessor;
 import dsp.KJFFT;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -20,7 +19,7 @@ import javafx.scene.paint.Color;
  *
  * @author GOXR3PLUS
  */
-public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor {
+public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalProcessor {
 	
 	/** The Constant log. */
 	private static final Logger log = Logger.getLogger(VisualizerModel.class.getName());
@@ -89,7 +88,7 @@ public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor 
 		},
 		
 		/** Display Sierpinski Triangles */
-		DISPLAY_CIRCULAR {
+		DISPLAY_JULIAFRACTALS {
 			@Override
 			public String toString() {
 				return "5";
@@ -160,15 +159,6 @@ public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor 
 	/** The bar offset. */
 	protected int barOffset = 1;
 	
-	/** The width. */
-	public int width = 1;
-	
-	/** The height. */
-	public int height = 1;
-	
-	/** The height 2. */
-	public int height_2 = 1;
-	
 	/** The fft. */
 	// -- Spectrum analyzer variables.
 	protected KJFFT fft;
@@ -225,6 +215,7 @@ public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor 
 	 */
 	public VisualizerModel() {
 		
+		// ----------------------
 		setFramesPerSecond(DEFAULT_FPS);
 		setPeakDelay((int) ( DEFAULT_FPS * DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO ));
 		
@@ -401,7 +392,7 @@ public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor 
 	 * @return the visualizer width
 	 */
 	public int getVisualizerWidth() {
-		return width;
+		return canvasWidth;
 	}
 	
 	/**
@@ -410,7 +401,7 @@ public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor 
 	 * @return the visualizer height
 	 */
 	public int getVisualizerHeight() {
-		return height;
+		return canvasHeight;
 	}
 	
 	/**
@@ -495,8 +486,8 @@ public class VisualizerModel extends Canvas implements KJDigitalSignalProcessor 
 	 * Compute color scale.
 	 */
 	public void computeColorScale() {
-		saColorScale = ( (float) spectrumAnalyserColors.length / height ) * barOffset * 1.0f;
-		vuColorScale = ( (float) spectrumAnalyserColors.length / ( width - 32 ) ) * 2.0f;
+		saColorScale = ( (float) spectrumAnalyserColors.length / canvasHeight ) * barOffset * 1.0f;
+		vuColorScale = ( (float) spectrumAnalyserColors.length / ( canvasWidth - 32 ) ) * 2.0f;
 	}
 	
 	/**

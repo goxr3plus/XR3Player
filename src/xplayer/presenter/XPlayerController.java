@@ -452,8 +452,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * This method is Used by VisualizerWindow class.
 	 */
 	public void reAddVisualizer() {
-		visualizerStackPane.getChildren().add(
-		        visualizer.resizeVisualizer(visualizerStackPane.getWidth() - 4, visualizerStackPane.getHeight() - 4));
+		visualizerStackPane.getChildren().add(visualizer);
 		visualizerStackPane.getChildren().get(visualizerStackPane.getChildren().size() - 1).toBack();
 	}
 	
@@ -468,52 +467,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		visualizer = new XPlayerVisualizer(0, 0, this);
 		visualizer.setShowFPS(xPlayerSettingsController.showFPS.selectedProperty().get());
 		visualizer.visibleProperty().bind(visualizerVisible.selectedProperty());
-		
-		// VisualizerStackPane
-		// -----VisualizerStackPane is a StackPane
-		// -----Where Visualizer is a Canvas
-		// visualizerStackPane.setStyle("-fx-border-color:white;
-		// -fx-border-width:1.5;");
-		visualizerStackPane.getChildren().add(visualizer);
-		// // visualizerStackPane.property
-		// visualizerStackPane.setOnMouseEntered(m -> {
-		// System.out.println("Current StackPane Size is:[width:" +
-		// visualizerStackPane.getWidth() + " , height:"
-		// + visualizerStackPane.getHeight());
-		//
-		// System.out.println("Visualizer Size is:[width:" +
-		// visualizer.getWidth() + " , height:"
-		// + visualizer.getHeight());
-		//
-		// visualizerStackPane.autosize();
-		// });
-		
-		//
-		
-		// visualizer.widthProperty().bind(visualizerStackPane.layouwidthProperty().subtract(4));
-		// visualizer.heightProperty().bind(visualizerStackPane.heightProperty().subtract(4));
-		//
-		// visualizer.layoutBoundsProperty().addListener(l->{
-		// visualizer.resizeVisualizer(visualizerStackPane.getWidth() - 4,
-		// visualizerStackPane.getHeight() - 4);
-		// });
-		
-		visualizerStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> {
-			
-			// System.out.println("Current StackPane Size is:[width:" +
-			// visualizerStackPane.getWidth() + " , height:"
-			// + visualizerStackPane.getHeight())
-			
-			if (!visualizerWindow.getStage().isShowing())
-				visualizer.resizeVisualizer(newValue.getWidth() - 4, newValue.getHeight() - 4);
-			
-			visualizer.getWidth();
-			visualizer.getHeight();
-			// System.out.println(
-			// "Visualizer-> Size is:[width:" + visualizer.getWidth() + " ,
-			// height:" + visualizer.getHeight())
-			
-		});
 		
 		// maximizeVisualizer
 		maximizeVisualizer.disableProperty().bind(visualizerVisible.selectedProperty().not());
@@ -533,6 +486,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				visualizerVisible.setGraphic(eyeDisabled);
 		});
 		visualizerVisible.toFront();
+		
+		// Add the Visualizer and Bring it to Back
+		visualizerStackPane.getChildren().add(visualizer);
+		visualizer.toBack();
 		
 		// visualizerVisibleLabel
 		visualizerVisibleLabel.visibleProperty().bind(visualizerVisible.selectedProperty().not());
@@ -783,26 +740,26 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 						Platform.runLater(() -> mediaFileMarquee
 						        .setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get())));
 						
-						// System.out.println("Song Object..." +
-						// xPlayerModel.songPathProperty().get())
+						// Print the Media Object Absolute Path
+						System.out.println("Song Object..." + xPlayerModel.songPathProperty().get());
 						
-						// retrieve the image
-						image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
-						
-						// Load
+						// ----------------------Open the Media
 						updateMessage("Opening ...");
 						xPlayer.open(xPlayerModel.songObjectProperty().get());
 						
-						// Play
+						// ---------------------- Play the Media
 						xPlayer.play();
+						
+						// -----------------------Configuration
 						updateMessage("Configuration ...");
 						
 						// start immediately?
 						if (!xPlayerSettingsController.startImmediately.isSelected())
 							pause();
-						
+							
 						// Mute?
-						System.out.println("Mute is Selected?: " + radialMenu.mute.isSelected());
+						// System.out.println("Mute is Selected?: " +
+						// radialMenu.mute.isSelected())
 						xPlayer.setMute(radialMenu.mute.isSelected());
 						
 						// Volume
@@ -813,6 +770,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 						
 						// Speaker Balance
 						xPlayer.setBalance(equalizer.balanceFilter.getValue(200));
+						
+						// retrieve the image
+						image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
 						
 						updateMessage("Starting ...");
 					} catch (Exception ex) {
@@ -888,9 +848,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			
 			System.out.println("Failed...");
 			
-			xPlayerModel.songObjectProperty().set(null);
-			xPlayerModel.songPathProperty().set(null);
-			xPlayerModel.songExtensionProperty().set(null);
+			// xPlayerModel.songObjectProperty().set(null);
+			// xPlayerModel.songPathProperty().set(null);
+			// xPlayerModel.songExtensionProperty().set(null);
 			xPlayerModel.setDuration(-1);
 			xPlayerModel.setCurrentTime(-1);
 			image = null;
@@ -899,8 +859,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			done();
 		}
 		
-		/* (non-Javadoc)
-		 * @see javafx.concurrent.Service#cancelled() */
 		@Override
 		public void cancelled() {
 			super.cancelled();
