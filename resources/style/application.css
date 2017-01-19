@@ -195,8 +195,8 @@
 ******************************************************************************/
 
 
-.dialog-pane{
-  -fx-border-color:black;
+/* .dialog-pane{
+  -fx-border-color:white;
   -fx-border-width:2.0px;
  }
 
@@ -206,35 +206,36 @@
 
 .dialog-pane > .content.label {
    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
-   -fx-background-color: yellow;
+   -fx-background-color: orange;
    -fx-text-fill:black;
    -fx-font-size:15.0px;
 }
 
 .dialog-pane:header .header-panel {
-  -fx-background-color: black;
+  -fx-background-color: white;
 }
 
 .dialog-pane:header .header-panel .label{
-  -fx-background-color: yellow;
+  -fx-background-color: orange;
   -fx-background-radius:10.0px;
   -fx-text-fill:black;
   -fx-font-size:15.0px;
-}
+}*/
 
 
 .dialog-pane .button{
-   -fx-background-color:black;
-   -fx-text-fill:white;
-   -fx-wrap-text: true;
-   -fx-effect: dropshadow( three-pass-box, yellow, 10.0, 0.0, 0.0, 0.0);
+   -fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  
+   -fx-background-radius: 5.0;
+   -fx-text-fill: white;  
+   -fx-wrap-text:true;
+   -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
+   -fx-font-size: 13.0px;
    -fx-cursor:hand;
  }
 
-.dialog-pane .button:hover{     
-  -fx-background-color:white;
-  -fx-text-fill:black;
-  -fx-font-weight:bold; 
+.dialog-pane .button:hover{   
+	-fx-background-color:rgb(255.0,119.0,0.0,0.7);
+    /*-fx-font-weight:bold; */
  }
 
 
@@ -245,10 +246,10 @@
 ******************************************************************************/
 
 .tooltip{
-  -fx-background-color: yellow;
+  -fx-background-color: white;
   -fx-text-fill:black;
-  -fx-font-size:12.0;
-  -fx-effect: dropshadow( three-pass-box, black, 10.0, 0.0, 0.0, 0.0);
+  -fx-font-size:11.0;
+ /*  -fx-effect: dropshadow( three-pass-box, black, 10.0, 0.0, 0.0, 0.0); */
   -fx-wrap-text:true;
 }
 
@@ -878,22 +879,22 @@
 .windowMode:selected{
 	-fx-text-fill:cyan;
 }
-  
-    
-#xr3SettingsButton{
-  	-fx-background-color:white; 
-  	-fx-background-radius:15.0;
- 	-fx-font-weight:bold;
- 	-fx-cursor:hand;	
- 	/*-fx-effect: dropshadow( three-pass-box , orange ,5.0, 0.0 , 0.0 , 2.0 );*/
-}
    
    
 .menu-button{
-    -fx-background-color:white; 
- 	-fx-background-radius:20.0px;
- 	-fx-font-weight:bold;
- 	-fx-cursor:hand;	
+ 	-fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  
+ 	-fx-background-radius: 5.0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
+    -fx-font-size: 13.0px;	
+    -fx-cursor:hand;
+}
+
+.menu-button .label{
+	-fx-text-fill:white;
+}
+
+.menu-button .label:hover{
+	-fx-text-fill:orange;
 }
 
 

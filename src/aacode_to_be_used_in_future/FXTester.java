@@ -24,7 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import tools.InfoTool;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class FXTester.
  */
@@ -37,7 +37,7 @@ public class FXTester extends Application {
 	Balancer balancer = new Balancer(100, 50, 208, 20, 100, 200);
 	
 	/** The dj disc. */
-	DJDisc djDisc = new DJDisc(140, 140, Color.RED, 15);
+	DJDisc djDisc = new DJDisc(140, 140, Color.RED, 15,125);
 	
 	/** The filter. */
 	DJFilter filter = new DJFilter(150, 150, 36, 36, Color.BLUE);

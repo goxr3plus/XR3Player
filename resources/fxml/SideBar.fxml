@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root id="sideBar" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="507.0" prefWidth="265.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="507.0" prefWidth="265.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -33,7 +33,7 @@
          </BorderPane.margin>
          <children>
             <JFXButton fx:id="hideSideBar" style="-fx-font-weight: bold;" text="Close" />
-            <MenuButton id="xr3SettingsButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" prefWidth="150.0" text="XR3" GridPane.halignment="RIGHT" fx:id="xr3Settings">
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" prefWidth="150.0" text="XR3" GridPane.halignment="RIGHT" fx:id="xr3Settings">
                <items>
                   <Menu mnemonicParsing="false" text="DataBase">
                      <items>

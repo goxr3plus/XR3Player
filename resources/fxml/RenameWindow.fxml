@@ -9,12 +9,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(16,26,24); -fx-background-radius: 10;" type="HBox" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(16,26,24); -fx-background-radius: 10;" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="charsField" alignment="CENTER" prefHeight="45.0" prefWidth="64.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: white;" text="200" HBox.hgrow="ALWAYS" />
       <Button fx:id="okButton" minHeight="25.0" minWidth="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="45.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="OK">
          <tooltip>
-            <Tooltip text="Exit" />
+            <Tooltip text="Save" />
          </tooltip>
          <HBox.margin>
             <Insets left="5.0" right="5.0" />
@@ -32,7 +32,7 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="Exit" />
+            <Tooltip text="Close" />
          </tooltip>
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -7,12 +7,13 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root maxWidth="150.0" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="150.0" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" StackPane.alignment="CENTER">
 			<image>
@@ -33,6 +34,18 @@
 				</ImageView>
 			</graphic>
 		</Label>
+      <Label fx:id="warningLabel" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" StackPane.alignment="BOTTOM_RIGHT">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/warning.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Image is missing!" />
+         </tooltip>
+      </Label>
 		<JFXBadge fx:id="ratingLabel" maxHeight="20.0" maxWidth="60.0" style="-fx-background-color: rgb(255,255,255,0.8);" styleClass="icons-badge" text="0.5" StackPane.alignment="TOP_LEFT">
 			<Icon awesomeIcon="STAR" size="2em" style=";" styleClass="icon" />
 		</JFXBadge>
@@ -46,4 +59,7 @@
 	<cursor>
 		<Cursor fx:constant="HAND" />
 	</cursor>
+   <effect>
+      <DropShadow height="47.69" radius="23.345" width="47.69" />
+   </effect>
 </fx:root>

@@ -515,7 +515,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	public void makeTheDisc(int width , int height , Color color , int volume , Side side) {
 		
 		// initialize
-		disc = new DJDisc(width, height, color, volume);
+		disc = new DJDisc(width, height, color, volume,125);
 		disc.addDJDiscListener(this);
 		// disc.set
 		

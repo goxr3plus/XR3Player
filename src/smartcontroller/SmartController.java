@@ -161,7 +161,7 @@ public class SmartController extends StackPane {
 	private String name = null;
 	
 	/** The search service. */
-	public final Searcher searchService;
+	public final SmartSearcher searchService;
 	
 	/** The load service. */
 	public final LoadService loadService;
@@ -222,7 +222,7 @@ public class SmartController extends StackPane {
 		
 		// Initialize
 		tableViewer = new MediaTableViewer();
-		searchService = new Searcher(this);
+		searchService = new SmartSearcher(this);
 		loadService = new LoadService();
 		inputService = new InputService();
 		copyOrMoveService = new CopyOrMoveService();
