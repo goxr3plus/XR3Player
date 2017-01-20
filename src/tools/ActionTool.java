@@ -71,7 +71,7 @@ public final class ActionTool {
      * that if you use a method which is accessing a JavaFX element from
      * external Thread you have to use <b> Platform.runLater() </b>;
      */
-    public static void initInternalJavaFXElements() {  
+    public static void initInternalJavaFXElements() {
         alert.initStyle(StageStyle.UTILITY);
         alert.initOwner(Main.window);
     }
@@ -82,7 +82,7 @@ public final class ActionTool {
      * @param path the path
      */
     public static void openFileLocation(String path) {
-        showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path), NotificationType.INFORMATION);
+        showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path), Duration.millis(1500), NotificationType.INFORMATION);
         if (InfoTool.osName.toLowerCase()
             .contains("win")) {
             try {
@@ -90,10 +90,10 @@ public final class ActionTool {
                     .exec("explorer.exe /select," + path);
             } catch (IOException ex) {
                 Main.logger.log(Level.WARNING, ex.getMessage(), ex);
-                showNotification("Folder Explorer Fail", "Failed to open file explorer.", NotificationType.WARNING);
+                showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500), NotificationType.WARNING);
             }
         } else {
-            showNotification("Not Supported", "This function is only supported in Windows \n I am trying my best to implement it and on other operating systems :)", NotificationType.WARNING);
+            showNotification("Not Supported", "This function is only supported in Windows \n I am trying my best to implement it and on other operating systems :)", Duration.millis(1500), NotificationType.WARNING);
         }
 
     }
@@ -211,7 +211,7 @@ public final class ActionTool {
      * @param text the text
      * @param type the type
      */
-    public static void showNotification(String title, String text, NotificationType type) {
+    public static void showNotification(String title, String text, Duration duration, NotificationType type) {
         Notifications notification = Notifications.create()
             .title(title)
             .text(text);

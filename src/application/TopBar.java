@@ -15,25 +15,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import tools.ActionTool;
 import tools.InfoTool;
@@ -83,11 +81,6 @@ public class TopBar extends BorderPane {
     // ----------------------
 
     /**
-     * The current update of XR3Player
-     */
-    private final int currentVersion = 38;
-
-    /**
      * The current Window Mode that means if the application is on <b>
      * LibraryMode </b> or in <b>DJMode </b>.
      */
@@ -131,98 +124,7 @@ public class TopBar extends BorderPane {
         // showSideBar
         showSideBar.setOnAction(a -> Main.sideBar.showBar());
 
-        checkForUpdates.setOnAction(a -> {
-
-            new Thread(() -> {
-                if (InfoTool.isReachableByPing("www.google.com")) {
-
-                    try {
-
-                        // Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
-                        // .get()
-
-                        Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
-                        Element element = doc.getElementsByTag("article")
-                            .last();
-
-                        // Update is available?
-                        if (Integer.valueOf(element.id()) > currentVersion) {
-
-                            Platform.runLater(() -> {
-                                Alert alert = new Alert(AlertType.CONFIRMATION);
-                                alert.setTitle("Update Available");
-                                alert.setHeaderText("New Update available!!!");
-                                alert.setContentText("Update ->( " + element.id() + " )<- is available!\n\t\t\t\t\tYour current version is: ->( " + currentVersion + " )<-");
-                                alert.initStyle(StageStyle.UTILITY);
-                                alert.initOwner(Main.window);
-
-                                Label label = new Label("Information about the latest update :)");
-
-                                TextArea textArea = new TextArea();
-                                textArea.setEditable(false);
-                                textArea.setWrapText(true);
-
-                                textArea.setMaxWidth(Double.MAX_VALUE);
-                                textArea.setMaxHeight(Double.MAX_VALUE);
-                                GridPane.setVgrow(textArea, Priority.ALWAYS);
-                                GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-                                GridPane expContent = new GridPane();
-                                expContent.setMaxWidth(Double.MAX_VALUE);
-                                expContent.add(label, 0, 0);
-                                expContent.add(textArea, 0, 1);
-
-                                // Append the text to the textArea
-                                element.getElementsByTag("p")
-                                    .forEach(element2 -> textArea.appendText("<p>" + element2.text()
-                                        .replaceAll("<br>", "\n") + "<//p>\n"));
-
-                                // Set the default buttons
-                                ButtonType download = new ButtonType("Download");
-                                ButtonType cancel = new ButtonType("Cancel");
-                                alert.getButtonTypes()
-                                    .setAll(download, cancel);
-                                // ((Button) alert.getDialogPane()
-                                // .lookupButton(ButtonType.OK)).setDefaultButton(true);
-
-                                // Set expandable Exception into the dialog pane.
-                                alert.getDialogPane()
-                                    .setExpandableContent(expContent);
-                                alert.getDialogPane()
-                                    .setExpanded(true);
-
-                                // Show and Wait
-                                alert.showAndWait()
-                                    .ifPresent(answer -> {
-                                        if (answer == download) {
-                                            // Open the Default Browser
-                                            if (Desktop.isDesktopSupported()) {
-                                                Desktop desktop = Desktop.getDesktop();
-                                                try {
-                                                    desktop.browse(new URI("https://sourceforge.net/projects/xr3player/"));
-                                                } catch (URISyntaxException | IOException ex) {
-                                                    ex.printStackTrace();
-                                                }
-                                                // Error?
-                                            } else {
-                                                System.out.println("Error trying to open the default web browser.");
-                                            }
-                                        }
-                                    });
-
-                            });
-                        }
-
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-
-                } else {
-                    Platform.runLater(() -> ActionTool.showNotification("Can't Connect", "Can't connect to the update site :\n" + "1) Maybe there is not internet connection" + "\n2)GitHub is down for maintenance", NotificationType.INFORMATION));
-                }
-
-            }).start();
-        });
+        checkForUpdates.setOnAction(a -> Main.checkForUpdates(true));
 
         // restartButton
         restartButton.setOnAction(a -> {

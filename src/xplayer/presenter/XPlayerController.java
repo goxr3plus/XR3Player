@@ -43,6 +43,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import smartcontroller.Genre.TYPE;
 import streamplayer.StreamPlayer.Status;
 import streamplayer.StreamPlayerEvent;
@@ -780,7 +781,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 						Platform.runLater(() -> ActionTool.showNotification("ERROR",
 						        "Can't play \n[" + InfoTool.getMinString(xPlayerModel.songPathProperty().get(), 30)
 						                + "]\n" + "It is corrupted or maybe unsupported",
-						        NotificationType.ERROR));
+						                Duration.millis(2000), NotificationType.ERROR));
 						return false;
 					}
 					
@@ -1017,7 +1018,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		if (xPlayerModel.songExtensionProperty().get() != null)
 			playService.startPlayService(xPlayerModel.songPathProperty().get());
 		else
-			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.",
+			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.",Duration.millis(1500),
 			        NotificationType.INFORMATION);
 			
 		// if (thisSong instanceof URL)

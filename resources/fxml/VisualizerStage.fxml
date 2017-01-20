@@ -18,10 +18,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="524.0" style="-fx-background-color: transparent;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root style="-fx-background-color: transparent;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="visualizerPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
-      <BorderPane fx:id="topBar" maxHeight="-Infinity" prefHeight="31.0" prefWidth="524.0" style="-fx-background-color: rgb(0,0,0,0.95);" StackPane.alignment="TOP_CENTER">
+      <BorderPane fx:id="visualizerPane" style="-fx-background-color: transparent;" />
+      <BorderPane fx:id="topBar" maxHeight="31.0" style="-fx-background-color: rgb(0,0,0,0.95);" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
          </StackPane.margin>
@@ -53,7 +53,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <MenuButton mnemonicParsing="false" text="More">
+                  <MenuButton fx:id="moreMenuButton" mnemonicParsing="false" text="More">
                     <items>
                         <Menu mnemonicParsing="false" text="Background">
                           <items>
@@ -86,7 +86,7 @@
             </HBox>
          </right>
          <center>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane BorderPane.alignment="CENTER">
                <center>
                   <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15;" text="~Visualizer~" BorderPane.alignment="CENTER">
                      <effect>
@@ -95,10 +95,10 @@
                   </Label>
                </center>
                <right>
-                  <StackPane prefHeight="48.0" prefWidth="70.0" BorderPane.alignment="CENTER">
+                  <StackPane fx:id="progressBarStackPane" BorderPane.alignment="CENTER">
                      <children>
-                        <ProgressBar fx:id="progressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="35.0" />
-                        <Label fx:id="progressLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: black;" text="100%" />
+                        <ProgressBar fx:id="progressBar" maxWidth="70.0" />
+                        <Label fx:id="progressLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: black;" text="100%" />
                      </children>
                   </StackPane>
                </right>

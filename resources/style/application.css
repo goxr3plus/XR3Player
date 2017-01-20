@@ -866,18 +866,19 @@
 
 .windowMode{
   	-fx-background-color:black;
-  	-fx-border-radius:15.0;
+  	-fx-border-radius:10.0;
+  	-fx-border-width:2.0;
   	-fx-text-fill:white;
   	-fx-font-weight:bold;
   	-fx-cursor:hand;
 }
   
 .windowMode:hover{
-	-fx-border-color:cyan;
+	-fx-border-color:magenta;
 }
   
 .windowMode:selected{
-	-fx-text-fill:cyan;
+	-fx-text-fill:magenta;
 }
    
    

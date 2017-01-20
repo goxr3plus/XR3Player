@@ -34,6 +34,7 @@ import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 import application.Main;
 import javafx.application.Platform;
+import javafx.util.Duration;
 import javazoom.spi.PropertiesContainer;
 import tools.ActionTool;
 import tools.NotificationType;
@@ -269,7 +270,7 @@ public class StreamPlayer implements Runnable {
 			
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
 			Main.logger.log(Level.INFO, ex.getMessage(), ex);
-			Platform.runLater(() -> ActionTool.showNotification("Warning", ex.getMessage(), NotificationType.WARNING));
+			Platform.runLater(() -> ActionTool.showNotification("Warning", ex.getMessage(),Duration.millis(1500), NotificationType.WARNING));
 			throw new StreamPlayerException(ex);
 		}
 		
@@ -798,7 +799,7 @@ public class StreamPlayer implements Runnable {
 			} catch (IOException ex) {
 				Main.logger.log(Level.WARNING, "Cannot get m_encodedaudioInputStream.available()", ex);
 				Platform.runLater(
-				        () -> ActionTool.showNotification("Error", ex.getMessage(), NotificationType.WARNING));
+				        () -> ActionTool.showNotification("Error", ex.getMessage(),Duration.millis(1500), NotificationType.WARNING));
 				stop();
 			}
 		}

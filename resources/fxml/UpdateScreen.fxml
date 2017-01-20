@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 
-<fx:root prefHeight="182.0" prefWidth="387.0" style="-fx-background-color: black;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="239.0" prefWidth="626.0" style="-fx-background-color: black;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <cursor>
       <Cursor fx:constant="WAIT" />
    </cursor>
@@ -31,6 +31,6 @@
             <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-size: 22; -fx-text-fill: white;" text="....Loading...." textAlignment="CENTER" />
          </children>
       </VBox>
-      <Label id="updateScreenButtonLabel" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="XR3Player by Alex K(GOXR3PLUS STUDIO) -&gt;Java 1.8.0_111" StackPane.alignment="BOTTOM_CENTER" />
+      <Label id="updateScreenButtonLabel" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="Created by -&gt;GoXR3Plus Studio" StackPane.alignment="BOTTOM_RIGHT" />
    </children>
 </fx:root>

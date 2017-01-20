@@ -3,28 +3,39 @@
  */
 package application;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
+import org.fxmisc.richtext.InlineCssTextArea;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import borderless.BorderlessScene;
 import database.LocalDBManager;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -54,8 +65,6 @@ import xplayer.presenter.XPlayersList;
  * @author GOXR3PLUS
  */
 public class Main extends Application {
-
-    public static HostServices hostServices;
 
     /** Application logger. */
     public static final Logger logger = Logger.getGlobal();
@@ -166,8 +175,20 @@ public class Main extends Application {
     public static final TreeViewManager treeManager = new TreeViewManager();
 
     /** The can save data. */
-    // Variables
     public static boolean canSaveData = true;
+
+    // ------------Updates Sector------------
+    /**
+     * The current update of XR3Player
+     */
+    private final static int currentVersion = 39;
+
+    /**
+     * The Thread which is responsible for the update check
+     */
+    private static Thread updaterThread;
+
+    // ---------------------------------------
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -182,7 +203,6 @@ public class Main extends Application {
             StackPane.setAlignment(sideBar, Pos.CENTER_LEFT);
 
             // root
-
             root.setTop(topBar);
 
             // Window
@@ -198,12 +218,9 @@ public class Main extends Application {
             // window)
 
             window.setTitle("XR3Player");
-            // -------Due to a bug i need the width%2==0---------
-            int width = (int) (InfoTool.getVisualScreenWidth() * 0.77);
-            width = (width % 2 == 0) ? width : width + 1;
             // -------------------
-            window.setWidth(width);
-            window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
+            window.setWidth(450);
+            window.setHeight(253);
             window.getIcons()
                 .add(InfoTool.getImageFromDocuments("icon.png"));
             window.centerOnScreen();
@@ -213,10 +230,7 @@ public class Main extends Application {
             });
 
             // Root
-            root.setStyle("-fx-background-color:BLACK;");
-            // "-fx-background-color:rgb(0,0,0,0.9)
-            // -fx-background-image:url('/image/djBackground.jpg')
-            // -fx-background-size:cover;")
+            root.setStyle("-fx-background-color:BLACK; -fx-background-color:rgb(0,0,0,0.9); -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-size:cover;");
             // root.setBottom(navigationBar)
 
             // Scene
@@ -225,13 +239,6 @@ public class Main extends Application {
             scene.getStylesheets()
                 .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss)
                     .toExternalForm());
-            // scene.setOnKeyReleased(key -> {
-            // if (key.getCode() == KeyCode.S)
-            // sideBar.showBar();
-            // else if (key.getCode() == KeyCode.H)
-            // sideBar.hideBar();
-            //
-            // });
 
             // Register some listeners to the main window
             libraryMode.librariesSearcher.registerListeners();
@@ -248,7 +255,7 @@ public class Main extends Application {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(", NotificationType.ERROR);
+            ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(", Duration.millis(10000), NotificationType.ERROR);
         }
 
     }
@@ -324,18 +331,18 @@ public class Main extends Application {
         ButtonType vAndExit = new ButtonType("Vacuum + Exit");
         ButtonType cancel = new ButtonType("Cancel");
 
-//        alert.getDialogPane()
-//            .getScene()
-//            .setFill(Color.TRANSPARENT);
-//        ((Button) alert.getDialogPane()
-//            .lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
+        // alert.getDialogPane()
+        // .getScene()
+        // .setFill(Color.TRANSPARENT);
+        // ((Button) alert.getDialogPane()
+        // .lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
         alert.getButtonTypes()
             .setAll(cancel, justExit, vAndExit);
         // alert.getDialogPane()
         // .getStylesheets()
         // .add(Main.class.getResource(InfoTool.styLes + InfoTool.applicationCss)
         // .toExternalForm());
-        
+
         alert.showAndWait()
             .ifPresent(answer -> {
                 if (answer == vAndExit)
@@ -443,6 +450,151 @@ public class Main extends Application {
                 });
             }
         }).start();
+    }
+
+    private static int counter;
+
+    /**
+     * This method is fetching data from github to check if the is a new update for XR3Player
+     * @param showIfNotUpdateAvailable 
+     */
+    public static void checkForUpdates(boolean showIfNotUpdateAvailable) {
+
+        // Not already running
+        if (updaterThread == null || !updaterThread.isAlive()) {
+            updaterThread = new Thread(() -> {
+                System.out.println("Started update Thread");
+
+                if (InfoTool.isReachableByPing("www.google.com")) {
+
+                    try {
+
+                         Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
+                         .get();
+
+                       // Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
+                        Element lastArticle = doc.getElementsByTag("article")
+                            .last();
+
+                        // Not disturb the user every time the application starts
+                        if (Integer.valueOf(lastArticle.id()) == currentVersion && !showIfNotUpdateAvailable)
+                            return;
+
+                        // Update is available or not?
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(AlertType.CONFIRMATION);
+                            alert.setTitle("Update Window");
+                            if (Integer.valueOf(lastArticle.id()) > currentVersion) {
+                                alert.setHeaderText("New Update available!!!");
+                                alert.setContentText("Update ->( " + lastArticle.id() + " )<- is available!\n\t\t\t\t\tYour current version is: ->( " + currentVersion + " )<-");
+                            } else {
+                                alert.setHeaderText("You are up too date :)");
+                                alert.setContentText("Your current version is: ->( " + currentVersion + " )<-");
+                            }
+                            alert.initStyle(StageStyle.UTILITY);
+                            alert.initOwner(Main.window);
+
+                            // Label label = new Label("Information about the latest update :)")
+
+                            InlineCssTextArea textArea = new InlineCssTextArea();
+                            textArea.setEditable(false);
+                            textArea.setFocusTraversable(false);
+                            // textArea.setWrapText(true)
+
+                            textArea.setMinSize(500, 200);
+                            textArea.setMaxWidth(Double.MAX_VALUE);
+                            textArea.setMaxHeight(Double.MAX_VALUE);
+                            GridPane.setVgrow(textArea, Priority.ALWAYS);
+                            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+                            GridPane expContent = new GridPane();
+                            expContent.setMaxWidth(Double.MAX_VALUE);
+                            expContent.setMaxHeight(Double.MAX_VALUE);
+                            // expContent.add(label, 0, 0)
+                            expContent.add(textArea, 0, 1);
+
+                            doc.getElementsByTag("article")
+                                .forEach(element -> {
+                                    String id = element.id();
+
+                                    // Append the text to the textArea
+                                    textArea.appendText("-------------Start of Update (" + id + ")----------------------------------------------------------------------------------------------------\n");
+
+                                    // Information
+                                    textArea.appendText("->Information: ");
+                                    textArea.appendText(element.getElementsByClass("about")
+                                        .text() + "\n");
+
+                                    // ChangeLog
+                                    textArea.appendText("->ChangeLog:\n");
+                                    textArea.setStyle(textArea.getText()
+                                        .length() - 13, textArea.getText()
+                                            .length(),
+                                        "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;");
+
+                                    counter = -1;
+                                    Arrays.asList(element.getElementsByClass("changelog")
+                                        .text()
+                                        .split("\\*"))
+                                        .forEach(el -> {
+                                            if (++counter >= 1)
+                                                textArea.appendText((counter) + ")" + el + "\n");
+                                        });
+
+                                    textArea.appendText("\n\n");
+
+                                });
+
+                            // Set the default buttons
+                            ButtonType download = new ButtonType("Download");
+                            ButtonType cancel = new ButtonType("Cancel");
+                            alert.getButtonTypes()
+                                .setAll(download, cancel);
+
+                            // Set expandable Exception into the dialog pane.
+                            alert.getDialogPane()
+                                .setExpandableContent(expContent);
+                            alert.getDialogPane()
+                                .setExpanded(true);
+                            alert.getDialogPane()
+                                .setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+                            // Show and Wait
+                            alert.showAndWait()
+                                .ifPresent(answer -> {
+                                    if (answer == download) {
+                                        // Open the Default Browser
+                                        if (Desktop.isDesktopSupported()) {
+                                            Desktop desktop = Desktop.getDesktop();
+                                            try {
+                                                desktop.browse(new URI("https://sourceforge.net/projects/xr3player/"));
+                                            } catch (URISyntaxException | IOException ex) {
+                                                Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[ https://sourceforge.net/projects/xr3player/ ]", Duration.millis(2500), NotificationType.INFORMATION));
+                                                ex.printStackTrace();
+                                            }
+                                            // Error?
+                                        } else {
+                                            System.out.println("Error trying to open the default web browser.");
+                                        }
+                                    }
+                                });
+
+                        });
+                    } catch (IOException ex) {
+                        Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Trying to fetch update information i had a problem.", Duration.millis(2500), NotificationType.WARNING));
+                        ex.printStackTrace();
+                    }
+
+                } else {
+                    Platform
+                        .runLater(() -> ActionTool.showNotification("Can't Connect", "Can't connect to the update site :\n" + "1) Maybe there is not internet connection" + "\n2)GitHub is down for maintenance", Duration.millis(2500), NotificationType.ERROR));
+                }
+
+            });
+
+            updaterThread.setDaemon(true);
+            updaterThread.start();
+        }
     }
 
     /**

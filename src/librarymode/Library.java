@@ -43,6 +43,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 import smartcontroller.Genre;
 import smartcontroller.SmartController;
 import tools.ActionTool;
@@ -482,7 +483,9 @@ public class Library extends StackPane {
             .bind(selectionRegion.visibleProperty());
         selectedProperty().bind(selectionBox.selectedProperty());
 
-        setOnDragDetected(drag -> {
+        Label error = new Label();
+        error.setOnDragDetected(drag -> {
+            
             // Main.libraryMode.dragDetected=true;
 
             /* Allow copy transfer mode */
@@ -504,7 +507,7 @@ public class Library extends StackPane {
 
         });
 
-        setOnDragOver(drag -> {
+        error.setOnDragOver(drag -> {
             // Main.libraryMode.dragDetected=false;
 
             Dragboard db = drag.getDragboard();
@@ -678,7 +681,7 @@ public class Library extends StackPane {
                 updateImagePathInDB(file.getAbsolutePath(), false, true);
                 imageView.setImage(getImage());
             } else
-                ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(), NotificationType.WARNING);
+                ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(),Duration.millis(1500), NotificationType.WARNING);
         }
     }
 

@@ -428,10 +428,7 @@ public class LibraryMode extends GridPane {
             // clip.set
             clip.setSmooth(true);
             setClip(clip);
-            // setStyle(
-            // "-fx-background-color: linear-gradient(to bottom,black 60,
-            // #141414 60.2%, orange 87%); -fx-border-color:white;
-            // -fx-border-style:dotted;");
+            setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);");
 
             // setup containerScroller bar
 
@@ -465,6 +462,9 @@ public class LibraryMode extends GridPane {
                 .addAll(leftGroup, rightGroup, centerGroup);
 
             getChildren().addAll(centered);
+
+            // Styling
+            // setStyle("-fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-size:stretch;");
 
         }
 

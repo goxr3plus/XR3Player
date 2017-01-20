@@ -145,6 +145,7 @@ public class SmartSearcher extends HBox {
 		private void done() {
 			controller.updateList();
 			controller.unbind();
+			
 		}
 		
 		/**
