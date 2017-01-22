@@ -56,11 +56,17 @@ public abstract class Media {
     /** The stars. */
     private SimpleDoubleProperty stars;
 
+    /** The hour imported. */
+    private SimpleStringProperty hourImported;
+
     /** The date imported. */
     private SimpleStringProperty dateImported;
 
-    /** The hour imported. */
-    private SimpleStringProperty hourImported;
+    /** The date that the File was created. */
+    private SimpleStringProperty dateFileCreated;
+
+    /** The date that the File was last modified. */
+    private SimpleStringProperty dateFileModified;
 
     /** The drive. */
     private SimpleStringProperty drive;
@@ -81,14 +87,14 @@ public abstract class Media {
     // PROPERTIES----------------------------------------------------------------------------------
 
     /** The image to be displayed if the Media is Song + NO ERRORS */
-    public static Image songImage = InfoTool.getImageFromDocuments("song.png");
+    public static final Image songImage = InfoTool.getImageFromDocuments("song.png");
     /** The image to be displayed if the Media is Song + MISSING */
-    public static Image songMissingImage = InfoTool.getImageFromDocuments("songMissing.png");
+    public static final Image songMissingImage = InfoTool.getImageFromDocuments("songMissing.png");
     /** The image to be displayed if the Media is Song + CORRUPTED */
-    public static Image songCorruptedImage = InfoTool.getImageFromDocuments("songCorrupted.png");
+    public static final Image songCorruptedImage = InfoTool.getImageFromDocuments("songCorrupted.png");
 
     /** The video image. */
-    public static Image videoImage = InfoTool.getImageFromDocuments("video.png");
+    public static final Image videoImage = InfoTool.getImageFromDocuments("video.png");
 
     /** The genre. */
     protected Genre genre;
@@ -126,17 +132,20 @@ public abstract class Media {
         this.duration.addListener((observable, oldValue, newValue) -> determineTheImage());
         this.durationEdited = new SimpleStringProperty(duration == -1 ? "error" : InfoTool.getTimeEditedOnHours(duration));
 
+        // Hour Created
+        if (hourImported == null)
+            this.hourImported = new SimpleStringProperty(InfoTool.getLocalTime());
+        else
+            this.hourImported = new SimpleStringProperty(hourImported);
+
         // Date Created
         if (dateImported == null)
             this.dateImported = new SimpleStringProperty(InfoTool.getCurrentDate());
         else
             this.dateImported = new SimpleStringProperty(dateImported);
 
-        // Hour Created
-        if (hourImported == null)
-            this.hourImported = new SimpleStringProperty(InfoTool.getLocalTime());
-        else
-            this.hourImported = new SimpleStringProperty(hourImported);
+        dateFileCreated = new SimpleStringProperty(InfoTool.getFileCreationDate(path));
+        dateFileModified = new SimpleStringProperty(InfoTool.getFileLastModifiedDate(path));
 
         // File exists
         fileExists = new SimpleBooleanProperty(this, "FileExists", true);
@@ -238,6 +247,15 @@ public abstract class Media {
     }
 
     /**
+     * Hour imported property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty hourImportedProperty() {
+        return hourImported;
+    }
+
+    /**
      * Date imported property.
      *
      * @return the simple string property
@@ -247,12 +265,21 @@ public abstract class Media {
     }
 
     /**
-     * Hour imported property.
+     * Date File Created property.
      *
-     * @return the simple string property
+     * @return Date File Created property.
      */
-    public SimpleStringProperty hourImportedProperty() {
-        return hourImported;
+    public SimpleStringProperty dateFileCreatedProperty() {
+        return dateFileCreated;
+    }
+
+    /**
+     * Date File last modified property.
+     *
+     * @return The Date File last modified property.
+     */
+    public SimpleStringProperty dateFileModified() {
+        return dateFileModified;
     }
 
     /**
@@ -632,6 +659,15 @@ public abstract class Media {
     }
 
     /**
+     * Gets the hour imported.
+     *
+     * @return the hour imported
+     */
+    public String getHourImported() {
+        return hourImported.get();
+    }
+
+    /**
      * Gets the date imported.
      *
      * @return the date imported
@@ -641,12 +677,21 @@ public abstract class Media {
     }
 
     /**
-     * Gets the hour imported.
+     * Gets The date that the File was created
      *
-     * @return the hour imported
+     * @return The date that the File was created
      */
-    public String getHourImported() {
-        return hourImported.get();
+    public String getDateFileCreated() {
+        return dateFileCreated.get();
+    }
+
+    /**
+     * Gets The date that the File was last modified
+     *
+     * @return The date that the File was last modified
+     */
+    public String getDateFileModified() {
+        return dateFileModified.get();
     }
 
     /**

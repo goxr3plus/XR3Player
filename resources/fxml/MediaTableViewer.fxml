@@ -6,7 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
       <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="?" />
       <TableColumn fx:id="mediaType" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Type" />
@@ -71,6 +71,8 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
+      <TableColumn fx:id="dateFileCreated" prefWidth="75.0" text="Date File Created" visible="false" />
+      <TableColumn fx:id="dateFileModified" prefWidth="75.0" text="Date File Modified" visible="false" />
       <TableColumn prefWidth="75.0" text="Artist-[Not implemented]" visible="false" />
       <TableColumn fx:id="remix" prefWidth="75.0" text="Remix-[Not implemented]" visible="false" />
       <TableColumn fx:id="album" prefWidth="75.0" text="Album-[Not implemented]" visible="false" />

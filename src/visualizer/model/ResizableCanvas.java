@@ -34,8 +34,13 @@ public class ResizableCanvas extends Canvas {
     }
 
     @Override
-    public double maxHeight(double width) {
-        return Double.MAX_VALUE;
+    public double minWidth(double height) {
+        return 1;
+    }
+
+    @Override
+    public double prefWidth(double width) {
+        return minWidth(width);
     }
 
     @Override
@@ -44,12 +49,12 @@ public class ResizableCanvas extends Canvas {
     }
 
     @Override
-    public double minWidth(double height) {
-        return 1;
+    public double maxWidth(double height) {
+        return Double.MAX_VALUE;
     }
 
     @Override
-    public double maxWidth(double height) {
+    public double maxHeight(double width) {
         return Double.MAX_VALUE;
     }
 

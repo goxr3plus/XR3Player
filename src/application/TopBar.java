@@ -93,10 +93,10 @@ public class TopBar extends BorderPane {
      */
     public enum WindowMode {
 
-        /** The djmode. */
-        DJMODE,
-        /** The librarymode. */
-        LIBRARYMODE;
+	/** The djmode. */
+	DJMODE,
+	/** The librarymode. */
+	LIBRARYMODE;
 
     }
 
@@ -104,15 +104,15 @@ public class TopBar extends BorderPane {
      * Constructor.
      */
     public TopBar() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "TopBar.fxml"));
-        loader.setController(this);
-        loader.setRoot(this);
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "TopBar.fxml"));
+	loader.setController(this);
+	loader.setRoot(this);
 
-        try {
-            loader.load();
-        } catch (IOException ex) {
-            Main.logger.log(Level.WARNING, "", ex);
-        }
+	try {
+	    loader.load();
+	} catch (IOException ex) {
+	    Main.logger.log(Level.WARNING, "", ex);
+	}
     }
 
     /**
@@ -121,80 +121,73 @@ public class TopBar extends BorderPane {
     @FXML
     private void initialize() {
 
-        // showSideBar
-        showSideBar.setOnAction(a -> Main.sideBar.showBar());
+	// showSideBar
+	showSideBar.setOnAction(a -> Main.sideBar.showBar());
 
-        checkForUpdates.setOnAction(a -> Main.checkForUpdates(true));
+	checkForUpdates.setOnAction(a -> Main.checkForUpdates(true));
 
-        // restartButton
-        restartButton.setOnAction(a -> {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.initOwner(Main.window);
+	// restartButton
+	restartButton.setOnAction(a -> {
+	    Alert alert = new Alert(AlertType.CONFIRMATION);
+	    alert.initOwner(Main.window);
 
-            alert.setContentText("Soore you want to restart the application?");
-            ButtonType yes = new ButtonType("Yes");
-            ButtonType cancel = new ButtonType("Cancel");
-            ((Button) alert.getDialogPane()
-                .lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
+	    alert.setContentText("Soore you want to restart the application?");
+	    ButtonType yes = new ButtonType("Yes");
+	    ButtonType cancel = new ButtonType("Cancel");
+	    ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
 
-            alert.getButtonTypes()
-                .setAll(yes, cancel);
-            alert.initStyle(StageStyle.TRANSPARENT);
-            alert.showAndWait()
-                .ifPresent(answer -> {
-                    if (answer == yes)
-                        Main.restartTheApplication(true);
-                });
-        });
+	    alert.getButtonTypes().setAll(yes, cancel);
+	    alert.initStyle(StageStyle.TRANSPARENT);
+	    alert.showAndWait().ifPresent(answer -> {
+		if (answer == yes)
+		    Main.restartTheApplication(true);
+	    });
+	});
 
-        // minimize
-        minimize.setOnAction(ac -> Main.window.setIconified(true));
+	// minimize
+	minimize.setOnAction(ac -> Main.window.setIconified(true));
 
-        // maximize_normalize
-        maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
+	// maximize_normalize
+	maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
 
-        // close
-        close.setOnAction(ac -> Main.exitQuestion());
+	// close
+	close.setOnAction(ac -> Main.exitQuestion());
 
-        // goDJMode
-        goDJMode.setOnMouseReleased(mouse -> {
-            if (windowMode != WindowMode.DJMODE && mouse.getButton() == MouseButton.PRIMARY) {
+	// goDJMode
+	goDJMode.setOnMouseReleased(mouse -> {
+	    if (windowMode != WindowMode.DJMODE && mouse.getButton() == MouseButton.PRIMARY) {
 
-                // Work
-                Main.djMode.getSplitPane()
-                    .getItems()
-                    .removeAll(Main.treeManager, Main.multipleTabs);
-                Main.djMode.getSplitPane()
-                    .getItems()
-                    .addAll(Main.treeManager, Main.multipleTabs);
-                Main.djMode.setDividerPositions();
-                Main.root.setCenter(Main.djMode);
+		// Work
+		Main.djMode.getSplitPane().getItems().removeAll(Main.treeManager, Main.multipleTabs);
+		Main.djMode.getSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
+		Main.djMode.setDividerPositions();
+		Main.root.setCenter(Main.djMode);
 
-                // Update window Mode
-                windowMode = WindowMode.DJMODE;
+		// Update window Mode
+		windowMode = WindowMode.DJMODE;
 
-                // Marked
-                changeMarks(true, false);
-            } else
-                goDJMode.setSelected(true);
-        });
+		// Marked
+		changeMarks(true, false);
+	    } else
+		goDJMode.setSelected(true);
+	});
 
-        // goLibrariesMode
-        goLibrariesMode.setSelected(true);
-        goLibrariesMode.setOnMouseReleased(mouse -> {
-            if (windowMode != WindowMode.LIBRARYMODE && mouse.getButton() == MouseButton.PRIMARY) {
+	// goLibrariesMode
+	goLibrariesMode.setSelected(true);
+	goLibrariesMode.setOnMouseReleased(mouse -> {
+	    if (windowMode != WindowMode.LIBRARYMODE && mouse.getButton() == MouseButton.PRIMARY) {
 
-                Main.libraryMode.add(Main.multipleTabs, 0, 1);
-                Main.root.setCenter(Main.libraryMode);
+		Main.libraryMode.add(Main.multipleTabs, 0, 1);
+		Main.root.setCenter(Main.libraryMode);
 
-                // Update window Mode
-                windowMode = WindowMode.LIBRARYMODE;
+		// Update window Mode
+		windowMode = WindowMode.LIBRARYMODE;
 
-                // Marked
-                changeMarks(false, true);
-            } else
-                goLibrariesMode.setSelected(true);
-        });
+		// Marked
+		changeMarks(false, true);
+	    } else
+		goLibrariesMode.setSelected(true);
+	});
 
     }
 
@@ -202,21 +195,25 @@ public class TopBar extends BorderPane {
      * Add the binding to the xr3Label
      */
     public void addXR3LabelBinding() {
-        // xr3Label
-        StringBinding binding = Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player-<  Width=[{0}],Height=[{1}]", Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(), Main.window.heightProperty());
-        xr3Label.textProperty()
-            .bind(binding);
+	// xr3Label
+	StringBinding binding = Bindings.createStringBinding(
+		() -> MessageFormat.format(">-XR3Player V." + Main.currentVersion + "-<  Width=[{0}],Height=[{1}]",
+			Main.window.getWidth(), Main.window.getHeight()),
+		Main.window.widthProperty(), Main.window.heightProperty());
+	xr3Label.textProperty().bind(binding);
     }
 
     /**
      * Changes the marks of goDJMode,goSimpleMode,goLibraryMode.
      *
-     * @param a the a
-     * @param b the b
+     * @param a
+     *            the a
+     * @param b
+     *            the b
      */
     private void changeMarks(boolean a, boolean b) {
-        goDJMode.setSelected(a);
-        goLibrariesMode.setSelected(b);
+	goDJMode.setSelected(a);
+	goLibrariesMode.setSelected(b);
     }
 
 }

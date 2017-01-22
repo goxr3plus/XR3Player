@@ -23,79 +23,81 @@ import tools.InfoTool;
  * @author GOXR3PLUS
  */
 public class XPlayerSettingsController extends BorderPane {
-	
-	@FXML
-	JFXCheckBox showFPS;
-	
-	@FXML
-	JFXCheckBox startImmediately;
-	
-	@FXML
-	private JFXCheckBox showVisualizer;
-	
-	@FXML
-	JFXCheckBox askSecurityQuestion;
-	
-	@FXML
-	Tab equalizerTab;
-	
-	@FXML
-	Tab playListTab;
-	
-	@FXML
-	private Button closeSettings;
-	
-	// ------------------------
-	
-	/** The x player UI. */
-	XPlayerController xPlayerUI;
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param xPlayerUI the x player UI
-	 */
-	public XPlayerSettingsController(XPlayerController xPlayerUI) {
-		
-		this.xPlayerUI = xPlayerUI;
-		
-		// FXMLLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerSettingsController.fxml"));
-		loader.setController(this);
-		loader.setRoot(this);
-		
-		try {
-			loader.load();
-		} catch (IOException ex) {
-			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "XPlayerSettingsController FXML can't be loaded!",
-			        ex);
-		}
-		
-	}
-	
-	/**
-	 * As soon as fxml has been loaded then this method will be called
-	 * 1)-constructor,2)-FXMLLOADER,3)-initialize();
-	 */
-	@FXML
-	public void initialize() {
-		
-		// When this can be visible?
-		this.setOnKeyReleased(key -> {
-			if (key.getCode() == KeyCode.ESCAPE)
-				xPlayerUI.settingsToggle.setSelected(false);
-		});
-		this.visibleProperty().bind(xPlayerUI.settingsToggle.selectedProperty());
-		this.visibleProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue) // true?
-				this.requestFocus();
-		});
-		
-		// ShowFPS
-		showFPS.setOnAction(a -> xPlayerUI.visualizer.setShowFPS(!xPlayerUI.visualizer.isShowingFPS()));
-		
-		// closeSettings
-		closeSettings.setOnAction(e -> xPlayerUI.settingsToggle.setSelected(false));
-	}
-	
+
+    @FXML
+    JFXCheckBox showFPS;
+
+    @FXML
+    JFXCheckBox startImmediately;
+
+    @FXML
+    private JFXCheckBox showVisualizer;
+
+    @FXML
+    JFXCheckBox askSecurityQuestion;
+
+    @FXML
+    Tab equalizerTab;
+
+    @FXML
+    Tab playListTab;
+
+    @FXML
+    private Button closeSettings;
+
+    // ------------------------
+
+    /** The x player UI. */
+    XPlayerController xPlayerUI;
+
+    /**
+     * Constructor.
+     *
+     * @param xPlayerUI the x player UI
+     */
+    public XPlayerSettingsController(XPlayerController xPlayerUI) {
+
+        this.xPlayerUI = xPlayerUI;
+
+        // FXMLLoader
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerSettingsController.fxml"));
+        loader.setController(this);
+        loader.setRoot(this);
+
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(getClass().getName())
+                .log(Level.SEVERE, "XPlayerSettingsController FXML can't be loaded!", ex);
+        }
+
+    }
+
+    /**
+     * As soon as fxml has been loaded then this method will be called
+     * 1)-constructor,2)-FXMLLOADER,3)-initialize();
+     */
+    @FXML
+    private void initialize() {
+
+        // When this can be visible?
+        this.setOnKeyReleased(key -> {
+            if (key.getCode() == KeyCode.ESCAPE)
+                xPlayerUI.settingsToggle.setSelected(false);
+        });
+        this.visibleProperty()
+            .bind(xPlayerUI.settingsToggle.selectedProperty());
+        this.visibleProperty()
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue) // true?
+                    this.requestFocus();
+            });
+
+        // ShowFPS
+        showFPS.setOnAction(a -> xPlayerUI.visualizer.setShowFPS(!xPlayerUI.visualizer.isShowingFPS()));
+
+        // closeSettings
+        closeSettings.setOnAction(e -> xPlayerUI.settingsToggle.setSelected(false));
+    }
+
 }

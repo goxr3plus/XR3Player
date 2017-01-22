@@ -531,9 +531,8 @@ public class LibraryMode extends GridPane {
                     if (((Library) centerGroup.getChildren()
                         .get(0)).getPosition() != library.getPosition()) {
 
-                        centerIndex = library.getPosition();
-                        scrollBar.setValue(centerIndex);
-                        update();
+                        scrollBar.setValue(library.getPosition());
+                        setCenterIndex(library.getPosition());
                     }
 
                 } else if (m.getButton() == MouseButton.SECONDARY) {
@@ -542,9 +541,8 @@ public class LibraryMode extends GridPane {
                     if (((Library) centerGroup.getChildren()
                         .get(0)).getPosition() != library.getPosition()) {
 
-                        centerIndex = library.getPosition();
-                        scrollBar.setValue(centerIndex);
-                        update();
+                        scrollBar.setValue(library.getPosition());
+                        setCenterIndex(library.getPosition());
 
                         timeline.setOnFinished(v -> {
                             Bounds bounds = library.localToScreen(library.getBoundsInLocal());
@@ -608,8 +606,10 @@ public class LibraryMode extends GridPane {
          * @param i the new center index
          */
         public void setCenterIndex(int i) {
-            centerIndex = i;
-            update();
+            if (centerIndex != i) {
+                centerIndex = i;
+                update();
+            }
         }
 
         /**

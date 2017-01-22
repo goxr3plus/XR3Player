@@ -95,7 +95,7 @@
                         <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                            <children>
                               <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Coming Soon ;)" />
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Thinking... " />
                            </children>
                         </StackPane>
                         <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
@@ -113,37 +113,36 @@
             </GridPane>
             <GridPane fx:id="bottomGridPane" gridLinesVisible="true" GridPane.columnSpan="2" GridPane.rowIndex="1">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="35.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="343.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="343.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="52.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
                         <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Coming Soon ;)" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER" />
-                     </children>
-                  </StackPane>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                     <children>
-                        <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" ">
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Thinking..." textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER" />
+                        <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" text=" " StackPane.alignment="TOP_CENTER">
                            <font>
                               <Font size="1.0" />
                            </font>
                         </JFXToggleButton>
-                        <Button fx:id="openFileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Open File">
-                           <VBox.margin>
-                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                           </VBox.margin>
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="diskStackPane" prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="openFileButton" mnemonicParsing="false" stylesheets="@../style/application.css" text="Open " StackPane.alignment="TOP_RIGHT">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <tooltip>
+                              <Tooltip text="Choose a File to be opened" />
+                           </tooltip>
                         </Button>
                      </children>
-                  </VBox>
+                  </StackPane>
                </children>
             </GridPane>
          </children>

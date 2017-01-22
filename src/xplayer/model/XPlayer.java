@@ -11,24 +11,12 @@ import streamplayer.StreamPlayer;
  * @author SuperGoliath
  */
 public class XPlayer extends StreamPlayer {
-	
-	/**
-	 * Constructor.
-	 */
-	public XPlayer() {
-		super();
-	}
-	
-	/**
-	 * Stops the play back.<br>
-	 *
-	 * Player Status = STOPPED.<br>
-	 * Thread should free Audio resources.
-	 */
-	@Override
-	public void stop() {
-		//new Thread(super::stop).start();
-		super.stop();
-	}
-	
+
+    /**
+     * Constructor.
+     */
+    public XPlayer() {
+        super();
+    }
+
 }

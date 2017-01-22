@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root pannable="true" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root pannable="true" stylesheets="@../style/application.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <BorderPane>
          <center>
@@ -50,16 +50,6 @@
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
-         <bottom>
-            <Button fx:id="okButton" mnemonicParsing="false" text="OK" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets top="10.0" />
-               </BorderPane.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </bottom>
          <top>
             <HBox spacing="100.0" BorderPane.alignment="CENTER">
                <children>
@@ -96,6 +86,25 @@
                </children>
             </HBox>
          </top>
+         <bottom>
+            <HBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="okButton" mnemonicParsing="false" text="OK">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="10.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
       </BorderPane>
    </content>
 </fx:root>

@@ -268,16 +268,13 @@ public class DJDisc extends StackPane {
         int ovalHeight = 7;
 
         // fix the circle position
-        if (-angle == 0 || -angle == 270) {
-            circlePointX = circlePointX - ovalWidth / 2 + 2;
-            circlePointY = circlePointY + 2;
-        } else if (-angle > 0 && -angle <= 90) {
+        if (-angle >= 0 && -angle <= 90) {
             circlePointX = circlePointX - ovalWidth / 2 + 2;
             circlePointY = circlePointY + 1;
         } else if (-angle > 90 && -angle <= 180) {
             circlePointX = circlePointX - ovalWidth / 2 + 3;
             circlePointY = circlePointY - ovalWidth / 2 + 2;
-        } else if (-angle > 180 && -angle < 270) {
+        } else if (-angle > 180 && -angle <= 270) {
             circlePointX = circlePointX + 2;
             circlePointY = circlePointY - ovalWidth / 2 + 2;
         } else if (-angle > 270) {

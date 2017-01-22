@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root fx:id="root" prefHeight="354.0" prefWidth="511.0" type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" prefHeight="354.0" prefWidth="511.0" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="65.0" prefWidth="352.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="273.0" />
@@ -58,13 +58,28 @@
                         <Insets bottom="10.0" />
                      </StackPane.margin>
                   </Button>
-                  <Button fx:id="newLibrary" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create Library +">
+                  <Button fx:id="newLibrary" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New Library +">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <effect>
                         <Reflection />
                      </effect>
+                  </Button>
+                  <Button fx:id="createLibrary" mnemonicParsing="false" prefHeight="38.0" prefWidth="60.0" styleClass="arrowButton" translateY="-5.0" StackPane.alignment="BOTTOM_CENTER">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/add.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Create new Library" />
+                     </tooltip>
                   </Button>
                </children>
                <BorderPane.margin>
@@ -83,25 +98,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="createLibrary" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/add.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Create new Library" />
-                     </tooltip>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </Button>
-                  <JFXToggleButton fx:id="selectionModeToggle" disable="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Selection Mode" textFill="WHITE" GridPane.columnIndex="1">
+                  <JFXToggleButton fx:id="selectionModeToggle" disable="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Selection Mode" textFill="WHITE" visible="false" GridPane.columnIndex="1">
                      <tooltip>
                         <Tooltip text="Enable Libraries Selection" />
                      </tooltip>

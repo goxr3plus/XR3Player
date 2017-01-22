@@ -69,7 +69,8 @@ public class SmartSearcher extends HBox {
 				controller.listNumber.set(service.getPaneNumberBeforeSearch());
 				controller.getNextButton().setDisable(false);
 				controller.loadService.startService(false, false);
-			} else if (controller.isFree(false) && Main.advancedSearch.searchOnFlySelected())
+				 //Main.advancedSearch.searchOnFlySelected()
+			} else if (controller.isFree(false) && control.instantSearch.isSelected())
 				service.search();
 		});
 		searchField.editableProperty().bind(service.runningProperty().not());
@@ -153,7 +154,7 @@ public class SmartSearcher extends HBox {
 		 *
 		 * @return the pane number before search
 		 */
-		public int getPaneNumberBeforeSearch() {
+		private int getPaneNumberBeforeSearch() {
 			return pageBeforeSearch;
 		}
 		

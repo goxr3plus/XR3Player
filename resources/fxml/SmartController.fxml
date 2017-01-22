@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -18,11 +19,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root styleClass="smartController" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="236.0" prefWidth="542.0" styleClass="smartController" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="mainBorder" style="-fx-background-color: transparent;">
          <top>
@@ -30,77 +32,93 @@
                <content>
                   <GridPane fx:id="topGrid" hgap="5.0" style="-fx-background-color: rgb(0,0,0,0.85);;">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="70.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="40.0" percentWidth="15.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="15.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="80.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="22.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <tooltip>
-                              <Tooltip text="current page" />
-                           </tooltip>
-                           <contextMenu>
-                              <ContextMenu />
-                           </contextMenu>
-                        </TextField>
-                        <MenuButton fx:id="settingsButton" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
-                           <items>
-                              <Menu fx:id="totalItemsShown" mnemonicParsing="false" text="Total Shown">
+                        <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <children>
+                              <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0">
+                                 <tooltip>
+                                    <Tooltip text="current page" />
+                                 </tooltip>
+                                 <contextMenu>
+                                    <ContextMenu />
+                                 </contextMenu>
+                              </TextField>
+                              <MenuButton fx:id="settingsButton" mnemonicParsing="false">
                                  <items>
-                                    <RadioMenuItem mnemonicParsing="false" selected="true" text="50">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="totalShownGroup" />
-                                       </toggleGroup></RadioMenuItem>
-                                    <RadioMenuItem mnemonicParsing="false" text="100" toggleGroup="$totalShownGroup" />
+                                    <Menu fx:id="totalItemsShown" mnemonicParsing="false" text="Total Shown">
+                                       <items>
+                                          <RadioMenuItem mnemonicParsing="false" selected="true" text="50">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="totalShownGroup" />
+                                             </toggleGroup>
+                                          </RadioMenuItem>
+                                          <RadioMenuItem mnemonicParsing="false" text="100" toggleGroup="$totalShownGroup" />
+                                       </items>
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/eye2.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Menu>
+                                    <Menu mnemonicParsing="false" text="Actions">
+                                      <items>
+                                        <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import">
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/import24.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export">
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/export24.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                      </items>
+                                    </Menu>
+                                    <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
                                  </items>
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../image/eye2.png" />
+                                          <Image url="@../image/gear.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="Actions">
-                                <items>
-                                  <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/import24.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></MenuItem>
-                                    <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/export24.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></MenuItem>
-                                </items>
-                              </Menu>
-                              <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/delete.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></MenuItem>
-                           </items>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/gear.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuButton>
+                              </MenuButton>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="searchBarHBox" spacing="10.0">
+                           <children>
+                              <JFXCheckBox fx:id="instantSearch" maxHeight="1.7976931348623157E308" selected="true" text="Instant Search" textFill="WHITE">
+                                 <tooltip>
+                                    <Tooltip text="If not selected you have to press enter on the search field in order to search" />
+                                 </tooltip>
+                              </JFXCheckBox>
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </content>

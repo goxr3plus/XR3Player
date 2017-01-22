@@ -25,6 +25,8 @@ import java.util.stream.Stream;
 import org.controlsfx.control.Notifications;
 import org.fxmisc.easybind.EasyBind;
 
+import com.jfoenix.controls.JFXCheckBox;
+
 import application.Main;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
@@ -60,6 +62,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import media.Audio;
@@ -115,6 +118,12 @@ public class SmartController extends StackPane {
     @FXML
     private MenuItem clearAll;
 
+    /**
+     * If the search is instant or needs the user to press enter on the search field
+     */
+    @FXML
+    public JFXCheckBox instantSearch;
+
     /** The center stack pane. */
     @FXML
     private StackPane centerStackPane;
@@ -139,6 +148,9 @@ public class SmartController extends StackPane {
     @FXML
     private Button cancel;
 
+    @FXML
+    private HBox searchBarHBox;
+
     // ----------------------------------------------------------
 
     /** The observable list. */
@@ -158,7 +170,7 @@ public class SmartController extends StackPane {
     private final String dataBaseTableName;
 
     /** The name. */
-    private String name = null;
+    private String smartName = null;
 
     /** The search service. */
     public final SmartSearcher searchService;
@@ -181,7 +193,7 @@ public class SmartController extends StackPane {
     /** The deposit working. */
     public volatile boolean depositWorking;
 
-    /** The undeposit working. */
+    /** The un deposit working. */
     public volatile boolean undepositWorking;
 
     /** The rename working. */
@@ -217,7 +229,7 @@ public class SmartController extends StackPane {
      */
     public SmartController(Genre genre, String name, String dataBaseTableName) {
         this.genre = genre;
-        this.name = name;
+        this.smartName = name;
         this.dataBaseTableName = dataBaseTableName;
 
         // Initialize
@@ -334,8 +346,9 @@ public class SmartController extends StackPane {
             .bind(region.visibleProperty());
         cancel.setDisable(true);
 
-        // SearchService
-        topGrid.add(searchService, 0, 0);
+        // searchBarHBox
+        searchBarHBox.getChildren()
+            .add(0, searchService);
 
         // Previous Button
         previous.disableProperty()
@@ -578,10 +591,10 @@ public class SmartController extends StackPane {
         } else if (updateWorking) {
             isFree = false;
             message = "Updating";
-        } // else if (copyOrMoveService.isRunning()) {
-          // isFree = false;
-          // message = "Copy-Move Service";
-          // }
+        } else if (copyOrMoveService.isRunning()) {
+            isFree = false;
+            message = "Copy-Move Service";
+        }
 
         if (!isFree && showMessage)
             showMessage(message);
@@ -726,18 +739,19 @@ public class SmartController extends StackPane {
      * @param newName the new name
      */
     public void setName(String newName) {
-        name = newName;
+        smartName = newName;
     }
 
+    /** Returns the name of the smart controller
+     * @return The name of the smartController
+     */
     public String getName() {
-        return name;
+        return smartName;
     }
 
-    /* (non-Javadoc)
-     * @see javafx.scene.Node#toString() */
     @Override
     public String toString() {
-        return "Library" + ": <" + name + ">";
+        return "SmartController" + ": <" + smartName + ">";
     }
 
     /**
@@ -860,15 +874,23 @@ public class SmartController extends StackPane {
         @FXML
         private TableColumn<Media, Double> stars;
 
-        /** The date imported. */
-        @FXML
-        private TableColumn<Media, String> dateImported;
-
         /** The hour imported. */
         @FXML
         private TableColumn<Media, String> hourImported;
 
-        /** The remix. */
+        /** The date imported. */
+        @FXML
+        private TableColumn<Media, String> dateImported;
+
+        /** The date that the file was created */
+        @FXML
+        private TableColumn<Media, String> dateFileCreated;
+
+        /** The date that the file was last modified */
+        @FXML
+        private TableColumn<Media, String> dateFileModified;
+
+        /** It is a remix? */
         @FXML
         private TableColumn<?, ?> remix;
 
@@ -937,7 +959,6 @@ public class SmartController extends StackPane {
         private TableColumn<?, ?> singer;
 
         /** The image. */
-        // Variables used on dragView
         WritableImage image = new WritableImage(100, 100);
 
         /** The canvas. */
@@ -981,11 +1002,17 @@ public class SmartController extends StackPane {
             title.setStyle(center);
             title.setCellValueFactory(new PropertyValueFactory<>("title"));
 
+            // hourImported
+            hourImported.setCellValueFactory(new PropertyValueFactory<>("hourImported"));
+
             // dateImported
             dateImported.setCellValueFactory(new PropertyValueFactory<>("dateImported"));
 
-            // hourImported
-            hourImported.setCellValueFactory(new PropertyValueFactory<>("hourImported"));
+            // dateFileCreated
+            dateFileCreated.setCellValueFactory(new PropertyValueFactory<>("dateFileCreated"));
+
+            // dateFileCreated
+            dateFileModified.setCellValueFactory(new PropertyValueFactory<>("dateFileModified"));
 
             // stars
             stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
@@ -1038,8 +1065,10 @@ public class SmartController extends StackPane {
                 return row;
             });
 
-            // this
+            // Selection Model
             getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+            // --Drag Detected
             setOnDragDetected(event -> {
                 if (getSelectedCount() != 0 && event.getScreenY() > localToScreen(getBoundsInLocal()).getMinY() + 30) {
 
@@ -1072,6 +1101,36 @@ public class SmartController extends StackPane {
                     db.setContent(content);
                 }
                 event.consume();
+            });
+
+            // --Drag Over
+            setOnDragOver(dragOver -> {
+                // System.out.println(over.getGestureSource() + "," + controller.tableViewer)
+
+                // // Check if the drag come from the same source
+                // String gestureSourceString
+                // if (over.getGestureSource() != null)
+                // gestureSourceString = over.getGestureSource()
+                // .toString()
+                // else
+                // gestureSourceString = "null"
+
+                // The drag must come from source other than the owner
+                if (dragOver.getDragboard()
+                    .hasFiles() && dragOver.getGestureSource() != tableViewer) {
+                    dragOver.acceptTransferModes(TransferMode.LINK);
+                }
+            });
+
+            // --Drag Dropped
+            setOnDragDropped(drop -> {
+                // Has Files? + isFree()?
+                if (drop.getDragboard()
+                    .hasFiles() && isFree(true))
+                    inputService.start(drop.getDragboard()
+                        .getFiles());
+
+                drop.setDropCompleted(true);
             });
 
             // setOnDragDone(d -> {
@@ -1558,27 +1617,29 @@ public class SmartController extends StackPane {
          * @param list the list
          */
         public void start(List<File> list) {
+            if (isFree(true)) {
 
-            // Security
-            job = "upload from system";
-            this.list = list;
-            depositWorking = true;
+                // Security
+                job = "upload from system";
+                this.list = list;
+                depositWorking = true;
 
-            // Binds
-            getRegion().visibleProperty()
-                .bind(runningProperty());
-            getIndicator().progressProperty()
-                .bind(progressProperty());
-            getCancelButton().setDisable(false);
-            getCancelButton().setText("Calculating entries...");
-            getCancelButton().setOnAction(e -> {
-                super.cancel();
-                getCancelButton().setDisable(true);
-            });
+                // Binds
+                getRegion().visibleProperty()
+                    .bind(runningProperty());
+                getIndicator().progressProperty()
+                    .bind(progressProperty());
+                getCancelButton().setDisable(false);
+                getCancelButton().setText("Calculating entries...");
+                getCancelButton().setOnAction(e -> {
+                    super.cancel();
+                    getCancelButton().setDisable(true);
+                });
 
-            // ....
-            reset();
-            start();
+                // ....
+                reset();
+                start();
+            }
         }
 
         /**
