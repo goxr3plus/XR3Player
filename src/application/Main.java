@@ -179,7 +179,7 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 40;
+    public final static int currentVersion = 41;
 
     /**
      * The Thread which is responsible for the update check
