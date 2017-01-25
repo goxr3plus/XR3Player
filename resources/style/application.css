@@ -473,11 +473,11 @@
 
  
  .context-menu {
-  	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
+  	-fx-background-color:rgb(0.0,0.0,0.0,0.85);
   	-fx-background-radius:4.0;
-  	-fx-border-color:white;
-  	-fx-border-width:2.0; 	
-    -fx-border-style:segments(4.0); 
+  	-fx-border-color:magenta;
+  	/*-fx-border-width:2.0; 	
+    -fx-border-style:segments(4.0); */
 }
 
  .menu-item .label{
@@ -680,12 +680,12 @@
 ******************************************************************************/
 
 .librarySettings {
-	-fx-background-color:white;
+	-fx-background-color:rgb(0,0,0,0.95);
 }
 
 
 .librarySettings .label{	
-	-fx-text-fill:black;
+	-fx-text-fill:white;
 	-fx-font-size:14.0px;
 	-fx-font-weight:bold;
 }
@@ -880,6 +880,10 @@
 .windowMode:selected{
 	-fx-text-fill:magenta;
 }
+
+
+
+
    
    
 .menu-button{
@@ -896,6 +900,10 @@
 
 .menu-button .label:hover{
 	-fx-text-fill:orange;
+}
+
+.visWindowMenuButton .label{	
+	-fx-text-fill:white;
 }
 
 

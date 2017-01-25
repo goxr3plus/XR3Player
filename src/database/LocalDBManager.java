@@ -236,14 +236,6 @@ public class LocalDBManager {
                 Main.libraryMode.add(Main.multipleTabs, 0, 1);
                 Main.updateScreen.setVisible(false);
 
-                // -------Due to a bug i need the width%2==0---------
-                int width = (int) (InfoTool.getVisualScreenWidth() * 0.77);
-                width = (width % 2 == 0) ? width : width + 1;
-                // -------------------
-                Main.window.setWidth(width);
-                Main.window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
-                Main.window.centerOnScreen();
-
                 // Check for updates on start
                 new Thread(() -> {
                     if (InfoTool.isReachableByPing("www.google.com"))

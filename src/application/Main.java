@@ -216,8 +216,15 @@ public class Main extends Application {
 
 	    window.setTitle("XR3Player V." + currentVersion);
 	    // -------------------
-	    window.setWidth(450);
-	    window.setHeight(253);
+	    // -------Due to a bug i need the width%2==0---------
+	    int width = (int) (InfoTool.getVisualScreenWidth() * 0.77);
+	    width = (width % 2 == 0) ? width : width + 1;
+	    // -------------------
+	    Main.window.setWidth(width);
+	    Main.window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
+	    Main.window.centerOnScreen();
+	    // window.setWidth(450)
+	    // window.setHeight(253)
 	    window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
 	    window.centerOnScreen();
 	    window.setOnCloseRequest(exit -> {
@@ -468,7 +475,8 @@ public class Main extends Application {
 
 			// Document doc = Jsoup.parse(new
 			// File("XR3PlayerUpdatePage.html"), "UTF-8",
-			// "http://example.com/")
+			// "http://example.com/");
+			
 			Element lastArticle = doc.getElementsByTag("article").last();
 
 			// Not disturb the user every time the application

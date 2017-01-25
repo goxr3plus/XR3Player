@@ -580,10 +580,8 @@ public class Library extends StackPane {
     /**
      * Make an update only if the library is in information mode.
      */
-    public void updateTotalLabel() {
-	// if (getCenter() != imageView)
-	Main.libraryMode.libraryViewer.settings
-		.updateTotalSongsLabel(Integer.toString(controller.getTotalInDataBase()));
+    public void updateSettingsTotalLabel() {
+	Main.libraryMode.libraryViewer.settings.updateTotalItemsLabel(this);
     }
 
     /**
@@ -768,6 +766,7 @@ public class Library extends StackPane {
 		    .bind(Main.starWindow.starsProperty().asString());
 
 	    Main.starWindow.show(starsProperty().get(), Main.libraryMode.libraryViewer.settings.getStarsLabel());
+	    stars.bind(Main.starWindow.starsProperty());
 
 	    Main.starWindow.window.showingProperty().addListener(new InvalidationListener() {
 		@Override
@@ -775,6 +774,9 @@ public class Library extends StackPane {
 
 		    // Remove the listener
 		    Main.starWindow.window.showingProperty().removeListener(this);
+
+		    // Remove Binding from Stars
+		    stars.unbind();
 
 		    // if !showing
 		    if (!Main.starWindow.window.isShowing()) {

@@ -349,7 +349,7 @@ public abstract class Media {
         if (previousTotal != controller.getTotalInDataBase()) {
             if (genre == Genre.LIBRARYSONG)
                 Main.libraryMode.multipleLibs.getSelectedLibrary()
-                    .updateTotalLabel();
+                    .updateSettingsTotalLabel();
             controller.loadService.startService(true, true);
         }
     }

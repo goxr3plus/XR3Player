@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import org.controlsfx.glyphfont.Glyph?>
 
-<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="188.0" prefWidth="250.0" styleClass="librarySettings" type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="206.0" prefWidth="271.0" styleClass="librarySettings" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
@@ -25,12 +24,16 @@
   </rowConstraints>
    <children>
       <Label fx:id="totalItems" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Total Items:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-         <graphic>
-           <Glyph fontFamily="FontAwesome" icon="PLUS" />
-         </graphic>
          <tooltip>
             <Tooltip text="Total songs in Library" />
          </tooltip>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/cabinet.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Label>
       <Label fx:id="dateLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DateCreated" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <tooltip>
@@ -71,8 +74,11 @@
                </image>
             </ImageView>
          </graphic>
+         <tooltip>
+            <Tooltip text="Rating in Stars " />
+         </tooltip>
       </Label>
-      <Label fx:id="totalCharsLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Total Characters" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <Label fx:id="totalCharsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Total Characters" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <tooltip>
             <Tooltip text="Total Characters in comments" />
          </tooltip>
@@ -84,10 +90,8 @@
             </ImageView>
          </graphic>
       </Label>
-      <Label fx:id="totalDuration" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-         <tooltip>
-            <Tooltip text="How many songs have been listened" />
-         </tooltip>
-      </Label>
    </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </fx:root>

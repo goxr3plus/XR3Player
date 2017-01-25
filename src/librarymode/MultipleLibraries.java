@@ -151,7 +151,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
     /**
      * Returns the selected library.
      *
-     * @return the selected library
+     * @return The Selected Library if exists or <b> null </b> instead
      */
     public Library getSelectedLibrary() {
 
@@ -257,6 +257,15 @@ public class MultipleLibraries extends StackPane implements Initializable {
 		dragOver.acceptTransferModes(TransferMode.LINK);
 		tabPane.getSelectionModel().select(tab);
 	    }
+	});
+
+	// --Drag Dropped
+	hBox.setOnDragDropped(drop -> {
+	    // Has Files? + isFree()?
+	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true))
+		getSelectedLibrary().getSmartController().inputService.start(drop.getDragboard().getFiles());
+
+	    drop.setDropCompleted(true);
 	});
 
     }

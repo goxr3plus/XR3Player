@@ -11,7 +11,7 @@ import javax.sound.sampled.SourceDataLine;
 import dsp.KJDSPAudioDataConsumer;
 import dsp.KJDigitalSignalProcessor;
 import dsp.KJFFT;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Color;
 
 /**
@@ -62,55 +62,77 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      */
     public enum DisplayMode {
 
-        /** The display scope. */
-        DISPLAY_SCOPE {
-            @Override
-            public String toString() {
-                return "0";
-            }
-        },
+	/** OSCILLOSCOPE */
+	OSCILLOSCOPE {
+	    @Override
+	    public String toString() {
+		return "0";
+	    }
+	},
 
-        /** The display spectrum analyser. */
-        DISPLAY_SPECTRUM_ANALYSER {
-            @Override
-            public String toString() {
-                return "1";
-            }
-        },
+	/** OSCILLOSCOPE */
+	STEREO_OSCILLOSCOPE {
+	    @Override
+	    public String toString() {
+		return "1";
+	    }
+	},
 
-        /** The display vu meter. */
-        DISPLAY_VU_METER {
-            @Override
-            public String toString() {
-                return "2";
-            }
-        },
-        /** The display rossete with polyspiral. */
-        DISPLAY_ROSSETE_WITH_POLYSPIRAL {
-            @Override
-            public String toString() {
-                return "3";
-            }
-        },
-        /** The display circular. */
-        DISPLAY_SIERPINSKI {
-            @Override
-            public String toString() {
-                return "4";
-            }
-        },
+	/** OSCILLOSCOPE */
+	OSCILLOSCOPE_LINES {
+	    @Override
+	    public String toString() {
+		return "2";
+	    }
+	},
 
-        /** Display Sierpinski Triangles */
-        DISPLAY_JULIAFRACTALS {
-            @Override
-            public String toString() {
-                return "5";
-            }
-        }
+	/** The display spectrum analyser. */
+	SPECTRUM_BARS {
+	    @Override
+	    public String toString() {
+		return "3";
+	    }
+	},
+
+	/** The display vu meter. */
+	VOLUME_METER {
+	    @Override
+	    public String toString() {
+		return "4";
+	    }
+	},
+	/** The display rossete with polyspiral. */
+	ROSETTE {
+	    @Override
+	    public String toString() {
+		return "5";
+	    }
+	},
+	/** The display circular. */
+	SIERPINSKI {
+	    @Override
+	    public String toString() {
+		return "6";
+	    }
+	},
+
+	/** Display Sierpinski Triangles */
+	JULIAFRACTALS {
+	    @Override
+	    public String toString() {
+		return "7";
+	    }
+	}
     }
 
+    /**
+     * The maximum that the display mode can reach
+     */
+    public final static int DISPLAYMODE_MAXIMUM = 6;
+
     /** The display mode. */
-    public int displayMode = Integer.parseInt(DisplayMode.DISPLAY_ROSSETE_WITH_POLYSPIRAL.toString());
+    public SimpleIntegerProperty displayMode = new SimpleIntegerProperty(
+	    Integer.parseInt(DisplayMode.OSCILLOSCOPE_LINES.toString()));
 
     /** The Constant DEFAULT_FPS. */
     private static final int DEFAULT_FPS = 60;
@@ -195,7 +217,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     protected float saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
 
     /** The source data line. */
-    private SourceDataLine sourceDataLine = null;
+    protected SourceDataLine sourceDataLine = null;
 
     /** The old left. */
     // -- VU Meter
@@ -220,23 +242,20 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     /** The show FPS. */
     public boolean showFPS = false;
 
-    /** The gc. */
-    public GraphicsContext gc = getGraphicsContext2D();
-
     /**
      * Default Constructor.
      */
     public VisualizerModel() {
 
-        // ----------------------
-        setFramesPerSecond(DEFAULT_FPS);
-        setPeakDelay((int) (DEFAULT_FPS * DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO));
+	// ----------------------
+	setFramesPerSecond(DEFAULT_FPS);
+	setPeakDelay((int) (DEFAULT_FPS * DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO));
 
-        setSpectrumAnalyserFFTSampleSize(DEFAULT_SPECTRUM_ANALYSER_FFT_SAMPLE_SIZE);
-        setSpectrumAnalyserDecay(DEFAULT_SPECTRUM_ANALYSER_DECAY);
-        setSpectrumAnalyserBandCount(DEFAULT_SPECTRUM_ANALYSER_BAND_COUNT);
+	setSpectrumAnalyserFFTSampleSize(DEFAULT_SPECTRUM_ANALYSER_FFT_SAMPLE_SIZE);
+	setSpectrumAnalyserDecay(DEFAULT_SPECTRUM_ANALYSER_DECAY);
+	setSpectrumAnalyserBandCount(DEFAULT_SPECTRUM_ANALYSER_BAND_COUNT);
 
-        setPeakColor(Color.WHITE);
+	setPeakColor(Color.WHITE);
     }
 
     /*-----------------------------------------------------------------------
@@ -251,96 +270,102 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * -----------------------------------------------------------------------
      */
 
-    /* (non-Javadoc)
-     * @see dsp.KJDigitalSignalProcessor#process(float[], float[], float) */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see dsp.KJDigitalSignalProcessor#process(float[], float[], float)
+     */
     @Override
     public synchronized void process(float[] pLeft, float[] pRight, float frameRateRatioHint) {
 
-        left = pLeft;
-        right = pRight;
-        this.frameRateRatioHint = frameRateRatioHint;
+	left = pLeft;
+	right = pRight;
+	this.frameRateRatioHint = frameRateRatioHint;
     }
 
     /**
      * Setup DSP.
      *
-     * @param line the new up DSP
+     * @param line
+     *            the new up DSP
      */
     public void setupDSP(SourceDataLine line) {
-        if (dsp != null) {
-            // Number of Channels
-            dsp.setChannelMode(line.getFormat()
-                .getChannels() == 1 ? KJDSPAudioDataConsumer.ChannelMode.MONO : KJDSPAudioDataConsumer.ChannelMode.STEREO);
+	if (dsp != null) {
+	    // Number of Channels
+	    dsp.setChannelMode(line.getFormat().getChannels() == 1 ? KJDSPAudioDataConsumer.ChannelMode.MONO
+		    : KJDSPAudioDataConsumer.ChannelMode.STEREO);
 
-            // SampleSizeInBits
-            dsp.setSampleType(line.getFormat()
-                .getSampleSizeInBits() == 8 ? KJDSPAudioDataConsumer.SampleType.EIGHT_BIT : KJDSPAudioDataConsumer.SampleType.SIXTEEN_BIT);
-        }
+	    // SampleSizeInBits
+	    dsp.setSampleType(line.getFormat().getSampleSizeInBits() == 8 ? KJDSPAudioDataConsumer.SampleType.EIGHT_BIT
+		    : KJDSPAudioDataConsumer.SampleType.SIXTEEN_BIT);
+	}
     }
 
     /**
      * Starts DSP.
      *
-     * @param line the line
+     * @param line
+     *            the line
      */
     public void startDSP(SourceDataLine line) {
-        if (line != null)
-            sourceDataLine = line;
+	if (line != null)
+	    sourceDataLine = line;
 
-        // dsp null?
-        if (dsp == null) {
-            dsp = new KJDSPAudioDataConsumer(2048, fps);
-            dsp.add(this);
-        }
+	// dsp null?
+	if (dsp == null) {
+	    dsp = new KJDSPAudioDataConsumer(2048, fps);
+	    dsp.add(this);
+	}
 
-        if (sourceDataLine != null) {
-            if (dspHasStarted)
-                stopDSP();
+	if (sourceDataLine != null) {
+	    if (dspHasStarted)
+		stopDSP();
 
-            dsp.start(sourceDataLine);
-            dspHasStarted = true;
-            log.info("DSP started");
-        }
+	    dsp.start(sourceDataLine);
+	    dspHasStarted = true;
+	    log.info("DSP started");
+	}
     }
 
     /**
      * Stop DSP.
      */
     public void stopDSP() {
-        if (dsp != null) {
-            dsp.stop();
-            dspHasStarted = false;
-            log.setLevel(Level.INFO);
-            log.info("DSP stopped");
-        }
+	if (dsp != null) {
+	    dsp.stop();
+	    dspHasStarted = false;
+	    log.setLevel(Level.INFO);
+	    log.info("DSP stopped");
+	}
     }
 
     /**
      * Close DSP.
      */
     public void closeDSP() {
-        if (dsp != null) {
-            stopDSP();
-            dsp = null;
-            log.info("DSP CLOSSED");
-        }
+	if (dsp != null) {
+	    stopDSP();
+	    dsp = null;
+	    log.info("DSP CLOSSED");
+	}
     }
 
     /**
      * Write PCM data to DSP.
      *
-     * @param pcmdata the pcmdata
+     * @param pcmdata
+     *            the pcmdata
      */
     public void writeDSP(byte[] pcmdata) {
-        if (dsp != null)
-            dsp.writeAudioData(pcmdata);
+	if (dsp != null)
+	    dsp.writeAudioData(pcmdata);
     }
 
     /**
      * Clears the Canvas from the Previous Painting.
      */
     public void clear() {
-        gc.clearRect(0, 0, getWidth(), getHeight());
+	gc.clearRect(0, 0, getWidth(), getHeight());
     }
 
     /*-----------------------------------------------------------------------
@@ -369,7 +394,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return KJDSPAudioDataConsumer
      */
     public KJDSPAudioDataConsumer getDSP() {
-        return dsp;
+	return dsp;
     }
 
     /**
@@ -378,7 +403,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return true, if is peaks enabled
      */
     public boolean isPeaksEnabled() {
-        return peaksEnabled;
+	return peaksEnabled;
     }
 
     /**
@@ -387,7 +412,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return the frames per second
      */
     public int getFramesPerSecond() {
-        return fps;
+	return fps;
     }
 
     /**
@@ -396,7 +421,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return peak fall off delay
      */
     public int getPeakDelay() {
-        return peakDelay;
+	return peakDelay;
     }
 
     /**
@@ -405,7 +430,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return the visualizer width
      */
     public int getVisualizerWidth() {
-        return canvasWidth;
+	return canvasWidth;
     }
 
     /**
@@ -414,7 +439,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return the visualizer height
      */
     public int getVisualizerHeight() {
-        return canvasHeight;
+	return canvasHeight;
     }
 
     /**
@@ -423,18 +448,18 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return the default spectrum analyser colors
      */
     public static Color[] getDefaultSpectrumAnalyserColors() {
-        Color[] wColors = new Color[256];
+	Color[] wColors = new Color[256];
 
-        for (int a = 0; a < 128; a++)
-            wColors[a] = Color.rgb(0, (a >> 1) + 192, 0);
+	for (int a = 0; a < 128; a++)
+	    wColors[a] = Color.rgb(0, (a >> 1) + 192, 0);
 
-        for (int a = 0; a < 64; a++)
-            wColors[a + 128] = Color.rgb(a << 2, 255, 0);
+	for (int a = 0; a < 64; a++)
+	    wColors[a + 128] = Color.rgb(a << 2, 255, 0);
 
-        for (int a = 0; a < 64; a++)
-            wColors[a + 192] = Color.rgb(255, 255 - (a << 2), 0);
+	for (int a = 0; a < 64; a++)
+	    wColors[a + 192] = Color.rgb(255, 255 - (a << 2), 0);
 
-        return wColors;
+	return wColors;
     }
 
     /**
@@ -444,7 +469,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      *         DISPLAY_MODE_SPECTRUM_ANALYSER or DISPLAY_MODE_VUMETER.
      */
     public synchronized int getDisplayMode() {
-        return displayMode;
+	return displayMode.get();
     }
 
     /**
@@ -454,7 +479,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      *         analyser.
      */
     public synchronized int getSpectrumAnalyserBandCount() {
-        return saBands;
+	return saBands;
     }
 
     /**
@@ -463,7 +488,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return Returns the decay rate of the spectrum analyser's bands.
      */
     public synchronized float getSpectrumAnalyserDecay() {
-        return saDecay;
+	return saDecay;
     }
 
     /**
@@ -472,7 +497,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return Returns the color the scope is rendered in.
      */
     public synchronized Color getScopeColor() {
-        return scopeColor;
+	return scopeColor;
     }
 
     /**
@@ -482,7 +507,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      *         bars.
      */
     public synchronized Color[] getSpectrumAnalyserColors() {
-        return spectrumAnalyserColors;
+	return spectrumAnalyserColors;
     }
 
     /**
@@ -492,22 +517,22 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      *         displayed.
      */
     public boolean isShowingFPS() {
-        return showFPS;
+	return showFPS;
     }
 
     /**
      * Compute color scale.
      */
     public void computeColorScale() {
-        saColorScale = ((float) spectrumAnalyserColors.length / canvasHeight) * barOffset * 1.0f;
-        vuColorScale = ((float) spectrumAnalyserColors.length / (canvasWidth - 32)) * 2.0f;
+	saColorScale = ((float) spectrumAnalyserColors.length / canvasHeight) * barOffset * 1.0f;
+	vuColorScale = ((float) spectrumAnalyserColors.length / (canvasWidth - 32)) * 2.0f;
     }
 
     /**
      * Compute SA multiplier.
      */
     private void computeSAMultiplier() {
-        saMultiplier = (float) ((saFFTSampleSize / 2.00) / saBands);
+	saMultiplier = (float) ((saFFTSampleSize / 2.00) / saBands);
     }
 
     /*-----------------------------------------------------------------------
@@ -533,109 +558,120 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     /**
      * Sets the peaks enabled.
      *
-     * @param peaksEnabled the new peaks enabled
+     * @param peaksEnabled
+     *            the new peaks enabled
      */
     public void setPeaksEnabled(boolean peaksEnabled) {
-        this.peaksEnabled = peaksEnabled;
+	this.peaksEnabled = peaksEnabled;
     }
 
     /**
      * Set visual peak color.
      *
-     * @param c the new peak color
+     * @param c
+     *            the new peak color
      */
     public void setPeakColor(Color c) {
-        peakColor = c;
+	peakColor = c;
     }
 
     /**
      * Set peak fall off delay.
      *
-     * @param waitFPS the new peak delay
+     * @param waitFPS
+     *            the new peak delay
      */
     public void setPeakDelay(int waitFPS) {
-        int min = Math.round((DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO - DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO_RANGE) * fps);
-        int max = Math.round((DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO + DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO_RANGE) * fps);
-        if ((waitFPS >= min) && (waitFPS <= max)) {
-            peakDelay = waitFPS;
-        } else {
-            peakDelay = Math.round(DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO * fps);
-        }
+	int min = Math.round(
+		(DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO - DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO_RANGE)
+			* fps);
+	int max = Math.round(
+		(DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO + DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO_RANGE)
+			* fps);
+	if ((waitFPS >= min) && (waitFPS <= max)) {
+	    peakDelay = waitFPS;
+	} else {
+	    peakDelay = Math.round(DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO * fps);
+	}
     }
 
     /**
      * Sets the frames per second.
      *
-     * @param fps the new frames per second
+     * @param fps
+     *            the new frames per second
      */
     public void setFramesPerSecond(int fps) {
-        this.fps = fps;
+	this.fps = fps;
     }
 
     /**
      * Sets the current display mode.
      *
-     * @param pMode the new display mode
+     * @param pMode
+     *            the new display mode
      */
     public synchronized void setDisplayMode(int pMode) {
-        displayMode = pMode;
+	displayMode.set(pMode);
     }
 
     /**
      * Sets the color of the scope.
      *
-     * @param pColor the new scope color
+     * @param pColor
+     *            the new scope color
      */
     public synchronized void setScopeColor(Color pColor) {
-        scopeColor = pColor;
+	scopeColor = pColor;
     }
 
     /**
      * When 'true' is passed as a parameter, will overlay the "Frames Per
      * Seconds" achieved by the component.
      *
-     * @param pState the new show FPS
+     * @param pState
+     *            the new show FPS
      */
     public synchronized void setShowFPS(boolean pState) {
-        showFPS = pState;
+	showFPS = pState;
     }
 
     /**
      * Sets the numbers of bands rendered by the spectrum analyser.
      *
      * @param pCount
-     *        Cannot be more than half the "FFT sample size".
+     *            Cannot be more than half the "FFT sample size".
      */
     public synchronized void setSpectrumAnalyserBandCount(int pCount) {
 
-        saBands = pCount;
-        peaks = new int[saBands];
-        peaksDelay = new int[saBands];
-        computeSAMultiplier();
+	saBands = pCount;
+	peaks = new int[saBands];
+	peaksDelay = new int[saBands];
+	computeSAMultiplier();
     }
 
     /**
      * Sets the spectrum analyzer band decay rate.
      *
      * @param pDecay
-     *        Must be a number between 0.0 and 1.0 exclusive.
+     *            Must be a number between 0.0 and 1.0 exclusive.
      */
     public synchronized void setSpectrumAnalyserDecay(float pDecay) {
-        if ((pDecay >= MIN_SPECTRUM_ANALYSER_DECAY) && (pDecay <= MAX_SPECTRUM_ANALYSER_DECAY)) {
-            saDecay = pDecay;
-        } else
-            saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
+	if ((pDecay >= MIN_SPECTRUM_ANALYSER_DECAY) && (pDecay <= MAX_SPECTRUM_ANALYSER_DECAY)) {
+	    saDecay = pDecay;
+	} else
+	    saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
     }
 
     /**
      * Sets the spectrum analyzer color scale.
      *
      * @param pColors
-     *        Any amount of colors may be used. Must not be null.
+     *            Any amount of colors may be used. Must not be null.
      */
     public synchronized void setSpectrumAnalyserColors(Color[] pColors) {
-        spectrumAnalyserColors = pColors;
-        computeColorScale();
+	spectrumAnalyserColors = pColors;
+	computeColorScale();
     }
 
     /**
@@ -643,28 +679,30 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * values. The default is 512.
      *
      * @param pSize
-     *        Cannot be more than the size of the sample provided by the
-     *        DSP.
+     *            Cannot be more than the size of the sample provided by the
+     *            DSP.
      */
     public synchronized void setSpectrumAnalyserFFTSampleSize(int pSize) {
-        saFFTSampleSize = pSize;
-        fft = new KJFFT(saFFTSampleSize);
-        oldFFT = new float[saFFTSampleSize];
-        computeSAMultiplier();
+	saFFTSampleSize = pSize;
+	fft = new KJFFT(saFFTSampleSize);
+	oldFFT = new float[saFFTSampleSize];
+	computeSAMultiplier();
     }
 
     /**
      * Stereo merge.
      *
-     * @param pLeft the left
-     * @param pRight the right
+     * @param pLeft
+     *            the left
+     * @param pRight
+     *            the right
      * @return A float[] array from merging left and right speakers
      */
     public float[] stereoMerge(float[] pLeft, float[] pRight) {
-        for (int a = 0; a < pLeft.length; a++)
-            pLeft[a] = (pLeft[a] + pRight[a]) / 2.0f;
+	for (int a = 0; a < pLeft.length; a++)
+	    pLeft[a] = (pLeft[a] + pRight[a]) / 2.0f;
 
-        return pLeft;
+	return pLeft;
     }
 
 }

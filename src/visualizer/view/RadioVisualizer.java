@@ -35,7 +35,7 @@ public class RadioVisualizer extends Visualizer implements StreamPlayerListener 
 		radioPlayer.addStreamPlayerListener(this);
 	//	resizeVisualizer(width, height);
 		
-		addMouseListener();
+		//addMouseListener();
 	}
 	
 	/* (non-Javadoc)

@@ -3,8 +3,9 @@
  */
 package visualizer.view;
 
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseButton;
 import xplayer.presenter.XPlayerController;
-
 
 /**
  * This class is updating the panel of the XPlayerUI.
@@ -12,28 +13,42 @@ import xplayer.presenter.XPlayerController;
  * @author GOXR3PLUS
  */
 public class XPlayerVisualizer extends Visualizer {
-	
-	/** The x player UI. */
-	private XPlayerController xPlayerUI;
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param width the width
-	 * @param height the height
-	 * @param xPlayerUI the x player UI
-	 */
-	public XPlayerVisualizer(int width, int height, XPlayerController xPlayerUI) {
-		super("XRPLAYER");
-		
-		this.xPlayerUI = xPlayerUI;
-		this.animationService.passDJDisc(xPlayerUI.disc);
-	//	resizeVisualizer(width, height);
-		
-		setScopeColor(xPlayerUI.disc.getArcColor());
-		addMouseListener();
-		
-	}
-	
-	
+
+    /** The x player UI. */
+    private XPlayerController xPlayerUI;
+
+    /**
+     * Constructor.
+     *
+     * @param xPlayerUI
+     *            the x player UI
+     */
+    public XPlayerVisualizer(XPlayerController xPlayerUI) {
+	super("XRPLAYER");
+
+	this.xPlayerUI = xPlayerUI;
+	this.animationService.passDJDisc(xPlayerUI.disc);
+
+	setScopeColor(xPlayerUI.disc.getArcColor());
+	addMouseListener();
+    }
+
+    /**
+     * Add a mouse listener so every time primary mouse button is clicked the
+     * visualizer is changing.
+     */
+    protected void addMouseListener() {
+
+	setCursor(Cursor.HAND);
+	setOnMouseReleased(m -> {
+	    // PRIMARY
+	    if (m.getButton() == MouseButton.PRIMARY) {
+		displayMode.set((displayMode.get() + 1 > DISPLAYMODE_MAXIMUM) ? 0 : displayMode.get() + 1);
+		// SECONDARY
+	    } else if (m.getButton() == MouseButton.SECONDARY)
+		xPlayerUI.visualizerWindow.visualizerContextMenu.show(this, m.getScreenX(), m.getScreenY());
+	});
+
+    }
+
 }
