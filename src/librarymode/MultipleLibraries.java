@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import application.Main;
-import customNodes.Marquee;
+import customnodes.Marquee;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

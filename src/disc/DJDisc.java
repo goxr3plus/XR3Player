@@ -6,7 +6,7 @@ package disc;
 import java.util.ArrayList;
 
 import application.Main;
-import customNodes.DragAdjustableLabel;
+import customnodes.DragAdjustableLabel;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;

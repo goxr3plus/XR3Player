@@ -3,19 +3,11 @@
  */
 package application;
 
-import java.awt.Desktop;
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
-import javafx.application.Platform;
+import customnodes.CPUsage;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
@@ -23,19 +15,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.stage.StageStyle;
-import tools.ActionTool;
 import tools.InfoTool;
-import tools.NotificationType;
 
 /**
  * The Top bar of the application Window.
@@ -64,6 +53,12 @@ public class TopBar extends BorderPane {
     @FXML
     private Button showSideBar;
 
+    /**
+     * Has inside a CPUsage object
+     */
+    @FXML
+    private StackPane cpuStackPane;
+
     /** The go DJ mode. */
     @FXML
     private ToggleButton goDJMode;
@@ -79,6 +74,8 @@ public class TopBar extends BorderPane {
     private MenuItem restartButton;
 
     // ----------------------
+
+    CPUsage cpUsage = new CPUsage();
 
     /**
      * The current Window Mode that means if the application is on <b>
@@ -120,6 +117,10 @@ public class TopBar extends BorderPane {
      */
     @FXML
     private void initialize() {
+	
+	//cpuStackPane
+	cpuStackPane.getChildren().add(0,cpUsage);
+	cpUsage.startUpdater();
 
 	// showSideBar
 	showSideBar.setOnAction(a -> Main.sideBar.showBar());
@@ -132,12 +133,11 @@ public class TopBar extends BorderPane {
 	    alert.initOwner(Main.window);
 
 	    alert.setContentText("Soore you want to restart the application?");
-	    ButtonType yes = new ButtonType("Yes");
-	    ButtonType cancel = new ButtonType("Cancel");
+	    ButtonType yes = new ButtonType("Yes",ButtonData.OK_DONE);
+	    ButtonType cancel = new ButtonType("Cancel",ButtonData.CANCEL_CLOSE);
 	    ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
 
 	    alert.getButtonTypes().setAll(yes, cancel);
-	    alert.initStyle(StageStyle.TRANSPARENT);
 	    alert.showAndWait().ifPresent(answer -> {
 		if (answer == yes)
 		    Main.restartTheApplication(true);

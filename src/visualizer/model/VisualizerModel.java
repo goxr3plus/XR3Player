@@ -168,7 +168,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     protected Color scopeColor;
 
     /** The spectrum analyser colors. */
-    protected Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
+    public static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
 
     /** The dsp. */
     private KJDSPAudioDataConsumer dsp = null;
@@ -443,9 +443,10 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     }
 
     /**
-     * Gets the default spectrum analyser colors.
+     * Gets the default spectrum analyzer colors. Colors are starting from green
+     * and ending to red.
      *
-     * @return the default spectrum analyser colors
+     * @return the default spectrum analyzer colors
      */
     public static Color[] getDefaultSpectrumAnalyserColors() {
 	Color[] wColors = new Color[256];

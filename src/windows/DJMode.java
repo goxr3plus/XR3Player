@@ -5,15 +5,12 @@ package windows;
 
 import java.io.IOException;
 
-import aacode_to_be_used_in_future.DJTabs;
-import aacode_to_be_used_in_future.DJSoundTeam.DJSoundTeamButton;
 import application.Main;
-import customNodes.DigitalClock;
+import customnodes.DigitalClock;
 import disc.Balancer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
-import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -33,7 +30,7 @@ public class DJMode extends GridPane {
 	private SplitPane splitPane;
 	
 	/** The dj tabs. */
-	public DJTabs djTabs;
+	//public DJTabs djTabs;
 	
 	/** The balancer. */
 	public Balancer balancer;
@@ -115,7 +112,7 @@ public class DJMode extends GridPane {
 	 * Make DJ sound team tabs.
 	 */
 	void makeDJSoundTeamTabs() {
-		djTabs = new DJTabs(InfoTool.getScreenWidth() - 305, 400, 300, InfoTool.getScreenHeight() - 400);
+		//djTabs = new DJTabs(InfoTool.getScreenWidth() - 305, 400, 300, InfoTool.getScreenHeight() - 400);
 	}
 	
 	/**
@@ -205,28 +202,29 @@ public class DJMode extends GridPane {
 						Main.xPlayersList.getXPlayer(2).stop();
 					
 				// DJBeats
-			} else if (keyCode == KeyCode.DIGIT4) {
-				
-				for (Node n : djTabs.djBeats.getChildren())
-					if ( ( (DJSoundTeamButton) n ).getRadioButton().isSelected()) {
-						
-						( (DJSoundTeamButton) n ).controllPlayer();
-						
-						break;
-					}
-				
-				// DJScratch
-			} else if (keyCode == KeyCode.DIGIT5) {
-				
-				for (Node n : djTabs.djScratches.getChildren())
-					if ( ( (DJSoundTeamButton) n ).getRadioButton().isSelected()) {
-						
-						( (DJSoundTeamButton) n ).controllPlayer();
-						
-						break;
-					}
-				
 			}
+//			 else if (keyCode == KeyCode.DIGIT4) {
+//				
+//				for (Node n : djTabs.djBeats.getChildren())
+//					if ( ( (DJSoundTeamButton) n ).getRadioButton().isSelected()) {
+//						
+//						( (DJSoundTeamButton) n ).controllPlayer();
+//						
+//						break;
+//					}
+//				
+//				// DJScratch
+//			} else if (keyCode == KeyCode.DIGIT5) {
+//				
+//				for (Node n : djTabs.djScratches.getChildren())
+//					if ( ( (DJSoundTeamButton) n ).getRadioButton().isSelected()) {
+//						
+//						( (DJSoundTeamButton) n ).controllPlayer();
+//						
+//						break;
+//					}
+//				
+//			}
 			
 		});
 		

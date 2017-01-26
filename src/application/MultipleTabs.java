@@ -3,7 +3,6 @@
  */
 package application;
 
-import aaaradio_not_used_yet.RadioStationsController;
 import javafx.geometry.Side;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -20,7 +19,7 @@ public class MultipleTabs extends BorderPane {
 	/** The tab pane. */
 	private TabPane tabPane = new TabPane();
 	
-	private RadioStationsController radioStations = new RadioStationsController();
+	//private RadioStationsController radioStations = new RadioStationsController();
 	
 	/**
 	 * Constructor.
@@ -32,7 +31,7 @@ public class MultipleTabs extends BorderPane {
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
 		addTab(new Tab("Libraries", Main.libraryMode.multipleLibs));
-		addTab(new Tab("Radio Stations", radioStations));
+		//addTab(new Tab("Radio Stations", radioStations));
 		tabPane.getSelectionModel().select(0);
 		
 		this.setCenter(tabPane);

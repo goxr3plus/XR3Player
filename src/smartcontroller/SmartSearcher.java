@@ -15,8 +15,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
-import aaaradio_not_used_yet.RadioStationsController;
-import aacode_to_be_used_in_future.TagsBar;
 import application.Main;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.concurrent.Service;
@@ -256,10 +254,10 @@ public class SmartSearcher extends HBox {
 		private void initialize() {
 			
 			// TagsBar
-			TagsBar tagsBar = new TagsBar();
-			tagsBar.setMaxWidth(InfoTool.getScreenWidth() / 2.5);
-			tagsBar.getEntries().addAll(RadioStationsController.musicGenres);
-			bottomVBox.getChildren().add(tagsBar);
+//			TagsBar tagsBar = new TagsBar();
+//			tagsBar.setMaxWidth(InfoTool.getScreenWidth() / 2.5);
+//			tagsBar.getEntries().addAll(RadioStationsController.musicGenres);
+//			bottomVBox.getChildren().add(tagsBar);
 			
 			// PopOver
 			popOver.setContentNode(this);

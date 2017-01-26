@@ -16,9 +16,8 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToggleButton;
 
-import aacode_to_be_used_in_future.AnalyserBox;
 import application.Main;
-import customNodes.Marquee;
+import customnodes.Marquee;
 import disc.DJDisc;
 import disc.DJDiscListener;
 import javafx.application.Platform;
@@ -196,7 +195,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     XPlayerEqualizer equalizer;
 
     /** The analyser box. */
-    AnalyserBox analyserBox;
+    // AnalyserBox analyserBox;
 
     /** The disc. */
     public DJDisc disc;
@@ -562,16 +561,16 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	disc.getCanvas().setOnMouseReleased(m -> {
 	    disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 	    if (xPlayer.isPausedOrPlaying() && discIsDragging)
-		if (m.getButton() == MouseButton.PRIMARY)
+		if (m.getButton() == MouseButton.PRIMARY && xPlayerModel.getDuration() != 0) {
 		    seekService.startSeekService(xPlayerModel.getCurrentAngleTime()
 			    * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
-		else if (m.getButton() == MouseButton.SECONDARY)
+		} else if (m.getButton() == MouseButton.SECONDARY)
 		    seekService.startSeekService(0);
 	    // disc.exitVolumeDragging()
 	});
 	disc.getCanvas().setOnMouseDragged(m -> {
 	    if ((m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
-		    && !radialMenu.isShowing() && xPlayer.isPausedOrPlaying()) {
+		    && !radialMenu.isShowing() && xPlayer.isPausedOrPlaying() && xPlayerModel.getDuration() != 0) {
 		discIsDragging = true;
 		xPlayerModel.setCurrentAngleTime(disc.getValue(xPlayerModel.getDuration()));
 		disc.calculateAngleByMouse(m, xPlayerModel.getCurrentAngleTime(), xPlayerModel.getDuration());
@@ -599,7 +598,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	pane.setStyle("-fx-padding:5px;");
 
 	// AnalyserBox
-	analyserBox = new AnalyserBox(301, 100);
+	// analyserBox = new AnalyserBox(301, 100);
 	// pane.setCenter(analyserBox)
 
 	// Equalizer
@@ -1017,6 +1016,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		disc.pauseRotation();
 		visualizer.stopVisualizer();
 		radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
+
+		ActionTool.showNotification("Deck " + this.getKey(), "Deck[ " + this.getKey() + " ] has stopped...",
+			Duration.seconds(2), NotificationType.SIMPLE);
 	    });
 
 	    System.out.println("Player stopped! with key:" + getKey());

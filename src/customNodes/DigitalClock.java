@@ -1,7 +1,7 @@
 /*
  * 
  */
-package customNodes;
+package customnodes;
 
 import java.time.LocalTime;
 

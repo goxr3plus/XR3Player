@@ -26,7 +26,6 @@ import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class is managing the database of the application.
  *
@@ -59,74 +58,102 @@ public class LocalDBManager {
 
     /** The runnable of the commit executor. */
     private Runnable commitRunnable = () -> {
-        try {
-            connection1.commit();
-        } catch (SQLException ex) {
-            Main.logger.log(Level.WARNING, ex.getMessage(), ex);
-        } finally {
-            Platform.runLater(Notifications.create()
-                .text("Successfully saved changes.")
-                .hideAfter(Duration.millis(800))::show);
-        }
+	try {
+	    connection1.commit();
+	} catch (SQLException ex) {
+	    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
+	} finally {
+	    Platform.runLater(
+		    Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(800))::show);
+	}
+
+    };
+
+    /** The runnable of the commit executor. */
+    private Runnable vacuumRunnable = () -> {
+	try {
+	    // close + open connection
+	    connection1.commit();
+	    manageConnection(Operation.CLOSE);
+	    manageConnection(Operation.OPEN);
+
+	    // vacuum
+	    connection1.createStatement().executeUpdate("VACUUM");
+
+	    // close connection
+	    manageConnection(Operation.CLOSE);
+
+	    // exit
+	    System.exit(0);
+	} catch (SQLException ex) {
+	    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
+	    System.exit(-1);
+	} finally {
+	    System.exit(0);
+	}
 
     };
 
     /**
      * Constructor.
      *
-     * @param userName the user name
+     * @param userName
+     *            the user name
      */
     public LocalDBManager(String userName) {
 
-        try {
-            Class.forName("org.sqlite.JDBC");
+	try {
 
-            // database folder
-            if (!new File(InfoTool.dbPath_Plain).exists())
-                new File(InfoTool.dbPath_Plain).mkdir();
+	    // load the sqlite-JDBC driver using the current class loader
+	    Class.forName("org.sqlite.JDBC");
 
-            // user folder
-            if (!new File(InfoTool.dbPath_With_Separator + userName).exists())
-                new File(InfoTool.dbPath_With_Separator + userName).mkdir();
-            InfoTool.user_dbPath_With_Separator = InfoTool.dbPath_With_Separator + userName + File.separator;
+	    // database folder
+	    if (!new File(InfoTool.dbPath_Plain).exists())
+		new File(InfoTool.dbPath_Plain).mkdir();
 
-            // images folder
-            imagesFolder = InfoTool.dbPath_With_Separator + userName + File.separator + "Images";
-            if (!new File(imagesFolder).exists())
-                new File(imagesFolder).mkdir();
+	    // user folder
+	    if (!new File(InfoTool.dbPath_With_Separator + userName).exists())
+		new File(InfoTool.dbPath_With_Separator + userName).mkdir();
+	    InfoTool.user_dbPath_With_Separator = InfoTool.dbPath_With_Separator + userName + File.separator;
 
-            // database file(.db)
-            dbFile = InfoTool.dbPath_With_Separator + userName + File.separator + "dbFile.db";
-            boolean data1Exist = new File(dbFile).exists();
+	    // images folder
+	    imagesFolder = InfoTool.dbPath_With_Separator + userName + File.separator + "Images";
+	    if (!new File(imagesFolder).exists())
+		new File(imagesFolder).mkdir();
 
-            // connection1
-            connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
-            connection1.setAutoCommit(false);
+	    // database file(.db)
+	    dbFile = InfoTool.dbPath_With_Separator + userName + File.separator + "dbFile.db";
+	    boolean data1Exist = new File(dbFile).exists();
 
-            if (!data1Exist)
-                recreateDataBase();
+	    // connection1
+	    connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+	    connection1.setAutoCommit(false);
 
-        } catch (SQLException | ClassNotFoundException ex) {
-            Main.logger.log(Level.SEVERE, "", ex);
-        }
+	    if (!data1Exist)
+		recreateDataBase();
+
+	} catch (SQLException | ClassNotFoundException ex) {
+	    Main.logger.log(Level.SEVERE, "", ex);
+	}
     }
 
     /**
      * Open or close the connection.
      *
-     * @param action the action
+     * @param action
+     *            the action
      */
     public void manageConnection(Operation action) {
-        try {
-            // OPEN
-            if (action == Operation.OPEN && connection1.isClosed())
-                connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
-            // CLOSE
-            else if (action == Operation.CLOSE && !connection1.isClosed())
-                connection1.close();
-        } catch (SQLException ex) {
-            Main.logger.log(Level.WARNING, "", ex);
-        }
+	try {
+	    // OPEN
+	    if (action == Operation.OPEN && connection1.isClosed())
+		connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+	    // CLOSE
+	    else if (action == Operation.CLOSE && !connection1.isClosed())
+		connection1.close();
+	} catch (SQLException ex) {
+	    Main.logger.log(Level.WARNING, "", ex);
+	}
     }
 
     /**
@@ -134,35 +161,45 @@ public class LocalDBManager {
      * have unexpected lags.
      */
     public void commit() {
-        commitExecutor.execute(commitRunnable);
+	commitExecutor.execute(commitRunnable);
+    }
+
+    /**
+     * Using this methods to control commit + vacuum across the application so
+     * not to have unexpected lags.
+     * 
+     */
+    public void commitAndVacuum() {
+	commitExecutor.execute(vacuumRunnable);
     }
 
     /**
      * Stops the executorService.
      */
     public void shutdownCommitExecutor() {
-        commitExecutor.shutdown();
+	commitExecutor.shutdown();
     }
 
     /**
      * Checks if this table exists in dataBase.
      *
-     * @param tableName the table name
+     * @param tableName
+     *            the table name
      * @return true, if successful
      */
     public static boolean tableExists(String tableName) {
-        // SQLite table names are case insensitive, but comparison is case
-        // sensitive by default. To make this work properly in all cases you
-        // need to add COLLATE NOCASE
-        try (ResultSet r = Main.dbManager.connection1.createStatement()
-            .executeQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
-            int total = r.getInt(1);
-            return total == 0 ? false : true;
-        } catch (SQLException ex) {
-            Main.logger.log(Level.INFO, "", ex);
-        }
+	// SQLite table names are case insensitive, but comparison is case
+	// sensitive by default. To make this work properly in all cases you
+	// need to add COLLATE NOCASE
+	try (ResultSet r = Main.dbManager.connection1.createStatement().executeQuery(
+		"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
+	    int total = r.getInt(1);
+	    return total == 0 ? false : true;
+	} catch (SQLException ex) {
+	    Main.logger.log(Level.INFO, "", ex);
+	}
 
-        return false;
+	return false;
     }
 
     /**
@@ -170,47 +207,56 @@ public class LocalDBManager {
      */
     public void recreateDataBase() {
 
-        Main.logger.info("1-->Recreating the database..");
+	Main.logger.info("1-->Recreating the database..");
 
-        try (Statement statement = connection1.createStatement()) {
+	try (Statement statement = connection1.createStatement()) {
 
-            // ----------Libraries Table ----------------//
-            statement.executeUpdate("CREATE TABLE LIBRARIES(NAME          TEXT    PRIMARY KEY   NOT NULL," + "TABLENAME TEXT NOT NULL," + "STARS         DOUBLE     NOT NULL," + "DATECREATED          TEXT   	NOT NULL,"
-                + "TIMECREATED          TEXT    NOT NULL," + "DESCRIPTION   TEXT    NOT NULL," + "SAVEMODE      INT     NOT NULL," + "POSITION      INT     NOT NULL," + "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
+	    // ----------Libraries Table ----------------//
+	    statement.executeUpdate("CREATE TABLE LIBRARIES(NAME          TEXT    PRIMARY KEY   NOT NULL,"
+		    + "TABLENAME TEXT NOT NULL," + "STARS         DOUBLE     NOT NULL,"
+		    + "DATECREATED          TEXT   	NOT NULL," + "TIMECREATED          TEXT    NOT NULL,"
+		    + "DESCRIPTION   TEXT    NOT NULL," + "SAVEMODE      INT     NOT NULL,"
+		    + "POSITION      INT     NOT NULL," + "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
 
-            // -----------Radio Stations Table ------------//
-            statement.executeUpdate("CREATE TABLE '" + InfoTool.radioStationsTable + "'(NAME TEXT PRIMARY KEY NOT NULL," + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL," + "DESCRIPTION TEXT," + "STARS DOUBLE NOT NULL)");
+	    // -----------Radio Stations Table ------------//
+	    statement.executeUpdate("CREATE TABLE '" + InfoTool.radioStationsTable + "'(NAME TEXT PRIMARY KEY NOT NULL,"
+		    + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL," + "DESCRIPTION TEXT,"
+		    + "STARS DOUBLE NOT NULL)");
 
-            // ----------XPlayers PlayLists Table ----------//
-            for (int i = 0; i < 3; i++)
-                createXPlayListTable(statement, i);
+	    // ----------XPlayers PlayLists Table ----------//
+	    for (int i = 0; i < 3; i++)
+		createXPlayListTable(statement, i);
 
-            commit();
-        } catch (SQLException ex) {
-            Main.logger.log(Level.SEVERE, "", ex);
-        }
+	    commit();
+	} catch (SQLException ex) {
+	    Main.logger.log(Level.SEVERE, "", ex);
+	}
     }
 
     /**
      * Create a database table for the specific XPlayer.
      *
-     * @param statement the statement
-     * @param key the key
-     * @throws SQLException the SQL exception
+     * @param statement
+     *            the statement
+     * @param key
+     *            the key
+     * @throws SQLException
+     *             the SQL exception
      */
     private void createXPlayListTable(Statement statement, int key) throws SQLException {
-        statement.executeUpdate("CREATE TABLE XPPL" + key + "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+	statement.executeUpdate("CREATE TABLE XPPL" + key + "(PATH       TEXT    PRIMARY KEY   NOT NULL ,"
+		+ "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL,"
+		+ "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
     }
 
     /**
      * This method loads the application database.
      */
     public void loadApplicationDataBase() {
-        Main.updateScreen.setVisible(true);
-        Main.updateScreen.progressBar.progressProperty()
-            .bind(dataLoader.progressProperty());
-        dataLoader.reset();
-        dataLoader.start();
+	Main.updateScreen.setVisible(true);
+	Main.updateScreen.progressBar.progressProperty().bind(dataLoader.progressProperty());
+	dataLoader.reset();
+	dataLoader.start();
     }
 
     /**
@@ -220,96 +266,95 @@ public class LocalDBManager {
      */
     public class DataLoader extends Service<Void> {
 
-        /** The total. */
-        int total;
+	/** The total. */
+	int total;
 
-        /**
-         * Constructor.
-         */
-        public DataLoader() {
+	/**
+	 * Constructor.
+	 */
+	public DataLoader() {
 
-            // if succeeded
-            setOnSucceeded(s -> {
-                Main.updateScreen.progressBar.progressProperty()
-                    .unbind();
-                Main.root.setCenter(Main.libraryMode);
-                Main.libraryMode.add(Main.multipleTabs, 0, 1);
-                Main.updateScreen.setVisible(false);
+	    // if succeeded
+	    setOnSucceeded(s -> {
+		Main.updateScreen.progressBar.progressProperty().unbind();
+		Main.root.setCenter(Main.libraryMode);
+		Main.libraryMode.add(Main.multipleTabs, 0, 1);
+		Main.updateScreen.setVisible(false);
 
-                // Check for updates on start
-                new Thread(() -> {
-                    if (InfoTool.isReachableByPing("www.google.com"))
-                        Main.checkForUpdates(false);
-                }).start();
-            });
+		// Check for updates on start
+		new Thread(() -> {
+		    if (InfoTool.isReachableByPing("www.google.com"))
+			Main.checkForUpdates(false);
+		}).start();
+	    });
 
-            // if failed
-            setOnFailed(fail -> {
-                Main.updateScreen.progressBar.progressProperty()
-                    .unbind();
-                ActionTool.showNotification("Fatal Error!", "DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500), NotificationType.ERROR);
-                System.exit(0);
-            });
-        }
+	    // if failed
+	    setOnFailed(fail -> {
+		Main.updateScreen.progressBar.progressProperty().unbind();
+		ActionTool.showNotification("Fatal Error!",
+			"DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500),
+			NotificationType.ERROR);
+		System.exit(0);
+	    });
+	}
 
-        @Override
-        protected Task<Void> createTask() {
-            return new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
+	@Override
+	protected Task<Void> createTask() {
+	    return new Task<Void>() {
+		@Override
+		protected Void call() throws Exception {
 
-                    // -------------------------- Load all the libraries
-                    try (ResultSet resultSet = connection1.createStatement()
-                        .executeQuery("SELECT* FROM LIBRARIES;");
-                        ResultSet dbCounter = connection1.createStatement()
-                            .executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+		    // -------------------------- Load all the libraries
+		    try (ResultSet resultSet = connection1.createStatement().executeQuery("SELECT* FROM LIBRARIES;");
+			    ResultSet dbCounter = connection1.createStatement()
+				    .executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
 
-                        total = dbCounter.getInt(1);
-                        Main.logger.info("Uploading libraries....");
+			total = dbCounter.getInt(1);
+			Main.logger.info("Uploading libraries....");
 
-                        // Refresh the text
-                        Platform.runLater(() -> Main.updateScreen.label.setText("Uploading Libraries..."));
-                        updateProgress(1, 2);
+			// Refresh the text
+			Platform.runLater(() -> Main.updateScreen.label.setText("Uploading Libraries..."));
+			updateProgress(1, 2);
 
-                        // Load all the libraries
-                        while (resultSet.next()) {
+			// Load all the libraries
+			while (resultSet.next()) {
 
-                            Library library = new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"), resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"),
-                                resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED"));
+			    Library library = new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"),
+				    resultSet.getDouble("STARS"), resultSet.getString("DATECREATED"),
+				    resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"),
+				    resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"),
+				    resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED"));
 
-                            Main.libraryMode.libraryViewer.addLibrary(library);
+			    Main.libraryMode.libraryViewer.addLibrary(library);
 
-                            // opened?
-                            if (resultSet.getBoolean("OPENED"))
-                                library.libraryOpenClose(true, true);
+			    // opened?
+			    if (resultSet.getBoolean("OPENED"))
+				library.libraryOpenClose(true, true);
 
-                            updateProgress(resultSet.getRow(), total);
-                        }
+			    updateProgress(resultSet.getRow(), total);
+			}
 
-                        Main.libraryMode.libraryViewer.getItems()
-                            .stream()
-                            .filter(Library::isLibraryOpened)
-                            .findFirst()
-                            .ifPresent(library -> {
-                                if (library.isLibraryOpened())
-                                    Main.libraryMode.libraryViewer.setCenterIndex(library.getPosition());
-                            });
+			Main.libraryMode.libraryViewer.getItems().stream().filter(Library::isLibraryOpened).findFirst()
+				.ifPresent(library -> {
+				    if (library.isLibraryOpened())
+					Main.libraryMode.libraryViewer.setCenterIndex(library.getPosition());
+				});
 
-                        // update library viewer
-                        Main.libraryMode.libraryViewer.update();
-                        Main.libraryMode.libraryViewer.goOnSelectionMode(false);
+			// update library viewer
+			Main.libraryMode.libraryViewer.update();
+			Main.libraryMode.libraryViewer.goOnSelectionMode(false);
 
-                        // set libraries tree expanded
-                        Main.treeManager.librariesTree.setExpanded(true);
+			// set libraries tree expanded
+			Main.treeManager.librariesTree.setExpanded(true);
 
-                    } catch (Exception ex) {
-                        Main.logger.log(Level.SEVERE, "", ex);
-                    }
+		    } catch (Exception ex) {
+			Main.logger.log(Level.SEVERE, "", ex);
+		    }
 
-                    return null;
-                }
-            };
-        }
+		    return null;
+		}
+	    };
+	}
 
     }
 }

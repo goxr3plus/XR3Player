@@ -102,63 +102,70 @@ public abstract class Media {
     /**
      * Constructor.
      *
-     * @param path The path of the File
-     * @param duration The duration of the Media
-     * @param stars The quality of the Media
-     * @param timesPlayed The times the Media has been played
-     * @param dateImported The date the Media was imported <b> if null given
-     *        then the
-     *        imported time will be the current date </b>
-     * @param hourImported The hour the Media was imported <b> if null given
-     *        then the
-     *        imported hour will be the current time </b>
-     * @param genre The genre of the Media <b> see the Genre class for more </b>
+     * @param path
+     *            The path of the File
+     * @param duration
+     *            The duration of the Media
+     * @param stars
+     *            The quality of the Media
+     * @param timesPlayed
+     *            The times the Media has been played
+     * @param dateImported
+     *            The date the Media was imported <b> if null given then the
+     *            imported time will be the current date </b>
+     * @param hourImported
+     *            The hour the Media was imported <b> if null given then the
+     *            imported hour will be the current time </b>
+     * @param genre
+     *            The genre of the Media <b> see the Genre class for more </b>
      */
-    public Media(String path, int duration, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre) {
+    public Media(String path, int duration, double stars, int timesPlayed, String dateImported, String hourImported,
+	    Genre genre) {
 
-        // ....initialize
-        mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? songImage : videoImage));
-        hasBeenPlayed = new SimpleObjectProperty<>(null);
+	// ....initialize
+	mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? songImage : videoImage));
+	hasBeenPlayed = new SimpleObjectProperty<>(null);
 
-        this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
-        this.drive = new SimpleStringProperty(path.substring(0, 1));
-        this.filePath = new SimpleStringProperty(path);
-        this.fileName = new SimpleStringProperty(InfoTool.getFileName(path));
-        this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
+	this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
+	this.drive = new SimpleStringProperty(path.substring(0, 1));
+	this.filePath = new SimpleStringProperty(path);
+	this.fileName = new SimpleStringProperty(InfoTool.getFileName(path));
+	this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
 
-        this.stars = new SimpleDoubleProperty(stars);
-        this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
-        this.duration = new SimpleIntegerProperty(duration);
-        this.duration.addListener((observable, oldValue, newValue) -> determineTheImage());
-        this.durationEdited = new SimpleStringProperty(duration == -1 ? "error" : InfoTool.getTimeEditedOnHours(duration));
+	this.stars = new SimpleDoubleProperty(stars);
+	this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
+	this.duration = new SimpleIntegerProperty(duration);
+	this.duration.addListener((observable, oldValue, newValue) -> determineTheImage());
+	this.durationEdited = new SimpleStringProperty(
+		duration == -1 ? "corrupted" : duration == 0 ? "error" : InfoTool.getTimeEditedOnHours(duration));
 
-        // Hour Created
-        if (hourImported == null)
-            this.hourImported = new SimpleStringProperty(InfoTool.getLocalTime());
-        else
-            this.hourImported = new SimpleStringProperty(hourImported);
+	// Hour Created
+	if (hourImported == null)
+	    this.hourImported = new SimpleStringProperty(InfoTool.getLocalTime());
+	else
+	    this.hourImported = new SimpleStringProperty(hourImported);
 
-        // Date Created
-        if (dateImported == null)
-            this.dateImported = new SimpleStringProperty(InfoTool.getCurrentDate());
-        else
-            this.dateImported = new SimpleStringProperty(dateImported);
+	// Date Created
+	if (dateImported == null)
+	    this.dateImported = new SimpleStringProperty(InfoTool.getCurrentDate());
+	else
+	    this.dateImported = new SimpleStringProperty(dateImported);
 
-        dateFileCreated = new SimpleStringProperty(InfoTool.getFileCreationDate(path));
-        dateFileModified = new SimpleStringProperty(InfoTool.getFileLastModifiedDate(path));
+	dateFileCreated = new SimpleStringProperty(InfoTool.getFileCreationDate(path));
+	dateFileModified = new SimpleStringProperty(InfoTool.getFileLastModifiedDate(path));
 
-        // File exists
-        fileExists = new SimpleBooleanProperty(this, "FileExists", true);
-        fileExists.addListener((observable, oldValue, newValue) -> {
-            // System.out.println(path + " newValue= :" + newValue)
-            determineTheImage();
-        });
+	// File exists
+	fileExists = new SimpleBooleanProperty(this, "FileExists", true);
+	fileExists.addListener((observable, oldValue, newValue) -> {
+	    // System.out.println(path + " newValue= :" + newValue)
+	    determineTheImage();
+	});
 
-        // Media Genre
-        this.genre = genre;
+	// Media Genre
+	this.genre = genre;
 
-        // Find the correct image
-        determineTheImage();
+	// Find the correct image
+	determineTheImage();
     }
 
     /**
@@ -166,18 +173,15 @@ public abstract class Media {
      * CORRUPTED OR MISSING OR OK OR COMBINATION OF THEM
      */
     private void determineTheImage() {
-        if (InfoTool.isAudioSupported(filePath.get())) {// AUDIO?
-            // Corrupted?
-            if (this.duration.get() != -1)
-                mediaType.get()
-                    .setImage(fileExists.get() ? songImage : songMissingImage);
-            else if (this.duration.get() == -1)
-                mediaType.get()
-                    .setImage(songCorruptedImage);
-        } else { // VIDEO?
-            mediaType.get()
-                .setImage(videoImage);
-        }
+	if (InfoTool.isAudioSupported(filePath.get())) {// AUDIO?
+	    // Corrupted?
+	    if (this.duration.get() != -1)
+		mediaType.get().setImage(fileExists.get() ? songImage : songMissingImage);
+	    else if (this.duration.get() == -1)
+		mediaType.get().setImage(songCorruptedImage);
+	} else { // VIDEO?
+	    mediaType.get().setImage(videoImage);
+	}
     }
 
     // --------Property
@@ -189,7 +193,7 @@ public abstract class Media {
      * @return the simple object property
      */
     public SimpleObjectProperty<ImageView> mediaTypeProperty() {
-        return mediaType;
+	return mediaType;
     }
 
     /**
@@ -198,7 +202,7 @@ public abstract class Media {
      * @return the simple object property
      */
     public SimpleObjectProperty<ImageView> hasBeenPlayedProperty() {
-        return hasBeenPlayed;
+	return hasBeenPlayed;
     }
 
     /**
@@ -207,7 +211,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty titleProperty() {
-        return title;
+	return title;
     }
 
     /**
@@ -216,7 +220,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty durationEditedProperty() {
-        return durationEdited;
+	return durationEdited;
     }
 
     /**
@@ -225,7 +229,7 @@ public abstract class Media {
      * @return the simple integer property
      */
     public SimpleIntegerProperty durationProperty() {
-        return duration;
+	return duration;
     }
 
     /**
@@ -234,7 +238,7 @@ public abstract class Media {
      * @return the simple integer property
      */
     public SimpleIntegerProperty timesPlayedProperty() {
-        return timesPlayed;
+	return timesPlayed;
     }
 
     /**
@@ -243,7 +247,7 @@ public abstract class Media {
      * @return the simple double property
      */
     public SimpleDoubleProperty starsProperty() {
-        return stars;
+	return stars;
     }
 
     /**
@@ -252,7 +256,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty hourImportedProperty() {
-        return hourImported;
+	return hourImported;
     }
 
     /**
@@ -261,7 +265,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty dateImportedProperty() {
-        return dateImported;
+	return dateImported;
     }
 
     /**
@@ -270,7 +274,7 @@ public abstract class Media {
      * @return Date File Created property.
      */
     public SimpleStringProperty dateFileCreatedProperty() {
-        return dateFileCreated;
+	return dateFileCreated;
     }
 
     /**
@@ -279,7 +283,7 @@ public abstract class Media {
      * @return The Date File last modified property.
      */
     public SimpleStringProperty dateFileModified() {
-        return dateFileModified;
+	return dateFileModified;
     }
 
     /**
@@ -288,7 +292,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty driveProperty() {
-        return drive;
+	return drive;
     }
 
     /**
@@ -297,7 +301,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty filePathProperty() {
-        return filePath;
+	return filePath;
     }
 
     /**
@@ -306,7 +310,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty fileNameProperty() {
-        return fileName;
+	return fileName;
     }
 
     /**
@@ -315,7 +319,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleStringProperty fileTypeProperty() {
-        return fileType;
+	return fileType;
     }
 
     /**
@@ -324,7 +328,7 @@ public abstract class Media {
      * @return the simple string property
      */
     public SimpleBooleanProperty fileExistsProperty() {
-        return fileExists;
+	return fileExists;
     }
 
     // --------ORDINARY
@@ -334,254 +338,260 @@ public abstract class Media {
      * Prepares the delete operation when more than one Media files will be
      * deleted.
      *
-     * @param permanent <br>
-     *        true->storage medium + (play list)/library<br>
-     *        false->only from (play list)/library
-     * @param controller the controller
+     * @param permanent
+     *            <br>
+     *            true->storage medium + (play list)/library<br>
+     *            false->only from (play list)/library
+     * @param controller
+     *            the controller
      */
     public void prepareDelete(boolean permanent, SmartController controller) {
-        int previousTotal = controller.getTotalInDataBase();
+	int previousTotal = controller.getTotalInDataBase();
 
-        // Remove selected items
-        controller.removeSelected(permanent);
+	// Remove selected items
+	controller.removeSelected(permanent);
 
-        // Update
-        if (previousTotal != controller.getTotalInDataBase()) {
-            if (genre == Genre.LIBRARYSONG)
-                Main.libraryMode.multipleLibs.getSelectedLibrary()
-                    .updateSettingsTotalLabel();
-            controller.loadService.startService(true, true);
-        }
+	// Update
+	if (previousTotal != controller.getTotalInDataBase()) {
+	    if (genre == Genre.LIBRARYSONG)
+		Main.libraryMode.multipleLibs.getSelectedLibrary().updateSettingsTotalLabel();
+	    controller.loadService.startService(true, true);
+	}
     }
 
     /**
      * Delete the Media from (play list)/library or (+storage medium).
      *
-     * @param permanent <br>
-     *        true->storage medium + (play list)/library<br>
-     *        false->only from (play list)/library
-     * @param doQuestion <br>
-     *        true->asks for permission</b> <br>
-     *        false->not asking for permission<br>
-     * @param commit <br>
-     *        true-> will do commit<br>
-     *        false->will not do commit
-     * @param controller the controller
+     * @param permanent
+     *            <br>
+     *            true->storage medium + (play list)/library<br>
+     *            false->only from (play list)/library
+     * @param doQuestion
+     *            <br>
+     *            true->asks for permission</b> <br>
+     *            false->not asking for permission<br>
+     * @param commit
+     *            <br>
+     *            true-> will do commit<br>
+     *            false->will not do commit
+     * @param controller
+     *            the controller
      */
 
     public void delete(boolean permanent, boolean doQuestion, boolean commit, SmartController controller) {
 
-        if (controller.isFree(true)) {
-            boolean hasBeenDeleted = false;
+	if (controller.isFree(true)) {
+	    boolean hasBeenDeleted = false;
 
-            // Do question?
-            if (doQuestion) {
-                if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1))
-                    hasBeenDeleted = removeItem(permanent, controller);
-            } else
-                hasBeenDeleted = removeItem(permanent, controller);
+	    // Do question?
+	    if (doQuestion) {
+		if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1))
+		    hasBeenDeleted = removeItem(permanent, controller);
+	    } else
+		hasBeenDeleted = removeItem(permanent, controller);
 
-            if (hasBeenDeleted) {
-                // Delete from database
-                try {
-                    controller.preparedDelete.setString(1, getFilePath());
-                    controller.preparedDelete.executeUpdate();
-                    // Commit?
-                    if (commit)
-                        Main.dbManager.commit();
-                } catch (SQLException ex) {
-                    Main.logger.log(Level.WARNING, "", ex);
-                }
-            }
+	    if (hasBeenDeleted) {
+		// Delete from database
+		try {
+		    controller.preparedDelete.setString(1, getFilePath());
+		    controller.preparedDelete.executeUpdate();
+		    // Commit?
+		    if (commit)
+			Main.dbManager.commit();
+		} catch (SQLException ex) {
+		    Main.logger.log(Level.WARNING, "", ex);
+		}
+	    }
 
-        }
+	}
 
     }
 
     /**
      * Removes this specific Media.
      *
-     * @param permanent <br>
-     *        true->storage medium + (play list)/library<br>
-     *        false->only from (play list)/library
-     * @param controller the controller
+     * @param permanent
+     *            <br>
+     *            true->storage medium + (play list)/library<br>
+     *            false->only from (play list)/library
+     * @param controller
+     *            the controller
      * @return true, if successful
      */
     private boolean removeItem(boolean permanent, SmartController controller) {
 
-        // Delete from storage medium?
-        if (permanent && !ActionTool.deleteFile(new File(getFilePath())))
-            return false;
+	// Delete from storage medium?
+	if (permanent && !ActionTool.deleteFile(new File(getFilePath())))
+	    return false;
 
-        // --totalInDataBase
-        controller.setTotalInDataBase(controller.getTotalInDataBase() - 1);
+	// --totalInDataBase
+	controller.setTotalInDataBase(controller.getTotalInDataBase() - 1);
 
-        return true;
+	return true;
     }
 
     /**
      * Rename the Media File.
      *
-     * @param controller the controller
+     * @param controller
+     *            the controller
      */
     public void rename(SmartController controller) {
 
-        // If !Controller is Locked
-        if (controller.isFree(true)) {
+	// If !Controller is Locked
+	if (controller.isFree(true)) {
 
-            // Security Variable
-            controller.renameWorking = true;
+	    // Security Variable
+	    controller.renameWorking = true;
 
-            // Open Window
-            String extension = "." + InfoTool.getFileExtension(getFilePath());
-            Main.renameWindow.show(getTitle(), controller.tableViewer);
+	    // Open Window
+	    String extension = "." + InfoTool.getFileExtension(getFilePath());
+	    Main.renameWindow.show(getTitle(), controller.tableViewer);
 
-            // Bind
-            title.bind(Main.renameWindow.inputField.textProperty());
-            fileName.bind(Main.renameWindow.inputField.textProperty()
-                .concat(extension));
+	    // Bind
+	    title.bind(Main.renameWindow.inputField.textProperty());
+	    fileName.bind(Main.renameWindow.inputField.textProperty().concat(extension));
 
-            // When the Rename Window is closed do the rename
-            Main.renameWindow.showingProperty()
-                .addListener(new InvalidationListener() {
-                    @Override
-                    public void invalidated(Observable observable) {
+	    // When the Rename Window is closed do the rename
+	    Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
+		@Override
+		public void invalidated(Observable observable) {
 
-                        // Remove the Listener
-                        Main.renameWindow.showingProperty()
-                            .removeListener(this);
+		    // Remove the Listener
+		    Main.renameWindow.showingProperty().removeListener(this);
 
-                        // !Showing
-                        if (!Main.renameWindow.isShowing()) {
+		    // !Showing
+		    if (!Main.renameWindow.isShowing()) {
 
-                            // Remove Binding
-                            title.unbind();
-                            fileName.unbind();
+			// Remove Binding
+			title.unbind();
+			fileName.unbind();
 
-                            String newName = new File(getFilePath()).getParent() + File.separator + fileName.get();
+			String newName = new File(getFilePath()).getParent() + File.separator + fileName.get();
 
-                            // !XPressed && // Old name != New name
-                            if (!Main.renameWindow.isXPressed() && !getFilePath().equals(newName)) {
+			// !XPressed && // Old name != New name
+			if (!Main.renameWindow.isXPressed() && !getFilePath().equals(newName)) {
 
-                                try {
+			    try {
 
-                                    // No duplicates allowed
-                                    boolean canPass = true;
-                                    controller.preparedCountElementsWithString.setString(1, newName);
-                                    ResultSet set = controller.preparedCountElementsWithString.executeQuery();
-                                    int total = set.getInt(1);
-                                    if (total > 0)
-                                        canPass = false;
-                                    set.close();
-                                    // System.out.println("Total is->:" + total)
+				// No duplicates allowed
+				boolean canPass = true;
+				controller.preparedCountElementsWithString.setString(1, newName);
+				ResultSet set = controller.preparedCountElementsWithString.executeQuery();
+				int total = set.getInt(1);
+				if (total > 0)
+				    canPass = false;
+				set.close();
+				// System.out.println("Total is->:" + total)
 
-                                    // if can pass
-                                    if (canPass) {
+				// if can pass
+				if (canPass) {
 
-                                        // Check if that file already exists
-                                        if (new File(newName).exists()) {
-                                            setFilePath(filePath.get());
-                                            ActionTool.showNotification("Rename Failed", "The action can not been completed(Possible Reason):\nA file with that name already exists.", Duration.millis(1500), NotificationType.WARNING);
-                                            controller.renameWorking = false;
-                                            return;
-                                        }
+				    // Check if that file already exists
+				    if (new File(newName).exists()) {
+					setFilePath(filePath.get());
+					ActionTool.showNotification("Rename Failed",
+						"The action can not been completed(Possible Reason):\nA file with that name already exists.",
+						Duration.millis(1500), NotificationType.WARNING);
+					controller.renameWorking = false;
+					return;
+				    }
 
-                                        // Check if it can be renamed
-                                        if (!new File(getFilePath()).renameTo(new File(newName))) {
-                                            setFilePath(filePath.get());
-                                            ActionTool.showNotification("Rename Failed", "The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..", Duration.millis(1500),
-                                                NotificationType.WARNING);
-                                            controller.renameWorking = false;
-                                            return;
-                                        }
+				    // Check if it can be renamed
+				    if (!new File(getFilePath()).renameTo(new File(newName))) {
+					setFilePath(filePath.get());
+					ActionTool.showNotification("Rename Failed",
+						"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
+						Duration.millis(1500), NotificationType.WARNING);
+					controller.renameWorking = false;
+					return;
+				    }
 
-                                        // database update
-                                        controller.preparedRename.setString(1, newName);
-                                        controller.preparedRename.setString(2, getFilePath());
-                                        controller.preparedRename.executeUpdate();
-                                        Main.dbManager.commit();
+				    // database update
+				    controller.preparedRename.setString(1, newName);
+				    controller.preparedRename.setString(2, getFilePath());
+				    controller.preparedRename.executeUpdate();
+				    Main.dbManager.commit();
 
-                                        // Rename it in playedSong if...
-                                        Main.playedSongs.renameSong(getFilePath(), newName);
+				    // Rename it in playedSong if...
+				    Main.playedSongs.renameSong(getFilePath(), newName);
 
-                                        // change the file path
-                                        setFilePath(newName);
+				    // change the file path
+				    setFilePath(newName);
 
-                                    } else { // canPass==false
-                                        setFilePath(filePath.get());
-                                        Notifications.create()
-                                            .title("Dublicate Name")
-                                            .text("The action can not been completed because :\nA file with that name already exists.")
-                                            .darkStyle()
-                                            .showWarning();
-                                    }
+				} else { // canPass==false
+				    setFilePath(filePath.get());
+				    Notifications.create().title("Dublicate Name").text(
+					    "The action can not been completed because :\nA file with that name already exists.")
+					    .darkStyle().showWarning();
+				}
 
-                                    // Exception occurred
-                                } catch (SQLException ex) {
-                                    Main.logger.log(Level.WARNING, "", ex);
-                                    setFilePath(filePath.get());
-                                    ActionTool.showNotification("Error", "error during renaming the file", Duration.millis(1500), NotificationType.ERROR);
-                                }
-                            } else // X is pressed by user || // Old name == New
-                                   // name
-                                setFilePath(filePath.get());
+				// Exception occurred
+			    } catch (SQLException ex) {
+				Main.logger.log(Level.WARNING, "", ex);
+				setFilePath(filePath.get());
+				ActionTool.showNotification("Error", "error during renaming the file",
+					Duration.millis(1500), NotificationType.ERROR);
+			    }
+			} else // X is pressed by user || // Old name == New
+			       // name
+			    setFilePath(filePath.get());
 
-                            // Security Variable
-                            controller.renameWorking = false;
+			// Security Variable
+			controller.renameWorking = false;
 
-                        } // RenameWindow is still showing
-                    }// invalidated
-                });
-        }
+		    } // RenameWindow is still showing
+		}// invalidated
+	    });
+	}
     }
 
     /**
      * Evaluate the Media File using stars.
      *
-     * @param controller the controller
+     * @param controller
+     *            the controller
      */
     public void updateStars(SmartController controller) {
 
-        // Show the Window
-        Main.starWindow.show(stars.get(), controller.tableViewer);
+	// Show the Window
+	Main.starWindow.show(stars.get(), controller.tableViewer);
 
-        // Keep in memory stars ...
-        final double previousStars = stars.get();
-        stars.bind(Main.starWindow.starsProperty());
+	// Keep in memory stars ...
+	final double previousStars = stars.get();
+	stars.bind(Main.starWindow.starsProperty());
 
-        // Listener
-        Main.starWindow.window.showingProperty()
-            .addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable observable) {
+	// Listener
+	Main.starWindow.window.showingProperty().addListener(new InvalidationListener() {
+	    @Override
+	    public void invalidated(Observable observable) {
 
-                    // Remove the listener
-                    Main.starWindow.window.showingProperty()
-                        .removeListener(this);
+		// Remove the listener
+		Main.starWindow.window.showingProperty().removeListener(this);
 
-                    // !showing?
-                    if (!Main.starWindow.window.isShowing()) {
+		// !showing?
+		if (!Main.starWindow.window.isShowing()) {
 
-                        // unbind stars property
-                        stars.unbind();
+		    // unbind stars property
+		    stars.unbind();
 
-                        // Accepted?
-                        if (Main.starWindow.wasAccepted()) {
-                            try {
+		    // Accepted?
+		    if (Main.starWindow.wasAccepted()) {
+			try {
 
-                                controller.preparedUStars.setDouble(1, getStars());
-                                controller.preparedUStars.setString(2, getFilePath());
-                                controller.preparedUStars.executeUpdate();
-                                Main.dbManager.commit();
+			    controller.preparedUStars.setDouble(1, getStars());
+			    controller.preparedUStars.setString(2, getFilePath());
+			    controller.preparedUStars.executeUpdate();
+			    Main.dbManager.commit();
 
-                            } catch (Exception ex) {
-                                Main.logger.log(Level.WARNING, "", ex);
-                            }
-                        } else
-                            stars.set(previousStars);
-                    }
-                }
-            });
+			} catch (Exception ex) {
+			    Main.logger.log(Level.WARNING, "", ex);
+			}
+		    } else
+			stars.set(previousStars);
+		}
+	    }
+	});
     }
 
     // --------GETTERS------------------------------------------------------------------------------------
@@ -592,7 +602,7 @@ public abstract class Media {
      * @return the title
      */
     public String getTitle() {
-        return title.get();
+	return title.get();
     }
 
     /**
@@ -601,7 +611,7 @@ public abstract class Media {
      * @return the drive
      */
     public String getDrive() {
-        return drive.get();
+	return drive.get();
     }
 
     /**
@@ -610,7 +620,7 @@ public abstract class Media {
      * @return the file path
      */
     public String getFilePath() {
-        return filePath.get();
+	return filePath.get();
     }
 
     /**
@@ -619,7 +629,7 @@ public abstract class Media {
      * @return the file name
      */
     public String getFileName() {
-        return fileName.get();
+	return fileName.get();
     }
 
     /**
@@ -628,7 +638,7 @@ public abstract class Media {
      * @return the file type
      */
     public String getFileType() {
-        return fileType.get();
+	return fileType.get();
     }
 
     /**
@@ -637,7 +647,7 @@ public abstract class Media {
      * @return the duration
      */
     public int getDuration() {
-        return duration.get();
+	return duration.get();
     }
 
     /**
@@ -646,7 +656,7 @@ public abstract class Media {
      * @return the stars
      */
     public double getStars() {
-        return stars.get();
+	return stars.get();
     }
 
     /**
@@ -655,7 +665,7 @@ public abstract class Media {
      * @return the times played
      */
     public int getTimesPlayed() {
-        return timesPlayed.get();
+	return timesPlayed.get();
     }
 
     /**
@@ -664,7 +674,7 @@ public abstract class Media {
      * @return the hour imported
      */
     public String getHourImported() {
-        return hourImported.get();
+	return hourImported.get();
     }
 
     /**
@@ -673,7 +683,7 @@ public abstract class Media {
      * @return the date imported
      */
     public String getDateImported() {
-        return dateImported.get();
+	return dateImported.get();
     }
 
     /**
@@ -682,7 +692,7 @@ public abstract class Media {
      * @return The date that the File was created
      */
     public String getDateFileCreated() {
-        return dateFileCreated.get();
+	return dateFileCreated.get();
     }
 
     /**
@@ -691,7 +701,7 @@ public abstract class Media {
      * @return The date that the File was last modified
      */
     public String getDateFileModified() {
-        return dateFileModified.get();
+	return dateFileModified.get();
     }
 
     /**
@@ -700,7 +710,7 @@ public abstract class Media {
      * @return the genre
      */
     public Genre getGenre() {
-        return genre;
+	return genre;
     }
 
     // --------SETTERS------------------------------------------------------------------------------------
@@ -708,46 +718,50 @@ public abstract class Media {
     /**
      * Sets the file path.
      *
-     * @param path the new file path
+     * @param path
+     *            the new file path
      */
     private void setFilePath(String path) {
-        this.title.set(InfoTool.getFileTitle(path));
-        this.drive.set(path.substring(0, 1));
-        this.filePath.set(path);
-        this.fileName.set(InfoTool.getFileName(path));
-        this.fileType.set(InfoTool.getFileExtension(path));
+	this.title.set(InfoTool.getFileTitle(path));
+	this.drive.set(path.substring(0, 1));
+	this.filePath.set(path);
+	this.fileName.set(InfoTool.getFileName(path));
+	this.fileType.set(InfoTool.getFileExtension(path));
 
     }
 
     /**
      * Sets the duration.
      *
-     * @param duration the new duration
+     * @param duration
+     *            the new duration
      */
     public void setDuration(int duration) {
-        this.duration.set(duration);
+	this.duration.set(duration);
     }
 
     /**
      * Sets the times played.
      *
-     * @param timesPlayed the times played
-     * @param controller the controller
+     * @param timesPlayed
+     *            the times played
+     * @param controller
+     *            the controller
      */
     protected void setTimesPlayed(int timesPlayed, SmartController controller) {
-        this.timesPlayed.set(timesPlayed);
+	this.timesPlayed.set(timesPlayed);
 
-        // Update the dataBase
-        try {
+	// Update the dataBase
+	try {
 
-            controller.preparedUTimesPlayed.setInt(1, getTimesPlayed());
-            controller.preparedUTimesPlayed.setString(2, getFilePath());
-            controller.preparedUTimesPlayed.executeUpdate();
-            Main.dbManager.commit();
+	    controller.preparedUTimesPlayed.setInt(1, getTimesPlayed());
+	    controller.preparedUTimesPlayed.setString(2, getFilePath());
+	    controller.preparedUTimesPlayed.executeUpdate();
+	    Main.dbManager.commit();
 
-        } catch (Exception ex) {
-            Main.logger.log(Level.WARNING, "", ex);
-        }
+	} catch (Exception ex) {
+	    Main.logger.log(Level.WARNING, "", ex);
+	}
 
     }
 
@@ -755,12 +769,11 @@ public abstract class Media {
      * Sets the media played.
      */
     public void setMediaPlayed() {
-        // not initialize new Objects if not necessary
-        if (hasBeenPlayed.get() == null)
-            hasBeenPlayed.set(new ImageView(InfoTool.playedImage));
-        else
-            hasBeenPlayed.get()
-                .setImage(InfoTool.playedImage);
+	// not initialize new Objects if not necessary
+	if (hasBeenPlayed.get() == null)
+	    hasBeenPlayed.set(new ImageView(InfoTool.playedImage));
+	else
+	    hasBeenPlayed.get().setImage(InfoTool.playedImage);
 
     }
 
@@ -771,7 +784,8 @@ public abstract class Media {
      * This method is used during drag so the drag view has an image
      * representing the album image of the media.
      *
-     * @param db the new drag view
+     * @param db
+     *            the new drag view
      */
     public abstract void setDragView(Dragboard db);
 

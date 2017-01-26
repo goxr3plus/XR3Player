@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
+import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,12 +30,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -43,7 +43,6 @@ import librarymode.LibraryMode;
 import remote_communication.RemoteAppsController;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
-import smartcontroller.Operation;
 import smartcontroller.PlayedSongs;
 import smartcontroller.SmartSearcher.AdvancedSearch;
 import tools.ActionTool;
@@ -179,7 +178,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 41;
+    public final static int currentVersion = 42;
+    /**
+     * This application version release date
+     */
+    public final static String releaseDate = "26/01/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -193,7 +196,6 @@ public class Main extends Application {
 
 	try {
 	    logger.info("XR3Player Application Started");
-	    ActionTool.initInternalJavaFXElements();
 
 	    // rootStack
 	    stackPaneRoot.getChildren().addAll(root, sideBar, updateScreen);
@@ -295,26 +297,7 @@ public class Main extends Application {
 			new File(InfoTool.dbPath_With_Separator + "user" + File.separator + "dbFile.db-journal"));
 
 		// Go
-		new Thread(() -> {
-		    try {
-			// close + open connection
-			dbManager.commit();
-			dbManager.shutdownCommitExecutor();
-			dbManager.manageConnection(Operation.CLOSE);
-			dbManager.manageConnection(Operation.OPEN);
-
-			// vacuum
-			dbManager.connection1.createStatement().executeUpdate("VACUUM");
-
-			// close connection
-			dbManager.manageConnection(Operation.OPEN);
-
-			// exit
-			System.exit(0);
-		    } catch (SQLException ex) {
-			logger.log(Level.WARNING, "", ex);
-		    }
-		}).start();
+		dbManager.commitAndVacuum();
 	    } else
 		System.exit(0);
 	}
@@ -329,29 +312,32 @@ public class Main extends Application {
 	alert.initStyle(StageStyle.UTILITY);
 	alert.initOwner(window);
 
+	alert.setHeaderText("Terminate the application?");
 	alert.setContentText(
 		"Doing Vacuum you clear all the junks on the dataBase so:\n1)You release memory \n2)The application is going faster\nBut:\nThe bigger the dataBase the more time it will take!");
-	ButtonType justExit = new ButtonType("Exit");
-	ButtonType vAndExit = new ButtonType("Vacuum + Exit");
-	ButtonType cancel = new ButtonType("Cancel");
+	ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
+	ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
+	ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
 	// alert.getDialogPane()
 	// .getScene()
 	// .setFill(Color.TRANSPARENT);
-	// ((Button) alert.getDialogPane()
-	// .lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
-	alert.getButtonTypes().setAll(cancel, justExit, vAndExit);
 	// alert.getDialogPane()
 	// .getStylesheets()
 	// .add(Main.class.getResource(InfoTool.styLes +
 	// InfoTool.applicationCss)
+	// ((Button) alert.getDialogPane()
+	// .lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
+	alert.getButtonTypes().setAll(vacuum, exit, cancel);
+
 	// .toExternalForm());
 
 	alert.showAndWait().ifPresent(answer -> {
-	    if (answer == vAndExit)
-		terminate(true);
-	    else if (answer == justExit)
+	    if (answer == exit)
 		terminate(false);
+	    else if (answer == vacuum)
+		terminate(true);
+
 	});
     }
 
@@ -396,11 +382,11 @@ public class Main extends Application {
 		    if (askUser) {
 			Platform.runLater(() -> {
 			    Alert alert = new Alert(AlertType.CONFIRMATION);
-			    alert.getDialogPane().getScene().setFill(Color.TRANSPARENT);
+			    // alert.getDialogPane().getScene().setFill(Color.TRANSPARENT)
 
 			    alert.setContentText("Restart failed.... force shutdown?");
-			    ButtonType yes = new ButtonType("Yes");
-			    ButtonType cancel = new ButtonType("Cancel");
+			    ButtonType yes = new ButtonType("Yes", ButtonData.OK_DONE);
+			    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 			    ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
 
 			    alert.getButtonTypes().setAll(yes, cancel);
@@ -476,17 +462,17 @@ public class Main extends Application {
 			// Document doc = Jsoup.parse(new
 			// File("XR3PlayerUpdatePage.html"), "UTF-8",
 			// "http://example.com/");
-			
+
 			Element lastArticle = doc.getElementsByTag("article").last();
 
 			// Not disturb the user every time the application
 			// starts
-			if (Integer.valueOf(lastArticle.id()) == currentVersion && !showIfNotUpdateAvailable)
+			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showIfNotUpdateAvailable)
 			    return;
 
 			// Update is available or not?
 			Platform.runLater(() -> {
-			    Alert alert = new Alert(AlertType.CONFIRMATION);
+			    Alert alert = new Alert(AlertType.INFORMATION);
 			    alert.setTitle("Update Window");
 			    if (Integer.valueOf(lastArticle.id()) > currentVersion) {
 				alert.setHeaderText("New Update available!!!");
@@ -508,50 +494,55 @@ public class Main extends Application {
 			    textArea.setFocusTraversable(false);
 			    // textArea.setWrapText(true)
 
-			    textArea.setMinSize(500, 200);
-			    textArea.setMaxWidth(Double.MAX_VALUE);
-			    textArea.setMaxHeight(Double.MAX_VALUE);
-			    GridPane.setVgrow(textArea, Priority.ALWAYS);
-			    GridPane.setHgrow(textArea, Priority.ALWAYS);
+			    VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(textArea);
+			    vsPane.setMinSize(500, 200);
+			    vsPane.setMaxWidth(Double.MAX_VALUE);
+			    vsPane.setMaxHeight(Double.MAX_VALUE);
+			    GridPane.setVgrow(vsPane, Priority.ALWAYS);
+			    GridPane.setHgrow(vsPane, Priority.ALWAYS);
 
 			    GridPane expContent = new GridPane();
 			    expContent.setMaxWidth(Double.MAX_VALUE);
 			    expContent.setMaxHeight(Double.MAX_VALUE);
 			    // expContent.add(label, 0, 0)
-			    expContent.add(textArea, 0, 1);
+			    expContent.add(vsPane, 0, 0);
 
+			    String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
 			    doc.getElementsByTag("article").forEach(element -> {
 				String id = element.id();
 
 				// Append the text to the textArea
-				textArea.appendText("-------------Start of Update (" + id
+				textArea.appendText("\n\n-------------Start of Update (" + id
 					+ ")----------------------------------------------------------------------------------------------------\n");
 
 				// Information
 				textArea.appendText("->Information: ");
+				textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style);
 				textArea.appendText(element.getElementsByClass("about").text() + "\n");
+
+				// Release Date
+				textArea.appendText("->Release Date: ");
+				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style);
+				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
 
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
-				textArea.setStyle(textArea.getText().length() - 13, textArea.getText().length(),
-					"-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;");
-
+				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style);
 				counter = -1;
 				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*"))
 					.forEach(el -> {
 					    if (++counter >= 1)
-						textArea.appendText((counter) + ")" + el + "\n");
+						textArea.appendText("\t" + (counter) + ")" + el + "\n");
 					});
-
-				textArea.appendText("\n\n");
 
 			    });
 
-			    textArea.moveTo(20);
+			    textArea.moveTo(textArea.getLength());
+			    textArea.requestFollowCaret();
 
 			    // Set the default buttons
-			    ButtonType download = new ButtonType("Download");
-			    ButtonType cancel = new ButtonType("Cancel");
+			    ButtonType download = new ButtonType("Download", ButtonData.OK_DONE);
+			    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 			    alert.getButtonTypes().setAll(download, cancel);
 
 			    // Set expandable Exception into the dialog pane.
@@ -627,5 +618,6 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
 	launch(args);
+
     }
 }
