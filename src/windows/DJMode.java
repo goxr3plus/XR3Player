@@ -64,12 +64,12 @@ public class DJMode extends GridPane {
 	 */
 	@FXML
 	public void initialize() {
-		Main.xPlayersList.addXPlayerUI(new XPlayerController(400, 0, 1));
+		Main.xPlayersList.addXPlayerUI(new XPlayerController(1));
 		Main.xPlayersList.getXPlayerUI(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
 		Main.xPlayersList.getXPlayerUI(1).makeTheVisualizer(Side.LEFT);
 		add(Main.xPlayersList.getXPlayerUI(1), 0, 0);
 		
-		Main.xPlayersList.addXPlayerUI(new XPlayerController(400, 0, 2));
+		Main.xPlayersList.addXPlayerUI(new XPlayerController(2));
 		Main.xPlayersList.getXPlayerUI(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
 		Main.xPlayersList.getXPlayerUI(2).makeTheVisualizer(Side.RIGHT);
 		add(Main.xPlayersList.getXPlayerUI(2), 1, 0);

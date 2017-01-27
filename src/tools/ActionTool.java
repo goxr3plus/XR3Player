@@ -19,12 +19,16 @@ import java.util.logging.Level;
 import org.controlsfx.control.Notifications;
 
 import application.Main;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -245,6 +249,73 @@ public final class ActionTool {
 	alert.setGraphic(questionImage);
 	alert.setHeaderText("");
 	alert.setContentText(text);
+	alert.showAndWait().ifPresent(answer -> {
+	    if (answer == ButtonType.OK)
+		questionAnswer = true;
+	    else
+		questionAnswer = false;
+	});
+
+	return questionAnswer;
+    }
+
+    /**
+     * Makes a question to the user.
+     *
+     * @param text
+     *            the text
+     * @param node
+     *            The node owner of the Alert
+     * @return true, if successful
+     */
+    public static boolean doQuestion(String text, Node node) {
+	questionAnswer = false;
+
+	// Show Alert
+	Alert alert = new Alert(AlertType.CONFIRMATION);
+	alert.initStyle(StageStyle.UTILITY);
+	alert.setGraphic(questionImage);
+	alert.setHeaderText("");
+	alert.setContentText(text);
+	
+	// Make sure that JavaFX doesn't cut the text with ...
+	alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label)
+		.forEach(item -> ((Label) node).setMinHeight(Region.USE_PREF_SIZE));
+
+	// I noticed that height property is notified after width property
+	// that's why i choose to add the listener here
+	alert.heightProperty().addListener(l -> {
+
+	    // Width and Height of the Alert
+	    int alertWidth = (int) alert.getWidth();
+	    int alertHeight = (int) alert.getHeight();
+
+	    // Here it prints 0!!
+	    System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight);
+
+	    // Find the bounds of the node
+	    Bounds bounds = node.localToScreen(node.getBoundsInLocal());
+	    int x = (int) (bounds.getMinX() + bounds.getWidth() / 2 - alertWidth / 2);
+	    int y = (int) (bounds.getMinY() + bounds.getHeight() / 2 - alertHeight / 2);
+
+	    // Check if Alert goes out of the Screen on X Axis
+	    if (x + alertWidth > InfoTool.getVisualScreenWidth())
+		x = (int) (InfoTool.getVisualScreenWidth() - alertWidth);
+	    else if (x < 0)
+		x = 0;
+
+	    // Check if Alert goes out of the Screen on Y AXIS
+	    if (y + alertHeight > InfoTool.getVisualScreenHeight())
+		y = (int) (InfoTool.getVisualScreenHeight() - alertHeight);
+	    else if (y < 0)
+		y = 0;
+
+	    // Set the X and Y of the Alert
+	    alert.setX(x);
+	    alert.setY(y);
+	});
+
+	// Show the Alert
 	alert.showAndWait().ifPresent(answer -> {
 	    if (answer == ButtonType.OK)
 		questionAnswer = true;

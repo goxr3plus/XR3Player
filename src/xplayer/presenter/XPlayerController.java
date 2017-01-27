@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
@@ -218,17 +219,17 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /** The disc is dragging. */
     private boolean discIsDragging = false;
 
+    private static Image noSeek = InfoTool.getImageFromDocuments(
+	    ImageCursor.getBestSize(64, 64).getWidth() >= 64.00 ? "Private-64.png" : "Private-32.png");
+    private static ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
+
     /**
      * Constructor.
      *
-     * @param width
-     *            the width
-     * @param height
-     *            the height
      * @param key
-     *            the key
+     *            The key that is identifying this player
      */
-    public XPlayerController(int width, int height, int key) {
+    public XPlayerController(int key) {
 	this.key = key;
 
 	// ----------------------------------- FXMLLoader
@@ -282,7 +283,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	mediaFileMarquee.toBack();
 
 	// openMediaFileFolder
-	// openMediaFileFolder.visibleProperty().bind(mediaFileStackPane.hoverProperty());
+	// openMediaFileFolder.visibleProperty().bind(mediaFileStackPane.hoverProperty())
 	openMediaFileFolder.setOnAction(action -> ActionTool.openFileLocation(xPlayerModel.songPathProperty().get()));
 
 	// openFileButton
@@ -313,7 +314,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		// Ask Question?
 		if (xPlayer.isPausedOrPlaying() && xPlayerSettingsController.askSecurityQuestion.isSelected()) {
 		    if (ActionTool.doQuestion(
-			    "A song is already playing on this deck.\n Are you sure you want to replace it?"))
+			    "A song is already playing on this deck.\n Are you sure you want to replace it?",
+			    visualizerWindow.getStage().isShowing() ? visualizerWindow : XPlayerController.this))
 			playSong(absolutePath);
 		} else
 		    playSong(absolutePath);
@@ -557,24 +559,55 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	radialMenu.setBackgroundMouseOnColor(color);
 	disc.getChildren().add(radialMenu);
 
-	// Canvas Listeners
+	// Canvas Mouse Moving
+	disc.getCanvas().setOnMouseMoved(m -> {
+	    // File is either corrupted or error or no File entered yet
+	    if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1)
+		disc.getCanvas().setCursor(noSeekCursor);
+	    // !discIsDragging
+	    else if (!discIsDragging)
+		disc.getCanvas().setCursor(Cursor.OPEN_HAND);
+	});
+
+	// Canvas Mouse Released
 	disc.getCanvas().setOnMouseReleased(m -> {
-	    disc.getCanvas().setCursor(Cursor.OPEN_HAND);
-	    if (xPlayer.isPausedOrPlaying() && discIsDragging)
-		if (m.getButton() == MouseButton.PRIMARY && xPlayerModel.getDuration() != 0) {
+
+	    // PrimaryMouseButton
+	    if (m.getButton() == MouseButton.PRIMARY) {
+
+		// discIsDragging and MouseButton==Primary
+		// and duration!=0 and duration!=-1
+		if (discIsDragging && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
+
+		    // Try to seek
 		    seekService.startSeekService(xPlayerModel.getCurrentAngleTime()
 			    * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
-		} else if (m.getButton() == MouseButton.SECONDARY)
-		    seekService.startSeekService(0);
-	    // disc.exitVolumeDragging()
-	});
-	disc.getCanvas().setOnMouseDragged(m -> {
-	    if ((m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
-		    && !radialMenu.isShowing() && xPlayer.isPausedOrPlaying() && xPlayerModel.getDuration() != 0) {
-		discIsDragging = true;
-		xPlayerModel.setCurrentAngleTime(disc.getValue(xPlayerModel.getDuration()));
-		disc.calculateAngleByMouse(m, xPlayerModel.getCurrentAngleTime(), xPlayerModel.getDuration());
+
+		}
+
 	    }
+	});
+
+	// Canvas Mouse Dragging
+	disc.getCanvas().setOnMouseDragged(m -> {
+
+	    // MouseButton==Primary
+	    if (m.getButton() == MouseButton.PRIMARY)
+
+		// RadialMenu!showing and duration!=0 and duration!=-1
+		if (!radialMenu.isShowing() && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
+
+		    System.out.println("Entered Dragging...");
+
+		    // Set the cursor
+		    disc.getCanvas().setCursor(Cursor.CLOSED_HAND);
+
+		    // Try to do the dragging
+		    discIsDragging = true;
+		    xPlayerModel.setCurrentAngleTime(disc.getValue(xPlayerModel.getDuration()));
+		    disc.calculateAngleByMouse(m, xPlayerModel.getCurrentAngleTime(), xPlayerModel.getDuration());
+
+		}
 	});
 
 	diskStackPane.getChildren().add(disc);
@@ -638,6 +671,16 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    setOnSucceeded(s -> done());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javafx.concurrent.Service#start()
+	 */
+	@Override
+	public void start() {
+	    // nothing
+	}
+
 	/**
 	 * Start the Service.
 	 *
@@ -649,8 +692,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		this.bytes = bytes;
 		fxLabel.setText("Seeking...");
 		fxRegion.setVisible(true);
-		reset();
-		start();
+		super.reset();
+		super.start();
 	    }
 	}
 
@@ -658,8 +701,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * When the Service is done.
 	 */
 	private void done() {
+
 	    // Variable
 	    discIsDragging = false;
+
+	    // Set the Cursor
+	    disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 
 	    // Resume Rotation
 	    if (xPlayer.isPlaying() && !playService.isDiscImageNull())
@@ -680,7 +727,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		    boolean succeded = true;
 
 		    // GO
-		    if (bytes != 0 && xPlayer.isPausedOrPlaying()) {
+		    if (bytes != 0) {// && xPlayer.isPausedOrPlaying()) {
 			Main.logger.info("Seek Service Started..");
 
 			// CurrentTime
@@ -699,6 +746,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			    Main.logger.log(Level.WARNING, "", ex);
 			    succeded = false;
 			}
+		    }
+
+		    // If the player is just stopped...
+		    if (!xPlayer.isPausedOrPlaying()) {
+			System.out.println("Entered the Seek Thread [ if(!xPlayer.isPausedOrPlaying())]");
+			xPlayer.play();
 		    }
 
 		    return succeded;
@@ -813,6 +866,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			// retrieve the image
 			image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
 
+			// Finally seek settings
+			// if(canvas)
+			// canvas.set
+			// setOnMousePressed(m ->
+			// canvas.setCursor(Cursor.CLOSED_HAND));
+
 			updateMessage("Starting ...");
 		    } catch (Exception ex) {
 			Main.logger.log(Level.WARNING, "", ex);
@@ -890,10 +949,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    // xPlayerModel.songObjectProperty().set(null);
 	    // xPlayerModel.songPathProperty().set(null);
 	    // xPlayerModel.songExtensionProperty().set(null);
-	    xPlayerModel.setDuration(-1);
-	    xPlayerModel.setCurrentTime(-1);
-	    image = null;
-	    disc.replaceImage(null);
+	    // xPlayerModel.setDuration(-1);
+	    // xPlayerModel.setCurrentTime(-1);
+	    // image = null;
+	    // disc.replaceImage(null);
 
 	    done();
 	}
@@ -929,6 +988,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	    // unlock when is done
 	    locked = false;
+
+	    // Set Cursor
+	    if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1)
+		disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 	}
 
     }
@@ -958,7 +1021,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		float progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
 			? (nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f)
 			: -1.0f;
-		// System.out.println(progress*100+"%");
+		// System.out.println(progress*100+"%")
 		if (visualizerWindow.isVisible()) {
 		    Platform.runLater(() -> visualizerWindow.progressBar.setProgress(progress));
 		}
@@ -980,7 +1043,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	}
 
-	// System.out.println(xPlayer.currentTime);
+	// System.out.println(xPlayer.currentTime)
     }
 
     @Override

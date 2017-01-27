@@ -208,7 +208,7 @@ public class VisualizerWindowController extends StackPane {
 				: xPlayerUI.visualizer.displayMode.get() + 1);
 	    } else if (key.getCode() == KeyCode.LEFT) {
 		xPlayerUI.visualizer.displayMode
-			.set(xPlayerUI.visualizer.displayMode.get() - 1 > 0 ? xPlayerUI.visualizer.displayMode.get() - 1
+			.set(xPlayerUI.visualizer.displayMode.get() - 1 >= 0 ? xPlayerUI.visualizer.displayMode.get() - 1
 				: VisualizerModel.DISPLAYMODE_MAXIMUM);
 	    }
 	});

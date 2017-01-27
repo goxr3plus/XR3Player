@@ -115,7 +115,7 @@ public class DJDisc extends StackPane {
 
         // StackPane
         canvas.setCursor(Cursor.OPEN_HAND);
-        // setStyle("-fx-background-color:green;");
+        // setStyle("-fx-background-color:green;")
 
         this.arcColor = arcColor;
         canvas.setEffect(new DropShadow(10, Color.WHITE));
@@ -169,7 +169,7 @@ public class DJDisc extends StackPane {
         getChildren().addAll(canvas, imageView, noAlbumImageLabel, volumeLabel, timeField);
 
         // MouseListeners
-        canvas.setOnMousePressed(m -> canvas.setCursor(Cursor.CLOSED_HAND));
+        //canvas.setOnMousePressed(m -> canvas.setCursor(Cursor.CLOSED_HAND))
         canvas.setOnMouseDragged(this::onMouseDragged);
         setOnScroll(this::onScroll);
 
