@@ -196,7 +196,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     XPlayerEqualizer equalizer;
 
     /** The analyser box. */
-    // AnalyserBox analyserBox;
+    // AnalyserBox analyserBox  ;
 
     /** The disc. */
     public DJDisc disc;

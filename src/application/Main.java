@@ -178,11 +178,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 42;
+    public final static int currentVersion = 43;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "26/01/2017";
+    public final static String releaseDate = "28/01/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -455,9 +455,9 @@ public class Main extends Application {
 
 		    try {
 
-			Document doc = Jsoup.connect(
-				"https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
-				.get();
+			 Document doc = Jsoup.connect(
+			 "https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
+			 .get();
 
 			// Document doc = Jsoup.parse(new
 			// File("XR3PlayerUpdatePage.html"), "UTF-8",
@@ -524,6 +524,11 @@ public class Main extends Application {
 				textArea.appendText("->Release Date: ");
 				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style);
 				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
+
+				// Minimum JRE
+				textArea.appendText("->Minimum Java Version: ");
+				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style);
+				textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
 
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
