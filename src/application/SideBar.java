@@ -2,8 +2,6 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +16,6 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -34,7 +31,7 @@ import tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class SideBar extends BorderPane implements Initializable {
+public class SideBar extends BorderPane{
 
     /** The speech label. */
     @FXML
@@ -110,7 +107,7 @@ public class SideBar extends BorderPane implements Initializable {
      */
     public SideBar() {
 
-	// FXMLLOADER
+	// ------------------------------------FXMLLOADER
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SideBar.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
@@ -160,8 +157,8 @@ public class SideBar extends BorderPane implements Initializable {
 	}
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    private void initialize() {
 
 	// Translate Transition
 	tTrans = new TranslateTransition(Duration.millis(200), this);

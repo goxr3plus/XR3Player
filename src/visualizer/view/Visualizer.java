@@ -6,8 +6,6 @@ package visualizer.view;
 import disc.DJDisc;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.Cursor;
-import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import visualizer.model.VisualizerDrawer;
 
@@ -53,7 +51,7 @@ abstract class Visualizer extends VisualizerDrawer {
 	    halfCanvasHeight = canvasHeight >> 1;
 
 	    // Sierpinski
-	    sierpinskiRootHeight = canvasHeight;
+	    sierpinski.sierpinskiRootHeight = canvasHeight;
 
 	    // Compute the Color Scale
 	    computeColorScale();
@@ -188,7 +186,7 @@ abstract class Visualizer extends VisualizerDrawer {
 		drawSierpinski();
 		break;
 	    case 7:
-		drawJuliaFractals();
+		drawJuliaSet();
 		break;
 	    default:
 		break;

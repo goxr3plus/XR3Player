@@ -27,7 +27,7 @@ import streamplayer.StreamPlayer.Status;
 /**
  * The Class StreamPlayerEvent.
  *
- * @author GOXR3PLUS
+ * @author GOXR3PLUS (www.goxr3plus.co.nf)
  */
 public class StreamPlayerEvent {
 

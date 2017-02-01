@@ -3,12 +3,15 @@
  */
 package tools;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -19,6 +22,7 @@ import java.util.logging.Level;
 import org.controlsfx.control.Notifications;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
@@ -196,18 +200,49 @@ public final class ActionTool {
     }
 
     /**
+     * Tries to open that URI on the default browser
+     * 
+     * @param uri
+     * @return <b>True</b> if succeeded , <b>False</b> if not
+     */
+    public static boolean openWebSite(String uri) {
+	
+
+	// Open the Default Browser
+	if (Desktop.isDesktopSupported()) {
+	    Desktop desktop = Desktop.getDesktop();
+	    try {
+		desktop.browse(new URI(uri));
+	    } catch (IOException | URISyntaxException ex) {
+		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
+			"Can't open default web browser at:\n[ https://sourceforge.net/projects/xr3player/ ]",
+			Duration.millis(2500), NotificationType.INFORMATION));
+		ex.printStackTrace();
+		return false;
+	    }
+	    // Error?
+	} else {
+	    System.out.println("Error trying to open the default web browser.");
+	    return false;
+	}
+	return true;
+    }
+
+    /**
      * Show a notification.
      *
      * @param title
-     *            the title
+     *            The notification title
      * @param text
-     *            the text
+     *            The notification text
+     * @param duration
+     *            The duration that notification will be visible
      * @param type
-     *            the type
+     *            The notification type
      */
     public static void showNotification(String title, String text, Duration duration, NotificationType type) {
 	Notifications notification = Notifications.create().title(title).text(text);
-	notification.hideAfter(Duration.millis(1500));
+	notification.hideAfter(duration);
 
 	switch (type) {
 	case INFORMATION:
@@ -247,7 +282,7 @@ public final class ActionTool {
 	alert.initStyle(StageStyle.UTILITY);
 	alert.initOwner(Main.window);
 	alert.setGraphic(questionImage);
-	alert.setHeaderText("");
+	alert.setHeaderText("Question");
 	alert.setContentText(text);
 	alert.showAndWait().ifPresent(answer -> {
 	    if (answer == ButtonType.OK)
@@ -275,9 +310,9 @@ public final class ActionTool {
 	Alert alert = new Alert(AlertType.CONFIRMATION);
 	alert.initStyle(StageStyle.UTILITY);
 	alert.setGraphic(questionImage);
-	alert.setHeaderText("");
+	alert.setHeaderText("Question");
 	alert.setContentText(text);
-	
+
 	// Make sure that JavaFX doesn't cut the text with ...
 	alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label)
 		.forEach(item -> ((Label) node).setMinHeight(Region.USE_PREF_SIZE));

@@ -42,7 +42,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import smartcontroller.Genre;
 import smartcontroller.SmartController;
@@ -118,7 +117,7 @@ public class Library extends StackPane {
      * // create a rotation transform starting at 0 degrees, rotating about
      * pivot point 0, 0.
      */
-    Rotate rotationTransform = new Rotate(0, 0, 0);
+    // Rotate rotationTransform = new Rotate(0, 0, 0)
 
     /**
      * The Save Mode of the Library.
@@ -153,7 +152,7 @@ public class Library extends StackPane {
     PreparedStatement libUDescription;
 
     /** The lib U save mode. */
-    PreparedStatement libUSaveMode;
+    // PreparedStatement libUSaveMode;
 
     /** The lib U position. */
     PreparedStatement libUPosition;
@@ -404,8 +403,9 @@ public class Library extends StackPane {
 	    libUDescription = Main.dbManager.connection1
 		    .prepareStatement("UPDATE LIBRARIES SET DESCRIPTION=?" + " WHERE NAME=?;");
 
-	    libUSaveMode = Main.dbManager.connection1
-		    .prepareStatement("UPDATE LIBRARIES SET SAVEMODE=?  WHERE NAME=? ;");
+	    // libUSaveMode = Main.dbManager.connection1
+	    // .prepareStatement("UPDATE LIBRARIES SET SAVEMODE=? WHERE NAME=?
+	    // ;");
 
 	    libUPosition = Main.dbManager.connection1
 		    .prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;");
@@ -802,6 +802,7 @@ public class Library extends StackPane {
 
 		// Drop the database table
 		Main.dbManager.connection1.createStatement().execute("DROP TABLE '" + getDataBaseTableName() + "' ");
+
 		// Delete the row from Libraries table
 		Main.dbManager.connection1.createStatement()
 			.executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");

@@ -3,13 +3,10 @@
  */
 package application;
 
-import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +26,6 @@ import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
@@ -113,12 +109,16 @@ public class Main extends Application {
      */
     public static final ExportWindowController exportWindow = new ExportWindowController();
 
+    /**
+     * The About Window Controller
+     */
+    public static final AboutWindowController aboutWindow = new AboutWindowController();
+
     /** The window. */
-    // window,scene,root
     public static Stage window;
 
     /** The scene. */
-    public static BorderlessScene scene;
+    static BorderlessScene scene;
 
     /** The stack pane root. */
     private static final StackPane stackPaneRoot = new StackPane();
@@ -178,11 +178,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 43;
+    public final static int currentVersion = 44;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "28/01/2017";
+    public final static String releaseDate = "02/02/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -203,6 +203,8 @@ public class Main extends Application {
 
 	    // root
 	    root.setTop(topBar);
+	    topBar.visibleProperty()
+		    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
 
 	    // Window
 	    window = primaryStage;
@@ -225,8 +227,6 @@ public class Main extends Application {
 	    Main.window.setWidth(width);
 	    Main.window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
 	    Main.window.centerOnScreen();
-	    // window.setWidth(450)
-	    // window.setHeight(253)
 	    window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
 	    window.centerOnScreen();
 	    window.setOnCloseRequest(exit -> {
@@ -236,8 +236,7 @@ public class Main extends Application {
 
 	    // Root
 	    root.setStyle(
-		    "-fx-background-color:BLACK; -fx-background-color:rgb(0,0,0,0.9); -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-size:cover;");
-	    // root.setBottom(navigationBar)
+		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	    // Scene
 	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, stackPaneRoot, 650, 500);
@@ -256,7 +255,7 @@ public class Main extends Application {
 	    window.show();
 
 	    // throw new Exception("xd")
-	    // ScenicView.show(scene);
+	    // ScenicView.show(scene)
 
 	} catch (Exception ex) {
 	    ex.printStackTrace();
@@ -321,16 +320,14 @@ public class Main extends Application {
 
 	// alert.getDialogPane()
 	// .getScene()
-	// .setFill(Color.TRANSPARENT);
+	// .setFill(Color.TRANSPARENT)
 	// alert.getDialogPane()
 	// .getStylesheets()
 	// .add(Main.class.getResource(InfoTool.styLes +
 	// InfoTool.applicationCss)
 	// ((Button) alert.getDialogPane()
-	// .lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
+	// .lookupButton(ButtonType.CANCEL)).setDefaultButton(true)
 	alert.getButtonTypes().setAll(vacuum, exit, cancel);
-
-	// .toExternalForm());
 
 	alert.showAndWait().ifPresent(answer -> {
 	    if (answer == exit)
@@ -381,20 +378,8 @@ public class Main extends Application {
 		    // Ask the user
 		    if (askUser) {
 			Platform.runLater(() -> {
-			    Alert alert = new Alert(AlertType.CONFIRMATION);
-			    // alert.getDialogPane().getScene().setFill(Color.TRANSPARENT)
-
-			    alert.setContentText("Restart failed.... force shutdown?");
-			    ButtonType yes = new ButtonType("Yes", ButtonData.OK_DONE);
-			    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			    ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
-
-			    alert.getButtonTypes().setAll(yes, cancel);
-			    alert.initStyle(StageStyle.TRANSPARENT);
-			    alert.showAndWait().ifPresent(answer -> {
-				if (answer == yes)
-				    terminate(false);
-			    });
+			    if (ActionTool.doQuestion("Restart failed.... force shutdown?"))
+				terminate(false);
 			});
 		    } else {
 			// Terminate after showing the message for a while
@@ -449,15 +434,16 @@ public class Main extends Application {
 	// Not already running
 	if (updaterThread == null || !updaterThread.isAlive()) {
 	    updaterThread = new Thread(() -> {
-		System.out.println("Started update Thread");
+		Platform.runLater(() -> ActionTool.showNotification("Enstablishing Connection", "Trying to connect...",
+			Duration.millis(1000), NotificationType.INFORMATION));
 
 		if (InfoTool.isReachableByPing("www.google.com")) {
 
 		    try {
 
-			 Document doc = Jsoup.connect(
-			 "https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
-			 .get();
+			Document doc = Jsoup.connect(
+				"https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
+				.get();
 
 			// Document doc = Jsoup.parse(new
 			// File("XR3PlayerUpdatePage.html"), "UTF-8",
@@ -558,31 +544,16 @@ public class Main extends Application {
 			    textArea.requestFocus();
 			    // Show and Wait
 			    alert.showAndWait().ifPresent(answer -> {
-				if (answer == download) {
-				    // Open the Default Browser
-				    if (Desktop.isDesktopSupported()) {
-					Desktop desktop = Desktop.getDesktop();
-					try {
-					    desktop.browse(new URI("https://sourceforge.net/projects/xr3player/"));
-					} catch (URISyntaxException | IOException ex) {
-					    Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-						    "Can't open default web browser at:\n[ https://sourceforge.net/projects/xr3player/ ]",
-						    Duration.millis(2500), NotificationType.INFORMATION));
-					    ex.printStackTrace();
-					}
-					// Error?
-				    } else {
-					System.out.println("Error trying to open the default web browser.");
-				    }
-				}
+				if (answer == download)
+				    ActionTool.openWebSite("https://sourceforge.net/projects/xr3player/");
 			    });
 
 			});
 		    } catch (IOException ex) {
 			Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-				"Trying to fetch update information i had a problem.", Duration.millis(2500),
+				"Trying to fetch update information a problem occured", Duration.millis(2500),
 				NotificationType.WARNING));
-			ex.printStackTrace();
+			logger.log(Level.WARNING, "", ex);
 		    }
 
 		} else {

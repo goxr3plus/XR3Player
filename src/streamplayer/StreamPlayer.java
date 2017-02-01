@@ -66,6 +66,11 @@ import tools.NotificationType;
  * StreamPlayer is a class based on JavaSound API. It has been successfully
  * tested under JSE 1.8.x.
  */
+/**
+ * @author GOXR3PLUS (www.goxr3plus.co.nf)
+ * @author JavaZOOM (www.javazoom.net)
+ *
+ */
 public class StreamPlayer implements Runnable {
 
     /**
@@ -176,9 +181,6 @@ public class StreamPlayer implements Runnable {
     /** The empty map. */
     private Map<String, Object> emptyMap = new HashMap<>();
 
-    /** Properties when the File/URL/InputStream is opened. */
-    private Map<String, Object> audioProperties;
-
     /**
      * This executor service is used in order the playerState events to be
      * executed in an order
@@ -274,7 +276,7 @@ public class StreamPlayer implements Runnable {
      * Open the specific object which can be File,URL or InputStream.
      *
      * @param object
-     *            the object
+     *            the object [File or URL or InputStream ]
      * @throws StreamPlayerException
      *             the stream player exception
      */
@@ -321,6 +323,8 @@ public class StreamPlayer implements Runnable {
 
 	} catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
 	    logger.log(Level.INFO, ex.getMessage(), ex);
+	    // Comment the below line (i am using it into the application
+	    // with external libraries...)
 	    Platform.runLater(() -> ActionTool.showNotification("Warning", ex.getMessage(), Duration.millis(1500),
 		    NotificationType.WARNING));
 	    throw new StreamPlayerException(ex);
@@ -365,6 +369,9 @@ public class StreamPlayer implements Runnable {
 
 	logger.info("Entered determineProperties()!\n");
 
+	// Properties when the File/URL/InputStream is opened.
+	Map<String, Object> audioProperties;
+
 	// Add AudioFileFormat properties.
 	// Expect if it is null(something bad happened).
 	if (audioFileFormat != null) {
@@ -408,8 +415,11 @@ public class StreamPlayer implements Runnable {
 	    // Add SourceDataLine
 	    audioProperties.put("basicplayer.sourcedataline", sourceDataLine);
 
+	    // Keep this final reference for the lambda expression
+	    final Map<String, Object> audioPropertiesCopy = audioProperties;
+
 	    // Notify all registered StreamPlayerListeners
-	    listeners.forEach(listener -> listener.opened(dataSource, audioProperties));
+	    listeners.forEach(listener -> listener.opened(dataSource, audioPropertiesCopy));
 
 	    logger.info("Exited determineProperties()!\n");
 	}
@@ -763,7 +773,6 @@ public class StreamPlayer implements Runnable {
 		} else if (status == Status.PAUSED) { // Paused
 		    try {
 			while (status == Status.PAUSED) {
-			    System.out.println("StreamPlayer into sleep");
 			    Thread.sleep(200);
 			}
 		    } catch (InterruptedException ex) {
@@ -865,9 +874,11 @@ public class StreamPlayer implements Runnable {
 		nEncodedBytes = encodedAudioLength - encodedAudioInputStream.available();
 	    } catch (IOException ex) {
 		logger.log(Level.WARNING, "Cannot get m_encodedaudioInputStream.available()", ex);
+		stop();
+		// Comment the below line (i am using it into the application
+		// with external libraries...)
 		Platform.runLater(() -> ActionTool.showNotification("Error", ex.getMessage(), Duration.millis(1500),
 			NotificationType.WARNING));
-		stop();
 	    }
 	}
 	return nEncodedBytes;

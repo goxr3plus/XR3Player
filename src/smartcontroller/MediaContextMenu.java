@@ -78,10 +78,10 @@ public class MediaContextMenu extends ContextMenu {
 	MenuItem rename = new MenuItem("Rename(R)", InfoTool.getImageViewFromDocuments("rename.png"));
 	
 	/** The simple delete. */
-	MenuItem simpleDelete = new MenuItem("Delete(Delete)");
+	MenuItem simpleDelete = new MenuItem("Delete(Delete)",InfoTool.getImageViewFromDocuments("delete2.png"));
 	
 	/** The storage delete. */
-	MenuItem storageDelete = new MenuItem("Delete(Shift+Delete)");
+	MenuItem storageDelete = new MenuItem("Delete(Shift+Delete)",InfoTool.getImageViewFromDocuments("delete.png"));
 	
 	
 	/** The separator 1. */

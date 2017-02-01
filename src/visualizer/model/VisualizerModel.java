@@ -21,6 +21,9 @@ import javafx.scene.paint.Color;
  */
 public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalProcessor {
 
+    /** The Constant log. */
+    private static final Logger logger = Logger.getLogger(VisualizerModel.class.getName());
+
     /**
      * The width of the canvas
      */
@@ -34,14 +37,11 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      */
     public int halfCanvasHeight = 0;
 
-    /** The Constant log. */
-    private static final Logger log = Logger.getLogger(VisualizerModel.class.getName());
-
     /** The left. */
-    protected float[] left = new float[1024];
+    protected float[] pLeftChannel = new float[1024];
 
     /** The right. */
-    protected float[] right = new float[1024];
+    protected float[] pRightChannel = new float[1024];
 
     /** The frame rate ratio hint. */
     protected float frameRateRatioHint;
@@ -54,76 +54,6 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 
     /** The w fs. */
     protected float wFs;
-
-    /**
-     * Visualizer Display Mode.
-     *
-     * @author GOXR3PLUS
-     */
-    public enum DisplayMode {
-
-	/** OSCILLOSCOPE */
-	OSCILLOSCOPE {
-	    @Override
-	    public String toString() {
-		return "0";
-	    }
-	},
-
-	/** OSCILLOSCOPE */
-	STEREO_OSCILLOSCOPE {
-	    @Override
-	    public String toString() {
-		return "1";
-	    }
-	},
-
-	/** OSCILLOSCOPE */
-	OSCILLOSCOPE_LINES {
-	    @Override
-	    public String toString() {
-		return "2";
-	    }
-	},
-
-	/** The display spectrum analyser. */
-	SPECTRUM_BARS {
-	    @Override
-	    public String toString() {
-		return "3";
-	    }
-	},
-
-	/** The display vu meter. */
-	VOLUME_METER {
-	    @Override
-	    public String toString() {
-		return "4";
-	    }
-	},
-	/** The display rossete with polyspiral. */
-	ROSETTE {
-	    @Override
-	    public String toString() {
-		return "5";
-	    }
-	},
-	/** The display circular. */
-	SIERPINSKI {
-	    @Override
-	    public String toString() {
-		return "6";
-	    }
-	},
-
-	/** Display Sierpinski Triangles */
-	JULIAFRACTALS {
-	    @Override
-	    public String toString() {
-		return "7";
-	    }
-	}
-    }
 
     /**
      * The maximum that the display mode can reach
@@ -168,7 +98,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     protected Color scopeColor;
 
     /** The spectrum analyser colors. */
-    public static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
+    protected static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
 
     /** The dsp. */
     private KJDSPAudioDataConsumer dsp = null;
@@ -194,8 +124,8 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     /** The bar offset. */
     protected int barOffset = 1;
 
-    /** The fft. */
     // -- Spectrum analyzer variables.
+    /** The fft. */
     protected KJFFT fft;
 
     /** The old FFT. */
@@ -234,7 +164,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 
     /** The frames per second. */
     // -- FPS calculations.
-    public int framesPerSecond = 0;
+    protected int framesPerSecond = 0;
 
     /** The fps. */
     public int fps = DEFAULT_FPS;
@@ -270,17 +200,25 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * -----------------------------------------------------------------------
      */
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Called by the KJDigitalSignalProcessingAudioDataConsumer.
      * 
-     * @see dsp.KJDigitalSignalProcessor#process(float[], float[], float)
+     * @param pLeftChannel
+     *            Audio data for the left channel.
+     * @param pRightChannel
+     *            Audio data for the right channel.
+     * @param pFrameRateRatioHint
+     *            A float value representing the ratio of the current frame rate
+     *            to the desired frame rate. It is used to keep DSP animation
+     *            consistent if the frame rate drop below the desired frame
+     *            rate.
      */
     @Override
-    public synchronized void process(float[] pLeft, float[] pRight, float frameRateRatioHint) {
+    public synchronized void process(float[] pLeftChannel, float[] pRightChannel, float pFrameRateRatioHint) {
 
-	left = pLeft;
-	right = pRight;
-	this.frameRateRatioHint = frameRateRatioHint;
+	this.pLeftChannel = pLeftChannel;
+	this.pRightChannel = pRightChannel;
+	this.frameRateRatioHint = pFrameRateRatioHint;
     }
 
     /**
@@ -323,7 +261,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 
 	    dsp.start(sourceDataLine);
 	    dspHasStarted = true;
-	    log.info("DSP started");
+	    logger.info("DSP started");
 	}
     }
 
@@ -334,8 +272,8 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	if (dsp != null) {
 	    dsp.stop();
 	    dspHasStarted = false;
-	    log.setLevel(Level.INFO);
-	    log.info("DSP stopped");
+	    logger.setLevel(Level.INFO);
+	    logger.info("DSP stopped");
 	}
     }
 
@@ -346,7 +284,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	if (dsp != null) {
 	    stopDSP();
 	    dsp = null;
-	    log.info("DSP CLOSSED");
+	    logger.info("DSP CLOSSED");
 	}
     }
 
@@ -704,6 +642,141 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	    pLeft[a] = (pLeft[a] + pRight[a]) / 2.0f;
 
 	return pLeft;
+    }
+
+    /**
+     * Returns an array which has length<array length> and contains frequencies
+     * in every cell which has a value from 0.00 to 1.00.
+     *
+     * @param pSample
+     *            the sample
+     * @param arrayLength
+     *            the array length
+     * @return An array which has length<array length> and contains frequencies
+     *         in every cell which has a value from 0.00 to 1.00.
+     */
+    float[] returnBandsArray(float[] pSample, int arrayLength) {
+
+	wFFT = fft.calculate(pSample);
+	wSadfrr = saDecay * frameRateRatioHint;
+	wFs = 0;
+	float[] array = new float[arrayLength];
+	for (int a = 0, band = 0; band < array.length; a += saMultiplier, band++) {
+	    wFs = 0;
+
+	    // -- Average out nearest bands.
+	    for (int b = 0; b < saMultiplier; b++)
+		wFs += wFFT[a + b];
+
+	    // -- Log filter.
+	    wFs = (wFs = wFs * (float) Math.log(band + 2.00)) > 1.0f ? 1.0f : wFs;
+	    // wFs = (wFs > 1.0f) ? 1.0f : wFs
+
+	    // -- Compute SA decay...
+	    if (wFs >= (oldFFT[a] - wSadfrr))
+		oldFFT[a] = wFs;
+	    else {
+		oldFFT[a] -= wSadfrr;
+		if (oldFFT[a] < 0)
+		    oldFFT[a] = 0;
+
+		wFs = oldFFT[a];
+	    }
+
+	    array[band] = wFs;
+	}
+
+	return array;
+    }
+
+    /*-----------------------------------------------------------------------
+     * 
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * 
+     * 							GETTERS
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * -----------------------------------------------------------------------
+     */
+
+    /**
+     * Visualizer Display Mode.
+     *
+     * @author GOXR3PLUS
+     */
+    public enum DisplayMode {
+
+	/** OSCILLOSCOPE */
+	OSCILLOSCOPE {
+	    @Override
+	    public String toString() {
+		return "0";
+	    }
+	},
+
+	/** OSCILLOSCOPE */
+	STEREO_OSCILLOSCOPE {
+	    @Override
+	    public String toString() {
+		return "1";
+	    }
+	},
+
+	/** OSCILLOSCOPE */
+	OSCILLOSCOPE_LINES {
+	    @Override
+	    public String toString() {
+		return "2";
+	    }
+	},
+
+	/** The display spectrum analyzer. */
+	SPECTRUM_BARS {
+	    @Override
+	    public String toString() {
+		return "3";
+	    }
+	},
+
+	/** The display vu meter. */
+	VOLUME_METER {
+	    @Override
+	    public String toString() {
+		return "4";
+	    }
+	},
+	/** The display rosette with polyspiral. */
+	ROSETTE {
+	    @Override
+	    public String toString() {
+		return "5";
+	    }
+	},
+	/** The display circular. */
+	SIERPINSKI {
+	    @Override
+	    public String toString() {
+		return "6";
+	    }
+	},
+
+	/** Display Sierpinski Triangles */
+	JULIAFRACTALS {
+	    @Override
+	    public String toString() {
+		return "7";
+	    }
+	}
     }
 
 }

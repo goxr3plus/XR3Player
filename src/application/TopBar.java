@@ -23,7 +23,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.StageStyle;
+import tools.ActionTool;
 import tools.InfoTool;
 
 /**
@@ -33,45 +33,41 @@ import tools.InfoTool;
  */
 public class TopBar extends BorderPane {
 
-    /** The minimize. */
-    @FXML
-    private Button minimize;
-
-    /** The max or normalize. */
-    @FXML
-    private Button maxOrNormalize;
-
-    /** The close. */
-    @FXML
-    private Button close;
-
-    /** The label. */
-    @FXML
-    private Label xr3Label;
-
-    /** The show side bar. */
-    @FXML
-    private Button showSideBar;
-
-    /**
-     * Has inside a CPUsage object
-     */
-    @FXML
-    private StackPane cpuStackPane;
-
-    /** The go DJ mode. */
-    @FXML
-    private ToggleButton goDJMode;
-
-    /** The go libraries mode. */
     @FXML
     private ToggleButton goLibrariesMode;
+
+    @FXML
+    private ToggleButton goDJMode;
 
     @FXML
     private MenuItem checkForUpdates;
 
     @FXML
-    private MenuItem restartButton;
+    private MenuItem aboutSection;
+
+    @FXML
+    private MenuItem donation;
+
+    @FXML
+    private Button restartButton;
+
+    @FXML
+    private Button minimize;
+
+    @FXML
+    private Button maxOrNormalize;
+
+    @FXML
+    private Button close;
+
+    @FXML
+    private Button showSideBar;
+
+    @FXML
+    private StackPane cpuStackPane;
+
+    @FXML
+    private Label xr3Label;
 
     // ----------------------
 
@@ -117,15 +113,22 @@ public class TopBar extends BorderPane {
      */
     @FXML
     private void initialize() {
-	
-	//cpuStackPane
-	cpuStackPane.getChildren().add(0,cpUsage);
+
+	// cpuStackPane
+	cpuStackPane.getChildren().add(0, cpUsage);
 	cpUsage.startUpdater();
 
 	// showSideBar
 	showSideBar.setOnAction(a -> Main.sideBar.showBar());
 
+	// checkForUpdates
 	checkForUpdates.setOnAction(a -> Main.checkForUpdates(true));
+
+	// aboutSection
+	aboutSection.setOnAction(a -> Main.aboutWindow.showWindow());
+	
+	//donation
+	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
 	// restartButton
 	restartButton.setOnAction(a -> {
@@ -133,8 +136,8 @@ public class TopBar extends BorderPane {
 	    alert.initOwner(Main.window);
 
 	    alert.setContentText("Soore you want to restart the application?");
-	    ButtonType yes = new ButtonType("Yes",ButtonData.OK_DONE);
-	    ButtonType cancel = new ButtonType("Cancel",ButtonData.CANCEL_CLOSE);
+	    ButtonType yes = new ButtonType("Yes", ButtonData.OK_DONE);
+	    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 	    ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
 
 	    alert.getButtonTypes().setAll(yes, cancel);

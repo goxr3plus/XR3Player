@@ -30,7 +30,7 @@ import streamplayer.StreamPlayer.Status;
 /**
  * The Class StreamPlayerEventLauncher.
  *
- * @author GOXR3PLUS STUDIO
+ * @author GOXR3PLUS (www.goxr3plus.co.nf)
  */
 public class StreamPlayerEventLauncher implements Callable<String> {
 

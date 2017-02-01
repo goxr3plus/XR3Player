@@ -29,12 +29,11 @@ import java.io.PrintWriter;
 /**
  * Special exceptions of StreamPlayer.
  *
- * @author http://www.javazoom.net + GOXR3PLUS STUDIO
+ * @author GOXR3PLUS (www.goxr3plus.co.nf)
+ * @author http://www.javazoom.net
  */
+@SuppressWarnings("serial")
 public class StreamPlayerException extends Exception {
-
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
 
     /**
      * Type of exception.
@@ -66,7 +65,7 @@ public class StreamPlayerException extends Exception {
      * Constructor.
      *
      * @param paramString
-     *            the param string
+     *            String Parameter
      */
     public StreamPlayerException(PlayerException paramString) {
 	super(paramString.toString());

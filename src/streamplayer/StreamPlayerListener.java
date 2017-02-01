@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * Used to notify for events that are happening on StreamPlayer.
  *
- * @author GOXR3PLUS
+ * @author GOXR3PLUS (www.goxr3plus.co.nf)
  */
 public interface StreamPlayerListener {
 	

@@ -14,7 +14,7 @@
       <Label fx:id="charsField" alignment="CENTER" prefHeight="45.0" prefWidth="64.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: white;" text="200" HBox.hgrow="ALWAYS" />
       <Button fx:id="okButton" minHeight="25.0" minWidth="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="45.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="OK">
          <tooltip>
-            <Tooltip text="Save" />
+            <Tooltip text="Save+Close" />
          </tooltip>
          <HBox.margin>
             <Insets left="5.0" right="5.0" />

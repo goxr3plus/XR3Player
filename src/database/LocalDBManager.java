@@ -104,8 +104,9 @@ public class LocalDBManager {
 
 	try {
 
+	    //!!! Not needed in Java8 !!!!
 	    // load the sqlite-JDBC driver using the current class loader
-	    Class.forName("org.sqlite.JDBC");
+	    // Class.forName("org.sqlite.JDBC")
 
 	    // database folder
 	    if (!new File(InfoTool.dbPath_Plain).exists())
@@ -132,7 +133,7 @@ public class LocalDBManager {
 	    if (!data1Exist)
 		recreateDataBase();
 
-	} catch (SQLException | ClassNotFoundException ex) {
+	} catch (SQLException ex) {
 	    Main.logger.log(Level.SEVERE, "", ex);
 	}
     }
@@ -276,15 +277,31 @@ public class LocalDBManager {
 
 	    // if succeeded
 	    setOnSucceeded(s -> {
-		Main.updateScreen.progressBar.progressProperty().unbind();
-		Main.root.setCenter(Main.libraryMode);
-		Main.libraryMode.add(Main.multipleTabs, 0, 1);
-		Main.updateScreen.setVisible(false);
 
-		// Check for updates on start
+		// Do the animation with rectangles
+		Main.updateScreen.closeUpdateScreen();
+
+		// Wait until the animation is finished and then fix the layout
 		new Thread(() -> {
-		    if (InfoTool.isReachableByPing("www.google.com"))
-			Main.checkForUpdates(false);
+		    try {
+			Thread.sleep(1000);
+		    } catch (InterruptedException ex) {
+			ex.printStackTrace();
+		    }
+
+		    // JavaFX Thread
+		    Platform.runLater(() -> {
+			Main.libraryMode.add(Main.multipleTabs, 0, 1);
+			Main.root.setCenter(Main.libraryMode);
+			Main.updateScreen.setVisible(false);
+			Main.updateScreen.progressBar.progressProperty().unbind();
+
+			// Check for updates on start
+			new Thread(() -> {
+			    if (InfoTool.isReachableByPing("www.google.com"))
+				Main.checkForUpdates(false);
+			}).start();
+		    });
 		}).start();
 	    });
 
@@ -310,7 +327,7 @@ public class LocalDBManager {
 				    .executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
 
 			total = dbCounter.getInt(1);
-			Main.logger.info("Uploading libraries....");
+			Main.logger.info("Loading libraries....");
 
 			// Refresh the text
 			Platform.runLater(() -> Main.updateScreen.label.setText("Uploading Libraries..."));

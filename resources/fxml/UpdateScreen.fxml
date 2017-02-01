@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 
-<fx:root prefHeight="239.0" prefWidth="626.0" style="-fx-background-color: black;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="579.0" prefWidth="650.0" style="-fx-background-color: rgb(255,255,255,0.2);" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <cursor>
       <Cursor fx:constant="WAIT" />
    </cursor>
    <children>
-      <Region maxHeight="120.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(255,255,255,0.8);" StackPane.alignment="CENTER" />
-      <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" height="117.0" stroke="BLACK" strokeType="INSIDE" width="343.0" StackPane.alignment="CENTER">
+      <Label id="updateScreenButtonLabel" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="Created by -&gt;GoXR3Plus Studio" StackPane.alignment="BOTTOM_RIGHT" />
+      <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" height="165.0" stroke="BLACK" strokeType="INSIDE" width="385.0" StackPane.alignment="CENTER">
          <fill>
-            <RadialGradient centerX="0.5222222222222223" centerY="0.5" cycleMethod="REFLECT" radius="0.5">
+            <RadialGradient centerX="0.5222222222222223" centerY="0.5476190476190476" cycleMethod="REFLECT" focusAngle="84.81" focusDistance="-0.4883720930232558" radius="0.18604651162790697">
                <stops>
                   <Stop color="#00acff" />
-                  <Stop color="BLACK" offset="1.0" />
+                  <Stop color="#00ff7369" offset="1.0" />
                </stops>
             </RadialGradient>
-         </fill></Rectangle>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
+         </fill>
+      </Rectangle>
+      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff68" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
+      <Rectangle fx:id="rightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff69" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_RIGHT" />
+      <VBox alignment="CENTER" spacing="10.0" StackPane.alignment="CENTER">
          <children>
-            <JFXProgressBar fx:id="progressBar" />
-            <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-size: 22; -fx-text-fill: white;" text="....Loading...." textAlignment="CENTER" />
+            <ProgressBar fx:id="progressBar" prefHeight="0.0" prefWidth="354.0" />
+            <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="385.0" style="-fx-font-weight: bold; -fx-font-size: 22; -fx-text-fill: white; -fx-background-color: rgb(0,0,0,0.75);" text="....Loading...." textAlignment="CENTER" />
          </children>
       </VBox>
-      <Label id="updateScreenButtonLabel" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="Created by -&gt;GoXR3Plus Studio" StackPane.alignment="BOTTOM_RIGHT" />
    </children>
 </fx:root>
