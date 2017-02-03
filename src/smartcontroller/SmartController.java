@@ -4,11 +4,7 @@
 package smartcontroller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -1386,6 +1382,8 @@ public class SmartController extends StackPane {
 
 	/**
 	 * Copying process
+	 * 
+	 * @param directories
 	 */
 	public void startCopy(List<File> directories) {
 	    if (!isRunning() && isFree(true)) {
@@ -1397,6 +1395,8 @@ public class SmartController extends StackPane {
 
 	/**
 	 * Moving process
+	 * 
+	 * @param directories
 	 */
 	public void startMoving(List<File> directories) {
 	    if (!isRunning() && isFree(true)) {
@@ -1498,53 +1498,10 @@ public class SmartController extends StackPane {
 			return;
 
 		    if (operation == Operation.COPY)
-			copy(filePath, destinationFolder + File.separator + media.getFileName());
+			ActionTool.copy(filePath, destinationFolder + File.separator + media.getFileName());
 		    else
-			move(filePath, destinationFolder + File.separator + media.getFileName());
+			ActionTool.move(filePath, destinationFolder + File.separator + media.getFileName());
 		}
-
-		/**
-		 * Copy a file from source to destination
-		 *
-		 * @param source
-		 * @param destination
-		 */
-		public void copy(String source, String destination) {
-
-		    // Use bytes stream to support all file types
-		    try (InputStream in = new FileInputStream(source);
-			    OutputStream out = new FileOutputStream(destination)) {
-
-			byte[] buffer = new byte[1024];
-
-			int length;
-
-			// copy the file content in bytes
-			while ((length = in.read(buffer)) > 0)
-			    out.write(buffer, 0, length);
-
-		    } catch (Exception ex) {
-			ex.printStackTrace();
-		    }
-
-		    System.out.println("Copying ->" + filePath + "\n\tto ->" + destinationFolder);
-
-		}
-
-		/**
-		 * Moves a file from source to destination
-		 *
-		 * @param source
-		 * @param destination
-		 * @return
-		 */
-		public boolean move(String source, String destination) {
-		    copy(source, destination);
-		    boolean b = new File(source).delete();
-		    System.out.println("Moving [" + b + "] ->" + filePath + "\n\tto ->" + destinationFolder);
-		    return b;
-		}
-
 	    };
 	}
     }

@@ -183,7 +183,7 @@ public class SideBar extends BorderPane{
 			Main.dbManager.manageConnection(Operation.CLOSE);
 
 			// Delete the previous database
-			ActionTool.deleteFile(new File(InfoTool.dbPath_With_Separator.replace(File.separator, "")));
+			ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
 
 			// Change the Scene View
 			Main.updateScreen.setVisible(true);
@@ -214,7 +214,7 @@ public class SideBar extends BorderPane{
 
 		    // Export the database
 		    Main.dbManager.zipper.exportDataBase(file.getParent() + File.separator + "XR3DataBase.zip",
-			    new File(InfoTool.dbPath_Plain).getAbsolutePath());
+			    InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
 		}
 	    }
 	});
@@ -229,7 +229,7 @@ public class SideBar extends BorderPane{
 		Main.dbManager.manageConnection(Operation.CLOSE);
 
 		// Clear the Previous database manager
-		ActionTool.deleteFile(new File(InfoTool.dbPath_Plain));
+		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
 
 		// Show Update Screen
 		Main.updateScreen.setVisible(true);

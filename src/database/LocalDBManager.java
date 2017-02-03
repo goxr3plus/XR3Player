@@ -48,10 +48,16 @@ public class LocalDBManager {
 
     /** The db file. */
     // -Constructor-
-    private String dbFile;
+    private String dbFileAbsolutePath;
 
-    /** The images folder. */
-    public String imagesFolder;
+    /** The images folder relative path */
+    private String imagesFolderRelativePath;
+
+    /** The images folder absolute path */
+    public String imagesFolderAbsolutePath;
+
+    /** The name of the logged in user */
+    public String userName;
 
     /** This executor does the commit job. */
     private static final ExecutorService commitExecutor = Executors.newSingleThreadExecutor();
@@ -104,30 +110,36 @@ public class LocalDBManager {
 
 	try {
 
-	    //!!! Not needed in Java8 !!!!
+	    // !!! Not needed in Java8 !!!!
 	    // load the sqlite-JDBC driver using the current class loader
 	    // Class.forName("org.sqlite.JDBC")
 
+	    // the userName
+	    this.userName = userName;
+
 	    // database folder
-	    if (!new File(InfoTool.dbPath_Plain).exists())
-		new File(InfoTool.dbPath_Plain).mkdir();
+	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists())
+		new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
 
 	    // user folder
-	    if (!new File(InfoTool.dbPath_With_Separator + userName).exists())
-		new File(InfoTool.dbPath_With_Separator + userName).mkdir();
-	    InfoTool.user_dbPath_With_Separator = InfoTool.dbPath_With_Separator + userName + File.separator;
+	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName).exists())
+		new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName).mkdir();
 
 	    // images folder
-	    imagesFolder = InfoTool.dbPath_With_Separator + userName + File.separator + "Images";
-	    if (!new File(imagesFolder).exists())
-		new File(imagesFolder).mkdir();
+	    imagesFolderRelativePath = InfoTool.DATABASE_FOLDER_NAME_WITH_SEPARATOR + userName + File.separator
+		    + "Images";
+	    imagesFolderAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
+		    + imagesFolderRelativePath;
+	    if (!new File(imagesFolderAbsolutePath).exists())
+		new File(imagesFolderAbsolutePath).mkdir();
 
 	    // database file(.db)
-	    dbFile = InfoTool.dbPath_With_Separator + userName + File.separator + "dbFile.db";
-	    boolean data1Exist = new File(dbFile).exists();
+	    dbFileAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator
+		    + "dbFile.db";
+	    boolean data1Exist = new File(dbFileAbsolutePath).exists();
 
 	    // connection1
-	    connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+	    connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 	    connection1.setAutoCommit(false);
 
 	    if (!data1Exist)
@@ -148,7 +160,7 @@ public class LocalDBManager {
 	try {
 	    // OPEN
 	    if (action == Operation.OPEN && connection1.isClosed())
-		connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+		connection1 = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 	    // CLOSE
 	    else if (action == Operation.CLOSE && !connection1.isClosed())
 		connection1.close();
@@ -220,9 +232,9 @@ public class LocalDBManager {
 		    + "POSITION      INT     NOT NULL," + "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
 
 	    // -----------Radio Stations Table ------------//
-	    statement.executeUpdate("CREATE TABLE '" + InfoTool.radioStationsTable + "'(NAME TEXT PRIMARY KEY NOT NULL,"
-		    + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL," + "DESCRIPTION TEXT,"
-		    + "STARS DOUBLE NOT NULL)");
+	    statement.executeUpdate("CREATE TABLE '" + InfoTool.RADIO_STATIONS_DATABASE_TABLE_NAME
+		    + "'(NAME TEXT PRIMARY KEY NOT NULL," + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL,"
+		    + "DESCRIPTION TEXT," + "STARS DOUBLE NOT NULL)");
 
 	    // ----------XPlayers PlayLists Table ----------//
 	    for (int i = 0; i < 3; i++)

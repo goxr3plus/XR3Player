@@ -5,11 +5,7 @@ package tools;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -18,7 +14,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.Random;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.Notifications;
 
 import application.Main;
@@ -45,6 +43,9 @@ import javafx.util.Duration;
  * @author GOXR3PLUS
  */
 public final class ActionTool {
+
+    /** The logger for this class */
+    private static final Logger logger = Logger.getLogger(ActionTool.class.getName());
 
     /** The random. */
     static Random random = new Random();
@@ -80,7 +81,7 @@ public final class ActionTool {
 	    try {
 		Runtime.getRuntime().exec("explorer.exe /select," + path);
 	    } catch (IOException ex) {
-		Main.logger.log(Level.WARNING, ex.getMessage(), ex);
+		logger.log(Level.WARNING, ex.getMessage(), ex);
 		showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500),
 			NotificationType.WARNING);
 	    }
@@ -99,25 +100,21 @@ public final class ActionTool {
      *            the source
      * @param destination
      *            the destination
+     * @return True if succeeded , False if not
      */
-    public static void copy(String source, String destination) {
+    public static boolean copy(String source, String destination) {
+	boolean succeess = true;
 
-	// Use bytes stream to support all file types
-	try (InputStream in = new FileInputStream(source); OutputStream out = new FileOutputStream(destination)) {
+	System.out.println("Copying ->" + source + "\n\tto ->" + destination);
 
-	    byte[] buffer = new byte[1024];
-
-	    int length;
-
-	    // copy the file content in bytes
-	    while ((length = in.read(buffer)) > 0)
-		out.write(buffer, 0, length);
-
-	} catch (Exception ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	try {
+	    Files.copy(Paths.get(source), Paths.get(destination));
+	} catch (IOException ex) {
+	    logger.log(Level.WARNING, "", ex);
+	    succeess = false;
 	}
 
-	// System.out.println("Copying ->" + source + "\n\tto ->" + destination)
+	return succeess;
 
     }
 
@@ -126,41 +123,43 @@ public final class ActionTool {
      *
      * @param source
      *            the source
-     * @param dest
+     * @param destination
      *            the dest
      * @return true, if successful
      */
-    public static boolean move(String source, String dest) {
-	copy(source, dest);
-	return new File(source).delete();
+    public static boolean move(String source, String destination) {
+	boolean succeess = true;
+
+	System.out.println("Moving ->" + source + "\n\tto ->" + destination);
+
+	try {
+	    Files.move(Paths.get(source), Paths.get(destination));
+	} catch (IOException ex) {
+	    logger.log(Level.WARNING, "", ex);
+	    succeess = false;
+	}
+
+	return succeess;
     }
 
     /**
      * Deletes Directory of File.
      *
-     * @param src
-     *            the src
+     * @param source
+     *            The File to be deleted | either if it is directory or File
      * @return true, if successful
      */
-    public static boolean deleteFile(File src) {
+    public static boolean deleteFile(File source) {
 
-	if (src.isDirectory()) { // Directory
-	    File[] list = src.listFiles();
-	    if (list != null) { // If !returns null
-		for (File subFile : list)
-		    if (subFile != null)
-			deleteFile(subFile);
-
-		if (!src.delete()) {
-		    Notifications.create().title("Error")
-			    .text("Can't delete file:\n(" + src.getName() + ") cause is in use by a program.")
-			    .darkStyle().showWarning();
-		    return false;
-		}
+	if (source.isDirectory()) { // Directory
+	    try {
+		FileUtils.deleteDirectory(source);
+	    } catch (IOException ex) {
+		logger.log(Level.INFO, "", ex);
 	    }
-	} else if (src.isFile() && !src.delete()) { // File
+	} else if (source.isFile() && !source.delete()) { // File
 	    Notifications.create().title("Error")
-		    .text("Can't delete file:\n(" + src.getName() + ") cause is in use by a program.").darkStyle()
+		    .text("Can't delete file:\n(" + source.getName() + ") cause is in use by a program.").darkStyle()
 		    .showWarning();
 	    return false;
 	}
@@ -193,7 +192,7 @@ public final class ActionTool {
 	try {
 	    return Files.readAttributes(Paths.get(path), BasicFileAttributes.class).creationTime();
 	} catch (IOException ex) {
-	    Main.logger.log(Level.INFO, "", ex);
+	    logger.log(Level.INFO, "", ex);
 	}
 
 	return null;
@@ -206,7 +205,6 @@ public final class ActionTool {
      * @return <b>True</b> if succeeded , <b>False</b> if not
      */
     public static boolean openWebSite(String uri) {
-	
 
 	// Open the Default Browser
 	if (Desktop.isDesktopSupported()) {
@@ -217,7 +215,7 @@ public final class ActionTool {
 		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
 			"Can't open default web browser at:\n[ https://sourceforge.net/projects/xr3player/ ]",
 			Duration.millis(2500), NotificationType.INFORMATION));
-		ex.printStackTrace();
+		logger.log(Level.INFO, "", ex);
 		return false;
 	    }
 	    // Error?

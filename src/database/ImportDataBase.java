@@ -32,7 +32,7 @@ public class ImportDataBase extends Service<Boolean> {
 	String inputZip;
 	
 	/** The out put folder. */
-	String outPutFolder = InfoTool.dbPath_Plain;
+	String outPutFolder = InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN;
 	
 	/** The zip. */
 	ZipFile zip;

@@ -64,23 +64,49 @@ public final class InfoTool {
     /** The Constant fxmls. */
     public static final String fxmls = "/fxml/";
 
-    /** The Constant dbPath_With_Separator. */
-    public static final String dbPath_With_Separator = "XR3DataBase" + File.separator;
+    // ----------------Important-----------------------------
 
-    /** The Constant dbPath_Plain. */
-    public static final String dbPath_Plain = "XR3DataBase";
+    /** Database folder name <b>with out</b> separator */
+    public static final String DATABASE_FOLDER_NAME = "XR3DataBase";
 
-    /** The user db path with separator. */
-    public static String user_dbPath_With_Separator;
+    /** Database folder name with separator */
+    public static final String DATABASE_FOLDER_NAME_WITH_SEPARATOR = DATABASE_FOLDER_NAME + File.separator;
+
+    // --------
+
+    /**
+     * The current absolute path to the database <b>PARENT</b> folder with
+     * separator[example:C:/Users/]
+     */
+    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR = InfoTool
+	    .getBasePathForClass(InfoTool.class);
+
+    /**
+     * The current absolute path to the database <b>PARENT</b> folder without
+     * separator[example:C:/Users]
+     */
+    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
+	    .substring(0, ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR.length() - 1);
+
+    // --------
+
+    /** The absolute path to the database folder<b>with out</b> separator */
+    public static final String ABSOLUTE_DATABASE_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
+	    + DATABASE_FOLDER_NAME;
+
+    /** The absolute database path with separator */
+    public static final String ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR = ABSOLUTE_DATABASE_PATH_PLAIN + File.separator;
+
+    // --------------------------------------------------------------------------------------------------------------
 
     /** The Constant radioStationsTable. */
-    public static final String radioStationsTable = "RADIOSTATIONS";
+    public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 
     /** The Constant playedImage. */
     public static final Image playedImage = getImageFromDocuments("played.png");
 
     /** The contains. */
-    private static boolean contains;
+    // private static boolean contains
 
     /**
      * Instantiates a new info tool.
@@ -138,8 +164,8 @@ public final class InfoTool {
      * class file is.
      * 
      * @param classs
-     * @return The absolute path of the current directory in which the class
-     *         file is.
+     *            * @return The absolute path of the current directory in which
+     *            the class file is. <b>[it ends with File.Separator!!]</b>
      * @author GOXR3PLUS[StackOverFlow user] + bachden [StackOverFlow user]
      */
     public static final String getBasePathForClass(Class<?> classs) {
@@ -623,32 +649,32 @@ public final class InfoTool {
 	return "error";
     }
 
-    /**
-     * Checks if the list contains at least one accepted file.
-     *
-     * @param list
-     *            the list
-     * @return true, if successful
-     */
-    @Deprecated
-    private static boolean containsAcceptedFiles(List<File> list) {
-	contains = false;
-	for (File file : list) {
-	    try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
-		paths.forEach(path -> {
-		    if (Files.isRegularFile(path))
-			if (isAudioSupported(path.toString())) {
-			    contains = true;
-			    System.out.println(path.toString());
-			    paths.close();
-			}
-		});
-	    } catch (Exception ex) {
-		ex.printStackTrace();
-	    }
-	}
-
-	return contains;
-    }
+    // /**
+    // * Checks if the list contains at least one accepted file.
+    // *
+    // * @param list
+    // * the list
+    // * @return true, if successful
+    // */
+    // @Deprecated
+    // private static boolean containsAcceptedFiles(List<File> list) {
+    // contains = false;
+    // for (File file : list) {
+    // try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
+    // paths.forEach(path -> {
+    // if (Files.isRegularFile(path))
+    // if (isAudioSupported(path.toString())) {
+    // contains = true;
+    // System.out.println(path.toString());
+    // paths.close();
+    // }
+    // });
+    // } catch (Exception ex) {
+    // ex.printStackTrace();
+    // }
+    // }
+    //
+    // return contains;
+    // }
 
 }

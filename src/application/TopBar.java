@@ -180,6 +180,7 @@ public class TopBar extends BorderPane {
 	goLibrariesMode.setOnMouseReleased(mouse -> {
 	    if (windowMode != WindowMode.LIBRARYMODE && mouse.getButton() == MouseButton.PRIMARY) {
 
+		Main.djMode.updateDividerArray();
 		Main.libraryMode.add(Main.multipleTabs, 0, 1);
 		Main.root.setCenter(Main.libraryMode);
 

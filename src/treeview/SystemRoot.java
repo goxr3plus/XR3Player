@@ -9,6 +9,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.logging.Level;
 
+import javax.swing.filechooser.FileSystemView;
+
 import application.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,57 +22,65 @@ import tools.InfoTool;
  * @author GOXR3PLUS
  */
 public class SystemRoot {
-	
-	/** The Constant folderImage. */
-	public static final Image folderImage = new Image(
-	        SystemFileItem.class.getResourceAsStream(InfoTool.images + "folder.png"));
-	
-	/** The Constant openedFolderImage. */
-	public static final Image openedFolderImage = new Image(
-	        SystemFileItem.class.getResourceAsStream(InfoTool.images + "openedFolder.png"));
-	
-	/** The Constant fileImage. */
-	public static final Image fileImage = new Image(
-	        SystemFileItem.class.getResourceAsStream(InfoTool.images + "file.png"));
-	
-	/** The host name. */
-	String hostName = "computer";
-	
-	/** The root. */
-	SystemFileItem root;
-	
-	/** The root directories. */
-	Iterable<Path> rootDirectories;
-	
-	/**
-	 * Constructor.
-	 */
-	public SystemRoot() {
-		
-		// setup the file browser root
-		try {
-			hostName = InetAddress.getLocalHost().getHostName();
-		} catch (UnknownHostException ex) {
-			Main.logger.log(Level.WARNING, "", ex);
-		}
-		root = new SystemFileItem(hostName);
-		root.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(InfoTool.images + "computer.png"))));
-		
-		SystemFileItem userHome = new SystemFileItem(System.getProperty("user.home"));
-		root.getChildren().add(userHome);
-		rootDirectories = FileSystems.getDefault().getRootDirectories();
-		for (Path name : rootDirectories) {
-			SystemFileItem treeNode = new SystemFileItem(name.toString());
-			root.getChildren().add(treeNode);
-		}
-		
-		root.setExpanded(true);
+
+    /** The Constant folderImage. */
+    public static final Image closedFolderImage = new Image(
+	    TreeItemFile.class.getResourceAsStream(InfoTool.images + "folder.png"));
+
+    /** The Constant openedFolderImage. */
+    public static final Image openedFolderImage = new Image(
+	    TreeItemFile.class.getResourceAsStream(InfoTool.images + "openedFolder.png"));
+
+    /** The Constant fileImage. */
+    public static final Image fileImage = new Image(
+	    TreeItemFile.class.getResourceAsStream(InfoTool.images + "file.png"));
+
+    /** The host name. */
+    String hostName = "computer";
+
+    /** The root. */
+    TreeItemFile root;
+
+    /** The root directories. */
+    Iterable<Path> rootDirectories;
+
+    /**
+     * Constructor.
+     */
+    public SystemRoot() {
+
+	// setup the file browser root
+	try {
+	    hostName = InetAddress.getLocalHost().getHostName();
+	} catch (UnknownHostException ex) {
+	    Main.logger.log(Level.WARNING, "", ex);
 	}
-	
-	/**
-	 * @return The root item of the FileSystem
-	 */
-	public SystemFileItem getRoot() {
-		return root;
+	root = new TreeItemFile(hostName);
+	root.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(InfoTool.images + "computer.png"))));
+
+	// Add the user directory
+	TreeItemFile userHome = new TreeItemFile(System.getProperty("user.home"));
+	root.getChildren().add(userHome);
+
+	// Add the user desktop
+	FileSystemView filesys = FileSystemView.getFileSystemView();
+	TreeItemFile dekstop = new TreeItemFile(filesys.getHomeDirectory().getAbsolutePath());
+	root.getChildren().add(dekstop);
+
+	// Add the root directories
+	rootDirectories = FileSystems.getDefault().getRootDirectories();
+	for (Path name : rootDirectories) {
+	    TreeItemFile treeNode = new TreeItemFile(name.toString());
+	    root.getChildren().add(treeNode);
 	}
+
+	root.setExpanded(true);
+    }
+
+    /**
+     * @return The root item of the FileSystem
+     */
+    public TreeItemFile getRoot() {
+	return root;
+    }
 }

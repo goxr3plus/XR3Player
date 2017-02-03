@@ -10,12 +10,12 @@ import javafx.concurrent.Task;
 import tools.InfoTool;
 
 /**
- * Get the progress of Vacuum Operation.
+ * Get the progress of Copy Operation.
  * 
  * @author GOXR3PLUS
  *
  */
-public class VacuumProgress extends Service<Void> {
+public class CopyProgress extends Service<Void> {
 
     /** The basic file. */
     File basicFile;
@@ -44,7 +44,7 @@ public class VacuumProgress extends Service<Void> {
 	    @Override
 	    protected Void call() throws Exception {
 
-		updateMessage("Hold on(Vacuum running)...");
+		updateMessage("Hold on(Service is running)...");
 
 		long bfL = basicFile.length();
 		long jfL;
@@ -74,7 +74,6 @@ public class VacuumProgress extends Service<Void> {
 		// Update Message
 		updateMessage("Terminating..");
 
-		// System.out.println("Exited Vacuum Progress Service")
 		return null;
 	    }
 

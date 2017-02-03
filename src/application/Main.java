@@ -178,11 +178,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 44;
+    public final static int currentVersion = 45;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "02/02/2017";
+    public final static String releaseDate = "03/02/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -292,8 +292,8 @@ public class Main extends Application {
 		updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
 		updateScreen.setVisible(true);
 
-		vService.start(new File(InfoTool.dbPath_With_Separator + "user" + File.separator + "dbFile.db"),
-			new File(InfoTool.dbPath_With_Separator + "user" + File.separator + "dbFile.db-journal"));
+		vService.start(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db"),
+			new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db-journal"));
 
 		// Go
 		dbManager.commitAndVacuum();

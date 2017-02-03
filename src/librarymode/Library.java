@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
 
@@ -15,6 +16,7 @@ import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXCheckBox;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
@@ -25,20 +27,16 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -55,6 +53,9 @@ import tools.NotificationType;
  * @author GOXR3PLUS
  */
 public class Library extends StackPane {
+
+    /** The logger for this class */
+    private static final Logger logger = Logger.getLogger(Library.class.getName());
 
     /** The image view. */
     @FXML
@@ -78,18 +79,28 @@ public class Library extends StackPane {
     @FXML
     private Label nameField;
 
-    /** The selection region. */
     @FXML
-    private Region selectionRegion;
+    private StackPane progressBarStackPane;
 
-    /** The selection box. */
     @FXML
-    private JFXCheckBox selectionBox;
+    private ProgressBar progressBar;
+
+    @FXML
+    private Label progressBarLabel;
+
+    @FXML
+    private StackPane selectionModeStackPane;
+
+    @FXML
+    private JFXCheckBox selectionModeCheckBox;
 
     // --------------------------------------------
 
+    // private final CopyProgress copyService = new CopyProgress()
+
+    // -------------------------------------------
+
     /** The controller. */
-    // -------------------------
     private final SmartController controller;
 
     /** The library name. */
@@ -140,10 +151,10 @@ public class Library extends StackPane {
     private SaveMode saveMode;
 
     /** The position. */
-    private int position = -89;
+    private int position = -1;
 
-    /** The image path. */
-    private String imagePath;
+    /** The name of the database image [Example : image.jpg ] */
+    private String imageName;
 
     /** * Prepared Statements *. */
     PreparedStatement libUStars;
@@ -152,7 +163,7 @@ public class Library extends StackPane {
     PreparedStatement libUDescription;
 
     /** The lib U save mode. */
-    // PreparedStatement libUSaveMode;
+    // PreparedStatement libUSaveMode
 
     /** The lib U position. */
     PreparedStatement libUPosition;
@@ -222,17 +233,19 @@ public class Library extends StackPane {
 			    libURename.executeUpdate();
 
 			    // Rename library folder
-			    new File(InfoTool.user_dbPath_With_Separator + oldName)
-				    .renameTo(new File(InfoTool.user_dbPath_With_Separator + newName));
+			    // new File(InfoTool.ab + oldName)
+			    // .renameTo(new
+			    // File(InfoTool.user_dbPath_With_Separator +
+			    // newName))
 
 			    // set the new name
 			    setLibraryName(newName);
 			    nameField.getTooltip().setText(newName);
 
 			    // Rename the image of library
-			    if (imagePath != null)
-				updateImagePathInDB(Main.dbManager.imagesFolder + File.separator + newName + "."
-					+ InfoTool.getFileExtension(imagePath), true, false);
+			    if (imageName != null)
+				updateImagePathInDB(Main.dbManager.imagesFolderAbsolutePath + File.separator + newName
+					+ "." + InfoTool.getFileExtension(getAbsoluteImagePath()), true, false);
 
 			} else { // duplicate
 			    resetTheName();
@@ -244,7 +257,7 @@ public class Library extends StackPane {
 			resetTheName();
 
 		} catch (Exception ex) {
-		    Main.logger.log(Level.WARNING, "", ex);
+		    logger.log(Level.WARNING, "", ex);
 		    // etc
 		    resetTheName();
 		} finally {
@@ -294,14 +307,14 @@ public class Library extends StackPane {
      * @param saveMode
      *            the save mode
      * @param position
-     *            the position
-     * @param imagePath
-     *            the image path
+     *            The library position inside
+     * @param imageName
+     *            The image name [example: image.jpg ]
      * @param opened
      *            the opened
      */
     public Library(String libraryName, String dataBaseTableName, double stars, String dateCreated, String timeCreated,
-	    String description, int saveMode, int position, String imagePath, boolean opened) {
+	    String description, int saveMode, int position, String imageName, boolean opened) {
 
 	// LibraryName
 	this.libraryName = libraryName;
@@ -338,7 +351,7 @@ public class Library extends StackPane {
 	this.position = position;
 
 	// LibraryImage
-	this.imagePath = imagePath;
+	this.imageName = imageName;
 
 	// isOpened
 	this.opened.set(opened);
@@ -392,7 +405,7 @@ public class Library extends StackPane {
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
 
 	try {
@@ -418,7 +431,7 @@ public class Library extends StackPane {
 	    libURename = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET NAME=? WHERE NAME=? ;");
 
 	} catch (SQLException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	} /********************/
     }
 
@@ -486,43 +499,54 @@ public class Library extends StackPane {
 		updateStars(starsProperty().get() - 0.5);
 	});
 
-	// selectionRegion
-	selectionBox.visibleProperty().bind(selectionRegion.visibleProperty());
-	selectedProperty().bind(selectionBox.selectedProperty());
+	// progressBarStackPane
+	progressBarStackPane.setVisible(false);
+	progressBar.setProgress(-1);
+	// progressBar.progressProperty().bind(copyService.progressProperty());
+	// progressBarLabel.textProperty()
+	// .bind(Bindings.max(0,
+	// progressBar.progressProperty()).multiply(100.00).asString("%.02f
+	// %%"));
 
-	Label error = new Label();
-	error.setOnDragDetected(drag -> {
+	// selectionModeStackPane
+	selectedProperty().bind(selectionModeCheckBox.selectedProperty());
 
-	    // Main.libraryMode.dragDetected=true;
-
-	    /* Allow copy transfer mode */
-	    Dragboard db = startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
-
-	    /* Put a String into the dragBoard */
-	    ClipboardContent content = new ClipboardContent();
-	    content.putString("#library#" + getLibraryName());
-
-	    /* Set the DragView */
-	    WritableImage writableImage = new WritableImage((int) nameField.getWidth(), (int) nameField.getHeight());
-	    SnapshotParameters params = new SnapshotParameters();
-	    // params.setFill(Color.TRANSPARENT);
-	    params.setFill(Color.WHITE);
-	    db.setDragView(nameField.snapshot(params, writableImage), writableImage.getWidth() / 2, 0);
-
-	    db.setContent(content);
-	    drag.consume();
-
-	});
-
-	error.setOnDragOver(drag -> {
-	    // Main.libraryMode.dragDetected=false;
-
-	    Dragboard db = drag.getDragboard();
-	    if (db.hasString() && db.getString().contains("#library#"))
-		drag.acceptTransferModes(TransferMode.COPY);
-
-	    drag.consume();
-	});
+	// Label error = new Label();
+	// error.setOnDragDetected(drag -> {
+	//
+	// // Main.libraryMode.dragDetected=true
+	//
+	// /* Allow copy transfer mode */
+	// Dragboard db = startDragAndDrop(TransferMode.COPY,
+	// TransferMode.LINK);
+	//
+	// /* Put a String into the dragBoard */
+	// ClipboardContent content = new ClipboardContent();
+	// content.putString("#library#" + getLibraryName());
+	//
+	// /* Set the DragView */
+	// WritableImage writableImage = new WritableImage((int)
+	// nameField.getWidth(), (int) nameField.getHeight());
+	// SnapshotParameters params = new SnapshotParameters();
+	// // params.setFill(Color.TRANSPARENT)
+	// params.setFill(Color.WHITE);
+	// db.setDragView(nameField.snapshot(params, writableImage),
+	// writableImage.getWidth() / 2, 0);
+	//
+	// db.setContent(content);
+	// drag.consume();
+	//
+	// });
+	//
+	// error.setOnDragOver(drag -> {
+	// // Main.libraryMode.dragDetected=false
+	//
+	// Dragboard db = drag.getDragboard();
+	// if (db.hasString() && db.getString().contains("#library#"))
+	// drag.acceptTransferModes(TransferMode.COPY);
+	//
+	// drag.consume();
+	// });
 
     }
 
@@ -533,10 +557,7 @@ public class Library extends StackPane {
      *            the way
      */
     public void goOnSelectionMode(boolean way) {
-	if (way)
-	    selectionRegion.setVisible(true);
-	else
-	    selectionRegion.setVisible(false);
+	selectionModeStackPane.setVisible(way);
     }
 
     /**
@@ -556,7 +577,7 @@ public class Library extends StackPane {
 		Main.dbManager.commit();
 	    }
 	} catch (SQLException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
     }
 
@@ -573,7 +594,7 @@ public class Library extends StackPane {
 	    Main.dbManager.commit();
 
 	} catch (SQLException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
     }
 
@@ -600,46 +621,54 @@ public class Library extends StackPane {
 	    libUPosition.setString(2, getLibraryName());
 	    libUPosition.executeUpdate();
 	} catch (SQLException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
     }
 
     /**
      * Updates the Image File.
      *
-     * @param newPath
-     *            the new path
+     * @param absolutePath
+     *            The absolute path of the new image to the file system
      * @param renameUpdate
-     *            the rename update
+     *            Is this a rename update ?
      * @param commit
-     *            the commit
+     *            If true commit to database
      */
-    private boolean updateImagePathInDB(String newPath, boolean renameUpdate, boolean commit) {
+    private boolean updateImagePathInDB(String absolutePath, boolean renameUpdate, boolean commit) {
 	boolean success = true;
 
 	try {
 
-	    if (renameUpdate && imagePath != null) { // rename the old image
+	    // rename the old image file
+	    if (renameUpdate && imageName != null) {
 
-		success = new File(imagePath).renameTo(new File(newPath));
-		imagePath = newPath;
+		// Do the rename procedure
+		success = new File(getAbsoluteImagePath()).renameTo(new File(absolutePath));
+
+		// Change the image name
+		imageName = InfoTool.getFileName(absolutePath);
 
 	    } else { // Create new Image
 
 		// Delete the [[old]] image if exist
-		if (imagePath != null)
-		    success = new File(imagePath).delete();
+		if (imageName != null && !new File(getAbsoluteImagePath()).delete())
+		    logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
 
 		// Create the new image
-		imagePath = Main.dbManager.imagesFolder + File.separator + getLibraryName() + "."
-			+ InfoTool.getFileExtension(newPath);
+		String newImageName = Main.dbManager.imagesFolderAbsolutePath + File.separator + getLibraryName() + "."
+			+ InfoTool.getFileExtension(absolutePath);
 
-		ActionTool.copy(newPath, imagePath);
+		// Change the image name
+		imageName = InfoTool.getFileName(newImageName);
 
+		// Do the copy procedure
+		if (!ActionTool.copy(absolutePath, newImageName))
+		    logger.log(Level.WARNING, "Failed to create image for LibraryName=[" + getLibraryName() + "]");
 	    }
 
 	    // SQLITE
-	    libUImage.setString(1, imagePath);
+	    libUImage.setString(1, imageName);
 	    libUImage.setString(2, getLibraryName());
 	    libUImage.executeUpdate();
 	    if (commit)
@@ -647,7 +676,7 @@ public class Library extends StackPane {
 
 	} catch (SQLException ex) {
 	    success = false;
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
 
 	return success;
@@ -660,22 +689,28 @@ public class Library extends StackPane {
 
 	try {
 
-	    // Delete the old image if exist
-	    if (imagePath != null)
-		new File(imagePath).delete();
-	    imagePath = null;
+	    // Ask if user is sure...
+	    if (ActionTool.doQuestion("Reset to default the image of this library?", this)) {
 
-	    // Set the default
-	    imageView.setImage(getImage());
+		// Delete the [[old]] image if exist
+		if (imageName != null && !new File(getAbsoluteImagePath()).delete())
+		    logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
 
-	    // SQLITE
-	    libUImage.setString(1, imagePath);
-	    libUImage.setString(2, getLibraryName());
-	    libUImage.executeUpdate();
-	    Main.dbManager.commit();
+		// Set to null
+		imageName = null;
+
+		// Set the default
+		imageView.setImage(getImage());
+
+		// SQLITE
+		libUImage.setString(1, imageName);
+		libUImage.setString(2, getLibraryName());
+		libUImage.executeUpdate();
+		Main.dbManager.commit();
+	    }
 
 	} catch (Exception ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
     }
 
@@ -702,10 +737,23 @@ public class Library extends StackPane {
      * Export the Library image.
      */
     public void exportImage() {
-	if (imagePath != null) {
-	    File file = Main.specialChooser.prepareToExportImage(Main.window, imagePath);
-	    if (file != null)
-		new Thread(() -> ActionTool.copy(imagePath, file.getAbsolutePath())).start();
+	if (imageName != null) {
+	    File file = Main.specialChooser.prepareToExportImage(Main.window, imageName);
+	    if (file != null) {
+		progressBarStackPane.setVisible(true);
+		progressBarLabel.setText("Exporting image...");
+
+		// Start a new Thread to copy the File
+		new Thread(() -> {
+		    // Check if copy succeeded
+		    if (!ActionTool.copy(getAbsoluteImagePath(), file.getAbsolutePath()))
+			Platform.runLater(() -> ActionTool.showNotification("Exporting Library Image",
+				"Failed to export library image for \nLibrary=[" + getLibraryName() + "]",
+				Duration.millis(2500), NotificationType.SIMPLE));
+
+		    Platform.runLater(() -> progressBarStackPane.setVisible(false));
+		}).start();
+	    }
 	}
     }
 
@@ -808,11 +856,11 @@ public class Library extends StackPane {
 			.executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");
 
 		// Delete the folder with library name in database
-		ActionTool.deleteFile(new File(InfoTool.dbPath_With_Separator + getLibraryName()));
+		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + getLibraryName()));
 
 		// delete library image
-		if (imagePath != null)
-		    new File(imagePath).delete();
+		if (imageName != null && !new File(getAbsoluteImagePath()).delete())
+		    logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
 
 		// opened? Yes=remove the tab
 		if (isLibraryOpened())
@@ -829,7 +877,7 @@ public class Library extends StackPane {
 		Main.dbManager.commit();
 
 	    } catch (SQLException sql) {
-		Main.logger.log(Level.WARNING, "\n", sql);
+		logger.log(Level.WARNING, "\n", sql);
 	    }
 
 	}
@@ -1040,14 +1088,14 @@ public class Library extends StackPane {
      * @return The image of the Library
      */
     public Image getImage() {
-	if (imagePath != null) {
-	    if (new File(imagePath).exists()) {
+	if (imageName != null) {
+	    if (new File(getAbsoluteImagePath()).exists()) {
 
 		// Hide warning Label
 		warningLabel.setVisible(false);
 
 		// return the image
-		return new Image(new File(imagePath).toURI().toString());
+		return new Image(new File(getAbsoluteImagePath()).toURI().toString());
 
 	    } else {
 
@@ -1084,12 +1132,17 @@ public class Library extends StackPane {
     }
 
     /**
-     * Gets the image path.
+     * Returns the absolute path of the Library Image in the operating system
      *
      * @return The absolute path of the Library Image in the operating system
      */
-    public String getImagePath() {
-	return imagePath;
+    public String getAbsoluteImagePath() {
+
+	// If an image exists
+	if (imageName != null)
+	    return Main.dbManager.imagesFolderAbsolutePath + File.separator + imageName;
+
+	return null;
     }
 
     /**
