@@ -58,7 +58,7 @@ public class VacuumProgress extends Service<Void> {
 		    Thread.sleep(50);
 
 		// creating process...
-		while ((jfL = journalFile.length()) <= bfL) {
+		while ((jfL = journalFile.length()) < bfL) {
 
 		    // Update Message
 		    updateMessage("Before:" + InfoTool.getFileSizeEdited(basicFile) + "  After:"
