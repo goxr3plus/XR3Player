@@ -70,7 +70,7 @@ public class LocalDBManager {
 	    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
 	} finally {
 	    Platform.runLater(
-		    Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(800))::show);
+		    Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(100))::show);
 	}
 
     };

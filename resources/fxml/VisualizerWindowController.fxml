@@ -16,10 +16,18 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.media.MediaView?>
 
-<fx:root prefHeight="0.0" prefWidth="379.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="visualizerPane" style="-fx-background-color: transparent;" />
+      <BorderPane fx:id="visualizerPane" style="-fx-background-color: transparent;">
+         <center>
+            <StackPane fx:id="centerStackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <MediaView fx:id="mediaView" />
+               </children>
+            </StackPane>
+         </center></BorderPane>
       <BorderPane fx:id="topBar" maxHeight="35.0" minHeight="35.0" style="-fx-background-color: rgb(255,255,255,0.85);" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />

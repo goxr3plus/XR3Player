@@ -49,7 +49,7 @@
 		<JFXBadge fx:id="ratingLabel" maxHeight="20.0" maxWidth="60.0" style="-fx-background-color: rgb(255,255,255,0.8);" styleClass="icons-badge" text="0.5" StackPane.alignment="TOP_LEFT">
 			<Icon awesomeIcon="STAR" size="2em" style=";" styleClass="icon" />
 		</JFXBadge>
-      <StackPane fx:id="progressBarStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: rgb(255,255,255,0.75);">
+      <StackPane fx:id="progressBarStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
          <children>
             <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
             <Label fx:id="progressBarLabel" style="-fx-font-weight: bold;" text="la" />

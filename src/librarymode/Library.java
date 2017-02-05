@@ -470,7 +470,7 @@ public class Library extends StackPane {
 	rect.setEffect(new Reflection());
 
 	// StackPane -> this
-	this.setClip(rect);
+	//this.setClip(rect);
 	Reflection reflection = new Reflection();
 	reflection.setInput(new DropShadow(4, Color.WHITE));
 	this.setEffect(reflection);

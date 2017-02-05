@@ -29,6 +29,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -47,8 +50,8 @@ import xplayer.presenter.XPlayerController;
 public class VisualizerWindowController extends StackPane {
 
     /** The visualizer pane. */
-    @FXML
-    private BorderPane visualizerPane;
+    // @FXML
+    // private BorderPane visualizerPane;
 
     /** The top bar. */
     @FXML
@@ -65,15 +68,9 @@ public class VisualizerWindowController extends StackPane {
     @FXML
     private MenuButton menuPopButton;
 
-    /**
-     * 
-     */
     @FXML
     public ContextMenu visualizerContextMenu;
 
-    /**
-     * 
-     */
     @FXML
     public ToggleGroup visualizerTypeGroup;
 
@@ -99,11 +96,11 @@ public class VisualizerWindowController extends StackPane {
     @FXML
     public ProgressBar progressBar;
 
-    // @FXML
-    // private Label progressLabel;
+    @FXML
+    private StackPane centerStackPane;
 
-    // @FXML
-    // private ToggleButton onTop;
+    @FXML
+    private MediaView mediaView;
 
     // ------------------------------------
 
@@ -207,8 +204,8 @@ public class VisualizerWindowController extends StackPane {
 			.set((xPlayerUI.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
 				: xPlayerUI.visualizer.displayMode.get() + 1);
 	    } else if (key.getCode() == KeyCode.LEFT) {
-		xPlayerUI.visualizer.displayMode
-			.set(xPlayerUI.visualizer.displayMode.get() - 1 >= 0 ? xPlayerUI.visualizer.displayMode.get() - 1
+		xPlayerUI.visualizer.displayMode.set(
+			xPlayerUI.visualizer.displayMode.get() - 1 >= 0 ? xPlayerUI.visualizer.displayMode.get() - 1
 				: VisualizerModel.DISPLAYMODE_MAXIMUM);
 	    }
 	});
@@ -244,6 +241,23 @@ public class VisualizerWindowController extends StackPane {
 		xPlayerUI.visualizer.setCursor(Cursor.NONE);
 	    }
 	});
+
+	/** The media. */
+	Media media = new Media(new File("C:\\Users\\GOXR3PLUS\\Desktop\\vid.mp4").toURI().toString());
+
+	/** The video player. */
+	MediaPlayer videoPlayer = new MediaPlayer(media);
+
+	mediaView.setMediaPlayer(videoPlayer);
+	mediaView.fitHeightProperty().bind(super.widthProperty());
+	mediaView.fitHeightProperty().bind(super.heightProperty());
+	mediaView.setSmooth(true);
+
+//	if (xPlayerUI.getKey() == 0) {
+//	    videoPlayer.setMute(true);
+//	    videoPlayer.setAutoPlay(true);
+//	    videoPlayer.setCycleCount(Integer.MAX_VALUE);
+//	}
 
     }
 
@@ -343,7 +357,8 @@ public class VisualizerWindowController extends StackPane {
 	setForeground.setOnAction(a -> changeImage(Type.foreground));
 
 	// Add the visualizer
-	visualizerPane.setCenter(xPlayerUI.visualizerStackController);
+	// visualizerPane.setCenter(xPlayerUI.visualizerStackController);
+	centerStackPane.getChildren().add(1, xPlayerUI.visualizerStackController);
 
 	// show the window
 	window.show();

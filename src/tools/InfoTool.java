@@ -8,15 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -305,15 +301,19 @@ public final class InfoTool {
      * @return The File Creation Date in String Format
      */
     public static String getFileCreationDate(String filePath) {
-	Path path = Paths.get(filePath);
-	BasicFileAttributes attr;
-	try {
-	    attr = Files.readAttributes(path, BasicFileAttributes.class);
-	} catch (IOException ex) {
-	    ex.printStackTrace();
-	    return "error";
+	File file = new File(filePath);
+	// exists?
+	if (file.exists()) {
+	    BasicFileAttributes attr;
+	    try {
+		attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+	    } catch (IOException ex) {
+		ex.printStackTrace();
+		return "error";
+	    }
+	    return attr.creationTime().toString().replaceAll("T|Z", " ");
 	}
-	return attr.creationTime().toString().replaceAll("T|Z", " ");
+	return "file not exists";
     }
 
     /**
@@ -329,15 +329,21 @@ public final class InfoTool {
      * @return The File Creation Date in String Format
      */
     public static String getFileLastModifiedDate(String filePath) {
-	Path path = Paths.get(filePath);
-	BasicFileAttributes attr;
-	try {
-	    attr = Files.readAttributes(path, BasicFileAttributes.class);
-	} catch (IOException ex) {
-	    ex.printStackTrace();
-	    return "error";
+	File file = new File(filePath);
+	// exists?
+	if (file.exists()) {
+	    BasicFileAttributes attr;
+	    try {
+		attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+	    } catch (IOException ex) {
+		ex.printStackTrace();
+		return "error";
+	    }
+	    return attr.lastModifiedTime().toString().replaceAll("T|Z", " ");
 	}
-	return attr.lastModifiedTime().toString().replaceAll("T|Z", " ");
+
+	else
+	    return "file not exists";
     }
 
     /**

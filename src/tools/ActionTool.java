@@ -8,8 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.Random;
@@ -108,7 +110,7 @@ public final class ActionTool {
 	System.out.println("Copying ->" + source + "\n\tto ->" + destination);
 
 	try {
-	    Files.copy(Paths.get(source), Paths.get(destination));
+	    Files.copy(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
 	} catch (IOException ex) {
 	    logger.log(Level.WARNING, "", ex);
 	    succeess = false;
@@ -133,7 +135,7 @@ public final class ActionTool {
 	System.out.println("Moving ->" + source + "\n\tto ->" + destination);
 
 	try {
-	    Files.move(Paths.get(source), Paths.get(destination));
+	    Files.move(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
 	} catch (IOException ex) {
 	    logger.log(Level.WARNING, "", ex);
 	    succeess = false;

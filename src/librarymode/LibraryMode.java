@@ -492,9 +492,9 @@ public class LibraryMode extends GridPane {
 	    centered.setLayoutX((getWidth() - WIDTH) / 2);
 
 	    // position containerScroller bar at bottom
-	    scrollBar.setLayoutX(10);
-	    scrollBar.setLayoutY(getHeight() - 25);
-	    scrollBar.resize(getWidth() - 20, 15);
+	    // scrollBar.setLayoutX(10)
+	    // scrollBar.setLayoutY(getHeight() - 25)
+	    // scrollBar.resize(getWidth() - 20, 15)
 
 	}
 
@@ -595,7 +595,7 @@ public class LibraryMode extends GridPane {
 		centerIndex = leftGroup.getChildren().size() - 1;
 	    else
 		// if (!rightGroup.getChildren().isEmpty())
-		// centerIndex = 0;
+		// centerIndex = 0
 		// else
 		centerIndex = 0;
 

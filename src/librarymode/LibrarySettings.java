@@ -10,8 +10,6 @@ import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
 
 import application.Main;
-import de.jensd.fx.glyphs.GlyphsDude;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -78,6 +76,10 @@ public class LibrarySettings extends GridPane {
 	popOver.setAutoHide(true);
 	popOver.setHeaderAlwaysVisible(true);
 	popOver.setContentNode(this);
+	popOver.showingProperty().addListener((observable, oldValue, newValue) -> {
+	    if (library != null)
+		library.updateDescription();	    
+	});
 
 	try {
 	    loader.load();
@@ -151,7 +153,7 @@ public class LibrarySettings extends GridPane {
     @FXML
     public void initialize() {
 
-	// GlyphsDude.setIcon(totalItems, FontAwesomeIcon.CLOUD, "1.5em");
+	// GlyphsDude.setIcon(totalItems, FontAwesomeIcon.CLOUD, "1.5em")
 
 	// starsLabel
 	starsLabel.setOnMouseReleased(m -> library.updateLibraryStars());
