@@ -159,6 +159,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     @FXML
     private Label fxLabel;
 
+    @FXML
+    private Label topInfoLabel;
+
     // -----------------------------------------------------------------------------
 
     private static final ImageView eye = InfoTool.getImageViewFromDocuments("eye.png");
@@ -196,7 +199,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     XPlayerEqualizer equalizer;
 
     /** The analyser box. */
-    // AnalyserBox analyserBox  ;
+    // AnalyserBox analyserBox ;
 
     /** The disc. */
     public DJDisc disc;
@@ -292,6 +295,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    if (file != null)
 		playSong(file.getAbsolutePath());
 	});
+
+	// topInfoLabel
+	topInfoLabel.setText("Player : [ " + this.getKey() + " ]");
     }
 
     /**
@@ -1080,8 +1086,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		visualizer.stopVisualizer();
 		radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
 
-		ActionTool.showNotification("Deck " + this.getKey(), "Deck[ " + this.getKey() + " ] has stopped...",
-			Duration.seconds(2), NotificationType.SIMPLE);
+		ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...",
+			Duration.millis(500), NotificationType.SIMPLE);
 	    });
 
 	    System.out.println("Player stopped! with key:" + getKey());

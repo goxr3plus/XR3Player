@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Region?>
@@ -23,130 +24,149 @@
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
    <children>
-      <GridPane fx:id="container">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" percentHeight="40.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="60.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <GridPane fx:id="topGridPane" gridLinesVisible="true" GridPane.columnSpan="2">
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <GridPane fx:id="container" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="60.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <StackPane fx:id="visualizerStackPane" style="-fx-border-color: white; -fx-border-width: 1.5;">
+                  <GridPane fx:id="topGridPane" GridPane.columnSpan="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(255,255,255,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
-                        <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" />
-                        <Label fx:id="visualizerMaximizedLabel" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Maximized ">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/extend.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" translateX="-38.0" StackPane.alignment="TOP_RIGHT">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/eye.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                           <StackPane.margin>
-                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                           </StackPane.margin>
-                        </ToggleButton>
-                        <Button fx:id="maximizeVisualizer" mnemonicParsing="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                           </StackPane.margin>
-                           <tooltip>
-                              <Tooltip text="Maximize Visualizer" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/extend.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </StackPane>
-                  <VBox fx:id="topRightVBox" GridPane.columnIndex="1">
-                     <children>
-                        <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                        <StackPane fx:id="visualizerStackPane" style="-fx-border-color: white; -fx-border-width: 1.5;">
                            <children>
-                              <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Thinking... " />
-                           </children>
-                        </StackPane>
-                        <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
-                           <children>
-                              <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" StackPane.alignment="CENTER_RIGHT">
+                              <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(255,255,255,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
+                              <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" />
+                              <Label fx:id="visualizerMaximizedLabel" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Maximized ">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/extend.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" translateX="-38.0" StackPane.alignment="TOP_RIGHT">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/eye.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
+                                    </ImageView>
+                                 </graphic>
+                                 <StackPane.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </StackPane.margin>
+                              </ToggleButton>
+                              <Button fx:id="maximizeVisualizer" mnemonicParsing="false" StackPane.alignment="TOP_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </StackPane.margin>
+                                 <tooltip>
+                                    <Tooltip text="Maximize Visualizer" />
+                                 </tooltip>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/extend.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <GridPane.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" />
+                           </GridPane.margin>
+                        </StackPane>
+                        <VBox fx:id="topRightVBox" GridPane.columnIndex="1">
+                           <children>
+                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Thinking... " />
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" StackPane.alignment="CENTER_RIGHT">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="bottomGridPane" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="343.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="52.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Thinking..." textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
+                                 <StackPane.margin>
+                                    <Insets left="2.0" />
+                                 </StackPane.margin></Label>
+                              <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" text=" " StackPane.alignment="TOP_CENTER">
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </JFXToggleButton>
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="diskStackPane" prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="openFileButton" mnemonicParsing="false" stylesheets="@../style/application.css" text="Open " StackPane.alignment="TOP_RIGHT">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Choose a File to be opened" />
+                                 </tooltip>
                               </Button>
                            </children>
                         </StackPane>
                      </children>
-                  </VBox>
+                  </GridPane>
                </children>
             </GridPane>
-            <GridPane fx:id="bottomGridPane" gridLinesVisible="true" GridPane.columnSpan="2" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="343.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="52.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <children>
-                        <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Thinking..." textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER" />
-                        <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" text=" " StackPane.alignment="TOP_CENTER">
-                           <font>
-                              <Font size="1.0" />
-                           </font>
-                        </JFXToggleButton>
-                     </children>
-                  </StackPane>
-                  <StackPane fx:id="diskStackPane" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="openFileButton" mnemonicParsing="false" stylesheets="@../style/application.css" text="Open " StackPane.alignment="TOP_RIGHT">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Choose a File to be opened" />
-                           </tooltip>
-                        </Button>
-                     </children>
-                  </StackPane>
-               </children>
-            </GridPane>
-         </children>
-      </GridPane>
+         </center>
+         <top>
+            <Label fx:id="topInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: firebrick; -fx-font-weight: bold; -fx-text-fill: white;" text="Player : [ 0 ] " BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="2.0" />
+               </BorderPane.margin></Label>
+         </top>
+      </BorderPane>
       <Region fx:id="fxRegion" style="-fx-background-color: rgb(255,255,255,0.8);" visible="false" />
       <Label fx:id="bugLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-family: &quot;Younger than me&quot;;" text="If it lags here it is a serious bug , sorry about that i am doing my best to fix it ..... :) . The only way this player to be responsive again is to restart the XR3Player.... :(" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT">
          <font>

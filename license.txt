@@ -1,7 +1,7 @@
    
 <XR3Player Made from the Bro for Bros ( A Next Generation JavaFX Media Player)>
 
-    Copyright © <2015-2017>
+    Copyright © <2015-2307>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,4 +29,4 @@
 
 END OF TERMS AND CONDITIONS
 
- Copyright © <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.
+ Copyright © <2015-2307>  (www.goxr3plus.co.nf) . All rights reserved.

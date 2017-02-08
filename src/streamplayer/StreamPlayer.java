@@ -1165,9 +1165,9 @@ public class StreamPlayer implements Runnable {
 		 */
 
 		// Better type
-		gainControl.setValue((float) (20 * Math.log10(fGain == 0.0 ? 0.0000 : fGain)));
+		gainControl.setValue((float) (20 * Math.log10(fGain >= 0.0 ? 0.0000 : fGain)));
 		// OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))
-		generateEvent(Status.GAIN, getEncodedStreamPosition(), null);
+		//generateEvent(Status.GAIN, getEncodedStreamPosition(), null)
 	    }
 
     }

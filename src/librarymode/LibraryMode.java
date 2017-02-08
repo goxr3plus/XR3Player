@@ -1,14 +1,15 @@
 package librarymode;
 
-import java.awt.AWTException;
-import java.awt.Robot;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 
 import org.controlsfx.control.Notifications;
 
+import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXSlider.IndicatorPosition;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
@@ -21,15 +22,16 @@ import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Side;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -137,14 +139,13 @@ public class LibraryMode extends GridPane {
 			validName = !LocalDBManager.tableExists(dataBaseTableName);
 		    } while (!validName);
 
-		    try {
+		    try (Statement statement = Main.dbManager.connection1.createStatement()) {
 
 			// Create the dataBase table
-			Main.dbManager.connection1.createStatement()
-				.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'"
-					+ "(PATH       TEXT    PRIMARY KEY   NOT NULL ,"
-					+ "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL,"
-					+ "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'"
+				+ "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
+				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL,"
+				+ "HOUR        TEXT    NOT NULL)");
 
 			// Create the Library
 			Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1,
@@ -198,7 +199,6 @@ public class LibraryMode extends GridPane {
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    // Main.logger.log(Level.WARNING, "", ex);
 	    ex.printStackTrace();
 	}
 
@@ -302,7 +302,6 @@ public class LibraryMode extends GridPane {
 	Main.xPlayersList.addXPlayerUI(new XPlayerController(0));
 	Main.xPlayersList.getXPlayerUI(0).makeTheDisc(136, 136, Color.ORANGE, 45, Side.LEFT);
 	Main.xPlayersList.getXPlayerUI(0).makeTheVisualizer(Side.RIGHT);
-	// Main.xPlayersList.getXPlayerUI(0).resizeUI(100, 100)
 	add(Main.xPlayersList.getXPlayerUI(0), 1, 1);
 
     }
@@ -383,6 +382,7 @@ public class LibraryMode extends GridPane {
 
 	/** The items. */
 	ObservableList<Library> items = FXCollections.observableArrayList();
+	SimpleListProperty<Library> list = new SimpleListProperty<>(items);
 
 	/** The centered. */
 	private Group centered = new Group();
@@ -400,7 +400,7 @@ public class LibraryMode extends GridPane {
 	int centerIndex = 0;
 
 	/** The scroll bar. */
-	protected ScrollBar scrollBar = new ScrollBar();
+	JFXSlider scrollBar = new JFXSlider();
 
 	/** The time line */
 	private Timeline timeline = new Timeline();
@@ -413,42 +413,49 @@ public class LibraryMode extends GridPane {
 	// Constructor
 	public LibrariesViewer() {
 
-	    this.setOnMouseMoved(m -> {
-
-		if (dragDetected) {
-		    System.out.println("Mouse Moving... with drag detected");
-
-		    try {
-			Robot robot = new Robot();
-			robot.mouseMove((int) m.getScreenX(),
-				(int) this.localToScreen(this.getBoundsInLocal()).getMinY() + 2);
-		    } catch (AWTException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		    }
-		}
-	    });
+	    // this.setOnMouseMoved(m -> {
+	    //
+	    // if (dragDetected) {
+	    // System.out.println("Mouse Moving... with drag detected");
+	    //
+	    // try {
+	    // Robot robot = new Robot();
+	    // robot.mouseMove((int) m.getScreenX(),
+	    // (int) this.localToScreen(this.getBoundsInLocal()).getMinY() + 2);
+	    // } catch (AWTException ex) {
+	    // ex.printStackTrace();
+	    // }
+	    // }
+	    // })
 
 	    // clip.set
-	    clip.setSmooth(true);
 	    setClip(clip);
 	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);");
 
-	    // setup containerScroller bar
-
-	    scrollBar.setMax(items.size() - 1);
-	    scrollBar.setVisibleAmount(1);
-	    scrollBar.setUnitIncrement(1);
-	    scrollBar.setBlockIncrement(1);
-	    scrollBar.valueProperty().addListener(new InvalidationListener() {
-		@Override
-		public void invalidated(Observable ov) {
-		    // if (timeline.getStatus() != Status.RUNNING)
-		    // setCenterIndex((int) scrollBar.getValue());
+	    // ScrollBar
+	    scrollBar.setIndicatorPosition(IndicatorPosition.RIGHT);	    
+	    scrollBar.setCursor(Cursor.HAND);
+	    scrollBar.setMin(0);
+	    scrollBar.setMax(0);
+	    scrollBar.visibleProperty().bind(list.sizeProperty().greaterThan(3));
+	    // scrollBar.setVisibleAmount(1)
+	    // scrollBar.setUnitIncrement(1)
+	    // scrollBar.setBlockIncrement(1)
+	    // scrollBar.setShowTickLabels(true)
+	    // scrollBar.setMajorTickUnit(1)
+	    scrollBar.setShowTickMarks(true);
+	    scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
+		int newVal = (int) Math.round(newValue.doubleValue());
+		int oldVal = (int) Math.round(oldValue.doubleValue());
+		// new!=old
+		if (newVal != oldVal) {
+		    setCenterIndex(newVal);
 		}
+
+		// System.out.println(scrollBar.getValue())
 	    });
 
-	    // setFocusTraversable(true);
+	    // setFocusTraversable(true)
 	    // setOnKeyReleased(key -> {
 	    // if (key.getCode() == KeyCode.LEFT) {
 	    // if (timeline.getStatus() != Status.RUNNING)
@@ -458,28 +465,23 @@ public class LibraryMode extends GridPane {
 	    // next();
 	    // }
 	    //
-	    // });
+	    // })
 
 	    // create content
 	    centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
 
-	    getChildren().addAll(centered);
-
-	    // Styling
-	    // setStyle("-fx-background-image:url('/image/libraryModeBackground.jpg');
-	    // -fx-background-size:stretch;");
-
+	    getChildren().addAll(centered, scrollBar);
 	}
 
+	/**
+	 * The Collection that holds all the Libraries
+	 * 
+	 * @return The Collection that holds all the Libraries
+	 */
 	public ObservableList<Library> getItems() {
 	    return items;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javafx.scene.Parent#layoutChildren()
-	 */
 	@Override
 	protected void layoutChildren() {
 
@@ -491,10 +493,9 @@ public class LibraryMode extends GridPane {
 	    centered.setLayoutY((getHeight() - HEIGHT) / 2);
 	    centered.setLayoutX((getWidth() - WIDTH) / 2);
 
-	    // position containerScroller bar at bottom
-	    // scrollBar.setLayoutX(10)
-	    // scrollBar.setLayoutY(getHeight() - 25)
-	    // scrollBar.resize(getWidth() - 20, 15)
+	    scrollBar.setLayoutX(getWidth() / 2 - 100);
+	    scrollBar.setLayoutY(5);
+	    scrollBar.resize(200, 15);
 
 	}
 
@@ -538,8 +539,8 @@ public class LibraryMode extends GridPane {
 		    // If it isn't the same library again
 		    if (((Library) centerGroup.getChildren().get(0)).getPosition() != library.getPosition()) {
 
-			scrollBar.setValue(library.getPosition());
 			setCenterIndex(library.getPosition());
+			// scrollBar.setValue(library.getPosition())
 		    }
 
 		} else if (m.getButton() == MouseButton.SECONDARY) {
@@ -547,8 +548,8 @@ public class LibraryMode extends GridPane {
 		    // if isn't the same library again
 		    if (((Library) centerGroup.getChildren().get(0)).getPosition() != library.getPosition()) {
 
-			scrollBar.setValue(library.getPosition());
 			setCenterIndex(library.getPosition());
+			// scrollBar.setValue(library.getPosition())
 
 			timeline.setOnFinished(v -> {
 			    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
@@ -567,7 +568,7 @@ public class LibraryMode extends GridPane {
 	    });
 
 	    // MAX
-	    scrollBar.setMax(items.size() + 1);
+	    scrollBar.setMax(items.size() - 1.00);
 	}
 
 	/**
@@ -600,7 +601,7 @@ public class LibraryMode extends GridPane {
 		centerIndex = 0;
 
 	    // Max
-	    scrollBar.setMax(items.size() - 1);
+	    scrollBar.setMax(items.size() - 1.00);
 
 	    update();
 
@@ -616,6 +617,9 @@ public class LibraryMode extends GridPane {
 	    if (centerIndex != i) {
 		centerIndex = i;
 		update();
+
+		// Update the ScrollBar Value
+		scrollBar.setValue(centerIndex);
 	    }
 	}
 
@@ -623,21 +627,16 @@ public class LibraryMode extends GridPane {
 	 * Goes to next Item (RIGHT).
 	 */
 	public void next() {
-	    if (centerIndex + 1 < items.size()) {
-		++centerIndex;
-		update();
-	    }
-
+	    if (centerIndex + 1 < items.size())
+		setCenterIndex(centerIndex + 1);
 	}
 
 	/**
 	 * Goes to previous item(LEFT).
 	 */
 	public void previous() {
-	    if (centerIndex > 0) {
-		--centerIndex;
-		update();
-	    }
+	    if (centerIndex > 0)
+		setCenterIndex(centerIndex - 1);
 	}
 
 	/**
@@ -699,7 +698,7 @@ public class LibraryMode extends GridPane {
 
 			    new KeyValue(it.scaleYProperty(), SCALE_SMALL, interpolator)));
 
-		    // new KeyValue(it.angle, 45.0, INTERPOLATOR)));
+		    // new KeyValue(it.angle, 45.0, INTERPOLATOR)))
 
 		}
 

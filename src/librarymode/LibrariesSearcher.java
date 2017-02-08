@@ -143,7 +143,6 @@ public class LibrariesSearcher extends HBox {
             setText(text);
             setOnAction(ac -> {
                 Main.libraryMode.libraryViewer.setCenterIndex(position);
-                Main.libraryMode.libraryViewer.scrollBar.setValue(position);
             });
         }
 

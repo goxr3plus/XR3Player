@@ -46,7 +46,7 @@ public class LocalDBManager {
     // Important Tasks
     private DataLoader dataLoader = new DataLoader();
 
-    /** The db file. */
+    /** The database file. */
     // -Constructor-
     private String dbFileAbsolutePath;
 

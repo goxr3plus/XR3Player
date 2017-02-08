@@ -365,10 +365,10 @@ public class Library extends StackPane {
 	// setEffect(rotationTransform)
 
 	// Add the rotation transform
-	// rotationTransform.pivotXProperty().bind(this.widthProperty().divide(2));
-	// rotationTransform.pivotYProperty().bind(this.heightProperty().divide(2));
-	// rotationTransform.setAxis(Rotate.Y_AXIS);
-	// getTransforms().add(rotationTransform);
+	// rotationTransform.pivotXProperty().bind(this.widthProperty().divide(2))
+	// rotationTransform.pivotYProperty().bind(this.heightProperty().divide(2))
+	// rotationTransform.setAxis(Rotate.Y_AXIS)
+	// getTransforms().add(rotationTransform)
 
 	setOnKeyReleased(this::onKeyReleased);
 	setOnMouseEntered(m -> {
@@ -418,7 +418,7 @@ public class Library extends StackPane {
 
 	    // libUSaveMode = Main.dbManager.connection1
 	    // .prepareStatement("UPDATE LIBRARIES SET SAVEMODE=? WHERE NAME=?
-	    // ;");
+	    // ;")
 
 	    libUPosition = Main.dbManager.connection1
 		    .prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;");
@@ -470,7 +470,7 @@ public class Library extends StackPane {
 	rect.setEffect(new Reflection());
 
 	// StackPane -> this
-	//this.setClip(rect);
+	this.setClip(rect);
 	Reflection reflection = new Reflection();
 	reflection.setInput(new DropShadow(4, Color.WHITE));
 	this.setEffect(reflection);

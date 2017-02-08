@@ -29,8 +29,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -68,9 +66,15 @@ public class VisualizerWindowController extends StackPane {
     @FXML
     private MenuButton menuPopButton;
 
+    /**
+     * 
+     */
     @FXML
     public ContextMenu visualizerContextMenu;
 
+    /**
+     * 
+     */
     @FXML
     public ToggleGroup visualizerTypeGroup;
 
@@ -243,15 +247,15 @@ public class VisualizerWindowController extends StackPane {
 	});
 
 	/** The media. */
-	Media media = new Media(new File("C:\\Users\\GOXR3PLUS\\Desktop\\vid.mp4").toURI().toString());
-
-	/** The video player. */
-	MediaPlayer videoPlayer = new MediaPlayer(media);
-
-	mediaView.setMediaPlayer(videoPlayer);
-	mediaView.fitHeightProperty().bind(super.widthProperty());
-	mediaView.fitHeightProperty().bind(super.heightProperty());
-	mediaView.setSmooth(true);
+//	Media media = new Media(new File("C:\\Users\\GOXR3PLUS\\Desktop\\vid.mp4").toURI().toString());
+//
+//	/** The video player. */
+//	MediaPlayer videoPlayer = new MediaPlayer(media);
+//
+//	mediaView.setMediaPlayer(videoPlayer);
+//	mediaView.fitHeightProperty().bind(super.widthProperty());
+//	mediaView.fitHeightProperty().bind(super.heightProperty());
+//	mediaView.setSmooth(true);
 
 //	if (xPlayerUI.getKey() == 0) {
 //	    videoPlayer.setMute(true);

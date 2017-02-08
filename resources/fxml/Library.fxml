@@ -34,7 +34,7 @@
 				</ImageView>
 			</graphic>
 		</Label>
-      <Label fx:id="warningLabel" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" StackPane.alignment="BOTTOM_RIGHT">
+      <Label fx:id="warningLabel" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" visible="false" StackPane.alignment="BOTTOM_RIGHT">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
