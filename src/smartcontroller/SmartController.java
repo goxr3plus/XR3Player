@@ -41,6 +41,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -63,9 +64,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import media.Audio;
 import media.Media;
-import smartcontroller.Genre.TYPE;
 import tools.ActionTool;
 import tools.InfoTool;
+import xplayer.presenter.AudioType;
 
 /**
  * Used to control big amounts of data in user interface.
@@ -115,8 +116,7 @@ public class SmartController extends StackPane {
     private MenuItem clearAll;
 
     /**
-     * If the search is instant or needs the user to press enter on the search
-     * field
+     * If the search is instant or needs the user to press enter on the search field
      */
     @FXML
     public JFXCheckBox instantSearch;
@@ -476,8 +476,7 @@ public class SmartController extends StackPane {
      *
      * @param permanent
      *            <br>
-     *            true->storage medium + (play list)/library false->only from
-     *            (play list)/library<br>
+     *            true->storage medium + (play list)/library false->only from (play list)/library<br>
      */
     public void removeSelected(boolean permanent) {
 	// Free? && How many items are selected?+Question
@@ -762,12 +761,11 @@ public class SmartController extends StackPane {
     }
 
     /**
-     * Return the number of the final List counting from <b>firstList->0
-     * SecondList->1 ....</b>
+     * Return the number of the final List counting from <b>firstList->0 SecondList->1 ....</b>
      *
      * @return the int
      */
-    private int maximumList() {
+    public int maximumList() {
 	if (totalInDataBase.get() == 0)
 	    return 0;
 	else
@@ -775,8 +773,7 @@ public class SmartController extends StackPane {
     }
 
     /**
-     * Indicates that a capture event has been fired to this controller from the
-     * CaptureWindow.
+     * Indicates that a capture event has been fired to this controller from the CaptureWindow.
      *
      * @param array
      *            the array
@@ -1247,6 +1244,17 @@ public class SmartController extends StackPane {
 	    // Library?
 	    if (genre == Genre.LIBRARYSONG)
 		Main.libraryMode.updateLibraryTotalLabel(smartName);
+
+	    //Reset the default vertical scroll position before the search happened
+	    if (searchService.getVerticalScrollBarPosition() != -1.00) {
+		System.out.println("Trying to set the vertical scrollPosition:"+searchService.getVerticalScrollBarPosition());
+		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+		verticalBar.setValue(searchService.getVerticalScrollBarPosition());
+		//tableViewer.scrollTo(searchService.getVerticalScrollBarPosition())
+		// tableViewer.getSelectionModel().select(tableViewer.getItems().size()/2)
+		searchService.setVerticalScrollBarPosition(-1.00);
+	    }
+
 	}
 
 	@Override
@@ -1302,7 +1310,7 @@ public class SmartController extends StackPane {
 			    Audio song = null;
 			    while (resultSet.next()) {
 				song = new Audio(resultSet.getString("PATH"),
-					InfoTool.durationInSeconds(resultSet.getString("PATH"), TYPE.FILE),
+					InfoTool.durationInSeconds(resultSet.getString("PATH"), AudioType.FILE),
 					resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
 					resultSet.getString("DATE"), resultSet.getString("HOUR"), genre);
 				observableList.add(song);
@@ -1696,8 +1704,7 @@ public class SmartController extends StackPane {
 		}
 
 		/**
-		 * Count files in a directory (including files in all sub
-		 * directories)
+		 * Count files in a directory (including files in all sub directories)
 		 * 
 		 * @param directory
 		 *            the directory to start in

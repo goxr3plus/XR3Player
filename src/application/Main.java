@@ -481,7 +481,7 @@ public class Main extends Application {
 			    // textArea.setWrapText(true)
 
 			    VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(textArea);
-			    vsPane.setMinSize(500, 200);
+			    vsPane.setMinSize(700, 350);
 			    vsPane.setMaxWidth(Double.MAX_VALUE);
 			    vsPane.setMaxHeight(Double.MAX_VALUE);
 			    GridPane.setVgrow(vsPane, Priority.ALWAYS);

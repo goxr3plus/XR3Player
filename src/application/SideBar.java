@@ -20,7 +20,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.effect.Reflection;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.Operation;
 import tools.ActionTool;
@@ -31,7 +34,7 @@ import tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class SideBar extends BorderPane{
+public class SideBar extends BorderPane {
 
     /** The speech label. */
     @FXML
@@ -92,6 +95,11 @@ public class SideBar extends BorderPane{
     /** The hide side bar. */
     @FXML
     private JFXButton hideSideBar;
+
+    @FXML
+    private ImageView userImageView;
+
+    // -------------------------------------------------------------
 
     /** Translate Transition used to show/hide the bar. */
     private TranslateTransition tTrans;
@@ -169,6 +177,17 @@ public class SideBar extends BorderPane{
 
 	// closeSideBar
 	hideSideBar.setOnAction(a -> hideBar());
+
+	// Clip
+	Rectangle rect = new Rectangle();
+	rect.widthProperty().bind(userImageView.fitWidthProperty());
+	rect.heightProperty().bind(userImageView.fitHeightProperty());
+	rect.setArcHeight(30);
+	rect.setArcWidth(30);
+	rect.setEffect(new Reflection());
+
+	// StackPane -> this
+	userImageView.setClip(rect);
 
 	// importDataBase
 	importDataBase.setOnAction(e -> {

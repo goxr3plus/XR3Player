@@ -45,7 +45,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import smartcontroller.Genre.TYPE;
 import streamplayer.StreamPlayer.Status;
 import streamplayer.StreamPlayerEvent;
 import streamplayer.StreamPlayerException;
@@ -65,6 +64,13 @@ import xplayer.model.XPlayerModel;
  * @author GOXR3PLUS
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
+
+    /**
+     * The class Logger
+     */
+    private Logger logger = Logger.getLogger(getClass().getName());
+
+    // -----------------------------------------------------
 
     /** The container. */
     @FXML
@@ -101,8 +107,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     private Label visualizerMaximizedLabel;
 
     /**
-     * This Label is visible when the player is stopped || paused and displays
-     * that status
+     * This Label is visible when the player is stopped || paused and displays that status
      */
     @FXML
     private Label playerStatusLabel;
@@ -186,9 +191,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     public VisualizerWindowController visualizerWindow;
 
     /**
-     * This controller contains a Visualizer and a Label which describes every
-     * time (for some milliseconds) which type of visualizer is being displayed
-     * (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
+     * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
+     * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
      */
     public VisualizerStackController visualizerStackController = new VisualizerStackController();
 
@@ -219,7 +223,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /** The key. */
     private int key;
 
-    /** The disc is dragging. */
+    /** The disc is being mouse dragged */
     private boolean discIsDragging = false;
 
     private static Image noSeek = InfoTool.getImageFromDocuments(
@@ -244,7 +248,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    Logger.getLogger(getClass().getName()).log(Level.SEVERE, "XPlayerController FXML can't be loaded!", ex);
+	    logger.log(Level.SEVERE, "XPlayerController FXML can't be loaded!", ex);
 	}
 
     }
@@ -301,8 +305,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     }
 
     /**
-     * Can be called from different classes to implement the dragDrop for their
-     * XPlayer.
+     * Can be called from different classes to implement the dragDrop for their XPlayer.
      *
      * @param dragDrop
      *            the drag drop
@@ -455,7 +458,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    }
 
 	} catch (Exception ex) {
-	    Main.logger.log(Level.INFO, "\n", ex);
+
+	    logger.log(Level.INFO, "\n", ex);
 	}
 
     }
@@ -659,47 +663,49 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     }
 
     /**
-     * Implements the StreamPlayer Seek Method so it runs outside JavaFX Main
-     * Thread.
+     * This Service is used to skip the Audio to a different time .
      *
      * @author GOXR3PLUS
      */
     public class SeekService extends Service<Boolean> {
 
-	/** The bytes. */
+	/** The bytes to be skipped */
 	long bytes;
+
+	/**
+	 * Determines if the Service is locked , if yes it can't be used .
+	 */
+	private volatile boolean locked = false;
 
 	/**
 	 * Constructor.
 	 */
 	public SeekService() {
-	    setOnFailed(f -> done());
 	    setOnSucceeded(s -> done());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javafx.concurrent.Service#start()
-	 */
-	@Override
-	public void start() {
-	    // nothing
+	    setOnFailed(f -> done());
 	}
 
 	/**
 	 * Start the Service.
 	 *
 	 * @param bytes
-	 *            the bytes
+	 *            Bytes to skip
 	 */
 	public void startSeekService(long bytes) {
-	    if (!isRunning()) {
+	    if (!locked && !isRunning()) {
+
+		// Bytes to Skip
 		this.bytes = bytes;
-		fxLabel.setText("Seeking...");
-		fxRegion.setVisible(true);
-		super.reset();
-		super.start();
+
+		// Create Binding
+		fxLabel.textProperty().bind(messageProperty());
+		fxRegion.visibleProperty().bind(runningProperty());
+
+		// lock the Service
+		locked = true;
+
+		// Restart
+		restart();
 	    }
 	}
 
@@ -708,10 +714,15 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	private void done() {
 
-	    // Variable
+	    // Remove the unidirectional binding
+	    fxLabel.textProperty().unbind();
+	    fxRegion.visibleProperty().unbind();
+	    fxRegion.setVisible(false);
+
+	    // Stop disc dragging!
 	    discIsDragging = false;
 
-	    // Set the Cursor
+	    // Put the appropriate Cursor
 	    disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 
 	    // Resume Rotation
@@ -719,10 +730,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		disc.resumeRotation();
 
 	    // Recalculate Angle and paint again Disc
-	    disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration());
+	    disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), true);
 	    disc.repaint();
 
-	    fxRegion.setVisible(false);
+	    // unlock the Service
+	    locked = false;
+
 	}
 
 	@Override
@@ -732,8 +745,11 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		protected Boolean call() throws Exception {
 		    boolean succeded = true;
 
+		    // ----------------------- Seek the Media
+		    updateMessage("Skipping the Audio");
+
 		    // GO
-		    if (bytes != 0) {// && xPlayer.isPausedOrPlaying()) {
+		    if (bytes != 0) { // and xPlayer.isPausedOrPlaying())
 			Main.logger.info("Seek Service Started..");
 
 			// CurrentTime
@@ -741,24 +757,22 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 			try {
 			    xPlayer.seek(bytes);
-			    xPlayer.setMute(radialMenu.mute.isSelected());
-			    controlVolume();
-			    if (!equalizer.isDisable())
-				xPlayer.setEqualizer(xPlayerModel.getEqualizerArray(), 32);
-			    xPlayer.setPan(equalizer.panFilter.getValue(200));
-			    xPlayer.setBalance(equalizer.balanceFilter.getValue(200));
-
 			} catch (StreamPlayerException ex) {
-			    Main.logger.log(Level.WARNING, "", ex);
+			    logger.log(Level.WARNING, "", ex);
 			    succeded = false;
 			}
 		    }
 
-		    // If the player is just stopped...
-		    if (!xPlayer.isPausedOrPlaying()) {
-			System.out.println("Entered the Seek Thread [ if(!xPlayer.isPausedOrPlaying())]");
+		    // ----------------------- Play Audio
+		    if (!xPlayer.isPausedOrPlaying())
 			xPlayer.play();
-		    }
+
+		    // ----------------------- Configuration
+		    updateMessage("Applying Settings ...");
+
+		    // Configure Media Settings
+		    if (xPlayer.isPausedOrPlaying())
+			configureMediaSettings();
 
 		    return succeded;
 		}
@@ -769,211 +783,46 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     }
 
     /**
-     * Implements the StreamPlayer Seek Method so it runs outside JavaFX Main
-     * Thread.
+     * Implements the StreamPlayer Seek Method so it runs outside JavaFX Main Thread.
      *
      * @author GOXR3PLUS
      */
     private class PlayService extends Service<Boolean> {
 
-	/** The image. */
+	/** The album image of the audio */
 	private Image image;
 
-	/** The locked. */
+	/**
+	 * Determines if the Service is locked , if yes it can't be used .
+	 */
 	private volatile boolean locked = false;
 
 	/**
 	 * Start the Service.
 	 *
 	 * @param path
-	 *            the path
+	 *            The path of the audio
 	 */
 	public void startPlayService(String path) {
 	    if (!locked && !isRunning() && path != null && InfoTool.isAudioSupported(path)) {
 
-		// song path
+		// The path of the audio file
 		xPlayerModel.songPathProperty().set(path);
 
-		// Binding
+		// Create Binding
 		fxLabel.textProperty().bind(messageProperty());
 		fxRegion.visibleProperty().bind(runningProperty());
 
 		// Restart the Service
 		restart();
 
-		// Lock until is done
+		// lock the Service
 		locked = true;
 	    }
 	}
 
 	/**
-	 * ***
-	 * 
-	 * Severe problems existing here!!!!.
-	 *
-	 * @return the task
-	 */
-
-	@Override
-	protected Task<Boolean> createTask() {
-	    return new Task<Boolean>() {
-		@Override
-		protected Boolean call() throws Exception {
-
-		    try {
-			updateMessage("Stop previous...");
-			// Stop the previous
-			xPlayer.stop();
-
-			System.out.println("After calling xPlayer.stop() in PlayService ->:" + xPlayer.getStatus());
-
-			updateMessage("File Configuration ...");
-			// duration and extension
-			xPlayerModel.setDuration(InfoTool.durationInSeconds(xPlayerModel.songPathProperty().get(),
-				checkAudioType(xPlayerModel.songPathProperty().get())));
-			xPlayerModel.songExtensionProperty()
-				.set(InfoTool.getFileExtension(xPlayerModel.songPathProperty().get()));
-
-			// Set the text to the mediaFileMarquee
-			Platform.runLater(() -> mediaFileMarquee
-				.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get())));
-
-			// Print the Media Object Absolute Path
-			System.out.println("Song Object..." + xPlayerModel.songPathProperty().get());
-
-			// ----------------------Open the Media
-			updateMessage("Opening ...");
-			xPlayer.open(xPlayerModel.songObjectProperty().get());
-
-			// ---------------------- Play the Media
-			xPlayer.play();
-
-			// -----------------------Configuration
-			updateMessage("Settings ...");
-
-			// start immediately?
-			if (!xPlayerSettingsController.startImmediately.isSelected())
-			    pause();
-
-			// Mute?
-			// System.out.println("Mute is Selected?: " +
-			// radialMenu.mute.isSelected())
-			xPlayer.setMute(radialMenu.mute.isSelected());
-
-			// Volume
-			controlVolume();
-
-			// Pan
-			xPlayer.setPan(equalizer.panFilter.getValue(200));
-
-			// Speaker Balance
-			xPlayer.setBalance(equalizer.balanceFilter.getValue(200));
-
-			// retrieve the image
-			image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
-
-			// Finally seek settings
-			// if(canvas)
-			// canvas.set
-			// setOnMousePressed(m ->
-			// canvas.setCursor(Cursor.CLOSED_HAND));
-
-			updateMessage("Starting ...");
-		    } catch (Exception ex) {
-			Main.logger.log(Level.WARNING, "", ex);
-			Platform.runLater(() -> ActionTool.showNotification("ERROR",
-				"Can't play \n[" + InfoTool.getMinString(xPlayerModel.songPathProperty().get(), 30)
-					+ "]\n" + "It is corrupted or maybe unsupported",
-				Duration.millis(2000), NotificationType.ERROR));
-			return false;
-		    }
-
-		    return true;
-		}
-
-		/**
-		 * Checking the audio type
-		 * 
-		 * @param path
-		 * @return returns the type of the audio
-		 */
-		private TYPE checkAudioType(String path) {
-
-		    // File?
-		    try {
-			xPlayerModel.songObjectProperty().set(new File(path));
-			return TYPE.FILE;
-		    } catch (Exception ex) {
-			Main.logger.log(Level.FINE, "", ex);
-		    }
-
-		    // URL?
-		    try {
-			xPlayerModel.songObjectProperty().set(new URL(path));
-			return TYPE.URL;
-		    } catch (MalformedURLException ex) {
-			Main.logger.log(Level.FINE, "MalformedURLException", ex);
-		    }
-
-		    // very dangerous this null here!!!!!!!!!!!
-		    xPlayerModel.songObjectProperty().set(null);
-
-		    return TYPE.UNKOWN;
-		}
-
-	    };
-	}
-
-	@Override
-	public void succeeded() {
-	    super.succeeded();
-
-	    System.out.println("Succeeded...");
-
-	    // image?
-	    disc.replaceImage(image);
-
-	    // add to played songs...
-	    Main.playedSongs.add(xPlayerModel.songPathProperty().get());
-
-	    // mp3?
-	    if ("mp3".equals(xPlayerModel.songExtensionProperty().get())) {
-		xPlayer.setEqualizer(xPlayerModel.getEqualizerArray(), 32);
-		equalizer.setDisable(false);
-	    } else
-		equalizer.setDisable(true);
-
-	    done();
-	}
-
-	@Override
-	public void failed() {
-	    super.failed();
-
-	    System.out.println("Failed...");
-
-	    // xPlayerModel.songObjectProperty().set(null);
-	    // xPlayerModel.songPathProperty().set(null);
-	    // xPlayerModel.songExtensionProperty().set(null);
-	    // xPlayerModel.setDuration(-1);
-	    // xPlayerModel.setCurrentTime(-1);
-	    // image = null;
-	    // disc.replaceImage(null);
-
-	    done();
-	}
-
-	@Override
-	public void cancelled() {
-	    super.cancelled();
-
-	    System.out.println("Cancelled...");
-
-	}
-
-	/**
-	 * Determines if the image of the disc is the NULL_IMAGE that means that
-	 * the media inserted into the player has no album image.
+	 * Determines if the image of the disc is the NULL_IMAGE that means that the media inserted into the player has no album image.
 	 *
 	 * @return true if the DiscImage==null <br>
 	 *         false if the DiscImage!=null
@@ -987,18 +836,186 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	private void done() {
 
-	    // Unbind
+	    // Remove the unidirectional binding
 	    fxLabel.textProperty().unbind();
 	    fxRegion.visibleProperty().unbind();
 	    fxRegion.setVisible(false);
 
-	    // unlock when is done
-	    locked = false;
-
-	    // Set Cursor
+	    // Set the appropriate cursor
 	    if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1)
 		disc.getCanvas().setCursor(Cursor.OPEN_HAND);
+
+	    // unlock the Service
+	    locked = false;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javafx.concurrent.Service#createTask()
+	 */
+	@Override
+	protected Task<Boolean> createTask() {
+	    return new Task<Boolean>() {
+		@Override
+		protected Boolean call() throws Exception {
+
+		    try {
+
+			// Stop the previous audio
+			updateMessage("Stop previous...");
+			xPlayer.stop();
+
+			// ---------------------- Load the File
+			updateMessage("File Configuration ...");
+
+			// duration
+			xPlayerModel.setDuration(InfoTool.durationInSeconds(xPlayerModel.songPathProperty().get(),
+				checkAudioType(xPlayerModel.songPathProperty().get())));
+
+			// extension
+			xPlayerModel.songExtensionProperty()
+				.set(InfoTool.getFileExtension(xPlayerModel.songPathProperty().get()));
+
+			// ---------------------- Open the Audio
+			updateMessage("Opening ...");
+			xPlayer.open(xPlayerModel.songObjectProperty().get());
+
+			// ----------------------- Play the Audio
+			updateMessage("Starting ...");
+			xPlayer.play();
+
+			// ----------------------- Configuration
+			updateMessage("Applying Settings ...");
+
+			// Configure Media Settings
+			configureMediaSettings();
+
+			// ----------------------- Load the Album Image
+			image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
+
+			// ....well let's go
+		    } catch (Exception ex) {
+			logger.log(Level.WARNING, "", ex);
+			Platform.runLater(() -> ActionTool.showNotification("ERROR",
+				"Can't play \n[" + InfoTool.getMinString(xPlayerModel.songPathProperty().get(), 30)
+					+ "]\n" + "It is corrupted or maybe unsupported",
+				Duration.millis(1500), NotificationType.ERROR));
+			return false;
+		    } finally {
+
+			// Print the current audio file path
+			System.out.println("Current audio path is ...:" + xPlayerModel.songPathProperty().get());
+
+		    }
+
+		    return true;
+		}
+
+		/**
+		 * Checking the audio type -> File || URL
+		 * 
+		 * @param path
+		 *            The path of the audio File
+		 * @return returns
+		 * @see AudioType
+		 */
+		private AudioType checkAudioType(String path) {
+
+		    // File?
+		    try {
+			xPlayerModel.songObjectProperty().set(new File(path));
+			return AudioType.FILE;
+		    } catch (Exception ex) {
+			logger.log(Level.WARNING, "", ex);
+		    }
+
+		    // URL?
+		    try {
+			xPlayerModel.songObjectProperty().set(new URL(path));
+			return AudioType.URL;
+		    } catch (MalformedURLException ex) {
+			logger.log(Level.WARNING, "MalformedURLException", ex);
+		    }
+
+		    // very dangerous this null here!!!!!!!!!!!
+		    xPlayerModel.songObjectProperty().set(null);
+
+		    return AudioType.UNKNOWN;
+		}
+
+	    };
+	}
+
+	@Override
+	public void succeeded() {
+	    super.succeeded();
+	    System.out.println("XPlayer [ " + key + " ] PlayService Succeeded...");
+
+	    // Replace the image of the disc
+	    disc.replaceImage(image);
+
+	    // add to played songs...
+	    Main.playedSongs.add(xPlayerModel.songPathProperty().get());
+
+	    done();
+	}
+
+	@Override
+	public void failed() {
+	    super.failed();
+	    System.out.println("XPlayer [ " + key + " ] PlayService Failed...");
+
+	    // xPlayerModel.songObjectProperty().set(null)
+	    // xPlayerModel.songPathProperty().set(null)
+	    // xPlayerModel.songExtensionProperty().set(null)
+	    // xPlayerModel.setDuration(-1)
+	    // xPlayerModel.setCurrentTime(-1)
+	    // image = null
+	    // disc.replaceImage(null)
+
+	    done();
+	}
+
+	@Override
+	public void cancelled() {
+	    super.cancelled();
+	    System.out.println("XPlayer [ " + key + " ] PlayService Cancelled...");
+
+	}
+    }
+
+    /**
+     * When the audio starts , fast configure it's settings
+     */
+    public void configureMediaSettings() {
+
+	// Start immediately?
+	if (!xPlayerSettingsController.startImmediately.isSelected())
+	    pause();
+
+	// Mute?
+	xPlayer.setMute(radialMenu.mute.isSelected());
+
+	// Volume
+	controlVolume();
+
+	// Sets Pan value. Line should be opened before calling this method.
+	// Linear scale : -1.0 <--> +1.0
+	xPlayer.setPan(equalizer.panFilter.getValue(200));
+
+	// Represents a control for the relative balance of a stereo signal
+	// between two stereo speakers. The valid range of values is -1.0 (left
+	// channel only) to 1.0 (right channel only). The default is 0.0
+	// (centered).
+	xPlayer.setBalance(equalizer.balanceFilter.getValue(200));
+
+	// Audio is MP3?
+	if ("mp3".equals(xPlayerModel.songExtensionProperty().get())) {
+	    xPlayer.setEqualizer(xPlayerModel.getEqualizerArray(), 32);
+	    equalizer.setDisable(false);
+	} else
+	    equalizer.setDisable(true);
 
     }
 
@@ -1008,8 +1025,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	// some code here
     }
 
-    /** The previous time. */
-    int previousTime;
+    float progress = 0;
 
     @Override
     public void progress(int nEncodedBytes, long microSecondsPosition, byte[] pcmdata, Map<String, Object> properties) {
@@ -1024,24 +1040,30 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		    || "wav".equals(xPlayerModel.songExtensionProperty().get())) {
 
 		// Calculate the progress until now
-		float progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
+		progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
 			? (nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f)
 			: -1.0f;
 		// System.out.println(progress*100+"%")
-		if (visualizerWindow.isVisible()) {
+		if (visualizerWindow.isVisible())
 		    Platform.runLater(() -> visualizerWindow.progressBar.setProgress(progress));
-		}
 
 		// find the current time in seconds
 		xPlayerModel.setCurrentTime((int) (xPlayerModel.getDuration() * progress));
+		//System.out.println((double) xPlayerModel.getDuration() * progress)
 
 		// .WHATEVER MUSIC FILE*
 	    } else
 		xPlayerModel.setCurrentTime((int) (microSecondsPosition / 1000000));
 
+	    String millisecondsFormat = InfoTool.millisecondsToTime(microSecondsPosition / 1000);
+	    //System.out.println(milliFormat)
+
 	    // Paint the Disc
-	    if (xPlayerModel.getCurrentTime() != previousTime && !xPlayer.isStopped()) {
-		disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration());
+	    if (!xPlayer.isStopped()) {
+		//Update the disc Angle
+		disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
+		//Update the disc time
+		disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormat);
 	    }
 
 	    if (!visualizer.isRunning())
@@ -1055,7 +1077,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     @Override
     public void statusUpdated(StreamPlayerEvent streamPlayerEvent) {
 
-	if (streamPlayerEvent.getPlayerStatus() == Status.OPENED && xPlayer.getSourceDataLine() != null) { // xPlayer.isOpened()
+	// Status.OPENED
+	if (streamPlayerEvent.getPlayerStatus() == Status.OPENED && xPlayer.getSourceDataLine() != null) {
 
 	    visualizer.setupDSP(xPlayer.getSourceDataLine());
 	    visualizer.startDSP(xPlayer.getSourceDataLine());
@@ -1065,20 +1088,37 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		resumeCode();
 	    });
 
-	    System.out.println("Player is opened!!!! with key:" + getKey());
+	    System.out.println("XPlayer [ " + getKey() + " ] is opened!");
 
-	} else if (streamPlayerEvent.getPlayerStatus() == Status.STOPPED) { // xPlayer.isStopped()
+	    // Status.PLAYING
+	} else if (streamPlayerEvent.getPlayerStatus() == Status.PLAYING) {
+
+	    Platform.runLater(this::resumeCode);
+
+	    System.out.println("XPlayer [ " + getKey() + " ] is PLAYING!");
+
+	    // Status.PAUSED
+	} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
+
+	    Platform.runLater(() -> {
+		playerStatusLabel.setText("Player is Paused ");
+		pauseCode();
+	    });
+	    System.out.println("XPlayer [ " + getKey() + " ] is PAUSED!");
+
+	    // Status.STOPPED
+	} else if (streamPlayerEvent.getPlayerStatus() == Status.STOPPED) {
 
 	    visualizer.stopDSP();
 
 	    Platform.runLater(() -> {
 
 		//
-		mediaFileMarquee.setText("Player Stopped");
+		mediaFileMarquee.setText("Player is Stopped");
 		playerStatusLabel.setText(mediaFileMarquee.textProperty().get());
 
 		// disc
-		disc.calculateAngleByValue(0, 0);
+		disc.calculateAngleByValue(0, 0, true);
 		disc.repaint();
 
 		disc.stopFade();
@@ -1090,26 +1130,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			Duration.millis(500), NotificationType.SIMPLE);
 	    });
 
-	    System.out.println("Player stopped! with key:" + getKey());
-
-	} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) { // xPlayer.isPaused()
-
-	    Platform.runLater(() -> {
-		playerStatusLabel.setText("Player Paused ");
-		pauseCode();
-	    });
-	    System.out.println("Player paused! with key:" + getKey());
-
-	    // + ( visualizerWindow.getStage().showingProperty().get() ? " + " +
-	    // visualizerMaximizedLabel.getText()
-	    // : "" )
-	    // + ( visualizerVisible.isSelected() ? " + " +
-	    // visualizerVisible.getText() : "" ))
-	} else if (streamPlayerEvent.getPlayerStatus() == Status.PLAYING) { // status=playing
-
-	    Platform.runLater(this::resumeCode);
-
-	    System.out.println("Player is playing! with key:" + getKey());
+	    System.out.println("XPlayer [ " + getKey() + " ] is STOPPED!");
 	}
     }
 
