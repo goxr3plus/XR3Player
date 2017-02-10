@@ -106,14 +106,14 @@
    <top>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <bottom>
-            <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Logged in : GOXR3PLUS STUDIO" BorderPane.alignment="CENTER" />
+            <Label fx:id="userNameLabel" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Logged in : GOXR3PLUS STUDIO" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="userImageView" fitHeight="170.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Desktop/images/parrot-55293_640.jpg" />
+                        <Image url="@../image/library.png" />
                      </image>
                      <StackPane.margin>
                         <Insets bottom="5.0" top="5.0" />
@@ -178,4 +178,11 @@
          </top>
       </BorderPane>
    </top>
+   <bottom>
+      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 18;" text="Multiple Users Support is comming :)" wrapText="true" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
 </fx:root>

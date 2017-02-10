@@ -76,6 +76,9 @@ public class SideBar extends BorderPane {
     @FXML
     private ProgressIndicator internetProgressIndicator;
 
+    @FXML
+    private Label userNameLabel;
+
     /** The xr 3 settings. */
     @FXML
     private MenuButton xr3Settings;
@@ -167,6 +170,9 @@ public class SideBar extends BorderPane {
 
     @FXML
     private void initialize() {
+
+	//userNameLabel
+	userNameLabel.setText("Logged in : [ " + System.getProperty("user.name") + " ]");
 
 	// Translate Transition
 	tTrans = new TranslateTransition(Duration.millis(200), this);

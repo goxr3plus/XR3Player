@@ -481,7 +481,7 @@ public class Library extends StackPane {
 	nameField.getTooltip().setText(libraryName);
 
 	// Update the Image
-	// updateStarLabelImage();
+	// updateStarLabelImage()
 
 	// Image
 	imageView.setImage(getImage());

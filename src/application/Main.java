@@ -178,11 +178,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 46;
+    public final static int currentVersion = 47;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "08/02/2017";
+    public final static String releaseDate = "10/02/2017";
 
     /**
      * The Thread which is responsible for the update check

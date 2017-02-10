@@ -1247,12 +1247,12 @@ public class SmartController extends StackPane {
 
 	    //Reset the default vertical scroll position before the search happened
 	    if (searchService.getVerticalScrollBarPosition() != -1.00) {
-		System.out.println("Trying to set the vertical scrollPosition:"+searchService.getVerticalScrollBarPosition());
-		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
-		verticalBar.setValue(searchService.getVerticalScrollBarPosition());
-		//tableViewer.scrollTo(searchService.getVerticalScrollBarPosition())
-		// tableViewer.getSelectionModel().select(tableViewer.getItems().size()/2)
-		searchService.setVerticalScrollBarPosition(-1.00);
+//		System.out.println("Trying to set the vertical scrollPosition:"+searchService.getVerticalScrollBarPosition());
+//		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+//		verticalBar.setValue(searchService.getVerticalScrollBarPosition());
+//		//tableViewer.scrollTo(searchService.getVerticalScrollBarPosition())
+//		// tableViewer.getSelectionModel().select(tableViewer.getItems().size()/2)
+//		searchService.setVerticalScrollBarPosition(-1.00);
 	    }
 
 	}
