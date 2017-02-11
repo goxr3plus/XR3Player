@@ -14,6 +14,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -32,8 +33,8 @@
                <content>
                   <GridPane fx:id="topGrid" hgap="5.0" style="-fx-background-color: rgb(0,0,0,0.85);;">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="80.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="22.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="90.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -41,14 +42,6 @@
                      <children>
                         <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <children>
-                              <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0">
-                                 <tooltip>
-                                    <Tooltip text="current page" />
-                                 </tooltip>
-                                 <contextMenu>
-                                    <ContextMenu />
-                                 </contextMenu>
-                              </TextField>
                               <MenuButton fx:id="settingsButton" mnemonicParsing="false">
                                  <items>
                                     <Menu fx:id="totalItemsShown" mnemonicParsing="false" text="Total Shown">
@@ -157,6 +150,17 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="94.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 15; -fx-background-radius: 15; -fx-background-color: black; -fx-text-fill: orange;" text="55">
+                     <tooltip>
+                        <Tooltip text="current page" />
+                     </tooltip>
+                     <contextMenu>
+                        <ContextMenu />
+                     </contextMenu>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </TextField>
                </children>
             </StackPane>
          </center>

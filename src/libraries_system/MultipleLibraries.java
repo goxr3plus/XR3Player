@@ -1,7 +1,7 @@
 /*
  * 
  */
-package librarymode;
+package libraries_system;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,8 +34,7 @@ import tools.InfoTool;
 import tools.NotificationType;
 
 /**
- * Mechanism of showing the opened libraries each opened library is represented
- * by a Tab.
+ * Mechanism of showing the opened libraries each opened library is represented by a Tab.
  *
  * @author SuperGoliath
  */
@@ -231,11 +230,11 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	    if (indicator.isVisible()) {
 		stack.setManaged(true);
 		stack.setVisible(true);
-		// tab.setGraphic(hBox);
+		// tab.setGraphic(hBox)
 	    } else {
 		stack.setManaged(false);
 		stack.setVisible(false);
-		// tab.setGraphic(null);
+		// tab.setGraphic(null)
 	    }
 	});
 
@@ -252,8 +251,8 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	// --Drag Over
 	hBox.setOnDragOver(dragOver -> {
 	    // The drag must come from source other than the owner
-	    if (dragOver.getDragboard().hasFiles()
-		    && dragOver.getGestureSource() != library.getSmartController().tableViewer) {
+	    if (dragOver.getDragboard().hasFiles()) {
+		//&& dragOver.getGestureSource() != library.getSmartController().tableViewer) 
 		dragOver.acceptTransferModes(TransferMode.LINK);
 		tabPane.getSelectionModel().select(tab);
 	    }
@@ -262,7 +261,8 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	// --Drag Dropped
 	hBox.setOnDragDropped(drop -> {
 	    // Has Files? + isFree()?
-	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true))
+	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true)
+		    && drop.getGestureSource() != library.getSmartController().tableViewer)
 		getSelectedLibrary().getSmartController().inputService.start(drop.getDragboard().getFiles());
 
 	    drop.setDropCompleted(true);

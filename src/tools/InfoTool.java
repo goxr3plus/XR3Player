@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +38,9 @@ import xplayer.presenter.AudioType;
  * @author SuperGoliath
  */
 public final class InfoTool {
+
+    /** Logger */
+    public static final Logger logger = Logger.getLogger(InfoTool.class.getName());
 
     /** The song. */
     static Mp3File song;
@@ -270,7 +272,7 @@ public final class InfoTool {
 					true);
 		}
 	    } catch (UnsupportedTagException | InvalidDataException | IOException ex) {
-		Main.logger.log(Level.WARNING, "Can't get Album Image", ex);
+		logger.log(Level.WARNING, "Can't get Album Image", ex);
 	    }
 	}
 
@@ -296,7 +298,7 @@ public final class InfoTool {
 	    try {
 		attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
 	    } catch (IOException ex) {
-		ex.printStackTrace();
+		logger.log(Level.WARNING, ex.getMessage(), ex);
 		return "error";
 	    }
 	    return attr.creationTime().toString().replaceAll("T|Z", " ");
@@ -322,7 +324,7 @@ public final class InfoTool {
 	    try {
 		attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
 	    } catch (IOException ex) {
-		ex.printStackTrace();
+		logger.log(Level.WARNING, ex.getMessage(), ex);
 		return "error";
 	    }
 	    return attr.lastModifiedTime().toString().replaceAll("T|Z", " ");
@@ -530,7 +532,7 @@ public final class InfoTool {
 		try {
 		    return (int) ((Long) AudioSystem.getAudioFileFormat(file).properties().get("duration") / 1000);
 		} catch (IOException | UnsupportedAudioFileException ex) {
-		    ex.printStackTrace();
+		    logger.log(Level.WARNING, ex.getMessage(), ex);
 		}
 	    }
 
@@ -540,7 +542,7 @@ public final class InfoTool {
 		    AudioFormat format = audioInputStream.getFormat();
 		    return (int) (file.length() / (format.getFrameSize() * (int) format.getFrameRate())) * 1000;
 		} catch (IOException | UnsupportedAudioFileException ex) {
-		    ex.printStackTrace();
+		    logger.log(Level.WARNING, ex.getMessage(), ex);
 		}
 	    }
 	}
@@ -588,21 +590,21 @@ public final class InfoTool {
      */
     public static String millisecondsToTime(long ms) {
 	int millis = (int) ((ms % 1000) / 100);
-//	int seconds = (int) ((ms / 1000) % 60);
-//	int minutes = (int) ((ms / (1000 * 60)) % 60);
-//	int hours = (int) ((ms / (1000 * 60 * 60)) % 24);
+	//	int seconds = (int) ((ms / 1000) % 60);
+	//	int minutes = (int) ((ms / (1000 * 60)) % 60);
+	//	int hours = (int) ((ms / (1000 * 60 * 60)) % 24);
 
-//	if (minutes > 60)
-//	    return String.format("%02d:%02d:%02d.%d", hours, minutes, seconds, millis);
-//	else
-//	    return String.format("%02d:%02d.%d", minutes, seconds, millis);
-	
-	return String.format(".%d",millis);
+	//	if (minutes > 60)
+	//	    return String.format("%02d:%02d:%02d.%d", hours, minutes, seconds, millis);
+	//	else
+	//	    return String.format("%02d:%02d.%d", minutes, seconds, millis);
+
+	return String.format(".%d", millis);
 
     }
 
     /**
-     * Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
+     * Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02dsec if (seconds<60) %02d:%02d.
      *
      * @param seconds
      *            the seconds
@@ -610,12 +612,14 @@ public final class InfoTool {
      */
     public static String getTimeEdited(int seconds) {
 
-	// Is more than one hour>60
-	if ((seconds / 60) / 60 > 0)
-	    return String.format("%02d:%02d:%02d", (seconds / 60) / 60, (seconds / 60) % 60, seconds % 60);
-	// Is less than one hour<60
+	// duration < 1 minute
+	if (seconds < 60)
+	    return String.format("%02ds", seconds % 60);
+	// duration >= 1 hour
+	else if ((seconds / 60) / 60 > 0)
+	    return String.format("%02dh:%02dm:%02d", (seconds / 60) / 60, (seconds / 60) % 60, seconds % 60);
 	else
-	    return String.format("%02d:%02d", (seconds / 60) % 60, seconds % 60);
+	    return String.format("%02dm:%02d", (seconds / 60) % 60, seconds % 60);
 
     }
 

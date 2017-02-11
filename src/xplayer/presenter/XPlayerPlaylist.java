@@ -218,7 +218,7 @@ public class XPlayerPlaylist extends StackPane {
 	 * Starts the service.
 	 */
 	public void startService() {
-	    if (!isRunning() && !controller.observableList.isEmpty()) {
+	    if (!isRunning() && !controller.itemsObservableList.isEmpty()) {
 		stopPlayingList.setVisible(true);
 		progressSpinner.setVisible(true);
 		progressSpinner.progressProperty().bind(progressProperty());
@@ -259,14 +259,14 @@ public class XPlayerPlaylist extends StackPane {
 		protected Void call() throws Exception {
 
 		    counter = 1;
-		    int totalItems = controller.observableList.size();
+		    int totalItems = controller.itemsObservableList.size();
 
 		    // loop
 		    while (!isCancelled()) {
 
 			// Play song
 			// Synchronize with javaFX thread
-			song = (Audio) controller.observableList.get(counter - 1);
+			song = (Audio) controller.itemsObservableList.get(counter - 1);
 			CountDownLatch latch = new CountDownLatch(1);
 			Platform.runLater(() -> {
 

@@ -25,15 +25,18 @@ import com.jfoenix.controls.JFXCheckBox;
 
 import application.Main;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -149,25 +152,34 @@ public class SmartController extends StackPane {
     private HBox searchBarHBox;
 
     // ----------------------------------------------------------
+    /** @see Genre */
+    public final Genre genre;
 
-    /** The observable list. */
-    // Keeping all the items of controller
-    public ObservableList<Media> observableList = FXCollections.observableArrayList();
-
-    /** The total in data base. */
-    private IntegerProperty totalInDataBase = new SimpleIntegerProperty(0);
-
-    /** The maximum per list. */
-    int maximumPerList = 50;
-
-    /** The list number. */
-    public IntegerProperty listNumber = new SimpleIntegerProperty(0);
-
-    /** The data base table name. */
+    /** The name of the database table (eg. @see ActionTool.returnRandomTableName()) */
     private final String dataBaseTableName;
 
-    /** The name. */
-    private String smartName = null;
+    /** The name of the SmartController . */
+    private String controllerName = null;
+
+    /** Total items in database table . */
+    private IntegerProperty totalInDataBase = new SimpleIntegerProperty(0);
+
+    /** The last focus owner of the Scene , it is used by the pageField TextField */
+    private Node focusOwner;
+
+    /** The table viewer. */
+    public final MediaTableViewer tableViewer;
+
+    /** This list keeps all the Media Items from the TableViewer */
+    public ObservableList<Media> itemsObservableList = FXCollections.observableArrayList();
+
+    /** The current page inside the TableViewer */
+    IntegerProperty currentPage = new SimpleIntegerProperty(0);
+
+    /** Maximum items allowed per page. */
+    int maximumPerPage = 50;
+
+    //---------Services--------------------------
 
     /** The search service. */
     public final SmartSearcher searchService;
@@ -178,16 +190,10 @@ public class SmartController extends StackPane {
     /** The input service. */
     public final InputService inputService;
 
-    /**
-     * CopyOrMoveService
-     */
-    public CopyOrMoveService copyOrMoveService;
+    /** CopyOrMoveService */
+    public final CopyOrMoveService copyOrMoveService;
 
-    /** The table viewer. */
-    public final MediaTableViewer tableViewer;
-
-    /** The genre. */
-    public final Genre genre;
+    //---------Security---------------------------
 
     /** The deposit working. */
     public volatile boolean depositWorking;
@@ -200,6 +206,8 @@ public class SmartController extends StackPane {
 
     /** The update working. */
     public volatile boolean updateWorking;
+
+    //--------Prepared Statements------------------
 
     /** The prepared insert. */
     public PreparedStatement preparedInsert;
@@ -219,19 +227,22 @@ public class SmartController extends StackPane {
     /** The prepared count elements with string. */
     public PreparedStatement preparedCountElementsWithString;
 
+    //--------------------------------------------------
+
     /**
      * Instantiates a new smart controller.
      *
      * @param genre
-     *            the genre
-     * @param name
-     *            the name
+     *            .. @see Genre
+     * @param controllerName
+     *            The name of the SmartController
      * @param dataBaseTableName
-     *            the data base table name
+     *            The name of the database table <br>
+     *            ..@see ActionTool.returnRandomTableName()
      */
-    public SmartController(Genre genre, String name, String dataBaseTableName) {
+    public SmartController(Genre genre, String controllerName, String dataBaseTableName) {
 	this.genre = genre;
-	this.smartName = name;
+	this.controllerName = controllerName;
 	this.dataBaseTableName = dataBaseTableName;
 
 	// Initialize
@@ -282,7 +293,7 @@ public class SmartController extends StackPane {
     @FXML
     private void initialize() {
 
-	// centerStackPane
+	// ------ centerStackPane
 	centerStackPane.setOnKeyReleased(key -> {
 	    KeyCode code = key.getCode();
 
@@ -306,8 +317,8 @@ public class SmartController extends StackPane {
 
 	});
 
-	// TableViewer
-	tableViewer.setItems(observableList);
+	// ------ tableViewer
+	tableViewer.setItems(itemsObservableList);
 	tableViewer.setPlaceholder(new Label("Import or Drag Media Here ;) "));
 	tableViewer.setOnMouseReleased(m -> {
 	    if (m.getButton() == MouseButton.SECONDARY && !tableViewer.getSelectionModel().getSelectedItems().isEmpty())
@@ -315,43 +326,36 @@ public class SmartController extends StackPane {
 			m.getScreenX(), m.getScreenY(), this);
 	});
 
-	/*
-	 * ObjectProperty<TableRow<Media>> lastSelectedRow = new
-	 * SimpleObjectProperty<>(); tableViewer.setRowFactory(tableView -> {
-	 * TableRow<Media> row = new TableRow<>();
-	 * row.selectedProperty().addListener((obs, wasSelected, isNowSelected)
-	 * -> { if (isNowSelected) lastSelectedRow.set(row); }); return row; });
-	 */
-
 	centerStackPane.getChildren().add(tableViewer);
 	tableViewer.toBack();
 
-	// Region
+	// ------ region
 	region.setStyle("-fx-background-color:rgb(0,0,0,0.7)");
 	region.setVisible(false);
 
-	// Indicator
+	// ------ progress indicator
 	indicator.visibleProperty().bind(region.visibleProperty());
 
-	// Cancel
+	// ------ cancel
 	cancel.setStyle(
 		"-fx-background-color:rgb(0,0,0,0.7); -fx-background-radius:20; -fx-text-fill:rgb(40,140,255); -fx-font-size:18px; -fx-font-weight:bold;");
 	cancel.visibleProperty().bind(region.visibleProperty());
 	cancel.setDisable(true);
 
-	// searchBarHBox
+	// ------ searchBarHBox
 	searchBarHBox.getChildren().add(0, searchService);
 
-	// Previous Button
+	// ------ previous
 	previous.disableProperty().bind(next.disabledProperty());
-	previous.visibleProperty().bind(listNumber.isNotEqualTo(0));
+	previous.visibleProperty().bind(currentPage.isNotEqualTo(0));
 	previous.setOnAction(a -> goPrevious());
 
-	// Next Button
+	// ------- next 
 	next.setVisible(false);
 	next.setOnAction(a -> goNext());
 
-	// PageField
+	// -------- pageField
+	pageField.opacityProperty().bind(Bindings.when(pageField.hoverProperty()).then(1.0).otherwise(0.06));
 	pageField.disableProperty().bind(next.disabledProperty());
 	pageField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -363,33 +367,59 @@ public class SmartController extends StackPane {
 		int maximumPage = maximumList();
 		// System.out.println("maximum Page:"+maximumPage)
 		if (Integer.parseInt(pageField.getText()) > maximumPage)
-		    Platform.runLater(() -> pageField.setText(Integer.toString(maximumPage)));
+		    Platform.runLater(() -> {
+			pageField.setText(Integer.toString(maximumPage));
+			pageField.selectEnd();
+		    });
 	    }
 
 	});
-	pageField.setOnAction(ac -> {
+	pageField.setOnAction(ac -> { // ENTER KEY
 	    if (!pageField.getText().isEmpty() && !loadService.isRunning() && !searchService.service.isRunning()
 		    && totalInDataBase.get() != 0) {
 		int lisN = Integer.parseInt(pageField.getText());
 		if (lisN <= maximumList()) {
-		    listNumber.set(lisN);
+		    currentPage.set(lisN);
 		    loadService.startService(false, true);
-		} else
+		} else {
 		    pageField.setText(Integer.toString(lisN));
+		    pageField.selectEnd();
+		}
 	    }
 
 	});
+	pageField.setOnScroll(scroll -> { //SCROLL
+	    if (scroll.getDeltaY() > 0 && currentPage.get() + 1 <= maximumList())
+		currentPage.set(currentPage.get() + 1);
+	    else if (scroll.getDeltaY() < 0 && currentPage.get() - 1 >= 0)
+		currentPage.set(currentPage.get() - 1);
 
-	// totalItemsShown
+	    //Update pageField
+	    pageField.setText(String.valueOf(currentPage.get()));
+	    pageField.selectEnd();
+	    pageField.deselect();
+	});
+	pageField.hoverProperty().addListener(l -> { //HOVER
+	    if (pageField.isHover()) {
+		focusOwner = Main.window.getScene().getFocusOwner();
+		pageField.requestFocus();
+		pageField.selectEnd();
+		//pageField.deselect()
+	    } else {
+		focusOwner.requestFocus();
+	    }
+	});
+
+	// -------- totalItemsShown
 	for (MenuItem item : totalItemsShown.getItems())
 	    item.setOnAction(ac -> {
 
 		// GO
 		int current = Integer.parseInt(item.getText());
-		if (maximumPerList != current) {
-		    listNumber.set((maximumPerList == 50) ? listNumber.get() / 2
-			    : listNumber.get() * 2 + (listNumber.get() % 2 == 0 ? 0 : 1));
-		    maximumPerList = current;
+		if (maximumPerPage != current) {
+		    currentPage.set((maximumPerPage == 50) ? currentPage.get() / 2
+			    : currentPage.get() * 2 + (currentPage.get() % 2 == 0 ? 0 : 1));
+		    maximumPerPage = current;
 		    loadService.startService(false, true);
 		}
 
@@ -493,7 +523,7 @@ public class SmartController extends StackPane {
 
 		// Library?
 		if (genre == Genre.LIBRARYSONG)
-		    Main.libraryMode.updateLibraryTotalLabel(smartName);
+		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
 
 	    } catch (Exception ex) {
 		Main.logger.log(Level.WARNING, "", ex);
@@ -537,7 +567,7 @@ public class SmartController extends StackPane {
 
 	    // Library?
 	    if (genre == Genre.LIBRARYSONG)
-		Main.libraryMode.updateLibraryTotalLabel(smartName);
+		Main.libraryMode.updateLibraryTotalLabel(controllerName);
 	}
     }
 
@@ -546,18 +576,18 @@ public class SmartController extends StackPane {
      */
     public void updateLabel() {
 	if (!searchService.isActive()) {
-	    titledPane.setText("[Total:<" + totalInDataBase.get() + "> ListNumber:<" + listNumber.get()
-		    + "> MaximumList:<" + maximumList() + ">] Selected:" + tableViewer.getSelectedCount() + "  Showing:"
-		    + listNumber.get() * maximumPerList + "-"
-		    + (listNumber.get() * maximumPerList + observableList.size()));
+	    titledPane.setText("[Total:<" + totalInDataBase.get() + "> CurrentPage:<" + currentPage.get()
+		    + "> MaxPage:<" + maximumList() + ">] [ Selected:" + tableViewer.getSelectedCount() + "  Showing:"
+		    + currentPage.get() * maximumPerPage + "-"
+		    + (currentPage.get() * maximumPerPage + itemsObservableList.size() + " ]"));
 
 	} else {
-	    titledPane.setText("[Found: <" + observableList.size() + "> first matching] Selected:"
+	    titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] Selected:"
 		    + tableViewer.getSelectedCount());
 
 	}
 
-	pageField.setText(Integer.toString(listNumber.get()));
+	pageField.setText(Integer.toString(currentPage.get()));
     }
 
     /**
@@ -677,8 +707,8 @@ public class SmartController extends StackPane {
      * Goes on the Previous List.
      */
     public void goPrevious() {
-	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && listNumber.get() > 0) {
-	    listNumber.set(listNumber.get() - 1);
+	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() > 0) {
+	    currentPage.set(currentPage.get() - 1);
 	    loadService.startService(false, true);
 	}
     }
@@ -688,8 +718,8 @@ public class SmartController extends StackPane {
      */
     public void goNext() {
 	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0
-		&& listNumber.get() < maximumList()) {
-	    listNumber.set(listNumber.get() + 1);
+		&& currentPage.get() < maximumList()) {
+	    currentPage.set(currentPage.get() + 1);
 	    loadService.startService(false, true);
 	}
     }
@@ -703,12 +733,12 @@ public class SmartController extends StackPane {
 	if (totalInDataBase.get() == 0) {
 
 	    next.setVisible(false);
-	    listNumber.set(0);
+	    currentPage.set(0);
 
 	} else {
 
 	    next.setVisible(
-		    (listNumber.isEqualTo(0).or(listNumber.lessThan(maximumList()))).get() && maximumList() != 0);
+		    (currentPage.isEqualTo(0).or(currentPage.lessThan(maximumList()))).get() && maximumList() != 0);
 	}
 
 	// update the label
@@ -722,7 +752,7 @@ public class SmartController extends StackPane {
      * Clear all the items from list.
      */
     private void simpleClear() {
-	observableList.clear();
+	itemsObservableList.clear();
 	totalInDataBase.set(0);
 	updateList();
     }
@@ -734,7 +764,7 @@ public class SmartController extends StackPane {
      *            the new name
      */
     public void setName(String newName) {
-	smartName = newName;
+	controllerName = newName;
     }
 
     /**
@@ -743,12 +773,12 @@ public class SmartController extends StackPane {
      * @return The name of the smartController
      */
     public String getName() {
-	return smartName;
+	return controllerName;
     }
 
     @Override
     public String toString() {
-	return "SmartController" + ": <" + smartName + ">";
+	return "SmartController" + ": <" + controllerName + ">";
     }
 
     /**
@@ -769,7 +799,7 @@ public class SmartController extends StackPane {
 	if (totalInDataBase.get() == 0)
 	    return 0;
 	else
-	    return (totalInDataBase.get() / maximumPerList) + ((totalInDataBase.get() % maximumPerList == 0) ? -1 : 0);
+	    return (totalInDataBase.get() / maximumPerPage) + ((totalInDataBase.get() % maximumPerPage == 0) ? -1 : 0);
     }
 
     /**
@@ -1135,9 +1165,9 @@ public class SmartController extends StackPane {
 	    // Target:" + d.getGestureTarget());
 	    // });
 
-	    getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-		// Main.amazon.updateInformation((Media) newValue);
-	    });
+	    getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l ->
+	    // Main.amazon.updateInformation((Media) newValue)
+	    updateLabel());
 
 	}
 
@@ -1218,8 +1248,8 @@ public class SmartController extends StackPane {
 		    updateWorking = true;
 		    region.visibleProperty().bind(runningProperty());
 		    indicator.progressProperty().bind(progressProperty());
-		    observableList.clear();
 		    cancel.setText("Updating...");
+		    itemsObservableList.clear();
 		    super.reset();
 		    super.start();
 		}
@@ -1243,18 +1273,22 @@ public class SmartController extends StackPane {
 
 	    // Library?
 	    if (genre == Genre.LIBRARYSONG)
-		Main.libraryMode.updateLibraryTotalLabel(smartName);
+		Main.libraryMode.updateLibraryTotalLabel(controllerName);
+
+	    //System.out.println("Is this JavaFX Thread: " + Platform.isFxApplicationThread())
 
 	    //Reset the default vertical scroll position before the search happened
 	    if (searchService.getVerticalScrollBarPosition() != -1.00) {
-//		System.out.println("Trying to set the vertical scrollPosition:"+searchService.getVerticalScrollBarPosition());
-//		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
-//		verticalBar.setValue(searchService.getVerticalScrollBarPosition());
-//		//tableViewer.scrollTo(searchService.getVerticalScrollBarPosition())
-//		// tableViewer.getSelectionModel().select(tableViewer.getItems().size()/2)
-//		searchService.setVerticalScrollBarPosition(-1.00);
-	    }
+		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+		if (verticalBar != null)
+		    verticalBar.setValue(searchService.getVerticalScrollBarPosition());
 
+		//System.out.println(
+		//"Trying to set the vertical scrollPosition:" + searchService.getVerticalScrollBarPosition())
+
+		//Reset to -1
+		searchService.setVerticalScrollBarPosition(-1.00);
+	    }
 	}
 
 	@Override
@@ -1277,47 +1311,57 @@ public class SmartController extends StackPane {
 
 		    // when the final list is deleted then the controller
 		    // has to go to the previous list automatically
-		    if (getTotalInDataBase() != 0 && listNumber.get() > maximumList())
-			listNumber.set(listNumber.get() - 1);
+		    if (getTotalInDataBase() != 0 && currentPage.get() > maximumList())
+			currentPage.set(currentPage.get() - 1);
 
 		    // Select the available Media Files
 		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
-			    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerList
-				    + " OFFSET " + listNumber.get() * maximumPerList);
+			    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerPage
+				    + " OFFSET " + currentPage.get() * maximumPerPage);
 			    ResultSet dbCounter = Main.dbManager.connection1.createStatement()
-				    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerList
-					    + " OFFSET " + listNumber.get() * maximumPerList);) {
+				    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerPage
+					    + " OFFSET " + currentPage.get() * maximumPerPage);) {
 
 			// Count how many items the result returned...
 			int currentMaximumPerList = 0;
 			while (dbCounter.next())
 			    ++currentMaximumPerList;
-			// System.out.println("Next:"+dbCounter.getString("PATH"));
+			// System.out.println("Next:"+dbCounter.getString("PATH"))
 
-			// System.out.println("CurrentMaximumPerList=:" +
-			// currentMaximumPerList);
+			// System.out.println("CurrentMaximumPerList=:" +currentMaximumPerList)
 
 			if (genre == Genre.RADIOSTATION) {
-			    /*
-			     * SongButton station = null; while (set.next()) {
-			     * station = new RadioStation(set.getString("NAME"),
-			     * new URL(set.getString("STREAMURL")),
-			     * set.getString("TAGS"), set.getDouble("STARS"));
-			     * bigList.add(station); // Update Progress
-			     * updateProgress(++counter, maximumPerList); }
-			     */
+
+			    //			    SongButton station = null;
+			    //			    while (set.next()) {
+			    //				station = new RadioStation(set.getString("NAME"), new URL(set.getString("STREAMURL")),
+			    //					set.getString("TAGS"), set.getDouble("STARS"));
+			    //				bigList.add(station); // Update Progress
+			    //				updateProgress(++counter, maximumPerList);
+			    //			    }
+
 			} else {
+			    //Fetch the items from the database
+			    List<Media> array = new ArrayList<>();
 			    Audio song = null;
 			    while (resultSet.next()) {
 				song = new Audio(resultSet.getString("PATH"),
 					InfoTool.durationInSeconds(resultSet.getString("PATH"), AudioType.FILE),
 					resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
 					resultSet.getString("DATE"), resultSet.getString("HOUR"), genre);
-				observableList.add(song);
+				array.add(song);
 
 				// Update Progress
 				updateProgress(++counter, currentMaximumPerList);
 			    }
+
+			    //Add the the items to the observable list
+			    CountDownLatch countDown = new CountDownLatch(1);
+			    Platform.runLater(() -> {
+				itemsObservableList.addAll(array);
+				countDown.countDown();
+			    });
+			    countDown.await();
 			}
 
 			// commit?
@@ -1458,12 +1502,12 @@ public class SmartController extends StackPane {
 			count = 0;
 			// total = (int) observableList.stream().filter(button
 			// -> ( (Audio) button ).isMarked()).count();
-			total = observableList.size();
+			total = itemsObservableList.size();
 
 			// Multiple Items have been selected
 			if (total > 0) {
 			    // Stream
-			    Stream<Media> stream = observableList.stream();
+			    Stream<Media> stream = itemsObservableList.stream();
 			    stream.forEach(media -> {
 				if (!isCancelled()) {
 				    // if (button.isMarked()) {

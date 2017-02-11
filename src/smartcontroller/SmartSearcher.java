@@ -5,6 +5,9 @@ package smartcontroller;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
 import org.controlsfx.control.PopOver;
@@ -16,6 +19,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -30,6 +34,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import media.Audio;
+import media.Media;
 import tools.InfoTool;
 import xplayer.presenter.AudioType;
 
@@ -50,6 +55,8 @@ public class SmartSearcher extends HBox {
     /** The service. */
     SearchService service = new SearchService();
 
+    boolean saveSettingBeforeSearch = true;
+
     /**
      * Constructor.
      *
@@ -66,31 +73,35 @@ public class SmartSearcher extends HBox {
 	searchField.setPromptText("Search.....");
 	searchField.textProperty().addListener((observable, newValue, oldValue) -> {
 	    if (searchField.getText().isEmpty()) {
+		saveSettingBeforeSearch = true;
 
 		//Reset the page number to the default before search
 		if (service.getPaneNumberBeforeSearch() <= controller.maximumList())
-		    controller.listNumber.set(service.getPaneNumberBeforeSearch());
+		    controller.currentPage.set(service.getPaneNumberBeforeSearch());
 
 		//continue 
 		controller.getNextButton().setDisable(false);
 		controller.loadService.startService(false, false);
 		//Main.advancedSearch.searchOnFlySelected()
 
-	    } else if (controller.isFree(false) && control.instantSearch.isSelected())
+	    } else if (controller.isFree(false) && control.instantSearch.isSelected()) {
+		//Save the Settings before the first search
+		if (saveSettingBeforeSearch) {
+		    service.pageBeforeSearch = controller.currentPage.get();
+		    ScrollBar verticalBar = (ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical");
+		    service.previousVerticalScrollValue = verticalBar.getValue();
+
+		    saveSettingBeforeSearch = false;
+		}
+
 		service.search();
+	    }
 	});
 	searchField.editableProperty().bind(service.runningProperty().not());
 	searchField.disableProperty().bind(Main.advancedSearch.showingProperty());
 	searchField.setOnAction(ac -> {
 	    if (controller.isFree(false))
 		service.search();
-	});
-	searchField.focusedProperty().addListener(l -> {
-	    if (!isActive()) {
-		service.pageBeforeSearch = controller.listNumber.get();
-		ScrollBar verticalBar = (ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical");
-		service.previousVerticalScrollValue = verticalBar.getValue();
-	    }
 	});
 
 	// searchField.setOnMouseClicked(m -> {
@@ -112,14 +123,16 @@ public class SmartSearcher extends HBox {
     }
 
     /**
-     * @return The Vertical Scroll Bar position of SmartController TableViewer before the search activated
+     * @return The Vertical ScrollBar position of SmartController TableViewer before the search is activated
      */
     public double getVerticalScrollBarPosition() {
 	return service.previousVerticalScrollValue;
     }
 
     /**
-     * @return The Vertical Scroll Bar position of SmartController TableViewer before the search activated
+     * Set the Vertical Scroll Bar position of SmartController TableViewer before the search activated
+     * 
+     * @param value
      */
     public void setVerticalScrollBarPosition(double value) {
 	service.previousVerticalScrollValue = value;
@@ -140,7 +153,7 @@ public class SmartSearcher extends HBox {
 	int pageBeforeSearch = 0;
 
 	/**
-	 * The previous value of the VerticalScroll bar in the table viewer
+	 * The Vertical ScrollBar position of SmartController TableViewer before the search is activated
 	 */
 	double previousVerticalScrollValue = -1;
 
@@ -168,6 +181,11 @@ public class SmartSearcher extends HBox {
 	    controller.getRegion().visibleProperty().bind(runningProperty());
 	    controller.getIndicator().progressProperty().bind(progressProperty());
 	    controller.getCancelButton().setText("Searching...");
+	    controller.getNextButton().setDisable(true);
+
+	    //Clear the list
+	    controller.itemsObservableList.clear();
+
 	    reset();
 	    start();
 	}
@@ -202,25 +220,34 @@ public class SmartSearcher extends HBox {
 		    // Given Work
 		    System.out.println("Searching for word:[" + word + "]");
 
-		    controller.getNextButton().setDisable(true);
-		    controller.observableList.clear();
-		    controller.listNumber.set(pageBeforeSearch);
+		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
+			    .executeQuery("SELECT* FROM '" + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%"
+				    + word + "%'")) {
 
-		    try (ResultSet set = Main.dbManager.connection1.createStatement().executeQuery("SELECT* FROM '"
-			    + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%'")) {
-
+			//Fetch the items from the database
+			List<Media> array = new ArrayList<>();
 			Audio song = null;
-			while (set.next()) {
-			    song = new Audio(set.getString("PATH"),
-				    InfoTool.durationInSeconds(set.getString("PATH"), AudioType.FILE),
-				    set.getDouble("STARS"), set.getInt("TIMESPLAYED"), set.getString("DATE"),
-				    set.getString("HOUR"), controller.genre);
-			    controller.observableList.add(song);
+			while (resultSet.next()) {
+			    song = new Audio(resultSet.getString("PATH"),
+				    InfoTool.durationInSeconds(resultSet.getString("PATH"), AudioType.FILE),
+				    resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
+				    resultSet.getString("DATE"), resultSet.getString("HOUR"), controller.genre);
+			    array.add(song);
+
 			    ++counter;
-			    if (counter >= controller.maximumPerList)
+			    if (counter >= controller.maximumPerPage)
 				break;
 
 			}
+
+			//Add the the items to the observable list
+			CountDownLatch countDown = new CountDownLatch(1);
+			Platform.runLater(() -> {
+			    controller.itemsObservableList.addAll(array);
+			    countDown.countDown();
+			});
+			countDown.await();
+
 		    } catch (Exception ex) {
 			Main.logger.log(Level.WARNING, "", ex);
 		    }

@@ -370,7 +370,7 @@ public class DJDisc extends StackPane {
     }
 
     /**
-     * Returns the canvas of the disc.
+     * Returns the Canvas of the disc.
      *
      * @return The Canvas of the Disc
      */
@@ -382,9 +382,11 @@ public class DJDisc extends StackPane {
      * Calculates the angle based on the given value and the maximum value allowed.
      *
      * @param value
-     *            the value
+     *            The current moment of the Audio
      * @param maximum
-     *            the maximum
+     *            The maximum duration of the Audio
+     * @param updateTheTime
+     *            True if you want to update the Time Label
      */
     public void calculateAngleByValue(int value, int maximum, boolean updateTheTime) {
 

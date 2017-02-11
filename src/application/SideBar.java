@@ -44,22 +44,6 @@ public class SideBar extends BorderPane {
     @FXML
     private Label internetLabel;
 
-    /** The recording label. */
-    @FXML
-    private Label recordingLabel;
-
-    /** The info label. */
-    @FXML
-    private Label infoLabel;
-
-    /** The recording toggle. */
-    @FXML
-    private JFXToggleButton recordingToggle;
-
-    /** The info toggle. */
-    @FXML
-    private JFXToggleButton infoToggle;
-
     /** The speech toggle. */
     @FXML
     private JFXToggleButton speechToggle;

@@ -877,6 +877,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			xPlayerModel.songExtensionProperty()
 				.set(InfoTool.getFileExtension(xPlayerModel.songPathProperty().get()));
 
+			// ----------------------- Load the Album Image
+			image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
+
 			// ---------------------- Open the Audio
 			updateMessage("Opening ...");
 			xPlayer.open(xPlayerModel.songObjectProperty().get());
@@ -890,9 +893,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 			// Configure Media Settings
 			configureMediaSettings();
-
-			// ----------------------- Load the Album Image
-			image = InfoTool.getMp3AlbumImage(xPlayerModel.songPathProperty().get(), -1, -1);
 
 			// ....well let's go
 		    } catch (Exception ex) {

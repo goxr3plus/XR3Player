@@ -1,4 +1,4 @@
-package librarymode;
+package libraries_system;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -400,7 +400,7 @@ public class LibraryMode extends GridPane {
 	int centerIndex = 0;
 
 	/** The scroll bar. */
-	JFXSlider scrollBar = new JFXSlider();
+	JFXSlider jfSlider = new JFXSlider();
 
 	/** The time line */
 	private Timeline timeline = new Timeline();
@@ -433,18 +433,18 @@ public class LibraryMode extends GridPane {
 	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);");
 
 	    // ScrollBar
-	    scrollBar.setIndicatorPosition(IndicatorPosition.RIGHT);	    
-	    scrollBar.setCursor(Cursor.HAND);
-	    scrollBar.setMin(0);
-	    scrollBar.setMax(0);
-	    scrollBar.visibleProperty().bind(list.sizeProperty().greaterThan(3));
+	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);	    
+	    jfSlider.setCursor(Cursor.HAND);
+	    jfSlider.setMin(0);
+	    jfSlider.setMax(0);
+	    jfSlider.visibleProperty().bind(list.sizeProperty().greaterThan(3));
 	    // scrollBar.setVisibleAmount(1)
 	    // scrollBar.setUnitIncrement(1)
 	    // scrollBar.setBlockIncrement(1)
-	    // scrollBar.setShowTickLabels(true)
+	    jfSlider.setShowTickLabels(true);
 	    // scrollBar.setMajorTickUnit(1)
-	    scrollBar.setShowTickMarks(true);
-	    scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
+	    jfSlider.setShowTickMarks(true);
+	    jfSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
 		int newVal = (int) Math.round(newValue.doubleValue());
 		int oldVal = (int) Math.round(oldValue.doubleValue());
 		// new!=old
@@ -470,7 +470,7 @@ public class LibraryMode extends GridPane {
 	    // create content
 	    centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
 
-	    getChildren().addAll(centered, scrollBar);
+	    getChildren().addAll(centered, jfSlider);
 	}
 
 	/**
@@ -493,9 +493,9 @@ public class LibraryMode extends GridPane {
 	    centered.setLayoutY((getHeight() - HEIGHT) / 2);
 	    centered.setLayoutX((getWidth() - WIDTH) / 2);
 
-	    scrollBar.setLayoutX(getWidth() / 2 - 100);
-	    scrollBar.setLayoutY(5);
-	    scrollBar.resize(200, 15);
+	    jfSlider.setLayoutX(getWidth() / 2 - 100);
+	    jfSlider.setLayoutY(10);
+	    jfSlider.resize(200, 15);
 
 	}
 
@@ -568,7 +568,7 @@ public class LibraryMode extends GridPane {
 	    });
 
 	    // MAX
-	    scrollBar.setMax(items.size() - 1.00);
+	    jfSlider.setMax(items.size() - 1.00);
 	}
 
 	/**
@@ -601,7 +601,7 @@ public class LibraryMode extends GridPane {
 		centerIndex = 0;
 
 	    // Max
-	    scrollBar.setMax(items.size() - 1.00);
+	    jfSlider.setMax(items.size() - 1.00);
 
 	    update();
 
@@ -619,7 +619,7 @@ public class LibraryMode extends GridPane {
 		update();
 
 		// Update the ScrollBar Value
-		scrollBar.setValue(centerIndex);
+		jfSlider.setValue(centerIndex);
 	    }
 	}
 

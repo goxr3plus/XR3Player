@@ -35,7 +35,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import librarymode.LibraryMode;
+import libraries_system.LibraryMode;
 import remote_communication.RemoteAppsController;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
@@ -178,11 +178,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 47;
+    public final static int currentVersion = 48;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "10/02/2017";
+    public final static String releaseDate = "11/02/2017";
 
     /**
      * The Thread which is responsible for the update check

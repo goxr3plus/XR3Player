@@ -1,4 +1,4 @@
-package librarymode;
+package libraries_system;
 
 import application.Main;
 import javafx.scene.control.ContextMenu;
