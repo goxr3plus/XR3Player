@@ -36,7 +36,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import libraries_system.LibraryMode;
+import librarysystema.LibraryMode;
 import remote_communication.RemoteAppsController;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
@@ -158,11 +158,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 48;
+    public final static int currentVersion = 49;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "11/02/2017";
+    public final static String releaseDate = "23/02/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -234,6 +234,8 @@ public class Main extends Application {
 	    window.setScene(scene);
 	    window.show();
 
+	    checkJavaCombatibility();
+
 	    // throw new Exception("xd")
 	    // ScenicView.show(scene)
 
@@ -248,6 +250,27 @@ public class Main extends Application {
     @Override
     public void init() {
 	System.out.println("Hello from init");
+    }
+
+    /**
+     * Checks if the Current Java Version is the appropriate for the application
+     */
+    public void checkJavaCombatibility() {
+	//String minimumJavaVersion = "1.8.0_111"
+	String[] javaVersionElements = System.getProperty("java.runtime.version").split("\\.|_|-b");
+
+	//String discard = javaVersionElements[0]
+	String major = javaVersionElements[1];
+	//String minor = javaVersionElements[2]
+	String update = javaVersionElements[3];
+	//String build = javaVersionElements[4]
+
+	if (Integer.parseInt(major) < 8 || (Integer.parseInt(major) < 8 && Integer.parseInt(update) < 111))
+	    ActionTool.showNotification("Java Version Problem",
+		    "XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:"
+			    + System.getProperty("java.version")
+			    + "\nThe application may crash or not work at all!\nPlease Update your Java Version :)",
+		    Duration.seconds(40), NotificationType.ERROR);
     }
 
     /**

@@ -1,45 +1,24 @@
-/*
+/**
  * 
  */
 package xplayer.presenter;
 
-import application.Main;
+import eu.hansolo.enzo.common.SymbolType;
+import eu.hansolo.enzo.radialmenu.RadialMenu;
+import eu.hansolo.enzo.radialmenu.RadialMenuBuilder;
+import eu.hansolo.enzo.radialmenu.RadialMenuItem;
+import eu.hansolo.enzo.radialmenu.RadialMenuItemBuilder;
+import eu.hansolo.enzo.radialmenu.RadialMenuOptionsBuilder;
 import javafx.scene.Cursor;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import radialmenu.RadialCheckMenuItem;
-import radialmenu.RadialMenu;
-import radialmenu.RadialMenuItem;
+import tools.ActionTool;
 import tools.InfoTool;
 
 /**
- * The Class XPlayerRadialMenu.
+ * @author GOXR3PLUS
+ *
  */
-public class XPlayerRadialMenu extends RadialMenu {
-
-    /** The previous. */
-    public RadialMenuItem previous;
-
-    /** The next. */
-    public RadialMenuItem next;
-
-    /** The stop. */
-    public RadialMenuItem stop;
-
-    /** The resume or pause. */
-    public RadialMenuItem resumeOrPause;
-
-    /** The replay. */
-    public RadialMenuItem replay;
-
-    /** The mute. */
-    public RadialCheckMenuItem mute;
-
-    /** The play image view. */
-    public final ImageView playImageView = InfoTool.getImageViewFromDocuments("play.png");
-
-    /** The pause image view. */
-    public final ImageView pauseImageView = InfoTool.getImageViewFromDocuments("pause.png");
+public class XPlayerRadialMenu {
 
     /** The next pressed. */
     private boolean nextPressed;
@@ -47,119 +26,126 @@ public class XPlayerRadialMenu extends RadialMenu {
     /** The previous pressed. */
     private boolean previousPressed;
 
-    /** The is showing. */
-    private boolean isShowing;
+    //
+    private RadialMenu radialMenu;
 
-    /** The size. */
-    private int size = 360 / 6;
+    //
+    RadialMenuItem stop = RadialMenuItemBuilder.create().symbol(SymbolType.STOP).tooltip("Stop").size(40).build();
+    RadialMenuItem play = RadialMenuItemBuilder.create().symbol(SymbolType.PLAY).tooltip("Play").size(40).build();
+    RadialMenuItem pause = RadialMenuItemBuilder.create().symbol(SymbolType.PAUSE).tooltip("Pause").size(40).build();
+    RadialMenuItem mute = RadialMenuItemBuilder.create().selectable(true).selected(false)
+	    .thumbnailImageName(getClass().getResource(InfoTool.images + "mute.png").toExternalForm()).tooltip("Mute")
+	    .size(40).build();
+
+    //
+    RadialMenuItem refresh = RadialMenuItemBuilder.create().symbol(SymbolType.REFRESH).tooltip("Refresh").size(40)
+	    .build();
+    RadialMenuItem search = RadialMenuItemBuilder.create().symbol(SymbolType.SEARCH).tooltip("Search").size(40).build();
+
+    //
+    RadialMenuItem next = RadialMenuItemBuilder.create().symbol(SymbolType.FORWARD).tooltip("Next").size(40).build();
+    RadialMenuItem previous = RadialMenuItemBuilder.create().symbol(SymbolType.REWIND).tooltip("Previous").size(40)
+	    .build();
+
+    XPlayerController xPlayerController;
 
     /**
-     * Constructor.
-     *
-     * @param key
-     *            the key
+     * Constructor
+     * 
+     * @param xPlayerController
+     * 
      */
-    public XPlayerRadialMenu(int key) {
-	super(-32, 16, 60, 5, Color.rgb(0, 0, 0, 0.93), Color.rgb(0, 0, 0, 1), null, null, false,
-		CenterVisibility.ALWAYS, null);
-	setCursor(Cursor.HAND);
+    public XPlayerRadialMenu(XPlayerController xPlayerController) {
+	this.xPlayerController = xPlayerController;
 
-	// PREVIOUS
-	previous = new RadialMenuItem(size, "previous", InfoTool.getImageViewFromDocuments("previous.png"),
-		v -> goPrevious());
+	//----------------RadialMenu
+	radialMenu = RadialMenuBuilder.create()
+		.options(RadialMenuOptionsBuilder.create().degrees(180).buttonFillColor(Color.BLUE).offset(-140) //-135 with next and previous + 350 degrees //-160 with 360 degrees
+			.radius(60).buttonSize(40).tooltipsEnabled(true).buttonHideOnSelect(false)
+			.buttonHideOnClose(false).buttonAlpha(1.0).build())
+		.items(
+			//RadialMenuItemBuilder.create().thumbnailImageName(getClass().getResource("star.png").toExternalForm()).size(40).build(),
+			stop, play, pause,
+			//next, 
+			refresh, mute, search
+		//previous
+		).build();
 
-	// Play OR Pause
-	resumeOrPause = new RadialMenuItem(size, "play/pause", playImageView,
-		v -> Main.xPlayersList.getXPlayerUI(key).reversePlayAndPause());
+	//radialMenu.setStyle("-fx-background-color:magenta;")
 
-	// STOP
-	stop = new RadialMenuItem(size, "stop", InfoTool.getImageViewFromDocuments("stop.png"),
-		v -> new Thread(Main.xPlayersList.getXPlayer(key)::stop).start());
+	radialMenu.setPickOnBounds(false);
+	radialMenu.setCursor(Cursor.HAND);
+	if (xPlayerController.getKey() == 0)
+	    radialMenu.open();
 
-	// NEXT
-	next = new RadialMenuItem(size, "next", InfoTool.getImageViewFromDocuments("next.png"), v -> goNext());
-
-	// Replay
-	replay = new RadialMenuItem(size, "replay", InfoTool.getImageViewFromDocuments("replay.png"),
-		v -> Main.xPlayersList.getXPlayerUI(key).replaySong());
-
-	// empty1
-	mute = new RadialCheckMenuItem(size, InfoTool.getImageViewFromDocuments("unmute.png"), v -> {
-	});
-	mute.selectedProperty().addListener((observable, oldValue, newValue) -> {
-	    Main.xPlayersList.getXPlayer(key).setMute(mute.isSelected());
-	    mute.setGraphic(InfoTool.getImageViewFromDocuments(mute.isSelected() ? "mute.png" : "unmute.png"));
-	});
-
-	// FINNALLY
-	addMenuItem(next);
-	addMenuItem(resumeOrPause);
-	addMenuItem(stop);
-	addMenuItem(previous);
-	addMenuItem(replay);
-	addMenuItem(mute);
-
-	hideRadialMenu();
+	//--disable the bitches
+	//radialMenu.hide()
 	next.setDisable(true);
 	previous.setDisable(true);
+
+	//--Click
+	radialMenu.setOnItemClicked(clickEvent -> {
+
+	    if (clickEvent.item == stop)
+		xPlayerController.xPlayer.stop();
+	    else if (clickEvent.item == play)
+		xPlayerController.playOrReplay();
+	    else if (clickEvent.item == pause)
+		xPlayerController.pause();
+	    if (clickEvent.item == refresh)
+		xPlayerController.replaySong();
+
+	    else if (clickEvent.item == search)
+		ActionTool.openFileLocation(xPlayerController.xPlayerModel.songPathProperty().get());
+	});
+
+	radialMenu.setOnMenuOpenStarted(menuEvent -> System.out.println("Menu starts to open"));
+	radialMenu.setOnMenuOpenFinished(menuEvent -> System.out.println("Menu finished to open"));
+	radialMenu.setOnMenuCloseStarted(menuEvent -> System.out.println("Menu starts to close"));
+	radialMenu.setOnMenuCloseFinished(menuEvent -> System.out.println("Menu finished to close"));
+	radialMenu.setOnItemSelected(selectionEvent -> {
+	    if (selectionEvent.item == mute)
+		xPlayerController.xPlayer.setMute(true);
+	});
+	radialMenu.setOnItemDeselected(selectionEvent -> {
+	    if (selectionEvent.item == mute)
+		xPlayerController.xPlayer.setMute(false);
+	});
+
     }
 
     /**
-     * Checks if is showing.
-     *
-     * @return true, if is showing
+     * @return The RadialMenuButton
      */
-    public boolean isShowing() {
-	return isShowing;
+    public RadialMenu getRadialMenuButton() {
+	return radialMenu;
     }
 
-    /** The transparent. */
-    Color transparent = Color.TRANSPARENT;
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see radialmenu.RadialMenu#hideRadialMenu()
+    /**
+     * @return True if the RadialMenu is Hidden or false if not
      */
-    @Override
-    public void hideRadialMenu() {
-	isShowing = false;
-	super.hideRadialMenu();
-	setBackgroundColor(transparent);
-	setStrokeColor(transparent);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see radialmenu.RadialMenu#showRadialMenu()
-     */
-    @Override
-    public void showRadialMenu() {
-	isShowing = true;
-	super.showRadialMenu();
-	setBackgroundColor(Color.rgb(0, 0, 0, 0.93));
-	setStrokeColor(Color.WHITE);
+    public boolean isHidden() {
+	return radialMenu.getOpacity() == 0.0;
     }
 
     /**
      * This method is used to go on next song.
      */
     public void goNext() {
-	if (!next.isDisable()) {
-	    nextPressed = true;
-	    previousPressed = false;
-	}
+	//	if (!next.isDisable()) {
+	//	    nextPressed = true;
+	//	    previousPressed = false;
+	//	}
     }
 
     /**
      * This method is used to go on next song.
      */
     public void goPrevious() {
-	if (!previous.isDisable()) {
-	    nextPressed = false;
-	    previousPressed = true;
-	}
+	//	if (!previous.isDisable()) {
+	//	    nextPressed = false;
+	//	    previousPressed = true;
+	//	}
     }
 
     /**
@@ -187,4 +173,5 @@ public class XPlayerRadialMenu extends RadialMenu {
 	nextPressed = false;
 	previousPressed = false;
     }
+
 }

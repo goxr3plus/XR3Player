@@ -121,7 +121,7 @@ public class DJDisc extends StackPane {
 
 	// StackPane
 	canvas.setCursor(Cursor.OPEN_HAND);
-	// setStyle("-fx-background-color:green;")
+	//setStyle("-fx-background-color:green;")
 
 	this.arcColor = arcColor;
 	canvas.setEffect(new DropShadow(10, Color.WHITE));
@@ -486,6 +486,14 @@ public class DJDisc extends StackPane {
      * Pause the rotation of the disc.
      */
     public void pauseRotation() {
+	rotationAnimation.pause();
+    }
+
+    /**
+     * Stops the Rotation Animation
+     */
+    public void stopRotation() {
+	rotationAnimation.jumpTo(Duration.ZERO);
 	rotationAnimation.pause();
     }
 

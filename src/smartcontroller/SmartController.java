@@ -24,6 +24,7 @@ import org.fxmisc.easybind.EasyBind;
 import com.jfoenix.controls.JFXCheckBox;
 
 import application.Main;
+import customnodes.FunIndicator;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
@@ -43,6 +44,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
@@ -65,6 +67,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import media.Audio;
 import media.Media;
 import tools.ActionTool;
@@ -140,9 +144,12 @@ public class SmartController extends StackPane {
     @FXML
     private Region region;
 
+    @FXML
+    private VBox indicatorVBox;
+
     /** The indicator. */
     @FXML
-    private ProgressIndicator indicator;
+    private ProgressBar indicator;
 
     /** The cancel. */
     @FXML
@@ -329,16 +336,28 @@ public class SmartController extends StackPane {
 	centerStackPane.getChildren().add(tableViewer);
 	tableViewer.toBack();
 
+	//FunIndicator
+	FunIndicator funIndicator = new FunIndicator();
+	super.getChildren().add(super.getChildren().size() - 1, funIndicator);
+
 	// ------ region
-	region.setStyle("-fx-background-color:rgb(0,0,0,0.7)");
 	region.setVisible(false);
+	region.visibleProperty().addListener((observable, oldValue, newValue) -> {
+	    if (region.isVisible()) {
+		funIndicator.start();
+		funIndicator.setFromColor(Color.RED);
+	    } else
+		funIndicator.pause();
+	});
 
 	// ------ progress indicator
+	funIndicator.visibleProperty().bind(region.visibleProperty());
 	indicator.visibleProperty().bind(region.visibleProperty());
+	indicatorVBox.visibleProperty().bind(region.visibleProperty());
 
 	// ------ cancel
 	cancel.setStyle(
-		"-fx-background-color:rgb(0,0,0,0.7); -fx-background-radius:20; -fx-text-fill:rgb(40,140,255); -fx-font-size:18px; -fx-font-weight:bold;");
+		"-fx-background-color:rgb(0,0,0,0.7); -fx-background-radius:20; -fx-text-fill:orange; -fx-font-size:18px; -fx-font-weight:bold;");
 	cancel.visibleProperty().bind(region.visibleProperty());
 	cancel.setDisable(true);
 
@@ -361,7 +380,7 @@ public class SmartController extends StackPane {
 	// -------- pageField
 	pageField.opacityProperty()
 		.bind(Bindings.when(pageField.hoverProperty().or(next.hoverProperty()).or(previous.hoverProperty()))
-			.then(1.0).otherwise(0.06));
+			.then(1.0).otherwise(0.03));
 	pageField.disableProperty().bind(next.disabledProperty());
 	pageField.textProperty().addListener((observable, oldValue, newValue) -> {
 

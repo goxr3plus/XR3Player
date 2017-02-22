@@ -182,8 +182,7 @@ public class StreamPlayer implements Runnable {
     private Map<String, Object> emptyMap = new HashMap<>();
 
     /**
-     * This executor service is used in order the playerState events to be
-     * executed in an order
+     * This executor service is used in order the playerState events to be executed in an order
      */
     ExecutorService eventsExecutorService = Executors.newSingleThreadExecutor();
 
@@ -455,14 +454,10 @@ public class StreamPlayer implements Runnable {
     /**
      * Inits a DateLine.<br>
      * 
-     * From the AudioInputStream, i.e. from the sound file, we fetch information
-     * about the format of the audio data. These information include the
-     * sampling frequency, the number of channels and the size of the samples.
-     * There information are needed to ask JavaSound for a suitable output line
-     * for this audio file. Furthermore, we have to give JavaSound a hint about
-     * how big the internal buffer for the line should be. Here, we say
-     * AudioSystem.NOT_SPECIFIED, signaling that we don't care about the exact
-     * size. JavaSound will use some default value for the buffer size.
+     * From the AudioInputStream, i.e. from the sound file, we fetch information about the format of the audio data. These information include the
+     * sampling frequency, the number of channels and the size of the samples. There information are needed to ask JavaSound for a suitable output
+     * line for this audio file. Furthermore, we have to give JavaSound a hint about how big the internal buffer for the line should be. Here, we say
+     * AudioSystem.NOT_SPECIFIED, signaling that we don't care about the exact size. JavaSound will use some default value for the buffer size.
      *
      * @throws LineUnavailableException
      *             the line unavailable exception
@@ -707,8 +702,7 @@ public class StreamPlayer implements Runnable {
     /**
      * Main loop.
      *
-     * Player Status == STOPPED || SEEKING => End of Thread + Freeing Audio
-     * Resources.<br>
+     * Player Status == STOPPED || SEEKING => End of Thread + Freeing Audio Resources.<br>
      * Player Status == PLAYING => Audio stream data sent to Audio line.<br>
      * Player Status == PAUSED => Waiting for another status.
      */
@@ -805,8 +799,7 @@ public class StreamPlayer implements Runnable {
     }
 
     /**
-     * Skip bytes in the File input stream. It will skip N frames matching to
-     * bytes, so it will never skip given bytes length exactly.
+     * Skip bytes in the File input stream. It will skip N frames matching to bytes, so it will never skip given bytes length exactly.
      *
      * @param bytes
      *            the bytes
@@ -862,8 +855,7 @@ public class StreamPlayer implements Runnable {
 
     /**
      * Calculates the current position of the encoded audio based on <br>
-     * <b>nEncodedBytes = encodedAudioLength -
-     * encodedAudioInputStream.available();</b>
+     * <b>nEncodedBytes = encodedAudioLength - encodedAudioInputStream.available();</b>
      * 
      * @return The Position of the encoded stream in term of bytes
      */
@@ -1116,8 +1108,7 @@ public class StreamPlayer implements Runnable {
     }
 
     /**
-     * Set SourceDataLine buffer size. It affects audio latency. (the delay
-     * between line.write(data) and real sound). Minimum value should be over
+     * Set SourceDataLine buffer size. It affects audio latency. (the delay between line.write(data) and real sound). Minimum value should be over
      * 10000 bytes.
      * 
      * @param size
@@ -1128,8 +1119,7 @@ public class StreamPlayer implements Runnable {
     }
 
     /**
-     * Sets Pan value. Line should be opened before calling this method. Linear
-     * scale : -1.0 <--> +1.0
+     * Sets Pan value. Line should be opened before calling this method. Linear scale : -1.0 <--> +1.0
      *
      * @param fPan
      *            the new pan
@@ -1145,8 +1135,7 @@ public class StreamPlayer implements Runnable {
     }
 
     /**
-     * Sets Gain value. Line should be opened before calling this method. Linear
-     * scale 0.0 <--> 1.0 Threshold Coef. : 1/2 to avoid saturation.
+     * Sets Gain value. Line should be opened before calling this method. Linear scale 0.0 <--> 1.0 Threshold Coef. : 1/2 to avoid saturation.
      *
      * @param fGain
      *            the new gain
@@ -1184,8 +1173,7 @@ public class StreamPlayer implements Runnable {
     }
 
     /**
-     * Represents a control for the relative balance of a stereo signal between
-     * two stereo speakers. The valid range of values is -1.0 (left channel
+     * Represents a control for the relative balance of a stereo signal between two stereo speakers. The valid range of values is -1.0 (left channel
      * only) to 1.0 (right channel only). The default is 0.0 (centered).
      *
      * @param fBalance

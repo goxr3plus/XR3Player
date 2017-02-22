@@ -25,6 +25,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -175,8 +176,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
     // -----------------------------------------------------------------------------
 
-    private static final ImageView eye = InfoTool.getImageViewFromDocuments("eye.png");
-    private static final ImageView eyeDisabled = InfoTool.getImageViewFromDocuments("eyeDisabled.png");
+    private final ImageView eye = InfoTool.getImageViewFromDocuments("eye.png");
+    private final ImageView eyeDisabled = InfoTool.getImageViewFromDocuments("eyeDisabled.png");
 
     /** The x player settings controller. */
     public XPlayerSettingsController xPlayerSettingsController;
@@ -270,7 +271,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	xPlayer.addStreamPlayerListener(this);
 
 	// -----Important-------------
-	radialMenu = new XPlayerRadialMenu(key);
+	radialMenu = new XPlayerRadialMenu(this);
 	xPlayList = new XPlayerPlaylist(25, this);
 	visualizerWindow = new VisualizerWindowController(this);
 	xPlayerSettingsController = new XPlayerSettingsController(this);
@@ -322,7 +323,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() - 10);
 
 		//Seek
-		this.seekService.startSeekService(
+		seekService.startSeekService(
 			(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
 	    }
 	    //    }
@@ -340,7 +341,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + 10);
 
 		//Seek
-		this.seekService.startSeekService(
+		seekService.startSeekService(
 			(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
 	    }
 	    //   }
@@ -454,21 +455,39 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
      * Used by resume method.
      */
     public void resumeCode() {
+	System.out.println("RESUME code....");
+
+	//Stop the fade animation
 	disc.stopFade();
+
+	//image !=null? 
 	if (!playService.isDiscImageNull())
 	    disc.resumeRotation();
+
+	//Start the visualizer
 	visualizer.startVisualizer();
-	radialMenu.resumeOrPause.setGraphic(radialMenu.pauseImageView);
+
+	//Pause Image
+	//radialMenu.resumeOrPause.setGraphic(radialMenu.pauseImageView);
     }
 
     /**
      * Used by pause method.
      */
     private void pauseCode() {
+	System.out.println("PAUSE code....");
+
+	//Play the fade animation
 	disc.playFade();
+
+	//Pause the Rotation fo disc
 	disc.pauseRotation();
+
+	//Stop the Visualizer
 	visualizer.stopVisualizer();
-	radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
+
+	//Play Image
+	//radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
     }
 
     /**
@@ -609,9 +628,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	// disc.set
 
 	// radialMenu
-	radialMenu.setStrokeVisible(false);
-	radialMenu.setBackgroundMouseOnColor(color);
-	disc.getChildren().add(radialMenu);
+	//radialMenu.setStrokeVisible(false)
+	//radialMenu.setBackgroundMouseOnColor(color)
+	disc.getChildren().add(radialMenu.getRadialMenuButton());
+	radialMenu.getRadialMenuButton().setPrefSize(width * 2, 0);
 
 	// Canvas Mouse Moving
 	disc.getCanvas().setOnMouseMoved(m -> {
@@ -650,7 +670,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
 
 		// RadialMenu!showing and duration!=0 and duration!=-1
-		if (!radialMenu.isShowing() && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
+		if (!radialMenu.isHidden() && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 
 		    System.out.println("Entered Dragging...");
 
@@ -772,10 +792,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    // Put the appropriate Cursor
 	    disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 
-	    // Resume Rotation
-	    if (xPlayer.isPlaying() && !playService.isDiscImageNull())
-		disc.resumeRotation();
-
 	    // Recalculate Angle and paint again Disc
 	    disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), true);
 	    disc.repaint();
@@ -818,8 +834,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		    updateMessage("Applying Settings ...");
 
 		    // Configure Media Settings
-		    if (xPlayer.isPausedOrPlaying())
-			configureMediaSettings();
+		    // if (xPlayer.isPausedOrPlaying())
+		    configureMediaSettings();
 
 		    return succeded;
 		}
@@ -1043,6 +1059,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// Mute?
 	xPlayer.setMute(radialMenu.mute.isSelected());
+	System.out.println("Mute is Selected? " + radialMenu.mute.isSelected());
 
 	// Volume
 	controlVolume();
@@ -1113,8 +1130,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormat);
 	    }
 
-	    if (!visualizer.isRunning())
-		Platform.runLater(this::resumeCode);
+	    //	    if (!visualizer.isRunning())
+	    //		Platform.runLater(this::resumeCode);
 
 	}
 
@@ -1130,19 +1147,21 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    visualizer.setupDSP(xPlayer.getSourceDataLine());
 	    visualizer.startDSP(xPlayer.getSourceDataLine());
 
+	    Platform.runLater(
+		    () -> mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get())));
+
+	    // Status.RESUMED
+	} else if (streamPlayerEvent.getPlayerStatus() == Status.RESUMED) {
+
 	    Platform.runLater(() -> {
-		mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
+		playerStatusLabel.setText("Player is Resumed ");
 		resumeCode();
 	    });
-
-	    System.out.println("XPlayer [ " + getKey() + " ] is opened!");
 
 	    // Status.PLAYING
 	} else if (streamPlayerEvent.getPlayerStatus() == Status.PLAYING) {
 
 	    Platform.runLater(this::resumeCode);
-
-	    System.out.println("XPlayer [ " + getKey() + " ] is PLAYING!");
 
 	    // Status.PAUSED
 	} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
@@ -1151,7 +1170,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		playerStatusLabel.setText("Player is Paused ");
 		pauseCode();
 	    });
-	    System.out.println("XPlayer [ " + getKey() + " ] is PAUSED!");
 
 	    // Status.STOPPED
 	} else if (streamPlayerEvent.getPlayerStatus() == Status.STOPPED) {
@@ -1160,27 +1178,48 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	    Platform.runLater(() -> {
 
-		//
-		mediaFileMarquee.setText("Player is Stopped");
-		playerStatusLabel.setText(mediaFileMarquee.textProperty().get());
+		//SeekService running?
+		if (seekService.isRunning()) {
 
-		// disc
-		if (!seekService.isRunning()) {
+		    //oh yeah
+
+		} else {
+		    //Set time to 0 to not have problems with SeekService
+		    xPlayerModel.setCurrentTime(0);
+
+		    //Change Marquee text
+		    mediaFileMarquee.setText("Player is Stopped");
+		    playerStatusLabel.setText(mediaFileMarquee.textProperty().get());
+
 		    disc.calculateAngleByValue(0, 0, true);
 		    disc.repaint();
+
+		    //disk
+		    disc.stopRotation();
+		    disc.stopFade();
+
+		    //Visualizer
+		    visualizer.stopVisualizer();
+
+		    //Play Image
+		    //radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
+
+		    //Notification
+		    ActionTool.showNotification("Player " + this.getKey(),
+			    "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500),
+			    NotificationType.SIMPLE);
 		}
-		xPlayerModel.setCurrentTime(0);
 
-		disc.stopFade();
-		disc.pauseRotation();
-		visualizer.stopVisualizer();
-		radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
-
-		ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...",
-			Duration.millis(500), NotificationType.SIMPLE);
 	    });
 
-	    System.out.println("XPlayer [ " + getKey() + " ] is STOPPED!");
+	    //Status.SEEKING
+	} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKING) {
+
+	    Platform.runLater(() -> playerStatusLabel.setText("Player is SEEKING "));
+
+	    //Status.SEEKED
+	} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKED) {
+
 	}
     }
 
@@ -1243,6 +1282,16 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	else if (xPlayer.isStopped() || xPlayer.isUnknown())
 	    replaySong();
 
+    }
+
+    /**
+     * If the player is paused it resume it else if it is stopped it replays the Media
+     */
+    public void playOrReplay() {
+	if (xPlayer.isPaused()) // paused?
+	    resume();
+	else if (xPlayer.isStopped() || xPlayer.isUnknown())
+	    replaySong();
     }
 
 }

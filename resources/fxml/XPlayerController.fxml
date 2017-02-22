@@ -107,7 +107,7 @@
                               </StackPane>
                               <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
                                  <children>
-                                    <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" StackPane.alignment="CENTER_RIGHT">
+                                    <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" visible="false" StackPane.alignment="CENTER_RIGHT">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -146,14 +146,6 @@
                         </StackPane>
                         <StackPane fx:id="diskStackPane" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="openFileButton" mnemonicParsing="false" text="Open " StackPane.alignment="TOP_RIGHT">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <tooltip>
-                                    <Tooltip text="Choose a File to be opened" />
-                                 </tooltip>
-                              </Button>
                               <HBox alignment="CENTER" maxHeight="32.0" prefHeight="32.0" spacing="10.0" StackPane.alignment="BOTTOM_CENTER">
                                  <children>
                                     <Button fx:id="backwardButton" mnemonicParsing="false" text="10 sec">
@@ -197,6 +189,14 @@
                                     <Insets bottom="3.0" />
                                  </StackPane.margin>
                               </HBox>
+                              <Button fx:id="openFileButton" mnemonicParsing="false" text="Open " StackPane.alignment="TOP_LEFT">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Choose a File to be opened" />
+                                 </tooltip>
+                              </Button>
                            </children>
                         </StackPane>
                      </children>

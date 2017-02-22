@@ -1,4 +1,4 @@
-package libraries_system;
+package librarysystema;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -87,14 +87,12 @@ public class LibraryMode extends GridPane {
     public final MultipleLibraries multipleLibs = new MultipleLibraries();
 
     /**
-     * The mechanism which allows you to view the libraries as components with
-     * image etc.
+     * The mechanism which allows you to view the libraries as components with image etc.
      */
     public final LibrariesViewer libraryViewer = new LibrariesViewer();
 
     /**
-     * The mechanism which allows you to transport items between libraries and
-     * more.
+     * The mechanism which allows you to transport items between libraries and more.
      */
     public final LibrariesSearcher librariesSearcher = new LibrariesSearcher();
 
@@ -102,8 +100,7 @@ public class LibraryMode extends GridPane {
     PreparedStatement insertNewLibrary;
 
     /**
-     * Default image of a library(which has not a costume one selected by the
-     * user.
+     * Default image of a library(which has not a costume one selected by the user.
      */
     public static final Image defaultImage = InfoTool.getImageFromDocuments("library.png");
     /**
@@ -237,8 +234,7 @@ public class LibraryMode extends GridPane {
     }
 
     /**
-     * Update Settings Total Library only if this Library exists and it is on
-     * settings mode
+     * Update Settings Total Library only if this Library exists and it is on settings mode
      * 
      * @param name
      */
@@ -284,7 +280,7 @@ public class LibraryMode extends GridPane {
 		.addListener((observable, oldValue, newValue) -> libraryViewer.goOnSelectionMode(newValue));
 
 	// searchLibrary
-	topGrid.add(librariesSearcher, 2, 0);
+	topGrid.add(librariesSearcher, 1, 0);
 
 	// previous
 	previous.setOnAction(a -> libraryViewer.previous());
@@ -433,7 +429,7 @@ public class LibraryMode extends GridPane {
 	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);");
 
 	    // ScrollBar
-	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);	    
+	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);
 	    jfSlider.setCursor(Cursor.HAND);
 	    jfSlider.setMin(0);
 	    jfSlider.setMax(0);

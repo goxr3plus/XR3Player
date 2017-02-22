@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -27,7 +26,6 @@ import smartcontroller.Genre;
 import smartcontroller.SmartController;
 import tools.InfoTool;
 
-// TODO: Auto-generated Javadoc
 /**
  * Represents the PlayList of a Specific Player.
  *
@@ -119,20 +117,20 @@ public class XPlayerPlaylist extends StackPane {
     @FXML
     public void initialize() {
 
-//	controller.setOnDragOver(over -> {
-//	    if (Main.dragOwner != Main.DragOwner.XPLAYLISTSONG)// &&
-//							       // controller.totalInDataBase
-//							       // <
-//							       // maximumItems)
-//		over.acceptTransferModes(TransferMode.LINK);
-//	});
-//	controller.setOnDragDropped(drop -> {
-//	    // if?
-//	    if (drop.getDragboard().hasFiles() && controller.isFree(true))
-//		controller.inputService.start(drop.getDragboard().getFiles());
-//
-//	    drop.setDropCompleted(true);
-//	});
+	//	controller.setOnDragOver(over -> {
+	//	    if (Main.dragOwner != Main.DragOwner.XPLAYLISTSONG)// &&
+	//							       // controller.totalInDataBase
+	//							       // <
+	//							       // maximumItems)
+	//		over.acceptTransferModes(TransferMode.LINK);
+	//	});
+	//	controller.setOnDragDropped(drop -> {
+	//	    // if?
+	//	    if (drop.getDragboard().hasFiles() && controller.isFree(true))
+	//		controller.inputService.start(drop.getDragboard().getFiles());
+	//
+	//	    drop.setDropCompleted(true);
+	//	});
 
 	// BorderPane
 	borderPane.setCenter(controller);

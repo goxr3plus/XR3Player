@@ -1,0 +1,25 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//Make this project as a Gradle project
+eclipse.project {
+  	natures 'org.springsource.ide.eclipse.gradle.core.nature'
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //Medusa Library
+    compile 'eu.hansolo:Medusa:7.6'
+
+}
+

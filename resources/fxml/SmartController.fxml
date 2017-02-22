@@ -8,7 +8,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -24,8 +24,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="236.0" prefWidth="542.0" styleClass="smartController" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="236.0" prefWidth="542.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="mainBorder" style="-fx-background-color: transparent;">
          <top>
@@ -165,15 +166,19 @@
             </StackPane>
          </center>
       </BorderPane>
-      <Region fx:id="region" visible="false" />
-      <ProgressIndicator fx:id="indicator" progress="0.0" visible="false" />
-      <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
-         <tooltip>
-            <Tooltip text="Cancel" />
-         </tooltip>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <Region fx:id="region" />
+      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0">
+         <children>
+            <ProgressBar fx:id="indicator" maxHeight="12.0" minHeight="12.0" prefHeight="12.0" prefWidth="112.0" progress="0.0" VBox.vgrow="NEVER" />
+            <Button fx:id="cancel" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" text="Cancel">
+               <tooltip>
+                  <Tooltip text="Cancel" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </fx:root>

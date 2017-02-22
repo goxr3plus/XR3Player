@@ -1,4 +1,4 @@
-package libraries_system;
+package librarysystema;
 
 import application.Main;
 import javafx.scene.control.ContextMenu;

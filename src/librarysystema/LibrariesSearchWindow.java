@@ -1,7 +1,7 @@
 /*
  * 
  */
-package libraries_system;
+package librarysystema;
 
 import application.Main;
 import javafx.fxml.FXML;

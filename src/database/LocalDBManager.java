@@ -20,7 +20,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import libraries_system.Library;
+import librarysystema.Library;
 import smartcontroller.Operation;
 import tools.ActionTool;
 import tools.InfoTool;
@@ -170,16 +170,14 @@ public class LocalDBManager {
     }
 
     /**
-     * Using this methods to control commits across the application so not to
-     * have unexpected lags.
+     * Using this methods to control commits across the application so not to have unexpected lags.
      */
     public void commit() {
 	commitExecutor.execute(commitRunnable);
     }
 
     /**
-     * Using this methods to control commit + vacuum across the application so
-     * not to have unexpected lags.
+     * Using this methods to control commit + vacuum across the application so not to have unexpected lags.
      * 
      */
     public void commitAndVacuum() {
@@ -343,7 +341,7 @@ public class LocalDBManager {
 			Main.logger.info("Loading libraries....");
 
 			// Refresh the text
-			Platform.runLater(() -> Main.updateScreen.label.setText("Uploading Libraries..."));
+			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Libraries..."));
 			updateProgress(1, 2);
 
 			// Load all the libraries
