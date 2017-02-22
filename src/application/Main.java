@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +40,7 @@ import libraries_system.LibraryMode;
 import remote_communication.RemoteAppsController;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
-import smartcontroller.PlayedSongs;
+import smartcontroller.PlayedMediaList;
 import smartcontroller.SmartSearcher.AdvancedSearch;
 import tools.ActionTool;
 import tools.InfoTool;
@@ -61,26 +62,6 @@ public class Main extends Application {
 
     /** Application logger. */
     public static final Logger logger = Logger.getGlobal();
-
-    /**
-     * Indicates where the drag is coming from i use this cause for example when
-     * you drag a song from a library that song can not be dragged into the same
-     * library again cause is stupid that to happen.
-     *
-     * @author SuperGoliath
-     */
-    public enum DragOwner {
-
-	/** The library song. */
-	LIBRARYSONG,
-	/** The xplaylist song. */
-	XPLAYLISTSONG,
-	/** The unknown. */
-	UNKNOWN;
-    }
-
-    /** Indicates which is the owner of the drag. */
-    // public static DragOwner dragOwner = DragOwner.UNKNOWN
 
     /** The Constant tagWindow. */
     // public static final TagWindow tagWindow = new TagWindow()
@@ -104,8 +85,7 @@ public class Main extends Application {
     public static final StarWindow starWindow = new StarWindow();
 
     /**
-     * This window is being used to export files from the application to the
-     * outside world
+     * This window is being used to export files from the application to the outside world
      */
     public static final ExportWindowController exportWindow = new ExportWindowController();
 
@@ -152,7 +132,7 @@ public class Main extends Application {
     public static final AdvancedSearch advancedSearch = new AdvancedSearch();
 
     /** The Constant playedSongs. */
-    public static final PlayedSongs playedSongs = new PlayedSongs();
+    public static final PlayedMediaList playedSongs = new PlayedMediaList();
 
     /** The Constant libraryMode. */
     // Modes
@@ -292,8 +272,11 @@ public class Main extends Application {
 		updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
 		updateScreen.setVisible(true);
 
-		vService.start(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db"),
-			new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db-journal"));
+		vService.start(
+			new File(
+				InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db"),
+			new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator
+				+ "dbFile.db-journal"));
 
 		// Go
 		dbManager.commitAndVacuum();
@@ -421,11 +404,8 @@ public class Main extends Application {
 	}).start();
     }
 
-    private static int counter;
-
     /**
-     * This method is fetching data from github to check if the is a new update
-     * for XR3Player
+     * This method is fetching data from github to check if the is a new update for XR3Player
      * 
      * @param showIfNotUpdateAvailable
      */
@@ -519,10 +499,10 @@ public class Main extends Application {
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
 				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style);
-				counter = -1;
+				final AtomicInteger counter = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*"))
 					.forEach(el -> {
-					    if (++counter >= 1)
+					    if (counter.addAndGet(+1) >= 1)
 						textArea.appendText("\t" + (counter) + ")" + el + "\n");
 					});
 
@@ -568,22 +548,6 @@ public class Main extends Application {
 	    updaterThread.setDaemon(true);
 	    updaterThread.start();
 	}
-    }
-
-    /**
-     * After Export or Import DataBase the Layout must be redefined again based
-     * on mode.
-     */
-    public static void fixLayout() {
-	updateScreen.setVisible(false);
-    }
-
-    /**
-     * This method is hiding all the PopUp Windows of the application.
-     */
-    public static void hideAllPopUpWindows() {
-	advancedSearch.hide();
-	// navigationBar.getExtraControls().hide()
     }
 
     /**

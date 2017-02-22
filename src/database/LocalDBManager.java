@@ -307,7 +307,7 @@ public class LocalDBManager {
 			Main.root.setCenter(Main.libraryMode);
 			Main.updateScreen.setVisible(false);
 			Main.updateScreen.progressBar.progressProperty().unbind();
-			Main.sideBar.showBar();
+			//Main.sideBar.showBar();
 
 			// Check for updates on start
 			new Thread(() -> {

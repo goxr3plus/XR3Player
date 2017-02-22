@@ -346,16 +346,22 @@ public class SmartController extends StackPane {
 	searchBarHBox.getChildren().add(0, searchService);
 
 	// ------ previous
+	previous.opacityProperty()
+		.bind(Bindings.when(previous.hoverProperty().or(next.hoverProperty())).then(1.0).otherwise(0.5));
 	previous.disableProperty().bind(next.disabledProperty());
 	previous.visibleProperty().bind(currentPage.isNotEqualTo(0));
 	previous.setOnAction(a -> goPrevious());
 
 	// ------- next 
+	next.opacityProperty()
+		.bind(Bindings.when(next.hoverProperty().or(previous.hoverProperty())).then(1.0).otherwise(0.5));
 	next.setVisible(false);
 	next.setOnAction(a -> goNext());
 
 	// -------- pageField
-	pageField.opacityProperty().bind(Bindings.when(pageField.hoverProperty()).then(1.0).otherwise(0.06));
+	pageField.opacityProperty()
+		.bind(Bindings.when(pageField.hoverProperty().or(next.hoverProperty()).or(previous.hoverProperty()))
+			.then(1.0).otherwise(0.06));
 	pageField.disableProperty().bind(next.disabledProperty());
 	pageField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -434,9 +440,7 @@ public class SmartController extends StackPane {
 	});
 
 	// exportFiles
-	exportFiles.setOnAction(a -> {
-	    Main.exportWindow.show(this);
-	});
+	exportFiles.setOnAction(a -> Main.exportWindow.show(this));
 
 	// Export
 	// ...

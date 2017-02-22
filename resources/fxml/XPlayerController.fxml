@@ -13,13 +13,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="231.0" prefWidth="379.0" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="309.0" prefWidth="536.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
@@ -145,7 +146,7 @@
                         </StackPane>
                         <StackPane fx:id="diskStackPane" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="openFileButton" mnemonicParsing="false" stylesheets="@../style/application.css" text="Open " StackPane.alignment="TOP_RIGHT">
+                              <Button fx:id="openFileButton" mnemonicParsing="false" text="Open " StackPane.alignment="TOP_RIGHT">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -153,6 +154,49 @@
                                     <Tooltip text="Choose a File to be opened" />
                                  </tooltip>
                               </Button>
+                              <HBox alignment="CENTER" maxHeight="32.0" prefHeight="32.0" spacing="10.0" StackPane.alignment="BOTTOM_CENTER">
+                                 <children>
+                                    <Button fx:id="backwardButton" mnemonicParsing="false" text="10 sec">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true" rotate="-180.0">
+                                             <image>
+                                                <Image url="@../image/forward.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button disable="true" mnemonicParsing="false" text="REC">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/microphone.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="forwardButton" mnemonicParsing="false" text="10 sec">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/forward.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                                 <StackPane.margin>
+                                    <Insets bottom="3.0" />
+                                 </StackPane.margin>
+                              </HBox>
                            </children>
                         </StackPane>
                      </children>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root style="-fx-background-color: rgb(255,255,255,0.9);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root style="-fx-background-color: rgb(255,255,255,0.9);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <StackPane BorderPane.alignment="CENTER">
          <children>
@@ -20,7 +20,7 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-family: &quot;Younger than me&quot;;" text="System Explorer" />
-            <TreeView fx:id="systemTreeView" />
+            <TreeView fx:id="systemTreeView" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </center>

@@ -514,7 +514,7 @@ public abstract class Media {
 				    Main.dbManager.commit();
 
 				    // Rename it in playedSong if...
-				    Main.playedSongs.renameSong(getFilePath(), newName);
+				    Main.playedSongs.renameMedia(getFilePath(), newName);
 
 				    // change the file path
 				    setFilePath(newName);

@@ -8,12 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.CopyOption;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,11 +79,51 @@ public final class ActionTool {
      *            the path
      */
     public static void openFileLocation(String path) {
-	showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path),
-		Duration.millis(1500), NotificationType.INFORMATION);
+	// Open the Default Browser
 	if (InfoTool.osName.toLowerCase().contains("win")) {
+	    showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path),
+		    Duration.millis(1500), NotificationType.INFORMATION);
+
+	    //START: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
+
+	    path = path.trim().replaceAll(" +", " ");
+	    String selectPath = "/select," + path;
+
+	    //START: Strip one SPACE among consecutive spaces
+	    LinkedList<String> list = new LinkedList<>();
+	    StringBuilder sb = new StringBuilder();
+	    boolean flag = true;
+
+	    for (int i = 0; i < selectPath.length(); i++) {
+		if (i == 0) {
+		    sb.append(selectPath.charAt(i));
+		    continue;
+		}
+
+		if (selectPath.charAt(i) == ' ' && flag) {
+		    list.add(sb.toString());
+		    sb.setLength(0);
+		    flag = false;
+		    continue;
+		}
+
+		if (!flag && selectPath.charAt(i) != ' ') {
+		    flag = true;
+		}
+
+		sb.append(selectPath.charAt(i));
+	    }
+
+	    list.add(sb.toString());
+
+	    list.addFirst("explorer.exe");
+	    //END: Strip one SPACE among consecutive spaces
+
+	    //END: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
+
 	    try {
-		Runtime.getRuntime().exec("explorer.exe /select," + path);
+		//Open in Explorer and Highlight
+		new ProcessBuilder(list).start();
 	    } catch (IOException ex) {
 		logger.log(Level.WARNING, ex.getMessage(), ex);
 		showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500),
@@ -206,17 +248,17 @@ public final class ActionTool {
      * @param uri
      * @return <b>True</b> if succeeded , <b>False</b> if not
      */
-    public static boolean openWebSite(String uri) {
+    public static boolean openWebSite(String uri, String... optional) {
 
 	// Open the Default Browser
 	if (Desktop.isDesktopSupported()) {
 	    Desktop desktop = Desktop.getDesktop();
 	    try {
-		desktop.browse(new URI(uri));
+		desktop.browse(new URI(uri + ((optional.length == 0) ? "" : URLEncoder.encode(optional[0], "UTF-8"))));
 	    } catch (IOException | URISyntaxException ex) {
 		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-			"Can't open default web browser at:\n[ https://sourceforge.net/projects/xr3player/ ]",
-			Duration.millis(2500), NotificationType.INFORMATION));
+			"Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
+			NotificationType.INFORMATION));
 		logger.log(Level.INFO, "", ex);
 		return false;
 	    }
@@ -399,8 +441,7 @@ public final class ActionTool {
     }
 
     /**
-     * Returns a Random Number from 0 to ...what i have choosen in method see
-     * the doc
+     * Returns a Random Number from 0 to ...what i have choosen in method see the doc
      *
      * @return the int
      */
@@ -411,8 +452,7 @@ public final class ActionTool {
     /**
      * Return random table name.
      *
-     * @return Returns a RandomTableName for the database in format
-     *         ("_"+randomNumber)
+     * @return Returns a RandomTableName for the database in format ("_"+randomNumber)
      */
     public static String returnRandomTableName() {
 	return "_" + returnRandom();

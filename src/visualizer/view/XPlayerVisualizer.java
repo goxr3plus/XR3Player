@@ -27,15 +27,14 @@ public class XPlayerVisualizer extends Visualizer {
 	super("XRPLAYER");
 
 	this.xPlayerUI = xPlayerUI;
-	this.animationService.passDJDisc(xPlayerUI.disc);
+	this.animationService.passXPlayer(xPlayerUI);
 
 	setScopeColor(xPlayerUI.disc.getArcColor());
 	addMouseListener();
     }
 
     /**
-     * Add a mouse listener so every time primary mouse button is clicked the
-     * visualizer is changing.
+     * Add a mouse listener so every time primary mouse button is clicked the visualizer is changing.
      */
     protected void addMouseListener() {
 

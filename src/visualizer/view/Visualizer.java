@@ -3,11 +3,11 @@
  */
 package visualizer.view;
 
-import disc.DJDisc;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
 import visualizer.model.VisualizerDrawer;
+import xplayer.presenter.XPlayerController;
 
 /**
  * The Class Visualizer.
@@ -109,8 +109,15 @@ abstract class Visualizer extends VisualizerDrawer {
 	 */
 	private volatile SimpleBooleanProperty running = new SimpleBooleanProperty(false);
 
-	/** The disc. */
-	DJDisc disc;
+	/**
+	 * XPlayerController reference
+	 */
+	XPlayerController xPlayerController;
+
+	/**
+	 * The animationService can draw
+	 */
+	private boolean draw = true;
 
 	@Override
 	public void start() {
@@ -146,79 +153,93 @@ abstract class Visualizer extends VisualizerDrawer {
 	}
 
 	/**
-	 * This method is used by XPLayerVisualizer to pass it's disc so it is
-	 * repainted from this AnimationTimer.
+	 * This method is used by XPlayerController to pass a reference to the AnimationTimer
 	 *
-	 * @param disc
-	 *            the disc
+	 * @param xPlayerController
+	 *            The XPlayerController Reference
 	 */
-	public void passDJDisc(DJDisc disc) {
-	    this.disc = disc;
+	public void passXPlayer(XPlayerController xPlayerController) {
+	    this.xPlayerController = xPlayerController;
 	}
 
 	@Override
 	public void handle(long nanos) {
+
+	    //XPlayer controlls this animationTimer?
+	    if (xPlayerController != null && !xPlayerController.visualizerStackController.isVisible()) {
+		clear();
+		draw = false;
+	    } else
+		draw = true;
+
+	    //Can draw?
+	    if (draw) {
+		clear();
+		switch (displayMode.get()) {
+
+		case 0:
+		    drawOscilloscope(false);
+		    break;
+		case 1:
+		    drawOscilloscope(true);
+		    break;
+		case 2:
+		    drawOscilloScopeLines();
+		    break;
+		case 3:
+		    drawSpectrumBars();
+		    break;
+		case 4:
+		    drawVUMeter();
+		    break;
+		case 5:
+		    drawPolySpiral();
+		    break;
+		case 6:
+		    drawSierpinski();
+		    break;
+		case 7:
+		    drawJuliaSet();
+		    break;
+		default:
+		    break;
+		}
+
+		// -- Show FPS if necessary.
+		if (showFPS) {
+
+		    framesPerSecond++;
+
+		    // Check for 1 second passed
+		    if (nanos >= nextSecond) {
+			fps = framesPerSecond;
+			framesPerSecond = 0;
+			nextSecond = nanos + ONE_SECOND_NANOS;
+		    }
+		    gc.setStroke(Color.YELLOW);
+		    gc.strokeText("FPS: " + fps + " (FRRH: " + frameRateRatioHint + ")", 0, canvasHeight - 1.00);
+		}
+
+	    } //END: if draw == TRUE
+
+	    //--XRPlayer controller?
+	    if (xPlayerController != null) {
+		//Repaint the disc
+		if (xPlayerController.disc != null)
+		    xPlayerController.disc.repaint();
+	    }
+
+	    //--------------------------------------------------------------------------------------RUBBISH CODE
+	    /*
+	     * if (System.currentTimeMillis() >= lfu + 1000) { lfu =
+	     * System.currentTimeMillis(); fps = framesPerSecond;
+	     * framesPerSecond = 0; }
+	     */
+
 	    // System.out.println("Canvas Width is:" + canvasWidth + " , Canvas
 	    // Height is:" + canvasHeight)
 
-	    clear();
-	    switch (displayMode.get()) {
-
-	    case 0:
-		drawOscilloscope(false);
-		break;
-	    case 1:
-		drawOscilloscope(true);
-		break;
-	    case 2:
-		drawOscilloScopeLines();
-		break;
-	    case 3:
-		drawSpectrumBars();
-		break;
-	    case 4:
-		drawVUMeter();
-		break;
-	    case 5:
-		drawPolySpiral();
-		break;
-	    case 6:
-		drawSierpinski();
-		break;
-	    case 7:
-		drawJuliaSet();
-		break;
-	    default:
-		break;
-	    }
-
 	    // System.out.println("Running..")
-
-	    // -- Show FPS if necessary.
-	    if (showFPS) {
-
-		framesPerSecond++;
-
-		// Check for 1 second passed
-		if (nanos >= nextSecond) {
-		    fps = framesPerSecond;
-		    framesPerSecond = 0;
-		    nextSecond = nanos + ONE_SECOND_NANOS;
-		}
-
-		/*
-		 * if (System.currentTimeMillis() >= lfu + 1000) { lfu =
-		 * System.currentTimeMillis(); fps = framesPerSecond;
-		 * framesPerSecond = 0; }
-		 */
-		gc.setStroke(Color.YELLOW);
-		gc.strokeText("FPS: " + fps + " (FRRH: " + frameRateRatioHint + ")", 0, canvasHeight - 1.00);
-	    }
-
-	    // player.analyserBox.repaintCanvas();
-
-	    if (disc != null)
-		disc.repaint();
 	}
 
     }

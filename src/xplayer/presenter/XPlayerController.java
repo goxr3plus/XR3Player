@@ -149,6 +149,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     @FXML
     private Button openFileButton;
 
+    @FXML
+    private Button backwardButton;
+
+    @FXML
+    private Button forwardButton;
+
     /** The fx region. */
     @FXML
     private Region fxRegion;
@@ -194,7 +200,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
      * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
      * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
      */
-    public VisualizerStackController visualizerStackController = new VisualizerStackController();
+    public final VisualizerStackController visualizerStackController = new VisualizerStackController();
 
     /** The visualizer. */
     public XPlayerVisualizer visualizer;
@@ -203,7 +209,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     XPlayerEqualizer equalizer;
 
     /** The analyser box. */
-    // AnalyserBox analyserBox ;
+    // AnalyserBox analyserBox 
 
     /** The disc. */
     public DJDisc disc;
@@ -213,10 +219,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     // ---Services---------------------
 
     /** The seek service. */
-    public SeekService seekService = new SeekService();
+    public final SeekService seekService = new SeekService();
 
     /** The play service. */
-    private PlayService playService = new PlayService();
+    private final PlayService playService = new PlayService();
 
     // ---Variables-----------------------
 
@@ -226,9 +232,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /** The disc is being mouse dragged */
     private boolean discIsDragging = false;
 
-    private static Image noSeek = InfoTool.getImageFromDocuments(
+    private static final Image noSeek = InfoTool.getImageFromDocuments(
 	    ImageCursor.getBestSize(64, 64).getWidth() >= 64.00 ? "Private-64.png" : "Private-32.png");
-    private static ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
+    private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2,
+	    noSeek.getHeight() / 2);
 
     /**
      * Constructor.
@@ -302,6 +309,43 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// topInfoLabel
 	topInfoLabel.setText("Player : [ " + this.getKey() + " ]");
+
+	//backwardButton
+	backwardButton.setOnAction(a -> {
+	    // if (xPlayer.isPausedOrPlaying()) {
+
+	    //Check
+	    if (xPlayerModel.getCurrentTime() - 10 >= 0) {
+		System.out.println("Entered backward...");
+
+		//Add
+		xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() - 10);
+
+		//Seek
+		this.seekService.startSeekService(
+			(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
+	    }
+	    //    }
+	});
+
+	//forwardButton
+	forwardButton.setOnAction(a -> {
+	    // if (xPlayer.isPausedOrPlaying()) {
+
+	    //Check
+	    if (xPlayerModel.getCurrentTime() + 10 <= xPlayerModel.getDuration()) {
+		System.out.println("Entered forward...");
+
+		//Add
+		xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + 10);
+
+		//Seek
+		this.seekService.startSeekService(
+			(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
+	    }
+	    //   }
+	});
+
     }
 
     /**
@@ -594,15 +638,16 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			    * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
 
 		}
-
-	    }
+		// SecondaryMouseButton
+	    } else if (m.getButton() == MouseButton.SECONDARY)
+		discIsDragging = false;
 	});
 
 	// Canvas Mouse Dragging
 	disc.getCanvas().setOnMouseDragged(m -> {
 
-	    // MouseButton==Primary
-	    if (m.getButton() == MouseButton.PRIMARY)
+	    // MouseButton==Primary || Secondary
+	    if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
 
 		// RadialMenu!showing and duration!=0 and duration!=-1
 		if (!radialMenu.isShowing() && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
@@ -692,7 +737,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 *            Bytes to skip
 	 */
 	public void startSeekService(long bytes) {
-	    if (!locked && !isRunning()) {
+	    if (!locked && !isRunning() && xPlayerModel.songPathProperty().get() != null) {
+
+		System.out.println(bytes);
 
 		// Bytes to Skip
 		this.bytes = bytes;
@@ -749,19 +796,19 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		    updateMessage("Skipping the Audio");
 
 		    // GO
-		    if (bytes != 0) { // and xPlayer.isPausedOrPlaying())
-			Main.logger.info("Seek Service Started..");
+		    //if (bytes != 0) { // and xPlayer.isPausedOrPlaying())
+		    Main.logger.info("Seek Service Started..");
 
-			// CurrentTime
-			xPlayerModel.setCurrentTime(xPlayerModel.getCurrentAngleTime());
+		    // CurrentTime
+		    xPlayerModel.setCurrentTime(xPlayerModel.getCurrentAngleTime());
 
-			try {
-			    xPlayer.seek(bytes);
-			} catch (StreamPlayerException ex) {
-			    logger.log(Level.WARNING, "", ex);
-			    succeded = false;
-			}
+		    try {
+			xPlayer.seek(bytes);
+		    } catch (StreamPlayerException ex) {
+			logger.log(Level.WARNING, "", ex);
+			succeded = false;
 		    }
+		    //}
 
 		    // ----------------------- Play Audio
 		    if (!xPlayer.isPausedOrPlaying())
@@ -1118,8 +1165,11 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		playerStatusLabel.setText(mediaFileMarquee.textProperty().get());
 
 		// disc
-		disc.calculateAngleByValue(0, 0, true);
-		disc.repaint();
+		if (!seekService.isRunning()) {
+		    disc.calculateAngleByValue(0, 0, true);
+		    disc.repaint();
+		}
+		xPlayerModel.setCurrentTime(0);
 
 		disc.stopFade();
 		disc.pauseRotation();

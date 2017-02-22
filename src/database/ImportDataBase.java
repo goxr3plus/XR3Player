@@ -86,7 +86,7 @@ public class ImportDataBase extends Service<Boolean> {
 	 * Done.
 	 */
 	private void done() {
-		Main.fixLayout();
+		Main.updateScreen.setVisible(false);
 		Main.updateScreen.progressBar.progressProperty().unbind();
 	}
 	

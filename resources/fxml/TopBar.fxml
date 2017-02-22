@@ -21,16 +21,55 @@
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
+   <left>
+      <HBox spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="showSideBar" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Menu">
+               <tooltip>
+                  <Tooltip text="Minimize" />
+               </tooltip>
+               <font>
+                  <Font size="9.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+   </left>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="CPU:" />
+            <StackPane fx:id="cpuStackPane" maxHeight="25.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" translateY="2.0">
+               <children>
+                  <Label fx:id="cpuLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: black;" text="STOPPED" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></StackPane>
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold;" text="~~XR3Player~~" HBox.hgrow="ALWAYS" fx:id="xr3Label">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin>
+      </HBox>
+   </center>
    <right>
       <HBox style="-fx-spacing: 0.5;" BorderPane.alignment="CENTER">
          <children>
-            <ToggleButton fx:id="goLibrariesMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="133.0" styleClass="windowMode" text="Libraries Mode" />
-            <ToggleButton fx:id="goDJMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="111.0" styleClass="windowMode" text="DJMode" />
-            <MenuButton mnemonicParsing="false" text="Options">
+            <ToggleButton fx:id="goLibrariesMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="Simple" />
+            <ToggleButton fx:id="goDJMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="DJ" />
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-font-size: 12;" text="Options">
               <items>
                 <MenuItem fx:id="checkForUpdates" mnemonicParsing="false" text="Check for Updates" />
                   <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="About" />
-                  <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: cyan;" text="Donation :)" />
+                  <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: magenta;" text="Donation :)" />
               </items>
             </MenuButton>
             <Button fx:id="restartButton" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="R">
@@ -71,37 +110,4 @@
          </opaqueInsets>
       </HBox>
    </right>
-   <left>
-      <HBox spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="showSideBar" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Menu">
-               <tooltip>
-                  <Tooltip text="Minimize" />
-               </tooltip>
-               <font>
-                  <Font size="9.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </HBox>
-   </left>
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="CPU:" />
-            <StackPane fx:id="cpuStackPane" maxHeight="25.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" translateY="2.0" />
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold;" text="~~XR3Player~~" HBox.hgrow="ALWAYS" fx:id="xr3Label">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-         </children>
-         <BorderPane.margin>
-            <Insets left="5.0" right="5.0" />
-         </BorderPane.margin>
-      </HBox>
-   </center>
 </fx:root>

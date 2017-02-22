@@ -12,8 +12,7 @@ import javafx.scene.text.FontWeight;
 import visualizer.model.ResizableCanvas;
 
 /**
- * This class is running a background class which updates every 1000
- * milliseconds the Canvas based on the CPULOAD.
+ * This class is running a background class which updates every 1000 milliseconds the Canvas based on the CPULOAD.
  *
  * @author GOXR3PLUS
  */
@@ -63,45 +62,45 @@ public class CPUsage extends ResizableCanvas {
 	gc.setFill(Color.CORNFLOWERBLUE);
 
 	// usage=80
-//	if (usage % 2 == 0)
-//	    for (int a = 1; a <= usage + usage / 2; a += 2)
-//		gc.strokeRect(a, 3, 1, getHeight() - 6);
-//	else
-//	    for (int a = 1; a <= usage + usage / 2; a += 2) {
-//		if (a == usage + usage / 2)
-//		    gc.strokeRect(a, 3, 0.5, getHeight() - 6);
-//		else
-//		    gc.strokeRect(a, 3, 1, getHeight() - 6);
-//	    }
-	
-//	float saColorScale = (float) VisualizerModel.spectrumAnalyserColors.length / (float) (getWidth()/1.2)  * 1.0f;
-//	float c = 0;
-//	for (int a = 1; a<(usageDouble/100.00)*(getWidth()-2); a++) {
-//	    c += saColorScale;
-//	    if (c < VisualizerModel.spectrumAnalyserColors.length)
-//		gc.setFill(VisualizerModel.spectrumAnalyserColors[(int) c]);
-//
-//	    gc.fillRect(a, 3, 1, getHeight() - 6);
-//	}
-	
-	gc.fillRect(1, 3, (usage/100.00)*(getWidth()-2), getHeight() - 6);
+	//	if (usage % 2 == 0)
+	//	    for (int a = 1; a <= usage + usage / 2; a += 2)
+	//		gc.strokeRect(a, 3, 1, getHeight() - 6);
+	//	else
+	//	    for (int a = 1; a <= usage + usage / 2; a += 2) {
+	//		if (a == usage + usage / 2)
+	//		    gc.strokeRect(a, 3, 0.5, getHeight() - 6);
+	//		else
+	//		    gc.strokeRect(a, 3, 1, getHeight() - 6);
+	//	    }
+
+	//	float saColorScale = (float) VisualizerModel.spectrumAnalyserColors.length / (float) (getWidth()/1.2)  * 1.0f;
+	//	float c = 0;
+	//	for (int a = 1; a<(usageDouble/100.00)*(getWidth()-2); a++) {
+	//	    c += saColorScale;
+	//	    if (c < VisualizerModel.spectrumAnalyserColors.length)
+	//		gc.setFill(VisualizerModel.spectrumAnalyserColors[(int) c]);
+	//
+	//	    gc.fillRect(a, 3, 1, getHeight() - 6);
+	//	}
+
+	gc.fillRect(1, 3, (usage / 100.00) * (getWidth() - 2), getHeight() - 6);
 	//gc.fillRect(1, 3, (usageDouble/100.00)*(getWidth()-2), getHeight() - 6)
 
 	// Show the Progress on String format
 	gc.setFill(Color.WHITE);
 	gc.fillText(String.format("%d ", usage) + "%", getWidth() / 2 - 15, getHeight() / 2 + 5);
-	
-//	gc.fillText(String.format("%.2f ", (usageDouble < 0) ? 0 : usageDouble) + "%", getWidth() / 2 - 15,
-//		getHeight() / 2 + 5)
+
+	//	gc.fillText(String.format("%.2f ", (usageDouble < 0) ? 0 : usageDouble) + "%", getWidth() / 2 - 15,
+	//		getHeight() / 2 + 5)
 
     }
 
     /**
      * Starts the Background Update Service
      */
-    public void startUpdater() {
+    public void restartUpdater() {
 	run = true;
-	updateService.restart();
+	getUpdateService().restart();
     }
 
     /**
@@ -109,7 +108,23 @@ public class CPUsage extends ResizableCanvas {
      */
     public void stopUpdater() {
 	run = false;
-	updateService.cancel();
+	getUpdateService().cancel();
+    }
+
+    /**
+     * True if the Updater is running or False if not
+     * 
+     * @return True if the Updater is running or False if not
+     */
+    public boolean isRunning() {
+	return getUpdateService().isRunning();
+    }
+
+    /**
+     * @return the updateService
+     */
+    public UpdateService getUpdateService() {
+	return updateService;
     }
 
     /**
@@ -118,7 +133,7 @@ public class CPUsage extends ResizableCanvas {
      * @author GOXR3PLUS
      *
      */
-    private class UpdateService extends Service<Void> {
+    public class UpdateService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
@@ -138,7 +153,6 @@ public class CPUsage extends ResizableCanvas {
 			// usageDouble = 100
 			usage = (int) usageDouble;
 			Platform.runLater(CPUsage.this::repaint);
-
 		    }
 
 		    System.out.println("CPU Update Service Exited");
