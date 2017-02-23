@@ -1,6 +1,6 @@
 # XR3Player ( A modern JavaFX Media Player)
 
------------------------Current status ##Alpha-------------------------------------
+-----------------------Current status ##BETA-------------------------------------
 
 A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
@@ -8,8 +8,13 @@ A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
 https://sourceforge.net/projects/xr3player/
 
+##Image from Update 49
+![Update 49 Main Window](https://cloud.githubusercontent.com/assets/20374208/23238856/addb4e16-f96c-11e6-9228-b3a775440079.png)
+
 ## On youtube
 [![XR3Player](http://img.youtube.com/vi/pTIxNt_UpNs/0.jpg)](https://www.youtube.com/watch?v=pTIxNt_UpNs)
+
+
 
 -------------------------------------------------------------------------------------
 
