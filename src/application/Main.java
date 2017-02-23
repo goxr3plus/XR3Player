@@ -158,11 +158,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 49;
+    public final static int currentVersion = 50;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "23/02/2017";
+    public final static String releaseDate = "24/02/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -235,6 +235,8 @@ public class Main extends Application {
 	    window.show();
 
 	    checkJavaCombatibility();
+	    Main.songsContextMenu.show(window);
+	    Main.songsContextMenu.hide();
 
 	    // throw new Exception("xd")
 	    // ScenicView.show(scene)

@@ -326,6 +326,8 @@ public class LocalDBManager {
 	    });
 	}
 
+	
+	//-------------------Needs modification cause it violates JavaFX THREAD!!!!!!!!!!!!
 	@Override
 	protected Task<Void> createTask() {
 	    return new Task<Void>() {
@@ -356,8 +358,10 @@ public class LocalDBManager {
 			    Main.libraryMode.libraryViewer.addLibrary(library);
 
 			    // opened?
-			    if (resultSet.getBoolean("OPENED"))
-				library.libraryOpenClose(true, true);
+			    if (resultSet.getBoolean("OPENED")) {
+				Platform.runLater(() -> library.libraryOpenClose(true, true));
+
+			    }
 
 			    updateProgress(resultSet.getRow(), total);
 			}

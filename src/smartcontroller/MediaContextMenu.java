@@ -3,6 +3,9 @@
  */
 package smartcontroller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ContextMenu;
@@ -28,7 +31,7 @@ public class MediaContextMenu extends ContextMenu {
     private SmartController controller;
 
     /** The players. */
-    Menu players = new Menu("Play on");
+    Menu players = new Menu("Play on", InfoTool.getImageViewFromDocuments("circledPlay24.png"));
 
     /** The player 0. */
     MenuItem player0 = new MenuItem("xPlayer ~0");
@@ -39,7 +42,26 @@ public class MediaContextMenu extends ContextMenu {
     /** The player 2. */
     MenuItem player2 = new MenuItem("xPlayer ~2");
 
-    MenuItem searchOnWeb = new MenuItem("Search on Web..", InfoTool.getImageViewFromDocuments("google.png"));
+    //Start:--Search on Web
+    Menu searchOnWeb = new Menu("Search on Web..", InfoTool.getImageViewFromDocuments("searchWeb24.png"));
+
+    MenuItem soundCloud = new MenuItem("SoundCloud", InfoTool.getImageViewFromDocuments("soundcloud24.png"));
+    MenuItem jamendo = new MenuItem("Jamendo", InfoTool.getImageViewFromDocuments("jamendo24.png"));
+    MenuItem tunein = new MenuItem("tunein", InfoTool.getImageViewFromDocuments("tunein24.png"));
+    MenuItem amazon = new MenuItem("amazon", InfoTool.getImageViewFromDocuments("amazon24.png"));
+
+    MenuItem lastfm = new MenuItem("Last.fm", InfoTool.getImageViewFromDocuments("lastfm24.png"));
+    MenuItem librefm = new MenuItem("Libre.fm", InfoTool.getImageViewFromDocuments("librefm24.png"));
+
+    MenuItem youtube = new MenuItem("Youtube", InfoTool.getImageViewFromDocuments("youtube24.png"));
+    MenuItem vimeo = new MenuItem("Vimeo", InfoTool.getImageViewFromDocuments("vimeo24.png"));
+
+    MenuItem google = new MenuItem("Google", InfoTool.getImageViewFromDocuments("google24.png"));
+    MenuItem duckduckgo = new MenuItem("DuckDuckgo", InfoTool.getImageViewFromDocuments("duckduckgo24.png"));
+    MenuItem bing = new MenuItem("Bing", InfoTool.getImageViewFromDocuments("bing24.png"));
+    MenuItem yahoo = new MenuItem("Yahoo", InfoTool.getImageViewFromDocuments("yahoo24.png"));
+
+    //END:--Search on Web
 
     /** The add on. */
     Menu addOn = new Menu("Add on");
@@ -69,17 +91,16 @@ public class MediaContextMenu extends ContextMenu {
     MenuItem copy = new MenuItem("copy/move (C/M)", InfoTool.getImageViewFromDocuments("copyFile.png"));
 
     /** The move. */
-    //MenuItem move = new MenuItem("moveTo(M)", InfoTool.getImageViewFromDocuments("moveFile.png"))
+    //MenuItem move = new MenuItem("moveTo(M)")
 
     /** The rename. */
-    MenuItem rename = new MenuItem("Rename File (R)", InfoTool.getImageViewFromDocuments("rename.png"));
+    MenuItem rename = new MenuItem("Rename (R)", InfoTool.getImageViewFromDocuments("rename.png"));
 
     /** The simple delete. */
-    MenuItem simpleDelete = new MenuItem("Simple Delete (Delete)", InfoTool.getImageViewFromDocuments("delete2.png"));
+    MenuItem simpleDelete = new MenuItem("Delete (Delete)", InfoTool.getImageViewFromDocuments("delete2.png"));
 
     /** The storage delete. */
-    MenuItem storageDelete = new MenuItem("Permanent Delete (Shift+Delete)",
-	    InfoTool.getImageViewFromDocuments("delete.png"));
+    MenuItem storageDelete = new MenuItem("Delete (Shift+Delete)", InfoTool.getImageViewFromDocuments("delete.png"));
 
     /** The separator 1. */
     SeparatorMenuItem separator1 = new SeparatorMenuItem();
@@ -95,56 +116,38 @@ public class MediaContextMenu extends ContextMenu {
      */
     public MediaContextMenu() {
 
-	// play on deck 0,1,2
+	//Add all the items
+	getItems().addAll(new LabelMenuItem("Common"), players, searchOnWeb, more, new LabelMenuItem("File Edit"),
+		rename, simpleDelete, storageDelete, new LabelMenuItem("Organize"), copy);
+
+	//---play
+	
 	players.getItems().addAll(player0, player1, player2);
+	players.getItems().forEach(item -> item.setOnAction(this::onAction));
 
-	// searchOnWeb
-	//searchOnWeb.setDisable(true)
+	//---searchOnWeb
+	getItems().addAll();
 
-	// add the above
-	getItems().addAll(players, searchOnWeb);
-	searchOnWeb.setOnAction(a -> {
-	    if (media != null)
-		ActionTool.openWebSite("https://www.google.com/search?q=", media.getFileName());
-	});
+	//Start:--Search on Web
+	searchOnWeb.getItems().addAll(new LabelMenuItem("Popular"), soundCloud, jamendo, tunein,
+		new LabelMenuItem("Shop"), amazon, new LabelMenuItem("Radios"), librefm, lastfm,
+		new LabelMenuItem("Video Sites"), youtube, vimeo, new LabelMenuItem("Search Engines"), google,
+		duckduckgo, bing, yahoo);
+	searchOnWeb.getItems().forEach(item -> item.setOnAction(this::onAction2));
+
+	//END:--Search on Web
 
 	// add on deck play list 0,1,2
 	addOn.setDisable(true);
 	addOn.getItems().addAll(xPlayer0, xPlayer1, xPlayer2);
-	//getItems().addAll(addOn)
+	addOn.getItems().forEach(item -> item.setOnAction(this::onAction));
 
 	// More
-	information.setDisable(true);
-	more.getItems().addAll(information, stars, sourceFolder);
-	getItems().addAll(more);
-
-	// Disable,Rename
-	getItems().addAll(separator1, rename);
-
-	// Simple Delete and Storage Delete
-	getItems().addAll(simpleDelete, storageDelete);
-
-	// copyTo,moveTo
-	//move.setDisable(true)
-	//addInQuery.setDisable(true);
-	getItems().addAll(separator2, copy);
-	//addInQuery.setVisible(false)
-
-	player0.setOnAction(this::onAction);
-	player1.setOnAction(this::onAction);
-	player2.setOnAction(this::onAction);
-
-	xPlayer0.setOnAction(this::onAction);
-	xPlayer1.setOnAction(this::onAction);
-	xPlayer2.setOnAction(this::onAction);
-
-	information.setOnAction(this::onAction);
-	sourceFolder.setOnAction(this::onAction);
-	stars.setOnAction(this::onAction);
+	more.getItems().addAll(stars, sourceFolder);
+	more.getItems().forEach(item -> item.setOnAction(this::onAction));
 
 	copy.setOnAction(this::onAction);
 	//move.setOnAction(this::onAction)
-
 	simpleDelete.setOnAction(this::onAction);
 	storageDelete.setOnAction(this::onAction);
 	rename.setOnAction(this::onAction);
@@ -206,7 +209,7 @@ public class MediaContextMenu extends ContextMenu {
 	this.controller = controller;
 
 	// Show it
-	show(Main.window, (int) d, (int) e);
+	show(Main.window, d - super.getWidth() + super.getWidth() * 14 / 100, e - 1);
 	previousGenre = genre;
     }
 
@@ -219,8 +222,8 @@ public class MediaContextMenu extends ContextMenu {
      *            the y
      */
     public void showPopOver(double x, double y) {
-	// this.media = media;
-	// pop.show(media);
+	// this.media = media
+	// pop.show(media)
     }
 
     /**
@@ -277,6 +280,70 @@ public class MediaContextMenu extends ContextMenu {
 	    ActionTool.openFileLocation(media.getFilePath());
 	else if (action.getSource() == copy) // copyTo
 	    Main.exportWindow.show(controller);
+
+    }
+
+    /**
+     * It is used for action events
+     * 
+     * @param action
+     */
+    public void onAction2(ActionEvent action) {
+	Object source = action.getSource();
+	String encoding = "UTF-8";
+
+	//media!=null [warning]
+	if (media != null) {
+	    try {
+
+		//Music Sites
+		if (source == soundCloud)
+		    ActionTool.openWebSite(
+			    "https://soundcloud.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == jamendo)
+		    ActionTool.openWebSite(
+			    "https://www.jamendo.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == tunein)
+		    ActionTool.openWebSite(
+			    "http://tunein.com/search/?query=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == amazon)
+		    ActionTool.openWebSite(
+			    "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords="
+				    + URLEncoder.encode(media.getTitle(), encoding));
+
+		else if (source == lastfm)
+		    ActionTool.openWebSite(
+			    "https://www.last.fm/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == librefm)
+		    ActionTool.openWebSite("https://libre.fm/search.php?search_term="
+			    + URLEncoder.encode(media.getTitle(), encoding) + "&search_type=artist");
+
+		//Video WebSites
+		else if (source == youtube)
+		    ActionTool.openWebSite("https://www.youtube.com/results?search_query="
+			    + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == vimeo)
+		    ActionTool
+			    .openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+
+		//Search-Engines
+		else if (source == google)
+		    ActionTool.openWebSite(
+			    "https://www.google.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == duckduckgo)
+		    ActionTool
+			    .openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == bing)
+		    ActionTool.openWebSite(
+			    "http://www.bing.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == yahoo)
+		    ActionTool.openWebSite(
+			    "https://search.yahoo.com/search?p=" + URLEncoder.encode(media.getTitle(), encoding));
+
+	    } catch (UnsupportedEncodingException ex) {
+		ex.printStackTrace();
+	    }
+	}
 
     }
 

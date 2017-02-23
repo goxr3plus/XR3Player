@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -248,13 +246,13 @@ public final class ActionTool {
      * @param uri
      * @return <b>True</b> if succeeded , <b>False</b> if not
      */
-    public static boolean openWebSite(String uri, String... optional) {
+    public static boolean openWebSite(String uri) {
 
 	// Open the Default Browser
 	if (Desktop.isDesktopSupported()) {
 	    Desktop desktop = Desktop.getDesktop();
 	    try {
-		desktop.browse(new URI(uri + ((optional.length == 0) ? "" : URLEncoder.encode(optional[0], "UTF-8"))));
+		desktop.browse(new URI(uri));
 	    } catch (IOException | URISyntaxException ex) {
 		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
 			"Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),

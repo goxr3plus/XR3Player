@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import de.jensd.fx.fontawesome.Icon?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -13,19 +14,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root maxWidth="150.0" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" StackPane.alignment="CENTER">
+		<ImageView fx:id="imageView" pickOnBounds="true" StackPane.alignment="CENTER">
 			<image>
 				<Image url="@../image/library.png" />
 			</image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
 		</ImageView>
 		<Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="oh damn null!" wrapText="true">
 			<tooltip>
 				<Tooltip />
 			</tooltip>
 		</Label>
-		<Label fx:id="goSettings" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+		<Label fx:id="goSettings" style="-fx-background-color: rgb(255,255,255,0.8); -fx-background-radius: 10;" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true">
 					<image>
@@ -46,15 +50,15 @@
             <Tooltip text="Image is missing!" />
          </tooltip>
       </Label>
-		<JFXBadge fx:id="ratingLabel" maxHeight="20.0" maxWidth="60.0" style="-fx-background-color: rgb(255,255,255,0.8);" styleClass="icons-badge" text="0.5" StackPane.alignment="TOP_LEFT">
+		<JFXBadge fx:id="ratingLabel" maxHeight="20.0" maxWidth="60.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-background-radius: 45;" styleClass="icons-badge" text="0.5" StackPane.alignment="TOP_LEFT">
 			<Icon awesomeIcon="STAR" size="2em" style=";" styleClass="icon" />
 		</JFXBadge>
-      <StackPane fx:id="progressBarStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
+      <StackPane fx:id="progressBarStackPane" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
          <children>
-            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
+            <ProgressBar fx:id="progressBar" progress="0.0" />
             <Label fx:id="progressBarLabel" style="-fx-font-weight: bold;" text="la" />
          </children></StackPane>
-      <StackPane fx:id="selectionModeStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: rgb(255,255,255,0.3);" visible="false">
+      <StackPane fx:id="selectionModeStackPane" style="-fx-background-color: rgb(255,255,255,0.3);" visible="false">
          <children>
       		<JFXCheckBox fx:id="selectionModeCheckBox" alignment="CENTER" checkedColor="#e12f2f" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="0.0" text=" " unCheckedColor="#c6ed11">
       			<StackPane.margin>

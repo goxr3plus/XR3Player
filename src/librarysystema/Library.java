@@ -59,7 +59,7 @@ public class Library extends StackPane {
 
     /** The image view. */
     @FXML
-    private ImageView imageView;
+    public ImageView imageView;
 
     /** The go settings. */
     @FXML
@@ -125,8 +125,7 @@ public class Library extends StackPane {
     private String description = "";
 
     /**
-     * // create a rotation transform starting at 0 degrees, rotating about
-     * pivot point 0, 0.
+     * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
      */
     // Rotate rotationTransform = new Rotate(0, 0, 0)
 
@@ -138,8 +137,7 @@ public class Library extends StackPane {
     public enum SaveMode {
 
 	/**
-	 * Songs are not copied into the database so if they are deleted they
-	 * don't exist anymore.
+	 * Songs are not copied into the database so if they are deleted they don't exist anymore.
 	 */
 	ORIGINAL_PATH,
 
@@ -458,30 +456,33 @@ public class Library extends StackPane {
 	// this.maxWidthProperty().bind(this.maxHeightProperty());
 
 	// ImageView
-	// imageView.fitWidthProperty().bind(this.maxWidthProperty());
-	// imageView.fitHeightProperty().bind(this.maxHeightProperty());
+	//imageView.fitWidthProperty().bind(this.prefWidthProperty());
+	//imageView.fitHeightProperty().bind(this.prefHeightProperty());
+	
 
 	// Clip
 	Rectangle rect = new Rectangle();
 	rect.widthProperty().bind(this.widthProperty());
 	rect.heightProperty().bind(this.heightProperty());
-	rect.setArcHeight(30);
-	rect.setArcWidth(30);
-	rect.setEffect(new Reflection());
+	rect.setArcWidth(25);
+	rect.setArcHeight(25);
+	//rect.setEffect(new Reflection());
 
 	// StackPane -> this
 	this.setClip(rect);
 	Reflection reflection = new Reflection();
 	reflection.setInput(new DropShadow(4, Color.WHITE));
-	this.setEffect(reflection);
+	//this.setEffect(reflection);
 
 	// LibraryName
 	setLibraryName(libraryName);
 	nameField.setText(libraryName);
 	nameField.getTooltip().setText(libraryName);
 
-	// Update the Image
+	// Update the Image 
 	// updateStarLabelImage()
+//	imageView.setFitWidth(getWidth());
+//	imageView.setFitHeight(getHeight());
 
 	// Image
 	imageView.setImage(getImage());
@@ -606,8 +607,7 @@ public class Library extends StackPane {
     }
 
     /**
-     * Updates the position variable of Library in database so the next time
-     * viewer position it correct.
+     * Updates the position variable of Library in database so the next time viewer position it correct.
      *
      * @param newPosition
      *            The new position of the Library
@@ -1201,8 +1201,7 @@ public class Library extends StackPane {
      * This method is called when a key is released.
      *
      * @param key
-     *            An event which indicates that a keystroke occurred in a
-     *            javafx.scene.Node.
+     *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
      */
     public void onKeyReleased(KeyEvent key) {
 	if (!Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused()
