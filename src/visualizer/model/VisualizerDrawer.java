@@ -64,18 +64,58 @@ public class VisualizerDrawer extends VisualizerModel {
      * Draws an Oscilloscope
      * 
      * @param stereo
-     *            The Oscilloscope with have 2 lines->stereo or 1 line->merge
-     *            left and right audio
+     *            The Oscilloscope with have 2 lines->stereo or 1 line->merge left and right audio
      */
     public void drawOscilloscope(boolean stereo) {
 	oscilloscope.drawOscilloscope(stereo);
     }
 
+    double inc = 0;
+    /** The color index. */
+    private int colorIndex = 0;
+
     /**
      * Draws an Oscilloscope with up and down Lines
      */
     public void drawOscilloScopeLines() {
-	oscilloscope.drawOscilloScopeLines();
+	float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
+	float[] array = returnBandsArray(pSample, 4);
+
+	//oscilloscope.drawOscilloScopeLines()
+	inc = (inc + 0.3 + Math.abs(array[0])) % 360;
+	double len = 6;
+	double angleIncrement = Math.toRadians(inc);
+	double x1 = getWidth() / 2.00;
+	double y1 = getHeight() / 2.00;
+	double angle = angleIncrement;
+
+	//gc.setStroke(Color.RED);
+	gc.setLineWidth(2);
+	gc.strokeArc(5, 5, getWidth() - 10, getHeight() - 10, 90, 360 * Math.abs(array[0]), ArcType.OPEN);
+	gc.setStroke(Color.CYAN);
+	gc.strokeArc(15, 15, getWidth() - 30, getHeight() - 30, 180, 360 * Math.abs(array[1]), ArcType.OPEN);
+	gc.setStroke(Color.FIREBRICK);
+	gc.strokeArc(25, 25, getWidth() - 50, getHeight() - 50, 270, 360 * Math.abs(array[2]), ArcType.OPEN);
+	gc.setStroke(Color.CHARTREUSE);
+	gc.strokeArc(35, 35, getWidth() - 70, getHeight() - 70, 360, 360 * Math.abs(array[3]), ArcType.OPEN);
+	gc.setLineWidth(1);
+
+	int until = (int) (x1 + y1) / 2; //(int) (getWidth()/2 * Math.abs(array[0]));
+	for (int i = 0; i < until; i++) {
+
+	    colorIndex = (colorIndex == 360 - 1) ? 0 : colorIndex + 1;
+	    gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
+
+	    double x2 = x1 + Math.cos(angle) * len;
+	    double y2 = y1 - Math.sin(angle) * len;
+	    gc.strokeLine((int) x1, (int) y1, (int) x2, (int) y2);
+	    x1 = x2;
+	    y1 = y2;
+
+	    len += 3 * Math.abs(array[1]);
+
+	    angle = (angle + angleIncrement) % (Math.PI * 2);
+	}
     }
 
     /*-----------------------------------------------------------------------
@@ -89,7 +129,7 @@ public class VisualizerDrawer extends VisualizerModel {
      * 
      * -----------------------------------------------------------------------
      */
-    
+
     /**
      * Draws a Rosette and a Polyspiral.
      */

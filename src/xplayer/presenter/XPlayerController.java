@@ -3,8 +3,6 @@
  */
 package xplayer.presenter;
 
-import static application.Main.djMode;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,7 +23,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -496,29 +493,29 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     public void controlVolume() {
 
 	try {
-	    if (key == 1 || key == 2) {
-		if (djMode.balancer.getVolume() < 100) { // <100
-
-		    Main.xPlayersList.getXPlayer(1).setGain(
-			    ((Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00) * (djMode.balancer.getVolume()))
-				    / 100.00);
-		    Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerUI(2).getVolume() / 100.00);
-
-		} else if (djMode.balancer.getVolume() == 100) { // ==100
-
-		    Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00);
-		    Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerUI(2).getVolume() / 100.00);
-
-		} else if (djMode.balancer.getVolume() > 100) { // >100
-
-		    Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00);
-		    Main.xPlayersList.getXPlayer(2).setGain(((Main.xPlayersList.getXPlayerUI(2).getVolume() / 100.00)
-			    * (200 - djMode.balancer.getVolume())) / 100.00);
-
-		}
-	    } else if (key == 0) {
-		xPlayer.setGain((double) disc.getVolume() / 100.00);
-	    }
+	    //	    if (key == 1 || key == 2) {
+	    //		if (djMode.balancer.getVolume() < 100) { // <100
+	    //
+	    //		    Main.xPlayersList.getXPlayer(1).setGain(
+	    //			    ((Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00) * (djMode.balancer.getVolume()))
+	    //				    / 100.00);
+	    //		    Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerUI(2).getVolume() / 100.00);
+	    //
+	    //		} else if (djMode.balancer.getVolume() == 100) { // ==100
+	    //
+	    //		    Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00);
+	    //		    Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerUI(2).getVolume() / 100.00);
+	    //
+	    //		} else if (djMode.balancer.getVolume() > 100) { // >100
+	    //
+	    //		    Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00);
+	    //		    Main.xPlayersList.getXPlayer(2).setGain(((Main.xPlayersList.getXPlayerUI(2).getVolume() / 100.00)
+	    //			    * (200 - djMode.balancer.getVolume())) / 100.00);
+	    //
+	    //		}
+	    //	    } else if (key == 0) {
+	    xPlayer.setGain((double) disc.getVolume() / 100.00);
+	    //	    }
 
 	} catch (Exception ex) {
 

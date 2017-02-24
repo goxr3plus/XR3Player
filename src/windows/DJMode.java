@@ -6,7 +6,6 @@ package windows;
 import java.io.IOException;
 
 import application.Main;
-import disc.Balancer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
@@ -32,7 +31,7 @@ public class DJMode extends GridPane {
     // public DJTabs djTabs
 
     /** The balancer. */
-    public Balancer balancer;
+    //public Balancer balancer;
 
     /** The digital clock. */
     // public DigitalClock digitalClock
@@ -121,16 +120,16 @@ public class DJMode extends GridPane {
      */
     void makeBalancer() {
 
-	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
-	balancer.setOnMouseDragged(drag -> {
-	    balancer.onMouseDragged(drag);
-	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-	});
-
-	balancer.setOnScroll(scroll -> {
-	    balancer.onScroll(scroll);
-	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-	});
+//	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
+//	balancer.setOnMouseDragged(drag -> {
+//	    balancer.onMouseDragged(drag);
+//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
+//	});
+//
+//	balancer.setOnScroll(scroll -> {
+//	    balancer.onScroll(scroll);
+//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
+//	});
 
     }
 
