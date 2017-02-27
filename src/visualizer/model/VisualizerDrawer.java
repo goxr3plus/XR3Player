@@ -70,52 +70,63 @@ public class VisualizerDrawer extends VisualizerModel {
 	oscilloscope.drawOscilloscope(stereo);
     }
 
-    double inc = 0;
-    /** The color index. */
-    private int colorIndex = 0;
+    double incr = 0;
+    int colorIndex;
 
     /**
      * Draws an Oscilloscope with up and down Lines
      */
     public void drawOscilloScopeLines() {
-	float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
-	float[] array = returnBandsArray(pSample, 4);
 
-	//oscilloscope.drawOscilloScopeLines()
-	inc = (inc + 0.3 + Math.abs(array[0])) % 360;
-	double len = 6;
-	double angleIncrement = Math.toRadians(inc);
-	double x1 = getWidth() / 2.00;
-	double y1 = getHeight() / 2.00;
-	double angle = angleIncrement;
+//	float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
+//	float[] array = returnBandsArray(pSample, 4);
+//
+//	//Draw tge Oscilloscope Lines below
+//	drawJuliaSet();
+//	gc.setGlobalAlpha(0.8 - Math.abs(array[0]));
+	oscilloscope.drawOscilloScopeLines();
+//	gc.setGlobalAlpha(1.0);
+//
+//	incr = (incr + 0.3 + Math.abs(array[0])) % 360;
+//	double len = 6;
+//	double angleIncrement = Math.toRadians(incr);
+//	double x1 = getWidth() / 2.00;
+//	double y1 = getHeight() / 2.00;
+//	double angle = angleIncrement;
+//
+//	//gc.setStroke(Color.RED)
+//	gc.setLineWidth(2);
+//	gc.strokeArc(5, 5, getWidth() - 10, getHeight() - 10, 90, 360 * Math.abs(array[0]), ArcType.OPEN);
+//	gc.setStroke(Color.CYAN);
+//	gc.strokeArc(15, 15, getWidth() - 30, getHeight() - 30, 180, 360 * Math.abs(array[1]), ArcType.OPEN);
+//	gc.setStroke(Color.FIREBRICK);
+//	gc.strokeArc(25, 25, getWidth() - 50, getHeight() - 50, 270, 360 * Math.abs(array[2]), ArcType.OPEN);
+//	gc.setStroke(Color.CHARTREUSE);
+//	gc.strokeArc(35, 35, getWidth() - 70, getHeight() - 70, 360, 360 * Math.abs(array[3]), ArcType.OPEN);
+//	gc.setLineWidth(1);
+//
+//	//gc.setLineWidth(0.5)
+//	gc.setLineWidth(1.5);
+//	int until = (int) (x1 + y1) / 2; //(int) (getWidth()/2 * Math.abs(array[0]))
+//	double TWOPI = Math.PI * 2;
+//	int lenIncrement = (int) (3 * Math.abs(array[1]));
+//	for (int i = 0; i < until; i++) {
+//
+//	    colorIndex = (colorIndex == 360 - 1) ? 0 : colorIndex + 1;
+//	    gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
+//
+//	    double x2 = x1 + Math.cos(angle) * len;
+//	    double y2 = y1 - Math.sin(angle) * len;
+//	    gc.strokeLine((int) x1, (int) y1, (int) x2, (int) y2);
+//	    x1 = x2;
+//	    y1 = y2;
+//
+//	    len += lenIncrement;
+//
+//	    angle = (angle + angleIncrement) % (TWOPI);
+//	}
+//	gc.setLineWidth(1);
 
-	//gc.setStroke(Color.RED);
-	gc.setLineWidth(2);
-	gc.strokeArc(5, 5, getWidth() - 10, getHeight() - 10, 90, 360 * Math.abs(array[0]), ArcType.OPEN);
-	gc.setStroke(Color.CYAN);
-	gc.strokeArc(15, 15, getWidth() - 30, getHeight() - 30, 180, 360 * Math.abs(array[1]), ArcType.OPEN);
-	gc.setStroke(Color.FIREBRICK);
-	gc.strokeArc(25, 25, getWidth() - 50, getHeight() - 50, 270, 360 * Math.abs(array[2]), ArcType.OPEN);
-	gc.setStroke(Color.CHARTREUSE);
-	gc.strokeArc(35, 35, getWidth() - 70, getHeight() - 70, 360, 360 * Math.abs(array[3]), ArcType.OPEN);
-	gc.setLineWidth(1);
-
-	int until = (int) (x1 + y1) / 2; //(int) (getWidth()/2 * Math.abs(array[0]));
-	for (int i = 0; i < until; i++) {
-
-	    colorIndex = (colorIndex == 360 - 1) ? 0 : colorIndex + 1;
-	    gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
-
-	    double x2 = x1 + Math.cos(angle) * len;
-	    double y2 = y1 - Math.sin(angle) * len;
-	    gc.strokeLine((int) x1, (int) y1, (int) x2, (int) y2);
-	    x1 = x2;
-	    y1 = y2;
-
-	    len += 3 * Math.abs(array[1]);
-
-	    angle = (angle + angleIncrement) % (Math.PI * 2);
-	}
     }
 
     /*-----------------------------------------------------------------------

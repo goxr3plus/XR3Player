@@ -9,7 +9,7 @@ import javafx.scene.control.MenuItem;
  * @author GOXR3PLUS
  *
  */
-public class LabelMenuItem extends MenuItem {
+public class TitleMenuItem extends MenuItem {
 
     /**
      * Constructor
@@ -18,11 +18,11 @@ public class LabelMenuItem extends MenuItem {
      *            The Text of The Menu Item
      * 
      */
-    public LabelMenuItem(String text) {
+    public TitleMenuItem(String text) {
 	setText(text);
 	setDisable(true);
 	getStyleClass().clear();
-	getStyleClass().add("label-menu-item");
+	getStyleClass().add("title-menu-item");
     }
 
 }

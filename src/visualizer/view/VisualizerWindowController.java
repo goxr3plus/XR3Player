@@ -29,6 +29,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -151,6 +153,9 @@ public class VisualizerWindowController extends StackPane {
 
     }
 
+    public MediaPlayer videoPlayer;
+    
+
     /**
      * Called as soon as .fxml has been loaded
      */
@@ -245,22 +250,23 @@ public class VisualizerWindowController extends StackPane {
 	    }
 	});
 
-	/** The media. */
-	//	Media media = new Media(new File("C:\\Users\\GOXR3PLUS\\Desktop\\vid.mp4").toURI().toString());
-	//
-	//	/** The video player. */
-	//	MediaPlayer videoPlayer = new MediaPlayer(media);
-	//
-	//	mediaView.setMediaPlayer(videoPlayer);
-	//	mediaView.fitHeightProperty().bind(super.widthProperty());
-	//	mediaView.fitHeightProperty().bind(super.heightProperty());
-	//	mediaView.setSmooth(true);
-
-	//	if (xPlayerUI.getKey() == 0) {
-	//	    videoPlayer.setMute(true);
-	//	    videoPlayer.setAutoPlay(true);
-	//	    videoPlayer.setCycleCount(Integer.MAX_VALUE);
-	//	}
+//	/** The media. */
+//	Media media = new Media(new File("C:\\\\Users\\\\GOXR3PLUS\\\\Desktop\\\\Twerking Dog.mp4").toURI().toString());
+//
+//	/** The video player. */
+//	videoPlayer = new MediaPlayer(media);
+//
+//	mediaView.setMediaPlayer(videoPlayer);
+//	mediaView.fitHeightProperty().bind(super.widthProperty());
+//	mediaView.fitHeightProperty().bind(super.heightProperty());
+//	mediaView.setSmooth(true);
+//
+//	if (xPlayerUI.getKey() == 0) {
+//	    videoPlayer.setRate(0.5);
+//	    videoPlayer.setCycleCount(50000);
+//	    videoPlayer.setMute(true);
+//	    videoPlayer.setAutoPlay(true);
+//	}
 
     }
 

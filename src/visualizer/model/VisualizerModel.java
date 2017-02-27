@@ -655,7 +655,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
      * @return An array which has length<array length> and contains frequencies
      *         in every cell which has a value from 0.00 to 1.00.
      */
-    float[] returnBandsArray(float[] pSample, int arrayLength) {
+    public float[] returnBandsArray(float[] pSample, int arrayLength) {
 
 	wFFT = fft.calculate(pSample);
 	wSadfrr = saDecay * frameRateRatioHint;

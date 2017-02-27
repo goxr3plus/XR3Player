@@ -1035,27 +1035,27 @@
 *                           Label-Menu-Item                            *
 
 ******************************************************************************/
-.label-menu-item .label{
+.title-menu-item .label{
 	  -fx-text-alignment:center; 
 }
 
-.label-menu-item .label .text{
+.title-menu-item .label .text{
 	  -fx-text-alignment:center; 
 }
 
 
 /* When the Label-Menu-Item is disabled [Always it is cause i don't want the user to be able to click it] */
-.label-menu-item:disabled {
+.title-menu-item:disabled {
     -fx-opacity: 1.0;
     -fx-border-color:transparent white white white;
      -fx-cursor:default;
 }
 
-.label-menu-item:disabled:hover{
+.title-menu-item:disabled:hover{
 	-fx-background-color: transparent;
 }
 
-.label-menu-item:disabled .label {
+.title-menu-item:disabled .label {
     -fx-opacity: 1.0;
     -fx-font-size:10.0;
     -fx-font-weight:bold;
@@ -1064,7 +1064,7 @@
     -fx-text-fill:orange;   
 }
 
-.label-menu-item:disabled:hover .label {
+.title-menu-item:disabled:hover .label {
 	-fx-background-color: transparent;
 }
 

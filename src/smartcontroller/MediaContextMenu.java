@@ -117,8 +117,8 @@ public class MediaContextMenu extends ContextMenu {
     public MediaContextMenu() {
 
 	//Add all the items
-	getItems().addAll(new LabelMenuItem("Common"), players, searchOnWeb, more, new LabelMenuItem("File Edit"),
-		rename, simpleDelete, storageDelete, new LabelMenuItem("Organize"), copy);
+	getItems().addAll(new TitleMenuItem("Common"), players, searchOnWeb, more, new TitleMenuItem("File Edit"),
+		rename, simpleDelete, storageDelete, new TitleMenuItem("Organize"), copy);
 
 	//---play
 	
@@ -129,9 +129,9 @@ public class MediaContextMenu extends ContextMenu {
 	getItems().addAll();
 
 	//Start:--Search on Web
-	searchOnWeb.getItems().addAll(new LabelMenuItem("Popular"), soundCloud, jamendo, tunein,
-		new LabelMenuItem("Shop"), amazon, new LabelMenuItem("Radios"), librefm, lastfm,
-		new LabelMenuItem("Video Sites"), youtube, vimeo, new LabelMenuItem("Search Engines"), google,
+	searchOnWeb.getItems().addAll(new TitleMenuItem("Popular"), soundCloud, jamendo, tunein,
+		new TitleMenuItem("Shop"), amazon, new TitleMenuItem("Radios"), librefm, lastfm,
+		new TitleMenuItem("Video Sites"), youtube, vimeo, new TitleMenuItem("Search Engines"), google,
 		duckduckgo, bing, yahoo);
 	searchOnWeb.getItems().forEach(item -> item.setOnAction(this::onAction2));
 
