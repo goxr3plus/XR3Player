@@ -8,8 +8,8 @@ A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
 https://sourceforge.net/projects/xr3player/
 
-##Image from Update 49
-![Update 49 Main Window](https://cloud.githubusercontent.com/assets/20374208/23238856/addb4e16-f96c-11e6-9228-b3a775440079.png)
+##Image from Update 51
+![Image](https://cloud.githubusercontent.com/assets/20374208/23493525/16db4e68-ff15-11e6-8015-8113854cdfba.png)
 
 ## On youtube
 [![XR3Player](http://img.youtube.com/vi/pTIxNt_UpNs/0.jpg)](https://www.youtube.com/watch?v=pTIxNt_UpNs)
@@ -49,7 +49,7 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
    
     <XR3Player Made from the Bro for Bros ( A Next Generation JavaFX Media Player)>
 
-    Copyright © <2015-2017>
+    Copyright Â© <2015-2017>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,4 +80,4 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
 
      END OF TERMS AND CONDITIONS
 
-     Copyright © <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.
+     Copyright Â© <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.
