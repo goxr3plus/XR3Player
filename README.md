@@ -49,7 +49,7 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
    
     <XR3Player Made from the Bro for Bros ( A Next Generation JavaFX Media Player)>
 
-    Copyright © <2015-2017>
+    Copyright © <2015-2307>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,4 +80,4 @@ It contains bugs and a lot of work need to be done but you can have fun with it 
 
      END OF TERMS AND CONDITIONS
 
-     Copyright © <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.
+     Copyright © <2015-2307>  (www.goxr3plus.co.nf) . All rights reserved.
