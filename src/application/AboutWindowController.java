@@ -180,7 +180,7 @@ public class AboutWindowController extends BorderPane {
 	close.setOnAction(a -> window.close());
 
 	// --visitWebsite
-	visitWebsite.setOnAction(a -> ActionTool.openWebSite("http://goxr3plus.co.nf/html5/index.html"));
+	visitWebsite.setOnAction(a -> ActionTool.openWebSite("http://goxr3plus.co.nf"));
 
 	// --reportBug
 	reportBug.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/issues"));

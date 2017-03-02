@@ -77,7 +77,8 @@ public class TopBar extends BorderPane {
     CPUsage cpUsage = new CPUsage();
 
     /**
-     * The current Window Mode that means if the application is on <b> LibraryMode </b> or in <b>DJMode </b>.
+     * The current Window Mode that means if the application is on <b>
+     * LibraryMode </b> or in <b>DJMode </b>.
      */
     private WindowMode windowMode = WindowMode.LIBRARYMODE;
 
@@ -124,11 +125,11 @@ public class TopBar extends BorderPane {
 	    else
 		cpUsage.restartUpdater();
 	});
-	
-	//cpuLabel
+
+	// cpuLabel
 	cpuLabel.visibleProperty().bind(cpUsage.getUpdateService().runningProperty().not());
-	
-	//cpuUsage
+
+	// cpuUsage
 	cpUsage.visibleProperty().bind(cpuLabel.visibleProperty().not());
 	cpUsage.restartUpdater();
 
@@ -141,7 +142,7 @@ public class TopBar extends BorderPane {
 	// aboutSection
 	aboutSection.setOnAction(a -> Main.aboutWindow.showWindow());
 
-	//donation
+	// donation
 	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
 	// restartButton
@@ -215,7 +216,7 @@ public class TopBar extends BorderPane {
     public void addXR3LabelBinding() {
 	// xr3Label
 	StringBinding binding = Bindings.createStringBinding(
-		() -> MessageFormat.format(">-XR3Player V." + Main.currentVersion + "-<  Width=[{0}],Height=[{1}]",
+		() -> MessageFormat.format(">-XR3Player V.{0} -<  Width=[{1}],Height=[{2}]", Main.currentVersion,
 			Main.window.getWidth(), Main.window.getHeight()),
 		Main.window.widthProperty(), Main.window.heightProperty());
 	xr3Label.textProperty().bind(binding);
