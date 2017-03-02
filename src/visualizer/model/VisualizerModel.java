@@ -58,11 +58,11 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     /**
      * The maximum that the display mode can reach
      */
-    public final static int DISPLAYMODE_MAXIMUM = 6;
+    public final static int DISPLAYMODE_MAXIMUM = DisplayMode.values().length - 2; //-2 cause i count from 0
 
     /** The display mode. */
     public SimpleIntegerProperty displayMode = new SimpleIntegerProperty(
-	    Integer.parseInt(DisplayMode.OSCILLOSCOPE_LINES.toString()));
+	    Integer.parseInt(DisplayMode.ROSETTE.toString()));
 
     /** The Constant DEFAULT_FPS. */
     private static final int DEFAULT_FPS = 60;
@@ -98,7 +98,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
     protected Color scopeColor;
 
     /** The spectrum analyser colors. */
-    protected static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
+    static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
 
     /** The dsp. */
     private KJDSPAudioDataConsumer dsp = null;
@@ -740,7 +740,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	    }
 	},
 
-	/** The display spectrum analyzer. */
+	/** The display spectrum bars. */
 	SPECTRUM_BARS {
 	    @Override
 	    public String toString() {
@@ -748,7 +748,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	    }
 	},
 
-	/** The display vu meter. */
+	/** Display a VOLUME_METER */
 	VOLUME_METER {
 	    @Override
 	    public String toString() {
@@ -762,19 +762,25 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 		return "5";
 	    }
 	},
-	/** The display circular. */
-	SIERPINSKI {
+	/** Display a Polyspiral and 4 Arcs. */
+	ROSETTE_ARCS {
 	    @Override
 	    public String toString() {
 		return "6";
 	    }
 	},
-
 	/** Display Sierpinski Triangles */
-	JULIAFRACTALS {
+	SIERPINSKI {
 	    @Override
 	    public String toString() {
 		return "7";
+	    }
+	},
+	/** Display Julia Fractals */
+	JULIAFRACTALS {
+	    @Override
+	    public String toString() {
+		return "8";
 	    }
 	}
     }

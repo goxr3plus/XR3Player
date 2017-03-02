@@ -96,7 +96,8 @@ public class VisualizerWindowController extends StackPane {
     private StackPane progressBarStackPane;
 
     /**
-     * Shows the progress of the Media how much has completed from it's total duration
+     * Shows the progress of the Media how much has completed from it's total
+     * duration
      */
     @FXML
     public ProgressBar progressBar;
@@ -114,7 +115,7 @@ public class VisualizerWindowController extends StackPane {
 
     /** The x player UI. */
     // Controller of an XPlayer
-    private XPlayerController xPlayerUI;
+    private XPlayerController xPlayerController;
 
     /** The pause transition. */
     private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
@@ -122,12 +123,12 @@ public class VisualizerWindowController extends StackPane {
     /**
      * Constructor.
      *
-     * @param xPlayerUI
-     *            the x player UI
+     * @param xPlayerController
+     *            xPlayerController
      */
-    public VisualizerWindowController(XPlayerController xPlayerUI) {
+    public VisualizerWindowController(XPlayerController xPlayerController) {
 
-	this.xPlayerUI = xPlayerUI;
+	this.xPlayerController = xPlayerController;
 
 	window = new Stage();
 	window.setTitle("XR3Player Visualizer");
@@ -154,7 +155,6 @@ public class VisualizerWindowController extends StackPane {
     }
 
     public MediaPlayer videoPlayer;
-    
 
     /**
      * Called as soon as .fxml has been loaded
@@ -186,17 +186,17 @@ public class VisualizerWindowController extends StackPane {
 	    pauseTransition.playFromStart();
 	    topBar.setVisible(true);
 	    setCursor(Cursor.HAND);
-	    xPlayerUI.visualizer.setCursor(Cursor.HAND);
+	    xPlayerController.visualizer.setCursor(Cursor.HAND);
 	});
 
 	// --- Mouse Scroll Listeners
 	setOnScroll(scroll -> {
 	    if (scroll.getDeltaY() > 0)
-		xPlayerUI.adjustVolume(1);
+		xPlayerController.adjustVolume(1);
 	    else
-		xPlayerUI.adjustVolume(-1);
+		xPlayerController.adjustVolume(-1);
 
-	    xPlayerUI.visualizerStackController.replayLabelEffect("Vol: " + xPlayerUI.getVolume());
+	    xPlayerController.visualizerStackController.replayLabelEffect("Vol: " + xPlayerController.getVolume());
 	});
 
 	// -- KeyListeners
@@ -208,26 +208,26 @@ public class VisualizerWindowController extends StackPane {
 		    removeVisualizer();
 
 	    } else if (key.getCode() == KeyCode.RIGHT) {
-		xPlayerUI.visualizer.displayMode
-			.set((xPlayerUI.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-				: xPlayerUI.visualizer.displayMode.get() + 1);
+		xPlayerController.visualizer.displayMode.set(
+			(xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
+				: xPlayerController.visualizer.displayMode.get() + 1);
 	    } else if (key.getCode() == KeyCode.LEFT) {
-		xPlayerUI.visualizer.displayMode.set(
-			xPlayerUI.visualizer.displayMode.get() - 1 >= 0 ? xPlayerUI.visualizer.displayMode.get() - 1
-				: VisualizerModel.DISPLAYMODE_MAXIMUM);
+		xPlayerController.visualizer.displayMode.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
+			? xPlayerController.visualizer.displayMode.get() - 1
+			: VisualizerModel.DISPLAYMODE_MAXIMUM);
 	    }
 	});
 
 	// ----------Drag && Drop Listeners
 	scene.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-	scene.setOnDragDropped(drop -> xPlayerUI.dragDrop(drop, 2));
+	scene.setOnDragDropped(drop -> xPlayerController.dragDrop(drop, 2));
 	window.setScene(scene);
 
 	// -------------Top Bar Elements---------------
 
 	// menuPopButton
 	menuPopButton.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00)
-		.asString("[%.02f %%]").concat("Deck [" + xPlayerUI.getKey() + "]"));
+		.asString("[%.02f %%]").concat("Deck [" + xPlayerController.getKey() + "]"));
 
 	// ----------------------------- Minimize
 	minimize.setOnAction(action ->
@@ -235,7 +235,7 @@ public class VisualizerWindowController extends StackPane {
 	removeVisualizer());
 
 	// clearBackground
-	clearBackground.setOnAction(a -> xPlayerUI.visualizer.backgroundImage = null);
+	clearBackground.setOnAction(a -> xPlayerController.visualizer.backgroundImage = null);
 
 	// transparencySlider
 	transparencySlider.valueProperty()
@@ -246,27 +246,29 @@ public class VisualizerWindowController extends StackPane {
 	    if (!topBar.isHover() && window.isShowing() && !menuPopButton.isShowing()) {
 		topBar.setVisible(false);
 		setCursor(Cursor.NONE);
-		xPlayerUI.visualizer.setCursor(Cursor.NONE);
+		xPlayerController.visualizer.setCursor(Cursor.NONE);
 	    }
 	});
 
-//	/** The media. */
-//	Media media = new Media(new File("C:\\\\Users\\\\GOXR3PLUS\\\\Desktop\\\\Twerking Dog.mp4").toURI().toString());
-//
-//	/** The video player. */
-//	videoPlayer = new MediaPlayer(media);
-//
-//	mediaView.setMediaPlayer(videoPlayer);
-//	mediaView.fitHeightProperty().bind(super.widthProperty());
-//	mediaView.fitHeightProperty().bind(super.heightProperty());
-//	mediaView.setSmooth(true);
-//
-//	if (xPlayerUI.getKey() == 0) {
-//	    videoPlayer.setRate(0.5);
-//	    videoPlayer.setCycleCount(50000);
-//	    videoPlayer.setMute(true);
-//	    videoPlayer.setAutoPlay(true);
-//	}
+	// /** The media. */
+	// Media media = new Media(new
+	// File("C:\\\\Users\\\\GOXR3PLUS\\\\Desktop\\\\Twerking
+	// Dog.mp4").toURI().toString());
+	//
+	// /** The video player. */
+	// videoPlayer = new MediaPlayer(media);
+	//
+	// mediaView.setMediaPlayer(videoPlayer);
+	// mediaView.fitHeightProperty().bind(super.widthProperty());
+	// mediaView.fitHeightProperty().bind(super.heightProperty());
+	// mediaView.setSmooth(true);
+	//
+	// if (xPlayerUI.getKey() == 0) {
+	// videoPlayer.setRate(0.5);
+	// videoPlayer.setCycleCount(50000);
+	// videoPlayer.setMute(true);
+	// videoPlayer.setAutoPlay(true);
+	// }
 
     }
 
@@ -293,9 +295,9 @@ public class VisualizerWindowController extends StackPane {
 	    Image img = new Image(image.toURI().toString());
 	    if (img.getWidth() <= 4800 && img.getHeight() <= 4800) {
 		if (type == Type.background)
-		    xPlayerUI.visualizer.backgroundImage = img;
+		    xPlayerController.visualizer.backgroundImage = img;
 		else if (type == Type.foreground)
-		    xPlayerUI.visualizer.foregroundImage = img;
+		    xPlayerController.visualizer.foregroundImage = img;
 	    } else
 		ActionTool.showNotification("Warning",
 			"Maximum Size Allowed 4800*4800 \n Current is:" + img.getWidth() + "*" + img.getHeight(),
@@ -367,7 +369,7 @@ public class VisualizerWindowController extends StackPane {
 
 	// Add the visualizer
 	// visualizerPane.setCenter(xPlayerUI.visualizerStackController);
-	centerStackPane.getChildren().add(1, xPlayerUI.visualizerStackController);
+	centerStackPane.getChildren().add(1, xPlayerController.visualizerStackController);
 
 	// show the window
 	window.show();
@@ -376,10 +378,10 @@ public class VisualizerWindowController extends StackPane {
     /**
      * Removes the visualizer from the Window.
      */
-    private void removeVisualizer() {
+    public void removeVisualizer() {
 	pauseTransition.stop();
-	xPlayerUI.visualizer.setCursor(Cursor.HAND);
-	xPlayerUI.reAddVisualizer();
+	xPlayerController.visualizer.setCursor(Cursor.HAND);
+	xPlayerController.reAddVisualizer();
 	window.close();
     }
 

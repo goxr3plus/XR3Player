@@ -8,12 +8,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import tools.InfoTool;
+import visualizer.model.VisualizerModel;
+import xplayer.presenter.XPlayerController;
 
 /**
  * 
@@ -25,9 +30,20 @@ import tools.InfoTool;
 public class VisualizerStackController extends StackPane {
 
     @FXML
+    private Button next;
+
+    @FXML
     private Label visualizerTypeLabel;
 
+    @FXML
+    private Button previous;
+
+    // --------------------------------------
+
     private FadeTransition fadeTransition;
+
+    /** The pause transition. */
+    private PauseTransition pauseTransition = new PauseTransition(Duration.millis(900));
 
     /**
      * Constructor
@@ -57,15 +73,50 @@ public class VisualizerStackController extends StackPane {
 	fadeTransition.setToValue(0.0);
 
 	visualizerTypeLabel.setOpacity(0);
+
+	// --- MouseListeners
+	addEventHandler(MouseEvent.MOUSE_MOVED, m -> {
+	    pauseTransition.playFromStart();
+	    previous.setVisible(true);
+	    next.setVisible(true);
+	});
+
+	// PauseTransition
+	pauseTransition.setOnFinished(f -> {
+	    if (!previous.isHover() && !next.isHover()) {
+		previous.setVisible(false);
+		next.setVisible(false);
+	    }
+	});
+	pauseTransition.playFromStart();
+
     }
 
     /**
      * Replays the fade effect to show the new type of visualizer
-     * @param text 
+     * 
+     * @param text
      */
     public void replayLabelEffect(String text) {
 	visualizerTypeLabel.setText(text);
 	fadeTransition.playFromStart();
+    }
+
+    /**
+     * Add the listeners to the Next and Previous Buttons
+     * 
+     * @param xPlayerController
+     */
+    public void addListenersToButtons(XPlayerController xPlayerController) {
+	// previous
+	previous.setOnAction(a -> xPlayerController.visualizer.displayMode
+		.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
+			? xPlayerController.visualizer.displayMode.get() - 1
+			: VisualizerModel.DISPLAYMODE_MAXIMUM));
+	// next
+	next.setOnAction(a -> xPlayerController.visualizer.displayMode
+		.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
+			: xPlayerController.visualizer.displayMode.get() + 1));
     }
 
 }

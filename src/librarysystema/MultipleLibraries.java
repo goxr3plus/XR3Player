@@ -59,7 +59,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
     // -----------------------------------------------------------------------
 
     /** Custom pen cursor */
-    ImageCursor stylus = new ImageCursor(InfoTool.getImageFromDocuments("highlighter.png"), 0, 32);
+    //ImageCursor stylus = new ImageCursor(InfoTool.getImageFromDocuments("highlighter.png"), 0, 32)
 
     /** The hand. */
     Cursor hand = Cursor.HAND;
@@ -105,32 +105,32 @@ public class MultipleLibraries extends StackPane implements Initializable {
 		((SmartController) newValue.getContent()).loadService.startService(false, true);
 	});
 
-	tabPane.setOnMouseMoved(m -> {
-	    if (!m.isControlDown())
-		resetCursor();
-	    else
-		setControlCursor();
-	});
+//	tabPane.setOnMouseMoved(m -> {
+//	    if (!m.isControlDown())
+//		resetCursor();
+//	    else
+//		setControlCursor();
+//	});
 
 	// Filtering Thread
 	new FilesFilterService().start(FilesFilterService.FilterMode.MULTIPLELIBS);
     }
 
-    /**
-     * Resets the cursor to the default one.
-     */
-    public void resetCursor() {
-	if (tabPane.getCursor() != hand)
-	    tabPane.setCursor(hand);
-    }
-
-    /**
-     * Set the Cursor to control Cursor.
-     */
-    public void setControlCursor() {
-	if (tabPane.getCursor() != stylus)
-	    tabPane.setCursor(stylus);
-    }
+//    /**
+//     * Resets the cursor to the default one.
+//     */
+//    public void resetCursor() {
+//	if (tabPane.getCursor() != hand)
+//	    tabPane.setCursor(hand);
+//    }
+//
+//    /**
+//     * Set the Cursor to control Cursor.
+//     */
+//    public void setControlCursor() {
+//	if (tabPane.getCursor() != stylus)
+//	    tabPane.setCursor(stylus);
+//    }
 
     /**
      * Returns true if all the controllers are free.

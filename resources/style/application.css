@@ -273,16 +273,18 @@
 .titled-pane {
 	-fx-background-color:transparent;
 	-fx-font-weight:bold;
-	-fx-text-fill:black;
+	-fx-text-fill:white;
 }
 
 .titled-pane > *.content {
-	-fx-effect: innershadow(three-pass-box, white, 15.0, 0.0, 0.0, 0.0);
+	-fx-effect: innershadow(three-pass-box, red , 15.0, 0.0, 0.0, 0.0);
     -fx-background-color:transparent;
+    -fx-border-color:transparent;    
 }
 
 .titled-pane > .title {
-    -fx-background-color:  -fx-box-border, -fx-inner-border, -fx-body-color;
+    -fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);
+     /*-fx-background-color:  -fx-box-border, -fx-inner-border, -fx-body-color;*/
     -fx-background-insets: 0.0, 1.0, 2.0;
     -fx-background-radius: 5.0 5.0 0.0 0.0, 4.0 4.0 0.0 0.0, 3.0 3.0 0.0 0.0;
     -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
@@ -298,7 +300,7 @@
 
 .tab-pane .tab-header-area .tab-header-background {
     /*-fx-opacity: 0.0;*/
-    -fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);    	    
+    /*-fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%); */    	    
 }
 
 .tab-pane{	
@@ -307,7 +309,7 @@
 
 
 .tab-pane .tab{
-    -fx-background-color: black;
+    -fx-background-color: linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);
     -fx-background-radius: 20.0 0.0 20.0;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;   
@@ -377,7 +379,7 @@
 
 /*  LibrariesTabPane */
 #LibrariesTabPane .tab-header-area .tab-header-background {
-    -fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);    	    
+     /*-fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%); */    	    
 }
 
 

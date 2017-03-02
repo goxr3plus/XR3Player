@@ -125,7 +125,8 @@ public class Library extends StackPane {
     private String description = "";
 
     /**
-     * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
+     * // create a rotation transform starting at 0 degrees, rotating about
+     * pivot point 0, 0.
      */
     // Rotate rotationTransform = new Rotate(0, 0, 0)
 
@@ -137,7 +138,8 @@ public class Library extends StackPane {
     public enum SaveMode {
 
 	/**
-	 * Songs are not copied into the database so if they are deleted they don't exist anymore.
+	 * Songs are not copied into the database so if they are deleted they
+	 * don't exist anymore.
 	 */
 	ORIGINAL_PATH,
 
@@ -452,13 +454,12 @@ public class Library extends StackPane {
     private void initialize() {
 
 	// StackView
-	// this.maxHeightProperty().bind(Main.libraryMode.libraryViewer.heightProperty().divide(2));
-	// this.maxWidthProperty().bind(this.maxHeightProperty());
+	//this.maxWidthProperty().bind(imageView.fitWidthProperty())
+	//this.maxHeightProperty().bind(imageView.fitHeightProperty())
 
 	// ImageView
-	//imageView.fitWidthProperty().bind(this.prefWidthProperty());
-	//imageView.fitHeightProperty().bind(this.prefHeightProperty());
-	
+	// imageView.fitWidthProperty().bind(this.prefWidthProperty())
+	// imageView.fitHeightProperty().bind(this.prefHeightProperty())
 
 	// Clip
 	Rectangle rect = new Rectangle();
@@ -466,23 +467,23 @@ public class Library extends StackPane {
 	rect.heightProperty().bind(this.heightProperty());
 	rect.setArcWidth(25);
 	rect.setArcHeight(25);
-	//rect.setEffect(new Reflection());
+	// rect.setEffect(new Reflection());
 
 	// StackPane -> this
 	this.setClip(rect);
-	//Reflection reflection = new Reflection();
-	//reflection.setInput(new DropShadow(4, Color.WHITE));
-	//this.setEffect(reflection);
+	// Reflection reflection = new Reflection();
+	// reflection.setInput(new DropShadow(4, Color.WHITE));
+	// this.setEffect(reflection);
 
 	// LibraryName
 	setLibraryName(libraryName);
 	nameField.setText(libraryName);
 	nameField.getTooltip().setText(libraryName);
 
-	// Update the Image 
+	// Update the Image
 	// updateStarLabelImage()
-//	imageView.setFitWidth(getWidth());
-//	imageView.setFitHeight(getHeight());
+	// imageView.setFitWidth(getWidth());
+	// imageView.setFitHeight(getHeight());
 
 	// Image
 	imageView.setImage(getImage());
@@ -607,7 +608,8 @@ public class Library extends StackPane {
     }
 
     /**
-     * Updates the position variable of Library in database so the next time viewer position it correct.
+     * Updates the position variable of Library in database so the next time
+     * viewer position it correct.
      *
      * @param newPosition
      *            The new position of the Library
@@ -1201,7 +1203,8 @@ public class Library extends StackPane {
      * This method is called when a key is released.
      *
      * @param key
-     *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
+     *            An event which indicates that a keystroke occurred in a
+     *            javafx.scene.Node.
      */
     public void onKeyReleased(KeyEvent key) {
 	if (!Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused()

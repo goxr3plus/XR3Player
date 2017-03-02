@@ -77,10 +77,11 @@
                                              </toggleGroup>
                                           </RadioMenuItem>
                                           <RadioMenuItem mnemonicParsing="false" text="Stereo Oscilloscope" toggleGroup="$visualizerTypeGroup" />
-                                          <RadioMenuItem mnemonicParsing="false" selected="true" text="Oscilloscope Lines" toggleGroup="$visualizerTypeGroup" />
+                                          <RadioMenuItem mnemonicParsing="false" text="Oscilloscope Lines" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Volum Meter" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Spectrum Bars" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Rozete" toggleGroup="$visualizerTypeGroup" />
+                                          <RadioMenuItem mnemonicParsing="false" text="Rozete + Arcs" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Skierpinski Triangles" toggleGroup="$visualizerTypeGroup" />
                                       </items>
                                     </Menu>

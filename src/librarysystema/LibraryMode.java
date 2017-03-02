@@ -87,12 +87,14 @@ public class LibraryMode extends GridPane {
     public final MultipleLibraries multipleLibs = new MultipleLibraries();
 
     /**
-     * The mechanism which allows you to view the libraries as components with image etc.
+     * The mechanism which allows you to view the libraries as components with
+     * image etc.
      */
     public final LibrariesViewer libraryViewer = new LibrariesViewer();
 
     /**
-     * The mechanism which allows you to transport items between libraries and more.
+     * The mechanism which allows you to transport items between libraries and
+     * more.
      */
     public final LibrariesSearcher librariesSearcher = new LibrariesSearcher();
 
@@ -100,7 +102,8 @@ public class LibraryMode extends GridPane {
     PreparedStatement insertNewLibrary;
 
     /**
-     * Default image of a library(which has not a costume one selected by the user.
+     * Default image of a library(which has not a costume one selected by the
+     * user.
      */
     public static final Image defaultImage = InfoTool.getImageFromDocuments("library.png");
     /**
@@ -234,7 +237,8 @@ public class LibraryMode extends GridPane {
     }
 
     /**
-     * Update Settings Total Library only if this Library exists and it is on settings mode
+     * Update Settings Total Library only if this Library exists and it is on
+     * settings mode
      * 
      * @param name
      */
@@ -478,10 +482,10 @@ public class LibraryMode extends GridPane {
 	    return items;
 	}
 
-	//----About the last size of each Library
+	// ----About the last size of each Library
 	double lastSize;
 
-	//----About the width and height of LibraryMode Clip
+	// ----About the width and height of LibraryMode Clip
 	int previousWidth;
 	int previousHeight;
 
@@ -503,32 +507,39 @@ public class LibraryMode extends GridPane {
 	    centered.setLayoutX((getWidth() - WIDTH) / 2);
 	    centered.setLayoutY((getHeight() - HEIGHT / var) / 2);
 
-	    //	    centered.setLayoutX((getWidth() - WIDTH) / 2)
-	    //	    centered.setLayoutY((getHeight() - HEIGHT) / 2)	   
+	    // centered.setLayoutX((getWidth() - WIDTH) / 2)
+	    // centered.setLayoutY((getHeight() - HEIGHT) / 2)
 
 	    jfSlider.setLayoutX(getWidth() / 2 - 100);
 	    jfSlider.setLayoutY(10);
 	    jfSlider.resize(200, 15);
 
-	    //AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
-	    // if (previousWidth != (int) WIDTH || 
+	    // AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
+	    // if (previousWidth != (int) WIDTH ||
 	    if (previousHeight != (int) HEIGHT) {
-		//System.out.println("Updating Library Size")
+		// System.out.println("Updating Library Size")
 
-		//Update ImageView width and height
+		// Update ImageView width and height
 		SPACING = HEIGHT / (var + 0.5);
 		LEFT_OFFSET = -(SPACING - 10);
 		RIGHT_OFFSET = -LEFT_OFFSET;
-		//For-Each
+		// For-Each
 		items.forEach(library -> {
-		    library.imageView.setFitWidth(HEIGHT / var);
-		    library.imageView.setFitHeight(HEIGHT / var);
+		    double size = HEIGHT / var;
+
+		    // --
+		    library.imageView.setFitWidth(size);
+		    library.imageView.setFitHeight(size);
+		    library.setMaxWidth(size);
+		    library.setMaxHeight(size);
 		});
 
-		//Dont Fuck the CPU 
-		double currentSize = WIDTH / var; //the current size of each library
+		// Dont Fuck the CPU
+		double currentSize = WIDTH / var; // the current size of each
+						  // library
 		boolean doUpdate = Math.abs(currentSize - lastSize) > 2;
-		//System.out.println("Do update?:" + doUpdate + " , " + Math.abs(currentSize - lastSize) + "SSD.U2\n")
+		// System.out.println("Do update?:" + doUpdate + " , " +
+		// Math.abs(currentSize - lastSize) + "SSD.U2\n")
 		lastSize = currentSize;
 		if (doUpdate)
 		    update();
@@ -536,7 +547,8 @@ public class LibraryMode extends GridPane {
 
 	    previousWidth = (int) WIDTH;
 	    previousHeight = (int) HEIGHT;
-	    //System.out.println("Counter:" + (++counter) + " , " + getWidth() + "," + getHeight())
+	    // System.out.println("Counter:" + (++counter) + " , " + getWidth()
+	    // + "," + getHeight())
 
 	}
 
@@ -573,8 +585,16 @@ public class LibraryMode extends GridPane {
 	 */
 	public void addLibrary(Library library) {
 	    items.add(library);
-	    library.imageView.setFitWidth(HEIGHT / var);
-	    library.imageView.setFitHeight(HEIGHT / var);
+
+	    // --
+	    double size = HEIGHT / var;
+
+	    library.imageView.setFitWidth(size);
+	    library.imageView.setFitHeight(size);
+	    library.setMaxWidth(size);
+	    library.setMaxHeight(size);
+
+	    // --
 	    library.setOnMouseClicked(m -> {
 
 		if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {

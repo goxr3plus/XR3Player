@@ -153,7 +153,8 @@ abstract class Visualizer extends VisualizerDrawer {
 	}
 
 	/**
-	 * This method is used by XPlayerController to pass a reference to the AnimationTimer
+	 * This method is used by XPlayerController to pass a reference to the
+	 * AnimationTimer
 	 *
 	 * @param xPlayerController
 	 *            The XPlayerController Reference
@@ -165,14 +166,14 @@ abstract class Visualizer extends VisualizerDrawer {
 	@Override
 	public void handle(long nanos) {
 
-	    //XPlayer controlls this animationTimer?
+	    // XPlayer controlls this animationTimer?
 	    if (xPlayerController != null && !xPlayerController.visualizerStackController.isVisible()) {
 		clear();
 		draw = false;
 	    } else
 		draw = true;
 
-	    //Can draw?
+	    // Can draw?
 	    if (draw) {
 		clear();
 		switch (displayMode.get()) {
@@ -196,9 +197,12 @@ abstract class Visualizer extends VisualizerDrawer {
 		    drawPolySpiral();
 		    break;
 		case 6:
-		    drawSierpinski();
+		    drawPolySpiral2();
 		    break;
 		case 7:
+		    drawSierpinski();
+		    break;
+		case 8:
 		    drawJuliaSet();
 		    break;
 		default:
@@ -217,19 +221,20 @@ abstract class Visualizer extends VisualizerDrawer {
 			nextSecond = nanos + ONE_SECOND_NANOS;
 		    }
 		    gc.setStroke(Color.YELLOW);
-		    gc.strokeText("FPS: " + fps + " (FRRH: " + frameRateRatioHint + ")", 0, canvasHeight - 1.00);
+		    gc.strokeText("FPS: " + fps , 0, canvasHeight - 1.00); //+ " (FRRH: " + frameRateRatioHint + ")"
 		}
 
-	    } //END: if draw == TRUE
+	    } // END: if draw == TRUE
 
-	    //--XRPlayer controller?
+	    // --XRPlayer controller?
 	    if (xPlayerController != null) {
-		//Repaint the disc
+		// Repaint the disc
 		if (xPlayerController.disc != null)
 		    xPlayerController.disc.repaint();
 	    }
 
-	    //--------------------------------------------------------------------------------------RUBBISH CODE
+	    // --------------------------------------------------------------------------------------RUBBISH
+	    // CODE
 	    /*
 	     * if (System.currentTimeMillis() >= lfu + 1000) { lfu =
 	     * System.currentTimeMillis(); fps = framesPerSecond;

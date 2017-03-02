@@ -8,6 +8,7 @@ import java.util.Random;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 /**
  * -----------------------------------------------------------------------
@@ -25,6 +26,26 @@ import javafx.scene.paint.Color;
  *
  */
 public class Polyspiral {
+
+    /** The cool effect. */
+    final Image coolEffect = new Image(VisualizerModel.class.getResourceAsStream("anim1.gif"));
+
+    /** The yellow light. */
+    final Image yellowLight = new Image(VisualizerModel.class.getResourceAsStream("yellowLight.png"));
+
+    /** The blue light. */
+    final Image blueLight = new Image(VisualizerModel.class.getResourceAsStream("blueLight.png"));
+
+    /** The grey light. */
+    final Image greyLight = new Image(VisualizerModel.class.getResourceAsStream("greyLight.png"));
+
+    /** The light blue light. */
+    final Image lightBlueLight = new Image(VisualizerModel.class.getResourceAsStream("lightBlueLight.png"));
+
+    /** The red light. */
+    final Image redLight = new Image(VisualizerModel.class.getResourceAsStream("redLight.png"));
+
+    // -------------------
 
     Random random = new Random();
 
@@ -157,9 +178,9 @@ public class Polyspiral {
 	 * Exception in thread "JavaFX Application Thread"
 	 * java.lang.IllegalArgumentException: bound must be positive at
 	 * java.util.Random.nextInt(Random.java:388) at
-	 * visualizer.model.VisualizerDrawer.drawPolySpiral(VisualizerDrawer.
-	 * java:261) error(gc.fillOval(random.nextInt(width),
-	 * random.nextInt(height), length + 2.00, length + 2.00);)
+	 * visualizer.model.drawPolySpiral( java:261)
+	 * error(gc.fillOval(random.nextInt(width), random.nextInt(height),
+	 * length + 2.00, length + 2.00);)
 	 */
 	visualizerDrawer.gc.setFill(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
 	for (int i = 0; i < total; i++) {
@@ -168,28 +189,27 @@ public class Polyspiral {
 	}
 
 	// Draw Lights
-	if (visualizerDrawer.canvasWidth > VisualizerDrawer.greyLight.getWidth()
-		&& visualizerDrawer.canvasHeight > VisualizerDrawer.greyLight.getHeight())
+	if (visualizerDrawer.canvasWidth > greyLight.getWidth()
+		&& visualizerDrawer.canvasHeight > greyLight.getHeight())
 	    if (array[0] < 0.2) {
-		drawLight(VisualizerDrawer.greyLight);
+		drawLight(greyLight);
 	    } else if (array[0] < 0.3) {
-		drawLight(VisualizerDrawer.lightBlueLight);
+		drawLight(lightBlueLight);
 	    } else if (array[0] < 0.4) {
-		drawLight(VisualizerDrawer.blueLight);
+		drawLight(blueLight);
 	    } else if (array[0] < 0.6) {
-		drawLight(VisualizerDrawer.yellowLight);
+		drawLight(yellowLight);
 	    } else if (array[0] < 0.9) {
-		drawLight(VisualizerDrawer.redLight);
+		drawLight(redLight);
 
 	    }
 
 	// Scope
-	if (visualizerDrawer.canvasWidth > VisualizerDrawer.greyLight.getWidth()
-		&& visualizerDrawer.canvasHeight > VisualizerDrawer.greyLight.getHeight()) {
+	if (visualizerDrawer.canvasWidth > greyLight.getWidth()
+		&& visualizerDrawer.canvasHeight > greyLight.getHeight()) {
 	    visualizerDrawer.gc.setStroke(visualizerDrawer.scopeColor);
-	    double coolW = VisualizerDrawer.coolEffect.getWidth();
-	    double coolH = VisualizerDrawer.coolEffect.getHeight() < visualizerDrawer.canvasHeight
-		    ? VisualizerDrawer.coolEffect.getHeight()
+	    double coolW = coolEffect.getWidth();
+	    double coolH = coolEffect.getHeight() < visualizerDrawer.canvasHeight ? coolEffect.getHeight()
 		    : visualizerDrawer.canvasHeight;
 
 	    // ------------------------Draw Scope----------------------------
@@ -220,19 +240,17 @@ public class Polyspiral {
 	    }
 
 	    // Cool Effects
-	    visualizerDrawer.gc.drawImage(VisualizerDrawer.coolEffect, (coolW / 2 - 50) - coolW * array[0] / 2,
+	    visualizerDrawer.gc.drawImage(coolEffect, (coolW / 2 - 50) - coolW * array[0] / 2,
 		    (visualizerDrawer.canvasHeight / 2 - coolH / 2) - coolH * array[0] / 2, coolW * array[0],
 		    coolH * array[0]);
-	    visualizerDrawer.gc.drawImage(VisualizerDrawer.coolEffect,
-		    (visualizerDrawer.canvasWidth - coolW / 2) - coolW * array[0] / 2,
+	    visualizerDrawer.gc.drawImage(coolEffect, (visualizerDrawer.canvasWidth - coolW / 2) - coolW * array[0] / 2,
 		    (visualizerDrawer.canvasHeight / 2 - coolH / 2) - coolH * array[0] / 2, coolW * array[0],
 		    coolH * array[0]);
 
-	    visualizerDrawer.gc.drawImage(VisualizerDrawer.coolEffect, (coolW / 2 - 50) - coolW * array[0] / 2,
+	    visualizerDrawer.gc.drawImage(coolEffect, (coolW / 2 - 50) - coolW * array[0] / 2,
 		    (visualizerDrawer.canvasHeight - coolH / 2) - coolH * array[0] / 2, coolW * array[0],
 		    coolH * array[0]);
-	    visualizerDrawer.gc.drawImage(VisualizerDrawer.coolEffect,
-		    (visualizerDrawer.canvasWidth - coolW / 2) - coolW * array[0] / 2,
+	    visualizerDrawer.gc.drawImage(coolEffect, (visualizerDrawer.canvasWidth - coolW / 2) - coolW * array[0] / 2,
 		    (visualizerDrawer.canvasHeight - coolH / 2) - coolH * array[0] / 2, coolW * array[0],
 		    coolH * array[0]);
 	}
@@ -366,6 +384,71 @@ public class Polyspiral {
      */
     private int deviceY(double logicalY) {
 	return (int) (centerY - logicalY / pixelSize);
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------------
+
+    private double incr = 0;
+    private int colorIndex;
+
+    /**
+     * Draws a polyspiral and 4 arcs
+     */
+    public void drawPolyspiral2() {
+	float[] pSample = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
+	float[] array = visualizerDrawer.returnBandsArray(pSample, 4);
+
+	// Draw tge Oscilloscope Lines below
+	// drawJuliaSet()
+	// visualizerDrawer.gc.setGlobalAlpha(0.8 - Math.abs(array[0]))
+	// oscilloscope.drawOscilloScopeLines()
+	// visualizerDrawer.gc.setGlobalAlpha(1.0)
+
+	incr = (incr + 0.3 + Math.abs(array[0])) % 360;
+	double len = 6;
+	double angleIncrement = Math.toRadians(incr);
+	double x1 = visualizerDrawer.canvasWidth / 2.00;
+	double y1 = visualizerDrawer.canvasHeight / 2.00;
+	double angle = angleIncrement;
+
+	// visualizerDrawer.gc.setStroke(Color.RED)
+	visualizerDrawer.gc.setLineWidth(2);
+	visualizerDrawer.gc.strokeArc(5, 5, visualizerDrawer.canvasWidth - 10, visualizerDrawer.canvasHeight - 10, 90,
+		360 * Math.abs(array[0]), ArcType.OPEN);
+	visualizerDrawer.gc.setStroke(Color.CYAN);
+	visualizerDrawer.gc.strokeArc(15, 15, visualizerDrawer.canvasWidth - 30, visualizerDrawer.canvasHeight - 30,
+		180, 360 * Math.abs(array[1]), ArcType.OPEN);
+	visualizerDrawer.gc.setStroke(Color.FIREBRICK);
+	visualizerDrawer.gc.strokeArc(25, 25, visualizerDrawer.canvasWidth - 50, visualizerDrawer.canvasHeight - 50,
+		270, 360 * Math.abs(array[2]), ArcType.OPEN);
+	visualizerDrawer.gc.setStroke(Color.CHARTREUSE);
+	visualizerDrawer.gc.strokeArc(35, 35, visualizerDrawer.canvasWidth - 70, visualizerDrawer.canvasHeight - 70,
+		360, 360 * Math.abs(array[3]), ArcType.OPEN);
+	visualizerDrawer.gc.setLineWidth(1);
+
+	// visualizerDrawer.gc.setLineWidth(0.5)
+	visualizerDrawer.gc.setLineWidth(1.5);
+	int until = (int) (x1 + y1) / 2; // (int)
+					 // (visualizerDrawer.canvasWidth/2 *
+					 // Math.abs(array[0]))
+	double twoPI = Math.PI * 2;
+	int lenIncrement = (int) (3 * Math.abs(array[1]));
+	for (int i = 0; i < until; i++) {
+
+	    colorIndex = (colorIndex == 360 - 1) ? 0 : colorIndex + 1;
+	    visualizerDrawer.gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
+
+	    double x2 = x1 + Math.cos(angle) * len;
+	    double y2 = y1 - Math.sin(angle) * len;
+	    visualizerDrawer.gc.strokeLine((int) x1, (int) y1, (int) x2, (int) y2);
+	    x1 = x2;
+	    y1 = y2;
+
+	    len += lenIncrement;
+
+	    angle = (angle + angleIncrement) % (twoPI);
+	}
+	visualizerDrawer.gc.setLineWidth(1);
     }
 
 }

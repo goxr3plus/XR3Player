@@ -119,7 +119,10 @@ public class DJDisc extends StackPane {
     public DJDisc(int width, int height, Color arcColor, int volume, int maximumVolume) {
 	this.maximumVolume = maximumVolume;
 
+	super.setPickOnBounds(true);
+	
 	// StackPane
+	canvas.setPickOnBounds(false);
 	canvas.setCursor(Cursor.OPEN_HAND);
 	//setStyle("-fx-background-color:green;")
 
