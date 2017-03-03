@@ -854,7 +854,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 		    // Configure Media Settings
 		    // if (xPlayer.isPausedOrPlaying())
-		    configureMediaSettings();
+		    configureMediaSettings(true);
 
 		    return succeded;
 		}
@@ -976,7 +976,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			updateMessage("Applying Settings ...");
 
 			// Configure Media Settings
-			configureMediaSettings();
+			configureMediaSettings(false);
 
 			// ....well let's go
 		    } catch (Exception ex) {
@@ -1072,10 +1072,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /**
      * When the audio starts , fast configure it's settings
      */
-    public void configureMediaSettings() {
+    public void configureMediaSettings(boolean passStartImmediatly) {
 
 	// Start immediately?
-	if (!xPlayerSettingsController.startImmediately.isSelected())
+	if (!passStartImmediatly && !xPlayerSettingsController.startImmediately.isSelected())
 	    pause();
 
 	// Mute?

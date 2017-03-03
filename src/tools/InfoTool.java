@@ -65,10 +65,10 @@ public final class InfoTool {
 
     // ----------------Important-----------------------------
 
-    /** Database folder name <b>with out</b> separator */
+    /** Database folder name <b>with out</b> separator [example:XR3DataBase] */
     public static final String DATABASE_FOLDER_NAME = "XR3DataBase";
 
-    /** Database folder name with separator */
+    /** Database folder name with separator [example:XR3DataBase/] */
     public static final String DATABASE_FOLDER_NAME_WITH_SEPARATOR = DATABASE_FOLDER_NAME + File.separator;
 
     // --------
@@ -87,11 +87,11 @@ public final class InfoTool {
 
     // --------
 
-    /** The absolute path to the database folder<b>with out</b> separator */
+    /** The absolute path to the database folder<b>with out</b> separator [example:C:/Users/XR3DataBase] */
     public static final String ABSOLUTE_DATABASE_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
 	    + DATABASE_FOLDER_NAME;
 
-    /** The absolute database path with separator */
+    /** The absolute database path with separator [example:C:/Users/XR3DataBase/] */
     public static final String ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR = ABSOLUTE_DATABASE_PATH_PLAIN + File.separator;
 
     // --------------------------------------------------------------------------------------------------------------

@@ -11,11 +11,11 @@ import java.util.logging.Level;
 import application.Main;
 import customnodes.Marquee;
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
@@ -96,41 +96,34 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	emptyLabelRegion.visibleProperty().bind(emptyLabel.visibleProperty());
 
 	// TabPane
-	tabPane.setId("LibrariesTabPane");
+	tabPane.setId("LibrariesTabPane");	
 
-	// SelectionModel Listener
-	tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-	    // Give a refresh to the newly selected
-	    if (!tabPane.getTabs().isEmpty() && ((SmartController) newValue.getContent()).isFree(false))
-		((SmartController) newValue.getContent()).loadService.startService(false, true);
-	});
-
-//	tabPane.setOnMouseMoved(m -> {
-//	    if (!m.isControlDown())
-//		resetCursor();
-//	    else
-//		setControlCursor();
-//	});
+	//	tabPane.setOnMouseMoved(m -> {
+	//	    if (!m.isControlDown())
+	//		resetCursor();
+	//	    else
+	//		setControlCursor();
+	//	});
 
 	// Filtering Thread
 	new FilesFilterService().start(FilesFilterService.FilterMode.MULTIPLELIBS);
     }
 
-//    /**
-//     * Resets the cursor to the default one.
-//     */
-//    public void resetCursor() {
-//	if (tabPane.getCursor() != hand)
-//	    tabPane.setCursor(hand);
-//    }
-//
-//    /**
-//     * Set the Cursor to control Cursor.
-//     */
-//    public void setControlCursor() {
-//	if (tabPane.getCursor() != stylus)
-//	    tabPane.setCursor(stylus);
-//    }
+    //    /**
+    //     * Resets the cursor to the default one.
+    //     */
+    //    public void resetCursor() {
+    //	if (tabPane.getCursor() != hand)
+    //	    tabPane.setCursor(hand);
+    //    }
+    //
+    //    /**
+    //     * Set the Cursor to control Cursor.
+    //     */
+    //    public void setControlCursor() {
+    //	if (tabPane.getCursor() != stylus)
+    //	    tabPane.setCursor(stylus);
+    //    }
 
     /**
      * Returns true if all the controllers are free.
@@ -181,6 +174,24 @@ public class MultipleLibraries extends StackPane implements Initializable {
      */
     public Tab getTab(int index) {
 	return tabPane.getTabs().get(index);
+    }
+
+    /**
+     * Returns a List of the TabPane Tabs
+     * 
+     * @return A List of the TabPane Tabs
+     */
+    public ObservableList<Tab> getTabs() {
+	return tabPane.getTabs();
+    }
+
+    /**
+     * Return the TabPane
+     * 
+     * @return The TabPane
+     */
+    public TabPane getTabPane() {
+	return tabPane;
     }
 
     /**

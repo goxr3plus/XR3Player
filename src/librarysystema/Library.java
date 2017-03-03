@@ -125,8 +125,7 @@ public class Library extends StackPane {
     private String description = "";
 
     /**
-     * // create a rotation transform starting at 0 degrees, rotating about
-     * pivot point 0, 0.
+     * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
      */
     // Rotate rotationTransform = new Rotate(0, 0, 0)
 
@@ -138,8 +137,7 @@ public class Library extends StackPane {
     public enum SaveMode {
 
 	/**
-	 * Songs are not copied into the database so if they are deleted they
-	 * don't exist anymore.
+	 * Songs are not copied into the database so if they are deleted they don't exist anymore.
 	 */
 	ORIGINAL_PATH,
 
@@ -247,6 +245,9 @@ public class Library extends StackPane {
 				updateImagePathInDB(Main.dbManager.imagesFolderAbsolutePath + File.separator + newName
 					+ "." + InfoTool.getFileExtension(getAbsoluteImagePath()), true, false);
 
+			    //Update the JSONFile
+			    if (isLibraryOpened())
+				Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),true);
 			} else { // duplicate
 			    resetTheName();
 			    Notifications.create().title("Dublicate Name")
@@ -608,8 +609,7 @@ public class Library extends StackPane {
     }
 
     /**
-     * Updates the position variable of Library in database so the next time
-     * viewer position it correct.
+     * Updates the position variable of Library in database so the next time viewer position it correct.
      *
      * @param newPosition
      *            The new position of the Library
@@ -771,11 +771,14 @@ public class Library extends StackPane {
 
 	try {
 	    opened.set(way);
-	    libUStatus.setBoolean(1, way);
-	    libUStatus.setString(2, getLibraryName());
-	    libUStatus.executeUpdate();
-	    if (commit)
+
+	    //commit?
+	    if (commit) {
+		libUStatus.setBoolean(1, way);
+		libUStatus.setString(2, getLibraryName());
+		libUStatus.executeUpdate();
 		Main.dbManager.commit();
+	    }
 	} catch (SQLException sql) {
 	    sql.printStackTrace();
 	}
@@ -878,6 +881,10 @@ public class Library extends StackPane {
 		// Commit
 		Main.dbManager.commit();
 
+		//Update the JSONFile
+		if (isLibraryOpened())
+		    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),true);
+
 	    } catch (SQLException sql) {
 		logger.log(Level.WARNING, "\n", sql);
 	    }
@@ -904,6 +911,10 @@ public class Library extends StackPane {
 		setLibraryOpened(open, true);
 		Main.libraryMode.multipleLibs.removeTab(getLibraryName());
 	    }
+
+	    //Update the JSONFile
+	    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),true);
+
 	    // Open Hacked to not commit
 	} else {
 	    setLibraryOpened(open, false);
@@ -1203,8 +1214,7 @@ public class Library extends StackPane {
      * This method is called when a key is released.
      *
      * @param key
-     *            An event which indicates that a keystroke occurred in a
-     *            javafx.scene.Node.
+     *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
      */
     public void onKeyReleased(KeyEvent key) {
 	if (!Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused()

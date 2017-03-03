@@ -229,6 +229,9 @@ public class Main extends Application {
 
 	    // Load the database
 	    dbManager.loadApplicationDataBase();
+	  //  dbManager.recreateJSonDataBase();
+	  //  dbManager.loadOpenedLibraries();
+	  //  dbManager.updateLibrariesInformation(null);
 
 	    // Scene and Show
 	    window.setScene(scene);

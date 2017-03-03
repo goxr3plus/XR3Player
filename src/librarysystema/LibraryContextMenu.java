@@ -6,6 +6,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.Window;
+import smartcontroller.TitleMenuItem;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode
@@ -79,7 +80,8 @@ public class LibraryContextMenu extends ContextMenu {
 	setImage.getItems().addAll(localImage, internetImage);
 	image.getItems().addAll(setImage, exportImage, resetImage);
 
-	getItems().addAll(open, close, settings, new SeparatorMenuItem(), image, rename, delete);
+	getItems().addAll(new TitleMenuItem("Basic"), open, close, settings, image, new TitleMenuItem("File Actions"),
+		rename, delete);
 
     }
 
@@ -101,10 +103,10 @@ public class LibraryContextMenu extends ContextMenu {
 	// customize the menu accordingly
 	if (library.isLibraryOpened()) {
 	    getItems().remove(open);
-	    getItems().add(0, close);
+	    getItems().add(1, close);
 	} else {
 	    getItems().remove(close);
-	    getItems().add(0, open);
+	    getItems().add(1, open);
 	}
 
 	show(window, x, y);
