@@ -40,10 +40,16 @@ public class TopBar extends BorderPane {
     private ToggleButton goDJMode;
 
     @FXML
+    private Button openConsole;
+
+    @FXML
     private MenuItem checkForUpdates;
 
     @FXML
     private MenuItem aboutSection;
+
+    @FXML
+    private MenuItem help;
 
     @FXML
     private MenuItem donation;
@@ -77,8 +83,7 @@ public class TopBar extends BorderPane {
     CPUsage cpUsage = new CPUsage();
 
     /**
-     * The current Window Mode that means if the application is on <b>
-     * LibraryMode </b> or in <b>DJMode </b>.
+     * The current Window Mode that means if the application is on <b> LibraryMode </b> or in <b>DJMode </b>.
      */
     private WindowMode windowMode = WindowMode.LIBRARYMODE;
 
@@ -116,6 +121,13 @@ public class TopBar extends BorderPane {
      */
     @FXML
     private void initialize() {
+
+	//openConsole
+	openConsole.setOnAction(a -> Main.consoleWindow.show());
+
+	//help
+	help.setOnAction(
+		a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 
 	// cpuStackPane
 	cpuStackPane.getChildren().add(0, cpUsage);

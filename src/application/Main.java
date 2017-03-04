@@ -94,6 +94,11 @@ public class Main extends Application {
      */
     public static final AboutWindowController aboutWindow = new AboutWindowController();
 
+    /**
+     * The console Window Controller
+     */
+    public static final ConsoleWindowController consoleWindow = new ConsoleWindowController();
+
     /** The window. */
     public static Stage window;
 
@@ -158,11 +163,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 51;
+    public final static int currentVersion = 52;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "02/03/2017";
+    public final static String releaseDate = "04/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -191,6 +196,7 @@ public class Main extends Application {
 	    starWindow.window.initOwner(window);
 	    renameWindow.window.initOwner(window);
 	    exportWindow.window.initOwner(window);
+	    consoleWindow.window.initOwner(window);
 	    topBar.addXR3LabelBinding();
 
 	    // captureWindow
@@ -229,9 +235,9 @@ public class Main extends Application {
 
 	    // Load the database
 	    dbManager.loadApplicationDataBase();
-	  //  dbManager.recreateJSonDataBase();
-	  //  dbManager.loadOpenedLibraries();
-	  //  dbManager.updateLibrariesInformation(null);
+	    //  dbManager.recreateJSonDataBase();
+	    //  dbManager.loadOpenedLibraries();
+	    //  dbManager.updateLibrariesInformation(null);
 
 	    // Scene and Show
 	    window.setScene(scene);

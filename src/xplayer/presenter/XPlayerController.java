@@ -112,8 +112,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     private Label visualizerRequestFocus;
 
     /**
-     * This Label is visible when the player is stopped || paused and displays
-     * that status
+     * This Label is visible when the player is stopped || paused and displays that status
      */
     @FXML
     private Label playerStatusLabel;
@@ -203,9 +202,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     public VisualizerWindowController visualizerWindow;
 
     /**
-     * This controller contains a Visualizer and a Label which describes every
-     * time (for some milliseconds) which type of visualizer is being displayed
-     * (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
+     * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
+     * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
      */
     public final VisualizerStackController visualizerStackController = new VisualizerStackController();
 
@@ -308,11 +306,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	openMediaFileFolder.setOnAction(action -> ActionTool.openFileLocation(xPlayerModel.songPathProperty().get()));
 
 	// openFileButton
-	openFileButton.setOnAction(action -> {
-	    File file = Main.specialChooser.selectSongFile(Main.window);
-	    if (file != null)
-		playSong(file.getAbsolutePath());
-	});
+	openFileButton.setOnAction(action -> openFileChooser());
 
 	// topInfoLabel
 	topInfoLabel.setText("Player : [ " + this.getKey() + " ]");
@@ -321,17 +315,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	backwardButton.setOnAction(a -> {
 	    // if (xPlayer.isPausedOrPlaying()) {
 
+	    seek(-10);
 	    // Check
-	    if (xPlayerModel.getCurrentTime() - 10 >= 0) {
-		System.out.println("Entered backward...");
 
-		// Add
-		xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() - 10);
-
-		// Seek
-		seekService.startSeekService(
-			(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
-	    }
 	    // }
 	});
 
@@ -339,25 +325,24 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	forwardButton.setOnAction(a -> {
 	    // if (xPlayer.isPausedOrPlaying()) {
 
-	    // Check
-	    if (xPlayerModel.getCurrentTime() + 10 <= xPlayerModel.getDuration()) {
-		System.out.println("Entered forward...");
+	    seek(+10);
 
-		// Add
-		xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + 10);
-
-		// Seek
-		seekService.startSeekService(
-			(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
-	    }
 	    // }
 	});
 
     }
 
     /**
-     * Can be called from different classes to implement the dragDrop for their
-     * XPlayer.
+     * Opens a FileChooser so the user can select a song File
+     */
+    public void openFileChooser() {
+	File file = Main.specialChooser.selectSongFile(Main.window);
+	if (file != null)
+	    playSong(file.getAbsolutePath());
+    }
+
+    /**
+     * Can be called from different classes to implement the dragDrop for their XPlayer.
      *
      * @param dragDrop
      *            the drag drop
@@ -461,7 +446,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /**
      * Used by resume method.
      */
-    public void resumeCode() {
+    private void resumeCode() {
 	System.out.println("RESUME code....");
 
 	// Stop the fade animation
@@ -673,8 +658,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		if (discIsDragging && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 
 		    // Try to seek
-		    seekService.startSeekService(xPlayerModel.getCurrentAngleTime()
-			    * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()));
+		    seekService.startSeekService(
+			    xPlayerModel.getCurrentAngleTime() * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()),
+			    false);
 
 		}
 		// SecondaryMouseButton
@@ -757,6 +743,11 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	long bytes;
 
 	/**
+	 * I am using this variables when i want to stop the player and go to a specific time for example at 1 m and 32 seconds :)
+	 */
+	boolean stopPlayer;
+
+	/**
 	 * Determines if the Service is locked , if yes it can't be used .
 	 */
 	private volatile boolean locked = false;
@@ -775,10 +766,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * @param bytes
 	 *            Bytes to skip
 	 */
-	public void startSeekService(long bytes) {
+	public void startSeekService(long bytes, boolean stopPlayer) {
 	    if (!locked && !isRunning() && xPlayerModel.songPathProperty().get() != null) {
 
 		System.out.println(bytes);
+
+		//StopPlayer
+		this.stopPlayer = stopPlayer;
 
 		// Bytes to Skip
 		this.bytes = bytes;
@@ -830,6 +824,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		    // ----------------------- Seek the Media
 		    updateMessage("Skipping the Audio");
 
+		    //Stop?
+		    if (stopPlayer)
+			xPlayer.stop();
+
 		    // GO
 		    // if (bytes != 0) { // and xPlayer.isPausedOrPlaying())
 		    Main.logger.info("Seek Service Started..");
@@ -865,8 +863,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     }
 
     /**
-     * Implements the StreamPlayer Seek Method so it runs outside JavaFX Main
-     * Thread.
+     * Implements the StreamPlayer Seek Method so it runs outside JavaFX Main Thread.
      *
      * @author GOXR3PLUS
      */
@@ -905,8 +902,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 
 	/**
-	 * Determines if the image of the disc is the NULL_IMAGE that means that
-	 * the media inserted into the player has no album image.
+	 * Determines if the image of the disc is the NULL_IMAGE that means that the media inserted into the player has no album image.
 	 *
 	 * @return true if the DiscImage==null <br>
 	 *         false if the DiscImage!=null
@@ -1279,6 +1275,81 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	playService.startPlayService(absolutePath);
     }
 
+    //---------------------------------------------------Player Actions------------------------------------------------------------------
+
+    /**
+     * Tries to skip forward or backward
+     * 
+     * @param seconds
+     *            Seconds to seek
+     */
+    public void seek(int seconds) {
+	if (seconds == 0)
+	    return;
+
+	boolean ok = false;
+
+	if (seconds < 0 && (xPlayerModel.getCurrentTime() + seconds >= 0)) { //negative seek
+
+	    System.out.println("Skipping backwards ...p" + seconds + "] seconds");
+
+	    ok = true;
+	} else if (seconds > 0 && (xPlayerModel.getCurrentTime() + seconds <= xPlayerModel.getDuration())) { //positive seek
+
+	    System.out.println("Skipping forward ...p" + seconds + "] seconds");
+
+	    ok = true;
+	}
+
+	//Ok/?
+	if (ok) {
+
+	    // Add or Remove
+	    xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + seconds);
+
+	    //Seek
+	    seekService.startSeekService(
+		    (xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()),
+		    false);
+	}
+
+    }
+
+    /**
+     * This method is used to seek to a specific time of the audio
+     * 
+     * @param seconds
+     */
+    public void seekTo(int seconds) {
+
+	if (seconds >= 0 && seconds < xPlayerModel.getDuration()) {
+
+	    // Set
+	    xPlayerModel.setCurrentAngleTime(seconds);
+
+	    //Seek To
+	    seekService.startSeekService(
+		    (xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()),
+		    true);
+
+	}
+
+    }
+
+    /**
+     * Mute the player.
+     */
+    public void mute() {
+	radialMenu.mute.setSelected(true);
+    }
+
+    /**
+     * UnMute the player.
+     */
+    public void unMute() {
+	radialMenu.mute.setSelected(false);
+    }
+
     /**
      * Resume the player.
      */
@@ -1291,6 +1362,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
      */
     public void pause() {
 	xPlayer.pause();
+    }
+    
+    /**
+     * Stop the player.
+     */
+    public void stop() {
+	xPlayer.stop();
     }
 
     /**
@@ -1307,8 +1385,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     }
 
     /**
-     * If the player is paused it resume it else if it is stopped it replays the
-     * Media
+     * If the player is paused it resume it else if it is stopped it replays the Media
      */
     public void playOrReplay() {
 	if (xPlayer.isPaused()) // paused?

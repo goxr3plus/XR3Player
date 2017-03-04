@@ -26,7 +26,7 @@
          <children>
             <Button fx:id="showSideBar" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Menu">
                <tooltip>
-                  <Tooltip text="Minimize" />
+                  <Tooltip text="Open Menu" />
                </tooltip>
                <font>
                   <Font size="9.0" />
@@ -65,16 +65,28 @@
          <children>
             <ToggleButton fx:id="goLibrariesMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="Simple" />
             <ToggleButton fx:id="goDJMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="DJ" />
+            <Button fx:id="openConsole" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Console">
+               <tooltip>
+                  <Tooltip text="Open Console Window" />
+               </tooltip>
+               <font>
+                  <Font size="9.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-font-size: 12;" text="Options">
               <items>
                 <MenuItem fx:id="checkForUpdates" mnemonicParsing="false" text="Check for Updates" />
-                  <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="About" />
+                  <MenuItem fx:id="help" mnemonicParsing="false" text="Open Manual Help" />
                   <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: magenta;" text="Donation :)" />
+                  <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="About" />
               </items>
             </MenuButton>
             <Button fx:id="restartButton" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="R">
                <tooltip>
-                  <Tooltip text="Minimize" />
+                  <Tooltip text="Restart" />
                </tooltip>
                <font>
                   <Font size="9.0" />

@@ -231,40 +231,40 @@ public class RemoteAppsController {
 			Main.xPlayersList.getXPlayer(key).stop();
 			// playSound()
 		} else if (result.contains("restart")) {
-			Platform.runLater(Main.xPlayersList.getXPlayerUI(key)::replaySong);
+			Platform.runLater(Main.xPlayersList.getXPlayerController(key)::replaySong);
 			// playSound()
 		} else if (result.contains("maximum volume")) {
-			Main.xPlayersList.getXPlayerUI(key).maximizeVolume();
+			Main.xPlayersList.getXPlayerController(key).maximizeVolume();
 			// playSound()
 		} else if (result.contains("minimum volume")) {
-			Main.xPlayersList.getXPlayerUI(key).minimizeVolume();
+			Main.xPlayersList.getXPlayerController(key).minimizeVolume();
 			// playSound()
 		} else if (result.contains("increase volume by")) { // increase volume
 			if (result.contains("five")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(5);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(5);
 				// playSound()
 			} else if (result.contains("ten")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(10);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(10);
 				// playSound()
 			} else if (result.contains("twenty")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(20);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(20);
 				// playSound()
 			} else if (result.contains("thirty")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(30);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(30);
 				// playSound()
 			}
 		} else if (result.contains("low volume by")) { // low volume
 			if (result.contains("five")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(-5);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(-5);
 				// playSound()
 			} else if (result.contains("ten")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(-10);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(-10);
 				// playSound()
 			} else if (result.contains("twenty")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(-20);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(-20);
 				// playSound()
 			} else if (result.contains("thirty")) {
-				Main.xPlayersList.getXPlayerUI(key).adjustVolume(-30);
+				Main.xPlayersList.getXPlayerController(key).adjustVolume(-30);
 				// playSound()
 			}
 		} else if (result.contains("set volume")) { // set volume
@@ -279,25 +279,25 @@ public class RemoteAppsController {
 	 */
 	private void volumeLevel(int key) {
 		if (result.contains("volume zero")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(0);
+			Main.xPlayersList.getXPlayerController(key).setVolume(0);
 			// playSound()
 		} else if (result.contains("five")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(5);
+			Main.xPlayersList.getXPlayerController(key).setVolume(5);
 			// playSound()
 		} else if (result.contains("ten")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(10);
+			Main.xPlayersList.getXPlayerController(key).setVolume(10);
 			// playSound()
 		} else if (result.contains("twenty")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(20);
+			Main.xPlayersList.getXPlayerController(key).setVolume(20);
 			// playSound()
 		} else if (result.contains("thirty")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(30);
+			Main.xPlayersList.getXPlayerController(key).setVolume(30);
 			// playSound()
 		} else if (result.contains("fourty")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(40);
+			Main.xPlayersList.getXPlayerController(key).setVolume(40);
 			// playSound()
 		} else if (result.contains("fifty")) {
-			Main.xPlayersList.getXPlayerUI(key).setVolume(50);
+			Main.xPlayersList.getXPlayerController(key).setVolume(50);
 			// playSound()
 		}
 	}

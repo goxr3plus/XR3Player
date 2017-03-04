@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root pannable="true" stylesheets="@../style/application.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root pannable="true" style="-fx-background-color: cornflower;" stylesheets="@../style/application.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <BorderPane>
          <center>

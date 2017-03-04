@@ -241,6 +241,38 @@ public final class ActionTool {
     }
 
     /**
+     * Tries to open this File with the default system program
+     * 
+     * @param absolutePath
+     *            The absolute path of the File
+     * @return <b>True</b> if succeeded , <b>False</b> if not
+     */
+    public static boolean openFile(String absolutePath) {
+
+	// Open the Default Browser
+	if (Desktop.isDesktopSupported()) {
+	    Desktop desktop = Desktop.getDesktop();
+	    try {
+		desktop.open(new File(absolutePath));
+	    } catch (IOException ex) {
+		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
+			"Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
+			NotificationType.INFORMATION));
+		logger.log(Level.INFO, "", ex);
+		return false;
+	    }
+	    // Error?
+	} else {
+	    Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
+		    "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
+		    NotificationType.INFORMATION));
+	    System.out.println("Error trying to open the default web browser.");
+	    return false;
+	}
+	return true;
+    }
+
+    /**
      * Tries to open that URI on the default browser
      * 
      * @param uri
@@ -262,6 +294,9 @@ public final class ActionTool {
 	    }
 	    // Error?
 	} else {
+	    Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
+		    "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
+		    NotificationType.INFORMATION));
 	    System.out.println("Error trying to open the default web browser.");
 	    return false;
 	}

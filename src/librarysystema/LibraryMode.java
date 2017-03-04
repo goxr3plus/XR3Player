@@ -299,10 +299,10 @@ public class LibraryMode extends GridPane {
 	libraryViewer.toBack();
 
 	// XPlayer - 0
-	Main.xPlayersList.addXPlayerUI(new XPlayerController(0));
-	Main.xPlayersList.getXPlayerUI(0).makeTheDisc(136, 136, Color.ORANGE, 45, Side.LEFT);
-	Main.xPlayersList.getXPlayerUI(0).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerUI(0), 1, 1);
+	Main.xPlayersList.addXPlayerController(new XPlayerController(0));
+	Main.xPlayersList.getXPlayerController(0).makeTheDisc(136, 136, Color.ORANGE, 45, Side.LEFT);
+	Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
+	add(Main.xPlayersList.getXPlayerController(0), 1, 1);
 
     }
 

@@ -112,6 +112,7 @@ public class SideBar extends BorderPane {
 	} catch (IOException ex) {
 	    logger.log(Level.SEVERE, "", ex);
 	}
+	
     }
 
     /**

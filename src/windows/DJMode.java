@@ -62,15 +62,15 @@ public class DJMode extends GridPane {
      */
     @FXML
     public void initialize() {
-	Main.xPlayersList.addXPlayerUI(new XPlayerController(1));
-	Main.xPlayersList.getXPlayerUI(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
-	Main.xPlayersList.getXPlayerUI(1).makeTheVisualizer(Side.LEFT);
-	add(Main.xPlayersList.getXPlayerUI(1), 0, 0);
+	Main.xPlayersList.addXPlayerController(new XPlayerController(1));
+	Main.xPlayersList.getXPlayerController(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
+	Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
+	add(Main.xPlayersList.getXPlayerController(1), 0, 0);
 
-	Main.xPlayersList.addXPlayerUI(new XPlayerController(2));
-	Main.xPlayersList.getXPlayerUI(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
-	Main.xPlayersList.getXPlayerUI(2).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerUI(2), 1, 0);
+	Main.xPlayersList.addXPlayerController(new XPlayerController(2));
+	Main.xPlayersList.getXPlayerController(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
+	Main.xPlayersList.getXPlayerController(2).makeTheVisualizer(Side.RIGHT);
+	add(Main.xPlayersList.getXPlayerController(2), 1, 0);
 
 	// splitPane
 	splitPane.setStyle("-fx-background-color:transparent");
@@ -147,12 +147,12 @@ public class DJMode extends GridPane {
 	    if (keyCode == KeyCode.W) {
 
 		if (key.isShiftDown()) {
-		    if (Main.xPlayersList.getXPlayerUI(1).getVolume() < 101) {
-			Main.xPlayersList.getXPlayerUI(1).setVolume(Main.xPlayersList.getXPlayerUI(1).getVolume() + 1);
+		    if (Main.xPlayersList.getXPlayerController(1).getVolume() < 101) {
+			Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
 		    }
 		} else if (key.isControlDown()) {
-		    if (Main.xPlayersList.getXPlayerUI(2).getVolume() < 101) {
-			Main.xPlayersList.getXPlayerUI(2).setVolume(Main.xPlayersList.getXPlayerUI(2).getVolume() + 1);
+		    if (Main.xPlayersList.getXPlayerController(2).getVolume() < 101) {
+			Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
 		    }
 		}
 
@@ -160,12 +160,12 @@ public class DJMode extends GridPane {
 	    } else if (keyCode == KeyCode.Q) {
 
 		if (key.isShiftDown()) {
-		    if (Main.xPlayersList.getXPlayerUI(1).getVolume() > -1) {
-			Main.xPlayersList.getXPlayerUI(1).setVolume(Main.xPlayersList.getXPlayerUI(1).getVolume() - 1);
+		    if (Main.xPlayersList.getXPlayerController(1).getVolume() > -1) {
+			Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
 		    }
 		} else if (key.isControlDown()) {
-		    if (Main.xPlayersList.getXPlayerUI(2).getVolume() > -1) {
-			Main.xPlayersList.getXPlayerUI(2).setVolume(Main.xPlayersList.getXPlayerUI(2).getVolume() - 1);
+		    if (Main.xPlayersList.getXPlayerController(2).getVolume() > -1) {
+			Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
 		    }
 		}
 	    }

@@ -94,7 +94,7 @@ public class Audio extends Media {
     public void playOnDeck(int deck, SmartController controller) {
 	// if (Main.xPlayersList.getXPlayer(deck).playSong(this))
 	// setTimesPlayed(getTimesPlayed() + 1, controller);
-	Main.xPlayersList.getXPlayerUI(deck).playSong(getFilePath());
+	Main.xPlayersList.getXPlayerController(deck).playSong(getFilePath());
 
     }
 

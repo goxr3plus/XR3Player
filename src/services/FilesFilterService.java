@@ -108,13 +108,13 @@ public class FilesFilterService {
 				        : null;
 				break;
 			case XPLAYER0:
-				controller = Main.xPlayersList.getXPlayerUI(0).xPlayList.controller;
+				controller = Main.xPlayersList.getXPlayerController(0).xPlayList.controller;
 				break;
 			case XPLAYER1:
-				controller = Main.xPlayersList.getXPlayerUI(1).xPlayList.controller;
+				controller = Main.xPlayersList.getXPlayerController(1).xPlayList.controller;
 				break;
 			case XPLAYER2:
-				controller = Main.xPlayersList.getXPlayerUI(2).xPlayList.controller;
+				controller = Main.xPlayersList.getXPlayerController(2).xPlayList.controller;
 				break;
 			default:
 				controller = null;

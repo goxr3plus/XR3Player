@@ -24,13 +24,17 @@ public class XPlayersList {
     }
 
     /**
-     * Gets the x player UI.
+     * Gets the xPlayerController
      *
      * @param key
      *            the key
-     * @return the x player UI
+     * @return xPlayerController
      */
-    public XPlayerController getXPlayerUI(int key) {
+    public XPlayerController getXPlayerController(int key) {
+	if (key > list.size())
+	    return null;
+
+	//Find it
 	for (XPlayerController p : list)
 	    if (p.getKey() == key)
 		return p;
@@ -39,24 +43,24 @@ public class XPlayersList {
     }
 
     /**
-     * Gets the x player.
+     * Gets the xPlayer
      *
      * @param key
      *            the key
-     * @return the x player
+     * @return the xPlayer
      */
     public XPlayer getXPlayer(int key) {
-	return getXPlayerUI(key).xPlayer;
+	return getXPlayerController(key).xPlayer;
     }
 
     /**
-     * Adds the X player UI.
+     * Adds the xPlayerController
      *
-     * @param xplayerUI
-     *            the xplayer UI
+     * @param xPlayerController
+     *            xPlayerController
      */
-    public void addXPlayerUI(XPlayerController xplayerUI) {
-	list.add(xplayerUI);
+    public void addXPlayerController(XPlayerController xPlayerController) {
+	list.add(xPlayerController);
     }
 
 }
