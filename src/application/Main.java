@@ -201,6 +201,7 @@ public class Main extends Application {
 	    StackPane.setAlignment(sideBar, Pos.CENTER_LEFT);
 
 	    // root
+	    updateScreen.setVisible(false);
 	    topBar.setVisible(false);
 	    root.setTop(topBar);
 
@@ -290,6 +291,7 @@ public class Main extends Application {
 
 	//Close the LoginMode
 	loginMode.setVisible(false);
+	updateScreen.setVisible(true);
 
 	PauseTransition pause = new PauseTransition(Duration.millis(500));
 	pause.playFromStart();

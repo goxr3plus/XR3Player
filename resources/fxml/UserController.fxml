@@ -13,7 +13,7 @@
    <children>
       <ImageView fx:id="imageView" fitHeight="350.0" fitWidth="350.0" pickOnBounds="true">
          <image>
-            <Image url="@../image/libraryModeBackground.jpg" />
+            <Image url="@../image/user.png" />
          </image>
          <viewport>
             <Rectangle2D />

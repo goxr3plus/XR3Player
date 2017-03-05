@@ -41,7 +41,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import loginsystema.User;
 import tools.ActionTool;
 import tools.InfoTool;
 import xplayer.presenter.XPlayerController;
@@ -151,8 +150,7 @@ public class LibraryMode extends GridPane {
 
 			// Add the library
 			currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
-			libraryViewer.addLibrary(currentLib);
-			libraryViewer.update();
+			libraryViewer.addLibrary(currentLib, true);
 
 			// Add a row on libraries table
 			insertNewLibrary.setString(1, name);
@@ -501,14 +499,15 @@ public class LibraryMode extends GridPane {
 	    WIDTH = getHeight();
 	    HEIGHT = WIDTH;// + (WIDTH * 0.4)
 
-	    centered.setLayoutX((getWidth() - WIDTH) / 2);
-	    centered.setLayoutY((getHeight() - HEIGHT / var) / 2);
+	    double variable = WIDTH / var;
+	    centered.setLayoutX((getWidth() - variable) / 2);  //WIDTH/var) / 2)
+	    centered.setLayoutY((getHeight() - variable) / 2); //HEIGHT / var) / 2)
 
 	    // centered.setLayoutX((getWidth() - WIDTH) / 2)
 	    // centered.setLayoutY((getHeight() - HEIGHT) / 2)
 
 	    jfSlider.setLayoutX(getWidth() / 2 - 100);
-	    jfSlider.setLayoutY(10);
+	    jfSlider.setLayoutY(15);
 	    jfSlider.resize(200, 15);
 
 	    // AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
@@ -568,7 +567,7 @@ public class LibraryMode extends GridPane {
 	 */
 	public void addMultipleLibraries(Library[] libraries) {
 	    for (int i = 0; i < libraries.length; i++)
-		addLibrary(libraries[i]);
+		addLibrary(libraries[i], false);
 
 	    // update
 	    update();
@@ -579,8 +578,10 @@ public class LibraryMode extends GridPane {
 	 *
 	 * @param library
 	 *            the library
+	 * @param update
+	 *            Do the update on the list?
 	 */
-	public void addLibrary(Library library) {
+	public void addLibrary(Library library, boolean update) {
 	    items.add(library);
 
 	    // --
@@ -629,6 +630,10 @@ public class LibraryMode extends GridPane {
 
 	    // MAX
 	    jfSlider.setMax(items.size() - 1.00);
+
+	    //Update?
+	    if (update)
+		update();
 	}
 
 	/**

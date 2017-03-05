@@ -368,7 +368,7 @@ public class LocalDBManager {
 				    resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"),
 				    resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED"));
 
-			    Main.libraryMode.libraryViewer.addLibrary(library);
+			    Main.libraryMode.libraryViewer.addLibrary(library,false);
 
 			    updateProgress(resultSet.getRow(), total);
 			}
@@ -549,7 +549,7 @@ public class LocalDBManager {
 		// return false
 	    } finally {
 		Platform.runLater(
-			Notifications.create().text("JSON File Updated...").hideAfter(Duration.millis(500))::show);
+			Notifications.create().text("JSON File Updated...").hideAfter(Duration.millis(100))::show);
 	    }
 	});
 

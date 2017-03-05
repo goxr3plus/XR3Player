@@ -175,7 +175,7 @@ public class LoginMode extends BorderPane {
 
 	//deleteUser
 	deleteUser.disableProperty().bind(newUser.visibleProperty());
-	deleteUser.setOnAction(a -> {	   
+	deleteUser.setOnAction(a -> {
 	    //Try to delete it
 	    if (ActionTool.deleteFile(new File(
 		    InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
@@ -391,14 +391,15 @@ public class LoginMode extends BorderPane {
 	    WIDTH = getHeight();
 	    HEIGHT = WIDTH;// + (WIDTH * 0.4)
 
-	    centered.setLayoutX((getWidth() - WIDTH) / 2);
-	    centered.setLayoutY((getHeight() - HEIGHT / var) / 2);
+	    double variable = WIDTH / var;
+	    centered.setLayoutX((getWidth() - variable) / 2);  //WIDTH/var) / 2)
+	    centered.setLayoutY((getHeight() - variable) / 2); //HEIGHT / var) / 2)
 
 	    // centered.setLayoutX((getWidth() - WIDTH) / 2)
 	    // centered.setLayoutY((getHeight() - HEIGHT) / 2)
 
 	    jfSlider.setLayoutX(getWidth() / 2 - 100);
-	    jfSlider.setLayoutY(10);
+	    jfSlider.setLayoutY(15);
 	    jfSlider.resize(200, 15);
 
 	    // AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
@@ -475,6 +476,8 @@ public class LoginMode extends BorderPane {
 	 *
 	 * @param user
 	 *            The User to be added
+	 * @param update
+	 *            Do the update on the list?
 	 */
 	public void addUser(User user, boolean update) {
 	    items.add(user);
@@ -528,7 +531,7 @@ public class LoginMode extends BorderPane {
 
 	    //Update?
 	    if (update)
-		userViewer.update();
+		update();
 	}
 
 	//	/**
