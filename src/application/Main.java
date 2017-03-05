@@ -7,10 +7,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.controlsfx.control.Notifications;
 import org.fxmisc.flowless.VirtualizedScrollPane;
@@ -37,7 +40,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import librarysystema.LibraryMode;
+import loginsystema.LoginMode;
+import loginsystema.User;
 import remote_communication.RemoteAppsController;
+import services.FilesFilterService;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
 import smartcontroller.PlayedMediaList;
@@ -63,69 +69,53 @@ public class Main extends Application {
     /** Application logger. */
     public static final Logger logger = Logger.getGlobal();
 
-    /** The Constant tagWindow. */
-    // public static final TagWindow tagWindow = new TagWindow()
-
-    /** The Constant dbManager. */
-    // DataBaseController
-    public static final LocalDBManager dbManager = new LocalDBManager("user");
+    //    /** The Constant tagWindow. */
+    //    // public static final TagWindow tagWindow = new TagWindow()
+    //    
+    //    /** The capture window. */
+    //    // public static CaptureWindow captureWindow
+    // public static final RadioStationsController stationsInfostructure 
 
     /** The speech reader. */
-    // SpeechReader
-    public static RemoteAppsController speechReader;// = new
-						    // RemoteAppsController()
+    public static RemoteAppsController speechReader;
 
-    /** The capture window. */
-    // public static CaptureWindow captureWindow
+    //----------------START: The below have not depencities on other ---------------------------------//
 
-    /** The rename window. */
-    public static final RenameWindow renameWindow = new RenameWindow();
+    //
 
     /** The star window. */
     public static final StarWindow starWindow = new StarWindow();
 
-    /**
-     * This window is being used to export files from the application to the outside world
-     */
+    /** The rename window. */
+    public static final RenameWindow renameWindow = new RenameWindow();
+
+    /** This window is being used to export files from the application to the outside world */
     public static final ExportWindowController exportWindow = new ExportWindowController();
 
-    /**
-     * The About Window Controller
-     */
+    /** The About Window of the Application */
     public static final AboutWindowController aboutWindow = new AboutWindowController();
 
-    /**
-     * The console Window Controller
-     */
+    /** The console Window of the Application */
     public static final ConsoleWindowController consoleWindow = new ConsoleWindowController();
 
-    /** The window. */
-    public static Stage window;
+    //
 
-    /** The scene. */
-    static BorderlessScene scene;
-
-    /** The stack pane root. */
-    private static final StackPane stackPaneRoot = new StackPane();
-
-    /** The root. */
-    public static final BorderPane root = new BorderPane();
-
-    // ------------------------------------------------------
-
-    /** The top bar. */
+    /** The Top Bar of the Application */
     public static final TopBar topBar = new TopBar();
 
-    /** The Constant sideBar. */
+    /** The Side Bar of The Application */
     public static final SideBar sideBar = new SideBar();
 
-    // ---------------------------------------------------------
-
-    /** The Constant xPlayersList. */
-    public static final XPlayersList xPlayersList = new XPlayersList();
-
-    /** The Constant updateScreen. */
+    /** Application Update Screen */
     public static final UpdateScreen updateScreen = new UpdateScreen();
+
+    /** The TreeView of DJMode */
+    public static final TreeViewManager treeManager = new TreeViewManager();
+
+    /** The Constant advancedSearch. */
+    public static final AdvancedSearch advancedSearch = new AdvancedSearch();
+
+    //
 
     /** The Constant songsContextMenu. */
     public static final MediaContextMenu songsContextMenu = new MediaContextMenu();
@@ -133,33 +123,32 @@ public class Main extends Application {
     /** The Constant specialChooser. */
     public static final SpecialChooser specialChooser = new SpecialChooser();
 
-    /** The Constant advancedSearch. */
-    public static final AdvancedSearch advancedSearch = new AdvancedSearch();
+    //
+
+    /** XPlayList holds the instances of XPlayerControllers */
+    public static final XPlayersList xPlayersList = new XPlayersList();
 
     /** The Constant playedSongs. */
     public static final PlayedMediaList playedSongs = new PlayedMediaList();
 
-    /** The Constant libraryMode. */
-    // Modes
-    public static final LibraryMode libraryMode = new LibraryMode();
+    //----------------END: The above have not depencities on other ---------------------------------//
 
-    /** The Constant djMode. */
-    public static final DJMode djMode = new DJMode();
+    //----------------START: Vary basic for the application---------------------------------------//
 
-    /** The Constant multipleTabs. */
-    public static final MultipleTabs multipleTabs = new MultipleTabs();
+    /** The window. */
+    public static Stage window;
 
-    /** The Constant stationsInfostructure. */
-    // public static final RadioStationsController stationsInfostructure = new
-    // RadioStationsController()
+    /** The scene. */
+    public static BorderlessScene scene;
 
-    /** The Constant treeManager. */
-    public static final TreeViewManager treeManager = new TreeViewManager();
+    /** The stack pane root. */
+    private static final StackPane stackPaneRoot = new StackPane();
 
-    /** The can save data. */
-    public static boolean canSaveData = true;
+    /** The root. */
+    public static final BorderPane root = new BorderPane();
 
-    // ------------Updates Sector------------
+    //
+
     /**
      * The current update of XR3Player
      */
@@ -174,22 +163,46 @@ public class Main extends Application {
      */
     private static Thread updaterThread;
 
-    // ---------------------------------------
+    /** The can save data. */
+    public static boolean canSaveData = true;
+
+    //---------------END:Vary basic for the application---------------------------------//
+
+    // --------------START: The below have depencities on others------------------------
+
+    /** The Constant dbManager. */
+    public static LocalDBManager dbManager;
+
+    /** The Constant libraryMode. */
+    public static LibraryMode libraryMode;
+
+    /** The Constant djMode. */
+    public static DJMode djMode;
+
+    /** The Constant multipleTabs. */
+    public static MultipleTabs multipleTabs;
+
+    /** The Login Mode where the user of the applications has to choose an account to login */
+    public static LoginMode loginMode;
+
+    // --------------END: The below have depencities on others------------------------
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 	try {
-	    logger.info("XR3Player Application Started");
+	    // logger.info("XR3Player Application Started")
+	    System.out.println("XR3Player Application Started");
+
+	    loginMode = new LoginMode();
 
 	    // rootStack
-	    stackPaneRoot.getChildren().addAll(root, sideBar, updateScreen);
+	    stackPaneRoot.getChildren().addAll(root, sideBar, updateScreen, loginMode);
 	    StackPane.setAlignment(sideBar, Pos.CENTER_LEFT);
 
 	    // root
+	    topBar.setVisible(false);
 	    root.setTop(topBar);
-	    topBar.visibleProperty()
-		    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
 
 	    // Window
 	    window = primaryStage;
@@ -230,28 +243,33 @@ public class Main extends Application {
 	    scene.getStylesheets()
 		    .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
 
-	    // Register some listeners to the main window
-	    libraryMode.librariesSearcher.registerListeners();
-
-	    // Load the database
-	    dbManager.loadApplicationDataBase();
-	    //  dbManager.recreateJSonDataBase();
-	    //  dbManager.loadOpenedLibraries();
-	    //  dbManager.updateLibrariesInformation(null);
-
 	    // Scene and Show
 	    window.setScene(scene);
 	    window.show();
 
-	    checkJavaCombatibility();
-	    Main.songsContextMenu.show(window);
-	    Main.songsContextMenu.hide();
+	    // Check if database folder exists
+	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists()) {
+		new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
+	    } else {
+		//Create the List with the Available Users
+		AtomicInteger counter = new AtomicInteger();
+		loginMode.userViewer.addMultipleUsers(Files.walk(Paths.get(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN), 1)
+			.filter(path -> path.toFile().isDirectory()
+				&& !path.toString().equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
+			.map(path -> new User(path.getFileName().toString(), counter.getAndAdd(1)))
+			.collect(Collectors.toList()));
+	    }
 
+	    //Check Compatibility
+	    checkJavaCombatibility();
+
+	    //Main.songsContextMenu.show(window)
+	    // Main.songsContextMenu.hide()
 	    // throw new Exception("xd")
 	    // ScenicView.show(scene)
 
 	} catch (Exception ex) {
-	    ex.printStackTrace();
+	    logger.log(Level.SEVERE, "Application has serious problem and can't start", ex);
 	    ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(",
 		    Duration.millis(10000), NotificationType.ERROR);
 	}
@@ -261,6 +279,54 @@ public class Main extends Application {
     @Override
     public void init() {
 	System.out.println("Hello from init");
+    }
+
+    /**
+     * Starts the application for this specific user
+     * 
+     * @param user
+     */
+    public static void startAppWithUser(User user) {
+
+	//Close the LoginMode
+	loginMode.setVisible(false);
+
+	PauseTransition pause = new PauseTransition(Duration.millis(500));
+	pause.playFromStart();
+	pause.setOnFinished(f -> {
+
+	    //----------------START:initialize everything needed------------------------------------------
+	    //userNameLabel
+	    sideBar.userNameLabel.setText("Logged in : ->[ " + user.getUserName() + " ]<-");
+
+	    dbManager = new LocalDBManager(user.getUserName());
+	    libraryMode = new LibraryMode();
+	    djMode = new DJMode();
+	    multipleTabs = new MultipleTabs();
+
+	    //---------------END:initialize everything needed---------------------------------------------
+
+	    //----------------START: Important Work-------------------------------------------------------
+
+	    // Register some listeners to the main window
+	    libraryMode.librariesSearcher.registerListeners();
+
+	    //When Top Bar to be visible?
+	    topBar.visibleProperty()
+		    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
+
+	    //Load the DataBase
+	    dbManager.loadApplicationDataBase();
+	    //  dbManager.recreateJSonDataBase()
+	    //  dbManager.loadOpenedLibraries()
+	    //  dbManager.updateLibrariesInformation(null)
+
+	    //Filter Thread (Inspecting the Files if existing)
+	    new FilesFilterService().start(FilesFilterService.FilterMode.MULTIPLELIBS);
+
+	    //---------------END:Important Work-----------------------------------------------------------
+
+	});
     }
 
     /**

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(255,255,255,0.95);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="usersStackView" prefHeight="277.0">
+               <children>
+                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" translateX="5.0" StackPane.alignment="BOTTOM_LEFT">
+                     <tooltip>
+                        <Tooltip text="Previous" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" translateX="-5.0" StackPane.alignment="BOTTOM_RIGHT">
+                     <tooltip>
+                        <Tooltip text="Next" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true" translateX="2.0">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Button>
+                  <Button fx:id="createUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="60.0" styleClass="arrowButton" translateY="-5.0" StackPane.alignment="BOTTOM_CENTER">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/add.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Create new Library" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </StackPane>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" spacing="5.0" VBox.vgrow="NEVER">
+               <children>
+                  <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Login">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Delete User">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Exit">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="Welcome to XR3Player , select a user to login :) " BorderPane.alignment="CENTER">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+   </top>
+</fx:root>

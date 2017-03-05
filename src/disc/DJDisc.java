@@ -120,7 +120,7 @@ public class DJDisc extends StackPane {
 	this.maximumVolume = maximumVolume;
 
 	super.setPickOnBounds(true);
-	
+
 	// StackPane
 	canvas.setPickOnBounds(false);
 	canvas.setCursor(Cursor.OPEN_HAND);
@@ -452,6 +452,10 @@ public class DJDisc extends StackPane {
     public void setVolume(int volume) {
 	if (volume > -1 && volume < getMaximumVolume() + 1)
 	    Platform.runLater(() -> volumeLabel.setCurrentValue(volume));
+	else if (volume < 0)
+	    Platform.runLater(() -> volumeLabel.setCurrentValue(0));
+	else if (volume > getMaximumVolume())
+	    Platform.runLater(() -> volumeLabel.setCurrentValue(getMaximumVolume()));
     }
 
     /**

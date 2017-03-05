@@ -98,9 +98,10 @@ public class CPUsage extends ResizableCanvas {
     /**
      * Starts the Background Update Service
      */
-    public void restartUpdater() {
+    public void restartUpdater() {	
 	run = true;
 	getUpdateService().restart();
+	Platform.runLater(CPUsage.this::repaint);
     }
 
     /**

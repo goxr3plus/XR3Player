@@ -57,7 +57,7 @@ public class RenameWindow extends HBox {
     private boolean xPressed = false;
 
     /** The not allow. */
-    String[] notAllow = new String[] { "/", "\\", ":", "*", "?", "\"", "<", ">", "|", "'" };
+    String[] notAllow = new String[] { "/", "\\", ":", "*", "?", "\"", "<", ">", "|", "'", "." };
 
     /**
      * Constructor
@@ -110,7 +110,7 @@ public class RenameWindow extends HBox {
 	// inputField
 	inputField.setPrefSize(290, 32);
 	inputField
-		.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') \n **Escape to Exit**"));
+		.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
 	inputField.setPromptText("Type Here...");
 	inputField.setStyle("-fx-font-weight:bold; -fx-font-size:14;");
 
@@ -222,11 +222,8 @@ public class RenameWindow extends HBox {
     }
 
     /**
-     * @return Whether or not this {@code Stage} is showing (that is, open on
-     *         the user's system). The Stage might be "showing", yet the user
-     *         might not be able to see it due to the Stage being rendered
-     *         behind another window or due to the Stage being positioned off
-     *         the monitor.
+     * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not
+     *         be able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
      * 
      *
      * @defaultValue false
@@ -236,11 +233,8 @@ public class RenameWindow extends HBox {
     }
 
     /**
-     * @return Whether or not this {@code Stage} is showing (that is, open on
-     *         the user's system). The Stage might be "showing", yet the user
-     *         might not be able to see it due to the Stage being rendered
-     *         behind another window or due to the Stage being positioned off
-     *         the monitor.
+     * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not
+     *         be able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
      * 
      */
     public boolean isShowing() {

@@ -103,10 +103,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	//		resetCursor();
 	//	    else
 	//		setControlCursor();
-	//	});
-
-	// Filtering Thread
-	new FilesFilterService().start(FilesFilterService.FilterMode.MULTIPLELIBS);
+	//	});	
     }
 
     //    /**

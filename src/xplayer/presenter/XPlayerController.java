@@ -1341,6 +1341,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
      */
     public void mute() {
 	radialMenu.mute.setSelected(true);
+	xPlayer.setMute(true);
     }
 
     /**
@@ -1348,6 +1349,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
      */
     public void unMute() {
 	radialMenu.mute.setSelected(false);
+	xPlayer.setMute(false);
     }
 
     /**
@@ -1363,7 +1365,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     public void pause() {
 	xPlayer.pause();
     }
-    
+
     /**
      * Stop the player.
      */

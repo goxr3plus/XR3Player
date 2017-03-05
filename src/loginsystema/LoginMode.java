@@ -1,19 +1,20 @@
-package librarysystema;
+/**
+ * 
+ */
+package loginsystema;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXSlider.IndicatorPosition;
-import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
-import database.LocalDBManager;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -27,40 +28,27 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import loginsystema.User;
 import tools.ActionTool;
 import tools.InfoTool;
-import xplayer.presenter.XPlayerController;
+import tools.NotificationType;
 
 /**
- * This class contains everything needed going on LibraryMode.
+ * @author GOXR3PLUS
  *
- * @author SuperGoliath
  */
-public class LibraryMode extends GridPane {
+public class LoginMode extends BorderPane {
 
     @FXML
-    private GridPane root;
-
-    @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private StackPane librariesStackView;
+    private StackPane usersStackView;
 
     @FXML
     private Button previous;
@@ -69,48 +57,31 @@ public class LibraryMode extends GridPane {
     private Button next;
 
     @FXML
-    private Button newLibrary;
+    private Button newUser;
 
     @FXML
-    private GridPane topGrid;
+    private Button createUser;
 
     @FXML
-    private Button createLibrary;
+    private Button loginButton;
 
     @FXML
-    private JFXToggleButton selectionModeToggle;
+    private Button deleteUser;
 
-    // ------------------------------------------------
+    @FXML
+    private Button exitButton;
 
-    protected boolean dragDetected;
+    // --------------------------------------------
 
-    /** The mechanism behind of opening multiple libraries. */
-    public final MultipleLibraries multipleLibs = new MultipleLibraries();
-
-    /**
-     * The mechanism which allows you to view the libraries as components with image etc.
-     */
-    public final LibrariesViewer libraryViewer = new LibrariesViewer();
+    /** The logger for this class */
+    private static final Logger logger = Logger.getLogger(LoginMode.class.getName());
 
     /**
-     * The mechanism which allows you to transport items between libraries and more.
+     * Allows to see the users in a beatiful way
      */
-    public final LibrariesSearcher librariesSearcher = new LibrariesSearcher();
+    public UsersViewer userViewer = new UsersViewer();
 
-    /** The insert new library. */
-    PreparedStatement insertNewLibrary;
-
-    /**
-     * Default image of a library(which has not a costume one selected by the user.
-     */
-    public static final Image defaultImage = InfoTool.getImageFromDocuments("library.png");
-    /**
-     * A classic warning image to inform the user about something
-     * 
-     */
-    public static final Image warningImage = InfoTool.getImageFromDocuments("warning.png");
-
-    /** This variable is used during the creation of a new library. */
+    /** This variable is used during the creation of a new user. */
     private final InvalidationListener creationInvalidator = new InvalidationListener() {
 	@Override
 	public void invalidated(Observable observable) {
@@ -127,180 +98,105 @@ public class LibraryMode extends GridPane {
 		String name = Main.renameWindow.getUserInput();
 
 		// if can pass
-		if (!libraryViewer.items.stream().anyMatch(lib -> lib.getLibraryName().equals(name))) {
-		    String dataBaseTableName;
-		    boolean validName;
+		if (!userViewer.items.stream().anyMatch(user -> user.getUserName().equals(name))) {
 
-		    // Until the randomName doesn't already exists
-		    do {
-			dataBaseTableName = ActionTool.returnRandomTableName();
-			validName = !LocalDBManager.tableExists(dataBaseTableName);
-		    } while (!validName);
-
-		    try (Statement statement = Main.dbManager.connection1.createStatement()) {
-
-			// Create the dataBase table
-			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'"
-				+ "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
-				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL,"
-				+ "HOUR        TEXT    NOT NULL)");
-
-			// Create the Library
-			Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1,
-				libraryViewer.items.size(), null, false);
-
-			// Add the library
-			currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
-			libraryViewer.addLibrary(currentLib);
-			libraryViewer.update();
-
-			// Add a row on libraries table
-			insertNewLibrary.setString(1, name);
-			insertNewLibrary.setString(2, dataBaseTableName);
-			insertNewLibrary.setDouble(3, currentLib.starsProperty().get());
-			insertNewLibrary.setString(4, currentLib.getDateCreated());
-			insertNewLibrary.setString(5, currentLib.getTimeCreated());
-			insertNewLibrary.setString(6, currentLib.getDescription());
-			insertNewLibrary.setInt(7, 1);
-			insertNewLibrary.setInt(8, currentLib.getPosition());
-			insertNewLibrary.setString(9, null);
-			insertNewLibrary.setBoolean(10, false);
-
-			insertNewLibrary.executeUpdate();
-
-			// Commit
-			Main.dbManager.commit();
-		    } catch (Exception ex) {
-			Main.logger.log(Level.WARNING, "", ex);
-		    }
+		    if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + name).mkdir())
+			userViewer.addUser(new User(name, userViewer.items.size()), true);
+		    else
+			ActionTool.showNotification("Error", "An error occured trying to create a new user",
+				Duration.seconds(2), NotificationType.ERROR);
 
 		    // update the positions
-		    updateLibrariesPosition();
+		    //updateUsersPosition()
 		} else {
-		    Notifications.create().title("Dublicate Name")
-			    .text("A Library or PlayList with this name already exists!").darkStyle().showConfirm();
+		    Notifications.create().title("Dublicate User").text("This user already exists").darkStyle()
+			    .showConfirm();
 		}
 	    }
 	}
     };
 
     /**
-     * Constructor.
+     * Constructor
      */
-    public LibraryMode() {
+    public LoginMode() {
 
-	// FXMLLOADER
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "LibraryMode.fxml"));
+	// ----------------------------------FXMLLoader-------------------------------------
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "LoginScreenController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
+	// -------------Load the FXML-------------------------------
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    ex.printStackTrace();
+	    logger.log(Level.WARNING, "", ex);
 	}
 
-	// Prepared Statement
-	try {
-	    insertNewLibrary = Main.dbManager.connection1.prepareStatement(
-		    "INSERT INTO LIBRARIES (NAME,TABLENAME,STARS,DATECREATED,TIMECREATED,DESCRIPTION,SAVEMODE,POSITION,LIBRARYIMAGE,OPENED) "
-			    + "VALUES (?,?,?,?,?,?,?,?,?,?)");
-	} catch (SQLException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
-	}
-    }
-
-    /**
-     * Return the library with the given name.
-     *
-     * @param name
-     *            the name
-     * @return the library with name
-     */
-    public Library getLibraryWithName(String name) {
-
-	// Find that
-	for (Library library : libraryViewer.items)
-	    if (library.getLibraryName().equals(name))
-		return library;
-
-	return null;
-    }
-
-    /**
-     * Updates the positions of the libraries in the database.
-     */
-    public void updateLibrariesPosition() {
-
-    }
-
-    /**
-     * Update Settings Total Library only if this Library exists and it is on settings mode
-     * 
-     * @param name
-     */
-    public void updateLibraryTotalLabel(String name) {
-	Library lib = getLibraryWithName(name);
-	if (lib != null)
-	    lib.updateSettingsTotalLabel();
     }
 
     /**
      * Called as soon as FXML file has been loaded
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
+
+	//super
+	setStyle(
+		"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	// createLibrary
-	createLibrary.setOnAction(a -> {
+	createUser.setOnAction(a -> {
 	    if (!Main.renameWindow.isShowing()) {
 
 		// Open rename window
-		Main.renameWindow.show("", createLibrary);
+		Main.renameWindow.show("", createUser);
 
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);
 	    }
 	});
 
-	// newLibrary
-	newLibrary.setOnAction(a -> {
+	//newUser
+	newUser.setOnAction(a -> {
 	    if (!Main.renameWindow.isShowing()) {
 
 		// Open rename window
-		Main.renameWindow.show("", newLibrary);
+		Main.renameWindow.show("", newUser);
 
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);
 	    }
 	});
-	newLibrary.visibleProperty().bind(Bindings.size(libraryViewer.items).isEqualTo(0));
+	newUser.visibleProperty().bind(Bindings.size(userViewer.items).isEqualTo(0));
 
-	// selectionModeToggle
-	selectionModeToggle.selectedProperty()
-		.addListener((observable, oldValue, newValue) -> libraryViewer.goOnSelectionMode(newValue));
+	//loginButton
+	loginButton.setOnAction(a -> Main.startAppWithUser(userViewer.getSelectedItem()));
 
-	// searchLibrary
-	topGrid.add(librariesSearcher, 1, 0);
+	//deleteUser
+	deleteUser.disableProperty().bind(newUser.visibleProperty());
+	deleteUser.setOnAction(a -> {	   
+	    //Try to delete it
+	    if (ActionTool.deleteFile(new File(
+		    InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
+		userViewer.deleteUser(userViewer.getSelectedItem());
+	    else
+		ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2),
+			NotificationType.ERROR);
+	});
+
+	//exitButton
+	exitButton.setOnAction(a -> System.exit(0));
 
 	// previous
-	previous.setOnAction(a -> libraryViewer.previous());
+	previous.setOnAction(a -> userViewer.previous());
 
 	// next
-	next.setOnAction(a -> libraryViewer.next());
+	next.setOnAction(a -> userViewer.next());
 
-	// StackPane
-	librariesStackView.getChildren().addAll(libraryViewer, librariesSearcher.region,
-		librariesSearcher.searchProgress);
-	librariesStackView.setStyle("-fx-border-color:white; -fx-border-style:segments(4.0);");
-	libraryViewer.toBack();
-
-	// XPlayer - 0
-	Main.xPlayersList.addXPlayerController(new XPlayerController(0));
-	Main.xPlayersList.getXPlayerController(0).makeTheDisc(136, 136, Color.ORANGE, 45, Side.LEFT);
-	Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerController(0), 1, 1);
-
+	//Continue
+	usersStackView.getChildren().add(userViewer);
+	userViewer.toBack();
     }
 
     /**
@@ -341,17 +237,11 @@ public class LibraryMode extends GridPane {
      * -----------------------------------------------------------------------
      */
     /**
-     * This class allows you to view the libraries.
+     * This class allows you to view items
      *
-     * @author SuperGoliath
+     * @author GOXR3PLUS
      */
-    public class LibrariesViewer extends Region {
-
-	/** The context menu. */
-	public LibraryContextMenu contextMenu = new LibraryContextMenu();
-
-	/** The settings. */
-	public LibrarySettings settings = new LibrarySettings();
+    public class UsersViewer extends Region {
 
 	/** The Constant WIDTH. */
 	double WIDTH = 120;
@@ -378,8 +268,8 @@ public class LibraryMode extends GridPane {
 	private static final double SCALE_SMALL = 0.6;
 
 	/** The items. */
-	ObservableList<Library> items = FXCollections.observableArrayList();
-	SimpleListProperty<Library> list = new SimpleListProperty<>(items);
+	ObservableList<User> items = FXCollections.observableArrayList();
+	SimpleListProperty<User> list = new SimpleListProperty<>(items);
 
 	/** The centered. */
 	private Group centered = new Group();
@@ -408,7 +298,7 @@ public class LibraryMode extends GridPane {
 	 * Instantiates a new libraries viewer.
 	 */
 	// Constructor
-	public LibrariesViewer() {
+	public UsersViewer() {
 
 	    // this.setOnMouseMoved(m -> {
 	    //
@@ -471,11 +361,11 @@ public class LibraryMode extends GridPane {
 	}
 
 	/**
-	 * The Collection that holds all the Libraries
+	 * The Collection that holds all the Items
 	 * 
-	 * @return The Collection that holds all the Libraries
+	 * @return The Collection that holds all the Items
 	 */
-	public ObservableList<Library> getItems() {
+	public ObservableList<User> getItems() {
 	    return items;
 	}
 
@@ -521,14 +411,14 @@ public class LibraryMode extends GridPane {
 		LEFT_OFFSET = -(SPACING - 10);
 		RIGHT_OFFSET = -LEFT_OFFSET;
 		// For-Each
-		items.forEach(library -> {
+		items.forEach(user -> {
 		    double size = HEIGHT / var;
 
 		    // --
-		    library.imageView.setFitWidth(size);
-		    library.imageView.setFitHeight(size);
-		    library.setMaxWidth(size);
-		    library.setMaxHeight(size);
+		    user.imageView.setFitWidth(size);
+		    user.imageView.setFitHeight(size);
+		    user.setMaxWidth(size);
+		    user.setMaxHeight(size);
 		});
 
 		// Dont Fuck the CPU
@@ -550,25 +440,31 @@ public class LibraryMode extends GridPane {
 	}
 
 	/**
-	 * Go on selection mode.
-	 *
-	 * @param way
-	 *            the way
+	 * @return The selected item from the List (That means the center index)
 	 */
-	public void goOnSelectionMode(boolean way) {
-	    for (Library library : items)
-		library.goOnSelectionMode(way);
+	public User getSelectedItem() {
+	    return items.get(centerIndex);
 	}
 
+	//	/**
+	//	 * Go on selection mode.
+	//	 *
+	//	 * @param way
+	//	 *            the way
+	//	 */
+	//	public void goOnSelectionMode(boolean way) {
+	//	    for (Library library : items)
+	//		library.goOnSelectionMode(way);
+	//	}
+
 	/**
-	 * Add multiple libraries at once.
+	 * Add multiple users at once.
 	 *
-	 * @param libraries
-	 *            the libraries
+	 * @param list
+	 *            The List with the users to be added
 	 */
-	public void addMultipleLibraries(Library[] libraries) {
-	    for (int i = 0; i < libraries.length; i++)
-		addLibrary(libraries[i]);
+	public void addMultipleUsers(List<User> list) {
+	    list.forEach(user -> this.addUser(user, false));
 
 	    // update
 	    update();
@@ -577,51 +473,51 @@ public class LibraryMode extends GridPane {
 	/**
 	 * Add the new library.
 	 *
-	 * @param library
-	 *            the library
+	 * @param user
+	 *            The User to be added
 	 */
-	public void addLibrary(Library library) {
-	    items.add(library);
+	public void addUser(User user, boolean update) {
+	    items.add(user);
 
 	    // --
 	    double size = HEIGHT / var;
 
-	    library.imageView.setFitWidth(size);
-	    library.imageView.setFitHeight(size);
-	    library.setMaxWidth(size);
-	    library.setMaxHeight(size);
+	    user.imageView.setFitWidth(size);
+	    user.imageView.setFitHeight(size);
+	    user.setMaxWidth(size);
+	    user.setMaxHeight(size);
 
 	    // --
-	    library.setOnMouseClicked(m -> {
+	    user.setOnMouseClicked(m -> {
 
 		if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
 
-		    // If it isn't the same library again
-		    if (((Library) centerGroup.getChildren().get(0)).getPosition() != library.getPosition()) {
+		    // If it isn't the same User again
+		    if (((User) centerGroup.getChildren().get(0)).getPosition() != user.getPosition()) {
 
-			setCenterIndex(library.getPosition());
+			setCenterIndex(user.getPosition());
 			// scrollBar.setValue(library.getPosition())
 		    }
 
 		} else if (m.getButton() == MouseButton.SECONDARY) {
 
-		    // if isn't the same library again
-		    if (((Library) centerGroup.getChildren().get(0)).getPosition() != library.getPosition()) {
+		    // if isn't the same User again
+		    if (((User) centerGroup.getChildren().get(0)).getPosition() != user.getPosition()) {
 
-			setCenterIndex(library.getPosition());
+			setCenterIndex(user.getPosition());
 			// scrollBar.setValue(library.getPosition())
 
-			timeline.setOnFinished(v -> {
-			    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			    contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-				    bounds.getMinY() + bounds.getHeight() / 4, library);
-			    timeline.setOnFinished(null);
-			});
+			//			timeline.setOnFinished(v -> {
+			//			    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
+			//			    contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
+			//				    bounds.getMinY() + bounds.getHeight() / 4, library);
+			//			    timeline.setOnFinished(null);
+			//			});
 
-		    } else { // if is the same library again
-			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-				bounds.getMinY() + bounds.getHeight() / 4, library);
+		    } else { // if is the same User again
+			//			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
+			//			contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
+			//				bounds.getMinY() + bounds.getHeight() / 4, library);
 		    }
 		}
 
@@ -629,26 +525,40 @@ public class LibraryMode extends GridPane {
 
 	    // MAX
 	    jfSlider.setMax(items.size() - 1.00);
+
+	    //Update?
+	    if (update)
+		userViewer.update();
 	}
 
+	//	/**
+	//	 * Recalculate the position of all the libraries.
+	//	 *
+	//	 * @param commit
+	//	 *            the commit
+	//	 */
+	//	public void updateLibrariesPositions(boolean commit) {
+	//
+	//	    for (int i = 0; i < items.size(); i++)
+	//		items.get(i).updatePosition(i);
+	//
+	//	    if (commit)
+	//		Main.dbManager.commit();
+	//	}
+
 	/**
-	 * Deletes the specific Library from the list
+	 * Deletes the specific user from the list
 	 * 
-	 * @param library
-	 *            Library to be deleted
-	 * @param commit
-	 *            commit the changes to the database
+	 * @param user
+	 *            User to be deleted
 	 */
-	public void deleteLibrary(Library library, boolean commit) {
-	    items.remove(library);
+	public void deleteUser(User user) {
+	    items.remove(user);
 
 	    for (int i = 0; i < items.size(); i++)
-		items.get(i).updatePosition(i);
+		items.get(i).setPosition(i);
 
 	    calculateCenterAfterDelete();
-
-	    if (commit)
-		Main.dbManager.commit();
 	}
 
 	/**
@@ -749,7 +659,7 @@ public class LibraryMode extends GridPane {
 		// LEFT KEYFRAMES
 		for (int i = 0; i < leftGroup.getChildren().size(); i++) {
 
-		    final Library it = items.get(i);
+		    final User it = items.get(i);
 
 		    double newX = -leftGroup.getChildren().size() *
 
@@ -768,11 +678,11 @@ public class LibraryMode extends GridPane {
 		}
 
 		// CENTER ITEM KEYFRAME
-		final Library centerItem;
+		final User centerItem;
 		if (items.size() == 1)
 		    centerItem = items.get(0);
 		else
-		    centerItem = (Library) centerGroup.getChildren().get(0);
+		    centerItem = (User) centerGroup.getChildren().get(0);
 
 		keyFrames.add(new KeyFrame(duration,
 
@@ -790,7 +700,7 @@ public class LibraryMode extends GridPane {
 		// RIGHT KEYFRAMES
 		for (int i = 0; i < rightGroup.getChildren().size(); i++) {
 
-		    final Library it = items.get(items.size() - i - 1);
+		    final User it = items.get(items.size() - i - 1);
 
 		    final double newX = rightGroup.getChildren().size() *
 

@@ -78,6 +78,10 @@ public class ConsoleWindowController extends StackPane {
 	window.setTitle("XR3Player Console");
 	window.initStyle(StageStyle.UTILITY);
 	window.setScene(new Scene(this));
+	this.focusedProperty().addListener((observable, oldValue, newValue) -> {
+	    if (window.isFocused())
+		commandTextField.requestFocus();
+	});
     }
 
     /**
@@ -91,6 +95,9 @@ public class ConsoleWindowController extends StackPane {
 	cssTextArea.setWrapText(true);
 	cssTextArea.setEditable(false);
 	cssTextArea.setFocusTraversable(false);
+	String t = "Click Help to check the manual\n";
+	cssTextArea.appendText(t);
+	cssTextArea.setStyle(0, t.length(), "-fx-fill:green; -fx-font-weight:bold; -fx-font-size:15;");
 
 	VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(cssTextArea);
 	vsPane.setMaxWidth(Double.MAX_VALUE);
@@ -117,7 +124,7 @@ public class ConsoleWindowController extends StackPane {
     }
 
     Pattern pattern1 = Pattern.compile("player:[-|+]?\\d+:\\w+");
-   // Pattern pattern2 = Pattern.compile("player:[-|+]?\\d+:\\w+:[-|+]?\\d+")
+    Pattern pattern2 = Pattern.compile("player:[-|+]?\\d+:\\w+:[-|+]?\\d+");
     Pattern pattern3 = Pattern.compile("player:[-|+]?\\d+:\\w+:[-|+]?\\d+:[s|m|h]");
 
     /**
@@ -179,19 +186,22 @@ public class ConsoleWindowController extends StackPane {
 
 	    }
 
-	    //	    //It must be 4 [format = "player"+"key"+"action"+"value"]   
-	    //	    else if (array.length == 4 && pattern2.matcher(command).matches()) {
-	    //		System.out.println("Yes it does match \"player\"+\"key\"+\"action\"+\"value\"] ");
-	    //		XPlayerController player = Main.xPlayersList.getXPlayerController(Integer.parseInt(array[1]));
-	    //
-	    //		String action = array[2];
-	    //		int value = Integer.parseInt(array[3]);
-	    //
-	    //		if ("seek".equals(action)) { //seek
-	    //		    player.seek(value);
-	    //		    success = true;
-	    //		}
-	    //	    }
+	    //It must be 4 [format = "player"+"key"+"action"+"value"]   
+	    else if (array.length == 4 && pattern2.matcher(command).matches()) {
+		System.out.println("Yes it does match \"player\"+\"key\"+\"action\"+\"value\"] ");
+		XPlayerController player = Main.xPlayersList.getXPlayerController(Integer.parseInt(array[1]));
+
+		String action = array[2];
+		int value = Integer.parseInt(array[3]);
+
+		if ("volume".equals(action)) { //adjust volume
+		    player.adjustVolume(value);
+		    success = true;
+		} else if ("setvolume".equals(action)) { //setvolume
+		    player.setVolume(value);
+		    success = true;
+		}
+	    }
 
 	    //It must be 4 [format = "player"+"key"+"action"+"value"+"s|m|h"]   
 	    else if (array.length == 5 && pattern3.matcher(command).matches()) {
@@ -226,8 +236,14 @@ public class ConsoleWindowController extends StackPane {
 		}
 	    }
 
-	    System.out.println(Arrays.asList(array));
+	    
+	} else if ("clear".equals(command) || "cls".equals(command)) { //Clear 
+	    cssTextArea.clear();
+	    cssTextArea.clear();
+	    success = true;
 	}
+	
+	System.out.println(command);
 
 	//-----------------------------Message for the user-------------------------------------------
 	cssTextArea.appendText(message);

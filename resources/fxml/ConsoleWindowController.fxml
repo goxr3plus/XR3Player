@@ -17,7 +17,7 @@
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
                   <JFXTextField fx:id="commandTextField" promptText="command..." style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="help" mnemonicParsing="false" text="HELP">
+                  <Button fx:id="help" focusTraversable="false" mnemonicParsing="false" text="HELP">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

@@ -247,7 +247,8 @@ public class Library extends StackPane {
 
 			    //Update the JSONFile
 			    if (isLibraryOpened())
-				Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),true);
+				Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),
+					true);
 			} else { // duplicate
 			    resetTheName();
 			    Notifications.create().title("Dublicate Name")
@@ -357,7 +358,7 @@ public class Library extends StackPane {
 	// isOpened
 	this.opened.set(opened);
 
-	// ----------------------------------FXMLLoader
+	// ----------------------------------FXMLLoader-------------------------------------
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "Library.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
@@ -402,7 +403,7 @@ public class Library extends StackPane {
 	    drop.setDropCompleted(true);
 	});
 
-	// -------------Load the FXML
+	// -------------Load the FXML-------------------------------
 	try {
 	    loader.load();
 	} catch (IOException ex) {
@@ -872,18 +873,14 @@ public class Library extends StackPane {
 		    Main.libraryMode.multipleLibs.removeTab(getLibraryName());
 
 		// Update the libraryViewer
-		Main.libraryMode.libraryViewer.items.remove(this);
-		Main.libraryMode.libraryViewer.calculateCenterAfterDelete();
-
-		// Update the libraries positions
-		Main.libraryMode.libraryViewer.updateLibrariesPositions(false);
+		Main.libraryMode.libraryViewer.deleteLibrary(this, false);
 
 		// Commit
 		Main.dbManager.commit();
 
 		//Update the JSONFile
 		if (isLibraryOpened())
-		    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),true);
+		    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 
 	    } catch (SQLException sql) {
 		logger.log(Level.WARNING, "\n", sql);
@@ -913,7 +910,7 @@ public class Library extends StackPane {
 	    }
 
 	    //Update the JSONFile
-	    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),true);
+	    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 
 	    // Open Hacked to not commit
 	} else {

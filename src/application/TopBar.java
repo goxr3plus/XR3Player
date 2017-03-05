@@ -143,7 +143,7 @@ public class TopBar extends BorderPane {
 
 	// cpuUsage
 	cpUsage.visibleProperty().bind(cpuLabel.visibleProperty().not());
-	cpUsage.restartUpdater();
+	//cpUsage.restartUpdater()
 
 	// showSideBar
 	showSideBar.setOnAction(a -> Main.sideBar.showBar());
