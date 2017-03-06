@@ -27,7 +27,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import services.FilesFilterService;
 import smartcontroller.SmartController;
 import tools.ActionTool;
 import tools.InfoTool;
@@ -54,7 +53,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
      * This Label is visible when no libraries are opened
      */
     @FXML
-    private Label emptyLabel;
+    public Label emptyLabel;
 
     // -----------------------------------------------------------------------
 
@@ -85,18 +84,18 @@ public class MultipleLibraries extends StackPane implements Initializable {
 
 	// emptyLabel
 	emptyLabel.setOnMouseReleased(m -> {
-	    if (!Main.libraryMode.libraryViewer.items.isEmpty())
-		Main.libraryMode.libraryViewer.items.get(0).libraryOpenClose(true, false);
+	    if (Main.libraryMode.libraryViewer.items.isEmpty())
+		Main.libraryMode.createNewLibrary(emptyLabel);
 	    else
-		ActionTool.showNotification("Notification", "You have to create a library ...", Duration.seconds(3),
-			NotificationType.INFORMATION);
+		Main.libraryMode.libraryViewer.items.get(0).libraryOpenClose(true, false);
 	});
+	
 
 	// emptyLabelRegion
 	emptyLabelRegion.visibleProperty().bind(emptyLabel.visibleProperty());
 
 	// TabPane
-	tabPane.setId("LibrariesTabPane");	
+	tabPane.setId("LibrariesTabPane");
 
 	//	tabPane.setOnMouseMoved(m -> {
 	//	    if (!m.isControlDown())

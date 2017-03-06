@@ -31,6 +31,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
@@ -81,20 +82,20 @@ public class LibraryMode extends GridPane {
 
     // ------------------------------------------------
 
-    protected boolean dragDetected;
+    // protected boolean dragDetected
 
-    /** The mechanism behind of opening multiple libraries. */
-    public final MultipleLibraries multipleLibs = new MultipleLibraries();
+    /**
+     * The mechanism which allows you to transport items between libraries and more.
+     */
+    public final LibrariesSearcher librariesSearcher = new LibrariesSearcher();
 
     /**
      * The mechanism which allows you to view the libraries as components with image etc.
      */
     public final LibrariesViewer libraryViewer = new LibrariesViewer();
 
-    /**
-     * The mechanism which allows you to transport items between libraries and more.
-     */
-    public final LibrariesSearcher librariesSearcher = new LibrariesSearcher();
+    /** The mechanism behind of opening multiple libraries. */
+    public final MultipleLibraries multipleLibs = new MultipleLibraries();
 
     /** The insert new library. */
     PreparedStatement insertNewLibrary;
@@ -172,8 +173,6 @@ public class LibraryMode extends GridPane {
 			Main.logger.log(Level.WARNING, "", ex);
 		    }
 
-		    // update the positions
-		    updateLibrariesPosition();
 		} else {
 		    Notifications.create().title("Dublicate Name")
 			    .text("A Library or PlayList with this name already exists!").darkStyle().showConfirm();
@@ -226,13 +225,6 @@ public class LibraryMode extends GridPane {
     }
 
     /**
-     * Updates the positions of the libraries in the database.
-     */
-    public void updateLibrariesPosition() {
-
-    }
-
-    /**
      * Update Settings Total Library only if this Library exists and it is on settings mode
      * 
      * @param name
@@ -250,28 +242,10 @@ public class LibraryMode extends GridPane {
     public void initialize() {
 
 	// createLibrary
-	createLibrary.setOnAction(a -> {
-	    if (!Main.renameWindow.isShowing()) {
-
-		// Open rename window
-		Main.renameWindow.show("", createLibrary);
-
-		// Add the showing listener
-		Main.renameWindow.showingProperty().addListener(creationInvalidator);
-	    }
-	});
+	createLibrary.setOnAction(a -> createNewLibrary(createLibrary));
 
 	// newLibrary
-	newLibrary.setOnAction(a -> {
-	    if (!Main.renameWindow.isShowing()) {
-
-		// Open rename window
-		Main.renameWindow.show("", newLibrary);
-
-		// Add the showing listener
-		Main.renameWindow.showingProperty().addListener(creationInvalidator);
-	    }
-	});
+	newLibrary.setOnAction(a -> createNewLibrary(newLibrary));
 	newLibrary.visibleProperty().bind(Bindings.size(libraryViewer.items).isEqualTo(0));
 
 	// selectionModeToggle
@@ -299,6 +273,22 @@ public class LibraryMode extends GridPane {
 	Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
 	add(Main.xPlayersList.getXPlayerController(0), 1, 1);
 
+    }
+
+    /**
+     * Used to create a new Library
+     * 
+     * @param owner
+     */
+    public void createNewLibrary(Node owner) {
+	if (!Main.renameWindow.isShowing()) {
+
+	    // Open rename window
+	    Main.renameWindow.show("", owner);
+
+	    // Add the showing listener
+	    Main.renameWindow.showingProperty().addListener(creationInvalidator);
+	}
     }
 
     /**
@@ -377,7 +367,7 @@ public class LibraryMode extends GridPane {
 
 	/** The items. */
 	ObservableList<Library> items = FXCollections.observableArrayList();
-	SimpleListProperty<Library> list = new SimpleListProperty<>(items);
+	public SimpleListProperty<Library> list = new SimpleListProperty<>(items);
 
 	/** The centered. */
 	private Group centered = new Group();

@@ -124,8 +124,7 @@ public class SmartController extends StackPane {
     private MenuItem clearAll;
 
     /**
-     * If the search is instant or needs the user to press enter on the search
-     * field
+     * If the search is instant or needs the user to press enter on the search field
      */
     @FXML
     public JFXCheckBox instantSearch;
@@ -165,8 +164,7 @@ public class SmartController extends StackPane {
     public final Genre genre;
 
     /**
-     * The name of the database table (eg. @see
-     * ActionTool.returnRandomTableName())
+     * The name of the database table (eg. @see ActionTool.returnRandomTableName())
      */
     private final String dataBaseTableName;
 
@@ -351,8 +349,8 @@ public class SmartController extends StackPane {
 	region.setVisible(false);
 	region.visibleProperty().addListener((observable, oldValue, newValue) -> {
 	    if (region.isVisible()) {
-		funIndicator.start();
 		funIndicator.setFromColor(Color.RED);
+		funIndicator.start();
 	    } else
 		funIndicator.pause();
 	});
@@ -536,8 +534,7 @@ public class SmartController extends StackPane {
      *
      * @param permanent
      *            <br>
-     *            true->storage medium + (play list)/library false->only from
-     *            (play list)/library<br>
+     *            true->storage medium + (play list)/library false->only from (play list)/library<br>
      */
     public void removeSelected(boolean permanent) {
 	// Free? && How many items are selected?+Question
@@ -822,8 +819,7 @@ public class SmartController extends StackPane {
     }
 
     /**
-     * Return the number of the final List counting from <b>firstList->0
-     * SecondList->1 ....</b>
+     * Return the number of the final List counting from <b>firstList->0 SecondList->1 ....</b>
      *
      * @return the int
      */
@@ -835,8 +831,7 @@ public class SmartController extends StackPane {
     }
 
     /**
-     * Indicates that a capture event has been fired to this controller from the
-     * CaptureWindow.
+     * Indicates that a capture event has been fired to this controller from the CaptureWindow.
      *
      * @param array
      *            the array
@@ -1786,8 +1781,8 @@ public class SmartController extends StackPane {
 			    // Count how many items where added
 			    preparedInsert.executeBatch();
 			    //--Below i need to know how many entries have been successfully added [ will be implemented better soon... :) ]
-			   // setTotalInDataBase((int) (getTotalInDataBase()
-			   //	    + Arrays.stream(preparedInsert.executeBatch()).filter(s -> s > 0).count()))
+			    // setTotalInDataBase((int) (getTotalInDataBase()
+			    //	    + Arrays.stream(preparedInsert.executeBatch()).filter(s -> s > 0).count()))
 			    setTotalInDataBase(0);
 			    // Platform.runLater(() -> updateTotalLabel())
 			} catch (SQLException | InterruptedException ex) {
@@ -1797,8 +1792,7 @@ public class SmartController extends StackPane {
 		}
 
 		/**
-		 * Count files in a directory (including files in all sub
-		 * directories)
+		 * Count files in a directory (including files in all sub directories)
 		 * 
 		 * @param directory
 		 *            the directory to start in

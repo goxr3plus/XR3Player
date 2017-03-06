@@ -3,9 +3,7 @@
  */
 package application;
 
-import java.awt.Desktop;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -236,13 +234,15 @@ public class ConsoleWindowController extends StackPane {
 		}
 	    }
 
-	    
 	} else if ("clear".equals(command) || "cls".equals(command)) { //Clear 
 	    cssTextArea.clear();
 	    cssTextArea.clear();
 	    success = true;
+	} else if ("help".equals(command)) { //help
+	    ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
+	    success = true;
 	}
-	
+
 	System.out.println(command);
 
 	//-----------------------------Message for the user-------------------------------------------

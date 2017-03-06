@@ -4,9 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root fx:id="root" prefHeight="354.0" prefWidth="511.0" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" prefHeight="609.0" prefWidth="854.0" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="65.0" prefWidth="352.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="273.0" />
@@ -30,7 +28,7 @@
          <center>
             <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" translateX="5.0" StackPane.alignment="BOTTOM_LEFT">
+                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" translateX="-100.0" translateY="5.0" StackPane.alignment="BOTTOM_CENTER">
                      <tooltip>
                         <Tooltip text="Previous" />
                      </tooltip>
@@ -45,7 +43,7 @@
                         <Insets bottom="10.0" />
                      </StackPane.margin>
                   </Button>
-                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" translateX="-5.0" StackPane.alignment="BOTTOM_RIGHT">
+                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" translateX="100.0" translateY="5.0" StackPane.alignment="BOTTOM_CENTER">
                      <tooltip>
                         <Tooltip text="Next" />
                      </tooltip>
@@ -104,10 +102,6 @@
                         <Tooltip text="Enable Libraries Selection" />
                      </tooltip>
                   </JFXToggleButton>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: WHITE; -fx-font-weight: bold;" text="[ BLURISH EFFECT ON LIBRARIES WHEN RESIZING THE WINDOW WILL BE FIXED :) ]">
-                     <effect>
-                        <DropShadow />
-                     </effect></Label>
                </children>
                <BorderPane.margin>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

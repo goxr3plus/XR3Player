@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
 
 import application.Main;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
@@ -280,8 +282,12 @@ public class LocalDBManager {
     public void loadApplicationDataBase() {
 	Main.updateScreen.setVisible(true);
 	Main.updateScreen.progressBar.progressProperty().bind(dataLoader.progressProperty());
-	dataLoader.reset();
-	dataLoader.start();
+	//	System.out.println(Main.updateScreen.progressBar.getProgress());
+	//	System.out.println(Main.updateScreen.progressBar.getProgress());
+	//	System.out.println(Main.updateScreen.progressBar.getProgress());
+	//	System.out.println(Main.updateScreen.progressBar.getProgress());
+	//	System.out.println(Main.updateScreen.progressBar.getProgress());
+	dataLoader.restart();
     }
 
     /**
@@ -299,38 +305,31 @@ public class LocalDBManager {
 	 */
 	public DataLoader() {
 
-	    // if succeeded
+	    // -------------------if succeeded
 	    setOnSucceeded(s -> {
 
-		// Do the animation with rectangles
+		//----------------Do the animation with rectangles---------------------
 		Main.updateScreen.closeUpdateScreen();
 
-		// Wait until the animation is finished and then fix the layout
-		new Thread(() -> {
-		    try {
-			Thread.sleep(1000);
-		    } catch (InterruptedException ex) {
-			ex.printStackTrace();
-		    }
+		//----------------Finall Settings---------------------
+		// update library viewer
+		Main.libraryMode.libraryViewer.update();
+		//Main.libraryMode.libraryViewer.goOnSelectionMode(false)
 
-		    // JavaFX Thread
-		    Platform.runLater(() -> {
-			Main.libraryMode.add(Main.multipleTabs, 0, 1);
-			Main.root.setCenter(Main.libraryMode);
-			Main.updateScreen.setVisible(false);
-			Main.updateScreen.progressBar.progressProperty().unbind();
-			//Main.sideBar.showBar();
+		// set libraries tree expanded
+		//Main.treeManager.librariesTree.setExpanded(true)
 
-			// Check for updates on start
-			new Thread(() -> {
-			    if (InfoTool.isReachableByPing("www.google.com"))
-				Main.checkForUpdates(false);
-			}).start();
-		    });
-		}).start();
+		//---------------Set the update Screen invisible---------------------
+		PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
+		pause1.setOnFinished(f -> {
+		    Main.updateScreen.setVisible(false);
+		    Main.updateScreen.progressBar.progressProperty().unbind();
+		});
+		pause1.playFromStart();
+
 	    });
 
-	    // if failed
+	    // ---------------------if failed
 	    setOnFailed(fail -> {
 		Main.updateScreen.progressBar.progressProperty().unbind();
 		ActionTool.showNotification("Fatal Error!",
@@ -346,14 +345,17 @@ public class LocalDBManager {
 	    return new Task<Void>() {
 		@Override
 		protected Void call() throws Exception {
+		    int counter;
+		    int total = 1;
+		    updateProgress(0, total);
 
 		    // -------------------------- Load all the libraries
 		    try (ResultSet resultSet = connection1.createStatement().executeQuery("SELECT* FROM LIBRARIES;");
 			    ResultSet dbCounter = connection1.createStatement()
 				    .executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
 
-			total = dbCounter.getInt(1);
-			Main.logger.info("Loading libraries....");
+			total += dbCounter.getInt(1);
+			Main.logger.info("Loading Libraries....");
 
 			// Refresh the text
 			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Libraries..."));
@@ -361,27 +363,22 @@ public class LocalDBManager {
 
 			// Load all the libraries
 			while (resultSet.next()) {
-
 			    Library library = new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"),
 				    resultSet.getDouble("STARS"), resultSet.getString("DATECREATED"),
 				    resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"),
 				    resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"),
 				    resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED"));
 
-			    Main.libraryMode.libraryViewer.addLibrary(library,false);
+			    Platform.runLater(() -> Main.libraryMode.libraryViewer.addLibrary(library, false));
 
-			    updateProgress(resultSet.getRow(), total);
+			    updateProgress(resultSet.getRow() - 1, total);
 			}
 
 			//Load the Opened Libraries
+			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Opened Libraries..."));
 			loadOpenedLibraries();
 
-			// update library viewer
-			Main.libraryMode.libraryViewer.update();
-			Main.libraryMode.libraryViewer.goOnSelectionMode(false);
-
-			// set libraries tree expanded
-			Main.treeManager.librariesTree.setExpanded(true);
+			updateProgress(total, total);
 
 		    } catch (Exception ex) {
 			Main.logger.log(Level.SEVERE, "", ex);
@@ -434,7 +431,8 @@ public class LocalDBManager {
 	    });
 
 	    //Last selected library Array
-	    JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem")).get("lastSelectedLibrary");
+	    JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem"))
+		    .get("lastSelectedLibrary");
 
 	    //Add the Listener to multipleLibs
 	    Platform.runLater(() -> {
@@ -502,7 +500,8 @@ public class LocalDBManager {
 		JsonObject json = (JsonObject) obj;
 
 		//Last selected library Array
-		JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem")).get("lastSelectedLibrary");
+		JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem"))
+			.get("lastSelectedLibrary");
 
 		if (observableList.isEmpty())
 		    lastSelectedLibrary.clear();
@@ -516,7 +515,8 @@ public class LocalDBManager {
 		if (updateOpenedLibraries) {
 
 		    //Opened Libraries Array
-		    JsonArray openedLibraries = (JsonArray) ((JsonObject) json.get("librariesSystem")).get("openedLibraries");
+		    JsonArray openedLibraries = (JsonArray) ((JsonObject) json.get("librariesSystem"))
+			    .get("openedLibraries");
 		    openedLibraries.clear();
 
 		    //Add the Libraries to the Libraries Array
@@ -581,11 +581,11 @@ public class LocalDBManager {
 
 	//Libraries that where opened
 	JsonArray openedLibraries = new JsonArray();
-//	for (int i = 0; i < 2; i++) {
-//	    JsonObject object = new JsonObject();
-//	    object.put("name", "library->" + i);
-//	    openedLibraries.add(object);
-//	}
+	//	for (int i = 0; i < 2; i++) {
+	//	    JsonObject object = new JsonObject();
+	//	    object.put("name", "library->" + i);
+	//	    openedLibraries.add(object);
+	//	}
 
 	librariesSystem.put("openedLibraries", openedLibraries);
 	librariesSystem.put("lastSelectedLibrary", lastSelectedLibrary);
@@ -598,7 +598,7 @@ public class LocalDBManager {
 	    object.put("name", "xPlayer" + i);
 	    xPlayers.add(object);
 	}
-	
+
 	json.put("librariesSystem", librariesSystem);
 	json.put("xPlayers", xPlayers);
 

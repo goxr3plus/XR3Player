@@ -125,7 +125,7 @@ public class StreamPlayer implements Runnable {
     private static final int EXTERNAL_BUFFER_SIZE = 4000 * 4;
 
     /** The Constant SKIP_INACCURACY_SIZE. */
-    private static final int SKIP_INACCURACY_SIZE = 1200;
+    // private static final int SKIP_INACCURACY_SIZE = 1200
 
     /** The thread. */
     private Thread thread = null;
@@ -189,6 +189,11 @@ public class StreamPlayer implements Runnable {
     Logger logger = Logger.getLogger(StreamPlayer.class.getName());
 
     /**
+     * It is used for synchronization in place of audioInputStream
+     */
+    private volatile Object audioLock = new Object();
+
+    /**
      * Constructor.
      */
     public StreamPlayer() {
@@ -202,15 +207,9 @@ public class StreamPlayer implements Runnable {
     private void reset() {
 	status = Status.UNKNOWN;
 	generateEvent(Status.UNKNOWN, UNAVAILABLE, null);
-	// System.out.println("Stream Player reset before `synchronized
-	// (audioInputStream)")
-	if (audioInputStream != null)
-	    synchronized (audioInputStream) {
-		closeStream();
-	    }
-
-	// System.out.println("Stream Player reset !!!passed!!!! `synchronized
-	// (audioInputStream)")
+	synchronized (audioLock) {
+	    closeStream();
+	}
 
 	audioInputStream = null;
 	audioFileFormat = null;
@@ -601,7 +600,7 @@ public class StreamPlayer implements Runnable {
 	    generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
 	    // System.out.println("StreamPlayer stop() before!
 	    // synchronize(audioInputStream) ")
-	    synchronized (audioInputStream) {
+	    synchronized (audioLock) {
 		closeStream();
 	    }
 	    // System.out.println("StreamPlayer stop() passed!!!
@@ -712,7 +711,7 @@ public class StreamPlayer implements Runnable {
 	int readBytes = 1;
 	byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
 	// Lock stream while playing.
-	synchronized (audioInputStream) {
+	synchronized (audioLock) {
 	    // Main play/pause loop.
 	    while ((readBytes != -1)
 		    && !(status == Status.STOPPED || status == Status.SEEKING || status == Status.UNKNOWN)) {
@@ -767,8 +766,10 @@ public class StreamPlayer implements Runnable {
 		} else if (status == Status.PAUSED) { // Paused
 		    try {
 			while (status == Status.PAUSED) {
-			    Thread.sleep(200);
+			    //Thread.sleep(200)
+			    audioLock.wait(50);
 			}
+
 		    } catch (InterruptedException ex) {
 			thread.interrupt();
 			logger.warning("Thread cannot sleep.\n" + ex);
@@ -815,7 +816,7 @@ public class StreamPlayer implements Runnable {
 	    status = Status.SEEKING;
 	    long skipped = 0;
 	    try {
-		synchronized (audioInputStream) {
+		synchronized (audioLock) {
 		    // System.out.println("Stream player entered into
 		    // seek(bytes) synchronized")
 		    generateEvent(Status.SEEKING, UNAVAILABLE, null);
@@ -823,11 +824,11 @@ public class StreamPlayer implements Runnable {
 		    if (audioInputStream != null) {
 
 			// Loop until bytes are really skipped.
-			while (totalSkipped < (bytes - SKIP_INACCURACY_SIZE)) {
+			while (totalSkipped < (bytes)) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
 			    skipped = audioInputStream.skip(bytes - totalSkipped);
 			    if (skipped == 0)
 				break;
-			    totalSkipped = totalSkipped + skipped;
+			    totalSkipped += skipped;
 			    logger.info("Skipped : " + totalSkipped + "/" + bytes);
 			    if (totalSkipped == -1)
 				throw new StreamPlayerException(

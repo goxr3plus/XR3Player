@@ -27,6 +27,7 @@ import database.LocalDBManager;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -152,11 +153,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 52;
+    public final static int currentVersion = 53;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "04/03/2017";
+    public final static String releaseDate = "06/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -264,6 +265,12 @@ public class Main extends Application {
 	    //Check Compatibility
 	    checkJavaCombatibility();
 
+	    // Check for updates on start
+	    new Thread(() -> {
+		if (InfoTool.isReachableByPing("www.google.com"))
+		    Main.checkForUpdates(false);
+	    }).start();
+
 	    //Main.songsContextMenu.show(window)
 	    // Main.songsContextMenu.hide()
 	    // throw new Exception("xd")
@@ -292,19 +299,33 @@ public class Main extends Application {
 	//Close the LoginMode
 	loginMode.setVisible(false);
 	updateScreen.setVisible(true);
+	//userNameLabel
+	sideBar.userNameLabel.setText("Hello -> " + user.getUserName() + " <- !");
 
+	//Do a pause so the login mode dissapears
 	PauseTransition pause = new PauseTransition(Duration.millis(500));
-	pause.playFromStart();
 	pause.setOnFinished(f -> {
 
 	    //----------------START:initialize everything needed------------------------------------------
-	    //userNameLabel
-	    sideBar.userNameLabel.setText("Logged in : ->[ " + user.getUserName() + " ]<-");
 
+	    //Create this in a Thread
+	    //Thread s = new Thread(() ->
 	    dbManager = new LocalDBManager(user.getUserName());
+	    //Manage the above Thread
+	    //	    try {
+	    //		s.start();
+	    //		s.join();
+	    //	    } catch (InterruptedException ex) {
+	    //		ex.printStackTrace();
+	    //	    }
+
+	    //
 	    libraryMode = new LibraryMode();
 	    djMode = new DJMode();
 	    multipleTabs = new MultipleTabs();
+
+	    libraryMode.add(Main.multipleTabs, 0, 1);
+	    root.setCenter(Main.libraryMode);
 
 	    //---------------END:initialize everything needed---------------------------------------------
 
@@ -316,6 +337,12 @@ public class Main extends Application {
 	    //When Top Bar to be visible?
 	    topBar.visibleProperty()
 		    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
+
+	    //Important binding 
+	    libraryMode.multipleLibs.emptyLabel.textProperty()
+		    .bind(Bindings.when(Main.libraryMode.libraryViewer.list.emptyProperty())
+			    .then("Click here to create a library...")
+			    .otherwise("Click here to open the first available library..."));
 
 	    //Load the DataBase
 	    dbManager.loadApplicationDataBase();
@@ -329,6 +356,7 @@ public class Main extends Application {
 	    //---------------END:Important Work-----------------------------------------------------------
 
 	});
+	pause.playFromStart();
     }
 
     /**
@@ -511,13 +539,13 @@ public class Main extends Application {
      * 
      * @param showIfNotUpdateAvailable
      */
-    public static void checkForUpdates(boolean showIfNotUpdateAvailable) {
+    public static synchronized void checkForUpdates(boolean showIfNotUpdateAvailable) {
 
 	// Not already running
 	if (updaterThread == null || !updaterThread.isAlive()) {
 	    updaterThread = new Thread(() -> {
-		Platform.runLater(() -> ActionTool.showNotification("Enstablishing Connection", "Trying to connect...",
-			Duration.millis(1000), NotificationType.INFORMATION));
+		Platform.runLater(() -> ActionTool.showNotification("Searching for Updates",
+			"Fetching informations from server...", Duration.millis(1000), NotificationType.INFORMATION));
 
 		if (InfoTool.isReachableByPing("www.google.com")) {
 

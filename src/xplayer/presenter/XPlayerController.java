@@ -658,9 +658,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		if (discIsDragging && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 
 		    // Try to seek
-		    seekService.startSeekService(
-			    xPlayerModel.getCurrentAngleTime() * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()),
-			    false);
+		    seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
 
 		}
 		// SecondaryMouseButton
@@ -765,11 +763,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 *
 	 * @param bytes
 	 *            Bytes to skip
+	 * @param stopPlayer
 	 */
 	public void startSeekService(long bytes, boolean stopPlayer) {
 	    if (!locked && !isRunning() && xPlayerModel.songPathProperty().get() != null) {
 
-		System.out.println(bytes);
+		//System.out.println(bytes);
 
 		//StopPlayer
 		this.stopPlayer = stopPlayer;
@@ -1284,19 +1283,20 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
      *            Seconds to seek
      */
     public void seek(int seconds) {
+	boolean ok = false;
 	if (seconds == 0)
 	    return;
 
-	boolean ok = false;
+	//
 
 	if (seconds < 0 && (xPlayerModel.getCurrentTime() + seconds >= 0)) { //negative seek
 
-	    System.out.println("Skipping backwards ...p" + seconds + "] seconds");
+	    System.out.println("Skipping backwards ..." + seconds + "] seconds");
 
 	    ok = true;
 	} else if (seconds > 0 && (xPlayerModel.getCurrentTime() + seconds <= xPlayerModel.getDuration())) { //positive seek
 
-	    System.out.println("Skipping forward ...p" + seconds + "] seconds");
+	    System.out.println("Skipping forward ..." + seconds + "] seconds");
 
 	    ok = true;
 	}
@@ -1307,10 +1307,15 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    // Add or Remove
 	    xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + seconds);
 
-	    //Seek
-	    seekService.startSeekService(
-		    (xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()),
-		    false);
+	    //	    //Seek
+	    //	    System.out.println("Original: "
+	    //		    + (xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration())
+	    //		    + " With double:" + (long) (((float) xPlayerModel.getCurrentAngleTime())
+	    //			    * (xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration())))
+
+	    //Start the Service
+	    seekService.startSeekService((long) (((float) xPlayerModel.getCurrentAngleTime())
+		    * (xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration())), false);
 	}
 
     }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import customnodes.FunIndicator;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import tools.InfoTool;
@@ -84,6 +86,11 @@ public class UpdateScreen extends StackPane {
 
 	translate1 = new TranslateTransition(Duration.millis(1000), leftRectangle);
 	translate2 = new TranslateTransition(Duration.millis(1000), rightRectangle);
+	
+//	FunIndicator fun  = new FunIndicator();	
+//	fun.setFromColor(Color.RED);
+//	fun.start();
+//	super.getChildren().add(fun);
     }
 
     /**

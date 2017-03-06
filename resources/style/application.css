@@ -445,6 +445,13 @@
   	-fx-cursor:hand;
   }
   
+  .arrowButton2{
+  	-fx-background-color:rgb(0,0,0,0.9);
+  	-fx-background-radius:45.0;
+  	-fx-cursor:hand;
+  }
+  
+  
  
  
  

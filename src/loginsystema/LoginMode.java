@@ -30,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -143,35 +144,18 @@ public class LoginMode extends BorderPane {
 
 	//super
 	setStyle(
-		"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+		"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/loginBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	// createLibrary
-	createUser.setOnAction(a -> {
-	    if (!Main.renameWindow.isShowing()) {
-
-		// Open rename window
-		Main.renameWindow.show("", createUser);
-
-		// Add the showing listener
-		Main.renameWindow.showingProperty().addListener(creationInvalidator);
-	    }
-	});
+	createUser.setOnAction(a -> createNewUser(createUser));
 
 	//newUser
-	newUser.setOnAction(a -> {
-	    if (!Main.renameWindow.isShowing()) {
-
-		// Open rename window
-		Main.renameWindow.show("", newUser);
-
-		// Add the showing listener
-		Main.renameWindow.showingProperty().addListener(creationInvalidator);
-	    }
-	});
+	newUser.setOnAction(a -> createNewUser(createUser));
 	newUser.visibleProperty().bind(Bindings.size(userViewer.items).isEqualTo(0));
 
 	//loginButton
 	loginButton.setOnAction(a -> Main.startAppWithUser(userViewer.getSelectedItem()));
+	loginButton.disableProperty().bind(deleteUser.disabledProperty());
 
 	//deleteUser
 	deleteUser.disableProperty().bind(newUser.visibleProperty());
@@ -197,6 +181,22 @@ public class LoginMode extends BorderPane {
 	//Continue
 	usersStackView.getChildren().add(userViewer);
 	userViewer.toBack();
+    }
+
+    /**
+     * Used to create a new User
+     * 
+     * @param owner
+     */
+    public void createNewUser(Node owner) {
+	if (!Main.renameWindow.isShowing()) {
+
+	    // Open rename window
+	    Main.renameWindow.show("", owner);
+
+	    // Add the showing listener
+	    Main.renameWindow.showingProperty().addListener(creationInvalidator);
+	}
     }
 
     /**
@@ -317,8 +317,12 @@ public class LoginMode extends BorderPane {
 
 	    // clip.set
 	    setClip(clip);
-	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);");
+	    //	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%;"); //-fx-background-size:100% 100%; -fx-background-image:url('/image/lisback.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
+	    //setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+
+	    this.setStyle(
+		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%); -fx-border-color:black transparent transparent transparent; -fx-border-width:5;");
 	    // ScrollBar
 	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);
 	    jfSlider.setCursor(Cursor.HAND);

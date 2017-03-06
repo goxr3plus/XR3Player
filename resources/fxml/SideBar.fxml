@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -23,20 +25,18 @@
 <fx:root id="sideBar" maxWidth="-Infinity" prefHeight="624.0" prefWidth="265.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <bottom>
-            <Label fx:id="userNameLabel" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Logged in : GOXR3PLUS STUDIO" BorderPane.alignment="CENTER" />
-         </bottom>
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="userImageView" fitHeight="170.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userImageView" fitHeight="170.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                      <image>
-                        <Image url="@../image/logo.png" />
+                        <Image url="@../image/user.png" />
                      </image>
                      <StackPane.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </StackPane.margin>
                   </ImageView>
+                  <Label fx:id="userNameLabel" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="Logged in : GOXR3PLUS STUDIO" translateY="-25.0" StackPane.alignment="TOP_CENTER" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
@@ -44,18 +44,12 @@
             </StackPane>
          </center>
          <top>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="144.0" prefWidth="257.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="49.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <HBox spacing="52.0" VBox.vgrow="NEVER">
                      <children>
                         <JFXButton fx:id="hideSideBar" style="-fx-font-weight: bold;" text="Close" />
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" prefWidth="150.0" text="XR3" GridPane.halignment="RIGHT" fx:id="xr3Settings">
+                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" prefWidth="150.0" text="XR3" fx:id="xr3Settings">
                            <items>
                               <Menu mnemonicParsing="false" text="DataBase">
                                  <items>
@@ -91,7 +85,7 @@
                            </items>
                         </MenuButton>
                      </children>
-                  </GridPane>
+                  </HBox>
                   <ScrollPane prefWidth="200.0">
                      <content>
                         <GridPane alignment="CENTER" prefHeight="80.0" prefWidth="253.0" style="-fx-border-color: white; -fx-border-radius: 5;">
@@ -158,6 +152,27 @@
                </BorderPane.margin>
             </VBox>
          </top>
+         <bottom>
+            <VBox alignment="CENTER" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Settings">
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Chat">
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Log Out">
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </bottom>
       </BorderPane>
    </top>
 </fx:root>

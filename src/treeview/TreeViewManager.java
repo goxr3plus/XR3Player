@@ -87,7 +87,7 @@ public class TreeViewManager extends BorderPane {
 		return;
 	    }
 
-	    if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2) {
+	    if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 1) {
 		System.out.println(source.getValue());
 
 		// System.out.println(source.isExpanded())
