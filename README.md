@@ -8,6 +8,9 @@ A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
 https://sourceforge.net/projects/xr3player/
 
+##Multiple Users Support Update 53 >
+![2](https://cloud.githubusercontent.com/assets/20374208/23596032/73643664-022f-11e7-8706-f38b66bf99f7.png)
+
 ##Image from Update 51
 ![Image](https://cloud.githubusercontent.com/assets/20374208/23493525/16db4e68-ff15-11e6-8015-8113854cdfba.png)
 
