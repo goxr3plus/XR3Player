@@ -303,7 +303,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// openMediaFileFolder
 	// openMediaFileFolder.visibleProperty().bind(mediaFileStackPane.hoverProperty())
-	openMediaFileFolder.setOnAction(action -> ActionTool.openFileLocation(xPlayerModel.songPathProperty().get()));
+	openMediaFileFolder.setOnAction(action -> openAudioInExplorer());
 
 	// openFileButton
 	openFileButton.setOnAction(action -> openFileChooser());
@@ -330,6 +330,14 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    // }
 	});
 
+    }
+
+    /**
+     * Opens the current Media File of the player to the default system explorer
+     */
+    public void openAudioInExplorer() {
+	if (xPlayerModel.songPathProperty().get() != null)
+	    ActionTool.openFileLocation(xPlayerModel.songPathProperty().get());
     }
 
     /**

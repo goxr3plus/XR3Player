@@ -14,7 +14,7 @@
       <Cursor fx:constant="WAIT" />
    </cursor>
    <children>
-      <Label id="updateScreenButtonLabel" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="Created by -&gt;GoXR3Plus Studio" StackPane.alignment="BOTTOM_RIGHT" />
+      <Label id="updateScreenButtonLabel" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="Created by -&gt;GoXR3Plus Studio" visible="false" StackPane.alignment="BOTTOM_RIGHT" />
       <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" height="165.0" stroke="BLACK" strokeType="INSIDE" width="385.0" StackPane.alignment="CENTER">
          <fill>
             <RadialGradient centerX="0.5222222222222223" centerY="0.5476190476190476" cycleMethod="REFLECT" focusAngle="84.81" focusDistance="-0.4883720930232558" radius="0.18604651162790697">

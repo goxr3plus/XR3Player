@@ -94,9 +94,8 @@ public class XPlayerRadialMenu {
 		xPlayerController.pause();
 	    if (clickEvent.item == refresh)
 		xPlayerController.replaySong();
-
 	    else if (clickEvent.item == search)
-		ActionTool.openFileLocation(xPlayerController.xPlayerModel.songPathProperty().get());
+		xPlayerController.openAudioInExplorer();
 	});
 
 	radialMenu.setOnMenuOpenStarted(menuEvent -> System.out.println("Menu starts to open"));

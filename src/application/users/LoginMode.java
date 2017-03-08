@@ -1,7 +1,7 @@
 /**
  * 
  */
-package loginsystema;
+package application.users;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +32,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -71,6 +72,12 @@ public class LoginMode extends BorderPane {
 
     @FXML
     private Button exitButton;
+
+    @FXML
+    public Label xr3PlayerLabel;
+
+    @FXML
+    private Label createdByLabel;
 
     // --------------------------------------------
 
@@ -181,6 +188,9 @@ public class LoginMode extends BorderPane {
 	//Continue
 	usersStackView.getChildren().add(userViewer);
 	userViewer.toBack();
+
+	//createdByLabel
+	createdByLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.website));
     }
 
     /**
@@ -322,7 +332,7 @@ public class LoginMode extends BorderPane {
 	    //setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
 
 	    this.setStyle(
-		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%); -fx-border-color:black transparent transparent transparent; -fx-border-width:5;");
+		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);  -fx-border-width:5;");
 	    // ScrollBar
 	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);
 	    jfSlider.setCursor(Cursor.HAND);
@@ -470,7 +480,7 @@ public class LoginMode extends BorderPane {
 	 */
 	public void addMultipleUsers(List<User> list) {
 	    list.forEach(user -> this.addUser(user, false));
-
+	    
 	    // update
 	    update();
 	}

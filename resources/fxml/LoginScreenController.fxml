@@ -5,10 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Reflection?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,6 +17,11 @@
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15 15 0 0;" text="Login creating or selecting a user">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
             <StackPane fx:id="usersStackView" prefHeight="277.0">
                <children>
                   <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton2" translateX="-100.0" translateY="5.0" StackPane.alignment="BOTTOM_CENTER">
@@ -105,22 +107,31 @@
          </BorderPane.margin>
       </VBox>
    </center>
+   <bottom>
+      <Label fx:id="createdByLabel" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: black; -fx-text-fill: white; -fx-background-radius: 15 15 0 0;" text="XR3Player was created by " BorderPane.alignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/goXR3PlusStudio.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <BorderPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </BorderPane.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+   </bottom>
    <top>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="Welcome to XR3Player -&gt; select or create a user to login :) " BorderPane.alignment="CENTER">
-         <effect>
-            <Reflection>
-               <input>
-                  <Lighting>
-                     <bumpInput>
-                        <Shadow color="#70ad68" height="255.0" radius="127.0" width="255.0" />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant color="#d9ff00" />
-                     </light>
-                  </Lighting>
-               </input>
-            </Reflection>
-         </effect>
+      <Label alignment="CENTER" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15;" text=" XR3Player " BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
+         <cursor>
+            <Cursor fx:constant="MOVE" />
+         </cursor>
       </Label>
    </top>
 </fx:root>

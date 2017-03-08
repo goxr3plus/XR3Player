@@ -36,7 +36,7 @@ public class JavaFXNativeHookExample extends Application {
 		final Scene scene = new Scene(root, 300, 250);
 
 		// Clear previous logging configurations.
-		LogManager.getLogManager().reset();
+		//LogManager.getLogManager().reset();
 
 		// Get the logger for "org.jnativehook" and set the level to off.
 		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());

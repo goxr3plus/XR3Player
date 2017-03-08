@@ -767,7 +767,10 @@ public class StreamPlayer implements Runnable {
 		    try {
 			while (status == Status.PAUSED) {
 			    //Thread.sleep(200)
-			    audioLock.wait(50);
+			   // Thread.sle
+			    Thread.sleep(50);
+			    //audioLock.
+			    //audioLock.wait(50)
 			}
 
 		    } catch (InterruptedException ex) {

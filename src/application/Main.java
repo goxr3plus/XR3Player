@@ -22,6 +22,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import application.settings.ApplicationSettingsController;
+import application.users.LoginMode;
+import application.users.User;
 import borderless.BorderlessScene;
 import database.LocalDBManager;
 import javafx.animation.PauseTransition;
@@ -41,8 +44,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import librarysystema.LibraryMode;
-import loginsystema.LoginMode;
-import loginsystema.User;
 import remote_communication.RemoteAppsController;
 import services.FilesFilterService;
 import services.VacuumProgress;
@@ -98,6 +99,11 @@ public class Main extends Application {
 
     /** The console Window of the Application */
     public static final ConsoleWindowController consoleWindow = new ConsoleWindowController();
+
+    /**
+     * This Window contains the settings for the whole application
+     */
+    public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
 
     //
 
@@ -212,6 +218,7 @@ public class Main extends Application {
 	    renameWindow.window.initOwner(window);
 	    exportWindow.window.initOwner(window);
 	    consoleWindow.window.initOwner(window);
+	    settingsWindow.window.initOwner(window);
 	    topBar.addXR3LabelBinding();
 
 	    // captureWindow
@@ -241,7 +248,7 @@ public class Main extends Application {
 
 	    // Scene
 	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, stackPaneRoot, 650, 500);
-	    scene.setMoveControl(topBar);
+	    scene.setMoveControl(loginMode.xr3PlayerLabel);
 	    scene.getStylesheets()
 		    .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
 
@@ -260,6 +267,10 @@ public class Main extends Application {
 				&& !path.toString().equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
 			.map(path -> new User(path.getFileName().toString(), counter.getAndAdd(1)))
 			.collect(Collectors.toList()));
+
+		//avoid error
+		if (loginMode.userViewer.getItems().size() != 0)
+		    loginMode.userViewer.setCenterIndex(loginMode.userViewer.getItems().size() / 2);
 	    }
 
 	    //Check Compatibility
@@ -301,6 +312,8 @@ public class Main extends Application {
 	updateScreen.setVisible(true);
 	//userNameLabel
 	sideBar.userNameLabel.setText("Hello -> " + user.getUserName() + " <- !");
+	//Top Bar is the new Move Control
+	scene.setMoveControl(topBar);
 
 	//Do a pause so the login mode dissapears
 	PauseTransition pause = new PauseTransition(Duration.millis(500));

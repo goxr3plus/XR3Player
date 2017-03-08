@@ -1626,7 +1626,7 @@ public class SmartController extends StackPane {
 	private String job;
 
 	/** The counter. */
-	private int counter;
+	private int progress;
 
 	/** The total files. */
 	private int totalFiles;
@@ -1696,6 +1696,9 @@ public class SmartController extends StackPane {
 	    loadService.startService(true, true);
 	}
 
+	int batchcount;
+	int batchSize;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1707,7 +1710,7 @@ public class SmartController extends StackPane {
 		@Override
 		protected Void call() throws Exception {
 
-		    counter = 0;
+		    progress = 0;
 		    totalFiles = 0;
 		    String date = InfoTool.getCurrentDate();
 
@@ -1730,9 +1733,20 @@ public class SmartController extends StackPane {
 
 			// System.out.println("Total Files are->" + totalFiles)
 
-			Platform.runLater(() -> getCancelButton().setText("Adding: [" + totalFiles + "] entries..."));
+			
+			//Calculate the batch size
+//			if (totalFiles < 20_000)
+//			    batchSize = 1000;
+//			else if (totalFiles < 100_000)
+//			    batchSize = 5000;
+//			else
+//			    batchSize = 10_000;
+//			
+			
+//			batchcount = 0;
 
-			// insert in database
+			// INSERT
+			Platform.runLater(() -> getCancelButton().setText("Adding: [" + totalFiles + "] entries..."));
 			for (File file : list) {
 			    if (file.exists() && !isCancelled()) {
 				try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
@@ -1747,8 +1761,17 @@ public class SmartController extends StackPane {
 					else if (InfoTool.isAudioSupported(path.toString()))
 					    insertMedia(path.toString(), 0, 0, date, InfoTool.getLocalTime());
 
+					//For performance reasons
+//					if ((++batchcount % batchSize) == 0) {
+//					    try {
+//						preparedInsert.executeBatch();
+//					    } catch (SQLException ex) {
+//						ex.printStackTrace();
+//					    }
+//					}
+
 					// update progress
-					updateProgress(++counter, totalFiles);
+					updateProgress(++progress, totalFiles);
 				    });
 				} catch (IOException ex) {
 				    Main.logger.log(Level.WARNING, "", ex);
@@ -1778,8 +1801,11 @@ public class SmartController extends StackPane {
 			});
 			try {
 			    latch.await();
-			    // Count how many items where added
+
+			    //Insert the remaining
 			    preparedInsert.executeBatch();
+
+			    // Count how many items where added
 			    //--Below i need to know how many entries have been successfully added [ will be implemented better soon... :) ]
 			    // setTotalInDataBase((int) (getTotalInDataBase()
 			    //	    + Arrays.stream(preparedInsert.executeBatch()).filter(s -> s > 0).count()))

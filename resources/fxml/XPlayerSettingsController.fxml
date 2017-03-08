@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="382.0" prefWidth="459.0" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
@@ -24,7 +24,7 @@
                      <content>
                         <ScrollPane styleClass="xPlayerSettingsTab">
                            <content>
-                              <GridPane hgap="10.0" vgap="10.0">
+                              <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="0.0" />
                                  </columnConstraints>

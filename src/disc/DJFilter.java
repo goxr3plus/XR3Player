@@ -11,14 +11,14 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class DJFilter.
  */
 public class DJFilter extends Canvas {
 
 	/** The background. */
-	Color background = Color.BLACK;
+	//Color background = Color.BLACK
 	
 	/** The arc color. */
 	Color arcColor = Color.RED;

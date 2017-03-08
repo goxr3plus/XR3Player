@@ -60,7 +60,8 @@ public class SideBar extends BorderPane {
     @FXML
     private ProgressIndicator internetProgressIndicator;
 
-    @FXML Label userNameLabel;
+    @FXML
+    Label userNameLabel;
 
     /** The xr 3 settings. */
     @FXML
@@ -111,7 +112,7 @@ public class SideBar extends BorderPane {
 	} catch (IOException ex) {
 	    logger.log(Level.SEVERE, "", ex);
 	}
-	
+
     }
 
     /**
@@ -152,10 +153,11 @@ public class SideBar extends BorderPane {
 	}
     }
 
+    /**
+     * Called as soon as .fxml is initialized
+     */
     @FXML
     private void initialize() {
-
-	
 
 	// Translate Transition
 	tTrans = new TranslateTransition(Duration.millis(200), this);

@@ -37,6 +37,9 @@ public class TopBar extends BorderPane {
     private ToggleButton goLibrariesMode;
 
     @FXML
+    private Button openSettings;
+
+    @FXML
     private ToggleButton goDJMode;
 
     @FXML
@@ -173,6 +176,9 @@ public class TopBar extends BorderPane {
 		    Main.restartTheApplication(true);
 	    });
 	});
+
+	//openSettings
+	openSettings.setOnAction(a -> Main.settingsWindow.showWindow());
 
 	// minimize
 	minimize.setOnAction(ac -> Main.window.setIconified(true));

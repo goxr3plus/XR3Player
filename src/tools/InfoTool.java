@@ -45,6 +45,9 @@ public final class InfoTool {
     /** The song. */
     static Mp3File song;
 
+    /** WebSite url */
+    public static final String website = "http://goxr3plus.co.nf";
+
     /** The Constant images. */
     public static final String images = "/image/";
 
