@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.settings;
+package application.settings.window;
 
 import java.io.IOException;
 import java.util.logging.Level;

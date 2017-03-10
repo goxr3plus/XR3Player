@@ -691,7 +691,7 @@
 }
 
 .library:opened .libraryNameLabel{
-	-fx-text-fill:magenta !important;
+	-fx-text-fill:lightgreen !important;
 	-fx-font-size:15.0;
 }
 

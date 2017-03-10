@@ -29,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Side;
+import javafx.scene.CacheHint;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -264,7 +265,6 @@ public class LibraryMode extends GridPane {
 	// StackPane
 	librariesStackView.getChildren().addAll(libraryViewer, librariesSearcher.region,
 		librariesSearcher.searchProgress);
-	librariesStackView.setStyle("-fx-border-color:white; -fx-border-style:segments(4.0);");
 	libraryViewer.toBack();
 
 	// XPlayer - 0
@@ -367,6 +367,9 @@ public class LibraryMode extends GridPane {
 
 	/** The items. */
 	ObservableList<Library> items = FXCollections.observableArrayList();
+	/**
+	 * This class wraps an ObservableList
+	 */
 	public SimpleListProperty<Library> list = new SimpleListProperty<>(items);
 
 	/** The centered. */
@@ -412,10 +415,15 @@ public class LibraryMode extends GridPane {
 	    // }
 	    // }
 	    // })
+	    
+	    //super.setCache(true)
+	   // super.setCacheHint(CacheHint.SPEED)
 
 	    // clip.set
 	    setClip(clip);
-	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);");
+	    setStyle(
+		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+	    //setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 
 	    // ScrollBar
 	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);

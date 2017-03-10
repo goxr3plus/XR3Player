@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="resources/libs/mp3agic-0.9.0.jar"/>
 	<classpathentry kind="lib" path="resources/libs/javasysmon-0.3.5.0.jar"/>
 	<classpathentry kind="lib" path="resources/libs/json-simple-2.1.2.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/json-simple-2.1.2-sources.jar"/>
+	<classpathentry kind="lib" path="resources/libs/jnativehook-2.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

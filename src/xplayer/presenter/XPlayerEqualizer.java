@@ -3,28 +3,47 @@
  */
 package xplayer.presenter;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import disc.DJFilter;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
+import tools.InfoTool;
 
 /**
  * The Class XPlayerEqualizer.
  */
 public class XPlayerEqualizer extends BorderPane {
 
-    /** The color. */
-    // Color and key
-    Color color = Color.BLUEVIOLET;
+    @FXML
+    private TilePane tilePane;
 
-    /** The key. */
-    int key;
+    @FXML
+    private HBox bottomHBox;
+
+    @FXML
+    private Button resetFilers;
+
+    @FXML
+    private Button effects;
+
+    //----------------------------------------------------
+
+    /** The logger for this class */
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
+    /** The color. */
+    Color color = Color.BLUEVIOLET;
 
     /** The pan filter. */
     DJFilter panFilter;
@@ -60,35 +79,37 @@ public class XPlayerEqualizer extends BorderPane {
      */
     public XPlayerEqualizer(XPlayerController xPlayerUI) {
 
+	//Vars
 	this.xPlayerUI = xPlayerUI;
 	color = xPlayerUI.getDiscColor();
 
-	setStyle("-fx-background-color:transparent;");
+	// ----------------------------------FXMLLoader-------------------------------------
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerEqualizer.fxml"));
+	loader.setController(this);
+	loader.setRoot(this);
 
-	// -> CENTER
-	TilePane tilePane = new TilePane();
-	tilePane.setStyle("-fx-background-color:transparent;");
-	tilePane.setPrefColumns(8);
-	tilePane.setHgap(5);
-	tilePane.setVgap(5);
+	// -------------Load the FXML-------------------------------
+	try {
+	    loader.load();
+	} catch (IOException ex) {
+	    logger.log(Level.WARNING, "", ex);
+	}
+
+    }
+
+    /**
+     * Called as soon as FXML file has been loaded
+     */
+    @FXML
+    private void initialize() {
+
+	// TilePane
 	for (int counter = 0; counter < 32; counter++)
 	    filters[counter] = new Filter(36, 36, counter);
-
 	tilePane.getChildren().addAll(filters);
 
-	setCenter(tilePane);
-
-	// -> BOTTOM
-	GridPane grid = new GridPane();
-	grid.setHgap(5);
-	grid.setVgap(5);
-
-	// reset
-	Button reset = new Button("Reset");
-	reset.setPrefSize(70, 25);
-	reset.setTooltip(new Tooltip("Reset all to zero"));
-
-	reset.setOnAction(action -> {
+	//resetFilers
+	resetFilers.setOnAction(action -> {
 	    for (int i = 0; i < 32; i++)
 		xPlayerUI.xPlayerModel.getEqualizerArray()[i] = 0.0f;
 
@@ -96,60 +117,50 @@ public class XPlayerEqualizer extends BorderPane {
 
 	    for (Filter comp : filters)
 		comp.resetToZero();
+	    
 	});
-
-	grid.add(reset, 0, 0);
 
 	// Effects
-	Button effects = new Button("Effects");
 	ContextMenu contextMenu = new ContextMenu();
 	contextMenu.getItems().addAll(filterButtons);
+	effects.setOnMouseReleased(m -> contextMenu.show(effects, m.getScreenX(), m.getScreenY() - contextMenu.getHeight()));
 
-	effects.setOnMouseReleased(m -> {
-	    contextMenu.show(effects, m.getScreenX(), m.getScreenY());
-	});
-
-	grid.add(effects, 1, 0);
-
-	// Extra Filters
+	//-------------------------- Extra Filters--------------------------
 	panFilter = new DJFilter(2, 2, 36, 36, Color.YELLOW);
-	grid.add(panFilter, 2, 0);
 	panFilter.setOnMouseDragged(drag -> {
 	    panFilter.onMouseDragged(drag);
 	    xPlayerUI.xPlayer.setPan(panFilter.getValue(200));
 	});
 
 	balanceFilter = new DJFilter(40, 2, 36, 36, Color.YELLOW);
-	grid.add(balanceFilter, 3, 0);
 	balanceFilter.setOnMouseDragged(drag -> {
 	    balanceFilter.onMouseDragged(drag);
 	    xPlayerUI.xPlayer.setBalance(balanceFilter.getValue(200));
 	});
 
-	amplitudeFilter = new DJFilter(40, 2, 36, 36, Color.YELLOW);
-	grid.add(amplitudeFilter, 4, 0);
-	amplitudeFilter.setOnMouseDragged(drag -> {
-	    amplitudeFilter.onMouseDragged(drag);
+	//	amplitudeFilter = new DJFilter(40, 2, 36, 36, Color.YELLOW);
+	//	amplitudeFilter.setOnMouseDragged(drag -> {
+	//	    amplitudeFilter.onMouseDragged(drag);
+	//
+	//	    float value = amplitudeFilter.getValue(200);
+	//	    // Pass the variables to the array
+	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[0] = value;
+	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[1] = -value;
+	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[2] = value;
+	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[3] = value;
+	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[4] = -value;
+	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[5] = value;
+	//
+	//	    // Add the filter
+	//	    xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
+	//
+	//	    //Change the angles of equalizer filters
+	//	    for (int i = 0; i <= 5; i++)
+	//		filters[i].setAngle(xPlayerUI.xPlayerModel.getEqualizerArray()[i], 200);
+	//
+	//	});
 
-	    float value = amplitudeFilter.getValue(200);
-	    // Pass the variables to the array
-	    xPlayerUI.xPlayerModel.getEqualizerArray()[0] = value;
-	    xPlayerUI.xPlayerModel.getEqualizerArray()[1] = -value;
-	    xPlayerUI.xPlayerModel.getEqualizerArray()[2] = value;
-	    xPlayerUI.xPlayerModel.getEqualizerArray()[3] = value;
-	    xPlayerUI.xPlayerModel.getEqualizerArray()[4] = -value;
-	    xPlayerUI.xPlayerModel.getEqualizerArray()[5] = value;
-
-	    // Add the filter
-	    xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
-
-	    //Change the angles of equalizer filters
-	    for (int i = 0; i <= 5; i++)
-		filters[i].setAngle(xPlayerUI.xPlayerModel.getEqualizerArray()[i], 200);
-
-	});
-
-	setBottom(grid);
+	bottomHBox.getChildren().addAll(panFilter, balanceFilter);
 
     }
 
@@ -210,7 +221,7 @@ public class XPlayerEqualizer extends BorderPane {
 	 * @param variables
 	 *            the variables
 	 */
-	public FilterButton(String text, double variables[]) {
+	public FilterButton(String text, double[] variables) {
 
 	    vars = variables;
 	    setText(text);

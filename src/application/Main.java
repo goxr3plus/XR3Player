@@ -22,7 +22,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import application.settings.ApplicationSettingsController;
+import application.settings.window.ApplicationSettingsController;
 import application.users.LoginMode;
 import application.users.User;
 import borderless.BorderlessScene;
@@ -159,11 +159,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 53;
+    public final static int currentVersion = 54;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "06/03/2017";
+    public final static String releaseDate = "10/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -256,9 +256,17 @@ public class Main extends Application {
 	    window.setScene(scene);
 	    window.show();
 
-	    // Check if database folder exists
+	    //InfoTool.DATABASE_FOLDER_NAME Exists?
 	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists()) {
-		new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
+		boolean dataBaseRootCreated = new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
+
+		//If it can not be created [FATAL ERROR]
+		if (!dataBaseRootCreated) {
+		    ActionTool.showNotification("Fatala Error!",
+			    "Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
+			    Duration.seconds(45), NotificationType.ERROR);
+		}
+
 	    } else {
 		//Create the List with the Available Users
 		AtomicInteger counter = new AtomicInteger();
@@ -269,18 +277,15 @@ public class Main extends Application {
 			.collect(Collectors.toList()));
 
 		//avoid error
-		if (loginMode.userViewer.getItems().size() != 0)
+		if (!loginMode.userViewer.getItems().isEmpty())
 		    loginMode.userViewer.setCenterIndex(loginMode.userViewer.getItems().size() / 2);
 	    }
 
 	    //Check Compatibility
 	    checkJavaCombatibility();
 
-	    // Check for updates on start
-	    new Thread(() -> {
-		if (InfoTool.isReachableByPing("www.google.com"))
-		    Main.checkForUpdates(false);
-	    }).start();
+	    //Check for updates
+	    Main.checkForUpdates(false);
 
 	    //Main.songsContextMenu.show(window)
 	    // Main.songsContextMenu.hide()
@@ -550,9 +555,10 @@ public class Main extends Application {
     /**
      * This method is fetching data from github to check if the is a new update for XR3Player
      * 
-     * @param showIfNotUpdateAvailable
+     * @param showTheWindow
+     *            If not update is available then don't show the window
      */
-    public static synchronized void checkForUpdates(boolean showIfNotUpdateAvailable) {
+    public static synchronized void checkForUpdates(boolean showTheWindow) {
 
 	// Not already running
 	if (updaterThread == null || !updaterThread.isAlive()) {
@@ -576,7 +582,7 @@ public class Main extends Application {
 
 			// Not disturb the user every time the application
 			// starts
-			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showIfNotUpdateAvailable)
+			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
 			    return;
 
 			// Update is available or not?

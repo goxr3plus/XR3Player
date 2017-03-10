@@ -95,7 +95,7 @@
          <top>
             <StackPane BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="161.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 15 15 0 0; -fx-border-color: firebrick; -fx-border-radius: 15 15 0 0; -fx-border-width: 2.5;" text="- Libraries -" StackPane.alignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="161.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 15 15 0 0; -fx-border-color: firebrick; -fx-border-radius: 15 15 0 0; -fx-border-width: 2.5;" text="- Libraries -" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow />
                      </effect>

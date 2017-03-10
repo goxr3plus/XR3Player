@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <fx:root prefHeight="470.0" prefWidth="552.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <HBox spacing="5.0" BorderPane.alignment="CENTER">
@@ -34,8 +33,8 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </Label>
-                                                <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Resume/Start" />
-                                                <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Pause" />
+                                                <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Resume/Start/Pause" />
+                                                <Label disable="true" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Pause" />
                                                 <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Replay" />
                                                 <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Seek Forward 10 sec" />
                                                 <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Seek Backward 10 sec" />
@@ -57,8 +56,8 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </Label>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="Pause/Resume Key" />
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="Pause/Resume Key" />
+                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="Play/Pause Key from Keyboard" />
+                                                <Label alignment="CENTER" disable="true" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="Pause/Resume Key" />
                                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="SHIFT+R" />
                                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="Right Key ( -&gt; )" />
                                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="Left Key ( &lt;- )" />

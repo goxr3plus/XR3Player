@@ -82,7 +82,7 @@ public class LoginMode extends BorderPane {
     // --------------------------------------------
 
     /** The logger for this class */
-    private static final Logger logger = Logger.getLogger(LoginMode.class.getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     /**
      * Allows to see the users in a beatiful way
@@ -310,29 +310,15 @@ public class LoginMode extends BorderPane {
 	// Constructor
 	public UsersViewer() {
 
-	    // this.setOnMouseMoved(m -> {
-	    //
-	    // if (dragDetected) {
-	    // System.out.println("Mouse Moving... with drag detected");
-	    //
-	    // try {
-	    // Robot robot = new Robot();
-	    // robot.mouseMove((int) m.getScreenX(),
-	    // (int) this.localToScreen(this.getBoundsInLocal()).getMinY() + 2);
-	    // } catch (AWTException ex) {
-	    // ex.printStackTrace();
-	    // }
-	    // }
-	    // })
-
 	    // clip.set
 	    setClip(clip);
-	    //	    setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%;"); //-fx-background-size:100% 100%; -fx-background-image:url('/image/lisback.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	    //setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%;"); //-fx-background-size:100% 100%; -fx-background-image:url('/image/lisback.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 
-	    //setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+	    //setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);")
 
-	    this.setStyle(
+	    setStyle(
 		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);  -fx-border-width:5;");
+
 	    // ScrollBar
 	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);
 	    jfSlider.setCursor(Cursor.HAND);
@@ -355,18 +341,6 @@ public class LoginMode extends BorderPane {
 
 		// System.out.println(scrollBar.getValue())
 	    });
-
-	    // setFocusTraversable(true)
-	    // setOnKeyReleased(key -> {
-	    // if (key.getCode() == KeyCode.LEFT) {
-	    // if (timeline.getStatus() != Status.RUNNING)
-	    // previous();
-	    // } else if (key.getCode() == KeyCode.RIGHT) {
-	    // if (timeline.getStatus() != Status.RUNNING)
-	    // next();
-	    // }
-	    //
-	    // })
 
 	    // create content
 	    centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
@@ -480,7 +454,7 @@ public class LoginMode extends BorderPane {
 	 */
 	public void addMultipleUsers(List<User> list) {
 	    list.forEach(user -> this.addUser(user, false));
-	    
+
 	    // update
 	    update();
 	}

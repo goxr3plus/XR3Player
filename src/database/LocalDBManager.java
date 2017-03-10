@@ -12,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -466,6 +465,15 @@ public class LocalDBManager {
 		    //System.out.println("Entered !lastSelectedLibrary.isEmpty()")
 		});
 	    }
+
+	    //Do an Update on the selected Library SmartController
+	    Platform.runLater(() -> {
+		//Check if empty and if not update the selected library
+		if (!Main.libraryMode.multipleLibs.getTabs().isEmpty()
+			&& Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().isFree(false))
+		    Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().loadService
+			    .startService(false, true);
+	    });
 
 	} catch (IOException | DeserializationException e) {
 	    e.printStackTrace();

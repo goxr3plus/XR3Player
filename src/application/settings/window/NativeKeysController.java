@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.settings;
+package application.settings.window;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -81,6 +81,8 @@ public class NativeKeysController extends BorderPane {
 			xPlayer.openFileChooser();
 			System.out.println("Opening File Chooser");
 
+		    } else if (keyCode == NativeKeyEvent.VC_MEDIA_PLAY) { //PlayPause
+			xPlayer.reversePlayAndPause();
 		    } else if (keyCode == NativeKeyEvent.VC_R && (e.getModifiers() == NativeKeyEvent.SHIFT_L_MASK
 			    || e.getModifiers() == NativeKeyEvent.SHIFT_R_MASK
 			    || e.getModifiers() == NativeKeyEvent.SHIFT_MASK
