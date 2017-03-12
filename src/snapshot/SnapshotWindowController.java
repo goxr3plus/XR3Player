@@ -24,6 +24,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
@@ -92,7 +93,7 @@ public class SnapshotWindowController extends StackPane {
 
 	window.setX(0);
 	window.setY(0);
-	// getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")))
+	window.getIcons().add(new Image(getClass().getResourceAsStream(InfoTool.images+"icon.png")));
 	window.initStyle(StageStyle.TRANSPARENT);
 	window.setAlwaysOnTop(true);
 
