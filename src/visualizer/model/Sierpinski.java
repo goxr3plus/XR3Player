@@ -24,7 +24,7 @@ import javafx.scene.paint.Color;
  * @author GOXR3PLUS
  */
 public class Sierpinski {
-    
+
     Random random = new Random();
 
     /** The sierpinski root height. */
@@ -81,10 +81,8 @@ public class Sierpinski {
 	sierpinskiAcceleration = array[0] * 0.1;
 	// System.out.println(sierpinskiAcceleration)
 
-	// Background image
-	if (visualizerDrawer.backgroundImage != null)
-	    visualizerDrawer.gc.drawImage(visualizerDrawer.backgroundImage, 0, 0, visualizerDrawer.canvasWidth,
-		    visualizerDrawer.canvasHeight);
+	// Background
+	visualizerDrawer.drawBackgroundImage();
 
 	calcTriangles();
 	drawTriangles();
@@ -175,16 +173,14 @@ public class Sierpinski {
 	pointsX[2] = topX - h / 2;
 	pointsY[2] = topY + h;
 
-	visualizerDrawer.gc.setFill(Color.rgb(random.nextInt(255),
-		random.nextInt(255), random.nextInt(255)));
+	visualizerDrawer.gc.setFill(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
 	visualizerDrawer.gc.fillPolygon(pointsX, pointsY, 3);
 
 	// gc.strokePolygon(pointsX, pointsY, 3)
     }
 
     /**
-     * --------------------------Triangle class which contains x,y of a Triangle
-     * and height.
+     * --------------------------Triangle class which contains x,y of a Triangle and height.
      */
     private class Triangle {
 

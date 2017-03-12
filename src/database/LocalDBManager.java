@@ -281,11 +281,11 @@ public class LocalDBManager {
     public void loadApplicationDataBase() {
 	Main.updateScreen.setVisible(true);
 	Main.updateScreen.progressBar.progressProperty().bind(dataLoader.progressProperty());
-	//	System.out.println(Main.updateScreen.progressBar.getProgress());
-	//	System.out.println(Main.updateScreen.progressBar.getProgress());
-	//	System.out.println(Main.updateScreen.progressBar.getProgress());
-	//	System.out.println(Main.updateScreen.progressBar.getProgress());
-	//	System.out.println(Main.updateScreen.progressBar.getProgress());
+	//	System.out.println(Main.updateScreen.progressBar.getProgress())
+	//	System.out.println(Main.updateScreen.progressBar.getProgress())
+	//	System.out.println(Main.updateScreen.progressBar.getProgress())
+	//	System.out.println(Main.updateScreen.progressBar.getProgress())
+	//	System.out.println(Main.updateScreen.progressBar.getProgress())
 	dataLoader.restart();
     }
 

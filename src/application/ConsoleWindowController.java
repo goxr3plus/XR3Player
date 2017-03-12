@@ -241,7 +241,8 @@ public class ConsoleWindowController extends StackPane {
 	} else if ("help".equals(command)) { //help
 	    ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
 	    success = true;
-	}
+	} else if ("exit".equals(command) || "close".equals(command)) //close console
+	    window.close();
 
 	System.out.println(command);
 

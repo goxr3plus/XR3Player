@@ -80,7 +80,7 @@ public class SnapshotWindowController extends StackPane {
     public SnapshotWindowController() {
 
 	// FXMLLOADER
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls+"SnapshotWindowController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SnapshotWindowController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -286,7 +286,7 @@ public class SnapshotWindowController extends StackPane {
     /**
      * Creates and saves the image.
      */
-    public void prepareImage() {
+    private void prepareImage() {
 	Platform.runLater(() -> {
 	    // Clear the canvas
 	    gc.clearRect(0, 0, window.getWidth(), window.getHeight());

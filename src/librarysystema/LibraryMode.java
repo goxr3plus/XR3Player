@@ -29,7 +29,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Side;
-import javafx.scene.CacheHint;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -120,7 +119,7 @@ public class LibraryMode extends GridPane {
 	    Main.renameWindow.showingProperty().removeListener(this);
 
 	    // !Showing && !XPressed
-	    if (!Main.renameWindow.isShowing() && !Main.renameWindow.isXPressed()) {
+	    if (!Main.renameWindow.isShowing() && Main.renameWindow.wasAccepted()) {
 
 		Main.window.requestFocus();
 
@@ -271,7 +270,7 @@ public class LibraryMode extends GridPane {
 	Main.xPlayersList.addXPlayerController(new XPlayerController(0));
 	Main.xPlayersList.getXPlayerController(0).makeTheDisc(136, 136, Color.ORANGE, 45, Side.LEFT);
 	Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerController(0), 1, 1);
+	add(Main.xPlayersList.getXPlayerController(0).getFlipPanel(), 1, 1);
 
     }
 

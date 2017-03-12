@@ -470,7 +470,7 @@ public abstract class Media {
 			String newName = new File(getFilePath()).getParent() + File.separator + fileName.get();
 
 			// !XPressed && // Old name != New name
-			if (!Main.renameWindow.isXPressed() && !getFilePath().equals(newName)) {
+			if (Main.renameWindow.wasAccepted() && !getFilePath().equals(newName)) {
 
 			    try {
 

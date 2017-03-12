@@ -31,7 +31,7 @@ public class MultipleTabs extends BorderPane {
 	tabPane.setSide(Side.LEFT);
 	tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
-	addTab(new Tab("Libraries", Main.libraryMode.multipleLibs));
+	addTab(new Tab("Opened Libraries", Main.libraryMode.multipleLibs));
 	// addTab(new Tab("Radio Stations", radioStations))
 	tabPane.getSelectionModel().select(0);
 
@@ -45,7 +45,7 @@ public class MultipleTabs extends BorderPane {
      *            the tab
      */
     public void addTab(Tab tab) {
-	tab.getStyleClass().add("STab");
+	//tab.getStyleClass().add("STab");
 	tabPane.getTabs().add(tab);
 
     }

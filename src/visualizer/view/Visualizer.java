@@ -153,8 +153,7 @@ abstract class Visualizer extends VisualizerDrawer {
 	}
 
 	/**
-	 * This method is used by XPlayerController to pass a reference to the
-	 * AnimationTimer
+	 * This method is used by XPlayerController to pass a reference to the AnimationTimer
 	 *
 	 * @param xPlayerController
 	 *            The XPlayerController Reference
@@ -197,7 +196,7 @@ abstract class Visualizer extends VisualizerDrawer {
 		    drawPolySpiral();
 		    break;
 		case 6:
-		    drawPolySpiral2();
+		    drawCircleWithLines();
 		    break;
 		case 7:
 		    drawSierpinski();
@@ -220,8 +219,11 @@ abstract class Visualizer extends VisualizerDrawer {
 			framesPerSecond = 0;
 			nextSecond = nanos + ONE_SECOND_NANOS;
 		    }
-		    gc.setStroke(Color.YELLOW);
-		    gc.strokeText("FPS: " + fps , 0, canvasHeight - 1.00); //+ " (FRRH: " + frameRateRatioHint + ")"
+		   
+		    gc.setFill(Color.BLACK);
+		    gc.fillRect(0, canvasHeight - 15.00, 50, 28);
+		    gc.setStroke(Color.WHITE);
+		    gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
 		}
 
 	    } // END: if draw == TRUE

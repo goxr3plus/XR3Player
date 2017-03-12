@@ -62,7 +62,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 
     /** The display mode. */
     public SimpleIntegerProperty displayMode = new SimpleIntegerProperty(
-	    Integer.parseInt(DisplayMode.ROSETTE.toString()));
+	    Integer.parseInt(DisplayMode.CIRCLE_WITH_LINES.toString()));
 
     /** The Constant DEFAULT_FPS. */
     private static final int DEFAULT_FPS = 60;
@@ -762,8 +762,8 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 		return "5";
 	    }
 	},
-	/** Display a Polyspiral and 4 Arcs. */
-	ROSETTE_ARCS {
+	/** Display A Circle With Lines on it's circumference */
+	CIRCLE_WITH_LINES {
 	    @Override
 	    public String toString() {
 		return "6";

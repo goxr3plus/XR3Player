@@ -26,7 +26,7 @@
       <Canvas fx:id="canvas" height="33.0" style="-fx-cursor: hand;" width="160.0" />
       <Button fx:id="close" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER">
          <tooltip>
-            <Tooltip text="Close" />
+            <Tooltip text="Cancel" />
          </tooltip>
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">

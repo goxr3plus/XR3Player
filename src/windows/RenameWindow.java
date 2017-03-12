@@ -53,8 +53,8 @@ public class RenameWindow extends HBox {
      */
     public Stage window = new Stage();
 
-    /** The x pressed. */
-    private boolean xPressed = false;
+    /** If it was accepted */
+    private boolean accepted = false;
 
     /** The not allow. */
     String[] notAllow = new String[] { "/", "\\", ":", "*", "?", "\"", "<", ">", "|", "'", "." };
@@ -71,7 +71,7 @@ public class RenameWindow extends HBox {
 	window.initStyle(StageStyle.TRANSPARENT);
 	window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
 	window.centerOnScreen();
-	window.setOnCloseRequest(ev -> xPressed = true);
+	window.setOnCloseRequest(ev -> close(false));
 	window.setAlwaysOnTop(true);
 
 	// ----------------------------------FXMLLoader
@@ -90,10 +90,8 @@ public class RenameWindow extends HBox {
 	getScene().getStylesheets()
 		.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
 	getScene().setOnKeyReleased(key -> {
-	    if (key.getCode() == KeyCode.ESCAPE) {
-		xPressed = true;
-		window.close();
-	    }
+	    if (key.getCode() == KeyCode.ESCAPE)
+		close(false);
 	});
 
     }
@@ -109,8 +107,8 @@ public class RenameWindow extends HBox {
 
 	// inputField
 	inputField.setPrefSize(290, 32);
-	inputField
-		.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
+	inputField.setTooltip(
+		new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
 	inputField.setPromptText("Type Here...");
 	inputField.setStyle("-fx-font-weight:bold; -fx-font-size:14;");
 
@@ -134,7 +132,7 @@ public class RenameWindow extends HBox {
 
 	    // can pass?
 	    if (!inputField.getText().trim().isEmpty())
-		window.close();
+		close(true);
 	    else
 		Notifications.create().text("You have to type something..").showWarning();
 
@@ -146,10 +144,7 @@ public class RenameWindow extends HBox {
 	okButton.setOnAction(myHandler);
 
 	// closeButton
-	closeButton.setOnAction(action -> {
-	    xPressed = true;
-	    window.close();
-	});
+	closeButton.setOnAction(action -> close(false));
 
     }
 
@@ -163,12 +158,23 @@ public class RenameWindow extends HBox {
     }
 
     /**
-     * Checks if is x pressed.
+     * Checks if it was cancelled
      *
-     * @return true, if is x pressed
+     * @return True if it was cancelled , false if not
      */
-    public boolean isXPressed() {
-	return xPressed;
+    public boolean wasAccepted() {
+	return accepted;
+    }
+
+    /**
+     * Close the Window.
+     *
+     * @param accepted
+     *            True if accepted , False if not
+     */
+    public void close(boolean accepted) {
+	this.accepted = accepted;
+	window.close();
     }
 
     /**
@@ -217,7 +223,7 @@ public class RenameWindow extends HBox {
 
 	inputField.setText(text);
 	inputField.end();
-	xPressed = false;
+	accepted = true;
 	window.show();
     }
 

@@ -3,9 +3,10 @@
  */
 package visualizer.model;
 
+import java.util.Random;
+
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 
 /**
  * The Class VisualizerDrawer.
@@ -28,6 +29,43 @@ public class VisualizerDrawer extends VisualizerModel {
     public Image backgroundImage;// new
 				 // Image(VisualizerModel.class.getResourceAsStream("background.gif"))
 
+    /**
+     * Draws the foreground image of the visualizer
+     * 
+     * @param array
+     *            The samples array
+     */
+    public void drawForegroundImage(float[] array) {
+
+	//!null
+	if (foregroundImage != null) {
+
+	    //Compute
+	    double imageW;//= foregroundImage.getWidth()
+	    double imageH;//= foregroundImage.getHeight()
+	    if (canvasWidth < canvasHeight)
+		imageW = imageH = canvasWidth / 2.00;
+	    else
+		imageW = imageH = canvasHeight / 2.00;
+
+	    //Draw it
+	    gc.drawImage(foregroundImage, (canvasWidth / 2 - imageW / 2) - imageW * array[0] / 2,
+		    (canvasHeight / 2 - imageH / 2) - imageH * array[0] / 2, imageW + imageW * array[0],
+		    imageH + imageH * array[0]);
+
+	}
+    }
+
+    /**
+     * Draws the background image of the visualizer
+     */
+    public void drawBackgroundImage() {
+
+	//!null
+	if (backgroundImage != null)
+	    gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+    }
+
     // ---------------------------------------------------------------------
 
     /*-----------------------------------------------------------------------
@@ -46,8 +84,7 @@ public class VisualizerDrawer extends VisualizerModel {
      * Draws an Oscilloscope
      * 
      * @param stereo
-     *            The Oscilloscope with have 2 lines->stereo or 1 line->merge
-     *            left and right audio
+     *            The Oscilloscope with have 2 lines->stereo or 1 line->merge left and right audio
      */
     public void drawOscilloscope(boolean stereo) {
 	oscilloscope.drawOscilloscope(stereo);
@@ -79,11 +116,103 @@ public class VisualizerDrawer extends VisualizerModel {
 	polySpiral.drawPolySpiral();
     }
 
-    /**
-     * Draws a Polyspiral and 4 arcs
+    /*-----------------------------------------------------------------------
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * 
+     * 			Circle With Lines
+     * 
+     * -----------------------------------------------------------------------
+     * 
+     * -----------------------------------------------------------------------
      */
-    public void drawPolySpiral2() {
-	polySpiral.drawPolyspiral2();
+
+    /** The color size. */
+    private final int colorSize = 360;
+
+    /** The color index. */
+    private int colorIndex = 0;
+
+    /**
+     * Draws the Round Circle with Lines on it's circumference
+     */
+    public void drawCircleWithLines() {
+	gc.setLineWidth(2);
+
+	float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
+	float[] array = returnBandsArray(pSample, 32);
+
+	//Background 
+	drawBackgroundImage();
+
+	//Calculate the radius
+	int radius;
+	if (canvasHeight > canvasWidth)
+	    radius = canvasWidth / 2;
+	else
+	    radius = canvasHeight / 2;
+	radius = (int) (radius / 1.5);
+
+	gc.setLineWidth(2);
+
+	//int previousX1 = -1
+	//int previousY1 = -1
+	int previousEndX = -1;
+	int previousEndY = -1;
+
+	for (float angle = 0; angle <= 360; angle++) {
+	    // Use HSB color model
+	    colorIndex = (colorIndex == colorSize - 1) ? 0 : colorIndex + 1;
+	    gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
+	    //gc.setFill(Color.hsb(colorIndex, 1.0f, 1.0f))
+	    //System.out.println("Calculating")
+	    //gc.setStroke(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)))
+
+	    //Code before
+	    //int px1 = (int) (canvasWidth / 2 + Math.sin(Math.toRadians(angle)) * radius)
+	    //int py1 = (int) (canvasHeight / 2 + Math.cos(Math.toRadians(angle)) * radius)
+
+	    //int px2 = (int) (canvasWidth / 2 + Math.sin(Math.toRadians(angle)) * (radius + Math.abs(pSample[(int) angle]) * 100))
+	    //int py2 = (int) (canvasHeight / 2 + Math.cos(Math.toRadians(angle)) * (radius + Math.abs(pSample[(int) angle]) * 100))
+
+	    //Code after [ Runs faster ]
+	    double angleRadians = Math.toRadians(angle);
+	    double mathSin = Math.sin(angleRadians);
+	    double mathCos = Math.cos(angleRadians);
+
+	    double centerX = canvasWidth / 2.00;
+	    double centerY = canvasHeight / 2.00;
+
+	    int startX = (int) (centerX + mathSin * radius); //startX
+	    int startY = (int) (centerY + mathCos * radius); //startY
+
+	    double add = Math.abs(pSample[(int) angle]) * 100;
+
+	    int endX = (int) (centerX + mathSin * (radius + add)); //endX
+	    int endY = (int) (centerY + mathCos * (radius + add)); //endY
+
+	    //Join with the previous line
+	    if (previousEndX != -1) {
+		gc.strokeLine(previousEndX, previousEndY, endX, endY); //connect with the previous line
+
+		//gc.fillPolygon(new double[] { previousX1,previousX2, px2, px1 }, new double[] { previousY1,previousY2, py2, py1 }, 4)
+	    }
+
+	    //previousX1 = px1
+	    //previousY1 = py1
+	    previousEndX = endX;
+	    previousEndY = endY;
+
+	    gc.strokeLine(startX, startY, endX, endY); //draw the line
+	}
+
+	//Foreground
+	drawForegroundImage(array);
+
+	//Reset it so it doesn't affect the others
+	gc.setLineWidth(1);
+
     }
 
     /*-----------------------------------------------------------------------
@@ -107,9 +236,9 @@ public class VisualizerDrawer extends VisualizerModel {
 	float barWidth = (float) canvasWidth / (float) saBands;
 	float[] array = returnBandsArray(pSample, saBands);
 	float c = 0;
-	// BackgroundImage
-	if (backgroundImage != null)
-	    gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+
+	// Background
+	this.drawBackgroundImage();
 
 	for (int band = 0; band < saBands; band++) {
 	    drawSpectrumBar((int) c, canvasHeight, (int) barWidth - 1, (int) (array[band] * canvasHeight), band);
@@ -181,9 +310,8 @@ public class VisualizerDrawer extends VisualizerModel {
      */
     public void drawVUMeter() {
 
-	// BackgroundImage
-	if (backgroundImage != null)
-	    gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+	// Background
+	drawBackgroundImage();
 
 	float wLeft = 0.0f;
 	float wRight = 0.0f;
@@ -199,7 +327,7 @@ public class VisualizerDrawer extends VisualizerModel {
 
 	/*
 	 * vuAverage += ( ( wLeft + wRight ) / 2.0f ); vuSamples++; if (
-	 * vuSamples > 128 ) { vuSamples /= 2.0f; vuAverage /= 2.0f; }
+	 * vuSamples > 128 ) { vuSamples /= 2.0f; vuAverage /= 2.0f }
 	 */
 
 	if (wLeft >= (oldLeft - wSadfrr))
@@ -254,36 +382,6 @@ public class VisualizerDrawer extends VisualizerModel {
 	for (int a = x; a <= max; a += 15) {
 	    gc.strokeRect(a, y, 1, pHeight);
 	}
-    }
-
-    /*-----------------------------------------------------------------------
-     * 
-     * -----------------------------------------------------------------------
-     * 
-     * 
-     * 							Cicular
-     * 
-     * -----------------------------------------------------------------------
-     * 
-     * -----------------------------------------------------------------------
-     */
-
-    /**
-     * Draws an Arc or whole Circle.
-     */
-    @Deprecated
-    public void drawCircular() {
-	float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
-
-	// backgoundImage
-	if (backgroundImage != null)
-	    gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
-	float[] array = returnBandsArray(pSample, 1);
-	int arcHeight = canvasHeight / 2;
-
-	gc.setFill(Color.WHITE);
-	// gc.fillOval(iX(-w*2), iY(w*2), w, w);
-	gc.fillArc(canvasWidth / 2.00, canvasHeight / 2.00, arcHeight, arcHeight, 0, 360 * array[0], ArcType.ROUND);
     }
 
     /*-----------------------------------------------------------------------

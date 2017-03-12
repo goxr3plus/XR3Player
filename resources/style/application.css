@@ -7,7 +7,7 @@
 
 
 
-.icon{
+/* .icon{
 	-fx-text-fill: #FE774D;
 	-fx-padding: 10.0;
 	-fx-cursor: hand;
@@ -26,6 +26,7 @@
 	-fx-font-size: 13.0px !important;
 	-fx-text-fill: WHITE;
 }
+*/
 
 /*******************************************************************************
 
@@ -326,18 +327,19 @@
     -fx-font-size: 12.0px;
     -fx-font-weight: bold;
     -fx-wrap-text: true;
+    -fx-cursor:hand;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill:brown ;
+    -fx-text-fill:black ; /* before it was BROWN */
     -fx-font-size:130.0%;
 }
 
 .tab:hover .tab-label{
 	-fx-text-fill:white;
 	-fx-background-color:firebrick;	
-	-fx-background-radius:8.0px;
+	-fx-background-radius:8.0 0.0 8.0 0.0;
 }
 
 
@@ -446,7 +448,7 @@
   }
   
   .arrowButton2{
-  	-fx-background-color:rgb(0,0,0,0.9);
+  	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
   	-fx-background-radius:45.0;
   	-fx-cursor:hand;
   }
@@ -874,8 +876,8 @@
 }
 
 #sideBar{
-	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
-	-fx-border-color:white;
+	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
+	/*-fx-border-color:white;*/
 }
 
 .sideBarSectionLabel{

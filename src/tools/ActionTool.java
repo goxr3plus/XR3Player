@@ -15,6 +15,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -340,6 +341,27 @@ public final class ActionTool {
 
 	}
 
+    }
+
+    /**
+     * Shows an Alert
+     * 
+     * @param title
+     * @param headerText
+     * @param contentText
+     */
+    public static void showAlert(String title, String headerText, String contentText) {
+	//AtomicBoolean answer = new AtomicBoolean(false)
+
+	// Show Alert
+	Alert alert = new Alert(AlertType.INFORMATION);
+	alert.initStyle(StageStyle.UTILITY);
+	alert.initOwner(Main.window);
+	//alert.setGraphic(questionImage)
+	alert.setTitle(title);
+	alert.setHeaderText(title);
+	alert.setContentText(contentText);
+	alert.showAndWait();
     }
 
     /**

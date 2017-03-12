@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 import org.controlsfx.control.Notifications;
 
-import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXCheckBox;
 
 import application.Main;
@@ -30,15 +29,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.Genre;
@@ -54,14 +50,12 @@ import tools.NotificationType;
  */
 public class Library extends StackPane {
 
-    /** The logger for this class */
-    private static final Logger logger = Logger.getLogger(Library.class.getName());
-
-    /** The image view. */
     @FXML
-    public ImageView imageView;
+    ImageView imageView;
 
-    /** The go settings. */
+    @FXML
+    private Label nameField;
+
     @FXML
     private Label goSettings;
 
@@ -71,13 +65,8 @@ public class Library extends StackPane {
     @FXML
     private Label warningLabel;
 
-    /** The rating label. */
     @FXML
-    private JFXBadge ratingLabel;
-
-    /** The name field. */
-    @FXML
-    private Label nameField;
+    private Label ratingLabel;
 
     @FXML
     private StackPane progressBarStackPane;
@@ -99,6 +88,9 @@ public class Library extends StackPane {
     // private final CopyProgress copyService = new CopyProgress()
 
     // -------------------------------------------
+
+    /** The logger for this class */
+    private static final Logger logger = Logger.getLogger(Library.class.getName());
 
     /** The controller. */
     private final SmartController controller;
@@ -219,7 +211,7 @@ public class Library extends StackPane {
 		    nameField.textProperty().unbind();
 
 		    // !XPressed && Old name !=newName
-		    if (!Main.renameWindow.isXPressed() && !libraryName.equals(newName)) {
+		    if (Main.renameWindow.wasAccepted() && !libraryName.equals(newName)) {
 
 			// duplicate?
 			if (!(duplicate = Main.libraryMode.libraryViewer.items.stream().anyMatch(
@@ -266,7 +258,7 @@ public class Library extends StackPane {
 
 		    // Rename Tab + Unbind Tab textProperty
 		    if (isLibraryOpened()) {
-			if (!Main.renameWindow.isXPressed() && !newName.equals(oldName) && !duplicate)
+			if (!Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
 			    Main.libraryMode.multipleLibs.renameTab(oldName, getLibraryName());
 
 			Main.libraryMode.multipleLibs.getTab(getLibraryName()).getTooltip().textProperty().unbind();
@@ -276,7 +268,7 @@ public class Library extends StackPane {
 		    controller.renameWorking = false;
 
 		    // commit
-		    if (!Main.renameWindow.isXPressed() && !newName.equals(oldName) && !duplicate)
+		    if (!Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
 			Main.dbManager.commit();
 		}
 
@@ -495,7 +487,7 @@ public class Library extends StackPane {
 
 	// Rating Label
 	ratingLabel.textProperty().bind(starsProperty().asString());
-	ratingLabel.visibleProperty().bind(starsProperty().greaterThan(0));
+	//ratingLabel.visibleProperty().bind(starsProperty().greaterThan(0));
 	this.setOnScroll(scroll -> {
 	    if (scroll.getDeltaY() > 0)
 		updateStars(starsProperty().get() + 0.5);
@@ -820,6 +812,11 @@ public class Library extends StackPane {
 		    .bind(Main.starWindow.starsProperty().asString());
 
 	    Main.starWindow.show(starsProperty().get(), Main.libraryMode.libraryViewer.settings.getStarsLabel());
+
+	    //Keep a reference to the previous stars
+	    double previousStars = stars.get();
+
+	    //Bind
 	    stars.bind(Main.starWindow.starsProperty());
 
 	    Main.starWindow.window.showingProperty().addListener(new InvalidationListener() {
@@ -834,9 +831,15 @@ public class Library extends StackPane {
 
 		    // if !showing
 		    if (!Main.starWindow.window.isShowing()) {
+			
+			//Unbind
+			Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty().unbind();
+
+			//Was accepted
 			if (Main.starWindow.wasAccepted())
 			    updateStars(Main.starWindow.getStars());
-			Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty().unbind();
+			else
+			    setStars(previousStars);
 		    }
 
 		}
@@ -850,7 +853,7 @@ public class Library extends StackPane {
      */
     public void deleteLibrary() {
 	if (controller.isFree(true) && ActionTool
-		.doQuestion("Confirm that you want to 'delete' this library,\n Name: " + getLibraryName())) {
+		.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName()+" ]")) {
 
 	    try {
 

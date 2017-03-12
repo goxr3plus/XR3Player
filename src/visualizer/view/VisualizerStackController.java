@@ -102,21 +102,38 @@ public class VisualizerStackController extends StackPane {
 	fadeTransition.playFromStart();
     }
 
+    XPlayerController xPlayerController;
+
     /**
      * Add the listeners to the Next and Previous Buttons
      * 
      * @param xPlayerController
      */
     public void addListenersToButtons(XPlayerController xPlayerController) {
+	this.xPlayerController = xPlayerController;
+
 	// previous
-	previous.setOnAction(a -> xPlayerController.visualizer.displayMode
-		.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
-			? xPlayerController.visualizer.displayMode.get() - 1
-			: VisualizerModel.DISPLAYMODE_MAXIMUM));
+	previous.setOnAction(a -> previousSpectrumAnalyzer());
 	// next
-	next.setOnAction(a -> xPlayerController.visualizer.displayMode
+	next.setOnAction(a -> nextSpectrumAnalyzer());
+    }
+
+    /**
+     * Goes to the next Spectrum Analyzer
+     */
+    public void nextSpectrumAnalyzer() {
+	xPlayerController.visualizer.displayMode
 		.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-			: xPlayerController.visualizer.displayMode.get() + 1));
+			: xPlayerController.visualizer.displayMode.get() + 1);
+    }
+
+    /**
+     * Goes to the previous Spectrum Analyzer
+     */
+    public void previousSpectrumAnalyzer() {
+	xPlayerController.visualizer.displayMode.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
+		? xPlayerController.visualizer.displayMode.get() - 1
+		: VisualizerModel.DISPLAYMODE_MAXIMUM);
     }
 
 }

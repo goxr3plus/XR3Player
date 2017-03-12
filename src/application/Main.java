@@ -31,7 +31,6 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -50,6 +49,7 @@ import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
 import smartcontroller.PlayedMediaList;
 import smartcontroller.SmartSearcher.AdvancedSearch;
+import snapshot.SnapshotWindowController;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
@@ -84,6 +84,11 @@ public class Main extends Application {
     //----------------START: The below have not depencities on other ---------------------------------//
 
     //
+
+    /**
+     * The SnapShot Window
+     */
+    public static final SnapshotWindowController snapShotWindow = new SnapshotWindowController();
 
     /** The star window. */
     public static final StarWindow starWindow = new StarWindow();
@@ -159,11 +164,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 54;
+    public final static int currentVersion = 55;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "10/03/2017";
+    public final static String releaseDate = "12/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -204,13 +209,21 @@ public class Main extends Application {
 	    loginMode = new LoginMode();
 
 	    // rootStack
-	    stackPaneRoot.getChildren().addAll(root, sideBar, updateScreen, loginMode);
-	    StackPane.setAlignment(sideBar, Pos.CENTER_LEFT);
+	    BorderPane rootParent = new BorderPane();
+	    rootParent.setStyle("-fx-background-color:black;");
+	    rootParent.setCenter(root);
+	    rootParent.setLeft(sideBar);
+	    root.setStyle("-fx-background-color:red");
+	    stackPaneRoot.getChildren().addAll(rootParent, updateScreen, loginMode);
+	    // StackPane.setAlignment(sideBar, Pos.CENTER_LEFT)
 
 	    // root
+	    //rootParent.setVisible(false)
 	    updateScreen.setVisible(false);
+	    sideBar.setVisible(false);
 	    topBar.setVisible(false);
 	    root.setTop(topBar);
+	    //root.setLeft(sideBar)
 
 	    // Window
 	    window = primaryStage;
@@ -355,6 +368,7 @@ public class Main extends Application {
 	    //When Top Bar to be visible?
 	    topBar.visibleProperty()
 		    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
+	    sideBar.visibleProperty().bind(topBar.visibleProperty());
 
 	    //Important binding 
 	    libraryMode.multipleLibs.emptyLabel.textProperty()

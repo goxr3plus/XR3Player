@@ -79,8 +79,7 @@ public class Oscilloscope {
      * Draws an Oscilloscope.
      *
      * @param stereo
-     *            The Oscilloscope with have 2 lines->stereo or 1 line->merge
-     *            left and right audio
+     *            The Oscilloscope with have 2 lines->stereo or 1 line->merge left and right audio
      */
     public void drawOscilloscope(boolean stereo) {
 	float[] pSample1;
@@ -91,10 +90,8 @@ public class Oscilloscope {
 	else // not?Then merge the array
 	    pSample1 = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
 
-	// backgoundImage
-	if (visualizerDrawer.backgroundImage != null)
-	    visualizerDrawer.gc.drawImage(visualizerDrawer.backgroundImage, 0, 0, visualizerDrawer.canvasWidth,
-		    visualizerDrawer.canvasHeight);
+	//Background
+	visualizerDrawer.drawBackgroundImage();
 
 	visualizerDrawer.gc.setStroke(visualizerDrawer.scopeColor);
 	// System.out.println(pSample.length)
@@ -135,6 +132,9 @@ public class Oscilloscope {
      */
     public void drawOscilloScopeLines() {
 
+	//Background
+	visualizerDrawer.drawBackgroundImage();
+
 	// Use HSB color model
 	colorIndex = (colorIndex == colorSize - 1) ? 0 : colorIndex + 1;
 	visualizerDrawer.gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
@@ -153,7 +153,8 @@ public class Oscilloscope {
 	// those of the previous sample. x = sample number; y = sample value
 	for (int i = 0; i < newSampleCount; i++) {
 	    x = (int) (i * bandWidth);
-	    y = halfHeight + (int) (quarterHeight * (visualizerDrawer.pLeftChannel[i] + visualizerDrawer.pRightChannel[i]));
+	    y = halfHeight
+		    + (int) (quarterHeight * (visualizerDrawer.pLeftChannel[i] + visualizerDrawer.pRightChannel[i]));
 
 	    x = Math.min(Math.max(0, x), visualizerDrawer.canvasWidth);
 	    y = Math.min(Math.max(0, y), visualizerDrawer.canvasHeight);

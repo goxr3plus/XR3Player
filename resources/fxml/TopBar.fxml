@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="39.0" prefHeight="39.0" prefWidth="789.0" style="-fx-background-color: rgb(217,9,15,0.7);" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="39.0" prefHeight="39.0" prefWidth="789.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0 0 15 0;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
@@ -22,32 +22,7 @@
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <left>
-      <HBox spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="showSideBar" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Menu">
-               <tooltip>
-                  <Tooltip text="Open Menu" />
-               </tooltip>
-               <font>
-                  <Font size="9.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="openSettings" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Settings">
-               <tooltip>
-                  <Tooltip text="Open Menu" />
-               </tooltip>
-               <font>
-                  <Font size="9.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </HBox>
+      <HBox spacing="5.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
@@ -79,17 +54,6 @@
          <children>
             <ToggleButton fx:id="goLibrariesMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="Simple" />
             <ToggleButton fx:id="goDJMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="DJ" />
-            <Button fx:id="openConsole" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Console">
-               <tooltip>
-                  <Tooltip text="Open Console Window" />
-               </tooltip>
-               <font>
-                  <Font size="9.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-font-size: 12;" text="Options">
               <items>
                 <MenuItem fx:id="checkForUpdates" mnemonicParsing="false" text="Check for Updates" />

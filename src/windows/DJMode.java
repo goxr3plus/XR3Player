@@ -31,7 +31,7 @@ public class DJMode extends GridPane {
     // public DJTabs djTabs
 
     /** The balancer. */
-    //public Balancer balancer;
+    //public Balancer balancer
 
     /** The digital clock. */
     // public DigitalClock digitalClock
@@ -65,12 +65,12 @@ public class DJMode extends GridPane {
 	Main.xPlayersList.addXPlayerController(new XPlayerController(1));
 	Main.xPlayersList.getXPlayerController(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
 	Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
-	add(Main.xPlayersList.getXPlayerController(1), 0, 0);
+	add(Main.xPlayersList.getXPlayerController(1).getFlipPanel(), 0, 0);
 
 	Main.xPlayersList.addXPlayerController(new XPlayerController(2));
 	Main.xPlayersList.getXPlayerController(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
 	Main.xPlayersList.getXPlayerController(2).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerController(2), 1, 0);
+	add(Main.xPlayersList.getXPlayerController(2).getFlipPanel(), 1, 0);
 
 	// splitPane
 	splitPane.setStyle("-fx-background-color:transparent");
@@ -120,16 +120,16 @@ public class DJMode extends GridPane {
      */
     void makeBalancer() {
 
-//	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
-//	balancer.setOnMouseDragged(drag -> {
-//	    balancer.onMouseDragged(drag);
-//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-//	});
-//
-//	balancer.setOnScroll(scroll -> {
-//	    balancer.onScroll(scroll);
-//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-//	});
+	//	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
+	//	balancer.setOnMouseDragged(drag -> {
+	//	    balancer.onMouseDragged(drag);
+	//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
+	//	});
+	//
+	//	balancer.setOnScroll(scroll -> {
+	//	    balancer.onScroll(scroll);
+	//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
+	//	});
 
     }
 
@@ -148,11 +148,13 @@ public class DJMode extends GridPane {
 
 		if (key.isShiftDown()) {
 		    if (Main.xPlayersList.getXPlayerController(1).getVolume() < 101) {
-			Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
+			Main.xPlayersList.getXPlayerController(1)
+				.setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
 		    }
 		} else if (key.isControlDown()) {
 		    if (Main.xPlayersList.getXPlayerController(2).getVolume() < 101) {
-			Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
+			Main.xPlayersList.getXPlayerController(2)
+				.setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
 		    }
 		}
 
@@ -161,11 +163,13 @@ public class DJMode extends GridPane {
 
 		if (key.isShiftDown()) {
 		    if (Main.xPlayersList.getXPlayerController(1).getVolume() > -1) {
-			Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
+			Main.xPlayersList.getXPlayerController(1)
+				.setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
 		    }
 		} else if (key.isControlDown()) {
 		    if (Main.xPlayersList.getXPlayerController(2).getVolume() > -1) {
-			Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
+			Main.xPlayersList.getXPlayerController(2)
+				.setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
 		    }
 		}
 	    }

@@ -36,14 +36,14 @@ public class TopBar extends BorderPane {
     @FXML
     private ToggleButton goLibrariesMode;
 
-    @FXML
-    private Button openSettings;
+   // @FXML
+   // private Button openSettings
 
     @FXML
     private ToggleButton goDJMode;
 
-    @FXML
-    private Button openConsole;
+   // @FXML
+    //private Button openConsole
 
     @FXML
     private MenuItem checkForUpdates;
@@ -69,8 +69,8 @@ public class TopBar extends BorderPane {
     @FXML
     private Button close;
 
-    @FXML
-    private Button showSideBar;
+   // @FXML
+    //private Button showSideBar;
 
     @FXML
     private StackPane cpuStackPane;
@@ -126,7 +126,7 @@ public class TopBar extends BorderPane {
     private void initialize() {
 
 	//openConsole
-	openConsole.setOnAction(a -> Main.consoleWindow.show());
+	//openConsole.setOnAction(a -> Main.consoleWindow.show())
 
 	//help
 	help.setOnAction(
@@ -149,7 +149,7 @@ public class TopBar extends BorderPane {
 	//cpUsage.restartUpdater()
 
 	// showSideBar
-	showSideBar.setOnAction(a -> Main.sideBar.showBar());
+	//showSideBar.setOnAction(a -> Main.sideBar.toogleBar());
 
 	// checkForUpdates
 	checkForUpdates.setOnAction(a -> Main.checkForUpdates(true));
@@ -178,7 +178,7 @@ public class TopBar extends BorderPane {
 	});
 
 	//openSettings
-	openSettings.setOnAction(a -> Main.settingsWindow.showWindow());
+	//openSettings.setOnAction(a -> Main.settingsWindow.showWindow());
 
 	// minimize
 	minimize.setOnAction(ac -> Main.window.setIconified(true));

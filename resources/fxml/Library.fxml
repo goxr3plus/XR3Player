@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXBadge?>
 <?import com.jfoenix.controls.JFXCheckBox?>
-<?import de.jensd.fx.fontawesome.Icon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
@@ -16,7 +14,7 @@
 
 <fx:root styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<ImageView fx:id="imageView" pickOnBounds="true" StackPane.alignment="CENTER">
+		<ImageView fx:id="imageView" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
 			<image>
 				<Image url="@../image/library.png" />
 			</image>
@@ -24,12 +22,12 @@
             <Rectangle2D />
          </viewport>
 		</ImageView>
-		<Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="oh damn null!" wrapText="true">
+		<Label fx:id="nameField" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="oh damn null!" wrapText="true">
 			<tooltip>
 				<Tooltip />
 			</tooltip>
 		</Label>
-		<Label fx:id="goSettings" style="-fx-background-color: rgb(255,255,255,0.8); -fx-background-radius: 10;" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+		<Label fx:id="goSettings" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 10;" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true">
 					<image>
@@ -38,7 +36,7 @@
 				</ImageView>
 			</graphic>
 		</Label>
-      <Label fx:id="warningLabel" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+      <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" visible="false" StackPane.alignment="BOTTOM_RIGHT">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -50,9 +48,15 @@
             <Tooltip text="Image is missing!" />
          </tooltip>
       </Label>
-		<JFXBadge fx:id="ratingLabel" maxHeight="20.0" maxWidth="60.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-background-radius: 45;" styleClass="icons-badge" text="0.5" StackPane.alignment="TOP_LEFT">
-			<Icon awesomeIcon="STAR" size="2em" style=";" styleClass="icon" />
-		</JFXBadge>
+      <Label fx:id="ratingLabel" alignment="CENTER" prefHeight="33.0" prefWidth="57.0" style="-fx-background-color: white; -fx-background-radius: 0 15 15 0; -fx-text-fill: black; -fx-font-size: bold; -fx-font-size: 18;" text="1" StackPane.alignment="TOP_LEFT">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/smallStar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
       <StackPane fx:id="progressBarStackPane" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
          <children>
             <ProgressBar fx:id="progressBar" progress="0.0" />

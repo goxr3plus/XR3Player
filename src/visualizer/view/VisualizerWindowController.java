@@ -29,7 +29,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -39,7 +38,6 @@ import javafx.util.Duration;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
-import visualizer.model.VisualizerModel;
 import xplayer.presenter.XPlayerController;
 
 /**
@@ -96,8 +94,7 @@ public class VisualizerWindowController extends StackPane {
     private StackPane progressBarStackPane;
 
     /**
-     * Shows the progress of the Media how much has completed from it's total
-     * duration
+     * Shows the progress of the Media how much has completed from it's total duration
      */
     @FXML
     public ProgressBar progressBar;
@@ -207,15 +204,10 @@ public class VisualizerWindowController extends StackPane {
 		else
 		    removeVisualizer();
 
-	    } else if (key.getCode() == KeyCode.RIGHT) {
-		xPlayerController.visualizer.displayMode.set(
-			(xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-				: xPlayerController.visualizer.displayMode.get() + 1);
-	    } else if (key.getCode() == KeyCode.LEFT) {
-		xPlayerController.visualizer.displayMode.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
-			? xPlayerController.visualizer.displayMode.get() - 1
-			: VisualizerModel.DISPLAYMODE_MAXIMUM);
-	    }
+	    } else if (key.getCode() == KeyCode.RIGHT)
+		xPlayerController.visualizerStackController.nextSpectrumAnalyzer();
+	    else if (key.getCode() == KeyCode.LEFT)
+		xPlayerController.visualizerStackController.previousSpectrumAnalyzer();
 	});
 
 	// ----------Drag && Drop Listeners

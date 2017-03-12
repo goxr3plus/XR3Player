@@ -81,7 +81,7 @@
                                           <RadioMenuItem mnemonicParsing="false" text="Volum Meter" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Spectrum Bars" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Rozete" toggleGroup="$visualizerTypeGroup" />
-                                          <RadioMenuItem mnemonicParsing="false" text="Rozete + Arcs" toggleGroup="$visualizerTypeGroup" />
+                                          <RadioMenuItem mnemonicParsing="false" text="Circle Lines" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Skierpinski Triangles" toggleGroup="$visualizerTypeGroup" />
                                       </items>
                                     </Menu>
@@ -104,7 +104,7 @@
                                 <items>
                                   <MenuItem mnemonicParsing="false">
                                        <graphic>
-                                          <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" min="0.1" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="transparency-slider" stylesheets="@../style/application.css" value="0.9">
+                                          <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" min="0.01" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="transparency-slider" stylesheets="@../style/application.css" value="0.9">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>

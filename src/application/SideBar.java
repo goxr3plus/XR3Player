@@ -36,55 +36,59 @@ import tools.InfoTool;
  */
 public class SideBar extends BorderPane {
 
-    /** The speech label. */
-    @FXML
-    private Label speechLabel;
-
-    /** The internet label. */
-    @FXML
-    private Label internetLabel;
-
-    /** The speech toggle. */
-    @FXML
-    private JFXToggleButton speechToggle;
-
-    /** The speech progress indicator. */
-    @FXML
-    private ProgressIndicator speechProgressIndicator;
-
-    /** The internet toggle. */
-    @FXML
-    private JFXToggleButton internetToggle;
-
-    /** The internet progress indicator. */
-    @FXML
-    private ProgressIndicator internetProgressIndicator;
-
-    @FXML
-    Label userNameLabel;
-
-    /** The xr 3 settings. */
-    @FXML
-    private MenuButton xr3Settings;
-
-    /** The import data base. */
-    @FXML
-    private MenuItem importDataBase;
-
-    /** The export data base. */
-    @FXML
-    private MenuItem exportDataBase;
-
-    /** The delete data base. */
-    @FXML
-    private MenuItem deleteDataBase;
-
-    /** The hide side bar. */
     @FXML
     private JFXButton hideSideBar;
 
     @FXML
+    private Label speechLabel;
+
+    @FXML
+    private Label internetLabel;
+
+    @FXML
+    private JFXToggleButton speechToggle;
+
+    @FXML
+    private ProgressIndicator speechProgressIndicator;
+
+    @FXML
+    private JFXToggleButton internetToggle;
+
+    @FXML
+    private ProgressIndicator internetProgressIndicator;
+
+    @FXML
     private ImageView userImageView;
+
+    @FXML
+    Label userNameLabel;
+
+    @FXML
+    private MenuButton xr3Settings;
+
+    @FXML
+    private MenuItem importDataBase;
+
+    @FXML
+    private MenuItem exportDataBase;
+
+    @FXML
+    private MenuItem deleteDataBase;
+
+    @FXML
+    private JFXButton homeScreen;
+
+    @FXML
+    private JFXButton userSettings;
+
+    @FXML
+    private JFXButton applicationSettings;
+
+    @FXML
+    private JFXButton applicationConsole;
+
+    @FXML
+    private JFXButton snapshot;
 
     // -------------------------------------------------------------
 
@@ -154,6 +158,16 @@ public class SideBar extends BorderPane {
     }
 
     /**
+     * Shows/Hides Side Bar
+     */
+    public void toogleBar() {
+	if (this.getTranslateX() == -this.getPrefWidth())
+	    showBar();
+	else
+	    hideBar();
+    }
+
+    /**
      * Called as soon as .fxml is initialized
      */
     @FXML
@@ -164,10 +178,24 @@ public class SideBar extends BorderPane {
 	tTrans.setFromX(-this.getPrefWidth());
 	tTrans.setToX(0);
 
-	this.setTranslateX(-this.getPrefWidth());
+	//this.setTranslateX(-this.getPrefWidth())
+	//showBar()
 
 	// closeSideBar
-	hideSideBar.setOnAction(a -> hideBar());
+	hideSideBar.setOnAction(a -> toogleBar());
+
+	//applicationSettings
+	applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow());
+
+	//applicationConsole
+	applicationConsole.setOnAction(a -> Main.consoleWindow.show());
+
+	//snapShot
+	snapshot.setOnAction(a -> {
+	    ActionTool.showAlert("Snapshot Window", "Read the below.",
+		    "This is a prototype , and it will be improved on the next updates. \n\n----------------------------Helpful Info----------------------------\nA window will appear , you have to drag your mouse to select an area of the screen, \n Press : [ ESCAPE OR BACKSPACE ] to exit \n Press : [ ENTER OR SPACE ] to capture the selected area.");
+	    Main.snapShotWindow.prepareForCapture();
+	});
 
 	// Clip
 	Rectangle rect = new Rectangle();

@@ -32,7 +32,7 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="Close" />
+            <Tooltip text="Cancel" />
          </tooltip>
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -98,7 +98,7 @@ public class LoginMode extends BorderPane {
 	    Main.renameWindow.showingProperty().removeListener(this);
 
 	    // !Showing && !XPressed
-	    if (!Main.renameWindow.isShowing() && !Main.renameWindow.isXPressed()) {
+	    if (!Main.renameWindow.isShowing() && Main.renameWindow.wasAccepted()) {
 
 		Main.window.requestFocus();
 
@@ -167,13 +167,18 @@ public class LoginMode extends BorderPane {
 	//deleteUser
 	deleteUser.disableProperty().bind(newUser.visibleProperty());
 	deleteUser.setOnAction(a -> {
-	    //Try to delete it
-	    if (ActionTool.deleteFile(new File(
-		    InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
-		userViewer.deleteUser(userViewer.getSelectedItem());
-	    else
-		ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2),
-			NotificationType.ERROR);
+	    //Ask
+	    if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ "
+		    + userViewer.getSelectedItem().getUserName() + " ]")) {
+
+		//Try to delete it
+		if (ActionTool.deleteFile(new File(
+			InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
+		    userViewer.deleteUser(userViewer.getSelectedItem());
+		else
+		    ActionTool.showNotification("Error", "An error occured trying to delete the user",
+			    Duration.seconds(2), NotificationType.ERROR);
+	    }
 	});
 
 	//exitButton

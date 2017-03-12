@@ -18,11 +18,13 @@ import application.Main;
 import customnodes.Marquee;
 import disc.DJDisc;
 import disc.DJDiscListener;
+import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -265,6 +267,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
     }
 
+    FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
+
     /** Called as soon as the .fxml has been loaded */
     @FXML
     private void initialize() {
@@ -288,8 +292,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	container.setOnDragDropped(drop -> dragDrop(drop, 2));
 
 	// settingsToggle
-	getChildren().add(xPlayerSettingsController);
-	xPlayerSettingsController.visibleProperty().bind(settingsToggle.selectedProperty());
+	//getChildren().add(xPlayerSettingsController);
+	//xPlayerSettingsController.visibleProperty().bind(settingsToggle.selectedProperty());
 
 	// fxRegion,fxSpinner
 	fxRegion.setVisible(false);
@@ -330,6 +334,26 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    // }
 	});
 
+	//flipPane
+	flipPane.setFlipTime(150);
+	flipPane.getFront().getChildren().addAll(this);
+	flipPane.getBack().getChildren().addAll(xPlayerSettingsController);
+	
+	settingsToggle.selectedProperty().addListener((observable,oldValue,newValue)->{
+	    if(newValue) // true?
+		flipPane.flipToBack();
+	    else
+		flipPane.flipToFront();
+	});
+
+	
+    }
+
+    /**
+     * @return The FlipPanel
+     */
+    public FlipPanel getFlipPanel() {
+	return flipPane;
     }
 
     /**

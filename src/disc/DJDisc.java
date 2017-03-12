@@ -26,6 +26,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import tools.InfoTool;
@@ -124,6 +125,8 @@ public class DJDisc extends StackPane {
 	// StackPane
 	canvas.setPickOnBounds(false);
 	canvas.setCursor(Cursor.OPEN_HAND);
+	canvas.setPickOnBounds(false);
+	super.setPickOnBounds(false);
 	//setStyle("-fx-background-color:green;")
 
 	this.arcColor = arcColor;
@@ -133,6 +136,7 @@ public class DJDisc extends StackPane {
 	replaceImage(null);
 
 	// timeField
+	timeField.setTextAlignment(TextAlignment.CENTER);
 	timeField.setStyle(
 		"-fx-background-color:white; -fx-padding:-2 8 -2 8; -fx-background-radius: 15; -fx-font-weight:bold; -fx-font-size:15; -fx-text-fill:black; -fx-cursor:hand;");
 	timeField.setOnMouseClicked(c -> {
@@ -441,6 +445,9 @@ public class DJDisc extends StackPane {
 	    this.time = time + "." + (9 - Integer.parseInt(milliseconds.replace(".", "")));
 	else
 	    this.time = time + milliseconds;
+	
+	//Final 
+	//this.time = time + "\n," + InfoTool.getTimeEdited(total);
     }
 
     /**
@@ -542,7 +549,7 @@ public class DJDisc extends StackPane {
 	    else {
 		angle = (int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, getHeight() / 2 - mouseY));
 		angle = -(360 - angle); // make it minus cause i turn it
-					// on the right
+				       // on the right
 	    }
 
 	    // System.out.println(-angle)
