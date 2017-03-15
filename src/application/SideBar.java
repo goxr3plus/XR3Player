@@ -64,7 +64,10 @@ public class SideBar extends BorderPane {
     Label userNameLabel;
 
     @FXML
-    private MenuButton xr3Settings;
+    private JFXButton goMainMode;
+
+    @FXML
+    private JFXButton goUserMode;
 
     @FXML
     private MenuItem importDataBase;
@@ -74,9 +77,6 @@ public class SideBar extends BorderPane {
 
     @FXML
     private MenuItem deleteDataBase;
-
-    @FXML
-    private JFXButton homeScreen;
 
     @FXML
     private JFXButton userSettings;
@@ -106,7 +106,7 @@ public class SideBar extends BorderPane {
      */
     public SideBar() {
 
-	// ------------------------------------FXMLLOADER
+	// ------------------------------------FXMLLOADER ----------------------------------------
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SideBar.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
@@ -167,6 +167,26 @@ public class SideBar extends BorderPane {
 	    hideBar();
     }
 
+    String style = "-fx-background-radius: 15 0 0 15; -fx-background-color:black; -fx-border-width:0 4 0 0;";
+
+    /**
+     * Goes to MainMode
+     */
+    public void goMainMode() {
+	Main.rootFlipPane.flipToFront();
+	goMainMode.setStyle("-fx-border-color:firebrick; " + style);
+	goUserMode.setStyle("-fx-border-color:transparent; " + style);
+    }
+
+    /**
+     * Goes to UserMode
+     */
+    public void goUserMode() {
+	Main.rootFlipPane.flipToBack();
+	goMainMode.setStyle("-fx-border-color:transparent; " + style);
+	goUserMode.setStyle("-fx-border-color:firebrick; " + style);
+    }
+
     /**
      * Called as soon as .fxml is initialized
      */
@@ -180,6 +200,12 @@ public class SideBar extends BorderPane {
 
 	//this.setTranslateX(-this.getPrefWidth())
 	//showBar()
+
+	//goMainMode
+	goMainMode.setOnAction(a -> goMainMode());
+
+	//goUserMode
+	goUserMode.setOnAction(a -> goUserMode());
 
 	// closeSideBar
 	hideSideBar.setOnAction(a -> toogleBar());
@@ -215,25 +241,12 @@ public class SideBar extends BorderPane {
 
 		File file = Main.specialChooser.prepareToImportDataBase(Main.window);
 		if (file != null) {
-		    if ("XR3DataBase.zip".equals(file.getName())) {
+		    // Change the Scene View
+		    Main.updateScreen.setVisible(true);
+		    Main.updateScreen.progressBar.progressProperty().bind(Main.dbManager.unZipper.progressProperty());
 
-			// Close all the connections with database
-			Main.dbManager.manageConnection(Operation.CLOSE);
-
-			// Delete the previous database
-			ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
-
-			// Change the Scene View
-			Main.updateScreen.setVisible(true);
-			Main.updateScreen.progressBar.progressProperty()
-				.bind(Main.dbManager.unZipper.progressProperty());
-
-			// Import the new database
-			Main.dbManager.unZipper.importDataBase(file.getAbsolutePath());
-
-		    } else
-			Notifications.create().title("Information").text("Please select the XR3DataBase.zip")
-				.darkStyle().showWarning();
+		    // Import the new database
+		    Main.dbManager.unZipper.importDataBase(file.getAbsolutePath());
 		}
 	    }
 	});
@@ -251,8 +264,7 @@ public class SideBar extends BorderPane {
 		    Main.updateScreen.progressBar.progressProperty().bind(Main.dbManager.zipper.progressProperty());
 
 		    // Export the database
-		    Main.dbManager.zipper.exportDataBase(file.getParent() + File.separator + "XR3DataBase.zip",
-			    InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
+		    Main.dbManager.zipper.exportDataBase(file.getAbsolutePath(), InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
 		}
 	    }
 	});

@@ -6,6 +6,7 @@ package application;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import customnodes.CPUsage;
 import javafx.beans.binding.Bindings;
@@ -82,6 +83,10 @@ public class TopBar extends BorderPane {
     private Label xr3Label;
 
     // ----------------------
+    
+
+    /** The logger. */
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     CPUsage cpUsage = new CPUsage();
 
@@ -115,7 +120,7 @@ public class TopBar extends BorderPane {
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	    logger.log(Level.WARNING, "", ex);
 	}
     }
 
@@ -197,7 +202,8 @@ public class TopBar extends BorderPane {
 		Main.djMode.getSplitPane().getItems().removeAll(Main.treeManager, Main.multipleTabs);
 		Main.djMode.getSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
 		Main.djMode.setDividerPositions();
-		Main.root.setCenter(Main.djMode);
+		//Main.root.setCenter(Main.djMode);
+		Main.mainModeFlipPane.flipToBack();
 
 		// Update window Mode
 		windowMode = WindowMode.DJMODE;
@@ -215,7 +221,8 @@ public class TopBar extends BorderPane {
 
 		Main.djMode.updateDividerArray();
 		Main.libraryMode.add(Main.multipleTabs, 0, 1);
-		Main.root.setCenter(Main.libraryMode);
+		//Main.root.setCenter(Main.libraryMode);
+		Main.mainModeFlipPane.flipToFront();
 
 		// Update window Mode
 		windowMode = WindowMode.LIBRARYMODE;

@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -16,7 +15,7 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <TabPane style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane side="RIGHT" style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab closable="false" text="Settings">
                      <content>
@@ -65,10 +64,6 @@
                   </Tab>
                </tabs>
             </TabPane>
-            <Button fx:id="closeSettings" mnemonicParsing="false" text="X" translateX="-2.0" StackPane.alignment="TOP_RIGHT">
-               <tooltip>
-                  <Tooltip text="Close the Settings [!Tip -&gt; You can also press &gt;ESCAPE&lt; KEY]" />
-               </tooltip></Button>
          </children>
       </StackPane>
    </center>

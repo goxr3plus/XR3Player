@@ -65,12 +65,12 @@ public class DJMode extends GridPane {
 	Main.xPlayersList.addXPlayerController(new XPlayerController(1));
 	Main.xPlayersList.getXPlayerController(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
 	Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
-	add(Main.xPlayersList.getXPlayerController(1).getFlipPanel(), 0, 0);
+	add(Main.xPlayersList.getXPlayerController(1), 0, 0);
 
 	Main.xPlayersList.addXPlayerController(new XPlayerController(2));
 	Main.xPlayersList.getXPlayerController(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
 	Main.xPlayersList.getXPlayerController(2).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerController(2).getFlipPanel(), 1, 0);
+	add(Main.xPlayersList.getXPlayerController(2), 1, 0);
 
 	// splitPane
 	splitPane.setStyle("-fx-background-color:transparent");

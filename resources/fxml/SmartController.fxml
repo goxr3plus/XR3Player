@@ -41,7 +41,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                            <children>
                               <MenuButton fx:id="settingsButton" mnemonicParsing="false">
                                  <items>
@@ -121,7 +121,7 @@
          <center>
             <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" StackPane.alignment="CENTER_LEFT">
+                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton" translateX="-85.0" StackPane.alignment="CENTER">
                      <tooltip>
                         <Tooltip text="Previous" />
                      </tooltip>
@@ -136,7 +136,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" StackPane.alignment="CENTER_RIGHT">
+                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton" translateX="85.0" StackPane.alignment="CENTER">
                      <StackPane.margin>
                         <Insets right="15.0" />
                      </StackPane.margin>
@@ -166,8 +166,8 @@
             </StackPane>
          </center>
       </BorderPane>
-      <Region fx:id="region" />
-      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0">
+      <Region fx:id="region" visible="false" />
+      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" visible="false">
          <children>
             <ProgressBar fx:id="indicator" maxHeight="12.0" minHeight="12.0" prefHeight="12.0" prefWidth="112.0" progress="0.0" VBox.vgrow="NEVER" />
             <Button fx:id="cancel" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" text="Cancel">

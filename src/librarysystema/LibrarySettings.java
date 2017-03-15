@@ -156,7 +156,7 @@ public class LibrarySettings extends GridPane {
 	// GlyphsDude.setIcon(totalItems, FontAwesomeIcon.CLOUD, "1.5em")
 
 	// starsLabel
-	starsLabel.setOnMouseReleased(m -> library.updateLibraryStars());
+	starsLabel.setOnMouseReleased(m -> library.updateLibraryStars(library));
 
 	// totalCharsLabel
 	totalCharsLabel.textProperty().bind(commentsArea.textProperty().length().asString());

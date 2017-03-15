@@ -21,7 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,12 +31,8 @@ import tools.InfoTool;
 /**
  * The Class RenameWindow.
  */
-public class RenameWindow extends HBox {
+public class RenameWindow extends VBox {
 
-    /**
-     * The field inside the user writes the text
-     */
-    public TextField inputField = TextFields.createClearableTextField();
 
     @FXML
     private Label charsField;
@@ -46,7 +42,24 @@ public class RenameWindow extends HBox {
 
     @FXML
     private Button closeButton;
+
     // ----------------
+
+    /**
+     * The field inside the user writes the text
+     */
+    public TextField inputField = TextFields.createClearableTextField();
+
+    // Custom Event Handler
+    EventHandler<ActionEvent> myHandler = e -> {
+
+	// can pass?
+	if (!inputField.getText().trim().isEmpty())
+	    close(true);
+	else
+	    Notifications.create().text("You have to type something..").showWarning();
+
+    };
 
     /**
      * 
@@ -66,7 +79,10 @@ public class RenameWindow extends HBox {
 
 	// Window
 	window.setTitle("Rename Window");
-	window.setWidth(435);
+	window.setMinHeight(100);
+	window.setMinWidth(300);
+	window.setWidth(440);
+	window.setHeight(80);
 	window.initModality(Modality.APPLICATION_MODAL);
 	window.initStyle(StageStyle.TRANSPARENT);
 	window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
@@ -87,8 +103,8 @@ public class RenameWindow extends HBox {
 
 	// ----------------------------------Scene
 	window.setScene(new Scene(this, Color.TRANSPARENT));
-	getScene().getStylesheets()
-		.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+	//getScene().getStylesheets()
+	//	.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm())
 	getScene().setOnKeyReleased(key -> {
 	    if (key.getCode() == KeyCode.ESCAPE)
 		close(false);
@@ -106,14 +122,16 @@ public class RenameWindow extends HBox {
 	charsField.textProperty().bind(inputField.textProperty().length().asString());
 
 	// inputField
-	inputField.setPrefSize(290, 32);
+	getChildren().add(inputField);	
+	inputField.setMinSize(420, 32);
 	inputField.setTooltip(
 		new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
 	inputField.setPromptText("Type Here...");
 	inputField.setStyle("-fx-font-weight:bold; -fx-font-size:14;");
-
+	//inputField.setPrefColumnCount(200)
+	//inputField.prefColumnCountProperty().bind(inputField.textProperty().length().add(1));
 	inputField.textProperty().addListener((observable, oldValue, newValue) -> {
-
+	    //Check newValue
 	    if (newValue != null) {
 
 		// Allow until 150 characters
@@ -126,19 +144,12 @@ public class RenameWindow extends HBox {
 			inputField.setText(newValue.replace(character, ""));
 	    }
 	});
-
-	// Custom Event Handler
-	EventHandler<ActionEvent> myHandler = e -> {
-
-	    // can pass?
-	    if (!inputField.getText().trim().isEmpty())
-		close(true);
-	    else
-		Notifications.create().text("You have to type something..").showWarning();
-
-	};
+	//---prefColumnCountProperty
+//	inputField.prefColumnCountProperty().addListener((observable, oldValue, newValue) -> {
+//	    if (inputField.getWidth() < 450)
+//		window.setWidth(inputField.getWidth() + 50);
+//	});
 	inputField.setOnAction(myHandler);
-	getChildren().add(0, inputField);
 
 	// okButton
 	okButton.setOnAction(myHandler);
@@ -146,6 +157,7 @@ public class RenameWindow extends HBox {
 	// closeButton
 	closeButton.setOnAction(action -> close(false));
 
+	//window.show();
     }
 
     /**
@@ -222,9 +234,12 @@ public class RenameWindow extends HBox {
 	}
 
 	inputField.setText(text);
-	inputField.end();
 	accepted = true;
 	window.show();
+	
+	//	
+	inputField.requestFocus();
+	inputField.end();
     }
 
     /**

@@ -525,7 +525,7 @@ public final class InfoTool {
     private static int fileDuration(File file) {
 
 	// exists?
-	if (file.exists()) {
+	if (file.exists() && file.length() != 0) {
 
 	    // extension?
 	    String extension = InfoTool.getFileExtension(file.getName());

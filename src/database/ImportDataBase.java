@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -18,6 +19,9 @@ import application.Main;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.util.Duration;
+import smartcontroller.Operation;
+import tools.ActionTool;
 import tools.InfoTool;
 
 /**
@@ -27,146 +31,217 @@ import tools.InfoTool;
  *
  */
 public class ImportDataBase extends Service<Boolean> {
-	
-	/** The input zip. */
-	String inputZip;
-	
-	/** The out put folder. */
-	String outPutFolder = InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN;
-	
-	/** The zip. */
-	ZipFile zip;
-	
-	/** The success. */
-	Notifications success = Notifications.create().title("Mission Completed")
-	        .text("Successfully imported the database!");
-	
-	/** The fail. */
-	Notifications fail = Notifications.create().title("Mission Failed").text("Failed to import the database!");
-	
-	/** The exception. */
-	String exception;
-	
-	/**
-	 * Constructor.
-	 */
-	public ImportDataBase() {
-		
-		setOnSucceeded(s -> {
-			// done()
-			Main.canSaveData = false;
-			
-			// Check the Value
-			if (getValue())
-				success.showInformation();
-			else
-				fail.text(exception).showError();
-			
-			// Restart XR3Player
-			Main.updateScreen.progressBar.progressProperty().unbind();
-			Main.updateScreen.progressBar.setProgress(-1);
-			Main.updateScreen.label.setText("Restarting....");
-			Main.restartTheApplication(false);
-			
-		});
-		
-		setOnFailed(failed -> {
-			done();
-			fail.showError();
-		});
-		
-		setOnCancelled(c -> {
-			done();
-			fail.showError();
-			
-		});
-	}
-	
-	/**
-	 * Done.
-	 */
-	private void done() {
-		Main.updateScreen.setVisible(false);
+
+    /** The input zip. */
+    String inputZip;
+
+    /** The out put folder. */
+    String outPutFolder = InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN;
+
+    /** The zip. */
+    ZipFile zip;
+
+    /** The success. */
+    Notifications success = Notifications.create().title("Mission Completed")
+	    .text("Successfully imported the database!");
+
+    /** The fail. */
+    Notifications fail = Notifications.create().title("Mission Failed").text("Failed to import the database!")
+	    .hideAfter(Duration.seconds(15));
+
+    /** The exception. */
+    String exception;
+
+    /**
+     * Constructor.
+     */
+    public ImportDataBase() {
+
+	setOnSucceeded(s -> {
+	    // done()
+	    Main.canSaveData = false;
+
+	    // Check the Value
+	    if (getValue()) {
+		success.showInformation();
+
+		// Restart XR3Player
 		Main.updateScreen.progressBar.progressProperty().unbind();
-	}
-	
-	/**
-	 * Import the database from the zip folder.
-	 *
-	 * @param zipFolder the zip folder
-	 */
-	public void importDataBase(String zipFolder) {
-		inputZip = zipFolder;
-		reset();
-		restart();
-	}
-	
-	/* (non-Javadoc)
-	 * @see javafx.concurrent.Service#createTask() */
-	@Override
-	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
-			@Override
-			protected Boolean call() throws Exception {
-				
-				byte[] buffer = new byte[1024];
-				
-				try {
-					
-					// create output directory is not exists
-					File folder = new File(outPutFolder);
-					if (!folder.exists())
-						folder.mkdir();
-					
-					// get the zip file content
-					ZipInputStream zis = new ZipInputStream(new FileInputStream(inputZip));
-					// get the zipped file list entry
-					ZipEntry ze = zis.getNextEntry();
-					
-					// Count entries
-					zip = new ZipFile(inputZip);
-					double counter = 0;
-					double total = zip.size();
-					
-					// Start
-					while (ze != null) {
-						
-						String fileName = ze.getName();
-						File newFile = new File(outPutFolder + File.separator + fileName);
-						
-						// Refresh the dataLabel text
-						Platform.runLater(() -> Main.updateScreen.label.setText("In:" + newFile.getName()));
-						
-						// create all non exists folders
-						// else you will hit FileNotFoundException for
-						// compressed folder
-						new File(newFile.getParent()).mkdirs();
-						
-						FileOutputStream fos = new FileOutputStream(newFile);
-						
-						// Copy byte by byte
-						int len;
-						while ( ( len = zis.read(buffer) ) > 0)
-							fos.write(buffer, 0, len);
-						
-						fos.close();
-						ze = zis.getNextEntry();
-						updateProgress(++counter / total, 1);
-					}
-					
-					zis.closeEntry();
-					zis.close();
-					zip.close();
-					
-				} catch (IOException ex) {
-					exception = ex.getMessage();
-					Main.logger.log(Level.WARNING, "", ex);
-					return false;
-				}
-				
-				return true;
+		Main.updateScreen.progressBar.setProgress(-1);
+		Main.updateScreen.label.setText("Restarting....");
+		Main.restartTheApplication(false);
+	    } else {
+		fail.text(exception).showError();
+		done();
+	    }
+
+	});
+
+	setOnFailed(failed -> {
+	    done();
+	    fail.showError();
+	});
+
+	setOnCancelled(c -> {
+	    done();
+	    fail.showError();
+
+	});
+    }
+
+    /**
+     * Done.
+     */
+    private void done() {
+	Main.updateScreen.setVisible(false);
+	Main.updateScreen.progressBar.progressProperty().unbind();
+    }
+
+    /**
+     * Import the database from the zip folder.
+     *
+     * @param zipFolder
+     *            the zip folder
+     */
+    public void importDataBase(String zipFolder) {
+	inputZip = zipFolder;
+	reset();
+	restart();
+    }
+
+    /* (non-Javadoc)
+     * @see javafx.concurrent.Service#createTask() */
+    @Override
+    protected Task<Boolean> createTask() {
+	return new Task<Boolean>() {
+	    @Override
+	    protected Boolean call() throws Exception {
+
+		//Previous versions < Update 56 of XR3Player will be broken after this update :( future is future
+
+		//----------------------Search for the signature file-------------------------------		
+		try (ZipFile zis = new ZipFile(inputZip)) {
+
+		    //signature file
+		    String signatureFile = Main.dbManager.signatureFile.getName();
+
+		    //get all entries                      
+		    Enumeration<? extends ZipEntry> e = zis.entries();
+		    boolean found = false;
+
+		    System.out.println("Trying to search [" + signatureFile + "] in ->" + zis.getName());
+
+		    //Search every entry inside the zip folder
+		    while (e.hasMoreElements()) {
+			ZipEntry entry = e.nextElement();
+
+			/*
+			 * Here, normal compare would not work.
+			 *
+			 * Because zip might contain directories so the entry name will not
+			 * match extactly with the file name we want to search.
+			 *
+			 * Additionally, there might be more than one file with the same
+			 * name in different directories inside the zip archive.
+			 *
+			 * So approch here is to search using indexOf and not using
+			 * equals or equalsIgnoreCase methods.
+			 */
+			//System.out.println(entry.getName())
+			if (entry.getName().indexOf(signatureFile) != -1) {
+			    found = true;
+			    // System.out.println("Found " + entry.getName())
+
+			    /*
+			     * if you want to search only first instance, uncomment the
+			     * following break statement.
+			     */
+
+			    break;
 			}
-			
-		};
-	}
+		    }
+
+		    //Found it?
+		    if (!found) {
+			exception = "Can't find the signature file [ " + signatureFile
+				+ " ]  inside the given .zip folder\n After Update .56 every XR3Player database contains the above file.";
+			return false;
+		    }
+
+		} catch (IOException ex) {
+		    exception = ex.getMessage();
+		    Main.logger.log(Level.WARNING, "", ex);
+		    return false;
+		}
+
+		//----------------------Found the signature file so we can procceeed-------------------------------
+
+		// Close all the connections with database
+		Main.dbManager.manageConnection(Operation.CLOSE);
+
+		// Delete the previous database
+		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
+
+		//---------------------Move on Importing the Database-----------------------------------------------
+
+		// get the zip file content
+		try (ZipInputStream zis = new ZipInputStream(new FileInputStream(inputZip))) {
+
+		    // create output directory is not exists
+		    File folder = new File(outPutFolder);
+		    if (!folder.exists())
+			folder.mkdir();
+
+		    // get the zipped file list entry
+		    ZipEntry ze = zis.getNextEntry();
+
+		    // Count entries
+		    zip = new ZipFile(inputZip);
+		    double counter = 0;
+		    double total = zip.size();
+
+		    //the buffer
+		    byte[] buffer = new byte[1024];
+
+		    // Start
+		    while (ze != null) {
+
+			String fileName = ze.getName();
+			File newFile = new File(outPutFolder + File.separator + fileName);
+
+			// Refresh the dataLabel text
+			Platform.runLater(() -> Main.updateScreen.label.setText("In:" + newFile.getName()));
+
+			// create all non exists folders
+			// else you will hit FileNotFoundException for
+			// compressed folder
+			new File(newFile.getParent()).mkdirs();
+
+			FileOutputStream fos = new FileOutputStream(newFile);
+
+			// Copy byte by byte
+			int len;
+			while ((len = zis.read(buffer)) > 0)
+			    fos.write(buffer, 0, len);
+
+			fos.close();
+			ze = zis.getNextEntry();
+			updateProgress(++counter / total, 1);
+		    }
+
+		    zis.closeEntry();
+		    zis.close();
+		    zip.close();
+
+		} catch (IOException ex) {
+		    exception = ex.getMessage();
+		    Main.logger.log(Level.WARNING, "", ex);
+		    return false;
+		}
+
+		return true;
+	    }
+
+	};
+    }
 }

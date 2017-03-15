@@ -18,6 +18,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
@@ -111,11 +112,9 @@ public abstract class Media {
      * @param timesPlayed
      *            The times the Media has been played
      * @param dateImported
-     *            The date the Media was imported <b> if null given then the
-     *            imported time will be the current date </b>
+     *            The date the Media was imported <b> if null given then the imported time will be the current date </b>
      * @param hourImported
-     *            The hour the Media was imported <b> if null given then the
-     *            imported hour will be the current time </b>
+     *            The hour the Media was imported <b> if null given then the imported hour will be the current time </b>
      * @param genre
      *            The genre of the Media <b> see the Genre class for more </b>
      */
@@ -169,8 +168,7 @@ public abstract class Media {
     }
 
     /**
-     * Finds the correct image to display for the Media based on if it is
-     * CORRUPTED OR MISSING OR OK OR COMBINATION OF THEM
+     * Finds the correct image to display for the Media based on if it is CORRUPTED OR MISSING OR OK OR COMBINATION OF THEM
      */
     private void determineTheImage() {
 	if (InfoTool.isAudioSupported(filePath.get())) {// AUDIO?
@@ -335,8 +333,7 @@ public abstract class Media {
     // METHODS----------------------------------------------------------------------
 
     /**
-     * Prepares the delete operation when more than one Media files will be
-     * deleted.
+     * Prepares the delete operation when more than one Media files will be deleted.
      *
      * @param permanent
      *            <br>
@@ -435,8 +432,10 @@ public abstract class Media {
      *
      * @param controller
      *            the controller
+     * @param node
+     *            The node based on which the Rename Window will be position
      */
-    public void rename(SmartController controller) {
+    public void rename(SmartController controller, Node node) {
 
 	// If !Controller is Locked
 	if (controller.isFree(true)) {
@@ -446,7 +445,7 @@ public abstract class Media {
 
 	    // Open Window
 	    String extension = "." + InfoTool.getFileExtension(getFilePath());
-	    Main.renameWindow.show(getTitle(), controller.tableViewer);
+	    Main.renameWindow.show(getTitle(), node);
 
 	    // Bind
 	    title.bind(Main.renameWindow.inputField.textProperty());
@@ -534,7 +533,7 @@ public abstract class Media {
 					Duration.millis(1500), NotificationType.ERROR);
 			    }
 			} else // X is pressed by user || // Old name == New
-			       // name
+			      // name
 			    setFilePath(filePath.get());
 
 			// Security Variable
@@ -551,11 +550,13 @@ public abstract class Media {
      *
      * @param controller
      *            the controller
+     * @param node
+     *            The node based on which the Rename Window will be position
      */
-    public void updateStars(SmartController controller) {
+    public void updateStars(SmartController controller, Node node) {
 
 	// Show the Window
-	Main.starWindow.show(stars.get(), controller.tableViewer);
+	Main.starWindow.show(stars.get(), node);
 
 	// Keep in memory stars ...
 	final double previousStars = stars.get();
@@ -781,8 +782,7 @@ public abstract class Media {
     // ----------------------------------------------------------------------
 
     /**
-     * This method is used during drag so the drag view has an image
-     * representing the album image of the media.
+     * This method is used during drag so the drag view has an image representing the album image of the media.
      *
      * @param db
      *            the new drag view

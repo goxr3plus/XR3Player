@@ -68,16 +68,19 @@ public class LoginMode extends BorderPane {
     private Button loginButton;
 
     @FXML
+    private Button renameUser;
+
+    @FXML
     private Button deleteUser;
 
     @FXML
     private Button exitButton;
 
     @FXML
-    public Label xr3PlayerLabel;
+    private Label createdByLabel;
 
     @FXML
-    private Label createdByLabel;
+    public Label xr3PlayerLabel;
 
     // --------------------------------------------
 
@@ -89,7 +92,7 @@ public class LoginMode extends BorderPane {
      */
     public UsersViewer userViewer = new UsersViewer();
 
-    /** This variable is used during the creation of a new user. */
+    /** This InvalidationListener is used during the creation of a new user. */
     private final InvalidationListener creationInvalidator = new InvalidationListener() {
 	@Override
 	public void invalidated(Observable observable) {
@@ -163,6 +166,10 @@ public class LoginMode extends BorderPane {
 	//loginButton
 	loginButton.setOnAction(a -> Main.startAppWithUser(userViewer.getSelectedItem()));
 	loginButton.disableProperty().bind(deleteUser.disabledProperty());
+
+	//renameUser
+	renameUser.disableProperty().bind(deleteUser.disabledProperty());
+	renameUser.setOnAction(a -> userViewer.getSelectedItem().renameUser(userViewer.getSelectedItem().imageView));
 
 	//deleteUser
 	deleteUser.disableProperty().bind(newUser.visibleProperty());

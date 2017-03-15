@@ -62,7 +62,7 @@ public class LibraryContextMenu extends ContextMenu {
 
 	close.setOnAction(c -> library.libraryOpenClose(false, false));
 
-	rename.setOnAction(ac -> library.renameLibrary());
+	rename.setOnAction(ac -> library.renameLibrary(library));
 
 	localImage.setOnAction(ac -> library.setNewImage());
 

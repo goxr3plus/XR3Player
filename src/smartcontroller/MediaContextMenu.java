@@ -8,6 +8,7 @@ import java.net.URLEncoder;
 
 import application.Main;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -23,6 +24,11 @@ import tools.InfoTool;
  * @author GOXR3PLUS
  */
 public class MediaContextMenu extends ContextMenu {
+
+    /**
+     * The node based on which the Rename or Star Window will be position
+     */
+    private Node node;
 
     /** The media. */
     private Media media;
@@ -121,7 +127,7 @@ public class MediaContextMenu extends ContextMenu {
 		rename, simpleDelete, storageDelete, new TitleMenuItem("Organize"), copy);
 
 	//---play
-	
+
 	players.getItems().addAll(player0, player1, player2);
 	players.getItems().forEach(item -> item.setOnAction(this::onAction));
 
@@ -168,7 +174,7 @@ public class MediaContextMenu extends ContextMenu {
      * @param controller
      *            the controller
      */
-    public void showContextMenu(Media media, Genre genre, double d, double e, SmartController controller) {
+    public void showContextMenu(Media media, Genre genre, double d, double e, SmartController controller, Node node) {
 
 	// Don't waste resources
 	if (previousGenre != genre) {
@@ -205,6 +211,7 @@ public class MediaContextMenu extends ContextMenu {
 	    }
 	}
 
+	this.node = node;
 	this.media = media;
 	this.controller = controller;
 
@@ -271,11 +278,11 @@ public class MediaContextMenu extends ContextMenu {
 
 	// rename
 	else if (action.getSource() == rename)
-	    media.rename(controller);
+	    media.rename(controller, node);
 	else if (action.getSource() == information) { // information
 	    // showPopOver(media);
 	} else if (action.getSource() == stars)
-	    media.updateStars(controller);
+	    media.updateStars(controller,node);
 	else if (action.getSource() == sourceFolder) // File path
 	    ActionTool.openFileLocation(media.getFilePath());
 	else if (action.getSource() == copy) // copyTo

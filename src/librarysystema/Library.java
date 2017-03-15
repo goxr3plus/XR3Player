@@ -23,18 +23,25 @@ import javafx.beans.property.BooleanPropertyBase;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.Genre;
@@ -54,19 +61,19 @@ public class Library extends StackPane {
     ImageView imageView;
 
     @FXML
-    private Label nameField;
+    private Label nameLabel;
 
-    @FXML
-    private Label goSettings;
-
-    /**
-     * Warning if the Library Image is missing
-     */
     @FXML
     private Label warningLabel;
 
     @FXML
     private Label ratingLabel;
+
+    @FXML
+    private Label settingsLabel;
+
+    @FXML
+    private Label descriptionLabel;
 
     @FXML
     private StackPane progressBarStackPane;
@@ -114,7 +121,7 @@ public class Library extends StackPane {
     private String timeCreated = "";
 
     /** The description. */
-    private String description = "";
+    private StringProperty description;
 
     /**
      * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
@@ -208,7 +215,7 @@ public class Library extends StackPane {
 		try {
 
 		    // Remove Bindings
-		    nameField.textProperty().unbind();
+		    nameLabel.textProperty().unbind();
 
 		    // !XPressed && Old name !=newName
 		    if (Main.renameWindow.wasAccepted() && !libraryName.equals(newName)) {
@@ -230,7 +237,7 @@ public class Library extends StackPane {
 
 			    // set the new name
 			    setLibraryName(newName);
-			    nameField.getTooltip().setText(newName);
+			    nameLabel.getTooltip().setText(newName);
 
 			    // Rename the image of library
 			    if (imageName != null)
@@ -258,7 +265,7 @@ public class Library extends StackPane {
 
 		    // Rename Tab + Unbind Tab textProperty
 		    if (isLibraryOpened()) {
-			if (!Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
+			if (Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
 			    Main.libraryMode.multipleLibs.renameTab(oldName, getLibraryName());
 
 			Main.libraryMode.multipleLibs.getTab(getLibraryName()).getTooltip().textProperty().unbind();
@@ -268,7 +275,7 @@ public class Library extends StackPane {
 		    controller.renameWorking = false;
 
 		    // commit
-		    if (!Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
+		    if (Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
 			Main.dbManager.commit();
 		}
 
@@ -279,7 +286,7 @@ public class Library extends StackPane {
 	 * Resets the name if the user cancels the rename operation
 	 */
 	private void resetTheName() {
-	    nameField.setText(getLibraryName());
+	    nameLabel.setText(getLibraryName());
 	}
     };
 
@@ -333,7 +340,9 @@ public class Library extends StackPane {
 
 	// Description
 	if (description != null)
-	    this.description = description;
+	    this.description = new SimpleStringProperty(description);
+	else
+	    this.description = new SimpleStringProperty("");
 
 	// SaveMode
 	if (saveMode == 1)
@@ -454,48 +463,57 @@ public class Library extends StackPane {
 	// ImageView
 	// imageView.fitWidthProperty().bind(this.prefWidthProperty())
 	// imageView.fitHeightProperty().bind(this.prefHeightProperty())
-
-	// Clip
-	Rectangle rect = new Rectangle();
-	rect.widthProperty().bind(this.widthProperty());
-	rect.heightProperty().bind(this.heightProperty());
-	rect.setArcWidth(25);
-	rect.setArcHeight(25);
-	// rect.setEffect(new Reflection());
-
-	// StackPane -> this
-	this.setClip(rect);
-	// Reflection reflection = new Reflection();
-	// reflection.setInput(new DropShadow(4, Color.WHITE));
-	// this.setEffect(reflection);
-
-	// LibraryName
-	setLibraryName(libraryName);
-	nameField.setText(libraryName);
-	nameField.getTooltip().setText(libraryName);
-
-	// Update the Image
-	// updateStarLabelImage()
-	// imageView.setFitWidth(getWidth());
-	// imageView.setFitHeight(getHeight());
-
-	// Image
-	imageView.setImage(getImage());
-
-	// goSettings
-	goSettings.setOnMouseReleased(m -> Main.libraryMode.libraryViewer.settings.showWindow(this));
-
-	// Rating Label
-	ratingLabel.textProperty().bind(starsProperty().asString());
-	//ratingLabel.visibleProperty().bind(starsProperty().greaterThan(0));
-	this.setOnScroll(scroll -> {
+	
+	//-----THIS
+	setOnScroll(scroll -> {
 	    if (scroll.getDeltaY() > 0)
 		updateStars(starsProperty().get() + 0.5);
 	    else
 		updateStars(starsProperty().get() - 0.5);
 	});
 
-	// progressBarStackPane
+	// Clip
+	Rectangle rect = new Rectangle();
+	rect.widthProperty().bind(widthProperty());
+	rect.heightProperty().bind(heightProperty());
+	rect.setArcWidth(30);
+	rect.setArcHeight(30);
+	//rect.setEffect(new Reflection());
+	setClip(rect);
+
+	// StackPane -> this
+	//Reflection reflection = new Reflection();
+	//reflection.setInput(new DropShadow(4, Color.FIREBRICK));
+	//this.setEffect(reflection);
+
+	// -----ImageView
+	imageView.setImage(getImage());
+
+	// -----NameLabel
+	setLibraryName(libraryName);
+	nameLabel.setText(libraryName);
+	nameLabel.getTooltip().setText(libraryName);
+	nameLabel.setOnMouseReleased(m -> {
+	    if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2)
+		renameLibrary(nameLabel);
+	});
+
+	// -----RatingLabel
+	ratingLabel.textProperty().bind(starsProperty().asString());
+	ratingLabel.setOnMouseReleased(m -> {
+	    if (m.getButton() == MouseButton.PRIMARY)
+		updateLibraryStars(ratingLabel);
+	});
+	
+
+	// ----SettingsLabel
+	settingsLabel.setOnMouseReleased(m -> Main.libraryMode.libraryViewer.settings.showWindow(this));
+
+	// ----DescriptionLabel
+	descriptionLabel.visibleProperty().bind(description.isEmpty().not());
+	descriptionLabel.setOnMouseReleased(settingsLabel.getOnMouseReleased());
+
+	// ----ProgressBarStackPane
 	progressBarStackPane.setVisible(false);
 	progressBar.setProgress(-1);
 	// progressBar.progressProperty().bind(copyService.progressProperty());
@@ -504,7 +522,7 @@ public class Library extends StackPane {
 	// progressBar.progressProperty()).multiply(100.00).asString("%.02f
 	// %%"));
 
-	// selectionModeStackPane
+	// ---SelectionModeStackPane
 	selectedProperty().bind(selectionModeCheckBox.selectedProperty());
 
 	// Label error = new Label();
@@ -584,7 +602,7 @@ public class Library extends StackPane {
 	try {
 
 	    // SQLITE
-	    libUDescription.setString(1, description);
+	    libUDescription.setString(1, description.get());
 	    libUDescription.setString(2, getLibraryName());
 	    libUDescription.executeUpdate();
 	    Main.dbManager.commit();
@@ -779,23 +797,26 @@ public class Library extends StackPane {
 
     /**
      * Renames the current Library.
+     * 
+     * @param node
+     *            The node based on which the Rename Window will be position
      */
-    public void renameLibrary() {
+    public void renameLibrary(Node node) {
 	if (controller.isFree(true)) {
 
 	    // Security Variable
 	    controller.renameWorking = true;
 
 	    // Open the Window
-	    Main.renameWindow.show(getLibraryName(), this);
+	    Main.renameWindow.show(getLibraryName(), node);
 
 	    // Bind 1
 	    Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());
 	    if (tab != null)
-		tab.getTooltip().textProperty().bind(nameField.textProperty());
+		tab.getTooltip().textProperty().bind(nameLabel.textProperty());
 
 	    // Bind 2
-	    nameField.textProperty().bind(Main.renameWindow.inputField.textProperty());
+	    nameLabel.textProperty().bind(Main.renameWindow.inputField.textProperty());
 
 	    Main.renameWindow.showingProperty().addListener(renameInvalidator);
 	}
@@ -803,15 +824,18 @@ public class Library extends StackPane {
 
     /**
      * Updates the LibraryStars.
+     * 
+     * @param node
+     *            The node based on which the Rename Window will be position
      */
-    protected void updateLibraryStars() {
+    protected void updateLibraryStars(Node node) {
 	if (controller.isFree(true)) {
 
 	    // Bind
 	    Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty()
 		    .bind(Main.starWindow.starsProperty().asString());
 
-	    Main.starWindow.show(starsProperty().get(), Main.libraryMode.libraryViewer.settings.getStarsLabel());
+	    Main.starWindow.show(starsProperty().get(), node);
 
 	    //Keep a reference to the previous stars
 	    double previousStars = stars.get();
@@ -831,7 +855,7 @@ public class Library extends StackPane {
 
 		    // if !showing
 		    if (!Main.starWindow.window.isShowing()) {
-			
+
 			//Unbind
 			Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty().unbind();
 
@@ -853,7 +877,7 @@ public class Library extends StackPane {
      */
     public void deleteLibrary() {
 	if (controller.isFree(true) && ActionTool
-		.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName()+" ]")) {
+		.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]")) {
 
 	    try {
 
@@ -980,7 +1004,7 @@ public class Library extends StackPane {
      *            the new description
      */
     public void setDescription(String newDescription) {
-	description = newDescription;
+	description.set(newDescription);
     }
 
     /*------------------------------------------------------------------------
@@ -1182,7 +1206,7 @@ public class Library extends StackPane {
      * @return The description of the Library
      */
     public String getDescription() {
-	return description;
+	return description.get();
     }
 
     /**
@@ -1226,7 +1250,7 @@ public class Library extends StackPane {
 	    else if (code == KeyCode.C)
 		libraryOpenClose(false, false);
 	    else if (code == KeyCode.R)
-		renameLibrary();
+		renameLibrary(nameLabel);
 	    else if (code == KeyCode.DELETE || code == KeyCode.D)
 		deleteLibrary();
 	    else if (code == KeyCode.S)

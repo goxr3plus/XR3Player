@@ -26,7 +26,7 @@
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0">
          <center>
             <GridPane fx:id="container" BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -47,7 +47,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <StackPane fx:id="visualizerStackPane" style="-fx-border-color: white; -fx-border-width: 1.5;">
+                        <StackPane fx:id="visualizerStackPane" style="-fx-border-color: firebrick; -fx-border-width: 2;">
                            <children>
                               <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(255,255,255,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
                               <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" visible="false" />
@@ -120,7 +120,7 @@
                               </Button>
                            </children>
                            <GridPane.margin>
-                              <Insets bottom="2.0" left="2.0" right="2.0" />
+                              <Insets bottom="2.0" right="2.0" top="2.0" />
                            </GridPane.margin>
                         </StackPane>
                         <VBox fx:id="topRightVBox" GridPane.columnIndex="1">
@@ -128,7 +128,7 @@
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                                    <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Comming..." />
+                                    <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Give me some ideas what to add here ..." />
                                  </children>
                               </StackPane>
                               <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
@@ -185,23 +185,6 @@
                                           <Tooltip text="Choose a File to be opened" />
                                        </tooltip>
                                     </Button>
-                                    <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Settings">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/gear.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="DEFAULT" />
-                                       </cursor>
-                                    </Label>
-                                    <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: orange;" text=" ">
-                                       <font>
-                                          <Font size="1.0" />
-                                       </font>
-                                    </JFXToggleButton>
                                  </children>
                               </VBox>
                            </children>
@@ -264,10 +247,21 @@
             </GridPane>
          </center>
          <top>
-            <Label fx:id="topInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: firebrick; -fx-font-weight: bold; -fx-text-fill: white;" text="Player : [ 0 ] " BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="2.0" />
-               </BorderPane.margin></Label>
+            <HBox style="-fx-background-color: firebrick; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="topInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Player : [ 0 ] " HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Settings">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Label>
+                  <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" maxWidth="1.7976931348623157E308" minHeight="17.0" prefHeight="17.0">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </JFXToggleButton>
+               </children>
+            </HBox>
          </top>
       </BorderPane>
       <Region fx:id="fxRegion" style="-fx-background-color: rgb(255,255,255,0.8);" visible="false" />

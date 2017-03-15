@@ -65,14 +65,10 @@ import xplayer.model.XPlayerModel;
  * @author GOXR3PLUS
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
-
-    /**
-     * The class Logger
-     */
-    private Logger logger = Logger.getLogger(getClass().getName());
-
-    // -----------------------------------------------------
-
+   
+    @FXML
+    private BorderPane borderPane;
+    
     /** The container. */
     @FXML
     private GridPane container;
@@ -181,6 +177,11 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     private Label topInfoLabel;
 
     // -----------------------------------------------------------------------------
+    
+    /**
+     * The class Logger
+     */
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     private final ImageView eye = InfoTool.getImageViewFromDocuments("eye.png");
     private final ImageView eyeDisabled = InfoTool.getImageViewFromDocuments("eyeDisabled.png");
@@ -243,6 +244,11 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    ImageCursor.getBestSize(64, 64).getWidth() >= 64.00 ? "Private-64.png" : "Private-32.png");
     private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2,
 	    noSeek.getHeight() / 2);
+    
+    /**
+     * 
+     */
+    FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 
     /**
      * Constructor.
@@ -266,8 +272,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 
     }
-
-    FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 
     /** Called as soon as the .fxml has been loaded */
     @FXML
@@ -336,7 +340,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	//flipPane
 	flipPane.setFlipTime(150);
-	flipPane.getFront().getChildren().addAll(this);
+	flipPane.getFront().getChildren().addAll(container);
 	flipPane.getBack().getChildren().addAll(xPlayerSettingsController);
 	
 	settingsToggle.selectedProperty().addListener((observable,oldValue,newValue)->{
@@ -344,7 +348,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		flipPane.flipToBack();
 	    else
 		flipPane.flipToFront();
-	});
+	});	
+	borderPane.setCenter(flipPane);
 
 	
     }
@@ -352,9 +357,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /**
      * @return The FlipPanel
      */
-    public FlipPanel getFlipPanel() {
-	return flipPane;
-    }
+//    public FlipPanel getFlipPanel() {
+//	return flipPane;
+//    }
 
     /**
      * Opens the current Media File of the player to the default system explorer

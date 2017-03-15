@@ -315,11 +315,7 @@ public class SmartController extends StackPane {
 		goNext();
 	    } else if (tableViewer.getSelectedCount() > 0) { // TableViewer
 
-		if (code == KeyCode.R)
-		    tableViewer.getSelectionModel().getSelectedItem().rename(SmartController.this);
-		else if (code == KeyCode.S)
-		    tableViewer.getSelectionModel().getSelectedItem().updateStars(SmartController.this);
-		else if (code == KeyCode.P)
+		if (code == KeyCode.P)
 		    ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 		else if (code == KeyCode.DELETE)
 		    tableViewer.getSelectionModel().getSelectedItem().prepareDelete(key.isShiftDown(),
@@ -331,12 +327,7 @@ public class SmartController extends StackPane {
 
 	// ------ tableViewer
 	tableViewer.setItems(itemsObservableList);
-	tableViewer.setPlaceholder(new Label("Import or Drag Media Here ;) "));
-	tableViewer.setOnMouseReleased(m -> {
-	    if (m.getButton() == MouseButton.SECONDARY && !tableViewer.getSelectionModel().getSelectedItems().isEmpty())
-		Main.songsContextMenu.showContextMenu(tableViewer.getSelectionModel().getSelectedItem(), genre,
-			m.getScreenX(), m.getScreenY(), this);
-	});
+	tableViewer.setPlaceholder(new Label("Drag && Drop or Import Media"));
 
 	centerStackPane.getChildren().add(tableViewer);
 	tableViewer.toBack();
@@ -1093,7 +1084,7 @@ public class SmartController extends StackPane {
 	    // fileType
 	    fileType.setCellValueFactory(new PropertyValueFactory<>("fileType"));
 
-	    setRowFactory(tv -> {
+	    setRowFactory(rf -> {
 		TableRow<Media> row = new TableRow<>();
 
 		// use EasyBind to access the valueProperty of the itemProperty
@@ -1108,6 +1099,37 @@ public class SmartController extends StackPane {
 				.map(x -> !x.booleanValue())
 				// value to use if item was null
 				.orElse(false));
+
+		//Mouse Listener
+		row.setOnMouseReleased(m -> {
+		    if (m.getButton() == MouseButton.SECONDARY && !row.isDisable())
+			tableViewer.getSelectionModel().select(row.getIndex());
+
+		    //Primary
+		    if (m.getButton() == MouseButton.PRIMARY) {
+			if (m.getClickCount() == 2)
+			    row.itemProperty().get().rename(SmartController.this, row);
+
+		    }//Secondary
+		    else if (m.getButton() == MouseButton.SECONDARY
+			    && !tableViewer.getSelectionModel().getSelectedItems().isEmpty()) {
+			Main.songsContextMenu.showContextMenu(row.itemProperty().get(), SmartController.this.genre,
+				m.getScreenX(), m.getScreenY(), SmartController.this, row);
+		    }
+
+		});
+
+		//Needs fixing!!!
+		//		//KeyListener
+		//		row.setOnKeyReleased(k -> {
+		//		    System.out.println("Key Released....");
+		//		    KeyCode code = k.getCode();
+		//
+		//		    if (code == KeyCode.R)
+		//			row.itemProperty().get().rename(SmartController.this, row);
+		//		    else if (code == KeyCode.S)
+		//			tableViewer.getSelectionModel().getSelectedItem().updateStars(SmartController.this, row);
+		//		});
 
 		// it's also possible to do this with the standard API, but
 		// there are lots of
@@ -1733,17 +1755,16 @@ public class SmartController extends StackPane {
 
 			// System.out.println("Total Files are->" + totalFiles)
 
-			
 			//Calculate the batch size
-//			if (totalFiles < 20_000)
-//			    batchSize = 1000;
-//			else if (totalFiles < 100_000)
-//			    batchSize = 5000;
-//			else
-//			    batchSize = 10_000;
-//			
-			
-//			batchcount = 0;
+			//			if (totalFiles < 20_000)
+			//			    batchSize = 1000;
+			//			else if (totalFiles < 100_000)
+			//			    batchSize = 5000;
+			//			else
+			//			    batchSize = 10_000;
+			//			
+
+			//			batchcount = 0;
 
 			// INSERT
 			Platform.runLater(() -> getCancelButton().setText("Adding: [" + totalFiles + "] entries..."));
@@ -1762,13 +1783,13 @@ public class SmartController extends StackPane {
 					    insertMedia(path.toString(), 0, 0, date, InfoTool.getLocalTime());
 
 					//For performance reasons
-//					if ((++batchcount % batchSize) == 0) {
-//					    try {
-//						preparedInsert.executeBatch();
-//					    } catch (SQLException ex) {
-//						ex.printStackTrace();
-//					    }
-//					}
+					//					if ((++batchcount % batchSize) == 0) {
+					//					    try {
+					//						preparedInsert.executeBatch();
+					//					    } catch (SQLException ex) {
+					//						ex.printStackTrace();
+					//					    }
+					//					}
 
 					// update progress
 					updateProgress(++progress, totalFiles);

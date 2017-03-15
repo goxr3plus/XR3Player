@@ -113,6 +113,13 @@ public class LocalDBManager {
 
     };
 
+    //-----------------------------------------------------------
+
+    /**
+     * XR3Database signature File , i am using this so the user can use any name for the exported xr3database zip and has not too worry
+     */
+    File signatureFile = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "xr3Original.sig");
+
     /**
      * Constructor.
      *
@@ -131,20 +138,36 @@ public class LocalDBManager {
 	    this.userName = userName;
 
 	    // database folder
-	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists())
-		new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
+	    File xr3Folder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
+	    if (!xr3Folder.exists())
+		xr3Folder.mkdir();
+
+	    //original xr3database singature file	    
+	    if (!signatureFile.exists())
+		try {
+		    if (signatureFile.createNewFile()) {
+			//success
+		    } else {
+			//to be implemented
+		    }
+		} catch (IOException ex) {
+		    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
+		}
 
 	    // user folder
-	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName).exists())
-		new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName).mkdir();
+	    File userFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName);
+	    if (!userFolder.exists())
+		userFolder.mkdir();
 
-	    // images folder
+	    //--images folder
 	    imagesFolderRelativePath = InfoTool.DATABASE_FOLDER_NAME_WITH_SEPARATOR + userName + File.separator
 		    + "Images";
 	    imagesFolderAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
 		    + imagesFolderRelativePath;
-	    if (!new File(imagesFolderAbsolutePath).exists())
-		new File(imagesFolderAbsolutePath).mkdir();
+	    //--
+	    File imagesFolder = new File(imagesFolderAbsolutePath);
+	    if (!imagesFolder.exists())
+		imagesFolder.mkdir();
 
 	    // database file(.db)
 	    dbFileAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator
@@ -438,14 +461,16 @@ public class LocalDBManager {
 		Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty()
 			.addListener((observable, oldValue, newValue) -> {
 
-			    // Give a refresh to the newly selected
+			    // Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
 			    if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty()
-				    && ((SmartController) newValue.getContent()).isFree(false)) {
+				    && ((SmartController) newValue.getContent()).isFree(false)
+				    && ((SmartController) newValue.getContent()).itemsObservableList.isEmpty()) {
 
 				((SmartController) newValue.getContent()).loadService.startService(false, true);
 
 				Main.dbManager.updateLibrariesInformation(
 					Main.libraryMode.multipleLibs.getTabPane().getTabs(), false);
+
 			    }
 			});
 	    });

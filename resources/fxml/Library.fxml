@@ -11,8 +11,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<ImageView fx:id="imageView" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
 			<image>
@@ -22,21 +23,12 @@
             <Rectangle2D />
          </viewport>
 		</ImageView>
-		<Label fx:id="nameField" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="oh damn null!" wrapText="true">
+		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="LIBRARY NAME" wrapText="true">
 			<tooltip>
 				<Tooltip />
 			</tooltip>
 		</Label>
-		<Label fx:id="goSettings" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 10;" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
-			<graphic>
-				<ImageView pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../image/gear.png" />
-					</image>
-				</ImageView>
-			</graphic>
-		</Label>
-      <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: rgb(255,255,255,0.8);" textAlignment="CENTER" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+      <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white;" textAlignment="CENTER" StackPane.alignment="BOTTOM_LEFT">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -48,15 +40,52 @@
             <Tooltip text="Image is missing!" />
          </tooltip>
       </Label>
-      <Label fx:id="ratingLabel" alignment="CENTER" prefHeight="33.0" prefWidth="57.0" style="-fx-background-color: white; -fx-background-radius: 0 15 15 0; -fx-text-fill: black; -fx-font-size: bold; -fx-font-size: 18;" text="1" StackPane.alignment="TOP_LEFT">
+      <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/smallStar.png" />
+                  <Image url="@../image/comment.png" />
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
+      <VBox alignment="TOP_RIGHT" minHeight="0.0" minWidth="0.0" pickOnBounds="false" spacing="10.0">
+         <children>
+            <Label fx:id="ratingLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" prefHeight="27.0" prefWidth="55.0" style="-fx-background-color: white; -fx-background-radius: 15 0 0 15; -fx-text-fill: black; -fx-font-weight: bold;" text="5.0">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/smallStar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="settingsLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/gear.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+         <StackPane.margin>
+            <Insets right="2.0" top="2.0" />
+         </StackPane.margin>
+         <cursor>
+            <Cursor fx:constant="V_RESIZE" />
+         </cursor>
+      </VBox>
       <StackPane fx:id="progressBarStackPane" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
          <children>
             <ProgressBar fx:id="progressBar" progress="0.0" />

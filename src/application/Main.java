@@ -25,12 +25,15 @@ import org.jsoup.nodes.Element;
 import application.settings.window.ApplicationSettingsController;
 import application.users.LoginMode;
 import application.users.User;
+import application.users.UserMode;
 import borderless.BorderlessScene;
 import database.LocalDBManager;
+import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -164,11 +167,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 55;
+    public final static int currentVersion = 56;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "12/03/2017";
+    public final static String releaseDate = "16/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -196,6 +199,11 @@ public class Main extends Application {
 
     /** The Login Mode where the user of the applications has to choose an account to login */
     public static LoginMode loginMode;
+
+    /**
+     * Entering in this mode you can change the user settings and other things that have to do with the user....
+     */
+    public static UserMode userMode;
 
     // --------------END: The below have depencities on others------------------------
 
@@ -275,7 +283,7 @@ public class Main extends Application {
 
 		//If it can not be created [FATAL ERROR]
 		if (!dataBaseRootCreated) {
-		    ActionTool.showNotification("Fatala Error!",
+		    ActionTool.showNotification("Fatal Error!",
 			    "Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
 			    Duration.seconds(45), NotificationType.ERROR);
 		}
@@ -318,6 +326,9 @@ public class Main extends Application {
 	System.out.println("Hello from init");
     }
 
+    public static final FlipPanel rootFlipPane = new FlipPanel(Orientation.HORIZONTAL);
+    public static final FlipPanel mainModeFlipPane = new FlipPanel(Orientation.HORIZONTAL);
+
     /**
      * Starts the application for this specific user
      * 
@@ -354,9 +365,18 @@ public class Main extends Application {
 	    libraryMode = new LibraryMode();
 	    djMode = new DJMode();
 	    multipleTabs = new MultipleTabs();
+	    userMode = new UserMode(user);
 
 	    libraryMode.add(Main.multipleTabs, 0, 1);
-	    root.setCenter(Main.libraryMode);
+	    root.setCenter(rootFlipPane);
+
+	    //flipPane
+	    mainModeFlipPane.getFront().getChildren().addAll(libraryMode);
+	    mainModeFlipPane.getBack().getChildren().addAll(djMode);
+	    
+	    //rootFlipPane
+	    rootFlipPane.getFront().getChildren().addAll(mainModeFlipPane);
+	    rootFlipPane.getBack().getChildren().addAll(userMode);
 
 	    //---------------END:initialize everything needed---------------------------------------------
 

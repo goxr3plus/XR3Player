@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -41,9 +40,6 @@ public class XPlayerSettingsController extends BorderPane {
 
     @FXML
     Tab playListTab;
-
-    @FXML
-    private Button closeSettings;
 
     // ------------------------
 
@@ -96,8 +92,6 @@ public class XPlayerSettingsController extends BorderPane {
         // ShowFPS
         showFPS.setOnAction(a -> xPlayerUI.visualizer.setShowFPS(!xPlayerUI.visualizer.isShowingFPS()));
 
-        // closeSettings
-        closeSettings.setOnAction(e -> xPlayerUI.settingsToggle.setSelected(false));
     }
 
 }

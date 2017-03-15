@@ -86,7 +86,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Delete User">
+                  <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Rename">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Delete ">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -128,7 +133,7 @@
       </Label>
    </bottom>
    <top>
-      <Label alignment="CENTER" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15;" text=" XR3Player " BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
+      <Label alignment="CENTER" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15; -fx-border-color: transparent white white white; -fx-border-radius: 0 0 10 10; -fx-border-width: 2;" text=" XR3Player " BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
          <cursor>
             <Cursor fx:constant="MOVE" />
          </cursor>

@@ -84,7 +84,8 @@
 /* .table-row-cell */
 
 .table-row-cell:disabled{
-	-fx-opacity:0.5;
+	-fx-opacity:0.1;
+	-fx-background-color:darkgray;
 }
 
 .table-row-cell .text{
@@ -92,15 +93,36 @@
     -fx-fill: black ;
 } 
 
-.table-row-cell:focused .text {
+/*.table-row-cell:focused .text {
      -fx-fill: white ;
+} */
+
+.table-row-cell:hover .text , .table-row-cell:selected .text{
+     -fx-fill: white ;    
 }
 
-.table-row-cell:hover .text {
-     -fx-fill: white ;
+.table-row-cell:hover:selected .text,.table-row-cell:focused:selected .text{
+	-fx-fill:rgb(173.0,255.0,10.0);
 }
 
-.table-row-cell:focused{
+
+/*.table-row-cell:focused{
+	-fx-background-color:firebrick;
+}*/
+
+.table-row-cell:focused:disabled{ 
+	-fx-background-color:darkgray;
+}
+
+.table-row-cell:hover , .table-row-cell:selected{
+	/*-fx-background-color:rgb(0.0,191.0,255.0);*/
+	 -fx-background-color:firebrick;
+}
+
+
+
+
+/* .table-row-cell:focused{
 	-fx-background-color:purple;
 }
 
@@ -111,6 +133,7 @@
 .table-row-cell:hover{
 	-fx-background-color:magenta;
 }
+ */
 
 
 
@@ -120,6 +143,10 @@
     -fx-font-size: 12.0px;
 }
 
+
+
+
+/*------------------------------*
 
 
 /* 
@@ -526,10 +553,92 @@
   }
   
   
-  .scroll-bar{
+  /* The main scrollbar CSS class of ListView */
+ .scroll-bar:horizontal ,
+  .scroll-bar:vertical{
+    -fx-background-color:transparent;
+    -fx-cursor: hand ;
+	
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+ .increment-button , .decrement-button {
+    -fx-background-color:transparent;
+	-fx-background-radius: 2.0em;
+	
+	
+}
+
+/* The main scrollbar **track** CSS class  */
+ .scroll-bar:horizontal .track,
+ .scroll-bar:vertical .track{
+	-fx-background-color: transparent;
+	-fx-border-color:derive(gray,80.0%);
+	-fx-background-radius: 2.0em;
+	-fx-border-radius:2.0em;
+}
+
+
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+ .scroll-bar:horizontal .thumb,
+ .scroll-bar:vertical .thumb {
+    -fx-background-color:derive(black,90.0%);
+	-fx-background-insets: 2.0, 0.0, 0.0;
+	-fx-background-radius: 2.0em;
+	
+	
+}
+
+/* ------------------------------------------------------------------------------------- */
+/** EVENT CSS **/
+/* ------------------------------------------------------------------------------------- */
+
+/* The main scrollbar **track** CSS class on event of "hover" and "pressed" */
+
+ .scroll-bar:horizontal:hover .track ,
+ .scroll-bar:horizontal:pressed .track ,
+ .scroll-bar:vertical:hover .track,
+ .scroll-bar:vertical:pressed .track{
+     -fx-background-color: derive(#434343,70.0%);
+	 -fx-opacity: 0.5;
+	 -fx-background-radius: 0.0em;
+    
+}
+
+/* The main scrollbar **thumb** CSS class on event of "hover" and "pressed" */
+ .scroll-bar .thumb:hover,
+ .scroll-bar .thumb:pressed{
+    -fx-background-color: derive(black,50.0%);
+}
+
+
+ .increment-button:hover , .decrement-button:hover {
+    -fx-background-color:derive(gray,100.0%);
+	-fx-border-color:derive(gray,80.0%);	
+	-fx-padding:10.0px;
+}
+ 
+ 
+ /*----------------OLD CODE-------------------------------------- */
+ 
+ /*  .scroll-bar{
     -fx-background-color: transparent;
-    /*-fx-background-radius:2.0em;*/
   }
+  
+  .scroll-bar:vertical{
+  	-fx-cursor: hand;
+  }
+  
+  .scroll-bar:horizontal:hover .track , .scroll-bar:horizontal:pressed .track , .scroll-bar:vertical:hover .track, .scroll-bar:vertical:pressed .track{
+	     -fx-background-color: derive(#434343,20.0%); 
+	     -fx-opacity: 0.2;
+	     -fx-background-radius: 0.0em;
+   }
+	 	 
+   .scroll-bar .thumb:hover,.scroll-bar .thumb:pressed{
+	     -fx-background-color: derive(black,50.0%);
+   }
 
   .scroll-bar:horizontal .increment-arrow {
   	-fx-background-color: black;
@@ -570,6 +679,10 @@
   .scroll-bar:horizontal .decrement-button {
    -fx-background-color:transparent;
   }
+   */
+   
+/*----------------END OF OLD CODE-------------------------------------- */
+  
 
 
 /*******************************************************************************

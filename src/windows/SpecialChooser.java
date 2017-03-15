@@ -46,8 +46,8 @@ public class SpecialChooser {
     public File prepareToImportDataBase(Stage window) {
 	fileChooser.getExtensionFilters().clear();
 	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("zip", "*.zip"));
-	fileChooser.setTitle("Select the (XR3DataBase).zip");
-	fileChooser.setInitialFileName("XR3DataBase");
+	fileChooser.setTitle("Select the database zip folder");
+	fileChooser.setInitialFileName("example name (XR3Database.zip)");
 	File file = fileChooser.showOpenDialog(window);
 	if (file != null) {
 	    // Set the property to the directory of the chosenFile so the

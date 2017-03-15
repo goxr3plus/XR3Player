@@ -19,7 +19,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class is used as a Service which is exporting the applications database as a zip folder.
  *
