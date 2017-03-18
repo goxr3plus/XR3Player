@@ -17,12 +17,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import librarysystema.Library;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
@@ -36,7 +34,8 @@ public class User extends StackPane {
     @FXML
     ImageView imageView;
 
-    @FXML Label nameField;
+    @FXML
+    Label nameField;
 
     // --------------------------------------------
 
@@ -68,11 +67,13 @@ public class User extends StackPane {
 		// Remove Bindings
 		nameField.textProperty().unbind();
 
-		// !XPressed && Old name !=newName
-		if (Main.renameWindow.wasAccepted() && !oldName.equals(newName)) {
+		// !XPressed
+		if (Main.renameWindow.wasAccepted()) {
 
 		    // duplicate?
-		    if (!Main.loginMode.userViewer.items.stream().anyMatch(user -> user.getUserName().equals(newName))) {
+		    if (!Main.loginMode.userViewer.items.stream()
+			    .anyMatch(user -> user != User.this && user.getUserName().equalsIgnoreCase(newName))
+			    || newName.equalsIgnoreCase(oldName)) {
 
 			File originalFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + oldName);
 			File outputFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + newName);

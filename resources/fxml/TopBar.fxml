@@ -4,8 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
@@ -14,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="39.0" prefHeight="39.0" prefWidth="789.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0 0 15 0;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="39.0" prefHeight="39.0" prefWidth="789.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0 0 15 0; -fx-border-color: red transparent transparent transparent;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
@@ -54,14 +52,6 @@
          <children>
             <ToggleButton fx:id="goLibrariesMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="Simple" />
             <ToggleButton fx:id="goDJMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="DJ" />
-            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-font-size: 12;" text="Options">
-              <items>
-                <MenuItem fx:id="checkForUpdates" mnemonicParsing="false" text="Check for Updates" />
-                  <MenuItem fx:id="help" mnemonicParsing="false" text="Open Manual Help" />
-                  <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: magenta;" text="Donation :)" />
-                  <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="About" />
-              </items>
-            </MenuButton>
             <Button fx:id="restartButton" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="R">
                <tooltip>
                   <Tooltip text="Restart" />
@@ -69,6 +59,9 @@
                <font>
                   <Font size="9.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="minimize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="-">
                <tooltip>
@@ -77,6 +70,9 @@
                <font>
                   <Font size="9.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="maxOrNormalize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="25.0" styleClass="windowButton" text="+">
                <tooltip>
@@ -85,6 +81,9 @@
                <font>
                   <Font size="9.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="close" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="X">
                <tooltip>
@@ -93,6 +92,9 @@
                <font>
                   <Font size="9.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
          <opaqueInsets>

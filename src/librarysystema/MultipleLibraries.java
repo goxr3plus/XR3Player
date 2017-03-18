@@ -10,6 +10,7 @@ import java.util.logging.Level;
 
 import application.Main;
 import customnodes.Marquee;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -89,7 +90,6 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	    else
 		Main.libraryMode.libraryViewer.items.get(0).libraryOpenClose(true, false);
 	});
-	
 
 	// emptyLabelRegion
 	emptyLabelRegion.visibleProperty().bind(emptyLabel.visibleProperty());
@@ -222,7 +222,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
 	marquee.setStyle(
-		"-fx-background-radius:15 0 0 0; -fx-background-color:rgb(255,255,255,0.7); -fx-border-color:transparent;");
+		"-fx-background-radius:0 0 15 15; -fx-background-color:rgb(255,255,255,0.7); -fx-border-color:transparent;");
 
 	stack.getChildren().addAll(indicator, text);
 	stack.setManaged(false);
@@ -231,6 +231,26 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	// HBOX
 	HBox hBox = new HBox();
 	hBox.getChildren().addAll(stack, marquee);
+
+	// --Drag Over
+	hBox.setOnDragOver(dragOver -> {
+	    // The drag must come from source other than the owner
+	    if (dragOver.getDragboard().hasFiles()) {
+		//&& dragOver.getGestureSource() != library.getSmartController().tableViewer) 
+		dragOver.acceptTransferModes(TransferMode.LINK);
+		tabPane.getSelectionModel().select(tab);
+	    }
+	});
+
+	// --Drag Dropped
+	hBox.setOnDragDropped(drop -> {
+	    // Has Files? + isFree()?
+	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true)
+		    && drop.getGestureSource() != library.getSmartController().tableViewer)
+		getSelectedLibrary().getSmartController().inputService.start(drop.getDragboard().getFiles());
+
+	    drop.setDropCompleted(true);
+	});
 
 	// stack
 	library.getSmartController().getIndicator().visibleProperty().addListener(l -> {
@@ -254,27 +274,6 @@ public class MultipleLibraries extends StackPane implements Initializable {
 
 	tab.setGraphic(hBox);
 	tabPane.getTabs().add(tab);
-
-	// --Drag Over
-	hBox.setOnDragOver(dragOver -> {
-	    // The drag must come from source other than the owner
-	    if (dragOver.getDragboard().hasFiles()) {
-		//&& dragOver.getGestureSource() != library.getSmartController().tableViewer) 
-		dragOver.acceptTransferModes(TransferMode.LINK);
-		tabPane.getSelectionModel().select(tab);
-	    }
-	});
-
-	// --Drag Dropped
-	hBox.setOnDragDropped(drop -> {
-	    // Has Files? + isFree()?
-	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true)
-		    && drop.getGestureSource() != library.getSmartController().tableViewer)
-		getSelectedLibrary().getSmartController().inputService.start(drop.getDragboard().getFiles());
-
-	    drop.setDropCompleted(true);
-	});
-
     }
 
     /**
@@ -290,6 +289,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	// tabPane empty?
 	if (tabPane.getTabs().isEmpty())
 	    emptyLabel.setVisible(true);
+
     }
 
     /**
@@ -304,9 +304,9 @@ public class MultipleLibraries extends StackPane implements Initializable {
 
 	tabPane.getTabs().stream().forEach(tab -> {
 	    if (tab.getTooltip().getText().equals(oldName)) {
-		// tab.textProperty().unbind();
+		// tab.textProperty().unbind()
 		tab.getTooltip().textProperty().unbind();
-		// tab.setText(InfoTool.getMinString(newName, 15));
+		// tab.setText(InfoTool.getMinString(newName, 15))
 		tab.getTooltip().setText(newName);
 	    }
 	});

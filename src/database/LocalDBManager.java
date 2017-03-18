@@ -24,10 +24,14 @@ import org.json.simple.Jsoner;
 
 import application.Main;
 import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.util.Duration;
 import librarysystema.Library;
@@ -83,7 +87,7 @@ public class LocalDBManager {
 	    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
 	} finally {
 	    Platform.runLater(
-		    Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(100))::show);
+		    Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(150))::show);
 	}
 
     };
@@ -304,11 +308,6 @@ public class LocalDBManager {
     public void loadApplicationDataBase() {
 	Main.updateScreen.setVisible(true);
 	Main.updateScreen.progressBar.progressProperty().bind(dataLoader.progressProperty());
-	//	System.out.println(Main.updateScreen.progressBar.getProgress())
-	//	System.out.println(Main.updateScreen.progressBar.getProgress())
-	//	System.out.println(Main.updateScreen.progressBar.getProgress())
-	//	System.out.println(Main.updateScreen.progressBar.getProgress())
-	//	System.out.println(Main.updateScreen.progressBar.getProgress())
 	dataLoader.restart();
     }
 
@@ -400,6 +399,11 @@ public class LocalDBManager {
 			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Opened Libraries..."));
 			loadOpenedLibraries();
 
+			//Load PlayerMediaList
+			Platform.runLater(() -> Main.updateScreen.label.setText("Loading previous data..."));
+			Main.playedSongs.uploadFromDataBase();
+
+			//--FINISH
 			updateProgress(total, total);
 
 		    } catch (Exception ex) {
@@ -440,17 +444,15 @@ public class LocalDBManager {
 	    JsonArray openedLibraries = (JsonArray) ((JsonObject) json.get("librariesSystem")).get("openedLibraries");
 
 	    //For each Library
-	    openedLibraries.forEach(libraryObject -> {
-		Platform.runLater(() -> {
+	    openedLibraries.forEach(libraryObject -> Platform.runLater(() ->
 
-		    //Get the Library and Open it!
-		    Main.libraryMode.getLibraryWithName(((JsonObject) libraryObject).get("name").toString())
-			    .libraryOpenClose(true, true);
+	    //Get the Library and Open it!
+	    Main.libraryMode.getLibraryWithName(((JsonObject) libraryObject).get("name").toString())
+		    .libraryOpenClose(true, true)
 
-		    //Print its name
-		    //System.out.println(((JsonObject) libraryObject).get("name"))
-		});
-	    });
+	    //Print its name
+	    //System.out.println(((JsonObject) libraryObject).get("name"))
+	    ));
 
 	    //Last selected library Array
 	    JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem"))
@@ -459,19 +461,43 @@ public class LocalDBManager {
 	    //Add the Listener to multipleLibs
 	    Platform.runLater(() -> {
 		Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty()
-			.addListener((observable, oldValue, newValue) -> {
+			.addListener((observable, oldTab, newTab) -> {
 
 			    // Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
 			    if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty()
-				    && ((SmartController) newValue.getContent()).isFree(false)
-				    && ((SmartController) newValue.getContent()).itemsObservableList.isEmpty()) {
+				    && ((SmartController) newTab.getContent()).isFree(false)
+				    && ((SmartController) newTab.getContent()).itemsObservableList.isEmpty()) {
 
-				((SmartController) newValue.getContent()).loadService.startService(false, true);
+				((SmartController) newTab.getContent()).loadService.startService(false, true);
 
 				Main.dbManager.updateLibrariesInformation(
 					Main.libraryMode.multipleLibs.getTabPane().getTabs(), false);
 
 			    }
+
+			    //			    //Do an animation
+			    //			    if (oldTab != null && newTab != null) {
+			    //				Node oldContent = oldTab.getContent(); //tabContent.get(oldTab)
+			    //				Node newContent = newTab.getContent(); //tabContent.get(newTab)
+			    //
+			    //				newTab.setContent(oldContent);
+			    //				ScaleTransition fadeOut = new ScaleTransition(Duration.millis(50), oldContent);
+			    //				fadeOut.setFromX(1);
+			    //				fadeOut.setFromY(1);
+			    //				fadeOut.setToX(0);
+			    //				fadeOut.setToY(0);
+			    //
+			    //				ScaleTransition fadeIn = new ScaleTransition(Duration.millis(50), newContent);
+			    //				fadeIn.setFromX(0);
+			    //				fadeIn.setFromY(0);
+			    //				fadeIn.setToX(1);
+			    //				fadeIn.setToY(1);
+			    //
+			    //				fadeOut.setOnFinished(event -> newTab.setContent(newContent));
+			    //
+			    //				SequentialTransition crossFade = new SequentialTransition(fadeOut, fadeIn);
+			    //				crossFade.play();
+			    //			    }
 			});
 	    });
 

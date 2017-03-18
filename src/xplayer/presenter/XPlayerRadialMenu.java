@@ -60,8 +60,8 @@ public class XPlayerRadialMenu {
 
 	//----------------RadialMenu
 	radialMenu = RadialMenuBuilder.create()
-		.options(RadialMenuOptionsBuilder.create().degrees(180).buttonFillColor(Color.BLUE).offset(-140) //-135 with next and previous + 350 degrees //-160 with 360 degrees
-			.radius(60).buttonSize(40).tooltipsEnabled(true).buttonHideOnSelect(false)
+		.options(RadialMenuOptionsBuilder.create().degrees(180).buttonFillColor(Color.BLUE).offset(-125) //-135 with next and previous + 350 degrees //-160 with 360 degrees
+			.radius(65).buttonSize(40).tooltipsEnabled(true).buttonHideOnSelect(false)
 			.buttonHideOnClose(false).buttonAlpha(1.0).build())
 		.items(
 			//RadialMenuItemBuilder.create().thumbnailImageName(getClass().getResource("star.png").toExternalForm()).size(40).build(),

@@ -197,6 +197,12 @@ public class LibraryMode extends GridPane {
 	    ex.printStackTrace();
 	}
 
+    }
+
+    /**
+     * This method inits the appropriate prepared statements
+     */
+    public void initPreparedStatements() {
 	// Prepared Statement
 	try {
 	    insertNewLibrary = Main.dbManager.connection1.prepareStatement(
@@ -414,14 +420,13 @@ public class LibraryMode extends GridPane {
 	    // }
 	    // }
 	    // })
-	    
+
 	    //super.setCache(true)
-	   // super.setCacheHint(CacheHint.SPEED)
+	    // super.setCacheHint(CacheHint.SPEED)
 
 	    // clip.set
 	    setClip(clip);
-	    setStyle(
-		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+	    setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
 	    //setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 
 	    // ScrollBar

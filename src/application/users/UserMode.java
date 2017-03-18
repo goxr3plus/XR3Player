@@ -42,9 +42,8 @@ public class UserMode extends BorderPane {
     /**
      * Constructor.
      */
-    public UserMode(User user) {
-	this.user = user;
-
+    public UserMode() {
+	
 	// ------------------------------------FXMLLOADER ----------------------------------------
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "UserMode.fxml"));
 	loader.setController(this);
@@ -61,13 +60,20 @@ public class UserMode extends BorderPane {
      * Called as soon as .fxml is initialized
      */
     @FXML
-    private void initialize() {
-
-	//-----UserNameLabel
-	userNameLabel.textProperty().bind(user.nameField.textProperty());
+    private void initialize() {	
 
 	//goBack
 	goBack.setOnAction(a -> Main.sideBar.goMainMode());
+    }
+    
+    /**This method should be called after fxml has been initialized for this controller
+     * @param user
+     */
+    public void setUser(User user) {
+	this.user = user;
+	
+	//-----UserNameLabel
+		userNameLabel.textProperty().bind(user.nameField.textProperty());
     }
 
 }

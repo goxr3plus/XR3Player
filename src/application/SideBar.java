@@ -6,8 +6,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.controlsfx.control.Notifications;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -37,6 +35,33 @@ import tools.InfoTool;
 public class SideBar extends BorderPane {
 
     @FXML
+    private JFXButton applicationUpdate;
+
+    @FXML
+    private MenuItem aboutSection;
+
+    @FXML
+    private MenuItem help;
+
+    @FXML
+    private MenuItem donation;
+
+    @FXML
+    private JFXButton goMainMode;
+
+    @FXML
+    private JFXButton goUserMode;
+
+    @FXML
+    private JFXButton applicationConsole;
+
+    @FXML
+    private JFXButton snapshot;
+
+    @FXML
+    private JFXButton applicationSettings;
+
+    @FXML
     private JFXButton hideSideBar;
 
     @FXML
@@ -64,10 +89,7 @@ public class SideBar extends BorderPane {
     Label userNameLabel;
 
     @FXML
-    private JFXButton goMainMode;
-
-    @FXML
-    private JFXButton goUserMode;
+    private MenuButton applicationDatabase;
 
     @FXML
     private MenuItem importDataBase;
@@ -77,19 +99,6 @@ public class SideBar extends BorderPane {
 
     @FXML
     private MenuItem deleteDataBase;
-
-    @FXML
-    private JFXButton userSettings;
-
-    @FXML
-    private JFXButton applicationSettings;
-
-    @FXML
-    private JFXButton applicationConsole;
-
-    @FXML
-    private JFXButton snapshot;
-
     // -------------------------------------------------------------
 
     /** Translate Transition used to show/hide the bar. */
@@ -188,6 +197,26 @@ public class SideBar extends BorderPane {
     }
 
     /**
+     * Prepares the SideBar to be shown for LoginMode
+     * @param b 
+     */
+    public void prepareForLoginMode(boolean b) {
+	if (b) {
+	    goMainMode.setDisable(true);
+	    goUserMode.setDisable(true);
+	    applicationSettings.setDisable(true);
+	    applicationConsole.setDisable(true);
+	    applicationDatabase.setDisable(true);
+	} else {
+	    goMainMode.setDisable(false);
+	    goUserMode.setDisable(false);
+	    applicationSettings.setDisable(false);
+	    applicationConsole.setDisable(false);
+	    applicationDatabase.setDisable(false);
+	}
+    }
+
+    /**
      * Called as soon as .fxml is initialized
      */
     @FXML
@@ -201,6 +230,22 @@ public class SideBar extends BorderPane {
 	//this.setTranslateX(-this.getPrefWidth())
 	//showBar()
 
+	//---------UPDATE ------------------------------
+
+	// checkForUpdates
+	applicationUpdate.setOnAction(a -> Main.checkForUpdates(true));
+
+	//help
+	help.setOnAction(
+		a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+
+	// aboutSection
+	aboutSection.setOnAction(a -> Main.aboutWindow.showWindow());
+
+	// donation
+	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
+
+	//---------MODE ------------------------------	
 	//goMainMode
 	goMainMode.setOnAction(a -> goMainMode());
 
@@ -296,12 +341,12 @@ public class SideBar extends BorderPane {
 
 	// speechLabel and speechButton
 	speechLabel.disableProperty().bind(speechToggle.selectedProperty().not());
-	speechToggle.selectedProperty().addListener(l -> {
-	    if (speechToggle.isSelected())
-		Main.speechReader.startSpeechRecognizer();
-	    else
-		Main.speechReader.stopSpeechRec(true);
-	});
+	//	speechToggle.selectedProperty().addListener(l -> {
+	//	    if (speechToggle.isSelected())
+	//		Main.speechReader.startSpeechRecognizer();
+	//	    else
+	//		Main.speechReader.stopSpeechRec(true);
+	//	});
 
 	speechToggle.setDisable(true);
 	// ------------------------------------About the Internet

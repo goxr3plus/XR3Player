@@ -46,7 +46,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import librarysystema.LibraryMode;
-import remote_communication.RemoteAppsController;
 import services.FilesFilterService;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
@@ -82,7 +81,7 @@ public class Main extends Application {
     // public static final RadioStationsController stationsInfostructure 
 
     /** The speech reader. */
-    public static RemoteAppsController speechReader;
+    // public static RemoteAppsController speechReader
 
     //----------------START: The below have not depencities on other ---------------------------------//
 
@@ -167,11 +166,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 56;
+    public final static int currentVersion = 57;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "16/03/2017";
+    public final static String releaseDate = "19/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -189,21 +188,26 @@ public class Main extends Application {
     public static LocalDBManager dbManager;
 
     /** The Constant libraryMode. */
-    public static LibraryMode libraryMode;
+    public static LibraryMode libraryMode = new LibraryMode();
 
     /** The Constant djMode. */
-    public static DJMode djMode;
+    public static DJMode djMode = new DJMode();
 
     /** The Constant multipleTabs. */
-    public static MultipleTabs multipleTabs;
+    public static MultipleTabs multipleTabs = new MultipleTabs();
 
     /** The Login Mode where the user of the applications has to choose an account to login */
-    public static LoginMode loginMode;
+    public static LoginMode loginMode = new LoginMode();
 
     /**
      * Entering in this mode you can change the user settings and other things that have to do with the user....
      */
-    public static UserMode userMode;
+    public static UserMode userMode = new UserMode();
+
+    /***
+     * This BorderPane has in the center the root , at the left the SideBar and on the Top the TopBar
+     */
+    static BorderPane applicationBorderPane = new BorderPane();
 
     // --------------END: The below have depencities on others------------------------
 
@@ -214,24 +218,23 @@ public class Main extends Application {
 	    // logger.info("XR3Player Application Started")
 	    System.out.println("XR3Player Application Started");
 
-	    loginMode = new LoginMode();
+	    //ApplicationStackPane
+	    stackPaneRoot.getChildren().addAll(applicationBorderPane, updateScreen, loginMode);
 
-	    // rootStack
-	    BorderPane rootParent = new BorderPane();
-	    rootParent.setStyle("-fx-background-color:black;");
-	    rootParent.setCenter(root);
-	    rootParent.setLeft(sideBar);
-	    root.setStyle("-fx-background-color:red");
-	    stackPaneRoot.getChildren().addAll(rootParent, updateScreen, loginMode);
-	    // StackPane.setAlignment(sideBar, Pos.CENTER_LEFT)
+	    //ApplicationBorderPane	    
+	    applicationBorderPane.setStyle("-fx-background-color:black;");
+	    applicationBorderPane.setCenter(root);
+
+	    //LoginMode    
+	    loginMode.setLeft(sideBar);
+	    sideBar.prepareForLoginMode(true);
 
 	    // root
-	    //rootParent.setVisible(false)
-	    updateScreen.setVisible(false);
-	    sideBar.setVisible(false);
-	    topBar.setVisible(false);
 	    root.setTop(topBar);
-	    //root.setLeft(sideBar)
+
+	    //Misc
+	    updateScreen.setVisible(false);
+	    topBar.setVisible(false);
 
 	    // Window
 	    window = primaryStage;
@@ -276,6 +279,10 @@ public class Main extends Application {
 	    // Scene and Show
 	    window.setScene(scene);
 	    window.show();
+
+	    //Do this in order to now have problems with SongsContextMenu
+	    songsContextMenu.show(window, 0, 0);
+	    songsContextMenu.hide();
 
 	    //InfoTool.DATABASE_FOLDER_NAME Exists?
 	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists()) {
@@ -339,8 +346,16 @@ public class Main extends Application {
 	//Close the LoginMode
 	loginMode.setVisible(false);
 	updateScreen.setVisible(true);
-	//userNameLabel
+
+	//SideBar
+	sideBar.setVisible(false);
+	sideBar.setManaged(false);
+	sideBar.prepareForLoginMode(false);
+	root.setLeft(sideBar);
+
+	//userNameLabel	
 	sideBar.userNameLabel.setText("Hello -> " + user.getUserName() + " <- !");
+
 	//Top Bar is the new Move Control
 	scene.setMoveControl(topBar);
 
@@ -351,29 +366,20 @@ public class Main extends Application {
 	    //----------------START:initialize everything needed------------------------------------------
 
 	    //Create this in a Thread
-	    //Thread s = new Thread(() ->
-	    dbManager = new LocalDBManager(user.getUserName());
-	    //Manage the above Thread
-	    //	    try {
-	    //		s.start();
-	    //		s.join();
-	    //	    } catch (InterruptedException ex) {
-	    //		ex.printStackTrace();
-	    //	    }
+	    Thread s = new Thread(() -> dbManager = new LocalDBManager(user.getUserName()));
+	    s.start();
 
-	    //
-	    libraryMode = new LibraryMode();
-	    djMode = new DJMode();
-	    multipleTabs = new MultipleTabs();
-	    userMode = new UserMode(user);
-
+	    //Do the below until the database is initialized
+	    userMode.setUser(user);
 	    libraryMode.add(Main.multipleTabs, 0, 1);
 	    root.setCenter(rootFlipPane);
+	    sideBar.setVisible(true);
+	    sideBar.setManaged(true);
 
 	    //flipPane
 	    mainModeFlipPane.getFront().getChildren().addAll(libraryMode);
 	    mainModeFlipPane.getBack().getChildren().addAll(djMode);
-	    
+
 	    //rootFlipPane
 	    rootFlipPane.getFront().getChildren().addAll(mainModeFlipPane);
 	    rootFlipPane.getBack().getChildren().addAll(userMode);
@@ -396,8 +402,15 @@ public class Main extends Application {
 			    .then("Click here to create a library...")
 			    .otherwise("Click here to open the first available library..."));
 
-	    //Load the DataBase
+	    //Load the DataBase - After the DBManager has been initialized of course ;)
+	    try {
+		s.join();
+	    } catch (InterruptedException ex) {
+		ex.printStackTrace();
+	    }
+	    libraryMode.initPreparedStatements();
 	    dbManager.loadApplicationDataBase();
+
 	    //  dbManager.recreateJSonDataBase()
 	    //  dbManager.loadOpenedLibraries()
 	    //  dbManager.updateLibrariesInformation(null)
@@ -443,8 +456,8 @@ public class Main extends Application {
 	if (libraryMode.multipleLibs.isFree(true)) {
 
 	    // Stop SpeechReader
-	    if (speechReader != null)
-		speechReader.stopSpeechRec(true);
+	    //	    if (speechReader != null)
+	    //		speechReader.stopSpeechRec(true)
 
 	    // vacuum?
 	    if (vacuum) {
@@ -583,7 +596,7 @@ public class Main extends Application {
 			    .hideAfter(Duration.millis(2000))::showError);
 		});
 	    }
-	}).start();
+	}, "Restart Application Thread").start();
     }
 
     /**
@@ -608,14 +621,11 @@ public class Main extends Application {
 				"https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
 				.get();
 
-			// Document doc = Jsoup.parse(new
-			// File("XR3PlayerUpdatePage.html"), "UTF-8",
-			// "http://example.com/");
+			// Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
 
 			Element lastArticle = doc.getElementsByTag("article").last();
 
-			// Not disturb the user every time the application
-			// starts
+			// Not disturb the user every time the application starts if there is not new update
 			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
 			    return;
 
@@ -671,17 +681,17 @@ public class Main extends Application {
 
 				// Release Date
 				textArea.appendText("->Release Date: ");
-				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style);
+				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "green"));
 				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
 
 				// Minimum JRE
 				textArea.appendText("->Minimum Java Version: ");
-				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style);
+				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("black", "orange"));
 				textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
 
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
-				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style);
+				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "firebrick"));
 				final AtomicInteger counter = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*"))
 					.forEach(el -> {
@@ -726,7 +736,7 @@ public class Main extends Application {
 			    Duration.millis(2500), NotificationType.ERROR));
 		}
 
-	    });
+	    }, "Application Update Thread");
 
 	    updaterThread.setDaemon(true);
 	    updaterThread.start();

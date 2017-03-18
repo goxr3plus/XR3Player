@@ -7,12 +7,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import application.Main;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.util.Duration;
 import media.Audio;
 import media.Media;
 import tools.ActionTool;
@@ -37,7 +44,7 @@ public class MediaContextMenu extends ContextMenu {
     private SmartController controller;
 
     /** The players. */
-    Menu players = new Menu("Play on", InfoTool.getImageViewFromDocuments("circledPlay24.png"));
+    Menu playOn = new Menu("Play on", InfoTool.getImageViewFromDocuments("circledPlay24.png"));
 
     /** The player 0. */
     MenuItem player0 = new MenuItem("xPlayer ~0");
@@ -47,6 +54,18 @@ public class MediaContextMenu extends ContextMenu {
 
     /** The player 2. */
     MenuItem player2 = new MenuItem("xPlayer ~2");
+
+    /** The players. */
+    Menu stopPlayer = new Menu("Stop Player", InfoTool.getImageViewFromDocuments("Stop Sign-24.png"));
+
+    /** The player 0. */
+    MenuItem splayer0 = new MenuItem("xPlayer ~0");
+
+    /** The player 1. */
+    MenuItem splayer1 = new MenuItem("xPlayer ~1");
+
+    /** The player 2. */
+    MenuItem splayer2 = new MenuItem("xPlayer ~2");
 
     //Start:--Search on Web
     Menu searchOnWeb = new Menu("Search on Web..", InfoTool.getImageViewFromDocuments("searchWeb24.png"));
@@ -123,13 +142,18 @@ public class MediaContextMenu extends ContextMenu {
     public MediaContextMenu() {
 
 	//Add all the items
-	getItems().addAll(new TitleMenuItem("Common"), players, searchOnWeb, more, new TitleMenuItem("File Edit"),
-		rename, simpleDelete, storageDelete, new TitleMenuItem("Organize"), copy);
+	getItems().addAll(new TitleMenuItem("Common"), playOn, stopPlayer, searchOnWeb, more,
+		new TitleMenuItem("File Edit"), rename, simpleDelete, storageDelete, new TitleMenuItem("Organize"),
+		copy);
 
 	//---play
 
-	players.getItems().addAll(player0, player1, player2);
-	players.getItems().forEach(item -> item.setOnAction(this::onAction));
+	playOn.getItems().addAll(player0, player1, player2);
+	playOn.getItems().forEach(item -> item.setOnAction(this::onAction));
+
+	//--stop
+	stopPlayer.getItems().addAll(splayer0, splayer1, splayer2);
+	stopPlayer.getItems().forEach(item -> item.setOnAction(this::onAction));
 
 	//---searchOnWeb
 	getItems().addAll();
@@ -167,14 +191,15 @@ public class MediaContextMenu extends ContextMenu {
      *            the media
      * @param genre
      *            the genre
-     * @param d
+     * @param screenX
      *            the d
-     * @param e
+     * @param screenY
      *            the e
      * @param controller
      *            the controller
      */
-    public void showContextMenu(Media media, Genre genre, double d, double e, SmartController controller, Node node) {
+    public void showContextMenu(Media media, Genre genre, double screenX, double screenY, SmartController controller,
+	    Node node) {
 
 	// Don't waste resources
 	if (previousGenre != genre) {
@@ -188,16 +213,16 @@ public class MediaContextMenu extends ContextMenu {
 		storageDelete.setVisible(true);
 		separator1.setVisible(true);
 		separator2.setVisible(true);
-		// } else if (button instanceof TopCategorySong) {
-		// addOn.setVisible(false);
-		// stars.setVisible(false);
-		// copy.setVisible(false);
-		// move.setVisible(false);
-		// rename.setVisible(false);
-		// simpleDelete.setVisible(false);
-		// storageDelete.setVisible(false);
-		// separator1.setVisible(false);
-		// separator2.setVisible(false);
+//		 } else if (button instanceof TopCategorySong) {
+//		 addOn.setVisible(false);
+//		 stars.setVisible(false);
+//		 copy.setVisible(false);
+//		 move.setVisible(false);
+//		 rename.setVisible(false);
+//		 simpleDelete.setVisible(false);
+//		 storageDelete.setVisible(false);
+//		 separator1.setVisible(false);
+//		 separator2.setVisible(false);
 	    } else if (media.getGenre() == Genre.XPLAYLISTSONG) {
 		addOn.setVisible(false);
 		stars.setVisible(false);
@@ -216,8 +241,30 @@ public class MediaContextMenu extends ContextMenu {
 	this.controller = controller;
 
 	// Show it
-	show(Main.window, d - super.getWidth() + super.getWidth() * 14 / 100, e - 1);
+	show(Main.window, screenX - 5 - super.getWidth() + super.getWidth() * 14 / 100, screenY - 1);
 	previousGenre = genre;
+
+	//Y axis
+	double yIni = screenY - 50;
+	double yEnd = super.getY();
+	super.setY(yIni);
+	final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+	yProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+
+	//X axis
+	//	double xIni = screenX - super.getWidth() + super.getWidth() * 14 / 100 + 30;
+	//	double xEnd = screenX - super.getWidth() + super.getWidth() * 14 / 100;
+	//	super.setX(xIni);
+	//	final DoubleProperty xProperty = new SimpleDoubleProperty(xIni);
+	//	xProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+
+	//Timeline
+	Timeline timeIn = new Timeline();
+	timeIn.getKeyFrames()
+		.addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+	//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
+	timeIn.play();
+
     }
 
     /**
@@ -241,7 +288,7 @@ public class MediaContextMenu extends ContextMenu {
      */
     public void onAction(ActionEvent action) {
 
-	// play on deck 0
+	// --------------------play on deck 0
 	if (action.getSource() == player0) {
 	    ((Audio) media).playOnDeck(0, controller);
 
@@ -250,8 +297,22 @@ public class MediaContextMenu extends ContextMenu {
 	    ((Audio) media).playOnDeck(1, controller);
 
 	    // play on deck 2
-	} else if (action.getSource() == player2)
+	} else if (action.getSource() == player2) {
+
 	    ((Audio) media).playOnDeck(2, controller);
+
+	    // ------------------stop deck 0
+	} else if (action.getSource() == splayer0) {
+	    Main.xPlayersList.getXPlayer(0).stop();
+
+	    // stop deck 1
+	} else if (action.getSource() == splayer1) {
+	    Main.xPlayersList.getXPlayer(1).stop();
+
+	    // stop deck 2
+	} else if (action.getSource() == splayer2) {
+	    Main.xPlayersList.getXPlayer(2).stop();
+	}
 
 	// add on xPlayList 0
 	// } else if (a.getSource() == xPlayer0)
@@ -282,7 +343,7 @@ public class MediaContextMenu extends ContextMenu {
 	else if (action.getSource() == information) { // information
 	    // showPopOver(media);
 	} else if (action.getSource() == stars)
-	    media.updateStars(controller,node);
+	    media.updateStars(controller, node);
 	else if (action.getSource() == sourceFolder) // File path
 	    ActionTool.openFileLocation(media.getFilePath());
 	else if (action.getSource() == copy) // copyTo

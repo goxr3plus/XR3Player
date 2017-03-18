@@ -32,8 +32,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -41,7 +39,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.Genre;
@@ -463,7 +460,7 @@ public class Library extends StackPane {
 	// ImageView
 	// imageView.fitWidthProperty().bind(this.prefWidthProperty())
 	// imageView.fitHeightProperty().bind(this.prefHeightProperty())
-	
+
 	//-----THIS
 	setOnScroll(scroll -> {
 	    if (scroll.getDeltaY() > 0)
@@ -504,7 +501,6 @@ public class Library extends StackPane {
 	    if (m.getButton() == MouseButton.PRIMARY)
 		updateLibraryStars(ratingLabel);
 	});
-	
 
 	// ----SettingsLabel
 	settingsLabel.setOnMouseReleased(m -> Main.libraryMode.libraryViewer.settings.showWindow(this));
@@ -788,6 +784,8 @@ public class Library extends StackPane {
 		libUStatus.setBoolean(1, way);
 		libUStatus.setString(2, getLibraryName());
 		libUStatus.executeUpdate();
+
+		//Commit
 		Main.dbManager.commit();
 	    }
 	} catch (SQLException sql) {

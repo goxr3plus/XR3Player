@@ -65,10 +65,10 @@ import xplayer.model.XPlayerModel;
  * @author GOXR3PLUS
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
-   
+
     @FXML
     private BorderPane borderPane;
-    
+
     /** The container. */
     @FXML
     private GridPane container;
@@ -177,7 +177,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     private Label topInfoLabel;
 
     // -----------------------------------------------------------------------------
-    
+
     /**
      * The class Logger
      */
@@ -196,7 +196,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     public XPlayer xPlayer;
 
     /** The x play list. */
-    public XPlayerPlaylist xPlayList;
+    // public XPlayerPlaylist xPlayList
 
     /** The radial menu. */
     public XPlayerRadialMenu radialMenu;
@@ -244,7 +244,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    ImageCursor.getBestSize(64, 64).getWidth() >= 64.00 ? "Private-64.png" : "Private-32.png");
     private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2,
 	    noSeek.getHeight() / 2);
-    
+
     /**
      * 
      */
@@ -284,7 +284,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// -----Important-------------
 	radialMenu = new XPlayerRadialMenu(this);
-	xPlayList = new XPlayerPlaylist(25, this);
+	//xPlayList = new XPlayerPlaylist(25, this)
 	visualizerWindow = new VisualizerWindowController(this);
 	xPlayerSettingsController = new XPlayerSettingsController(this);
 
@@ -296,8 +296,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	container.setOnDragDropped(drop -> dragDrop(drop, 2));
 
 	// settingsToggle
-	//getChildren().add(xPlayerSettingsController);
-	//xPlayerSettingsController.visibleProperty().bind(settingsToggle.selectedProperty());
+	//getChildren().add(xPlayerSettingsController)
+	//xPlayerSettingsController.visibleProperty().bind(settingsToggle.selectedProperty())
 
 	// fxRegion,fxSpinner
 	fxRegion.setVisible(false);
@@ -317,49 +317,28 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	openFileButton.setOnAction(action -> openFileChooser());
 
 	// topInfoLabel
-	topInfoLabel.setText("Player : [ " + this.getKey() + " ]");
+	topInfoLabel.setText("Player <<" + this.getKey() + " >>");
 
 	// backwardButton
-	backwardButton.setOnAction(a -> {
-	    // if (xPlayer.isPausedOrPlaying()) {
-
-	    seek(-10);
-	    // Check
-
-	    // }
-	});
+	backwardButton.setOnAction(a -> seek(-10));
 
 	// forwardButton
-	forwardButton.setOnAction(a -> {
-	    // if (xPlayer.isPausedOrPlaying()) {
-
-	    seek(+10);
-
-	    // }
-	});
+	forwardButton.setOnAction(a -> seek(+10));
 
 	//flipPane
 	flipPane.setFlipTime(150);
 	flipPane.getFront().getChildren().addAll(container);
 	flipPane.getBack().getChildren().addAll(xPlayerSettingsController);
-	
-	settingsToggle.selectedProperty().addListener((observable,oldValue,newValue)->{
-	    if(newValue) // true?
+
+	settingsToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
+	    if (newValue) // true?
 		flipPane.flipToBack();
 	    else
 		flipPane.flipToFront();
-	});	
+	});
 	borderPane.setCenter(flipPane);
 
-	
     }
-
-    /**
-     * @return The FlipPanel
-     */
-//    public FlipPanel getFlipPanel() {
-//	return flipPane;
-//    }
 
     /**
      * Opens the current Media File of the player to the default system explorer
@@ -754,7 +733,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	xPlayerSettingsController.equalizerTab.setContent(new ScrollPane(equalizer));
 
 	// PlayList
-	xPlayerSettingsController.playListTab.setContent(xPlayList);
+	//xPlayerSettingsController.playListTab.setContent(xPlayList);
 
 	// XplayerTabs
 	/*

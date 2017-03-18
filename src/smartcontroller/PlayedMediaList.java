@@ -3,8 +3,16 @@
  */
 package smartcontroller;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.logging.Level;
+
+import application.Main;
+import database.LocalDBManager;
+import tools.InfoTool;
 
 /**
  * The Class PlayedSongs.
@@ -15,13 +23,89 @@ public class PlayedMediaList {
     Set<String> set = new LinkedHashSet<>(); // order is preserved
 
     /**
+     * The name of the database table
+     */
+    private final String dataBaseTableName = "PlayedMediaList";
+
+    //------------Prepared Statements---------------
+    PreparedStatement insert;
+    PreparedStatement rename;
+
+    /**
+     * Prepares the DataBase table (if not exists) , i do this to keep backward compatibility with previous XR3Player Versions ( Update 57<) Also it
+     * creates the PreparedStatement to insert Files Paths into the Table
+     */
+    private void prepareMediaListTable() {
+
+	try {
+	    //Check if it does already exists
+	    if (!LocalDBManager.tableExists(dataBaseTableName))
+
+		Main.dbManager.connection1.createStatement()
+			.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'"
+				+ "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "TIMESPLAYED  INT     NOT NULL,"
+				+ "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+
+	    //Create the PreparedStatements
+	    String string = "UPDATE '" + dataBaseTableName + "'";
+
+	    insert = Main.dbManager.connection1.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName
+		    + "' (PATH,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?)");
+
+	    rename = Main.dbManager.connection1.prepareStatement(string + " SET PATH=? WHERE PATH=?");
+	} catch (SQLException ex) {
+	    ex.printStackTrace();
+	}
+
+    }
+
+    /**
+     * Uploads the data from the database table to the list , i call this method when i loggin into a user to upload the Media that he/she has
+     * previously heard
+     */
+    public void uploadFromDataBase() {
+
+	//Check existance
+	prepareMediaListTable();
+
+	//Now Upload
+	try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
+		.executeQuery("SELECT* FROM '" + dataBaseTableName + "'")) {
+
+	    //Add all
+	    while (resultSet.next())
+		set.add(resultSet.getString("PATH"));
+
+	} catch (SQLException ex) {
+	    ex.printStackTrace();
+	}
+
+    }
+
+    /**
      * Add a new item.
      *
      * @param item
      *            the item
+     * @return True if succeeded or False if not
      */
-    public void add(String item) {
-	set.add(item);
+    public boolean add(String item) {
+
+	try {
+	    insert.setString(1, item);
+	    insert.setInt(2, 0);
+	    insert.setString(3, InfoTool.getCurrentDate());
+	    insert.setString(4, InfoTool.getLocalTime());
+	    insert.executeUpdate();
+
+	    //Commit
+	    Main.dbManager.commit();
+
+	    return set.add(item);
+	} catch (SQLException ex) {
+	    ex.printStackTrace();
+	    return false;
+	}
     }
 
     /**
@@ -52,10 +136,49 @@ public class PlayedMediaList {
      * @return true, if successful
      */
     public boolean renameMedia(String oldName, String newName) {
-	if (set.remove(oldName))
-	    return set.add(newName);
+	if (set.remove(oldName)) {
 
-	return false;
+	    //Update in the database
+	    try {
+		rename.setString(1, newName);
+		rename.setString(2, oldName);
+		rename.executeUpdate();
+
+		//Commit
+		Main.dbManager.commit();
+	    } catch (SQLException ex) {
+		ex.printStackTrace();
+		return false;
+	    }
+
+	    //Add to the Set
+	    return set.add(newName);
+	}
+
+	return true;
+    }
+
+    /**
+     * Clears all the Media from the List and Database
+     * 
+     * @return True if succeeded or False if not
+     */
+    public boolean clearAll() {
+
+	try {
+	    //Clear the table
+	    Main.dbManager.connection1.createStatement().executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
+	    Main.dbManager.commit();
+
+	    //Clear from Set
+	    set.clear();
+	} catch (Exception ex) {
+	    Main.logger.log(Level.WARNING, "", ex);
+	    return false;
+	}
+
+	return true;
+
     }
 
     /**

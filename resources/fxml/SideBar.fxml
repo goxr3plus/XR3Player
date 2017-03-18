@@ -6,7 +6,6 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -22,21 +21,98 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" maxWidth="-Infinity" prefHeight="624.0" prefWidth="62.0" style="-fx-background-color: rgb(42,42,42); -fx-border-width: 3; -fx-background-radius: 0 0 15 0;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="62.0" style="-fx-background-color: rgb(42,42,42); -fx-border-width: 3; -fx-background-radius: 0 0 15 0;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+   <top>
+      <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Mode" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: rgb(66,255,154); -fx-font-weight: bold;" text="Update" wrapText="true" />
+                  <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Downloading%20Updates-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Update" />
+                     </tooltip>
+                  </JFXButton>
+                  <MenuButton alignment="CENTER" contentDisplay="CENTER" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 12; -fx-background-color: black; -fx-background-radius: 0;">
+                     <items>
+                        <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="App Info" />
+                        <MenuItem fx:id="help" mnemonicParsing="false" text="App Manual" />
+                        <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Donate :)" />
+                     </items>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Help-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuButton>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Database" />
+                  <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0" style="-fx-background-color: black;">
+                     <items>
+                        <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
+                           <graphic>
+                              <ImageView pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../image/Accept%20Database-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="exportDataBase" mnemonicParsing="false" text="Export DataBase">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Data%20Protection-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="deleteDataBase" mnemonicParsing="false" text="Delete DataBase">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Delete%20Database-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/SQL-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuButton>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: orange; -fx-font-weight: bold;" text="Mode" />
                   <JFXButton fx:id="goMainMode" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 15 0 0 15; -fx-border-color: transparent firebrick transparent transparent; -fx-border-width: 0 4 0 0;" styleClass="applicationMode" text=" ">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Home-32.png" />
+                              <Image url="@../image/Library-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -51,7 +127,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/User-32.png" />
+                              <Image url="@../image/User%20Location-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -66,7 +142,27 @@
             </VBox>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Tools" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Settings" />
+                  <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Settings-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Application Settings" />
+                     </tooltip>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
                   <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -95,21 +191,6 @@
                      </cursor>
                      <tooltip>
                         <Tooltip text="Screen SnapShot" />
-                     </tooltip>
-                  </JFXButton>
-                  <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Gears-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <tooltip>
-                        <Tooltip text="Application Settings" />
                      </tooltip>
                   </JFXButton>
                   <StackPane prefHeight="150.0" prefWidth="200.0" visible="false">
@@ -184,9 +265,6 @@
                            </children>
                         </VBox>
                         <ImageView fx:id="userImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-                           <image>
-                              <Image url="@../image/user.png" />
-                           </image>
                            <StackPane.margin>
                               <Insets bottom="5.0" top="5.0" />
                            </StackPane.margin>
@@ -197,55 +275,6 @@
                   </StackPane>
                </children>
             </VBox>
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Database" />
-            <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" prefWidth="55.0" style="-fx-background-color: black;" fx:id="xr3Settings">
-               <items>
-                  <Menu mnemonicParsing="false" text="DataBase">
-                     <items>
-                        <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
-                           <graphic>
-                              <ImageView pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../image/database-import.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem fx:id="exportDataBase" mnemonicParsing="false" text="Export DataBase">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/database-export.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem fx:id="deleteDataBase" mnemonicParsing="false" text="Delete DataBase">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/database-delete.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuItem>
-                     </items>
-                  </Menu>
-               </items>
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/Database-32.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </MenuButton>
          </children>
       </VBox>
    </top>

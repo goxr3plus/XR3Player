@@ -79,6 +79,9 @@ public class LoginMode extends BorderPane {
     @FXML
     private Label createdByLabel;
 
+    /**
+     * 
+     */
     @FXML
     public Label xr3PlayerLabel;
 
@@ -106,13 +109,13 @@ public class LoginMode extends BorderPane {
 		Main.window.requestFocus();
 
 		// Check if this name already exists
-		String name = Main.renameWindow.getUserInput();
+		String newName = Main.renameWindow.getUserInput();
 
 		// if can pass
-		if (!userViewer.items.stream().anyMatch(user -> user.getUserName().equals(name))) {
+		if (!userViewer.items.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
 
-		    if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + name).mkdir())
-			userViewer.addUser(new User(name, userViewer.items.size()), true);
+		    if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + newName).mkdir())
+			userViewer.addUser(new User(newName, userViewer.items.size()), true);
 		    else
 			ActionTool.showNotification("Error", "An error occured trying to create a new user",
 				Duration.seconds(2), NotificationType.ERROR);

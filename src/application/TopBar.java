@@ -19,12 +19,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import tools.ActionTool;
 import tools.InfoTool;
 
 /**
@@ -35,28 +33,19 @@ import tools.InfoTool;
 public class TopBar extends BorderPane {
 
     @FXML
-    private ToggleButton goLibrariesMode;
+    private StackPane cpuStackPane;
 
-   // @FXML
-   // private Button openSettings
+    @FXML
+    private Label cpuLabel;
+
+    @FXML
+    private Label xr3Label;
+
+    @FXML
+    private ToggleButton goLibrariesMode;
 
     @FXML
     private ToggleButton goDJMode;
-
-   // @FXML
-    //private Button openConsole
-
-    @FXML
-    private MenuItem checkForUpdates;
-
-    @FXML
-    private MenuItem aboutSection;
-
-    @FXML
-    private MenuItem help;
-
-    @FXML
-    private MenuItem donation;
 
     @FXML
     private Button restartButton;
@@ -70,17 +59,6 @@ public class TopBar extends BorderPane {
     @FXML
     private Button close;
 
-   // @FXML
-    //private Button showSideBar;
-
-    @FXML
-    private StackPane cpuStackPane;
-
-    @FXML
-    private Label cpuLabel;
-
-    @FXML
-    private Label xr3Label;
 
     // ----------------------
     
@@ -130,13 +108,6 @@ public class TopBar extends BorderPane {
     @FXML
     private void initialize() {
 
-	//openConsole
-	//openConsole.setOnAction(a -> Main.consoleWindow.show())
-
-	//help
-	help.setOnAction(
-		a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
-
 	// cpuStackPane
 	cpuStackPane.getChildren().add(0, cpUsage);
 	cpuStackPane.setOnMouseReleased(r -> {
@@ -154,16 +125,8 @@ public class TopBar extends BorderPane {
 	//cpUsage.restartUpdater()
 
 	// showSideBar
-	//showSideBar.setOnAction(a -> Main.sideBar.toogleBar());
-
-	// checkForUpdates
-	checkForUpdates.setOnAction(a -> Main.checkForUpdates(true));
-
-	// aboutSection
-	aboutSection.setOnAction(a -> Main.aboutWindow.showWindow());
-
-	// donation
-	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
+	//showSideBar.setOnAction(a -> Main.sideBar.toogleBar()
+	
 
 	// restartButton
 	restartButton.setOnAction(a -> {
@@ -182,9 +145,6 @@ public class TopBar extends BorderPane {
 	    });
 	});
 
-	//openSettings
-	//openSettings.setOnAction(a -> Main.settingsWindow.showWindow());
-
 	// minimize
 	minimize.setOnAction(ac -> Main.window.setIconified(true));
 
@@ -202,7 +162,7 @@ public class TopBar extends BorderPane {
 		Main.djMode.getSplitPane().getItems().removeAll(Main.treeManager, Main.multipleTabs);
 		Main.djMode.getSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
 		Main.djMode.setDividerPositions();
-		//Main.root.setCenter(Main.djMode);
+		//Main.root.setCenter(Main.djMode)
 		Main.mainModeFlipPane.flipToBack();
 
 		// Update window Mode
@@ -221,7 +181,7 @@ public class TopBar extends BorderPane {
 
 		Main.djMode.updateDividerArray();
 		Main.libraryMode.add(Main.multipleTabs, 0, 1);
-		//Main.root.setCenter(Main.libraryMode);
+		//Main.root.setCenter(Main.libraryMode)
 		Main.mainModeFlipPane.flipToFront();
 
 		// Update window Mode
@@ -241,7 +201,7 @@ public class TopBar extends BorderPane {
     public void addXR3LabelBinding() {
 	// xr3Label
 	StringBinding binding = Bindings.createStringBinding(
-		() -> MessageFormat.format(">-XR3Player V.{0} -<  Width=[{1}],Height=[{2}]", Main.currentVersion,
+		() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]", Main.currentVersion,
 			Main.window.getWidth(), Main.window.getHeight()),
 		Main.window.widthProperty(), Main.window.heightProperty());
 	xr3Label.textProperty().bind(binding);

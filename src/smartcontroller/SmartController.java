@@ -58,6 +58,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
@@ -70,10 +71,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import media.Audio;
 import media.Media;
 import tools.ActionTool;
 import tools.InfoTool;
+import tools.NotificationType;
 import xplayer.presenter.AudioType;
 
 /**
@@ -325,10 +328,7 @@ public class SmartController extends StackPane {
 
 	});
 
-	// ------ tableViewer
-	tableViewer.setItems(itemsObservableList);
-	tableViewer.setPlaceholder(new Label("Drag && Drop or Import Media"));
-
+	// ------ tableViewer	
 	centerStackPane.getChildren().add(tableViewer);
 	tableViewer.toBack();
 
@@ -1037,53 +1037,49 @@ public class SmartController extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
-	    String center = "-fx-alignment:CENTER-LEFT;";
 
-	    // hasBeenPlayed
-	    hasBeenPlayed.setCellValueFactory(new PropertyValueFactory<>("hasBeenPlayed"));
+	    //------------------------------TableViewer---------------------------
+	    setItems(itemsObservableList);
+	    setPlaceholder(new Label("Drag && Drop or Import Media"));
 
-	    // hasBeenPlayed
-	    mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
+	    //--Selection Model
+	    getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+	    getSelectionModel().getSelectedIndices()
+		    .addListener((ListChangeListener<? super Integer>) l -> updateLabel());  // Main.amazon.updateInformation((Media) newValue)
 
-	    // title
-	    title.setStyle(center);
-	    title.setCellValueFactory(new PropertyValueFactory<>("title"));
+	    //--KeyListener
+	    setOnKeyReleased(key -> {
+		if ((key.isControlDown() || key.getCode() == KeyCode.COMMAND) && key.getCode() == KeyCode.C) {
+		    System.out.println("Control+C was released");
 
-	    // hourImported
-	    hourImported.setCellValueFactory(new PropertyValueFactory<>("hourImported"));
+		    //Get Native System ClipBoard
+		    final Clipboard clipboard = Clipboard.getSystemClipboard();
+		    final ClipboardContent content = new ClipboardContent();
 
-	    // dateImported
-	    dateImported.setCellValueFactory(new PropertyValueFactory<>("dateImported"));
+		    // PutFiles
+		    content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath()))
+			    .collect(Collectors.toList()));
 
-	    // dateFileCreated
-	    dateFileCreated.setCellValueFactory(new PropertyValueFactory<>("dateFileCreated"));
+		    //Set the Content
+		    clipboard.setContent(content);
 
-	    // dateFileCreated
-	    dateFileModified.setCellValueFactory(new PropertyValueFactory<>("dateFileModified"));
+		    ActionTool.showNotification("Copied to Clipboard",
+			    "Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
+			    Duration.seconds(3.5), NotificationType.INFORMATION);
 
-	    // stars
-	    stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+		} else if ((key.isControlDown() || key.getCode() == KeyCode.COMMAND) && key.getCode() == KeyCode.V) {
+		    System.out.println("Control+V was released");
 
-	    // timesHeard
-	    timesPlayed.setCellValueFactory(new PropertyValueFactory<>("timesPlayed"));
+		    //Get Native System ClipBoard
+		    final Clipboard clipboard = Clipboard.getSystemClipboard();
 
-	    // duration
-	    duration.setCellValueFactory(new PropertyValueFactory<>("durationEdited"));
+		    // Has Files? + isFree()?
+		    if (clipboard.hasFiles() && isFree(true))
+			inputService.start(clipboard.getFiles());
+		}
+	    });
 
-	    // drive
-	    drive.setCellValueFactory(new PropertyValueFactory<>("drive"));
-
-	    // filePath
-	    filePath.setStyle(center);
-	    filePath.setCellValueFactory(new PropertyValueFactory<>("filePath"));
-
-	    // fileName
-	    fileName.setStyle(center);
-	    fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
-
-	    // fileType
-	    fileType.setCellValueFactory(new PropertyValueFactory<>("fileType"));
-
+	    //--Row Factory
 	    setRowFactory(rf -> {
 		TableRow<Media> row = new TableRow<>();
 
@@ -1101,6 +1097,7 @@ public class SmartController extends StackPane {
 				.orElse(false));
 
 		//Mouse Listener
+		row.setFocusTraversable(true);
 		row.setOnMouseReleased(m -> {
 		    if (m.getButton() == MouseButton.SECONDARY && !row.isDisable())
 			tableViewer.getSelectionModel().select(row.getIndex());
@@ -1120,16 +1117,16 @@ public class SmartController extends StackPane {
 		});
 
 		//Needs fixing!!!
-		//		//KeyListener
-		//		row.setOnKeyReleased(k -> {
-		//		    System.out.println("Key Released....");
-		//		    KeyCode code = k.getCode();
-		//
-		//		    if (code == KeyCode.R)
-		//			row.itemProperty().get().rename(SmartController.this, row);
-		//		    else if (code == KeyCode.S)
-		//			tableViewer.getSelectionModel().getSelectedItem().updateStars(SmartController.this, row);
-		//		});
+		//KeyListener
+		row.setOnKeyReleased(k -> {
+		    System.out.println("Key Released....");
+		    KeyCode code = k.getCode();
+
+		    if (code == KeyCode.R)
+			row.itemProperty().get().rename(SmartController.this, row);
+		    else if (code == KeyCode.S)
+			tableViewer.getSelectionModel().getSelectedItem().updateStars(SmartController.this, row);
+		});
 
 		// it's also possible to do this with the standard API, but
 		// there are lots of
@@ -1142,9 +1139,6 @@ public class SmartController extends StackPane {
 		return row;
 	    });
 
-	    // Selection Model
-	    getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
 	    // --Drag Detected
 	    setOnDragDetected(event -> {
 		if (getSelectedCount() != 0 && event.getScreenY() > localToScreen(getBoundsInLocal()).getMinY() + 30) {
@@ -1155,20 +1149,17 @@ public class SmartController extends StackPane {
 		    /* put a string on drag board */
 		    ClipboardContent content = new ClipboardContent();
 
-		    // Single DND
-		    if (getSelectedCount() == 1) {
-			content.putFiles(Arrays.asList(new File(getSelectionModel().getSelectedItem().getFilePath())));
-			getSelectionModel().getSelectedItem().setDragView(db);
-			// MultipleDND
-		    } else {
-			// Array with all the selected
-			ArrayList<File> files = new ArrayList<>();
-			getSelectionModel().getSelectedItems().stream()
-				.forEach(s -> files.add(new File(s.getFilePath())));
+		    // PutFiles
+		    content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath()))
+			    .collect(Collectors.toList()));
 
-			// PutFiles
-			content.putFiles(files);
-			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + files.size() + ")Items", 100, 100);
+		    // Single Drag and Drop ?
+		    if (content.getFiles().size() == 1)
+			getSelectionModel().getSelectedItem().setDragView(db);
+		    // Multiple Drag and Drop ?
+		    else {
+			ActionTool.paintCanvas(canvas.getGraphicsContext2D(),
+				"(" + content.getFiles().size() + ")Items", 100, 100);
 			db.setDragView(canvas.snapshot(null, image), 50, 0);
 		    }
 
@@ -1215,9 +1206,53 @@ public class SmartController extends StackPane {
 	    // Target:" + d.getGestureTarget());
 	    // });
 
-	    getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l ->
-	    // Main.amazon.updateInformation((Media) newValue)
-	    updateLabel());
+	    //--------------------------Other-----------------------------------
+	    String center = "-fx-alignment:CENTER-LEFT;";
+
+	    // hasBeenPlayed
+	    hasBeenPlayed.setCellValueFactory(new PropertyValueFactory<>("hasBeenPlayed"));
+
+	    // hasBeenPlayed
+	    mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
+
+	    // title
+	    title.setStyle(center);
+	    title.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+	    // hourImported
+	    hourImported.setCellValueFactory(new PropertyValueFactory<>("hourImported"));
+
+	    // dateImported
+	    dateImported.setCellValueFactory(new PropertyValueFactory<>("dateImported"));
+
+	    // dateFileCreated
+	    dateFileCreated.setCellValueFactory(new PropertyValueFactory<>("dateFileCreated"));
+
+	    // dateFileCreated
+	    dateFileModified.setCellValueFactory(new PropertyValueFactory<>("dateFileModified"));
+
+	    // stars
+	    stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+
+	    // timesHeard
+	    timesPlayed.setCellValueFactory(new PropertyValueFactory<>("timesPlayed"));
+
+	    // duration
+	    duration.setCellValueFactory(new PropertyValueFactory<>("durationEdited"));
+
+	    // drive
+	    drive.setCellValueFactory(new PropertyValueFactory<>("drive"));
+
+	    // filePath
+	    filePath.setStyle(center);
+	    filePath.setCellValueFactory(new PropertyValueFactory<>("filePath"));
+
+	    // fileName
+	    fileName.setStyle(center);
+	    fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
+
+	    // fileType
+	    fileType.setCellValueFactory(new PropertyValueFactory<>("fileType"));
 
 	}
 

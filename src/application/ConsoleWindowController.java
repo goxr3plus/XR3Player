@@ -93,9 +93,9 @@ public class ConsoleWindowController extends StackPane {
 	cssTextArea.setWrapText(true);
 	cssTextArea.setEditable(false);
 	cssTextArea.setFocusTraversable(false);
-	String t = "Click Help to check the manual\n";
+	String t = "Click or type Help to open the app manual\n";
 	cssTextArea.appendText(t);
-	cssTextArea.setStyle(0, t.length(), "-fx-fill:green; -fx-font-weight:bold; -fx-font-size:15;");
+	cssTextArea.setStyle(0, t.length(), "-fx-fill:yellow; -fx-font-weight:bold; -fx-font-size:15;");
 
 	VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(cssTextArea);
 	vsPane.setMaxWidth(Double.MAX_VALUE);
