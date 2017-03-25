@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -59,6 +61,7 @@ import org.tritonus.share.sampled.file.TAudioFileFormat;
 import javafx.application.Platform;
 import javafx.util.Duration;
 import javazoom.spi.PropertiesContainer;
+import streamplayer.StreamPlayerException.PlayerException;
 import tools.ActionTool;
 import tools.NotificationType;
 
@@ -74,58 +77,14 @@ import tools.NotificationType;
 public class StreamPlayer implements Runnable {
 
     /**
-     * Status of Stream Player.
-     *
-     * @author GOXR3PLUS
+     * Class logger
      */
-    public enum Status {
+    Logger logger = Logger.getLogger(StreamPlayer.class.getName());
 
-	/** UNKOWN STATUS. */
-	UNKNOWN,
+    //-------------------AUDIO---------------------
 
-	/** In the process of opening the AudioInputStream. */
-	OPENING,
-
-	/** AudioInputStream is opened. */
-	OPENED,
-
-	/** play event has been fired. */
-	PLAYING,
-
-	/** player is stopped. */
-	STOPPED,
-
-	/** player is paused. */
-	PAUSED,
-
-	/** resume event is fired. */
-	RESUMED,
-
-	/** player is in the process of seeking. */
-	SEEKING,
-
-	/** seek work has been done. */
-	SEEKED,
-
-	/** EOM stands for "END OF MEDIA". */
-	EOM,
-
-	/** player pan has changed. */
-	PAN,
-
-	/** player gain has changed. */
-	GAIN;
-
-    }
-
-    /** The Constant UNAVAILABLE. */
-    private static final int UNAVAILABLE = -1;
-
-    /** The Constant EXTERNAL_BUFFER_SIZE. */
-    private static final int EXTERNAL_BUFFER_SIZE = 4000 * 4;
-
-    /** The Constant SKIP_INACCURACY_SIZE. */
-    // private static final int SKIP_INACCURACY_SIZE = 1200
+    /** @SEE streamplayer.Status */
+    private volatile Status status = Status.UNKNOWN;
 
     /** The thread. */
     private Thread thread = null;
@@ -139,17 +98,15 @@ public class StreamPlayer implements Runnable {
     /** The encoded audio input stream. */
     private AudioInputStream encodedAudioInputStream;
 
-    /** The encoded audio length. */
-    private int encodedAudioLength = -1;
-
     /** The audio file format. */
     private AudioFileFormat audioFileFormat;
 
     /** The source data line. */
     private SourceDataLine sourceDataLine;
 
+    //-------------------CONTROLS---------------------
+
     /** The gain control. */
-    // Controls
     private FloatControl gainControl;
 
     /** The pan control. */
@@ -159,72 +116,94 @@ public class StreamPlayer implements Runnable {
     private FloatControl balanceControl;
 
     /** The sample rate control. */
-    private FloatControl sampleRateControl;
+    // private FloatControl sampleRateControl
 
     /** The mute control. */
     private BooleanControl muteControl;
 
-    /** The current line buffer size. */
-    // protected String mixerName = null
-    private int currentLineBufferSize = -1;
-
-    /** The line buffer size. */
-    private int lineBufferSize = -1;
-
-    /** The status. */
-    private volatile Status status = Status.UNKNOWN;
-
-    /** The listeners. */
-    // Listeners to be notified.
-    private ArrayList<StreamPlayerListener> listeners = new ArrayList<>();
-
-    /** The empty map. */
-    private Map<String, Object> emptyMap = new HashMap<>();
-
-    /**
-     * This executor service is used in order the playerState events to be executed in an order
-     */
-    ExecutorService eventsExecutorService = Executors.newSingleThreadExecutor();
-
-    Logger logger = Logger.getLogger(StreamPlayer.class.getName());
+    //-------------------LOCKS---------------------
 
     /**
      * It is used for synchronization in place of audioInputStream
      */
     private volatile Object audioLock = new Object();
 
+    //-------------------VARIABLES---------------------
+
+    String mixerName;
+
+    /** The current line buffer size. */
+    private int currentLineBufferSize = -1;
+
+    /** The line buffer size. */
+    private int lineBufferSize = -1;
+
+    /** The encoded audio length. */
+    private int encodedAudioLength = -1;
+
+    /** The Constant EXTERNAL_BUFFER_SIZE. */
+    private static final int EXTERNAL_BUFFER_SIZE = 1024 * 4;
+
+    /** The Constant SKIP_INACCURACY_SIZE. */
+    // private static final int SKIP_INACCURACY_SIZE = 1200
+
+    //-------------------CLASSES---------------------
+
+    /**
+     * This executor service is used in order the playerState events to be executed in an order
+     */
+    ExecutorService eventsExecutorService;
+
+    /** Holds a list of Linteners to be notified about Stream PlayerEvents */
+    private ArrayList<StreamPlayerListener> listeners;
+
+    /** The empty map. */
+    private Map<String, Object> emptyMap = new HashMap<>();
+
+    //-------------------BEGIN OF CONSTRUCTOR---------------------
+
     /**
      * Constructor.
      */
     public StreamPlayer() {
+	eventsExecutorService = Executors.newSingleThreadExecutor();
+	listeners = new ArrayList<>();
 	reset();
-
     }
 
     /**
      * Freeing the resources.
      */
     private void reset() {
-	status = Status.UNKNOWN;
-	generateEvent(Status.UNKNOWN, UNAVAILABLE, null);
+
+	//Close the stream
 	synchronized (audioLock) {
 	    closeStream();
 	}
 
-	audioInputStream = null;
-	audioFileFormat = null;
-	encodedAudioInputStream = null;
-	encodedAudioLength = -1;
+	//Source Data Line
 	if (sourceDataLine != null) {
-	    sourceDataLine.stop();
+	    sourceDataLine.flush();
 	    sourceDataLine.close();
 	    sourceDataLine = null;
 	}
 
+	//AudioFile
+	audioInputStream = null;
+	audioFileFormat = null;
+	encodedAudioInputStream = null;
+	encodedAudioLength = -1;
+
+	//Controls
 	gainControl = null;
 	panControl = null;
 	balanceControl = null;
-	sampleRateControl = null;
+	//sampleRateControl = null
+
+	//Notify the Status
+	status = Status.UNKNOWN;
+	generateEvent(Status.UNKNOWN, AudioSystem.NOT_SPECIFIED, null);
+
     }
 
     /**
@@ -298,7 +277,11 @@ public class StreamPlayer implements Runnable {
 
 	    logger.info("Entered initAudioInputStream\n");
 
+	    //Reset
 	    reset();
+
+	    //Notify Status
+	    status = Status.OPENING;
 	    generateEvent(Status.OPENING, getEncodedStreamPosition(), dataSource);
 
 	    // Audio resources from file||URL||inputStream.
@@ -321,10 +304,6 @@ public class StreamPlayer implements Runnable {
 
 	} catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
 	    logger.log(Level.INFO, ex.getMessage(), ex);
-	    // Comment the below line (i am using it into the application
-	    // with external libraries...)
-	    Platform.runLater(() -> ActionTool.showNotification("Warning", ex.getMessage(), Duration.millis(1500),
-		    NotificationType.WARNING));
 	    throw new StreamPlayerException(ex);
 	}
 
@@ -428,8 +407,9 @@ public class StreamPlayer implements Runnable {
      *
      * @throws LineUnavailableException
      *             the line unavailable exception
+     * @throws StreamPlayerException
      */
-    private void initLine() throws LineUnavailableException {
+    private void initLine() throws LineUnavailableException, StreamPlayerException {
 
 	logger.info("Initiating the line...");
 
@@ -448,7 +428,7 @@ public class StreamPlayer implements Runnable {
     }
 
     /** The frame size. */
-    private int frameSize;
+    // private int frameSize
 
     /**
      * Inits a DateLine.<br>
@@ -460,8 +440,9 @@ public class StreamPlayer implements Runnable {
      *
      * @throws LineUnavailableException
      *             the line unavailable exception
+     * @throws StreamPlayerException
      */
-    private void createLine() throws LineUnavailableException {
+    private void createLine() throws LineUnavailableException, StreamPlayerException {
 
 	logger.info("Entered CreateLine()!:\n");
 
@@ -481,7 +462,7 @@ public class StreamPlayer implements Runnable {
 		    nSampleSizeInBits, sourceFormat.getChannels(), sourceFormat.getChannels() * (nSampleSizeInBits / 8),
 		    sourceFormat.getSampleRate(), false);
 
-	    frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8);
+	    // int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
 
 	    logger.info("Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate=" + targetFormat.getFrameRate()
 		    + ",Bit Rate=" + targetFormat.getSampleSizeInBits() + "Target format: " + targetFormat + "\n");
@@ -497,20 +478,28 @@ public class StreamPlayer implements Runnable {
 
 	    // Create decoded Stream
 	    audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
-	    DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(),
+	    DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(),
 		    AudioSystem.NOT_SPECIFIED);
+	    if (!AudioSystem.isLineSupported(lineInfo)) {
+		throw new StreamPlayerException(PlayerException.LINE_NOT_SUPPORTED);
+	    }
 
-	    /*
-	     * Mixer mixer = getMixer(m_mixerName); if (mixer != null) { //
-	     * System.out.println("Mixer!=null"); log.info("Mixer : " +
-	     * mixer.getMixerInfo().toString()); m_line = (SourceDataLine)
-	     * mixer.getLine(info); } else { //
-	     * System.out.println("Mixer==null");
-	     */
+	    //----------About the mixer
+	    if (mixerName == null) {
+		// Primary Sound Driver
+		mixerName = getMixers().get(0);
+	    }
+	    Mixer mixer = getMixer(mixerName);
+	    if (mixer != null) {
+		logger.info("Mixer: " + mixer.getMixerInfo());
+		sourceDataLine = (SourceDataLine) mixer.getLine(lineInfo);
+	    } else {
+		sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
+		mixerName = null;
+	    }
 
-	    sourceDataLine = (SourceDataLine) AudioSystem.getLine(info);
-	    // mixerName = null
-	    // }
+	    sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
+
 	    // ------------------------------------------
 	    logger.info("Line : " + sourceDataLine.toString());
 	    // ------------------------------------------
@@ -559,10 +548,10 @@ public class StreamPlayer implements Runnable {
 		    panControl = null;
 
 		// SampleRate?
-		if (sourceDataLine.isControlSupported(FloatControl.Type.SAMPLE_RATE))
-		    sampleRateControl = (FloatControl) sourceDataLine.getControl(FloatControl.Type.SAMPLE_RATE);
-		else
-		    sampleRateControl = null;
+		//		if (sourceDataLine.isControlSupported(FloatControl.Type.SAMPLE_RATE))
+		//		    sampleRateControl = (FloatControl) sourceDataLine.getControl(FloatControl.Type.SAMPLE_RATE);
+		//		else
+		//		    sampleRateControl = null;
 
 		// Mute?
 		if (sourceDataLine.isControlSupported(BooleanControl.Type.MUTE))
@@ -592,17 +581,17 @@ public class StreamPlayer implements Runnable {
 	if (isPausedOrPlaying()) {
 	    if (isPlaying())
 		pause();
-	    if (sourceDataLine != null) {
-		sourceDataLine.stop();
-		sourceDataLine.flush();
-	    }
+	    //	    if (sourceDataLine != null) {
+	    //		sourceDataLine.stop();
+	    //		sourceDataLine.flush();
+	    //	    }
 	    status = Status.STOPPED;
 	    generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
 	    // System.out.println("StreamPlayer stop() before!
 	    // synchronize(audioInputStream) ")
-	    synchronized (audioLock) {
-		closeStream();
-	    }
+	    //	    synchronized (audioLock) {
+	    //		closeStream();
+	    //	    }
 	    // System.out.println("StreamPlayer stop() passed!!!
 	    // synchronize(audioInputStream) ")
 	    logger.info("StreamPlayer stopPlayback() completed");
@@ -618,8 +607,8 @@ public class StreamPlayer implements Runnable {
      */
     public boolean pause() {
 	if (sourceDataLine != null && status == Status.PLAYING) {
-	    sourceDataLine.stop();
-	    sourceDataLine.flush();
+	    // sourceDataLine.stop()
+	    // sourceDataLine.flush()
 	    status = Status.PAUSED;
 	    logger.info("pausePlayback() completed");
 	    generateEvent(Status.PAUSED, getEncodedStreamPosition(), null);
@@ -698,6 +687,8 @@ public class StreamPlayer implements Runnable {
 	}
     }
 
+    byte[] trimBuffer;
+
     /**
      * Main loop.
      *
@@ -708,37 +699,51 @@ public class StreamPlayer implements Runnable {
     @SuppressWarnings("unchecked")
     @Override
     public void run() {
-	int readBytes = 1;
-	byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+	//	int readBytes = 1
+	//	byte[] abData = new byte[EXTERNAL_BUFFER_SIZE]
+	int nBytesRead = 0;
+	int audioDataLength = EXTERNAL_BUFFER_SIZE;
+	ByteBuffer audioDataBuffer = ByteBuffer.allocate(audioDataLength);
+	audioDataBuffer.order(ByteOrder.LITTLE_ENDIAN);
+
 	// Lock stream while playing.
 	synchronized (audioLock) {
 	    // Main play/pause loop.
-	    while ((readBytes != -1)
+	    while ((nBytesRead != -1)
 		    && !(status == Status.STOPPED || status == Status.SEEKING || status == Status.UNKNOWN)) {
-		if (status == Status.PLAYING) {
-		    try {
+		try {
+		    //Playing?
+		    if (status == Status.PLAYING) {
+
 			// System.out.println("Inside Stream Player Run method")
 
+			int toRead = audioDataLength;
+			int totalRead = 0;
 			// Reads up a specified maximum number of bytes
-			// from audio stream ,putting them into the given
-			// byte array
-			if ((readBytes = audioInputStream.read(abData, 0, abData.length)) >= 0) {
+			// from audio stream 
+			while (toRead > 0 && (nBytesRead = audioInputStream.read(audioDataBuffer.array(), totalRead,
+				toRead)) != -1) {
+			    totalRead += nBytesRead;
+			    toRead -= nBytesRead;
+			}
 
-			    // Copy data from [ nBytesRead ] to [ PCM ] array
-			    byte[] pcm = new byte[readBytes];
-			    System.arraycopy(abData, 0, pcm, 0, readBytes);
+			// Check for under run
+			if (sourceDataLine.available() >= sourceDataLine.getBufferSize())
+			    logger.info(String.format("Underrun :%s/%s", sourceDataLine.available(),
+				    sourceDataLine.getBufferSize()));
 
-			    // Check for under run
-			    if (sourceDataLine.available() >= sourceDataLine.getBufferSize())
-				logger.info("Underrun :" + sourceDataLine.available() + "/"
-					+ sourceDataLine.getBufferSize());
+			//Check if anything has been read
+			if (totalRead > 0) {
+			    trimBuffer = audioDataBuffer.array();
+			    if (totalRead < trimBuffer.length) {
+				trimBuffer = new byte[totalRead];
+				//Copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array
+				// The number of components copied is equal to the length argument. 
+				System.arraycopy(audioDataBuffer.array(), 0, trimBuffer, 0, totalRead);
+			    }
 
-			    // Write data to mixer via the source data line
-			    // System.out.println("ReadBytes:" + readBytes + "
-			    // Line Level:" + sourceDataLine.getLevel()
-			    // + " Frame Size:" + frameSize)
-			    if (readBytes % frameSize == 0)
-				sourceDataLine.write(abData, 0, readBytes);
+			    //Writes audio data to the mixer via this source data line
+			    sourceDataLine.write(trimBuffer, 0, totalRead);
 
 			    // Compute position in bytes in encoded stream.
 			    int nEncodedBytes = getEncodedStreamPosition();
@@ -748,37 +753,119 @@ public class StreamPlayer implements Runnable {
 				if (audioInputStream instanceof PropertiesContainer) {
 				    // Pass audio parameters such as instant
 				    // bit rate, ...
-				    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(), pcm,
-					    ((PropertiesContainer) audioInputStream).properties());
+				    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(),
+					    trimBuffer, ((PropertiesContainer) audioInputStream).properties());
 				} else
-				    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(), pcm,
-					    emptyMap);
+				    // Pass audio parameters
+				    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(),
+					    trimBuffer, emptyMap);
 			    });
+
 			}
 
-		    } catch (IOException e) {
-			logger.warning("Thread cannot run()\n" + e);
-			stop();
-			status = Status.STOPPED;
-			generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
-		    }
+			//Paused?
+		    } else if (status == Status.PAUSED) {
 
-		} else if (status == Status.PAUSED) { // Paused
-		    try {
-			while (status == Status.PAUSED) {
-			    //Thread.sleep(200)
-			   // Thread.sle
-			    Thread.sleep(50);
-			    //audioLock.
-			    //audioLock.wait(50)
+			//Flush the line
+			if (sourceDataLine != null && sourceDataLine.isRunning()) {
+			    sourceDataLine.flush();
+			    sourceDataLine.stop();
 			}
 
-		    } catch (InterruptedException ex) {
-			thread.interrupt();
-			logger.warning("Thread cannot sleep.\n" + ex);
+			try {
+			    while (status == Status.PAUSED) {
+				//Thread.sleep(200)
+				// Thread.sle
+				Thread.sleep(50);
+				//audioLock.
+				//audioLock.wait(50)
+			    }
+
+			} catch (InterruptedException ex) {
+			    thread.interrupt();
+			    logger.warning("Thread cannot sleep.\n" + ex);
+			}
 		    }
+
+		} catch (IOException ex) {
+		    logger.log(Level.WARNING, "\"Decoder Exception: \" ", ex);
+		    // stop()
+		    status = Status.STOPPED;
+		    generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
 		}
 	    }
+
+	    //	    int readBytes = 1;
+	    //		byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+	    //		// Lock stream while playing.
+	    //		synchronized (audioLock) {
+	    //		    // Main play/pause loop.
+	    //		    while ((readBytes != -1)
+	    //			    && !(status == Status.STOPPED || status == Status.SEEKING || status == Status.UNKNOWN)) {
+	    //			if (status == Status.PLAYING) {
+	    //			    try {
+	    //				// System.out.println("Inside Stream Player Run method")
+	    //
+	    //				// Reads up a specified maximum number of bytes
+	    //				// from audio stream ,putting them into the given
+	    //				// byte array
+	    //				if ((readBytes = audioInputStream.read(abData, 0, abData.length)) >= 0) {
+	    //
+	    //				    // Copy data from [ nBytesRead ] to [ PCM ] array
+	    //				    byte[] pcm = new byte[readBytes];
+	    //				    System.arraycopy(abData, 0, pcm, 0, readBytes);
+	    //
+	    //				    // Check for under run
+	    //				    if (sourceDataLine.available() >= sourceDataLine.getBufferSize())
+	    //					logger.info("Underrun :" + sourceDataLine.available() + "/"
+	    //						+ sourceDataLine.getBufferSize());
+	    //
+	    //				    // Write data to mixer via the source data line
+	    //				    // System.out.println("ReadBytes:" + readBytes + "
+	    //				    // Line Level:" + sourceDataLine.getLevel()
+	    //				    // + " Frame Size:" + frameSize)
+	    //				    if (readBytes % frameSize == 0)
+	    //					sourceDataLine.write(abData, 0, readBytes);
+	    //
+	    //				    // Compute position in bytes in encoded stream.
+	    //				    int nEncodedBytes = getEncodedStreamPosition();
+	    //
+	    //				    // Notify all registered Listeners
+	    //				    listeners.forEach(listener -> {
+	    //					if (audioInputStream instanceof PropertiesContainer) {
+	    //					    // Pass audio parameters such as instant
+	    //					    // bit rate, ...
+	    //					    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(), pcm,
+	    //						    ((PropertiesContainer) audioInputStream).properties());
+	    //					} else
+	    //					    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(), pcm,
+	    //						    emptyMap);
+	    //				    });
+	    //				}
+	    //
+	    //			    } catch (IOException e) {
+	    //				logger.warning("Thread cannot run()\n" + e);
+	    //				stop();
+	    //				status = Status.STOPPED;
+	    //				generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
+	    //			    }
+	    //
+	    //			} else if (status == Status.PAUSED) { // Paused
+	    //			    try {
+	    //				while (status == Status.PAUSED) {
+	    //				    //Thread.sleep(200)
+	    //				    // Thread.sle
+	    //				    Thread.sleep(50);
+	    //				    //audioLock.
+	    //				    //audioLock.wait(50)
+	    //				}
+	    //
+	    //			    } catch (InterruptedException ex) {
+	    //				thread.interrupt();
+	    //				logger.warning("Thread cannot sleep.\n" + ex);
+	    //			    }
+	    //			}
+	    //		    }
 
 	    // Free audio resources.
 	    if (sourceDataLine != null) {
@@ -788,17 +875,20 @@ public class StreamPlayer implements Runnable {
 		sourceDataLine = null;
 	    }
 
-	    // Notification of "End Of Media"
-	    if (readBytes == -1)
-		generateEvent(Status.EOM, getEncodedStreamPosition(), null);
-
 	    // Close stream.
 	    closeStream();
+
+	    // Notification of "End Of Media"
+	    if (nBytesRead == -1)
+		generateEvent(Status.EOM, AudioSystem.NOT_SPECIFIED, null);
+
 	}
+	//Generate Event
 	status = Status.STOPPED;
-	// stream in closed so not purpose to get EncodedStreamPosition()
-	generateEvent(Status.STOPPED, UNAVAILABLE, null);
-	System.out.println("StreamPLayer Run method successfully exited...");
+	generateEvent(Status.STOPPED, AudioSystem.NOT_SPECIFIED, null);
+
+	//Log
+	logger.info("Decoding thread completed");
 
     }
 
@@ -822,7 +912,7 @@ public class StreamPlayer implements Runnable {
 		synchronized (audioLock) {
 		    // System.out.println("Stream player entered into
 		    // seek(bytes) synchronized")
-		    generateEvent(Status.SEEKING, UNAVAILABLE, null);
+		    generateEvent(Status.SEEKING, AudioSystem.NOT_SPECIFIED, null);
 		    initAudioInputStream();
 		    if (audioInputStream != null) {
 

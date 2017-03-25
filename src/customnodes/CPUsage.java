@@ -44,7 +44,7 @@ public class CPUsage extends ResizableCanvas {
     public CPUsage() {
 	gc.setFont(Font.font("default", FontWeight.BOLD, 14));
 	// startUpdater()
-
+	repaint();
     }
 
     /**

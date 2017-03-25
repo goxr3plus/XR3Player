@@ -36,7 +36,7 @@ import xplayer.presenter.XPlayerController;
  * @author GOXR3PLUS
  *
  */
-public class NativeKeysController extends BorderPane {
+public class KeyBindingsController extends BorderPane {
 
     @FXML
     private Accordion accordion;
@@ -51,7 +51,7 @@ public class NativeKeysController extends BorderPane {
     /**
      * Constructor
      */
-    public NativeKeysController() {
+    public KeyBindingsController() {
 
 	// Get the logger for "org.jnativehook" and set the level to off.
 	Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -61,6 +61,14 @@ public class NativeKeysController extends BorderPane {
 	GlobalScreen.addNativeKeyListener(new NativeKeyListener() {
 	    public void nativeKeyPressed(NativeKeyEvent e) {
 		System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
+
+		int keyCode = e.getKeyCode();
+
+		//-------------SNAPSHOT WINDOW
+		if (keyCode == NativeKeyEvent.ALT_L_MASK || keyCode == NativeKeyEvent.ALT_R_MASK
+			|| keyCode == NativeKeyEvent.ALT_MASK || keyCode == NativeKeyEvent.VC_ALT) {
+		    Main.snapShotWindow.prepareForCapture();
+		}
 	    }
 
 	    //Key Released
@@ -73,7 +81,9 @@ public class NativeKeysController extends BorderPane {
 
 		    int keyCode = e.getKeyCode();
 
-		    //Find
+		    //WORK WORK WORK AAAA YEAH F F F FFUUUUUCK BITCH
+
+		    //-----------PLAYERS
 		    if (keyCode == NativeKeyEvent.VC_O && (e.getModifiers() == NativeKeyEvent.SHIFT_L_MASK
 			    || e.getModifiers() == NativeKeyEvent.SHIFT_R_MASK
 			    || e.getModifiers() == NativeKeyEvent.SHIFT_MASK
@@ -99,6 +109,12 @@ public class NativeKeysController extends BorderPane {
 			    || e.getModifiers() == NativeKeyEvent.SHIFT_MASK
 			    || e.getModifiers() == NativeKeyEvent.VC_SHIFT)) { //Open Media in Explorer
 			xPlayer.openAudioInExplorer();
+		    }
+
+		    //-----------SNAPSHOT WINDOW
+		    else if (keyCode == NativeKeyEvent.ALT_L_MASK || keyCode == NativeKeyEvent.ALT_R_MASK
+			    || keyCode == NativeKeyEvent.ALT_MASK || keyCode == NativeKeyEvent.VC_ALT) {
+			Main.snapShotWindow.hideWindow();
 		    }
 
 		});
@@ -131,7 +147,7 @@ public class NativeKeysController extends BorderPane {
 	});
 
 	// ------------------------------------FXMLLOADER-------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "NativeKeysController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "KeyBindingsController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -165,12 +181,12 @@ public class NativeKeysController extends BorderPane {
 		    GlobalScreen.setEventDispatcher(new SwingDispatchService());
 		    GlobalScreen.registerNativeHook();
 
-		    keyBindingsActive.setText("Click here to De-activate Shortcuts");
+		    keyBindingsActive.setText("Click here to De-activate KeyBindings");
 		} else {
 		    //Remove Global Listener from the Operating System
 		    GlobalScreen.unregisterNativeHook();
 
-		    keyBindingsActive.setText("Click here to Activate Shortcuts");
+		    keyBindingsActive.setText("Click here to Activate KeyBindings");
 		}
 	    } catch (NativeHookException ex) {
 		//Log it
@@ -184,7 +200,7 @@ public class NativeKeysController extends BorderPane {
 	    }
 
 	    ActionTool.showNotification("Notification",
-		    "Native Hook has been [ " + (newValue ? "activated" : "deactivated") + " ]", Duration.millis(800),
+		    "KeyBindings has been [ " + (newValue ? "activated" : "deactivated") + " ]", Duration.millis(800),
 		    NotificationType.INFORMATION);
 	});
 

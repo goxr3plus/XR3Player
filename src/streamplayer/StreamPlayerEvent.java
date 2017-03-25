@@ -22,7 +22,6 @@
  */
 package streamplayer;
 
-import streamplayer.StreamPlayer.Status;
 
 /**
  * The Class StreamPlayerEvent.
@@ -66,7 +65,7 @@ public class StreamPlayerEvent {
      * Returns the Player Status
      *
      * @return The player Status (paused,playing,...)
-     * @see StreamPlayer.Status
+     * @see streamplayer.Status
      */
     public Status getPlayerStatus() {
 	return playerStatus;

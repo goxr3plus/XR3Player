@@ -46,7 +46,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import streamplayer.StreamPlayer.Status;
+import streamplayer.Status;
 import streamplayer.StreamPlayerEvent;
 import streamplayer.StreamPlayerException;
 import streamplayer.StreamPlayerListener;
@@ -289,7 +289,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	xPlayerSettingsController = new XPlayerSettingsController(this);
 
 	// Styling
-	setStyle("-fx-background-image:url('/image/deckBackground.jpg');  -fx-background-size:stretch;");
+	//setStyle("-fx-background-image:url('/image/deckBackground.jpg');  -fx-background-size:stretch;")
 
 	// Listeners
 	container.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));

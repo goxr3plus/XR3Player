@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="309.0" prefWidth="536.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="309.0" prefWidth="536.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
@@ -129,11 +129,11 @@
                                  <children>
                                     <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
                                     <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Give me some ideas what to add here ..." visible="false" />
-                                    <ToolBar maxWidth="1.7976931348623157E308" orientation="VERTICAL" StackPane.alignment="CENTER">
+                                    <ToolBar maxWidth="1.7976931348623157E308" minWidth="5.0" orientation="VERTICAL" StackPane.alignment="CENTER">
                                        <items>
                                           <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                              <children>
-                                                <Button fx:id="backwardButton" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" styleClass="first" text="10">
+                                                <Button fx:id="backwardButton" minWidth="15.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" styleClass="first" text="10">
                                                    <graphic>
                                                       <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -145,7 +145,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Button fx:id="forwardButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" styleClass="last" text="10">
+                                                <Button fx:id="forwardButton" contentDisplay="RIGHT" minWidth="15.0" mnemonicParsing="false" prefHeight="30.0" styleClass="last" text="10">
                                                    <graphic>
                                                       <ImageView pickOnBounds="true" preserveRatio="true">
                                                          <image>

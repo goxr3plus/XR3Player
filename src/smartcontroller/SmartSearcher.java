@@ -89,7 +89,7 @@ public class SmartSearcher extends HBox {
 		if (saveSettingBeforeSearch) {
 		    service.pageBeforeSearch = controller.currentPage.get();
 		    ScrollBar verticalBar = (ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical");
-		    service.previousVerticalScrollValue = verticalBar.getValue();
+		    service.scrollValueBeforeSearch = verticalBar.getValue();
 
 		    saveSettingBeforeSearch = false;
 		}
@@ -126,7 +126,7 @@ public class SmartSearcher extends HBox {
      * @return The Vertical ScrollBar position of SmartController TableViewer before the search is activated
      */
     public double getVerticalScrollBarPosition() {
-	return service.previousVerticalScrollValue;
+	return service.scrollValueBeforeSearch;
     }
 
     /**
@@ -135,7 +135,7 @@ public class SmartSearcher extends HBox {
      * @param value
      */
     public void setVerticalScrollBarPosition(double value) {
-	service.previousVerticalScrollValue = value;
+	service.scrollValueBeforeSearch = value;
     }
 
     /**
@@ -155,7 +155,7 @@ public class SmartSearcher extends HBox {
 	/**
 	 * The Vertical ScrollBar position of SmartController TableViewer before the search is activated
 	 */
-	double previousVerticalScrollValue = -1;
+	double scrollValueBeforeSearch = -1;
 
 	/**
 	 * Constructor.

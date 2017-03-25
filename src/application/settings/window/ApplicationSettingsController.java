@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,7 +36,7 @@ public class ApplicationSettingsController extends BorderPane {
      */
     public Stage window = new Stage();
 
-    NativeKeysController nativeKeyBindings = new NativeKeysController();
+    KeyBindingsController nativeKeyBindings = new KeyBindingsController();
 
     /**
      * Constructor
@@ -57,6 +58,10 @@ public class ApplicationSettingsController extends BorderPane {
 	window.setTitle("Application Settings");
 	window.initStyle(StageStyle.UTILITY);
 	window.setScene(new Scene(this));
+	window.getScene().setOnKeyReleased(k -> {
+	    if (k.getCode() == KeyCode.ESCAPE)
+		window.close();
+	});
 
     }
 

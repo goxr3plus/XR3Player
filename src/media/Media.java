@@ -19,6 +19,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
@@ -345,6 +346,10 @@ public abstract class Media {
     public void prepareDelete(boolean permanent, SmartController controller) {
 	int previousTotal = controller.getTotalInDataBase();
 
+	//RememberScrollBar Position
+	ScrollBar verticalBar = (ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical");
+	controller.scrollValueBeforeDeleteAction = verticalBar.getValue();
+
 	// Remove selected items
 	controller.removeSelected(permanent);
 
@@ -352,6 +357,7 @@ public abstract class Media {
 	if (previousTotal != controller.getTotalInDataBase()) {
 	    if (genre == Genre.LIBRARYSONG)
 		Main.libraryMode.multipleLibs.getSelectedLibrary().updateSettingsTotalLabel();
+
 	    controller.loadService.startService(true, true);
 	}
     }
@@ -374,7 +380,6 @@ public abstract class Media {
      * @param controller
      *            the controller
      */
-
     public void delete(boolean permanent, boolean doQuestion, boolean commit, SmartController controller) {
 
 	if (controller.isFree(true)) {

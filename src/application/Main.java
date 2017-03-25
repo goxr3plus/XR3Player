@@ -166,11 +166,11 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 57;
+    public final static int currentVersion = 58;
     /**
      * This application version release date
      */
-    public final static String releaseDate = "19/03/2017";
+    public final static String releaseDate = "25/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -256,9 +256,9 @@ public class Main extends Application {
 	    int width = (int) (InfoTool.getVisualScreenWidth() * 0.77);
 	    width = (width % 2 == 0) ? width : width + 1;
 	    // -------------------
-	    Main.window.setWidth(width);
-	    Main.window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
-	    Main.window.centerOnScreen();
+	    window.setWidth(width);
+	    window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
+	    window.centerOnScreen();
 	    window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
 	    window.centerOnScreen();
 	    window.setOnCloseRequest(exit -> {
@@ -283,6 +283,8 @@ public class Main extends Application {
 	    //Do this in order to now have problems with SongsContextMenu
 	    songsContextMenu.show(window, 0, 0);
 	    songsContextMenu.hide();
+	    libraryMode.libraryViewer.contextMenu.show(window, 0, 0);
+	    libraryMode.libraryViewer.contextMenu.hide();
 
 	    //InfoTool.DATABASE_FOLDER_NAME Exists?
 	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists()) {
@@ -631,7 +633,7 @@ public class Main extends Application {
 
 			// Update is available or not?
 			Platform.runLater(() -> {
-			    Alert alert = new Alert(AlertType.INFORMATION);
+			    Alert alert = new Alert(AlertType.CONFIRMATION);
 			    alert.setTitle("Update Window");
 			    if (Integer.valueOf(lastArticle.id()) > currentVersion) {
 				alert.setHeaderText("New Update available!!!");
@@ -654,7 +656,7 @@ public class Main extends Application {
 			    // textArea.setWrapText(true)
 
 			    VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(textArea);
-			    vsPane.setMinSize(700, 350);
+			    vsPane.setMinSize(850, 550);
 			    vsPane.setMaxWidth(Double.MAX_VALUE);
 			    vsPane.setMaxHeight(Double.MAX_VALUE);
 			    GridPane.setVgrow(vsPane, Priority.ALWAYS);
@@ -681,17 +683,20 @@ public class Main extends Application {
 
 				// Release Date
 				textArea.appendText("->Release Date: ");
-				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "green"));
+				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1,
+					style.replace("black", "green"));
 				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
 
 				// Minimum JRE
 				textArea.appendText("->Minimum Java Version: ");
-				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("black", "orange"));
+				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1,
+					style.replace("black", "orange"));
 				textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
 
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
-				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "firebrick"));
+				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1,
+					style.replace("black", "firebrick"));
 				final AtomicInteger counter = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*"))
 					.forEach(el -> {
@@ -705,9 +710,10 @@ public class Main extends Application {
 			    textArea.requestFollowCaret();
 
 			    // Set the default buttons
+			    ButtonType autoUpdate = new ButtonType("Auto Update", ButtonData.YES);
 			    ButtonType download = new ButtonType("Download", ButtonData.OK_DONE);
 			    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			    alert.getButtonTypes().setAll(download, cancel);
+			    alert.getButtonTypes().setAll(autoUpdate, download, cancel);
 
 			    // Set expandable Exception into the dialog pane.
 			    alert.getDialogPane().setExpandableContent(expContent);

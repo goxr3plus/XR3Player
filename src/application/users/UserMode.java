@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXButton;
 
 import application.Main;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -43,7 +44,7 @@ public class UserMode extends BorderPane {
      * Constructor.
      */
     public UserMode() {
-	
+
 	// ------------------------------------FXMLLOADER ----------------------------------------
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "UserMode.fxml"));
 	loader.setController(this);
@@ -60,20 +61,23 @@ public class UserMode extends BorderPane {
      * Called as soon as .fxml is initialized
      */
     @FXML
-    private void initialize() {	
+    private void initialize() {
 
 	//goBack
 	goBack.setOnAction(a -> Main.sideBar.goMainMode());
     }
-    
-    /**This method should be called after fxml has been initialized for this controller
+
+    /**
+     * This method should be called after fxml has been initialized for this controller
+     * 
      * @param user
      */
     public void setUser(User user) {
 	this.user = user;
-	
+
 	//-----UserNameLabel
-		userNameLabel.textProperty().bind(user.nameField.textProperty());
+	userNameLabel.textProperty()
+		.bind(Bindings.concat("Logged in as->[ ").concat(user.nameField.textProperty()).concat(" ]"));
     }
 
 }

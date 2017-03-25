@@ -26,8 +26,7 @@ public class VisualizerDrawer extends VisualizerModel {
     public Image foregroundImage = new Image(VisualizerModel.class.getResourceAsStream("foreground.png"));
 
     /** The background image. */
-    public Image backgroundImage;// new
-				 // Image(VisualizerModel.class.getResourceAsStream("background.gif"))
+    public Image backgroundImage;//= new Image(VisualizerModel.class.getResourceAsStream("foreground.png"))
 
     /**
      * Draws the foreground image of the visualizer
@@ -61,9 +60,29 @@ public class VisualizerDrawer extends VisualizerModel {
      */
     public void drawBackgroundImage() {
 
+	float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
+	float[] array = returnBandsArray(pSample, 1);
+
 	//!null
-	if (backgroundImage != null)
-	    gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+	if (backgroundImage != null) {
+	    // gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+
+	    //Compute
+	    double imageW = backgroundImage.getWidth();
+	    double imageH = backgroundImage.getHeight();//= foregroundImage.getHeight()
+	    //	    if (canvasWidth < canvasHeight)
+	    //		imageW = imageH = canvasWidth / 2.00;
+	    //	    else
+	    //		imageW = imageH = canvasHeight / 2.00;
+
+	    //Draw it
+	    double front = Math.abs(array[0]) / 4;
+	    gc.drawImage(backgroundImage, 0 - front * canvasWidth, 0 - front * canvasHeight,
+		    canvasWidth + (front * canvasWidth) * 2, canvasHeight + (front * canvasHeight) * 2);
+	    //	    gc.drawImage(backgroundImage,canvasWidth - imageW) - imageW * array[0] / 2,
+	    //	    (canvasHeight - imageH) - imageH * array[0], imageW + imageW * array[0],
+	    //	    imageH + imageH * array[0]);
+	}
     }
 
     // ---------------------------------------------------------------------
@@ -161,6 +180,10 @@ public class VisualizerDrawer extends VisualizerModel {
 	int previousEndX = -1;
 	int previousEndY = -1;
 
+	double centerX = canvasWidth / 2.00;
+	double centerY = canvasHeight / 2.00;
+
+	//for loop
 	for (float angle = 0; angle <= 360; angle++) {
 	    // Use HSB color model
 	    colorIndex = (colorIndex == colorSize - 1) ? 0 : colorIndex + 1;
@@ -181,13 +204,10 @@ public class VisualizerDrawer extends VisualizerModel {
 	    double mathSin = Math.sin(angleRadians);
 	    double mathCos = Math.cos(angleRadians);
 
-	    double centerX = canvasWidth / 2.00;
-	    double centerY = canvasHeight / 2.00;
-
 	    int startX = (int) (centerX + mathSin * radius); //startX
 	    int startY = (int) (centerY + mathCos * radius); //startY
 
-	    double add = Math.abs(pSample[(int) angle]) * 100;
+	    double add = Math.abs(pSample[(int) angle]) * (radius);
 
 	    int endX = (int) (centerX + mathSin * (radius + add)); //endX
 	    int endY = (int) (centerY + mathCos * (radius + add)); //endY
@@ -205,6 +225,10 @@ public class VisualizerDrawer extends VisualizerModel {
 	    previousEndY = endY;
 
 	    gc.strokeLine(startX, startY, endX, endY); //draw the line
+
+	    int endX2 = (int) (centerX + mathSin * (radius - add)); //endX
+	    int endY2 = (int) (centerY + mathCos * (radius - add)); //endY
+	    gc.strokeLine(startX, startY, endX2, endY2); //draw the line
 	}
 
 	//Foreground

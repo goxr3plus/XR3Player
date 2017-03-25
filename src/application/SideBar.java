@@ -198,7 +198,8 @@ public class SideBar extends BorderPane {
 
     /**
      * Prepares the SideBar to be shown for LoginMode
-     * @param b 
+     * 
+     * @param b
      */
     public void prepareForLoginMode(boolean b) {
 	if (b) {
@@ -207,12 +208,14 @@ public class SideBar extends BorderPane {
 	    applicationSettings.setDisable(true);
 	    applicationConsole.setDisable(true);
 	    applicationDatabase.setDisable(true);
+	    snapshot.setDisable(true);
 	} else {
 	    goMainMode.setDisable(false);
 	    goUserMode.setDisable(false);
 	    applicationSettings.setDisable(false);
 	    applicationConsole.setDisable(false);
 	    applicationDatabase.setDisable(false);
+	    snapshot.setDisable(false);
 	}
     }
 
@@ -262,11 +265,8 @@ public class SideBar extends BorderPane {
 	applicationConsole.setOnAction(a -> Main.consoleWindow.show());
 
 	//snapShot
-	snapshot.setOnAction(a -> {
-	    ActionTool.showAlert("Snapshot Window", "Read the below.",
-		    "This is a prototype , and it will be improved on the next updates. \n\n----------------------------Helpful Info----------------------------\nA window will appear , you have to drag your mouse to select an area of the screen, \n Press : [ ESCAPE OR BACKSPACE ] to exit \n Press : [ ENTER OR SPACE ] to capture the selected area.");
-	    Main.snapShotWindow.prepareForCapture();
-	});
+	snapshot.setOnAction(a -> ActionTool.showAlert("Snapshot Window", "Read the below.",
+		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area."));
 
 	// Clip
 	Rectangle rect = new Rectangle();

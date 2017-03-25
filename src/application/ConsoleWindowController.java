@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -79,6 +80,10 @@ public class ConsoleWindowController extends StackPane {
 	this.focusedProperty().addListener((observable, oldValue, newValue) -> {
 	    if (window.isFocused())
 		commandTextField.requestFocus();
+	});
+	window.getScene().setOnKeyReleased(k -> {
+	    if (k.getCode() == KeyCode.ESCAPE)
+		window.close();
 	});
     }
 

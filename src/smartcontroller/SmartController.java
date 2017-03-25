@@ -136,6 +136,9 @@ public class SmartController extends StackPane {
     @FXML
     private StackPane centerStackPane;
 
+    @FXML
+    private HBox navigationHBox;
+
     /** The previous. */
     @FXML
     private Button previous;
@@ -245,6 +248,11 @@ public class SmartController extends StackPane {
     // --------------------------------------------------
 
     /**
+     * The Vertical ScrollBar position of SmartController TableViewer before the some kind of MediaDelete Happens
+     */
+    public double scrollValueBeforeDeleteAction = -1;
+
+    /**
      * Instantiates a new smart controller.
      *
      * @param genre
@@ -352,8 +360,6 @@ public class SmartController extends StackPane {
 	indicatorVBox.visibleProperty().bind(region.visibleProperty());
 
 	// ------ cancel
-	cancel.setStyle(
-		"-fx-background-color:rgb(0,0,0,0.7); -fx-background-radius:20; -fx-text-fill:orange; -fx-font-size:18px; -fx-font-weight:bold;");
 	cancel.visibleProperty().bind(region.visibleProperty());
 	cancel.setDisable(true);
 
@@ -1187,6 +1193,10 @@ public class SmartController extends StackPane {
 		}
 	    });
 
+	    //Drag Entered and Exited
+	    setOnDragEntered(d -> navigationHBox.setVisible(false));
+	    setOnDragExited(d -> navigationHBox.setVisible(true));
+
 	    // --Drag Dropped
 	    setOnDragDropped(drop -> {
 		// Has Files? + isFree()?
@@ -1370,12 +1380,18 @@ public class SmartController extends StackPane {
 		if (verticalBar != null)
 		    verticalBar.setValue(searchService.getVerticalScrollBarPosition());
 
-		// System.out.println(
-		// "Trying to set the vertical scrollPosition:" +
-		// searchService.getVerticalScrollBarPosition())
-
 		// Reset to -1
 		searchService.setVerticalScrollBarPosition(-1.00);
+	    }
+
+	    // Reset the default vertical scroll position after a delete action happens
+	    if (scrollValueBeforeDeleteAction != -1.00) {
+		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+		if (verticalBar != null)
+		    verticalBar.setValue(scrollValueBeforeDeleteAction);
+
+		// Reset to -1
+		scrollValueBeforeDeleteAction = -1;
 	    }
 	}
 

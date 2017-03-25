@@ -105,6 +105,7 @@ public class Oscilloscope {
 	    visualizerDrawer.gc.strokeLine(c, yLast1, c + 1.00, yNow);
 	    yLast1 = yNow;
 	}
+	
 
 	// Oscilloscope will be stereo
 	if (stereo) {

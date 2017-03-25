@@ -1,11 +1,17 @@
 package librarysystema;
 
 import application.Main;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import smartcontroller.TitleMenuItem;
 
 /**
@@ -80,8 +86,7 @@ public class LibraryContextMenu extends ContextMenu {
 	setImage.getItems().addAll(localImage, internetImage);
 	image.getItems().addAll(setImage, exportImage, resetImage);
 
-	getItems().addAll(new TitleMenuItem("Basic"), open, close, settings, image, new TitleMenuItem("File Actions"),
-		rename, delete);
+	getItems().addAll(new TitleMenuItem("Common"), open, close,rename,new TitleMenuItem("Other"),settings, image,delete);
 
     }
 
@@ -109,7 +114,30 @@ public class LibraryContextMenu extends ContextMenu {
 	    getItems().add(1, open);
 	}
 
-	show(window, x, y);
+	// Show it
+	show(window, x - 15 - super.getWidth() + super.getWidth() * 14 / 100, y - 1);
+
+	//Y axis
+	double yIni = y - 50;
+	double yEnd = super.getY();
+	super.setY(yIni);
+	final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+	yProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+
+	//X axis
+	//	double xIni = screenX - super.getWidth() + super.getWidth() * 14 / 100 + 30;
+	//	double xEnd = screenX - super.getWidth() + super.getWidth() * 14 / 100;
+	//	super.setX(xIni);
+	//	final DoubleProperty xProperty = new SimpleDoubleProperty(xIni);
+	//	xProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+
+	//Timeline
+	Timeline timeIn = new Timeline();
+	timeIn.getKeyFrames()
+		.addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+	//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
+	timeIn.play();
+
     }
 
 }

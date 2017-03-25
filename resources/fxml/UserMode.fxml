@@ -27,7 +27,6 @@
                   <Image url="@../image/user.jpg" />
                </image>
             </ImageView>
-            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Hey taxi!" />
          </children>
       </StackPane>
    </center>

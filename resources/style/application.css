@@ -1019,7 +1019,7 @@
 ******************************************************************************/
 
 @font-face{
-	src: url("../fonts/Younger than me Bold.ttf");
+	src: url("../fonts/Younger than me.ttf");
 }
 
 .drag-adjustable-label{
@@ -1029,6 +1029,10 @@
   -fx-font-family:"Younger than me";
   -fx-text-fill:black;
   -fx-font-weight:bold;  
+}
+
+#LoginScreenTopLabel{
+  -fx-font-family:"Younger than me";
 }
 
 /*******************************************************************************

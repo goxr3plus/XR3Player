@@ -27,7 +27,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -615,16 +614,18 @@ public class LibraryMode extends GridPane {
 			// scrollBar.setValue(library.getPosition())
 
 			timeline.setOnFinished(v -> {
-			    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			    contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-				    bounds.getMinY() + bounds.getHeight() / 4, library);
+			    // Bounds bounds = library.localToScreen(library.getBoundsInLocal());
+			    //			    contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
+			    //				    bounds.getMinY() + bounds.getHeight() / 4, library);
+			    contextMenu.show(Main.window, m.getScreenX(), m.getScreenY(), library);
 			    timeline.setOnFinished(null);
 			});
 
 		    } else { // if is the same library again
-			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-				bounds.getMinY() + bounds.getHeight() / 4, library);
+			//			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
+			//			contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
+			//				bounds.getMinY() + bounds.getHeight() / 4, library);
+			contextMenu.show(Main.window, m.getScreenX(), m.getScreenY(), library);
 		    }
 		}
 
@@ -667,8 +668,8 @@ public class LibraryMode extends GridPane {
 	    if (!leftGroup.getChildren().isEmpty())
 		centerIndex = leftGroup.getChildren().size() - 1;
 	    else
-		// if (!rightGroup.getChildren().isEmpty())
-		// centerIndex = 0
+		// if (!rightGroup.getChildren().isEmpty())	
+		// centerIndex = 0	
 		// else
 		centerIndex = 0;
 

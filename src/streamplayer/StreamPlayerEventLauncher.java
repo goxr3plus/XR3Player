@@ -25,8 +25,6 @@ package streamplayer;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import streamplayer.StreamPlayer.Status;
-
 /**
  * The Class StreamPlayerEventLauncher.
  *

@@ -109,8 +109,8 @@ public class MediaContextMenu extends ContextMenu {
     /** The stars. */
     MenuItem stars = new MenuItem("Stars (S)", InfoTool.getImageViewFromDocuments("smallStar.png"));
 
-    /** The source folder. */
-    MenuItem sourceFolder = new MenuItem("PathFolder (P)", InfoTool.getImageViewFromDocuments("path.png"));
+    /** Show File */
+    MenuItem showFile = new MenuItem("Show File (P)", InfoTool.getImageViewFromDocuments("path.png"));
 
     /** The copy. */
     MenuItem copy = new MenuItem("copy/move (C/M)", InfoTool.getImageViewFromDocuments("copyFile.png"));
@@ -142,7 +142,7 @@ public class MediaContextMenu extends ContextMenu {
     public MediaContextMenu() {
 
 	//Add all the items
-	getItems().addAll(new TitleMenuItem("Common"), playOn, stopPlayer, searchOnWeb, more,
+	getItems().addAll(new TitleMenuItem("Common"), playOn, stopPlayer, new TitleMenuItem("More"),searchOnWeb , stars, showFile,
 		new TitleMenuItem("File Edit"), rename, simpleDelete, storageDelete, new TitleMenuItem("Organize"),
 		copy);
 
@@ -173,8 +173,10 @@ public class MediaContextMenu extends ContextMenu {
 	addOn.getItems().forEach(item -> item.setOnAction(this::onAction));
 
 	// More
-	more.getItems().addAll(stars, sourceFolder);
-	more.getItems().forEach(item -> item.setOnAction(this::onAction));
+	//more.getItems().addAll(stars, showFile)
+	//more.getItems().forEach(item -> item.setOnAction(this::onAction))
+	stars.setOnAction(this::onAction);
+	showFile.setOnAction(this::onAction);
 
 	copy.setOnAction(this::onAction);
 	//move.setOnAction(this::onAction)
@@ -191,14 +193,14 @@ public class MediaContextMenu extends ContextMenu {
      *            the media
      * @param genre
      *            the genre
-     * @param screenX
+     * @param x
      *            the d
-     * @param screenY
+     * @param y
      *            the e
      * @param controller
      *            the controller
      */
-    public void showContextMenu(Media media, Genre genre, double screenX, double screenY, SmartController controller,
+    public void showContextMenu(Media media, Genre genre, double x, double y, SmartController controller,
 	    Node node) {
 
 	// Don't waste resources
@@ -241,11 +243,11 @@ public class MediaContextMenu extends ContextMenu {
 	this.controller = controller;
 
 	// Show it
-	show(Main.window, screenX - 5 - super.getWidth() + super.getWidth() * 14 / 100, screenY - 1);
+	show(Main.window, x - 5 - super.getWidth() + super.getWidth() * 14 / 100, y - 1);
 	previousGenre = genre;
 
 	//Y axis
-	double yIni = screenY - 50;
+	double yIni = y - 50;
 	double yEnd = super.getY();
 	super.setY(yIni);
 	final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
@@ -344,7 +346,7 @@ public class MediaContextMenu extends ContextMenu {
 	    // showPopOver(media);
 	} else if (action.getSource() == stars)
 	    media.updateStars(controller, node);
-	else if (action.getSource() == sourceFolder) // File path
+	else if (action.getSource() == showFile) // File path
 	    ActionTool.openFileLocation(media.getFilePath());
 	else if (action.getSource() == copy) // copyTo
 	    Main.exportWindow.show(controller);

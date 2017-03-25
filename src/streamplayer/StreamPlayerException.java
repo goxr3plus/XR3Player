@@ -54,6 +54,10 @@ public class StreamPlayerException extends Exception {
 	WAIT_ERROR,
 	/** The can not init line. */
 	CAN_NOT_INIT_LINE,
+	/**
+	* LINE IS NOT SUPPORTED
+	*/
+	LINE_NOT_SUPPORTED,
 	/** The skip not supported. */
 	SKIP_NOT_SUPPORTED;
     }
