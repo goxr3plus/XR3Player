@@ -12,12 +12,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Audio Analysis"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Graphics"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Database Connection"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JGroups"/>
 	<classpathentry kind="lib" path="resources/libs/easybind-1.0.3.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/easybind-1.0.3-sources.jar"/>
 	<classpathentry kind="lib" path="resources/libs/jsoup-1.10.2.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/jsoup-1.10.2-sources.jar"/>
-	<classpathentry kind="lib" path="resources/libs/mp3agic-0.9.0.jar"/>
 	<classpathentry kind="lib" path="resources/libs/javasysmon-0.3.5.0.jar"/>
 	<classpathentry kind="lib" path="resources/libs/json-simple-2.1.2.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/json-simple-2.1.2-sources.jar"/>
 	<classpathentry kind="lib" path="resources/libs/jnativehook-2.1.0.jar"/>
+	<classpathentry kind="lib" path="resources/libs/mp3agic-0.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

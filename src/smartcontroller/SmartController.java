@@ -36,6 +36,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -146,6 +148,9 @@ public class SmartController extends StackPane {
     /** The next. */
     @FXML
     private Button next;
+
+    @FXML
+    private Button goToPage;
 
     /** The region. */
     @FXML
@@ -366,23 +371,44 @@ public class SmartController extends StackPane {
 	// ------ searchBarHBox
 	searchBarHBox.getChildren().add(0, searchService);
 
+	//------navigationHBox
+	navigationHBox.disableProperty().bind(this.totalInDataBase.isEqualTo(0));
+	
 	// ------ previous
-	previous.opacityProperty()
-		.bind(Bindings.when(previous.hoverProperty().or(next.hoverProperty())).then(1.0).otherwise(0.5));
+	//previous.opacityProperty()
+	//	.bind(Bindings.when(previous.hoverProperty().or(next.hoverProperty())).then(1.0).otherwise(0.5))
 	previous.disableProperty().bind(next.disabledProperty());
 	previous.visibleProperty().bind(currentPage.isNotEqualTo(0));
 	previous.setOnAction(a -> goPrevious());
 
 	// ------- next
-	next.opacityProperty()
-		.bind(Bindings.when(next.hoverProperty().or(previous.hoverProperty())).then(1.0).otherwise(0.5));
+	//next.opacityProperty()
+	//	.bind(Bindings.when(next.hoverProperty().or(previous.hoverProperty())).then(1.0).otherwise(0.5))
 	next.setVisible(false);
-	next.setOnAction(a -> goNext());
+	next.setOnAction(a -> goNext());	
+
+	//Handler
+	EventHandler<ActionEvent> handler = ac -> {
+	    if (!pageField.getText().isEmpty() && !loadService.isRunning() && !searchService.service.isRunning()
+		    && totalInDataBase.get() != 0) {
+		int lisN = Integer.parseInt(pageField.getText());
+		if (lisN <= maximumList()) {
+		    currentPage.set(lisN);
+		    loadService.startService(false, true);
+		} else {
+		    pageField.setText(Integer.toString(lisN));
+		    pageField.selectEnd();
+		}
+	    }
+	};
+	
+	//-----goToPage
+	goToPage.setOnAction(handler);
 
 	// -------- pageField
-	pageField.opacityProperty()
-		.bind(Bindings.when(pageField.hoverProperty().or(next.hoverProperty()).or(previous.hoverProperty()))
-			.then(1.0).otherwise(0.03));
+	//pageField.opacityProperty()
+	//	.bind(Bindings.when(pageField.hoverProperty().or(next.hoverProperty()).or(previous.hoverProperty()))
+	//		.then(1.0).otherwise(0.03))
 	pageField.disableProperty().bind(next.disabledProperty());
 	pageField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -401,20 +427,8 @@ public class SmartController extends StackPane {
 	    }
 
 	});
-	pageField.setOnAction(ac -> { // ENTER KEY
-	    if (!pageField.getText().isEmpty() && !loadService.isRunning() && !searchService.service.isRunning()
-		    && totalInDataBase.get() != 0) {
-		int lisN = Integer.parseInt(pageField.getText());
-		if (lisN <= maximumList()) {
-		    currentPage.set(lisN);
-		    loadService.startService(false, true);
-		} else {
-		    pageField.setText(Integer.toString(lisN));
-		    pageField.selectEnd();
-		}
-	    }
 
-	});
+	pageField.setOnAction(handler);
 	pageField.setOnScroll(scroll -> { // SCROLL
 	    if (scroll.getDeltaY() > 0 && currentPage.get() + 1 <= maximumList())
 		currentPage.set(currentPage.get() + 1);

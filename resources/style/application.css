@@ -362,7 +362,7 @@
 }
 
 .titled-pane > *.content {
-	-fx-effect: innershadow(three-pass-box, red , 15.0, 0.0, 0.0, 0.0);
+	/*-fx-effect: innershadow(three-pass-box, red , 15.0, 0.0, 0.0, 0.0);*/
     -fx-background-color:transparent;
     -fx-border-color:transparent;    
 }
@@ -912,6 +912,8 @@
 	-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);
     -fx-background-insets:3.0;
     -fx-background-radius: 5.0;
+    -fx-border-radius:5.0;
+    -fx-border-width:1.0;
     -fx-prompt-text-fill:black;
     -fx-text-fill:black;
     -fx-font-size:12.0;
@@ -920,9 +922,10 @@
 }
 
 
-.search-box .text-field:focused, .libraries-search-box .text-field:focused{
+.search-box .text-field:focused, .libraries-search-box .text-field:focused,.search-box .text-field:hover, .libraries-search-box .text-field:hover{
 	-fx-effect: null;
 	-fx-background-color: firebrick;
+	-fx-border-color:white;
 	-fx-text-fill:white;
 	-fx-prompt-text-fill:white;
     -fx-background-insets: -0.1, 2.0;

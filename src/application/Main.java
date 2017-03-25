@@ -710,10 +710,10 @@ public class Main extends Application {
 			    textArea.requestFollowCaret();
 
 			    // Set the default buttons
-			    ButtonType autoUpdate = new ButtonType("Auto Update", ButtonData.YES);
+			    //ButtonType autoUpdate = new ButtonType("Auto Update", ButtonData.YES)
 			    ButtonType download = new ButtonType("Download", ButtonData.OK_DONE);
 			    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			    alert.getButtonTypes().setAll(autoUpdate, download, cancel);
+			    alert.getButtonTypes().setAll(download, cancel);
 
 			    // Set expandable Exception into the dialog pane.
 			    alert.getDialogPane().setExpandableContent(expContent);

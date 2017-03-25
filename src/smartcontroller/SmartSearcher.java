@@ -69,6 +69,8 @@ public class SmartSearcher extends HBox {
 	getStyleClass().add("search-box");
 
 	// searchField
+	searchField.setMinWidth(100);
+	searchField.setPrefWidth(400);
 	searchField.setMaxWidth(Integer.MAX_VALUE);
 	searchField.setPromptText("Search.....");
 	searchField.textProperty().addListener((observable, newValue, oldValue) -> {
@@ -98,7 +100,7 @@ public class SmartSearcher extends HBox {
 	    }
 	});
 	searchField.editableProperty().bind(service.runningProperty().not());
-	searchField.disableProperty().bind(Main.advancedSearch.showingProperty());
+	//searchField.disableProperty().bind(Main.advancedSearch.showingProperty())
 	searchField.setOnAction(ac -> {
 	    if (controller.isFree(false))
 		service.search();
@@ -107,7 +109,7 @@ public class SmartSearcher extends HBox {
 	// searchField.setOnMouseClicked(m -> {
 	// if (m.getButton() == MouseButton.SECONDARY)
 	// Main.advancedSearch.show(searchField, controller);
-	// });
+	// })
 	searchField.setContextMenu(new ContextMenu());
 	getChildren().add(searchField);
 

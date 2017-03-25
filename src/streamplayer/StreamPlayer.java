@@ -58,12 +58,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.tritonus.share.sampled.TAudioFormat;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
-import javafx.application.Platform;
-import javafx.util.Duration;
 import javazoom.spi.PropertiesContainer;
 import streamplayer.StreamPlayerException.PlayerException;
-import tools.ActionTool;
-import tools.NotificationType;
 
 /**
  * StreamPlayer is a class based on JavaSound API. It has been successfully
@@ -961,10 +957,6 @@ public class StreamPlayer implements Runnable {
 	    } catch (IOException ex) {
 		logger.log(Level.WARNING, "Cannot get m_encodedaudioInputStream.available()", ex);
 		stop();
-		// Comment the below line (i am using it into the application
-		// with external libraries...)
-		Platform.runLater(() -> ActionTool.showNotification("Error", ex.getMessage(), Duration.millis(1500),
-			NotificationType.WARNING));
 	    }
 	}
 	return nEncodedBytes;

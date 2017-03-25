@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
@@ -31,7 +32,7 @@
          <top>
             <TitledPane fx:id="titledPane" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" minWidth="0.0" text="I am The TilePane and i don't like wrapping the text!" wrapText="true" BorderPane.alignment="CENTER">
                <content>
-                  <GridPane fx:id="topGrid" hgap="5.0" style="-fx-background-color: rgb(0,0,0,0.85);;">
+                  <GridPane fx:id="topGrid" hgap="5.0" style="-fx-background-color: rgb(200,0,0,0.85);">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" percentWidth="90.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
@@ -103,12 +104,15 @@
                               </MenuButton>
                            </children>
                         </HBox>
-                        <HBox fx:id="searchBarHBox" spacing="10.0">
+                        <HBox fx:id="searchBarHBox" alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <JFXCheckBox fx:id="instantSearch" maxHeight="1.7976931348623157E308" selected="true" text="Instant Search" textFill="WHITE">
+                              <JFXCheckBox fx:id="instantSearch" checkedColor="#061617" maxHeight="1.7976931348623157E308" selected="true" text="Instant Search" textFill="WHITE" unCheckedColor="BLACK">
                                  <tooltip>
                                     <Tooltip text="If not selected you have to press enter on the search field in order to search" />
                                  </tooltip>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </JFXCheckBox>
                            </children>
                         </HBox>
@@ -118,50 +122,57 @@
             </TitledPane>
          </top>
          <center>
-            <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox fx:id="navigationHBox" alignment="CENTER" pickOnBounds="false" spacing="8.0" StackPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton">
-                           <tooltip>
-                              <Tooltip text="Previous" />
-                           </tooltip>
-                           <graphic>
-                              <ImageView id="arrowButton" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/right.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="94.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 15; -fx-background-radius: 15; -fx-background-color: black; -fx-text-fill: orange;" text="55">
-                           <tooltip>
-                              <Tooltip text="current page" />
-                           </tooltip>
-                           <contextMenu>
-                              <ContextMenu />
-                           </contextMenu>
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </TextField>
-                        <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton">
-                           <tooltip>
-                              <Tooltip text="Next" />
-                           </tooltip>
-                           <graphic>
-                              <ImageView id="arrowButton" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/right.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </StackPane>
+            <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER" />
          </center>
+         <bottom>
+            <HBox fx:id="navigationHBox" alignment="CENTER" pickOnBounds="false" spacing="8.0" style="-fx-background-color: rgb(0,0,0,0.85);" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton">
+                     <tooltip>
+                        <Tooltip text="Previous" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView id="arrowButton" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="94.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 17; -fx-background-radius: 15; -fx-background-color: white; -fx-text-fill: firebrcik;" text="55">
+                     <tooltip>
+                        <Tooltip text="Select a Page and Press Enter" />
+                     </tooltip>
+                     <contextMenu>
+                        <ContextMenu />
+                     </contextMenu>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </TextField>
+                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton">
+                     <tooltip>
+                        <Tooltip text="Next" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView id="arrowButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/right.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="2.0" top="2.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="goToPage" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 15.5; -fx-text-fill: white;" styleClass="arrowButton" text="GO">
+                     <tooltip>
+                        <Tooltip text="Go to the selected Page" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
       <Region fx:id="region" visible="false" />
       <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" visible="false">
