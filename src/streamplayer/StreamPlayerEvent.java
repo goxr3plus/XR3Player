@@ -31,7 +31,7 @@ package streamplayer;
 public class StreamPlayerEvent {
 
     /** The status. */
-    private Status playerStatus = Status.UNKNOWN;
+    private Status playerStatus = Status.NOT_SPECIFIED;
 
     /** The stream position. */
     private int encodedStreamPosition = -1;

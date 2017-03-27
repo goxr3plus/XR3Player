@@ -139,7 +139,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="94.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 17; -fx-background-radius: 15; -fx-background-color: white; -fx-text-fill: firebrcik;" text="55">
+                  <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="94.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 17; -fx-background-radius: 15; -fx-background-color: white; -fx-text-fill: black;" text="55">
                      <tooltip>
                         <Tooltip text="Select a Page and Press Enter" />
                      </tooltip>

@@ -82,7 +82,7 @@ public class SmartSearcher extends HBox {
 		    controller.currentPage.set(service.getPaneNumberBeforeSearch());
 
 		//continue 
-		controller.getNextButton().setDisable(false);
+		controller.getNavigationHBox().setDisable(false);
 		controller.loadService.startService(false, false);
 		//Main.advancedSearch.searchOnFlySelected()
 
@@ -165,7 +165,7 @@ public class SmartSearcher extends HBox {
 	public SearchService() {
 	    setOnSucceeded(s -> done());
 	    setOnFailed(f -> {
-		controller.getNextButton().setDisable(false);
+		controller.getNavigationHBox().setDisable(false);
 		done();
 	    });
 
@@ -183,7 +183,7 @@ public class SmartSearcher extends HBox {
 	    controller.getRegion().visibleProperty().bind(runningProperty());
 	    controller.getIndicator().progressProperty().bind(progressProperty());
 	    controller.getCancelButton().setText("Searching...");
-	    controller.getNextButton().setDisable(true);
+	    controller.getNavigationHBox().setDisable(true);
 
 	    //Clear the list
 	    controller.itemsObservableList.clear();

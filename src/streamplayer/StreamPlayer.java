@@ -34,9 +34,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,20 +72,20 @@ import streamplayer.StreamPlayerException.PlayerException;
  * @author JavaZOOM (www.javazoom.net)
  *
  */
-public class StreamPlayer implements Runnable {
+public class StreamPlayer implements Callable<Void> {
 
     /**
      * Class logger
      */
-    Logger logger = Logger.getLogger(StreamPlayer.class.getName());
+    private Logger logger = Logger.getLogger(StreamPlayer.class.getName());
 
     //-------------------AUDIO---------------------
 
     /** @SEE streamplayer.Status */
-    private volatile Status status = Status.UNKNOWN;
+    private volatile Status status = Status.NOT_SPECIFIED;
 
     /** The thread. */
-    private Thread thread = null;
+    //private Thread thread = null
 
     /** The data source. */
     private Object dataSource;
@@ -126,7 +128,7 @@ public class StreamPlayer implements Runnable {
 
     //-------------------VARIABLES---------------------
 
-    String mixerName;
+    private String mixerName;
 
     /** The current line buffer size. */
     private int currentLineBufferSize = -1;
@@ -138,17 +140,25 @@ public class StreamPlayer implements Runnable {
     private int encodedAudioLength = -1;
 
     /** The Constant EXTERNAL_BUFFER_SIZE. */
-    private static final int EXTERNAL_BUFFER_SIZE = 1024 * 4;
+    private static final int EXTERNAL_BUFFER_SIZE = 4096;
 
     /** The Constant SKIP_INACCURACY_SIZE. */
     // private static final int SKIP_INACCURACY_SIZE = 1200
 
+    byte[] trimBuffer;
+
     //-------------------CLASSES---------------------
+
+    /**
+     * This is starting a Thread for StreamPlayer to Run
+     */
+    private ExecutorService streamPlayerExecutorService;
+    private Future<Void> future;
 
     /**
      * This executor service is used in order the playerState events to be executed in an order
      */
-    ExecutorService eventsExecutorService;
+    private ExecutorService eventsExecutorService;
 
     /** Holds a list of Linteners to be notified about Stream PlayerEvents */
     private ArrayList<StreamPlayerListener> listeners;
@@ -162,7 +172,9 @@ public class StreamPlayer implements Runnable {
      * Constructor.
      */
     public StreamPlayer() {
-	eventsExecutorService = Executors.newSingleThreadExecutor();
+	streamPlayerExecutorService = Executors
+		.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("StreamPlayer"));
+	eventsExecutorService = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("StreamPlayerEvent"));
 	listeners = new ArrayList<>();
 	reset();
     }
@@ -197,8 +209,8 @@ public class StreamPlayer implements Runnable {
 	//sampleRateControl = null
 
 	//Notify the Status
-	status = Status.UNKNOWN;
-	generateEvent(Status.UNKNOWN, AudioSystem.NOT_SPECIFIED, null);
+	status = Status.NOT_SPECIFIED;
+	generateEvent(Status.NOT_SPECIFIED, AudioSystem.NOT_SPECIFIED, null);
 
     }
 
@@ -213,9 +225,9 @@ public class StreamPlayer implements Runnable {
      *            the description
      * @return
      */
-    protected String generateEvent(Status playerStatus, int encodedStreamPosition, Object description) {
+    private String generateEvent(Status $, int encodedStreamPosition, Object description) {
 	try {
-	    return eventsExecutorService.submit(new StreamPlayerEventLauncher(this, playerStatus, encodedStreamPosition,
+	    return eventsExecutorService.submit(new StreamPlayerEventLauncher(this, $, encodedStreamPosition,
 		    description, new ArrayList<StreamPlayerListener>(listeners))).get();
 	} catch (InterruptedException | ExecutionException ex) {
 	    logger.log(Level.WARNING, "Problem in StreamPlayer generateEvent() method", ex);
@@ -226,38 +238,38 @@ public class StreamPlayer implements Runnable {
     /**
      * Add a listener to be notified.
      *
-     * @param listener
+     * @param ¢
      *            the listener
      */
-    public void addStreamPlayerListener(StreamPlayerListener listener) {
-	listeners.add(listener);
+    public void addStreamPlayerListener(StreamPlayerListener ¢) {
+	listeners.add(¢);
     }
 
     /**
      * Remove registered listener.
      *
-     * @param listener
+     * @param ¢
      *            the listener
      */
-    public void removeStreamPlayerListener(StreamPlayerListener listener) {
+    public void removeStreamPlayerListener(StreamPlayerListener ¢) {
 	if (listeners != null)
-	    listeners.remove(listener);
+	    listeners.remove(¢);
 
     }
 
     /**
      * Open the specific object which can be File,URL or InputStream.
      *
-     * @param object
+     * @param ¢
      *            the object [File or URL or InputStream ]
      * @throws StreamPlayerException
      *             the stream player exception
      */
-    public void open(Object object) throws StreamPlayerException {
+    public void open(Object ¢) throws StreamPlayerException {
 
-	logger.info("open(" + object + ")\n");
-	if (object != null) {
-	    dataSource = object;
+	logger.info(() -> "open(" + ¢ + ")\n");
+	if (¢ != null) {
+	    dataSource = ¢;
 	    initAudioInputStream();
 	}
     }
@@ -298,9 +310,9 @@ public class StreamPlayer implements Runnable {
 	    status = Status.OPENED;
 	    generateEvent(Status.OPENED, getEncodedStreamPosition(), null);
 
-	} catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
-	    logger.log(Level.INFO, ex.getMessage(), ex);
-	    throw new StreamPlayerException(ex);
+	} catch (LineUnavailableException | UnsupportedAudioFileException | IOException ¢) {
+	    logger.log(Level.INFO, ¢.getMessage(), ¢);
+	    throw new StreamPlayerException(¢);
 	}
 
 	logger.info("Exited initAudioInputStream\n");
@@ -339,7 +351,6 @@ public class StreamPlayer implements Runnable {
      * Determines Properties when the File/URL/InputStream is opened.
      */
     private void determineProperties() {
-
 	logger.info("Entered determineProperties()!\n");
 
 	// Properties when the File/URL/InputStream is opened.
@@ -348,7 +359,6 @@ public class StreamPlayer implements Runnable {
 	// Add AudioFileFormat properties.
 	// Expect if it is null(something bad happened).
 	if (audioFileFormat != null) {
-	    audioProperties = null;
 	    if (audioFileFormat instanceof TAudioFileFormat) {
 
 		// Tritonus SPI compliant audio file format.
@@ -414,8 +424,8 @@ public class StreamPlayer implements Runnable {
 	if (!sourceDataLine.isOpen())
 	    openLine();
 	else {
-	    AudioFormat lineAudioFormat = sourceDataLine.getFormat();
-	    AudioFormat audioInputStreamFormat = audioInputStream == null ? null : audioInputStream.getFormat();
+	    AudioFormat lineAudioFormat = sourceDataLine.getFormat(),
+		    audioInputStreamFormat = audioInputStream == null ? null : audioInputStream.getFormat();
 	    if (!lineAudioFormat.equals(audioInputStreamFormat)) {
 		sourceDataLine.close();
 		openLine();
@@ -442,10 +452,12 @@ public class StreamPlayer implements Runnable {
 
 	logger.info("Entered CreateLine()!:\n");
 
-	if (sourceDataLine == null) {
+	if (sourceDataLine != null)
+	    logger.warning("Warning Source DataLine is not null!\n");
+	else {
 	    AudioFormat sourceFormat = audioInputStream.getFormat();
 
-	    logger.info("Create Line : Source format : " + sourceFormat.toString() + "\n");
+	    logger.info(() -> "Create Line : Source format : " + sourceFormat.toString() + "\n");
 
 	    // Calculate the Sample Size in bits
 	    int nSampleSizeInBits = sourceFormat.getSampleSizeInBits();
@@ -460,8 +472,9 @@ public class StreamPlayer implements Runnable {
 
 	    // int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
 
-	    logger.info("Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate=" + targetFormat.getFrameRate()
-		    + ",Bit Rate=" + targetFormat.getSampleSizeInBits() + "Target format: " + targetFormat + "\n");
+	    logger.info(() -> "Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate="
+		    + targetFormat.getFrameRate() + ",Bit Rate=" + targetFormat.getSampleSizeInBits()
+		    + "Target format: " + targetFormat + "\n");
 
 	    // Keep a reference on encoded stream to progress notification.
 	    encodedAudioInputStream = audioInputStream;
@@ -496,16 +509,11 @@ public class StreamPlayer implements Runnable {
 
 	    sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
 
-	    // ------------------------------------------
-	    logger.info("Line : " + sourceDataLine.toString());
-	    // ------------------------------------------
-	    logger.info("Line Info : " + sourceDataLine.getLineInfo().toString());
-	    // ------------------------------------------
-	    logger.info("Line AudioFormat: " + sourceDataLine.getFormat().toString() + "\n");
-
+	    //--------------------------------------------------------------------------------
+	    logger.info(() -> "Line : " + sourceDataLine.toString());
+	    logger.info(() -> "Line Info : " + sourceDataLine.getLineInfo().toString());
+	    logger.info(() -> "Line AudioFormat: " + sourceDataLine.getFormat().toString() + "\n");
 	    logger.info("Exited CREATELINE()!:\n");
-	} else {
-	    logger.warning("Warning Source DataLine is not null!\n");
 	}
     }
 
@@ -521,117 +529,47 @@ public class StreamPlayer implements Runnable {
 
 	if (sourceDataLine != null) {
 	    AudioFormat audioFormat = audioInputStream.getFormat();
-	    int bufferSize = (bufferSize = lineBufferSize) < 0 ? sourceDataLine.getBufferSize() : bufferSize;
-	    sourceDataLine.open(audioFormat, currentLineBufferSize = bufferSize);
+	    int bufferSize = (bufferSize = lineBufferSize) >= 0 ? bufferSize : sourceDataLine.getBufferSize();
+	    currentLineBufferSize = bufferSize;
+	    sourceDataLine.open(audioFormat, currentLineBufferSize);
 
 	    // opened?
 	    if (sourceDataLine.isOpen()) {
-		logger.info("Open Line Buffer Size=" + bufferSize + "\n");
+		logger.info(() -> "Open Line Buffer Size=" + bufferSize + "\n");
 
 		/*-- Display supported controls --*/
 		// Control[] c = m_line.getControls()
 
 		// Master_Gain Control?
-		if (sourceDataLine.isControlSupported(FloatControl.Type.MASTER_GAIN))
-		    gainControl = (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
-		else
-		    gainControl = null;
+		gainControl = sourceDataLine.isControlSupported(FloatControl.Type.MASTER_GAIN)
+			? (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN)
+			: null;
 
 		// PanControl?
-		if (sourceDataLine.isControlSupported(FloatControl.Type.PAN))
-		    panControl = (FloatControl) sourceDataLine.getControl(FloatControl.Type.PAN);
-		else
-		    panControl = null;
+		panControl = sourceDataLine.isControlSupported(FloatControl.Type.PAN)
+			? (FloatControl) sourceDataLine.getControl(FloatControl.Type.PAN)
+			: null;
 
 		// SampleRate?
 		//		if (sourceDataLine.isControlSupported(FloatControl.Type.SAMPLE_RATE))
 		//		    sampleRateControl = (FloatControl) sourceDataLine.getControl(FloatControl.Type.SAMPLE_RATE);
 		//		else
-		//		    sampleRateControl = null;
+		//		    sampleRateControl = null
 
 		// Mute?
-		if (sourceDataLine.isControlSupported(BooleanControl.Type.MUTE))
-		    muteControl = (BooleanControl) sourceDataLine.getControl(BooleanControl.Type.MUTE);
-		else
-		    muteControl = null;
+		muteControl = sourceDataLine.isControlSupported(BooleanControl.Type.MUTE)
+			? (BooleanControl) sourceDataLine.getControl(BooleanControl.Type.MUTE)
+			: null;
 
 		// Speakers Balance?
-		if (sourceDataLine.isControlSupported(FloatControl.Type.BALANCE))
-		    balanceControl = (FloatControl) sourceDataLine.getControl(FloatControl.Type.BALANCE);
-		else
-		    balanceControl = null;
+		balanceControl = sourceDataLine.isControlSupported(FloatControl.Type.BALANCE)
+			? (FloatControl) sourceDataLine.getControl(FloatControl.Type.BALANCE)
+			: null;
 	    }
 
 	}
 
 	logger.info("Exited OpenLine()!:\n");
-    }
-
-    /**
-     * Stops the play back.<br>
-     *
-     * Player Status = STOPPED.<br>
-     * Thread should free Audio resources.
-     */
-    public void stop() {
-	if (isPausedOrPlaying()) {
-	    if (isPlaying())
-		pause();
-	    //	    if (sourceDataLine != null) {
-	    //		sourceDataLine.stop();
-	    //		sourceDataLine.flush();
-	    //	    }
-	    status = Status.STOPPED;
-	    generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
-	    // System.out.println("StreamPlayer stop() before!
-	    // synchronize(audioInputStream) ")
-	    //	    synchronized (audioLock) {
-	    //		closeStream();
-	    //	    }
-	    // System.out.println("StreamPlayer stop() passed!!!
-	    // synchronize(audioInputStream) ")
-	    logger.info("StreamPlayer stopPlayback() completed");
-	}
-    }
-
-    /**
-     * Pauses the play back.<br>
-     * 
-     * Player Status = PAUSED. * @return False if failed(so simple...)
-     *
-     * @return true, if successful
-     */
-    public boolean pause() {
-	if (sourceDataLine != null && status == Status.PLAYING) {
-	    // sourceDataLine.stop()
-	    // sourceDataLine.flush()
-	    status = Status.PAUSED;
-	    logger.info("pausePlayback() completed");
-	    generateEvent(Status.PAUSED, getEncodedStreamPosition(), null);
-	    return true;
-	}
-
-	return false;
-    }
-
-    /**
-     * Resumes the play back.<br>
-     *
-     * Player Status = PLAYING*
-     * 
-     * @return False if failed(so simple...)
-     */
-    public boolean resume() {
-	if (sourceDataLine != null && status == Status.PAUSED) {
-	    sourceDataLine.start();
-	    status = Status.PLAYING;
-	    logger.info("resumePlayback() completed");
-	    generateEvent(Status.RESUMED, getEncodedStreamPosition(), null);
-	    return true;
-	}
-
-	return false;
-
     }
 
     /**
@@ -643,47 +581,123 @@ public class StreamPlayer implements Runnable {
     public void play() throws StreamPlayerException {
 	if (status == Status.STOPPED)
 	    initAudioInputStream();
-	if (status == Status.OPENED) {
-	    if (thread != null && thread.isAlive()) {
-		logger.info("WARNING: old thread still running!!");
-		int counter = 0;
-		while (status != Status.OPENED) {
-		    try {
-			if (thread != null) {
+	if (status != Status.OPENED)
+	    return;
 
-			    logger.info("Waiting ... " + counter);
-			    counter++;
-			    Thread.sleep(400);
-			    if (counter > 2) {
-				thread.interrupt();
-			    }
-			}
-		    } catch (InterruptedException ex) {
-			logger.log(Level.WARNING, "WARNING: old thread still running!!", ex);
-			throw new StreamPlayerException(StreamPlayerException.PlayerException.WAIT_ERROR, ex);
-		    }
-		}
-	    }
+	//Shutdown previous Thread Running
+	awaitTermination();
+	awaitTermination();
 
-	    // Open SourceDataLine.
-	    try {
-		initLine();
-	    } catch (LineUnavailableException e) {
-		throw new StreamPlayerException(StreamPlayerException.PlayerException.CAN_NOT_INIT_LINE, e);
-	    }
+	// Open SourceDataLine.
+	try {
+	    initLine();
+	} catch (LineUnavailableException ¢) {
+	    throw new StreamPlayerException(StreamPlayerException.PlayerException.CAN_NOT_INIT_LINE, ¢);
+	}
 
-	    // ---- log.info("Creating new thread")
-	    thread = new Thread(this, "BasicPlayer");
-	    thread.start();
-	    if (sourceDataLine != null) {
-		sourceDataLine.start();
-		status = Status.PLAYING;
-		generateEvent(Status.PLAYING, getEncodedStreamPosition(), null);
-	    }
+	//Open the sourceDataLine
+	if (sourceDataLine != null && !sourceDataLine.isRunning()) {
+	    sourceDataLine.start();
+
+	    //Proceed only if we have not problems
+	    logger.info("Submitting new StreamPlayer Thread");
+	    streamPlayerExecutorService.submit(this);
+
+	    //Update the status
+	    status = Status.PLAYING;
+	    generateEvent(Status.PLAYING, getEncodedStreamPosition(), null);
 	}
     }
 
-    byte[] trimBuffer;
+    /**
+     * Pauses the play back.<br>
+     * 
+     * Player Status = PAUSED. * @return False if failed(so simple...)
+     *
+     * @return true, if successful
+     */
+    public boolean pause() {
+	if (sourceDataLine == null || status != Status.PLAYING)
+	    return false;
+	status = Status.PAUSED;
+	logger.info("pausePlayback() completed");
+	generateEvent(Status.PAUSED, getEncodedStreamPosition(), null);
+	return true;
+    }
+
+    /**
+     * Stops the play back.<br>
+     *
+     * Player Status = STOPPED.<br>
+     * Thread should free Audio resources.
+     */
+    public void stop() {
+	if (status == Status.STOPPED)
+	    return;
+	if (isPlaying())
+	    pause();
+	status = Status.STOPPED;
+	generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
+	logger.info("StreamPlayer stopPlayback() completed");
+    }
+
+    /**
+     * Resumes the play back.<br>
+     *
+     * Player Status = PLAYING*
+     * 
+     * @return False if failed(so simple...)
+     */
+    public boolean resume() {
+	if (sourceDataLine == null || status != Status.PAUSED)
+	    return false;
+	sourceDataLine.start();
+	status = Status.PLAYING;
+	generateEvent(Status.RESUMED, getEncodedStreamPosition(), null);
+	logger.info("resumePlayback() completed");
+	return true;
+
+    }
+
+    /**
+     * Await for the termination of StreamPlayerExecutorService Thread
+     */
+    private void awaitTermination() {
+	if (future != null && !future.isDone()) {
+	    try {
+		//future.get() [Don't use this cause it may hang forever and ever...]
+
+		//Wait ~1 second and then cancel the future
+		Thread delay = new Thread(() -> {
+		    try {
+			for (int i = 0; i < 50; i++) {
+			    if (!future.isDone()) {
+				Thread.sleep(20);
+			    } else
+				break;
+			    System.out.println("StreamPlayer Future is not yet done...");
+			}
+
+		    } catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+			logger.log(Level.INFO, ex.getMessage(), ex);
+		    }
+		});
+
+		//Start the delay Thread
+		delay.start();
+		//Join until delay Thread is finished
+		delay.join();
+
+	    } catch (InterruptedException ex) {
+		Thread.currentThread().interrupt();
+		logger.log(Level.WARNING, ex.getMessage(), ex);
+	    } finally {
+		// Harmless if task already completed
+		future.cancel(true); // interrupt if running
+	    }
+	}
+    }
 
     /**
      * Main loop.
@@ -692,9 +706,8 @@ public class StreamPlayer implements Runnable {
      * Player Status == PLAYING => Audio stream data sent to Audio line.<br>
      * Player Status == PAUSED => Waiting for another status.
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public void run() {
+    public Void call() {
 	//	int readBytes = 1
 	//	byte[] abData = new byte[EXTERNAL_BUFFER_SIZE]
 	int nBytesRead = 0;
@@ -706,27 +719,24 @@ public class StreamPlayer implements Runnable {
 	synchronized (audioLock) {
 	    // Main play/pause loop.
 	    while ((nBytesRead != -1)
-		    && !(status == Status.STOPPED || status == Status.SEEKING || status == Status.UNKNOWN)) {
+		    && !(status == Status.STOPPED || status == Status.SEEKING || status == Status.NOT_SPECIFIED)) {
 		try {
 		    //Playing?
 		    if (status == Status.PLAYING) {
 
 			// System.out.println("Inside Stream Player Run method")
-
 			int toRead = audioDataLength;
 			int totalRead = 0;
-			// Reads up a specified maximum number of bytes
-			// from audio stream 
-			while (toRead > 0 && (nBytesRead = audioInputStream.read(audioDataBuffer.array(), totalRead,
-				toRead)) != -1) {
-			    totalRead += nBytesRead;
-			    toRead -= nBytesRead;
-			}
 
-			// Check for under run
-			if (sourceDataLine.available() >= sourceDataLine.getBufferSize())
-			    logger.info(String.format("Underrun :%s/%s", sourceDataLine.available(),
-				    sourceDataLine.getBufferSize()));
+			// Reads up a specified maximum number of bytes
+			// from audio stream 		
+			for (; toRead > 0 && (nBytesRead = audioInputStream.read(audioDataBuffer.array(), totalRead,
+				toRead)) != -1; toRead -= nBytesRead, totalRead += nBytesRead)
+
+			    // Check for under run
+			    if (sourceDataLine.available() >= sourceDataLine.getBufferSize())
+				logger.info(() -> "Underrun> Available=" + sourceDataLine.available()
+					+ " , SourceDataLineBuffer=" + sourceDataLine.getBufferSize());
 
 			//Check if anything has been read
 			if (totalRead > 0) {
@@ -759,38 +769,28 @@ public class StreamPlayer implements Runnable {
 
 			}
 
-			//Paused?
 		    } else if (status == Status.PAUSED) {
 
-			//Flush the line
+			//Flush and stop the source data line 
 			if (sourceDataLine != null && sourceDataLine.isRunning()) {
 			    sourceDataLine.flush();
 			    sourceDataLine.stop();
 			}
-
 			try {
 			    while (status == Status.PAUSED) {
-				//Thread.sleep(200)
-				// Thread.sle
 				Thread.sleep(50);
-				//audioLock.
-				//audioLock.wait(50)
 			    }
-
 			} catch (InterruptedException ex) {
-			    thread.interrupt();
+			    Thread.currentThread().interrupt();
 			    logger.warning("Thread cannot sleep.\n" + ex);
 			}
 		    }
-
 		} catch (IOException ex) {
 		    logger.log(Level.WARNING, "\"Decoder Exception: \" ", ex);
-		    // stop()
 		    status = Status.STOPPED;
 		    generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
 		}
 	    }
-
 	    //	    int readBytes = 1;
 	    //		byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
 	    //		// Lock stream while playing.
@@ -886,6 +886,7 @@ public class StreamPlayer implements Runnable {
 	//Log
 	logger.info("Decoding thread completed");
 
+	return null;
     }
 
     /**
@@ -898,32 +899,41 @@ public class StreamPlayer implements Runnable {
      *             the stream player exception
      */
     public long seek(long bytes) throws StreamPlayerException {
-	long totalSkipped = 0;
+	long $ = 0;
+
+	//If it is File
 	if (dataSource instanceof File) {
-	    logger.info("Bytes to skip : " + bytes);
+
+	    //Check if the requested bytes are more than totalBytes of Audio
+	    long bytesLength = getTotalBytes();
+	    if ((bytesLength <= 0) || (bytes >= bytesLength)) {
+		generateEvent(Status.EOM, getEncodedStreamPosition(), null);
+		return $;
+	    }
+
+	    logger.info(() -> "Bytes to skip : " + bytes);
 	    Status previousStatus = status;
 	    status = Status.SEEKING;
-	    long skipped = 0;
+
 	    try {
 		synchronized (audioLock) {
-		    // System.out.println("Stream player entered into
-		    // seek(bytes) synchronized")
 		    generateEvent(Status.SEEKING, AudioSystem.NOT_SPECIFIED, null);
 		    initAudioInputStream();
 		    if (audioInputStream != null) {
 
+			long skipped;
 			// Loop until bytes are really skipped.
-			while (totalSkipped < (bytes)) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
-			    skipped = audioInputStream.skip(bytes - totalSkipped);
+			while ($ < (bytes)) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
+			    skipped = audioInputStream.skip(bytes - $);
 			    if (skipped == 0)
 				break;
-			    totalSkipped += skipped;
-			    logger.info("Skipped : " + totalSkipped + "/" + bytes);
-			    if (totalSkipped == -1)
+			    $ += skipped;
+			    logger.info("Skipped : " + $ + "/" + bytes);
+			    if ($ == -1)
 				throw new StreamPlayerException(
 					StreamPlayerException.PlayerException.SKIP_NOT_SUPPORTED);
 
-			    logger.info("Skeeping:" + totalSkipped);
+			    logger.info("Skeeping:" + $);
 			}
 		    }
 		}
@@ -940,7 +950,7 @@ public class StreamPlayer implements Runnable {
 		logger.log(Level.WARNING, ex.getMessage(), ex);
 	    }
 	}
-	return totalSkipped;
+	return $;
     }
 
     /**
@@ -950,16 +960,16 @@ public class StreamPlayer implements Runnable {
      * @return The Position of the encoded stream in term of bytes
      */
     public int getEncodedStreamPosition() {
-	int nEncodedBytes = -1;
+	int $ = -1;
 	if (dataSource instanceof File && encodedAudioInputStream != null) {
 	    try {
-		nEncodedBytes = encodedAudioLength - encodedAudioInputStream.available();
+		$ = encodedAudioLength - encodedAudioInputStream.available();
 	    } catch (IOException ex) {
 		logger.log(Level.WARNING, "Cannot get m_encodedaudioInputStream.available()", ex);
 		stop();
 	    }
 	}
-	return nEncodedBytes;
+	return $;
     }
 
     /**
@@ -971,8 +981,8 @@ public class StreamPlayer implements Runnable {
 		audioInputStream.close();
 		logger.info("Stream closed");
 	    }
-	} catch (IOException e) {
-	    logger.warning("Cannot close stream\n" + e);
+	} catch (IOException ¢) {
+	    logger.warning("Cannot close stream\n" + ¢);
 	}
     }
 
@@ -1000,7 +1010,7 @@ public class StreamPlayer implements Runnable {
      * @return A List of available Mixers
      */
     public List<String> getMixers() {
-	List<String> mixers = new ArrayList<>();
+	List<String> $ = new ArrayList<>();
 
 	// Obtains an array of mixer info objects that represents the set of
 	// audio mixers that are currently installed on the system.
@@ -1014,11 +1024,11 @@ public class StreamPlayer implements Runnable {
 
 		// if line supported
 		if (mixer.isLineSupported(lineInfo))
-		    mixers.add(mInfo.getName());
+		    $.add(mInfo.getName());
 
 	    });
 
-	return mixers;
+	return $;
     }
 
     /**
@@ -1028,8 +1038,8 @@ public class StreamPlayer implements Runnable {
      *            the name
      * @return The Mixer with that name
      */
-    public Mixer getMixer(String name) {
-	Mixer mixer = null;
+    private Mixer getMixer(String name) {
+	Mixer $ = null;
 
 	// Obtains an array of mixer info objects that represents the set of
 	// audio mixers that are currently installed on the system.
@@ -1038,11 +1048,11 @@ public class StreamPlayer implements Runnable {
 	if (name != null && mixerInfos != null) {
 	    for (int i = 0; i < mixerInfos.length; i++)
 		if (mixerInfos[i].getName().equals(name)) {
-		    mixer = AudioSystem.getMixer(mixerInfos[i]);
+		    $ = AudioSystem.getMixer(mixerInfos[i]);
 		    break;
 		}
 	}
-	return mixer;
+	return $;
     }
 
     /**
@@ -1055,11 +1065,8 @@ public class StreamPlayer implements Runnable {
      * @return true, if successful
      */
     private boolean hasControl(Type control, Control component) {
-
-	if (component != null && (sourceDataLine != null) && (sourceDataLine.isControlSupported(control)))
-	    return true;
-
-	return false;
+	return component != null && (sourceDataLine != null) && (sourceDataLine.isControlSupported(control)) ? true
+		: false;
     }
 
     /**
@@ -1069,10 +1076,7 @@ public class StreamPlayer implements Runnable {
      */
     public float getGainValue() {
 
-	if (hasControl(FloatControl.Type.MASTER_GAIN, gainControl))
-	    return gainControl.getValue();
-	else
-	    return 0.0F;
+	return hasControl(FloatControl.Type.MASTER_GAIN, gainControl) ? gainControl.getValue() : 0.0F;
     }
 
     /**
@@ -1081,10 +1085,7 @@ public class StreamPlayer implements Runnable {
      * @return The Maximum Gain Value
      */
     public float getMaximumGain() {
-	if (hasControl(FloatControl.Type.MASTER_GAIN, gainControl))
-	    return gainControl.getMaximum();
-	else
-	    return 0.0F;
+	return hasControl(FloatControl.Type.MASTER_GAIN, gainControl) ? gainControl.getMaximum() : 0.0F;
 
     }
 
@@ -1095,10 +1096,7 @@ public class StreamPlayer implements Runnable {
      */
     public float getMinimumGain() {
 
-	if (hasControl(FloatControl.Type.MASTER_GAIN, gainControl))
-	    return gainControl.getMinimum();
-	else
-	    return 0.0F;
+	return hasControl(FloatControl.Type.MASTER_GAIN, gainControl) ? gainControl.getMinimum() : 0.0F;
 
     }
 
@@ -1108,10 +1106,7 @@ public class StreamPlayer implements Runnable {
      * @return The Precision Value
      */
     public float getPrecision() {
-	if (hasControl(FloatControl.Type.PAN, panControl))
-	    return panControl.getPrecision();
-	else
-	    return 0.0F;
+	return hasControl(FloatControl.Type.PAN, panControl) ? panControl.getPrecision() : 0.0F;
 
     }
 
@@ -1121,10 +1116,7 @@ public class StreamPlayer implements Runnable {
      * @return The Pan Value
      */
     public float getPan() {
-	if (hasControl(FloatControl.Type.PAN, panControl))
-	    return panControl.getValue();
-	else
-	    return 0.0F;
+	return hasControl(FloatControl.Type.PAN, panControl) ? panControl.getValue() : 0.0F;
 
     }
 
@@ -1134,10 +1126,7 @@ public class StreamPlayer implements Runnable {
      * @return True if muted , False if not
      */
     public boolean getMute() {
-	if (hasControl(BooleanControl.Type.MUTE, muteControl))
-	    return muteControl.getValue();
-
-	return false;
+	return hasControl(BooleanControl.Type.MUTE, muteControl) ? muteControl.getValue() : false;
     }
 
     /**
@@ -1146,10 +1135,7 @@ public class StreamPlayer implements Runnable {
      * @return The Balance Value
      */
     public float getBalance() {
-	if (hasControl(FloatControl.Type.BALANCE, balanceControl))
-	    return balanceControl.getValue();
-
-	return 0f;
+	return hasControl(FloatControl.Type.BALANCE, balanceControl) ? balanceControl.getValue() : 0f;
     }
 
     /****
@@ -1186,11 +1172,11 @@ public class StreamPlayer implements Runnable {
      *            the src
      * @return the map
      */
-    protected Map<String, Object> deepCopy(Map<String, Object> src) {
-	HashMap<String, Object> map = new HashMap<>();
+    private Map<String, Object> deepCopy(Map<String, Object> src) {
+	HashMap<String, Object> $ = new HashMap<>();
 	if (src != null)
-	    src.keySet().forEach(key -> map.put(key, src.get(key)));
-	return map;
+	    src.keySet().forEach(key -> $.put(key, src.get(key)));
+	return $;
     }
 
     /**
@@ -1212,11 +1198,11 @@ public class StreamPlayer implements Runnable {
      */
     public void setPan(double fPan) {
 
-	if (hasControl(FloatControl.Type.PAN, panControl) && fPan >= -1.0 && fPan <= 1.0) {
-	    logger.info("Pan : " + fPan);
-	    panControl.setValue((float) fPan);
-	    generateEvent(Status.PAN, getEncodedStreamPosition(), null);
-	}
+	if (!hasControl(FloatControl.Type.PAN, panControl) || fPan < -1.0 || fPan > 1.0)
+	    return;
+	logger.info(() -> "Pan : " + fPan);
+	panControl.setValue((float) fPan);
+	generateEvent(Status.PAN, getEncodedStreamPosition(), null);
 
     }
 
@@ -1224,34 +1210,18 @@ public class StreamPlayer implements Runnable {
      * Sets Gain value. Line should be opened before calling this method. Linear scale 0.0 <--> 1.0 Threshold Coef. : 1/2 to avoid saturation.
      *
      * @param fGain
-     *            the new gain
+     *            The new gain value
      */
     public void setGain(double fGain) {
-	if (isPlaying() || isPaused())
-	    if (hasControl(FloatControl.Type.MASTER_GAIN, gainControl)) {
-		/*
-		 * //logger.info("Gain : " + fGain); // double minGainDB =
-		 * getMinimumGain(); // double ampGainDB = ((10.0f / 20.0f) *
-		 * getMaximumGain()) - // getMinimumGain(); // double cste =
-		 * Math.log(10.0) / 20; // double valueDB = minGainDB + (1 /
-		 * cste) * Math.log(1 + // (Math.exp(cste * ampGainDB) - 1) *
-		 * fGain); // log.debug("Gain : " + valueDB); //
-		 * m_gainControl.setValue((float) valueDB);
-		 */
-
-		// Better type
-		gainControl.setValue((float) (20 * Math.log10(fGain == 0.0 ? 0.0000 : fGain)));
-		// OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))
-		//generateEvent(Status.GAIN, getEncodedStreamPosition(), null)
-	    }
-
+	if (isPlaying() || isPaused() && hasControl(FloatControl.Type.MASTER_GAIN, gainControl))
+	    gainControl.setValue((float) (20 * Math.log10(fGain == 0.0 ? 0.0000 : fGain)));
     }
 
     /**
      * Set the mute of the Line. Note that mute status does not affect gain.
      *
      * @param mute
-     *            the new mute
+     *            True to mute the audio of False to unmute it
      */
     public void setMute(boolean mute) {
 	if (hasControl(BooleanControl.Type.MUTE, muteControl) && muteControl.getValue() != mute)
@@ -1285,12 +1255,12 @@ public class StreamPlayer implements Runnable {
      *            the stop
      */
     public void setEqualizer(float[] array, int stop) {
-	if (isPausedOrPlaying() && audioInputStream instanceof PropertiesContainer) {
-	    Map<?, ?> map = ((PropertiesContainer) audioInputStream).properties();
-	    float[] equalizer = (float[]) map.get("mp3.equalizer");
-	    for (int i = 0; i < stop; i++)
-		equalizer[i] = array[i];
-	}
+	if (!isPausedOrPlaying() || !(audioInputStream instanceof PropertiesContainer))
+	    return;
+	//Map<?, ?> map = ((PropertiesContainer) audioInputStream).properties()
+	float[] equalizer = (float[]) ((PropertiesContainer) audioInputStream).properties().get("mp3.equalizer");
+	for (int ¢ = 0; ¢ < stop; ¢++)
+	    equalizer[¢] = array[¢];
 
     }
 
@@ -1303,11 +1273,11 @@ public class StreamPlayer implements Runnable {
      *            the key
      */
     public void setEqualizerKey(float value, int key) {
-	if (isPausedOrPlaying() && audioInputStream instanceof PropertiesContainer) {
-	    Map<?, ?> map = ((PropertiesContainer) audioInputStream).properties();
-	    float[] equalizer = (float[]) map.get("mp3.equalizer");
-	    equalizer[key] = value;
-	}
+	if (!isPausedOrPlaying() || !(audioInputStream instanceof PropertiesContainer))
+	    return;
+	//Map<?, ?> map = ((PropertiesContainer) audioInputStream).properties()
+	float[] equalizer = (float[]) ((PropertiesContainer) audioInputStream).properties().get("mp3.equalizer");
+	equalizer[key] = value;
 
     }
 
@@ -1317,7 +1287,7 @@ public class StreamPlayer implements Runnable {
      * @return If Status==STATUS.UNKNOWN.
      */
     public boolean isUnknown() {
-	return status == Status.UNKNOWN;
+	return status == Status.NOT_SPECIFIED;
     }
 
     /**
@@ -1344,11 +1314,7 @@ public class StreamPlayer implements Runnable {
      * @return <b>true</b> if player is paused/playing,<b>false</b> if not
      */
     public boolean isPausedOrPlaying() {
-
-	if (isPlaying() || isPaused())
-	    return true;
-
-	return false;
+	return isPlaying() || isPaused() ? true : false;
     }
 
     /**

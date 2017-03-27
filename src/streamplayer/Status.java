@@ -1,50 +1,56 @@
 package streamplayer;
+
 /**
-     * Status of Stream Player.
-     *
-     * @author GOXR3PLUS
+ * Status of Stream Player.
+ *
+ * @author GOXR3PLUS
+ */
+public enum Status {
+
+    /**
+     * INITIALIZING
      */
-    public enum Status {
+    INIT,
 
-	/** UNKOWN STATUS. */
-	UNKNOWN,
+    /** UNKOWN STATUS. */
+    NOT_SPECIFIED,
 
-	/** In the process of opening the AudioInputStream. */
-	OPENING,
+    /** In the process of opening the AudioInputStream. */
+    OPENING,
 
-	/** AudioInputStream is opened. */
-	OPENED,
+    /** AudioInputStream is opened. */
+    OPENED,
 
-	/** play event has been fired. */
-	PLAYING,
+    /** play event has been fired. */
+    PLAYING,
 
-	/** player is stopped. */
-	STOPPED,
+    /** player is stopped. */
+    STOPPED,
 
-	/** player is paused. */
-	PAUSED,
+    /** player is paused. */
+    PAUSED,
 
-	/** resume event is fired. */
-	RESUMED,
+    /** resume event is fired. */
+    RESUMED,
 
-	/** player is in the process of seeking. */
-	SEEKING,
-	
-	/**
-	 * The player is buffering
-	 */
-	BUFFERING,
+    /** player is in the process of seeking. */
+    SEEKING,
 
-	/** seek work has been done. */
-	SEEKED,
+    /**
+     * The player is buffering
+     */
+    BUFFERING,
 
-	/** EOM stands for "END OF MEDIA". */
-	EOM,
+    /** seek work has been done. */
+    SEEKED,
 
-	/** player pan has changed. */
-	PAN,
+    /** EOM stands for "END OF MEDIA". */
+    EOM,
 
-	/** player gain has changed. */
-	GAIN;
+    /** player pan has changed. */
+    PAN,
 
-    }
+    /** player gain has changed. */
+    GAIN;
+
+}

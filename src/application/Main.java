@@ -207,7 +207,7 @@ public class Main extends Application {
     /***
      * This BorderPane has in the center the root , at the left the SideBar and on the Top the TopBar
      */
-    static BorderPane applicationBorderPane = new BorderPane();
+    private static BorderPane applicationBorderPane = new BorderPane();
 
     // --------------END: The below have depencities on others------------------------
 

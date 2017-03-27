@@ -33,7 +33,7 @@ import java.util.concurrent.Callable;
 public class StreamPlayerEventLauncher implements Callable<String> {
 
     /** The player state. */
-    private Status playerState = Status.UNKNOWN;
+    private Status playerState = Status.NOT_SPECIFIED;
 
     /** The stream position. */
     private int encodedStreamPosition = -1;

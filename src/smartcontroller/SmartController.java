@@ -372,12 +372,13 @@ public class SmartController extends StackPane {
 	searchBarHBox.getChildren().add(0, searchService);
 
 	//------navigationHBox
-	navigationHBox.disableProperty().bind(this.totalInDataBase.isEqualTo(0));
+	//navigationHBox.disableProperty().bind(this.totalInDataBase.isEqualTo(0));
 	
 	// ------ previous
 	//previous.opacityProperty()
 	//	.bind(Bindings.when(previous.hoverProperty().or(next.hoverProperty())).then(1.0).otherwise(0.5))
-	previous.disableProperty().bind(next.disabledProperty());
+	
+	//previous.disableProperty().bind(next.disabledProperty())
 	previous.visibleProperty().bind(currentPage.isNotEqualTo(0));
 	previous.setOnAction(a -> goPrevious());
 
@@ -409,7 +410,8 @@ public class SmartController extends StackPane {
 	//pageField.opacityProperty()
 	//	.bind(Bindings.when(pageField.hoverProperty().or(next.hoverProperty()).or(previous.hoverProperty()))
 	//		.then(1.0).otherwise(0.03))
-	pageField.disableProperty().bind(next.disabledProperty());
+	
+	//pageField.disableProperty().bind(next.disabledProperty())
 	pageField.textProperty().addListener((observable, oldValue, newValue) -> {
 
 	    if (!newValue.matches("\\d"))
@@ -694,6 +696,16 @@ public class SmartController extends StackPane {
 	return cancel;
     }
 
+    
+    /**
+     * Gets the next button.
+     *
+     * @return the next button
+     */
+    public HBox getNavigationHBox() {
+	return navigationHBox;
+    }
+    
     /**
      * Gets the next button.
      *

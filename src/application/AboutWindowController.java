@@ -190,7 +190,7 @@ public class AboutWindowController extends BorderPane {
     /**
      * Shows the Window
      */
-    public void showWindow() {
+    void showWindow() {
 	window.sizeToScene();
 	window.show();
     }
