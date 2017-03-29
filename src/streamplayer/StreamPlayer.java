@@ -77,7 +77,7 @@ public class StreamPlayer implements Callable<Void> {
     /**
      * Class logger
      */
-    private Logger logger = Logger.getLogger(StreamPlayer.class.getName());
+    private static final Logger logger = Logger.getLogger(StreamPlayer.class.getName());
 
     //-------------------AUDIO---------------------
 
@@ -535,7 +535,7 @@ public class StreamPlayer implements Callable<Void> {
 
 	    // opened?
 	    if (sourceDataLine.isOpen()) {
-		logger.info(() -> "Open Line Buffer Size=" + bufferSize + "\n");
+		//logger.info(() -> "Open Line Buffer Size=" + bufferSize + "\n");
 
 		/*-- Display supported controls --*/
 		// Control[] c = m_line.getControls()

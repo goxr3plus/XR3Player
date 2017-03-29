@@ -923,24 +923,22 @@ public class Library extends StackPane {
      *            the first load hack
      */
     public void libraryOpenClose(boolean open, boolean firstLoadHack) {
-	if (!firstLoadHack) {
+	if (firstLoadHack) {
+	    setLibraryOpened(open, false);
+	    Main.libraryMode.multipleLibs.insertTab(this);
+	} else {
 	    // Open
 	    if (open && !isLibraryOpened()) {
 		setLibraryOpened(open, true);
 		Main.libraryMode.multipleLibs.insertTab(this);
-		// Close
-	    } else if (!open && isLibraryOpened() && controller.isFree(true)) {
+	    }// Close 
+	    else if (!open && isLibraryOpened() && controller.isFree(true)) {
 		setLibraryOpened(open, true);
 		Main.libraryMode.multipleLibs.removeTab(getLibraryName());
 	    }
 
 	    //Update the JSONFile
 	    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
-
-	    // Open Hacked to not commit
-	} else {
-	    setLibraryOpened(open, false);
-	    Main.libraryMode.multipleLibs.insertTab(this);
 	}
     }
 
@@ -977,12 +975,11 @@ public class Library extends StackPane {
      * @param stars
      *            the new stars
      */
-    private final boolean setStars(double stars) {
-	if (stars >= 0.0 && stars <= 5.0) {
-	    starsProperty().set(stars);
-	    return true;
-	} else
+    private boolean setStars(double stars) {
+	if (stars < 0.0 || stars > 5.0)
 	    return false;
+	starsProperty().set(stars);
+	return true;
     }
 
     /**
@@ -1115,37 +1112,29 @@ public class Library extends StackPane {
 	return saveMode;
     }
 
-    // ---------!!!!!!!!!!!!!Θέλει διόρθωση για να προηδοποιεί τον χρήστη εάν
-    // μία εικόνα λείπει!!!!!!!!!!!! -----------------
     /**
      * Gets the image.
      *
      * @return The image of the Library
      */
     public Image getImage() {
-	if (imageName != null) {
-	    if (new File(getAbsoluteImagePath()).exists()) {
 
-		// Hide warning Label
-		warningLabel.setVisible(false);
-
-		// return the image
-		return new Image(new File(getAbsoluteImagePath()).toURI().toString());
-
-	    } else {
-
-		// Show warning Label
-		warningLabel.setVisible(true);
-
-		return null;
-	    }
-	} else {
-
+	if (imageName == null) {
 	    // Show warning Label
 	    warningLabel.setVisible(false);
-
 	    return LibraryMode.defaultImage;
 	}
+	if (!new File(getAbsoluteImagePath()).exists()) {
+	    //Show warning Label
+	    warningLabel.setVisible(true);
+	    return null;
+	}
+
+	//Hide warning Label
+	warningLabel.setVisible(false);
+	//Return the Image
+	return new Image(new File(getAbsoluteImagePath()).toURI() + "");
+
     }
 
     /**
@@ -1172,12 +1161,7 @@ public class Library extends StackPane {
      * @return The absolute path of the Library Image in the operating system
      */
     public String getAbsoluteImagePath() {
-
-	// If an image exists
-	if (imageName != null)
-	    return Main.dbManager.imagesFolderAbsolutePath + File.separator + imageName;
-
-	return null;
+	return imageName == null ? null : Main.dbManager.imagesFolderAbsolutePath + File.separator + imageName;
     }
 
     /**
@@ -1235,28 +1219,27 @@ public class Library extends StackPane {
     /**
      * This method is called when a key is released.
      *
-     * @param key
+     * @param e
      *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
      */
-    public void onKeyReleased(KeyEvent key) {
-	if (!Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused()
-		&& getPosition() == Main.libraryMode.libraryViewer.centerIndex) {
+    public void onKeyReleased(KeyEvent e) {
+	if (Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused()
+		|| getPosition() != Main.libraryMode.libraryViewer.centerIndex)
+	    return;
 
-	    KeyCode code = key.getCode();
-	    if (code == KeyCode.O)
-		libraryOpenClose(true, false);
-	    else if (code == KeyCode.C)
-		libraryOpenClose(false, false);
-	    else if (code == KeyCode.R)
-		renameLibrary(nameLabel);
-	    else if (code == KeyCode.DELETE || code == KeyCode.D)
-		deleteLibrary();
-	    else if (code == KeyCode.S)
-		Main.libraryMode.libraryViewer.settings.showWindow(this);
-	    else if (code == KeyCode.E)
-		this.exportImage();
-
-	}
+	KeyCode code = e.getCode();
+	if (code == KeyCode.O)
+	    libraryOpenClose(true, false);
+	else if (code == KeyCode.C)
+	    libraryOpenClose(false, false);
+	else if (code == KeyCode.R)
+	    renameLibrary(nameLabel);
+	else if (code == KeyCode.DELETE || code == KeyCode.D)
+	    deleteLibrary();
+	else if (code == KeyCode.S)
+	    Main.libraryMode.libraryViewer.settings.showWindow(this);
+	else if (code == KeyCode.E)
+	    this.exportImage();
     }
 
     /*------------------------------------------------------------------------

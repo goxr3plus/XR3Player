@@ -192,7 +192,7 @@ public class LoginMode extends BorderPane {
 	});
 
 	//exitButton
-	exitButton.setOnAction(a -> System.exit(0));
+	exitButton.setOnAction(a -> Main.exitQuestion());
 
 	// previous
 	previous.setOnAction(a -> userViewer.previous());

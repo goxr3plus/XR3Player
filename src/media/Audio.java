@@ -70,11 +70,9 @@ public class Audio extends Media {
      * @param timesPlayed
      *            The times the Media has been played
      * @param dateImported
-     *            The date the Media was imported <b> if null given then the
-     *            imported time will be the current date </b>
+     *            The date the Media was imported <b> if null given then the imported time will be the current date </b>
      * @param hourImported
-     *            The hour the Media was imported <b> if null given then the
-     *            imported hour will be the current time </b>
+     *            The hour the Media was imported <b> if null given then the imported hour will be the current time </b>
      * @param genre
      *            The genre of the Media <b> see the Genre class for more </b>
      */
@@ -132,10 +130,7 @@ public class Audio extends Media {
 	case 1:
 	    return getTimesPlayed();
 	case 2:
-	    return (int) (getStars() * 2); // Το μετατρέπει από maximum 5
-					   // σε
-					   // maximum
-					   // 10
+	    return (int) (getStars() * 2); //It converts it to maximum 10
 	default:
 	    return -1;
 	}

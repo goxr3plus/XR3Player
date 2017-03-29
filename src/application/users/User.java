@@ -79,9 +79,10 @@ public class User extends StackPane {
 			File outputFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + newName);
 
 			//Check if the Folder can be renamed
-			if (originalFolder.renameTo(outputFolder)) {
+			if (originalFolder.renameTo(outputFolder)) { //Success
 			    success = true;
-			    setUserName(nameField.getText()); //Success
+			    setUserName(nameField.getText());
+			    nameField.getTooltip().setText(getUserName());
 			} else
 			    ActionTool.showNotification("Error", "An error occured trying to rename the user",
 				    Duration.seconds(2), NotificationType.ERROR);

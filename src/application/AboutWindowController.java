@@ -101,7 +101,7 @@ public class AboutWindowController extends BorderPane {
 	String text = "A cross platform Java/JavaFX Media Player\n";
 	cssTextArea.appendText(text);
 
-	text = "Copyright © <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.\n\n";
+	text = "Copyright (C) <2015-2017>  (www.goxr3plus.co.nf) . All rights reserved.\n\n";
 	cssTextArea.appendText(text);
 
 	// --Style

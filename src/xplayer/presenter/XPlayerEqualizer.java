@@ -198,7 +198,7 @@ public class XPlayerEqualizer extends BorderPane {
 
 	}
 
-	/** Επαναφορά σε 0.0f */
+	/** Reset to 0.0f */
 	public void resetToZero() {
 	    setAngle(100, 200);
 	}
@@ -227,14 +227,14 @@ public class XPlayerEqualizer extends BorderPane {
 	    setText(text);
 
 	    setOnAction(action -> {
-		// Πέρνα τις τιμές στον πίνακα
+		// Pass the values to the array
 		for (int y = 0; y < 10; y++)
 		    xPlayerUI.xPlayerModel.getEqualizerArray()[y] = (float) vars[y];
 
-		// Εφάρμοσε το φίλτρο
+		// Set the filter
 		xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
 
-		// Άλλαξε τις γωνίες στα φίλτρα του equalizer
+		// Change the angles on the filters
 		for (int i = 0; i < 10; i++)
 		    filters[i].setAngle(xPlayerUI.xPlayerModel.getEqualizerArray()[i], 200);
 

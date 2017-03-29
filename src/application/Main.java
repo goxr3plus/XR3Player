@@ -166,11 +166,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public final static int currentVersion = 58;
+    public static final int currentVersion = 58;
+
     /**
      * This application version release date
      */
-    public final static String releaseDate = "25/03/2017";
+    public static final String releaseDate = "25/03/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -215,6 +216,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 	try {
+	    //new Tester();
+	    
 	    // logger.info("XR3Player Application Started")
 	    System.out.println("XR3Player Application Started");
 
@@ -289,7 +292,6 @@ public class Main extends Application {
 	    //InfoTool.DATABASE_FOLDER_NAME Exists?
 	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists()) {
 		boolean dataBaseRootCreated = new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
-
 		//If it can not be created [FATAL ERROR]
 		if (!dataBaseRootCreated) {
 		    ActionTool.showNotification("Fatal Error!",
@@ -455,31 +457,35 @@ public class Main extends Application {
      */
     public static void terminate(boolean vacuum) {
 
-	if (libraryMode.multipleLibs.isFree(true)) {
+	//I need to check it in case no user is logged in 
+	if (dbManager != null) {
+	    if (libraryMode.multipleLibs.isFree(true)) {
 
-	    // Stop SpeechReader
-	    //	    if (speechReader != null)
-	    //		speechReader.stopSpeechRec(true)
+		// Stop SpeechReader
+		//	    if (speechReader != null)
+		//		speechReader.stopSpeechRec(true)
 
-	    // vacuum?
-	    if (vacuum) {
-		VacuumProgress vService = new VacuumProgress();
-		updateScreen.label.textProperty().bind(vService.messageProperty());
-		updateScreen.progressBar.setProgress(-1);
-		updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
-		updateScreen.setVisible(true);
+		// vacuum?
+		if (vacuum) {
+		    VacuumProgress vService = new VacuumProgress();
+		    updateScreen.label.textProperty().bind(vService.messageProperty());
+		    updateScreen.progressBar.setProgress(-1);
+		    updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
+		    updateScreen.setVisible(true);
 
-		vService.start(
-			new File(
-				InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db"),
-			new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator
-				+ "dbFile.db-journal"));
+		    vService.start(
+			    new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator
+				    + "dbFile.db"),
+			    new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator
+				    + "dbFile.db-journal"));
 
-		// Go
-		dbManager.commitAndVacuum();
-	    } else
-		System.exit(0);
-	}
+		    // Go
+		    dbManager.commitAndVacuum();
+		} else
+		    System.exit(0);
+	    }
+	} else
+	    System.exit(0);
 
     }
 
@@ -490,10 +496,11 @@ public class Main extends Application {
 	Alert alert = new Alert(AlertType.CONFIRMATION);
 	alert.initStyle(StageStyle.UTILITY);
 	alert.initOwner(window);
+	alert.setTitle("Terminate the application?");
 
-	alert.setHeaderText("Terminate the application?");
+	alert.setHeaderText("Vacuum is clearing junks from database\n(In future updates it will be automatical)");
 	alert.setContentText(
-		"Doing Vacuum you clear all the junks on the dataBase so:\n1)You release memory \n2)The application is going faster\nBut:\nThe bigger the dataBase the more time it will take!");
+		"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n");
 	ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
 	ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 	ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);

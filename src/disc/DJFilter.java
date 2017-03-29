@@ -100,7 +100,7 @@ public class DJFilter extends Canvas {
 		gc.setFill(arcColor);
 		gc.fillArc(1, -(getHeight() / 2) * 2, getWidth() - 2, getHeight() * 2 - 1, 180, angle, ArcType.ROUND);
 
-		// Ζωγράφισε το string
+		// Paint the string
 		gc.setFill(Color.BLACK);
 		gc.setFont(font);
 		value = getValue(200);
@@ -139,12 +139,12 @@ public class DJFilter extends Canvas {
 	 */
 	public void setAngle(int value, int maximum) {
 
-		// Οριακές τιμές
+		// Min and Max values
 		if (value == 0)
 			angle = 0;
 		else if (value == maximum)
 			angle = 180;
-		else// Υπολογισμός
+		else// Calculation
 			angle = ((value * 180) / maximum);
 
 		paintFilter();
@@ -193,7 +193,7 @@ public class DJFilter extends Canvas {
 			angle = -(int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, 2 - mouseY));
 		else {
 			angle = (int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, 2 - mouseY));
-			angle = 360 - angle; // Για να μην βγάζει τρελά
+			angle = 360 - angle; // So it calculates it correctly
 		}
 
 		angle = 270 - angle;

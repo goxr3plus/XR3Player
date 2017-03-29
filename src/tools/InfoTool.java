@@ -555,7 +555,7 @@ public final class InfoTool {
     }
 
     /**
-     * Επιστρέφει τον χρόνο του άσματος σε δευτερόλεπτα.
+     * Returns the time of Audio to seconds
      *
      * @param name
      *            the name
@@ -572,14 +572,10 @@ public final class InfoTool {
 
 	return (time == 0 || time == -1) ? time : time / 1000;
 
-	/*
-	 * παίρνω τα microseconds Long microseconds =
-	 * (Long)AudioSystem.getAudioFileFormat(new
-	 * File(kommati)).properties().get("duration") int mili =
-	 * (int)(microseconds / 1000L); //από microseconds σε δεύτερα int sec =
-	 * mili / 1000 % 60; //από δεύτερα σε δευτερόλεπτα int min = mili / 1000
-	 * / 60; //από δεύτερα σε λεπτά time = min * 60 + sec
-	 */
+//	 Long microseconds = (Long)AudioSystem.getAudioFileFormat(new File(audio)).properties().get("duration") int mili = (int)(microseconds / 1000L);
+//	 int sec = milli / 1000 % 60; 
+//	 int min = milli / 1000 / 60; 
+	
 
     }
 

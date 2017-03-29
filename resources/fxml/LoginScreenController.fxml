@@ -114,26 +114,6 @@
          </BorderPane.margin>
       </VBox>
    </center>
-   <bottom>
-      <Label fx:id="createdByLabel" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: black; -fx-text-fill: white; -fx-background-radius: 15 15 0 0;" text="XR3Player was created by " BorderPane.alignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/goXR3PlusStudio.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </graphic>
-         <BorderPane.margin>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </BorderPane.margin>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Label>
-   </bottom>
    <top>
       <Label id="LoginScreenTopLabel" alignment="CENTER" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15; -fx-border-color: transparent firebrick firebrick; -fx-border-radius: 0 0 10 10; -fx-border-width: 2;" text=" XR3Player " BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
          <cursor>
@@ -141,4 +121,40 @@
          </cursor>
       </Label>
    </top>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="createdByLabel" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: black; -fx-text-fill: white;" text="XR3Player was created by " HBox.hgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/goXR3PlusStudio.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="createdByLabel1" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: firebrick; -fx-text-fill: white;" text="Click here to see a tutorial " HBox.hgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/goXR3PlusStudio.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
 </fx:root>

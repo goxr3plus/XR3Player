@@ -1,4 +1,4 @@
-package application;
+package aa_test_code_for_future_updates;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ public class FuturePolySpiral extends JPanel {
 	double y1 = getHeight() / 2.00;
 	double angle = angleIncrement;
 
-	for (int i = 0; i < 150; i++) {
+	for (int i = 0; i < getWidth()/2; i++) {
 
 	    g.setColor(Color.getHSBColor(i / 150f, 1.0f, 1.0f));
 

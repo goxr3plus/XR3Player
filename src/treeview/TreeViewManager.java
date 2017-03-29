@@ -139,8 +139,9 @@ public class TreeViewManager extends BorderPane {
 	systemTreeView.setOnDragDetected(event -> {
 	    TreeItemFile source = (TreeItemFile) systemTreeView.getSelectionModel().getSelectedItem();
 
-	    if (!source.getValue().equals(hostName)) { // To host δεν
-						       // ανακατεύεται
+	    //The host is not allowed
+	    if (!source.getValue().equals(hostName)) { 
+		
 		// Allow this transfer Mode
 		Dragboard board = startDragAndDrop(TransferMode.LINK);
 

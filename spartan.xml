@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spartan version="1.0">
+    <category id="Abbreviation">
+        <tipper description="SingleVariableDeclarationAbbreviation" enabled="true" id="SingleVariableDeclarationAbbreviation"/>
+    </category>
+    <category id="Arithmetic">
+        <tipper description="CastToDouble2Multiply1" enabled="true" id="CastToDouble2Multiply1"/>
+        <tipper description="Evaluate multiplication" enabled="true" id="InfixMultiplicationEvaluate"/>
+        <tipper description="Evaluate division" enabled="true" id="InfixDivisionEvaluate"/>
+        <tipper description="Evaluate remainder" enabled="true" id="InfixRemainderEvaluate"/>
+        <tipper description="InfixAdditionSubtractionExpand" enabled="true" id="InfixAdditionSubtractionExpand"/>
+        <tipper description="Evaluate addition" enabled="true" id="InfixAdditionEvaluate"/>
+        <tipper description="Evaluate subtraction" enabled="true" id="InfixSubtractionEvaluate"/>
+    </category>
+    <category id="Annonimaization">
+        <tipper description="SingelVariableDeclarationUnderscoreDoubled" enabled="true" id="SingelVariableDeclarationUnderscoreDoubled"/>
+        <tipper description="FragmentRenameUnderscoreToDoubleUnderscore" enabled="true" id="FragmentRenameUnderscoreToDoubleUnderscore"/>
+    </category>
+    <category id="Canonicalization">
+        <tipper description="AssignmentAndAssignment" enabled="true" id="AssignmentAndAssignment"/>
+        <tipper description="AssignmentAndReturn" enabled="true" id="AssignmentAndReturn"/>
+        <tipper description="TernaryCollapse" enabled="true" id="TernaryCollapse"/>
+        <tipper description="TernaryEliminate" enabled="true" id="TernaryEliminate"/>
+        <tipper description="TernaryPushdown" enabled="true" id="TernaryPushdown"/>
+        <tipper description="TernaryPushdownStrings" enabled="true" id="TernaryPushdownStrings"/>
+        <tipper description="TernaryBranchesAreOppositeBooleans" enabled="true" id="TernaryBranchesAreOppositeBooleans"/>
+        <tipper description="Convert the return inside the loop to break" enabled="true" id="ReturnToBreakFiniteFor"/>
+        <tipper description="ForToForUpdaters" enabled="true" id="ForToForUpdaters"/>
+        <tipper description="ForAndReturnToFor" enabled="true" id="ForAndReturnToFor"/>
+        <tipper description="IfReturnFooElseReturnBar" enabled="true" id="IfReturnFooElseReturnBar"/>
+        <tipper description="IfReturnNoElseReturn" enabled="true" id="IfReturnNoElseReturn"/>
+        <tipper description="IfAssignToFooElseAssignToFoo" enabled="true" id="IfAssignToFooElseAssignToFoo"/>
+        <tipper description="IfThenFooBarElseFooBaz" enabled="true" id="IfThenFooBarElseFooBaz"/>
+        <tipper description="IfBarFooElseBazFoo" enabled="true" id="IfBarFooElseBazFoo"/>
+        <tipper description="IfThrowFooElseThrowBar" enabled="true" id="IfThrowFooElseThrowBar"/>
+        <tipper description="IfThrowNoElseThrow" enabled="true" id="IfThrowNoElseThrow"/>
+        <tipper description="IfExpressionStatementElseSimilarExpressionStatement" enabled="true" id="IfExpressionStatementElseSimilarExpressionStatement"/>
+        <tipper description="IfThenOrElseIsCommandsFollowedBySequencer" enabled="true" id="IfThenOrElseIsCommandsFollowedBySequencer"/>
+        <tipper description="IfFooSequencerIfFooSameSequencer" enabled="true" id="IfFooSequencerIfFooSameSequencer"/>
+        <tipper description="IfThenIfThenNoElseNoElse" enabled="true" id="IfThenIfThenNoElseNoElse"/>
+        <tipper description="InfixLessEqualsToLess" enabled="true" id="InfixLessEqualsToLess"/>
+        <tipper description="InfixLessToLessEquals" enabled="true" id="InfixLessToLessEquals"/>
+        <tipper description="InfixConditionalCommon" enabled="true" id="InfixConditionalCommon"/>
+        <tipper description="PrefixIncrementDecrementReturn" enabled="true" id="PrefixIncrementDecrementReturn"/>
+        <tipper description="MergeSwitchBranches" enabled="true" id="MergeSwitchBranches"/>
+        <tipper description="SwitchWithOneCaseToIf" enabled="true" id="SwitchWithOneCaseToIf"/>
+        <tipper description="MergeCatches" enabled="true" id="MergeCatches"/>
+        <tipper description="FragmentNoInitializerAssignment" enabled="true" id="FragmentNoInitializerAssignment"/>
+        <tipper description="FragmentInitialiazerUpdateAssignment" enabled="true" id="FragmentInitialiazerUpdateAssignment"/>
+        <tipper description="FragmentInitializerWhile" enabled="true" id="FragmentInitializerWhile"/>
+        <tipper description="FragmentInitializerToForInitializers" enabled="true" id="FragmentInitializerToForInitializers"/>
+        <tipper description="TwoDeclarationsIntoOne" enabled="true" id="TwoDeclarationsIntoOne"/>
+        <tipper description="Convert the return inside the loop to break" enabled="true" id="ReturnToBreakFiniteWhile"/>
+        <tipper description="WhileToForUpdaters" enabled="true" id="WhileToForUpdaters"/>
+    </category>
+    <category id="CommonFactoring"/>
+    <category id="Centification">
+        <tipper description="CatchClauseRenameParameterToCent" enabled="true" id="CatchClauseRenameParameterToCent"/>
+        <tipper description="MethodDeclarationRenameSingleParameterToCent" enabled="true" id="MethodDeclarationRenameSingleParameterToCent"/>
+        <tipper description="SingleVariableDeclarationEnhancedForRenameParameterToCent" enabled="true" id="SingleVariableDeclarationEnhancedForRenameParameterToCent"/>
+        <tipper description="ForRenameInitializerToCent" enabled="true" id="ForRenameInitializerToCent"/>
+        <tipper description="EnhancedForParameterRenameToCent" enabled="true" id="EnhancedForParameterRenameToCent"/>
+        <tipper description="LambdaRenameSingleParameterToLambda" enabled="true" id="LambdaRenameSingleParameterToLambda"/>
+    </category>
+    <category id="Deadcode">
+        <tipper description="SequencerNotLastInBlock" enabled="true" id="SequencerNotLastInBlock"/>
+        <tipper description="IfTrueOrFalse" enabled="true" id="IfTrueOrFalse"/>
+        <tipper description="Remove unused, uninitialized variable" enabled="true" id="FragmentNoInitializerRemoveUnused"/>
+    </category>
+    <category id="Dollarization">
+        <tipper description="MethodDeclarationRenameReturnToDollar" enabled="true" id="MethodDeclarationRenameReturnToDollar"/>
+    </category>
+    <category id="EarlyReturn">
+        <tipper description="IfLastInMethodThenEndingWithEmptyReturn" enabled="true" id="IfLastInMethodThenEndingWithEmptyReturn"/>
+        <tipper description="IfLastInMethodElseEndingWithEmptyReturn" enabled="true" id="IfLastInMethodElseEndingWithEmptyReturn"/>
+        <tipper description="IfLastInMethod" enabled="true" id="IfLastInMethod"/>
+        <tipper description="IfCommandsSequencerNoElseSingletonSequencer" enabled="true" id="IfCommandsSequencerNoElseSingletonSequencer"/>
+        <tipper description="IfPenultimateInMethodFollowedBySingleStatement" enabled="true" id="IfPenultimateInMethodFollowedBySingleStatement"/>
+    </category>
+    <category id="Idiomatic">
+        <tipper description="ClassInstanceCreationValueTypes" enabled="true" id="ClassInstanceCreationValueTypes"/>
+        <tipper description="TernaryShortestFirst" enabled="true" id="TernaryShortestFirst"/>
+        <tipper description="ExpressionStatementAssertTrueFalse" enabled="true" id="ExpressionStatementAssertTrueFalse"/>
+        <tipper description="ExpressionStatementThatIsBooleanLiteral" enabled="true" id="ExpressionStatementThatIsBooleanLiteral"/>
+        <tipper description="BodyDeclarationModifiersSort" enabled="true" id="BodyDeclarationModifiersSort"/>
+        <tipper description="AnnotationSort" enabled="true" id="AnnotationSort"/>
+        <tipper description="IfShortestFirst" enabled="true" id="IfShortestFirst"/>
+        <tipper description="InfixComparisonSizeToZero" enabled="true" id="InfixComparisonSizeToZero"/>
+        <tipper description="InfixConcatenationEmptyStringLeft" enabled="true" id="InfixConcatenationEmptyStringLeft"/>
+        <tipper description="InfixFactorNegatives" enabled="true" id="InfixFactorNegatives"/>
+        <tipper description="InfixAdditionSort" enabled="true" id="InfixAdditionSort"/>
+        <tipper description="InfixComparisonSpecific" enabled="true" id="InfixComparisonSpecific"/>
+        <tipper description="InfixMultiplicationSort" enabled="true" id="InfixMultiplicationSort"/>
+        <tipper description="InfixPseudoAdditionSort" enabled="true" id="InfixPseudoAdditionSort"/>
+        <tipper description="InfixSubtractionSort" enabled="true" id="InfixSubtractionSort"/>
+        <tipper description="InfixDivisonSortRest" enabled="true" id="InfixDivisonSortRest"/>
+        <tipper description="InfixIndexOfToStringContains" enabled="true" id="InfixIndexOfToStringContains"/>
+        <tipper description="InfixSimplifyComparisionOfAdditions" enabled="true" id="InfixSimplifyComparisionOfAdditions"/>
+        <tipper description="InfixSimplifyComparisionOfSubtractions" enabled="true" id="InfixSimplifyComparisionOfSubtractions"/>
+        <tipper description="MethodDeclarationConstructorMoveToInitializers" enabled="true" id="MethodDeclarationConstructorMoveToInitializers"/>
+        <tipper description="MethodInvocationEqualsWithLiteralString" enabled="true" id="MethodInvocationEqualsWithLiteralString"/>
+        <tipper description="MethodInvocationValueOfBooleanConstant" enabled="true" id="MethodInvocationValueOfBooleanConstant"/>
+        <tipper description="MethodInvocationToStringToEmptyStringAddition" enabled="true" id="MethodInvocationToStringToEmptyStringAddition"/>
+        <tipper description="StringFromStringBuilder" enabled="true" id="StringFromStringBuilder"/>
+        <tipper description="PostfixToPrefix" enabled="true" id="PostfixToPrefix"/>
+        <tipper description="PrefixNotPushdown" enabled="true" id="PrefixNotPushdown"/>
+        <tipper description="SwitchCaseLocalSort" enabled="true" id="SwitchCaseLocalSort"/>
+        <tipper description="SwitchBranchSort" enabled="true" id="SwitchBranchSort"/>
+    </category>
+    <category id="Inlining">
+        <tipper description="ArrayAccessAndIncrement" enabled="true" id="ArrayAccessAndIncrement"/>
+        <tipper description="FragmentInitializerIfAssignment" enabled="true" id="FragmentInitializerIfAssignment"/>
+        <tipper description="FragmentInitializerIfUpdateAssignment" enabled="true" id="FragmentInitializerIfUpdateAssignment"/>
+        <tipper description="FragmentInitializerReturnVariable" enabled="true" id="FragmentInitializerReturnVariable"/>
+        <tipper description="FragmentInitializerReturnExpression" enabled="true" id="FragmentInitializerReturnExpression"/>
+        <tipper description="FragmentInitializerReturnAssignment" enabled="true" id="FragmentInitializerReturnAssignment"/>
+        <tipper description="FragmentInitializerStatementTerminatingScope" enabled="true" id="FragmentInitializerStatementTerminatingScope"/>
+        <tipper description="FragmentInitialiazerAssignment" enabled="true" id="FragmentInitialiazerAssignment"/>
+        <tipper description="FragmentInitializerInlineIntoNext" enabled="true" id="FragmentInitializerInlineIntoNext"/>
+        <tipper description="LambdaRemoveParenthesis" enabled="true" id="LambdaRemoveParenthesis"/>
+    </category>
+    <category id="NOOP">
+        <tipper description="CastToLong2Multiply1L" enabled="true" id="CastToLong2Multiply1L"/>
+        <tipper description="TernaryBooleanLiteral" enabled="true" id="TernaryBooleanLiteral"/>
+        <tipper description="IfEmptyThenEmptyElse" enabled="true" id="IfEmptyThenEmptyElse"/>
+        <tipper description="InfixSubtractionZero" enabled="true" id="InfixSubtractionZero"/>
+        <tipper description="[&quot;&quot;+foo]-&gt;foo" enabled="true" id="InfixPlusEmptyString"/>
+        <tipper description="InfixTermsZero" enabled="true" id="InfixTermsZero"/>
+        <tipper description="InfixComparisonBooleanLiteral" enabled="true" id="InfixComparisonBooleanLiteral"/>
+        <tipper description="InfixConditionalAndTrue" enabled="true" id="InfixConditionalAndTrue"/>
+        <tipper description="InfixConditionalOrFalse" enabled="true" id="InfixConditionalOrFalse"/>
+        <tipper description="InfixMultiplicationByOne" enabled="true" id="InfixMultiplicationByOne"/>
+        <tipper description="InfixMultiplicationByZero" enabled="true" id="InfixMultiplicationByZero"/>
+        <tipper description="PrefixPlusRemove" enabled="true" id="PrefixPlusRemove"/>
+    </category>
+    <category id="Nanopatterns"/>
+    <category id="ScopeReduction"/>
+    <category id="Sorting"/>
+    <category id="SyntacticBaggage">
+        <tipper description="AssignmentToFromInfixIncludingTo" enabled="true" id="AssignmentToFromInfixIncludingTo"/>
+        <tipper description="AssignmentToPrefixIncrement" enabled="true" id="AssignmentToPrefixIncrement"/>
+        <tipper description="BlockSimplify" enabled="true" id="BlockSimplify"/>
+        <tipper description="BlockSingleton" enabled="true" id="BlockSingleton"/>
+        <tipper description="Simplify 'for(?;true;?)' to 'for(?;;?)'" enabled="true" id="ForTrueConditionRemove"/>
+        <tipper description="IfDegenerateElse" enabled="true" id="IfDegenerateElse"/>
+        <tipper description="IfEmptyThen" enabled="true" id="IfEmptyThen"/>
+        <tipper description="InfixPlusToMinus" enabled="true" id="InfixPlusToMinus"/>
+        <tipper description="Remove redundant parenthesis" enabled="true" id="InfixPlusRemoveParenthesis"/>
+        <tipper description="Remove empty initializer" enabled="true" id="InitializerEmptyRemove"/>
+        <tipper description="JavadocEmptyRemove" enabled="true" id="JavadocEmptyRemove"/>
+        <tipper description="ParenthesizedRemoveExtraParenthesis" enabled="true" id="ParenthesizedRemoveExtraParenthesis"/>
+        <tipper description="ReturnLastInMethod" enabled="true" id="ReturnLastInMethod"/>
+        <tipper description="SuperConstructorInvocationRemover" enabled="true" id="SuperConstructorInvocationRemover"/>
+        <tipper description="RemoveRedundantSwitchCases" enabled="true" id="RemoveRedundantSwitchCases"/>
+        <tipper description="SwitchEmpty" enabled="true" id="SwitchEmpty"/>
+        <tipper description="TryBodyEmptyLeaveFinallyIfExists" enabled="true" id="TryBodyEmptyLeaveFinallyIfExists"/>
+        <tipper description="TryBodyEmptyNoCatchesNoFinallyEliminate" enabled="true" id="TryBodyEmptyNoCatchesNoFinallyEliminate"/>
+        <tipper description="TryBodyNotEmptyNoCatchesNoFinallyRemove" enabled="true" id="TryBodyNotEmptyNoCatchesNoFinallyRemove"/>
+        <tipper description="TryFinallyEmptyRemove" enabled="true" id="TryFinallyEmptyRemove"/>
+        <tipper description="Trim implicit extends Object" enabled="true" id="TypeDeclarationClassExtendsObject"/>
+        <tipper description="Remove default values initiliazing field" enabled="true" id="FragmentInitializerDead"/>
+        <tipper description="EnhancedForEliminateConditionalContinue" enabled="true" id="EnhancedForEliminateConditionalContinue"/>
+        <tipper description="TypeParameterExtendsObject" enabled="true" id="TypeParameterExtendsObject"/>
+        <tipper description="WildcardTypeExtendsObjectTrim" enabled="true" id="WildcardTypeExtendsObjectTrim"/>
+        <tipper description="AnnotationDiscardValueName" enabled="true" id="AnnotationDiscardValueName"/>
+        <tipper description="AnnotationRemoveEmptyParentheses" enabled="true" id="AnnotationRemoveEmptyParentheses"/>
+        <tipper description="AnnotationRemoveSingletonArrray" enabled="true" id="AnnotationRemoveSingletonArrray"/>
+        <tipper description="Remove redundant modifier" enabled="true" id="ModifierRedundant"/>
+        <tipper description="Remove redundant final modifier of paramaeter to abstract method" enabled="true" id="ModifierFinalAbstractMethodRedundant"/>
+        <tipper description="Remove redundant final modifier of try resource" enabled="true" id="ModifierFinalTryResourceRedundant"/>
+        <tipper description="LambdaRemoveRedundantCurlyBraces" enabled="true" id="LambdaRemoveRedundantCurlyBraces"/>
+    </category>
+    <category id="Ternarization"/>
+    <category id="Bloater"/>
+    <category id="Shortcut">
+        <tipper description="EliminateConditionalContinueInFor" enabled="true" id="EliminateConditionalContinueInFor"/>
+        <tipper description="Convert the break inside 'for(;;)' to 'return'" enabled="true" id="BlockBreakToReturnInfiniteFor"/>
+        <tipper description="Prune redundant continue" enabled="true" id="ForRedundantContinue"/>
+        <tipper description="RemoveRedundantSwitchReturn" enabled="true" id="RemoveRedundantSwitchReturn"/>
+        <tipper description="RemoveRedundantSwitchContinue" enabled="true" id="RemoveRedundantSwitchContinue"/>
+        <tipper description="FragmentInitializerReturn" enabled="true" id="FragmentInitializerReturn"/>
+        <tipper description="EliminateConditionalContinueInWhile" enabled="true" id="EliminateConditionalContinueInWhile"/>
+        <tipper description="Convert the break inside 'while()' loop to 'return'" enabled="true" id="BlockBreakToReturnInfiniteWhile"/>
+        <tipper description="Prune redundant continue" enabled="true" id="EnhancedForRedundantContinue"/>
+    </category>
+    <category id="Thrashing">
+        <tipper description="SameEvaluationConditional" enabled="true" id="SameEvaluationConditional"/>
+        <tipper description="ForDeadRemove" enabled="true" id="ForDeadRemove"/>
+        <tipper description="IfDeadRemove" enabled="true" id="IfDeadRemove"/>
+        <tipper description="WhileDeadRemove" enabled="true" id="WhileDeadRemove"/>
+    </category>
+    <category id="NOOPOnBooleans"/>
+    <category id="NOOPOnStrings"/>
+    <category id="NOOPOnNumbers"/>
+</spartan>

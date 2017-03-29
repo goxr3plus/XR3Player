@@ -49,7 +49,7 @@ import tools.NotificationType;
 public class LocalDBManager {
 
     /** The connection 1. */
-    public Connection connection1 = null;
+    public Connection connection1;
 
     /** The zipper. */
     public final ExportDataBase zipper = new ExportDataBase();
@@ -276,7 +276,7 @@ public class LocalDBManager {
 		    + "'(NAME TEXT PRIMARY KEY NOT NULL," + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL,"
 		    + "DESCRIPTION TEXT," + "STARS DOUBLE NOT NULL)");
 
-	    // ----------XPlayers PlayLists Table ----------//
+	    // ----------XPlayers PlayLists Tables ----------//
 	    for (int i = 0; i < 3; i++)
 		createXPlayListTable(statement, i);
 
@@ -435,10 +435,9 @@ public class LocalDBManager {
 
 	//Read the JSON File
 	try (FileReader fileReader = new FileReader(jsonFilePath)) {
-	    Object obj = Jsoner.deserialize(fileReader);
-
+	    
 	    //JSON Array [ROOT]
-	    JsonObject json = (JsonObject) obj;
+	    JsonObject json = (JsonObject) Jsoner.deserialize(fileReader);
 
 	    //Opened Libraries Array
 	    JsonArray openedLibraries = (JsonArray) ((JsonObject) json.get("librariesSystem")).get("openedLibraries");
