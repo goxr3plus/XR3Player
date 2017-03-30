@@ -34,7 +34,7 @@ public class XPlayerRadialMenu {
     RadialMenuItem play = RadialMenuItemBuilder.create().symbol(SymbolType.PLAY).tooltip("Play").size(40).build();
     RadialMenuItem pause = RadialMenuItemBuilder.create().symbol(SymbolType.PAUSE).tooltip("Pause").size(40).build();
     RadialMenuItem mute = RadialMenuItemBuilder.create().selectable(true).selected(false)
-	    .thumbnailImageName(getClass().getResource(InfoTool.images + "mute.png").toExternalForm()).tooltip("Mute")
+	    .thumbnailImageName(getClass().getResource(InfoTool.IMAGES + "mute.png").toExternalForm()).tooltip("Mute")
 	    .size(40).build();
 
     //

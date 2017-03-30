@@ -65,7 +65,7 @@ public class LibrariesSearchWindow {
 	public void setTheScene(Scene scene) {
 		stage.setScene(scene);
 		stage.getScene().getStylesheets()
-		        .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+		        .add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 	}
 	
 	/**

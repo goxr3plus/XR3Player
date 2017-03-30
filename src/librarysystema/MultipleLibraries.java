@@ -4,18 +4,14 @@
 package librarysystema;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import application.Main;
 import customnodes.Marquee;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -27,18 +23,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import smartcontroller.SmartController;
-import tools.ActionTool;
 import tools.InfoTool;
-import tools.NotificationType;
 
 /**
  * Mechanism of showing the opened libraries each opened library is represented by a Tab.
  *
  * @author SuperGoliath
  */
-public class MultipleLibraries extends StackPane implements Initializable {
+public class MultipleLibraries extends StackPane {
 
     /** The tab pane. */
     @FXML
@@ -69,7 +62,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
      */
     public MultipleLibraries() {
 
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "MultipleLibraries.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MultipleLibraries.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -80,8 +73,11 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	}
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    /**
+     * Called as soon as .fxml is initialized
+     */
+    @FXML
+    private void initialize() {
 
 	// emptyLabel
 	emptyLabel.setOnMouseReleased(m -> {
@@ -211,7 +207,7 @@ public class MultipleLibraries extends StackPane implements Initializable {
 	ProgressBar indicator = new ProgressBar();
 	indicator.progressProperty().bind(library.getSmartController().getIndicator().progressProperty());
 	indicator.visibleProperty().bind(library.getSmartController().getIndicator().visibleProperty());
-	indicator.setMaxSize(30, 5);
+	indicator.setMaxSize(30, 11);
 
 	// text
 	Text text = new Text();

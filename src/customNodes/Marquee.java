@@ -43,7 +43,7 @@ public class Marquee extends Pane implements Initializable {
 		
 		// FXMLLOADER
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "Marquee.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "Marquee.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
@@ -73,6 +73,7 @@ public class Marquee extends Pane implements Initializable {
 	public Marquee setText(String value) {
 		
 		// text
+	   // text.setStyle("-fx-font-size:12px !important;");
 		text.setText(value);
 		
 		return this;

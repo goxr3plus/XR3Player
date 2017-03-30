@@ -63,8 +63,6 @@ public class Audio extends Media {
      * 
      * @param path
      *            The path of the File
-     * @param duration
-     *            The duration of the Media
      * @param stars
      *            The quality of the Media
      * @param timesPlayed
@@ -76,9 +74,8 @@ public class Audio extends Media {
      * @param genre
      *            The genre of the Media <b> see the Genre class for more </b>
      */
-    public Audio(String path, int duration, double stars, int timesPlayed, String dateImported, String hourImported,
-	    Genre genre) {
-	super(path, duration, stars, timesPlayed, dateImported, hourImported, genre);
+    public Audio(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre) {
+	super(path, stars, timesPlayed, dateImported, hourImported, genre);
     }
 
     /**

@@ -79,7 +79,7 @@ public final class ActionTool {
      */
     public static void openFileLocation(String path) {
 	// Open the Default Browser
-	if (InfoTool.osName.toLowerCase().contains("win")) {
+	if (InfoTool.OSNAME.toLowerCase().contains("win")) {
 	    showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path),
 		    Duration.millis(1500), NotificationType.INFORMATION);
 

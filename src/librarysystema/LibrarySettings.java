@@ -63,7 +63,7 @@ public class LibrarySettings extends GridPane {
      */
     public LibrarySettings() {
 
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "LibrarySettings.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibrarySettings.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

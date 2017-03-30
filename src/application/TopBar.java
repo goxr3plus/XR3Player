@@ -91,7 +91,7 @@ public class TopBar extends BorderPane {
      * Constructor.
      */
     public TopBar() {
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "TopBar.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TopBar.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

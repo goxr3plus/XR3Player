@@ -56,7 +56,7 @@ public class XPlayerSettingsController extends BorderPane {
         this.xPlayerUI = xPlayerUI;
 
         // FXMLLoader
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerSettingsController.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerSettingsController.fxml"));
         loader.setController(this);
         loader.setRoot(this);
 

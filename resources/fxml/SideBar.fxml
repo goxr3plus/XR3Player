@@ -34,6 +34,52 @@
          <content>
             <VBox alignment="CENTER" minHeight="0.0" prefWidth="71.0" spacing="25.0">
                <children>
+                  <VBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Database" />
+                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0" style="-fx-background-color: black;">
+                           <items>
+                              <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../image/Accept%20Database-24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="exportDataBase" mnemonicParsing="false" text="Export DataBase">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/Data%20Protection-24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="deleteDataBase" mnemonicParsing="false" text="Delete DataBase">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/Delete%20Database-24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                           </items>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/SQL-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </MenuButton>
+                     </children>
+                  </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Search" wrapText="true" />
@@ -97,52 +143,6 @@
                         </MenuButton>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" spacing="5.0">
-                     <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Database" />
-                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0" style="-fx-background-color: black;">
-                           <items>
-                              <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../image/Accept%20Database-24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem fx:id="exportDataBase" mnemonicParsing="false" text="Export DataBase">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Data%20Protection-24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem fx:id="deleteDataBase" mnemonicParsing="false" text="Delete DataBase">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Delete%20Database-24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                           </items>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/SQL-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </MenuButton>
-                     </children>
-                  </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: orange; -fx-font-weight: bold;" text="Mode" />
@@ -181,6 +181,21 @@
                            <VBox.margin>
                               <Insets left="3.0" />
                            </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="theMovieDBMode" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 15 0 0 15; -fx-border-width: 0 4 0 0;" styleClass="applicationMode" text=" ">
+                           <graphic>
+                              <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/theMovieDB.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="User Settings" />
+                           </tooltip>
                         </JFXButton>
                      </children>
                   </VBox>

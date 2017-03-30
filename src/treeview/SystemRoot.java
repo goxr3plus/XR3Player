@@ -25,15 +25,15 @@ public class SystemRoot {
 
     /** The Constant folderImage. */
     public static final Image closedFolderImage = new Image(
-	    TreeItemFile.class.getResourceAsStream(InfoTool.images + "folder.png"));
+	    TreeItemFile.class.getResourceAsStream(InfoTool.IMAGES + "folder.png"));
 
     /** The Constant openedFolderImage. */
     public static final Image openedFolderImage = new Image(
-	    TreeItemFile.class.getResourceAsStream(InfoTool.images + "openedFolder.png"));
+	    TreeItemFile.class.getResourceAsStream(InfoTool.IMAGES + "openedFolder.png"));
 
     /** The Constant fileImage. */
     public static final Image fileImage = new Image(
-	    TreeItemFile.class.getResourceAsStream(InfoTool.images + "file.png"));
+	    TreeItemFile.class.getResourceAsStream(InfoTool.IMAGES + "file.png"));
 
     /** The host name. */
     String hostName = "computer";
@@ -56,7 +56,7 @@ public class SystemRoot {
 	    Main.logger.log(Level.WARNING, "", ex);
 	}
 	root = new TreeItemFile(hostName);
-	root.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(InfoTool.images + "computer.png"))));
+	root.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(InfoTool.IMAGES + "computer.png"))));
 
 	// Add the user directory
 	TreeItemFile userHome = new TreeItemFile(System.getProperty("user.home"));

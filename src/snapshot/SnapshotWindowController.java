@@ -81,7 +81,7 @@ public class SnapshotWindowController extends StackPane {
     public SnapshotWindowController() {
 
 	// FXMLLOADER
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SnapshotWindowController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SnapshotWindowController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -93,7 +93,7 @@ public class SnapshotWindowController extends StackPane {
 
 	window.setX(0);
 	window.setY(0);
-	window.getIcons().add(new Image(getClass().getResourceAsStream(InfoTool.images+"icon.png")));
+	window.getIcons().add(new Image(getClass().getResourceAsStream(InfoTool.IMAGES+"icon.png")));
 	window.initStyle(StageStyle.TRANSPARENT);
 	window.setAlwaysOnTop(true);
 

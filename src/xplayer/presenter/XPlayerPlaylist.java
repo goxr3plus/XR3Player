@@ -101,7 +101,7 @@ public class XPlayerPlaylist extends StackPane {
 	controller.loadService.startService(false, true);
 
 	// FXMLLoader
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerPlaylist.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerPlaylist.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

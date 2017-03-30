@@ -26,6 +26,6 @@ public class Tester {
     // O MY GOD IT'S GROOVY!!!!!!!!!!!!
     //The future language of XR3Player!!
      static def main(args) {
-	new Tester()
+	new InternetConnectionTester()
     }
 }

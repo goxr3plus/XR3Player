@@ -147,7 +147,7 @@ public class KeyBindingsController extends BorderPane {
 	});
 
 	// ------------------------------------FXMLLOADER-------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "KeyBindingsController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "KeyBindingsController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

@@ -261,7 +261,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// ----------------------------------- FXMLLoader
 	// -------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

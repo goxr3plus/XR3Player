@@ -58,7 +58,7 @@ public class TreeViewManager extends BorderPane {
     public TreeViewManager() {
 
 	// FXMLLoader
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "TreeViewManager.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TreeViewManager.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

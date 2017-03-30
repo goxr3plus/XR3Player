@@ -138,7 +138,7 @@ public class VisualizerWindowController extends StackPane {
 	window.setOnCloseRequest(c -> removeVisualizer());
 
 	// FXMLLOADER
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "VisualizerWindowController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "VisualizerWindowController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -163,7 +163,7 @@ public class VisualizerWindowController extends StackPane {
 	BorderlessScene scene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150);
 	scene.setMoveControl(topBar);
 	scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue()));
-	scene.getStylesheets().add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+	scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 
 	// ---Size Listeners
 

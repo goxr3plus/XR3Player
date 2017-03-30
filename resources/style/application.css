@@ -28,6 +28,8 @@
 }
 */
 
+
+
 /*******************************************************************************
 
 *                           CheckBox                            *
@@ -49,7 +51,6 @@
 *                            ToolBar                               *
 
 ******************************************************************************/
-
 
 .tool-bar {
 	-light-black: rgb(74.0, 75.0, 78.0);
@@ -141,9 +142,13 @@
 /* .table-row-cell */
 
 .table-row-cell:disabled{
-	-fx-opacity:0.1;
-	-fx-background-color:darkgray;
+	-fx-opacity:0.5;
+	-fx-background-color:darkgray;	  
 }
+
+.table-row-cell:disabled .text{
+	/*-fx-strikethrough:  true ;*/
+} 
 
 .table-row-cell .text{
 	-fx-font-weight:bold;
@@ -381,11 +386,13 @@
 *                             TabPane                                      *
 
 ******************************************************************************/
- 
+ #magicTabPane .tab-header-area {
+  -fx-padding: 0.0 0.0 0.0 35.0 ;
+}
 
 .tab-pane .tab-header-area .tab-header-background {
     /*-fx-opacity: 0.0;*/
-    /*-fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%); */    	    
+    -fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  	    
 }
 
 .tab-pane{	
@@ -408,7 +415,7 @@
 .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 12.0px;
+    -fx-font-size: 12px; /* before it was 12px */
     -fx-font-weight: bold;
     -fx-wrap-text: true;
     -fx-cursor:hand;
@@ -417,7 +424,7 @@
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill:black ; /* before it was BROWN */
-    -fx-font-size:130.0%;
+    /*-fx-font-size:130.0%;*/
 }
 
 .tab:hover .tab-label{
@@ -791,6 +798,9 @@
         derive(-fx-accent, 30.0%) 50.0%,
         derive(-fx-accent, 30.0%) 99.0%
     );
+    
+    -fx-background-insets: 1.0 1.0 1.0 1.0;
+    -fx-padding: 0.2em;
 }
   
   

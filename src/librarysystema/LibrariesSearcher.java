@@ -82,7 +82,7 @@ public class LibrariesSearcher extends HBox {
         // ------------------------LibrariesSearchWindow
 
         // Load the LibrariesSearchWindow FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "LibrariesSearchWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibrariesSearchWindow.fxml"));
         loader.setController(libSearchWinController);
         BorderPane root = null;
         try {

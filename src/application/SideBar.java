@@ -35,6 +35,21 @@ import tools.InfoTool;
 public class SideBar extends BorderPane {
 
     @FXML
+    private MenuButton applicationDatabase;
+
+    @FXML
+    private MenuItem importDataBase;
+
+    @FXML
+    private MenuItem exportDataBase;
+
+    @FXML
+    private MenuItem deleteDataBase;
+
+    @FXML
+    private JFXButton applicationSearch;
+
+    @FXML
     private JFXButton applicationUpdate;
 
     @FXML
@@ -53,13 +68,16 @@ public class SideBar extends BorderPane {
     private JFXButton goUserMode;
 
     @FXML
+    private JFXButton theMovieDBMode;
+
+    @FXML
+    private JFXButton applicationSettings;
+
+    @FXML
     private JFXButton applicationConsole;
 
     @FXML
     private JFXButton snapshot;
-
-    @FXML
-    private JFXButton applicationSettings;
 
     @FXML
     private JFXButton hideSideBar;
@@ -88,24 +106,13 @@ public class SideBar extends BorderPane {
     @FXML
     Label userNameLabel;
 
-    @FXML
-    private MenuButton applicationDatabase;
-
-    @FXML
-    private MenuItem importDataBase;
-
-    @FXML
-    private MenuItem exportDataBase;
-
-    @FXML
-    private MenuItem deleteDataBase;
     // -------------------------------------------------------------
 
     /** Translate Transition used to show/hide the bar. */
     private TranslateTransition tTrans;
 
     /** The logger. */
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     /** The internet thread. */
     Thread internetThread;
@@ -116,7 +123,7 @@ public class SideBar extends BorderPane {
     public SideBar() {
 
 	// ------------------------------------FXMLLOADER ----------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SideBar.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -254,6 +261,13 @@ public class SideBar extends BorderPane {
 
 	//goUserMode
 	goUserMode.setOnAction(a -> goUserMode());
+
+	//theMovieDBMode
+	theMovieDBMode.setOnAction(a -> {
+	    
+	});
+
+	//-----------------------------------------
 
 	// closeSideBar
 	hideSideBar.setOnAction(a -> toogleBar());

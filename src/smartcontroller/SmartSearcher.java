@@ -228,18 +228,14 @@ public class SmartSearcher extends HBox {
 
 			//Fetch the items from the database
 			List<Media> array = new ArrayList<>();
-			Audio song = null;
-			while (resultSet.next()) {
-			    song = new Audio(resultSet.getString("PATH"),
-				    InfoTool.durationInSeconds(resultSet.getString("PATH"), AudioType.FILE),
-				    resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
-				    resultSet.getString("DATE"), resultSet.getString("HOUR"), controller.genre);
+			for (Audio song = null; resultSet.next();) {
+			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"),
+				    resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
+				    resultSet.getString("HOUR"), controller.genre);
 			    array.add(song);
-
 			    ++counter;
 			    if (counter >= controller.maximumPerPage)
 				break;
-
 			}
 
 			//Add the the items to the observable list
@@ -297,7 +293,7 @@ public class SmartSearcher extends HBox {
 	public AdvancedSearch() {
 
 	    // Load the f x m l file
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SearchSettings.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SearchSettings.fxml"));
 	    loader.setController(this);
 	    loader.setRoot(this);
 
@@ -324,7 +320,7 @@ public class SmartSearcher extends HBox {
 	    // PopOver
 	    popOver.setContentNode(this);
 	    popOver.getScene().getStylesheets()
-		    .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+		    .add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 	    popOver.setDetachable(false);
 	    popOver.setAutoHide(true);
 	    popOver.setArrowLocation(ArrowLocation.TOP_CENTER);

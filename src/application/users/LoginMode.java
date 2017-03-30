@@ -77,13 +77,13 @@ public class LoginMode extends BorderPane {
     private Button exitButton;
 
     @FXML
+    public Label xr3PlayerLabel;
+
+    @FXML
     private Label createdByLabel;
 
-    /**
-     * 
-     */
     @FXML
-    public Label xr3PlayerLabel;
+    private Label checkTutorialsLabel;
 
     // --------------------------------------------
 
@@ -136,7 +136,7 @@ public class LoginMode extends BorderPane {
     public LoginMode() {
 
 	// ----------------------------------FXMLLoader-------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "LoginScreenController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LoginScreenController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -205,7 +205,10 @@ public class LoginMode extends BorderPane {
 	userViewer.toBack();
 
 	//createdByLabel
-	createdByLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.website));
+	createdByLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.WEBSITE));
+	
+	//checkTutorialsLabel
+	checkTutorialsLabel.setOnMouseReleased(r->ActionTool.openWebSite(InfoTool.TUTORIALS));
     }
 
     /**

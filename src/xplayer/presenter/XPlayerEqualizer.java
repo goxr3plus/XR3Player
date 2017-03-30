@@ -84,7 +84,7 @@ public class XPlayerEqualizer extends BorderPane {
 	color = xPlayerUI.getDiscColor();
 
 	// ----------------------------------FXMLLoader-------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "XPlayerEqualizer.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerEqualizer.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

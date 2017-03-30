@@ -45,7 +45,7 @@ public class ApplicationSettingsController extends BorderPane {
 
 	// ------------------------------------FXMLLOADER-------------------------------------
 	FXMLLoader loader = new FXMLLoader(
-		getClass().getResource(InfoTool.fxmls + "ApplicationSettingsController.fxml"));
+		getClass().getResource(InfoTool.FXMLS + "ApplicationSettingsController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

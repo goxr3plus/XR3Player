@@ -4,10 +4,12 @@
 package media;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
+import org.apache.commons.io.FilenameUtils;
 import org.controlsfx.control.Notifications;
 
 import application.Main;
@@ -29,6 +31,7 @@ import smartcontroller.SmartController;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
+import xplayer.presenter.AudioType;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -82,6 +85,9 @@ public abstract class Media {
     /** The file type. */
     private SimpleStringProperty fileType;
 
+    /** The file type. */
+    private SimpleStringProperty fileSize;
+
     /** Does the File exists */
     private SimpleBooleanProperty fileExists;
 
@@ -106,8 +112,6 @@ public abstract class Media {
      *
      * @param path
      *            The path of the File
-     * @param duration
-     *            The duration of the Media
      * @param stars
      *            The quality of the Media
      * @param timesPlayed
@@ -119,68 +123,91 @@ public abstract class Media {
      * @param genre
      *            The genre of the Media <b> see the Genre class for more </b>
      */
-    public Media(String path, int duration, double stars, int timesPlayed, String dateImported, String hourImported,
-	    Genre genre) {
+    public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre) {
 
 	// ....initialize
 	mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? songImage : videoImage));
 	hasBeenPlayed = new SimpleObjectProperty<>(null);
 
 	this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
-	this.drive = new SimpleStringProperty(path.substring(0, 1));
+	this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
 	this.filePath = new SimpleStringProperty(path);
 	this.fileName = new SimpleStringProperty(InfoTool.getFileName(path));
 	this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
+	this.fileSize = new SimpleStringProperty();
 
 	this.stars = new SimpleDoubleProperty(stars);
 	this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
-	this.duration = new SimpleIntegerProperty(duration);
-	this.duration.addListener((observable, oldValue, newValue) -> determineTheImage());
-	this.durationEdited = new SimpleStringProperty(
-		duration == -1 ? "corrupted" : duration == 0 ? "error" : InfoTool.getTimeEditedOnHours(duration));
+	this.duration = new SimpleIntegerProperty();
+	//this.duration.addListener((observable, oldValue, newValue) -> fixTheInformations(true))
+	this.durationEdited = new SimpleStringProperty("");
 
-	// Hour Created
-	if (hourImported == null)
-	    this.hourImported = new SimpleStringProperty(InfoTool.getLocalTime());
-	else
-	    this.hourImported = new SimpleStringProperty(hourImported);
+	// Hour Created|Imported
+	this.hourImported = new SimpleStringProperty(hourImported != null ? hourImported : InfoTool.getLocalTime());
 
-	// Date Created
-	if (dateImported == null)
-	    this.dateImported = new SimpleStringProperty(InfoTool.getCurrentDate());
-	else
-	    this.dateImported = new SimpleStringProperty(dateImported);
+	// Date Created|Imported
+	this.dateImported = new SimpleStringProperty(dateImported != null ? dateImported : InfoTool.getCurrentDate());
 
-	dateFileCreated = new SimpleStringProperty(InfoTool.getFileCreationDate(path));
-	dateFileModified = new SimpleStringProperty(InfoTool.getFileLastModifiedDate(path));
+	//Date File Created + Date File Modified
+	dateFileCreated = new SimpleStringProperty();
+	dateFileModified = new SimpleStringProperty();
 
 	// File exists
 	fileExists = new SimpleBooleanProperty(this, "FileExists", true);
-	fileExists.addListener((observable, oldValue, newValue) -> {
-	    // System.out.println(path + " newValue= :" + newValue)
-	    determineTheImage();
-	});
+	fileExists.addListener((observable, oldValue, newValue) -> fixTheInformations(true));
 
 	// Media Genre
 	this.genre = genre;
 
 	// Find the correct image
-	determineTheImage();
+	fixTheInformations(true);
     }
 
+    //!!!!!!!!!!!!!!!!!!THIS METHOD NEEDS FIXING!!!!!!!!!!!!!!!!!
+
     /**
-     * Finds the correct image to display for the Media based on if it is CORRUPTED OR MISSING OR OK OR COMBINATION OF THEM
+     * When a files appears or dissapears it's information like size , image etc must be fixed to represent it's current status
      */
-    private void determineTheImage() {
-	if (InfoTool.isAudioSupported(filePath.get())) {// AUDIO?
-	    // Corrupted?
-	    if (this.duration.get() != -1)
-		mediaType.get().setImage(fileExists.get() ? songImage : songMissingImage);
-	    else if (this.duration.get() == -1)
-		mediaType.get().setImage(songCorruptedImage);
-	} else { // VIDEO?
-	    mediaType.get().setImage(videoImage);
-	}
+    private void fixTheInformations(boolean doUpdate) {
+
+	if (!doUpdate)
+	    return;
+
+	//System.out.println("Doing Update ->" + this.fileName.get())
+
+	//I need to add code for video files etc
+
+	//Check the fileSize 
+	this.fileSize.set(InfoTool.getFileSizeEdited(new File(filePath.get())));
+
+	//dateFileCreated
+	dateFileCreated.set(InfoTool.getFileCreationDate(filePath.get()));
+
+	//dateFileModified
+	dateFileModified.set(InfoTool.getFileLastModifiedDate(filePath.get()));
+
+	//It is Audio?
+	if (!InfoTool.isAudioSupported(filePath.get()))
+	    return;
+
+	//Duration
+	duration.set(InfoTool.durationInSeconds(filePath.get(), AudioType.FILE));
+
+	//DurationEdited
+	int localDuration = this.duration.get();
+
+	durationEdited.set(!fileExists.get() ? "file missing"
+		: localDuration == -1 ? "corrupted"
+			: localDuration == 0 ? "error" : InfoTool.getTimeEditedOnHours(localDuration));
+
+	//Image
+	if (!fileExists.get()) //File is missing ?
+	    mediaType.get().setImage(songMissingImage);
+	else if (this.duration.get() != -1) // Not corrupted
+	    mediaType.get().setImage(songImage);
+	else if (this.duration.get() == -1) //Corrupted
+	    mediaType.get().setImage(songCorruptedImage);
+
     }
 
     // --------Property
@@ -310,6 +337,15 @@ public abstract class Media {
      */
     public SimpleStringProperty fileNameProperty() {
 	return fileName;
+    }
+
+    /**
+     * File Size property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty fileSizeProperty() {
+	return fileSize;
     }
 
     /**
@@ -645,6 +681,15 @@ public abstract class Media {
      */
     public String getFileType() {
 	return fileType.get();
+    }
+
+    /**
+     * Gets the file size.
+     *
+     * @return the file type
+     */
+    public String getFileSize() {
+	return fileSize.get();
     }
 
     /**

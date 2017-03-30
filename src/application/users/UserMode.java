@@ -46,7 +46,7 @@ public class UserMode extends BorderPane {
     public UserMode() {
 
 	// ------------------------------------FXMLLOADER ----------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "UserMode.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserMode.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

@@ -441,11 +441,14 @@ public class DJDisc extends StackPane {
      */
     public void updateTimeDirectly(int current, int total, String milliseconds) {
 	calculateTheTime(current, total);
-	if (timeMode == TimeMode.REVERSED)
-	    this.time = time + "." + (9 - Integer.parseInt(milliseconds.replace(".", "")));
-	else
-	    this.time = time + milliseconds;
-	
+	if (!this.timeField.isHover()) { //Is being hovered
+	    if (timeMode == TimeMode.REVERSED)
+		this.time = time + "." + (9 - Integer.parseInt(milliseconds.replace(".", "")));
+	    else
+		this.time = time + milliseconds;
+	} else
+	    this.time = InfoTool.getTimeEdited(total);
+
 	//Final 
 	//this.time = time + "\n," + InfoTool.getTimeEdited(total);
     }

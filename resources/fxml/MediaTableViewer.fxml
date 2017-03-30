@@ -8,17 +8,24 @@
 
 <fx:root tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
-      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="?" />
-      <TableColumn fx:id="mediaType" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Type" />
-    <TableColumn fx:id="title" minWidth="120.0" prefWidth="200.0" text="Title">
+      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false">
          <graphic>
             <ImageView>
                <image>
-                  <Image url="@../image/title.png" />
+                  <Image url="@../image/played.png" />
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="duration" maxWidth="500.0" minWidth="60.0" prefWidth="65.0" text="Duration">
+      <TableColumn fx:id="mediaType" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Type" />
+    <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Title">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../image/Audio%20Wave-20.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,7 +34,7 @@
             </ImageView>
          </graphic>
       </TableColumn>
-      <TableColumn fx:id="timesPlayed" minWidth="60.0" prefWidth="90.0" text="Times Played">
+      <TableColumn fx:id="timesPlayed" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="# Played">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -35,7 +42,7 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="stars" minWidth="60.0" prefWidth="70.0" text="Stars">
+      <TableColumn fx:id="stars" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Stars">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -43,7 +50,23 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="drive" prefWidth="75.0" text="Drive" visible="false">
+      <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Extension">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Puzzle-20.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="fileSize" maxWidth="250.0" minWidth="130.0" prefWidth="139.0" text="File Size">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../image/Front%20View-20.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="drive" maxWidth="80.0" minWidth="80.0" text="Drive">
          <graphic>
             <ImageView>
                <image>
@@ -51,11 +74,9 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="filePath" prefWidth="75.0" text="File Path" visible="false" />
-      <TableColumn fx:id="fileName" prefWidth="75.0" text="File Name" visible="false" />
-      <TableColumn fx:id="fileType" prefWidth="75.0" text="File Type" visible="false" />
-      <TableColumn fx:id="fileSize" prefWidth="75.0" text="File Size" visible="false" />
-      <TableColumn fx:id="hourImported" prefWidth="106.0" text="Time Imported" visible="false">
+      <TableColumn fx:id="filePath" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Path" visible="false" />
+      <TableColumn fx:id="fileName" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Name" visible="false" />
+      <TableColumn fx:id="hourImported" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Time Imported" visible="false">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -63,7 +84,7 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-    <TableColumn fx:id="dateImported" prefWidth="123.0" text="Date Imported" visible="false">
+    <TableColumn fx:id="dateImported" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date Imported" visible="false">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -71,8 +92,22 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="dateFileCreated" prefWidth="75.0" text="Date File Created" visible="false" />
-      <TableColumn fx:id="dateFileModified" prefWidth="75.0" text="Date File Modified" visible="false" />
+      <TableColumn fx:id="dateFileCreated" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date File Created" visible="false">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Add%20File-20.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
+      <TableColumn fx:id="dateFileModified" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date File Modified" visible="false">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Edit%20File-20.png" />
+               </image>
+            </ImageView>
+         </graphic></TableColumn>
       <TableColumn prefWidth="75.0" text="Artist-[Not implemented]" visible="false" />
       <TableColumn fx:id="remix" prefWidth="75.0" text="Remix-[Not implemented]" visible="false" />
       <TableColumn fx:id="album" prefWidth="75.0" text="Album-[Not implemented]" visible="false" />

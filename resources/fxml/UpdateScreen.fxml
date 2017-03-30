@@ -25,11 +25,11 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff68" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
-      <Rectangle fx:id="rightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff69" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_RIGHT" />
+      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff292969" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
+      <Rectangle fx:id="rightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff000069" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_RIGHT" />
       <VBox alignment="CENTER" spacing="10.0" StackPane.alignment="CENTER">
          <children>
-            <ProgressBar fx:id="progressBar" prefHeight="0.0" prefWidth="354.0" />
+            <ProgressBar fx:id="progressBar" prefHeight="12.0" prefWidth="354.0" />
             <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="385.0" style="-fx-font-weight: bold; -fx-font-size: 22; -fx-text-fill: white; -fx-background-color: rgb(0,0,0,0.75);" text="....Loading...." textAlignment="CENTER" />
          </children>
       </VBox>

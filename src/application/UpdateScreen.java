@@ -57,7 +57,7 @@ public class UpdateScreen extends StackPane {
      * Constructor.
      */
     public UpdateScreen() {
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "UpdateScreen.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UpdateScreen.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

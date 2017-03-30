@@ -67,7 +67,7 @@ public class ExportWindowController extends ScrollPane {
 	window.setResizable(false);
 
 	// -----------------------------------------FXMLLoader
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "ExportWindowController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ExportWindowController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -79,7 +79,7 @@ public class ExportWindowController extends ScrollPane {
 
 	window.setScene(new Scene(this));
 	window.getScene().getStylesheets()
-		.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+		.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
     }
 
     /**

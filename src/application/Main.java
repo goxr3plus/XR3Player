@@ -27,6 +27,7 @@ import application.users.LoginMode;
 import application.users.User;
 import application.users.UserMode;
 import borderless.BorderlessScene;
+import browsers.WebBrowserController;
 import database.LocalDBManager;
 import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.animation.PauseTransition;
@@ -145,6 +146,10 @@ public class Main extends Application {
     /** The Constant playedSongs. */
     public static final PlayedMediaList playedSongs = new PlayedMediaList();
 
+    //
+
+    public static WebBrowserController webBrowser = new WebBrowserController();
+
     //----------------END: The above have not depencities on other ---------------------------------//
 
     //----------------START: Vary basic for the application---------------------------------------//
@@ -216,8 +221,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 	try {
-	    //new Tester();
-	    
+	    //new Tester()
+
 	    // logger.info("XR3Player Application Started")
 	    System.out.println("XR3Player Application Started");
 
@@ -277,7 +282,7 @@ public class Main extends Application {
 	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, stackPaneRoot, 650, 500);
 	    scene.setMoveControl(loginMode.xr3PlayerLabel);
 	    scene.getStylesheets()
-		    .add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+		    .add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 
 	    // Scene and Show
 	    window.setScene(scene);
@@ -381,7 +386,7 @@ public class Main extends Application {
 	    sideBar.setManaged(true);
 
 	    //flipPane
-	    mainModeFlipPane.getFront().getChildren().addAll(libraryMode);
+	    mainModeFlipPane.getFront().getChildren().addAll(webBrowser);
 	    mainModeFlipPane.getBack().getChildren().addAll(djMode);
 
 	    //rootFlipPane

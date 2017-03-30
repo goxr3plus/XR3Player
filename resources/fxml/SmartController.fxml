@@ -132,7 +132,7 @@
                         <Tooltip text="Previous" />
                      </tooltip>
                      <graphic>
-                        <ImageView id="arrowButton" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/right.png" />
                            </image>
@@ -150,12 +150,12 @@
                         <DropShadow />
                      </effect>
                   </TextField>
-                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton">
+                  <Button fx:id="next" mnemonicParsing="false" prefWidth="33.0" styleClass="arrowButton">
                      <tooltip>
                         <Tooltip text="Next" />
                      </tooltip>
                      <graphic>
-                        <ImageView id="arrowButton" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/right.png" />
                            </image>
@@ -165,7 +165,7 @@
                         <Insets bottom="2.0" top="2.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="goToPage" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 15.5; -fx-text-fill: white;" styleClass="arrowButton" text="GO">
+                  <Button fx:id="goToPage" mnemonicParsing="false" prefHeight="18.0" prefWidth="46.0" style="-fx-font-weight: bold; -fx-font-size: 15.5; -fx-text-fill: white;" styleClass="arrowButton" text="GO">
                      <tooltip>
                         <Tooltip text="Go to the selected Page" />
                      </tooltip>

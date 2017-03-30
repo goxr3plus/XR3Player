@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<fx:root prefHeight="466.0" prefWidth="519.0" style="-fx-background-color: rgb(0,0,0,0.85);" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane">
+         <top>
+            <VBox spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" minHeight="4.0" prefHeight="4.0" progress="0.06" />
+                  <HBox spacing="5.0">
+                     <children>
+                        <JFXButton fx:id="backwardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-text-fill: white; -fx-font-weight: bold;" styleClass="arrowButton" text=" ">
+                           <graphic>
+                              <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/right.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <tooltip>
+                              <Tooltip text="Back" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="forwardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-text-fill: white; -fx-font-weight: bold;" styleClass="arrowButton" text=" ">
+                           <graphic>
+                              <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/right.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <tooltip>
+                              <Tooltip text="Forward" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXTextField fx:id="searchBar" focusColor="#dd0f0f" promptText="search on google...." style="-fx-text-fill: white; -fx-font-weight: bold;" HBox.hgrow="ALWAYS">
+                           <tooltip>
+                              <Tooltip text="Search" />
+                           </tooltip></JFXTextField>
+                        <JFXButton fx:id="reloadButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-text-fill: white; -fx-font-weight: bold;" styleClass="arrowButton" text=" ">
+                           <graphic>
+                              <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/reload.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <tooltip>
+                              <Tooltip text="Reload" />
+                           </tooltip>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+            </VBox>
+         </top>
+         <center>
+            <WebView fx:id="webView" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</fx:root>

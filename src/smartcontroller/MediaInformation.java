@@ -94,7 +94,7 @@ public class MediaInformation extends BorderPane implements Initializable {
 	public MediaInformation() {
 
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "MediaInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 

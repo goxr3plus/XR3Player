@@ -91,7 +91,7 @@ public class RenameWindow extends VBox {
 	window.setAlwaysOnTop(true);
 
 	// ----------------------------------FXMLLoader
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "RenameWindow.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "RenameWindow.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

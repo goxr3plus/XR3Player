@@ -186,7 +186,7 @@ public class LibraryMode extends GridPane {
     public LibraryMode() {
 
 	// FXMLLOADER
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "LibraryMode.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibraryMode.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

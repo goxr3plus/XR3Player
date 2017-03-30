@@ -59,7 +59,7 @@ public class AboutWindowController extends BorderPane {
     public AboutWindowController() {
 
 	// ------------------------------------FXMLLOADER
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "AboutWindow.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AboutWindow.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -86,7 +86,7 @@ public class AboutWindowController extends BorderPane {
 	// Scene
 	window.setScene(new Scene(this));
 	window.getScene().getStylesheets()
-		.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+		.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 
 	// InlineCssTextArea
 	VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(cssTextArea);
@@ -180,7 +180,7 @@ public class AboutWindowController extends BorderPane {
 	close.setOnAction(a -> window.close());
 
 	// --visitWebsite
-	visitWebsite.setOnAction(a -> ActionTool.openWebSite(InfoTool.website));
+	visitWebsite.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE));
 
 	// --reportBug
 	reportBug.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/issues"));

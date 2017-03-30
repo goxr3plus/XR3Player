@@ -51,7 +51,7 @@ public class VisualizerStackController extends StackPane {
     public VisualizerStackController() {
 
 	// ----------------- FXMLLoader----------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "VisualizerStackController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "VisualizerStackController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

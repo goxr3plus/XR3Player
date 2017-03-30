@@ -180,7 +180,7 @@ public class SmartController extends StackPane {
     private final String dataBaseTableName;
 
     /** The name of the SmartController . */
-    private String controllerName = null;
+    private String controllerName;
 
     /** Total items in database table . */
     private IntegerProperty totalInDataBase = new SimpleIntegerProperty(0);
@@ -194,7 +194,7 @@ public class SmartController extends StackPane {
     public final MediaTableViewer tableViewer;
 
     /** This list keeps all the Media Items from the TableViewer */
-    public ObservableList<Media> itemsObservableList = FXCollections.observableArrayList();
+    public final ObservableList<Media> itemsObservableList = FXCollections.observableArrayList();
 
     /** The current page inside the TableViewer */
     IntegerProperty currentPage = new SimpleIntegerProperty(0);
@@ -281,7 +281,7 @@ public class SmartController extends StackPane {
 	copyOrMoveService = new CopyOrMoveService();
 
 	// FXMLLoader
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "SmartController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -1027,7 +1027,7 @@ public class SmartController extends StackPane {
 
 	/** The file size. */
 	@FXML
-	private TableColumn<?, ?> fileSize;
+	private TableColumn<Media, String> fileSize;
 
 	/** The album art. */
 	@FXML
@@ -1052,7 +1052,7 @@ public class SmartController extends StackPane {
 	    canvas.setHeight(100);
 
 	    // FXMLLOADRE
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "MediaTableViewer.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaTableViewer.fxml"));
 	    loader.setController(this);
 	    loader.setRoot(this);
 
@@ -1220,8 +1220,8 @@ public class SmartController extends StackPane {
 	    });
 
 	    //Drag Entered and Exited
-	    setOnDragEntered(d -> navigationHBox.setVisible(false));
-	    setOnDragExited(d -> navigationHBox.setVisible(true));
+	    //setOnDragEntered(d -> navigationHBox.setVisible(false))
+	    //setOnDragExited(d -> navigationHBox.setVisible(true))
 
 	    // --Drag Dropped
 	    setOnDragDropped(drop -> {
@@ -1289,6 +1289,9 @@ public class SmartController extends StackPane {
 
 	    // fileType
 	    fileType.setCellValueFactory(new PropertyValueFactory<>("fileType"));
+	    
+	    // fileType
+	    fileSize.setCellValueFactory(new PropertyValueFactory<>("fileSize"));
 
 	}
 
@@ -1475,15 +1478,12 @@ public class SmartController extends StackPane {
 			} else {
 			    // Fetch the items from the database
 			    List<Media> array = new ArrayList<>();
-			    Audio song = null;
-			    while (resultSet.next()) {
-				song = new Audio(resultSet.getString("PATH"),
-					InfoTool.durationInSeconds(resultSet.getString("PATH"), AudioType.FILE),
-					resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
-					resultSet.getString("DATE"), resultSet.getString("HOUR"), genre);
+			    for (Audio song = null; resultSet.next();) {
+				song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"),
+					resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
+					resultSet.getString("HOUR"), genre);
 				array.add(song);
-
-				// Update Progress
+				//Update the progress
 				updateProgress(++counter, currentMaximumPerList);
 			    }
 

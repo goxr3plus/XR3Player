@@ -6,11 +6,16 @@ package tools;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,25 +51,28 @@ public final class InfoTool {
     static Mp3File song;
 
     /** WebSite url */
-    public static final String website = "http://goxr3plus.co.nf";
+    public static final String WEBSITE = "http://goxr3plus.co.nf";
+
+    /** XR3Player Tutorials */
+    public static final String TUTORIALS = "https://www.youtube.com/playlist?list=PL-xqaiRUr_iRKDkpFWPfSRFmJvHSr1VJI";
 
     /** The Constant images. */
-    public static final String images = "/image/";
+    public static final String IMAGES = "/image/";
 
     /** The os name. */
-    public static final String osName = System.getProperty("os.name");
+    public static final String OSNAME = System.getProperty("os.name");
 
     /** The Constant styLes. */
-    public static final String styLes = "/style/";
+    public static final String STYLES = "/style/";
 
     /** The Constant applicationCss. */
-    public static final String applicationCss = "application.css";
+    public static final String APPLICATIONCSS = "application.css";
 
     /** The Constant sounds. */
-    public static final String sounds = "/sound/";
+    //public static final String sounds = "/sound/"
 
     /** The Constant fxmls. */
-    public static final String fxmls = "/fxml/";
+    public static final String FXMLS = "/fxml/";
 
     // ----------------Important-----------------------------
 
@@ -105,14 +113,23 @@ public final class InfoTool {
     /** The Constant playedImage. */
     public static final Image playedImage = getImageFromDocuments("played.png");
 
-    /** The contains. */
-    // private static boolean contains
+    //-----------Lists of accepted extensions
+    //Java 8 Way
+    //    private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = Stream.of("mp3", "wav", "ogg")
+    //	    .collect(Collectors.toCollection(HashSet::new))
+    //    private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = Stream.of("mp4", "flv")
+    //	    .collect(Collectors.toCollection(HashSet::new))
+    //    private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = Stream.of("png", "jpg", "jpeg")
+    //	    .collect(Collectors.toCollection(HashSet::new))
+    //Java 7 Way and back
+    private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg"));
+    private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv"));
+    private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg"));
 
     /**
-     * Instantiates a new info tool.
+     * Private Constructor , we don't want instances of this class
      */
     private InfoTool() {
-
     }
 
     /**
@@ -224,25 +241,40 @@ public final class InfoTool {
     public static boolean isReachableByPing(String host) {
 	try {
 
-	    String cmd;
-	    if (osName.toLowerCase().startsWith("windows")) {
-		// For Windows
-		cmd = "ping -n 1 " + host;
-	    } else {
-		// For Linux and OSX
-		cmd = "ping -c 1 " + host;
-	    }
-
 	    // Start a new Process
-	    Process myProcess = Runtime.getRuntime().exec(cmd);
-	    myProcess.waitFor();
+	    Process process = Runtime.getRuntime()
+		    .exec("ping -" + (OSNAME.toLowerCase().startsWith("windows") ? "n" : "c") + " 1 " + host);
 
-	    if (myProcess.exitValue() == 0)
-		return true;
-	    else
-		return false;
+	    //Wait for it to finish
+	    process.waitFor();
+
+	    //Check the return value
+	    return process.exitValue() == 0;
 
 	} catch (Exception ex) {
+	    Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
+	    return false;
+	}
+    }
+
+    /**
+     * Checks for Application Internet connection using Socket and InetSocketAddress I combine this method with reachableByPing to check if the
+     * Operating System is connected to the Internet and this method to check if the application can be connected to Internet,
+     * 
+     * Because the admin my have blocked internet connection for this Java application.
+     * 
+     * @param host
+     *            the host
+     * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
+     */
+    public static boolean isReachableUsingSocket(String host) {
+	InetSocketAddress addr = new InetSocketAddress(host, 80);
+
+	//Check if it can be connected
+	try (Socket sock = new Socket()) {
+	    sock.connect(addr, 2000);
+	    return true;
+	} catch (IOException ex) {
 	    Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 	    return false;
 	}
@@ -361,7 +393,7 @@ public final class InfoTool {
     }
 
     /**
-     * Returns the extension of file(without (.)) for example <b>(ai.mp3)->(mp3)</b>
+     * Returns the extension of file(without (.)) for example <b>(ai.mp3)->(mp3)</b> and to lowercase (Mp3 -> mp3)
      *
      * @param path
      *            the path
@@ -372,67 +404,50 @@ public final class InfoTool {
 
 	// int i = path.lastIndexOf('.'); // characters contained before (.)
 	//
-	// if (i > 0 && i < path.length() - 1) // if the name is not empty
-	// return path.substring(i + 1).toLowerCase();
+	// if the name is not empty
+	// if (i > 0 && i < path.length() - 1) 
+	// return path.substring(i + 1).toLowerCase()
 	//
-	// return null;
+	// return null
     }
 
     /**
      * 1)Checks if this file is <b>audio</b><br>
      * 2)If is supported by the application.
-     *
+     * 
      * @param name
      *            the name
-     * @return true if the type is supported or else false
+     * @return true if the type is supported or else false [[SuppressWarningsSpartan]]
      */
     public static boolean isAudioSupported(String name) {
 	String extension = getFileExtension(name);
-
-	if (extension != null && ("mp3".equals(extension) || "wav".equals(extension) || "ogg".equals(extension)))
-	    // extension.equals("ogg")
-	    // ||
-	    // extension.equals("wav")
-	    // || extension.equals("au") || extension.equals("flac") ||
-	    // extension.equals("aiff")
-	    // || extension.equals("speex")))
-	    return true;
-
-	return false;
+	return extension != null && ACCEPTED_AUDIO_EXTENSIONS.contains(extension);
     }
 
     /**
      * 1)Checks if this file is <b>video</b><br>
      * 2)If is supported by the application.
-     *
+     * 
      * @param name
      *            the name
-     * @return true if the type is supported or else false
+     * @return true if the type is supported or else false [[SuppressWarningsSpartan]]
      */
     public static boolean isVideoSupported(String name) {
 	String extension = getFileExtension(name);
-
-	if (extension != null && ("mp4".equals(extension) || "flv".equals(extension)))
-	    return true;
-
-	return false;
+	return extension != null && ACCEPTED_VIDEO_EXTENSIONS.contains(extension);
     }
 
     /**
      * 1)Checks if this file is <b>video</b><br>
      * 2)If is supported by the application.
-     *
+     * 
      * @param name
      *            the name
-     * @return true if the file is an Image
+     * @return true if the file is an Image [[SuppressWarningsSpartan]]
      */
     public static boolean isImage(String name) {
 	String extension = getFileExtension(name);
-
-	if (extension != null && ("png".equals(extension) || "jpg".equals(extension) || "jpeg".equals(extension)))
-	    return true;
-
-	return false;
+	return extension != null && ACCEPTED_IMAGE_EXTENSIONS.contains(extension);
     }
 
     /**
@@ -443,7 +458,7 @@ public final class InfoTool {
      * @return Returns an image which is already into the resources folder of the application
      */
     public static Image getImageFromDocuments(String imageName) {
-	return new Image(InfoTool.class.getResourceAsStream(images + imageName));
+	return new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName));
     }
 
     /**
@@ -454,7 +469,7 @@ public final class InfoTool {
      * @return Returns an ImageView using method getImageFromDocumuments(String imageName);
      */
     public static ImageView getImageViewFromDocuments(String imageName) {
-	return new ImageView(new Image(InfoTool.class.getResourceAsStream(images + imageName)));
+	return new ImageView(new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName)));
     }
 
     /**
@@ -463,7 +478,7 @@ public final class InfoTool {
      * @return the LocalTime
      */
     public static String getLocalTime() {
-	return LocalTime.now().toString();
+	return LocalTime.now() + "";
     }
 
     /**
@@ -472,24 +487,21 @@ public final class InfoTool {
      * @return the local date in format YYYY-MM-DD
      */
     public static String getCurrentDate() {
-	return LocalDate.now().toString();
+	return LocalDate.now() + "";
 
     }
 
     /**
      * Returns a String with a fixed number of letters.
      *
-     * @param string
+     * @param s
      *            the string
      * @param letters
      *            the letters
      * @return A substring(or the current given string) based on the letters that have to be cut
      */
-    public static String getMinString(String string, int letters) {
-	if (string.length() < letters)
-	    return string;
-	else
-	    return string.substring(0, letters) + "...";
+    public static String getMinString(String s, int letters) {
+	return s.length() < letters ? s : s.substring(0, letters) + "...";
     }
 
     /**
@@ -497,22 +509,15 @@ public final class InfoTool {
      *
      * @param input
      *            The name of the input
-     * @param type
+     * @param audioType
      *            URL, FILE, INPUTSTREAM, UNKOWN;
      * @return Returns the duration of URL/FILE/INPUTSTREAM in milliseconds
      */
-    public static int durationInMilliseconds(String input, AudioType type) {
-
-	if (type == AudioType.FILE)
-	    return fileDuration(new File(input));
-	// else if (type == TYPE.URL)
-	// return -1;
-	// else if (type == TYPE.INPUTSTREAM)
-	// return -1;
-	// else if (type == TYPE.UNKOWN)
-	// return -1;
-
-	return -1;
+    public static int durationInMilliseconds(String input, AudioType audioType) {
+	return audioType == AudioType.FILE ? fileDuration(new File(input))
+		: (audioType == AudioType.URL || audioType == AudioType.INPUTSTREAM || audioType == AudioType.UNKNOWN)
+			? -1
+			: -1;
     }
 
     /**
@@ -572,10 +577,9 @@ public final class InfoTool {
 
 	return (time == 0 || time == -1) ? time : time / 1000;
 
-//	 Long microseconds = (Long)AudioSystem.getAudioFileFormat(new File(audio)).properties().get("duration") int mili = (int)(microseconds / 1000L);
-//	 int sec = milli / 1000 % 60; 
-//	 int min = milli / 1000 / 60; 
-	
+	//	 Long microseconds = (Long)AudioSystem.getAudioFileFormat(new File(audio)).properties().get("duration") int mili = (int)(microseconds / 1000L);
+	//	 int sec = milli / 1000 % 60; 
+	//	 int min = milli / 1000 / 60; 
 
     }
 
@@ -610,16 +614,9 @@ public final class InfoTool {
      * @return the time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
      */
     public static String getTimeEdited(int seconds) {
-
-	// duration < 1 minute
-	if (seconds < 60)
-	    return String.format("%02ds", seconds % 60);
-	// duration >= 1 hour
-	else if ((seconds / 60) / 60 > 0)
-	    return String.format("%02dh:%02dm:%02d", (seconds / 60) / 60, (seconds / 60) % 60, seconds % 60);
-	else
-	    return String.format("%02dm:%02d", (seconds / 60) % 60, seconds % 60);
-
+	return seconds < 60 ? String.format("%02ds", seconds % 60)  // duration < 1 minute
+		: (seconds / 60) / 60 <= 0 ? String.format("%02dm:%02d", (seconds / 60) % 60, seconds % 60) // duration < 1 hour
+			: String.format("%02dh:%02dm:%02d", (seconds / 60) / 60, (seconds / 60) % 60, seconds % 60); //else
     }
 
     /**
@@ -636,27 +633,36 @@ public final class InfoTool {
     }
 
     /**
-     * Gets the file size edited.
+     * Gets the file size edited in format "x MiB , y KiB"
      *
      * @param file
      *            the file
      * @return <b> a String representing the file size in MB and kB </b>
      */
     public static String getFileSizeEdited(File file) {
-	double bytes = file.length();
-	int kilobytes = (int) (bytes / 1024);
-	int megabytes = kilobytes / 1024;
-	int gigabytes = megabytes / 1024;
+	if (file.exists()) {
+	    //Get the size in bytes
+	    double bytes = file.length();
+	    int kilobytes = (int) (bytes / 1024);
+	    int megabytes = kilobytes / 1024;
 
-	if (kilobytes < 1024) {
-	    return kilobytes + " KiB";
-	} else if (kilobytes > 1024) {
-	    return megabytes + " MiB";
-	} else if (megabytes > 1024) {
-	    return gigabytes + " GiB";
+	    //int gigabytes = megabytes / 1024
+
+	    if (kilobytes < 1024) {
+		return kilobytes + " KiB";
+	    } else if (kilobytes > 1024) {
+		return megabytes + " MiB + " + (kilobytes - (megabytes * 1024)) + " KiB";
+	    }
+
+	    //else if (megabytes > 1024) {
+	    //	    return gigabytes + " GiB"
+	    //	}
+
 	}
 
+	//If it reaches here we have an error ;) damn !
 	return "error";
+
     }
 
     // /**

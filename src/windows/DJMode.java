@@ -45,7 +45,7 @@ public class DJMode extends GridPane {
      */
     public DJMode() {
 
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "DJMode.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DJMode.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

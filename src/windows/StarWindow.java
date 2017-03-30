@@ -71,7 +71,7 @@ public class StarWindow extends GridPane {
     public StarWindow() {
 
 	// ----------------------------------FXMLLoader
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "StarWindow.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "StarWindow.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -264,7 +264,7 @@ public class StarWindow extends GridPane {
 	// Scene
 	window.setScene(new Scene(this, Color.TRANSPARENT));
 	window.getScene().getStylesheets()
-		.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm());
+		.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 	window.getScene().setOnKeyReleased(key -> {
 	    if (key.getCode() == KeyCode.ESCAPE)
 		close(false);

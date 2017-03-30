@@ -119,7 +119,7 @@ public class User extends StackPane {
 	this.setPosition(position);
 
 	// ----------------------------------FXMLLoader-------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.fxmls + "UserController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
