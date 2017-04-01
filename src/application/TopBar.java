@@ -8,6 +8,7 @@ import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.TopBar.WindowMode;
 import customnodes.CPUsage;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
@@ -19,7 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -32,6 +33,8 @@ import tools.InfoTool;
  */
 public class TopBar extends BorderPane {
 
+    // ----------------------------------------------
+
     @FXML
     private StackPane cpuStackPane;
 
@@ -42,10 +45,16 @@ public class TopBar extends BorderPane {
     private Label xr3Label;
 
     @FXML
-    private ToggleButton goLibrariesMode;
+    private Tab mainModeTab;
 
     @FXML
-    private ToggleButton goDJMode;
+    private Tab djModeTab;
+
+    @FXML
+    private Tab userModeTab;
+
+    @FXML
+    private Tab webModeTab;
 
     @FXML
     private Button restartButton;
@@ -59,9 +68,7 @@ public class TopBar extends BorderPane {
     @FXML
     private Button close;
 
-
-    // ----------------------
-    
+    // ----------------------------------------------
 
     /** The logger. */
     private Logger logger = Logger.getLogger(getClass().getName());
@@ -69,21 +76,38 @@ public class TopBar extends BorderPane {
     CPUsage cpUsage = new CPUsage();
 
     /**
-     * The current Window Mode that means if the application is on <b> LibraryMode </b> or in <b>DJMode </b>.
+     * The current Window Mode
+     * 
+     * @SEE WindowMode
      */
-    private WindowMode windowMode = WindowMode.LIBRARYMODE;
+    private WindowMode windowMode = WindowMode.MAINMODE;
 
     /**
      * WindowMode.
      *
-     * @author SuperGoliath
+     * @author GOXR3PLUS
      */
     public enum WindowMode {
 
-	/** The djmode. */
+	/**
+	 * The Window is on LibraryMode
+	 */
+	MAINMODE,
+
+	/**
+	 * The window is on DJMode
+	 */
 	DJMODE,
-	/** The librarymode. */
-	LIBRARYMODE;
+
+	/**
+	 * The window is on user settings mode
+	 */
+	USERMODE,
+
+	/**
+	 * The window is on web browser mode
+	 */
+	WEBMODE;
 
     }
 
@@ -103,7 +127,7 @@ public class TopBar extends BorderPane {
     }
 
     /**
-     * Called as soon as .fxml is initialized
+     * Called as soon as .fxml is initialized [[SuppressWarningsSpartan]]
      */
     @FXML
     private void initialize() {
@@ -126,7 +150,6 @@ public class TopBar extends BorderPane {
 
 	// showSideBar
 	//showSideBar.setOnAction(a -> Main.sideBar.toogleBar()
-	
 
 	// restartButton
 	restartButton.setOnAction(a -> {
@@ -154,44 +177,68 @@ public class TopBar extends BorderPane {
 	// close
 	close.setOnAction(ac -> Main.exitQuestion());
 
-	// goDJMode
-	goDJMode.setOnMouseReleased(mouse -> {
-	    if (windowMode != WindowMode.DJMODE && mouse.getButton() == MouseButton.PRIMARY) {
+	//----------------------------START: TABS---------------------------------
 
-		// Work
-		Main.djMode.getSplitPane().getItems().removeAll(Main.treeManager, Main.multipleTabs);
-		Main.djMode.getSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
-		Main.djMode.setDividerPositions();
-		//Main.root.setCenter(Main.djMode)
-		Main.mainModeFlipPane.flipToBack();
+	mainModeTab.setOnSelectionChanged(l -> {
+	    if (mainModeTab.isSelected()) {
+		//System.out.println("MainMode Selected")
 
-		// Update window Mode
-		windowMode = WindowMode.DJMODE;
+		if (windowMode != WindowMode.MAINMODE && !Main.libraryMode.getChildren().contains(Main.multipleTabs)) {
 
-		// Marked
-		changeMarks(true, false);
-	    } else
-		goDJMode.setSelected(true);
+		    Main.djMode.updateDividerArray();
+		    Main.libraryMode.add(Main.multipleTabs, 0, 1);
+
+		    // Update window Mode
+		    windowMode = WindowMode.MAINMODE;
+
+		}
+		Main.specialJFXTabPane.getSelectionModel().select(0);
+	    }
 	});
 
-	// goLibrariesMode
-	goLibrariesMode.setSelected(true);
-	goLibrariesMode.setOnMouseReleased(mouse -> {
-	    if (windowMode != WindowMode.LIBRARYMODE && mouse.getButton() == MouseButton.PRIMARY) {
+	djModeTab.setOnSelectionChanged(l -> {
+	    if (djModeTab.isSelected()) {
+		//System.out.println("djModeTab Selected")
 
-		Main.djMode.updateDividerArray();
-		Main.libraryMode.add(Main.multipleTabs, 0, 1);
-		//Main.root.setCenter(Main.libraryMode)
-		Main.mainModeFlipPane.flipToFront();
+		if (windowMode != WindowMode.DJMODE && Main.libraryMode.getChildren().contains(Main.multipleTabs)) {
+
+		    // Work
+		    Main.djMode.getSplitPane().getItems().removeAll(Main.treeManager, Main.multipleTabs);
+		    Main.djMode.getSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
+		    Main.djMode.setDividerPositions();
+
+		    // Update window Mode
+		    windowMode = WindowMode.DJMODE;
+
+		}
+		Main.specialJFXTabPane.getSelectionModel().select(1);
+
+	    }
+	});
+
+	userModeTab.setOnSelectionChanged(l -> {
+	    if (userModeTab.isSelected()) {
+		//System.out.println("userModeTab Selected")
+
+		Main.specialJFXTabPane.getSelectionModel().select(2);
 
 		// Update window Mode
-		windowMode = WindowMode.LIBRARYMODE;
-
-		// Marked
-		changeMarks(false, true);
-	    } else
-		goLibrariesMode.setSelected(true);
+		windowMode = WindowMode.USERMODE;
+	    }
 	});
+
+	webModeTab.setOnSelectionChanged(l -> {
+	    if (webModeTab.isSelected()) {
+		//System.out.println("webModeTab Selected")
+
+		Main.specialJFXTabPane.getSelectionModel().select(3);
+
+		// Update window Mode
+		windowMode = WindowMode.WEBMODE;
+	    }
+	});
+
+	//----------------------------END: TABS---------------------------------
 
     }
 
@@ -200,24 +247,24 @@ public class TopBar extends BorderPane {
      */
     public void addXR3LabelBinding() {
 	// xr3Label
-	StringBinding binding = Bindings.createStringBinding(
-		() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]", Main.currentVersion,
-			Main.window.getWidth(), Main.window.getHeight()),
-		Main.window.widthProperty(), Main.window.heightProperty());
-	xr3Label.textProperty().bind(binding);
+	xr3Label.textProperty()
+		.bind(Bindings.createStringBinding(
+			() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
+				Main.currentVersion, Main.window.getWidth(), Main.window.getHeight()),
+			Main.window.widthProperty(), Main.window.heightProperty()));
     }
 
-    /**
-     * Changes the marks of goDJMode,goSimpleMode,goLibraryMode.
-     *
-     * @param a
-     *            the a
-     * @param b
-     *            the b
-     */
-    private void changeMarks(boolean a, boolean b) {
-	goDJMode.setSelected(a);
-	goLibrariesMode.setSelected(b);
-    }
+    //    /**
+    //     * Changes the marks of goDJMode,goSimpleMode,goLibraryMode.
+    //     *
+    //     * @param a
+    //     *            the a
+    //     * @param b
+    //     *            the b
+    //     */
+    //    private void changeMarks(boolean a, boolean b) {
+    //	goDJMode.setSelected(a);
+    //	goLibrariesMode.setSelected(b);
+    //    }
 
 }

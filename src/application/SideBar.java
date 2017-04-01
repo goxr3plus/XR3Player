@@ -62,15 +62,6 @@ public class SideBar extends BorderPane {
     private MenuItem donation;
 
     @FXML
-    private JFXButton goMainMode;
-
-    @FXML
-    private JFXButton goUserMode;
-
-    @FXML
-    private JFXButton theMovieDBMode;
-
-    @FXML
     private JFXButton applicationSettings;
 
     @FXML
@@ -102,7 +93,7 @@ public class SideBar extends BorderPane {
 
     @FXML
     private ImageView userImageView;
-
+    
     @FXML
     Label userNameLabel;
 
@@ -185,23 +176,23 @@ public class SideBar extends BorderPane {
 
     String style = "-fx-background-radius: 15 0 0 15; -fx-background-color:black; -fx-border-width:0 4 0 0;";
 
-    /**
-     * Goes to MainMode
-     */
-    public void goMainMode() {
-	Main.rootFlipPane.flipToFront();
-	goMainMode.setStyle("-fx-border-color:firebrick; " + style);
-	goUserMode.setStyle("-fx-border-color:transparent; " + style);
-    }
-
-    /**
-     * Goes to UserMode
-     */
-    public void goUserMode() {
-	Main.rootFlipPane.flipToBack();
-	goMainMode.setStyle("-fx-border-color:transparent; " + style);
-	goUserMode.setStyle("-fx-border-color:firebrick; " + style);
-    }
+//    /**
+//     * Goes to MainMode
+//     */
+//    public void goMainMode() {
+//	Main.rootFlipPane.flipToFront();
+//	goMainMode.setStyle("-fx-border-color:firebrick; " + style);
+//	goUserMode.setStyle("-fx-border-color:transparent; " + style);
+//    }
+//
+//    /**
+//     * Goes to UserMode
+//     */
+//    public void goUserMode() {
+//	Main.rootFlipPane.flipToBack();
+//	goMainMode.setStyle("-fx-border-color:transparent; " + style);
+//	goUserMode.setStyle("-fx-border-color:firebrick; " + style);
+//    }
 
     /**
      * Prepares the SideBar to be shown for LoginMode
@@ -210,15 +201,15 @@ public class SideBar extends BorderPane {
      */
     public void prepareForLoginMode(boolean b) {
 	if (b) {
-	    goMainMode.setDisable(true);
-	    goUserMode.setDisable(true);
+	    //goMainMode.setDisable(true);
+	    //goUserMode.setDisable(true);
 	    applicationSettings.setDisable(true);
 	    applicationConsole.setDisable(true);
 	    applicationDatabase.setDisable(true);
 	    snapshot.setDisable(true);
 	} else {
-	    goMainMode.setDisable(false);
-	    goUserMode.setDisable(false);
+	    //goMainMode.setDisable(false);
+	    //goUserMode.setDisable(false);
 	    applicationSettings.setDisable(false);
 	    applicationConsole.setDisable(false);
 	    applicationDatabase.setDisable(false);
@@ -256,16 +247,16 @@ public class SideBar extends BorderPane {
 	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
 	//---------MODE ------------------------------	
-	//goMainMode
-	goMainMode.setOnAction(a -> goMainMode());
-
-	//goUserMode
-	goUserMode.setOnAction(a -> goUserMode());
-
-	//theMovieDBMode
-	theMovieDBMode.setOnAction(a -> {
-	    
-	});
+//	//goMainMode
+//	goMainMode.setOnAction(a -> goMainMode());
+//
+//	//goUserMode
+//	goUserMode.setOnAction(a -> goUserMode());
+//
+//	//theMovieDBMode
+//	browserMode.setOnAction(a -> {
+//
+//	});
 
 	//-----------------------------------------
 

@@ -91,7 +91,7 @@ public class MultipleLibraries extends StackPane {
 	emptyLabelRegion.visibleProperty().bind(emptyLabel.visibleProperty());
 
 	// TabPane
-	tabPane.setId("LibrariesTabPane");
+	//tabPane.setId("LibrariesTabPane");
 
 	//	tabPane.setOnMouseMoved(m -> {
 	//	    if (!m.isControlDown())
@@ -218,7 +218,7 @@ public class MultipleLibraries extends StackPane {
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
 	marquee.setStyle(
-		"-fx-background-radius:0 0 15 15; -fx-background-color:rgb(255,255,255,0.7); -fx-border-color:transparent;");
+		"-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
 
 	stack.getChildren().addAll(indicator, text);
 	stack.setManaged(false);

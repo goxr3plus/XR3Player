@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.85);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.85);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../style/application.css" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
             <TabPane id="magicTabPane" fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../style/application.css" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                <tabs>

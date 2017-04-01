@@ -3,7 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -20,7 +21,6 @@
          <top>
             <VBox spacing="5.0" BorderPane.alignment="CENTER">
                <children>
-                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" minHeight="4.0" prefHeight="4.0" progress="0.06" />
                   <HBox spacing="5.0">
                      <children>
                         <JFXButton fx:id="backwardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-text-fill: white; -fx-font-weight: bold;" styleClass="arrowButton" text=" ">
@@ -53,10 +53,14 @@
                               <Tooltip text="Forward" />
                            </tooltip>
                         </JFXButton>
-                        <JFXTextField fx:id="searchBar" focusColor="#dd0f0f" promptText="search on google...." style="-fx-text-fill: white; -fx-font-weight: bold;" HBox.hgrow="ALWAYS">
+                        <JFXTextField fx:id="searchBar" focusColor="#dd0f0f" promptText="search..." style="-fx-text-fill: white; -fx-font-weight: bold;" HBox.hgrow="ALWAYS">
                            <tooltip>
                               <Tooltip text="Search" />
                            </tooltip></JFXTextField>
+                        <ComboBox fx:id="searchEngineComboBox" prefHeight="31.0" prefWidth="138.0" promptText="search engine...">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ComboBox>
                         <JFXButton fx:id="reloadButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: rgb(255,255,255,0.8); -fx-text-fill: white; -fx-font-weight: bold;" styleClass="arrowButton" text=" ">
                            <graphic>
                               <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">

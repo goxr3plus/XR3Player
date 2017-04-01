@@ -4,10 +4,12 @@
 package browsers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 
 import application.Main;
 import javafx.fxml.FXML;
@@ -55,25 +57,24 @@ public class WebBrowserController extends BorderPane {
     }
 
     /**
-     * Called as soon as .fxml is initialized
+     * Called as soon as .fxml is initialized [[SuppressWarningsSpartan]]
      */
     @FXML
     private void initialize() {
 
 	//tabPane
 	tabPane.getTabs().clear();
-	Tab tab = new Tab("");
-	new WebBrowserTabController(tab);
-	tabPane.getTabs().add(tab);
+	createNewTab("coz");
 
 	//addTab
 	addTab.setOnAction(a -> {
 
 	    //Check tabs number
 	    if (tabPane.getTabs().size() >= 4) {
+		JFXDialog dialog = new JFXDialog();
 		//Show Message
-		Alert alert = new Alert(AlertType.ERROR,
-			"Hello :)  Currently only 4 tabs are allowed , for performance reasons...");
+		Alert alert = new Alert(AlertType.WARNING,
+			"Currently only 4 tabs are allowed , for performance reasons... \n\n If you can hack it without decompiling the code i will give you 5$ dollars via paypal ;)");
 		alert.initOwner(Main.window);
 		alert.initOwner(Main.window);
 		alert.showAndWait();
@@ -81,12 +82,39 @@ public class WebBrowserController extends BorderPane {
 		return;
 	    }
 
-	    //Add new Tab
-	    Tab t = new Tab("");
-	    new WebBrowserTabController(t);
-	    tabPane.getTabs().add(t);
+	    //Create
+	    createNewTab();
+	});
+
+    }
+
+    /**
+     * Creates a new tab for the webbrowser ->Directing to a specific website [[SuppressWarningsSpartan]]
+     * 
+     * @param webSite
+     */
+    public void createNewTab(String... webSite) {
+	//Add new Tab
+	Tab tab = new Tab("");
+	WebBrowserTabController webBrowserTab = new WebBrowserTabController(tab,webSite.length==0?null:webSite[0]);
+	tab.setOnCloseRequest(c -> {
+
+	    //Check the tabs number
+	    if (tabPane.getTabs().size() == 1)
+		createNewTab();
+
+	    // Delete cache for navigate back
+	    webBrowserTab.webEngine.load("about:blank");
+
+	    //Delete cookies  Experimental!!! 
+	    //java.net.CookieHandler.setDefault(new java.net.CookieManager())
 
 	});
+
+	//Add the tab
+	tabPane.getTabs().add(tab);
+	//System.out.println(Arrays.asList(webSite))
+
     }
 
 }

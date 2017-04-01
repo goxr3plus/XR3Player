@@ -21,7 +21,7 @@
 	-fx-alignment: center;
 }
 
-.icons-badge Label{
+.icns-badge Label{
 	-fx-font-weight: BOLD;
 	-fx-font-size: 13.0px !important;
 	-fx-text-fill: WHITE;
@@ -383,12 +383,53 @@
 
 /*******************************************************************************
 
+*                             JFXTabPane                                      *
+
+******************************************************************************/
+
+.jfx-tab-pane#specialJFXTabPane .tab-header-area .tab-header-background {
+    /*-fx-opacity: 0.0;*/
+    -fx-background-color:rgb(0.0,0.0,0.0,0.8);  	    
+}
+
+
+.jfx-tab-pane#specialJFXTabPane .tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12.0px; /* before it was 12px */
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+    -fx-cursor:hand;
+}
+
+.jfx-tab-pane#specialJFXTabPane .tab-header-area .jfx-rippler{
+    -fx-rippler-fill :firebrick;
+    -fx-cursor:hand;
+}
+
+.jfx-tab-pane#specialJFXTabPane .tab-header-area  .tab-selected-line{
+     -fx-stroke : firebrick;
+}
+
+.jfx-tab-pane#specialJFXTabPane .tab:hover .tab-label{
+	-fx-text-fill:black;
+	-fx-background-color:white;	
+	-fx-background-radius: 0.0;
+	-fx-cursor:hand;
+}
+
+
+
+/*******************************************************************************
+
 *                             TabPane                                      *
 
 ******************************************************************************/
+
  #magicTabPane .tab-header-area {
   -fx-padding: 0.0 0.0 0.0 35.0 ;
 }
+
 
 .tab-pane .tab-header-area .tab-header-background {
     /*-fx-opacity: 0.0;*/
@@ -396,15 +437,16 @@
 }
 
 .tab-pane{	
-    -fx-tab-min-width:90.0px; 
+    -fx-tab-min-width:90.0; 
 }
 
 
 .tab-pane .tab{
     -fx-background-color: linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);
-    -fx-background-radius:  0.0 0.0 20.0 20.0;
+    -fx-background-radius:  0.0 0.0 0.0 0.0;
     -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;   
+    -fx-faint-focus-color: transparent;  
+    -fx-cursor:hand; 
 }
 
 .tab-pane .tab:selected{
@@ -415,10 +457,10 @@
 .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 12px; /* before it was 12px */
+    -fx-font-size: 12.0px; /* before it was 12px */
     -fx-font-weight: bold;
     -fx-wrap-text: true;
-    -fx-cursor:hand;
+    
 }
 
 .tab:selected .tab-label { 
@@ -430,7 +472,7 @@
 .tab:hover .tab-label{
 	-fx-text-fill:white;
 	-fx-background-color:firebrick;	
-	-fx-background-radius: 0.0 0.0 8.0 8.0;
+	-fx-background-radius: 0.0 0.0 0.0 0.0;
 }
 
 
@@ -1096,6 +1138,11 @@
 
 
 
+/*******************************************************************************
+
+*                          .menu-button                          *    
+
+******************************************************************************/
 
    
    

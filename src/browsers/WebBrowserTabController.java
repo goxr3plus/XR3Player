@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
@@ -36,8 +37,11 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebHistory.Entry;
+import javafx.util.Duration;
 import javafx.scene.web.WebView;
+import tools.ActionTool;
 import tools.InfoTool;
+import tools.NotificationType;
 
 /**
  * @author GOXR3PLUS
@@ -54,9 +58,6 @@ public class WebBrowserTabController extends StackPane {
     private BorderPane borderPane;
 
     @FXML
-    private WebView webView;
-
-    @FXML
     private JFXButton backwardButton;
 
     @FXML
@@ -66,26 +67,35 @@ public class WebBrowserTabController extends StackPane {
     private JFXTextField searchBar;
 
     @FXML
+    private ComboBox<String> searchEngineComboBox;
+
+    @FXML
     private JFXButton reloadButton;
 
     @FXML
-    private ProgressBar progressBar;
+    private WebView webView;
 
     // -------------------------------------------------------------
 
     /** The engine. */
     WebEngine webEngine;
+
     /** The web history */
     WebHistory history;
     ObservableList<WebHistory.Entry> historyEntryList;
 
     Tab tab;
+    String firstWebSite;
 
     /**
      * Constructor
+     * 
+     * @param tab
+     * @param firstWebSite
      */
-    public WebBrowserTabController(Tab tab) {
+    public WebBrowserTabController(Tab tab, String firstWebSite) {
 	this.tab = tab;
+	this.firstWebSite = firstWebSite;
 	this.tab.setContent(this);
 
 	// ------------------------------------FXMLLOADER ----------------------------------------
@@ -106,7 +116,7 @@ public class WebBrowserTabController extends StackPane {
     @FXML
     private void initialize() {
 
-	//-------------------WebView------------------------
+	//-------------------WebView------------------------	
 	// hide webview scrollbars whenever they appear.
 	webView.getChildrenUnmodifiable().addListener((Change<? extends Node> change) -> {
 	    Set<Node> deadSeaScrolls = webView.lookupAll(".scroll-bar");
@@ -118,30 +128,36 @@ public class WebBrowserTabController extends StackPane {
 
 	//-------------------WebEngine------------------------
 	webEngine = webView.getEngine();
-	webEngine.load("https://www.duckduckgo.com/");
-	webEngine.getLoadWorker().exceptionProperty().addListener(l -> {
-	    Alert alert = new Alert(AlertType.ERROR, webEngine.getLoadWorker().getException().getMessage());
-	    alert.initOwner(Main.window);
-	    alert.initOwner(Main.window);
-	    alert.showAndWait();
+	webEngine.getLoadWorker().exceptionProperty().addListener(error -> {
+	    ActionTool.showNotification("Error Occured",
+		    "Trying to connect to a website error occured:\n\t["
+			    + webEngine.getLoadWorker().getException().getMessage()
+			    + "]\nMaybe you don't have internet connection.",
+		    Duration.seconds(2), NotificationType.ERROR);
 	});
+
+	//	webEngine.setOnError(error -> ActionTool.showNotification("Error Occured",
+	//		"Trying to connect to a website error occured:\n\t["
+	//			+ webEngine.getLoadWorker().getException().getMessage()
+	//			+ "]\nMaybe you don't have internet connection.",
+	//		Duration.seconds(2), NotificationType.ERROR));
+
 	history = webEngine.getHistory();
 	historyEntryList = history.getEntries();
 	SimpleListProperty<Entry> list = new SimpleListProperty<>(historyEntryList);
 
-	//-------------------Items------------------------
-	//----tab
+	//-------------------TAB------------------------
 	tab.setTooltip(new Tooltip(""));
 	tab.getTooltip().textProperty().bind(webEngine.titleProperty());
-	//tab.textProperty().bind(webEngine.titleProperty());
+	//tab.textProperty().bind(webEngine.titleProperty())
 
 	// Graphic
 	StackPane stack = new StackPane();
 
 	// indicator
 	ProgressBar indicator = new ProgressBar();
-	indicator.progressProperty().bind(progressBar.progressProperty());
-	indicator.visibleProperty().bind(progressBar.visibleProperty());
+	indicator.progressProperty().bind(webEngine.getLoadWorker().progressProperty());
+	indicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
 	indicator.setMaxSize(30, 11);
 
 	// text
@@ -153,14 +169,14 @@ public class WebBrowserTabController extends StackPane {
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
 	marquee.setStyle(
-		"-fx-background-radius:0 0 15 15; -fx-background-color:rgb(255,255,255,0.7); -fx-border-color:transparent;");
+		"-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
 
 	stack.getChildren().addAll(indicator, text);
 	stack.setManaged(false);
 	stack.setVisible(false);
 
 	// stack
-	progressBar.visibleProperty().addListener(l -> {
+	indicator.visibleProperty().addListener(l -> {
 	    if (indicator.isVisible()) {
 		stack.setManaged(true);
 		stack.setVisible(true);
@@ -170,50 +186,33 @@ public class WebBrowserTabController extends StackPane {
 	    }
 	});
 
-	tab.setOnCloseRequest(c -> {
-	    // Delete cache for navigate back
-	    webEngine.load("about:blank");
-
-	    //Experimental!!!
-	    //Delete cookies 
-	    //java.net.CookieHandler.setDefault(new java.net.CookieManager())
-	});
-
 	// HBOX
 	HBox hBox = new HBox();
 	hBox.getChildren().addAll(stack, marquee);
 	tab.setGraphic(hBox);
 
-	//----searchBar
+	//-------------------Items------------------------
+	//searchBar
 	searchBar.focusedProperty().addListener((observable, oldValue, newValue) -> {
 	    if (newValue) // if focused
 		searchBar.textProperty().unbind();
 	    else
 		searchBar.textProperty().bind(webEngine.locationProperty());
 	});
-	searchBar.setOnAction(a -> {
-	    // Get an UrlValidator
-	    UrlValidator defaultValidator = new UrlValidator(); // default schemes
-	    String load = null;
-	    if (defaultValidator.isValid(searchBar.getText()))
-		load = searchBar.getText();
-
-	    //Load
-	    try {
-		webEngine.load(load != null ? load
-			: "https://www.google.com/search?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8"));
-	    } catch (UnsupportedEncodingException ex) {
-		ex.printStackTrace();
-	    }
-	});
+	searchBar.setOnAction(a -> loadWebSite(searchBar.getText()));
 
 	//reloadButton
-	reloadButton.setOnAction(a -> webEngine.reload());
+	reloadButton.setOnAction(a -> {
+	    if (history.getEntries().isEmpty())
+		webEngine.load("about:home");
+	    else
+		webEngine.reload();
+	});
 
 	//ProgressBar	
-	progressBar.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
-	progressBar.managedProperty().bind(progressBar.visibleProperty());
-	progressBar.progressProperty().bind(webEngine.getLoadWorker().progressProperty());
+	//	progressBar.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
+	//	progressBar.managedProperty().bind(progressBar.visibleProperty());
+	//	progressBar.progressProperty().bind(webEngine.getLoadWorker().progressProperty());
 
 	//backwardButton
 	backwardButton.setOnAction(a -> goBack());
@@ -224,7 +223,93 @@ public class WebBrowserTabController extends StackPane {
 	forwardButton.disableProperty()
 		.bind(history.currentIndexProperty().greaterThanOrEqualTo(list.sizeProperty().subtract(1)));
 
+	//searchEngineComboBox
+	//	Label google = new Label("Google", InfoTool.getImageViewFromDocuments("google24.png"));
+	//	google.setTooltip(new Tooltip("https://www.google.com/search?q="));
+	//
+	//	Label duckduckgo = new Label("DuckDuckGo", InfoTool.getImageViewFromDocuments("duckduckgo24.png"));
+	//	duckduckgo.setTooltip(new Tooltip("https://duckduckgo.com/?q="));
+	//
+	//	Label bing = new Label("Bing", InfoTool.getImageViewFromDocuments("bing24.png"));
+	//	bing.setTooltip(new Tooltip("http://www.bing.com/search?q="));
+	//
+	//	Label yahoo = new Label("Yahoo", InfoTool.getImageViewFromDocuments("yahoo24.png"));
+	//	yahoo.setTooltip(new Tooltip("https://search.yahoo.com/search?p="));
+
+	searchEngineComboBox.getItems().addAll("Google", "DuckDuckGo", "Bing", "Yahoo");
+	searchEngineComboBox.getSelectionModel().select(1);
+
 	//System.out.println(history.getCurrentIndex() + "," + historyEntryList.size())
+
+	//Load the website
+	loadWebSite(firstWebSite);
+    }
+
+    /**
+     * Return the Search Url for the Search Provider For example for `Google` returns `https://www.google.com/search?q=`
+     * 
+     * @param searchProvider
+     * @return The Search Engine Url
+     */
+    public String getSearchEngineSearchUrl(String searchProvider) {
+	//Find
+	switch (searchProvider.toLowerCase()) {
+	case "bing":
+	    return "http://www.bing.com/search?q=";
+	case "duckduckgo":
+	    return "https://duckduckgo.com/?q=";
+	case "yahoo":
+	    return "https://search.yahoo.com/search?p=";
+	default: //then google
+	    return "https://www.google.com/search?q=";
+	}
+    }
+
+    /**
+     * Return the Search Url for the Search Provider For example for `Google` returns `https://www.google.com/search?q=`
+     * 
+     * @param searchProvider
+     * @return The Search Engine Url
+     */
+    public String getSearchEngineHomeUrl(String searchProvider) {
+	//Find
+	switch (searchProvider.toLowerCase()) {
+	case "bing":
+	    return "http://www.bing.com";
+	case "duckduckgo":
+	    return "https://duckduckgo.com";
+	case "yahoo":
+	    return "https://search.yahoo.com";
+	default: //then google
+	    return "https://www.google.com";
+	}
+    }
+
+    /**
+     * Loads the given website , either directly if the url is a valid WebSite Url or using a SearchEngine like Google
+     * 
+     * @param webSite
+     */
+    public void loadWebSite(String webSite) {
+	//Search if it is a valid WebSite url
+	String load = !new UrlValidator().isValid(webSite) ? null : webSite;
+
+	//Load
+	try {
+	    webEngine.load(load != null ? load
+		    : getSearchEngineSearchUrl(searchEngineComboBox.getSelectionModel().getSelectedItem())
+			    + URLEncoder.encode(searchBar.getText(), "UTF-8"));
+	} catch (UnsupportedEncodingException ex) {
+	    ex.printStackTrace();
+	}
+
+    }
+
+    /**
+     * Loads the default website
+     */
+    public void loadDefaultWebSite() {
+	webEngine.load(getSearchEngineHomeUrl(searchEngineComboBox.getSelectionModel().getSelectedItem()));
     }
 
     /**

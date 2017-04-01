@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="334.0" prefWidth="475.0" style="-fx-background-color: rgb(255,255,255,0.7);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="334.0" prefWidth="475.0" style="-fx-background-color: rgb(0,0,0,0.7);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label fx:id="userNameLabel" style="-fx-font-size: 18; -fx-font-weight: bold;" text="DAVINCI" BorderPane.alignment="CENTER" />
+      <Label fx:id="userNameLabel" style="-fx-font-size: 18; -fx-font-weight: bold;" text="DAVINCI" textFill="#ff5454" BorderPane.alignment="CENTER" />
    </top>
-   <left>
-      <JFXButton fx:id="goBack" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="307.0" prefWidth="87.0" style="-fx-background-color: BLACK; -fx-text-fill: white; -fx-font-weight: bold;" text="&lt;- BACK" BorderPane.alignment="CENTER">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-   </left>
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="userImageView" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="userImageView" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/user.jpg" />
+                  <Image url="@../image/goXR3PlusStudio.png" />
                </image>
             </ImageView>
          </children>

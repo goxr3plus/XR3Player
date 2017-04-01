@@ -25,8 +25,8 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff292969" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
-      <Rectangle fx:id="rightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff000069" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_RIGHT" />
+      <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="#0031ff69" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
+      <Rectangle fx:id="rightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#0031ff69" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_RIGHT" />
       <VBox alignment="CENTER" spacing="10.0" StackPane.alignment="CENTER">
          <children>
             <ProgressBar fx:id="progressBar" prefHeight="12.0" prefWidth="354.0" />

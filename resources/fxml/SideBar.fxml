@@ -145,62 +145,6 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: orange; -fx-font-weight: bold;" text="Mode" />
-                        <JFXButton fx:id="goMainMode" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 15 0 0 15; -fx-border-color: transparent firebrick transparent transparent; -fx-border-width: 0 4 0 0;" styleClass="applicationMode" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Library-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Application Home Screen" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="goUserMode" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 15 0 0 15; -fx-border-width: 0 4 0 0;" styleClass="applicationMode" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/User%20Location-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="User Settings" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="theMovieDBMode" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 15 0 0 15; -fx-border-width: 0 4 0 0;" styleClass="applicationMode" text=" ">
-                           <graphic>
-                              <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/theMovieDB.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="User Settings" />
-                           </tooltip>
-                        </JFXButton>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Settings" />
                         <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>

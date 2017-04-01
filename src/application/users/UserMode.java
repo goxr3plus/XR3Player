@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXButton;
-
-import application.Main;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +26,6 @@ public class UserMode extends BorderPane {
 
     @FXML
     private Label userNameLabel;
-
-    @FXML
-    private JFXButton goBack;
 
     // ----------------------
 
@@ -63,8 +57,8 @@ public class UserMode extends BorderPane {
     @FXML
     private void initialize() {
 
-	//goBack
-	goBack.setOnAction(a -> Main.sideBar.goMainMode());
+//	//goBack
+//	goBack.setOnAction(a -> Main.sideBar.goMainMode());
     }
 
     /**

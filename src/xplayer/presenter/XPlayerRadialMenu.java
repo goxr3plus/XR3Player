@@ -98,10 +98,10 @@ public class XPlayerRadialMenu {
 		xPlayerController.openAudioInExplorer();
 	});
 
-	radialMenu.setOnMenuOpenStarted(menuEvent -> System.out.println("Menu starts to open"));
-	radialMenu.setOnMenuOpenFinished(menuEvent -> System.out.println("Menu finished to open"));
-	radialMenu.setOnMenuCloseStarted(menuEvent -> System.out.println("Menu starts to close"));
-	radialMenu.setOnMenuCloseFinished(menuEvent -> System.out.println("Menu finished to close"));
+//	radialMenu.setOnMenuOpenStarted(menuEvent -> System.out.println("Menu starts to open"));
+//	radialMenu.setOnMenuOpenFinished(menuEvent -> System.out.println("Menu finished to open"));
+//	radialMenu.setOnMenuCloseStarted(menuEvent -> System.out.println("Menu starts to close"));
+//	radialMenu.setOnMenuCloseFinished(menuEvent -> System.out.println("Menu finished to close"));
 	radialMenu.setOnItemSelected(selectionEvent -> {
 	    if (selectionEvent.item == mute)
 		xPlayerController.xPlayer.setMute(true);

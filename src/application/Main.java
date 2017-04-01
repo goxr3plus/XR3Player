@@ -22,6 +22,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.jfoenix.controls.JFXTabPane;
+
 import application.settings.window.ApplicationSettingsController;
 import application.users.LoginMode;
 import application.users.User;
@@ -29,16 +31,15 @@ import application.users.UserMode;
 import borderless.BorderlessScene;
 import browsers.WebBrowserController;
 import database.LocalDBManager;
-import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -161,7 +162,7 @@ public class Main extends Application {
     public static BorderlessScene scene;
 
     /** The stack pane root. */
-    private static final StackPane stackPaneRoot = new StackPane();
+    public static final StackPane applicationStackPane = new StackPane();
 
     /** The root. */
     public static final BorderPane root = new BorderPane();
@@ -171,12 +172,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 58;
+    public static final int currentVersion = 59;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "25/03/2017";
+    public static final String releaseDate = "01/04/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -213,7 +214,9 @@ public class Main extends Application {
     /***
      * This BorderPane has in the center the root , at the left the SideBar and on the Top the TopBar
      */
-    private static BorderPane applicationBorderPane = new BorderPane();
+    // private static BorderPane applicationBorderPane = new BorderPane();
+
+    public static JFXTabPane specialJFXTabPane = new JFXTabPane();
 
     // --------------END: The below have depencities on others------------------------
 
@@ -221,17 +224,18 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 	try {
+
 	    //new Tester()
 
 	    // logger.info("XR3Player Application Started")
 	    System.out.println("XR3Player Application Started");
 
 	    //ApplicationStackPane
-	    stackPaneRoot.getChildren().addAll(applicationBorderPane, updateScreen, loginMode);
+	    applicationStackPane.getChildren().addAll(root, updateScreen, loginMode);
 
 	    //ApplicationBorderPane	    
-	    applicationBorderPane.setStyle("-fx-background-color:black;");
-	    applicationBorderPane.setCenter(root);
+	    //applicationBorderPane.setStyle("-fx-background-color:black;")
+	    // applicationBorderPane.setCenter(root)
 
 	    //LoginMode    
 	    loginMode.setLeft(sideBar);
@@ -279,7 +283,7 @@ public class Main extends Application {
 		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	    // Scene
-	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, stackPaneRoot, 650, 500);
+	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, applicationStackPane, 650, 500);
 	    scene.setMoveControl(loginMode.xr3PlayerLabel);
 	    scene.getStylesheets()
 		    .add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
@@ -342,8 +346,8 @@ public class Main extends Application {
 	System.out.println("Hello from init");
     }
 
-    public static final FlipPanel rootFlipPane = new FlipPanel(Orientation.HORIZONTAL);
-    public static final FlipPanel mainModeFlipPane = new FlipPanel(Orientation.HORIZONTAL);
+    //public static final FlipPanel rootFlipPane = new FlipPanel(Orientation.HORIZONTAL);
+    //public static final FlipPanel mainModeFlipPane = new FlipPanel(Orientation.HORIZONTAL);
 
     /**
      * Starts the application for this specific user
@@ -381,17 +385,17 @@ public class Main extends Application {
 	    //Do the below until the database is initialized
 	    userMode.setUser(user);
 	    libraryMode.add(Main.multipleTabs, 0, 1);
-	    root.setCenter(rootFlipPane);
 	    sideBar.setVisible(true);
 	    sideBar.setManaged(true);
+	    topBar.setVisible(true);
 
-	    //flipPane
-	    mainModeFlipPane.getFront().getChildren().addAll(webBrowser);
-	    mainModeFlipPane.getBack().getChildren().addAll(djMode);
-
-	    //rootFlipPane
-	    rootFlipPane.getFront().getChildren().addAll(mainModeFlipPane);
-	    rootFlipPane.getBack().getChildren().addAll(userMode);
+	    specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
+	    specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
+	    specialJFXTabPane.getTabs().add(new Tab("tab3", userMode));
+	    specialJFXTabPane.getTabs().add(new Tab("tab4", webBrowser));
+	    specialJFXTabPane.setTabMaxWidth(0);
+	    specialJFXTabPane.setTabMaxHeight(0);
+	    root.setCenter(specialJFXTabPane);
 
 	    //---------------END:initialize everything needed---------------------------------------------
 
@@ -401,9 +405,9 @@ public class Main extends Application {
 	    libraryMode.librariesSearcher.registerListeners();
 
 	    //When Top Bar to be visible?
-	    topBar.visibleProperty()
-		    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
-	    sideBar.visibleProperty().bind(topBar.visibleProperty());
+	    //topBar.visibleProperty()
+	    //    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
+	    //sideBar.visibleProperty().bind(topBar.visibleProperty());
 
 	    //Important binding 
 	    libraryMode.multipleLibs.emptyLabel.textProperty()

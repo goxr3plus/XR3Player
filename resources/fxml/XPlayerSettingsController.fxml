@@ -15,7 +15,7 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <TabPane side="RIGHT" style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab closable="false" text="Settings">
                      <content>
@@ -57,7 +57,7 @@
                         <ScrollPane fitToHeight="true" fitToWidth="true" />
                      </content>
                   </Tab>
-                  <Tab fx:id="playListTab" closable="false" disable="true" text="PlayList">
+                  <Tab fx:id="playListTab" closable="false" disable="true" text="Coming...">
                      <content>
                         <ScrollPane />
                      </content>

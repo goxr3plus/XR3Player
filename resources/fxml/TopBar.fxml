@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="39.0" prefHeight="39.0" prefWidth="789.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0 0 15 0; -fx-border-color: red transparent transparent transparent;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="47.0" prefHeight="47.0" prefWidth="804.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0 0 15 0; -fx-border-color: red transparent transparent transparent;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
@@ -50,8 +53,52 @@
    <right>
       <HBox style="-fx-spacing: 0.5;" BorderPane.alignment="CENTER">
          <children>
-            <ToggleButton fx:id="goLibrariesMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="Simple" />
-            <ToggleButton fx:id="goDJMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" styleClass="windowMode" text="DJ" />
+            <JFXTabPane id="specialJFXTabPane" maxWidth="301.0" minWidth="100.0" prefHeight="34.0" prefWidth="301.0" side="RIGHT" tabClosingPolicy="ALL_TABS">
+               <tabs>
+                  <Tab fx:id="mainModeTab" text="Main">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Library-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Library Mode" />
+                     </tooltip>
+                  </Tab>
+                  <Tab fx:id="djModeTab" text="DJ">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/DJ-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="DJ Mode" />
+                     </tooltip>
+                  </Tab>
+                  <Tab fx:id="userModeTab" text="User">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/User%20Location-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="webModeTab" text="Web">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Domain-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
             <Button fx:id="restartButton" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="R">
                <tooltip>
                   <Tooltip text="Restart" />
