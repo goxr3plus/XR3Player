@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.controlsfx.control.Notifications;
@@ -139,14 +140,11 @@ public class LibraryMode extends GridPane {
 		    try (Statement statement = Main.dbManager.connection1.createStatement()) {
 
 			// Create the dataBase table
-			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'"
-				+ "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
-				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL,"
-				+ "HOUR        TEXT    NOT NULL)");
+			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'" + "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
+				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
 
 			// Create the Library
-			Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1,
-				libraryViewer.items.size(), null, false);
+			Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1, libraryViewer.items.size(), null, false);
 
 			// Add the library
 			currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
@@ -173,8 +171,7 @@ public class LibraryMode extends GridPane {
 		    }
 
 		} else {
-		    Notifications.create().title("Dublicate Name")
-			    .text("A Library or PlayList with this name already exists!").darkStyle().showConfirm();
+		    Notifications.create().title("Dublicate Name").text("A Library or PlayList with this name already exists!").darkStyle().showConfirm();
 		}
 	    }
 	}
@@ -204,9 +201,8 @@ public class LibraryMode extends GridPane {
     public void initPreparedStatements() {
 	// Prepared Statement
 	try {
-	    insertNewLibrary = Main.dbManager.connection1.prepareStatement(
-		    "INSERT INTO LIBRARIES (NAME,TABLENAME,STARS,DATECREATED,TIMECREATED,DESCRIPTION,SAVEMODE,POSITION,LIBRARYIMAGE,OPENED) "
-			    + "VALUES (?,?,?,?,?,?,?,?,?,?)");
+	    insertNewLibrary = Main.dbManager.connection1
+		    .prepareStatement("INSERT INTO LIBRARIES (NAME,TABLENAME,STARS,DATECREATED,TIMECREATED,DESCRIPTION,SAVEMODE,POSITION,LIBRARYIMAGE,OPENED) " + "VALUES (?,?,?,?,?,?,?,?,?,?)");
 	} catch (SQLException ex) {
 	    Main.logger.log(Level.WARNING, "", ex);
 	}
@@ -254,8 +250,7 @@ public class LibraryMode extends GridPane {
 	newLibrary.visibleProperty().bind(Bindings.size(libraryViewer.items).isEqualTo(0));
 
 	// selectionModeToggle
-	selectionModeToggle.selectedProperty()
-		.addListener((observable, oldValue, newValue) -> libraryViewer.goOnSelectionMode(newValue));
+	selectionModeToggle.selectedProperty().addListener((observable, oldValue, newValue) -> libraryViewer.goOnSelectionMode(newValue));
 
 	// searchLibrary
 	topGrid.add(librariesSearcher, 1, 0);
@@ -267,8 +262,7 @@ public class LibraryMode extends GridPane {
 	next.setOnAction(a -> libraryViewer.next());
 
 	// StackPane
-	librariesStackView.getChildren().addAll(libraryViewer, librariesSearcher.region,
-		librariesSearcher.searchProgress);
+	librariesStackView.getChildren().addAll(libraryViewer, librariesSearcher.region, librariesSearcher.searchProgress);
 	libraryViewer.toBack();
 
 	// XPlayer - 0
@@ -563,12 +557,17 @@ public class LibraryMode extends GridPane {
 	/**
 	 * Add multiple libraries at once.
 	 *
-	 * @param libraries
-	 *            the libraries
+	 * @param ls
+	 *            List full of Libraries
 	 */
-	public void addMultipleLibraries(Library[] libraries) {
-	    for (int i = 0; i < libraries.length; i++)
-		addLibrary(libraries[i], false);
+	public void addMultipleLibraries(List<Library> ls) {
+
+	    //Check it first
+	    if (ls == null || ls.isEmpty())
+		return;
+
+	    //Add all them
+	    ls.forEach(l -> addLibrary(l, false));
 
 	    // update
 	    update();

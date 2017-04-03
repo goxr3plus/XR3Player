@@ -1,7 +1,7 @@
 /**
  * 
  */
-package snapshot;
+package xr3capture;
 
 import java.util.Random;
 
@@ -17,7 +17,7 @@ import javafx.stage.Screen;
  * @author GOXR3PLUS
  *
  */
-public class SnapshotWindowData {
+public class CaptureWindowModel {
 	
 	/** The random. */
 	Random random = new Random();

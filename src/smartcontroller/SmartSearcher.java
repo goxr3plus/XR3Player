@@ -36,9 +36,10 @@ import javafx.scene.layout.VBox;
 import media.Audio;
 import media.Media;
 import tools.InfoTool;
-import xplayer.presenter.AudioType;
 
 /**
+ * WARNING! I WAS DRUNK WHEN WRITING THIS CLASS ;) , REALLY! FUCKED UP XOAXOAOXOAO
+ * 
  * This class is used as a search Box for SmartController.
  *
  * @author GOXR3PLUS
@@ -90,8 +91,7 @@ public class SmartSearcher extends HBox {
 		//Save the Settings before the first search
 		if (saveSettingBeforeSearch) {
 		    service.pageBeforeSearch = controller.currentPage.get();
-		    ScrollBar verticalBar = (ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical");
-		    service.scrollValueBeforeSearch = verticalBar.getValue();
+		    service.scrollValueBeforeSearch = ((ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical")).getValue();
 
 		    saveSettingBeforeSearch = false;
 		}
@@ -223,19 +223,16 @@ public class SmartSearcher extends HBox {
 		    System.out.println("Searching for word:[" + word + "]");
 
 		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
-			    .executeQuery("SELECT* FROM '" + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%"
-				    + word + "%'")) {
+			    .executeQuery("SELECT* FROM '" + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.maximumPerPage)) {
 
 			//Fetch the items from the database
 			List<Media> array = new ArrayList<>();
 			for (Audio song = null; resultSet.next();) {
-			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"),
-				    resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
-				    resultSet.getString("HOUR"), controller.genre);
+			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"), resultSet.getString("HOUR"),
+				    controller.genre);
 			    array.add(song);
-			    ++counter;
-			    if (counter >= controller.maximumPerPage)
-				break;
+
+			    updateProgress(++counter, controller.maximumPerPage);
 			}
 
 			//Add the the items to the observable list
@@ -319,8 +316,7 @@ public class SmartSearcher extends HBox {
 
 	    // PopOver
 	    popOver.setContentNode(this);
-	    popOver.getScene().getStylesheets()
-		    .add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	    popOver.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 	    popOver.setDetachable(false);
 	    popOver.setAutoHide(true);
 	    popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
@@ -359,8 +355,7 @@ public class SmartSearcher extends HBox {
 	    // Find the correct arrow location
 	    double width = popOver.getWidth();
 	    double height = popOver.getHeight();
-	    Bounds bounds = controller.searchService.searchField
-		    .localToScreen(controller.searchService.searchField.getBoundsInLocal());
+	    Bounds bounds = controller.searchService.searchField.localToScreen(controller.searchService.searchField.getBoundsInLocal());
 	    boolean fitOnTop = bounds.getMinY() - height > 0; // top?
 	    boolean fitOnLeft = bounds.getMinX() - width > 0; // left?
 	    boolean fitOnRight = bounds.getMaxX() + width < InfoTool.getScreenWidth();// right?

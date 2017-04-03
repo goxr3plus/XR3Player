@@ -67,7 +67,7 @@ public class KeyBindingsController extends BorderPane {
 		//-------------SNAPSHOT WINDOW
 		if (keyCode == NativeKeyEvent.ALT_L_MASK || keyCode == NativeKeyEvent.ALT_R_MASK
 			|| keyCode == NativeKeyEvent.ALT_MASK || keyCode == NativeKeyEvent.VC_ALT) {
-		    Main.snapShotWindow.prepareForCapture();
+		  //  Main.snapShotWindow.prepareForCapture();
 		}
 	    }
 
@@ -114,7 +114,7 @@ public class KeyBindingsController extends BorderPane {
 		    //-----------SNAPSHOT WINDOW
 		    else if (keyCode == NativeKeyEvent.ALT_L_MASK || keyCode == NativeKeyEvent.ALT_R_MASK
 			    || keyCode == NativeKeyEvent.ALT_MASK || keyCode == NativeKeyEvent.VC_ALT) {
-			Main.snapShotWindow.hideWindow();
+			//Main.snapShotWindow.hideWindow();
 		    }
 
 		});

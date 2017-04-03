@@ -82,7 +82,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Search" wrapText="true" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
                         <JFXButton fx:id="applicationSearch" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" disable="true" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
@@ -101,16 +101,11 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: rgb(66,255,154); -fx-font-weight: bold;" text="Update" wrapText="true" />
-                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationConverter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Downloading%20Updates-32.png" />
+                                    <Image url="@../image/youtubeToAudio.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -118,57 +113,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <tooltip>
-                              <Tooltip text="Update" />
+                              <Tooltip text="Convert YouTube,FB,Vimeo  etc... links to MP3, MP4, AVI etc.... " />
                            </tooltip>
                            <VBox.margin>
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 12; -fx-background-color: black; -fx-background-radius: 0;">
-                           <items>
-                              <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="App Info" />
-                              <MenuItem fx:id="help" mnemonicParsing="false" text="App Manual" />
-                              <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Donate :)" />
-                           </items>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Help-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </MenuButton>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Settings" />
-                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Settings-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Application Settings" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
                         <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
@@ -285,6 +235,64 @@
                               <VBox alignment="CENTER" spacing="20.0" />
                            </children>
                         </StackPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: rgb(66,255,154); -fx-font-weight: bold;" text="Settings" wrapText="true" />
+                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Downloading%20Updates-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Update" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <MenuButton alignment="CENTER" contentDisplay="CENTER" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 12; -fx-background-color: black; -fx-background-radius: 0;">
+                           <items>
+                              <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="Application Information" />
+                              <MenuItem fx:id="help" mnemonicParsing="false" text="Application Manual" />
+                              <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Offer me a beer :) " />
+                           </items>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Help-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </MenuButton>
+                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Settings-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Application Settings" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
                   </VBox>
                </children>

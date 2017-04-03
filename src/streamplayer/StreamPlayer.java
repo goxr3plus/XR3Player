@@ -489,9 +489,8 @@ public class StreamPlayer implements Callable<Void> {
 	    audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
 	    DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(),
 		    AudioSystem.NOT_SPECIFIED);
-	    if (!AudioSystem.isLineSupported(lineInfo)) {
+	    if (!AudioSystem.isLineSupported(lineInfo))
 		throw new StreamPlayerException(PlayerException.LINE_NOT_SUPPORTED);
-	    }
 
 	    //----------About the mixer
 	    if (mixerName == null) {

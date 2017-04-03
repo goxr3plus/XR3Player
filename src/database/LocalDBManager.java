@@ -12,6 +12,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -24,14 +26,10 @@ import org.json.simple.Jsoner;
 
 import application.Main;
 import javafx.animation.PauseTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.util.Duration;
 import librarysystema.Library;
@@ -86,8 +84,7 @@ public class LocalDBManager {
 	} catch (SQLException ex) {
 	    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
 	} finally {
-	    Platform.runLater(
-		    Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(150))::show);
+	    Platform.runLater(Notifications.create().text("Successfully saved changes.").hideAfter(Duration.millis(150))::show);
 	}
 
     };
@@ -164,18 +161,15 @@ public class LocalDBManager {
 		userFolder.mkdir();
 
 	    //--images folder
-	    imagesFolderRelativePath = InfoTool.DATABASE_FOLDER_NAME_WITH_SEPARATOR + userName + File.separator
-		    + "Images";
-	    imagesFolderAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
-		    + imagesFolderRelativePath;
+	    imagesFolderRelativePath = InfoTool.DATABASE_FOLDER_NAME_WITH_SEPARATOR + userName + File.separator + "Images";
+	    imagesFolderAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR + imagesFolderRelativePath;
 	    //--
 	    File imagesFolder = new File(imagesFolderAbsolutePath);
 	    if (!imagesFolder.exists())
 		imagesFolder.mkdir();
 
 	    // database file(.db)
-	    dbFileAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator
-		    + "dbFile.db";
+	    dbFileAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "dbFile.db";
 	    boolean data1Exist = new File(dbFileAbsolutePath).exists();
 
 	    // connection1
@@ -244,8 +238,7 @@ public class LocalDBManager {
 	// SQLite table names are case insensitive, but comparison is case
 	// sensitive by default. To make this work properly in all cases you
 	// need to add COLLATE NOCASE
-	try (ResultSet r = Main.dbManager.connection1.createStatement().executeQuery(
-		"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
+	try (ResultSet r = Main.dbManager.connection1.createStatement().executeQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
 	    int total = r.getInt(1);
 	    return total == 0 ? false : true;
 	} catch (SQLException ex) {
@@ -265,15 +258,12 @@ public class LocalDBManager {
 	try (Statement statement = connection1.createStatement()) {
 
 	    // ----------Libraries Table ----------------//
-	    statement.executeUpdate("CREATE TABLE LIBRARIES(NAME          TEXT    PRIMARY KEY   NOT NULL,"
-		    + "TABLENAME TEXT NOT NULL," + "STARS         DOUBLE     NOT NULL,"
-		    + "DATECREATED          TEXT   	NOT NULL," + "TIMECREATED          TEXT    NOT NULL,"
-		    + "DESCRIPTION   TEXT    NOT NULL," + "SAVEMODE      INT     NOT NULL,"
+	    statement.executeUpdate("CREATE TABLE LIBRARIES(NAME          TEXT    PRIMARY KEY   NOT NULL," + "TABLENAME TEXT NOT NULL," + "STARS         DOUBLE     NOT NULL,"
+		    + "DATECREATED          TEXT   	NOT NULL," + "TIMECREATED          TEXT    NOT NULL," + "DESCRIPTION   TEXT    NOT NULL," + "SAVEMODE      INT     NOT NULL,"
 		    + "POSITION      INT     NOT NULL," + "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
 
 	    // -----------Radio Stations Table ------------//
-	    statement.executeUpdate("CREATE TABLE '" + InfoTool.RADIO_STATIONS_DATABASE_TABLE_NAME
-		    + "'(NAME TEXT PRIMARY KEY NOT NULL," + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL,"
+	    statement.executeUpdate("CREATE TABLE '" + InfoTool.RADIO_STATIONS_DATABASE_TABLE_NAME + "'(NAME TEXT PRIMARY KEY NOT NULL," + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL,"
 		    + "DESCRIPTION TEXT," + "STARS DOUBLE NOT NULL)");
 
 	    // ----------XPlayers PlayLists Tables ----------//
@@ -297,8 +287,7 @@ public class LocalDBManager {
      *             the SQL exception
      */
     private void createXPlayListTable(Statement statement, int key) throws SQLException {
-	statement.executeUpdate("CREATE TABLE XPPL" + key + "(PATH       TEXT    PRIMARY KEY   NOT NULL ,"
-		+ "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL,"
+	statement.executeUpdate("CREATE TABLE XPPL" + key + "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL,"
 		+ "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
     }
 
@@ -353,9 +342,7 @@ public class LocalDBManager {
 	    // ---------------------if failed
 	    setOnFailed(fail -> {
 		Main.updateScreen.progressBar.progressProperty().unbind();
-		ActionTool.showNotification("Fatal Error!",
-			"DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500),
-			NotificationType.ERROR);
+		ActionTool.showNotification("Fatal Error!", "DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500), NotificationType.ERROR);
 		System.exit(0);
 	    });
 	}
@@ -372,8 +359,7 @@ public class LocalDBManager {
 
 		    // -------------------------- Load all the libraries
 		    try (ResultSet resultSet = connection1.createStatement().executeQuery("SELECT* FROM LIBRARIES;");
-			    ResultSet dbCounter = connection1.createStatement()
-				    .executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+			    ResultSet dbCounter = connection1.createStatement().executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
 
 			total += dbCounter.getInt(1);
 			Main.logger.info("Loading Libraries....");
@@ -382,18 +368,20 @@ public class LocalDBManager {
 			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Libraries..."));
 			updateProgress(1, 2);
 
+			//Kepp a List of all Libraries
+			final List<Library> libraries = new ArrayList<>(total);
+
 			// Load all the libraries
 			while (resultSet.next()) {
-			    Library library = new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"),
-				    resultSet.getDouble("STARS"), resultSet.getString("DATECREATED"),
-				    resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"),
-				    resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"),
-				    resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED"));
-
-			    Platform.runLater(() -> Main.libraryMode.libraryViewer.addLibrary(library, false));
+			    libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"), resultSet.getString("DATECREATED"),
+				    resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"),
+				    resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
 
 			    updateProgress(resultSet.getRow() - 1, total);
 			}
+
+			//Add all the Libraries to the Library Viewer
+			Platform.runLater(() -> Main.libraryMode.libraryViewer.addMultipleLibraries(libraries));
 
 			//Load the Opened Libraries
 			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Opened Libraries..."));
@@ -426,8 +414,7 @@ public class LocalDBManager {
      */
     public boolean loadOpenedLibraries() {
 
-	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator
-		+ "settings.json";
+	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "settings.json";
 
 	//Check if the file exists
 	if (!new File(jsonFilePath).exists())
@@ -435,7 +422,7 @@ public class LocalDBManager {
 
 	//Read the JSON File
 	try (FileReader fileReader = new FileReader(jsonFilePath)) {
-	    
+
 	    //JSON Array [ROOT]
 	    JsonObject json = (JsonObject) Jsoner.deserialize(fileReader);
 
@@ -446,58 +433,53 @@ public class LocalDBManager {
 	    openedLibraries.forEach(libraryObject -> Platform.runLater(() ->
 
 	    //Get the Library and Open it!
-	    Main.libraryMode.getLibraryWithName(((JsonObject) libraryObject).get("name").toString())
-		    .libraryOpenClose(true, true)
+	    Main.libraryMode.getLibraryWithName(((JsonObject) libraryObject).get("name").toString()).libraryOpenClose(true, true)
 
 	    //Print its name
 	    //System.out.println(((JsonObject) libraryObject).get("name"))
 	    ));
 
 	    //Last selected library Array
-	    JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem"))
-		    .get("lastSelectedLibrary");
+	    JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem")).get("lastSelectedLibrary");
 
 	    //Add the Listener to multipleLibs
 	    Platform.runLater(() -> {
-		Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty()
-			.addListener((observable, oldTab, newTab) -> {
+		Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
 
-			    // Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
-			    if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty()
-				    && ((SmartController) newTab.getContent()).isFree(false)
-				    && ((SmartController) newTab.getContent()).itemsObservableList.isEmpty()) {
+		    // Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
+		    if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ((SmartController) newTab.getContent()).isFree(false)
+			    && ((SmartController) newTab.getContent()).itemsObservableList.isEmpty()) {
 
-				((SmartController) newTab.getContent()).loadService.startService(false, true);
+			((SmartController) newTab.getContent()).loadService.startService(false, true);
 
-				Main.dbManager.updateLibrariesInformation(
-					Main.libraryMode.multipleLibs.getTabPane().getTabs(), false);
+			Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabPane().getTabs(), false);
 
-			    }
+		    }
 
-			    //			    //Do an animation
-			    //			    if (oldTab != null && newTab != null) {
-			    //				Node oldContent = oldTab.getContent(); //tabContent.get(oldTab)
-			    //				Node newContent = newTab.getContent(); //tabContent.get(newTab)
-			    //
-			    //				newTab.setContent(oldContent);
-			    //				ScaleTransition fadeOut = new ScaleTransition(Duration.millis(50), oldContent);
-			    //				fadeOut.setFromX(1);
-			    //				fadeOut.setFromY(1);
-			    //				fadeOut.setToX(0);
-			    //				fadeOut.setToY(0);
-			    //
-			    //				ScaleTransition fadeIn = new ScaleTransition(Duration.millis(50), newContent);
-			    //				fadeIn.setFromX(0);
-			    //				fadeIn.setFromY(0);
-			    //				fadeIn.setToX(1);
-			    //				fadeIn.setToY(1);
-			    //
-			    //				fadeOut.setOnFinished(event -> newTab.setContent(newContent));
-			    //
-			    //				SequentialTransition crossFade = new SequentialTransition(fadeOut, fadeIn);
-			    //				crossFade.play();
-			    //			    }
-			});
+		    //			    //Do an animation
+		    //			    if (oldTab != null && newTab != null) {
+		    //				Node oldContent = oldTab.getContent(); //tabContent.get(oldTab)
+		    //				Node newContent = newTab.getContent(); //tabContent.get(newTab)
+		    //
+		    //				newTab.setContent(oldContent);
+		    //				ScaleTransition fadeOut = new ScaleTransition(Duration.millis(50), oldContent);
+		    //				fadeOut.setFromX(1);
+		    //				fadeOut.setFromY(1);
+		    //				fadeOut.setToX(0);
+		    //				fadeOut.setToY(0);
+		    //
+		    //				ScaleTransition fadeIn = new ScaleTransition(Duration.millis(50), newContent);
+		    //				fadeIn.setFromX(0);
+		    //				fadeIn.setFromY(0);
+		    //				fadeIn.setToX(1);
+		    //				fadeIn.setToY(1);
+		    //
+		    //				fadeOut.setOnFinished(event -> newTab.setContent(newContent));
+		    //
+		    //				SequentialTransition crossFade = new SequentialTransition(fadeOut, fadeIn);
+		    //				crossFade.play();
+		    //			    }
+		});
 	    });
 
 	    //If not empty...
@@ -505,12 +487,10 @@ public class LocalDBManager {
 		Platform.runLater(() -> {
 
 		    //Select the correct library inside the TabPane
-		    Main.libraryMode.multipleLibs.getTabPane().getSelectionModel()
-			    .select(Main.libraryMode.multipleLibs.getTab(lastSelectedLibrary.get("name").toString()));
+		    Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().select(Main.libraryMode.multipleLibs.getTab(lastSelectedLibrary.get("name").toString()));
 
 		    //This will change in future update when user can change the default position of Libraries
-		    Main.libraryMode.libraryViewer
-			    .setCenterIndex(Main.libraryMode.multipleLibs.getSelectedLibrary().getPosition());
+		    Main.libraryMode.libraryViewer.setCenterIndex(Main.libraryMode.multipleLibs.getSelectedLibrary().getPosition());
 
 		    //System.out.println("Entered !lastSelectedLibrary.isEmpty()")
 		});
@@ -519,10 +499,8 @@ public class LocalDBManager {
 	    //Do an Update on the selected Library SmartController
 	    Platform.runLater(() -> {
 		//Check if empty and if not update the selected library
-		if (!Main.libraryMode.multipleLibs.getTabs().isEmpty()
-			&& Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().isFree(false))
-		    Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().loadService
-			    .startService(false, true);
+		if (!Main.libraryMode.multipleLibs.getTabs().isEmpty() && Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().isFree(false))
+		    Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().loadService.startService(false, true);
 	    });
 
 	} catch (IOException | DeserializationException e) {
@@ -543,8 +521,7 @@ public class LocalDBManager {
      * @return True if succedeed or False if not
      */
     public boolean updateLibrariesInformation(ObservableList<Tab> observableList, boolean updateOpenedLibraries) {
-	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator
-		+ "settings.json";
+	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "settings.json";
 
 	if (!new File(jsonFilePath).exists())
 	    return false;
@@ -558,8 +535,7 @@ public class LocalDBManager {
 		JsonObject json = (JsonObject) obj;
 
 		//Last selected library Array
-		JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem"))
-			.get("lastSelectedLibrary");
+		JsonObject lastSelectedLibrary = (JsonObject) ((JsonObject) json.get("librariesSystem")).get("lastSelectedLibrary");
 
 		if (observableList.isEmpty())
 		    lastSelectedLibrary.clear();
@@ -573,8 +549,7 @@ public class LocalDBManager {
 		if (updateOpenedLibraries) {
 
 		    //Opened Libraries Array
-		    JsonArray openedLibraries = (JsonArray) ((JsonObject) json.get("librariesSystem"))
-			    .get("openedLibraries");
+		    JsonArray openedLibraries = (JsonArray) ((JsonObject) json.get("librariesSystem")).get("openedLibraries");
 		    openedLibraries.clear();
 
 		    //Add the Libraries to the Libraries Array
@@ -606,8 +581,7 @@ public class LocalDBManager {
 		//  logger.severe("SettingsWindowController - exception: " + e); //$NON-NLS-1$
 		// return false
 	    } finally {
-		Platform.runLater(
-			Notifications.create().text("JSON File Updated...").hideAfter(Duration.millis(100))::show);
+		Platform.runLater(Notifications.create().text("JSON File Updated...").hideAfter(Duration.millis(100))::show);
 	    }
 	});
 
@@ -621,8 +595,7 @@ public class LocalDBManager {
      * @return True if succedeed or False if not
      */
     public boolean recreateJSonDataBase() {
-	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator
-		+ "settings.json";
+	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "settings.json";
 
 	//File already exists?
 	if (new File(jsonFilePath).exists())

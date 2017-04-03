@@ -53,7 +53,6 @@ import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
 import smartcontroller.PlayedMediaList;
 import smartcontroller.SmartSearcher.AdvancedSearch;
-import snapshot.SnapshotWindowController;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
@@ -64,6 +63,7 @@ import windows.RenameWindow;
 import windows.SpecialChooser;
 import windows.StarWindow;
 import xplayer.presenter.XPlayersList;
+import xr3capture.CaptureWindow;
 
 /**
  * The Main class from which the application is starting.
@@ -92,7 +92,6 @@ public class Main extends Application {
     /**
      * The SnapShot Window
      */
-    public static final SnapshotWindowController snapShotWindow = new SnapshotWindowController();
 
     /** The star window. */
     public static final StarWindow starWindow = new StarWindow();
@@ -113,6 +112,8 @@ public class Main extends Application {
      * This Window contains the settings for the whole application
      */
     public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
+
+    public static CaptureWindow captureWindow = new CaptureWindow();
 
     //
 
@@ -172,12 +173,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 59;
+    public static final int currentVersion = 60;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "01/04/2017";
+    public static final String releaseDate = "03/04/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -280,13 +281,12 @@ public class Main extends Application {
 
 	    // Root
 	    root.setStyle(
-		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/libraryModeBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	    // Scene
 	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, applicationStackPane, 650, 500);
 	    scene.setMoveControl(loginMode.xr3PlayerLabel);
-	    scene.getStylesheets()
-		    .add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	    scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 
 	    // Scene and Show
 	    window.setScene(scene);
@@ -311,11 +311,9 @@ public class Main extends Application {
 	    } else {
 		//Create the List with the Available Users
 		AtomicInteger counter = new AtomicInteger();
-		loginMode.userViewer.addMultipleUsers(Files.walk(Paths.get(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN), 1)
-			.filter(path -> path.toFile().isDirectory()
-				&& !path.toString().equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
-			.map(path -> new User(path.getFileName().toString(), counter.getAndAdd(1)))
-			.collect(Collectors.toList()));
+		loginMode.userViewer.addMultipleUsers(
+			Files.walk(Paths.get(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN), 1).filter(path -> path.toFile().isDirectory() && !path.toString().equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
+				.map(path -> new User(path.getFileName().toString(), counter.getAndAdd(1))).collect(Collectors.toList()));
 
 		//avoid error
 		if (!loginMode.userViewer.getItems().isEmpty())
@@ -335,8 +333,7 @@ public class Main extends Application {
 
 	} catch (Exception ex) {
 	    logger.log(Level.SEVERE, "Application has serious problem and can't start", ex);
-	    ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(",
-		    Duration.millis(10000), NotificationType.ERROR);
+	    ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(", Duration.millis(10000), NotificationType.ERROR);
 	}
 
     }
@@ -411,9 +408,7 @@ public class Main extends Application {
 
 	    //Important binding 
 	    libraryMode.multipleLibs.emptyLabel.textProperty()
-		    .bind(Bindings.when(Main.libraryMode.libraryViewer.list.emptyProperty())
-			    .then("Click here to create a library...")
-			    .otherwise("Click here to open the first available library..."));
+		    .bind(Bindings.when(Main.libraryMode.libraryViewer.list.emptyProperty()).then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 
 	    //Load the DataBase - After the DBManager has been initialized of course ;)
 	    try {
@@ -451,11 +446,8 @@ public class Main extends Application {
 	//String build = javaVersionElements[4]
 
 	if (Integer.parseInt(major) < 8 || (Integer.parseInt(major) < 8 && Integer.parseInt(update) < 111))
-	    ActionTool.showNotification("Java Version Problem",
-		    "XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:"
-			    + System.getProperty("java.version")
-			    + "\nThe application may crash or not work at all!\nPlease Update your Java Version :)",
-		    Duration.seconds(40), NotificationType.ERROR);
+	    ActionTool.showNotification("Java Version Problem", "XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:" + System.getProperty("java.version")
+		    + "\nThe application may crash or not work at all!\nPlease Update your Java Version :)", Duration.seconds(40), NotificationType.ERROR);
     }
 
     /**
@@ -482,11 +474,8 @@ public class Main extends Application {
 		    updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
 		    updateScreen.setVisible(true);
 
-		    vService.start(
-			    new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator
-				    + "dbFile.db"),
-			    new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator
-				    + "dbFile.db-journal"));
+		    vService.start(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db"),
+			    new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db-journal"));
 
 		    // Go
 		    dbManager.commitAndVacuum();
@@ -508,8 +497,7 @@ public class Main extends Application {
 	alert.setTitle("Terminate the application?");
 
 	alert.setHeaderText("Vacuum is clearing junks from database\n(In future updates it will be automatical)");
-	alert.setContentText(
-		"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n");
+	alert.setContentText("Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n");
 	ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
 	ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 	ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -548,8 +536,7 @@ public class Main extends Application {
 	    String applicationPath = new File(path + "XR3Player.jar").getAbsolutePath();
 
 	    Platform.runLater(Notifications.create().title("Processing")
-		    .text("Restarting XR3Player....\n Current directory path is:[ " + applicationPath
-			    + " ] \n If this takes more than 20 seconds either the computer is slow or it has failed....")
+		    .text("Restarting XR3Player....\n Current directory path is:[ " + applicationPath + " ] \n If this takes more than 20 seconds either the computer is slow or it has failed....")
 		    .hideAfter(Duration.seconds(25))::show);
 
 	    try {
@@ -567,8 +554,7 @@ public class Main extends Application {
 
 		    // Show failed message
 		    Platform.runLater(Notifications.create().title("Failed to restart!")
-			    .text("Failed to restart XR3Player!\nBuilder Directory:" + applicationPath
-				    + "\nTrying to start:" + path + "XR3Player.jar\nTry to do it manually...")
+			    .text("Failed to restart XR3Player!\nBuilder Directory:" + applicationPath + "\nTrying to start:" + path + "XR3Player.jar\nTry to do it manually...")
 			    .hideAfter(Duration.seconds(10))::showError);
 
 		    // Ask the user
@@ -609,8 +595,7 @@ public class Main extends Application {
 
 		    // Show failed message
 		    Platform.runLater(Notifications.create().title("Error")
-			    .text("Failed to restart XR3Player!\nBuilder Directory:" + path + "\nTrying to start:"
-				    + path + "XR3ImageViewer.jar\nTry to do it manually...")
+			    .text("Failed to restart XR3Player!\nBuilder Directory:" + path + "\nTrying to start:" + path + "XR3ImageViewer.jar\nTry to do it manually...")
 			    .hideAfter(Duration.millis(2000))::showError);
 		});
 	    }
@@ -628,16 +613,13 @@ public class Main extends Application {
 	// Not already running
 	if (updaterThread == null || !updaterThread.isAlive()) {
 	    updaterThread = new Thread(() -> {
-		Platform.runLater(() -> ActionTool.showNotification("Searching for Updates",
-			"Fetching informations from server...", Duration.millis(1000), NotificationType.INFORMATION));
+		Platform.runLater(() -> ActionTool.showNotification("Searching for Updates", "Fetching informations from server...", Duration.millis(1000), NotificationType.INFORMATION));
 
 		if (InfoTool.isReachableByPing("www.google.com")) {
 
 		    try {
 
-			Document doc = Jsoup.connect(
-				"https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
-				.get();
+			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
 
 			// Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
 
@@ -653,9 +635,7 @@ public class Main extends Application {
 			    alert.setTitle("Update Window");
 			    if (Integer.valueOf(lastArticle.id()) > currentVersion) {
 				alert.setHeaderText("New Update available!!!");
-				alert.setContentText("Update ->( " + lastArticle.id()
-					+ " )<- is available!\n\t\t\t\t\tYour current version is: ->( " + currentVersion
-					+ " )<-");
+				alert.setContentText("Update ->( " + lastArticle.id() + " )<- is available!\n\t\t\t\t\tYour current version is: ->( " + currentVersion + " )<-");
 			    } else {
 				alert.setHeaderText("You are up too date :)");
 				alert.setContentText("Your current version is: ->( " + currentVersion + " )<-");
@@ -689,8 +669,8 @@ public class Main extends Application {
 				String id = element.id();
 
 				// Append the text to the textArea
-				textArea.appendText("\n\n-------------Start of Update (" + id
-					+ ")----------------------------------------------------------------------------------------------------\n");
+				textArea.appendText(
+					"\n\n-------------Start of Update (" + id + ")----------------------------------------------------------------------------------------------------\n");
 
 				// Information
 				textArea.appendText("->Information: ");
@@ -699,26 +679,22 @@ public class Main extends Application {
 
 				// Release Date
 				textArea.appendText("->Release Date: ");
-				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1,
-					style.replace("black", "green"));
+				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "green"));
 				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
 
 				// Minimum JRE
 				textArea.appendText("->Minimum Java Version: ");
-				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1,
-					style.replace("black", "orange"));
+				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("black", "orange"));
 				textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
 
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
-				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1,
-					style.replace("black", "firebrick"));
+				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "firebrick"));
 				final AtomicInteger counter = new AtomicInteger(-1);
-				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*"))
-					.forEach(el -> {
-					    if (counter.addAndGet(+1) >= 1)
-						textArea.appendText("\t" + (counter) + ")" + el + "\n");
-					});
+				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
+				    if (counter.addAndGet(+1) >= 1)
+					textArea.appendText("\t" + (counter) + ")" + el + "\n");
+				});
 
 			    });
 
@@ -745,17 +721,15 @@ public class Main extends Application {
 
 			});
 		    } catch (IOException ex) {
-			Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-				"Trying to fetch update information a problem occured", Duration.millis(2500),
-				NotificationType.WARNING));
+			Platform.runLater(
+				() -> ActionTool.showNotification("Problem Occured", "Trying to fetch update information a problem occured", Duration.millis(2500), NotificationType.WARNING));
 			logger.log(Level.WARNING, "", ex);
 		    }
 
 		} else {
 		    Platform.runLater(() -> ActionTool.showNotification("Can't Connect",
-			    "Can't connect to the update site :\n" + "1) Maybe there is not internet connection"
-				    + "\n2)GitHub is down for maintenance",
-			    Duration.millis(2500), NotificationType.ERROR));
+			    "Can't connect to the update site :\n" + "1) Maybe there is not internet connection" + "\n2)GitHub is down for maintenance", Duration.millis(2500),
+			    NotificationType.ERROR));
 		}
 
 	    }, "Application Update Thread");
@@ -773,6 +747,5 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
 	launch(args);
-
     }
 }

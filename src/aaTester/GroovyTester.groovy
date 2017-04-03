@@ -1,17 +1,17 @@
 /**
  * 
  */
-package application
+package aaTester
 
 /**
  * @author GOXR3PLUS
  *
  */
-public class Tester {
+public class GroovyTester {
 
     def i = -1
 
-    public Tester() {
+    public GroovyTester() {
 	println"Hello from Groovy!!!"
 	def list = 4 .. 1
 	//list.sort(true)

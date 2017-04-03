@@ -334,8 +334,7 @@ public class SmartController extends StackPane {
 		if (code == KeyCode.P)
 		    ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 		else if (code == KeyCode.DELETE)
-		    tableViewer.getSelectionModel().getSelectedItem().prepareDelete(key.isShiftDown(),
-			    SmartController.this);
+		    tableViewer.getSelectionModel().getSelectedItem().prepareDelete(key.isShiftDown(), SmartController.this);
 
 	    }
 
@@ -373,11 +372,11 @@ public class SmartController extends StackPane {
 
 	//------navigationHBox
 	//navigationHBox.disableProperty().bind(this.totalInDataBase.isEqualTo(0));
-	
+
 	// ------ previous
 	//previous.opacityProperty()
 	//	.bind(Bindings.when(previous.hoverProperty().or(next.hoverProperty())).then(1.0).otherwise(0.5))
-	
+
 	//previous.disableProperty().bind(next.disabledProperty())
 	previous.visibleProperty().bind(currentPage.isNotEqualTo(0));
 	previous.setOnAction(a -> goPrevious());
@@ -386,12 +385,11 @@ public class SmartController extends StackPane {
 	//next.opacityProperty()
 	//	.bind(Bindings.when(next.hoverProperty().or(previous.hoverProperty())).then(1.0).otherwise(0.5))
 	next.setVisible(false);
-	next.setOnAction(a -> goNext());	
+	next.setOnAction(a -> goNext());
 
 	//Handler
 	EventHandler<ActionEvent> handler = ac -> {
-	    if (!pageField.getText().isEmpty() && !loadService.isRunning() && !searchService.service.isRunning()
-		    && totalInDataBase.get() != 0) {
+	    if (!pageField.getText().isEmpty() && !loadService.isRunning() && !searchService.service.isRunning() && totalInDataBase.get() != 0) {
 		int lisN = Integer.parseInt(pageField.getText());
 		if (lisN <= maximumList()) {
 		    currentPage.set(lisN);
@@ -402,7 +400,7 @@ public class SmartController extends StackPane {
 		}
 	    }
 	};
-	
+
 	//-----goToPage
 	goToPage.setOnAction(handler);
 
@@ -410,7 +408,7 @@ public class SmartController extends StackPane {
 	//pageField.opacityProperty()
 	//	.bind(Bindings.when(pageField.hoverProperty().or(next.hoverProperty()).or(previous.hoverProperty()))
 	//		.then(1.0).otherwise(0.03))
-	
+
 	//pageField.disableProperty().bind(next.disabledProperty())
 	pageField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -460,8 +458,7 @@ public class SmartController extends StackPane {
 		// GO
 		int current = Integer.parseInt(item.getText());
 		if (maximumPerPage != current) {
-		    currentPage.set((maximumPerPage == 50) ? currentPage.get() / 2
-			    : currentPage.get() * 2 + (currentPage.get() % 2 == 0 ? 0 : 1));
+		    currentPage.set((maximumPerPage == 50) ? currentPage.get() / 2 : currentPage.get() * 2 + (currentPage.get() % 2 == 0 ? 0 : 1));
 		    maximumPerPage = current;
 		    loadService.startService(false, true);
 		}
@@ -521,21 +518,17 @@ public class SmartController extends StackPane {
 	try {
 	    String string = "UPDATE '" + dataBaseTableName + "'";
 
-	    preparedInsert = Main.dbManager.connection1.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName
-		    + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?,?)");
+	    preparedInsert = Main.dbManager.connection1.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?,?)");
 
 	    preparedRename = Main.dbManager.connection1.prepareStatement(string + " SET PATH=? WHERE PATH=?");
 
-	    preparedDelete = Main.dbManager.connection1
-		    .prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?");
+	    preparedDelete = Main.dbManager.connection1.prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?");
 
 	    preparedUStars = Main.dbManager.connection1.prepareStatement(string + " SET STARS=? WHERE PATH=?");
 
-	    preparedUTimesPlayed = Main.dbManager.connection1
-		    .prepareStatement(string + " SET TIMESPLAYED=? WHERE PATH=?");
+	    preparedUTimesPlayed = Main.dbManager.connection1.prepareStatement(string + " SET TIMESPLAYED=? WHERE PATH=?");
 
-	    preparedCountElementsWithString = Main.dbManager.connection1
-		    .prepareStatement("SELECT COUNT(*) FROM '" + dataBaseTableName + "' WHERE PATH=?");
+	    preparedCountElementsWithString = Main.dbManager.connection1.prepareStatement("SELECT COUNT(*) FROM '" + dataBaseTableName + "' WHERE PATH=?");
 
 	} catch (SQLException ex) {
 	    Main.logger.log(Level.WARNING, "", ex);
@@ -552,15 +545,12 @@ public class SmartController extends StackPane {
     public void removeSelected(boolean permanent) {
 	// Free? && How many items are selected?+Question
 	if (isFree(true) && tableViewer.getSelectedCount() == 1
-		? ActionTool.doDeleteQuestion(permanent,
-			tableViewer.getSelectionModel().getSelectedItem().getFileName(), tableViewer.getSelectedCount())
-		: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()),
-			tableViewer.getSelectedCount())) {
+		? ActionTool.doDeleteQuestion(permanent, tableViewer.getSelectionModel().getSelectedItem().getFileName(), tableViewer.getSelectedCount())
+		: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()), tableViewer.getSelectedCount())) {
 
 	    // Remove selected items
 	    try {
-		tableViewer.getSelectionModel().getSelectedItems().iterator()
-			.forEachRemaining(r -> r.delete(permanent, false, false, this));
+		tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent, false, false, this));
 
 		// Library?
 		if (genre == Genre.LIBRARYSONG)
@@ -590,8 +580,7 @@ public class SmartController extends StackPane {
 	    // New Thread
 	    new Thread(() -> {
 		try {
-		    Main.dbManager.connection1.createStatement()
-			    .executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
+		    Main.dbManager.connection1.createStatement().executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
 		    Main.dbManager.commit();
 		    Platform.runLater(() -> {
 			getRegion().setVisible(false);
@@ -616,17 +605,11 @@ public class SmartController extends StackPane {
      * Updates the label of the smart controller.
      */
     public void updateLabel() {
-	if (!searchService.isActive()) {
-	    titledPane.setText("[Total:<" + totalInDataBase.get() + "> CurrentPage:<" + currentPage.get()
-		    + "> MaxPage:<" + maximumList() + ">] [ Selected:" + tableViewer.getSelectedCount() + "  Showing:"
-		    + currentPage.get() * maximumPerPage + "-"
-		    + (currentPage.get() * maximumPerPage + itemsObservableList.size() + " ]"));
-
-	} else {
-	    titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] Selected:"
-		    + tableViewer.getSelectedCount());
-
-	}
+	if (searchService.isActive())
+	    titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] Selected:" + tableViewer.getSelectedCount());
+	else
+	    titledPane.setText("[Total:<" + totalInDataBase.get() + "> CurrentPage:<" + currentPage.get() + "> MaxPage:<" + maximumList() + ">] [ Selected:" + tableViewer.getSelectedCount()
+		    + "  Showing:" + maximumPerPage * currentPage.get() + "-" + (maximumPerPage * currentPage.get() + itemsObservableList.size() + " ]"));
 
 	pageField.setText(Integer.toString(currentPage.get()));
     }
@@ -696,7 +679,6 @@ public class SmartController extends StackPane {
 	return cancel;
     }
 
-    
     /**
      * Gets the next button.
      *
@@ -705,7 +687,7 @@ public class SmartController extends StackPane {
     public HBox getNavigationHBox() {
 	return navigationHBox;
     }
-    
+
     /**
      * Gets the next button.
      *
@@ -740,9 +722,7 @@ public class SmartController extends StackPane {
      *            the reason
      */
     private void showMessage(String reason) {
-	Notifications.create().title("Easy Bro")
-		.text("[" + reason + "] is working on:\n " + toString() + "\n\t retry as soon as it finish.")
-		.darkStyle().showInformation();
+	Notifications.create().title("Easy Bro").text("[" + reason + "] is working on:\n " + toString() + "\n\t retry as soon as it finish.").darkStyle().showInformation();
     }
 
     /**
@@ -768,8 +748,7 @@ public class SmartController extends StackPane {
      * Goes on the Next List.
      */
     public void goNext() {
-	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0
-		&& currentPage.get() < maximumList()) {
+	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() < maximumList()) {
 	    currentPage.set(currentPage.get() + 1);
 	    loadService.startService(false, true);
 	}
@@ -780,16 +759,11 @@ public class SmartController extends StackPane {
      */
     protected void updateList() {
 
-	// totalInDataBase==0?
-	if (totalInDataBase.get() == 0) {
-
+	if (totalInDataBase.get() != 0)
+	    next.setVisible(currentPage.isEqualTo(0).or(currentPage.lessThan(maximumList())).get() && maximumList() != 0);
+	else {
 	    next.setVisible(false);
 	    currentPage.set(0);
-
-	} else {
-
-	    next.setVisible(
-		    (currentPage.isEqualTo(0).or(currentPage.lessThan(maximumList()))).get() && maximumList() != 0);
 	}
 
 	// update the label
@@ -1076,8 +1050,7 @@ public class SmartController extends StackPane {
 
 	    //--Selection Model
 	    getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-	    getSelectionModel().getSelectedIndices()
-		    .addListener((ListChangeListener<? super Integer>) l -> updateLabel());  // Main.amazon.updateInformation((Media) newValue)
+	    getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> updateLabel());  // Main.amazon.updateInformation((Media) newValue)
 
 	    //--KeyListener
 	    setOnKeyReleased(key -> {
@@ -1089,15 +1062,14 @@ public class SmartController extends StackPane {
 		    final ClipboardContent content = new ClipboardContent();
 
 		    // PutFiles
-		    content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath()))
-			    .collect(Collectors.toList()));
+		    content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
 
 		    //Set the Content
 		    clipboard.setContent(content);
 
 		    ActionTool.showNotification("Copied to Clipboard",
-			    "Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
-			    Duration.seconds(3.5), NotificationType.INFORMATION);
+			    "Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(3.5),
+			    NotificationType.INFORMATION);
 
 		} else if ((key.isControlDown() || key.getCode() == KeyCode.COMMAND) && key.getCode() == KeyCode.V) {
 		    System.out.println("Control+V was released");
@@ -1140,10 +1112,8 @@ public class SmartController extends StackPane {
 			    row.itemProperty().get().rename(SmartController.this, row);
 
 		    }//Secondary
-		    else if (m.getButton() == MouseButton.SECONDARY
-			    && !tableViewer.getSelectionModel().getSelectedItems().isEmpty()) {
-			Main.songsContextMenu.showContextMenu(row.itemProperty().get(), SmartController.this.genre,
-				m.getScreenX(), m.getScreenY(), SmartController.this, row);
+		    else if (m.getButton() == MouseButton.SECONDARY && !tableViewer.getSelectionModel().getSelectedItems().isEmpty()) {
+			Main.songsContextMenu.showContextMenu(row.itemProperty().get(), SmartController.this.genre, m.getScreenX(), m.getScreenY(), SmartController.this, row);
 		    }
 
 		});
@@ -1182,16 +1152,14 @@ public class SmartController extends StackPane {
 		    ClipboardContent content = new ClipboardContent();
 
 		    // PutFiles
-		    content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath()))
-			    .collect(Collectors.toList()));
+		    content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
 
 		    // Single Drag and Drop ?
 		    if (content.getFiles().size() == 1)
 			getSelectionModel().getSelectedItem().setDragView(db);
 		    // Multiple Drag and Drop ?
 		    else {
-			ActionTool.paintCanvas(canvas.getGraphicsContext2D(),
-				"(" + content.getFiles().size() + ")Items", 100, 100);
+			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
 			db.setDragView(canvas.snapshot(null, image), 50, 0);
 		    }
 
@@ -1289,7 +1257,7 @@ public class SmartController extends StackPane {
 
 	    // fileType
 	    fileType.setCellValueFactory(new PropertyValueFactory<>("fileType"));
-	    
+
 	    // fileType
 	    fileSize.setCellValueFactory(new PropertyValueFactory<>("fileSize"));
 
@@ -1436,8 +1404,7 @@ public class SmartController extends StackPane {
 
 		    // total entries in database
 		    if (getTotalInDataBase() == 0) {
-			ResultSet s = Main.dbManager.connection1.createStatement()
-				.executeQuery("SELECT COUNT(*) FROM '" + dataBaseTableName + "';");
+			ResultSet s = Main.dbManager.connection1.createStatement().executeQuery("SELECT COUNT(*) FROM '" + dataBaseTableName + "';");
 			setTotalInDataBase(s.getInt(1));
 			s.close();
 		    }
@@ -1449,11 +1416,9 @@ public class SmartController extends StackPane {
 
 		    // Select the available Media Files
 		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
-			    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerPage
-				    + " OFFSET " + currentPage.get() * maximumPerPage);
+			    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerPage + " OFFSET " + currentPage.get() * maximumPerPage);
 			    ResultSet dbCounter = Main.dbManager.connection1.createStatement()
-				    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerPage
-					    + " OFFSET " + currentPage.get() * maximumPerPage);) {
+				    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + maximumPerPage + " OFFSET " + currentPage.get() * maximumPerPage);) {
 
 			// Count how many items the result returned...
 			int currentMaximumPerList = 0;
@@ -1479,9 +1444,8 @@ public class SmartController extends StackPane {
 			    // Fetch the items from the database
 			    List<Media> array = new ArrayList<>();
 			    for (Audio song = null; resultSet.next();) {
-				song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"),
-					resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
-					resultSet.getString("HOUR"), genre);
+				song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"), resultSet.getString("HOUR"),
+					genre);
 				array.add(song);
 				//Update the progress
 				updateProgress(++counter, currentMaximumPerList);
@@ -1551,14 +1515,12 @@ public class SmartController extends StackPane {
 
 	    setOnSucceeded(s -> {
 		done();
-		Notifications.create().title("Message")
-			.text(operation + " successfully done for:\n\t" + SmartController.this).show();
+		Notifications.create().title("Message").text(operation + " successfully done for:\n\t" + SmartController.this).show();
 	    });
 
 	    setOnFailed(f -> {
 		done();
-		Notifications.create().title("Message").text(operation + " failed for:\n\t" + SmartController.this)
-			.darkStyle().showError();
+		Notifications.create().title("Message").text(operation + " failed for:\n\t" + SmartController.this).darkStyle().showError();
 	    });
 
 	    setOnCancelled(c -> done());
@@ -1761,10 +1723,7 @@ public class SmartController extends StackPane {
 		job = "upload from system";
 
 		// We need only directories or media files
-		this.list = list.stream()
-			.filter(file -> file.isDirectory()
-				|| (file.isFile() && InfoTool.isAudioSupported(file.getAbsolutePath())))
-			.collect(Collectors.toList());
+		this.list = list.stream().filter(file -> file.isDirectory() || (file.isFile() && InfoTool.isAudioSupported(file.getAbsolutePath()))).collect(Collectors.toList());
 		depositWorking = true;
 		// System.out.println(this.list)
 
@@ -1954,8 +1913,7 @@ public class SmartController extends StackPane {
 		 * @param dateCreated
 		 * @param hourCreated
 		 */
-		private void insertMedia(String path, double stars, int timesPlayed, String dateCreated,
-			String hourCreated) {
+		private void insertMedia(String path, double stars, int timesPlayed, String dateCreated, String hourCreated) {
 
 		    try {
 

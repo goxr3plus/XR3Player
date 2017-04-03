@@ -1,7 +1,7 @@
 /**
  * 
  */
-package snapshot;
+package xr3capture;
 
 import java.util.Arrays;
 
@@ -16,7 +16,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
  *
  * @author GOXR3PLUS
  */
-public class SFileChooser {
+public class XR3CaptureFileChooser {
 	
 	/** The file chooser. */
 	private FileChooser fileChooser = new FileChooser();
@@ -24,7 +24,7 @@ public class SFileChooser {
 	/**
 	 * Instantiates a new s file chooser.
 	 */
-	public SFileChooser() {
+	public XR3CaptureFileChooser() {
 		fileChooser.setTitle("Save Image");
 		
 		// Extension Filter + Descriptions

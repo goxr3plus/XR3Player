@@ -38,6 +38,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import tools.ActionTool;
 import tools.InfoTool;
@@ -77,13 +78,16 @@ public class LoginMode extends BorderPane {
     private Button exitButton;
 
     @FXML
-    public Label xr3PlayerLabel;
-
-    @FXML
     private Label createdByLabel;
 
     @FXML
     private Label checkTutorialsLabel;
+
+    @FXML
+    private Label downloadsLabel;
+
+    @FXML
+    public Label xr3PlayerLabel;
 
     // --------------------------------------------
 
@@ -117,14 +121,12 @@ public class LoginMode extends BorderPane {
 		    if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + newName).mkdir())
 			userViewer.addUser(new User(newName, userViewer.items.size()), true);
 		    else
-			ActionTool.showNotification("Error", "An error occured trying to create a new user",
-				Duration.seconds(2), NotificationType.ERROR);
+			ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2), NotificationType.ERROR);
 
 		    // update the positions
 		    //updateUsersPosition()
 		} else {
-		    Notifications.create().title("Dublicate User").text("This user already exists").darkStyle()
-			    .showConfirm();
+		    Notifications.create().title("Dublicate User").text("This user already exists").darkStyle().showConfirm();
 		}
 	    }
 	}
@@ -155,9 +157,25 @@ public class LoginMode extends BorderPane {
     @FXML
     private void initialize() {
 
+	//Below is some coded i used with javafxsvg Library to Display SVG images although i changed it 
+	//to using WebView due to the cost of many external libraries
+	//	HttpURLConnection httpcon = (HttpURLConnection) new URL(
+	//		    "https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
+	//	    httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+	//	    ImageView imageView = new ImageView(new Image(httpcon.getInputStream()));
+
+	//downloadsLabel
+	((WebView) downloadsLabel.getGraphic()).getEngine().getLoadWorker().exceptionProperty().addListener(error -> {
+	    downloadsLabel.setPrefSize(0, 0);
+	    downloadsLabel.setMaxSize(0, 0);
+	    downloadsLabel.setMinSize(0, 0);
+	    ((WebView) downloadsLabel.getGraphic()).setPrefHeight(0);
+	});
+	((WebView) downloadsLabel.getGraphic()).getEngine().load("https://img.shields.io/sourceforge/dt/xr3player.svg");
+
 	//super
 	setStyle(
-		"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/loginBackground.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+		"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	// createLibrary
 	createUser.setOnAction(a -> createNewUser(createUser));
@@ -178,16 +196,13 @@ public class LoginMode extends BorderPane {
 	deleteUser.disableProperty().bind(newUser.visibleProperty());
 	deleteUser.setOnAction(a -> {
 	    //Ask
-	    if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ "
-		    + userViewer.getSelectedItem().getUserName() + " ]")) {
+	    if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + userViewer.getSelectedItem().getUserName() + " ]")) {
 
 		//Try to delete it
-		if (ActionTool.deleteFile(new File(
-			InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
+		if (ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
 		    userViewer.deleteUser(userViewer.getSelectedItem());
 		else
-		    ActionTool.showNotification("Error", "An error occured trying to delete the user",
-			    Duration.seconds(2), NotificationType.ERROR);
+		    ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
 	    }
 	});
 
@@ -206,9 +221,9 @@ public class LoginMode extends BorderPane {
 
 	//createdByLabel
 	createdByLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.WEBSITE));
-	
+
 	//checkTutorialsLabel
-	checkTutorialsLabel.setOnMouseReleased(r->ActionTool.openWebSite(InfoTool.TUTORIALS));
+	checkTutorialsLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.TUTORIALS));
     }
 
     /**
@@ -334,8 +349,7 @@ public class LoginMode extends BorderPane {
 
 	    //setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);")
 
-	    setStyle(
-		    "-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);  -fx-border-width:5;");
+	    setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);  -fx-border-width:5;");
 
 	    // ScrollBar
 	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);

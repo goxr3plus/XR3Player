@@ -150,27 +150,6 @@ public class Library extends StackPane {
     /** The name of the database image [Example : image.jpg ] */
     private String imageName;
 
-    /** * Prepared Statements *. */
-    PreparedStatement libUStars;
-
-    /** The lib U description. */
-    PreparedStatement libUDescription;
-
-    /** The lib U save mode. */
-    // PreparedStatement libUSaveMode
-
-    /** The lib U position. */
-    PreparedStatement libUPosition;
-
-    /** The lib U image. */
-    PreparedStatement libUImage;
-
-    /** The lib U rename. */
-    PreparedStatement libURename;
-
-    /** The lib U status. */
-    PreparedStatement libUStatus;
-
     /** Define a pseudo class. */
     private static final PseudoClass OPENED_PSEUDO_CLASS = PseudoClass.getPseudoClass("opened");
 
@@ -218,13 +197,16 @@ public class Library extends StackPane {
 		    if (Main.renameWindow.wasAccepted() && !libraryName.equals(newName)) {
 
 			// duplicate?
-			if (!(duplicate = Main.libraryMode.libraryViewer.items.stream().anyMatch(
-				library -> library != Library.this && library.getLibraryName().equals(newName)))) {
+			if (!(duplicate = Main.libraryMode.libraryViewer.items.stream().anyMatch(library -> library != Library.this && library.getLibraryName().equals(newName)))) {
 
-			    // Update SQL Database
-			    libURename.setString(1, newName);
-			    libURename.setString(2, oldName);
-			    libURename.executeUpdate();
+			    try (PreparedStatement libURename = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET NAME=? WHERE NAME=? ;")) {
+				// Update SQL Database
+				libURename.setString(1, newName);
+				libURename.setString(2, oldName);
+				libURename.executeUpdate();
+			    } catch (Exception ex) {
+				ex.printStackTrace();
+			    }
 
 			    // Rename library folder
 			    // new File(InfoTool.ab + oldName)
@@ -238,18 +220,14 @@ public class Library extends StackPane {
 
 			    // Rename the image of library
 			    if (imageName != null)
-				updateImagePathInDB(Main.dbManager.imagesFolderAbsolutePath + File.separator + newName
-					+ "." + InfoTool.getFileExtension(getAbsoluteImagePath()), true, false);
+				updateImagePathInDB(Main.dbManager.imagesFolderAbsolutePath + File.separator + newName + "." + InfoTool.getFileExtension(getAbsoluteImagePath()), true, false);
 
 			    //Update the JSONFile
 			    if (isLibraryOpened())
-				Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(),
-					true);
+				Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 			} else { // duplicate
 			    resetTheName();
-			    Notifications.create().title("Dublicate Name")
-				    .text("Name->" + newName + " is already used from another Library...").darkStyle()
-				    .showInformation();
+			    Notifications.create().title("Dublicate Name").text("Name->" + newName + " is already used from another Library...").darkStyle().showInformation();
 			}
 		    } else // X is pressed by user || oldName == newName
 			resetTheName();
@@ -311,8 +289,10 @@ public class Library extends StackPane {
      * @param opened
      *            the opened
      */
-    public Library(String libraryName, String dataBaseTableName, double stars, String dateCreated, String timeCreated,
-	    String description, int saveMode, int position, String imageName, boolean opened) {
+    public Library(String libraryName, String dataBaseTableName, double stars, String dateCreated, String timeCreated, String description, int saveMode, int position, String imageName,
+	    boolean opened) {
+
+	// ----------------------------------Initialize Variables-------------------------------------
 
 	// LibraryName
 	this.libraryName = libraryName;
@@ -324,28 +304,16 @@ public class Library extends StackPane {
 	setStars(stars);
 
 	// Date Created
-	if (dateCreated == null)
-	    this.dateCreated = InfoTool.getCurrentDate();
-	else
-	    this.dateCreated = dateCreated;
+	this.dateCreated = dateCreated != null ? dateCreated : InfoTool.getCurrentDate();
 
 	// Hour Created
-	if (timeCreated == null)
-	    this.timeCreated = InfoTool.getLocalTime();
-	else
-	    this.timeCreated = timeCreated;
+	this.timeCreated = timeCreated != null ? timeCreated : InfoTool.getLocalTime();
 
 	// Description
-	if (description != null)
-	    this.description = new SimpleStringProperty(description);
-	else
-	    this.description = new SimpleStringProperty("");
+	this.description = new SimpleStringProperty(description == null ? "" : description);
 
 	// SaveMode
-	if (saveMode == 1)
-	    this.saveMode = SaveMode.ORIGINAL_PATH;
-	else if (saveMode == 2)
-	    this.saveMode = SaveMode.DATABASE_PATH;
+	this.saveMode = saveMode == 1 ? SaveMode.ORIGINAL_PATH : SaveMode.DATABASE_PATH;
 
 	// Library Position in List
 	this.position = position;
@@ -357,6 +325,7 @@ public class Library extends StackPane {
 	this.opened.set(opened);
 
 	// ----------------------------------FXMLLoader-------------------------------------
+
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "Library.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
@@ -370,14 +339,30 @@ public class Library extends StackPane {
 	// rotationTransform.setAxis(Rotate.Y_AXIS)
 	// getTransforms().add(rotationTransform)
 
+	// Controller
+	this.controller = new SmartController(Genre.LIBRARYSONG, libraryName, dataBaseTableName);
+
+	// ----------------------------------Load FXML-------------------------------------
+
+	try {
+	    loader.load();
+	} catch (IOException ex) {
+	    logger.log(Level.WARNING, "", ex);
+	}
+
+	// ----------------------------------Evemt Listeners-------------------------------------
+
+	// --Scroll Listener
+	setOnScroll(scroll -> updateStars(scroll.getDeltaY() > 0 ? starsProperty().get() + 0.5 : starsProperty().get() - 0.5));
+
+	// --Key Listener
 	setOnKeyReleased(this::onKeyReleased);
+
+	// --Mouse Listener
 	setOnMouseEntered(m -> {
 	    if (!isFocused())
 		requestFocus();
 	});
-
-	// Controller
-	controller = new SmartController(Genre.LIBRARYSONG, libraryName, dataBaseTableName);
 
 	// --Drag Over
 	super.setOnDragOver(dragOver -> {
@@ -401,38 +386,6 @@ public class Library extends StackPane {
 	    drop.setDropCompleted(true);
 	});
 
-	// -------------Load the FXML-------------------------------
-	try {
-	    loader.load();
-	} catch (IOException ex) {
-	    logger.log(Level.WARNING, "", ex);
-	}
-
-	try {
-
-	    // ----------------About the Library---------------------
-	    libUStars = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET STARS=? WHERE NAME=?;");
-
-	    libUDescription = Main.dbManager.connection1
-		    .prepareStatement("UPDATE LIBRARIES SET DESCRIPTION=?" + " WHERE NAME=?;");
-
-	    // libUSaveMode = Main.dbManager.connection1
-	    // .prepareStatement("UPDATE LIBRARIES SET SAVEMODE=? WHERE NAME=?
-	    // ;")
-
-	    libUPosition = Main.dbManager.connection1
-		    .prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;");
-
-	    libUImage = Main.dbManager.connection1
-		    .prepareStatement("UPDATE LIBRARIES SET LIBRARYIMAGE=?  WHERE NAME=?");
-
-	    libUStatus = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET OPENED=? WHERE NAME=? ;");
-
-	    libURename = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET NAME=? WHERE NAME=? ;");
-
-	} catch (SQLException ex) {
-	    logger.log(Level.WARNING, "", ex);
-	} /********************/
     }
 
     /*-----------------------------------------------------------------------
@@ -461,25 +414,17 @@ public class Library extends StackPane {
 	// imageView.fitWidthProperty().bind(this.prefWidthProperty())
 	// imageView.fitHeightProperty().bind(this.prefHeightProperty())
 
-	//-----THIS
-	setOnScroll(scroll -> {
-	    if (scroll.getDeltaY() > 0)
-		updateStars(starsProperty().get() + 0.5);
-	    else
-		updateStars(starsProperty().get() - 0.5);
-	});
-
 	// Clip
 	Rectangle rect = new Rectangle();
 	rect.widthProperty().bind(widthProperty());
 	rect.heightProperty().bind(heightProperty());
 	rect.setArcWidth(30);
 	rect.setArcHeight(30);
-	//rect.setEffect(new Reflection());
+	//rect.setEffect(new Reflection())
 	setClip(rect);
 
 	// StackPane -> this
-	//Reflection reflection = new Reflection();
+	//Reflection reflection = new Reflection()
 	//reflection.setInput(new DropShadow(4, Color.FIREBRICK));
 	//this.setEffect(reflection);
 
@@ -573,29 +518,32 @@ public class Library extends StackPane {
     /**
      * Update the Stars of the Library.
      *
-     * @param stars
+     * @param stars1
      *            the stars
      */
-    public void updateStars(double stars) {
-	try {
-	    // An acceptable value has been given
-	    if (setStars(stars)) {
+    public void updateStars(double stars1) {
+	// An acceptable value has been given
+	if (setStars(stars1))
+	    //Try
+	    try (PreparedStatement libUStars = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET STARS=? WHERE NAME=?;");) {
+
 		// SQLITE COMMIT
-		libUStars.setDouble(1, stars);
+		libUStars.setDouble(1, stars1);
 		libUStars.setString(2, getLibraryName());
 		libUStars.executeUpdate();
+
+		//Commit
 		Main.dbManager.commit();
+	    } catch (SQLException ex) {
+		logger.log(Level.WARNING, "", ex);
 	    }
-	} catch (SQLException ex) {
-	    logger.log(Level.WARNING, "", ex);
-	}
     }
 
     /**
      * Stores the Library description into the database.
      */
     public void updateDescription() {
-	try {
+	try (PreparedStatement libUDescription = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET DESCRIPTION=?" + " WHERE NAME=?;")) {
 
 	    // SQLITE
 	    libUDescription.setString(1, description.get());
@@ -622,7 +570,7 @@ public class Library extends StackPane {
      *            The new position of the Library
      */
     public void updatePosition(int newPosition) {
-	try {
+	try (PreparedStatement libUPosition = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;")) {
 	    position = newPosition;
 
 	    // SQLITE
@@ -647,7 +595,7 @@ public class Library extends StackPane {
     private boolean updateImagePathInDB(String absolutePath, boolean renameUpdate, boolean commit) {
 	boolean success = true;
 
-	try {
+	try (PreparedStatement libUImage = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET LIBRARYIMAGE=?  WHERE NAME=?")) {
 
 	    // rename the old image file
 	    if (renameUpdate && imageName != null) {
@@ -665,8 +613,7 @@ public class Library extends StackPane {
 		    logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
 
 		// Create the new image
-		String newImageName = Main.dbManager.imagesFolderAbsolutePath + File.separator + getLibraryName() + "."
-			+ InfoTool.getFileExtension(absolutePath);
+		String newImageName = Main.dbManager.imagesFolderAbsolutePath + File.separator + getLibraryName() + "." + InfoTool.getFileExtension(absolutePath);
 
 		// Change the image name
 		imageName = InfoTool.getFileName(newImageName);
@@ -696,7 +643,7 @@ public class Library extends StackPane {
      */
     public void setDefaultImage() {
 
-	try {
+	try (PreparedStatement libUImage = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET LIBRARYIMAGE=?  WHERE NAME=?")) {
 
 	    // Ask if user is sure...
 	    if (ActionTool.doQuestion("Reset to default the image of this library?", this)) {
@@ -730,15 +677,16 @@ public class Library extends StackPane {
     public void setNewImage() {
 
 	File file = Main.specialChooser.prepareToSelectImage(Main.window);
-	if (file != null) {
-	    Image image = new Image(file.toURI().toString());
-	    if (image.getWidth() <= 4800 && image.getHeight() <= 4800) {
-		updateImagePathInDB(file.getAbsolutePath(), false, true);
-		imageView.setImage(getImage());
-	    } else
-		ActionTool.showNotification("Warning",
-			"Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(),
-			Duration.millis(1500), NotificationType.WARNING);
+	if (file == null)
+	    return;
+
+	//Check the given image
+	Image image = new Image(file.toURI() + "");
+	if (image.getWidth() > 4800 || image.getHeight() > 4800)
+	    ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(), Duration.millis(1500), NotificationType.WARNING);
+	else {
+	    updateImagePathInDB(file.getAbsolutePath(), false, true);
+	    imageView.setImage(getImage());
 	}
     }
 
@@ -746,24 +694,23 @@ public class Library extends StackPane {
      * Export the Library image.
      */
     public void exportImage() {
-	if (imageName != null) {
-	    File file = Main.specialChooser.prepareToExportImage(Main.window, imageName);
-	    if (file != null) {
-		progressBarStackPane.setVisible(true);
-		progressBarLabel.setText("Exporting image...");
+	//imageName ?
+	if (imageName == null)
+	    return;
+	File file = Main.specialChooser.prepareToExportImage(Main.window, imageName);
+	//File ?
+	if (file == null)
+	    return;
+	progressBarStackPane.setVisible(true);
+	progressBarLabel.setText("Exporting image...");
 
-		// Start a new Thread to copy the File
-		new Thread(() -> {
-		    // Check if copy succeeded
-		    if (!ActionTool.copy(getAbsoluteImagePath(), file.getAbsolutePath()))
-			Platform.runLater(() -> ActionTool.showNotification("Exporting Library Image",
-				"Failed to export library image for \nLibrary=[" + getLibraryName() + "]",
-				Duration.millis(2500), NotificationType.SIMPLE));
-
-		    Platform.runLater(() -> progressBarStackPane.setVisible(false));
-		}).start();
-	    }
-	}
+	//Start a Thread to copy the File
+	new Thread(() -> {
+	    if (!ActionTool.copy(getAbsoluteImagePath(), file.getAbsolutePath()))
+		Platform.runLater(() -> ActionTool.showNotification("Exporting Library Image", "Failed to export library image for \nLibrary=[" + getLibraryName() + "]", Duration.millis(2500),
+			NotificationType.SIMPLE));
+	    Platform.runLater(() -> progressBarStackPane.setVisible(false));
+	}).start();
     }
 
     /**
@@ -776,7 +723,7 @@ public class Library extends StackPane {
      */
     private void setLibraryOpened(boolean way, boolean commit) {
 
-	try {
+	try (PreparedStatement libUStatus = Main.dbManager.connection1.prepareStatement("UPDATE LIBRARIES SET OPENED=? WHERE NAME=? ;")) {
 	    opened.set(way);
 
 	    //commit?
@@ -796,77 +743,86 @@ public class Library extends StackPane {
     /**
      * Renames the current Library.
      * 
-     * @param node
+     * @param n
      *            The node based on which the Rename Window will be position
      */
-    public void renameLibrary(Node node) {
-	if (controller.isFree(true)) {
+    public void renameLibrary(Node n) {
+	//Free?
+	if (!controller.isFree(true))
+	    return;
 
-	    // Security Variable
-	    controller.renameWorking = true;
+	// Security Variable
+	controller.renameWorking = true;
 
-	    // Open the Window
-	    Main.renameWindow.show(getLibraryName(), node);
+	// Open the Window
+	Main.renameWindow.show(getLibraryName(), n);
 
-	    // Bind 1
-	    Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());
-	    if (tab != null)
-		tab.getTooltip().textProperty().bind(nameLabel.textProperty());
+	// Bind 1
+	Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());
+	if (tab != null)
+	    tab.getTooltip().textProperty().bind(nameLabel.textProperty());
 
-	    // Bind 2
-	    nameLabel.textProperty().bind(Main.renameWindow.inputField.textProperty());
+	// Bind 2
+	nameLabel.textProperty().bind(Main.renameWindow.inputField.textProperty());
 
-	    Main.renameWindow.showingProperty().addListener(renameInvalidator);
-	}
+	//Add Invalidation Listener
+	Main.renameWindow.showingProperty().addListener(renameInvalidator);
+
     }
 
     /**
      * Updates the LibraryStars.
      * 
-     * @param node
+     * @param n
      *            The node based on which the Rename Window will be position
      */
-    protected void updateLibraryStars(Node node) {
-	if (controller.isFree(true)) {
+    protected void updateLibraryStars(Node n) {
+	//Free?
+	if (!controller.isFree(true))
+	    return;
 
-	    // Bind
-	    Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty()
-		    .bind(Main.starWindow.starsProperty().asString());
+	// Bind
+	Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty().bind(Main.starWindow.starsProperty().asString());
 
-	    Main.starWindow.show(starsProperty().get(), node);
+	Main.starWindow.show(starsProperty().get(), n);
 
-	    //Keep a reference to the previous stars
-	    double previousStars = stars.get();
+	//Keep a reference to the previous stars
+	double previousStars = stars.get();
 
-	    //Bind
-	    stars.bind(Main.starWindow.starsProperty());
+	//Bind
+	stars.bind(Main.starWindow.starsProperty());
 
-	    Main.starWindow.window.showingProperty().addListener(new InvalidationListener() {
-		@Override
-		public void invalidated(Observable observable) {
+	/***
+	 * This InvalidationListener is used when i want to change the stars of the Library
+	 */
+	InvalidationListener updateStarsInvalidation = new InvalidationListener() {
+	    @Override
+	    public void invalidated(Observable o) {
 
-		    // Remove the listener
-		    Main.starWindow.window.showingProperty().removeListener(this);
+		// Remove the listener
+		Main.starWindow.window.showingProperty().removeListener(this);
 
-		    // Remove Binding from Stars
-		    stars.unbind();
+		// Remove Binding from Stars
+		stars.unbind();
 
-		    // if !showing
-		    if (!Main.starWindow.window.isShowing()) {
+		// if !showing
+		if (!Main.starWindow.window.isShowing()) {
 
-			//Unbind
-			Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty().unbind();
+		    //Unbind
+		    Main.libraryMode.libraryViewer.settings.getStarsLabel().textProperty().unbind();
 
-			//Was accepted
-			if (Main.starWindow.wasAccepted())
-			    updateStars(Main.starWindow.getStars());
-			else
-			    setStars(previousStars);
-		    }
-
+		    //Was accepted
+		    if (Main.starWindow.wasAccepted())
+			updateStars(Main.starWindow.getStars());
+		    else
+			setStars(previousStars);
 		}
-	    });
-	}
+
+	    }
+	};
+
+	//Add Invalidation Listener
+	Main.starWindow.window.showingProperty().addListener(updateStarsInvalidation);
 
     }
 
@@ -874,8 +830,7 @@ public class Library extends StackPane {
      * Delete the library.
      */
     public void deleteLibrary() {
-	if (controller.isFree(true) && ActionTool
-		.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]")) {
+	if (controller.isFree(true) && ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]")) {
 
 	    try {
 
@@ -883,8 +838,7 @@ public class Library extends StackPane {
 		Main.dbManager.connection1.createStatement().execute("DROP TABLE '" + getDataBaseTableName() + "' ");
 
 		// Delete the row from Libraries table
-		Main.dbManager.connection1.createStatement()
-			.executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");
+		Main.dbManager.connection1.createStatement().executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");
 
 		// Delete the folder with library name in database
 		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + getLibraryName()));
@@ -1223,8 +1177,7 @@ public class Library extends StackPane {
      *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
      */
     public void onKeyReleased(KeyEvent e) {
-	if (Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused()
-		|| getPosition() != Main.libraryMode.libraryViewer.centerIndex)
+	if (Main.libraryMode.libraryViewer.settings.isCommentsAreaFocused() || getPosition() != Main.libraryMode.libraryViewer.centerIndex)
 	    return;
 
 	KeyCode code = e.getCode();

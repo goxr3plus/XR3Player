@@ -34,6 +34,8 @@ import tools.InfoTool;
  */
 public class SideBar extends BorderPane {
 
+    //-----------------------------------------------------
+
     @FXML
     private MenuButton applicationDatabase;
 
@@ -50,19 +52,7 @@ public class SideBar extends BorderPane {
     private JFXButton applicationSearch;
 
     @FXML
-    private JFXButton applicationUpdate;
-
-    @FXML
-    private MenuItem aboutSection;
-
-    @FXML
-    private MenuItem help;
-
-    @FXML
-    private MenuItem donation;
-
-    @FXML
-    private JFXButton applicationSettings;
+    private JFXButton applicationConverter;
 
     @FXML
     private JFXButton applicationConsole;
@@ -93,10 +83,24 @@ public class SideBar extends BorderPane {
 
     @FXML
     private ImageView userImageView;
-    
+
     @FXML
     Label userNameLabel;
 
+    @FXML
+    private JFXButton applicationUpdate;
+
+    @FXML
+    private MenuItem aboutSection;
+
+    @FXML
+    private MenuItem help;
+
+    @FXML
+    private MenuItem donation;
+
+    @FXML
+    private JFXButton applicationSettings;
     // -------------------------------------------------------------
 
     /** Translate Transition used to show/hide the bar. */
@@ -176,23 +180,23 @@ public class SideBar extends BorderPane {
 
     String style = "-fx-background-radius: 15 0 0 15; -fx-background-color:black; -fx-border-width:0 4 0 0;";
 
-//    /**
-//     * Goes to MainMode
-//     */
-//    public void goMainMode() {
-//	Main.rootFlipPane.flipToFront();
-//	goMainMode.setStyle("-fx-border-color:firebrick; " + style);
-//	goUserMode.setStyle("-fx-border-color:transparent; " + style);
-//    }
-//
-//    /**
-//     * Goes to UserMode
-//     */
-//    public void goUserMode() {
-//	Main.rootFlipPane.flipToBack();
-//	goMainMode.setStyle("-fx-border-color:transparent; " + style);
-//	goUserMode.setStyle("-fx-border-color:firebrick; " + style);
-//    }
+    //    /**
+    //     * Goes to MainMode
+    //     */
+    //    public void goMainMode() {
+    //	Main.rootFlipPane.flipToFront();
+    //	goMainMode.setStyle("-fx-border-color:firebrick; " + style);
+    //	goUserMode.setStyle("-fx-border-color:transparent; " + style);
+    //    }
+    //
+    //    /**
+    //     * Goes to UserMode
+    //     */
+    //    public void goUserMode() {
+    //	Main.rootFlipPane.flipToBack();
+    //	goMainMode.setStyle("-fx-border-color:transparent; " + style);
+    //	goUserMode.setStyle("-fx-border-color:firebrick; " + style);
+    //    }
 
     /**
      * Prepares the SideBar to be shown for LoginMode
@@ -206,14 +210,14 @@ public class SideBar extends BorderPane {
 	    applicationSettings.setDisable(true);
 	    applicationConsole.setDisable(true);
 	    applicationDatabase.setDisable(true);
-	    snapshot.setDisable(true);
+	    //snapshot.setDisable(true);
 	} else {
 	    //goMainMode.setDisable(false);
 	    //goUserMode.setDisable(false);
 	    applicationSettings.setDisable(false);
 	    applicationConsole.setDisable(false);
 	    applicationDatabase.setDisable(false);
-	    snapshot.setDisable(false);
+	    //snapshot.setDisable(false);
 	}
     }
 
@@ -237,8 +241,7 @@ public class SideBar extends BorderPane {
 	applicationUpdate.setOnAction(a -> Main.checkForUpdates(true));
 
 	//help
-	help.setOnAction(
-		a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+	help.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 
 	// aboutSection
 	aboutSection.setOnAction(a -> Main.aboutWindow.showWindow());
@@ -247,16 +250,16 @@ public class SideBar extends BorderPane {
 	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
 	//---------MODE ------------------------------	
-//	//goMainMode
-//	goMainMode.setOnAction(a -> goMainMode());
-//
-//	//goUserMode
-//	goUserMode.setOnAction(a -> goUserMode());
-//
-//	//theMovieDBMode
-//	browserMode.setOnAction(a -> {
-//
-//	});
+	//	//goMainMode
+	//	goMainMode.setOnAction(a -> goMainMode());
+	//
+	//	//goUserMode
+	//	goUserMode.setOnAction(a -> goUserMode());
+	//
+	//	//theMovieDBMode
+	//	browserMode.setOnAction(a -> {
+	//
+	//	});
 
 	//-----------------------------------------
 
@@ -266,12 +269,17 @@ public class SideBar extends BorderPane {
 	//applicationSettings
 	applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow());
 
+	//applicationConverter
+	applicationConverter.setOnAction(a -> ActionTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
+
 	//applicationConsole
 	applicationConsole.setOnAction(a -> Main.consoleWindow.show());
 
 	//snapShot
-	snapshot.setOnAction(a -> ActionTool.showAlert("Snapshot Window", "Read the below.",
-		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area."));
+	snapshot.setOnAction(a -> Main.captureWindow.stage.show());
+
+//	ActionTool.showAlert("Snapshot Window", "Read the below.",
+//		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area.");
 
 	// Clip
 	Rectangle rect = new Rectangle();
@@ -286,8 +294,7 @@ public class SideBar extends BorderPane {
 
 	// importDataBase
 	importDataBase.setOnAction(e -> {
-	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning()
-		    && Main.libraryMode.multipleLibs.isFree(true)) {
+	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning() && Main.libraryMode.multipleLibs.isFree(true)) {
 
 		File file = Main.specialChooser.prepareToImportDataBase(Main.window);
 		if (file != null) {
@@ -303,8 +310,7 @@ public class SideBar extends BorderPane {
 
 	// exportDataBase
 	exportDataBase.setOnAction(a -> {
-	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning()
-		    && Main.libraryMode.multipleLibs.isFree(true)) {
+	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning() && Main.libraryMode.multipleLibs.isFree(true)) {
 
 		File file = Main.specialChooser.prepareForExportDataBase(Main.window);
 		if (file != null) {
@@ -321,9 +327,8 @@ public class SideBar extends BorderPane {
 
 	// deleteDataBase
 	deleteDataBase.setOnAction(a -> {
-	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning()
-		    && Main.libraryMode.multipleLibs.isFree(true) && ActionTool.doQuestion(
-			    "You will delete the database of the application!\nAre you soore for that?\nThere is no coming back.\nAfter that the application will automatically restart...")) {
+	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning() && Main.libraryMode.multipleLibs.isFree(true) && ActionTool
+		    .doQuestion("You will delete the database of the application!\nAre you soore for that?\nThere is no coming back.\nAfter that the application will automatically restart...")) {
 
 		// Close database connections
 		Main.dbManager.manageConnection(Operation.CLOSE);

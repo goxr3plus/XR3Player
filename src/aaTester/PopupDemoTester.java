@@ -1,4 +1,4 @@
-package application;
+package aaTester;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class PopupDemo extends Application {
+public class PopupDemoTester extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {

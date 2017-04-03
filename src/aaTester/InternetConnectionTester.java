@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application;
+package aaTester;
 
 import tools.InfoTool;
 

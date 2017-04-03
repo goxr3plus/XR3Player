@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="root" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" style="-fx-background-color: transparent;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xr3capture.MainWindowController">
+   <children>
+      <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: black; -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: white; -fx-border-style: solid;">
+         <top>
+            <HBox spacing="5.0">
+               <children>
+                  <JFXButton fx:id="more" prefHeight="27.0" prefWidth="81.0" ripplerFill="#2b8e9e" styleClass="topButton" text="Settings" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="minimize" prefHeight="27.0" prefWidth="82.0" ripplerFill="#1f9dd1" styleClass="topButton" text="Minimize" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="exitButton" prefHeight="27.0" prefWidth="67.0" ripplerFill="#1f9dd1" styleClass="topButton" text="Exit" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="3.0" left="10.0" right="4.0" top="3.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" majorTickUnit="1.0" max="9.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" styleClass="time-slider" value="-1.0" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <JFXButton fx:id="captureButton" ripplerFill="#eaf213" text=" " textFill="#faac05">
+                           <graphic>
+                              <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../image/capture.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Capture" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="openImageViewer" disable="true" ripplerFill="#e1da1b" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/imageViewer.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open ImageViewer" />
+                           </tooltip>
+                        </JFXButton>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+      <Region fx:id="region" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.8); -fx-background-radius: 15 0 0 15;" visible="false" />
+      <ProgressIndicator fx:id="progressBar" visible="false" />
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</StackPane>

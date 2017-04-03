@@ -1,8 +1,6 @@
 package customnodes;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -13,10 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import tools.InfoTool;
 
@@ -26,7 +22,7 @@ import tools.InfoTool;
  * @author GOXR3PLUS
  *
  */
-public class Marquee extends Pane implements Initializable {
+public class Marquee extends Pane {
 
     @FXML
     private Text text;
@@ -53,8 +49,11 @@ public class Marquee extends Pane implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    /**
+     * Called as soon as .fxml is initialized [[SuppressWarningsSpartan]]
+     */
+    @FXML
+    private void initialize() {
 
 	// Pane
 
