@@ -12,7 +12,7 @@ https://sourceforge.net/projects/xr3player/
 ![update55](https://cloud.githubusercontent.com/assets/20374208/23834985/f178b7f4-0767-11e7-8666-409e48776a1a.png)
 
 ## On youtube
-[![XR3Player](http://img.youtube.com/vi/UCj7qnP36Ye7gsiqvhA3eALw/0.jpg)](https://www.youtube.com/watch?v=UCj7qnP36Ye7gsiqvhA3eALw)
+[![XR3Player](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
 
 -------------------------------------------------------------------------------------
 
