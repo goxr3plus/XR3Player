@@ -8,7 +8,7 @@
 
 <fx:root tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
-      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false">
+      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="File Played?">
          <graphic>
             <ImageView>
                <image>
@@ -25,7 +25,7 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false">
+      <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Time">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -34,7 +34,7 @@
             </ImageView>
          </graphic>
       </TableColumn>
-      <TableColumn fx:id="timesPlayed" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="# Played">
+      <TableColumn fx:id="timesPlayed" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Played # -[Not implemented yet]" visible="false">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

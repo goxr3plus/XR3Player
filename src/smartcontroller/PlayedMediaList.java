@@ -42,15 +42,14 @@ public class PlayedMediaList {
 	    if (!LocalDBManager.tableExists(dataBaseTableName))
 
 		Main.dbManager.connection1.createStatement()
-			.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'"
-				+ "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "TIMESPLAYED  INT     NOT NULL,"
-				+ "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+			.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'" + "(PATH       TEXT    PRIMARY KEY   NOT NULL ,"
+				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
 
 	    //Create the PreparedStatements
 	    String string = "UPDATE '" + dataBaseTableName + "'";
 
-	    insert = Main.dbManager.connection1.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName
-		    + "' (PATH,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?)");
+	    insert = Main.dbManager.connection1
+		    .prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?)");
 
 	    rename = Main.dbManager.connection1.prepareStatement(string + " SET PATH=? WHERE PATH=?");
 	} catch (SQLException ex) {
@@ -69,8 +68,7 @@ public class PlayedMediaList {
 	prepareMediaListTable();
 
 	//Now Upload
-	try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
-		.executeQuery("SELECT* FROM '" + dataBaseTableName + "'")) {
+	try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery("SELECT* FROM '" + dataBaseTableName + "'")) {
 
 	    //Add all
 	    while (resultSet.next())
@@ -111,12 +109,12 @@ public class PlayedMediaList {
     /**
      * Check if a media has been already played.
      *
-     * @param item
-     *            the item
+     * @param filePath
+     *            The absolute file path
      * @return true, if successful
      */
-    public boolean contains(String item) {
-	return set.contains(item);
+    public boolean containsFile(String filePath) {
+	return set.contains(filePath);
     }
 
     /**

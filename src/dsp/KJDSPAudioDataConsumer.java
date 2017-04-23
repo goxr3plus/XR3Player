@@ -190,9 +190,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
     public synchronized void start(SourceDataLine pSdl) {
 
 	// -- Stop processing previous source data line.
-	if (signalProcessor != null) {
+	if (signalProcessor != null)
 	    stop();
-	}
 
 	if (signalProcessor == null) {
 
@@ -223,15 +222,13 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
      */
     public synchronized void stop() {
 
-	if (signalProcessor != null) {
-
-	    signalProcessor.stop();
-	    signalProcessor = null;
-
-	    audioDataBuffer = null;
-	    sourceDataLine = null;
-
-	}
+	if (signalProcessor == null)
+	    return;
+	
+	signalProcessor.stop();
+	signalProcessor = null;
+	audioDataBuffer = null;
+	sourceDataLine = null;
 
     }
 
@@ -249,9 +246,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 	synchronized (readWriteLock) {
 
-	    if (audioDataBuffer == null) {
+	    if (audioDataBuffer == null)
 		return;
-	    }
 
 	    int wOverrun = 0;
 
@@ -264,13 +260,11 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 	    System.arraycopy(pAudioData, pOffset, audioDataBuffer, position, pLength);
 
-	    if (wOverrun > 0) {
-
+	    if (wOverrun <= 0)
+		position += pLength;
+	    else {
 		System.arraycopy(pAudioData, pOffset + pLength, audioDataBuffer, 0, wOverrun);
 		position = wOverrun;
-
-	    } else {
-		position += pLength;
 	    }
 
 	    // KJJukeBox.getDSPDialog().setDSPBufferInfo(
@@ -366,10 +360,10 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 		    if (c >= audioDataBuffer.length) {
 			offset++;
-			c = c - audioDataBuffer.length;
+			c -= audioDataBuffer.length;
 		    }
 
-		    left[a] = (int) audioDataBuffer[c] / 128.0f;
+		    left[a] = audioDataBuffer[c] / 128.0f;
 		    right[a] = left[a];
 
 		}
@@ -380,11 +374,11 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 		    if (c >= audioDataBuffer.length) {
 			offset++;
-			c = c - audioDataBuffer.length;
+			c -= audioDataBuffer.length;
 		    }
 
-		    left[a] = (int) audioDataBuffer[c] / 128.0f;
-		    right[a] = (int) audioDataBuffer[c + 1] / 128.0f;
+		    left[a] = audioDataBuffer[c] / 128.0f;
+		    right[a] = audioDataBuffer[c + 1] / 128.0f;
 
 		}
 
@@ -394,10 +388,10 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 		    if (c >= audioDataBuffer.length) {
 			offset++;
-			c = c - audioDataBuffer.length;
+			c -= audioDataBuffer.length;
 		    }
 
-		    left[a] = (float) (((int) audioDataBuffer[c + 1] << 8) + (audioDataBuffer[c] & 0xff)) / 32767.0f;
+		    left[a] = ((audioDataBuffer[c] & 0xff) + (audioDataBuffer[c + 1] << 8)) / 32767.0f;
 		    right[a] = left[a];
 
 		}
@@ -408,11 +402,11 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 		    if (c >= audioDataBuffer.length) {
 			offset++;
-			c = c - audioDataBuffer.length;
+			c -= audioDataBuffer.length;
 		    }
 
-		    left[a] = (float) (((int) audioDataBuffer[c + 1] << 8) + (audioDataBuffer[c] & 0xff)) / 32767.0f;
-		    right[a] = (float) (((int) audioDataBuffer[c + 3] << 8) + (audioDataBuffer[c + 2] & 0xff))
+		    left[a] = ((audioDataBuffer[c] & 0xff) + (audioDataBuffer[c + 1] << 8)) / 32767.0f;
+		    right[a] = ((audioDataBuffer[c + 3] << 8) + (audioDataBuffer[c + 2] & 0xff))
 			    / 32767.0f;
 
 		}
@@ -437,9 +431,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
 		    int wSdp = calculateSamplePosition();
 
-		    if (wSdp > 0) {
+		    if (wSdp > 0)
 			processSamples(wSdp);
-		    }
 
 		    // -- Dispatch sample data to digital signal processors.
 		    for (int a = 0; a < dsps.size(); a++) {
@@ -468,9 +461,9 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 		    long wDelay = fpsAsNS - (System.nanoTime() - wStn);
 
 		    // -- No DSP registered? Put the the DSP thread to sleep.
-		    if (dsps.isEmpty()) {
+		    if (dsps.isEmpty()) 
 			wDelay = 1000000000; // -- 1 second.
-		    }
+		    
 
 		    if (wDelay > 0) {
 
@@ -481,11 +474,10 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 			}
 
 			// -- Adjust FPS until we meet the "desired FPS".
-			if (fpsAsNS > desiredFpsAsNS) {
+			if (fpsAsNS > desiredFpsAsNS)
 			    fpsAsNS -= wDelay;
-			} else {
+			else
 			    fpsAsNS = desiredFpsAsNS;
-			}
 
 		    } else {
 

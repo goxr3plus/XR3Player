@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
-import org.controlsfx.control.Notifications;
-
 import application.Main;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -75,10 +73,8 @@ public class XPlayerPlaylist extends StackPane {
     // Variables
     int maximumItems;
 
-    /** The notification. */
-    // Notification
-    Notifications notification = Notifications.create().title("Maximum elements added")
-	    .text("You have added the maximum number of elements allowed in the PlayList.").darkStyle();
+    //    showNotification("Maximum elements added", "You have added the maximum number of elements allowed in the PlayList.", Duration.millis(2000),
+    //	    NotificationType.INFORMATION);
 
     /** The x player UI. */
     XPlayerController xPlayerUI;
@@ -295,8 +291,7 @@ public class XPlayerPlaylist extends StackPane {
 
 			    // Check if nextHasBeenPressed or
 			    // previousHasBeenPressed
-			    if (xPlayerUI.radialMenu.nextHasBeenPressed()
-				    || xPlayerUI.radialMenu.previousHasBeenPressed())
+			    if (xPlayerUI.radialMenu.nextHasBeenPressed() || xPlayerUI.radialMenu.previousHasBeenPressed())
 				break;
 
 			    // Get out if cancelled

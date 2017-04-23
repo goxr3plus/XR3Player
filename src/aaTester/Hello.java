@@ -1,4 +1,4 @@
-package application;
+package aaTester;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.application.Application;
@@ -9,7 +9,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MyApp extends Application {
+public class Hello extends Application {
     
     
     /**Main Method

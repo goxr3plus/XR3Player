@@ -118,17 +118,13 @@ public class BorderlessController {
     /**
      * Maximize on/off the application.
      */
+    @SuppressWarnings("boxing")
     protected void maximize() {
 	Rectangle2D screen;
-	if (Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2)
-		.isEmpty()) {
-	    screen = Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight())
-		    .get(0).getVisualBounds();
-	} else {
-	    screen = Screen
-		    .getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2)
-		    .get(0).getVisualBounds();
-	}
+	if (Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2).isEmpty())
+	    screen = Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight()).get(0).getVisualBounds();
+	else
+	    screen = Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2).get(0).getVisualBounds();
 
 	if (maximized.get()) {
 	    stage.setWidth(prevSize.x);
@@ -176,6 +172,7 @@ public class BorderlessController {
      * @param node
      *            the node.
      */
+    @SuppressWarnings("boxing")
     protected void setMoveControl(final Node node) {
 	final Delta delta = new Delta();
 	final Delta eventSource = new Delta();
@@ -211,8 +208,7 @@ public class BorderlessController {
 		if (snapped) {
 
 		    // Aero Snap off.
-		    Rectangle2D screen = Screen.getScreensForRectangle(m.getScreenX(), m.getScreenY(), 1, 1).get(0)
-			    .getVisualBounds();
+		    Rectangle2D screen = Screen.getScreensForRectangle(m.getScreenX(), m.getScreenY(), 1, 1).get(0).getVisualBounds();
 
 		    stage.setHeight(screen.getHeight());
 
@@ -244,8 +240,7 @@ public class BorderlessController {
 	// Aero Snap on release.
 	node.setOnMouseReleased(m -> {
 	    if ((m.getButton().equals(MouseButton.PRIMARY)) && (m.getScreenX() != eventSource.x)) {
-		Rectangle2D screen = Screen.getScreensForRectangle(m.getScreenX(), m.getScreenY(), 1, 1).get(0)
-			.getVisualBounds();
+		Rectangle2D screen = Screen.getScreensForRectangle(m.getScreenX(), m.getScreenY(), 1, 1).get(0).getVisualBounds();
 
 		// Aero Snap Left.
 		if (m.getScreenX() == screen.getMinX()) {
@@ -354,8 +349,7 @@ public class BorderlessController {
 	// Aero Snap Resize.
 	pane.setOnMouseReleased(m -> {
 	    if ((m.getButton().equals(MouseButton.PRIMARY)) && (!snapped)) {
-		Rectangle2D screen = Screen.getScreensForRectangle(m.getScreenX(), m.getScreenY(), 1, 1).get(0)
-			.getVisualBounds();
+		Rectangle2D screen = Screen.getScreensForRectangle(m.getScreenX(), m.getScreenY(), 1, 1).get(0).getVisualBounds();
 
 		if ((stage.getY() <= screen.getMinY()) && (direction.startsWith("top"))) {
 		    stage.setHeight(screen.getHeight());
@@ -374,11 +368,8 @@ public class BorderlessController {
 
 	// Aero Snap resize on double click.
 	pane.setOnMouseClicked(m -> {
-	    if ((m.getButton().equals(MouseButton.PRIMARY)) && (m.getClickCount() == 2)
-		    && ("top".equals(direction) || bottom.equals(direction))) {
-		Rectangle2D screen = Screen
-			.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2)
-			.get(0).getVisualBounds();
+	    if ((m.getButton().equals(MouseButton.PRIMARY)) && (m.getClickCount() == 2) && ("top".equals(direction) || bottom.equals(direction))) {
+		Rectangle2D screen = Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2).get(0).getVisualBounds();
 
 		if (snapped) {
 		    stage.setHeight(prevSize.y);

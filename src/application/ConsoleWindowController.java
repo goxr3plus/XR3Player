@@ -8,11 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import org.controlsfx.control.MaskerPane;
-import org.controlsfx.control.Notifications;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
@@ -24,8 +23,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import tools.ActionTool;
 import tools.InfoTool;
+import tools.NotificationType;
 import xplayer.presenter.XPlayerController;
 
 /**
@@ -41,10 +42,13 @@ public class ConsoleWindowController extends StackPane {
     private JFXTextField commandTextField;
 
     @FXML
-    private Button help;
+    private JFXButton go;
 
     @FXML
-    private MaskerPane maskerPane;
+    private Button help;
+
+    //@FXML
+    //private MaskerPane maskerPane
 
     //--------------------------------------------------------
 
@@ -56,7 +60,7 @@ public class ConsoleWindowController extends StackPane {
     /**
      * The Console Window
      */
-    public Stage window = new Stage();
+    private Stage window = new Stage();
 
     /**
      * Constructor
@@ -108,11 +112,14 @@ public class ConsoleWindowController extends StackPane {
 	borderPane.setCenter(vsPane);
 
 	//help
-	help.setOnAction(
-		a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+	help.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 
 	//commandTextField
 	commandTextField.setOnAction(a -> procceedCommand(commandTextField.getText()));
+
+	//go
+	go.setOnAction(a -> procceedCommand(commandTextField.getText()));
+	go.disableProperty().bind(commandTextField.textProperty().isEmpty());
 
     }
 
@@ -120,10 +127,10 @@ public class ConsoleWindowController extends StackPane {
      * Show the Window
      */
     public void show() {
-	if (window.isShowing())
-	    window.requestFocus();
-	else
+	if (!window.isShowing())
 	    window.show();
+	else
+	    window.requestFocus();
     }
 
     Pattern pattern1 = Pattern.compile("player:[-|+]?\\d+:\\w+");
@@ -146,7 +153,7 @@ public class ConsoleWindowController extends StackPane {
 
 	//Check if it is null
 	if (command.isEmpty()) {
-	    Notifications.create().text("You have to type something..").showWarning();
+	    ActionTool.showNotification("Message", "You have to type something..", Duration.millis(1500), NotificationType.WARNING);
 	    return;
 	}
 
@@ -264,6 +271,13 @@ public class ConsoleWindowController extends StackPane {
 
 	cssTextArea.moveTo(cssTextArea.getLength());
 	cssTextArea.requestFollowCaret();
+    }
+
+    /**
+     * @return the window
+     */
+    public Stage getWindow() {
+	return window;
     }
 
 }

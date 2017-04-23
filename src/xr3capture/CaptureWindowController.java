@@ -15,8 +15,6 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import org.controlsfx.control.Notifications;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -35,6 +33,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import tools.ActionTool;
+import tools.NotificationType;
 
 /**
  * This is the Window which is used from the user to draw the rectangle representing an area on the screen to be captured.
@@ -557,7 +558,8 @@ public class CaptureWindowController extends Stage {
 	    gc.setFill(Color.FIREBRICK);
 	    gc.fillRect(middle - 77, data.rectUpperLeftY < 25 ? data.rectUpperLeftY + 2 : data.rectUpperLeftY - 25.00, 77, 23);
 	    gc.setFill(Color.WHITE);
-	    gc.fillText(data.rectWidth + "," + data.rectHeight, middle - 77 + 9, data.rectUpperLeftY < 25 ? data.rectUpperLeftY + 17.00 : data.rectUpperLeftY - 6.00);
+	    gc.fillText(data.rectWidth + "," + data.rectHeight, middle - 77 + 9,
+		    data.rectUpperLeftY < 25 ? data.rectUpperLeftY + 17.00 : data.rectUpperLeftY - 6.00);
 
 	}
     }
@@ -629,19 +631,20 @@ public class CaptureWindowController extends Stage {
 	 *            The image to be saved.
 	 */
 	public void startService(BufferedImage image2) {
-	    if (!isRunning()) {
+	    if (isRunning()) //Check if running
+		return;
 
-		this.image = image2;
+	    this.image = image2;
 
-		// Show the SaveDialog
-		fileSaver.get().setInitialFileName("ScreenShot" + data.random.nextInt(50000));
-		File file = fileSaver.get().showSaveDialog(CaptureWindowController.this);
-		if (file != null) {
-		    filePath = file.getAbsolutePath();
-		    reset();
-		    start();
-		} else
-		    repaintCanvas();
+	    // Show the SaveDialog
+	    fileSaver.get().setInitialFileName("ScreenShot" + data.random.nextInt(50000));
+	    File file = fileSaver.get().showSaveDialog(CaptureWindowController.this);
+	    if (file == null)
+		repaintCanvas();
+	    else {
+		filePath = file.getAbsolutePath();
+		reset();
+		start();
 	    }
 	}
 
@@ -653,10 +656,12 @@ public class CaptureWindowController extends Stage {
 	    CaptureWindow.stage.show();
 	    close();
 
-	    if (getValue()) // successful?
-		Notifications.create().title("Successfull Capturing").text("Image is being saved at:\n" + filePath).showInformation();
+	    //Was it seccussful?
+	    if (!getValue())
+		ActionTool.showNotification("Error", "Failed to capture the Screen!", Duration.millis(2000), NotificationType.ERROR);
 	    else
-		Notifications.create().title("Error").text("Failed to capture the Screen!").showError();
+		ActionTool.showNotification("Successful Capturing", "Image is being saved at:\n" + filePath, Duration.millis(2000),
+			NotificationType.INFORMATION);
 	}
 
 	/* (non-Javadoc)

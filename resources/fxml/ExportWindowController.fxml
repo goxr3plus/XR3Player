@@ -5,106 +5,95 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root pannable="true" style="-fx-background-color: white;" stylesheets="@../style/application.css" type="ScrollPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <BorderPane>
-         <center>
-            <VBox spacing="5.0" BorderPane.alignment="CENTER">
+
+<fx:root prefHeight="320.0" prefWidth="597.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="5.0">
                <children>
-                  <VBox spacing="20.0">
+                  <VBox maxWidth="1.7976931348623157E308" spacing="5.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-border-color: transparent transparent black transparent;" text="LOCATIONS" VBox.vgrow="SOMETIMES" />
-                        <HBox>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Procedure(?)">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox spacing="10.0">
                            <children>
-                              <TextField fx:id="exportField1" editable="false" focusTraversable="false" mouseTransparent="true" prefWidth="425.0" promptText="...export to" />
-                              <Button fx:id="exportButton1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="..." HBox.hgrow="ALWAYS">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox disable="true" layoutX="10.0" layoutY="27.0">
-                           <children>
-                              <TextField prefWidth="425.0" text="...export to[will be implemeted soon]" />
-                              <Button mnemonicParsing="false" text="Button" />
-                           </children>
-                        </HBox>
-                        <HBox disable="true" layoutX="10.0" layoutY="88.0">
-                           <children>
-                              <TextField prefWidth="425.0" text="...export to[will be implemented soon]" />
-                              <Button mnemonicParsing="false" text="Button" />
+                              <JFXCheckBox fx:id="copyBox" disable="true" selected="true" styleClass="settingsRadioButton" text="Copy" />
+                              <JFXCheckBox fx:id="moveBox" alignment="CENTER" disable="true" styleClass="settingsRadioButton" text="Move" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" spacing="5.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="File to export(?)">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox spacing="10.0">
+                           <children>
+                              <JFXCheckBox disable="true" styleClass="settingsRadioButton" text="Selected Items" />
+                              <JFXCheckBox alignment="CENTER" disable="true" selected="true" styleClass="settingsRadioButton" text="Export All" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox spacing="20.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="LOCATIONS" VBox.vgrow="SOMETIMES" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <TextField fx:id="exportField1" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="...export to" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="exportButton1" mnemonicParsing="false" text="..." HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="27.0">
+                     <children>
+                        <TextField maxWidth="1.7976931348623157E308" text="...export to[will be implemeted soon]" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" text="..." />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="88.0">
+                     <children>
+                        <TextField maxWidth="1.7976931348623157E308" text="...export to[will be implemented soon]" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" text="..." />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-         </center>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <top>
-            <HBox spacing="100.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" spacing="15.0">
                <children>
-                  <VBox spacing="5.0" HBox.hgrow="SOMETIMES">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-border-color: transparent transparent black transparent;" text="PROCEDURE">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox spacing="10.0">
-                           <children>
-                              <JFXCheckBox fx:id="copyBox" disable="true" selected="true" text="Copy" underline="true" />
-                              <JFXCheckBox fx:id="moveBox" alignment="CENTER" disable="true" text="Move" underline="true" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" spacing="5.0" HBox.hgrow="SOMETIMES">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-border-color: transparent transparent black transparent;" text="Which to export?">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox spacing="10.0">
-                           <children>
-                              <JFXCheckBox disable="true" text="Selected Items" underline="true" />
-                              <JFXCheckBox alignment="CENTER" disable="true" selected="true" text="Export All" underline="true" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </top>
-         <bottom>
-            <HBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="okButton" mnemonicParsing="false" text="OK">
+                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" text="OK">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel">
+                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" text="Cancel">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
                </children>
-               <BorderPane.margin>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="10.0" />
-               </BorderPane.margin>
             </HBox>
-         </bottom>
-      </BorderPane>
-   </content>
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
 </fx:root>

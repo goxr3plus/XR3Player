@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.controlsfx.control.Notifications;
-
 import application.Main;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -71,7 +69,7 @@ public class User extends StackPane {
 		if (Main.renameWindow.wasAccepted()) {
 
 		    // duplicate?
-		    if (!Main.loginMode.userViewer.items.stream()
+		    if (!Main.loginMode.userViewer.getItemsObservableList().stream()
 			    .anyMatch(user -> user != User.this && user.getUserName().equalsIgnoreCase(newName))
 			    || newName.equalsIgnoreCase(oldName)) {
 
@@ -84,13 +82,13 @@ public class User extends StackPane {
 			    setUserName(nameField.getText());
 			    nameField.getTooltip().setText(getUserName());
 			} else
-			    ActionTool.showNotification("Error", "An error occured trying to rename the user",
-				    Duration.seconds(2), NotificationType.ERROR);
+			    ActionTool.showNotification("Error", "An error occured trying to rename the user", Duration.seconds(2),
+				    NotificationType.ERROR);
 
 		    }//This user already exists
 		    else
-			Notifications.create().title("Dublicate User")
-				.text("This user already exists\nTry with a different name").darkStyle().showConfirm();
+			ActionTool.showNotification("Dublicate User", "Name->" + newName + " is already used from another User...",
+				Duration.millis(2000), NotificationType.INFORMATION);
 		}
 
 		//Succeeded?

@@ -46,13 +46,34 @@
 }
 */
 
+
+/*******************************************************************************
+
+*                            PlayListsSettingsController                               *
+
+******************************************************************************/
+
+.settingsLabel{	
+	-fx-border-color:  white white transparent white;
+	-fx-text-fill:#00E494;
+	-fx-font-weight:bold;
+	-fx-font-size:18.0;
+}
+
+.settingsRadioButton{
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-cursor:hand;
+}
+
+
 /*******************************************************************************
 
 *                            ToolBar                               *
 
 ******************************************************************************/
 
-.tool-bar {
+.tool-bar{
 	-light-black: rgb(74.0, 75.0, 78.0);
     -dark-highlight: rgb(87.0, 89.0, 92.0);
     -dark-black: rgb(39.0, 40.0, 40.0);
@@ -67,10 +88,13 @@
         linear-gradient(to bottom, derive(-fx-base,-30.0%), derive(-fx-base,-60.0%)),
         linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
     -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.9em 0.416667em 0.9em 0.416667em;
+    /*-fx-padding: 0.9em 0.416667em 0.9em 0.416667em;*/
     -fx-effect: dropshadow(two-pass-box,black,5.0,0.2,0.0,0.0);
 }
 
+.tool-bar2{	
+    -fx-base:  white;
+}
 
 .segmented-button-bar .button {
     -fx-background-color:
@@ -93,7 +117,7 @@
 }
 
 .segmented-button-bar .button:hover{
-	-fx-background-color:rgb(255.0,119.0,0.0,0.9);
+	-fx-background-color:firebrick;
 }
 
 .segmented-button-bar .button:pressed {
@@ -412,8 +436,8 @@
 }
 
 .jfx-tab-pane#specialJFXTabPane .tab:hover .tab-label{
-	-fx-text-fill:black;
-	-fx-background-color:white;	
+	-fx-text-fill:white;
+	-fx-background-color:black;	
 	-fx-background-radius: 0.0;
 	-fx-cursor:hand;
 }
@@ -433,7 +457,8 @@
 
 .tab-pane .tab-header-area .tab-header-background {
     /*-fx-opacity: 0.0;*/
-    -fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  	    
+    /*-fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  */
+    -fx-background-color:#303030;	    
 }
 
 .tab-pane{	
@@ -444,34 +469,43 @@
 .tab-pane .tab{
     -fx-background-color: linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);
     -fx-background-radius:  0.0 0.0 0.0 0.0;
+    -fx-border-color:transparent transparent transparent transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;  
     -fx-cursor:hand; 
 }
 
 .tab-pane .tab:selected{
-    -fx-background-color: orange;
+    -fx-background-color: #FF4A00;
+}
+
+.tab-pane .tab:selected:hover{
+    -fx-background-color: #FF4A00;
+}
+
+.tab-pane .tab:hover{
+	-fx-background-color:black;
 }
 
 
-.tab .tab-label { 
+.tab-pane .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 12.0px; /* before it was 12px */
+    -fx-font-size: 13px; /* before it was 12px */
     -fx-font-weight: bold;
     -fx-wrap-text: true;
     
 }
 
-.tab:selected .tab-label { 
+.tab-pane .tab:selected .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill:black ; /* before it was BROWN */
     /*-fx-font-size:130.0%;*/
 }
 
-.tab:hover .tab-label{
-	-fx-text-fill:white;
-	-fx-background-color:firebrick;	
+.tab-pane .tab:hover .tab-label{
+	-fx-text-fill:black;
+	-fx-background-color:white;	
 	-fx-background-radius: 0.0 0.0 0.0 0.0;
 }
 
@@ -513,8 +547,9 @@
 
 
 /*  LibrariesTabPane */
-#LibrariesTabPane .tab-header-area .tab-header-background {
-     /*-fx-background-color:linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%); */    	    
+#MultipleLibrariesTabPane .tab-header-area .tab-header-background {
+     -fx-background-color:rgb(0.0,0.0,0.0,0.8);   	
+     -fx-background-radius:5.0 5.0  0.0 0.0;    
 }
 
 
@@ -535,7 +570,7 @@
  }
  
  .button:hover{
- 	-fx-background-color:rgb(255.0,119.0,0.0,0.7);
+ 	-fx-background-color:firebrick;
     /*-fx-background-color: 
         linear-gradient(from 0.0% 93.0% to 0.0% 100.0%, #a34313 0.0%, #903b12 100.0%),
         #9d4024,
@@ -625,7 +660,7 @@
 
  
  .context-menu {
-  	-fx-background-color:rgb(0.0,0.0,0.0,0.85);
+  	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
   	-fx-background-radius:4.0;
   	/*-fx-border-width:2.0; 	
     -fx-border-style:segments(4.0); */
@@ -638,7 +673,8 @@
  }
  
  .menu-item:focused {
- 	-fx-background-color:orange;
+ 	-fx-background-color:firebrick;
+ 	-fx-text-fill:black;
  	-fx-background-radius:10.0;
  }
  
@@ -662,7 +698,7 @@
   /* The main scrollbar CSS class of ListView */
  .scroll-bar:horizontal ,
   .scroll-bar:vertical{
-    -fx-background-color:transparent;
+    -fx-background-color:rgb(255.0,255.0,255.0,0.85);
     -fx-cursor: hand ;
 	
 }
@@ -722,7 +758,7 @@
  .increment-button:hover , .decrement-button:hover {
     -fx-background-color:derive(gray,100.0%);
 	-fx-border-color:derive(gray,80.0%);	
-	-fx-padding:10.0px;
+	/*-fx-padding:10.0px;*/
 }
  
  
@@ -824,7 +860,11 @@
 ******************************************************************************/
 
 .progress-indicator{
-	-fx-progress-color:orange;
+	-fx-progress-color:firebrick;
+}
+
+.progress-indicator:determinate .determinate-indicator .percentage{
+	-fx-fill:white;
 }
 
 .progress-bar{
@@ -832,14 +872,15 @@
 }
 
 .progress-bar > .bar {
-    -fx-background-color: linear-gradient(
+	-fx-background-color:firebrick;
+    /*-fx-background-color: linear-gradient(
         from 0.0px 0.75em to 0.75em 0.0px,
         repeat,
         -fx-accent 0.0%,
         -fx-accent 49.0%,
         derive(-fx-accent, 30.0%) 50.0%,
         derive(-fx-accent, 30.0%) 99.0%
-    );
+    );*/
     
     -fx-background-insets: 1.0 1.0 1.0 1.0;
     -fx-padding: 0.2em;
@@ -961,47 +1002,47 @@
 ******************************************************************************/
 
 .search-box .text-field, .libraries-search-box .text-field {
-	-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);
-    -fx-background-insets:3.0;
+	/*-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);*/
+    /*-fx-background-insets:3.0;*/
+    -fx-background-insets: -0.1, 2.0;
     -fx-background-radius: 5.0;
     -fx-border-radius:5.0;
     -fx-border-width:1.0;
     -fx-prompt-text-fill:black;
     -fx-text-fill:black;
-    -fx-font-size:12.0;
-    -fx-font-weight:bold; 
-        
+    -fx-font-size:13.0;
+    -fx-font-weight:bold;       
 }
 
 
 .search-box .text-field:focused, .libraries-search-box .text-field:focused,.search-box .text-field:hover, .libraries-search-box .text-field:hover{
-	-fx-effect: null;
+	/*-fx-effect: null;*/
 	-fx-background-color: firebrick;
 	-fx-border-color:white;
 	-fx-text-fill:white;
 	-fx-prompt-text-fill:white;
-    -fx-background-insets: -0.1, 2.0;
-     -fx-font-size:14.0;
+    /*-fx-background-insets: -0.1, 2.0;*/
 }
 
-.library-search-box-item{
-	-fx-background-color:orange;
-	-fx-background-radius:5.0px;
+.search-box-window-item{
+	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
+	-fx-background-radius:5.0;
+	-fx-text-fill:white;
 	-fx-font-size:15.0;	
-	-fx-text-fill:black;
+	-fx-font-weight:bold;
 	-fx-cursor:hand;
 	
 }
 
-.library-search-box-item:hover{
+.search-box-window-item:hover{
 	-fx-background-color:black;	
-	-fx-text-fill:white;
+	-fx-text-fill:firebrick;
 }
 
-#library-search-box-label{
-	-fx-text-fill:black; 
+.search-box-window-label{
+	-fx-text-fill:white; 
 	-fx-font-weight:bold;
-	-fx-font-size:120.0%;
+	-fx-font-size:15.0;
 }
 
  /*******************************************************************************
@@ -1303,11 +1344,11 @@
 
 .title-menu-item:disabled .label {
     -fx-opacity: 1.0;
-    -fx-font-size:10.0;
+    -fx-font-size:11.0;
     -fx-font-weight:bold;
     -fx-text-fill:white;
     -fx-text-alignment:center; 
-    -fx-text-fill:orange;   
+    -fx-text-fill: #BBFF00;   
 }
 
 .title-menu-item:disabled:hover .label {

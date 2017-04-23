@@ -13,7 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -79,12 +81,14 @@ public class MultipleLibraries extends StackPane {
     @FXML
     private void initialize() {
 
+	tabPane.setId("MultipleLibrariesTabPane");
+
 	// emptyLabel
 	emptyLabel.setOnMouseReleased(m -> {
-	    if (Main.libraryMode.libraryViewer.items.isEmpty())
+	    if (Main.libraryMode.teamViewer.getViewer().getItemsObservableList().isEmpty())
 		Main.libraryMode.createNewLibrary(emptyLabel);
 	    else
-		Main.libraryMode.libraryViewer.items.get(0).libraryOpenClose(true, false);
+		Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).libraryOpenClose(true, false);
 	});
 
 	// emptyLabelRegion
@@ -140,8 +144,8 @@ public class MultipleLibraries extends StackPane {
     public Library getSelectedLibrary() {
 
 	// selection model is empty?
-	return !tabPane.getSelectionModel().isEmpty() ? Main.libraryMode
-		.getLibraryWithName(tabPane.getSelectionModel().getSelectedItem().getTooltip().getText()) : null;
+	return tabPane.getSelectionModel().isEmpty() ? null
+		: Main.libraryMode.getLibraryWithName(tabPane.getSelectionModel().getSelectedItem().getTooltip().getText());
     }
 
     /**
@@ -153,8 +157,7 @@ public class MultipleLibraries extends StackPane {
      */
     public Tab getTab(String name) {
 
-	return tabPane.getTabs().stream().filter(tab -> tab.getTooltip().getText().equals(name)).findFirst()
-		.orElse(null);
+	return tabPane.getTabs().stream().filter(tab -> tab.getTooltip().getText().equals(name)).findFirst().orElse(null);
     }
 
     /**
@@ -206,19 +209,18 @@ public class MultipleLibraries extends StackPane {
 	// indicator
 	ProgressBar indicator = new ProgressBar();
 	indicator.progressProperty().bind(library.getSmartController().getIndicator().progressProperty());
-	indicator.visibleProperty().bind(library.getSmartController().getIndicator().visibleProperty());
-	indicator.setMaxSize(30, 11);
+	indicator.setMaxSize(35, 15);
 
 	// text
 	Text text = new Text();
-	text.setStyle("-fx-font-size:70%;");
+	text.setStyle("-fx-font-size:70%; -fx-fill:black;");
 	text.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"));
 	// text.visibleProperty().bind(library.getSmartController().inputService.runningProperty())
 
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
-	marquee.setStyle(
-		"-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
+	marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
+	//tab.textProperty().bind(marquee.textProperty())
 
 	stack.getChildren().addAll(indicator, text);
 	stack.setManaged(false);
@@ -249,8 +251,8 @@ public class MultipleLibraries extends StackPane {
 	});
 
 	// stack
-	library.getSmartController().getIndicator().visibleProperty().addListener(l -> {
-	    if (indicator.isVisible()) {
+	library.getSmartController().getIndicatorVBox().visibleProperty().addListener((observable, oldValue, newValue) -> {
+	    if (newValue) { //if it is visible
 		stack.setManaged(true);
 		stack.setVisible(true);
 		// tab.setGraphic(hBox)
@@ -260,6 +262,8 @@ public class MultipleLibraries extends StackPane {
 		// tab.setGraphic(null)
 	    }
 	});
+	//library.getLibraryProgressIndicator().progressProperty().bind(indicator.progressProperty());
+	//library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty());
 
 	tab.setOnCloseRequest(c -> {
 	    if (library.getSmartController().isFree(true))
@@ -270,6 +274,16 @@ public class MultipleLibraries extends StackPane {
 
 	tab.setGraphic(hBox);
 	tabPane.getTabs().add(tab);
+
+	//ContextMenu
+	ContextMenu contextMenu = new ContextMenu();
+
+	//--findLibrary
+	MenuItem findLibrary = new MenuItem("Go to Library");
+	findLibrary.setOnAction(a -> Main.libraryMode.teamViewer.getViewer().setCenterIndex(library.getPosition()));
+	contextMenu.getItems().add(findLibrary);
+
+	tab.setContextMenu(contextMenu);
     }
 
     /**

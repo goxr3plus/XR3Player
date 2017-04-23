@@ -1,130 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<fx:root prefHeight="571.0" prefWidth="871.0" style="-fx-background-color: rgb(255,255,255,0.95);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="523.0" prefWidth="752.0" style="-fx-background-color: rgb(255,255,255,0.95);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.8); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15 15 0 0;" text="Login creating or selecting a user">
+            <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.8); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15 15 0 0;" text="Login creating or selecting a user">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Label>
-            <StackPane fx:id="usersStackView" prefHeight="277.0">
-               <children>
-                  <Button fx:id="previous" mnemonicParsing="false" styleClass="arrowButton2" translateX="-100.0" translateY="5.0" StackPane.alignment="BOTTOM_CENTER">
-                     <tooltip>
-                        <Tooltip text="Previous" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/right.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <StackPane.margin>
-                        <Insets bottom="10.0" />
-                     </StackPane.margin>
-                  </Button>
-                  <Button fx:id="next" mnemonicParsing="false" styleClass="arrowButton2" translateX="100.0" translateY="5.0" StackPane.alignment="BOTTOM_CENTER">
-                     <tooltip>
-                        <Tooltip text="Next" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true" translateX="2.0">
-                           <image>
-                              <Image url="@../image/right.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <StackPane.margin>
-                        <Insets bottom="10.0" />
-                     </StackPane.margin>
-                  </Button>
-                  <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Reflection />
-                     </effect>
-                  </Button>
-                  <Button fx:id="createUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="60.0" styleClass="arrowButton2" translateY="-5.0" StackPane.alignment="BOTTOM_CENTER">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/add.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Create new User" />
-                     </tooltip>
-                  </Button>
-               </children>
-            </StackPane>
-            <ToolBar orientation="VERTICAL">
-              <items>
-                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="segmented-button-bar">
+            <BorderPane fx:id="borderPane">
+               <bottom>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: rgb(255,255,255,0.4); -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+                     <content>
+                        <StackPane>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="161.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 45 45 0 0; -fx-border-color: firebrick; -fx-border-radius: 15 15 0 0; -fx-border-width: 2.5;" text="^Libraries ^" visible="false">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <GridPane fx:id="topGrid" pickOnBounds="false" visible="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <JFXToggleButton fx:id="selectionModeToggle" disable="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Selection Mode" textFill="WHITE" visible="false">
+                                       <tooltip>
+                                          <Tooltip text="Enable Libraries Selection" />
+                                       </tooltip>
+                                    </JFXToggleButton>
+                                 </children>
+                              </GridPane>
+                              <BorderPane>
+                                 <center>
+                                    <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="55.0" prefWidth="182.0" spacing="8.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
+                                             <graphic>
+                                                <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/right.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
+                                             <graphic>
+                                                <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                                   <image>
+                                                      <Image url="@../image/Plus-32.png" />
+                                                   </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="Create new Library" />
+                                             </tooltip>
+                                          </JFXButton>
+                                          <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
+                                             <graphic>
+                                                <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                   <image>
+                                                      <Image url="@../image/right.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" />
+                                       </BorderPane.margin>
+                                       <padding>
+                                          <Insets right="8.0" />
+                                       </padding>
+                                    </HBox>
+                                 </center>
+                                 <right>
+                                    <ToolBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="300.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
+                                       <items>
+                                          <HBox fx:id="botttomHBox" alignment="CENTER" />
+                                       </items>
+                                    </ToolBar>
+                                 </right>
+                                 <left>
+                                    <ToolBar fx:id="userToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="223.0" BorderPane.alignment="CENTER">
+                                      <items>
+                                          <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="segmented-button-bar">
+                                             <children>
+                                                <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" styleClass="first" text="Delete ">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" styleClass="last" text="Rename">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                      </items>
+                                    </ToolBar>
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </StackPane>
+                     </content>
+                     <BorderPane.margin>
+                        <Insets bottom="3.0" />
+                     </BorderPane.margin>
+                  </ScrollPane>
+               </bottom>
+               <center>
+                  <StackPane fx:id="usersStackView" prefHeight="277.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" styleClass="first" text="Login">
+                        <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                        </Button>
-                        <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Rename">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" text="Delete ">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="137.0" styleClass="last" text="Exit">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
+                           <effect>
+                              <Reflection />
+                           </effect>
                         </Button>
                      </children>
-                  </HBox>
-              </items>
-            </ToolBar>
+                  </StackPane>
+               </center>
+            </BorderPane>
+            <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="71.0" prefWidth="199.0" style="-fx-font-size: 30;" text="Launch">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
       </VBox>
    </center>
-   <top>
-      <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15; -fx-border-color: transparent firebrick firebrick; -fx-border-radius: 0 0 10 10; -fx-border-width: 2;" text=" XR3Player " BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
-         <cursor>
-            <Cursor fx:constant="MOVE" />
-         </cursor>
-         <padding>
-            <Insets bottom="2.0" />
-         </padding>
-      </Label>
-   </top>
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -178,4 +219,41 @@
          </children>
       </HBox>
    </bottom>
+   <top>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="42.0" prefWidth="276.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15; -fx-border-color: transparent firebrick firebrick; -fx-border-radius: 0 0 10 10; -fx-border-width: 2;" text="~ XR3Player ~" BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+               <padding>
+                  <Insets bottom="2.0" />
+               </padding>
+            </Label>
+         </center>
+         <right>
+            <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" styleClass="arrowButton2" text="Exit" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="Exit application" />
+               </tooltip>
+            </Button>
+         </right>
+         <BorderPane.margin>
+            <Insets right="5.0" />
+         </BorderPane.margin>
+         <left>
+            <Button fx:id="changeBackground" disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="114.0" style="-fx-font-size: 8;" styleClass="arrowButton2" text="Change Background[Comming...]" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="Exit application" />
+               </tooltip>
+            </Button>
+         </left>
+      </BorderPane>
+   </top>
 </fx:root>

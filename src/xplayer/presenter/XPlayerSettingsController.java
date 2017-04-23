@@ -79,10 +79,10 @@ public class XPlayerSettingsController extends BorderPane {
         // When this can be visible?
         this.setOnKeyReleased(key -> {
             if (key.getCode() == KeyCode.ESCAPE)
-                xPlayerUI.settingsToggle.setSelected(false);
+                xPlayerUI.getSettingsToggle().setSelected(false);
         });
         this.visibleProperty()
-            .bind(xPlayerUI.settingsToggle.selectedProperty());
+            .bind(xPlayerUI.getSettingsToggle().selectedProperty());
         this.visibleProperty()
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue) // true?

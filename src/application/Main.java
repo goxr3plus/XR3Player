@@ -8,14 +8,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.controlsfx.control.Notifications;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.jsoup.Jsoup;
@@ -29,7 +30,6 @@ import application.users.LoginMode;
 import application.users.User;
 import application.users.UserMode;
 import borderless.BorderlessScene;
-import browsers.WebBrowserController;
 import database.LocalDBManager;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -40,6 +40,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -52,15 +53,14 @@ import services.FilesFilterService;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
 import smartcontroller.PlayedMediaList;
-import smartcontroller.SmartSearcher.AdvancedSearch;
+import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
 import treeview.TreeViewManager;
-import windows.DJMode;
+import webBrowser.WebBrowserController;
 import windows.ExportWindowController;
 import windows.RenameWindow;
-import windows.SpecialChooser;
 import windows.StarWindow;
 import xplayer.presenter.XPlayersList;
 import xr3capture.CaptureWindow;
@@ -113,6 +113,9 @@ public class Main extends Application {
      */
     public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
 
+    /**
+     * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
+     */
     public static CaptureWindow captureWindow = new CaptureWindow();
 
     //
@@ -150,7 +153,10 @@ public class Main extends Application {
 
     //
 
-    public static WebBrowserController webBrowser = new WebBrowserController();
+    /**
+     * The WebBrowser of the Application
+     */
+    public static WebBrowserController webBrowser;
 
     //----------------END: The above have not depencities on other ---------------------------------//
 
@@ -173,12 +179,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 60;
+    public static final int currentVersion = 62;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "03/04/2017";
+    public static final String releaseDate = "20/04/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -231,8 +237,11 @@ public class Main extends Application {
 	    // logger.info("XR3Player Application Started")
 	    System.out.println("XR3Player Application Started");
 
+	    //Initialize some classes which heavily rely on JavaFX Thread here
+	    webBrowser = new WebBrowserController();
+
 	    //ApplicationStackPane
-	    applicationStackPane.getChildren().addAll(root, updateScreen, loginMode);
+	    applicationStackPane.getChildren().addAll(root, loginMode, updateScreen);
 
 	    //ApplicationBorderPane	    
 	    //applicationBorderPane.setStyle("-fx-background-color:black;")
@@ -251,11 +260,11 @@ public class Main extends Application {
 
 	    // Window
 	    window = primaryStage;
-	    starWindow.window.initOwner(window);
-	    renameWindow.window.initOwner(window);
-	    exportWindow.window.initOwner(window);
-	    consoleWindow.window.initOwner(window);
-	    settingsWindow.window.initOwner(window);
+	    starWindow.getWindow().initOwner(window);
+	    renameWindow.getWindow().initOwner(window);
+	    exportWindow.getWindow().initOwner(window);
+	    consoleWindow.getWindow().initOwner(window);
+	    settingsWindow.getWindow().initOwner(window);
 	    topBar.addXR3LabelBinding();
 
 	    // captureWindow
@@ -280,45 +289,58 @@ public class Main extends Application {
 	    });
 
 	    // Root
-	    root.setStyle(
-		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	    // root.setStyle(
+	    //	    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	    // Scene
 	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, applicationStackPane, 650, 500);
-	    scene.setMoveControl(loginMode.xr3PlayerLabel);
+	    scene.setMoveControl(loginMode.getXr3PlayerLabel());
 	    scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 
 	    // Scene and Show
+	    determineBackgroundImage();
 	    window.setScene(scene);
 	    window.show();
 
 	    //Do this in order to now have problems with SongsContextMenu
 	    songsContextMenu.show(window, 0, 0);
 	    songsContextMenu.hide();
-	    libraryMode.libraryViewer.contextMenu.show(window, 0, 0);
-	    libraryMode.libraryViewer.contextMenu.hide();
+	    libraryMode.contextMenu.show(window, 0, 0);
+	    libraryMode.contextMenu.hide();
 
-	    //InfoTool.DATABASE_FOLDER_NAME Exists?
-	    if (!new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists()) {
-		boolean dataBaseRootCreated = new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).mkdir();
+	    //Check if dataBase Folder exists
+	    File dataBaseFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
+	    if (!dataBaseFolder.exists()) {
 		//If it can not be created [FATAL ERROR]
-		if (!dataBaseRootCreated) {
+		if (!dataBaseFolder.mkdir())
 		    ActionTool.showNotification("Fatal Error!",
 			    "Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
 			    Duration.seconds(45), NotificationType.ERROR);
-		}
+	    } //If it does
+	    else {
 
-	    } else {
 		//Create the List with the Available Users
 		AtomicInteger counter = new AtomicInteger();
-		loginMode.userViewer.addMultipleUsers(
-			Files.walk(Paths.get(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN), 1).filter(path -> path.toFile().isDirectory() && !path.toString().equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
-				.map(path -> new User(path.getFileName().toString(), counter.getAndAdd(1))).collect(Collectors.toList()));
+		loginMode.userViewer.addMultipleUsers(Files.walk(Paths.get(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN), 1)
+			.filter(path -> path.toFile().isDirectory() && !(path + "").equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
+			.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1))).collect(Collectors.toList()));
 
 		//avoid error
-		if (!loginMode.userViewer.getItems().isEmpty())
-		    loginMode.userViewer.setCenterIndex(loginMode.userViewer.getItems().size() / 2);
+		if (!loginMode.userViewer.getItemsObservableList().isEmpty())
+		    loginMode.userViewer.setCenterIndex(loginMode.userViewer.getItemsObservableList().size() / 2);
 	    }
+
+	    //Create Original xr3database singature file	    
+	    if (dataBaseFolder.exists() && !InfoTool.DATABASE_SIGNATURE_FILE.exists())
+		try {
+		    //I need to fix this for errors
+		    InfoTool.DATABASE_SIGNATURE_FILE.createNewFile();
+		} catch (IOException ex) {
+		    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
+		}
+
+	    //Users Search Box
+	    loginMode.userSearchBox.registerListeners(window);
 
 	    //Check Compatibility
 	    checkJavaCombatibility();
@@ -333,7 +355,8 @@ public class Main extends Application {
 
 	} catch (Exception ex) {
 	    logger.log(Level.SEVERE, "Application has serious problem and can't start", ex);
-	    ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(", Duration.millis(10000), NotificationType.ERROR);
+	    ActionTool.showNotification("Fatal Error", "Fatal Error happened trying to run the application... :(", Duration.millis(10000),
+		    NotificationType.ERROR);
 	}
 
     }
@@ -343,15 +366,127 @@ public class Main extends Application {
 	System.out.println("Hello from init");
     }
 
-    //public static final FlipPanel rootFlipPane = new FlipPanel(Orientation.HORIZONTAL);
-    //public static final FlipPanel mainModeFlipPane = new FlipPanel(Orientation.HORIZONTAL);
+    /**
+     * The user has the ability to change the Library Image
+     * 
+     * @deprecated
+     */
+    private static void changeBackgroundImage() {
+
+	File imageFile = Main.specialChooser.prepareToSelectImage(Main.window);
+	if (imageFile == null)
+	    return;
+
+	//Check the given image
+	Image image = new Image(imageFile.toURI() + "");
+	if (image.getWidth() > 4800 || image.getHeight() > 4800) {
+	    ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(),
+		    Duration.millis(1500), NotificationType.WARNING);
+	    return;
+	}
+	if (image.getWidth() < 1200 || image.getHeight() < 1200) {
+	    ActionTool.showNotification("Warning", "Minimum Size Allowed 1200*1200 \n Current is:" + image.getWidth() + "*" + image.getHeight(),
+		    Duration.millis(1500), NotificationType.WARNING);
+	    return;
+	}
+
+	//	String maou = file.getAbsoluteFile().toURI().toString();
+	//	maou = maou.replaceAll("\\Q\\\\E", "//");
+	//	loginMode.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('" + maou
+	//		+ "'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	//	
+
+	//Start a Thread to copy the File
+	new Thread(() -> {
+	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()))) {
+		paths.forEach(path -> {
+		    File file2 = path.toFile();
+		    if (file2.getName().contains("background") && !file2.isDirectory()) {
+			file2.delete();
+		    }
+		});
+	    } catch (IOException ex) {
+		ex.printStackTrace();
+	    }
+
+	    if (!ActionTool.copy(imageFile.getAbsolutePath(),
+		    InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "background." + InfoTool.getFileExtension(imageFile.getAbsolutePath())))
+		Platform.runLater(() -> ActionTool.showNotification("Failed saving background image", "Failed to change the background image...",
+			Duration.millis(2500), NotificationType.SIMPLE));
+	    else {
+
+		try {
+		    Thread.sleep(3500);
+		} catch (InterruptedException ex) {
+		    ex.printStackTrace();
+		}
+		Platform.runLater(Main::determineBackgroundImage);
+	    }
+	}).start();
+    }
+
+    static boolean backgroundFound;
+    static String backgroundPath;
+
+    /**
+     * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is
+     * being added :)
+     * 
+     * @deprecated
+     */
+    private static void determineBackgroundImage() {
+	//	backgroundFound = false;
+	//	backgroundPath = null;
+	//
+	//	//Check if a background image exists
+	//	if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists())
+	//	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()))) {
+	//		paths.forEach(path -> {
+	//		    File file = path.toFile();
+	//		    if (file.getName().contains("background") && !file.isDirectory()) {
+	//
+	//			//Platform.runLater(() -> {
+	//			System.out.println("Is JavaFX Thread :" + Platform.isFxApplicationThread());
+	//			String maou = file.getAbsoluteFile().toURI().toString();
+	//			maou = maou.replaceAll("\\Q\\\\E", "//");
+	//			System.out.println("Maou=\n" + maou);
+	//
+	//			backgroundPath = maou;
+	//
+	//			//loginMode.setStyle(null);
+	//			
+	//			//loginMode.setStyle(
+	//			//	"-fx-background-color:red; -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	//
+	//			loginMode.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('e"
+	//				+ backgroundPath + "'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	//			
+	//			loginMode.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('"
+	//				+ backgroundPath + "'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	//
+	//			//backgroundPath = null;
+	//			//loginMode.setStyle(root.getStyle());
+	//			//backgroundFound = true;
+	//		    }
+	//		});
+	//	    } catch (IOException ex) {
+	//		ex.printStackTrace();
+	//	    }
+
+	//Default Image
+	if (backgroundPath == null)
+	    loginMode.setStyle(
+		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+
+	root.setStyle(loginMode.getStyle());
+    }
 
     /**
      * Starts the application for this specific user
      * 
-     * @param user
+     * @param u
      */
-    public static void startAppWithUser(User user) {
+    public static void startAppWithUser(User u) {
 
 	//Close the LoginMode
 	loginMode.setVisible(false);
@@ -364,7 +499,7 @@ public class Main extends Application {
 	root.setLeft(sideBar);
 
 	//userNameLabel	
-	sideBar.userNameLabel.setText("Hello -> " + user.getUserName() + " <- !");
+	sideBar.userNameLabel.setText("Hello -> " + u.getUserName() + " <- !");
 
 	//Top Bar is the new Move Control
 	scene.setMoveControl(topBar);
@@ -376,11 +511,11 @@ public class Main extends Application {
 	    //----------------START:initialize everything needed------------------------------------------
 
 	    //Create this in a Thread
-	    Thread s = new Thread(() -> dbManager = new LocalDBManager(user.getUserName()));
+	    Thread s = new Thread(() -> dbManager = new LocalDBManager(u.getUserName()));
 	    s.start();
 
 	    //Do the below until the database is initialized
-	    userMode.setUser(user);
+	    userMode.setUser(u);
 	    libraryMode.add(Main.multipleTabs, 0, 1);
 	    sideBar.setVisible(true);
 	    sideBar.setManaged(true);
@@ -392,6 +527,18 @@ public class Main extends Application {
 	    specialJFXTabPane.getTabs().add(new Tab("tab4", webBrowser));
 	    specialJFXTabPane.setTabMaxWidth(0);
 	    specialJFXTabPane.setTabMaxHeight(0);
+
+	    //Add listeners to each tab
+	    final AtomicInteger counter = new AtomicInteger(-1);
+	    specialJFXTabPane.getTabs().forEach(tab -> {
+		final int index = counter.addAndGet(1);
+		tab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+		    if (specialJFXTabPane.getTabs().get(index).isSelected() && !topBar.isTabSelected(index))
+			topBar.selectTab(index);
+		    //System.out.println("Entered Tab " + index) //this is inside curly braces with the above if
+
+		});
+	    });
 	    root.setCenter(specialJFXTabPane);
 
 	    //---------------END:initialize everything needed---------------------------------------------
@@ -399,16 +546,17 @@ public class Main extends Application {
 	    //----------------START: Important Work-------------------------------------------------------
 
 	    // Register some listeners to the main window
-	    libraryMode.librariesSearcher.registerListeners();
+	    libraryMode.librariesSearcher.registerListeners(window);
 
 	    //When Top Bar to be visible?
 	    //topBar.visibleProperty()
-	    //    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()));
-	    //sideBar.visibleProperty().bind(topBar.visibleProperty());
+	    //    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()))
+	    //sideBar.visibleProperty().bind(topBar.visibleProperty())
 
 	    //Important binding 
 	    libraryMode.multipleLibs.emptyLabel.textProperty()
-		    .bind(Bindings.when(Main.libraryMode.libraryViewer.list.emptyProperty()).then("Click here to create a library...").otherwise("Click here to open the first available library..."));
+		    .bind(Bindings.when(Main.libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
+			    .then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 
 	    //Load the DataBase - After the DBManager has been initialized of course ;)
 	    try {
@@ -416,7 +564,6 @@ public class Main extends Application {
 	    } catch (InterruptedException ex) {
 		ex.printStackTrace();
 	    }
-	    libraryMode.initPreparedStatements();
 	    dbManager.loadApplicationDataBase();
 
 	    //  dbManager.recreateJSonDataBase()
@@ -444,10 +591,13 @@ public class Main extends Application {
 	//String minor = javaVersionElements[2]
 	String update = javaVersionElements[3];
 	//String build = javaVersionElements[4]
+	//System.out.println(Arrays.asList(javaVersionElements));
 
 	if (Integer.parseInt(major) < 8 || (Integer.parseInt(major) < 8 && Integer.parseInt(update) < 111))
-	    ActionTool.showNotification("Java Version Problem", "XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:" + System.getProperty("java.version")
-		    + "\nThe application may crash or not work at all!\nPlease Update your Java Version :)", Duration.seconds(40), NotificationType.ERROR);
+	    ActionTool.showNotification("Java Version Problem",
+		    "XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:" + System.getProperty("java.version")
+			    + "\nThe application may crash or not work at all!\nPlease Update your Java Version :)",
+		    Duration.seconds(40), NotificationType.ERROR);
     }
 
     /**
@@ -535,9 +685,11 @@ public class Main extends Application {
 	    String path = InfoTool.getBasePathForClass(Main.class);
 	    String applicationPath = new File(path + "XR3Player.jar").getAbsolutePath();
 
-	    Platform.runLater(Notifications.create().title("Processing")
-		    .text("Restarting XR3Player....\n Current directory path is:[ " + applicationPath + " ] \n If this takes more than 20 seconds either the computer is slow or it has failed....")
-		    .hideAfter(Duration.seconds(25))::show);
+	    //Show message that application is restarting
+	    Platform.runLater(() -> ActionTool.showNotification("Message",
+		    "Restarting XR3Player....\n Current directory path is:[ " + applicationPath
+			    + " ] \n If this takes more than 20 seconds either the computer is slow or it has failed....",
+		    Duration.seconds(25), NotificationType.INFORMATION));
 
 	    try {
 
@@ -553,17 +705,20 @@ public class Main extends Application {
 		pause.setOnFinished(f -> {
 
 		    // Show failed message
-		    Platform.runLater(Notifications.create().title("Failed to restart!")
-			    .text("Failed to restart XR3Player!\nBuilder Directory:" + applicationPath + "\nTrying to start:" + path + "XR3Player.jar\nTry to do it manually...")
-			    .hideAfter(Duration.seconds(10))::showError);
+		    Platform.runLater(
+			    () -> ActionTool
+				    .showNotification(
+					    "Message", "Failed to restart XR3Player!\nBuilder Directory:" + applicationPath + "\nTrying to start:"
+						    + path + "XR3Player.jar\nTry to do it manually...",
+					    Duration.seconds(10), NotificationType.ERROR));
 
 		    // Ask the user
-		    if (askUser) {
+		    if (askUser)
 			Platform.runLater(() -> {
 			    if (ActionTool.doQuestion("Restart failed.... force shutdown?"))
 				terminate(false);
 			});
-		    } else {
+		    else {
 			// Terminate after showing the message for a while
 			PauseTransition forceTerminate = new PauseTransition(Duration.seconds(2));
 			forceTerminate.setOnFinished(fn -> terminate(false));
@@ -593,10 +748,13 @@ public class Main extends Application {
 		Platform.runLater(() -> {
 		    Main.updateScreen.setVisible(false);
 
-		    // Show failed message
-		    Platform.runLater(Notifications.create().title("Error")
-			    .text("Failed to restart XR3Player!\nBuilder Directory:" + path + "\nTrying to start:" + path + "XR3ImageViewer.jar\nTry to do it manually...")
-			    .hideAfter(Duration.millis(2000))::showError);
+		    // Show failed message		  
+		    Platform.runLater(
+			    () -> ActionTool
+				    .showNotification(
+					    "Message", "Failed to restart XR3Player!\nBuilder Directory:" + applicationPath + "\nTrying to start:"
+						    + path + "XR3Player.jar\nTry to do it manually...",
+					    Duration.seconds(10), NotificationType.ERROR));
 		});
 	    }
 	}, "Restart Application Thread").start();
@@ -613,7 +771,8 @@ public class Main extends Application {
 	// Not already running
 	if (updaterThread == null || !updaterThread.isAlive()) {
 	    updaterThread = new Thread(() -> {
-		Platform.runLater(() -> ActionTool.showNotification("Searching for Updates", "Fetching informations from server...", Duration.millis(1000), NotificationType.INFORMATION));
+		Platform.runLater(() -> ActionTool.showNotification("Searching for Updates", "Fetching informations from server...",
+			Duration.millis(1000), NotificationType.INFORMATION));
 
 		if (InfoTool.isReachableByPing("www.google.com")) {
 
@@ -633,12 +792,13 @@ public class Main extends Application {
 			Platform.runLater(() -> {
 			    Alert alert = new Alert(AlertType.CONFIRMATION);
 			    alert.setTitle("Update Window");
-			    if (Integer.valueOf(lastArticle.id()) > currentVersion) {
-				alert.setHeaderText("New Update available!!!");
-				alert.setContentText("Update ->( " + lastArticle.id() + " )<- is available!\n\t\t\t\t\tYour current version is: ->( " + currentVersion + " )<-");
-			    } else {
+			    if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
 				alert.setHeaderText("You are up too date :)");
 				alert.setContentText("Your current version is: ->( " + currentVersion + " )<-");
+			    } else {
+				alert.setHeaderText("New Update available!!!");
+				alert.setContentText("Update ->( " + lastArticle.id() + " )<- is available!\n\t\t\t\t\tYour current version is: ->( "
+					+ currentVersion + " )<-");
 			    }
 			    alert.initStyle(StageStyle.UTILITY);
 			    alert.initOwner(Main.window);
@@ -666,11 +826,9 @@ public class Main extends Application {
 
 			    String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
 			    doc.getElementsByTag("article").forEach(element -> {
-				String id = element.id();
-
 				// Append the text to the textArea
-				textArea.appendText(
-					"\n\n-------------Start of Update (" + id + ")----------------------------------------------------------------------------------------------------\n");
+				textArea.appendText("\n\n-------------Start of Update (" + element.id()
+					+ ")----------------------------------------------------------------------------------------------------\n");
 
 				// Information
 				textArea.appendText("->Information: ");
@@ -692,8 +850,8 @@ public class Main extends Application {
 				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "firebrick"));
 				final AtomicInteger counter = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
-				    if (counter.addAndGet(+1) >= 1)
-					textArea.appendText("\t" + (counter) + ")" + el + "\n");
+				    if (counter.addAndGet(1) >= 1)
+					textArea.appendText("\t" + counter + ")" + el + "\n");
 				});
 
 			    });
@@ -721,16 +879,15 @@ public class Main extends Application {
 
 			});
 		    } catch (IOException ex) {
-			Platform.runLater(
-				() -> ActionTool.showNotification("Problem Occured", "Trying to fetch update information a problem occured", Duration.millis(2500), NotificationType.WARNING));
+			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Trying to fetch update information a problem occured",
+				Duration.millis(2500), NotificationType.WARNING));
 			logger.log(Level.WARNING, "", ex);
 		    }
 
-		} else {
-		    Platform.runLater(() -> ActionTool.showNotification("Can't Connect",
-			    "Can't connect to the update site :\n" + "1) Maybe there is not internet connection" + "\n2)GitHub is down for maintenance", Duration.millis(2500),
+		} else
+		    Platform.runLater(() -> ActionTool.showNotification("Can't Connect", "Can't connect to the update site :\n"
+			    + "1) Maybe there is not internet connection" + "\n2)GitHub is down for maintenance", Duration.millis(2500),
 			    NotificationType.ERROR));
-		}
 
 	    }, "Application Update Thread");
 

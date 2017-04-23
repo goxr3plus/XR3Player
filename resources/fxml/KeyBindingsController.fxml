@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="470.0" prefWidth="552.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="470.0" prefWidth="552.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <HBox spacing="5.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,8 +25,8 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label style="-fx-font-weight: bold;" text="Action" />
-                                          <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: orange;" VBox.vgrow="ALWAYS">
+                                          <Label style="-fx-font-weight: bold;" styleClass="settingsRadioButton" text="Action" />
+                                          <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: #00E494;" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="-&gt;Open" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
@@ -48,8 +48,8 @@
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label style="-fx-font-weight: bold;" text="ShortCut" />
-                                          <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: firebrick;" VBox.vgrow="ALWAYS">
+                                          <Label style="-fx-font-weight: bold;" styleClass="settingsRadioButton" text="ShortCut" />
+                                          <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: #00C6E1;" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-background-color: white;" text="SHIFT+O" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
@@ -139,7 +139,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="552.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXCheckBox fx:id="keyBindingsActive" maxHeight="1.7976931348623157E308" text="Activate KeyBindings" HBox.hgrow="ALWAYS">
+            <JFXCheckBox fx:id="keyBindingsActive" checkedColor="#119c8c" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="settingsRadioButton" text="Activate KeyBindings" unCheckedColor="#9c101b" HBox.hgrow="ALWAYS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

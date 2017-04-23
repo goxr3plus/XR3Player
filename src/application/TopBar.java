@@ -8,10 +8,11 @@ import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import application.TopBar.WindowMode;
-import customnodes.CPUsage;
+import com.jfoenix.controls.JFXTabPane;
+
+import customnodes.SystemMonitor;
+import customnodes.SystemMonitor.Monitor;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -21,7 +22,6 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import tools.InfoTool;
@@ -36,13 +36,10 @@ public class TopBar extends BorderPane {
     // ----------------------------------------------
 
     @FXML
-    private StackPane cpuStackPane;
-
-    @FXML
-    private Label cpuLabel;
-
-    @FXML
     private Label xr3Label;
+
+    @FXML
+    private JFXTabPane jfxTabPane;
 
     @FXML
     private Tab mainModeTab;
@@ -68,12 +65,25 @@ public class TopBar extends BorderPane {
     @FXML
     private Button close;
 
+    @FXML
+    private StackPane cpuStackPane;
+
+    @FXML
+    private Label cpuLabel;
+
+    @FXML
+    private StackPane ramStackPane;
+
+    @FXML
+    private Label ramLabel;
+
     // ----------------------------------------------
 
     /** The logger. */
     private Logger logger = Logger.getLogger(getClass().getName());
 
-    CPUsage cpUsage = new CPUsage();
+    SystemMonitor cpuUsage = new SystemMonitor(Monitor.CPU);
+    SystemMonitor ramUsage = new SystemMonitor(Monitor.RAM);
 
     /**
      * The current Window Mode
@@ -115,7 +125,7 @@ public class TopBar extends BorderPane {
      * Constructor.
      */
     public TopBar() {
-	
+
 	//---------------------FXML LOADER---------------------------------
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TopBar.fxml"));
 	loader.setController(this);
@@ -134,24 +144,38 @@ public class TopBar extends BorderPane {
     @FXML
     private void initialize() {
 
-	// cpuStackPane
-	cpuStackPane.getChildren().add(0, cpUsage);
+	// ----------------------------cpuStackPane
+	cpuStackPane.getChildren().add(0, cpuUsage);
 	cpuStackPane.setOnMouseReleased(r -> {
-	    if (cpUsage.isRunning())
-		cpUsage.stopUpdater();
+	    if (cpuUsage.isRunning())
+		cpuUsage.stopUpdater();
 	    else
-		cpUsage.restartUpdater();
+		cpuUsage.restartUpdater();
 	});
 
 	// cpuLabel
-	cpuLabel.visibleProperty().bind(cpUsage.getUpdateService().runningProperty().not());
+	cpuLabel.visibleProperty().bind(cpuUsage.getUpdateService().runningProperty().not());
 
 	// cpuUsage
-	cpUsage.visibleProperty().bind(cpuLabel.visibleProperty().not());
+	cpuUsage.visibleProperty().bind(cpuLabel.visibleProperty().not());
 	//cpUsage.restartUpdater()
 
-	// showSideBar
-	//showSideBar.setOnAction(a -> Main.sideBar.toogleBar()
+	// ----------------------------RamStackPane
+	ramStackPane.getChildren().add(0, ramUsage);
+	ramStackPane.setOnMouseReleased(r -> {
+	    if (ramUsage.isRunning())
+		ramUsage.stopUpdater();
+	    else
+		ramUsage.restartUpdater();
+	});
+
+	// ramLabel
+	ramLabel.visibleProperty().bind(ramUsage.getUpdateService().runningProperty().not());
+
+	// cpuUsage
+	ramUsage.visibleProperty().bind(ramLabel.visibleProperty().not());
+
+	//---------------------------------------------------
 
 	// restartButton
 	restartButton.setOnAction(a -> {
@@ -194,6 +218,7 @@ public class TopBar extends BorderPane {
 		    windowMode = WindowMode.MAINMODE;
 
 		}
+		//if (!Main.specialJFXTabPane.getTabs().get(0).isSelected())
 		Main.specialJFXTabPane.getSelectionModel().select(0);
 	    }
 	});
@@ -213,6 +238,7 @@ public class TopBar extends BorderPane {
 		    windowMode = WindowMode.DJMODE;
 
 		}
+		//if (!Main.specialJFXTabPane.getTabs().get(1).isSelected())
 		Main.specialJFXTabPane.getSelectionModel().select(1);
 
 	    }
@@ -222,6 +248,7 @@ public class TopBar extends BorderPane {
 	    if (userModeTab.isSelected()) {
 		//System.out.println("userModeTab Selected")
 
+		//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
 		Main.specialJFXTabPane.getSelectionModel().select(2);
 
 		// Update window Mode
@@ -233,6 +260,7 @@ public class TopBar extends BorderPane {
 	    if (webModeTab.isSelected()) {
 		//System.out.println("webModeTab Selected")
 
+		//if (!Main.specialJFXTabPane.getTabs().get(3).isSelected())
 		Main.specialJFXTabPane.getSelectionModel().select(3);
 
 		// Update window Mode
@@ -245,15 +273,33 @@ public class TopBar extends BorderPane {
     }
 
     /**
+     * Selects the tab from JFXTabPane in position {index}
+     * 
+     * @param index
+     */
+    public void selectTab(int index) {
+	jfxTabPane.getSelectionModel().select(index);
+    }
+
+    /**
+     * Checks if the tab from JFXTabPane in position {index} is selected
+     * 
+     * @param index
+     * @return True if the tab is selected or false if not
+     */
+    public boolean isTabSelected(int index) {
+	return jfxTabPane.getSelectionModel().isSelected(index);
+    }
+
+    /**
      * Add the binding to the xr3Label
      */
     public void addXR3LabelBinding() {
 	// xr3Label
 	xr3Label.textProperty()
-		.bind(Bindings.createStringBinding(
-			() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
-				Main.currentVersion, Main.window.getWidth(), Main.window.getHeight()),
-			Main.window.widthProperty(), Main.window.heightProperty()));
+		.bind(Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
+			Main.currentVersion, Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(),
+			Main.window.heightProperty()));
     }
 
     //    /**

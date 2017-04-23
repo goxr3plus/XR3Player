@@ -1,7 +1,7 @@
 /**
  * 
  */
-package browsers;
+package webBrowser;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,7 +15,6 @@ import org.apache.commons.validator.routines.UrlValidator;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
-import application.Main;
 import customnodes.Marquee;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleListProperty;
@@ -24,8 +23,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
@@ -37,8 +34,8 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebHistory.Entry;
-import javafx.util.Duration;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
@@ -128,13 +125,6 @@ public class WebBrowserTabController extends StackPane {
 
 	//-------------------WebEngine------------------------
 	webEngine = webView.getEngine();
-	webEngine.getLoadWorker().exceptionProperty().addListener(error -> {
-	    ActionTool.showNotification("Error Occured",
-		    "Trying to connect to a website error occured:\n\t["
-			    + webEngine.getLoadWorker().getException().getMessage()
-			    + "]\nMaybe you don't have internet connection.",
-		    Duration.seconds(2), NotificationType.ERROR);
-	});
 
 	//	webEngine.setOnError(error -> ActionTool.showNotification("Error Occured",
 	//		"Trying to connect to a website error occured:\n\t["
@@ -168,8 +158,7 @@ public class WebBrowserTabController extends StackPane {
 
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
-	marquee.setStyle(
-		"-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
+	marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
 
 	stack.getChildren().addAll(indicator, text);
 	stack.setManaged(false);
@@ -220,8 +209,7 @@ public class WebBrowserTabController extends StackPane {
 
 	//forwardButton
 	forwardButton.setOnAction(a -> goForward());
-	forwardButton.disableProperty()
-		.bind(history.currentIndexProperty().greaterThanOrEqualTo(list.sizeProperty().subtract(1)));
+	forwardButton.disableProperty().bind(history.currentIndexProperty().greaterThanOrEqualTo(list.sizeProperty().subtract(1)));
 
 	//searchEngineComboBox
 	//	Label google = new Label("Google", InfoTool.getImageViewFromDocuments("google24.png"));

@@ -5,12 +5,10 @@ package media;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
-
-import org.apache.commons.io.FilenameUtils;
-import org.controlsfx.control.Notifications;
 
 import application.Main;
 import javafx.beans.InvalidationListener;
@@ -127,7 +125,7 @@ public abstract class Media {
 
 	// ....initialize
 	mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? songImage : videoImage));
-	hasBeenPlayed = new SimpleObjectProperty<>(null);
+	hasBeenPlayed = new SimpleObjectProperty<>(new ImageView());
 
 	this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
 	this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
@@ -197,8 +195,7 @@ public abstract class Media {
 	int localDuration = this.duration.get();
 
 	durationEdited.set(!fileExists.get() ? "file missing"
-		: localDuration == -1 ? "corrupted"
-			: localDuration == 0 ? "error" : InfoTool.getTimeEditedOnHours(localDuration));
+		: localDuration == -1 ? "corrupted" : localDuration == 0 ? "error" : InfoTool.getTimeEditedOnHours(localDuration));
 
 	//Image
 	if (!fileExists.get()) //File is missing ?
@@ -512,7 +509,8 @@ public abstract class Media {
 			// !XPressed && // Old name != New name
 			if (Main.renameWindow.wasAccepted() && !getFilePath().equals(newName)) {
 
-			    try {
+			    try (PreparedStatement preparedRename = Main.dbManager.connection1
+				    .prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
 
 				// No duplicates allowed
 				boolean canPass = true;
@@ -548,9 +546,9 @@ public abstract class Media {
 				    }
 
 				    // database update
-				    controller.preparedRename.setString(1, newName);
-				    controller.preparedRename.setString(2, getFilePath());
-				    controller.preparedRename.executeUpdate();
+				    preparedRename.setString(1, newName);
+				    preparedRename.setString(2, getFilePath());
+				    preparedRename.executeUpdate();
 				    Main.dbManager.commit();
 
 				    // Rename it in playedSong if...
@@ -561,17 +559,17 @@ public abstract class Media {
 
 				} else { // canPass==false
 				    setFilePath(filePath.get());
-				    Notifications.create().title("Dublicate Name").text(
-					    "The action can not been completed because :\nA file with that name already exists.")
-					    .darkStyle().showWarning();
+				    ActionTool.showNotification("Dublicate Name",
+					    "The action can not been completed because :\nA file with that name already exists.",
+					    Duration.millis(1500), NotificationType.INFORMATION);
 				}
 
 				// Exception occurred
 			    } catch (SQLException ex) {
 				Main.logger.log(Level.WARNING, "", ex);
 				setFilePath(filePath.get());
-				ActionTool.showNotification("Error", "error during renaming the file",
-					Duration.millis(1500), NotificationType.ERROR);
+				ActionTool.showNotification("Error Message", "Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
+					NotificationType.ERROR);
 			    }
 			} else // X is pressed by user || // Old name == New
 			      // name
@@ -604,30 +602,33 @@ public abstract class Media {
 	stars.bind(Main.starWindow.starsProperty());
 
 	// Listener
-	Main.starWindow.window.showingProperty().addListener(new InvalidationListener() {
+	Main.starWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
 	    @Override
 	    public void invalidated(Observable observable) {
 
 		// Remove the listener
-		Main.starWindow.window.showingProperty().removeListener(this);
+		Main.starWindow.getWindow().showingProperty().removeListener(this);
 
 		// !showing?
-		if (!Main.starWindow.window.isShowing()) {
+		if (!Main.starWindow.getWindow().isShowing()) {
 
 		    // unbind stars property
 		    stars.unbind();
 
 		    // Accepted?
 		    if (Main.starWindow.wasAccepted()) {
-			try {
+			try (PreparedStatement preparedUStars = Main.dbManager.connection1
+				.prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
 
-			    controller.preparedUStars.setDouble(1, getStars());
-			    controller.preparedUStars.setString(2, getFilePath());
-			    controller.preparedUStars.executeUpdate();
+			    preparedUStars.setDouble(1, getStars());
+			    preparedUStars.setString(2, getFilePath());
+			    preparedUStars.executeUpdate();
 			    Main.dbManager.commit();
 
 			} catch (Exception ex) {
 			    Main.logger.log(Level.WARNING, "", ex);
+			    ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500),
+				    NotificationType.ERROR);
 			}
 		    } else
 			stars.set(previousStars);
@@ -799,33 +800,30 @@ public abstract class Media {
      * @param controller
      *            the controller
      */
-    protected void setTimesPlayed(int timesPlayed, SmartController controller) {
-	this.timesPlayed.set(timesPlayed);
-
-	// Update the dataBase
-	try {
-
-	    controller.preparedUTimesPlayed.setInt(1, getTimesPlayed());
-	    controller.preparedUTimesPlayed.setString(2, getFilePath());
-	    controller.preparedUTimesPlayed.executeUpdate();
-	    Main.dbManager.commit();
-
-	} catch (Exception ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
-	}
-
-    }
+    //    protected void setTimesPlayed(int timesPlayed, SmartController controller) {
+    //	this.timesPlayed.set(timesPlayed);
+    //
+    //	// Update the dataBase
+    //	try (PreparedStatement preparedUTimesPlayed = Main.dbManager.connection1.prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET TIMESPLAYED=? WHERE PATH=?")) {
+    //
+    //	    preparedUTimesPlayed.setInt(1, getTimesPlayed());
+    //	    preparedUTimesPlayed.setString(2, getFilePath());
+    //	    preparedUTimesPlayed.executeUpdate();
+    //	    Main.dbManager.commit();
+    //
+    //	} catch (Exception ex) {
+    //	    Main.logger.log(Level.WARNING, "", ex);
+    //	}
+    //
+    //    }
 
     /**
      * Sets the media played.
+     * 
+     * @param played
      */
-    public void setMediaPlayed() {
-	// not initialize new Objects if not necessary
-	if (hasBeenPlayed.get() == null)
-	    hasBeenPlayed.set(new ImageView(InfoTool.playedImage));
-	else
-	    hasBeenPlayed.get().setImage(InfoTool.playedImage);
-
+    public void setMediaPlayed(boolean played) {
+	hasBeenPlayed.get().setImage(!played ? null : InfoTool.playedImage);
     }
 
     // ------------------ABSTRACT METHODS

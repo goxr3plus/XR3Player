@@ -60,19 +60,21 @@ public class XPlayerRadialMenu {
 
 	//----------------RadialMenu
 	radialMenu = RadialMenuBuilder.create()
-		.options(RadialMenuOptionsBuilder.create().degrees(180).buttonFillColor(Color.BLUE).offset(-125) //-135 with next and previous + 350 degrees //-160 with 360 degrees
-			.radius(65).buttonSize(40).tooltipsEnabled(true).buttonHideOnSelect(false)
+		.options(RadialMenuOptionsBuilder.create().degrees(360).buttonFillColor(Color.BLUE).offset(-125-55) //-135 with next and previous + 350 degrees //-160 with 360 degrees
+			.radius(60).buttonSize(40).tooltipsEnabled(true).buttonHideOnSelect(false)
 			.buttonHideOnClose(false).buttonAlpha(1.0).build())
 		.items(
 			//RadialMenuItemBuilder.create().thumbnailImageName(getClass().getResource("star.png").toExternalForm()).size(40).build(),
-			stop, play, pause,
+			previous,stop, play, pause,
 			//next, 
-			refresh, mute, search
+			next,refresh, mute, search
 		//previous
 		).build();
 
 	//radialMenu.setStyle("-fx-background-color:magenta;")
-
+	previous.setDisable(true);
+	next.setDisable(true);
+	//radialMenu.pref
 	radialMenu.setPickOnBounds(false);
 	radialMenu.setCursor(Cursor.HAND);
 	if (xPlayerController.getKey() == 0)

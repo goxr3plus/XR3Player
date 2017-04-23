@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root prefHeight="393.0" prefWidth="532.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="170.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Search Settings(?)">
+               <tooltip>
+                  <Tooltip text="SearchBar Settings" />
+               </tooltip>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="54.0">
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+               <children>
+                  <JFXCheckBox fx:id="instantSearch" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Instant Search" unCheckedColor="#9c101b" />
+               </children>
+            </HBox>
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Detect Played Files Using(?)">
+               <tooltip>
+                  <Tooltip text="Choose the way that the played files will be detected on playlists" />
+               </tooltip></Label>
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="File Absolute Path" HBox.hgrow="ALWAYS">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="playedFilesDetectionGroup" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommened)" toggleGroup="$playedFilesDetectionGroup" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Total Files Shown(?)">
+               <tooltip>
+                  <Tooltip text="Choose the total number of files to be shown on playlists" />
+               </tooltip>
+            </Label>
+            <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="54.0">
+               <children>
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="50" HBox.hgrow="ALWAYS">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="totalFilesShownGroup" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="100" toggleGroup="$totalFilesShownGroup" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Clear Played Files History(?)">
+               <tooltip>
+                  <Tooltip text="Clear the History of played files " />
+               </tooltip>
+            </Label>
+            <JFXButton fx:id="clearPlayedFilesHistory" styleClass="arrowButton" text="Press here to clear" />
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</fx:root>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -8,15 +9,19 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import org.controlsfx.control.MaskerPane?>
 
 <fx:root prefHeight="432.0" prefWidth="600.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane">
          <bottom>
-            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="commandTextField" promptText="command..." style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
+                  <JFXTextField fx:id="commandTextField" promptText="Type Command and Press Enter..." style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="go" text="GO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                   <Button fx:id="help" focusTraversable="false" mnemonicParsing="false" text="HELP">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -31,6 +36,5 @@
             </HBox>
          </bottom>
       </BorderPane>
-      <MaskerPane fx:id="maskerPane" progress="1.0" visible="false" />
    </children>
 </fx:root>

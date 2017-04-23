@@ -4,8 +4,6 @@
 package xr3capture;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +24,7 @@ import javafx.stage.StageStyle;
 public class CaptureWindow {
 
     /** The daemon. */
-    Thread daemon;
+    private Thread positionFixerThread;
 
     /** The stage. */
     public static Stage stage = new Stage();
@@ -81,9 +79,10 @@ public class CaptureWindow {
 
 	    // Finally
 	    stage.setScene(new Scene(loader1.getRoot(), Color.TRANSPARENT));
-	    //stage.show();
+	    //stage.show()
 
-	    startPositionFixThread();
+	    stage.setOnShown(s -> startPositionFixThread());
+	    stage.setOnHidden(h -> stopPositionFixThread());
 
 	} catch (Exception ex) {
 	    ex.printStackTrace();
@@ -100,39 +99,54 @@ public class CaptureWindow {
      * This method is starting a Thread which is running all the time and is fixing the position of the application on the screen.
      */
     private void startPositionFixThread() {
+	if (positionFixerThread != null && positionFixerThread.isAlive())
+	    return;
 
 	// Check frequently for the Primary Screen Bounds
-	daemon = new Thread(() -> {
-	    // Run it until the application has been closed
-	    while (true) {
+	positionFixerThread = new Thread(() -> {
+	    try {
+		//Run until it is interrupted
+		while (true) {
 
-		// CountDownLatch
-		CountDownLatch count = new CountDownLatch(1);
+		    // CountDownLatch
+		    CountDownLatch count = new CountDownLatch(1);
 
-		// Get VisualBounds of the Primary Screen
-		Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-		Platform.runLater(() -> {
+		    // Get VisualBounds of the Primary Screen
+		    Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+		    Platform.runLater(() -> {
 
-		    //Fix the window position
-		    stage.setX(mainWindowController.getRoot().getNodeOrientation() != NodeOrientation.LEFT_TO_RIGHT ? 0 : bounds.getMaxX() - stage.getWidth());
-		    stage.setY(bounds.getMaxY() / 2 - stage.getHeight() / 2);
-		    count.countDown();
-		});
+			//Fix the window position
+			stage.setX(mainWindowController.getRoot().getNodeOrientation() == NodeOrientation.RIGHT_TO_LEFT ? bounds.getMinX()
+				: bounds.getMaxX() - stage.getWidth());
+			stage.setY(bounds.getMaxY() / 2 - stage.getHeight() / 2);
+			count.countDown();
+		    });
 
-		try {
 		    // Wait until the Platform.runLater has run
 		    count.await();
 		    // Sleep some time
 		    Thread.sleep(500);
-		} catch (InterruptedException ex) {
-		    daemon.interrupt();
-		    Logger.getLogger(CaptureWindow.class.getName()).log(Level.WARNING, null, ex);
+
 		}
+	    } catch (@SuppressWarnings("unused") InterruptedException ex) {
+		positionFixerThread.interrupt();
+		//fuck dis error it is not fatal
+		//Logger.getLogger(CaptureWindow.class.getName()).log(Level.WARNING, null, ex)
 	    }
+
+	    //System.out.println("XR3Positioning Thread exited")
 	});
 
-	daemon.setDaemon(true);
-	daemon.start();
+	positionFixerThread.setDaemon(true);
+	positionFixerThread.start();
+    }
+
+    /**
+     * Stop thread positioning thread
+     */
+    private void stopPositionFixThread() {
+	if (positionFixerThread != null && positionFixerThread.isAlive())
+	    positionFixerThread.interrupt();
     }
 
 }

@@ -31,7 +31,7 @@ public class InternetConnectionTester {
 		    // TODO Auto-generated catch block
 		    ex.printStackTrace();
 		}
-		System.out.println("Internet Connection is available : "+ InfoTool.isReachableUsingSocket("www.google.com"));
+		System.out.println("Internet Connection is available : "+ InfoTool.isReachableUsingSocket("www.google.com",80));
 	    }
 	});
 	

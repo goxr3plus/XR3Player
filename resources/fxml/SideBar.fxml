@@ -30,9 +30,9 @@
       <InnerShadow color="#ff2222" />
    </effect>
    <center>
-      <ScrollPane hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false" prefWidth="71.0">
          <content>
-            <VBox alignment="CENTER" minHeight="0.0" prefWidth="71.0" spacing="25.0">
+            <VBox alignment="CENTER" minHeight="0.0" spacing="25.0">
                <children>
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
@@ -83,7 +83,7 @@
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
-                        <JFXButton fx:id="applicationSearch" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" disable="true" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationSearch" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" disable="true" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -101,7 +101,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="applicationConverter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationConverter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -119,7 +119,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -137,7 +137,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="snapshot" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="snapshot" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -240,7 +240,7 @@
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: rgb(66,255,154); -fx-font-weight: bold;" text="Settings" wrapText="true" />
-                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -275,7 +275,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </MenuButton>
-                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>

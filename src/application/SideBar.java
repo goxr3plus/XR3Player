@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
+import application.settings.window.ApplicationSettingsController.SettingsTab;
+import database.ExportDataBase;
+import database.ImportDataBase;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -101,6 +104,7 @@ public class SideBar extends BorderPane {
 
     @FXML
     private JFXButton applicationSettings;
+
     // -------------------------------------------------------------
 
     /** Translate Transition used to show/hide the bar. */
@@ -111,6 +115,12 @@ public class SideBar extends BorderPane {
 
     /** The internet thread. */
     Thread internetThread;
+
+    /** The zipper. */
+    public final ExportDataBase zipper = new ExportDataBase();
+
+    /** The un zipper. */
+    public final ImportDataBase unZipper = new ImportDataBase();
 
     /**
      * Constructor.
@@ -209,14 +219,14 @@ public class SideBar extends BorderPane {
 	    //goUserMode.setDisable(true);
 	    applicationSettings.setDisable(true);
 	    applicationConsole.setDisable(true);
-	    applicationDatabase.setDisable(true);
+	    // applicationDatabase.setDisable(true);
 	    //snapshot.setDisable(true);
 	} else {
 	    //goMainMode.setDisable(false);
 	    //goUserMode.setDisable(false);
 	    applicationSettings.setDisable(false);
 	    applicationConsole.setDisable(false);
-	    applicationDatabase.setDisable(false);
+	    //applicationDatabase.setDisable(false);
 	    //snapshot.setDisable(false);
 	}
     }
@@ -267,7 +277,7 @@ public class SideBar extends BorderPane {
 	hideSideBar.setOnAction(a -> toogleBar());
 
 	//applicationSettings
-	applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow());
+	applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.ANYONE));
 
 	//applicationConverter
 	applicationConverter.setOnAction(a -> ActionTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
@@ -278,8 +288,8 @@ public class SideBar extends BorderPane {
 	//snapShot
 	snapshot.setOnAction(a -> Main.captureWindow.stage.show());
 
-//	ActionTool.showAlert("Snapshot Window", "Read the below.",
-//		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area.");
+	//	ActionTool.showAlert("Snapshot Window", "Read the below.",
+	//		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area.");
 
 	// Clip
 	Rectangle rect = new Rectangle();
@@ -294,44 +304,48 @@ public class SideBar extends BorderPane {
 
 	// importDataBase
 	importDataBase.setOnAction(e -> {
-	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning() && Main.libraryMode.multipleLibs.isFree(true)) {
+	    if (!zipper.isRunning() && !unZipper.isRunning()
+		    && (Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true))) {
 
 		File file = Main.specialChooser.prepareToImportDataBase(Main.window);
 		if (file != null) {
 		    // Change the Scene View
 		    Main.updateScreen.setVisible(true);
-		    Main.updateScreen.progressBar.progressProperty().bind(Main.dbManager.unZipper.progressProperty());
+		    Main.updateScreen.progressBar.progressProperty().bind(unZipper.progressProperty());
 
 		    // Import the new database
-		    Main.dbManager.unZipper.importDataBase(file.getAbsolutePath());
+		    unZipper.importDataBase(file.getAbsolutePath());
 		}
 	    }
 	});
 
 	// exportDataBase
 	exportDataBase.setOnAction(a -> {
-	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning() && Main.libraryMode.multipleLibs.isFree(true)) {
+	    if (!zipper.isRunning() && !unZipper.isRunning()
+		    && (Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true))) {
 
 		File file = Main.specialChooser.prepareForExportDataBase(Main.window);
 		if (file != null) {
 
 		    // Change the Scene View
 		    Main.updateScreen.setVisible(true);
-		    Main.updateScreen.progressBar.progressProperty().bind(Main.dbManager.zipper.progressProperty());
+		    Main.updateScreen.progressBar.progressProperty().bind(zipper.progressProperty());
 
 		    // Export the database
-		    Main.dbManager.zipper.exportDataBase(file.getAbsolutePath(), InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
+		    zipper.exportDataBase(file.getAbsolutePath(), InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
 		}
 	    }
 	});
 
 	// deleteDataBase
 	deleteDataBase.setOnAction(a -> {
-	    if (!Main.dbManager.zipper.isRunning() && !Main.dbManager.unZipper.isRunning() && Main.libraryMode.multipleLibs.isFree(true) && ActionTool
-		    .doQuestion("You will delete the database of the application!\nAre you soore for that?\nThere is no coming back.\nAfter that the application will automatically restart...")) {
+	    if (!zipper.isRunning() && !unZipper.isRunning() && (Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true))
+		    && ActionTool.doQuestion(
+			    "You will delete the database of the application!\nAre you soore for that?\nThere is no coming back.\nAfter that the application will automatically restart...")) {
 
 		// Close database connections
-		Main.dbManager.manageConnection(Operation.CLOSE);
+		if (Main.dbManager != null)
+		    Main.dbManager.manageConnection(Operation.CLOSE);
 
 		// Clear the Previous database manager
 		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));

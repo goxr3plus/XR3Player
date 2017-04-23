@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.controlsfx.control.Notifications;
-
-import com.jfoenix.controls.JFXSlider;
-import com.jfoenix.controls.JFXSlider.IndicatorPosition;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
 import javafx.animation.Animation.Status;
@@ -23,18 +21,25 @@ import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -51,31 +56,43 @@ import tools.NotificationType;
 public class LoginMode extends BorderPane {
 
     @FXML
-    private StackPane usersStackView;
+    private BorderPane borderPane;
 
     @FXML
-    private Button previous;
+    private GridPane topGrid;
 
     @FXML
-    private Button next;
+    private JFXToggleButton selectionModeToggle;
 
     @FXML
-    private Button newUser;
+    private JFXButton previous;
 
     @FXML
-    private Button createUser;
+    private JFXButton createUser;
 
     @FXML
-    private Button loginButton;
+    private JFXButton next;
 
     @FXML
-    private Button renameUser;
+    private HBox botttomHBox;
+
+    @FXML
+    private ToolBar userToolBar;
 
     @FXML
     private Button deleteUser;
 
     @FXML
-    private Button exitButton;
+    private Button renameUser;
+
+    @FXML
+    private Button loginButton;
+
+    @FXML
+    private StackPane usersStackView;
+
+    @FXML
+    private Button newUser;
 
     @FXML
     private Label createdByLabel;
@@ -87,7 +104,13 @@ public class LoginMode extends BorderPane {
     private Label downloadsLabel;
 
     @FXML
-    public Label xr3PlayerLabel;
+    private Label xr3PlayerLabel;
+
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    private Button changeBackground;
 
     // --------------------------------------------
 
@@ -98,6 +121,11 @@ public class LoginMode extends BorderPane {
      * Allows to see the users in a beatiful way
      */
     public UsersViewer userViewer = new UsersViewer();
+
+    /**
+     * The Search Box of the LoginMode
+     */
+    public UserSearchBox userSearchBox = new UserSearchBox();
 
     /** This InvalidationListener is used during the creation of a new user. */
     private final InvalidationListener creationInvalidator = new InvalidationListener() {
@@ -116,17 +144,19 @@ public class LoginMode extends BorderPane {
 		String newName = Main.renameWindow.getUserInput();
 
 		// if can pass
-		if (!userViewer.items.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
+		if (!userViewer.itemsObservableList.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
 
 		    if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + newName).mkdir())
-			userViewer.addUser(new User(newName, userViewer.items.size()), true);
+			userViewer.addUser(new User(newName, userViewer.itemsObservableList.size()), true);
 		    else
-			ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2), NotificationType.ERROR);
+			ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2),
+				NotificationType.ERROR);
 
 		    // update the positions
 		    //updateUsersPosition()
 		} else {
-		    Notifications.create().title("Dublicate User").text("This user already exists").darkStyle().showConfirm();
+		    ActionTool.showNotification("Dublicate User", "Name->" + newName + " is already used from another User...", Duration.millis(2000),
+			    NotificationType.INFORMATION);
 		}
 	    }
 	}
@@ -174,29 +204,36 @@ public class LoginMode extends BorderPane {
 	((WebView) downloadsLabel.getGraphic()).getEngine().load("https://img.shields.io/sourceforge/dt/xr3player.svg");
 
 	//super
-	setStyle(
-		"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	//setStyle(
+	//	"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+
+	// -- libraryToolBar
+	userToolBar.disableProperty().bind(userViewer.centerItemProperty().isNull());
+
+	// -- botttomHBox
+	botttomHBox.getChildren().add(userSearchBox);
 
 	// createLibrary
 	createUser.setOnAction(a -> createNewUser(createUser));
 
 	//newUser
 	newUser.setOnAction(a -> createNewUser(createUser));
-	newUser.visibleProperty().bind(Bindings.size(userViewer.items).isEqualTo(0));
+	newUser.visibleProperty().bind(Bindings.size(userViewer.itemsObservableList).isEqualTo(0));
 
 	//loginButton
 	loginButton.setOnAction(a -> Main.startAppWithUser(userViewer.getSelectedItem()));
-	loginButton.disableProperty().bind(deleteUser.disabledProperty());
+	loginButton.disableProperty().bind(userToolBar.disabledProperty());
 
 	//renameUser
-	renameUser.disableProperty().bind(deleteUser.disabledProperty());
-	renameUser.setOnAction(a -> userViewer.getSelectedItem().renameUser(userViewer.getSelectedItem().imageView));
+	//renameUser.disableProperty().bind(deleteUser.disabledProperty())
+	renameUser.setOnAction(a -> userViewer.getSelectedItem().renameUser(renameUser));
 
 	//deleteUser
-	deleteUser.disableProperty().bind(newUser.visibleProperty());
+	//deleteUser.disableProperty().bind(newUser.visibleProperty())
 	deleteUser.setOnAction(a -> {
 	    //Ask
-	    if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + userViewer.getSelectedItem().getUserName() + " ]")) {
+	    if (ActionTool
+		    .doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + userViewer.getSelectedItem().getUserName() + " ]")) {
 
 		//Try to delete it
 		if (ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
@@ -205,6 +242,9 @@ public class LoginMode extends BorderPane {
 		    ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
 	    }
 	});
+
+	//changeBackground
+	//changeBackground.setOnAction(a -> Main.changeBackgroundImage())
 
 	//exitButton
 	exitButton.setOnAction(a -> Main.exitQuestion());
@@ -232,14 +272,15 @@ public class LoginMode extends BorderPane {
      * @param owner
      */
     public void createNewUser(Node owner) {
-	if (!Main.renameWindow.isShowing()) {
+	if (Main.renameWindow.isShowing())
+	    return;
 
-	    // Open rename window
-	    Main.renameWindow.show("", owner);
+	// Open rename window
+	Main.renameWindow.show("", owner);
 
-	    // Add the showing listener
-	    Main.renameWindow.showingProperty().addListener(creationInvalidator);
-	}
+	// Add the showing listener
+	Main.renameWindow.showingProperty().addListener(creationInvalidator);
+
     }
 
     /**
@@ -258,6 +299,21 @@ public class LoginMode extends BorderPane {
      */
     protected Button getNext() {
 	return next;
+    }
+
+    /**
+     * @return the xr3PlayerLabel
+     */
+    public Label getXr3PlayerLabel() {
+	return xr3PlayerLabel;
+    }
+
+    /**
+     * @param xr3PlayerLabel
+     *            the xr3PlayerLabel to set
+     */
+    public void setXr3PlayerLabel(Label xr3PlayerLabel) {
+	this.xr3PlayerLabel = xr3PlayerLabel;
     }
 
     /*-----------------------------------------------------------------------
@@ -311,8 +367,16 @@ public class LoginMode extends BorderPane {
 	private static final double SCALE_SMALL = 0.6;
 
 	/** The items. */
-	ObservableList<User> items = FXCollections.observableArrayList();
-	SimpleListProperty<User> list = new SimpleListProperty<>(items);
+	private ObservableList<User> itemsObservableList = FXCollections.observableArrayList();
+	/**
+	 * This class wraps an ObservableList
+	 */
+	private SimpleListProperty<User> itemsWrapperProperty = new SimpleListProperty<>(itemsObservableList);
+
+	/**
+	 * Holds the center item of TeamViewer
+	 */
+	private ObjectProperty<User> centerItemProperty = new SimpleObjectProperty<>(null);
 
 	/** The centered. */
 	private Group centered = new Group();
@@ -330,7 +394,7 @@ public class LoginMode extends BorderPane {
 	int centerIndex = 0;
 
 	/** The scroll bar. */
-	JFXSlider jfSlider = new JFXSlider();
+	private ScrollBar jfSlider = new ScrollBar();
 
 	/** The time line */
 	private Timeline timeline = new Timeline();
@@ -343,26 +407,42 @@ public class LoginMode extends BorderPane {
 	// Constructor
 	public UsersViewer() {
 
+	    // this.setOnMouseMoved(m -> {
+	    //
+	    // if (dragDetected) {
+	    // System.out.println("Mouse Moving... with drag detected");
+	    //
+	    // try {
+	    // Robot robot = new Robot();
+	    // robot.mouseMove((int) m.getScreenX(),
+	    // (int) this.localToScreen(this.getBoundsInLocal()).getMinY() + 2);
+	    // } catch (AWTException ex) {
+	    // ex.printStackTrace();
+	    // }
+	    // }
+	    // })
+
+	    //super.setCache(true)
+	    // super.setCacheHint(CacheHint.SPEED)
+
 	    // clip.set
 	    setClip(clip);
-	    //setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%;"); //-fx-background-size:100% 100%; -fx-background-image:url('/image/lisback.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
-
-	    //setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);")
-
-	    setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);  -fx-border-width:5;");
+	    setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+	    //setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 
 	    // ScrollBar
-	    jfSlider.setIndicatorPosition(IndicatorPosition.RIGHT);
+	    // jfSlider.setStyle("-fx-text-fill:white; -fx-background-color:black; -fx-border-color:red");
+	    // jfSlider.setIndicatorPosition(IndicatorPosition.LEFT);
 	    jfSlider.setCursor(Cursor.HAND);
 	    jfSlider.setMin(0);
 	    jfSlider.setMax(0);
-	    jfSlider.visibleProperty().bind(list.sizeProperty().greaterThan(3));
+	    jfSlider.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(3));
 	    // scrollBar.setVisibleAmount(1)
 	    // scrollBar.setUnitIncrement(1)
 	    // scrollBar.setBlockIncrement(1)
-	    jfSlider.setShowTickLabels(true);
+	    // jfSlider.setShowTickLabels(true);
 	    // scrollBar.setMajorTickUnit(1)
-	    jfSlider.setShowTickMarks(true);
+	    // jfSlider.setShowTickMarks(true);
 	    jfSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
 		int newVal = (int) Math.round(newValue.doubleValue());
 		int oldVal = (int) Math.round(oldValue.doubleValue());
@@ -374,6 +454,8 @@ public class LoginMode extends BorderPane {
 		// System.out.println(scrollBar.getValue())
 	    });
 
+	    jfSlider.setOrientation(Orientation.HORIZONTAL);
+
 	    // create content
 	    centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
 
@@ -381,12 +463,37 @@ public class LoginMode extends BorderPane {
 	}
 
 	/**
-	 * The Collection that holds all the Items
+	 * The Collection that holds all the Library Viewer Items
 	 * 
-	 * @return The Collection that holds all the Items
+	 * @return The Collection that holds all the Libraries
 	 */
-	public ObservableList<User> getItems() {
-	    return items;
+	public ObservableList<User> getItemsObservableList() {
+	    return itemsObservableList;
+	}
+
+	/**
+	 * This class wraps an ObservableList
+	 *
+	 * @return the itemsWrapperProperty
+	 */
+	public SimpleListProperty<User> itemsWrapperProperty() {
+	    return itemsWrapperProperty;
+	}
+
+	/**
+	 * @return the centerItem
+	 */
+	public ObjectProperty<User> centerItemProperty() {
+	    return centerItemProperty;
+	}
+
+	/**
+	 * Returns the Index of the List center Item
+	 * 
+	 * @return Returns the Index of the List center Item
+	 */
+	public int getCenterIndex() {
+	    return centerIndex;
 	}
 
 	// ----About the last size of each Library
@@ -418,9 +525,12 @@ public class LoginMode extends BorderPane {
 	    // centered.setLayoutX((getWidth() - WIDTH) / 2)
 	    // centered.setLayoutY((getHeight() - HEIGHT) / 2)
 
-	    jfSlider.setLayoutX(getWidth() / 2 - 100);
-	    jfSlider.setLayoutY(15);
-	    jfSlider.resize(200, 15);
+	    jfSlider.setLayoutX(getWidth() / 2 - 150);
+	    //jfSlider.setLayoutX(0);
+	    //jfSlider.setLayoutY(double g snoopy dogg);
+	    //jfSlider.resize(getWidth(), 15);
+	    jfSlider.resize(300, 15);
+	    jfSlider.setLayoutY(getHeight() - jfSlider.getHeight());
 
 	    // AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
 	    // if (previousWidth != (int) WIDTH ||
@@ -432,7 +542,7 @@ public class LoginMode extends BorderPane {
 		LEFT_OFFSET = -(SPACING - 10);
 		RIGHT_OFFSET = -LEFT_OFFSET;
 		// For-Each
-		items.forEach(user -> {
+		itemsObservableList.forEach(user -> {
 		    double size = HEIGHT / var;
 
 		    // --
@@ -464,7 +574,7 @@ public class LoginMode extends BorderPane {
 	 * @return The selected item from the List (That means the center index)
 	 */
 	public User getSelectedItem() {
-	    return items.get(centerIndex);
+	    return itemsObservableList.get(centerIndex);
 	}
 
 	//	/**
@@ -500,7 +610,7 @@ public class LoginMode extends BorderPane {
 	 *            Do the update on the list?
 	 */
 	public void addUser(User user, boolean update) {
-	    items.add(user);
+	    itemsObservableList.add(user);
 
 	    // --
 	    double size = HEIGHT / var;
@@ -547,7 +657,7 @@ public class LoginMode extends BorderPane {
 	    });
 
 	    // MAX
-	    jfSlider.setMax(items.size() - 1.00);
+	    jfSlider.setMax(itemsObservableList.size() - 1.00);
 
 	    //Update?
 	    if (update)
@@ -576,10 +686,10 @@ public class LoginMode extends BorderPane {
 	 *            User to be deleted
 	 */
 	public void deleteUser(User user) {
-	    items.remove(user);
+	    itemsObservableList.remove(user);
 
-	    for (int i = 0; i < items.size(); i++)
-		items.get(i).setPosition(i);
+	    for (int i = 0; i < itemsObservableList.size(); i++)
+		itemsObservableList.get(i).setPosition(i);
 
 	    calculateCenterAfterDelete();
 	}
@@ -599,7 +709,7 @@ public class LoginMode extends BorderPane {
 		centerIndex = 0;
 
 	    // Max
-	    jfSlider.setMax(items.size() - 1.00);
+	    jfSlider.setMax(itemsObservableList.size() - 1.00);
 
 	    update();
 
@@ -625,7 +735,7 @@ public class LoginMode extends BorderPane {
 	 * Goes to next Item (RIGHT).
 	 */
 	public void next() {
-	    if (centerIndex + 1 < items.size())
+	    if (centerIndex + 1 < itemsObservableList.size())
 		setCenterIndex(centerIndex + 1);
 	}
 
@@ -647,27 +757,27 @@ public class LoginMode extends BorderPane {
 	    centerGroup.getChildren().clear();
 	    rightGroup.getChildren().clear();
 
-	    if (!items.isEmpty()) {
+	    if (!itemsObservableList.isEmpty()) {
 
 		// If only on item exists
-		if (items.size() == 1) {
-		    centerGroup.getChildren().add(items.get(0));
+		if (itemsObservableList.size() == 1) {
+		    centerGroup.getChildren().add(itemsObservableList.get(0));
 		    centerIndex = 0;
 		} else {
 
 		    // LEFT,
 		    for (int i = 0; i < centerIndex; i++)
-			leftGroup.getChildren().add(items.get(i));
+			leftGroup.getChildren().add(itemsObservableList.get(i));
 
 		    // CENTER,
-		    if (centerIndex == items.size()) {
+		    if (centerIndex == itemsObservableList.size()) {
 			centerGroup.getChildren().add(leftGroup.getChildren().get(centerIndex - 1));
 		    } else
-			centerGroup.getChildren().add(items.get(centerIndex));
+			centerGroup.getChildren().add(itemsObservableList.get(centerIndex));
 
 		    // RIGHT
-		    for (int i = items.size() - 1; i > centerIndex; i--)
-			rightGroup.getChildren().add(items.get(i));
+		    for (int i = itemsObservableList.size() - 1; i > centerIndex; i--)
+			rightGroup.getChildren().add(itemsObservableList.get(i));
 
 		}
 
@@ -682,7 +792,7 @@ public class LoginMode extends BorderPane {
 		// LEFT KEYFRAMES
 		for (int i = 0; i < leftGroup.getChildren().size(); i++) {
 
-		    final User it = items.get(i);
+		    final User it = itemsObservableList.get(i);
 
 		    double newX = -leftGroup.getChildren().size() *
 
@@ -702,10 +812,13 @@ public class LoginMode extends BorderPane {
 
 		// CENTER ITEM KEYFRAME
 		final User centerItem;
-		if (items.size() == 1)
-		    centerItem = items.get(0);
+		if (itemsObservableList.size() == 1)
+		    centerItem = itemsObservableList.get(0);
 		else
 		    centerItem = (User) centerGroup.getChildren().get(0);
+
+		//The Property Center Item
+		this.centerItemProperty.set(centerItem);
 
 		keyFrames.add(new KeyFrame(duration,
 
@@ -723,7 +836,7 @@ public class LoginMode extends BorderPane {
 		// RIGHT KEYFRAMES
 		for (int i = 0; i < rightGroup.getChildren().size(); i++) {
 
-		    final User it = items.get(items.size() - i - 1);
+		    final User it = itemsObservableList.get(itemsObservableList.size() - i - 1);
 
 		    final double newX = rightGroup.getChildren().size() *
 
@@ -748,18 +861,13 @@ public class LoginMode extends BorderPane {
 		// play animation
 		timeline.setAutoReverse(true);
 		timeline.play();
-	    }
+	    } else
+		//The Property Center Item
+		this.centerItemProperty.set(null);
 
 	    // Previous and Next Visibility
-	    if (rightGroup.getChildren().isEmpty())
-		getNext().setVisible(false);
-	    else
-		getNext().setVisible(true);
-
-	    if (leftGroup.getChildren().isEmpty())
-		getPrevious().setVisible(false);
-	    else
-		getPrevious().setVisible(true);
+	    getNext().setVisible(!rightGroup.getChildren().isEmpty());
+	    getPrevious().setVisible(!leftGroup.getChildren().isEmpty());
 
 	}
 

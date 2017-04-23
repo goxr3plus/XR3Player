@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import tools.InfoTool;
@@ -54,8 +55,12 @@ public class Marquee extends Pane {
      */
     @FXML
     private void initialize() {
-
-	// Pane
+	
+        //Clip
+	Rectangle rectangle = new Rectangle(25,25);
+	rectangle.widthProperty().bind(widthProperty());
+	rectangle.heightProperty().bind(heightProperty());
+	setClip(rectangle);
 
 	// Text
 	text.setManaged(false);
@@ -72,8 +77,6 @@ public class Marquee extends Pane {
     public Marquee setText(String value) {
 
 	// text
-	// text.setStyle("-fx-font-size:12px !important;")
-	//text.setTextAlignment(TextAlignment.RIGHT)
 	text.setText(value);
 
 	return this;

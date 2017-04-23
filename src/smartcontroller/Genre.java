@@ -21,6 +21,4 @@ public enum Genre {
     /** The unknown. */
     UNKNOWN;
 
-    
-
 }

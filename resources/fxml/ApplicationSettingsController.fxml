@@ -4,14 +4,13 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab closable="false" disable="true" text="Animations" />
+            <Tab fx:id="librariesTab" closable="false" text="Libraries" />
+          <Tab fx:id="playListsTab" closable="false" text="PlayLists" />
           <Tab fx:id="shortCutsTab" closable="false" text="ShortCuts" />
-            <Tab closable="false" disable="true" text="Window" />
         </tabs>
       </TabPane>
    </center>

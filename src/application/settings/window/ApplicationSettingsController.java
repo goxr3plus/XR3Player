@@ -23,6 +23,20 @@ import tools.InfoTool;
  */
 public class ApplicationSettingsController extends BorderPane {
 
+    /**
+     * @author GOXR3PLUS
+     *
+     */
+    public enum SettingsTab {
+	LIBRARIES, PLAYLISTS, SHORTCUTS, ANYONE;
+    }
+
+    @FXML
+    private Tab librariesTab;
+
+    @FXML
+    private Tab playListsTab;
+
     @FXML
     private Tab shortCutsTab;
 
@@ -34,9 +48,11 @@ public class ApplicationSettingsController extends BorderPane {
     /**
      * The Stage of the ApplicationSettings
      */
-    public Stage window = new Stage();
+    private Stage window = new Stage();
 
-    KeyBindingsController nativeKeyBindings = new KeyBindingsController();
+    private KeyBindingsController nativeKeyBindings = new KeyBindingsController();
+    private PlaylistsSettingsController playListsSettingsController = new PlaylistsSettingsController();
+    private LibrariesSettingsController librariesSettingsController = new LibrariesSettingsController();
 
     /**
      * Constructor
@@ -44,8 +60,7 @@ public class ApplicationSettingsController extends BorderPane {
     public ApplicationSettingsController() {
 
 	// ------------------------------------FXMLLOADER-------------------------------------
-	FXMLLoader loader = new FXMLLoader(
-		getClass().getResource(InfoTool.FXMLS + "ApplicationSettingsController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ApplicationSettingsController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -67,8 +82,19 @@ public class ApplicationSettingsController extends BorderPane {
 
     /**
      * Shows the Window
+     * 
+     * @param settingsTab
+     *            The default tab you want to be selected when the window is shown
      */
-    public void showWindow() {
+    public void showWindow(SettingsTab settingsTab) {
+
+	if (settingsTab == SettingsTab.LIBRARIES)
+	    librariesTab.getTabPane().getSelectionModel().select(0);
+	else if (settingsTab == SettingsTab.PLAYLISTS)
+	    librariesTab.getTabPane().getSelectionModel().select(1);
+	else if (settingsTab == SettingsTab.SHORTCUTS)
+	    librariesTab.getTabPane().getSelectionModel().select(2);
+
 	window.show();
     }
 
@@ -80,10 +106,41 @@ public class ApplicationSettingsController extends BorderPane {
     }
 
     /**
+     * @return the window
+     */
+    public Stage getWindow() {
+	return window;
+    }
+
+    /**
      * Called as soon as .fxml is initialized
      */
     @FXML
     private void initialize() {
+	librariesTab.setContent(librariesSettingsController);
+	playListsTab.setContent(playListsSettingsController);
 	shortCutsTab.setContent(nativeKeyBindings);
     }
+
+    /**
+     * @return the playListsSettingsController
+     */
+    public PlaylistsSettingsController getPlayListsSettingsController() {
+	return playListsSettingsController;
+    }
+
+    /**
+     * @return the nativeKeyBindings
+     */
+    public KeyBindingsController getNativeKeyBindings() {
+	return nativeKeyBindings;
+    }
+
+    /**
+     * @return the librariesSettingsController
+     */
+    public LibrariesSettingsController getLibrariesSettingsController() {
+	return librariesSettingsController;
+    }
+
 }

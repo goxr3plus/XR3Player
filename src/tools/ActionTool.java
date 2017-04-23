@@ -15,7 +15,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,8 +79,8 @@ public final class ActionTool {
     public static void openFileLocation(String path) {
 	// Open the Default Browser
 	if (InfoTool.OSNAME.toLowerCase().contains("win")) {
-	    showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path),
-		    Duration.millis(1500), NotificationType.INFORMATION);
+	    showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path), Duration.millis(1500),
+		    NotificationType.INFORMATION);
 
 	    //START: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
 
@@ -106,9 +105,8 @@ public final class ActionTool {
 		    continue;
 		}
 
-		if (!flag && selectPath.charAt(i) != ' ') {
+		if (!flag && selectPath.charAt(i) != ' ')
 		    flag = true;
-		}
 
 		sb.append(selectPath.charAt(i));
 	    }
@@ -125,8 +123,7 @@ public final class ActionTool {
 		new ProcessBuilder(list).start();
 	    } catch (IOException ex) {
 		logger.log(Level.WARNING, ex.getMessage(), ex);
-		showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500),
-			NotificationType.WARNING);
+		showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500), NotificationType.WARNING);
 	    }
 	} else {
 	    showNotification("Not Supported",
@@ -201,9 +198,8 @@ public final class ActionTool {
 		logger.log(Level.INFO, "", ex);
 	    }
 	} else if (source.isFile() && !source.delete()) { // File
-	    Notifications.create().title("Error")
-		    .text("Can't delete file:\n(" + source.getName() + ") cause is in use by a program.").darkStyle()
-		    .showWarning();
+	    showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.", Duration.millis(2000),
+		    NotificationType.WARNING);
 	    return false;
 	}
 
@@ -256,17 +252,15 @@ public final class ActionTool {
 	    try {
 		desktop.open(new File(absolutePath));
 	    } catch (IOException ex) {
-		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-			"Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
-			NotificationType.INFORMATION));
+		Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]",
+			Duration.millis(2500), NotificationType.INFORMATION));
 		logger.log(Level.INFO, "", ex);
 		return false;
 	    }
 	    // Error?
 	} else {
-	    Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-		    "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
-		    NotificationType.INFORMATION));
+	    Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]",
+		    Duration.millis(2500), NotificationType.INFORMATION));
 	    System.out.println("Error trying to open the default web browser.");
 	    return false;
 	}
@@ -287,17 +281,15 @@ public final class ActionTool {
 	    try {
 		desktop.browse(new URI(uri));
 	    } catch (IOException | URISyntaxException ex) {
-		Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-			"Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
-			NotificationType.INFORMATION));
+		Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]",
+			Duration.millis(2500), NotificationType.INFORMATION));
 		logger.log(Level.INFO, "", ex);
 		return false;
 	    }
 	    // Error?
 	} else {
-	    Platform.runLater(() -> ActionTool.showNotification("Problem Occured",
-		    "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
-		    NotificationType.INFORMATION));
+	    Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]",
+		    Duration.millis(2500), NotificationType.INFORMATION));
 	    System.out.println("Error trying to open the default web browser.");
 	    return false;
 	}
@@ -311,34 +303,33 @@ public final class ActionTool {
      *            The notification title
      * @param text
      *            The notification text
-     * @param duration
+     * @param d
      *            The duration that notification will be visible
-     * @param type
+     * @param t
      *            The notification type
      */
-    public static void showNotification(String title, String text, Duration duration, NotificationType type) {
-	Notifications notification = Notifications.create().title(title).text(text);
-	notification.hideAfter(duration);
+    public static void showNotification(String title, String text, Duration d, NotificationType t) {
+	Notifications notification1 = Notifications.create().title(title).text(text);
+	notification1.hideAfter(d);
 
-	switch (type) {
-	case INFORMATION:
-	    notification.showInformation();
-	    break;
-	case WARNING:
-	    notification.showWarning();
+	switch (t) {
+	case CONFIRM:
+	    notification1.showConfirm();
 	    break;
 	case ERROR:
-	    notification.showError();
+	    notification1.showError();
 	    break;
-	case CONFIRM:
-	    notification.showConfirm();
+	case INFORMATION:
+	    notification1.showInformation();
 	    break;
 	case SIMPLE:
-	    notification.show();
+	    notification1.show();
+	    break;
+	case WARNING:
+	    notification1.showWarning();
 	    break;
 	default:
 	    break;
-
 	}
 
     }
@@ -479,10 +470,8 @@ public final class ActionTool {
 	alert.initOwner(Main.window);
 	alert.setGraphic(!permanent ? questionImage : warningImage);
 	alert.setHeaderText(!permanent ? "Remove selection" + (i > 1 ? "s " + multiple : unique) + " from List?"
-		: "Are you sure you want to permanently delete " + (i > 1 ? "these " + multiple : "this item " + unique)
-			+ " ?");
-	alert.setContentText(!permanent
-		? "Are you sure you want to remove the selected " + (i > 1 ? "items" : "item") + " from the List?"
+		: "Are you sure you want to permanently delete " + (i > 1 ? "these " + multiple : "this item " + unique) + " ?");
+	alert.setContentText(!permanent ? "Are you sure you want to remove the selected " + (i > 1 ? "items" : "item") + " from the List?"
 		: "If you delete the selection " + (i > 1 ? "s  they" : "it") + " will be permanenlty lost.");
 	// LookUpButton
 	((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setDefaultButton(false);

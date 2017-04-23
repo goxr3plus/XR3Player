@@ -38,7 +38,7 @@ public class LibraryContextMenu extends ContextMenu {
     Menu image = new Menu("Image");
 
     /** The set image. */
-    Menu setImage = new Menu("newImage");
+    Menu setImage = new Menu("change...");
 
     /** The local image. */
     MenuItem localImage = new MenuItem("local");
@@ -47,10 +47,10 @@ public class LibraryContextMenu extends ContextMenu {
     MenuItem internetImage = new MenuItem("internet");
 
     /** The export image. */
-    MenuItem exportImage = new MenuItem("exportImage(E)");
+    MenuItem exportImage = new MenuItem("export...(E)");
 
     /** The reset image. */
-    MenuItem resetImage = new MenuItem("defaultImage");
+    MenuItem resetImage = new MenuItem("default");
 
     /** The settings. */
     MenuItem settings = new MenuItem("Settings(S)");
@@ -76,7 +76,7 @@ public class LibraryContextMenu extends ContextMenu {
 
 	exportImage.setOnAction(a -> library.exportImage());
 
-	settings.setOnAction(ac -> Main.libraryMode.libraryViewer.settings.showWindow(library));
+	settings.setOnAction(ac -> Main.libraryMode.settings.showWindow(library));
 
 	delete.setOnAction(ac -> library.deleteLibrary());
 
@@ -86,7 +86,7 @@ public class LibraryContextMenu extends ContextMenu {
 	setImage.getItems().addAll(localImage, internetImage);
 	image.getItems().addAll(setImage, exportImage, resetImage);
 
-	getItems().addAll(new TitleMenuItem("Common"), open, close,rename,new TitleMenuItem("Other"),settings, image,delete);
+	getItems().addAll(new TitleMenuItem("Common"), open, close, rename, new TitleMenuItem("Other"), settings, image, delete);
 
     }
 
@@ -106,7 +106,7 @@ public class LibraryContextMenu extends ContextMenu {
 	this.library = library;
 
 	// customize the menu accordingly
-	if (library.isLibraryOpened()) {
+	if (library.isOpened()) {
 	    getItems().remove(open);
 	    getItems().add(1, close);
 	} else {
@@ -133,8 +133,7 @@ public class LibraryContextMenu extends ContextMenu {
 
 	//Timeline
 	Timeline timeIn = new Timeline();
-	timeIn.getKeyFrames()
-		.addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+	timeIn.getKeyFrames().addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
 	//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
 	timeIn.play();
 

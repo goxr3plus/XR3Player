@@ -26,10 +26,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -44,7 +46,7 @@ import tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class SmartSearcher extends HBox {
+public class SmartControllerSearcher extends HBox {
 
     /** The search field. */
     TextField searchField = TextFields.createClearableTextField();
@@ -64,9 +66,10 @@ public class SmartSearcher extends HBox {
      * @param control
      *            the control
      */
-    public SmartSearcher(SmartController control) {
+    public SmartControllerSearcher(SmartController control) {
 	controller = control;
 
+	super.setAlignment(Pos.CENTER);
 	getStyleClass().add("search-box");
 
 	// searchField
@@ -87,7 +90,7 @@ public class SmartSearcher extends HBox {
 		controller.loadService.startService(false, false);
 		//Main.advancedSearch.searchOnFlySelected()
 
-	    } else if (controller.isFree(false) && control.instantSearch.isSelected()) {
+	    } else if (controller.isFree(false) && Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
 		//Save the Settings before the first search
 		if (saveSettingBeforeSearch) {
 		    service.pageBeforeSearch = controller.currentPage.get();
@@ -98,6 +101,10 @@ public class SmartSearcher extends HBox {
 
 		service.search();
 	    }
+	});
+	searchField.setOnKeyReleased(key -> {
+	    if (key.getCode() == KeyCode.ESCAPE)
+		searchField.clear();
 	});
 	searchField.editableProperty().bind(service.runningProperty().not());
 	//searchField.disableProperty().bind(Main.advancedSearch.showingProperty())
@@ -222,17 +229,17 @@ public class SmartSearcher extends HBox {
 		    // Given Work
 		    System.out.println("Searching for word:[" + word + "]");
 
-		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
-			    .executeQuery("SELECT* FROM '" + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.maximumPerPage)) {
+		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery("SELECT* FROM '"
+			    + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage())) {
 
 			//Fetch the items from the database
 			List<Media> array = new ArrayList<>();
 			for (Audio song = null; resultSet.next();) {
-			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"), resultSet.getString("HOUR"),
-				    controller.genre);
+			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
+				    resultSet.getString("DATE"), resultSet.getString("HOUR"), controller.genre);
 			    array.add(song);
 
-			    updateProgress(++counter, controller.maximumPerPage);
+			    updateProgress(++counter, controller.getMaximumPerPage());
 			}
 
 			//Add the the items to the observable list

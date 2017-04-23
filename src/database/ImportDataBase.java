@@ -38,16 +38,11 @@ public class ImportDataBase extends Service<Boolean> {
     /** The out put folder. */
     String outPutFolder = InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN;
 
-    /** The zip. */
-    ZipFile zip;
-
     /** The success. */
-    Notifications success = Notifications.create().title("Mission Completed")
-	    .text("Successfully imported the database!");
+    Notifications success = Notifications.create().title("Mission Completed").text("Successfully imported the database!");
 
     /** The fail. */
-    Notifications fail = Notifications.create().title("Mission Failed").text("Failed to import the database!")
-	    .hideAfter(Duration.seconds(15));
+    Notifications fail = Notifications.create().title("Mission Failed").text("Failed to import the database!").hideAfter(Duration.seconds(15));
 
     /** The exception. */
     String exception;
@@ -61,8 +56,11 @@ public class ImportDataBase extends Service<Boolean> {
 	    // done()
 	    Main.canSaveData = false;
 
-	    // Check the Value
-	    if (getValue()) {
+	    //Check the value
+	    if (!getValue()) {
+		fail.text(exception).showError();
+		done();
+	    } else {
 		success.showInformation();
 
 		// Restart XR3Player
@@ -70,9 +68,6 @@ public class ImportDataBase extends Service<Boolean> {
 		Main.updateScreen.progressBar.setProgress(-1);
 		Main.updateScreen.label.setText("Restarting....");
 		Main.restartTheApplication(false);
-	    } else {
-		fail.text(exception).showError();
-		done();
 	    }
 
 	});
@@ -92,7 +87,7 @@ public class ImportDataBase extends Service<Boolean> {
     /**
      * Done.
      */
-    private void done() {
+    private static void done() {
 	Main.updateScreen.setVisible(false);
 	Main.updateScreen.progressBar.progressProperty().unbind();
     }
@@ -123,7 +118,7 @@ public class ImportDataBase extends Service<Boolean> {
 		try (ZipFile zis = new ZipFile(inputZip)) {
 
 		    //signature file
-		    String signatureFile = Main.dbManager.signatureFile.getName();
+		    String signatureFile = InfoTool.DATABASE_SIGNATURE_FILE.getName();
 
 		    //get all entries                      
 		    Enumeration<? extends ZipEntry> e = zis.entries();
@@ -132,9 +127,7 @@ public class ImportDataBase extends Service<Boolean> {
 		    System.out.println("Trying to search [" + signatureFile + "] in ->" + zis.getName());
 
 		    //Search every entry inside the zip folder
-		    while (e.hasMoreElements()) {
-			ZipEntry entry = e.nextElement();
-
+		    while (e.hasMoreElements())
 			/*
 			 * Here, normal compare would not work.
 			 *
@@ -148,7 +141,7 @@ public class ImportDataBase extends Service<Boolean> {
 			 * equals or equalsIgnoreCase methods.
 			 */
 			//System.out.println(entry.getName())
-			if (entry.getName().indexOf(signatureFile) != -1) {
+			if (e.nextElement().getName().indexOf(signatureFile) != -1) {
 			    found = true;
 			    // System.out.println("Found " + entry.getName())
 
@@ -159,7 +152,6 @@ public class ImportDataBase extends Service<Boolean> {
 
 			    break;
 			}
-		    }
 
 		    //Found it?
 		    if (!found) {
@@ -177,7 +169,8 @@ public class ImportDataBase extends Service<Boolean> {
 		//----------------------Found the signature file so we can procceeed-------------------------------
 
 		// Close all the connections with database
-		Main.dbManager.manageConnection(Operation.CLOSE);
+		if (Main.dbManager != null)
+		    Main.dbManager.manageConnection(Operation.CLOSE);
 
 		// Delete the previous database
 		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
@@ -196,15 +189,11 @@ public class ImportDataBase extends Service<Boolean> {
 		    ZipEntry ze = zis.getNextEntry();
 
 		    // Count entries
-		    zip = new ZipFile(inputZip);
-		    double counter = 0;
-		    double total = zip.size();
+		    ZipFile zip = new ZipFile(inputZip);
+		    double counter = 0, total = zip.size();
 
-		    //the buffer
-		    byte[] buffer = new byte[1024];
-
-		    // Start
-		    while (ze != null) {
+		    //Start
+		    for (byte[] buffer = new byte[1024]; ze != null;) {
 
 			String fileName = ze.getName();
 			File newFile = new File(outPutFolder + File.separator + fileName);
@@ -217,15 +206,23 @@ public class ImportDataBase extends Service<Boolean> {
 			// compressed folder
 			new File(newFile.getParent()).mkdirs();
 
-			FileOutputStream fos = new FileOutputStream(newFile);
+			//Create File OutputStream
+			try (FileOutputStream fos = new FileOutputStream(newFile)) {
 
-			// Copy byte by byte
-			int len;
-			while ((len = zis.read(buffer)) > 0)
-			    fos.write(buffer, 0, len);
+			    // Copy byte by byte
+			    int len;
+			    while ((len = zis.read(buffer)) > 0)
+				fos.write(buffer, 0, len);
 
-			fos.close();
+			} catch (IOException ex) {
+			    exception = ex.getMessage();
+			    Main.logger.log(Level.WARNING, "", ex);
+			}
+
+			//Get next entry
 			ze = zis.getNextEntry();
+
+			//Update the progress
 			updateProgress(++counter / total, 1);
 		    }
 

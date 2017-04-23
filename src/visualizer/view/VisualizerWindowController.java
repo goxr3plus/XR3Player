@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -29,7 +30,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -38,6 +38,7 @@ import javafx.util.Duration;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
+import visualizer.model.VisualizerDrawer;
 import xplayer.presenter.XPlayerController;
 
 /**
@@ -47,63 +48,53 @@ import xplayer.presenter.XPlayerController;
  */
 public class VisualizerWindowController extends StackPane {
 
-    /** The visualizer pane. */
-    // @FXML
-    // private BorderPane visualizerPane
-
-    /** The top bar. */
     @FXML
-    private BorderPane topBar;
-
-    /** The transparency slider. */
-    @FXML
-    private Slider transparencySlider;
-
-    /** The minimize. */
-    @FXML
-    private Button minimize;
-
-    @FXML
-    private MenuButton menuPopButton;
-
-    /**
-     * 
-     */
-    @FXML
-    public ContextMenu visualizerContextMenu;
-
-    /**
-     * 
-     */
-    @FXML
-    public ToggleGroup visualizerTypeGroup;
-
-    /** The set background. */
-    @FXML
-    private MenuItem setBackground;
-
-    /** The clear background. */
-    @FXML
-    private MenuItem clearBackground;
-
-    /** The set foreground. */
-    @FXML
-    private MenuItem setForeground;
-
-    @FXML
-    private StackPane progressBarStackPane;
-
-    /**
-     * Shows the progress of the Media how much has completed from it's total duration
-     */
-    @FXML
-    public ProgressBar progressBar;
+    private BorderPane visualizerPane;
 
     @FXML
     private StackPane centerStackPane;
 
     @FXML
     private MediaView mediaView;
+
+    @FXML
+    private BorderPane topBar;
+
+    @FXML
+    private Button minimize;
+
+    @FXML
+    private StackPane progressBarStackPane;
+
+    @FXML
+    private ProgressBar progressBar;
+
+    @FXML
+    private MenuButton menuPopButton;
+
+    @FXML
+    private ContextMenu visualizerContextMenu;
+
+    @FXML
+    private Menu spectrumMenu;
+
+    @FXML
+    private ToggleGroup visualizerTypeGroup;
+
+    @FXML
+    private MenuItem setBackground;
+
+    @FXML
+    private MenuItem clearBackground;
+
+    @FXML
+    private MenuItem setForeground;
+
+    @FXML
+    private MenuItem setDefaultForeground;
+
+    @FXML
+    private Slider transparencySlider;
 
     // ------------------------------------
 
@@ -145,13 +136,12 @@ public class VisualizerWindowController extends StackPane {
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    Logger.getLogger(getClass().getName()).log(Level.SEVERE, "VisualizerWindowController FXML can't be loaded!",
-		    ex);
+	    Logger.getLogger(getClass().getName()).log(Level.SEVERE, "VisualizerWindowController FXML can't be loaded!", ex);
 	}
 
     }
 
-    public MediaPlayer videoPlayer;
+    //public MediaPlayer videoPlayer;
 
     /**
      * Called as soon as .fxml has been loaded
@@ -218,20 +208,16 @@ public class VisualizerWindowController extends StackPane {
 	// -------------Top Bar Elements---------------
 
 	// menuPopButton
-	menuPopButton.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00)
-		.asString("[%.02f %%]").concat("Deck [" + xPlayerController.getKey() + "]"));
+	menuPopButton.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("[%.02f %%]")
+		.concat("Deck [" + xPlayerController.getKey() + "]"));
 
 	// ----------------------------- Minimize
 	minimize.setOnAction(action ->
 
 	removeVisualizer());
 
-	// clearBackground
-	clearBackground.setOnAction(a -> xPlayerController.visualizer.backgroundImage = null);
-
 	// transparencySlider
-	transparencySlider.valueProperty()
-		.addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
+	transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
 
 	// PauseTransition
 	pauseTransition.setOnFinished(f -> {
@@ -262,6 +248,20 @@ public class VisualizerWindowController extends StackPane {
 	// videoPlayer.setAutoPlay(true);
 	// }
 
+	//--------------------------
+
+	// setBackground
+	setBackground.setOnAction(a -> changeImage(Type.background));
+
+	// clearBackground
+	clearBackground.setOnAction(a -> xPlayerController.visualizer.backgroundImage = null);
+
+	// setForeground
+	setForeground.setOnAction(a -> changeImage(Type.foreground));
+
+	//setDefaultForeground
+	setDefaultForeground.setOnAction(a -> xPlayerController.visualizer.foregroundImage = VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE);
+
     }
 
     /**
@@ -291,8 +291,7 @@ public class VisualizerWindowController extends StackPane {
 		else if (type == Type.foreground)
 		    xPlayerController.visualizer.foregroundImage = img;
 	    } else
-		ActionTool.showNotification("Warning",
-			"Maximum Size Allowed 4800*4800 \n Current is:" + img.getWidth() + "*" + img.getHeight(),
+		ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + img.getWidth() + "*" + img.getHeight(),
 			Duration.millis(1500), NotificationType.WARNING);
 
 	}
@@ -352,15 +351,7 @@ public class VisualizerWindowController extends StackPane {
      */
     public void displayVisualizer() {
 
-	// label.setText("~Visualizer[ " + xPlayerUI.getKey() + " ]~");
-
-	// setBackground
-	setBackground.setOnAction(a -> changeImage(Type.background));
-	// setForeground
-	setForeground.setOnAction(a -> changeImage(Type.foreground));
-
 	// Add the visualizer
-	// visualizerPane.setCenter(xPlayerUI.visualizerStackController);
 	centerStackPane.getChildren().add(1, xPlayerController.visualizerStackController);
 
 	// show the window
@@ -375,6 +366,27 @@ public class VisualizerWindowController extends StackPane {
 	xPlayerController.visualizer.setCursor(Cursor.HAND);
 	xPlayerController.reAddVisualizer();
 	window.close();
+    }
+
+    /**
+     * @return the visualizerContextMenu
+     */
+    public ContextMenu getVisualizerContextMenu() {
+	return visualizerContextMenu;
+    }
+
+    /**
+     * @return the visualizerTypeGroup
+     */
+    public ToggleGroup getVisualizerTypeGroup() {
+	return visualizerTypeGroup;
+    }
+
+    /**
+     * @return the progressBar
+     */
+    public ProgressBar getProgressBar() {
+	return progressBar;
     }
 
     // -----------------Rubbish code.......------------------------------

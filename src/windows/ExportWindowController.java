@@ -14,10 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import smartcontroller.SmartController;
 import tools.InfoTool;
 
@@ -25,7 +26,7 @@ import tools.InfoTool;
  * @author GOXR3PLUS
  *
  */
-public class ExportWindowController extends ScrollPane {
+public class ExportWindowController extends BorderPane {
 
     @FXML
     private TextField exportField1;
@@ -50,7 +51,7 @@ public class ExportWindowController extends ScrollPane {
     /**
      * The Window of the ExportWindowController
      */
-    public Stage window = new Stage();
+    private Stage window = new Stage();
 
     /**
      * The needed smartController
@@ -61,10 +62,6 @@ public class ExportWindowController extends ScrollPane {
      * Constructor
      */
     public ExportWindowController() {
-
-	window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
-	window.initModality(Modality.APPLICATION_MODAL);
-	window.setResizable(false);
 
 	// -----------------------------------------FXMLLoader
 	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ExportWindowController.fxml"));
@@ -77,9 +74,14 @@ public class ExportWindowController extends ScrollPane {
 	    ex.printStackTrace();
 	}
 
+	window.setTitle("Export Window");
+	window.initStyle(StageStyle.UTILITY);
 	window.setScene(new Scene(this));
-	window.getScene().getStylesheets()
-		.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	window.getScene().setOnKeyReleased(key -> {
+	    if (key.getCode() == KeyCode.ESCAPE)
+		window.close();
+	});
     }
 
     /**
@@ -113,12 +115,19 @@ public class ExportWindowController extends ScrollPane {
     /**
      * Opens the Export Window
      * 
-     * @param smartController
+     * @param smartController1
      */
 
-    public void show(SmartController smartController) {
-	this.smartController = smartController;
+    public void show(SmartController smartController1) {
+	this.smartController = smartController1;
 	window.show();
+    }
+
+    /**
+     * @return the window
+     */
+    public Stage getWindow() {
+	return window;
     }
 
 }

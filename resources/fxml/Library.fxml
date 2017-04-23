@@ -15,7 +15,7 @@
 
 <fx:root pickOnBounds="false" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<ImageView fx:id="imageView" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
+		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
 			<image>
 				<Image url="@../image/library.png" />
 			</image>
@@ -23,24 +23,36 @@
             <Rectangle2D />
          </viewport>
 		</ImageView>
-		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="libraryNameLabel" text="LIBRARY NAME" wrapText="true">
+		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-border-color: firebrick transparent transparent transparent;" styleClass="libraryNameLabel" text="Lib Name :)" wrapText="true">
 			<tooltip>
 				<Tooltip />
 			</tooltip>
 		</Label>
-      <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white;" textAlignment="CENTER" StackPane.alignment="BOTTOM_LEFT">
+      <Label fx:id="ratingLabel" alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="47.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14;" text="5.0" StackPane.alignment="TOP_RIGHT">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/warning.png" />
+                  <Image url="@../image/smallStar.png" />
                </image>
             </ImageView>
          </graphic>
-         <tooltip>
-            <Tooltip text="Image is missing!" />
-         </tooltip>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
-      <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
+      <Label fx:id="settingsLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="BOTTOM_RIGHT">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/gear.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -52,39 +64,36 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <VBox alignment="TOP_RIGHT" minHeight="0.0" minWidth="0.0" pickOnBounds="false" spacing="10.0">
+      <VBox alignment="BOTTOM_LEFT" minHeight="0.0" minWidth="0.0" pickOnBounds="false" spacing="10.0">
+         <cursor>
+            <Cursor fx:constant="V_RESIZE" />
+         </cursor>
          <children>
-            <Label fx:id="ratingLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" prefHeight="27.0" prefWidth="55.0" style="-fx-background-color: white; -fx-background-radius: 15 0 0 15; -fx-text-fill: black; -fx-font-weight: bold;" text="5.0">
+            <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/smallStar.png" />
+                        <Image url="@../image/warning.png" />
                      </image>
                   </ImageView>
                </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+               <tooltip>
+                  <Tooltip text="Image is missing!" />
+               </tooltip>
             </Label>
-            <Label fx:id="settingsLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" textAlignment="CENTER">
+            <Label fx:id="totalItemsLabel" alignment="CENTER" layoutX="315.0" layoutY="154.0" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="9999999" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/gear.png" />
+                        <Image url="@../image/song.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Label>
          </children>
-         <StackPane.margin>
-            <Insets right="2.0" top="2.0" />
-         </StackPane.margin>
-         <cursor>
-            <Cursor fx:constant="V_RESIZE" />
-         </cursor>
       </VBox>
       <StackPane fx:id="progressBarStackPane" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
          <children>

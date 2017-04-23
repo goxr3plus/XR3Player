@@ -17,6 +17,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -42,7 +43,7 @@ public class StarWindow extends GridPane {
     private Button close;
 
     /** The window. */
-    public Stage window;
+    private Stage window;
 
     /** The gc. */
     protected GraphicsContext gc;
@@ -80,6 +81,48 @@ public class StarWindow extends GridPane {
 	} catch (IOException ex) {
 	    ex.printStackTrace();
 	}
+
+    }
+
+    /**
+     * Called when .fxml is initialized
+     */
+    @FXML
+    private void initialize() {
+	System.out.println("StarWindow Initialized....");
+
+	// Window
+	window = new Stage();
+	window.initStyle(StageStyle.TRANSPARENT);
+	window.initModality(Modality.APPLICATION_MODAL);
+	window.setAlwaysOnTop(true);
+
+	// Graphics Context 2D
+	gc = canvas.getGraphicsContext2D();
+
+	// Root
+	getStyleClass().add("starWindow");
+
+	// Canvas
+	canvas.setOnMouseDragged(m -> computeStars(m));
+	canvas.setOnMouseReleased(m -> computeStars(m));
+
+	// close
+	close.setOnAction(a -> close(false));
+
+	// OK
+	ok.setOnAction(a -> close(true));
+
+	// Scene
+	window.setScene(new Scene(this, Color.TRANSPARENT));
+	window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	window.getScene().setOnKeyReleased(key -> {
+	    if (key.getCode() == KeyCode.ESCAPE)
+		close(false);
+	});
+
+	// Repaint
+	repaintStars();
 
     }
 
@@ -209,70 +252,40 @@ public class StarWindow extends GridPane {
     }
 
     /**
-     * Called when .fxml is initialized
+     * Computes the stars based on the mouse position on screen
      */
-    @FXML
-    private void initialize() {
-	System.out.println("StarWindow Initialized....");
+    private void computeStars(MouseEvent m) {
+	int x = (int) m.getX();
 
-	// Window
-	window = new Stage();
-	window.initStyle(StageStyle.TRANSPARENT);
-	window.initModality(Modality.APPLICATION_MODAL);
-	window.setAlwaysOnTop(true);
+	if (x <= 5)
+	    setStars(0);
+	else if (x >= 144)
+	    setStars(5);
+	else if (x >= 133)
+	    setStars(4.5);
+	else if (x >= 115)
+	    setStars(4);
+	else if (x >= 105)
+	    setStars(3.5);
+	else if (x >= 85)
+	    setStars(3);
+	else if (x >= 74)
+	    setStars(2.5);
+	else if (x >= 55)
+	    setStars(2);
+	else if (x >= 45)
+	    setStars(1.5);
+	else if (x >= 25)
+	    setStars(1);
+	else if (x >= 12)
+	    setStars(0.5);
+    }
 
-	// Graphics Context 2D
-	gc = canvas.getGraphicsContext2D();
-
-	// Root
-	getStyleClass().add("starWindow");
-
-	// Canvas
-	canvas.setOnMouseDragged(m -> {
-	    int x = (int) m.getX();
-
-	    if (x <= 5)
-		setStars(0);
-	    else if (x >= 144)
-		setStars(5);
-	    else if (x >= 133)
-		setStars(4.5);
-	    else if (x >= 115)
-		setStars(4);
-	    else if (x >= 105)
-		setStars(3.5);
-	    else if (x >= 85)
-		setStars(3);
-	    else if (x >= 74)
-		setStars(2.5);
-	    else if (x >= 55)
-		setStars(2);
-	    else if (x >= 45)
-		setStars(1.5);
-	    else if (x >= 25)
-		setStars(1);
-	    else if (x >= 12)
-		setStars(0.5);
-	});
-
-	// close
-	close.setOnAction(a -> close(false));
-
-	// OK
-	ok.setOnAction(a -> close(true));
-
-	// Scene
-	window.setScene(new Scene(this, Color.TRANSPARENT));
-	window.getScene().getStylesheets()
-		.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-	window.getScene().setOnKeyReleased(key -> {
-	    if (key.getCode() == KeyCode.ESCAPE)
-		close(false);
-	});
-
-	// Repaint
-	repaintStars();
-
+    /**
+     * @return the window
+     */
+    public Stage getWindow() {
+	return window;
     }
 
 }

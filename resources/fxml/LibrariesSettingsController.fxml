@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<fx:root prefHeight="377.0" prefWidth="501.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="170.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Show Libraries Widgets(?)">
+               <tooltip>
+                  <Tooltip text="Libraries Widgets shows you extra informations about each library" />
+               </tooltip>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="54.0">
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+               <children>
+                  <JFXCheckBox fx:id="showWidgets" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Show Widgets" unCheckedColor="#9c101b" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</fx:root>

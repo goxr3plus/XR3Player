@@ -104,8 +104,13 @@ public class DJDisc extends StackPane {
     private double circlePointY;
 
     /**
+     * The rotation transformation
+     */
+    private Rotate rotationTransf;
+
+    /**
      * Constructor.
-     *
+     * 
      * @param width
      *            The width of the disc
      * @param height
@@ -115,7 +120,7 @@ public class DJDisc extends StackPane {
      * @param volume
      *            The current volume of the disc
      * @param maximumVolume
-     *            The maximum volume of the disc
+     *            The maximum volume of the disc [[SuppressWarningsSpartan]]
      */
     public DJDisc(int width, int height, Color arcColor, int volume, int maximumVolume) {
 	this.maximumVolume = maximumVolume;
@@ -127,7 +132,7 @@ public class DJDisc extends StackPane {
 	canvas.setCursor(Cursor.OPEN_HAND);
 	canvas.setPickOnBounds(false);
 	super.setPickOnBounds(false);
-	//setStyle("-fx-background-color:green;")
+	//setStyle("-fx-background-color:rgb(255,255,255,0.6)");
 
 	this.arcColor = arcColor;
 	canvas.setEffect(new DropShadow(10, Color.WHITE));
@@ -155,8 +160,8 @@ public class DJDisc extends StackPane {
 	volumeLabel = new DragAdjustableLabel(volume, 0, maximumVolume);
 	// volumeLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/style/Younger
 	// than me Bold.ttf"), 18))
-	volumeLabel.currentValueProperty().addListener(
-		(observable, oldValue, newValue) -> listeners.forEach(l -> l.volumeChanged(newValue.intValue())));
+	volumeLabel.currentValueProperty()
+		.addListener((observable, oldValue, newValue) -> listeners.forEach(l -> l.volumeChanged(newValue.intValue())));
 
 	// Fade animation for centerDisc
 	fade = new FadeTransition(new Duration(1000), canvas);
@@ -167,15 +172,14 @@ public class DJDisc extends StackPane {
 	// fade.play()
 
 	// rotation transform starting at 0 degrees, rotating about pivot point
-	Rotate rotationTransf = new Rotate(0, width / 2.00 - 10, height / 2.00 - 10);
+	rotationTransf = new Rotate(0, width / 2.00 - 10, height / 2.00 - 10);
 	imageView.getTransforms().add(rotationTransf);
 
 	// rotate a square using time line attached to the rotation transform's
 	// angle property.
-	rotationAnimation.getKeyFrames()
-		.add(new KeyFrame(Duration.millis(2100), new KeyValue(rotationTransf.angleProperty(), 360)));
+	rotationAnimation.getKeyFrames().add(new KeyFrame(Duration.millis(2100), new KeyValue(rotationTransf.angleProperty(), 360)));
 	rotationAnimation.setCycleCount(Animation.INDEFINITE);
-	// rotationAnimation.play()
+	//rotationAnimation.play();
 
 	// When no album image exists this Label is shown
 	Label noAlbumImageLabel = new Label("-Album Image-");
@@ -205,17 +209,23 @@ public class DJDisc extends StackPane {
     /**
      * Resizes the disc to the given values.
      *
-     * @param width
+     * @param width1
      *            the width
-     * @param height
+     * @param height1
      *            the height
      */
-    public void resizeDisc(int width, int height) {
-	if (width == height)
-	    if ((width >= 80 && height >= 80) && (width % 2 == 0 && height % 2 == 0)) {
+    public void resizeDisc(double width1, double height1) {
+	int width = (int) Math.round(width1);
+	int height = width;
 
-		double halfWidth = width / 2.00;
-		double halfHeight = height / 2.00;
+	//int height = (int) Math.round(height1)
+
+	//System.out.println("Given:" + width1 + " , Rounded:" + width)
+
+	if (width == height)
+	    if ((width >= 100 && height >= 100) && (width % 2 == 0 && height % 2 == 0)) {
+
+		double halfWidth = width / 2.00, halfHeight = height / 2.00;
 
 		// {Maximum,Preferred} Size
 		setMinSize(width, height);
@@ -240,6 +250,10 @@ public class DJDisc extends StackPane {
 		// volumeField
 		volumeLabel.setTranslateY(+height * 26 / 100.00);
 
+		//rotationTransformation
+		rotationTransf.setPivotX(width / 2.00 - 10);
+		rotationTransf.setPivotY(height / 2.00 - 10);
+
 		repaint();
 	    } else {
 		Main.logger.info("DJDisc resizing failed..");
@@ -251,18 +265,23 @@ public class DJDisc extends StackPane {
      */
     public void repaint() {
 
-	canvas.gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+	//Calculate here to use less cpu
+	double prefWidth = getPrefWidth();
+	double prefHeight = getPrefHeight();
+
+	//Clear the outer rectangle
+	canvas.gc.clearRect(0, 0, prefWidth, prefHeight);
 	canvas.gc.setFill(Color.WHITE);
-	canvas.gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+	canvas.gc.fillRect(0, 0, prefWidth, prefHeight);
 
 	// Arc Background Oval
 	canvas.gc.setLineWidth(7);
 	canvas.gc.setStroke(Color.WHITE);
-	canvas.gc.strokeArc(5, 5, getWidth() - 10, getHeight() - 10, 90, 360.00 + angle, ArcType.OPEN);
+	canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, 360.00 + angle, ArcType.OPEN);
 
 	// Foreground Arc
 	canvas.gc.setStroke(arcColor);
-	canvas.gc.strokeArc(5, 5, getWidth() - 10, getHeight() - 10, 90, angle, ArcType.OPEN);
+	canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, angle, ArcType.OPEN);
 
 	// --------------------------Maths to find the point on the circle
 	// circumference
@@ -277,10 +296,8 @@ public class DJDisc extends StackPane {
 	int minus = 8;
 
 	// Find the point on the circle circumference
-	circlePointX = Math.round(((int) (canvas.getWidth() - minus)) / 2
-		+ Math.cos(Math.toRadians(-angle2)) * ((int) (canvas.getWidth() - minus) / 2));
-	circlePointY = Math.round(((int) (canvas.getHeight() - minus)) / 2
-		+ Math.sin(Math.toRadians(-angle2)) * ((int) (canvas.getHeight() - minus) / 2));
+	circlePointX = Math.round(((int) (prefWidth - minus)) / 2 + Math.cos(Math.toRadians(-angle2)) * ((int) (prefWidth - minus) / 2));
+	circlePointY = Math.round(((int) (prefHeight - minus)) / 2 + Math.sin(Math.toRadians(-angle2)) * ((int) (prefHeight - minus) / 2));
 
 	// System.out.println("Width:" + canvas.getWidth() + " , Height:" + canvas.getHeight() + " , Angle: " + this.angle)
 	// System.out.println(circlePointX + "," + circlePointY)
@@ -573,9 +590,8 @@ public class DJDisc extends StackPane {
     @SuppressWarnings("unused")
     private boolean isContainedInCircle(double mouseX, double mouseY) {
 	// Check if it is contained into the circle
-	if (Math.sqrt(Math.pow(((int) (getWidth() - 5) / 2) - (int) mouseX, 2)
-		+ Math.pow(((int) (getHeight() - 5) / 2) - (int) mouseY, 2)) <= Math.floorDiv((int) (getWidth() - 5),
-			2)) {
+	if (Math.sqrt(Math.pow(((int) (getWidth() - 5) / 2) - (int) mouseX, 2) + Math.pow(((int) (getHeight() - 5) / 2) - (int) mouseY, 2)) <= Math
+		.floorDiv((int) (getWidth() - 5), 2)) {
 	    System.out.println("The point is contained in the circle.");
 	    return true;
 	} else {

@@ -2,6 +2,7 @@ package customnodes;
 
 import com.jezhumble.javasysmon.CpuTimes;
 import com.jezhumble.javasysmon.JavaSysMon;
+import com.jezhumble.javasysmon.MemoryStats;
 
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -16,10 +17,30 @@ import visualizer.model.ResizableCanvas;
  *
  * @author GOXR3PLUS
  */
-public class CPUsage extends ResizableCanvas {
+public class SystemMonitor extends ResizableCanvas {
+
+    /**
+     * What to Monitor?
+     * 
+     * @author GOXR3PLUS
+     *
+     */
+    public enum Monitor {
+	/**
+	 * Monitor the CPU
+	 */
+	CPU,
+	/**
+	 * Monitor the RAM
+	 */
+	RAM;
+    }
 
     /** The monitor. */
-    private JavaSysMon monitor = new JavaSysMon();
+    private Monitor monitor;
+
+    /** The monitor. */
+    private JavaSysMon javaSysMon = new JavaSysMon();
 
     /** The usage. */
     private int usage;
@@ -38,10 +59,18 @@ public class CPUsage extends ResizableCanvas {
     private volatile boolean run;
 
     /**
-     * Constructor
-     *
+     * Colors to be used for paint
      */
-    public CPUsage() {
+    private final Color[] colors = { Color.BLACK, Color.FIREBRICK, Color.WHITE };
+
+    /**
+     * Constructor
+     * 
+     * @param monitor
+     *            The category of Monitor
+     */
+    public SystemMonitor(Monitor monitor) {
+	this.monitor = monitor;
 	gc.setFont(Font.font("default", FontWeight.BOLD, 14));
 	// startUpdater()
 	repaint();
@@ -54,12 +83,15 @@ public class CPUsage extends ResizableCanvas {
 	gc.clearRect(0, 0, getWidth(), getHeight());
 
 	// Outline
-	gc.setFill(Color.BLACK);
+	gc.setFill(colors[0]);
 	gc.fillRect(0, 0, getWidth(), getHeight());
 
 	// Inner progress
 	//gc.setStroke(Color.FIREBRICK);
-	gc.setFill(Color.CORNFLOWERBLUE);
+	//if (monitor == Monitor.CPU)
+	gc.setFill(colors[1]);
+	//else if (monitor == Monitor.RAM)
+	//     gc.setFill(Color.web("#FF4A00"));
 
 	// usage=80
 	//	if (usage % 2 == 0)
@@ -87,8 +119,11 @@ public class CPUsage extends ResizableCanvas {
 	//gc.fillRect(1, 3, (usageDouble/100.00)*(getWidth()-2), getHeight() - 6)
 
 	// Show the Progress on String format
-	gc.setFill(Color.WHITE);
-	gc.fillText(String.format("%d ", usage) + "%", getWidth() / 2 - 15, getHeight() / 2 + 5);
+	gc.setFill(colors[2]);
+	if (monitor == Monitor.CPU)
+	    gc.fillText(String.format("CPU %d ", usage) + "%", getWidth() / 2 - 30, getHeight() / 2 + 5);
+	else if (monitor == Monitor.RAM)
+	    gc.fillText(String.format("RAM %d ", usage) + "%", getWidth() / 2 - 30, getHeight() / 2 + 5);
 
 	//	gc.fillText(String.format("%.2f ", (usageDouble < 0) ? 0 : usageDouble) + "%", getWidth() / 2 - 15,
 	//		getHeight() / 2 + 5)
@@ -98,10 +133,10 @@ public class CPUsage extends ResizableCanvas {
     /**
      * Starts the Background Update Service
      */
-    public void restartUpdater() {	
+    public void restartUpdater() {
 	run = true;
 	getUpdateService().restart();
-	Platform.runLater(CPUsage.this::repaint);
+	Platform.runLater(SystemMonitor.this::repaint);
     }
 
     /**
@@ -143,20 +178,39 @@ public class CPUsage extends ResizableCanvas {
 		@Override
 		protected Void call() throws Exception {
 
-		    CpuTimes cpu;
+		    //Monitor the CPU
+		    if (monitor == Monitor.CPU) {
+			CpuTimes cpu;
 
-		    // Loop
-		    while (run) {
+			// Loop
+			while (run) {
 
-			cpu = monitor.cpuTimes();
-			Thread.sleep(999);
-			usageDouble = monitor.cpuTimes().getCpuUsage(cpu) * 100.00;
-			// usageDouble = 100
-			usage = (int) usageDouble;
-			Platform.runLater(CPUsage.this::repaint);
+			    cpu = javaSysMon.cpuTimes();
+			    Thread.sleep(999);
+			    usageDouble = javaSysMon.cpuTimes().getCpuUsage(cpu) * 100.00;
+			    // usageDouble = 100
+			    usage = (int) usageDouble;
+			    Platform.runLater(SystemMonitor.this::repaint);
+			}
+
+			System.out.println("CPU Update Service Exited");
 		    }
+		    //Monitor the RAM
+		    else if (monitor == Monitor.RAM) {
+			// Loop
+			while (run) {
 
-		    System.out.println("CPU Update Service Exited");
+			    Thread.sleep(999);
+			    // usageDouble = 
+			    // usageDouble = 100
+			    MemoryStats memory = javaSysMon.physical();
+			    //System.out.println("Total: "+memory.getTotalBytes()+" ,Free: "+memory.getFreeBytes())
+			    usage = 100 - (int) (((memory.getFreeBytes() * 100.00) / memory.getTotalBytes()));
+			    Platform.runLater(SystemMonitor.this::repaint);
+			}
+
+			System.out.println("RAM Update Service Exited");
+		    }
 
 		    return null;
 		}

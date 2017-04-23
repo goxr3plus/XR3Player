@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="509.0" prefWidth="611.0" styleClass="settings-controller" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xr3capture.SettingsWindowController">
+<BorderPane fx:id="root" prefHeight="509.0" prefWidth="611.0" styleClass="settings-controller" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xr3capture.SettingsWindowController">
    <center>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -42,13 +43,13 @@
                   <HBox>
                      <children>
                         <JFXToggleButton fx:id="marryttsToggle" disable="true" text="MaryTTS Voice" />
-                        <JFXToggleButton fx:id="orientation" selected="true" text="Current : LEFT  -&gt; TO  -&gt; RIGHT" />
+                        <JFXToggleButton fx:id="orientation" focusTraversable="false" selected="true" text="Current : LEFT  -&gt; TO  -&gt; RIGHT" />
                      </children>
                   </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <children>
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="How fast the capture rectangle will grow with arrow keys(milliseconds delay)" VBox.vgrow="SOMETIMES" />
-                        <JFXSlider fx:id="precisionSlider" majorTickUnit="20.0" max="300.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="-1.0" />
+                        <JFXSlider fx:id="precisionSlider" focusTraversable="false" majorTickUnit="20.0" max="300.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="-1.0" />
                      </children>
                   </VBox>
                </children>
@@ -59,4 +60,8 @@
          </center>
       </BorderPane>
    </bottom>
+   <stylesheets>
+      <URL value="@../../style/application.css" />
+      <URL value="@../css/application.css" />
+   </stylesheets>
 </BorderPane>

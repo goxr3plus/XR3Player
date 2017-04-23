@@ -28,7 +28,7 @@ public class MultipleTabs extends BorderPane {
     public MultipleTabs() {
 
 	tabPane.setId("SpecialTabPane");
-	tabPane.setSide(Side.LEFT);
+	tabPane.setSide(Side.RIGHT);
 	tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
 	addTab(new Tab("Opened Libraries", Main.libraryMode.multipleLibs));

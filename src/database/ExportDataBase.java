@@ -30,14 +30,13 @@ public class ExportDataBase extends Service<Boolean> {
     List<String> fileList = new ArrayList<>();
 
     /** The zip file. */
-    String zipFile = null;
+    String zipFile;
 
     /** The source folder. */
-    String sourceFolder = null;
+    String sourceFolder;
 
     /** The success. */
-    Notifications success = Notifications.create().title("Mission Completed")
-	    .text("Successfully exported the database!");
+    Notifications success = Notifications.create().title("Mission Completed").text("Successfully exported the database!");
 
     /** The fail. */
     Notifications fail = Notifications.create().title("Mission Failed").text("Failed to export the database!");
@@ -50,14 +49,14 @@ public class ExportDataBase extends Service<Boolean> {
      *
      * @param zip
      *            The Destination zip Folder
-     * @param sourceFolder
+     * @param sourceFolder1
      *            The source Folder
      */
-    public void exportDataBase(String zip, String sourceFolder) {
+    public void exportDataBase(String zip, String sourceFolder1) {
 
 	// initialize these variables
 	zipFile = zip;
-	this.sourceFolder = sourceFolder;
+	this.sourceFolder = sourceFolder1;
 
 	setOnSucceeded(s -> {
 	    done();
@@ -106,34 +105,36 @@ public class ExportDataBase extends Service<Boolean> {
 		generateFileList(new File(sourceFolder), sourceFolder);
 		byte[] buffer = new byte[1024];
 
-		double total = fileList.size();
-		double counter = 0;
+		double total = fileList.size(), counter = 0;
 
 		// GO
-		try (FileOutputStream fos = new FileOutputStream(zipFile);
-			ZipOutputStream zos = new ZipOutputStream(fos)) {
+		try (FileOutputStream fos = new FileOutputStream(zipFile); ZipOutputStream zos = new ZipOutputStream(fos)) {
 
 		    // Start
 		    for (String file : fileList) {
 
 			// Refresh the label Text
-			Platform.runLater(() -> {
-			    Main.updateScreen.label.setText("OUT:" + file);
-			});
+			Platform.runLater(() -> Main.updateScreen.label.setText("OUT:" + file));
 
-			// Create zipEntry
-			ZipEntry ze = new ZipEntry(file);
-			zos.putNextEntry(ze);
+			// Create zipEntry		
+			zos.putNextEntry(new ZipEntry(file));
 
-			FileInputStream in = new FileInputStream(sourceFolder + File.separator + file);
+			//Create File Input Stream
+			try (FileInputStream in = new FileInputStream(sourceFolder + File.separator + file)) {
 
-			// Copy byte by byte
-			int len;
-			while ((len = in.read(buffer)) > 0)
-			    zos.write(buffer, 0, len);
+			    //Copy byte by byte
+			    int len;
+			    while ((len = in.read(buffer)) > 0)
+				zos.write(buffer, 0, len);
 
-			in.close();
+			} catch (IOException ex) {
+			    ex.printStackTrace();
+			    exception = ex.getMessage();
+			}
+
+			//Update Progress
 			updateProgress(++counter / total, 1);
+
 		    }
 
 		    // Close the motherFuckers
@@ -154,24 +155,23 @@ public class ExportDataBase extends Service<Boolean> {
     /**
      * Traverse a directory and get all files, and add the file into fileList.
      *
-     * @param file
+     * @param f
      *            the file
      * @param file2
      *            the file 2
      */
-    public void generateFileList(File file, String file2) {
+    public void generateFileList(File f, String file2) {
 
 	// add file only
-	if (file.isFile())
-	    fileList.add(generateZipEntry(file.getAbsoluteFile().toString(), file2));
+	if (f.isFile())
+	    fileList.add(generateZipEntry(f.getAbsoluteFile() + "", file2));
 
-	if (file.isDirectory()) {
-	    String[] subNote = file.list();
-	    if (subNote != null)
-		for (String filename : subNote)
-		    generateFileList(new File(file, filename), file2);
-
-	}
+	if (!f.isDirectory())
+	    return;
+	String[] subNote = f.list();
+	if (subNote != null)
+	    for (String filename : subNote)
+		generateFileList(new File(f, filename), file2);
 
     }
 

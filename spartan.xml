@@ -55,12 +55,12 @@
     </category>
     <category id="CommonFactoring"/>
     <category id="Centification">
-        <tipper description="CatchClauseRenameParameterToCent" enabled="true" id="CatchClauseRenameParameterToCent"/>
-        <tipper description="MethodDeclarationRenameSingleParameterToCent" enabled="true" id="MethodDeclarationRenameSingleParameterToCent"/>
-        <tipper description="SingleVariableDeclarationEnhancedForRenameParameterToCent" enabled="true" id="SingleVariableDeclarationEnhancedForRenameParameterToCent"/>
-        <tipper description="ForRenameInitializerToCent" enabled="true" id="ForRenameInitializerToCent"/>
-        <tipper description="EnhancedForParameterRenameToCent" enabled="true" id="EnhancedForParameterRenameToCent"/>
-        <tipper description="LambdaRenameSingleParameterToLambda" enabled="true" id="LambdaRenameSingleParameterToLambda"/>
+        <tipper description="CatchClauseRenameParameterToCent" enabled="false" id="CatchClauseRenameParameterToCent"/>
+        <tipper description="MethodDeclarationRenameSingleParameterToCent" enabled="false" id="MethodDeclarationRenameSingleParameterToCent"/>
+        <tipper description="SingleVariableDeclarationEnhancedForRenameParameterToCent" enabled="false" id="SingleVariableDeclarationEnhancedForRenameParameterToCent"/>
+        <tipper description="ForRenameInitializerToCent" enabled="false" id="ForRenameInitializerToCent"/>
+        <tipper description="EnhancedForParameterRenameToCent" enabled="false" id="EnhancedForParameterRenameToCent"/>
+        <tipper description="LambdaRenameSingleParameterToLambda" enabled="false" id="LambdaRenameSingleParameterToLambda"/>
     </category>
     <category id="Deadcode">
         <tipper description="SequencerNotLastInBlock" enabled="true" id="SequencerNotLastInBlock"/>
@@ -68,7 +68,7 @@
         <tipper description="Remove unused, uninitialized variable" enabled="true" id="FragmentNoInitializerRemoveUnused"/>
     </category>
     <category id="Dollarization">
-        <tipper description="MethodDeclarationRenameReturnToDollar" enabled="true" id="MethodDeclarationRenameReturnToDollar"/>
+        <tipper description="MethodDeclarationRenameReturnToDollar" enabled="false" id="MethodDeclarationRenameReturnToDollar"/>
     </category>
     <category id="EarlyReturn">
         <tipper description="IfLastInMethodThenEndingWithEmptyReturn" enabled="true" id="IfLastInMethodThenEndingWithEmptyReturn"/>
@@ -147,7 +147,7 @@
         <tipper description="InfixPlusToMinus" enabled="true" id="InfixPlusToMinus"/>
         <tipper description="Remove redundant parenthesis" enabled="true" id="InfixPlusRemoveParenthesis"/>
         <tipper description="Remove empty initializer" enabled="true" id="InitializerEmptyRemove"/>
-        <tipper description="JavadocEmptyRemove" enabled="true" id="JavadocEmptyRemove"/>
+        <tipper description="JavadocEmptyRemove" enabled="false" id="JavadocEmptyRemove"/>
         <tipper description="ParenthesizedRemoveExtraParenthesis" enabled="true" id="ParenthesizedRemoveExtraParenthesis"/>
         <tipper description="ReturnLastInMethod" enabled="true" id="ReturnLastInMethod"/>
         <tipper description="SuperConstructorInvocationRemover" enabled="true" id="SuperConstructorInvocationRemover"/>

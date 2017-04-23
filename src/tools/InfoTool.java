@@ -47,9 +47,6 @@ public final class InfoTool {
     /** Logger */
     public static final Logger logger = Logger.getLogger(InfoTool.class.getName());
 
-    /** The song. */
-    static Mp3File song;
-
     /** WebSite url */
     public static final String WEBSITE = "http://goxr3plus.co.nf";
 
@@ -87,25 +84,28 @@ public final class InfoTool {
     /**
      * The current absolute path to the database <b>PARENT</b> folder with separator[example:C:/Users/]
      */
-    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR = InfoTool
-	    .getBasePathForClass(InfoTool.class);
+    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR = InfoTool.getBasePathForClass(InfoTool.class);
 
     /**
      * The current absolute path to the database <b>PARENT</b> folder without separator[example:C:/Users]
      */
-    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
-	    .substring(0, ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR.length() - 1);
+    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR.substring(0,
+	    ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR.length() - 1);
 
     // --------
 
     /** The absolute path to the database folder<b>with out</b> separator [example:C:/Users/XR3DataBase] */
-    public static final String ABSOLUTE_DATABASE_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR
-	    + DATABASE_FOLDER_NAME;
+    public static final String ABSOLUTE_DATABASE_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR + DATABASE_FOLDER_NAME;
 
     /** The absolute database path with separator [example:C:/Users/XR3DataBase/] */
     public static final String ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR = ABSOLUTE_DATABASE_PATH_PLAIN + File.separator;
 
     // --------------------------------------------------------------------------------------------------------------
+
+    /**
+     * XR3Database signature File , i am using this so the user can use any name for the exported xr3database zip and has not too worry
+     */
+    public static final File DATABASE_SIGNATURE_FILE = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "xr3Original.sig");
 
     /** The Constant radioStationsTable. */
     public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
@@ -195,8 +195,7 @@ public final class InfoTool {
 	    }
 	} catch (URISyntaxException ex) {
 	    failed = true;
-	    Logger.getLogger(classs.getName()).log(Level.WARNING,
-		    "Cannot firgue out base path for class with way (1): ", ex);
+	    Logger.getLogger(classs.getName()).log(Level.WARNING, "Cannot firgue out base path for class with way (1): ", ex);
 	}
 
 	// The above failed?
@@ -210,14 +209,13 @@ public final class InfoTool {
 		// String l = local.replaceFirst("[" + File.separator +
 		// "/\\\\]", "")
 	    } catch (URISyntaxException ex) {
-		Logger.getLogger(classs.getName()).log(Level.WARNING,
-			"Cannot firgue out base path for class with way (2): ", ex);
+		Logger.getLogger(classs.getName()).log(Level.WARNING, "Cannot firgue out base path for class with way (2): ", ex);
 	    }
 	}
 
 	// fix to run inside eclipse
-	if (basePath.endsWith(File.separator + "lib") || basePath.endsWith(File.separator + "bin")
-		|| basePath.endsWith("bin" + File.separator) || basePath.endsWith("lib" + File.separator)) {
+	if (basePath.endsWith(File.separator + "lib") || basePath.endsWith(File.separator + "bin") || basePath.endsWith("bin" + File.separator)
+		|| basePath.endsWith("lib" + File.separator)) {
 	    basePath = basePath.substring(0, basePath.length() - 4);
 	}
 	// fix to run inside netbeans
@@ -242,8 +240,7 @@ public final class InfoTool {
 	try {
 
 	    // Start a new Process
-	    Process process = Runtime.getRuntime()
-		    .exec("ping -" + (OSNAME.toLowerCase().startsWith("windows") ? "n" : "c") + " 1 " + host);
+	    Process process = Runtime.getRuntime().exec("ping -" + (OSNAME.toLowerCase().startsWith("windows") ? "n" : "c") + " 1 " + host);
 
 	    //Wait for it to finish
 	    process.waitFor();
@@ -265,10 +262,12 @@ public final class InfoTool {
      * 
      * @param host
      *            the host
+     * @param port
+     *            the port
      * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
      */
-    public static boolean isReachableUsingSocket(String host) {
-	InetSocketAddress addr = new InetSocketAddress(host, 80);
+    public static boolean isReachableUsingSocket(String host, int port) {
+	InetSocketAddress addr = new InetSocketAddress(host, port);
 
 	//Check if it can be connected
 	try (Socket sock = new Socket()) {
@@ -294,17 +293,15 @@ public final class InfoTool {
     public static Image getMp3AlbumImage(String path, int width, int height) {
 	if ("mp3".equals(getFileExtension(path))) {
 	    try {
-		song = new Mp3File(path);
+		Mp3File song = new Mp3File(path);
 
 		if (song.hasId3v2Tag()) { // has id3v2 tag?
 
 		    ID3v2 id3v2Tag = song.getId3v2Tag();
 
 		    if (id3v2Tag.getAlbumImage() != null) // image?
-			return (width == -1 && height == -1)
-				? new Image(new ByteArrayInputStream(id3v2Tag.getAlbumImage()))
-				: new Image(new ByteArrayInputStream(id3v2Tag.getAlbumImage()), width, height, false,
-					true);
+			return (width == -1 && height == -1) ? new Image(new ByteArrayInputStream(id3v2Tag.getAlbumImage()))
+				: new Image(new ByteArrayInputStream(id3v2Tag.getAlbumImage()), width, height, false, true);
 		}
 	    } catch (UnsupportedTagException | InvalidDataException | IOException ex) {
 		logger.log(Level.WARNING, "Can't get Album Image", ex);
@@ -327,18 +324,18 @@ public final class InfoTool {
      */
     public static String getFileCreationDate(String filePath) {
 	File file = new File(filePath);
-	// exists?
-	if (file.exists()) {
-	    BasicFileAttributes attr;
-	    try {
-		attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-	    } catch (IOException ex) {
-		logger.log(Level.WARNING, ex.getMessage(), ex);
-		return "error";
-	    }
-	    return attr.creationTime().toString().replaceAll("T|Z", " ");
+	//exists?
+	if (!file.exists())
+	    return "file missing";
+
+	BasicFileAttributes attr;
+	try {
+	    attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+	} catch (IOException ex) {
+	    logger.log(Level.WARNING, ex.getMessage(), ex);
+	    return "error";
 	}
-	return "file not exists";
+	return (attr.creationTime() + "").replaceAll("T|Z", " ");
     }
 
     /**
@@ -353,20 +350,18 @@ public final class InfoTool {
      */
     public static String getFileLastModifiedDate(String filePath) {
 	File file = new File(filePath);
-	// exists?
-	if (file.exists()) {
-	    BasicFileAttributes attr;
-	    try {
-		attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-	    } catch (IOException ex) {
-		logger.log(Level.WARNING, ex.getMessage(), ex);
-		return "error";
-	    }
-	    return attr.lastModifiedTime().toString().replaceAll("T|Z", " ");
-	}
+	//exists?
+	if (!file.exists())
+	    return "file missing";
 
-	else
-	    return "file not exists";
+	BasicFileAttributes attr;
+	try {
+	    attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+	} catch (IOException ex) {
+	    logger.log(Level.WARNING, ex.getMessage(), ex);
+	    return "error";
+	}
+	return (attr.lastModifiedTime() + "").replaceAll("T|Z", " ");
     }
 
     /**
@@ -513,11 +508,29 @@ public final class InfoTool {
      *            URL, FILE, INPUTSTREAM, UNKOWN;
      * @return Returns the duration of URL/FILE/INPUTSTREAM in milliseconds
      */
-    public static int durationInMilliseconds(String input, AudioType audioType) {
-	return audioType == AudioType.FILE ? fileDuration(new File(input))
-		: (audioType == AudioType.URL || audioType == AudioType.INPUTSTREAM || audioType == AudioType.UNKNOWN)
-			? -1
-			: -1;
+    public static long durationInMilliseconds(String input, AudioType audioType) {
+	return audioType == AudioType.FILE ? durationInMilliseconds_Part2(new File(input))
+		: (audioType == AudioType.URL || audioType == AudioType.INPUTSTREAM || audioType == AudioType.UNKNOWN) ? -1 : -1;
+    }
+
+    /**
+     * I am using this method to get mp3 duration in milliseconds
+     * 
+     * @return Length of Mp3 song in milliseconds
+     */
+    private static long tryWithMp3Agic(File file) {
+	long milliseconds = -1;
+
+	//try with mp3agic
+	try {
+	    Mp3File song = new Mp3File(file);
+	    milliseconds = (int) song.getLengthInMilliseconds();
+	    //  System.out.println("Bitrate : " + song.getBitrate() + " Seconds: " + lengthInMilliseconds);
+	    return milliseconds;
+	} catch (UnsupportedTagException | InvalidDataException | IOException ex1) {
+	    ex1.printStackTrace();
+	}
+	return milliseconds;
     }
 
     /**
@@ -527,7 +540,8 @@ public final class InfoTool {
      *            the file
      * @return the int
      */
-    private static int fileDuration(File file) {
+    private static long durationInMilliseconds_Part2(File file) {
+	long milliseconds = -1;
 
 	// exists?
 	if (file.exists() && file.length() != 0) {
@@ -538,25 +552,36 @@ public final class InfoTool {
 	    // MP3?
 	    if ("mp3".equals(extension)) {
 		try {
-		    return (int) ((Long) AudioSystem.getAudioFileFormat(file).properties().get("duration") / 1000);
-		} catch (IOException | UnsupportedAudioFileException ex) {
-		    logger.log(Level.WARNING, ex.getMessage(), ex);
-		}
-	    }
+		    milliseconds = (int) ((Long) AudioSystem.getAudioFileFormat(file).properties().get("duration") / 1000);
 
+		    //Get the result of mp3agic if the duration is bigger than 6 minutes
+		    //		    if (milliseconds / 1000 > 60 * 9) {
+		    //			System.out.println("Entered..");
+		    //			milliseconds = tryWithMp3Agic(file);
+		    //		    }
+
+		} catch (IOException | UnsupportedAudioFileException ex) {
+		    System.out.println(file.getAbsolutePath());
+		    logger.log(Level.WARNING, ex.getMessage(), ex);
+
+		    //Try with mp3agic
+		}
+		//}
+	    }
 	    // WAVE || OGG?
-	    if ("ogg".equals(extension) || "wav".equals(extension)) {
+	    else if ("ogg".equals(extension) || "wav".equals(extension)) {
 		try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
 		    AudioFormat format = audioInputStream.getFormat();
-		    return (int) (file.length() / (format.getFrameSize() * (int) format.getFrameRate())) * 1000;
+		    milliseconds = (int) (file.length() / (format.getFrameSize() * (int) format.getFrameRate())) * 1000;
 		} catch (IOException | UnsupportedAudioFileException ex) {
+		    System.out.println(file.getAbsolutePath());
 		    logger.log(Level.WARNING, ex.getMessage(), ex);
 		}
 	    }
 	}
 
 	// System.out.println("Passed with error")
-	return -1;
+	return milliseconds >= 0 ? milliseconds : -1;
     }
 
     /**
@@ -573,9 +598,9 @@ public final class InfoTool {
      */
     public static int durationInSeconds(String name, AudioType type) {
 
-	int time = durationInMilliseconds(name, type);
+	long time = durationInMilliseconds(name, type);
 
-	return (time == 0 || time == -1) ? time : time / 1000;
+	return (int) ((time == 0 || time == -1) ? time : time / 1000);
 
 	//	 Long microseconds = (Long)AudioSystem.getAudioFileFormat(new File(audio)).properties().get("duration") int mili = (int)(microseconds / 1000L);
 	//	 int sec = milli / 1000 % 60; 
@@ -640,25 +665,27 @@ public final class InfoTool {
      * @return <b> a String representing the file size in MB and kB </b>
      */
     public static String getFileSizeEdited(File file) {
-	if (file.exists()) {
-	    //Get the size in bytes
-	    double bytes = file.length();
-	    int kilobytes = (int) (bytes / 1024);
-	    int megabytes = kilobytes / 1024;
 
-	    //int gigabytes = megabytes / 1024
+	//file exists?
+	if (!file.exists())
+	    return "file missing";
 
-	    if (kilobytes < 1024) {
-		return kilobytes + " KiB";
-	    } else if (kilobytes > 1024) {
-		return megabytes + " MiB + " + (kilobytes - (megabytes * 1024)) + " KiB";
-	    }
+	//Get the size in bytes
+	double bytes = file.length();
+	int kilobytes = (int) (bytes / 1024);
+	int megabytes = kilobytes / 1024;
 
-	    //else if (megabytes > 1024) {
-	    //	    return gigabytes + " GiB"
-	    //	}
+	//int gigabytes = megabytes / 1024
 
+	if (kilobytes < 1024) {
+	    return kilobytes + " KiB";
+	} else if (kilobytes > 1024) {
+	    return megabytes + " MiB + " + (kilobytes - (megabytes * 1024)) + " KiB";
 	}
+
+	//else if (megabytes > 1024) {
+	//	    return gigabytes + " GiB"
+	//	}
 
 	//If it reaches here we have an error ;) damn !
 	return "error";

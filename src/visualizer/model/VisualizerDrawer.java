@@ -3,8 +3,6 @@
  */
 package visualizer.model;
 
-import java.util.Random;
-
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
@@ -22,8 +20,10 @@ public class VisualizerDrawer extends VisualizerModel {
 
     // -----------------------------Images---------------------------------
 
-    /** The foreground image. */
-    public Image foregroundImage = new Image(VisualizerModel.class.getResourceAsStream("foreground.png"));
+    /** The DEFAULT_FOREGROUND_IMAGE */
+    public static final Image DEFAULT_FOREGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("foreground.png"));
+    /** The foreground image */
+    public Image foregroundImage = DEFAULT_FOREGROUND_IMAGE;
 
     /** The background image. */
     public Image backgroundImage;//= new Image(VisualizerModel.class.getResourceAsStream("foreground.png"))
@@ -49,8 +49,7 @@ public class VisualizerDrawer extends VisualizerModel {
 
 	    //Draw it
 	    gc.drawImage(foregroundImage, (canvasWidth / 2 - imageW / 2) - imageW * array[0] / 2,
-		    (canvasHeight / 2 - imageH / 2) - imageH * array[0] / 2, imageW + imageW * array[0],
-		    imageH + imageH * array[0]);
+		    (canvasHeight / 2 - imageH / 2) - imageH * array[0] / 2, imageW + imageW * array[0], imageH + imageH * array[0]);
 
 	}
     }
@@ -77,8 +76,8 @@ public class VisualizerDrawer extends VisualizerModel {
 
 	    //Draw it
 	    double front = Math.abs(array[0]) / 4;
-	    gc.drawImage(backgroundImage, 0 - front * canvasWidth, 0 - front * canvasHeight,
-		    canvasWidth + (front * canvasWidth) * 2, canvasHeight + (front * canvasHeight) * 2);
+	    gc.drawImage(backgroundImage, 0 - front * canvasWidth, 0 - front * canvasHeight, canvasWidth + (front * canvasWidth) * 2,
+		    canvasHeight + (front * canvasHeight) * 2);
 	    //	    gc.drawImage(backgroundImage,canvasWidth - imageW) - imageW * array[0] / 2,
 	    //	    (canvasHeight - imageH) - imageH * array[0], imageW + imageW * array[0],
 	    //	    imageH + imageH * array[0]);

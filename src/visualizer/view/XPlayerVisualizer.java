@@ -45,7 +45,7 @@ public class XPlayerVisualizer extends Visualizer {
 		displayMode.set((displayMode.get() + 1 > DISPLAYMODE_MAXIMUM) ? 0 : displayMode.get() + 1);
 		// SECONDARY
 	    } else if (m.getButton() == MouseButton.SECONDARY)
-		xPlayerUI.visualizerWindow.visualizerContextMenu.show(this, m.getScreenX(), m.getScreenY());
+		xPlayerUI.visualizerWindow.getVisualizerContextMenu().show(this, m.getScreenX(), m.getScreenY());
 	});
 
     }

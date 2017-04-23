@@ -5,7 +5,6 @@ package windows;
 
 import java.io.IOException;
 
-import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -26,13 +25,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import tools.ActionTool;
 import tools.InfoTool;
+import tools.NotificationType;
 
 /**
  * The Class RenameWindow.
  */
 public class RenameWindow extends VBox {
-
 
     @FXML
     private Label charsField;
@@ -57,14 +58,14 @@ public class RenameWindow extends VBox {
 	if (!inputField.getText().trim().isEmpty())
 	    close(true);
 	else
-	    Notifications.create().text("You have to type something..").showWarning();
+	    ActionTool.showNotification("Message", "You have to type something..", Duration.millis(1500), NotificationType.WARNING);
 
     };
 
     /**
      * 
      */
-    public Stage window = new Stage();
+    private Stage window = new Stage();
 
     /** If it was accepted */
     private boolean accepted = false;
@@ -122,10 +123,9 @@ public class RenameWindow extends VBox {
 	charsField.textProperty().bind(inputField.textProperty().length().asString());
 
 	// inputField
-	getChildren().add(inputField);	
+	getChildren().add(inputField);
 	inputField.setMinSize(420, 32);
-	inputField.setTooltip(
-		new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
+	inputField.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
 	inputField.setPromptText("Type Here...");
 	inputField.setStyle("-fx-font-weight:bold; -fx-font-size:14;");
 	//inputField.setPrefColumnCount(200)
@@ -145,10 +145,10 @@ public class RenameWindow extends VBox {
 	    }
 	});
 	//---prefColumnCountProperty
-//	inputField.prefColumnCountProperty().addListener((observable, oldValue, newValue) -> {
-//	    if (inputField.getWidth() < 450)
-//		window.setWidth(inputField.getWidth() + 50);
-//	});
+	//	inputField.prefColumnCountProperty().addListener((observable, oldValue, newValue) -> {
+	//	    if (inputField.getWidth() < 450)
+	//		window.setWidth(inputField.getWidth() + 50);
+	//	});
 	inputField.setOnAction(myHandler);
 
 	// okButton
@@ -236,7 +236,7 @@ public class RenameWindow extends VBox {
 	inputField.setText(text);
 	accepted = true;
 	window.show();
-	
+
 	//	
 	inputField.requestFocus();
 	inputField.end();
@@ -260,6 +260,13 @@ public class RenameWindow extends VBox {
      */
     public boolean isShowing() {
 	return showingProperty().get();
+    }
+
+    /**
+     * @return the window
+     */
+    public Stage getWindow() {
+	return window;
     }
 
 }
