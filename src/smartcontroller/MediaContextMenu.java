@@ -19,6 +19,8 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import media.Audio;
 import media.Media;
@@ -32,6 +34,8 @@ import tools.InfoTool;
  */
 public class MediaContextMenu extends ContextMenu {
 
+    private final Image soundWave = InfoTool.getImageFromDocuments("Audio Wave Filled-24.png");
+
     /**
      * The node based on which the Rename or Star Window will be position
      */
@@ -44,28 +48,28 @@ public class MediaContextMenu extends ContextMenu {
     private SmartController controller;
 
     /** The players. */
-    Menu playOn = new Menu("Play on", InfoTool.getImageViewFromDocuments("circledPlay24.png"));
+    Menu startPlayer = new Menu("Play on", InfoTool.getImageViewFromDocuments("circledPlay24.png"));
 
     /** The player 0. */
-    MenuItem player0 = new MenuItem("xPlayer ~0");
+    MenuItem player0 = new MenuItem("xPlayer ~0", new ImageView(soundWave));
 
     /** The player 1. */
-    MenuItem player1 = new MenuItem("xPlayer ~1");
+    MenuItem player1 = new MenuItem("xPlayer ~1", new ImageView(soundWave));
 
     /** The player 2. */
-    MenuItem player2 = new MenuItem("xPlayer ~2");
+    MenuItem player2 = new MenuItem("xPlayer ~2", new ImageView(soundWave));
 
     /** The players. */
     Menu stopPlayer = new Menu("Stop Player", InfoTool.getImageViewFromDocuments("Stop Sign-24.png"));
 
     /** The player 0. */
-    MenuItem splayer0 = new MenuItem("xPlayer ~0");
+    MenuItem splayer0 = new MenuItem("xPlayer ~0", new ImageView(soundWave));
 
     /** The player 1. */
-    MenuItem splayer1 = new MenuItem("xPlayer ~1");
+    MenuItem splayer1 = new MenuItem("xPlayer ~1", new ImageView(soundWave));
 
     /** The player 2. */
-    MenuItem splayer2 = new MenuItem("xPlayer ~2");
+    MenuItem splayer2 = new MenuItem("xPlayer ~2", new ImageView(soundWave));
 
     //Start:--Search on Web
     Menu searchOnWeb = new Menu("Search on Web..", InfoTool.getImageViewFromDocuments("searchWeb24.png"));
@@ -115,8 +119,11 @@ public class MediaContextMenu extends ContextMenu {
     MenuItem showFile = new MenuItem("Show File ", InfoTool.getImageViewFromDocuments("path.png"));
 
     /** Find Lyrics (L) */
-    MenuItem findLyrics = new MenuItem("Find Lyrics[Comming..]", InfoTool.getImageViewFromDocuments("Puzzle-20.png"));
+    Menu findLyrics = new Menu("Find Lyrics", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
+    MenuItem lyricFinderOrg = new MenuItem("LyricFinder.org", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
+    MenuItem lyricsCom = new MenuItem("Lyrics.com", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
 
+    
     /** Show Info (I) */
     MenuItem showInfo = new MenuItem("Show Info[Comming..]", InfoTool.getImageViewFromDocuments("tag.png"));
 
@@ -152,15 +159,15 @@ public class MediaContextMenu extends ContextMenu {
     public MediaContextMenu() {
 
 	//Add all the items
-	findLyrics.setDisable(true);
 	showInfo.setDisable(true);
-	getItems().addAll(new TitleMenuItem("Common"), playOn, stopPlayer, new TitleMenuItem("More"), searchOnWeb, stars, showFile, findLyrics,
-		showInfo, new TitleMenuItem("File Edit"), rename, simpleDelete, storageDelete, new TitleMenuItem("Organize"), copy);
+	getItems().addAll(new TitleMenuItem("Basic"), startPlayer, stopPlayer, new TitleMenuItem("Search"), searchOnWeb, findLyrics,
+		new TitleMenuItem("More"), stars, showFile, showInfo, new TitleMenuItem("File Edit"), rename, simpleDelete, storageDelete,
+		new TitleMenuItem("Organize"), copy);
 
 	//---play
 
-	playOn.getItems().addAll(player0, player1, player2);
-	playOn.getItems().forEach(item -> item.setOnAction(this::onAction));
+	startPlayer.getItems().addAll(player0, player1, player2);
+	startPlayer.getItems().forEach(item -> item.setOnAction(this::onAction));
 
 	//--stop
 	stopPlayer.getItems().addAll(splayer0, splayer1, splayer2);
@@ -174,6 +181,10 @@ public class MediaContextMenu extends ContextMenu {
 		new TitleMenuItem("Radios"), librefm, lastfm, new TitleMenuItem("Video Sites"), youtube, vimeo, new TitleMenuItem("Search Engines"),
 		google, duckduckgo, bing, yahoo);
 	searchOnWeb.getItems().forEach(item -> item.setOnAction(this::onAction2));
+
+	//---findLyrics
+	findLyrics.getItems().addAll(new TitleMenuItem("Popular"), lyricFinderOrg,lyricsCom);
+	findLyrics.getItems().forEach(item -> item.setOnAction(this::onAction2));
 
 	//END:--Search on Web
 
@@ -245,6 +256,14 @@ public class MediaContextMenu extends ContextMenu {
 		separator1.setVisible(false);
 		separator2.setVisible(false);
 	    }
+	}
+
+	//Determine the image
+	for (int i = 0; i <= 2; i++) {
+	    boolean b = Main.xPlayersList.getXPlayer(i).isOpened() || Main.xPlayersList.getXPlayer(i).isPausedOrPlaying()
+		    || Main.xPlayersList.getXPlayer(i).isSeeking();
+	    ((ImageView) startPlayer.getItems().get(i).getGraphic()).setImage(b ? soundWave : null);
+	    ((ImageView) stopPlayer.getItems().get(i).getGraphic()).setImage(b ? soundWave : null);
 	}
 
 	this.node = node;
@@ -374,6 +393,7 @@ public class MediaContextMenu extends ContextMenu {
 	if (media != null) {
 	    try {
 
+		//---------------------SEARCH ON WEB--------------------------------------------
 		//Music Sites
 		if (source == soundCloud)
 		    ActionTool.openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
@@ -406,6 +426,12 @@ public class MediaContextMenu extends ContextMenu {
 		    ActionTool.openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
 		else if (source == yahoo)
 		    ActionTool.openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(media.getTitle(), encoding));
+
+		//-----------------------FIND LYRICS------------------------------------------------
+		else if (source == lyricFinderOrg)
+		    ActionTool.openWebSite("http://search.lyricfinder.org/?query=" + URLEncoder.encode(media.getTitle(), encoding));
+		else if (source == lyricsCom)
+		    ActionTool.openWebSite("http://www.lyrics.com/lyrics/" + URLEncoder.encode(media.getTitle(), encoding));
 
 	    } catch (UnsupportedEncodingException ex) {
 		ex.printStackTrace();

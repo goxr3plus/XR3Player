@@ -781,6 +781,7 @@ public class SmartController extends StackPane {
 	updateLabel();
 	// refresh the tableViewer
 	tableViewer.refresh();
+	tableViewer.sort();
 
     }
 
@@ -1448,7 +1449,7 @@ public class SmartController extends StackPane {
 
 		// Reset to -1
 		scrollValueBeforeDeleteAction = -1;
-	    }
+	    }		    
 	}
 
 	@Override

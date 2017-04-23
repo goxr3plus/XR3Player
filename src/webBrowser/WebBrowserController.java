@@ -152,7 +152,7 @@ public class WebBrowserController extends StackPane {
     private void checkForInternetConnection() {
 	//Check for internet connection
 	Thread thread = new Thread(() -> {
-	    boolean hasInternet = InfoTool.isReachableByPing("https://www.google.com");
+	    boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
 	    Platform.runLater(() -> errorPane.setVisible(!hasInternet));
 	}, "Internet Connection Tester Thread");
 	thread.setDaemon(true);
