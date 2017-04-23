@@ -1,5 +1,7 @@
 # XR3Player ( A modern JavaFX Media Player)
 
+[![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 -----------------------Current status ##BETA-------------------------------------
 
 A pure Java Media Player which is what you always wanted , OPENSOURCE!!
