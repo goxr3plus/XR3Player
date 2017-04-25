@@ -16,12 +16,12 @@
 <fx:root pickOnBounds="false" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
-			<image>
-				<Image url="@../image/library.png" />
-			</image>
          <viewport>
             <Rectangle2D />
          </viewport>
+         <image>
+            <Image url="@../image/visualizer.jpg" />
+         </image>
 		</ImageView>
 		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-border-color: firebrick transparent transparent transparent;" styleClass="libraryNameLabel" text="Lib Name :)" wrapText="true">
 			<tooltip>
@@ -81,7 +81,7 @@
                   <Tooltip text="Image is missing!" />
                </tooltip>
             </Label>
-            <Label fx:id="totalItemsLabel" alignment="CENTER" layoutX="315.0" layoutY="154.0" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="9999999" textAlignment="CENTER">
+            <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="543545" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -92,6 +92,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
             </Label>
          </children>
       </VBox>

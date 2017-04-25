@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<fx:root prefHeight="523.0" prefWidth="752.0" style="-fx-background-color: rgb(255,255,255,0.95);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="753.0" prefWidth="1031.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -141,7 +141,7 @@
                   </ScrollPane>
                </bottom>
                <center>
-                  <StackPane fx:id="usersStackView" prefHeight="277.0" BorderPane.alignment="CENTER">
+                  <StackPane fx:id="usersStackView" prefHeight="298.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
                            <cursor>
@@ -155,7 +155,7 @@
                   </StackPane>
                </center>
             </BorderPane>
-            <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="71.0" prefWidth="199.0" style="-fx-font-size: 30;" text="Launch">
+            <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="71.0" prefWidth="199.0" style="-fx-font-size: 30;" text="Lauch">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -232,7 +232,7 @@
             </Label>
          </center>
          <right>
-            <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" styleClass="arrowButton2" text="Exit" BorderPane.alignment="CENTER">
+            <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" style="-fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Exit" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -245,12 +245,12 @@
             <Insets right="5.0" />
          </BorderPane.margin>
          <left>
-            <Button fx:id="changeBackground" disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="114.0" style="-fx-font-size: 8;" styleClass="arrowButton2" text="Change Background[Comming...]" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+            <Button fx:id="changeBackground" mnemonicParsing="false" prefHeight="35.0" prefWidth="114.0" style="-fx-font-size: 9; -fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Change Background" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <tooltip>
-                  <Tooltip text="Exit application" />
+                  <Tooltip text="Change the background image of the application" />
                </tooltip>
             </Button>
          </left>

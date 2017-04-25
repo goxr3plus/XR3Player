@@ -173,6 +173,9 @@
                </BorderPane.margin>
             </ScrollPane>
          </bottom>
+         <top>
+            <Label fx:id="librariesInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent;" styleClass="settingsLabel" text="Libraries Info" BorderPane.alignment="CENTER" />
+         </top>
       </BorderPane>
    </children>
    <padding>

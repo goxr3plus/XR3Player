@@ -15,6 +15,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import customnodes.Marquee;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleListProperty;
@@ -64,10 +65,13 @@ public class WebBrowserTabController extends StackPane {
     private JFXTextField searchBar;
 
     @FXML
-    private ComboBox<String> searchEngineComboBox;
+    private JFXButton goButton;
 
     @FXML
     private JFXButton reloadButton;
+
+    @FXML
+    private ComboBox<String> searchEngineComboBox;
 
     @FXML
     private WebView webView;
@@ -125,12 +129,22 @@ public class WebBrowserTabController extends StackPane {
 
 	//-------------------WebEngine------------------------
 	webEngine = webView.getEngine();
+	webEngine.getLoadWorker().exceptionProperty().addListener(error -> {
+	    ActionTool
+		    .showNotification(
+			    "Error Occured", "Trying to connect to a website error occured:\n\t["
+				    + webEngine.getLoadWorker().getException().getMessage() + "]\nMaybe you don't have internet connection.",
+			    Duration.seconds(15), NotificationType.ERROR);
 
-	//	webEngine.setOnError(error -> ActionTool.showNotification("Error Occured",
-	//		"Trying to connect to a website error occured:\n\t["
-	//			+ webEngine.getLoadWorker().getException().getMessage()
-	//			+ "]\nMaybe you don't have internet connection.",
-	//		Duration.seconds(2), NotificationType.ERROR));
+	    Main.webBrowser.checkForInternetConnection();
+	});
+	webEngine.setOnError(error -> {
+	    ActionTool.showNotification("Error Occured",
+		    "Trying to connect to a website error occured:\n\t[" + error.getMessage() + "]\nMaybe you don't have internet connection.",
+		    Duration.seconds(15), NotificationType.ERROR);
+
+	    Main.webBrowser.checkForInternetConnection();
+	});
 
 	history = webEngine.getHistory();
 	historyEntryList = history.getEntries();
@@ -158,7 +172,7 @@ public class WebBrowserTabController extends StackPane {
 
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
-	marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
+	//marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
 
 	stack.getChildren().addAll(indicator, text);
 	stack.setManaged(false);
@@ -182,20 +196,23 @@ public class WebBrowserTabController extends StackPane {
 
 	//-------------------Items------------------------
 	//searchBar
-	searchBar.focusedProperty().addListener((observable, oldValue, newValue) -> {
-	    if (newValue) // if focused
+	webEngine.getLoadWorker().runningProperty().addListener((observable, oldValue, newValue) -> {
+	    if (!newValue) // if !running
 		searchBar.textProperty().unbind();
 	    else
 		searchBar.textProperty().bind(webEngine.locationProperty());
 	});
 	searchBar.setOnAction(a -> loadWebSite(searchBar.getText()));
 
+	//goButton
+	goButton.setOnAction(searchBar.getOnAction());
+
 	//reloadButton
 	reloadButton.setOnAction(a -> {
-	    if (history.getEntries().isEmpty())
-		webEngine.load("about:home");
-	    else
-		webEngine.reload();
+	    //	    if (history.getEntries().isEmpty())
+	    //		webEngine.load("about:home");
+	    //	    else
+	    webEngine.reload();
 	});
 
 	//ProgressBar	

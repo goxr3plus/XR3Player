@@ -26,7 +26,7 @@ public class VisualizerDrawer extends VisualizerModel {
     public Image foregroundImage = DEFAULT_FOREGROUND_IMAGE;
 
     /** The background image. */
-    public Image backgroundImage;//= new Image(VisualizerModel.class.getResourceAsStream("foreground.png"))
+    public Image backgroundImage = new Image(VisualizerModel.class.getResourceAsStream("visualizer.jpg"));
 
     /**
      * Draws the foreground image of the visualizer

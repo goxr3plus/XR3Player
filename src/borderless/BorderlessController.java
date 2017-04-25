@@ -118,7 +118,6 @@ public class BorderlessController {
     /**
      * Maximize on/off the application.
      */
-    @SuppressWarnings("boxing")
     protected void maximize() {
 	Rectangle2D screen;
 	if (Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth() / 2, stage.getHeight() / 2).isEmpty())

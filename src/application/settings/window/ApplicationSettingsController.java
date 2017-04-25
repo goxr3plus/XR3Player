@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,6 +41,9 @@ public class ApplicationSettingsController extends BorderPane {
 
     @FXML
     private Tab shortCutsTab;
+
+    @FXML
+    private JFXButton doneButton;
 
     //--------------------------------------------------------
 
@@ -120,6 +125,9 @@ public class ApplicationSettingsController extends BorderPane {
 	librariesTab.setContent(librariesSettingsController);
 	playListsTab.setContent(playListsSettingsController);
 	shortCutsTab.setContent(nativeKeyBindings);
+
+	//doneButton
+	doneButton.setOnAction(a -> hideWindow());
     }
 
     /**

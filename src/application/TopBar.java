@@ -66,6 +66,9 @@ public class TopBar extends BorderPane {
     private Button close;
 
     @FXML
+    private Button changeBackground;
+
+    @FXML
     private StackPane cpuStackPane;
 
     @FXML
@@ -202,6 +205,9 @@ public class TopBar extends BorderPane {
 
 	// close
 	close.setOnAction(ac -> Main.exitQuestion());
+
+	//changeBackground
+	changeBackground.setOnAction(a -> Main.changeBackgroundImage());
 
 	//----------------------------START: TABS---------------------------------
 

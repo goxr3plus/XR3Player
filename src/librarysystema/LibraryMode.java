@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -84,6 +85,9 @@ public class LibraryMode extends GridPane {
     @FXML
     private HBox botttomHBox;
 
+    @FXML
+    private Label librariesInfoLabel;
+
     // ------------------------------------------------
 
     // protected boolean dragDetected
@@ -106,7 +110,7 @@ public class LibraryMode extends GridPane {
     /**
      * Default image of a library(which has not a costume one selected by the user.
      */
-    public static final Image defaultImage = InfoTool.getImageFromDocuments("library.png");
+    public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg");
     /**
      * A classic warning image to inform the user about something
      * 
@@ -308,6 +312,8 @@ public class LibraryMode extends GridPane {
 	openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get()
 		.libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 
+	//----librariesInfoLabel
+	librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries"));
     }
 
     /**

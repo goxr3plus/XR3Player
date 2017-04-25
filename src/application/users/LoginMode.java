@@ -244,7 +244,7 @@ public class LoginMode extends BorderPane {
 	});
 
 	//changeBackground
-	//changeBackground.setOnAction(a -> Main.changeBackgroundImage())
+	changeBackground.setOnAction(a -> Main.changeBackgroundImage());
 
 	//exitButton
 	exitButton.setOnAction(a -> Main.exitQuestion());

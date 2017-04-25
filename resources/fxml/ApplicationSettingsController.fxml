@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
             <Tab fx:id="librariesTab" closable="false" text="Libraries" />
           <Tab fx:id="playListsTab" closable="false" text="PlayLists" />
@@ -14,4 +18,21 @@
         </tabs>
       </TabPane>
    </center>
+   <bottom>
+      <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: firebrick; -fx-background-radius: 45 45 0 0;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="doneButton" text="Close">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
+      </StackPane>
+   </bottom>
 </fx:root>

@@ -219,7 +219,7 @@ public class MultipleLibraries extends StackPane {
 
 	Marquee marquee = new Marquee();
 	marquee.textProperty().bind(tab.getTooltip().textProperty());
-	marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;");
+	//marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
 	//tab.textProperty().bind(marquee.textProperty())
 
 	stack.getChildren().addAll(indicator, text);

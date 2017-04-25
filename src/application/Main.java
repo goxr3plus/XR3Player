@@ -41,6 +41,11 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -179,12 +184,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 62;
+    public static final int currentVersion = 63;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "20/04/2017";
+    public static final String releaseDate = "25/04/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -273,6 +278,7 @@ public class Main extends Application {
 	    // window)
 
 	    window.setTitle("XR3Player V." + currentVersion);
+	    loginMode.getXr3PlayerLabel().setText("~" + window.getTitle() + "~");
 	    // -------------------
 	    // -------Due to a bug i need the width%2==0---------
 	    int width = (int) (InfoTool.getVisualScreenWidth() * 0.77);
@@ -293,7 +299,7 @@ public class Main extends Application {
 	    //	    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	    // Scene
-	    scene = new BorderlessScene(window, StageStyle.TRANSPARENT, applicationStackPane, 650, 500);
+	    scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, 650, 500);
 	    scene.setMoveControl(loginMode.getXr3PlayerLabel());
 	    scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 
@@ -369,9 +375,8 @@ public class Main extends Application {
     /**
      * The user has the ability to change the Library Image
      * 
-     * @deprecated
      */
-    private static void changeBackgroundImage() {
+    public static void changeBackgroundImage() {
 
 	File imageFile = Main.specialChooser.prepareToSelectImage(Main.window);
 	if (imageFile == null)
@@ -380,30 +385,28 @@ public class Main extends Application {
 	//Check the given image
 	Image image = new Image(imageFile.toURI() + "");
 	if (image.getWidth() > 4800 || image.getHeight() > 4800) {
-	    ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(),
-		    Duration.millis(1500), NotificationType.WARNING);
+	    ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "x" + image.getHeight(),
+		    Duration.millis(2000), NotificationType.WARNING);
 	    return;
 	}
-	if (image.getWidth() < 1200 || image.getHeight() < 1200) {
-	    ActionTool.showNotification("Warning", "Minimum Size Allowed 1200*1200 \n Current is:" + image.getWidth() + "*" + image.getHeight(),
-		    Duration.millis(1500), NotificationType.WARNING);
+	if (image.getWidth() < 1000 || image.getHeight() < 1000) {
+	    ActionTool.showNotification("Warning", "Minimum Size Allowed 1200*1200 \n Current is:" + image.getWidth() + "x" + image.getHeight(),
+		    Duration.millis(2000), NotificationType.WARNING);
 	    return;
 	}
 
-	//	String maou = file.getAbsoluteFile().toURI().toString();
-	//	maou = maou.replaceAll("\\Q\\\\E", "//");
-	//	loginMode.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('" + maou
-	//		+ "'); -fx-background-position: center center; -fx-background-repeat:stretch;");
-	//	
+	BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
+	//loginMode.setBackground(new Background(bgImg))
+	root.setBackground(new Background(bgImg));
 
 	//Start a Thread to copy the File
 	new Thread(() -> {
-	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()))) {
+	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()), 1)) {
 		paths.forEach(path -> {
-		    File file2 = path.toFile();
-		    if (file2.getName().contains("background") && !file2.isDirectory()) {
-			file2.delete();
-		    }
+		    File file = path.toFile();
+		    if (file.getName().contains("background") && InfoTool.isImage(file.getAbsolutePath()) && !file.isDirectory())
+			file.delete(); //fuck if failed... Good programming practice xoaoxaoxoaoxo -> to be fixed
 		});
 	    } catch (IOException ex) {
 		ex.printStackTrace();
@@ -413,72 +416,56 @@ public class Main extends Application {
 		    InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "background." + InfoTool.getFileExtension(imageFile.getAbsolutePath())))
 		Platform.runLater(() -> ActionTool.showNotification("Failed saving background image", "Failed to change the background image...",
 			Duration.millis(2500), NotificationType.SIMPLE));
-	    else {
 
-		try {
-		    Thread.sleep(3500);
-		} catch (InterruptedException ex) {
-		    ex.printStackTrace();
-		}
-		Platform.runLater(Main::determineBackgroundImage);
-	    }
 	}).start();
     }
 
     static boolean backgroundFound;
-    static String backgroundPath;
 
     /**
      * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is
      * being added :)
      * 
-     * @deprecated
      */
     private static void determineBackgroundImage() {
-	//	backgroundFound = false;
-	//	backgroundPath = null;
-	//
-	//	//Check if a background image exists
-	//	if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists())
-	//	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()))) {
-	//		paths.forEach(path -> {
-	//		    File file = path.toFile();
-	//		    if (file.getName().contains("background") && !file.isDirectory()) {
-	//
-	//			//Platform.runLater(() -> {
-	//			System.out.println("Is JavaFX Thread :" + Platform.isFxApplicationThread());
-	//			String maou = file.getAbsoluteFile().toURI().toString();
-	//			maou = maou.replaceAll("\\Q\\\\E", "//");
-	//			System.out.println("Maou=\n" + maou);
-	//
-	//			backgroundPath = maou;
-	//
-	//			//loginMode.setStyle(null);
-	//			
-	//			//loginMode.setStyle(
-	//			//	"-fx-background-color:red; -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
-	//
-	//			loginMode.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('e"
-	//				+ backgroundPath + "'); -fx-background-position: center center; -fx-background-repeat:stretch;");
-	//			
-	//			loginMode.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('"
-	//				+ backgroundPath + "'); -fx-background-position: center center; -fx-background-repeat:stretch;");
-	//
-	//			//backgroundPath = null;
-	//			//loginMode.setStyle(root.getStyle());
-	//			//backgroundFound = true;
-	//		    }
-	//		});
-	//	    } catch (IOException ex) {
-	//		ex.printStackTrace();
-	//	    }
+	backgroundFound = false;
 
-	//Default Image
-	if (backgroundPath == null)
-	    loginMode.setStyle(
-		    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+	//Check if a background image exists
+	if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists())
+	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()), 1)) {
+		paths.forEach(path -> {
+		    File file = path.toFile();
+		    if (file.getName().contains("background") && InfoTool.isImage(file.getAbsolutePath()) && !file.isDirectory()) {
 
-	root.setStyle(loginMode.getStyle());
+			Image img = new Image(file.toURI() + "");
+			BackgroundImage bgImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.DEFAULT, new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
+			//loginMode.setBackground(new Background(bgImg))
+			root.setBackground(new Background(bgImg));
+
+			//Found?
+			backgroundFound = true;
+
+		    }
+		});
+	    } catch (IOException ex) {
+		ex.printStackTrace();
+	    }
+
+	//Check if background is found
+	if (backgroundFound)
+	    return;
+
+	Image img = new Image("/image/visualizer.jpg");
+	BackgroundImage bgImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
+	root.setBackground(new Background(bgImg));
+
+	//Junk COde
+	//		    loginMode.setStyle(
+	//			    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
+	//	root.setStyle(loginMode.getStyle())
+
     }
 
     /**

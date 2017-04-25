@@ -91,7 +91,7 @@
    <right>
       <HBox style="-fx-spacing: 0.5;" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" spacing="1.0">
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0">
                      <children>
@@ -141,6 +141,14 @@
                         </Button>
                      </children>
                   </HBox>
+                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 9; -fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Change Background" textAlignment="CENTER" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Change the background image of the application" />
+                     </tooltip>
+                  </Button>
                </children>
             </VBox>
          </children>

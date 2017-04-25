@@ -328,18 +328,18 @@ public class SmartController extends StackPane {
 	region.setVisible(false);
 
 	// FunIndicator
-//	FunIndicator funIndicator = new FunIndicator();
-//	//super.getChildren().add(super.getChildren().size() - 1, funIndicator);
-//	funIndicator.setPrefSize(50, 50);
-//	indicatorVBox.getChildren().add(0, funIndicator);
-//	region.visibleProperty().addListener((observable, oldValue, newValue) -> {
-//	    if (!region.isVisible())
-//		funIndicator.pause();
-//	    else {
-//		funIndicator.setFromColor(Color.WHITE);
-//		funIndicator.start();
-//	    }
-//	});
+	//	FunIndicator funIndicator = new FunIndicator();
+	//	//super.getChildren().add(super.getChildren().size() - 1, funIndicator);
+	//	funIndicator.setPrefSize(50, 50);
+	//	indicatorVBox.getChildren().add(0, funIndicator);
+	//	region.visibleProperty().addListener((observable, oldValue, newValue) -> {
+	//	    if (!region.isVisible())
+	//		funIndicator.pause();
+	//	    else {
+	//		funIndicator.setFromColor(Color.WHITE);
+	//		funIndicator.start();
+	//	    }
+	//	});
 
 	// ------ progress indicator
 	//funIndicator.visibleProperty().bind(region.visibleProperty());
@@ -781,7 +781,8 @@ public class SmartController extends StackPane {
 	updateLabel();
 	// refresh the tableViewer
 	tableViewer.refresh();
-	tableViewer.sort();
+	if (!tableViewer.getSortOrder().isEmpty())
+	    tableViewer.sort();
 
     }
 
@@ -1449,7 +1450,7 @@ public class SmartController extends StackPane {
 
 		// Reset to -1
 		scrollValueBeforeDeleteAction = -1;
-	    }		    
+	    }
 	}
 
 	@Override
