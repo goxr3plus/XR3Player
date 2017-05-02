@@ -130,18 +130,18 @@ public class WebBrowserTabController extends StackPane {
 	//-------------------WebEngine------------------------
 	webEngine = webView.getEngine();
 	webEngine.getLoadWorker().exceptionProperty().addListener(error -> {
-	    ActionTool
-		    .showNotification(
-			    "Error Occured", "Trying to connect to a website error occured:\n\t["
-				    + webEngine.getLoadWorker().getException().getMessage() + "]\nMaybe you don't have internet connection.",
-			    Duration.seconds(15), NotificationType.ERROR);
+//	    ActionTool
+//		    .showNotification(
+//			    "Error Occured", "Trying to connect to a website error occured:\n\t["
+//				    + webEngine.getLoadWorker().getException().getMessage() + "]\nMaybe you don't have internet connection.",
+//			    Duration.seconds(15), NotificationType.ERROR);
 
 	    Main.webBrowser.checkForInternetConnection();
 	});
 	webEngine.setOnError(error -> {
-	    ActionTool.showNotification("Error Occured",
-		    "Trying to connect to a website error occured:\n\t[" + error.getMessage() + "]\nMaybe you don't have internet connection.",
-		    Duration.seconds(15), NotificationType.ERROR);
+//	    ActionTool.showNotification("Error Occured",
+//		    "Trying to connect to a website error occured:\n\t[" + error.getMessage() + "]\nMaybe you don't have internet connection.",
+//		    Duration.seconds(15), NotificationType.ERROR);
 
 	    Main.webBrowser.checkForInternetConnection();
 	});

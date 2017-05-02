@@ -122,6 +122,9 @@
                                              </image>
                                           </ImageView>
                                        </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Libraries Settings" />
+                                       </tooltip>
                                     </JFXButton>
                                  </children>
                                  <BorderPane.margin>
@@ -133,24 +136,54 @@
                               </HBox>
                            </center>
                            <left>
-                              <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="315.0" BorderPane.alignment="CENTER">
+                              <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                                  <items>
                                     <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                        <children>
-                                          <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="137.0" styleClass="first" text="Delete">
+                                          <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-font-size: 12;" styleClass="first" text="Delete">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button fx:id="renameLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="137.0" text="Rename">
+                                          <Button fx:id="renameLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="112.0" style="-fx-font-size: 12;" text="Rename">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button fx:id="openOrCloseLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="137.0" styleClass="last" text="Open">
+                                          <Button fx:id="openOrCloseLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" style="-fx-font-size: 12;" text="Open">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
+                                          </Button>
+                                          <Button fx:id="openLibraryContextMenu" contentDisplay="GRAPHIC_ONLY" layoutX="284.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
+                                                   <image>
+                                                      <Image url="@../image/Xbox%20Menu-32.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="Open Context Menu" />
+                                             </tooltip>
+                                          </Button>
+                                          <Button fx:id="settingsOfLibrary" contentDisplay="GRAPHIC_ONLY" layoutX="208.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
+                                                   <image>
+                                                      <Image url="@../image/About-32.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="Open Library Information" />
+                                             </tooltip>
                                           </Button>
                                        </children>
                                     </HBox>

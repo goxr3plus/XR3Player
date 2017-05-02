@@ -131,20 +131,20 @@ public class LocalDBManager {
 	    this.userName = userName;
 
 	    // user folder
-	    File userFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName);
+	    File userFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName);
 	    if (!userFolder.exists())
 		userFolder.mkdir();
 
 	    //--images folder
-	    imagesFolderRelativePath = InfoTool.DATABASE_FOLDER_NAME_WITH_SEPARATOR + userName + File.separator + "Images";
-	    imagesFolderAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR + imagesFolderRelativePath;
+	    imagesFolderRelativePath = InfoTool.getDatabaseFolderNameWithSeparator() + userName + File.separator + "Images";
+	    imagesFolderAbsolutePath = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + imagesFolderRelativePath;
 	    //--
 	    File imagesFolder = new File(imagesFolderAbsolutePath);
 	    if (!imagesFolder.exists())
 		imagesFolder.mkdir();
 
 	    // database file(.db)
-	    dbFileAbsolutePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "dbFile.db";
+	    dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "dbFile.db";
 	    boolean data1Exist = new File(dbFileAbsolutePath).exists();
 
 	    // connection1
@@ -365,6 +365,8 @@ public class LocalDBManager {
 			//Load the Opened Libraries
 			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Opened Libraries..."));
 			loadOpenedLibraries();
+			//Calculate opened libraries
+			Platform.runLater(() -> Main.libraryMode.calculateOpenedLibraries());
 
 			//Load PlayerMediaList
 			Platform.runLater(() -> Main.updateScreen.label.setText("Loading previous data..."));
@@ -393,7 +395,7 @@ public class LocalDBManager {
      */
     public boolean loadOpenedLibraries() {
 
-	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "settings.json";
+	String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings.json";
 
 	//Check if the file exists
 	if (!new File(jsonFilePath).exists())
@@ -427,7 +429,7 @@ public class LocalDBManager {
 
 		    // Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
 		    if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ((SmartController) newTab.getContent()).isFree(false)
-			    && ((SmartController) newTab.getContent()).itemsObservableList.isEmpty()) {
+			    && ((SmartController) newTab.getContent()).getItemsObservableList().isEmpty()) {
 
 			((SmartController) newTab.getContent()).loadService.startService(false, true);
 
@@ -502,7 +504,7 @@ public class LocalDBManager {
      * @return True if succedeed or False if not
      */
     public boolean updateLibrariesInformation(ObservableList<Tab> observableList, boolean updateOpenedLibraries) {
-	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "settings.json";
+	String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings.json";
 
 	if (!new File(jsonFilePath).exists())
 	    return false;
@@ -577,7 +579,7 @@ public class LocalDBManager {
      * @return True if succedeed or False if not
      */
     public boolean recreateJSonDataBase() {
-	String jsonFilePath = InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userName + File.separator + "settings.json";
+	String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings.json";
 
 	//File already exists?
 	if (new File(jsonFilePath).exists())

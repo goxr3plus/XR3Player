@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -28,7 +29,13 @@ public class PlaylistsSettingsController extends BorderPane {
     //-----------------------------------------------------
 
     @FXML
+    private Accordion accordion;
+
+    @FXML
     private JFXCheckBox instantSearch;
+
+    @FXML
+    private ToggleGroup fileSearchGroup;
 
     @FXML
     private ToggleGroup playedFilesDetectionGroup;
@@ -82,6 +89,9 @@ public class PlaylistsSettingsController extends BorderPane {
 		ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500),
 			NotificationType.ERROR);
 	});
+	
+	//accordion
+	accordion.setExpandedPane(accordion.getPanes().get(0));
     }
 
     /**
@@ -103,6 +113,13 @@ public class PlaylistsSettingsController extends BorderPane {
      */
     public ToggleGroup getTotalFilesShownGroup() {
 	return totalFilesShownGroup;
+    }
+
+    /**
+     * @return the fileSearchGroup
+     */
+    public ToggleGroup getFileSearchGroup() {
+	return fileSearchGroup;
     }
 
 }

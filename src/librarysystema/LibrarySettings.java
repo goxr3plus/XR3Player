@@ -15,7 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import tools.InfoTool;
 
@@ -24,39 +24,33 @@ import tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class LibrarySettings extends GridPane {
+public class LibrarySettings extends BorderPane {
 
-    /** The total items. */
-    @FXML
-    private Label totalItems;
-
-    /** The date label. */
-    @FXML
-    private Label dateLabel;
-
-    /** The comments area. */
     @FXML
     private TextArea commentsArea;
 
-    /** The time label. */
+    @FXML
+    private Label totalItems;
+
+    @FXML
+    private Label dateLabel;
+
     @FXML
     private Label timeLabel;
 
-    /** The stars label. */
     @FXML
     private Label starsLabel;
 
-    /** The total chars label. */
     @FXML
     private Label totalCharsLabel;
 
     // --------------------------------------------------------------------
 
     /** The library. */
-    public Library library;
+    private Library library;
 
     /** The Constant popOver. */
-    public static final PopOver popOver = new PopOver();
+    private final PopOver popOver = new PopOver();
 
     /**
      * Constructor.
@@ -78,7 +72,7 @@ public class LibrarySettings extends GridPane {
 	popOver.setContentNode(this);
 	popOver.showingProperty().addListener((observable, oldValue, newValue) -> {
 	    if (library != null)
-		library.updateDescription();	    
+		library.updateDescription();
 	});
 
 	try {
@@ -92,21 +86,32 @@ public class LibrarySettings extends GridPane {
     /**
      * Shows the window with the Library settings.
      *
-     * @param library
+     * @param library1
      *            the library
      */
-    public void showWindow(Library library) {
-	this.library = library;
+    public void showWindow(Library library1) {
+	this.library = library1;
 
 	// Pass the current information
-	dateLabel.setText(library.getDateCreated());
-	timeLabel.setText(library.getTimeCreated());
-	starsLabel.setText(Double.toString(library.getStars()));
-	totalItems.setText("Total: [ " + Integer.toString(library.getTotalEntries()) + " ]");
-	commentsArea.setText(library.getDescription());
-	popOver.show(library.getImageView());
+	dateLabel.setText(library1.getDateCreated());
+	
+	timeLabel.setText(library1.getTimeCreated());
+	
+	starsLabel.textProperty().bind(library.getRatingLabel().textProperty());
+	
+	totalItems.textProperty().bind(library.getTotalItemsLabel().textProperty());
+	
+	commentsArea.setText(library1.getDescription());
+	
+	popOver.show(library1.getImageView());
     }
 
+    /**
+     * @return True if the popover is showing of false if not
+     */
+    public boolean isShowing() {
+	return popOver.isShowing();
+    }
     /**
      * Updates the totalSongsLabel with the given text.
      * 
@@ -114,10 +119,10 @@ public class LibrarySettings extends GridPane {
      *            The Library calling this method
      *
      */
-    public void updateTotalItemsLabel(Library library) {
-	if (this.library == library)
-	    totalItems.setText("Total: [ " + Integer.toString(library.getTotalEntries()) + " ]");
-    }
+    //    public void updateTotalItemsLabel(Library library) {
+    //	if (this.library == library)
+    //	    totalItems.setText("Total: [ " + Integer.toString(library.getTotalEntries()) + " ]");
+    //    }
 
     /**
      * Checking if commentsArea is Focused.

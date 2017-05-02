@@ -36,7 +36,7 @@ public class ImportDataBase extends Service<Boolean> {
     String inputZip;
 
     /** The out put folder. */
-    String outPutFolder = InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN;
+    String outPutFolder = InfoTool.getAbsoluteDatabasePathPlain();
 
     /** The success. */
     Notifications success = Notifications.create().title("Mission Completed").text("Successfully imported the database!");
@@ -118,7 +118,7 @@ public class ImportDataBase extends Service<Boolean> {
 		try (ZipFile zis = new ZipFile(inputZip)) {
 
 		    //signature file
-		    String signatureFile = InfoTool.DATABASE_SIGNATURE_FILE.getName();
+		    String signatureFile = InfoTool.getDatabaseSignatureFile().getName();
 
 		    //get all entries                      
 		    Enumeration<? extends ZipEntry> e = zis.entries();
@@ -173,7 +173,7 @@ public class ImportDataBase extends Service<Boolean> {
 		    Main.dbManager.manageConnection(Operation.CLOSE);
 
 		// Delete the previous database
-		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
+		ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
 
 		//---------------------Move on Importing the Database-----------------------------------------------
 

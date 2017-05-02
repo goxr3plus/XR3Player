@@ -332,7 +332,7 @@ public class SideBar extends BorderPane {
 		    Main.updateScreen.progressBar.progressProperty().bind(zipper.progressProperty());
 
 		    // Export the database
-		    zipper.exportDataBase(file.getAbsolutePath(), InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
+		    zipper.exportDataBase(file.getAbsolutePath(), InfoTool.getAbsoluteDatabasePathPlain());
 		}
 	    }
 	});
@@ -341,14 +341,14 @@ public class SideBar extends BorderPane {
 	deleteDataBase.setOnAction(a -> {
 	    if (!zipper.isRunning() && !unZipper.isRunning() && (Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true))
 		    && ActionTool.doQuestion(
-			    "You will delete the database of the application!\nAre you soore for that?\nThere is no coming back.\nAfter that the application will automatically restart...")) {
+			    "Are you soore you want to delete the database?\nYou can keep a copy before deleting it by using export database functionality.\n\nAfter that the application will automatically restart...")) {
 
 		// Close database connections
 		if (Main.dbManager != null)
 		    Main.dbManager.manageConnection(Operation.CLOSE);
 
 		// Clear the Previous database manager
-		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN));
+		ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
 
 		// Show Update Screen
 		Main.updateScreen.setVisible(true);

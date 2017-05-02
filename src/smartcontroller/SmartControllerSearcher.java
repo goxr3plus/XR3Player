@@ -3,6 +3,7 @@
  */
 package smartcontroller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import application.Main;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -35,6 +37,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import librarysystema.Library;
 import media.Audio;
 import media.Media;
 import tools.InfoTool;
@@ -83,7 +86,7 @@ public class SmartControllerSearcher extends HBox {
 
 		//Reset the page number to the default before search
 		if (service.getPaneNumberBeforeSearch() <= controller.maximumList())
-		    controller.currentPage.set(service.getPaneNumberBeforeSearch());
+		    controller.getCurrentPage().set(service.getPaneNumberBeforeSearch());
 
 		//continue 
 		controller.getNavigationHBox().setDisable(false);
@@ -93,8 +96,8 @@ public class SmartControllerSearcher extends HBox {
 	    } else if (controller.isFree(false) && Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
 		//Save the Settings before the first search
 		if (saveSettingBeforeSearch) {
-		    service.pageBeforeSearch = controller.currentPage.get();
-		    service.scrollValueBeforeSearch = ((ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical")).getValue();
+		    service.pageBeforeSearch = controller.getCurrentPage().get();
+		    service.scrollValueBeforeSearch = ((ScrollBar) controller.getTableViewer().lookup(".scroll-bar:vertical")).getValue();
 
 		    saveSettingBeforeSearch = false;
 		}
@@ -193,7 +196,7 @@ public class SmartControllerSearcher extends HBox {
 	    controller.getNavigationHBox().setDisable(true);
 
 	    //Clear the list
-	    controller.itemsObservableList.clear();
+	    controller.getItemsObservableList().clear();
 
 	    reset();
 	    start();
@@ -220,6 +223,9 @@ public class SmartControllerSearcher extends HBox {
 	@Override
 	protected Task<Void> createTask() {
 	    return new Task<Void>() {
+		/**
+		 * [[SuppressWarningsSpartan]]
+		 */
 		@Override
 		protected Void call() throws Exception {
 
@@ -229,23 +235,65 @@ public class SmartControllerSearcher extends HBox {
 		    // Given Work
 		    System.out.println("Searching for word:[" + word + "]");
 
-		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery("SELECT* FROM '"
-			    + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage())) {
+		    //Let's create the UNION
+		    ArrayList<String> queryArray = new ArrayList<>();
+		    ObservableList<Library> observableList = Main.libraryMode.teamViewer.getViewer().getItemsObservableList();
+		    String query = "";
+
+		    //--------------THIS IS AN EXPERIMENT-------------------------
+		    if (observableList.isEmpty()) {
+			return null;
+		    } else if (observableList.size() >= 1) {
+
+			queryArray.add("SELECT * FROM (");
+
+			//For Each
+			Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(lib -> {
+			    if (lib.getPosition() != observableList.size() - 1)
+				queryArray.add(" SELECT * FROM '" + lib.getDataBaseTableName() + "' UNION ALL ");
+			    else
+				queryArray.add(" SELECT * FROM '" + lib.getDataBaseTableName() + "' ");
+			});
+
+			//Finish String
+			queryArray.add(" ) WHERE replace(path, rtrim(path, replace(path,'" + File.separator + "','')),'') LIKE '%" + word
+				+ "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
+
+			query = String.join("", queryArray);
+			System.out.println(query);
+		    }
+
+		    //--------------END OF EXPERIMENT-------------------------
+
+		    //Choose the correct query based on the settings of the user
+		    String sQuery;
+		    if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
+			sQuery = "SELECT * FROM '" + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%' LIMIT "
+				+ controller.getMaximumPerPage();
+		    else
+			sQuery = "SELECT * FROM '" + controller.getDataBaseTableName() + "' WHERE replace(path, rtrim(path, replace(path, '"
+				+ File.separator + "', '')), '') LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage();
+
+		    //Continue
+		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(sQuery)) {
+			//try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 
 			//Fetch the items from the database
+			Platform.runLater(() -> controller.getCancelButton().setText("Validating..."));
 			List<Media> array = new ArrayList<>();
 			for (Audio song = null; resultSet.next();) {
+			    //song = new Audio(resultSet.getString("PATH"), 5, 5, "f", "s", controller.genre);
 			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
-				    resultSet.getString("DATE"), resultSet.getString("HOUR"), controller.genre);
+				    resultSet.getString("DATE"), resultSet.getString("HOUR"), controller.getGenre());
 			    array.add(song);
 
-			    updateProgress(++counter, controller.getMaximumPerPage());
+			    // updateProgress(++counter, controller.getMaximumPerPage());
 			}
 
 			//Add the the items to the observable list
 			CountDownLatch countDown = new CountDownLatch(1);
 			Platform.runLater(() -> {
-			    controller.itemsObservableList.addAll(array);
+			    controller.getItemsObservableList().addAll(array);
 			    countDown.countDown();
 			});
 			countDown.await();

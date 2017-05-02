@@ -71,47 +71,14 @@ public final class InfoTool {
     /** The Constant fxmls. */
     public static final String FXMLS = "/fxml/";
 
-    // ----------------Important-----------------------------
-
-    /** Database folder name <b>with out</b> separator [example:XR3DataBase] */
-    public static final String DATABASE_FOLDER_NAME = "XR3DataBase";
-
-    /** Database folder name with separator [example:XR3DataBase/] */
-    public static final String DATABASE_FOLDER_NAME_WITH_SEPARATOR = DATABASE_FOLDER_NAME + File.separator;
-
-    // --------
-
-    /**
-     * The current absolute path to the database <b>PARENT</b> folder with separator[example:C:/Users/]
-     */
-    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR = InfoTool.getBasePathForClass(InfoTool.class);
-
-    /**
-     * The current absolute path to the database <b>PARENT</b> folder without separator[example:C:/Users]
-     */
-    public static final String ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR.substring(0,
-	    ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR.length() - 1);
-
-    // --------
-
-    /** The absolute path to the database folder<b>with out</b> separator [example:C:/Users/XR3DataBase] */
-    public static final String ABSOLUTE_DATABASE_PATH_PLAIN = ABSOLUTE_DATABASE_PARENT_FOLDER_PATH_WITH_SEPARATOR + DATABASE_FOLDER_NAME;
-
-    /** The absolute database path with separator [example:C:/Users/XR3DataBase/] */
-    public static final String ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR = ABSOLUTE_DATABASE_PATH_PLAIN + File.separator;
-
-    // --------------------------------------------------------------------------------------------------------------
-
-    /**
-     * XR3Database signature File , i am using this so the user can use any name for the exported xr3database zip and has not too worry
-     */
-    public static final File DATABASE_SIGNATURE_FILE = new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "xr3Original.sig");
-
     /** The Constant radioStationsTable. */
     public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 
     /** The Constant playedImage. */
     public static final Image playedImage = getImageFromDocuments("played.png");
+
+    /** Database folder name <b>with out</b> separator [example:XR3DataBase] */
+    private static final String DATABASE_FOLDER_NAME = "XR3DataBase";
 
     //-----------Lists of accepted extensions
     //Java 8 Way
@@ -125,6 +92,50 @@ public final class InfoTool {
     private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg"));
     private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv"));
     private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg"));
+
+    // ------------------------------------Important-------------------------------------------------------------------
+
+    /** @return Database folder name <b>with out</b> separator [example:XR3DataBase] */
+    public static String getDatabaseFolderName() {
+	return DATABASE_FOLDER_NAME;
+    }
+
+    /** @return Database folder name with separator [example:XR3DataBase/] */
+    public static String getDatabaseFolderNameWithSeparator() {
+	return getDatabaseFolderName() + File.separator;
+    }
+
+    //----
+
+    /** @return The current absolute path to the database <b>PARENT</b> folder with separator[example:C:/Users/] */
+    public static String getAbsoluteDatabaseParentFolderPathWithSeparator() {
+	return InfoTool.getBasePathForClass(InfoTool.class);
+    }
+
+    /** @return The current absolute path to the database <b>PARENT</b> folder without separator[example:C:/Users] */
+    public static String getAbsoluteDatabaseParentFolderPathPlain() {
+	String parentName = getAbsoluteDatabaseParentFolderPathWithSeparator();
+	return parentName.substring(0, parentName.length() - 1);
+    }
+
+    //---
+
+    /** @return The absolute path to the database folder<b>with out</b> separator [example:C:/Users/XR3DataBase] */
+    public static String getAbsoluteDatabasePathPlain() {
+	return getAbsoluteDatabaseParentFolderPathWithSeparator() + getDatabaseFolderName();
+    }
+
+    /** @return The absolute database path with separator [example:C:/Users/XR3DataBase/] */
+    public static String getAbsoluteDatabasePathWithSeparator() {
+	return getAbsoluteDatabasePathPlain() + File.separator;
+    }
+
+    /** @return XR3Database signature File , i am using this so the user can use any name for the exported xr3database zip and has not too worry */
+    public static File getDatabaseSignatureFile() {
+	return new File(getAbsoluteDatabasePathWithSeparator() + "xr3Original.sig");
+    }
+
+    // --------------------------------------------------------------------------------------------------------------
 
     /**
      * Private Constructor , we don't want instances of this class
@@ -282,18 +293,18 @@ public final class InfoTool {
     /**
      * Return the imageView of mp3File in requested Width and Height.
      *
-     * @param path
-     *            the path
+     * @param absolutePath
+     *            The File absolute path
      * @param width
      *            the width
      * @param height
      *            the height
      * @return an Image
      */
-    public static Image getMp3AlbumImage(String path, int width, int height) {
-	if ("mp3".equals(getFileExtension(path))) {
+    public static Image getMp3AlbumImage(String absolutePath, int width, int height) {
+	if ("mp3".equals(getFileExtension(absolutePath))) {
 	    try {
-		Mp3File song = new Mp3File(path);
+		Mp3File song = new Mp3File(absolutePath);
 
 		if (song.hasId3v2Tag()) { // has id3v2 tag?
 
@@ -319,11 +330,12 @@ public final class InfoTool {
      * implementation specific default value, typically the {@link #lastModifiedTime() last-modified-time} or a {@code FileTime} representing the
      * epoch (1970-01-01T00:00:00Z).
      *
-     * @param filePath
+     * @param absolutePath
+     *            The File absolute path
      * @return The File Creation Date in String Format
      */
-    public static String getFileCreationDate(String filePath) {
-	File file = new File(filePath);
+    public static String getFileCreationDate(String absolutePath) {
+	File file = new File(absolutePath);
 	//exists?
 	if (!file.exists())
 	    return "file missing";
@@ -345,11 +357,12 @@ public final class InfoTool {
      * If the file system implementation does not support a time stamp to indicate the time of last modification then this method returns an
      * implementation specific default value, typically a {@code FileTime} representing the epoch (1970-01-01T00:00:00Z).
      *
-     * @param filePath
+     * @param absolutePath
+     *            The File absolute path
      * @return The File Creation Date in String Format
      */
-    public static String getFileLastModifiedDate(String filePath) {
-	File file = new File(filePath);
+    public static String getFileLastModifiedDate(String absolutePath) {
+	File file = new File(absolutePath);
 	//exists?
 	if (!file.exists())
 	    return "file missing";
@@ -367,35 +380,35 @@ public final class InfoTool {
     /**
      * Returns the title of the file for example if file name is <b>(club.mp3)</b> it returns <b>(club)</b>
      *
-     * @param path
-     *            the path
+     * @param absolutePath
+     *            The File absolute path
      * @return the File title
      */
-    public static String getFileTitle(String path) {
-	return FilenameUtils.getBaseName(path);
+    public static String getFileTitle(String absolutePath) {
+	return FilenameUtils.getBaseName(absolutePath);
     }
 
     /**
      * Returns the name of the file for example if file path is <b>(C:/Give me more/no no/media.ogg)</b> it returns <b>(media.ogg)</b>
      *
-     * @param path
+     * @param absolutePath
      *            the path
      * @return the File title+extension
      */
-    public static String getFileName(String path) {
-	return FilenameUtils.getName(path);
+    public static String getFileName(String absolutePath) {
+	return FilenameUtils.getName(absolutePath);
 
     }
 
     /**
      * Returns the extension of file(without (.)) for example <b>(ai.mp3)->(mp3)</b> and to lowercase (Mp3 -> mp3)
      *
-     * @param path
-     *            the path
+     * @param absolutePath
+     *            The File absolute path
      * @return the File extension
      */
-    public static String getFileExtension(String path) {
-	return FilenameUtils.getExtension(path).toLowerCase();
+    public static String getFileExtension(String absolutePath) {
+	return FilenameUtils.getExtension(absolutePath).toLowerCase();
 
 	// int i = path.lastIndexOf('.'); // characters contained before (.)
 	//

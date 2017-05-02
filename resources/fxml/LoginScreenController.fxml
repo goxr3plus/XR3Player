@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
 <fx:root prefHeight="753.0" prefWidth="1031.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -83,7 +84,7 @@
                                                 </ImageView>
                                              </graphic>
                                              <tooltip>
-                                                <Tooltip text="Create new Library" />
+                                                <Tooltip text="Create new User" />
                                              </tooltip>
                                           </JFXButton>
                                           <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
@@ -112,7 +113,7 @@
                                     </ToolBar>
                                  </right>
                                  <left>
-                                    <ToolBar fx:id="userToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="223.0" BorderPane.alignment="CENTER">
+                                    <ToolBar fx:id="userToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="261.0" BorderPane.alignment="CENTER">
                                       <items>
                                           <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="segmented-button-bar">
                                              <children>
@@ -125,6 +126,21 @@
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
+                                                </Button>
+                                                <Button fx:id="openUserContextMenu" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
+                                                         <image>
+                                                            <Image url="@../image/Xbox%20Menu-32.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Open Context Menu" />
+                                                   </tooltip>
                                                 </Button>
                                              </children>
                                           </HBox>
@@ -154,8 +170,11 @@
                      </children>
                   </StackPane>
                </center>
+               <top>
+                  <Label fx:id="usersInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent;" styleClass="settingsLabel" text="Users Info" BorderPane.alignment="CENTER" />
+               </top>
             </BorderPane>
-            <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="71.0" prefWidth="199.0" style="-fx-font-size: 30;" text="Lauch">
+            <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="71.0" prefWidth="199.0" style="-fx-font-size: 30;" text="Login">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -231,29 +250,60 @@
                </padding>
             </Label>
          </center>
-         <right>
-            <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" style="-fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Exit" BorderPane.alignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Exit application" />
-               </tooltip>
-            </Button>
-         </right>
          <BorderPane.margin>
             <Insets right="5.0" />
          </BorderPane.margin>
-         <left>
-            <Button fx:id="changeBackground" mnemonicParsing="false" prefHeight="35.0" prefWidth="114.0" style="-fx-font-size: 9; -fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Change Background" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Change the background image of the application" />
-               </tooltip>
-            </Button>
-         </left>
+         <right>
+            <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: gold;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="TOP_CENTER" spacing="5.0">
+                     <children>
+                        <Button fx:id="minimize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="-">
+                           <tooltip>
+                              <Tooltip text="Minimize" />
+                           </tooltip>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="maxOrNormalize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="25.0" styleClass="windowButton" text="+">
+                           <tooltip>
+                              <Tooltip text="Maximize/Normalize" />
+                           </tooltip>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="exitApplication" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="X">
+                           <tooltip>
+                              <Tooltip text="Close" />
+                           </tooltip>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 9; -fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Change Background" textAlignment="CENTER" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Change the background image of the application" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </VBox>
+         </right>
       </BorderPane>
    </top>
 </fx:root>

@@ -28,6 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -86,13 +87,19 @@ public class LoginMode extends BorderPane {
     private Button renameUser;
 
     @FXML
-    private Button loginButton;
+    private Button openUserContextMenu;
 
     @FXML
     private StackPane usersStackView;
 
     @FXML
     private Button newUser;
+
+    @FXML
+    private Label usersInfoLabel;
+
+    @FXML
+    private Button loginButton;
 
     @FXML
     private Label createdByLabel;
@@ -107,7 +114,13 @@ public class LoginMode extends BorderPane {
     private Label xr3PlayerLabel;
 
     @FXML
-    private Button exitButton;
+    private Button minimize;
+
+    @FXML
+    private Button maxOrNormalize;
+
+    @FXML
+    private Button exitApplication;
 
     @FXML
     private Button changeBackground;
@@ -120,12 +133,17 @@ public class LoginMode extends BorderPane {
     /**
      * Allows to see the users in a beatiful way
      */
-    public UsersViewer userViewer = new UsersViewer();
+    public UsersViewer teamViewer = new UsersViewer();
 
     /**
      * The Search Box of the LoginMode
      */
     public UserSearchBox userSearchBox = new UserSearchBox();
+
+    /** The context menu of the users */
+    public UserContextMenu userContextMenu = new UserContextMenu(this);
+
+    //-----
 
     /** This InvalidationListener is used during the creation of a new user. */
     private final InvalidationListener creationInvalidator = new InvalidationListener() {
@@ -144,10 +162,10 @@ public class LoginMode extends BorderPane {
 		String newName = Main.renameWindow.getUserInput();
 
 		// if can pass
-		if (!userViewer.itemsObservableList.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
+		if (!teamViewer.itemsObservableList.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
 
-		    if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + newName).mkdir())
-			userViewer.addUser(new User(newName, userViewer.itemsObservableList.size()), true);
+		    if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir())
+			teamViewer.addUser(new User(newName, teamViewer.itemsObservableList.size(), LoginMode.this), true);
 		    else
 			ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2),
 				NotificationType.ERROR);
@@ -208,7 +226,7 @@ public class LoginMode extends BorderPane {
 	//	"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 
 	// -- libraryToolBar
-	userToolBar.disableProperty().bind(userViewer.centerItemProperty().isNull());
+	userToolBar.disableProperty().bind(teamViewer.centerItemProperty().isNull());
 
 	// -- botttomHBox
 	botttomHBox.getChildren().add(userSearchBox);
@@ -218,52 +236,57 @@ public class LoginMode extends BorderPane {
 
 	//newUser
 	newUser.setOnAction(a -> createNewUser(createUser));
-	newUser.visibleProperty().bind(Bindings.size(userViewer.itemsObservableList).isEqualTo(0));
+	newUser.visibleProperty().bind(Bindings.size(teamViewer.itemsObservableList).isEqualTo(0));
 
 	//loginButton
-	loginButton.setOnAction(a -> Main.startAppWithUser(userViewer.getSelectedItem()));
+	loginButton.setOnAction(a -> Main.startAppWithUser(teamViewer.getSelectedItem()));
 	loginButton.disableProperty().bind(userToolBar.disabledProperty());
+
+	//openUserContextMenu
+	openUserContextMenu.setOnAction(a -> {
+	    User user = teamViewer.getSelectedItem();
+	    Bounds bounds = user.localToScreen(user.getBoundsInLocal());
+	    userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
+	});
 
 	//renameUser
 	//renameUser.disableProperty().bind(deleteUser.disabledProperty())
-	renameUser.setOnAction(a -> userViewer.getSelectedItem().renameUser(renameUser));
+	renameUser.setOnAction(a -> teamViewer.getSelectedItem().renameUser(renameUser));
 
 	//deleteUser
 	//deleteUser.disableProperty().bind(newUser.visibleProperty())
-	deleteUser.setOnAction(a -> {
-	    //Ask
-	    if (ActionTool
-		    .doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + userViewer.getSelectedItem().getUserName() + " ]")) {
+	deleteUser.setOnAction(a -> deleteUser(deleteUser));
 
-		//Try to delete it
-		if (ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + userViewer.getSelectedItem().getUserName())))
-		    userViewer.deleteUser(userViewer.getSelectedItem());
-		else
-		    ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
-	    }
-	});
+	// minimize
+	minimize.setOnAction(ac -> Main.window.setIconified(true));
+
+	// maximize_normalize
+	maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
+
+	//exitButton
+	exitApplication.setOnAction(a -> Main.exitQuestion());
 
 	//changeBackground
 	changeBackground.setOnAction(a -> Main.changeBackgroundImage());
 
-	//exitButton
-	exitButton.setOnAction(a -> Main.exitQuestion());
-
 	// previous
-	previous.setOnAction(a -> userViewer.previous());
+	previous.setOnAction(a -> teamViewer.previous());
 
 	// next
-	next.setOnAction(a -> userViewer.next());
+	next.setOnAction(a -> teamViewer.next());
 
 	//Continue
-	usersStackView.getChildren().add(userViewer);
-	userViewer.toBack();
+	usersStackView.getChildren().add(teamViewer);
+	teamViewer.toBack();
 
 	//createdByLabel
 	createdByLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.WEBSITE));
 
 	//checkTutorialsLabel
 	checkTutorialsLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.TUTORIALS));
+
+	//----usersInfoLabel
+	usersInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.itemsWrapperProperty().sizeProperty(), " ] Users"));
     }
 
     /**
@@ -276,11 +299,26 @@ public class LoginMode extends BorderPane {
 	    return;
 
 	// Open rename window
-	Main.renameWindow.show("", owner);
+	Main.renameWindow.show("", owner, "Creating new User");
 
 	// Add the showing listener
 	Main.renameWindow.showingProperty().addListener(creationInvalidator);
 
+    }
+
+    /**
+     * Used to delete a User
+     */
+    public void deleteUser(Node owner) {
+	//Ask
+	if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]",owner)) {
+
+	    //Try to delete it
+	    if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + teamViewer.getSelectedItem().getUserName())))
+		teamViewer.deleteUser(teamViewer.getSelectedItem());
+	    else
+		ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
+	}
     }
 
     /**
@@ -407,6 +445,13 @@ public class LoginMode extends BorderPane {
 	// Constructor
 	public UsersViewer() {
 
+	    setOnScroll(scroll -> {
+		if (scroll.getDeltaX() < 0)
+		    next();
+		else if (scroll.getDeltaX() > 0)
+		    previous();
+	    });
+
 	    // this.setOnMouseMoved(m -> {
 	    //
 	    // if (dragDetected) {
@@ -436,7 +481,7 @@ public class LoginMode extends BorderPane {
 	    jfSlider.setCursor(Cursor.HAND);
 	    jfSlider.setMin(0);
 	    jfSlider.setMax(0);
-	    jfSlider.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(3));
+	    jfSlider.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(2));
 	    // scrollBar.setVisibleAmount(1)
 	    // scrollBar.setUnitIncrement(1)
 	    // scrollBar.setBlockIncrement(1)
@@ -640,17 +685,16 @@ public class LoginMode extends BorderPane {
 			setCenterIndex(user.getPosition());
 			// scrollBar.setValue(library.getPosition())
 
-			//			timeline.setOnFinished(v -> {
-			//			    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			//			    contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-			//				    bounds.getMinY() + bounds.getHeight() / 4, library);
-			//			    timeline.setOnFinished(null);
-			//			});
+			timeline.setOnFinished(v -> {
+			    Bounds bounds = user.localToScreen(user.getBoundsInLocal());
+			    userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4,
+				    user);
+			    timeline.setOnFinished(null);
+			});
 
 		    } else { // if is the same User again
-			//			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			//			contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-			//				bounds.getMinY() + bounds.getHeight() / 4, library);
+			Bounds bounds = user.localToScreen(user.getBoundsInLocal());
+			userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
 		    }
 		}
 

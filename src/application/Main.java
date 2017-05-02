@@ -64,6 +64,8 @@ import tools.InfoTool;
 import tools.NotificationType;
 import treeview.TreeViewManager;
 import webBrowser.WebBrowserController;
+import windows.AboutWindowController;
+import windows.ConsoleWindowController;
 import windows.ExportWindowController;
 import windows.RenameWindow;
 import windows.StarWindow;
@@ -184,12 +186,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 63;
+    public static final int currentVersion = 64;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "25/04/2017";
+    public static final String releaseDate = "02/05/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -270,6 +272,7 @@ public class Main extends Application {
 	    exportWindow.getWindow().initOwner(window);
 	    consoleWindow.getWindow().initOwner(window);
 	    settingsWindow.getWindow().initOwner(window);
+	    aboutWindow.getWindow().initOwner(window);
 	    topBar.addXR3LabelBinding();
 
 	    // captureWindow
@@ -311,11 +314,11 @@ public class Main extends Application {
 	    //Do this in order to now have problems with SongsContextMenu
 	    songsContextMenu.show(window, 0, 0);
 	    songsContextMenu.hide();
-	    libraryMode.contextMenu.show(window, 0, 0);
-	    libraryMode.contextMenu.hide();
+	    libraryMode.librariesContextMenu.show(window, 0, 0);
+	    libraryMode.librariesContextMenu.hide();
 
 	    //Check if dataBase Folder exists
-	    File dataBaseFolder = new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN);
+	    File dataBaseFolder = new File(InfoTool.getAbsoluteDatabasePathPlain());
 	    if (!dataBaseFolder.exists()) {
 		//If it can not be created [FATAL ERROR]
 		if (!dataBaseFolder.mkdir())
@@ -327,20 +330,20 @@ public class Main extends Application {
 
 		//Create the List with the Available Users
 		AtomicInteger counter = new AtomicInteger();
-		loginMode.userViewer.addMultipleUsers(Files.walk(Paths.get(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN), 1)
-			.filter(path -> path.toFile().isDirectory() && !(path + "").equals(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN))
-			.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1))).collect(Collectors.toList()));
+		loginMode.teamViewer.addMultipleUsers(Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)
+			.filter(path -> path.toFile().isDirectory() && !(path + "").equals(InfoTool.getAbsoluteDatabasePathPlain()))
+			.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode)).collect(Collectors.toList()));
 
 		//avoid error
-		if (!loginMode.userViewer.getItemsObservableList().isEmpty())
-		    loginMode.userViewer.setCenterIndex(loginMode.userViewer.getItemsObservableList().size() / 2);
+		if (!loginMode.teamViewer.getItemsObservableList().isEmpty())
+		    loginMode.teamViewer.setCenterIndex(loginMode.teamViewer.getItemsObservableList().size() / 2);
 	    }
 
 	    //Create Original xr3database singature file	    
-	    if (dataBaseFolder.exists() && !InfoTool.DATABASE_SIGNATURE_FILE.exists())
+	    if (dataBaseFolder.exists() && !InfoTool.getDatabaseSignatureFile().exists())
 		try {
 		    //I need to fix this for errors
-		    InfoTool.DATABASE_SIGNATURE_FILE.createNewFile();
+		    InfoTool.getDatabaseSignatureFile().createNewFile();
 		} catch (IOException ex) {
 		    Main.logger.log(Level.WARNING, ex.getMessage(), ex);
 		}
@@ -402,7 +405,7 @@ public class Main extends Application {
 
 	//Start a Thread to copy the File
 	new Thread(() -> {
-	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()), 1)) {
+	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.getAbsoluteDatabasePathPlain()).getPath()), 1)) {
 		paths.forEach(path -> {
 		    File file = path.toFile();
 		    if (file.getName().contains("background") && InfoTool.isImage(file.getAbsolutePath()) && !file.isDirectory())
@@ -413,7 +416,7 @@ public class Main extends Application {
 	    }
 
 	    if (!ActionTool.copy(imageFile.getAbsolutePath(),
-		    InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "background." + InfoTool.getFileExtension(imageFile.getAbsolutePath())))
+		    InfoTool.getAbsoluteDatabasePathWithSeparator() + "background." + InfoTool.getFileExtension(imageFile.getAbsolutePath())))
 		Platform.runLater(() -> ActionTool.showNotification("Failed saving background image", "Failed to change the background image...",
 			Duration.millis(2500), NotificationType.SIMPLE));
 
@@ -431,8 +434,8 @@ public class Main extends Application {
 	backgroundFound = false;
 
 	//Check if a background image exists
-	if (new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).exists())
-	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.ABSOLUTE_DATABASE_PATH_PLAIN).getPath()), 1)) {
+	if (new File(InfoTool.getAbsoluteDatabasePathPlain()).exists())
+	    try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.getAbsoluteDatabasePathPlain()).getPath()), 1)) {
 		paths.forEach(path -> {
 		    File file = path.toFile();
 		    if (file.getName().contains("background") && InfoTool.isImage(file.getAbsolutePath()) && !file.isDirectory()) {
@@ -611,8 +614,8 @@ public class Main extends Application {
 		    updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
 		    updateScreen.setVisible(true);
 
-		    vService.start(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db"),
-			    new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + "user" + File.separator + "dbFile.db-journal"));
+		    vService.start(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + "user" + File.separator + "dbFile.db"),
+			    new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + "user" + File.separator + "dbFile.db-journal"));
 
 		    // Go
 		    dbManager.commitAndVacuum();

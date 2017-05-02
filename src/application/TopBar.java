@@ -15,15 +15,12 @@ import customnodes.SystemMonitor.Monitor;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import tools.ActionTool;
 import tools.InfoTool;
 
 /**
@@ -63,7 +60,7 @@ public class TopBar extends BorderPane {
     private Button maxOrNormalize;
 
     @FXML
-    private Button close;
+    private Button exitApplication;
 
     @FXML
     private Button changeBackground;
@@ -182,19 +179,8 @@ public class TopBar extends BorderPane {
 
 	// restartButton
 	restartButton.setOnAction(a -> {
-	    Alert alert = new Alert(AlertType.CONFIRMATION);
-	    alert.initOwner(Main.window);
-
-	    alert.setContentText("Soore you want to restart the application?");
-	    ButtonType yes = new ButtonType("Yes", ButtonData.OK_DONE);
-	    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-	    ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
-
-	    alert.getButtonTypes().setAll(yes, cancel);
-	    alert.showAndWait().ifPresent(answer -> {
-		if (answer == yes)
-		    Main.restartTheApplication(true);
-	    });
+	    if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton))
+		Main.restartTheApplication(true);
 	});
 
 	// minimize
@@ -204,7 +190,7 @@ public class TopBar extends BorderPane {
 	maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
 
 	// close
-	close.setOnAction(ac -> Main.exitQuestion());
+	exitApplication.setOnAction(ac -> Main.exitQuestion());
 
 	//changeBackground
 	changeBackground.setOnAction(a -> Main.changeBackgroundImage());

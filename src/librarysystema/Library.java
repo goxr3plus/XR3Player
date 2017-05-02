@@ -30,7 +30,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,7 +37,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -350,7 +348,7 @@ public class Library extends StackPane {
 	// getTransforms().add(rotationTransform)
 
 	// Controller
-	this.controller = new SmartController(Genre.LIBRARYSONG, libraryName, dataBaseTableName);
+	this.controller = new SmartController(Genre.LIBRARYMEDIA, libraryName, dataBaseTableName);
 
 	// ----------------------------------Load FXML-------------------------------------
 
@@ -382,7 +380,7 @@ public class Library extends StackPane {
 		Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
 
 	    // The drag must come from source other than the owner
-	    if (dragOver.getGestureSource() != controller.tableViewer)
+	    if (dragOver.getGestureSource() != controller.getTableViewer())
 		dragOver.acceptTransferModes(TransferMode.LINK);
 
 	});
@@ -583,9 +581,9 @@ public class Library extends StackPane {
     /**
      * Make an update only if the library is in information mode.
      */
-    public void updateSettingsTotalLabel() {
-	Main.libraryMode.settings.updateTotalItemsLabel(this);
-    }
+    //    public void updateSettingsTotalLabel() {
+    //	Main.libraryMode.settings.updateTotalItemsLabel(this);
+    //    }
 
     /**
      * Updates the position variable of Library in database so the next time viewer position it correct.
@@ -782,7 +780,7 @@ public class Library extends StackPane {
 	controller.renameWorking = true;
 
 	// Open the Window
-	Main.renameWindow.show(getLibraryName(), n);
+	Main.renameWindow.show(getLibraryName(), n, "Library Renaming");
 
 	// Bind 1
 	Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());
@@ -856,8 +854,8 @@ public class Library extends StackPane {
     /**
      * Delete the library.
      */
-    public void deleteLibrary() {
-	if (controller.isFree(true) && ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]")) {
+    public void deleteLibrary(Node owner) {
+	if (controller.isFree(true) && ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]",owner)) {
 
 	    try {
 
@@ -868,7 +866,7 @@ public class Library extends StackPane {
 		Main.dbManager.connection1.createStatement().executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");
 
 		// Delete the folder with library name in database
-		ActionTool.deleteFile(new File(InfoTool.ABSOLUTE_DATABASE_PATH_WITH_SEPARATOR + getLibraryName()));
+		ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + getLibraryName()));
 
 		// delete library image
 		if (imageName != null && !new File(getAbsoluteImagePath()).delete())
@@ -920,6 +918,9 @@ public class Library extends StackPane {
 
 	    //Update the JSONFile
 	    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+
+	    //Calculate opened libraries
+	    Main.libraryMode.calculateOpenedLibraries();
 	}
     }
 
@@ -1079,6 +1080,14 @@ public class Library extends StackPane {
     }
 
     /**
+     * @return the ratingLabel
+     */
+    public Label getRatingLabel() {
+	return ratingLabel;
+    }
+
+
+    /**
      * Returns <b>DATABASE TABLE NAME</b> of the List.
      *
      * @return The DataBase table name of this Library
@@ -1150,6 +1159,13 @@ public class Library extends StackPane {
     }
 
     /**
+     * @return the totalItemsLabel
+     */
+    public Label getTotalItemsLabel() {
+	return totalItemsLabel;
+    }
+
+    /**
      * Returns the absolute path of the Library Image in the operating system
      *
      * @return The absolute path of the Library Image in the operating system
@@ -1217,7 +1233,7 @@ public class Library extends StackPane {
      *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
      */
     public void onKeyReleased(KeyEvent e) {
-	if (Main.libraryMode.settings.isCommentsAreaFocused() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())
+	if (Main.libraryMode.settings.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())
 	    return;
 
 	KeyCode code = e.getCode();
@@ -1228,7 +1244,7 @@ public class Library extends StackPane {
 	else if (code == KeyCode.R)
 	    renameLibrary(nameLabel);
 	else if (code == KeyCode.DELETE || code == KeyCode.D)
-	    deleteLibrary();
+	    deleteLibrary(this);
 	else if (code == KeyCode.S)
 	    Main.libraryMode.settings.showWindow(this);
 	else if (code == KeyCode.E)

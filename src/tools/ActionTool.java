@@ -396,6 +396,7 @@ public final class ActionTool {
 
 	// Show Alert
 	Alert alert = new Alert(AlertType.CONFIRMATION);
+	alert.initOwner(Main.window);
 	alert.initStyle(StageStyle.UTILITY);
 	alert.setGraphic(questionImage);
 	alert.setHeaderText("Question");

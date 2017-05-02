@@ -225,7 +225,7 @@ public class MediaContextMenu extends ContextMenu {
 
 	// Don't waste resources
 	if (previousGenre != genre) {
-	    if (media1.getGenre() == Genre.LIBRARYSONG) {
+	    if (media1.getGenre() == Genre.LIBRARYMEDIA) {
 		addOn.setVisible(true);
 		stars.setVisible(true);
 		copy.setVisible(true);
@@ -245,17 +245,18 @@ public class MediaContextMenu extends ContextMenu {
 		//		 storageDelete.setVisible(false);
 		//		 separator1.setVisible(false);
 		//		 separator2.setVisible(false);
-	    } else if (media1.getGenre() == Genre.XPLAYLISTSONG) {
-		addOn.setVisible(false);
-		stars.setVisible(false);
-		copy.setVisible(false);
-		//move.setVisible(false)
-		rename.setVisible(false);
-		simpleDelete.setVisible(true);
-		storageDelete.setVisible(true);
-		separator1.setVisible(false);
-		separator2.setVisible(false);
 	    }
+//	    } else if (media1.getGenre() == Genre.XPLAYLISTSONG) {
+//		addOn.setVisible(false);
+//		stars.setVisible(false);
+//		copy.setVisible(false);
+//		//move.setVisible(false)
+//		rename.setVisible(false);
+//		simpleDelete.setVisible(true);
+//		storageDelete.setVisible(true);
+//		separator1.setVisible(false);
+//		separator2.setVisible(false);
+//	    }
 	}
 
 	//Determine the image
@@ -360,11 +361,11 @@ public class MediaContextMenu extends ContextMenu {
 
 	// delete from list
 	else if (e.getSource() == simpleDelete)
-	    media.prepareDelete(false, controller);
+	    controller.prepareDelete(false);
 	// delete from Storage medium
 	else if (e.getSource() == storageDelete)
 
-	    media.prepareDelete(true, controller);
+	    controller.prepareDelete(true);
 
 	// rename
 	else if (e.getSource() == rename) {

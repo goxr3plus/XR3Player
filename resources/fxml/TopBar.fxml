@@ -128,7 +128,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="close" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="X">
+                        <Button fx:id="exitApplication" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="X">
                            <tooltip>
                               <Tooltip text="Close" />
                            </tooltip>

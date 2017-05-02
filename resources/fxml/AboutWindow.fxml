@@ -11,23 +11,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-
-<fx:root prefHeight="378.0" prefWidth="515.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<fx:root prefHeight="462.0" prefWidth="530.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label fx:id="topLabel" alignment="CENTER" graphicTextGap="10.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 19;" text="XR3Player Media Player" BorderPane.alignment="CENTER">
+      <Label fx:id="topLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 19;" text="XR3Player " BorderPane.alignment="CENTER">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/icon.png" />
+                  <Image url="@../image/logo.png" />
                </image>
             </ImageView>
          </graphic>
       </Label>
    </top>
    <center>
-      <VBox fx:id="centerVBox" BorderPane.alignment="CENTER">
+      <VBox fx:id="centerVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
-            <InlineCssTextArea fx:id="cssTextArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+            <InlineCssTextArea fx:id="cssTextArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="495.0" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" maxHeight="35.0" spacing="10.0">
                <children>
                   <Button fx:id="close" mnemonicParsing="false" text="Close">

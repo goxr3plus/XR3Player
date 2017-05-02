@@ -162,10 +162,10 @@ public class UserSearchBox extends HBox {
 		    word = word.toLowerCase();
 
 		    // matcher
-		    Main.loginMode.userViewer.getItemsObservableList().stream().filter(user -> user.getUserName().toLowerCase().contains(word))
+		    Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> user.getUserName().toLowerCase().contains(word))
 			    .forEach(user -> {
 				Platform.runLater(() -> searchBoxWindow.addItem(user.getUserName(),
-					ac -> Main.loginMode.userViewer.setCenterIndex(user.getPosition())));
+					ac -> Main.loginMode.teamViewer.setCenterIndex(user.getPosition())));
 				++found;
 			    });
 		    return null;

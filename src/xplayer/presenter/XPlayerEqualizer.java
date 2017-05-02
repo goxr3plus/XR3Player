@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import disc.DJFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -32,10 +33,10 @@ public class XPlayerEqualizer extends BorderPane {
     private HBox bottomHBox;
 
     @FXML
-    private Button resetFilers;
+    private JFXButton resetFilters;
 
     @FXML
-    private Button effects;
+    private MenuButton effects;
 
     //----------------------------------------------------
 
@@ -60,16 +61,29 @@ public class XPlayerEqualizer extends BorderPane {
     /** The filters. */
     Filter[] filters = new Filter[32];
 
+    private final double[] PRESET_NORMAL = { 50, 50, 50, 50, 50, 50, 50, 50, 50, 50 };
+    private final double[] PRESET_CLASSICAL = { 50, 50, 50, 50, 50, 50, 70, 70, 70, 76 };
+    private final double[] PRESET_CLUB = { 50, 50, 42, 34, 34, 34, 42, 50, 50, 50 };
+    private final double[] PRESET_DANCE = { 26, 34, 46, 50, 50, 66, 70, 70, 50, 50 };
+    private final double[] PRESET_FULLBASS = { 26, 26, 26, 36, 46, 62, 76, 78, 78, 78 };
+    private final double[] PRESET_FULLBASSTREBLE = { 34, 34, 50, 68, 62, 46, 28, 22, 18, 18 };
+    private final double[] PRESET_FULLTREBLE = { 78, 78, 78, 62, 42, 24, 8, 8, 8, 8 };
+    private final double[] PRESET_LAPTOP = { 38, 22, 36, 60, 58, 46, 38, 24, 16, 14 };
+    private final double[] PRESET_LIVE = { 66, 50, 40, 36, 34, 34, 40, 42, 42, 42 };
+    private final double[] PRESET_PARTY = { 32, 32, 50, 50, 50, 50, 50, 50, 32, 32 };
+    private final double[] PRESET_POP = { 56, 38, 32, 30, 38, 54, 56, 56, 54, 54 };
+    private final double[] PRESET_REGGAE = { 48, 48, 50, 66, 48, 34, 34, 48, 48, 48 };
+    private final double[] PRESET_ROCK = { 32, 38, 64, 72, 56, 40, 28, 24, 24, 24 };
+    private final double[] PRESET_TECHNO = { 30, 34, 48, 66, 64, 48, 30, 24, 24, 28 };
+
     /** The filter buttons. */
-    FilterButton[] filterButtons = new FilterButton[] {
-	    new FilterButton("Normal", new double[] { 0.0, 0.0, 0., 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 }),
-	    new FilterButton("Club", new double[] { .2, .2, .35, .34, .34, .34, .42, .50, .50, .50 }),
-	    new FilterButton("Dance", new double[] { .26, .2, .46, .50, .50, .66, .70, .70, .50, .50 }),
-	    new FilterButton("FullBass", new double[] { 0.4, .4, .26, .36, .46, .62, .76, .78, .78, .78 }),
-	    new FilterButton("FullBassTreble", new double[] { .34, .34, .50, .68, .62, .46, .28, .22, .18, .18 }),
-	    new FilterButton("Live", new double[] { .2, .2, .40, .36, .34, .34, .40, .42, .42, .42 }),
-	    new FilterButton("Party", new double[] { .15, .15, .50, .50, .50, .50, .50, .50, .32, .32 }),
-	    new FilterButton("Rock", new double[] { .32, .38, .64, .72, .56, .40, .28, .24, .24, .24 }) };
+    //where 0.0 is equivalent to 0.50 for FilterButton 
+    FilterButton[] filterButtons = new FilterButton[] { new FilterButton("Normal", PRESET_NORMAL), new FilterButton("Classical", PRESET_CLASSICAL),
+	    new FilterButton("Club", PRESET_CLUB), new FilterButton("Dance", PRESET_DANCE), new FilterButton("FullBass", PRESET_FULLBASS),
+	    new FilterButton("FullBassTreble", PRESET_FULLBASSTREBLE), new FilterButton("FullTreble", PRESET_FULLTREBLE),
+	    new FilterButton("Laptop", PRESET_LAPTOP), new FilterButton("Live", PRESET_LIVE), new FilterButton("Party", PRESET_PARTY),
+	    new FilterButton("Pop", PRESET_POP), new FilterButton("Reggae", PRESET_REGGAE), new FilterButton("Rock", PRESET_ROCK),
+	    new FilterButton("Techno", PRESET_TECHNO) };
 
     /**
      * Constructor.
@@ -109,56 +123,42 @@ public class XPlayerEqualizer extends BorderPane {
 	tilePane.getChildren().addAll(filters);
 
 	//resetFilers
-	resetFilers.setOnAction(action -> {
+	resetFilters.setOnAction(action -> {
+	    //Balance
+	    balanceFilter.setAngle(100, 200);
+	    xPlayerUI.xPlayer.setBalance((float) 0.0);
+
+	    //Pan
+	    panFilter.setAngle(100, 200);
+	    xPlayerUI.xPlayer.setPan(0.0);
+
+	    //Reset the equalizer
 	    for (int i = 0; i < 32; i++)
 		xPlayerUI.xPlayerModel.getEqualizerArray()[i] = 0.0f;
-
 	    xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
-
-	    for (Filter comp : filters)
-		comp.resetToZero();
-	    
+	    for (Filter filter : filters)
+		filter.resetToZero();
 	});
 
-	// Effects
-	ContextMenu contextMenu = new ContextMenu();
-	contextMenu.getItems().addAll(filterButtons);
-	effects.setOnMouseReleased(m -> contextMenu.show(effects, m.getScreenX(), m.getScreenY() - contextMenu.getHeight()));
+	// Add all
+	effects.getItems().clear();
+	effects.getItems().addAll(filterButtons);
 
 	//-------------------------- Extra Filters--------------------------
-	panFilter = new DJFilter(2, 2, 36, 36, Color.YELLOW);
+
+	// -- panFilter
+	panFilter = new DJFilter(2, 2, 36, 36, Color.GOLD);
 	panFilter.setOnMouseDragged(drag -> {
 	    panFilter.onMouseDragged(drag);
 	    xPlayerUI.xPlayer.setPan(panFilter.getValue(200));
 	});
 
-	balanceFilter = new DJFilter(40, 2, 36, 36, Color.YELLOW);
+	// --balanceFilter
+	balanceFilter = new DJFilter(40, 2, 36, 36, Color.GOLD);
 	balanceFilter.setOnMouseDragged(drag -> {
 	    balanceFilter.onMouseDragged(drag);
 	    xPlayerUI.xPlayer.setBalance(balanceFilter.getValue(200));
 	});
-
-	//	amplitudeFilter = new DJFilter(40, 2, 36, 36, Color.YELLOW);
-	//	amplitudeFilter.setOnMouseDragged(drag -> {
-	//	    amplitudeFilter.onMouseDragged(drag);
-	//
-	//	    float value = amplitudeFilter.getValue(200);
-	//	    // Pass the variables to the array
-	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[0] = value;
-	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[1] = -value;
-	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[2] = value;
-	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[3] = value;
-	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[4] = -value;
-	//	    xPlayerUI.xPlayerModel.getEqualizerArray()[5] = value;
-	//
-	//	    // Add the filter
-	//	    xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
-	//
-	//	    //Change the angles of equalizer filters
-	//	    for (int i = 0; i <= 5; i++)
-	//		filters[i].setAngle(xPlayerUI.xPlayerModel.getEqualizerArray()[i], 200);
-	//
-	//	});
 
 	bottomHBox.getChildren().addAll(panFilter, balanceFilter);
 
@@ -225,6 +225,10 @@ public class XPlayerEqualizer extends BorderPane {
 
 	    vars = variables;
 	    setText(text);
+	    for (int i = 0; i < variables.length; i++)
+		variables[i] = variables[i] / 100.00 - 0.5;
+
+	    // System.out.println(variables[0])
 
 	    setOnAction(action -> {
 		// Pass the values to the array

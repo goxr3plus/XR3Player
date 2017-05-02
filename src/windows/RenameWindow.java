@@ -36,6 +36,9 @@ import tools.NotificationType;
 public class RenameWindow extends VBox {
 
     @FXML
+    private Label titleLabel;
+
+    @FXML
     private Label charsField;
 
     @FXML
@@ -62,9 +65,7 @@ public class RenameWindow extends VBox {
 
     };
 
-    /**
-     * 
-     */
+    /** The window */
     private Stage window = new Stage();
 
     /** If it was accepted */
@@ -125,7 +126,7 @@ public class RenameWindow extends VBox {
 	// inputField
 	getChildren().add(inputField);
 	inputField.setMinSize(420, 32);
-	inputField.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Escape to Exit**"));
+	inputField.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Press Escape to Exit**"));
 	inputField.setPromptText("Type Here...");
 	inputField.setStyle("-fx-font-weight:bold; -fx-font-size:14;");
 	//inputField.setPrefColumnCount(200)
@@ -181,11 +182,11 @@ public class RenameWindow extends VBox {
     /**
      * Close the Window.
      *
-     * @param accepted
+     * @param accepted1
      *            True if accepted , False if not
      */
-    public void close(boolean accepted) {
-	this.accepted = accepted;
+    public void close(boolean accepted1) {
+	this.accepted = accepted1;
 	window.close();
     }
 
@@ -194,14 +195,16 @@ public class RenameWindow extends VBox {
      *
      * @param text
      *            the text
-     * @param node
+     * @param n
      *            the node
+     * @param title
+     *            The text if the title Label
      */
-    public void show(String text, Node node) {
+    public void show(String text, Node n, String title) {
 
 	// Auto Calculate the position
-	Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-	show(text, bounds.getMinX() + 5, bounds.getMaxY());
+	Bounds bounds = n.localToScreen(n.getBoundsInLocal());
+	show(text, bounds.getMinX() + 5, bounds.getMaxY(), title);
     }
 
     /**
@@ -213,8 +216,10 @@ public class RenameWindow extends VBox {
      *            the x
      * @param y
      *            the y
+     * @param title
+     *            The text if the title Label
      */
-    public void show(String text, double x, double y) {
+    public void show(String text, double x, double y, String title) {
 
 	if (x <= -1 && y <= -1)
 	    window.centerOnScreen();
@@ -233,6 +238,7 @@ public class RenameWindow extends VBox {
 	    window.setY(y);
 	}
 
+	titleLabel.setText(title);
 	inputField.setText(text);
 	accepted = true;
 	window.show();

@@ -19,7 +19,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
@@ -367,35 +366,6 @@ public abstract class Media {
     // METHODS----------------------------------------------------------------------
 
     /**
-     * Prepares the delete operation when more than one Media files will be deleted.
-     *
-     * @param permanent
-     *            <br>
-     *            true->storage medium + (play list)/library<br>
-     *            false->only from (play list)/library
-     * @param controller
-     *            the controller
-     */
-    public void prepareDelete(boolean permanent, SmartController controller) {
-	int previousTotal = controller.getTotalInDataBase();
-
-	//RememberScrollBar Position
-	ScrollBar verticalBar = (ScrollBar) controller.tableViewer.lookup(".scroll-bar:vertical");
-	controller.scrollValueBeforeDeleteAction = verticalBar.getValue();
-
-	// Remove selected items
-	controller.removeSelected(permanent);
-
-	// Update
-	if (previousTotal != controller.getTotalInDataBase()) {
-	    if (genre == Genre.LIBRARYSONG)
-		Main.libraryMode.multipleLibs.getSelectedLibrary().updateSettingsTotalLabel();
-
-	    controller.loadService.startService(true, true);
-	}
-    }
-
-    /**
      * Delete the Media from (play list)/library or (+storage medium).
      *
      * @param permanent
@@ -410,26 +380,27 @@ public abstract class Media {
      *            <br>
      *            true-> will do commit<br>
      *            false->will not do commit
-     * @param controller
+     * @param c
      *            the controller
+     * @param deleteStatement
+     *            The prepared Statement which will delete the items from the SQL DataBase
      */
-    public void delete(boolean permanent, boolean doQuestion, boolean commit, SmartController controller) {
+    public void delete(boolean permanent, boolean doQuestion, boolean commit, SmartController c, PreparedStatement deleteStatement) {
 
-	if (controller.isFree(true)) {
+	if (c.isFree(true)) {
 	    boolean hasBeenDeleted = false;
 
 	    // Do question?
-	    if (doQuestion) {
-		if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1))
-		    hasBeenDeleted = removeItem(permanent, controller);
-	    } else
-		hasBeenDeleted = removeItem(permanent, controller);
+	    if (!doQuestion)
+		hasBeenDeleted = removeItem(permanent, c);
+	    else if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1))
+		hasBeenDeleted = removeItem(permanent, c);
 
 	    if (hasBeenDeleted) {
 		// Delete from database
 		try {
-		    controller.preparedDelete.setString(1, getFilePath());
-		    controller.preparedDelete.executeUpdate();
+		    deleteStatement.setString(1, getFilePath());
+		    deleteStatement.executeUpdate();
 		    // Commit?
 		    if (commit)
 			Main.dbManager.commit();
@@ -483,7 +454,7 @@ public abstract class Media {
 
 	    // Open Window
 	    String extension = "." + InfoTool.getFileExtension(getFilePath());
-	    Main.renameWindow.show(getTitle(), node);
+	    Main.renameWindow.show(getTitle(), node,"Media Renaming");
 
 	    // Bind
 	    title.bind(Main.renameWindow.inputField.textProperty());
@@ -510,12 +481,15 @@ public abstract class Media {
 			if (Main.renameWindow.wasAccepted() && !getFilePath().equals(newName)) {
 
 			    try (PreparedStatement preparedRename = Main.dbManager.connection1
-				    .prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
+				    .prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?");
+				    PreparedStatement elementsMatchingThisWord = Main.dbManager.connection1
+					    .prepareStatement("SELECT COUNT(*) FROM '" + controller.getDataBaseTableName() + "' WHERE PATH=?");) {
 
 				// No duplicates allowed
 				boolean canPass = true;
-				controller.preparedCountElementsWithString.setString(1, newName);
-				ResultSet set = controller.preparedCountElementsWithString.executeQuery();
+
+				elementsMatchingThisWord.setString(1, newName);
+				ResultSet set = elementsMatchingThisWord.executeQuery(); //needs to be fixed
 				int total = set.getInt(1);
 				if (total > 0)
 				    canPass = false;
@@ -529,8 +503,8 @@ public abstract class Media {
 				    if (new File(newName).exists()) {
 					setFilePath(filePath.get());
 					ActionTool.showNotification("Rename Failed",
-						"The action can not been completed(Possible Reason):\nA file with that name already exists.",
-						Duration.millis(1500), NotificationType.WARNING);
+						"The action can not been completed:\nA file with that name already exists.", Duration.millis(1500),
+						NotificationType.WARNING);
 					controller.renameWorking = false;
 					return;
 				    }

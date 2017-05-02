@@ -1,4 +1,6 @@
-package librarysystema;
+package application.users;
+
+import java.io.File;
 
 import application.Main;
 import javafx.animation.Interpolator;
@@ -13,6 +15,9 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import smartcontroller.TitleMenuItem;
+import tools.ActionTool;
+import tools.InfoTool;
+import tools.NotificationType;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode
@@ -20,13 +25,10 @@ import smartcontroller.TitleMenuItem;
  * @author GOXR3PLUS
  *
  */
-public class LibraryContextMenu extends ContextMenu {
+public class UserContextMenu extends ContextMenu {
 
-    /** The open. */
-    MenuItem open = new MenuItem("Open");
-
-    /** The close. */
-    MenuItem close = new MenuItem("Close");
+    /** The Login. */
+    MenuItem login = new MenuItem("Login");
 
     /** The rename. */
     MenuItem rename = new MenuItem("Rename(R)");
@@ -52,33 +54,30 @@ public class LibraryContextMenu extends ContextMenu {
     /** The reset image. */
     MenuItem resetImage = new MenuItem("default");
 
-    /** The settings. */
-    MenuItem settings = new MenuItem("Settings(S)");
-
     /** The library. */
-    private Library library;
+    private User user;
+    private LoginMode loginMode;
 
     /**
      * Instantiates a new library context menu.
+     * 
+     * @param loginMode
      */
     // Constructor
-    public LibraryContextMenu() {
+    public UserContextMenu(LoginMode loginMode) {
+	this.loginMode = loginMode;
 
-	open.setOnAction(ac -> library.libraryOpenClose(true, false));
+	login.setOnAction(a -> Main.startAppWithUser(user));
 
-	close.setOnAction(c -> library.libraryOpenClose(false, false));
+	rename.setOnAction(ac -> user.renameUser(user));
 
-	rename.setOnAction(ac -> library.renameLibrary(library));
+	localImage.setOnAction(ac -> user.setNewImage());
 
-	localImage.setOnAction(ac -> library.setNewImage());
+	resetImage.setOnAction(ac -> user.setDefaultImage());
 
-	resetImage.setOnAction(ac -> library.setDefaultImage());
+	exportImage.setOnAction(a -> user.exportImage());
 
-	exportImage.setOnAction(a -> library.exportImage());
-
-	settings.setOnAction(ac -> Main.libraryMode.settings.showWindow(library));
-
-	delete.setOnAction(ac -> library.deleteLibrary(library));
+	delete.setOnAction(ac -> loginMode.deleteUser(user));
 
 	internetImage.setDisable(true);
 	// exportImage.setDisable(true)
@@ -86,7 +85,7 @@ public class LibraryContextMenu extends ContextMenu {
 	setImage.getItems().addAll(localImage, internetImage);
 	image.getItems().addAll(setImage, exportImage, resetImage);
 
-	getItems().addAll(new TitleMenuItem("Common"), open, close, rename, new TitleMenuItem("Other"), settings, image, delete);
+	getItems().addAll(new TitleMenuItem("Common"), login, rename, new TitleMenuItem("Other"), image, delete);
 
     }
 
@@ -99,21 +98,14 @@ public class LibraryContextMenu extends ContextMenu {
      *            the x
      * @param y
      *            the y
-     * @param library
-     *            the library
+     * @param user
+     *            the user
      */
-    public void show(Window window, double x, double y, Library library) {
-	this.library = library;
+    public void show(Window window, double x, double y, User user) {
+	this.user = user;
 
 	// customize the menu accordingly
-	if (library.isOpened()) {
-	    getItems().remove(open);
-	    getItems().add(1, close);
-	} else {
-	    getItems().remove(close);
-	    getItems().add(1, open);
-	}
-	exportImage.setDisable(library.getAbsoluteImagePath() == null);
+	exportImage.setDisable(user.getAbsoluteImagePath() == null);
 	resetImage.setDisable(exportImage.isDisable());
 
 	// Show it

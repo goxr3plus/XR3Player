@@ -166,7 +166,7 @@ public class FilesFilterService {
 	//System.out.println("Checking elements.....")
 	// controller is free && threadIsRunning?
 	if (controllerIsFree && threadIsRunning)
-	    controller.itemsObservableList.stream().forEach(media -> {
+	    controller.getItemsObservableList().stream().forEach(media -> {
 		if (!threadIsRunning)
 		    return;
 

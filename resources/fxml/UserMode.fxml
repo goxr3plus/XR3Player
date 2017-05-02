@@ -8,7 +8,7 @@
 
 <fx:root prefHeight="334.0" prefWidth="475.0" style="-fx-background-color: rgb(0,0,0,0.7);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label fx:id="userNameLabel" style="-fx-font-size: 18; -fx-font-weight: bold;" text="DAVINCI" textFill="#ff5454" BorderPane.alignment="CENTER" />
+      <Label fx:id="userNameLabel" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: black;" text="DAVINCI" textFill="#ff5454" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">

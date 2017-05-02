@@ -244,7 +244,7 @@ public class MultipleLibraries extends StackPane {
 	hBox.setOnDragDropped(drop -> {
 	    // Has Files? + isFree()?
 	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true)
-		    && drop.getGestureSource() != library.getSmartController().tableViewer)
+		    && drop.getGestureSource() != library.getSmartController().getTableViewer())
 		getSelectedLibrary().getSmartController().inputService.start(drop.getDragboard().getFiles());
 
 	    drop.setDropCompleted(true);

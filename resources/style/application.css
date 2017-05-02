@@ -55,7 +55,7 @@
 
 .settingsLabel{	
 	-fx-border-color:  white white transparent white;
-	-fx-text-fill:#00E494;
+	-fx-text-fill:gold;
 	-fx-font-weight:bold;
 	-fx-font-size:18.0;
 }
@@ -491,7 +491,7 @@
 .tab-pane .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 13px; /* before it was 12px */
+    -fx-font-size: 13.0px; /* before it was 12px */
     -fx-font-weight: bold;
     -fx-wrap-text: true;
     
@@ -968,21 +968,23 @@
 ******************************************************************************/
 
 .librarySettings {
-	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
+	-fx-background-color: #202020;
 }
 
 
 .librarySettings .label{	
 	-fx-text-fill:white;
-	-fx-font-size:14.0px;
+	-fx-font-size:12.0px;
 	-fx-font-weight:bold;
+	-fx-border-color:transparent white transparent transparent ;
+	 -fx-border-insets: 5px;
 }
 
 .librarySettings .text-area{
 	-fx-background-color: white;	
     -fx-background-radius:5.0;
     -fx-text-fill:black;
-    -fx-font-size:14.0;  
+    -fx-font-size:13.0;  
 }
 
 .librarySettings .text-area .content{

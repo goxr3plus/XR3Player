@@ -5,6 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,29 +14,39 @@
 
 <fx:root prefHeight="432.0" prefWidth="600.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="borderPane">
-         <bottom>
-            <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXTextField fx:id="commandTextField" promptText="Type Command and Press Enter..." style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
-                  <JFXButton fx:id="go" text="GO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <Button fx:id="help" focusTraversable="false" mnemonicParsing="false" text="HELP">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <tooltip>
-                        <Tooltip text="Open XR3Player Manual" />
-                     </tooltip></Button>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </BorderPane.margin>
-            </HBox>
-         </bottom>
-      </BorderPane>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="Console">
+               <content>
+                  <BorderPane fx:id="borderPane">
+                     <bottom>
+                        <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXTextField fx:id="commandTextField" promptText="Type Command and Press Enter..." style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
+                              <JFXButton fx:id="go" text="GO">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Button fx:id="help" focusTraversable="false" mnemonicParsing="false" text="HELP">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Open XR3Player Manual" />
+                                 </tooltip>
+                              </Button>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </BorderPane.margin>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+          </Tab>
+          <Tab closable="false" disable="true" text="Speech Recognition" />
+        </tabs>
+      </TabPane>
    </children>
 </fx:root>

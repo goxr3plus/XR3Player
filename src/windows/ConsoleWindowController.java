@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application;
+package windows;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -14,6 +14,7 @@ import org.fxmisc.richtext.InlineCssTextArea;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

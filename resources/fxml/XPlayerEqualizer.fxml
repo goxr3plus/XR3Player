@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 
-
-<fx:root style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="325.0" prefWidth="389.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TilePane fx:id="tilePane" alignment="CENTER" hgap="5.0" prefColumns="8" prefRows="0" style="-fx-background-color: transparent;" vgap="5.0" BorderPane.alignment="CENTER" />
+      <TilePane fx:id="tilePane" alignment="CENTER" hgap="5.0" prefColumns="8" prefRows="0" style="-fx-background-color: white;" vgap="5.0" BorderPane.alignment="CENTER" />
    </center>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -18,20 +18,20 @@
    <top>
       <HBox fx:id="bottomHBox" alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="resetFilers" mnemonicParsing="false" text="Reset Filters">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="effects" mnemonicParsing="false" text="Effects">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+            <JFXButton fx:id="resetFilters" focusTraversable="false" styleClass="arrowButton2" text="Reset Filters" />
+            <MenuButton fx:id="effects" mnemonicParsing="false" popupSide="RIGHT" text="Effects">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" top="5.0" />
          </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
       </HBox>
    </top>
 </fx:root>

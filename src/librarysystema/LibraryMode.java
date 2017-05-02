@@ -10,12 +10,15 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
 import application.settings.window.ApplicationSettingsController.SettingsTab;
+import application.users.User;
 import database.LocalDBManager;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -83,6 +86,12 @@ public class LibraryMode extends GridPane {
     private Button openOrCloseLibrary;
 
     @FXML
+    private Button openLibraryContextMenu;
+
+    @FXML
+    private Button settingsOfLibrary;
+
+    @FXML
     private HBox botttomHBox;
 
     @FXML
@@ -123,7 +132,12 @@ public class LibraryMode extends GridPane {
     public LibrarySettings settings = new LibrarySettings();
 
     /** The context menu. */
-    public LibraryContextMenu contextMenu = new LibraryContextMenu();
+    public LibraryContextMenu librariesContextMenu = new LibraryContextMenu();
+
+    /**
+     * This binding contains a number which shows how many libraries are currently opened
+     */
+    public SimpleIntegerProperty openedLibraries = new SimpleIntegerProperty();
 
     //----- Invalidation Listeners ------------------
 
@@ -162,7 +176,7 @@ public class LibraryMode extends GridPane {
 			    Statement statement = Main.dbManager.connection1.createStatement()) {
 
 			// Create the dataBase table
-			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'" + "(PATH       TEXT    PRIMARY KEY   NOT NULL ,"
+			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "' (PATH       TEXT    PRIMARY KEY   NOT NULL ,"
 				+ "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL,"
 				+ "HOUR        TEXT    NOT NULL)");
 
@@ -243,11 +257,11 @@ public class LibraryMode extends GridPane {
      * 
      * @param name
      */
-    public void updateLibraryTotalLabel(String name) {
-	Library lib = getLibraryWithName(name);
-	if (lib != null)
-	    lib.updateSettingsTotalLabel();
-    }
+    //    public void updateLibraryTotalLabel(String name) {
+    //	Library lib = getLibraryWithName(name);
+    //	if (lib != null)
+    //	    lib.updateSettingsTotalLabel();
+    //    }
 
     /**
      * Called as soon as FXML file has been loaded
@@ -290,6 +304,13 @@ public class LibraryMode extends GridPane {
 
 	//Let'z GO
 
+	// -- openLibrariesContextMenu
+	openLibraryContextMenu.setOnAction(a -> {
+	    Library library = teamViewer.getViewer().getSelectedItem();
+	    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
+	    librariesContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, library);
+	});
+
 	// -- libraryToolBar
 	libraryToolBar.disableProperty().bind(teamViewer.getViewer().centerItemProperty().isNull());
 
@@ -297,7 +318,7 @@ public class LibraryMode extends GridPane {
 	renameLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().renameLibrary(renameLibrary));
 
 	// -- deleteLibrary
-	deleteLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().deleteLibrary());
+	deleteLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().deleteLibrary(deleteLibrary));
 
 	// -- openOrCloseLibrary 
 	teamViewer.getViewer().centerItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -312,8 +333,19 @@ public class LibraryMode extends GridPane {
 	openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get()
 		.libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 
+	// -- settingsOfLibrary
+	settingsOfLibrary.setOnAction(a -> settings.showWindow(teamViewer.getViewer().centerItemProperty().get()));
+
 	//----librariesInfoLabel
-	librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries"));
+	librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries",
+		" , [ ", openedLibraries, " ] Opened"));
+    }
+
+    /**
+     * Recalculates the opened libraries
+     */
+    public void calculateOpenedLibraries() {
+	openedLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(library -> library.isOpened()).count());
     }
 
     /**
@@ -326,7 +358,7 @@ public class LibraryMode extends GridPane {
 	    return;
 
 	// Open rename window
-	Main.renameWindow.show("", owner);
+	Main.renameWindow.show("", owner, "Creating new Library");
 
 	// Add the showing listener
 	Main.renameWindow.showingProperty().addListener(creationInvalidator);

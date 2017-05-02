@@ -6,6 +6,7 @@ package librarysystema;
 import java.util.List;
 
 import application.Main;
+import application.users.User;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -143,6 +144,13 @@ public class TeamViewer {
 	// Constructor
 	public Viewer() {
 
+	    setOnScroll(scroll -> {
+		if (scroll.getDeltaX() < 0)
+		    next();
+		else if (scroll.getDeltaX() > 0)
+		    previous();
+	    });
+
 	    // this.setOnMouseMoved(m -> {
 	    //
 	    // if (dragDetected) {
@@ -167,18 +175,18 @@ public class TeamViewer {
 	    //setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 
 	    // ScrollBar
-	   // jfSlider.setStyle("-fx-text-fill:white; -fx-background-color:black; -fx-border-color:red");
-	   // jfSlider.setIndicatorPosition(IndicatorPosition.LEFT);
+	    // jfSlider.setStyle("-fx-text-fill:white; -fx-background-color:black; -fx-border-color:red");
+	    // jfSlider.setIndicatorPosition(IndicatorPosition.LEFT);
 	    jfSlider.setCursor(Cursor.HAND);
 	    jfSlider.setMin(0);
 	    jfSlider.setMax(0);
-	    jfSlider.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(3));
+	    jfSlider.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(2));
 	    // scrollBar.setVisibleAmount(1)
 	    // scrollBar.setUnitIncrement(1)
 	    // scrollBar.setBlockIncrement(1)
-	   // jfSlider.setShowTickLabels(true);
+	    // jfSlider.setShowTickLabels(true);
 	    // scrollBar.setMajorTickUnit(1)
-	   // jfSlider.setShowTickMarks(true);
+	    // jfSlider.setShowTickMarks(true);
 	    jfSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
 		int newVal = (int) Math.round(newValue.doubleValue());
 		int oldVal = (int) Math.round(oldValue.doubleValue());
@@ -189,7 +197,6 @@ public class TeamViewer {
 
 		// System.out.println(scrollBar.getValue())
 	    });
-	    
 	    jfSlider.setOrientation(Orientation.HORIZONTAL);
 
 	    // setFocusTraversable(true)
@@ -236,6 +243,13 @@ public class TeamViewer {
 	}
 
 	/**
+	 * @return the centerItem
+	 */
+	public Library getSelectedItem() {
+	    return centerItemProperty.get();
+	}
+
+	/**
 	 * Returns the Index of the List center Item
 	 * 
 	 * @return Returns the Index of the List center Item
@@ -278,8 +292,7 @@ public class TeamViewer {
 	    //jfSlider.setLayoutY(double g snoopy dogg);
 	    //jfSlider.resize(getWidth(), 15);
 	    jfSlider.resize(300, 15);
-	    jfSlider.setLayoutY(getHeight()-jfSlider.getHeight());
-	    
+	    jfSlider.setLayoutY(getHeight() - jfSlider.getHeight());
 
 	    // AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
 	    // if (previousWidth != (int) WIDTH ||
@@ -389,8 +402,8 @@ public class TeamViewer {
 
 			timeline.setOnFinished(v -> {
 			    Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-			    mode.contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4,
-				    library);
+			    mode.librariesContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
+				    bounds.getMinY() + bounds.getHeight() / 4, library);
 			    // mode.contextMenu.show(Main.window, m.getScreenX(), m.getScreenY(), library);
 			    timeline.setOnFinished(null);
 			});
@@ -399,7 +412,7 @@ public class TeamViewer {
 			//			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
 			//			contextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
 			//				bounds.getMinY() + bounds.getHeight() / 4, library);
-			mode.contextMenu.show(Main.window, m.getScreenX() - 5, m.getScreenY() - 15, library);
+			mode.librariesContextMenu.show(Main.window, m.getScreenX() - 5, m.getScreenY() - 15, library);
 		    }
 		}
 

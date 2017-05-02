@@ -24,7 +24,6 @@ import com.jfoenix.controls.JFXButton;
 
 import application.Main;
 import application.settings.window.ApplicationSettingsController.SettingsTab;
-import customnodes.FunIndicator;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -43,7 +42,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
@@ -69,7 +67,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import media.Audio;
 import media.Media;
@@ -158,8 +155,7 @@ public class SmartController extends StackPane {
     private TextArea informationTextArea;
 
     // ----------------------------------------------------------
-    /** @see Genre */
-    public final Genre genre;
+    private final Genre genre;
 
     /**
      * The name of the database table (eg. @see ActionTool.returnRandomTableName())
@@ -178,13 +174,13 @@ public class SmartController extends StackPane {
     private Node focusOwner;
 
     /** The table viewer. */
-    public final MediaTableViewer tableViewer;
+    private final MediaTableViewer tableViewer;
 
     /** This list keeps all the Media Items from the TableViewer */
-    public final ObservableList<Media> itemsObservableList = FXCollections.observableArrayList();
+    private final ObservableList<Media> itemsObservableList = FXCollections.observableArrayList();
 
     /** The current page inside the TableViewer */
-    IntegerProperty currentPage = new SimpleIntegerProperty(0);
+    private IntegerProperty currentPage = new SimpleIntegerProperty(0);
 
     /** Maximum items allowed per page. */
     private int maximumPerPage = 50;
@@ -216,17 +212,6 @@ public class SmartController extends StackPane {
 
     /** The update working. */
     public volatile boolean updateWorking;
-
-    // --------Prepared Statements------------------
-
-    /** The prepared insert. */
-    public PreparedStatement preparedInsert;
-
-    /** The prepared delete. */
-    public PreparedStatement preparedDelete;
-
-    /** The prepared count elements with string. */
-    public PreparedStatement preparedCountElementsWithString;
 
     // --------------------------------------------------
 
@@ -269,9 +254,6 @@ public class SmartController extends StackPane {
 	    Main.logger.log(Level.WARNING, "", ex);
 	}
 
-	// Initialize the prepared statements
-	if (genre != Genre.RADIOSTATION)
-	    prepareStatements();
     }
 
     /*-----------------------------------------------------------------------
@@ -314,7 +296,7 @@ public class SmartController extends StackPane {
 		if (code == KeyCode.P)
 		    ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 		else if (code == KeyCode.DELETE)
-		    tableViewer.getSelectionModel().getSelectedItem().prepareDelete(key.isShiftDown(), SmartController.this);
+		    prepareDelete(key.isShiftDown());
 
 	    }
 
@@ -524,21 +506,31 @@ public class SmartController extends StackPane {
      */
 
     /**
-     * Prepares the statements for this PlayList.
+     * Prepares the delete operation when more than one Media files will be deleted.
+     *
+     * @param permanent
+     *            <br>
+     *            true->storage medium + (play list)/library<br>
+     *            false->only from (play list)/library
+     * @param controller
+     *            the controller
      */
-    private void prepareStatements() {
-	// ------------------Prepared Statements
-	try {
-	    //String string = "UPDATE '" + dataBaseTableName + "'"
+    public void prepareDelete(boolean permanent) {
+	int previousTotal = getTotalInDataBase();
 
-	    preparedInsert = Main.dbManager.connection1
-		    .prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?,?)");
-	    preparedDelete = Main.dbManager.connection1.prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?");
-	    preparedCountElementsWithString = Main.dbManager.connection1
-		    .prepareStatement("SELECT COUNT(*) FROM '" + dataBaseTableName + "' WHERE PATH=?");
+	//RememberScrollBar Position
+	ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+	scrollValueBeforeDeleteAction = verticalBar.getValue();
 
-	} catch (SQLException ex) {
-	    Main.logger.log(Level.WARNING, "", ex);
+	// Remove selected items
+	removeSelected(permanent);
+
+	// Update
+	if (previousTotal != getTotalInDataBase()) {
+	    //	    if (genre == Genre.LIBRARYMEDIA)
+	    //		Main.libraryMode.multipleLibs.getSelectedLibrary().updateSettingsTotalLabel();
+
+	    loadService.startService(true, true);
 	}
     }
 
@@ -557,12 +549,16 @@ public class SmartController extends StackPane {
 		: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()), tableViewer.getSelectedCount())) {
 
 	    // Remove selected items
-	    try {
-		tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent, false, false, this));
+	    try (PreparedStatement preparedDelete = Main.dbManager.connection1
+		    .prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
+
+		//Call the delete for each selected item
+		tableViewer.getSelectionModel().getSelectedItems().iterator()
+			.forEachRemaining(r -> r.delete(permanent, false, false, this, preparedDelete));
 
 		// Library?
-		if (genre == Genre.LIBRARYSONG)
-		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
+		//		if (genre == Genre.LIBRARYMEDIA)
+		//		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
 
 	    } catch (Exception ex) {
 		Main.logger.log(Level.WARNING, "", ex);
@@ -575,38 +571,38 @@ public class SmartController extends StackPane {
      * Clears all the items from this library *.
      */
     private void clearDataBaseTable() {
-	if (isFree(true)) {
+	if (!isFree(true))
+	    return;
 
-	    // Security Value
-	    undepositWorking = true;
+	// Security Value
+	undepositWorking = true;
 
-	    // Controller
-	    getIndicator().setProgress(-1);
-	    getCancelButton().setText("Clearing...");
-	    getRegion().setVisible(true);
+	// Controller
+	getIndicator().setProgress(-1);
+	getCancelButton().setText("Clearing...");
+	getRegion().setVisible(true);
 
-	    // New Thread
-	    new Thread(() -> {
-		try {
-		    Main.dbManager.connection1.createStatement().executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
-		    Main.dbManager.commit();
-		    Platform.runLater(() -> {
-			getRegion().setVisible(false);
-			getCancelButton().setText("Cancel");
-		    });
-		} catch (Exception ex) {
-		    Main.logger.log(Level.WARNING, "", ex);
-		} finally {
-		    undepositWorking = false;
-		}
-	    }).start();
+	// New Thread
+	new Thread(() -> {
+	    try {
+		Main.dbManager.connection1.createStatement().executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
+		Main.dbManager.commit();
+		Platform.runLater(() -> {
+		    getRegion().setVisible(false);
+		    getCancelButton().setText("Cancel");
+		});
+	    } catch (Exception ex) {
+		Main.logger.log(Level.WARNING, "", ex);
+	    } finally {
+		undepositWorking = false;
+	    }
+	}).start();
 
-	    simpleClear();
+	simpleClear();
 
-	    // Library?
-	    if (genre == Genre.LIBRARYSONG)
-		Main.libraryMode.updateLibraryTotalLabel(controllerName);
-	}
+	// Library?
+	//	    if (genre == Genre.LIBRARYMEDIA)
+	//		Main.libraryMode.updateLibraryTotalLabel(controllerName);
     }
 
     /**
@@ -888,6 +884,55 @@ public class SmartController extends StackPane {
     public IntegerProperty totalInDataBaseProperty() {
 	return totalInDataBase;
     }
+    
+    /**
+     * @return the currentPage
+     */
+    public IntegerProperty getCurrentPage() {
+	return currentPage;
+    }
+
+    /**
+     * @param currentPage the currentPage to set
+     */
+    public void setCurrentPage(IntegerProperty currentPage) {
+	this.currentPage = currentPage;
+    }
+
+    /**
+     * @return the maximumPerPage
+     */
+    public int getMaximumPerPage() {
+	return maximumPerPage;
+    }
+
+    /**
+     * @return the indicatorVBox
+     */
+    public VBox getIndicatorVBox() {
+	return indicatorVBox;
+    }
+
+    /**
+     * @return the genre
+     */
+    public Genre getGenre() {
+	return genre;
+    }
+
+    /**
+     * @return the tableViewer
+     */
+    public MediaTableViewer getTableViewer() {
+	return tableViewer;
+    }
+
+    /**
+     * @return the itemsObservableList
+     */
+    public ObservableList<Media> getItemsObservableList() {
+	return itemsObservableList;
+    }
 
     /**
      * Calculates the total entries in the database table [it MUST be called from external thread cause it may lag the application ]
@@ -935,20 +980,6 @@ public class SmartController extends StackPane {
      * 
      * -----------------------------------------------------------------------
      */
-
-    /**
-     * @return the maximumPerPage
-     */
-    public int getMaximumPerPage() {
-	return maximumPerPage;
-    }
-
-    /**
-     * @return the indicatorVBox
-     */
-    public VBox getIndicatorVBox() {
-	return indicatorVBox;
-    }
 
     /**
      * Representing the data of SmartController.
@@ -1099,7 +1130,7 @@ public class SmartController extends StackPane {
 	private void initialize() {
 
 	    //------------------------------TableViewer---------------------------
-	    setItems(itemsObservableList);
+	    setItems(getItemsObservableList());
 	    setPlaceholder(new Label("Drag && Drop or Import Media"));
 
 	    //--Selection Model
@@ -1162,7 +1193,7 @@ public class SmartController extends StackPane {
 		    if (row.itemProperty().getValue() != null) {
 
 			if (m.getButton() == MouseButton.SECONDARY && !row.isDisable())
-			    tableViewer.getSelectionModel().select(row.getIndex());
+			    getTableViewer().getSelectionModel().select(row.getIndex());
 
 			//Primary
 			if (m.getButton() == MouseButton.PRIMARY) {
@@ -1170,8 +1201,8 @@ public class SmartController extends StackPane {
 				row.itemProperty().get().rename(SmartController.this, row);
 
 			}//Secondary
-			else if (m.getButton() == MouseButton.SECONDARY && !tableViewer.getSelectionModel().getSelectedItems().isEmpty())
-			    Main.songsContextMenu.showContextMenu(row.itemProperty().get(), SmartController.this.genre, m.getScreenX(),
+			else if (m.getButton() == MouseButton.SECONDARY && !getTableViewer().getSelectionModel().getSelectedItems().isEmpty())
+			    Main.songsContextMenu.showContextMenu(row.itemProperty().get(), SmartController.this.getGenre(), m.getScreenX(),
 				    m.getScreenY(), SmartController.this, row);
 		    }
 		});
@@ -1185,7 +1216,7 @@ public class SmartController extends StackPane {
 		    if (code == KeyCode.R)
 			row.itemProperty().get().rename(SmartController.this, row);
 		    else if (code == KeyCode.S)
-			tableViewer.getSelectionModel().getSelectedItem().updateStars(SmartController.this, row);
+			getTableViewer().getSelectionModel().getSelectedItem().updateStars(SmartController.this, row);
 		});
 
 		// it's also possible to do this with the standard API, but
@@ -1241,7 +1272,7 @@ public class SmartController extends StackPane {
 		// gestureSourceString = "null"
 
 		// The drag must come from source other than the owner
-		if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != tableViewer) {
+		if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != getTableViewer()) {
 		    dragOver.acceptTransferModes(TransferMode.LINK);
 		}
 	    });
@@ -1328,7 +1359,7 @@ public class SmartController extends StackPane {
 	 * @return An int representing the total selected items in the table
 	 */
 	public int getSelectedCount() {
-	    return tableViewer.getSelectionModel().getSelectedItems().size();
+	    return getTableViewer().getSelectionModel().getSelectedItems().size();
 	}
 
     }
@@ -1402,7 +1433,7 @@ public class SmartController extends StackPane {
 		    indicator.progressProperty().bind(progressProperty());
 		    cancel.setText("Updating...");
 		    informationTextArea.setText("\n Updating the playlist....");
-		    itemsObservableList.clear();
+		    getItemsObservableList().clear();
 		    super.reset();
 		    super.start();
 		}
@@ -1425,8 +1456,8 @@ public class SmartController extends StackPane {
 		centerStackPane.requestFocus();
 
 	    // Library?
-	    if (genre == Genre.LIBRARYSONG)
-		Main.libraryMode.updateLibraryTotalLabel(controllerName);
+	    //	    if (genre == Genre.LIBRARYMEDIA)
+	    //		Main.libraryMode.updateLibraryTotalLabel(controllerName);
 
 	    // System.out.println("Is this JavaFX Thread: " +
 	    // Platform.isFxApplicationThread())
@@ -1434,7 +1465,7 @@ public class SmartController extends StackPane {
 	    // Reset the default vertical scroll position before the search
 	    // happened
 	    if (searchService.getVerticalScrollBarPosition() != -1.00) {
-		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+		ScrollBar verticalBar = (ScrollBar) getTableViewer().lookup(".scroll-bar:vertical");
 		if (verticalBar != null)
 		    verticalBar.setValue(searchService.getVerticalScrollBarPosition());
 
@@ -1444,7 +1475,7 @@ public class SmartController extends StackPane {
 
 	    // Reset the default vertical scroll position after a delete action happens
 	    if (scrollValueBeforeDeleteAction != -1.00) {
-		ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
+		ScrollBar verticalBar = (ScrollBar) getTableViewer().lookup(".scroll-bar:vertical");
 		if (verticalBar != null)
 		    verticalBar.setValue(scrollValueBeforeDeleteAction);
 
@@ -1468,15 +1499,15 @@ public class SmartController extends StackPane {
 
 		    // when the final list is deleted then the controller
 		    // has to go to the previous list automatically
-		    if (getTotalInDataBase() != 0 && currentPage.get() > maximumList())
-			currentPage.set(currentPage.get() - 1);
+		    if (getTotalInDataBase() != 0 && getCurrentPage().get() > maximumList())
+			getCurrentPage().set(getCurrentPage().get() - 1);
 
 		    // Select the available Media Files
 		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
 			    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + getMaximumPerPage() + " OFFSET "
-				    + currentPage.get() * getMaximumPerPage());
+				    + getCurrentPage().get() * getMaximumPerPage());
 			    ResultSet dbCounter = Main.dbManager.connection1.createStatement().executeQuery("SELECT* FROM '" + dataBaseTableName
-				    + "' LIMIT " + getMaximumPerPage() + " OFFSET " + currentPage.get() * getMaximumPerPage());) {
+				    + "' LIMIT " + getMaximumPerPage() + " OFFSET " + getCurrentPage().get() * getMaximumPerPage());) {
 
 			// Count how many items the result returned...
 			int currentMaximumPerList = 0;
@@ -1487,36 +1518,38 @@ public class SmartController extends StackPane {
 			// System.out.println("CurrentMaximumPerList=:"
 			// +currentMaximumPerList)
 
-			if (genre == Genre.RADIOSTATION) {
-
-			    // SongButton station = null;
-			    // while (set.next()) {
-			    // station = new RadioStation(set.getString("NAME"),
-			    // new URL(set.getString("STREAMURL")),
-			    // set.getString("TAGS"), set.getDouble("STARS"));
-			    // bigList.add(station); // Update Progress
-			    // updateProgress(++counter, maximumPerList);
-			    // }
-
-			} else {
-			    // Fetch the items from the database
-			    List<Media> array = new ArrayList<>();
-			    for (Audio song = null; resultSet.next();) {
-				song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
-					resultSet.getString("DATE"), resultSet.getString("HOUR"), genre);
-				array.add(song);
-				//Update the progress
-				updateProgress(++counter, currentMaximumPerList);
-			    }
-
-			    // Add the the items to the observable list
-			    CountDownLatch countDown = new CountDownLatch(1);
-			    Platform.runLater(() -> {
-				itemsObservableList.addAll(array);
-				countDown.countDown();
-			    });
-			    countDown.await();
+			//			if (genre == Genre.RADIOSTATION) {
+			//
+			//			    // SongButton station = null;
+			//			    // while (set.next()) {
+			//			    // station = new RadioStation(set.getString("NAME"),
+			//			    // new URL(set.getString("STREAMURL")),
+			//			    // set.getString("TAGS"), set.getDouble("STARS"));
+			//			    // bigList.add(station); // Update Progress
+			//			    // updateProgress(++counter, maximumPerList);
+			//			    // }
+			//
+			//			} else {
+			//			    
+			//Genre == Genre.LIBRARY
+			// Fetch the items from the database
+			List<Media> array = new ArrayList<>();
+			for (Audio song = null; resultSet.next();) {
+			    song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
+				    resultSet.getString("DATE"), resultSet.getString("HOUR"), getGenre());
+			    array.add(song);
+			    //Update the progress
+			    updateProgress(++counter, currentMaximumPerList);
 			}
+
+			// Add the the items to the observable list
+			CountDownLatch countDown = new CountDownLatch(1);
+			Platform.runLater(() -> {
+			    getItemsObservableList().addAll(array);
+			    countDown.countDown();
+			});
+			countDown.await();
+			//}
 
 			// commit?
 			if (commit)
@@ -1658,12 +1691,12 @@ public class SmartController extends StackPane {
 			count = 0;
 			// total = (int) observableList.stream().filter(button
 			// -> ( (Audio) button ).isMarked()).count();
-			total = itemsObservableList.size();
+			total = getItemsObservableList().size();
 
 			// Multiple Items have been selected
 			if (total > 0) {
 			    // Stream
-			    Stream<Media> stream = itemsObservableList.stream();
+			    Stream<Media> stream = getItemsObservableList().stream();
 			    stream.forEach(media -> {
 				if (!isCancelled()) {
 				    // if (button.isMarked()) {
@@ -1764,12 +1797,12 @@ public class SmartController extends StackPane {
 
 	    setOnSucceeded(s -> done());
 	    setOnCancelled(c -> {
-		// Clear all Batches
-		try {
-		    preparedInsert.clearBatch();
-		} catch (SQLException ex) {
-		    Main.logger.log(Level.WARNING, "", ex);
-		}
+		//		// Clear all Batches
+		//		try {
+		//		    preparedInsert.clearBatch();
+		//		} catch (SQLException ex) {
+		//		    Main.logger.log(Level.WARNING, "", ex);
+		//		}
 		done();
 	    });
 	    setOnFailed(c -> done());
@@ -1842,79 +1875,87 @@ public class SmartController extends StackPane {
 		    // Update informationTextArea
 		    Platform.runLater(() -> informationTextArea.appendText("\nCounting files from ....\n"));
 
-		    // Start the insert work
-		    if ("upload from system".equals(job)) {
+		    //Initialize the prepared statement
+		    try (PreparedStatement preparedInsert = Main.dbManager.connection1.prepareStatement(
+			    "INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?,?)")) {
 
-			//Count the total files to be inserted
-			for (File file : list) {
+			// Start the insert work
+			if ("upload from system".equals(job)) {
 
-			    //File exists?
-			    if (!file.exists())
-				continue;
+			    //Count the total files to be inserted
+			    for (File file : list) {
 
-			    // Update informationTextArea
-			    Platform.runLater(
-				    () -> informationTextArea.appendText((!file.isDirectory() ? "File" : "Folder") + ": " + file.getName()));
+				//File exists?
+				if (!file.exists())
+				    continue;
 
-			    int previousTotal = totalFiles;
-			    // File or Folder exists?
-			    if (isCancelled())
-				break;
-			    totalFiles += countFiles(file);
+				// Update informationTextArea
+				Platform.runLater(
+					() -> informationTextArea.appendText((!file.isDirectory() ? "File" : "Folder") + ": " + file.getName()));
 
-			    // Update informationTextArea
-			    Platform.runLater(() -> informationTextArea.appendText("\n\t-> Total: [ " + (totalFiles - previousTotal) + " ]\n"));
+				int previousTotal = totalFiles;
+				// File or Folder exists?
+				if (isCancelled())
+				    break;
+				totalFiles += countFiles(file);
 
+				// Update informationTextArea
+				Platform.runLater(() -> informationTextArea.appendText("\n\t-> Total: [ " + (totalFiles - previousTotal) + " ]\n"));
+
+			    }
+
+			    // System.out.println("Total Files are->" + totalFiles)
+
+			    //Calculate the batch size
+			    //			if (totalFiles < 20_000)
+			    //			    batchSize = 1000;
+			    //			else if (totalFiles < 100_000)
+			    //			    batchSize = 5000;
+			    //			else
+			    //			    batchSize = 10_000;
+			    //			
+
+			    //			batchcount = 0;
+
+			    // Update informationTextArea and cancel button
+			    Platform.runLater(() -> {
+				getCancelButton().setText("Inserting...");
+				informationTextArea.appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
+			    });
+
+			    for (File file : list)
+				if (file.exists() && !isCancelled())
+				    try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
+					paths.forEach(path -> {
+
+					    // System.out.println("Adding...."+s.toString())
+
+					    // cancelled?
+					    if (isCancelled())
+						paths.close();
+
+					    // supported?
+					    else if (InfoTool.isAudioSupported(path + ""))
+						insertMedia(path + "", 0, 0, date, time, preparedInsert);
+
+					    //					// Update informationTextArea				   
+					    //					File f = path.toFile();
+					    //					if (f.isDirectory())
+					    //					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
+
+					    // update progress
+					    updateProgress(++progress, totalFiles);
+					});
+				    } catch (IOException ex) {
+					Main.logger.log(Level.WARNING, "", ex);
+				    }
 			}
 
-			// System.out.println("Total Files are->" + totalFiles)
+			saveInDataBase(preparedInsert);
 
-			//Calculate the batch size
-			//			if (totalFiles < 20_000)
-			//			    batchSize = 1000;
-			//			else if (totalFiles < 100_000)
-			//			    batchSize = 5000;
-			//			else
-			//			    batchSize = 10_000;
-			//			
-
-			//			batchcount = 0;
-
-			// Update informationTextArea and cancel button
-			Platform.runLater(() -> {
-			    getCancelButton().setText("Inserting...");
-			    informationTextArea.appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
-			});
-
-			for (File file : list)
-			    if (file.exists() && !isCancelled())
-				try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
-				    paths.forEach(path -> {
-
-					// System.out.println("Adding...."+s.toString())
-
-					// cancelled?
-					if (isCancelled())
-					    paths.close();
-
-					// supported?
-					else if (InfoTool.isAudioSupported(path + ""))
-					    insertMedia(path + "", 0, 0, date, time);
-
-					//					// Update informationTextArea				   
-					//					File f = path.toFile();
-					//					if (f.isDirectory())
-					//					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
-
-					// update progress
-					updateProgress(++progress, totalFiles);
-				    });
-				} catch (IOException ex) {
-				    Main.logger.log(Level.WARNING, "", ex);
-				}
+		    } catch (Exception ex) {
+			ex.printStackTrace();
 		    }
-
-		    saveInDataBase();
 
 		    return null;
 		}
@@ -1922,7 +1963,7 @@ public class SmartController extends StackPane {
 		/**
 		 * Save everything in database
 		 */
-		void saveInDataBase() {
+		void saveInDataBase(PreparedStatement preparedInsert) {
 		    // Cancelled?
 		    if (isCancelled())
 			return;
@@ -1996,7 +2037,8 @@ public class SmartController extends StackPane {
 		 * @param dateCreated
 		 * @param hourCreated
 		 */
-		void insertMedia(String path, double stars, int timesPlayed, String dateCreated, String hourCreated) {
+		void insertMedia(String path, double stars, int timesPlayed, String dateCreated, String hourCreated,
+			PreparedStatement preparedInsert) {
 
 		    try {
 

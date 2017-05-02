@@ -11,14 +11,12 @@ package smartcontroller;
 public enum Genre {
 
     /** The librarysong. */
-    LIBRARYSONG,
-    /** The xplaylistsong. */
-    XPLAYLISTSONG,
-    /** The topcategorysong. */
-    TOPCATEGORYSONG,
-    /** The radiostation. */
-    RADIOSTATION,
+    LIBRARYMEDIA,
+//    /** The xplaylistsong. */
+//    XPLAYLISTSONG,
+//    /** The radiostation. */
+//    RADIOSTATION,
     /** The unknown. */
-    UNKNOWN;
+   UNKNOWN;
 
 }

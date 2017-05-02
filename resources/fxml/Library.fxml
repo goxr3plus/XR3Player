@@ -39,18 +39,24 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <tooltip>
+            <Tooltip text="Stars" />
+         </tooltip>
       </Label>
       <Label fx:id="settingsLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="BOTTOM_RIGHT">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
+            <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/gear.png" />
+                  <Image url="@../image/About-32.png" />
                </image>
             </ImageView>
          </graphic>
+         <tooltip>
+            <Tooltip text="Library Information" />
+         </tooltip>
       </Label>
       <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
          <graphic>
@@ -63,6 +69,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <tooltip>
+            <Tooltip text="Library Comments" />
+         </tooltip>
       </Label>
       <VBox alignment="BOTTOM_LEFT" minHeight="0.0" minWidth="0.0" pickOnBounds="false" spacing="10.0">
          <cursor>
@@ -78,7 +87,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Image is missing!" />
+                  <Tooltip text="Image is missing !!" />
                </tooltip>
             </Label>
             <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="543545" textAlignment="CENTER">
@@ -95,6 +104,9 @@
                <padding>
                   <Insets left="4.0" right="4.0" />
                </padding>
+               <tooltip>
+                  <Tooltip text="Total Items" />
+               </tooltip>
             </Label>
          </children>
       </VBox>
