@@ -123,7 +123,6 @@ public class MediaContextMenu extends ContextMenu {
     MenuItem lyricFinderOrg = new MenuItem("LyricFinder.org", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
     MenuItem lyricsCom = new MenuItem("Lyrics.com", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
 
-    
     /** Show Info (I) */
     MenuItem showInfo = new MenuItem("Show Info[Comming..]", InfoTool.getImageViewFromDocuments("tag.png"));
 
@@ -183,7 +182,7 @@ public class MediaContextMenu extends ContextMenu {
 	searchOnWeb.getItems().forEach(item -> item.setOnAction(this::onAction2));
 
 	//---findLyrics
-	findLyrics.getItems().addAll(new TitleMenuItem("Popular"), lyricFinderOrg,lyricsCom);
+	findLyrics.getItems().addAll(new TitleMenuItem("Popular"), lyricFinderOrg, lyricsCom);
 	findLyrics.getItems().forEach(item -> item.setOnAction(this::onAction2));
 
 	//END:--Search on Web
@@ -220,43 +219,17 @@ public class MediaContextMenu extends ContextMenu {
      *            the e
      * @param controller1
      *            the controller
+     * @param node 
      */
     public void showContextMenu(Media media1, Genre genre, double x, double y, SmartController controller1, Node node) {
 
 	// Don't waste resources
 	if (previousGenre != genre) {
 	    if (media1.getGenre() == Genre.LIBRARYMEDIA) {
-		addOn.setVisible(true);
-		stars.setVisible(true);
-		copy.setVisible(true);
-		//move.setVisible(true)
-		rename.setVisible(true);
-		simpleDelete.setVisible(true);
-		storageDelete.setVisible(true);
-		separator1.setVisible(true);
-		separator2.setVisible(true);
-		//		 } else if (button instanceof TopCategorySong) {
-		//		 addOn.setVisible(false);
-		//		 stars.setVisible(false);
-		//		 copy.setVisible(false);
-		//		 move.setVisible(false);
-		//		 rename.setVisible(false);
-		//		 simpleDelete.setVisible(false);
-		//		 storageDelete.setVisible(false);
-		//		 separator1.setVisible(false);
-		//		 separator2.setVisible(false);
+		getItems().forEach(item -> item.setVisible(true));
+	    } else if (media1.getGenre() == Genre.SEARCHWINDOW) {
+		simpleDelete.setVisible(false);
 	    }
-//	    } else if (media1.getGenre() == Genre.XPLAYLISTSONG) {
-//		addOn.setVisible(false);
-//		stars.setVisible(false);
-//		copy.setVisible(false);
-//		//move.setVisible(false)
-//		rename.setVisible(false);
-//		simpleDelete.setVisible(true);
-//		storageDelete.setVisible(true);
-//		separator1.setVisible(false);
-//		separator2.setVisible(false);
-//	    }
 	}
 
 	//Determine the image
@@ -272,7 +245,8 @@ public class MediaContextMenu extends ContextMenu {
 	this.controller = controller1;
 
 	// Show it
-	show(Main.window, x - 5 - super.getWidth() + super.getWidth() * 14 / 100, y - 1);
+	show(genre != Genre.SEARCHWINDOW ? Main.window : Main.searchWindow.getWindow(), x - 5 - super.getWidth() + super.getWidth() * 14 / 100,
+		y - 1);
 	previousGenre = genre;
 
 	//Y axis

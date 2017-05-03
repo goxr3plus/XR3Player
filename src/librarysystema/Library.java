@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +18,7 @@ import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.beans.property.DoubleProperty;
@@ -469,7 +471,12 @@ public class Library extends StackPane {
 	descriptionLabel.setOnMouseReleased(settingsLabel.getOnMouseReleased());
 
 	// ----totalItemsLabel
-	totalItemsLabel.textProperty().bind(controller.totalInDataBaseProperty().asString());
+
+	totalItemsLabel.textProperty()
+		.bind(Bindings.createStringBinding(
+			() -> String.format(Locale.US, "%,d", controller.totalInDataBaseProperty().get()).replace(",", "."),
+			controller.totalInDataBaseProperty()));
+
 	totalItemsLabel.visibleProperty().bind(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty());
 	//I run this Thread to calculate the total entries of this library
 	//because if the library is not opened they are not calculated
@@ -855,7 +862,8 @@ public class Library extends StackPane {
      * Delete the library.
      */
     public void deleteLibrary(Node owner) {
-	if (controller.isFree(true) && ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]",owner)) {
+	if (controller.isFree(true)
+		&& ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner)) {
 
 	    try {
 
@@ -1085,7 +1093,6 @@ public class Library extends StackPane {
     public Label getRatingLabel() {
 	return ratingLabel;
     }
-
 
     /**
      * Returns <b>DATABASE TABLE NAME</b> of the List.

@@ -15,9 +15,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -91,7 +93,7 @@ public final class InfoTool {
     //Java 7 Way and back
     private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg"));
     private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv"));
-    private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg"));
+    private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg", "gif"));
 
     // ------------------------------------Important-------------------------------------------------------------------
 
@@ -732,5 +734,15 @@ public final class InfoTool {
     //
     // return contains;
     // }
+
+    /**
+     * Returns a number with more than 3 digits [ Example 1000 as 1.000] with dots every 3 digits
+     * 
+     * @param number
+     * @return A number with more than 3 digits [ Example 1000 as 1.000] with dots every 3 digits
+     */
+    public static String getNumberWithDots(int number) {
+	return String.format(Locale.US, "%,d", number).replace(",", ".");
+    }
 
 }

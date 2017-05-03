@@ -88,7 +88,7 @@ public class SideBar extends BorderPane {
     private ImageView userImageView;
 
     @FXML
-    Label userNameLabel;
+    private Label userNameLabel;
 
     @FXML
     private JFXButton applicationUpdate;
@@ -104,6 +104,9 @@ public class SideBar extends BorderPane {
 
     @FXML
     private JFXButton applicationSettings;
+
+    @FXML
+    private JFXButton donateButton;
 
     // -------------------------------------------------------------
 
@@ -219,6 +222,7 @@ public class SideBar extends BorderPane {
 	    //goUserMode.setDisable(true);
 	    applicationSettings.setDisable(true);
 	    applicationConsole.setDisable(true);
+	    applicationSearch.setDisable(true);
 	    // applicationDatabase.setDisable(true);
 	    //snapshot.setDisable(true);
 	} else {
@@ -226,6 +230,7 @@ public class SideBar extends BorderPane {
 	    //goUserMode.setDisable(false);
 	    applicationSettings.setDisable(false);
 	    applicationConsole.setDisable(false);
+	    applicationSearch.setDisable(false);
 	    //applicationDatabase.setDisable(false);
 	    //snapshot.setDisable(false);
 	}
@@ -259,6 +264,9 @@ public class SideBar extends BorderPane {
 	// donation
 	donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
+	// donateButton
+	donateButton.setOnAction(donation.getOnAction());
+
 	//---------MODE ------------------------------	
 	//	//goMainMode
 	//	goMainMode.setOnAction(a -> goMainMode());
@@ -272,6 +280,9 @@ public class SideBar extends BorderPane {
 	//	});
 
 	//-----------------------------------------
+
+	// -- applicationSearch
+	applicationSearch.setOnAction(a -> Main.searchWindow.show());
 
 	// closeSideBar
 	hideSideBar.setOnAction(a -> toogleBar());
@@ -440,6 +451,13 @@ public class SideBar extends BorderPane {
 
 	});
 
+    }
+
+    /**
+     * @return the userNameLabel
+     */
+    public Label getUserNameLabel() {
+	return userNameLabel;
     }
 
 }

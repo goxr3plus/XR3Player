@@ -6,7 +6,6 @@ package media;
 import java.io.File;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
@@ -23,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.util.Duration;
+import librarysystema.Library;
 import smartcontroller.Genre;
 import smartcontroller.SmartController;
 import tools.ActionTool;
@@ -396,7 +396,7 @@ public abstract class Media {
 	    else if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1))
 		hasBeenDeleted = removeItem(permanent, c);
 
-	    if (hasBeenDeleted) {
+	    if (hasBeenDeleted && deleteStatement != null) {
 		// Delete from database
 		try {
 		    deleteStatement.setString(1, getFilePath());
@@ -438,11 +438,11 @@ public abstract class Media {
 
     /**
      * Rename the Media File.
-     *
+     * 
      * @param controller
      *            the controller
      * @param node
-     *            The node based on which the Rename Window will be position
+     *            The node based on which the Rename Window will be position [[SuppressWarningsSpartan]]
      */
     public void rename(SmartController controller, Node node) {
 
@@ -454,7 +454,7 @@ public abstract class Media {
 
 	    // Open Window
 	    String extension = "." + InfoTool.getFileExtension(getFilePath());
-	    Main.renameWindow.show(getTitle(), node,"Media Renaming");
+	    Main.renameWindow.show(getTitle(), node, "Media Renaming");
 
 	    // Bind
 	    title.bind(Main.renameWindow.inputField.textProperty());
@@ -462,6 +462,9 @@ public abstract class Media {
 
 	    // When the Rename Window is closed do the rename
 	    Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
+		/**
+		 * [[SuppressWarningsSpartan]]
+		 */
 		@Override
 		public void invalidated(Observable observable) {
 
@@ -480,66 +483,89 @@ public abstract class Media {
 			// !XPressed && // Old name != New name
 			if (Main.renameWindow.wasAccepted() && !getFilePath().equals(newName)) {
 
-			    try (PreparedStatement preparedRename = Main.dbManager.connection1
-				    .prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?");
-				    PreparedStatement elementsMatchingThisWord = Main.dbManager.connection1
-					    .prepareStatement("SELECT COUNT(*) FROM '" + controller.getDataBaseTableName() + "' WHERE PATH=?");) {
+			    //			    try (PreparedStatement elementsMatchingThisWord = Main.dbManager.connection1
+			    //				    .prepareStatement("SELECT COUNT(*) FROM '" + controller.getDataBaseTableName() + "' WHERE PATH=?");) {
+			    //
+			    //				// No duplicates allowed
+			    //				boolean canPass = true;
+			    //
+			    //				elementsMatchingThisWord.setString(1, newName);
+			    //				ResultSet set = elementsMatchingThisWord.executeQuery(); //needs to be fixed
+			    //				int total = set.getInt(1);
+			    //				if (total > 0)
+			    //				    canPass = false;
+			    //				set.close();
+			    //				// System.out.println("Total is->:" + total)
+			    //
+			    //			    } catch (SQLException ex) {
+			    //				Main.logger.log(Level.WARNING, "", ex);
+			    //				setFilePath(filePath.get());
+			    //				ActionTool.showNotification("Error Message", "Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
+			    //					NotificationType.ERROR);
+			    //			    }
 
-				// No duplicates allowed
-				boolean canPass = true;
-
-				elementsMatchingThisWord.setString(1, newName);
-				ResultSet set = elementsMatchingThisWord.executeQuery(); //needs to be fixed
-				int total = set.getInt(1);
-				if (total > 0)
-				    canPass = false;
-				set.close();
-				// System.out.println("Total is->:" + total)
-
+			    try {
 				// if can pass
-				if (canPass) {
+				//if (canPass) {
 
-				    // Check if that file already exists
-				    if (new File(newName).exists()) {
-					setFilePath(filePath.get());
-					ActionTool.showNotification("Rename Failed",
-						"The action can not been completed:\nA file with that name already exists.", Duration.millis(1500),
-						NotificationType.WARNING);
-					controller.renameWorking = false;
-					return;
-				    }
-
-				    // Check if it can be renamed
-				    if (!new File(getFilePath()).renameTo(new File(newName))) {
-					setFilePath(filePath.get());
-					ActionTool.showNotification("Rename Failed",
-						"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
-						Duration.millis(1500), NotificationType.WARNING);
-					controller.renameWorking = false;
-					return;
-				    }
-
-				    // database update
-				    preparedRename.setString(1, newName);
-				    preparedRename.setString(2, getFilePath());
-				    preparedRename.executeUpdate();
-				    Main.dbManager.commit();
-
-				    // Rename it in playedSong if...
-				    Main.playedSongs.renameMedia(getFilePath(), newName);
-
-				    // change the file path
-				    setFilePath(newName);
-
-				} else { // canPass==false
+				// Check if that file already exists
+				if (new File(newName).exists()) {
 				    setFilePath(filePath.get());
-				    ActionTool.showNotification("Dublicate Name",
-					    "The action can not been completed because :\nA file with that name already exists.",
-					    Duration.millis(1500), NotificationType.INFORMATION);
+				    ActionTool.showNotification("Rename Failed",
+					    "The action can not been completed:\nA file with that name already exists.", Duration.millis(1500),
+					    NotificationType.WARNING);
+				    controller.renameWorking = false;
+				    return;
 				}
 
+				// Check if it can be renamed
+				if (!new File(getFilePath()).renameTo(new File(newName))) {
+				    setFilePath(filePath.get());
+				    ActionTool.showNotification("Rename Failed",
+					    "The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
+					    Duration.millis(1500), NotificationType.WARNING);
+				    controller.renameWorking = false;
+				    return;
+				}
+
+				//Inform all the Playlists including this one
+				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController)
+					.forEach(controller1 -> {
+
+					    //if (controller1 != controller) // we already renamed on this controller
+					    try (PreparedStatement dataRename = Main.dbManager.connection1.prepareStatement(
+						    "UPDATE '" + controller1.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
+
+						// Prepare Statement
+						dataRename.setString(1, newName);
+						dataRename.setString(2, getFilePath());
+						int i = dataRename.executeUpdate();
+
+						if (i > 0) //Check 
+						    controller1.loadService.startService(false, false, true);
+
+					    } catch (SQLException ex) {
+						Main.logger.log(Level.WARNING, "", ex);
+					    }
+					});
+
+				Main.dbManager.commit();
+
+				// Rename it in playedSong if...
+				Main.playedSongs.renameMedia(getFilePath(), newName);
+
+				// change the file path
+				setFilePath(newName);
+
+				//				} else { // canPass==false
+				//				    setFilePath(filePath.get());
+				//				    ActionTool.showNotification("Dublicate Name",
+				//					    "The action can not been completed because :\nA file with that name already exists.",
+				//					    Duration.millis(1500), NotificationType.INFORMATION);
+				//				}
+
 				// Exception occurred
-			    } catch (SQLException ex) {
+			    } catch (Exception ex) {
 				Main.logger.log(Level.WARNING, "", ex);
 				setFilePath(filePath.get());
 				ActionTool.showNotification("Error Message", "Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
@@ -577,8 +603,11 @@ public abstract class Media {
 
 	// Listener
 	Main.starWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
+	    /**
+	     * [[SuppressWarningsSpartan]]
+	     */
 	    @Override
-	    public void invalidated(Observable observable) {
+	    public void invalidated(Observable o) {
 
 		// Remove the listener
 		Main.starWindow.getWindow().showingProperty().removeListener(this);
@@ -591,19 +620,32 @@ public abstract class Media {
 
 		    // Accepted?
 		    if (Main.starWindow.wasAccepted()) {
-			try (PreparedStatement preparedUStars = Main.dbManager.connection1
-				.prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
 
-			    preparedUStars.setDouble(1, getStars());
-			    preparedUStars.setString(2, getFilePath());
-			    preparedUStars.executeUpdate();
-			    Main.dbManager.commit();
+			//Inform all the Playlists including this one
+			Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController)
+				.forEach(controller1 -> {
 
-			} catch (Exception ex) {
-			    Main.logger.log(Level.WARNING, "", ex);
-			    ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500),
-				    NotificationType.ERROR);
-			}
+				    //Do it bro!
+				    try (PreparedStatement preparedUStars = Main.dbManager.connection1
+					    .prepareStatement("UPDATE '" + controller1.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
+
+					// Prepare Statement
+					preparedUStars.setDouble(1, getStars());
+					preparedUStars.setString(2, getFilePath());
+					int i = preparedUStars.executeUpdate();
+
+					if (i > 0) //Check 
+					    controller1.loadService.startService(false, false, true);
+
+				    } catch (Exception ex) {
+					Main.logger.log(Level.WARNING, "", ex);
+					//					ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(),
+					//						Duration.millis(1500), NotificationType.ERROR);
+				    }
+				});
+
+			//Commit
+			Main.dbManager.commit();
 		    } else
 			stars.set(previousStars);
 		}

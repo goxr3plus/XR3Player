@@ -27,16 +27,6 @@ import tools.NotificationType;
  * The Class FileFilterThread.
  */
 public class FilesFilterService {
-
-    /** The thread. */
-    //Thread thread = new Thread();
-
-    /** The controller. */
-    SmartController controller;
-
-    /** The controller is free. */
-    boolean controllerIsFree;
-
     /**
      * It is true when the Thread is running.
      */
@@ -50,29 +40,10 @@ public class FilesFilterService {
     private ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("Files Filter Service"));
 
     /**
-     * The Enum FilterMode.
-     *
-     * @author GOXR3PLUS
-     */
-    public enum FilterMode {
-
-	/** The multiplelibs. */
-	MULTIPLELIBS,
-	/** The xplayer0. */
-	XPLAYER0,
-	/** The xplayer1. */
-	XPLAYER1,
-	/** The xplayer2. */
-	XPLAYER2;
-    }
-
-    /**
      * Start the Thread.
      *
-     * @param filterMode
-     *            the filter mode
      */
-    public void start(FilterMode filterMode) {
+    public void start() {
 	Runnable runnable = () -> {
 	    try {
 		Platform.runLater(() -> threadStopped.set(false));
@@ -82,10 +53,7 @@ public class FilesFilterService {
 		while (threadIsRunning) {
 
 		    // Find the correct controller
-		    getCorrectController(filterMode);
-
-		    // Check all the elements of the Controller
-		    checkElements();
+		    startFilteringControllers();
 
 		    // Sleep some milliseconds
 		    Thread.sleep(1000);
@@ -111,36 +79,17 @@ public class FilesFilterService {
     }
 
     /**
-     * Calling this method will make the Thread stop after a while
+     * Starts filtering all the needed application SmartControllers
      */
-    //    public void stop() {
-    //	threadIsRunning = false;
-    //    }
+    private void startFilteringControllers() {
 
-    /**
-     * Get the correct SmartController based on the FilterMode.
-     *
-     * @param filterMode
-     *            the filter mode
-     */
-    private void getCorrectController(FilterMode filterMode) {
-	switch (filterMode) {
-	case MULTIPLELIBS:
-	    controller = (libraryMode.multipleLibs.getSelectedLibrary() != null) ? libraryMode.multipleLibs.getSelectedLibrary().getSmartController()
-		    : null;
-	    break;
-	//			case XPLAYER0:
-	//				controller = Main.xPlayersList.getXPlayerController(0).xPlayList.controller;
-	//				break;
-	//			case XPLAYER1:
-	//				controller = Main.xPlayersList.getXPlayerController(1).xPlayList.controller;
-	//				break;
-	//			case XPLAYER2:
-	//				controller = Main.xPlayersList.getXPlayerController(2).xPlayList.controller;
-	//				break;
-	default:
-	    controller = null;
-	}
+	//First filter the selected Opened Library Controller
+	filterController(
+		libraryMode.multipleLibs.getSelectedLibrary() == null ? null : libraryMode.multipleLibs.getSelectedLibrary().getSmartController());
+
+	//The filter the SearchWindow Controller
+	filterController(Main.searchWindow.getSmartController());
+
     }
 
     /**
@@ -149,23 +98,29 @@ public class FilesFilterService {
      * @throws InterruptedException
      *             the interrupted exception [[SuppressWarningsSpartan]]
      */
-    private void checkElements() throws InterruptedException {
+    private void filterController(SmartController controller) {
 
 	// Don't enter if controller is null
 	if (controller == null)
 	    return;
 
+	boolean[] controllerIsFree = { false };
+
 	// Synchronize with javaFX thread
 	CountDownLatch latch = new CountDownLatch(1);
 	Platform.runLater(() -> {
-	    controllerIsFree = (controller != null) && controller.isFree(false);
+	    controllerIsFree[0] = controller.isFree(false);
 	    latch.countDown();
 	});
-	latch.await();
+	try {
+	    latch.await();
+	} catch (InterruptedException ex) {
+	    ex.printStackTrace();
+	}
 
 	//System.out.println("Checking elements.....")
 	// controller is free && threadIsRunning?
-	if (controllerIsFree && threadIsRunning)
+	if (controllerIsFree[0] && threadIsRunning)
 	    controller.getItemsObservableList().stream().forEach(media -> {
 		if (!threadIsRunning)
 		    return;

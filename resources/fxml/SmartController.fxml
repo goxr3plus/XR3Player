@@ -33,6 +33,18 @@
                      <content>
                         <HBox fx:id="searchBarHBox" alignment="CENTER" spacing="10.0" style="-fx-background-color: rgb(0,0,0,0.9);">
                            <children>
+                              <JFXButton fx:id="refreshButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="144.0" layoutY="19.0" styleClass="arrowButton2" text="Refresh">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/Synchronize-24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Refresh" />
+                                 </tooltip>
+                              </JFXButton>
                               <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="arrowButton2" text="Settings">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
@@ -92,7 +104,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <MenuButton contentDisplay="TEXT_ONLY" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="29.0" prefWidth="81.0" text="Actions">
+                              <MenuButton fx:id="actionsMenuButton" contentDisplay="TEXT_ONLY" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="29.0" prefWidth="81.0" text="Actions">
                                  <items>
                                     <Menu mnemonicParsing="false" text="Files">
                                       <items>
@@ -155,8 +167,8 @@
             <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <Region fx:id="region" style="-fx-background-color: rgb(40,40,40,0.95);" />
-      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0">
+      <Region fx:id="region" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false" />
+      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" visible="false">
          <children>
             <ProgressIndicator fx:id="indicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="617.0" progress="0.0" />
             <Button fx:id="cancel" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-background-radius: 20; -fx-font-size: 18; -fx-font-weight: bold;" text="Cancel">
@@ -169,7 +181,7 @@
             </Button>
             <TitledPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="487.0" text="More Info">
                <content>
-                  <TextArea fx:id="informationTextArea" text="hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;hello&#10;" />
+                  <TextArea fx:id="informationTextArea" text="Normally this text should not appear ...." wrapText="true" />
                </content>
             </TitledPane>
          </children>

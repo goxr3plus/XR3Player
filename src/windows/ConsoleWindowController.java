@@ -58,9 +58,7 @@ public class ConsoleWindowController extends StackPane {
     /** The logger. */
     private Logger logger = Logger.getLogger(getClass().getName());
 
-    /**
-     * The Console Window
-     */
+    /** The Window */
     private Stage window = new Stage();
 
     /**

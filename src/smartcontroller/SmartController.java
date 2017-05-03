@@ -41,6 +41,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
@@ -51,7 +52,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -62,7 +62,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -81,60 +80,51 @@ import tools.NotificationType;
  */
 public class SmartController extends StackPane {
 
-    /** The main border. */
     @FXML
     private BorderPane mainBorder;
 
-    /** The titled pane. */
     @FXML
     private TitledPane titledPane;
 
-    /** The top grid. */
     @FXML
-    private GridPane topGrid;
+    private HBox searchBarHBox;
 
-    /** The page field. */
     @FXML
-    private TextField pageField;
+    private JFXButton refreshButton;
 
     @FXML
     private JFXButton showSettings;
 
-    /** The yolo. */
-    @FXML
-    private ToggleGroup yolo;
-
-    /** The import files. */
-    @FXML
-    private MenuItem importFiles;
-
-    /** The export files. */
-    @FXML
-    private MenuItem exportFiles;
-
-    /** The clear all. */
-    @FXML
-    private MenuItem clearAll;
-
-    /** The center stack pane. */
-    @FXML
-    private StackPane centerStackPane;
-
     @FXML
     private HBox navigationHBox;
 
-    /** The previous. */
     @FXML
     private Button previous;
 
-    /** The next. */
     @FXML
-    private Button next;
+    private TextField pageField;
 
     @FXML
     private Button goToPage;
 
-    /** The region. */
+    @FXML
+    private Button next;
+
+    @FXML
+    private MenuButton actionsMenuButton;
+
+    @FXML
+    private MenuItem importFiles;
+
+    @FXML
+    private MenuItem exportFiles;
+
+    @FXML
+    private MenuItem clearAll;
+
+    @FXML
+    private StackPane centerStackPane;
+
     @FXML
     private Region region;
 
@@ -144,17 +134,14 @@ public class SmartController extends StackPane {
     @FXML
     private ProgressIndicator indicator;
 
-    /** The cancel. */
     @FXML
     private Button cancel;
-
-    @FXML
-    private HBox searchBarHBox;
 
     @FXML
     private TextArea informationTextArea;
 
     // ----------------------------------------------------------
+
     private final Genre genre;
 
     /**
@@ -216,9 +203,14 @@ public class SmartController extends StackPane {
     // --------------------------------------------------
 
     /**
-     * The Vertical ScrollBar position of SmartController TableViewer before the some kind of MediaDelete Happens
+     * The Vertical ScrollBar position of SmartController TableViewer without the search activated
      */
-    public double scrollValueBeforeDeleteAction = -1;
+    private double verticalScrollValueWithoutSearch = -1;
+
+    /**
+     * The Vertical ScrollBar position of SmartController TableViewer when the the search activated
+     */
+    private double verticalScrollValueWithSearch = -1;
 
     /**
      * Instantiates a new smart controller.
@@ -295,7 +287,7 @@ public class SmartController extends StackPane {
 
 		if (code == KeyCode.P)
 		    ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
-		else if (code == KeyCode.DELETE)
+		else if (code == KeyCode.DELETE && SmartController.this.genre != Genre.SEARCHWINDOW)
 		    prepareDelete(key.isShiftDown());
 
 	    }
@@ -346,7 +338,7 @@ public class SmartController extends StackPane {
 	cancel.setDisable(true);
 
 	// ------ searchBarHBox
-	searchBarHBox.getChildren().add(0, searchService);
+	searchBarHBox.getChildren().add(1, searchService);
 
 	//------navigationHBox
 	//navigationHBox.disableProperty().bind(this.totalInDataBase.isEqualTo(0))
@@ -462,8 +454,19 @@ public class SmartController extends StackPane {
 		clearDataBaseTable();
 	});
 
+	// -- refreshButton
+	refreshButton.setOnAction(e -> loadService.startService(false, true));
+
 	// Update
 	updateLabel();
+
+	//---------------------Check the genre--------------------
+	if (genre == Genre.SEARCHWINDOW) {
+	    navigationHBox.setVisible(false);
+	    actionsMenuButton.setVisible(false);
+	    navigationHBox.setManaged(false);
+	    actionsMenuButton.setManaged(false);
+	}
 
     }
 
@@ -518,10 +521,6 @@ public class SmartController extends StackPane {
     public void prepareDelete(boolean permanent) {
 	int previousTotal = getTotalInDataBase();
 
-	//RememberScrollBar Position
-	ScrollBar verticalBar = (ScrollBar) tableViewer.lookup(".scroll-bar:vertical");
-	scrollValueBeforeDeleteAction = verticalBar.getValue();
-
 	// Remove selected items
 	removeSelected(permanent);
 
@@ -530,7 +529,7 @@ public class SmartController extends StackPane {
 	    //	    if (genre == Genre.LIBRARYMEDIA)
 	    //		Main.libraryMode.multipleLibs.getSelectedLibrary().updateSettingsTotalLabel();
 
-	    loadService.startService(true, true);
+	    loadService.startService(true, true, true);
 	}
     }
 
@@ -549,22 +548,27 @@ public class SmartController extends StackPane {
 		: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()), tableViewer.getSelectedCount())) {
 
 	    // Remove selected items
-	    try (PreparedStatement preparedDelete = Main.dbManager.connection1
-		    .prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
-
+	    if (genre == Genre.SEARCHWINDOW)
 		//Call the delete for each selected item
-		tableViewer.getSelectionModel().getSelectedItems().iterator()
-			.forEachRemaining(r -> r.delete(permanent, false, false, this, preparedDelete));
+		tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent, false, false, this, null));
+	    else
+		try (PreparedStatement preparedDelete = Main.dbManager.connection1
+			.prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
 
-		// Library?
-		//		if (genre == Genre.LIBRARYMEDIA)
-		//		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
+		    //Call the delete for each selected item
+		    tableViewer.getSelectionModel().getSelectedItems().iterator()
+			    .forEachRemaining(r -> r.delete(permanent, false, false, this, preparedDelete));
 
-	    } catch (Exception ex) {
-		Main.logger.log(Level.WARNING, "", ex);
-	    }
+		    // Library?
+		    //		if (genre == Genre.LIBRARYMEDIA)
+		    //		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
+
+		} catch (Exception ex) {
+		    Main.logger.log(Level.WARNING, "", ex);
+		}
 
 	}
+
     }
 
     /**
@@ -609,13 +613,14 @@ public class SmartController extends StackPane {
      * Updates the label of the smart controller. [[SuppressWarningsSpartan]]
      */
     public void updateLabel() {
-	if (searchService.isActive())
-	    titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] from [ Total:<" + totalInDataBase.get() + ">] Selected:"
-		    + tableViewer.getSelectedCount());
+	if (searchService.isActive() || genre == Genre.SEARCHWINDOW)
+	    titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] from [ Total:<"
+		    + InfoTool.getNumberWithDots(totalInDataBase.get()) + ">] Selected:" + tableViewer.getSelectedCount());
 	else
-	    titledPane.setText("[Total:<" + totalInDataBase.get() + "> CurrentPage:<" + currentPage.get() + "> MaxPage:<" + maximumList()
-		    + ">] [ Selected:" + tableViewer.getSelectedCount() + "  Showing:" + maximumPerPage * currentPage.get() + "-"
-		    + (maximumPerPage * currentPage.get() + itemsObservableList.size() + " ]"));
+	    titledPane.setText("[Total:<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> CurrentPage:<"
+		    + InfoTool.getNumberWithDots(currentPage.get()) + "> MaxPage:<" + InfoTool.getNumberWithDots(maximumList()) + ">] [ Selected:"
+		    + tableViewer.getSelectedCount() + "  Showing:" + InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + "-"
+		    + InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size()) + " ]");
 
 	pageField.setText(Integer.toString(currentPage.get()));
     }
@@ -745,7 +750,8 @@ public class SmartController extends StackPane {
      * Goes on the Previous List.
      */
     public void goPrevious() {
-	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() > 0) {
+	if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0
+		&& currentPage.get() > 0) {
 	    currentPage.set(currentPage.get() - 1);
 	    loadService.startService(false, true);
 	}
@@ -755,7 +761,8 @@ public class SmartController extends StackPane {
      * Goes on the Next List.
      */
     public void goNext() {
-	if (isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() < maximumList()) {
+	if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0
+		&& currentPage.get() < maximumList()) {
 	    currentPage.set(currentPage.get() + 1);
 	    loadService.startService(false, true);
 	}
@@ -812,7 +819,7 @@ public class SmartController extends StackPane {
 
     @Override
     public String toString() {
-	return "PlayList" + ": <" + controllerName + ">";
+	return "PlayList: <" + controllerName + ">";
     }
 
     /**
@@ -830,10 +837,7 @@ public class SmartController extends StackPane {
      * @return the int
      */
     public int maximumList() {
-	if (totalInDataBase.get() == 0)
-	    return 0;
-	else
-	    return (totalInDataBase.get() / maximumPerPage) + ((totalInDataBase.get() % maximumPerPage == 0) ? -1 : 0);
+	return totalInDataBase.get() == 0 ? 0 : (totalInDataBase.get() / maximumPerPage) + ((totalInDataBase.get() % maximumPerPage == 0) ? -1 : 0);
     }
 
     /**
@@ -884,7 +888,7 @@ public class SmartController extends StackPane {
     public IntegerProperty totalInDataBaseProperty() {
 	return totalInDataBase;
     }
-    
+
     /**
      * @return the currentPage
      */
@@ -893,7 +897,8 @@ public class SmartController extends StackPane {
     }
 
     /**
-     * @param currentPage the currentPage to set
+     * @param currentPage
+     *            the currentPage to set
      */
     public void setCurrentPage(IntegerProperty currentPage) {
 	this.currentPage = currentPage;
@@ -932,6 +937,21 @@ public class SmartController extends StackPane {
      */
     public ObservableList<Media> getItemsObservableList() {
 	return itemsObservableList;
+    }
+
+    /**
+     * @return the informationTextArea
+     */
+    public TextArea getInformationTextArea() {
+	return informationTextArea;
+    }
+
+    /**
+     * @param informationTextArea
+     *            the informationTextArea to set
+     */
+    public void setInformationTextArea(TextArea informationTextArea) {
+	this.informationTextArea = informationTextArea;
     }
 
     /**
@@ -980,6 +1000,36 @@ public class SmartController extends StackPane {
      * 
      * -----------------------------------------------------------------------
      */
+
+    /**
+     * @return the verticalScrollValueWithoutSearch
+     */
+    public double getVerticalScrollValueWithoutSearch() {
+	return verticalScrollValueWithoutSearch;
+    }
+
+    /**
+     * @param verticalScrollValueWithoutSearch
+     *            the verticalScrollValueWithoutSearch to set
+     */
+    public void setVerticalScrollValueWithoutSearch(double verticalScrollValueWithoutSearch) {
+	this.verticalScrollValueWithoutSearch = verticalScrollValueWithoutSearch;
+    }
+
+    /**
+     * @return the verticalScrollValueWithSearch
+     */
+    public double getVerticalScrollValueWithSearch() {
+	return verticalScrollValueWithSearch;
+    }
+
+    /**
+     * @param verticalScrollValueWithSearch
+     *            the verticalScrollValueWithSearch to set
+     */
+    public void setVerticalScrollValueWithSearch(double verticalScrollValueWithSearch) {
+	this.verticalScrollValueWithSearch = verticalScrollValueWithSearch;
+    }
 
     /**
      * Representing the data of SmartController.
@@ -1131,7 +1181,11 @@ public class SmartController extends StackPane {
 
 	    //------------------------------TableViewer---------------------------
 	    setItems(getItemsObservableList());
-	    setPlaceholder(new Label("Drag && Drop or Import Media"));
+	    //Collect the correct
+	    if (SmartController.this.genre == Genre.LIBRARYMEDIA)
+		setPlaceholder(new Label("Drag && Drop or Import/Paste Media..."));
+	    else if (SmartController.this.genre == Genre.SEARCHWINDOW)
+		setPlaceholder(new Label("Search Media from all the playlists..."));
 
 	    //--Selection Model
 	    getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -1157,7 +1211,9 @@ public class SmartController extends StackPane {
 			    "Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 			    Duration.seconds(3.5), NotificationType.INFORMATION);
 
-		} else if ((key.isControlDown() || key.getCode() == KeyCode.COMMAND) && key.getCode() == KeyCode.V) {
+		} else if (SmartController.this.genre == Genre.LIBRARYMEDIA
+			&& ((key.isControlDown() || key.getCode() == KeyCode.COMMAND) && key.getCode() == KeyCode.V)) {
+
 		    System.out.println("Control+V was released");
 
 		    //Get Native System ClipBoard
@@ -1258,37 +1314,41 @@ public class SmartController extends StackPane {
 		event.consume();
 	    });
 
-	    // --Drag Over
-	    setOnDragOver(dragOver -> {
-		// System.out.println(over.getGestureSource() + "," +
-		// controller.tableViewer)
+	    if (SmartController.this.genre == Genre.LIBRARYMEDIA) {
 
-		// // Check if the drag come from the same source
-		// String gestureSourceString
-		// if (over.getGestureSource() != null)
-		// gestureSourceString = over.getGestureSource()
-		// .toString()
-		// else
-		// gestureSourceString = "null"
+		// --Drag Over
+		setOnDragOver(dragOver -> {
+		    // System.out.println(over.getGestureSource() + "," +
+		    // controller.tableViewer)
 
-		// The drag must come from source other than the owner
-		if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != getTableViewer()) {
-		    dragOver.acceptTransferModes(TransferMode.LINK);
-		}
-	    });
+		    // // Check if the drag come from the same source
+		    // String gestureSourceString
+		    // if (over.getGestureSource() != null)
+		    // gestureSourceString = over.getGestureSource()
+		    // .toString()
+		    // else
+		    // gestureSourceString = "null"
 
-	    //Drag Entered and Exited
-	    //setOnDragEntered(d -> navigationHBox.setVisible(false))
-	    //setOnDragExited(d -> navigationHBox.setVisible(true))
+		    // The drag must come from source other than the owner
+		    if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != getTableViewer()) {
+			dragOver.acceptTransferModes(TransferMode.LINK);
+		    }
+		});
 
-	    // --Drag Dropped
-	    setOnDragDropped(drop -> {
-		// Has Files? + isFree()?
-		if (drop.getDragboard().hasFiles() && isFree(true))
-		    inputService.start(drop.getDragboard().getFiles());
+		//Drag Entered and Exited
+		//setOnDragEntered(d -> navigationHBox.setVisible(false))
+		//setOnDragExited(d -> navigationHBox.setVisible(true))
 
-		drop.setDropCompleted(true);
-	    });
+		// --Drag Dropped
+		setOnDragDropped(drop -> {
+		    // Has Files? + isFree()?
+		    if (drop.getDragboard().hasFiles() && isFree(true))
+			inputService.start(drop.getDragboard().getFiles());
+
+		    drop.setDropCompleted(true);
+		});
+
+	    }
 
 	    // setOnDragDone(d -> {
 	    // System.out.println(
@@ -1365,6 +1425,13 @@ public class SmartController extends StackPane {
     }
 
     /**
+     * @return The Vertical ScrollBar of TableViewer
+     */
+    public ScrollBar getVerticalScrollBar() {
+	return (ScrollBar) getTableViewer().lookup(".scroll-bar:vertical");
+    }
+
+    /**
      * -----------------------------------------------------------------------
      * 
      * 
@@ -1423,8 +1490,8 @@ public class SmartController extends StackPane {
 	    // Start
 	    try {
 
-		// Search
-		if (searchService.isActive())
+		// Search + Trick for genre.SearchWindow
+		if (searchService.isActive() || genre == Genre.SEARCHWINDOW)
 		    searchService.service.search();
 		// Reload
 		else {
@@ -1432,7 +1499,7 @@ public class SmartController extends StackPane {
 		    region.visibleProperty().bind(runningProperty());
 		    indicator.progressProperty().bind(progressProperty());
 		    cancel.setText("Updating...");
-		    informationTextArea.setText("\n Updating the playlist....");
+		    getInformationTextArea().setText("\n Updating the playlist....");
 		    getItemsObservableList().clear();
 		    super.reset();
 		    super.start();
@@ -1444,10 +1511,34 @@ public class SmartController extends StackPane {
 	}
 
 	/**
+	 * Stars the reload Service.
+	 *
+	 * @param commit1
+	 *            the commit
+	 * @param requestFocus1
+	 *            the request focus
+	 * @param rememberScrollPosition
+	 *            Remembers the scroll position of the playlist
+	 */
+	public void startService(boolean commit1, boolean requestFocus1, boolean rememberScrollPosition) {
+
+	    //Remember the scroll position
+	    if (rememberScrollPosition) {
+		// Search is activated?
+		if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
+		    // setVerticalScrollValueWithSearch(getVerticalScrollBar().getValue());
+		} else
+		    setVerticalScrollValueWithoutSearch(getVerticalScrollBar().getValue());
+	    }
+
+	    startService(commit1, requestFocus1);
+	}
+
+	/**
 	 * Done.
 	 */
 	// Work done
-	private void done() {
+	public void done() {
 	    commit = false;
 	    updateList();
 	    unbind();
@@ -1455,33 +1546,15 @@ public class SmartController extends StackPane {
 	    if (requestFocus)
 		centerStackPane.requestFocus();
 
-	    // Library?
-	    //	    if (genre == Genre.LIBRARYMEDIA)
-	    //		Main.libraryMode.updateLibraryTotalLabel(controllerName);
-
-	    // System.out.println("Is this JavaFX Thread: " +
-	    // Platform.isFxApplicationThread())
-
-	    // Reset the default vertical scroll position before the search
-	    // happened
-	    if (searchService.getVerticalScrollBarPosition() != -1.00) {
-		ScrollBar verticalBar = (ScrollBar) getTableViewer().lookup(".scroll-bar:vertical");
-		if (verticalBar != null)
-		    verticalBar.setValue(searchService.getVerticalScrollBarPosition());
-
-		// Reset to -1
-		searchService.setVerticalScrollBarPosition(-1.00);
+	    //Fix the vertical scroll bar position
+	    if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
+		getVerticalScrollBar().setValue(getVerticalScrollValueWithSearch());
+		setVerticalScrollValueWithSearch(0.0);
+	    } else {
+		getVerticalScrollBar().setValue(getVerticalScrollValueWithoutSearch());
+		setVerticalScrollValueWithoutSearch(0.0);
 	    }
-
-	    // Reset the default vertical scroll position after a delete action happens
-	    if (scrollValueBeforeDeleteAction != -1.00) {
-		ScrollBar verticalBar = (ScrollBar) getTableViewer().lookup(".scroll-bar:vertical");
-		if (verticalBar != null)
-		    verticalBar.setValue(scrollValueBeforeDeleteAction);
-
-		// Reset to -1
-		scrollValueBeforeDeleteAction = -1;
-	    }
+	    
 	}
 
 	@Override
@@ -1503,35 +1576,16 @@ public class SmartController extends StackPane {
 			getCurrentPage().set(getCurrentPage().get() - 1);
 
 		    // Select the available Media Files
-		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement()
-			    .executeQuery("SELECT* FROM '" + dataBaseTableName + "' LIMIT " + getMaximumPerPage() + " OFFSET "
-				    + getCurrentPage().get() * getMaximumPerPage());
-			    ResultSet dbCounter = Main.dbManager.connection1.createStatement().executeQuery("SELECT* FROM '" + dataBaseTableName
-				    + "' LIMIT " + getMaximumPerPage() + " OFFSET " + getCurrentPage().get() * getMaximumPerPage());) {
+		    String query = "SELECT* FROM '" + dataBaseTableName + "' LIMIT " + getMaximumPerPage() + " OFFSET "
+			    + getCurrentPage().get() * getMaximumPerPage();
+		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query);
+			    ResultSet dbCounter = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 
 			// Count how many items the result returned...
 			int currentMaximumPerList = 0;
 			while (dbCounter.next())
 			    ++currentMaximumPerList;
-			// System.out.println("Next:"+dbCounter.getString("PATH"))
 
-			// System.out.println("CurrentMaximumPerList=:"
-			// +currentMaximumPerList)
-
-			//			if (genre == Genre.RADIOSTATION) {
-			//
-			//			    // SongButton station = null;
-			//			    // while (set.next()) {
-			//			    // station = new RadioStation(set.getString("NAME"),
-			//			    // new URL(set.getString("STREAMURL")),
-			//			    // set.getString("TAGS"), set.getDouble("STARS"));
-			//			    // bigList.add(station); // Update Progress
-			//			    // updateProgress(++counter, maximumPerList);
-			//			    // }
-			//
-			//			} else {
-			//			    
-			//Genre == Genre.LIBRARY
 			// Fetch the items from the database
 			List<Media> array = new ArrayList<>();
 			for (Audio song = null; resultSet.next();) {
@@ -1650,8 +1704,8 @@ public class SmartController extends StackPane {
 	/**
 	 * Common operations on (move and copy) processes
 	 */
-	private void commonOperations(Operation operation) {
-	    this.operation = operation;
+	private void commonOperations(Operation operation1) {
+	    this.operation = operation1;
 
 	    // The choosen directories
 	    destinationFolder = directories.get(0);
@@ -1666,6 +1720,7 @@ public class SmartController extends StackPane {
 		super.cancel();
 		cancel.setDisable(true);
 	    });
+	    getInformationTextArea().setText("\n Exporting Media from PlayList....");
 
 	    // start
 	    this.reset();
@@ -1698,16 +1753,12 @@ public class SmartController extends StackPane {
 			    // Stream
 			    Stream<Media> stream = getItemsObservableList().stream();
 			    stream.forEach(media -> {
-				if (!isCancelled()) {
-				    // if (button.isMarked()) {
-
-				    passItem(media);
-
-				    // updateProgress
-				    updateProgress(++count, total);
-				    // }
-				} else
+				if (isCancelled())
 				    stream.close();
+				else {
+				    passItem(media);
+				    updateProgress(++count, total);
+				}
 			    });
 
 			    // User has pressed right click or a shortcut so one
@@ -1738,10 +1789,18 @@ public class SmartController extends StackPane {
 		    if (!new File(filePath).exists())
 			return;
 
-		    if (operation == Operation.COPY)
-			ActionTool.copy(filePath, destinationFolder + File.separator + media.getFileName());
-		    else
-			ActionTool.move(filePath, destinationFolder + File.separator + media.getFileName());
+		    //Useful
+		    String source = filePath;
+		    String destination = destinationFolder + File.separator + media.getFileName();
+
+		    //Go
+		    if (operation == Operation.COPY) {
+			Platform.runLater(() -> getInformationTextArea().appendText("\n Copying ->" + media.getFileName()));
+			ActionTool.copy(source, destination);
+		    } else {
+			Platform.runLater(() -> getInformationTextArea().appendText("\n Moving ->" + media.getFileName()));
+			ActionTool.move(source, destination);
+		    }
 		}
 	    };
 	}
@@ -1796,15 +1855,7 @@ public class SmartController extends StackPane {
 	public InputService() {
 
 	    setOnSucceeded(s -> done());
-	    setOnCancelled(c -> {
-		//		// Clear all Batches
-		//		try {
-		//		    preparedInsert.clearBatch();
-		//		} catch (SQLException ex) {
-		//		    Main.logger.log(Level.WARNING, "", ex);
-		//		}
-		done();
-	    });
+	    setOnCancelled(c -> done());
 	    setOnFailed(c -> done());
 	}
 
@@ -1829,7 +1880,7 @@ public class SmartController extends StackPane {
 	    // System.out.println(this.list)
 
 	    //Clear the text of imformation text field
-	    informationTextArea.clear();
+	    getInformationTextArea().clear();
 
 	    // Binds
 	    getRegion().visibleProperty().bind(runningProperty());
@@ -1873,11 +1924,11 @@ public class SmartController extends StackPane {
 		    String date = InfoTool.getCurrentDate(), time = InfoTool.getLocalTime();
 
 		    // Update informationTextArea
-		    Platform.runLater(() -> informationTextArea.appendText("\nCounting files from ....\n"));
+		    Platform.runLater(() -> getInformationTextArea().appendText("\nCounting files from ....\n"));
 
 		    //Initialize the prepared statement
 		    try (PreparedStatement preparedInsert = Main.dbManager.connection1.prepareStatement(
-			    "INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) " + "VALUES (?,?,?,?,?)")) {
+			    "INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?,?)")) {
 
 			// Start the insert work
 			if ("upload from system".equals(job)) {
@@ -1891,7 +1942,7 @@ public class SmartController extends StackPane {
 
 				// Update informationTextArea
 				Platform.runLater(
-					() -> informationTextArea.appendText((!file.isDirectory() ? "File" : "Folder") + ": " + file.getName()));
+					() -> getInformationTextArea().appendText((!file.isDirectory() ? "File" : "Folder") + ": " + file.getName()));
 
 				int previousTotal = totalFiles;
 				// File or Folder exists?
@@ -1900,7 +1951,8 @@ public class SmartController extends StackPane {
 				totalFiles += countFiles(file);
 
 				// Update informationTextArea
-				Platform.runLater(() -> informationTextArea.appendText("\n\t-> Total: [ " + (totalFiles - previousTotal) + " ]\n"));
+				Platform.runLater(
+					() -> getInformationTextArea().appendText("\n\t-> Total: [ " + (totalFiles - previousTotal) + " ]\n"));
 
 			    }
 
@@ -1920,7 +1972,7 @@ public class SmartController extends StackPane {
 			    // Update informationTextArea and cancel button
 			    Platform.runLater(() -> {
 				getCancelButton().setText("Inserting...");
-				informationTextArea.appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
+				getInformationTextArea().appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
 			    });
 
 			    for (File file : list)
@@ -1974,7 +2026,7 @@ public class SmartController extends StackPane {
 		    Platform.runLater(() -> {
 			getCancelButton().setDisable(true);
 			getCancelButton().setText("Saving...");
-			informationTextArea.appendText("Saving...");
+			getInformationTextArea().appendText("Saving...");
 			latch.countDown();
 		    });
 		    try {

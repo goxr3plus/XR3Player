@@ -12,11 +12,13 @@ public enum Genre {
 
     /** The librarysong. */
     LIBRARYMEDIA,
-//    /** The xplaylistsong. */
-//    XPLAYLISTSONG,
-//    /** The radiostation. */
-//    RADIOSTATION,
+
+    SEARCHWINDOW,
+    //    /** The xplaylistsong. */
+    //    XPLAYLISTSONG,
+    //    /** The radiostation. */
+    //    RADIOSTATION,
     /** The unknown. */
-   UNKNOWN;
+    UNKNOWN;
 
 }

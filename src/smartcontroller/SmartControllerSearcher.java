@@ -31,7 +31,6 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -97,7 +96,7 @@ public class SmartControllerSearcher extends HBox {
 		//Save the Settings before the first search
 		if (saveSettingBeforeSearch) {
 		    service.pageBeforeSearch = controller.getCurrentPage().get();
-		    service.scrollValueBeforeSearch = ((ScrollBar) controller.getTableViewer().lookup(".scroll-bar:vertical")).getValue();
+		    controller.setVerticalScrollValueWithoutSearch(controller.getVerticalScrollBar().getValue());
 
 		    saveSettingBeforeSearch = false;
 		}
@@ -135,22 +134,6 @@ public class SmartControllerSearcher extends HBox {
     }
 
     /**
-     * @return The Vertical ScrollBar position of SmartController TableViewer before the search is activated
-     */
-    public double getVerticalScrollBarPosition() {
-	return service.scrollValueBeforeSearch;
-    }
-
-    /**
-     * Set the Vertical Scroll Bar position of SmartController TableViewer before the search activated
-     * 
-     * @param value
-     */
-    public void setVerticalScrollBarPosition(double value) {
-	service.scrollValueBeforeSearch = value;
-    }
-
-    /**
      * The Class SearchService.
      */
     class SearchService extends Service<Void> {
@@ -163,11 +146,6 @@ public class SmartControllerSearcher extends HBox {
 
 	/** The page before search. */
 	int pageBeforeSearch = 0;
-
-	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer before the search is activated
-	 */
-	double scrollValueBeforeSearch = -1;
 
 	/**
 	 * Constructor.
@@ -193,6 +171,7 @@ public class SmartControllerSearcher extends HBox {
 	    controller.getRegion().visibleProperty().bind(runningProperty());
 	    controller.getIndicator().progressProperty().bind(progressProperty());
 	    controller.getCancelButton().setText("Searching...");
+	    controller.getInformationTextArea().setText("\n Searching ....");
 	    controller.getNavigationHBox().setDisable(true);
 
 	    //Clear the list
@@ -208,7 +187,6 @@ public class SmartControllerSearcher extends HBox {
 	private void done() {
 	    controller.updateList();
 	    controller.unbind();
-
 	}
 
 	/**
@@ -232,18 +210,26 @@ public class SmartControllerSearcher extends HBox {
 		    // Counter
 		    counter = 0;
 
+		    // if (word.isEmpty())
+		    //	word = "";
+
 		    // Given Work
 		    System.out.println("Searching for word:[" + word + "]");
-
-		    //Let's create the UNION
-		    ArrayList<String> queryArray = new ArrayList<>();
-		    ObservableList<Library> observableList = Main.libraryMode.teamViewer.getViewer().getItemsObservableList();
 		    String query = "";
 
-		    //--------------THIS IS AN EXPERIMENT-------------------------
-		    if (observableList.isEmpty()) {
-			return null;
-		    } else if (observableList.size() >= 1) {
+		    //--------------SEARCH WINDOW SPECIAL SEARCH----------------------------
+
+		    if (controller.getGenre() == Genre.SEARCHWINDOW) {
+
+			//Let's create the UNION
+			ArrayList<String> queryArray = new ArrayList<>();
+			ObservableList<Library> observableList = Main.libraryMode.teamViewer.getViewer().getItemsObservableList();
+			controller.setTotalInDataBase(observableList.stream().mapToInt(Library::getTotalEntries).sum());
+
+			//Check if any PlayLists exist
+			if (observableList.isEmpty()) {
+			    return null;
+			}
 
 			queryArray.add("SELECT * FROM (");
 
@@ -255,27 +241,35 @@ public class SmartControllerSearcher extends HBox {
 				queryArray.add(" SELECT * FROM '" + lib.getDataBaseTableName() + "' ");
 			});
 
-			//Finish String
-			queryArray.add(" ) WHERE replace(path, rtrim(path, replace(path,'" + File.separator + "','')),'') LIKE '%" + word
-				+ "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
+			//Choose the correct query based on the settings of the user
+			if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
+			    queryArray.add(" ) WHERE PATH LIKE '%" + word + "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
+			else
+			    queryArray.add(" ) WHERE replace(path, rtrim(path, replace(path,'" + File.separator + "','')),'') LIKE '%" + word
+				    + "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
 
 			query = String.join("", queryArray);
-			System.out.println(query);
+			//System.out.println(query)
+
 		    }
 
-		    //--------------END OF EXPERIMENT-------------------------
+		    //--------------NORMAL PLAYLISTS SEARCH----------------------------
 
-		    //Choose the correct query based on the settings of the user
-		    String sQuery;
-		    if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
-			sQuery = "SELECT * FROM '" + controller.getDataBaseTableName() + "' WHERE PATH LIKE '%" + word + "%' LIMIT "
-				+ controller.getMaximumPerPage();
-		    else
-			sQuery = "SELECT * FROM '" + controller.getDataBaseTableName() + "' WHERE replace(path, rtrim(path, replace(path, '"
-				+ File.separator + "', '')), '') LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage();
+		    else {
+			query = "SELECT * FROM '" + controller.getDataBaseTableName() + "' ";
+
+			//Choose the correct query based on the settings of the user
+			if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
+			    query = query + " WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage();
+			else
+			    query = query + " WHERE replace(path, rtrim(path, replace(path, '" + File.separator + "', '')), '') LIKE '%" + word
+				    + "%' LIMIT " + controller.getMaximumPerPage();
+		    }
+
+		    System.out.println(query);
 
 		    //Continue
-		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(sQuery)) {
+		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 			//try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 
 			//Fetch the items from the database

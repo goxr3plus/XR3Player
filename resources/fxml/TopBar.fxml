@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -16,78 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="47.0" prefHeight="47.0" prefWidth="594.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0; -fx-border-color: firebrick transparent transparent transparent; -fx-border-radius: 0; -fx-border-width: 2;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="51.0" minHeight="-Infinity" prefHeight="51.0" prefWidth="988.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0; -fx-border-color: firebrick transparent transparent transparent; -fx-border-radius: 0; -fx-border-width: 2;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
    </padding>
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="~~XR3Player~~" HBox.hgrow="ALWAYS" fx:id="xr3Label">
-               <effect>
-                  <DropShadow />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="MOVE" />
-               </cursor>
-               <graphic>
-                  <JFXTabPane id="specialJFXTabPane" fx:id="jfxTabPane" maxWidth="301.0" minWidth="100.0" prefHeight="34.0" prefWidth="301.0" tabClosingPolicy="ALL_TABS">
-                     <tabs>
-                        <Tab fx:id="mainModeTab" text="Main">
-                           <graphic>
-                              <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Library-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Library Mode" />
-                           </tooltip>
-                        </Tab>
-                        <Tab fx:id="djModeTab" text="DJ">
-                           <graphic>
-                              <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/DJ-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="DJ Mode" />
-                           </tooltip>
-                        </Tab>
-                        <Tab fx:id="userModeTab" text="User">
-                           <graphic>
-                              <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/User%20Location-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Tab>
-                        <Tab fx:id="webModeTab" text="Web">
-                           <graphic>
-                              <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Domain-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Tab>
-                     </tabs>
-                  </JFXTabPane>
-               </graphic>
-            </Label>
-         </children>
-         <BorderPane.margin>
-            <Insets left="5.0" right="5.0" />
-         </BorderPane.margin>
-      </HBox>
-   </center>
    <right>
       <HBox style="-fx-spacing: 0.5;" BorderPane.alignment="CENTER">
          <children>
@@ -179,4 +115,82 @@
          </children>
       </VBox>
    </left>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="~~XR3Player~~" BorderPane.alignment="CENTER" fx:id="xr3Label">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+            </Label>
+         </center>
+         <left>
+            <JFXTabPane id="specialJFXTabPane" fx:id="jfxTabPane" maxWidth="301.0" minWidth="100.0" prefHeight="34.0" prefWidth="301.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab fx:id="mainModeTab" text="Main">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Library-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Library Mode" />
+                     </tooltip>
+                  </Tab>
+                  <Tab fx:id="djModeTab" text="DJ">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/DJ-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="DJ Mode" />
+                     </tooltip>
+                  </Tab>
+                  <Tab fx:id="userModeTab" text="User">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/User%20Location-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="webModeTab" text="Web">
+                     <graphic>
+                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Domain-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+               </tabs>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </JFXTabPane>
+         </left>
+         <right>
+            <JFXTextField fx:id="searchField" editable="false" focusColor="#ff0f53" focusTraversable="false" maxWidth="196.0" minWidth="138.0" prefHeight="31.0" prefWidth="196.0" promptText="search..." style="-fx-text-fill: white;" text="search.." unFocusColor="#ff3535" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <BorderPane.margin>
+                  <Insets left="5.0" />
+               </BorderPane.margin>
+            </JFXTextField>
+         </right>
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </center>
 </fx:root>

@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextField;
 
 import customnodes.SystemMonitor;
 import customnodes.SystemMonitor.Monitor;
@@ -49,6 +50,9 @@ public class TopBar extends BorderPane {
 
     @FXML
     private Tab webModeTab;
+
+    @FXML
+    private JFXTextField searchField;
 
     @FXML
     private Button restartButton;
@@ -143,6 +147,9 @@ public class TopBar extends BorderPane {
      */
     @FXML
     private void initialize() {
+	
+	// -- searchField
+	searchField.setOnMouseReleased(m->Main.searchWindow.show());
 
 	// ----------------------------cpuStackPane
 	cpuStackPane.getChildren().add(0, cpuUsage);

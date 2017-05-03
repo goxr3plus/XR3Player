@@ -76,9 +76,17 @@ public class PlaylistsSettingsController extends BorderPane {
     private void initialize() {
 
 	//totalFilesShownGroup
-	totalFilesShownGroup.selectedToggleProperty().addListener(
-		listener -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController()
-			.setNewMaximumPerPage(Integer.parseInt(((Labeled) totalFilesShownGroup.getSelectedToggle()).getText()), true)));
+	totalFilesShownGroup.selectedToggleProperty().addListener(listener -> {
+
+	    //First Update all the Libraries
+	    Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController()
+		    .setNewMaximumPerPage(Integer.parseInt(((Labeled) totalFilesShownGroup.getSelectedToggle()).getText()), true));
+
+	    //Secondly Update the Search Window PlayList
+	    Main.searchWindow.getSmartController()
+		    .setNewMaximumPerPage(Integer.parseInt(((Labeled) totalFilesShownGroup.getSelectedToggle()).getText()), true);
+
+	});
 
 	//clearPlayedFilesHistory
 	clearPlayedFilesHistory.setOnAction(a -> {
@@ -89,7 +97,7 @@ public class PlaylistsSettingsController extends BorderPane {
 		ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500),
 			NotificationType.ERROR);
 	});
-	
+
 	//accordion
 	accordion.setExpandedPane(accordion.getPanes().get(0));
     }

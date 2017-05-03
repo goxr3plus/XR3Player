@@ -68,6 +68,7 @@ import windows.AboutWindowController;
 import windows.ConsoleWindowController;
 import windows.ExportWindowController;
 import windows.RenameWindow;
+import windows.SearchWindow;
 import windows.StarWindow;
 import xplayer.presenter.XPlayersList;
 import xr3capture.CaptureWindow;
@@ -124,6 +125,9 @@ public class Main extends Application {
      * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
      */
     public static CaptureWindow captureWindow = new CaptureWindow();
+
+    /** The Search Window of the application */
+    public static SearchWindow searchWindow = new SearchWindow();
 
     //
 
@@ -186,12 +190,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 64;
+    public static final int currentVersion = 65;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "02/05/2017";
+    public static final String releaseDate = "03/05/2017";
 
     /**
      * The Thread which is responsible for the update check
@@ -273,6 +277,7 @@ public class Main extends Application {
 	    consoleWindow.getWindow().initOwner(window);
 	    settingsWindow.getWindow().initOwner(window);
 	    aboutWindow.getWindow().initOwner(window);
+	    searchWindow.getWindow().initOwner(window);
 	    topBar.addXR3LabelBinding();
 
 	    // captureWindow
@@ -305,6 +310,7 @@ public class Main extends Application {
 	    scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, 650, 500);
 	    scene.setMoveControl(loginMode.getXr3PlayerLabel());
 	    scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	    searchWindow.getWindow().getScene().getStylesheets().addAll(scene.getStylesheets());
 
 	    // Scene and Show
 	    determineBackgroundImage();
@@ -489,7 +495,7 @@ public class Main extends Application {
 	root.setLeft(sideBar);
 
 	//userNameLabel	
-	sideBar.userNameLabel.setText("Hello -> " + u.getUserName() + " <- !");
+	sideBar.getUserNameLabel().setText("Hello -> " + u.getUserName() + " <- !");
 
 	//Top Bar is the new Move Control
 	scene.setMoveControl(topBar);
@@ -561,7 +567,7 @@ public class Main extends Application {
 	    //  dbManager.updateLibrariesInformation(null)
 
 	    //Filter Thread (Inspecting the Files if existing)
-	    new FilesFilterService().start(FilesFilterService.FilterMode.MULTIPLELIBS);
+	    new FilesFilterService().start();
 
 	    //---------------END:Important Work-----------------------------------------------------------
 
@@ -770,7 +776,7 @@ public class Main extends Application {
 
 			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
 
-			// Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
+			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
 
 			Element lastArticle = doc.getElementsByTag("article").last();
 
@@ -802,7 +808,7 @@ public class Main extends Application {
 			    // textArea.setWrapText(true)
 
 			    VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(textArea);
-			    vsPane.setMinSize(850, 550);
+			    vsPane.setMinSize(450, 550);
 			    vsPane.setMaxWidth(Double.MAX_VALUE);
 			    vsPane.setMaxHeight(Double.MAX_VALUE);
 			    GridPane.setVgrow(vsPane, Priority.ALWAYS);
@@ -814,20 +820,35 @@ public class Main extends Application {
 			    // expContent.add(label, 0, 0)
 			    expContent.add(vsPane, 0, 0);
 
+			    InlineCssTextArea textArea2 = new InlineCssTextArea();
+			    textArea2.setEditable(false);
+			    textArea2.setFocusTraversable(false);
+			    textArea2.setWrapText(true);
+
+			    VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(textArea2);
+			    vsPane2.setMinSize(450, 550);
+			    vsPane2.setMaxWidth(Double.MAX_VALUE);
+			    vsPane2.setMaxHeight(Double.MAX_VALUE);
+			    GridPane.setVgrow(vsPane2, Priority.ALWAYS);
+			    GridPane.setHgrow(vsPane2, Priority.ALWAYS);
+
+			    expContent.add(vsPane2, 1, 0);
+
+			    // -- TextArea 
 			    String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
 			    doc.getElementsByTag("article").forEach(element -> {
+
 				// Append the text to the textArea
-				textArea.appendText("\n\n-------------Start of Update (" + element.id()
-					+ ")----------------------------------------------------------------------------------------------------\n");
+				textArea.appendText("\n\n-------------Start of Update (" + element.id() + ")-------------\n");
 
 				// Information
 				textArea.appendText("->Information: ");
-				textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style);
+				textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style.replace("black", "#202020"));
 				textArea.appendText(element.getElementsByClass("about").text() + "\n");
 
 				// Release Date
 				textArea.appendText("->Release Date: ");
-				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "green"));
+				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "firebrick"));
 				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
 
 				// Minimum JRE
@@ -837,17 +858,49 @@ public class Main extends Application {
 
 				// ChangeLog
 				textArea.appendText("->ChangeLog:\n");
-				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "firebrick"));
+				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "green"));
 				final AtomicInteger counter = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
-				    if (counter.addAndGet(1) >= 1)
-					textArea.appendText("\t" + counter + ")" + el + "\n");
+				    if (counter.addAndGet(1) >= 1) {
+					String s = "\t" + counter + ")";
+					textArea.appendText(s);
+					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style);
+					textArea.appendText(el + "\n");
+				    }
 				});
 
 			    });
 
 			    textArea.moveTo(textArea.getLength());
 			    textArea.requestFollowCaret();
+
+			    // -- TextArea 2
+			    doc.getElementsByTag("section").forEach(section -> {
+
+				// Append the text to the textArea
+				textArea2.appendText("\n\n-------------Upcoming Features for XR3Player-------------\n\n");
+
+				// Information
+				textArea2.appendText("->Coming:\n");
+				textArea2.setStyle(textArea2.getLength() - 8, textArea2.getLength() - 1, style.replace("black", "green"));
+				final AtomicInteger counter = new AtomicInteger(-1);
+				Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
+				    if (counter.addAndGet(1) >= 1) {
+					String s = "\t" + counter + ")";
+					textArea2.appendText(s);
+					textArea2.setStyle(textArea2.getLength() - s.length(), textArea2.getLength() - 1, style);
+					textArea2.appendText(el + "\n");
+				    }
+				});
+
+				//Last Updated
+				textArea2.appendText("->Last Updated: ");
+				textArea2.setStyle(textArea2.getLength() - 14, textArea2.getLength() - 1, style.replace("black", "firebrick"));
+				textArea2.appendText(section.getElementById("lastUpdated").text());
+			    });
+
+			    textArea2.moveTo(textArea2.getLength());
+			    textArea2.requestFollowCaret();
 
 			    // Set the default buttons
 			    //ButtonType autoUpdate = new ButtonType("Auto Update", ButtonData.YES)
@@ -869,15 +922,15 @@ public class Main extends Application {
 
 			});
 		    } catch (IOException ex) {
-			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Trying to fetch update information a problem occured",
-				Duration.millis(2500), NotificationType.WARNING));
+			Platform.runLater(() -> ActionTool.showNotification("Error", "Trying to fetch update information a problem occured",
+				Duration.millis(2500), NotificationType.ERROR));
 			logger.log(Level.WARNING, "", ex);
 		    }
 
 		} else
-		    Platform.runLater(() -> ActionTool.showNotification("Can't Connect", "Can't connect to the update site :\n"
-			    + "1) Maybe there is not internet connection" + "\n2)GitHub is down for maintenance", Duration.millis(2500),
-			    NotificationType.ERROR));
+		    Platform.runLater(() -> ActionTool.showNotification("Can't Connect",
+			    "Can't connect to the update site :\n1) Maybe there is not internet connection\n2)GitHub is down for maintenance",
+			    Duration.millis(2500), NotificationType.ERROR));
 
 	    }, "Application Update Thread");
 

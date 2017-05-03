@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
 import application.settings.window.ApplicationSettingsController.SettingsTab;
-import application.users.User;
 import database.LocalDBManager;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
