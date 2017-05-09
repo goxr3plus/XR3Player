@@ -11,7 +11,7 @@
 [license-image]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
 
-#Description:
+#### Description:
 
 XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organizer,Radio and more .
 
@@ -19,7 +19,7 @@ Tested in Windows and Linux only .
 
    ->Download : https://sourceforge.net/projects/xr3player/
 
-#System Requirements:
+#### System Requirements:
 
      At least 2 Cores CPU Intel i5 or i7 or AMD Ryzen [Soore it will do well) ;)
 
@@ -27,7 +27,7 @@ Tested in Windows and Linux only .
 
      At least 4GB DDR3|DDR4
 
-#Tutorial and Informations:
+#### Tutorial and Informations:
 
 Download Java 8 here : Java 1.8.0_111(8 Update 111)++ required . ( https://www.java.com/en/ )
 
