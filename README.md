@@ -13,9 +13,30 @@
 
 -----------------------Current status ##BETA-------------------------------------
 
-A pure Java Media Player which is what you always wanted , OPENSOURCE!!
+#Description:
+
+XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organizer,Radio and more .
+
+Tested in Windows and Linux only .
 
 #Download on SourceForge https://sourceforge.net/projects/xr3player/
+
+#System Requirements:
+
+*At least 2 Cores CPU Intel i5 or i7 or AMD Ryzen [Soore it will do well) ;)
+
+*A very good GPU (Graphics Processing Unit)
+
+*At least 4GB DDR3|DDR4
+
+#Tutorial and Informations:
+
+Download Java 8 here : Java 1.8.0_111(8 Update 111)++ required . ( https://www.java.com/en/ )
+
+How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
+
+-------------------------------------------------------------------------------------
+
 
 ## Image from Update 66 Login Screen
 ![xr3player](https://cloud.githubusercontent.com/assets/20374208/25839995/a8f8d640-34a2-11e7-8cce-b41e5c6b9baa.png)
@@ -29,31 +50,6 @@ A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 # On youtube
 [![XR3Player](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
 
--------------------------------------------------------------------------------------
-
-#Description:
-
-How to install? ( https://www.youtube.com/watch?v=tWPSNeoU-XU )
-
-On youtube ( https://www.youtube.com/channel/UCj7qnP36Ye7gsiqvhA3eALw )
-
-XR3Player is a pure Java+JavaFX program .
-
-Some of it's current/future features are/will :
-
-       1)Media Player
-
-       2)Media File Organizer
-
-       3) Online Radio Listening
- 
-       4) Audio and Video Analyzer
-
-       5)Many more in every update
-
-->Tested in Windows and Linux only!
-
-It contains bugs and a lot of work need to be done but you can have fun with it :)
 
 ------------------------------------------------------------------------------------
 
