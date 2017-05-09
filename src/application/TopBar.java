@@ -20,7 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import tools.ActionTool;
 import tools.InfoTool;
 
@@ -32,6 +32,24 @@ import tools.InfoTool;
 public class TopBar extends BorderPane {
 
     // ----------------------------------------------
+
+    @FXML
+    private Button restartButton;
+
+    @FXML
+    private Button minimize;
+
+    @FXML
+    private Button maxOrNormalize;
+
+    @FXML
+    private Button exitApplication;
+
+    @FXML
+    private Button changeBackground;
+
+    @FXML
+    private VBox monitorsVBox;
 
     @FXML
     private Label xr3Label;
@@ -54,40 +72,13 @@ public class TopBar extends BorderPane {
     @FXML
     private JFXTextField searchField;
 
-    @FXML
-    private Button restartButton;
-
-    @FXML
-    private Button minimize;
-
-    @FXML
-    private Button maxOrNormalize;
-
-    @FXML
-    private Button exitApplication;
-
-    @FXML
-    private Button changeBackground;
-
-    @FXML
-    private StackPane cpuStackPane;
-
-    @FXML
-    private Label cpuLabel;
-
-    @FXML
-    private StackPane ramStackPane;
-
-    @FXML
-    private Label ramLabel;
-
     // ----------------------------------------------
 
     /** The logger. */
     private Logger logger = Logger.getLogger(getClass().getName());
 
-    SystemMonitor cpuUsage = new SystemMonitor(Monitor.CPU);
-    SystemMonitor ramUsage = new SystemMonitor(Monitor.RAM);
+    SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
+    SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
 
     /**
      * The current Window Mode
@@ -147,40 +138,27 @@ public class TopBar extends BorderPane {
      */
     @FXML
     private void initialize() {
-	
+
 	// -- searchField
-	searchField.setOnMouseReleased(m->Main.searchWindow.show());
+	searchField.setOnMouseReleased(m -> Main.searchWindow.show());
 
-	// ----------------------------cpuStackPane
-	cpuStackPane.getChildren().add(0, cpuUsage);
-	cpuStackPane.setOnMouseReleased(r -> {
-	    if (cpuUsage.isRunning())
-		cpuUsage.stopUpdater();
+	// ----------------------------cpuMonitor
+	cpuMonitor.setOnMouseReleased(r -> {
+	    if (cpuMonitor.isRunning())
+		cpuMonitor.stopUpdater();
 	    else
-		cpuUsage.restartUpdater();
+		cpuMonitor.restartUpdater();
 	});
 
-	// cpuLabel
-	cpuLabel.visibleProperty().bind(cpuUsage.getUpdateService().runningProperty().not());
-
-	// cpuUsage
-	cpuUsage.visibleProperty().bind(cpuLabel.visibleProperty().not());
-	//cpUsage.restartUpdater()
-
-	// ----------------------------RamStackPane
-	ramStackPane.getChildren().add(0, ramUsage);
-	ramStackPane.setOnMouseReleased(r -> {
-	    if (ramUsage.isRunning())
-		ramUsage.stopUpdater();
+	// ----------------------------ramMonitor
+	ramMonitor.setOnMouseReleased(r -> {
+	    if (ramMonitor.isRunning())
+		ramMonitor.stopUpdater();
 	    else
-		ramUsage.restartUpdater();
+		ramMonitor.restartUpdater();
 	});
 
-	// ramLabel
-	ramLabel.visibleProperty().bind(ramUsage.getUpdateService().runningProperty().not());
-
-	// cpuUsage
-	ramUsage.visibleProperty().bind(ramLabel.visibleProperty().not());
+	monitorsVBox.getChildren().addAll(cpuMonitor, ramMonitor);
 
 	//---------------------------------------------------
 
@@ -299,6 +277,20 @@ public class TopBar extends BorderPane {
 		.bind(Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
 			Main.currentVersion, Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(),
 			Main.window.heightProperty()));
+    }
+
+    /**
+     * @return the xr3Label
+     */
+    public Label getXr3Label() {
+	return xr3Label;
+    }
+
+    /**
+     * @param xr3Label the xr3Label to set
+     */
+    public void setXr3Label(Label xr3Label) {
+	this.xr3Label = xr3Label;
     }
 
     //    /**

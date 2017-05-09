@@ -203,7 +203,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="checkTutorialsLabel" alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-background-color: firebrick; -fx-text-fill: white;" text="Press here for youtube tutorials  :)" textAlignment="CENTER" wrapText="true" HBox.hgrow="SOMETIMES">
+            <Label fx:id="checkTutorialsLabel" alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-background-color: firebrick; -fx-text-fill: white;" styleClass=".button" text="Youtube Tutorials " textAlignment="CENTER" wrapText="true" HBox.hgrow="SOMETIMES">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -254,7 +254,7 @@
             <Insets right="5.0" />
          </BorderPane.margin>
          <right>
-            <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: gold;" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
@@ -293,7 +293,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 9; -fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Change Background" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 11;" text="Change Background" textAlignment="CENTER" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

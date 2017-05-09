@@ -580,7 +580,7 @@ public class StreamPlayer implements Callable<Void> {
 
 	//Shutdown previous Thread Running
 	awaitTermination();
-	awaitTermination();
+	//awaitTermination();
 
 	// Open SourceDataLine.
 	try {

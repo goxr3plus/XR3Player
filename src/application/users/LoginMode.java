@@ -5,6 +5,9 @@ package application.users;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +21,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -26,6 +30,8 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -142,6 +148,11 @@ public class LoginMode extends BorderPane {
 
     /** The context menu of the users */
     public UserContextMenu userContextMenu = new UserContextMenu(this);
+
+    /**
+     * Loads all the information about each user
+     */
+    public UsersInfoLoader usersInfoLoader = new UsersInfoLoader();
 
     //-----
 
@@ -311,7 +322,8 @@ public class LoginMode extends BorderPane {
      */
     public void deleteUser(Node owner) {
 	//Ask
-	if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]",owner)) {
+	if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]",
+		owner)) {
 
 	    //Try to delete it
 	    if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + teamViewer.getSelectedItem().getUserName())))
@@ -591,8 +603,8 @@ public class LoginMode extends BorderPane {
 		    double size = HEIGHT / var;
 
 		    // --
-		    user.imageView.setFitWidth(size);
-		    user.imageView.setFitHeight(size);
+		    user.getImageView().setFitWidth(size);
+		    user.getImageView().setFitHeight(size);
 		    user.setMaxWidth(size);
 		    user.setMaxHeight(size);
 		});
@@ -660,8 +672,8 @@ public class LoginMode extends BorderPane {
 	    // --
 	    double size = HEIGHT / var;
 
-	    user.imageView.setFitWidth(size);
-	    user.imageView.setFitHeight(size);
+	    user.getImageView().setFitWidth(size);
+	    user.getImageView().setFitHeight(size);
 	    user.setMaxWidth(size);
 	    user.setMaxHeight(size);
 
@@ -913,6 +925,91 @@ public class LoginMode extends BorderPane {
 	    getNext().setVisible(!rightGroup.getChildren().isEmpty());
 	    getPrevious().setVisible(!leftGroup.getChildren().isEmpty());
 
+	}
+
+    }
+
+    /**
+     * @author GOXR3PLUS
+     *
+     */
+    public class UsersInfoLoader extends Service<Boolean> {
+
+	/**
+	 * Constructor
+	 */
+	public UsersInfoLoader() {
+	    this.setOnSucceeded(s -> done());
+	    this.setOnFailed(f -> done());
+	    this.setOnCancelled(c -> done());
+	}
+
+	@Override
+	public void start() {
+	    if (isRunning())
+		return;
+
+	    //Bindings
+	    Main.updateScreen.setVisible(true);
+	    Main.updateScreen.getProgressBar().progressProperty().bind(progressProperty());
+	    Main.updateScreen.getLabel().setText("---Loadings Users Information---");
+
+	    //Start
+	    super.start();
+	}
+
+	/**
+	 * Called when Service is done
+	 */
+	private void done() {
+	    //Bindings
+	    Main.updateScreen.getProgressBar().progressProperty().unbind();
+	    Main.updateScreen.setVisible(false);
+	}
+
+	/* (non-Javadoc)
+	 * @see javafx.concurrent.Service#createTask()
+	 */
+	@Override
+	protected Task<Boolean> createTask() {
+	    return new Task<Boolean>() {
+		@Override
+		protected Boolean call() throws Exception {
+		    //Variables
+		    int[] counter = { 0 };
+		    int totalUsers = LoginMode.this.teamViewer.getItemsObservableList().size();
+
+		    // -- For every user
+		    LoginMode.this.teamViewer.getItemsObservableList().forEach(user -> {
+
+			//Check if the database of this user exists
+			String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator
+				+ "dbFile.db";
+			if (new File(dbFileAbsolutePath).exists()) {
+
+			    // --Create connection and load user information
+			    try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
+				    ResultSet dbCounter = connection.createStatement().executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+
+				int[] totalLibraries = { 0 };
+				totalLibraries[0] += dbCounter.getInt(1);
+				Thread.sleep(500);
+
+				// Refresh the text
+				Platform.runLater(() -> user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0])));
+				System.out.println("User:" + user.getUserName() + " contains : " + totalLibraries + " Libraries");
+
+				updateProgress(++counter[0], totalUsers);
+			    } catch (Exception ex) {
+				Main.logger.log(Level.SEVERE, "", ex);
+			    }
+			}
+
+		    });
+
+		    return true;
+		}
+	    };
 	}
 
     }

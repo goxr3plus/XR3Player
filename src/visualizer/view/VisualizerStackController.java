@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -58,8 +59,7 @@ public class VisualizerStackController extends StackPane {
 	try {
 	    loader.load();
 	} catch (IOException ex) {
-	    Logger.getLogger(getClass().getName()).log(Level.SEVERE, "VisualizerStackController FXML can't be loaded!",
-		    ex);
+	    Logger.getLogger(getClass().getName()).log(Level.SEVERE, "VisualizerStackController FXML can't be loaded!", ex);
 	}
     }
 
@@ -107,33 +107,65 @@ public class VisualizerStackController extends StackPane {
     /**
      * Add the listeners to the Next and Previous Buttons
      * 
-     * @param xPlayerController
+     * @param xPlayerController1
      */
-    public void addListenersToButtons(XPlayerController xPlayerController) {
-	this.xPlayerController = xPlayerController;
+    public void addListenersToButtons(XPlayerController xPlayerController1) {
+	this.xPlayerController = xPlayerController1;
 
 	// previous
 	previous.setOnAction(a -> previousSpectrumAnalyzer());
 	// next
 	next.setOnAction(a -> nextSpectrumAnalyzer());
+
+	// -- KeyListeners
+	setOnKeyReleased(key -> {
+	    if (key.getCode() == KeyCode.RIGHT)
+		nextSpectrumAnalyzer();
+	    else if (key.getCode() == KeyCode.LEFT)
+		previousSpectrumAnalyzer();
+	});
+
+	// --- Mouse Listeners
+	setOnMouseEntered(m -> {
+	    if (!isFocused())
+		requestFocus();
+	});
+
+	// --- Mouse Scroll Listeners
+	setOnScroll(scroll -> {
+
+	    //Delta Y
+	    if (scroll.getDeltaY() > 0)
+		xPlayerController.adjustVolume(1);
+	    else if (scroll.getDeltaY() < 0)
+		xPlayerController.adjustVolume(-1);
+
+	    //Delta X
+	    if (scroll.getDeltaX() < 0)
+		nextSpectrumAnalyzer();
+	    else if (scroll.getDeltaX() > 0)
+		previousSpectrumAnalyzer();
+
+	    if (scroll.getDeltaY() != 0)
+		replayLabelEffect("Vol: " + xPlayerController1.getVolume());
+	});
     }
 
     /**
      * Goes to the next Spectrum Analyzer
      */
     public void nextSpectrumAnalyzer() {
-	xPlayerController.visualizer.displayMode
-		.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-			: xPlayerController.visualizer.displayMode.get() + 1);
+	xPlayerController.visualizer.displayMode.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
+		: xPlayerController.visualizer.displayMode.get() + 1);
     }
 
     /**
      * Goes to the previous Spectrum Analyzer
      */
     public void previousSpectrumAnalyzer() {
-	xPlayerController.visualizer.displayMode.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
-		? xPlayerController.visualizer.displayMode.get() - 1
-		: VisualizerModel.DISPLAYMODE_MAXIMUM);
+	xPlayerController.visualizer.displayMode
+		.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0 ? xPlayerController.visualizer.displayMode.get() - 1
+			: VisualizerModel.DISPLAYMODE_MAXIMUM);
     }
 
 }

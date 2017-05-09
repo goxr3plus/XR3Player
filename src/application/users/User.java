@@ -38,10 +38,16 @@ import tools.NotificationType;
 public class User extends StackPane {
 
     @FXML
-    ImageView imageView;
+    private ImageView imageView;
 
     @FXML
-    Label nameField;
+    private Label nameField;
+
+    @FXML
+    private Label warningLabel;
+
+    @FXML
+    private Label totalLibrariesLabel;
 
     // --------------------------------------------
 
@@ -128,7 +134,7 @@ public class User extends StackPane {
 	this.loginMode = loginMode;
 
 	// ----------------------------------FXMLLoader-------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "User.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -193,6 +199,34 @@ public class User extends StackPane {
     }
 
     /**
+     * @return the totalLibrariesLabel
+     */
+    public Label getTotalLibrariesLabel() {
+	return totalLibrariesLabel;
+    }
+
+    /**
+     * @return the imageView
+     */
+    public ImageView getImageView() {
+	return imageView;
+    }
+
+    /**
+     * @return the nameField
+     */
+    public Label getNameField() {
+	return nameField;
+    }
+
+    /**
+     * @param nameField the nameField to set
+     */
+    public void setNameField(Label nameField) {
+	this.nameField = nameField;
+    }
+
+    /**
      * @param userName
      *            the userName to set
      */
@@ -219,7 +253,7 @@ public class User extends StackPane {
     public void renameUser(Node node) {
 
 	// Open the Window
-	Main.renameWindow.show(getUserName(), node,"User Renaming");
+	Main.renameWindow.show(getUserName(), node, "User Renaming");
 
 	// Bind 
 	nameField.textProperty().bind(Main.renameWindow.inputField.textProperty());

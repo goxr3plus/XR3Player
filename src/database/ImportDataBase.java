@@ -64,9 +64,9 @@ public class ImportDataBase extends Service<Boolean> {
 		success.showInformation();
 
 		// Restart XR3Player
-		Main.updateScreen.progressBar.progressProperty().unbind();
-		Main.updateScreen.progressBar.setProgress(-1);
-		Main.updateScreen.label.setText("Restarting....");
+		Main.updateScreen.getProgressBar().progressProperty().unbind();
+		Main.updateScreen.getProgressBar().setProgress(-1);
+		Main.updateScreen.getLabel().setText("Restarting....");
 		Main.restartTheApplication(false);
 	    }
 
@@ -89,7 +89,7 @@ public class ImportDataBase extends Service<Boolean> {
      */
     private static void done() {
 	Main.updateScreen.setVisible(false);
-	Main.updateScreen.progressBar.progressProperty().unbind();
+	Main.updateScreen.getProgressBar().progressProperty().unbind();
     }
 
     /**
@@ -199,7 +199,7 @@ public class ImportDataBase extends Service<Boolean> {
 			File newFile = new File(outPutFolder + File.separator + fileName);
 
 			// Refresh the dataLabel text
-			Platform.runLater(() -> Main.updateScreen.label.setText("In:" + newFile.getName()));
+			Platform.runLater(() -> Main.updateScreen.getLabel().setText("In:" + newFile.getName()));
 
 			// create all non exists folders
 			// else you will hit FileNotFoundException for

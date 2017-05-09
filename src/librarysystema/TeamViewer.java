@@ -6,7 +6,6 @@ package librarysystema;
 import java.util.List;
 
 import application.Main;
-import application.users.User;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -22,6 +21,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
@@ -148,6 +148,20 @@ public class TeamViewer {
 		if (scroll.getDeltaX() < 0)
 		    next();
 		else if (scroll.getDeltaX() > 0)
+		    previous();
+	    });
+
+	    // --- Mouse Listeners
+	    setOnMouseEntered(m -> {
+		if (!isFocused())
+		    requestFocus();
+	    });
+
+	    // -- KeyListeners
+	    setOnKeyReleased(key -> {
+		if (key.getCode() == KeyCode.RIGHT)
+		    next();
+		else if (key.getCode() == KeyCode.LEFT)
 		    previous();
 	    });
 

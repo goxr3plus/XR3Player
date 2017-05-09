@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -19,13 +19,13 @@
       </TabPane>
    </center>
    <bottom>
-      <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: firebrick; -fx-background-radius: 45 45 0 0;" BorderPane.alignment="CENTER">
+      <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #353535; -fx-background-radius: 45 45 0 0;" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="doneButton" text="Close">
+            <Button fx:id="doneButton" mnemonicParsing="false" text="Done">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </JFXButton>
+            </Button>
          </children>
          <padding>
             <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />

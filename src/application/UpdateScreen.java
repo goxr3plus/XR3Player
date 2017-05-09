@@ -7,15 +7,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import customnodes.FunIndicator;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import tools.InfoTool;
@@ -25,23 +23,20 @@ import tools.InfoTool;
  */
 public class UpdateScreen extends StackPane {
 
-    /** The rectangle. */
     @FXML
     private Rectangle rectangle;
-
-    /** The progress bar. */
-    @FXML
-    public ProgressBar progressBar;
-
-    /** The label. */
-    @FXML
-    public Label label;
 
     @FXML
     private Rectangle leftRectangle;
 
     @FXML
     private Rectangle rightRectangle;
+
+    @FXML
+    private ProgressIndicator progressBar;
+
+    @FXML
+    private Label label;
 
     // -------------------------------------------------------------------------------------
 
@@ -86,11 +81,11 @@ public class UpdateScreen extends StackPane {
 
 	translate1 = new TranslateTransition(Duration.millis(1000), leftRectangle);
 	translate2 = new TranslateTransition(Duration.millis(1000), rightRectangle);
-	
-//	FunIndicator fun  = new FunIndicator();	
-//	fun.setFromColor(Color.RED);
-//	fun.start();
-//	super.getChildren().add(fun);
+
+	//	FunIndicator fun  = new FunIndicator();	
+	//	fun.setFromColor(Color.RED);
+	//	fun.start();
+	//	super.getChildren().add(fun);
     }
 
     /**
@@ -99,20 +94,32 @@ public class UpdateScreen extends StackPane {
     public void closeUpdateScreen() {
 
 	// Left Rectangle
-	if (translate1.getStatus() != Animation.Status.RUNNING
-		&& leftRectangle.getTranslateX() >= -leftRectangle.getWidth()) {
+	if (translate1.getStatus() != Animation.Status.RUNNING && leftRectangle.getTranslateX() >= -leftRectangle.getWidth()) {
 	    translate1.setFromX(leftRectangle.getX());
 	    translate1.setToX(-leftRectangle.getWidth());
 	    translate1.playFromStart();
 	}
 
 	// Right Rectangle
-	if (translate2.getStatus() != Animation.Status.RUNNING
-		&& rightRectangle.getTranslateX() >= -rightRectangle.getWidth()) {
+	if (translate2.getStatus() != Animation.Status.RUNNING && rightRectangle.getTranslateX() >= -rightRectangle.getWidth()) {
 	    translate2.setFromX(rightRectangle.getX());
 	    translate2.setToX(rightRectangle.getX() + rightRectangle.getWidth());
 	    translate2.playFromStart();
 	}
+    }
+
+    /**
+     * @return the label
+     */
+    public Label getLabel() {
+	return label;
+    }
+
+    /**
+     * @return the progressBar
+     */
+    public ProgressIndicator getProgressBar() {
+	return progressBar;
     }
 
 }

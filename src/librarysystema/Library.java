@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -472,10 +471,8 @@ public class Library extends StackPane {
 
 	// ----totalItemsLabel
 
-	totalItemsLabel.textProperty()
-		.bind(Bindings.createStringBinding(
-			() -> String.format(Locale.US, "%,d", controller.totalInDataBaseProperty().get()).replace(",", "."),
-			controller.totalInDataBaseProperty()));
+	totalItemsLabel.textProperty().bind(Bindings.createStringBinding(() -> InfoTool.getNumberWithDots(controller.totalInDataBaseProperty().get()),
+		controller.totalInDataBaseProperty()));
 
 	totalItemsLabel.visibleProperty().bind(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty());
 	//I run this Thread to calculate the total entries of this library

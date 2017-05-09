@@ -253,7 +253,7 @@ public class SideBar extends BorderPane {
 	//---------UPDATE ------------------------------
 
 	// checkForUpdates
-	applicationUpdate.setOnAction(a -> Main.checkForUpdates(true));
+	applicationUpdate.setOnAction(a -> Main.updateWindow.searchForUpdates(true));
 
 	//help
 	help.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
@@ -322,7 +322,7 @@ public class SideBar extends BorderPane {
 		if (file != null) {
 		    // Change the Scene View
 		    Main.updateScreen.setVisible(true);
-		    Main.updateScreen.progressBar.progressProperty().bind(unZipper.progressProperty());
+		    Main.updateScreen.getProgressBar().progressProperty().bind(unZipper.progressProperty());
 
 		    // Import the new database
 		    unZipper.importDataBase(file.getAbsolutePath());
@@ -340,7 +340,7 @@ public class SideBar extends BorderPane {
 
 		    // Change the Scene View
 		    Main.updateScreen.setVisible(true);
-		    Main.updateScreen.progressBar.progressProperty().bind(zipper.progressProperty());
+		    Main.updateScreen.getProgressBar().progressProperty().bind(zipper.progressProperty());
 
 		    // Export the database
 		    zipper.exportDataBase(file.getAbsolutePath(), InfoTool.getAbsoluteDatabasePathPlain());
@@ -363,9 +363,9 @@ public class SideBar extends BorderPane {
 
 		// Show Update Screen
 		Main.updateScreen.setVisible(true);
-		Main.updateScreen.progressBar.progressProperty().unbind();
-		Main.updateScreen.progressBar.setProgress(-1);
-		Main.updateScreen.label.setText("Restarting....");
+		Main.updateScreen.getProgressBar().progressProperty().unbind();
+		Main.updateScreen.getProgressBar().setProgress(-1);
+		Main.updateScreen.getLabel().setText("Restarting....");
 
 		// Exit the application
 		Main.canSaveData = false;

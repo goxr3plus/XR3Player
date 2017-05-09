@@ -1,23 +1,43 @@
 package customnodes;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.jezhumble.javasysmon.CpuTimes;
 import com.jezhumble.javasysmon.JavaSysMon;
 import com.jezhumble.javasysmon.MemoryStats;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import visualizer.model.ResizableCanvas;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.StackPane;
+import tools.InfoTool;
 
 /**
  * This class is running a background class which updates every 1000 milliseconds the Canvas based on the CPULOAD.
  *
  * @author GOXR3PLUS
  */
-public class SystemMonitor extends ResizableCanvas {
+public class SystemMonitor extends StackPane {
+
+    //-----------------------------------------------------
+
+    @FXML
+    private ProgressBar progressBar;
+
+    @FXML
+    private Label progressLabel;
+
+    // -------------------------------------------------------------
+
+    /** The logger. */
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     /**
      * What to Monitor?
@@ -59,11 +79,6 @@ public class SystemMonitor extends ResizableCanvas {
     private volatile boolean run;
 
     /**
-     * Colors to be used for paint
-     */
-    private final Color[] colors = { Color.BLACK, Color.FIREBRICK, Color.WHITE };
-
-    /**
      * Constructor
      * 
      * @param monitor
@@ -71,63 +86,28 @@ public class SystemMonitor extends ResizableCanvas {
      */
     public SystemMonitor(Monitor monitor) {
 	this.monitor = monitor;
-	gc.setFont(Font.font("default", FontWeight.BOLD, 14));
-	// startUpdater()
-	repaint();
+
+	// ------------------------------------FXMLLOADER ----------------------------------------
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SystemMonitor.fxml"));
+	loader.setController(this);
+	loader.setRoot(this);
+
+	try {
+	    loader.load();
+	} catch (IOException ex) {
+	    logger.log(Level.SEVERE, "", ex);
+	}
+
     }
 
     /**
-     * Paint usage.
+     * Called as soon as .fxml is initialized
      */
-    private void repaint() {
-	gc.clearRect(0, 0, getWidth(), getHeight());
+    @FXML
+    private void initialize() {
 
-	// Outline
-	gc.setFill(colors[0]);
-	gc.fillRect(0, 0, getWidth(), getHeight());
-
-	// Inner progress
-	//gc.setStroke(Color.FIREBRICK);
-	//if (monitor == Monitor.CPU)
-	gc.setFill(colors[1]);
-	//else if (monitor == Monitor.RAM)
-	//     gc.setFill(Color.web("#FF4A00"));
-
-	// usage=80
-	//	if (usage % 2 == 0)
-	//	    for (int a = 1; a <= usage + usage / 2; a += 2)
-	//		gc.strokeRect(a, 3, 1, getHeight() - 6);
-	//	else
-	//	    for (int a = 1; a <= usage + usage / 2; a += 2) {
-	//		if (a == usage + usage / 2)
-	//		    gc.strokeRect(a, 3, 0.5, getHeight() - 6);
-	//		else
-	//		    gc.strokeRect(a, 3, 1, getHeight() - 6);
-	//	    }
-
-	//	float saColorScale = (float) VisualizerModel.spectrumAnalyserColors.length / (float) (getWidth()/1.2)  * 1.0f;
-	//	float c = 0;
-	//	for (int a = 1; a<(usageDouble/100.00)*(getWidth()-2); a++) {
-	//	    c += saColorScale;
-	//	    if (c < VisualizerModel.spectrumAnalyserColors.length)
-	//		gc.setFill(VisualizerModel.spectrumAnalyserColors[(int) c]);
-	//
-	//	    gc.fillRect(a, 3, 1, getHeight() - 6);
-	//	}
-
-	gc.fillRect(1, 3, (usage / 100.00) * (getWidth() - 2), getHeight() - 6);
-	//gc.fillRect(1, 3, (usageDouble/100.00)*(getWidth()-2), getHeight() - 6)
-
-	// Show the Progress on String format
-	gc.setFill(colors[2]);
-	if (monitor == Monitor.CPU)
-	    gc.fillText(String.format("CPU %d ", usage) + "%", getWidth() / 2 - 30, getHeight() / 2 + 5);
-	else if (monitor == Monitor.RAM)
-	    gc.fillText(String.format("RAM %d ", usage) + "%", getWidth() / 2 - 30, getHeight() / 2 + 5);
-
-	//	gc.fillText(String.format("%.2f ", (usageDouble < 0) ? 0 : usageDouble) + "%", getWidth() / 2 - 15,
-	//		getHeight() / 2 + 5)
-
+	//ProgressLabel
+	progressLabel.setText("Click for " + (monitor == Monitor.CPU ? "CPU" : "RAM") + " Usage");
     }
 
     /**
@@ -136,7 +116,11 @@ public class SystemMonitor extends ResizableCanvas {
     public void restartUpdater() {
 	run = true;
 	getUpdateService().restart();
-	Platform.runLater(SystemMonitor.this::repaint);
+
+	//ProgressLabel
+	progressLabel.textProperty().bind(Bindings.createStringBinding(
+		() -> String.format("%s %d %%", monitor == Monitor.CPU ? "CPU" : "RAM", progressBar.progressProperty().multiply(100.00).intValue()),
+		progressBar.progressProperty()));
     }
 
     /**
@@ -145,6 +129,13 @@ public class SystemMonitor extends ResizableCanvas {
     public void stopUpdater() {
 	run = false;
 	getUpdateService().cancel();
+
+	//ProgressLabel
+	progressLabel.textProperty().unbind();
+	progressLabel.setText("Click for " + (monitor == Monitor.CPU ? "CPU" : "RAM") + " Usage");
+
+	//ProgressBar
+	progressBar.setProgress(0);
     }
 
     /**
@@ -164,6 +155,13 @@ public class SystemMonitor extends ResizableCanvas {
     }
 
     /**
+     * @return the progressLabel
+     */
+    public Label getProgressLabel() {
+	return progressLabel;
+    }
+
+    /**
      * Updates the Canvas every 1 millisecond with the latest cpu load
      * 
      * @author GOXR3PLUS
@@ -178,39 +176,37 @@ public class SystemMonitor extends ResizableCanvas {
 		@Override
 		protected Void call() throws Exception {
 
-		    //Monitor the CPU
-		    if (monitor == Monitor.CPU) {
-			CpuTimes cpu;
+		    // Loop
+		    while (run) {
 
-			// Loop
-			while (run) {
+			//Monitor the CPU
+			if (monitor == Monitor.CPU) {
+			    CpuTimes cpu;
 
 			    cpu = javaSysMon.cpuTimes();
 			    Thread.sleep(999);
-			    usageDouble = javaSysMon.cpuTimes().getCpuUsage(cpu) * 100.00;
-			    // usageDouble = 100
+			    usageDouble = javaSysMon.cpuTimes().getCpuUsage(cpu); //* 100.00;
 			    usage = (int) usageDouble;
-			    Platform.runLater(SystemMonitor.this::repaint);
-			}
+			    Platform.runLater(() -> progressBar.setProgress(usageDouble));
 
-			System.out.println("CPU Update Service Exited");
-		    }
-		    //Monitor the RAM
-		    else if (monitor == Monitor.RAM) {
-			// Loop
-			while (run) {
+			    //System.out.println("CPU Update Service Exited");
+			}
+			//Monitor the RAM
+			else if (monitor == Monitor.RAM) {
 
 			    Thread.sleep(999);
-			    // usageDouble = 
-			    // usageDouble = 100
 			    MemoryStats memory = javaSysMon.physical();
 			    //System.out.println("Total: "+memory.getTotalBytes()+" ,Free: "+memory.getFreeBytes())
-			    usage = 100 - (int) (((memory.getFreeBytes() * 100.00) / memory.getTotalBytes()));
-			    Platform.runLater(SystemMonitor.this::repaint);
+			    //usage = 100 - (int) (((memory.getFreeBytes() * 100.00) / memory.getTotalBytes()));
+			    usageDouble = 1.00 - ((memory.getFreeBytes() * 100.00) / memory.getTotalBytes()) / 100;
+			    // System.out.println(usageDouble);
+			    Platform.runLater(() -> progressBar.setProgress(usageDouble));
 			}
 
-			System.out.println("RAM Update Service Exited");
 		    }
+
+		    System.out.println("Update Service Exited");
+		    Platform.runLater(() -> progressBar.setProgress(0));
 
 		    return null;
 		}

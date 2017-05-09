@@ -176,28 +176,15 @@ public class VisualizerWindowController extends StackPane {
 	    xPlayerController.visualizer.setCursor(Cursor.HAND);
 	});
 
-	// --- Mouse Scroll Listeners
-	setOnScroll(scroll -> {
-	    if (scroll.getDeltaY() > 0)
-		xPlayerController.adjustVolume(1);
-	    else
-		xPlayerController.adjustVolume(-1);
-
-	    xPlayerController.visualizerStackController.replayLabelEffect("Vol: " + xPlayerController.getVolume());
-	});
-
 	// -- KeyListeners
 	scene.setOnKeyReleased(key -> {
 	    if (key.getCode() == KeyCode.ESCAPE) {
-		if (window.isFullScreen())
-		    window.setFullScreen(false);
-		else
+		if (!window.isFullScreen())
 		    removeVisualizer();
+		else
+		    window.setFullScreen(false);
 
-	    } else if (key.getCode() == KeyCode.RIGHT)
-		xPlayerController.visualizerStackController.nextSpectrumAnalyzer();
-	    else if (key.getCode() == KeyCode.LEFT)
-		xPlayerController.visualizerStackController.previousSpectrumAnalyzer();
+	    }
 	});
 
 	// ----------Drag && Drop Listeners

@@ -57,8 +57,8 @@ public class UserMode extends BorderPane {
     @FXML
     private void initialize() {
 
-//	//goBack
-//	goBack.setOnAction(a -> Main.sideBar.goMainMode());
+	//	//goBack
+	//	goBack.setOnAction(a -> Main.sideBar.goMainMode());
     }
 
     /**
@@ -70,8 +70,7 @@ public class UserMode extends BorderPane {
 	this.user = user;
 
 	//-----UserNameLabel
-	userNameLabel.textProperty()
-		.bind(Bindings.concat("Logged in as->[ ").concat(user.nameField.textProperty()).concat(" ]"));
+	userNameLabel.textProperty().bind(Bindings.concat("Logged in as->[ ").concat(user.getNameField().textProperty()).concat(" ]"));
     }
 
 }

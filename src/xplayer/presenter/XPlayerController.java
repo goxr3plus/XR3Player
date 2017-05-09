@@ -873,15 +873,17 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		    // }
 
 		    // ----------------------- Play Audio
-		    if (!xPlayer.isPausedOrPlaying())
+		    if (!xPlayer.isPausedOrPlaying()) {
 			xPlayer.play();
+			//xPlayer.pause();
+		    }
 
 		    // ----------------------- Configuration
 		    updateMessage("Applying Settings ...");
 
 		    // Configure Media Settings
-		    // if (xPlayer.isPausedOrPlaying())
-		    configureMediaSettings(true);
+		    if (xPlayer.isPausedOrPlaying())
+			configureMediaSettings(true);
 
 		    return succeded;
 		}
@@ -955,6 +957,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1)
 		disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 
+	    // Configure Media Settings
+	    configureMediaSettings(false);
+
 	    // unlock the Service
 	    locked = false;
 	}
@@ -996,12 +1001,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			// ----------------------- Play the Audio
 			updateMessage("Starting ...");
 			xPlayer.play();
+			xPlayer.pause();
 
 			// ----------------------- Configuration
-			updateMessage("Applying Settings ...");
-
-			// Configure Media Settings
-			configureMediaSettings(false);
+			//			updateMessage("Applying Settings ...");
+			//
+			//			// Configure Media Settings
+			//			configureMediaSettings(false);
 
 			// ....well let's go
 		    } catch (Exception ex) {
@@ -1096,11 +1102,15 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     /**
      * When the audio starts , fast configure it's settings
      */
-    public void configureMediaSettings(boolean passStartImmediatly) {
+    public void configureMediaSettings(boolean ignoreStartImmediately) {
 
 	// Start immediately?
-	if (!passStartImmediatly && !xPlayerSettingsController.startImmediately.isSelected())
+	if (!ignoreStartImmediately && !xPlayerSettingsController.startImmediately.isSelected())
 	    pause();
+	else {
+	    play();
+	    resume();
+	}
 
 	// Mute?
 	xPlayer.setMute(radialMenu.mute.isSelected());
@@ -1378,6 +1388,17 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
     public void unMute() {
 	radialMenu.mute.setSelected(false);
 	xPlayer.setMute(false);
+    }
+
+    /**
+     * Starts the player
+     */
+    public void play() {
+	try {
+	    xPlayer.play();
+	} catch (StreamPlayerException ex) {
+	    ex.printStackTrace();
+	}
     }
 
     /**

@@ -83,6 +83,24 @@
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
+                        <JFXButton fx:id="snapshot" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Video%20Message-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Screen SnapShot" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                         <JFXButton fx:id="applicationSearch" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
@@ -96,24 +114,6 @@
                            </cursor>
                            <tooltip>
                               <Tooltip text="Update" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="applicationConverter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/youtubeToAudio.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Convert YouTube,FB,Vimeo  etc... links to MP3, MP4, AVI etc.... " />
                            </tooltip>
                            <VBox.margin>
                               <Insets left="3.0" />
@@ -137,11 +137,11 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="snapshot" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationConverter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Video%20Message-32.png" />
+                                    <Image url="@../image/youtubeToAudio.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -149,7 +149,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <tooltip>
-                              <Tooltip text="Screen SnapShot" />
+                              <Tooltip text="Convert YouTube,FB,Vimeo  etc... links to MP3, MP4, AVI etc.... " />
                            </tooltip>
                            <VBox.margin>
                               <Insets left="3.0" />
@@ -235,6 +235,21 @@
                               <VBox alignment="CENTER" spacing="20.0" />
                            </children>
                         </StackPane>
+                        <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" disable="true" focusTraversable="false" layoutX="13.0" layoutY="193.0" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Burn%20CD-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Screen SnapShot" />
+                           </tooltip>
+                        </JFXButton>
                      </children>
                   </VBox>
                   <VBox spacing="10.0">

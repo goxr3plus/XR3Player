@@ -13,7 +13,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -77,7 +76,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 9; -fx-border-color: firebrick; -fx-border-radius: 15;" styleClass="arrowButton2" text="Change Background" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 9;" text="Change Background" textAlignment="CENTER" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -94,26 +93,7 @@
       </HBox>
    </right>
    <left>
-      <VBox alignment="CENTER" prefHeight="37.0" prefWidth="90.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <StackPane fx:id="cpuStackPane" maxHeight="25.0" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: transparent; -fx-background-radius: 10;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <children>
-                  <Label fx:id="cpuLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: black; -fx-font-size: 8;" text="Click for CPU usage" textAlignment="CENTER" wrapText="true" />
-               </children>
-            </StackPane>
-            <StackPane fx:id="ramStackPane" layoutX="10.0" layoutY="16.0" maxHeight="25.0" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: transparent; -fx-background-radius: 10;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <children>
-                  <Label fx:id="ramLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: black; -fx-font-size: 8;" text="Click for RAM usage" textAlignment="CENTER" wrapText="true" />
-               </children>
-            </StackPane>
-         </children>
-      </VBox>
+      <VBox fx:id="monitorsVBox" alignment="CENTER" prefHeight="37.0" prefWidth="90.0" spacing="5.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <BorderPane BorderPane.alignment="CENTER">

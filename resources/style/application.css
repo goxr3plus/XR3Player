@@ -120,13 +120,6 @@
 	-fx-background-color:firebrick;
 }
 
-.segmented-button-bar .button:pressed {
-    -fx-background-color:
-        -darkest-black,
-        rgb(55.0, 57.0, 58.0),
-        linear-gradient(to top, -light-black 2.0%, -dark-black 98.0%);
-}
-
 /*******************************************************************************
 
 *                            TableView                               *
@@ -560,13 +553,27 @@
 ******************************************************************************/
 
  /**About Button  ----------------------------------------*/
+ 
+ .root{
+ 	-light-black: rgb(74.0, 75.0, 78.0);
+    -dark-highlight: rgb(87.0, 89.0, 92.0);
+    -dark-black: rgb(39.0, 40.0, 40.0);
+    -darkest-black: rgb(5.0, 5.0, 5.0);
+    -mid-gray: rgb(216.0, 222.0, 227.0);
+ }
 
- .button {
- 	-fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  
- 	-fx-background-radius: 5.0;
-    -fx-text-fill: white;  
-    /*-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );*/
-    -fx-font-size: 13.0px;
+ .button {	
+ 	 /*-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );*/
+    /* -fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);   */
+ 	 -fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
+    -fx-background-insets: 0.0, 1.0 1.0 1.0 0.0, 2.0 1.0 1.0 1.0;
+    -fx-background-radius: 0.0; 
+    -fx-text-fill: white;    
+    -fx-font-size: 13.0px;    
+    -fx-font-weight:bold;
  }
  
  .button:hover{
@@ -577,6 +584,13 @@
         #d86e3a,
         radial-gradient(center 50.0% 50.0%, radius 100.0%, #ea7f4b, #c54e2c);*/
  }
+ 
+ .button:pressed {
+    -fx-background-color:
+        -darkest-black,
+        rgb(55.0, 57.0, 58.0),
+        linear-gradient(to top, -light-black 2.0%, -dark-black 98.0%);
+}
  
  
  /**About SongButton  ----------------------------------------*/
@@ -660,7 +674,7 @@
 
  
  .context-menu {
-  	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
+ 	-fx-background-color:rgb(0,0,0,0.95);
   	-fx-background-radius:4.0;
   	/*-fx-border-width:2.0; 	
     -fx-border-style:segments(4.0); */
@@ -670,12 +684,24 @@
  .menu-item .label{
  	-fx-text-fill:white;
  	-fx-font-weight:bold;
+ 	-fx-font-size:13;
  }
  
  .menu-item:focused {
- 	-fx-background-color:firebrick;
- 	-fx-text-fill:black;
+ 	-color: firebrick;
+	-fx-background-color:linear-gradient(
+        from 0.0px 0.75em to 0.75em 0.0px,
+        repeat,
+        -color 0.0%,
+       -color 49.0%,
+        derive(-color, 30.0%) 50.0%,
+        derive(-color, 30.0%) 99.0%
+    );
  	-fx-background-radius:10.0;
+ }
+ 
+ .menu-item:focused .label{
+ 	-fx-text-fill:white;
  }
  
 
@@ -860,27 +886,38 @@
 ******************************************************************************/
 
 .progress-indicator{
-	-fx-progress-color:firebrick;
+	-color: firebrick;
+	-fx-accent:linear-gradient(
+        from 0.0px 0.75em to 0.75em 0.0px,
+        repeat,
+        -color 0.0%,
+       -color 49.0%,
+        derive(-color, 30.0%) 50.0%,
+        derive(-color, 30.0%) 99.0%
+    );
 }
 
 .progress-indicator:determinate .determinate-indicator .percentage{
 	-fx-fill:white;
 }
 
-.progress-bar{
+/* .progress-bar{
 	-fx-progress-color:orange;
 }
+* */
+
 
 .progress-bar > .bar {
-	-fx-background-color:firebrick;
-    /*-fx-background-color: linear-gradient(
+	-fx-accent:firebrick;
+	/*-fx-background-color:firebrick;*/
+    -fx-background-color: linear-gradient(
         from 0.0px 0.75em to 0.75em 0.0px,
         repeat,
         -fx-accent 0.0%,
         -fx-accent 49.0%,
         derive(-fx-accent, 30.0%) 50.0%,
         derive(-fx-accent, 30.0%) 99.0%
-    );*/
+    );
     
     -fx-background-insets: 1.0 1.0 1.0 1.0;
     -fx-padding: 0.2em;
@@ -977,7 +1014,7 @@
 	-fx-font-size:12.0px;
 	-fx-font-weight:bold;
 	-fx-border-color:transparent white transparent transparent ;
-	 -fx-border-insets: 5px;
+	 -fx-border-insets: 5.0px;
 }
 
 .librarySettings .text-area{

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root style="-fx-background-color: #404040;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: rgb(0,0,0,0.7); -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: firebrick transparent transparent transparent;" text="user name here" wrapText="true" StackPane.alignment="CENTER">
+         <tooltip>
+            <Tooltip />
+         </tooltip>
+      </Label>
+      <VBox alignment="BOTTOM_LEFT" minHeight="0.0" minWidth="0.0" pickOnBounds="false" spacing="10.0">
+         <cursor>
+            <Cursor fx:constant="V_RESIZE" />
+         </cursor>
+         <children>
+            <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" visible="false">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/warning.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Image is missing !!" />
+               </tooltip>
+            </Label>
+            <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="?" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Library-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip text="Total Libraries" />
+               </tooltip>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</fx:root>

@@ -7,11 +7,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXButton;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -33,6 +32,7 @@ public class ApplicationSettingsController extends BorderPane {
 	LIBRARIES, PLAYLISTS, SHORTCUTS, ANYONE;
     }
 
+
     @FXML
     private Tab librariesTab;
 
@@ -43,7 +43,7 @@ public class ApplicationSettingsController extends BorderPane {
     private Tab shortCutsTab;
 
     @FXML
-    private JFXButton doneButton;
+    private Button doneButton;
 
     //--------------------------------------------------------
 

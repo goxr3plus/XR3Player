@@ -10,18 +10,11 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.fxmisc.flowless.VirtualizedScrollPane;
-import org.fxmisc.richtext.InlineCssTextArea;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import com.jfoenix.controls.JFXTabPane;
 
@@ -47,8 +40,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -70,6 +61,7 @@ import windows.ExportWindowController;
 import windows.RenameWindow;
 import windows.SearchWindow;
 import windows.StarWindow;
+import windows.UpdateWindow;
 import xplayer.presenter.XPlayersList;
 import xr3capture.CaptureWindow;
 
@@ -128,6 +120,8 @@ public class Main extends Application {
 
     /** The Search Window of the application */
     public static SearchWindow searchWindow = new SearchWindow();
+
+    public static UpdateWindow updateWindow = new UpdateWindow();
 
     //
 
@@ -190,17 +184,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 65;
+    public static final int currentVersion = 66;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "03/05/2017";
-
-    /**
-     * The Thread which is responsible for the update check
-     */
-    private static Thread updaterThread;
+    public static final String releaseDate = "09/05/2017";
 
     /** The can save data. */
     public static boolean canSaveData = true;
@@ -278,6 +267,7 @@ public class Main extends Application {
 	    settingsWindow.getWindow().initOwner(window);
 	    aboutWindow.getWindow().initOwner(window);
 	    searchWindow.getWindow().initOwner(window);
+	    updateWindow.getWindow().initOwner(window);
 	    topBar.addXR3LabelBinding();
 
 	    // captureWindow
@@ -343,6 +333,9 @@ public class Main extends Application {
 		//avoid error
 		if (!loginMode.teamViewer.getItemsObservableList().isEmpty())
 		    loginMode.teamViewer.setCenterIndex(loginMode.teamViewer.getItemsObservableList().size() / 2);
+
+		//Load the information about every user
+		loginMode.usersInfoLoader.start();
 	    }
 
 	    //Create Original xr3database singature file	    
@@ -361,7 +354,7 @@ public class Main extends Application {
 	    checkJavaCombatibility();
 
 	    //Check for updates
-	    Main.checkForUpdates(false);
+	    updateWindow.searchForUpdates(false);
 
 	    //Main.songsContextMenu.show(window)
 	    // Main.songsContextMenu.hide()
@@ -486,6 +479,8 @@ public class Main extends Application {
 
 	//Close the LoginMode
 	loginMode.setVisible(false);
+	updateScreen.getProgressBar().setProgress(0);
+	updateScreen.getLabel().setText("--Starting--");
 	updateScreen.setVisible(true);
 
 	//SideBar
@@ -498,7 +493,7 @@ public class Main extends Application {
 	sideBar.getUserNameLabel().setText("Hello -> " + u.getUserName() + " <- !");
 
 	//Top Bar is the new Move Control
-	scene.setMoveControl(topBar);
+	scene.setMoveControl(topBar.getXr3Label());
 
 	//Do a pause so the login mode dissapears
 	PauseTransition pause = new PauseTransition(Duration.millis(500));
@@ -615,9 +610,9 @@ public class Main extends Application {
 		// vacuum?
 		if (vacuum) {
 		    VacuumProgress vService = new VacuumProgress();
-		    updateScreen.label.textProperty().bind(vService.messageProperty());
-		    updateScreen.progressBar.setProgress(-1);
-		    updateScreen.progressBar.progressProperty().bind(vService.progressProperty());
+		    updateScreen.getLabel().textProperty().bind(vService.messageProperty());
+		    updateScreen.getProgressBar().setProgress(-1);
+		    updateScreen.getProgressBar().progressProperty().bind(vService.progressProperty());
 		    updateScreen.setVisible(true);
 
 		    vService.start(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + "user" + File.separator + "dbFile.db"),
@@ -754,189 +749,6 @@ public class Main extends Application {
 		});
 	    }
 	}, "Restart Application Thread").start();
-    }
-
-    /**
-     * This method is fetching data from github to check if the is a new update for XR3Player
-     * 
-     * @param showTheWindow
-     *            If not update is available then don't show the window
-     */
-    public static synchronized void checkForUpdates(boolean showTheWindow) {
-
-	// Not already running
-	if (updaterThread == null || !updaterThread.isAlive()) {
-	    updaterThread = new Thread(() -> {
-		Platform.runLater(() -> ActionTool.showNotification("Searching for Updates", "Fetching informations from server...",
-			Duration.millis(1000), NotificationType.INFORMATION));
-
-		if (InfoTool.isReachableByPing("www.google.com")) {
-
-		    try {
-
-			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
-
-			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
-
-			Element lastArticle = doc.getElementsByTag("article").last();
-
-			// Not disturb the user every time the application starts if there is not new update
-			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
-			    return;
-
-			// Update is available or not?
-			Platform.runLater(() -> {
-			    Alert alert = new Alert(AlertType.CONFIRMATION);
-			    alert.setTitle("Update Window");
-			    if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
-				alert.setHeaderText("You are up too date :)");
-				alert.setContentText("Your current version is: ->( " + currentVersion + " )<-");
-			    } else {
-				alert.setHeaderText("New Update available!!!");
-				alert.setContentText("Update ->( " + lastArticle.id() + " )<- is available!\n\t\t\t\t\tYour current version is: ->( "
-					+ currentVersion + " )<-");
-			    }
-			    alert.initStyle(StageStyle.UTILITY);
-			    alert.initOwner(Main.window);
-
-			    // Label label = new Label("Information about the
-			    // latest update :)")
-
-			    InlineCssTextArea textArea = new InlineCssTextArea();
-			    textArea.setEditable(false);
-			    textArea.setFocusTraversable(false);
-			    // textArea.setWrapText(true)
-
-			    VirtualizedScrollPane<InlineCssTextArea> vsPane = new VirtualizedScrollPane<>(textArea);
-			    vsPane.setMinSize(450, 550);
-			    vsPane.setMaxWidth(Double.MAX_VALUE);
-			    vsPane.setMaxHeight(Double.MAX_VALUE);
-			    GridPane.setVgrow(vsPane, Priority.ALWAYS);
-			    GridPane.setHgrow(vsPane, Priority.ALWAYS);
-
-			    GridPane expContent = new GridPane();
-			    expContent.setMaxWidth(Double.MAX_VALUE);
-			    expContent.setMaxHeight(Double.MAX_VALUE);
-			    // expContent.add(label, 0, 0)
-			    expContent.add(vsPane, 0, 0);
-
-			    InlineCssTextArea textArea2 = new InlineCssTextArea();
-			    textArea2.setEditable(false);
-			    textArea2.setFocusTraversable(false);
-			    textArea2.setWrapText(true);
-
-			    VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(textArea2);
-			    vsPane2.setMinSize(450, 550);
-			    vsPane2.setMaxWidth(Double.MAX_VALUE);
-			    vsPane2.setMaxHeight(Double.MAX_VALUE);
-			    GridPane.setVgrow(vsPane2, Priority.ALWAYS);
-			    GridPane.setHgrow(vsPane2, Priority.ALWAYS);
-
-			    expContent.add(vsPane2, 1, 0);
-
-			    // -- TextArea 
-			    String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
-			    doc.getElementsByTag("article").forEach(element -> {
-
-				// Append the text to the textArea
-				textArea.appendText("\n\n-------------Start of Update (" + element.id() + ")-------------\n");
-
-				// Information
-				textArea.appendText("->Information: ");
-				textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style.replace("black", "#202020"));
-				textArea.appendText(element.getElementsByClass("about").text() + "\n");
-
-				// Release Date
-				textArea.appendText("->Release Date: ");
-				textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "firebrick"));
-				textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
-
-				// Minimum JRE
-				textArea.appendText("->Minimum Java Version: ");
-				textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("black", "orange"));
-				textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
-
-				// ChangeLog
-				textArea.appendText("->ChangeLog:\n");
-				textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "green"));
-				final AtomicInteger counter = new AtomicInteger(-1);
-				Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
-				    if (counter.addAndGet(1) >= 1) {
-					String s = "\t" + counter + ")";
-					textArea.appendText(s);
-					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style);
-					textArea.appendText(el + "\n");
-				    }
-				});
-
-			    });
-
-			    textArea.moveTo(textArea.getLength());
-			    textArea.requestFollowCaret();
-
-			    // -- TextArea 2
-			    doc.getElementsByTag("section").forEach(section -> {
-
-				// Append the text to the textArea
-				textArea2.appendText("\n\n-------------Upcoming Features for XR3Player-------------\n\n");
-
-				// Information
-				textArea2.appendText("->Coming:\n");
-				textArea2.setStyle(textArea2.getLength() - 8, textArea2.getLength() - 1, style.replace("black", "green"));
-				final AtomicInteger counter = new AtomicInteger(-1);
-				Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
-				    if (counter.addAndGet(1) >= 1) {
-					String s = "\t" + counter + ")";
-					textArea2.appendText(s);
-					textArea2.setStyle(textArea2.getLength() - s.length(), textArea2.getLength() - 1, style);
-					textArea2.appendText(el + "\n");
-				    }
-				});
-
-				//Last Updated
-				textArea2.appendText("->Last Updated: ");
-				textArea2.setStyle(textArea2.getLength() - 14, textArea2.getLength() - 1, style.replace("black", "firebrick"));
-				textArea2.appendText(section.getElementById("lastUpdated").text());
-			    });
-
-			    textArea2.moveTo(textArea2.getLength());
-			    textArea2.requestFollowCaret();
-
-			    // Set the default buttons
-			    //ButtonType autoUpdate = new ButtonType("Auto Update", ButtonData.YES)
-			    ButtonType download = new ButtonType("Download", ButtonData.OK_DONE);
-			    ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			    alert.getButtonTypes().setAll(download, cancel);
-
-			    // Set expandable Exception into the dialog pane.
-			    alert.getDialogPane().setExpandableContent(expContent);
-			    alert.getDialogPane().setExpanded(true);
-			    alert.getDialogPane().setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-			    textArea.requestFocus();
-			    // Show and Wait
-			    alert.showAndWait().ifPresent(answer -> {
-				if (answer == download)
-				    ActionTool.openWebSite("https://sourceforge.net/projects/xr3player/");
-			    });
-
-			});
-		    } catch (IOException ex) {
-			Platform.runLater(() -> ActionTool.showNotification("Error", "Trying to fetch update information a problem occured",
-				Duration.millis(2500), NotificationType.ERROR));
-			logger.log(Level.WARNING, "", ex);
-		    }
-
-		} else
-		    Platform.runLater(() -> ActionTool.showNotification("Can't Connect",
-			    "Can't connect to the update site :\n1) Maybe there is not internet connection\n2)GitHub is down for maintenance",
-			    Duration.millis(2500), NotificationType.ERROR));
-
-	    }, "Application Update Thread");
-
-	    updaterThread.setDaemon(true);
-	    updaterThread.start();
-	}
     }
 
     /**

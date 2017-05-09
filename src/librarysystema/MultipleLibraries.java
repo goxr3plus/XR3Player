@@ -20,6 +20,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -58,6 +60,8 @@ public class MultipleLibraries extends StackPane {
 
     /** The hand. */
     Cursor hand = Cursor.HAND;
+
+    private static final Image noItemsImage = InfoTool.getImageFromDocuments("noMusic.png");
 
     /**
      * Constructor.
@@ -226,9 +230,14 @@ public class MultipleLibraries extends StackPane {
 	stack.setManaged(false);
 	stack.setVisible(false);
 
+	//ImageView
+	ImageView imageView = new ImageView(noItemsImage);
+	imageView.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
+	imageView.managedProperty().bind(imageView.visibleProperty());
+
 	// HBOX
 	HBox hBox = new HBox();
-	hBox.getChildren().addAll(stack, marquee);
+	hBox.getChildren().addAll(imageView, stack, marquee);
 
 	// --Drag Over
 	hBox.setOnDragOver(dragOver -> {

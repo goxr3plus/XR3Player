@@ -89,7 +89,7 @@ public class ExportDataBase extends Service<Boolean> {
      */
     private void done() {
 	Main.updateScreen.setVisible(false);
-	Main.updateScreen.progressBar.progressProperty().unbind();
+	Main.updateScreen.getProgressBar().progressProperty().unbind();
 
     }
 
@@ -114,7 +114,7 @@ public class ExportDataBase extends Service<Boolean> {
 		    for (String file : fileList) {
 
 			// Refresh the label Text
-			Platform.runLater(() -> Main.updateScreen.label.setText("OUT:" + file));
+			Platform.runLater(() -> Main.updateScreen.getLabel().setText("OUT:" + file));
 
 			// Create zipEntry		
 			zos.putNextEntry(new ZipEntry(file));

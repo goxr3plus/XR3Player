@@ -273,7 +273,7 @@ public class LocalDBManager {
      */
     public void loadApplicationDataBase() {
 	Main.updateScreen.setVisible(true);
-	Main.updateScreen.progressBar.progressProperty().bind(dataLoader.progressProperty());
+	Main.updateScreen.getProgressBar().progressProperty().bind(dataLoader.progressProperty());
 	dataLoader.restart();
     }
 
@@ -310,7 +310,7 @@ public class LocalDBManager {
 		PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
 		pause1.setOnFinished(f -> {
 		    Main.updateScreen.setVisible(false);
-		    Main.updateScreen.progressBar.progressProperty().unbind();
+		    Main.updateScreen.getProgressBar().progressProperty().unbind();
 		});
 		pause1.playFromStart();
 
@@ -318,7 +318,7 @@ public class LocalDBManager {
 
 	    // ---------------------if failed
 	    setOnFailed(fail -> {
-		Main.updateScreen.progressBar.progressProperty().unbind();
+		Main.updateScreen.getProgressBar().progressProperty().unbind();
 		ActionTool.showNotification("Fatal Error!", "DataLoader failed during loading dataBase!!Application will exit...",
 			Duration.millis(1500), NotificationType.ERROR);
 		System.exit(0);
@@ -343,7 +343,7 @@ public class LocalDBManager {
 			Main.logger.info("Loading Libraries....");
 
 			// Refresh the text
-			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Libraries..."));
+			Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries..."));
 			updateProgress(1, 2);
 
 			//Kepp a List of all Libraries
@@ -363,13 +363,13 @@ public class LocalDBManager {
 			Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().addMultipleLibraries(libraries));
 
 			//Load the Opened Libraries
-			Platform.runLater(() -> Main.updateScreen.label.setText("Loading Opened Libraries..."));
+			Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Opened Libraries..."));
 			loadOpenedLibraries();
 			//Calculate opened libraries
 			Platform.runLater(() -> Main.libraryMode.calculateOpenedLibraries());
 
 			//Load PlayerMediaList
-			Platform.runLater(() -> Main.updateScreen.label.setText("Loading previous data..."));
+			Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading previous data..."));
 			Main.playedSongs.uploadFromDataBase();
 
 			//--FINISH

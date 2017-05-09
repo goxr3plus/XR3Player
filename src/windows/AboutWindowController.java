@@ -51,6 +51,7 @@ public class AboutWindowController extends BorderPane {
     /** The logger. */
     private Logger logger = Logger.getLogger(getClass().getName());
 
+    /** Window **/
     private Stage window = new Stage();
 
     /**
