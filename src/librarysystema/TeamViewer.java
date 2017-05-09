@@ -158,7 +158,7 @@ public class TeamViewer {
 	    });
 
 	    // -- KeyListeners
-	    setOnKeyReleased(key -> {
+	    setOnKeyPressed(key -> {
 		if (key.getCode() == KeyCode.RIGHT)
 		    next();
 		else if (key.getCode() == KeyCode.LEFT)

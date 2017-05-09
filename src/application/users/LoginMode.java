@@ -43,6 +43,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -463,6 +464,20 @@ public class LoginMode extends BorderPane {
 		else if (scroll.getDeltaX() > 0)
 		    previous();
 	    });
+
+	    // --- Mouse Listeners
+	    setOnMouseEntered(m -> {
+		if (!isFocused())
+		    requestFocus();
+	    });
+
+	    // -- KeyListeners
+//	    setOnKeyReleased(key -> {
+//		if (key.getCode() == KeyCode.RIGHT)
+//		    next();
+//		else if (key.getCode() == KeyCode.LEFT)
+//		    previous();
+//	    });
 
 	    // this.setOnMouseMoved(m -> {
 	    //
