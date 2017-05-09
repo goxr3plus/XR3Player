@@ -3,19 +3,19 @@
 [![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GitHub contributors][contributors-image]][contributors-url]
 [![license][license-image]][license-url]
+<a href="https://sourceforge.net/projects/xr3player/files/latest/download" rel="nofollow"><img alt="Download XR3Player" src="https://img.shields.io/sourceforge/dt/xr3player.svg"></a>
 
 [contributors-url]: https://github.com/goxr3plus/XR3Player/graphs/contributors
 [contributors-image]: https://img.shields.io/github/contributors/goxr3plus/XR3Player.svg
 [license-url]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
+
 -----------------------Current status ##BETA-------------------------------------
 
 A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
-#Download on SourceForge
-
-https://sourceforge.net/projects/xr3player/
+#Download on SourceForge https://sourceforge.net/projects/xr3player/
 
 ## Image from Update 66 Login Screen
 ![xr3player](https://cloud.githubusercontent.com/assets/20374208/25839995/a8f8d640-34a2-11e7-8cce-b41e5c6b9baa.png)
