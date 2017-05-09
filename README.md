@@ -17,11 +17,14 @@ A pure Java Media Player which is what you always wanted , OPENSOURCE!!
 
 https://sourceforge.net/projects/xr3player/
 
-## Image from Update 64 Login Screen
-![xr3player](https://cloud.githubusercontent.com/assets/20374208/25604546/cc24baee-2f0c-11e7-82ed-3fb1c233dbb7.png)
+## Image from Update 66 Login Screen
+![xr3player](https://cloud.githubusercontent.com/assets/20374208/25839995/a8f8d640-34a2-11e7-8cce-b41e5c6b9baa.png)
 
 ## Image from Update 64 After Login
 ![xr3player](https://cloud.githubusercontent.com/assets/20374208/25604757/abcc253c-2f0e-11e7-9394-55ac3ff7f152.png)
+
+## Image from Update 66 Internal WebBrowser
+![xr3player](https://cloud.githubusercontent.com/assets/20374208/25840212/a69cf222-34a3-11e7-8400-8f5952f630a1.png)
 
 # On youtube
 [![XR3Player](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
