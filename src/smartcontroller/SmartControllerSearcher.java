@@ -71,7 +71,9 @@ public class SmartControllerSearcher extends HBox {
     public SmartControllerSearcher(SmartController control) {
 	controller = control;
 
-	super.setAlignment(Pos.CENTER);
+	//Super
+	setAlignment(Pos.CENTER);
+	getChildren().add(searchField);
 	getStyleClass().add("search-box");
 
 	// searchField
@@ -80,6 +82,11 @@ public class SmartControllerSearcher extends HBox {
 	searchField.setMaxWidth(Integer.MAX_VALUE);
 	searchField.setPromptText("Search.....");
 	searchField.textProperty().addListener((observable, newValue, oldValue) -> {
+
+	    //Check if the controller is free
+	    if (!controller.isFree(false))
+		return;
+
 	    if (searchField.getText().isEmpty()) {
 		saveSettingBeforeSearch = true;
 
@@ -90,17 +97,9 @@ public class SmartControllerSearcher extends HBox {
 		//continue 
 		controller.getNavigationHBox().setDisable(false);
 		controller.loadService.startService(false, false);
-		//Main.advancedSearch.searchOnFlySelected()
 
-	    } else if (controller.isFree(false) && Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
-		//Save the Settings before the first search
-		if (saveSettingBeforeSearch) {
-		    service.pageBeforeSearch = controller.getCurrentPage().get();
-		    controller.setVerticalScrollValueWithoutSearch(controller.getVerticalScrollBar().getValue());
-
-		    saveSettingBeforeSearch = false;
-		}
-
+	    } else if (Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
+		saveSettingsBeforeSearch();
 		service.search();
 	    }
 	});
@@ -111,17 +110,29 @@ public class SmartControllerSearcher extends HBox {
 	searchField.editableProperty().bind(service.runningProperty().not());
 	//searchField.disableProperty().bind(Main.advancedSearch.showingProperty())
 	searchField.setOnAction(ac -> {
-	    if (controller.isFree(false))
+	    if (controller.isFree(false)) {
+		saveSettingsBeforeSearch();
 		service.search();
+	    }
 	});
 
-	// searchField.setOnMouseClicked(m -> {
-	// if (m.getButton() == MouseButton.SECONDARY)
-	// Main.advancedSearch.show(searchField, controller);
-	// })
+	//Override the default context menu
 	searchField.setContextMenu(new ContextMenu());
-	getChildren().add(searchField);
 
+    }
+
+    /**
+     * //Save the Settings before the first search -> [ ScrollBar position and current page of the SmartController ]
+     */
+    private void saveSettingsBeforeSearch() {
+
+	//lock it so no override happens during the search
+	if (!saveSettingBeforeSearch)
+	    return;
+
+	service.pageBeforeSearch = controller.getCurrentPage().get();
+	controller.setVerticalScrollValueWithoutSearch(controller.getVerticalScrollBar().getValue());
+	saveSettingBeforeSearch = false;
     }
 
     /**

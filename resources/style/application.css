@@ -6,7 +6,6 @@
 
 
 
-
 /* .icon{
 	-fx-text-fill: #FE774D;
 	-fx-padding: 10.0;
@@ -28,6 +27,21 @@
 }
 */
 
+.chart-pie-label {
+    -fx-fill: white;
+    /*-fx-font-weight:bold;*/
+    -fx-font-size: 1em;
+} 
+
+.chart .chart-title .text{
+	-fx-font-weight:bold;
+	-fx-fill:white;
+}
+
+.chart .chart-content .chart-pie-label-line {
+	-fx-stroke: #8b4513;
+    -fx-fill: #8b4513;
+}
 
 
 /*******************************************************************************
@@ -674,7 +688,7 @@
 
  
  .context-menu {
- 	-fx-background-color:rgb(0,0,0,0.95);
+ 	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
   	-fx-background-radius:4.0;
   	/*-fx-border-width:2.0; 	
     -fx-border-style:segments(4.0); */
@@ -684,7 +698,7 @@
  .menu-item .label{
  	-fx-text-fill:white;
  	-fx-font-weight:bold;
- 	-fx-font-size:13;
+ 	-fx-font-size:13.0;
  }
  
  .menu-item:focused {
@@ -1239,10 +1253,16 @@
 }
 
 .menu-button .label:hover{
-	-fx-text-fill:orange;
+	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
+	-fx-text-fill:white;
 }
 
 .visWindowMenuButton .label{	
+	-fx-text-fill:white;
+}
+
+.visWindowMenuButton .label:hover{	
+	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
 	-fx-text-fill:white;
 }
 
@@ -1277,65 +1297,47 @@
 
 ******************************************************************************/
 
+/* Universal */
+.leftPane:hover , .rightPane:hover , .topPane:hover , .bottomPane:hover , .topLeftPane:hover , .topRightPane:hover , .bottomRightPane:hover , .bottomLeftPane:hover {	
+	-fx-background-color:rgb(255,0,0,0.8);
+	-fx-border-width:2.0;
+	/*-fx-border-style:dotted ;	*/
+}
 
 /* Sides */
-.leftPane:hover{	
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
+.leftPane:hover{
 	-fx-border-color:transparent transparent transparent black;
 }
 
 .rightPane:hover{
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
 	-fx-border-color:transparent black transparent transparent;
 }
 
 .topPane:hover{
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
 	-fx-border-color:black transparent transparent transparent;
 }
 
 .bottomPane:hover{	
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
 	-fx-border-color:transparent transparent black transparent;
 }
 
 /* Corners */
 
 .topLeftPane:hover{
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
 	-fx-border-color:black transparent transparent black;
 }
 
 
 .topRightPane:hover{
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
 	-fx-border-color:black black transparent transparent;
 }
 
 
-.bottomRightPane:hover{	
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
+.bottomRightPane:hover{
 	-fx-border-color:transparent black black transparent;	
 }
 
-.bottomLeftPane:hover{	
-	-fx-background-color:white;
-	-fx-border-width:2.0;
-	-fx-border-style:dotted ;
+.bottomLeftPane:hover{
 	-fx-border-color:transparent transparent black black;
 }
 

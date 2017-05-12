@@ -135,9 +135,9 @@ public class RenameWindow extends VBox {
 	    //Check newValue
 	    if (newValue != null) {
 
-		// Allow until 150 characters
-		if (newValue.length() > 150)
-		    inputField.setText(newValue.substring(0, 150));
+		// Allow until 200 characters
+		if (newValue.length() > 200)
+		    inputField.setText(newValue.substring(0, 200));
 
 		// Strict Mode
 		for (String character : notAllow)

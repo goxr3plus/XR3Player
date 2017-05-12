@@ -78,7 +78,7 @@ public class StreamPlayerEventLauncher implements Callable<String> {
 		    .statusUpdated(new StreamPlayerEvent(source, playerState, encodedStreamPosition, description)));
 	}
 
-	System.out.println("State Updated to: " + playerState);
+	System.out.println("Stream player Status -> " + playerState);
 	return "OK";
     }
 }

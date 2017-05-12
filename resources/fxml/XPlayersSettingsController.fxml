@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root prefHeight="420.0" prefWidth="494.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Visualizers(?)" />
+            <JFXCheckBox fx:id="showFPS" alignment="CENTER" selected="true" styleClass="settingsRadioButton" text="Show FPS (Frames Per Second)">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="Visualizers show Frames Per Second [FPS]" />
+               </tooltip>
+            </JFXCheckBox>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="25.0" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Players(?)" />
+            <JFXCheckBox fx:id="startImmediately" alignment="CENTER" selected="true" styleClass="settingsRadioButton" text="Start at once">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="When you drop a song into the player it wil start immediately" />
+               </tooltip>
+            </JFXCheckBox>
+            <JFXCheckBox fx:id="askSecurityQuestion" alignment="CENTER" selected="true" styleClass="settingsRadioButton" text="Ask Security Question" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="When you drop a song into the player it will ask security question if other song is already playing" />
+               </tooltip>
+            </JFXCheckBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="15.0" />
+         </padding>
+      </VBox>
+   </center>
+</fx:root>

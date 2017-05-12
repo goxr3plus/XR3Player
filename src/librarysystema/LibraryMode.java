@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
 import application.settings.window.ApplicationSettingsController.SettingsTab;
-import database.LocalDBManager;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -164,7 +163,7 @@ public class LibraryMode extends GridPane {
 		    // Until the randomName doesn't already exists
 		    do {
 			tableName = ActionTool.returnRandomTableName();
-			validName = !LocalDBManager.tableExists(tableName);
+			validName = !Main.dbManager.doesTableExist(tableName);
 		    } while (!validName);
 		    final String dataBaseTableName = tableName; //add it to a final variable
 

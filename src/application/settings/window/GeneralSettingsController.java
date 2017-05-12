@@ -1,28 +1,31 @@
+/**
+ * 
+ */
 package application.settings.window;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXCheckBox;
-
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import tools.InfoTool;
+import tools.JavaFXTools;
 
 /**
- * 
- *
  * @author GOXR3PLUS
+ *
  */
-public class LibrariesSettingsController extends BorderPane {
+public class GeneralSettingsController extends BorderPane {
 
     //-----------------------------------------------------
 
     @FXML
-    private JFXCheckBox showWidgets;
+    private ToggleGroup sideBarSideGroup;
 
     // -------------------------------------------------------------
 
@@ -32,10 +35,10 @@ public class LibrariesSettingsController extends BorderPane {
     /**
      * Constructor.
      */
-    public LibrariesSettingsController() {
+    public GeneralSettingsController() {
 
 	// ------------------------------------FXMLLOADER ----------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibrariesSettingsController.fxml"));
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "GeneralSettingsController.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 
@@ -53,16 +56,25 @@ public class LibrariesSettingsController extends BorderPane {
     @FXML
     private void initialize() {
 
-	//Listener
-	showWidgets.selectedProperty()
-		.addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-ShowWidgets", String.valueOf(showWidgets.isSelected())));
+	//sideBarSideGroup
+	sideBarSideGroup.selectedToggleProperty().addListener(listener -> {
+
+	    //Update the properties file
+	    Main.dbManager.getPropertiesDb().updateProperty("General-SideBarSide",
+		    Integer.toString(JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup)));
+
+	    //Fix the side bar position
+	    Main.sideBar.changeSide(
+		    JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
+	});
+
     }
 
     /**
-     * @return the showWidgets
+     * @return the sideBarSideGroup
      */
-    public JFXCheckBox getShowWidgets() {
-	return showWidgets;
+    public ToggleGroup getSideBarSideGroup() {
+	return sideBarSideGroup;
     }
 
 }

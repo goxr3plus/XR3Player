@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +25,7 @@ import application.users.LoginMode;
 import application.users.User;
 import application.users.UserMode;
 import borderless.BorderlessScene;
-import database.LocalDBManager;
+import database.DbManager;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -52,6 +54,7 @@ import smartcontroller.PlayedMediaList;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import tools.ActionTool;
 import tools.InfoTool;
+import tools.JavaFXTools;
 import tools.NotificationType;
 import treeview.TreeViewManager;
 import webBrowser.WebBrowserController;
@@ -184,12 +187,12 @@ public class Main extends Application {
     /**
      * The current update of XR3Player
      */
-    public static final int currentVersion = 66;
+    public static final int currentVersion = 67;
 
     /**
      * This application version release date
      */
-    public static final String releaseDate = "09/05/2017";
+    public static final String releaseDate = "13/05/2017";
 
     /** The can save data. */
     public static boolean canSaveData = true;
@@ -199,7 +202,7 @@ public class Main extends Application {
     // --------------START: The below have depencities on others------------------------
 
     /** The Constant dbManager. */
-    public static LocalDBManager dbManager;
+    public static DbManager dbManager;
 
     /** The Constant libraryMode. */
     public static LibraryMode libraryMode = new LibraryMode();
@@ -247,7 +250,7 @@ public class Main extends Application {
 	    //applicationBorderPane.setStyle("-fx-background-color:black;")
 	    // applicationBorderPane.setCenter(root)
 
-	    //LoginMode    
+	    //LoginMode  
 	    loginMode.setLeft(sideBar);
 	    sideBar.prepareForLoginMode(true);
 
@@ -371,7 +374,7 @@ public class Main extends Application {
 
     @Override
     public void init() {
-	System.out.println("Hello from init");
+	System.out.println("JavaFX Init Method Called");
     }
 
     /**
@@ -458,7 +461,7 @@ public class Main extends Application {
 	if (backgroundFound)
 	    return;
 
-	Image img = new Image("/image/visualizer.jpg");
+	Image img = new Image("/image/application_background.jpg");
 	BackgroundImage bgImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 		new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
 	root.setBackground(new Background(bgImg));
@@ -502,7 +505,7 @@ public class Main extends Application {
 	    //----------------START:initialize everything needed------------------------------------------
 
 	    //Create this in a Thread
-	    Thread s = new Thread(() -> dbManager = new LocalDBManager(u.getUserName()));
+	    Thread s = new Thread(() -> dbManager = new DbManager(u.getUserName()));
 	    s.start();
 
 	    //Do the below until the database is initialized
@@ -555,6 +558,9 @@ public class Main extends Application {
 	    } catch (InterruptedException ex) {
 		ex.printStackTrace();
 	    }
+
+	    loadApplicationSettings();
+
 	    dbManager.loadApplicationDataBase();
 
 	    //  dbManager.recreateJSonDataBase()
@@ -749,6 +755,77 @@ public class Main extends Application {
 		});
 	    }
 	}, "Restart Application Thread").start();
+    }
+
+    /**
+     * Loads all the application settings from the property file
+     */
+    public static void loadApplicationSettings() {
+	try {
+
+	    //Start
+	    System.out.println("\n\n-----App Settings--------------\n");
+
+	    Properties settings = dbManager.getPropertiesDb().getProperties();
+	    settings.forEach((key, value) -> System.out.println(key + ":" + value));
+
+	    //Example
+	    Optional.ofNullable(settings.getProperty("")).ifPresent(s -> {
+		System.out.println(s);
+
+	    });
+
+	    //----------                        --------------------
+
+	    //--General-Settings
+	    Optional.ofNullable(settings.getProperty("General-SideBarSide")).ifPresent(s -> JavaFXTools
+		    .selectToggleOnIndex(Main.settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
+
+	    //--Libraries-Settings
+	    Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
+		    .ifPresent(s -> Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
+
+	    //--Playlists-Settings-Search
+	    Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
+		    .ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
+
+	    Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing")).ifPresent(s -> JavaFXTools
+		    .selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
+
+	    //--Playlists-Settings-General
+
+	    Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection")).ifPresent(s -> JavaFXTools
+		    .selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(), Integer.valueOf(s)));
+
+	    Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown")).ifPresent(s -> JavaFXTools
+		    .selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
+
+	    //--XPlayers-Visualizer-Settings
+	    Optional.ofNullable(settings.getProperty("XPlayers-Visualizer-ShowFPS")).ifPresent(s -> {
+
+		//Set the Value to the CheckBox
+		Main.settingsWindow.getxPlayersSettingsController().getShowFPS().setSelected(Boolean.parseBoolean(s));
+
+		//Update all the players
+		Main.xPlayersList.getList().forEach(xPlayerController -> xPlayerController.visualizer.setShowFPS(Boolean.parseBoolean(s)));
+
+	    });
+
+	    //--XPlayers-General-Settings
+	    Optional.ofNullable(settings.getProperty("XPlayers-General-StartAtOnce"))
+		    .ifPresent(s -> Main.settingsWindow.getxPlayersSettingsController().getStartImmediately().setSelected(Boolean.parseBoolean(s)));
+
+	    Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion")).ifPresent(
+		    s -> Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
+
+	    //----------                        --------------------
+
+	    //Finish
+	    System.out.println("\n-----App Settings Finish--------------\n\n");
+
+	} catch (Exception ex) {
+	    ex.printStackTrace();
+	}
     }
 
     /**

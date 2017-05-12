@@ -17,10 +17,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import tools.ActionTool;
 import tools.InfoTool;
+import tools.JavaFXTools;
 import tools.NotificationType;
 
 /**
- * This class is used as the SideBar of the application.
+ * 
  *
  * @author GOXR3PLUS
  */
@@ -75,8 +76,32 @@ public class PlaylistsSettingsController extends BorderPane {
     @FXML
     private void initialize() {
 
+	//accordion
+	accordion.setExpandedPane(accordion.getPanes().get(1));
+
+	//--Playlists-Settings-Search--------------
+
+	//instantSearch
+	instantSearch.selectedProperty().addListener(
+		l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-InstantSearch", String.valueOf(instantSearch.isSelected())));
+
+	//fileSearchGroup
+	fileSearchGroup.selectedToggleProperty().addListener(listener -> Main.dbManager.getPropertiesDb()
+		.updateProperty("PlayLists-Search-FileSearchUsing", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(fileSearchGroup))));
+
+	//--Playlists-Settings-General--------------
+
+	//playedFilesDetectionGroup
+	playedFilesDetectionGroup.selectedToggleProperty()
+		.addListener(listener -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-PlayedFilesDetection",
+			Integer.toString(JavaFXTools.getIndexOfSelectedToggle(playedFilesDetectionGroup))));
+
 	//totalFilesShownGroup
 	totalFilesShownGroup.selectedToggleProperty().addListener(listener -> {
+
+	    //Update the properties file
+	    Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown",
+		    Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
 
 	    //First Update all the Libraries
 	    Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController()
@@ -98,8 +123,6 @@ public class PlaylistsSettingsController extends BorderPane {
 			NotificationType.ERROR);
 	});
 
-	//accordion
-	accordion.setExpandedPane(accordion.getPanes().get(0));
     }
 
     /**

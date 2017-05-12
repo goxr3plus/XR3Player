@@ -6,21 +6,26 @@ package services;
 import static application.Main.libraryMode;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
+import org.apache.commons.io.FileUtils;
+
 import application.Main;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.Duration;
+import media.Media;
 import smartcontroller.SmartController;
 import streamplayer.ThreadFactoryWithNamePrefix;
 import tools.ActionTool;
 import tools.InfoTool;
+import tools.JavaFXTools;
 import tools.NotificationType;
 
 /**
@@ -120,7 +125,12 @@ public class FilesFilterService {
 
 	//System.out.println("Checking elements.....")
 	// controller is free && threadIsRunning?
-	if (controllerIsFree[0] && threadIsRunning)
+	if (controllerIsFree[0] && threadIsRunning) {
+
+	    //Check the settings
+	    int mode = JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup());
+
+	    //For each media File of the Controller
 	    controller.getItemsObservableList().stream().forEach(media -> {
 		if (!threadIsRunning)
 		    return;
@@ -128,28 +138,42 @@ public class FilesFilterService {
 		// File exists?
 		Platform.runLater(() -> media.fileExistsProperty().set(Paths.get(media.getFilePath()).toFile().exists()));
 
-		// Item has been played?
-		if (Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup().getToggles().get(0).isSelected()) {
-		    // System.out.println("Entered 1")
-		    //Check bases on File Absolute Path
-		    if (Main.playedSongs.containsFile(media.getFilePath()))
-			Platform.runLater(() -> media.setMediaPlayed(true));
-		    else
-			Platform.runLater(() -> media.setMediaPlayed(false));
-		} else {
-		    // System.out.println("Entered 2")
-		    String mediaName = InfoTool.getFileName(media.getFilePath());
+		if (mode == 0) { // Check based on File Content [ The content must be absolutely the same ] 
+
+		    //Go
+		    File mediaPath = new File(media.getFilePath());
+		    setMediaPlayed(media, Main.playedSongs.getSet().stream().anyMatch(playedFileAbsolutePath -> {
+			try {
+			    return FileUtils.contentEquals(new File(playedFileAbsolutePath), mediaPath);
+			} catch (IOException ex) {
+			    ex.printStackTrace();
+			}
+			return false;
+		    }));
+		} else if (mode == 1) { //Check based on FileName and FileLength -> both must be equal
+
+		    //Go
+		    String mediaName = InfoTool.getFileName(media.getFilePath()).toLowerCase();
+		    // String mediaPath = media.getFilePath().toLowerCase()
 		    long mediaFileLength = new File(media.getFilePath()).length();
-		    //Check based on FileName and FileLength -> both must be equal
-		    if (Main.playedSongs.getSet().stream().filter(file -> file.contains(mediaName))
-			    .anyMatch(file -> new File(file).length() == mediaFileLength))
-			Platform.runLater(() -> media.setMediaPlayed(true));
-		    else
-			Platform.runLater(() -> media.setMediaPlayed(false));
+		    setMediaPlayed(media,
+			    Main.playedSongs.getSet().stream()
+				    .filter(playedFileAbsolutePath -> playedFileAbsolutePath.toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
+				    .anyMatch(playedFile -> new File(playedFile).length() == mediaFileLength));
 
 		}
 	    });
+	}
 
+    }
+
+    /**
+     * Set's the Media Played or Not [ Using JavaFX Thread ]
+     * 
+     * @param played
+     */
+    private static void setMediaPlayed(Media m, boolean played) {
+	Platform.runLater(() -> m.setMediaPlayed(played));
     }
 
 }

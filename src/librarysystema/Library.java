@@ -232,7 +232,7 @@ public class Library extends StackPane {
 
 			    //Update the JSONFile
 			    if (isOpened())
-				Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+				Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 			} else { // duplicate
 			    resetTheName();
 			    ActionTool.showNotification("Dublicate Name", "Name->" + newName + " is already used from another Library...",
@@ -889,7 +889,7 @@ public class Library extends StackPane {
 
 		//Update the JSONFile
 		if (isOpened())
-		    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+		    Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 
 	    } catch (SQLException sql) {
 		logger.log(Level.WARNING, "\n", sql);
@@ -922,7 +922,7 @@ public class Library extends StackPane {
 	    }
 
 	    //Update the JSONFile
-	    Main.dbManager.updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+	    Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 
 	    //Calculate opened libraries
 	    Main.libraryMode.calculateOpenedLibraries();

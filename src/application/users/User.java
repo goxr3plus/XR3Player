@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import application.Main;
+import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -24,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -182,6 +184,11 @@ public class User extends StackPane {
 	//Name
 	nameField.setText(getUserName());
 	nameField.getTooltip().setText(getUserName());
+	nameField.setOnMouseReleased(m -> {
+	    if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2
+		    && Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
+		renameUser(nameField);
+	});
     }
 
     /**
@@ -220,7 +227,8 @@ public class User extends StackPane {
     }
 
     /**
-     * @param nameField the nameField to set
+     * @param nameField
+     *            the nameField to set
      */
     public void setNameField(Label nameField) {
 	this.nameField = nameField;

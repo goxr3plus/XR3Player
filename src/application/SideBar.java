@@ -17,6 +17,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -191,6 +192,25 @@ public class SideBar extends BorderPane {
 	    hideBar();
     }
 
+    /**
+     * Changes the side of the SideBar
+     * 
+     * @param orientation
+     */
+    public void changeSide(NodeOrientation orientation) {
+
+	Main.root.getChildren().remove(this);
+
+	//Check the orientation
+	if (orientation == NodeOrientation.LEFT_TO_RIGHT)
+	    Main.root.setLeft(this);
+	else if (orientation == NodeOrientation.RIGHT_TO_LEFT)
+	    Main.root.setRight(this);
+
+	//Set the orientation
+	this.setNodeOrientation(orientation);
+    }
+
     String style = "-fx-background-radius: 15 0 0 15; -fx-background-color:black; -fx-border-width:0 4 0 0;";
 
     //    /**
@@ -288,7 +308,7 @@ public class SideBar extends BorderPane {
 	hideSideBar.setOnAction(a -> toogleBar());
 
 	//applicationSettings
-	applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.ANYONE));
+	applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.GENERERAL));
 
 	//applicationConverter
 	applicationConverter.setOnAction(a -> ActionTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));

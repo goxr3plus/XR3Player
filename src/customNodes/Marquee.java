@@ -55,9 +55,9 @@ public class Marquee extends Pane {
      */
     @FXML
     private void initialize() {
-	
-        //Clip
-	Rectangle rectangle = new Rectangle(25,25);
+
+	//Clip
+	Rectangle rectangle = new Rectangle(25, 25);
 	rectangle.widthProperty().bind(widthProperty());
 	rectangle.heightProperty().bind(heightProperty());
 	setClip(rectangle);
@@ -113,8 +113,7 @@ public class Marquee extends Pane {
 		    text.setLayoutX(OFFSET);
 		    timeline.stop();
 		} else {
-		    if ((rightMovement && layoutX >= OFFSET)
-			    || (!rightMovement && layoutX + textWidth + OFFSET <= paneWidth)) {
+		    if ((rightMovement && layoutX >= OFFSET) || (!rightMovement && layoutX + textWidth + OFFSET <= paneWidth)) {
 			// invert movement, if bounds are reached
 			rightMovement = !rightMovement;
 		    }
@@ -137,6 +136,7 @@ public class Marquee extends Pane {
 	InvalidationListener listener = o -> {
 	    double textWidth = text.getLayoutBounds().getWidth();
 	    double paneWidth = getWidth();
+	    text.setLayoutX(5);
 	    if (textWidth + 2 * OFFSET > paneWidth && timeline.getStatus() != Animation.Status.RUNNING)
 		timeline.play();
 	};

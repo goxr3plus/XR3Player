@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="393.0" prefWidth="532.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="412.0" prefWidth="580.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
@@ -34,7 +34,10 @@
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </padding>
                            <children>
-                              <JFXCheckBox fx:id="instantSearch" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Instant Search" unCheckedColor="#9c101b" />
+                              <JFXCheckBox fx:id="instantSearch" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Instant Search" unCheckedColor="#9c101b">
+                                 <tooltip>
+                                    <Tooltip text="When you type inside PlayLists search fields the search will start immediatly without pressing enter" />
+                                 </tooltip></JFXCheckBox>
                            </children>
                         </HBox>
                         <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="File Search Using(?)">
@@ -48,8 +51,14 @@
                                  <toggleGroup>
                                     <ToggleGroup fx:id="fileSearchGroup" />
                                  </toggleGroup>
+                                 <tooltip>
+                                    <Tooltip text="It will return Files that contain the typed letters into their absolute path [Example -&gt; C:/../a.mp3 ]" />
+                                 </tooltip>
                               </JFXRadioButton>
-                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name( a.mp3)[ slower ]" toggleGroup="$fileSearchGroup" HBox.hgrow="ALWAYS" />
+                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name( a.mp3)[ slower ]" toggleGroup="$fileSearchGroup" HBox.hgrow="ALWAYS">
+                                 <tooltip>
+                                    <Tooltip text="It will return only Files that have the typed letters inside their names [Example -&gt; a.mp3 ] " />
+                                 </tooltip></JFXRadioButton>
                            </children>
                            <padding>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
@@ -70,12 +79,18 @@
                         </Label>
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
-                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="File Absolute Path" HBox.hgrow="ALWAYS">
+                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="Exact File Content (  More accurate )" HBox.hgrow="ALWAYS">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="playedFilesDetectionGroup" />
                                  </toggleGroup>
+                                 <tooltip>
+                                    <Tooltip text="Most accurate option but it is also consuming more Disk " />
+                                 </tooltip>
                               </JFXRadioButton>
-                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommened)" toggleGroup="$playedFilesDetectionGroup" HBox.hgrow="ALWAYS" />
+                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommended)" toggleGroup="$playedFilesDetectionGroup" HBox.hgrow="ALWAYS">
+                                 <tooltip>
+                                    <Tooltip text="Not catching everything but it is not consuming too much disk" />
+                                 </tooltip></JFXRadioButton>
                            </children>
                            <padding>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
@@ -104,7 +119,10 @@
                               <Tooltip text="Clear the History of played files " />
                            </tooltip>
                         </Label>
-                        <JFXButton fx:id="clearPlayedFilesHistory" styleClass="arrowButton" text="Press here to clear" />
+                        <JFXButton fx:id="clearPlayedFilesHistory" styleClass="arrowButton" text="Press here to clear">
+                           <tooltip>
+                              <Tooltip text="All the history of played songs will be cleared [ Not from Players though..]" />
+                           </tooltip></JFXButton>
                      </children>
                   </VBox>
                </content>

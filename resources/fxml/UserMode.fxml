@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="334.0" prefWidth="475.0" style="-fx-background-color: rgb(0,0,0,0.7);" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <Label fx:id="userNameLabel" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: black;" text="DAVINCI" textFill="#ff5454" BorderPane.alignment="CENTER" />
-   </top>
+<fx:root prefHeight="600.0" prefWidth="812.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="userImageView" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+      <PieChart fx:id="pieChart" legendSide="LEFT" style="-fx-fill: white;" title="Coming soon.. not yet implemented .. i need to think what to add here" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <BorderPane style="-fx-background-color: rgb(255,255,255,0.8); -fx-background-radius: 45 0 0 45;" BorderPane.alignment="CENTER">
+         <center>
+            <Label fx:id="userNameLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: black;" styleClass="settingsLabel" text="User-Name-Right-Here" textFill="#ff5454" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <ImageView fx:id="userImageView" fitHeight="101.0" fitWidth="227.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../image/goXR3PlusStudio.png" />
                </image>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
             </ImageView>
-         </children>
-      </StackPane>
-   </center>
+         </right>
+      </BorderPane>
+   </top>
 </fx:root>

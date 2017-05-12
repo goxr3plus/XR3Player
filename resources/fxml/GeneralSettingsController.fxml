@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Side Bar Settings(?)">
+               <tooltip>
+                  <Tooltip text="Side Bar Settings" />
+               </tooltip>
+            </Label>
+            <HBox alignment="CENTER">
+               <children>
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT (Default + Recommended )" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sideBarSideGroup" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT (Experimental )" toggleGroup="$sideBarSideGroup" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                  </JFXRadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</fx:root>

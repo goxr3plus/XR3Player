@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import application.Main;
-import database.LocalDBManager;
 import tools.InfoTool;
 
 /**
@@ -39,7 +38,7 @@ public class PlayedMediaList {
 
 	try {
 	    //Check if it does already exists
-	    if (!LocalDBManager.tableExists(dataBaseTableName))
+	    if (!Main.dbManager.doesTableExist(dataBaseTableName))
 
 		Main.dbManager.connection1.createStatement()
 			.executeUpdate("CREATE TABLE '" + dataBaseTableName + "'" + "(PATH       TEXT    PRIMARY KEY   NOT NULL ,"

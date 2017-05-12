@@ -184,10 +184,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
     // -------------------------ETC --------------------------
 
+    /**
+     * 
+     */
     public XPlayerWindow xPlayerWindow;
 
     /** The x player settings controller. */
-    public XPlayerSettingsController xPlayerSettingsController;
+    public XPlayerExtraSettings playerExtraSettings;
 
     /** The x player model. */
     public XPlayerModel xPlayerModel;
@@ -284,7 +287,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	radialMenu = new XPlayerRadialMenu(this);
 	//xPlayList = new XPlayerPlaylist(25, this)
 	visualizerWindow = new VisualizerWindowController(this);
-	xPlayerSettingsController = new XPlayerSettingsController(this);
+	playerExtraSettings = new XPlayerExtraSettings(this);
 
 	// Styling
 	//setStyle("-fx-background-image:url('/image/deckBackground.jpg');  -fx-background-size:stretch;")
@@ -327,7 +330,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	//flipPane
 	flipPane.setFlipTime(150);
 	flipPane.getFront().getChildren().addAll(container);
-	flipPane.getBack().getChildren().addAll(xPlayerSettingsController);
+	flipPane.getBack().getChildren().addAll(playerExtraSettings);
 
 	settingsToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
 	    if (newValue) // true?
@@ -395,7 +398,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	    absolutePath = file.getAbsolutePath();
 	    if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
 		// Ask Question?
-		if (xPlayer.isPausedOrPlaying() && xPlayerSettingsController.askSecurityQuestion.isSelected()) {
+		if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
 		    if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
 			    visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane))
 			playSong(absolutePath);
@@ -587,7 +590,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// Visualizer
 	visualizer = new XPlayerVisualizer(this);
-	visualizer.setShowFPS(xPlayerSettingsController.showFPS.selectedProperty().get());
+	visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
 
 	// Select the correct toggle
 	visualizerWindow.getVisualizerTypeGroup()
@@ -744,7 +747,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
 	// Equalizer
 	equalizer = new XPlayerEqualizer(this);
-	xPlayerSettingsController.equalizerTab.setContent(new ScrollPane(equalizer));
+	playerExtraSettings.getEqualizerTab().setContent(new ScrollPane(equalizer));
 
 	// PlayList
 	//xPlayerSettingsController.playListTab.setContent(xPlayList);
@@ -1101,11 +1104,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 
     /**
      * When the audio starts , fast configure it's settings
+     * 
+     * @param ignoreStartImmediately
      */
     public void configureMediaSettings(boolean ignoreStartImmediately) {
 
 	// Start immediately?
-	if (!ignoreStartImmediately && !xPlayerSettingsController.startImmediately.isSelected())
+	if (!ignoreStartImmediately && !Main.settingsWindow.getxPlayersSettingsController().getStartImmediately().isSelected())
 	    pause();
 	else {
 	    play();

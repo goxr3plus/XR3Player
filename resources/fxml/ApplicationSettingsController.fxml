@@ -8,13 +8,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="464.0" prefWidth="678.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TabPane style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-            <Tab fx:id="librariesTab" closable="false" text="Libraries" />
+            <Tab fx:id="generalTab" closable="false" text="General" />
           <Tab fx:id="playListsTab" closable="false" text="PlayLists" />
+            <Tab fx:id="librariesTab" closable="false" text="Libraries" />
           <Tab fx:id="shortCutsTab" closable="false" text="ShortCuts" />
+            <Tab closable="false" text="XPlayers" fx:id="xPlayersTab" />
         </tabs>
       </TabPane>
    </center>

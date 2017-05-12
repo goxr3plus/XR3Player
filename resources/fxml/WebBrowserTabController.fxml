@@ -57,12 +57,12 @@
                            <tooltip>
                               <Tooltip text="Search" />
                            </tooltip></JFXTextField>
-                        <JFXButton fx:id="goButton" layoutX="339.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" styleClass="arrowButton2" text="GO">
+                        <JFXButton fx:id="goButton" layoutX="339.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="43.0" styleClass="arrowButton2" text="GO">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <tooltip>
-                              <Tooltip text="Reload" />
+                              <Tooltip text="Go" />
                            </tooltip>
                         </JFXButton>
                         <JFXButton fx:id="reloadButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="37.0" styleClass="arrowButton2" text=" ">

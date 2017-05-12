@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -39,11 +40,11 @@ import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ToolBar;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -107,6 +108,9 @@ public class LoginMode extends BorderPane {
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private PieChart pieChart;
 
     @FXML
     private Label createdByLabel;
@@ -216,6 +220,9 @@ public class LoginMode extends BorderPane {
      */
     @FXML
     private void initialize() {
+
+	//Set PieChartData
+	pieChart.setData(pieChartData);
 
 	//Below is some coded i used with javafxsvg Library to Display SVG images although i changed it 
 	//to using WebView due to the cost of many external libraries
@@ -472,12 +479,12 @@ public class LoginMode extends BorderPane {
 	    });
 
 	    // -- KeyListeners
-//	    setOnKeyReleased(key -> {
-//		if (key.getCode() == KeyCode.RIGHT)
-//		    next();
-//		else if (key.getCode() == KeyCode.LEFT)
-//		    previous();
-//	    });
+	    //	    setOnKeyReleased(key -> {
+	    //		if (key.getCode() == KeyCode.RIGHT)
+	    //		    next();
+	    //		else if (key.getCode() == KeyCode.LEFT)
+	    //		    previous();
+	    //	    });
 
 	    // this.setOnMouseMoved(m -> {
 	    //
@@ -942,7 +949,16 @@ public class LoginMode extends BorderPane {
 
 	}
 
+	/**
+	 * @return The Timeline
+	 */
+	public Animation getTimeline() {
+	    return timeline;
+	}
+
     }
+
+    ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
     /**
      * @author GOXR3PLUS
@@ -1011,8 +1027,16 @@ public class LoginMode extends BorderPane {
 				Thread.sleep(500);
 
 				// Refresh the text
-				Platform.runLater(() -> user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0])));
-				System.out.println("User:" + user.getUserName() + " contains : " + totalLibraries + " Libraries");
+				Platform.runLater(() -> {
+
+				    //Add Pie Chart Data
+				    pieChartData.add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
+
+				    //Update User Label
+				    user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));
+
+				});
+				//System.out.println("User:" + user.getUserName() + " contains : " + totalLibraries + " Libraries");
 
 				updateProgress(++counter[0], totalUsers);
 			    } catch (Exception ex) {

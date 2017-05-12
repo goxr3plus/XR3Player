@@ -63,4 +63,18 @@ public class XPlayersList {
 	list.add(xPlayerController);
     }
 
+    /**
+     * @return the list
+     */
+    public List<XPlayerController> getList() {
+	return list;
+    }
+
+    /**
+     * @param list the list to set
+     */
+    public void setList(List<XPlayerController> list) {
+	this.list = list;
+    }
+
 }

@@ -123,8 +123,11 @@ public class MediaContextMenu extends ContextMenu {
     MenuItem lyricFinderOrg = new MenuItem("LyricFinder.org", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
     MenuItem lyricsCom = new MenuItem("Lyrics.com", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
 
+    /** Search by country */
+    Menu searchByCountry = new Menu("Search by country[Coming...]", InfoTool.getImageViewFromDocuments("flag 24.png"));
+
     /** Show Info (I) */
-    MenuItem showInfo = new MenuItem("Show Info[Comming..]", InfoTool.getImageViewFromDocuments("tag.png"));
+    MenuItem showInfo = new MenuItem("Show Info[Coming..]", InfoTool.getImageViewFromDocuments("tag.png"));
 
     //--------------------------------
 
@@ -158,8 +161,9 @@ public class MediaContextMenu extends ContextMenu {
     public MediaContextMenu() {
 
 	//Add all the items
+	searchByCountry.setDisable(true);
 	showInfo.setDisable(true);
-	getItems().addAll(new TitleMenuItem("Basic"), startPlayer, stopPlayer, new TitleMenuItem("Search"), searchOnWeb, findLyrics,
+	getItems().addAll(new TitleMenuItem("Basic"), startPlayer, stopPlayer, new TitleMenuItem("Search"), searchOnWeb, findLyrics, searchByCountry,
 		new TitleMenuItem("More"), stars, showFile, showInfo, new TitleMenuItem("File Edit"), rename, simpleDelete, storageDelete,
 		new TitleMenuItem("Organize"), copy);
 
@@ -219,25 +223,23 @@ public class MediaContextMenu extends ContextMenu {
      *            the e
      * @param controller1
      *            the controller
-     * @param node 
+     * @param node
      */
     public void showContextMenu(Media media1, Genre genre, double x, double y, SmartController controller1, Node node) {
 
 	// Don't waste resources
-	if (previousGenre != genre) {
-	    if (media1.getGenre() == Genre.LIBRARYMEDIA) {
+	if (previousGenre != genre)
+	    if (media1.getGenre() == Genre.LIBRARYMEDIA)
 		getItems().forEach(item -> item.setVisible(true));
-	    } else if (media1.getGenre() == Genre.SEARCHWINDOW) {
+	    else if (media1.getGenre() == Genre.SEARCHWINDOW)
 		simpleDelete.setVisible(false);
-	    }
-	}
 
 	//Determine the image
 	for (int i = 0; i <= 2; i++) {
-	    boolean b = Main.xPlayersList.getXPlayer(i).isOpened() || Main.xPlayersList.getXPlayer(i).isPausedOrPlaying()
+	    boolean playerEnergized = Main.xPlayersList.getXPlayer(i).isOpened() || Main.xPlayersList.getXPlayer(i).isPausedOrPlaying()
 		    || Main.xPlayersList.getXPlayer(i).isSeeking();
-	    ((ImageView) startPlayer.getItems().get(i).getGraphic()).setImage(b ? soundWave : null);
-	    ((ImageView) stopPlayer.getItems().get(i).getGraphic()).setImage(b ? soundWave : null);
+	    ((ImageView) startPlayer.getItems().get(i).getGraphic()).setImage(!playerEnergized ? null : soundWave);
+	    ((ImageView) stopPlayer.getItems().get(i).getGraphic()).setImage(!playerEnergized ? null : soundWave);
 	}
 
 	this.node = node;
@@ -245,8 +247,7 @@ public class MediaContextMenu extends ContextMenu {
 	this.controller = controller1;
 
 	// Show it
-	show(genre != Genre.SEARCHWINDOW ? Main.window : Main.searchWindow.getWindow(), x - 5 - super.getWidth() + super.getWidth() * 14 / 100,
-		y - 1);
+	show(genre != Genre.SEARCHWINDOW ? Main.window : Main.searchWindow.getWindow(), x - super.getWidth(), y - 1);
 	previousGenre = genre;
 
 	//Y axis

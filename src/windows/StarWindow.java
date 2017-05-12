@@ -89,7 +89,6 @@ public class StarWindow extends GridPane {
      */
     @FXML
     private void initialize() {
-	System.out.println("StarWindow Initialized....");
 
 	// Window
 	window = new Stage();

@@ -33,7 +33,7 @@ import tools.InfoTool;
 /**
  * Mechanism of showing the opened libraries each opened library is represented by a Tab.
  *
- * @author SuperGoliath
+ * @author GOXR3PLUS STUDIO
  */
 public class MultipleLibraries extends StackPane {
 

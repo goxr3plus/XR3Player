@@ -98,7 +98,7 @@
    <center>
       <BorderPane BorderPane.alignment="CENTER">
          <center>
-            <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="~~XR3Player~~" BorderPane.alignment="CENTER" fx:id="xr3Label">
+            <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="~~XR3Players~~" BorderPane.alignment="CENTER" fx:id="xr3Label">
                <effect>
                   <DropShadow />
                </effect>
@@ -126,7 +126,7 @@
                      <graphic>
                         <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/DJ-32.png" />
+                              <Image url="@../image/MusicRecord-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -138,7 +138,7 @@
                      <graphic>
                         <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/User%20Location-32.png" />
+                              <Image url="@../image/UserGroupManWoman-32.png" />
                            </image>
                         </ImageView>
                      </graphic>

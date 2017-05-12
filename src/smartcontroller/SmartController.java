@@ -1548,6 +1548,7 @@ public class SmartController extends StackPane {
 
 	    //Fix the vertical scroll bar position
 	    if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
+		System.out.println("Search is active");
 		getVerticalScrollBar().setValue(getVerticalScrollValueWithSearch());
 		setVerticalScrollValueWithSearch(0.0);
 	    } else {

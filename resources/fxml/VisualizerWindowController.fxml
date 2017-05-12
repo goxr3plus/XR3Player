@@ -122,6 +122,9 @@
                      </BorderPane.margin>
                   </StackPane>
                </left>
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
             </BorderPane>
          </center>
       </BorderPane>
