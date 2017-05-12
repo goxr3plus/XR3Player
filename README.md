@@ -36,17 +36,17 @@ How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 -------------------------------------------------------------------------------------
 
 
-## Image from Update 66 Login Screen
-![xr3player](https://cloud.githubusercontent.com/assets/20374208/25839995/a8f8d640-34a2-11e7-8cce-b41e5c6b9baa.png)
+## Image from Update 67 Login Screen
+![xr3player login screen](https://cloud.githubusercontent.com/assets/20374208/26019377/9fc630a8-377d-11e7-8481-ac4830a86865.png)
 
 ## Image from Update 64 After Login
-![xr3player](https://cloud.githubusercontent.com/assets/20374208/25604757/abcc253c-2f0e-11e7-9394-55ac3ff7f152.png)
+![xr3player libraries mode](https://cloud.githubusercontent.com/assets/20374208/25604757/abcc253c-2f0e-11e7-9394-55ac3ff7f152.png)
 
 ## Image from Update 66 Internal WebBrowser
-![xr3player](https://cloud.githubusercontent.com/assets/20374208/25840212/a69cf222-34a3-11e7-8400-8f5952f630a1.png)
+![xr3player web browser](https://cloud.githubusercontent.com/assets/20374208/25840212/a69cf222-34a3-11e7-8400-8f5952f630a1.png)
 
 # On youtube
-[![XR3Player](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
+[![XR3Player on youtube](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
 
 
 ------------------------------------------------------------------------------------
