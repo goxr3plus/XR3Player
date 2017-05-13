@@ -12,20 +12,22 @@
 
 
 #### Description:
-
-XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organizer,Radio and more .
-
-Tested in Windows and Linux only .
+XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organizer , aiming to be something more than a Media Player.
 
    ->Download : https://sourceforge.net/projects/xr3player/
+   
+   ->Tested : Windows and Linux . I have to check if it also works on Mac etc..
+# Small Video
+[![XR3Player on youtube](http://img.youtube.com/vi/SN-1nvUaykQ/0.jpg)](https://www.youtube.com/watch?v=SN-1nvUaykQ)
+
 
 #### System Requirements:
 
-     At least 2 Cores CPU Intel i5 or i7 or AMD Ryzen [Soore it will do well) ;)
+     At least 2 Cores i5 > 2.0 GHZ CPU Intel or AMD 
 
-     A very good GPU (Graphics Processing Unit)
+     A good GPU (Graphics Processing Unit) [ It requires graphic power for visualizers ]
 
-     At least 4GB DDR3|DDR4
+     At least 4GB DDR3|DDR4 Ram [ Java Programs are known to consume a little bit more RAM ;) ]
 
 #### Tutorial and Informations:
 
@@ -45,7 +47,7 @@ How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 ## Image from Update 66 Internal WebBrowser
 ![xr3player web browser](https://cloud.githubusercontent.com/assets/20374208/25840212/a69cf222-34a3-11e7-8400-8f5952f630a1.png)
 
-# On youtube
+# On youtube 2
 [![XR3Player on youtube](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
 
 
