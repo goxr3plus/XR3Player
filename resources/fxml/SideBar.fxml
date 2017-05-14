@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" minHeight="0.0" style="-fx-background-color: rgb(42,42,42); -fx-border-width: 3; -fx-background-radius: 0 0 15 0;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" minHeight="0.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
-   <effect>
-      <InnerShadow color="#ff2222" />
-   </effect>
    <center>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false" prefWidth="71.0">
          <content>
@@ -36,7 +24,7 @@
                <children>
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold;" text="Database" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Data,Search" />
                         <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0" style="-fx-background-color: black;">
                            <items>
                               <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
@@ -78,6 +66,24 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </MenuButton>
+                        <JFXButton fx:id="applicationSearch" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Search%20Property-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Update" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
@@ -101,47 +107,11 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="applicationSearch" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Search%20Property-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Update" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Console-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Application Console" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
                         <JFXButton fx:id="applicationConverter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/youtubeToAudio.png" />
+                                    <Image url="@../image/audioToVideo.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -155,86 +125,6 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <StackPane maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" visible="false">
-                           <children>
-                              <VBox prefHeight="144.0" prefWidth="257.0" spacing="15.0" visible="false">
-                                 <children>
-                                    <HBox spacing="52.0" VBox.vgrow="NEVER">
-                                       <children>
-                                          <JFXButton fx:id="hideSideBar" style="-fx-font-weight: bold;" text="Close" />
-                                       </children>
-                                    </HBox>
-                                    <ScrollPane fitToWidth="true" prefWidth="200.0">
-                                       <content>
-                                          <GridPane alignment="CENTER" prefHeight="80.0" prefWidth="253.0" style="-fx-border-color: white; -fx-border-radius: 5;">
-                                             <columnConstraints>
-                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <Label fx:id="speechLabel" disable="true" styleClass="miniControl" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/voiceRecognition.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Enable/Disable Speech Recognition" />
-                                                   </tooltip>
-                                                </Label>
-                                                <Label fx:id="internetLabel" disable="true" styleClass="miniControl" text="??" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                                   <graphic>
-                                                      <ImageView nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                         <viewport>
-                                                            <Rectangle2D />
-                                                         </viewport>
-                                                         <image>
-                                                            <Image url="@../image/online.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="It will be disabled if not internet connection is available" />
-                                                   </tooltip>
-                                                </Label>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXToggleButton fx:id="speechToggle" text=" " />
-                                                      <ProgressIndicator fx:id="speechProgressIndicator" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="35.0" visible="false" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
-                                                   <children>
-                                                      <JFXToggleButton fx:id="internetToggle" text=" ">
-                                                         <tooltip>
-                                                            <Tooltip text="Check for Internet Connection" />
-                                                         </tooltip>
-                                                      </JFXToggleButton>
-                                                      <ProgressIndicator fx:id="internetProgressIndicator" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="35.0" visible="false" />
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </GridPane>
-                                       </content>
-                                    </ScrollPane>
-                                 </children>
-                              </VBox>
-                              <ImageView fx:id="userImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </ImageView>
-                              <Label fx:id="userNameLabel" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="Logged in : GOXR3PLUS STUDIO" translateY="-25.0" visible="false" StackPane.alignment="TOP_CENTER" />
-                              <VBox alignment="CENTER" spacing="20.0" />
-                           </children>
-                        </StackPane>
                         <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" disable="true" focusTraversable="false" layoutX="13.0" layoutY="193.0" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
@@ -254,7 +144,25 @@
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold;" text="Update" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Console,Update" />
+                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Console-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Application Console" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                         <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
@@ -273,11 +181,29 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
+                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Settings-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Application Settings" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" spacing="10.0">
+                  <VBox spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: rgb(66,255,154); -fx-font-weight: bold;" text="Settings" wrapText="true" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Donation,About" />
                         <MenuButton alignment="CENTER" contentDisplay="CENTER" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 12; -fx-background-color: black; -fx-background-radius: 0;">
                            <items>
                               <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="Application Information" />
@@ -302,29 +228,6 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </MenuButton>
-                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Settings-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Application Settings" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                     </children>
-                  </VBox>
-                  <VBox spacing="10.0">
-                     <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold;" text="Donate :)" />
                         <JFXButton fx:id="donateButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
@@ -343,6 +246,9 @@
                      </children>
                   </VBox>
                </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
             </VBox>
          </content>
       </ScrollPane>

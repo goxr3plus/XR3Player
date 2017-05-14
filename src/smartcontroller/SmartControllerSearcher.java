@@ -280,7 +280,7 @@ public class SmartControllerSearcher extends HBox {
 		    System.out.println(query);
 
 		    //Continue
-		    try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
+		    try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query)) {
 			//try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 
 			//Fetch the items from the database

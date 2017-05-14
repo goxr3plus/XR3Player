@@ -168,10 +168,10 @@ public class LibraryMode extends GridPane {
 		    final String dataBaseTableName = tableName; //add it to a final variable
 
 		    //Ok Now Go
-		    try (PreparedStatement insertNewLibrary = Main.dbManager.connection1.prepareStatement(
+		    try (PreparedStatement insertNewLibrary = Main.dbManager.getConnection().prepareStatement(
 			    "INSERT INTO LIBRARIES (NAME,TABLENAME,STARS,DATECREATED,TIMECREATED,DESCRIPTION,SAVEMODE,POSITION,LIBRARYIMAGE,OPENED) "
 				    + "VALUES (?,?,?,?,?,?,?,?,?,?)");
-			    Statement statement = Main.dbManager.connection1.createStatement()) {
+			    Statement statement = Main.dbManager.getConnection().createStatement()) {
 
 			// Create the dataBase table
 			statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "' (PATH       TEXT    PRIMARY KEY   NOT NULL ,"

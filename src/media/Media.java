@@ -533,7 +533,7 @@ public abstract class Media {
 					.forEach(controller1 -> {
 
 					    //if (controller1 != controller) // we already renamed on this controller
-					    try (PreparedStatement dataRename = Main.dbManager.connection1.prepareStatement(
+					    try (PreparedStatement dataRename = Main.dbManager.getConnection().prepareStatement(
 						    "UPDATE '" + controller1.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
 
 						// Prepare Statement
@@ -626,7 +626,7 @@ public abstract class Media {
 				.forEach(controller1 -> {
 
 				    //Do it bro!
-				    try (PreparedStatement preparedUStars = Main.dbManager.connection1
+				    try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
 					    .prepareStatement("UPDATE '" + controller1.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
 
 					// Prepare Statement

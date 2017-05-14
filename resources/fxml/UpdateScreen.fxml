@@ -17,20 +17,20 @@
       <Label id="updateScreenButtonLabel" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../style/application.css" text="Created by -&gt;GoXR3Plus Studio" visible="false" StackPane.alignment="BOTTOM_RIGHT" />
       <Rectangle fx:id="leftRectangle" arcHeight="5.0" arcWidth="5.0" fill="#20202069" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
       <Rectangle fx:id="rightRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f1f1f69" height="200.0" layoutX="10.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_RIGHT" />
-      <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" height="165.0" stroke="BLACK" strokeType="INSIDE" width="385.0" StackPane.alignment="CENTER">
+      <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" height="175.0" stroke="BLACK" strokeType="INSIDE" width="409.0" StackPane.alignment="CENTER">
          <fill>
-            <RadialGradient centerX="0.49444444444444446" centerY="0.5761904761904761" cycleMethod="REFLECT" focusAngle="90.0" focusDistance="-0.627906976744186" radius="0.08139534883720931">
+            <RadialGradient centerX="0.5" centerY="0.6857142857142857" focusAngle="90.0" focusDistance="-0.627906976744186" radius="0.1511627906976744">
                <stops>
                   <Stop color="BLACK" />
-                  <Stop color="#1bff9169" offset="1.0" />
+                  <Stop color="#1f1f1fd9" offset="1.0" />
                </stops>
             </RadialGradient>
          </fill>
       </Rectangle>
-      <VBox alignment="CENTER" spacing="10.0" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="18.0" StackPane.alignment="CENTER">
          <children>
             <ProgressIndicator fx:id="progressBar" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="171.0" progress="0.2" />
-            <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="385.0" style="-fx-background-color: rgb(0,0,0,0.75); -fx-border-color: transparent;" styleClass="settingsLabel" text="....Loading...." textAlignment="CENTER" />
+            <Label fx:id="label" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="404.0" prefHeight="26.0" prefWidth="404.0" style="-fx-background-color: #202020; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold;" text="Update Screen" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

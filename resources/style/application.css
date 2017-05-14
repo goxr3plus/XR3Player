@@ -30,7 +30,7 @@
 .chart-pie-label {
     -fx-fill: white;
     /*-fx-font-weight:bold;*/
-    -fx-font-size: 1em;
+    -fx-font-size: 1.0em;
 } 
 
 .chart .chart-title .text{
@@ -523,6 +523,56 @@
    -fx-background-color:transparent;
 }
 
+#SpecialTabPane .sTab.tab{
+	-fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
+    -fx-background-insets: 0.0, 1.0 1.0 1.0 0.0, 2.0 1.0 1.0 1.0;
+    -fx-background-radius:0.0 0.0 45.0 45.0;
+    -fx-text-fill: white;    
+    -fx-font-size: 13.0px;    
+    -fx-font-weight:bold; 
+   -fx-padding:3.0em -1.0em 3.0em -1.0em; 
+   -fx-cursor:hand;	
+}
+
+#SpecialTabPane .sTab.tab:hover{
+	 -fx-background-color:orange;
+}
+
+#SpecialTabPane .sTab.tab:selected{
+	 -fx-background-color:firebrick;
+}
+
+#SpecialTabPane .sTab.tab:pressed{
+	 -fx-background-color:
+        -darkest-black,
+        rgb(55.0, 57.0, 58.0),
+        linear-gradient(to top, -light-black 2.0%, -dark-black 98.0%);
+}
+
+#SpecialTabPane .sTab.tab .tab-label{
+   -fx-text-fill:white;
+   -fx-background-color: transparent;
+   -fx-background-radius:0.0px;
+   -fx-rotate:90.0; 
+}
+
+
+#SpecialTabPane .sTab.tab:hover .tab-label,#SpecialTabPane .sTab.tab:selected .tab-label{
+	-fx-text-fill:black;
+	-fx-background-radius: 0.0 45.0 45.0 0.0;
+	-fx-background-color: white;   
+}
+
+
+
+
+/*#SpecialTabPane .tab-header-area .tab-header-background {
+   -fx-background-color:transparent;
+}
+
 #SpecialTabPane .STab.tab .tab-label{
    -fx-text-fill:white;
    -fx-background-color: transparent;
@@ -551,6 +601,7 @@
 #SpecialTabPane .STab.tab:selected{
 	-fx-effect: innershadow(two-pass-box, red, 15.0, 0.0, 0.0, 0.0);
 }
+*/
 
 
 /*  LibrariesTabPane */
@@ -1199,8 +1250,7 @@
 }
 
 #sideBar{
-	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
-	/*-fx-border-color:white;*/
+	-fx-background-color:#202020;
 }
 
 .sideBarSectionLabel{
@@ -1299,7 +1349,7 @@
 
 /* Universal */
 .leftPane:hover , .rightPane:hover , .topPane:hover , .bottomPane:hover , .topLeftPane:hover , .topRightPane:hover , .bottomRightPane:hover , .bottomLeftPane:hover {	
-	-fx-background-color:rgb(255,0,0,0.8);
+	-fx-background-color:rgb(255.0,0.0,0.0,0.8);
 	-fx-border-width:2.0;
 	/*-fx-border-style:dotted ;	*/
 }

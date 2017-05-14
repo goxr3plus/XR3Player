@@ -36,10 +36,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebHistory.Entry;
 import javafx.scene.web.WebView;
-import javafx.util.Duration;
-import tools.ActionTool;
 import tools.InfoTool;
-import tools.NotificationType;
 
 /**
  * @author GOXR3PLUS
@@ -82,11 +79,11 @@ public class WebBrowserTabController extends StackPane {
     WebEngine webEngine;
 
     /** The web history */
-    WebHistory history;
-    ObservableList<WebHistory.Entry> historyEntryList;
+    private WebHistory history;
+    private ObservableList<WebHistory.Entry> historyEntryList;
 
-    Tab tab;
-    String firstWebSite;
+    private Tab tab;
+    private String firstWebSite;
 
     /**
      * Constructor
@@ -119,13 +116,13 @@ public class WebBrowserTabController extends StackPane {
 
 	//-------------------WebView------------------------	
 	// hide webview scrollbars whenever they appear.
-	webView.getChildrenUnmodifiable().addListener((Change<? extends Node> change) -> {
-	    Set<Node> deadSeaScrolls = webView.lookupAll(".scroll-bar");
-	    for (Node scroll : deadSeaScrolls) {
-		scroll.setVisible(false);
-		scroll.setManaged(false);
-	    }
-	});
+//	webView.getChildrenUnmodifiable().addListener((Change<? extends Node> change) -> {
+//	    Set<Node> deadSeaScrolls = webView.lookupAll(".scroll-bar");
+//	    for (Node scroll : deadSeaScrolls) {
+//		scroll.setVisible(false);
+//		scroll.setManaged(false);
+//	    }
+//	});
 
 	//-------------------WebEngine------------------------
 	webEngine = webView.getEngine();
