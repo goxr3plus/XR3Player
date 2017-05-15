@@ -29,7 +29,7 @@ public class XPlayerVisualizer extends Visualizer {
 	this.xPlayerUI = xPlayerUI;
 	this.animationService.passXPlayer(xPlayerUI);
 
-	setScopeColor(xPlayerUI.disc.getArcColor());
+	setScopeColor(xPlayerUI.getDisc().getArcColor());
 	addMouseListener();
     }
 
@@ -45,7 +45,7 @@ public class XPlayerVisualizer extends Visualizer {
 		displayMode.set((displayMode.get() + 1 > DISPLAYMODE_MAXIMUM) ? 0 : displayMode.get() + 1);
 		// SECONDARY
 	    } else if (m.getButton() == MouseButton.SECONDARY)
-		xPlayerUI.visualizerWindow.getVisualizerContextMenu().show(this, m.getScreenX(), m.getScreenY());
+		xPlayerUI.getVisualizerWindow().getVisualizerContextMenu().show(this, m.getScreenX(), m.getScreenY());
 	});
 
     }

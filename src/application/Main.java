@@ -50,7 +50,6 @@ import librarysystema.LibraryMode;
 import services.FilesFilterService;
 import services.VacuumProgress;
 import smartcontroller.MediaContextMenu;
-import smartcontroller.PlayedMediaList;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import tools.ActionTool;
 import tools.InfoTool;
@@ -65,6 +64,7 @@ import windows.RenameWindow;
 import windows.SearchWindow;
 import windows.StarWindow;
 import windows.UpdateWindow;
+import xplayer.presenter.PlayedMediaList;
 import xplayer.presenter.XPlayersList;
 import xr3capture.CaptureWindow;
 
@@ -814,7 +814,7 @@ public class Main extends Application {
 				Main.settingsWindow.getxPlayersSettingsController().getShowFPS().setSelected(Boolean.parseBoolean(s));
 				
 				//Update all the players
-				Main.xPlayersList.getList().forEach(xPlayerController -> xPlayerController.visualizer.setShowFPS(Boolean.parseBoolean(s)));
+				Main.xPlayersList.getList().forEach(xPlayerController -> xPlayerController.getVisualizer().setShowFPS(Boolean.parseBoolean(s)));
 				
 			});
 			

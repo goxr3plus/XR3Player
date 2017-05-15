@@ -68,7 +68,7 @@ public class XPlayersSettingsController extends BorderPane {
 	    Main.dbManager.getPropertiesDb().updateProperty("XPlayers-Visualizer-ShowFPS", String.valueOf(showFPS.isSelected()));
 
 	    //Update all the players
-	    Main.xPlayersList.getList().forEach(xPlayerController -> xPlayerController.visualizer.setShowFPS(showFPS.isSelected()));
+	    Main.xPlayersList.getList().forEach(xPlayerController -> xPlayerController.getVisualizer().setShowFPS(showFPS.isSelected()));
 
 	});
 

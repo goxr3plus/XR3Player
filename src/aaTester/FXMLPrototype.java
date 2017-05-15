@@ -46,7 +46,7 @@ public class FXMLPrototype extends BorderPane {
 
    
     /**
-     * Called as soon as .fxml is initialized
+     * Called as soon as .fxml is initialised
      */
     @FXML
     private void initialize() {

@@ -155,16 +155,16 @@ public class VisualizerStackController extends StackPane {
      * Goes to the next Spectrum Analyzer
      */
     public void nextSpectrumAnalyzer() {
-	xPlayerController.visualizer.displayMode.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-		: xPlayerController.visualizer.displayMode.get() + 1);
+	xPlayerController.getVisualizer().displayMode.set((xPlayerController.getVisualizer().displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
+		: xPlayerController.getVisualizer().displayMode.get() + 1);
     }
 
     /**
      * Goes to the previous Spectrum Analyzer
      */
     public void previousSpectrumAnalyzer() {
-	xPlayerController.visualizer.displayMode
-		.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0 ? xPlayerController.visualizer.displayMode.get() - 1
+	xPlayerController.getVisualizer().displayMode
+		.set(xPlayerController.getVisualizer().displayMode.get() - 1 >= 0 ? xPlayerController.getVisualizer().displayMode.get() - 1
 			: VisualizerModel.DISPLAYMODE_MAXIMUM);
     }
 

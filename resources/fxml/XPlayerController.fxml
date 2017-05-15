@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="309.0" prefWidth="345.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="403.0" prefWidth="481.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
@@ -126,12 +126,27 @@
                                     <Insets bottom="2.0" right="2.0" top="2.0" />
                                  </GridPane.margin>
                               </StackPane>
-                              <VBox fx:id="topRightVBox" alignment="TOP_CENTER" spacing="3.0" GridPane.columnIndex="1">
+                              <VBox fx:id="topRightVBox" alignment="CENTER" spacing="3.0" GridPane.columnIndex="1">
                                  <children>
-                                    <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                    <JFXButton fx:id="openPlayerHistory" focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-size: 11; -fx-border-color: firebrick; -fx-border-radius: 15; -fx-border-width: 2;" styleClass="arrowButton2" text="Player History">
+                                       <tooltip>
+                                          <Tooltip text="See history of songs that have been played from this player" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
                                        <children>
-                                          <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                                          <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Give me some ideas what to add here ..." visible="false" />
+                                          <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" visible="false" StackPane.alignment="CENTER_RIGHT">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </StackPane>
+                                    <StackPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="54.0" VBox.vgrow="ALWAYS">
+                                       <children>
                                           <ToolBar maxWidth="1.7976931348623157E308" minWidth="5.0" orientation="VERTICAL" StackPane.alignment="CENTER">
                                              <items>
                                                 <HBox alignment="CENTER" styleClass="segmented-button-bar">
@@ -166,80 +181,55 @@
                                           </ToolBar>
                                        </children>
                                        <VBox.margin>
-                                          <Insets top="3.0" />
+                                          <Insets />
                                        </VBox.margin>
                                     </StackPane>
-                                    <JFXButton disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-size: 11;" styleClass="arrowButton2" text="History" />
-                                    <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
+                                    <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="3.0">
                                        <children>
-                                          <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" visible="false" StackPane.alignment="CENTER_RIGHT">
+                                          <Button fx:id="openFileButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Open" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
+                                             <tooltip>
+                                                <Tooltip text="Choose a File to be opened" />
+                                             </tooltip>
+                                          </Button>
+                                          <Button fx:id="transferAudioButton" alignment="CENTER" disable="true" layoutX="11.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Transfer" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <tooltip>
+                                                <Tooltip text="Choose a File to be opened" />
+                                             </tooltip>
+                                          </Button>
+                                          <Button fx:id="extendPlayer" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 11;" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <tooltip>
+                                                <Tooltip text="Open Player to external Window" />
+                                             </tooltip>
                                           </Button>
                                        </children>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </StackPane>
+                                    </HBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="2.0" />
                                  </padding>
+                                 <GridPane.margin>
+                                    <Insets top="3.0" />
+                                 </GridPane.margin>
                               </VBox>
                            </children>
                         </GridPane>
                         <GridPane fx:id="bottomGridPane" GridPane.columnSpan="2" GridPane.rowIndex="1">
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="343.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="52.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                 <children>
-                                    <Region style="-fx-background-color: rgb(255,255,255,0.7);" />
-                                    <Label alignment="BOTTOM_CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="!Dance!" textAlignment="CENTER" wrapText="true">
-                                       <StackPane.margin>
-                                          <Insets left="2.0" />
-                                       </StackPane.margin>
-                                    </Label>
-                                    <VBox alignment="CENTER" spacing="5.0" StackPane.alignment="TOP_CENTER">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Actions">
-                                             <graphic>
-                                                <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/point.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <cursor>
-                                                <Cursor fx:constant="DEFAULT" />
-                                             </cursor>
-                                          </Label>
-                                          <Button fx:id="openFileButton" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Open File " textAlignment="CENTER" wrapText="true">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <tooltip>
-                                                <Tooltip text="Choose a File to be opened" />
-                                             </tooltip>
-                                          </Button>
-                                          <Button fx:id="extendPlayer" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 11;" text="Extend Player" textAlignment="CENTER" wrapText="true">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <tooltip>
-                                                <Tooltip text="Choose a File to be opened" />
-                                             </tooltip>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </StackPane>
                               <StackPane fx:id="diskStackPane" prefHeight="150.0" prefWidth="200.0" />
                            </children>
                         </GridPane>
@@ -250,7 +240,7 @@
                   <HBox style="-fx-background-color: firebrick; -fx-background-radius: 15 15 0 0;" BorderPane.alignment="CENTER">
                      <children>
                         <Label fx:id="topInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Player : &lt;&lt;0 &gt;&gt;" HBox.hgrow="ALWAYS" />
-                        <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Settings">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Settings+More">
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>

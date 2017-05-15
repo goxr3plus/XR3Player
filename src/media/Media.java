@@ -28,7 +28,7 @@ import smartcontroller.SmartController;
 import tools.ActionTool;
 import tools.InfoTool;
 import tools.NotificationType;
-import xplayer.presenter.AudioType;
+import xplayer.model.AudioType;
 
 /**
  * This class is used as super class for Audio and Video classes.

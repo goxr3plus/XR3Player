@@ -145,8 +145,8 @@ public class SmartController extends StackPane {
 	private final Genre genre;
 	
 	/**
-	 * The name of the database table (eg. @see
-	 * ActionTool.returnRandomTableName())
+	 * The name of the database table
+	 * (eg. @see ActionTool.returnRandomTableName())
 	 */
 	private final String dataBaseTableName;
 	

@@ -173,7 +173,7 @@ public class VisualizerWindowController extends StackPane {
 	    pauseTransition.playFromStart();
 	    topBar.setVisible(true);
 	    setCursor(Cursor.HAND);
-	    xPlayerController.visualizer.setCursor(Cursor.HAND);
+	    xPlayerController.getVisualizer().setCursor(Cursor.HAND);
 	});
 
 	// -- KeyListeners
@@ -211,7 +211,7 @@ public class VisualizerWindowController extends StackPane {
 	    if (!topBar.isHover() && window.isShowing() && !menuPopButton.isShowing()) {
 		topBar.setVisible(false);
 		setCursor(Cursor.NONE);
-		xPlayerController.visualizer.setCursor(Cursor.NONE);
+		xPlayerController.getVisualizer().setCursor(Cursor.NONE);
 	    }
 	});
 
@@ -241,13 +241,13 @@ public class VisualizerWindowController extends StackPane {
 	setBackground.setOnAction(a -> changeImage(Type.background));
 
 	// clearBackground
-	clearBackground.setOnAction(a -> xPlayerController.visualizer.backgroundImage = null);
+	clearBackground.setOnAction(a -> xPlayerController.getVisualizer().backgroundImage = null);
 
 	// setForeground
 	setForeground.setOnAction(a -> changeImage(Type.foreground));
 
 	//setDefaultForeground
-	setDefaultForeground.setOnAction(a -> xPlayerController.visualizer.foregroundImage = VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE);
+	setDefaultForeground.setOnAction(a -> xPlayerController.getVisualizer().foregroundImage = VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE);
 
     }
 
@@ -274,9 +274,9 @@ public class VisualizerWindowController extends StackPane {
 	    Image img = new Image(image.toURI().toString());
 	    if (img.getWidth() <= 4800 && img.getHeight() <= 4800) {
 		if (type == Type.background)
-		    xPlayerController.visualizer.backgroundImage = img;
+		    xPlayerController.getVisualizer().backgroundImage = img;
 		else if (type == Type.foreground)
-		    xPlayerController.visualizer.foregroundImage = img;
+		    xPlayerController.getVisualizer().foregroundImage = img;
 	    } else
 		ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + img.getWidth() + "*" + img.getHeight(),
 			Duration.millis(1500), NotificationType.WARNING);
@@ -339,7 +339,7 @@ public class VisualizerWindowController extends StackPane {
     public void displayVisualizer() {
 
 	// Add the visualizer
-	centerStackPane.getChildren().add(1, xPlayerController.visualizerStackController);
+	centerStackPane.getChildren().add(1, xPlayerController.getVisualizerStackController());
 
 	// show the window
 	window.show();
@@ -350,7 +350,7 @@ public class VisualizerWindowController extends StackPane {
      */
     public void removeVisualizer() {
 	pauseTransition.stop();
-	xPlayerController.visualizer.setCursor(Cursor.HAND);
+	xPlayerController.getVisualizer().setCursor(Cursor.HAND);
 	xPlayerController.reAddVisualizer();
 	window.close();
     }

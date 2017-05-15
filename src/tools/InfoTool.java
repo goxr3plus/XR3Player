@@ -37,7 +37,7 @@ import application.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
-import xplayer.presenter.AudioType;
+import xplayer.model.AudioType;
 
 /**
  * Provides useful methods for retrieving informations.

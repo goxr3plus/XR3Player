@@ -166,7 +166,7 @@ abstract class Visualizer extends VisualizerDrawer {
 	public void handle(long nanos) {
 
 	    // XPlayer controlls this animationTimer?
-	    if (xPlayerController != null && !xPlayerController.visualizerStackController.isVisible()) {
+	    if (xPlayerController != null && !xPlayerController.getVisualizerStackController().isVisible()) {
 		clear();
 		draw = false;
 	    } else
@@ -231,8 +231,8 @@ abstract class Visualizer extends VisualizerDrawer {
 	    // --XRPlayer controller?
 	    if (xPlayerController != null) {
 		// Repaint the disc
-		if (xPlayerController.disc != null)
-		    xPlayerController.disc.repaint();
+		if (xPlayerController.getDisc() != null)
+		    xPlayerController.getDisc().repaint();
 	    }
 
 	    // --------------------------------------------------------------------------------------RUBBISH

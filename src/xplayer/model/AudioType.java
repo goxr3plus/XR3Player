@@ -1,4 +1,4 @@
-package xplayer.presenter;
+package xplayer.model;
 
 /**
  * Indicates the type of data.

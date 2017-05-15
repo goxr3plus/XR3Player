@@ -89,7 +89,7 @@ public class XPlayerRadialMenu {
 	radialMenu.setOnItemClicked(clickEvent -> {
 
 	    if (clickEvent.item == stop)
-		xPlayerController.xPlayer.stop();
+		xPlayerController.getxPlayer().stop();
 	    else if (clickEvent.item == play)
 		xPlayerController.playOrReplay();
 	    else if (clickEvent.item == pause)
@@ -106,11 +106,11 @@ public class XPlayerRadialMenu {
 //	radialMenu.setOnMenuCloseFinished(menuEvent -> System.out.println("Menu finished to close"));
 	radialMenu.setOnItemSelected(selectionEvent -> {
 	    if (selectionEvent.item == mute)
-		xPlayerController.xPlayer.setMute(true);
+		xPlayerController.getxPlayer().setMute(true);
 	});
 	radialMenu.setOnItemDeselected(selectionEvent -> {
 	    if (selectionEvent.item == mute)
-		xPlayerController.xPlayer.setMute(false);
+		xPlayerController.getxPlayer().setMute(false);
 	});
 
     }

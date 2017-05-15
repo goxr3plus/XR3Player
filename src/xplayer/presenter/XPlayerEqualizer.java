@@ -126,16 +126,16 @@ public class XPlayerEqualizer extends BorderPane {
 	resetFilters.setOnAction(action -> {
 	    //Balance
 	    balanceFilter.setAngle(100, 200);
-	    xPlayerUI.xPlayer.setBalance((float) 0.0);
+	    xPlayerUI.getxPlayer().setBalance((float) 0.0);
 
 	    //Pan
 	    panFilter.setAngle(100, 200);
-	    xPlayerUI.xPlayer.setPan(0.0);
+	    xPlayerUI.getxPlayer().setPan(0.0);
 
 	    //Reset the equalizer
 	    for (int i = 0; i < 32; i++)
-		xPlayerUI.xPlayerModel.getEqualizerArray()[i] = 0.0f;
-	    xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
+		xPlayerUI.getxPlayerModel().getEqualizerArray()[i] = 0.0f;
+	    xPlayerUI.getxPlayer().setEqualizer(xPlayerUI.getxPlayerModel().getEqualizerArray(), 32);
 	    for (Filter filter : filters)
 		filter.resetToZero();
 	});
@@ -150,14 +150,14 @@ public class XPlayerEqualizer extends BorderPane {
 	panFilter = new DJFilter(2, 2, 36, 36, Color.GOLD);
 	panFilter.setOnMouseDragged(drag -> {
 	    panFilter.onMouseDragged(drag);
-	    xPlayerUI.xPlayer.setPan(panFilter.getValue(200));
+	    xPlayerUI.getxPlayer().setPan(panFilter.getValue(200));
 	});
 
 	// --balanceFilter
 	balanceFilter = new DJFilter(40, 2, 36, 36, Color.GOLD);
 	balanceFilter.setOnMouseDragged(drag -> {
 	    balanceFilter.onMouseDragged(drag);
-	    xPlayerUI.xPlayer.setBalance(balanceFilter.getValue(200));
+	    xPlayerUI.getxPlayer().setBalance(balanceFilter.getValue(200));
 	});
 
 	bottomHBox.getChildren().addAll(panFilter, balanceFilter);
@@ -192,8 +192,8 @@ public class XPlayerEqualizer extends BorderPane {
 		super.onMouseDragged(m);
 
 		//Add the filter
-		xPlayerUI.xPlayerModel.getEqualizerArray()[position] = getValue(200);
-		xPlayerUI.xPlayer.setEqualizerKey(xPlayerUI.xPlayerModel.getEqualizerArray()[position], position);
+		xPlayerUI.getxPlayerModel().getEqualizerArray()[position] = getValue(200);
+		xPlayerUI.getxPlayer().setEqualizerKey(xPlayerUI.getxPlayerModel().getEqualizerArray()[position], position);
 	    });
 
 	}
@@ -233,14 +233,14 @@ public class XPlayerEqualizer extends BorderPane {
 	    setOnAction(action -> {
 		// Pass the values to the array
 		for (int y = 0; y < 10; y++)
-		    xPlayerUI.xPlayerModel.getEqualizerArray()[y] = (float) vars[y];
+		    xPlayerUI.getxPlayerModel().getEqualizerArray()[y] = (float) vars[y];
 
 		// Set the filter
-		xPlayerUI.xPlayer.setEqualizer(xPlayerUI.xPlayerModel.getEqualizerArray(), 32);
+		xPlayerUI.getxPlayer().setEqualizer(xPlayerUI.getxPlayerModel().getEqualizerArray(), 32);
 
 		// Change the angles on the filters
 		for (int i = 0; i < 10; i++)
-		    filters[i].setAngle(xPlayerUI.xPlayerModel.getEqualizerArray()[i], 200);
+		    filters[i].setAngle(xPlayerUI.getxPlayerModel().getEqualizerArray()[i], 200);
 
 	    });
 
