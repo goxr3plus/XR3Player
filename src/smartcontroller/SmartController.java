@@ -5,13 +5,19 @@ package smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileVisitOption;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
@@ -1988,36 +1994,82 @@ public class SmartController extends StackPane {
 							
 							for (File file : list)
 								if (file.exists() && !isCancelled())
-									try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
-										paths.forEach(path -> {
-											
-											// System.out.println("Adding...."+s.toString())
-											
-											// cancelled?
-											if (isCancelled())
-												paths.close();
-											
-											// supported?
-											else if (InfoTool.isAudioSupported(path + ""))
-												insertMedia(path + "", 0, 0, date, time, preparedInsert);
-											
-											//					// Update informationTextArea				   
-											//					File f = path.toFile();
-											//					if (f.isDirectory())
-											//					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
-											
-											// update progress
-											updateProgress(++progress, totalFiles);
-										});
-									} catch (IOException ex) {
-										Main.logger.log(Level.WARNING, "", ex);
+									try {
+										Files.walkFileTree(Paths.get(file.getPath()),
+												new HashSet<FileVisitOption>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE,
+												new SimpleFileVisitor<Path>() {
+													@Override
+													public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
+														
+														// System.out.println("Adding...."+s.toString())
+														
+														// cancelled?
+														//if (isCancelled())
+														//	paths.close();
+														
+														// supported?
+														if (InfoTool.isAudioSupported(file + ""))
+															insertMedia(file + "", 0, 0, date, time, preparedInsert);
+														
+														//					// Update informationTextArea				   
+														//					File f = path.toFile();
+														//					if (f.isDirectory())
+														//					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
+														
+														// update progress
+														updateProgress(++progress, totalFiles);
+														
+														return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
+													}
+													
+													@Override
+													public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
+														System.err.printf("Visiting failed for %s\n", file);
+														
+														return FileVisitResult.SKIP_SUBTREE;
+													}
+													
+													@Override
+													public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs)
+															throws IOException {
+														return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
+													}
+												});
+									} catch (IOException e) {
+										e.printStackTrace();
 									}
+								
+							//									try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
+							//										paths.forEach(path -> {
+							//											
+							//											// System.out.println("Adding...."+s.toString())
+							//											
+							//											// cancelled?
+							//											if (isCancelled())
+							//												paths.close();
+							//											
+							//											// supported?
+							//											else if (InfoTool.isAudioSupported(path + ""))
+							//												insertMedia(path + "", 0, 0, date, time, preparedInsert);
+							//											
+							//											//					// Update informationTextArea				   
+							//											//					File f = path.toFile();
+							//											//					if (f.isDirectory())
+							//											//					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
+							//											
+							//											// update progress
+							//											updateProgress(++progress, totalFiles);
+							//										});
+							//									} catch (IOException ex) {
+							//										Main.logger.log(Level.WARNING, "", ex);
+							//									}
 						}
 						
 						saveInDataBase(preparedInsert);
 						
 					} catch (Exception ex) {
 						ex.printStackTrace();
+						//Platform.runLater(() -> ActionTool.showNotification("Error", ex.getMessage(), Duration.seconds(2), NotificationType.ERROR));
 					}
 					
 					return null;
@@ -2072,24 +2124,55 @@ public class SmartController extends StackPane {
 				 * @return the total number of files
 				 */
 				int countFiles(File dir) {
+					int[] count = { 0 };
+					
 					if (dir.exists())
-						try (Stream<Path> paths = Files.walk(Paths.get(dir.getPath()))) {
-							return (int) paths.filter(path -> {
-								
-								//Check if cancelled
-								if (!isCancelled())
-									return InfoTool.isAudioSupported(path + "");
-								
-								//If it has been cancelled return falsy 
-								paths.close();
-								
-								return false;
-							}).count();
-						} catch (IOException ex) {
-							Main.logger.log(Level.WARNING, "", ex);
+						//						try (Stream<Path> paths = Files.walk(Paths.get(dir.getPath()), FileVisitOption.FOLLOW_LINKS)) {
+						//							return (int) paths.filter(path -> {
+						//								
+						//								//Check if cancelled
+						//								if (!isCancelled())
+						//									return InfoTool.isAudioSupported(path + "");
+						//								
+						//								//If it has been cancelled return false 
+						//								paths.close();
+						//								
+						//								return false;
+						//							}).count();
+						//						} catch (IOException ex) {
+						//							Main.logger.log(Level.WARNING, "", ex);
+						//						}
+						
+						try {
+							Files.walkFileTree(Paths.get(dir.getPath()), new HashSet<FileVisitOption>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)),
+									Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+										@Override
+										public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
+											
+											if (InfoTool.isAudioSupported(file + ""))
+												++count[0];
+											
+											return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
+										}
+										
+										@Override
+										public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
+											System.err.printf("Visiting failed for %s\n", file);
+											
+											return FileVisitResult.SKIP_SUBTREE;
+										}
+										
+										@Override
+										public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs) throws IOException {
+											return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
+										}
+									});
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
 					
-					return 0;
+					System.out.println("Total Files=" + count[0]);
+					return count[0];
 				}
 				
 				/**

@@ -34,7 +34,7 @@ import tools.InfoTool;
  */
 public class MediaContextMenu extends ContextMenu {
 	
-	private final Image soundWave = InfoTool.getImageFromDocuments("Audio Wave Filled-24.png");
+	private final Image soundWave = InfoTool.getImageFromResourcesFolder("Audio Wave Filled-24.png");
 	
 	/**
 	 * The node based on which the Rename or Star Window will be position
@@ -48,7 +48,7 @@ public class MediaContextMenu extends ContextMenu {
 	private SmartController controller;
 	
 	/** The players. */
-	Menu startPlayer = new Menu("Play on", InfoTool.getImageViewFromDocuments("circledPlay24.png"));
+	Menu startPlayer = new Menu("Play on", InfoTool.getImageViewFromResourcesFolder("circledPlay24.png"));
 	
 	/** The player 0. */
 	MenuItem player0 = new MenuItem("xPlayer ~0", new ImageView(soundWave));
@@ -60,7 +60,7 @@ public class MediaContextMenu extends ContextMenu {
 	MenuItem player2 = new MenuItem("xPlayer ~2", new ImageView(soundWave));
 	
 	/** The players. */
-	Menu stopPlayer = new Menu("Stop Player", InfoTool.getImageViewFromDocuments("Stop Sign-24.png"));
+	Menu stopPlayer = new Menu("Stop Player", InfoTool.getImageViewFromResourcesFolder("Stop Sign-24.png"));
 	
 	/** The player 0. */
 	MenuItem splayer0 = new MenuItem("xPlayer ~0", new ImageView(soundWave));
@@ -72,23 +72,23 @@ public class MediaContextMenu extends ContextMenu {
 	MenuItem splayer2 = new MenuItem("xPlayer ~2", new ImageView(soundWave));
 	
 	//Start:--Search on Web
-	Menu searchOnWeb = new Menu("Search on Web..", InfoTool.getImageViewFromDocuments("searchWeb24.png"));
+	Menu searchOnWeb = new Menu("Search on Web..", InfoTool.getImageViewFromResourcesFolder("searchWeb24.png"));
 	
-	MenuItem soundCloud = new MenuItem("SoundCloud", InfoTool.getImageViewFromDocuments("soundcloud24.png"));
-	MenuItem jamendo = new MenuItem("Jamendo", InfoTool.getImageViewFromDocuments("jamendo24.png"));
-	MenuItem tunein = new MenuItem("tunein", InfoTool.getImageViewFromDocuments("tunein24.png"));
-	MenuItem amazon = new MenuItem("amazon", InfoTool.getImageViewFromDocuments("amazon24.png"));
+	MenuItem soundCloud = new MenuItem("SoundCloud", InfoTool.getImageViewFromResourcesFolder("soundcloud24.png"));
+	MenuItem jamendo = new MenuItem("Jamendo", InfoTool.getImageViewFromResourcesFolder("jamendo24.png"));
+	MenuItem tunein = new MenuItem("tunein", InfoTool.getImageViewFromResourcesFolder("tunein24.png"));
+	MenuItem amazon = new MenuItem("amazon", InfoTool.getImageViewFromResourcesFolder("amazon24.png"));
 	
-	MenuItem lastfm = new MenuItem("Last.fm", InfoTool.getImageViewFromDocuments("lastfm24.png"));
-	MenuItem librefm = new MenuItem("Libre.fm", InfoTool.getImageViewFromDocuments("librefm24.png"));
+	MenuItem lastfm = new MenuItem("Last.fm", InfoTool.getImageViewFromResourcesFolder("lastfm24.png"));
+	MenuItem librefm = new MenuItem("Libre.fm", InfoTool.getImageViewFromResourcesFolder("librefm24.png"));
 	
-	MenuItem youtube = new MenuItem("Youtube", InfoTool.getImageViewFromDocuments("youtube24.png"));
-	MenuItem vimeo = new MenuItem("Vimeo", InfoTool.getImageViewFromDocuments("vimeo24.png"));
+	MenuItem youtube = new MenuItem("Youtube", InfoTool.getImageViewFromResourcesFolder("youtube24.png"));
+	MenuItem vimeo = new MenuItem("Vimeo", InfoTool.getImageViewFromResourcesFolder("vimeo24.png"));
 	
-	MenuItem google = new MenuItem("Google", InfoTool.getImageViewFromDocuments("google24.png"));
-	MenuItem duckduckgo = new MenuItem("DuckDuckgo", InfoTool.getImageViewFromDocuments("duckduckgo24.png"));
-	MenuItem bing = new MenuItem("Bing", InfoTool.getImageViewFromDocuments("bing24.png"));
-	MenuItem yahoo = new MenuItem("Yahoo", InfoTool.getImageViewFromDocuments("yahoo24.png"));
+	MenuItem google = new MenuItem("Google", InfoTool.getImageViewFromResourcesFolder("google24.png"));
+	MenuItem duckduckgo = new MenuItem("DuckDuckgo", InfoTool.getImageViewFromResourcesFolder("duckduckgo24.png"));
+	MenuItem bing = new MenuItem("Bing", InfoTool.getImageViewFromResourcesFolder("bing24.png"));
+	MenuItem yahoo = new MenuItem("Yahoo", InfoTool.getImageViewFromResourcesFolder("yahoo24.png"));
 	
 	//END:--Search on Web
 	
@@ -113,38 +113,38 @@ public class MediaContextMenu extends ContextMenu {
 	//MenuItem information = new MenuItem("Information (I)", InfoTool.getImageViewFromDocuments("tag.png"))
 	
 	/** The stars. (S) */
-	MenuItem stars = new MenuItem("Stars ", InfoTool.getImageViewFromDocuments("smallStar.png"));
+	MenuItem stars = new MenuItem("Stars ", InfoTool.getImageViewFromResourcesFolder("smallStar.png"));
 	
 	/** Show File (P) */
-	MenuItem showFile = new MenuItem("Show File ", InfoTool.getImageViewFromDocuments("path.png"));
+	MenuItem showFile = new MenuItem("Show File ", InfoTool.getImageViewFromResourcesFolder("path.png"));
 	
 	/** Find Lyrics (L) */
-	Menu findLyrics = new Menu("Find Lyrics", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
-	MenuItem lyricFinderOrg = new MenuItem("LyricFinder.org", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
-	MenuItem lyricsCom = new MenuItem("Lyrics.com", InfoTool.getImageViewFromDocuments("Lyrics-24.png"));
+	Menu findLyrics = new Menu("Find Lyrics", InfoTool.getImageViewFromResourcesFolder("Lyrics-24.png"));
+	MenuItem lyricFinderOrg = new MenuItem("LyricFinder.org", InfoTool.getImageViewFromResourcesFolder("Lyrics-24.png"));
+	MenuItem lyricsCom = new MenuItem("Lyrics.com", InfoTool.getImageViewFromResourcesFolder("Lyrics-24.png"));
 	
 	/** Search by country */
-	Menu searchByCountry = new Menu("Search by country[Coming...]", InfoTool.getImageViewFromDocuments("flag 24.png"));
+	Menu searchByCountry = new Menu("Search by country[Coming...]", InfoTool.getImageViewFromResourcesFolder("flag 24.png"));
 	
 	/** Show Info (I) */
-	MenuItem showInfo = new MenuItem("Show Info[Coming..]", InfoTool.getImageViewFromDocuments("tag.png"));
+	MenuItem showInfo = new MenuItem("Show Info[Coming..]", InfoTool.getImageViewFromResourcesFolder("tag.png"));
 	
 	//--------------------------------
 	
 	/** The copy. (C/M) */
-	MenuItem copy = new MenuItem("copy/move ", InfoTool.getImageViewFromDocuments("copyFile.png"));
+	MenuItem copy = new MenuItem("copy/move ", InfoTool.getImageViewFromResourcesFolder("copyFile.png"));
 	
 	/** The move. */
 	//MenuItem move = new MenuItem("moveTo(M)")
 	
 	/** The rename. (R) */
-	MenuItem rename = new MenuItem("Rename ", InfoTool.getImageViewFromDocuments("rename.png"));
+	MenuItem rename = new MenuItem("Rename ", InfoTool.getImageViewFromResourcesFolder("rename.png"));
 	
 	/** The simple delete. */
-	MenuItem simpleDelete = new MenuItem("Delete (Delete)", InfoTool.getImageViewFromDocuments("delete2.png"));
+	MenuItem simpleDelete = new MenuItem("Delete (Delete)", InfoTool.getImageViewFromResourcesFolder("delete2.png"));
 	
 	/** The storage delete. */
-	MenuItem storageDelete = new MenuItem("Delete (Shift+Delete)", InfoTool.getImageViewFromDocuments("delete.png"));
+	MenuItem storageDelete = new MenuItem("Delete (Shift+Delete)", InfoTool.getImageViewFromResourcesFolder("delete.png"));
 	
 	/** The separator 1. */
 	SeparatorMenuItem separator1 = new SeparatorMenuItem();

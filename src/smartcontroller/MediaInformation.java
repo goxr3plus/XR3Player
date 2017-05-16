@@ -86,7 +86,7 @@ public class MediaInformation extends BorderPane implements Initializable {
 	private Media media;
 	
 	/** The null image. */
-	private final Image nullImage = InfoTool.getImageFromDocuments("noImage.png");
+	private final Image nullImage = InfoTool.getImageFromResourcesFolder("noImage.png");
 
 	/**
 	 * Constructor.

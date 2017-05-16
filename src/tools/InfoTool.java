@@ -74,7 +74,7 @@ public final class InfoTool {
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 	
 	/** The Constant playedImage. */
-	public static final Image playedImage = getImageFromDocuments("played.png");
+	public static final Image playedImage = getImageFromResourcesFolder("played.png");
 	
 	/** Database folder name <b>with out</b> separator [example:XR3DataBase] */
 	private static final String DATABASE_FOLDER_NAME = "XR3DataBase";
@@ -546,8 +546,21 @@ public final class InfoTool {
 	 * @return Returns an image which is already into the resources folder of
 	 *         the application
 	 */
-	public static Image getImageFromDocuments(String imageName) {
+	public static Image getImageFromResourcesFolder(String imageName) {
 		return new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName));
+	}
+	
+	/**
+	 * Use this method to retrieve an image from the resources of the
+	 * application.
+	 *
+	 * @param imageName
+	 *        the image name
+	 * @return Returns an image which is already into the resources folder of
+	 *         the application
+	 */
+	public static Image getImageFromCurrentFolder(String folderName , String imageName) {
+		return new Image(InfoTool.class.getResourceAsStream("/" + folderName + "/" + imageName));
 	}
 	
 	/**
@@ -556,10 +569,11 @@ public final class InfoTool {
 	 *
 	 * @param imageName
 	 *        the image name
-	 * @return Returns an ImageView using method getImageFromDocumuments(String
+	 * @return Returns an ImageView using method
+	 *         getImageFromResourcesFolder(String
 	 *         imageName);
 	 */
-	public static ImageView getImageViewFromDocuments(String imageName) {
+	public static ImageView getImageViewFromResourcesFolder(String imageName) {
 		return new ImageView(new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName)));
 	}
 	

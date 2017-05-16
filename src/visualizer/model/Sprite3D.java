@@ -9,9 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import tools.InfoTool;
 
 /**
@@ -98,34 +96,34 @@ public class Sprite3D {
 	private List<Point3D> points;
 	
 	/** The roll. */
-	private double roll = 0;
+	private double roll;
 	
 	/** The pitch. */
-	private double pitch = 0;
+	private double pitch;
 	
 	/** The yaw. */
-	private double yaw = 0;
+	private double yaw;
 	
 	/** The roll inc. */
-	private double rollInc = 0;
+	private double rollInc;
 	
 	/** The pitch inc. */
-	private double pitchInc = 0;
+	private double pitchInc;
 	
 	/** The yaw inc. */
-	private double yawInc = 0;
+	private double yawInc;
 	
 	/** The x offset. */
-	private double xOffset = 0;
+	private double xOffset;
 	
 	/** The y offset. */
-	private double yOffset = 0;
+	private double yOffset;
 	
 	/** The z offset. */
-	private double zOffset = 0;
+	private double zOffset;
 	
 	/** The zoom. */
-	private double zoom = 0;
+	private double zoom;
 	
 	/** The background. */
 	//private Image background;
@@ -136,10 +134,11 @@ public class Sprite3D {
 	/** The z comparator. */
 	private Comparator<Point3D> zComparator = (p1 , p2) -> Double.compare(p2.z, p1.z);
 	
-	/** The gc. */
-	//GraphicsContext gc;
-	
 	private VisualizerDrawer visualizerDrawer;
+	
+	Image[] images = { InfoTool.getImageFromResourcesFolder("star1.png") , InfoTool.getImageFromResourcesFolder("star2.png") ,
+			InfoTool.getImageFromResourcesFolder("star3.png") , InfoTool.getImageFromResourcesFolder("star4.png") ,
+			InfoTool.getImageFromResourcesFolder("star5.png") };
 	
 	/**
 	 * Instantiates a new sprite 3 D.
@@ -151,7 +150,6 @@ public class Sprite3D {
 		this.visualizerDrawer = visualizerDrawer;
 		
 		//background = new Image(getClass().getResourceAsStream(InfoTool.images + "trapNation.jpg"));
-		imageBall = InfoTool.getImageFromDocuments("star.png");
 		customInitialise(shape, -1, -1);
 	}
 	
@@ -352,7 +350,7 @@ public class Sprite3D {
 		renderList.clear();
 		
 		for (int i = 0; i < array.length; i++) {
-			array[i]=Math.abs(array[i]);
+			array[i] = Math.abs(array[i]);
 			array[i] *= 100.00;
 		}
 		
@@ -363,6 +361,18 @@ public class Sprite3D {
 		}
 		
 		zSort(renderList);
+		
+		//System.out.println(array[0])
+		if (array[1] <= 15)
+			imageBall = images[0];
+		else if (array[1] <= 25)
+			imageBall = images[1];
+		else if (array[1] <= 35)
+			imageBall = images[2];
+		else if (array[1] <= 45)
+			imageBall = images[3];
+		else
+			imageBall = images[4];
 		
 		for (int i = 0; i < renderList.size(); i++) {
 			Point3D point = renderList.get(i);
@@ -415,10 +425,9 @@ public class Sprite3D {
 	 */
 	private final Point3D transform(Point3D orig , double pitch , double yaw , double roll , double translateX , double translateY ,
 			double translateZ , float[] bands) {
-			
 		
 		// rotate around Z axis (roll)
-		double newX = orig.x * cos(bands[0]) -  orig.y * sin(roll);
+		double newX = orig.x * cos(bands[0]) - orig.y * sin(roll);
 		double newY = orig.x + sin(bands[0]) + orig.y * cos(roll);
 		double newZ = orig.z;
 		

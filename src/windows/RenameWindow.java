@@ -87,7 +87,7 @@ public class RenameWindow extends VBox {
 	window.setHeight(80);
 	window.initModality(Modality.APPLICATION_MODAL);
 	window.initStyle(StageStyle.TRANSPARENT);
-	window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
+	window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 	window.centerOnScreen();
 	window.setOnCloseRequest(ev -> close(false));
 	window.setAlwaysOnTop(true);

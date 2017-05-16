@@ -42,7 +42,7 @@ import visualizer.model.ResizableCanvas;
 public class DJDisc extends StackPane {
 	
 	/** The Constant NULL_IMAGE. */
-	private static final Image NULL_IMAGE = InfoTool.getImageFromDocuments("noImage.png");
+	private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noImage.png");
 	
 	/** The listeners. */
 	private final ArrayList<DJDiscListener> listeners = new ArrayList<>();

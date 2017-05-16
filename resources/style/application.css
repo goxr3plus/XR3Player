@@ -4,6 +4,18 @@
 
 ******************************************************************************/
 
+.split-pane .split-pane-divider{	
+	-fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
+}
+
+.split-pane .split-pane-divider:hover{	
+	-fx-background-color:firebrick;
+	-fx-border-color:black;
+	-fx-border-width:2.0;
+}
 
 
 /* .icon{

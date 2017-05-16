@@ -56,10 +56,10 @@ public final class ActionTool {
 	private static boolean questionAnswer;
 	
 	/** The warning image. */
-	private static ImageView warningImage = InfoTool.getImageViewFromDocuments("warning.png");
+	private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png");
 	
 	/** The question image. */
-	private static ImageView questionImage = InfoTool.getImageViewFromDocuments("question.png");
+	private static ImageView questionImage = InfoTool.getImageViewFromResourcesFolder("question.png");
 	
 	/**
 	 * Private Constructor.

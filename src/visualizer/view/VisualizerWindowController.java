@@ -120,7 +120,7 @@ public class VisualizerWindowController extends StackPane {
 
 	window = new Stage();
 	window.setTitle("XR3Player Visualizer");
-	window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
+	window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 	window.setWidth(InfoTool.getScreenHeight() / 2);
 	window.setHeight(InfoTool.getScreenHeight() / 2);
 	window.centerOnScreen();

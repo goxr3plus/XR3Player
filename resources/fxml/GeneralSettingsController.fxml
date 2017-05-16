@@ -20,7 +20,7 @@
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT (Default + Recommended )" HBox.hgrow="ALWAYS">
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT (Default )" HBox.hgrow="ALWAYS">
                      <tooltip>
                         <Tooltip text="The Side Bar will be at the left of the Window" />
                      </tooltip>
@@ -28,7 +28,57 @@
                         <ToggleGroup fx:id="sideBarSideGroup" />
                      </toggleGroup>
                   </JFXRadioButton>
-                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT (Experimental )" toggleGroup="$sideBarSideGroup" HBox.hgrow="ALWAYS">
+                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT" toggleGroup="$sideBarSideGroup" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                  </JFXRadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Turn Library Mode Upside Down(?)">
+               <tooltip>
+                  <Tooltip text="Library Mode Settings" />
+               </tooltip>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="54.0">
+               <children>
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No (Default)" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="libraryModeUpsideDown" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                  </JFXRadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Turn DJ Mode Upside Down(?)">
+               <tooltip>
+                  <Tooltip text="DJ ModeSettings" />
+               </tooltip>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0">
+               <children>
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No (Default)" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="djModeUpsideDown" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" HBox.hgrow="ALWAYS">
                      <tooltip>
                         <Tooltip text="The Side Bar will be at the left of the Window" />
                      </tooltip>

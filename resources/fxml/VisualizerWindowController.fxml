@@ -83,6 +83,8 @@
                                           <RadioMenuItem mnemonicParsing="false" text="Rozete" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Circle Lines" toggleGroup="$visualizerTypeGroup" />
                                           <RadioMenuItem mnemonicParsing="false" text="Skierpinski Triangles" toggleGroup="$visualizerTypeGroup" />
+                                          <RadioMenuItem mnemonicParsing="false" text="Sprite3D (new)" toggleGroup="$visualizerTypeGroup" />
+                                          <RadioMenuItem disable="true" mnemonicParsing="false" text="Julia Fractals (new)" toggleGroup="$visualizerTypeGroup" />
                                       </items>
                                     </Menu>
                                  </items>

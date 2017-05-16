@@ -10,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import tools.InfoTool;
 import xplayer.presenter.XPlayerController;
@@ -20,231 +22,278 @@ import xplayer.presenter.XPlayerController;
  *
  * @author GOXR3PLUS
  */
-public class DJMode extends GridPane {
-
-    /** The split pane. */
-    @FXML
-    private SplitPane splitPane;
-
-    /** The dj tabs. */
-    // public DJTabs djTabs
-
-    /** The balancer. */
-    //public Balancer balancer
-
-    /** The digital clock. */
-    // public DigitalClock digitalClock
-
-    /** The divider. */
-    // Variables
-    private double[] divider = { 0.18, 0.83, 0.2 };
-
-    /**
-     * Constructor.
-     */
-    public DJMode() {
-
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DJMode.fxml"));
-	loader.setController(this);
-	loader.setRoot(this);
-
-	try {
-	    loader.load();
-	} catch (IOException ex) {
-	    ex.printStackTrace();
+public class DJMode extends BorderPane {
+	
+	//-------------------------------------------------
+	
+	@FXML
+	private SplitPane topSplitPane;
+	
+	@FXML
+	private HBox hBox;
+	
+	@FXML
+	private SplitPane bottomSplitPane;
+	
+	//--------------------------------------------------------------
+	
+	/**
+	 * Constructor.
+	 */
+	public DJMode() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DJMode.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
 	}
-
-    }
-
-    /**
-     * Called as soon as .FXML is loaded from FXML Loader
-     */
-    @FXML
-    public void initialize() {
-	Main.xPlayersList.addXPlayerController(new XPlayerController(1));
-	Main.xPlayersList.getXPlayerController(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
-	Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
-	add(Main.xPlayersList.getXPlayerController(1), 0, 0);
-
-	Main.xPlayersList.addXPlayerController(new XPlayerController(2));
-	Main.xPlayersList.getXPlayerController(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
-	Main.xPlayersList.getXPlayerController(2).makeTheVisualizer(Side.RIGHT);
-	add(Main.xPlayersList.getXPlayerController(2), 1, 0);
-
-	// splitPane
-	splitPane.setStyle("-fx-background-color:transparent");
-
-	// makeCpuUsageMeter()
-	makeDigitalClock();
-	makeDJSoundTeamTabs();
-	makeBalancer();
-
-	addKeyListeners();
-    }
-
-    /**
-     * Returns the splitPane of the DJMode.
-     *
-     * @return the split pane
-     */
-    public SplitPane getSplitPane() {
-	return splitPane;
-    }
-
-    /**
-     * Create CpuMeter.
-     */
-    void makeCpuUsageMeter() {
-	// cpu = new CPUsage(0, InfoTool.screenHeight - 420, 151, 15)
-    }
-
-    /**
-     * Make the digital Clock
-     */
-    void makeDigitalClock() {
-	// digitalClock = new DigitalClock(170, InfoTool.getScreenHeight() -
-	// 422, 80, 16)
-    }
-
-    /**
-     * Make DJ sound team tabs.
-     */
-    void makeDJSoundTeamTabs() {
-	// djTabs = new DJTabs(InfoTool.getScreenWidth() - 305, 400, 300,
-	// InfoTool.getScreenHeight() - 400)
-    }
-
-    /**
-     * Make balancer.
-     */
-    void makeBalancer() {
-
-	//	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
-	//	balancer.setOnMouseDragged(drag -> {
-	//	    balancer.onMouseDragged(drag);
-	//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-	//	});
-	//
-	//	balancer.setOnScroll(scroll -> {
-	//	    balancer.onScroll(scroll);
-	//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-	//	});
-
-    }
-
-    /**
-     * Adds the appropriate key listeners to the Parent.
-     */
-    private final void addKeyListeners() {
-
-	// Key Pressed Events
-	setOnKeyPressed(key -> {
-
-	    KeyCode keyCode = key.getCode();
-
-	    // -->Xplayer_1||XPlayer_2 Volume++
-	    if (keyCode == KeyCode.W) {
-
-		if (key.isShiftDown()) {
-		    if (Main.xPlayersList.getXPlayerController(1).getVolume() < 101) {
-			Main.xPlayersList.getXPlayerController(1)
-				.setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
-		    }
-		} else if (key.isControlDown()) {
-		    if (Main.xPlayersList.getXPlayerController(2).getVolume() < 101) {
-			Main.xPlayersList.getXPlayerController(2)
-				.setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
-		    }
-		}
-
-		// -->Xplayer_1||XPlayer_2 Volume--
-	    } else if (keyCode == KeyCode.Q) {
-
-		if (key.isShiftDown()) {
-		    if (Main.xPlayersList.getXPlayerController(1).getVolume() > -1) {
-			Main.xPlayersList.getXPlayerController(1)
-				.setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
-		    }
-		} else if (key.isControlDown()) {
-		    if (Main.xPlayersList.getXPlayerController(2).getVolume() > -1) {
-			Main.xPlayersList.getXPlayerController(2)
-				.setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
-		    }
-		}
-	    }
-
-	});
-
-	setOnKeyReleased(key -> {
-	    KeyCode keyCode = key.getCode();
-
-	    // Xplayer_1||Xplayer2.Resume
-	    if (keyCode == KeyCode.DIGIT1) {
-
-		if (key.isShiftDown())
-		    Main.xPlayersList.getXPlayer(1).resume();
-		else if (key.isControlDown())
-		    Main.xPlayersList.getXPlayer(2).resume();
-
-		// Xplayer_1||Xplayer_2.Pause
-	    } else if (keyCode == KeyCode.DIGIT2) {
-
-		if (key.isShiftDown())
-		    Main.xPlayersList.getXPlayer(1).pause();
-		else if (key.isControlDown())
-		    Main.xPlayersList.getXPlayer(2).pause();
-
-		// Xplayer_1||Xplayer_2.Stop
-	    } else if (keyCode == KeyCode.DIGIT3) {
-
-		if (key.isShiftDown()) {
-		    if (Main.xPlayersList.getXPlayer(1).isPausedOrPlaying())
-			Main.xPlayersList.getXPlayer(1).stop();
-		} else if (key.isControlDown())
-		    if (Main.xPlayersList.getXPlayer(2).isPausedOrPlaying())
-			Main.xPlayersList.getXPlayer(2).stop();
-
-		// DJBeats
-	    }
-	    // else if (keyCode == KeyCode.DIGIT4) {
-	    //
-	    // for (Node n : djTabs.djBeats.getChildren())
-	    // if ( ( (DJSoundTeamButton) n ).getRadioButton().isSelected()) {
-	    //
-	    // ( (DJSoundTeamButton) n ).controllPlayer();
-	    //
-	    // break;
-	    // }
-	    //
-	    // // DJScratch
-	    // } else if (keyCode == KeyCode.DIGIT5) {
-	    //
-	    // for (Node n : djTabs.djScratches.getChildren())
-	    // if ( ( (DJSoundTeamButton) n ).getRadioButton().isSelected()) {
-	    //
-	    // ( (DJSoundTeamButton) n ).controllPlayer();
-	    //
-	    // break;
-	    // }
-	    //
-	    // }
-
-	});
-
-    }
-
-    /**
-     * Sets the position of the divider.
-     */
-    public void setDividerPositions() {
-	splitPane.setDividerPositions(divider);
-    }
-
-    /**
-     * Updates the array holding the divider positions.
-     */
-    public void updateDividerArray() {
-	divider = splitPane.getDividerPositions();
-    }
-
+	
+	/**
+	 * Called as soon as .FXML is loaded from FXML Loader
+	 */
+	@FXML
+	public void initialize() {
+		
+		//XPlayer 1
+		Main.xPlayersList.addXPlayerController(new XPlayerController(1));
+		Main.xPlayersList.getXPlayerController(1).makeTheDisc(136, 136, Color.rgb(53, 144, 255), 45, Side.RIGHT);
+		Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
+		hBox.getChildren().add(Main.xPlayersList.getXPlayerController(1));
+		HBox.setHgrow(Main.xPlayersList.getXPlayerController(1), Priority.ALWAYS);
+		
+		//XPlayer 2
+		Main.xPlayersList.addXPlayerController(new XPlayerController(2));
+		Main.xPlayersList.getXPlayerController(2).makeTheDisc(136, 136, Color.RED, 45, Side.LEFT);
+		Main.xPlayersList.getXPlayerController(2).makeTheVisualizer(Side.RIGHT);
+		hBox.getChildren().add(Main.xPlayersList.getXPlayerController(2));
+		HBox.setHgrow(Main.xPlayersList.getXPlayerController(2), Priority.ALWAYS);
+		
+		// makeCpuUsageMeter()
+		makeDigitalClock();
+		makeDJSoundTeamTabs();
+		makeBalancer();
+		
+		addKeyListeners();
+		
+	}
+	
+	/**
+	 * Create CpuMeter.
+	 */
+	void makeCpuUsageMeter() {
+		// cpu = new CPUsage(0, InfoTool.screenHeight - 420, 151, 15)
+	}
+	
+	/**
+	 * Make the digital Clock
+	 */
+	void makeDigitalClock() {
+		// digitalClock = new DigitalClock(170, InfoTool.getScreenHeight() -
+		// 422, 80, 16)
+	}
+	
+	/**
+	 * Make DJ sound team tabs.
+	 */
+	void makeDJSoundTeamTabs() {
+		// djTabs = new DJTabs(InfoTool.getScreenWidth() - 305, 400, 300,
+		// InfoTool.getScreenHeight() - 400)
+	}
+	
+	/**
+	 * Make balancer.
+	 */
+	void makeBalancer() {
+		
+		//	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
+		//	balancer.setOnMouseDragged(drag -> {
+		//	    balancer.onMouseDragged(drag);
+		//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
+		//	});
+		//
+		//	balancer.setOnScroll(scroll -> {
+		//	    balancer.onScroll(scroll);
+		//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
+		//	});
+		
+	}
+	
+	/**
+	 * Adds the appropriate key listeners to the Parent.
+	 */
+	private final void addKeyListeners() {
+		
+		// Key Pressed Events
+		setOnKeyPressed(key -> {
+			
+			KeyCode keyCode = key.getCode();
+			
+			// -->Xplayer_1||XPlayer_2 Volume++
+			if (keyCode == KeyCode.W) {
+				
+				if (key.isShiftDown()) {
+					if (Main.xPlayersList.getXPlayerController(1).getVolume() < 101) {
+						Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
+					}
+				} else if (key.isControlDown()) {
+					if (Main.xPlayersList.getXPlayerController(2).getVolume() < 101) {
+						Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
+					}
+				}
+				
+				// -->Xplayer_1||XPlayer_2 Volume--
+			} else if (keyCode == KeyCode.Q) {
+				
+				if (key.isShiftDown()) {
+					if (Main.xPlayersList.getXPlayerController(1).getVolume() > -1) {
+						Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
+					}
+				} else if (key.isControlDown()) {
+					if (Main.xPlayersList.getXPlayerController(2).getVolume() > -1) {
+						Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
+					}
+				}
+			}
+			
+		});
+		
+		setOnKeyReleased(key -> {
+			KeyCode keyCode = key.getCode();
+			
+			// Xplayer_1||Xplayer2.Resume
+			if (keyCode == KeyCode.DIGIT1) {
+				
+				if (key.isShiftDown())
+					Main.xPlayersList.getXPlayer(1).resume();
+				else if (key.isControlDown())
+					Main.xPlayersList.getXPlayer(2).resume();
+				
+				// Xplayer_1||Xplayer_2.Pause
+			} else if (keyCode == KeyCode.DIGIT2) {
+				
+				if (key.isShiftDown())
+					Main.xPlayersList.getXPlayer(1).pause();
+				else if (key.isControlDown())
+					Main.xPlayersList.getXPlayer(2).pause();
+				
+				// Xplayer_1||Xplayer_2.Stop
+			} else if (keyCode == KeyCode.DIGIT3) {
+				
+				if (key.isShiftDown()) {
+					if (Main.xPlayersList.getXPlayer(1).isPausedOrPlaying())
+						Main.xPlayersList.getXPlayer(1).stop();
+				} else if (key.isControlDown() && Main.xPlayersList.getXPlayer(2).isPausedOrPlaying())
+					Main.xPlayersList.getXPlayer(2).stop();
+				
+				// DJBeats
+			}
+			
+		});
+		
+	}
+	
+	// Variables
+	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
+	
+	// Variables
+	private double[] bottomSplitPaneDivider = { 0.18 , 0.83 };
+	
+	//	/**
+	//	 * Updates the values of array that holds DividerPositions of splitPane
+	//	 */
+	//	public void updateTopSplitPaneDividerArray(double[] array) {
+	//		topSplitPaneDivider[0] = array[0];
+	//		topSplitPaneDivider[1] = array[1];
+	//	}
+	//	
+	//	/**
+	//	 * Updates the values of array that holds DividerPositions of splitPane
+	//	 */
+	//	public void updateBottomSplitPaneDividerArray(double[] array) {
+	//		bottomSplitPaneDivider[0] = array[0];
+	//		bottomSplitPaneDivider[1] = array[1];
+	//	}
+	
+	//----------------------------
+	
+	/**
+	 * Updates the SplitPane DividerPositions based on the saved array
+	 */
+	public void updateTopSplitPaneDivider() {
+		topSplitPane.setDividerPositions(topSplitPaneDivider);
+	}
+	
+	/**
+	 * Updates the SplitPane DividerPositions based on the saved array
+	 */
+	public void updateBottomSplitPaneDivider() {
+		bottomSplitPane.setDividerPositions(bottomSplitPaneDivider);
+	}
+	
+	//----------------------------	
+	
+	/**
+	 * Saves current divider positions of SplitPane into an array
+	 */
+	public void saveTopSplitPaneDivider() {
+		topSplitPaneDivider = topSplitPane.getDividerPositions();
+	}
+	
+	/**
+	 * Saves current divider positions of SplitPane into an array
+	 */
+	public void saveBottomSplitPaneDivider() {
+		bottomSplitPaneDivider = bottomSplitPane.getDividerPositions();
+	}
+	
+	/**
+	 * Turns the Library Mode Upside Down or opposite
+	 * 
+	 * @param turnDown
+	 */
+	public void turnUpsideDownSplitPane(boolean turnDown) {
+		
+		//Check if it can enter based on the top hBox position
+		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(hBox) ) || ( !turnDown && topSplitPane.getItems().get(0).equals(hBox) ))
+			return;
+		
+		//this.saveTopSplitPaneDivider();
+		double temp = topSplitPaneDivider[0];
+		topSplitPaneDivider[0] = topSplitPaneDivider[1];
+		topSplitPaneDivider[1] = temp;
+		
+		boolean libraryIsOnTop = topSplitPane.getItems().get(0).equals(hBox);
+		topSplitPane.getItems().clear();
+		if (libraryIsOnTop)
+			topSplitPane.getItems().addAll(bottomSplitPane, hBox);
+		else
+			topSplitPane.getItems().addAll(hBox, bottomSplitPane);
+		
+		this.updateTopSplitPaneDivider();
+		
+	}
+	
+	//----------------------------
+	
+	/**
+	 * @return the topSplitPane
+	 */
+	public SplitPane getTopSplitPane() {
+		return topSplitPane;
+	}
+	
+	/**
+	 * @return the bottomSplitPane
+	 */
+	public SplitPane getBottomSplitPane() {
+		return bottomSplitPane;
+	}
+	
 }

@@ -21,60 +21,104 @@ import tools.JavaFXTools;
  *
  */
 public class GeneralSettingsController extends BorderPane {
-
-    //-----------------------------------------------------
-
-    @FXML
-    private ToggleGroup sideBarSideGroup;
-
-    // -------------------------------------------------------------
-
-    /** The logger. */
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    /**
-     * Constructor.
-     */
-    public GeneralSettingsController() {
-
-	// ------------------------------------FXMLLOADER ----------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "GeneralSettingsController.fxml"));
-	loader.setController(this);
-	loader.setRoot(this);
-
-	try {
-	    loader.load();
-	} catch (IOException ex) {
-	    logger.log(Level.SEVERE, "", ex);
+	
+	//-----------------------------------------------------
+	
+	@FXML
+	private ToggleGroup sideBarSideGroup;
+	
+	@FXML
+	private ToggleGroup libraryModeUpsideDown;
+	
+	@FXML
+	private ToggleGroup djModeUpsideDown;
+	
+	// -------------------------------------------------------------
+	
+	/** The logger. */
+	private final Logger logger = Logger.getLogger(getClass().getName());
+	
+	/**
+	 * Constructor.
+	 */
+	public GeneralSettingsController() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "GeneralSettingsController.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			logger.log(Level.SEVERE, "", ex);
+		}
+		
 	}
-
-    }
-
-    /**
-     * Called as soon as .fxml is initialized
-     */
-    @FXML
-    private void initialize() {
-
-	//sideBarSideGroup
-	sideBarSideGroup.selectedToggleProperty().addListener(listener -> {
-
-	    //Update the properties file
-	    Main.dbManager.getPropertiesDb().updateProperty("General-SideBarSide",
-		    Integer.toString(JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup)));
-
-	    //Fix the side bar position
-	    Main.sideBar.changeSide(
-		    JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
-	});
-
-    }
-
-    /**
-     * @return the sideBarSideGroup
-     */
-    public ToggleGroup getSideBarSideGroup() {
-	return sideBarSideGroup;
-    }
-
+	
+	/**
+	 * Called as soon as .fxml is initialized
+	 */
+	@FXML
+	private void initialize() {
+		
+		//sideBarSideGroup
+		sideBarSideGroup.selectedToggleProperty().addListener(listener -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("General-SideBarSide",
+					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup)));
+			
+			//Fix the side bar position
+			Main.sideBar.changeSide(
+					JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
+		});
+		
+		//sideBarSideGroup
+		libraryModeUpsideDown.selectedToggleProperty().addListener(listener -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("General-LibraryModeUpsideDown",
+					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown)));
+			
+			//Turn Library Mode Upside Down or The Opposite
+			Main.libraryMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown) != 0);
+			
+		});
+		
+		//sideBarSideGroup
+		djModeUpsideDown.selectedToggleProperty().addListener(listener -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("General-DjModeUpsideDown",
+					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(djModeUpsideDown)));
+			
+			//Turn Library Mode Upside Down or The Opposite
+			Main.djMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(djModeUpsideDown) != 0);
+			
+		});
+		
+	}
+	
+	/**
+	 * @return the sideBarSideGroup
+	 */
+	public ToggleGroup getSideBarSideGroup() {
+		return sideBarSideGroup;
+	}
+	
+	/**
+	 * @return the libraryModeUpsideDown
+	 */
+	public ToggleGroup getLibraryModeUpsideDown() {
+		return libraryModeUpsideDown;
+	}
+	
+	/**
+	 * @return the djModeUpsideDown
+	 */
+	public ToggleGroup getDjModeUpsideDown() {
+		return djModeUpsideDown;
+	}
+	
 }

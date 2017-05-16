@@ -92,14 +92,14 @@ public abstract class Media {
     // PROPERTIES----------------------------------------------------------------------------------
 
     /** The image to be displayed if the Media is Song + NO ERRORS */
-    public static final Image songImage = InfoTool.getImageFromDocuments("song.png");
+    public static final Image songImage = InfoTool.getImageFromResourcesFolder("song.png");
     /** The image to be displayed if the Media is Song + MISSING */
-    public static final Image songMissingImage = InfoTool.getImageFromDocuments("songMissing.png");
+    public static final Image songMissingImage = InfoTool.getImageFromResourcesFolder("songMissing.png");
     /** The image to be displayed if the Media is Song + CORRUPTED */
-    public static final Image songCorruptedImage = InfoTool.getImageFromDocuments("songCorrupted.png");
+    public static final Image songCorruptedImage = InfoTool.getImageFromResourcesFolder("songCorrupted.png");
 
     /** The video image. */
-    public static final Image videoImage = InfoTool.getImageFromDocuments("video.png");
+    public static final Image videoImage = InfoTool.getImageFromResourcesFolder("video.png");
 
     /** The genre. */
     protected Genre genre;

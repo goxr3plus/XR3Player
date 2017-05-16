@@ -297,7 +297,7 @@ public class Main extends Application {
 			window.setWidth(width);
 			window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
 			window.centerOnScreen();
-			window.getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
+			window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 			window.centerOnScreen();
 			window.setOnCloseRequest(exit -> {
 				exitQuestion();
@@ -356,7 +356,7 @@ public class Main extends Application {
 					//I need to fix this for errors
 					InfoTool.getDatabaseSignatureFile().createNewFile();
 				} catch (IOException ex) {
-					Main.logger.log(Level.WARNING, ex.getMessage(), ex);
+					logger.log(Level.WARNING, ex.getMessage(), ex);
 				}
 			
 			//Users Search Box
@@ -392,7 +392,7 @@ public class Main extends Application {
 	 */
 	public static void changeBackgroundImage() {
 		
-		File imageFile = Main.specialChooser.prepareToSelectImage(Main.window);
+		File imageFile = specialChooser.prepareToSelectImage(window);
 		if (imageFile == null)
 			return;
 		
@@ -517,7 +517,9 @@ public class Main extends Application {
 			
 			//Do the below until the database is initialized
 			userMode.setUser(u);
-			libraryMode.add(Main.multipleTabs, 0, 1);
+			libraryMode.getBottomSplitPane().getItems().add(multipleTabs);
+			libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
+			//libraryMode.add(Main.multipleTabs, 0, 0);
 			sideBar.setVisible(true);
 			sideBar.setManaged(true);
 			topBar.setVisible(true);
@@ -556,7 +558,7 @@ public class Main extends Application {
 			
 			//Important binding 
 			libraryMode.multipleLibs.emptyLabel.textProperty()
-					.bind(Bindings.when(Main.libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
+					.bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
 							.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 			
 			//Load the DataBase - After the DBManager has been initialized of course ;)
@@ -750,7 +752,7 @@ public class Main extends Application {
 			} catch (IOException ex) {
 				Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 				Platform.runLater(() -> {
-					Main.updateScreen.setVisible(false);
+					updateScreen.setVisible(false);
 					
 					// Show failed message		  
 					Platform.runLater(
@@ -777,53 +779,64 @@ public class Main extends Application {
 			settings.forEach((key , value) -> System.out.println(key + ":" + value));
 			
 			//Example
-			Optional.ofNullable(settings.getProperty("")).ifPresent(s -> {
-				System.out.println(s);
-				
-			});
+//			Optional.ofNullable(settings.getProperty("")).ifPresent(s -> {
+//				System.out.println(s);
+//			});
 			
 			//----------                        --------------------
 			
-			//--General-Settings
-			Optional.ofNullable(settings.getProperty("General-SideBarSide")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(Main.settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
+			//--General-Settings-SideBar
+			Optional.ofNullable(settings.getProperty("General-SideBarSide")).ifPresent(
+					s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
+			
+			//--General-Settings-LibraryMode
+			libraryMode.updateTopSplitPaneDivider();
+			libraryMode.updateBottomSplitPaneDivider();
+			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown")).ifPresent(s -> JavaFXTools
+					.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)));
+			
+			//--General-Settings-DJMode
+			djMode.updateTopSplitPaneDivider();
+			djMode.updateBottomSplitPaneDivider();
+			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown")).ifPresent(
+					s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
 			
 			//--Libraries-Settings
 			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
-					.ifPresent(s -> Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
+					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
 			
 			//--Playlists-Settings-Search
 			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
-					.ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
+					.ifPresent(s -> settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
 			
-			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing")).ifPresent(
+					s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
 			
 			//--Playlists-Settings-General
 			
 			Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(), Integer.valueOf(s)));
+					.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(), Integer.valueOf(s)));
 			
 			Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
+					.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
 			
 			//--XPlayers-Visualizer-Settings
 			Optional.ofNullable(settings.getProperty("XPlayers-Visualizer-ShowFPS")).ifPresent(s -> {
 				
 				//Set the Value to the CheckBox
-				Main.settingsWindow.getxPlayersSettingsController().getShowFPS().setSelected(Boolean.parseBoolean(s));
+				settingsWindow.getxPlayersSettingsController().getShowFPS().setSelected(Boolean.parseBoolean(s));
 				
 				//Update all the players
-				Main.xPlayersList.getList().forEach(xPlayerController -> xPlayerController.getVisualizer().setShowFPS(Boolean.parseBoolean(s)));
+				xPlayersList.getList().forEach(xPlayerController -> xPlayerController.getVisualizer().setShowFPS(Boolean.parseBoolean(s)));
 				
 			});
 			
 			//--XPlayers-General-Settings
 			Optional.ofNullable(settings.getProperty("XPlayers-General-StartAtOnce"))
-					.ifPresent(s -> Main.settingsWindow.getxPlayersSettingsController().getStartImmediately().setSelected(Boolean.parseBoolean(s)));
+					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getStartImmediately().setSelected(Boolean.parseBoolean(s)));
 			
-			Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion")).ifPresent(
-					s -> Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
+			Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion"))
+					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
 			
 			//----------                        --------------------
 			

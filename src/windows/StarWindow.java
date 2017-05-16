@@ -58,13 +58,13 @@ public class StarWindow extends GridPane {
     private boolean accepted;
 
     /** The no star. */
-    protected Image noStar = InfoTool.getImageFromDocuments("noStar.png");
+    protected Image noStar = InfoTool.getImageFromResourcesFolder("noStar.png");
 
     /** The half star. */
-    protected Image halfStar = InfoTool.getImageFromDocuments("halfStar.png");
+    protected Image halfStar = InfoTool.getImageFromResourcesFolder("halfStar.png");
 
     /** The star. */
-    protected Image star = InfoTool.getImageFromDocuments("star.png");
+    protected Image star = InfoTool.getImageFromResourcesFolder("star.png");
 
     /**
      * Constructor.

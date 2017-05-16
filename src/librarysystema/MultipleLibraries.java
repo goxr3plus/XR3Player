@@ -61,7 +61,7 @@ public class MultipleLibraries extends StackPane {
     /** The hand. */
     Cursor hand = Cursor.HAND;
 
-    private static final Image noItemsImage = InfoTool.getImageFromDocuments("noMusic.png");
+    private static final Image noItemsImage = InfoTool.getImageFromResourcesFolder("noMusic.png");
 
     /**
      * Constructor.

@@ -45,7 +45,7 @@ public class XPlayerWindow extends BorderPane {
 	//Make the window
 	window = new Stage();
 	getWindow().setTitle("XPlayer Window");
-	getWindow().getIcons().add(InfoTool.getImageFromDocuments("icon.png"));
+	getWindow().getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 	getWindow().setFullScreenExitHint("");
 	getWindow().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 	getWindow().setOnCloseRequest(c -> close());

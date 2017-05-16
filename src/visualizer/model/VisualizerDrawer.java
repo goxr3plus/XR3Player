@@ -18,8 +18,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	Polyspiral polySpiral = new Polyspiral(this);
 	protected final Sierpinski sierpinski = new Sierpinski(this);
 	private final JuliaSet juliaSet = new JuliaSet(this);
-	
-	private Sprite3D sprite3D = new Sprite3D(this, Shape3D.CUBE);
+	private Sprite3D sprite3D = new Sprite3D(this, Shape3D.SPHERE);
 	
 	// -----------------------------Images---------------------------------
 	
@@ -135,9 +134,26 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Draws a Rosette and a Polyspiral.
 	 */
 	public void drawPolySpiral() {
-		//polySpiral.drawPolySpiral();
+		polySpiral.drawPolySpiral();
 		
-		// Calculations	
+	}
+	
+	/*-----------------------------------------------------------------------
+	 * 
+	 * -----------------------------------------------------------------------
+	 * 
+	 * 
+	 * 				Sprite3D
+	 * 
+	 * -----------------------------------------------------------------------
+	 * 
+	 * -----------------------------------------------------------------------
+	 */
+	
+	/**
+	 * Draws a 3D Sprite
+	 */
+	public void drawSprite3D() {
 		sprite3D.draw();
 	}
 	

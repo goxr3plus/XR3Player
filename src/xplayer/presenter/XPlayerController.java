@@ -163,11 +163,11 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	// ------------------------- Images/ImageViews --------------------------
 	
-	private final ImageView eye = InfoTool.getImageViewFromDocuments("eye.png");
-	private final ImageView eyeDisabled = InfoTool.getImageViewFromDocuments("eyeDisabled.png");
+	private final ImageView eye = InfoTool.getImageViewFromResourcesFolder("eye.png");
+	private final ImageView eyeDisabled = InfoTool.getImageViewFromResourcesFolder("eyeDisabled.png");
 	
 	private static final Image noSeek = InfoTool
-			.getImageFromDocuments("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
+			.getImageFromResourcesFolder("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
 	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
 	
 	// ------------------------- Services --------------------------
@@ -324,7 +324,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		backwardButton.setOnAction(a -> seek(-10));
 		
 		// forwardButton
-		forwardButton.setOnAction(a -> seek(+10));
+		forwardButton.setOnAction(a -> seek(10));
 		
 		//flipPane
 		flipPane.setFlipTime(150);
@@ -352,8 +352,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		focusXPlayerWindow.setOnMouseReleased(m -> xPlayerWindow.getWindow().requestFocus());
 		
 		//extendPlayer
-		extendPlayer.textProperty()
-				.bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore").otherwise("Extend"));
+		extendPlayer.textProperty().bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore").otherwise("Extend"));
 		extendPlayer.setOnAction(ac -> {
 			if (xPlayerWindow.getWindow().isShowing())
 				xPlayerWindow.close();
@@ -649,7 +648,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		visualizerRequestFocus.setOnMouseReleased(m -> visualizerWindow.getStage().requestFocus());
 		
 		// playerStatusLabel
-		playerStatusLabel.visibleProperty().bind(visualizer.animationService.runningProperty().not());
+		playerStatusLabel.visibleProperty().bind(visualizer.getAnimationService().runningProperty().not());
 		
 		buildSettings(side);
 	}

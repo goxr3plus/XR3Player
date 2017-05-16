@@ -15,43 +15,38 @@ import tools.InfoTool;
  * @author GOXR3PLUS
  */
 public class FXMLPrototype extends BorderPane {
-
-    //-----------------------------------------------------
-
-   
-    // -------------------------------------------------------------
-
-  
-    /** The logger. */
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-
-    /**
-     * Constructor.
-     */
-    public FXMLPrototype() {
-
-	// ------------------------------------FXMLLOADER ----------------------------------------
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
-	loader.setController(this);
-	loader.setRoot(this);
-
-	try {
-	    loader.load();
-	} catch (IOException ex) {
-	    logger.log(Level.SEVERE, "", ex);
-	}
-
-    }
-
-   
-    /**
-     * Called as soon as .fxml is initialised
-     */
-    @FXML
-    private void initialize() {
-
 	
-    }
-
+	//-----------------------------------------------------
+	
+	// -------------------------------------------------------------
+	
+	/** The logger. */
+	private final Logger logger = Logger.getLogger(getClass().getName());
+	
+	/**
+	 * Constructor.
+	 */
+	public FXMLPrototype() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			logger.log(Level.SEVERE, "", ex);
+		}
+		
+	}
+	
+	/**
+	 * Called as soon as .FXML is loaded from FXML Loader
+	 */
+	@FXML
+	private void initialize() {
+		
+	}
+	
 }

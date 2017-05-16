@@ -27,7 +27,7 @@ public class XPlayerVisualizer extends Visualizer {
 	super("XRPLAYER");
 
 	this.xPlayerUI = xPlayerUI;
-	this.animationService.passXPlayer(xPlayerUI);
+	this.getAnimationService().passXPlayer(xPlayerUI);
 
 	setScopeColor(xPlayerUI.getDisc().getArcColor());
 	addMouseListener();
