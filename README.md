@@ -4,6 +4,7 @@
 [![GitHub contributors][contributors-image]][contributors-url]
 [![license][license-image]][license-url]
 <a href="https://sourceforge.net/projects/xr3player/files/latest/download" rel="nofollow"><img alt="Download XR3Player" src="https://img.shields.io/sourceforge/dt/xr3player.svg"></a>
+[Downloads on Github](http://www.somsubhra.com/github-release-stats/?username=goxr3plus&repository=XR3Player)
 
 [contributors-url]: https://github.com/goxr3plus/XR3Player/graphs/contributors
 [contributors-image]: https://img.shields.io/github/contributors/goxr3plus/XR3Player.svg
