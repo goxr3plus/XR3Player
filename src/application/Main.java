@@ -191,12 +191,12 @@ public class Main extends Application {
 	/**
 	 * The current update of XR3Player
 	 */
-	public static final int currentVersion = 67;
+	public static final int currentVersion = 68;
 	
 	/**
 	 * This application version release date
 	 */
-	public static final String releaseDate = "13/05/2017";
+	public static final String releaseDate = "17/05/2017";
 	
 	/** The can save data. */
 	public static boolean canSaveData = true;
@@ -779,9 +779,9 @@ public class Main extends Application {
 			settings.forEach((key , value) -> System.out.println(key + ":" + value));
 			
 			//Example
-//			Optional.ofNullable(settings.getProperty("")).ifPresent(s -> {
-//				System.out.println(s);
-//			});
+			//			Optional.ofNullable(settings.getProperty("")).ifPresent(s -> {
+			//				System.out.println(s);
+			//			});
 			
 			//----------                        --------------------
 			
