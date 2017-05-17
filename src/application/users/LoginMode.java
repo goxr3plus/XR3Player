@@ -16,6 +16,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
+import application.tools.NotificationType;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
@@ -36,11 +39,11 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ToolBar;
@@ -51,18 +54,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import tools.ActionTool;
-import tools.InfoTool;
-import tools.NotificationType;
 
 /**
  * @author GOXR3PLUS
  *
  */
 public class LoginMode extends BorderPane {
+	
+	//-------------------------------------
 	
 	@FXML
 	private BorderPane borderPane;
@@ -110,19 +113,25 @@ public class LoginMode extends BorderPane {
 	private Label usersInfoLabel;
 	
 	@FXML
-	private PieChart pieChart;
+	private PieChart librariesPieChart;
+	
+	@FXML
+	private PieChart downloadsPieChart;
 	
 	@FXML
 	private Button loginButton;
 	
 	@FXML
-	private Label createdByLabel;
+	private Hyperlink visitCreatorHyperLink;
 	
 	@FXML
-	private Label checkTutorialsLabel;
+	private Hyperlink youtubeTutorialsHyperLink;
 	
 	@FXML
 	private Label downloadsLabel;
+	
+	@FXML
+	private Button restartButton;
 	
 	@FXML
 	private Button minimize;
@@ -141,11 +150,17 @@ public class LoginMode extends BorderPane {
 	
 	// --------------------------------------------
 	
+	private final ObservableList<PieChart.Data> librariesPieChartData = FXCollections.observableArrayList();
+	
+	private final ObservableList<PieChart.Data> downloadsPieChartData = FXCollections.observableArrayList();
+	
+	//---
+	
 	/** The logger for this class */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	/**
-	 * Allows to see the users in a beatiful way
+	 * Allows to see the users in a beautiful way
 	 */
 	public Viewer teamViewer;
 	
@@ -162,7 +177,7 @@ public class LoginMode extends BorderPane {
 	 */
 	public UsersInfoLoader usersInfoLoader = new UsersInfoLoader();
 	
-	//-----
+	//---------------------------------------
 	
 	/** This InvalidationListener is used during the creation of a new user. */
 	private final InvalidationListener creationInvalidator = new InvalidationListener() {
@@ -205,7 +220,7 @@ public class LoginMode extends BorderPane {
 	public LoginMode() {
 		
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LoginScreenController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LoginMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -224,11 +239,28 @@ public class LoginMode extends BorderPane {
 	@FXML
 	private void initialize() {
 		
+		//librariesPieChart
+		librariesPieChart.setData(librariesPieChartData);
+		
+		//downloadsPieChart
+		downloadsPieChartData.addAll(new PieChart.Data("Source...", 240), new PieChart.Data("Git...", 142));
+		downloadsPieChart.setData(downloadsPieChartData);
+		
+		final Label caption = new Label("");
+		caption.setTextFill(Color.DARKORANGE);
+		caption.setStyle("-fx-font: 24 arial;");
+		for (final PieChart.Data data : downloadsPieChart.getData()) {
+			data.getNode().setOnMouseEntered(m -> {
+				System.out.println("Entered");
+				caption.setTranslateX(m.getSceneX());
+				caption.setTranslateY(m.getSceneY());
+				caption.setText(String.valueOf(data.getPieValue()) + "%");
+			});
+			
+		}
+		
 		//Initialise
 		teamViewer = new Viewer(horizontalScrollBar);
-		
-		//Set PieChartData
-		pieChart.setData(pieChartData);
 		
 		//Below is some coded i used with javafxsvg Library to Display SVG images although i changed it 
 		//to using WebView due to the cost of many external libraries
@@ -282,6 +314,12 @@ public class LoginMode extends BorderPane {
 		//deleteUser.disableProperty().bind(newUser.visibleProperty())
 		deleteUser.setOnAction(a -> deleteUser(deleteUser));
 		
+		// restartButton
+		restartButton.setOnAction(a -> {
+			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton))
+				Main.restartTheApplication(true);
+		});
+		
 		// minimize
 		minimize.setOnAction(ac -> Main.window.setIconified(true));
 		
@@ -289,7 +327,7 @@ public class LoginMode extends BorderPane {
 		maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
 		
 		//exitButton
-		exitApplication.setOnAction(a -> Main.exitQuestion());
+		exitApplication.setOnAction(a -> Main.confirmApplicationExit());
 		
 		//changeBackground
 		changeBackground.setOnAction(a -> Main.changeBackgroundImage());
@@ -304,11 +342,11 @@ public class LoginMode extends BorderPane {
 		usersStackView.getChildren().add(teamViewer);
 		teamViewer.toBack();
 		
-		//createdByLabel
-		createdByLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.WEBSITE));
+		//visitCreatorHyperLink
+		visitCreatorHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE));
 		
-		//checkTutorialsLabel
-		checkTutorialsLabel.setOnMouseReleased(r -> ActionTool.openWebSite(InfoTool.TUTORIALS));
+		//youtubeTutorialsHyperLink
+		youtubeTutorialsHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.TUTORIALS));
 		
 		//----usersInfoLabel
 		usersInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.itemsWrapperProperty().sizeProperty(), " ] Users"));
@@ -516,9 +554,7 @@ public class LoginMode extends BorderPane {
 			//setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 			
 			// ScrollBar
-			scrollBar.setCursor(Cursor.HAND);
-			scrollBar.setMin(0);
-			scrollBar.setMax(0);
+			scrollBar.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(2));
 			scrollBar.valueProperty().addListener((observable , oldValue , newValue) -> {
 				int newVal = (int) Math.round(newValue.doubleValue());
 				int oldVal = (int) Math.round(oldValue.doubleValue());
@@ -954,8 +990,6 @@ public class LoginMode extends BorderPane {
 		
 	}
 	
-	ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-	
 	/**
 	 * @author GOXR3PLUS
 	 *
@@ -1027,7 +1061,8 @@ public class LoginMode extends BorderPane {
 								Platform.runLater(() -> {
 									
 									//Add Pie Chart Data
-									pieChartData.add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
+									if (totalLibraries[0] > 0)
+										librariesPieChartData.add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
 									
 									//Update User Label
 									user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));
@@ -1039,6 +1074,9 @@ public class LoginMode extends BorderPane {
 							} catch (Exception ex) {
 								Main.logger.log(Level.SEVERE, "", ex);
 							}
+						} else {
+							// Refresh the text
+							Platform.runLater(() -> user.getTotalLibrariesLabel().setText(Integer.toString(0)));
 						}
 						
 					});

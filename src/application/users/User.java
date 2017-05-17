@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
+import application.tools.NotificationType;
 import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -29,9 +32,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import tools.ActionTool;
-import tools.InfoTool;
-import tools.NotificationType;
 
 /**
  * @author GOXR3PLUS

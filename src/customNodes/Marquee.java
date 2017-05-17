@@ -2,6 +2,7 @@ package customnodes;
 
 import java.io.IOException;
 
+import application.tools.InfoTool;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import tools.InfoTool;
 
 /**
  * When the screen element is not big enough to show the text then an animation will start automatically

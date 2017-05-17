@@ -3,10 +3,10 @@ package application;
 import java.io.File;
 import java.util.List;
 
+import application.tools.InfoTool;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import tools.InfoTool;
 
 /**
  * An implementation which combines FileChooser and DirectoryChooser.

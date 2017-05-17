@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import application.Main;
-import tools.InfoTool;
+import application.tools.InfoTool;
 
 /**
  * The Class PlayedSongs.

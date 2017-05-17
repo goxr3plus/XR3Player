@@ -8,6 +8,7 @@ import com.jezhumble.javasysmon.CpuTimes;
 import com.jezhumble.javasysmon.JavaSysMon;
 import com.jezhumble.javasysmon.MemoryStats;
 
+import application.tools.InfoTool;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Service;
@@ -17,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
-import tools.InfoTool;
 
 /**
  * This class is running a background class which updates every 1000 milliseconds the Canvas based on the CPULOAD.

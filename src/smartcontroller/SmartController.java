@@ -29,7 +29,10 @@ import org.fxmisc.easybind.EasyBind;
 import com.jfoenix.controls.JFXButton;
 
 import application.Main;
-import application.settings.window.ApplicationSettingsController.SettingsTab;
+import application.settings.ApplicationSettingsController.SettingsTab;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
+import application.tools.NotificationType;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -73,11 +76,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import media.Audio;
-import media.Media;
-import tools.ActionTool;
-import tools.InfoTool;
-import tools.NotificationType;
+import smartcontroller.media.Audio;
+import smartcontroller.media.Media;
 
 /**
  * Used to control big amounts of data in user interface.

@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
+import application.tools.ActionTool;
+import application.tools.InfoTool;
 import customnodes.SystemMonitor;
 import customnodes.SystemMonitor.Monitor;
 import javafx.beans.binding.Bindings;
@@ -21,8 +23,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import tools.ActionTool;
-import tools.InfoTool;
 
 /**
  * The Top bar of the application Window.
@@ -175,7 +175,7 @@ public class TopBar extends BorderPane {
 		maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
 		
 		// close
-		exitApplication.setOnAction(ac -> Main.exitQuestion());
+		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());
 		
 		//changeBackground
 		changeBackground.setOnAction(a -> Main.changeBackgroundImage());
@@ -281,11 +281,14 @@ public class TopBar extends BorderPane {
 	 * Add the binding to the xr3Label
 	 */
 	public void addXR3LabelBinding() {
+		
 		// xr3Label
 		xr3Label.textProperty()
-				.bind(Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
-						Main.currentVersion, Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(),
-						Main.window.heightProperty()));
+				.bind(Bindings
+						.createStringBinding(
+								() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
+										Main.applicationProperties.get("Version"), Main.window.getWidth(), Main.window.getHeight()),
+								Main.window.widthProperty(), Main.window.heightProperty()));
 	}
 	
 	/**

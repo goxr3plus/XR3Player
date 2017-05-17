@@ -6,15 +6,15 @@ import java.net.URL;
 import java.util.logging.Level;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
+import application.tools.NotificationType;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
-import tools.ActionTool;
-import tools.InfoTool;
-import tools.NotificationType;
 import xplayer.model.AudioType;
 import xplayer.presenter.XPlayerController;
 

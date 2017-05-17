@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.tools.InfoTool;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -16,7 +17,6 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import tools.InfoTool;
 
 /**
  * The Class UpdateScreen.

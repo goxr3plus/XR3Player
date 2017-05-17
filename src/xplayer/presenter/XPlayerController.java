@@ -14,9 +14,13 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
+import application.tools.NotificationType;
+import application.windows.XPlayerWindow;
+import customnodes.DJDisc;
+import customnodes.DJDiscListener;
 import customnodes.Marquee;
-import disc.DJDisc;
-import disc.DJDiscListener;
 import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -44,21 +48,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import streamplayer.Status;
-import streamplayer.StreamPlayerEvent;
-import streamplayer.StreamPlayerException;
-import streamplayer.StreamPlayerListener;
-import tools.ActionTool;
-import tools.InfoTool;
-import tools.NotificationType;
-import visualizer.view.VisualizerStackController;
-import visualizer.view.VisualizerWindowController;
-import visualizer.view.XPlayerVisualizer;
-import windows.XPlayerWindow;
 import xplayer.model.XPlayer;
 import xplayer.model.XPlayerModel;
 import xplayer.services.XPlayerPlayService;
 import xplayer.services.XPlayerSeekService;
+import xplayer.streamplayer.Status;
+import xplayer.streamplayer.StreamPlayerEvent;
+import xplayer.streamplayer.StreamPlayerException;
+import xplayer.streamplayer.StreamPlayerListener;
+import xplayer.visualizer.view.VisualizerStackController;
+import xplayer.visualizer.view.VisualizerWindowController;
+import xplayer.visualizer.view.XPlayerVisualizer;
 
 /**
  * Represents the graphical interface for the deck.

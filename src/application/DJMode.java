@@ -5,6 +5,7 @@ package application;
 
 import java.io.IOException;
 
+import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
@@ -14,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
-import tools.InfoTool;
 import xplayer.presenter.XPlayerController;
 
 /**

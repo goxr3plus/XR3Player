@@ -39,6 +39,10 @@
 }
 */
 
+.chart .chart-title .text{
+	-fx-font-size:9.0px;
+}
+
 .chart-pie-label {
     -fx-fill: white;
     /*-fx-font-weight:bold;*/

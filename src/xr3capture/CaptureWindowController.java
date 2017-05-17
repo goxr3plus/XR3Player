@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import application.tools.ActionTool;
+import application.tools.NotificationType;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -34,8 +36,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import tools.ActionTool;
-import tools.NotificationType;
 
 /**
  * This is the Window which is used from the user to draw the rectangle representing an area on the screen to be captured.

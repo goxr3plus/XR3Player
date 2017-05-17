@@ -3,6 +3,9 @@ package application.users;
 import java.io.File;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
+import application.tools.NotificationType;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -15,9 +18,6 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import smartcontroller.TitleMenuItem;
-import tools.ActionTool;
-import tools.InfoTool;
-import tools.NotificationType;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode

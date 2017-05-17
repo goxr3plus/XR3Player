@@ -23,7 +23,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <fx:root prefHeight="595.0" prefWidth="868.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
@@ -138,7 +137,7 @@
                                  <center>
                                     <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="182.0" spacing="2.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <ScrollBar fx:id="horizontalScrollBar" />
+                                          <ScrollBar fx:id="horizontalScrollBar" max="0.0" />
                                           <HBox alignment="CENTER" prefHeight="55.0" spacing="8.0">
                                              <children>
                                                 <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">

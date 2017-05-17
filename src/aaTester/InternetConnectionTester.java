@@ -3,7 +3,7 @@
  */
 package aaTester;
 
-import tools.InfoTool;
+import application.tools.InfoTool;
 
 /**
  * @author GOXR3PLUS

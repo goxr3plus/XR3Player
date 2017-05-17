@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -22,10 +24,8 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import media.Audio;
-import media.Media;
-import tools.ActionTool;
-import tools.InfoTool;
+import smartcontroller.media.Audio;
+import smartcontroller.media.Media;
 
 /**
  * The default context menu for song items of application.

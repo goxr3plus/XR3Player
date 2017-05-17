@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.tools.InfoTool;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import tools.InfoTool;
 
 /**
  * @author GOXR3PLUS

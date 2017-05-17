@@ -12,9 +12,9 @@ import java.util.logging.Level;
 import javax.swing.filechooser.FileSystemView;
 
 import application.Main;
+import application.tools.InfoTool;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import tools.InfoTool;
 
 /**
  * Manages the SystemTree.

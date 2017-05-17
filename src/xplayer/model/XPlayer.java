@@ -3,7 +3,7 @@
  */
 package xplayer.model;
 
-import streamplayer.StreamPlayer;
+import xplayer.streamplayer.StreamPlayer;
 
 /**
  * This class in controlling the player internally.

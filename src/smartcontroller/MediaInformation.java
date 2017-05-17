@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import application.Main;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,9 +27,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import media.Media;
-import tools.ActionTool;
-import tools.InfoTool;
+import smartcontroller.media.Media;
 
 // TODO: Auto-generated Javadoc
 /**

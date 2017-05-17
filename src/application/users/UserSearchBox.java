@@ -6,6 +6,7 @@ package application.users;
 import org.controlsfx.control.textfield.TextFields;
 
 import application.Main;
+import application.medialibraries.SearchBoxWindow;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -16,7 +17,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import librarysystema.SearchBoxWindow;
 
 /**
  * Represents the Libraries Search.

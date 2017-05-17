@@ -9,9 +9,11 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
-import application.settings.window.ApplicationSettingsController.SettingsTab;
-import database.ExportDataBase;
-import database.ImportDataBase;
+import application.database.ExportDataBase;
+import application.database.ImportDataBase;
+import application.settings.ApplicationSettingsController.SettingsTab;
+import application.tools.ActionTool;
+import application.tools.InfoTool;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -28,8 +30,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.Operation;
-import tools.ActionTool;
-import tools.InfoTool;
 
 /**
  * This class is used as the SideBar of the application.
@@ -234,6 +234,9 @@ public class SideBar extends BorderPane {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//Prepare the Side Bar
+		prepareForLoginMode(true);
 		
 		// Translate Transition
 		tTrans = new TranslateTransition(Duration.millis(200), this);

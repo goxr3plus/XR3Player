@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
@@ -22,7 +23,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import tools.InfoTool;
 
 /**
  * The Class TreeViewManager.

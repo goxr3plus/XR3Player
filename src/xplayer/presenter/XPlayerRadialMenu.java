@@ -3,6 +3,8 @@
  */
 package xplayer.presenter;
 
+import application.tools.ActionTool;
+import application.tools.InfoTool;
 import eu.hansolo.enzo.common.SymbolType;
 import eu.hansolo.enzo.radialmenu.RadialMenu;
 import eu.hansolo.enzo.radialmenu.RadialMenuBuilder;
@@ -11,8 +13,6 @@ import eu.hansolo.enzo.radialmenu.RadialMenuItemBuilder;
 import eu.hansolo.enzo.radialmenu.RadialMenuOptionsBuilder;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
-import tools.ActionTool;
-import tools.InfoTool;
 
 /**
  * @author GOXR3PLUS
