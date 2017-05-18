@@ -1,4 +1,5 @@
-# XR3Player ( A modern JavaFX Media Player)
+
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)XR3Player ( A modern JavaFX Media Player)
 
 [![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GitHub contributors][contributors-image]][contributors-url]
