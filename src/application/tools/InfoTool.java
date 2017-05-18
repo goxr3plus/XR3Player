@@ -119,6 +119,16 @@ public final class InfoTool {
 	
 	//----
 	
+	public static String getXPlayersImageFolderAbsolutePathPlain() {
+		return getImagesFolderAbsolutePathWithSeparator() + "XPlayersImages";
+	}
+	
+	public static String getXPlayersImageFolderAbsolutePathWithSeparator() {
+		return getImagesFolderAbsolutePathPlain() + File.separator;
+	}
+	
+	//----
+	
 	/**
 	 * @return Database folder name <b>with out</b> separator
 	 *         [example:XR3DataBase]
@@ -314,8 +324,7 @@ public final class InfoTool {
 		try {
 			
 			// Start a new Process
-			Process process = Runtime.getRuntime()
-					.exec("ping -" + ( System.getProperty("os.name").toLowerCase().startsWith("windows") ? "n" : "c" ) + " 1 " + host);
+			Process process = Runtime.getRuntime().exec("ping -" + ( System.getProperty("os.name").toLowerCase().startsWith("windows") ? "n" : "c" ) + " 1 " + host);
 			
 			//Wait for it to finish
 			process.waitFor();

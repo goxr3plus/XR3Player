@@ -123,6 +123,11 @@ public class DbManager {
 		if (!imagesFolder.exists())
 			imagesFolder.mkdir();
 		
+		//XPlayer Images Folder
+		File xPlayerImagesFolder = new File(InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+		if (!xPlayerImagesFolder.exists())
+			xPlayerImagesFolder.mkdir();
+		
 		// Database File(.db)
 		String dbFileAbsolutePath = InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db";
 		boolean data1Exist = new File(dbFileAbsolutePath).exists();

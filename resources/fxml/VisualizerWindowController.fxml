@@ -94,6 +94,7 @@
                               <Menu mnemonicParsing="false" text="Background">
                                 <items>
                                   <MenuItem fx:id="setBackground" mnemonicParsing="false" text="change..." />
+                                    <MenuItem fx:id="setDefaultBackground" mnemonicParsing="false" text="default" />
                                   <MenuItem fx:id="clearBackground" mnemonicParsing="false" text="clear" />
                                 </items>
                               </Menu>
@@ -117,6 +118,13 @@
                                 </items>
                               </Menu>
                            </items>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Maintenance-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </MenuButton>
                      </children>
                      <BorderPane.margin>

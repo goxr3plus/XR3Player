@@ -300,7 +300,7 @@ public class SideBar extends BorderPane {
 			if (!zipper.isRunning() && !unZipper.isRunning()
 					&& ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
 				
-				File file = Main.specialChooser.prepareToImportDataBase(Main.window);
+				File file = Main.specialChooser.selectDBFile(Main.window);
 				if (file != null) {
 					// Change the Scene View
 					Main.updateScreen.setVisible(true);
@@ -317,7 +317,7 @@ public class SideBar extends BorderPane {
 			if (!zipper.isRunning() && !unZipper.isRunning()
 					&& ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
 				
-				File file = Main.specialChooser.prepareForExportDataBase(Main.window);
+				File file = Main.specialChooser.exportDBFile(Main.window);
 				if (file != null) {
 					
 					// Change the Scene View

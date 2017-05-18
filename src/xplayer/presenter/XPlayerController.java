@@ -59,6 +59,7 @@ import xplayer.streamplayer.StreamPlayerListener;
 import xplayer.visualizer.view.VisualizerStackController;
 import xplayer.visualizer.view.VisualizerWindowController;
 import xplayer.visualizer.view.XPlayerVisualizer;
+import xplayer.visualizer.view.VisualizerWindowController.Type;
 
 /**
  * Represents the graphical interface for the deck.
@@ -166,8 +167,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private final ImageView eye = InfoTool.getImageViewFromResourcesFolder("eye.png");
 	private final ImageView eyeDisabled = InfoTool.getImageViewFromResourcesFolder("eyeDisabled.png");
 	
-	private static final Image noSeek = InfoTool
-			.getImageFromResourcesFolder("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
+	private static final Image noSeek = InfoTool.getImageFromResourcesFolder("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
 	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
 	
 	// ------------------------- Services --------------------------
@@ -600,11 +600,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// Visualizer
 		visualizer = new XPlayerVisualizer(this);
-		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
+		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());	
 		
 		// Select the correct toggle
-		visualizerWindow.getVisualizerTypeGroup()
-				.selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(visualizer.displayMode.get()));
+		visualizerWindow.getVisualizerTypeGroup().selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(visualizer.displayMode.get()));
 		
 		// When displayMode is being updated
 		visualizer.displayMode.addListener((observable , oldValue , newValue) -> {
@@ -614,8 +613,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// -----------visualizerTypeGroup
 		visualizerWindow.getVisualizerTypeGroup().getToggles().forEach(toggle -> {
-			( (RadioMenuItem) toggle )
-					.setOnAction(a -> visualizer.displayMode.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle)));
+			( (RadioMenuItem) toggle ).setOnAction(a -> visualizer.displayMode.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle)));
 		});
 		
 		// VisualizerStackController
@@ -935,8 +933,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
 					
 					// Notification
-					ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500),
-							NotificationType.SIMPLE);
+					ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500), NotificationType.SIMPLE);
 				}
 				
 			});
@@ -965,8 +962,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		if (xPlayerModel.songExtensionProperty().get() != null)
 			playService.startPlayService(xPlayerModel.songPathProperty().get());
 		else
-			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.", Duration.millis(1500),
-					NotificationType.INFORMATION);
+			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.", Duration.millis(1500), NotificationType.INFORMATION);
 		
 		// if (thisSong instanceof URL)
 		// return playSong(((URL) thisSong).toString(), totalTime);
@@ -1026,9 +1022,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			//			    * (xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration())))
 			
 			//Start the Service
-			seekService.startSeekService(
-					(long) ( ( (float) xPlayerModel.getCurrentAngleTime() ) * ( xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration() ) ),
-					false);
+			seekService.startSeekService((long) ( ( (float) xPlayerModel.getCurrentAngleTime() ) * ( xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration() ) ), false);
 		}
 		
 	}

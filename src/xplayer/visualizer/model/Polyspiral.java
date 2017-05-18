@@ -26,23 +26,23 @@ import javafx.scene.paint.Color;
  */
 public class Polyspiral {
 
-    /** The cool effect. */
-    final Image coolEffect = new Image(VisualizerModel.class.getResourceAsStream("anim1.gif"));
-
-    /** The yellow light. */
-    final Image yellowLight = new Image(VisualizerModel.class.getResourceAsStream("yellowLight.png"));
-
-    /** The blue light. */
-    final Image blueLight = new Image(VisualizerModel.class.getResourceAsStream("blueLight.png"));
-
-    /** The grey light. */
-    final Image greyLight = new Image(VisualizerModel.class.getResourceAsStream("greyLight.png"));
-
-    /** The light blue light. */
-    final Image lightBlueLight = new Image(VisualizerModel.class.getResourceAsStream("lightBlueLight.png"));
-
-    /** The red light. */
-    final Image redLight = new Image(VisualizerModel.class.getResourceAsStream("redLight.png"));
+//    /** The cool effect. */
+//    final Image coolEffect = new Image(VisualizerModel.class.getResourceAsStream("anim1.gif"));
+//
+//    /** The yellow light. */
+//    final Image yellowLight = new Image(VisualizerModel.class.getResourceAsStream("yellowLight.png"));
+//
+//    /** The blue light. */
+//    final Image blueLight = new Image(VisualizerModel.class.getResourceAsStream("blueLight.png"));
+//
+//    /** The grey light. */
+//    final Image greyLight = new Image(VisualizerModel.class.getResourceAsStream("greyLight.png"));
+//
+//    /** The light blue light. */
+//    final Image lightBlueLight = new Image(VisualizerModel.class.getResourceAsStream("lightBlueLight.png"));
+//
+//    /** The red light. */
+//    final Image redLight = new Image(VisualizerModel.class.getResourceAsStream("redLight.png"));
 
     // -------------------
 

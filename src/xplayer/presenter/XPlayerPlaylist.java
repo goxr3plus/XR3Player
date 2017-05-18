@@ -102,6 +102,7 @@ public class XPlayerPlaylist extends StackPane {
 		// progressSpinner.visibleProperty().bind(controller.getRegion().visibleProperty());
 		
 		// play
+		//play.setDisable(false);
 		//play.setOnAction(a -> playService.startService());
 		
 		// horizontalBox
@@ -109,7 +110,7 @@ public class XPlayerPlaylist extends StackPane {
 		
 		// stopPlayingList
 		stopPlayingList.setVisible(false);
-		//stopPlayingList.setOnAction(a -> playService.stopService());
+		stopPlayingList.setOnAction(a -> playService.stopService());
 		
 		// previousButton
 		previousButton.visibleProperty().bind(stopPlayingList.visibleProperty());
@@ -162,7 +163,7 @@ public class XPlayerPlaylist extends StackPane {
 	 * -----------------------------------------------------------------------
 	 */
 	/**
-	 * This class implements the algorithm of playing the play list.
+	 * This class implements the algorithm of playing the play list. !!!NEEDS TO BE FIXED IT DOESN'T WORK AT ALL!!!
 	 *
 	 * @author GOXR3PLUS
 	 */

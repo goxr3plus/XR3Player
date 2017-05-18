@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.Properties;
@@ -16,7 +15,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.jfoenix.controls.JFXTabPane;
 
@@ -66,6 +64,7 @@ import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import treeview.TreeViewManager;
 import xplayer.presenter.PlayedMediaList;
 import xplayer.presenter.XPlayersList;
+import xplayer.visualizer.view.VisualizerWindowController.Type;
 import xr3capture.CaptureWindow;
 
 /**
@@ -87,7 +86,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		applicationProperties.put("Version", 69);
-		applicationProperties.put("ReleasedDate", "20/05/2017");
+		applicationProperties.put("ReleasedDate", "19/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
 		
@@ -159,7 +158,7 @@ public class Main extends Application {
 	public static final MediaContextMenu songsContextMenu = new MediaContextMenu();
 	
 	/** The Constant specialChooser. */
-	public static final SpecialChooser specialChooser = new SpecialChooser();
+	public static final FileAndFolderChooser specialChooser = new FileAndFolderChooser();
 	
 	//
 	
@@ -328,9 +327,8 @@ public class Main extends Application {
 		libraryMode.librariesContextMenu.hide();
 		libraryMode.getBottomSplitPane().getItems().add(multipleTabs);
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
-		libraryMode.multipleLibs.emptyLabel.textProperty()
-				.bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
-						.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
+		libraryMode.multipleLibs.emptyLabel.textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
+				.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----Do this trick for songsContextMenu
@@ -432,13 +430,11 @@ public class Main extends Application {
 			//Do the below until the database is initialized
 			userMode.setUser(u);
 			
-		
-			
 			try {
 				s.join();
 			} catch (InterruptedException ex) {
 				ex.printStackTrace();
-			}						
+			}
 			
 			//Load the DataBase - After the DBManager has been initialized of course ;)
 			dbManager.loadApplicationDataBase();
@@ -478,10 +474,11 @@ public class Main extends Application {
 		//System.out.println(Arrays.asList(javaVersionElements));
 		
 		if (Integer.parseInt(major) < 8 || ( Integer.parseInt(major) < 8 && Integer.parseInt(update) < 111 ))
-			ActionTool.showNotification("Important Problem with Java Version!",
-					"XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:" + System.getProperty("java.version")
-							+ "\nThe application may crash or not work at all!\nPlease Update your Java Version :)",
-					Duration.seconds(40), NotificationType.ERROR);
+			ActionTool
+					.showNotification(
+							"Important Problem with Java Version!", "XR3Player needs at least Java Version:1.8.0_111  -> Your current Java Version is:"
+									+ System.getProperty("java.version") + "\nThe application may crash or not work at all!\nPlease Update your Java Version :)",
+							Duration.seconds(40), NotificationType.ERROR);
 	}
 	
 	/**
@@ -562,9 +559,8 @@ public class Main extends Application {
 			
 			//Show message that application is restarting
 			Platform.runLater(() -> ActionTool.showNotification("Restarting Application",
-					"Application Path:[ " + applicationPath[0]
-							+ " ]\n\tIf this takes more than 20 seconds either the computer is slow or it has failed....",
-					Duration.seconds(25), NotificationType.INFORMATION));
+					"Application Path:[ " + applicationPath[0] + " ]\n\tIf this takes more than 20 seconds either the computer is slow or it has failed....", Duration.seconds(25),
+					NotificationType.INFORMATION));
 			
 			try {
 				
@@ -581,9 +577,8 @@ public class Main extends Application {
 					updateScreen.setVisible(false);
 					
 					// Show failed message
-					Platform.runLater(() -> ActionTool.showNotification("Restart Failed",
-							"\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...", Duration.seconds(10),
-							NotificationType.ERROR));
+					Platform.runLater(() -> ActionTool.showNotification("Restart Failed", "\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...",
+							Duration.seconds(10), NotificationType.ERROR));
 					
 					// Ask the user
 					if (askUser)
@@ -617,9 +612,8 @@ public class Main extends Application {
 					updateScreen.setVisible(false);
 					
 					// Show failed message
-					Platform.runLater(() -> ActionTool.showNotification("Restart Failed",
-							"\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...", Duration.seconds(10),
-							NotificationType.ERROR));
+					Platform.runLater(() -> ActionTool.showNotification("Restart Failed", "\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...",
+							Duration.seconds(10), NotificationType.ERROR));
 				});
 			}
 		}, "Restart Application Thread").start();
@@ -645,20 +639,20 @@ public class Main extends Application {
 			//----------                        --------------------
 			
 			//--General-Settings-SideBar
-			Optional.ofNullable(settings.getProperty("General-SideBarSide")).ifPresent(
-					s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("General-SideBarSide"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
 			
 			//--General-Settings-LibraryMode
 			libraryMode.updateTopSplitPaneDivider();
 			libraryMode.updateBottomSplitPaneDivider();
-			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)));
 			
 			//--General-Settings-DJMode
 			djMode.updateTopSplitPaneDivider();
 			djMode.updateBottomSplitPaneDivider();
-			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown")).ifPresent(
-					s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
 			
 			//--Libraries-Settings
 			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
@@ -668,16 +662,16 @@ public class Main extends Application {
 			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
 					.ifPresent(s -> settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
 			
-			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing")).ifPresent(
-					s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
 			
 			//--Playlists-Settings-General
 			
-			Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(), Integer.valueOf(s)));
 			
-			Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown")).ifPresent(s -> JavaFXTools
-					.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
+			Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
 			
 			//--XPlayers-Visualizer-Settings
 			Optional.ofNullable(settings.getProperty("XPlayers-Visualizer-ShowFPS")).ifPresent(s -> {
@@ -697,6 +691,12 @@ public class Main extends Application {
 			Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion"))
 					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
 			
+			//----Determine the Visualizer Images
+			Main.xPlayersList.getList().forEach(xPlayerController -> {
+				//Determine the images before the application starts
+				xPlayerController.getVisualizerWindow().determineImage(Type.BACKGROUND);
+				xPlayerController.getVisualizerWindow().determineImage(Type.FOREGROUND);
+			});
 			//----------                        --------------------
 			
 			//Finish
@@ -715,46 +715,14 @@ public class Main extends Application {
 	 */
 	public static void changeBackgroundImage() {
 		
-		File imageFile = specialChooser.prepareToSelectImage(window);
-		if (imageFile == null)
-			return;
+		//Check the response
+		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window).ifPresent(image -> {
+			BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+					new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
+			loginMode.setBackground(new Background(bgImg));
+			root.setBackground(new Background(bgImg));
+		});
 		
-		//Check the given image
-		Image image = new Image(imageFile.toURI() + "");
-		if (image.getWidth() > 4800 || image.getHeight() > 4800) {
-			ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "x" + image.getHeight(),
-					Duration.millis(2000), NotificationType.WARNING);
-			return;
-		}
-		if (image.getWidth() < 1000 || image.getHeight() < 1000) {
-			ActionTool.showNotification("Warning", "Minimum Size Allowed 1200*1200 \n Current is:" + image.getWidth() + "x" + image.getHeight(),
-					Duration.millis(2000), NotificationType.WARNING);
-			return;
-		}
-		
-		BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-				new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
-		loginMode.setBackground(new Background(bgImg));
-		root.setBackground(new Background(bgImg));
-		
-		//Start a Thread to copy the File
-		new Thread(() -> {
-			try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.getAbsoluteDatabasePathPlain()).getPath()), 1)) {
-				paths.forEach(path -> {
-					File file = path.toFile();
-					if (file.getName().contains("background") && InfoTool.isImage(file.getAbsolutePath()) && !file.isDirectory())
-						file.delete(); //fuck if failed... Good programming practice xoaoxaoxoaoxo -> to be fixed
-				});
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-			
-			if (!ActionTool.copy(imageFile.getAbsolutePath(),
-					InfoTool.getAbsoluteDatabasePathWithSeparator() + "background." + InfoTool.getFileExtension(imageFile.getAbsolutePath())))
-				Platform.runLater(() -> ActionTool.showNotification("Failed saving background image", "Failed to change the background image...",
-						Duration.millis(2500), NotificationType.SIMPLE));
-			
-		}).start();
 	}
 	
 	static boolean backgroundFound;
@@ -766,45 +734,33 @@ public class Main extends Application {
 	 * 
 	 */
 	private static void determineBackgroundImage() {
-		backgroundFound = false;
 		
-		//Check if a background image exists
-		if (new File(InfoTool.getAbsoluteDatabasePathPlain()).exists())
-			try (Stream<Path> paths = Files.walk(Paths.get(new File(InfoTool.getAbsoluteDatabasePathPlain()).getPath()), 1)) {
-				paths.forEach(path -> {
-					File file = path.toFile();
-					if (file.getName().contains("background") && InfoTool.isImage(file.getAbsolutePath()) && !file.isDirectory()) {
-						
-						Image img = new Image(file.toURI() + "");
-						BackgroundImage bgImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-								BackgroundPosition.DEFAULT, new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
-						loginMode.setBackground(new Background(bgImg));
-						root.setBackground(new Background(bgImg));
-						
-						//Found?
-						backgroundFound = true;
-						
-					}
-				});
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
+		//Check if it returns null
+		Image image = JavaFXTools.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
 		
-		//Check if background is found
-		if (backgroundFound)
-			return;
+		//Find the default one for the application
+		if (image == null)
+			image = new Image("/image/application_background.jpg");
 		
-		Image img = new Image("/image/application_background.jpg");
-		BackgroundImage bgImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		//Set the background Image
+		BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 				new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
 		loginMode.setBackground(new Background(bgImg));
 		root.setBackground(new Background(bgImg));
 		
-		//Junk COde
-		//		    loginMode.setStyle(
-		//			    "-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
-		//	root.setStyle(loginMode.getStyle())
+	}
+	
+	/**
+	 * Resets the application background image to the default one
+	 * 
+	 */
+	public static void resetBackgroundImage() {
 		
+		//Delete the background image
+		JavaFXTools.deleteAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
+		
+		//Set the default one
+		determineBackgroundImage();
 	}
 	
 	/**
@@ -814,6 +770,18 @@ public class Main extends Application {
 	 *        the arguments
 	 */
 	public static void main(String[] args) {
+		System.out.println("Hello from Main Method!");
+		
+		//		//---------------Check for Duplicate Instance-----------------	
+		//		String id = "XR3PlayerApplication";
+		//		try {
+		//			JUnique.acquireLock(id, null);
+		//		} catch (AlreadyLockedException e) { // Application already running.
+		//			System.out.println("Duplicate instance detected...exiting...");
+		//			System.exit(0);
+		//		}
+		//		//------------END OF: Check for Duplicate Instance-------------------
+		
 		launch(args);
 	}
 }

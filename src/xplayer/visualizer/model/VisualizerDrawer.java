@@ -22,13 +22,22 @@ public class VisualizerDrawer extends VisualizerModel {
 	
 	// -----------------------------Images---------------------------------
 	
+	//-----
+	
+	/** The DEFAULT_BACKGROUND_IMAGE */
+	public static final Image DEFAULT_BACKGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("background.gif"));
 	/** The DEFAULT_FOREGROUND_IMAGE */
 	public static final Image DEFAULT_FOREGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("foreground.png"));
+	
+	//-----
+	
 	/** The foreground image */
 	public Image foregroundImage = DEFAULT_FOREGROUND_IMAGE;
 	
 	/** The background image. */
-	public Image backgroundImage = new Image(VisualizerModel.class.getResourceAsStream("visualizer.jpg"));
+	public Image backgroundImage = DEFAULT_BACKGROUND_IMAGE;
+	
+	//-----
 	
 	/**
 	 * Draws the foreground image of the visualizer
@@ -50,8 +59,8 @@ public class VisualizerDrawer extends VisualizerModel {
 				imageW = imageH = canvasHeight / 2.00;
 			
 			//Draw it
-			gc.drawImage(foregroundImage, ( canvasWidth / 2 - imageW / 2 ) - imageW * array[0] / 2,
-					( canvasHeight / 2 - imageH / 2 ) - imageH * array[0] / 2, imageW + imageW * array[0], imageH + imageH * array[0]);
+			gc.drawImage(foregroundImage, ( canvasWidth / 2 - imageW / 2 ) - imageW * array[0] / 2, ( canvasHeight / 2 - imageH / 2 ) - imageH * array[0] / 2,
+					imageW + imageW * array[0], imageH + imageH * array[0]);
 			
 		}
 	}

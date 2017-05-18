@@ -87,6 +87,8 @@ import smartcontroller.media.Media;
  */
 public class SmartController extends StackPane {
 	
+	//--------------------------------
+	
 	@FXML
 	private BorderPane mainBorder;
 	
@@ -119,6 +121,9 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private MenuButton actionsMenuButton;
+	
+	@FXML
+	private MenuItem importFolder;
 	
 	@FXML
 	private MenuItem importFiles;
@@ -443,6 +448,13 @@ public class SmartController extends StackPane {
 		
 		//showSettings
 		showSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS));
+		
+		//importFolder
+		importFolder.setOnAction(a -> {
+			File file = Main.specialChooser.selectFolder(Main.window);
+			if (file != null)
+				inputService.start(Arrays.asList(file));
+		});
 		
 		// importFiles
 		importFiles.setOnAction(a -> {

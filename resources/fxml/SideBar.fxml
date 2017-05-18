@@ -25,7 +25,7 @@
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Data,Search" />
-                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0" style="-fx-background-color: black;">
+                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0">
                            <items>
                               <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
                                  <graphic>
@@ -36,7 +36,7 @@
                                     </ImageView>
                                  </graphic>
                               </MenuItem>
-                              <MenuItem fx:id="exportDataBase" mnemonicParsing="false" text="Export DataBase">
+                              <MenuItem fx:id="exportDataBase" mnemonicParsing="false" text="Export DataBase(BACKUP)">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -204,7 +204,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Donation,About" />
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 12; -fx-background-color: black; -fx-background-radius: 0;">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 11;">
                            <items>
                               <MenuItem fx:id="aboutSection" mnemonicParsing="false" text="Application Information" />
                               <MenuItem fx:id="help" mnemonicParsing="false" text="Application Manual" />

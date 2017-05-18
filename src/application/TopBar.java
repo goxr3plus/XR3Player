@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -46,7 +47,10 @@ public class TopBar extends BorderPane {
 	private Button exitApplication;
 	
 	@FXML
-	private Button changeBackground;
+	private MenuItem chooseBackground;
+	
+	@FXML
+	private MenuItem resetBackground;
 	
 	@FXML
 	private VBox monitorsVBox;
@@ -177,8 +181,11 @@ public class TopBar extends BorderPane {
 		// close
 		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());
 		
-		//changeBackground
-		changeBackground.setOnAction(a -> Main.changeBackgroundImage());
+		//chooseBackground
+		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		
+		//resetBackground
+		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 		
 		//----------------------------START: TABS---------------------------------
 		

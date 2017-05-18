@@ -6,6 +6,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
@@ -76,14 +78,15 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button fx:id="changeBackground" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 9;" text="Change Background" textAlignment="CENTER" wrapText="true">
+                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Change Background">
+                     <items>
+                        <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
+                        <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
+                     </items>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                     <tooltip>
-                        <Tooltip text="Change the background image of the application" />
-                     </tooltip>
-                  </Button>
+                  </MenuButton>
                </children>
             </VBox>
          </children>

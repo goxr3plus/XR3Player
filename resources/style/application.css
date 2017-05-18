@@ -643,7 +643,7 @@
     -mid-gray: rgb(216.0, 222.0, 227.0);
  }
 
- .button {	
+ .button , .menu-button {	
  	 /*-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );*/
     /* -fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);   */
  	 -fx-background-color:
@@ -666,7 +666,7 @@
         radial-gradient(center 50.0% 50.0%, radius 100.0%, #ea7f4b, #c54e2c);*/
  }
  
- .button:pressed {
+ .button:pressed , .menu-button:pressed{
     -fx-background-color:
         -darkest-black,
         rgb(55.0, 57.0, 58.0),
@@ -1304,16 +1304,10 @@
 
 ******************************************************************************/
 
-   
-   
 .menu-button{
- 	-fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);  
- 	-fx-background-radius: 5.0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
-    -fx-font-size: 13.0px;	
-    -fx-cursor:hand;
+	-fx-cursor:hand;
 }
-
+   
 .menu-button .label{
 	-fx-text-fill:white;
 }
