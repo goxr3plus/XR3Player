@@ -76,7 +76,7 @@ public class PropertiesDb {
 				ex.printStackTrace();
 			} finally {
 				//  if (showNotifications)
-				ActionTool.showNotification("Properties Updated", "Changes saved successfully", Duration.millis(550), NotificationType.INFORMATION);
+				//ActionTool.showNotification("Properties Updated", "Changes saved successfully", Duration.millis(550), NotificationType.INFORMATION);
 			}
 		});
 	}

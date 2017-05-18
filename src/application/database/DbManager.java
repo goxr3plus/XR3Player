@@ -132,8 +132,10 @@ public class DbManager {
 			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 			connection.setAutoCommit(false);
 			
-			if (!data1Exist)
-				recreateDataBase();
+			//if (!data1Exist)
+			
+			//This method keeps backward compatibility with previous XR3Player versions
+			createDatabaseMissingTables();
 			
 			keyValueDb.recreateJSonDataBase();
 			
@@ -235,9 +237,9 @@ public class DbManager {
 	/**
 	 * Recreates the database if it doesn't exist.
 	 */
-	public void recreateDataBase() {
+	public void createDatabaseMissingTables() {
 		
-		Main.logger.info("1-->Recreating the database..");
+		Main.logger.info("1-->Checking for missing database tables");
 		
 		try (Statement statement = connection.createStatement()) {
 			
@@ -252,8 +254,8 @@ public class DbManager {
 			//	    + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL," + "DESCRIPTION TEXT," + "STARS DOUBLE NOT NULL)");
 			
 			// ----------XPlayers PlayLists Tables ----------//
-			//    for (int i = 0; i < 3; i++)
-			//	createXPlayListTable(statement, i);
+			for (int i = 0; i < 3; i++)
+				createXPlayListTable(statement, i);
 			
 			commit();
 		} catch (SQLException ex) {
@@ -271,10 +273,11 @@ public class DbManager {
 	 * @throws SQLException
 	 *         the SQL exception
 	 */
-	//    private void createXPlayListTable(Statement statement, int key) throws SQLException {
-	//	statement.executeUpdate("CREATE TABLE XPPL" + key + "(PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
-	//		+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
-	//    }
+	private void createXPlayListTable(Statement statement , int key) throws SQLException {
+		statement.executeUpdate(
+				"CREATE TABLE IF NOT EXISTS `XPPL" + key + "` (PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
+						+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+	}
 	
 	/**
 	 * This method loads the application database.
@@ -373,12 +376,18 @@ public class DbManager {
 						//Load the Opened Libraries
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Opened Libraries..."));
 						keyValueDb.loadOpenedLibraries();
+						
 						//Calculate opened libraries
 						Platform.runLater(() -> Main.libraryMode.calculateOpenedLibraries());
 						
 						//Load PlayerMediaList
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading previous data..."));
 						Main.playedSongs.uploadFromDataBase();
+						
+						//Refresh all the XPlayers PlayLists
+						Platform.runLater(() -> Main.xPlayersList.getList().stream()
+								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().loadService
+										.startService(false, false)));
 						
 						//--FINISH
 						updateProgress(total, total);

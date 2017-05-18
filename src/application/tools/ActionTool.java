@@ -307,6 +307,13 @@ public final class ActionTool {
 	 *        The notification type
 	 */
 	public static void showNotification(String title , String text , Duration d , NotificationType t) {
+		
+		//Check if it is JavaFX Application Thread
+		if (!Platform.isFxApplicationThread()) {
+			Platform.runLater(() -> showNotification(title, text, d, t));
+			return;
+		}
+		
 		Notifications notification1 = Notifications.create().title(title).text(text);
 		notification1.hideAfter(d);
 		
@@ -340,7 +347,6 @@ public final class ActionTool {
 	 * @param contentText
 	 */
 	public static void showAlert(String title , String headerText , String contentText) {
-		//AtomicBoolean answer = new AtomicBoolean(false)
 		
 		// Show Alert
 		Alert alert = new Alert(AlertType.INFORMATION);

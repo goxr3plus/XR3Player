@@ -114,12 +114,12 @@ public class AboutWindowController extends BorderPane {
 		text = "Version :\t";
 		cssTextArea.appendText(text);
 		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
-		cssTextArea.appendText(String.valueOf(Main.applicationProperties.get("Version")) + "\n");
+		cssTextArea.appendText(Main.applicationProperties.get("Version") + "\n");
 		
 		text = "Release Date :\t";
 		cssTextArea.appendText(text);
 		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
-		cssTextArea.appendText(String.valueOf(Main.applicationProperties.get("ReleasedDate")) + "\n");
+		cssTextArea.appendText(Main.applicationProperties.get("ReleasedDate") + "\n");
 		
 		text = "Home Page :\t";
 		cssTextArea.appendText(text);

@@ -187,6 +187,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	// -------------------------ETC --------------------------
 	
+	private XPlayerPlaylist xPlayerPlayList;
+	
 	private XPlayerWindow xPlayerWindow;
 	
 	/** The x player settings controller. */
@@ -284,6 +286,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		// -----Important-------------
 		xPlayerWindow = new XPlayerWindow(this);
 		radialMenu = new XPlayerRadialMenu(this);
+		xPlayerPlayList = new XPlayerPlaylist(this);
 		//xPlayList = new XPlayerPlaylist(25, this)
 		visualizerWindow = new VisualizerWindowController(this);
 		playerExtraSettings = new XPlayerExtraSettings(this);
@@ -1128,24 +1131,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * @param xPlayerWindow the xPlayerWindow to set
-	 */
-	public void setxPlayerWindow(XPlayerWindow xPlayerWindow) {
-		this.xPlayerWindow = xPlayerWindow;
-	}
-	
-	/**
 	 * @return the playerExtraSettings
 	 */
 	public XPlayerExtraSettings getPlayerExtraSettings() {
 		return playerExtraSettings;
-	}
-	
-	/**
-	 * @param playerExtraSettings the playerExtraSettings to set
-	 */
-	public void setPlayerExtraSettings(XPlayerExtraSettings playerExtraSettings) {
-		this.playerExtraSettings = playerExtraSettings;
 	}
 	
 	/**
@@ -1156,24 +1145,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * @param xPlayerModel the xPlayerModel to set
-	 */
-	public void setxPlayerModel(XPlayerModel xPlayerModel) {
-		this.xPlayerModel = xPlayerModel;
-	}
-	
-	/**
 	 * @return the xPlayer
 	 */
 	public XPlayer getxPlayer() {
 		return xPlayer;
-	}
-	
-	/**
-	 * @param xPlayer the xPlayer to set
-	 */
-	public void setxPlayer(XPlayer xPlayer) {
-		this.xPlayer = xPlayer;
 	}
 	
 	/**
@@ -1184,24 +1159,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * @param radialMenu the radialMenu to set
-	 */
-	public void setRadialMenu(XPlayerRadialMenu radialMenu) {
-		this.radialMenu = radialMenu;
-	}
-	
-	/**
 	 * @return the visualizerWindow
 	 */
 	public VisualizerWindowController getVisualizerWindow() {
 		return visualizerWindow;
-	}
-	
-	/**
-	 * @param visualizerWindow the visualizerWindow to set
-	 */
-	public void setVisualizerWindow(VisualizerWindowController visualizerWindow) {
-		this.visualizerWindow = visualizerWindow;
 	}
 	
 	/**
@@ -1219,24 +1180,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * @param visualizer the visualizer to set
-	 */
-	public void setVisualizer(XPlayerVisualizer visualizer) {
-		this.visualizer = visualizer;
-	}
-	
-	/**
 	 * @return the equalizer
 	 */
 	public XPlayerEqualizer getEqualizer() {
 		return equalizer;
-	}
-	
-	/**
-	 * @param equalizer the equalizer to set
-	 */
-	public void setEqualizer(XPlayerEqualizer equalizer) {
-		this.equalizer = equalizer;
 	}
 	
 	/**
@@ -1247,10 +1194,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * @param disc the disc to set
+	 * @return the xPlayerPlayList
 	 */
-	public void setDisc(DJDisc disc) {
-		this.disc = disc;
+	public XPlayerPlaylist getxPlayerPlayList() {
+		return xPlayerPlayList;
 	}
 	
 }

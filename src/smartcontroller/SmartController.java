@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -626,10 +627,11 @@ public class SmartController extends StackPane {
 	 */
 	public void updateLabel() {
 		if (searchService.isActive() || genre == Genre.SEARCHWINDOW)
-			titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] from [ Total:<"
-					+ InfoTool.getNumberWithDots(totalInDataBase.get()) + ">] Selected:" + tableViewer.getSelectedCount());
+			titledPane.setText(
+					"[Found: <" + itemsObservableList.size() + "> first matching] from [ Total:<" + InfoTool.getNumberWithDots(totalInDataBase.get())
+							+ "> MaxPerPage:<" + maximumPerPage + "> ] Selected:" + tableViewer.getSelectedCount());
 		else
-			titledPane.setText("[Total:<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> CurrentPage:<"
+			titledPane.setText("[Total:<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> MaxPerPage:<" + maximumPerPage + "> CurrentPage:<"
 					+ InfoTool.getNumberWithDots(currentPage.get()) + "> MaxPage:<" + InfoTool.getNumberWithDots(maximumList()) + ">] [ Selected:"
 					+ tableViewer.getSelectedCount() + "  Showing:" + InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + "-"
 					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size()) + " ]");
@@ -1444,8 +1446,9 @@ public class SmartController extends StackPane {
 	/**
 	 * @return The Vertical ScrollBar of TableViewer
 	 */
-	public ScrollBar getVerticalScrollBar() {
-		return (ScrollBar) getTableViewer().lookup(".scroll-bar:vertical");
+	public Optional<ScrollBar> getVerticalScrollBar() {
+		
+		return Optional.ofNullable((ScrollBar) getTableViewer().lookup(".scroll-bar:vertical"));
 	}
 	
 	/**
@@ -1545,7 +1548,7 @@ public class SmartController extends StackPane {
 				if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
 					// setVerticalScrollValueWithSearch(getVerticalScrollBar().getValue());
 				} else
-					setVerticalScrollValueWithoutSearch(getVerticalScrollBar().getValue());
+					getVerticalScrollBar().ifPresent(scrollBar -> setVerticalScrollValueWithoutSearch(scrollBar.getValue()));
 			}
 			
 			startService(commit1, requestFocus1);
@@ -1563,14 +1566,18 @@ public class SmartController extends StackPane {
 			if (requestFocus)
 				centerStackPane.requestFocus();
 			
-			//Fix the vertical scroll bar position
-			if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
-				System.out.println("Search is active");
-				getVerticalScrollBar().setValue(getVerticalScrollValueWithSearch());
-				setVerticalScrollValueWithSearch(0.0);
-			} else {
-				getVerticalScrollBar().setValue(getVerticalScrollValueWithoutSearch());
-				setVerticalScrollValueWithoutSearch(0.0);
+			try {
+				//Fix the vertical scroll bar position
+				if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
+					System.out.println("Search is active");
+					getVerticalScrollBar().ifPresent(scrollBar -> scrollBar.setValue(getVerticalScrollValueWithSearch()));
+					setVerticalScrollValueWithSearch(0.0);
+				} else {
+					getVerticalScrollBar().ifPresent(scrollBar -> scrollBar.setValue(getVerticalScrollValueWithoutSearch()));
+					setVerticalScrollValueWithoutSearch(0.0);
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 			
 		}

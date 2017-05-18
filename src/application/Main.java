@@ -84,6 +84,14 @@ import xr3capture.CaptureWindow;
 public class Main extends Application {
 	
 	public static Properties applicationProperties = new Properties();
+	static {
+		//----------Properties-------------
+		applicationProperties.put("Version", 69);
+		applicationProperties.put("ReleasedDate", "20/05/2017");
+		
+		System.out.println("Outside of Application Start Method");
+		
+	}
 	
 	/** Application logger. */
 	public static final Logger logger = Logger.getGlobal();
@@ -228,10 +236,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		System.out.println("XR3Player Application Started");
-		
-		//----------Properties-------------
-		applicationProperties.put("Version", 69);
-		applicationProperties.put("ReleasedDate", "20/05/2017");
 		
 		// --------Window---------
 		window = primaryStage;
@@ -428,21 +432,19 @@ public class Main extends Application {
 			//Do the below until the database is initialized
 			userMode.setUser(u);
 			
-			//When Top Bar to be visible?
-			//topBar.visibleProperty()
-			//    .bind(libraryMode.sceneProperty().isNotNull().or(djMode.sceneProperty().isNotNull()))
-			//sideBar.visibleProperty().bind(topBar.visibleProperty())
+		
 			
-			//Load the DataBase - After the DBManager has been initialized of course ;)
 			try {
 				s.join();
 			} catch (InterruptedException ex) {
 				ex.printStackTrace();
-			}
+			}						
 			
-			loadApplicationSettings();
-			
+			//Load the DataBase - After the DBManager has been initialized of course ;)
 			dbManager.loadApplicationDataBase();
+			
+			//Load the application settings
+			loadApplicationSettings();
 			
 			//  dbManager.recreateJSonDataBase()
 			//  dbManager.loadOpenedLibraries()

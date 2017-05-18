@@ -81,7 +81,7 @@ public class TreeViewManager extends BorderPane {
 			// System.out.println(source.getValue())
 			
 			// host is not on the game
-			if (source != null && source.getValue().equals(hostName)) {
+			if (source == null || source.getValue().equals(hostName)) {
 				m.consume();
 				return;
 			}
@@ -138,7 +138,7 @@ public class TreeViewManager extends BorderPane {
 			TreeItemFile source = (TreeItemFile) systemTreeView.getSelectionModel().getSelectedItem();
 			
 			//The host is not allowed
-			if (!source.getValue().equals(hostName)) {
+			if (source != null && !source.getValue().equals(hostName)) {
 				
 				// Allow this transfer Mode
 				Dragboard board = startDragAndDrop(TransferMode.LINK);

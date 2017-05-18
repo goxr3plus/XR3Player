@@ -133,7 +133,7 @@ public class SmartControllerSearcher extends HBox {
 			return;
 		
 		service.pageBeforeSearch = controller.getCurrentPage().get();
-		controller.setVerticalScrollValueWithoutSearch(controller.getVerticalScrollBar().getValue());
+		controller.getVerticalScrollBar().ifPresent(scrollBar -> controller.setVerticalScrollValueWithoutSearch(scrollBar.getValue()));
 		saveSettingBeforeSearch = false;
 	}
 	
@@ -280,7 +280,7 @@ public class SmartControllerSearcher extends HBox {
 									+ "%' LIMIT " + controller.getMaximumPerPage();
 					}
 					
-					System.out.println(query);
+					//System.out.println(query);
 					
 					//Continue
 					try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query)) {

@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,14 +10,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="213.0" prefWidth="447.0" type="StackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="409.0" prefWidth="632.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="392.0">
-         <center>
-            <Label fx:id="topLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="Label" BorderPane.alignment="CENTER" />
-         </center>
+      <BorderPane fx:id="borderPane">
          <top>
-            <Button fx:id="play" maxWidth="80.0" mnemonicParsing="false" text="Play" BorderPane.alignment="CENTER">
+            <Button fx:id="play" disable="true" maxWidth="80.0" mnemonicParsing="false" text="Play" BorderPane.alignment="CENTER">
                <tooltip>
                   <Tooltip text="Play all the items in row" />
                </tooltip>
@@ -30,8 +26,8 @@
                </cursor>
             </Button>
          </top></BorderPane>
-      <Region fx:id="region" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false" />
-      <ProgressIndicator fx:id="progressSpinner" visible="false" />
+      <Region fx:id="region" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false" />
+      <ProgressIndicator fx:id="progressSpinner" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="173.0" prefWidth="204.0" visible="false" />
       <HBox fx:id="horizontalBox" alignment="CENTER" spacing="5.0">
          <children>
             <Button fx:id="previousButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0" style="-fx-font-weight: bold;" text="&lt;">

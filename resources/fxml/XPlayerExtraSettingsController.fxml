@@ -12,19 +12,14 @@
          <children>
             <TabPane style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
+                  <Tab fx:id="playListTab" closable="false" text="PlayList">
+                     <content>
+                        <ScrollPane />
+                     </content>
+                  </Tab>
                   <Tab fx:id="equalizerTab" closable="false" text="Equalizer">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: rgb(0,0,0,0.85);" />
-                     </content>
-                  </Tab>
-                  <Tab fx:id="historyTab" closable="false" disable="true" text="History[..]">
-                     <content>
-                        <ScrollPane />
-                     </content>
-                  </Tab>
-                  <Tab fx:id="playListTab" closable="false" disable="true" text="PlayList[...]">
-                     <content>
-                        <ScrollPane />
                      </content>
                   </Tab>
                </tabs>

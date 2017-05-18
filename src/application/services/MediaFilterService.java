@@ -16,14 +16,11 @@ import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
 
 import application.Main;
-import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
-import application.tools.NotificationType;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.util.Duration;
 import smartcontroller.SmartController;
 import smartcontroller.media.Media;
 import xplayer.streamplayer.ThreadFactoryWithNamePrefix;
@@ -79,11 +76,15 @@ public class MediaFilterService {
 	 */
 	private void startFilteringControllers() {
 		
-		//First filter the selected Opened Library Controller
+		//Filter Selected Opened Library SmartController
 		filterController(
 				libraryMode.multipleLibs.getSelectedLibrary() == null ? null : libraryMode.multipleLibs.getSelectedLibrary().getSmartController());
 		
-		//The filter the SearchWindow Controller
+		//Filter XPlayer PlayLists SmartControllers
+		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+				.forEach(this::filterController);
+		
+		//Filter SearchWindow SmartController
 		filterController(Main.searchWindow.getSmartController());
 		
 	}
