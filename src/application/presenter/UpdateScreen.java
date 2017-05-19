@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application;
+package application.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;

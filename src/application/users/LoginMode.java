@@ -205,8 +205,7 @@ public class LoginMode extends BorderPane {
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir())
 						teamViewer.addUser(new User(newName, teamViewer.itemsObservableList.size(), LoginMode.this), true);
 					else
-						ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2),
-								NotificationType.ERROR);
+						ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2), NotificationType.ERROR);
 					
 					// update the positions
 					//updateUsersPosition()
@@ -320,7 +319,7 @@ public class LoginMode extends BorderPane {
 		
 		// restartButton
 		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton))
+			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton, Main.window))
 				Main.restartTheApplication(true);
 		});
 		
@@ -337,7 +336,7 @@ public class LoginMode extends BorderPane {
 		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
 		
 		//resetBackground
-		resetBackground.setOnAction(a->Main.resetBackgroundImage());
+		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 		
 		// previous
 		previous.setOnAction(a -> teamViewer.previous());
@@ -381,8 +380,7 @@ public class LoginMode extends BorderPane {
 	 */
 	public void deleteUser(Node owner) {
 		//Ask
-		if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]",
-				owner)) {
+		if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]", owner, Main.window)) {
 			
 			//Try to delete it
 			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + teamViewer.getSelectedItem().getUserName())))
@@ -760,8 +758,7 @@ public class LoginMode extends BorderPane {
 						
 						timeline.setOnFinished(v -> {
 							Bounds bounds = user.localToScreen(user.getBoundsInLocal());
-							userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4,
-									user);
+							userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
 							timeline.setOnFinished(null);
 						});
 						
@@ -1052,8 +1049,7 @@ public class LoginMode extends BorderPane {
 					LoginMode.this.teamViewer.getItemsObservableList().forEach(user -> {
 						
 						//Check if the database of this user exists
-						String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator
-								+ "dbFile.db";
+						String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "dbFile.db";
 						if (new File(dbFileAbsolutePath).exists()) {
 							
 							// --Create connection and load user information

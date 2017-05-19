@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.medialibraries;
+package application.librarymode;
 
 import java.util.List;
 

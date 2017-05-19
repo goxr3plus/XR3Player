@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import application.FileAndFolderChooser;
+import application.windows.FileAndFolderChooser;
 import javafx.application.Platform;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;

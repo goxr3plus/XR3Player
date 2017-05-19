@@ -20,7 +20,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
-import application.medialibraries.Library;
+import application.librarymode.Library;
 import application.tools.InfoTool;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;

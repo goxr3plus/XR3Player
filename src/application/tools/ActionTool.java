@@ -6,6 +6,7 @@ package application.tools;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -36,6 +37,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
@@ -51,9 +53,6 @@ public final class ActionTool {
 	
 	/** The random. */
 	private static Random random = new Random();
-	
-	/** The question answer. */
-	private static boolean questionAnswer;
 	
 	/** The warning image. */
 	private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png");
@@ -77,8 +76,7 @@ public final class ActionTool {
 		
 		// Open the Default Browser
 		if (System.getProperty("os.name").toLowerCase().contains("win")) {
-			showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path), Duration.millis(1500),
-					NotificationType.INFORMATION);
+			showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path), Duration.millis(1500), NotificationType.INFORMATION);
 			
 			//START: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
 			
@@ -124,8 +122,7 @@ public final class ActionTool {
 				showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500), NotificationType.WARNING);
 			}
 		} else {
-			showNotification("Not Supported",
-					"This function is only supported in Windows \n I am trying my best to implement it and on other operating systems :)",
+			showNotification("Not Supported", "This function is only supported in Windows \n I am trying my best to implement it and on other operating systems :)",
 					Duration.millis(1500), NotificationType.WARNING);
 		}
 		
@@ -154,6 +151,30 @@ public final class ActionTool {
 		
 		return succeess;
 		
+	}
+	
+	/**
+	 * Copy a file from source to destination.
+	 *
+	 * @param source
+	 *        the source
+	 * @param destination
+	 *        the destination
+	 * @return True if succeeded , False if not
+	 */
+	public static boolean copy(InputStream source , String destination) {
+		boolean succeess = true;
+		
+		System.out.println("Copying ->" + source + "\n\tto ->" + destination);
+		
+		try {
+			System.out.println(Files.copy(source, Paths.get(destination), StandardCopyOption.REPLACE_EXISTING));
+		} catch (IOException ex) {
+			logger.log(Level.WARNING, "", ex);
+			succeess = false;
+		}
+		
+		return succeess;
 	}
 	
 	/**
@@ -196,8 +217,7 @@ public final class ActionTool {
 				logger.log(Level.INFO, "", ex);
 			}
 		} else if (source.isFile() && !source.delete()) { // File
-			showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.", Duration.millis(2000),
-					NotificationType.WARNING);
+			showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.", Duration.millis(2000), NotificationType.WARNING);
 			return false;
 		}
 		
@@ -250,15 +270,15 @@ public final class ActionTool {
 			try {
 				desktop.open(new File(absolutePath));
 			} catch (IOException ex) {
-				Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]",
-						Duration.millis(2500), NotificationType.INFORMATION));
+				Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
+						NotificationType.INFORMATION));
 				logger.log(Level.INFO, "", ex);
 				return false;
 			}
 			// Error?
 		} else {
-			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]",
-					Duration.millis(2500), NotificationType.INFORMATION));
+			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
+					NotificationType.INFORMATION));
 			System.out.println("Error trying to open the default web browser.");
 			return false;
 		}
@@ -279,15 +299,15 @@ public final class ActionTool {
 			try {
 				desktop.browse(new URI(uri));
 			} catch (IOException | URISyntaxException ex) {
-				Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]",
-						Duration.millis(2500), NotificationType.INFORMATION));
+				Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
+						NotificationType.INFORMATION));
 				logger.log(Level.INFO, "", ex);
 				return false;
 			}
 			// Error?
 		} else {
-			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]",
-					Duration.millis(2500), NotificationType.INFORMATION));
+			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
+					NotificationType.INFORMATION));
 			System.out.println("Error trying to open the default web browser.");
 			return false;
 		}
@@ -366,24 +386,19 @@ public final class ActionTool {
 	 *        the text
 	 * @return true, if successful
 	 */
-	public static boolean doQuestion(String text) {
-		questionAnswer = false;
+	public static boolean doQuestion(String text , Stage window) {
+		boolean[] questionAnswer = { false };
 		
 		// Show Alert
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.initStyle(StageStyle.UTILITY);
-		alert.initOwner(Main.window);
+		alert.initOwner(window);
 		alert.setGraphic(questionImage);
 		alert.setHeaderText("Question");
 		alert.setContentText(text);
-		alert.showAndWait().ifPresent(answer -> {
-			if (answer == ButtonType.OK)
-				questionAnswer = true;
-			else
-				questionAnswer = false;
-		});
+		alert.showAndWait().ifPresent(answer -> questionAnswer[0] = ( answer == ButtonType.OK ));
 		
-		return questionAnswer;
+		return questionAnswer[0];
 	}
 	
 	/**
@@ -395,20 +410,19 @@ public final class ActionTool {
 	 *        The node owner of the Alert
 	 * @return true, if successful
 	 */
-	public static boolean doQuestion(String text , Node node) {
-		questionAnswer = false;
+	public static boolean doQuestion(String text , Node node , Stage window) {
+		boolean[] questionAnswer = { false };
 		
 		// Show Alert
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initOwner(Main.window);
+		alert.initOwner(window);
 		alert.initStyle(StageStyle.UTILITY);
 		alert.setGraphic(questionImage);
 		alert.setHeaderText("Question");
 		alert.setContentText(text);
 		
 		// Make sure that JavaFX doesn't cut the text with ...
-		alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label)
-				.forEach(item -> ( (Label) node ).setMinHeight(Region.USE_PREF_SIZE));
+		alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label).forEach(item -> ( (Label) node ).setMinHeight(Region.USE_PREF_SIZE));
 		
 		// I noticed that height property is notified after width property
 		// that's why i choose to add the listener here
@@ -444,14 +458,9 @@ public final class ActionTool {
 		});
 		
 		// Show the Alert
-		alert.showAndWait().ifPresent(answer -> {
-			if (answer == ButtonType.OK)
-				questionAnswer = true;
-			else
-				questionAnswer = false;
-		});
+		alert.showAndWait().ifPresent(answer -> questionAnswer[0] = ( answer == ButtonType.OK ));
 		
-		return questionAnswer;
+		return questionAnswer[0];
 	}
 	
 	/**
@@ -465,14 +474,15 @@ public final class ActionTool {
 	 *        the i
 	 * @return true, if successful
 	 */
-	public static boolean doDeleteQuestion(boolean permanent , String text , int i) {
-		questionAnswer = false;
+	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
+		boolean[] questionAnswer = { false };
+		
 		String unique = "\n [" + text + "]";
 		String multiple = "[" + text + " items]";
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.initStyle(StageStyle.UTILITY);
-		alert.initOwner(Main.window);
+		alert.initOwner(window);
 		alert.setGraphic(!permanent ? questionImage : warningImage);
 		alert.setHeaderText(!permanent ? "Remove selection" + ( i > 1 ? "s " + multiple : unique ) + " from List?"
 				: "Are you sure you want to permanently delete " + ( i > 1 ? "these " + multiple : "this item " + unique ) + " ?");
@@ -483,17 +493,17 @@ public final class ActionTool {
 		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
 		alert.showAndWait().ifPresent(answer -> {
 			if (answer == ButtonType.OK)
-				questionAnswer = true;
+				questionAnswer[0] = true;
 		});
 		
-		return questionAnswer;
+		return questionAnswer[0];
 	}
 	
 	/**
 	 * Returns a Random Number from 0 to ...what i have choosen in method see
 	 * the doc
 	 *
-	 * @return the int
+	 * @return A random integer
 	 */
 	public static int returnRandom() {
 		return random.nextInt(80000);

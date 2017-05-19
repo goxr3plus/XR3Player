@@ -1,10 +1,11 @@
 /*
  * 
  */
-package application;
+package application.presenter;
 
 import java.io.IOException;
 
+import application.Main;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

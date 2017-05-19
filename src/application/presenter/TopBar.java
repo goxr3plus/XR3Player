@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application;
+package application.presenter;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import customnodes.SystemMonitor;
@@ -168,7 +169,7 @@ public class TopBar extends BorderPane {
 		
 		// restartButton
 		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton))
+			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton, Main.window))
 				Main.restartTheApplication(true);
 		});
 		
@@ -290,12 +291,8 @@ public class TopBar extends BorderPane {
 	public void addXR3LabelBinding() {
 		
 		// xr3Label
-		xr3Label.textProperty()
-				.bind(Bindings
-						.createStringBinding(
-								() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
-										Main.applicationProperties.get("Version"), Main.window.getWidth(), Main.window.getHeight()),
-								Main.window.widthProperty(), Main.window.heightProperty()));
+		xr3Label.textProperty().bind(Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
+				Main.applicationProperties.get("Version"), Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(), Main.window.heightProperty()));
 	}
 	
 	/**

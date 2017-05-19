@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -35,39 +37,6 @@
                </children>
             </GridPane>
          </center>
-         <bottom>
-            <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="autoDownload" disable="true" mnemonicParsing="false" text="Auto Update">
-                     <tooltip>
-                        <Tooltip text="Automatic Update Download" />
-                     </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="download" layoutX="627.0" layoutY="15.0" mnemonicParsing="false" text="Download">
-                     <tooltip>
-                        <Tooltip text="Download the latest version" />
-                     </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="closeWindow" layoutX="678.0" layoutY="15.0" mnemonicParsing="false" text="Close">
-                     <tooltip>
-                        <Tooltip text="Close the Window" />
-                     </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="7.0" top="7.0" />
-               </padding>
-            </HBox>
-         </bottom>
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
@@ -75,6 +44,53 @@
                </children>
             </VBox>
          </top>
+         <bottom>
+            <StackPane BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="download" mnemonicParsing="false" text="Manual Download" StackPane.alignment="CENTER_RIGHT">
+                     <tooltip>
+                        <Tooltip text="Download the latest version" />
+                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <HBox alignment="CENTER" pickOnBounds="false" spacing="5.0">
+                     <children>
+                        <Button fx:id="automaticUpdate" mnemonicParsing="false" text="Automatic Update">
+                           <tooltip>
+                              <Tooltip text="Automatic Update Download" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Installing%20Updates-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="closeWindow" layoutX="678.0" layoutY="15.0" mnemonicParsing="false" text="Close">
+                           <tooltip>
+                              <Tooltip text="Close the Window" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="7.0" top="7.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets right="5.0" />
+               </BorderPane.margin>
+            </StackPane>
+         </bottom>
       </BorderPane>
    </children>
 </fx:root>

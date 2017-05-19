@@ -19,7 +19,12 @@ import java.util.stream.Collectors;
 import com.jfoenix.controls.JFXTabPane;
 
 import application.database.DbManager;
-import application.medialibraries.LibraryMode;
+import application.librarymode.LibraryMode;
+import application.presenter.DJMode;
+import application.presenter.MultipleTabs;
+import application.presenter.SideBar;
+import application.presenter.TopBar;
+import application.presenter.UpdateScreen;
 import application.services.MediaFilterService;
 import application.services.VacuumProgressService;
 import application.settings.ApplicationSettingsController;
@@ -34,6 +39,7 @@ import application.webbrowser.WebBrowserController;
 import application.windows.AboutWindowController;
 import application.windows.ConsoleWindowController;
 import application.windows.ExportWindowController;
+import application.windows.FileAndFolderChooser;
 import application.windows.RenameWindow;
 import application.windows.SearchWindow;
 import application.windows.StarWindow;
@@ -85,7 +91,7 @@ public class Main extends Application {
 	public static Properties applicationProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 69);
+		applicationProperties.put("Version", 68);
 		applicationProperties.put("ReleasedDate", "19/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
@@ -269,6 +275,9 @@ public class Main extends Application {
 		
 		//Check for updates
 		updateWindow.searchForUpdates(false);
+		
+		//Delete AutoUpdate if it exists
+		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
 		//------------------Experiments------------------
 		// ScenicView.show(scene)
@@ -583,7 +592,7 @@ public class Main extends Application {
 					// Ask the user
 					if (askUser)
 						Platform.runLater(() -> {
-							if (ActionTool.doQuestion("Restart failed.... force shutdown?"))
+							if (ActionTool.doQuestion("Restart failed.... force shutdown?", Main.window))
 								terminate(false);
 						});
 					else {

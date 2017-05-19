@@ -1,4 +1,4 @@
-package application.medialibraries;
+package application.librarymode;
 
 import application.Main;
 import javafx.animation.Interpolator;

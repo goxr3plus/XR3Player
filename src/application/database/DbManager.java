@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 import application.Main;
-import application.medialibraries.Library;
+import application.librarymode.Library;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;

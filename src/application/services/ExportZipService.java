@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.database;
+package application.services;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +28,7 @@ import smartcontroller.Operation;
  * @author SuperGoliath
  *
  */
-public class ImportDataBase extends Service<Boolean> {
+public class ExportZipService extends Service<Boolean> {
 	
 	/** The input zip. */
 	private String inputZip;
@@ -42,7 +42,7 @@ public class ImportDataBase extends Service<Boolean> {
 	/**
 	 * Constructor.
 	 */
-	public ImportDataBase() {
+	public ExportZipService() {
 		
 		setOnSucceeded(s -> {
 			// done()

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 
 import application.Main;
-import application.medialibraries.Library;
+import application.librarymode.Library;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -397,7 +397,7 @@ public abstract class Media {
 			// Do question?
 			if (!doQuestion)
 				hasBeenDeleted = removeItem(permanent, c);
-			else if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1))
+			else if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1,Main.window))
 				hasBeenDeleted = removeItem(permanent, c);
 			
 			if (hasBeenDeleted && deleteStatement != null) {

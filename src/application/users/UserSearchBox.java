@@ -6,7 +6,7 @@ package application.users;
 import org.controlsfx.control.textfield.TextFields;
 
 import application.Main;
-import application.medialibraries.SearchBoxWindow;
+import application.librarymode.SearchBoxWindow;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;

@@ -1,33 +1,26 @@
-package application;
+package application.presenter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXToggleButton;
 
-import application.database.ExportDataBase;
-import application.database.ImportDataBase;
+import application.Main;
+import application.services.CreateZipService;
+import application.services.ExportZipService;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.effect.Reflection;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.Operation;
 
@@ -94,10 +87,10 @@ public class SideBar extends BorderPane {
 	Thread internetThread;
 	
 	/** The zipper. */
-	public final ExportDataBase zipper = new ExportDataBase();
+	public final CreateZipService zipper = new CreateZipService();
 	
 	/** The un zipper. */
-	public final ImportDataBase unZipper = new ImportDataBase();
+	public final ExportZipService unZipper = new ExportZipService();
 	
 	/**
 	 * Constructor.
@@ -334,7 +327,7 @@ public class SideBar extends BorderPane {
 		deleteDataBase.setOnAction(a -> {
 			if (!zipper.isRunning() && !unZipper.isRunning()
 					&& ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
-							"Are you soore you want to delete the database?\nYou can keep a copy before deleting it by using export database functionality.\n\nAfter that the application will automatically restart...")) {
+							"Are you soore you want to delete the database?\nYou can keep a copy before deleting it by using export database functionality.\n\nAfter that the application will automatically restart...",Main.window)) {
 				
 				// Close database connections
 				if (Main.dbManager != null)

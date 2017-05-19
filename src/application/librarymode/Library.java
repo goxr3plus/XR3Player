@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.medialibraries;
+package application.librarymode;
 
 import java.io.File;
 import java.io.IOException;
@@ -207,8 +207,7 @@ public class Library extends StackPane {
 						if (! ( duplicate = Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream()
 								.anyMatch(library -> library != Library.this && library.getLibraryName().equals(newName)) )) {
 							
-							try (PreparedStatement libURename = Main.dbManager.getConnection()
-									.prepareStatement("UPDATE LIBRARIES SET NAME=? WHERE NAME=? ;")) {
+							try (PreparedStatement libURename = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET NAME=? WHERE NAME=? ;")) {
 								// Update SQL Database
 								libURename.setString(1, newName);
 								libURename.setString(2, oldName);
@@ -229,16 +228,16 @@ public class Library extends StackPane {
 							
 							// Rename the image of library
 							if (imageName != null)
-								updateImagePathInDB(InfoTool.getImagesFolderAbsolutePathWithSeparator() + newName + "."
-										+ InfoTool.getFileExtension(getAbsoluteImagePath()), true, false);
+								updateImagePathInDB(InfoTool.getImagesFolderAbsolutePathWithSeparator() + newName + "." + InfoTool.getFileExtension(getAbsoluteImagePath()), true,
+										false);
 							
 							//Update the JSONFile
 							if (isOpened())
 								Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
 						} else { // duplicate
 							resetTheName();
-							ActionTool.showNotification("Dublicate Name", "Name->" + newName + " is already used from another Library...",
-									Duration.millis(2000), NotificationType.WARNING);
+							ActionTool.showNotification("Dublicate Name", "Name->" + newName + " is already used from another Library...", Duration.millis(2000),
+									NotificationType.WARNING);
 						}
 					} else // X is pressed by user || oldName == newName
 						resetTheName();
@@ -300,8 +299,8 @@ public class Library extends StackPane {
 	 * @param opened
 	 *        the opened
 	 */
-	public Library(String libraryName, String dataBaseTableName, double stars, String dateCreated, String timeCreated, String description,
-			int saveMode, int position, String imageName, boolean opened) {
+	public Library(String libraryName, String dataBaseTableName, double stars, String dateCreated, String timeCreated, String description, int saveMode, int position,
+			String imageName, boolean opened) {
 		
 		// ----------------------------------Initialize Variables-------------------------------------
 		
@@ -447,8 +446,7 @@ public class Library extends StackPane {
 		nameLabel.setText(libraryName);
 		nameLabel.getTooltip().setText(libraryName);
 		nameLabel.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2
-					&& Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() != Status.RUNNING)
+			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() != Status.RUNNING)
 				renameLibrary(nameLabel);
 		});
 		
@@ -467,14 +465,13 @@ public class Library extends StackPane {
 		});
 		
 		// ----DescriptionLabel
-		descriptionLabel.visibleProperty()
-				.bind(description.isEmpty().not().and(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty()));
+		descriptionLabel.visibleProperty().bind(description.isEmpty().not().and(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty()));
 		descriptionLabel.setOnMouseReleased(settingsLabel.getOnMouseReleased());
 		
 		// ----totalItemsLabel
 		
-		totalItemsLabel.textProperty().bind(Bindings.createStringBinding(() -> InfoTool.getNumberWithDots(controller.totalInDataBaseProperty().get()),
-				controller.totalInDataBaseProperty()));
+		totalItemsLabel.textProperty()
+				.bind(Bindings.createStringBinding(() -> InfoTool.getNumberWithDots(controller.totalInDataBaseProperty().get()), controller.totalInDataBaseProperty()));
 		
 		totalItemsLabel.visibleProperty().bind(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty());
 		//I run this Thread to calculate the total entries of this library
@@ -570,8 +567,7 @@ public class Library extends StackPane {
 	 * Stores the Library description into the database.
 	 */
 	public void updateDescription() {
-		try (PreparedStatement libUDescription = Main.dbManager.getConnection()
-				.prepareStatement("UPDATE LIBRARIES SET DESCRIPTION=?" + " WHERE NAME=?;")) {
+		try (PreparedStatement libUDescription = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET DESCRIPTION=?" + " WHERE NAME=?;")) {
 			
 			// SQLITE
 			libUDescription.setString(1, description.get());
@@ -642,8 +638,7 @@ public class Library extends StackPane {
 					logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
 				
 				// Create the new image
-				String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "."
-						+ InfoTool.getFileExtension(absolutePath);
+				String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "." + InfoTool.getFileExtension(absolutePath);
 				
 				// Change the image name
 				imageName = InfoTool.getFileName(newImageName);
@@ -676,7 +671,7 @@ public class Library extends StackPane {
 		try (PreparedStatement libUImage = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET LIBRARYIMAGE=?  WHERE NAME=?")) {
 			
 			// Ask if user is sure...
-			if (ActionTool.doQuestion("Reset to default the image of this library?", this)) {
+			if (ActionTool.doQuestion("Reset to default the image of this library?", this, Main.window)) {
 				
 				// Delete the [[old]] image if exist
 				if (imageName != null && !new File(getAbsoluteImagePath()).delete())
@@ -713,8 +708,8 @@ public class Library extends StackPane {
 		//Check the given image
 		Image image = new Image(file.toURI() + "");
 		if (image.getWidth() > 4800 || image.getHeight() > 4800)
-			ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(),
-					Duration.millis(1500), NotificationType.WARNING);
+			ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(), Duration.millis(1500),
+					NotificationType.WARNING);
 		else {
 			updateImagePathInDB(file.getAbsolutePath(), false, true);
 			imageView.setImage(getImage());
@@ -739,8 +734,8 @@ public class Library extends StackPane {
 		//Start a Thread to copy the File
 		new Thread(() -> {
 			if (!ActionTool.copy(getAbsoluteImagePath(), file.getAbsolutePath()))
-				Platform.runLater(() -> ActionTool.showNotification("Exporting Library Image",
-						"Failed to export library image for \nLibrary=[" + getLibraryName() + "]", Duration.millis(2500), NotificationType.SIMPLE));
+				Platform.runLater(() -> ActionTool.showNotification("Exporting Library Image", "Failed to export library image for \nLibrary=[" + getLibraryName() + "]",
+						Duration.millis(2500), NotificationType.SIMPLE));
 			Platform.runLater(() -> progressBarStackPane.setVisible(false));
 		}).start();
 	}
@@ -863,8 +858,7 @@ public class Library extends StackPane {
 	 * Delete the library.
 	 */
 	public void deleteLibrary(Node owner) {
-		if (controller.isFree(true)
-				&& ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner)) {
+		if (controller.isFree(true) && ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner, Main.window)) {
 			
 			try {
 				

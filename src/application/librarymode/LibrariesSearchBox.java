@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.medialibraries;
+package application.librarymode;
 
 import org.controlsfx.control.textfield.TextFields;
 

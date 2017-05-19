@@ -59,7 +59,6 @@ import xplayer.streamplayer.StreamPlayerListener;
 import xplayer.visualizer.view.VisualizerStackController;
 import xplayer.visualizer.view.VisualizerWindowController;
 import xplayer.visualizer.view.XPlayerVisualizer;
-import xplayer.visualizer.view.VisualizerWindowController.Type;
 
 /**
  * Represents the graphical interface for the deck.
@@ -402,7 +401,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				// Ask Question?
 				if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
 					if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
-							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane))
+							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane,Main.window))
 						playSong(absolutePath);
 				} else
 					playSong(absolutePath);

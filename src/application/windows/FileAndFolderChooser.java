@@ -1,8 +1,9 @@
-package application;
+package application.windows;
 
 import java.io.File;
 import java.util.List;
 
+import application.Main;
 import application.tools.InfoTool;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.DirectoryChooser;

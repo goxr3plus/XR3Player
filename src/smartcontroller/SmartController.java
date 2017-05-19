@@ -472,7 +472,7 @@ public class SmartController extends StackPane {
 		// clearAll
 		clearAll.setOnAction(ac -> {
 			if (ActionTool.doQuestion("You want to remove all the Files from ->" + this
-					+ "\n\nThis of course doesn't mean that they will be deleted from your computer"))
+					+ "\n\nThis of course doesn't mean that they will be deleted from your computer",Main.window))
 				clearDataBaseTable();
 		});
 		
@@ -569,8 +569,8 @@ public class SmartController extends StackPane {
 		// Free? && How many items are selected?+Question
 		if (isFree(true) && tableViewer.getSelectedCount() == 1
 				? ActionTool.doDeleteQuestion(permanent, tableViewer.getSelectionModel().getSelectedItem().getFileName(),
-						tableViewer.getSelectedCount())
-				: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()), tableViewer.getSelectedCount())) {
+						tableViewer.getSelectedCount(),Main.window)
+				: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()), tableViewer.getSelectedCount(),Main.window)) {
 			
 			// Remove selected items
 			if (genre == Genre.SEARCHWINDOW)
