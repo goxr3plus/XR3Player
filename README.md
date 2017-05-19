@@ -12,6 +12,8 @@
 [license-url]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
+### !Announcement! I have created an auto updater for any Java application (including XR3Player of course)
+ Check it :) !-> https://github.com/goxr3plus/JavaFXApplicationAutoUpdater
 
 #### Description:
 XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organizer , aiming to be something more than a Media Player.
@@ -19,10 +21,7 @@ XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organi
    ->Download : https://sourceforge.net/projects/xr3player/
    
    ->Tested : Windows and Linux . I have to check if it also works on Mac etc..
-# Small Video
-[![XR3Player on youtube](http://img.youtube.com/vi/SN-1nvUaykQ/0.jpg)](https://www.youtube.com/watch?v=SN-1nvUaykQ)
-
-
+   
 #### System Requirements:
 
      At least 2 Cores i5 > 2.0 GHZ CPU Intel or AMD 
@@ -37,6 +36,11 @@ Download Java 8 here : Java 1.8.0_111(8 Update 111)++ required . ( https://www.j
 
 How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 
+# Small video from update 62
+[![XR3Player on youtube](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
+
+
+
 -------------------------------------------------------------------------------------
 
 
@@ -48,10 +52,6 @@ How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 
 ## Image from Update 66 Internal WebBrowser
 ![xr3player web browser](https://cloud.githubusercontent.com/assets/20374208/25840212/a69cf222-34a3-11e7-8400-8f5952f630a1.png)
-
-# On youtube 2
-[![XR3Player on youtube](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
-
 
 ------------------------------------------------------------------------------------
 
