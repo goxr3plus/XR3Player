@@ -391,7 +391,7 @@ public class DbManager {
 						
 						//Refresh all the XPlayers PlayLists
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()
-								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().loadService
+								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService()
 										.startService(false, false)));
 						
 						//--FINISH

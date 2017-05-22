@@ -10,13 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
 /**
- * This class is used as the SideBar of the application.
+ * This class is an class FXML Prototype
  *
  * @author GOXR3PLUS
  */
 public class FXMLPrototype extends BorderPane {
 	
-	//-----------------------------------------------------
+	//--------------------------------------------------------------
 	
 	// -------------------------------------------------------------
 	

@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import application.Main;
+import application.presenter.custom.Marquee;
 import application.tools.InfoTool;
-import customnodes.Marquee;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -254,7 +254,7 @@ public class MultipleLibraries extends StackPane {
 	    // Has Files? + isFree()?
 	    if (drop.getDragboard().hasFiles() && getSelectedLibrary().getSmartController().isFree(true)
 		    && drop.getGestureSource() != library.getSmartController().getTableViewer())
-		getSelectedLibrary().getSmartController().inputService.start(drop.getDragboard().getFiles());
+		getSelectedLibrary().getSmartController().getInputService().start(drop.getDragboard().getFiles());
 
 	    drop.setDropCompleted(true);
 	});

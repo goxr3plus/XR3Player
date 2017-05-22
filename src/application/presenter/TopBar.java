@@ -12,10 +12,10 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
+import application.presenter.custom.SystemMonitor;
+import application.presenter.custom.SystemMonitor.Monitor;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
-import customnodes.SystemMonitor;
-import customnodes.SystemMonitor.Monitor;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -308,18 +308,5 @@ public class TopBar extends BorderPane {
 	public void setXr3Label(Label xr3Label) {
 		this.xr3Label = xr3Label;
 	}
-	
-	//    /**
-	//     * Changes the marks of goDJMode,goSimpleMode,goLibraryMode.
-	//     *
-	//     * @param a
-	//     *            the a
-	//     * @param b
-	//     *            the b
-	//     */
-	//    private void changeMarks(boolean a, boolean b) {
-	//	goDJMode.setSelected(a);
-	//	goLibrariesMode.setSelected(b);
-	//    }
 	
 }

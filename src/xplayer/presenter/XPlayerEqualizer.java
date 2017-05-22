@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.presenter.custom.DJFilter;
 import application.tools.InfoTool;
-import customnodes.DJFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package borderless;
+package application.borderless;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;

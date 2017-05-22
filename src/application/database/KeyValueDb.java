@@ -138,7 +138,7 @@ public class KeyValueDb {
 					if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ( (SmartController) newTab.getContent() ).isFree(false)
 							&& ( (SmartController) newTab.getContent() ).getItemsObservableList().isEmpty()) {
 						
-						( (SmartController) newTab.getContent() ).loadService.startService(false, true);
+						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true);
 						
 						updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabPane().getTabs(), false);
 						
@@ -190,7 +190,7 @@ public class KeyValueDb {
 				//Check if empty and if not update the selected library
 				if (!Main.libraryMode.multipleLibs.getTabs().isEmpty()
 						&& Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().isFree(false))
-					Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().loadService.startService(false, true);
+					Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getLoadService().startService(false, true);
 			});
 			
 		} catch (IOException | DeserializationException e) {

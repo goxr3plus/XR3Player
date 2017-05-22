@@ -191,7 +191,7 @@
       <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" visible="false">
          <children>
             <ProgressIndicator fx:id="indicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="617.0" progress="0.0" />
-            <Button fx:id="cancel" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-background-radius: 20; -fx-font-size: 18; -fx-font-weight: bold;" text="Cancel">
+            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-background-radius: 20; -fx-font-size: 18; -fx-font-weight: bold;" text="Cancel">
                <tooltip>
                   <Tooltip text="Cancel" />
                </tooltip>

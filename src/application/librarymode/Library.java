@@ -391,7 +391,7 @@ public class Library extends StackPane {
 		super.setOnDragDropped(drop -> {
 			// Has Files? + isFree()?
 			if (drop.getDragboard().hasFiles() && controller.isFree(true))
-				controller.inputService.start(drop.getDragboard().getFiles());
+				controller.getInputService().start(drop.getDragboard().getFiles());
 			
 			drop.setDropCompleted(true);
 		});

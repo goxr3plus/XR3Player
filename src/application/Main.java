@@ -18,13 +18,16 @@ import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXTabPane;
 
+import application.borderless.BorderlessScene;
 import application.database.DbManager;
 import application.librarymode.LibraryMode;
+import application.presenter.BottomBar;
 import application.presenter.DJMode;
 import application.presenter.MultipleTabs;
 import application.presenter.SideBar;
 import application.presenter.TopBar;
 import application.presenter.UpdateScreen;
+import application.presenter.treeview.TreeViewManager;
 import application.services.MediaFilterService;
 import application.services.VacuumProgressService;
 import application.settings.ApplicationSettingsController;
@@ -44,7 +47,6 @@ import application.windows.RenameWindow;
 import application.windows.SearchWindow;
 import application.windows.StarWindow;
 import application.windows.UpdateWindow;
-import borderless.BorderlessScene;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -62,12 +64,12 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import smartcontroller.MediaContextMenu;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
-import treeview.TreeViewManager;
 import xplayer.presenter.PlayedMediaList;
 import xplayer.presenter.XPlayersList;
 import xplayer.visualizer.view.VisualizerWindowController.Type;
@@ -91,8 +93,8 @@ public class Main extends Application {
 	public static Properties applicationProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 68);
-		applicationProperties.put("ReleasedDate", "19/05/2017");
+		applicationProperties.put("Version", 70);
+		applicationProperties.put("ReleasedDate", "22/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
 		
@@ -145,6 +147,9 @@ public class Main extends Application {
 	
 	/** The Top Bar of the Application */
 	public static final TopBar topBar = new TopBar();
+	
+	/** The Bottom Bar of the Application */
+	public static final BottomBar bottomBar = new BottomBar();
 	
 	/** The Side Bar of The Application */
 	public static final SideBar sideBar = new SideBar();
@@ -309,6 +314,7 @@ public class Main extends Application {
 		root.setVisible(false);
 		topBar.addXR3LabelBinding();
 		root.setTop(topBar);
+		root.setBottom(bottomBar);
 		
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
@@ -352,6 +358,10 @@ public class Main extends Application {
 		
 		//----------Load Application Users-------
 		loadTheUsers();
+		
+		//----------Bottom Bar----------------
+		settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty()
+				.addListener((observable , oldValue , newValue) -> bottomBar.getKeyBindingsLabel().setText(newValue ? "ON" : "OFF"));
 		
 	}
 	
@@ -638,14 +648,13 @@ public class Main extends Application {
 			System.out.println("\n\n-----App Settings--------------\n");
 			
 			Properties settings = dbManager.getPropertiesDb().getProperties();
-			settings.forEach((key , value) -> System.out.println(key + ":" + value));
-			
-			//Example
-			//			Optional.ofNullable(settings.getProperty("")).ifPresent(s -> {
-			//				System.out.println(s);
-			//			});
+			//settings.forEach((key , value) -> System.out.println(key + ":" + value))rV
 			
 			//----------                        --------------------
+			
+			//--KeyBindings-Settings
+			Optional.ofNullable(settings.getProperty("ShortCuts-KeyBindings"))
+					.ifPresent(s -> settingsWindow.getNativeKeyBindings().getKeyBindingsActive().setSelected(Boolean.parseBoolean(s)));
 			
 			//--General-Settings-SideBar
 			Optional.ofNullable(settings.getProperty("General-SideBarSide"))

@@ -14,7 +14,7 @@
 .split-pane .split-pane-divider:hover{	
 	-fx-background-color:firebrick;
 	-fx-border-color:black;
-	-fx-border-width:2.0;
+	-fx-border-width:1.0;
 }
 
 
@@ -1454,6 +1454,20 @@
 
 .title-menu-item:disabled:hover .label {
 	-fx-background-color: transparent;
+}
+
+
+/*******************************************************************************
+
+*                           KeyBindings                            *
+
+******************************************************************************/
+
+
+.shortCutKey{
+	-fx-background-color:#202020;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
 }
 
 

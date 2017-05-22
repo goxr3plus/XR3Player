@@ -1,7 +1,7 @@
 /*
  * 
  */
-package customnodes;
+package application.presenter.custom;
 
 /**
  * The listener interface for receiving DJDisc events.

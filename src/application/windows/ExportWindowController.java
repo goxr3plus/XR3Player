@@ -102,7 +102,7 @@ public class ExportWindowController extends BorderPane {
 
 	okButton.setOnAction(a -> {
 	    if (!exportField1.getText().isEmpty())
-		smartController.copyOrMoveService.startCopy(Arrays.asList(new File(exportField1.getText())));
+		smartController.getCopyOrMoveService().startCopy(Arrays.asList(new File(exportField1.getText())));
 
 	    window.close();
 	});

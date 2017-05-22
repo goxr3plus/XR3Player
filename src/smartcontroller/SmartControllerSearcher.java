@@ -59,7 +59,7 @@ public class SmartControllerSearcher extends HBox {
 	SmartController controller;
 	
 	/** The service. */
-	SearchService service = new SearchService();
+	private SearchService service = new SearchService();
 	
 	boolean saveSettingBeforeSearch = true;
 	
@@ -92,12 +92,12 @@ public class SmartControllerSearcher extends HBox {
 				saveSettingBeforeSearch = true;
 				
 				//Reset the page number to the default before search
-				if (service.getPaneNumberBeforeSearch() <= controller.maximumList())
-					controller.getCurrentPage().set(service.getPaneNumberBeforeSearch());
+				if (service.getPaneNumberBeforeSearch() <= controller.getMaximumList())
+					controller.currentPageProperty().set(service.getPaneNumberBeforeSearch());
 				
 				//continue 
 				controller.getNavigationHBox().setDisable(false);
-				controller.loadService.startService(false, false);
+				controller.getLoadService().startService(false, false);
 				
 			} else if (Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
 				saveSettingsBeforeSearch();
@@ -132,7 +132,7 @@ public class SmartControllerSearcher extends HBox {
 		if (!saveSettingBeforeSearch)
 			return;
 		
-		service.pageBeforeSearch = controller.getCurrentPage().get();
+		service.pageBeforeSearch = controller.currentPageProperty().get();
 		controller.getVerticalScrollBar().ifPresent(scrollBar -> controller.setVerticalScrollValueWithoutSearch(scrollBar.getValue()));
 		saveSettingBeforeSearch = false;
 	}
@@ -148,9 +148,16 @@ public class SmartControllerSearcher extends HBox {
 	}
 	
 	/**
+	 * @return the service
+	 */
+	public SearchService getService() {
+		return service;
+	}
+	
+	/**
 	 * The Class SearchService.
 	 */
-	class SearchService extends Service<Void> {
+	public class SearchService extends Service<Void> {
 		
 		/** The word. */
 		private String word;
@@ -259,8 +266,8 @@ public class SmartControllerSearcher extends HBox {
 						if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
 							queryArray.add(" ) WHERE PATH LIKE '%" + word + "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
 						else
-							queryArray.add(" ) WHERE replace(path, rtrim(path, replace(path,'" + File.separator + "','')),'') LIKE '%" + word
-									+ "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
+							queryArray.add(" ) WHERE replace(path, rtrim(path, replace(path,'" + File.separator + "','')),'') LIKE '%" + word + "%' GROUP BY PATH LIMIT "
+									+ controller.getMaximumPerPage() + " ");
 						
 						query = String.join("", queryArray);
 						//System.out.println(query)
@@ -276,8 +283,8 @@ public class SmartControllerSearcher extends HBox {
 						if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
 							query = query + " WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage();
 						else
-							query = query + " WHERE replace(path, rtrim(path, replace(path, '" + File.separator + "', '')), '') LIKE '%" + word
-									+ "%' LIMIT " + controller.getMaximumPerPage();
+							query = query + " WHERE replace(path, rtrim(path, replace(path, '" + File.separator + "', '')), '') LIKE '%" + word + "%' LIMIT "
+									+ controller.getMaximumPerPage();
 					}
 					
 					//System.out.println(query);
@@ -291,8 +298,8 @@ public class SmartControllerSearcher extends HBox {
 						List<Media> array = new ArrayList<>();
 						for (Audio song = null; resultSet.next();) {
 							//song = new Audio(resultSet.getString("PATH"), 5, 5, "f", "s", controller.genre);
-							song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
-									resultSet.getString("DATE"), resultSet.getString("HOUR"), controller.getGenre());
+							song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
+									resultSet.getString("HOUR"), controller.getGenre());
 							array.add(song);
 							
 							// updateProgress(++counter, controller.getMaximumPerPage());
@@ -383,7 +390,7 @@ public class SmartControllerSearcher extends HBox {
 			popOver.setDetachable(false);
 			popOver.setAutoHide(true);
 			popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-			popOver.setOnHidden(h -> controller.searchService.searchField.textProperty().unbind());
+			popOver.setOnHidden(h -> controller.getSearchService().searchField.textProperty().unbind());
 			
 			// this
 			setOnMouseEntered(m -> requestFocus());
@@ -410,15 +417,15 @@ public class SmartControllerSearcher extends HBox {
 		 *        the controller
 		 */
 		public void show(Node node , SmartController controller) {
-			searchField.editableProperty().bind(controller.searchService.service.runningProperty().not());
+			searchField.editableProperty().bind(controller.getSearchService().getService().runningProperty().not());
 			this.controller = controller;
-			searchField.setText(this.controller.searchService.searchField.getText());
-			this.controller.searchService.searchField.textProperty().bind(searchField.textProperty());
+			searchField.setText(this.controller.getSearchService().searchField.getText());
+			this.controller.getSearchService().searchField.textProperty().bind(searchField.textProperty());
 			
 			// Find the correct arrow location
 			double width = popOver.getWidth();
 			double height = popOver.getHeight();
-			Bounds bounds = controller.searchService.searchField.localToScreen(controller.searchService.searchField.getBoundsInLocal());
+			Bounds bounds = controller.getSearchService().searchField.localToScreen(controller.getSearchService().searchField.getBoundsInLocal());
 			boolean fitOnTop = bounds.getMinY() - height > 0; // top?
 			boolean fitOnLeft = bounds.getMinX() - width > 0; // left?
 			boolean fitOnRight = bounds.getMaxX() + width < InfoTool.getScreenWidth();// right?

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package customnodes;
+package application.presenter.custom;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

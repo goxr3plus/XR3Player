@@ -1,7 +1,7 @@
 /*
  * 
  */
-package borderless;
+package application.borderless;
 
 import java.io.IOException;
 

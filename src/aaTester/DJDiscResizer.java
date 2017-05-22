@@ -1,6 +1,6 @@
 package aaTester;
 
-import customnodes.DJDisc;
+import application.presenter.custom.DJDisc;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 
-<AnchorPane prefHeight="179.0" prefWidth="284.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="borderless.BorderlessController">
+<AnchorPane prefHeight="179.0" prefWidth="284.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.borderless.BorderlessController">
    <children>
       <Region />
       <Pane fx:id="topLeftPane" prefHeight="10.0" prefWidth="10.0" styleClass="topLeftPane" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

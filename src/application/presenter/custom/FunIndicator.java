@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package customnodes;
+package application.presenter.custom;
 
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;

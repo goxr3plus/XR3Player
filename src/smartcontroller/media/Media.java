@@ -547,7 +547,7 @@ public abstract class Media {
 												int i = dataRename.executeUpdate();
 												
 												if (i > 0) //Check 
-													controller1.loadService.startService(false, false, true);
+													controller1.getLoadService().startService(false, false, true);
 												
 											} catch (SQLException ex) {
 												Main.logger.log(Level.WARNING, "", ex);
@@ -569,7 +569,7 @@ public abstract class Media {
 												int i = dataRename.executeUpdate();
 												
 												if (i > 0) //Check 
-													controller1.loadService.startService(false, false, true);
+													controller1.getLoadService().startService(false, false, true);
 												
 											} catch (SQLException ex) {
 												Main.logger.log(Level.WARNING, "", ex);
@@ -662,7 +662,7 @@ public abstract class Media {
 										int i = preparedUStars.executeUpdate();
 										
 										if (i > 0) //Check 
-											controller1.loadService.startService(false, false, true);
+											controller1.getLoadService().startService(false, false, true);
 										
 									} catch (Exception ex) {
 										Main.logger.log(Level.WARNING, "", ex);
@@ -685,7 +685,7 @@ public abstract class Media {
 										int i = preparedUStars.executeUpdate();
 										
 										if (i > 0) //Check 
-											controller1.loadService.startService(false, false, true);
+											controller1.getLoadService().startService(false, false, true);
 										
 									} catch (Exception ex) {
 										Main.logger.log(Level.WARNING, "", ex);

@@ -675,8 +675,8 @@ public final class InfoTool {
 					//		    }
 					
 				} catch (IOException | UnsupportedAudioFileException ex) {
-					System.out.println(file.getAbsolutePath());
-					logger.log(Level.WARNING, ex.getMessage(), ex);
+					System.out.println("Problem getting the time of->" + file.getAbsolutePath());
+					//logger.log(Level.WARNING, ex.getMessage(), ex);
 					
 					//Try with mp3agic
 				}
@@ -688,8 +688,8 @@ public final class InfoTool {
 					AudioFormat format = audioInputStream.getFormat();
 					milliseconds = (int) ( file.length() / ( format.getFrameSize() * (int) format.getFrameRate() ) ) * 1000;
 				} catch (IOException | UnsupportedAudioFileException ex) {
-					System.out.println(file.getAbsolutePath());
-					logger.log(Level.WARNING, ex.getMessage(), ex);
+					System.out.println("Problem getting the time of->" + file.getAbsolutePath());
+					//logger.log(Level.WARNING, ex.getMessage(), ex);
 				}
 			}
 		}

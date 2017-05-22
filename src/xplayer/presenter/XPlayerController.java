@@ -14,13 +14,13 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import application.presenter.custom.DJDisc;
+import application.presenter.custom.DJDiscListener;
+import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
 import application.windows.XPlayerWindow;
-import customnodes.DJDisc;
-import customnodes.DJDiscListener;
-import customnodes.Marquee;
 import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;

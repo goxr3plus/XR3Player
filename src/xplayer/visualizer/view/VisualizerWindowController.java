@@ -3,17 +3,14 @@
  */
 package xplayer.visualizer.view;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import application.Main;
-import application.tools.ActionTool;
+import application.borderless.BorderlessScene;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
-import application.tools.NotificationType;
-import borderless.BorderlessScene;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -32,11 +29,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaView;
@@ -323,7 +315,7 @@ public class VisualizerWindowController extends StackPane {
 		//Check if it returns null
 		Image image = JavaFXTools.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
 		
-		System.out.println("image is null?" + type + " .... " + ( image == null ));
+		//System.out.println("image is null?" + type + " .... " + ( image == null ))
 		
 		//Replace the Image
 		if (type == Type.BACKGROUND)

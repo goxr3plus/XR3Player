@@ -1,7 +1,7 @@
 /*
  * 
  */
-package borderless;
+package application.borderless;
 
 /**
  * This class represents a point with x and y values.

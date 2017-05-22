@@ -13,11 +13,11 @@
 
 <fx:root prefHeight="462.0" prefWidth="530.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label fx:id="topLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 19;" text="XR3Player " BorderPane.alignment="CENTER">
+      <Label fx:id="topLabel" alignment="CENTER" graphicTextGap="10.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 19;" text="XR3Player " BorderPane.alignment="CENTER">
          <graphic>
-            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/logo.png" />
+                  <Image url="@../image/icon.png" />
                </image>
             </ImageView>
          </graphic>

@@ -16,8 +16,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
+import application.presenter.custom.Marquee;
 import application.tools.InfoTool;
-import customnodes.Marquee;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ListChangeListener.Change;

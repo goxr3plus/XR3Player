@@ -1,7 +1,7 @@
 /*
  * 
  */
-package customnodes;
+package application.presenter.custom;
 
 import java.awt.Robot;
 import java.util.logging.Level;
