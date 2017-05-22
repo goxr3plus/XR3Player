@@ -32,7 +32,7 @@ import smartcontroller.SmartController;
  *
  */
 @Deprecated
-public class KeyValueDb {
+public class JSONDB {
 	
 	/** This executor does the commit job. */
 	private static final ExecutorService jSONUpdateExecutor = Executors.newSingleThreadExecutor();
@@ -44,7 +44,7 @@ public class KeyValueDb {
 	 * 
 	 * @param localDBManager
 	 */
-	public KeyValueDb(DbManager localDBManager) {
+	public JSONDB(DbManager localDBManager) {
 		this.localDBManager = localDBManager;
 	}
 	
@@ -82,7 +82,7 @@ public class KeyValueDb {
 		
 		json.put("librariesSystem", librariesSystem);
 		
-		//Write to File
+		//Write to File	
 		try (FileWriter file = new FileWriter(jsonFilePath)) {
 			file.write(Jsoner.prettyPrint(json.toJson()));
 			file.flush();

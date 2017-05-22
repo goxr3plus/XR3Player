@@ -51,7 +51,7 @@ public class DbManager {
 	/**
 	 * The KeyValueDb
 	 */
-	private KeyValueDb keyValueDb = new KeyValueDb(this);
+	private JSONDB keyValueDb = new JSONDB(this);
 	
 	/**
 	 * The PropertiesDb
@@ -155,7 +155,7 @@ public class DbManager {
 	/**
 	 * @return the keyValueDb
 	 */
-	public KeyValueDb getKeyValueDb() {
+	public JSONDB getKeyValueDb() {
 		return keyValueDb;
 	}
 	

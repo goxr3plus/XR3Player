@@ -17,9 +17,9 @@
             <Label fx:id="userNameLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: black;" styleClass="settingsLabel" text="User-Name-Right-Here" textFill="#ff5454" BorderPane.alignment="CENTER" />
          </center>
          <right>
-            <ImageView fx:id="userImageView" fitHeight="101.0" fitWidth="227.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="userImageView" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../image/goXR3PlusStudio.png" />
+                  <Image url="@../image/smallLogo.jpg" />
                </image>
                <BorderPane.margin>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

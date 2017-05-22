@@ -64,7 +64,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -283,6 +282,7 @@ public class Main extends Application {
 		
 		//Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
+		
 		
 		//------------------Experiments------------------
 		// ScenicView.show(scene)
@@ -711,14 +711,23 @@ public class Main extends Application {
 			
 			//----Determine the Visualizer Images
 			Main.xPlayersList.getList().forEach(xPlayerController -> {
+				
 				//Determine the images before the application starts
 				xPlayerController.getVisualizerWindow().determineImage(Type.BACKGROUND);
 				xPlayerController.getVisualizerWindow().determineImage(Type.FOREGROUND);
+				
+				//Determine the visualizer display mode
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-DisplayMode"))
+						.ifPresent(s -> xPlayerController.getVisualizer().displayMode.set(Integer.valueOf(s)));
+				
 			});
 			//----------                        --------------------
 			
 			//Finish
 			System.out.println("\n-----App Settings Finish--------------\n\n");
+			
+			//Re-enable Properties Updating
+			dbManager.getPropertiesDb().setUpdatePropertiesLocked(false);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

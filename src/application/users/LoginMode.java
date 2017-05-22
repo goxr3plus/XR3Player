@@ -3,14 +3,21 @@
  */
 package application.users;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.commons.io.IOUtils;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
@@ -55,9 +62,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 /**
@@ -129,7 +136,13 @@ public class LoginMode extends BorderPane {
 	private Hyperlink youtubeTutorialsHyperLink;
 	
 	@FXML
-	private Label downloadsLabel;
+	private VBox downloadsVBox;
+	
+	@FXML
+	private Label sourceForgeDownloadsLabel;
+	
+	@FXML
+	private Label gitHubDownloadsLabel;
 	
 	@FXML
 	private Button restartButton;
@@ -272,18 +285,43 @@ public class LoginMode extends BorderPane {
 		//	    httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
 		//	    ImageView imageView = new ImageView(new Image(httpcon.getInputStream()));
 		
-		//downloadsLabel
-		( (WebView) downloadsLabel.getGraphic() ).getEngine().getLoadWorker().exceptionProperty().addListener(error -> {
-			downloadsLabel.setPrefSize(0, 0);
-			downloadsLabel.setMaxSize(0, 0);
-			downloadsLabel.setMinSize(0, 0);
-			( (WebView) downloadsLabel.getGraphic() ).setPrefHeight(0);
-		});
-		( (WebView) downloadsLabel.getGraphic() ).getEngine().load("https://img.shields.io/sourceforge/dt/xr3player.svg");
+		//----sourceForgeDownloadsLabel
+		new Thread(() -> {
+			try {
+				
+				//----sourceForgeDownloadsLabel
+				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
+				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				
+				//Read line by line
+				String line = "" , inputLine;
+				while ( ( inputLine = in.readLine() ) != null)
+					line += "\n" + inputLine;
+				in.close();
+				
+				String text = "Sourceforge: [ " + line.split("<text x=\"98.5\" y=\"14\">")[1].split("/total")[0] + " ]";
+				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
+				
+				//---gitHubDownloadsLabel					
+				String text2 = "GitHub: [ "
+						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
+								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
+						+ " ]";
+				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
+				
+				//throw new IOException("Exception get out of the building!!!")
+			} catch (IOException e) {
+				e.printStackTrace();
+				Platform.runLater(() -> {
+					downloadsVBox.setManaged(false);
+					downloadsVBox.setVisible(false);
+				});
+				
+			}
+		}).start();
 		
-		//super
-		//setStyle(
-		//	"-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+		//	setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 		
 		// -- libraryToolBar
 		userToolBar.disableProperty().bind(teamViewer.centerItemProperty().isNull());

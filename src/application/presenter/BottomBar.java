@@ -53,7 +53,7 @@ public class BottomBar extends HBox {
 	 */
 	private Thread timeThread;
 	
-	private int minutes=-1;
+	private int minutes = -1;
 	
 	/**
 	 * Constructor.
@@ -131,8 +131,8 @@ public class BottomBar extends HBox {
 				
 				Platform.runLater(() -> {
 					LocalTime l = LocalTime.now();
-					currentTimeLabel.setText(l.toString().substring(0,5));
-					runningTimeLabel.setText(++minutes + ( minutes > 1 ? " minutes" : " minute" ));
+					currentTimeLabel.setText(l.toString().substring(0, 5));
+					runningTimeLabel.setText(++minutes + ( minutes ==1 ? " minute" : " minutes" ));
 				});
 				
 				//Sleep sometime [ Don't lag the CPU]

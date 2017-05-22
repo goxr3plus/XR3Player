@@ -128,27 +128,55 @@
                               </StackPane>
                               <VBox fx:id="topRightVBox" alignment="CENTER" spacing="3.0" GridPane.columnIndex="1">
                                  <children>
-                                    <JFXButton fx:id="openPlayerHistory" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-size: 11; -fx-border-color: firebrick; -fx-border-radius: 15; -fx-border-width: 2;" styleClass="arrowButton2" text="Player History">
-                                       <tooltip>
-                                          <Tooltip text="See history of songs that have been played from this player" />
-                                       </tooltip>
-                                    </JFXButton>
-                                    <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
-                                       <children>
-                                          <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" visible="false" StackPane.alignment="CENTER_RIGHT">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                       </children>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </StackPane>
-                                    <StackPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="54.0" VBox.vgrow="ALWAYS">
+                                    <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <ToolBar maxWidth="1.7976931348623157E308" minWidth="5.0" orientation="VERTICAL" StackPane.alignment="CENTER">
                                              <items>
+                                                <JFXButton fx:id="openPlayerHistory" focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-size: 11; -fx-border-color: firebrick; -fx-border-radius: 15; -fx-border-width: 2;" styleClass="arrowButton2" text="Player History">
+                                                   <tooltip>
+                                                      <Tooltip text="See history of songs that have been played from this player" />
+                                                   </tooltip>
+                                                </JFXButton>
+                                                <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
+                                                   <children>
+                                                      <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" visible="false" StackPane.alignment="CENTER_RIGHT">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </StackPane>
+                                                <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="3.0">
+                                                   <children>
+                                                      <Button fx:id="openFileButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Open" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <tooltip>
+                                                            <Tooltip text="Choose a File to be opened" />
+                                                         </tooltip>
+                                                      </Button>
+                                                      <Button fx:id="transferAudioButton" alignment="CENTER" disable="true" layoutX="11.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Transfer" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <tooltip>
+                                                            <Tooltip text="Choose a File to be opened" />
+                                                         </tooltip>
+                                                      </Button>
+                                                      <Button fx:id="extendPlayer" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 11;" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <tooltip>
+                                                            <Tooltip text="Open Player to external Window" />
+                                                         </tooltip>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
                                                 <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                                    <children>
                                                       <Button fx:id="backwardButton" minWidth="15.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" style="-fx-font-size: 11;" styleClass="first" text="10">
@@ -184,34 +212,6 @@
                                           <Insets />
                                        </VBox.margin>
                                     </StackPane>
-                                    <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="3.0">
-                                       <children>
-                                          <Button fx:id="openFileButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Open" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <tooltip>
-                                                <Tooltip text="Choose a File to be opened" />
-                                             </tooltip>
-                                          </Button>
-                                          <Button fx:id="transferAudioButton" alignment="CENTER" disable="true" layoutX="11.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Transfer" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <tooltip>
-                                                <Tooltip text="Choose a File to be opened" />
-                                             </tooltip>
-                                          </Button>
-                                          <Button fx:id="extendPlayer" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 11;" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <tooltip>
-                                                <Tooltip text="Open Player to external Window" />
-                                             </tooltip>
-                                          </Button>
-                                       </children>
-                                    </HBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="2.0" />

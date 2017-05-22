@@ -10,9 +10,9 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <TabPane style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab fx:id="playListTab" closable="false" text="PlayList">
+                  <Tab fx:id="historyPlaylistTab" closable="false" text="History Playlist">
                      <content>
                         <ScrollPane />
                      </content>

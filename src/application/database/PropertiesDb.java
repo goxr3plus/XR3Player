@@ -32,23 +32,33 @@ public class PropertiesDb {
 	private static final ExecutorService updateExecutorService = Executors.newSingleThreadExecutor();
 	
 	/**
+	 * Using this variable when i when to prevent update of properties happen
+	 */
+	private boolean updatePropertiesLocked = true;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param localDbManager
 	 */
 	public PropertiesDb() {
 		properties = new Properties();
-		
 	}
 	
 	/**
-	 * Updates or Creates the given key
+	 * Updates or Creates the given key , warning also updateProperty can be
+	 * locked , if you want to unlock it or check if locked
+	 * check the method is `isUpdatePropertyLocked()`
 	 * 
 	 * @param key
 	 * @param value
 	 */
 	public void updateProperty(String key , String value) {
+		if (updatePropertiesLocked)
+			return;
+		
 		String propertiesAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + "config.properties";
+		System.out.println("Updating Property!");
 		
 		//Check if exists [ Create if Not ] 
 		if (!new File(propertiesAbsolutePath).exists())
@@ -60,8 +70,7 @@ public class PropertiesDb {
 		
 		//Submit it to the executors Service
 		updateExecutorService.submit(() -> {
-			try (InputStream inStream = new FileInputStream(propertiesAbsolutePath);
-					OutputStream outStream = new FileOutputStream(propertiesAbsolutePath)) {
+			try (InputStream inStream = new FileInputStream(propertiesAbsolutePath); OutputStream outStream = new FileOutputStream(propertiesAbsolutePath)) {
 				
 				//load  properties
 				properties.load(inStream);
@@ -74,9 +83,6 @@ public class PropertiesDb {
 				
 			} catch (IOException ex) {
 				ex.printStackTrace();
-			} finally {
-				//  if (showNotifications)
-				//ActionTool.showNotification("Properties Updated", "Changes saved successfully", Duration.millis(550), NotificationType.INFORMATION);
 			}
 		});
 	}
@@ -84,7 +90,7 @@ public class PropertiesDb {
 	/**
 	 * Loads the Properties
 	 */
-	public void loadProperties() {
+	void loadProperties() {
 		String propertiesAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + "config.properties";
 		
 		//Check if exists [ Create if Not ] 
@@ -112,6 +118,24 @@ public class PropertiesDb {
 	 */
 	public Properties getProperties() {
 		return properties;
+	}
+	
+	/**
+	 * Check if properties update is locked
+	 * 
+	 * @return the canUpdateProperty
+	 */
+	public boolean isUpdatePropertiesLocked() {
+		return updatePropertiesLocked;
+	}
+	
+	/**
+	 * Lock or unlock the update of properties
+	 * 
+	 * @param canUpdateProperty the canUpdateProperty to set
+	 */
+	public void setUpdatePropertiesLocked(boolean updatePropertiesLocked) {
+		this.updatePropertiesLocked = updatePropertiesLocked;
 	}
 	
 }

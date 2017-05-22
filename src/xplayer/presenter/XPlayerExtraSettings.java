@@ -11,6 +11,7 @@ import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
@@ -24,10 +25,13 @@ public class XPlayerExtraSettings extends BorderPane {
 	// ------------------------
 	
 	@FXML
-	private Tab equalizerTab;
+	private TabPane tabPane;
 	
 	@FXML
-	private Tab playListTab;
+	private Tab historyPlaylistTab;
+	
+	@FXML
+	private Tab equalizerTab;
 	
 	// ------------------------
 	
@@ -59,7 +63,7 @@ public class XPlayerExtraSettings extends BorderPane {
 	
 	/**
 	 * As soon as fxml has been loaded then this method will be called
-	 * 1)-constructor,2)-FXMLLOADER,3)-initialize();
+	 * 1)-constructor,2)-FXMLLOADER,3)-initialise();
 	 */
 	@FXML
 	private void initialize() {
@@ -76,7 +80,7 @@ public class XPlayerExtraSettings extends BorderPane {
 		});
 		
 		// ----PlayListTab
-		playListTab.setContent(xPlayerUI.getxPlayerPlayList());
+		historyPlaylistTab.setContent(xPlayerUI.getxPlayerPlayList());
 		
 	}
 	
@@ -85,6 +89,20 @@ public class XPlayerExtraSettings extends BorderPane {
 	 */
 	public Tab getEqualizerTab() {
 		return equalizerTab;
+	}
+	
+	/**
+	 * @return the historyPlaylistTab
+	 */
+	public Tab getHistoryPlaylistTab() {
+		return historyPlaylistTab;
+	}
+	
+	/**
+	 * @return the tabPane
+	 */
+	public TabPane getTabPane() {
+		return tabPane;
 	}
 	
 }

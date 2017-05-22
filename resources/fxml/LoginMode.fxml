@@ -26,7 +26,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.WebView?>
 
 <fx:root prefHeight="672.0" prefWidth="857.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -250,17 +249,34 @@
                   </Hyperlink>
                </graphic>
             </Label>
-            <Label fx:id="downloadsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <graphic>
-                  <WebView mouseTransparent="true" prefHeight="20.0" prefWidth="130.0" />
-               </graphic>
-               <padding>
-                  <Insets left="4.0" right="4.0" />
-               </padding>
-            </Label>
+            <VBox fx:id="downloadsVBox" prefHeight="200.0" prefWidth="100.0" style="-fx-font-size: 9;">
+               <children>
+                  <Label fx:id="sourceForgeDownloadsLabel1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sourceForgeDownloadsLabel" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Sourceforge :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="gitHubDownloadsLabel" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="GitHub :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
          </children>
          <BorderPane.margin>
             <Insets top="2.0" />

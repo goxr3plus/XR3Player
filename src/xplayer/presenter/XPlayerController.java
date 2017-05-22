@@ -19,6 +19,7 @@ import application.presenter.custom.DJDiscListener;
 import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
+import application.tools.JavaFXTools;
 import application.tools.NotificationType;
 import application.windows.XPlayerWindow;
 import eu.hansolo.enzo.flippanel.FlipPanel;
@@ -286,7 +287,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		xPlayerWindow = new XPlayerWindow(this);
 		radialMenu = new XPlayerRadialMenu(this);
 		xPlayerPlayList = new XPlayerPlaylist(this);
-		//xPlayList = new XPlayerPlaylist(25, this)
 		visualizerWindow = new VisualizerWindowController(this);
 		playerExtraSettings = new XPlayerExtraSettings(this);
 		
@@ -362,6 +362,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				xPlayerWindow.show();
 		});
 		
+		//----openPlayerHistory
+		openPlayerHistory.setOnAction(a -> {
+			playerExtraSettings.getTabPane().getSelectionModel().select(playerExtraSettings.getHistoryPlaylistTab());
+			settingsToggle.setSelected(true);
+		});
+		
 	}
 	
 	/**
@@ -401,7 +407,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				// Ask Question?
 				if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
 					if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
-							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane,Main.window))
+							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
 						playSong(absolutePath);
 				} else
 					playSong(absolutePath);
@@ -599,21 +605,25 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// Visualizer
 		visualizer = new XPlayerVisualizer(this);
-		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());	
+		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
 		
 		// Select the correct toggle
 		visualizerWindow.getVisualizerTypeGroup().selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(visualizer.displayMode.get()));
 		
 		// When displayMode is being updated
 		visualizer.displayMode.addListener((observable , oldValue , newValue) -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Visualizer-DisplayMode", Integer.toString(newValue.intValue()));
+			
+			//----------
 			visualizerWindow.getVisualizerTypeGroup().selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(newValue.intValue()));
 			visualizerStackController.replayLabelEffect( ( (RadioMenuItem) visualizerWindow.getVisualizerTypeGroup().getSelectedToggle() ).getText());
 		});
 		
 		// -----------visualizerTypeGroup
-		visualizerWindow.getVisualizerTypeGroup().getToggles().forEach(toggle -> {
-			( (RadioMenuItem) toggle ).setOnAction(a -> visualizer.displayMode.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle)));
-		});
+		visualizerWindow.getVisualizerTypeGroup().getToggles()
+				.forEach(toggle -> ( (RadioMenuItem) toggle ).setOnAction(a -> visualizer.displayMode.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle))));
 		
 		// VisualizerStackController
 		visualizerStackController.getChildren().add(0, visualizer);
@@ -630,12 +640,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// visualizerVisible
 		visualizerVisible.visibleProperty().bind(maximizeVisualizer.visibleProperty());
-		visualizerVisible.selectedProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue) // true?
-				visualizerVisible.setGraphic(eye);
-			else
-				visualizerVisible.setGraphic(eyeDisabled);
-		});
+		visualizerVisible.selectedProperty().addListener((observable , oldValue , newValue) -> visualizerVisible.setGraphic(newValue ? eye : eyeDisabled));
 		
 		// visualizerVisibleLabel
 		visualizerVisibleLabel.visibleProperty().bind(visualizerVisible.selectedProperty().not());
@@ -979,6 +984,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	public void playSong(String absolutePath) {
 		
 		playService.startPlayService(absolutePath);
+		
 	}
 	
 	//---------------------------------------------------Player Actions------------------------------------------------------------------

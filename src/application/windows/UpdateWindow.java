@@ -60,6 +60,9 @@ public class UpdateWindow extends StackPane {
 	private Button download;
 	
 	@FXML
+	private Button gitHubButton;
+	
+	@FXML
 	private Button automaticUpdate;
 	
 	@FXML
@@ -137,6 +140,9 @@ public class UpdateWindow extends StackPane {
 		
 		// -- download
 		download.setOnAction(a -> ActionTool.openWebSite("https://sourceforge.net/projects/xr3player/"));
+		
+		// -- GitHub
+		gitHubButton.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player"));
 		
 		// -- closeWindow
 		closeWindow.setOnAction(a -> window.close());

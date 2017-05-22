@@ -32,8 +32,20 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
                </BorderPane.margin>
                <children>
-                  <Label fx:id="updatesInformationLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #4FFF49;" styleClass="settingsLabel" text="Updates Information" />
-                  <Label fx:id="comingSoonLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="On the coming updates" GridPane.columnIndex="1" />
+                  <Label fx:id="updatesInformationLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #4FFF49; -fx-border-color: transparent;" styleClass="settingsLabel" text="Updates Information">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding></Label>
+                  <Label fx:id="comingSoonLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="settingsLabel" text="On the coming updates" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding></Label>
                </children>
             </GridPane>
          </center>
@@ -45,7 +57,7 @@
             </VBox>
          </top>
          <bottom>
-            <StackPane BorderPane.alignment="CENTER">
+            <StackPane style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="download" mnemonicParsing="false" text="Manual Download" StackPane.alignment="CENTER_RIGHT">
                      <tooltip>
@@ -54,6 +66,21 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                  </Button>
+                  <Button fx:id="gitHubButton" layoutX="961.0" layoutY="24.0" mnemonicParsing="false" text="GitHub " StackPane.alignment="CENTER_LEFT">
+                     <tooltip>
+                        <Tooltip text="Download the latest version" />
+                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/GitHub-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <HBox alignment="CENTER" pickOnBounds="false" spacing="5.0">
                      <children>
@@ -87,7 +114,7 @@
                   </HBox>
                </children>
                <BorderPane.margin>
-                  <Insets right="5.0" />
+                  <Insets left="3.0" right="3.0" top="5.0" />
                </BorderPane.margin>
             </StackPane>
          </bottom>

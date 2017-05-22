@@ -3,6 +3,7 @@ package xplayer.services;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 import application.Main;
@@ -125,8 +126,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 							checkAudioType(xPlayerController.getxPlayerModel().songPathProperty().get())));
 					
 					// extension
-					xPlayerController.getxPlayerModel().songExtensionProperty()
-							.set(InfoTool.getFileExtension(xPlayerController.getxPlayerModel().songPathProperty().get()));
+					xPlayerController.getxPlayerModel().songExtensionProperty().set(InfoTool.getFileExtension(xPlayerController.getxPlayerModel().songPathProperty().get()));
 					
 					// ----------------------- Load the Album Image
 					image = InfoTool.getMp3AlbumImage(xPlayerController.getxPlayerModel().songPathProperty().get(), -1, -1);
@@ -149,10 +149,9 @@ public class XPlayerPlayService extends Service<Boolean> {
 					// ....well let's go
 				} catch (Exception ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
-					Platform.runLater(() -> ActionTool.showNotification("ERROR",
-							"Can't play \n[" + InfoTool.getMinString(xPlayerController.getxPlayerModel().songPathProperty().get(), 30) + "]\n"
-									+ "It is corrupted or maybe unsupported",
-							Duration.millis(1500), NotificationType.ERROR));
+					Platform.runLater(
+							() -> ActionTool.showNotification("ERROR", "Can't play \n[" + InfoTool.getMinString(xPlayerController.getxPlayerModel().songPathProperty().get(), 30)
+									+ "]\n" + "It is corrupted or maybe unsupported", Duration.millis(1500), NotificationType.ERROR));
 					return false;
 				} finally {
 					
@@ -208,7 +207,9 @@ public class XPlayerPlayService extends Service<Boolean> {
 		xPlayerController.getDisc().replaceImage(image);
 		
 		// add to played songs...
-		Main.playedSongs.add(xPlayerController.getxPlayerModel().songPathProperty().get());
+		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
+		Main.playedSongs.add(absolutePath);
+		xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath)));
 		
 		done();
 	}
