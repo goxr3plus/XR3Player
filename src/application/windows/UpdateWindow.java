@@ -81,6 +81,8 @@ public class UpdateWindow extends StackPane {
 	private final VirtualizedScrollPane<InlineCssTextArea> vsPane1 = new VirtualizedScrollPane<>(textArea1);
 	private final VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(textArea2);
 	
+	private int update;
+	
 	/**
 	 * The Thread which is responsible for the update check
 	 */
@@ -136,7 +138,7 @@ public class UpdateWindow extends StackPane {
 		centerGridPane.addRow(1, vsPane1, vsPane2);
 		
 		// -- automaticUpdate
-		automaticUpdate.setOnAction(a -> startXR3PlayerUpdater());
+		automaticUpdate.setOnAction(a -> startXR3PlayerUpdater(update));
 		
 		// -- download
 		download.setOnAction(a -> ActionTool.openWebSite("https://sourceforge.net/projects/xr3player/"));
@@ -286,6 +288,7 @@ public class UpdateWindow extends StackPane {
 			if (showTheWindow || Integer.valueOf(lastArticle.id()) > currentVersion) {
 				download.setDisable(Integer.valueOf(lastArticle.id()) <= currentVersion);
 				automaticUpdate.setDisable(download.isDisable());
+				update = Integer.valueOf(lastArticle.id());
 				show();
 			}
 			
@@ -299,7 +302,7 @@ public class UpdateWindow extends StackPane {
 	 * Calling this method to start the main Application which is XR3Player
 	 * 
 	 */
-	public void startXR3PlayerUpdater() {
+	public void startXR3PlayerUpdater(int update) {
 		String applicationName = "XR3PlayerUpdater";
 		
 		// Start XR3Player Updater
@@ -330,7 +333,7 @@ public class UpdateWindow extends StackPane {
 				System.out.println(applicationName + " Path is : " + applicationPath[0]);
 				
 				//Create a process builder
-				ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0], "45");
+				ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0], String.valueOf(update));
 				builder.redirectErrorStream(true);
 				Process process = builder.start();
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));

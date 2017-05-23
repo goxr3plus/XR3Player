@@ -15,7 +15,7 @@ import xplayer.visualizer.model.Sprite3D.Shape3D;
 public class VisualizerDrawer extends VisualizerModel {
 	
 	private final Oscilloscope oscilloscope = new Oscilloscope(this);
-	Polyspiral polySpiral = new Polyspiral(this);
+	private Polyspiral polySpiral = new Polyspiral(this);
 	protected final Sierpinski sierpinski = new Sierpinski(this);
 	private final JuliaSet juliaSet = new JuliaSet(this);
 	private Sprite3D sprite3D = new Sprite3D(this, Shape3D.SPHERE);
@@ -25,7 +25,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	//-----
 	
 	/** The DEFAULT_BACKGROUND_IMAGE */
-	public static final Image DEFAULT_BACKGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("background.gif"));
+	public static final Image DEFAULT_BACKGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("background.jpg"));
 	/** The DEFAULT_FOREGROUND_IMAGE */
 	public static final Image DEFAULT_FOREGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("foreground.png"));
 	

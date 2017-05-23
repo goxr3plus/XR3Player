@@ -93,7 +93,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		applicationProperties.put("Version", 70);
-		applicationProperties.put("ReleasedDate", "22/05/2017");
+		applicationProperties.put("ReleasedDate", "28/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
 		
@@ -282,7 +282,6 @@ public class Main extends Application {
 		
 		//Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
-		
 		
 		//------------------Experiments------------------
 		// ScenicView.show(scene)
