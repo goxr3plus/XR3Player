@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.users;
+package application.loginmode;
 
 import java.io.IOException;
 import java.util.logging.Level;

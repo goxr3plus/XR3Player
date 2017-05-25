@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.users;
+package application.loginmode;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,10 +94,16 @@ public class User extends StackPane {
 						File outputFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName);
 						
 						//Check if the Folder can be renamed
-						if (originalFolder.renameTo(outputFolder)) { //Success
+						if (originalFolder.renameTo(outputFolder)) { //Success			
 							success = true;
 							setUserName(nameField.getText());
 							nameField.getTooltip().setText(getUserName());
+							
+							//Change Pie Data Name
+							Main.loginMode.getLibrariesPieChartData().forEach(pieData -> {
+								if (pieData.getName().equals(InfoTool.getMinString(oldName, 4)))
+									pieData.setName(InfoTool.getMinString(newName, 4));
+							});
 						} else
 							ActionTool.showNotification("Error", "An error occured trying to rename the user", Duration.seconds(2), NotificationType.ERROR);
 						

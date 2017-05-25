@@ -5,6 +5,22 @@ import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
+import com.jfoenix.controls.JFXToggleButton;
+
 import application.Main;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.InfoTool;
@@ -25,6 +41,9 @@ import javafx.scene.paint.Color;
 public class BottomBar extends HBox {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private JFXToggleButton showHideSideBar;
 	
 	@FXML
 	private Label internetConnectionLabel;
@@ -132,7 +151,7 @@ public class BottomBar extends HBox {
 				Platform.runLater(() -> {
 					LocalTime l = LocalTime.now();
 					currentTimeLabel.setText(l.toString().substring(0, 5));
-					runningTimeLabel.setText(++minutes + ( minutes ==1 ? " minute" : " minutes" ));
+					runningTimeLabel.setText(++minutes + ( minutes == 1 ? " minute" : " minutes" ));
 				});
 				
 				//Sleep sometime [ Don't lag the CPU]
@@ -162,6 +181,11 @@ public class BottomBar extends HBox {
 		//Start the Threads
 		startInternetCheckingThread();
 		startTimingThread();
+		
+		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> {
+			Main.sideBar.toogleBar();
+			showHideSideBar.setText(( newValue ? "Show" : "Hide" ) + " Side Bar");
+		});
 	}
 	
 	/**

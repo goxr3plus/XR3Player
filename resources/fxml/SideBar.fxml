@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" minHeight="0.0" style="-fx-border-color: transparent firebrick transparent transparent;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: transparent firebrick transparent transparent;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>

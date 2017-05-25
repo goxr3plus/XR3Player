@@ -14,7 +14,7 @@ import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import javafx.animation.Animation;
-import javafx.animation.TranslateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
@@ -77,9 +77,6 @@ public class SideBar extends BorderPane {
 	
 	// -------------------------------------------------------------
 	
-	/** Translate Transition used to show/hide the bar. */
-	private TranslateTransition tTrans;
-	
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
@@ -110,49 +107,80 @@ public class SideBar extends BorderPane {
 		
 	}
 	
-	//	/**
-	//	 * Gets the speech toggle button.
-	//	 *
-	//	 * @return the speech toggle button
-	//	 */
-	//	public JFXToggleButton getSpeechToggleButton() {
-	//		return speechToggle;
-	//	}
-	//	
-	//	/**
-	//	 * Gets the speech progress indicator.
-	//	 *
-	//	 * @return the speech progress indicator
-	//	 */
-	//	public ProgressIndicator getSpeechProgressIndicator() {
-	//		return speechProgressIndicator;
-	//	}
+	//private TranslateTransition translateX = new TranslateTransition(Duration.millis(200), this)
+	private ScaleTransition scaleX = new ScaleTransition(Duration.millis(100), this);
+	private double preferredWidth;
 	
 	/**
 	 * Shows the Bar.
 	 */
 	public void showBar() {
-		if (tTrans.getStatus() != Animation.Status.RUNNING && this.getTranslateX() == -this.getPrefWidth()) {
-			tTrans.setRate(1);
-			tTrans.playFromStart();
-		}
+		if (scaleX.getStatus() == Animation.Status.RUNNING)
+			return;
+		
+		//System.out.println("Entered Show Bar");
+		
+		//		//Check the orientation
+		//		NodeOrientation orientation = this.getNodeOrientation();
+		//		if (orientation == NodeOrientation.LEFT_TO_RIGHT) {
+		//			System.out.println("Width : " + getWidth());
+		//			translateX.setFromX(-getWidth());
+		//			translateX.setToX(0);
+		//		} else if (orientation == NodeOrientation.RIGHT_TO_LEFT) {
+		//			translateX.setFromX(getWidth());
+		//			translateX.setToX(0);
+		//		}
+		
+		scaleX.setFromX(0.0);
+		scaleX.setToX(1.0);
+		
+		scaleX.playFromStart();
+		scaleX.setOnFinished(f -> {
+			setMinWidth(preferredWidth);
+			setPrefWidth(preferredWidth);
+		});
 	}
 	
 	/**
 	 * Hides the Bar.
 	 */
 	public void hideBar() {
-		if (tTrans.getStatus() != Animation.Status.RUNNING && this.getTranslateX() == 0) {
-			tTrans.setRate(-1);
-			tTrans.playFrom(tTrans.getTotalDuration());
-		}
+		if (scaleX.getStatus() == Animation.Status.RUNNING)
+			return;
+		
+		//Remember the width of the node
+		if (preferredWidth == 0)
+			preferredWidth = getWidth();
+		
+		//System.out.println("Entered Hide Bar");
+		
+		//		//Check the orientation
+		//		NodeOrientation orientation = this.getNodeOrientation();
+		//		System.out.println(orientation);
+		//		if (orientation == NodeOrientation.LEFT_TO_RIGHT) {
+		//			System.out.println("Width : " + getWidth());
+		//			translateX.setFromX(0);
+		//			translateX.setToX(-getWidth());
+		//		} else if (orientation == NodeOrientation.RIGHT_TO_LEFT) {
+		//			translateX.setFromX(0);
+		//			translateX.setToX(getWidth());
+		//		}
+		
+		scaleX.setFromX(1.0);
+		scaleX.setToX(0.0);
+		
+		scaleX.playFromStart();
+		scaleX.setOnFinished(f -> {
+			setMinWidth(0);
+			setPrefWidth(0);
+		});
 	}
 	
 	/**
 	 * Shows/Hides Side Bar
 	 */
 	public void toogleBar() {
-		if (this.getTranslateX() == -this.getPrefWidth())
+		if (this.getScaleX() == 0.0)
 			showBar();
 		else
 			hideBar();
@@ -178,24 +206,6 @@ public class SideBar extends BorderPane {
 	}
 	
 	String style = "-fx-background-radius: 15 0 0 15; -fx-background-color:black; -fx-border-width:0 4 0 0;";
-	
-	//    /**
-	//     * Goes to MainMode
-	//     */
-	//    public void goMainMode() {
-	//	Main.rootFlipPane.flipToFront();
-	//	goMainMode.setStyle("-fx-border-color:firebrick; " + style);
-	//	goUserMode.setStyle("-fx-border-color:transparent; " + style);
-	//    }
-	//
-	//    /**
-	//     * Goes to UserMode
-	//     */
-	//    public void goUserMode() {
-	//	Main.rootFlipPane.flipToBack();
-	//	goMainMode.setStyle("-fx-border-color:transparent; " + style);
-	//	goUserMode.setStyle("-fx-border-color:firebrick; " + style);
-	//    }
 	
 	/**
 	 * Prepares the SideBar to be shown for LoginMode
@@ -223,18 +233,13 @@ public class SideBar extends BorderPane {
 	}
 	
 	/**
-	 * Called as soon as .fxml is initialized
+	 * Called as soon as .fxml is initialised
 	 */
 	@FXML
 	private void initialize() {
 		
 		//Prepare the Side Bar
 		prepareForLoginMode(true);
-		
-		// Translate Transition
-		tTrans = new TranslateTransition(Duration.millis(200), this);
-		tTrans.setFromX(-this.getPrefWidth());
-		tTrans.setToX(0);
 		
 		//this.setTranslateX(-this.getPrefWidth())
 		//showBar()
@@ -255,18 +260,6 @@ public class SideBar extends BorderPane {
 		
 		// donateButton
 		donateButton.setOnAction(donation.getOnAction());
-		
-		//---------MODE ------------------------------	
-		//	//goMainMode
-		//	goMainMode.setOnAction(a -> goMainMode());
-		//
-		//	//goUserMode
-		//	goUserMode.setOnAction(a -> goUserMode());
-		//
-		//	//theMovieDBMode
-		//	browserMode.setOnAction(a -> {
-		//
-		//	});
 		
 		//-----------------------------------------
 		
@@ -290,8 +283,7 @@ public class SideBar extends BorderPane {
 		
 		// importDataBase
 		importDataBase.setOnAction(e -> {
-			if (!zipper.isRunning() && !unZipper.isRunning()
-					&& ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
+			if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
 				
 				File file = Main.specialChooser.selectDBFile(Main.window);
 				if (file != null) {
@@ -307,8 +299,7 @@ public class SideBar extends BorderPane {
 		
 		// exportDataBase
 		exportDataBase.setOnAction(a -> {
-			if (!zipper.isRunning() && !unZipper.isRunning()
-					&& ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
+			if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
 				
 				File file = Main.specialChooser.exportDBFile(Main.window);
 				if (file != null) {
@@ -325,9 +316,9 @@ public class SideBar extends BorderPane {
 		
 		// deleteDataBase
 		deleteDataBase.setOnAction(a -> {
-			if (!zipper.isRunning() && !unZipper.isRunning()
-					&& ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
-							"Are you soore you want to delete the database?\nYou can keep a copy before deleting it by using export database functionality.\n\nAfter that the application will automatically restart...",Main.window)) {
+			if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
+					"Are you soore you want to delete the database?\nYou can keep a copy before deleting it by using export database functionality.\n\nAfter that the application will automatically restart...",
+					Main.window)) {
 				
 				// Close database connections
 				if (Main.dbManager != null)
@@ -348,83 +339,6 @@ public class SideBar extends BorderPane {
 				
 			}
 		});
-		
-		//		// speechLabel and speechButton
-		//		speechLabel.disableProperty().bind(speechToggle.selectedProperty().not());
-		//		//	speechToggle.selectedProperty().addListener(l -> {
-		//		//	    if (speechToggle.isSelected())
-		//		//		Main.speechReader.startSpeechRecognizer();
-		//		//	    else
-		//		//		Main.speechReader.stopSpeechRec(true);
-		//		//	});
-		//		
-		//		speechToggle.setDisable(true);
-		//		// ------------------------------------About the Internet
-		//		
-		//		// Create the runnable only one time
-		//		Runnable runnable = () -> {
-		//			
-		//			// Disable the Progress Indicator
-		//			// Thread has started
-		//			Platform.runLater(() -> {
-		//				internetProgressIndicator.setVisible(false);
-		//				internetLabel.setText("");
-		//			});
-		//			
-		//			// if internetToggle is still selected
-		//			while (internetToggle.isSelected()) {
-		//				
-		//				// Start a count down latch
-		//				CountDownLatch latch = new CountDownLatch(1);
-		//				
-		//				// Decide
-		//				if (InfoTool.isReachableByPing("www.google.com")) {
-		//					
-		//					// System.out.println("Internet is reachable...")
-		//					
-		//					// Enable internet label
-		//					Platform.runLater(() -> {
-		//						internetLabel.setDisable(false);
-		//						latch.countDown();
-		//					});
-		//					
-		//				} else {
-		//					
-		//					// System.out.println("Internet not reachable...")
-		//					
-		//					// Disable internet label
-		//					Platform.runLater(() -> {
-		//						internetLabel.setDisable(true);
-		//						latch.countDown();
-		//					});
-		//					
-		//				}
-		//				try {
-		//					latch.await();
-		//					Thread.sleep(700);
-		//				} catch (InterruptedException ex) {
-		//					internetThread.interrupt();
-		//					logger.log(Level.WARNING, "", ex);
-		//				}
-		//			}
-		//			
-		//			Platform.runLater(() -> {
-		//				internetProgressIndicator.setVisible(false);
-		//				internetLabel.setText("??");
-		//			});
-		//		};
-		//		
-		//		internetToggle.selectedProperty().addListener(l -> {
-		//			if (internetToggle.isSelected()) {
-		//				internetProgressIndicator.setVisible(true);
-		//				internetThread = new Thread(runnable);
-		//				internetThread.start();
-		//			} else {
-		//				internetProgressIndicator.setVisible(true);
-		//				internetLabel.setDisable(true);
-		//			}
-		//			
-		//		});
 		
 	}
 	

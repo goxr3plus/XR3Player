@@ -24,7 +24,7 @@ public class PlayedMediaList {
 	/**
 	 * The name of the database table
 	 */
-	private final String dataBaseTableName = "PlayedMediaList";
+	private static final String dataBaseTableName = "PlayedMediaList";
 	
 	//------------Prepared Statements---------------
 	private PreparedStatement insert;
@@ -41,14 +41,13 @@ public class PlayedMediaList {
 			//Check if it does already exists
 			if (!Main.dbManager.doesTableExist(dataBaseTableName))
 				
-				Main.dbManager.getConnection().createStatement().executeUpdate("CREATE TABLE '" + dataBaseTableName
-						+ "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
+				Main.dbManager.getConnection().createStatement().executeUpdate(
+						"CREATE TABLE '" + dataBaseTableName + "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
 			
 			//Create the PreparedStatements
 			String string = "UPDATE '" + dataBaseTableName + "'";
 			
-			insert = Main.dbManager.getConnection()
-					.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)");
+			insert = Main.dbManager.getConnection().prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)");
 			
 			rename = Main.dbManager.getConnection().prepareStatement(string + " SET PATH=? WHERE PATH=?");
 		} catch (SQLException ex) {
@@ -59,12 +58,12 @@ public class PlayedMediaList {
 	
 	/**
 	 * Uploads the data from the database table to the list , i call this method
-	 * when i loggin into a user to upload the Media that he/she has
+	 * when i login into a user to upload the Media that he/she has
 	 * previously heard
 	 */
 	public void uploadFromDataBase() {
 		
-		//Check existance
+		//Check existence
 		prepareMediaListTable();
 		
 		//Now Upload
@@ -134,26 +133,25 @@ public class PlayedMediaList {
 	 * @return true, if successful
 	 */
 	public boolean renameMedia(String oldName , String newName) {
-		if (set.remove(oldName)) {
+		if (!set.remove(oldName))
+			return true;
+		
+		//Update in the database
+		try {
+			rename.setString(1, newName);
+			rename.setString(2, oldName);
+			rename.executeUpdate();
 			
-			//Update in the database
-			try {
-				rename.setString(1, newName);
-				rename.setString(2, oldName);
-				rename.executeUpdate();
-				
-				//Commit
-				Main.dbManager.commit();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-				return false;
-			}
-			
-			//Add to the Set
-			return set.add(newName);
+			//Commit
+			Main.dbManager.commit();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
 		}
 		
-		return true;
+		//Add to the Set
+		return set.add(newName);
+		
 	}
 	
 	/**

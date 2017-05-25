@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-
-<fx:root alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="671.0" style="-fx-background-color: #202020; -fx-border-color: firebrick transparent firebrick transparent;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="951.0" style="-fx-background-color: #202020; -fx-border-color: firebrick transparent firebrick transparent;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Social Media ">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/asc.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="564.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <padding>
+            <Insets left="4.0" right="4.0" />
+         </padding>
+         <tooltip>
+            <Tooltip text="Can application connect to internet" />
+         </tooltip>
+         <HBox.margin>
+            <Insets left="15.0" />
+         </HBox.margin>
+      </Label>
+      <JFXToggleButton fx:id="showHideSideBar" contentDisplay="RIGHT" focusTraversable="false" style="-fx-font-weight: bold;" text="Hide Side Bar" textFill="WHITE" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" disable="true" layoutX="294.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Speech Recognition" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />

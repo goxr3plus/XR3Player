@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.users;
+package application.loginmode;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -278,20 +278,21 @@ public class LoginMode extends BorderPane {
 		//Initialise
 		teamViewer = new Viewer(horizontalScrollBar);
 		
-		//Below is some coded i used with javafxsvg Library to Display SVG images although i changed it 
-		//to using WebView due to the cost of many external libraries
-		//	HttpURLConnection httpcon = (HttpURLConnection) new URL(
-		//		    "https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
-		//	    httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-		//	    ImageView imageView = new ImageView(new Image(httpcon.getInputStream()));
-		
 		//----sourceForgeDownloadsLabel
 		new Thread(() -> {
 			try {
 				
+				//---gitHubDownloadsLabel					
+				String text2 = "GitHub: [ "
+						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
+								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
+						+ " ]";
+				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
+				
 				//----sourceForgeDownloadsLabel
 				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
 				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+				httpcon.setConnectTimeout(10000);
 				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 				
 				//Read line by line
@@ -302,13 +303,6 @@ public class LoginMode extends BorderPane {
 				
 				String text = "Sourceforge: [ " + line.split("<text x=\"98.5\" y=\"14\">")[1].split("/total")[0] + " ]";
 				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
-				
-				//---gitHubDownloadsLabel					
-				String text2 = "GitHub: [ "
-						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
-								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
-						+ " ]";
-				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
 				
 				//throw new IOException("Exception get out of the building!!!")
 			} catch (IOException e) {
@@ -446,6 +440,13 @@ public class LoginMode extends BorderPane {
 		return next;
 	}
 	
+	/**
+	 * @return the librariesPieChartData
+	 */
+	public ObservableList<PieChart.Data> getLibrariesPieChartData() {
+		return librariesPieChartData;
+	}
+
 	/**
 	 * @return the xr3PlayerLabel
 	 */
@@ -1103,7 +1104,7 @@ public class LoginMode extends BorderPane {
 									
 									//Add Pie Chart Data
 									if (totalLibraries[0] > 0)
-										librariesPieChartData.add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
+										getLibrariesPieChartData().add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
 									
 									//Update User Label
 									user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));

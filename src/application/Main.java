@@ -21,6 +21,9 @@ import com.jfoenix.controls.JFXTabPane;
 import application.borderless.BorderlessScene;
 import application.database.DbManager;
 import application.librarymode.LibraryMode;
+import application.loginmode.LoginMode;
+import application.loginmode.User;
+import application.loginmode.UserMode;
 import application.presenter.BottomBar;
 import application.presenter.DJMode;
 import application.presenter.MultipleTabs;
@@ -35,9 +38,6 @@ import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
 import application.tools.NotificationType;
-import application.users.LoginMode;
-import application.users.User;
-import application.users.UserMode;
 import application.webbrowser.WebBrowserController;
 import application.windows.AboutWindowController;
 import application.windows.ConsoleWindowController;
@@ -92,8 +92,8 @@ public class Main extends Application {
 	public static Properties applicationProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 70);
-		applicationProperties.put("ReleasedDate", "28/05/2017");
+		applicationProperties.put("Version", 71);
+		applicationProperties.put("ReleasedDate", "30/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
 		
