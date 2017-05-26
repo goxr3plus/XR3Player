@@ -7,20 +7,6 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXToggleButton;
 
-import com.jfoenix.controls.JFXToggleButton;
-
-import com.jfoenix.controls.JFXToggleButton;
-
-import com.jfoenix.controls.JFXToggleButton;
-
-import com.jfoenix.controls.JFXToggleButton;
-
-import com.jfoenix.controls.JFXToggleButton;
-
-import com.jfoenix.controls.JFXToggleButton;
-
-import com.jfoenix.controls.JFXToggleButton;
-
 import application.Main;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.InfoTool;
@@ -41,6 +27,9 @@ import javafx.scene.paint.Color;
 public class BottomBar extends HBox {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private Button showSocialMedia;
 	
 	@FXML
 	private JFXToggleButton showHideSideBar;
@@ -182,10 +171,10 @@ public class BottomBar extends HBox {
 		startInternetCheckingThread();
 		startTimingThread();
 		
-		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> {
-			Main.sideBar.toogleBar();
-			showHideSideBar.setText(( newValue ? "Show" : "Hide" ) + " Side Bar");
-		});
+		//showHideSideBar
+		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> Main.sideBar.toogleBar());
+		
+		//showSocialMedia
 	}
 	
 	/**

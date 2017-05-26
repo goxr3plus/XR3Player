@@ -1,16 +1,18 @@
 /**
  * 
  */
-package application.windows;
+package application.versionupdate;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
@@ -29,8 +31,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -43,15 +46,6 @@ import javafx.util.Duration;
 public class UpdateWindow extends StackPane {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private GridPane centerGridPane;
-	
-	@FXML
-	private Label updatesInformationLabel;
-	
-	@FXML
-	private Label comingSoonLabel;
 	
 	@FXML
 	private Label topLabel;
@@ -68,6 +62,24 @@ public class UpdateWindow extends StackPane {
 	@FXML
 	private Button closeWindow;
 	
+	@FXML
+	private Tab releasesTab;
+	
+	@FXML
+	private BorderPane releasesInfoContainer;
+	
+	@FXML
+	private Tab upcomingFeaturesTab;
+	
+	@FXML
+	private BorderPane upcomingFeaturesContainer;
+	
+	@FXML
+	private Tab gitHubReleasesTab;
+	
+	@FXML
+	private BorderPane gitHubInfoContrainer;
+	
 	// -------------------------------------------------------------
 	
 	/** The logger. */
@@ -76,12 +88,16 @@ public class UpdateWindow extends StackPane {
 	/** Window **/
 	private Stage window = new Stage();
 	
-	private final InlineCssTextArea textArea1 = new InlineCssTextArea();
-	private final InlineCssTextArea textArea2 = new InlineCssTextArea();
-	private final VirtualizedScrollPane<InlineCssTextArea> vsPane1 = new VirtualizedScrollPane<>(textArea1);
-	private final VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(textArea2);
+	private final InlineCssTextArea gitHubTextArea = new InlineCssTextArea();
+	private final InlineCssTextArea upcomingTextArea = new InlineCssTextArea();
+	private final InlineCssTextArea textArea = new InlineCssTextArea();
+	private final VirtualizedScrollPane<InlineCssTextArea> vsPane1 = new VirtualizedScrollPane<>(gitHubTextArea);
+	private final VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(upcomingTextArea);
+	private final VirtualizedScrollPane<InlineCssTextArea> vsPane3 = new VirtualizedScrollPane<>(textArea);
 	
 	private int update;
+	
+	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
 	
 	/**
 	 * The Thread which is responsible for the update check
@@ -120,22 +136,23 @@ public class UpdateWindow extends StackPane {
 	@FXML
 	private void initialize() {
 		
+		//textArea
+		textArea.setEditable(false);
+		textArea.setFocusTraversable(false);
+		
 		// --
-		textArea1.setEditable(false);
-		textArea1.setFocusTraversable(false);
-		//--
-		vsPane1.setMinSize(500, 425);
-		vsPane1.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		gitHubTextArea.setEditable(false);
+		gitHubTextArea.setFocusTraversable(false);
 		
 		//--
-		textArea2.setEditable(false);
-		textArea2.setFocusTraversable(false);
-		textArea2.setWrapText(true);
-		//--
-		vsPane2.setMinSize(500, 425);
-		vsPane2.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		upcomingTextArea.setEditable(false);
+		upcomingTextArea.setFocusTraversable(false);
+		upcomingTextArea.setWrapText(true);
 		
-		centerGridPane.addRow(1, vsPane1, vsPane2);
+		//--
+		releasesInfoContainer.setCenter(vsPane1);
+		upcomingFeaturesContainer.setCenter(vsPane2);
+		gitHubInfoContrainer.setCenter(vsPane3);
 		
 		// -- automaticUpdate
 		automaticUpdate.setOnAction(a -> startXR3PlayerUpdater(update));
@@ -202,86 +219,56 @@ public class UpdateWindow extends StackPane {
 			Platform.runLater(() -> {
 				
 				//--TopLabel
-				if (Integer.valueOf(lastArticle.id()) > currentVersion) {
-					window.setTitle("New update is available!");
-					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available!");
-				} else {
+				if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
 					window.setTitle("You have the latest update!");
 					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
+				} else {
+					window.setTitle("New update is available!");
+					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!! |  Current : ->( " + currentVersion + " )<-");
 				}
-				updatesInformationLabel.setText("Your current update is: ->( " + currentVersion + " )<-");
 				
 				//Clear the textAreas
-				textArea1.clear();
-				textArea2.clear();
+				textArea.clear();
+				gitHubTextArea.clear();
+				upcomingTextArea.clear();
 				
-				// -- TextArea 
-				String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
-				doc.getElementsByTag("article").forEach(element -> {
-					
-					// Append the text to the textArea
-					textArea1.appendText("\n\n-------------Start of Update (" + element.id() + ")-------------\n");
-					
-					// Information
-					textArea1.appendText("->Information: ");
-					textArea1.setStyle(textArea1.getLength() - 13, textArea1.getLength() - 1, style.replace("black", "#202020"));
-					textArea1.appendText(element.getElementsByClass("about").text() + "\n");
-					
-					// Release Date
-					textArea1.appendText("->Release Date: ");
-					textArea1.setStyle(textArea1.getLength() - 14, textArea1.getLength() - 1, style.replace("black", "firebrick"));
-					textArea1.appendText(element.getElementsByClass("releasedate").text() + "\n");
-					
-					// Minimum JRE
-					textArea1.appendText("->Minimum Java Version: ");
-					textArea1.setStyle(textArea1.getLength() - 22, textArea1.getLength() - 1, style.replace("black", "orange"));
-					textArea1.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
-					
-					// ChangeLog
-					textArea1.appendText("->ChangeLog:\n");
-					textArea1.setStyle(textArea1.getLength() - 11, textArea1.getLength() - 1, style.replace("black", "green"));
-					final AtomicInteger counter = new AtomicInteger(-1);
-					Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
-						if (counter.addAndGet(1) >= 1) {
-							String s = "\t" + counter + ")";
-							textArea1.appendText(s);
-							textArea1.setStyle(textArea1.getLength() - s.length(), textArea1.getLength() - 1, style);
-							textArea1.appendText(el + "\n");
-						}
-					});
-					
-				});
+				// -- gitHubTextArea 			
+				doc.getElementsByTag("article").stream().collect(Collectors.toCollection(ArrayDeque::new)).descendingIterator()
+						.forEachRemaining(element -> analyzeUpdate(gitHubTextArea, element));
 				
-				textArea1.moveTo(textArea1.getLength());
-				textArea1.requestFollowCaret();
+				//---textArea
+				doc.getElementsByTag("article").stream().reduce((first , second) -> second).ifPresent(element -> analyzeUpdate(textArea, element));
 				
-				// -- TextArea 2
+				//textArea.moveTo(gitHubTextArea.getLength());
+				//textArea.requestFollowCaret();
+				
+				// -- upcomingTextArea
 				doc.getElementsByTag("section").forEach(section -> {
 					
 					// Append the text to the textArea
-					textArea2.appendText("\n\n-------------Upcoming Features for XR3Player-------------\n\n");
+					upcomingTextArea.appendText("\n\n-------------Upcoming Features for XR3Player-------------\n\n");
 					
 					// Information
-					textArea2.appendText("->Coming:\n");
-					textArea2.setStyle(textArea2.getLength() - 8, textArea2.getLength() - 1, style.replace("black", "green"));
+					upcomingTextArea.appendText("->Coming:\n");
+					upcomingTextArea.setStyle(upcomingTextArea.getLength() - 8, upcomingTextArea.getLength() - 1, style.replace("black", "green"));
 					final AtomicInteger counter = new AtomicInteger(-1);
 					Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
 						if (counter.addAndGet(1) >= 1) {
 							String s = "\t" + counter + ")";
-							textArea2.appendText(s);
-							textArea2.setStyle(textArea2.getLength() - s.length(), textArea2.getLength() - 1, style);
-							textArea2.appendText(el + "\n");
+							upcomingTextArea.appendText(s);
+							upcomingTextArea.setStyle(upcomingTextArea.getLength() - s.length(), upcomingTextArea.getLength() - 1, style);
+							upcomingTextArea.appendText(el + "\n");
 						}
 					});
 					
 					//Last Updated
-					textArea2.appendText("->Last Updated: ");
-					textArea2.setStyle(textArea2.getLength() - 14, textArea2.getLength() - 1, style.replace("black", "firebrick"));
-					textArea2.appendText(section.getElementById("lastUpdated").text());
+					upcomingTextArea.appendText("->Last Updated: ");
+					upcomingTextArea.setStyle(upcomingTextArea.getLength() - 14, upcomingTextArea.getLength() - 1, style.replace("black", "firebrick"));
+					upcomingTextArea.appendText(section.getElementById("lastUpdated").text());
 				});
 				
-				textArea2.moveTo(textArea2.getLength());
-				textArea2.requestFollowCaret();
+				upcomingTextArea.moveTo(upcomingTextArea.getLength());
+				upcomingTextArea.requestFollowCaret();
 			});
 			
 			//show?
@@ -296,6 +283,48 @@ public class UpdateWindow extends StackPane {
 			Platform.runLater(() -> ActionTool.showNotification("Error", "Trying to fetch update information a problem occured", Duration.millis(2500), NotificationType.ERROR));
 			logger.log(Level.WARNING, "", ex);
 		}
+	}
+	
+	/**
+	 * Streams the given update and appends it to the InlineCssTextArea in a
+	 * specific
+	 * format
+	 * 
+	 * @param textArea
+	 * @param Element
+	 */
+	private void analyzeUpdate(InlineCssTextArea textArea , Element element) {
+		
+		// Append the text to the textArea
+		textArea.appendText("\n\n-------------Start of Update (" + element.id() + ")-------------\n");
+		
+		// Information
+		textArea.appendText("->Information: ");
+		textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style.replace("black", "#202020"));
+		textArea.appendText(element.getElementsByClass("about").text() + "\n");
+		
+		// Release Date
+		textArea.appendText("->Release Date: ");
+		textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "firebrick"));
+		textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
+		
+		// Minimum JRE
+		textArea.appendText("->Minimum Java Version: ");
+		textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("black", "orange"));
+		textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
+		
+		// ChangeLog
+		textArea.appendText("->ChangeLog:\n");
+		textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "green"));
+		final AtomicInteger counter = new AtomicInteger(-1);
+		Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
+			if (counter.addAndGet(1) >= 1) {
+				String s = "\t" + counter + ")";
+				textArea.appendText(s);
+				textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style);
+				textArea.appendText(el + "\n");
+			}
+		});
 	}
 	
 	/**

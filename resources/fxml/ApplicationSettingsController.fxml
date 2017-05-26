@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root id="SpecialTabPane" prefHeight="431.0" prefWidth="736.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="431.0" prefWidth="736.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TabPane side="LEFT" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane id="SpecialTabPane" side="LEFT" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
             <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General &gt;" />
           <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists &gt;" />

@@ -38,6 +38,7 @@ import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
 import application.tools.NotificationType;
+import application.versionupdate.UpdateWindow;
 import application.webbrowser.WebBrowserController;
 import application.windows.AboutWindowController;
 import application.windows.ConsoleWindowController;
@@ -46,7 +47,6 @@ import application.windows.FileAndFolderChooser;
 import application.windows.RenameWindow;
 import application.windows.SearchWindow;
 import application.windows.StarWindow;
-import application.windows.UpdateWindow;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -92,7 +92,7 @@ public class Main extends Application {
 	public static Properties applicationProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 71);
+		applicationProperties.put("Version", 32);
 		applicationProperties.put("ReleasedDate", "30/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
