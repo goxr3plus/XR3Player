@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,22 +12,25 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root prefHeight="44.0" prefWidth="253.0" style="-fx-background-color: rgb(16,26,24);" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="72.0" prefWidth="211.0" styleClass="starWindow" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="166.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="166.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="42.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="44.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Button fx:id="ok" alignment="CENTER" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="CENTER">
          <tooltip>
             <Tooltip text="Save+Close" />
-         </tooltip></Button>
+         </tooltip>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Canvas fx:id="canvas" height="33.0" style="-fx-cursor: hand;" width="160.0" />
-      <Button fx:id="close" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+      <Button fx:id="close" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <tooltip>
             <Tooltip text="Cancel" />
          </tooltip>
@@ -35,6 +41,13 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
+      <Label fx:id="starsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="Perfect!" GridPane.rowIndex="1" />
    </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" />
+   </padding>
 </fx:root>

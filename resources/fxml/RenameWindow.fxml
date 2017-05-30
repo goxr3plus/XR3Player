@@ -16,7 +16,7 @@
          <children>
             <Label fx:id="titleLabel" alignment="CENTER" maxWidth="-Infinity" prefHeight="27.0" prefWidth="220.0" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-border-color: transparent white;" text="Rename the Library" HBox.hgrow="ALWAYS" />
             <Label fx:id="charsField" alignment="CENTER" prefHeight="19.0" prefWidth="58.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: white; -fx-background-color: firebrick; -fx-background-radius: 35;" text="150" HBox.hgrow="ALWAYS" />
-            <Button fx:id="okButton" minHeight="25.0" minWidth="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="45.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="OK">
+            <Button fx:id="okButton" minHeight="25.0" minWidth="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="45.0" text="OK">
                <tooltip>
                   <Tooltip text="Save+Close" />
                </tooltip>
@@ -27,7 +27,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" style="-fx-background-color: black; -fx-background-radius: 10;">
+            <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>

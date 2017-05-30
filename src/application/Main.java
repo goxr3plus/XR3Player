@@ -53,6 +53,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
@@ -92,7 +93,7 @@ public class Main extends Application {
 	public static Properties applicationProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 32);
+		applicationProperties.put("Version", 71);
 		applicationProperties.put("ReleasedDate", "30/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
@@ -345,9 +346,15 @@ public class Main extends Application {
 				.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
-		//----Do this trick for songsContextMenu
-		songsContextMenu.show(window, 0, 0);
-		songsContextMenu.hide();
+		//----Do this trick for different context menus
+		//		songsContextMenu.show(window, 0, 0);
+		//		songsContextMenu.hide();
+		//		
+		//		libraryMode.librariesContextMenu.show(window, 0, 0);
+		//		libraryMode.librariesContextMenu.hide();
+		//		
+		//		loginMode.userContextMenu.show(window, 0, 0);
+		//		loginMode.userContextMenu.hide();
 		
 		// --- SearchWindow-----
 		searchWindow.getWindow().getScene().getStylesheets().addAll(scene.getStylesheets());
@@ -422,6 +429,7 @@ public class Main extends Application {
 	public static void startAppWithUser(User u) {
 		
 		//Close the LoginMode
+		loginMode.userSearchBox.getSearchBoxWindow().close();
 		loginMode.setVisible(false);
 		updateScreen.getProgressBar().setProgress(-1);
 		updateScreen.getLabel().setText("--Starting--");
@@ -541,18 +549,10 @@ public class Main extends Application {
 		ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
 		ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 		ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-		
-		// alert.getDialogPane()
-		// .getScene()
-		// .setFill(Color.TRANSPARENT)
-		// alert.getDialogPane()
-		// .getStylesheets()
-		// .add(Main.class.getResource(InfoTool.styLes +
-		// InfoTool.applicationCss)
-		// ((Button) alert.getDialogPane()
-		// .lookupButton(ButtonType.CANCEL)).setDefaultButton(true)
+		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
 		alert.getButtonTypes().setAll(vacuum, exit, cancel);
 		
+		//Pick the answer
 		alert.showAndWait().ifPresent(answer -> {
 			if (answer == exit)
 				terminate(false);

@@ -5,6 +5,10 @@
 
 ******************************************************************************/
 
+.split-pane{
+	-fx-background-color:transparent ;
+}
+
 .split-pane .split-pane-divider{	
 	-fx-background-color:
         -darkest-black,
@@ -1091,7 +1095,7 @@
 
 
 .librarySettings  .text-area:focused{	
-	-fx-background-color: orange, white;
+	-fx-background-color: firebrick, white;
     -fx-background-insets: -0.1, 2.0;
 }
 
@@ -1175,8 +1179,7 @@
 ******************************************************************************/
 
 .starWindow{
-	-fx-background-color:white;
-	-fx-background-radius:10.0;
+	-fx-background-color:rgb(16.0,26.0,24.0);
 }
 
 /*******************************************************************************

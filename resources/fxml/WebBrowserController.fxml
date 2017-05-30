@@ -2,18 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
 <fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -35,7 +29,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" styleClass="arrowButton2" text="+" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="-5.0">
+                  <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" styleClass="arrowButton" text="+" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="-1.0">
                      <tooltip>
                         <Tooltip text="New Tab" />
                      </tooltip>
@@ -50,21 +44,5 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </padding>
       </BorderPane>
-      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);">
-         <children>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/warning.png" />
-               </image>
-            </ImageView>
-            <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true" />
-            <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" prefHeight="156.0" prefWidth="587.0" text="&#10;1.Check the address for typing errors such as ww.example.com instead of www.example.com&#10;&#10;2.If you are unable to load any pages, check your computer’s network connection.&#10;&#10;3.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true" />
-            <JFXButton fx:id="tryAgain" buttonType="RAISED" ripplerFill="#fa0c0c" text="Try Again">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-         </children>
-      </VBox>
    </children>
 </fx:root>

@@ -23,6 +23,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import application.presenter.SearchBox;
+import application.presenter.SearchBox.SearchBoxType;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -54,6 +56,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -76,7 +80,19 @@ public class LoginMode extends BorderPane {
 	//-------------------------------------
 	
 	@FXML
+	private SplitPane splitPane;
+	
+	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private StackPane usersStackView;
+	
+	@FXML
+	private Button newUser;
+	
+	@FXML
+	private Label usersInfoLabel;
 	
 	@FXML
 	private GridPane topGrid;
@@ -112,22 +128,13 @@ public class LoginMode extends BorderPane {
 	private JFXButton next;
 	
 	@FXML
-	private StackPane usersStackView;
-	
-	@FXML
-	private Button newUser;
-	
-	@FXML
-	private Label usersInfoLabel;
+	private Button loginButton;
 	
 	@FXML
 	private PieChart librariesPieChart;
 	
 	@FXML
 	private PieChart downloadsPieChart;
-	
-	@FXML
-	private Button loginButton;
 	
 	@FXML
 	private Hyperlink visitCreatorHyperLink;
@@ -137,6 +144,9 @@ public class LoginMode extends BorderPane {
 	
 	@FXML
 	private VBox downloadsVBox;
+	
+	@FXML
+	private Label sourceForgeDownloadsLabel1;
 	
 	@FXML
 	private Label sourceForgeDownloadsLabel;
@@ -184,7 +194,7 @@ public class LoginMode extends BorderPane {
 	/**
 	 * The Search Box of the LoginMode
 	 */
-	public UserSearchBox userSearchBox = new UserSearchBox();
+	public SearchBox userSearchBox = new SearchBox(SearchBoxType.USERSSEARCHBOX);
 	
 	/** The context menu of the users */
 	public UserContextMenu userContextMenu = new UserContextMenu(this);
@@ -388,6 +398,9 @@ public class LoginMode extends BorderPane {
 		
 		//----usersInfoLabel
 		usersInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.itemsWrapperProperty().sizeProperty(), " ] Users"));
+		
+		//splitPane
+		splitPane.setDividerPosition(0, 0.8);
 	}
 	
 	/**
@@ -446,7 +459,7 @@ public class LoginMode extends BorderPane {
 	public ObservableList<PieChart.Data> getLibrariesPieChartData() {
 		return librariesPieChartData;
 	}
-
+	
 	/**
 	 * @return the xr3PlayerLabel
 	 */

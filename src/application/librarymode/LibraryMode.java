@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import application.presenter.SearchBox;
+import application.presenter.SearchBox.SearchBoxType;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
@@ -111,7 +113,7 @@ public class LibraryMode extends BorderPane {
 	 * The mechanism which allows you to transport items between libraries and
 	 * more.
 	 */
-	public final LibrariesSearchBox librariesSearcher = new LibrariesSearchBox();
+	public final SearchBox librariesSearcher = new SearchBox(SearchBoxType.LIBRARYSEARCHBOX);
 	
 	/**
 	 * The mechanism which allows you to view the libraries as components with
@@ -180,19 +182,17 @@ public class LibraryMode extends BorderPane {
 					final String dataBaseTableName = tableName; //add it to a final variable
 					
 					//Ok Now Go
-					try (PreparedStatement insertNewLibrary = Main.dbManager.getConnection().prepareStatement(
-							"INSERT INTO LIBRARIES (NAME,TABLENAME,STARS,DATECREATED,TIMECREATED,DESCRIPTION,SAVEMODE,POSITION,LIBRARYIMAGE,OPENED) "
+					try (PreparedStatement insertNewLibrary = Main.dbManager.getConnection()
+							.prepareStatement("INSERT INTO LIBRARIES (NAME,TABLENAME,STARS,DATECREATED,TIMECREATED,DESCRIPTION,SAVEMODE,POSITION,LIBRARYIMAGE,OPENED) "
 									+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
 							Statement statement = Main.dbManager.getConnection().createStatement()) {
 						
 						// Create the dataBase table
-						statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "' (PATH       TEXT    PRIMARY KEY   NOT NULL ,"
-								+ "STARS       DOUBLE     NOT NULL," + "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL,"
-								+ "HOUR        TEXT    NOT NULL)");
+						statement.executeUpdate("CREATE TABLE '" + dataBaseTableName + "' (PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
+								+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
 						
 						// Create the Library
-						Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1,
-								teamViewer.getViewer().getItemsObservableList().size(), null, false);
+						Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1, teamViewer.getViewer().getItemsObservableList().size(), null, false);
 						
 						// Add the library
 						currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
@@ -216,12 +216,11 @@ public class LibraryMode extends BorderPane {
 						Main.dbManager.commit();
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
-						ActionTool.showNotification("Error Creating a Library", "Library can't be created cause of:" + ex.getMessage(),
-								Duration.seconds(2), NotificationType.WARNING);
+						ActionTool.showNotification("Error Creating a Library", "Library can't be created cause of:" + ex.getMessage(), Duration.seconds(2),
+								NotificationType.WARNING);
 					}
 				} else {
-					ActionTool.showNotification("Dublicate Name", "A Library or PlayList with this name already exists!", Duration.seconds(2),
-							NotificationType.INFORMATION);
+					ActionTool.showNotification("Dublicate Name", "A Library or PlayList with this name already exists!", Duration.seconds(2), NotificationType.INFORMATION);
 				}
 			}
 		}
@@ -341,23 +340,21 @@ public class LibraryMode extends BorderPane {
 		// -- openOrCloseLibrary 
 		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
-				openOrCloseLibrary.textProperty()
-						.bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));
+				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));
 			else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");
 			}
 		});
-		openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get()
-				.libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
+		openOrCloseLibrary
+				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 		
 		// -- settingsOfLibrary
 		settingsOfLibrary.setOnAction(a -> settings.showWindow(teamViewer.getViewer().centerItemProperty().get()));
 		
 		//----librariesInfoLabel
-		librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries",
-				" , [ ", openedLibraries, " ] Opened"));
-		
+		librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ", openedLibraries,
+				" ] Opened", " , [ ", 0, " ] Empty"));
 		
 	}
 	
@@ -365,7 +362,7 @@ public class LibraryMode extends BorderPane {
 	 * Recalculates the opened libraries
 	 */
 	public void calculateOpenedLibraries() {
-		openedLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(library -> library.isOpened()).count());
+		openedLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).count());
 	}
 	
 	/**
@@ -415,21 +412,21 @@ public class LibraryMode extends BorderPane {
 	// Variables
 	private double[] bottomSplitPaneDivider = { 0.65 , 0.35 };
 	
-//	/**
-//	 * Updates the values of array that holds DividerPositions of splitPane
-//	 */
-//	public void updateTopSplitPaneDividerArray(double[] array) {
-//		topSplitPaneDivider[0] = array[0];
-//		topSplitPaneDivider[1] = array[1];
-//	}
-//	
-//	/**
-//	 * Updates the values of array that holds DividerPositions of splitPane
-//	 */
-//	public void updateBottomSplitPaneDividerArray(double[] array) {
-//		bottomSplitPaneDivider[0] = array[0];
-//		bottomSplitPaneDivider[1] = array[1];
-//	}
+	//	/**
+	//	 * Updates the values of array that holds DividerPositions of splitPane
+	//	 */
+	//	public void updateTopSplitPaneDividerArray(double[] array) {
+	//		topSplitPaneDivider[0] = array[0];
+	//		topSplitPaneDivider[1] = array[1];
+	//	}
+	//	
+	//	/**
+	//	 * Updates the values of array that holds DividerPositions of splitPane
+	//	 */
+	//	public void updateBottomSplitPaneDividerArray(double[] array) {
+	//		bottomSplitPaneDivider[0] = array[0];
+	//		bottomSplitPaneDivider[1] = array[1];
+	//	}
 	
 	//----------------------------
 	
