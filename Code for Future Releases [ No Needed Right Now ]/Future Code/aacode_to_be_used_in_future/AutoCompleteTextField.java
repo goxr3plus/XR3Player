@@ -23,6 +23,7 @@ public class AutoCompleteTextField extends TextField {
 
 	/** The existing auto complete entries. */
 	private final SortedSet<String> entries = new TreeSet<>();
+	
 	/** The pop up used to select an entry. */
 	private ContextMenu contextMenu = new ContextMenu();
 	
@@ -81,7 +82,7 @@ public class AutoCompleteTextField extends TextField {
 	}
 
 	/**
-	 * Bugged method.
+	 * !!!!!!!!!!!!!!!!!!!!Bugged method.
 	 */
 	// TODO ---------------This method not works perfect needs to be redone....
 	public void buggedMethod() {

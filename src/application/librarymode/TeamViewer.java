@@ -83,7 +83,7 @@ public class TeamViewer {
 		private double width = 120;
 		
 		/** The Constant HEIGHT. */
-		private double height = width + ( 0.4 * width );
+		private double height = width + 0.4 * width;
 		
 		/** The duration. */
 		private final Duration duration = Duration.millis(450);
@@ -336,17 +336,17 @@ public class TeamViewer {
 		/**
 		 * Add multiple libraries at once.
 		 *
-		 * @param ls
+		 * @param library
 		 *        List full of Libraries
 		 */
-		public void addMultipleLibraries(List<Library> ls) {
+		public void addMultipleItems(List<Library> library) {
 			
 			//Check it first
-			if (ls == null || ls.isEmpty())
+			if (library == null || library.isEmpty())
 				return;
 			
 			//Add all them
-			ls.forEach(l -> addLibrary(l, false));
+			library.forEach(l -> addItem(l, false));
 			
 			// update
 			update();
@@ -360,7 +360,7 @@ public class TeamViewer {
 		 * @param update
 		 *        Do the update on the list?
 		 */
-		public void addLibrary(Library library , boolean update) {
+		public void addItem(Library library , boolean update) {
 			itemsObservableList.add(library);
 			
 			// --
@@ -393,8 +393,7 @@ public class TeamViewer {
 						
 						timeline.setOnFinished(v -> {
 							Bounds bounds = library.localToScreen(library.getBoundsInLocal());
-							mode.librariesContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
-									bounds.getMinY() + bounds.getHeight() / 4, library);
+							mode.librariesContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, library);
 							// mode.contextMenu.show(Main.window, m.getScreenX(), m.getScreenY(), library);
 							timeline.setOnFinished(null);
 						});
@@ -422,19 +421,14 @@ public class TeamViewer {
 		 * 
 		 * @param library
 		 *        Library to be deleted
-		 * @param commit
-		 *        commit the changes to the database
 		 */
-		public void deleteLibrary(Library library , boolean commit) {
+		public void deleteItem(Library library) {
 			itemsObservableList.remove(library);
 			
 			for (int i = 0; i < itemsObservableList.size(); i++)
 				itemsObservableList.get(i).updatePosition(i);
 			
 			calculateCenterAfterDelete();
-			
-			if (commit)
-				Main.dbManager.commit();
 		}
 		
 		/**
@@ -480,11 +474,8 @@ public class TeamViewer {
 		 * @param library
 		 * @return True if it is
 		 */
-		public boolean isTheCenterItem(Library library) {
-			if (itemsObservableList.isEmpty())
-				return false;
-			
-			return itemsObservableList.get(centerIndex).equals(library);
+		public boolean isCenterItem(Library library) {
+			return !itemsObservableList.isEmpty() && itemsObservableList.get(centerIndex).equals(library);
 		}
 		
 		/**

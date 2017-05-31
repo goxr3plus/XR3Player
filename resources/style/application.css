@@ -71,6 +71,7 @@
 	-fx-text-fill:gold;
 	-fx-font-weight:bold;
 	-fx-font-size:18.0;
+	
 }
 
 .settingsRadioButton{
@@ -1451,6 +1452,14 @@
 	-fx-background-color:#202020;
 	-fx-text-fill:white;
 	-fx-font-weight:bold;
+}
+
+.applicationSettingsLabel{	
+	-fx-background-color:#202020;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-border-color:transparent transparent firebrick transparent;
+	-fx-border-width:2.0;
 }
 
 

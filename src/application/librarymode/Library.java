@@ -880,7 +880,7 @@ public class Library extends StackPane {
 					Main.libraryMode.multipleLibs.removeTab(getLibraryName());
 				
 				// Update the libraryViewer
-				Main.libraryMode.teamViewer.getViewer().deleteLibrary(this, false);
+				Main.libraryMode.teamViewer.getViewer().deleteItem(this);
 				
 				// Commit
 				Main.dbManager.commit();

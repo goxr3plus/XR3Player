@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xplayer.visualizer.model;
+package xplayer.visualizer;
 
 import java.util.ArrayList;
 import java.util.List;

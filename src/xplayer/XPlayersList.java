@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.presenter;
+package xplayer;
 
 import java.util.ArrayList;
 import java.util.List;

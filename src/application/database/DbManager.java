@@ -25,7 +25,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import smartcontroller.Operation;
+import smartcontroller.services.Operation;
 
 /**
  * This class is managing the database of the application.
@@ -376,7 +376,7 @@ public class DbManager {
 						}
 						
 						//Add all the Libraries to the Library Viewer
-						Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().addMultipleLibraries(libraries));
+						Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().addMultipleItems(libraries));
 						
 						//Load the Opened Libraries
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Opened Libraries..."));

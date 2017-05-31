@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.presenter;
+package xplayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -207,8 +207,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private VisualizerWindowController visualizerWindow;
 	
 	/**
-	 * This controller contains a Visualizer and a Label which describes every
-	 * time (for some milliseconds) which type of visualizer is being
+	 * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
 	 * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
 	 */
 	private final VisualizerStackController visualizerStackController = new VisualizerStackController();
@@ -233,7 +232,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * Constructor.
 	 *
 	 * @param key
-	 *        The key that is identifying this player
+	 *            The key that is identifying this player
 	 */
 	public XPlayerController(int key) {
 		this.key = key;
@@ -267,8 +266,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * Returns the XPlayerStackPane back to the XPlayerController if it is on
-	 * XPlayer external Window
+	 * Returns the XPlayerStackPane back to the XPlayerController if it is on XPlayer external Window
 	 */
 	public void restorePlayerStackPane() {
 		this.getChildren().add(getXPlayerStackPane());
@@ -388,13 +386,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * Can be called from different classes to implement the dragDrop for their
-	 * XPlayer.
+	 * Can be called from different classes to implement the dragDrop for their XPlayer.
 	 *
 	 * @param dragDrop
-	 *        the drag drop
+	 *            the drag drop
 	 * @param number
-	 *        the number
+	 *            the number
 	 */
 	public void dragDrop(DragEvent dragDrop , int number) {
 		// Keeping the absolute path
@@ -447,10 +444,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * Adjust the volume to a given value.
+	 * You can use this method to add or minus from the player volume For example you can call adjustVolume(+1) or adjustVolume(-1)
 	 *
 	 * @param value
-	 *        the value
+	 *            the value
 	 */
 	public void adjustVolume(int value) {
 		disc.setVolume(disc.getVolume() + value);
@@ -474,7 +471,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * Set the volume to this value.
 	 *
 	 * @param value
-	 *        the new volume
+	 *            the new volume
 	 */
 	public void setVolume(int value) {
 		disc.setVolume(value);
@@ -599,7 +596,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * This method is making the visualizer of the player.
 	 *
 	 * @param side
-	 *        the side
+	 *            the side
 	 */
 	public void makeTheVisualizer(Side side) {
 		
@@ -662,15 +659,15 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * This method is making the disc of the player.
 	 *
 	 * @param width
-	 *        the width
+	 *            the width
 	 * @param height
-	 *        the height
+	 *            the height
 	 * @param color
-	 *        the color
+	 *            the color
 	 * @param volume
-	 *        the volume
+	 *            the volume
 	 * @param side
-	 *        the side
+	 *            the side
 	 */
 	public void makeTheDisc(int width , int height , Color color , int volume , Side side) {
 		
@@ -743,7 +740,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * needs to be deleted.
 	 *
 	 * @param side
-	 *        the side
+	 *            the side
 	 * @deprecated
 	 */
 	@Deprecated
@@ -766,8 +763,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// XplayerTabs
 		/*
-		 * playerTabs = new XPlayerTabs(key); Button tabs = new Button("Tabs")
-		 * tabs.setId("button"); box.getChildren().add(tabs); tabs.setOnAction(e
+		 * playerTabs = new XPlayerTabs(key); Button tabs = new Button("Tabs") tabs.setId("button"); box.getChildren().add(tabs); tabs.setOnAction(e
 		 * -> playerTabs.show(firstLayerGridPane))
 		 */
 		
@@ -979,7 +975,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * Play the current song.
 	 *
 	 * @param absolutePath
-	 *        The absolute path of the file
+	 *            The absolute path of the file
 	 */
 	public void playSong(String absolutePath) {
 		
@@ -993,7 +989,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * Tries to skip forward or backward
 	 * 
 	 * @param seconds
-	 *        Seconds to seek
+	 *            Seconds to seek
 	 */
 	public void seek(int seconds) {
 		boolean ok = false;
@@ -1112,8 +1108,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * If the player is paused it resume it else if it is stopped it replays the
-	 * Media
+	 * If the player is paused it resume it else if it is stopped it replays the Media
 	 */
 	public void playOrReplay() {
 		if (xPlayer.isPaused()) // paused?

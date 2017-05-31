@@ -25,7 +25,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import smartcontroller.SmartController;
 
-// TODO When importing files from external disk they are not added properly
 /**
  * Manages the input operations of the SmartController.
  *
@@ -62,7 +61,7 @@ public class InputService extends Service<Void> {
 	 * Start the Service.
 	 *
 	 * @param list1
-	 *        the list
+	 *            the list
 	 */
 	public void start(List<File> list1) {
 		//Check if can enter...
@@ -292,11 +291,10 @@ public class InputService extends Service<Void> {
 			}
 			
 			/**
-			 * Count files in a directory (including files in all sub
-			 * directories)
+			 * Count files in a directory (including files in all sub directories)
 			 * 
 			 * @param directory
-			 *        the directory to start in
+			 *            the directory to start in
 			 * @return the total number of files
 			 */
 			int countFiles(File dir) {

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
 <fx:root prefHeight="600.0" prefWidth="812.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <PieChart fx:id="pieChart" legendSide="LEFT" style="-fx-fill: white;" title="Coming soon.. not yet implemented .. i need to think what to add here" BorderPane.alignment="CENTER" />
-   </center>
    <top>
       <BorderPane style="-fx-background-color: rgb(255,255,255,0.8); -fx-background-radius: 45 0 0 45;" BorderPane.alignment="CENTER">
          <center>

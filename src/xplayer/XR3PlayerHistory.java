@@ -1,4 +1,4 @@
-package xplayer.presenter;
+package xplayer;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

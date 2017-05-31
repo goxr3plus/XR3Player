@@ -1,4 +1,4 @@
-package smartcontroller;
+package smartcontroller.services;
 
 /**
  * Defines an operation.

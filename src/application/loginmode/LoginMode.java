@@ -469,10 +469,17 @@ public class LoginMode extends BorderPane {
 	
 	/**
 	 * @param xr3PlayerLabel
-	 *        the xr3PlayerLabel to set
+	 *            the xr3PlayerLabel to set
 	 */
 	public void setXr3PlayerLabel(Label xr3PlayerLabel) {
 		this.xr3PlayerLabel = xr3PlayerLabel;
+	}
+	
+	/**
+	 * @return the splitPane
+	 */
+	public SplitPane getSplitPane() {
+		return splitPane;
 	}
 	
 	/*-----------------------------------------------------------------------
@@ -760,7 +767,7 @@ public class LoginMode extends BorderPane {
 		 * Add multiple users at once.
 		 *
 		 * @param list
-		 *        The List with the users to be added
+		 *            The List with the users to be added
 		 */
 		public void addMultipleUsers(List<User> list) {
 			list.forEach(user -> this.addUser(user, false));
@@ -773,9 +780,9 @@ public class LoginMode extends BorderPane {
 		 * Add the new library.
 		 *
 		 * @param user
-		 *        The User to be added
+		 *            The User to be added
 		 * @param update
-		 *        Do the update on the list?
+		 *            Do the update on the list?
 		 */
 		public void addUser(User user , boolean update) {
 			itemsObservableList.add(user);
@@ -849,7 +856,7 @@ public class LoginMode extends BorderPane {
 		 * Deletes the specific user from the list
 		 * 
 		 * @param user
-		 *        User to be deleted
+		 *            User to be deleted
 		 */
 		public void deleteUser(User user) {
 			itemsObservableList.remove(user);
@@ -885,7 +892,7 @@ public class LoginMode extends BorderPane {
 		 * Sets the center index.
 		 *
 		 * @param i
-		 *        the new center index
+		 *            the new center index
 		 */
 		public void setCenterIndex(int i) {
 			if (centerIndex != i) {

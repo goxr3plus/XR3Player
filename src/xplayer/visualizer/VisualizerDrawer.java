@@ -1,11 +1,11 @@
 /**
  * 
  */
-package xplayer.visualizer.model;
+package xplayer.visualizer;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import xplayer.visualizer.model.Sprite3D.Shape3D;
+import xplayer.visualizer.Sprite3D.Shape3D;
 
 /**
  * The Class VisualizerDrawer.

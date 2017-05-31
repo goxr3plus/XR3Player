@@ -31,7 +31,7 @@ import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import xplayer.visualizer.model.ResizableCanvas;
+import xplayer.visualizer.ResizableCanvas;
 
 /**
  * Represents a disc controller.

@@ -35,12 +35,16 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </Label>
-                                                <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt; Find the Media in System Explorer" />
                                                 <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Resume/Start/Pause" />
-                                                <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Stop" />
                                                 <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Replay" />
+                                                <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Stop" />
+                                                <Label layoutX="15.0" layoutY="147.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Increase Volume (+)" />
+                                                <Label layoutX="15.0" layoutY="169.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Decrease Volume (-)" />
                                                 <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Seek Forward 10 sec" />
                                                 <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Seek Backward 10 sec" />
+                                                <Label disable="true" layoutX="15.0" layoutY="191.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Next song" />
+                                                <Label disable="true" layoutX="15.0" layoutY="213.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt;Previous Song" />
+                                                <Label maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="-&gt; Open Media with System File Explorer" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -58,12 +62,16 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </Label>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+S" />
                                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="&gt;/||  ( Play/Pause )" />
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="Media Stop Key " />
                                                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+R" />
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="&gt;&gt;|   ( Next )" />
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text=" |&lt;&lt;  ( Previous )" />
+                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="Media Stop Key " />
+                                                <Label alignment="CENTER" layoutX="15.0" layoutY="147.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+ UP " />
+                                                <Label alignment="CENTER" layoutX="15.0" layoutY="169.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+DOWN" />
+                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+ RIGHT" />
+                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+ LEFT" />
+                                                <Label alignment="CENTER" disable="true" layoutX="15.0" layoutY="169.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="Media &gt;&gt;|   ( Next )" />
+                                                <Label alignment="CENTER" disable="true" layoutX="15.0" layoutY="191.0" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="Meda  |&lt;&lt;  ( Previous )" />
+                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="shortCutKey" text="SHIFT+S" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

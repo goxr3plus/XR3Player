@@ -25,7 +25,7 @@ public class URLReader {
 		String line = "" , inputLine;
 		while ( ( inputLine = in.readLine() ) != null) {
 			line += "\n" + inputLine;
-			System.out.println(inputLine);
+			//System.out.println(inputLine);
 		}
 		in.close();
 		
@@ -38,7 +38,7 @@ public class URLReader {
 		
 		//URL: https://api.github.com/repos/goxr3plus/XR3Player/releases
 		
-		//		Arrays.stream(line.split("\"download_count\":")).skip(1).map(l -> l.split(",")[0]).forEach(l -> System.out.println(l));
+				Arrays.stream(line.split("\"download_count\":")).skip(1).map(l -> l.split(",")[0]).forEach(l -> System.out.println(l));
 		//		
 		//		int total = Arrays.stream(line.split("\"download_count\":")).skip(1).mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum();
 		//		

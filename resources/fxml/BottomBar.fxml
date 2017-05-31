@@ -12,7 +12,7 @@
 
 <fx:root alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="951.0" style="-fx-background-color: #202020; -fx-border-color: firebrick transparent firebrick transparent;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="showSocialMedia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Social Media ">
+      <Button fx:id="showSocialMedia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Social Media " visible="false">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

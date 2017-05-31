@@ -27,7 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import xplayer.presenter.XPlayerController;
+import xplayer.XPlayerController;
 
 /**
  * @author GOXR3PLUS

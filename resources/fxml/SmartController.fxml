@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -23,7 +22,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="384.0" prefWidth="617.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="411.0" prefWidth="761.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="mainBorder" style="-fx-background-color: transparent;">
          <top>
@@ -33,7 +32,7 @@
                      <content>
                         <HBox fx:id="searchBarHBox" alignment="CENTER" spacing="10.0" style="-fx-background-color: rgb(0,0,0,0.9);">
                            <children>
-                              <JFXButton fx:id="refreshButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="144.0" layoutY="19.0" styleClass="arrowButton2" text="Refresh">
+                              <Button fx:id="refreshButton" mnemonicParsing="false">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -44,8 +43,11 @@
                                  <tooltip>
                                     <Tooltip text="Refresh" />
                                  </tooltip>
-                              </JFXButton>
-                              <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="arrowButton2" text="Settings">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="showSettings" mnemonicParsing="false">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -53,7 +55,13 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
-                              </JFXButton>
+                                 <tooltip>
+                                    <Tooltip text="Settings" />
+                                 </tooltip>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                               <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="35.0" prefWidth="204.0">
                                  <children>
                                     <Button fx:id="previous" mnemonicParsing="false" style="-fx-background-radius: 15 0 0 15;" styleClass="arrowButton">

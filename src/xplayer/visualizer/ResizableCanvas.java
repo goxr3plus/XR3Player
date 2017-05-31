@@ -1,4 +1,4 @@
-package xplayer.visualizer.model;
+package xplayer.visualizer;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

@@ -22,7 +22,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import smartcontroller.Operation;
+import smartcontroller.services.Operation;
 
 /**
  * This class is used as the SideBar of the application.

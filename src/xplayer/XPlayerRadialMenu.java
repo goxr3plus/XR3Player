@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xplayer.presenter;
+package xplayer;
 
 import application.tools.ActionTool;
 import application.tools.InfoTool;

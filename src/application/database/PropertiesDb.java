@@ -13,10 +13,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import application.tools.ActionTool;
 import application.tools.InfoTool;
-import application.tools.NotificationType;
-import javafx.util.Duration;
 
 /**
  * This class is saving all the XR3Player Settings to a property file
@@ -58,7 +55,7 @@ public class PropertiesDb {
 			return;
 		
 		String propertiesAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + "config.properties";
-		System.out.println("Updating Property!");
+		//System.out.println("Updating Property!");
 		
 		//Check if exists [ Create if Not ] 
 		if (!new File(propertiesAbsolutePath).exists())

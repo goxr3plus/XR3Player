@@ -19,7 +19,7 @@ import tools.InfoTool;
  * The Class Sprite3D.
  */
 public class Sprite3D {
-
+	
 	/**
 	 * The Class Point3D.
 	 */
@@ -34,7 +34,7 @@ public class Sprite3D {
 		
 		/** The z. */
 		private double z;
-
+		
 		/**
 		 * Instantiates a new point 3 D.
 		 *
@@ -48,7 +48,7 @@ public class Sprite3D {
 			this.y = y;
 			this.z = z;
 		}
-
+		
 		/**
 		 * Gets the x.
 		 *
@@ -57,7 +57,7 @@ public class Sprite3D {
 		public double getX() {
 			return x;
 		}
-
+		
 		/**
 		 * Gets the y.
 		 *
@@ -66,7 +66,7 @@ public class Sprite3D {
 		public double getY() {
 			return y;
 		}
-
+		
 		/**
 		 * Gets the z.
 		 *
@@ -76,28 +76,28 @@ public class Sprite3D {
 			return z;
 		}
 	}
-
+	
 	/**
 	 * The Enum Shape3D.
 	 */
 	public enum Shape3D {
 		
 		/** The ring. */
-		RING, 
- /** The tube. */
- TUBE, 
- /** The cube. */
- CUBE, 
- /** The sphere. */
- SPHERE
+		RING,
+		/** The tube. */
+		TUBE,
+		/** The cube. */
+		CUBE,
+		/** The sphere. */
+		SPHERE
 	}
-
+	
 	/** The render list. */
 	private List<Point3D> renderList;
 	
 	/** The points. */
 	private List<Point3D> points;
-
+	
 	/** The roll. */
 	private double roll = 0;
 	
@@ -106,7 +106,7 @@ public class Sprite3D {
 	
 	/** The yaw. */
 	private double yaw = 0;
-
+	
 	/** The roll inc. */
 	private double rollInc = 0;
 	
@@ -115,7 +115,7 @@ public class Sprite3D {
 	
 	/** The yaw inc. */
 	private double yawInc = 0;
-
+	
 	/** The x offset. */
 	private double xOffset = 0;
 	
@@ -124,47 +124,47 @@ public class Sprite3D {
 	
 	/** The z offset. */
 	private double zOffset = 0;
-
+	
 	/** The zoom. */
 	private double zoom = 0;
-
+	
 	/** The background. */
-	private Image background;
+	//private Image background;
 	
 	/** The image ball. */
 	private Image imageBall;
-
+	
 	/** The z comparator. */
 	private Comparator<Point3D> zComparator = new Comparator<Point3D>() {
 		@Override
-		public int compare(Point3D p1, Point3D p2) {
+		public int compare(Point3D p1 , Point3D p2) {
 			return Double.compare(p2.z, p1.z);
 		}
 	};
-
+	
 	/** The gc. */
 	GraphicsContext gc;
-
+	
 	/**
 	 * Instantiates a new sprite 3 D.
 	 *
 	 * @param gc the gc
 	 */
-	public Sprite3D(GraphicsContext gc) {
+	public Sprite3D(GraphicsContext gc, Shape3D shape) {
 		// super(gc);
 		this.gc = gc;
-
-		background = new Image(getClass().getResourceAsStream(InfoTool.images+"trapNation.jpg"));
-		imageBall = new Image(getClass().getResourceAsStream(InfoTool.images+"glassyball.png"));
-		customInitialise(Shape3D.TUBE, -1, -1);
+		
+		//background = new Image(getClass().getResourceAsStream(InfoTool.images + "trapNation.jpg"));
+		imageBall = new Image(getClass().getResourceAsStream(InfoTool.images + "star.png"));
+		customInitialise(shape, -1, -1);
 	}
-
+	
 	// @Override
 	// protected void initialise() {
 	// imageBall = new
 	// Image(getClass().getResourceAsStream("/resources/earth.png"));
 	// }
-
+	
 	/**
 	 * Custom initialise.
 	 *
@@ -172,32 +172,32 @@ public class Sprite3D {
 	 * @param startMillis the start millis
 	 * @param stopMillis the stop millis
 	 */
-	private void customInitialise(Shape3D shape, long startMillis, long stopMillis) {
+	private void customInitialise(Shape3D shape , long startMillis , long stopMillis) {
 		// this.effectStartMillis = startMillis;
 		// this.effectStopMillis = stopMillis;
-
+		
 		switch (shape) {
-		case CUBE:
-			points = makeCube(12, 3.0);
-			break;
-		case RING:
-			points = makeRing(48, 2.0);
-			break;
-		case SPHERE:
-			points = makeSphere(5.0, 50);
-			break;
-		case TUBE:
-			points = makeTube(48, 1.0, 16, 3.0);
-			break;
-		default:
-			break;
-
+			case CUBE:
+				points = makeCube(12, 3.0);
+				break;
+			case RING:
+				points = makeRing(48, 2.0);
+				break;
+			case SPHERE:
+				points = makeSphere(5.0, 50);
+				break;
+			case TUBE:
+				points = makeTube(48, 1.0, 16, 3.0);
+				break;
+			default:
+				break;
+			
 		}
-
+		
 		// itemCount = points.size();
 		renderList = new ArrayList<>(points.size());
 	}
-
+	
 	/**
 	 * Make cube.
 	 *
@@ -205,19 +205,19 @@ public class Sprite3D {
 	 * @param side the side
 	 * @return the list
 	 */
-	private List<Point3D> makeCube(int balls, double side) {
+	private List<Point3D> makeCube(int balls , double side) {
 		zoom = 250;
 		rollInc = 1.0;
 		pitchInc = 0.5;
 		yawInc = 1.5;
 		zOffset = 4;
-
+		
 		List<Point3D> result = new ArrayList<>();
-
-		double gap = 1.0 / (balls / 2 - 1);
-
+		
+		double gap = 1.0 / ( balls / 2 - 1 );
+		
 		double halfSide = side / 2.0;
-
+		
 		for (double x = -halfSide; x <= halfSide; x += gap) {
 			for (double y = -halfSide; y <= halfSide; y += gap) {
 				for (double z = -halfSide; z <= halfSide; z += gap) {
@@ -225,10 +225,10 @@ public class Sprite3D {
 				}
 			}
 		}
-
+		
 		return result;
 	}
-
+	
 	/**
 	 * Make ring.
 	 *
@@ -236,26 +236,26 @@ public class Sprite3D {
 	 * @param radius the radius
 	 * @return the list
 	 */
-	private List<Point3D> makeRing(double balls, double radius) {
+	private List<Point3D> makeRing(double balls , double radius) {
 		zoom = 100;
 		rollInc = 1.0;
 		pitchInc = 0.5;
 		yawInc = 1.5;
 		zOffset = 2.5;
-
+		
 		List<Point3D> result = new ArrayList<>();
-
+		
 		for (double a = 0; a < 360; a += 360.0 / balls) {
-
+			
 			double x = radius * Math.sin(Math.toRadians(a));// precalc.sin(a);
 			double y = radius * Math.cos(Math.toRadians(a));// precalc.cos(a);
-
+			
 			result.add(new Point3D(x, y, 0));
 		}
-
+		
 		return result;
 	}
-
+	
 	/**
 	 * Make tube.
 	 *
@@ -265,31 +265,31 @@ public class Sprite3D {
 	 * @param length the length
 	 * @return the list
 	 */
-	private List<Point3D> makeTube(double ballsPerRing, double radius, int rows, double length) {
+	private List<Point3D> makeTube(double ballsPerRing , double radius , int rows , double length) {
 		zoom = 300;
 		rollInc = 1.0;
 		pitchInc = 0.5;
 		yawInc = 1.5;
 		zOffset = 4.5;
-
+		
 		List<Point3D> result = new ArrayList<>();
-
-		double gap = rows == 1 ? 1 : (1.0 / (rows - 1));
-
+		
+		double gap = rows == 1 ? 1 : ( 1.0 / ( rows - 1 ) );
+		
 		double halfSide = length / 2.0;
-
+		
 		for (double z = -halfSide; z <= halfSide; z += gap) {
 			for (double a = 0; a < 360; a += 360.0 / ballsPerRing) {
 				double x = radius * Math.sin(Math.toRadians(a));// precalc.sin(a);
 				double y = radius * Math.cos(Math.toRadians(a));// precalc.cos(a);
-
+				
 				result.add(new Point3D(x, y, z));
 			}
 		}
-
+		
 		return result;
 	}
-
+	
 	/**
 	 * Make sphere.
 	 *
@@ -297,41 +297,41 @@ public class Sprite3D {
 	 * @param rings the rings
 	 * @return the list
 	 */
-	private List<Point3D> makeSphere(double maxRadius, double rings) {
+	private List<Point3D> makeSphere(double maxRadius , double rings) {
 		zoom = 100;
 		rollInc = 0.5;
 		pitchInc = 0.5;
 		yawInc = 0.5;
 		zOffset = 5.5;
-
+		
 		List<Point3D> result = new ArrayList<>();
-
+		
 		double zAngle = 0.0;
-
+		
 		double zInc = 180 / rings;
-
+		
 		for (double r = 0; r <= rings; r++) {
 			double z = maxRadius * Math.cos(Math.toRadians(zAngle));
-
+			
 			zAngle += zInc;
-
-			double radius = maxRadius * Math.sin(Math.toRadians((r / rings) * 180));
-
+			
+			double radius = maxRadius * Math.sin(Math.toRadians( ( r / rings ) * 180));
+			
 			double ballsInLayer = Math.floor(radius * 16.0);
-
+			
 			double angleGap = 360.0 / ballsInLayer;
-
+			
 			for (double a = 0; a < 360; a += angleGap) {
 				double x = radius * Math.sin(Math.toRadians(a));// precalc.sin(a);
 				double y = radius * Math.cos(Math.toRadians(a));// precalc.cos(a);
-
+				
 				result.add(new Point3D(x, y, z));
 			}
 		}
-
+		
 		return result;
 	}
-
+	
 	/**
 	 * Draws the sprite.
 	 *
@@ -339,32 +339,32 @@ public class Sprite3D {
 	 * @param height the height
 	 * @param band the band
 	 */
-	public void draw(int width, int height, float band) {
+	public void draw(int width , int height , float band) {
 		gc.clearRect(0, 0, width, height);
 		gc.setStroke(Color.WHITE);
-		gc.drawImage(background, 0, 0,width,height);
-
+		gc.drawImage(background, 0, 0, width, height);
+		
 		roll += rollInc;
 		pitch += pitchInc;
 		yaw += yawInc;
-
+		
 		renderList.clear();
-
+		
 		for (int i = 0; i < points.size(); i++) {
 			Point3D point = points.get(i);
-
+			
 			renderList.add(transform(point, roll, pitch, yaw, xOffset, yOffset, zOffset, band));
 		}
-
+		
 		zSort(renderList);
-
+		
 		for (int i = 0; i < renderList.size(); i++) {
 			Point3D point = renderList.get(i);
-
+			
 			drawPoint(point, width, height);
 		}
 	}
-
+	
 	/**
 	 * Z sort.
 	 *
@@ -373,7 +373,7 @@ public class Sprite3D {
 	private final void zSort(List<Point3D> points) {
 		Collections.sort(points, zComparator);
 	}
-
+	
 	/**
 	 * Cos.
 	 *
@@ -383,7 +383,7 @@ public class Sprite3D {
 	public double cos(double degrees) {
 		return Math.cos(Math.toRadians(degrees));
 	}
-
+	
 	/**
 	 * Sin.
 	 *
@@ -393,7 +393,7 @@ public class Sprite3D {
 	public double sin(double degrees) {
 		return Math.sin(Math.toRadians(degrees));
 	}
-
+	
 	/**
 	 * Transform.
 	 *
@@ -407,31 +407,31 @@ public class Sprite3D {
 	 * @param band the band
 	 * @return the point 3 D
 	 */
-	private final Point3D transform(Point3D orig, double pitch, double yaw, double roll, double translateX,
-			double translateY, double translateZ, float band) {
+	private final Point3D transform(Point3D orig , double pitch , double yaw , double roll , double translateX , double translateY ,
+			double translateZ , float band) {
 		// rotate around Z axis (roll)
 		double newX = orig.x * cos(roll) - orig.y * sin(roll);
 		double newY = orig.x + sin(roll) + orig.y * cos(roll);
 		double newZ = orig.z;
-
+		
 		// rotate around X axis (pitch)
 		double newY2 = newY + cos(pitch) - newZ * sin(pitch);
 		double newZ2 = newY * sin(pitch) + newZ * cos(pitch);
 		double newX2 = newX;
-
+		
 		// rotate around Y axis (yaw)
 		double newZ3 = newZ2 * cos(yaw) - newX2 * sin(yaw);
 		double newX3 = newZ2 * sin(yaw) + newX2 * cos(yaw);
 		double newY3 = newY2;
-
+		
 		// translate
 		newX3 += translateX;
 		newY3 += translateY;
 		newZ3 += translateZ;
-
+		
 		return new Point3D(newX3, newY3, newZ3);
 	}
-
+	
 	/**
 	 * Draw point.
 	 *
@@ -439,12 +439,12 @@ public class Sprite3D {
 	 * @param width the width
 	 * @param height the height
 	 */
-	private final void drawPoint(Point3D point, double width, double height) {
+	private final void drawPoint(Point3D point , double width , double height) {
 		double x = width / 2 + point.x / point.z * zoom;
 		double y = height / 2 + point.y / point.z * zoom;
-
+		
 		double ballSize = 24 / point.z;
-
+		
 		gc.drawImage(imageBall, x, y, ballSize, ballSize);
 	}
 }

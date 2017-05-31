@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.presenter;
+package xplayer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -36,8 +36,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import xplayer.presenter.XPlayerController;
-import xplayer.visualizer.model.VisualizerDrawer;
+import xplayer.XPlayerController;
+import xplayer.visualizer.VisualizerDrawer;
 
 /**
  * The Class VisualizerWindow.

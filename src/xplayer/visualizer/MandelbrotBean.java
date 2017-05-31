@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package xplayer.visualizer.model;
+package xplayer.visualizer;
 
 import javafx.scene.paint.Color;
 

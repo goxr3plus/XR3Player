@@ -39,7 +39,7 @@
             </Label>
             <SplitPane fx:id="splitPane" dividerPositions="0.7" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                <items>
-                  <BorderPane fx:id="borderPane">
+                  <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308">
                      <center>
                         <StackPane fx:id="usersStackView" prefHeight="298.0" BorderPane.alignment="CENTER">
                            <children>

@@ -36,7 +36,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import xplayer.presenter.XPlayerController;
+import xplayer.XPlayerController;
 
 /**
  * This class contains everything needed going on LibraryMode.
@@ -196,7 +196,7 @@ public class LibraryMode extends BorderPane {
 						
 						// Add the library
 						currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
-						teamViewer.getViewer().addLibrary(currentLib, true);
+						teamViewer.getViewer().addItem(currentLib, true);
 						
 						// Add a row on libraries table
 						insertNewLibrary.setString(1, name);
@@ -279,7 +279,7 @@ public class LibraryMode extends BorderPane {
 	@FXML
 	public void initialize() {
 		
-		//Initialize
+		//Initialise
 		teamViewer = new TeamViewer(this);
 		
 		// createLibrary
@@ -293,7 +293,6 @@ public class LibraryMode extends BorderPane {
 		selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.getViewer().goOnSelectionMode(newValue));
 		
 		// searchLibrary
-		//topGrid.add(librariesSearcher, 1, 0)
 		botttomHBox.getChildren().add(librariesSearcher);
 		
 		// previous
@@ -313,13 +312,6 @@ public class LibraryMode extends BorderPane {
 		Main.xPlayersList.addXPlayerController(new XPlayerController(0));
 		Main.xPlayersList.getXPlayerController(0).makeTheDisc(150, 150, Color.FIREBRICK, 45, Side.LEFT);
 		Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
-		
-		//add(Main.xPlayersList.getXPlayerController(0), 1, 0);
-		//super.row
-		
-		//super.setRowIndex(borderPane, 1);
-		
-		//Let'z GO
 		
 		// -- openLibrariesContextMenu
 		openLibraryContextMenu.setOnAction(a -> {
@@ -353,8 +345,8 @@ public class LibraryMode extends BorderPane {
 		settingsOfLibrary.setOnAction(a -> settings.showWindow(teamViewer.getViewer().centerItemProperty().get()));
 		
 		//----librariesInfoLabel
-		librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ", openedLibraries,
-				" ] Opened", " , [ ", 0, " ] Empty"));
+		librariesInfoLabel.textProperty()
+				.bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ", openedLibraries, " ] Opened"));
 		
 	}
 	

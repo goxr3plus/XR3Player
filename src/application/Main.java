@@ -31,7 +31,6 @@ import application.presenter.SideBar;
 import application.presenter.TopBar;
 import application.presenter.UpdateScreen;
 import application.presenter.treeview.TreeViewManager;
-import application.services.MediaFilterService;
 import application.services.VacuumProgressService;
 import application.settings.ApplicationSettingsController;
 import application.tools.ActionTool;
@@ -70,8 +69,9 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import smartcontroller.MediaContextMenu;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
-import xplayer.presenter.PlayedMediaList;
-import xplayer.presenter.XPlayersList;
+import smartcontroller.services.MediaFilterService;
+import xplayer.PlayedMediaList;
+import xplayer.XPlayersList;
 import xplayer.visualizer.view.VisualizerWindowController.Type;
 import xr3capture.CaptureWindow;
 
@@ -94,7 +94,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		applicationProperties.put("Version", 71);
-		applicationProperties.put("ReleasedDate", "30/05/2017");
+		applicationProperties.put("ReleasedDate", "31/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
 		
@@ -116,8 +116,7 @@ public class Main extends Application {
 	public static final RenameWindow renameWindow = new RenameWindow();
 	
 	/**
-	 * This window is being used to export files from the application to the
-	 * outside world
+	 * This window is being used to export files from the application to the outside world
 	 */
 	public static final ExportWindowController exportWindow = new ExportWindowController();
 	
@@ -133,8 +132,7 @@ public class Main extends Application {
 	public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
 	
 	/**
-	 * This class is used to capture the computer Screen or a part of it [ Check
-	 * XR3Capture package]
+	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
 	 */
 	public static CaptureWindow captureWindow = new CaptureWindow();
 	
@@ -222,20 +220,17 @@ public class Main extends Application {
 	public static MultipleTabs multipleTabs = new MultipleTabs();
 	
 	/**
-	 * The Login Mode where the user of the applications has to choose an
-	 * account to login
+	 * The Login Mode where the user of the applications has to choose an account to login
 	 */
 	public static LoginMode loginMode = new LoginMode();
 	
 	/**
-	 * Entering in this mode you can change the user settings and other things
-	 * that have to do with the user....
+	 * Entering in this mode you can change the user settings and other things that have to do with the user....
 	 */
 	public static UserMode userMode = new UserMode();
 	
 	/***
-	 * This BorderPane has in the center the root , at the left the SideBar and
-	 * on the Top the TopBar
+	 * This BorderPane has in the center the root , at the left the SideBar and on the Top the TopBar
 	 */
 	// private static BorderPane applicationBorderPane = new BorderPane();
 	
@@ -271,6 +266,9 @@ public class Main extends Application {
 		
 		//Show the Window
 		window.show();
+		
+		//---Login Mode---- It must be set after the window has been shown
+		loginMode.getSplitPane().setDividerPositions(0.65, 0.35);
 		
 		//Load the informations about every user
 		loginMode.usersInfoLoader.start();
@@ -484,8 +482,7 @@ public class Main extends Application {
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * Checks if the Current Java Version is the appropriate for the application
-	 * [[SuppressWarningsSpartan]]
+	 * Checks if the Current Java Version is the appropriate for the application [[SuppressWarningsSpartan]]
 	 */
 	private void checkJavaCombatibility() {
 		
@@ -511,7 +508,7 @@ public class Main extends Application {
 	 * Terminate the application.
 	 *
 	 * @param vacuum
-	 *        the vacuum
+	 *            the vacuum
 	 */
 	private static void terminate(boolean vacuum) {
 		
@@ -566,7 +563,7 @@ public class Main extends Application {
 	 * Calling this method restarts the application
 	 * 
 	 * @param askUser
-	 *        Ask the User if he/she wants to restart the application
+	 *            Ask the User if he/she wants to restart the application
 	 */
 	public static void restartTheApplication(boolean askUser) {
 		
@@ -754,8 +751,7 @@ public class Main extends Application {
 	static boolean backgroundFound;
 	
 	/**
-	 * Determines the background image of the application based on if a custom
-	 * image exists inside the database .If not then the default image is
+	 * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is
 	 * being added :)
 	 * 
 	 */
@@ -793,7 +789,7 @@ public class Main extends Application {
 	 * Main Method.
 	 *
 	 * @param args
-	 *        the arguments
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 		System.out.println("Hello from Main Method!");

@@ -1,10 +1,10 @@
 /**
  * 
  */
-package xplayer.visualizer.model;
+package xplayer.visualizer;
 
 import javafx.scene.paint.Color;
-import xplayer.visualizer.model.MandelbrotBean.ColorSchema;
+import xplayer.visualizer.MandelbrotBean.ColorSchema;
 
 /*-----------------------------------------------------------------------
  * 

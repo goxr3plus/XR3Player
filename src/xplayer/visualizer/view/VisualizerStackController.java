@@ -18,8 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import xplayer.presenter.XPlayerController;
-import xplayer.visualizer.model.VisualizerModel;
+import xplayer.XPlayerController;
+import xplayer.visualizer.VisualizerModel;
 
 /**
  * 

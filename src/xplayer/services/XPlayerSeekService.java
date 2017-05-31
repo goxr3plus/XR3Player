@@ -6,7 +6,7 @@ import application.Main;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
-import xplayer.presenter.XPlayerController;
+import xplayer.XPlayerController;
 import xplayer.streamplayer.StreamPlayerException;
 
 /**

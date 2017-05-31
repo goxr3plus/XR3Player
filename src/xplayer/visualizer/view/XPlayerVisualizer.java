@@ -5,7 +5,7 @@ package xplayer.visualizer.view;
 
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
-import xplayer.presenter.XPlayerController;
+import xplayer.XPlayerController;
 
 /**
  * This class is updating the panel of the XPlayerUI.

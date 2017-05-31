@@ -70,10 +70,10 @@ public class SmartController extends StackPane {
 	private HBox searchBarHBox;
 	
 	@FXML
-	private JFXButton refreshButton;
+	private Button refreshButton;
 	
 	@FXML
-	private JFXButton showSettings;
+	private Button showSettings;
 	
 	@FXML
 	private HBox navigationHBox;

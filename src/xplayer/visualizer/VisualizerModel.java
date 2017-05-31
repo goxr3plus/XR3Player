@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.visualizer.model;
+package xplayer.visualizer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

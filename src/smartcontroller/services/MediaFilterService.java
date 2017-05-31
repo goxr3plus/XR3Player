@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.services;
+package smartcontroller.services;
 
 import static application.Main.libraryMode;
 
@@ -36,8 +36,7 @@ public class MediaFilterService {
 	private final BooleanProperty threadStopped = new SimpleBooleanProperty(false);
 	
 	/**
-	 * This executor service is used in order the playerState events to be
-	 * executed in an order
+	 * This executor service is used in order the playerState events to be executed in an order
 	 */
 	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("Files Filter Service"));
 	
@@ -77,12 +76,10 @@ public class MediaFilterService {
 	private void startFilteringControllers() {
 		
 		//Filter Selected Opened Library SmartController
-		filterController(
-				libraryMode.multipleLibs.getSelectedLibrary() == null ? null : libraryMode.multipleLibs.getSelectedLibrary().getSmartController());
+		filterController(libraryMode.multipleLibs.getSelectedLibrary() == null ? null : libraryMode.multipleLibs.getSelectedLibrary().getSmartController());
 		
 		//Filter XPlayer PlayLists SmartControllers
-		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-				.forEach(this::filterController);
+		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(this::filterController);
 		
 		//Filter SearchWindow SmartController
 		filterController(Main.searchWindow.getSmartController());
@@ -93,7 +90,7 @@ public class MediaFilterService {
 	 * Checks the Elements of the SmartController using some conditions.
 	 * 
 	 * @throws InterruptedException
-	 *         the interrupted exception [[SuppressWarningsSpartan]]
+	 *             the interrupted exception [[SuppressWarningsSpartan]]
 	 */
 	private void filterController(SmartController controller) {
 		
@@ -145,10 +142,8 @@ public class MediaFilterService {
 					String mediaName = InfoTool.getFileName(media.getFilePath()).toLowerCase();
 					// String mediaPath = media.getFilePath().toLowerCase()
 					long mediaFileLength = new File(media.getFilePath()).length();
-					setMediaPlayed(media,
-							Main.playedSongs.getSet().stream()
-									.filter(playedFileAbsolutePath -> playedFileAbsolutePath.toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
-									.anyMatch(playedFile -> new File(playedFile).length() == mediaFileLength));
+					setMediaPlayed(media, Main.playedSongs.getSet().stream().filter(playedFileAbsolutePath -> playedFileAbsolutePath.toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
+							.anyMatch(playedFile -> new File(playedFile).length() == mediaFileLength));
 					
 				}
 			});

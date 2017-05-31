@@ -16,8 +16,8 @@ import javafx.concurrent.Task;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
+import xplayer.XPlayerController;
 import xplayer.model.AudioType;
-import xplayer.presenter.XPlayerController;
 
 /**
  * This Service is used to start the Audio of XR3Player

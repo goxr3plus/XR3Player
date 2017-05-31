@@ -6,8 +6,8 @@ package xplayer.visualizer.view;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
-import xplayer.presenter.XPlayerController;
-import xplayer.visualizer.model.VisualizerDrawer;
+import xplayer.XPlayerController;
+import xplayer.visualizer.VisualizerDrawer;
 
 /**
  * The Class Visualizer.

@@ -1,94 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXRadioButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox alignment="TOP_CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Side Bar Settings(?)">
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Side Bar Horizontal Position" />
+            <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT " GridPane.columnIndex="1">
                <tooltip>
-                  <Tooltip text="Side Bar Settings" />
+                  <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
-            </Label>
-            <HBox alignment="CENTER">
-               <children>
-                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT (Default )" HBox.hgrow="ALWAYS">
-                     <tooltip>
-                        <Tooltip text="The Side Bar will be at the left of the Window" />
-                     </tooltip>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="sideBarSideGroup" />
-                     </toggleGroup>
-                  </JFXRadioButton>
-                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT" toggleGroup="$sideBarSideGroup" HBox.hgrow="ALWAYS">
-                     <tooltip>
-                        <Tooltip text="The Side Bar will be at the left of the Window" />
-                     </tooltip>
-                  </JFXRadioButton>
-               </children>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-            </HBox>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Turn Library Mode Upside Down(?)">
+               <toggleGroup>
+                  <ToggleGroup fx:id="sideBarSideGroup" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT" toggleGroup="$sideBarSideGroup" GridPane.columnIndex="2">
                <tooltip>
-                  <Tooltip text="Library Mode Settings" />
+                  <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
-            </Label>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="54.0">
-               <children>
-                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No (Default)" HBox.hgrow="ALWAYS">
-                     <tooltip>
-                        <Tooltip text="The Side Bar will be at the left of the Window" />
-                     </tooltip>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="libraryModeUpsideDown" />
-                     </toggleGroup>
-                  </JFXRadioButton>
-                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" HBox.hgrow="ALWAYS">
-                     <tooltip>
-                        <Tooltip text="The Side Bar will be at the left of the Window" />
-                     </tooltip>
-                  </JFXRadioButton>
-               </children>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-            </HBox>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Turn DJ Mode Upside Down(?)">
+            </JFXRadioButton>
+            <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No " GridPane.columnIndex="1" GridPane.rowIndex="2">
                <tooltip>
-                  <Tooltip text="DJ ModeSettings" />
+                  <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
-            </Label>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0">
-               <children>
-                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No (Default)" HBox.hgrow="ALWAYS">
-                     <tooltip>
-                        <Tooltip text="The Side Bar will be at the left of the Window" />
-                     </tooltip>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="djModeUpsideDown" />
-                     </toggleGroup>
-                  </JFXRadioButton>
-                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" HBox.hgrow="ALWAYS">
-                     <tooltip>
-                        <Tooltip text="The Side Bar will be at the left of the Window" />
-                     </tooltip>
-                  </JFXRadioButton>
-               </children>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-            </HBox>
+               <toggleGroup>
+                  <ToggleGroup fx:id="libraryModeUpsideDown" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="The Side Bar will be at the left of the Window" />
+               </tooltip>
+            </JFXRadioButton>
+            <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="The Side Bar will be at the left of the Window" />
+               </tooltip>
+               <toggleGroup>
+                  <ToggleGroup fx:id="djModeUpsideDown" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="The Side Bar will be at the left of the Window" />
+               </tooltip>
+            </JFXRadioButton>
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="DJ Mode Upside Down" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Main Mode Upside Down" GridPane.rowIndex="2" />
          </children>
-      </VBox>
+      </GridPane>
    </center>
 </fx:root>
