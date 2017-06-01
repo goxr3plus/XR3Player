@@ -18,6 +18,7 @@ import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -46,13 +47,13 @@ public class SideBar extends BorderPane {
 	private MenuItem deleteDataBase;
 	
 	@FXML
-	private JFXButton applicationSearch;
+	private Button applicationSearch;
 	
 	@FXML
-	private JFXButton snapshot;
+	private Button snapshot;
 	
 	@FXML
-	private JFXButton applicationConverter;
+	private Button applicationConverter;
 	
 	@FXML
 	private JFXButton applicationConsole;
@@ -73,7 +74,7 @@ public class SideBar extends BorderPane {
 	private MenuItem donation;
 	
 	@FXML
-	private JFXButton donateButton;
+	private Button donateButton;
 	
 	// -------------------------------------------------------------
 	

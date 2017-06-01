@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -16,6 +18,10 @@ import java.util.stream.Collectors;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.json.simple.DeserializationException;
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsoner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,6 +35,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -63,6 +70,12 @@ public class UpdateWindow extends StackPane {
 	private Button closeWindow;
 	
 	@FXML
+	private Tab gitHubReleases;
+	
+	@FXML
+	private Accordion gitHubAccordion;
+	
+	@FXML
 	private Tab releasesTab;
 	
 	@FXML
@@ -74,12 +87,6 @@ public class UpdateWindow extends StackPane {
 	@FXML
 	private BorderPane upcomingFeaturesContainer;
 	
-	@FXML
-	private Tab gitHubReleasesTab;
-	
-	@FXML
-	private BorderPane gitHubInfoContrainer;
-	
 	// -------------------------------------------------------------
 	
 	/** The logger. */
@@ -90,10 +97,8 @@ public class UpdateWindow extends StackPane {
 	
 	private final InlineCssTextArea gitHubTextArea = new InlineCssTextArea();
 	private final InlineCssTextArea upcomingTextArea = new InlineCssTextArea();
-	private final InlineCssTextArea textArea = new InlineCssTextArea();
 	private final VirtualizedScrollPane<InlineCssTextArea> vsPane1 = new VirtualizedScrollPane<>(gitHubTextArea);
 	private final VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(upcomingTextArea);
-	private final VirtualizedScrollPane<InlineCssTextArea> vsPane3 = new VirtualizedScrollPane<>(textArea);
 	
 	private int update;
 	
@@ -122,7 +127,6 @@ public class UpdateWindow extends StackPane {
 		
 		window.setTitle("Update Window");
 		window.initStyle(StageStyle.UTILITY);
-		window.setResizable(false);
 		window.setScene(new Scene(this));
 		window.getScene().setOnKeyReleased(k -> {
 			if (k.getCode() == KeyCode.ESCAPE)
@@ -136,10 +140,6 @@ public class UpdateWindow extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//textArea
-		textArea.setEditable(false);
-		textArea.setFocusTraversable(false);
-		
 		// --
 		gitHubTextArea.setEditable(false);
 		gitHubTextArea.setFocusTraversable(false);
@@ -152,7 +152,6 @@ public class UpdateWindow extends StackPane {
 		//--
 		releasesInfoContainer.setCenter(vsPane1);
 		upcomingFeaturesContainer.setCenter(vsPane2);
-		gitHubInfoContrainer.setCenter(vsPane3);
 		
 		// -- automaticUpdate
 		automaticUpdate.setOnAction(a -> startXR3PlayerUpdater(update));
@@ -169,11 +168,10 @@ public class UpdateWindow extends StackPane {
 	}
 	
 	/**
-	 * This method is fetching data from github to check if the is a new update
-	 * for XR3Player
+	 * This method is fetching data from github to check if the is a new update for XR3Player
 	 * 
 	 * @param showTheWindow
-	 *        If not update is available then don't show the window
+	 *            If not update is available then don't show the window
 	 */
 	public synchronized void searchForUpdates(boolean showTheWindow) {
 		
@@ -215,6 +213,20 @@ public class UpdateWindow extends StackPane {
 			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
 				return;
 			
+			//GitHub Releases
+			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
+			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+			
+			//Read line by line
+			String json[] = { "" };
+			String inputLine;
+			while ( ( inputLine = in.readLine() ) != null) {
+				json[0] += "\n" + inputLine;
+				//System.out.println(inputLine);
+			}
+			in.close();
+			
 			// Update is available or not?
 			Platform.runLater(() -> {
 				
@@ -227,17 +239,53 @@ public class UpdateWindow extends StackPane {
 					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!! |  Current : ->( " + currentVersion + " )<-");
 				}
 				
+				//Add all the elements to the accordion
+				gitHubAccordion.getPanes().clear();
+				JsonArray jsonRoot;
+				try {
+					jsonRoot = (JsonArray) Jsoner.deserialize(json[0]);
+					jsonRoot.forEach(item -> {
+						//--
+						String prerelease = ( (JsonObject) item ).get("prerelease").toString();
+						
+						//--
+						String tagName = ( (JsonObject) item ).get("tag_name").toString();
+						
+						//--
+						String[] downloads = { "" };
+						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> downloads[0] = ( (JsonObject) item2 ).get("download_count").toString());
+						downloads[0] = ( downloads[0].isEmpty() ? "-" : downloads[0] );
+						
+						//--
+						String[] size = { "" };
+						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> size[0] = ( (JsonObject) item2 ).get("size").toString());
+						size[0] = ( size[0].isEmpty() ? "-" : InfoTool.getFileSizeEdited(Long.parseLong(size[0])) );
+						
+						//--
+						String[] createdAt = { ( (JsonObject) item ).get("created_at").toString() };
+						
+						//--
+						String[] publishedAt = { ( (JsonObject) item ).get("published_at").toString() };
+						
+						//Create TitlePane and add it to the accordion
+						GitHubRelease release = new GitHubRelease();
+						release.setText("Update -> " + tagName.toLowerCase().replace("v3.", ""));
+						release.updateLabels(Boolean.toString(!Boolean.parseBoolean(prerelease)), downloads[0], size[0], publishedAt[0].substring(0, 10),
+								createdAt[0].substring(0, 10));
+						gitHubAccordion.getPanes().add(release);
+					});
+					gitHubAccordion.setExpandedPane(gitHubAccordion.getPanes().get(0));
+				} catch (DeserializationException e) {
+					e.printStackTrace();
+				}
+				
 				//Clear the textAreas
-				textArea.clear();
 				gitHubTextArea.clear();
 				upcomingTextArea.clear();
 				
 				// -- gitHubTextArea 			
 				doc.getElementsByTag("article").stream().collect(Collectors.toCollection(ArrayDeque::new)).descendingIterator()
 						.forEachRemaining(element -> analyzeUpdate(gitHubTextArea, element));
-				
-				//---textArea
-				doc.getElementsByTag("article").stream().reduce((first , second) -> second).ifPresent(element -> analyzeUpdate(textArea, element));
 				
 				//textArea.moveTo(gitHubTextArea.getLength());
 				//textArea.requestFollowCaret();
@@ -286,9 +334,7 @@ public class UpdateWindow extends StackPane {
 	}
 	
 	/**
-	 * Streams the given update and appends it to the InlineCssTextArea in a
-	 * specific
-	 * format
+	 * Streams the given update and appends it to the InlineCssTextArea in a specific format
 	 * 
 	 * @param textArea
 	 * @param Element

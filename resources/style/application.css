@@ -1298,6 +1298,7 @@
 
 .menu-button .label:hover{
 	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
+	-fx-background-radius:45;
 	-fx-text-fill:white;
 }
 
@@ -1307,6 +1308,7 @@
 
 .visWindowMenuButton .label:hover{	
 	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
+	-fx-background-radius:45;
 	-fx-text-fill:white;
 }
 
@@ -1459,6 +1461,14 @@
 	-fx-text-fill:white;
 	-fx-font-weight:bold;
 	-fx-border-color:transparent transparent firebrick transparent;
+	-fx-border-width:2.0;
+}
+
+.applicationSettingsLabel2{	
+	-fx-background-color:#202020;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-border-color:transparent transparent white transparent;
 	-fx-border-width:2.0;
 }
 

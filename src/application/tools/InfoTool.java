@@ -129,8 +129,7 @@ public final class InfoTool {
 	//----
 	
 	/**
-	 * @return Database folder name <b>with out</b> separator
-	 *         [example:XR3DataBase]
+	 * @return Database folder name <b>with out</b> separator [example:XR3DataBase]
 	 */
 	public static String getDatabaseFolderName() {
 		return DATABASE_FOLDER_NAME;
@@ -144,16 +143,14 @@ public final class InfoTool {
 	//----
 	
 	/**
-	 * @return The current absolute path to the database <b>PARENT</b> folder
-	 *         with separator[example:C:/Users/]
+	 * @return The current absolute path to the database <b>PARENT</b> folder with separator[example:C:/Users/]
 	 */
 	public static String getAbsoluteDatabaseParentFolderPathWithSeparator() {
 		return InfoTool.getBasePathForClass(InfoTool.class);
 	}
 	
 	/**
-	 * @return The current absolute path to the database <b>PARENT</b> folder
-	 *         without separator[example:C:/Users]
+	 * @return The current absolute path to the database <b>PARENT</b> folder without separator[example:C:/Users]
 	 */
 	public static String getAbsoluteDatabaseParentFolderPathPlain() {
 		String parentName = getAbsoluteDatabaseParentFolderPathWithSeparator();
@@ -163,16 +160,14 @@ public final class InfoTool {
 	//----
 	
 	/**
-	 * @return The absolute path to the database folder<b>with out</b> separator
-	 *         [example:C:/Users/XR3DataBase]
+	 * @return The absolute path to the database folder<b>with out</b> separator [example:C:/Users/XR3DataBase]
 	 */
 	public static String getAbsoluteDatabasePathPlain() {
 		return getAbsoluteDatabaseParentFolderPathWithSeparator() + getDatabaseFolderName();
 	}
 	
 	/**
-	 * @return The absolute database path with separator
-	 *         [example:C:/Users/XR3DataBase/]
+	 * @return The absolute database path with separator [example:C:/Users/XR3DataBase/]
 	 */
 	public static String getAbsoluteDatabasePathWithSeparator() {
 		return getAbsoluteDatabasePathPlain() + File.separator;
@@ -191,8 +186,7 @@ public final class InfoTool {
 	//----
 	
 	/**
-	 * @return XR3Database signature File , i am using this so the user can use
-	 *         any name for the exported xr3database zip and has not too worry
+	 * @return XR3Database signature File , i am using this so the user can use any name for the exported xr3database zip and has not too worry
 	 */
 	public static File getDatabaseSignatureFile() {
 		return new File(getAbsoluteDatabasePathWithSeparator() + "xr3Original.sig");
@@ -209,8 +203,7 @@ public final class InfoTool {
 	/**
 	 * Gets the screen width.
 	 *
-	 * @return The screen <b>Width</b> based on the <b> bounds </b> of the
-	 *         Screen.
+	 * @return The screen <b>Width</b> based on the <b> bounds </b> of the Screen.
 	 */
 	public static double getScreenWidth() {
 		return Screen.getPrimary().getBounds().getWidth();
@@ -219,8 +212,7 @@ public final class InfoTool {
 	/**
 	 * Gets the screen height.
 	 *
-	 * @return The screen <b>Height</b> based on the <b> bounds </b> of the
-	 *         Screen.
+	 * @return The screen <b>Height</b> based on the <b> bounds </b> of the Screen.
 	 */
 	public static double getScreenHeight() {
 		return Screen.getPrimary().getBounds().getHeight();
@@ -229,11 +221,8 @@ public final class InfoTool {
 	/**
 	 * Gets the visual screen width.
 	 *
-	 * @return The screen <b>Width</b> based on the <b>visual bounds</b> of the
-	 *         Screen.These bounds account for objects in the native windowing
-	 *         system
-	 *         such as task bars and menu bars. These bounds are contained by
-	 *         Screen.bounds.
+	 * @return The screen <b>Width</b> based on the <b>visual bounds</b> of the Screen.These bounds account for objects in the native windowing system
+	 *         such as task bars and menu bars. These bounds are contained by Screen.bounds.
 	 */
 	public static double getVisualScreenWidth() {
 		return Screen.getPrimary().getVisualBounds().getWidth();
@@ -242,22 +231,18 @@ public final class InfoTool {
 	/**
 	 * Gets the visual screen height.
 	 *
-	 * @return The screen <b>Height</b> based on the <b>visual bounds</b> of the
-	 *         Screen.These bounds account for objects in the native windowing
-	 *         system such as task bars and menu bars. These bounds are
-	 *         contained by Screen.bounds.
+	 * @return The screen <b>Height</b> based on the <b>visual bounds</b> of the Screen.These bounds account for objects in the native windowing
+	 *         system such as task bars and menu bars. These bounds are contained by Screen.bounds.
 	 */
 	public static double getVisualScreenHeight() {
 		return Screen.getPrimary().getVisualBounds().getHeight();
 	}
 	
 	/**
-	 * Returns the absolute path of the current directory in which the given
-	 * class file is.
+	 * Returns the absolute path of the current directory in which the given class file is.
 	 * 
 	 * @param classs
-	 *        * @return The absolute path of the current directory in which the
-	 *        class file is. <b>[it ends with File.Separator!!]</b>
+	 *            * @return The absolute path of the current directory in which the class file is. <b>[it ends with File.Separator!!]</b>
 	 * @author GOXR3PLUS[StackOverFlow user] + bachden [StackOverFlow user]
 	 */
 	public static final String getBasePathForClass(Class<?> classs) {
@@ -311,7 +296,7 @@ public final class InfoTool {
 	 * Checks if a web site is reachable using ping command.
 	 *
 	 * @param host
-	 *        the host
+	 *            the host
 	 * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
 	 */
 	public static boolean isReachableByPing(String host) {
@@ -333,19 +318,15 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Checks for Application Internet connection using Socket and
-	 * InetSocketAddress I combine this method with reachableByPing to check if
-	 * the
-	 * Operating System is connected to the Internet and this method to check if
-	 * the application can be connected to Internet,
+	 * Checks for Application Internet connection using Socket and InetSocketAddress I combine this method with reachableByPing to check if the
+	 * Operating System is connected to the Internet and this method to check if the application can be connected to Internet,
 	 * 
-	 * Because the admin my have blocked internet connection for this Java
-	 * application.
+	 * Because the admin my have blocked internet connection for this Java application.
 	 * 
 	 * @param host
-	 *        the host
+	 *            the host
 	 * @param port
-	 *        the port
+	 *            the port
 	 * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
 	 */
 	@Deprecated
@@ -366,11 +347,11 @@ public final class InfoTool {
 	 * Return the imageView of mp3File in requested Width and Height.
 	 *
 	 * @param absolutePath
-	 *        The File absolute path
+	 *            The File absolute path
 	 * @param width
-	 *        the width
+	 *            the width
 	 * @param height
-	 *        the height
+	 *            the height
 	 * @return an Image
 	 */
 	public static Image getMp3AlbumImage(String absolutePath , int width , int height) {
@@ -394,19 +375,15 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns the creation time. The creation time is the time that the file
-	 * was created.
+	 * Returns the creation time. The creation time is the time that the file was created.
 	 *
 	 * <p>
-	 * If the file system implementation does not support a time stamp to
-	 * indicate the time when the file was created then this method returns an
-	 * implementation specific default value, typically the
-	 * {@link #lastModifiedTime() last-modified-time} or a {@code FileTime}
-	 * representing the
+	 * If the file system implementation does not support a time stamp to indicate the time when the file was created then this method returns an
+	 * implementation specific default value, typically the {@link #lastModifiedTime() last-modified-time} or a {@code FileTime} representing the
 	 * epoch (1970-01-01T00:00:00Z).
 	 *
 	 * @param absolutePath
-	 *        The File absolute path
+	 *            The File absolute path
 	 * @return The File Creation Date in String Format
 	 */
 	public static String getFileCreationDate(String absolutePath) {
@@ -429,13 +406,11 @@ public final class InfoTool {
 	 * Returns the time of last modification.
 	 *
 	 * <p>
-	 * If the file system implementation does not support a time stamp to
-	 * indicate the time of last modification then this method returns an
-	 * implementation specific default value, typically a {@code FileTime}
-	 * representing the epoch (1970-01-01T00:00:00Z).
+	 * If the file system implementation does not support a time stamp to indicate the time of last modification then this method returns an
+	 * implementation specific default value, typically a {@code FileTime} representing the epoch (1970-01-01T00:00:00Z).
 	 *
 	 * @param absolutePath
-	 *        The File absolute path
+	 *            The File absolute path
 	 * @return The File Creation Date in String Format
 	 */
 	public static String getFileLastModifiedDate(String absolutePath) {
@@ -455,11 +430,10 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns the title of the file for example if file name is
-	 * <b>(club.mp3)</b> it returns <b>(club)</b>
+	 * Returns the title of the file for example if file name is <b>(club.mp3)</b> it returns <b>(club)</b>
 	 *
 	 * @param absolutePath
-	 *        The File absolute path
+	 *            The File absolute path
 	 * @return the File title
 	 */
 	public static String getFileTitle(String absolutePath) {
@@ -467,11 +441,10 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns the name of the file for example if file path is <b>(C:/Give me
-	 * more/no no/media.ogg)</b> it returns <b>(media.ogg)</b>
+	 * Returns the name of the file for example if file path is <b>(C:/Give me more/no no/media.ogg)</b> it returns <b>(media.ogg)</b>
 	 *
 	 * @param absolutePath
-	 *        the path
+	 *            the path
 	 * @return the File title+extension
 	 */
 	public static String getFileName(String absolutePath) {
@@ -480,11 +453,10 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns the extension of file(without (.)) for example
-	 * <b>(ai.mp3)->(mp3)</b> and to lowercase (Mp3 -> mp3)
+	 * Returns the extension of file(without (.)) for example <b>(ai.mp3)->(mp3)</b> and to lowercase (Mp3 -> mp3)
 	 *
 	 * @param absolutePath
-	 *        The File absolute path
+	 *            The File absolute path
 	 * @return the File extension
 	 */
 	public static String getFileExtension(String absolutePath) {
@@ -504,9 +476,8 @@ public final class InfoTool {
 	 * 2)If is supported by the application.
 	 * 
 	 * @param name
-	 *        the name
-	 * @return true if the type is supported or else false
-	 *         [[SuppressWarningsSpartan]]
+	 *            the name
+	 * @return true if the type is supported or else false [[SuppressWarningsSpartan]]
 	 */
 	public static boolean isAudioSupported(String name) {
 		String extension = getFileExtension(name);
@@ -518,9 +489,8 @@ public final class InfoTool {
 	 * 2)If is supported by the application.
 	 * 
 	 * @param name
-	 *        the name
-	 * @return true if the type is supported or else false
-	 *         [[SuppressWarningsSpartan]]
+	 *            the name
+	 * @return true if the type is supported or else false [[SuppressWarningsSpartan]]
 	 */
 	public static boolean isVideoSupported(String name) {
 		String extension = getFileExtension(name);
@@ -532,7 +502,7 @@ public final class InfoTool {
 	 * 2)If is supported by the application.
 	 * 
 	 * @param name
-	 *        the name
+	 *            the name
 	 * @return true if the file is an Image [[SuppressWarningsSpartan]]
 	 */
 	public static boolean isImage(String name) {
@@ -541,40 +511,33 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Use this method to retrieve an image from the resources of the
-	 * application.
+	 * Use this method to retrieve an image from the resources of the application.
 	 *
 	 * @param imageName
-	 *        the image name
-	 * @return Returns an image which is already into the resources folder of
-	 *         the application
+	 *            the image name
+	 * @return Returns an image which is already into the resources folder of the application
 	 */
 	public static Image getImageFromResourcesFolder(String imageName) {
 		return new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName));
 	}
 	
 	/**
-	 * Use this method to retrieve an image from the resources of the
-	 * application.
+	 * Use this method to retrieve an image from the resources of the application.
 	 *
 	 * @param imageName
-	 *        the image name
-	 * @return Returns an image which is already into the resources folder of
-	 *         the application
+	 *            the image name
+	 * @return Returns an image which is already into the resources folder of the application
 	 */
 	public static Image getImageFromCurrentFolder(String folderName , String imageName) {
 		return new Image(InfoTool.class.getResourceAsStream("/" + folderName + "/" + imageName));
 	}
 	
 	/**
-	 * Use this method to retrieve an ImageView from the resources of the
-	 * application.
+	 * Use this method to retrieve an ImageView from the resources of the application.
 	 *
 	 * @param imageName
-	 *        the image name
-	 * @return Returns an ImageView using method
-	 *         getImageFromResourcesFolder(String
-	 *         imageName);
+	 *            the image name
+	 * @return Returns an ImageView using method getImageFromResourcesFolder(String imageName);
 	 */
 	public static ImageView getImageViewFromResourcesFolder(String imageName) {
 		return new ImageView(new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName)));
@@ -603,11 +566,10 @@ public final class InfoTool {
 	 * Returns a String with a fixed number of letters.
 	 *
 	 * @param s
-	 *        the string
+	 *            the string
 	 * @param letters
-	 *        the letters
-	 * @return A substring(or the current given string) based on the letters
-	 *         that have to be cut
+	 *            the letters
+	 * @return A substring(or the current given string) based on the letters that have to be cut
 	 */
 	public static String getMinString(String s , int letters) {
 		return s.length() < letters ? s : s.substring(0, letters) + "...";
@@ -617,9 +579,9 @@ public final class InfoTool {
 	 * This method determines the duration of given data.
 	 *
 	 * @param input
-	 *        The name of the input
+	 *            The name of the input
 	 * @param audioType
-	 *        URL, FILE, INPUTSTREAM, UNKOWN;
+	 *            URL, FILE, INPUTSTREAM, UNKOWN;
 	 * @return Returns the duration of URL/FILE/INPUTSTREAM in milliseconds
 	 */
 	public static long durationInMilliseconds(String input , AudioType audioType) {
@@ -651,7 +613,7 @@ public final class InfoTool {
 	 * Used by method durationInMilliseconds() to get file duration.
 	 *
 	 * @param file
-	 *        the file
+	 *            the file
 	 * @return the int
 	 */
 	private static long durationInMilliseconds_Part2(File file) {
@@ -702,12 +664,12 @@ public final class InfoTool {
 	 * Returns the time of Audio to seconds
 	 *
 	 * @param name
-	 *        the name
+	 *            the name
 	 * @param type
-	 *        <br>
-	 *        1->URL <br>
-	 *        2->FILE <br>
-	 *        3->INPUTSTREAM
+	 *            <br>
+	 *            1->URL <br>
+	 *            2->FILE <br>
+	 *            3->INPUTSTREAM
 	 * @return time in milliseconds
 	 */
 	public static int durationInSeconds(String name , AudioType type) {
@@ -723,13 +685,11 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * /** Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b>
-	 * or %02d:%02d.
+	 * /** Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
 	 *
 	 * @param ms
-	 *        The milliseconds
-	 * @return The Time edited in format <b> %02d:%02d:%02d if( minutes >60
-	 *         )</b> or %02d:%02d.
+	 *            The milliseconds
+	 * @return The Time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
 	 * 
 	 */
 	public static String millisecondsToTime(long ms) {
@@ -748,13 +708,11 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b> or
-	 * %02dsec if (seconds<60) %02d:%02d.
+	 * Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02dsec if (seconds<60) %02d:%02d.
 	 *
 	 * @param seconds
-	 *        the seconds
-	 * @return the time edited in format <b> %02d:%02d:%02d if( minutes >60
-	 *         )</b> or %02d:%02d.
+	 *            the seconds
+	 * @return the time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
 	 */
 	public static String getTimeEdited(int seconds) {
 		return seconds < 60 ? String.format("%02ds", seconds % 60) // duration < 1 minute
@@ -766,7 +724,7 @@ public final class InfoTool {
 	 * Returns the time in format %02d:%02d.
 	 *
 	 * @param seconds
-	 *        the seconds
+	 *            the seconds
 	 * @return the time edited on hours
 	 */
 	public static String getTimeEditedOnHours(int seconds) {
@@ -779,19 +737,24 @@ public final class InfoTool {
 	 * Gets the file size edited in format "x MiB , y KiB"
 	 *
 	 * @param file
-	 *        the file
+	 *            the file
 	 * @return <b> a String representing the file size in MB and kB </b>
 	 */
 	public static String getFileSizeEdited(File file) {
+		return !file.exists() ? "file missing" : getFileSizeEdited(file.length());
+	}
+	
+	/**
+	 * Gets the file size edited in format "x MiB , y KiB"
+	 *
+	 * @param bytes
+	 *            File size in bytes
+	 * @return <b> a String representing the file size in MB and kB </b>
+	 */
+	public static String getFileSizeEdited(long bytes) {
 		
-		//file exists?
-		if (!file.exists())
-			return "file missing";
-		
-		//Get the size in bytes
-		double bytes = file.length();
+		//Find it	
 		int kilobytes = (int) ( bytes / 1024 ) , megabytes = kilobytes / 1024;
-		
 		if (kilobytes < 1024)
 			return kilobytes + " KiB";
 		else if (kilobytes > 1024)
@@ -802,12 +765,10 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns a number with more than 3 digits [ Example 1000 as 1.000] with
-	 * dots every 3 digits
+	 * Returns a number with more than 3 digits [ Example 1000 as 1.000] with dots every 3 digits
 	 * 
 	 * @param number
-	 * @return A number with more than 3 digits [ Example 1000 as 1.000] with
-	 *         dots every 3 digits
+	 * @return A number with more than 3 digits [ Example 1000 as 1.000] with dots every 3 digits
 	 */
 	public static String getNumberWithDots(int number) {
 		return String.format(Locale.US, "%,d", number).replace(",", ".");
