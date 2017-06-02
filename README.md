@@ -47,8 +47,8 @@ How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 ## Image from Update 69 Login Screen
 ![xr3player login screen](https://cloud.githubusercontent.com/assets/20374208/26226998/46209f6a-3c38-11e7-84b1-7a49ecd27bc7.png)
 
-## Image from Update 69 After User Login
-![xr3player libraries mode](https://cloud.githubusercontent.com/assets/20374208/26226999/47f9b06a-3c38-11e7-965b-d4278c3f4515.png)
+## Image from Update 72 After User Login
+![update 72](https://cloud.githubusercontent.com/assets/20374208/26711588/0cfec94a-476a-11e7-8ba4-a990c03405f2.png)
 
 ## Image from Update 66 Internal WebBrowser
 ![xr3player web browser](https://cloud.githubusercontent.com/assets/20374208/25840212/a69cf222-34a3-11e7-8400-8f5952f630a1.png)
