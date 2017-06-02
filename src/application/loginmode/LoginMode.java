@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 
@@ -306,12 +307,10 @@ public class LoginMode extends BorderPane {
 				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 				
 				//Read line by line
-				String line = "" , inputLine;
-				while ( ( inputLine = in.readLine() ) != null)
-					line += "\n" + inputLine;
+				String responseSB = in.lines().collect(Collectors.joining());
 				in.close();
 				
-				String text = "Sourceforge: [ " + line.split("<text x=\"98.5\" y=\"14\">")[1].split("/total")[0] + " ]";
+				String text = "Sourceforge: [ " + responseSB.split("<text x=\"98.5\" y=\"14\">")[1].split("/total")[0] + " ]";
 				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
 				
 				//throw new IOException("Exception get out of the building!!!")

@@ -19,7 +19,6 @@ import application.presenter.custom.DJDiscListener;
 import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
-import application.tools.JavaFXTools;
 import application.tools.NotificationType;
 import application.windows.XPlayerWindow;
 import eu.hansolo.enzo.flippanel.FlipPanel;
@@ -734,6 +733,18 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		});
 		
 		diskStackPane.getChildren().add(disc);
+		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
+	}
+	
+	/**
+	 * Recalculates the Canvas size to the preffered size
+	 */
+	private void reCalculateCanvasSize() {
+		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.5;
+		
+		radialMenu.getRadialMenuButton().setPrefSize(size, size);
+		disc.resizeDisc(size, size);
+		//System.out.println("Redrawing canvas");
 	}
 	
 	/**

@@ -27,11 +27,7 @@ public class URLReader {
 		BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 		
 		//Read line by line
-		String json = "" , inputLine;
-		while ( ( inputLine = in.readLine() ) != null) {
-			json += "\n" + inputLine;
-			//System.out.println(inputLine);
-		}
+		String responseSB = in.lines().collect(Collectors.joining());
 		in.close();
 		
 		//Get SourceForge Downloads 
@@ -52,7 +48,7 @@ public class URLReader {
 		//		System.out.println("\nTotal Downloads: " + total);
 		
 		//JSON Array [ROOT]
-		JsonArray jsonRoot = (JsonArray) Jsoner.deserialize(json);
+		JsonArray jsonRoot = (JsonArray) Jsoner.deserialize(responseSB);
 		jsonRoot.forEach(item -> {
 			//--
 			String url = ( (JsonObject) item ).get("url").toString();
@@ -76,7 +72,7 @@ public class URLReader {
 			String[] publicedAt = { "" };
 			( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> publicedAt[0] = ( (JsonObject) item2 ).get("created_at").toString());
 			
-			System.out.println(Arrays.asList(url,tagName,downloads[0],size[0],createdAt[0],publicedAt[0]));
+			System.out.println(Arrays.asList(url, tagName, downloads[0], size[0], createdAt[0], publicedAt[0]));
 		});
 		
 	}

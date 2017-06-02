@@ -27,7 +27,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -113,15 +112,15 @@ public class DJDisc extends StackPane {
 	 * Constructor.
 	 * 
 	 * @param width
-	 *        The width of the disc
+	 *            The width of the disc
 	 * @param height
-	 *        The height of the disc
+	 *            The height of the disc
 	 * @param arcColor
-	 *        The color of the disc arc
+	 *            The color of the disc arc
 	 * @param volume
-	 *        The current volume of the disc
+	 *            The current volume of the disc
 	 * @param maximumVolume
-	 *        The maximum volume of the disc [[SuppressWarningsSpartan]]
+	 *            The maximum volume of the disc [[SuppressWarningsSpartan]]
 	 */
 	public DJDisc(int width, int height, Color arcColor, int volume, int maximumVolume) {
 		this.maximumVolume = maximumVolume;
@@ -203,7 +202,7 @@ public class DJDisc extends StackPane {
 	 * Register a new DJDiscListener.
 	 *
 	 * @param listener
-	 *        the listener
+	 *            the listener
 	 */
 	public void addDJDiscListener(DJDiscListener listener) {
 		listeners.add(listener);
@@ -213,9 +212,9 @@ public class DJDisc extends StackPane {
 	 * Resizes the disc to the given values.
 	 *
 	 * @param width1
-	 *        the width
+	 *            the width
 	 * @param height1
-	 *        the height
+	 *            the height
 	 */
 	public void resizeDisc(double width1 , double height1) {
 		int width = (int) Math.round(width1);
@@ -226,7 +225,7 @@ public class DJDisc extends StackPane {
 		//System.out.println("Given:" + width1 + " , Rounded:" + width)
 		
 		if (width == height)
-			if ( ( width >= 100 && height >= 100 ) && ( width % 2 == 0 && height % 2 == 0 )) {
+			if ( ( width >= 150 && height >= 150 )) {
 				
 				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
 				
@@ -260,7 +259,7 @@ public class DJDisc extends StackPane {
 				
 				repaint();
 			} else {
-				Main.logger.info("DJDisc resizing failed..");
+				Main.logger.info("DJDisc resizing failed.. \nfor width: " + width + " height: " + height);
 			}
 	}
 	
@@ -292,16 +291,15 @@ public class DJDisc extends StackPane {
 		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
 		canvas.gc.setLineDashes(6);
 		canvas.gc.setLineWidth(3);
-		canvas.gc.setStroke(Color.FIREBRICK);
+		canvas.gc.setStroke(arcColor);
 		int value = this.getVolume() == 0 ? 0 : (int) ( ( (double) this.getVolume() / (double) this.maximumVolume ) * 180 );
 		//System.out.println(value)
 		canvas.gc.setFill(Color.BLACK);
 		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
 		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
-		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90,+value, ArcType.OPEN);
+		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
 		canvas.gc.setLineDashes(0);
 		canvas.gc.setLineCap(StrokeLineCap.ROUND);
-		
 		
 		// --------------------------Maths to find the point on the circle
 		// circumference
@@ -372,13 +370,11 @@ public class DJDisc extends StackPane {
 	}
 	
 	/**
-	 * Returns a Value based on the angle of the disc and the maximum value
-	 * allowed.
+	 * Returns a Value based on the angle of the disc and the maximum value allowed.
 	 *
 	 * @param maximum
-	 *        the maximum
-	 * @return Returns a Value based on the angle of the disc and the maximum
-	 *         value allowed
+	 *            the maximum
+	 * @return Returns a Value based on the angle of the disc and the maximum value allowed
 	 */
 	public int getValue(int maximum) {
 		
@@ -419,20 +415,19 @@ public class DJDisc extends StackPane {
 	 *
 	 * @return The Canvas of the Disc
 	 */
-	public Canvas getCanvas() {
+	public ResizableCanvas getCanvas() {
 		return canvas;
 	}
 	
 	/**
-	 * Calculates the angle based on the given value and the maximum value
-	 * allowed.
+	 * Calculates the angle based on the given value and the maximum value allowed.
 	 *
 	 * @param value
-	 *        The current moment of the Audio
+	 *            The current moment of the Audio
 	 * @param maximum
-	 *        The maximum duration of the Audio
+	 *            The maximum duration of the Audio
 	 * @param updateTheTime
-	 *        True if you want to update the Time Label
+	 *            True if you want to update the Time Label
 	 */
 	public void calculateAngleByValue(int value , int maximum , boolean updateTheTime) {
 		
@@ -458,9 +453,9 @@ public class DJDisc extends StackPane {
 	 * Calculates the time of the disc.
 	 *
 	 * @param current
-	 *        the current
+	 *            the current
 	 * @param total
-	 *        the total
+	 *            the total
 	 */
 	private void calculateTheTime(int current , int total) {
 		if (current == 0 && total == 0)
@@ -496,7 +491,7 @@ public class DJDisc extends StackPane {
 	 * Change the volume.
 	 *
 	 * @param volume
-	 *        the new volume
+	 *            the new volume
 	 */
 	public void setVolume(int volume) {
 		if (volume > -1 && volume < getMaximumVolume() + 1)
@@ -511,7 +506,7 @@ public class DJDisc extends StackPane {
 	 * Set the color of the arc to the given one.
 	 *
 	 * @param color
-	 *        the new arc color
+	 *            the new arc color
 	 */
 	public void setArcColor(Color color) {
 		arcColor = color;
@@ -521,7 +516,7 @@ public class DJDisc extends StackPane {
 	 * Replace the image of the disc with the given one.
 	 *
 	 * @param image
-	 *        the image
+	 *            the image
 	 */
 	public void replaceImage(Image image) {
 		if (image != null)
@@ -572,11 +567,11 @@ public class DJDisc extends StackPane {
 	 * Calculate the disc angle based on mouse position.
 	 *
 	 * @param m
-	 *        the m
+	 *            the m
 	 * @param current
-	 *        the current
+	 *            the current
 	 * @param total
-	 *        the total
+	 *            the total
 	 */
 	public void calculateAngleByMouse(MouseEvent m , int current , int total) {
 		// pauseRotation()
@@ -612,8 +607,8 @@ public class DJDisc extends StackPane {
 	@SuppressWarnings("unused")
 	private boolean isContainedInCircle(double mouseX , double mouseY) {
 		// Check if it is contained into the circle
-		if (Math.sqrt(Math.pow( ( (int) ( getWidth() - 5 ) / 2 ) - (int) mouseX, 2)
-				+ Math.pow( ( (int) ( getHeight() - 5 ) / 2 ) - (int) mouseY, 2)) <= Math.floorDiv((int) ( getWidth() - 5 ), 2)) {
+		if (Math.sqrt(Math.pow( ( (int) ( getWidth() - 5 ) / 2 ) - (int) mouseX, 2) + Math.pow( ( (int) ( getHeight() - 5 ) / 2 ) - (int) mouseY, 2)) <= Math
+				.floorDiv((int) ( getWidth() - 5 ), 2)) {
 			System.out.println("The point is contained in the circle.");
 			return true;
 		} else {
@@ -627,7 +622,7 @@ public class DJDisc extends StackPane {
 	 * On mouse dragged.
 	 *
 	 * @param m
-	 *        the m
+	 *            the m
 	 */
 	private void onMouseDragged(MouseEvent m) {
 		calculateAngleByMouse(m, 0, 0);
@@ -637,7 +632,7 @@ public class DJDisc extends StackPane {
 	 * On scroll.
 	 *
 	 * @param m
-	 *        the m
+	 *            the m
 	 */
 	private void onScroll(ScrollEvent m) {
 		int rotation = m.getDeltaY() < 1 ? 1 : -1;

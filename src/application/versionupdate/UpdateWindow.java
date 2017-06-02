@@ -219,12 +219,7 @@ public class UpdateWindow extends StackPane {
 			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 			
 			//Read line by line
-			String json[] = { "" };
-			String inputLine;
-			while ( ( inputLine = in.readLine() ) != null) {
-				json[0] += "\n" + inputLine;
-				//System.out.println(inputLine);
-			}
+			String responseSB = in.lines().collect(Collectors.joining());
 			in.close();
 			
 			// Update is available or not?
@@ -239,11 +234,15 @@ public class UpdateWindow extends StackPane {
 					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!! |  Current : ->( " + currentVersion + " )<-");
 				}
 				
-				//Add all the elements to the accordion
-				gitHubAccordion.getPanes().clear();
+				//Read the JSON response
 				JsonArray jsonRoot;
 				try {
-					jsonRoot = (JsonArray) Jsoner.deserialize(json[0]);
+					jsonRoot = (JsonArray) Jsoner.deserialize(responseSB);
+					//Avoid recreating again panes if no new releases have come
+					boolean create = jsonRoot.stream().count() != gitHubAccordion.getPanes().size();
+					
+					//For Each
+					int[] counter = { 0 };
 					jsonRoot.forEach(item -> {
 						//--
 						String prerelease = ( (JsonObject) item ).get("prerelease").toString();
@@ -267,16 +266,25 @@ public class UpdateWindow extends StackPane {
 						//--
 						String[] publishedAt = { ( (JsonObject) item ).get("published_at").toString() };
 						
-						//Create TitlePane and add it to the accordion
-						GitHubRelease release = new GitHubRelease();
-						release.setText("Update -> " + tagName.toLowerCase().replace("v3.", ""));
+						//Create or Reuse the existing Panes of Accordion
+						GitHubRelease release;
+						if (!create)
+							release = (GitHubRelease) gitHubAccordion.getPanes().get(counter[0]++);
+						else {
+							release = new GitHubRelease();
+							gitHubAccordion.getPanes().add(release);
+						}
+						
+						//Update the GitHubRelease Pane
+						release.setText("Update -> ( " + tagName.toLowerCase().replace("v3.", "") + " ) Downloads ( " + downloads[0] + " )");
 						release.updateLabels(Boolean.toString(!Boolean.parseBoolean(prerelease)), downloads[0], size[0], publishedAt[0].substring(0, 10),
 								createdAt[0].substring(0, 10));
-						gitHubAccordion.getPanes().add(release);
+						
 					});
 					gitHubAccordion.setExpandedPane(gitHubAccordion.getPanes().get(0));
 				} catch (DeserializationException e) {
 					e.printStackTrace();
+					ActionTool.showNotification("Message", "Failed to connect update server :(\n Try again in 5 seconds", Duration.seconds(3), NotificationType.ERROR);
 				}
 				
 				//Clear the textAreas
