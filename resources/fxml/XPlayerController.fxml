@@ -132,23 +132,23 @@
                                        <children>
                                           <ToolBar maxWidth="1.7976931348623157E308" minWidth="5.0" orientation="VERTICAL" StackPane.alignment="CENTER">
                                              <items>
-                                                <JFXButton fx:id="openPlayerHistory" focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-size: 11; -fx-border-color: firebrick; -fx-border-radius: 15; -fx-border-width: 2;" styleClass="arrowButton2" text="Player History">
-                                                   <tooltip>
-                                                      <Tooltip text="See history of songs that have been played from this player" />
-                                                   </tooltip>
-                                                </JFXButton>
-                                                <StackPane fx:id="mediaFileStackPane" maxWidth="1.7976931348623157E308">
+                                                <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="-fx-background-color: #202020;">
                                                    <children>
-                                                      <Button fx:id="openMediaFileFolder" mnemonicParsing="false" prefHeight="1.0" prefWidth="34.0" text="-&gt;" visible="false" StackPane.alignment="CENTER_RIGHT">
+                                                      <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
+                                                         <graphic>
+                                                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
+                                                         </graphic>
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </Button>
                                                    </children>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </StackPane>
+                                                </HBox>
+                                                <JFXButton fx:id="openPlayerHistory" focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-size: 11; -fx-border-color: firebrick; -fx-border-radius: 15; -fx-border-width: 2;" styleClass="arrowButton2" text="Player History">
+                                                   <tooltip>
+                                                      <Tooltip text="See history of songs that have been played from this player" />
+                                                   </tooltip>
+                                                </JFXButton>
                                                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="3.0">
                                                    <children>
                                                       <Button fx:id="openFileButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-size: 12;" text="Open" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
@@ -224,7 +224,8 @@
                         </GridPane>
                         <GridPane fx:id="bottomGridPane" GridPane.columnSpan="2" GridPane.rowIndex="1">
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

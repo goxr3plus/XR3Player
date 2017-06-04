@@ -538,12 +538,12 @@ public final class ActionTool {
 		
 		// Paint it
 		gc.setLineWidth(2);
-		gc.setLineDashes(3);
-		gc.setFill(Color.WHITE);
+		//gc.setLineDashes(3);
+		gc.setFill(Color.web("#202020"));
 		gc.fillRoundRect(0, 0, width, height, 15, 15);
-		gc.setStroke(Color.BLACK);
-		gc.strokeRoundRect(0, 0, width, height, 15, 15);
-		gc.setFill(Color.BLACK);
+		//gc.setStroke(Color.BLACK);
+		//gc.strokeRoundRect(0, 0, width, height, 15, 15);
+		gc.setFill(Color.WHITE);
 		gc.setFont(Font.font(null, FontWeight.BOLD, 14));
 		gc.fillText(text, 4, height / 2.00);
 		

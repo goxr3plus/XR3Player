@@ -1,4 +1,4 @@
-package aaTester;
+package aaTesterOnlyCode;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

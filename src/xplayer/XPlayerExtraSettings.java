@@ -30,9 +30,6 @@ public class XPlayerExtraSettings extends BorderPane {
 	@FXML
 	private Tab historyPlaylistTab;
 	
-	@FXML
-	private Tab equalizerTab;
-	
 	// ------------------------
 	
 	/** The x player UI. */
@@ -42,7 +39,7 @@ public class XPlayerExtraSettings extends BorderPane {
 	 * Constructor.
 	 *
 	 * @param xPlayerUI
-	 *        the x player UI
+	 *            the x player UI
 	 */
 	public XPlayerExtraSettings(XPlayerController xPlayerUI) {
 		
@@ -62,8 +59,7 @@ public class XPlayerExtraSettings extends BorderPane {
 	}
 	
 	/**
-	 * As soon as fxml has been loaded then this method will be called
-	 * 1)-constructor,2)-FXMLLOADER,3)-initialise();
+	 * As soon as fxml has been loaded then this method will be called 1)-constructor,2)-FXMLLOADER,3)-initialise();
 	 */
 	@FXML
 	private void initialize() {
@@ -82,13 +78,6 @@ public class XPlayerExtraSettings extends BorderPane {
 		// ----PlayListTab
 		historyPlaylistTab.setContent(xPlayerUI.getxPlayerPlayList());
 		
-	}
-	
-	/**
-	 * @return the equalizerTab
-	 */
-	public Tab getEqualizerTab() {
-		return equalizerTab;
 	}
 	
 	/**

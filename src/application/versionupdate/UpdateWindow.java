@@ -240,6 +240,8 @@ public class UpdateWindow extends StackPane {
 					jsonRoot = (JsonArray) Jsoner.deserialize(responseSB);
 					//Avoid recreating again panes if no new releases have come
 					boolean create = jsonRoot.stream().count() != gitHubAccordion.getPanes().size();
+					if (create)
+						gitHubAccordion.getPanes().clear();
 					
 					//For Each
 					int[] counter = { 0 };

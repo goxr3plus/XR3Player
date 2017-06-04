@@ -402,7 +402,7 @@ public class LibraryMode extends BorderPane {
 	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
 	
 	// Variables
-	private double[] bottomSplitPaneDivider = { 0.65 , 0.35 };
+	private double[] bottomSplitPaneDivider = { 0.6 , 0.4 };
 	
 	//	/**
 	//	 * Updates the values of array that holds DividerPositions of splitPane

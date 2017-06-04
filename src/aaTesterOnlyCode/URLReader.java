@@ -1,4 +1,4 @@
-package aaTester;
+package aaTesterOnlyCode;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

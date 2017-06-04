@@ -94,10 +94,9 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		applicationProperties.put("Version", 72);
-		applicationProperties.put("ReleasedDate", "3/05/2017");
+		applicationProperties.put("ReleasedDate", "04/05/2017");
 		
 		System.out.println("Outside of Application Start Method");
-		
 	}
 	
 	/** Application logger. */
@@ -708,9 +707,13 @@ public class Main extends Application {
 			//----Determine the Visualizer Images
 			Main.xPlayersList.getList().forEach(xPlayerController -> {
 				
-				//Determine the images before the application starts
-				xPlayerController.getVisualizerWindow().determineImage(Type.BACKGROUND);
-				xPlayerController.getVisualizerWindow().determineImage(Type.FOREGROUND);
+				//If the key is not there add background image by default
+				if (!Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-SetBackgroundImage")).isPresent()) {
+					xPlayerController.getVisualizerWindow().findAppropriateImage(Type.BACKGROUND);
+				}
+				
+				//Always add foreground image
+				xPlayerController.getVisualizerWindow().findAppropriateImage(Type.FOREGROUND);
 				
 				//Determine the visualizer display mode
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-DisplayMode"))
@@ -728,6 +731,9 @@ public class Main extends Application {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
+		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
 	}
 	
 	//------------------------------------- Methods not used very often--------------------------------------------------

@@ -1,4 +1,4 @@
-package aaTester;
+package aaTesterOnlyCode;
 
 import application.presenter.custom.DJDisc;
 import javafx.application.Application;

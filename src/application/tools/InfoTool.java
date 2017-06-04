@@ -26,6 +26,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.TagException;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -590,26 +595,6 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * I am using this method to get mp3 duration in milliseconds
-	 * 
-	 * @return Length of Mp3 song in milliseconds
-	 */
-	private static long tryWithMp3Agic(File file) {
-		long milliseconds = -1;
-		
-		//try with mp3agic
-		try {
-			Mp3File song = new Mp3File(file);
-			milliseconds = (int) song.getLengthInMilliseconds();
-			//  System.out.println("Bitrate : " + song.getBitrate() + " Seconds: " + lengthInMilliseconds);
-			return milliseconds;
-		} catch (UnsupportedTagException | InvalidDataException | IOException ex1) {
-			ex1.printStackTrace();
-		}
-		return milliseconds;
-	}
-	
-	/**
 	 * Used by method durationInMilliseconds() to get file duration.
 	 *
 	 * @param file
@@ -628,7 +613,9 @@ public final class InfoTool {
 			// MP3?
 			if ("mp3".equals(extension)) {
 				try {
-					milliseconds = (int) ( (Long) AudioSystem.getAudioFileFormat(file).properties().get("duration") / 1000 );
+					milliseconds = new MP3File(file).getMP3AudioHeader().getTrackLength() * 1000;
+					
+					//milliseconds = (int) ( (Long) AudioSystem.getAudioFileFormat(file).properties().get("duration") / 1000 );
 					
 					//Get the result of mp3agic if the duration is bigger than 6 minutes
 					//		    if (milliseconds / 1000 > 60 * 9) {
@@ -636,7 +623,7 @@ public final class InfoTool {
 					//			milliseconds = tryWithMp3Agic(file);
 					//		    }
 					
-				} catch (IOException | UnsupportedAudioFileException ex) {
+				} catch (IOException | InvalidAudioFrameException | TagException | ReadOnlyFileException | CannotReadException ex) {
 					System.out.println("Problem getting the time of->" + file.getAbsolutePath());
 					//logger.log(Level.WARNING, ex.getMessage(), ex);
 					
@@ -709,15 +696,18 @@ public final class InfoTool {
 	
 	/**
 	 * Returns the time in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02dsec if (seconds<60) %02d:%02d.
-	 *
+	 * 
 	 * @param seconds
 	 *            the seconds
-	 * @return the time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
+	 * @return the time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d. [[SuppressWarningsSpartan]]
 	 */
 	public static String getTimeEdited(int seconds) {
-		return seconds < 60 ? String.format("%02ds", seconds % 60) // duration < 1 minute
-				: ( seconds / 60 ) / 60 <= 0 ? String.format("%02dm:%02d", ( seconds / 60 ) % 60, seconds % 60) // duration < 1 hour
-						: String.format("%02dh:%02dm:%02d", ( seconds / 60 ) / 60, ( seconds / 60 ) % 60, seconds % 60); //else
+		if (seconds < 60) // duration < 1 minute
+			return String.format("%02ds", seconds % 60);
+		else if ( ( seconds / 60 ) / 60 <= 0) // duration < 1 hour
+			return String.format("%02dm:%02d", ( seconds / 60 ) % 60, seconds % 60);
+		else
+			return String.format("%02dh:%02dm:%02d", ( seconds / 60 ) / 60, ( seconds / 60 ) % 60, seconds % 60);
 	}
 	
 	/**
@@ -758,7 +748,7 @@ public final class InfoTool {
 		if (kilobytes < 1024)
 			return kilobytes + " KiB";
 		else if (kilobytes > 1024)
-			return megabytes + " MiB + " + ( kilobytes - ( megabytes * 1024 ) ) + " KiB";
+			return megabytes + "." + ( kilobytes - ( megabytes * 1024 ) ) + " MiB";
 		
 		return "error";
 		

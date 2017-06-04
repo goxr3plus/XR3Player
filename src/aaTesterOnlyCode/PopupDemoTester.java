@@ -1,4 +1,4 @@
-package aaTester;
+package aaTesterOnlyCode;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;

@@ -114,7 +114,7 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** The bit rate. */
 	@FXML
-	private TableColumn<?,?> bitRate;
+	private TableColumn<Media,Integer> bitRate;
 	
 	/** The year. */
 	@FXML
@@ -411,6 +411,9 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		// fileType
 		fileSize.setCellValueFactory(new PropertyValueFactory<>("fileSize"));
+		
+		//bitRate
+		bitRate.setCellValueFactory(new PropertyValueFactory<>("bitRate"));
 		
 	}
 	

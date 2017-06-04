@@ -1,7 +1,7 @@
 /**
  * 
  */
-package aaTester;
+package aaTesterOnlyCode;
 
 import application.tools.InfoTool;
 

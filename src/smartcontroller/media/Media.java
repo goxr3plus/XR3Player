@@ -4,10 +4,17 @@
 package smartcontroller.media;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
+
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.TagException;
 
 import application.Main;
 import application.librarymode.Library;
@@ -88,6 +95,9 @@ public abstract class Media {
 	/** Does the File exists */
 	private SimpleBooleanProperty fileExists;
 	
+	/** The times played. */
+	private SimpleIntegerProperty bitRate;
+	
 	// ---------END OF PROPERTIES----------------------------------------------------------------------------------
 	
 	/** The image to be displayed if the Media is Song + NO ERRORS */
@@ -110,19 +120,17 @@ public abstract class Media {
 	 * Constructor.
 	 *
 	 * @param path
-	 *        The path of the File
+	 *            The path of the File
 	 * @param stars
-	 *        The quality of the Media
+	 *            The quality of the Media
 	 * @param timesPlayed
-	 *        The times the Media has been played
+	 *            The times the Media has been played
 	 * @param dateImported
-	 *        The date the Media was imported <b> if null given then the
-	 *        imported time will be the current date </b>
+	 *            The date the Media was imported <b> if null given then the imported time will be the current date </b>
 	 * @param hourImported
-	 *        The hour the Media was imported <b> if null given then the
-	 *        imported hour will be the current time </b>
+	 *            The hour the Media was imported <b> if null given then the imported hour will be the current time </b>
 	 * @param genre
-	 *        The genre of the Media <b> see the Genre class for more </b>
+	 *            The genre of the Media <b> see the Genre class for more </b>
 	 */
 	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre) {
 		
@@ -136,6 +144,16 @@ public abstract class Media {
 		this.fileName = new SimpleStringProperty(InfoTool.getFileName(path));
 		this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
+		this.bitRate = new SimpleIntegerProperty();
+		try {
+			File file = new File(path);
+			if (file.exists())
+				//It is mp3?
+				if ("mp3".equals(this.fileType.get()))
+					this.bitRate.set((int) new MP3File(new File(path)).getMP3AudioHeader().getBitRateAsNumber());
+		} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException e) {
+			e.printStackTrace();
+		}
 		
 		this.stars = new SimpleDoubleProperty(stars);
 		this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
@@ -167,8 +185,7 @@ public abstract class Media {
 	//!!!!!!!!!!!!!!!!!!THIS METHOD NEEDS FIXING!!!!!!!!!!!!!!!!!
 	
 	/**
-	 * When a files appears or dissapears it's information like size , image etc
-	 * must be fixed to represent it's current status
+	 * When a files appears or dissapears it's information like size , image etc must be fixed to represent it's current status
 	 */
 	private void fixTheInformations(boolean doUpdate) {
 		
@@ -366,6 +383,15 @@ public abstract class Media {
 		return fileExists;
 	}
 	
+	/**
+	 * Bit Rate of Audio
+	 * 
+	 * @return the bitRate
+	 */
+	public SimpleIntegerProperty bitRateProperty() {
+		return bitRate;
+	}
+	
 	// --------ORDINARY
 	// METHODS----------------------------------------------------------------------
 	
@@ -373,22 +399,21 @@ public abstract class Media {
 	 * Delete the Media from (play list)/library or (+storage medium).
 	 *
 	 * @param permanent
-	 *        <br>
-	 *        true->storage medium + (play list)/library<br>
-	 *        false->only from (play list)/library
+	 *            <br>
+	 *            true->storage medium + (play list)/library<br>
+	 *            false->only from (play list)/library
 	 * @param doQuestion
-	 *        <br>
-	 *        true->asks for permission</b> <br>
-	 *        false->not asking for permission<br>
+	 *            <br>
+	 *            true->asks for permission</b> <br>
+	 *            false->not asking for permission<br>
 	 * @param commit
-	 *        <br>
-	 *        true-> will do commit<br>
-	 *        false->will not do commit
+	 *            <br>
+	 *            true-> will do commit<br>
+	 *            false->will not do commit
 	 * @param c
-	 *        the controller
+	 *            the controller
 	 * @param deleteStatement
-	 *        The prepared Statement which will delete the items from the SQL
-	 *        DataBase
+	 *            The prepared Statement which will delete the items from the SQL DataBase
 	 */
 	public void delete(boolean permanent , boolean doQuestion , boolean commit , SmartController c , PreparedStatement deleteStatement) {
 		
@@ -422,11 +447,11 @@ public abstract class Media {
 	 * Removes this specific Media.
 	 *
 	 * @param permanent
-	 *        <br>
-	 *        true->storage medium + (play list)/library<br>
-	 *        false->only from (play list)/library
+	 *            <br>
+	 *            true->storage medium + (play list)/library<br>
+	 *            false->only from (play list)/library
 	 * @param controller
-	 *        the controller
+	 *            the controller
 	 * @return true, if successful
 	 */
 	private boolean removeItem(boolean permanent , SmartController controller) {
@@ -445,10 +470,9 @@ public abstract class Media {
 	 * Rename the Media File.
 	 * 
 	 * @param controller
-	 *        the controller
+	 *            the controller
 	 * @param node
-	 *        The node based on which the Rename Window will be position
-	 *        [[SuppressWarningsSpartan]]
+	 *            The node based on which the Rename Window will be position [[SuppressWarningsSpartan]]
 	 */
 	public void rename(SmartController controller , Node node) {
 		
@@ -611,9 +635,9 @@ public abstract class Media {
 	 * Evaluate the Media File using stars.
 	 *
 	 * @param controller
-	 *        the controller
+	 *            the controller
 	 * @param node
-	 *        The node based on which the Rename Window will be position
+	 *            The node based on which the Rename Window will be position
 	 */
 	public void updateStars(SmartController controller , Node node) {
 		
@@ -827,10 +851,17 @@ public abstract class Media {
 	// --------SETTERS------------------------------------------------------------------------------------
 	
 	/**
+	 * @return the bitRate
+	 */
+	public SimpleIntegerProperty getBitRate() {
+		return bitRate;
+	}
+	
+	/**
 	 * Sets the file path.
 	 *
 	 * @param path
-	 *        the new file path
+	 *            the new file path
 	 */
 	private void setFilePath(String path) {
 		this.title.set(InfoTool.getFileTitle(path));
@@ -845,7 +876,7 @@ public abstract class Media {
 	 * Sets the duration.
 	 *
 	 * @param duration
-	 *        the new duration
+	 *            the new duration
 	 */
 	public void setDuration(int duration) {
 		this.duration.set(duration);
@@ -855,9 +886,9 @@ public abstract class Media {
 	 * Sets the times played.
 	 *
 	 * @param timesPlayed
-	 *        the times played
+	 *            the times played
 	 * @param controller
-	 *        the controller
+	 *            the controller
 	 */
 	//    protected void setTimesPlayed(int timesPlayed, SmartController controller) {
 	//	this.timesPlayed.set(timesPlayed);
@@ -889,11 +920,10 @@ public abstract class Media {
 	// ----------------------------------------------------------------------
 	
 	/**
-	 * This method is used during drag so the drag view has an image
-	 * representing the album image of the media.
+	 * This method is used during drag so the drag view has an image representing the album image of the media.
 	 *
 	 * @param db
-	 *        the new drag view
+	 *            the new drag view
 	 */
 	public abstract void setDragView(Dragboard db);
 	

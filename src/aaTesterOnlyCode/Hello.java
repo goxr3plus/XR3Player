@@ -1,4 +1,4 @@
-package aaTester;
+package aaTesterOnlyCode;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.application.Application;

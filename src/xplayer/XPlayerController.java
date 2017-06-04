@@ -33,7 +33,6 @@ import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,6 +42,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -107,13 +107,22 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private VBox topRightVBox;
 	
 	@FXML
-	private StackPane mediaFileStackPane;
-	
-	@FXML
-	private Button openMediaFileFolder;
-	
-	@FXML
 	private JFXButton openPlayerHistory;
+	
+	@FXML
+	private HBox mediaNameHBox;
+	
+	@FXML
+	private Button mediaTagImageButton;
+	
+	@FXML
+	private Button openFileButton;
+	
+	@FXML
+	private Button transferAudioButton;
+	
+	@FXML
+	private Button extendPlayer;
 	
 	@FXML
 	private Button backwardButton;
@@ -123,12 +132,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private GridPane bottomGridPane;
-	
-	@FXML
-	private Button openFileButton;
-	
-	@FXML
-	private Button extendPlayer;
 	
 	@FXML
 	private StackPane diskStackPane;
@@ -304,14 +307,15 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		fxSpinner.visibleProperty().bind(fxRegion.visibleProperty());
 		fxLabel.visibleProperty().bind(fxRegion.visibleProperty());
 		
-		// mediaFileStackPane
-		mediaFileStackPane.getChildren().add(mediaFileMarquee);
+		// mediaFileStackPane	
 		mediaFileMarquee.setOnMouseReleased(m -> openAudioInExplorer());
-		mediaFileMarquee.toBack();
+		mediaFileMarquee.setCursor(Cursor.HAND);
+		mediaNameHBox.getChildren().add(0, mediaFileMarquee);
+		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		// openMediaFileFolder
 		// openMediaFileFolder.visibleProperty().bind(mediaFileStackPane.hoverProperty())
-		openMediaFileFolder.setOnAction(action -> openAudioInExplorer());
+		mediaTagImageButton.setOnAction(action -> openAudioInExplorer());
 		
 		// openFileButton
 		openFileButton.setOnAction(action -> openFileChooser());
@@ -651,7 +655,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		// playerStatusLabel
 		playerStatusLabel.visibleProperty().bind(visualizer.getAnimationService().runningProperty().not());
 		
-		buildSettings(side);
+		//Equalizer
+		equalizer = new XPlayerEqualizer(this);
+		bottomGridPane.add(equalizer, 1, 0);
 	}
 	
 	/**
@@ -745,41 +751,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		radialMenu.getRadialMenuButton().setPrefSize(size, size);
 		disc.resizeDisc(size, size);
 		//System.out.println("Redrawing canvas");
-	}
-	
-	/**
-	 * needs to be deleted.
-	 *
-	 * @param side
-	 *            the side
-	 * @deprecated
-	 */
-	@Deprecated
-	private void buildSettings(Side side) {
-		
-		// BorderPane
-		BorderPane pane = new BorderPane();
-		pane.setStyle("-fx-padding:5px;");
-		
-		// AnalyserBox
-		// analyserBox = new AnalyserBox(301, 100);
-		// pane.setCenter(analyserBox)
-		
-		// Equalizer
-		equalizer = new XPlayerEqualizer(this);
-		playerExtraSettings.getEqualizerTab().setContent(new ScrollPane(equalizer));
-		
-		// PlayList
-		//xPlayerSettingsController.playListTab.setContent(xPlayList);
-		
-		// XplayerTabs
-		/*
-		 * playerTabs = new XPlayerTabs(key); Button tabs = new Button("Tabs") tabs.setId("button"); box.getChildren().add(tabs); tabs.setOnAction(e
-		 * -> playerTabs.show(firstLayerGridPane))
-		 */
-		
-		// pane.setBottom(box)
-		// firstLayerGridPane.add(pane, side == Side.LEFT ? 0 : 1, 2)
 	}
 	
 	/**
@@ -1203,6 +1174,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public XPlayerPlaylist getxPlayerPlayList() {
 		return xPlayerPlayList;
+	}
+	
+	/**
+	 * @return the mediaTagImageButton
+	 */
+	public Button getMediaTagImageButton() {
+		return mediaTagImageButton;
 	}
 	
 }

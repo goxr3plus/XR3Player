@@ -14,7 +14,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -259,7 +258,7 @@ public class DJDisc extends StackPane {
 				
 				repaint();
 			} else {
-				Main.logger.info("DJDisc resizing failed.. \nfor width: " + width + " height: " + height);
+				//Main.logger.info("DJDisc resizing failed.. \nfor width: " + width + " height: " + height);
 			}
 	}
 	
@@ -524,6 +523,15 @@ public class DJDisc extends StackPane {
 		else
 			imageView.setImage(NULL_IMAGE);
 		
+	}
+	
+	/**
+	 * The image of the disc
+	 * 
+	 * @return The image of the disc
+	 */
+	public Image getImage() {
+		return imageView.getImage();
 	}
 	
 	/**

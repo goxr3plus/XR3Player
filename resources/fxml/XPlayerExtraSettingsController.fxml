@@ -17,11 +17,6 @@
                         <ScrollPane />
                      </content>
                   </Tab>
-                  <Tab fx:id="equalizerTab" closable="false" text="Equalizer">
-                     <content>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: rgb(0,0,0,0.85);" />
-                     </content>
-                  </Tab>
                </tabs>
             </TabPane>
          </children>

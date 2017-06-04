@@ -115,7 +115,7 @@ public class VisualizerWindowController extends StackPane {
 	 * Constructor.
 	 *
 	 * @param xPlayerController
-	 *        xPlayerController
+	 *            xPlayerController
 	 */
 	public VisualizerWindowController(XPlayerController xPlayerController) {
 		
@@ -289,7 +289,7 @@ public class VisualizerWindowController extends StackPane {
 	 * Replaces the background image of visualizer.
 	 *
 	 * @param type
-	 *        the type
+	 *            the type
 	 */
 	public void changeImage(Type type) {
 		
@@ -304,13 +304,27 @@ public class VisualizerWindowController extends StackPane {
 	}
 	
 	/**
-	 * Find the appropriate background or foreground Image , based on if any
-	 * Images have been ever selected from the User
+	 * Resets the default background or foreground Image
 	 *
 	 * @param type
-	 *        the type
+	 *            the type
 	 */
-	public void determineImage(Type type) {
+	public void resetDefaultImage(Type type) {
+		
+		//Delete the background image
+		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+		
+		//Reset to default image
+		findAppropriateImage(type);
+	}
+	
+	/**
+	 * Find the appropriate background or foreground Image , based on if any Images have been ever selected from the User
+	 *
+	 * @param type
+	 *            the type
+	 */
+	public void findAppropriateImage(Type type) {
 		
 		//Check if it returns null
 		Image image = JavaFXTools.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
@@ -322,24 +336,6 @@ public class VisualizerWindowController extends StackPane {
 			xPlayerController.getVisualizer().backgroundImage = ( image != null ? image : VisualizerDrawer.DEFAULT_BACKGROUND_IMAGE );
 		else if (type == Type.FOREGROUND)
 			xPlayerController.getVisualizer().foregroundImage = ( image != null ? image : VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE );
-	}
-	
-	/**
-	 * Resets the default background or foreground Image
-	 *
-	 * @param type
-	 *        the type
-	 */
-	public void resetDefaultImage(Type type) {
-		
-		//Delete the background image
-		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		
-		//Replace the Image
-		if (type == Type.BACKGROUND)
-			xPlayerController.getVisualizer().backgroundImage = VisualizerDrawer.DEFAULT_BACKGROUND_IMAGE;
-		else if (type == Type.FOREGROUND)
-			xPlayerController.getVisualizer().foregroundImage = VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE;
 	}
 	
 	/*-----------------------------------------------------------------------

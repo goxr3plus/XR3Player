@@ -15,6 +15,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import xplayer.XPlayerController;
 import xplayer.model.AudioType;
@@ -49,7 +50,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * Start the Service.
 	 *
 	 * @param path
-	 *        The path of the audio
+	 *            The path of the audio
 	 */
 	public void startPlayService(String path) {
 		if (locked || isRunning() || path == null || !InfoTool.isAudioSupported(path))
@@ -71,8 +72,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 	}
 	
 	/**
-	 * Determines if the image of the disc is the NULL_IMAGE that means that
-	 * the media inserted into the player has no album image.
+	 * Determines if the image of the disc is the NULL_IMAGE that means that the media inserted into the player has no album image.
 	 *
 	 * @return true if the DiscImage==null <br>
 	 *         false if the DiscImage!=null
@@ -167,7 +167,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 			 * Checking the audio type -> File || URL
 			 * 
 			 * @param path
-			 *        The path of the audio File
+			 *            The path of the audio File
 			 * @return returns
 			 * @see AudioType
 			 */
@@ -205,6 +205,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		// Replace the image of the disc
 		xPlayerController.getDisc().replaceImage(image);
+		( (ImageView) xPlayerController.getMediaTagImageButton().getGraphic() ).setImage(xPlayerController.getDisc().getImage());
 		
 		// add to played songs...
 		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();

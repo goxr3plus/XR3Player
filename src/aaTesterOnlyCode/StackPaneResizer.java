@@ -1,4 +1,4 @@
-package aaTester;
+package aaTesterOnlyCode;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
