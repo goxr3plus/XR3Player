@@ -11,8 +11,7 @@ import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Accordion;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -34,6 +33,9 @@ public class XPlayersSettingsController extends BorderPane {
 	
 	@FXML
 	private JFXCheckBox askSecurityQuestion;
+	
+	@FXML
+	private Slider skipSlider;
 	
 	// -------------------------------------------------------------
 	
@@ -86,6 +88,19 @@ public class XPlayersSettingsController extends BorderPane {
 		askSecurityQuestion.selectedProperty()
 				.addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-AskSecurityQuestion", String.valueOf(askSecurityQuestion.isSelected())));
 		
+		// SkipSlider
+		skipSlider.valueProperty().addListener((observable , oldValue , newValue) -> {
+			//Change the values of skip buttons from each player
+			Main.xPlayersList.getList().forEach(xPlayerController -> {
+				xPlayerController.getBackwardButton().setText(Integer.toString(newValue.intValue()));
+				xPlayerController.getForwardButton().setText(Integer.toString(newValue.intValue()));
+			});
+		});
+		
+		skipSlider.valueChangingProperty().addListener((observable , oldValue , newValue) -> {
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-SkipButtonSeconds", Integer.toString((int) skipSlider.getValue()));
+		});
 	}
 	
 	/**
@@ -107,6 +122,13 @@ public class XPlayersSettingsController extends BorderPane {
 	 */
 	public JFXCheckBox getAskSecurityQuestion() {
 		return askSecurityQuestion;
+	}
+	
+	/**
+	 * @return the skipSlider
+	 */
+	public Slider getSkipSlider() {
+		return skipSlider;
 	}
 	
 }

@@ -218,49 +218,22 @@ public class VisualizerWindowController extends StackPane {
 			}
 		});
 		
-		// /** The media. */
-		// Media media = new Media(new
-		// File("C:\\\\Users\\\\GOXR3PLUS\\\\Desktop\\\\Twerking
-		// Dog.mp4").toURI().toString());
-		//
-		// /** The video player. */
-		// videoPlayer = new MediaPlayer(media);
-		//
-		// mediaView.setMediaPlayer(videoPlayer);
-		// mediaView.fitHeightProperty().bind(super.widthProperty());
-		// mediaView.fitHeightProperty().bind(super.heightProperty());
-		// mediaView.setSmooth(true);
-		//
-		// if (xPlayerUI.getKey() == 0) {
-		// videoPlayer.setRate(0.5);
-		// videoPlayer.setCycleCount(50000);
-		// videoPlayer.setMute(true);
-		// videoPlayer.setAutoPlay(true);
-		// }
-		
 		//--------------------------
 		
 		// setBackground
-		setBackground.setOnAction(a -> changeImage(Type.BACKGROUND));
+		setBackground.setOnAction(a -> setNewImage(Type.BACKGROUND));
 		
 		//setDefaultBackground
-		setDefaultBackground.setOnAction(a -> resetDefaultImage(Type.BACKGROUND));
+		setDefaultBackground.setOnAction(a -> resetToDefaultImage(Type.BACKGROUND));
 		
 		// clearBackground
-		clearBackground.setOnAction(a -> {
-			
-			//Delete the background image
-			JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + Type.BACKGROUND, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-			
-			//Set the Image to null
-			xPlayerController.getVisualizer().backgroundImage = null;
-		});
+		clearBackground.setOnAction(a -> clearImage(Type.BACKGROUND));
 		
 		// setForeground
-		setForeground.setOnAction(a -> changeImage(Type.FOREGROUND));
+		setForeground.setOnAction(a -> setNewImage(Type.FOREGROUND));
 		
 		//setDefaultForeground
-		setDefaultForeground.setOnAction(a -> resetDefaultImage(Type.FOREGROUND));
+		setDefaultForeground.setOnAction(a -> resetToDefaultImage(Type.FOREGROUND));
 		
 	}
 	
@@ -291,7 +264,7 @@ public class VisualizerWindowController extends StackPane {
 	 * @param type
 	 *            the type
 	 */
-	public void changeImage(Type type) {
+	public void setNewImage(Type type) {
 		
 		//Check the response
 		JavaFXTools.selectAndSaveImage("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
@@ -300,7 +273,12 @@ public class VisualizerWindowController extends StackPane {
 						xPlayerController.getVisualizer().backgroundImage = image;
 					else if (type == Type.FOREGROUND)
 						xPlayerController.getVisualizer().foregroundImage = image;
+					
+					//Manage Settings
+					Main.dbManager.getPropertiesDb().deleteProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");
+					
 				});
+		
 	}
 	
 	/**
@@ -309,10 +287,13 @@ public class VisualizerWindowController extends StackPane {
 	 * @param type
 	 *            the type
 	 */
-	public void resetDefaultImage(Type type) {
+	public void resetToDefaultImage(Type type) {
 		
 		//Delete the background image
 		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+		
+		//Manage Settings
+		Main.dbManager.getPropertiesDb().deleteProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");
 		
 		//Reset to default image
 		findAppropriateImage(type);
@@ -337,6 +318,30 @@ public class VisualizerWindowController extends StackPane {
 		else if (type == Type.FOREGROUND)
 			xPlayerController.getVisualizer().foregroundImage = ( image != null ? image : VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE );
 	}
+	
+	/**
+	 * Resets the default background or foreground Image
+	 *
+	 * @param type
+	 *            the type
+	 */
+	public void clearImage(Type type) {
+		
+		//Delete the background image
+		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+		
+		//Set the Image to null
+		if (type == Type.BACKGROUND)
+			xPlayerController.getVisualizer().backgroundImage = null;
+		else if (type == Type.FOREGROUND)
+			xPlayerController.getVisualizer().foregroundImage = null;
+		
+		//Manage Settings
+		Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared", "true");
+		
+	}
+	
+	//Manage Settings
 	
 	/*-----------------------------------------------------------------------
 	 * 

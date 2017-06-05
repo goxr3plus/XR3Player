@@ -17,7 +17,7 @@
             <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries &gt;" />
           <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts &gt;" />
             <Tab closable="false" styleClass="sTab" text="XPlayers &gt;" fx:id="xPlayersTab" />
-            <Tab fx:id="webBrowserTab" closable="false" styleClass="sTab" text="Web Browser &gt;" />
+            <Tab fx:id="webBrowserTab" closable="false" disable="true" styleClass="sTab" text="Web Browser &gt;" />
         </tabs>
       </TabPane>
    </center>

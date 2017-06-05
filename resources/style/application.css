@@ -1,4 +1,13 @@
 
+ .root{
+ 	-light-black: rgb(74.0, 75.0, 78.0);
+    -dark-highlight: rgb(87.0, 89.0, 92.0);
+    -dark-black: rgb(39.0, 40.0, 40.0);
+    -darkest-black: rgb(5.0, 5.0, 5.0);
+    -mid-gray: rgb(216.0, 222.0, 227.0);
+ }
+
+
 /*******************************************************************************
 
 *                           SplitPane                                        *
@@ -88,11 +97,6 @@
 ******************************************************************************/
 
 .tool-bar{
-	-light-black: rgb(74.0, 75.0, 78.0);
-    -dark-highlight: rgb(87.0, 89.0, 92.0);
-    -dark-black: rgb(39.0, 40.0, 40.0);
-    -darkest-black: rgb(5.0, 5.0, 5.0);
-    -mid-gray: rgb(216.0, 222.0, 227.0);
     -fx-background-color: -mid-gray;
 	
     -fx-base: -dark-black;
@@ -618,14 +622,6 @@
 ******************************************************************************/
 
  /**About Button  ----------------------------------------*/
- 
- .root{
- 	-light-black: rgb(74.0, 75.0, 78.0);
-    -dark-highlight: rgb(87.0, 89.0, 92.0);
-    -dark-black: rgb(39.0, 40.0, 40.0);
-    -darkest-black: rgb(5.0, 5.0, 5.0);
-    -mid-gray: rgb(216.0, 222.0, 227.0);
- }
 
  .button , .menu-button {	
  	 /*-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );*/
@@ -1298,7 +1294,7 @@
 
 .menu-button .label:hover{
 	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
-	-fx-background-radius:45;
+	-fx-background-radius:45.0;
 	-fx-text-fill:white;
 }
 
@@ -1308,7 +1304,7 @@
 
 .visWindowMenuButton .label:hover{	
 	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
-	-fx-background-radius:45;
+	-fx-background-radius:45.0;
 	-fx-text-fill:white;
 }
 
@@ -1334,6 +1330,25 @@
     -fx-tick-label-fill: white;
     -fx-tick-label-font-weight: bold;
     -fx-tick-length: 7.0px;
+}
+
+.transparency-slider .thumb{	
+	-fx-background-color:firebrick;
+	-fx-background-radius:90.0;
+	-fx-border-color:white;
+	-fx-border-radius:90.0;
+	-fx-border-width:2.0;
+}
+
+.transparency-slider .thumb:hover{	
+	-fx-border-width:5.0;
+}
+
+.transparency-slider .track{
+	-fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
 }
 
 

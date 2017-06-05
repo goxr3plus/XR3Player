@@ -5,7 +5,6 @@ package application.presenter.custom;
 
 import java.util.ArrayList;
 
-import application.Main;
 import application.tools.InfoTool;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -224,7 +223,7 @@ public class DJDisc extends StackPane {
 		//System.out.println("Given:" + width1 + " , Rounded:" + width)
 		
 		if (width == height)
-			if ( ( width >= 150 && height >= 150 )) {
+			if ( ( width >= 120 && height >= 120 )) {
 				
 				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
 				

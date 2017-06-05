@@ -324,10 +324,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		topInfoLabel.setText("Player <<" + this.getKey() + " >>");
 		
 		// backwardButton
-		backwardButton.setOnAction(a -> seek(-10));
+		backwardButton.setOnAction(a -> seek(-Integer.parseInt(backwardButton.getText())));
 		
 		// forwardButton
-		forwardButton.setOnAction(a -> seek(10));
+		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
 		
 		//flipPane
 		flipPane.setFlipTime(150);
@@ -674,18 +674,14 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * @param side
 	 *            the side
 	 */
-	public void makeTheDisc(int width , int height , Color color , int volume , Side side) {
+	public void makeTheDisc(Color color , int volume , Side side) {
 		
 		// initialize
-		disc = new DJDisc(width, height, color, volume, 125);
+		disc = new DJDisc(136, 136, color, volume, 125);
 		disc.addDJDiscListener(this);
-		// disc.set
 		
 		// radialMenu
-		// radialMenu.setStrokeVisible(false)
-		// radialMenu.setBackgroundMouseOnColor(color)
 		disc.getChildren().add(radialMenu.getRadialMenuButton());
-		radialMenu.getRadialMenuButton().setPrefSize(width, height);
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
@@ -740,6 +736,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
+		reCalculateCanvasSize();
 	}
 	
 	/**
@@ -748,8 +745,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private void reCalculateCanvasSize() {
 		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.5;
 		
-		radialMenu.getRadialMenuButton().setPrefSize(size, size);
 		disc.resizeDisc(size, size);
+		radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight());
 		//System.out.println("Redrawing canvas");
 	}
 	
@@ -1181,6 +1178,20 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public Button getMediaTagImageButton() {
 		return mediaTagImageButton;
+	}
+	
+	/**
+	 * @return the backwardButton
+	 */
+	public Button getBackwardButton() {
+		return backwardButton;
+	}
+	
+	/**
+	 * @return the forwardButton
+	 */
+	public Button getForwardButton() {
+		return forwardButton;
 	}
 	
 }

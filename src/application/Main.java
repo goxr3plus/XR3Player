@@ -34,6 +34,7 @@ import application.presenter.treeview.TreeViewManager;
 import application.services.VacuumProgressService;
 import application.settings.ApplicationSettingsController;
 import application.tools.ActionTool;
+import application.tools.ActionTool.FileType;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
 import application.tools.NotificationType;
@@ -240,12 +241,17 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		System.out.println("XR3Player Application Started");
+		Platform.setImplicitExit(false);
 		
 		// --------Window---------
 		window = primaryStage;
 		window.setTitle("XR3Player V." + applicationProperties.get("Version"));
-		window.setWidth(InfoTool.getVisualScreenWidth() * 0.77);
-		window.setHeight(InfoTool.getVisualScreenHeight() * 0.91);
+		double width = InfoTool.getVisualScreenWidth();
+		double height = InfoTool.getVisualScreenHeight();
+		//width = 1380;
+		//height = 800;
+		window.setWidth(width * 0.77);
+		window.setHeight(height * 0.91);
 		window.centerOnScreen();
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
@@ -259,6 +265,8 @@ public class Main extends Application {
 		scene.setMoveControl(loginMode.getXr3PlayerLabel());
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		window.setScene(scene);
+		window.show();
+		window.close();
 		
 		//Continue
 		startPart2();
@@ -378,16 +386,14 @@ public class Main extends Application {
 		//Set Update Screen Visible
 		updateScreen.setVisible(true);
 		
-		//Check if dataBase Folder exists
-		File dataBaseFolder = new File(InfoTool.getAbsoluteDatabasePathPlain());
-		if (!dataBaseFolder.exists()) {
-			//If it can not be created [FATAL ERROR]
-			if (!dataBaseFolder.mkdir())
-				ActionTool.showNotification("Fatal Error!",
-						"Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
-						Duration.seconds(45), NotificationType.ERROR);
-		} //If it does
-		else {
+		//Create Database folder if not exists
+		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
+			//			ActionTool.showNotification("Please exit the application and change it's installation directory!",
+			//					"Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
+			//					Duration.seconds(45), NotificationType.ERROR);
+			System.out.println("Failed to create database folder[lack of permissions],please change installation directory");
+			System.exit(-1);
+		} else {
 			
 			//Create the List with the Available Users
 			AtomicInteger counter = new AtomicInteger();
@@ -403,16 +409,32 @@ public class Main extends Application {
 			if (!loginMode.teamViewer.getItemsObservableList().isEmpty())
 				loginMode.teamViewer.setCenterIndex(loginMode.teamViewer.getItemsObservableList().size() / 2);
 			
+			//----------------------The 5-10 below lines are being used only to support updates below <72 where the `config.properties` file has been on DataBase Root folder[XR3DataBase]------------------------------
+			
+			//So copy the config.properties from the DataBase Root folder to the settings folder of each user
+			File configFile = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + "config.properties");
+			try {
+				if (configFile.exists())
+					Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)
+							.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain())).forEach(path -> {
+								
+								//Create settings folder if it doesn't exist
+								File settingsFolder = new File(path + File.separator + "settings");
+								if (!settingsFolder.exists())
+									settingsFolder.mkdir();
+								
+								//Now copy the it bro!
+								ActionTool.copy(configFile.getAbsolutePath(), settingsFolder.getAbsolutePath() + File.separator + "config.properties");
+							});
+				configFile.delete();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
-		//Create Original xr3database singature file	    
-		if (dataBaseFolder.exists() && !InfoTool.getDatabaseSignatureFile().exists())
-			try {
-				//I need to fix this for errors
-				InfoTool.getDatabaseSignatureFile().createNewFile();
-			} catch (IOException ex) {
-				logger.log(Level.WARNING, ex.getMessage(), ex);
-			}
+		//Create Original xr3database signature file	
+		ActionTool.createFileOrFolder(InfoTool.getDatabaseSignatureFile().getAbsolutePath(), FileType.FILE);
 		
 	}
 	
@@ -642,8 +664,8 @@ public class Main extends Application {
 			//Start
 			System.out.println("\n\n-----App Settings--------------\n");
 			
+			//--------------------Now continue normally----------------------------------------------
 			Properties settings = dbManager.getPropertiesDb().getProperties();
-			//settings.forEach((key , value) -> System.out.println(key + ":" + value))rV
 			
 			//----------                        --------------------
 			
@@ -704,13 +726,17 @@ public class Main extends Application {
 			Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion"))
 					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
 			
+			Optional.ofNullable(settings.getProperty("XPlayers-General-SkipButtonSeconds"))
+					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getSkipSlider().setValue(Integer.parseInt(s)));
+			
 			//----Determine the Visualizer Images
 			Main.xPlayersList.getList().forEach(xPlayerController -> {
 				
-				//If the key is not there add background image by default
-				if (!Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-SetBackgroundImage")).isPresent()) {
+				//If the key is not there add background image by default			
+				if (Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared")).isPresent())
+					xPlayerController.getVisualizerWindow().clearImage(Type.BACKGROUND);
+				else
 					xPlayerController.getVisualizerWindow().findAppropriateImage(Type.BACKGROUND);
-				}
 				
 				//Always add foreground image
 				xPlayerController.getVisualizerWindow().findAppropriateImage(Type.FOREGROUND);

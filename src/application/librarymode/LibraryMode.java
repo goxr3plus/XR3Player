@@ -110,14 +110,12 @@ public class LibraryMode extends BorderPane {
 	// protected boolean dragDetected
 	
 	/**
-	 * The mechanism which allows you to transport items between libraries and
-	 * more.
+	 * The mechanism which allows you to transport items between libraries and more.
 	 */
 	public final SearchBox librariesSearcher = new SearchBox(SearchBoxType.LIBRARYSEARCHBOX);
 	
 	/**
-	 * The mechanism which allows you to view the libraries as components with
-	 * image etc.
+	 * The mechanism which allows you to view the libraries as components with image etc.
 	 */
 	public TeamViewer teamViewer;
 	
@@ -127,8 +125,7 @@ public class LibraryMode extends BorderPane {
 	//--------Images ------------------------------
 	
 	/**
-	 * Default image of a library(which has not a costume one selected by the
-	 * user.
+	 * Default image of a library(which has not a costume one selected by the user.
 	 */
 	public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg");
 	/**
@@ -146,8 +143,7 @@ public class LibraryMode extends BorderPane {
 	public LibraryContextMenu librariesContextMenu = new LibraryContextMenu();
 	
 	/**
-	 * This binding contains a number which shows how many libraries are
-	 * currently opened
+	 * This binding contains a number which shows how many libraries are currently opened
 	 */
 	public SimpleIntegerProperty openedLibraries = new SimpleIntegerProperty();
 	
@@ -248,7 +244,7 @@ public class LibraryMode extends BorderPane {
 	 * Return the library with the given name.
 	 *
 	 * @param name
-	 *        the name
+	 *            the name
 	 * @return the library with name
 	 */
 	public Library getLibraryWithName(String name) {
@@ -262,8 +258,7 @@ public class LibraryMode extends BorderPane {
 	}
 	
 	/**
-	 * Update Settings Total Library only if this Library exists and it is on
-	 * settings mode
+	 * Update Settings Total Library only if this Library exists and it is on settings mode
 	 * 
 	 * @param name
 	 */
@@ -310,7 +305,7 @@ public class LibraryMode extends BorderPane {
 		
 		// XPlayer - 0
 		Main.xPlayersList.addXPlayerController(new XPlayerController(0));
-		Main.xPlayersList.getXPlayerController(0).makeTheDisc(150, 150, Color.FIREBRICK, 45, Side.LEFT);
+		Main.xPlayersList.getXPlayerController(0).makeTheDisc(Color.FIREBRICK, 45, Side.LEFT);
 		Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
 		
 		// -- openLibrariesContextMenu

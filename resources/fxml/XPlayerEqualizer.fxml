@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 
-<fx:root minHeight="1.0" minWidth="1.0" prefHeight="375.0" prefWidth="460.0" style="-fx-background-color: rgb(255,255,255,0.9);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="1.0" minWidth="1.0" prefHeight="375.0" prefWidth="460.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-border-color: rgb(255,255,255,0.9); -fx-border-width: 2;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox fx:id="bottomHBox" alignment="CENTER_LEFT" minHeight="1.0" minWidth="1.0" spacing="10.0">
          <children>
@@ -37,7 +37,10 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
-            <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="5.0" prefColumns="0" prefHeight="100.0" prefRows="0" prefWidth="100.0" style="-fx-background-color: #202020;" vgap="5.0" />
+            <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="5.0" prefColumns="0" prefHeight="100.0" prefRows="0" prefWidth="100.0" style="-fx-background-color: #202020;" vgap="5.0">
+               <padding>
+                  <Insets top="3.0" />
+               </padding></TilePane>
          </content>
       </ScrollPane>
    </center>

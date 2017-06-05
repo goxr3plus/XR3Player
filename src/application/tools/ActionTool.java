@@ -70,7 +70,7 @@ public final class ActionTool {
 	 * Opens the file with the System default file explorer.
 	 *
 	 * @param path
-	 *        the path
+	 *            the path
 	 */
 	public static void openFileLocation(String path) {
 		
@@ -132,9 +132,9 @@ public final class ActionTool {
 	 * Copy a file from source to destination.
 	 *
 	 * @param source
-	 *        the source
+	 *            the source
 	 * @param destination
-	 *        the destination
+	 *            the destination
 	 * @return True if succeeded , False if not
 	 */
 	public static boolean copy(String source , String destination) {
@@ -157,9 +157,9 @@ public final class ActionTool {
 	 * Copy a file from source to destination.
 	 *
 	 * @param source
-	 *        the source
+	 *            the source
 	 * @param destination
-	 *        the destination
+	 *            the destination
 	 * @return True if succeeded , False if not
 	 */
 	public static boolean copy(InputStream source , String destination) {
@@ -181,9 +181,9 @@ public final class ActionTool {
 	 * Moves a file to a different location.
 	 *
 	 * @param source
-	 *        the source
+	 *            the source
 	 * @param destination
-	 *        the dest
+	 *            the dest
 	 * @return true, if successful
 	 */
 	public static boolean move(String source , String destination) {
@@ -205,7 +205,7 @@ public final class ActionTool {
 	 * Deletes Directory of File.
 	 *
 	 * @param source
-	 *        The File to be deleted | either if it is directory or File
+	 *            The File to be deleted | either if it is directory or File
 	 * @return true, if successful
 	 */
 	public static boolean deleteFile(File source) {
@@ -228,7 +228,7 @@ public final class ActionTool {
 	 * Calculates the creationTime of the File.
 	 *
 	 * @param path
-	 *        the path
+	 *            the path
 	 * @return A String in format <b> DD/MM/YYYY</b>
 	 */
 	public static String getFileDateCreated(String path) {
@@ -242,7 +242,7 @@ public final class ActionTool {
 	 * Calculates the creationTime of the File.
 	 *
 	 * @param path
-	 *        the path
+	 *            the path
 	 * @return FileTime
 	 */
 	public static FileTime getFileCreationTime(String path) {
@@ -259,7 +259,7 @@ public final class ActionTool {
 	 * Tries to open this File with the default system program
 	 * 
 	 * @param absolutePath
-	 *        The absolute path of the File
+	 *            The absolute path of the File
 	 * @return <b>True</b> if succeeded , <b>False</b> if not
 	 */
 	public static boolean openFile(String absolutePath) {
@@ -318,13 +318,13 @@ public final class ActionTool {
 	 * Show a notification.
 	 *
 	 * @param title
-	 *        The notification title
+	 *            The notification title
 	 * @param text
-	 *        The notification text
+	 *            The notification text
 	 * @param d
-	 *        The duration that notification will be visible
+	 *            The duration that notification will be visible
 	 * @param t
-	 *        The notification type
+	 *            The notification type
 	 */
 	public static void showNotification(String title , String text , Duration d , NotificationType t) {
 		
@@ -383,7 +383,7 @@ public final class ActionTool {
 	 * Makes a question to the user.
 	 *
 	 * @param text
-	 *        the text
+	 *            the text
 	 * @return true, if successful
 	 */
 	public static boolean doQuestion(String text , Stage window) {
@@ -405,9 +405,9 @@ public final class ActionTool {
 	 * Makes a question to the user.
 	 *
 	 * @param text
-	 *        the text
+	 *            the text
 	 * @param node
-	 *        The node owner of the Alert
+	 *            The node owner of the Alert
 	 * @return true, if successful
 	 */
 	public static boolean doQuestion(String text , Node node , Stage window) {
@@ -467,11 +467,11 @@ public final class ActionTool {
 	 * Delete confirmation.
 	 *
 	 * @param permanent
-	 *        the permanent
+	 *            the permanent
 	 * @param text
-	 *        the text
+	 *            the text
 	 * @param i
-	 *        the i
+	 *            the i
 	 * @return true, if successful
 	 */
 	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
@@ -500,8 +500,7 @@ public final class ActionTool {
 	}
 	
 	/**
-	 * Returns a Random Number from 0 to ...what i have choosen in method see
-	 * the doc
+	 * Returns a Random Number from 0 to ...what i have choosen in method see the doc
 	 *
 	 * @return A random integer
 	 */
@@ -512,24 +511,71 @@ public final class ActionTool {
 	/**
 	 * Return random table name.
 	 *
-	 * @return Returns a RandomTableName for the database in format
-	 *         ("_"+randomNumber)
+	 * @return Returns a RandomTableName for the database in format ("_"+randomNumber)
 	 */
 	public static String returnRandomTableName() {
 		return "_" + returnRandom();
 	}
 	
 	/**
+	 * The Type of File
+	 * 
+	 * @author GOXR3PLUS
+	 *
+	 */
+	public enum FileType {
+		DIRECTORY, FILE;
+	}
+	
+	/**
+	 * Creates the given File or Folder if not exists and returns the result
+	 * 
+	 * @param absoluteFilePath
+	 *            The absolute path of the File|Folder
+	 * @param fileType
+	 *            Create DIRECTORY OR FILE ?
+	 * @return True if exists or have been successfully created , otherwise false
+	 */
+	public static boolean createFileOrFolder(String absoluteFilePath , FileType fileType) {
+		return createFileOrFolder(new File(absoluteFilePath), fileType);
+	}
+	
+	/**
+	 * Creates the given File or Folder if not exists and returns the result
+	 * 
+	 * @param absoluteFilePath
+	 *            The absolute path of the File|Folder
+	 * @param fileType
+	 *            Create DIRECTORY OR FILE ?
+	 * @return True if exists or have been successfully created , otherwise false
+	 */
+	public static boolean createFileOrFolder(File file , FileType fileType) {
+		//Already exists?
+		if (file.exists())
+			return true;
+		//Directory?
+		if (fileType == FileType.DIRECTORY)
+			return file.mkdir();
+		//File?
+		try {
+			return file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
 	 * Paint the given text on the given graphics context.
 	 *
 	 * @param gc
-	 *        the gc
+	 *            the gc
 	 * @param text
-	 *        the text
+	 *            the text
 	 * @param width
-	 *        the width
+	 *            the width
 	 * @param height
-	 *        the height
+	 *            the height
 	 */
 	public static void paintCanvas(GraphicsContext gc , String text , int width , int height) {
 		

@@ -20,6 +20,7 @@ import application.librarymode.Library;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
+import application.tools.ActionTool.FileType;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -56,7 +57,7 @@ public class DbManager {
 	/**
 	 * The PropertiesDb
 	 */
-	private PropertiesDb propertiesDb = new PropertiesDb();
+	private PropertiesDb propertiesDb;
 	
 	//-------------------------
 	
@@ -105,35 +106,34 @@ public class DbManager {
 	 * 
 	 *
 	 * @param userName
-	 *        the user name
+	 *            the user name
 	 */
 	public void initialize(String userName) {
 		
 		// Initialise
 		InfoTool.setUserName(userName);
+		
+		//Create the propertiesDb
+		File settingsFolder = new File(InfoTool.getUserFolderAbsolutePathWithSeparator() + "settings");
+		ActionTool.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
+		propertiesDb = new PropertiesDb(settingsFolder + File.separator + "config.properties");
 		propertiesDb.loadProperties();
 		
 		// User Folder
 		File userFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName);
-		if (!userFolder.exists())
-			userFolder.mkdir();
+		ActionTool.createFileOrFolder(userFolder, FileType.DIRECTORY);
 		
 		// Images Folder
 		File imagesFolder = new File(InfoTool.getImagesFolderAbsolutePathPlain());
-		if (!imagesFolder.exists())
-			imagesFolder.mkdir();
+		ActionTool.createFileOrFolder(imagesFolder, FileType.DIRECTORY);
 		
 		//XPlayer Images Folder
 		File xPlayerImagesFolder = new File(InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		if (!xPlayerImagesFolder.exists())
-			xPlayerImagesFolder.mkdir();
+		ActionTool.createFileOrFolder(xPlayerImagesFolder, FileType.DIRECTORY);
 		
-		// Database File(.db)
-		String dbFileAbsolutePath = InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db";
-		boolean data1Exist = new File(dbFileAbsolutePath).exists();
-		
+		//Attempt DataBase connection
 		try {
-			// connection1
+			String dbFileAbsolutePath = InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db";
 			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 			connection.setAutoCommit(false);
 			
@@ -178,7 +178,7 @@ public class DbManager {
 	 * Open or close the connection.
 	 *
 	 * @param action
-	 *        the action
+	 *            the action
 	 */
 	public void manageConnection(Operation action) {
 		try {
@@ -194,16 +194,14 @@ public class DbManager {
 	}
 	
 	/**
-	 * Using this methods to control commits across the application so not to
-	 * have unexpected lags.
+	 * Using this methods to control commits across the application so not to have unexpected lags.
 	 */
 	public void commit() {
 		commitExecutor.execute(commitRunnable);
 	}
 	
 	/**
-	 * Using this methods to control commit + vacuum across the application so
-	 * not to have unexpected lags.
+	 * Using this methods to control commit + vacuum across the application so not to have unexpected lags.
 	 * 
 	 */
 	public void commitAndVacuum() {
@@ -221,15 +219,14 @@ public class DbManager {
 	 * Checks if this table exists in the SQL DataBase
 	 *
 	 * @param tableName
-	 *        the table name
+	 *            the table name
 	 * @return true, if successful
 	 */
 	public boolean doesTableExist(String tableName) {
 		// SQLite table names are case insensitive, but comparison is case
 		// sensitive by default. To make this work properly in all cases you
 		// need to add COLLATE NOCASE
-		try (ResultSet r = connection.createStatement()
-				.executeQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
+		try (ResultSet r = connection.createStatement().executeQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
 			int total = r.getInt(1);
 			return total == 0 ? false : true;
 		} catch (SQLException ex) {
@@ -249,10 +246,10 @@ public class DbManager {
 		try (Statement statement = connection.createStatement()) {
 			
 			// ----------Libraries Table ----------------//
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS LIBRARIES (NAME          TEXT    PRIMARY KEY   NOT NULL," + "TABLENAME TEXT NOT NULL,"
-					+ "STARS         DOUBLE     NOT NULL," + "DATECREATED          TEXT   	NOT NULL," + "TIMECREATED          TEXT    NOT NULL,"
-					+ "DESCRIPTION   TEXT    NOT NULL," + "SAVEMODE      INT     NOT NULL," + "POSITION      INT     NOT NULL,"
-					+ "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
+			statement.executeUpdate(
+					"CREATE TABLE IF NOT EXISTS LIBRARIES (NAME          TEXT    PRIMARY KEY   NOT NULL," + "TABLENAME TEXT NOT NULL," + "STARS         DOUBLE     NOT NULL,"
+							+ "DATECREATED          TEXT   	NOT NULL," + "TIMECREATED          TEXT    NOT NULL," + "DESCRIPTION   TEXT    NOT NULL,"
+							+ "SAVEMODE      INT     NOT NULL," + "POSITION      INT     NOT NULL," + "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
 			
 			// -----------Radio Stations Table ------------//
 			//  statement.executeUpdate("CREATE TABLE '" + InfoTool.RADIO_STATIONS_DATABASE_TABLE_NAME + "'(NAME TEXT PRIMARY KEY NOT NULL,"
@@ -272,16 +269,15 @@ public class DbManager {
 	 * Create a database table for the specific XPlayer.
 	 *
 	 * @param statement
-	 *        the statement
+	 *            the statement
 	 * @param key
-	 *        the key
+	 *            the key
 	 * @throws SQLException
-	 *         the SQL exception
+	 *             the SQL exception
 	 */
 	private void createXPlayListTable(Statement statement , int key) throws SQLException {
-		statement.executeUpdate(
-				"CREATE TABLE IF NOT EXISTS `XPPL" + key + "` (PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
-						+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+		statement.executeUpdate("CREATE TABLE IF NOT EXISTS `XPPL" + key + "` (PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
+				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
 	}
 	
 	/**
@@ -335,8 +331,7 @@ public class DbManager {
 			// ---------------------if failed
 			setOnFailed(fail -> {
 				Main.updateScreen.getProgressBar().progressProperty().unbind();
-				ActionTool.showNotification("Fatal Error!", "DataLoader failed during loading dataBase!!Application will exit...",
-						Duration.millis(1500), NotificationType.ERROR);
+				ActionTool.showNotification("Fatal Error!", "DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500), NotificationType.ERROR);
 				System.exit(0);
 			});
 		}
@@ -368,9 +363,8 @@ public class DbManager {
 						// Load all the libraries
 						while (resultSet.next()) {
 							libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
-									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"),
-									resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"),
-									resultSet.getBoolean("OPENED")));
+									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"),
+									resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
 							
 							updateProgress(resultSet.getRow() - 1, total);
 						}
@@ -391,8 +385,7 @@ public class DbManager {
 						
 						//Refresh all the XPlayers PlayLists
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()
-								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService()
-										.startService(false, false)));
+								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false)));
 						
 						//--FINISH
 						updateProgress(total, total);
