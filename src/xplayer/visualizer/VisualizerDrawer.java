@@ -32,10 +32,10 @@ public class VisualizerDrawer extends VisualizerModel {
 	//-----
 	
 	/** The foreground image */
-	public Image foregroundImage = DEFAULT_FOREGROUND_IMAGE;
+	public Image foregroundImage ;//= DEFAULT_FOREGROUND_IMAGE;
 	
 	/** The background image. */
-	public Image backgroundImage = DEFAULT_BACKGROUND_IMAGE;
+	public Image backgroundImage ;//= DEFAULT_BACKGROUND_IMAGE;
 	
 	//-----
 	

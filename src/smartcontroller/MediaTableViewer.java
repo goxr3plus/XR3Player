@@ -82,35 +82,35 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** It is a remix? */
 	@FXML
-	private TableColumn<?,?> remix;
+	private TableColumn<Media,?> remix;
 	
 	/** The album. */
 	@FXML
-	private TableColumn<?,?> album;
+	private TableColumn<Media,?> album;
 	
 	/** The composer. */
 	@FXML
-	private TableColumn<?,?> composer;
+	private TableColumn<Media,?> composer;
 	
 	/** The comment. */
 	@FXML
-	private TableColumn<?,?> comment;
+	private TableColumn<Media,?> comment;
 	
 	/** The genre. */
 	@FXML
-	private TableColumn<?,?> genre;
+	private TableColumn<Media,?> genre;
 	
 	/** The bpm. */
 	@FXML
-	private TableColumn<?,?> bpm;
+	private TableColumn<Media,?> bpm;
 	
 	/** The key. */
 	@FXML
-	private TableColumn<?,?> key;
+	private TableColumn<Media,?> key;
 	
 	/** The harmonic. */
 	@FXML
-	private TableColumn<?,?> harmonic;
+	private TableColumn<Media,?> harmonic;
 	
 	/** The bit rate. */
 	@FXML
@@ -118,7 +118,7 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** The year. */
 	@FXML
-	private TableColumn<?,?> year;
+	private TableColumn<Media,?> year;
 	
 	/** The drive. */
 	@FXML
@@ -142,17 +142,17 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** The album art. */
 	@FXML
-	private TableColumn<?,?> albumArt;
+	private TableColumn<Media,?> albumArt;
 	
 	/** The singer. */
 	@FXML
-	private TableColumn<?,?> singer;
+	private TableColumn<Media,?> singer;
 	
 	/** The image. */
-	WritableImage image = new WritableImage(100, 100);
+	private WritableImage image = new WritableImage(100, 100);
 	
 	/** The canvas. */
-	Canvas canvas = new Canvas();
+	private Canvas canvas = new Canvas();
 	
 	private final SmartController smartController;
 	
@@ -201,30 +201,12 @@ public class MediaTableViewer extends TableView<Media> {
 			if ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.C) {
 				System.out.println("Control+C was released");
 				
-				//Get Native System ClipBoard
-				final Clipboard clipboard = Clipboard.getSystemClipboard();
-				final ClipboardContent content = new ClipboardContent();
-				
-				// PutFiles
-				content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
-				
-				//Set the Content
-				clipboard.setContent(content);
-				
-				ActionTool.showNotification("Copied to Clipboard",
-						"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(3.5),
-						NotificationType.INFORMATION);
+				copySelectedMediaToClipBoard();
 				
 			} else if (smartController.getGenre() == Genre.LIBRARYMEDIA && ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.V )) {
-				
 				System.out.println("Control+V was released");
 				
-				//Get Native System ClipBoard
-				final Clipboard clipboard = Clipboard.getSystemClipboard();
-				
-				// Has Files? + isFree()?
-				if (clipboard.hasFiles() && smartController.isFree(true))
-					smartController.getInputService().start(clipboard.getFiles());
+				pasteMediaFromClipBoard();
 			}
 		});
 		
@@ -424,6 +406,37 @@ public class MediaTableViewer extends TableView<Media> {
 	 */
 	public int getSelectedCount() {
 		return getSelectionModel().getSelectedItems().size();
+	}
+	
+	/**
+	 * Copies all the selected media files to the Native System ClipBoard
+	 */
+	public void copySelectedMediaToClipBoard() {
+		//Get Native System ClipBoard
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		final ClipboardContent content = new ClipboardContent();
+		
+		// PutFiles
+		content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
+		
+		//Set the Content
+		clipboard.setContent(content);
+		
+		ActionTool.showNotification("Copied to Clipboard",
+				"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(3.5),
+				NotificationType.INFORMATION);
+	}
+	
+	/**
+	 * Past's all Native System ClipBoard content's to the smartcontroller
+	 */
+	public void pasteMediaFromClipBoard() {
+		//Get Native System ClipBoard
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		
+		// Has Files? + isFree()?
+		if (clipboard.hasFiles() && smartController.isFree(true))
+			smartController.getInputService().start(clipboard.getFiles());
 	}
 	
 }

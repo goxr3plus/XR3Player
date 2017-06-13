@@ -258,14 +258,14 @@
                   </HBox>
                </top>
             </BorderPane>
-            <Region fx:id="fxRegion" style="-fx-background-color: rgb(255,255,255,0.8);" visible="false" />
-            <Label fx:id="bugLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-family: &quot;Younger than me&quot;;" text="If it lags here it is a serious bug , sorry about that i am doing my best to fix it ..... :) . The only way this player to be responsive again is to restart the XR3Player.... :(" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT">
+            <Region fx:id="fxRegion" style="-fx-background-color: rgb(0,0,0,0.8);" />
+            <Label fx:id="bugLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold;" text="If it lags here then it is a bug i am trying to fix :)" textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <JFXSpinner fx:id="fxSpinner" radius="45.0" startingAngle="-200.0" visible="false" />
-            <Label fx:id="fxLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-text-fill: black; -fx-font-weight: bold; -fx-font-family: &quot;Younger than me&quot;;" text="center label" visible="false">
+            <JFXSpinner fx:id="fxSpinner" radius="90.0" startingAngle="-200.0" />
+            <Label fx:id="fxLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="center label">
                <font>
                   <Font size="15.0" />
                </font>

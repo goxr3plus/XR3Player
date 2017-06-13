@@ -29,13 +29,19 @@ public class XPlayersSettingsController extends BorderPane {
 	private JFXCheckBox showFPS;
 	
 	@FXML
+	private Slider maxVisualizerFPSSlider;
+	
+	@FXML
 	private JFXCheckBox startImmediately;
 	
 	@FXML
 	private JFXCheckBox askSecurityQuestion;
 	
 	@FXML
-	private Slider skipSlider;
+	private Slider secondsToSkipSlider;
+	
+	@FXML
+	private JFXCheckBox showPlayerNotifications;
 	
 	// -------------------------------------------------------------
 	
@@ -89,7 +95,7 @@ public class XPlayersSettingsController extends BorderPane {
 				.addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-AskSecurityQuestion", String.valueOf(askSecurityQuestion.isSelected())));
 		
 		// SkipSlider
-		skipSlider.valueProperty().addListener((observable , oldValue , newValue) -> {
+		secondsToSkipSlider.valueProperty().addListener((observable , oldValue , newValue) -> {
 			//Change the values of skip buttons from each player
 			Main.xPlayersList.getList().forEach(xPlayerController -> {
 				xPlayerController.getBackwardButton().setText(Integer.toString(newValue.intValue()));
@@ -97,9 +103,9 @@ public class XPlayersSettingsController extends BorderPane {
 			});
 		});
 		
-		skipSlider.valueChangingProperty().addListener((observable , oldValue , newValue) -> {
+		secondsToSkipSlider.valueChangingProperty().addListener((observable , oldValue , newValue) -> {
 			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-SkipButtonSeconds", Integer.toString((int) skipSlider.getValue()));
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-SkipButtonSeconds", Integer.toString((int) secondsToSkipSlider.getValue()));
 		});
 	}
 	
@@ -128,7 +134,7 @@ public class XPlayersSettingsController extends BorderPane {
 	 * @return the skipSlider
 	 */
 	public Slider getSkipSlider() {
-		return skipSlider;
+		return secondsToSkipSlider;
 	}
 	
 }

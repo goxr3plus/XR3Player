@@ -133,7 +133,7 @@ public class SearchBoxWindow extends BorderPane {
 	 * Changes the text of the Top Label of the Window.
 	 *
 	 * @param text
-	 *        the new label text
+	 *            the new label text
 	 */
 	public void setLabelText(String text) {
 		resultsLabel.setText(text);
@@ -147,8 +147,7 @@ public class SearchBoxWindow extends BorderPane {
 	}
 	
 	/**
-	 * This method registers some listeners to the main window so when main
-	 * windows changes his size or position then the Search Window recalculates
+	 * This method registers some listeners to the main window so when main windows changes his size or position then the Search Window recalculates
 	 * it's position.
 	 * 
 	 * @param window1
@@ -172,7 +171,8 @@ public class SearchBoxWindow extends BorderPane {
 		
 		Bounds bounds = searchField.localToScreen(searchField.getBoundsInLocal());
 		window.setX(bounds.getMinX());
-		window.setY(bounds.getMaxY() + 10);
+		//Check here so the window doesn't go below screen height
+		window.setY( ( window.getHeight() + bounds.getMaxY() + 10 < InfoTool.getVisualScreenHeight() ) ? bounds.getMaxY() + 10 : bounds.getMinY() - window.getHeight() - 10);
 	}
 	
 	/**
@@ -186,7 +186,7 @@ public class SearchBoxWindow extends BorderPane {
 		 * Constructor.
 		 *
 		 * @param text
-		 *        the text
+		 *            the text
 		 * @param action
 		 */
 		public ResultButton(String text, EventHandler<ActionEvent> action) {

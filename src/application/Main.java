@@ -68,8 +68,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import smartcontroller.MediaContextMenu;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
+import smartcontroller.media.MediaContextMenu;
 import smartcontroller.services.MediaFilterService;
 import xplayer.PlayedMediaList;
 import xplayer.XPlayersList;
@@ -373,7 +373,7 @@ public class Main extends Application {
 		//----------Bottom Bar----------------
 		settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty()
 				.addListener((observable , oldValue , newValue) -> bottomBar.getKeyBindingsLabel().setText(newValue ? "ON" : "OFF"));
-		
+			
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------

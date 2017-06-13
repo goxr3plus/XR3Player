@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on">
+        <items>
+          <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="startOnPlayer1" mnemonicParsing="false" onAction="#action" text="xPlayer ~1">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="startOnPlayer2" mnemonicParsing="false" onAction="#action" text="xPlayer ~2">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuItem>
+        </items>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/circledPlay24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Menu>
+      <Menu fx:id="stopPlayer" mnemonicParsing="false" text="Stop Player">
+        <items>
+          <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="stopPlayer1" mnemonicParsing="false" onAction="#action" text="xPlayer ~1">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="stopPlayer2" mnemonicParsing="false" onAction="#action" text="xPlayer ~2">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuItem>
+        </items>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Stop-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Menu>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <Menu fx:id="getInfoBuy" mnemonicParsing="false" text="Get Info/Buy">
+        <items>
+            <Menu mnemonicParsing="false" text="Amazon">
+              <items>
+                  <MenuItem fx:id="amazonUS" mnemonicParsing="false" onAction="#action" text="US (Amazon.com)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                <MenuItem fx:id="amazonUK" mnemonicParsing="false" onAction="#action" text="UK (Amazon.com)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonCanada" mnemonicParsing="false" onAction="#action" text="Canada (Amazon.ca)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonGermany" mnemonicParsing="false" onAction="#action" text="Germany (Amazon.de)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonFrance" mnemonicParsing="false" onAction="#action" text="France (Amazon.fr)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonSpain" mnemonicParsing="false" onAction="#action" text="Spain (Amazon.es)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonItaly" mnemonicParsing="false" onAction="#action" text="Italy (Amazon.it)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonJapan" mnemonicParsing="false" onAction="#action" text="Japan (Amazon.co.jp)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="amazonChina" mnemonicParsing="false" onAction="#action" text="China (Amazon.cn)">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/amazon24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/amazon24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+            <MenuItem fx:id="soundCloud" mnemonicParsing="false" onAction="#action" text="SoundCloud">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/soundcloud24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+          <MenuItem fx:id="jamendo" mnemonicParsing="false" onAction="#action" text="Jamendo">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/jamendo24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="tuneIn" mnemonicParsing="false" onAction="#action" text="TuneIn">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/tunein24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="hDTracks" mnemonicParsing="false" onAction="#action" text="HDTracks">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/hDTracks.png" />
+                     </image></ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="cDUniverse" mnemonicParsing="false" onAction="#action" text="CD Universe">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/cDUniverse.png" />
+                     </image></ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="lastfm" mnemonicParsing="false" onAction="#action" text="Last.fm">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/lastfm24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="librefm" mnemonicParsing="false" onAction="#action" text="Libre.fm">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/librefm24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="youtube" mnemonicParsing="false" onAction="#action" text="Youtube">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/youtube24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="vimeo" mnemonicParsing="false" onAction="#action" text="Vimeo">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/vimeo24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="google" mnemonicParsing="false" onAction="#action" text="Google">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/google24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="duckduckgo" mnemonicParsing="false" onAction="#action" text="DuckDuckgo">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/duckduckgo24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="bing" mnemonicParsing="false" onAction="#action" text="Bing">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/bing24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="yahoo" mnemonicParsing="false" onAction="#action" text="Yahoo">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/yahoo24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="wikipedia" mnemonicParsing="false" onAction="#action" text="Wikipedia">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/wikipedia.png" />
+                     </image></ImageView>
+               </graphic>
+            </MenuItem>
+        </items>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Add%20Shopping%20Cart-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Menu>
+      <Menu fx:id="findLyrics" mnemonicParsing="false" text="Find Lyrics">
+        <items>
+          <MenuItem fx:id="lyricFinderOrg" mnemonicParsing="false" onAction="#action" text="LyricFinder.org">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Lyrics-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="lyricsCom" mnemonicParsing="false" onAction="#action" text="Lyrics.com">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Lyrics-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+        </items>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Lyrics-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Menu>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename ">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/rename.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="stars" mnemonicParsing="false" onAction="#action" text="Stars ">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/smallStar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <Menu mnemonicParsing="false" text="Send To">
+         <items>
+            <MenuItem fx:id="copyOrMove" mnemonicParsing="false" onAction="#action" text="Copy/Move">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/copyFile.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+         </items>
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Share-24.png" />
+               </image></ImageView>
+         </graphic>
+      </Menu>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Copy-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="paste" mnemonicParsing="false" onAction="#action" text="Paste (CTRL+V)">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Paste-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="simpleDelete" mnemonicParsing="false" onAction="#action" text="Delete (Delete)">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/delete2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="storageDelete" mnemonicParsing="false" onAction="#action" text="Delete (Shift+Delete)">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File ">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/path.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="properties" mnemonicParsing="false" onAction="#action" text="Properties...">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/tag.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+   </items>
+</fx:root>

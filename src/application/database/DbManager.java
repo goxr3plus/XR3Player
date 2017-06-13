@@ -387,6 +387,8 @@ public class DbManager {
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()
 								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false)));
 						
+						Platform.runLater(() -> Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getSplitPane().getItems().add(Main.loginMode.teamViewer));
+						
 						//--FINISH
 						updateProgress(total, total);
 						

@@ -31,7 +31,7 @@ public class PropertiesDb {
 	private static final ExecutorService updateExecutorService = Executors.newSingleThreadExecutor();
 	
 	/**
-	 * Using this variable when i when to prevent update of properties happen
+	 * Using this variable when i want to prevent update of properties happen
 	 */
 	private boolean updatePropertiesLocked = true;
 	
@@ -135,6 +135,8 @@ public class PropertiesDb {
 	}
 	
 	/**
+	 * Get the properties instance of this class
+	 * 
 	 * @return the properties
 	 */
 	public Properties getProperties() {

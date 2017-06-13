@@ -14,8 +14,6 @@ import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
-import com.jfoenix.controls.JFXButton;
-
 import application.Main;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.ActionTool;
@@ -36,6 +34,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -59,6 +58,9 @@ import smartcontroller.services.LoadService;
 public class SmartController extends StackPane {
 	
 	//----------------------------------------------------------------
+	
+	@FXML
+	private SplitPane splitPane;
 	
 	@FXML
 	private BorderPane mainBorder;
@@ -128,8 +130,7 @@ public class SmartController extends StackPane {
 	private final Genre genre;
 	
 	/**
-	 * The name of the database table
-	 * (eg. @see ActionTool.returnRandomTableName())
+	 * The name of the database table (eg. @see ActionTool.returnRandomTableName())
 	 */
 	private final String dataBaseTableName;
 	
@@ -187,14 +188,12 @@ public class SmartController extends StackPane {
 	// --------------------------------------------------
 	
 	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer without
-	 * the search activated
+	 * The Vertical ScrollBar position of SmartController TableViewer without the search activated
 	 */
 	private double verticalScrollValueWithoutSearch = -1;
 	
 	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer when the
-	 * the search activated
+	 * The Vertical ScrollBar position of SmartController TableViewer when the the search activated
 	 */
 	private double verticalScrollValueWithSearch = -1;
 	
@@ -208,12 +207,12 @@ public class SmartController extends StackPane {
 	 * Instantiates a new smart controller.
 	 *
 	 * @param genre
-	 *        .. @see Genre
+	 *            .. @see Genre
 	 * @param controllerName
-	 *        The name of the SmartController
+	 *            The name of the SmartController
 	 * @param dataBaseTableName
-	 *        The name of the database table <br>
-	 *        ..@see ActionTool.returnRandomTableName()
+	 *            The name of the database table <br>
+	 *            ..@see ActionTool.returnRandomTableName()
 	 */
 	public SmartController(Genre genre, String controllerName, String dataBaseTableName) {
 		this.genre = genre;
@@ -440,6 +439,10 @@ public class SmartController extends StackPane {
 		// Update
 		updateLabel();
 		
+		//---SplitPane
+		splitPane.getItems().remove(1);
+		
+		
 		//---------------------Check the genre--------------------
 		if (genre == Genre.SEARCHWINDOW) {
 			navigationHBox.setVisible(false);
@@ -471,17 +474,16 @@ public class SmartController extends StackPane {
 	 */
 	
 	/**
-	 * Prepares the delete operation when more than one Media files will be
-	 * deleted.
+	 * Prepares the delete operation when more than one Media files will be deleted.
 	 *
 	 * @param permanent
-	 *        <br>
-	 *        true->storage medium + (play list)/library<br>
-	 *        false->only from (play list)/library
+	 *            <br>
+	 *            true->storage medium + (play list)/library<br>
+	 *            false->only from (play list)/library
 	 * @param controller
-	 *        the controller
+	 *            the controller
 	 */
-	void prepareDelete(boolean permanent) {
+	public void prepareDelete(boolean permanent) {
 		int previousTotal = getTotalInDataBase();
 		
 		// Remove selected items
@@ -500,9 +502,8 @@ public class SmartController extends StackPane {
 	 * Removes the selected songs.
 	 *
 	 * @param permanent
-	 *        <br>
-	 *        true->storage medium + (play list)/library false->only from (play
-	 *        list)/library<br>
+	 *            <br>
+	 *            true->storage medium + (play list)/library false->only from (play list)/library<br>
 	 */
 	private void removeSelected(boolean permanent) {
 		// Free? && How many items are selected?+Question
@@ -590,7 +591,7 @@ public class SmartController extends StackPane {
 	 * Checks if any updates are on progress in the controller.
 	 *
 	 * @param showMessage
-	 *        the show message
+	 *            the show message
 	 * @return true->if yes<br>
 	 *         false->if not
 	 */
@@ -628,7 +629,7 @@ public class SmartController extends StackPane {
 	 * Show message.
 	 *
 	 * @param reason
-	 *        the reason
+	 *            the reason
 	 */
 	private void showMessage(String reason) {
 		ActionTool.showNotification("Message", "[" + reason + "] is working on:\n " + toString() + "\n\t retry as soon as it finish.", Duration.millis(2000),
@@ -695,8 +696,7 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Calculates the total entries in the database table [it MUST be called
-	 * from external thread cause it may lag the application ]
+	 * Calculates the total entries in the database table [it MUST be called from external thread cause it may lag the application ]
 	 */
 	public synchronized void calculateTotalEntries() {
 		// calculate the total entries
@@ -788,8 +788,7 @@ public class SmartController extends StackPane {
 	 * 
 	 * @param newMaximumPerPage
 	 * @param updateSmartController
-	 *        If true the loadService will start (Memory consuming ;( ) use with
-	 *        great care
+	 *            If true the loadService will start (Memory consuming ;( ) use with great care
 	 */
 	public void setNewMaximumPerPage(int newMaximumPerPage , boolean updateSmartController) {
 		if (maximumPerPage == newMaximumPerPage)
@@ -806,7 +805,7 @@ public class SmartController extends StackPane {
 	 * Sets the name.
 	 *
 	 * @param newName
-	 *        the new name
+	 *            the new name
 	 */
 	public void setName(String newName) {
 		controllerName = newName;
@@ -816,7 +815,7 @@ public class SmartController extends StackPane {
 	 * Sets the total in data base.
 	 *
 	 * @param totalInDataBase
-	 *        the new total in data base
+	 *            the new total in data base
 	 */
 	public void setTotalInDataBase(int totalInDataBase) {
 		this.totalInDataBase.set(totalInDataBase);
@@ -824,7 +823,7 @@ public class SmartController extends StackPane {
 	
 	/**
 	 * @param currentPage
-	 *        the currentPage to set
+	 *            the currentPage to set
 	 */
 	public void setCurrentPage(IntegerProperty currentPage) {
 		this.currentPage = currentPage;
@@ -832,7 +831,7 @@ public class SmartController extends StackPane {
 	
 	/**
 	 * @param informationTextArea
-	 *        the informationTextArea to set
+	 *            the informationTextArea to set
 	 */
 	public void setInformationTextArea(TextArea informationTextArea) {
 		this.informationTextArea = informationTextArea;
@@ -840,7 +839,7 @@ public class SmartController extends StackPane {
 	
 	/**
 	 * @param verticalScrollValueWithoutSearch
-	 *        the verticalScrollValueWithoutSearch to set
+	 *            the verticalScrollValueWithoutSearch to set
 	 */
 	public void setVerticalScrollValueWithoutSearch(double verticalScrollValueWithoutSearch) {
 		this.verticalScrollValueWithoutSearch = verticalScrollValueWithoutSearch;
@@ -848,7 +847,7 @@ public class SmartController extends StackPane {
 	
 	/**
 	 * @param verticalScrollValueWithSearch
-	 *        the verticalScrollValueWithSearch to set
+	 *            the verticalScrollValueWithSearch to set
 	 */
 	public void setVerticalScrollValueWithSearch(double verticalScrollValueWithSearch) {
 		this.verticalScrollValueWithSearch = verticalScrollValueWithSearch;
@@ -956,8 +955,7 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Return the number of the final List counting from <b>firstList->0
-	 * SecondList->1 ....</b>
+	 * Return the number of the final List counting from <b>firstList->0 SecondList->1 ....</b>
 	 *
 	 * @return the int
 	 */
@@ -1072,6 +1070,14 @@ public class SmartController extends StackPane {
 	public double getVerticalScrollValueWithSearch() {
 		return verticalScrollValueWithSearch;
 	}
+
+	/**
+	 * @return the splitPane
+	 */
+	public SplitPane getSplitPane() {
+		return splitPane;
+	}
+
 	
 	/*-----------------------------------------------------------------------
 	 * 

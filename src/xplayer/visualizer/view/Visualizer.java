@@ -107,10 +107,14 @@ abstract class Visualizer extends VisualizerDrawer {
 	public class PaintService extends AnimationTimer {
 		
 		/** The next second. */
-		long nextSecond = 0L;
+		long nextSecond;
+		long next50Milliseconds;
 		
 		/** The Constant ONE_SECOND_NANOS. */
 		private static final long ONE_SECOND_NANOS = 1_000_000_000L;
+		//50 Milliseconds in nanoseconds
+		private static final long MILLISECONDS_50_NANOS = 1_000_000L * 50;
+		
 		/**
 		 * When this property is <b>true</b> the AnimationTimer is running
 		 */
@@ -129,12 +133,10 @@ abstract class Visualizer extends VisualizerDrawer {
 		@Override
 		public void start() {
 			// Values must be >0
-			if (canvasWidth <= 0 || canvasHeight <= 0) {
-				canvasWidth = 1;
-				canvasHeight = 1;
-			}
+			if (canvasWidth <= 0 || canvasHeight <= 0)
+				canvasHeight = canvasWidth = 1;
 			
-			nextSecond = 0L;
+			next50Milliseconds = nextSecond = 0L;
 			super.start();
 			running.set(true);
 		}
@@ -160,25 +162,64 @@ abstract class Visualizer extends VisualizerDrawer {
 		}
 		
 		/**
-		 * This method is used by XPlayerController to pass a reference to the
-		 * AnimationTimer
+		 * This method is used by XPlayerController to pass a reference to the AnimationTimer
 		 *
 		 * @param xPlayerController
-		 *        The XPlayerController Reference
+		 *            The XPlayerController Reference
 		 */
 		public void passXPlayer(XPlayerController xPlayerController) {
 			this.xPlayerController = xPlayerController;
 		}
 		
+		//===============EXPERIMENTAL===========================
+		//int maximumFramesPerSecond = 60;
+		//int maximumFramesPer50Milliseconds = (int) Math.round(maximumFramesPerSecond / 20.00);
+		//int framesPer50Milliseconds = 0;
+		//===============END OF EXPERIMENTAL===========================
+		
 		@Override
 		public void handle(long nanos) {
 			
-			// XPlayer controlls this animationTimer?
+			//System.out.println("MaxPer50Millis : " + maximumFramesPer50Milliseconds + " Current frames drawn:" + framesPerSecond);
+			
+			// --XRPlayer controller?
+			if (xPlayerController != null && xPlayerController.getDisc() != null)
+				xPlayerController.getDisc().repaint();
+			
+			// Avoid null pointer and also check if we have permission to draw the visualizer
 			if (xPlayerController != null && !xPlayerController.getVisualizerStackController().isVisible()) {
 				clear();
 				draw = false;
-			} else
-				draw = true;
+				return;
+			}
+			
+			//===============EXPERIMENTAL===========================
+			//			//We want every 50 milliseconds only the allowed frames to be drawn
+			//			if (framesPer50Milliseconds >= maximumFramesPer50Milliseconds)
+			//				draw = false;
+			//			else {
+			//				draw = true;
+			//				++framesPer50Milliseconds;
+			//			}
+			//			
+			//			//Check every 50 milliseconds how many frames have been drawn and prepare for the next 50 milliseconds
+			//			if (nanos >= next50Milliseconds) {
+			//				framesPerSecond += framesPer50Milliseconds;
+			//				framesPer50Milliseconds = 0;
+			//				next50Milliseconds = nanos + MILLISECONDS_50_NANOS;
+			//			}
+			//===============END OF EXPERIMENTAL===========================
+			
+			//=====Remove it if you want to add the experimental
+			draw = true;
+			++framesPerSecond;
+			
+			// Check for 1 second passed
+			if (nanos >= nextSecond) {
+				fps = framesPerSecond;
+				framesPerSecond = 0;
+				nextSecond = nanos + ONE_SECOND_NANOS;
+			}
 			
 			// Can draw?
 			if (draw) {
@@ -221,16 +262,6 @@ abstract class Visualizer extends VisualizerDrawer {
 				
 				// -- Show FPS if necessary.
 				if (showFPS) {
-					
-					framesPerSecond++;
-					
-					// Check for 1 second passed
-					if (nanos >= nextSecond) {
-						fps = framesPerSecond;
-						framesPerSecond = 0;
-						nextSecond = nanos + ONE_SECOND_NANOS;
-					}
-					
 					gc.setFill(Color.BLACK);
 					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
 					gc.setStroke(Color.WHITE);
@@ -239,19 +270,10 @@ abstract class Visualizer extends VisualizerDrawer {
 				
 			} // END: if draw == TRUE
 			
-			// --XRPlayer controller?
-			if (xPlayerController != null) {
-				// Repaint the disc
-				if (xPlayerController.getDisc() != null)
-					xPlayerController.getDisc().repaint();
-			}
-			
 			// --------------------------------------------------------------------------------------RUBBISH
 			// CODE
 			/*
-			 * if (System.currentTimeMillis() >= lfu + 1000) { lfu =
-			 * System.currentTimeMillis(); fps = framesPerSecond;
-			 * framesPerSecond = 0; }
+			 * if (System.currentTimeMillis() >= lfu + 1000) { lfu = System.currentTimeMillis(); fps = framesPerSecond; framesPerSecond = 0; }
 			 */
 			
 			// System.out.println("Canvas Width is:" + canvasWidth + " , Canvas
