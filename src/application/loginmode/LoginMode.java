@@ -5,6 +5,7 @@ package application.loginmode;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,11 +15,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
+import org.json.simple.DeserializationException;
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsoner;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
@@ -29,6 +36,7 @@ import application.presenter.SearchBox.SearchBoxType;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
+import application.tools.ActionTool.FileType;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
@@ -70,6 +78,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import smartcontroller.SmartController;
 
 /**
  * @author GOXR3PLUS
@@ -1102,44 +1111,138 @@ public class LoginMode extends BorderPane {
 					int[] counter = { 0 };
 					int totalUsers = LoginMode.this.teamViewer.getItemsObservableList().size();
 					
-					// -- For every user
-					LoginMode.this.teamViewer.getItemsObservableList().forEach(user -> {
+					try {
 						
-						//Check if the database of this user exists
-						String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "dbFile.db";
-						if (new File(dbFileAbsolutePath).exists()) {
+						// -- For every user
+						LoginMode.this.teamViewer.getItemsObservableList().forEach(user -> {
 							
-							// --Create connection and load user information
-							try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
-									ResultSet dbCounter = connection.createStatement().executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+							//Check if the UserInformation Properties File exist
+							if (new File(user.getUserInformationDb().getFileAbsolutePath()).exists()) {
+								//System.out.println("UsersInformationDb Exists"); //debugging
 								
-								int[] totalLibraries = { 0 };
-								totalLibraries[0] += dbCounter.getInt(1);
-								Thread.sleep(500);
+								//--------------------Now continue normally----------------------------------------------
+								Properties settings = user.getUserInformationDb().loadProperties(); //Load the properties from the File
 								
-								// Refresh the text
-								Platform.runLater(() -> {
+								//--Total Libraries
+								Optional.ofNullable(settings.getProperty("Total-Libraries")).ifPresent(s -> {
+									int totalLibraries = Integer.parseInt(s);
 									
-									//Add Pie Chart Data
-									if (totalLibraries[0] > 0)
-										getLibrariesPieChartData().add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
-									
-									//Update User Label
-									user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));
-									
+									// Refresh the text
+									Platform.runLater(() -> {
+										//Add Pie Chart Data
+										if (totalLibraries > 0)
+											getLibrariesPieChartData().add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries));
+										
+										//Update User Label
+										user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries));
+									});
 								});
-								//System.out.println("User:" + user.getUserName() + " contains : " + totalLibraries + " Libraries");
 								
-								updateProgress(++counter[0], totalUsers);
-							} catch (Exception ex) {
-								Main.logger.log(Level.SEVERE, "", ex);
+							} //If the UserInformation Properties File doesn't exit try to take Total-Libraries information from the actual sqlite.db file
+								//this process is slow as fu.ck that's why i am keeping information inside a properties file generally...
+							else {
+								//System.out.println("UsersInformationDb doesn't Exists"); //debugging
+								
+								//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
+								ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
+										FileType.DIRECTORY);
+								ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()), FileType.FILE);
+								
+								//Check if the database of this user exists
+								String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "dbFile.db";
+								if (new File(dbFileAbsolutePath).exists()) {
+									
+									// --Create connection and load user information
+									try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
+											ResultSet dbCounter = connection.createStatement().executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+										
+										int[] totalLibraries = { 0 };
+										totalLibraries[0] += dbCounter.getInt(1);
+										Thread.sleep(500);
+										
+										// Refresh the text
+										Platform.runLater(() -> {
+											
+											//Add Pie Chart Data
+											if (totalLibraries[0] > 0)
+												getLibrariesPieChartData().add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
+											
+											//Update User Label
+											user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));
+											
+										});
+										
+										//Update the UserInformationDb so it is ready for the next time
+										user.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(totalLibraries[0]));
+										
+										//System.out.println("User:" + user.getUserName() + " contains : " + totalLibraries + " Libraries"); //debugging
+										
+										updateProgress(++counter[0], totalUsers);
+									} catch (Exception ex) {
+										Main.logger.log(Level.SEVERE, "", ex);
+									}
+									
+								} else {
+									// Refresh the text
+									Platform.runLater(() -> user.getTotalLibrariesLabel().setText("0"));
+									
+									//Update the UserInformationDb so it is ready for the next time
+									user.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(0));
+								}
+								
 							}
-						} else {
-							// Refresh the text
-							Platform.runLater(() -> user.getTotalLibrariesLabel().setText(Integer.toString(0)));
-						}
+							
+							//----------------SUPPORT FOR XR3Player Version 72 and below---------------------------------------------
+							//----------------THIS CODE WILL BE REMOVED SOMEDAY IN THE FUTURE----------------------------------------
+							//-----------------IT PARSES THE settings.json file from the previous updates which was holding information
+							//-----------------about open libraries and and the last opened library , now that information are stored
+							//-----------------on the userInformation.properties file ;)
+							String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings.json";
+							
+							//Check if the file exists -- make the simple magic
+							if (new File(jsonFilePath).exists()) {
+								//Read the JSON File
+								try (FileReader fileReader = new FileReader(jsonFilePath)) {
+									
+									//JSON Array [ROOT]
+									JsonObject json = (JsonObject) Jsoner.deserialize(fileReader);
+									
+									//Opened Libraries Array
+									JsonArray openedLibraries = (JsonArray) ( (JsonObject) json.get("librariesSystem") ).get("openedLibraries");
+									
+									//For each Library
+									//System.out.println("\n\nUser Name:" + user.getUserName());
+									if (!openedLibraries.isEmpty()) {
+										String openedLibs = openedLibraries.stream().map(libraryObject -> ( (JsonObject) libraryObject ).get("name").toString())
+												.collect(Collectors.joining("<|>:<|>"));
+										//System.out.println("Opened Libraries:\n-> " + openedLibs);
+										user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
+									}
+									
+									//Last selected library 
+									JsonObject lastSelectedLibrary = (JsonObject) ( (JsonObject) json.get("librariesSystem") ).get("lastSelectedLibrary");
+									
+									//If not Last selected library is empty...
+									if (!lastSelectedLibrary.isEmpty()) {
+										String lastOpenedLibrary = lastSelectedLibrary.get("name").toString();
+										//	System.out.println("Last Opened Library: " + lastOpenedLibrary);
+										user.getUserInformationDb().updateProperty("Last-Opened-Library", lastOpenedLibrary);
+									}
+									
+								} catch (IOException | DeserializationException e) {
+									e.printStackTrace();
+									//  logger.severe("SettingsWindowController - exception: " + e); //$NON-NLS-1$
+								}
+							}
+							
+							//Now delete that fucking JSON File
+							new File(jsonFilePath).delete();
+							
+						});
 						
-					});
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
 					
 					return true;
 				}

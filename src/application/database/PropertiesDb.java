@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import application.tools.ActionTool;
-import application.tools.InfoTool;
 import application.tools.ActionTool.FileType;
 
 /**
@@ -38,7 +37,7 @@ public class PropertiesDb {
 	/**
 	 * The absolute path of the properties file
 	 */
-	String propertiesAbsolutePath;
+	private String fileAbsolutePath;
 	
 	/**
 	 * Constructor
@@ -46,7 +45,7 @@ public class PropertiesDb {
 	 * @param localDbManager
 	 */
 	public PropertiesDb(String propertiesAbsolutePath) {
-		this.propertiesAbsolutePath = propertiesAbsolutePath;
+		this.fileAbsolutePath = propertiesAbsolutePath;
 		properties = new Properties();
 	}
 	
@@ -64,11 +63,11 @@ public class PropertiesDb {
 		///System.out.println("Updating Property!");
 		
 		//Check if exists [ Create if Not ] 
-		ActionTool.createFileOrFolder(propertiesAbsolutePath, FileType.FILE);
+		ActionTool.createFileOrFolder(fileAbsolutePath, FileType.FILE);
 		
 		//Submit it to the executors Service
 		updateExecutorService.submit(() -> {
-			try (InputStream inStream = new FileInputStream(propertiesAbsolutePath); OutputStream outStream = new FileOutputStream(propertiesAbsolutePath)) {
+			try (InputStream inStream = new FileInputStream(fileAbsolutePath); OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
 				
 				//load  properties
 				properties.load(inStream);
@@ -92,11 +91,11 @@ public class PropertiesDb {
 	 */
 	public void deleteProperty(String key) {
 		//Check if exists 
-		if (new File(propertiesAbsolutePath).exists())
+		if (new File(fileAbsolutePath).exists())
 			
 			//Submit it to the executors Service
 			updateExecutorService.submit(() -> {
-				try (InputStream inStream = new FileInputStream(propertiesAbsolutePath); OutputStream outStream = new FileOutputStream(propertiesAbsolutePath)) {
+				try (InputStream inStream = new FileInputStream(fileAbsolutePath); OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
 					
 					//load  properties
 					properties.load(inStream);
@@ -117,13 +116,13 @@ public class PropertiesDb {
 	/**
 	 * Loads the Properties
 	 */
-	void loadProperties() {
+	public Properties loadProperties() {
 		
 		//Check if exists 
-		if (new File(propertiesAbsolutePath).exists())
+		if (new File(fileAbsolutePath).exists())
 			
 			//Load the properties file
-			try (InputStream inStream = new FileInputStream(propertiesAbsolutePath)) {
+			try (InputStream inStream = new FileInputStream(fileAbsolutePath)) {
 				
 				//load  properties
 				properties.load(inStream);
@@ -132,6 +131,7 @@ public class PropertiesDb {
 				ex.printStackTrace();
 			}
 		
+		return properties;
 	}
 	
 	/**
@@ -160,6 +160,21 @@ public class PropertiesDb {
 	 */
 	public void setUpdatePropertiesLocked(boolean updatePropertiesLocked) {
 		this.updatePropertiesLocked = updatePropertiesLocked;
+	}
+	
+	/**
+	 * @param fileAbsolutePath
+	 *            The new absolute path of the properties file
+	 */
+	public void setFileAbsolutePath(String fileAbsolutePath) {
+		this.fileAbsolutePath = fileAbsolutePath;
+	}
+	
+	/**
+	 * @return the propertiesAbsolutePath
+	 */
+	public String getFileAbsolutePath() {
+		return fileAbsolutePath;
 	}
 	
 }

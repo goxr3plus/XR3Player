@@ -161,10 +161,7 @@ public class MediaContextMenu extends ContextMenu {
 	private MenuItem paste;
 	
 	@FXML
-	private MenuItem simpleDelete;
-	
-	@FXML
-	private MenuItem storageDelete;
+	private MenuItem removeMedia;
 	
 	@FXML
 	private MenuItem showFile;
@@ -244,7 +241,7 @@ public class MediaContextMenu extends ContextMenu {
 			if (media1.getGenre() == Genre.LIBRARYMEDIA)
 				getItems().forEach(item -> item.setVisible(true));
 			else if (media1.getGenre() == Genre.SEARCHWINDOW)
-				simpleDelete.setVisible(false);
+				removeMedia.setVisible(false);
 			
 		//Determine the image
 		for (int i = 0; i <= 2; i++) {
@@ -330,13 +327,9 @@ public class MediaContextMenu extends ContextMenu {
 			Main.xPlayersList.getXPlayer(2).stop();
 		}
 		
-		// delete from list
-		else if (source == simpleDelete)
+		// remove media
+		else if (source == removeMedia)
 			controller.prepareDelete(false);
-		// delete from Storage medium
-		else if (source == storageDelete)
-			
-			controller.prepareDelete(true);
 		
 		// rename
 		else if (source == rename)

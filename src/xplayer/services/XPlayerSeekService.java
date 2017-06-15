@@ -62,7 +62,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 		
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
-		xPlayerController.getFxRegion().visibleProperty().bind(runningProperty());
+		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
 		
 		// lock the Service
 		locked = true;
@@ -78,8 +78,8 @@ public class XPlayerSeekService extends Service<Boolean> {
 		
 		// Remove the unidirectional binding
 		xPlayerController.getFxLabel().textProperty().unbind();
-		xPlayerController.getFxRegion().visibleProperty().unbind();
-		xPlayerController.getFxRegion().setVisible(false);
+		xPlayerController.getRegionStackPane().visibleProperty().unbind();
+		xPlayerController.getRegionStackPane().setVisible(false);
 		
 		// Stop disc dragging!
 		xPlayerController.discIsDragging = false;

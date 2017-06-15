@@ -463,41 +463,41 @@ public final class ActionTool {
 		return questionAnswer[0];
 	}
 	
-	/**
-	 * Delete confirmation.
-	 *
-	 * @param permanent
-	 *            the permanent
-	 * @param text
-	 *            the text
-	 * @param i
-	 *            the i
-	 * @return true, if successful
-	 */
-	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
-		boolean[] questionAnswer = { false };
-		
-		String unique = "\n [" + text + "]";
-		String multiple = "[" + text + " items]";
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initStyle(StageStyle.UTILITY);
-		alert.initOwner(window);
-		alert.setGraphic(!permanent ? questionImage : warningImage);
-		alert.setHeaderText(!permanent ? "Remove selection" + ( i > 1 ? "s " + multiple : unique ) + " from List?"
-				: "Are you sure you want to permanently delete " + ( i > 1 ? "these " + multiple : "this item " + unique ) + " ?");
-		alert.setContentText(!permanent ? "Are you sure you want to remove the selected " + ( i > 1 ? "items" : "item" ) + " from the List?"
-				: "If you delete the selection " + ( i > 1 ? "s  they" : "it" ) + " will be permanenlty lost.");
-		// LookUpButton
-		( (Button) alert.getDialogPane().lookupButton(ButtonType.OK) ).setDefaultButton(false);
-		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
-		alert.showAndWait().ifPresent(answer -> {
-			if (answer == ButtonType.OK)
-				questionAnswer[0] = true;
-		});
-		
-		return questionAnswer[0];
-	}
+//	/**
+//	 * Delete confirmation.
+//	 *
+//	 * @param permanent
+//	 *            the permanent
+//	 * @param text
+//	 *            the text
+//	 * @param i
+//	 *            the i
+//	 * @return true, if successful
+//	 */
+//	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
+//		boolean[] questionAnswer = { false };
+//		
+//		String unique = "\n [" + text + "]";
+//		String multiple = "[" + text + " items]";
+//		
+//		Alert alert = new Alert(AlertType.CONFIRMATION);
+//		alert.initStyle(StageStyle.UTILITY);
+//		alert.initOwner(window);
+//		alert.setGraphic(!permanent ? questionImage : warningImage);
+//		alert.setHeaderText(!permanent ? "Remove selection" + ( i > 1 ? "s " + multiple : unique ) + " from List?"
+//				: "Are you sure you want to permanently delete " + ( i > 1 ? "these " + multiple : "this item " + unique ) + " ?");
+//		alert.setContentText(!permanent ? "Are you sure you want to remove the selected " + ( i > 1 ? "items" : "item" ) + " from the List?"
+//				: "If you delete the selection " + ( i > 1 ? "s  they" : "it" ) + " will be permanenlty lost.");
+//		// LookUpButton
+//		( (Button) alert.getDialogPane().lookupButton(ButtonType.OK) ).setDefaultButton(false);
+//		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
+//		alert.showAndWait().ifPresent(answer -> {
+//			if (answer == ButtonType.OK)
+//				questionAnswer[0] = true;
+//		});
+//		
+//		return questionAnswer[0];
+//	}
 	
 	/**
 	 * Returns a Random Number from 0 to ...what i have choosen in method see the doc

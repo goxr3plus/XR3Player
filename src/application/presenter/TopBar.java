@@ -235,6 +235,8 @@ public class TopBar extends BorderPane {
 				//if (!Main.specialJFXTabPane.getTabs().get(1).isSelected())
 				Main.specialJFXTabPane.getSelectionModel().select(1);
 				
+				//Hide the searchBox that is coming from LibraryMode
+				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
 			}
 		});
 		
@@ -247,6 +249,9 @@ public class TopBar extends BorderPane {
 				
 				// Update window Mode
 				windowMode = WindowMode.USERMODE;
+				
+				//Hide the searchBox that is coming from LibraryMode
+				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
 			}
 		});
 		
@@ -259,6 +264,9 @@ public class TopBar extends BorderPane {
 				
 				// Update window Mode
 				windowMode = WindowMode.WEBMODE;
+				
+				//Hide the searchBox that is coming from LibraryMode
+				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
 			}
 		});
 		
@@ -303,7 +311,8 @@ public class TopBar extends BorderPane {
 	}
 	
 	/**
-	 * @param xr3Label the xr3Label to set
+	 * @param xr3Label
+	 *            the xr3Label to set
 	 */
 	public void setXr3Label(Label xr3Label) {
 		this.xr3Label = xr3Label;

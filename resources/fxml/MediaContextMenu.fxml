@@ -378,16 +378,7 @@
             </ImageView>
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="simpleDelete" mnemonicParsing="false" onAction="#action" text="Delete (Delete)">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/delete2.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </MenuItem>
-      <MenuItem fx:id="storageDelete" mnemonicParsing="false" onAction="#action" text="Delete (Shift+Delete)">
+      <MenuItem fx:id="removeMedia" mnemonicParsing="false" onAction="#action" text="Remove ({Shift} Delete)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

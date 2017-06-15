@@ -126,8 +126,7 @@ public class Library extends StackPane {
 	private StringProperty description;
 	
 	/**
-	 * // create a rotation transform starting at 0 degrees, rotating about
-	 * pivot point 0, 0.
+	 * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
 	 */
 	// Rotate rotationTransform = new Rotate(0, 0, 0)
 	
@@ -139,8 +138,7 @@ public class Library extends StackPane {
 	public enum SaveMode {
 		
 		/**
-		 * Songs are not copied into the database so if they are deleted they
-		 * don't exist anymore.
+		 * Songs are not copied into the database so if they are deleted they don't exist anymore.
 		 */
 		ORIGINAL_PATH,
 		
@@ -231,9 +229,9 @@ public class Library extends StackPane {
 								updateImagePathInDB(InfoTool.getImagesFolderAbsolutePathWithSeparator() + newName + "." + InfoTool.getFileExtension(getAbsoluteImagePath()), true,
 										false);
 							
-							//Update the JSONFile
+							//Update the UserInformation properties file
 							if (isOpened())
-								Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+								Main.dbManager.storeOpenedLibraries();
 						} else { // duplicate
 							resetTheName();
 							ActionTool.showNotification("Dublicate Name", "Name->" + newName + " is already used from another Library...", Duration.millis(2000),
@@ -279,25 +277,25 @@ public class Library extends StackPane {
 	 * Instantiates a new library.
 	 *
 	 * @param libraryName
-	 *        the library name
+	 *            the library name
 	 * @param dataBaseTableName
-	 *        the data base table name
+	 *            the data base table name
 	 * @param stars
-	 *        the stars
+	 *            the stars
 	 * @param dateCreated
-	 *        the date created
+	 *            the date created
 	 * @param timeCreated
-	 *        the time created
+	 *            the time created
 	 * @param description
-	 *        the description
+	 *            the description
 	 * @param saveMode
-	 *        the save mode
+	 *            the save mode
 	 * @param position
-	 *        The library position inside
+	 *            The library position inside
 	 * @param imageName
-	 *        The image name [example: image.jpg ]
+	 *            The image name [example: image.jpg ]
 	 * @param opened
-	 *        the opened
+	 *            the opened
 	 */
 	public Library(String libraryName, String dataBaseTableName, double stars, String dateCreated, String timeCreated, String description, int saveMode, int position,
 			String imageName, boolean opened) {
@@ -533,7 +531,7 @@ public class Library extends StackPane {
 	 * Change the state of the Library from Normal to Selection Mode.
 	 *
 	 * @param way
-	 *        the way
+	 *            the way
 	 */
 	public void goOnSelectionMode(boolean way) {
 		selectionModeStackPane.setVisible(way);
@@ -543,7 +541,7 @@ public class Library extends StackPane {
 	 * Update the Stars of the Library.
 	 *
 	 * @param stars1
-	 *        the stars
+	 *            the stars
 	 */
 	public void updateStars(double stars1) {
 		// An acceptable value has been given
@@ -588,11 +586,10 @@ public class Library extends StackPane {
 	//    }
 	
 	/**
-	 * Updates the position variable of Library in database so the next time
-	 * viewer position it correct.
+	 * Updates the position variable of Library in database so the next time viewer position it correct.
 	 *
 	 * @param newPosition
-	 *        The new position of the Library
+	 *            The new position of the Library
 	 */
 	public void updatePosition(int newPosition) {
 		try (PreparedStatement libUPosition = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;")) {
@@ -611,11 +608,11 @@ public class Library extends StackPane {
 	 * Updates the Image File.
 	 *
 	 * @param absolutePath
-	 *        The absolute path of the new image to the file system
+	 *            The absolute path of the new image to the file system
 	 * @param renameUpdate
-	 *        Is this a rename update ?
+	 *            Is this a rename update ?
 	 * @param commit
-	 *        If true commit to database
+	 *            If true commit to database
 	 */
 	private boolean updateImagePathInDB(String absolutePath , boolean renameUpdate , boolean commit) {
 		boolean success = true;
@@ -744,9 +741,9 @@ public class Library extends StackPane {
 	 * Set or not the libraryOpened.
 	 *
 	 * @param way
-	 *        the way
+	 *            the way
 	 * @param commit
-	 *        the commit
+	 *            the commit
 	 */
 	private void setLibraryOpened(boolean way , boolean commit) {
 		
@@ -771,7 +768,7 @@ public class Library extends StackPane {
 	 * Renames the current Library.
 	 * 
 	 * @param n
-	 *        The node based on which the Rename Window will be position
+	 *            The node based on which the Rename Window will be position
 	 */
 	public void renameLibrary(Node n) {
 		//Free?
@@ -801,7 +798,7 @@ public class Library extends StackPane {
 	 * Updates the LibraryStars.
 	 * 
 	 * @param n
-	 *        The node based on which the Rename Window will be position
+	 *            The node based on which the Rename Window will be position
 	 */
 	protected void updateLibraryStars(Node n) {
 		//Free?
@@ -820,8 +817,7 @@ public class Library extends StackPane {
 		stars.bind(Main.starWindow.starsProperty());
 		
 		/***
-		 * This InvalidationListener is used when i want to change the stars of
-		 * the Library
+		 * This InvalidationListener is used when i want to change the stars of the Library
 		 */
 		InvalidationListener updateStarsInvalidation = new InvalidationListener() {
 			@Override
@@ -885,9 +881,9 @@ public class Library extends StackPane {
 				// Commit
 				Main.dbManager.commit();
 				
-				//Update the JSONFile
+				//Update the UserInformation properties file
 				if (isOpened())
-					Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+					Main.dbManager.storeOpenedLibraries();
 				
 			} catch (SQLException sql) {
 				logger.log(Level.WARNING, "\n", sql);
@@ -900,9 +896,9 @@ public class Library extends StackPane {
 	 * Opens the Library.
 	 *
 	 * @param open
-	 *        the open
+	 *            the open
 	 * @param firstLoadHack
-	 *        the first load hack
+	 *            the first load hack
 	 */
 	public void libraryOpenClose(boolean open , boolean firstLoadHack) {
 		if (firstLoadHack) {
@@ -919,8 +915,8 @@ public class Library extends StackPane {
 				Main.libraryMode.multipleLibs.removeTab(getLibraryName());
 			}
 			
-			//Update the JSONFile
-			Main.dbManager.getKeyValueDb().updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabs(), true);
+			//Update the UserInformation properties file
+			Main.dbManager.storeOpenedLibraries();
 			
 			//Calculate opened libraries
 			Main.libraryMode.calculateOpenedLibraries();
@@ -947,7 +943,7 @@ public class Library extends StackPane {
 	 * Set the Library new name.
 	 *
 	 * @param newName
-	 *        the new library name
+	 *            the new library name
 	 */
 	private void setLibraryName(String newName) {
 		libraryName = newName;
@@ -958,7 +954,7 @@ public class Library extends StackPane {
 	 * Set the stars of the library.
 	 *
 	 * @param stars
-	 *        the new stars
+	 *            the new stars
 	 */
 	private boolean setStars(double stars) {
 		if (stars < 0.0 || stars > 5.0)
@@ -971,7 +967,7 @@ public class Library extends StackPane {
 	 * Set if the library is selected or not.
 	 *
 	 * @param selected
-	 *        the new selected
+	 *            the new selected
 	 */
 	public void setSelected(boolean selected) {
 		selectedProperty().set(selected);
@@ -981,7 +977,7 @@ public class Library extends StackPane {
 	 * Set the new Description of the Library.
 	 *
 	 * @param newDescription
-	 *        the new description
+	 *            the new description
 	 */
 	public void setDescription(String newDescription) {
 		description.set(newDescription);
@@ -1232,8 +1228,7 @@ public class Library extends StackPane {
 	 * This method is called when a key is released.
 	 *
 	 * @param e
-	 *        An event which indicates that a keystroke occurred in a
-	 *        javafx.scene.Node.
+	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent e) {
 		if (Main.libraryMode.settings.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())

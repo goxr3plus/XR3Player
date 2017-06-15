@@ -76,7 +76,7 @@ public class MediaFilterService {
 	private void startFilteringControllers() {
 		
 		//Filter Selected Opened Library SmartController
-		filterController(libraryMode.multipleLibs.getSelectedLibrary() == null ? null : libraryMode.multipleLibs.getSelectedLibrary().getSmartController());
+		libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController()));
 		
 		//Filter XPlayer PlayLists SmartControllers
 		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(this::filterController);

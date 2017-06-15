@@ -191,6 +191,7 @@ public class MediaTableViewer extends TableView<Media> {
 			setPlaceholder(new Label("Drag && Drop or Import/Paste Media..."));
 		else if (smartController.getGenre() == Genre.SEARCHWINDOW)
 			setPlaceholder(new Label("Search Media from all the playlists..."));
+		getPlaceholder().setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
 		
 		//--Selection Model
 		getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

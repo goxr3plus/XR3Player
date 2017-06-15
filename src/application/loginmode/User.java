@@ -5,14 +5,11 @@ package application.loginmode;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import application.Main;
+import application.database.PropertiesDb;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
@@ -58,6 +55,11 @@ public class User extends StackPane {
 	private static final Logger logger = Logger.getLogger(User.class.getName());
 	
 	/**
+	 * Here are stored all the informations about the user and other things like opened libraries etc.
+	 */
+	private PropertiesDb userInformationDb;
+	
+	/**
 	 * The position of the User into the List
 	 */
 	private int position;
@@ -99,6 +101,10 @@ public class User extends StackPane {
 							setUserName(nameField.getText());
 							nameField.getTooltip().setText(getUserName());
 							
+							//Change the absolute path of the UserInformation.properties file
+							getUserInformationDb().setFileAbsolutePath(
+									InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator + "userInformation.properties");
+							
 							//Change Pie Data Name
 							Main.loginMode.getLibrariesPieChartData().forEach(pieData -> {
 								if (pieData.getName().equals(InfoTool.getMinString(oldName, 4)))
@@ -139,6 +145,11 @@ public class User extends StackPane {
 		this.setUserName(userName);
 		this.setPosition(position);
 		this.loginMode = loginMode;
+		
+		//Create the UserInformation DB
+		userInformationDb = new PropertiesDb(
+				InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator + "userInformation.properties");
+		userInformationDb.setUpdatePropertiesLocked(false);
 		
 		// ----------------------------------FXMLLoader-------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "User.fxml"));
@@ -232,7 +243,7 @@ public class User extends StackPane {
 	
 	/**
 	 * @param nameField
-	 *        the nameField to set
+	 *            the nameField to set
 	 */
 	public void setNameField(Label nameField) {
 		this.nameField = nameField;
@@ -240,7 +251,7 @@ public class User extends StackPane {
 	
 	/**
 	 * @param userName
-	 *        the userName to set
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -250,7 +261,7 @@ public class User extends StackPane {
 	
 	/**
 	 * @param position
-	 *        the position to set
+	 *            the position to set
 	 */
 	public void setPosition(int position) {
 		this.position = position;
@@ -260,7 +271,7 @@ public class User extends StackPane {
 	 * Renames the current User.
 	 * 
 	 * @param node
-	 *        The node based on which the Rename Window will be position
+	 *            The node based on which the Rename Window will be position
 	 */
 	public void renameUser(Node node) {
 		
@@ -277,8 +288,7 @@ public class User extends StackPane {
 	 * This method is called when a key is released.
 	 *
 	 * @param e
-	 *        An event which indicates that a keystroke occurred in a
-	 *        javafx.scene.Node.
+	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent e) {
 		if (getPosition() != loginMode.teamViewer.getCenterIndex())
@@ -349,6 +359,21 @@ public class User extends StackPane {
 		JavaFXTools.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
 		
 		return true;
+	}
+	
+	/**
+	 * @return the userInformationDb
+	 */
+	public PropertiesDb getUserInformationDb() {
+		return userInformationDb;
+	}
+	
+	/**
+	 * @param userInformationDb
+	 *            the userInformationDb to set
+	 */
+	public void setUserInformationDb(PropertiesDb userInformationDb) {
+		this.userInformationDb = userInformationDb;
 	}
 	
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<fx:root prefHeight="189.0" prefWidth="458.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <center>
+      <VBox alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXRadioButton selected="true" styleClass="settingsRadioButton" text="Delete from Playlist only">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton styleClass="settingsRadioButton" text="Delete from Playlist and Computer" toggleGroup="$group" />
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Are you soore you want to delete ?">
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="3.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/question.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="mediaNameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Sona Name .mp3 or some other extension here" />
+         </children>
+      </VBox>
+   </top>
+</fx:root>

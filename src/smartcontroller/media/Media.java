@@ -423,7 +423,7 @@ public abstract class Media {
 			// Do question?
 			if (!doQuestion)
 				hasBeenDeleted = removeItem(permanent, c);
-			else if (ActionTool.doDeleteQuestion(permanent, fileName.get(), 1, Main.window))
+			else if (Main.mediaDeleteWindow.doDeleteQuestion(permanent, fileName.get(), 1, Main.window).get(0))
 				hasBeenDeleted = removeItem(permanent, c);
 			
 			if (hasBeenDeleted && deleteStatement != null) {

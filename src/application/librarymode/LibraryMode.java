@@ -3,6 +3,7 @@ package application.librarymode;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import com.jfoenix.controls.JFXButton;
@@ -247,14 +248,14 @@ public class LibraryMode extends BorderPane {
 	 *            the name
 	 * @return the library with name
 	 */
-	public Library getLibraryWithName(String name) {
+	public Optional<Library> getLibraryWithName(String name) {
 		
 		// Find that
 		for (Library library : teamViewer.getViewer().getItemsObservableList())
 			if (library.getLibraryName().equals(name))
-				return library;
+				return Optional.of(library);
 			
-		return null;
+		return Optional.ofNullable(null);
 	}
 	
 	/**

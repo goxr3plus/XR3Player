@@ -20,13 +20,13 @@ import com.jfoenix.controls.JFXTabPane;
 
 import application.borderless.BorderlessScene;
 import application.database.DbManager;
+import application.djmode.DJMode;
 import application.librarymode.LibraryMode;
+import application.librarymode.MultipleTabs;
 import application.loginmode.LoginMode;
 import application.loginmode.User;
 import application.loginmode.UserMode;
 import application.presenter.BottomBar;
-import application.presenter.DJMode;
-import application.presenter.MultipleTabs;
 import application.presenter.SideBar;
 import application.presenter.TopBar;
 import application.presenter.UpdateScreen;
@@ -70,6 +70,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import smartcontroller.media.MediaContextMenu;
+import smartcontroller.media.MediaDeleteWindow;
 import smartcontroller.services.MediaFilterService;
 import xplayer.PlayedMediaList;
 import xplayer.XPlayersList;
@@ -94,8 +95,8 @@ public class Main extends Application {
 	public static Properties applicationProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 72);
-		applicationProperties.put("ReleasedDate", "04/05/2017");
+		applicationProperties.put("Version", 73);
+		applicationProperties.put("ReleasedDate", "15/06/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -108,6 +109,8 @@ public class Main extends Application {
 	/**
 	 * The SnapShot Window
 	 */
+	
+	public static final MediaDeleteWindow mediaDeleteWindow = new MediaDeleteWindow();
 	
 	/** The star window. */
 	public static final StarWindow starWindow = new StarWindow();
@@ -290,7 +293,7 @@ public class Main extends Application {
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
 		//------------------Experiments------------------
-		// ScenicView.show(scene)
+		// ScenicView.show(scene);
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
 		
 	}
@@ -373,7 +376,7 @@ public class Main extends Application {
 		//----------Bottom Bar----------------
 		settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty()
 				.addListener((observable , oldValue , newValue) -> bottomBar.getKeyBindingsLabel().setText(newValue ? "ON" : "OFF"));
-			
+		
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
@@ -443,9 +446,9 @@ public class Main extends Application {
 	/**
 	 * Starts the application for this specific user
 	 * 
-	 * @param u
+	 * @param user
 	 */
-	public static void startAppWithUser(User u) {
+	public static void startAppWithUser(User user) {
 		
 		//Close the LoginMode
 		loginMode.userSearchBox.getSearchBoxWindow().close();
@@ -464,16 +467,16 @@ public class Main extends Application {
 		//Set root visible
 		root.setVisible(true);
 		
-		//Do a pause so the login mode dissapears
+		//Do a pause so the login mode disappears
 		PauseTransition pause = new PauseTransition(Duration.millis(500));
 		pause.setOnFinished(f -> {
 			
 			//Create this in a Thread
-			Thread s = new Thread(() -> dbManager.initialize(u.getUserName()));
+			Thread s = new Thread(() -> dbManager.initialize(user.getUserName()));
 			s.start();
 			
 			//Do the below until the database is initialized
-			userMode.setUser(u);
+			userMode.setUser(user);
 			
 			try {
 				s.join();
@@ -486,6 +489,10 @@ public class Main extends Application {
 			
 			//Load the application settings
 			loadApplicationSettings();
+			
+			//----Update the UserInformation properties file when the total libraries change
+			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
+					.addListener((observable , oldValue , newValue) -> user.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
 			
 			//  dbManager.recreateJSonDataBase()
 			//  dbManager.loadOpenedLibraries()

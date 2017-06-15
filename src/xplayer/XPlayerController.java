@@ -67,98 +67,98 @@ import xplayer.visualizer.view.XPlayerVisualizer;
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
 	
-	@FXML
-	private StackPane xPlayerStackPane;
-	
-	@FXML
-	private BorderPane borderPane;
-	
-	@FXML
-	private GridPane container;
-	
-	@FXML
-	private GridPane topGridPane;
-	
-	@FXML
-	private StackPane visualizerStackPane;
-	
-	@FXML
-	private Label playerStatusLabel;
-	
-	@FXML
-	private Label visualizerVisibleLabel;
-	
-	@FXML
-	private HBox visualizerMaximizedHBox;
-	
-	@FXML
-	private Label visualizerMinimize;
-	
-	@FXML
-	private Label visualizerRequestFocus;
-	
-	@FXML
-	private ToggleButton visualizerVisible;
-	
-	@FXML
-	private Button maximizeVisualizer;
-	
-	@FXML
-	private VBox topRightVBox;
-	
-	@FXML
-	private JFXButton openPlayerHistory;
-	
-	@FXML
-	private HBox mediaNameHBox;
-	
-	@FXML
-	private Button mediaTagImageButton;
-	
-	@FXML
-	private Button openFileButton;
-	
-	@FXML
-	private Button transferAudioButton;
-	
-	@FXML
-	private Button extendPlayer;
-	
-	@FXML
-	private Button backwardButton;
-	
-	@FXML
-	private Button forwardButton;
-	
-	@FXML
-	private GridPane bottomGridPane;
-	
-	@FXML
-	private StackPane diskStackPane;
-	
-	@FXML
-	private Label topInfoLabel;
-	
-	@FXML
-	private JFXToggleButton settingsToggle;
-	
-	@FXML
-	private Region fxRegion;
-	
-	@FXML
-	private Label bugLabel;
-	
-	@FXML
-	private JFXSpinner fxSpinner;
-	
-	@FXML
-	private Label fxLabel;
-	
-	@FXML
-	private Label restorePlayer;
-	
-	@FXML
-	private Label focusXPlayerWindow;
+    @FXML
+    private StackPane xPlayerStackPane;
+
+    @FXML
+    private BorderPane borderPane;
+
+    @FXML
+    private GridPane container;
+
+    @FXML
+    private GridPane topGridPane;
+
+    @FXML
+    private StackPane visualizerStackPane;
+
+    @FXML
+    private Label playerStatusLabel;
+
+    @FXML
+    private Label visualizerVisibleLabel;
+
+    @FXML
+    private HBox visualizerMaximizedHBox;
+
+    @FXML
+    private Label visualizerMinimize;
+
+    @FXML
+    private Label visualizerRequestFocus;
+
+    @FXML
+    private ToggleButton visualizerVisible;
+
+    @FXML
+    private Button maximizeVisualizer;
+
+    @FXML
+    private VBox topRightVBox;
+
+    @FXML
+    private HBox mediaNameHBox;
+
+    @FXML
+    private Button mediaTagImageButton;
+
+    @FXML
+    private JFXButton openPlayerHistory;
+
+    @FXML
+    private Button openFileButton;
+
+    @FXML
+    private Button transferAudioButton;
+
+    @FXML
+    private Button extendPlayer;
+
+    @FXML
+    private Button backwardButton;
+
+    @FXML
+    private Button forwardButton;
+
+    @FXML
+    private GridPane bottomGridPane;
+
+    @FXML
+    private StackPane diskStackPane;
+
+    @FXML
+    private Label topInfoLabel;
+
+    @FXML
+    private JFXToggleButton settingsToggle;
+
+    @FXML
+    private StackPane regionStackPane;
+
+    @FXML
+    private Label bugLabel;
+
+    @FXML
+    private JFXSpinner fxSpinner;
+
+    @FXML
+    private Label fxLabel;
+
+    @FXML
+    private Label restorePlayer;
+
+    @FXML
+    private Label focusXPlayerWindow;
 	
 	// -----------------------------------------------------------------------------
 	
@@ -302,10 +302,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		//xPlayerSettingsController.visibleProperty().bind(settingsToggle.selectedProperty())
 		
 		// fxRegion,fxSpinner
-		fxRegion.setVisible(false);
-		bugLabel.visibleProperty().bind(fxRegion.visibleProperty());
-		fxSpinner.visibleProperty().bind(fxRegion.visibleProperty());
-		fxLabel.visibleProperty().bind(fxRegion.visibleProperty());
+		regionStackPane.setVisible(false);
 		
 		// mediaFileStackPane	
 		mediaFileMarquee.setOnMouseReleased(m -> openAudioInExplorer());
@@ -489,8 +486,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		return key;
 	}
 	
-	public Region getFxRegion() {
-		return fxRegion;
+	public StackPane getRegionStackPane() {
+		return regionStackPane;
 	}
 	
 	public Label getFxLabel() {

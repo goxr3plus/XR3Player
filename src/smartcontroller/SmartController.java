@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -442,7 +443,6 @@ public class SmartController extends StackPane {
 		//---SplitPane
 		splitPane.getItems().remove(1);
 		
-		
 		//---------------------Check the genre--------------------
 		if (genre == Genre.SEARCHWINDOW) {
 			navigationHBox.setVisible(false);
@@ -506,30 +506,38 @@ public class SmartController extends StackPane {
 	 *            true->storage medium + (play list)/library false->only from (play list)/library<br>
 	 */
 	private void removeSelected(boolean permanent) {
+		
 		// Free? && How many items are selected?+Question
-		if (isFree(true) && tableViewer.getSelectedCount() == 1
-				? ActionTool.doDeleteQuestion(permanent, tableViewer.getSelectionModel().getSelectedItem().getFileName(), tableViewer.getSelectedCount(), Main.window)
-				: ActionTool.doDeleteQuestion(permanent, Integer.toString(tableViewer.getSelectedCount()), tableViewer.getSelectedCount(), Main.window)) {
-			
-			// Remove selected items
-			if (genre == Genre.SEARCHWINDOW)
+		if (!isFree(true))
+			return;
+		
+		List<Boolean> answers = Main.mediaDeleteWindow.doDeleteQuestion(permanent,
+				tableViewer.getSelectedCount() != 1 ? Integer.toString(tableViewer.getSelectedCount()) : tableViewer.getSelectionModel().getSelectedItem().getFileName(),
+				tableViewer.getSelectedCount(), Main.window);
+		
+		//Check if the user is sure he want's to go on delete action
+		if (!answers.get(0))
+			return;
+		//Check if the delete will be finally permanent or not
+		boolean permanent1 = answers.get(1);
+		
+		// Remove selected items
+		if (genre == Genre.SEARCHWINDOW)
+			//Call the delete for each selected item
+			tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
+		else
+			try (PreparedStatement preparedDelete = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
+				
 				//Call the delete for each selected item
-				tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent, false, false, this, null));
-			else
-				try (PreparedStatement preparedDelete = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
-					
-					//Call the delete for each selected item
-					tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent, false, false, this, preparedDelete));
-					
-					// Library?
-					//		if (genre == Genre.LIBRARYMEDIA)
-					//		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
-					
-				} catch (Exception ex) {
-					Main.logger.log(Level.WARNING, "", ex);
-				}
-			
-		}
+				tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
+				
+				// Library?
+				//		if (genre == Genre.LIBRARYMEDIA)
+				//		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
+				
+			} catch (Exception ex) {
+				Main.logger.log(Level.WARNING, "", ex);
+			}
 		
 	}
 	
@@ -1070,14 +1078,13 @@ public class SmartController extends StackPane {
 	public double getVerticalScrollValueWithSearch() {
 		return verticalScrollValueWithSearch;
 	}
-
+	
 	/**
 	 * @return the splitPane
 	 */
 	public SplitPane getSplitPane() {
 		return splitPane;
 	}
-
 	
 	/*-----------------------------------------------------------------------
 	 * 

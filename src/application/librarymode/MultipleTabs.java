@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.presenter;
+package application.librarymode;
 
 import application.Main;
 import javafx.geometry.Side;

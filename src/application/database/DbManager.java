@@ -10,22 +10,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import application.Main;
 import application.librarymode.Library;
+import application.loginmode.User;
 import application.tools.ActionTool;
+import application.tools.ActionTool.FileType;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
-import application.tools.ActionTool.FileType;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.Tab;
 import javafx.util.Duration;
+import smartcontroller.SmartController;
 import smartcontroller.services.Operation;
 
 /**
@@ -45,17 +53,17 @@ public class DbManager {
 	private final ExecutorService commitExecutor = Executors.newSingleThreadExecutor();
 	
 	/** If true -> The database notifications are shown */
-	final boolean showNotifications = false;
+	private final boolean showNotifications = false;
 	
 	//----------------------
 	
 	/**
 	 * The KeyValueDb
 	 */
-	private JSONDB keyValueDb = new JSONDB(this);
+	//private JSONDB keyValueDb = new JSONDB(this);
 	
 	/**
-	 * The PropertiesDb
+	 * Here are stored all the settings for the user account
 	 */
 	private PropertiesDb propertiesDb;
 	
@@ -113,9 +121,11 @@ public class DbManager {
 		// Initialise
 		InfoTool.setUserName(userName);
 		
-		//Create the propertiesDb
+		//Create the settingsFolder
 		File settingsFolder = new File(InfoTool.getUserFolderAbsolutePathWithSeparator() + "settings");
 		ActionTool.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
+		
+		//Create the propertiesDb
 		propertiesDb = new PropertiesDb(settingsFolder + File.separator + "config.properties");
 		propertiesDb.loadProperties();
 		
@@ -142,7 +152,7 @@ public class DbManager {
 			//This method keeps backward compatibility with previous XR3Player versions
 			createDatabaseMissingTables();
 			
-			keyValueDb.recreateJSonDataBase();
+			//keyValueDb.recreateJSonDataBase();
 			
 		} catch (SQLException ex) {
 			Main.logger.log(Level.SEVERE, "", ex);
@@ -153,17 +163,17 @@ public class DbManager {
 	//------------------- Getters ---------------------------------------------------------------
 	
 	/**
-	 * @return the keyValueDb
-	 */
-	public JSONDB getKeyValueDb() {
-		return keyValueDb;
-	}
-	
-	/**
 	 * @return the propertiesDb
 	 */
 	public PropertiesDb getPropertiesDb() {
 		return propertiesDb;
+	}
+	
+	/**
+	 * @return the showNotifications
+	 */
+	public boolean isShowNotifications() {
+		return showNotifications;
 	}
 	
 	public Connection getConnection() {
@@ -289,6 +299,128 @@ public class DbManager {
 		dataLoader.restart();
 	}
 	
+	//-------------------------------------------------------------------
+	public Optional<User> getOpenedUser() {
+		return Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> user.getUserName().equals(InfoTool.getUserName())).findFirst();
+	}
+	
+	/**
+	 * Loads all [ Opened-Libraries ] and the [ Last-Opened-Library ] as properties from the UserInformation.properties file
+	 * [[SuppressWarningsSpartan]]
+	 */
+	public void loadOpenedLibraries() {
+		
+		//Get the current User
+		getOpenedUser().ifPresent(user -> {
+			
+			//Load the properties
+			Properties properties = user.getUserInformationDb().loadProperties();
+			
+			//Load the opened libraries
+			Optional.ofNullable(properties.getProperty("Opened-Libraries")).ifPresent(openedLibraries -> {
+				
+				//Use the split to get all the Opened Libraries Names
+				Arrays.asList(openedLibraries.split("\\<\\|\\>\\:\\<\\|\\>")).stream().forEach(name -> {
+					Platform.runLater(() -> {
+						//System.out.println(name); //debugging
+						
+						//Get the Library and Open it!
+						Main.libraryMode.getLibraryWithName(name).get().libraryOpenClose(true, true);
+					});
+				});
+			});
+			
+			//Add Selection Model ChangeListener 
+			Platform.runLater(() -> {
+				Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
+					
+					// Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
+					if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ( (SmartController) newTab.getContent() ).isFree(false)
+							&& ( (SmartController) newTab.getContent() ).getItemsObservableList().isEmpty()) {
+						
+						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true);
+						
+						storeOpenedLibraries();
+					}
+					
+					//System.out.println("Changed...");
+					storeLastOpenedLibrary();
+				});
+				
+				//Load the Last Opened Library
+				Optional.ofNullable(properties.getProperty("Last-Opened-Library")).ifPresent(lastOpenedLibrary -> {
+					
+					//Select the correct library inside the TabPane
+					Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().select(Main.libraryMode.multipleLibs.getTab(lastOpenedLibrary));
+					
+					//This will change in future update when user can change the default position of Libraries
+					Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.multipleLibs.getSelectedLibrary().get().getPosition());
+					
+				});
+				
+				//Update last selected Library SmartController if not empty
+				Main.libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> {
+					if (selectedLibrary.getSmartController().isFree(false))
+						selectedLibrary.getSmartController().getLoadService().startService(false, true);
+				});
+			});
+		});
+		
+	}
+	
+	/**
+	 * Stores the last opened library - That means the library that was selected on the Multiple Libraries Tab Pane <br>
+	 * !Must be called from JavaFX Thread!
+	 */
+	private void storeLastOpenedLibrary() {
+		
+		//Get the current User
+		getOpenedUser().ifPresent(user -> {
+			
+			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.multipleLibs.getTabs();
+			
+			//Save the last opened library
+			if (openedLibrariesTabs.isEmpty()) {
+				///System.out.println("Last-Opened-Library is Empty");
+				user.getUserInformationDb().deleteProperty("Last-Opened-Library");
+			} else {
+				Tab tab = Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().getSelectedItem();
+				//System.out.println("Last-Opened-Library: " + tab.getTooltip().getText());
+				user.getUserInformationDb().updateProperty("Last-Opened-Library", tab.getTooltip().getText());
+			}
+		});
+	}
+	
+	/**
+	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
+	 * !Must be called from JavaFX Thread!
+	 * 
+	 * @param openedLibrariesTabs
+	 */
+	public void storeOpenedLibraries() {
+		
+		//Get the opened user and store the opened libraries
+		getOpenedUser().ifPresent(user -> {
+			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.multipleLibs.getTabs();
+			
+			//Save the opened libraries
+			if (openedLibrariesTabs.isEmpty())
+				user.getUserInformationDb().deleteProperty("Opened-Libraries");
+			else {
+				
+				//Join all library names to a string using as separator char "<|>:<|>"
+				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
+				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
+				
+				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
+			}
+			
+			//Save the last opened library
+			storeLastOpenedLibrary();
+		});
+		
+	}
+	
 	/**
 	 * DataLoader.
 	 *
@@ -374,7 +506,7 @@ public class DbManager {
 						
 						//Load the Opened Libraries
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Opened Libraries..."));
-						keyValueDb.loadOpenedLibraries();
+						loadOpenedLibraries();
 						
 						//Calculate opened libraries
 						Platform.runLater(() -> Main.libraryMode.calculateOpenedLibraries());
@@ -387,7 +519,7 @@ public class DbManager {
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()
 								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false)));
 						
-						Platform.runLater(() -> Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getSplitPane().getItems().add(Main.loginMode.teamViewer));
+						//Platform.runLater(() -> Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getSplitPane().getItems().add(Main.loginMode.teamViewer));
 						
 						//--FINISH
 						updateProgress(total, total);

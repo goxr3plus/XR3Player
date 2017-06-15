@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.presenter;
+package application.djmode;
 
 import java.io.IOException;
 

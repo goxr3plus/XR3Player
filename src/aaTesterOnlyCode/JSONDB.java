@@ -1,7 +1,7 @@
 /**
  * 
  */
-package application.database;
+package aaTesterOnlyCode;
 
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +16,7 @@ import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
 
 import application.Main;
+import application.database.DbManager;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -121,7 +122,7 @@ public class JSONDB {
 			openedLibraries.forEach(libraryObject -> Platform.runLater(() ->
 			
 			//Get the Library and Open it!
-			Main.libraryMode.getLibraryWithName( ( (JsonObject) libraryObject ).get("name").toString()).libraryOpenClose(true, true)
+			Main.libraryMode.getLibraryWithName( ( (JsonObject) libraryObject ).get("name").toString()).get().libraryOpenClose(true, true)
 			
 			//Print its name
 			//System.out.println(((JsonObject) libraryObject).get("name"))
@@ -179,7 +180,7 @@ public class JSONDB {
 							.select(Main.libraryMode.multipleLibs.getTab(lastSelectedLibrary.get("name").toString()));
 					
 					//This will change in future update when user can change the default position of Libraries
-					Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.multipleLibs.getSelectedLibrary().getPosition());
+					Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.multipleLibs.getSelectedLibrary().get().getPosition());
 					
 					//System.out.println("Entered !lastSelectedLibrary.isEmpty()")
 				});
@@ -189,8 +190,8 @@ public class JSONDB {
 			Platform.runLater(() -> {
 				//Check if empty and if not update the selected library
 				if (!Main.libraryMode.multipleLibs.getTabs().isEmpty()
-						&& Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().isFree(false))
-					Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getLoadService().startService(false, true);
+						&& Main.libraryMode.multipleLibs.getSelectedLibrary().get().getSmartController().isFree(false))
+					Main.libraryMode.multipleLibs.getSelectedLibrary().get().getSmartController().getLoadService().startService(false, true);
 			});
 			
 		} catch (IOException | DeserializationException e) {
@@ -273,7 +274,7 @@ public class JSONDB {
 				//  logger.severe("SettingsWindowController - exception: " + e); //$NON-NLS-1$
 				// return false
 			} finally {
-				if (localDBManager.showNotifications)
+				if (localDBManager.isShowNotifications())
 					ActionTool.showNotification("JSON Updated", "JSON File Updated...", Duration.millis(150), NotificationType.INFORMATION);
 			}
 		});

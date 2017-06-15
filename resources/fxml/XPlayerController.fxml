@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -52,7 +51,7 @@
                            <children>
                               <StackPane fx:id="visualizerStackPane" style="-fx-border-color: firebrick; -fx-border-width: 2;">
                                  <children>
-                                    <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(255,255,255,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
+                                    <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(0,0,0,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
                                     <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" visible="false" />
                                     <HBox fx:id="visualizerMaximizedHBox" alignment="CENTER" maxHeight="20.0" maxWidth="1.7976931348623157E308" spacing="10.0" StackPane.alignment="CENTER">
                                        <children>
@@ -258,18 +257,21 @@
                   </HBox>
                </top>
             </BorderPane>
-            <Region fx:id="fxRegion" style="-fx-background-color: rgb(0,0,0,0.8);" />
-            <Label fx:id="bugLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold;" text="If it lags here then it is a bug i am trying to fix :)" textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <JFXSpinner fx:id="fxSpinner" radius="90.0" startingAngle="-200.0" />
-            <Label fx:id="fxLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="center label">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
+            <StackPane fx:id="regionStackPane" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false">
+               <children>
+                  <Label fx:id="bugLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold;" text="If it lags here then it is a bug i am trying to fix :)" textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <JFXSpinner fx:id="fxSpinner" radius="90.0" startingAngle="-200.0" />
+                  <Label fx:id="fxLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="center label">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
          </children>
       </StackPane>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(0,0,0,0.7);" visible="false">
