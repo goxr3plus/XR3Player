@@ -36,7 +36,7 @@ Download Java 8 here : Java 1.8.0_111(8 Update 111)++ required . ( https://www.j
 
 How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 
-# Small video from update 73
+# Small video from update 73 -> CLICK TO WATCH on Youtube
 [![update 73](https://user-images.githubusercontent.com/20374208/27167499-d1b029c0-51a9-11e7-98d2-63a1701668bd.png)](https://www.youtube.com/watch?v=6tuw2ZB__qo)
 
 
