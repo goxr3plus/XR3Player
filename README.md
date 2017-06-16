@@ -36,22 +36,26 @@ Download Java 8 here : Java 1.8.0_111(8 Update 111)++ required . ( https://www.j
 
 How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 
-# Small video from update 62
-[![XR3Player on youtube](http://img.youtube.com/vi/kL-LnVDInYg/0.jpg)](https://www.youtube.com/watch?v=kL-LnVDInYg)
+# Small video from update 73 
+### Press the image to if you want to watch the video on youtube
+[![update 73](https://user-images.githubusercontent.com/20374208/27167499-d1b029c0-51a9-11e7-98d2-63a1701668bd.png)](https://www.youtube.com/watch?v=6tuw2ZB__qo)
 
 
 
 -------------------------------------------------------------------------------------
-
-## Image from Update 72 Internal WebBrowser
-![xr3player update 72 browser](https://cloud.githubusercontent.com/assets/20374208/26711700/f4cdab60-476a-11e7-8c54-b592332af279.png)
-
 
 ## Image from Update 72 Login Screen
 ![xr3player update 72 login screen](https://cloud.githubusercontent.com/assets/20374208/26711701/f8f9bf12-476a-11e7-92db-fc0513011305.png)
 
 ## Image from Update 72 After User Login
 ![update 72](https://cloud.githubusercontent.com/assets/20374208/26711588/0cfec94a-476a-11e7-8ba4-a990c03405f2.png)
+
+
+## Image from Update 72 Internal WebBrowser
+![xr3player update 72 browser](https://cloud.githubusercontent.com/assets/20374208/26711700/f4cdab60-476a-11e7-8c54-b592332af279.png)
+
+## Image from Update 73 DJMode
+![update 73](https://user-images.githubusercontent.com/20374208/27167499-d1b029c0-51a9-11e7-98d2-63a1701668bd.png)
 
 
 ------------------------------------------------------------------------------------
