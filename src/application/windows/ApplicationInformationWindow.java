@@ -27,7 +27,9 @@ import javafx.stage.StageStyle;
  * @author GOXR3PLUS
  *
  */
-public class AboutWindowController extends BorderPane {
+public class ApplicationInformationWindow extends BorderPane {
+	
+	//---------------------------------------------
 	
 	@FXML
 	private Label topLabel;
@@ -57,10 +59,10 @@ public class AboutWindowController extends BorderPane {
 	/**
 	 * Constructor
 	 */
-	public AboutWindowController() {
+	public ApplicationInformationWindow() {
 		
-		// ------------------------------------FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AboutWindow.fxml"));
+		// ------------------------------------FXMLLOADER--------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ApplicationInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -114,12 +116,12 @@ public class AboutWindowController extends BorderPane {
 		text = "Version :\t";
 		cssTextArea.appendText(text);
 		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
-		cssTextArea.appendText(Main.applicationProperties.get("Version") + "\n");
+		cssTextArea.appendText(Main.applicationInfoProperties.get("Version") + "\n");
 		
 		text = "Release Date :\t";
 		cssTextArea.appendText(text);
 		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
-		cssTextArea.appendText(Main.applicationProperties.get("ReleasedDate") + "\n");
+		cssTextArea.appendText(Main.applicationInfoProperties.get("ReleasedDate") + "\n");
 		
 		text = "Home Page :\t";
 		cssTextArea.appendText(text);
@@ -188,9 +190,16 @@ public class AboutWindowController extends BorderPane {
 	/**
 	 * Shows the Window
 	 */
-	public void showWindow() {
+	public void show() {
 		window.sizeToScene();
 		window.show();
+	}
+	
+	/**
+	 * Close the Window
+	 */
+	public void close() {
+		window.close();
 	}
 	
 	/**

@@ -300,7 +300,7 @@ public class TopBar extends BorderPane {
 		
 		// xr3Label
 		xr3Label.textProperty().bind(Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
-				Main.applicationProperties.get("Version"), Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(), Main.window.heightProperty()));
+				Main.applicationInfoProperties.get("Version"), Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(), Main.window.heightProperty()));
 	}
 	
 	/**

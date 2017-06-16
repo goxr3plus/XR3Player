@@ -126,7 +126,7 @@ public class DbManager {
 		ActionTool.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
 		
 		//Create the propertiesDb
-		propertiesDb = new PropertiesDb(settingsFolder + File.separator + "config.properties");
+		propertiesDb = new PropertiesDb(settingsFolder + File.separator + "config.properties", true);
 		propertiesDb.loadProperties();
 		
 		// User Folder

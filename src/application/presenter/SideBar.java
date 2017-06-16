@@ -65,10 +65,13 @@ public class SideBar extends BorderPane {
 	private JFXButton applicationSettings;
 	
 	@FXML
-	private MenuItem aboutSection;
+	private MenuItem showWelcomeScreen;
 	
 	@FXML
-	private MenuItem help;
+	private MenuItem showApplicationInfo;
+	
+	@FXML
+	private MenuItem showManual;
 	
 	@FXML
 	private MenuItem donation;
@@ -250,11 +253,14 @@ public class SideBar extends BorderPane {
 		// checkForUpdates
 		applicationUpdate.setOnAction(a -> Main.updateWindow.searchForUpdates(true));
 		
-		//help
-		help.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+		// showApplicationInfo
+		showApplicationInfo.setOnAction(a -> Main.aboutWindow.show());
 		
-		// aboutSection
-		aboutSection.setOnAction(a -> Main.aboutWindow.showWindow());
+		// showWelcomeScreen
+		showWelcomeScreen.setOnAction(a -> Main.welcomeScreen.show());
+		
+		//showManual
+		showManual.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 		
 		// donation
 		donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));

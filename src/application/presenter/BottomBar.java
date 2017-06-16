@@ -1,7 +1,9 @@
 package application.presenter;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -138,8 +140,8 @@ public class BottomBar extends HBox {
 			while (true) {
 				
 				Platform.runLater(() -> {
-					LocalTime l = LocalTime.now();
-					currentTimeLabel.setText(l.toString().substring(0, 5));
+					String currentTimeme = LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a"));
+					currentTimeLabel.setText(currentTimeme);
 					runningTimeLabel.setText(++minutes + ( minutes == 1 ? " minute" : " minutes" ));
 				});
 				

@@ -32,7 +32,7 @@ public class PropertiesDb {
 	/**
 	 * Using this variable when i want to prevent update of properties happen
 	 */
-	private boolean updatePropertiesLocked = true;
+	private boolean updatePropertiesLocked;
 	
 	/**
 	 * The absolute path of the properties file
@@ -44,8 +44,9 @@ public class PropertiesDb {
 	 * 
 	 * @param localDbManager
 	 */
-	public PropertiesDb(String propertiesAbsolutePath) {
+	public PropertiesDb(String propertiesAbsolutePath, boolean updatePropertiesLocked) {
 		this.fileAbsolutePath = propertiesAbsolutePath;
+		this.updatePropertiesLocked = updatePropertiesLocked;
 		properties = new Properties();
 	}
 	

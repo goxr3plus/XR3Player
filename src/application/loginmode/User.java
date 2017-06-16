@@ -148,8 +148,7 @@ public class User extends StackPane {
 		
 		//Create the UserInformation DB
 		userInformationDb = new PropertiesDb(
-				InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator + "userInformation.properties");
-		userInformationDb.setUpdatePropertiesLocked(false);
+				InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator + "userInformation.properties", false);
 		
 		// ----------------------------------FXMLLoader-------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "User.fxml"));

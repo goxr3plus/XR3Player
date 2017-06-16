@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,6 +25,7 @@ import com.jfoenix.controls.JFXTabPane;
 
 import application.borderless.BorderlessScene;
 import application.database.DbManager;
+import application.database.PropertiesDb;
 import application.djmode.DJMode;
 import application.librarymode.LibraryMode;
 import application.librarymode.MultipleTabs;
@@ -40,13 +46,14 @@ import application.tools.JavaFXTools;
 import application.tools.NotificationType;
 import application.versionupdate.UpdateWindow;
 import application.webbrowser.WebBrowserController;
-import application.windows.AboutWindowController;
+import application.windows.ApplicationInformationWindow;
 import application.windows.ConsoleWindowController;
 import application.windows.ExportWindowController;
 import application.windows.FileAndFolderChooser;
 import application.windows.RenameWindow;
 import application.windows.SearchWindow;
 import application.windows.StarWindow;
+import application.windows.WelcomeScreen;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -92,23 +99,25 @@ import xr3capture.CaptureWindow;
  */
 public class Main extends Application {
 	
-	public static Properties applicationProperties = new Properties();
+	public static Properties applicationInfoProperties = new Properties();
 	static {
 		//----------Properties-------------
-		applicationProperties.put("Version", 73);
-		applicationProperties.put("ReleasedDate", "15/06/2017");
+		applicationInfoProperties.put("Version", 73);
+		applicationInfoProperties.put("ReleasedDate", "15/06/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
+	/**
+	 * Holds global application properties
+	 */
+	public static PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	
 	/** Application logger. */
 	public static final Logger logger = Logger.getGlobal();
 	
 	//----------------START: The below have not depencities on other ---------------------------------//
 	
-	/**
-	 * The SnapShot Window
-	 */
+	public static final WelcomeScreen welcomeScreen = new WelcomeScreen();
 	
 	public static final MediaDeleteWindow mediaDeleteWindow = new MediaDeleteWindow();
 	
@@ -124,7 +133,7 @@ public class Main extends Application {
 	public static final ExportWindowController exportWindow = new ExportWindowController();
 	
 	/** The About Window of the Application */
-	public static final AboutWindowController aboutWindow = new AboutWindowController();
+	public static final ApplicationInformationWindow aboutWindow = new ApplicationInformationWindow();
 	
 	/** The console Window of the Application */
 	public static final ConsoleWindowController consoleWindow = new ConsoleWindowController();
@@ -248,7 +257,7 @@ public class Main extends Application {
 		
 		// --------Window---------
 		window = primaryStage;
-		window.setTitle("XR3Player V." + applicationProperties.get("Version"));
+		window.setTitle("XR3Player V." + applicationInfoProperties.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
 		//width = 1380;
@@ -292,6 +301,20 @@ public class Main extends Application {
 		//Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
+		//Show Welcome Screen?	
+		Properties properties = applicationProperties.loadProperties();
+		if (properties.getProperty("Show-Welcome-Screen") == null)
+			welcomeScreen.show();
+		else
+			Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresent(value -> {
+				welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
+				if (welcomeScreen.getShowOnStartUp().isSelected())
+					welcomeScreen.show();
+				else
+					welcomeScreen.close();
+			});
+		applicationProperties.setUpdatePropertiesLocked(false);
+		
 		//------------------Experiments------------------
 		// ScenicView.show(scene);
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
@@ -309,6 +332,7 @@ public class Main extends Application {
 		aboutWindow.getWindow().initOwner(window);
 		searchWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
+		welcomeScreen.getWindow().initOwner(window);
 		
 		// --------- Fix the Background ------------
 		determineBackgroundImage();
