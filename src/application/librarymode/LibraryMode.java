@@ -137,8 +137,8 @@ public class LibraryMode extends BorderPane {
 	
 	//----- Library Specific ------------------
 	
-	/** The settings. */
-	public LibrarySettings settings = new LibrarySettings();
+	/** A PopUp window showing information about the selected library */
+	public LibraryInformation libraryInformation = new LibraryInformation();
 	
 	/** The context menu. */
 	public LibraryContextMenu librariesContextMenu = new LibraryContextMenu();
@@ -338,7 +338,7 @@ public class LibraryMode extends BorderPane {
 				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 		
 		// -- settingsOfLibrary
-		settingsOfLibrary.setOnAction(a -> settings.showWindow(teamViewer.getViewer().centerItemProperty().get()));
+		settingsOfLibrary.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
 		
 		//----librariesInfoLabel
 		librariesInfoLabel.textProperty()

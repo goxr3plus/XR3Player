@@ -9,11 +9,8 @@ import java.util.logging.Logger;
 
 import application.tools.InfoTool;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -27,17 +24,23 @@ public class UserMode extends BorderPane {
 	// ----------------------
 	
 	@FXML
-	private Label userNameLabel;
+	private Label nameLabel;
 	
 	@FXML
-	private ImageView userImageView;
+	private ImageView imageView;
+	
+	@FXML
+	private Label dateCreatedLabel;
+	
+	@FXML
+	private Label timeCreatedLabel;
 	
 	// ----------------------
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	User user;
+	private User user;
 	
 	/**
 	 * Constructor.
@@ -65,16 +68,25 @@ public class UserMode extends BorderPane {
 	}
 	
 	/**
-	 * This method should be called after fxml has been initialized for this
-	 * controller
+	 * This method should be called after fxml has been initialized for this controller
 	 * 
 	 * @param user
 	 */
 	public void setUser(User user) {
 		this.user = user;
 		
-		//-----UserNameLabel
-		userNameLabel.textProperty().bind(Bindings.concat("Logged in as->[ ").concat(user.getNameField().textProperty()).concat(" ]"));
+		//--nameLabel
+		nameLabel.textProperty().bind(Bindings.concat("Logged in as->[ ").concat(user.getNameField().textProperty()).concat(" ]"));
+		
+		//--imageView
+		imageView.imageProperty().bind(user.getImageView().imageProperty());
+		imageView.setOnMouseReleased(m -> user.changeUserImage());
+		
+		//--Date Label
+		dateCreatedLabel.setText(user.getDateCreated());
+		
+		//--Time Label	
+		timeCreatedLabel.setText(user.getTimeCreated());
 	}
 	
 }

@@ -208,6 +208,8 @@ public class LoginMode extends BorderPane {
 	/** The context menu of the users */
 	public UserContextMenu userContextMenu = new UserContextMenu(this);
 	
+	public UserInformation userInformation = new UserInformation();
+	
 	/**
 	 * Loads all the information about each user
 	 */
@@ -1136,6 +1138,13 @@ public class LoginMode extends BorderPane {
 										//Update User Label
 										user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries));
 									});
+								});
+								
+								//--User Description
+								Optional.ofNullable(settings.getProperty("User-Description")).ifPresent(s -> {
+									
+									// Refresh the text
+									Platform.runLater(() -> user.getDescriptionLabel().setText(s));
 								});
 								
 							} //If the UserInformation Properties File doesn't exit try to take Total-Libraries information from the actual sqlite.db file

@@ -17,11 +17,10 @@ import xplayer.streamplayer.StreamPlayerException;
 public class XPlayerSeekService extends Service<Boolean> {
 	
 	/** The bytes to be skipped */
-	long bytes;
+	long bytesToSkip;
 	
 	/**
-	 * I am using this variables when i want to stop the player and go to a
-	 * specific time for example at 1 m and 32 seconds :)
+	 * I am using this variables when i want to stop the player and go to a specific time for example at 1 m and 32 seconds :)
 	 */
 	boolean stopPlayer;
 	
@@ -44,21 +43,24 @@ public class XPlayerSeekService extends Service<Boolean> {
 	/**
 	 * Start the Service.
 	 *
-	 * @param bytes1
-	 *        Bytes to skip
-	 * @param stopPlayer1
+	 * @param bytesToSkip
+	 *            Bytes to skip
+	 * @param stopPlayer
 	 */
-	public void startSeekService(long bytes1 , boolean stopPlayer1) {
+	public void startSeekService(long bytesToSkip , boolean stopPlayer) {
 		if (locked || isRunning() || xPlayerController.getxPlayerModel().songPathProperty().get() == null)
+			return;
+		//Check if the bytesTheUser wants to skip are more than the total bytes of the audio
+		if (bytesToSkip > xPlayerController.getxPlayer().getTotalBytes())
 			return;
 		
 		//System.out.println(bytes)
 		
 		//StopPlayer
-		this.stopPlayer = stopPlayer1;
+		this.stopPlayer = stopPlayer;
 		
 		// Bytes to Skip
-		this.bytes = bytes1;
+		this.bytesToSkip = bytesToSkip;
 		
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
@@ -88,8 +90,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 		xPlayerController.getDisc().getCanvas().setCursor(Cursor.OPEN_HAND);
 		
 		// Recalculate Angle and paint again Disc
-		xPlayerController.getDisc().calculateAngleByValue(xPlayerController.getxPlayerModel().getCurrentTime(), xPlayerController.getxPlayerModel().getDuration(),
-				true);
+		xPlayerController.getDisc().calculateAngleByValue(xPlayerController.getxPlayerModel().getCurrentTime(), xPlayerController.getxPlayerModel().getDuration(), true);
 		xPlayerController.getDisc().repaint();
 		
 		// unlock the Service
@@ -119,7 +120,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 				xPlayerController.getxPlayerModel().setCurrentTime(xPlayerController.getxPlayerModel().getCurrentAngleTime());
 				
 				try {
-					xPlayerController.getxPlayer().seek(bytes);
+					xPlayerController.getxPlayer().seek(bytesToSkip);
 				} catch (StreamPlayerException ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					succeded = false;

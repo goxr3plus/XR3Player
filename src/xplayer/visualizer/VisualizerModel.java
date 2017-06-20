@@ -61,7 +61,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	public final static int DISPLAYMODE_MAXIMUM = DisplayMode.values().length - 2; //-1 cause i count from 0
 	
 	/** The display mode. */
-	public final SimpleIntegerProperty displayMode = new SimpleIntegerProperty(Integer.parseInt(DisplayMode.SPRITE3D.toString()));
+	public final SimpleIntegerProperty displayMode = new SimpleIntegerProperty(Integer.parseInt(DisplayMode.CIRCLE_WITH_LINES.toString()));
 	
 	/** The Constant DEFAULT_FPS. */
 	private static final int DEFAULT_FPS = 60;

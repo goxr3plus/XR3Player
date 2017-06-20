@@ -66,7 +66,7 @@ public class Library extends StackPane {
 	private Label ratingLabel;
 	
 	@FXML
-	private Label settingsLabel;
+	private Label informationLabel;
 	
 	@FXML
 	private Label descriptionLabel;
@@ -456,15 +456,15 @@ public class Library extends StackPane {
 				updateLibraryStars(ratingLabel);
 		});
 		
-		// ----SettingsLabel
-		settingsLabel.setOnMouseReleased(m -> {
+		// ----InformationLabel
+		informationLabel.setOnMouseReleased(m -> {
 			//  if (Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() == Status.RUNNING)
-			Main.libraryMode.settings.showWindow(this);
+			Main.libraryMode.libraryInformation.showWindow(this);
 		});
 		
 		// ----DescriptionLabel
 		descriptionLabel.visibleProperty().bind(description.isEmpty().not().and(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty()));
-		descriptionLabel.setOnMouseReleased(settingsLabel.getOnMouseReleased());
+		descriptionLabel.setOnMouseReleased(informationLabel.getOnMouseReleased());
 		
 		// ----totalItemsLabel
 		
@@ -806,7 +806,7 @@ public class Library extends StackPane {
 			return;
 		
 		// Bind
-		Main.libraryMode.settings.getStarsLabel().textProperty().bind(Main.starWindow.starsProperty().asString());
+		Main.libraryMode.libraryInformation.getStarsLabel().textProperty().bind(Main.starWindow.starsProperty().asString());
 		
 		Main.starWindow.show(starsProperty().get(), n);
 		
@@ -833,7 +833,7 @@ public class Library extends StackPane {
 				if (!Main.starWindow.getWindow().isShowing()) {
 					
 					//Unbind
-					Main.libraryMode.settings.getStarsLabel().textProperty().unbind();
+					Main.libraryMode.libraryInformation.getStarsLabel().textProperty().unbind();
 					
 					//Was accepted
 					if (Main.starWindow.wasAccepted())
@@ -1231,7 +1231,7 @@ public class Library extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent e) {
-		if (Main.libraryMode.settings.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())
+		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())
 			return;
 		
 		KeyCode code = e.getCode();
@@ -1244,7 +1244,7 @@ public class Library extends StackPane {
 		else if (code == KeyCode.DELETE || code == KeyCode.D)
 			deleteLibrary(this);
 		else if (code == KeyCode.S)
-			Main.libraryMode.settings.showWindow(this);
+			Main.libraryMode.libraryInformation.showWindow(this);
 		else if (code == KeyCode.E)
 			this.exportImage();
 	}

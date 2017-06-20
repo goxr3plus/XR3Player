@@ -182,7 +182,7 @@ public class DJDisc extends StackPane {
 		//rotationAnimation.play();
 		
 		// When no album image exists this Label is shown
-		Label noAlbumImageLabel = new Label("-Album Image-");
+		Label noAlbumImageLabel = new Label("");
 		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
 		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isEqualTo(NULL_IMAGE));
 		

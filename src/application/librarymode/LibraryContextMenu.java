@@ -76,7 +76,7 @@ public class LibraryContextMenu extends ContextMenu {
 
 	exportImage.setOnAction(a -> library.exportImage());
 
-	settings.setOnAction(ac -> Main.libraryMode.settings.showWindow(library));
+	settings.setOnAction(ac -> Main.libraryMode.libraryInformation.showWindow(library));
 
 	delete.setOnAction(ac -> library.deleteLibrary(library));
 

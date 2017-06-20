@@ -10,9 +10,13 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
@@ -549,21 +553,21 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns the current hour in format hh:mm:ss.
+	 * Returns the current hour in format h:mm a
 	 *
-	 * @return the LocalTime
+	 * @return the Returns the current hour in format h:mm a
 	 */
 	public static String getLocalTime() {
-		return LocalTime.now() + "";
+		return LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a"));
 	}
 	
 	/**
-	 * Returns the Local Date in format YYYY-MM-DD.
+	 * Returns the Local Date in format dd/MM/yyyy
 	 *
-	 * @return the local date in format YYYY-MM-DD
+	 * @return the local date in format dd/MM/yyyy
 	 */
 	public static String getCurrentDate() {
-		return LocalDate.now() + "";
+		return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		
 	}
 	
@@ -721,6 +725,48 @@ public final class InfoTool {
 		
 		return String.format("%02d:%02d", seconds / 60, seconds % 60);
 		
+	}
+	
+	/**
+	 * Returns the Date the File Created in Format `dd/mm/yyyy`
+	 * 
+	 * @param file
+	 *            The File to be given
+	 * @return the Date the File Created in Format `dd/mm/yyyy`
+	 */
+	public static String getFileCreationDate(File file) {
+		Path path = Paths.get(file.getAbsolutePath());
+		BasicFileAttributes attr;
+		try {
+			attr = Files.readAttributes(path, BasicFileAttributes.class);
+			
+			return new SimpleDateFormat("dd/MM/yyyy").format(attr.creationTime().toMillis());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "oops error! ";
+		}
+	}
+	
+	/**
+	 * Returns the Time the File Created in Format `h:mm a`
+	 * 
+	 * @param file
+	 *            The File to be given
+	 * @return the Time the File Created in Format `HH:mm:ss`
+	 */
+	public static String getFileCreationTime(File file) {
+		Path path = Paths.get(file.getAbsolutePath());
+		BasicFileAttributes attr;
+		try {
+			attr = Files.readAttributes(path, BasicFileAttributes.class);
+			
+			return new SimpleDateFormat("h:mm a").format(attr.creationTime().toMillis());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "oops error! ";
+		}
 	}
 	
 	/**

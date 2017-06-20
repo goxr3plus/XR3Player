@@ -9,11 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -99,14 +94,15 @@ import xr3capture.CaptureWindow;
  */
 public class Main extends Application {
 	
-	public static Properties applicationInfoProperties = new Properties();
+	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		applicationInfoProperties.put("Version", 73);
-		applicationInfoProperties.put("ReleasedDate", "15/06/2017");
+		internalInformation.put("Version", 74);
+		internalInformation.put("ReleasedDate", "21/06/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
+	
 	/**
 	 * Holds global application properties
 	 */
@@ -257,7 +253,7 @@ public class Main extends Application {
 		
 		// --------Window---------
 		window = primaryStage;
-		window.setTitle("XR3Player V." + applicationInfoProperties.get("Version"));
+		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
 		//width = 1380;

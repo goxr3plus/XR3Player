@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import xplayer.XPlayerController;
 import xplayer.model.AudioType;
+import xplayer.streamplayer.StreamPlayerException;
 
 /**
  * This Service is used to start the Audio of XR3Player
@@ -26,6 +27,9 @@ import xplayer.model.AudioType;
  * @author GOXR3PLUS
  */
 public class XPlayerPlayService extends Service<Boolean> {
+	
+	/** The seconds to be skipped */
+	private int secondsToSkip;
 	
 	/** The album image of the audio */
 	private Image image;
@@ -49,19 +53,23 @@ public class XPlayerPlayService extends Service<Boolean> {
 	/**
 	 * Start the Service.
 	 *
-	 * @param path
+	 * @param fileAbsolutePath
 	 *            The path of the audio
+	 * @param secondsToSkip
 	 */
-	public void startPlayService(String path) {
-		if (locked || isRunning() || path == null || !InfoTool.isAudioSupported(path))
+	public void startPlayService(String fileAbsolutePath , int secondsToSkip) {
+		if (locked || isRunning() || fileAbsolutePath == null || !InfoTool.isAudioSupported(fileAbsolutePath))
 			return;
 		
 		// The path of the audio file
-		xPlayerController.getxPlayerModel().songPathProperty().set(path);
+		xPlayerController.getxPlayerModel().songPathProperty().set(fileAbsolutePath);
 		
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
 		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
+		
+		// Bytes to Skip
+		this.secondsToSkip = secondsToSkip;
 		
 		// Restart the Service
 		restart();
@@ -97,6 +105,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		// Configure Media Settings
 		xPlayerController.configureMediaSettings(false);
+		xPlayerController.getDisc().repaint();
 		
 		// unlock the Service
 		locked = false;
@@ -140,6 +149,18 @@ public class XPlayerPlayService extends Service<Boolean> {
 					xPlayerController.getxPlayer().play();
 					xPlayerController.getxPlayer().pause();
 					
+					//So the user wants to start from a position better than 0
+					if (secondsToSkip > 0) {
+						xPlayerController.getxPlayer().seek((long) ( ( (float) secondsToSkip )
+								* ( xPlayerController.getxPlayer().getTotalBytes() / (float) xPlayerController.getxPlayerModel().getDuration() ) ));
+						
+						//Update the below bitches!!!!!!! Fuck dat flickiro a flickira e
+						// daaaaaaaaaaaaaaaaaaaaanb bitchg!!!!Fuck Fock Fock Fock i was crazy when writting this code here
+						xPlayerController.getxPlayerModel().setCurrentTime(secondsToSkip);
+						xPlayerController.getxPlayerModel().setCurrentAngleTime(secondsToSkip);
+						// Update the disc Angle
+						xPlayerController.getDisc().calculateAngleByValue(secondsToSkip, xPlayerController.getxPlayerModel().getDuration(), true);
+					}
 					// ----------------------- Configuration
 					//			updateMessage("Applying Settings ...");
 					//

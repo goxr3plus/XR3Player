@@ -6,6 +6,7 @@ package xplayer;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +33,7 @@ import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -43,7 +45,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -67,98 +68,98 @@ import xplayer.visualizer.view.XPlayerVisualizer;
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
 	
-    @FXML
-    private StackPane xPlayerStackPane;
-
-    @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private GridPane container;
-
-    @FXML
-    private GridPane topGridPane;
-
-    @FXML
-    private StackPane visualizerStackPane;
-
-    @FXML
-    private Label playerStatusLabel;
-
-    @FXML
-    private Label visualizerVisibleLabel;
-
-    @FXML
-    private HBox visualizerMaximizedHBox;
-
-    @FXML
-    private Label visualizerMinimize;
-
-    @FXML
-    private Label visualizerRequestFocus;
-
-    @FXML
-    private ToggleButton visualizerVisible;
-
-    @FXML
-    private Button maximizeVisualizer;
-
-    @FXML
-    private VBox topRightVBox;
-
-    @FXML
-    private HBox mediaNameHBox;
-
-    @FXML
-    private Button mediaTagImageButton;
-
-    @FXML
-    private JFXButton openPlayerHistory;
-
-    @FXML
-    private Button openFileButton;
-
-    @FXML
-    private Button transferAudioButton;
-
-    @FXML
-    private Button extendPlayer;
-
-    @FXML
-    private Button backwardButton;
-
-    @FXML
-    private Button forwardButton;
-
-    @FXML
-    private GridPane bottomGridPane;
-
-    @FXML
-    private StackPane diskStackPane;
-
-    @FXML
-    private Label topInfoLabel;
-
-    @FXML
-    private JFXToggleButton settingsToggle;
-
-    @FXML
-    private StackPane regionStackPane;
-
-    @FXML
-    private Label bugLabel;
-
-    @FXML
-    private JFXSpinner fxSpinner;
-
-    @FXML
-    private Label fxLabel;
-
-    @FXML
-    private Label restorePlayer;
-
-    @FXML
-    private Label focusXPlayerWindow;
+	@FXML
+	private StackPane xPlayerStackPane;
+	
+	@FXML
+	private BorderPane borderPane;
+	
+	@FXML
+	private GridPane container;
+	
+	@FXML
+	private GridPane topGridPane;
+	
+	@FXML
+	private StackPane visualizerStackPane;
+	
+	@FXML
+	private Label playerStatusLabel;
+	
+	@FXML
+	private Label visualizerVisibleLabel;
+	
+	@FXML
+	private HBox visualizerMaximizedHBox;
+	
+	@FXML
+	private Label visualizerMinimize;
+	
+	@FXML
+	private Label visualizerRequestFocus;
+	
+	@FXML
+	private ToggleButton visualizerVisible;
+	
+	@FXML
+	private Button maximizeVisualizer;
+	
+	@FXML
+	private VBox topRightVBox;
+	
+	@FXML
+	private HBox mediaNameHBox;
+	
+	@FXML
+	private Button mediaTagImageButton;
+	
+	@FXML
+	private JFXButton openPlayerHistory;
+	
+	@FXML
+	private Button openFileButton;
+	
+	@FXML
+	private MenuButton transferMediaButton;
+	
+	@FXML
+	private Button extendPlayer;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private GridPane bottomGridPane;
+	
+	@FXML
+	private StackPane diskStackPane;
+	
+	@FXML
+	private Label topInfoLabel;
+	
+	@FXML
+	private JFXToggleButton settingsToggle;
+	
+	@FXML
+	private StackPane regionStackPane;
+	
+	@FXML
+	private Label bugLabel;
+	
+	@FXML
+	private JFXSpinner fxSpinner;
+	
+	@FXML
+	private Label fxLabel;
+	
+	@FXML
+	private Label restorePlayer;
+	
+	@FXML
+	private Label focusXPlayerWindow;
 	
 	// -----------------------------------------------------------------------------
 	
@@ -365,6 +366,19 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			playerExtraSettings.getTabPane().getSelectionModel().select(playerExtraSettings.getHistoryPlaylistTab());
 			settingsToggle.setSelected(true);
 		});
+		
+		//--transferMediaButton
+		transferMediaButton.getItems().get(key).setDisable(true);
+		transferMediaButton.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty()).ifPresent(path -> {
+			
+			//Start the selected player
+			Main.xPlayersList.getXPlayerController(transferMediaButton.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(),
+					getxPlayerModel().getCurrentTime());
+			
+			//Stop the Current Player
+			stop();
+			
+		})));
 		
 	}
 	
@@ -936,7 +950,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	public void replaySong() {
 		
 		if (xPlayerModel.songExtensionProperty().get() != null)
-			playService.startPlayService(xPlayerModel.songPathProperty().get());
+			playService.startPlayService(xPlayerModel.songPathProperty().get(), 0);
 		else
 			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.", Duration.millis(1500), NotificationType.INFORMATION);
 		
@@ -955,7 +969,21 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public void playSong(String absolutePath) {
 		
-		playService.startPlayService(absolutePath);
+		playService.startPlayService(absolutePath, 0);
+		
+	}
+	
+	/**
+	 * Play the current song.
+	 *
+	 * @param absolutePath
+	 *            The absolute path of the file
+	 * @param startingSecond
+	 *            From which second to start the audio , this will not be exactly accurate
+	 */
+	public void playSong(String absolutePath , int startingSecond) {
+		
+		playService.startPlayService(absolutePath, startingSecond);
 		
 	}
 	

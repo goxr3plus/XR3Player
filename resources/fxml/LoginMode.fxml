@@ -362,7 +362,7 @@
                   <Insets bottom="4.0" />
                </padding>
             </VBox>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="42.0" prefWidth="298.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 0 0 15 15; -fx-border-color: transparent firebrick firebrick; -fx-border-radius: 0 0 10 10; -fx-border-width: 2;" text="~ XR3Player ~" fx:id="xr3PlayerLabel">
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #202020; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~ XR3Player ~" fx:id="xr3PlayerLabel">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>

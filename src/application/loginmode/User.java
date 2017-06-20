@@ -44,6 +44,12 @@ public class User extends StackPane {
 	private Label nameField;
 	
 	@FXML
+	private Label descriptionLabel;
+	
+	@FXML
+	private Label informationLabel;
+	
+	@FXML
 	private Label warningLabel;
 	
 	@FXML
@@ -203,6 +209,15 @@ public class User extends StackPane {
 			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
 				renameUser(nameField);
 		});
+		
+		// ----InformationLabel
+		informationLabel.setOnMouseReleased(m -> Main.loginMode.userInformation.showWindow(this));
+		
+		// ----DescriptionLabel
+		descriptionLabel.visibleProperty()
+				.bind(descriptionLabel.textProperty().isEmpty().not().and(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty()));
+		descriptionLabel.setOnMouseReleased(informationLabel.getOnMouseReleased());
+		
 	}
 	
 	/**
@@ -290,7 +305,7 @@ public class User extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent e) {
-		if (getPosition() != loginMode.teamViewer.getCenterIndex())
+		if (Main.loginMode.userInformation.isShowing() || getPosition() != loginMode.teamViewer.getCenterIndex())
 			return;
 		
 		KeyCode code = e.getCode();
@@ -373,6 +388,27 @@ public class User extends StackPane {
 	 */
 	public void setUserInformationDb(PropertiesDb userInformationDb) {
 		this.userInformationDb = userInformationDb;
+	}
+	
+	/**
+	 * Returns the date this user created based on the folder creation date
+	 */
+	public String getDateCreated() {
+		return InfoTool.getFileCreationDate(new File(userInformationDb.getFileAbsolutePath()));
+	}
+	
+	/**
+	 * Returns the Time this user created based on the folder creation date
+	 */
+	public String getTimeCreated() {
+		return InfoTool.getFileCreationTime(new File(userInformationDb.getFileAbsolutePath()));
+	}
+	
+	/**
+	 * @return the descriptionLabel
+	 */
+	public Label getDescriptionLabel() {
+		return descriptionLabel;
 	}
 	
 }
