@@ -40,8 +40,8 @@ public class XPlayerModel {
 	 */
 	public XPlayerModel() {
 		songObject = new SimpleObjectProperty<>(XPlayerModel.this, "songObject", null);
-		songExtension = new SimpleStringProperty(XPlayerModel.this, "songExtension", "");
-		songPath = new SimpleStringProperty(XPlayerModel.this, "songPath", "");
+		songExtension = new SimpleStringProperty(XPlayerModel.this, "songExtension", null);
+		songPath = new SimpleStringProperty(XPlayerModel.this, "songPath", null);
 		equalizerArray = new float[32];
 	}
 	
@@ -95,8 +95,7 @@ public class XPlayerModel {
 	/**
 	 * Gets the equalizer array.
 	 *
-	 * @return Return the array which contains the equalizer values for the
-	 *         player
+	 * @return Return the array which contains the equalizer values for the player
 	 */
 	public float[] getEqualizerArray() {
 		return equalizerArray;
@@ -126,7 +125,7 @@ public class XPlayerModel {
 	 * Set the current angle time of the player.
 	 *
 	 * @param currentAngleTime
-	 *        the new current angle time
+	 *            the new current angle time
 	 */
 	public void setCurrentAngleTime(int currentAngleTime) {
 		this.currentAngleTime = currentAngleTime;
@@ -136,7 +135,7 @@ public class XPlayerModel {
 	 * Set the current time of the player.
 	 *
 	 * @param currentTime
-	 *        the new current time
+	 *            the new current time
 	 */
 	public void setCurrentTime(int currentTime) {
 		this.currentTime = currentTime;
@@ -146,7 +145,7 @@ public class XPlayerModel {
 	 * Set the duration of the player.
 	 *
 	 * @param duration
-	 *        the new duration
+	 *            the new duration
 	 */
 	public void setDuration(int duration) {
 		this.duration = duration;

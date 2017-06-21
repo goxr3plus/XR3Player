@@ -4,13 +4,11 @@
 package application.webbrowser;
 
 import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
@@ -32,7 +30,7 @@ import javafx.scene.input.KeyEvent;
 public final class AutoCompleteTextField {
 	
 	/** The existing auto complete entries. */
-	private final SortedSet<String> entries = new TreeSet<>();
+	private SortedSet<String> entries = new TreeSet<>();
 	
 	/** The pop up used to select an entry. */
 	private final ContextMenu contextMenu = new ContextMenu();
@@ -77,8 +75,7 @@ public final class AutoCompleteTextField {
 	};
 	
 	/**
-	 * !!!!!!!!!!!!!!!!BUGGED !!!!!!!!!!!!!!!!! NEEDS FIXING
-	 * KeyHandler
+	 * !!!!!!!!!!!!!!!!BUGGED !!!!!!!!!!!!!!!!! NEEDS FIXING KeyHandler
 	 */
 	private EventHandler<? super KeyEvent> keyHandler = key -> {
 		KeyCode k = key.getCode();
@@ -135,11 +132,30 @@ public final class AutoCompleteTextField {
 	 * 
 	 * @param textField
 	 * @param maximumEntries
-	 * @param addKeyListener !NOT IMPLEMENTED!
+	 * @param addKeyListener
+	 *            !NOT IMPLEMENTED!
 	 * @param list
+	 *            W
 	 */
 	public void bindAutoCompletion(TextField textField , int maximumEntries , boolean addKeyListener , List<String> list) {
 		entries.addAll(list);
+		bindAutoCompletion(textField, maximumEntries, addKeyListener);
+	}
+	
+	/**
+	 * <b> Warning with this method will lead to NullPointerException if the given SortedSet goes to null , i am using it when i have really big
+	 * TreeSets on my Application</b> <br>
+	 * 
+	 * Add auto completion capabilities to the given textField
+	 * 
+	 * @param textField
+	 * @param maximumEntries
+	 * @param addKeyListener
+	 *            !NOT IMPLEMENTED!
+	 * @param list
+	 */
+	public void bindAutoCompletion(TextField textField , int maximumEntries , boolean addKeyListener , SortedSet<String> sortedSet) {
+		entries = sortedSet;
 		bindAutoCompletion(textField, maximumEntries, addKeyListener);
 	}
 	
@@ -148,7 +164,8 @@ public final class AutoCompleteTextField {
 	 * 
 	 * @param textField
 	 * @param maximumEntries
-	 * @param addKeyListener !NOT IMPLEMENTED!
+	 * @param addKeyListener
+	 *            !NOT IMPLEMENTED!
 	 */
 	public void bindAutoCompletion(TextField textField , int maximumEntries , boolean addKeyListener) {
 		this.textField = textField;
@@ -173,6 +190,7 @@ public final class AutoCompleteTextField {
 	 * Remove autoCompletion listeners from the TextField
 	 */
 	public void removeAutoCompletion() {
+		
 		// TextChanged Listener
 		textField.textProperty().removeListener(textListener);
 		
@@ -200,7 +218,8 @@ public final class AutoCompleteTextField {
 	}
 	
 	/**
-	 * @param maximumEntries the maximumEntries to set
+	 * @param maximumEntries
+	 *            the maximumEntries to set
 	 */
 	public void setMaximumEntries(int maximumEntries) {
 		this.maximumEntries = maximumEntries;

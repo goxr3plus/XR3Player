@@ -1,5 +1,6 @@
 
- .root{
+	
+ *{
  	-light-black: rgb(74.0, 75.0, 78.0);
     -dark-highlight: rgb(87.0, 89.0, 92.0);
     -dark-black: rgb(39.0, 40.0, 40.0);
@@ -1158,6 +1159,26 @@
 *                         search-box,libraries-search-box                      *
 
 ******************************************************************************/
+
+.special-text-field {	
+	-fx-background-insets: -0.1, 2.0;
+    -fx-background-radius: 5.0;
+    -fx-border-radius:5.0;
+    -fx-border-width:1.0;
+    -fx-prompt-text-fill:black;
+    -fx-text-fill:black;
+    -fx-font-size:13.0;
+    -fx-font-weight:bold;   
+    -fx-focus-color: firebrick; 
+}
+
+/*.special-text-field:focused , .special-text-field:hover{
+	-fx-background-color: firebrick;
+	-fx-border-color:white;
+	-fx-text-fill:white;
+	-fx-prompt-text-fill:white;	
+}*/
+
 
 .search-box .text-field, .libraries-search-box .text-field {
 	/*-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);*/

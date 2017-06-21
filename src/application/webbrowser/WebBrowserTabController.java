@@ -6,15 +6,12 @@ package application.webbrowser;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 
 import application.presenter.custom.Marquee;
 import application.tools.InfoTool;
@@ -28,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -61,7 +59,7 @@ public class WebBrowserTabController extends StackPane {
 	private Button forwardButton;
 	
 	@FXML
-	private JFXTextField searchBar;
+	private TextField searchBar;
 	
 	@FXML
 	private Button goButton;
@@ -201,10 +199,14 @@ public class WebBrowserTabController extends StackPane {
 				searchBar.textProperty().bind(webEngine.locationProperty());
 		});
 		searchBar.setOnAction(a -> loadWebSite(searchBar.getText()));
+		searchBar.focusedProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue)
+				Platform.runLater(() -> searchBar.selectAll());
+			
+		});
 		
 		//Proposing sites
-		List<String> proposals = Arrays.asList("https://www.fb.com", "https://www.facebook.com", "https://www.youtube.com");
-		new AutoCompleteTextField().bindAutoCompletion(searchBar, 15, true, proposals);
+		new AutoCompleteTextField().bindAutoCompletion(searchBar, 15, true, WebBrowserController.WEBSITE_PROPOSALS);
 		
 		//goButton
 		goButton.setOnAction(searchBar.getOnAction());
@@ -238,8 +240,7 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * Return the Search Url for the Search Provider For example for `Google`
-	 * returns `https://www.google.com/search?q=`
+	 * Return the Search Url for the Search Provider For example for `Google` returns `https://www.google.com/search?q=`
 	 * 
 	 * @param searchProvider
 	 * @return The Search Engine Url
@@ -259,8 +260,7 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * Return the Search Url for the Search Provider For example for `Google`
-	 * returns `https://www.google.com/search?q=`
+	 * Return the Search Url for the Search Provider For example for `Google` returns `https://www.google.com/search?q=`
 	 * 
 	 * @param searchProvider
 	 * @return The Search Engine Url
@@ -280,8 +280,7 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * Loads the given website , either directly if the url is a valid WebSite
-	 * Url or using a SearchEngine like Google
+	 * Loads the given website , either directly if the url is a valid WebSite Url or using a SearchEngine like Google
 	 * 
 	 * @param webSite
 	 */
@@ -386,7 +385,8 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * @param history the history to set
+	 * @param history
+	 *            the history to set
 	 */
 	public void setHistory(WebHistory history) {
 		this.history = history;

@@ -369,7 +369,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		//--transferMediaButton
 		transferMediaButton.getItems().get(key).setDisable(true);
-		transferMediaButton.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty()).ifPresent(path -> {
+		transferMediaButton.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
 			
 			//Start the selected player
 			Main.xPlayersList.getXPlayerController(transferMediaButton.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(),
@@ -931,7 +931,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			// Status.SEEKING
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKING) {
 			
-			Platform.runLater(() -> playerStatusLabel.setText("Player is SEEKING "));
+			Platform.runLater(() -> playerStatusLabel.setText("Player is Seeking "));
 			
 			// Status.SEEKED
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKED) {
@@ -1004,12 +1004,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		if (seconds < 0 && ( seconds + xPlayerModel.getCurrentTime() >= 0 )) { //negative seek
 			
-			System.out.println("Skipping backwards ..." + seconds + "] seconds");
+			System.out.println("Skipping backwards ...[" + seconds + "] seconds");
 			
 			ok = true;
 		} else if (seconds > 0 && ( seconds + xPlayerModel.getCurrentTime() <= xPlayerModel.getDuration() )) { //positive seek
 			
-			System.out.println("Skipping forward ..." + seconds + "] seconds");
+			System.out.println("Skipping forward ...[" + seconds + "] seconds");
 			
 			ok = true;
 		}
