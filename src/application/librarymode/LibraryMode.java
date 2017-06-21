@@ -46,6 +46,8 @@ import xplayer.XPlayerController;
  */
 public class LibraryMode extends BorderPane {
 	
+	// ------------------------------------------------
+	
 	@FXML
 	private SplitPane topSplitPane;
 	
@@ -80,7 +82,10 @@ public class LibraryMode extends BorderPane {
 	private Button openLibraryContextMenu;
 	
 	@FXML
-	private Button settingsOfLibrary;
+	private Button openLibraryInformation;
+	
+	@FXML
+	private Button goToLibraryPlayList;
 	
 	@FXML
 	private HBox botttomHBox;
@@ -148,6 +153,11 @@ public class LibraryMode extends BorderPane {
 	 */
 	public SimpleIntegerProperty openedLibraries = new SimpleIntegerProperty();
 	
+	/**
+	 * This binding contains a number which shows how many libraries have currently no items at all
+	 */
+	public SimpleIntegerProperty emptyLibraries = new SimpleIntegerProperty();
+	
 	//----- Invalidation Listeners ------------------
 	
 	/** This variable is used during the creation of a new library. */
@@ -211,6 +221,10 @@ public class LibraryMode extends BorderPane {
 						
 						// Commit
 						Main.dbManager.commit();
+						
+						//Recalculate Some Bindings
+						calculateEmptyLibraries();
+						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
 						ActionTool.showNotification("Error Creating a Library", "Library can't be created cause of:" + ex.getMessage(), Duration.seconds(2),
@@ -327,9 +341,9 @@ public class LibraryMode extends BorderPane {
 		
 		// -- openOrCloseLibrary 
 		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue != null)
-				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));
-			else {
+			if (newValue != null) {
+				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));	
+			} else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");
 			}
@@ -338,11 +352,17 @@ public class LibraryMode extends BorderPane {
 				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 		
 		// -- settingsOfLibrary
-		settingsOfLibrary.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
+		openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
+		
+		// -- goToLibraryPlayList
+		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.getViewer().centerItemProperty().get()).ifPresent(library -> {
+			if (library.isOpened())
+				multipleLibs.selectTab(library.getLibraryName());
+		}));
 		
 		//----librariesInfoLabel
-		librariesInfoLabel.textProperty()
-				.bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ", openedLibraries, " ] Opened"));
+		librariesInfoLabel.textProperty().bind(Bindings.concat("Totally -> [ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",
+				openedLibraries, " ] Opened", " , [ ", emptyLibraries, " ] Empty"));
 		
 	}
 	
@@ -351,6 +371,13 @@ public class LibraryMode extends BorderPane {
 	 */
 	public void calculateOpenedLibraries() {
 		openedLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).count());
+	}
+	
+	/**
+	 * Recalculates the empty libraries
+	 */
+	public void calculateEmptyLibraries() {
+		emptyLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isEmpty).count());
 	}
 	
 	/**

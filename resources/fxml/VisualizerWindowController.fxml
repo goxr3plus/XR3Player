@@ -11,6 +11,7 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -87,37 +88,35 @@
                                           <RadioMenuItem disable="true" mnemonicParsing="false" text="Julia Fractals (new)" toggleGroup="$visualizerTypeGroup" />
                                       </items>
                                     </Menu>
+                                    <Menu mnemonicParsing="false" text="Background">
+                                      <items>
+                                        <MenuItem fx:id="setBackground" mnemonicParsing="false" text="change..." />
+                                          <MenuItem fx:id="setDefaultBackground" mnemonicParsing="false" text="default" />
+                                        <MenuItem fx:id="clearBackground" mnemonicParsing="false" text="clear" />
+                                      </items>
+                                    </Menu>
+                                    <Menu mnemonicParsing="false" text="Foreground">
+                                       <items>
+                                          <MenuItem fx:id="setForeground" mnemonicParsing="false" text="change..." />
+                                          <MenuItem fx:id="setDefaultForeground" mnemonicParsing="false" text="default" />
+                                       </items>
+                                    </Menu>
+                                    <Menu mnemonicParsing="false" text="Opacity">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false">
+                                             <graphic>
+                                                <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" min="0.01" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="transparency-slider" stylesheets="@../style/application.css" value="0.9">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Slider>
+                                             </graphic>
+                                          </MenuItem>
+                                      </items>
+                                    </Menu>
                                  </items>
                               </ContextMenu>
                            </contextMenu>
-                           <items>
-                              <Menu mnemonicParsing="false" text="Background">
-                                <items>
-                                  <MenuItem fx:id="setBackground" mnemonicParsing="false" text="change..." />
-                                    <MenuItem fx:id="setDefaultBackground" mnemonicParsing="false" text="default" />
-                                  <MenuItem fx:id="clearBackground" mnemonicParsing="false" text="clear" />
-                                </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="Foreground">
-                                 <items>
-                                    <MenuItem fx:id="setForeground" mnemonicParsing="false" text="change..." />
-                                    <MenuItem fx:id="setDefaultForeground" mnemonicParsing="false" text="default" />
-                                 </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="Opacity">
-                                <items>
-                                  <MenuItem mnemonicParsing="false">
-                                       <graphic>
-                                          <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" min="0.01" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="transparency-slider" stylesheets="@../style/application.css" value="0.9">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Slider>
-                                       </graphic>
-                                    </MenuItem>
-                                </items>
-                              </Menu>
-                           </items>
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -125,6 +124,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Visualizer Extra" />
+                           </tooltip>
                         </MenuButton>
                      </children>
                      <BorderPane.margin>

@@ -15,6 +15,7 @@ import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -200,6 +201,10 @@ public class VisualizerWindowController extends StackPane {
 		// menuPopButton
 		menuPopButton.textProperty()
 				.bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("[%.02f %%]").concat("Deck [" + xPlayerController.getKey() + "]"));
+		menuPopButton.setOnMouseReleased(a -> {
+			Bounds bounds = menuPopButton.localToScreen(menuPopButton.getBoundsInLocal());
+			visualizerContextMenu.show(menuPopButton, bounds.getMaxX(), bounds.getMinY());
+		});
 		
 		// ----------------------------- Minimize
 		minimize.setOnAction(action ->

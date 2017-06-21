@@ -104,10 +104,10 @@
                                                       </ImageView>
                                                    </graphic>
                                                    <tooltip>
-                                                      <Tooltip text="Open Context Menu" />
+                                                      <Tooltip text="Open Library Context Menu" />
                                                    </tooltip>
                                                 </Button>
-                                                <Button fx:id="settingsOfLibrary" contentDisplay="GRAPHIC_ONLY" layoutX="208.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
+                                                <Button fx:id="openLibraryInformation" contentDisplay="GRAPHIC_ONLY" layoutX="208.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -120,6 +120,21 @@
                                                    </graphic>
                                                    <tooltip>
                                                       <Tooltip text="Open Library Information" />
+                                                   </tooltip>
+                                                </Button>
+                                                <Button fx:id="goToLibraryPlayList" contentDisplay="GRAPHIC_ONLY" layoutX="329.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="32.0" styleClass="last">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
+                                                         <image>
+                                                            <Image url="@../image/desc.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Go to the Opened Playlist if the Library is Opened" />
                                                    </tooltip>
                                                 </Button>
                                              </children>
@@ -203,7 +218,7 @@
                   </ScrollPane>
                </bottom>
                <top>
-                  <Label fx:id="librariesInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent;" styleClass="settingsLabel" text="Libraries Info" BorderPane.alignment="CENTER" />
+                  <Label fx:id="librariesInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
             <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />

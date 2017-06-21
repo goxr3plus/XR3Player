@@ -27,6 +27,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
@@ -97,6 +98,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private Label visualizerRequestFocus;
+	
+	@FXML
+	private HBox visualizerSettingsHBox;
+	
+	@FXML
+	private Button visualizerSettings;
 	
 	@FXML
 	private ToggleButton visualizerVisible;
@@ -644,13 +651,20 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		// Add VisualizerStackController to the VisualizerStackPane
 		visualizerStackPane.getChildren().add(0, visualizerStackController);
 		
+		// visualizerSettingsHBox
+		visualizerSettingsHBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty().not().and(visualizerStackPane.hoverProperty()));
+		
+		// visualizerSettings
+		visualizerSettings.setOnMouseReleased(m -> {
+			Bounds bounds = visualizerSettings.localToScreen(visualizerSettings.getBoundsInLocal());
+			getVisualizerWindow().getVisualizerContextMenu().show(visualizerSettings, bounds.getMinX(), bounds.getMaxY());
+		});
+		
 		// maximizeVisualizer
 		maximizeVisualizer.disableProperty().bind(visualizerVisible.selectedProperty().not());
 		maximizeVisualizer.setOnAction(e -> visualizerWindow.displayVisualizer());
-		maximizeVisualizer.visibleProperty().bind(visualizerWindow.getStage().showingProperty().not().and(visualizerStackPane.hoverProperty()));
 		
 		// visualizerVisible
-		visualizerVisible.visibleProperty().bind(maximizeVisualizer.visibleProperty());
 		visualizerVisible.selectedProperty().addListener((observable , oldValue , newValue) -> visualizerVisible.setGraphic(newValue ? eye : eyeDisabled));
 		
 		// visualizerVisibleLabel

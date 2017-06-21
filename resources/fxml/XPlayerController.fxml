@@ -55,7 +55,7 @@
                                  <children>
                                     <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(0,0,0,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
                                     <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" visible="false" />
-                                    <HBox fx:id="visualizerMaximizedHBox" alignment="CENTER" maxHeight="20.0" maxWidth="1.7976931348623157E308" spacing="10.0" StackPane.alignment="CENTER">
+                                    <HBox fx:id="visualizerMaximizedHBox" alignment="CENTER" maxHeight="20.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" spacing="10.0" StackPane.alignment="CENTER">
                                        <children>
                                           <Label fx:id="visualizerMinimize" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Minimize" HBox.hgrow="ALWAYS">
                                              <graphic>
@@ -86,42 +86,55 @@
                                           <Insets left="3.0" right="3.0" />
                                        </StackPane.margin>
                                     </HBox>
-                                    <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" style="-fx-background-color: white; -fx-background-radius: 15;" translateX="-38.0" StackPane.alignment="TOP_RIGHT">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/eye.png" />
-                                             </image>
+                                    <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" layoutX="15.0" layoutY="80.0" maxHeight="20.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" spacing="10.0" StackPane.alignment="TOP_CENTER">
+                                       <children>
+                                          <Button fx:id="visualizerSettings" layoutX="153.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                             <tooltip>
+                                                <Tooltip text="Visualizer Extra" />
+                                             </tooltip>
                                              <cursor>
-                                                <Cursor fx:constant="DEFAULT" />
+                                                <Cursor fx:constant="HAND" />
                                              </cursor>
-                                          </ImageView>
-                                       </graphic>
-                                       <StackPane.margin>
-                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                                       </StackPane.margin>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ToggleButton>
-                                    <Button fx:id="maximizeVisualizer" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;" StackPane.alignment="TOP_RIGHT">
-                                       <StackPane.margin>
-                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                                       </StackPane.margin>
-                                       <tooltip>
-                                          <Tooltip text="Maximize Visualizer" />
-                                       </tooltip>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/extend.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
+                                             <graphic>
+                                                <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/Maintenance-24.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                             <graphic>
+                                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/eye.png" />
+                                                   </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </ImageView>
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ToggleButton>
+                                          <Button fx:id="maximizeVisualizer" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                             <tooltip>
+                                                <Tooltip text="Maximize Visualizer" />
+                                             </tooltip>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <graphic>
+                                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/extend.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                  </children>
                                  <GridPane.margin>
                                     <Insets bottom="2.0" right="2.0" top="2.0" />

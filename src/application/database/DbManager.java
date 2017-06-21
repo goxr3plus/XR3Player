@@ -509,7 +509,10 @@ public class DbManager {
 						loadOpenedLibraries();
 						
 						//Calculate opened libraries
-						Platform.runLater(() -> Main.libraryMode.calculateOpenedLibraries());
+						Platform.runLater(() -> {
+							Main.libraryMode.calculateOpenedLibraries();
+							Main.libraryMode.calculateEmptyLibraries();
+						});
 						
 						//Load PlayerMediaList
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading previous data..."));

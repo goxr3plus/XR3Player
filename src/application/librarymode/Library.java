@@ -470,8 +470,9 @@ public class Library extends StackPane {
 		
 		totalItemsLabel.textProperty()
 				.bind(Bindings.createStringBinding(() -> InfoTool.getNumberWithDots(controller.totalInDataBaseProperty().get()), controller.totalInDataBaseProperty()));
-		
+		totalItemsLabel.textProperty().addListener((observable , oldValue , newValue) -> Main.libraryMode.calculateEmptyLibraries());
 		totalItemsLabel.visibleProperty().bind(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty());
+		
 		//I run this Thread to calculate the total entries of this library
 		//because if the library is not opened they are not calculated
 		new Thread(controller::calculateTotalEntries).start();
@@ -885,6 +886,10 @@ public class Library extends StackPane {
 				if (isOpened())
 					Main.dbManager.storeOpenedLibraries();
 				
+				//Recalculate those bindings
+				Main.libraryMode.calculateOpenedLibraries();
+				Main.libraryMode.calculateEmptyLibraries();
+				
 			} catch (SQLException sql) {
 				logger.log(Level.WARNING, "\n", sql);
 			}
@@ -1154,6 +1159,15 @@ public class Library extends StackPane {
 	 */
 	public int getTotalEntries() {
 		return controller.getTotalInDataBase();
+	}
+	
+	/**
+	 * True if the total items of Library are 0
+	 * 
+	 * @return True if the total items of Library are 0
+	 */
+	public boolean isEmpty() {
+		return getTotalEntries() == 0;
 	}
 	
 	/**

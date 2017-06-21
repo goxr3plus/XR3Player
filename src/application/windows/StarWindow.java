@@ -51,7 +51,7 @@ public class StarWindow extends GridPane {
 	private Stage window;
 	
 	/** The gc. */
-	protected GraphicsContext gc;
+	private GraphicsContext gc;
 	
 	/** The stars position. */
 	private int[] starsPosition = { 5 , 35 , 65 , 95 , 125 };
@@ -63,13 +63,13 @@ public class StarWindow extends GridPane {
 	private boolean accepted;
 	
 	/** The no star. */
-	protected Image noStar = InfoTool.getImageFromResourcesFolder("noStar.png");
+	private static final Image noStar = InfoTool.getImageFromResourcesFolder("noStar.png");
 	
 	/** The half star. */
-	protected Image halfStar = InfoTool.getImageFromResourcesFolder("halfStar.png");
+	private static final Image halfStar = InfoTool.getImageFromResourcesFolder("halfStar.png");
 	
 	/** The star. */
-	protected Image star = InfoTool.getImageFromResourcesFolder("star.png");
+	private static final Image star = InfoTool.getImageFromResourcesFolder("star.png");
 	
 	String[] labelText = { "No Stars" , "Very Bad" , "Bad" , "Very Bored" , "Bored" , "Almost Fine" , "Fine" , "Good" , "Very Good" , "Amazing" , "Excellent" };
 	
@@ -109,6 +109,8 @@ public class StarWindow extends GridPane {
 		// Canvas
 		canvas.setOnMouseDragged(this::computeStars);
 		canvas.setOnMouseReleased(this::computeStars);
+		canvas.setOnMouseMoved(this::computeFakeStars);
+		canvas.setOnMouseExited(m -> repaintStars(getStars()));
 		
 		// close
 		close.setOnAction(a -> close(false));
@@ -125,51 +127,51 @@ public class StarWindow extends GridPane {
 		});
 		
 		// Repaint
-		repaintStars();
+		repaintStars(getStars());
 		
 	}
 	
 	/**
 	 * Repaints the canvas with stars.
 	 */
-	private void repaintStars() {
+	private void repaintStars(double stars) {
 		
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
-		// System.out.println("Stars--->" + getStars());
+		// System.out.println("Stars--->" + stars);
 		
 		// paint half and whole stars
-		if ( ( getStars() - 0.5 ) < (int) getStars())
-			for (int i = 0; i < getStars(); i++)
+		if ( ( stars - 0.5 ) < (int) stars)
+			for (int i = 0; i < stars; i++)
 				gc.drawImage(star, starsPosition[i], 0);
 			
 		else {
-			for (int i = 0; i < getStars() - 1; i++)
+			for (int i = 0; i < stars - 1; i++)
 				gc.drawImage(star, starsPosition[i], 0);
 			
-			gc.drawImage(halfStar, starsPosition[(int) getStars()], 0);
+			gc.drawImage(halfStar, starsPosition[(int) stars], 0);
 		}
 		
 		// Paint unselected Stars
-		if (getStars() != 5)
-			for (int i = 4; i >= getStars(); i--)
+		if (stars != 5)
+			for (int i = 4; i >= stars; i--)
 				gc.drawImage(noStar, starsPosition[i], 0);
 			
 		//Label Text
-		starsLabel.setText(labelText[(int) Math.round(getStars() * 2)]);
+		starsLabel.setText(labelText[(int) Math.round(stars * 2)]);
 	}
 	
 	/**
 	 * Stars must be one number from 0 to 10.
 	 *
 	 * @param newStars
-	 *        the new stars
+	 *            the new stars
 	 */
 	private void setStars(double newStars) {
 		if (getStars() == newStars)
 			return;
 		stars.set(newStars);
-		repaintStars();
+		repaintStars(stars.get());
 	}
 	
 	/**
@@ -203,9 +205,9 @@ public class StarWindow extends GridPane {
 	 * Show.
 	 *
 	 * @param stars
-	 *        the stars
+	 *            the stars
 	 * @param node
-	 *        the node
+	 *            the node
 	 */
 	public void show(double stars , Node node) {
 		// Auto Calculate the position
@@ -217,11 +219,11 @@ public class StarWindow extends GridPane {
 	 * Show.
 	 *
 	 * @param stars
-	 *        the stars
+	 *            the stars
 	 * @param x
-	 *        the x
+	 *            the x
 	 * @param y
-	 *        the y
+	 *            the y
 	 */
 	public void show(double stars , double x , double y) {
 		setStars(stars);
@@ -250,7 +252,7 @@ public class StarWindow extends GridPane {
 	 * Close the Window.
 	 *
 	 * @param accepted
-	 *        True if accepted , False if not
+	 *            True if accepted , False if not
 	 */
 	private void close(boolean accepted) {
 		this.accepted = accepted;
@@ -285,6 +287,36 @@ public class StarWindow extends GridPane {
 			setStars(1);
 		else if (x >= 12)
 			setStars(0.5);
+	}
+	
+	/**
+	 * Computes the stars based on the mouse position on screen
+	 */
+	private void computeFakeStars(MouseEvent m) {
+		int x = (int) m.getX();
+		
+		if (x <= 5)
+			repaintStars(0);
+		else if (x >= 144)
+			repaintStars(5);
+		else if (x >= 133)
+			repaintStars(4.5);
+		else if (x >= 115)
+			repaintStars(4);
+		else if (x >= 105)
+			repaintStars(3.5);
+		else if (x >= 85)
+			repaintStars(3);
+		else if (x >= 74)
+			repaintStars(2.5);
+		else if (x >= 55)
+			repaintStars(2);
+		else if (x >= 45)
+			repaintStars(1.5);
+		else if (x >= 25)
+			repaintStars(1);
+		else if (x >= 12)
+			repaintStars(0.5);
 	}
 	
 	/**

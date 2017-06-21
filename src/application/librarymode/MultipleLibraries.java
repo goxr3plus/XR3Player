@@ -142,6 +142,19 @@ public class MultipleLibraries extends StackPane {
 	}
 	
 	/**
+	 * Selects the tab with the given name
+	 * 
+	 * @param name
+	 */
+	public void selectTab(String name) {
+		for (Tab tab : tabPane.getTabs())
+			if (tab.getTooltip().getText().equals(name)) {
+				tabPane.getSelectionModel().select(tab);
+				break;
+			}
+	}
+	
+	/**
 	 * Returns the selected library.
 	 *
 	 * @return The Selected Library if exists or <b> null </b> instead
