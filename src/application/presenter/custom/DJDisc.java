@@ -40,6 +40,9 @@ public class DJDisc extends StackPane {
 	/** The Constant NULL_IMAGE. */
 	private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noImage.png");
 	
+	/** The Constant NULL_IMAGE. */
+	private static final Image VOLUME_IMAGE = InfoTool.getImageFromResourcesFolder("unmute.png");
+	
 	/** The listeners. */
 	private final ArrayList<DJDiscListener> listeners = new ArrayList<>();
 	
@@ -140,17 +143,14 @@ public class DJDisc extends StackPane {
 		
 		// timeField
 		timeField.setTextAlignment(TextAlignment.CENTER);
-		timeField.setStyle(
-				"-fx-background-color:white; -fx-padding:-2 8 -2 8; -fx-background-radius: 15; -fx-font-weight:bold; -fx-font-size:15; -fx-text-fill:black; -fx-cursor:hand;");
+		timeField.setId("time-field-normal");
 		timeField.setOnMouseClicked(c -> {
 			if (timeMode == TimeMode.NORMAL) {
 				timeMode = TimeMode.REVERSED;
-				timeField.setStyle(
-						"-fx-background-color:white; -fx-padding:-2 8 -2 8; -fx-background-radius: 15; -fx-border-radius:15; -fx-border-color:red; -fx-border-width:2; -fx-font-weight:bold; -fx-font-size:15; -fx-text-fill:black; -fx-cursor:hand;");
+				timeField.setId("time-field-reversed");
 			} else {
 				timeMode = TimeMode.NORMAL;
-				timeField.setStyle(
-						"-fx-background-color:white; -fx-padding:-2 8 -2 8; -fx-background-radius: 15; -fx-font-weight:bold; -fx-font-size:15; -fx-text-fill:black; -fx-cursor:hand;");
+				timeField.setId("time-field-normal");
 			}
 		});
 		
@@ -162,6 +162,12 @@ public class DJDisc extends StackPane {
 			listeners.forEach(l -> l.volumeChanged(newValue.intValue()));
 			repaint();
 		});
+		ImageView graphic = new ImageView(VOLUME_IMAGE);
+		imageView.setFitWidth(15);
+		imageView.setFitHeight(15);
+		imageView.setSmooth(true);
+		volumeLabel.setGraphic(graphic);
+		volumeLabel.setGraphicTextGap(1);
 		
 		// Fade animation for centerDisc
 		fade = new FadeTransition(new Duration(1000), canvas);
@@ -469,15 +475,15 @@ public class DJDisc extends StackPane {
 	 * 
 	 * @param current
 	 * @param total
-	 * @param milliseconds
+	 * @param millisecondsFormatted
 	 */
-	public void updateTimeDirectly(int current , int total , String milliseconds) {
+	public void updateTimeDirectly(int current , int total , String millisecondsFormatted) {
 		calculateTheTime(current, total);
 		if (!this.timeField.isHover()) { //Is being hovered
 			if (timeMode == TimeMode.REVERSED)
-				this.time = time + "." + ( 9 - Integer.parseInt(milliseconds.replace(".", "")) );
+				this.time = time + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) );
 			else
-				this.time = time + milliseconds;
+				this.time = time + millisecondsFormatted;
 		} else
 			this.time = InfoTool.getTimeEdited(total);
 		

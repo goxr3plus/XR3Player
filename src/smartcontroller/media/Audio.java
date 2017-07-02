@@ -137,7 +137,7 @@ public class Audio extends Media {
 	@Override
 	public Image getAlbumImage() {
 		if ("mp3".equals(getFileType()) && new File(getFilePath()).exists() && albumImage == null)
-			albumImage = InfoTool.getMp3AlbumImage(getFilePath(), -1, -1);
+			albumImage = InfoTool.getAudioAlbumImage(getFilePath(), -1, -1);
 		return albumImage;
 	}
 	
@@ -151,7 +151,7 @@ public class Audio extends Media {
 	 * @return the album image fit
 	 */
 	public Image getAlbumImageFit(int width , int height) {
-		return !"mp3".equals(getFileType()) || !new File(getFilePath()).exists() ? null : InfoTool.getMp3AlbumImage(getFilePath(), width, height);
+		return !"mp3".equals(getFileType()) || !new File(getFilePath()).exists() ? null : InfoTool.getAudioAlbumImage(getFilePath(), width, height);
 	}
 	
 }

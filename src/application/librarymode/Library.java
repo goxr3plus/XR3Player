@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import application.Main;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
+import application.tools.JavaFXTools;
 import application.tools.NotificationType;
 import javafx.animation.Animation.Status;
 import javafx.application.Platform;
@@ -608,42 +609,42 @@ public class Library extends StackPane {
 	/**
 	 * Updates the Image File.
 	 *
-	 * @param absolutePath
+	 * @param absoluteFilePath
 	 *            The absolute path of the new image to the file system
-	 * @param renameUpdate
+	 * @param renameOperation
 	 *            Is this a rename update ?
 	 * @param commit
 	 *            If true commit to database
 	 */
-	private boolean updateImagePathInDB(String absolutePath , boolean renameUpdate , boolean commit) {
+	private boolean updateImagePathInDB(String absoluteFilePath , boolean renameOperation , boolean commit) {
 		boolean success = true;
 		
 		try (PreparedStatement libUImage = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET LIBRARYIMAGE=?  WHERE NAME=?")) {
 			
 			// rename the old image file
-			if (renameUpdate && imageName != null) {
+			if (renameOperation && imageName != null) {
 				
 				// Do the rename procedure
-				success = new File(getAbsoluteImagePath()).renameTo(new File(absolutePath));
+				success = new File(getAbsoluteImagePath()).renameTo(new File(absoluteFilePath));
 				
 				// Change the image name
-				imageName = InfoTool.getFileName(absolutePath);
+				imageName = InfoTool.getFileName(absoluteFilePath);
 				
 			} else { // Create new Image
 				
-				// Delete the [[old]] image if exist
-				if (imageName != null && !new File(getAbsoluteImagePath()).delete())
-					logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
-				
+				//				// Delete the [[old]] image if exist
+				//				if (imageName != null && !new File(getAbsoluteImagePath()).delete())
+				//					logger.log(Level.WARNING, "Failed to delete image for LibraryName=[" + getLibraryName() + "]");
+				//				
 				// Create the new image
-				String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "." + InfoTool.getFileExtension(absolutePath);
+				String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "." + InfoTool.getFileExtension(absoluteFilePath);
 				
 				// Change the image name
 				imageName = InfoTool.getFileName(newImageName);
 				
-				// Do the copy procedure
-				if (!ActionTool.copy(absolutePath, newImageName))
-					logger.log(Level.WARNING, "Failed to create image for LibraryName=[" + getLibraryName() + "]");
+				//				// Do the copy procedure
+				//				if (!ActionTool.copy(absolutePath, newImageName))
+				//					logger.log(Level.WARNING, "Failed to create image for LibraryName=[" + getLibraryName() + "]");			
 			}
 			
 			// SQLITE
@@ -659,6 +660,17 @@ public class Library extends StackPane {
 		}
 		
 		return success;
+	}
+	
+	/**
+	 * The user has the ability to change the Library Image
+	 *
+	 */
+	public void setNewImage() {
+		JavaFXTools.selectAndSaveImage(this.getLibraryName(), InfoTool.getImagesFolderAbsolutePathWithSeparator(), Main.specialChooser, Main.window).ifPresent(imageFile -> {
+			updateImagePathInDB(imageFile.getAbsolutePath(), false, true);
+			imageView.setImage(new Image(imageFile.toURI() + ""));
+		});
 	}
 	
 	/**
@@ -691,28 +703,6 @@ public class Library extends StackPane {
 		} catch (Exception ex) {
 			logger.log(Level.WARNING, "", ex);
 		}
-	}
-	
-	/**
-	 * The user has the ability to change the Library Image
-	 *
-	 */
-	public void setNewImage() {
-		
-		File file = Main.specialChooser.prepareToSelectImage(Main.window);
-		if (file == null)
-			return;
-		
-		//Check the given image
-		Image image = new Image(file.toURI() + "");
-		if (image.getWidth() > 4800 || image.getHeight() > 4800)
-			ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \n Current is:" + image.getWidth() + "*" + image.getHeight(), Duration.millis(1500),
-					NotificationType.WARNING);
-		else {
-			updateImagePathInDB(file.getAbsolutePath(), false, true);
-			imageView.setImage(getImage());
-		}
-		
 	}
 	
 	/**

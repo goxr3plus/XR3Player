@@ -35,7 +35,6 @@ import javafx.scene.input.Dragboard;
 import javafx.util.Duration;
 import smartcontroller.Genre;
 import smartcontroller.SmartController;
-import xplayer.model.AudioType;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -147,10 +146,9 @@ public abstract class Media {
 		this.bitRate = new SimpleIntegerProperty();
 		try {
 			File file = new File(path);
-			if (file.exists())
-				//It is mp3?
-				if ("mp3".equals(this.fileType.get()))
-					this.bitRate.set((int) new MP3File(new File(path)).getMP3AudioHeader().getBitRateAsNumber());
+			//exists ? + mp3 ?
+			if (file.exists() && "mp3".equals(this.fileType.get()))
+				this.bitRate.set((int) new MP3File(file).getMP3AudioHeader().getBitRateAsNumber());
 		} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException e) {
 			e.printStackTrace();
 		}

@@ -139,7 +139,7 @@ public class JSONDB {
 					if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ( (SmartController) newTab.getContent() ).isFree(false)
 							&& ( (SmartController) newTab.getContent() ).getItemsObservableList().isEmpty()) {
 						
-						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true);
+						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true,false);
 						
 						updateLibrariesInformation(Main.libraryMode.multipleLibs.getTabPane().getTabs(), false);
 						
@@ -191,7 +191,7 @@ public class JSONDB {
 				//Check if empty and if not update the selected library
 				if (!Main.libraryMode.multipleLibs.getTabs().isEmpty()
 						&& Main.libraryMode.multipleLibs.getSelectedLibrary().get().getSmartController().isFree(false))
-					Main.libraryMode.multipleLibs.getSelectedLibrary().get().getSmartController().getLoadService().startService(false, true);
+					Main.libraryMode.multipleLibs.getSelectedLibrary().get().getSmartController().getLoadService().startService(false, true,false);
 			});
 			
 		} catch (IOException | DeserializationException e) {

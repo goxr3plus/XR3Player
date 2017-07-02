@@ -6,10 +6,10 @@ package application.loginmode;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
 
 import application.Main;
+import application.presenter.SpecialPopOver;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +46,7 @@ public class UserInformation extends StackPane {
 	private User user;
 	
 	/** The Constant popOver. */
-	private final PopOver popOver = new PopOver();
+	private SpecialPopOver popOver;
 	
 	/**
 	 * Constructor.
@@ -64,22 +64,6 @@ public class UserInformation extends StackPane {
 		} catch (IOException ex) {
 			Main.logger.log(Level.WARNING, "", ex);
 		}
-		
-		// -------------Create the PopOver-------------------------------
-		popOver.setTitle("Information");
-		popOver.getScene().setFill(Color.TRANSPARENT);
-		popOver.setAutoFix(true);
-		popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-		popOver.setArrowSize(25);
-		popOver.setDetachable(false);
-		popOver.setAutoHide(true);
-		popOver.setHeaderAlwaysVisible(true);
-		popOver.setContentNode(this);
-		popOver.showingProperty().addListener((observable , oldValue , newValue) -> {
-			//			if (!newValue)  //on hidden
-			//				System.out.println("Closed...");
-			//			
-		});
 		
 	}
 	
@@ -102,11 +86,13 @@ public class UserInformation extends StackPane {
 		commentsArea.setText(user.getDescriptionLabel().getText());
 		
 		//Show the PopOver
-		popOver.show(user.getImageView());
+		popOver.showPopOver(user);
 	}
 	
 	/**
-	 * @return True if the PopOver is showing of false if not
+	 * Check if the PopOver is Showing
+	 * 
+	 * @return True if showing , false if not
 	 */
 	public boolean isShowing() {
 		return popOver.isShowing();
@@ -136,6 +122,23 @@ public class UserInformation extends StackPane {
 	 */
 	@FXML
 	public void initialize() {
+		
+		// -------------Create the PopOver-------------------------------
+		popOver = new SpecialPopOver();
+		popOver.setTitle("Information");
+		popOver.getScene().setFill(Color.TRANSPARENT);
+		popOver.setAutoFix(true);
+		popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
+		popOver.setArrowSize(25);
+		popOver.setDetachable(false);
+		popOver.setAutoHide(true);
+		popOver.setHeaderAlwaysVisible(true);
+		popOver.setContentNode(this);
+		popOver.showingProperty().addListener((observable , oldValue , newValue) -> {
+			//			if (!newValue)  //on hidden
+			//				System.out.println("Closed...");
+			//			
+		});
 		
 		//-- Total Characters
 		totalCharsLabel.textProperty().bind(commentsArea.textProperty().length().asString());

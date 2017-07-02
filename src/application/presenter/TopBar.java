@@ -197,12 +197,14 @@ public class TopBar extends BorderPane {
 				if (windowMode != WindowMode.MAINMODE && !Main.libraryMode.getBottomSplitPane().getItems().contains(Main.multipleTabs)) {
 					
 					//Update the djMode firstly
+					//Main.multipleTabs.saveSplitPaneDivider();
 					Main.djMode.saveBottomSplitPaneDivider();
 					Main.djMode.getBottomSplitPane().getItems().clear();
 					
 					Main.libraryMode.getBottomSplitPane().getItems().clear();
 					Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0));
 					Main.libraryMode.updateBottomSplitPaneDivider();
+					Main.multipleTabs.reverseSplitPaneItems();
 					
 					// Update window Mode
 					windowMode = WindowMode.MAINMODE;
@@ -220,6 +222,7 @@ public class TopBar extends BorderPane {
 				if (windowMode != WindowMode.DJMODE && Main.libraryMode.getBottomSplitPane().getItems().contains(Main.multipleTabs)) {
 					
 					//Update the libraryMode firstly
+					//Main.multipleTabs.saveSplitPaneDivider();
 					Main.libraryMode.saveBottomSplitPaneDivider();
 					Main.libraryMode.getBottomSplitPane().getItems().clear();
 					
@@ -227,6 +230,7 @@ public class TopBar extends BorderPane {
 					Main.djMode.getBottomSplitPane().getItems().clear();
 					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
 					Main.djMode.updateBottomSplitPaneDivider();
+					Main.multipleTabs.reverseSplitPaneItems();
 					
 					// Update window Mode
 					windowMode = WindowMode.DJMODE;
@@ -317,5 +321,13 @@ public class TopBar extends BorderPane {
 	public void setXr3Label(Label xr3Label) {
 		this.xr3Label = xr3Label;
 	}
+
+	/**
+	 * @return the windowMode
+	 */
+	public WindowMode getWindowMode() {
+		return windowMode;
+	}
+
 	
 }

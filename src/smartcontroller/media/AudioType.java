@@ -1,4 +1,4 @@
-package xplayer.model;
+package smartcontroller.media;
 
 /**
  * Indicates the type of data.

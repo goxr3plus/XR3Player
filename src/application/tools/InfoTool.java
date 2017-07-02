@@ -45,7 +45,7 @@ import application.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
-import xplayer.model.AudioType;
+import smartcontroller.media.AudioType;
 
 /**
  * Provides useful methods for retrieving informations.
@@ -363,7 +363,28 @@ public final class InfoTool {
 	 *            the height
 	 * @return an Image
 	 */
-	public static Image getMp3AlbumImage(String absolutePath , int width , int height) {
+	public static Image getAudioAlbumImage(String absolutePath , int width , int height) {
+		ByteArrayInputStream arrayInputStream = getAudioAlbumImageRaw(absolutePath, width, height);
+		//Does it contain an image
+		if (arrayInputStream != null)
+			return ( width == -1 && height == -1 ) ? new Image(arrayInputStream) : new Image(arrayInputStream, width, height, false, true);
+		
+		return null;// fatal error here
+	}
+	
+	/**
+	 * Return the imageView of mp3File in requested Width and Height.
+	 *
+	 * @param absolutePath
+	 *            The File absolute path
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 * @return ByteArrayInputStream containing the image as binary data
+	 */
+	public static ByteArrayInputStream getAudioAlbumImageRaw(String absolutePath , int width , int height) {
+		//Is it mp3?
 		if ("mp3".equals(getFileExtension(absolutePath)))
 			try {
 				Mp3File song = new Mp3File(absolutePath);
@@ -373,8 +394,7 @@ public final class InfoTool {
 					ID3v2 id3v2Tag = song.getId3v2Tag();
 					
 					if (id3v2Tag.getAlbumImage() != null) // image?
-						return ( width == -1 && height == -1 ) ? new Image(new ByteArrayInputStream(id3v2Tag.getAlbumImage()))
-								: new Image(new ByteArrayInputStream(id3v2Tag.getAlbumImage()), width, height, false, true);
+						return new ByteArrayInputStream(id3v2Tag.getAlbumImage());
 				}
 			} catch (UnsupportedTagException | InvalidDataException | IOException ex) {
 				logger.log(Level.WARNING, "Can't get Album Image", ex);

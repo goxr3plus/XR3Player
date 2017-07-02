@@ -9,7 +9,7 @@
 
 <fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on">
+      <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on (CTRL+ENTER)">
         <items>
           <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
                <graphic>
@@ -322,16 +322,16 @@
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
-      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename ">
+      <MenuItem fx:id="markAsPlayed" mnemonicParsing="false" onAction="#action" text="Mark as Played (CTRL+U)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/rename.png" />
+                  <Image url="@../image/played.png" />
                </image>
             </ImageView>
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="stars" mnemonicParsing="false" onAction="#action" text="Stars ">
+      <MenuItem fx:id="stars" mnemonicParsing="false" onAction="#action" text="Stars (CTRL+Q)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -360,6 +360,15 @@
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/rename.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
@@ -388,7 +397,7 @@
          </graphic>
       </MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
-      <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File ">
+      <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File (CTRL+F)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -397,7 +406,7 @@
             </ImageView>
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="properties" mnemonicParsing="false" onAction="#action" text="Properties...">
+      <MenuItem fx:id="properties" mnemonicParsing="false" onAction="#action" text="Properties... (CTRL+P)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

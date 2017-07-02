@@ -9,38 +9,43 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
 <fx:root minHeight="1.0" minWidth="1.0" prefHeight="375.0" prefWidth="460.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-border-color: rgb(255,255,255,0.9); -fx-border-width: 2;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox fx:id="bottomHBox" alignment="CENTER_LEFT" minHeight="1.0" minWidth="1.0" spacing="10.0">
-         <children>
-            <Button fx:id="resetFilters" mnemonicParsing="false" text="Reset All">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <MenuButton fx:id="presets" mnemonicParsing="false" popupSide="RIGHT" text="Presets">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="5.0" top="2.0" />
-         </padding>
-      </HBox>
-   </top>
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
-            <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="5.0" prefColumns="0" prefHeight="100.0" prefRows="0" prefWidth="100.0" style="-fx-background-color: #202020;" vgap="5.0">
-               <padding>
-                  <Insets top="3.0" />
-               </padding></TilePane>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <HBox fx:id="bottomHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="30.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="resetFilters" mnemonicParsing="false" style="-fx-font-size: 11;" text="Reset All">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <MenuButton fx:id="presets" mnemonicParsing="false" popupSide="RIGHT" style="-fx-font-size: 11;" text="Presets">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </MenuButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" top="2.0" />
+                     </padding>
+                  </HBox>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                     <content>
+                        <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="5.0" prefColumns="0" prefRows="0" style="-fx-background-color: #202020;" vgap="5.0">
+                           <padding>
+                              <Insets top="3.0" />
+                           </padding>
+                        </TilePane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </content>
       </ScrollPane>
    </center>

@@ -28,7 +28,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="753.0" prefWidth="986.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -39,9 +39,9 @@
             </Label>
             <SplitPane fx:id="splitPane" dividerPositions="0.7" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                <items>
-                  <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308">
+                  <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" minHeight="0.0">
                      <center>
-                        <StackPane fx:id="usersStackView" prefHeight="298.0" BorderPane.alignment="CENTER">
+                        <StackPane fx:id="usersStackView" BorderPane.alignment="CENTER">
                            <children>
                               <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
                                  <cursor>
@@ -103,7 +103,7 @@
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </Button>
-                                                            <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" styleClass="last" text="Rename">
+                                                            <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" text="Rename">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
@@ -180,17 +180,19 @@
                                     </StackPane>
                                  </content>
                               </ScrollPane>
-                              <Button fx:id="loginButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="63.0" prefWidth="192.0" style="-fx-font-size: 30;" text="Login" translateX="-21.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
                            </children>
                            <padding>
                               <Insets bottom="3.0" />
                            </padding>
                         </VBox>
                      </bottom>
+                     <right>
+                        <Button fx:id="loginButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="104.0" style="-fx-font-size: 18; -fx-background-radius: 0 45 45 0; -fx-border-radius: 0 45 45 0; -fx-border-color: firebrick; -fx-border-width: 5;" text="Login-&gt;" BorderPane.alignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </right>
                   </BorderPane>
                   <StackPane>
                      <children>
@@ -218,9 +220,9 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="38.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: rgb(20,20,20,0.85); -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Created by " textAlignment="CENTER" wrapText="true" HBox.hgrow="SOMETIMES">
+            <Label alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Created by " textAlignment="CENTER" wrapText="true" HBox.hgrow="SOMETIMES">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -239,7 +241,7 @@
                   </Hyperlink>
                </graphic>
             </Label>
-            <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true">
+            <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -263,7 +265,7 @@
             </Label>
             <VBox fx:id="downloadsVBox" prefHeight="200.0" prefWidth="100.0" style="-fx-font-size: 9;">
                <children>
-                  <Label fx:id="sourceForgeDownloadsLabel1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="sourceForgeDownloadsLabel1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -271,7 +273,7 @@
                         <Insets left="4.0" right="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sourceForgeDownloadsLabel" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Sourceforge :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                  <Label fx:id="sourceForgeDownloadsLabel" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Sourceforge :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -279,7 +281,7 @@
                         <Insets left="4.0" right="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="gitHubDownloadsLabel" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="GitHub :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                  <Label fx:id="gitHubDownloadsLabel" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="GitHub :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -298,7 +300,15 @@
    <top>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" maxWidth="-Infinity" spacing="5.0" style="-fx-background-color: #202020;" StackPane.alignment="CENTER_RIGHT">
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxWidth="-Infinity" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #202020; -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~ XR3Player ~" fx:id="xr3PlayerLabel">
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+               <padding>
+                  <Insets bottom="2.0" />
+               </padding>
+            </Label>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="39.0" spacing="5.0" style="-fx-background-color: firebrick;" StackPane.alignment="CENTER_RIGHT">
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
@@ -358,19 +368,14 @@
                      </cursor>
                   </MenuButton>
                </children>
-               <padding>
-                  <Insets bottom="4.0" />
-               </padding>
             </VBox>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #202020; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~ XR3Player ~" fx:id="xr3PlayerLabel">
-               <cursor>
-                  <Cursor fx:constant="MOVE" />
-               </cursor>
-               <padding>
-                  <Insets bottom="2.0" />
-               </padding>
-            </Label>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="5.0" right="5.0" top="3.0" />
+         </padding>
       </StackPane>
    </top>
 </fx:root>

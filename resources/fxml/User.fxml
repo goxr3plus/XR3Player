@@ -69,7 +69,7 @@
                   <Tooltip text="Image is missing !!" />
                </tooltip>
             </Label>
-            <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="?" textAlignment="CENTER">
+            <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="0" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

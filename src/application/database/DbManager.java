@@ -338,7 +338,7 @@ public class DbManager {
 					if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ( (SmartController) newTab.getContent() ).isFree(false)
 							&& ( (SmartController) newTab.getContent() ).getItemsObservableList().isEmpty()) {
 						
-						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true);
+						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, false);
 						
 						storeOpenedLibraries();
 					}
@@ -361,7 +361,7 @@ public class DbManager {
 				//Update last selected Library SmartController if not empty
 				Main.libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> {
 					if (selectedLibrary.getSmartController().isFree(false))
-						selectedLibrary.getSmartController().getLoadService().startService(false, true);
+						selectedLibrary.getSmartController().getLoadService().startService(false, true, false);
 				});
 			});
 		});
@@ -520,7 +520,7 @@ public class DbManager {
 						
 						//Refresh all the XPlayers PlayLists
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()
-								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false)));
+								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false, false)));
 						
 						//Platform.runLater(() -> Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getSplitPane().getItems().add(Main.loginMode.teamViewer));
 						

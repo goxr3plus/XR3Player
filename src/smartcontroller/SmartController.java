@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -29,8 +28,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -94,7 +95,10 @@ public class SmartController extends StackPane {
 	private Button next;
 	
 	@FXML
-	private MenuButton actionsMenuButton;
+	private MenuButton toolsMenuButton;
+	
+	@FXML
+	private ContextMenu toolsContextMenu;
 	
 	@FXML
 	private MenuItem importFolder;
@@ -252,16 +256,31 @@ public class SmartController extends StackPane {
 		centerStackPane.setOnKeyReleased(key -> {
 			KeyCode code = key.getCode();
 			
-			if (code == KeyCode.LEFT) {
+			if (key.isControlDown() && code == KeyCode.LEFT)
 				goPrevious();
-			} else if (code == KeyCode.RIGHT) {
+			else if (key.isControlDown() && code == KeyCode.RIGHT)
 				goNext();
-			} else if (tableViewer.getSelectedCount() > 0) { // TableViewer
+			else if (tableViewer.getSelectedCount() > 0) { // TableViewer
 				
-				if (code == KeyCode.P)
-					ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
-				else if (code == KeyCode.DELETE && SmartController.this.genre != Genre.SEARCHWINDOW)
+				if (code == KeyCode.DELETE && SmartController.this.genre != Genre.SEARCHWINDOW)
 					prepareDelete(key.isShiftDown());
+				else if (key.isControlDown()) { //Short Cuts
+					if (code == KeyCode.F)
+						ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
+					else if (code == KeyCode.Q)
+						tableViewer.getSelectionModel().getSelectedItem().updateStars(this, tableViewer);
+					else if (code == KeyCode.R)
+						tableViewer.getSelectionModel().getSelectedItem().rename(this, tableViewer);
+					else if (code == KeyCode.U) {
+						Media media = tableViewer.getSelectionModel().getSelectedItem();
+						if (!Main.playedSongs.containsFile(media.getFilePath()))
+							Main.playedSongs.add(media.getFilePath());
+						else
+							Main.playedSongs.remove(media.getFilePath());
+					} else if (code == KeyCode.ENTER)
+						Main.xPlayersList.getXPlayerController(0).playSong(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
+					
+				}
 				
 			}
 			
@@ -336,7 +355,7 @@ public class SmartController extends StackPane {
 				int listNumber = Integer.parseInt(pageField.getText());
 				if (listNumber <= getMaximumList()) {
 					currentPage.set(listNumber);
-					loadService.startService(false, true);
+					loadService.startService(false, true,false);
 				} else {
 					pageField.setText(Integer.toString(listNumber));
 					pageField.selectEnd();
@@ -434,8 +453,14 @@ public class SmartController extends StackPane {
 				clearDataBaseTable();
 		});
 		
+		//== toolsMenuButton
+		toolsMenuButton.setOnMouseReleased(m -> {
+			Bounds bounds = toolsMenuButton.localToScreen(toolsMenuButton.getBoundsInLocal());
+			toolsContextMenu.show(toolsMenuButton, bounds.getMaxX(), bounds.getMinY());
+		});
+		
 		// -- refreshButton
-		refreshButton.setOnAction(e -> loadService.startService(false, true));
+		refreshButton.setOnAction(e -> loadService.startService(false, true,false));
 		
 		// Update
 		updateLabel();
@@ -446,9 +471,9 @@ public class SmartController extends StackPane {
 		//---------------------Check the genre--------------------
 		if (genre == Genre.SEARCHWINDOW) {
 			navigationHBox.setVisible(false);
-			actionsMenuButton.setVisible(false);
+			toolsMenuButton.setVisible(false);
 			navigationHBox.setManaged(false);
-			actionsMenuButton.setManaged(false);
+			toolsMenuButton.setManaged(false);
 		}
 		
 	}
@@ -584,13 +609,13 @@ public class SmartController extends StackPane {
 	 */
 	public void updateLabel() {
 		if (searchService.isActive() || genre == Genre.SEARCHWINDOW)
-			titledPane.setText("[Found: <" + itemsObservableList.size() + "> first matching] from [ Total:<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> MaxPerPage:<"
-					+ maximumPerPage + "> ] Selected:" + tableViewer.getSelectedCount());
+			titledPane.setText(" Found<" + itemsObservableList.size() + "> first matching from Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> [ Selected<"
+					+ tableViewer.getSelectedCount() + "> MaxPerPage<" + maximumPerPage + "> ]");
 		else
-			titledPane.setText("[Total:<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> MaxPerPage:<" + maximumPerPage + "> CurrentPage:<"
-					+ InfoTool.getNumberWithDots(currentPage.get()) + "> MaxPage:<" + InfoTool.getNumberWithDots(getMaximumList()) + ">] [ Selected:"
-					+ tableViewer.getSelectedCount() + "  Showing:" + InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + "-"
-					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size()) + " ]");
+			titledPane.setText("[ Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> CurrentPage<" + InfoTool.getNumberWithDots(currentPage.get()) + "> MaxPage<"
+					+ InfoTool.getNumberWithDots(getMaximumList()) + "> ] [ Selected<" + tableViewer.getSelectedCount() + ">  Showing<"
+					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + "..."
+					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size()) + "> MaxPerPage<" + maximumPerPage + "> ]");
 		
 		pageField.setText(Integer.toString(currentPage.get()));
 	}
@@ -659,7 +684,7 @@ public class SmartController extends StackPane {
 	public void goPrevious() {
 		if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() > 0) {
 			currentPage.set(currentPage.get() - 1);
-			loadService.startService(false, true);
+			loadService.startService(false, true,false);
 		}
 	}
 	
@@ -669,7 +694,7 @@ public class SmartController extends StackPane {
 	public void goNext() {
 		if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() < getMaximumList()) {
 			currentPage.set(currentPage.get() + 1);
-			loadService.startService(false, true);
+			loadService.startService(false, true,false);
 		}
 	}
 	
@@ -806,7 +831,7 @@ public class SmartController extends StackPane {
 		currentPage.set( ( maximumPerPage == 50 ) ? currentPage.get() / 2 : currentPage.get() * 2 + ( currentPage.get() % 2 == 0 ? 0 : 1 ));
 		maximumPerPage = newMaximumPerPage;
 		if (updateSmartController && isFree(false))
-			loadService.startService(false, true);
+			loadService.startService(false, true,false);
 	}
 	
 	/**
@@ -1085,6 +1110,14 @@ public class SmartController extends StackPane {
 	public SplitPane getSplitPane() {
 		return splitPane;
 	}
+	
+	/**
+	 * @return the toolsContextMenu
+	 */
+	public ContextMenu getToolsContextMenu() {
+		return toolsContextMenu;
+	}
+	
 	
 	/*-----------------------------------------------------------------------
 	 * 

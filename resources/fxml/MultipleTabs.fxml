@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<fx:root prefHeight="467.0" prefWidth="543.0" styleClass="speci" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <SplitPane fx:id="splitPane" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</fx:root>

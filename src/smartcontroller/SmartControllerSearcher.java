@@ -97,7 +97,7 @@ public class SmartControllerSearcher extends HBox {
 				
 				//continue 
 				controller.getNavigationHBox().setDisable(false);
-				controller.getLoadService().startService(false, false);
+				controller.getLoadService().startService(false, false,false);
 				
 			} else if (Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
 				saveSettingsBeforeSearch();

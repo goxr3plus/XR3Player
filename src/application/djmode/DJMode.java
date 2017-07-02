@@ -76,53 +76,7 @@ public class DJMode extends BorderPane {
 		hBox.getChildren().add(Main.xPlayersList.getXPlayerController(2));
 		HBox.setHgrow(Main.xPlayersList.getXPlayerController(2), Priority.ALWAYS);
 		
-		// makeCpuUsageMeter()
-		makeDigitalClock();
-		makeDJSoundTeamTabs();
-		makeBalancer();
-		
 		addKeyListeners();
-		
-	}
-	
-	/**
-	 * Create CpuMeter.
-	 */
-	void makeCpuUsageMeter() {
-		// cpu = new CPUsage(0, InfoTool.screenHeight - 420, 151, 15)
-	}
-	
-	/**
-	 * Make the digital Clock
-	 */
-	void makeDigitalClock() {
-		// digitalClock = new DigitalClock(170, InfoTool.getScreenHeight() -
-		// 422, 80, 16)
-	}
-	
-	/**
-	 * Make DJ sound team tabs.
-	 */
-	void makeDJSoundTeamTabs() {
-		// djTabs = new DJTabs(InfoTool.getScreenWidth() - 305, 400, 300,
-		// InfoTool.getScreenHeight() - 400)
-	}
-	
-	/**
-	 * Make balancer.
-	 */
-	void makeBalancer() {
-		
-		//	balancer = new Balancer(InfoTool.getScreenWidth() / 2 - 100, 260, 208, 20, 100, 200);
-		//	balancer.setOnMouseDragged(drag -> {
-		//	    balancer.onMouseDragged(drag);
-		//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-		//	});
-		//
-		//	balancer.setOnScroll(scroll -> {
-		//	    balancer.onScroll(scroll);
-		//	    Main.xPlayersList.getXPlayerUI(1).controlVolume();
-		//	});
 		
 	}
 	

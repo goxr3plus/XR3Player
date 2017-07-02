@@ -121,13 +121,13 @@
     -fx-base:  white;
 }
 
-.segmented-button-bar .button {
+.segmented-button-bar .button , .segmented-button-bar .toggle-button{
     -fx-background-color:
         -darkest-black,
         -dark-highlight,
         linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
     -fx-background-insets: 0.0, 1.0 1.0 1.0 0.0, 2.0 1.0 1.0 1.0;
-    -fx-background-radius: 0.0;
+    -fx-background-radius: 0.0 !important;
     -fx-padding: 0.4em 1.833333em 0.4em 1.833333em;
 }
  
@@ -142,7 +142,7 @@
 }
 
 .segmented-button-bar .button:hover{
-	-fx-background-color:firebrick;
+	/*-fx-background-color:firebrick;*/
 }
 
 /*******************************************************************************
@@ -639,7 +639,7 @@
 
  /**About Button  ----------------------------------------*/
 
- .button , .menu-button {	
+ .button , .menu-button , .segmented-button-bar .toggle-button {	
  	 /*-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );*/
     /* -fx-background-color:  linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);   */
  	 -fx-background-color:
@@ -647,14 +647,13 @@
         -dark-highlight,
         linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
     -fx-background-insets: 0.0, 1.0 1.0 1.0 0.0, 2.0 1.0 1.0 1.0;
-    -fx-background-radius: 0.0; 
     -fx-text-fill: white;    
     -fx-font-size: 13.0px;    
     -fx-font-weight:bold;
     -fx-background-radius:45.0;
  }
  
- .button:hover{
+ .button:hover , .segmented-button-bar .button:hover , .segmented-button-bar .toggle-button:hover{
  	-fx-background-color:firebrick;
     /*-fx-background-color: 
         linear-gradient(from 0.0% 93.0% to 0.0% 100.0%, #a34313 0.0%, #903b12 100.0%),
@@ -663,11 +662,20 @@
         radial-gradient(center 50.0% 50.0%, radius 100.0%, #ea7f4b, #c54e2c);*/
  }
  
- .button:pressed , .menu-button:pressed{
+ .button:pressed , .menu-button:pressed , .segmented-button-bar .button:pressed{
     -fx-background-color:
         -darkest-black,
         rgb(55.0, 57.0, 58.0),
         linear-gradient(to top, -light-black 2.0%, -dark-black 98.0%);
+}
+
+.toggle-button {
+	-fx-cursor:hand;
+}
+
+.segmented-button-bar .toggle-button:selected{
+	-fx-background-color:#E47434;
+	-fx-text-fill:#202020;
 }
  
  
@@ -844,7 +852,7 @@
   /* The main scrollbar CSS class of ListView */
  .scroll-bar:horizontal ,
   .scroll-bar:vertical{
-    -fx-background-color:rgb(255.0,255.0,255.0,0.85);
+    -fx-background-color:rgb(255.0,255.0,255.0,0.8);
     -fx-cursor: hand ;
 	
 }
@@ -860,8 +868,9 @@
 /* The main scrollbar **track** CSS class  */
  .scroll-bar:horizontal .track,
  .scroll-bar:vertical .track{
-	-fx-background-color: transparent;
-	-fx-border-color:derive(gray,80.0%);
+	-fx-background-color: #202020;
+	-fx-border-color:black;
+	-fx-opacity:0.9;
 	-fx-background-radius: 2.0em;
 	-fx-border-radius:2.0em;
 }
@@ -871,7 +880,7 @@
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
  .scroll-bar:horizontal .thumb,
  .scroll-bar:vertical .thumb {
-    -fx-background-color:derive(black,90.0%);
+    -fx-background-color:white;
 	/*-fx-background-insets: 2.0, 0.0, 0.0;*/
 	-fx-background-radius: 2.0em;
 	
@@ -888,8 +897,8 @@
  .scroll-bar:horizontal:pressed .track ,
  .scroll-bar:vertical:hover .track,
  .scroll-bar:vertical:pressed .track{
-     -fx-background-color: derive(#434343,70.0%);
-	 -fx-opacity: 0.5;
+     -fx-background-color: #101010;
+	 -fx-opacity: 0.9;
 	/*  -fx-background-radius: 0.0em; */
     
 }
@@ -897,13 +906,13 @@
 /* The main scrollbar **thumb** CSS class on event of "hover" and "pressed" */
  .scroll-bar .thumb:hover,
  .scroll-bar .thumb:pressed{
-    -fx-background-color: derive(black,50.0%);
+    -fx-background-color: white;
 }
 
 
  .increment-button:hover , .decrement-button:hover {
-    -fx-background-color:derive(gray,100.0%);
-	-fx-border-color:derive(gray,80.0%);	
+    -fx-background-color:derive(#202020,100.0%);
+	-fx-border-color:derive(#202020,80.0%);	
 	/*-fx-padding:10.0px;*/
 }
  
@@ -1079,17 +1088,22 @@
 
 ******************************************************************************/ 
 
- .amazon{
- 	-fx-background-color:orange;
- 	-fx-background-radius:10.0;
+ .media-information{
+ 	-fx-background-color:#202020;
  }
 
-
- .amazon .label{	
- 	-fx-border-color: transparent black transparent transparent;
+ .media-information .label{	
  	-fx-font-weight:bold;
- 	-fx-text-fill:black;
+ 	-fx-text-fill:white;
  }
+
+ .media-information .mediaInfoLabel{	
+ 	-fx-border-color: transparent firebrick transparent transparent;
+ 	-fx-font-weight:bold;
+ 	-fx-text-fill:white;
+ }
+ 
+ 
   
    
  /*******************************************************************************
@@ -1297,16 +1311,39 @@
 }
 
 .drag-adjustable-label{
-  -fx-background-color:white;
+  -fx-background-color:#202020;
   -fx-background-radius:15.0;
   -fx-font-size:18.0;
   -fx-font-family:"Younger than me";
-  -fx-text-fill:black;
+  -fx-text-fill:white;
   -fx-font-weight:bold;  
 }
 
 #LoginScreenTopLabel{
   -fx-font-family:"Younger than me";
+}
+
+#time-field-normal{
+	-fx-background-color:#202020;
+	 -fx-padding:-2.0 8.0 -2.0 8.0;
+	  -fx-background-radius: 15.0; 
+	  -fx-font-weight:bold; 
+	  -fx-font-size:15.0; 
+	  -fx-text-fill:white;
+	   -fx-cursor:hand;
+}
+
+#time-field-reversed{
+	-fx-background-color:#202020; 
+	-fx-padding:-2.0 8.0 -2.0 8.0;
+	 -fx-background-radius: 15.0; 
+	 -fx-border-radius:15.0;
+	  -fx-border-color:firebrick; 
+	-fx-border-width:2.0; 
+	-fx-font-weight:bold;
+	 -fx-font-size:15.0;
+	  -fx-text-fill:white;
+	   -fx-cursor:hand;	
 }
 
 /*******************************************************************************

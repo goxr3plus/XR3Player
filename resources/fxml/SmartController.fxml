@@ -115,67 +115,7 @@
                                           </Button>
                                        </children>
                                     </HBox>
-                                    <MenuButton fx:id="actionsMenuButton" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="29.0" text="Tools">
-                                       <items>
-                                          <Menu mnemonicParsing="false" text="Folder">
-                                            <items>
-                                                <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/import24.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </MenuItem>
-                                            </items>
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/folder.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Menu>
-                                          <Menu mnemonicParsing="false" text="File">
-                                            <items>
-                                              <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import File">
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/import24.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </MenuItem>
-                                                <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/export24.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </MenuItem>
-                                            </items>
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/file.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Menu>
-                                          <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/Duster-24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                       </items>
+                                    <MenuButton fx:id="toolsMenuButton" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="29.0" text="Tools">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -183,6 +123,70 @@
                                              </image>
                                           </ImageView>
                                        </graphic>
+                                       <contextMenu>
+                                          <ContextMenu fx:id="toolsContextMenu">
+                                             <items>
+                                                <Menu mnemonicParsing="false" text="Folder">
+                                                  <items>
+                                                      <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
+                                                         <graphic>
+                                                            <ImageView pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../image/import24.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </MenuItem>
+                                                  </items>
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/folder.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Menu>
+                                                <Menu mnemonicParsing="false" text="File">
+                                                  <items>
+                                                    <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import File">
+                                                         <graphic>
+                                                            <ImageView pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../image/import24.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </MenuItem>
+                                                      <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
+                                                         <graphic>
+                                                            <ImageView pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../image/export24.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </MenuItem>
+                                                  </items>
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/file.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Menu>
+                                                <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/Duster-24.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </MenuItem>
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
                                     </MenuButton>
                                  </children>
                                  <padding>

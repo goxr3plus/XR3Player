@@ -27,12 +27,9 @@ public class PlayedMediaList {
 	private static final String dataBaseTableName = "PlayedMediaList";
 	
 	//------------Prepared Statements---------------
-	private PreparedStatement insert;
-	private PreparedStatement rename;
 	
 	/**
-	 * Prepares the DataBase table (if not exists) , i do this to keep backward
-	 * compatibility with previous XR3Player Versions ( Update 57<) Also it
+	 * Prepares the DataBase table (if not exists) , i do this to keep backward compatibility with previous XR3Player Versions ( Update 57<) Also it
 	 * creates the PreparedStatement to insert Files Paths into the Table
 	 */
 	private void prepareMediaListTable() {
@@ -40,16 +37,9 @@ public class PlayedMediaList {
 		try {
 			//Check if it does already exists
 			if (!Main.dbManager.doesTableExist(dataBaseTableName))
-				
 				Main.dbManager.getConnection().createStatement().executeUpdate(
 						"CREATE TABLE '" + dataBaseTableName + "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
 			
-			//Create the PreparedStatements
-			String string = "UPDATE '" + dataBaseTableName + "'";
-			
-			insert = Main.dbManager.getConnection().prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)");
-			
-			rename = Main.dbManager.getConnection().prepareStatement(string + " SET PATH=? WHERE PATH=?");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -57,8 +47,7 @@ public class PlayedMediaList {
 	}
 	
 	/**
-	 * Uploads the data from the database table to the list , i call this method
-	 * when i login into a user to upload the Media that he/she has
+	 * Uploads the data from the database table to the list , i call this method when i login into a user to upload the Media that he/she has
 	 * previously heard
 	 */
 	public void uploadFromDataBase() {
@@ -83,33 +72,65 @@ public class PlayedMediaList {
 	 * Add a new item.
 	 *
 	 * @param item
-	 *        the item
+	 *            the item
 	 * @return True if succeeded or False if not
 	 */
 	public boolean add(String item) {
 		
-		try {
-			insert.setString(1, item);
-			insert.setInt(2, 0);
-			insert.setString(3, InfoTool.getCurrentDate());
-			insert.setString(4, InfoTool.getLocalTime());
-			insert.executeUpdate();
-			
-			//Commit
-			Main.dbManager.commit();
-			
-			return set.add(item);
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			return false;
-		}
+		if (set.add(item))
+			//Try to insert into the database
+			try (PreparedStatement insert = Main.dbManager.getConnection()
+					.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)");) {
+				insert.setString(1, item);
+				insert.setInt(2, 0);
+				insert.setString(3, InfoTool.getCurrentDate());
+				insert.setString(4, InfoTool.getLocalTime());
+				insert.executeUpdate();
+				
+				//Commit
+				Main.dbManager.commit();
+				
+				return true;
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				return false;
+			}
+		
+		return false;
+	}
+	
+	/**
+	 * Add a new item.
+	 *
+	 * @param item
+	 *            the item
+	 * @return True if succeeded or False if not
+	 */
+	public boolean remove(String item) {
+		
+		if (set.remove(item))
+			//Try to delete from the database
+			try (PreparedStatement remove = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
+				remove.setString(1, item);
+				remove.executeUpdate();
+				
+				//Commit
+				Main.dbManager.commit();
+				
+				return true;
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				return false;
+			}
+		
+		return false;
 	}
 	
 	/**
 	 * Check if a media has been already played.
 	 *
 	 * @param filePath
-	 *        The absolute file path
+	 *            The absolute file path
 	 * @return true, if successful
 	 */
 	public boolean containsFile(String filePath) {
@@ -117,19 +138,12 @@ public class PlayedMediaList {
 	}
 	
 	/**
-	 * Prints all the Songs that had been played.
-	 */
-	public void printPlayedSongs() {
-		set.stream().forEach(System.out::println);
-	}
-	
-	/**
 	 * Renames the media with this name if exists [ in list ].
 	 *
 	 * @param oldName
-	 *        the old name
+	 *            the old name
 	 * @param newName
-	 *        the new name
+	 *            the new name
 	 * @return true, if successful
 	 */
 	public boolean renameMedia(String oldName , String newName) {
@@ -137,7 +151,7 @@ public class PlayedMediaList {
 			return true;
 		
 		//Update in the database
-		try {
+		try (PreparedStatement rename = Main.dbManager.getConnection().prepareStatement("UPDATE '" + dataBaseTableName + "' SET PATH=? WHERE PATH=?")) {
 			rename.setString(1, newName);
 			rename.setString(2, oldName);
 			rename.executeUpdate();

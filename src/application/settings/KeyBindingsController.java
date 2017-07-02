@@ -178,7 +178,7 @@ public class KeyBindingsController extends BorderPane {
 		
 		//REPLAY
 		else if (keyCode == NativeKeyEvent.VC_R && isShiftModifierPressed(e))
-			xPlayer.replaySong();
+			xPlayer.replay();
 		
 		//SEEK BACKWARD
 		else if (keyCode == NativeKeyEvent.VC_LEFT && isShiftModifierPressed(e))

@@ -185,7 +185,7 @@ public class ConsoleWindowController extends StackPane {
 					player.pause();
 					success = true;
 				} else if ("replay".equals(action)) { //replay
-					player.replaySong();
+					player.replay();
 					success = true;
 				} else if ("mute".equals(action)) { //replay
 					player.mute();

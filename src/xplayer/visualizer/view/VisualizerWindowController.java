@@ -193,7 +193,7 @@ public class VisualizerWindowController extends StackPane {
 		
 		// ----------Drag && Drop Listeners
 		scene.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-		scene.setOnDragDropped(drop -> xPlayerController.dragDrop(drop, 2));
+		scene.setOnDragDropped(xPlayerController.audioDropEvent);
 		window.setScene(scene);
 		
 		// -------------Top Bar Elements---------------
@@ -273,11 +273,11 @@ public class VisualizerWindowController extends StackPane {
 		
 		//Check the response
 		JavaFXTools.selectAndSaveImage("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
-				.ifPresent(image -> {
+				.ifPresent(imageFile -> {
 					if (type == Type.BACKGROUND)
-						xPlayerController.getVisualizer().backgroundImage = image;
+						xPlayerController.getVisualizer().backgroundImage = new Image(imageFile.toURI() + "");
 					else if (type == Type.FOREGROUND)
-						xPlayerController.getVisualizer().foregroundImage = image;
+						xPlayerController.getVisualizer().foregroundImage = new Image(imageFile.toURI() + "");
 					
 					//Manage Settings
 					Main.dbManager.getPropertiesDb().deleteProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");

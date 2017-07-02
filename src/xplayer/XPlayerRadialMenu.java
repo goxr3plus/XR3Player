@@ -33,8 +33,8 @@ public class XPlayerRadialMenu {
 	RadialMenuItem stop = RadialMenuItemBuilder.create().symbol(SymbolType.STOP).tooltip("Stop").size(40).build();
 	RadialMenuItem play = RadialMenuItemBuilder.create().symbol(SymbolType.PLAY).tooltip("Play").size(40).build();
 	RadialMenuItem pause = RadialMenuItemBuilder.create().symbol(SymbolType.PAUSE).tooltip("Pause").size(40).build();
-	RadialMenuItem mute = RadialMenuItemBuilder.create().selectable(true).selected(false)
-			.thumbnailImageName(getClass().getResource(InfoTool.IMAGES + "mute.png").toExternalForm()).tooltip("Mute").size(40).build();
+	RadialMenuItem mute = RadialMenuItemBuilder.create().selectable(true).selected(false).thumbnailImageName(getClass().getResource(InfoTool.IMAGES + "mute.png").toExternalForm())
+			.tooltip("Mute").size(40).build();
 	
 	//
 	RadialMenuItem refresh = RadialMenuItemBuilder.create().symbol(SymbolType.REFRESH).tooltip("Refresh").size(40).build();
@@ -44,7 +44,7 @@ public class XPlayerRadialMenu {
 	RadialMenuItem next = RadialMenuItemBuilder.create().symbol(SymbolType.FORWARD).tooltip("Next").size(40).build();
 	RadialMenuItem previous = RadialMenuItemBuilder.create().symbol(SymbolType.REWIND).tooltip("Previous").size(40).build();
 	
-	XPlayerController xPlayerController;
+	private final XPlayerController xPlayerController;
 	
 	/**
 	 * Constructor
@@ -89,7 +89,7 @@ public class XPlayerRadialMenu {
 			else if (clickEvent.item == pause)
 				xPlayerController.pause();
 			if (clickEvent.item == refresh)
-				xPlayerController.replaySong();
+				xPlayerController.replay();
 			else if (clickEvent.item == search)
 				xPlayerController.openAudioInExplorer();
 		});
@@ -98,14 +98,14 @@ public class XPlayerRadialMenu {
 		//	radialMenu.setOnMenuOpenFinished(menuEvent -> System.out.println("Menu finished to open"));
 		//	radialMenu.setOnMenuCloseStarted(menuEvent -> System.out.println("Menu starts to close"));
 		//	radialMenu.setOnMenuCloseFinished(menuEvent -> System.out.println("Menu finished to close"));
-		radialMenu.setOnItemSelected(selectionEvent -> {
-			if (selectionEvent.item == mute)
-				xPlayerController.getxPlayer().setMute(true);
-		});
-		radialMenu.setOnItemDeselected(selectionEvent -> {
-			if (selectionEvent.item == mute)
-				xPlayerController.getxPlayer().setMute(false);
-		});
+		//		radialMenu.setOnItemSelected(selectionEvent -> {
+		//			if (selectionEvent.item == mute)
+		//				xPlayerController.getxPlayer().setMute(true);
+		//		});
+		//		radialMenu.setOnItemDeselected(selectionEvent -> {
+		//			if (selectionEvent.item == mute)
+		//				xPlayerController.getxPlayer().setMute(false);
+		//		});
 		
 	}
 	

@@ -73,6 +73,7 @@ import javafx.util.Duration;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import smartcontroller.media.MediaContextMenu;
 import smartcontroller.media.MediaDeleteWindow;
+import smartcontroller.media.Information.MediaInformation;
 import smartcontroller.services.MediaFilterService;
 import xplayer.PlayedMediaList;
 import xplayer.XPlayersList;
@@ -97,8 +98,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 74);
-		internalInformation.put("ReleasedDate", "22/06/2017");
+		internalInformation.put("Version", 75);
+		internalInformation.put("ReleasedDate", "30/06/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -169,6 +170,7 @@ public class Main extends Application {
 	/** The Constant advancedSearch. */
 	public static final AdvancedSearch advancedSearch = new AdvancedSearch();
 	
+	public static final MediaInformation mediaInformation = new MediaInformation();
 	//
 	
 	/** The Constant songsContextMenu. */
@@ -258,8 +260,8 @@ public class Main extends Application {
 		double height = InfoTool.getVisualScreenHeight();
 		//width = 1380;
 		//height = 800;
-		window.setWidth(width * 0.77);
-		window.setHeight(height * 0.91);
+		window.setWidth(width * 0.95);
+		window.setHeight(height * 0.95);
 		window.centerOnScreen();
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
@@ -705,6 +707,7 @@ public class Main extends Application {
 					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
 			
 			//--General-Settings-LibraryMode
+			multipleTabs.updateSplitPaneDivider();
 			libraryMode.updateTopSplitPaneDivider();
 			libraryMode.updateBottomSplitPaneDivider();
 			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))
@@ -798,8 +801,8 @@ public class Main extends Application {
 	public static void changeBackgroundImage() {
 		
 		//Check the response
-		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window).ifPresent(image -> {
-			BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window).ifPresent(imageFile -> {
+			BackgroundImage bgImg = new BackgroundImage(new Image(imageFile.toURI() + ""), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 					new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
 			loginMode.setBackground(new Background(bgImg));
 			root.setBackground(new Background(bgImg));

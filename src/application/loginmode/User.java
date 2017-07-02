@@ -339,7 +339,7 @@ public class User extends StackPane {
 		
 		//Check the response
 		JavaFXTools.selectAndSaveImage("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName(), Main.specialChooser, Main.window)
-				.ifPresent(image -> imageView.setImage(image));
+				.ifPresent(imageFile -> imageView.setImage(new Image(imageFile.toURI() + "")));
 	}
 	
 	/**

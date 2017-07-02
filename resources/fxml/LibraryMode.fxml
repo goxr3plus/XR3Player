@@ -23,11 +23,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="595.0" prefWidth="868.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="465.0" prefWidth="662.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
-            <BorderPane fx:id="borderPane">
+            <BorderPane fx:id="borderPane" minHeight="0.0">
                <center>
                   <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
                      <children>
@@ -73,21 +73,21 @@
                               </GridPane>
                               <BorderPane>
                                  <left>
-                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="406.0" BorderPane.alignment="CENTER">
                                        <items>
                                           <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                              <children>
-                                                <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-font-size: 12;" styleClass="first" text="Delete">
+                                                <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" style="-fx-font-size: 12;" styleClass="first" text="Delete">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Button fx:id="renameLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="112.0" style="-fx-font-size: 12;" text="Rename">
+                                                <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" style="-fx-font-size: 12;" text="Rename">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Button fx:id="openOrCloseLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" style="-fx-font-size: 12;" text="Open">
+                                                <Button fx:id="openOrCloseLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-font-size: 12;" text="Open">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>

@@ -30,8 +30,7 @@ public class JavaFXTools {
 	}
 	
 	/**
-	 * Returns the Index of the Selected Toggle inside the ToggleGroup (counting
-	 * from 0)
+	 * Returns the Index of the Selected Toggle inside the ToggleGroup (counting from 0)
 	 * 
 	 * @param g
 	 * @return The index of the Selected Toggle
@@ -41,8 +40,7 @@ public class JavaFXTools {
 	}
 	
 	/**
-	 * Selects the Toggle in position Index inside the toggle group (counting
-	 * from 0 )
+	 * Selects the Toggle in position Index inside the toggle group (counting from 0 )
 	 * 
 	 * @param g
 	 * @param index
@@ -52,11 +50,9 @@ public class JavaFXTools {
 	}
 	
 	/**
-	 * Searches for any Image that contains the given title -> example
-	 * ["background"] inside the given folder
+	 * Searches for any Image that contains the given title -> example ["background"] inside the given folder
 	 * 
-	 * @return The absolute path of the image file or null if not
-	 *         exists
+	 * @return The absolute path of the image file or null if not exists
 	 */
 	public static String getAbsoluteImagePath(String title , String folderToSearch) {
 		String absolutePath = null;
@@ -80,12 +76,11 @@ public class JavaFXTools {
 	}
 	
 	/**
-	 * Check if any image with that title exists -> for example ["background"]
-	 * inside the Folder given , i don't have the extension
+	 * Check if any image with that title exists -> for example ["background"] inside the Folder given , i don't have the extension
 	 * 
 	 * @param title
 	 * @param folderToSearch
-	 *        Absolute path of the Folder to Search
+	 *            Absolute path of the Folder to Search
 	 * @return
 	 */
 	public static Image findAnyImageWithTitle(String title , String folderToSearch) {
@@ -95,12 +90,11 @@ public class JavaFXTools {
 	}
 	
 	/**
-	 * Deletes any image which has that title , for example ["background"]
-	 * searching on the given Folder
+	 * Deletes any image which has that title , for example ["background"] searching on the given Folder
 	 * 
 	 * @param title
 	 * @param folderToSearch
-	 *        Absolute path of the Folder to Search
+	 *            Absolute path of the Folder to Search
 	 */
 	public static void deleteAnyImageWithTitle(String title , String folderToSearch) {
 		
@@ -128,18 +122,17 @@ public class JavaFXTools {
 	}
 	
 	/**
-	 * Open's a select Window and if the user selects an image it saves it with
-	 * the given title and to the given folder , the extension is automatically
-	 * found from the original one Image
+	 * Open's a select Window and if the user selects an image it saves it with the given title and to the given folder , the extension is
+	 * automatically found from the original one Image
 	 * 
 	 * @param imageNameToDelete
-	 *        The images containing this name will be deleted
+	 *            The images containing this name will be deleted
 	 * @param folderForSaving
-	 *        This folder must already exist!
+	 *            This folder must already exist!
 	 * 
-	 * @return The image which of course can be null if it doesn't exists
+	 * @return The image file which of course can be null if the user doesn't selected anything
 	 */
-	public static Optional<Image> selectAndSaveImage(String title , String folderForSaving , FileAndFolderChooser specialChooser , Stage window) {
+	public static Optional<File> selectAndSaveImage(String title , String folderForSaving , FileAndFolderChooser specialChooser , Stage window) {
 		
 		File imageFile = specialChooser.prepareToSelectImage(window);
 		if (imageFile == null)
@@ -149,8 +142,8 @@ public class JavaFXTools {
 		Image image = new Image(imageFile.toURI() + "");
 		
 		//Check width and height
-		if (image.getWidth() > 4800 || image.getHeight() > 4800 || image.getWidth() < 400 || image.getHeight() < 400) {
-			ActionTool.showNotification("Warning", "Maximum Size Allowed 4800*4800 \nMinimum Size Allowed 400*400 \n\tCurrent is:" + image.getWidth() + "x" + image.getHeight(),
+		if (image.getWidth() > 8000 || image.getHeight() > 8000 || image.getWidth() < 200 || image.getHeight() < 200) {
+			ActionTool.showNotification("Warning", "Maximum Size Allowed 8000*8000 \nMinimum Size Allowed 200*200 \n\tCurrent is:" + image.getWidth() + "x" + image.getHeight(),
 					Duration.millis(2000), NotificationType.WARNING);
 			return Optional.ofNullable(null);
 		}
@@ -162,11 +155,10 @@ public class JavaFXTools {
 			deleteAnyImageWithTitle(title, folderForSaving);
 			
 			if (!ActionTool.copy(imageFile.getAbsolutePath(), folderForSaving + File.separator + title + "." + InfoTool.getFileExtension(imageFile.getAbsolutePath())))
-				Platform.runLater(() -> ActionTool.showNotification("Failed saving background image", "Failed to change the background image...", Duration.millis(2500),
-						NotificationType.SIMPLE));
+				Platform.runLater(() -> ActionTool.showNotification("Failed saving image", "Failed to change the image...", Duration.millis(2500), NotificationType.SIMPLE));
 			
 		}).start();
 		
-		return Optional.ofNullable(image);
+		return Optional.ofNullable(imageFile);
 	}
 }

@@ -103,7 +103,7 @@ public class InputService extends Service<Void> {
 		smartController.unbind();
 		smartController.getCancelButton().setDisable(true);
 		smartController.depositWorking = false;
-		smartController.getLoadService().startService(true, true);
+		smartController.getLoadService().startService(true, true,false);
 	}
 	
 	/*

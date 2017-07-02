@@ -54,7 +54,7 @@ public final class ActionTool {
 	private static Random random = new Random();
 	
 	/** The warning image. */
-	private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png");
+	//private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png");
 	
 	/** The question image. */
 	private static ImageView questionImage = InfoTool.getImageViewFromResourcesFolder("question.png");

@@ -5,12 +5,12 @@ package xplayer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -25,6 +25,7 @@ import application.windows.XPlayerWindow;
 import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -36,20 +37,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import smartcontroller.Genre;
+import smartcontroller.media.Audio;
 import xplayer.model.XPlayer;
 import xplayer.model.XPlayerModel;
 import xplayer.services.XPlayerPlayService;
@@ -69,6 +75,8 @@ import xplayer.visualizer.view.XPlayerVisualizer;
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
 	
+	//-----------------------------------------------
+	
 	@FXML
 	private StackPane xPlayerStackPane;
 	
@@ -76,10 +84,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private BorderPane borderPane;
 	
 	@FXML
-	private GridPane container;
-	
-	@FXML
-	private GridPane topGridPane;
+	private GridPane basicGridPane;
 	
 	@FXML
 	private StackPane visualizerStackPane;
@@ -112,16 +117,55 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private Button maximizeVisualizer;
 	
 	@FXML
-	private VBox topRightVBox;
-	
-	@FXML
 	private HBox mediaNameHBox;
 	
 	@FXML
 	private Button mediaTagImageButton;
 	
 	@FXML
-	private JFXButton openPlayerHistory;
+	private Label elapsedTimeLabel;
+	
+	@FXML
+	private Label remainingTimeLabel;
+	
+	@FXML
+	private Label totalTimeLabel;
+	
+	@FXML
+	private StackPane diskStackPane;
+	
+	@FXML
+	private Button previousSongButton;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private ToggleButton muteButton;
+	
+	@FXML
+	private Button playButton;
+	
+	@FXML
+	private Button pauseButton;
+	
+	@FXML
+	private Button stopButton;
+	
+	@FXML
+	private Button replayButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private Button nextSongButton;
+	
+	@FXML
+	private Tab equalizerTab;
+	
+	@FXML
+	private Label topInfoLabel;
 	
 	@FXML
 	private Button openFileButton;
@@ -131,21 +175,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private Button extendPlayer;
-	
-	@FXML
-	private Button backwardButton;
-	
-	@FXML
-	private Button forwardButton;
-	
-	@FXML
-	private GridPane bottomGridPane;
-	
-	@FXML
-	private StackPane diskStackPane;
-	
-	@FXML
-	private Label topInfoLabel;
 	
 	@FXML
 	private JFXToggleButton settingsToggle;
@@ -228,15 +257,67 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	/** The equalizer. */
 	private XPlayerEqualizer equalizer;
 	
-	/** The analyser box. */
-	// AnalyserBox analyserBox
-	
 	/** The disc. */
 	private DJDisc disc;
 	
 	private final Marquee mediaFileMarquee = new Marquee();
 	
 	private final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
+	
+	//======= Events ===========
+	
+	public final EventHandler<? super MouseEvent> audioDragEvent = event -> {
+		String absolutePath = xPlayerModel.songPathProperty().get();
+		if (absolutePath != null) {
+			
+			/* Allow copy transfer mode */
+			Dragboard db = startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
+			
+			/* Put a String into the dragBoard */
+			ClipboardContent content = new ClipboardContent();
+			content.putFiles(Arrays.asList(new File(absolutePath)));
+			db.setContent(content);
+			
+			/* Set the DragView */
+			new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW).setDragView(db);
+		}
+		event.consume();
+	};
+	
+	public final EventHandler<? super DragEvent> audioDropEvent = event -> {
+		// Keeping the absolute path
+		String absolutePath;
+		
+		// File?
+		for (File file : event.getDragboard().getFiles()) {
+			absolutePath = file.getAbsolutePath();
+			if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
+				// Ask Question?
+				if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
+					if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
+							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+						playSong(absolutePath);
+				} else
+					playSong(absolutePath);
+				break;
+			}
+		}
+		
+		// // URL?
+		// if (xPlayer.isPausedOrPlaying()) {
+		// // OK?
+		// if (ActionTool
+		// .doQuestion("A song is already playing on this deck.\n Are you
+		// sure you want to replace it?"))
+		// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
+		// } else
+		// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
+		
+		event.setDropCompleted(true);
+		
+	};
+	
+	//============================================================================================
 	
 	/**
 	 * Constructor.
@@ -293,50 +374,72 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// -----Important-------------
 		xPlayerWindow = new XPlayerWindow(this);
+		
+		//== RadialMenu
 		radialMenu = new XPlayerRadialMenu(this);
+		radialMenu.mute.selectedProperty().addListener(l -> {
+			xPlayer.setMute(radialMenu.mute.isSelected());
+			muteButton.setSelected(radialMenu.mute.isSelected());
+			
+			//System.out.println("Entered Radial Menu");
+		});
+		muteButton.selectedProperty().addListener(l -> {
+			xPlayer.setMute(radialMenu.mute.isSelected());
+			radialMenu.mute.setSelected(muteButton.isSelected());
+			
+			//System.out.println("Entered Menu Button");
+		});
+		
+		//
 		xPlayerPlayList = new XPlayerPlaylist(this);
 		visualizerWindow = new VisualizerWindowController(this);
 		playerExtraSettings = new XPlayerExtraSettings(this);
 		
-		// Styling
-		//setStyle("-fx-background-image:url('/image/deckBackground.jpg');  -fx-background-size:stretch;")
+		//== borderPane
+		borderPane.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
+		borderPane.setOnDragDropped(audioDropEvent);
 		
-		// Listeners
-		container.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-		container.setOnDragDropped(drop -> dragDrop(drop, 2));
-		
-		// settingsToggle
-		//getChildren().add(xPlayerSettingsController)
-		//xPlayerSettingsController.visibleProperty().bind(settingsToggle.selectedProperty())
-		
-		// fxRegion,fxSpinner
+		//== regionStackPane
 		regionStackPane.setVisible(false);
 		
 		// mediaFileStackPane	
-		mediaFileMarquee.setOnMouseReleased(m -> openAudioInExplorer());
+		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
+		mediaFileMarquee.setOnDragDetected(audioDragEvent);
 		mediaNameHBox.getChildren().add(0, mediaFileMarquee);
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		// openMediaFileFolder
-		// openMediaFileFolder.visibleProperty().bind(mediaFileStackPane.hoverProperty())
 		mediaTagImageButton.setOnAction(action -> openAudioInExplorer());
+		mediaTagImageButton.setOnDragDetected(audioDragEvent);
 		
 		// openFileButton
 		openFileButton.setOnAction(action -> openFileChooser());
 		
 		// topInfoLabel
-		topInfoLabel.setText("Player <<" + this.getKey() + " >>");
+		topInfoLabel.setText("Player {" + this.getKey() + "}");
 		
-		// backwardButton
+		//== backwardButton
 		backwardButton.setOnAction(a -> seek(-Integer.parseInt(backwardButton.getText())));
 		
-		// forwardButton
+		//== playButton
+		playButton.setOnAction(a -> playOrReplay());
+		
+		//== pauseButton
+		pauseButton.setOnAction(a -> pause());
+		
+		//== replayButton
+		replayButton.setOnAction(a -> replay());
+		
+		//== stopButton
+		stopButton.setOnAction(a -> stop());
+		
+		//== forwardButton
 		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
 		
 		//flipPane
 		flipPane.setFlipTime(150);
-		flipPane.getFront().getChildren().addAll(container);
+		flipPane.getFront().getChildren().addAll(basicGridPane);
 		flipPane.getBack().getChildren().addAll(playerExtraSettings);
 		
 		settingsToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
@@ -366,12 +469,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				xPlayerWindow.close();
 			else
 				xPlayerWindow.show();
-		});
-		
-		//----openPlayerHistory
-		openPlayerHistory.setOnAction(a -> {
-			playerExtraSettings.getTabPane().getSelectionModel().select(playerExtraSettings.getHistoryPlaylistTab());
-			settingsToggle.setSelected(true);
 		});
 		
 		//--transferMediaButton
@@ -404,46 +501,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		File file = Main.specialChooser.selectSongFile(Main.window);
 		if (file != null)
 			playSong(file.getAbsolutePath());
-	}
-	
-	/**
-	 * Can be called from different classes to implement the dragDrop for their XPlayer.
-	 *
-	 * @param dragDrop
-	 *            the drag drop
-	 * @param number
-	 *            the number
-	 */
-	public void dragDrop(DragEvent dragDrop , int number) {
-		// Keeping the absolute path
-		String absolutePath;
-		
-		// File?
-		for (File file : dragDrop.getDragboard().getFiles()) {
-			absolutePath = file.getAbsolutePath();
-			if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-				// Ask Question?
-				if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
-					if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
-							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
-						playSong(absolutePath);
-				} else
-					playSong(absolutePath);
-				break;
-			}
-		}
-		
-		// // URL?
-		// if (xPlayer.isPausedOrPlaying()) {
-		// // OK?
-		// if (ActionTool
-		// .doQuestion("A song is already playing on this deck.\n Are you
-		// sure you want to replace it?"))
-		// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
-		// } else
-		// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
-		
-		dragDrop.setDropCompleted(true);
 	}
 	
 	/**
@@ -682,7 +739,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		//Equalizer
 		equalizer = new XPlayerEqualizer(this);
-		bottomGridPane.add(equalizer, 1, 0);
+		equalizerTab.setContent(equalizer);
 	}
 	
 	/**
@@ -852,15 +909,31 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			} else
 				xPlayerModel.setCurrentTime((int) ( microSecondsPosition / 1000000 ));
 			
-			String millisecondsFormat = InfoTool.millisecondsToTime(microSecondsPosition / 1000);
+			String millisecondsFormatted = InfoTool.millisecondsToTime(microSecondsPosition / 1000);
 			// System.out.println(milliFormat)
 			
 			// Paint the Disc
 			if (!xPlayer.isStopped()) {
+				
 				// Update the disc Angle
 				disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
 				// Update the disc time
-				disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormat);
+				disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormatted);
+				
+				//Update the below labels - this might be costly in terms of cpu
+				Platform.runLater(() -> {
+					
+					//TotalTime and CurrentTime
+					int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentTime();
+					
+					//== RemainingTimeLabel
+					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ));
+					
+					//== ElapsedTimeLabel
+					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted + "");
+					
+				});
+				
 			}
 			
 			// if (!visualizer.isRunning())
@@ -916,6 +989,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					// oh yeah
 					
 				} else {
+					
 					// Set time to 0 to not have problems with SeekService
 					xPlayerModel.setCurrentTime(0);
 					
@@ -936,8 +1010,15 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					// Play Image
 					// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
 					
+					//== RemainingTimeLabel
+					remainingTimeLabel.setText("00:00");
+					
+					//== ElapsedTimeLabel
+					elapsedTimeLabel.setText("00:00");
+					
 					// Notification
 					ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500), NotificationType.SIMPLE);
+					
 				}
 				
 			});
@@ -961,7 +1042,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	/**
 	 * Replay the current song
 	 */
-	public void replaySong() {
+	public void replay() {
 		
 		if (xPlayerModel.songExtensionProperty().get() != null)
 			playService.startPlayService(xPlayerModel.songPathProperty().get(), 0);
@@ -1121,7 +1202,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		else if (xPlayer.isPaused()) // paused?
 			resume();
 		else if (xPlayer.isStopped() || xPlayer.isUnknown())
-			replaySong();
+			replay();
 		
 	}
 	
@@ -1132,7 +1213,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		if (xPlayer.isPaused()) // paused?
 			resume();
 		else if (xPlayer.isStopped() || xPlayer.isUnknown())
-			replaySong();
+			replay();
 	}
 	
 	/**
@@ -1231,6 +1312,21 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public Button getForwardButton() {
 		return forwardButton;
+	}
+	
+	/**
+	 * @return the totalTimeLabel
+	 */
+	public Label getTotalTimeLabel() {
+		return totalTimeLabel;
+	}
+	
+	/**
+	 * @param totalTimeLabel
+	 *            the totalTimeLabel to set
+	 */
+	public void setTotalTimeLabel(Label totalTimeLabel) {
+		this.totalTimeLabel = totalTimeLabel;
 	}
 	
 }

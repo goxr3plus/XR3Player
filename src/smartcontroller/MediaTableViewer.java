@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -148,6 +149,8 @@ public class MediaTableViewer extends TableView<Media> {
 	@FXML
 	private TableColumn<Media,?> singer;
 	
+	//-------------------------------------------------
+	
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
 	
@@ -155,6 +158,11 @@ public class MediaTableViewer extends TableView<Media> {
 	private Canvas canvas = new Canvas();
 	
 	private final SmartController smartController;
+	
+	/**
+	 * The selected row of the tableview , i need to impement this!
+	 */
+	//private TableRow<Media> selectedRow = new TableRow<>();
 	
 	/**
 	 * Constructor.
@@ -186,16 +194,24 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		//------------------------------TableViewer---------------------------
 		setItems(smartController.getItemsObservableList());
-		//Collect the correct
-		if (smartController.getGenre() == Genre.LIBRARYMEDIA)
-			setPlaceholder(new Label("Drag && Drop or Import/Paste Media..."));
-		else if (smartController.getGenre() == Genre.SEARCHWINDOW)
-			setPlaceholder(new Label("Search Media from all the playlists..."));
-		getPlaceholder().setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
+		
+		//Add the place holder for the tableView
+		Label placeHolderLabel = new Label();
+		
+		if (smartController.getGenre() == Genre.LIBRARYMEDIA) {
+			placeHolderLabel.setText("Drag && Drop or Import/Paste Media...");
+			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; -fx-cursor:hand;");
+			placeHolderLabel.setOnMouseReleased(m -> smartController.getToolsContextMenu().show(placeHolderLabel, m.getScreenX(), m.getScreenY()));
+		} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
+			placeHolderLabel.setText("Search Media from all the playlists...");
+			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
+		}
+		setPlaceholder(placeHolderLabel);
 		
 		//--Selection Model
 		getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> smartController.updateLabel()); // Main.amazon.updateInformation((Media) newValue)
+		getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> Main.mediaInformation.updateInformation(newValue));
 		
 		//--KeyListener
 		setOnKeyReleased(key -> {
@@ -250,15 +266,15 @@ public class MediaTableViewer extends TableView<Media> {
 			
 			//Needs fixing!!!
 			//KeyListener
-			row.setOnKeyReleased(k -> {
-				System.out.println("Key Released....");
-				KeyCode code = k.getCode();
-				
-				if (code == KeyCode.R)
-					row.itemProperty().get().rename(smartController, row);
-				else if (code == KeyCode.S)
-					smartController.getTableViewer().getSelectionModel().getSelectedItem().updateStars(smartController, row);
-			});
+			//			row.setOnKeyReleased(k -> {
+			//				System.out.println("Key Released....");
+			//				KeyCode code = k.getCode();
+			//				
+			//				if (code == KeyCode.R)
+			//					row.itemProperty().get().rename(smartController, row);
+			//				else if (code == KeyCode.S)
+			//					smartController.getTableViewer().getSelectionModel().getSelectedItem().updateStars(smartController, row);
+			//			});
 			
 			// it's also possible to do this with the standard API, but
 			// there are lots of
@@ -439,5 +455,4 @@ public class MediaTableViewer extends TableView<Media> {
 		if (clipboard.hasFiles() && smartController.isFree(true))
 			smartController.getInputService().start(clipboard.getFiles());
 	}
-	
 }

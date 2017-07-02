@@ -17,9 +17,8 @@ import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import smartcontroller.media.AudioType;
 import xplayer.XPlayerController;
-import xplayer.model.AudioType;
-import xplayer.streamplayer.StreamPlayerException;
 
 /**
  * This Service is used to start the Audio of XR3Player
@@ -134,11 +133,14 @@ public class XPlayerPlayService extends Service<Boolean> {
 					xPlayerController.getxPlayerModel().setDuration(InfoTool.durationInSeconds(xPlayerController.getxPlayerModel().songPathProperty().get(),
 							checkAudioType(xPlayerController.getxPlayerModel().songPathProperty().get())));
 					
+					//== TotalTimeLabel
+					Platform.runLater(() -> xPlayerController.getTotalTimeLabel().setText(InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
+					
 					// extension
 					xPlayerController.getxPlayerModel().songExtensionProperty().set(InfoTool.getFileExtension(xPlayerController.getxPlayerModel().songPathProperty().get()));
 					
 					// ----------------------- Load the Album Image
-					image = InfoTool.getMp3AlbumImage(xPlayerController.getxPlayerModel().songPathProperty().get(), -1, -1);
+					image = InfoTool.getAudioAlbumImage(xPlayerController.getxPlayerModel().songPathProperty().get(), -1, -1);
 					
 					// ---------------------- Open the Audio
 					updateMessage("Opening ...");

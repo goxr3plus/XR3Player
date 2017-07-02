@@ -146,13 +146,16 @@ public class MediaContextMenu extends ContextMenu {
 	private MenuItem lyricsCom;
 	
 	@FXML
-	private MenuItem rename;
+	private MenuItem markAsPlayed;
 	
 	@FXML
 	private MenuItem stars;
 	
 	@FXML
 	private MenuItem copyOrMove;
+	
+	@FXML
+	private MenuItem rename;
 	
 	@FXML
 	private MenuItem copy;
@@ -251,6 +254,9 @@ public class MediaContextMenu extends ContextMenu {
 			( (ImageView) stopPlayer.getItems().get(i).getGraphic() ).setImage(!playerEnergized ? null : soundWave);
 		}
 		
+		//Mark Played/Unplayed
+		this.markAsPlayed.setText("Mark as " + ( Main.playedSongs.containsFile(media1.getFilePath()) ? "Unplayed" : "Played" ) + " (CTRL+U)");
+		
 		this.node = node;
 		this.media = media1;
 		this.controller = controller1;
@@ -325,6 +331,14 @@ public class MediaContextMenu extends ContextMenu {
 			// stop deck 2
 		} else if (source == stopPlayer2) {
 			Main.xPlayersList.getXPlayer(2).stop();
+		}
+		
+		//markAsPlayed
+		else if (source == markAsPlayed) {
+			if (!Main.playedSongs.containsFile(media.getFilePath()))
+				System.out.println(Main.playedSongs.add(media.getFilePath()));
+			else
+				System.out.println(Main.playedSongs.remove(media.getFilePath()));
 		}
 		
 		// remove media

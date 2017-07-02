@@ -74,7 +74,7 @@ public class DragAdjustableLabel extends Label {
 		this.getStyleClass().add("drag-adjustable-label");
 		setCursor(Cursor.OPEN_HAND);
 		
-		textProperty().bind(this.currentValue.asString().concat(" dB"));
+		textProperty().bind(this.currentValue.asString());
 		
 		// when the mouse is pressed
 		setOnMousePressed(m -> {
