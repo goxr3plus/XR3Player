@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import application.Main;
 import application.presenter.TopBar.WindowMode;
 import application.tools.InfoTool;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
@@ -34,7 +33,7 @@ public class MultipleTabs extends BorderPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	// Variables
-	private double[] splitPaneDivider = { 0.2 , 0.8 };
+	private double[] splitPaneDivider = { 0.4 , 0.6 };
 	
 	/**
 	 * Constructor.

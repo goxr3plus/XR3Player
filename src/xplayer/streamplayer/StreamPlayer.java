@@ -608,7 +608,7 @@ public class StreamPlayer implements Callable<Void> {
 		if (isPlaying())
 			pause();
 		status = Status.STOPPED;
-		generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
+		//generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
 		logger.info("StreamPlayer stopPlayback() completed");
 	}
 	

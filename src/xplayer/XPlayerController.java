@@ -953,14 +953,25 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			visualizer.setupDSP(xPlayer.getSourceDataLine());
 			visualizer.startDSP(xPlayer.getSourceDataLine());
 			
-			Platform.runLater(() -> mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get())));
+			Platform.runLater(() -> {
+				//Marquee Text
+				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
+				
+				//Notification
+				ActionTool.showNotification("Player [ " + this.getKey() + " ] Opened", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+						NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
+			});
 			
-			// Status.RESUMED
+			// Status.RESUMED			
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.RESUMED) {
 			
 			Platform.runLater(() -> {
 				playerStatusLabel.setText("Player is Resumed ");
 				resumeCode();
+				
+				//Notification
+				//ActionTool.showNotification("Player [ " + this.getKey() + " ] Resuming", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
+				//		NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
 			});
 			
 			// Status.PLAYING
@@ -974,6 +985,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			Platform.runLater(() -> {
 				playerStatusLabel.setText("Player is Paused ");
 				pauseCode();
+				
+				//Notification
+			//	ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
+			//			NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
 			});
 			
 			// Status.STOPPED
@@ -1017,7 +1032,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					elapsedTimeLabel.setText("00:00");
 					
 					// Notification
-					ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500), NotificationType.SIMPLE);
+					//ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500), NotificationType.SIMPLE);
 					
 				}
 				

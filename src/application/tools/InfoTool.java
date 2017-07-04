@@ -42,8 +42,12 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
 import application.Main;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import smartcontroller.media.AudioType;
 
@@ -351,6 +355,24 @@ public final class InfoTool {
 			return false;
 		}
 	}
+	
+//	public Image getDragViewImage(Image image,int width,int height) {
+//		if(image!=null) {
+//			return image;
+//		}else {
+//		
+//				WritableImage image = new WritableImage(100, 100);
+//				Canvas canvas = new Canvas();
+//				canvas.setWidth(100);
+//				canvas.setHeight(100);
+//				ActionTool.paintCanvas(canvas.getGraphicsContext2D(), getFileName(), 100, 100);
+//				SnapshotParameters params = new SnapshotParameters();
+//				params.setFill(Color.TRANSPARENT);
+//				return 
+//				canvas.snapshot(params, image), 50, 0);
+//			
+//		}
+//	}
 	
 	/**
 	 * Return the imageView of mp3File in requested Width and Height.

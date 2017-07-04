@@ -31,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -75,7 +76,7 @@ public final class ActionTool {
 		
 		// Open the Default Browser
 		if (System.getProperty("os.name").toLowerCase().contains("win")) {
-			showNotification("Message", "Opening in System File Explorer...\n" + InfoTool.getFileName(path), Duration.millis(1500), NotificationType.INFORMATION);
+			showNotification("Message", "Opening in File Explorer:\n" + InfoTool.getFileName(path), Duration.millis(1500), NotificationType.INFORMATION);
 			
 			//START: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
 			
@@ -209,13 +210,13 @@ public final class ActionTool {
 	 */
 	public static boolean deleteFile(File source) {
 		
-		if (source.isDirectory()) { // Directory
+		if (source.isDirectory())  // Directory
 			try {
 				FileUtils.deleteDirectory(source);
 			} catch (IOException ex) {
 				logger.log(Level.INFO, "", ex);
 			}
-		} else if (source.isFile() && !source.delete()) { // File
+		else if (source.isFile() && !source.delete()) { // File
 			showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.", Duration.millis(2000), NotificationType.WARNING);
 			return false;
 		}
@@ -231,10 +232,15 @@ public final class ActionTool {
 	 * @return A String in format <b> DD/MM/YYYY</b>
 	 */
 	public static String getFileDateCreated(String path) {
-		String[] dateCreatedF = getFileCreationTime(path).toString().split("-");
 		
+		FileTime creationTime = getFileCreationTime(path);
+		
+		//Be carefull for null pointer exception here
+		if (creationTime == null)
+			return "error occured";
+		
+		String[] dateCreatedF = creationTime.toString().split("-");
 		return dateCreatedF[2].substring(0, 2) + "/" + dateCreatedF[1] + "/" + dateCreatedF[0];
-		
 	}
 	
 	/**
@@ -263,22 +269,18 @@ public final class ActionTool {
 	 */
 	public static boolean openFile(String absolutePath) {
 		
-		// Open the Default Browser
-		if (Desktop.isDesktopSupported()) {
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(new File(absolutePath));
-			} catch (IOException ex) {
-				Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
-						NotificationType.INFORMATION));
-				logger.log(Level.INFO, "", ex);
+		try {
+			//Check if Desktop is supported
+			if (!Desktop.isDesktopSupported()) {
+				ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500), NotificationType.INFORMATION);
 				return false;
 			}
-			// Error?
-		} else {
-			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500),
-					NotificationType.INFORMATION));
-			System.out.println("Error trying to open the default web browser.");
+			
+			ActionTool.showNotification("Opening file", "Opening in File Explorer :\n" + absolutePath, Duration.millis(1500), NotificationType.INFORMATION);
+			Desktop.getDesktop().open(new File(absolutePath));
+		} catch (IOException ex) {
+			ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500), NotificationType.INFORMATION);
+			logger.log(Level.INFO, "", ex);
 			return false;
 		}
 		return true;
@@ -292,22 +294,18 @@ public final class ActionTool {
 	 */
 	public static boolean openWebSite(String uri) {
 		
-		// Open the Default Browser
-		if (Desktop.isDesktopSupported()) {
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.browse(new URI(uri));
-			} catch (IOException | URISyntaxException ex) {
-				Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
-						NotificationType.INFORMATION));
-				logger.log(Level.INFO, "", ex);
+		try {
+			//Check if Desktop is supported
+			if (!Desktop.isDesktopSupported()) {
+				ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500), NotificationType.INFORMATION);
 				return false;
 			}
-			// Error?
-		} else {
-			Platform.runLater(() -> ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500),
-					NotificationType.INFORMATION));
-			System.out.println("Error trying to open the default web browser.");
+			
+			ActionTool.showNotification("Opening WebSite", "Opening on default Web Browser :\n" + uri, Duration.millis(1500), NotificationType.INFORMATION);
+			Desktop.getDesktop().browse(new URI(uri));
+		} catch (IOException | URISyntaxException ex) {
+			ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500), NotificationType.INFORMATION);
+			logger.log(Level.INFO, "", ex);
 			return false;
 		}
 		return true;
@@ -320,23 +318,46 @@ public final class ActionTool {
 	 *            The notification title
 	 * @param text
 	 *            The notification text
-	 * @param d
+	 * @param duration
 	 *            The duration that notification will be visible
-	 * @param t
+	 * @param notificationType
 	 *            The notification type
 	 */
-	public static void showNotification(String title , String text , Duration d , NotificationType t) {
+	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType) {
+		Platform.runLater(() -> showNotification(title, text, duration, notificationType, null));
+	}
+	
+	/**
+	 * Show a notification.
+	 *
+	 * @param title
+	 *            The notification title
+	 * @param text
+	 *            The notification text
+	 * @param duration
+	 *            The duration that notification will be visible
+	 * @param notificationType
+	 *            The notification type
+	 */
+	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , Image image) {
 		
 		//Check if it is JavaFX Application Thread
 		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> showNotification(title, text, d, t));
+			Platform.runLater(() -> showNotification(title, text, duration, notificationType));
 			return;
 		}
 		
-		Notifications notification1 = Notifications.create().title(title).text(text);
-		notification1.hideAfter(d);
+		Notifications notification1;
+		if (image == null)
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle();
+		else {
+			ImageView imageView = new ImageView(image);
+			//imageView.setFitWidth(25);
+			//imageView.setFitHeight(25);
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle();
+		}
 		
-		switch (t) {
+		switch (notificationType) {
 			case CONFIRM:
 				notification1.showConfirm();
 				break;
@@ -462,41 +483,41 @@ public final class ActionTool {
 		return questionAnswer[0];
 	}
 	
-//	/**
-//	 * Delete confirmation.
-//	 *
-//	 * @param permanent
-//	 *            the permanent
-//	 * @param text
-//	 *            the text
-//	 * @param i
-//	 *            the i
-//	 * @return true, if successful
-//	 */
-//	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
-//		boolean[] questionAnswer = { false };
-//		
-//		String unique = "\n [" + text + "]";
-//		String multiple = "[" + text + " items]";
-//		
-//		Alert alert = new Alert(AlertType.CONFIRMATION);
-//		alert.initStyle(StageStyle.UTILITY);
-//		alert.initOwner(window);
-//		alert.setGraphic(!permanent ? questionImage : warningImage);
-//		alert.setHeaderText(!permanent ? "Remove selection" + ( i > 1 ? "s " + multiple : unique ) + " from List?"
-//				: "Are you sure you want to permanently delete " + ( i > 1 ? "these " + multiple : "this item " + unique ) + " ?");
-//		alert.setContentText(!permanent ? "Are you sure you want to remove the selected " + ( i > 1 ? "items" : "item" ) + " from the List?"
-//				: "If you delete the selection " + ( i > 1 ? "s  they" : "it" ) + " will be permanenlty lost.");
-//		// LookUpButton
-//		( (Button) alert.getDialogPane().lookupButton(ButtonType.OK) ).setDefaultButton(false);
-//		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
-//		alert.showAndWait().ifPresent(answer -> {
-//			if (answer == ButtonType.OK)
-//				questionAnswer[0] = true;
-//		});
-//		
-//		return questionAnswer[0];
-//	}
+	//	/**
+	//	 * Delete confirmation.
+	//	 *
+	//	 * @param permanent
+	//	 *            the permanent
+	//	 * @param text
+	//	 *            the text
+	//	 * @param i
+	//	 *            the i
+	//	 * @return true, if successful
+	//	 */
+	//	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
+	//		boolean[] questionAnswer = { false };
+	//		
+	//		String unique = "\n [" + text + "]";
+	//		String multiple = "[" + text + " items]";
+	//		
+	//		Alert alert = new Alert(AlertType.CONFIRMATION);
+	//		alert.initStyle(StageStyle.UTILITY);
+	//		alert.initOwner(window);
+	//		alert.setGraphic(!permanent ? questionImage : warningImage);
+	//		alert.setHeaderText(!permanent ? "Remove selection" + ( i > 1 ? "s " + multiple : unique ) + " from List?"
+	//				: "Are you sure you want to permanently delete " + ( i > 1 ? "these " + multiple : "this item " + unique ) + " ?");
+	//		alert.setContentText(!permanent ? "Are you sure you want to remove the selected " + ( i > 1 ? "items" : "item" ) + " from the List?"
+	//				: "If you delete the selection " + ( i > 1 ? "s  they" : "it" ) + " will be permanenlty lost.");
+	//		// LookUpButton
+	//		( (Button) alert.getDialogPane().lookupButton(ButtonType.OK) ).setDefaultButton(false);
+	//		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
+	//		alert.showAndWait().ifPresent(answer -> {
+	//			if (answer == ButtonType.OK)
+	//				questionAnswer[0] = true;
+	//		});
+	//		
+	//		return questionAnswer[0];
+	//	}
 	
 	/**
 	 * Returns a Random Number from 0 to ...what i have choosen in method see the doc

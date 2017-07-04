@@ -187,7 +187,7 @@
                         </VBox>
                      </bottom>
                      <right>
-                        <Button fx:id="loginButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="104.0" style="-fx-font-size: 18; -fx-background-radius: 0 45 45 0; -fx-border-radius: 0 45 45 0; -fx-border-color: firebrick; -fx-border-width: 5;" text="Login-&gt;" BorderPane.alignment="CENTER">
+                        <Button fx:id="loginButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="104.0" style="-fx-font-size: 18; -fx-background-radius: 0 45 0 0; -fx-border-radius: 0 45 0 0; -fx-border-width: 5;" text="Login-&gt;" underline="true" BorderPane.alignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

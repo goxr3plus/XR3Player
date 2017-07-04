@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="465.0" prefWidth="662.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="568.0" prefWidth="780.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
@@ -83,11 +83,6 @@
                                                    </cursor>
                                                 </Button>
                                                 <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" style="-fx-font-size: 12;" text="Rename">
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </Button>
-                                                <Button fx:id="openOrCloseLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-font-size: 12;" text="Open">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -220,6 +215,13 @@
                <top>
                   <Label fx:id="librariesInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER" />
                </top>
+               <right>
+                  <Button fx:id="openOrCloseLibrary" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="104.0" style="-fx-font-size: 18; -fx-background-radius: 0 45 0 0; -fx-border-radius: 0 45 0 0; -fx-border-width: 5;" text="Open" underline="true" BorderPane.alignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </right>
             </BorderPane>
             <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
         </items>

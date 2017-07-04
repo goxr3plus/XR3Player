@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="325.0" prefWidth="612.0" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="325.0" prefWidth="612.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane fx:id="tabPane" side="BOTTOM" tabClosingPolicy="ALL_TABS" />
-      <Region fx:id="emptyLabelRegion" style="-fx-background-color: black;" />
-      <Label fx:id="emptyLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-background-color: rgb(0,0,0,0.85); -fx-text-fill: white;" text="Click here to create a library..." wrapText="true">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;">
+         <children>
+            <TabPane id="magicTabPane" fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+               <tabs>
+                  <Tab text="Example1">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Example2">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" styleClass="arrowButton" text="+" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="-1.0">
+               <tooltip>
+                  <Tooltip text="New Tab" />
+               </tooltip>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets top="3.0" />
+         </padding>
+      </AnchorPane>
+      <Region fx:id="emptyLabelRegion" style="-fx-background-color: black;" visible="false" />
+      <Label fx:id="emptyLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-background-color: rgb(0,0,0,0.85); -fx-text-fill: white;" text="Click here to create a library..." visible="false" wrapText="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

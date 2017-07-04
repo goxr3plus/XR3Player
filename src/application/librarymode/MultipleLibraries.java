@@ -14,7 +14,6 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -56,12 +55,6 @@ public class MultipleLibraries extends StackPane {
 	
 	// -----------------------------------------------------------------------
 	
-	/** Custom pen cursor */
-	//ImageCursor stylus = new ImageCursor(InfoTool.getImageFromDocuments("highlighter.png"), 0, 32)
-	
-	/** The hand. */
-	Cursor hand = Cursor.HAND;
-	
 	private static final Image noItemsImage = InfoTool.getImageFromResourcesFolder("noMusic.png");
 	
 	/**
@@ -86,7 +79,8 @@ public class MultipleLibraries extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		tabPane.setId("MultipleLibrariesTabPane");
+		tabPane.getTabs().clear();
+		//tabPane.setId("MultipleLibrariesTabPane");
 		
 		// emptyLabel
 		emptyLabel.setOnMouseReleased(m -> {
@@ -96,8 +90,11 @@ public class MultipleLibraries extends StackPane {
 				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).libraryOpenClose(true, false);
 		});
 		
-		// emptyLabelRegion
+		//== emptyLabelRegion
 		emptyLabelRegion.visibleProperty().bind(emptyLabel.visibleProperty());
+		
+		//== emptyLabel
+		emptyLabel.setVisible(true);
 		
 		// TabPane
 		//tabPane.setId("LibrariesTabPane");
@@ -289,10 +286,10 @@ public class MultipleLibraries extends StackPane {
 		//library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty());
 		
 		tab.setOnCloseRequest(c -> {
-			if (library.getSmartController().isFree(true))
-				library.libraryOpenClose(false, false);
-			else
+			if (!library.getSmartController().isFree(true))
 				c.consume();
+			else
+				library.libraryOpenClose(false, false);
 		});
 		
 		tab.setGraphic(hBox);

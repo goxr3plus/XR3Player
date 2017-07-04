@@ -342,12 +342,15 @@ public class LibraryMode extends BorderPane {
 		// -- openOrCloseLibrary 
 		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null) {
-				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));	
+				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));
 			} else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");
 			}
 		});
+		
+		// -- openOrCloseLibrary
+		openOrCloseLibrary.disableProperty().bind(libraryToolBar.disabledProperty());
 		openOrCloseLibrary
 				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 		
