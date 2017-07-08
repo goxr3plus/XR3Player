@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import com.jfoenix.controls.JFXButton;
+
 import application.Main;
 import application.presenter.custom.Marquee;
 import application.tools.InfoTool;
@@ -36,6 +38,9 @@ import smartcontroller.SmartController;
  * @author GOXR3PLUS STUDIO
  */
 public class MultipleLibraries extends StackPane {
+	
+	@FXML
+	private JFXButton addTab;
 	
 	/** The tab pane. */
 	@FXML
@@ -85,7 +90,7 @@ public class MultipleLibraries extends StackPane {
 		// emptyLabel
 		emptyLabel.setOnMouseReleased(m -> {
 			if (Main.libraryMode.teamViewer.getViewer().getItemsObservableList().isEmpty())
-				Main.libraryMode.createNewLibrary(emptyLabel);
+				Main.libraryMode.createNewLibrary(emptyLabel, false);
 			else
 				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).libraryOpenClose(true, false);
 		});
@@ -105,6 +110,10 @@ public class MultipleLibraries extends StackPane {
 		//	    else
 		//		setControlCursor();
 		//	});	
+		
+		//== addTab
+		addTab.setOnAction(a -> Main.libraryMode.createNewLibrary(addTab, true));
+		
 	}
 	
 	//    /**

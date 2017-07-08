@@ -102,13 +102,12 @@ public class WelcomeScreen extends BorderPane {
 	public Stage getWindow() {
 		return window;
 	}
-
+	
 	/**
 	 * @return the showOnStartUp
 	 */
 	public JFXCheckBox getShowOnStartUp() {
 		return showOnStartUp;
 	}
-
 	
 }

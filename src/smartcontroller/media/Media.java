@@ -144,15 +144,6 @@ public abstract class Media {
 		this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
 		this.bitRate = new SimpleIntegerProperty();
-		try {
-			File file = new File(path);
-			//exists ? + mp3 ?
-			if (file.exists() && "mp3".equals(this.fileType.get()))
-				this.bitRate.set((int) new MP3File(file).getMP3AudioHeader().getBitRateAsNumber());
-		} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException e) {
-			e.printStackTrace();
-		}
-		
 		this.stars = new SimpleDoubleProperty(stars);
 		this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
 		this.duration = new SimpleIntegerProperty();
@@ -190,6 +181,9 @@ public abstract class Media {
 		if (!doUpdate)
 			return;
 		
+		//Keep a reference of the File
+		File file = new File(filePath.get());
+		
 		//System.out.println("Doing Update ->" + this.fileName.get())
 		
 		//I need to add code for video files etc
@@ -212,6 +206,17 @@ public abstract class Media {
 		
 		//DurationEdited
 		int localDuration = this.duration.get();
+		
+		//-- BitRate etc
+		try {
+			//exists ? + mp3 ?
+			if (fileExists.get() && localDuration != 0 && file.length() != 0 && "mp3".equals(fileType.get()))
+				bitRate.set((int) new MP3File(file).getMP3AudioHeader().getBitRateAsNumber());
+			else
+				bitRate.set(-1);
+		} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException e) {
+			e.printStackTrace();
+		}
 		
 		durationEdited.set(!fileExists.get() ? "file missing" : localDuration == -1 ? "corrupted" : localDuration == 0 ? "error" : InfoTool.getTimeEditedOnHours(localDuration));
 		

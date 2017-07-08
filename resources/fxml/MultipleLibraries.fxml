@@ -16,7 +16,7 @@
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;">
          <children>
-            <TabPane id="magicTabPane" fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+            <TabPane id="magicTabPane" fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
                   <Tab text="Example1">
                      <content>
@@ -30,15 +30,12 @@
                   </Tab>
                </tabs>
             </TabPane>
-            <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" styleClass="arrowButton" text="+" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="-1.0">
+            <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" style="-fx-border-color: firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0">
                <tooltip>
                   <Tooltip text="New Tab" />
                </tooltip>
             </JFXButton>
          </children>
-         <padding>
-            <Insets top="3.0" />
-         </padding>
       </AnchorPane>
       <Region fx:id="emptyLabelRegion" style="-fx-background-color: black;" visible="false" />
       <Label fx:id="emptyLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-background-color: rgb(0,0,0,0.85); -fx-text-fill: white;" text="Click here to create a library..." visible="false" wrapText="true">

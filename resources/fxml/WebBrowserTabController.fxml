@@ -57,16 +57,31 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <TextField fx:id="searchBar" promptText="Search..." styleClass="special-text-field" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="searchBar" promptText="Search..." style="-fx-background-radius: 0 0 0 0;" styleClass="special-text-field" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="goButton" mnemonicParsing="false" style="-fx-background-radius: 0 45 45 0;" text="Go">
+                                 <tooltip>
+                                    <Tooltip text="Load the Web Site" />
+                                 </tooltip>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children>
                         </HBox>
-                        <Button fx:id="goButton" mnemonicParsing="false" text="Go">
+                        <Button fx:id="addOrRemoveBookMark" contentDisplay="GRAPHIC_ONLY" disable="true" layoutX="431.0" layoutY="10.0" mnemonicParsing="false" text="Go">
                            <tooltip>
-                              <Tooltip text="Load the Web Site" />
+                              <Tooltip text="Add/Remove from Bookmarks" />
                            </tooltip>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/smallStar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                         <Button fx:id="reloadButton" mnemonicParsing="false">
                            <graphic>

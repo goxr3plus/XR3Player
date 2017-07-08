@@ -264,8 +264,7 @@ public class ConsoleWindowController extends StackPane {
 		
 		//-----------------------------Message for the user-------------------------------------------
 		cssTextArea.appendText(message);
-		cssTextArea.setStyle(cssTextArea.getText().length() - message.length(), cssTextArea.getLength(),
-				"-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;");
+		cssTextArea.setStyle(cssTextArea.getText().length() - message.length(), cssTextArea.getLength(), "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;");
 		
 		String result = "  " + ( success ? "Succeeded" : "Error" );
 		cssTextArea.appendText(result);

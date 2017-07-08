@@ -453,7 +453,7 @@ public final class ActionTool {
 			int alertHeight = (int) alert.getHeight();
 			
 			// Here it prints 0!!
-			System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight);
+			//System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight);
 			
 			// Find the bounds of the node
 			Bounds bounds = node.localToScreen(node.getBoundsInLocal());

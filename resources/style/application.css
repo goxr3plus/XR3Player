@@ -494,8 +494,8 @@
 
 
 .tab-pane .tab{
-    -fx-background-color: linear-gradient(#38424b 0.0%, #1f2429 20.0%, #191d22 100.0%);
-    -fx-background-radius:  0.0 0.0 0.0 0.0;
+    -fx-background-color: black;
+    -fx-background-radius: 0.0 45.0 0.0 0.0 ;
     -fx-border-color:transparent transparent transparent transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;  
@@ -503,15 +503,15 @@
 }
 
 .tab-pane .tab:selected{
-    -fx-background-color: #FF4A00;
+    -fx-background-color: #FF3A4E;
 }
 
 .tab-pane .tab:selected:hover{
-    -fx-background-color: #FF4A00;
+     -fx-background-color: #FF1500; 
 }
 
 .tab-pane .tab:hover{
-	-fx-background-color:black;
+	-fx-background-color:#FF1500;
 }
 
 
@@ -526,7 +526,7 @@
 
 .tab-pane .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill:black ; /* before it was BROWN */
+    -fx-text-fill:white ; /* before it was BROWN */
     /*-fx-font-size:130.0%;*/
 }
 
@@ -653,7 +653,7 @@
     -fx-background-radius:45.0;
  }
  
- .button:hover , .segmented-button-bar .button:hover , .segmented-button-bar .toggle-button:hover{
+ .button:hover , .menu-button:hover , .segmented-button-bar .button:hover , .segmented-button-bar .toggle-button:hover{
  	-fx-background-color:firebrick;
     /*-fx-background-color: 
         linear-gradient(from 0.0% 93.0% to 0.0% 100.0%, #a34313 0.0%, #903b12 100.0%),
@@ -709,20 +709,20 @@
  
  /**About ArrowButon(in Libraries)  ----------------------------------------*/
   
+  /**About ArrowButon(in Libraries)  ----------------------------------------*/
+  
   .arrowButton{
   	-fx-background-color:rgb(255.0,255.0,255.0,0.2);
   	-fx-background-radius:45.0;
   	-fx-cursor:hand;
   }
+
   
   .arrowButton2{
-  	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
+  	-fx-background-color:#232323;
   	-fx-background-radius:45.0;
   	-fx-cursor:hand;
   }
-  
-  
- 
  
  
  
@@ -1361,7 +1361,7 @@
 }
 
 #sideBar{
-	-fx-background-color:#202020;
+	-fx-background-color:black;
 }
 
 .sideBarSectionLabel{

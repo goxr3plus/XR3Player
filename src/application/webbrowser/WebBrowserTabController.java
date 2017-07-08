@@ -39,6 +39,8 @@ import javafx.scene.web.WebHistory.Entry;
 import javafx.scene.web.WebView;
 
 /**
+ * This class represents a Tab from The WebBrowser
+ * 
  * @author GOXR3PLUS
  *
  */
@@ -63,6 +65,9 @@ public class WebBrowserTabController extends StackPane {
 	
 	@FXML
 	private Button goButton;
+	
+	@FXML
+	private Button addOrRemoveBookMark;
 	
 	@FXML
 	private Button reloadButton;
@@ -193,6 +198,9 @@ public class WebBrowserTabController extends StackPane {
 		
 		//searchBar
 		webEngine.getLoadWorker().runningProperty().addListener((observable , oldValue , newValue) -> {
+			//if (list.size() > 0)
+			//	System.out.println(getHistory().getEntries().get(getHistory().getCurrentIndex()).getUrl());
+			
 			if (!newValue) // if !running
 				searchBar.textProperty().unbind();
 			else

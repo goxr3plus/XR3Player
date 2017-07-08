@@ -26,7 +26,7 @@
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Data,Search" />
-                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="55.0" minWidth="55.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="55.0">
+                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
                               <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
                                  <graphic>
@@ -64,10 +64,10 @@
                               </ImageView>
                            </graphic>
                            <VBox.margin>
-                              <Insets left="3.0" />
+                              <Insets />
                            </VBox.margin>
                         </MenuButton>
-                        <Button fx:id="applicationSearch" mnemonicParsing="false">
+                        <Button fx:id="applicationSearch" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -87,7 +87,7 @@
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
-                        <Button fx:id="snapshot" mnemonicParsing="false">
+                        <Button fx:id="snapshot" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <tooltip>
                               <Tooltip text="Screen SnapShot" />
                            </tooltip>
@@ -105,7 +105,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="applicationConverter" layoutX="10.0" layoutY="37.0" mnemonicParsing="false">
+                        <Button fx:id="applicationConverter" layoutX="10.0" layoutY="37.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <tooltip>
                               <Tooltip text="Convert YouTube,FB,Vimeo  etc... links to MP3, MP4, AVI etc.... " />
                            </tooltip>
@@ -125,7 +125,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Console,Update" />
-                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -143,7 +143,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -161,7 +161,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" style="-fx-background-color: black; -fx-background-radius: 0;" text=" ">
+                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -184,7 +184,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Donation,About" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="53.0" mnemonicParsing="false" popupSide="RIGHT" prefWidth="53.0" style="-fx-font-size: 11;">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
                               <MenuItem fx:id="showWelcomeScreen" mnemonicParsing="false" text="Welcome Screen" />
                               <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />
@@ -209,7 +209,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </MenuButton>
-                        <Button fx:id="donateButton" mnemonicParsing="false">
+                        <Button fx:id="donateButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -223,6 +223,9 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
                   </VBox>

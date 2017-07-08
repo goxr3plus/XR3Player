@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="568.0" prefWidth="780.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="602.0" prefWidth="951.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
@@ -73,7 +73,7 @@
                               </GridPane>
                               <BorderPane>
                                  <left>
-                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="406.0" BorderPane.alignment="CENTER">
+                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="317.0" BorderPane.alignment="CENTER">
                                        <items>
                                           <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                              <children>
@@ -148,9 +148,9 @@
                                     <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="182.0" spacing="2.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <ScrollBar fx:id="horizontalScrollBar" max="0.0" />
-                                          <HBox alignment="CENTER" prefHeight="55.0" spacing="8.0">
+                                          <HBox alignment="CENTER" prefHeight="55.0" spacing="4.0">
                                              <children>
-                                                <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
+                                                <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
                                                    <graphic>
                                                       <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -158,8 +158,11 @@
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Previous" />
+                                                   </tooltip>
                                                 </JFXButton>
-                                                <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
+                                                <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                                                    <graphic>
                                                       <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                                                          <image>
@@ -174,7 +177,7 @@
                                                       <Tooltip text="Create new Library" />
                                                    </tooltip>
                                                 </JFXButton>
-                                                <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="arrowButton2" text=" ">
+                                                <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
                                                    <graphic>
                                                       <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                                          <image>
@@ -182,8 +185,11 @@
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Next" />
+                                                   </tooltip>
                                                 </JFXButton>
-                                                <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="arrowButton2" text="Settings">
+                                                <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" prefHeight="40.0" prefWidth="50.0" styleClass="arrowButton2" text="Settings">
                                                    <graphic>
                                                       <ImageView pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -213,15 +219,16 @@
                   </ScrollPane>
                </bottom>
                <top>
-                  <Label fx:id="librariesInfoLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER" />
+                  <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <Button fx:id="openOrCloseLibrary" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-font-size: 13; -fx-text-fill: yellow;" text="Open  Selected Library" textAlignment="CENTER" wrapText="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </graphic>
+                  </Label>
                </top>
-               <right>
-                  <Button fx:id="openOrCloseLibrary" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="104.0" style="-fx-font-size: 18; -fx-background-radius: 0 45 0 0; -fx-border-radius: 0 45 0 0; -fx-border-width: 5;" text="Open" underline="true" BorderPane.alignment="CENTER">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </right>
             </BorderPane>
             <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
         </items>

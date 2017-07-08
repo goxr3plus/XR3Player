@@ -31,7 +31,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" styleClass="arrowButton" text="+" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="-1.0">
+                  <JFXButton fx:id="addTab" style="-fx-border-color: firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tooltip>
                         <Tooltip text="New Tab" />
                      </tooltip>
@@ -48,7 +48,7 @@
          <top>
             <HBox alignment="CENTER" disable="true" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label styleClass="applicationSettingsLabel" text="Bookmarks are coming soon..." />
+                  <Label styleClass="applicationSettingsLabel" text="Bookmarks are coming on next versions..." />
                </children>
             </HBox>
          </top>

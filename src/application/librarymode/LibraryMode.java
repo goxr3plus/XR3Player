@@ -140,6 +140,8 @@ public class LibraryMode extends BorderPane {
 	 */
 	public static final Image warningImage = InfoTool.getImageFromResourcesFolder("warning.png");
 	
+	private boolean openLibraryAfterCreation;
+	
 	//----- Library Specific ------------------
 	
 	/** A PopUp window showing information about the selected library */
@@ -225,6 +227,12 @@ public class LibraryMode extends BorderPane {
 						//Recalculate Some Bindings
 						calculateEmptyLibraries();
 						
+						//Check if the user wants to immediately open library after it's creation
+						if (openLibraryAfterCreation) {
+							currentLib.libraryOpenClose(true, false);
+							Main.libraryMode.multipleLibs.selectTab(currentLib.getLibraryName());
+						}
+						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
 						ActionTool.showNotification("Error Creating a Library", "Library can't be created cause of:" + ex.getMessage(), Duration.seconds(2),
@@ -234,6 +242,11 @@ public class LibraryMode extends BorderPane {
 					ActionTool.showNotification("Dublicate Name", "A Library or PlayList with this name already exists!", Duration.seconds(2), NotificationType.INFORMATION);
 				}
 			}
+			
+			//Disable the openLibrary when the user creates a new Library
+			if (!Main.renameWindow.isShowing())
+				openLibraryAfterCreation = false;
+			
 		}
 	};
 	
@@ -293,10 +306,10 @@ public class LibraryMode extends BorderPane {
 		teamViewer = new TeamViewer(this);
 		
 		// createLibrary
-		createLibrary.setOnAction(a -> createNewLibrary(createLibrary));
+		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
 		
 		// newLibrary
-		newLibrary.setOnAction(a -> createNewLibrary(newLibrary));
+		newLibrary.setOnAction(a -> createNewLibrary(newLibrary, true));
 		newLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
@@ -342,7 +355,8 @@ public class LibraryMode extends BorderPane {
 		// -- openOrCloseLibrary 
 		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null) {
-				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("Close").otherwise("Open"));
+				openOrCloseLibrary.textProperty()
+						.bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("CLOSE Selected Library").otherwise("OPEN Selected Library"));
 			} else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");
@@ -388,12 +402,14 @@ public class LibraryMode extends BorderPane {
 	 * 
 	 * @param owner
 	 */
-	public void createNewLibrary(Node owner) {
+	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation) {
 		if (Main.renameWindow.isShowing())
 			return;
 		
+		this.openLibraryAfterCreation = openLibraryAfterCreation;
+		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Creating new Library");
+		Main.renameWindow.show("", owner, "Creating " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library");
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);
