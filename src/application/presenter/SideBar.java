@@ -35,6 +35,9 @@ public class SideBar extends BorderPane {
 	//-----------------------------------------------------
 	
 	@FXML
+	private Button goUserMode;
+	
+	@FXML
 	private MenuButton applicationDatabase;
 	
 	@FXML
@@ -249,6 +252,9 @@ public class SideBar extends BorderPane {
 		//showBar()
 		
 		//---------UPDATE ------------------------------
+		
+		// goUserMode
+		goUserMode.setOnAction(a -> Main.topBar.selectTab(2));
 		
 		// checkForUpdates
 		applicationUpdate.setOnAction(a -> Main.updateWindow.searchForUpdates(true));

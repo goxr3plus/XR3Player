@@ -244,6 +244,7 @@ public class TopBar extends BorderPane {
 			}
 		});
 		
+	
 		userModeTab.setOnSelectionChanged(l -> {
 			if (userModeTab.isSelected()) {
 				//System.out.println("userModeTab Selected")
@@ -321,13 +322,12 @@ public class TopBar extends BorderPane {
 	public void setXr3Label(Label xr3Label) {
 		this.xr3Label = xr3Label;
 	}
-
+	
 	/**
 	 * @return the windowMode
 	 */
 	public WindowMode getWindowMode() {
 		return windowMode;
 	}
-
 	
 }

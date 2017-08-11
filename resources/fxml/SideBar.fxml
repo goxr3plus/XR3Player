@@ -23,6 +23,25 @@
          <content>
             <VBox alignment="CENTER" minHeight="0.0" spacing="20.0">
                <children>
+                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="77.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="goUserMode" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 90;" styleClass="arrowButton2">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/UserGroupManWoman-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Go to User Mode" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Data,Search" />
@@ -76,7 +95,7 @@
                               </ImageView>
                            </graphic>
                            <tooltip>
-                              <Tooltip text="Update" />
+                              <Tooltip text="Search all the Media" />
                            </tooltip>
                            <cursor>
                               <Cursor fx:constant="HAND" />

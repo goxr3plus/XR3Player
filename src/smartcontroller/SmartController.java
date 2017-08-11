@@ -466,7 +466,7 @@ public class SmartController extends StackPane {
 		updateLabel();
 		
 		//---SplitPane
-		splitPane.getItems().remove(1);
+		//splitPane.getItems().remove(1);
 		
 		//---------------------Check the genre--------------------
 		if (genre == Genre.SEARCHWINDOW) {

@@ -93,6 +93,10 @@ public class XPlayersSettingsController extends BorderPane {
 		// AskSecurityQuestion
 		askSecurityQuestion.selectedProperty()
 				.addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-AskSecurityQuestion", String.valueOf(askSecurityQuestion.isSelected())));
+				
+		// ShowPlayerNotifications
+		showPlayerNotifications.selectedProperty().addListener(
+				l -> Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-ShowPlayerNotifications", String.valueOf(showPlayerNotifications.isSelected())));
 		
 		// SkipSlider
 		secondsToSkipSlider.valueProperty().addListener((observable , oldValue , newValue) -> {
@@ -135,6 +139,13 @@ public class XPlayersSettingsController extends BorderPane {
 	 */
 	public Slider getSkipSlider() {
 		return secondsToSkipSlider;
+	}
+	
+	/**
+	 * @return the showPlayerNotifications
+	 */
+	public JFXCheckBox getShowPlayerNotifications() {
+		return showPlayerNotifications;
 	}
 	
 }

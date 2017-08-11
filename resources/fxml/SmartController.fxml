@@ -10,6 +10,8 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -17,15 +19,16 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="411.0" prefWidth="761.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="411.0" prefWidth="666.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane fx:id="splitPane" dividerPositions="0.7237163814180929" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+      <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
          <items>
             <BorderPane fx:id="mainBorder" minHeight="1.0" style="-fx-background-color: transparent;">
                <top>
@@ -201,8 +204,33 @@
                <center>
                   <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER" />
                </center>
+               <bottom>
+                  <TabPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Songs+">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                      <Tab text="Artists+">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                        <Tab text="Albums+">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                        </Tab>
+                        <Tab text="Folders+">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </bottom>
             </BorderPane>
-            <BorderPane prefWidth="759.0" style="-fx-background-color: black;" />
          </items>
       </SplitPane>
       <Region fx:id="region" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false" />

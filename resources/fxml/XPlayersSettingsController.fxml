@@ -106,7 +106,7 @@
                               <Tooltip text="When checked it will show notifications about the player , like when it stops , starts etc." />
                            </tooltip>
                         </Label>
-                        <JFXCheckBox fx:id="showPlayerNotifications" alignment="CENTER" disable="true" layoutX="178.0" layoutY="145.0" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                        <JFXCheckBox fx:id="showPlayerNotifications" alignment="CENTER" layoutX="178.0" layoutY="145.0" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

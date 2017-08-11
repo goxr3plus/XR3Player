@@ -98,8 +98,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 76);
-		internalInformation.put("ReleasedDate", "30/06/2017");
+		internalInformation.put("Version", 77);
+		internalInformation.put("ReleasedDate", "07/08/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -755,6 +755,9 @@ public class Main extends Application {
 			
 			Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion"))
 					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
+			
+			Optional.ofNullable(settings.getProperty("XPlayers-General-ShowPlayerNotifications"))
+					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().setSelected(Boolean.parseBoolean(s)));
 			
 			Optional.ofNullable(settings.getProperty("XPlayers-General-SkipButtonSeconds"))
 					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getSkipSlider().setValue(Integer.parseInt(s)));

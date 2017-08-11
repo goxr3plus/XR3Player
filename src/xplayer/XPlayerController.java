@@ -958,8 +958,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
 				
 				//Notification
-				ActionTool.showNotification("Player [ " + this.getKey() + " ] Opened", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-						NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
+				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected())
+					ActionTool.showNotification("Player [ " + this.getKey() + " ] Opened", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+							NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
 			});
 			
 			// Status.RESUMED			
@@ -987,8 +988,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				pauseCode();
 				
 				//Notification
-			//	ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
-			//			NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
+				//	ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
+				//			NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
 			});
 			
 			// Status.STOPPED
