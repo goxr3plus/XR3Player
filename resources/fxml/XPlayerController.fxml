@@ -9,6 +9,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleButton?>
@@ -44,140 +45,6 @@
                         <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <StackPane fx:id="visualizerStackPane" style="-fx-border-color: firebrick; -fx-border-width: 2;">
-                           <children>
-                              <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(0,0,0,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
-                              <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" visible="false" />
-                              <HBox fx:id="visualizerMaximizedHBox" alignment="CENTER" maxHeight="20.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" spacing="10.0" StackPane.alignment="CENTER">
-                                 <children>
-                                    <Label fx:id="visualizerMinimize" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Minimize" HBox.hgrow="ALWAYS">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/extend.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Label>
-                                    <Label fx:id="visualizerRequestFocus" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Request Focus" HBox.hgrow="ALWAYS">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/eye2.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Label>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="3.0" right="3.0" />
-                                 </StackPane.margin>
-                              </HBox>
-                              <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" layoutX="15.0" layoutY="80.0" maxHeight="20.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" spacing="10.0" StackPane.alignment="TOP_CENTER">
-                                 <children>
-                                    <Button fx:id="visualizerSettings" layoutX="153.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;">
-                                       <tooltip>
-                                          <Tooltip text="Visualizer Extra" />
-                                       </tooltip>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/Maintenance-24.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" style="-fx-background-color: white; -fx-background-radius: 15;">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/eye.png" />
-                                             </image>
-                                             <cursor>
-                                                <Cursor fx:constant="DEFAULT" />
-                                             </cursor>
-                                          </ImageView>
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ToggleButton>
-                                    <Button fx:id="maximizeVisualizer" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;">
-                                       <tooltip>
-                                          <Tooltip text="Maximize Visualizer" />
-                                       </tooltip>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/extend.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets top="5.0" />
-                                 </StackPane.margin>
-                              </HBox>
-                           </children>
-                           <GridPane.margin>
-                              <Insets bottom="2.0" right="2.0" />
-                           </GridPane.margin>
-                        </StackPane>
-                        <VBox alignment="TOP_CENTER" spacing="1.0" GridPane.columnIndex="1">
-                           <children>
-                              <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" spacing="2.0" style="-fx-background-color: #202020;">
-                                 <children>
-                                    <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
-                                       <graphic>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
-                                 </children>
-                                 <padding>
-                                    <Insets left="2.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox spacing="1.0">
-                                 <children>
-                                    <VBox maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Elapsed" VBox.vgrow="ALWAYS" />
-                                          <Label fx:id="elapsedTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
-                                          <Label fx:id="remainingTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="110.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
-                                          <Label fx:id="totalTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <StackPane fx:id="diskStackPane" GridPane.rowIndex="1" />
                         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <content>
                               <HBox alignment="CENTER_LEFT" styleClass="segmented-button-bar">
@@ -197,22 +64,7 @@
                                           <Tooltip text="Skip backward n seconds" />
                                        </tooltip>
                                     </Button>
-                                    <Button fx:id="backwardButton" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="90.0" style="-fx-font-size: 11;" styleClass="first" text="10">
-                                       <graphic>
-                                          <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/previous.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <tooltip>
-                                          <Tooltip text="Skip backward n seconds" />
-                                       </tooltip>
-                                    </Button>
-                                    <ToggleButton fx:id="muteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="36.0">
+                                    <ToggleButton fx:id="muteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="36.0" styleClass="first">
                                        <graphic>
                                           <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -221,7 +73,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <Button fx:id="playButton" layoutX="331.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
+                                    <Button fx:id="playPauseButton" layoutX="331.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -235,21 +87,6 @@
                                              </image>
                                           </ImageView>
                                        </graphic>
-                                    </Button>
-                                    <Button fx:id="pauseButton" layoutX="195.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <graphic>
-                                          <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/pause.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <tooltip>
-                                          <Tooltip text="Pause" />
-                                       </tooltip>
                                     </Button>
                                     <Button fx:id="stopButton" layoutX="220.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
                                        <cursor>
@@ -266,6 +103,21 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
+                                    <Button fx:id="backwardButton" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="76.0" style="-fx-font-size: 11;" text="60">
+                                       <graphic>
+                                          <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/previous.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Skip backward n seconds" />
+                                       </tooltip>
+                                    </Button>
                                     <Button fx:id="replayButton" layoutX="311.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -281,7 +133,7 @@
                                           <Tooltip text="Replay" />
                                        </tooltip>
                                     </Button>
-                                    <Button fx:id="forwardButton" contentDisplay="RIGHT" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" style="-fx-font-size: 11;" styleClass="last" text="10">
+                                    <Button fx:id="forwardButton" contentDisplay="RIGHT" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" style="-fx-font-size: 11;" styleClass="last" text="60">
                                        <graphic>
                                           <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -318,15 +170,162 @@
                               <Insets />
                            </GridPane.margin>
                         </ScrollPane>
-                        <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <children>
-                              <TabPane id="SpecialTabPane" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
-                                <tabs>
-                                  <Tab fx:id="equalizerTab" text="Equalizer" />
-                                </tabs>
-                              </TabPane>
-                           </children>
-                        </StackPane>
+                        <SplitPane dividerPositions="0.22438162544169613" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+                           <items>
+                              <SplitPane dividerPositions="0.3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL">
+                                 <items>
+                                    <StackPane fx:id="visualizerStackPane">
+                                       <children>
+                                          <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: rgb(0,0,0,0.6); -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Player Stopped" textAlignment="CENTER" wrapText="true" />
+                                          <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" visible="false" />
+                                          <HBox fx:id="visualizerMaximizedHBox" alignment="CENTER" maxHeight="20.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" spacing="10.0" StackPane.alignment="CENTER">
+                                             <children>
+                                                <Label fx:id="visualizerMinimize" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Minimize" HBox.hgrow="ALWAYS">
+                                                   <graphic>
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/extend.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                                <Label fx:id="visualizerRequestFocus" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Focus Visualizer" HBox.hgrow="ALWAYS">
+                                                   <graphic>
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/eye2.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </StackPane.margin>
+                                          </HBox>
+                                          <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" layoutX="15.0" layoutY="80.0" maxHeight="20.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" spacing="10.0" StackPane.alignment="TOP_CENTER">
+                                             <children>
+                                                <Button fx:id="visualizerSettings" layoutX="153.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                                   <tooltip>
+                                                      <Tooltip text="Visualizer Extra" />
+                                                   </tooltip>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <graphic>
+                                                      <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/Maintenance-24.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                                   <graphic>
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/eye.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="DEFAULT" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </ToggleButton>
+                                                <Button fx:id="maximizeVisualizer" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                                   <tooltip>
+                                                      <Tooltip text="Maximize Visualizer" />
+                                                   </tooltip>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <graphic>
+                                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/extend.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="5.0" />
+                                             </StackPane.margin>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <BorderPane fx:id="discBorderPane">
+                                       <center>
+                                          <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
+                                       </center>
+                                    </BorderPane>
+                                 </items>
+                              </SplitPane>
+                              <SplitPane dividerPositions="0.2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" orientation="VERTICAL">
+                                 <items>
+                                    <VBox alignment="TOP_CENTER" spacing="1.0">
+                                       <children>
+                                          <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" spacing="2.0" style="-fx-background-color: #202020;">
+                                             <children>
+                                                <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets left="2.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox spacing="1.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Elapsed" VBox.vgrow="ALWAYS" />
+                                                      <Label fx:id="elapsedTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
+                                                      <Label fx:id="remainingTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="110.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
+                                                      <Label fx:id="totalTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                       <children>
+                                          <TabPane id="SpecialTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+                                            <tabs>
+                                              <Tab fx:id="equalizerTab" text="Equalizer" />
+                                            </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </StackPane>
+                                 </items>
+                              </SplitPane>
+                           </items>
+                        </SplitPane>
                      </children>
                      <BorderPane.margin>
                         <Insets top="3.0" />

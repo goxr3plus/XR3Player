@@ -11,7 +11,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,9 +20,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="602.0" prefWidth="951.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="570.0" prefWidth="763.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
@@ -31,6 +29,7 @@
                <center>
                   <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
                      <children>
+                        <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="175.0" StackPane.alignment="BOTTOM_CENTER" />
                         <Button fx:id="newLibrary" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New Library +">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -50,11 +49,6 @@
                      <content>
                         <StackPane>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="161.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 45 45 0 0; -fx-border-color: firebrick; -fx-border-radius: 15 15 0 0; -fx-border-width: 2.5;" text="^Libraries ^" visible="false">
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </Label>
                               <GridPane fx:id="topGrid" pickOnBounds="false" visible="false">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
@@ -72,8 +66,8 @@
                                  </children>
                               </GridPane>
                               <BorderPane>
-                                 <left>
-                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="317.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="60.0" prefWidth="749.0" BorderPane.alignment="CENTER">
                                        <items>
                                           <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                              <children>
@@ -87,6 +81,77 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
+                                                <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="191.0" text="Open  Selected Library" textAlignment="CENTER" wrapText="true">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <HBox.margin>
+                                                      <Insets right="4.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                                                   <graphic>
+                                                      <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Previous" />
+                                                   </tooltip>
+                                                   <HBox.margin>
+                                                      <Insets right="3.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                                   <graphic>
+                                                      <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                                         <image>
+                                                            <Image url="@../image/Plus-32.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Create new Library" />
+                                                   </tooltip>
+                                                </JFXButton>
+                                                <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
+                                                   <graphic>
+                                                      <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../image/right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Next" />
+                                                   </tooltip>
+                                                   <HBox.margin>
+                                                      <Insets left="3.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" text="Settings">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/gear.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Libraries Settings" />
+                                                   </tooltip>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <HBox.margin>
+                                                      <Insets left="3.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
                                                 <Button fx:id="openLibraryContextMenu" contentDisplay="GRAPHIC_ONLY" layoutX="284.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
@@ -101,6 +166,9 @@
                                                    <tooltip>
                                                       <Tooltip text="Open Library Context Menu" />
                                                    </tooltip>
+                                                   <HBox.margin>
+                                                      <Insets left="4.0" />
+                                                   </HBox.margin>
                                                 </Button>
                                                 <Button fx:id="openLibraryInformation" contentDisplay="GRAPHIC_ONLY" layoutX="208.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
                                                    <cursor>
@@ -136,78 +204,6 @@
                                           </HBox>
                                        </items>
                                     </ToolBar>
-                                 </left>
-                                 <right>
-                                    <ToolBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="300.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
-                                       <items>
-                                          <HBox fx:id="botttomHBox" alignment="CENTER" />
-                                       </items>
-                                    </ToolBar>
-                                 </right>
-                                 <center>
-                                    <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="182.0" spacing="2.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ScrollBar fx:id="horizontalScrollBar" max="0.0" />
-                                          <HBox alignment="CENTER" prefHeight="55.0" spacing="4.0">
-                                             <children>
-                                                <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
-                                                   <graphic>
-                                                      <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/right.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Previous" />
-                                                   </tooltip>
-                                                </JFXButton>
-                                                <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                                                   <graphic>
-                                                      <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                                                         <image>
-                                                            <Image url="@../image/Plus-32.png" />
-                                                         </image>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Create new Library" />
-                                                   </tooltip>
-                                                </JFXButton>
-                                                <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
-                                                   <graphic>
-                                                      <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                                         <image>
-                                                            <Image url="@../image/right.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Next" />
-                                                   </tooltip>
-                                                </JFXButton>
-                                                <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" prefHeight="40.0" prefWidth="50.0" styleClass="arrowButton2" text="Settings">
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/gear.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Libraries Settings" />
-                                                   </tooltip>
-                                                </JFXButton>
-                                             </children>
-                                             <padding>
-                                                <Insets right="8.0" />
-                                             </padding>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
                                  </center>
                               </BorderPane>
                            </children>
@@ -219,15 +215,26 @@
                   </ScrollPane>
                </bottom>
                <top>
-                  <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER">
-                     <graphic>
-                        <Button fx:id="openOrCloseLibrary" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-font-size: 13; -fx-text-fill: yellow;" text="Open  Selected Library" textAlignment="CENTER" wrapText="true">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                     </graphic>
-                  </Label>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: rgb(255,255,255,0.4); -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+                     <content>
+                        <StackPane>
+                           <children>
+                              <BorderPane>
+                                 <right>
+                                    <ToolBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="300.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
+                                       <items>
+                                          <HBox fx:id="botttomHBox" alignment="CENTER" />
+                                       </items>
+                                    </ToolBar>
+                                 </right>
+                                 <center>
+                                    <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: rgb(0,0,0,0.85); -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" text="-" BorderPane.alignment="CENTER" />
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </StackPane>
+                     </content>
+                  </ScrollPane>
                </top>
             </BorderPane>
             <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />

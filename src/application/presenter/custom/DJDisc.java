@@ -12,6 +12,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -142,7 +143,8 @@ public class DJDisc extends StackPane {
 		replaceImage(null);
 		
 		// timeField
-		timeField.setTextAlignment(TextAlignment.CENTER);
+		timeField.setAlignment(Pos.CENTER);
+		timeField.setMaxWidth(Double.MAX_VALUE);
 		timeField.setId("time-field-normal");
 		timeField.setOnMouseClicked(c -> {
 			if (timeMode == TimeMode.NORMAL) {
@@ -153,6 +155,7 @@ public class DJDisc extends StackPane {
 				timeField.setId("time-field-normal");
 			}
 		});
+		//timeField.setStyle("-fx-background-color:white;");
 		
 		// volumeLabel
 		volumeLabel = new DragAdjustableLabel(volume, 0, maximumVolume);
@@ -192,7 +195,7 @@ public class DJDisc extends StackPane {
 		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
 		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isEqualTo(NULL_IMAGE));
 		
-		getChildren().addAll(canvas, imageView, noAlbumImageLabel, volumeLabel, timeField);
+		getChildren().addAll(canvas, imageView, noAlbumImageLabel, volumeLabel);
 		
 		// MouseListeners
 		//canvas.setOnMousePressed(m -> canvas.setCursor(Cursor.CLOSED_HAND))
@@ -252,7 +255,7 @@ public class DJDisc extends StackPane {
 				imageView.setClip(new Circle(halfWidth - val * 2, halfHeight - val * 2, halfWidth - val * 2));
 				
 				// timeField
-				timeField.setTranslateY(-height * 26 / 100.00);
+				//timeField.setTranslateY(-height * 26 / 100.00);
 				
 				// volumeField
 				volumeLabel.setTranslateY(+height * 26 / 100.00);
@@ -421,6 +424,13 @@ public class DJDisc extends StackPane {
 	 */
 	public ResizableCanvas getCanvas() {
 		return canvas;
+	}
+	
+	/**
+	 * @return the timeField
+	 */
+	public Label getTimeField() {
+		return timeField;
 	}
 	
 	/**

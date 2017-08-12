@@ -225,29 +225,33 @@ public class RenameWindow extends VBox {
 	 */
 	private void show(String text , double x , double y , String title) {
 		
-		//		if (x <= -1 && y <= -1)
-		//			window.centerOnScreen();
-		//		else {
-		//			if (x + getWidth() > InfoTool.getVisualScreenWidth())
-		//				x = InfoTool.getVisualScreenWidth() - getWidth();
-		//			else if (x < 0)
-		//				x = 0;
-		//			
-		//			if (y + getHeight() > InfoTool.getVisualScreenHeight())
-		//				y = InfoTool.getVisualScreenHeight() - getHeight();
-		//			else if (y < 0)
-		//				y = 0;
-		//			
-		//			window.setX(x);
-		//			window.setY(y);
-		//		}
-		
 		titleLabel.setText(title);
 		inputField.setText(text);
 		accepted = true;
+		
+		//Set once
 		window.setX(x);
 		window.setY(y);
+		
 		window.show();
+		
+		//Set it again
+		if (x <= -1 && y <= -1)
+			window.centerOnScreen();
+		else {
+			if (x + getWidth() > InfoTool.getScreenWidth())
+				x = InfoTool.getScreenWidth() - getWidth();
+			else if (x < 0)
+				x = 0;
+			
+			if (y + getHeight() > InfoTool.getScreenHeight())
+				y = InfoTool.getScreenHeight() - getHeight();
+			else if (y < 0)
+				y = 0;
+			
+			window.setX(x);
+			window.setY(y);
+		}
 		
 		//	
 		inputField.requestFocus();

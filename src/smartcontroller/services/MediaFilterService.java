@@ -63,6 +63,8 @@ public class MediaFilterService {
 			}
 		};
 		executors.execute(runnable);
+		
+		//---Add this listener in case something bad happens to the thread above
 		threadStopped.addListener((observable , oldValue , newValue) -> {
 			//Restart it if it has stopped
 			if (newValue)

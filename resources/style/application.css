@@ -1325,25 +1325,28 @@
 
 #time-field-normal{
 	-fx-background-color:#202020;
-	 -fx-padding:-2.0 8.0 -2.0 8.0;
-	  -fx-background-radius: 15.0; 
+   -fx-padding:-2.0 8.0 -2.0 8.0;
+	 -fx-background-radius: 0.0 0.0 15.0 15.0; 
+	 -fx-border-radius:0.0 0.0 15.0 15.0;
 	  -fx-font-weight:bold; 
 	  -fx-font-size:15.0; 
 	  -fx-text-fill:white;
 	   -fx-cursor:hand;
+	   
 }
 
 #time-field-reversed{
 	-fx-background-color:#202020; 
 	-fx-padding:-2.0 8.0 -2.0 8.0;
-	 -fx-background-radius: 15.0; 
-	 -fx-border-radius:15.0;
+	 -fx-background-radius: 0.0 0.0 15.0 15.0; 
+	 -fx-border-radius:0.0 0.0 15.0 15.0;
 	  -fx-border-color:firebrick; 
 	-fx-border-width:2.0; 
 	-fx-font-weight:bold;
 	 -fx-font-size:15.0;
 	  -fx-text-fill:white;
 	   -fx-cursor:hand;	
+
 }
 
 /*******************************************************************************

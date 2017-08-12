@@ -77,6 +77,7 @@ import smartcontroller.media.Information.MediaInformation;
 import smartcontroller.services.MediaFilterService;
 import xplayer.PlayedMediaList;
 import xplayer.XPlayersList;
+import xplayer.services.XPlayersFilterService;
 import xplayer.visualizer.view.VisualizerWindowController.Type;
 import xr3capture.CaptureWindow;
 
@@ -522,6 +523,7 @@ public class Main extends Application {
 			
 			//Filter Thread (Inspecting the Files if existing)
 			new MediaFilterService().start();
+			new XPlayersFilterService().start();
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			

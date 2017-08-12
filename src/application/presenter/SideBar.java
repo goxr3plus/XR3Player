@@ -221,21 +221,15 @@ public class SideBar extends BorderPane {
 	 */
 	public void prepareForLoginMode(boolean b) {
 		if (b) {
-			//goMainMode.setDisable(true);
-			//goUserMode.setDisable(true);
 			applicationSettings.setDisable(true);
 			applicationConsole.setDisable(true);
 			applicationSearch.setDisable(true);
-			// applicationDatabase.setDisable(true);
-			//snapshot.setDisable(true);
+			goUserMode.setDisable(true);
 		} else {
-			//goMainMode.setDisable(false);
-			//goUserMode.setDisable(false);
 			applicationSettings.setDisable(false);
 			applicationConsole.setDisable(false);
 			applicationSearch.setDisable(false);
-			//applicationDatabase.setDisable(false);
-			//snapshot.setDisable(false);
+			goUserMode.setDisable(false);
 		}
 	}
 	
@@ -247,9 +241,6 @@ public class SideBar extends BorderPane {
 		
 		//Prepare the Side Bar
 		prepareForLoginMode(true);
-		
-		//this.setTranslateX(-this.getPrefWidth())
-		//showBar()
 		
 		//---------UPDATE ------------------------------
 		

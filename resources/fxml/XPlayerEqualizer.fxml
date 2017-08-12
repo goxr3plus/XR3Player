@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root minHeight="1.0" minWidth="1.0" prefHeight="375.0" prefWidth="460.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-border-color: rgb(255,255,255,0.9); -fx-border-width: 2;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="1.0" minWidth="1.0" prefHeight="375.0" prefWidth="460.0" style="-fx-background-color: rgb(0,0,0,0.9); -fx-border-color: rgb(255,255,255,0.9); -fx-border-width: 2;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>

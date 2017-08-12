@@ -75,6 +75,9 @@ import xplayer.visualizer.view.XPlayerVisualizer;
  */
 public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
 	
+	public static final Image playImage = InfoTool.getImageFromResourcesFolder("play.png");
+	public static final Image pauseImage = InfoTool.getImageFromResourcesFolder("pause.png");
+	
 	//-----------------------------------------------
 	
 	@FXML
@@ -85,6 +88,30 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private GridPane basicGridPane;
+	
+	@FXML
+	private Button previousSongButton;
+	
+	@FXML
+	private ToggleButton muteButton;
+	
+	@FXML
+	private Button playPauseButton;
+	
+	@FXML
+	private Button stopButton;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private Button replayButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private Button nextSongButton;
 	
 	@FXML
 	private StackPane visualizerStackPane;
@@ -117,6 +144,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private Button maximizeVisualizer;
 	
 	@FXML
+	private BorderPane discBorderPane;
+	
+	@FXML
+	private StackPane diskStackPane;
+	
+	@FXML
 	private HBox mediaNameHBox;
 	
 	@FXML
@@ -130,36 +163,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private Label totalTimeLabel;
-	
-	@FXML
-	private StackPane diskStackPane;
-	
-	@FXML
-	private Button previousSongButton;
-	
-	@FXML
-	private Button backwardButton;
-	
-	@FXML
-	private ToggleButton muteButton;
-	
-	@FXML
-	private Button playButton;
-	
-	@FXML
-	private Button pauseButton;
-	
-	@FXML
-	private Button stopButton;
-	
-	@FXML
-	private Button replayButton;
-	
-	@FXML
-	private Button forwardButton;
-	
-	@FXML
-	private Button nextSongButton;
 	
 	@FXML
 	private Tab equalizerTab;
@@ -422,11 +425,16 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		//== backwardButton
 		backwardButton.setOnAction(a -> seek(-Integer.parseInt(backwardButton.getText())));
 		
-		//== playButton
-		playButton.setOnAction(a -> playOrReplay());
-		
-		//== pauseButton
-		pauseButton.setOnAction(a -> pause());
+		//== playPauseButton
+		playPauseButton.setOnAction(fire -> {
+			if (xPlayer.isPlaying())
+				pause();
+			else
+				playOrReplay();
+			
+			//Fix fast the image
+			( (ImageView) playPauseButton.getGraphic() ).setImage(xPlayer.isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+		});
 		
 		//== replayButton
 		replayButton.setOnAction(a -> replay());
@@ -763,7 +771,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		disc.addDJDiscListener(this);
 		
 		// radialMenu
-		disc.getChildren().add(radialMenu.getRadialMenuButton());
+		//disc.getChildren().add(radialMenu.getRadialMenuButton());
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
@@ -816,9 +824,14 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				}
 		});
 		
+		//
+		Label ra = new Label("ra");
+		ra.setStyle("-fx-background-color:white); -fx-text-fill:black;");
+		discBorderPane.setTop(disc.getTimeField());
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
 		reCalculateCanvasSize();
+		
 	}
 	
 	/**
@@ -1343,6 +1356,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public void setTotalTimeLabel(Label totalTimeLabel) {
 		this.totalTimeLabel = totalTimeLabel;
+	}
+	
+	/**
+	 * @return the playPauseButton
+	 */
+	public Button getPlayPauseButton() {
+		return playPauseButton;
 	}
 	
 }

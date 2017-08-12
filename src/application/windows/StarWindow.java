@@ -212,7 +212,9 @@ public class StarWindow extends GridPane {
 	public void show(double stars , Node node) {
 		// Auto Calculate the position
 		Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-		show(stars, bounds.getMinX() + 5, bounds.getMaxY());
+		show(stars, bounds.getMinX() - 200 / 2 + bounds.getWidth() / 2, bounds.getMaxY());
+		
+		//show(stars, bounds.getMinX() + 5, bounds.getMaxY());
 	}
 	
 	/**
@@ -228,24 +230,30 @@ public class StarWindow extends GridPane {
 	public void show(double stars , double x , double y) {
 		setStars(stars);
 		
+		//Set once
+		window.setX(x);
+		window.setY(y);
+		
+		window.show();
+		
+		//Set it again
 		if (x <= -1 && y <= -1)
 			window.centerOnScreen();
 		else {
-			
-			if (x + getWidth() > InfoTool.getVisualScreenWidth())
-				x = InfoTool.getVisualScreenWidth() - getWidth();
+			if (x + getWidth() > InfoTool.getScreenWidth())
+				x = InfoTool.getScreenWidth() - getWidth();
 			else if (x < 0)
 				x = 0;
 			
-			if (y + getHeight() > InfoTool.getVisualScreenHeight())
-				y = InfoTool.getVisualScreenHeight() - getHeight();
+			if (y + getHeight() > InfoTool.getScreenHeight())
+				y = InfoTool.getScreenHeight() - getHeight();
 			else if (y < 0)
 				y = 0;
 			
 			window.setX(x);
 			window.setY(y);
 		}
-		window.show();
+		
 	}
 	
 	/**
