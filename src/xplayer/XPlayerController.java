@@ -78,6 +78,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	public static final Image playImage = InfoTool.getImageFromResourcesFolder("play.png");
 	public static final Image pauseImage = InfoTool.getImageFromResourcesFolder("pause.png");
 	
+	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
+	public static final Image loveDisabledImage = InfoTool.getImageFromResourcesFolder("loveDisabled.png");
+	
 	//-----------------------------------------------
 	
 	@FXML
@@ -148,6 +151,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private StackPane diskStackPane;
+	
+	@FXML
+	private ToggleButton loveButton;
 	
 	@FXML
 	private HBox mediaNameHBox;
@@ -282,7 +288,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			db.setContent(content);
 			
 			/* Set the DragView */
-			new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW).setDragView(db);
+			new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW, -1).setDragView(db);
 		}
 		event.consume();
 	};
@@ -491,6 +497,14 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			stop();
 			
 		})));
+		
+		//=loveButton
+		loveButton.selectedProperty().addListener((observable , oldValue , newValue) -> {
+			//Update the Image
+			( (ImageView) loveButton.getGraphic() ).setImage(newValue ? loveImage : loveDisabledImage);
+			
+			//Update the DataBase
+		});
 		
 	}
 	
@@ -825,9 +839,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		});
 		
 		//
-		Label ra = new Label("ra");
-		ra.setStyle("-fx-background-color:white); -fx-text-fill:black;");
-		discBorderPane.setTop(disc.getTimeField());
+		( (HBox) discBorderPane.getTop() ).getChildren().add(0, disc.getTimeField());
+		HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
 		reCalculateCanvasSize();
@@ -1363,6 +1376,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public Button getPlayPauseButton() {
 		return playPauseButton;
+	}
+	
+	/**
+	 * @return the loveButton
+	 */
+	public ToggleButton getLoveButton() {
+		return loveButton;
 	}
 	
 }

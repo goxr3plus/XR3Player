@@ -25,6 +25,7 @@ import org.controlsfx.control.Notifications;
 import application.Main;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
@@ -349,12 +350,12 @@ public final class ActionTool {
 		
 		Notifications notification1;
 		if (image == null)
-			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle();
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(Pos.BOTTOM_LEFT);
 		else {
 			ImageView imageView = new ImageView(image);
 			//imageView.setFitWidth(25);
 			//imageView.setFitHeight(25);
-			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle();
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle().position(Pos.BOTTOM_LEFT);
 		}
 		
 		switch (notificationType) {

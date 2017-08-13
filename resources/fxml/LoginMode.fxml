@@ -43,6 +43,7 @@
                      <center>
                         <StackPane fx:id="usersStackView" BorderPane.alignment="CENTER">
                            <children>
+                              <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="192.0" StackPane.alignment="BOTTOM_CENTER" />
                               <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -83,15 +84,8 @@
                                              </children>
                                           </GridPane>
                                           <BorderPane>
-                                             <right>
-                                                <ToolBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="300.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
-                                                   <items>
-                                                      <HBox fx:id="botttomHBox" alignment="CENTER" />
-                                                   </items>
-                                                </ToolBar>
-                                             </right>
-                                             <left>
-                                                <ToolBar fx:id="userToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="261.0" BorderPane.alignment="CENTER">
+                                             <center>
+                                                <ToolBar fx:id="userToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="672.0" BorderPane.alignment="CENTER">
                                                   <items>
                                                       <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="segmented-button-bar">
                                                          <children>
@@ -105,6 +99,57 @@
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </Button>
+                                                            <Button fx:id="loginButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" style="-fx-font-size: 16;" text="Login " textAlignment="CENTER" wrapText="true">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <HBox alignment="CENTER" spacing="3.0">
+                                                               <children>
+                                                                  <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                                                                     <graphic>
+                                                                        <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../image/right.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Previous" />
+                                                                     </tooltip>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                                                     <graphic>
+                                                                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                                                           <image>
+                                                                              <Image url="@../image/Add%20User%20Group%20Woman%20Man-32.png" />
+                                                                           </image>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Create new User" />
+                                                                     </tooltip>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
+                                                                     <graphic>
+                                                                        <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                                           <image>
+                                                                              <Image url="@../image/right.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Next" />
+                                                                     </tooltip>
+                                                                  </JFXButton>
+                                                               </children>
+                                                               <HBox.margin>
+                                                                  <Insets left="3.0" right="3.0" />
+                                                               </HBox.margin>
+                                                            </HBox>
                                                             <Button fx:id="openUserContextMenu" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
@@ -124,59 +169,6 @@
                                                       </HBox>
                                                   </items>
                                                 </ToolBar>
-                                             </left>
-                                             <center>
-                                                <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="190.0" spacing="2.0" BorderPane.alignment="CENTER">
-                                                   <children>
-                                                      <ScrollBar fx:id="horizontalScrollBar" max="0.0" />
-                                                      <HBox alignment="CENTER" prefHeight="55.0" spacing="3.0">
-                                                         <children>
-                                                            <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
-                                                               <graphic>
-                                                                  <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../image/right.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Previous" />
-                                                               </tooltip>
-                                                            </JFXButton>
-                                                            <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                                                               <graphic>
-                                                                  <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                                                                     <image>
-                                                                        <Image url="@../image/Add%20User%20Group%20Woman%20Man-32.png" />
-                                                                     </image>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Create new User" />
-                                                               </tooltip>
-                                                            </JFXButton>
-                                                            <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
-                                                               <graphic>
-                                                                  <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                                                     <image>
-                                                                        <Image url="@../image/right.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Next" />
-                                                               </tooltip>
-                                                            </JFXButton>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets right="8.0" />
-                                                         </padding>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
                                              </center>
                                           </BorderPane>
                                        </children>
@@ -189,15 +181,19 @@
                            </padding>
                         </VBox>
                      </bottom>
-                     <right>
-                        <Button fx:id="loginButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="104.0" style="-fx-font-size: 18; -fx-background-radius: 0 45 0 0; -fx-border-radius: 0 45 0 0; -fx-border-width: 5;" text="Login " textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                     </right>
                      <top>
-                        <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" style="-fx-background-color: rgb(0,0,0,0.85); -fx-background-radius: 0 0 45 45; -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER" />
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <right>
+                              <ToolBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="300.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
+                                 <items>
+                                    <HBox fx:id="botttomHBox" alignment="CENTER" />
+                                 </items>
+                              </ToolBar>
+                           </right>
+                           <center>
+                              <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="440.0" style="-fx-background-color: rgb(0,0,0,0.85); -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
                      </top>
                   </BorderPane>
                   <StackPane>

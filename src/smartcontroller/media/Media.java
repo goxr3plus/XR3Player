@@ -29,6 +29,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
@@ -52,6 +55,9 @@ public abstract class Media {
 	/** The has been played. */
 	private SimpleObjectProperty<ImageView> hasBeenPlayed;
 	
+	/** Liked Disliked or Neutral feelings */
+	private SimpleObjectProperty<Button> likeDislikeNeutral;
+	
 	/** The duration edited. */
 	private SimpleStringProperty durationEdited;
 	
@@ -62,7 +68,7 @@ public abstract class Media {
 	private SimpleIntegerProperty timesPlayed;
 	
 	/** The stars. */
-	private SimpleDoubleProperty stars;
+	private SimpleObjectProperty<Button> stars;
 	
 	/** The hour imported. */
 	private SimpleStringProperty hourImported;
@@ -96,6 +102,9 @@ public abstract class Media {
 	
 	/** The times played. */
 	private SimpleIntegerProperty bitRate;
+	
+	/** The number of the Media inside the PlayList */
+	private SimpleIntegerProperty number;
 	
 	// ---------END OF PROPERTIES----------------------------------------------------------------------------------
 	
@@ -131,11 +140,28 @@ public abstract class Media {
 	 * @param genre
 	 *            The genre of the Media <b> see the Genre class for more </b>
 	 */
-	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre) {
+	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre, int number) {
 		
 		// ....initialize
 		mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? SONG_IMAGE : VIDEO_IMAGE));
 		hasBeenPlayed = new SimpleObjectProperty<>(new ImageView());
+		
+		//Like Dislike or Neutral Feelings
+		
+		ImageView imageView = InfoTool.getImageViewFromResourcesFolder("likeFaded.png");
+		imageView.setFitWidth(24);
+		imageView.setFitHeight(24);
+		
+		Button button = new Button("", imageView);
+		button.setPrefSize(24, 24);
+		button.setMinSize(24, 24);
+		button.setMaxSize(24, 24);
+		button.setStyle("-fx-cursor:hand");
+		button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		button.setOnAction(a -> updateEmotion(button));
+		
+		likeDislikeNeutral = new SimpleObjectProperty<>(button);
+		//----------
 		
 		this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
 		this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
@@ -144,7 +170,19 @@ public abstract class Media {
 		this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
 		this.bitRate = new SimpleIntegerProperty();
-		this.stars = new SimpleDoubleProperty(stars);
+		this.number = new SimpleIntegerProperty(number);
+		
+		//Stars
+		Button starsButton = new Button(String.valueOf(stars));
+		starsButton.setPrefSize(50, 25);
+		starsButton.setMinSize(50, 25);
+		starsButton.setMaxSize(50, 25);
+		starsButton.setStyle("-fx-cursor:hand; -fx-background-color:black;");
+		starsButton.setOnAction(a -> updateStars(starsButton));
+		
+		this.stars = new SimpleObjectProperty<>(starsButton);
+		//-----------
+		
 		this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
 		this.duration = new SimpleIntegerProperty();
 		//this.duration.addListener((observable, oldValue, newValue) -> fixTheInformations(true))
@@ -252,6 +290,15 @@ public abstract class Media {
 	}
 	
 	/**
+	 * Liked Disliked or Neutral Feelings
+	 *
+	 * @return the simple object property
+	 */
+	public SimpleObjectProperty<Button> likeDislikeNeutralProperty() {
+		return likeDislikeNeutral;
+	}
+	
+	/**
 	 * Title property.
 	 *
 	 * @return the simple string property
@@ -292,7 +339,7 @@ public abstract class Media {
 	 *
 	 * @return the simple double property
 	 */
-	public SimpleDoubleProperty starsProperty() {
+	public SimpleObjectProperty<Button> starsProperty() {
 		return stars;
 	}
 	
@@ -395,6 +442,15 @@ public abstract class Media {
 		return bitRate;
 	}
 	
+	/**
+	 * Number of Audio inside the play list
+	 * 
+	 * @return the number
+	 */
+	public SimpleIntegerProperty numberProperty() {
+		return number;
+	}
+	
 	// --------ORDINARY
 	// METHODS----------------------------------------------------------------------
 	
@@ -477,179 +533,154 @@ public abstract class Media {
 	 * @param node
 	 *            The node based on which the Rename Window will be position [[SuppressWarningsSpartan]]
 	 */
-	public void rename(SmartController controller , Node node) {
+	public void rename(Node node) {
 		
 		// If !Controller is Locked
-		if (controller.isFree(true)) {
-			
-			// Security Variable
-			controller.renameWorking = true;
-			
-			// Open Window
-			String extension = "." + InfoTool.getFileExtension(getFilePath());
-			Main.renameWindow.show(getTitle(), node, "Media Renaming");
-			
-			// Bind
-			title.bind(Main.renameWindow.inputField.textProperty());
-			fileName.bind(Main.renameWindow.inputField.textProperty().concat(extension));
-			
-			// When the Rename Window is closed do the rename
-			Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
-				/**
-				 * [[SuppressWarningsSpartan]]
-				 */
-				@Override
-				public void invalidated(Observable observable) {
+		//if (controller.isFree(true)) {
+		
+		// Security Variable
+		//controller.renameWorking = true;
+		
+		// Open Window
+		String extension = "." + InfoTool.getFileExtension(getFilePath());
+		Main.renameWindow.show(getTitle(), node, "Media Renaming");
+		String oldFilePath = getFilePath();
+		
+		// Bind
+		title.bind(Main.renameWindow.inputField.textProperty());
+		fileName.bind(Main.renameWindow.inputField.textProperty().concat(extension));
+		
+		// When the Rename Window is closed do the rename
+		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
+			/**
+			 * [[SuppressWarningsSpartan]]
+			 */
+			@Override
+			public void invalidated(Observable observable) {
+				
+				// Remove the Listener
+				Main.renameWindow.showingProperty().removeListener(this);
+				
+				// !Showing
+				if (!Main.renameWindow.isShowing()) {
 					
-					// Remove the Listener
-					Main.renameWindow.showingProperty().removeListener(this);
+					// Remove Binding
+					title.unbind();
+					fileName.unbind();
 					
-					// !Showing
-					if (!Main.renameWindow.isShowing()) {
+					String newFilePath = new File(oldFilePath).getParent() + File.separator + fileName.get();
+					
+					// !XPressed && // Old name != New name
+					if (Main.renameWindow.wasAccepted() && !getFilePath().equals(newFilePath)) {
 						
-						// Remove Binding
-						title.unbind();
-						fileName.unbind();
-						
-						String newName = new File(getFilePath()).getParent() + File.separator + fileName.get();
-						
-						// !XPressed && // Old name != New name
-						if (Main.renameWindow.wasAccepted() && !getFilePath().equals(newName)) {
+						try {
 							
-							//			    try (PreparedStatement elementsMatchingThisWord = Main.dbManager.connection1
-							//				    .prepareStatement("SELECT COUNT(*) FROM '" + controller.getDataBaseTableName() + "' WHERE PATH=?");) {
-							//
-							//				// No duplicates allowed
-							//				boolean canPass = true;
-							//
-							//				elementsMatchingThisWord.setString(1, newName);
-							//				ResultSet set = elementsMatchingThisWord.executeQuery(); //needs to be fixed
-							//				int total = set.getInt(1);
-							//				if (total > 0)
-							//				    canPass = false;
-							//				set.close();
-							//				// System.out.println("Total is->:" + total)
-							//
-							//			    } catch (SQLException ex) {
-							//				Main.logger.log(Level.WARNING, "", ex);
-							//				setFilePath(filePath.get());
-							//				ActionTool.showNotification("Error Message", "Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
-							//					NotificationType.ERROR);
-							//			    }
-							
-							try {
-								// if can pass
-								//if (canPass) {
-								
-								// Check if that file already exists
-								if (new File(newName).exists()) {
-									setFilePath(filePath.get());
-									ActionTool.showNotification("Rename Failed", "The action can not been completed:\nA file with that name already exists.", Duration.millis(1500),
-											NotificationType.WARNING);
-									controller.renameWorking = false;
-									return;
-								}
-								
-								// Check if it can be renamed
-								if (!new File(getFilePath()).renameTo(new File(newName))) {
-									setFilePath(filePath.get());
-									ActionTool.showNotification("Rename Failed",
-											"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
-											Duration.millis(1500), NotificationType.WARNING);
-									controller.renameWorking = false;
-									return;
-								}
-								
-								//Inform all Libraries SmartControllers 
-								Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(controller1 -> {
-									
-									//if (controller1 != controller) // we already renamed on this controller
-									try (PreparedStatement dataRename = Main.dbManager.getConnection()
-											.prepareStatement("UPDATE '" + controller1.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
-										
-										// Prepare Statement
-										dataRename.setString(1, newName);
-										dataRename.setString(2, getFilePath());
-										int i = dataRename.executeUpdate();
-										
-										if (i > 0 && controller1 != controller) //Check 
-											controller1.getLoadService().startService(false, false, true);
-										
-									} catch (SQLException ex) {
-										Main.logger.log(Level.WARNING, "", ex);
-									}
-								});
-								
-								//Inform all XPlayers SmartControllers
-								Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(controller1 -> {
-									
-									//if (controller1 != controller) // we already renamed on this controller
-									try (PreparedStatement dataRename = Main.dbManager.getConnection()
-											.prepareStatement("UPDATE '" + controller1.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
-										
-										// Prepare Statement
-										dataRename.setString(1, newName);
-										dataRename.setString(2, getFilePath());
-										int i = dataRename.executeUpdate();
-										
-										if (i > 0 && controller1 != controller) //Check 
-											controller1.getLoadService().startService(false, false, true);
-										
-									} catch (SQLException ex) {
-										Main.logger.log(Level.WARNING, "", ex);
-									}
-								});
-								
-								Main.dbManager.commit();
-								
-								// Rename it in playedSong if...
-								Main.playedSongs.renameMedia(getFilePath(), newName);
-								
-								// change the file path
-								setFilePath(newName);
-								
-								//				} else { // canPass==false
-								//				    setFilePath(filePath.get());
-								//				    ActionTool.showNotification("Dublicate Name",
-								//					    "The action can not been completed because :\nA file with that name already exists.",
-								//					    Duration.millis(1500), NotificationType.INFORMATION);
-								//				}
-								
-								// Exception occurred
-							} catch (Exception ex) {
-								Main.logger.log(Level.WARNING, "", ex);
-								setFilePath(filePath.get());
-								ActionTool.showNotification("Error Message", "Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR);
+							// Check if that file already exists
+							if (new File(newFilePath).exists()) {
+								setFilePath(oldFilePath);
+								ActionTool.showNotification("Rename Failed", "The action can not been completed:\nA file with that name already exists.", Duration.millis(1500),
+										NotificationType.WARNING);
+								//controller.renameWorking = false;
+								return;
 							}
-						} else // X is pressed by user || // Old name == New
-								// name
-							setFilePath(filePath.get());
-						
-						// Security Variable
-						controller.renameWorking = false;
-						
-					} // RenameWindow is still showing
-				}// invalidated
-			});
-		}
+							
+							// Check if it can be renamed
+							if (!new File(getFilePath()).renameTo(new File(newFilePath))) {
+								setFilePath(oldFilePath);
+								ActionTool.showNotification("Rename Failed",
+										"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
+										Duration.millis(1500), NotificationType.WARNING);
+								//controller.renameWorking = false;
+								return;
+							}
+							
+							//Inform all Libraries SmartControllers 
+							Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(smartController -> {
+								
+								//if (controller1 != controller) // we already renamed on this controller
+								try (PreparedStatement dataRename = Main.dbManager.getConnection()
+										.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
+									
+									// Prepare Statement
+									dataRename.setString(1, newFilePath);
+									dataRename.setString(2, oldFilePath);
+									int i = dataRename.executeUpdate();
+									
+									if (i > 0) //Check
+										smartController.getItemsObservableList().forEach(media -> {
+											if (media.getFilePath().equals(oldFilePath))
+												media.setFilePath(newFilePath);
+										});
+									
+								} catch (SQLException ex) {
+									Main.logger.log(Level.WARNING, "", ex);
+								}
+							});
+							
+							//Inform all XPlayers SmartControllers
+							Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(smartController -> {
+								
+								//if (controller1 != controller) // we already renamed on this controller
+								try (PreparedStatement dataRename = Main.dbManager.getConnection()
+										.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
+									
+									// Prepare Statement
+									dataRename.setString(1, newFilePath);
+									dataRename.setString(2, oldFilePath);
+									int i = dataRename.executeUpdate();
+									
+									if (i > 0) //Check
+										smartController.getItemsObservableList().forEach(media -> {
+											if (media.getFilePath().equals(oldFilePath))
+												media.setFilePath(newFilePath);
+										});
+									
+								} catch (SQLException ex) {
+									Main.logger.log(Level.WARNING, "", ex);
+								}
+							});
+							
+							//Commit to the Database
+							Main.dbManager.commit();
+							
+							// Rename it in playedSong if...
+							Main.playedSongs.renameMedia(oldFilePath, newFilePath);
+							
+							//Update the SearchWindow
+							Main.searchWindow.getSmartController().getItemsObservableList().forEach(media -> {
+								if (media.getFilePath().equals(oldFilePath))
+									media.setFilePath(newFilePath);
+							});
+							
+							// Exception occurred
+						} catch (Exception ex) {
+							Main.logger.log(Level.WARNING, "", ex);
+							setFilePath(oldFilePath);
+							ActionTool.showNotification("Error Message", "Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR);
+						}
+					} else // X is pressed by user || // Old name == New name
+						setFilePath(oldFilePath);
+					
+				} // RenameWindow is still showing
+			}// invalidated
+		});
+		//}
 	}
 	
 	/**
 	 * Evaluate the Media File using stars.
-	 *
-	 * @param controller
-	 *            the controller
+	 * 
 	 * @param node
 	 *            The node based on which the Rename Window will be position
 	 */
-	public void updateStars(SmartController controller , Node node) {
+	public void updateStars(Node node) {
 		
 		// Show the Window
-		Main.starWindow.show(stars.get(), node);
+		Main.starWindow.show(Double.parseDouble(stars.get().getText()), node);
 		
 		// Keep in memory stars ...
-		final double previousStars = stars.get();
-		stars.bind(Main.starWindow.starsProperty());
+		final double previousStars = Double.parseDouble(stars.get().getText());
+		stars.get().textProperty().bind(Main.starWindow.starsProperty().asString());
 		
 		// Listener
 		Main.starWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
@@ -666,25 +697,29 @@ public abstract class Media {
 				if (!Main.starWindow.getWindow().isShowing()) {
 					
 					// unbind stars property
-					stars.unbind();
+					stars.get().textProperty().unbind();
 					
 					// Accepted?
 					if (Main.starWindow.wasAccepted()) {
 						
 						//Inform all Libraries SmartControllers
-						Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(controller1 -> {
+						Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(smartController -> {
 							
 							//Do it bro!
 							try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
-									.prepareStatement("UPDATE '" + controller1.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
+									.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
 								
 								// Prepare Statement
 								preparedUStars.setDouble(1, getStars());
 								preparedUStars.setString(2, getFilePath());
 								int i = preparedUStars.executeUpdate();
 								
-								if (i > 0 && controller1 != controller) //Check 
-									controller1.getLoadService().startService(false, false, true);
+								if (i > 0)// && controller1 != controller) //Check 
+									//controller1.getLoadService().startService(false, false, true);
+									smartController.getItemsObservableList().forEach(media -> {
+										if (media.getFilePath().equals(Media.this.getFilePath()))
+											media.starsProperty().get().setText(stars.get().getText());
+									});
 								
 							} catch (Exception ex) {
 								Main.logger.log(Level.WARNING, "", ex);
@@ -693,19 +728,23 @@ public abstract class Media {
 						});
 						
 						//Inform all XPlayers SmartControllers
-						Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(controller1 -> {
+						Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(smartController -> {
 							
 							//Do it bro!
 							try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
-									.prepareStatement("UPDATE '" + controller1.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
+									.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
 								
 								// Prepare Statement
 								preparedUStars.setDouble(1, getStars());
 								preparedUStars.setString(2, getFilePath());
 								int i = preparedUStars.executeUpdate();
 								
-								if (i > 0 && controller1 != controller) //Check 
-									controller1.getLoadService().startService(false, false, true);
+								if (i > 0)// && controller1 != controller) //Check 
+									//controller1.getLoadService().startService(false, false, true);
+									smartController.getItemsObservableList().forEach(media -> {
+										if (media.getFilePath().equals(Media.this.getFilePath()))
+											media.starsProperty().get().setText(stars.get().getText());
+									});
 								
 							} catch (Exception ex) {
 								Main.logger.log(Level.WARNING, "", ex);
@@ -713,10 +752,48 @@ public abstract class Media {
 							}
 						});
 						
+						//Update the SearchWindow
+						Main.searchWindow.getSmartController().getItemsObservableList().forEach(media -> {
+							if (media.getFilePath().equals(Media.this.getFilePath()))
+								media.starsProperty().get().setText(stars.get().getText());
+						});
+						
 						//Commit
 						Main.dbManager.commit();
 					} else
-						stars.set(previousStars);
+						stars.get().setText(String.valueOf(previousStars));
+				}
+			}
+		});
+		
+	}
+	
+	/**
+	 * Update the emotion the user is feeling for this Media
+	 */
+	public void updateEmotion(Node node) {
+		
+		// Show the Window
+		Main.emotionsWindow.show(node);
+		
+		// Listener
+		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
+			/**
+			 * [[SuppressWarningsSpartan]]
+			 */
+			@Override
+			public void invalidated(Observable o) {
+				
+				// Remove the listener
+				Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
+				
+				// !showing?
+				if (!Main.emotionsWindow.getWindow().isShowing()) {
+					
+					System.out.println(Main.emotionsWindow.getEmotion());
+					//Commit
+					//Main.dbManager.commit();
+					
 				}
 			}
 		});
@@ -794,7 +871,7 @@ public abstract class Media {
 	 * @return the stars
 	 */
 	public double getStars() {
-		return stars.get();
+		return Double.parseDouble(stars.get().getText());
 	}
 	
 	/**
@@ -851,14 +928,21 @@ public abstract class Media {
 		return genre;
 	}
 	
-	// --------SETTERS------------------------------------------------------------------------------------
-	
 	/**
 	 * @return the bitRate
 	 */
 	public SimpleIntegerProperty getBitRate() {
 		return bitRate;
 	}
+	
+	/**
+	 * @return the Number
+	 */
+	public SimpleIntegerProperty getNumber() {
+		return number;
+	}
+	
+	// --------SETTERS------------------------------------------------------------------------------------
 	
 	/**
 	 * Sets the file path.

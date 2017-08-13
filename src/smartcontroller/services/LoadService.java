@@ -152,7 +152,7 @@ public class LoadService extends Service<Void> {
 					List<Media> array = new ArrayList<>();
 					for (Audio song = null; resultSet.next();) {
 						song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
-								resultSet.getString("HOUR"), smartController.getGenre());
+								resultSet.getString("HOUR"), smartController.getGenre(), array.size() + 1);
 						array.add(song);
 						//Update the progress
 						updateProgress(++counter, currentMaximumPerList);

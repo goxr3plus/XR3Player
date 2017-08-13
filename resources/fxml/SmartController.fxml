@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -32,13 +33,13 @@
          <items>
             <BorderPane fx:id="mainBorder" minHeight="1.0" style="-fx-background-color: transparent;">
                <top>
-                  <TitledPane fx:id="titledPane" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" minHeight="1.0" minWidth="0.0" text="I am The TilePane and i don't like wrapping the text!" wrapText="true" BorderPane.alignment="CENTER">
+                  <TitledPane fx:id="titledPane" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" minHeight="1.0" minWidth="0.0" text="Page Navigation --&gt;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                      <content>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="69.0" prefWidth="662.0">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="22.0" prefWidth="662.0">
                            <content>
                               <VBox>
                                  <children>
-                                    <HBox fx:id="searchBarHBox" alignment="CENTER" style="-fx-background-color: rgb(0,0,0,0.9);">
+                                    <HBox fx:id="searchBarHBox" alignment="CENTER" style="-fx-background-color: rgb(0,0,0,0.8);">
                                        <children>
                                           <Button fx:id="refreshButton" mnemonicParsing="false" style="-fx-background-radius: 45 0 0 45;">
                                              <graphic>
@@ -148,63 +149,6 @@
                                           <Insets left="3.0" right="3.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="648.0" spacing="10.0" style="-fx-background-color: rgb(0,0,0,0.9);">
-                                       <padding>
-                                          <Insets left="3.0" right="3.0" />
-                                       </padding>
-                                       <children>
-                                          <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="35.0" prefWidth="204.0">
-                                             <children>
-                                                <Button fx:id="previous" mnemonicParsing="false" style="-fx-background-radius: 15 0 0 15;" styleClass="arrowButton">
-                                                   <tooltip>
-                                                      <Tooltip text="Previous" />
-                                                   </tooltip>
-                                                   <graphic>
-                                                      <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/right.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
-                                                <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="79.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 17; -fx-background-radius: 0; -fx-background-color: white; -fx-text-fill: black;" translateY="1.0">
-                                                   <tooltip>
-                                                      <Tooltip text="Select a Page and Press Enter" />
-                                                   </tooltip>
-                                                   <contextMenu>
-                                                      <ContextMenu />
-                                                   </contextMenu>
-                                                   <effect>
-                                                      <DropShadow />
-                                                   </effect>
-                                                </TextField>
-                                                <Button fx:id="goToPage" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton" text="GO">
-                                                   <tooltip>
-                                                      <Tooltip text="Go to the selected Page" />
-                                                   </tooltip>
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </Button>
-                                                <Button fx:id="next" mnemonicParsing="false" prefWidth="33.0" style="-fx-background-radius: 0 15 15 0;" styleClass="arrowButton">
-                                                   <tooltip>
-                                                      <Tooltip text="Next" />
-                                                   </tooltip>
-                                                   <graphic>
-                                                      <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/right.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <HBox.margin>
-                                                      <Insets bottom="2.0" top="2.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </HBox>
                                  </children>
                               </VBox>
                            </content>
@@ -213,13 +157,70 @@
                      <BorderPane.margin>
                         <Insets top="9.0" />
                      </BorderPane.margin>
+                     <graphic>
+                        <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="242.0">
+                           <children>
+                              <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 15 0 0 15;" styleClass="arrowButton">
+                                 <tooltip>
+                                    <Tooltip text="Previous" />
+                                 </tooltip>
+                                 <graphic>
+                                    <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/right.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 0; -fx-background-color: white; -fx-text-fill: black;">
+                                 <tooltip>
+                                    <Tooltip text="Select a Page and Press Enter" />
+                                 </tooltip>
+                                 <contextMenu>
+                                    <ContextMenu />
+                                 </contextMenu>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </TextField>
+                              <Label fx:id="maximumPageLabel" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" styleClass="applicationSettingsLabel" text="555555">
+                                 <tooltip>
+                                    <Tooltip text="Maximum Page" />
+                                 </tooltip>
+                              </Label>
+                              <Button fx:id="goToPage" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton" text="GO">
+                                 <tooltip>
+                                    <Tooltip text="Go to the selected Page" />
+                                 </tooltip>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0 15 15 0;" styleClass="arrowButton">
+                                 <tooltip>
+                                    <Tooltip text="Next" />
+                                 </tooltip>
+                                 <graphic>
+                                    <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/right.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" top="2.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </graphic>
                   </TitledPane>
                </top>
                <center>
                   <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER" />
                </center>
-               <bottom>
-                  <TabPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="0.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+               <right>
+                  <TabPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="0.0" prefWidth="0.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" visible="false" BorderPane.alignment="CENTER">
                     <tabs>
                       <Tab text="Songs+">
                         <content>
@@ -243,6 +244,13 @@
                         </Tab>
                     </tabs>
                   </TabPane>
+               </right>
+               <bottom>
+                  <HBox BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel2" text="433" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                </bottom>
             </BorderPane>
          </items>

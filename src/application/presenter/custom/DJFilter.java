@@ -43,15 +43,13 @@ public class DJFilter extends Canvas {
 	/** The gc. */
 	GraphicsContext gc = getGraphicsContext2D();
 	
-	/**
-	 * Constructor
-	 *
+	
+	/** Constructor
 	 * @param width
-	 *            the width
 	 * @param height
-	 *            the height
+	 * @param textColor
 	 * @param arcColor
-	 *            the arc color
+	 * @param backgroundColor
 	 */
 	public DJFilter(double width, double height, Color textColor, Color arcColor, Color backgroundColor) {
 		

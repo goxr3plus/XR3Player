@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
@@ -32,6 +34,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -80,21 +83,6 @@ public class SmartController extends StackPane {
 	private Button showSettings;
 	
 	@FXML
-	private HBox navigationHBox;
-	
-	@FXML
-	private Button previous;
-	
-	@FXML
-	private TextField pageField;
-	
-	@FXML
-	private Button goToPage;
-	
-	@FXML
-	private Button next;
-	
-	@FXML
 	private MenuButton toolsMenuButton;
 	
 	@FXML
@@ -113,7 +101,28 @@ public class SmartController extends StackPane {
 	private MenuItem clearAll;
 	
 	@FXML
+	private HBox navigationHBox;
+	
+	@FXML
+	private Button previous;
+	
+	@FXML
+	private TextField pageField;
+	
+	@FXML
+	private Label maximumPageLabel;
+	
+	@FXML
+	private Button goToPage;
+	
+	@FXML
+	private Button next;
+	
+	@FXML
 	private StackPane centerStackPane;
+	
+	@FXML
+	private Label detailsLabel;
 	
 	@FXML
 	private Region region;
@@ -268,9 +277,9 @@ public class SmartController extends StackPane {
 					if (code == KeyCode.F)
 						ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 					else if (code == KeyCode.Q)
-						tableViewer.getSelectionModel().getSelectedItem().updateStars(this, tableViewer);
+						tableViewer.getSelectionModel().getSelectedItem().updateStars(tableViewer);
 					else if (code == KeyCode.R)
-						tableViewer.getSelectionModel().getSelectedItem().rename(this, tableViewer);
+						tableViewer.getSelectionModel().getSelectedItem().rename(tableViewer);
 					else if (code == KeyCode.U) {
 						Media media = tableViewer.getSelectionModel().getSelectedItem();
 						if (!Main.playedSongs.containsFile(media.getFilePath()))
@@ -355,7 +364,7 @@ public class SmartController extends StackPane {
 				int listNumber = Integer.parseInt(pageField.getText());
 				if (listNumber <= getMaximumList()) {
 					currentPage.set(listNumber);
-					loadService.startService(false, true,false);
+					loadService.startService(false, true, false);
 				} else {
 					pageField.setText(Integer.toString(listNumber));
 					pageField.selectEnd();
@@ -460,7 +469,23 @@ public class SmartController extends StackPane {
 		});
 		
 		// -- refreshButton
-		refreshButton.setOnAction(e -> loadService.startService(false, true,false));
+		refreshButton.setOnAction(e -> {
+			
+			try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery("SELECT* FROM '" + this.getDataBaseTableName() + "'")) {
+				Set<String> set = new LinkedHashSet<>();
+				while (resultSet.next()) {
+					set.add(new File(new File(resultSet.getString("PATH")).getParent()).getName());
+				}
+				System.out.println(set.size());
+				
+				set.forEach(item -> System.out.println(item));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			
+		});
+		
+		//loadService.startService(false, true,false));
 		
 		// Update
 		updateLabel();
@@ -609,14 +634,14 @@ public class SmartController extends StackPane {
 	 */
 	public void updateLabel() {
 		if (searchService.isActive() || genre == Genre.SEARCHWINDOW)
-			titledPane.setText(" Found<" + itemsObservableList.size() + "> first matching from Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> [ Selected<"
+			detailsLabel.setText(" Found<" + itemsObservableList.size() + "> first matching from Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> [ Selected<"
 					+ tableViewer.getSelectedCount() + "> MaxPerPage<" + maximumPerPage + "> ]");
 		else
-			titledPane.setText("[ Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> CurrentPage<" + InfoTool.getNumberWithDots(currentPage.get()) + "> MaxPage<"
-					+ InfoTool.getNumberWithDots(getMaximumList()) + "> ] [ Selected<" + tableViewer.getSelectedCount() + ">  Showing<"
+			detailsLabel.setText("Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> [ Selected<" + tableViewer.getSelectedCount() + ">  Showing<"
 					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + "..."
 					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size()) + "> MaxPerPage<" + maximumPerPage + "> ]");
 		
+		maximumPageLabel.setText(Integer.toString(getMaximumList()));
 		pageField.setText(Integer.toString(currentPage.get()));
 	}
 	
@@ -684,7 +709,7 @@ public class SmartController extends StackPane {
 	public void goPrevious() {
 		if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() > 0) {
 			currentPage.set(currentPage.get() - 1);
-			loadService.startService(false, true,false);
+			loadService.startService(false, true, false);
 		}
 	}
 	
@@ -694,7 +719,7 @@ public class SmartController extends StackPane {
 	public void goNext() {
 		if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive() && totalInDataBase.get() != 0 && currentPage.get() < getMaximumList()) {
 			currentPage.set(currentPage.get() + 1);
-			loadService.startService(false, true,false);
+			loadService.startService(false, true, false);
 		}
 	}
 	
@@ -831,7 +856,7 @@ public class SmartController extends StackPane {
 		currentPage.set( ( maximumPerPage == 50 ) ? currentPage.get() / 2 : currentPage.get() * 2 + ( currentPage.get() % 2 == 0 ? 0 : 1 ));
 		maximumPerPage = newMaximumPerPage;
 		if (updateSmartController && isFree(false))
-			loadService.startService(false, true,false);
+			loadService.startService(false, true, false);
 	}
 	
 	/**
@@ -1117,7 +1142,6 @@ public class SmartController extends StackPane {
 	public ContextMenu getToolsContextMenu() {
 		return toolsContextMenu;
 	}
-	
 	
 	/*-----------------------------------------------------------------------
 	 * 

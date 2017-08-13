@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXCheckBox;
+
 import application.Main;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
@@ -22,13 +24,19 @@ public class GeneralSettingsController extends BorderPane {
 	/** -----------------------------------------------------. */
 	
 	@FXML
-	private ToggleGroup sideBarSideGroup;
+	private ToggleGroup sideBarPositionGroup;
 	
 	@FXML
 	private ToggleGroup libraryModeUpsideDown;
 	
 	@FXML
 	private ToggleGroup djModeUpsideDown;
+	
+	@FXML
+	private JFXCheckBox animationsEnabled;
+	
+	@FXML
+	private ToggleGroup notificationsPosition;
 	
 	// -------------------------------------------------------------
 	
@@ -60,23 +68,20 @@ public class GeneralSettingsController extends BorderPane {
 	private void initialize() {
 		
 		//sideBarSideGroup
-		sideBarSideGroup.selectedToggleProperty().addListener(listener -> {
+		sideBarPositionGroup.selectedToggleProperty().addListener(listener -> {
 			
 			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("General-SideBarSide",
-					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup)));
+			Main.dbManager.getPropertiesDb().updateProperty("General-SideBarSide", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(sideBarPositionGroup)));
 			
 			//Fix the side bar position
-			Main.sideBar.changeSide(
-					JavaFXTools.getIndexOfSelectedToggle(sideBarSideGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
+			Main.sideBar.changeSide(JavaFXTools.getIndexOfSelectedToggle(sideBarPositionGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
 		});
 		
 		//sideBarSideGroup
 		libraryModeUpsideDown.selectedToggleProperty().addListener(listener -> {
 			
 			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("General-LibraryModeUpsideDown",
-					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown)));
+			Main.dbManager.getPropertiesDb().updateProperty("General-LibraryModeUpsideDown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown)));
 			
 			//Turn Library Mode Upside Down or The Opposite
 			Main.libraryMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown) != 0);
@@ -87,8 +92,7 @@ public class GeneralSettingsController extends BorderPane {
 		djModeUpsideDown.selectedToggleProperty().addListener(listener -> {
 			
 			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("General-DjModeUpsideDown",
-					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(djModeUpsideDown)));
+			Main.dbManager.getPropertiesDb().updateProperty("General-DjModeUpsideDown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(djModeUpsideDown)));
 			
 			//Turn Library Mode Upside Down or The Opposite
 			Main.djMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(djModeUpsideDown) != 0);
@@ -101,7 +105,7 @@ public class GeneralSettingsController extends BorderPane {
 	 * @return the sideBarSideGroup
 	 */
 	public ToggleGroup getSideBarSideGroup() {
-		return sideBarSideGroup;
+		return sideBarPositionGroup;
 	}
 	
 	/**

@@ -1198,8 +1198,8 @@
 	/*-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);*/
     /*-fx-background-insets:3.0;*/
     -fx-background-insets: -0.1, 2.0;
-    -fx-background-radius: 5.0;
-    -fx-border-radius:5.0;
+    /*-fx-background-radius: 5.0;
+    -fx-border-radius:5.0;*/
     -fx-border-width:1.0;
     -fx-prompt-text-fill:black;
     -fx-text-fill:black;
@@ -1219,7 +1219,7 @@
 
 .search-box-window-item{
 	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
-	-fx-background-radius:5.0;
+	/*-fx-background-radius:5.0;*/
 	-fx-text-fill:white;
 	-fx-font-size:15.0;	
 	-fx-font-weight:bold;
@@ -1326,8 +1326,8 @@
 #time-field-normal{
 	-fx-background-color:#202020;
    -fx-padding:-2.0 8.0 -2.0 8.0;
-	 -fx-background-radius: 0.0 0.0 15.0 15.0; 
-	 -fx-border-radius:0.0 0.0 15.0 15.0;
+	 -fx-background-radius: 0.0 0.0 0.0 0.0 ; 
+	 -fx-border-radius:0.0 0.0 0 0 ;
 	  -fx-font-weight:bold; 
 	  -fx-font-size:15.0; 
 	  -fx-text-fill:white;
@@ -1338,8 +1338,8 @@
 #time-field-reversed{
 	-fx-background-color:#202020; 
 	-fx-padding:-2.0 8.0 -2.0 8.0;
-	 -fx-background-radius: 0.0 0.0 15.0 15.0; 
-	 -fx-border-radius:0.0 0.0 15.0 15.0;
+	 -fx-background-radius: 0.0 0.0 0 0; 
+	 -fx-border-radius:0.0 0.0 0 0 ;
 	  -fx-border-color:firebrick; 
 	-fx-border-width:2.0; 
 	-fx-font-weight:bold;

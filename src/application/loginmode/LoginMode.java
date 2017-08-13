@@ -1056,8 +1056,8 @@ public class LoginMode extends BorderPane {
 				this.centerItemProperty.set(null);
 			
 			// Previous and Next Visibility
-			getNext().setVisible(!rightGroup.getChildren().isEmpty());
-			getPrevious().setVisible(!leftGroup.getChildren().isEmpty());
+			getNext().setDisable(rightGroup.getChildren().isEmpty());
+			getPrevious().setDisable(leftGroup.getChildren().isEmpty());
 			
 		}
 		
@@ -1069,7 +1069,5 @@ public class LoginMode extends BorderPane {
 		}
 		
 	}
-	
-	
 	
 }

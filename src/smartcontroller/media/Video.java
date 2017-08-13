@@ -31,8 +31,8 @@ public class Video extends Media {
      * @param genre
      *            The genre of the Media <b> see the Genre class for more </b>
      */
-    public Video(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre) {
-	super(path, stars, timesPlayed, dateImported, hourImported, genre);
+    public Video(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre,int number) {
+	super(path, stars, timesPlayed, dateImported, hourImported, genre,number);
     }
 
     /* (non-Javadoc)

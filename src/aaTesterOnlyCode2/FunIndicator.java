@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package application.presenter.custom;
+package aaTesterOnlyCode2;
 
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;

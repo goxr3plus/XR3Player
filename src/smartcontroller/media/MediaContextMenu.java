@@ -347,13 +347,13 @@ public class MediaContextMenu extends ContextMenu {
 		
 		// rename
 		else if (source == rename)
-			media.rename(controller, node);
+			media.rename(node);
 		else if (source == copy)
 			controller.getTableViewer().copySelectedMediaToClipBoard();
 		else if (source == paste)
 			controller.getTableViewer().pasteMediaFromClipBoard();
 		else if (source == stars)
-			media.updateStars(controller, node);
+			media.updateStars(node);
 		else if (source == showFile) // File path
 			ActionTool.openFileLocation(media.getFilePath());
 		else if (e.getSource() == copyOrMove) // copyTo

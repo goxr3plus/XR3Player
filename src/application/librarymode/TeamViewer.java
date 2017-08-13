@@ -612,8 +612,8 @@ public class TeamViewer {
 				//The Property Center Item
 				this.centerItemProperty.set(null);
 			
-			mode.getNext().setVisible(!rightGroup.getChildren().isEmpty());
-			mode.getPrevious().setVisible(!leftGroup.getChildren().isEmpty());
+			mode.getNext().setDisable(rightGroup.getChildren().isEmpty());
+			mode.getPrevious().setDisable(leftGroup.getChildren().isEmpty());
 			
 		}
 		

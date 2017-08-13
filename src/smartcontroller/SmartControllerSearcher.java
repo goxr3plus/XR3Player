@@ -42,8 +42,7 @@ import smartcontroller.media.Audio;
 import smartcontroller.media.Media;
 
 /**
- * WARNING! I WAS DRUNK WHEN WRITING THIS CLASS ;) , REALLY! FUCKED UP
- * XOAXOAOXOAO
+ * WARNING! I WAS DRUNK WHEN WRITING THIS CLASS ;) , REALLY! FUCKED UP XOAXOAOXOAO
  * 
  * This class is used as a search Box for SmartController.
  *
@@ -67,7 +66,7 @@ public class SmartControllerSearcher extends HBox {
 	 * Constructor.
 	 *
 	 * @param control
-	 *        the control
+	 *            the control
 	 */
 	public SmartControllerSearcher(SmartController control) {
 		controller = control;
@@ -97,7 +96,7 @@ public class SmartControllerSearcher extends HBox {
 				
 				//continue 
 				controller.getNavigationHBox().setDisable(false);
-				controller.getLoadService().startService(false, false,false);
+				controller.getLoadService().startService(false, false, false);
 				
 			} else if (Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
 				saveSettingsBeforeSearch();
@@ -123,8 +122,7 @@ public class SmartControllerSearcher extends HBox {
 	}
 	
 	/**
-	 * //Save the Settings before the first search -> [ ScrollBar position and
-	 * current page of the SmartController ]
+	 * //Save the Settings before the first search -> [ ScrollBar position and current page of the SmartController ]
 	 */
 	private void saveSettingsBeforeSearch() {
 		
@@ -138,8 +136,7 @@ public class SmartControllerSearcher extends HBox {
 	}
 	
 	/**
-	 * Returns true if the Search service is currently activated(if reset button
-	 * is still visible).
+	 * Returns true if the Search service is currently activated(if reset button is still visible).
 	 *
 	 * @return <b> True </b> if searchField is empty
 	 */
@@ -299,7 +296,7 @@ public class SmartControllerSearcher extends HBox {
 						for (Audio song = null; resultSet.next();) {
 							//song = new Audio(resultSet.getString("PATH"), 5, 5, "f", "s", controller.genre);
 							song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
-									resultSet.getString("HOUR"), controller.getGenre());
+									resultSet.getString("HOUR"), controller.getGenre(), array.size() + 1);
 							array.add(song);
 							
 							// updateProgress(++counter, controller.getMaximumPerPage());
@@ -412,9 +409,9 @@ public class SmartControllerSearcher extends HBox {
 		 * Shows the Advanced Search with the given parameters.
 		 *
 		 * @param node
-		 *        the node
+		 *            the node
 		 * @param controller
-		 *        the controller
+		 *            the controller
 		 */
 		public void show(Node node , SmartController controller) {
 			searchField.editableProperty().bind(controller.getSearchService().getService().runningProperty().not());

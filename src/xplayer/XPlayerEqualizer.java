@@ -12,8 +12,7 @@ import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -29,10 +28,10 @@ public class XPlayerEqualizer extends BorderPane {
 	private HBox bottomHBox;
 	
 	@FXML
-	private Button resetFilters;
+	private Menu presets;
 	
 	@FXML
-	private MenuButton presets;
+	private MenuItem resetFilters;
 	
 	@FXML
 	private TilePane tilePane;
@@ -137,27 +136,26 @@ public class XPlayerEqualizer extends BorderPane {
 		});
 		
 		// Add all
-		presets.getItems().clear();
 		presets.getItems().addAll(filterButtons);
 		
 		//-------------------------- Extra Filters--------------------------
 		
 		// -- panFilter
-		panFilter = new DJFilter(36, 36, Color.BLACK, color, Color.WHITE);
+		panFilter = new DJFilter(36, 36, Color.WHITE, Color.GOLD, Color.BLACK);
 		panFilter.setOnMouseDragged(drag -> {
 			panFilter.onMouseDragged(drag);
 			xPlayerUI.getxPlayer().setPan(panFilter.getValue(200));
 		});
 		
 		// --balanceFilter
-		balanceFilter = new DJFilter(36, 36, Color.BLACK, color, Color.WHITE);
+		balanceFilter = new DJFilter(36, 36, Color.WHITE, Color.GOLD, Color.BLACK);
 		balanceFilter.setOnMouseDragged(drag -> {
 			balanceFilter.onMouseDragged(drag);
 			xPlayerUI.getxPlayer().setBalance(balanceFilter.getValue(200));
 		});
 		
-		bottomHBox.getChildren().addAll(panFilter, balanceFilter);
-		
+		//tilePane.getChildren().add(0,balanceFilter);
+		tilePane.getChildren().add(0,panFilter);		
 	}
 	
 	/**

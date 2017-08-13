@@ -175,7 +175,7 @@ public class MediaInformation extends BorderPane {
 			for (File file : drop.getDragboard().getFiles()) {
 				absolutePath = file.getAbsolutePath();
 				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-					updateInformation(new Audio(file.getAbsolutePath(), 0.0, 0, "", "", Genre.SEARCHWINDOW));
+					updateInformation(new Audio(file.getAbsolutePath(), 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
 					break;
 				}
 			}
@@ -193,8 +193,12 @@ public class MediaInformation extends BorderPane {
 		this.media = media;
 		
 		//== image
-		Image image = media.getAlbumImage();
-		imageView.setImage(image != null ? image : nullImage);
+		try {
+			Image image = media.getAlbumImage();
+			imageView.setImage(image != null ? image : nullImage);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		//== title
 		title.textProperty().bind(media.titleProperty());
@@ -203,7 +207,7 @@ public class MediaInformation extends BorderPane {
 		duration.setText(media.durationEditedProperty().get());
 		
 		//== stars
-		stars.textProperty().bind(media.starsProperty().asString());
+		stars.textProperty().bind(media.starsProperty().get().textProperty());
 		
 		//== drive
 		drive.setText(media.getDrive());

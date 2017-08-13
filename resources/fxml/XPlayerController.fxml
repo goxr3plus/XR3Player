@@ -267,12 +267,30 @@
                                        <center>
                                           <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
                                        </center>
+                                       <top>
+                                          <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <ToggleButton fx:id="loveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: rgb(0,0,0.7); -fx-background-radius: 0;">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/loveDisabled.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Like/Dislike this Song" />
+                                                   </tooltip>
+                                                </ToggleButton>
+                                             </children>
+                                          </HBox>
+                                       </top>
                                     </BorderPane>
                                  </items>
                               </SplitPane>
                               <SplitPane dividerPositions="0.2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" orientation="VERTICAL">
                                  <items>
-                                    <VBox alignment="TOP_CENTER" spacing="1.0">
+                                    <VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="436.0" spacing="1.0">
                                        <children>
                                           <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" spacing="2.0" style="-fx-background-color: #202020;">
                                              <children>
@@ -291,9 +309,10 @@
                                           </HBox>
                                           <HBox spacing="1.0">
                                              <children>
-                                                <VBox maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
                                                       <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Elapsed" VBox.vgrow="ALWAYS" />
+                                                      <HBox prefHeight="100.0" prefWidth="200.0" />
                                                       <Label fx:id="elapsedTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
                                                    </children>
                                                 </VBox>
@@ -315,7 +334,7 @@
                                     </VBox>
                                     <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                        <children>
-                                          <TabPane id="SpecialTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+                                          <TabPane id="SpecialTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
                                             <tabs>
                                               <Tab fx:id="equalizerTab" text="Equalizer" />
                                             </tabs>

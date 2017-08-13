@@ -43,6 +43,7 @@ import application.versionupdate.UpdateWindow;
 import application.webbrowser.WebBrowserController;
 import application.windows.ApplicationInformationWindow;
 import application.windows.ConsoleWindowController;
+import application.windows.EmotionsWindow;
 import application.windows.ExportWindowController;
 import application.windows.FileAndFolderChooser;
 import application.windows.RenameWindow;
@@ -100,7 +101,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 77);
-		internalInformation.put("ReleasedDate", "07/08/2017");
+		internalInformation.put("ReleasedDate", "13/08/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -124,6 +125,9 @@ public class Main extends Application {
 	
 	/** The rename window. */
 	public static final RenameWindow renameWindow = new RenameWindow();
+	
+	/** The rename window. */
+	public static final EmotionsWindow emotionsWindow = new EmotionsWindow();
 	
 	/**
 	 * This window is being used to export files from the application to the outside world

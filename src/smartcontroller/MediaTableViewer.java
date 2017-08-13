@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -41,6 +42,12 @@ import smartcontroller.media.Media;
  */
 public class MediaTableViewer extends TableView<Media> {
 	
+	@FXML
+	private TableColumn<Media,SimpleObjectProperty<Button>> likeDislikeNeutral;
+	
+	@FXML
+	private TableColumn<Media,Integer> number;
+	
 	/** The has been played. */
 	@FXML
 	private TableColumn<Media,SimpleObjectProperty<ImageView>> hasBeenPlayed;
@@ -63,7 +70,7 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** The stars. */
 	@FXML
-	private TableColumn<Media,Double> stars;
+	private TableColumn<Media,SimpleObjectProperty<Button>> stars;
 	
 	/** The hour imported. */
 	@FXML
@@ -256,7 +263,7 @@ public class MediaTableViewer extends TableView<Media> {
 					//Primary
 					if (m.getButton() == MouseButton.PRIMARY) {
 						if (m.getClickCount() == 2)
-							row.itemProperty().get().rename(smartController, row);
+							row.itemProperty().get().rename(row);
 						
 					} //Secondary
 					else if (m.getButton() == MouseButton.SECONDARY && !smartController.getTableViewer().getSelectionModel().getSelectedItems().isEmpty())
@@ -362,6 +369,12 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		//--------------------------Other-----------------------------------
 		String center = "-fx-alignment:CENTER-LEFT;";
+		
+		// likeDislikeNeutral
+		likeDislikeNeutral.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
+		
+		// number
+		number.setCellValueFactory(new PropertyValueFactory<>("number"));
 		
 		// hasBeenPlayed
 		hasBeenPlayed.setCellValueFactory(new PropertyValueFactory<>("hasBeenPlayed"));

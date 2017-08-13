@@ -8,7 +8,17 @@
 
 <fx:root prefHeight="433.0" prefWidth="718.0" stylesheets="@../style/application.css" tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
-      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="File Played?">
+      <TableColumn fx:id="number" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="#" />
+      <TableColumn fx:id="likeDislikeNeutral" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Like/Dislike">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0">
+               <image>
+                  <Image url="@../image/likeFaded.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </TableColumn>
+      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Has been Played?">
          <graphic>
             <ImageView>
                <image>
