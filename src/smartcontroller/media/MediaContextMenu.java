@@ -336,7 +336,7 @@ public class MediaContextMenu extends ContextMenu {
 		//markAsPlayed
 		else if (source == markAsPlayed) {
 			if (!Main.playedSongs.containsFile(media.getFilePath()))
-				System.out.println(Main.playedSongs.add(media.getFilePath()));
+				System.out.println(Main.playedSongs.addIfNotExists(media.getFilePath()));
 			else
 				System.out.println(Main.playedSongs.remove(media.getFilePath()));
 		}

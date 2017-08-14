@@ -1,7 +1,4 @@
-/*
- * 
- */
-package xplayer;
+package application.speciallists;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,9 +11,12 @@ import application.Main;
 import application.tools.InfoTool;
 
 /**
- * The Class PlayedSongs.
+ * A special kind of list which is used to save the list to the database and also have it in RAM memory of the computer
+ * 
+ * @author GOXR3PLUS
+ *
  */
-public class PlayedMediaList {
+public class DatabaseList {
 	
 	/** The LinkedHashSet */
 	private Set<String> set = new LinkedHashSet<>();
@@ -24,7 +24,16 @@ public class PlayedMediaList {
 	/**
 	 * The name of the database table
 	 */
-	private static final String dataBaseTableName = "PlayedMediaList";
+	private final String dataBaseTableName;
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param dataBaseTableName
+	 */
+	public DatabaseList(String dataBaseTableName) {
+		this.dataBaseTableName = dataBaseTableName;
+	}
 	
 	//------------Prepared Statements---------------
 	
@@ -75,12 +84,12 @@ public class PlayedMediaList {
 	 *            the item
 	 * @return True if succeeded or False if not
 	 */
-	public boolean add(String item) {
+	public boolean addIfNotExists(String item) {
 		
 		if (set.add(item))
 			//Try to insert into the database
 			try (PreparedStatement insert = Main.dbManager.getConnection()
-					.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)");) {
+					.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)")) {
 				insert.setString(1, item);
 				insert.setInt(2, 0);
 				insert.setString(3, InfoTool.getCurrentDate());

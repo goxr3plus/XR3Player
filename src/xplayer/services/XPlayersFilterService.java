@@ -35,12 +35,16 @@ public class XPlayersFilterService {
 				
 				//Run forever , except if i interrupt it ;)
 				for (;; Thread.sleep(500))
-					Platform.runLater(() -> Main.xPlayersList.getList().forEach(xPlayerController ->
-					
-					//Set the appropriate image for the PlayPauseButton based on the status of the Player
-					( (ImageView) xPlayerController.getPlayPauseButton().getGraphic() )
-							.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage)));
-				
+					Platform.runLater(() -> Main.xPlayersList.getList().forEach(xPlayerController -> {
+						
+						//-------Set the appropriate image for the PlayPauseButton based on the status of the Player
+						( (ImageView) xPlayerController.getPlayPauseButton().getGraphic() )
+								.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+						
+						// ---------Liked or disliked--------?
+						xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
+						
+					}));
 			} catch (Exception ex) {
 				Main.logger.log(Level.INFO, "", ex);
 			} finally {

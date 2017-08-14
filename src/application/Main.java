@@ -34,6 +34,8 @@ import application.presenter.UpdateScreen;
 import application.presenter.treeview.TreeViewManager;
 import application.services.VacuumProgressService;
 import application.settings.ApplicationSettingsController;
+import application.speciallists.EmotionListsController;
+import application.speciallists.PlayedMediaList;
 import application.tools.ActionTool;
 import application.tools.ActionTool.FileType;
 import application.tools.InfoTool;
@@ -76,7 +78,6 @@ import smartcontroller.media.MediaContextMenu;
 import smartcontroller.media.MediaDeleteWindow;
 import smartcontroller.media.Information.MediaInformation;
 import smartcontroller.services.MediaFilterService;
-import xplayer.PlayedMediaList;
 import xplayer.XPlayersList;
 import xplayer.services.XPlayersFilterService;
 import xplayer.visualizer.view.VisualizerWindowController.Type;
@@ -101,7 +102,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 77);
-		internalInformation.put("ReleasedDate", "13/08/2017");
+		internalInformation.put("ReleasedDate", "14/08/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -191,6 +192,9 @@ public class Main extends Application {
 	
 	/** The Constant playedSongs. */
 	public static final PlayedMediaList playedSongs = new PlayedMediaList();
+	
+	/** The Constant EmotionListsController. */
+	public static final EmotionListsController emotionListsController = new EmotionListsController();
 	
 	//
 	

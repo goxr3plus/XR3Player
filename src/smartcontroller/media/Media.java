@@ -21,6 +21,9 @@ import application.librarymode.Library;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
+import application.windows.EmotionsWindow;
+import application.windows.EmotionsWindow.Emotion;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -148,7 +151,7 @@ public abstract class Media {
 		
 		//Like Dislike or Neutral Feelings
 		
-		ImageView imageView = InfoTool.getImageViewFromResourcesFolder("likeFaded.png");
+		ImageView imageView = new ImageView(EmotionsWindow.neutralImage);
 		imageView.setFitWidth(24);
 		imageView.setFitHeight(24);
 		
@@ -640,11 +643,29 @@ public abstract class Media {
 								}
 							});
 							
+							//Inform all XPlayers Models
+							Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
+								if (oldFilePath.equals(xPlayerController.getxPlayerModel().songPathProperty().get())) {
+									
+									//filePath
+									xPlayerController.getxPlayerModel().songPathProperty().set(newFilePath);
+									
+									//object
+									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
+									
+									//
+								}
+							});
+							
 							//Commit to the Database
 							Main.dbManager.commit();
 							
-							// Rename it in playedSong if...
+							// Inform Played Media List
 							Main.playedSongs.renameMedia(oldFilePath, newFilePath);
+							// Inform Disliked Media List
+							Main.emotionListsController.getDislikedSongsList().renameMedia(oldFilePath, newFilePath);
+							// Inform Liked Media List
+							Main.emotionListsController.getLikedSongsList().renameMedia(oldFilePath, newFilePath);
 							
 							//Update the SearchWindow
 							Main.searchWindow.getSmartController().getItemsObservableList().forEach(media -> {
@@ -790,14 +811,32 @@ public abstract class Media {
 				// !showing?
 				if (!Main.emotionsWindow.getWindow().isShowing()) {
 					
-					System.out.println(Main.emotionsWindow.getEmotion());
-					//Commit
-					//Main.dbManager.commit();
+					//Add it the one of the emotions list
+					Main.emotionListsController.makeEmotionDecisition(Media.this.getFilePath(), Main.emotionsWindow.getEmotion());
+					
+					//System.out.println(Main.emotionsWindow.getEmotion());
 					
 				}
 			}
 		});
 		
+	}
+	
+	/**
+	 * This method is called to change the Emotion Image of the Media based on the current Emotion
+	 * 
+	 * @param emotion
+	 */
+	public void changeEmotionImage(Emotion emotion) {
+		//Make sure it will run on JavaFX Thread
+		Platform.runLater(() -> {
+			if (emotion == Emotion.DISLIKE)
+				( (ImageView) likeDislikeNeutral.get().getGraphic() ).setImage(EmotionsWindow.dislikeImage);
+			else if (emotion == Emotion.NEUTRAL)
+				( (ImageView) likeDislikeNeutral.get().getGraphic() ).setImage(EmotionsWindow.neutralImage);
+			else if (emotion == Emotion.LIKE)
+				( (ImageView) likeDislikeNeutral.get().getGraphic() ).setImage(EmotionsWindow.likeImage);
+		});
 	}
 	
 	// --------GETTERS------------------------------------------------------------------------------------

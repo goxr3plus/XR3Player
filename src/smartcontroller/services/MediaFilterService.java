@@ -148,6 +148,10 @@ public class MediaFilterService {
 							.anyMatch(playedFile -> new File(playedFile).length() == mediaFileLength));
 					
 				}
+				
+				// ---------Liked or disliked--------?
+				media.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(media.getFilePath()));
+				
 			});
 		}
 		

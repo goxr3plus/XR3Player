@@ -270,18 +270,21 @@
                                        <top>
                                           <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
                                              <children>
-                                                <ToggleButton fx:id="loveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: rgb(0,0,0.7); -fx-background-radius: 0;">
+                                                <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
                                                    <graphic>
                                                       <ImageView pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../image/loveDisabled.png" />
+                                                            <Image url="@../image/likeFaded.png" />
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
                                                    <tooltip>
-                                                      <Tooltip text="Like/Dislike this Song" />
+                                                      <Tooltip text="Express your emotion for this Song" />
                                                    </tooltip>
-                                                </ToggleButton>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
                                              </children>
                                           </HBox>
                                        </top>
@@ -337,6 +340,7 @@
                                           <TabPane id="SpecialTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
                                             <tabs>
                                               <Tab fx:id="equalizerTab" text="Equalizer" />
+                                                <Tab fx:id="padTab" text="Pad 8" />
                                             </tabs>
                                           </TabPane>
                                        </children>

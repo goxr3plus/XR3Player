@@ -5,31 +5,20 @@ package application.windows;
 
 import java.io.IOException;
 
-import org.controlsfx.control.textfield.TextFields;
-
-import application.tools.ActionTool;
 import application.tools.InfoTool;
-import application.tools.NotificationType;
 import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCode;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 /**
  * The Class RenameWindow.
@@ -52,6 +41,10 @@ public class EmotionsWindow extends BorderPane {
 	
 	/** The Emotion of the User */
 	private Emotion emotion = Emotion.NEUTRAL;
+	
+	public static final Image dislikeImage = InfoTool.getImageFromResourcesFolder("dislike.png");
+	public static final Image neutralImage = InfoTool.getImageFromResourcesFolder("likeFaded.png");
+	public static final Image likeImage = InfoTool.getImageFromResourcesFolder("like.png");
 	
 	/**
 	 * Constructor
@@ -82,6 +75,10 @@ public class EmotionsWindow extends BorderPane {
 		
 		// ----------------------------------Scene
 		window.setScene(new Scene(this, Color.TRANSPARENT));
+		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
+			if (!newValue)
+				window.close();
+		});
 	}
 	
 	/**
@@ -192,14 +189,15 @@ public class EmotionsWindow extends BorderPane {
 	public Emotion getEmotion() {
 		return emotion;
 	}
-
+	
 	/**
-	 * @param emotion the emotion to set
+	 * @param emotion
+	 *            the emotion to set
 	 */
 	public void setEmotion(Emotion emotion) {
 		this.emotion = emotion;
 	}
-
+	
 	/**
 	 * This enum represents possible emotions a user may feel for a song
 	 * 

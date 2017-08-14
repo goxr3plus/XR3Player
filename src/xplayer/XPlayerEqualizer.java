@@ -42,22 +42,22 @@ public class XPlayerEqualizer extends BorderPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	/** The color. */
-	Color color = Color.BLUEVIOLET;
+	private Color color = Color.BLUEVIOLET;
 	
 	/** The pan filter. */
-	DJFilter panFilter;
+	private DJFilter panFilter;
 	
 	/** The balance filter. */
-	DJFilter balanceFilter;
+	private DJFilter balanceFilter;
 	
 	/** The amplitude filter. */
-	DJFilter amplitudeFilter;
+	private DJFilter amplitudeFilter;
 	
 	/** The x player UI. */
-	XPlayerController xPlayerUI;
+	private final XPlayerController xPlayerController;
 	
 	/** The filters. */
-	Filter[] filters = new Filter[32];
+	private Filter[] filters = new Filter[32];
 	
 	private final double[] PRESET_NORMAL = { 50 , 50 , 50 , 50 , 50 , 50 , 50 , 50 , 50 , 50 };
 	private final double[] PRESET_CLASSICAL = { 50 , 50 , 50 , 50 , 50 , 50 , 70 , 70 , 70 , 76 };
@@ -76,7 +76,7 @@ public class XPlayerEqualizer extends BorderPane {
 	
 	/** The filter buttons. */
 	//where 0.0 is equivalent to 0.50 for FilterButton 
-	FilterButton[] filterButtons = new FilterButton[]{ new FilterButton("Normal", PRESET_NORMAL) , new FilterButton("Classical", PRESET_CLASSICAL) ,
+	private FilterButton[] filterButtons = new FilterButton[]{ new FilterButton("Normal", PRESET_NORMAL) , new FilterButton("Classical", PRESET_CLASSICAL) ,
 			new FilterButton("Club", PRESET_CLUB) , new FilterButton("Dance", PRESET_DANCE) , new FilterButton("FullBass", PRESET_FULLBASS) ,
 			new FilterButton("FullBassTreble", PRESET_FULLBASSTREBLE) , new FilterButton("FullTreble", PRESET_FULLTREBLE) , new FilterButton("Laptop", PRESET_LAPTOP) ,
 			new FilterButton("Live", PRESET_LIVE) , new FilterButton("Party", PRESET_PARTY) , new FilterButton("Pop", PRESET_POP) , new FilterButton("Reggae", PRESET_REGGAE) ,
@@ -85,12 +85,12 @@ public class XPlayerEqualizer extends BorderPane {
 	/**
 	 * Constructor.
 	 *
-	 * @param xPlayerUI
-	 *            the x player UI
+	 * @param xPlayerController
+	 *            The user Interface Controller of the Player
 	 */
-	public XPlayerEqualizer(XPlayerController xPlayerUI) {
-		this.xPlayerUI = xPlayerUI;
-		color = xPlayerUI.getDiscColor();
+	public XPlayerEqualizer(XPlayerController xPlayerController) {
+		this.xPlayerController = xPlayerController;
+		color = xPlayerController.getDiscColor();
 		
 		// ----------------------------------FXMLLoader-------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerEqualizer.fxml"));
@@ -121,16 +121,16 @@ public class XPlayerEqualizer extends BorderPane {
 		resetFilters.setOnAction(action -> {
 			//Balance
 			balanceFilter.setAngle(100, 200);
-			xPlayerUI.getxPlayer().setBalance((float) 0.0);
+			xPlayerController.getxPlayer().setBalance((float) 0.0);
 			
 			//Pan
 			panFilter.setAngle(100, 200);
-			xPlayerUI.getxPlayer().setPan(0.0);
+			xPlayerController.getxPlayer().setPan(0.0);
 			
 			//Reset the equalizer
 			for (int i = 0; i < 32; i++)
-				xPlayerUI.getxPlayerModel().getEqualizerArray()[i] = 0.0f;
-			xPlayerUI.getxPlayer().setEqualizer(xPlayerUI.getxPlayerModel().getEqualizerArray(), 32);
+				xPlayerController.getxPlayerModel().getEqualizerArray()[i] = 0.0f;
+			xPlayerController.getxPlayer().setEqualizer(xPlayerController.getxPlayerModel().getEqualizerArray(), 32);
 			for (Filter filter : filters)
 				filter.resetToZero();
 		});
@@ -144,18 +144,32 @@ public class XPlayerEqualizer extends BorderPane {
 		panFilter = new DJFilter(36, 36, Color.WHITE, Color.GOLD, Color.BLACK);
 		panFilter.setOnMouseDragged(drag -> {
 			panFilter.onMouseDragged(drag);
-			xPlayerUI.getxPlayer().setPan(panFilter.getValue(200));
+			xPlayerController.getxPlayer().setPan(panFilter.getValue(200));
 		});
 		
 		// --balanceFilter
 		balanceFilter = new DJFilter(36, 36, Color.WHITE, Color.GOLD, Color.BLACK);
 		balanceFilter.setOnMouseDragged(drag -> {
 			balanceFilter.onMouseDragged(drag);
-			xPlayerUI.getxPlayer().setBalance(balanceFilter.getValue(200));
+			xPlayerController.getxPlayer().setBalance(balanceFilter.getValue(200));
 		});
 		
 		//tilePane.getChildren().add(0,balanceFilter);
-		tilePane.getChildren().add(0,panFilter);		
+		tilePane.getChildren().add(0, panFilter);
+	}
+	
+	/**
+	 * @return the panFilter
+	 */
+	public DJFilter getPanFilter() {
+		return panFilter;
+	}
+	
+	/**
+	 * @return the balanceFilter
+	 */
+	public DJFilter getBalanceFilter() {
+		return balanceFilter;
 	}
 	
 	/**
@@ -186,8 +200,8 @@ public class XPlayerEqualizer extends BorderPane {
 				super.onMouseDragged(m);
 				
 				//Add the filter
-				xPlayerUI.getxPlayerModel().getEqualizerArray()[position] = getValue(200);
-				xPlayerUI.getxPlayer().setEqualizerKey(xPlayerUI.getxPlayerModel().getEqualizerArray()[position], position);
+				xPlayerController.getxPlayerModel().getEqualizerArray()[position] = getValue(200);
+				xPlayerController.getxPlayer().setEqualizerKey(xPlayerController.getxPlayerModel().getEqualizerArray()[position], position);
 			});
 			
 		}
@@ -227,14 +241,14 @@ public class XPlayerEqualizer extends BorderPane {
 			setOnAction(action -> {
 				// Pass the values to the array
 				for (int y = 0; y < 10; y++)
-					xPlayerUI.getxPlayerModel().getEqualizerArray()[y] = (float) vars[y];
+					xPlayerController.getxPlayerModel().getEqualizerArray()[y] = (float) vars[y];
 				
 				// Set the filter
-				xPlayerUI.getxPlayer().setEqualizer(xPlayerUI.getxPlayerModel().getEqualizerArray(), 32);
+				xPlayerController.getxPlayer().setEqualizer(xPlayerController.getxPlayerModel().getEqualizerArray(), 32);
 				
 				// Change the angles on the filters
 				for (int i = 0; i < 10; i++)
-					filters[i].setAngle(xPlayerUI.getxPlayerModel().getEqualizerArray()[i], 200);
+					filters[i].setAngle(xPlayerController.getxPlayerModel().getEqualizerArray()[i], 200);
 				
 			});
 			

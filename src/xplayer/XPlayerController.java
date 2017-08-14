@@ -21,9 +21,13 @@ import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
+import application.windows.EmotionsWindow;
 import application.windows.XPlayerWindow;
+import application.windows.EmotionsWindow.Emotion;
 import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,6 +37,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -77,9 +82,6 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	public static final Image playImage = InfoTool.getImageFromResourcesFolder("play.png");
 	public static final Image pauseImage = InfoTool.getImageFromResourcesFolder("pause.png");
-	
-	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
-	public static final Image loveDisabledImage = InfoTool.getImageFromResourcesFolder("loveDisabled.png");
 	
 	//-----------------------------------------------
 	
@@ -153,7 +155,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private StackPane diskStackPane;
 	
 	@FXML
-	private ToggleButton loveButton;
+	private Button emotionsButton;
 	
 	@FXML
 	private HBox mediaNameHBox;
@@ -172,6 +174,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private Tab equalizerTab;
+	
+	@FXML
+	private Tab padTab;
 	
 	@FXML
 	private Label topInfoLabel;
@@ -265,6 +270,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	/** The equalizer. */
 	private XPlayerEqualizer equalizer;
+	
+	private XPlayerPad xPlayerPad;
 	
 	/** The disc. */
 	private DJDisc disc;
@@ -498,12 +505,58 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			
 		})));
 		
-		//=loveButton
-		loveButton.selectedProperty().addListener((observable , oldValue , newValue) -> {
-			//Update the Image
-			( (ImageView) loveButton.getGraphic() ).setImage(newValue ? loveImage : loveDisabledImage);
-			
-			//Update the DataBase
+		//=emotionsButton
+		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
+		emotionsButton.setOnAction(a -> updateEmotion(emotionsButton));
+		
+	}
+	
+	/**
+	 * This method is called to change the Emotion Image of the Media based on the current Emotion
+	 * 
+	 * @param emotion
+	 */
+	public void changeEmotionImage(Emotion emotion) {
+		//Make sure it will run on JavaFX Thread
+		Platform.runLater(() -> {
+			if (emotion == Emotion.DISLIKE)
+				( (ImageView) emotionsButton.getGraphic() ).setImage(EmotionsWindow.dislikeImage);
+			else if (emotion == Emotion.NEUTRAL)
+				( (ImageView) emotionsButton.getGraphic() ).setImage(EmotionsWindow.neutralImage);
+			else if (emotion == Emotion.LIKE)
+				( (ImageView) emotionsButton.getGraphic() ).setImage(EmotionsWindow.likeImage);
+		});
+	}
+	
+	/**
+	 * Update the emotion the user is feeling for this Media
+	 */
+	public void updateEmotion(Node node) {
+		
+		// Show the Window
+		Main.emotionsWindow.show(node);
+		
+		// Listener
+		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
+			/**
+			 * [[SuppressWarningsSpartan]]
+			 */
+			@Override
+			public void invalidated(Observable o) {
+				
+				// Remove the listener
+				Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
+				
+				// !showing?
+				if (!Main.emotionsWindow.getWindow().isShowing()) {
+					
+					//Add it the one of the emotions list
+					Main.emotionListsController.makeEmotionDecisition(xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion());
+					
+					//System.out.println(Main.emotionsWindow.getEmotion());
+					
+				}
+			}
 		});
 		
 	}
@@ -762,6 +815,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		//Equalizer
 		equalizer = new XPlayerEqualizer(this);
 		equalizerTab.setContent(equalizer);
+		
+		//Pad
+		xPlayerPad = new XPlayerPad(this);
+		padTab.setContent(xPlayerPad);
 	}
 	
 	/**
@@ -882,13 +939,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// Sets Pan value. Line should be opened before calling this method.
 		// Linear scale : -1.0 <--> +1.0
-		xPlayer.setPan(equalizer.panFilter.getValue(200));
+		xPlayer.setPan(equalizer.getPanFilter().getValue(200));
 		
 		// Represents a control for the relative balance of a stereo signal
 		// between two stereo speakers. The valid range of values is -1.0 (left
 		// channel only) to 1.0 (right channel only). The default is 0.0
 		// (centered).
-		xPlayer.setBalance(equalizer.balanceFilter.getValue(200));
+		xPlayer.setBalance(equalizer.getBalanceFilter().getValue(200));
 		
 		// Audio is MP3?
 		if (!"mp3".equals(xPlayerModel.songExtensionProperty().get()))
@@ -1379,10 +1436,17 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * @return the loveButton
+	 * @return the emotionsButton
 	 */
-	public ToggleButton getLoveButton() {
-		return loveButton;
+	public Button getEmotionsButton() {
+		return emotionsButton;
+	}
+	
+	/**
+	 * @return the playService
+	 */
+	public XPlayerPlayService getPlayService() {
+		return playService;
 	}
 	
 }

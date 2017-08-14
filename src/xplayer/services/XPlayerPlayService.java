@@ -131,13 +131,13 @@ public class XPlayerPlayService extends Service<Boolean> {
 					
 					// duration
 					xPlayerController.getxPlayerModel().setDuration(InfoTool.durationInSeconds(xPlayerController.getxPlayerModel().songPathProperty().get(),
-							checkAudioType(xPlayerController.getxPlayerModel().songPathProperty().get())));
-					
-					//== TotalTimeLabel
-					Platform.runLater(() -> xPlayerController.getTotalTimeLabel().setText(InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
+							checkAudioTypeAndUpdateXPlayerModel(xPlayerController.getxPlayerModel().songPathProperty().get())));
 					
 					// extension
 					xPlayerController.getxPlayerModel().songExtensionProperty().set(InfoTool.getFileExtension(xPlayerController.getxPlayerModel().songPathProperty().get()));
+					
+					//== TotalTimeLabel
+					Platform.runLater(() -> xPlayerController.getTotalTimeLabel().setText(InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
 					
 					// ----------------------- Load the Album Image
 					image = InfoTool.getAudioAlbumImage(xPlayerController.getxPlayerModel().songPathProperty().get(), -1, -1);
@@ -186,39 +186,39 @@ public class XPlayerPlayService extends Service<Boolean> {
 				return true;
 			}
 			
-			/**
-			 * Checking the audio type -> File || URL
-			 * 
-			 * @param path
-			 *            The path of the audio File
-			 * @return returns
-			 * @see AudioType
-			 */
-			AudioType checkAudioType(String path) {
-				
-				// File?
-				try {
-					xPlayerController.getxPlayerModel().songObjectProperty().set(new File(path));
-					return AudioType.FILE;
-				} catch (Exception ex) {
-					xPlayerController.logger.log(Level.WARNING, "", ex);
-				}
-				
-				// URL?
-				try {
-					xPlayerController.getxPlayerModel().songObjectProperty().set(new URL(path));
-					return AudioType.URL;
-				} catch (MalformedURLException ex) {
-					xPlayerController.logger.log(Level.WARNING, "MalformedURLException", ex);
-				}
-				
-				// very dangerous this null here!!!!!!!!!!!
-				xPlayerController.getxPlayerModel().songObjectProperty().set(null);
-				
-				return AudioType.UNKNOWN;
-			}
-			
 		};
+	}
+	
+	/**
+	 * Checking the audio type -> File || URL
+	 * 
+	 * @param path
+	 *            The path of the audio File
+	 * @return returns
+	 * @see AudioType
+	 */
+	public AudioType checkAudioTypeAndUpdateXPlayerModel(String path) {
+		
+		// File?
+		try {
+			xPlayerController.getxPlayerModel().songObjectProperty().set(new File(path));
+			return AudioType.FILE;
+		} catch (Exception ex) {
+			xPlayerController.logger.log(Level.WARNING, "", ex);
+		}
+		
+		// URL?
+		try {
+			xPlayerController.getxPlayerModel().songObjectProperty().set(new URL(path));
+			return AudioType.URL;
+		} catch (MalformedURLException ex) {
+			xPlayerController.logger.log(Level.WARNING, "MalformedURLException", ex);
+		}
+		
+		// very dangerous this null here!!!!!!!!!!!
+		xPlayerController.getxPlayerModel().songObjectProperty().set(null);
+		
+		return AudioType.UNKNOWN;
 	}
 	
 	@Override
@@ -232,7 +232,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		// add to played songs...
 		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
-		Main.playedSongs.add(absolutePath);
+		Main.playedSongs.addIfNotExists(absolutePath);
 		xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath)));
 		
 		done();
