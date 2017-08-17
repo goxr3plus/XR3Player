@@ -88,14 +88,6 @@ import xr3capture.CaptureWindow;
  *
  * @author GOXR3PLUS
  */
-/**
- * @author GOXR3PLUS
- *
- */
-/**
- * @author GOXR3PLUS
- *
- */
 public class Main extends Application {
 	
 	public static Properties internalInformation = new Properties();
