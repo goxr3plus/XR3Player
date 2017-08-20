@@ -6,6 +6,8 @@ package application.windows;
 import java.io.IOException;
 
 import application.tools.InfoTool;
+import application.windows.EmotionsWindow.Emotion;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -26,6 +29,9 @@ import javafx.stage.StageStyle;
 public class EmotionsWindow extends BorderPane {
 	
 	@FXML
+	private Button hate;
+	
+	@FXML
 	private Button dislike;
 	
 	@FXML
@@ -33,6 +39,9 @@ public class EmotionsWindow extends BorderPane {
 	
 	@FXML
 	private Button like;
+	
+	@FXML
+	private Button love;
 	
 	// ----------------     
 	
@@ -42,9 +51,11 @@ public class EmotionsWindow extends BorderPane {
 	/** The Emotion of the User */
 	private Emotion emotion = Emotion.NEUTRAL;
 	
+	public static final Image hateImage = InfoTool.getImageFromResourcesFolder("angry.png");
 	public static final Image dislikeImage = InfoTool.getImageFromResourcesFolder("dislike.png");
 	public static final Image neutralImage = InfoTool.getImageFromResourcesFolder("likeFaded.png");
 	public static final Image likeImage = InfoTool.getImageFromResourcesFolder("like.png");
+	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
 	
 	/**
 	 * Constructor
@@ -53,7 +64,7 @@ public class EmotionsWindow extends BorderPane {
 		
 		// Window
 		window.setTitle("Rename Window");
-		window.setWidth(130);
+		window.setWidth(216);
 		window.setHeight(45);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.initStyle(StageStyle.TRANSPARENT);
@@ -87,6 +98,10 @@ public class EmotionsWindow extends BorderPane {
 	@FXML
 	private void initialize() {
 		
+		hate.setOnAction(a -> {
+			emotion = Emotion.HATE;
+			window.close();
+		});
 		dislike.setOnAction(a -> {
 			emotion = Emotion.DISLIKE;
 			window.close();
@@ -97,6 +112,10 @@ public class EmotionsWindow extends BorderPane {
 		});
 		like.setOnAction(a -> {
 			emotion = Emotion.LIKE;
+			window.close();
+		});
+		love.setOnAction(a -> {
+			emotion = Emotion.LOVE;
 			window.close();
 		});
 	}
@@ -114,7 +133,7 @@ public class EmotionsWindow extends BorderPane {
 		Bounds bounds = n.localToScreen(n.getBoundsInLocal());
 		//show(text, bounds.getMinX() + 5, bounds.getMaxY(), title);
 		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2);
-		show(bounds.getMinX() - 130 / 2 + bounds.getWidth() / 2, bounds.getMaxY());
+		show(bounds.getMinX() - 216 / 2 + bounds.getWidth() / 2, bounds.getMaxY());
 		
 		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2);
 	}
@@ -199,12 +218,41 @@ public class EmotionsWindow extends BorderPane {
 	}
 	
 	/**
+	 * The user is passing a button and an emotion and this method sets the correct graphic based on the emotion given
+	 * 
+	 * @param button
+	 * @param emotion
+	 */
+	public void giveEmotionImageToButton(Button button , Emotion emotion) {
+		//Make sure it will run on JavaFX Thread
+		Platform.runLater(() -> {
+			if (emotion == Emotion.HATE)
+				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.hateImage);
+			else if (emotion == Emotion.DISLIKE)
+				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.dislikeImage);
+			else if (emotion == Emotion.NEUTRAL)
+				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.neutralImage);
+			else if (emotion == Emotion.LIKE)
+				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.likeImage);
+			else if (emotion == Emotion.LOVE)
+				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.loveImage);
+		});
+	}
+	
+	/**
 	 * This enum represents possible emotions a user may feel for a song
 	 * 
 	 * @author GOXR3PLUS
 	 *
 	 */
 	public enum Emotion {
+		
+		HATE {
+			@Override
+			public String toString() {
+				return "HATE";
+			}
+		},
 		
 		DISLIKE {
 			@Override
@@ -222,6 +270,12 @@ public class EmotionsWindow extends BorderPane {
 			@Override
 			public String toString() {
 				return "LIKE";
+			}
+		},
+		LOVE {
+			@Override
+			public String toString() {
+				return "LOVE";
 			}
 		}
 	}

@@ -23,18 +23,15 @@ import application.tools.InfoTool;
 import application.tools.NotificationType;
 import application.windows.EmotionsWindow;
 import application.windows.EmotionsWindow.Emotion;
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
@@ -56,7 +53,7 @@ public abstract class Media {
 	private SimpleObjectProperty<ImageView> mediaType;
 	
 	/** The has been played. */
-	private SimpleObjectProperty<ImageView> hasBeenPlayed;
+	private SimpleBooleanProperty hasBeenPlayed;
 	
 	/** Liked Disliked or Neutral feelings */
 	private SimpleObjectProperty<Button> likeDislikeNeutral;
@@ -124,6 +121,9 @@ public abstract class Media {
 	/** The video image. */
 	private static final Image VIDEO_IMAGE = InfoTool.getImageFromResourcesFolder("video.png");
 	
+	/** The image to be shown when the Media has been already Played */
+	public static final Image PLAYED_IMAGE = InfoTool.getImageFromResourcesFolder("played.png");
+	
 	/** The genre. */
 	private Genre genre;
 	
@@ -147,7 +147,7 @@ public abstract class Media {
 		
 		// ....initialize
 		mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? SONG_IMAGE : VIDEO_IMAGE));
-		hasBeenPlayed = new SimpleObjectProperty<>(new ImageView());
+		hasBeenPlayed = new SimpleBooleanProperty(false);
 		
 		//Like Dislike or Neutral Feelings
 		
@@ -288,7 +288,7 @@ public abstract class Media {
 	 *
 	 * @return the simple object property
 	 */
-	public SimpleObjectProperty<ImageView> hasBeenPlayedProperty() {
+	public SimpleBooleanProperty hasBeenPlayedProperty() {
 		return hasBeenPlayed;
 	}
 	
@@ -668,7 +668,7 @@ public abstract class Media {
 							Main.emotionListsController.getLikedSongsList().renameMedia(oldFilePath, newFilePath);
 							
 							//Update the SearchWindow
-							Main.searchWindow.getSmartController().getItemsObservableList().forEach(media -> {
+							Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
 								if (media.getFilePath().equals(oldFilePath))
 									media.setFilePath(newFilePath);
 							});
@@ -774,7 +774,7 @@ public abstract class Media {
 						});
 						
 						//Update the SearchWindow
-						Main.searchWindow.getSmartController().getItemsObservableList().forEach(media -> {
+						Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
 							if (media.getFilePath().equals(Media.this.getFilePath()))
 								media.starsProperty().get().setText(stars.get().getText());
 						});
@@ -828,15 +828,7 @@ public abstract class Media {
 	 * @param emotion
 	 */
 	public void changeEmotionImage(Emotion emotion) {
-		//Make sure it will run on JavaFX Thread
-		Platform.runLater(() -> {
-			if (emotion == Emotion.DISLIKE)
-				( (ImageView) likeDislikeNeutral.get().getGraphic() ).setImage(EmotionsWindow.dislikeImage);
-			else if (emotion == Emotion.NEUTRAL)
-				( (ImageView) likeDislikeNeutral.get().getGraphic() ).setImage(EmotionsWindow.neutralImage);
-			else if (emotion == Emotion.LIKE)
-				( (ImageView) likeDislikeNeutral.get().getGraphic() ).setImage(EmotionsWindow.likeImage);
-		});
+		Main.emotionsWindow.giveEmotionImageToButton(likeDislikeNeutral.get(), emotion);
 	}
 	
 	// --------GETTERS------------------------------------------------------------------------------------
@@ -1039,7 +1031,7 @@ public abstract class Media {
 	 * @param played
 	 */
 	public void setMediaPlayed(boolean played) {
-		hasBeenPlayed.get().setImage(!played ? null : InfoTool.playedImage);
+		hasBeenPlayed.set(played);
 	}
 	
 	// ------------------ABSTRACT METHODS

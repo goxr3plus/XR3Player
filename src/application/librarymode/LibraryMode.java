@@ -502,7 +502,7 @@ public class LibraryMode extends BorderPane {
 	public void turnUpsideDownSplitPane(boolean turnDown) {
 		
 		//Check if it can enter based on the library border pane position
-		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(borderPane) ) || ( !turnDown && topSplitPane.getItems().get(0).equals(borderPane) ))
+		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ) || ( !turnDown && topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
 			return;
 		
 		//this.saveTopSplitPaneDivider();
@@ -510,12 +510,16 @@ public class LibraryMode extends BorderPane {
 		topSplitPaneDivider[0] = topSplitPaneDivider[1];
 		topSplitPaneDivider[1] = temp;
 		
-		boolean libraryIsOnTop = topSplitPane.getItems().get(0).equals(borderPane);
+		boolean libraryIsOnTop = topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane);
 		topSplitPane.getItems().clear();
-		if (libraryIsOnTop)
-			topSplitPane.getItems().addAll(bottomSplitPane, borderPane);
-		else
-			topSplitPane.getItems().addAll(borderPane, bottomSplitPane);
+		if (libraryIsOnTop) {
+			System.out.println("Entered first if!");
+			topSplitPane.getItems().addAll(bottomSplitPane, Main.playListModesSplitPane);
+		}else {
+			System.out.println("Entered second if!");
+			topSplitPane.getItems().addAll(Main.playListModesSplitPane, bottomSplitPane);
+		}
+			
 		
 		this.updateTopSplitPaneDivider();
 		
@@ -530,11 +534,19 @@ public class LibraryMode extends BorderPane {
 		return topSplitPane;
 	}
 	
+		/**
+		 * @return the bottomSplitPane
+		 */
+		public SplitPane getBottomSplitPane() {
+			return bottomSplitPane;
+		}
+		
+	
 	/**
-	 * @return the bottomSplitPane
+	 * @return the borderPane
 	 */
-	public SplitPane getBottomSplitPane() {
-		return bottomSplitPane;
+	public BorderPane getBorderPane() {
+		return borderPane;
 	}
 	
 }

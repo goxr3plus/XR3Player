@@ -23,11 +23,13 @@ import application.database.DbManager;
 import application.database.PropertiesDb;
 import application.djmode.DJMode;
 import application.librarymode.LibraryMode;
-import application.librarymode.MultipleTabs;
 import application.loginmode.LoginMode;
 import application.loginmode.User;
 import application.loginmode.UserMode;
 import application.presenter.BottomBar;
+import application.presenter.EmotionsTabPane;
+import application.presenter.PlayListModesSplitPane;
+import application.presenter.PlayListModesTabPane;
 import application.presenter.SideBar;
 import application.presenter.TopBar;
 import application.presenter.UpdateScreen;
@@ -49,7 +51,6 @@ import application.windows.EmotionsWindow;
 import application.windows.ExportWindowController;
 import application.windows.FileAndFolderChooser;
 import application.windows.RenameWindow;
-import application.windows.SearchWindow;
 import application.windows.StarWindow;
 import application.windows.WelcomeScreen;
 import javafx.animation.PauseTransition;
@@ -73,6 +74,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import smartcontroller.Genre;
+import smartcontroller.SmartController;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import smartcontroller.media.MediaContextMenu;
 import smartcontroller.media.MediaDeleteWindow;
@@ -93,8 +96,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 77);
-		internalInformation.put("ReleasedDate", "14/08/2017");
+		internalInformation.put("Version", 78);
+		internalInformation.put("ReleasedDate", "20/08/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -142,9 +145,6 @@ public class Main extends Application {
 	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
 	 */
 	public static CaptureWindow captureWindow = new CaptureWindow();
-	
-	/** The Search Window of the application */
-	public static SearchWindow searchWindow = new SearchWindow();
 	
 	public static UpdateWindow updateWindow = new UpdateWindow();
 	
@@ -227,8 +227,15 @@ public class Main extends Application {
 	/** The Constant djMode. */
 	public static DJMode djMode = new DJMode();
 	
+	public static EmotionsTabPane emotionsTabPane = new EmotionsTabPane();
+	
+	/** The Search Window Smart Controller of the application */
+	public static SmartController searchWindowSmartController = new SmartController(Genre.SEARCHWINDOW, "Searching any Media", null);
+	
+	public static PlayListModesTabPane playListModesTabPane = new PlayListModesTabPane();
+	
 	/** The Constant multipleTabs. */
-	public static MultipleTabs multipleTabs = new MultipleTabs();
+	public static PlayListModesSplitPane playListModesSplitPane = new PlayListModesSplitPane();
 	
 	/**
 	 * The Login Mode where the user of the applications has to choose an account to login
@@ -259,8 +266,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		//width = 1380;
-		//height = 800;
+		width = 1380;
+		height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -272,7 +279,7 @@ public class Main extends Application {
 		});
 		
 		// Scene
-		scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, 650, 500);
+		scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, width * 0.95, height * 0.95);
 		scene.setMoveControl(loginMode.getXr3PlayerLabel());
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		window.setScene(scene);
@@ -329,7 +336,7 @@ public class Main extends Application {
 		consoleWindow.getWindow().initOwner(window);
 		settingsWindow.getWindow().initOwner(window);
 		aboutWindow.getWindow().initOwner(window);
-		searchWindow.getWindow().initOwner(window);
+		//searchWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
 		welcomeScreen.getWindow().initOwner(window);
 		
@@ -371,9 +378,15 @@ public class Main extends Application {
 		//---------LibraryMode ------------			
 		libraryMode.librariesContextMenu.show(window, 0, 0);
 		libraryMode.librariesContextMenu.hide();
-		libraryMode.getBottomSplitPane().getItems().add(multipleTabs);
+		
+		//Remove this to be soore...
+		libraryMode.getTopSplitPane().getItems().remove(libraryMode.getBorderPane());
+		
+		libraryMode.getTopSplitPane().getItems().add(playListModesSplitPane);
+		libraryMode.getBottomSplitPane().getItems().add(libraryMode.getBorderPane());
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
-		libraryMode.multipleLibs.emptyLabel.textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
+		
+		libraryMode.multipleLibs.getEmptyLabel().textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
 				.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
@@ -388,7 +401,7 @@ public class Main extends Application {
 		//		loginMode.userContextMenu.hide();
 		
 		// --- SearchWindow-----
-		searchWindow.getWindow().getScene().getStylesheets().addAll(scene.getStylesheets());
+		//searchWindow.getWindow().getScene().getStylesheets().addAll(scene.getStylesheets());
 		
 		//----------ApplicationStackPane---------
 		applicationStackPane.getChildren().addAll(root, loginMode, updateScreen);
@@ -709,7 +722,7 @@ public class Main extends Application {
 					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
 			
 			//--General-Settings-LibraryMode
-			multipleTabs.updateSplitPaneDivider();
+			playListModesSplitPane.updateSplitPaneDivider();
 			libraryMode.updateTopSplitPaneDivider();
 			libraryMode.updateBottomSplitPaneDivider();
 			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))

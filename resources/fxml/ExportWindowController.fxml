@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<fx:root prefHeight="320.0" prefWidth="597.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="320.0" prefWidth="597.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +41,7 @@
                         <HBox spacing="10.0">
                            <children>
                               <JFXCheckBox disable="true" styleClass="settingsRadioButton" text="Selected Items" />
-                              <JFXCheckBox alignment="CENTER" disable="true" selected="true" styleClass="settingsRadioButton" text="Export All" />
+                              <JFXCheckBox alignment="CENTER" disable="true" selected="true" styleClass="settingsRadioButton" text="Only current page" />
                            </children>
                         </HBox>
                      </children>
@@ -62,18 +61,8 @@
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="27.0">
-                     <children>
-                        <TextField maxWidth="1.7976931348623157E308" text="...export to[will be implemeted soon]" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="..." />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="88.0">
-                     <children>
-                        <TextField maxWidth="1.7976931348623157E308" text="...export to[will be implemented soon]" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="..." />
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="27.0" />
+                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="88.0" />
                </children>
             </VBox>
             <HBox alignment="CENTER" spacing="15.0">
@@ -96,4 +85,11 @@
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
+   <top>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="64.0" styleClass="applicationSettingsLabel" text="I need to redisign this ungly stupid window ... Though it partially works .... Oou O_O Hello There" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
 </fx:root>

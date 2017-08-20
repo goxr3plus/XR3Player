@@ -990,7 +990,7 @@
 
 
 .tree-cell {
-    -fx-background-color: black ;
+    -fx-background-color: #202020 ;
     -fx-text-fill: white ;
 }
 

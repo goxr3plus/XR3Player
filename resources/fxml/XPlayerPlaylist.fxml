@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="409.0" prefWidth="632.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="409.0" prefWidth="632.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="borderPane">
+      <BorderPane fx:id="borderPane" style="-fx-background-color: transparent;">
          <top>
-            <Button fx:id="play" disable="true" maxWidth="80.0" mnemonicParsing="false" text="Play" BorderPane.alignment="CENTER">
+            <Button fx:id="play" disable="true" maxHeight="-Infinity" maxWidth="80.0" minHeight="0.0" mnemonicParsing="false" prefHeight="0.0" text="Play" BorderPane.alignment="CENTER">
                <tooltip>
                   <Tooltip text="Play all the items in row" />
                </tooltip>

@@ -16,7 +16,7 @@
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;">
          <children>
-            <TabPane id="magicTabPane" fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane id="magicTabPane" fx:id="openedLibrariesTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
                <tabs>
                   <Tab text="Example1">
                      <content>
@@ -30,7 +30,7 @@
                   </Tab>
                </tabs>
             </TabPane>
-            <JFXButton fx:id="addTab" layoutX="12.0" layoutY="8.0" style="-fx-border-color: firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0">
+            <JFXButton fx:id="addNewLibrary" layoutX="12.0" layoutY="8.0" style="-fx-border-color: firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2.5; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-1.0">
                <tooltip>
                   <Tooltip text="New Tab" />
                </tooltip>

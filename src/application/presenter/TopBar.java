@@ -16,6 +16,7 @@ import application.presenter.custom.SystemMonitor;
 import application.presenter.custom.SystemMonitor.Monitor;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
+import application.tools.JavaFXTools;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -145,7 +146,7 @@ public class TopBar extends BorderPane {
 	private void initialize() {
 		
 		// -- searchField
-		searchField.setOnMouseReleased(m -> Main.searchWindow.show());
+		searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
 		
 		// ----------------------------cpuMonitor
 		cpuMonitor.setOnMouseReleased(r -> {
@@ -194,17 +195,22 @@ public class TopBar extends BorderPane {
 			if (mainModeTab.isSelected()) {
 				//System.out.println("MainMode Selected")
 				
-				if (windowMode != WindowMode.MAINMODE && !Main.libraryMode.getBottomSplitPane().getItems().contains(Main.multipleTabs)) {
+				if (windowMode != WindowMode.MAINMODE && !Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
 					
 					//Update the djMode firstly
-					//Main.multipleTabs.saveSplitPaneDivider();
+					Main.playListModesSplitPane.saveSplitPaneDivider();
 					Main.djMode.saveBottomSplitPaneDivider();
 					Main.djMode.getBottomSplitPane().getItems().clear();
 					
-					Main.libraryMode.getBottomSplitPane().getItems().clear();
-					Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0));
-					Main.libraryMode.updateBottomSplitPaneDivider();
-					Main.multipleTabs.reverseSplitPaneItems();
+					//Check firstly if the mode is upside down or not				
+					Main.libraryMode.getTopSplitPane().getItems().add(
+							JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown()) == 0 ? 1 : 0,
+							Main.playListModesSplitPane);
+					//Main.libraryMode.getBottomSplitPane().getItems().clear();
+					//Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0));
+					
+					//Main.libraryMode.updateBottomSplitPaneDivider();
+					//Main.multipleTabs.reverseSplitPaneItems();
 					
 					// Update window Mode
 					windowMode = WindowMode.MAINMODE;
@@ -219,18 +225,19 @@ public class TopBar extends BorderPane {
 			if (djModeTab.isSelected()) {
 				//System.out.println("djModeTab Selected")
 				
-				if (windowMode != WindowMode.DJMODE && Main.libraryMode.getBottomSplitPane().getItems().contains(Main.multipleTabs)) {
+				if (windowMode != WindowMode.DJMODE && Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
 					
 					//Update the libraryMode firstly
-					//Main.multipleTabs.saveSplitPaneDivider();
-					Main.libraryMode.saveBottomSplitPaneDivider();
-					Main.libraryMode.getBottomSplitPane().getItems().clear();
+					Main.playListModesSplitPane.saveSplitPaneDivider();
+					//Main.libraryMode.saveBottomSplitPaneDivider();
+					//Main.libraryMode.getBottomSplitPane().getItems().clear();
+					Main.libraryMode.getTopSplitPane().getItems().remove(Main.playListModesSplitPane);
 					
 					// Work
 					Main.djMode.getBottomSplitPane().getItems().clear();
-					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.multipleTabs);
+					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.playListModesSplitPane);
 					Main.djMode.updateBottomSplitPaneDivider();
-					Main.multipleTabs.reverseSplitPaneItems();
+					//Main.multipleTabs.reverseSplitPaneItems();
 					
 					// Update window Mode
 					windowMode = WindowMode.DJMODE;
@@ -244,7 +251,6 @@ public class TopBar extends BorderPane {
 			}
 		});
 		
-	
 		userModeTab.setOnSelectionChanged(l -> {
 			if (userModeTab.isSelected()) {
 				//System.out.println("userModeTab Selected")

@@ -84,7 +84,7 @@ public class MediaFilterService {
 		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(this::filterController);
 		
 		//Filter SearchWindow SmartController
-		filterController(Main.searchWindow.getSmartController());
+		filterController(Main.searchWindowSmartController);
 		
 	}
 	

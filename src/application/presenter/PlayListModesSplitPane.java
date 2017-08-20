@@ -1,7 +1,7 @@
 /*
  * 
  */
-package application.librarymode;
+package application.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,7 +20,7 @@ import javafx.scene.layout.BorderPane;
  *
  * @author GOXR3PLUS
  */
-public class MultipleTabs extends BorderPane {
+public class PlayListModesSplitPane extends BorderPane {
 	
 	//--------------------------------------------------------------
 	
@@ -38,10 +38,10 @@ public class MultipleTabs extends BorderPane {
 	/**
 	 * Constructor.
 	 */
-	public MultipleTabs() {
+	public PlayListModesSplitPane() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MultipleTabs.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "PlayListModesSplitPane.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -68,7 +68,7 @@ public class MultipleTabs extends BorderPane {
 		
 		//== splitPane
 		splitPane.getItems().clear();
-		splitPane.getItems().addAll(Main.mediaInformation, Main.libraryMode.multipleLibs);
+		splitPane.getItems().addAll(Main.playListModesTabPane, Main.mediaInformation);
 		updateSplitPaneDivider();
 	}
 	

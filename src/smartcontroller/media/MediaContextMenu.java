@@ -262,7 +262,7 @@ public class MediaContextMenu extends ContextMenu {
 		this.controller = controller1;
 		
 		// Show it
-		show(genre != Genre.SEARCHWINDOW ? Main.window : Main.searchWindow.getWindow(), x - super.getWidth(), y - 1);
+		show(Main.window, x - super.getWidth(), y - 1);
 		previousGenre = genre;
 		
 		//Y axis

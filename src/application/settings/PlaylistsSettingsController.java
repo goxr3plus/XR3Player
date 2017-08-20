@@ -109,7 +109,7 @@ public class PlaylistsSettingsController extends BorderPane {
 					.setNewMaximumPerPage(Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText()), true));
 			
 			//Secondly Update the Search Window PlayList
-			Main.searchWindow.getSmartController()
+			Main.searchWindowSmartController
 					.setNewMaximumPerPage(Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText()), true);
 			
 			//Thirdly Update all the XPlayers SmartController

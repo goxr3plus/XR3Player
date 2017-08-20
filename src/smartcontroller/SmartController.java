@@ -65,79 +65,76 @@ public class SmartController extends StackPane {
 	//----------------------------------------------------------------
 	
 	@FXML
-	private SplitPane splitPane;
-	
-	@FXML
-	private BorderPane mainBorder;
-	
-	@FXML
-	private TitledPane titledPane;
-	
-	@FXML
-	private HBox searchBarHBox;
-	
-	@FXML
-	private Button refreshButton;
-	
-	@FXML
-	private Button showSettings;
-	
-	@FXML
-	private MenuButton toolsMenuButton;
-	
-	@FXML
-	private ContextMenu toolsContextMenu;
-	
-	@FXML
-	private MenuItem importFolder;
-	
-	@FXML
-	private MenuItem importFiles;
-	
-	@FXML
-	private MenuItem exportFiles;
-	
-	@FXML
-	private MenuItem clearAll;
-	
-	@FXML
-	private HBox navigationHBox;
-	
-	@FXML
-	private Button previous;
-	
-	@FXML
-	private TextField pageField;
-	
-	@FXML
-	private Label maximumPageLabel;
-	
-	@FXML
-	private Button goToPage;
-	
-	@FXML
-	private Button next;
-	
-	@FXML
-	private StackPane centerStackPane;
-	
-	@FXML
-	private Label detailsLabel;
-	
-	@FXML
-	private Region region;
-	
-	@FXML
-	private VBox indicatorVBox;
-	
-	@FXML
-	private ProgressIndicator indicator;
-	
-	@FXML
-	private Button cancelButton;
-	
-	@FXML
-	private TextArea informationTextArea;
+    private SplitPane splitPane;
+
+    @FXML
+    private BorderPane mainBorder;
+
+    @FXML
+    private StackPane centerStackPane;
+
+    @FXML
+    private Label detailsLabel;
+
+    @FXML
+    private HBox searchBarHBox;
+
+    @FXML
+    private Button refreshButton;
+
+    @FXML
+    private HBox navigationHBox;
+
+    @FXML
+    private Button previous;
+
+    @FXML
+    private TextField pageField;
+
+    @FXML
+    private Label maximumPageLabel;
+
+    @FXML
+    private Button goToPage;
+
+    @FXML
+    private Button next;
+
+    @FXML
+    private Button showSettings;
+
+    @FXML
+    private MenuButton toolsMenuButton;
+
+    @FXML
+    private ContextMenu toolsContextMenu;
+
+    @FXML
+    private MenuItem importFolder;
+
+    @FXML
+    private MenuItem importFiles;
+
+    @FXML
+    private MenuItem exportFiles;
+
+    @FXML
+    private MenuItem clearAll;
+
+    @FXML
+    private Region region;
+
+    @FXML
+    private VBox indicatorVBox;
+
+    @FXML
+    private ProgressIndicator indicator;
+
+    @FXML
+    private Button cancelButton;
+
+    @FXML
+    private TextArea informationTextArea;
 	
 	// ----------------------------------------------------------
 	

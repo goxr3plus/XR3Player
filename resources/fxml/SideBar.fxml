@@ -23,28 +23,32 @@
          <content>
             <VBox alignment="CENTER" minHeight="0.0" spacing="20.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="77.0" spacing="5.0">
+                  <VBox spacing="10.0">
                      <children>
-                        <Button fx:id="goUserMode" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 90;" styleClass="arrowButton2">
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Update" />
+                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/UserGroupManWoman-32.png" />
+                                    <Image url="@../image/Installing%20Updates-32.png" />
                                  </image>
                               </ImageView>
                            </graphic>
-                           <tooltip>
-                              <Tooltip text="Go to User Mode" />
-                           </tooltip>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                        </Button>
+                           <tooltip>
+                              <Tooltip text="Install new Updates" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Data,Search" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Database" />
                         <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
                               <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
@@ -86,26 +90,47 @@
                               <Insets />
                            </VBox.margin>
                         </MenuButton>
-                        <Button fx:id="applicationSearch" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Search%20Property-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Search all the Media" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: firebrick; -fx-font-weight: bold;" text="Tools" />
+                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Console-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Application Console" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Settings-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Application Settings" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
                         <Button fx:id="snapshot" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <tooltip>
                               <Tooltip text="Screen SnapShot" />
@@ -143,65 +168,6 @@
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Console,Update" />
-                        <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Console-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Application Console" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Installing%20Updates-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Install new Updates" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Settings-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Application Settings" />
-                           </tooltip>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                     </children>
-                  </VBox>
-                  <VBox spacing="10.0">
-                     <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Donation,About" />
                         <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
@@ -228,24 +194,6 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </MenuButton>
-                        <Button fx:id="donateButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Pear-24.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Donate me a Pear" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets left="3.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                   </VBox>
                </children>

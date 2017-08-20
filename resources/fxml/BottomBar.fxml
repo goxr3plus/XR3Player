@@ -38,7 +38,7 @@
             <Insets left="15.0" />
          </HBox.margin>
       </Label>
-      <JFXToggleButton fx:id="showHideSideBar" contentDisplay="RIGHT" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="BLACK" />
+      <JFXToggleButton fx:id="showHideSideBar" contentDisplay="RIGHT" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" disable="true" layoutX="294.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Speech Recognition" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />

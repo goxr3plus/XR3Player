@@ -10,7 +10,7 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <TabPane fx:id="tabPane" style="-fx-background-color: rgb(255,255,255,0.95);;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab fx:id="historyPlaylistTab" closable="false" text="History Playlist">
                      <content>

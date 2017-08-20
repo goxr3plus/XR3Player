@@ -24,6 +24,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import smartcontroller.services.Operation;
+import xr3capture.CaptureWindow;
 
 /**
  * This class is used as the SideBar of the application.
@@ -35,7 +36,7 @@ public class SideBar extends BorderPane {
 	//-----------------------------------------------------
 	
 	@FXML
-	private Button goUserMode;
+	private JFXButton applicationUpdate;
 	
 	@FXML
 	private MenuButton applicationDatabase;
@@ -50,22 +51,16 @@ public class SideBar extends BorderPane {
 	private MenuItem deleteDataBase;
 	
 	@FXML
-	private Button applicationSearch;
+	private JFXButton applicationConsole;
+	
+	@FXML
+	private JFXButton applicationSettings;
 	
 	@FXML
 	private Button snapshot;
 	
 	@FXML
 	private Button applicationConverter;
-	
-	@FXML
-	private JFXButton applicationConsole;
-	
-	@FXML
-	private JFXButton applicationUpdate;
-	
-	@FXML
-	private JFXButton applicationSettings;
 	
 	@FXML
 	private MenuItem showWelcomeScreen;
@@ -78,9 +73,6 @@ public class SideBar extends BorderPane {
 	
 	@FXML
 	private MenuItem donation;
-	
-	@FXML
-	private Button donateButton;
 	
 	// -------------------------------------------------------------
 	
@@ -223,13 +215,9 @@ public class SideBar extends BorderPane {
 		if (b) {
 			applicationSettings.setDisable(true);
 			applicationConsole.setDisable(true);
-			applicationSearch.setDisable(true);
-			goUserMode.setDisable(true);
 		} else {
 			applicationSettings.setDisable(false);
 			applicationConsole.setDisable(false);
-			applicationSearch.setDisable(false);
-			goUserMode.setDisable(false);
 		}
 	}
 	
@@ -242,10 +230,7 @@ public class SideBar extends BorderPane {
 		//Prepare the Side Bar
 		prepareForLoginMode(true);
 		
-		//---------UPDATE ------------------------------
-		
-		// goUserMode
-		goUserMode.setOnAction(a -> Main.topBar.selectTab(2));
+		//---------UPDATE ------------------------------		
 		
 		// checkForUpdates
 		applicationUpdate.setOnAction(a -> Main.updateWindow.searchForUpdates(true));
@@ -262,13 +247,7 @@ public class SideBar extends BorderPane {
 		// donation
 		donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 		
-		// donateButton
-		donateButton.setOnAction(donation.getOnAction());
-		
 		//-----------------------------------------
-		
-		// -- applicationSearch
-		applicationSearch.setOnAction(a -> Main.searchWindow.show());
 		
 		//applicationSettings
 		applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.GENERERAL));
@@ -280,7 +259,7 @@ public class SideBar extends BorderPane {
 		applicationConsole.setOnAction(a -> Main.consoleWindow.show());
 		
 		//snapShot
-		snapshot.setOnAction(a -> Main.captureWindow.stage.show());
+		snapshot.setOnAction(a -> CaptureWindow.stage.show());
 		
 		//	ActionTool.showAlert("Snapshot Window", "Read the below.",
 		//		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area.");

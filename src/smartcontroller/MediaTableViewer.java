@@ -11,15 +11,14 @@ import application.Main;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -43,22 +42,22 @@ import smartcontroller.media.Media;
 public class MediaTableViewer extends TableView<Media> {
 	
 	@FXML
-	private TableColumn<Media,SimpleObjectProperty<Button>> likeDislikeNeutral;
-	
-	@FXML
 	private TableColumn<Media,Integer> number;
 	
 	/** The has been played. */
 	@FXML
-	private TableColumn<Media,SimpleObjectProperty<ImageView>> hasBeenPlayed;
+	private TableColumn<Media,Boolean> hasBeenPlayed;
 	
 	/** The media type. */
 	@FXML
-	private TableColumn<Media,SimpleObjectProperty<ImageView>> mediaType;
+	private TableColumn<Media,ImageView> mediaType;
 	
 	/** The title. */
 	@FXML
 	private TableColumn<Media,String> title;
+	
+	@FXML
+	private TableColumn<Media,Button> emotions;
 	
 	/** The duration. */
 	@FXML
@@ -70,7 +69,7 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** The stars. */
 	@FXML
-	private TableColumn<Media,SimpleObjectProperty<Button>> stars;
+	private TableColumn<Media,Button> stars;
 	
 	/** The hour imported. */
 	@FXML
@@ -363,7 +362,7 @@ public class MediaTableViewer extends TableView<Media> {
 		// accepted?" + d.isAccepted());
 		// System.out.println("Accepted Mode:" +
 		// d.getAcceptedTransferMode());
-		// System.out.println(" Target:" + d.getTarget() + " Gestoure
+		// System.out.println(" Target:" + d.getTarget() + " Gesture
 		// Target:" + d.getGestureTarget());
 		// });
 		
@@ -371,13 +370,31 @@ public class MediaTableViewer extends TableView<Media> {
 		String center = "-fx-alignment:CENTER-LEFT;";
 		
 		// likeDislikeNeutral
-		likeDislikeNeutral.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
+		emotions.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
 		
 		// number
 		number.setCellValueFactory(new PropertyValueFactory<>("number"));
 		
 		// hasBeenPlayed
 		hasBeenPlayed.setCellValueFactory(new PropertyValueFactory<>("hasBeenPlayed"));
+		hasBeenPlayed.setCellFactory(col -> new TableCell<Media,Boolean>() {
+			private final ImageView imageView = new ImageView();
+			
+			{
+				setGraphic(imageView);
+				//imageView.setFitWidth(24);
+				//imageView.setFitHeight(24);
+			}
+			
+			@Override
+			protected void updateItem(Boolean item , boolean empty) {
+				super.updateItem(item, empty);
+				
+				// set the image according to the played state
+				imageView.setImage(item != null && item ? Media.PLAYED_IMAGE : null);
+			}
+			
+		});
 		
 		// hasBeenPlayed
 		mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
@@ -400,6 +417,14 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		// stars
 		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+		stars.setComparator((button1 , button2) -> {
+			if (Double.parseDouble(button1.getText()) > Double.parseDouble(button2.getText()))
+				return 1;
+			else if (Double.parseDouble(button1.getText()) < Double.parseDouble(button2.getText()))
+				return -1;
+			else
+				return 0;
+		});
 		
 		// timesHeard
 		timesPlayed.setCellValueFactory(new PropertyValueFactory<>("timesPlayed"));
@@ -426,6 +451,14 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		//bitRate
 		bitRate.setCellValueFactory(new PropertyValueFactory<>("bitRate"));
+		
+		
+//		this.getColumns().addListener((ListChangeListener <? super TableColumn<Media, ?>>) ( c -> {
+//			c.getList().stream().forEach(column->{
+//				System.out.printf("%s ,",column.getText());
+//			});
+//			System.out.println();
+//		}));
 		
 	}
 	

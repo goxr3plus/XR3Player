@@ -4,15 +4,19 @@ import application.windows.EmotionsWindow.Emotion;
 
 public class EmotionListsController {
 	
+	private final HatedSongsList hatedSongsList;
 	private final DislikedSongsList dislikedSongsList;
 	private final LikedSongsList likedSongsList;
+	private final LovedSongsList lovedSongsList;
 	
 	/**
 	 * Constructor
 	 */
 	public EmotionListsController() {
+		hatedSongsList = new HatedSongsList();
 		dislikedSongsList = new DislikedSongsList();
 		likedSongsList = new LikedSongsList();
+		lovedSongsList = new LovedSongsList();
 	}
 	
 	/**
@@ -26,20 +30,40 @@ public class EmotionListsController {
 	 * @param emotion
 	 */
 	public void makeEmotionDecisition(String songPath , Emotion emotion) {
-		if (emotion == Emotion.DISLIKE) {
+		if (emotion == Emotion.HATE) {
 			
+			hatedSongsList.addIfNotExists(songPath);
+			dislikedSongsList.remove(songPath);
+			likedSongsList.remove(songPath);
+			lovedSongsList.remove(songPath);
+			
+		} else if (emotion == Emotion.DISLIKE) {
+			
+			hatedSongsList.remove(songPath);
 			dislikedSongsList.addIfNotExists(songPath);
 			likedSongsList.remove(songPath);
+			lovedSongsList.remove(songPath);
 			
 		} else if (emotion == Emotion.NEUTRAL) {
 			
+			hatedSongsList.remove(songPath);
 			dislikedSongsList.remove(songPath);
 			likedSongsList.remove(songPath);
+			lovedSongsList.remove(songPath);
 			
 		} else if (emotion == Emotion.LIKE) {
 			
-			likedSongsList.addIfNotExists(songPath);
+			hatedSongsList.remove(songPath);
 			dislikedSongsList.remove(songPath);
+			likedSongsList.addIfNotExists(songPath);
+			lovedSongsList.remove(songPath);
+			
+		} else if (emotion == Emotion.LOVE) {
+			
+			hatedSongsList.remove(songPath);
+			dislikedSongsList.remove(songPath);
+			likedSongsList.remove(songPath);
+			lovedSongsList.addIfNotExists(songPath);
 			
 		}
 	}
@@ -50,10 +74,14 @@ public class EmotionListsController {
 	 * @param mediaPath
 	 */
 	public Emotion getEmotionForMedia(String mediaPath) {
+		if (hatedSongsList.containsFile(mediaPath))
+			return Emotion.HATE;
 		if (dislikedSongsList.containsFile(mediaPath))
 			return Emotion.DISLIKE;
 		else if (likedSongsList.containsFile(mediaPath))
 			return Emotion.LIKE;
+		else if (lovedSongsList.containsFile(mediaPath))
+			return Emotion.LOVE;
 		else
 			return Emotion.NEUTRAL;
 	}
@@ -70,6 +98,20 @@ public class EmotionListsController {
 	 */
 	public LikedSongsList getLikedSongsList() {
 		return likedSongsList;
+	}
+	
+	/**
+	 * @return the hatedSongsList
+	 */
+	public HatedSongsList getHatedSongsList() {
+		return hatedSongsList;
+	}
+	
+	/**
+	 * @return the lovedSongsList
+	 */
+	public LovedSongsList getLovedSongsList() {
+		return lovedSongsList;
 	}
 	
 }

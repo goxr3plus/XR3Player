@@ -21,9 +21,8 @@ import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
-import application.windows.EmotionsWindow;
-import application.windows.XPlayerWindow;
 import application.windows.EmotionsWindow.Emotion;
+import application.windows.XPlayerWindow;
 import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -192,6 +191,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	
 	@FXML
 	private JFXToggleButton settingsToggle;
+	
+	@FXML
+	private Button emotionListsButton;
 	
 	@FXML
 	private StackPane regionStackPane;
@@ -509,6 +511,9 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
 		emotionsButton.setOnAction(a -> updateEmotion(emotionsButton));
 		
+		//=emotionListsButton
+		emotionListsButton.setOnAction(a -> Main.playListModesTabPane.selectTab(1));
+		
 	}
 	
 	/**
@@ -517,15 +522,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * @param emotion
 	 */
 	public void changeEmotionImage(Emotion emotion) {
-		//Make sure it will run on JavaFX Thread
-		Platform.runLater(() -> {
-			if (emotion == Emotion.DISLIKE)
-				( (ImageView) emotionsButton.getGraphic() ).setImage(EmotionsWindow.dislikeImage);
-			else if (emotion == Emotion.NEUTRAL)
-				( (ImageView) emotionsButton.getGraphic() ).setImage(EmotionsWindow.neutralImage);
-			else if (emotion == Emotion.LIKE)
-				( (ImageView) emotionsButton.getGraphic() ).setImage(EmotionsWindow.likeImage);
-		});
+		Main.emotionsWindow.giveEmotionImageToButton(emotionsButton, emotion);
 	}
 	
 	/**

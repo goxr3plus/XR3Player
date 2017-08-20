@@ -517,8 +517,10 @@ public class DbManager {
 						//Load PlayerMediaList
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading previous data..."));
 						Main.playedSongs.uploadFromDataBase();
+						Main.emotionListsController.getHatedSongsList().uploadFromDataBase();
 						Main.emotionListsController.getLikedSongsList().uploadFromDataBase();
 						Main.emotionListsController.getDislikedSongsList().uploadFromDataBase();
+						Main.emotionListsController.getLovedSongsList().uploadFromDataBase();
 						
 						
 						//Refresh all the XPlayers PlayLists

@@ -40,23 +40,16 @@ import smartcontroller.SmartController;
 public class MultipleLibraries extends StackPane {
 	
 	@FXML
-	private JFXButton addTab;
+	private TabPane openedLibrariesTabPane;
 	
-	/** The tab pane. */
 	@FXML
-	private TabPane tabPane;
+	private JFXButton addNewLibrary;
 	
-	/**
-	 * This Region is visible when no libraries are opened
-	 */
 	@FXML
 	private Region emptyLabelRegion;
 	
-	/**
-	 * This Label is visible when no libraries are opened
-	 */
 	@FXML
-	public Label emptyLabel;
+	private Label emptyLabel;
 	
 	// -----------------------------------------------------------------------
 	
@@ -84,7 +77,7 @@ public class MultipleLibraries extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		tabPane.getTabs().clear();
+		openedLibrariesTabPane.getTabs().clear();
 		//tabPane.setId("MultipleLibrariesTabPane");
 		
 		// emptyLabel
@@ -112,7 +105,7 @@ public class MultipleLibraries extends StackPane {
 		//	});	
 		
 		//== addTab
-		addTab.setOnAction(a -> Main.libraryMode.createNewLibrary(addTab, true));
+		addNewLibrary.setOnAction(a -> Main.libraryMode.createNewLibrary(addNewLibrary, true));
 		
 	}
 	
@@ -140,7 +133,7 @@ public class MultipleLibraries extends StackPane {
 	 * @return true, if is free
 	 */
 	public boolean isFree(boolean showMessage) {
-		for (Tab tab : tabPane.getTabs())
+		for (Tab tab : openedLibrariesTabPane.getTabs())
 			if (! ( (SmartController) tab.getContent() ).isFree(showMessage))
 				return false;
 			
@@ -153,9 +146,9 @@ public class MultipleLibraries extends StackPane {
 	 * @param name
 	 */
 	public void selectTab(String name) {
-		for (Tab tab : tabPane.getTabs())
+		for (Tab tab : openedLibrariesTabPane.getTabs())
 			if (tab.getTooltip().getText().equals(name)) {
-				tabPane.getSelectionModel().select(tab);
+				openedLibrariesTabPane.getSelectionModel().select(tab);
 				break;
 			}
 	}
@@ -168,8 +161,8 @@ public class MultipleLibraries extends StackPane {
 	public Optional<Library> getSelectedLibrary() {
 		
 		// selection model is empty?
-		return Optional.ofNullable(
-				tabPane.getSelectionModel().isEmpty() ? null : Main.libraryMode.getLibraryWithName(tabPane.getSelectionModel().getSelectedItem().getTooltip().getText()).get());
+		return Optional.ofNullable(openedLibrariesTabPane.getSelectionModel().isEmpty() ? null
+				: Main.libraryMode.getLibraryWithName(openedLibrariesTabPane.getSelectionModel().getSelectedItem().getTooltip().getText()).get());
 	}
 	
 	/**
@@ -181,7 +174,7 @@ public class MultipleLibraries extends StackPane {
 	 */
 	public Tab getTab(String name) {
 		
-		return tabPane.getTabs().stream().filter(tab -> tab.getTooltip().getText().equals(name)).findFirst().orElse(null);
+		return openedLibrariesTabPane.getTabs().stream().filter(tab -> tab.getTooltip().getText().equals(name)).findFirst().orElse(null);
 	}
 	
 	/**
@@ -192,7 +185,7 @@ public class MultipleLibraries extends StackPane {
 	 * @return The tab with that index
 	 */
 	public Tab getTab(int index) {
-		return tabPane.getTabs().get(index);
+		return openedLibrariesTabPane.getTabs().get(index);
 	}
 	
 	/**
@@ -201,7 +194,7 @@ public class MultipleLibraries extends StackPane {
 	 * @return A List of the TabPane Tabs
 	 */
 	public ObservableList<Tab> getTabs() {
-		return tabPane.getTabs();
+		return openedLibrariesTabPane.getTabs();
 	}
 	
 	/**
@@ -210,7 +203,7 @@ public class MultipleLibraries extends StackPane {
 	 * @return The TabPane
 	 */
 	public TabPane getTabPane() {
-		return tabPane;
+		return openedLibrariesTabPane;
 	}
 	
 	/**
@@ -265,7 +258,7 @@ public class MultipleLibraries extends StackPane {
 			if (dragOver.getDragboard().hasFiles()) {
 				//&& dragOver.getGestureSource() != library.getSmartController().tableViewer) 
 				dragOver.acceptTransferModes(TransferMode.LINK);
-				tabPane.getSelectionModel().select(tab);
+				openedLibrariesTabPane.getSelectionModel().select(tab);
 			}
 		});
 		
@@ -302,7 +295,7 @@ public class MultipleLibraries extends StackPane {
 		});
 		
 		tab.setGraphic(hBox);
-		tabPane.getTabs().add(tab);
+		openedLibrariesTabPane.getTabs().add(tab);
 		
 		//ContextMenu
 		ContextMenu contextMenu = new ContextMenu();
@@ -323,10 +316,10 @@ public class MultipleLibraries extends StackPane {
 	 */
 	public void removeTab(String tabName) {
 		
-		tabPane.getTabs().removeIf(tab -> tab.getTooltip().getText().equals(tabName));
+		openedLibrariesTabPane.getTabs().removeIf(tab -> tab.getTooltip().getText().equals(tabName));
 		
 		// tabPane empty?
-		if (tabPane.getTabs().isEmpty())
+		if (openedLibrariesTabPane.getTabs().isEmpty())
 			emptyLabel.setVisible(true);
 		
 	}
@@ -341,7 +334,7 @@ public class MultipleLibraries extends StackPane {
 	 */
 	public void renameTab(String oldName , String newName) {
 		
-		tabPane.getTabs().stream().forEach(tab -> {
+		openedLibrariesTabPane.getTabs().stream().forEach(tab -> {
 			if (tab.getTooltip().getText().equals(oldName)) {
 				// tab.textProperty().unbind()
 				tab.getTooltip().textProperty().unbind();
@@ -349,6 +342,13 @@ public class MultipleLibraries extends StackPane {
 				tab.getTooltip().setText(newName);
 			}
 		});
+	}
+	
+	/**
+	 * @return the emptyLabel
+	 */
+	public Label getEmptyLabel() {
+		return emptyLabel;
 	}
 	
 }
