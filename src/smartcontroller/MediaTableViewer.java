@@ -419,9 +419,9 @@ public class MediaTableViewer extends TableView<Media> {
 		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
 		stars.setComparator((button1 , button2) -> {
 			if (Double.parseDouble(button1.getText()) > Double.parseDouble(button2.getText()))
-				return 1;
-			else if (Double.parseDouble(button1.getText()) < Double.parseDouble(button2.getText()))
 				return -1;
+			else if (Double.parseDouble(button1.getText()) < Double.parseDouble(button2.getText()))
+				return 1;
 			else
 				return 0;
 		});

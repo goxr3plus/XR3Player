@@ -42,12 +42,8 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
 import application.Main;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import smartcontroller.media.AudioType;
 
@@ -86,7 +82,7 @@ public final class InfoTool {
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 	
 	/** The Constant playedImage. */
-	public static final Image playedImage = getImageFromResourcesFolder("played.png");
+	//public static final Image playedImage = getImageFromResourcesFolder("played.png");
 	
 	/** Database folder name <b>with out</b> separator [example:XR3DataBase] */
 	private static final String DATABASE_FOLDER_NAME = "XR3DataBase";

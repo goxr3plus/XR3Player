@@ -97,7 +97,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 79);
-		internalInformation.put("ReleasedDate", "30/08/2017");
+		internalInformation.put("ReleasedDate", "27/08/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
