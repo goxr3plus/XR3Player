@@ -96,8 +96,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 78);
-		internalInformation.put("ReleasedDate", "20/08/2017");
+		internalInformation.put("Version", 79);
+		internalInformation.put("ReleasedDate", "30/08/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -266,8 +266,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		width = 1380;
-		height = 800;
+		//width = 1380;
+		//height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -390,19 +390,6 @@ public class Main extends Application {
 				.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
-		//----Do this trick for different context menus
-		//		songsContextMenu.show(window, 0, 0);
-		//		songsContextMenu.hide();
-		//		
-		//		libraryMode.librariesContextMenu.show(window, 0, 0);
-		//		libraryMode.librariesContextMenu.hide();
-		//		
-		//		loginMode.userContextMenu.show(window, 0, 0);
-		//		loginMode.userContextMenu.hide();
-		
-		// --- SearchWindow-----
-		//searchWindow.getWindow().getScene().getStylesheets().addAll(scene.getStylesheets());
-		
 		//----------ApplicationStackPane---------
 		applicationStackPane.getChildren().addAll(root, loginMode, updateScreen);
 		
@@ -413,6 +400,11 @@ public class Main extends Application {
 		settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty()
 				.addListener((observable , oldValue , newValue) -> bottomBar.getKeyBindingsLabel().setText(newValue ? "ON" : "OFF"));
 		
+		//-------------TOP BAR--------------------
+		topBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
+		topBar.getSearchField().disableProperty().bind(searchWindowSmartController.getRegion().visibleProperty());
+		
+			
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
@@ -540,6 +532,8 @@ public class Main extends Application {
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			
+			//This bitch doesn't work for some reason that i will find and smash his bitchy ass 
+			topBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());	
 		});
 		pause.playFromStart();
 	}
@@ -720,6 +714,10 @@ public class Main extends Application {
 			//--General-Settings-SideBar
 			Optional.ofNullable(settings.getProperty("General-SideBarSide"))
 					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
+			
+			//--General-Settings-SideBar
+			Optional.ofNullable(settings.getProperty("General-NotificationsPosition")).ifPresent(
+					s -> settingsWindow.getGeneralSettingsController().selectToogleWithText(settingsWindow.getGeneralSettingsController().getNotificationsPosition(), s));
 			
 			//--General-Settings-LibraryMode
 			playListModesSplitPane.updateSplitPaneDivider();

@@ -12,9 +12,11 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.Main;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
@@ -32,21 +34,23 @@ import javafx.scene.layout.BorderPane;
  */
 public class TreeViewManager extends BorderPane {
 	
+	// -------------------------------------
+	
 	@FXML
 	private TreeView<String> systemTreeView;
+	
+	@FXML
+	private Button searchButton;
 	
 	// -------------------------------------
 	
 	/**
 	 * The root element of the computer hard drive - drives
 	 */
-	SystemRoot systemRoot = new SystemRoot();
+	private final SystemRoot systemRoot = new SystemRoot();
 	
 	/** The libraries tree. */
 	public TreeItem<String> librariesTree = new TreeItem<>("Libraries", InfoTool.getImageViewFromResourcesFolder("folder.png"));
-	
-	/** The tree context menu. */
-	// public TreeViewContextMenu treeContextMenu = new TreeViewContextMenu()
 	
 	/** The host name. */
 	String hostName = "computer";
@@ -152,42 +156,9 @@ public class TreeViewManager extends BorderPane {
 			}
 		});
 		
-		// ---------------------------LibraryTreeView--------------------------------------
+		//searchButton
+		searchButton.setOnAction(a -> Main.specialChooser.prepareToImportSongFiles(Main.window));
 		
-		// TreeView<String> libraryTreeView = new TreeView<>(librariesTree);
-		// libraryTreeView.setEditable(true);
-		//
-		// // Mouse Clicked Implementation
-		// libraryTreeView.setOnMouseClicked(m -> {
-		// TreeItem<String> selected =
-		// libraryTreeView.getSelectionModel().getSelectedItem();
-		//
-		// if (!selected.getValue().equals(librariesTree.getValue())) {
-		// // if (m.getButton() == MouseButton.SECONDARY) {
-		// // treeContextMenu.showMenu(Genre.LIBRARY, selected.getValue(),
-		// // m.getScreenX(), m.getSceneY());
-		// // }
-		// }
-		// });
-		//
-		// // Drag Implementation
-		// libraryTreeView.setOnDragDetected(event -> {
-		// TreeItem<String> source =
-		// libraryTreeView.getSelectionModel().getSelectedItem();
-		//
-		// if (!source.getValue().equals(librariesTree.getValue())) {
-		//
-		// // Allow this transfer Mode
-		// Dragboard board = startDragAndDrop(TransferMode.LINK);
-		//
-		// // Put a String on DragBoard
-		// ClipboardContent content = new ClipboardContent();
-		// content.putString("!PATTERN LIBRARY!" + source.getValue());
-		//
-		// board.setContent(content);
-		// event.consume();
-		// }
-		// });
 	}
 	
 }

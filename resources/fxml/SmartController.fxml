@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -63,7 +64,7 @@
                <bottom>
                   <HBox BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel2" text="433" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="433" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </bottom>
@@ -85,6 +86,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                        <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#f58007" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="30.0" selected="true" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
+                           <tooltip>
+                              <Tooltip text="Instant Search " />
+                           </tooltip>
+                           <HBox.margin>
+                              <Insets left="4.0" right="4.0" />
+                           </HBox.margin>
+                        </JFXCheckBox>
                         <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="242.0">
                            <children>
                               <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
@@ -166,18 +175,34 @@
                            <contextMenu>
                               <ContextMenu fx:id="toolsContextMenu">
                                  <items>
-                                    <Menu mnemonicParsing="false" text="Folder">
-                                      <items>
-                                          <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/import24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                      </items>
+                                    <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/import24.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                  <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import File">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/import24.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/export24.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <Menu mnemonicParsing="false" text="Folder" visible="false">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -186,27 +211,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Menu>
-                                    <Menu mnemonicParsing="false" text="File">
-                                      <items>
-                                        <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import File">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/import24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                          <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/export24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                      </items>
+                                    <Menu mnemonicParsing="false" text="File" visible="false">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>

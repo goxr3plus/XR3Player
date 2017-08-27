@@ -6,8 +6,8 @@ package application.windows;
 import java.io.IOException;
 
 import application.tools.InfoTool;
-import application.windows.EmotionsWindow.Emotion;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +44,9 @@ public class EmotionsWindow extends BorderPane {
 	@FXML
 	private Button love;
 	
+	@FXML
+	private Label emotionLabel;
+	
 	// ----------------     
 	
 	/** The window */
@@ -65,7 +69,7 @@ public class EmotionsWindow extends BorderPane {
 		// Window
 		window.setTitle("Rename Window");
 		window.setWidth(216);
-		window.setHeight(45);
+		window.setHeight(72);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.initStyle(StageStyle.TRANSPARENT);
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
@@ -118,6 +122,28 @@ public class EmotionsWindow extends BorderPane {
 			emotion = Emotion.LOVE;
 			window.close();
 		});
+		
+		hate.setOnMouseEntered(m -> {
+			emotion = Emotion.HATE;
+			emotionLabel.setText(emotion.toString());
+		});
+		dislike.setOnMouseEntered(m -> {
+			emotion = Emotion.DISLIKE;
+			emotionLabel.setText(emotion.toString());
+		});
+		neutral.setOnMouseEntered(m -> {
+			emotion = Emotion.NEUTRAL;
+			emotionLabel.setText(emotion.toString());
+		});
+		like.setOnMouseEntered(m -> {
+			emotion = Emotion.LIKE;
+			emotionLabel.setText(emotion.toString());
+		});
+		love.setOnMouseEntered(m -> {
+			emotion = Emotion.LOVE;
+			emotionLabel.setText(emotion.toString());
+		});
+		
 	}
 	
 	/**
@@ -170,6 +196,8 @@ public class EmotionsWindow extends BorderPane {
 			
 			window.setX(x);
 			window.setY(y);
+			
+			emotionLabel.setText("?");
 		}
 		
 		//	

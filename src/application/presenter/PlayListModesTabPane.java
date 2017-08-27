@@ -75,6 +75,10 @@ public class PlayListModesTabPane extends StackPane {
 	 */
 	public void selectTab(int index) {
 		openedLibrariesTab.getTabPane().getSelectionModel().select(index);
+		
+		//In case of Search Window Tab  Request focus of Search Field
+		//if (index == 2)
+		//	Main.searchWindowSmartController.getSearchService().getSearchField().requestFocus();
 	}
 	
 }

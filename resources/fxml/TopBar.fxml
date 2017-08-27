@@ -162,7 +162,7 @@
             </JFXTabPane>
          </left>
          <right>
-            <JFXTextField fx:id="searchField" editable="false" focusColor="#ff0f53" focusTraversable="false" maxWidth="196.0" minWidth="138.0" prefHeight="31.0" prefWidth="196.0" promptText="search..." style="-fx-text-fill: white;" text="search.." unFocusColor="#ff3535" BorderPane.alignment="CENTER">
+            <JFXTextField fx:id="searchField" focusColor="#ff0f53" focusTraversable="false" maxWidth="196.0" minWidth="138.0" prefHeight="31.0" prefWidth="196.0" promptText="search..." style="-fx-text-fill: white;" unFocusColor="#ff3535" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

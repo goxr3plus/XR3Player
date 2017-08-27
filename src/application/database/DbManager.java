@@ -522,12 +522,26 @@ public class DbManager {
 						Main.emotionListsController.getDislikedSongsList().uploadFromDataBase();
 						Main.emotionListsController.getLovedSongsList().uploadFromDataBase();
 						
-						
 						//Refresh all the XPlayers PlayLists
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()
 								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false, false)));
 						
-						//Platform.runLater(() -> Main.libraryMode.multipleLibs.getSelectedLibrary().getSmartController().getSplitPane().getItems().add(Main.loginMode.teamViewer));
+						//------Bind Instant Search between all SmartControllers
+						Platform.runLater(() -> {
+							//For Search Window
+							Main.searchWindowSmartController.getInstantSearch().selectedProperty()
+									.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+							
+							//For Libraries
+							Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController)
+									.forEach(controller -> controller.getInstantSearch().selectedProperty()
+											.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
+							
+							//For XPLayersLists
+							Main.xPlayersList.getList().stream().forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch()
+									.selectedProperty().bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
+							
+						});
 						
 						//--FINISH
 						updateProgress(total, total);

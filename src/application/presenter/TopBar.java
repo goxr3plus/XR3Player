@@ -83,8 +83,8 @@ public class TopBar extends BorderPane {
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
-	SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
+	private final SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
+	private final SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
 	
 	/**
 	 * The current Window Mode
@@ -334,6 +334,13 @@ public class TopBar extends BorderPane {
 	 */
 	public WindowMode getWindowMode() {
 		return windowMode;
+	}
+	
+	/**
+	 * @return the searchField
+	 */
+	public JFXTextField getSearchField() {
+		return searchField;
 	}
 	
 }

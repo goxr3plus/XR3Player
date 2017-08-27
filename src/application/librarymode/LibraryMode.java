@@ -233,6 +233,10 @@ public class LibraryMode extends BorderPane {
 							Main.libraryMode.multipleLibs.selectTab(currentLib.getLibraryName());
 						}
 						
+						//Bidirectional binding with Instant Search
+						currentLib.getSmartController().getInstantSearch().selectedProperty()
+								.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
 						ActionTool.showNotification("Error Creating a Library", "Library can't be created cause of:" + ex.getMessage(), Duration.seconds(2),
@@ -502,7 +506,8 @@ public class LibraryMode extends BorderPane {
 	public void turnUpsideDownSplitPane(boolean turnDown) {
 		
 		//Check if it can enter based on the library border pane position
-		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ) || ( !turnDown && topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
+		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) )
+				|| ( !turnDown && topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
 			return;
 		
 		//this.saveTopSplitPaneDivider();
@@ -515,11 +520,10 @@ public class LibraryMode extends BorderPane {
 		if (libraryIsOnTop) {
 			System.out.println("Entered first if!");
 			topSplitPane.getItems().addAll(bottomSplitPane, Main.playListModesSplitPane);
-		}else {
+		} else {
 			System.out.println("Entered second if!");
 			topSplitPane.getItems().addAll(Main.playListModesSplitPane, bottomSplitPane);
 		}
-			
 		
 		this.updateTopSplitPaneDivider();
 		
@@ -534,13 +538,12 @@ public class LibraryMode extends BorderPane {
 		return topSplitPane;
 	}
 	
-		/**
-		 * @return the bottomSplitPane
-		 */
-		public SplitPane getBottomSplitPane() {
-			return bottomSplitPane;
-		}
-		
+	/**
+	 * @return the bottomSplitPane
+	 */
+	public SplitPane getBottomSplitPane() {
+		return bottomSplitPane;
+	}
 	
 	/**
 	 * @return the borderPane

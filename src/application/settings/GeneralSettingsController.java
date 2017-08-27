@@ -12,6 +12,8 @@ import application.tools.JavaFXTools;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 
@@ -42,6 +44,8 @@ public class GeneralSettingsController extends BorderPane {
 	
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
+	
+	public static Pos notificationPosition = Pos.BOTTOM_LEFT;
 	
 	/**
 	 * Constructor.
@@ -99,6 +103,66 @@ public class GeneralSettingsController extends BorderPane {
 			
 		});
 		
+		//notificationsPosition
+		notificationsPosition.selectedToggleProperty().addListener(listener -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("General-NotificationsPosition", ( (Labeled) notificationsPosition.getSelectedToggle() ).getText());
+			
+			//Turn Library Mode Upside Down or The Opposite
+			determineNotificationBarPosition();
+			
+		});
+		
+	}
+	
+	/**
+	 * Determines the NotificationBarPosition based on the selected toggle text
+	 */
+	private void determineNotificationBarPosition() {
+		switch ( ( (Labeled) notificationsPosition.getSelectedToggle() ).getText()) {
+			
+			case "TOP_LEFT":
+				notificationPosition = Pos.TOP_LEFT;
+				break;
+			case "TOP_CENTER":
+				notificationPosition = Pos.TOP_CENTER;
+				break;
+			case "TOP_RIGHT":
+				notificationPosition = Pos.TOP_RIGHT;
+				break;
+			case "CENTER_LEFT":
+				notificationPosition = Pos.CENTER_LEFT;
+				break;
+			case "CENTER":
+				notificationPosition = Pos.CENTER;
+				break;
+			case "CENTER_RIGHT":
+				notificationPosition = Pos.CENTER_RIGHT;
+				break;
+			case "BOTTOM_LEFT":
+				notificationPosition = Pos.BOTTOM_LEFT;
+				break;
+			case "BOTTOM_CENTER":
+				notificationPosition = Pos.BOTTOM_CENTER;
+				break;
+			case "BOTTOM_RIGHT":
+				notificationPosition = Pos.BOTTOM_RIGHT;
+				break;
+		}
+	}
+	
+	/**
+	 * Selects the Toogle with the given text from the toggle group or else selects nothing
+	 * 
+	 * @param toggleGroup
+	 */
+	public void selectToogleWithText(ToggleGroup toggleGroup , String text) {
+		notificationsPosition.getToggles().forEach(toggle -> {
+			if ( ( (Labeled) toggle ).getText().equals(text)) {
+				toggle.setSelected(true);
+			}
+		});
 	}
 	
 	/**
@@ -120,6 +184,13 @@ public class GeneralSettingsController extends BorderPane {
 	 */
 	public ToggleGroup getDjModeUpsideDown() {
 		return djModeUpsideDown;
+	}
+	
+	/**
+	 * @return the notificationsPosition
+	 */
+	public ToggleGroup getNotificationsPosition() {
+		return notificationsPosition;
 	}
 	
 }

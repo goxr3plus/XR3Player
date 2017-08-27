@@ -23,6 +23,7 @@ import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.Notifications;
 
 import application.Main;
+import application.settings.GeneralSettingsController;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
@@ -350,12 +351,13 @@ public final class ActionTool {
 		
 		Notifications notification1;
 		if (image == null)
-			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(Pos.BOTTOM_LEFT);
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(GeneralSettingsController.notificationPosition);
 		else {
 			ImageView imageView = new ImageView(image);
 			//imageView.setFitWidth(25);
 			//imageView.setFitHeight(25);
-			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle().position(Pos.BOTTOM_LEFT);
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle()
+					.position(GeneralSettingsController.notificationPosition);
 		}
 		
 		switch (notificationType) {

@@ -51,16 +51,16 @@ import smartcontroller.media.Media;
 public class SmartControllerSearcher extends HBox {
 	
 	/** The search field. */
-	TextField searchField = TextFields.createClearableTextField();
+	private final TextField searchField = TextFields.createClearableTextField();
 	
 	/** The controller. */
 	// Variables
-	SmartController controller;
+	private SmartController controller;
 	
 	/** The service. */
 	private SearchService service = new SearchService();
 	
-	boolean saveSettingBeforeSearch = true;
+	private boolean saveSettingBeforeSearch = true;
 	
 	/**
 	 * Constructor.
@@ -152,6 +152,13 @@ public class SmartControllerSearcher extends HBox {
 	}
 	
 	/**
+	 * @return the searchField
+	 */
+	public TextField getSearchField() {
+		return searchField;
+	}
+
+	/**
 	 * The Class SearchService.
 	 */
 	public class SearchService extends Service<Void> {
@@ -185,7 +192,7 @@ public class SmartControllerSearcher extends HBox {
 			// if (Main.advancedSearch.isShowing())
 			// word = Main.advancedSearch.getTextForSearching();
 			// else
-			word = searchField.getText();
+			word = getSearchField().getText();
 			controller.getRegion().visibleProperty().bind(runningProperty());
 			controller.getIndicator().progressProperty().bind(progressProperty());
 			controller.getCancelButton().setText("Searching...");
@@ -387,7 +394,7 @@ public class SmartControllerSearcher extends HBox {
 			popOver.setDetachable(false);
 			popOver.setAutoHide(true);
 			popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-			popOver.setOnHidden(h -> controller.getSearchService().searchField.textProperty().unbind());
+			popOver.setOnHidden(h -> controller.getSearchService().getSearchField().textProperty().unbind());
 			
 			// this
 			setOnMouseEntered(m -> requestFocus());
@@ -416,13 +423,13 @@ public class SmartControllerSearcher extends HBox {
 		public void show(Node node , SmartController controller) {
 			searchField.editableProperty().bind(controller.getSearchService().getService().runningProperty().not());
 			this.controller = controller;
-			searchField.setText(this.controller.getSearchService().searchField.getText());
-			this.controller.getSearchService().searchField.textProperty().bind(searchField.textProperty());
+			searchField.setText(this.controller.getSearchService().getSearchField().getText());
+			this.controller.getSearchService().getSearchField().textProperty().bind(searchField.textProperty());
 			
 			// Find the correct arrow location
 			double width = popOver.getWidth();
 			double height = popOver.getHeight();
-			Bounds bounds = controller.getSearchService().searchField.localToScreen(controller.getSearchService().searchField.getBoundsInLocal());
+			Bounds bounds = controller.getSearchService().getSearchField().localToScreen(controller.getSearchService().getSearchField().getBoundsInLocal());
 			boolean fitOnTop = bounds.getMinY() - height > 0; // top?
 			boolean fitOnLeft = bounds.getMinX() - width > 0; // left?
 			boolean fitOnRight = bounds.getMaxX() + width < InfoTool.getScreenWidth();// right?
