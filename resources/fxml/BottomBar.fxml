@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="951.0" style="-fx-background-color: #202020; -fx-border-color: firebrick transparent firebrick transparent;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: #202020; -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="showSocialMedia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Social Media " visible="false">
          <graphic>
@@ -24,22 +24,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="564.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-         <tooltip>
-            <Tooltip text="Can application connect to internet" />
-         </tooltip>
-         <HBox.margin>
-            <Insets left="15.0" />
-         </HBox.margin>
-      </Label>
-      <JFXToggleButton fx:id="showHideSideBar" contentDisplay="RIGHT" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
-      <Label alignment="CENTER" contentDisplay="BOTTOM" disable="true" layoutX="294.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Speech Recognition" textAlignment="CENTER" wrapText="true">
+      <JFXToggleButton fx:id="keyBindings" focusTraversable="false" layoutX="279.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -50,15 +36,8 @@
             <Tooltip text="Can application connect to internet" />
          </tooltip>
       </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" disable="true" layoutX="294.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Internet Connection :" textAlignment="CENTER" wrapText="true">
+      <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -69,15 +48,25 @@
             <Tooltip text="Can application connect to internet" />
          </tooltip>
       </Label>
-      <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
+      <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
          <padding>
             <Insets left="4.0" right="4.0" />
          </padding>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Wi-Fi-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Internet connection is available?" />
+         </tooltip>
       </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Key Bindings :" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="internetConnectionDescriptionLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="Disconnected" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -85,14 +74,9 @@
             <Insets left="4.0" right="4.0" />
          </padding>
          <tooltip>
-            <Tooltip text="Are Key Bindings Enabled" />
+            <Tooltip text="Internet connection is available?" />
          </tooltip>
       </Label>
-      <Button fx:id="keyBindingsLabel" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="43.0" style="-fx-font-size: 11;" text="OFF">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="339.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -101,7 +85,7 @@
             <Insets left="4.0" right="4.0" />
          </padding>
       </Label>
-      <Label fx:id="currentTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="522.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="17:14" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="currentTimeLabel" alignment="CENTER" layoutX="522.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="17:14" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -111,6 +95,13 @@
          <tooltip>
             <Tooltip text="Current System Time" />
          </tooltip>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Future-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Label>
       <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="566.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="/" textAlignment="CENTER" textFill="#1fdbcf" wrapText="true">
          <cursor>
@@ -120,6 +111,11 @@
             <Insets left="4.0" right="4.0" />
          </padding>
       </Label>
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Time-24.png" />
+         </image>
+      </ImageView>
       <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-background-color: #202020;" text="00:20" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -128,7 +124,7 @@
             <Insets left="4.0" right="4.0" />
          </padding>
          <tooltip>
-            <Tooltip text="Application Running Time" />
+            <Tooltip text="Total time the application is being alive" />
          </tooltip>
       </Label>
    </children>

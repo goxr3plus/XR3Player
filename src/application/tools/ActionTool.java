@@ -296,20 +296,24 @@ public final class ActionTool {
 	 */
 	public static boolean openWebSite(String uri) {
 		
-		try {
-			//Check if Desktop is supported
-			if (!Desktop.isDesktopSupported()) {
-				ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500), NotificationType.INFORMATION);
-				return false;
-			}
-			
-			ActionTool.showNotification("Opening WebSite", "Opening on default Web Browser :\n" + uri, Duration.millis(1500), NotificationType.INFORMATION);
-			Desktop.getDesktop().browse(new URI(uri));
-		} catch (IOException | URISyntaxException ex) {
+		//Check if Desktop is supported
+		if (!Desktop.isDesktopSupported()) {
 			ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500), NotificationType.INFORMATION);
-			logger.log(Level.INFO, "", ex);
 			return false;
 		}
+		
+		ActionTool.showNotification("Opening WebSite", "Opening on default Web Browser :\n" + uri, Duration.millis(1500), NotificationType.INFORMATION);
+		
+		//Start it to a new Thread , don't lag the JavaFX Application Thread
+		new Thread(() -> {
+			try {
+				Desktop.getDesktop().browse(new URI(uri));
+			} catch (IOException | URISyntaxException ex) {
+				ActionTool.showNotification("Problem Occured", "Can't open default web browser at:\n[" + uri + " ]", Duration.millis(2500), NotificationType.INFORMATION);
+				logger.log(Level.INFO, "", ex);
+			}
+		}).start();
+		
 		return true;
 	}
 	

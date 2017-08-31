@@ -17,6 +17,15 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
+      <TableColumn fx:id="getInfoBuy" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Get Info / Buy ">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0">
+               <image>
+                  <Image url="@../image/Download%20From%20Cloud-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </TableColumn>
       <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type" />
     <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Title">
          <graphic>

@@ -5,6 +5,8 @@ package smartcontroller.media;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -54,6 +56,9 @@ public abstract class Media {
 	
 	/** The has been played. */
 	private SimpleBooleanProperty hasBeenPlayed;
+	
+	/** Get Information or Buy */
+	private SimpleObjectProperty<Button> getInfoBuy;
 	
 	/** Liked Disliked or Neutral feelings */
 	private SimpleObjectProperty<Button> likeDislikeNeutral;
@@ -124,6 +129,8 @@ public abstract class Media {
 	/** The image to be shown when the Media has been already Played */
 	public static final Image PLAYED_IMAGE = InfoTool.getImageFromResourcesFolder("played.png");
 	
+	public static final Image INFOBUY_IMAGE = InfoTool.getImageFromResourcesFolder("Download From Cloud-24.png");
+	
 	/** The genre. */
 	private Genre genre;
 	
@@ -148,6 +155,27 @@ public abstract class Media {
 		// ....initialize
 		mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? SONG_IMAGE : VIDEO_IMAGE));
 		hasBeenPlayed = new SimpleBooleanProperty(false);
+		
+		//getInfoBuy
+		ImageView imageView1 = new ImageView(INFOBUY_IMAGE);
+		imageView1.setFitWidth(20);
+		imageView1.setFitHeight(20);
+		
+		Button button1 = new Button("", imageView1);
+		button1.setPrefSize(24, 24);
+		button1.setMinSize(24, 24);
+		button1.setMaxSize(24, 24);
+		button1.setStyle("-fx-cursor:hand");
+		button1.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		button1.setOnMouseReleased(m -> {
+			try {
+				ActionTool.openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		getInfoBuy = new SimpleObjectProperty<>(button1);
 		
 		//Like Dislike or Neutral Feelings
 		
@@ -290,6 +318,15 @@ public abstract class Media {
 	 */
 	public SimpleBooleanProperty hasBeenPlayedProperty() {
 		return hasBeenPlayed;
+	}
+	
+	/**
+	 * Get Information or Buy Property
+	 *
+	 * @return the simple object property
+	 */
+	public SimpleObjectProperty<Button> getInfoBuyProperty() {
+		return getInfoBuy;
 	}
 	
 	/**

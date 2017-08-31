@@ -97,7 +97,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 80);
-		internalInformation.put("ReleasedDate", "?/08/2017");
+		internalInformation.put("ReleasedDate", "?/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -278,8 +278,10 @@ public class Main extends Application {
 			exit.consume();
 		});
 		
-		// Scene
-		scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, width * 0.95, height * 0.95);
+		// Create BorderlessScene 
+		final int screenMinWidth = 800;
+		final int screenMinHeight = 600;
+		scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
 		scene.setMoveControl(loginMode.getXr3PlayerLabel());
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		window.setScene(scene);
@@ -397,14 +399,12 @@ public class Main extends Application {
 		loadTheUsers();
 		
 		//----------Bottom Bar----------------
-		settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty()
-				.addListener((observable , oldValue , newValue) -> bottomBar.getKeyBindingsLabel().setText(newValue ? "ON" : "OFF"));
+		bottomBar.getKeyBindings().selectedProperty().bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
 		
 		//-------------TOP BAR--------------------
 		topBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
 		topBar.getSearchField().disableProperty().bind(searchWindowSmartController.getRegion().visibleProperty());
 		
-			
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
@@ -533,7 +533,7 @@ public class Main extends Application {
 			//---------------END:Important Work-----------------------------------------------------------
 			
 			//This bitch doesn't work for some reason that i will find and smash his bitchy ass 
-			topBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());	
+			topBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
 		});
 		pause.playFromStart();
 	}

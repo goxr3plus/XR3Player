@@ -57,6 +57,9 @@ public class MediaTableViewer extends TableView<Media> {
 	private TableColumn<Media,String> title;
 	
 	@FXML
+	private TableColumn<Media,Button> getInfoBuy;
+	
+	@FXML
 	private TableColumn<Media,Button> emotions;
 	
 	/** The duration. */
@@ -369,6 +372,9 @@ public class MediaTableViewer extends TableView<Media> {
 		//--------------------------Other-----------------------------------
 		String center = "-fx-alignment:CENTER-LEFT;";
 		
+		//getInfoBuy
+		getInfoBuy.setCellValueFactory(new PropertyValueFactory<>("getInfoBuy"));
+		
 		// likeDislikeNeutral
 		emotions.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
 		
@@ -452,13 +458,12 @@ public class MediaTableViewer extends TableView<Media> {
 		//bitRate
 		bitRate.setCellValueFactory(new PropertyValueFactory<>("bitRate"));
 		
-		
-//		this.getColumns().addListener((ListChangeListener <? super TableColumn<Media, ?>>) ( c -> {
-//			c.getList().stream().forEach(column->{
-//				System.out.printf("%s ,",column.getText());
-//			});
-//			System.out.println();
-//		}));
+		//		this.getColumns().addListener((ListChangeListener <? super TableColumn<Media, ?>>) ( c -> {
+		//			c.getList().stream().forEach(column->{
+		//				System.out.printf("%s ,",column.getText());
+		//			});
+		//			System.out.println();
+		//		}));
 		
 	}
 	

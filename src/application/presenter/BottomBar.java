@@ -33,13 +33,16 @@ public class BottomBar extends HBox {
 	private Button showSocialMedia;
 	
 	@FXML
+	private JFXToggleButton keyBindings;
+	
+	@FXML
 	private JFXToggleButton showHideSideBar;
 	
 	@FXML
 	private Label internetConnectionLabel;
 	
 	@FXML
-	private Button keyBindingsLabel;
+	private Label internetConnectionDescriptionLabel;
 	
 	@FXML
 	private Label currentTimeLabel;
@@ -99,13 +102,13 @@ public class BottomBar extends HBox {
 				//Try to connect
 				if (InfoTool.isReachableByPing("www.google.com")) {
 					Platform.runLater(() -> {
-						internetConnectionLabel.setText("ON");
-						internetConnectionLabel.setTextFill(Color.GREEN);
+						internetConnectionLabel.setDisable(false);
+						internetConnectionDescriptionLabel.setText("Connected");
 					});
 				} else {
 					Platform.runLater(() -> {
-						internetConnectionLabel.setText("OFF");
-						internetConnectionLabel.setTextFill(Color.FIREBRICK);
+						internetConnectionLabel.setDisable(true);
+						internetConnectionDescriptionLabel.setText("Disconnected");
 					});
 				}
 				
@@ -124,8 +127,7 @@ public class BottomBar extends HBox {
 	}
 	
 	/**
-	 * Starts a Thread that is checking the current System Time and the
-	 * application running Time
+	 * Starts a Thread that is checking the current System Time and the application running Time
 	 */
 	private void startTimingThread() {
 		
@@ -166,7 +168,7 @@ public class BottomBar extends HBox {
 	private void initialize() {
 		
 		//keyBindingsLabel
-		keyBindingsLabel.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.SHORTCUTS));
+		keyBindings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.SHORTCUTS));
 		
 		//Start the Threads
 		startInternetCheckingThread();
@@ -179,10 +181,10 @@ public class BottomBar extends HBox {
 	}
 	
 	/**
-	 * @return the keyBindingsLabel
+	 * @return the keyBindings
 	 */
-	public Button getKeyBindingsLabel() {
-		return keyBindingsLabel;
+	public JFXToggleButton getKeyBindings() {
+		return keyBindings;
 	}
 	
 }
