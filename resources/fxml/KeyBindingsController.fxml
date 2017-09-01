@@ -102,7 +102,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXCheckBox>
-            <MenuButton mnemonicParsing="false" text="Choose Player">
+            <MenuButton fx:id="choosedPlayerMenuButton" mnemonicParsing="false" text="Choosed Player = { 0 }">
               <items>
                   <RadioMenuItem mnemonicParsing="false" selected="true" text="xPlayer 0">
                      <toggleGroup>

@@ -97,7 +97,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 80);
-		internalInformation.put("ReleasedDate", "?/09/2017");
+		internalInformation.put("ReleasedDate", "01/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -704,6 +704,7 @@ public class Main extends Application {
 			
 			//--------------------Now continue normally----------------------------------------------
 			Properties settings = dbManager.getPropertiesDb().getProperties();
+			settingsWindow.restoreAll();
 			
 			//----------                        --------------------
 			
@@ -711,13 +712,16 @@ public class Main extends Application {
 			Optional.ofNullable(settings.getProperty("ShortCuts-KeyBindings"))
 					.ifPresent(s -> settingsWindow.getNativeKeyBindings().getKeyBindingsActive().setSelected(Boolean.parseBoolean(s)));
 			
+			Optional.ofNullable(settings.getProperty("ShortCuts-SelectedPlayer"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getNativeKeyBindings().getxPlayerSelected(), Integer.valueOf(s)));
+			
 			//--General-Settings-SideBar
 			Optional.ofNullable(settings.getProperty("General-SideBarSide"))
 					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
 			
 			//--General-Settings-SideBar
-			Optional.ofNullable(settings.getProperty("General-NotificationsPosition")).ifPresent(
-					s -> settingsWindow.getGeneralSettingsController().selectToogleWithText(settingsWindow.getGeneralSettingsController().getNotificationsPosition(), s));
+			Optional.ofNullable(settings.getProperty("General-NotificationsPosition"))
+					.ifPresent(s -> JavaFXTools.selectToogleWithText(settingsWindow.getGeneralSettingsController().getNotificationsPosition(), s));
 			
 			//--General-Settings-LibraryMode
 			playListModesSplitPane.updateSplitPaneDivider();

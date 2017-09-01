@@ -81,7 +81,7 @@ public class GeneralSettingsController extends BorderPane {
 			Main.sideBar.changeSide(JavaFXTools.getIndexOfSelectedToggle(sideBarPositionGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
 		});
 		
-		//sideBarSideGroup
+		//libraryModeUpsideDown
 		libraryModeUpsideDown.selectedToggleProperty().addListener(listener -> {
 			
 			//Update the properties file
@@ -92,7 +92,7 @@ public class GeneralSettingsController extends BorderPane {
 			
 		});
 		
-		//sideBarSideGroup
+		//djModeUpsideDown
 		djModeUpsideDown.selectedToggleProperty().addListener(listener -> {
 			
 			//Update the properties file
@@ -152,17 +152,25 @@ public class GeneralSettingsController extends BorderPane {
 		}
 	}
 	
+	
+	
 	/**
-	 * Selects the Toogle with the given text from the toggle group or else selects nothing
-	 * 
-	 * @param toggleGroup
+	 * Restores all the settings that have to do with the category of the class
 	 */
-	public void selectToogleWithText(ToggleGroup toggleGroup , String text) {
-		notificationsPosition.getToggles().forEach(toggle -> {
-			if ( ( (Labeled) toggle ).getText().equals(text)) {
-				toggle.setSelected(true);
-			}
-		});
+	public void restoreSettings() {
+		
+		//notificationsPosition
+		JavaFXTools.selectToogleWithText(notificationsPosition, "BOTTOM_LEFT");
+		
+		//sideBarSideGroup
+		JavaFXTools.selectToggleOnIndex(sideBarPositionGroup, 0);
+		
+		//libraryModeUpsideDown
+		JavaFXTools.selectToggleOnIndex(libraryModeUpsideDown, 0);
+		
+		//djModeUpsideDown
+		JavaFXTools.selectToggleOnIndex(djModeUpsideDown, 0);
+		
 	}
 	
 	/**

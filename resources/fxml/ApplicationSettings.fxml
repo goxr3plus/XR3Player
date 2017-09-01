@@ -5,40 +5,53 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="493.0" prefWidth="726.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <TabPane id="SpecialTabPane" side="LEFT" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-            <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General &gt;" />
-          <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists &gt;" />
-            <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries &gt;" />
-          <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts &gt;" />
-            <Tab closable="false" styleClass="sTab" text="XPlayers &gt;" fx:id="xPlayersTab" />
-            <Tab fx:id="webBrowserTab" closable="false" disable="true" styleClass="sTab" text="Web Browser &gt;" />
-        </tabs>
-      </TabPane>
-   </center>
+<fx:root prefHeight="498.0" prefWidth="793.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #353535; -fx-background-radius: 45 45 0 0;" BorderPane.alignment="CENTER">
+      <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #353535;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="doneButton" mnemonicParsing="false" text="Done">
+            <Button fx:id="doneButton" mnemonicParsing="false" text="Close">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
          </children>
          <padding>
-            <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
+            <Insets bottom="5.0" left="2.0" top="5.0" />
          </padding>
          <BorderPane.margin>
-            <Insets top="5.0" />
+            <Insets />
          </BorderPane.margin>
       </StackPane>
    </bottom>
    <padding>
       <Insets top="2.0" />
    </padding>
+   <center>
+      <VBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane id="SpecialTabPane" side="LEFT" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                  <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General &gt;" />
+                <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists &gt;" />
+                  <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries &gt;" />
+                <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts &gt;" />
+                  <Tab closable="false" styleClass="sTab" text="XPlayers &gt;" fx:id="xPlayersTab" />
+              </tabs>
+            </TabPane>
+            <Button fx:id="restoreDefaults" mnemonicParsing="false" style="-fx-background-radius: 0 0 0 0;;" text="Restore Defaults">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="Restore defaults settings for the selected tab category" />
+               </tooltip>
+            </Button>
+         </children>
+      </VBox>
+   </center>
 </fx:root>

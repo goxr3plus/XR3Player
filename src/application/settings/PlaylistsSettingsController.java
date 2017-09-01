@@ -86,8 +86,8 @@ public class PlaylistsSettingsController extends BorderPane {
 		instantSearch.selectedProperty().addListener(l -> {
 			
 			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-InstantSearch", String.valueOf(instantSearch.isSelected()));
-		 System.out.println("Instant Search Updated...");
-		
+			System.out.println("Instant Search Updated...");
+			
 		});
 		
 		//fileSearchGroup
@@ -127,6 +127,24 @@ public class PlaylistsSettingsController extends BorderPane {
 				ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500), NotificationType.ERROR);
 		});
 		
+	}
+	
+	/**
+	 * Restores all the settings that have to do with the category of the class
+	 */
+	public void restoreSettings() {
+		
+		//instantSearch
+		instantSearch.setSelected(true);
+		
+		//fileSearchGroup
+		JavaFXTools.selectToggleOnIndex(fileSearchGroup, 1);
+		
+		//totalFilesShownGroup
+		JavaFXTools.selectToggleOnIndex(totalFilesShownGroup, 0);
+		
+		//playedFilesDetectionGroup
+		JavaFXTools.selectToggleOnIndex(playedFilesDetectionGroup, 1);
 	}
 	
 	/**

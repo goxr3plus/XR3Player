@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import application.windows.FileAndFolderChooser;
 import javafx.application.Platform;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -24,9 +25,22 @@ import javafx.util.Duration;
  * @author GOXR3PLUS
  *
  */
-public class JavaFXTools {
+public final class JavaFXTools {
 	
 	private JavaFXTools() {
+	}
+	
+	/**
+	 * Selects the Toogle with the given text from the toggle group or else selects nothing
+	 * 
+	 * @param toggleGroup
+	 */
+	public static void selectToogleWithText(ToggleGroup toggleGroup , String text) {
+		toggleGroup.getToggles().forEach(toggle -> {
+			if ( ( (Labeled) toggle ).getText().equals(text)) {
+				toggle.setSelected(true);
+			}
+		});
 	}
 	
 	/**

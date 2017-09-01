@@ -93,7 +93,7 @@ public class XPlayersSettingsController extends BorderPane {
 		// AskSecurityQuestion
 		askSecurityQuestion.selectedProperty()
 				.addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-AskSecurityQuestion", String.valueOf(askSecurityQuestion.isSelected())));
-				
+		
 		// ShowPlayerNotifications
 		showPlayerNotifications.selectedProperty().addListener(
 				l -> Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-ShowPlayerNotifications", String.valueOf(showPlayerNotifications.isSelected())));
@@ -111,6 +111,27 @@ public class XPlayersSettingsController extends BorderPane {
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-SkipButtonSeconds", Integer.toString((int) secondsToSkipSlider.getValue()));
 		});
+	}
+	
+	/**
+	 * Restores all the settings that have to do with the category of the class
+	 */
+	public void restoreSettings() {
+		
+		// ShowFPS
+		showFPS.setSelected(false);
+		
+		// StartImmediately
+		startImmediately.setSelected(true);
+		
+		// AskSecurityQuestion
+		askSecurityQuestion.setSelected(true);
+		
+		// ShowPlayerNotifications
+		showPlayerNotifications.setSelected(false);
+		
+		// SkipSlider
+		secondsToSkipSlider.setValue(15);		
 	}
 	
 	/**

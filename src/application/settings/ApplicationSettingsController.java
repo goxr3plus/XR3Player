@@ -30,6 +30,9 @@ public class ApplicationSettingsController extends BorderPane {
 	}
 	
 	@FXML
+	private Button doneButton;
+	
+	@FXML
 	private Tab generalTab;
 	
 	@FXML
@@ -45,10 +48,7 @@ public class ApplicationSettingsController extends BorderPane {
 	private Tab xPlayersTab;
 	
 	@FXML
-	private Tab webBrowserTab;
-	
-	@FXML
-	private Button doneButton;
+	private Button restoreDefaults;
 	
 	//--------------------------------------------------------
 	
@@ -61,9 +61,9 @@ public class ApplicationSettingsController extends BorderPane {
 	private Stage window = new Stage();
 	
 	private GeneralSettingsController generalSettingsController = new GeneralSettingsController();
-	private KeyBindingsController nativeKeyBindingsController = new KeyBindingsController();
 	private PlaylistsSettingsController playListsSettingsController = new PlaylistsSettingsController();
 	private LibrariesSettingsController librariesSettingsController = new LibrariesSettingsController();
+	private KeyBindingsController nativeKeyBindingsController = new KeyBindingsController();
 	private XPlayersSettingsController xPlayersSettingsController = new XPlayersSettingsController();
 	
 	/**
@@ -143,6 +143,36 @@ public class ApplicationSettingsController extends BorderPane {
 		
 		//doneButton
 		doneButton.setOnAction(a -> hideWindow());
+		
+		//restoreDefaults
+		restoreDefaults.setOnAction(a -> {
+			//Find the selected Tab
+			Tab selectedTab = generalTab.getTabPane().getSelectionModel().getSelectedItem();
+			
+			//Decide which settings to restore based on the category
+			if (selectedTab == generalTab)
+				generalSettingsController.restoreSettings();
+			else if (selectedTab == playListsTab)
+				playListsSettingsController.restoreSettings();
+			else if (selectedTab == librariesTab)
+				librariesSettingsController.restoreSettings();
+			else if (selectedTab == shortCutsTab)
+				nativeKeyBindingsController.restoreSettings();
+			else if (selectedTab == xPlayersTab)
+				xPlayersSettingsController.restoreSettings();
+			
+		});
+	}
+	
+	/**
+	 * Restores all the settings of all the categories, this is usually used when the application firstly loads
+	 */
+	public void restoreAll() {
+		generalSettingsController.restoreSettings();
+		playListsSettingsController.restoreSettings();
+		librariesSettingsController.restoreSettings();
+		nativeKeyBindingsController.restoreSettings();
+		xPlayersSettingsController.restoreSettings();
 	}
 	
 	/**

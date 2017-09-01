@@ -21,6 +21,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
@@ -39,6 +40,9 @@ public class KeyBindingsController extends BorderPane {
 	
 	@FXML
 	private JFXCheckBox keyBindingsActive;
+	
+	@FXML
+	private MenuButton choosedPlayerMenuButton;
 	
 	@FXML
 	private ToggleGroup xPlayerSelected;
@@ -103,6 +107,16 @@ public class KeyBindingsController extends BorderPane {
 						NotificationType.ERROR);
 			}
 			
+		});
+		
+		//xPlayerSelected
+		xPlayerSelected.selectedToggleProperty().addListener(listener -> {
+			//System.out.println(JavaFXTools.getIndexOfSelectedToggle(xPlayerSelected));
+			int selectedIndex = JavaFXTools.getIndexOfSelectedToggle(xPlayerSelected);
+			choosedPlayerMenuButton.setText("Choosed Player = { " + selectedIndex + " }");
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("ShortCuts-SelectedPlayer", String.valueOf(selectedIndex));
 		});
 		
 		//accordion
@@ -225,10 +239,29 @@ public class KeyBindingsController extends BorderPane {
 	}
 	
 	/**
+	 * Restores all the settings that have to do with the category of the class
+	 */
+	public void restoreSettings() {
+		
+		//KeyBindingsActive
+		keyBindingsActive.setSelected(false);
+		
+		//xPlayerSelected
+		JavaFXTools.selectToggleOnIndex(xPlayerSelected, 0);
+	}
+	
+	/**
 	 * @return the keyBindingsActive
 	 */
 	public JFXCheckBox getKeyBindingsActive() {
 		return keyBindingsActive;
+	}
+	
+	/**
+	 * @return the xPlayerSelected
+	 */
+	public ToggleGroup getxPlayerSelected() {
+		return xPlayerSelected;
 	}
 	
 }
