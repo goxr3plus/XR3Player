@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -69,6 +70,7 @@
                                     </ImageView>
                                  </graphic>
                               </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
                               <MenuItem fx:id="deleteDataBase" mnemonicParsing="false" text="Delete DataBase">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">

@@ -93,7 +93,7 @@
             <JFXCheckBox fx:id="animationsEnabled" disable="true" selected="true" text=" " GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
             <StackPane GridPane.columnIndex="1">
                <children>
-                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text="BOTTOM_LEFT" StackPane.alignment="BOTTOM_LEFT">
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="settingsRadioButton" text="BOTTOM_LEFT" StackPane.alignment="BOTTOM_LEFT">
                      <tooltip>
                         <Tooltip text="The Side Bar will be at the left of the Window" />
                      </tooltip>
@@ -150,7 +150,7 @@
                         <Tooltip text="The Side Bar will be at the left of the Window" />
                      </tooltip>
                   </JFXRadioButton>
-                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="settingsRadioButton" text="BOTTOM_CENTER" toggleGroup="$notificationsPosition" StackPane.alignment="BOTTOM_CENTER">
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text="BOTTOM_CENTER" toggleGroup="$notificationsPosition" StackPane.alignment="BOTTOM_CENTER">
                      <tooltip>
                         <Tooltip text="The Side Bar will be at the left of the Window" />
                      </tooltip>

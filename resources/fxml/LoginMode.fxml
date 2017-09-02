@@ -32,11 +32,6 @@
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15 15 0 0;" text="Login creating or selecting a user">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
             <SplitPane fx:id="splitPane" dividerPositions="0.7" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                <items>
                   <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" minHeight="0.0">
