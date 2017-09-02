@@ -53,8 +53,7 @@ public class ExportZipService extends Service<Boolean> {
 				ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
 				done();
 			} else {
-				ActionTool.showNotification("Database Import", "Successfully imported the database!", Duration.seconds(2),
-						NotificationType.INFORMATION);
+				ActionTool.showNotification("Database Import", "Successfully imported the database!", Duration.seconds(2), NotificationType.INFORMATION);
 				
 				// Restart XR3Player
 				Main.updateScreen.getProgressBar().progressProperty().unbind();
@@ -89,7 +88,7 @@ public class ExportZipService extends Service<Boolean> {
 	 * Import the database from the zip folder.
 	 *
 	 * @param zipFolder
-	 *        the zip folder
+	 *            the zip folder
 	 */
 	public void importDataBase(String zipFolder) {
 		inputZip = zipFolder;
@@ -97,10 +96,6 @@ public class ExportZipService extends Service<Boolean> {
 		restart();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see javafx.concurrent.Service#createTask()
-	 */
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
@@ -163,9 +158,7 @@ public class ExportZipService extends Service<Boolean> {
 						// Refresh the dataLabel text
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("In:" + newFile.getName()));
 						
-						// create all non exists folders
-						// else you will hit FileNotFoundException for
-						// compressed folder
+						// create all non exists folders else you will hit FileNotFoundException for compressed folder
 						new File(newFile.getParent()).mkdirs();
 						
 						//Create File OutputStream

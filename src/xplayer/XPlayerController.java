@@ -303,36 +303,41 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	};
 	
 	public final EventHandler<? super DragEvent> audioDropEvent = event -> {
-		// Keeping the absolute path
-		String absolutePath;
 		
-		// File?
-		for (File file : event.getDragboard().getFiles()) {
-			absolutePath = file.getAbsolutePath();
-			if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-				// Ask Question?
-				if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
-					if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
-							visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+		//We don't want the player to start if the drop event is for the XPlayer PlayList
+		if (!flipPane.isBackVisible()) {
+			
+			// Keeping the absolute path
+			String absolutePath;
+			
+			// File?
+			for (File file : event.getDragboard().getFiles()) {
+				absolutePath = file.getAbsolutePath();
+				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
+					// Ask Question?
+					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
+						if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
+								visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+							playSong(absolutePath);
+					} else
 						playSong(absolutePath);
-				} else
-					playSong(absolutePath);
-				break;
+					break;
+				}
 			}
+			
+			// // URL?
+			// if (xPlayer.isPausedOrPlaying()) {
+			// // OK?
+			// if (ActionTool
+			// .doQuestion("A song is already playing on this deck.\n Are you
+			// sure you want to replace it?"))
+			// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
+			// } else
+			// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
+			
+			event.setDropCompleted(true);
+			
 		}
-		
-		// // URL?
-		// if (xPlayer.isPausedOrPlaying()) {
-		// // OK?
-		// if (ActionTool
-		// .doQuestion("A song is already playing on this deck.\n Are you
-		// sure you want to replace it?"))
-		// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
-		// } else
-		// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
-		
-		event.setDropCompleted(true);
-		
 	};
 	
 	//============================================================================================

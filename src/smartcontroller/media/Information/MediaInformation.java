@@ -192,6 +192,10 @@ public class MediaInformation extends BorderPane {
 	public void updateInformation(Media media) {
 		this.media = media;
 		
+		//We don't want thugs here
+		if (this.media == null)
+			return;
+		
 		//== image
 		try {
 			Image image = media.getAlbumImage();

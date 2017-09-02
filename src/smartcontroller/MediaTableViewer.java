@@ -220,7 +220,10 @@ public class MediaTableViewer extends TableView<Media> {
 		//--Selection Model
 		getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> smartController.updateLabel()); // Main.amazon.updateInformation((Media) newValue)
-		getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> Main.mediaInformation.updateInformation(newValue));
+		getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue != null)
+				Main.mediaInformation.updateInformation(newValue);
+		});
 		
 		//--KeyListener
 		setOnKeyReleased(key -> {

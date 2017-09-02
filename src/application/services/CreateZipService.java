@@ -20,8 +20,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 /**
- * This class is used as a Service which is exporting the applications database
- * as a zip folder.
+ * This class is used as a Service which is exporting the applications database as a zip folder.
  *
  * @author SuperGoliath
  */
@@ -49,9 +48,9 @@ public class CreateZipService extends Service<Boolean> {
 	 * This method is using a Service to export the dataBase into a zip folder.
 	 *
 	 * @param zip
-	 *        The Destination zip Folder
+	 *            The Destination zip Folder
 	 * @param sourceFolder1
-	 *        The source Folder
+	 *            The source Folder
 	 */
 	public void exportDataBase(String zip , String sourceFolder1) {
 		
@@ -157,9 +156,9 @@ public class CreateZipService extends Service<Boolean> {
 	 * Traverse a directory and get all files, and add the file into fileList.
 	 *
 	 * @param f
-	 *        the file
+	 *            the file
 	 * @param file2
-	 *        the file 2
+	 *            the file 2
 	 */
 	public void generateFileList(File f , String file2) {
 		
@@ -180,9 +179,9 @@ public class CreateZipService extends Service<Boolean> {
 	 * Format the file path for zip.
 	 *
 	 * @param file
-	 *        file path
+	 *            file path
 	 * @param sourceFolder
-	 *        the source folder
+	 *            the source folder
 	 * @return Formatted file path
 	 */
 	private String generateZipEntry(String file , String sourceFolder) {

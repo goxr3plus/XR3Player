@@ -24,7 +24,7 @@ public class DatabaseList {
 	/**
 	 * The name of the database table
 	 */
-	private final String dataBaseTableName;
+	private final String databaseTableName;
 	
 	/**
 	 * Constructor
@@ -32,7 +32,7 @@ public class DatabaseList {
 	 * @param dataBaseTableName
 	 */
 	public DatabaseList(String dataBaseTableName) {
-		this.dataBaseTableName = dataBaseTableName;
+		this.databaseTableName = dataBaseTableName;
 	}
 	
 	//------------Prepared Statements---------------
@@ -44,15 +44,36 @@ public class DatabaseList {
 	private void prepareMediaListTable() {
 		
 		try {
-			//Check if it does already exists
-			if (!Main.dbManager.doesTableExist(dataBaseTableName))
-				Main.dbManager.getConnection().createStatement().executeUpdate(
-						"CREATE TABLE '" + dataBaseTableName + "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
+			//IF DATABASE DOESN'T EXIST
+			if (!Main.dbManager.doesTableExist(databaseTableName))
+				Main.dbManager.getConnection().createStatement().executeUpdate("CREATE TABLE '" + databaseTableName
+						+ "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,STARS DOUBLE NOT NULL , TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
+			else {
+				//XR3Player Databases < Update [ 81 ] NEED THIS COLUMN MODIFICATION IN ORDER TO WORK
+				//We need to add one more column here :)
+				
+			}
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 		
+		System.out.println("Column exists " + isColumnExists(databaseTableName, "STARS"));
+	}
+	
+	/** Checks if the Specific column exists inside the database
+	 * @param table
+	 * @param column
+	 * @return
+	 */
+	public boolean isColumnExists(String table , String column) {
+		try {
+			Main.dbManager.getConnection().prepareStatement("SELECT " + column + " FROM '" + table + "'").executeQuery();
+			return true;
+		} catch (SQLException e) {
+			//e.printStackTrace();
+			return false;
+		}
 	}
 	
 	/**
@@ -65,7 +86,7 @@ public class DatabaseList {
 		prepareMediaListTable();
 		
 		//Now Upload
-		try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery("SELECT* FROM '" + dataBaseTableName + "'")) {
+		try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery("SELECT* FROM '" + databaseTableName + "'")) {
 			
 			//Add all
 			while (resultSet.next())
@@ -89,11 +110,12 @@ public class DatabaseList {
 		if (set.add(item))
 			//Try to insert into the database
 			try (PreparedStatement insert = Main.dbManager.getConnection()
-					.prepareStatement("INSERT OR IGNORE INTO '" + dataBaseTableName + "' (PATH,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?)")) {
+					.prepareStatement("INSERT OR IGNORE INTO '" + databaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?,?)")) {
 				insert.setString(1, item);
-				insert.setInt(2, 0);
-				insert.setString(3, InfoTool.getCurrentDate());
-				insert.setString(4, InfoTool.getLocalTime());
+				insert.setDouble(2, 0.0);
+				insert.setInt(3, 0);
+				insert.setString(4, InfoTool.getCurrentDate());
+				insert.setString(5, InfoTool.getLocalTime());
 				insert.executeUpdate();
 				
 				//Commit
@@ -119,7 +141,7 @@ public class DatabaseList {
 		
 		if (set.remove(item))
 			//Try to delete from the database
-			try (PreparedStatement remove = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
+			try (PreparedStatement remove = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + databaseTableName + "' WHERE PATH=?")) {
 				remove.setString(1, item);
 				remove.executeUpdate();
 				
@@ -160,7 +182,7 @@ public class DatabaseList {
 			return true;
 		
 		//Update in the database
-		try (PreparedStatement rename = Main.dbManager.getConnection().prepareStatement("UPDATE '" + dataBaseTableName + "' SET PATH=? WHERE PATH=?")) {
+		try (PreparedStatement rename = Main.dbManager.getConnection().prepareStatement("UPDATE '" + databaseTableName + "' SET PATH=? WHERE PATH=?")) {
 			rename.setString(1, newName);
 			rename.setString(2, oldName);
 			rename.executeUpdate();
@@ -186,7 +208,7 @@ public class DatabaseList {
 		
 		try {
 			//Clear the table
-			Main.dbManager.getConnection().createStatement().executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
+			Main.dbManager.getConnection().createStatement().executeUpdate("DELETE FROM '" + databaseTableName + "'");
 			Main.dbManager.commit();
 			
 			//Clear from Set

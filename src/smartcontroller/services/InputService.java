@@ -103,7 +103,7 @@ public class InputService extends Service<Void> {
 		smartController.unbind();
 		smartController.getCancelButton().setDisable(true);
 		smartController.depositWorking = false;
-		smartController.getLoadService().startService(true, true,false);
+		smartController.getLoadService().startService(true, true, false);
 	}
 	
 	/*
@@ -347,7 +347,7 @@ public class InputService extends Service<Void> {
 						e.printStackTrace();
 					}
 				
-				System.out.println("Total Files=" + count[0]);
+				//System.out.println("Total Files=" + count[0]);
 				return count[0];
 			}
 			

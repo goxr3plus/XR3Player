@@ -88,10 +88,10 @@ public class UsersInfoLoader extends Service<Boolean> {
 							//System.out.println("UsersInformationDb Exists"); //debugging
 							
 							//--------------------Now continue normally----------------------------------------------
-							Properties settings = user.getUserInformationDb().loadProperties(); //Load the properties from the File
+							Properties userInformationSettings = user.getUserInformationDb().loadProperties(); //Load the properties from the File
 							
 							//--Total Libraries
-							Optional.ofNullable(settings.getProperty("Total-Libraries")).ifPresent(s -> {
+							Optional.ofNullable(userInformationSettings.getProperty("Total-Libraries")).ifPresent(s -> {
 								int totalLibraries = Integer.parseInt(s);
 								
 								// Refresh the text
@@ -106,7 +106,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 							});
 							
 							//--User Description
-							Optional.ofNullable(settings.getProperty("User-Description"))
+							Optional.ofNullable(userInformationSettings.getProperty("User-Description"))
 									.ifPresent(description -> Platform.runLater(() -> user.getDescriptionLabel().setText(description)));
 							
 						} //If the UserInformation Properties File doesn't exit try to take Total-Libraries information from the actual sqlite.db file

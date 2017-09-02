@@ -285,8 +285,8 @@ public class DbManager {
 	 *             the SQL exception
 	 */
 	private void createXPlayListTable(Statement statement , int key) throws SQLException {
-		statement.executeUpdate("CREATE TABLE IF NOT EXISTS `XPPL" + key + "` (PATH       TEXT    PRIMARY KEY   NOT NULL ," + "STARS       DOUBLE     NOT NULL,"
-				+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
+		statement.executeUpdate("CREATE TABLE IF NOT EXISTS `XPPL" + key
+				+ "` (PATH TEXT PRIMARY KEY  NOT NULL , STARS  DOUBLE  NOT NULL , TIMESPLAYED  INT NOT NULL , DATE TEXT NOT NULL , HOUR TEXT NOT NULL);");
 	}
 	
 	/**
@@ -316,18 +316,22 @@ public class DbManager {
 			Properties properties = user.getUserInformationDb().loadProperties();
 			
 			//Load the opened libraries
-			Optional.ofNullable(properties.getProperty("Opened-Libraries")).ifPresent(openedLibraries -> {
-				
-				//Use the split to get all the Opened Libraries Names
-				Arrays.asList(openedLibraries.split("\\<\\|\\>\\:\\<\\|\\>")).stream().forEach(name -> {
-					Platform.runLater(() -> {
-						//System.out.println(name); //debugging
-						
-						//Get the Library and Open it!
-						Main.libraryMode.getLibraryWithName(name).get().libraryOpenClose(true, true);
-					});
-				});
-			});
+			//			Optional.ofNullable(properties.getProperty("Opened-Libraries")).ifPresent(openedLibraries -> {
+			//				
+			//				//Use the split to get all the Opened Libraries Names
+			//				Arrays.asList(openedLibraries.split("\\<\\|\\>\\:\\<\\|\\>")).stream().forEach(name -> {
+			//					Platform.runLater(() -> {
+			//						//System.out.println(name); //debugging
+			//						
+			//						//Get the Library and Open it!
+			//						Main.libraryMode.getLibraryWithName(name).get().libraryOpenClose(true, true);
+			//					});
+			//				});
+			//			});
+			
+			//Load all the Opened Libraries
+			Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened)
+					.forEach(library -> library.libraryOpenClose(true, true)));
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {
@@ -402,17 +406,17 @@ public class DbManager {
 		getOpenedUser().ifPresent(user -> {
 			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.multipleLibs.getTabs();
 			
-			//Save the opened libraries
-			if (openedLibrariesTabs.isEmpty())
-				user.getUserInformationDb().deleteProperty("Opened-Libraries");
-			else {
-				
-				//Join all library names to a string using as separator char "<|>:<|>"
-				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
-				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
-				
-				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
-			}
+			//			//Save the opened libraries
+			//			if (openedLibrariesTabs.isEmpty())
+			//				user.getUserInformationDb().deleteProperty("Opened-Libraries");
+			//			else {
+			//				
+			//				//Join all library names to a string using as separator char "<|>:<|>"
+			//				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
+			//				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
+			//				
+			//				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
+			//			}
 			
 			//Save the last opened library
 			storeLastOpenedLibrary();
@@ -496,6 +500,10 @@ public class DbManager {
 							libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
 									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"),
 									resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
+							
+							//Check if this Library must be Opened
+							//							if (resultSet.getBoolean("OPENED"))
+							//								libraries.get(libraries.size() - 1).libraryOpenClose(true, true);
 							
 							updateProgress(resultSet.getRow() - 1, total);
 						}
