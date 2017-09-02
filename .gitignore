@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Ignore XR3Player test code
+src/aaTesterOnlyCode
+src/aaTesterOnlyCode2
