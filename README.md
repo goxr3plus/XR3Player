@@ -17,6 +17,26 @@ Total Downloads on Github
 [license-url]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
+# Amazing Visualizations
+[![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
+
+-------------------------------------------------------------------------------------
+
+## Image from Update 80 After User Login
+![update 80](https://user-images.githubusercontent.com/20374208/29983731-e049b02a-8f5f-11e7-8773-b8d66f8f9174.png)
+
+
+## Image from Update 81 Internal WebBrowser
+![xr3player update 80 browser](https://user-images.githubusercontent.com/20374208/30113084-2e7c493c-931c-11e7-91fd-a9a3c95ab8a6.png)
+
+## Image from Update 81 DJMode
+![update 80](https://user-images.githubusercontent.com/20374208/30113083-2dc6b5ae-931c-11e7-8062-2e74b7080604.png)
+
+
+## Image from Update 72 Login Screen
+![xr3player update 80 login screen](https://cloud.githubusercontent.com/assets/20374208/26711701/f8f9bf12-476a-11e7-92db-fc0513011305.png)
+---------
+
 ### !Announcement! I have created an auto updater for any Java application (including XR3Player of course)
  Check it :) !-> https://github.com/goxr3plus/JavaFXApplicationAutoUpdater
 
@@ -40,31 +60,6 @@ XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organi
 Download Java 8 here : Java 1.8.0_111(8 Update 111)++ required . ( https://www.java.com/en/ )
 
 How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
-
-# Amazing Visualizations
-[![Visualizer](http://img.youtube.com/vi/QwBdD8xTgd0/0.jpg)](https://www.youtube.com/watch?v=QwBdD8xTgd0)
-
-# Update 76 small video
-### Press the image to if you want to watch the video on youtube
-[![update 76](http://img.youtube.com/vi/fSvrBj75XcA/0.jpg)](https://www.youtube.com/watch?v=fSvrBj75XcA)
-
-
-
--------------------------------------------------------------------------------------
-
-## Image from Update 72 Login Screen
-![xr3player update 80 login screen](https://cloud.githubusercontent.com/assets/20374208/26711701/f8f9bf12-476a-11e7-92db-fc0513011305.png)
-
-## Image from Update 80 After User Login
-![update 80](https://user-images.githubusercontent.com/20374208/29983731-e049b02a-8f5f-11e7-8773-b8d66f8f9174.png)
-
-
-## Image from Update 80 Internal WebBrowser
-![xr3player update 80 browser](https://user-images.githubusercontent.com/20374208/29983738-e40bbdca-8f5f-11e7-8ece-50abce2a764c.png)
-
-## Image from Update 80 DJMode
-![update 80](https://user-images.githubusercontent.com/20374208/29983736-e2b77aa4-8f5f-11e7-880d-9a225bdcc1e8.png)
-
 
 ------------------------------------------------------------------------------------
 
