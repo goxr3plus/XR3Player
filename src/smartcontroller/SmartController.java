@@ -284,9 +284,9 @@ public class SmartController extends StackPane {
 					else if (code == KeyCode.U) {
 						Media media = tableViewer.getSelectionModel().getSelectedItem();
 						if (!Main.playedSongs.containsFile(media.getFilePath()))
-							Main.playedSongs.addIfNotExists(media.getFilePath());
+							Main.playedSongs.addIfNotExists(media.getFilePath(), true);
 						else
-							Main.playedSongs.remove(media.getFilePath());
+							Main.playedSongs.remove(media.getFilePath(), true);
 					} else if (code == KeyCode.ENTER)
 						Main.xPlayersList.getXPlayerController(0).playSong(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 					
@@ -502,6 +502,11 @@ public class SmartController extends StackPane {
 			toolsMenuButton.setManaged(false);
 		}
 		
+		if (genre == Genre.EMOTIONSMEDIA) {
+			importFolder.setVisible(false);
+			importFiles.setVisible(false);
+		}
+		
 	}
 	
 	/*-----------------------------------------------------------------------
@@ -612,10 +617,31 @@ public class SmartController extends StackPane {
 			try {
 				Main.dbManager.getConnection().createStatement().executeUpdate("DELETE FROM '" + dataBaseTableName + "'");
 				Main.dbManager.commit();
+				
+				//Check if it is Emotion PlayList so clear the Internal List also babeeee!
+				if (genre == Genre.EMOTIONSMEDIA)
+					switch (getName()) {
+						
+						case "HatedMediaController":
+							Main.emotionListsController.hatedMediaList.getSet().clear();
+							break;
+						case "DislikedMediaController":
+							Main.emotionListsController.dislikedMediaList.getSet().clear();
+							break;
+						case "LikedMediaController":
+							Main.emotionListsController.likedMediaList.getSet().clear();
+							break;
+						case "LovedMediaController":
+							Main.emotionListsController.lovedMediaList.getSet().clear();
+							break;
+					}
+				
+				//Make the Region Disappear in the fog of hell ououou
 				Platform.runLater(() -> {
 					getRegion().setVisible(false);
 					getCancelButton().setText("Cancel");
 				});
+				
 			} catch (Exception ex) {
 				Main.logger.log(Level.WARNING, "", ex);
 			} finally {

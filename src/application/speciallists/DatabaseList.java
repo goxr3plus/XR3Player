@@ -48,20 +48,24 @@ public class DatabaseList {
 			if (!Main.dbManager.doesTableExist(databaseTableName))
 				Main.dbManager.getConnection().createStatement().executeUpdate("CREATE TABLE '" + databaseTableName
 						+ "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,STARS DOUBLE NOT NULL , TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
-			else {
-				//XR3Player Databases < Update [ 81 ] NEED THIS COLUMN MODIFICATION IN ORDER TO WORK
-				//We need to add one more column here :)
-				
-			}
 			
+			//Update 81+ deletes the Emotions Lists from previous databases ( too bad , but wtf to do.... we have to update bro's)
+			else {
+				//Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF EXISTS'" + databaseTableName.replace("Original", "") + "'");
+				//Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF EXISTS'" + "HateddMediaList" + "'");
+				
+				//Main.dbManager.getConnection().commit();
+			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 		
-		System.out.println("Column exists " + isColumnExists(databaseTableName, "STARS"));
+		//System.out.println("Column exists " + isColumnExists(databaseTableName, "STARS"));
 	}
 	
-	/** Checks if the Specific column exists inside the database
+	/**
+	 * Checks if the Specific column exists inside the database
+	 * 
 	 * @param table
 	 * @param column
 	 * @return
@@ -105,7 +109,7 @@ public class DatabaseList {
 	 *            the item
 	 * @return True if succeeded or False if not
 	 */
-	public boolean addIfNotExists(String item) {
+	public boolean addIfNotExists(String item , boolean commit) {
 		
 		if (set.add(item))
 			//Try to insert into the database
@@ -119,7 +123,8 @@ public class DatabaseList {
 				insert.executeUpdate();
 				
 				//Commit
-				Main.dbManager.commit();
+				if (commit)
+					Main.dbManager.commit();
 				
 				return true;
 			} catch (SQLException ex) {
@@ -137,7 +142,7 @@ public class DatabaseList {
 	 *            the item
 	 * @return True if succeeded or False if not
 	 */
-	public boolean remove(String item) {
+	public boolean remove(String item , boolean commit) {
 		
 		if (set.remove(item))
 			//Try to delete from the database
@@ -146,7 +151,8 @@ public class DatabaseList {
 				remove.executeUpdate();
 				
 				//Commit
-				Main.dbManager.commit();
+				if (commit)
+					Main.dbManager.commit();
 				
 				return true;
 			} catch (SQLException ex) {
@@ -177,7 +183,7 @@ public class DatabaseList {
 	 *            the new name
 	 * @return true, if successful
 	 */
-	public boolean renameMedia(String oldName , String newName) {
+	public boolean renameMedia(String oldName , String newName , boolean commit) {
 		if (!set.remove(oldName))
 			return true;
 		
@@ -188,7 +194,8 @@ public class DatabaseList {
 			rename.executeUpdate();
 			
 			//Commit
-			Main.dbManager.commit();
+			if (commit)
+				Main.dbManager.commit();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			return false;
@@ -204,12 +211,13 @@ public class DatabaseList {
 	 * 
 	 * @return True if succeeded or False if not
 	 */
-	public boolean clearAll() {
+	public boolean clearAll(boolean commit) {
 		
 		try {
 			//Clear the table
 			Main.dbManager.getConnection().createStatement().executeUpdate("DELETE FROM '" + databaseTableName + "'");
-			Main.dbManager.commit();
+			if (commit)
+				Main.dbManager.commit();
 			
 			//Clear from Set
 			set.clear();
@@ -229,6 +237,13 @@ public class DatabaseList {
 	 */
 	public Set<String> getSet() {
 		return set;
+	}
+	
+	/**
+	 * @return the databaseTableName
+	 */
+	public String getDatabaseTableName() {
+		return databaseTableName;
 	}
 	
 }

@@ -654,7 +654,7 @@
  }
  
  .button:hover , .menu-button:hover , .segmented-button-bar .button:hover , .segmented-button-bar .toggle-button:hover{
- 	-fx-background-color:firebrick;
+ 	-fx-background-color:rgb(255,106,0);
     /*-fx-background-color: 
         linear-gradient(from 0.0% 93.0% to 0.0% 100.0%, #a34313 0.0%, #903b12 100.0%),
         #9d4024,

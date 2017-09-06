@@ -9,16 +9,18 @@ package smartcontroller;
  * @author GOXR3PLUS
  */
 public enum Genre {
-
-    /** The librarysong. */
-    LIBRARYMEDIA,
-
-    SEARCHWINDOW,
-    //    /** The xplaylistsong. */
-    //    XPLAYLISTSONG,
-    //    /** The radiostation. */
-    //    RADIOSTATION,
-    /** The unknown. */
-    UNKNOWN;
-
+	
+	/** The librarysong. */
+	LIBRARYMEDIA,
+	
+	EMOTIONSMEDIA,
+	
+	SEARCHWINDOW,
+	//    /** The xplaylistsong. */
+	//    XPLAYLISTSONG,
+	//    /** The radiostation. */
+	//    RADIOSTATION,
+	/** The unknown. */
+	UNKNOWN;
+	
 }

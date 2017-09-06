@@ -30,10 +30,13 @@
                   </Tab>
                </tabs>
             </TabPane>
-            <JFXButton fx:id="addNewLibrary" layoutX="12.0" layoutY="8.0" style="-fx-border-color: firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2.5; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+            <JFXButton fx:id="addNewLibrary" layoutX="12.0" layoutY="8.0" style="-fx-border-color: transparent orange transparent firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2.5; -fx-background-radius: 0 45 45 0;" styleClass="starWindow" text="+" AnchorPane.leftAnchor="-3.0" AnchorPane.topAnchor="-2.0">
                <tooltip>
                   <Tooltip text="New Tab" />
                </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
          </children>
       </AnchorPane>

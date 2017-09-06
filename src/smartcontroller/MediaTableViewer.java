@@ -11,6 +11,7 @@ import application.Main;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
+import application.windows.EmotionsWindow;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -214,6 +215,9 @@ public class MediaTableViewer extends TableView<Media> {
 		} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
 			placeHolderLabel.setText("Search Media from all the playlists...");
 			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
+		} else if (smartController.getGenre() == Genre.EMOTIONSMEDIA) {
+			placeHolderLabel.setText("No Media in this emotions list ...");
+			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
 		}
 		setPlaceholder(placeHolderLabel);
 		
@@ -380,6 +384,15 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		// likeDislikeNeutral
 		emotions.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
+		emotions.setComparator((button1 , button2) -> {
+			if ( ( (ImageView) button1.getGraphic() ).getImage() == EmotionsWindow.neutralImage && ( (ImageView) button2.getGraphic() ).getImage() != EmotionsWindow.neutralImage)
+				return 1;
+			else if ( ( (ImageView) button1.getGraphic() ).getImage() != EmotionsWindow.neutralImage
+					&& ( (ImageView) button2.getGraphic() ).getImage() == EmotionsWindow.neutralImage)
+				return -1;
+			else
+				return 0;
+		});
 		
 		// number
 		number.setCellValueFactory(new PropertyValueFactory<>("number"));
@@ -428,9 +441,9 @@ public class MediaTableViewer extends TableView<Media> {
 		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
 		stars.setComparator((button1 , button2) -> {
 			if (Double.parseDouble(button1.getText()) > Double.parseDouble(button2.getText()))
-				return -1;
-			else if (Double.parseDouble(button1.getText()) < Double.parseDouble(button2.getText()))
 				return 1;
+			else if (Double.parseDouble(button1.getText()) < Double.parseDouble(button2.getText()))
+				return -1;
 			else
 				return 0;
 		});

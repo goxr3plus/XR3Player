@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,7 +8,7 @@
 
 <fx:root prefHeight="102.0" prefWidth="662.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXTabPane id="specialJFXTabPane">
+      <JFXTabPane id="specialJFXTabPane" fx:id="tabPane">
          <tabs>
             <Tab fx:id="hateTab" closable="false" text="Hated">
                <graphic>
@@ -49,6 +48,5 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 32; -fx-background-color: rgb(0,0,0,0.6);" styleClass="applicationSettingsLabel" text="Coming soon... :)" />
    </children>
 </fx:root>

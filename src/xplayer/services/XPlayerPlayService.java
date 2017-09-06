@@ -232,7 +232,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		// add to played songs...
 		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
-		Main.playedSongs.addIfNotExists(absolutePath);
+		Main.playedSongs.addIfNotExists(absolutePath,true);
 		xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath)));
 		
 		done();

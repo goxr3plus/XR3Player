@@ -562,6 +562,15 @@ public abstract class Media {
 		// --totalInDataBase
 		controller.setTotalInDataBase(controller.getTotalInDataBase() - 1);
 		
+		//Check if it is EmotionMedia (because if cleared directly from an Emotion Playlist , then we want also to
+		//vanish it completely)
+		if (controller.getGenre() == Genre.EMOTIONSMEDIA) {
+			Main.emotionListsController.hatedMediaList.remove(getFilePath(), false);
+			Main.emotionListsController.dislikedMediaList.remove(getFilePath(), false);
+			Main.emotionListsController.likedMediaList.remove(getFilePath(), false);
+			Main.emotionListsController.lovedMediaList.remove(getFilePath(), false);
+		}
+		
 		return true;
 	}
 	
@@ -637,47 +646,22 @@ public abstract class Media {
 							//Inform all Libraries SmartControllers 
 							Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(smartController -> {
 								
-								//if (controller1 != controller) // we already renamed on this controller
-								try (PreparedStatement dataRename = Main.dbManager.getConnection()
-										.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
-									
-									// Prepare Statement
-									dataRename.setString(1, newFilePath);
-									dataRename.setString(2, oldFilePath);
-									int i = dataRename.executeUpdate();
-									
-									if (i > 0) //Check
-										smartController.getItemsObservableList().forEach(media -> {
-											if (media.getFilePath().equals(oldFilePath))
-												media.setFilePath(newFilePath);
-										});
-									
-								} catch (SQLException ex) {
-									Main.logger.log(Level.WARNING, "", ex);
-								}
+								internalDataBaseRename(smartController, newFilePath, oldFilePath);
+								
 							});
 							
 							//Inform all XPlayers SmartControllers
 							Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(smartController -> {
 								
-								//if (controller1 != controller) // we already renamed on this controller
-								try (PreparedStatement dataRename = Main.dbManager.getConnection()
-										.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
-									
-									// Prepare Statement
-									dataRename.setString(1, newFilePath);
-									dataRename.setString(2, oldFilePath);
-									int i = dataRename.executeUpdate();
-									
-									if (i > 0) //Check
-										smartController.getItemsObservableList().forEach(media -> {
-											if (media.getFilePath().equals(oldFilePath))
-												media.setFilePath(newFilePath);
-										});
-									
-								} catch (SQLException ex) {
-									Main.logger.log(Level.WARNING, "", ex);
-								}
+								internalDataBaseRename(smartController, newFilePath, oldFilePath);
+								
+							});
+							
+							//Update Emotion Lists SmartControllers
+							Main.emotionsTabPane.getTabPane().getTabs().stream().map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
+								
+								internalDataBaseRename(smartController, newFilePath, oldFilePath);
+								
 							});
 							
 							//Inform all XPlayers Models
@@ -690,25 +674,29 @@ public abstract class Media {
 									//object
 									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 									
-									//
 								}
 							});
 							
-							//Commit to the Database
-							Main.dbManager.commit();
-							
 							// Inform Played Media List
-							Main.playedSongs.renameMedia(oldFilePath, newFilePath);
+							Main.playedSongs.renameMedia(oldFilePath, newFilePath, false);
+							
+							// Inform Hated Media List
+							Main.emotionListsController.hatedMediaList.renameMedia(oldFilePath, newFilePath, false);
 							// Inform Disliked Media List
-							Main.emotionListsController.getDislikedSongsList().renameMedia(oldFilePath, newFilePath);
+							Main.emotionListsController.dislikedMediaList.renameMedia(oldFilePath, newFilePath, false);
 							// Inform Liked Media List
-							Main.emotionListsController.getLikedSongsList().renameMedia(oldFilePath, newFilePath);
+							Main.emotionListsController.likedMediaList.renameMedia(oldFilePath, newFilePath, false);
+							// Inform Loved Media List
+							Main.emotionListsController.lovedMediaList.renameMedia(oldFilePath, newFilePath, false);
 							
 							//Update the SearchWindow
 							Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
 								if (media.getFilePath().equals(oldFilePath))
 									media.setFilePath(newFilePath);
 							});
+							
+							//Commit to the Database
+							Main.dbManager.commit();
 							
 							// Exception occurred
 						} catch (Exception ex) {
@@ -723,6 +711,33 @@ public abstract class Media {
 			}// invalidated
 		});
 		//}
+	}
+	
+	/**
+	 * Called to rename the SQL Table data for the SmartController
+	 * 
+	 * @param smartController
+	 * @param newFilePath
+	 * @param oldFilePath
+	 */
+	private void internalDataBaseRename(SmartController smartController , String newFilePath , String oldFilePath) {
+		
+		//if (controller1 != controller) // we already renamed on this controller
+		try (PreparedStatement dataRename = Main.dbManager.getConnection().prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
+			
+			// Prepare Statement
+			dataRename.setString(1, newFilePath);
+			dataRename.setString(2, oldFilePath);
+			if (dataRename.executeUpdate() > 0) //Check
+				smartController.getItemsObservableList().forEach(media -> {
+					if (media.getFilePath().equals(oldFilePath))
+						media.setFilePath(newFilePath);
+				});
+			
+		} catch (SQLException ex) {
+			Main.logger.log(Level.WARNING, "", ex);
+		}
+		
 	}
 	
 	/**
@@ -763,51 +778,22 @@ public abstract class Media {
 						//Inform all Libraries SmartControllers
 						Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(smartController -> {
 							
-							//Do it bro!
-							try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
-									.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
-								
-								// Prepare Statement
-								preparedUStars.setDouble(1, getStars());
-								preparedUStars.setString(2, getFilePath());
-								int i = preparedUStars.executeUpdate();
-								
-								if (i > 0)// && controller1 != controller) //Check 
-									//controller1.getLoadService().startService(false, false, true);
-									smartController.getItemsObservableList().forEach(media -> {
-										if (media.getFilePath().equals(Media.this.getFilePath()))
-											media.starsProperty().get().setText(stars.get().getText());
-									});
-								
-							} catch (Exception ex) {
-								Main.logger.log(Level.WARNING, "", ex);
-								//	ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR);
-							}
+							internalDataBaseUpdateStars(smartController);
+							
 						});
 						
 						//Inform all XPlayers SmartControllers
 						Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(smartController -> {
 							
-							//Do it bro!
-							try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
-									.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
-								
-								// Prepare Statement
-								preparedUStars.setDouble(1, getStars());
-								preparedUStars.setString(2, getFilePath());
-								int i = preparedUStars.executeUpdate();
-								
-								if (i > 0)// && controller1 != controller) //Check 
-									//controller1.getLoadService().startService(false, false, true);
-									smartController.getItemsObservableList().forEach(media -> {
-										if (media.getFilePath().equals(Media.this.getFilePath()))
-											media.starsProperty().get().setText(stars.get().getText());
-									});
-								
-							} catch (Exception ex) {
-								Main.logger.log(Level.WARNING, "", ex);
-								//	ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR);
-							}
+							internalDataBaseUpdateStars(smartController);
+							
+						});
+						
+						//Update Emotion Lists SmartControllers
+						Main.emotionsTabPane.getTabPane().getTabs().stream().map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
+							
+							internalDataBaseUpdateStars(smartController);
+							
 						});
 						
 						//Update the SearchWindow
@@ -824,6 +810,33 @@ public abstract class Media {
 			}
 		});
 		
+	}
+	
+	/**
+	 * Called to update STARS on the SQL Table data for the SmartController
+	 * 
+	 * @param smartController
+	 */
+	private void internalDataBaseUpdateStars(SmartController smartController) {
+		
+		//Do it bro!
+		try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
+				.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
+			
+			// Prepare Statement
+			preparedUStars.setDouble(1, getStars());
+			preparedUStars.setString(2, getFilePath());
+			if (preparedUStars.executeUpdate() > 0)// && controller1 != controller) //Check 
+				//controller1.getLoadService().startService(false, false, true);
+				smartController.getItemsObservableList().forEach(media -> {
+					if (media.getFilePath().equals(Media.this.getFilePath()))
+						media.starsProperty().get().setText(String.valueOf(getStars()));
+				});
+			
+		} catch (Exception ex) {
+			Main.logger.log(Level.WARNING, "", ex);
+			//	ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR);
+		}
 	}
 	
 	/**
@@ -848,8 +861,9 @@ public abstract class Media {
 				// !showing?
 				if (!Main.emotionsWindow.getWindow().isShowing()) {
 					
+					new Thread(() ->
 					//Add it the one of the emotions list
-					Main.emotionListsController.makeEmotionDecisition(Media.this.getFilePath(), Main.emotionsWindow.getEmotion());
+					Main.emotionListsController.makeEmotionDecisition(Media.this.getFilePath(), Main.emotionsWindow.getEmotion())).start();
 					
 					//System.out.println(Main.emotionsWindow.getEmotion());
 					

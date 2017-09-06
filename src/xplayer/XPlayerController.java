@@ -39,7 +39,8 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
@@ -181,19 +182,19 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	private Label topInfoLabel;
 	
 	@FXML
-	private Button openFileButton;
-	
-	@FXML
-	private MenuButton transferMediaButton;
+	private JFXToggleButton settingsToggle;
 	
 	@FXML
 	private Button extendPlayer;
 	
 	@FXML
-	private JFXToggleButton settingsToggle;
+	private MenuItem openFile;
 	
 	@FXML
-	private Button emotionListsButton;
+	private Menu transferMedia;
+	
+	@FXML
+	private MenuItem showEmotionLists;
 	
 	@FXML
 	private StackPane regionStackPane;
@@ -426,6 +427,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		regionStackPane.setVisible(false);
 		
 		// mediaFileStackPane	
+		mediaFileMarquee.setText("Drag a song on this deck to load it");
 		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
@@ -436,8 +438,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		mediaTagImageButton.setOnAction(action -> openAudioInExplorer());
 		mediaTagImageButton.setOnDragDetected(audioDragEvent);
 		
-		// openFileButton
-		openFileButton.setOnAction(action -> openFileChooser());
+		// openFile
+		openFile.setOnAction(action -> openFileChooser());
 		
 		// topInfoLabel
 		topInfoLabel.setText("Player {" + this.getKey() + "}");
@@ -499,13 +501,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				xPlayerWindow.show();
 		});
 		
-		//--transferMediaButton
-		transferMediaButton.getItems().get(key).setDisable(true);
-		transferMediaButton.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
+		//transferMedia
+		transferMedia.getItems().get(key).setVisible(false);
+		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
 			
 			//Start the selected player
-			Main.xPlayersList.getXPlayerController(transferMediaButton.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(),
-					getxPlayerModel().getCurrentTime());
+			Main.xPlayersList.getXPlayerController(transferMedia.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
 			
 			//Stop the Current Player
 			stop();
@@ -516,8 +517,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
 		emotionsButton.setOnAction(a -> updateEmotion(emotionsButton));
 		
-		//=emotionListsButton
-		emotionListsButton.setOnAction(a -> Main.playListModesTabPane.selectTab(1));
+		//=showEmotionLists
+		showEmotionLists.setOnAction(a -> Main.playListModesTabPane.selectTab(1));
 		
 	}
 	
@@ -1095,7 +1096,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					xPlayerModel.setCurrentTime(0);
 					
 					// Change Marquee text
-					mediaFileMarquee.setText("Player is Stopped");
+					//mediaFileMarquee.setText("Player is Stopped");
 					playerStatusLabel.setText(mediaFileMarquee.textProperty().get());
 					
 					disc.calculateAngleByValue(0, 0, true);

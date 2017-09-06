@@ -10,14 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 import application.Main;
 import application.librarymode.Library;
@@ -524,10 +522,11 @@ public class DbManager {
 						//Load PlayerMediaList
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading previous data..."));
 						Main.playedSongs.uploadFromDataBase();
-						Main.emotionListsController.getHatedSongsList().uploadFromDataBase();
-						Main.emotionListsController.getLikedSongsList().uploadFromDataBase();
-						Main.emotionListsController.getDislikedSongsList().uploadFromDataBase();
-						Main.emotionListsController.getLovedSongsList().uploadFromDataBase();
+						Main.emotionListsController.hatedMediaList.uploadFromDataBase();
+						Main.emotionListsController.dislikedMediaList.uploadFromDataBase();
+						Main.emotionListsController.likedMediaList.uploadFromDataBase();
+						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
+						Platform.runLater(() -> Main.emotionListsController.updateEmotionSmartControllers(true, true, true, true));
 						
 						//Refresh all the XPlayers PlayLists
 						Platform.runLater(() -> Main.xPlayersList.getList().stream()

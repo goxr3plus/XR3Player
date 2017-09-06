@@ -11,7 +11,7 @@ public class LikedSongsList extends DatabaseList {
 	/**
 	 * The name of the database table
 	 */
-	private static final String dataBaseTableName = "LikedMediaList";
+	private static final String dataBaseTableName = "LikedMediaListOriginal";
 	
 	/**
 	 * Constructor
