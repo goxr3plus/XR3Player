@@ -45,7 +45,7 @@
                   </StackPane>
                </center>
                <bottom>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: rgb(255,255,255,0.4); -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: rgb(255,255,255,0.4);" BorderPane.alignment="CENTER">
                      <content>
                         <StackPane>
                            <children>
@@ -222,7 +222,7 @@
                   </ScrollPane>
                </bottom>
                <top>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: rgb(255,255,255,0.4); -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: rgb(255,255,255,0.4);" BorderPane.alignment="CENTER">
                      <content>
                         <StackPane>
                            <children>

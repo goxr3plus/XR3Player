@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="51.0" minHeight="-Infinity" prefHeight="51.0" prefWidth="988.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0; -fx-border-color: firebrick transparent transparent transparent; -fx-border-radius: 0; -fx-border-width: 2;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="51.0" minHeight="-Infinity" prefHeight="51.0" prefWidth="988.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 2;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
    </padding>

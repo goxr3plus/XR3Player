@@ -60,7 +60,13 @@ public class SideBar extends BorderPane {
 	private Button snapshot;
 	
 	@FXML
-	private Button applicationConverter;
+	private MenuItem downloadYoutubePlaylist;
+	
+	@FXML
+	private MenuItem socialMediaToMP3;
+	
+	@FXML
+	private MenuItem socialMediaToAnything;
 	
 	@FXML
 	private MenuItem showWelcomeScreen;
@@ -252,8 +258,14 @@ public class SideBar extends BorderPane {
 		//applicationSettings
 		applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.GENERERAL));
 		
-		//applicationConverter
-		applicationConverter.setOnAction(a -> ActionTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
+		//downloadYoutubePlaylist
+		downloadYoutubePlaylist.setOnAction(a -> ActionTool.openWebSite("http://www.youtubecomtomp3.com"));
+		
+		//socialMediaToMP3
+		socialMediaToMP3.setOnAction(downloadYoutubePlaylist.getOnAction());
+		
+		//socialMediaToAnything
+		socialMediaToAnything.setOnAction(a -> ActionTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
 		
 		//applicationConsole
 		applicationConsole.setOnAction(a -> Main.consoleWindow.show());

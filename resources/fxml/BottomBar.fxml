@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: #202020; -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: #202020; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="showSocialMedia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Social Media " visible="false">
          <graphic>

@@ -719,7 +719,7 @@
 
   
   .arrowButton2{
-  	-fx-background-color:#232323;
+  	-fx-background-color:#101010;
   	-fx-background-radius:45.0;
   	-fx-cursor:hand;
   }
@@ -1364,7 +1364,7 @@
 }
 
 #sideBar{
-	-fx-background-color:black;
+	-fx-background-color:#202020;
 }
 
 .sideBarSectionLabel{

@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: transparent firebrick transparent transparent;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
-      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+      <Insets bottom="2.0" left="3.0" top="2.0" />
    </padding>
    <center>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false" prefWidth="71.0">
@@ -151,26 +151,54 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="applicationConverter" layoutX="10.0" layoutY="37.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
-                           <tooltip>
-                              <Tooltip text="Convert YouTube,FB,Vimeo  etc... links to MP3, MP4, AVI etc.... " />
-                           </tooltip>
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/audioToVideo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
                      </children>
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Donation,About" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #47BBFF; -fx-font-weight: bold; -fx-font-size: 9;" text="Social Media" />
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/youtube24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <items>
+                              <MenuItem fx:id="downloadYoutubePlaylist" mnemonicParsing="false" text="Download Youtube Playlist">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/youtube24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="socialMediaToMP3" mnemonicParsing="false" text="Convert Social Media Video to MP3">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/youtube24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="socialMediaToAnything" mnemonicParsing="false" text="Download Social Media Video to any Format ">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/audioToVideo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                           </items>
+                        </MenuButton>
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Information" />
                         <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
                               <MenuItem fx:id="showWelcomeScreen" mnemonicParsing="false" text="Welcome Screen" />
@@ -188,7 +216,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Help-32.png" />
+                                    <Image url="@../image/Ask%20Question%20Filled-32.png" />
                                  </image>
                               </ImageView>
                            </graphic>

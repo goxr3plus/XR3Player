@@ -554,7 +554,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				if (!Main.emotionsWindow.getWindow().isShowing()) {
 					
 					//Add it the one of the emotions list
-					Main.emotionListsController.makeEmotionDecisition(xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion());
+					new Thread(() -> Main.emotionListsController.makeEmotionDecisition(xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion())).start();
 					
 					//System.out.println(Main.emotionsWindow.getEmotion());
 					
@@ -1097,7 +1097,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					
 					// Change Marquee text
 					//mediaFileMarquee.setText("Player is Stopped");
-					playerStatusLabel.setText(mediaFileMarquee.textProperty().get());
+					playerStatusLabel.setText("Player is Stopped");
 					
 					disc.calculateAngleByValue(0, 0, true);
 					disc.repaint();
