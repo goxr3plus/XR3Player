@@ -23,17 +23,13 @@ Total Downloads on Github
 -------------------------------------------------------------------------------------
 
 ## Image from Update 80 After User Login
-![update 80](https://user-images.githubusercontent.com/20374208/29983731-e049b02a-8f5f-11e7-8773-b8d66f8f9174.png)
-
-
-## Image from Update 81 Internal WebBrowser
 ![xr3player update 80 browser](https://user-images.githubusercontent.com/20374208/30113084-2e7c493c-931c-11e7-91fd-a9a3c95ab8a6.png)
 
 ## Image from Update 81 DJMode
 ![update 80](https://user-images.githubusercontent.com/20374208/30113083-2dc6b5ae-931c-11e7-8062-2e74b7080604.png)
 
 
-## Image from Update 72 Login Screen
+
 ![xr3player update 80 login screen](https://cloud.githubusercontent.com/assets/20374208/26711701/f8f9bf12-476a-11e7-92db-fc0513011305.png)
 ---------
 
