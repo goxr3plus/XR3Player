@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <items>
-            <HBox fx:id="hBox" alignment="CENTER" spacing="4.0" />
+            <HBox fx:id="hBox" alignment="CENTER" spacing="4.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0">
+                           <center>
+                              <JFXTabPane id="SpecialTabPane" BorderPane.alignment="CENTER">
+                                 <tabs>
+                                    <Tab text="Mixer" />
+                                    <Tab text="Video" />
+                                    <Tab text="Scratch]" />
+                                 </tabs>
+                              </JFXTabPane>
+                           </center>
+                        </BorderPane>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(0,0,0,0.75);" styleClass="applicationSettingsLabel" text="Coming Soon !" />
+                        <Button fx:id="removeThis" mnemonicParsing="false" style="-fx-background-radius: 0;" text="OK REMOVE THIS" StackPane.alignment="BOTTOM_CENTER">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" />
+                           </StackPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </StackPane>
+               </children></HBox>
             <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
          </items>
       </SplitPane>

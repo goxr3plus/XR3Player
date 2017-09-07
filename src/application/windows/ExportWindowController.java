@@ -73,6 +73,8 @@ public class ExportWindowController extends BorderPane {
 	 */
 	private Stage window = new Stage();
 	
+	private SmartController oldSmartController;
+	
 	/**
 	 * The needed smartController
 	 */
@@ -202,9 +204,15 @@ public class ExportWindowController extends BorderPane {
 	 */
 	public void show(SmartController smartController) {
 		this.smartController = smartController;
-		exportField1.clear();
-		exportField2.clear();
-		exportField3.clear();
+		
+		if (oldSmartController != smartController) {
+			exportField1.clear();
+			exportField2.clear();
+			exportField3.clear();
+		}
+		oldSmartController = smartController;
+		
+		//Show the Window
 		defineFilesToExport();
 		window.show();
 	}

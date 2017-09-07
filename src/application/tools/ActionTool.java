@@ -26,7 +26,6 @@ import application.Main;
 import application.settings.GeneralSettingsController;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
@@ -142,7 +141,7 @@ public final class ActionTool {
 	public static boolean copy(String source , String destination) {
 		boolean succeess = true;
 		
-		System.out.println("Copying ->" + source + "\n\tto ->" + destination);
+		//System.out.println("Copying ->" + source + "\n\tto ->" + destination);
 		
 		try {
 			Files.copy(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
@@ -167,7 +166,7 @@ public final class ActionTool {
 	public static boolean copy(InputStream source , String destination) {
 		boolean succeess = true;
 		
-		System.out.println("Copying ->" + source + "\n\tto ->" + destination);
+		//System.out.println("Copying ->" + source + "\n\tto ->" + destination);
 		
 		try {
 			System.out.println(Files.copy(source, Paths.get(destination), StandardCopyOption.REPLACE_EXISTING));
@@ -191,7 +190,7 @@ public final class ActionTool {
 	public static boolean move(String source , String destination) {
 		boolean succeess = true;
 		
-		System.out.println("Moving ->" + source + "\n\tto ->" + destination);
+		//System.out.println("Moving ->" + source + "\n\tto ->" + destination);
 		
 		try {
 			Files.move(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);

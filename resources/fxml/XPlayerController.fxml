@@ -385,7 +385,7 @@
                                     <Insets left="3.0" right="3.0" />
                                  </padding>
                                  <graphic>
-                                    <JFXToggleButton fx:id="settingsToggle" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" prefHeight="17.0" text=" " textOverrun="CLIP" toggleColor="WHITE" toggleLineColor="#f43e13">
+                                    <JFXToggleButton fx:id="settingsToggle" focusTraversable="false" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" prefHeight="17.0" text=" " textOverrun="CLIP" toggleColor="WHITE" toggleLineColor="#f43e13">
                                        <font>
                                           <Font size="1.0" />
                                        </font>

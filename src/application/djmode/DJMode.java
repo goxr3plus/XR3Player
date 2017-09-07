@@ -10,6 +10,7 @@ import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +33,9 @@ public class DJMode extends BorderPane {
 	
 	@FXML
 	private HBox hBox;
+	
+	@FXML
+	private Button removeThis;
 	
 	@FXML
 	private SplitPane bottomSplitPane;
@@ -66,7 +70,7 @@ public class DJMode extends BorderPane {
 		Main.xPlayersList.addXPlayerController(new XPlayerController(1));
 		Main.xPlayersList.getXPlayerController(1).makeTheDisc(Color.rgb(53, 144, 255), 45, Side.RIGHT);
 		Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
-		hBox.getChildren().add(Main.xPlayersList.getXPlayerController(1));
+		hBox.getChildren().add(0, Main.xPlayersList.getXPlayerController(1));
 		HBox.setHgrow(Main.xPlayersList.getXPlayerController(1), Priority.ALWAYS);
 		
 		//XPlayer 2
@@ -77,6 +81,9 @@ public class DJMode extends BorderPane {
 		HBox.setHgrow(Main.xPlayersList.getXPlayerController(2), Priority.ALWAYS);
 		
 		addKeyListeners();
+		
+		// removeThis
+		removeThis.setOnAction(a -> hBox.getChildren().remove(removeThis.getParent()));
 		
 	}
 	
