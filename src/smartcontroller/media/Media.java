@@ -208,7 +208,7 @@ public abstract class Media {
 		starsButton.setPrefSize(50, 25);
 		starsButton.setMinSize(50, 25);
 		starsButton.setMaxSize(50, 25);
-		starsButton.setStyle("-fx-cursor:hand; -fx-background-color:black;");
+		starsButton.setStyle("-fx-cursor:hand; -fx-background-color:black; -fx-text-fill:white;");
 		starsButton.setOnAction(a -> updateStars(starsButton));
 		
 		this.stars = new SimpleObjectProperty<>(starsButton);

@@ -2,9 +2,7 @@ package smartcontroller.services;
 
 import java.io.File;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
@@ -17,7 +15,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
 import smartcontroller.SmartController;
-import smartcontroller.media.Audio;
 import smartcontroller.media.Media;
 
 /**

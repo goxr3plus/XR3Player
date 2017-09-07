@@ -5,6 +5,7 @@ package application.presenter.treeview;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,10 +20,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 
@@ -80,62 +81,8 @@ public class TreeViewManager extends BorderPane {
 		// ------------------------- TreeView ----------------------------------
 		systemTreeView.setRoot(systemRoot.getRoot());
 		
-		systemTreeView.setOnMouseReleased(m -> {
-			TreeItemFile source = (TreeItemFile) systemTreeView.getSelectionModel().getSelectedItem();
-			// System.out.println(source.getValue())
-			
-			// host is not on the game
-			if (source == null || source.getValue().equals(hostName)) {
-				m.consume();
-				return;
-			}
-			
-			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 1) {
-				System.out.println(source.getValue());
-				
-				// System.out.println(source.isExpanded())
-				
-				// source is expanded
-				if (!source.isExpanded() && source.getChildren().isEmpty()) {
-					if (source.isDirectory())
-						source.setGraphic(new ImageView(SystemRoot.openedFolderImage));
-					
-					try {
-						if (source.getChildren().isEmpty()) {
-							Path mainPath = Paths.get(source.getFullPath());
-							// directory?
-							if (mainPath.toFile().isDirectory())
-								Files.newDirectoryStream(mainPath).forEach(path -> {
-									// !hidden
-									if (!path.toFile().isHidden())
-										// directory or accepted file
-										if (path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath())) {
-											TreeItemFile treeNode = new TreeItemFile(path.toString());
-											source.getChildren().add(treeNode);
-										}
-								});
-						} else {
-							// if you want to implement rescanning a
-							// directory
-							// for
-							// changes this would be the place to do it
-						}
-					} catch (IOException x) {
-						x.printStackTrace();
-					}
-					
-					source.setExpanded(true);
-				}
-				
-				// if (!source.isExpanded() && source.isDirectory())
-				// source.setGraphic(new ImageView(SystemRoot.folderImage))
-				
-			} else if (m.getButton() == MouseButton.SECONDARY) {
-				// Main.treeManager.treeContextMenu.showMenu(Genre.SYSTEMFILE,
-				// source.getFullPath(),
-				// m.getScreenX(), m.getScreenY());
-			}
-		});
+		// Mouse Released Event
+		systemTreeView.setOnMouseReleased(this::treeViewMouseReleased);
 		
 		// Drag Implementation
 		systemTreeView.setOnDragDetected(event -> {
@@ -159,6 +106,73 @@ public class TreeViewManager extends BorderPane {
 		//searchButton
 		searchButton.setOnAction(a -> Main.specialChooser.prepareToImportSongFiles(Main.window));
 		
+	}
+	
+	/**
+	 * Used for TreeView mouse released event
+	 * 
+	 * @param mouseEvent
+	 *            [[SuppressWarningsSpartan]]
+	 */
+	private void treeViewMouseReleased(MouseEvent mouseEvent) {
+		//Get the selected item
+		TreeItemFile source = (TreeItemFile) systemTreeView.getSelectionModel().getSelectedItem();
+		
+		// host is not on the game
+		if (source == null || source.getValue().equals(hostName)) {
+			mouseEvent.consume();
+			return;
+		}
+		
+		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 1) {
+			
+			// source is expanded
+			if (!source.isExpanded() && source.getChildren().isEmpty()) {
+				//if (source.isDirectory())
+				//source.setGraphic(new ImageView(SystemRoot.openedFolderImage));
+				
+				//Check if the TreeItem has not children yet
+				if (source.getChildren().isEmpty()) {
+					
+					//Main Path
+					Path mainPath = Paths.get(source.getFullPath());
+					
+					// directory?				
+					if (mainPath.toFile().isDirectory())
+						try (DirectoryStream<Path> stream = Files.newDirectoryStream(mainPath)) {
+							
+							//Run the Stream
+							stream.forEach(path -> {	
+								
+								// File or Directory is Hidden? + Directory or Accepted File
+								if (!path.toFile().isHidden() && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
+									TreeItemFile treeNode = new TreeItemFile(path.toString());
+									source.getChildren().add(treeNode);
+								}	
+								
+							});
+							
+						} catch (IOException x) {
+							x.printStackTrace();
+						}
+					
+				} else {
+					// if you want to implement rescanning a
+					// directory
+					// for
+					// changes this would be the place to do it
+				}
+				source.setExpanded(true);
+			}
+			
+			// if (!source.isExpanded() && source.isDirectory())
+			// source.setGraphic(new ImageView(SystemRoot.folderImage))
+			
+		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+			// Main.treeManager.treeContextMenu.showMenu(Genre.SYSTEMFILE,
+			// source.getFullPath(),
+			// m.getScreenX(), m.getScreenY());
+		}
 	}
 	
 }

@@ -337,7 +337,7 @@ public class LibraryMode extends BorderPane {
 		
 		// XPlayer - 0
 		Main.xPlayersList.addXPlayerController(new XPlayerController(0));
-		Main.xPlayersList.getXPlayerController(0).makeTheDisc(Color.FIREBRICK, 45, Side.LEFT);
+		Main.xPlayersList.getXPlayerController(0).makeTheDisc(Color.rgb(255, 95, 0), 45, Side.LEFT);
 		Main.xPlayersList.getXPlayerController(0).makeTheVisualizer(Side.RIGHT);
 		
 		// -- openLibrariesContextMenu

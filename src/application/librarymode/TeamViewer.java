@@ -17,7 +17,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.input.KeyCode;
@@ -326,7 +325,7 @@ public class TeamViewer {
 		 * Go on selection mode.
 		 *
 		 * @param way
-		 *        the way
+		 *            the way
 		 */
 		public void goOnSelectionMode(boolean way) {
 			for (Library library : itemsObservableList)
@@ -337,7 +336,7 @@ public class TeamViewer {
 		 * Add multiple libraries at once.
 		 *
 		 * @param library
-		 *        List full of Libraries
+		 *            List full of Libraries
 		 */
 		public void addMultipleItems(List<Library> library) {
 			
@@ -356,9 +355,9 @@ public class TeamViewer {
 		 * Add the new library.
 		 *
 		 * @param library
-		 *        the library
+		 *            the library
 		 * @param update
-		 *        Do the update on the list?
+		 *            Do the update on the list?
 		 */
 		public void addItem(Library library , boolean update) {
 			itemsObservableList.add(library);
@@ -420,7 +419,7 @@ public class TeamViewer {
 		 * Deletes the specific Library from the list
 		 * 
 		 * @param library
-		 *        Library to be deleted
+		 *            Library to be deleted
 		 */
 		public void deleteItem(Library library) {
 			itemsObservableList.remove(library);
@@ -456,7 +455,7 @@ public class TeamViewer {
 		 * Sets the center index.
 		 *
 		 * @param i
-		 *        the new center index
+		 *            the new center index
 		 */
 		public void setCenterIndex(int i) {
 			if (centerIndex != i) {

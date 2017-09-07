@@ -205,11 +205,11 @@
 } */
 
 .table-row-cell:hover .text , .table-row-cell:selected .text{
-     -fx-fill: white ;    
+     -fx-fill: black ;    
 }
 
 .table-row-cell:hover:selected .text,.table-row-cell:focused:selected .text{
-	-fx-fill:rgb(173.0,255.0,10.0);
+	-fx-fill:white;
 }
 
 
@@ -223,7 +223,7 @@
 
 .table-row-cell:hover , .table-row-cell:selected{
 	/*-fx-background-color:rgb(0.0,191.0,255.0);*/
-	 -fx-background-color:firebrick;
+	 -fx-background-color:rgb(255.0,97.0,0.0);
 }
 
 
@@ -654,7 +654,7 @@
  }
  
  .button:hover , .menu-button:hover , .segmented-button-bar .button:hover , .segmented-button-bar .toggle-button:hover{
- 	-fx-background-color:rgb(255,106,0);
+ 	-fx-background-color:rgb(255.0,106.0,0.0);
     /*-fx-background-color: 
         linear-gradient(from 0.0% 93.0% to 0.0% 100.0%, #a34313 0.0%, #903b12 100.0%),
         #9d4024,
@@ -760,11 +760,11 @@
 
  
  .context-menu {
- 	-fx-background-color:rgb(0.0,0.0,0.0,0.95);
+ 	-fx-background-color:#202020;
   	-fx-background-radius:5.0;
   	-fx-border-width:2.0; 	
   	-fx-border-radius:2.0;
-  	-fx-border-color:firebrick;
+  	-fx-border-color:rgb(255.0,95.0,0.0);
     /*-fx-border-style:segments(4.0); */
     -fx-cursor:hand;
 }
@@ -776,7 +776,7 @@
  }
  
  .menu-item:focused {
- 	-color: firebrick;
+ 	-color: rgb(255.0,95.0,0.0);
 	-fx-background-color:linear-gradient(
         from 0.0px 0.75em to 0.75em 0.0px,
         repeat,
@@ -1327,7 +1327,7 @@
 	-fx-background-color:#202020;
    -fx-padding:-2.0 8.0 -2.0 8.0;
 	 -fx-background-radius: 0.0 0.0 0.0 0.0 ; 
-	 -fx-border-radius:0.0 0.0 0 0 ;
+	 -fx-border-radius:0.0 0.0 0.0 0.0 ;
 	  -fx-font-weight:bold; 
 	  -fx-font-size:15.0; 
 	  -fx-text-fill:white;
@@ -1338,8 +1338,8 @@
 #time-field-reversed{
 	-fx-background-color:#202020; 
 	-fx-padding:-2.0 8.0 -2.0 8.0;
-	 -fx-background-radius: 0.0 0.0 0 0; 
-	 -fx-border-radius:0.0 0.0 0 0 ;
+	 -fx-background-radius: 0.0 0.0 0.0 0.0; 
+	 -fx-border-radius:0.0 0.0 0.0 0.0 ;
 	  -fx-border-color:firebrick; 
 	-fx-border-width:2.0; 
 	-fx-font-weight:bold;
