@@ -30,10 +30,10 @@ public class EmotionListsController {
 		lovedMediaList = new LovedSongsList();
 		
 		//SmartControllers
-		hatedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "HatedMediaController", hatedMediaList.getDatabaseTableName());
-		dislikedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "DislikedMediaController", dislikedMediaList.getDatabaseTableName());
-		likedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "LikedMediaController", likedMediaList.getDatabaseTableName());
-		lovedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "LovedMediaController", lovedMediaList.getDatabaseTableName());
+		hatedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "HatedMediaPlayList", hatedMediaList.getDatabaseTableName());
+		dislikedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "DislikedMediaPlayList", dislikedMediaList.getDatabaseTableName());
+		likedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "LikedMediaPlayList", likedMediaList.getDatabaseTableName());
+		lovedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "LovedMediaPlayList", lovedMediaList.getDatabaseTableName());
 	}
 	
 	/**

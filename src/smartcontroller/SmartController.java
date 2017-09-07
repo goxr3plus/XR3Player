@@ -622,16 +622,16 @@ public class SmartController extends StackPane {
 				if (genre == Genre.EMOTIONSMEDIA)
 					switch (getName()) {
 						
-						case "HatedMediaController":
+						case "HatedMediaPlayList":
 							Main.emotionListsController.hatedMediaList.getSet().clear();
 							break;
-						case "DislikedMediaController":
+						case "DislikedMediaPlayList":
 							Main.emotionListsController.dislikedMediaList.getSet().clear();
 							break;
-						case "LikedMediaController":
+						case "LikedMediaPlayList":
 							Main.emotionListsController.likedMediaList.getSet().clear();
 							break;
-						case "LovedMediaController":
+						case "LovedMediaPlayList":
 							Main.emotionListsController.lovedMediaList.getSet().clear();
 							break;
 					}

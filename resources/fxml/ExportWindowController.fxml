@@ -1,81 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="338.0" prefWidth="552.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="330.0" prefWidth="584.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox spacing="5.0">
+            <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
                <children>
-                  <VBox maxWidth="1.7976931348623157E308" spacing="5.0" HBox.hgrow="ALWAYS">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="How to export files?">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="Procedure(?)">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox spacing="10.0">
-                           <children>
-                              <JFXCheckBox fx:id="copyBox" disable="true" selected="true" styleClass="settingsRadioButton" text="Copy" />
-                              <JFXCheckBox fx:id="moveBox" alignment="CENTER" disable="true" styleClass="settingsRadioButton" text="Move" />
-                           </children>
-                        </HBox>
+                        <JFXRadioButton disable="true" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Copy">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="exportProcedureGroup" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton disable="true" focusTraversable="false" styleClass="settingsRadioButton" text="Move" toggleGroup="$exportProcedureGroup" />
                      </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" spacing="5.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="File to export(?)">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox spacing="10.0">
-                           <children>
-                              <JFXCheckBox disable="true" styleClass="settingsRadioButton" text="Selected Items" />
-                              <JFXCheckBox alignment="CENTER" disable="true" selected="true" styleClass="settingsRadioButton" text="Only current page" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
-            <VBox spacing="20.0">
+            </VBox>
+            <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsLabel" text="LOCATIONS" VBox.vgrow="SOMETIMES" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="What files to export?">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" styleClass="settingsRadioButton" text="Selected Items">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="whatFilesToExportGroup" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Current Page" toggleGroup="$whatFilesToExportGroup" />
+                        <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" styleClass="settingsRadioButton" text="Everything on Playlist" toggleGroup="$whatFilesToExportGroup" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Where to export the files?" VBox.vgrow="SOMETIMES" />
                   <HBox alignment="CENTER">
                      <children>
-                        <TextField fx:id="exportField1" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="...export to" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="exportButton1" mnemonicParsing="false" text="..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="exportField1" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick a folder..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="exportButton1" mnemonicParsing="false" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="27.0" />
-                  <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="88.0" />
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="51.0">
+                     <children>
+                        <TextField fx:id="exportField2" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="exportButton2" mnemonicParsing="false" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="70.0">
+                     <children>
+                        <TextField fx:id="exportField3" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="exportButton3" mnemonicParsing="false" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <HBox alignment="CENTER" spacing="15.0">
                <children>
-                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" text="OK">
+                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="77.0" text="OK">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Checkmark-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="67.0" text="Cancel">
+                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="87.0" text="Close">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/x.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </HBox>
@@ -85,11 +125,4 @@
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
-   <top>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="64.0" styleClass="applicationSettingsLabel" text="I need to redisign this ungly stupid window ... Though it partially works .... Oou O_O Hello There" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="5.0" />
-         </BorderPane.margin>
-      </Label>
-   </top>
 </fx:root>

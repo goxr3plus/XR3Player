@@ -1,10 +1,16 @@
 package smartcontroller.services;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.logging.Level;
 import java.util.stream.Stream;
 
+import application.Main;
 import application.tools.ActionTool;
+import application.tools.InfoTool;
 import application.tools.NotificationType;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -27,7 +33,8 @@ public class CopyOrMoveService extends Service<Boolean> {
 	private int total;
 	private String filePath;
 	private Operation operation;
-	private List<File> directories;
+	private FilesToExport filesToExport;
+	private List<File> targetDirectories;
 	
 	private final SmartController smartController;
 	
@@ -51,57 +58,37 @@ public class CopyOrMoveService extends Service<Boolean> {
 	}
 	
 	/**
-	 * Copying process
+	 * Start the operation based on the given parameters
 	 * 
-	 * @param directories1
+	 * @param targetDirectories
+	 * @param operation
 	 */
-	public void startCopy(List<File> directories1) {
+	public void startOperation(List<File> targetDirectories , Operation operation , FilesToExport filesToExport) {
 		if (isRunning() || !smartController.isFree(true))
-			ActionTool.showNotification("Message", "Copy can't start!!", Duration.millis(2000), NotificationType.WARNING);
+			ActionTool.showNotification("Message", "Export can't start", Duration.millis(2000), NotificationType.WARNING);
 		else {
-			this.directories = directories1;
-			commonOperations(Operation.COPY);
+			this.targetDirectories = targetDirectories;
+			this.operation = operation;
+			this.filesToExport = filesToExport;
+			
+			// The choosen directories
+			destinationFolder = targetDirectories.get(0);
+			targetDirectories.forEach(File::mkdir);
+			
+			// Bindings
+			smartController.getRegion().visibleProperty().bind(runningProperty());
+			smartController.getIndicator().progressProperty().bind(progressProperty());
+			smartController.getCancelButton().setText("Exporting...");
+			smartController.getCancelButton().setDisable(false);
+			smartController.getCancelButton().setOnAction(e -> {
+				super.cancel();
+				smartController.getCancelButton().setDisable(true);
+			});
+			
+			// start
+			this.reset();
+			this.start();
 		}
-	}
-	
-	/**
-	 * Moving process
-	 * 
-	 * @param directories1
-	 */
-	public void startMoving(List<File> directories1) {
-		if (isRunning() || !smartController.isFree(true))
-			ActionTool.showNotification("Message", "Moving can't start!!", Duration.millis(2000), NotificationType.WARNING);
-		else {
-			this.directories = directories1;
-			commonOperations(Operation.MOVE);
-		}
-	}
-	
-	/**
-	 * Common operations on (move and copy) processes
-	 */
-	private void commonOperations(Operation operation1) {
-		this.operation = operation1;
-		
-		// The choosen directories
-		destinationFolder = directories.get(0);
-		directories.forEach(File::mkdir);
-		
-		// Bindings
-		smartController.getRegion().visibleProperty().bind(runningProperty());
-		smartController.getIndicator().progressProperty().bind(progressProperty());
-		smartController.getCancelButton().setText("Exporting...");
-		smartController.getCancelButton().setDisable(false);
-		smartController.getCancelButton().setOnAction(e -> {
-			super.cancel();
-			smartController.getCancelButton().setDisable(true);
-		});
-		smartController.getInformationTextArea().setText("\n Exporting Media from PlayList....");
-		
-		// start
-		this.reset();
-		this.start();
 	}
 	
 	/**
@@ -120,33 +107,75 @@ public class CopyOrMoveService extends Service<Boolean> {
 			protected Boolean call() throws Exception {
 				
 				try {
+					//Keep a counter for the process
 					count = 0;
-					// total = (int) observableList.stream().filter(button
-					// -> ( (Audio) button ).isMarked()).count();
-					total = smartController.getItemsObservableList().size();
 					
-					// Multiple Items have been selected
-					if (total > 0) {
+					//================Prepare based on the Files User want to Export=============
+					
+					if (filesToExport == FilesToExport.CURRENT_PAGE) {  // CURRENT_PAGE
+						
+						//Count total files that will be exported
+						total = smartController.getItemsObservableList().size();
+						Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+						
 						// Stream
 						Stream<Media> stream = smartController.getItemsObservableList().stream();
 						stream.forEach(media -> {
 							if (isCancelled())
 								stream.close();
 							else {
-								passItem(media);
+								passItem(media.getFilePath());
+								
+								//Update the progress
 								updateProgress(++count, total);
 							}
 						});
 						
-						// User has pressed right click or a shortcut so one
-						// item has passed
+					} else if (filesToExport == FilesToExport.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+						
+						//Count total files that will be exported
+						total = smartController.getTableViewer().getSelectionModel().getSelectedItems().size();
+						Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+						
+						// Stream
+						Stream<Media> stream = smartController.getTableViewer().getSelectionModel().getSelectedItems().stream();
+						stream.forEach(media -> {
+							if (isCancelled())
+								stream.close();
+							else {
+								passItem(media.getFilePath());
+								
+								//Update the progress
+								updateProgress(++count, total);
+							}
+						});
+						
+					} else if (filesToExport == FilesToExport.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
+						
+						//Count total files that will be exported
+						total = smartController.getTotalInDataBase();
+						Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+						
+						// Stream
+						String query = "SELECT* FROM '" + smartController.getDataBaseTableName() + "'";
+						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);) {
+							
+							// Fetch the items from the database
+							while (resultSet.next())
+								if (isCancelled())
+									break;
+								else {
+									passItem(resultSet.getString("PATH"));
+									
+									//Update the progress
+									updateProgress(++count, total);
+								}
+							
+						} catch (Exception ex) {
+							Main.logger.log(Level.WARNING, "", ex);
+						}
+						
 					}
-					// } else {
-					// passItem(Main.songsContextMenu.getM);
-					//
-					// // updateProgress
-					// updateProgress(1, 1);
-					// }
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					return false;
@@ -155,28 +184,26 @@ public class CopyOrMoveService extends Service<Boolean> {
 			}
 			
 			/**
-			 * Pass the media to the controller
+			 * Pass current File absolute Path
 			 *
-			 * @param media
+			 * @param sourceFilePath
+			 *            [ The Source File Absolute Path]
 			 */
-			private void passItem(Media media) {
-				
-				filePath = ( (Audio) media ).getFilePath();
-				
-				if (!new File(filePath).exists())
+			private void passItem(String sourceFilePath) {
+				if (!new File(sourceFilePath).exists())
 					return;
 				
 				//Useful
-				String source = filePath;
-				String destination = destinationFolder + File.separator + media.getFileName();
+				String fileName = InfoTool.getFileName(sourceFilePath);
+				String destination = destinationFolder + File.separator + fileName;
 				
 				//Go
 				if (operation == Operation.COPY) {
-					Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n Copying ->" + media.getFileName()));
-					ActionTool.copy(source, destination);
+					Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n Copying ->" + fileName));
+					ActionTool.copy(sourceFilePath, destination);
 				} else {
-					Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n Moving ->" + media.getFileName()));
-					ActionTool.move(source, destination);
+					Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n Moving ->" + fileName));
+					ActionTool.move(sourceFilePath, destination);
 				}
 			}
 		};
