@@ -5,7 +5,9 @@ package application.windows;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import application.Main;
 import application.tools.ActionTool;
@@ -45,16 +47,25 @@ public class ExportWindowController extends BorderPane {
 	private TextField exportField1;
 	
 	@FXML
+	private Button clear1;
+	
+	@FXML
 	private Button exportButton1;
 	
 	@FXML
 	private TextField exportField2;
 	
 	@FXML
+	private Button clear2;
+	
+	@FXML
 	private Button exportButton2;
 	
 	@FXML
 	private TextField exportField3;
+	
+	@FXML
+	private Button clear3;
 	
 	@FXML
 	private Button exportButton3;
@@ -117,18 +128,17 @@ public class ExportWindowController extends BorderPane {
 		exportButton1.setOnAction(a -> pickFolder(exportField1));
 		exportButton2.setOnAction(a -> pickFolder(exportField2));
 		exportButton3.setOnAction(a -> pickFolder(exportField3));
-		exportButton2.disableProperty().bind(exportField1.textProperty().isEmpty());
-		exportButton3.disableProperty().bind(exportField2.textProperty().isEmpty());
 		
-		// exportFields
-		exportField2.disableProperty().bind(exportButton2.disabledProperty());
-		exportField3.disableProperty().bind(exportButton3.disabledProperty());
+		// clearButtons
+		clear1.setOnAction(a -> exportField1.clear());
+		clear2.setOnAction(a -> exportField2.clear());
+		clear3.setOnAction(a -> exportField3.clear());
 		
 		// whatFilesToExportGroup
 		whatFilesToExportGroup.selectedToggleProperty().addListener(l -> defineFilesToExport());
 		
 		// okButton
-		okButton.disableProperty().bind(exportField1.textProperty().isEmpty());
+		okButton.disableProperty().bind(exportField1.textProperty().isEmpty().and(exportField2.textProperty().isEmpty()).and(exportField3.textProperty().isEmpty()));
 		okButton.setOnAction(a -> {
 			
 			//Check if export field is empty
@@ -137,8 +147,17 @@ public class ExportWindowController extends BorderPane {
 				//Define the Operation
 				Operation operation = "Copy".equalsIgnoreCase( ( (Labeled) exportProcedureGroup.getSelectedToggle() ).getText()) ? Operation.COPY : Operation.MOVE;
 				
-				//Nailed it !
-				smartController.getCopyOrMoveService().startOperation(Arrays.asList(new File(exportField1.getText())), operation, filesToExport);
+				//Create the directories for export !
+				List<File> directories = new ArrayList<>();
+				if (!exportField1.getText().isEmpty())
+					directories.add(new File(exportField1.getText()));
+				if (!exportField2.getText().isEmpty())
+					directories.add(new File(exportField2.getText()));
+				if (!exportField3.getText().isEmpty())
+					directories.add(new File(exportField3.getText()));
+				
+				//Nailed it!
+				smartController.getCopyOrMoveService().startOperation(directories, operation, filesToExport);
 			}
 			
 			window.close();

@@ -7,13 +7,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="330.0" prefWidth="584.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="343.0" prefWidth="584.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -61,31 +62,97 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Where to export the files?" VBox.vgrow="SOMETIMES" />
                   <HBox alignment="CENTER">
                      <children>
-                        <TextField fx:id="exportField1" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick a folder..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="exportButton1" mnemonicParsing="false" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="exportField1" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="clear1" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/x.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
+                           <tooltip>
+                              <Tooltip text="Clear Text Field" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="exportButton1" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
                         </Button>
                      </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="51.0">
                      <children>
-                        <TextField fx:id="exportField2" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="exportButton2" mnemonicParsing="false" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="exportField2" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="clear2" contentDisplay="GRAPHIC_ONLY" layoutX="561.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/x.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
+                           <tooltip>
+                              <Tooltip text="Clear Text Field" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="exportButton2" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="70.0">
                      <children>
-                        <TextField fx:id="exportField3" editable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="exportButton3" mnemonicParsing="false" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="exportField3" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="clear3" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/x.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
+                           <tooltip>
+                              <Tooltip text="Clear Text Field" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="exportButton3" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets bottom="1.0" />
+                           </HBox.margin>
                         </Button>
                      </children>
                   </HBox>

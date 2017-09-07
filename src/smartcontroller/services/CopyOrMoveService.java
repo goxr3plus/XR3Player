@@ -25,10 +25,8 @@ import smartcontroller.media.Media;
  */
 public class CopyOrMoveService extends Service<Boolean> {
 	
-	private File destinationFolder;
 	private int count;
 	private int total;
-	private String filePath;
 	private Operation operation;
 	private FilesToExport filesToExport;
 	private List<File> targetDirectories;
@@ -68,10 +66,6 @@ public class CopyOrMoveService extends Service<Boolean> {
 			this.operation = operation;
 			this.filesToExport = filesToExport;
 			
-			// The choosen directories
-			destinationFolder = targetDirectories.get(0);
-			targetDirectories.forEach(File::mkdir);
-			
 			// Bindings
 			smartController.getRegion().visibleProperty().bind(runningProperty());
 			smartController.getIndicator().progressProperty().bind(progressProperty());
@@ -99,84 +93,94 @@ public class CopyOrMoveService extends Service<Boolean> {
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
-			
 			@Override
 			protected Boolean call() throws Exception {
 				
-				try {
-					//Keep a counter for the process
-					count = 0;
+				//For each given target directory
+				targetDirectories.stream().forEach(targetDirectory -> {
+					if (isCancelled())
+						return;
 					
-					//================Prepare based on the Files User want to Export=============
-					
-					if (filesToExport == FilesToExport.CURRENT_PAGE) {  // CURRENT_PAGE
+					try {
 						
-						//Count total files that will be exported
-						total = smartController.getItemsObservableList().size();
-						Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+						//Create the targetDirectory
+						targetDirectory.mkdir();
 						
-						// Stream
-						Stream<Media> stream = smartController.getItemsObservableList().stream();
-						stream.forEach(media -> {
-							if (isCancelled())
-								stream.close();
-							else {
-								passItem(media.getFilePath());
-								
-								//Update the progress
-								updateProgress(++count, total);
-							}
-						});
+						//Keep a counter for the process
+						count = 0;
 						
-					} else if (filesToExport == FilesToExport.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+						//================Prepare based on the Files User want to Export=============
 						
-						//Count total files that will be exported
-						total = smartController.getTableViewer().getSelectionModel().getSelectedItems().size();
-						Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
-						
-						// Stream
-						Stream<Media> stream = smartController.getTableViewer().getSelectionModel().getSelectedItems().stream();
-						stream.forEach(media -> {
-							if (isCancelled())
-								stream.close();
-							else {
-								passItem(media.getFilePath());
-								
-								//Update the progress
-								updateProgress(++count, total);
-							}
-						});
-						
-					} else if (filesToExport == FilesToExport.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
-						
-						//Count total files that will be exported
-						total = smartController.getTotalInDataBase();
-						Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
-						
-						// Stream
-						String query = "SELECT* FROM '" + smartController.getDataBaseTableName() + "'";
-						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);) {
+						if (filesToExport == FilesToExport.CURRENT_PAGE) {  // CURRENT_PAGE
 							
-							// Fetch the items from the database
-							while (resultSet.next())
+							//Count total files that will be exported
+							total = smartController.getItemsObservableList().size();
+							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+							
+							// Stream
+							Stream<Media> stream = smartController.getItemsObservableList().stream();
+							stream.forEach(media -> {
 								if (isCancelled())
-									break;
+									stream.close();
 								else {
-									passItem(resultSet.getString("PATH"));
+									passItem(media.getFilePath(), targetDirectory);
 									
 									//Update the progress
 									updateProgress(++count, total);
 								}
+							});
 							
-						} catch (Exception ex) {
-							Main.logger.log(Level.WARNING, "", ex);
+						} else if (filesToExport == FilesToExport.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+							
+							//Count total files that will be exported
+							total = smartController.getTableViewer().getSelectionModel().getSelectedItems().size();
+							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+							
+							// Stream
+							Stream<Media> stream = smartController.getTableViewer().getSelectionModel().getSelectedItems().stream();
+							stream.forEach(media -> {
+								if (isCancelled())
+									stream.close();
+								else {
+									passItem(media.getFilePath(), targetDirectory);
+									
+									//Update the progress
+									updateProgress(++count, total);
+								}
+							});
+							
+						} else if (filesToExport == FilesToExport.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
+							
+							//Count total files that will be exported
+							total = smartController.getTotalInDataBase();
+							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+							
+							// Stream
+							String query = "SELECT* FROM '" + smartController.getDataBaseTableName() + "'";
+							try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);) {
+								
+								// Fetch the items from the database
+								while (resultSet.next())
+									if (isCancelled())
+										break;
+									else {
+										passItem(resultSet.getString("PATH"), targetDirectory);
+										
+										//Update the progress
+										updateProgress(++count, total);
+									}
+								
+							} catch (Exception ex) {
+								Main.logger.log(Level.WARNING, "", ex);
+							}
+							
 						}
-						
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						//return false;
 					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					return false;
-				}
+				});
+				
 				return true;
 			}
 			
@@ -186,7 +190,7 @@ public class CopyOrMoveService extends Service<Boolean> {
 			 * @param sourceFilePath
 			 *            [ The Source File Absolute Path]
 			 */
-			private void passItem(String sourceFilePath) {
+			private void passItem(String sourceFilePath , File destinationFolder) {
 				if (!new File(sourceFilePath).exists())
 					return;
 				
