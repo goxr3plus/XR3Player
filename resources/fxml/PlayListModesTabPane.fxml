@@ -9,9 +9,9 @@
 
 <fx:root prefHeight="263.0" prefWidth="588.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane>
+      <BorderPane minHeight="0.0">
          <center>
-            <JFXTabPane id="specialJFXTabPane" BorderPane.alignment="CENTER">
+            <JFXTabPane id="specialJFXTabPane" minHeight="0.0" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries">
                    <graphic>

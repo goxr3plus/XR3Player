@@ -141,24 +141,20 @@ public class ExportWindowController extends BorderPane {
 		okButton.disableProperty().bind(exportField1.textProperty().isEmpty().and(exportField2.textProperty().isEmpty()).and(exportField3.textProperty().isEmpty()));
 		okButton.setOnAction(a -> {
 			
-			//Check if export field is empty
-			if (!exportField1.getText().isEmpty()) {
-				
-				//Define the Operation
-				Operation operation = "Copy".equalsIgnoreCase( ( (Labeled) exportProcedureGroup.getSelectedToggle() ).getText()) ? Operation.COPY : Operation.MOVE;
-				
-				//Create the directories for export !
-				List<File> directories = new ArrayList<>();
-				if (!exportField1.getText().isEmpty())
-					directories.add(new File(exportField1.getText()));
-				if (!exportField2.getText().isEmpty())
-					directories.add(new File(exportField2.getText()));
-				if (!exportField3.getText().isEmpty())
-					directories.add(new File(exportField3.getText()));
-				
-				//Nailed it!
-				smartController.getCopyOrMoveService().startOperation(directories, operation, filesToExport);
-			}
+			//Define the Operation
+			Operation operation = "Copy".equalsIgnoreCase( ( (Labeled) exportProcedureGroup.getSelectedToggle() ).getText()) ? Operation.COPY : Operation.MOVE;
+			
+			//Create the directories for export !
+			List<File> directories = new ArrayList<>();
+			if (!exportField1.getText().isEmpty())
+				directories.add(new File(exportField1.getText()));
+			if (!exportField2.getText().isEmpty())
+				directories.add(new File(exportField2.getText()));
+			if (!exportField3.getText().isEmpty())
+				directories.add(new File(exportField3.getText()));
+			
+			//Nailed it!
+			smartController.getCopyOrMoveService().startOperation(directories, operation, filesToExport);
 			
 			window.close();
 		});

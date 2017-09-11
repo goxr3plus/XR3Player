@@ -26,7 +26,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import xplayer.visualizer.ResizableCanvas;
@@ -195,7 +194,7 @@ public class DJDisc extends StackPane {
 		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
 		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isEqualTo(NULL_IMAGE));
 		
-		getChildren().addAll(canvas, imageView, noAlbumImageLabel, volumeLabel);
+		getChildren().addAll(canvas, imageView, noAlbumImageLabel);
 		
 		// MouseListeners
 		//canvas.setOnMousePressed(m -> canvas.setCursor(Cursor.CLOSED_HAND))
@@ -232,7 +231,7 @@ public class DJDisc extends StackPane {
 		//System.out.println("Given:" + width1 + " , Rounded:" + width)
 		
 		if (width == height)
-			if ( ( width >= 120 && height >= 120 )) {
+			if ( ( width >= 60 && height >= 60 )) {
 				
 				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
 				
@@ -258,7 +257,7 @@ public class DJDisc extends StackPane {
 				//timeField.setTranslateY(-height * 26 / 100.00);
 				
 				// volumeField
-				volumeLabel.setTranslateY(+height * 26 / 100.00);
+				//volumeLabel.setTranslateY(+height * 26 / 100.00);
 				
 				//rotationTransformation
 				rotationTransf.setPivotX(width / 2.00 - val * 2);
@@ -660,6 +659,13 @@ public class DJDisc extends StackPane {
 	private void onScroll(ScrollEvent m) {
 		int rotation = m.getDeltaY() < 1 ? 1 : -1;
 		setVolume(getVolume() - rotation);
+	}
+
+	/**
+	 * @return the volumeLabel
+	 */
+	public DragAdjustableLabel getVolumeLabel() {
+		return volumeLabel;
 	}
 	
 }

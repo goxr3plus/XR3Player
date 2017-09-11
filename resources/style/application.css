@@ -1312,7 +1312,7 @@
 
 .drag-adjustable-label{
   -fx-background-color:#202020;
-  -fx-background-radius:15.0;
+  /*-fx-background-radius:15.0;* */
   -fx-font-size:18.0;
   -fx-font-family:"Younger than me";
   -fx-text-fill:white;

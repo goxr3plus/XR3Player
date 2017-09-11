@@ -899,7 +899,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		});
 		
 		//
-		( (HBox) discBorderPane.getTop() ).getChildren().add(0, disc.getTimeField());
+		( (HBox) discBorderPane.getBottom() ).getChildren().add(disc.getTimeField());
+		( (HBox) discBorderPane.getBottom() ).getChildren().add(disc.getVolumeLabel());
 		HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
