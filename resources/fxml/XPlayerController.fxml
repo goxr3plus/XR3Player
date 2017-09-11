@@ -54,9 +54,9 @@
                                           <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
                                        </center>
                                        <bottom>
-                                          <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+                                          <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                              <children>
-                                                <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
+                                                <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" StackPane.alignment="CENTER_RIGHT">
                                                    <graphic>
                                                       <ImageView pickOnBounds="true" preserveRatio="true">
                                                          <image>
@@ -72,7 +72,7 @@
                                                    </cursor>
                                                 </Button>
                                              </children>
-                                          </HBox>
+                                          </StackPane>
                                        </bottom>
                                     </BorderPane>
                                     <StackPane fx:id="visualizerStackPane" minHeight="0.0">

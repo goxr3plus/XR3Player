@@ -1123,7 +1123,7 @@
 	-fx-text-fill:white;
 	-fx-font-size:14.0;
 	-fx-font-weight:bold;
-    -fx-font-family:"Younger than me";
+     /*-fx-font-family:"Younger than me";*/
 }
 
 .library:opened .libraryNameLabel{
@@ -1306,21 +1306,24 @@
 
 ******************************************************************************/
 
-@font-face{
+/* @font-face{
 	src: url("../fonts/Younger than me.ttf");
-}
+}*/
 
 .drag-adjustable-label{
   -fx-background-color:#202020;
-  /*-fx-background-radius:15.0;* */
+  -fx-background-radius:15.0;
+  -fx-border-radius:15.0;
+  -fx-border-color:white;
+  -fx-border-width:2.0px;
   -fx-font-size:18.0;
-  -fx-font-family:"Younger than me";
+  /*-fx-font-family:"Younger than me";*/
   -fx-text-fill:white;
   -fx-font-weight:bold;  
 }
 
 #LoginScreenTopLabel{
-  -fx-font-family:"Younger than me";
+  /*-fx-font-family:"Younger than me";*/
 }
 
 #time-field-normal{
@@ -1530,7 +1533,7 @@
 
 #updateScreenButtonLabel{
 	
-	-fx-font-family:"Younger than me";
+	 /*-fx-font-family:"Younger than me";*/
 	-fx-text-fill:blue;
 	
 }

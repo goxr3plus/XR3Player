@@ -72,9 +72,9 @@ public class XPlayerPlaylist extends StackPane {
 	 * Constructor.
 	 *
 	 * @param maximumItems
-	 *        maximumItems allowed to be inserted into the playList
+	 *            maximumItems allowed to be inserted into the playList
 	 * @param xPlayerUI
-	 *        the x player UI
+	 *            the x player UI
 	 */
 	public XPlayerPlaylist(final XPlayerController xPlayerUI) {
 		this.xPlayerUI = xPlayerUI;

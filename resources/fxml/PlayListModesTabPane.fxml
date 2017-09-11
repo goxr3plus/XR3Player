@@ -40,6 +40,15 @@
                         </ImageView>
                      </graphic>
                   </Tab>
+                  <Tab fx:id="radioTab" closable="false" disable="true" text="Radio [ Coming soon .... ]">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Radio-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
                </tabs>
             </JFXTabPane>
          </center>

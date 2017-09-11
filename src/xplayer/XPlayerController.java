@@ -885,7 +885,8 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				// RadialMenu!showing and duration!=0 and duration!=-1
 				if (!radialMenu.isHidden() && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 					
-					// System.out.println("Entered Dragging...");
+					//TotalTime and CurrentTime					
+					int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
 					
 					// Set the cursor
 					disc.getCanvas().setCursor(Cursor.CLOSED_HAND);
@@ -893,15 +894,21 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 					// Try to do the dragging
 					discIsDragging = true;
 					xPlayerModel.setCurrentAngleTime(disc.getValue(xPlayerModel.getDuration()));
-					disc.calculateAngleByMouse(m, xPlayerModel.getCurrentAngleTime(), xPlayerModel.getDuration());
+					disc.calculateAngleByMouse(m, currentTime, totalTime);
+					
+					//== RemainingTimeLabel
+					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime));// + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ));
+					
+					//== ElapsedTimeLabel
+					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime));// + millisecondsFormatted + "");
 					
 				}
 		});
 		
 		//
-		( (HBox) discBorderPane.getBottom() ).getChildren().add(disc.getTimeField());
-		( (HBox) discBorderPane.getBottom() ).getChildren().add(disc.getVolumeLabel());
-		HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
+		//( (HBox) discBorderPane.getBottom() ).getChildren().add(0, disc.getTimeField());
+		( (StackPane) discBorderPane.getBottom() ).getChildren().add(1, disc.getVolumeLabel());
+		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
 		reCalculateCanvasSize();
