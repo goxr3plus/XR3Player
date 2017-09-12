@@ -23,7 +23,7 @@ import smartcontroller.media.Media;
  * @author GOXR3PLUS
  *
  */
-public class CopyOrMoveService extends Service<Boolean> {
+public class FilesExportService extends Service<Boolean> {
 	
 	private int count;
 	private int total;
@@ -36,7 +36,7 @@ public class CopyOrMoveService extends Service<Boolean> {
 	/**
 	 * Constructor
 	 */
-	public CopyOrMoveService(SmartController smartController) {
+	public FilesExportService(SmartController smartController) {
 		this.smartController = smartController;
 		
 		setOnSucceeded(s -> {
@@ -67,7 +67,7 @@ public class CopyOrMoveService extends Service<Boolean> {
 			this.filesToExport = filesToExport;
 			
 			// Bindings
-			smartController.getRegion().visibleProperty().bind(runningProperty());
+			smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 			smartController.getIndicator().progressProperty().bind(progressProperty());
 			smartController.getCancelButton().setText("Exporting...");
 			smartController.getCancelButton().setDisable(false);

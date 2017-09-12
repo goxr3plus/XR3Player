@@ -4,7 +4,6 @@
 package application.presenter;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +16,6 @@ import application.presenter.custom.SystemMonitor.Monitor;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;

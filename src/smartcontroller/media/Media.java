@@ -115,16 +115,16 @@ public abstract class Media {
 	
 	/** The image to be displayed if the Media is Song + NO ERRORS */
 	
-	private static final Image SONG_IMAGE = InfoTool.getImageFromResourcesFolder("song.png");
+	public static final Image SONG_IMAGE = InfoTool.getImageFromResourcesFolder("song.png");
 	
 	/** The image to be displayed if the Media is Song + MISSING */
-	private static final Image SONG_MISSING_IMAGE = InfoTool.getImageFromResourcesFolder("songMissing.png");
+	public static final Image SONG_MISSING_IMAGE = InfoTool.getImageFromResourcesFolder("songMissing.png");
 	
 	/** The image to be displayed if the Media is Song + CORRUPTED */
-	private static final Image SONG_CORRUPTED_IMAGE = InfoTool.getImageFromResourcesFolder("songCorrupted.png");
+	public static final Image SONG_CORRUPTED_IMAGE = InfoTool.getImageFromResourcesFolder("songCorrupted.png");
 	
 	/** The video image. */
-	private static final Image VIDEO_IMAGE = InfoTool.getImageFromResourcesFolder("video.png");
+	public static final Image VIDEO_IMAGE = InfoTool.getImageFromResourcesFolder("video.png");
 	
 	/** The image to be shown when the Media has been already Played */
 	public static final Image PLAYED_IMAGE = InfoTool.getImageFromResourcesFolder("played.png");

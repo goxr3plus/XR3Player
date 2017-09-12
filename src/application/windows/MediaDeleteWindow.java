@@ -1,4 +1,4 @@
-package smartcontroller.media;
+package application.windows;
 
 import java.io.IOException;
 import java.util.ArrayList;

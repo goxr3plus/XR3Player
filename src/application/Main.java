@@ -50,6 +50,7 @@ import application.windows.ConsoleWindowController;
 import application.windows.EmotionsWindow;
 import application.windows.ExportWindowController;
 import application.windows.FileAndFolderChooser;
+import application.windows.MediaDeleteWindow;
 import application.windows.RenameWindow;
 import application.windows.StarWindow;
 import application.windows.WelcomeScreen;
@@ -80,8 +81,7 @@ import smartcontroller.Genre;
 import smartcontroller.SmartController;
 import smartcontroller.SmartControllerSearcher.AdvancedSearch;
 import smartcontroller.media.MediaContextMenu;
-import smartcontroller.media.MediaDeleteWindow;
-import smartcontroller.media.Information.MediaInformation;
+import smartcontroller.media.MediaInformation;
 import smartcontroller.services.MediaFilterService;
 import xplayer.XPlayersList;
 import xplayer.services.XPlayersFilterService;
@@ -98,8 +98,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 83);
-		internalInformation.put("ReleasedDate", "11/09/2017");
+		internalInformation.put("Version", 84);
+		internalInformation.put("ReleasedDate", "?/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -268,8 +268,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		//width = 1380;
-		//height = 800;
+		width = 1380;
+		height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -404,7 +404,7 @@ public class Main extends Application {
 		
 		//-------------TOP BAR--------------------
 		topBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
-		topBar.getSearchField().disableProperty().bind(searchWindowSmartController.getRegion().visibleProperty());
+		topBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
 		
 	}
 	

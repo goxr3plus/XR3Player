@@ -80,7 +80,7 @@ public class InputService extends Service<Void> {
 		smartController.getInformationTextArea().clear();
 		
 		// Binds
-		smartController.getRegion().visibleProperty().bind(runningProperty());
+		smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 		smartController.getIndicator().progressProperty().bind(progressProperty());
 		smartController.getCancelButton().setDisable(false);
 		smartController.getCancelButton().setText("Counting...");

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package smartcontroller;
+package application.presenter;
 
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;

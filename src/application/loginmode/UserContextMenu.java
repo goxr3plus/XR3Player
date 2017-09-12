@@ -3,6 +3,7 @@ package application.loginmode;
 import java.io.File;
 
 import application.Main;
+import application.presenter.TitleMenuItem;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -17,7 +18,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
-import smartcontroller.TitleMenuItem;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode

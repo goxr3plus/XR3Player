@@ -5,13 +5,17 @@ package application.presenter.treeview;
 
 import java.io.File;
 
+import application.tools.InfoTool;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
  * A custom TreeItem which represents Files
  */
 public class TreeItemFile extends TreeItem<String> {
+	
+	public static final Image x = InfoTool.getImageFromResourcesFolder("x.png");
 	
 	/** Stores the full path to the file or directory. */
 	private String fullPath;
@@ -31,8 +35,9 @@ public class TreeItemFile extends TreeItem<String> {
 		this.fullPath = absolutePath;
 		
 		//Is this a directory?
-		isDirectory = new File(fullPath).isDirectory();
-		setGraphic(new ImageView(!isDirectory ? SystemRoot.fileImage : SystemRoot.closedFolderImage));
+		File file = new File(fullPath);
+		isDirectory = file.isDirectory();
+		setGraphic(new ImageView(!file.exists() ? x : !isDirectory ? SystemRoot.fileImage : SystemRoot.closedFolderImage));
 		
 		// set the value
 		if (!fullPath.endsWith(File.separator)) {

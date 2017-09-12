@@ -1,7 +1,7 @@
 /*
  * 
  */
-package smartcontroller.media.Information;
+package smartcontroller.media;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +28,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import smartcontroller.Genre;
-import smartcontroller.media.Audio;
-import smartcontroller.media.Media;
 
 /**
  * Allows you to view informations about the selected song like the album image,to search for it on the web,to buy this song on iTunes,Amazon.

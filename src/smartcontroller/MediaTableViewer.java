@@ -420,6 +420,14 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		// hasBeenPlayed
 		mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
+		mediaType.setComparator((imageView1 , imageView2) -> {
+			if (imageView1.getImage() == Media.SONG_MISSING_IMAGE && imageView2.getImage() != Media.SONG_MISSING_IMAGE)
+				return 1;
+			else if (imageView1.getImage() != Media.SONG_MISSING_IMAGE && imageView2.getImage() == Media.SONG_MISSING_IMAGE)
+				return -1;
+			else
+				return 0;
+		});
 		
 		// title
 		title.setStyle(center);

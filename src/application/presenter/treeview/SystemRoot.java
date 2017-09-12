@@ -7,7 +7,6 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.logging.Level;
 
 import javax.swing.filechooser.FileSystemView;

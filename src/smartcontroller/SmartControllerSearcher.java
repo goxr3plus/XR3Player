@@ -193,7 +193,7 @@ public class SmartControllerSearcher extends HBox {
 			// word = Main.advancedSearch.getTextForSearching();
 			// else
 			word = getSearchField().getText();
-			controller.getRegion().visibleProperty().bind(runningProperty());
+			controller.getIndicatorVBox().visibleProperty().bind(runningProperty());
 			controller.getIndicator().progressProperty().bind(progressProperty());
 			controller.getCancelButton().setText("Searching...");
 			controller.getInformationTextArea().setText("\n Searching ....");

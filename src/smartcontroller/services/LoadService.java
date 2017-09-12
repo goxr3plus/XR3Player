@@ -77,7 +77,7 @@ public class LoadService extends Service<Void> {
 			// Reload
 			else {
 				smartController.updateWorking = true;
-				smartController.getRegion().visibleProperty().bind(runningProperty());
+				smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 				smartController.getIndicator().progressProperty().bind(progressProperty());
 				smartController.getCancelButton().setText("Updating...");
 				smartController.getInformationTextArea().setText("\n Updating the playlist....");

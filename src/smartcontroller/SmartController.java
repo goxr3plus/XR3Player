@@ -41,18 +41,19 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import smartcontroller.media.Media;
-import smartcontroller.services.CopyOrMoveService;
+import smartcontroller.modes.SmartControllerFoldersMode;
+import smartcontroller.services.FilesExportService;
 import smartcontroller.services.InputService;
 import smartcontroller.services.LoadService;
 
@@ -66,7 +67,10 @@ public class SmartController extends StackPane {
 	//----------------------------------------------------------------
 	
 	@FXML
-	private SplitPane splitPane;
+	private TabPane modesTabPane;
+	
+	@FXML
+	private Tab normalModeTab;
 	
 	@FXML
 	private BorderPane mainBorder;
@@ -126,7 +130,7 @@ public class SmartController extends StackPane {
 	private MenuItem clearAll;
 	
 	@FXML
-	private Region region;
+	private Tab foldersModeTab;
 	
 	@FXML
 	private VBox indicatorVBox;
@@ -184,7 +188,7 @@ public class SmartController extends StackPane {
 	private final InputService inputService;
 	
 	/** CopyOrMoveService */
-	private final CopyOrMoveService copyOrMoveService;
+	private final FilesExportService copyOrMoveService;
 	
 	// ---------Security---------------------------
 	
@@ -199,6 +203,10 @@ public class SmartController extends StackPane {
 	
 	/** The update working. */
 	public volatile boolean updateWorking;
+	
+	// --------------------------------------------------
+	
+	SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
 	
 	// --------------------------------------------------
 	
@@ -239,7 +247,7 @@ public class SmartController extends StackPane {
 		searchService = new SmartControllerSearcher(this);
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
-		copyOrMoveService = new CopyOrMoveService(this);
+		copyOrMoveService = new FilesExportService(this);
 		
 		// --------------------------------FXMLLoader---------------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartController.fxml"));
@@ -301,7 +309,7 @@ public class SmartController extends StackPane {
 		tableViewer.toBack();
 		
 		// ------ region
-		region.setVisible(false);
+		//indicatorVBox.setVisible(false);
 		
 		// FunIndicator
 		//	FunIndicator funIndicator = new FunIndicator();
@@ -322,7 +330,6 @@ public class SmartController extends StackPane {
 		indicator.setVisible(true);
 		//indicator.visibleProperty().bind(region.visibleProperty())
 		indicatorVBox.setVisible(false);
-		indicatorVBox.visibleProperty().bind(region.visibleProperty());
 		
 		// ------ cancel
 		cancelButton.hoverProperty().addListener((observable , oldValue , newValue) -> cancelButton.setText(cancelButton.isHover() ? "cancel" : previousCancelText));
@@ -507,6 +514,16 @@ public class SmartController extends StackPane {
 			importFiles.setVisible(false);
 		}
 		
+		//------------------------SMART CONTROLLER MODES-----------------
+		foldersModeTab.setContent(foldersMode);
+		
+		//--Change Listener for Modes Tab Pane
+		modesTabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue == foldersModeTab) {
+				foldersMode.recreateTree();
+			}
+		});
+		
 	}
 	
 	/*-----------------------------------------------------------------------
@@ -610,7 +627,7 @@ public class SmartController extends StackPane {
 		// Controller
 		getIndicator().setProgress(-1);
 		getCancelButton().setText("Clearing...");
-		getRegion().setVisible(true);
+		indicatorVBox.setVisible(true);
 		
 		// New Thread
 		new Thread(() -> {
@@ -638,7 +655,7 @@ public class SmartController extends StackPane {
 				
 				//Make the Region Disappear in the fog of hell ououou
 				Platform.runLater(() -> {
-					getRegion().setVisible(false);
+					indicatorVBox.setVisible(false);
 					getCancelButton().setText("Cancel");
 				});
 				
@@ -725,8 +742,8 @@ public class SmartController extends StackPane {
 	 * Unbind.
 	 */
 	public void unbind() {
-		region.visibleProperty().unbind();
-		region.setVisible(false);
+		indicatorVBox.visibleProperty().unbind();
+		indicatorVBox.setVisible(false);
 		indicator.progressProperty().unbind();
 	}
 	
@@ -968,15 +985,6 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Gets the region.
-	 *
-	 * @return the region
-	 */
-	public Region getRegion() {
-		return region;
-	}
-	
-	/**
 	 * Gets the indicator.
 	 *
 	 * @return the indicator
@@ -1087,7 +1095,7 @@ public class SmartController extends StackPane {
 	/**
 	 * @return the copyOrMoveService
 	 */
-	public CopyOrMoveService getCopyOrMoveService() {
+	public FilesExportService getCopyOrMoveService() {
 		return copyOrMoveService;
 	}
 	
@@ -1154,13 +1162,6 @@ public class SmartController extends StackPane {
 	 */
 	public double getVerticalScrollValueWithSearch() {
 		return verticalScrollValueWithSearch;
-	}
-	
-	/**
-	 * @return the splitPane
-	 */
-	public SplitPane getSplitPane() {
-		return splitPane;
 	}
 	
 	/**

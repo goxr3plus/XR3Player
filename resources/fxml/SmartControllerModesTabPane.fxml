@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<fx:root prefHeight="403.0" prefWidth="644.0" stylesheets="@../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <TabPane fx:id="tabPane" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="normalModeTab" text="Normal" />
+            <Tab fx:id="folderModeTab" text="Folders" />
+         </tabs>
+      </TabPane>
+   </children>
+</fx:root>

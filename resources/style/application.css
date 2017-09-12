@@ -988,6 +988,9 @@
 
 ******************************************************************************/
 
+.tree-view{
+	-fx-background-color:#202020;
+}
 
 .tree-cell {
     -fx-background-color: #202020 ;
@@ -1003,6 +1006,13 @@
 }
 .tree-cell:sub-tree-item {
     -fx-padding: 0.25em ;
+}
+
+.tree-cell > .tree-disclosure-node > .arrow  {
+    -fx-background-color: white;
+}
+.tree-cell:expanded > .tree-disclosure-node > .arrow {
+    -fx-background-color: white;
 }
 
 
