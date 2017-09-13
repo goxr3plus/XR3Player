@@ -1,4 +1,4 @@
-package smartcontroller.services;
+package smartcontroller.enums;
 
 /**
  * 
@@ -7,7 +7,7 @@ package smartcontroller.services;
  * @author GOXR3PLUS
  *
  */
-public enum FilesToExport {
+public enum FilesExportMode {
 	
 	CURRENT_PAGE,
 	

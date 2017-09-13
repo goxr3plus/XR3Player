@@ -9,6 +9,7 @@ import application.tools.InfoTool;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import smartcontroller.media.Media;
 
 /**
  * A custom TreeItem which represents Files
@@ -37,7 +38,21 @@ public class TreeItemFile extends TreeItem<String> {
 		//Is this a directory?
 		File file = new File(fullPath);
 		isDirectory = file.isDirectory();
-		setGraphic(new ImageView(!file.exists() ? x : !isDirectory ? SystemRoot.fileImage : SystemRoot.closedFolderImage));
+		//Does it exists?
+		if (file.exists()) {
+			//It is directory?
+			if (isDirectory())
+				setGraphic(new ImageView(SystemRoot.closedFolderImage));
+			
+			else {
+				//Is it a music file?
+				if (InfoTool.isAudioSupported(absolutePath))
+					setGraphic(new ImageView(Media.SONG_IMAGE));
+				else
+					setGraphic(new ImageView(SystemRoot.fileImage));
+			}
+		} else
+			setGraphic(new ImageView(x));
 		
 		// set the value
 		if (!fullPath.endsWith(File.separator)) {

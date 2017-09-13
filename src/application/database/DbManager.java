@@ -31,7 +31,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Tab;
 import javafx.util.Duration;
-import smartcontroller.SmartController;
+import smartcontroller.presenter.SmartController;
 import smartcontroller.services.Operation;
 
 /**

@@ -21,8 +21,8 @@ import application.tools.JavaFXTools;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import smartcontroller.SmartController;
 import smartcontroller.media.Media;
+import smartcontroller.presenter.SmartController;
 import xplayer.streamplayer.ThreadFactoryWithNamePrefix;
 
 /**

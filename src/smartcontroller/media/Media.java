@@ -38,8 +38,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.util.Duration;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
+import smartcontroller.presenter.SmartController;
 
 /**
  * This class is used as super class for Audio and Video classes.

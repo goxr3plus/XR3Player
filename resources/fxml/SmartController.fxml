@@ -151,7 +151,7 @@
                               </HBox>
                               <Button fx:id="showSettings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0;">
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../image/gear.png" />
                                        </image>

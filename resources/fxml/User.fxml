@@ -69,23 +69,26 @@
                   <Tooltip text="Image is missing !!" />
                </tooltip>
             </Label>
-            <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="0" textAlignment="CENTER">
+            <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="0" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/Library-32.png" />
                      </image>
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets left="4.0" right="4.0" />
+                  <Insets bottom="7.0" left="7.0" right="5.0" top="4.0" />
                </padding>
                <tooltip>
                   <Tooltip text="Total Libraries" />
                </tooltip>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="3.0" />
+               </VBox.margin>
             </Label>
          </children>
       </VBox>

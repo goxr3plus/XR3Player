@@ -5,7 +5,7 @@ package smartcontroller.media;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
-import smartcontroller.Genre;
+import smartcontroller.enums.Genre;
 
 // TODO: Auto-generated Javadoc
 /**

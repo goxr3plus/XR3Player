@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <fx:root prefHeight="433.0" prefWidth="618.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -58,7 +59,7 @@
                   </GridPane>
                </content>
             </TitledPane>
-          <TitledPane alignment="CENTER" expanded="false" minWidth="0.0" text="General">
+          <TitledPane alignment="CENTER" expanded="false" minWidth="0.0" text="Media Mode">
                <content>
                   <GridPane>
                      <columnConstraints>
@@ -112,6 +113,38 @@
                            </toggleGroup>
                         </JFXRadioButton>
                         <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="100" toggleGroup="$totalFilesShownGroup" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+               </content>
+            </TitledPane>
+            <TitledPane alignment="CENTER" expanded="false" layoutX="10.0" layoutY="32.0" minWidth="0.0" text="Associated Folders Mode">
+               <content>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="For which Media to show associated folders? [ Coming soon...]" textAlignment="CENTER" wrapText="true">
+                           <tooltip>
+                              <Tooltip text="Choose the total number of files to be shown on playlists" />
+                           </tooltip>
+                        </Label>
+                        <HBox alignment="CENTER" disable="true" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                           <children>
+                              <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" styleClass="settingsRadioButton" text="Selected Items">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="associatedFoldersMediaGroup" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Current Page" toggleGroup="$associatedFoldersMediaGroup" />
+                              <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" selected="true" styleClass="settingsRadioButton" text="Everything on Playlist" toggleGroup="$associatedFoldersMediaGroup" />
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </content>

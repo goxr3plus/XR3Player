@@ -27,7 +27,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import smartcontroller.Genre;
+import smartcontroller.enums.Genre;
 
 /**
  * Allows you to view informations about the selected song like the album image,to search for it on the web,to buy this song on iTunes,Amazon.

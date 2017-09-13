@@ -1,7 +1,7 @@
 /*
  * 
  */
-package smartcontroller;
+package smartcontroller.enums;
 
 /**
  * Indicates the Genre of Songs.

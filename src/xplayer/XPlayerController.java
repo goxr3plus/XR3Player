@@ -59,7 +59,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import smartcontroller.Genre;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
 import xplayer.model.XPlayer;
 import xplayer.model.XPlayerModel;

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package smartcontroller.media;
+package smartcontroller.presenter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -28,8 +28,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
+import smartcontroller.media.Audio;
+import smartcontroller.media.Media;
 
 /**
  * The default context menu for song items of application.

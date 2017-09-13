@@ -14,8 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
+import smartcontroller.presenter.SmartController;
 
 /**
  * Representing an Audio File.

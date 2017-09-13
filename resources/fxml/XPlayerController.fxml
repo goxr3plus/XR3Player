@@ -291,7 +291,7 @@
                                                          <graphic>
                                                             <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                                                <image>
-                                                                  <Image url="@../image/reload.png" />
+                                                                  <Image url="@../image/replay.png" />
                                                                </image>
                                                             </ImageView>
                                                          </graphic>

@@ -503,15 +503,15 @@
 }
 
 .tab-pane .tab:selected{
-    -fx-background-color: #FF3A4E;
+    -fx-background-color: #FF6E00;
 }
 
 .tab-pane .tab:selected:hover{
-     -fx-background-color: #FF1500; 
+     -fx-background-color: #FF9D00; 
 }
 
 .tab-pane .tab:hover{
-	-fx-background-color:#FF1500;
+	-fx-background-color:#FF9D00;
 }
 
 

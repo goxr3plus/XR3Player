@@ -45,8 +45,8 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
+import smartcontroller.presenter.SmartController;
 
 /**
  * A class which hold all the functionality of a digital library.

@@ -12,6 +12,7 @@ import application.presenter.treeview.TreeItemFile;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import smartcontroller.enums.FilesExportMode;
 import smartcontroller.media.Media;
 import smartcontroller.modes.SmartControllerFoldersMode;
 
@@ -20,7 +21,7 @@ public class FoldersModeService extends Service<Void> {
 	/** A private instance of the SmartController it belongs */
 	private final SmartControllerFoldersMode smartControllerFoldersMode;
 	
-	FilesToExport filesToExport = FilesToExport.EVERYTHING_ON_PLAYLIST;
+	FilesExportMode filesToExport = FilesExportMode.EVERYTHING_ON_PLAYLIST;
 	
 	private int count;
 	private int total;
@@ -51,7 +52,7 @@ public class FoldersModeService extends Service<Void> {
 					
 					//================Prepare based on the Files User want to Export=============
 					
-					if (filesToExport == FilesToExport.CURRENT_PAGE) {  // CURRENT_PAGE
+					if (filesToExport == FilesExportMode.CURRENT_PAGE) {  // CURRENT_PAGE
 						
 						//Count total files that will be exported
 						total = smartControllerFoldersMode.getSmartController().getItemsObservableList().size();
@@ -71,7 +72,7 @@ public class FoldersModeService extends Service<Void> {
 							}
 						});
 						
-					} else if (filesToExport == FilesToExport.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+					} else if (filesToExport == FilesExportMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 						
 						//Count total files that will be exported
 						total = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().size();
@@ -91,7 +92,7 @@ public class FoldersModeService extends Service<Void> {
 							}
 						});
 						
-					} else if (filesToExport == FilesToExport.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
+					} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
 						
 						//Count total files that will be exported
 						total = smartControllerFoldersMode.getSmartController().getTotalInDataBase();

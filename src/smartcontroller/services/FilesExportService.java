@@ -14,8 +14,9 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import smartcontroller.SmartController;
+import smartcontroller.enums.FilesExportMode;
 import smartcontroller.media.Media;
+import smartcontroller.presenter.SmartController;
 
 /**
  * Copy or Move items
@@ -28,7 +29,7 @@ public class FilesExportService extends Service<Boolean> {
 	private int count;
 	private int total;
 	private Operation operation;
-	private FilesToExport filesToExport;
+	private FilesExportMode filesToExport;
 	private List<File> targetDirectories;
 	
 	private final SmartController smartController;
@@ -58,7 +59,7 @@ public class FilesExportService extends Service<Boolean> {
 	 * @param targetDirectories
 	 * @param operation
 	 */
-	public void startOperation(List<File> targetDirectories , Operation operation , FilesToExport filesToExport) {
+	public void startOperation(List<File> targetDirectories , Operation operation , FilesExportMode filesToExport) {
 		if (isRunning() || !smartController.isFree(true))
 			ActionTool.showNotification("Message", "Export can't start", Duration.millis(2000), NotificationType.WARNING);
 		else {
@@ -111,7 +112,7 @@ public class FilesExportService extends Service<Boolean> {
 						
 						//================Prepare based on the Files User want to Export=============
 						
-						if (filesToExport == FilesToExport.CURRENT_PAGE) {  // CURRENT_PAGE
+						if (filesToExport == FilesExportMode.CURRENT_PAGE) {  // CURRENT_PAGE
 							
 							//Count total files that will be exported
 							total = smartController.getItemsObservableList().size();
@@ -130,7 +131,7 @@ public class FilesExportService extends Service<Boolean> {
 								}
 							});
 							
-						} else if (filesToExport == FilesToExport.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+						} else if (filesToExport == FilesExportMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 							
 							//Count total files that will be exported
 							total = smartController.getTableViewer().getSelectionModel().getSelectedItems().size();
@@ -149,7 +150,7 @@ public class FilesExportService extends Service<Boolean> {
 								}
 							});
 							
-						} else if (filesToExport == FilesToExport.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
+						} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
 							
 							//Count total files that will be exported
 							total = smartController.getTotalInDataBase();

@@ -1,4 +1,4 @@
-package smartcontroller;
+package smartcontroller.presenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +33,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.util.Duration;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Media;
 
 /**

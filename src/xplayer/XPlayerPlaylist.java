@@ -20,9 +20,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
+import smartcontroller.presenter.SmartController;
 
 /**
  * Represents the PlayList of a Specific Player.

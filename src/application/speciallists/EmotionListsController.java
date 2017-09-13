@@ -3,8 +3,8 @@ package application.speciallists;
 import application.Main;
 import application.windows.EmotionsWindow.Emotion;
 import javafx.application.Platform;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
+import smartcontroller.presenter.SmartController;
 
 public class EmotionListsController {
 	

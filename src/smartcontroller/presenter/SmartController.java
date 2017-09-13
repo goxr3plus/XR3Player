@@ -1,7 +1,7 @@
 /*
  * 
  */
-package smartcontroller;
+package smartcontroller.presenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +51,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Media;
 import smartcontroller.modes.SmartControllerFoldersMode;
 import smartcontroller.services.FilesExportService;

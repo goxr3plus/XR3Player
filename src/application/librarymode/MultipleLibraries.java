@@ -30,7 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import smartcontroller.SmartController;
+import smartcontroller.presenter.SmartController;
 
 /**
  * Mechanism of showing the opened libraries each opened library is represented by a Tab.

@@ -10,10 +10,10 @@ import application.Main;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import smartcontroller.Genre;
-import smartcontroller.SmartController;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
 import smartcontroller.media.Media;
+import smartcontroller.presenter.SmartController;
 
 public class LoadService extends Service<Void> {
 	

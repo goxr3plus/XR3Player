@@ -84,8 +84,6 @@ public class LibraryMode extends BorderPane {
 	@FXML
 	private Button openLibraryInformation;
 	
-	@FXML
-	private Button goToLibraryPlayList;
 	
 	@FXML
 	private HBox botttomHBox;
@@ -376,10 +374,10 @@ public class LibraryMode extends BorderPane {
 		openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
 		
 		// -- goToLibraryPlayList
-		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.getViewer().centerItemProperty().get()).ifPresent(library -> {
-			if (library.isOpened())
-				multipleLibs.selectTab(library.getLibraryName());
-		}));
+//		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.getViewer().centerItemProperty().get()).ifPresent(library -> {
+//			if (library.isOpened())
+//				multipleLibs.selectTab(library.getLibraryName());
+//		}));
 		
 		//----librariesInfoLabel
 		librariesInfoLabel.textProperty().bind(Bindings.concat("Totally -> [ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",

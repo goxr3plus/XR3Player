@@ -25,7 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import smartcontroller.SmartController;
+import smartcontroller.presenter.SmartController;
 import smartcontroller.services.FoldersModeService;
 
 public class SmartControllerFoldersMode extends StackPane {

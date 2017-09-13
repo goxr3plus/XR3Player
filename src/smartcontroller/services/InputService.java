@@ -23,7 +23,7 @@ import application.tools.InfoTool;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import smartcontroller.SmartController;
+import smartcontroller.presenter.SmartController;
 
 /**
  * Manages the input operations of the SmartController.

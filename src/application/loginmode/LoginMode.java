@@ -79,7 +79,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import smartcontroller.SmartController;
+import smartcontroller.presenter.SmartController;
 
 /**
  * @author GOXR3PLUS

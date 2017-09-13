@@ -108,7 +108,7 @@
                                                       </JFXButton>
                                                       <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                                                          <graphic>
-                                                            <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                                            <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
                                                                <image>
                                                                   <Image url="@../image/Plus-32.png" />
                                                                </image>
@@ -136,7 +136,7 @@
                                                             <Insets />
                                                          </HBox.margin>
                                                       </JFXButton>
-                                                      <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" text="Settings">
+                                                      <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" text="Settings">
                                                          <graphic>
                                                             <ImageView pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -166,7 +166,7 @@
                                                    <graphic>
                                                       <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
                                                          <image>
-                                                            <Image url="@../image/Xbox%20Menu-32.png" />
+                                                            <Image url="@../image/menu.png" />
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
@@ -184,27 +184,12 @@
                                                    <graphic>
                                                       <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
                                                          <image>
-                                                            <Image url="@../image/About-32.png" />
+                                                            <Image url="@../image/signal.png" />
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
                                                    <tooltip>
                                                       <Tooltip text="Open Library Information" />
-                                                   </tooltip>
-                                                </Button>
-                                                <Button fx:id="goToLibraryPlayList" contentDisplay="GRAPHIC_ONLY" layoutX="329.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="32.0" styleClass="last">
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
-                                                         <image>
-                                                            <Image url="@../image/desc.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Go to the Opened Playlist if the Library is Opened" />
                                                    </tooltip>
                                                 </Button>
                                              </children>

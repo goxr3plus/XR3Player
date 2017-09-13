@@ -1,7 +1,7 @@
 /*
  * 
  */
-package smartcontroller;
+package smartcontroller.presenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +38,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
 import smartcontroller.media.Media;
 
