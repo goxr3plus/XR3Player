@@ -17,7 +17,10 @@ public class WebBrowserTabContextMenu extends ContextMenu {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private MenuItem showTheLibrary;
+	private MenuItem newTab;
+	
+	@FXML
+	private MenuItem reloadTab;
 	
 	@FXML
 	private MenuItem closeOtherTabs;
@@ -36,16 +39,22 @@ public class WebBrowserTabContextMenu extends ContextMenu {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
-	private final Tab tab;
+	private final WebBrowserTabController webBrowserTabController;
+	
+	private final WebBrowserController webBrowserController;
 	
 	/**
-	 * Constructor.
+	 * Constructor
+	 * 
+	 * @param tab
+	 * @param webBrowserController
 	 */
-	public WebBrowserTabContextMenu(Tab tab) {
-		this.tab = tab;
+	public WebBrowserTabContextMenu(WebBrowserTabController webBrowserTabController, WebBrowserController webBrowserController) {
+		this.webBrowserTabController = webBrowserTabController;
+		this.webBrowserController = webBrowserController;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibraryTabContextMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "WebBrowserTabContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -63,24 +72,26 @@ public class WebBrowserTabContextMenu extends ContextMenu {
 	@FXML
 	private void initialize() {
 		
-		//showTheLibrary
-		showTheLibrary
-				.setOnAction(a -> Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.getLibraryWithName(tab.getTooltip().getText()).get().getPosition()));
+		//newTab
+		newTab.setOnAction(a -> webBrowserController.createAndAddNewTab());
+		
+		//reloadTab
+		reloadTab.setOnAction(a -> webBrowserTabController.reloadWebSite());
 		
 		//closeTabsRight
-		closeTabsRight.setOnAction(a -> Main.libraryMode.multipleLibs.closeTabsToTheRight());
+		closeTabsRight.setOnAction(a -> webBrowserController.closeTabsToTheRight());
 		
 		//closeTabsLeft
-		closeTabsLeft.setOnAction(a -> Main.libraryMode.multipleLibs.closeTabsToTheLeft());
+		closeTabsLeft.setOnAction(a -> webBrowserController.closeTabsToTheLeft());
 		
 		//closeOtherTabs
 		closeOtherTabs.setOnAction(a -> {
-			Main.libraryMode.multipleLibs.closeTabsToTheLeft();
-			Main.libraryMode.multipleLibs.closeTabsToTheRight();
+			webBrowserController.closeTabsToTheLeft();
+			webBrowserController.closeTabsToTheRight();
 		});
 		
 		//closeTab
-		closeTab.setOnAction(a -> Main.libraryMode.multipleLibs.removeTab(tab));
+		closeTab.setOnAction(a -> webBrowserController.removeTab(webBrowserTabController.getTab()));
 		
 	}
 }

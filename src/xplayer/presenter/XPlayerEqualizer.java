@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.presenter.custom.DJDisc2;
 import application.presenter.custom.DJFilter;
 import application.presenter.custom.DragAdjustableLabel;
 import application.tools.InfoTool;
@@ -45,7 +46,7 @@ public class XPlayerEqualizer extends BorderPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	/** The color. */
-	private Color color = Color.BLUEVIOLET;
+	private Color discArcColor = Color.BLUEVIOLET;
 	
 	/** The pan filter. */
 	private DJFilter panFilter;
@@ -93,7 +94,7 @@ public class XPlayerEqualizer extends BorderPane {
 	 */
 	public XPlayerEqualizer(XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
-		color = xPlayerController.getDiscColor();
+		discArcColor = xPlayerController.getDiscColor();
 		
 		// ----------------------------------FXMLLoader-------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerEqualizer.fxml"));
@@ -120,9 +121,9 @@ public class XPlayerEqualizer extends BorderPane {
 			filters[counter] = new Filter(36, 36, counter);
 		//tilePane.getChildren().addAll(filters);
 		
-		List<DragAdjustableLabel> dragLabels = new ArrayList<>();
+		List<DJDisc2> dragLabels = new ArrayList<>();
 		for (int i = 0; i < 32; i++)
-			dragLabels.add(new DragAdjustableLabel(0, -100, 100));
+			dragLabels.add(new DJDisc2(30, 30, discArcColor));
 		tilePane.getChildren().addAll(dragLabels);
 		
 		//resetFilers
@@ -199,7 +200,7 @@ public class XPlayerEqualizer extends BorderPane {
 		 *            the position
 		 */
 		public Filter(double width, double height, int position) {
-			super(width, height, Color.BLACK, color, Color.WHITE);
+			super(width, height, Color.BLACK, discArcColor, Color.WHITE);
 			this.position = position;
 			setPadding(new Insets(5, 5, 5, 5));
 			

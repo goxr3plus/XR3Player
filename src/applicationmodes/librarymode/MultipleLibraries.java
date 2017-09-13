@@ -343,8 +343,6 @@ public class MultipleLibraries extends StackPane {
 				//Collect the all to a list
 				.collect(Collectors.toList()).forEach(tab -> tab.getOnCloseRequest().handle(null));
 		
-		//int finish = tabPane.getTabs().size() - 1;
-		//tabPane.getTabs().remove(tabPane.getSelectionModel().getSelectedIndex() + 1, tabPane.getTabs().size() - 1);
 	}
 	
 	/**
@@ -367,8 +365,6 @@ public class MultipleLibraries extends StackPane {
 				//Collect the all to a list
 				.collect(Collectors.toList()).forEach(tab -> tab.getOnCloseRequest().handle(null));
 		
-		//if (tabPane.getTabs().size() != 1)
-		//	tabPane.getTabs().remove(0, tabPane.getSelectionModel().getSelectedIndex());
 	}
 	
 	/**
@@ -377,7 +373,7 @@ public class MultipleLibraries extends StackPane {
 	 * @param tab
 	 */
 	public void removeTab(Tab tab) {
-		Main.libraryMode.getLibraryWithName(tab.getTooltip().getText()).ifPresent(library -> library.openLibrary(false, false));
+		tab.getOnCloseRequest().handle(null);
 	}
 	
 	/**

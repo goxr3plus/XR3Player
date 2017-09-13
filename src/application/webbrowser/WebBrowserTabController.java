@@ -194,6 +194,9 @@ public class WebBrowserTabController extends StackPane {
 		hBox.getChildren().addAll(stack, marquee);
 		tab.setGraphic(hBox);
 		
+		//ContextMenu
+		tab.setContextMenu(new WebBrowserTabContextMenu(this,webBrowserController));
+		
 		//-------------------Items------------------------
 		
 		//searchBar

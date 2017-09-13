@@ -9,6 +9,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -95,10 +96,10 @@ public class WebBrowserController extends StackPane {
 		//Create
 		Tab tab = new Tab("");
 		WebBrowserTabController webBrowserTab = new WebBrowserTabController(this, tab, webSite.length == 0 ? null : webSite[0]);
-		tab.setOnCloseRequest(c -> {
+		tab.setOnClosed(c -> {
 			
 			//Check the tabs number
-			if (tabPane.getTabs().size() == 1)
+			if (tabPane.getTabs().isEmpty())
 				createAndAddNewTab();
 			
 			// Delete cache for navigate back
@@ -110,6 +111,60 @@ public class WebBrowserController extends StackPane {
 		});
 		
 		return webBrowserTab;
+	}
+	
+	/**
+	 * Closes the tabs to the right of the selected tab
+	 * 
+	 * @param tab
+	 */
+	public void closeTabsToTheRight() {
+		//Return if size <= 1
+		if (tabPane.getTabs().size() <= 1)
+			return;
+		
+		//The start
+		int start = tabPane.getSelectionModel().getSelectedIndex();
+		
+		//Remove the appropriate items
+		tabPane.getTabs().stream()
+				//filter
+				.filter(tab -> tabPane.getTabs().indexOf(tab) > start)
+				//Collect the all to a list
+				.collect(Collectors.toList()).forEach(this::removeTab);
+		
+	}
+	
+	/**
+	 * Closes the tabs to the left of the selected tab
+	 * 
+	 * @param tab
+	 */
+	public void closeTabsToTheLeft() {
+		//Return if size <= 1
+		if (tabPane.getTabs().size() <= 1)
+			return;
+		
+		//The start
+		int start = tabPane.getSelectionModel().getSelectedIndex();
+		
+		//Remove the appropriate items
+		tabPane.getTabs().stream()
+				//filter
+				.filter(tab -> tabPane.getTabs().indexOf(tab) < start)
+				//Collect the all to a list
+				.collect(Collectors.toList()).forEach(this::removeTab);
+		
+	}
+	
+	/**
+	 * Removes this Tab from the TabPane
+	 * 
+	 * @param tab
+	 */
+	public void removeTab(Tab tab) {
+		tabPane.getTabs().remove(tab);
+		tab.getOnClosed().handle(null);
 	}
 	
 	/**

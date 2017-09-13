@@ -35,7 +35,7 @@ import xplayer.visualizer.ResizableCanvas;
  *
  * @author GOXR3PLUS
  */
-public class DJDisc extends StackPane {
+public class DJDisc2 extends StackPane {
 	
 	/** The Constant NULL_IMAGE. */
 	private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noImage.png");
@@ -66,7 +66,7 @@ public class DJDisc extends StackPane {
 	private int angle;
 	
 	/** The Constant MAXIMUM_VOLUME. */
-	private final int maximumVolume;
+	private final int maximumVolume = 0;
 	
 	/** The time. */
 	// About the Time
@@ -123,8 +123,8 @@ public class DJDisc extends StackPane {
 	 * @param maximumVolume
 	 *            The maximum volume of the disc [[SuppressWarningsSpartan]]
 	 */
-	public DJDisc(int width, int height, Color arcColor, int volume, int maximumVolume) {
-		this.maximumVolume = maximumVolume;
+	public DJDisc2(int width, int height, Color arcColor) {
+		//this.maximumVolume = maximumVolume;
 		
 		super.setPickOnBounds(true);
 		
@@ -157,7 +157,7 @@ public class DJDisc extends StackPane {
 		//timeField.setStyle("-fx-background-color:white;");
 		
 		// volumeLabel
-		volumeLabel = new DragAdjustableLabel(volume, 0, maximumVolume);
+		volumeLabel = new DragAdjustableLabel(5, 0, maximumVolume);
 		// volumeLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/style/Younger
 		// than me Bold.ttf"), 18))
 		volumeLabel.currentValueProperty().addListener((observable , oldValue , newValue) -> {
@@ -231,7 +231,7 @@ public class DJDisc extends StackPane {
 		//System.out.println("Given:" + width1 + " , Rounded:" + width)
 		
 		if (width == height)
-			if ( ( width >= 40 && height >= 40 )) {
+			if ( ( width >= 30 && height >= 30 )) {
 				
 				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
 				

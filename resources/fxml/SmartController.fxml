@@ -71,7 +71,7 @@
                         </HBox>
                      </bottom>
                      <top>
-                        <HBox fx:id="searchBarHBox" alignment="CENTER" prefHeight="37.0" prefWidth="664.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                        <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <children>
                               <Button fx:id="refreshButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 45 0 0 45;">
                                  <graphic>

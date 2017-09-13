@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <MenuItem fx:id="newTab" mnemonicParsing="false" text="New Tab" />
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="reloadTab" mnemonicParsing="false" text="Reload" />
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="closeOtherTabs" mnemonicParsing="false" text="Close other Tabs" />
+      <MenuItem fx:id="closeTabsRight" mnemonicParsing="false" text="Close Tabs to the Right" />
+      <MenuItem fx:id="closeTabsLeft" mnemonicParsing="false" text="Close Tabs to the Left" />
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="closeTab" mnemonicParsing="false" text="Close Tab" />
+  </items>
+</fx:root>
