@@ -37,7 +37,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import xplayer.XPlayerController;
+import xplayer.presenter.XPlayerController;
 import xplayer.visualizer.VisualizerDrawer;
 
 /**

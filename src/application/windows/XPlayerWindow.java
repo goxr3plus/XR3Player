@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import xplayer.XPlayerController;
+import xplayer.presenter.XPlayerController;
 
 /**
  * @author GOXR3PLUS

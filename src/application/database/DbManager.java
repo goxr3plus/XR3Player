@@ -18,10 +18,10 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 import application.Main;
-import application.librarymode.Library;
-import application.loginmode.User;
 import application.tools.ActionTool;
 import application.tools.ActionTool.FileType;
+import applicationmodes.librarymode.Library;
+import applicationmodes.loginmode.User;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
 import javafx.animation.PauseTransition;

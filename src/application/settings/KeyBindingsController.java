@@ -25,7 +25,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import xplayer.XPlayerController;
+import xplayer.presenter.XPlayerController;
 
 /**
  * @author GOXR3PLUS

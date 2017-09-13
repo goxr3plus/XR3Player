@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import smartcontroller.media.AudioType;
-import xplayer.XPlayerController;
+import xplayer.presenter.XPlayerController;
 
 /**
  * This Service is used to start the Audio of XR3Player

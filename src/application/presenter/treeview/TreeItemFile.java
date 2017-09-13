@@ -42,17 +42,17 @@ public class TreeItemFile extends TreeItem<String> {
 		if (file.exists()) {
 			//It is directory?
 			if (isDirectory())
-				setGraphic(new ImageView(SystemRoot.closedFolderImage));
+				setImage(SystemRoot.closedFolderImage);
 			
 			else {
 				//Is it a music file?
 				if (InfoTool.isAudioSupported(absolutePath))
-					setGraphic(new ImageView(Media.SONG_IMAGE));
+					setImage(Media.SONG_IMAGE);
 				else
-					setGraphic(new ImageView(SystemRoot.fileImage));
+					setImage(SystemRoot.fileImage);
 			}
 		} else
-			setGraphic(new ImageView(x));
+			setImage(x);
 		
 		// set the value
 		if (!fullPath.endsWith(File.separator)) {
@@ -67,6 +67,15 @@ public class TreeItemFile extends TreeItem<String> {
 		}
 		
 		//this.setValue(InfoTool.getFileName(absolutePath));
+	}
+	
+	/**
+	 * Using this method do not write duplicate code using setGraphic(...) everywhere
+	 * 
+	 * @param image
+	 */
+	private void setImage(Image image) {
+		setGraphic(new ImageView(image));
 	}
 	
 	/**

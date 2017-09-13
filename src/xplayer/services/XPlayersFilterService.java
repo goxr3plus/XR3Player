@@ -9,7 +9,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
-import xplayer.XPlayerController;
+import xplayer.presenter.XPlayerController;
 import xplayer.streamplayer.ThreadFactoryWithNamePrefix;
 
 public class XPlayersFilterService {

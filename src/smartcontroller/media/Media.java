@@ -19,12 +19,12 @@ import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.TagException;
 
 import application.Main;
-import application.librarymode.Library;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
 import application.windows.EmotionsWindow;
 import application.windows.EmotionsWindow.Emotion;
+import applicationmodes.librarymode.Library;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
