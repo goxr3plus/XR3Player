@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXTabPane;
+
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,7 @@ public class XPlayerExtraSettings extends BorderPane {
 	// ------------------------
 	
 	@FXML
-	private TabPane tabPane;
+	private JFXTabPane tabPane;
 	
 	@FXML
 	private Tab historyPlaylistTab;

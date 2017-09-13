@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -17,7 +18,7 @@
          <center>
             <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane id="magicTabPane" fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                  <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="magicTabPaneVersion1" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                      <tabs>
                         <Tab text="Example1">
                            <content>
@@ -31,10 +32,13 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <JFXButton fx:id="addTab" style="-fx-border-color: firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <JFXButton fx:id="addTab" style="-fx-border-color: transparent orange transparent firebrick; -fx-border-radius: 0 45 45 0; -fx-background-radius: 0 45 45 0;" styleClass="applicationSettingsLabel2" text="+">
                      <tooltip>
                         <Tooltip text="New Tab" />
                      </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                </children>
                <padding>

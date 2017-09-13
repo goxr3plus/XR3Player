@@ -11,7 +11,7 @@
    <children>
       <BorderPane minHeight="0.0">
          <center>
-            <JFXTabPane id="specialJFXTabPane" minHeight="0.0" BorderPane.alignment="CENTER">
+            <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries">
                    <graphic>
@@ -36,15 +36,6 @@
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/searchIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="radioTab" closable="false" disable="true" text="Radio [ Coming soon .... ]">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Radio-32.png" />
                            </image>
                         </ImageView>
                      </graphic>

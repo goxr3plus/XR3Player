@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +14,7 @@ import application.presenter.treeview.TreeItemFile;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
@@ -34,6 +33,9 @@ public class SmartControllerFoldersMode extends StackPane {
 	
 	@FXML
 	private TreeView<String> treeView;
+	
+	@FXML
+	private Label detailsLabel;
 	
 	@FXML
 	private VBox indicatorVBox;
@@ -225,4 +227,12 @@ public class SmartControllerFoldersMode extends StackPane {
 	public void setProgressIndicator(ProgressIndicator progressIndicator) {
 		this.progressIndicator = progressIndicator;
 	}
+	
+	/**
+	 * @return the detailsLabel
+	 */
+	public Label getDetailsLabel() {
+		return detailsLabel;
+	}
+	
 }

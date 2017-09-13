@@ -17,6 +17,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTabPane;
 
 import application.Main;
 import application.settings.ApplicationSettingsController.SettingsTab;
@@ -42,7 +43,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -68,7 +68,7 @@ public class SmartController extends StackPane {
 	//----------------------------------------------------------------
 	
 	@FXML
-	private TabPane modesTabPane;
+	private JFXTabPane modesTabPane;
 	
 	@FXML
 	private Tab normalModeTab;
@@ -144,6 +144,12 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private TextArea informationTextArea;
+	
+	@FXML
+	private VBox reloadVBox;
+	
+	@FXML
+	private Button reloadPlayListButton;
 	
 	// ----------------------------------------------------------
 	
@@ -520,8 +526,18 @@ public class SmartController extends StackPane {
 		
 		//--Change Listener for Modes Tab Pane
 		modesTabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue == foldersModeTab) {
+			if (newValue == foldersModeTab)
 				foldersMode.recreateTree();
+		});
+		
+		//reloadVBox
+		reloadVBox.setVisible(false);
+		
+		//reloadPlayListButton
+		reloadPlayListButton.setOnAction(a -> {
+			if (isFree(true)) {
+				loadService.startService(false, true, false);
+				reloadVBox.setVisible(false);
 			}
 		});
 		
@@ -900,8 +916,9 @@ public class SmartController extends StackPane {
 		//Change it
 		currentPage.set( ( maximumPerPage == 50 ) ? currentPage.get() / 2 : currentPage.get() * 2 + ( currentPage.get() % 2 == 0 ? 0 : 1 ));
 		maximumPerPage = newMaximumPerPage;
-		if (updateSmartController && isFree(false))
-			loadService.startService(false, true, false);
+		reloadVBox.setVisible(true);
+		//if (updateSmartController && isFree(false))
+		//	loadService.startService(false, true, false);
 	}
 	
 	/**

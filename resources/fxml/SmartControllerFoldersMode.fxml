@@ -7,32 +7,28 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <center>
-            <TreeView fx:id="treeView" BorderPane.alignment="CENTER" />
-         </center>
-         <top>
-            <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel2" text="Displays from which folders the Playlist Media are coming from ..." BorderPane.alignment="CENTER">
+      <StackPane>
+         <children>
+            <TreeView fx:id="treeView" />
+            <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !">
                <tooltip>
                   <Tooltip text="Displays from which folders the Playlist Media are coming from ..." />
                </tooltip>
                <graphic>
-                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Folder%20Tree-24.png" />
+                        <Image url="@../image/Playlist-32.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Label>
-         </top>
-      </BorderPane>
+         </children>
+      </StackPane>
       <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
             <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="617.0" progress="0.0" />

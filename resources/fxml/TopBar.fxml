@@ -111,7 +111,7 @@
             </Label>
          </center>
          <left>
-            <JFXTabPane id="specialJFXTabPane" fx:id="jfxTabPane" maxWidth="301.0" minWidth="100.0" prefHeight="34.0" prefWidth="301.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+            <JFXTabPane fx:id="jfxTabPane" maxWidth="301.0" minWidth="100.0" prefHeight="34.0" prefWidth="301.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab fx:id="mainModeTab" text="Main">
                      <graphic>

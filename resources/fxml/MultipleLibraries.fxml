@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,27 +17,23 @@
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;">
          <children>
-            <TabPane id="magicTabPane" fx:id="openedLibrariesTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
+            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="3.0">
                <tabs>
-                  <Tab text="Example1">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab text="Example2">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
+                  <Tab text="Example1" />
+                  <Tab text="Example2" />
                </tabs>
-            </TabPane>
-            <JFXButton fx:id="addNewLibrary" layoutX="12.0" layoutY="8.0" style="-fx-border-color: transparent orange transparent firebrick; -fx-border-radius: 0 45 45 0; -fx-border-width: 2.5; -fx-background-radius: 0 45 45 0;" styleClass="starWindow" text="+" AnchorPane.leftAnchor="-3.0" AnchorPane.topAnchor="-2.0">
+            </JFXTabPane>
+            <JFXButton fx:id="addNewLibrary" layoutX="1.0" layoutY="-1.0" style="-fx-border-color: transparent orange transparent firebrick; -fx-border-radius: 0 45 45 0; -fx-background-radius: 0 45 45 0;" text="+" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0">
                <tooltip>
                   <Tooltip text="New Tab" />
                </tooltip>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <styleClass>
+                  <String fx:value="applicationSettingsLabel2" />
+                  <String fx:value="starWindow" />
+               </styleClass>
             </JFXButton>
          </children>
       </AnchorPane>

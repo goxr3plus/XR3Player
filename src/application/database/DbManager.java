@@ -329,7 +329,7 @@ public class DbManager {
 			
 			//Load all the Opened Libraries
 			Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened)
-					.forEach(library -> library.libraryOpenClose(true, true)));
+					.forEach(library -> library.openLibrary(true, true)));
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {

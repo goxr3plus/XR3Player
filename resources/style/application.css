@@ -435,16 +435,25 @@
 /*******************************************************************************
 
 *                             JFXTabPane                                      *
+* 
+* .jfx-tab-pane#specialJFXTabPane .tab:hover .tab-label{
+* 
+* }
 
 ******************************************************************************/
 
-.jfx-tab-pane#specialJFXTabPane .tab-header-area .tab-header-background {
+#specialJFXTabPane2 .tab-header-area .tab-header-background {
     /*-fx-opacity: 0.0;*/
-    -fx-background-color:rgb(0.0,0.0,0.0,0.8);  	    
+    -fx-background-color:rgb(0.0,0.0,0.0,0.8) !important;  	    
+}
+
+.specialJFXTabPane .tab-header-area .tab-header-background {
+    /*-fx-opacity: 0.0;*/
+    -fx-background-color:#252525 !important;  	    
 }
 
 
-.jfx-tab-pane#specialJFXTabPane .tab .tab-label { 
+.specialJFXTabPane .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
     -fx-font-size: 12.0px; /* before it was 12px */
@@ -453,22 +462,40 @@
     -fx-cursor:hand;
 }
 
-.jfx-tab-pane#specialJFXTabPane .tab-header-area .jfx-rippler{
+.specialJFXTabPane .tab-header-area .jfx-rippler{
     -fx-rippler-fill :firebrick;
     -fx-cursor:hand;
 }
 
-.jfx-tab-pane#specialJFXTabPane .tab-header-area  .tab-selected-line{
+.specialJFXTabPane .tab-header-area  .tab-selected-line{
      -fx-stroke : firebrick;
 }
 
-.jfx-tab-pane#specialJFXTabPane .tab:hover .tab-label{
+.specialJFXTabPane .tab:hover .tab-label{
 	-fx-text-fill:white;
 	-fx-background-color:black;	
 	-fx-background-radius: 0.0;
-	-fx-cursor:hand;
 }
 
+.specialJFXTabPane .tab:selected .tab-label{
+	-fx-background-color:rgb(255,110,0,0.55);
+}
+
+
+/*******************************************************************************
+
+*                             Magic Tab Pane                                      *
+
+******************************************************************************/
+
+
+.magicTabPaneVersion1 .tab-header-area {
+  -fx-padding: 0.0 0.0 0.0 35.0  !important;
+}
+
+.magicTabPaneVersion2 .tab-header-area {
+  -fx-padding:0.0  !important;
+}
 
 
 /*******************************************************************************
@@ -477,9 +504,7 @@
 
 ******************************************************************************/
 
- #magicTabPane .tab-header-area {
-  -fx-padding: 0.0 0.0 0.0 35.0 ;
-}
+
 
 
 .tab-pane .tab-header-area .tab-header-background {
@@ -535,6 +560,13 @@
 	-fx-background-color:white;	
 	-fx-background-radius: 0.0 0.0 0.0 0.0;
 }
+
+
+/*******************************************************************************
+
+*                             Special Tab Pane                                      *
+
+******************************************************************************/
 
 
 /*Special Tab Pane */

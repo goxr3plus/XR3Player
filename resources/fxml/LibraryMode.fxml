@@ -67,7 +67,7 @@
                               </GridPane>
                               <BorderPane>
                                  <center>
-                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="60.0" prefWidth="749.0" BorderPane.alignment="CENTER">
+                                    <ToolBar fx:id="libraryToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="60.0" BorderPane.alignment="CENTER">
                                        <items>
                                           <HBox alignment="CENTER" styleClass="segmented-button-bar">
                                              <children>
@@ -136,24 +136,6 @@
                                                             <Insets />
                                                          </HBox.margin>
                                                       </JFXButton>
-                                                      <JFXButton fx:id="showSettings" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" text="Settings">
-                                                         <graphic>
-                                                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../image/gear.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <tooltip>
-                                                            <Tooltip text="Libraries Settings" />
-                                                         </tooltip>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </JFXButton>
                                                    </children>
                                                    <HBox.margin>
                                                       <Insets left="3.0" right="3.0" />
@@ -176,21 +158,6 @@
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
-                                                </Button>
-                                                <Button fx:id="openLibraryInformation" contentDisplay="GRAPHIC_ONLY" layoutX="208.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
-                                                         <image>
-                                                            <Image url="@../image/signal.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Open Library Information" />
-                                                   </tooltip>
                                                 </Button>
                                              </children>
                                           </HBox>

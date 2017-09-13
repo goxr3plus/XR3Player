@@ -895,7 +895,7 @@ public class Library extends StackPane {
 	 * @param firstLoadHack
 	 *            the first load hack
 	 */
-	public void libraryOpenClose(boolean open , boolean firstLoadHack) {
+	public void openLibrary(boolean open , boolean firstLoadHack) {
 		if (firstLoadHack) {
 			setLibraryOpened(open, false);
 			Main.libraryMode.multipleLibs.insertTab(this);
@@ -1240,9 +1240,9 @@ public class Library extends StackPane {
 		
 		KeyCode code = e.getCode();
 		if (code == KeyCode.O)
-			libraryOpenClose(true, false);
+			openLibrary(true, false);
 		else if (code == KeyCode.C)
-			libraryOpenClose(false, false);
+			openLibrary(false, false);
 		else if (code == KeyCode.R)
 			renameLibrary(nameLabel);
 		else if (code == KeyCode.DELETE || code == KeyCode.D)

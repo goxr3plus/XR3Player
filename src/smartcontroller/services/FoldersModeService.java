@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import smartcontroller.enums.FilesExportMode;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Media;
 import smartcontroller.modes.SmartControllerFoldersMode;
 
@@ -92,7 +93,7 @@ public class FoldersModeService extends Service<Void> {
 							}
 						});
 						
-					} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
+					} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST && smartControllerFoldersMode.getSmartController().getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
 						
 						//Count total files that will be exported
 						total = smartControllerFoldersMode.getSmartController().getTotalInDataBase();
@@ -121,16 +122,20 @@ public class FoldersModeService extends Service<Void> {
 					}
 					
 					//For each item on set
-					Platform.runLater(() -> set.forEach(item -> {
-						//System.out.println(item);
-						//smartControllerFoldersMode.getRoot().getChildren().forEach(treeItem->{
+					Platform.runLater(() -> {
 						
-						//});
-						TreeItemFile treeItem = new TreeItemFile(item);
-						treeItem.setValue(treeItem.getValue() + " [ " + item + " ]");
-						smartControllerFoldersMode.getRoot().getChildren().add(treeItem);
+						//Add all the items
+						set.forEach(item -> {
+							TreeItemFile treeItem = new TreeItemFile(item);
+							treeItem.setValue(treeItem.getValue() + " [ " + item + " ]");
+							smartControllerFoldersMode.getRoot().getChildren().add(treeItem);
+							
+						});
 						
-					}));
+						//Define if details label will be visible or not
+						smartControllerFoldersMode.getDetailsLabel().setVisible(set.isEmpty());
+						
+					});
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();

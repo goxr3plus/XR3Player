@@ -58,6 +58,9 @@ public class LibraryMode extends BorderPane {
 	private StackPane librariesStackView;
 	
 	@FXML
+	private ScrollBar horizontalScrollBar;
+	
+	@FXML
 	private Button newLibrary;
 	
 	@FXML
@@ -79,19 +82,6 @@ public class LibraryMode extends BorderPane {
 	private Button openOrCloseLibrary;
 	
 	@FXML
-	private Button openLibraryContextMenu;
-	
-	@FXML
-	private Button openLibraryInformation;
-	
-	
-	@FXML
-	private HBox botttomHBox;
-	
-	@FXML
-	private ScrollBar horizontalScrollBar;
-	
-	@FXML
 	private JFXButton previous;
 	
 	@FXML
@@ -101,7 +91,10 @@ public class LibraryMode extends BorderPane {
 	private JFXButton next;
 	
 	@FXML
-	private JFXButton showSettings;
+	private Button openLibraryContextMenu;
+	
+	@FXML
+	private HBox botttomHBox;
 	
 	@FXML
 	private Label librariesInfoLabel;
@@ -227,7 +220,7 @@ public class LibraryMode extends BorderPane {
 						
 						//Check if the user wants to immediately open library after it's creation
 						if (openLibraryAfterCreation) {
-							currentLib.libraryOpenClose(true, false);
+							currentLib.openLibrary(true, false);
 							Main.libraryMode.multipleLibs.selectTab(currentLib.getLibraryName());
 						}
 						
@@ -327,7 +320,7 @@ public class LibraryMode extends BorderPane {
 		next.setOnAction(a -> teamViewer.getViewer().next());
 		
 		//showSettings
-		showSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.LIBRARIES));
+		//showSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.LIBRARIES));
 		
 		// StackPane
 		librariesStackView.getChildren().addAll(teamViewer.getViewer(), librariesSearcher.region, librariesSearcher.searchProgress);
@@ -368,16 +361,16 @@ public class LibraryMode extends BorderPane {
 		// -- openOrCloseLibrary
 		openOrCloseLibrary.disableProperty().bind(libraryToolBar.disabledProperty());
 		openOrCloseLibrary
-				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().libraryOpenClose(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
+				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().openLibrary(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 		
 		// -- settingsOfLibrary
-		openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
+		//openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
 		
 		// -- goToLibraryPlayList
-//		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.getViewer().centerItemProperty().get()).ifPresent(library -> {
-//			if (library.isOpened())
-//				multipleLibs.selectTab(library.getLibraryName());
-//		}));
+		//		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.getViewer().centerItemProperty().get()).ifPresent(library -> {
+		//			if (library.isOpened())
+		//				multipleLibs.selectTab(library.getLibraryName());
+		//		}));
 		
 		//----librariesInfoLabel
 		librariesInfoLabel.textProperty().bind(Bindings.concat("Totally -> [ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",

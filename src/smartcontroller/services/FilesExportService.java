@@ -15,6 +15,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
 import smartcontroller.enums.FilesExportMode;
+import smartcontroller.enums.Genre;
 import smartcontroller.media.Media;
 import smartcontroller.presenter.SmartController;
 
@@ -150,7 +151,7 @@ public class FilesExportService extends Service<Boolean> {
 								}
 							});
 							
-						} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST) { // EVERYTHING_ON_PLAYLIST
+						} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST && smartController.getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
 							
 							//Count total files that will be exported
 							total = smartController.getTotalInDataBase();

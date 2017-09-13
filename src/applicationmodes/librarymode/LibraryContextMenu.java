@@ -64,9 +64,9 @@ public class LibraryContextMenu extends ContextMenu {
     // Constructor
     public LibraryContextMenu() {
 
-	open.setOnAction(ac -> library.libraryOpenClose(true, false));
+	open.setOnAction(ac -> library.openLibrary(true, false));
 
-	close.setOnAction(c -> library.libraryOpenClose(false, false));
+	close.setOnAction(c -> library.openLibrary(false, false));
 
 	rename.setOnAction(ac -> library.renameLibrary(library));
 

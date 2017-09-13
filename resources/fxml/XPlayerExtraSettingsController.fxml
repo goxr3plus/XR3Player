@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -10,7 +10,7 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <TabPane fx:id="tabPane" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
+            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
                <tabs>
                   <Tab fx:id="historyPlaylistTab" closable="false" text="History Playlist">
                      <content>
@@ -18,7 +18,7 @@
                      </content>
                   </Tab>
                </tabs>
-            </TabPane>
+            </JFXTabPane>
          </children>
       </StackPane>
    </center>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -337,12 +337,12 @@
                                     </VBox>
                                     <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                        <children>
-                                          <TabPane id="SpecialTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
-                                            <tabs>
+                                          <JFXTabPane side="RIGHT" styleClass="specialJFXTabPane">
+                                             <tabs>
                                               <Tab fx:id="equalizerTab" text="Equalizer" />
                                                 <Tab fx:id="padTab" text="Pad 8" />
-                                            </tabs>
-                                          </TabPane>
+                                             </tabs>
+                                          </JFXTabPane>
                                        </children>
                                     </StackPane>
                                  </items>
