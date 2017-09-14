@@ -123,7 +123,7 @@ public class JSONDB {
 			openedLibraries.forEach(libraryObject -> Platform.runLater(() ->
 			
 			//Get the Library and Open it!
-			Main.libraryMode.getLibraryWithName( ( (JsonObject) libraryObject ).get("name").toString()).get().libraryOpenClose(true, true)
+			Main.libraryMode.getLibraryWithName( ( (JsonObject) libraryObject ).get("name").toString()).get().openLibrary(true, true)
 			
 			//Print its name
 			//System.out.println(((JsonObject) libraryObject).get("name"))

@@ -595,7 +595,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 *
 	 * @return the disc color
 	 */
-	public Color getDiscColor() {
+	public Color getDiscArcColor() {
 		return disc.getArcColor();
 	}
 	
@@ -950,13 +950,13 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// Sets Pan value. Line should be opened before calling this method.
 		// Linear scale : -1.0 <--> +1.0
-		xPlayer.setPan(equalizer.getPanFilter().getValue(200));
+		//xPlayer.setPan(equalizer.getPanFilter().getValue(200));
 		
 		// Represents a control for the relative balance of a stereo signal
 		// between two stereo speakers. The valid range of values is -1.0 (left
 		// channel only) to 1.0 (right channel only). The default is 0.0
 		// (centered).
-		xPlayer.setBalance(equalizer.getBalanceFilter().getValue(200));
+		//xPlayer.setBalance(equalizer.getBalanceFilter().getValue(200));
 		
 		// Audio is MP3?
 		if (!"mp3".equals(xPlayerModel.songExtensionProperty().get()))

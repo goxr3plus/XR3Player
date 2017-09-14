@@ -3,230 +3,345 @@
  */
 package application.presenter.custom;
 
+import java.util.ArrayList;
+
+import application.tools.InfoTool;
+import javafx.application.Platform;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.StrokeLineCap;
+import xplayer.visualizer.ResizableCanvas;
 
 /**
- * The Class DJFilter.
+ * Represents a disc controller.
+ *
+ * @author GOXR3PLUS
  */
-public class DJFilter extends Canvas {
+public class DJFilter extends StackPane {
+	
+	/** The listeners. */
+	private final ArrayList<DJFilterListener> listeners = new ArrayList<>();
 	
 	/** The arc color. */
-	private Color arcColor = Color.FIREBRICK;
-	
-	/** The arc color. */
-	private Color textColor = Color.WHITE;
-	
-	private Color backgroundColor = Color.web("#202020");
-	
-	/** The font. */
-	private Font font = Font.font("Default", FontWeight.BOLD, 14);
-	
-	/** The value. */
-	float value = 100;
-	
-	/** The mouse X. */
-	private int mouseX = 0;
-	
-	/** The mouse Y. */
-	private int mouseY = 0;
+	private Color arcColor;
 	
 	/** The angle. */
 	private int angle;
 	
-	/** The gc. */
-	GraphicsContext gc = getGraphicsContext2D();
+	/** The canvas. */
+	// Canvas
+	private final ResizableCanvas canvas = new ResizableCanvas();
 	
+	/**
+	 * The X of the Point that is in the circle circumference
+	 */
+	private double circlePointX;
+	/**
+	 * The Y of the Point that is in the circle circumference
+	 */
+	private double circlePointY;
 	
-	/** Constructor
+	//The maximum Value
+	private double maximumValue;
+	
+	//The minimum Value
+	private double minimumValue;
+	
+	/**
+	 * Constructor
+	 * 
 	 * @param width
 	 * @param height
-	 * @param textColor
 	 * @param arcColor
-	 * @param backgroundColor
+	 * @param currentValue
+	 * @param minimumValue
+	 * @param maximumValue
 	 */
-	public DJFilter(double width, double height, Color textColor, Color arcColor, Color backgroundColor) {
+	public DJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue) {
+		this.minimumValue = minimumValue;
+		this.maximumValue = maximumValue;
 		
-		setWidth(width);
-		setHeight(height);
-		this.textColor = textColor;
+		super.setPickOnBounds(true);
+		
+		// StackPane
+		canvas.setPickOnBounds(false);
+		canvas.setCursor(Cursor.OPEN_HAND);
+		canvas.setPickOnBounds(false);
+		super.setPickOnBounds(false);
+		
 		this.arcColor = arcColor;
-		this.backgroundColor = backgroundColor;
-		setAngle(100, 200);
-		setCursor(Cursor.HAND);
+		canvas.setEffect(new DropShadow(10, Color.WHITE));
 		
-		// setOnMouseDragged(this::onMouseDragged)
-		paintFilter();
+		getChildren().addAll(canvas);
+		
+		// Event handlers
+		canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::onMouseDragged);
+		
+		resizeDisc(width, height);
+		setValue(currentValue);
 	}
 	
 	/**
-	 * Paint filter.
-	 */
-	private void paintFilter() {
-		
-		// --- Clear everything
-		gc.clearRect(0, 0, getWidth(), getHeight());
-		
-		// --- Fill the background
-		gc.setFill(backgroundColor);
-		gc.fillArc(0, - ( getHeight() / 2 ) * 2, getWidth(), getHeight() * 2 - 1, 180, 180, ArcType.ROUND);
-		
-		// --- Draw the Arc
-		gc.setFill(arcColor);
-		gc.fillArc(1, - ( getHeight() / 2 ) * 2, getWidth() - 2, getHeight() * 2 - 1, 180, angle, ArcType.ROUND);
-		
-		// -- Draw the text
-		gc.setFill(textColor);
-		gc.setFont(font);
-		value = getValue(200);
-		gc.fillText(String.valueOf(value), getWidth() / 2 - 10, 20);
-		
-	}
-	
-	/**
-	 * Calculates the angle of disc based on maximum value.
+	 * Register a new DJDiscListener.
 	 *
-	 * @param maximum
-	 *            the maximum
-	 * @return angle from 0 - 360
+	 * @param listener
+	 *            the listener
 	 */
-	public float getValue(int maximum) {
-		value = (float) ( ( maximum * angle ) / 180.00 );
-		
-		if (value == 0)
-			return -1.0f;
-		else if (value == 100)
-			return 0.0f;
-		else if (value == 200)
-			return 1.0f;
-		else if (value < 100)
-			return - ( 1 - value / 100f );
-		else if (value > 100)
-			return value / 100f - 1;
-		
-		return 0;
+	public void addDJDiscListener(DJFilterListener listener) {
+		listeners.add(listener);
 	}
 	
 	/**
-	 * Changes the Angle of the filter.
+	 * Resizes the disc to the given values.
 	 *
-	 * @param value
-	 *            the value
-	 * @param maximum
-	 *            the maximum
+	 * @param width1
+	 *            the width
+	 * @param height1
+	 *            the height
 	 */
-	public void setAngle(int value , int maximum) {
+	public void resizeDisc(double width1 , double height1) {
+		int width = (int) Math.round(width1);
+		int height = width;
 		
-		// Min and Max values
-		if (value == 0)
-			angle = 0;
-		else if (value == maximum)
-			angle = 180;
-		else// Calculation
-			angle = ( ( value * 180 ) / maximum );
+		//int height = (int) Math.round(height1)
 		
-		paintFilter();
+		//System.out.println("Given:" + width1 + " , Rounded:" + width)
+		
+		if (width == height)
+			if ( ( width >= 30 && height >= 30 )) {
+				
+				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
+				
+				// {Maximum,Preferred} Size
+				setMinSize(width, height);
+				setMaxSize(width, height);
+				setPrefSize(width, height);
+				canvas.setWidth(width);
+				canvas.setHeight(height);
+				canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
+				
+				repaint();
+			} else {
+				//Main.logger.info("DJDisc resizing failed.. \nfor width: " + width + " height: " + height);
+			}
 	}
 	
 	/**
-	 * Changes the Angle of the filter.
+	 * Repaints the disc.
+	 */
+	public void repaint() {
+		
+		//Calculate here to use less cpu
+		double prefWidth = getPrefWidth();
+		double prefHeight = getPrefHeight();
+		canvas.gc.setLineCap(StrokeLineCap.ROUND);
+		
+		//Clear the outer rectangle
+		canvas.gc.clearRect(0, 0, prefWidth, prefHeight);
+		canvas.gc.setFill(Color.WHITE);
+		canvas.gc.fillRect(0, 0, prefWidth, prefHeight);
+		
+		// Arc Background Oval
+		canvas.gc.setLineWidth(7);
+		canvas.gc.setStroke(Color.WHITE);
+		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, 360.00 + angle, ArcType.OPEN);
+		
+		// Foreground Arc
+		canvas.gc.setStroke(arcColor);
+		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, angle, ArcType.OPEN);
+		
+		// Volume Arc
+		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
+		canvas.gc.setLineDashes(6);
+		canvas.gc.setLineWidth(3);
+		canvas.gc.setStroke(arcColor);
+		int volume = 100;
+		int maximumVolume = 100;
+		int value = volume == 0 ? 0 : (int) ( ( (double) volume / (double) maximumVolume ) * 180 );
+		//		//System.out.println(value)
+		canvas.gc.setFill(Color.BLACK);
+		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
+		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
+		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
+		canvas.gc.setLineDashes(0);
+		canvas.gc.setLineCap(StrokeLineCap.ROUND);
+		
+		// --------------------------Maths to find the point on the circle
+		// circumference
+		// draw the progress oval
+		
+		// here i add + 89 to the angle cause the Java has where i have 0
+		// degrees the 90 degrees.
+		// I am counting the 0 degrees from the top center of the circle and
+		// Java calculates them from the right mid of the circle and it is
+		// going left , i calculate them clock wise
+		int angle2 = this.angle + 89;
+		int minus = 8;
+		
+		// Find the point on the circle circumference
+		circlePointX = Math.round( ( (int) ( prefWidth - minus ) ) / 2 + Math.cos(Math.toRadians(-angle2)) * ( (int) ( prefWidth - minus ) / 2 ));
+		circlePointY = Math.round( ( (int) ( prefHeight - minus ) ) / 2 + Math.sin(Math.toRadians(-angle2)) * ( (int) ( prefHeight - minus ) / 2 ));
+		
+		// System.out.println("Width:" + canvas.getWidth() + " , Height:" + canvas.getHeight() + " , Angle: " + this.angle)
+		// System.out.println(circlePointX + "," + circlePointY)
+		
+		int ovalWidth = 7;
+		int ovalHeight = 7;
+		
+		// fix the circle position
+		if (-angle >= 0 && -angle <= 90) {
+			circlePointX = circlePointX - ovalWidth / 2 + 2;
+			circlePointY = circlePointY + 1;
+		} else if (-angle > 90 && -angle <= 180) {
+			circlePointX = circlePointX - ovalWidth / 2 + 3;
+			circlePointY = circlePointY - ovalWidth / 2 + 2;
+		} else if (-angle > 180 && -angle <= 270) {
+			circlePointX = circlePointX + 2;
+			circlePointY = circlePointY - ovalWidth / 2 + 2;
+		} else if (-angle > 270) {
+			circlePointX = circlePointX + 2;
+			// previousY = previousY - 7
+		}
+		
+		canvas.gc.setLineWidth(5);
+		canvas.gc.setStroke(Color.BLACK);
+		canvas.gc.strokeOval(circlePointX, circlePointY, ovalWidth, ovalHeight);
+		
+		canvas.gc.setFill(arcColor);
+		canvas.gc.fillOval(circlePointX, circlePointY, ovalWidth, ovalHeight);
+		
+		// System.out.println("Angle is:" + ( -this.angle ))
+		// System.out.println("FormatedX is: " + previousX + ", FormatedY is: "
+		// + previousY)
+		// System.out.println("Relative Mouse X: " + m.getX() + " , Relative
+		// Mouse Y: " + m.getY())
+		
+		// Draw the drag able rectangle
+		// gc.setFill(Color.WHITE)
+		// gc.fillOval(getWidth() / 2, 0, 20, 20)
+		
+		// ----------------------------------------------------------------------------------------------
+		
+	}
+	
+	/**
+	 * Calculates the angle based on the given value and the maximum value allowed.
 	 *
-	 * @param value
-	 *            the value
-	 * @param maximum
-	 *            the maximum
 	 */
-	public void setAngle(float value , int maximum) {
+	public void setValue(double newValue) {
 		
-		if (value == -1.0f)
-			angle = 0;
-		else if (value == 1.0f)
-			angle = 180;
-		else if (value == 0.0f)
-			angle = 90;
-		else if (value < 0.0f)
-			angle = (int) - ( ( ( value * 100 ) * 180 ) / maximum );
-		else if (value > 0.0f)
-			angle = (int) ( ( ( value * 100 + 100 ) * 180 ) / maximum );
+		//Find the current angle based on the new value given + the maximum value
+		angle = (int) ( ( maximumValue == 0.0 || newValue == 0.0 ) ? 0.0 : newValue == maximumValue ? 360.0 : - ( ( 360.0 * newValue ) / maximumValue ) );
 		
-		paintFilter();
+		repaint();
 	}
 	
 	/**
-	 * @return the textColor
+	 * THIS NEEDS TO BE FIXED IT COMPLETELY IGNORES MINIMUM VALUE
+	 * 
+	 * Returns a Value based on the angle of the disc and the maximum value allowed.
+	 *
+	 * @return Returns a Value based on the angle of the disc and the maximum value allowed
 	 */
-	public Color getTextColor() {
-		return textColor;
+	
+	@Deprecated
+	public double getValue() {
+		double holder1 = ( maximumValue * -angle ) / 360;
+		//double holder2 = ( minimumValue * -angle ) / 360;
+		//System.out.println("Holder : " + holder1);
+		
+		//double transformer = holder1 + holder2;
+		
+		return holder1;
 	}
 	
 	/**
-	 * @param textColor
-	 *            the textColor to set
-	 */
-	public void setTextColor(Color textColor) {
-		this.textColor = textColor;
-	}
-	
-	/**
-	 * @return the arcColor
+	 * Returns the color of the arc.
+	 *
+	 * @return The Color of the Disc Arc
 	 */
 	public Color getArcColor() {
+		
 		return arcColor;
 	}
 	
 	/**
-	 * @param arcColor
-	 *            the arcColor to set
+	 * Returns the Canvas of the disc.
+	 *
+	 * @return The Canvas of the Disc
 	 */
-	public void setArcColor(Color arcColor) {
-		this.arcColor = arcColor;
+	public ResizableCanvas getCanvas() {
+		return canvas;
 	}
 	
 	/**
-	 * @return the backgroundColor
+	 * Set the color of the arc to the given one.
+	 *
+	 * @param color
+	 *            the new arc color
 	 */
-	public Color getBackgroundColor() {
-		return backgroundColor;
+	public void setArcColor(Color color) {
+		arcColor = color;
 	}
 	
 	/**
-	 * @param backgroundColor
-	 *            the backgroundColor to set
+	 * Calculate the disc angle based on mouse position.
+	 *
+	 * @param m
+	 *            the m
+	 * @param current
+	 *            the current
+	 * @param total
+	 *            the total
 	 */
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
+	public void setAngleUsingMouseEvent(MouseEvent m) {
+		//Define mouseX , mouseY
+		double mouseX , mouseY;
+		
+		//Go find it
+		if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE) {
+			mouseX = m.getX();
+			mouseY = m.getY();
+			if (mouseX > getWidth() / 2)
+				angle = (int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, getHeight() / 2 - mouseY));
+			else {
+				angle = (int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, getHeight() / 2 - mouseY));
+				angle = - ( 360 - angle ); // make it minus cause i turn it
+				// on the right
+				
+				//System.out.println(getValue());
+				
+			}
+			Platform.runLater(this::repaint);
+			
+		}
 	}
 	
 	/**
-	 * When the mouse is dragged.
+	 * On mouse dragged.
 	 *
 	 * @param m
 	 *            the m
 	 */
-	public void onMouseDragged(MouseEvent m) {
-		mouseX = (int) m.getX();
-		mouseY = (int) m.getY();
-		if (mouseX > getWidth() / 2)
-			angle = -(int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, 2 - mouseY));
-		else {
-			angle = (int) Math.toDegrees(Math.atan2(getWidth() / 2 - mouseX, 2 - mouseY));
-			angle = 360 - angle; // So it calculates it correctly
-		}
-		
-		angle = 270 - angle;
-		if (mouseX < 0 && mouseY < 0)
-			angle = 0;
-		else if (mouseX > getWidth() / 2 && mouseY < 0)
-			angle = 180;
-		
-		if (angle <= 180 && angle >= 0)
-			paintFilter();
+	private void onMouseDragged(MouseEvent m) {
+		setAngleUsingMouseEvent(m);
+		listeners.forEach(listener -> listener.valueChanged(getValue()));
+	}
+	
+	/**
+	 * @return the maximumValue
+	 */
+	public double getMaximumValue() {
+		return maximumValue;
 	}
 	
 }

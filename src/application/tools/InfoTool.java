@@ -627,6 +627,19 @@ public final class InfoTool {
 	}
 	
 	/**
+	 * Returns a String with a fixed number of letters.
+	 *
+	 * @param s
+	 *            the string
+	 * @param letters
+	 *            the letters
+	 * @return A substring(or the current given string) based on the letters that have to be cut
+	 */
+	public static String getMinString2(String s , int letters) {
+		return s.length() < letters ? s : s.substring(0, letters);
+	}
+	
+	/**
 	 * This method determines the duration of given data.
 	 *
 	 * @param input

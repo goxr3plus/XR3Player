@@ -348,7 +348,7 @@ public class DJDisc extends StackPane {
 		canvas.gc.setStroke(Color.BLACK);
 		canvas.gc.strokeOval(circlePointX, circlePointY, ovalWidth, ovalHeight);
 		
-		canvas.gc.setFill(Color.MEDIUMVIOLETRED);
+		canvas.gc.setFill(arcColor);
 		canvas.gc.fillOval(circlePointX, circlePointY, ovalWidth, ovalHeight);
 		
 		// System.out.println("Angle is:" + ( -this.angle ))
