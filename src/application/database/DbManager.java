@@ -328,8 +328,8 @@ public class DbManager {
 			//			});
 			
 			//Load all the Opened Libraries
-			Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened)
-					.forEach(library -> library.openLibrary(true, true)));
+			Platform.runLater(
+					() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).forEach(library -> library.openLibrary(true, true)));
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {
@@ -526,14 +526,18 @@ public class DbManager {
 						Main.emotionListsController.dislikedMediaList.uploadFromDataBase();
 						Main.emotionListsController.likedMediaList.uploadFromDataBase();
 						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
-						Platform.runLater(() -> Main.emotionListsController.updateEmotionSmartControllers(true, true, true, true));
 						
-						//Refresh all the XPlayers PlayLists
-						Platform.runLater(() -> Main.xPlayersList.getList().stream()
-								.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false, false)));
-						
-						//------Bind Instant Search between all SmartControllers
 						Platform.runLater(() -> {
+							
+							//Update the emotion smart controller 
+							Main.emotionListsController.updateEmotionSmartControllers(true, true, true, true);
+							
+							//Refresh all the XPlayers PlayLists
+							Main.xPlayersList.getList().stream()
+									.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false, false));
+							
+							//------Bind Instant Search between all SmartControllers
+							
 							//For Search Window
 							Main.searchWindowSmartController.getInstantSearch().selectedProperty()
 									.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
@@ -546,6 +550,9 @@ public class DbManager {
 							//For XPLayersLists
 							Main.xPlayersList.getList().stream().forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch()
 									.selectedProperty().bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
+							
+							//-----------------------Load the application settings					
+							Main.loadApplicationSettings();
 							
 						});
 						

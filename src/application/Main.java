@@ -99,7 +99,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 84);
-		internalInformation.put("ReleasedDate", "?/09/2017");
+		internalInformation.put("ReleasedDate", "14/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -514,8 +514,7 @@ public class Main extends Application {
 				ex.printStackTrace();
 			}
 			
-			//Load the DataBase - After the DBManager has been initialized of course ;)
-			dbManager.loadApplicationDataBase();
+			
 			
 			//--------- Create the Menu Items of available users for Settings Window
 			loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !userr.getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
@@ -566,12 +565,11 @@ public class Main extends Application {
 				settingsWindow.getCopySettingsMenuButton().getItems().add(menuItem);
 			});
 			
-			//Load the application settings
-			loadApplicationSettings();
-			
+					
 			//----Update the UserInformation properties file when the total libraries change
 			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
 					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
+				
 			
 			//Filter Thread (Inspecting the Files if existing)
 			new MediaFilterService().start();
@@ -581,6 +579,10 @@ public class Main extends Application {
 			
 			//This bitch doesn't work for some reason that i will find and smash his bitchy ass 
 			topBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
+			
+			
+			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
+			dbManager.loadApplicationDataBase();
 		});
 		pause.playFromStart();
 	}

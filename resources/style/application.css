@@ -478,7 +478,7 @@
 }
 
 .specialJFXTabPane .tab:selected .tab-label{
-	-fx-background-color:rgb(255,110,0,0.55);
+	-fx-background-color:rgb(255.0,110.0,0.0,0.55);
 }
 
 
@@ -1090,7 +1090,7 @@
         derive(-fx-accent, 30.0%) 99.0%
     );
     
-    -fx-background-insets: 1.0 1.0 1.0 1.0;
+    -fx-background-insets: 3.0;
     -fx-padding: 0.2em;
 }
   

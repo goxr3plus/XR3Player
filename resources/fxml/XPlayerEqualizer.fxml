@@ -20,9 +20,9 @@
                   <HBox fx:id="bottomHBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="30.0" spacing="10.0">
                      <children>
                         <Label fx:id="filterValueLabel" alignment="CENTER" prefHeight="21.0" prefWidth="61.0" styleClass="applicationSettingsLabel2" text="0.0" />
-                        <MenuButton mnemonicParsing="false" style="-fx-font-size: 11;" text="More">
+                        <MenuButton mnemonicParsing="false" style="-fx-font-size: 11;" text="Tools">
                           <items>
-                              <Menu fx:id="presets" mnemonicParsing="false" text="Presets" />
+                              <Menu fx:id="presets" mnemonicParsing="false" text="Presets" visible="false" />
                               <MenuItem fx:id="resetFilters" mnemonicParsing="false" text="Reset All" />
                           </items>
                         </MenuButton>

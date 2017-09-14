@@ -81,7 +81,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="191.0" text="Open  Selected Library" textAlignment="CENTER" wrapText="true">
+                                                <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="OPEN" textAlignment="CENTER" wrapText="true">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>

@@ -12,7 +12,6 @@ import com.jfoenix.controls.JFXToggleButton;
 import application.Main;
 import application.presenter.SearchBox;
 import application.presenter.SearchBox.SearchBoxType;
-import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -351,7 +350,7 @@ public class LibraryMode extends BorderPane {
 		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null) {
 				openOrCloseLibrary.textProperty()
-						.bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("CLOSE Selected Library").otherwise("OPEN Selected Library"));
+						.bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("CLOSE").otherwise("OPEN"));
 			} else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");

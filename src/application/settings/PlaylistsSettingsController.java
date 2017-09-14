@@ -106,17 +106,23 @@ public class PlaylistsSettingsController extends BorderPane {
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
 			
+			int maximumPerPlaylist = Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText());
+			
 			//First Update all the Libraries
-			Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(
-					library -> library.getSmartController().setNewMaximumPerPage(Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText()), true));
+			Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController().setNewMaximumPerPage(maximumPerPlaylist, true));
 			
 			//Secondly Update the Search Window PlayList
-			Main.searchWindowSmartController.setNewMaximumPerPage(Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText()), true);
+			Main.searchWindowSmartController.setNewMaximumPerPage(maximumPerPlaylist, true);
 			
 			//Thirdly Update all the XPlayers SmartController
 			Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-					.forEach(controller -> controller.setNewMaximumPerPage(Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText()), true));
+					.forEach(controller -> controller.setNewMaximumPerPage(maximumPerPlaylist, true));
 			
+			//Finally all the Emotion Lists Controllers
+			Main.emotionListsController.hatedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+			Main.emotionListsController.dislikedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+			Main.emotionListsController.likedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+			Main.emotionListsController.lovedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
 		});
 		
 		//clearPlayedFilesHistory

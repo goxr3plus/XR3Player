@@ -114,17 +114,17 @@ public class WebBrowserController extends StackPane {
 	}
 	
 	/**
-	 * Closes the tabs to the right of the selected tab
+	 * Closes the tabs to the right of the given Tab
 	 * 
 	 * @param tab
 	 */
-	public void closeTabsToTheRight() {
+	public void closeTabsToTheRight(Tab givenTab) {
 		//Return if size <= 1
 		if (tabPane.getTabs().size() <= 1)
 			return;
 		
 		//The start
-		int start = tabPane.getSelectionModel().getSelectedIndex();
+		int start = tabPane.getTabs().indexOf(givenTab);
 		
 		//Remove the appropriate items
 		tabPane.getTabs().stream()
@@ -136,17 +136,17 @@ public class WebBrowserController extends StackPane {
 	}
 	
 	/**
-	 * Closes the tabs to the left of the selected tab
+	 * Closes the tabs to the left of the given Tab
 	 * 
 	 * @param tab
 	 */
-	public void closeTabsToTheLeft() {
+	public void closeTabsToTheLeft(Tab givenTab) {
 		//Return if size <= 1
 		if (tabPane.getTabs().size() <= 1)
 			return;
 		
 		//The start
-		int start = tabPane.getSelectionModel().getSelectedIndex();
+		int start = tabPane.getTabs().indexOf(givenTab);
 		
 		//Remove the appropriate items
 		tabPane.getTabs().stream()

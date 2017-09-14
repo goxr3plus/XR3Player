@@ -60,7 +60,7 @@ public class XPlayerEqualizer extends BorderPane {
 	
 	//================================================================================================
 	
-	private final double[] PRESET_NORMAL = { 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 };
+	private final double[] PRESET_NORMAL = { 50 , 50 , 50 , 50 , 50 , 50 , 50 , 50 , 50 , 50 };
 	private final double[] PRESET_CLASSICAL = { 50 , 50 , 50 , 50 , 50 , 50 , 70 , 70 , 70 , 76 };
 	private final double[] PRESET_CLUB = { 50 , 50 , 42 , 34 , 34 , 34 , 42 , 50 , 50 , 50 };
 	private final double[] PRESET_DANCE = { 26 , 34 , 46 , 50 , 50 , 66 , 70 , 70 , 50 , 50 };
@@ -221,6 +221,7 @@ public class XPlayerEqualizer extends BorderPane {
 	/**
 	 * The Class FilterButton.
 	 */
+	@Deprecated
 	public class FilterButton extends MenuItem {
 		
 		double[] variables;
@@ -239,7 +240,7 @@ public class XPlayerEqualizer extends BorderPane {
 			//Continue
 			setText(text);
 			for (int i = 0; i < variables.length; i++)
-				variables[i] = variables[i] / 100.00;
+				variables[i] = ( 100-variables[i] )/ 100.00;
 			
 			// System.out.println(variables[0])
 			

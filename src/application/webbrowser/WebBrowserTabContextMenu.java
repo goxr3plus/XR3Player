@@ -79,15 +79,15 @@ public class WebBrowserTabContextMenu extends ContextMenu {
 		reloadTab.setOnAction(a -> webBrowserTabController.reloadWebSite());
 		
 		//closeTabsRight
-		closeTabsRight.setOnAction(a -> webBrowserController.closeTabsToTheRight());
+		closeTabsRight.setOnAction(a -> webBrowserController.closeTabsToTheRight(webBrowserTabController.getTab()));
 		
 		//closeTabsLeft
-		closeTabsLeft.setOnAction(a -> webBrowserController.closeTabsToTheLeft());
+		closeTabsLeft.setOnAction(a -> webBrowserController.closeTabsToTheLeft(webBrowserTabController.getTab()));
 		
 		//closeOtherTabs
 		closeOtherTabs.setOnAction(a -> {
-			webBrowserController.closeTabsToTheLeft();
-			webBrowserController.closeTabsToTheRight();
+			webBrowserController.closeTabsToTheLeft(webBrowserTabController.getTab());
+			webBrowserController.closeTabsToTheRight(webBrowserTabController.getTab());
 		});
 		
 		//closeTab
