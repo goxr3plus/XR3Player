@@ -484,23 +484,7 @@ public class SmartController extends StackPane {
 		});
 		
 		// -- refreshButton
-		refreshButton.setOnAction(e -> {
-			
-			try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery("SELECT* FROM '" + this.getDataBaseTableName() + "'")) {
-				Set<String> set = new LinkedHashSet<>();
-				while (resultSet.next()) {
-					set.add(new File(new File(resultSet.getString("PATH")).getParent()).getName());
-				}
-				System.out.println(set.size());
-				
-				set.forEach(item -> System.out.println(item));
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-			
-		});
-		
-		//loadService.startService(false, true,false));
+		refreshButton.setOnAction(e -> loadService.startService(false, true, false));
 		
 		// Update
 		updateLabel();

@@ -73,7 +73,7 @@
                      <top>
                         <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="refreshButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 45 0 0 45;">
+                              <Button fx:id="refreshButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 45 0 0 45;">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -96,7 +96,7 @@
                                     <Insets left="4.0" right="4.0" />
                                  </HBox.margin>
                               </JFXCheckBox>
-                              <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="242.0">
+                              <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" pickOnBounds="false" prefHeight="25.0" prefWidth="242.0">
                                  <children>
                                     <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
                                        <tooltip>
@@ -151,7 +151,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Button fx:id="showSettings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0;">
+                              <Button fx:id="showSettings" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0;">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -166,7 +166,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" style="-fx-background-radius: 0 45 45 0;" text="Action">
+                              <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" style="-fx-background-radius: 0 45 45 0;" text="Action">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>

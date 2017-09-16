@@ -22,7 +22,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -100,7 +99,7 @@ public class StarWindow extends GridPane {
 		// Window
 		window = new Stage();
 		window.initStyle(StageStyle.TRANSPARENT);
-		window.initModality(Modality.APPLICATION_MODAL);
+		//window.initModality(Modality.APPLICATION_MODAL);
 		window.setAlwaysOnTop(true);
 		
 		// Graphics Context 2D
@@ -123,6 +122,10 @@ public class StarWindow extends GridPane {
 		window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		window.getScene().setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE)
+				close(false);
+		});
+		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
+			if (!newValue && window.isShowing())
 				close(false);
 		});
 		
@@ -263,6 +266,7 @@ public class StarWindow extends GridPane {
 	 *            True if accepted , False if not
 	 */
 	private void close(boolean accepted) {
+	//	System.out.println("Star Window Close called with accepted := " + accepted);
 		this.accepted = accepted;
 		window.close();
 	}

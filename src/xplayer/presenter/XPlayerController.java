@@ -551,7 +551,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 				Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
 				
 				// !showing?
-				if (!Main.emotionsWindow.getWindow().isShowing()) {
+				if (!Main.emotionsWindow.getWindow().isShowing() && Main.emotionsWindow.wasAccepted()) {
 					
 					//Add it the one of the emotions list
 					new Thread(() -> Main.emotionListsController.makeEmotionDecisition(xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion())).start();

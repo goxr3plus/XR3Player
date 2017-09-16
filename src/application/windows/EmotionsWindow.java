@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import application.tools.InfoTool;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  * The Class RenameWindow.
@@ -61,6 +61,9 @@ public class EmotionsWindow extends BorderPane {
 	public static final Image likeImage = InfoTool.getImageFromResourcesFolder("like.png");
 	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
 	
+	/** The accepted. */
+	private boolean accepted;
+	
 	/**
 	 * Constructor
 	 */
@@ -70,11 +73,11 @@ public class EmotionsWindow extends BorderPane {
 		window.setTitle("Rename Window");
 		window.setWidth(216);
 		window.setHeight(72);
-		window.initModality(Modality.APPLICATION_MODAL);
+		//window.initModality(Modality.APPLICATION_MODAL);
 		window.initStyle(StageStyle.TRANSPARENT);
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
-		window.setOnCloseRequest(ev -> ev.consume());
+		window.setOnCloseRequest(WindowEvent::consume);
 		window.setAlwaysOnTop(true);
 		
 		// ----------------------------------FXMLLoader
@@ -91,8 +94,8 @@ public class EmotionsWindow extends BorderPane {
 		// ----------------------------------Scene
 		window.setScene(new Scene(this, Color.TRANSPARENT));
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue)
-				window.close();
+			if (!newValue && window.isShowing())
+				close(false);
 		});
 	}
 	
@@ -104,23 +107,23 @@ public class EmotionsWindow extends BorderPane {
 		
 		hate.setOnAction(a -> {
 			emotion = Emotion.HATE;
-			window.close();
+			close(true);
 		});
 		dislike.setOnAction(a -> {
 			emotion = Emotion.DISLIKE;
-			window.close();
+			close(true);
 		});
 		neutral.setOnAction(a -> {
 			emotion = Emotion.NEUTRAL;
-			window.close();
+			close(true);
 		});
 		like.setOnAction(a -> {
 			emotion = Emotion.LIKE;
-			window.close();
+			close(true);
 		});
 		love.setOnAction(a -> {
 			emotion = Emotion.LOVE;
-			window.close();
+			close(true);
 		});
 		
 		hate.setOnMouseEntered(m -> {
@@ -243,6 +246,27 @@ public class EmotionsWindow extends BorderPane {
 	 */
 	public void setEmotion(Emotion emotion) {
 		this.emotion = emotion;
+	}
+	
+	/**
+	 * Close the Window.
+	 *
+	 * @param accepted
+	 *            True if accepted , False if not
+	 */
+	private void close(boolean accepted) {
+	//	System.out.println("Emotions Window Close called with accepted := " + accepted);
+		this.accepted = accepted;
+		window.close();
+	}
+	
+	/**
+	 * Was accepted.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean wasAccepted() {
+		return accepted;
 	}
 	
 	/**

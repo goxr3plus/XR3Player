@@ -859,7 +859,7 @@ public abstract class Media {
 				Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
 				
 				// !showing?
-				if (!Main.emotionsWindow.getWindow().isShowing()) {
+				if (!Main.emotionsWindow.getWindow().isShowing() && Main.emotionsWindow.wasAccepted()) {
 					
 					new Thread(() ->
 					//Add it the one of the emotions list

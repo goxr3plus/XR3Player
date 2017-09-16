@@ -85,7 +85,7 @@ public class RenameWindow extends VBox {
 		window.setMinWidth(300);
 		window.setWidth(440);
 		window.setHeight(80);
-		window.initModality(Modality.APPLICATION_MODAL);
+		//window.initModality(Modality.);
 		window.initStyle(StageStyle.TRANSPARENT);
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
@@ -109,6 +109,10 @@ public class RenameWindow extends VBox {
 		//	.add(getClass().getResource(InfoTool.styLes + InfoTool.applicationCss).toExternalForm())
 		getScene().setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE)
+				close(false);
+		});
+		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
+			if (!newValue && window.isShowing())
 				close(false);
 		});
 		
@@ -185,8 +189,9 @@ public class RenameWindow extends VBox {
 	 * @param accepted1
 	 *            True if accepted , False if not
 	 */
-	public void close(boolean accepted1) {
-		this.accepted = accepted1;
+	public void close(boolean accepted) {
+		//	System.out.println("Rename Window Close called with accepted := " + accepted);
+		this.accepted = accepted;
 		window.close();
 	}
 	
