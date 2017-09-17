@@ -23,17 +23,14 @@ Total Downloads on Github
 -------------------------------------------------------------------------------------
 
 ## Update 84 Main Mode
-![Main Mode](https://user-images.githubusercontent.com/20374208/30447821-c4aefe20-9995-11e7-9178-c66048269963.png)
-
-![Main Mode2](https://user-images.githubusercontent.com/20374208/30448257-f49af854-9996-11e7-81b5-4703ce56963f.png)
-
+![Main Mode](https://user-images.githubusercontent.com/20374208/30448239-e38b7052-9996-11e7-9332-30ba75363eea.png)
 
 ## Update 84 DJMode
-![DJMode](https://user-images.githubusercontent.com/20374208/30188368-dc1f8b42-9436-11e7-8556-d713f564f37e.png)
+![DJMode](https://user-images.githubusercontent.com/20374208/30524938-c75c5e98-9c05-11e7-9c85-bf17f7f0a629.png)
 
 
 ## Update 84 Login Screen
-![Login Screen](https://user-images.githubusercontent.com/20374208/30448239-e38b7052-9996-11e7-9332-30ba75363eea.png)
+
 ---------
 
 ### !Announcement! I have created an auto updater for any Java application (including XR3Player of course)
