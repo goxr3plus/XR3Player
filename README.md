@@ -17,19 +17,20 @@ Total Downloads on Github
 [license-url]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
-# Amazing Visualizations
-[![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
-
 -------------------------------------------------------------------------------------
 
-## Update 84 Main Mode
-![Main Mode](https://user-images.githubusercontent.com/20374208/30448239-e38b7052-9996-11e7-9332-30ba75363eea.png)
-
-## Update 84 DJMode
+## Update DJMode
 ![DJMode](https://user-images.githubusercontent.com/20374208/30524938-c75c5e98-9c05-11e7-9c85-bf17f7f0a629.png)
 
 
-## Update 84 Login Screen
+## Update Main Mode
+![Main Mode](https://user-images.githubusercontent.com/20374208/30448239-e38b7052-9996-11e7-9332-30ba75363eea.png)
+
+## Update Login Screen
+![Login Screen](https://user-images.githubusercontent.com/20374208/30524977-7c576248-9c06-11e7-8a6c-c5c1ced6530b.png)
+
+# Amazing Visualizations
+[![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
 
 ---------
 
