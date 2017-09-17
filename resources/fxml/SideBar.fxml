@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="3.0" top="2.0" />
    </padding>

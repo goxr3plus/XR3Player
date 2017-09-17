@@ -17,6 +17,9 @@ import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.TagException;
 
 import application.tools.InfoTool;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -123,6 +126,8 @@ public class MediaInformation extends BorderPane {
 	
 	private Media media;
 	
+	private final UpdateInformationService service = new UpdateInformationService();
+	
 	/**
 	 * Constructor.
 	 */
@@ -187,73 +192,162 @@ public class MediaInformation extends BorderPane {
 	 * @param media
 	 *            the media [[SuppressWarningsSpartan]]
 	 */
-	public void updateInformation(Media media) {
-		this.media = media;
+	public void updateInformation(Media mediar) {
+		service.updateInformation(mediar);
+	}
+	
+	/**
+	 * Using this Service as an external Thread which updates the Information based on the selected Media
+	 * 
+	 * @author GOXR3PLUS
+	 *
+	 */
+	public class UpdateInformationService extends Service<Void> {
 		
-		//We don't want thugs here
-		if (this.media == null)
-			return;
+		private String _sampleRate;
+		private String _bitRate;
+		private String _encoder;
+		private String _Channel;
+		private String _format;
 		
-		//== image
-		try {
-			Image image = media.getAlbumImage();
-			imageView.setImage(image != null ? image : nullImage);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		private String _mpegVersion;
+		private String _mpegLayer;
+		private String _totalFrames;
+		private String _noOfSamples;
+		private String _mp3StartByte;
+		private String _empasis;
+		private String _isVariableBitRate;
+		private String _isOriginal;
+		private String _isCopyrighted;
+		private String _isPadding;
+		private String _isProtected;
+		private String _isPrivate;
+		private Image image;
+		
+		/**
+		 * Updates the image shown.
+		 * 
+		 * @param media
+		 *            the media [[SuppressWarningsSpartan]]
+		 */
+		public void updateInformation(Media mediar) {
+			media = mediar;
+			
+			//We don't want thugs here
+			if (media == null)
+				return;
+			
+			//Restart the Service
+			this.restart();
+			
 		}
 		
-		//== title
-		title.textProperty().bind(media.titleProperty());
-		
-		//== duration
-		duration.setText(media.durationEditedProperty().get());
-		
-		//== stars
-		stars.textProperty().bind(media.starsProperty().get().textProperty());
-		
-		//== drive
-		drive.setText(media.getDrive());
-		
-		//== type
-		type.setText(media.getFileType());
-		
-		//== size
-		size.setText(media.fileSizeProperty().get());
-		
-		try {
-			File file = new File(media.getFilePath());
-			//It is mp3?
-			if ("mp3".equals(media.fileTypeProperty().get()) && file.exists()) {
-				MP3AudioHeader mp3Header = new MP3File(file).getMP3AudioHeader();
+		@Override
+		protected Task<Void> createTask() {
+			return new Task<Void>() {
 				
-				sampleRate.setText(mp3Header.getSampleRate());
-				bitRate.setText(Long.toString(mp3Header.getBitRateAsNumber()));
-				encoder.setText(mp3Header.getEncoder());
-				channel.setText(mp3Header.getChannels());
-				format.setText(mp3Header.getFormat());
-				
-				mpegVersion.setText(mp3Header.getMpegVersion());
-				mpegLayer.setText(mp3Header.getMpegLayer());
-				totalFrames.setText(Long.toString(mp3Header.getNumberOfFrames()));
-				noOfSamples.setText(Long.toString(mp3Header.getNoOfSamples()));
-				mp3StartByte.setText(Long.toString(mp3Header.getMp3StartByte()));
-				empasis.setText(mp3Header.getEmphasis());
-				isVariableBitRate.setText(mp3Header.isVariableBitRate() ? "yes" : "no");
-				isOriginal.setText(mp3Header.isOriginal() ? "yes" : "no");
-				isCopyrighted.setText(mp3Header.isCopyrighted() ? "yes" : "no");
-				isPadding.setText(mp3Header.isPadding() ? "yes" : "no");
-				isProtected.setText(mp3Header.isProtected() ? "yes" : "no");
-				isPrivate.setText(mp3Header.isPrivate() ? "yes" : "no");
-				
-			} else {
-				sampleRate.setText("-");
-				bitRate.setText("-");
-				encoder.setText("-");
-				channel.setText("-");
-				format.setText("-");
-			}
-		} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException ex) {
-			ex.printStackTrace();
+				@Override
+				protected Void call() throws Exception {
+					
+					//== image
+					image = null;
+					try {
+						image = media.getAlbumImage();
+					} catch (Exception ex) {
+						//ex.printStackTrace();
+					}
+					
+					Platform.runLater(() -> {
+						imageView.setImage(image != null ? image : nullImage);
+						
+						//== title
+						title.textProperty().bind(media.titleProperty());
+						
+						//== duration
+						duration.setText(media.durationEditedProperty().get());
+						
+						//== stars
+						stars.textProperty().bind(media.starsProperty().get().textProperty());
+						
+						//== drive
+						drive.setText(media.getDrive());
+						
+						//== type
+						type.setText(media.getFileType());
+						
+						//== size
+						size.setText(media.fileSizeProperty().get());
+						
+					});
+					
+					//Try to get other information
+					try {
+						File file = new File(media.getFilePath());
+						
+						//---------------------MP3--------------------------------------
+						if ("mp3".equals(media.fileTypeProperty().get()) && file.exists()) {
+							MP3AudioHeader mp3Header = new MP3File(file).getMP3AudioHeader();
+							
+							_sampleRate = mp3Header.getSampleRate();
+							_bitRate = Long.toString(mp3Header.getBitRateAsNumber());
+							_encoder = mp3Header.getEncoder();
+							_Channel = mp3Header.getChannels();
+							_format = mp3Header.getFormat();
+							
+							_mpegVersion = mp3Header.getMpegVersion();
+							_mpegLayer = mp3Header.getMpegLayer();
+							_totalFrames = Long.toString(mp3Header.getNumberOfFrames());
+							_noOfSamples = Long.toString(mp3Header.getNoOfSamples());
+							_mp3StartByte = Long.toString(mp3Header.getMp3StartByte());
+							_empasis = mp3Header.isVariableBitRate() ? "yes" : "no";
+							_isVariableBitRate = mp3Header.getEmphasis();
+							_isOriginal = mp3Header.isOriginal() ? "yes" : "no";
+							_isCopyrighted = mp3Header.isCopyrighted() ? "yes" : "no";
+							_isPadding = mp3Header.isPadding() ? "yes" : "no";
+							_isProtected = mp3Header.isProtected() ? "yes" : "no";
+							_isPrivate = mp3Header.isPrivate() ? "yes" : "no";
+							
+							//Run it on JavaFX Thread
+							Platform.runLater(() -> {
+								sampleRate.setText(_sampleRate);
+								bitRate.setText(_bitRate);
+								encoder.setText(_encoder);
+								channel.setText(_Channel);
+								format.setText(_format);
+								
+								mpegVersion.setText(_mpegVersion);
+								mpegLayer.setText(_mpegLayer);
+								totalFrames.setText(_totalFrames);
+								noOfSamples.setText(_noOfSamples);
+								mp3StartByte.setText(_mp3StartByte);
+								empasis.setText(_empasis);
+								isVariableBitRate.setText(_isVariableBitRate);
+								isOriginal.setText(_isOriginal);
+								isCopyrighted.setText(_isCopyrighted);
+								isPadding.setText(_isPadding);
+								isProtected.setText(_isProtected);
+								isPrivate.setText(_isPrivate);
+							});
+							
+							//------------------------OTHER FORMAT-------------------------
+						} else {
+							
+							//Run it on JavaFX Thread
+							Platform.runLater(() -> {
+								sampleRate.setText("-");
+								bitRate.setText("-");
+								encoder.setText("-");
+								channel.setText("-");
+								format.setText("-");
+							});
+						}
+					} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException ex) {
+						//ex.printStackTrace();
+					}
+					
+					return null;
+				}
+			};
 		}
 		
 	}

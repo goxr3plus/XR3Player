@@ -9,10 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
@@ -86,9 +84,6 @@ public class SmartController extends StackPane {
 	private HBox searchBarHBox;
 	
 	@FXML
-	private Button refreshButton;
-	
-	@FXML
 	private JFXCheckBox instantSearch;
 	
 	@FXML
@@ -110,9 +105,6 @@ public class SmartController extends StackPane {
 	private Button next;
 	
 	@FXML
-	private Button showSettings;
-	
-	@FXML
 	private MenuButton toolsMenuButton;
 	
 	@FXML
@@ -126,6 +118,9 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private MenuItem exportFiles;
+	
+	@FXML
+	private MenuItem showSettings;
 	
 	@FXML
 	private MenuItem clearAll;
@@ -484,13 +479,11 @@ public class SmartController extends StackPane {
 		});
 		
 		// -- refreshButton
-		refreshButton.setOnAction(e -> loadService.startService(false, true, false));
+		//refreshButton.setOnAction(e -> loadService.startService(false, true, false));
 		
 		// Update
 		updateLabel();
 		
-		//---SplitPane
-		//splitPane.getItems().remove(1);
 		
 		//---------------------Check the genre--------------------
 		if (genre == Genre.SEARCHWINDOW) {
@@ -1178,6 +1171,13 @@ public class SmartController extends StackPane {
 	 */
 	public JFXCheckBox getInstantSearch() {
 		return instantSearch;
+	}
+	
+	/**
+	 * @return the reloadVBox
+	 */
+	public VBox getReloadVBox() {
+		return reloadVBox;
 	}
 	
 	/*-----------------------------------------------------------------------

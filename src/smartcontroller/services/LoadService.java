@@ -65,6 +65,10 @@ public class LoadService extends Service<Void> {
 		this.requestFocus = requestFocus;
 		this.commit = commit;
 		
+		//Check if reloadVBox is visible
+		if (smartController.getReloadVBox().isVisible())
+			smartController.getReloadVBox().setVisible(false);
+		
 		// Hide ContextMenu
 		Main.songsContextMenu.hide();
 		

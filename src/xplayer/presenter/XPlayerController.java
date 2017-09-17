@@ -431,7 +431,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
-		mediaNameHBox.getChildren().add(0, mediaFileMarquee);
+		mediaNameHBox.getChildren().add(1, mediaFileMarquee);
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		// openMediaFileFolder
@@ -907,7 +907,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		//
 		//( (HBox) discBorderPane.getBottom() ).getChildren().add(0, disc.getTimeField());
-		( (StackPane) discBorderPane.getBottom() ).getChildren().add(1, disc.getVolumeLabel());
+		( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, disc.getVolumeLabel());
 		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
@@ -916,7 +916,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	}
 	
 	/**
-	 * Recalculates the Canvas size to the preffered size
+	 * Recalculates the Canvas size to the preferred size
 	 */
 	private void reCalculateCanvasSize() {
 		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.5;

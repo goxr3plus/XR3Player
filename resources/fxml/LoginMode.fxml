@@ -305,7 +305,7 @@
                   <Insets bottom="2.0" />
                </padding>
             </Label>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="123.0" spacing="3.0" style="-fx-background-color: firebrick;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="123.0" spacing="3.0" style="-fx-background-color: #151515;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>

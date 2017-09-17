@@ -475,7 +475,7 @@ public class DbManager {
 			return new Task<Void>() {
 				@Override
 				protected Void call() throws Exception {
-					int counter;
+					
 					int total = 1;
 					updateProgress(0, total);
 					
@@ -495,28 +495,41 @@ public class DbManager {
 						
 						// Load all the libraries
 						while (resultSet.next()) {
+							
+							//Add the library to the List of Libraries
 							libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
 									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"),
 									resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
 							
-							//Check if this Library must be Opened
-							//							if (resultSet.getBoolean("OPENED"))
-							//								libraries.get(libraries.size() - 1).libraryOpenClose(true, true);
-							
+							//Update the Progress
 							updateProgress(resultSet.getRow() - 1, total);
 						}
 						
-						//Add all the Libraries to the Library Viewer
-						Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().addMultipleItems(libraries));
+						//Run of JavaFX Thread
+						Platform.runLater(() -> {
+							
+							//Change Label Text
+							Main.updateScreen.getLabel().setText("Adding Libraries ...");
+							
+							//Add all the Libraries to the Library Viewer
+							Main.libraryMode.teamViewer.getViewer().addMultipleItems(libraries);
+							
+							//Change Label Text
+							Main.updateScreen.getLabel().setText("Loading Opened Libraries...");
+						});
 						
 						//Load the Opened Libraries
-						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Opened Libraries..."));
 						loadOpenedLibraries();
 						
-						//Calculate opened libraries
+						//Run of JavaFX Thread
 						Platform.runLater(() -> {
+							
+							//Calculate Opened Libraries
 							Main.libraryMode.calculateOpenedLibraries();
+							
+							//Calculate Empty Libraries
 							Main.libraryMode.calculateEmptyLibraries();
+							
 						});
 						
 						//Load PlayerMediaList
@@ -528,6 +541,9 @@ public class DbManager {
 						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
 						
 						Platform.runLater(() -> {
+							
+							//Change Label Text
+							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading User Settings Part ( 1 )..."));
 							
 							//Update the emotion smart controller 
 							Main.emotionListsController.updateEmotionSmartControllers(true, true, true, true);
@@ -551,7 +567,10 @@ public class DbManager {
 							Main.xPlayersList.getList().stream().forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch()
 									.selectedProperty().bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
 							
-							//-----------------------Load the application settings					
+							//Change Label Text
+							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading User Settings Part ( 2 )..."));
+							
+							//-----------------------Load the application settings-------------------------------					
 							Main.loadApplicationSettings();
 							
 						});

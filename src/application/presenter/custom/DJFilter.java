@@ -5,13 +5,9 @@ package application.presenter.custom;
 
 import java.util.ArrayList;
 
-import application.tools.InfoTool;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
-import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -242,6 +238,10 @@ public class DJFilter extends StackPane {
 		//Find the current angle based on the new value given + the maximum value
 		angle = (int) ( ( maximumValue == 0.0 || newValue == 0.0 ) ? 0.0 : newValue == maximumValue ? 360.0 : - ( ( 360.0 * newValue ) / maximumValue ) );
 		
+		//Notify all the Listeners
+		listeners.forEach(listener -> listener.valueChanged(getValue()));
+		
+		//Repaint
 		repaint();
 	}
 	

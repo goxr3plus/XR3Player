@@ -40,8 +40,11 @@ public class TreeViewManager extends BorderPane {
 	@FXML
 	private TreeView<String> systemTreeView;
 	
+	//	@FXML
+	//	private Button searchButton;
+	
 	@FXML
-	private Button searchButton;
+	private Button collapseTree;
 	
 	// -------------------------------------
 	
@@ -104,8 +107,33 @@ public class TreeViewManager extends BorderPane {
 		});
 		
 		//searchButton
-		searchButton.setOnAction(a -> Main.specialChooser.prepareToImportSongFiles(Main.window));
+		//searchButton.setOnAction(a -> Main.specialChooser.prepareToImportSongFiles(Main.window));
 		
+		//collapseTree
+		collapseTree.setOnAction(a -> {
+			//Trick for CPU based on this question -> https://stackoverflow.com/questions/15490268/manually-expand-collapse-all-treeitems-memory-cost-javafx-2-2
+			systemRoot.getRoot().setExpanded(false);
+			
+			//Set not expanded all the children
+			collapseTreeView(systemRoot.getRoot(), false);
+			
+			//Trick for CPU
+			systemRoot.getRoot().setExpanded(true);
+		});
+		
+	}
+	
+	/**
+	 * Collapses the whole TreeView
+	 * 
+	 * @param item
+	 */
+	private void collapseTreeView(TreeItem<String> item , boolean expanded) {
+		if (item == null || item.isLeaf())
+			return;
+		
+		item.setExpanded(expanded);
+		item.getChildren().forEach(child -> collapseTreeView(child, expanded));
 	}
 	
 	/**
@@ -142,13 +170,13 @@ public class TreeViewManager extends BorderPane {
 						try (DirectoryStream<Path> stream = Files.newDirectoryStream(mainPath)) {
 							
 							//Run the Stream
-							stream.forEach(path -> {	
+							stream.forEach(path -> {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
 								if (!path.toFile().isHidden() && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
 									TreeItemFile treeNode = new TreeItemFile(path.toString());
 									source.getChildren().add(treeNode);
-								}	
+								}
 								
 							});
 							

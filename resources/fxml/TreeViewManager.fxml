@@ -4,39 +4,51 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <fx:root minWidth="0.0" style="-fx-background-color: rgb(255,255,255,0.9);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel2" text="System Explorer">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/Folder%20Tree-24.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Label>
-            <TreeView fx:id="systemTreeView" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <HBox>
+               <children>
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="System Explorer" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Folder%20Tree-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Button fx:id="collapseTree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="24.0" style="-fx-background-radius: 0;">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/collapse.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Collapse All" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+            <TreeView fx:id="systemTreeView" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin></TreeView>
          </children>
       </VBox>
    </center>
-   <top>
-      <Button fx:id="searchButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Open Native System Explorer" BorderPane.alignment="CENTER">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </Button>
-   </top>
 </fx:root>

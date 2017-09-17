@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -234,6 +235,7 @@ public class TopBar extends BorderPane {
 					// Work
 					Main.djMode.getBottomSplitPane().getItems().clear();
 					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.playListModesSplitPane);
+					SplitPane.setResizableWithParent(Main.treeManager, Boolean.FALSE);
 					Main.djMode.updateBottomSplitPaneDivider();
 					//Main.multipleTabs.reverseSplitPaneItems();
 					

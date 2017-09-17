@@ -59,16 +59,10 @@ public class PlayListModesSplitPane extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		//== tabPane
-		//tabPane.getSelectionModel().select(0);
-		
-		//== tab 1
-		//tab1.getStyleClass().add("sTab")
-		//tab1.setContent(Main.libraryMode.multipleLibs);
-		
 		//== splitPane
 		splitPane.getItems().clear();
 		splitPane.getItems().addAll(Main.playListModesTabPane, Main.mediaInformation);
+		SplitPane.setResizableWithParent(Main.mediaInformation, Boolean.FALSE);
 		updateSplitPaneDivider();
 	}
 	

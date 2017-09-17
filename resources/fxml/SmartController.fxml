@@ -66,29 +66,14 @@
                      <bottom>
                         <HBox BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="info" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="detailsLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="info" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </bottom>
                      <top>
                         <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="refreshButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 45 0 0 45;">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Synchronize-24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Refresh" />
-                                 </tooltip>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#f58007" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="30.0" selected="true" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
+                              <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#f58007" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="30.0" selected="true" style="-fx-background-color: #252525;" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
                                  <tooltip>
                                     <Tooltip text="Instant Search " />
                                  </tooltip>
@@ -151,26 +136,11 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Button fx:id="showSettings" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0;">
+                              <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0 45 45 0;">
                                  <graphic>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../image/gear.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Settings" />
-                                 </tooltip>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" style="-fx-background-radius: 0 45 45 0;" text="Action">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Maintenance-24.png" />
+                                          <Image url="@../image/menu2.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -222,6 +192,15 @@
                                                 </ImageView>
                                              </graphic>
                                           </Menu>
+                                          <MenuItem fx:id="showSettings" mnemonicParsing="false" text="Settings">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/gear.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
                                           <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">

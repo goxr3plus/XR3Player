@@ -38,7 +38,7 @@ import xplayer.visualizer.ResizableCanvas;
 public class DJDisc extends StackPane {
 	
 	/** The Constant NULL_IMAGE. */
-	private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noImage.png");
+	private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noDiscImage.png");
 	
 	/** The Constant NULL_IMAGE. */
 	private static final Image VOLUME_IMAGE = InfoTool.getImageFromResourcesFolder("unmute.png");
@@ -190,7 +190,7 @@ public class DJDisc extends StackPane {
 		//rotationAnimation.play();
 		
 		// When no album image exists this Label is shown
-		Label noAlbumImageLabel = new Label("");
+		Label noAlbumImageLabel = new Label("-");
 		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
 		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isEqualTo(NULL_IMAGE));
 		
@@ -231,7 +231,7 @@ public class DJDisc extends StackPane {
 		//System.out.println("Given:" + width1 + " , Rounded:" + width)
 		
 		if (width == height)
-			if ( ( width >= 40 && height >= 40 )) {
+			if ( ( width >= 30 && height >= 30 )) {
 				
 				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
 				
@@ -269,6 +269,9 @@ public class DJDisc extends StackPane {
 			}
 	}
 	
+	//For performance;
+	private static final Color webGrey = Color.web("#353535");
+	
 	/**
 	 * Repaints the disc.
 	 */
@@ -300,7 +303,7 @@ public class DJDisc extends StackPane {
 		canvas.gc.setStroke(arcColor);
 		int value = this.getVolume() == 0 ? 0 : (int) ( ( (double) this.getVolume() / (double) this.maximumVolume ) * 180 );
 		//System.out.println(value)
-		canvas.gc.setFill(Color.BLACK);
+		canvas.gc.setFill(webGrey);
 		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
 		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
 		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);

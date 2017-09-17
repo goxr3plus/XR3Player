@@ -14,8 +14,10 @@ import application.presenter.treeview.TreeItemFile;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -42,6 +44,9 @@ public class SmartControllerFoldersMode extends StackPane {
 	
 	@FXML
 	private ProgressIndicator progressIndicator;
+	
+	@FXML
+	private Button collapseTree;
 	
 	// -------------------------------------------------------------
 	
@@ -118,6 +123,31 @@ public class SmartControllerFoldersMode extends StackPane {
 		//Progress Indicator
 		progressIndicator.progressProperty().bind(service.progressProperty());
 		
+		//collapseTree
+		collapseTree.setOnAction(a -> {
+			//Trick for CPU based on this question -> https://stackoverflow.com/questions/15490268/manually-expand-collapse-all-treeitems-memory-cost-javafx-2-2
+			root.setExpanded(false);
+			
+			//Set not expanded all the children
+			collapseTreeView(root, false);
+			
+			//Trick for CPU
+			root.setExpanded(true);
+		});
+		
+	}
+	
+	/**
+	 * Collapses the whole TreeView
+	 * 
+	 * @param item
+	 */
+	private void collapseTreeView(TreeItem<String> item , boolean expanded) {
+		if (item == null || item.isLeaf())
+			return;
+		
+		item.setExpanded(expanded);
+		item.getChildren().forEach(child -> collapseTreeView(child, expanded));
 	}
 	
 	/**

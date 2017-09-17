@@ -20,6 +20,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -29,9 +30,6 @@ public class XPlayerEqualizer extends BorderPane {
 	
 	@FXML
 	private HBox bottomHBox;
-	
-	@FXML
-	private Label filterValueLabel;
 	
 	@FXML
 	private Menu presets;
@@ -120,9 +118,30 @@ public class XPlayerEqualizer extends BorderPane {
 	private void initialize() {
 		
 		//Add all the DJFilters		
-		for (int i = 0; i < 32; i++)
-			djFilters.add(new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i));
-		tilePane.getChildren().addAll(djFilters);
+		for (int i = 0; i < 32; i++) {
+			//---VBOX------
+			VBox vBox = new VBox();
+			
+			//---Label
+			Label label = new Label("0.0");
+			label.getStyleClass().add("applicationSettingsLabel2");
+			label.setMinWidth(35);
+			label.setMaxWidth(35);
+			//label.textProperty()
+			//.bind(Bindings.createStringBinding(() -> InfoTool.getMinString2(Double.toString(filter.currentValueProperty().get()), 4), filter.currentValueProperty()));
+			
+			//-----CustomDJFilter
+			CustomDJFilter filter = new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, label);
+			
+			//Add the Children
+			vBox.getChildren().addAll(filter, label);
+			
+			//Add VBox to TilePane
+			tilePane.getChildren().add(vBox);
+			
+			//Add to djFilters
+			djFilters.add(filter);
+		}
 		
 		//resetFilers
 		resetFilters.setOnAction(action -> {
@@ -174,7 +193,8 @@ public class XPlayerEqualizer extends BorderPane {
 	 */
 	private class CustomDJFilter extends DJFilter implements DJFilterListener {
 		
-		int position;
+		private int position;
+		private Label label;
 		
 		/**
 		 * Constructor
@@ -185,12 +205,16 @@ public class XPlayerEqualizer extends BorderPane {
 		 * @param currentValue
 		 * @param maximumValue
 		 * @param maximumValue
+		 * @param label
 		 */
-		public CustomDJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue, int position) {
+		public CustomDJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue, int position, Label label) {
 			super(width, height, arcColor, currentValue, minimumValue, maximumValue);
 			
 			//Position
 			this.position = position;
+			
+			//Label
+			this.label = label;
 			
 			//Add the DJFilterListener
 			super.addDJDiscListener(this);
@@ -210,7 +234,7 @@ public class XPlayerEqualizer extends BorderPane {
 				filterValue = Math.abs(1.0 - getValue() * 2.00);
 			
 			//Set the Text 
-			filterValueLabel.setText(InfoTool.getMinString2(Double.toString(filterValue), 4));
+			label.setText(InfoTool.getMinString2(Double.toString(filterValue), filterValue > 0 ? 4 : 5));
 			
 			xPlayerController.getxPlayerModel().getEqualizerArray()[position] = (float) filterValue;
 			xPlayerController.getxPlayer().setEqualizerKey(xPlayerController.getxPlayerModel().getEqualizerArray()[position], position);
@@ -240,7 +264,7 @@ public class XPlayerEqualizer extends BorderPane {
 			//Continue
 			setText(text);
 			for (int i = 0; i < variables.length; i++)
-				variables[i] = ( 100-variables[i] )/ 100.00;
+				variables[i] = ( 100 - variables[i] ) / 100.00;
 			
 			// System.out.println(variables[0])
 			

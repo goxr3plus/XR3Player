@@ -54,25 +54,7 @@
                                           <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
                                        </center>
                                        <bottom>
-                                          <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" StackPane.alignment="CENTER_RIGHT">
-                                                   <graphic>
-                                                      <ImageView pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../image/likeFaded.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <tooltip>
-                                                      <Tooltip text="Express your emotion for this Song" />
-                                                   </tooltip>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </Button>
-                                             </children>
-                                          </StackPane>
+                                          <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
                                        </bottom>
                                     </BorderPane>
                                     <StackPane fx:id="visualizerStackPane" minHeight="0.0">
@@ -175,6 +157,21 @@
                                        <children>
                                           <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" spacing="2.0" style="-fx-background-color: #202020;">
                                              <children>
+                                                <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;">
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/likeFaded.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <tooltip>
+                                                      <Tooltip text="Express your emotion for this Song" />
+                                                   </tooltip>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
                                                 <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
                                                    <graphic>
                                                       <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
@@ -192,20 +189,20 @@
                                              <children>
                                                 <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Elapsed" VBox.vgrow="ALWAYS" />
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Elapsed Time" VBox.vgrow="ALWAYS" />
                                                       <HBox prefHeight="100.0" prefWidth="200.0" />
                                                       <Label fx:id="elapsedTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
                                                    </children>
                                                 </VBox>
                                                 <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining Time" VBox.vgrow="ALWAYS" />
                                                       <Label fx:id="remainingTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
                                                    </children>
                                                 </VBox>
                                                 <VBox layoutX="110.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total Time" VBox.vgrow="ALWAYS" />
                                                       <Label fx:id="totalTimeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
                                                    </children>
                                                 </VBox>

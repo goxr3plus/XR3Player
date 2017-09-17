@@ -99,7 +99,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 85);
-		internalInformation.put("ReleasedDate", "?/09/2017");
+		internalInformation.put("ReleasedDate", "17/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -268,8 +268,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		width = 1380;
-		height = 800;
+		//width = 1380;
+		//height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
