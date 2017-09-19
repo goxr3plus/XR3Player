@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
@@ -7,36 +8,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
 <fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
-         <top>
-            <VBox BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="topLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="46.0" style="-fx-text-fill: white; -fx-font-size: 15;" styleClass="settingsLabel" text="Hello Bar" />
-               </children>
-            </VBox>
-         </top>
          <bottom>
             <StackPane style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="download" mnemonicParsing="false" text="Manual Download" StackPane.alignment="CENTER_RIGHT">
-                     <tooltip>
-                        <Tooltip text="Download the latest version" />
-                     </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button fx:id="gitHubButton" layoutX="961.0" layoutY="24.0" mnemonicParsing="false" text="GitHub " StackPane.alignment="CENTER_LEFT">
                      <tooltip>
                         <Tooltip text="Download the latest version" />
@@ -48,6 +32,21 @@
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/GitHub-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="closeWindow" mnemonicParsing="false" text="Close" StackPane.alignment="CENTER_RIGHT">
+                     <tooltip>
+                        <Tooltip text="Close the Window" />
+                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/x.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -69,9 +68,9 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="closeWindow" layoutX="678.0" layoutY="15.0" mnemonicParsing="false" text="Close">
+                        <Button fx:id="download" mnemonicParsing="false" text="Manual Download">
                            <tooltip>
-                              <Tooltip text="Close the Window" />
+                              <Tooltip text="Download the latest version" />
                            </tooltip>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -89,9 +88,9 @@
             </StackPane>
          </bottom>
          <center>
-            <TabPane id="SpecialTabPane" side="LEFT" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <JFXTabPane styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab fx:id="gitHubReleases" closable="false" styleClass="sTab" text="Github Releases">
+                  <Tab fx:id="releasesHistoryTab" closable="false" styleClass="sTab" text="Releases History">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>
@@ -99,20 +98,60 @@
                            </content>
                         </ScrollPane>
                      </content>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/balloons.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Tab>
-                  <Tab fx:id="releasesTab" closable="false" styleClass="sTab" text="Analytics &gt;">
+                  <Tab fx:id="whatsNewTab" closable="false" styleClass="sTab" text="What's new ?">
                      <content>
-                        <BorderPane fx:id="releasesInfoContainer" />
+                        <BorderPane fx:id="whatsNewContainer" />
                      </content>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/analytics.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Tab>
-                  <Tab fx:id="upcomingFeaturesTab" closable="false" styleClass="sTab" text="Upcoming &gt;">
+                  <Tab fx:id="upcomingFeaturesTab" closable="false" styleClass="sTab" text="Upcoming Features">
                      <content>
                         <BorderPane fx:id="upcomingFeaturesContainer" />
                      </content>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/flask.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="knowBugsTab" closable="false" styleClass="sTab" text="Known Bugs">
+                     <content>
+                        <BorderPane fx:id="knownBugsContainer" />
+                     </content>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/bug.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Tab>
                </tabs>
-            </TabPane>
+            </JFXTabPane>
          </center>
+         <top>
+            <Label fx:id="topLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="46.0" style="-fx-font-size: 15;" styleClass="applicationSettingsLabel2" text="Top Bar  " BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
       </BorderPane>
    </children>
 </fx:root>

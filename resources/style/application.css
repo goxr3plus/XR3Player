@@ -1210,6 +1210,10 @@
     -fx-background-insets: -0.1, 2.0;
 }
 
+.inline-css-text-area{
+	-fx-background-color:#202020;	
+}
+
 /*******************************************************************************
 
 *                         search-box,libraries-search-box                      *

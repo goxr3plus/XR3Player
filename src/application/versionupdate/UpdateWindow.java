@@ -70,22 +70,28 @@ public class UpdateWindow extends StackPane {
 	private Button closeWindow;
 	
 	@FXML
-	private Tab gitHubReleases;
+	private Tab releasesHistoryTab;
 	
 	@FXML
 	private Accordion gitHubAccordion;
 	
 	@FXML
-	private Tab releasesTab;
+	private Tab whatsNewTab;
 	
 	@FXML
-	private BorderPane releasesInfoContainer;
+	private BorderPane whatsNewContainer;
 	
 	@FXML
 	private Tab upcomingFeaturesTab;
 	
 	@FXML
 	private BorderPane upcomingFeaturesContainer;
+	
+	@FXML
+	private Tab knowBugsTab;
+	
+	@FXML
+	private BorderPane knownBugsContainer;
 	
 	// -------------------------------------------------------------
 	
@@ -95,14 +101,16 @@ public class UpdateWindow extends StackPane {
 	/** Window **/
 	private Stage window = new Stage();
 	
-	private final InlineCssTextArea gitHubTextArea = new InlineCssTextArea();
-	private final InlineCssTextArea upcomingTextArea = new InlineCssTextArea();
-	private final VirtualizedScrollPane<InlineCssTextArea> vsPane1 = new VirtualizedScrollPane<>(gitHubTextArea);
-	private final VirtualizedScrollPane<InlineCssTextArea> vsPane2 = new VirtualizedScrollPane<>(upcomingTextArea);
+	private final InlineCssTextArea whatsNewTextArea = new InlineCssTextArea();
+	private final InlineCssTextArea upcomingFeaturesTextArea = new InlineCssTextArea();
+	private final InlineCssTextArea knownBugsTextArea = new InlineCssTextArea();
+	private final VirtualizedScrollPane<InlineCssTextArea> whatsNewVirtualPane = new VirtualizedScrollPane<>(whatsNewTextArea);
+	private final VirtualizedScrollPane<InlineCssTextArea> upcomingFeaturesVirtualPane = new VirtualizedScrollPane<>(upcomingFeaturesTextArea);
+	private final VirtualizedScrollPane<InlineCssTextArea> knownBugsVirtualPane = new VirtualizedScrollPane<>(knownBugsTextArea);
 	
 	private int update;
 	
-	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
+	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;";
 	
 	/**
 	 * The Thread which is responsible for the update check
@@ -140,18 +148,27 @@ public class UpdateWindow extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		// --
-		gitHubTextArea.setEditable(false);
-		gitHubTextArea.setFocusTraversable(false);
+		// -- whatsNewTextArea
+		whatsNewTextArea.setEditable(false);
+		whatsNewTextArea.setFocusTraversable(false);
+		whatsNewTextArea.getStyleClass().add("inline-css-text-area");
 		
-		//--
-		upcomingTextArea.setEditable(false);
-		upcomingTextArea.setFocusTraversable(false);
-		upcomingTextArea.setWrapText(true);
+		// -- upcomingFeaturesTextArea
+		upcomingFeaturesTextArea.setEditable(false);
+		upcomingFeaturesTextArea.setFocusTraversable(false);
+		upcomingFeaturesTextArea.setWrapText(true);
+		upcomingFeaturesTextArea.getStyleClass().add("inline-css-text-area");
 		
-		//--
-		releasesInfoContainer.setCenter(vsPane1);
-		upcomingFeaturesContainer.setCenter(vsPane2);
+		// -- knownBugsTextArea
+		knownBugsTextArea.setEditable(false);
+		knownBugsTextArea.setFocusTraversable(false);
+		knownBugsTextArea.setWrapText(true);
+		knownBugsTextArea.getStyleClass().add("inline-css-text-area");
+		
+		//-- whatsNewContainer +  upcomingFeaturesContainer + knownBugsContainer
+		whatsNewContainer.setCenter(whatsNewVirtualPane);
+		upcomingFeaturesContainer.setCenter(upcomingFeaturesVirtualPane);
+		knownBugsContainer.setCenter(knownBugsVirtualPane);
 		
 		// -- automaticUpdate
 		automaticUpdate.setOnAction(a -> startXR3PlayerUpdater(update));
@@ -202,9 +219,9 @@ public class UpdateWindow extends StackPane {
 	private void searchForUpdatesPart2(boolean showTheWindow) {
 		try {
 			
-			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
+			//Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
 			
-			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
+			Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
 			
 			Element lastArticle = doc.getElementsByTag("article").last();
 			
@@ -290,43 +307,93 @@ public class UpdateWindow extends StackPane {
 				}
 				
 				//Clear the textAreas
-				gitHubTextArea.clear();
-				upcomingTextArea.clear();
+				whatsNewTextArea.clear();
+				upcomingFeaturesTextArea.clear();
+				knownBugsTextArea.clear();
 				
-				// -- gitHubTextArea 			
+				// --------------------------------------- whatsNewTextArea -----------------------------------			
 				doc.getElementsByTag("article").stream().collect(Collectors.toCollection(ArrayDeque::new)).descendingIterator()
-						.forEachRemaining(element -> analyzeUpdate(gitHubTextArea, element));
+						.forEachRemaining(element -> analyzeUpdate(whatsNewTextArea, element));
 				
 				//textArea.moveTo(gitHubTextArea.getLength());
 				//textArea.requestFollowCaret();
 				
-				// -- upcomingTextArea
-				doc.getElementsByTag("section").forEach(section -> {
+				// --------------------------------------- upcomingTextArea -----------------------------------
+				doc.getElementsByTag("section").stream().filter(section -> "Upcoming Features".equals(section.id())).forEach(section -> {
 					
 					// Append the text to the textArea
-					upcomingTextArea.appendText("\n\n-------------Upcoming Features for XR3Player-------------\n\n");
+					upcomingFeaturesTextArea.appendText("\n");
 					
-					// Information
-					upcomingTextArea.appendText("->Coming:\n");
-					upcomingTextArea.setStyle(upcomingTextArea.getLength() - 8, upcomingTextArea.getLength() - 1, style.replace("black", "green"));
+					//Most Important
+					upcomingFeaturesTextArea.appendText("  Most Important:\n\n");
+					upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - 17, upcomingFeaturesTextArea.getLength() - 1, style.replace("white", "#3DFF53"));
+					final AtomicInteger counter2 = new AtomicInteger(-1);
+					Arrays.asList(section.getElementById("most important").text().split("\\*")).forEach(el -> {
+						if (counter2.addAndGet(1) >= 1) {
+							String s = "\t" + counter2 + " ";
+							upcomingFeaturesTextArea.appendText(s);
+							upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - s.length(), upcomingFeaturesTextArea.getLength() - 1, style2);
+							upcomingFeaturesTextArea.appendText(el + "\n");
+							upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - el.length(), upcomingFeaturesTextArea.getLength() - 1, style3);
+						}
+					});
+					
+					//Less Important
+					upcomingFeaturesTextArea.appendText("\n\n  Less Important:\n\n");
+					upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - 17, upcomingFeaturesTextArea.getLength() - 1, style.replace("white", "#3DFF53"));
 					final AtomicInteger counter = new AtomicInteger(-1);
 					Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
 						if (counter.addAndGet(1) >= 1) {
-							String s = "\t" + counter + ")";
-							upcomingTextArea.appendText(s);
-							upcomingTextArea.setStyle(upcomingTextArea.getLength() - s.length(), upcomingTextArea.getLength() - 1, style);
-							upcomingTextArea.appendText(el + "\n");
+							String s = "\t" + counter + " ";
+							upcomingFeaturesTextArea.appendText(s);
+							upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - s.length(), upcomingFeaturesTextArea.getLength() - 1, style2);
+							upcomingFeaturesTextArea.appendText(el + "\n");
+							upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - el.length(), upcomingFeaturesTextArea.getLength() - 1, style3);
 						}
 					});
 					
 					//Last Updated
-					upcomingTextArea.appendText("->Last Updated: ");
-					upcomingTextArea.setStyle(upcomingTextArea.getLength() - 14, upcomingTextArea.getLength() - 1, style.replace("black", "firebrick"));
-					upcomingTextArea.appendText(section.getElementById("lastUpdated").text());
+					upcomingFeaturesTextArea.appendText("\n  Last Updated: ");
+					upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - 14, upcomingFeaturesTextArea.getLength() - 1, style.replace("white", "#FFEC00"));
+					upcomingFeaturesTextArea.appendText(section.getElementById("lastUpdated").text());
+					upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - section.getElementById("lastUpdated").text().length(),
+							upcomingFeaturesTextArea.getLength(), style3);
+					
 				});
 				
-				upcomingTextArea.moveTo(upcomingTextArea.getLength());
-				upcomingTextArea.requestFollowCaret();
+				//upcomingFeaturesTextArea.moveTo(upcomingFeaturesTextArea.getLength());
+				//upcomingFeaturesTextArea.requestFollowCaret();
+				
+				// --------------------------------------- knownBugsTextArea -----------------------------------		
+				doc.getElementsByTag("section").stream().filter(section -> "Bugs".equals(section.id())).forEach(section -> {
+					
+					// Append the text to the textArea
+					knownBugsTextArea.appendText("\n");
+					
+					// Information
+					knownBugsTextArea.appendText("  Bugs:\n\n");
+					knownBugsTextArea.setStyle(knownBugsTextArea.getLength() - 7, knownBugsTextArea.getLength() - 1, style.replace("white", "#FF130F"));
+					final AtomicInteger counter = new AtomicInteger(-1);
+					Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
+						if (counter.addAndGet(1) >= 1) {
+							String s = "\t" + counter + " ";
+							knownBugsTextArea.appendText(s);
+							knownBugsTextArea.setStyle(knownBugsTextArea.getLength() - s.length(), knownBugsTextArea.getLength() - 1, style2);
+							knownBugsTextArea.appendText(el + "\n");
+							knownBugsTextArea.setStyle(knownBugsTextArea.getLength() - el.length(), knownBugsTextArea.getLength() - 1, style3);
+						}
+					});
+					
+					//Last Updated
+					knownBugsTextArea.appendText("\n  Last Updated: ");
+					knownBugsTextArea.setStyle(knownBugsTextArea.getLength() - 14, knownBugsTextArea.getLength() - 1, style.replace("white", "#FFEC00"));
+					knownBugsTextArea.appendText(section.getElementById("lastUpdated").text());
+					knownBugsTextArea.setStyle(knownBugsTextArea.getLength() - section.getElementById("lastUpdated").text().length(), knownBugsTextArea.getLength(), style3);
+					
+				});
+				
+				//knownBugsTextArea.moveTo(knownBugsTextArea.getLength());
+				//knownBugsTextArea.requestFollowCaret();
 			});
 			
 			//show?
@@ -343,6 +410,9 @@ public class UpdateWindow extends StackPane {
 		}
 	}
 	
+	private final String style2 = style.replace("white", "#329CFF");
+	private final String style3 = style.replace("bold", "400");
+	
 	/**
 	 * Streams the given update and appends it to the InlineCssTextArea in a specific format
 	 * 
@@ -352,33 +422,40 @@ public class UpdateWindow extends StackPane {
 	private void analyzeUpdate(InlineCssTextArea textArea , Element element) {
 		
 		// Append the text to the textArea
-		textArea.appendText("\n\n-------------Start of Update (" + element.id() + ")-------------\n");
+		//		String updateNumber = "\n\n-------------Update (" + element.id() + ")-------------\n";
+		//		textArea.appendText(updateNumber);
+		//		textArea.setStyle(textArea.getLength() - updateNumber.length(), textArea.getLength() - 1, style);
+		textArea.appendText("\n\n");
 		
 		// Information
-		textArea.appendText("->Information: ");
-		textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style.replace("black", "#202020"));
+		textArea.appendText("  Information: ");
+		textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style.replace("white", "#329CFF"));
 		textArea.appendText(element.getElementsByClass("about").text() + "\n");
+		textArea.setStyle(textArea.getLength() - element.getElementsByClass("about").text().length() - 1, textArea.getLength() - 1, style3);
 		
 		// Release Date
-		textArea.appendText("->Release Date: ");
-		textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("black", "firebrick"));
+		textArea.appendText("  Release Date: ");
+		textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("white", "#3DFF53"));
 		textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
+		textArea.setStyle(textArea.getLength() - element.getElementsByClass("releasedate").text().length() - 1, textArea.getLength() - 1, style3);
 		
 		// Minimum JRE
-		textArea.appendText("->Minimum Java Version: ");
-		textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("black", "orange"));
+		textArea.appendText("  Minimum Java Version: ");
+		textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("white", "orange"));
 		textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
+		textArea.setStyle(textArea.getLength() - element.getElementsByClass("minJavaVersion").text().length() - 1, textArea.getLength() - 1, style3);
 		
 		// ChangeLog
-		textArea.appendText("->ChangeLog:\n");
-		textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("black", "green"));
+		textArea.appendText("  ChangeLog:\n");
+		textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("white", "#FFEC00"));
 		final AtomicInteger counter = new AtomicInteger(-1);
-		Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(el -> {
+		Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(improvement -> {
 			if (counter.addAndGet(1) >= 1) {
-				String s = "\t" + counter + ")";
+				String s = "\t" + counter + " ";
 				textArea.appendText(s);
-				textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style);
-				textArea.appendText(el + "\n");
+				textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style2);
+				textArea.appendText(improvement + "\n");
+				textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
 			}
 		});
 	}
