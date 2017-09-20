@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.visualizer.view;
+package xplayer.visualizer.presenter;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;

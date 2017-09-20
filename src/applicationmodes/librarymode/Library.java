@@ -1231,26 +1231,31 @@ public class Library extends StackPane {
 	/**
 	 * This method is called when a key is released.
 	 *
-	 * @param e
+	 * @param key
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
-	public void onKeyReleased(KeyEvent e) {
+	public void onKeyReleased(KeyEvent key) {
 		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())
 			return;
 		
-		KeyCode code = e.getCode();
-		if (code == KeyCode.O)
-			openLibrary(true, false);
-		else if (code == KeyCode.C)
-			openLibrary(false, false);
-		else if (code == KeyCode.R)
-			renameLibrary(nameLabel);
-		else if (code == KeyCode.DELETE || code == KeyCode.D)
-			deleteLibrary(this);
-		else if (code == KeyCode.S)
-			Main.libraryMode.libraryInformation.showWindow(this);
-		else if (code == KeyCode.E)
-			this.exportImage();
+		//Check if Control is down
+		if (key.isControlDown()) {
+			
+			KeyCode code = key.getCode();
+			if (code == KeyCode.O)
+				openLibrary(true, false);
+			else if (code == KeyCode.C)
+				openLibrary(false, false);
+			else if (code == KeyCode.R)
+				renameLibrary(nameLabel);
+			else if (code == KeyCode.DELETE || code == KeyCode.D)
+				deleteLibrary(this);
+			else if (code == KeyCode.S)
+				Main.libraryMode.libraryInformation.showWindow(this);
+			else if (code == KeyCode.E)
+				this.exportImage();
+			
+		}
 	}
 	
 	/*------------------------------------------------------------------------

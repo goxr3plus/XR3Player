@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.visualizer.view;
+package xplayer.visualizer.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;

@@ -5,27 +5,17 @@ package applicationmodes.loginmode;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
-import org.json.simple.DeserializationException;
-import org.json.simple.JsonArray;
-import org.json.simple.JsonObject;
-import org.json.simple.Jsoner;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
@@ -34,15 +24,16 @@ import application.Main;
 import application.presenter.SearchBox;
 import application.presenter.SearchBox.SearchBoxType;
 import application.tools.ActionTool;
+import application.tools.ActionTool.FileType;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
-import application.tools.ActionTool.FileType;
 import applicationmodes.loginmode.services.UsersInfoLoader;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -51,10 +42,10 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -79,7 +70,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import smartcontroller.presenter.SmartController;
 
 /**
  * @author GOXR3PLUS
@@ -99,19 +89,19 @@ public class LoginMode extends BorderPane {
 	private StackPane usersStackView;
 	
 	@FXML
+	private ScrollBar horizontalScrollBar;
+	
+	@FXML
 	private Button newUser;
 	
 	@FXML
-	private Label usersInfoLabel;
+	private Label quickSearchTextField;
 	
 	@FXML
 	private GridPane topGrid;
 	
 	@FXML
 	private JFXToggleButton selectionModeToggle;
-	
-	@FXML
-	private HBox botttomHBox;
 	
 	@FXML
 	private ToolBar userToolBar;
@@ -123,10 +113,7 @@ public class LoginMode extends BorderPane {
 	private Button renameUser;
 	
 	@FXML
-	private Button openUserContextMenu;
-	
-	@FXML
-	private ScrollBar horizontalScrollBar;
+	private Button loginButton;
 	
 	@FXML
 	private JFXButton previous;
@@ -138,7 +125,13 @@ public class LoginMode extends BorderPane {
 	private JFXButton next;
 	
 	@FXML
-	private Button loginButton;
+	private Button openUserContextMenu;
+	
+	@FXML
+	private HBox botttomHBox;
+	
+	@FXML
+	private Label usersInfoLabel;
 	
 	@FXML
 	private PieChart librariesPieChart;
@@ -165,6 +158,9 @@ public class LoginMode extends BorderPane {
 	private Label gitHubDownloadsLabel;
 	
 	@FXML
+	private Label xr3PlayerLabel;
+	
+	@FXML
 	private Button restartButton;
 	
 	@FXML
@@ -181,9 +177,6 @@ public class LoginMode extends BorderPane {
 	
 	@FXML
 	private MenuItem resetBackground;
-	
-	@FXML
-	private Label xr3PlayerLabel;
 	
 	// --------------------------------------------
 	
@@ -306,6 +299,8 @@ public class LoginMode extends BorderPane {
 		
 		//Initialise
 		teamViewer = new Viewer(horizontalScrollBar);
+		quickSearchTextField.visibleProperty().bind(teamViewer.searchWordProperty().isEmpty().not());
+		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.searchWordProperty()));
 		
 		//----sourceForgeDownloadsLabel
 		new Thread(() -> {
@@ -584,6 +579,10 @@ public class LoginMode extends BorderPane {
 		
 		private final Rectangle clip = new Rectangle();
 		
+		/** The pause transition. */
+		private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1.5));
+		private StringProperty searchWord = new SimpleStringProperty("");
+		
 		/**
 		 * Constructor
 		 * 
@@ -612,7 +611,30 @@ public class LoginMode extends BorderPane {
 					next();
 				else if (key.getCode() == KeyCode.LEFT)
 					previous();
+				else if (key.getCode() == KeyCode.BACK_SPACE)
+					searchWord.set("");
+				
+				//Local Search 
+				String keySmall = key.getText();
+				searchWord.set(searchWord.get() + keySmall);
+				pauseTransition.playFromStart();
+				//System.out.println("Search Word : " + searchWord);
+				
+				//Check if searchWord is empty
+				if (!searchWord.get().isEmpty()) {
+					boolean[] found = { false };
+					//Find the first matching item
+					getItemsObservableList().forEach(user -> {
+						if (user.getUserName().contains(searchWord.get()) && !found[0]) {
+							this.setCenterIndex(user.getPosition());
+							found[0] = true;
+						}
+					});
+				}
 			});
+			
+			// PauseTransition
+			pauseTransition.setOnFinished(f -> searchWord.set(""));
 			
 			// this.setOnMouseMoved(m -> {
 			//
@@ -1066,6 +1088,13 @@ public class LoginMode extends BorderPane {
 		 */
 		public Animation getTimeline() {
 			return timeline;
+		}
+		
+		/**
+		 * @return the searchWord
+		 */
+		public StringProperty searchWordProperty() {
+			return searchWord;
 		}
 		
 	}

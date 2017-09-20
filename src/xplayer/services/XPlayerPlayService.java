@@ -3,7 +3,12 @@ package xplayer.services;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
 import application.Main;
@@ -17,7 +22,9 @@ import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import smartcontroller.media.Audio;
 import smartcontroller.media.AudioType;
+import smartcontroller.media.Media;
 import xplayer.presenter.XPlayerController;
 
 /**
@@ -237,9 +244,36 @@ public class XPlayerPlayService extends Service<Boolean> {
 		new Thread(() -> {
 			
 			//Add to played songs
-			if (Main.playedSongs.add(absolutePath, true)) {
-				//Add to Player Playlist history
-				Platform.runLater(() -> xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath))));
+			Main.playedSongs.add(absolutePath, true);
+			
+			//Check if file already in XPlayer Database History Playlist before trying to add it
+			try (PreparedStatement statement = Main.dbManager.getConnection()
+					.prepareStatement("SELECT PATH FROM '" + xPlayerController.getxPlayerPlayList().getSmartController().getDataBaseTableName() + "' WHERE PATH=?")) {
+				
+				//Set the string to the prepared statement
+				statement.setString(1, absolutePath);
+				
+				//Now check if at least one exists
+				try (ResultSet resultSet = statement.executeQuery()) {
+					
+					boolean exists = false;
+					//For each
+					while (resultSet.next()) {
+						exists = true;
+						break;
+					}
+					
+					//Insert into database if it doesn't exist
+					if (!exists)
+						Platform.runLater(() -> xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath))));
+					
+				} catch (Exception ex) {
+					Main.logger.log(Level.WARNING, "", ex);
+				}
+				
+				//
+			} catch (Exception ex) {
+				Main.logger.log(Level.WARNING, "", ex);
 			}
 			
 		}).start();

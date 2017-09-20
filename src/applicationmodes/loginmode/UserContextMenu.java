@@ -1,12 +1,7 @@
 package applicationmodes.loginmode;
 
-import java.io.File;
-
 import application.Main;
 import application.presenter.TitleMenuItem;
-import application.tools.ActionTool;
-import application.tools.InfoTool;
-import application.tools.NotificationType;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -31,10 +26,10 @@ public class UserContextMenu extends ContextMenu {
 	MenuItem login = new MenuItem("Login");
 	
 	/** The rename. */
-	MenuItem rename = new MenuItem("Rename(R)");
+	MenuItem rename = new MenuItem("Rename(CTRL + R)");
 	
 	/** The delete. */
-	MenuItem delete = new MenuItem("Delete(D)");
+	MenuItem delete = new MenuItem("Delete(CTRL + D)");
 	
 	/** The image. */
 	Menu image = new Menu("Image");
@@ -49,7 +44,7 @@ public class UserContextMenu extends ContextMenu {
 	MenuItem internetImage = new MenuItem("internet");
 	
 	/** The export image. */
-	MenuItem exportImage = new MenuItem("export...(E)");
+	MenuItem exportImage = new MenuItem("export...(CTRL + E)");
 	
 	/** The reset image. */
 	MenuItem resetImage = new MenuItem("default");
@@ -93,13 +88,13 @@ public class UserContextMenu extends ContextMenu {
 	 * Shows the LibraryContextMenu.
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @param x
-	 *        the x
+	 *            the x
 	 * @param y
-	 *        the y
+	 *            the y
 	 * @param user
-	 *        the user
+	 *            the user
 	 */
 	public void show(Window window , double x , double y , User user) {
 		this.user = user;

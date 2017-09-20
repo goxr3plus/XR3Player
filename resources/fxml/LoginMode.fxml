@@ -47,6 +47,7 @@
                                     <Reflection />
                                  </effect>
                               </Button>
+                              <Label fx:id="quickSearchTextField" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Search" StackPane.alignment="BOTTOM_LEFT" />
                            </children>
                         </StackPane>
                      </center>

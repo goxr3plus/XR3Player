@@ -844,7 +844,7 @@ public class SmartController extends StackPane {
 	public synchronized void calculateTotalEntries() {
 		// calculate the total entries
 		if (getTotalInDataBase() == 0)
-			try (ResultSet s = Main.dbManager.getConnection().createStatement().executeQuery("SELECT COUNT(*) FROM '" + getDataBaseTableName() + "';")) {
+			try (ResultSet s = Main.dbManager.getConnection().createStatement().executeQuery("SELECT COUNT(PATH) FROM '" + getDataBaseTableName() + "';")) {
 				
 				//Total items
 				final int total = s.getInt(1);

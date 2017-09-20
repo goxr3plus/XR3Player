@@ -29,10 +29,10 @@ public class LibraryContextMenu extends ContextMenu {
     MenuItem close = new MenuItem("Close");
 
     /** The rename. */
-    MenuItem rename = new MenuItem("Rename(R)");
+    MenuItem rename = new MenuItem("Rename(CTRL + R)");
 
     /** The delete. */
-    MenuItem delete = new MenuItem("Delete(D)");
+    MenuItem delete = new MenuItem("Delete(CTRL + D)");
 
     /** The image. */
     Menu image = new Menu("Image");
@@ -47,13 +47,13 @@ public class LibraryContextMenu extends ContextMenu {
     MenuItem internetImage = new MenuItem("internet");
 
     /** The export image. */
-    MenuItem exportImage = new MenuItem("export...(E)");
+    MenuItem exportImage = new MenuItem("export...CTRL + E)");
 
     /** The reset image. */
     MenuItem resetImage = new MenuItem("default");
 
     /** The settings. */
-    MenuItem settings = new MenuItem("Settings(S)");
+    MenuItem settings = new MenuItem("Settings(CTRL + S)");
 
     /** The library. */
     private Library library;

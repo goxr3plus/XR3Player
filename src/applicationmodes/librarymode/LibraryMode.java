@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
 import application.presenter.SearchBox;
@@ -28,10 +27,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -63,13 +60,10 @@ public class LibraryMode extends BorderPane {
 	private Button newLibrary;
 	
 	@FXML
-	private GridPane topGrid;
+	private Label quickSearchTextField;
 	
 	@FXML
-	private JFXToggleButton selectionModeToggle;
-	
-	@FXML
-	private ToolBar libraryToolBar;
+	private HBox libraryToolBar;
 	
 	@FXML
 	private Button deleteLibrary;
@@ -93,10 +87,10 @@ public class LibraryMode extends BorderPane {
 	private Button openLibraryContextMenu;
 	
 	@FXML
-	private HBox botttomHBox;
+	private Label librariesInfoLabel;
 	
 	@FXML
-	private Label librariesInfoLabel;
+	private HBox botttomHBox;
 	
 	@FXML
 	private SplitPane bottomSplitPane;
@@ -194,7 +188,7 @@ public class LibraryMode extends BorderPane {
 						Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1, teamViewer.getViewer().getItemsObservableList().size(), null, false);
 						
 						// Add the library
-						currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
+						//currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
 						teamViewer.getViewer().addItem(currentLib, true);
 						
 						// Add a row on libraries table
@@ -298,6 +292,8 @@ public class LibraryMode extends BorderPane {
 		
 		//Initialise
 		teamViewer = new TeamViewer(this);
+		quickSearchTextField.visibleProperty().bind(teamViewer.getViewer().searchWordProperty().isEmpty().not());
+		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.getViewer().searchWordProperty()));
 		
 		// createLibrary
 		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
@@ -307,7 +303,7 @@ public class LibraryMode extends BorderPane {
 		newLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
-		selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.getViewer().goOnSelectionMode(newValue));
+		//selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.getViewer().goOnSelectionMode(newValue));
 		
 		// searchLibrary
 		botttomHBox.getChildren().add(librariesSearcher);
@@ -348,10 +344,9 @@ public class LibraryMode extends BorderPane {
 		
 		// -- openOrCloseLibrary 
 		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue != null) {
-				openOrCloseLibrary.textProperty()
-						.bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("CLOSE").otherwise("OPEN"));
-			} else {
+			if (newValue != null)
+				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("CLOSE").otherwise("OPEN"));
+			else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");
 			}
@@ -359,8 +354,7 @@ public class LibraryMode extends BorderPane {
 		
 		// -- openOrCloseLibrary
 		openOrCloseLibrary.disableProperty().bind(libraryToolBar.disabledProperty());
-		openOrCloseLibrary
-				.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().openLibrary(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
+		openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().openLibrary(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
 		
 		// -- settingsOfLibrary
 		//openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));

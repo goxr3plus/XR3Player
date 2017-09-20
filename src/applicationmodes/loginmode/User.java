@@ -301,20 +301,25 @@ public class User extends StackPane {
 	/**
 	 * This method is called when a key is released.
 	 *
-	 * @param e
+	 * @param key
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
-	public void onKeyReleased(KeyEvent e) {
+	public void onKeyReleased(KeyEvent key) {
 		if (Main.loginMode.userInformation.isShowing() || getPosition() != loginMode.teamViewer.getCenterIndex())
 			return;
 		
-		KeyCode code = e.getCode();
-		if (code == KeyCode.R)
-			renameUser(this);
-		else if (code == KeyCode.DELETE || code == KeyCode.D)
-			loginMode.deleteUser(this);
-		else if (code == KeyCode.E)
-			exportImage();
+		//Check if Control is down
+		if (key.isControlDown()) {
+			
+			KeyCode code = key.getCode();
+			if (code == KeyCode.R)
+				renameUser(this);
+			else if (code == KeyCode.DELETE || code == KeyCode.D)
+				loginMode.deleteUser(this);
+			else if (code == KeyCode.E)
+				exportImage();
+			
+		}
 	}
 	
 	//----------------------------------------About Images---------------------------------------------------------------

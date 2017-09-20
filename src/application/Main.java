@@ -85,7 +85,7 @@ import smartcontroller.presenter.SmartControllerSearcher.AdvancedSearch;
 import smartcontroller.services.MediaFilterService;
 import xplayer.presenter.XPlayersList;
 import xplayer.services.XPlayersFilterService;
-import xplayer.visualizer.view.VisualizerWindowController.Type;
+import xplayer.visualizer.presenter.VisualizerWindowController.Type;
 import xr3capture.CaptureWindow;
 
 /**
@@ -99,7 +99,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 86);
-		internalInformation.put("ReleasedDate", "?/09/2017");
+		internalInformation.put("ReleasedDate", "21/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -268,8 +268,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		width = 1380;
-		height = 800;
+		//width = 1380;
+		//height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -780,19 +780,19 @@ public class Main extends Application {
 			playListModesSplitPane.updateSplitPaneDivider();
 			libraryMode.updateTopSplitPaneDivider();
 			libraryMode.updateBottomSplitPaneDivider();
-			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)));
-			
+			//			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))
+			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)));
+			//			
 			//--General-Settings-DJMode
 			djMode.updateTopSplitPaneDivider();
 			djMode.updateBottomSplitPaneDivider();
 			//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
 			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
 			//			
-			//			//--Libraries-Settings
-			//			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
-			//					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
-			//			
+			//--Libraries-Settings
+			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
+					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
+			
 			//--Playlists-Settings-Search
 			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
 					.ifPresent(s -> settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));

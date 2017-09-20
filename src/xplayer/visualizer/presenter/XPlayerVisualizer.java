@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.visualizer.view;
+package xplayer.visualizer.presenter;
 
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;

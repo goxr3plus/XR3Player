@@ -430,7 +430,7 @@ public class DbManager {
 	public class DataLoader extends Service<Void> {
 		
 		/** The total. */
-		int total;
+		private int totalLibraries;
 		
 		/**
 		 * Constructor.
@@ -469,41 +469,34 @@ public class DbManager {
 			});
 		}
 		
-		//TODO-------------------Needs modification cause sometimes it violates JavaFX THREAD!!!!!!!!!!!!
 		@Override
 		protected Task<Void> createTask() {
 			return new Task<Void>() {
 				@Override
 				protected Void call() throws Exception {
-					
-					int total = 1;
-					updateProgress(0, total);
+					int totalSteps = 4;
 					
 					// -------------------------- Load all the libraries
 					try (ResultSet resultSet = getConnection().createStatement().executeQuery("SELECT* FROM LIBRARIES;");
-							ResultSet dbCounter = getConnection().createStatement().executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+							ResultSet dbCounter = getConnection().createStatement().executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
 						
-						total += dbCounter.getInt(1);
-						Main.logger.info("Loading Libraries....");
+						totalLibraries = dbCounter.getInt(1);
 						
 						// Refresh the text
-						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries..."));
-						updateProgress(1, 2);
+						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries....[ " + totalLibraries + " ]"));
 						
 						//Kepp a List of all Libraries
-						final List<Library> libraries = new ArrayList<>(total);
+						final List<Library> libraries = new ArrayList<>(totalLibraries);
 						
 						// Load all the libraries
-						while (resultSet.next()) {
-							
+						while (resultSet.next())
 							//Add the library to the List of Libraries
 							libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
 									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"),
 									resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
-							
-							//Update the Progress
-							updateProgress(resultSet.getRow() - 1, total);
-						}
+						
+						//Update the Progress
+						updateProgress(1, totalSteps);
 						
 						//Run of JavaFX Thread
 						Platform.runLater(() -> {
@@ -517,6 +510,9 @@ public class DbManager {
 							//Change Label Text
 							Main.updateScreen.getLabel().setText("Loading Opened Libraries...");
 						});
+						
+						//Update the Progress
+						updateProgress(2, totalSteps);
 						
 						//Load the Opened Libraries
 						loadOpenedLibraries();
@@ -533,12 +529,15 @@ public class DbManager {
 						});
 						
 						//Load PlayerMediaList
-						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading previous data..."));
+						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading database data..."));
 						Main.playedSongs.uploadFromDataBase();
 						Main.emotionListsController.hatedMediaList.uploadFromDataBase();
 						Main.emotionListsController.dislikedMediaList.uploadFromDataBase();
 						Main.emotionListsController.likedMediaList.uploadFromDataBase();
 						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
+						
+						//Update the Progress
+						updateProgress(3, totalSteps);
 						
 						Platform.runLater(() -> {
 							
@@ -575,8 +574,8 @@ public class DbManager {
 							
 						});
 						
-						//--FINISH
-						updateProgress(total, total);
+						//Update the Progress
+						updateProgress(4, 4);
 						
 					} catch (Exception ex) {
 						Main.logger.log(Level.SEVERE, "", ex);

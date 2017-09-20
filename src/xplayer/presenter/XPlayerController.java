@@ -73,9 +73,9 @@ import xplayer.streamplayer.Status;
 import xplayer.streamplayer.StreamPlayerEvent;
 import xplayer.streamplayer.StreamPlayerException;
 import xplayer.streamplayer.StreamPlayerListener;
-import xplayer.visualizer.view.VisualizerStackController;
-import xplayer.visualizer.view.VisualizerWindowController;
-import xplayer.visualizer.view.XPlayerVisualizer;
+import xplayer.visualizer.presenter.VisualizerStackController;
+import xplayer.visualizer.presenter.VisualizerWindowController;
+import xplayer.visualizer.presenter.XPlayerVisualizer;
 
 /**
  * Represents the graphical interface for the deck.

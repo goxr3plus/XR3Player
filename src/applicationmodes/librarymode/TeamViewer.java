@@ -10,10 +10,13 @@ import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
@@ -137,6 +140,10 @@ public class TeamViewer {
 		
 		private final Rectangle clip = new Rectangle();
 		
+		/** The pause transition. */
+		private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1.5));
+		private StringProperty searchWord = new SimpleStringProperty("");
+		
 		/**
 		 * Constructor
 		 * 
@@ -165,7 +172,30 @@ public class TeamViewer {
 					next();
 				else if (key.getCode() == KeyCode.LEFT)
 					previous();
+				else if (key.getCode() == KeyCode.BACK_SPACE)
+					searchWord.set("");
+				
+				//Local Search 
+				String keySmall = key.getText();
+				searchWord.set(searchWord.get() + keySmall);
+				pauseTransition.playFromStart();
+				//System.out.println("Search Word : " + searchWord);
+				
+				//Check if searchWord is empty
+				if (!searchWord.get().isEmpty()) {
+					boolean[] found = { false };
+					//Find the first matching item
+					getItemsObservableList().forEach(library -> {
+						if (library.getLibraryName().contains(searchWord.get()) && !found[0]) {
+							this.setCenterIndex(library.getPosition());
+							found[0] = true;
+						}
+					});
+				}
 			});
+			
+			// PauseTransition
+			pauseTransition.setOnFinished(f -> searchWord.set(""));
 			
 			// this.setOnMouseMoved(m -> {
 			//
@@ -621,6 +651,13 @@ public class TeamViewer {
 		 */
 		public Timeline getTimeline() {
 			return timeline;
+		}
+		
+		/**
+		 * @return the searchWord
+		 */
+		public StringProperty searchWordProperty() {
+			return searchWord;
 		}
 		
 	}
