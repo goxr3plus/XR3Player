@@ -19,7 +19,7 @@ Total Downloads on Github
 
 -------------------------------------------------------------------------------------
 
-## Update 86 Main Mode ( Coming soon , possibly after 21 September [ >21/09/2017] )
+## Update 86 Main Mode ( Will be released after [ 21~22/09/2017] )
 ![Main Mode](https://user-images.githubusercontent.com/20374208/30622630-7ddc87e0-9dbb-11e7-89e6-3b99595be4c2.png)
 
 
