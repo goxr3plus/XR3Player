@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -41,7 +41,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Natural%20User%20Interface%201-24.png" />
+                        <Image url="@../image/team.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -69,15 +69,53 @@
                   <Tooltip text="Restore defaults settings for the selected tab category" />
                </tooltip>
             </Button>
-            <TabPane id="SpecialTabPane" side="LEFT" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-              <tabs>
-                  <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General &gt;" />
-                <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists &gt;" />
-                  <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries &gt;" />
-                <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts &gt;" />
-                  <Tab closable="false" styleClass="sTab" text="XPlayers &gt;" fx:id="xPlayersTab" />
-              </tabs>
-            </TabPane>
+            <JFXTabPane styleClass="specialJFXTabPane">
+               <tabs>
+                  <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Tab>
+                <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/menu2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Tab>
+                  <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Library-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Tab>
+                <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/keyboard.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Tab>
+                  <Tab closable="false" styleClass="sTab" text="Players" fx:id="xPlayersTab">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/MusicRecord-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Tab>
+               </tabs>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXTabPane>
          </children>
       </VBox>
    </center>

@@ -14,6 +14,8 @@ import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
+import org.fxmisc.richtext.InlineCssTextArea;
+
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTabPane;
 
@@ -35,7 +37,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -78,7 +79,7 @@ public class SmartController extends StackPane {
 	private StackPane centerStackPane;
 	
 	@FXML
-	private Label detailsLabel;
+	private InlineCssTextArea detailCssTextArea;
 	
 	@FXML
 	private HBox searchBarHBox;
@@ -94,9 +95,6 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private TextField pageField;
-	
-	@FXML
-	private Label maximumPageLabel;
 	
 	@FXML
 	private Button goToPage;
@@ -481,10 +479,6 @@ public class SmartController extends StackPane {
 		// -- refreshButton
 		//refreshButton.setOnAction(e -> loadService.startService(false, true, false));
 		
-		// Update
-		updateLabel();
-		
-		
 		//---------------------Check the genre--------------------
 		if (genre == Genre.SEARCHWINDOW) {
 			navigationHBox.setVisible(false);
@@ -667,20 +661,73 @@ public class SmartController extends StackPane {
 		//		Main.libraryMode.updateLibraryTotalLabel(controllerName);
 	}
 	
+	private static final String style1 = "-fx-font-weight:bold; -fx-font-size:13; -fx-fill:#FF9000;";
+	private static final String style2 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:white;";
+	
 	/**
 	 * Updates the label of the smart controller. [[SuppressWarningsSpartan]]
 	 */
 	public void updateLabel() {
-		if (searchService.isActive() || genre == Genre.SEARCHWINDOW)
-			detailsLabel.setText(" Found<" + itemsObservableList.size() + "> first matching from Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> [ Selected<"
-					+ tableViewer.getSelectedCount() + "> MaxPerPage<" + maximumPerPage + "> ]");
-		else
-			detailsLabel.setText("Total<" + InfoTool.getNumberWithDots(totalInDataBase.get()) + "> [ Selected<" + tableViewer.getSelectedCount() + ">  Showing<"
-					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + "..."
-					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size()) + "> MaxPerPage<" + maximumPerPage + "> ]");
+		//System.out.println(this.getName() + " called UpdateLabel()");
 		
-		maximumPageLabel.setText(Integer.toString(getMaximumList()));
+		//Clear the text area
+		detailCssTextArea.clear();
+		
+		String total = "Total : ";
+		String _total = InfoTool.getNumberWithDots(totalInDataBase.get());
+		
+		String selected = "Selected : ";
+		String _selected = String.valueOf(tableViewer.getSelectedCount());
+		
+		String maxPerPage = "MaxPerPage : ";
+		String _maxPerPage = String.valueOf(maximumPerPage);
+		
+		//Search is Activated?
+		if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
+			
+			String found = "Found ";
+			String _found = String.valueOf(itemsObservableList.size());
+			
+			//Now set the Text
+			appendToDetails(found, _found, true, style1.replace("FF9000", "00BBFF"));
+			appendToDetails(total, _total, true, style1.replace("FF9000", "00E148"));
+			appendToDetails(selected, _selected, true, style1);
+			appendToDetails(maxPerPage, _maxPerPage, false, style1);
+			
+		} else {
+			
+			String showing = "Showing : ";
+			String _showing = InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + " ... "
+					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size());
+			
+			String maximumPage = "MaximumPage : ";
+			String _maximumPage = InfoTool.getNumberWithDots(getMaximumList());
+			
+			//Now set the Text
+			appendToDetails(total, _total, true, style1.replace("FF9000", "00E148"));
+			appendToDetails(selected, _selected, true, style1);
+			appendToDetails(showing, _showing, true, style1);
+			appendToDetails(maxPerPage, _maxPerPage, true, style1);
+			appendToDetails(maximumPage, _maximumPage, false, style1);
+			
+		}
+		
 		pageField.setText(Integer.toString(currentPage.get()));
+	}
+	
+	/**
+	 * This method is used from updateLabel() method to append Text to detailsCssTextArea
+	 * 
+	 * @param text1
+	 * @param text2
+	 * @param appendComma
+	 */
+	private void appendToDetails(String text1 , String text2 , boolean appendComma , String style1) {
+		detailCssTextArea.appendText(text1);
+		detailCssTextArea.setStyle(detailCssTextArea.getLength() - text1.length(), detailCssTextArea.getLength() - 1, style1);
+		
+		detailCssTextArea.appendText(text2 + " " + ( !appendComma ? "" : ", " ));
+		detailCssTextArea.setStyle(detailCssTextArea.getLength() - text2.length() - ( appendComma ? 3 : 1 ), detailCssTextArea.getLength() - 1, style2);
 	}
 	
 	/**

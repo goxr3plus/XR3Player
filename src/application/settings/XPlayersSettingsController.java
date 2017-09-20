@@ -10,7 +10,6 @@ import application.Main;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 
@@ -21,9 +20,6 @@ import javafx.scene.layout.BorderPane;
 public class XPlayersSettingsController extends BorderPane {
 	
 	/** -----------------------------------------------------. */
-	
-	@FXML
-	private Accordion accordion;
 	
 	@FXML
 	private JFXCheckBox showFPS;
@@ -71,9 +67,6 @@ public class XPlayersSettingsController extends BorderPane {
 	 */
 	@FXML
 	private void initialize() {
-		
-		//accordion
-		accordion.setExpandedPane(accordion.getPanes().get(1));
 		
 		// ShowFPS
 		showFPS.setOnAction(a -> {
@@ -131,7 +124,7 @@ public class XPlayersSettingsController extends BorderPane {
 		showPlayerNotifications.setSelected(false);
 		
 		// SkipSlider
-		secondsToSkipSlider.setValue(15);		
+		secondsToSkipSlider.setValue(15);
 	}
 	
 	/**

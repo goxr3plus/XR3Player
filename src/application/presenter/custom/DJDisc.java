@@ -395,7 +395,7 @@ public class DJDisc extends StackPane {
 	 *
 	 * @return The Current Volume Value
 	 */
-	public int getVolume() {
+	private int getVolume() {
 		return volumeLabel.getCurrentValue();
 	}
 	
@@ -404,7 +404,7 @@ public class DJDisc extends StackPane {
 	 *
 	 * @return The Maximum Volume allowed in the Disc
 	 */
-	public int getMaximumVolume() {
+	private int getMaximumVolume() {
 		
 		return maximumVolume;
 	}
@@ -509,7 +509,7 @@ public class DJDisc extends StackPane {
 	 * @param volume
 	 *            the new volume
 	 */
-	public void setVolume(int volume) {
+	private void setVolume(int volume) {
 		if (volume > -1 && volume < getMaximumVolume() + 1)
 			Platform.runLater(() -> volumeLabel.setCurrentValue(volume));
 		else if (volume < 0)
@@ -664,11 +664,11 @@ public class DJDisc extends StackPane {
 		setVolume(getVolume() - rotation);
 	}
 	
-	/**
-	 * @return the volumeLabel
-	 */
-	public DragAdjustableLabel getVolumeLabel() {
-		return volumeLabel;
-	}
+//	/**
+//	 * @return the volumeLabel
+//	 */
+//	public DragAdjustableLabel getVolumeLabel() {
+//		return volumeLabel;
+//	}
 	
 }

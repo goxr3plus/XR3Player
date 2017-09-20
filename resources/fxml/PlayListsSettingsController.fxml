@@ -3,153 +3,187 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
 <fx:root prefHeight="433.0" prefWidth="618.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
    <center>
-      <Accordion fx:id="accordion" BorderPane.alignment="CENTER">
-        <panes>
-          <TitledPane alignment="CENTER" minWidth="0.0" text="Search">
+      <JFXTabPane side="RIGHT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab text="Search ">
                <content>
-                  <GridPane>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
+                  <StackPane>
                      <children>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Instant Search " textAlignment="CENTER" wrapText="true">
-                           <tooltip>
-                              <Tooltip text="When you type inside PlayLists search fields the search will start immediatly without pressing enter" />
-                           </tooltip></Label>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Search Files Using" GridPane.rowIndex="1" GridPane.rowSpan="2" />
-                        <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                        <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Absolute Path (C:/../a.mp3) [ Faster ]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="fileSearchGroup" />
-                           </toggleGroup>
-                           <tooltip>
-                              <Tooltip text="It will return Files that contain the typed letters into their absolute path [Example -&gt; C:/../a.mp3 ]" />
-                           </tooltip>
-                        </JFXRadioButton>
-                        <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name( a.mp3)[ More accurate | Slower ]" textAlignment="CENTER" toggleGroup="$fileSearchGroup" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
-                           <tooltip>
-                              <Tooltip text="It will return only Files that have the typed letters inside their names [Example -&gt; a.mp3 ] " />
-                           </tooltip>
-                        </JFXRadioButton>
-                     </children>
-                  </GridPane>
-               </content>
-            </TitledPane>
-          <TitledPane alignment="CENTER" expanded="false" minWidth="0.0" text="Media Mode">
-               <content>
-                  <GridPane>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total Files shown" textAlignment="CENTER" wrapText="true">
-                           <tooltip>
-                              <Tooltip text="Choose the total number of files to be shown on playlists" />
-                           </tooltip>
-                        </Label>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Detect played files using" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                           <tooltip>
-                              <Tooltip text="Choose the way that the played files will be detected on playlists" />
-                           </tooltip>
-                        </Label>
-                        <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="Exact File Content (  More accurate | CPU costly )" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="playedFilesDetectionGroup" />
-                           </toggleGroup>
-                           <tooltip>
-                              <Tooltip text="Most accurate option but it is also consuming more Disk " />
-                           </tooltip>
-                        </JFXRadioButton>
-                        <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommended)" toggleGroup="$playedFilesDetectionGroup" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                           <tooltip>
-                              <Tooltip text="Not catching everything but it is not consuming too much disk" />
-                           </tooltip>
-                        </JFXRadioButton>
-                        <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Clear played files history" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
-                           <tooltip>
-                              <Tooltip text="Clear the History of played files " />
-                           </tooltip>
-                        </Label>
-                        <JFXButton fx:id="clearPlayedFilesHistory" alignment="CENTER" contentDisplay="CENTER" styleClass="arrowButton" text="Press here to clear" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
-                           <tooltip>
-                              <Tooltip text="All the history of played songs will be cleared [ Not from Players though..]" />
-                           </tooltip>
-                        </JFXButton>
-                        <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="50" GridPane.columnIndex="1">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="totalFilesShownGroup" />
-                           </toggleGroup>
-                        </JFXRadioButton>
-                        <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="100" toggleGroup="$totalFilesShownGroup" GridPane.columnIndex="2" />
-                     </children>
-                  </GridPane>
-               </content>
-            </TitledPane>
-            <TitledPane alignment="CENTER" expanded="false" layoutX="10.0" layoutY="32.0" minWidth="0.0" text="Associated Folders Mode">
-               <content>
-                  <GridPane>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="For which Media to show associated folders? [ Coming soon...]" textAlignment="CENTER" wrapText="true">
-                           <tooltip>
-                              <Tooltip text="Choose the total number of files to be shown on playlists" />
-                           </tooltip>
-                        </Label>
-                        <HBox alignment="CENTER" disable="true" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" styleClass="settingsRadioButton" text="Selected Items">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Instant Search " textAlignment="CENTER" wrapText="true">
+                                 <tooltip>
+                                    <Tooltip text="When you type inside PlayLists search fields the search will start immediatly without pressing enter" />
+                                 </tooltip>
+                              </Label>
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Search Files Using" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+                              <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Absolute Path (C:/../a.mp3) [ Faster ]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                  <toggleGroup>
-                                    <ToggleGroup fx:id="associatedFoldersMediaGroup" />
+                                    <ToggleGroup fx:id="fileSearchGroup" />
+                                 </toggleGroup>
+                                 <tooltip>
+                                    <Tooltip text="It will return Files that contain the typed letters into their absolute path [Example -&gt; C:/../a.mp3 ]" />
+                                 </tooltip>
+                              </JFXRadioButton>
+                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name( a.mp3)[ More accurate | Slower ]" textAlignment="CENTER" toggleGroup="$fileSearchGroup" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                 <tooltip>
+                                    <Tooltip text="It will return only Files that have the typed letters inside their names [Example -&gt; a.mp3 ] " />
+                                 </tooltip>
+                              </JFXRadioButton>
+                           </children>
+                        </GridPane>
+                     </children></StackPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/searchIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+            <Tab text="Media Mode">
+               <content>
+                  <StackPane>
+                     <children>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total Files shown" textAlignment="CENTER" wrapText="true">
+                                 <tooltip>
+                                    <Tooltip text="Choose the total number of files to be shown on playlists" />
+                                 </tooltip>
+                              </Label>
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Detect played files using" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                                 <tooltip>
+                                    <Tooltip text="Choose the way that the played files will be detected on playlists" />
+                                 </tooltip>
+                              </Label>
+                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="Exact File Content (  More accurate | CPU costly )" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="playedFilesDetectionGroup" />
+                                 </toggleGroup>
+                                 <tooltip>
+                                    <Tooltip text="Most accurate option but it is also consuming more Disk " />
+                                 </tooltip>
+                              </JFXRadioButton>
+                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommended)" toggleGroup="$playedFilesDetectionGroup" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                 <tooltip>
+                                    <Tooltip text="Not catching everything but it is not consuming too much disk" />
+                                 </tooltip>
+                              </JFXRadioButton>
+                              <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Clear played files history" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
+                                 <tooltip>
+                                    <Tooltip text="Clear the History of played files " />
+                                 </tooltip>
+                              </Label>
+                              <JFXButton fx:id="clearPlayedFilesHistory" alignment="CENTER" contentDisplay="CENTER" styleClass="arrowButton" text="Press here to clear" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                                 <tooltip>
+                                    <Tooltip text="All the history of played songs will be cleared [ Not from Players though..]" />
+                                 </tooltip>
+                              </JFXButton>
+                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="50" GridPane.columnIndex="1">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="totalFilesShownGroup" />
                                  </toggleGroup>
                               </JFXRadioButton>
-                              <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Current Page" toggleGroup="$associatedFoldersMediaGroup" />
-                              <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" selected="true" styleClass="settingsRadioButton" text="Everything on Playlist" toggleGroup="$associatedFoldersMediaGroup" />
+                              <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="100" toggleGroup="$totalFilesShownGroup" GridPane.columnIndex="2" />
                            </children>
-                        </HBox>
-                     </children>
-                  </GridPane>
+                        </GridPane>
+                     </children></StackPane>
                </content>
-            </TitledPane>
-        </panes>
-      </Accordion>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Playlist-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+            <Tab text="Folder Mode">
+               <content>
+                  <StackPane>
+                     <children>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="For which Media to show associated folders? [ Coming soon...]" textAlignment="CENTER" wrapText="true">
+                                 <tooltip>
+                                    <Tooltip text="Choose the total number of files to be shown on playlists" />
+                                 </tooltip>
+                              </Label>
+                              <HBox alignment="CENTER" disable="true" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                 <children>
+                                    <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" styleClass="settingsRadioButton" text="Selected Items">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="associatedFoldersMediaGroup" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Current Page" toggleGroup="$associatedFoldersMediaGroup" />
+                                    <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" selected="true" styleClass="settingsRadioButton" text="Everything on Playlist" toggleGroup="$associatedFoldersMediaGroup" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </children></StackPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Folder%20Tree-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
    </center>
 </fx:root>

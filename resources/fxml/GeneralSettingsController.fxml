@@ -46,7 +46,7 @@
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
             </JFXRadioButton>
-            <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No " GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <JFXRadioButton contentDisplay="BOTTOM" disable="true" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No " GridPane.columnIndex="1" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
@@ -54,12 +54,12 @@
                   <ToggleGroup fx:id="libraryModeUpsideDown" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <JFXRadioButton disable="true" focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
             </JFXRadioButton>
-            <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXRadioButton contentDisplay="BOTTOM" disable="true" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
@@ -67,20 +67,20 @@
                   <ToggleGroup fx:id="djModeUpsideDown" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <JFXRadioButton disable="true" focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
             </JFXRadioButton>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="DJ Mode Upside Down" GridPane.rowIndex="4">
+            <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="DJ Mode Upside Down    [ TODO BUG FIX ]" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="DJ Players will be shown on top or below the playlists" />
                </tooltip></Label>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Main Mode Upside Down" GridPane.rowIndex="3">
+            <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Main Mode Upside Down [ TODO BUG FIX ]" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="The Libraries will be shown on the top or below the playlists" />
                </tooltip></Label>
-            <Label alignment="CENTER" disable="true" layoutX="10.0" layoutY="110.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Animations Enabled (TODO)" GridPane.rowIndex="1">
+            <Label alignment="CENTER" disable="true" layoutX="10.0" layoutY="110.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Animations Enabled (TODO)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Determines if the animations for the application will be enabled or not" />
                </tooltip>

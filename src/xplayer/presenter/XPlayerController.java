@@ -17,6 +17,8 @@ import com.jfoenix.controls.JFXToggleButton;
 import application.Main;
 import application.presenter.custom.DJDisc;
 import application.presenter.custom.DJDiscListener;
+import application.presenter.custom.DJFilter;
+import application.presenter.custom.DJFilterListener;
 import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
@@ -33,6 +35,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -57,7 +60,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
@@ -78,7 +83,7 @@ import xplayer.visualizer.view.XPlayerVisualizer;
  *
  * @author GOXR3PLUS
  */
-public class XPlayerController extends StackPane implements DJDiscListener, StreamPlayerListener {
+public class XPlayerController extends StackPane implements DJFilterListener, StreamPlayerListener {
 	
 	public static final Image playImage = InfoTool.getImageFromResourcesFolder("play.png");
 	public static final Image pauseImage = InfoTool.getImageFromResourcesFolder("pause.png");
@@ -587,7 +592,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 * @return the volume
 	 */
 	public int getVolume() {
-		return disc.getVolume();
+		return (int) volumeDisc.getValue();
 	}
 	
 	/**
@@ -606,21 +611,21 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 *            the value
 	 */
 	public void adjustVolume(int value) {
-		disc.setVolume(disc.getVolume() + value);
+		volumeDisc.setValue(volumeDisc.getValue() + value);
 	}
 	
 	/**
 	 * Adjust the volume to the maximum value.
 	 */
 	public void maximizeVolume() {
-		disc.setVolume(disc.getMaximumVolume());
+		volumeDisc.setValue(volumeDisc.getMaximumValue());
 	}
 	
 	/**
 	 * Adjust the volume to the minimum value.
 	 */
 	public void minimizeVolume() {
-		disc.setVolume(0);
+		volumeDisc.setValue(0);
 	}
 	
 	/**
@@ -630,7 +635,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 *            the new volume
 	 */
 	public void setVolume(int value) {
-		disc.setVolume(value);
+		volumeDisc.setValue(value);
 	}
 	
 	/**
@@ -722,7 +727,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 			//
 			// }
 			// } else if (key == 0) {
-			xPlayer.setGain((double) disc.getVolume() / 100.00);
+			xPlayer.setGain((double) volumeDisc.getValue() / 100.00);
 			// }
 			
 		} catch (Exception ex) {
@@ -842,7 +847,7 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		// initialize
 		disc = new DJDisc(136, 136, color, volume, 125);
-		disc.addDJDiscListener(this);
+		//disc.addDJDiscListener(this);
 		
 		// radialMenu
 		//disc.getChildren().add(radialMenu.getRadialMenuButton());
@@ -907,13 +912,37 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		
 		//
 		//( (HBox) discBorderPane.getBottom() ).getChildren().add(0, disc.getTimeField());
-		( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, disc.getVolumeLabel());
+		
+		//---VBOX------
+		VBox vBox = new VBox();
+		
+		//---Label
+		volumeDiscLabel.getStyleClass().add("applicationSettingsLabel2");
+		volumeDiscLabel.setMinWidth(35);
+		volumeDiscLabel.setMaxWidth(35);
+		volumeDiscLabel.setTextAlignment(TextAlignment.CENTER);
+		volumeDiscLabel.setAlignment(Pos.CENTER);
+		//label.textProperty()
+		//.bind(Bindings.createStringBinding(() -> InfoTool.getMinString2(Double.toString(filter.currentValueProperty().get()), 4), filter.currentValueProperty()));
+		
+		//volumeDisc
+		volumeDisc.addDJDiscListener(this);
+		
+		//Add the Children
+		vBox.getChildren().addAll(volumeDisc, volumeDiscLabel);
+		vBox.setAlignment(Pos.CENTER);
+		
+		( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, vBox);
 		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
 		diskStackPane.getChildren().add(disc);
 		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
 		reCalculateCanvasSize();
 		
 	}
+	
+	//-----CustomDJFilter
+	Label volumeDiscLabel = new Label("45");
+	DJFilter volumeDisc = new DJFilter(30, 30, Color.MEDIUMSPRINGGREEN, 45, 0, 125);
 	
 	/**
 	 * Recalculates the Canvas size to the preferred size
@@ -1144,10 +1173,10 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 		}
 	}
 	
-	@Override
-	public void volumeChanged(int volume) {
-		controlVolume();
-	}
+	//	@Override
+	//	public void volumeChanged(int volume) {
+	//		controlVolume();
+	//	}
 	
 	/**
 	 * Replay the current song
@@ -1458,6 +1487,12 @@ public class XPlayerController extends StackPane implements DJDiscListener, Stre
 	 */
 	public XPlayerPlayService getPlayService() {
 		return playService;
+	}
+	
+	@Override
+	public void valueChanged(double value) {
+		volumeDiscLabel.setText(String.valueOf((int) value));
+		controlVolume();
 	}
 	
 }

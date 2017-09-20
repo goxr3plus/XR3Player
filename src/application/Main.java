@@ -98,8 +98,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 85);
-		internalInformation.put("ReleasedDate", "17/09/2017");
+		internalInformation.put("Version", 86);
+		internalInformation.put("ReleasedDate", "?/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -268,8 +268,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		//width = 1380;
-		//height = 800;
+		width = 1380;
+		height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -791,13 +791,13 @@ public class Main extends Application {
 			//--General-Settings-DJMode
 			djMode.updateTopSplitPaneDivider();
 			djMode.updateBottomSplitPaneDivider();
-			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
-			
-			//--Libraries-Settings
-			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
-					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
-			
+//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
+//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
+//			
+//			//--Libraries-Settings
+//			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
+//					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
+//			
 			//--Playlists-Settings-Search
 			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
 					.ifPresent(s -> settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));

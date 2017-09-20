@@ -1211,8 +1211,11 @@
 }
 
 .inline-css-text-area{
-	-fx-background-color:#202020;	
+	-fx-background-color:#151515 !important;	
+   
 }
+
+
 
 /*******************************************************************************
 

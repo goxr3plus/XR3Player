@@ -170,6 +170,8 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	private final SmartController smartController;
 	
+	private int previousSelectedCount = 0;
+	
 	/**
 	 * The selected row of the tableview , i need to impement this!
 	 */
@@ -222,9 +224,24 @@ public class MediaTableViewer extends TableView<Media> {
 		}
 		setPlaceholder(placeHolderLabel);
 		
-		//--Selection Model
+		//--Allow Multiple Selection
 		getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> smartController.updateLabel()); // Main.amazon.updateInformation((Media) newValue)
+		
+		getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> {
+			//System.out.println("Entered Selection Model Listener");
+			
+			//Hold the Current Selected Count
+			int currentSelectedCount = getSelectedCount();
+			
+			//Update the Label only if the current selected count != previousSelectedCount
+			if (previousSelectedCount != currentSelectedCount) {
+				previousSelectedCount = currentSelectedCount;
+				smartController.updateLabel();
+			}
+			
+		});
+		
+		//Update the Media Information when Selected Item changes
 		getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
 				Main.mediaInformation.updateInformation(newValue);

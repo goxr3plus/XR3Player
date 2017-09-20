@@ -14,7 +14,6 @@ import application.tools.JavaFXTools;
 import application.tools.NotificationType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -31,9 +30,6 @@ public class PlaylistsSettingsController extends BorderPane {
 	/** -----------------------------------------------------. */
 	
 	@FXML
-	private Accordion accordion;
-	
-	@FXML
 	private JFXCheckBox instantSearch;
 	
 	@FXML
@@ -43,10 +39,13 @@ public class PlaylistsSettingsController extends BorderPane {
 	private ToggleGroup playedFilesDetectionGroup;
 	
 	@FXML
+	private JFXButton clearPlayedFilesHistory;
+	
+	@FXML
 	private ToggleGroup totalFilesShownGroup;
 	
 	@FXML
-	private JFXButton clearPlayedFilesHistory;
+	private ToggleGroup associatedFoldersMediaGroup;
 	
 	// -------------------------------------------------------------
 	
@@ -76,9 +75,6 @@ public class PlaylistsSettingsController extends BorderPane {
 	 */
 	@FXML
 	private void initialize() {
-		
-		//accordion
-		accordion.setExpandedPane(accordion.getPanes().get(1));
 		
 		//--Playlists-Settings-Search--------------
 		

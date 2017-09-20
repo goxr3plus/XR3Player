@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
@@ -30,6 +31,9 @@ public class XPlayerEqualizer extends BorderPane {
 	
 	@FXML
 	private HBox bottomHBox;
+	
+	@FXML
+	private VBox sideVBox;
 	
 	@FXML
 	private Menu presets;
@@ -143,15 +147,67 @@ public class XPlayerEqualizer extends BorderPane {
 			djFilters.add(filter);
 		}
 		
+		//-------------------------- Extra Filters--------------------------
+		
+		// --------------------Pan Filter---------------------------------
+		//---VBOX------
+		VBox vBox = new VBox();
+		
+		//---Label
+		Label label = new Label("0.5");
+		label.getStyleClass().add("applicationSettingsLabel2");
+		label.setMinWidth(35);
+		label.setMaxWidth(35);
+		
+		//-----CustomDJFilter
+		DJFilter panFilter = new DJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0);
+		
+		//Add the Children
+		vBox.getChildren().addAll(panFilter, label);
+		
+		//Add VBox to TilePane
+		panFilter.addEventFilter(MouseEvent.MOUSE_DRAGGED, d -> {
+			label.setText(String.valueOf(panFilter.getValue()));
+			xPlayerController.getxPlayer().setPan(panFilter.getValue());
+		});
+		
+		// --------------------Balance Filter---------------------------------
+		
+		//---VBOX------
+		VBox vBox2 = new VBox();
+		
+		//---Label
+		Label label2 = new Label("0.5");
+		label2.getStyleClass().add("applicationSettingsLabel2");
+		label2.setMinWidth(35);
+		label2.setMaxWidth(35);
+		
+		//-----CustomDJFilter
+		DJFilter balanceFilter = new DJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0);
+		
+		//Add the Children
+		vBox2.getChildren().addAll(balanceFilter, label2);
+		
+		//Add VBox to TilePane
+		balanceFilter.addEventFilter(MouseEvent.MOUSE_DRAGGED, d -> {
+			label2.setText(String.valueOf(panFilter.getValue()));
+			xPlayerController.getxPlayer().setBalance((float) panFilter.getValue());
+		});
+		
+		sideVBox.getChildren().addAll(vBox, vBox2);
+		vBox.setDisable(true);
+		vBox2.setDisable(true);
+		
 		//resetFilers
 		resetFilters.setOnAction(action -> {
-			//			//Balance
-			//			balanceFilter.setAngle(100, 200);
-			//			xPlayerController.getxPlayer().setBalance((float) 0.0);
-			//			
-			//			//Pan
-			//			panFilter.setAngle(100, 200);
-			//			xPlayerController.getxPlayer().setPan(0.0);
+			//Balance
+//			panFilter.setValue(0.5);
+//			label.setText(value);
+//			xPlayerController.getxPlayer().setBalance((float) 0.0);
+//			
+//			//Pan
+//			panFilter.setAngle(100, 200);
+//			xPlayerController.getxPlayer().setPan(0.0);
 			
 			//Reset the equalizer
 			for (int i = 0; i < 32; i++)
@@ -167,24 +223,6 @@ public class XPlayerEqualizer extends BorderPane {
 		// Add all
 		presets.getItems().addAll(filterButtons);
 		
-		//-------------------------- Extra Filters--------------------------
-		
-		//		// -- panFilter
-		//		panFilter = new DJFilter(36, 36, Color.WHITE, Color.GOLD, Color.BLACK);
-		//		panFilter.setOnMouseDragged(drag -> {
-		//			panFilter.onMouseDragged(drag);
-		//			xPlayerController.getxPlayer().setPan(panFilter.getValue(200));
-		//		});
-		//		
-		//		// --balanceFilter
-		//		balanceFilter = new DJFilter(36, 36, Color.WHITE, Color.GOLD, Color.BLACK);
-		//		balanceFilter.setOnMouseDragged(drag -> {
-		//			balanceFilter.onMouseDragged(drag);
-		//			xPlayerController.getxPlayer().setBalance(balanceFilter.getValue(200));
-		//		});
-		
-		//tilePane.getChildren().add(0,balanceFilter);
-		//tilePane.getChildren().add(0, panFilter);
 	}
 	
 	/**
