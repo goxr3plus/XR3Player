@@ -19,14 +19,14 @@ Total Downloads on Github
 
 -------------------------------------------------------------------------------------
 
-## Update DJMode
+## Update 86 Main Mode
+![Main Mode](https://user-images.githubusercontent.com/20374208/30622630-7ddc87e0-9dbb-11e7-89e6-3b99595be4c2.png)
+
+
+## Update 85 DJMode
 ![DJMode](https://user-images.githubusercontent.com/20374208/30524938-c75c5e98-9c05-11e7-9c85-bf17f7f0a629.png)
 
-
-## Update Main Mode
-![Main Mode](https://user-images.githubusercontent.com/20374208/30448239-e38b7052-9996-11e7-9332-30ba75363eea.png)
-
-## Update Login Screen
+## Update 85 Login Screen
 ![Login Screen](https://user-images.githubusercontent.com/20374208/30524977-7c576248-9c06-11e7-8a6c-c5c1ced6530b.png)
 
 # Amazing Visualizations
