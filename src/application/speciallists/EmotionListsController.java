@@ -51,7 +51,7 @@ public class EmotionListsController {
 		
 		if (emotion == Emotion.HATE) {
 			
-			updateEmotion[0] = hatedMediaList.addIfNotExists(songPath, false);
+			updateEmotion[0] = hatedMediaList.add(songPath, false);
 			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
 			updateEmotion[2] = likedMediaList.remove(songPath, false);
 			updateEmotion[3] = lovedMediaList.remove(songPath, false);
@@ -59,7 +59,7 @@ public class EmotionListsController {
 		} else if (emotion == Emotion.DISLIKE) {
 			
 			updateEmotion[0] = hatedMediaList.remove(songPath, false);
-			updateEmotion[1] = dislikedMediaList.addIfNotExists(songPath, false);
+			updateEmotion[1] = dislikedMediaList.add(songPath, false);
 			updateEmotion[2] = likedMediaList.remove(songPath, false);
 			updateEmotion[3] = lovedMediaList.remove(songPath, false);
 			
@@ -74,7 +74,7 @@ public class EmotionListsController {
 			
 			updateEmotion[0] = hatedMediaList.remove(songPath, false);
 			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-			updateEmotion[2] = likedMediaList.addIfNotExists(songPath, false);
+			updateEmotion[2] = likedMediaList.add(songPath, false);
 			updateEmotion[3] = lovedMediaList.remove(songPath, false);
 			
 		} else if (emotion == Emotion.LOVE) {
@@ -82,7 +82,7 @@ public class EmotionListsController {
 			updateEmotion[0] = hatedMediaList.remove(songPath, false);
 			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
 			updateEmotion[2] = likedMediaList.remove(songPath, false);
-			updateEmotion[3] = lovedMediaList.addIfNotExists(songPath, false);
+			updateEmotion[3] = lovedMediaList.add(songPath, false);
 			
 		}
 		

@@ -11,8 +11,6 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
-import application.presenter.custom.SystemMonitor;
-import application.presenter.custom.SystemMonitor.Monitor;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.JavaFXTools;
@@ -24,7 +22,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 /**
  * The Top bar of the application Window.
@@ -54,9 +51,6 @@ public class TopBar extends BorderPane {
 	private MenuItem resetBackground;
 	
 	@FXML
-	private VBox monitorsVBox;
-	
-	@FXML
 	private Label xr3Label;
 	
 	@FXML
@@ -73,17 +67,14 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private Tab webModeTab;
-	
-	@FXML
-	private JFXTextField searchField;
+
 	
 	// ----------------------------------------------
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	private final SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
-	private final SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
+
 	
 	/**
 	 * The current Window Mode
@@ -144,27 +135,9 @@ public class TopBar extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		// -- searchField
-		searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
 		
-		// ----------------------------cpuMonitor
-		cpuMonitor.setOnMouseReleased(r -> {
-			if (cpuMonitor.isRunning())
-				cpuMonitor.stopUpdater();
-			else
-				cpuMonitor.restartUpdater();
-		});
 		
-		// ----------------------------ramMonitor
-		ramMonitor.setOnMouseReleased(r -> {
-			if (ramMonitor.isRunning())
-				ramMonitor.stopUpdater();
-			else
-				ramMonitor.restartUpdater();
-		});
-		
-		monitorsVBox.getChildren().addAll(cpuMonitor, ramMonitor);
-		
+
 		//---------------------------------------------------
 		
 		// restartButton
@@ -339,11 +312,5 @@ public class TopBar extends BorderPane {
 		return windowMode;
 	}
 	
-	/**
-	 * @return the searchField
-	 */
-	public JFXTextField getSearchField() {
-		return searchField;
-	}
 	
 }

@@ -292,7 +292,7 @@ public class SmartController extends StackPane {
 					else if (code == KeyCode.U) {
 						Media media = tableViewer.getSelectionModel().getSelectedItem();
 						if (!Main.playedSongs.containsFile(media.getFilePath()))
-							Main.playedSongs.addIfNotExists(media.getFilePath(), true);
+							Main.playedSongs.add(media.getFilePath(), true);
 						else
 							Main.playedSongs.remove(media.getFilePath(), true);
 					} else if (code == KeyCode.ENTER)

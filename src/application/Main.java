@@ -403,8 +403,8 @@ public class Main extends Application {
 		bottomBar.getKeyBindings().selectedProperty().bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
 		
 		//-------------TOP BAR--------------------
-		topBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
-		topBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
+		bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
+		bottomBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
 		
 	}
 	
@@ -514,8 +514,6 @@ public class Main extends Application {
 				ex.printStackTrace();
 			}
 			
-			
-			
 			//--------- Create the Menu Items of available users for Settings Window
 			loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !userr.getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
 				
@@ -565,11 +563,9 @@ public class Main extends Application {
 				settingsWindow.getCopySettingsMenuButton().getItems().add(menuItem);
 			});
 			
-					
 			//----Update the UserInformation properties file when the total libraries change
 			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
 					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
-				
 			
 			//Filter Thread (Inspecting the Files if existing)
 			new MediaFilterService().start();
@@ -578,8 +574,7 @@ public class Main extends Application {
 			//---------------END:Important Work-----------------------------------------------------------
 			
 			//This bitch doesn't work for some reason that i will find and smash his bitchy ass 
-			topBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
-			
+			bottomBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
 			
 			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
 			dbManager.loadApplicationDataBase();
@@ -791,13 +786,13 @@ public class Main extends Application {
 			//--General-Settings-DJMode
 			djMode.updateTopSplitPaneDivider();
 			djMode.updateBottomSplitPaneDivider();
-//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
-//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
-//			
-//			//--Libraries-Settings
-//			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
-//					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
-//			
+			//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
+			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
+			//			
+			//			//--Libraries-Settings
+			//			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
+			//					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
+			//			
 			//--Playlists-Settings-Search
 			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
 					.ifPresent(s -> settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));

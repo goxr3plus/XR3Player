@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="868.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="showSocialMedia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Social Media " visible="false">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/asc.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <JFXTextField fx:id="searchField" focusColor="#ff0f53" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" promptText="search..." style="-fx-text-fill: white;" unFocusColor="#ff3535" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </Button>
-      <JFXToggleButton fx:id="keyBindings" focusTraversable="false" layoutX="279.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      </JFXTextField>
+      <JFXToggleButton fx:id="keyBindings" focusTraversable="false" layoutX="279.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="143.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -126,6 +119,14 @@
          <tooltip>
             <Tooltip text="Total time the application is being alive" />
          </tooltip>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <padding>
+            <Insets left="4.0" right="4.0" />
+         </padding>
       </Label>
    </children>
 </fx:root>

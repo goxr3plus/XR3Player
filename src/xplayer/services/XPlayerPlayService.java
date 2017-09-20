@@ -232,8 +232,17 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		// add to played songs...
 		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
-		Main.playedSongs.addIfNotExists(absolutePath,true);
-		xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath)));
+		
+		//Run this on new Thread for performance reasons
+		new Thread(() -> {
+			
+			//Add to played songs
+			if (Main.playedSongs.add(absolutePath, true)) {
+				//Add to Player Playlist history
+				Platform.runLater(() -> xPlayerController.getxPlayerPlayList().getSmartController().getInputService().start(Arrays.asList(new File(absolutePath))));
+			}
+			
+		}).start();
 		
 		done();
 	}

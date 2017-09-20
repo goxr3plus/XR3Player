@@ -6,18 +6,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
+import application.presenter.custom.SystemMonitor;
+import application.presenter.custom.SystemMonitor.Monitor;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.InfoTool;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 /**
  * The BottomBar of the Application
@@ -28,9 +29,6 @@ import javafx.scene.paint.Color;
 public class BottomBar extends HBox {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private Button showSocialMedia;
 	
 	@FXML
 	private JFXToggleButton keyBindings;
@@ -50,6 +48,9 @@ public class BottomBar extends HBox {
 	@FXML
 	private Label runningTimeLabel;
 	
+	@FXML
+	private JFXTextField searchField;
+	
 	// -------------------------------------------------------------
 	
 	/** The logger. */
@@ -66,6 +67,10 @@ public class BottomBar extends HBox {
 	private Thread timeThread;
 	
 	private int minutes = -1;
+	
+	//System Monitors for CPU + RAM
+	private final SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
+	private final SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
 	
 	/**
 	 * Constructor.
@@ -177,7 +182,27 @@ public class BottomBar extends HBox {
 		//showHideSideBar
 		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> Main.sideBar.toogleBar());
 		
-		//showSocialMedia
+		// ----------------------------cpuMonitor
+		cpuMonitor.setOnMouseReleased(r -> {
+			if (cpuMonitor.isRunning())
+				cpuMonitor.stopUpdater();
+			else
+				cpuMonitor.restartUpdater();
+		});
+		
+		// ----------------------------ramMonitor
+		ramMonitor.setOnMouseReleased(r -> {
+			if (ramMonitor.isRunning())
+				ramMonitor.stopUpdater();
+			else
+				ramMonitor.restartUpdater();
+		});
+		
+		super.getChildren().add(cpuMonitor);
+		super.getChildren().add(ramMonitor);
+		
+		// -- searchField
+		searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
 	}
 	
 	/**
@@ -185,6 +210,13 @@ public class BottomBar extends HBox {
 	 */
 	public JFXToggleButton getKeyBindings() {
 		return keyBindings;
+	}
+	
+	/**
+	 * @return the searchField
+	 */
+	public JFXTextField getSearchField() {
+		return searchField;
 	}
 	
 }

@@ -16,7 +16,6 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import application.Main;
 import application.presenter.custom.DJDisc;
-import application.presenter.custom.DJDiscListener;
 import application.presenter.custom.DJFilter;
 import application.presenter.custom.DJFilterListener;
 import application.presenter.custom.Marquee;
@@ -977,16 +976,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		// Volume
 		controlVolume();
 		
-		// Sets Pan value. Line should be opened before calling this method.
-		// Linear scale : -1.0 <--> +1.0
-		//xPlayer.setPan(equalizer.getPanFilter().getValue(200));
-		
-		// Represents a control for the relative balance of a stereo signal
-		// between two stereo speakers. The valid range of values is -1.0 (left
-		// channel only) to 1.0 (right channel only). The default is 0.0
-		// (centered).
-		//xPlayer.setBalance(equalizer.getBalanceFilter().getValue(200));
-		
 		// Audio is MP3?
 		if (!"mp3".equals(xPlayerModel.songExtensionProperty().get()))
 			equalizer.setDisable(true);
@@ -994,6 +983,17 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			xPlayer.setEqualizer(xPlayerModel.getEqualizerArray(), 32);
 			equalizer.setDisable(false);
 		}
+		
+		// Sets Pan value. Line should be opened before calling this method.
+		// Linear scale : -1.0 <--> +1.0
+		xPlayer.setPan(equalizer.getPanFilter().getValueTransformed());
+		//System.out.println("Eq Pan value :" + equalizer.getPanFilter().getValueTransformed());
+		
+		// Represents a control for the relative balance of a stereo signal
+		// between two stereo speakers. The valid range of values is -1.0 (left
+		// channel only) to 1.0 (right channel only). The default is 0.0
+		// (centered).
+		//xPlayer.setBalance((float) equalizer.getBalanceFilter().getValueTransformed());
 		
 	}
 	

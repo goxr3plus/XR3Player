@@ -109,7 +109,7 @@ public class DatabaseList {
 	 *            the item
 	 * @return True if succeeded or False if not
 	 */
-	public boolean addIfNotExists(String item , boolean commit) {
+	public boolean add(String item , boolean commit) {
 		
 		if (set.add(item))
 			//Try to insert into the database
@@ -120,7 +120,7 @@ public class DatabaseList {
 				insert.setInt(3, 0);
 				insert.setString(4, InfoTool.getCurrentDate());
 				insert.setString(5, InfoTool.getLocalTime());
-				insert.executeUpdate();
+				System.out.println("AddIfNotExists : " + insert.executeUpdate());
 				
 				//Commit
 				if (commit)

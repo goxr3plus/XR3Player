@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -26,7 +25,7 @@
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <right>
-      <HBox style="-fx-spacing: 0.5;" BorderPane.alignment="CENTER">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-spacing: 0.5;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" spacing="1.0">
                <children>
@@ -95,27 +94,27 @@
          </opaqueInsets>
       </HBox>
    </right>
-   <left>
-      <VBox fx:id="monitorsVBox" alignment="CENTER" prefHeight="37.0" prefWidth="90.0" spacing="5.0" BorderPane.alignment="CENTER" />
-   </left>
    <center>
-      <BorderPane BorderPane.alignment="CENTER">
-         <center>
-            <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR3Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
-               <effect>
-                  <DropShadow />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="MOVE" />
-               </cursor>
-            </Label>
-         </center>
-         <left>
-            <JFXTabPane fx:id="jfxTabPane" maxWidth="301.0" minWidth="100.0" prefHeight="34.0" prefWidth="301.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR3Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="MOVE" />
+         </cursor>
+         <BorderPane.margin>
+            <Insets right="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </center>
+   <left>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="399.0" minHeight="-Infinity" minWidth="100.0" prefHeight="42.0" prefWidth="339.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS">
                <tabs>
                   <Tab fx:id="mainModeTab" text="Main">
                      <graphic>
-                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/Library-32.png" />
                            </image>
@@ -127,7 +126,7 @@
                   </Tab>
                   <Tab fx:id="djModeTab" text="DJ">
                      <graphic>
-                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/MusicRecord-32.png" />
                            </image>
@@ -139,7 +138,7 @@
                   </Tab>
                   <Tab fx:id="userModeTab" text="User">
                      <graphic>
-                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/team.png" />
                            </image>
@@ -148,7 +147,7 @@
                   </Tab>
                   <Tab fx:id="webModeTab" text="Web">
                      <graphic>
-                        <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/Globe-32.png" />
                            </image>
@@ -156,24 +155,8 @@
                      </graphic>
                   </Tab>
                </tabs>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
             </JFXTabPane>
-         </left>
-         <right>
-            <JFXTextField fx:id="searchField" focusColor="#ff0f53" focusTraversable="false" maxWidth="196.0" minWidth="138.0" prefHeight="31.0" prefWidth="196.0" promptText="search..." style="-fx-text-fill: white;" unFocusColor="#ff3535" BorderPane.alignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <BorderPane.margin>
-                  <Insets left="5.0" />
-               </BorderPane.margin>
-            </JFXTextField>
-         </right>
-         <BorderPane.margin>
-            <Insets left="5.0" right="5.0" />
-         </BorderPane.margin>
-      </BorderPane>
-   </center>
+         </children>
+      </HBox>
+   </left>
 </fx:root>
