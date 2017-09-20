@@ -20,8 +20,8 @@ Total Downloads on Github
 
 -------------------------------------------------------------------------------------
 
-## Update 86 Main Mode ( Will be released after [ 21~22/09/2017] )
-![Main Mode](https://user-images.githubusercontent.com/20374208/30622630-7ddc87e0-9dbb-11e7-89e6-3b99595be4c2.png)
+## Update 86 Main Mode
+![Main Mode](https://user-images.githubusercontent.com/20374208/30670989-64eb141a-9e6d-11e7-9887-5300d5edd6e1.png)
 
 
 ## Update 85 DJMode
