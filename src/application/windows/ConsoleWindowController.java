@@ -1,6 +1,6 @@
 /**
- * 
- */
+ *  OOUUUUUUUUU PARTYYYYYYYYYYYYYYYYYYYYY!
+ */ 
 package application.windows;
 
 import java.io.IOException;
@@ -11,9 +11,11 @@ import java.util.regex.Pattern;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
+import application.consoleandspeech.SpeechRecognition;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -36,6 +38,9 @@ import xplayer.presenter.XPlayerController;
 public class ConsoleWindowController extends StackPane {
 	
 	@FXML
+	private JFXTabPane tabPane;
+	
+	@FXML
 	private BorderPane borderPane;
 	
 	@FXML
@@ -50,18 +55,20 @@ public class ConsoleWindowController extends StackPane {
 	@FXML
 	private Button help;
 	
-	//@FXML
-	//private MaskerPane maskerPane
-	
 	//--------------------------------------------------------
 	
-	InlineCssTextArea cssTextArea = new InlineCssTextArea();
+	private final InlineCssTextArea cssTextArea = new InlineCssTextArea();
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	/** The Window */
 	private Stage window = new Stage();
+	
+	/**
+	 * The Speech Recognition of the Application
+	 */
+	private SpeechRecognition speechRecognition = new SpeechRecognition();
 	
 	/**
 	 * Constructor
@@ -98,11 +105,11 @@ public class ConsoleWindowController extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//CSS TEXT AREA	
-		cssTextArea.setStyle("-fx-background-color:black;");
-		cssTextArea.setWrapText(true);
+		//-- cssTextArea	
 		cssTextArea.setEditable(false);
 		cssTextArea.setFocusTraversable(false);
+		cssTextArea.getStyleClass().add("inline-css-text-area");
+		
 		String t = "Click or type Help to open the app manual\n";
 		cssTextArea.appendText(t);
 		cssTextArea.setStyle(0, t.length(), "-fx-fill:yellow; -fx-font-weight:bold; -fx-font-size:15;");
@@ -125,16 +132,8 @@ public class ConsoleWindowController extends StackPane {
 		//help
 		help.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 		
-	}
-	
-	/**
-	 * Show the Window
-	 */
-	public void show() {
-		if (!window.isShowing())
-			window.show();
-		else
-			window.requestFocus();
+		//Add SpeechRecognition
+		tabPane.getTabs().get(1).setContent(this.speechRecognition);
 	}
 	
 	Pattern pattern1 = Pattern.compile("player:[-|+]?\\d+:\\w+");
@@ -274,6 +273,7 @@ public class ConsoleWindowController extends StackPane {
 		
 		cssTextArea.moveTo(cssTextArea.getLength());
 		cssTextArea.requestFollowCaret();
+		
 	}
 	
 	/**
@@ -281,6 +281,23 @@ public class ConsoleWindowController extends StackPane {
 	 */
 	public Stage getWindow() {
 		return window;
+	}
+	
+	/**
+	 * @return the speechRecognition
+	 */
+	public SpeechRecognition getSpeechRecognition() {
+		return speechRecognition;
+	}
+	
+	/**
+	 * Show the Window
+	 */
+	public void show() {
+		if (!window.isShowing())
+			window.show();
+		else
+			window.requestFocus();
 	}
 	
 }

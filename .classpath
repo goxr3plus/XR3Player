@@ -7,18 +7,15 @@
 	<classpathentry kind="lib" path="libraries/commons-io-2.5.jar" sourcepath="C:/Users/GOXR3P~1/AppData/Local/Temp/decompiler/source/commons-io-2.5-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/commons-validator-1.6.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/commons-validator-1.6-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/easybind-1.0.3.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/easybind-1.0.3-sources.jar"/>
-	<classpathentry kind="lib" path="libraries/Enzo-0.3.6.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/Enzo-0.3.6-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/jaudiotagger-2.2.6-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="libraries/javasysmon-0.3.5.0.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/javasysmon-0.3.5.0-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/jlayer-1.0.1.4.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/jlayer-1.0.1.4-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/jmactritonusspi1.74.jar"/>
 	<classpathentry kind="lib" path="libraries/jnativehook-2.1.0.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/jnativehook-2.1.0-sources.jar"/>
-	<classpathentry kind="lib" path="libraries/jplaylistparser-0.9.0.jar"/>
 	<classpathentry kind="lib" path="libraries/json-simple-2.1.2.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/json-simple-2.1.2-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/jsoup-1.10.3.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/jsoup-1.10.3-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/jspeex0.9.7.jar"/>
 	<classpathentry kind="lib" path="libraries/junique-1.0.4.jar"/>
-	<classpathentry kind="lib" path="libraries/mp3agic-0.9.0.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/mp3agic-0.9.0-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/mp3spi1.9.5.jar"/>
 	<classpathentry kind="lib" path="libraries/richtextfx-fat-0.7-M5.jar"/>
 	<classpathentry kind="lib" path="libraries/tritonus-share-0.3.7.4.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/tritonus-share-0.3.7.4-sources.jar"/>
@@ -27,5 +24,11 @@
 	<classpathentry kind="lib" path="libraries/jfoenix.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/jfoenix-1.7.0-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/sqlite-jdbc-3.20.0.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/sqlite-jdbc-3.20.0-sources.jar"/>
 	<classpathentry kind="lib" path="libraries/jflac-codec-1.5.2.jar" sourcepath="C:/Users/GOXR3PLUS/.sourceattacher/jflac-codec-1.5.2-sources.jar"/>
+	<classpathentry kind="lib" path="libraries/java-speech-api-1.13.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libraries/java-flac-encoder-0.3.7.jar"/>
+	<classpathentry kind="lib" path="libraries/json-20150729.jar"/>
+	<classpathentry kind="lib" path="libraries/Enzo-0.3.6.jar"/>
+	<classpathentry kind="lib" path="testinglibraries/jplaylistparser-0.9.0.jar"/>
+	<classpathentry kind="lib" path="testinglibraries/mp3agic-0.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -120,7 +120,7 @@ public class DatabaseList {
 				insert.setInt(3, 0);
 				insert.setString(4, InfoTool.getCurrentDate());
 				insert.setString(5, InfoTool.getLocalTime());
-				System.out.println("AddIfNotExists : " + insert.executeUpdate());
+				insert.executeUpdate();
 				
 				//Commit
 				if (commit)

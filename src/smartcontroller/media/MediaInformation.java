@@ -285,7 +285,7 @@ public class MediaInformation extends BorderPane {
 						File file = new File(media.getFilePath());
 						
 						//---------------------MP3--------------------------------------
-						if ("mp3".equals(media.fileTypeProperty().get()) && file.exists()) {
+						if ("mp3".equals(media.fileTypeProperty().get()) && file.exists() && file.length() != 0) {
 							MP3AudioHeader mp3Header = new MP3File(file).getMP3AudioHeader();
 							
 							_sampleRate = mp3Header.getSampleRate();

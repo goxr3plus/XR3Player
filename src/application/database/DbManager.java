@@ -483,17 +483,24 @@ public class DbManager {
 						totalLibraries = dbCounter.getInt(1);
 						
 						// Refresh the text
-						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries....[ " + totalLibraries + " ]"));
+						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries....[ 0 / " + totalLibraries + " ]"));
 						
 						//Kepp a List of all Libraries
 						final List<Library> libraries = new ArrayList<>(totalLibraries);
+						int[] counter = { 0 };
 						
 						// Load all the libraries
-						while (resultSet.next())
+						while (resultSet.next()) {
 							//Add the library to the List of Libraries
 							libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
 									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"),
 									resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
+							
+							//Change Label Text
+							++counter[0];
+							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries... [ " + counter[0] + " / " + totalLibraries + " ]"));
+							
+						}
 						
 						//Update the Progress
 						updateProgress(1, totalSteps);

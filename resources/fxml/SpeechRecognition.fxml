@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<fx:root prefHeight="282.0" prefWidth="529.0" stylesheets="@../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <BorderPane fx:id="borderPane">
+         <bottom>
+            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="868.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXToggleButton fx:id="activateSpeechRecognition" focusTraversable="false" layoutX="279.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Start Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</fx:root>

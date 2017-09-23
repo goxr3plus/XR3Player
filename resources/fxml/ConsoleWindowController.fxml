@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
 <fx:root prefHeight="432.0" prefWidth="600.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
+      <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
+         <tabs>
           <Tab closable="false" text="Console">
                <content>
                   <BorderPane fx:id="borderPane">
                      <bottom>
-                        <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" spacing="2.0" BorderPane.alignment="CENTER">
                            <children>
                               <JFXTextField fx:id="commandTextField" promptText="Type Command and Press Enter..." style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
-                              <Button fx:id="go" focusTraversable="false" layoutX="498.0" layoutY="11.0" mnemonicParsing="false" text="Run it!">
+                              <Button fx:id="go" focusTraversable="false" layoutX="498.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Run ">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -30,7 +32,7 @@
                                     <Tooltip text="Close the Window" />
                                  </tooltip>
                               </Button>
-                              <Button fx:id="close" focusTraversable="false" mnemonicParsing="false" text="Close">
+                              <Button fx:id="close" focusTraversable="false" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Close">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -38,7 +40,7 @@
                                     <Tooltip text="Close the Window" />
                                  </tooltip>
                               </Button>
-                              <Button fx:id="help" focusTraversable="false" layoutX="556.0" layoutY="11.0" mnemonicParsing="false" text="Help">
+                              <Button fx:id="help" focusTraversable="false" layoutX="556.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Help">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -54,9 +56,23 @@
                      </bottom>
                   </BorderPane>
                </content>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Console-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
           </Tab>
-          <Tab closable="false" disable="true" text="Speech Recognition" />
-        </tabs>
-      </TabPane>
+          <Tab closable="false" text="Speech Recognition Console">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/voiceRecognition.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Tab>
+         </tabs>
+      </JFXTabPane>
    </children>
 </fx:root>

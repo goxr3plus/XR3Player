@@ -98,8 +98,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 86);
-		internalInformation.put("ReleasedDate", "21/09/2017");
+		internalInformation.put("Version", 87);
+		internalInformation.put("ReleasedDate", "?/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}

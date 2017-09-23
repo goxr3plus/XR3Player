@@ -43,7 +43,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import smartcontroller.enums.Genre;
 import smartcontroller.presenter.SmartController;
@@ -424,7 +423,7 @@ public class Library extends StackPane {
 		// imageView.fitHeightProperty().bind(this.prefHeightProperty())
 		
 		// Clip
-		Rectangle rect = new Rectangle();
+		//Rectangle rect = new Rectangle();
 		//rect.widthProperty().bind(widthProperty());
 		//rect.heightProperty().bind(heightProperty());
 		//rect.setArcWidth(30);
