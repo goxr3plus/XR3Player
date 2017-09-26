@@ -39,7 +39,7 @@
                         <StackPane fx:id="usersStackView" BorderPane.alignment="CENTER">
                            <children>
                               <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="192.0" StackPane.alignment="BOTTOM_CENTER" />
-                              <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New User +">
+                              <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" text="+Create New User +">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -85,17 +85,17 @@
                                                   <items>
                                                       <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="segmented-button-bar">
                                                          <children>
-                                                            <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" styleClass="first" text="Delete ">
+                                                            <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="35.0" styleClass="first" text="Delete ">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </Button>
-                                                            <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" text="Rename">
+                                                            <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" text="Rename">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </Button>
-                                                            <Button fx:id="loginButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" style="-fx-font-size: 16;" text="Login " textAlignment="CENTER" wrapText="true">
+                                                            <Button fx:id="loginButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="37.0" style="-fx-font-size: 16;" text="Login " textAlignment="CENTER" wrapText="true">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
@@ -261,9 +261,9 @@
                   </Hyperlink>
                </graphic>
             </Label>
-            <VBox fx:id="downloadsVBox" prefHeight="200.0" prefWidth="100.0" style="-fx-font-size: 9;">
+            <VBox fx:id="downloadsVBox" style="-fx-font-size: 9;">
                <children>
-                  <Label fx:id="sourceForgeDownloadsLabel1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="sourceForgeDownloadsLabel1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -271,7 +271,7 @@
                         <Insets left="4.0" right="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sourceForgeDownloadsLabel" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Sourceforge :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                  <Label fx:id="sourceForgeDownloadsLabel" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Sourceforge :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -279,7 +279,7 @@
                         <Insets left="4.0" right="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="gitHubDownloadsLabel" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="200.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="GitHub :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                  <Label fx:id="gitHubDownloadsLabel" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="GitHub :" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -306,7 +306,7 @@
                   <Insets bottom="2.0" />
                </padding>
             </Label>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="123.0" spacing="3.0" style="-fx-background-color: #151515;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0" style="-fx-background-color: #151515;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>

@@ -1,7 +1,17 @@
 package smartcontroller.services;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileVisitOption;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -9,6 +19,7 @@ import java.util.stream.Stream;
 
 import application.Main;
 import application.presenter.treeview.TreeItemFile;
+import application.tools.InfoTool;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -26,6 +37,7 @@ public class FoldersModeService extends Service<Void> {
 	
 	private int count;
 	private int total;
+	private Thread thread;
 	
 	/**
 	 * Constructor
@@ -127,13 +139,37 @@ public class FoldersModeService extends Service<Void> {
 						//Add all the items
 						set.forEach(item -> {
 							TreeItemFile treeItem = new TreeItemFile(item);
-							treeItem.setValue(treeItem.getValue() + " [ " + item + " ]");
+							treeItem.setValue(treeItem.getValue());
 							smartControllerFoldersMode.getRoot().getChildren().add(treeItem);
 							
 						});
 						
 						//Define if details label will be visible or not
 						smartControllerFoldersMode.getDetailsLabel().setVisible(set.isEmpty());
+						
+						//Count how many files each folder has
+						new Thread(() -> {
+							//Trick to exit the Thread :)
+							boolean[] exitThread = { false };
+							
+							smartControllerFoldersMode.getRoot().getChildren().forEach(treeItem -> {
+								if (!exitThread[0]) {
+									
+									//Count the Files
+									int countFiles = countFiles(new File( ( (TreeItemFile) treeItem ).getFullPath()));
+									
+									//If it returns -1 it mean get the hell out of here and stop this Thread
+									if (countFiles == -1)
+										exitThread[0] = true;
+									
+									//Run this later
+									Platform.runLater(() -> treeItem.setValue(
+											treeItem.getValue() + " (" + InfoTool.getNumberWithDots(countFiles) + ") " + " [ " + ( (TreeItemFile) treeItem ).getFullPath() + " ]"));
+								}
+							});
+							
+							System.out.println("FolderMode Counting Files Thread exited!");
+						}).start();
 						
 					});
 					
@@ -143,6 +179,59 @@ public class FoldersModeService extends Service<Void> {
 				}
 				
 				return null;
+			}
+			
+			/**
+			 * Count files in a directory (including files in all sub directories)
+			 * 
+			 * @param directory
+			 *            the directory to start in
+			 * @return the total number of files
+			 */
+			int countFiles(File dir) {
+				int[] count = { 0 };
+				
+				if (dir.exists())
+					try {
+						Files.walkFileTree(Paths.get(dir.getPath()), new HashSet<FileVisitOption>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE,
+								new SimpleFileVisitor<Path>() {
+									@Override
+									public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
+										
+										//System.out.println("It is symbolic link?"+Files.isSymbolicLink(file));
+										
+										if (InfoTool.isAudioSupported(file + ""))
+											++count[0];
+										
+										if (isCancelled() || Thread.interrupted()) {
+											count[0] = -1;
+											return FileVisitResult.TERMINATE;
+										} else
+											return FileVisitResult.CONTINUE;
+									}
+									
+									@Override
+									public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
+										System.err.printf("Visiting failed for %s\n", file);
+										
+										return FileVisitResult.SKIP_SUBTREE;
+									}
+									
+									@Override
+									public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs) throws IOException {
+										if (isCancelled() || Thread.interrupted()) {
+											count[0] = -1;
+											return FileVisitResult.TERMINATE;
+										} else
+											return FileVisitResult.CONTINUE;
+									}
+								});
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
+				//System.out.println("Total Files=" + count[0]);
+				return count[0];
 			}
 			
 		};

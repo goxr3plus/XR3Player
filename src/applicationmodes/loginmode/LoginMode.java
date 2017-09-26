@@ -297,7 +297,7 @@ public class LoginMode extends BorderPane {
 			
 		}
 		
-		//Initialise
+		//Initialize
 		teamViewer = new Viewer(horizontalScrollBar);
 		quickSearchTextField.visibleProperty().bind(teamViewer.searchWordProperty().isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.searchWordProperty()));
@@ -327,8 +327,8 @@ public class LoginMode extends BorderPane {
 				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
 				
 				//throw new IOException("Exception get out of the building!!!")
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception ex) {
+				ex.printStackTrace();
 				Platform.runLater(() -> {
 					downloadsVBox.setManaged(false);
 					downloadsVBox.setVisible(false);

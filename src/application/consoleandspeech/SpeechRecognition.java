@@ -168,4 +168,11 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 			System.out.println("Output was null");
 	}
 	
+	/**
+	 * @return the activateSpeechRecognition
+	 */
+	public JFXToggleButton getActivateSpeechRecognition() {
+		return activateSpeechRecognition;
+	}
+	
 }

@@ -76,6 +76,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import smartcontroller.enums.Genre;
 import smartcontroller.media.MediaInformation;
@@ -99,7 +100,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 87);
-		internalInformation.put("ReleasedDate", "?/09/2017");
+		internalInformation.put("ReleasedDate", "30/09/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -256,6 +257,11 @@ public class Main extends Application {
 	
 	public static JFXTabPane specialJFXTabPane = new JFXTabPane();
 	
+	private static void handle(WindowEvent exit) {
+		confirmApplicationExit();
+		exit.consume();
+	}
+	
 	// --------------END: The below have depencities on others------------------------
 	
 	@Override
@@ -275,10 +281,7 @@ public class Main extends Application {
 		window.centerOnScreen();
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
-		window.setOnCloseRequest(exit -> {
-			confirmApplicationExit();
-			exit.consume();
-		});
+		window.setOnCloseRequest(Main::handle);
 		
 		// Create BorderlessScene 
 		final int screenMinWidth = 800 , screenMinHeight = 600;
@@ -401,6 +404,7 @@ public class Main extends Application {
 		
 		//----------Bottom Bar----------------
 		bottomBar.getKeyBindings().selectedProperty().bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
+		bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
 		
 		//-------------TOP BAR--------------------
 		bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());

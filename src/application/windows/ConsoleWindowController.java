@@ -1,6 +1,6 @@
 /**
- *  OOUUUUUUUUU PARTYYYYYYYYYYYYYYYYYYYYY!
- */ 
+ * OOUUUUUUUUU PARTYYYYYYYYYYYYYYYYYYYYY!
+ */
 package application.windows;
 
 import java.io.IOException;
@@ -69,6 +69,14 @@ public class ConsoleWindowController extends StackPane {
 	 * The Speech Recognition of the Application
 	 */
 	private SpeechRecognition speechRecognition = new SpeechRecognition();
+	
+	/**
+	 * @author GOXR3PLUS
+	 *
+	 */
+	public enum ConsoleTab {
+		CONSOLE, SPEECH_RECOGNITION;
+	}
 	
 	/**
 	 * Constructor
@@ -298,6 +306,24 @@ public class ConsoleWindowController extends StackPane {
 			window.show();
 		else
 			window.requestFocus();
+	}
+	
+	/**
+	 * Shows the Window.
+	 * 
+	 * @param settingsTab
+	 *            The default tab you want to be selected when the window is shown
+	 */
+	public void showWindow(ConsoleTab consoleTab) {
+		
+		if (consoleTab == ConsoleTab.CONSOLE) {
+			tabPane.getSelectionModel().select(0);
+		} else if (consoleTab == ConsoleTab.SPEECH_RECOGNITION) {
+			tabPane.getSelectionModel().select(1);
+			
+		}
+		
+		window.show();
 	}
 	
 }

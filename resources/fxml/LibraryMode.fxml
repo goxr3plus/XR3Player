@@ -24,7 +24,7 @@
                   <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
                      <children>
                         <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="175.0" StackPane.alignment="BOTTOM_CENTER" />
-                        <Button fx:id="newLibrary" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="160.0" text="+Create New Library +">
+                        <Button fx:id="newLibrary" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" text="+Create New Library +">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -44,17 +44,17 @@
                      <center>
                         <HBox fx:id="libraryToolBar" alignment="CENTER" prefHeight="45.0" styleClass="segmented-button-bar" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" style="-fx-font-size: 12;" styleClass="first" text="Delete">
+                              <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" style="-fx-font-size: 12;" styleClass="first" text="Delete">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" style="-fx-font-size: 12;" text="Rename">
+                              <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" style="-fx-font-size: 12;" text="Rename">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="OPEN" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" text="OPEN" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -79,7 +79,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                    <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
                                              <image>

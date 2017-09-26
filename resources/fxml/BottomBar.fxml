@@ -17,7 +17,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXTextField>
-      <JFXToggleButton fx:id="keyBindings" focusTraversable="false" layoutX="279.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="143.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      <JFXToggleButton fx:id="speechRecognitionToggle" focusTraversable="false" layoutX="149.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="292.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <padding>
+            <Insets left="4.0" right="4.0" />
+         </padding>
+         <tooltip>
+            <Tooltip text="Can application connect to internet" />
+         </tooltip>
+      </Label>
+      <JFXToggleButton fx:id="keyBindings" focusTraversable="false" layoutX="279.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -29,7 +41,7 @@
             <Tooltip text="Can application connect to internet" />
          </tooltip>
       </Label>
-      <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -119,14 +131,6 @@
          <tooltip>
             <Tooltip text="Total time the application is being alive" />
          </tooltip>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
       </Label>
    </children>
 </fx:root>

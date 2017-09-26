@@ -108,9 +108,9 @@
       </Label>
    </center>
    <left>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" minWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="399.0" minHeight="-Infinity" minWidth="100.0" prefHeight="42.0" prefWidth="339.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS">
+            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="42.0" prefWidth="350.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS" HBox.hgrow="ALWAYS">
                <tabs>
                   <Tab fx:id="mainModeTab" text="Main">
                      <graphic>

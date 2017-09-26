@@ -14,6 +14,7 @@ import application.presenter.custom.SystemMonitor;
 import application.presenter.custom.SystemMonitor.Monitor;
 import application.settings.ApplicationSettingsController.SettingsTab;
 import application.tools.InfoTool;
+import application.windows.ConsoleWindowController.ConsoleTab;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,12 @@ import javafx.scene.layout.HBox;
 public class BottomBar extends HBox {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private JFXTextField searchField;
+	
+	@FXML
+	private JFXToggleButton speechRecognitionToggle;
 	
 	@FXML
 	private JFXToggleButton keyBindings;
@@ -47,9 +54,6 @@ public class BottomBar extends HBox {
 	
 	@FXML
 	private Label runningTimeLabel;
-	
-	@FXML
-	private JFXTextField searchField;
 	
 	// -------------------------------------------------------------
 	
@@ -175,6 +179,9 @@ public class BottomBar extends HBox {
 		//keyBindingsLabel
 		keyBindings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.SHORTCUTS));
 		
+		//SpeechRecognitionToggle
+		speechRecognitionToggle.setOnAction(a -> Main.consoleWindow.showWindow(ConsoleTab.SPEECH_RECOGNITION));
+		
 		//Start the Threads
 		startInternetCheckingThread();
 		startTimingThread();
@@ -217,6 +224,13 @@ public class BottomBar extends HBox {
 	 */
 	public JFXTextField getSearchField() {
 		return searchField;
+	}
+	
+	/**
+	 * @return the speechRecognitionToggle
+	 */
+	public JFXToggleButton getSpeechRecognitionToggle() {
+		return speechRecognitionToggle;
 	}
 	
 }
