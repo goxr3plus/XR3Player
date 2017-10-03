@@ -1,4 +1,4 @@
-package application.consoleandspeech;
+package speechrecognition;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -134,6 +134,12 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 				activateSpeechRecognition.setText("Start Speech Recognition");
 			}
 		});
+		
+		//Append this help text
+		String text = "--Google Speech Recognition Demostration only ....--\n ";
+		cssTextArea.appendText(text);
+		cssTextArea.setStyle(cssTextArea.getText().length() - text.length(), cssTextArea.getLength() - 1, style.replace("white", "orange"));
+		
 	}
 	
 	@Override

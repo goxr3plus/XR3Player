@@ -89,7 +89,7 @@ public class TreeViewManager extends BorderPane {
 		
 		// Drag Implementation
 		systemTreeView.setOnDragDetected(event -> {
-			TreeItemFile source = (TreeItemFile) systemTreeView.getSelectionModel().getSelectedItem();
+			FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
 			
 			//The host is not allowed
 			if (source != null && !source.getValue().equals(hostName)) {
@@ -144,7 +144,7 @@ public class TreeViewManager extends BorderPane {
 	 */
 	private void treeViewMouseReleased(MouseEvent mouseEvent) {
 		//Get the selected item
-		TreeItemFile source = (TreeItemFile) systemTreeView.getSelectionModel().getSelectedItem();
+		FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
 		
 		// host is not on the game
 		if (source == null || source.getValue().equals(hostName)) {
@@ -174,7 +174,7 @@ public class TreeViewManager extends BorderPane {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
 								if (!path.toFile().isHidden() && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
-									TreeItemFile treeNode = new TreeItemFile(path.toString());
+									FileTreeItem treeNode = new FileTreeItem(path.toString());
 									source.getChildren().add(treeNode);
 								}
 								

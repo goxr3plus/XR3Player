@@ -503,7 +503,7 @@ public class DbManager {
 						}
 						
 						//Update the Progress
-						updateProgress(1, totalSteps);
+						//updateProgress(1, totalSteps);
 						
 						//Run of JavaFX Thread
 						Platform.runLater(() -> {
@@ -519,7 +519,7 @@ public class DbManager {
 						});
 						
 						//Update the Progress
-						updateProgress(2, totalSteps);
+						//updateProgress(2, totalSteps);
 						
 						//Load the Opened Libraries
 						loadOpenedLibraries();
@@ -544,7 +544,7 @@ public class DbManager {
 						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
 						
 						//Update the Progress
-						updateProgress(3, totalSteps);
+						//updateProgress(3, totalSteps);
 						
 						Platform.runLater(() -> {
 							
@@ -582,7 +582,7 @@ public class DbManager {
 						});
 						
 						//Update the Progress
-						updateProgress(4, 4);
+						//updateProgress(4, 4);
 						
 					} catch (Exception ex) {
 						Main.logger.log(Level.SEVERE, "", ex);

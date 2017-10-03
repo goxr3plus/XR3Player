@@ -12,9 +12,9 @@ import javafx.scene.image.ImageView;
 import smartcontroller.media.Media;
 
 /**
- * A custom TreeItem which represents Files
+ * A custom TreeItem which represents a File
  */
-public class TreeItemFile extends TreeItem<String> {
+public class FileTreeItem extends TreeItem<String> {
 	
 	public static final Image x = InfoTool.getImageFromResourcesFolder("x.png");
 	
@@ -31,7 +31,7 @@ public class TreeItemFile extends TreeItem<String> {
 	 *            The absolute path of the file or folder
 	 * 
 	 */
-	public TreeItemFile(String absolutePath) {
+	public FileTreeItem(String absolutePath) {
 		super(absolutePath);
 		this.fullPath = absolutePath;
 		

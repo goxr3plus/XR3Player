@@ -179,16 +179,12 @@
                      </bottom>
                      <top>
                         <BorderPane BorderPane.alignment="CENTER">
-                           <right>
-                              <ToolBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="300.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
-                                 <items>
-                                    <HBox fx:id="botttomHBox" alignment="CENTER" />
-                                 </items>
-                              </ToolBar>
-                           </right>
                            <center>
-                              <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="440.0" style="-fx-background-color: rgb(0,0,0,0.85); -fx-border-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="-" BorderPane.alignment="CENTER" />
+                              <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
                            </center>
+                           <right>
+                              <HBox fx:id="botttomHBox" alignment="CENTER" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
+                           </right>
                         </BorderPane>
                      </top>
                   </BorderPane>
@@ -220,26 +216,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: rgb(20,20,20,0.85); -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Created by " textAlignment="CENTER" wrapText="true" HBox.hgrow="SOMETIMES">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <Hyperlink fx:id="visitCreatorHyperLink" alignment="CENTER" contentDisplay="RIGHT" text="GOXR3PLUS STUDIO">
-                     <graphic>
-                        <ImageView fitHeight="58.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/smallLogo.jpg" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                  </Hyperlink>
-               </graphic>
-            </Label>
-            <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true">
+            <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -261,7 +238,26 @@
                   </Hyperlink>
                </graphic>
             </Label>
-            <VBox fx:id="downloadsVBox" style="-fx-font-size: 9;">
+            <Label alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Created by " textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <Hyperlink fx:id="visitCreatorHyperLink" alignment="CENTER" contentDisplay="RIGHT" text="GOXR3PLUS STUDIO">
+                     <graphic>
+                        <ImageView fitHeight="58.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/smallLogo.jpg" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Hyperlink>
+               </graphic>
+            </Label>
+            <VBox fx:id="downloadsVBox" style="-fx-font-size: 9;" HBox.hgrow="SOMETIMES">
                <children>
                   <Label fx:id="sourceForgeDownloadsLabel1" alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Total Downloads" textAlignment="CENTER" wrapText="true">
                      <cursor>

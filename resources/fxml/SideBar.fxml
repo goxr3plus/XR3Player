@@ -50,7 +50,7 @@
                   <VBox alignment="CENTER_LEFT" spacing="5.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: white; -fx-font-weight: bold; -fx-font-size: 11;" text="Database" />
-                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
+                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
                               <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
                                  <graphic>
@@ -133,7 +133,7 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <Button fx:id="snapshot" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
+                        <Button fx:id="snapshot" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <tooltip>
                               <Tooltip text="Screen SnapShot" />
                            </tooltip>
@@ -156,7 +156,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #47BBFF; -fx-font-weight: bold; -fx-font-size: 9;" text="Social Media" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -199,7 +199,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Information" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
                               <MenuItem fx:id="showWelcomeScreen" mnemonicParsing="false" text="Welcome Screen" />
                               <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />

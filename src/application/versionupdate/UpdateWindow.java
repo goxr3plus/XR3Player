@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.json.simple.DeserializationException;
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
@@ -301,8 +300,8 @@ public class UpdateWindow extends StackPane {
 						
 					});
 					gitHubAccordion.setExpandedPane(gitHubAccordion.getPanes().get(0));
-				} catch (DeserializationException e) {
-					e.printStackTrace();
+				} catch (Exception ex) {
+					ex.printStackTrace();
 					ActionTool.showNotification("Message", "Failed to connect update server :(\n Try again in 5 seconds", Duration.seconds(3), NotificationType.ERROR);
 				}
 				

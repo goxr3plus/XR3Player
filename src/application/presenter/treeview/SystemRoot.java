@@ -48,7 +48,7 @@ public class SystemRoot {
 	String hostName = "computer";
 	
 	/** The root. */
-	TreeItemFile root;
+	FileTreeItem root;
 	
 	/** File System View */
 	FileSystemView fileSystemView = FileSystemView.getFileSystemView();
@@ -66,12 +66,12 @@ public class SystemRoot {
 		}
 		
 		//Local-Host
-		root = new TreeItemFile(hostName + " ( Local )");
+		root = new FileTreeItem(hostName + " ( Local )");
 		root.setGraphic(InfoTool.getImageViewFromResourcesFolder("computer.png"));
 		String userHome = System.getProperty("user.home");
 		
 		// User Folder
-		TreeItemFile userFolder = new TreeItemFile(userHome);
+		FileTreeItem userFolder = new FileTreeItem(userHome);
 		( (ImageView) userFolder.getGraphic() ).setImage(userFolderImage);
 		root.getChildren().add(userFolder);
 		
@@ -79,39 +79,39 @@ public class SystemRoot {
 		if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
 			
 			//Documents
-			TreeItemFile documentsFolder = new TreeItemFile(userHome + File.separator + "Documents");
+			FileTreeItem documentsFolder = new FileTreeItem(userHome + File.separator + "Documents");
 			( (ImageView) documentsFolder.getGraphic() ).setImage(documentsFolderImage);
 			root.getChildren().add(documentsFolder);
 			
 			//Downloads
-			TreeItemFile downloadsFolder = new TreeItemFile(userHome + File.separator + "Downloads");
+			FileTreeItem downloadsFolder = new FileTreeItem(userHome + File.separator + "Downloads");
 			( (ImageView) downloadsFolder.getGraphic() ).setImage(downloadsFolderImage);
 			root.getChildren().add(downloadsFolder);
 			
 			//Music
-			TreeItemFile musicFolder = new TreeItemFile(userHome + File.separator + "Music");
+			FileTreeItem musicFolder = new FileTreeItem(userHome + File.separator + "Music");
 			( (ImageView) musicFolder.getGraphic() ).setImage(musicFolderImage);
 			root.getChildren().add(musicFolder);
 			
 			//Pictures
-			TreeItemFile picturesFolder = new TreeItemFile(userHome + File.separator + "Pictures");
+			FileTreeItem picturesFolder = new FileTreeItem(userHome + File.separator + "Pictures");
 			( (ImageView) picturesFolder.getGraphic() ).setImage(picturesFolderImage);
 			root.getChildren().add(picturesFolder);
 			
 			//Videos
-			TreeItemFile videosFolder = new TreeItemFile(userHome + File.separator + "Videos");
+			FileTreeItem videosFolder = new FileTreeItem(userHome + File.separator + "Videos");
 			( (ImageView) videosFolder.getGraphic() ).setImage(videosFolderImage);
 			root.getChildren().add(videosFolder);
 			
 		}
 		
 		//===============Hard Drives Sub Menu=================================
-		TreeItemFile hardDrives = new TreeItemFile("Hard Drives");
+		FileTreeItem hardDrives = new FileTreeItem("Hard Drives");
 		hardDrives.setGraphic(InfoTool.getImageViewFromResourcesFolder("SSD-20.png"));
 		
 		// Add the root directories to the hard drive
 		FileSystems.getDefault().getRootDirectories().forEach(pathName -> {
-			TreeItemFile treeNode = new TreeItemFile(pathName.toString());
+			FileTreeItem treeNode = new FileTreeItem(pathName.toString());
 			hardDrives.getChildren().add(treeNode);
 		});
 		
@@ -121,7 +121,7 @@ public class SystemRoot {
 		//================================================================
 		
 		// Desktop
-		root.getChildren().add(new TreeItemFile(fileSystemView.getHomeDirectory().getAbsolutePath()));
+		root.getChildren().add(new FileTreeItem(fileSystemView.getHomeDirectory().getAbsolutePath()));
 		
 		root.setExpanded(true);
 	}
@@ -129,7 +129,7 @@ public class SystemRoot {
 	/**
 	 * @return The root item of the FileSystem
 	 */
-	public TreeItemFile getRoot() {
+	public FileTreeItem getRoot() {
 		return root;
 	}
 }

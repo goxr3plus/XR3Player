@@ -25,7 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import smartcontroller.enums.FilesExportMode;
+import smartcontroller.enums.FilesMode;
 import smartcontroller.presenter.SmartController;
 import smartcontroller.services.Operation;
 
@@ -90,7 +90,7 @@ public class ExportWindowController extends BorderPane {
 	 */
 	private SmartController smartController;
 	
-	private FilesExportMode filesToExport;
+	private FilesMode filesToExport;
 	
 	/**
 	 * Constructor
@@ -196,18 +196,18 @@ public class ExportWindowController extends BorderPane {
 		switch ( ( (Labeled) whatFilesToExportGroup.getSelectedToggle() ).getText()) {
 			case "Selected Items":
 				window.setTitle(common + smartController.getTableViewer().getSelectionModel().getSelectedItems().size() + " ]");
-				filesToExport = FilesExportMode.SELECTED_MEDIA;
+				filesToExport = FilesMode.SELECTED_MEDIA;
 				break;
 			case "Current Page":
 				window.setTitle(common + smartController.getItemsObservableList().size() + " ]");
-				filesToExport = FilesExportMode.CURRENT_PAGE;
+				filesToExport = FilesMode.CURRENT_PAGE;
 				break;
 			case "Everything on Playlist":
 				window.setTitle(common + smartController.getTotalInDataBase() + " ]");
-				filesToExport = FilesExportMode.EVERYTHING_ON_PLAYLIST;
+				filesToExport = FilesMode.EVERYTHING_ON_PLAYLIST;
 				break;
 			default:
-				filesToExport = FilesExportMode.CURRENT_PAGE;
+				filesToExport = FilesMode.CURRENT_PAGE;
 		}
 	}
 	

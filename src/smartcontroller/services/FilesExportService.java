@@ -14,7 +14,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import smartcontroller.enums.FilesExportMode;
+import smartcontroller.enums.FilesMode;
 import smartcontroller.enums.Genre;
 import smartcontroller.media.Media;
 import smartcontroller.presenter.SmartController;
@@ -30,7 +30,7 @@ public class FilesExportService extends Service<Boolean> {
 	private int count;
 	private int total;
 	private Operation operation;
-	private FilesExportMode filesToExport;
+	private FilesMode filesToExport;
 	private List<File> targetDirectories;
 	
 	private final SmartController smartController;
@@ -60,7 +60,7 @@ public class FilesExportService extends Service<Boolean> {
 	 * @param targetDirectories
 	 * @param operation
 	 */
-	public void startOperation(List<File> targetDirectories , Operation operation , FilesExportMode filesToExport) {
+	public void startOperation(List<File> targetDirectories , Operation operation , FilesMode filesToExport) {
 		if (isRunning() || !smartController.isFree(true))
 			ActionTool.showNotification("Message", "Export can't start", Duration.millis(2000), NotificationType.WARNING);
 		else {
@@ -113,7 +113,7 @@ public class FilesExportService extends Service<Boolean> {
 						
 						//================Prepare based on the Files User want to Export=============
 						
-						if (filesToExport == FilesExportMode.CURRENT_PAGE) {  // CURRENT_PAGE
+						if (filesToExport == FilesMode.CURRENT_PAGE) {  // CURRENT_PAGE
 							
 							//Count total files that will be exported
 							total = smartController.getItemsObservableList().size();
@@ -132,7 +132,7 @@ public class FilesExportService extends Service<Boolean> {
 								}
 							});
 							
-						} else if (filesToExport == FilesExportMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+						} else if (filesToExport == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 							
 							//Count total files that will be exported
 							total = smartController.getTableViewer().getSelectionModel().getSelectedItems().size();
@@ -151,7 +151,7 @@ public class FilesExportService extends Service<Boolean> {
 								}
 							});
 							
-						} else if (filesToExport == FilesExportMode.EVERYTHING_ON_PLAYLIST && smartController.getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
+						} else if (filesToExport == FilesMode.EVERYTHING_ON_PLAYLIST && smartController.getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
 							
 							//Count total files that will be exported
 							total = smartController.getTotalInDataBase();

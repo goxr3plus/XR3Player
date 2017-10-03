@@ -68,6 +68,7 @@ public class SearchBox extends HBox {
 		region.visibleProperty().bind(searchService.runningProperty());
 		
 		// SearchField
+		searchField.setFocusTraversable(false);
 		searchField.setMinWidth(280);
 		searchField.setPrefWidth(280);
 		if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
@@ -109,8 +110,7 @@ public class SearchBox extends HBox {
 	}
 	
 	/**
-	 * Register the window listeners to the window so it follows the Main window
-	 * of the application
+	 * Register the window listeners to the window so it follows the Main window of the application
 	 * 
 	 * @param window
 	 */

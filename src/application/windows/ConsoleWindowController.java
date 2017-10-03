@@ -15,7 +15,6 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
-import application.consoleandspeech.SpeechRecognition;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -29,6 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import speechrecognition.SpeechRecognition;
 import xplayer.presenter.XPlayerController;
 
 /**

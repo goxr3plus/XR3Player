@@ -213,31 +213,6 @@ public class InputService extends Service<Void> {
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
-							
-						//									try (Stream<Path> paths = Files.walk(Paths.get(file.getPath()))) {
-						//										paths.forEach(path -> {
-						//											
-						//											// System.out.println("Adding...."+s.toString())
-						//											
-						//											// cancelled?
-						//											if (isCancelled())
-						//												paths.close();
-						//											
-						//											// supported?
-						//											else if (InfoTool.isAudioSupported(path + ""))
-						//												insertMedia(path + "", 0, 0, date, time, preparedInsert);
-						//											
-						//											//					// Update informationTextArea				   
-						//											//					File f = path.toFile();
-						//											//					if (f.isDirectory())
-						//											//					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
-						//											
-						//											// update progress
-						//											updateProgress(++progress, totalFiles);
-						//										});
-						//									} catch (IOException ex) {
-						//										Main.logger.log(Level.WARNING, "", ex);
-						//									}
 					}
 					
 					saveInDataBase(preparedInsert);
@@ -294,55 +269,39 @@ public class InputService extends Service<Void> {
 			 * Count files in a directory (including files in all sub directories)
 			 * 
 			 * @param directory
-			 *            the directory to start in
-			 * @return the total number of files
+			 *            The Full path of the Directory
+			 * @return Total number of files contained in this folder
 			 */
 			int countFiles(File dir) {
 				int[] count = { 0 };
 				
+				//Folder exists?
 				if (dir.exists())
-					//						try (Stream<Path> paths = Files.walk(Paths.get(dir.getPath()), FileVisitOption.FOLLOW_LINKS)) {
-					//							return (int) paths.filter(path -> {
-					//								
-					//								//Check if cancelled
-					//								if (!isCancelled())
-					//									return InfoTool.isAudioSupported(path + "");
-					//								
-					//								//If it has been cancelled return false 
-					//								paths.close();
-					//								
-					//								return false;
-					//							}).count();
-					//						} catch (IOException ex) {
-					//							Main.logger.log(Level.WARNING, "", ex);
-					//						}
-					
 					try {
-						Files.walkFileTree(Paths.get(dir.getPath()), new HashSet<FileVisitOption>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE,
-								new SimpleFileVisitor<Path>() {
-									@Override
-									public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
-										
-										//System.out.println("It is symbolic link?"+Files.isSymbolicLink(file));
-										
-										if (InfoTool.isAudioSupported(file + ""))
-											++count[0];
-										
-										return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
-									}
-									
-									@Override
-									public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
-										System.err.printf("Visiting failed for %s\n", file);
-										
-										return FileVisitResult.SKIP_SUBTREE;
-									}
-									
-									@Override
-									public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs) throws IOException {
-										return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
-									}
-								});
+						Files.walkFileTree(Paths.get(dir.getPath()), new HashSet<>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+							@Override
+							public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
+								
+								//System.out.println("It is symbolic link?"+Files.isSymbolicLink(file));
+								
+								if (InfoTool.isAudioSupported(file + ""))
+									++count[0];
+								
+								return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
+							}
+							
+							@Override
+							public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
+								System.err.printf("Visiting failed for %s\n", file);
+								
+								return FileVisitResult.SKIP_SUBTREE;
+							}
+							
+							@Override
+							public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs) throws IOException {
+								return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
+							}
+						});
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -378,11 +337,6 @@ public class InputService extends Service<Void> {
 					preparedInsert.setString(4, dateCreated);
 					preparedInsert.setString(5, hourCreated);
 					preparedInsert.addBatch();
-					// if (uInsertIntoLib.executeUpdate() > 0 ? true :
-					// false)
-					// updateTotalSongs(++totalSongs, false, false);
-					// if (sInsert.executeUpdate() > 0)
-					// ++controller.totalInDataBase;
 				} catch (SQLException ex) {
 					Main.logger.log(Level.WARNING, "", ex);
 				}

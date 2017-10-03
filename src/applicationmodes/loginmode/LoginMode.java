@@ -128,10 +128,10 @@ public class LoginMode extends BorderPane {
 	private Button openUserContextMenu;
 	
 	@FXML
-	private HBox botttomHBox;
+	private Label usersInfoLabel;
 	
 	@FXML
-	private Label usersInfoLabel;
+	private HBox botttomHBox;
 	
 	@FXML
 	private PieChart librariesPieChart;
@@ -615,21 +615,22 @@ public class LoginMode extends BorderPane {
 					searchWord.set("");
 				
 				//Local Search 
-				String keySmall = key.getText();
-				searchWord.set(searchWord.get() + keySmall);
-				pauseTransition.playFromStart();
-				//System.out.println("Search Word : " + searchWord);
-				
-				//Check if searchWord is empty
-				if (!searchWord.get().isEmpty()) {
-					boolean[] found = { false };
-					//Find the first matching item
-					getItemsObservableList().forEach(user -> {
-						if (user.getUserName().contains(searchWord.get()) && !found[0]) {
-							this.setCenterIndex(user.getPosition());
-							found[0] = true;
-						}
-					});
+				if (key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE) {
+					String keySmall = key.getText();
+					searchWord.set(searchWord.get() + keySmall);
+					pauseTransition.playFromStart();
+					
+					//Check if searchWord is empty
+					if (!searchWord.get().isEmpty()) {
+						boolean[] found = { false };
+						//Find the first matching item
+						getItemsObservableList().forEach(user -> {
+							if (user.getUserName().contains(searchWord.get()) && !found[0]) {
+								this.setCenterIndex(user.getPosition());
+								found[0] = true;
+							}
+						});
+					}
 				}
 			});
 			

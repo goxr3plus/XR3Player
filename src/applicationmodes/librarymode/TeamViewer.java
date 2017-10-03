@@ -176,21 +176,22 @@ public class TeamViewer {
 					searchWord.set("");
 				
 				//Local Search 
-				String keySmall = key.getText();
-				searchWord.set(searchWord.get() + keySmall);
-				pauseTransition.playFromStart();
-				//System.out.println("Search Word : " + searchWord);
-				
-				//Check if searchWord is empty
-				if (!searchWord.get().isEmpty()) {
-					boolean[] found = { false };
-					//Find the first matching item
-					getItemsObservableList().forEach(library -> {
-						if (library.getLibraryName().contains(searchWord.get()) && !found[0]) {
-							this.setCenterIndex(library.getPosition());
-							found[0] = true;
-						}
-					});
+				if (key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE) {
+					String keySmall = key.getText();
+					searchWord.set(searchWord.get() + keySmall);
+					pauseTransition.playFromStart();
+					
+					//Check if searchWord is empty
+					if (!searchWord.get().isEmpty()) {
+						boolean[] found = { false };
+						//Find the first matching item
+						getItemsObservableList().forEach(library -> {
+							if (library.getLibraryName().contains(searchWord.get()) && !found[0]) {
+								this.setCenterIndex(library.getPosition());
+								found[0] = true;
+							}
+						});
+					}
 				}
 			});
 			

@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import application.presenter.treeview.TreeItemFile;
+import application.presenter.treeview.FileTreeItem;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +62,7 @@ public class SmartControllerFoldersMode extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	private final TreeItemFile root = new TreeItemFile("root");
+	private final FileTreeItem root = new FileTreeItem("root");
 	
 	// -------------------------------------------------------------
 	
@@ -100,7 +100,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		
 		// Drag Implementation
 		treeView.setOnDragDetected(event -> {
-			TreeItemFile source = (TreeItemFile) treeView.getSelectionModel().getSelectedItem();
+			FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
 			
 			//The host is not allowed
 			if (source != null && source != root) {
@@ -170,7 +170,7 @@ public class SmartControllerFoldersMode extends StackPane {
 	 */
 	private void treeViewMouseReleased(MouseEvent mouseEvent) {
 		//Get the selected item
-		TreeItemFile source = (TreeItemFile) treeView.getSelectionModel().getSelectedItem();
+		FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		
 		// host is not on the game
 		if (source == null || source == root) {
@@ -200,7 +200,7 @@ public class SmartControllerFoldersMode extends StackPane {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
 								if (!path.toFile().isHidden() && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
-									TreeItemFile treeNode = new TreeItemFile(path.toString());
+									FileTreeItem treeNode = new FileTreeItem(path.toString());
 									source.getChildren().add(treeNode);
 								}
 								
@@ -239,7 +239,7 @@ public class SmartControllerFoldersMode extends StackPane {
 	/**
 	 * @return the root of the tree
 	 */
-	public TreeItemFile getRoot() {
+	public FileTreeItem getRoot() {
 		return root;
 	}
 	
