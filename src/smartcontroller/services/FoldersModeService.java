@@ -164,7 +164,7 @@ public class FoldersModeService extends Service<Void> {
 						//Add all the items
 						set.forEach(filePath -> {
 							FileTreeItem treeItem = new FileTreeItem(filePath);
-							treeItem.setValue(treeItem.getValue() + filePath);
+							treeItem.setValue(treeItem.getValue() + " [ " + filePath + " ] ");
 							
 							//Add the item to the TreeView
 							smartControllerFoldersMode.getRoot().getChildren().add(treeItem);

@@ -52,10 +52,10 @@ public class XPlayerEqualizer extends BorderPane {
 	private final XPlayerController xPlayerController;
 	
 	//-----panFilter
-	private CustomDJFilter panFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, FilterCategory.PAN);
+	private CustomDJFilter panFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.PAN);
 	
 	//-----balanceFilter
-	private CustomDJFilter balanceFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, FilterCategory.BALANCE);
+	private CustomDJFilter balanceFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.BALANCE);
 	
 	//	
 	//	/** The amplitude filter. */
@@ -128,7 +128,7 @@ public class XPlayerEqualizer extends BorderPane {
 			VBox vBox = new VBox();
 			
 			//-----CustomDJFilter
-			CustomDJFilter generalFilter = new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, FilterCategory.GENERAL);
+			CustomDJFilter generalFilter = new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, Equalizer_Filter_Category.GENERAL);
 			
 			//Add the Children
 			vBox.getChildren().addAll(generalFilter, generalFilter.getFilterLabel());
@@ -199,7 +199,7 @@ public class XPlayerEqualizer extends BorderPane {
 	 * @author GOXR3PLUS
 	 *
 	 */
-	private enum FilterCategory {
+	private enum Equalizer_Filter_Category {
 		
 		GENERAL, PAN, BALANCE
 	}
@@ -212,7 +212,7 @@ public class XPlayerEqualizer extends BorderPane {
 		
 		private int position;
 		private Label filterLabel;
-		private FilterCategory filterCategory;
+		private Equalizer_Filter_Category filterCategory;
 		
 		/**
 		 * Constructor
@@ -226,8 +226,9 @@ public class XPlayerEqualizer extends BorderPane {
 		 * @param position
 		 * @param filterCategory
 		 */
-		public CustomDJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue, int position, FilterCategory filterCategory) {
-			super(width, height, arcColor, currentValue, minimumValue, maximumValue);
+		public CustomDJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue, int position,
+				Equalizer_Filter_Category filterCategory) {
+			super(width, height, arcColor, currentValue, minimumValue, maximumValue, DJFilterCategory.EQUALIZER_FILTER);
 			
 			//Position
 			this.position = position;
@@ -256,16 +257,16 @@ public class XPlayerEqualizer extends BorderPane {
 			filterLabel.setText(InfoTool.getMinString2(Double.toString(filterValue), filterValue > 0 ? 4 : 5));
 			
 			//GENERAL
-			if (filterCategory == FilterCategory.GENERAL) {
+			if (filterCategory == Equalizer_Filter_Category.GENERAL) {
 				xPlayerController.getxPlayerModel().getEqualizerArray()[position] = (float) filterValue;
 				xPlayerController.getxPlayer().setEqualizerKey(xPlayerController.getxPlayerModel().getEqualizerArray()[position], position);
 				
 				//PAN
-			} else if (filterCategory == FilterCategory.PAN) {
+			} else if (filterCategory == Equalizer_Filter_Category.PAN) {
 				xPlayerController.getxPlayer().setPan(filterValue);
 				
 				//BALANCE
-			} else if (filterCategory == FilterCategory.BALANCE)
+			} else if (filterCategory == Equalizer_Filter_Category.BALANCE)
 				xPlayerController.getxPlayer().setBalance((float) filterValue);
 			
 		}

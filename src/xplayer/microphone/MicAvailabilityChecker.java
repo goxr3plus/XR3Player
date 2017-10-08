@@ -1,7 +1,5 @@
 package xplayer.microphone;
 
-import javax.sound.sampled.LineUnavailableException;
-
 import com.darkprograms.speech.microphone.Microphone;
 
 import net.sourceforge.javaflacencoder.FLACFileWriter;
@@ -20,8 +18,6 @@ public class MicAvailabilityChecker {
 				throw new MicUnaccessibleException("Mic is in use and can't be accessed");
 			}
 			mic.close();
-		} catch (LineUnavailableException e) {
-			throw new MicUnaccessibleException("Mic is in use and can't be accessed");
 		} finally {
 			mic.close();
 			

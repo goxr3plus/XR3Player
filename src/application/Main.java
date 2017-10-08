@@ -28,6 +28,7 @@ import application.presenter.PlayListModesTabPane;
 import application.presenter.SideBar;
 import application.presenter.TopBar;
 import application.presenter.UpdateScreen;
+import application.presenter.treeview.TreeViewContextMenu;
 import application.presenter.treeview.TreeViewManager;
 import application.services.VacuumProgressService;
 import application.settings.ApplicationSettingsController;
@@ -99,8 +100,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 87);
-		internalInformation.put("ReleasedDate", "03/10/2017");
+		internalInformation.put("Version", 88);
+		internalInformation.put("ReleasedDate", "08/10/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -173,6 +174,8 @@ public class Main extends Application {
 	
 	public static final MediaInformation mediaInformation = new MediaInformation();
 	//
+	
+	public static final TreeViewContextMenu treeViewContextMenu = new TreeViewContextMenu();
 	
 	/** The Constant songsContextMenu. */
 	public static final MediaContextMenu songsContextMenu = new MediaContextMenu();
@@ -582,6 +585,13 @@ public class Main extends Application {
 			
 			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
 			dbManager.loadApplicationDataBase();
+			
+			//---------------ROOT ----------------
+			//			root.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> {
+			//				xPlayersList.getList().forEach(xPlayerController -> {
+			//					xPlayerController.reCalculateDiscStackPane();
+			//				});
+			//			});
 		});
 		pause.playFromStart();
 	}

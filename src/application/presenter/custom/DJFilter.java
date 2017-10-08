@@ -24,6 +24,10 @@ import xplayer.visualizer.ResizableCanvas;
  */
 public class DJFilter extends StackPane {
 	
+	public enum DJFilterCategory {
+		EQUALIZER_FILTER, VOLUME_FILTER;
+	}
+	
 	/** The listeners. */
 	private final ArrayList<DJFilterListener> listeners = new ArrayList<>();
 	
@@ -50,7 +54,10 @@ public class DJFilter extends StackPane {
 	private double maximumValue;
 	
 	//The minimum Value
+	
 	private double minimumValue;
+	
+	private final DJFilterCategory filterCategory;
 	
 	/**
 	 * Constructor
@@ -62,9 +69,10 @@ public class DJFilter extends StackPane {
 	 * @param minimumValue
 	 * @param maximumValue
 	 */
-	public DJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue) {
+	public DJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue, DJFilterCategory filterCategory) {
 		this.minimumValue = minimumValue;
 		this.maximumValue = maximumValue;
+		this.filterCategory = filterCategory;
 		
 		super.setPickOnBounds(true);
 		
@@ -75,7 +83,7 @@ public class DJFilter extends StackPane {
 		super.setPickOnBounds(false);
 		
 		this.arcColor = arcColor;
-		canvas.setEffect(new DropShadow(10, Color.WHITE));
+		canvas.setEffect(new DropShadow(10, Color.BLACK));
 		
 		getChildren().addAll(canvas);
 		
@@ -143,7 +151,7 @@ public class DJFilter extends StackPane {
 		
 		//Clear the outer rectangle
 		canvas.gc.clearRect(0, 0, prefWidth, prefHeight);
-		canvas.gc.setFill(Color.WHITE);
+		canvas.gc.setFill(filterCategory == DJFilterCategory.EQUALIZER_FILTER ? Color.BLACK : Color.TRANSPARENT);
 		canvas.gc.fillRect(0, 0, prefWidth, prefHeight);
 		
 		// Arc Background Oval
@@ -155,19 +163,19 @@ public class DJFilter extends StackPane {
 		canvas.gc.setStroke(arcColor);
 		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, angle, ArcType.OPEN);
 		
-		// Volume Arc
-		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
-		canvas.gc.setLineDashes(6);
-		canvas.gc.setLineWidth(3);
-		canvas.gc.setStroke(arcColor);
-		int volume = 100;
-		int maximumVolume = 100;
-		int value = volume == 0 ? 0 : (int) ( ( (double) volume / (double) maximumVolume ) * 180 );
-		//		//System.out.println(value)
-		canvas.gc.setFill(Color.BLACK);
-		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
-		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
-		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
+		// Value Arc
+		if (filterCategory == DJFilterCategory.EQUALIZER_FILTER) {
+			canvas.gc.setLineCap(StrokeLineCap.SQUARE);
+			canvas.gc.setLineDashes(6);
+			canvas.gc.setLineWidth(3);
+			canvas.gc.setStroke(arcColor);
+			int value = ( getValue() == 0 ) ? 0 : (int) ( ( (double) getValue() / (double) maximumValue ) * 180 );
+			//System.out.println(value + " max : " + maximumValue)
+			canvas.gc.setFill(Color.BLACK);
+			canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
+			canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
+			canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
+		}
 		canvas.gc.setLineDashes(0);
 		canvas.gc.setLineCap(StrokeLineCap.ROUND);
 		

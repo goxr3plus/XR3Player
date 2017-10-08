@@ -136,7 +136,7 @@ public class DJDisc extends StackPane {
 		//setStyle("-fx-background-color:rgb(255,255,255,0.6)");
 		
 		this.arcColor = arcColor;
-		canvas.setEffect(new DropShadow(10, Color.WHITE));
+		canvas.setEffect(new DropShadow(15, Color.BLACK));
 		
 		// imageView
 		replaceImage(null);
@@ -244,7 +244,7 @@ public class DJDisc extends StackPane {
 				canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
 				
 				// ImageView
-				int val = 8;
+				int val = 5;
 				imageView.setTranslateX(val);
 				imageView.setTranslateY(val);
 				imageView.setFitWidth(width - val * 2);
@@ -284,7 +284,7 @@ public class DJDisc extends StackPane {
 		
 		//Clear the outer rectangle
 		canvas.gc.clearRect(0, 0, prefWidth, prefHeight);
-		canvas.gc.setFill(Color.WHITE);
+		canvas.gc.setFill(Color.TRANSPARENT);
 		canvas.gc.fillRect(0, 0, prefWidth, prefHeight);
 		
 		// Arc Background Oval
@@ -292,23 +292,23 @@ public class DJDisc extends StackPane {
 		canvas.gc.setStroke(Color.WHITE);
 		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, 360.00 + angle, ArcType.OPEN);
 		
-		// Foreground Arc
+		// Arc Foreground Oval 
 		canvas.gc.setStroke(arcColor);
 		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, angle, ArcType.OPEN);
 		
 		// Volume Arc
-		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
-		canvas.gc.setLineDashes(6);
-		canvas.gc.setLineWidth(3);
-		canvas.gc.setStroke(arcColor);
-		int value = this.getVolume() == 0 ? 0 : (int) ( ( (double) this.getVolume() / (double) this.maximumVolume ) * 180 );
-		//System.out.println(value)
-		canvas.gc.setFill(webGrey);
-		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
-		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
-		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
-		canvas.gc.setLineDashes(0);
-		canvas.gc.setLineCap(StrokeLineCap.ROUND);
+//		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
+//		canvas.gc.setLineDashes(6);
+//		canvas.gc.setLineWidth(3);
+//		canvas.gc.setStroke(arcColor);
+//		int value = this.getVolume() == 0 ? 0 : (int) ( ( (double) this.getVolume() / (double) this.maximumVolume ) * 180 );
+//		//System.out.println(value)
+//		canvas.gc.setFill(webGrey);
+//		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
+//		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
+//		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
+//		canvas.gc.setLineDashes(0);
+//		canvas.gc.setLineCap(StrokeLineCap.ROUND);
 		
 		// --------------------------Maths to find the point on the circle
 		// circumference
@@ -509,7 +509,7 @@ public class DJDisc extends StackPane {
 	 * @param volume
 	 *            the new volume
 	 */
-	private void setVolume(int volume) {
+	public void setVolume(int volume) {
 		if (volume > -1 && volume < getMaximumVolume() + 1)
 			Platform.runLater(() -> volumeLabel.setCurrentValue(volume));
 		else if (volume < 0)
@@ -664,11 +664,11 @@ public class DJDisc extends StackPane {
 		setVolume(getVolume() - rotation);
 	}
 	
-//	/**
-//	 * @return the volumeLabel
-//	 */
-//	public DragAdjustableLabel getVolumeLabel() {
-//		return volumeLabel;
-//	}
+	//	/**
+	//	 * @return the volumeLabel
+	//	 */
+	//	public DragAdjustableLabel getVolumeLabel() {
+	//		return volumeLabel;
+	//	}
 	
 }

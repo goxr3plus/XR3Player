@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import application.Main;
 import application.presenter.custom.DJDisc;
 import application.presenter.custom.DJFilter;
+import application.presenter.custom.DJFilter.DJFilterCategory;
 import application.presenter.custom.DJFilterListener;
 import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
@@ -34,7 +35,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -59,9 +59,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
@@ -244,6 +242,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	/** The disc is being mouse dragged */
 	public boolean discIsDragging;
+	
+	//-----CustomDJFilter
+	Label volumeDiscLabel;
+	DJFilter volumeDisc;
 	
 	// -------------------------ETC --------------------------
 	
@@ -842,14 +844,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @param side
 	 *            the side
 	 */
-	public void makeTheDisc(Color color , int volume , Side side) {
+	public void makeTheDisc(Color color , int volume , int minimumVolume , int maximumVolume , Side side) {
 		
 		// initialize
-		disc = new DJDisc(136, 136, color, volume, 125);
-		//disc.addDJDiscListener(this);
-		
-		// radialMenu
-		//disc.getChildren().add(radialMenu.getRadialMenuButton());
+		disc = new DJDisc(136, 136, color, volume, maximumVolume);
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
@@ -901,57 +899,72 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					disc.calculateAngleByMouse(m, currentTime, totalTime);
 					
 					//== RemainingTimeLabel
-					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime));// + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ));
+					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime)); // + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ))
 					
 					//== ElapsedTimeLabel
-					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime));// + millisecondsFormatted + "");
+					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime)); // + millisecondsFormatted + "")
 					
 				}
 		});
 		
-		//
-		//( (HBox) discBorderPane.getBottom() ).getChildren().add(0, disc.getTimeField());
-		
 		//---VBOX------
-		VBox vBox = new VBox();
-		
-		//---Label
-		volumeDiscLabel.getStyleClass().add("applicationSettingsLabel2");
-		volumeDiscLabel.setMinWidth(35);
-		volumeDiscLabel.setMaxWidth(35);
-		volumeDiscLabel.setTextAlignment(TextAlignment.CENTER);
-		volumeDiscLabel.setAlignment(Pos.CENTER);
-		//label.textProperty()
-		//.bind(Bindings.createStringBinding(() -> InfoTool.getMinString2(Double.toString(filter.currentValueProperty().get()), 4), filter.currentValueProperty()));
-		
+		//		VBox vBox = new VBox();
+		//		
 		//volumeDisc
+		volumeDisc = new DJFilter(30, 30, Color.MEDIUMSPRINGGREEN, volume, minimumVolume, maximumVolume, DJFilterCategory.VOLUME_FILTER);
 		volumeDisc.addDJDiscListener(this);
 		
+		//		
+		//		//---volumeDiscLabel
+		//volumeDiscLabel = new Label(String.valueOf(volume));
+		//		volumeDiscLabel.getStyleClass().add("applicationSettingsLabel2");
+		//		volumeDiscLabel.setMinWidth(35);
+		//		volumeDiscLabel.setMaxWidth(35);
+		//		volumeDiscLabel.setTextAlignment(TextAlignment.CENTER);
+		//		volumeDiscLabel.setAlignment(Pos.CENTER);
+		
 		//Add the Children
-		vBox.getChildren().addAll(volumeDisc, volumeDiscLabel);
-		vBox.setAlignment(Pos.CENTER);
+		//vBox.getChildren().addAll(volumeDisc, volumeDiscLabel);
+		//vBox.setAlignment(Pos.CENTER);
 		
-		( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, vBox);
-		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS);
-		diskStackPane.getChildren().add(disc);
-		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
-		reCalculateCanvasSize();
+		//( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, vBox);
+		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS)		
+		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
 		
+		//Add disc and volume disc to StackPane
+		diskStackPane.getChildren().addAll(disc, volumeDisc);
 	}
-	
-	//-----CustomDJFilter
-	Label volumeDiscLabel = new Label("45");
-	DJFilter volumeDisc = new DJFilter(30, 30, Color.MEDIUMSPRINGGREEN, 45, 0, 125);
 	
 	/**
 	 * Recalculates the Canvas size to the preferred size
 	 */
 	private void reCalculateCanvasSize() {
-		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.5;
+		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size, size);
 		radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight());
-		//System.out.println("Redrawing canvas");
+		//System.out.println("Redrawing canvas")
+	}
+	
+	/**
+	 * Makes the DJDisc fit correctly into it's StackPane
+	 */
+	public void reCalculateDiscStackPane() {
+		//Call it for the DJDisc
+		reCalculateCanvasSize();
+		
+		//System.out.println(disc.getPrefWidth());
+		
+		//Find the correct size for the VolumeDisc			
+		double size;
+		if (disc.getPrefWidth() < 80)
+			size = disc.getPrefWidth() / 1.55;
+		else if (disc.getPrefWidth() < 165)
+			size = disc.getPrefWidth() / 1.25;
+		else
+			size = disc.getPrefWidth() / 1.15;
+		
+		volumeDisc.resizeDisc(size, size);
 	}
 	
 	/**
@@ -1491,8 +1504,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@Override
 	public void valueChanged(double value) {
-		volumeDiscLabel.setText(String.valueOf((int) value));
 		controlVolume();
+		//volumeDiscLabel.setText(String.valueOf((int) value));
+		disc.setVolume((int) ( value * 100 ));
 	}
 	
 }

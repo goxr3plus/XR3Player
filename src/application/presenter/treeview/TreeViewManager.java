@@ -197,9 +197,7 @@ public class TreeViewManager extends BorderPane {
 			// source.setGraphic(new ImageView(SystemRoot.folderImage))
 			
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-			// Main.treeManager.treeContextMenu.showMenu(Genre.SYSTEMFILE,
-			// source.getFullPath(),
-			// m.getScreenX(), m.getScreenY());
+			 Main.treeViewContextMenu.show( source.getFullPath() , mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
 	}
 	

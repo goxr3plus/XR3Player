@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.Main;
 import application.presenter.treeview.FileTreeItem;
 import application.tools.InfoTool;
 import javafx.fxml.FXML;
@@ -223,9 +224,7 @@ public class SmartControllerFoldersMode extends StackPane {
 			// source.setGraphic(new ImageView(SystemRoot.folderImage))
 			
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-			// Main.treeManager.treeContextMenu.showMenu(Genre.SYSTEMFILE,
-			// source.getFullPath(),
-			// m.getScreenX(), m.getScreenY());
+			Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
 	}
 	
