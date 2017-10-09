@@ -20,7 +20,7 @@ Total Downloads on Github
 
 -------------------------------------------------------------------------------------
 
-## javaFX Visualizations+Strange Music
+## JavaFX Visualizations+Strange Music
 [![Visualizer](http://img.youtube.com/vi/pf33A4lnO_s/0.jpg)](https://www.youtube.com/watch?v=pf33A4lnO_s)
 
 ## Update 86 Main Mode
