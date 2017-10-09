@@ -1,6 +1,7 @@
 package aaTesterOnlyCode;
 
 import application.presenter.custom.DJFilter;
+import application.presenter.custom.DJFilter.DJFilterCategory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 public class DJDisc2Tester extends Application {
 	
 	StackPane stackPane = new StackPane();
-	DJFilter djDisc2 = new DJFilter(200, 200, Color.DEEPSKYBLUE, 0.5, -1.0, 1.0);
+	DJFilter djDisc2 = new DJFilter(200, 200, Color.DEEPSKYBLUE, 0.5, -1.0, 1.0, DJFilterCategory.EQUALIZER_FILTER);
 	
 	public void start(Stage primary) {
 		
