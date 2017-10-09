@@ -20,6 +20,9 @@ Total Downloads on Github
 
 -------------------------------------------------------------------------------------
 
+## javaFX Visualizations+Strange Music
+[![Visualizer](http://img.youtube.com/vi/pf33A4lnO_s/0.jpg)](https://www.youtube.com/watch?v=pf33A4lnO_s)
+
 ## Update 86 Main Mode
 ![Main Mode](https://user-images.githubusercontent.com/20374208/30670989-64eb141a-9e6d-11e7-9887-5300d5edd6e1.png)
 
@@ -32,7 +35,6 @@ Total Downloads on Github
 
 # Amazing Visualizations
 [![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
-
 ---------
 
 ### !Announcement! I have created an auto updater for any Java application (including XR3Player of course)
