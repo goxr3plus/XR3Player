@@ -49,6 +49,5 @@ Temporary Items
 # Ignore XR3Player test code
 /XR3Database
 /rubbishCode
-/testing
 *.flac
 *.mp3
