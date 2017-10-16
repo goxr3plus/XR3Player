@@ -63,7 +63,7 @@ public class XPlayerPlaylist extends StackPane {
 	private SmartController smartController;
 	
 	/** The play service. */
-	private PlayListService playService = new PlayListService();;
+	//private PlayListService playService = new PlayListService();;
 	
 	/** The x player UI. */
 	XPlayerController xPlayerUI;
@@ -110,17 +110,17 @@ public class XPlayerPlaylist extends StackPane {
 		
 		// stopPlayingList
 		stopPlayingList.setVisible(false);
-		stopPlayingList.setOnAction(a -> playService.stopService());
+		//stopPlayingList.setOnAction(a -> playService.stopService());
 		
 		// previousButton
 		previousButton.visibleProperty().bind(stopPlayingList.visibleProperty());
-		previousButton.setOnAction(a -> xPlayerUI.getRadialMenu().goPrevious());
-		previousButton.disableProperty().bind(xPlayerUI.getRadialMenu().previous.disabledProperty());
+		//previousButton.setOnAction(a -> xPlayerUI.getRadialMenu().goPrevious());
+		//previousButton.disableProperty().bind(xPlayerUI.getRadialMenu().previous.disabledProperty());
 		
 		// nextButton
 		nextButton.visibleProperty().bind(stopPlayingList.visibleProperty());
-		nextButton.setOnAction(a -> xPlayerUI.getRadialMenu().goNext());
-		nextButton.disableProperty().bind(xPlayerUI.getRadialMenu().next.disabledProperty());
+		//nextButton.setOnAction(a -> xPlayerUI.getRadialMenu().goNext());
+		//nextButton.disableProperty().bind(xPlayerUI.getRadialMenu().next.disabledProperty());
 		
 		// SmartController
 		smartController = new SmartController(Genre.LIBRARYMEDIA, "XPlayer " + xPlayerUI.getKey() + " PlayList", "XPPL" + xPlayerUI.getKey());
@@ -162,151 +162,151 @@ public class XPlayerPlaylist extends StackPane {
 	 * 
 	 * -----------------------------------------------------------------------
 	 */
-	/**
-	 * This class implements the algorithm of playing the play list. !!!NEEDS TO BE FIXED IT DOESN'T WORK AT ALL!!!
-	 *
-	 * @author GOXR3PLUS
-	 */
-	@Deprecated
-	private class PlayListService extends Service<Void> {
-		
-		/** The song. */
-		private Audio song;
-		
-		/** The counter. */
-		private int counter;
-		
-		/**
-		 * Constructor.
-		 */
-		public PlayListService() {
-			setOnSucceeded(s -> done());
-			setOnFailed(c -> done());
-			setOnCancelled(c -> done());
-		}
-		
-		/**
-		 * Starts the service.
-		 */
-		public void startService() {
-			if (!isRunning() && !getSmartController().getItemsObservableList().isEmpty()) {
-				stopPlayingList.setVisible(true);
-				progressSpinner.setVisible(true);
-				progressSpinner.progressProperty().bind(progressProperty());
-				xPlayerUI.getRadialMenu().next.setDisable(false);
-				xPlayerUI.getRadialMenu().previous.setDisable(false);
-				reset();
-				start();
-			}
-		}
-		
-		/**
-		 * Stops the service.
-		 */
-		public void stopService() {
-			if (isRunning()) {
-				cancel();
-				done();
-			}
-		}
-		
-		/**
-		 * Done.
-		 */
-		private void done() {
-			progressSpinner.progressProperty().unbind();
-			progressSpinner.setProgress(-1);
-			progressSpinner.setVisible(false);
-			stopPlayingList.setVisible(false);
-			xPlayerUI.getRadialMenu().next.setDisable(true);
-			xPlayerUI.getRadialMenu().previous.setDisable(true);
-			song = null;
-		}
-		
-		@Override
-		protected Task<Void> createTask() {
-			return new Task<Void>() {
-				@Override
-				protected Void call() throws Exception {
-					
-					counter = 1;
-					int totalItems = getSmartController().getItemsObservableList().size();
-					
-					// loop
-					while (!isCancelled()) {
-						
-						// Play song
-						// Synchronize with javaFX thread
-						song = (Audio) getSmartController().getItemsObservableList().get(counter - 1);
-						CountDownLatch latch = new CountDownLatch(1);
-						Platform.runLater(() -> {
-							
-							// Enable disable next
-							if (counter == totalItems)
-								xPlayerUI.getRadialMenu().next.setDisable(true);
-							else
-								xPlayerUI.getRadialMenu().next.setDisable(false);
-							
-							// Enable disable previous
-							if (counter == 1)
-								xPlayerUI.getRadialMenu().previous.setDisable(true);
-							else
-								xPlayerUI.getRadialMenu().previous.setDisable(false);
-							
-							// playSong
-							xPlayerUI.playSong(song.getFilePath());
-							
-							latch.countDown();
-						});
-						latch.await();
-						
-						// Update the progress
-						updateProgress(counter, totalItems);
-						
-						// Check is is playing some song or is paused
-						while (xPlayerUI.getxPlayer().isPausedOrPlaying() || xPlayerUI.getxPlayer().isSeeking()) {
-							
-							// Check if nextHasBeenPressed or
-							// previousHasBeenPressed
-							if (xPlayerUI.getRadialMenu().nextHasBeenPressed() || xPlayerUI.getRadialMenu().previousHasBeenPressed())
-								break;
-							
-							// Get out if cancelled
-							if (isCancelled())
-								break;
-							
-							// Sleep
-							Thread.sleep(500);
-						} // --------end of while
-						
-						// Get out if cancelled
-						if (isCancelled())
-							break;
-						
-						// Check if next has been pressed
-						if (xPlayerUI.getRadialMenu().nextHasBeenPressed()) {
-							++counter;
-							xPlayerUI.getRadialMenu().resetPreviousAndNextIfPressed();
-							
-							// Check if previous has been pressed
-						} else if (xPlayerUI.getRadialMenu().previousHasBeenPressed()) {
-							--counter;
-							xPlayerUI.getRadialMenu().resetPreviousAndNextIfPressed();
-							
-							// if counter<listSize
-						} else if (counter < totalItems) {
-							++counter;
-							// else stop Service
-						} else if (counter == totalItems)
-							break;
-						
-					} // -------end of while
-					
-					return null;
-				}
-			};
-		}
-		
-	}
-	
+//	/**
+//	 * This class implements the algorithm of playing the play list. !!!NEEDS TO BE FIXED IT DOESN'T WORK AT ALL!!!
+//	 *
+//	 * @author GOXR3PLUS
+//	 */
+//	@Deprecated
+//	private class PlayListService extends Service<Void> {
+//		
+//		/** The song. */
+//		private Audio song;
+//		
+//		/** The counter. */
+//		private int counter;
+//		
+//		/**
+//		 * Constructor.
+//		 */
+//		public PlayListService() {
+//			setOnSucceeded(s -> done());
+//			setOnFailed(c -> done());
+//			setOnCancelled(c -> done());
+//		}
+//		
+//		/**
+//		 * Starts the service.
+//		 */
+//		public void startService() {
+//			if (!isRunning() && !getSmartController().getItemsObservableList().isEmpty()) {
+//				stopPlayingList.setVisible(true);
+//				progressSpinner.setVisible(true);
+//				progressSpinner.progressProperty().bind(progressProperty());
+//			//	xPlayerUI.getRadialMenu().next.setDisable(false);
+//			//	xPlayerUI.getRadialMenu().previous.setDisable(false);
+//				reset();
+//				start();
+//			}
+//		}
+//		
+//		/**
+//		 * Stops the service.
+//		 */
+//		public void stopService() {
+//			if (isRunning()) {
+//				cancel();
+//				done();
+//			}
+//		}
+//		
+//		/**
+//		 * Done.
+//		 */
+//		private void done() {
+//			progressSpinner.progressProperty().unbind();
+//			progressSpinner.setProgress(-1);
+//			progressSpinner.setVisible(false);
+//			stopPlayingList.setVisible(false);
+//			xPlayerUI.getRadialMenu().next.setDisable(true);
+//			xPlayerUI.getRadialMenu().previous.setDisable(true);
+//			song = null;
+//		}
+//		
+//		@Override
+//		protected Task<Void> createTask() {
+//			return new Task<Void>() {
+//				@Override
+//				protected Void call() throws Exception {
+//					
+//					counter = 1;
+//					int totalItems = getSmartController().getItemsObservableList().size();
+//					
+//					// loop
+//					while (!isCancelled()) {
+//						
+//						// Play song
+//						// Synchronize with javaFX thread
+//						song = (Audio) getSmartController().getItemsObservableList().get(counter - 1);
+//						CountDownLatch latch = new CountDownLatch(1);
+//						Platform.runLater(() -> {
+//							
+//							// Enable disable next
+//							if (counter == totalItems)
+//								xPlayerUI.getRadialMenu().next.setDisable(true);
+//							else
+//								xPlayerUI.getRadialMenu().next.setDisable(false);
+//							
+//							// Enable disable previous
+//							if (counter == 1)
+//								xPlayerUI.getRadialMenu().previous.setDisable(true);
+//							else
+//								xPlayerUI.getRadialMenu().previous.setDisable(false);
+//							
+//							// playSong
+//							xPlayerUI.playSong(song.getFilePath());
+//							
+//							latch.countDown();
+//						});
+//						latch.await();
+//						
+//						// Update the progress
+//						updateProgress(counter, totalItems);
+//						
+//						// Check is is playing some song or is paused
+//						while (xPlayerUI.getxPlayer().isPausedOrPlaying() || xPlayerUI.getxPlayer().isSeeking()) {
+//							
+//							// Check if nextHasBeenPressed or
+//							// previousHasBeenPressed
+//							if (xPlayerUI.getRadialMenu().nextHasBeenPressed() || xPlayerUI.getRadialMenu().previousHasBeenPressed())
+//								break;
+//							
+//							// Get out if cancelled
+//							if (isCancelled())
+//								break;
+//							
+//							// Sleep
+//							Thread.sleep(500);
+//						} // --------end of while
+//						
+//						// Get out if cancelled
+//						if (isCancelled())
+//							break;
+//						
+//						// Check if next has been pressed
+//						if (xPlayerUI.getRadialMenu().nextHasBeenPressed()) {
+//							++counter;
+//							xPlayerUI.getRadialMenu().resetPreviousAndNextIfPressed();
+//							
+//							// Check if previous has been pressed
+//						} else if (xPlayerUI.getRadialMenu().previousHasBeenPressed()) {
+//							--counter;
+//							xPlayerUI.getRadialMenu().resetPreviousAndNextIfPressed();
+//							
+//							// if counter<listSize
+//						} else if (counter < totalItems) {
+//							++counter;
+//							// else stop Service
+//						} else if (counter == totalItems)
+//							break;
+//						
+//					} // -------end of while
+//					
+//					return null;
+//				}
+//			};
+//		}
+//		
+//	}
+//	
 }

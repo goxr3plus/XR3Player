@@ -1,10 +1,11 @@
 /**
  * 
  */
-package xplayer.visualizer;
+package xplayer.visualizer.geometryshapes;
 
 import javafx.scene.paint.Color;
-import xplayer.visualizer.MandelbrotBean.ColorSchema;
+import xplayer.visualizer.VisualizerDrawer;
+import xplayer.visualizer.geometryshapes.MandelbrotBean.ColorSchema;
 
 /*-----------------------------------------------------------------------
  * 
@@ -17,7 +18,7 @@ import xplayer.visualizer.MandelbrotBean.ColorSchema;
  * 
  * -----------------------------------------------------------------------
  */
-class JuliaSet {
+public class JuliaSet {
 	
 	/**
 	 * Size of the coordinate system for the Julia set
@@ -51,7 +52,7 @@ class JuliaSet {
 	 * @param visualizerDrawer
 	 *        the visualizer drawer
 	 */
-	JuliaSet(VisualizerDrawer visualizerDrawer) {
+	public JuliaSet(VisualizerDrawer visualizerDrawer) {
 		this.visualizerDrawer = visualizerDrawer;
 	}
 	

@@ -1,13 +1,14 @@
 /**
  * 
  */
-package xplayer.visualizer;
+package xplayer.visualizer.geometryshapes;
 
 import java.util.Random;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import xplayer.visualizer.VisualizerDrawer;
 
 /**
  * -----------------------------------------------------------------------

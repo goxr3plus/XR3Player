@@ -3,9 +3,15 @@
  */
 package xplayer.visualizer;
 
+import application.tools.InfoTool;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import xplayer.visualizer.Sprite3D.Shape3D;
+import xplayer.visualizer.geometryshapes.JuliaSet;
+import xplayer.visualizer.geometryshapes.Oscilloscope;
+import xplayer.visualizer.geometryshapes.Polyspiral;
+import xplayer.visualizer.geometryshapes.Sierpinski;
+import xplayer.visualizer.geometryshapes.Sprite3D;
+import xplayer.visualizer.geometryshapes.Sprite3D.Shape3D;
 
 /**
  * The Class VisualizerDrawer.
@@ -25,17 +31,17 @@ public class VisualizerDrawer extends VisualizerModel {
 	//-----
 	
 	/** The DEFAULT_BACKGROUND_IMAGE */
-	public static final Image DEFAULT_BACKGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("background.jpg"));
+	public static final Image DEFAULT_BACKGROUND_IMAGE = InfoTool.getImageFromResourcesFolder("VisualizerBackground.jpg");
 	/** The DEFAULT_FOREGROUND_IMAGE */
-	public static final Image DEFAULT_FOREGROUND_IMAGE = new Image(VisualizerModel.class.getResourceAsStream("foreground.png"));
+	public static final Image DEFAULT_FOREGROUND_IMAGE = InfoTool.getImageFromResourcesFolder("VisualizerForeground.png");
 	
 	//-----
 	
 	/** The foreground image */
-	public Image foregroundImage ;//= DEFAULT_FOREGROUND_IMAGE;
+	public Image foregroundImage;//= DEFAULT_FOREGROUND_IMAGE;
 	
 	/** The background image. */
-	public Image backgroundImage ;//= DEFAULT_BACKGROUND_IMAGE;
+	public Image backgroundImage;//= DEFAULT_BACKGROUND_IMAGE;
 	
 	//-----
 	
@@ -43,7 +49,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Draws the foreground image of the visualizer
 	 * 
 	 * @param array
-	 *        The samples array
+	 *            The samples array
 	 */
 	public void drawForegroundImage(float[] array) {
 		
@@ -113,8 +119,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Draws an Oscilloscope
 	 * 
 	 * @param stereo
-	 *        The Oscilloscope with have 2 lines->stereo or 1 line->merge left
-	 *        and right audio
+	 *            The Oscilloscope with have 2 lines->stereo or 1 line->merge left and right audio
 	 */
 	public void drawOscilloscope(boolean stereo) {
 		oscilloscope.drawOscilloscope(stereo);
@@ -305,15 +310,15 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Draw spectrum analyser bar.
 	 *
 	 * @param pX
-	 *        the p X
+	 *            the p X
 	 * @param pY
-	 *        the p Y
+	 *            the p Y
 	 * @param pWidth
-	 *        the width
+	 *            the width
 	 * @param pHeight
-	 *        the height
+	 *            the height
 	 * @param band
-	 *        the band
+	 *            the band
 	 */
 	private void drawSpectrumBar(int pX , int pY , int pWidth , int pHeight , int band) {
 		float c = 0;
@@ -381,8 +386,7 @@ public class VisualizerDrawer extends VisualizerModel {
 		wRight = ( wRight = ( wRight * 2.0f ) / pRightChannel.length ) > 1.0f ? 1.0f : wRight;
 		
 		/*
-		 * vuAverage += ( ( wLeft + wRight ) / 2.0f ); vuSamples++; if (
-		 * vuSamples > 128 ) { vuSamples /= 2.0f; vuAverage /= 2.0f }
+		 * vuAverage += ( ( wLeft + wRight ) / 2.0f ); vuSamples++; if ( vuSamples > 128 ) { vuSamples /= 2.0f; vuAverage /= 2.0f }
 		 */
 		
 		if (wLeft >= ( oldLeft - wSadfrr ))
@@ -413,13 +417,13 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Draw volume meter bar.
 	 *
 	 * @param x
-	 *        the x
+	 *            the x
 	 * @param y
-	 *        the y
+	 *            the y
 	 * @param pWidth
-	 *        the width
+	 *            the width
 	 * @param pHeight
-	 *        the height
+	 *            the height
 	 */
 	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
 		

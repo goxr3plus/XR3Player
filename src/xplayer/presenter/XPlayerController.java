@@ -18,6 +18,7 @@ import application.Main;
 import application.presenter.custom.DJDisc;
 import application.presenter.custom.DJFilter;
 import application.presenter.custom.DJFilter.DJFilterCategory;
+import application.presenter.custom.flippane.FlipPanel;
 import application.presenter.custom.DJFilterListener;
 import application.presenter.custom.Marquee;
 import application.tools.ActionTool;
@@ -25,7 +26,6 @@ import application.tools.InfoTool;
 import application.tools.NotificationType;
 import application.windows.EmotionsWindow.Emotion;
 import application.windows.XPlayerWindow;
-import eu.hansolo.enzo.flippanel.FlipPanel;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -263,7 +263,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private XPlayer xPlayer;
 	
 	/** The radial menu. */
-	private XPlayerRadialMenu radialMenu;
+	//private XPlayerRadialMenu radialMenu;
 	
 	/** The visualizer window. */
 	private VisualizerWindowController visualizerWindow;
@@ -406,16 +406,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		xPlayerWindow = new XPlayerWindow(this);
 		
 		//== RadialMenu
-		radialMenu = new XPlayerRadialMenu(this);
-		radialMenu.mute.selectedProperty().addListener(l -> {
-			xPlayer.setMute(radialMenu.mute.isSelected());
-			muteButton.setSelected(radialMenu.mute.isSelected());
-			
-			//System.out.println("Entered Radial Menu");
-		});
+		//radialMenu = new XPlayerRadialMenu(this);
+		//		radialMenu.mute.selectedProperty().addListener(l -> {
+		//			xPlayer.setMute(radialMenu.mute.isSelected());
+		//			muteButton.setSelected(radialMenu.mute.isSelected());
+		//			
+		//			//System.out.println("Entered Radial Menu");
+		//		});
 		muteButton.selectedProperty().addListener(l -> {
-			xPlayer.setMute(radialMenu.mute.isSelected());
-			radialMenu.mute.setSelected(muteButton.isSelected());
+			xPlayer.setMute(muteButton.isSelected());
+			//radialMenu.mute.setSelected(muteButton.isSelected());
 			
 			//System.out.println("Entered Menu Button");
 		});
@@ -885,7 +885,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
 				
 				// RadialMenu!showing and duration!=0 and duration!=-1
-				if (!radialMenu.isHidden() && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
+				//if (!radialMenu.isHidden() && 
+				if (xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 					
 					//TotalTime and CurrentTime					
 					int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
@@ -942,7 +943,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size, size);
-		radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight());
+		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight());
 		//System.out.println("Redrawing canvas")
 	}
 	
@@ -983,8 +984,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		}
 		
 		// Mute?
-		xPlayer.setMute(radialMenu.mute.isSelected());
-		System.out.println("Mute is Selected? " + radialMenu.mute.isSelected());
+		xPlayer.setMute(muteButton.isSelected());
+		//System.out.println("Mute is Selected? " + muteButton.isSelected());
 		
 		// Volume
 		controlVolume();
@@ -1298,19 +1299,14 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
-	 * Mute the player.
+	 * Set the mute of the Line. Note that mute status does not affect gain.
+	 *
+	 * @param mute
+	 *            True to mute the audio of False to unmute it
 	 */
-	public void mute() {
-		radialMenu.mute.setSelected(true);
-		xPlayer.setMute(true);
-	}
-	
-	/**
-	 * UnMute the player.
-	 */
-	public void unMute() {
-		radialMenu.mute.setSelected(false);
-		xPlayer.setMute(false);
+	public void setMute(boolean value) {
+		muteButton.setSelected(value);
+		xPlayer.setMute(value);
 	}
 	
 	/**
@@ -1396,12 +1392,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return xPlayer;
 	}
 	
-	/**
-	 * @return the radialMenu
-	 */
-	public XPlayerRadialMenu getRadialMenu() {
-		return radialMenu;
-	}
+	//	/**
+	//	 * @return the radialMenu
+	//	 */
+	//	public XPlayerRadialMenu getRadialMenu() {
+	//		return radialMenu;
+	//	}
 	
 	/**
 	 * @return the visualizerWindow

@@ -27,10 +27,9 @@ public class MicAvailabilityChecker {
 	
 	public static void main(String[] args) {
 		try {
-		
+			
 			MicAvailabilityChecker.validateMicAvailability();
 		} catch (MicUnaccessibleException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -195,10 +195,10 @@ public class ConsoleWindowController extends StackPane {
 					player.replay();
 					success = true;
 				} else if ("mute".equals(action)) { //replay
-					player.mute();
+					player.setMute(true);
 					success = true;
 				} else if ("unmute".equals(action)) { //replay
-					player.unMute();
+					player.setMute(false);
 					success = true;
 				} else if ("open".equals(action)) { //open file chooser
 					player.openFileChooser();

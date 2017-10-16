@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import xplayer.dsp.KJDSPAudioDataConsumer;
 import xplayer.dsp.KJDigitalSignalProcessor;
 import xplayer.dsp.KJFFT;
+import xplayer.visualizer.geometryshapes.ResizableCanvas;
 
 /**
  * This SuperClass represents the model of the Visualizer.
@@ -38,10 +39,10 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	public int halfCanvasHeight = 0;
 	
 	/** The left. */
-	protected float[] pLeftChannel = new float[1024];
+	public float[] pLeftChannel = new float[1024];
 	
 	/** The right. */
-	protected float[] pRightChannel = new float[1024];
+	public float[] pRightChannel = new float[1024];
 	
 	/** The frame rate ratio hint. */
 	protected float frameRateRatioHint;
@@ -94,7 +95,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	private static final float DEFAULT_VU_METER_DECAY = 0.02f;
 	
 	/** The scope color. */
-	protected Color scopeColor;
+	public Color scopeColor;
 	
 	/** The spectrum analyser colors. */
 	static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
@@ -146,7 +147,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	protected float saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
 	
 	/** The source data line. */
-	protected SourceDataLine sourceDataLine = null;
+	public SourceDataLine sourceDataLine = null;
 	
 	/** The old left. */
 	// -- VU Meter

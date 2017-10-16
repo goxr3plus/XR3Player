@@ -47,5 +47,8 @@ Temporary Items
 .apdisk
 
 # Ignore XR3Player test code
-src/aaTesterOnlyCode
-src/aaTesterOnlyCode2
+/XR3Database
+/rubbishCode
+/testing
+*.flac
+*.mp3

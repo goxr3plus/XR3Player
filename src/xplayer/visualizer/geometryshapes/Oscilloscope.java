@@ -1,9 +1,10 @@
 /**
  * 
  */
-package xplayer.visualizer;
+package xplayer.visualizer.geometryshapes;
 
 import javafx.scene.paint.Color;
+import xplayer.visualizer.VisualizerDrawer;
 
 /**
  * The Class Oscilloscope.
