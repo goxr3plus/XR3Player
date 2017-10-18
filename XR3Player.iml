@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/libraries/commons-io-2.5.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/commons-validator-1.6.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/easybind-1.0.3.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jaudiotagger-2.2.6-SNAPSHOT.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/javasysmon-0.3.5.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jmactritonusspi1.74.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jnativehook-2.1.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/json-simple-2.1.2.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jsoup-1.10.3.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jspeex0.9.7.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/junique-1.0.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/richtextfx-fat-0.7-M5.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/tritonus-share-0.3.7.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/vorbis-support-1.1.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jfoenix.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/sqlite-jdbc-3.20.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jflac-codec-1.5.2.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/json-20150729.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/testinglibraries/jplaylistparser-0.9.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/testinglibraries/mp3agic-0.9.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/controlsfx-8.40.14.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/java-google-speech-api-2.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/java-flac-encoder-0.3.8.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/jlayer-8.0.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libraries/mp3spi1.9.5.jar!/" />
+    <src_description expected_position="1">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="1" />
+      <src_folder value="file://$MODULE_DIR$/resources" expected_position="2" />
+      <src_folder value="file://$MODULE_DIR$/testing" expected_position="3" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/testing" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="commons-io-2.5.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/commons-io-2.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3P~1/AppData/Local/Temp/decompiler/source/commons-io-2.5-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-validator-1.6.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/commons-validator-1.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/commons-validator-1.6-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="easybind-1.0.3.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/easybind-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/easybind-1.0.3-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaudiotagger-2.2.6-SNAPSHOT.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jaudiotagger-2.2.6-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javasysmon-0.3.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/javasysmon-0.3.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/javasysmon-0.3.5.0-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jmactritonusspi1.74.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jmactritonusspi1.74.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jnativehook-2.1.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jnativehook-2.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/jnativehook-2.1.0-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json-simple-2.1.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/json-simple-2.1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/json-simple-2.1.2-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jsoup-1.10.3.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jsoup-1.10.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/jsoup-1.10.3-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jspeex0.9.7.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jspeex0.9.7.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="junique-1.0.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/junique-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="richtextfx-fat-0.7-M5.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/richtextfx-fat-0.7-M5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="tritonus-share-0.3.7.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/tritonus-share-0.3.7.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/tritonus-share-0.3.7.4-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="vorbis-support-1.1.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/vorbis-support-1.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/vorbis-support-1.1.0-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jfoenix.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jfoenix.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/jfoenix-1.7.0-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="sqlite-jdbc-3.20.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/sqlite-jdbc-3.20.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/sqlite-jdbc-3.20.0-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jflac-codec-1.5.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jflac-codec-1.5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/GOXR3PLUS/.sourceattacher/jflac-codec-1.5.2-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json-20150729.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/json-20150729.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jplaylistparser-0.9.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/testinglibraries/jplaylistparser-0.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mp3agic-0.9.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/testinglibraries/mp3agic-0.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="controlsfx-8.40.14.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/controlsfx-8.40.14.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="java-google-speech-api-2.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/java-google-speech-api-2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="java-flac-encoder-0.3.8.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/java-flac-encoder-0.3.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jlayer-8.0.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/jlayer-8.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mp3spi1.9.5.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libraries/mp3spi1.9.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
+    <orderEntry type="library" name="Maven: commons-validator:commons-validator:1.6" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.8.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:9.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.fxmisc.easybind:easybind:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: net.sourceforge.javaflacencoder:java-flac-encoder:0.3.7" level="project" />
+    <orderEntry type="library" name="Maven: com.outr.javasysmon:javasysmon_2.10:0.3.4" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.10.3" level="project" />
+    <orderEntry type="library" name="Maven: org.jflac:jflac-codec:1.5.2" level="project" />
+    <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:1.9.1" level="project" />
+    <orderEntry type="library" name="Maven: com.1stleg:jnativehook:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.3" level="project" />
+    <orderEntry type="library" name="Maven: de.huxhorn.lilith:de.huxhorn.lilith.3rdparty.junique:1.0.4" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.soundlibs:mp3spi:1.9.5.4" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.soundlibs:jlayer:1.0.1.4" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:3.8.2" level="project" />
+    <orderEntry type="library" name="Maven: org.fxmisc.richtext:richtextfx:0.7-M5" level="project" />
+    <orderEntry type="library" name="Maven: org.fxmisc.wellbehaved:wellbehavedfx:0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.fxmisc.undo:undofx:1.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.reactfx:reactfx:2.0-M5" level="project" />
+    <orderEntry type="library" name="Maven: org.fxmisc.flowless:flowless:0.5.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.xerial:sqlite-jdbc:3.20.1" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.soundlibs:tritonus-share:0.3.7.4" level="project" />
+  </component>
+</module>
