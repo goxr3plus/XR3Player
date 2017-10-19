@@ -100,8 +100,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 88);
-		internalInformation.put("ReleasedDate", "08/10/2017");
+		internalInformation.put("Version", 9776);
+		internalInformation.put("ReleasedDate", "??/6/2020");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -911,7 +911,7 @@ public class Main extends Application {
 		
 		//Find the default one for the application
 		if (image == null)
-			image = new Image("/image/application_background.jpg");
+			image = InfoTool.getImageFromResourcesFolder("application_background.jpg");
 		
 		//Set the background Image
 		BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -942,6 +942,8 @@ public class Main extends Application {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Hello from Main Method!");
+		
+		System.out.println("Cur Path :-> " + InfoTool.getBasePathForClass(Main.class));
 		
 		//		//---------------Check for Duplicate Instance-----------------	
 		//		String id = "XR3PlayerApplication";

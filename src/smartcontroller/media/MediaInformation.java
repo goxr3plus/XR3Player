@@ -341,7 +341,7 @@ public class MediaInformation extends BorderPane {
 								format.setText("-");
 							});
 						}
-					} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException ex) {
+					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException ex) {
 						//ex.printStackTrace();
 					}
 					

@@ -1,6 +1,3 @@
-/*
- * 
- */
 package application.tools;
 
 import java.io.ByteArrayInputStream;
@@ -37,7 +34,6 @@ import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.TagException;
 
 import com.mpatric.mp3agic.ID3v2;
-import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
@@ -418,7 +414,7 @@ public final class InfoTool {
 					if (id3v2Tag.getAlbumImage() != null) // image?
 						return new ByteArrayInputStream(id3v2Tag.getAlbumImage());
 				}
-			} catch (UnsupportedTagException | InvalidDataException | IOException ex) {
+			} catch (Exception ex) {
 				logger.log(Level.WARNING, "Can't get Album Image", ex);
 			}
 		
@@ -682,11 +678,11 @@ public final class InfoTool {
 					//			milliseconds = tryWithMp3Agic(file);
 					//		    }
 					
-				} catch (IOException | InvalidAudioFrameException | TagException | ReadOnlyFileException | CannotReadException ex) {
+				} catch (IOException | InvalidAudioFrameException | TagException | ReadOnlyFileException ex) {
 					System.out.println("Problem getting the time of->" + file.getAbsolutePath());
 					//logger.log(Level.WARNING, ex.getMessage(), ex);
-					
-					//Try with mp3agic
+				} catch (Exception ex) {
+					System.out.println("Problem getting the time of->" + file.getAbsolutePath());
 				}
 				//}
 			}

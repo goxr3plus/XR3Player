@@ -283,7 +283,7 @@ public abstract class Media {
 				bitRate.set((int) new MP3File(file).getMP3AudioHeader().getBitRateAsNumber());
 			else
 				bitRate.set(-1);
-		} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException e) {
+		} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException e) {
 			e.printStackTrace();
 		}
 		
