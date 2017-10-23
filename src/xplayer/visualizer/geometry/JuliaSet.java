@@ -1,11 +1,11 @@
 /**
  * 
  */
-package xplayer.visualizer.geometryshapes;
+package xplayer.visualizer.geometry;
 
 import javafx.scene.paint.Color;
-import xplayer.visualizer.VisualizerDrawer;
-import xplayer.visualizer.geometryshapes.MandelbrotBean.ColorSchema;
+import xplayer.visualizer.core.VisualizerDrawer;
+import xplayer.visualizer.geometry.MandelbrotBean.ColorSchema;
 
 /*-----------------------------------------------------------------------
  * 

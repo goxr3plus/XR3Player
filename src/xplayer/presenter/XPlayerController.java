@@ -18,9 +18,9 @@ import application.Main;
 import application.presenter.custom.DJDisc;
 import application.presenter.custom.DJFilter;
 import application.presenter.custom.DJFilter.DJFilterCategory;
-import application.presenter.custom.flippane.FlipPanel;
 import application.presenter.custom.DJFilterListener;
 import application.presenter.custom.Marquee;
+import application.presenter.custom.flippane.FlipPanel;
 import application.tools.ActionTool;
 import application.tools.InfoTool;
 import application.tools.NotificationType;
@@ -63,17 +63,17 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import smartcontroller.enums.Genre;
 import smartcontroller.media.Audio;
+import streamplayer.Status;
+import streamplayer.StreamPlayerEvent;
+import streamplayer.StreamPlayerException;
+import streamplayer.StreamPlayerListener;
 import xplayer.model.XPlayer;
 import xplayer.model.XPlayerModel;
 import xplayer.services.XPlayerPlayService;
 import xplayer.services.XPlayerSeekService;
-import xplayer.streamplayer.Status;
-import xplayer.streamplayer.StreamPlayerEvent;
-import xplayer.streamplayer.StreamPlayerException;
-import xplayer.streamplayer.StreamPlayerListener;
-import xplayer.visualizer.presenter.VisualizerStackController;
-import xplayer.visualizer.presenter.VisualizerWindowController;
-import xplayer.visualizer.presenter.XPlayerVisualizer;
+import xplayer.visualizer.fxpresenter.VisualizerStackController;
+import xplayer.visualizer.fxpresenter.VisualizerWindowController;
+import xplayer.visualizer.fxpresenter.XPlayerVisualizer;
 
 /**
  * Represents the graphical interface for the deck.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xplayer.visualizer.presenter;
+package xplayer.visualizer.fxpresenter;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import xplayer.presenter.XPlayerController;
-import xplayer.visualizer.VisualizerModel;
+import xplayer.visualizer.core.VisualizerModel;
 
 /**
  * 

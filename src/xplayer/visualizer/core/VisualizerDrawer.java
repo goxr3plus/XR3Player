@@ -1,17 +1,17 @@
 /**
  * 
  */
-package xplayer.visualizer;
+package xplayer.visualizer.core;
 
 import application.tools.InfoTool;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import xplayer.visualizer.geometryshapes.JuliaSet;
-import xplayer.visualizer.geometryshapes.Oscilloscope;
-import xplayer.visualizer.geometryshapes.Polyspiral;
-import xplayer.visualizer.geometryshapes.Sierpinski;
-import xplayer.visualizer.geometryshapes.Sprite3D;
-import xplayer.visualizer.geometryshapes.Sprite3D.Shape3D;
+import xplayer.visualizer.geometry.JuliaSet;
+import xplayer.visualizer.geometry.Oscilloscope;
+import xplayer.visualizer.geometry.Polyspiral;
+import xplayer.visualizer.geometry.Sierpinski;
+import xplayer.visualizer.geometry.Sprite3D;
+import xplayer.visualizer.geometry.Sprite3D.Shape3D;
 
 /**
  * The Class VisualizerDrawer.
@@ -38,10 +38,10 @@ public class VisualizerDrawer extends VisualizerModel {
 	//-----
 	
 	/** The foreground image */
-	public Image foregroundImage;//= DEFAULT_FOREGROUND_IMAGE;
+	public Image foregroundImage;//= DEFAULT_FOREGROUND_IMAGE
 	
 	/** The background image. */
-	public Image backgroundImage;//= DEFAULT_BACKGROUND_IMAGE;
+	public Image backgroundImage;//= DEFAULT_BACKGROUND_IMAGE
 	
 	//-----
 	

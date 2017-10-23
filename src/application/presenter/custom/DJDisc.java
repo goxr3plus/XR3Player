@@ -28,7 +28,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import xplayer.visualizer.geometryshapes.ResizableCanvas;
+import xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
  * Represents a disc controller.

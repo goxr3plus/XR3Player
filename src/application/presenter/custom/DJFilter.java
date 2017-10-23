@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
-import xplayer.visualizer.geometryshapes.ResizableCanvas;
+import xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
  * Represents a disc controller.

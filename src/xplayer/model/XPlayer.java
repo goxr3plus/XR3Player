@@ -3,7 +3,7 @@
  */
 package xplayer.model;
 
-import xplayer.streamplayer.StreamPlayer;
+import streamplayer.StreamPlayer;
 
 /**
  * This class in controlling the player internally.
@@ -19,4 +19,5 @@ public class XPlayer extends StreamPlayer {
         super();
     }
 
+	
 }

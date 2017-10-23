@@ -2,7 +2,7 @@
  * Copyright (c) 2015 Chris Newland.
  * Licensed under https://github.com/chriswhocodes/demofx/blob/master/LICENSE-BSD
  */
-package xplayer.visualizer.geometryshapes;
+package xplayer.visualizer.geometry;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import application.tools.InfoTool;
 import javafx.scene.image.Image;
-import xplayer.visualizer.VisualizerDrawer;
+import xplayer.visualizer.core.VisualizerDrawer;
 
 /**
  * The Class Sprite3D.

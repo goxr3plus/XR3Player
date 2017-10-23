@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.visualizer.presenter;
+package xplayer.visualizer.fxpresenter;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -38,7 +38,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import xplayer.presenter.XPlayerController;
-import xplayer.visualizer.VisualizerDrawer;
+import xplayer.visualizer.core.VisualizerDrawer;
 
 /**
  * The Class VisualizerWindow.

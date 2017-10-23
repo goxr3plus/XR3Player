@@ -6,10 +6,12 @@
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
 	<version>3.0.0</version>
+	<name>XR3Player</name>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -19,7 +21,7 @@
 				<directory>resources</directory>
 			</resource>
 		</resources>
-		<testSourceDirectory>testing</testSourceDirectory>
+		<!-- <testSourceDirectory>testing</testSourceDirectory> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -37,7 +39,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
+				<version>3.0.0-M1</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -50,6 +52,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -152,28 +155,14 @@
 		</dependency>
 		<!-- AUDIO SUPPORT -->
 		<dependency>
-			<groupId>com.googlecode.soundlibs</groupId>
-			<artifactId>mp3spi</artifactId>
-			<version>1.9.5.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jflac</groupId>
-			<artifactId>jflac-codec</artifactId>
-			<version>1.5.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.Trilarion</groupId>
-			<artifactId>java-vorbis-support</artifactId>
-			<version>v1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.soundlibs</groupId>
-			<artifactId>tritonus-share</artifactId>
-			<version>0.3.7.4</version>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>java-stream-player</artifactId>
+			<version>V1.0.0</version>
 		</dependency>
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
 	</dependencies>
 
+	<description>Dominant Future Generation JavaFX Media Player</description>
 </project>

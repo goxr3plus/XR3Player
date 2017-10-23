@@ -87,7 +87,7 @@ import smartcontroller.presenter.SmartControllerSearcher.AdvancedSearch;
 import smartcontroller.services.MediaFilterService;
 import xplayer.presenter.XPlayersList;
 import xplayer.services.XPlayersFilterService;
-import xplayer.visualizer.presenter.VisualizerWindowController.Type;
+import xplayer.visualizer.fxpresenter.VisualizerWindowController.Type;
 import xr3capture.CaptureWindow;
 
 /**

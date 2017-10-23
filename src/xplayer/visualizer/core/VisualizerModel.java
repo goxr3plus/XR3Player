@@ -1,7 +1,7 @@
 /*
  * 
  */
-package xplayer.visualizer;
+package xplayer.visualizer.core;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import xplayer.dsp.KJDSPAudioDataConsumer;
 import xplayer.dsp.KJDigitalSignalProcessor;
 import xplayer.dsp.KJFFT;
-import xplayer.visualizer.geometryshapes.ResizableCanvas;
+import xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
  * This SuperClass represents the model of the Visualizer.

@@ -1,4 +1,4 @@
-package xplayer.visualizer.geometryshapes;
+package xplayer.visualizer.geometry;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

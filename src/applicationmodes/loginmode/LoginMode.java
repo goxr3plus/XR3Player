@@ -323,7 +323,7 @@ public class LoginMode extends BorderPane {
 				String responseSB = in.lines().collect(Collectors.joining());
 				in.close();
 				
-				String text = "Sourceforge: [ " + responseSB.split("<text x=\"98.5\" y=\"14\">")[1].split("/total")[0] + " ]";
+				String text = "Sourceforge: [ " + responseSB.split("/total")[0].split("textLength=\"510\">")[1] + " ]";
 				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
 				
 				//throw new IOException("Exception get out of the building!!!")

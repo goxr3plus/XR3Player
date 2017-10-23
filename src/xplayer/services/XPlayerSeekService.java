@@ -6,8 +6,8 @@ import application.Main;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
+import streamplayer.StreamPlayerException;
 import xplayer.presenter.XPlayerController;
-import xplayer.streamplayer.StreamPlayerException;
 
 /**
  * This Service is used to skip the Audio of XPlayer to different time.

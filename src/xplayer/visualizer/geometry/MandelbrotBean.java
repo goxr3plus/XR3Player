@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package xplayer.visualizer.geometryshapes;
+package xplayer.visualizer.geometry;
 
 import javafx.scene.paint.Color;
 

@@ -1,13 +1,13 @@
 /*
  * 
  */
-package xplayer.visualizer.presenter;
+package xplayer.visualizer.fxpresenter;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
 import xplayer.presenter.XPlayerController;
-import xplayer.visualizer.VisualizerDrawer;
+import xplayer.visualizer.core.VisualizerDrawer;
 
 /**
  * The Class Visualizer.
@@ -20,7 +20,7 @@ abstract class Visualizer extends VisualizerDrawer {
 	private final PaintService animationService = new PaintService();
 	
 	/**
-	 * Constructor
+	 * Constructor 
 	 * 
 	 * @param text
 	 */

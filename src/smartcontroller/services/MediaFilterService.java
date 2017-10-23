@@ -23,7 +23,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import smartcontroller.media.Media;
 import smartcontroller.presenter.SmartController;
-import xplayer.streamplayer.ThreadFactoryWithNamePrefix;
+import streamplayer.ThreadFactoryWithNamePrefix;
 
 /**
  * The Class FileFilterThread.

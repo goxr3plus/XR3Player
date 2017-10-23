@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import xplayer.visualizer.geometryshapes.ResizableCanvas;
+import xplayer.visualizer.geometry.ResizableCanvas;
 
 public class StackPaneResizer extends Application {
 	
