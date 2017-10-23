@@ -7,6 +7,11 @@
 	<artifactId>XR3Player</artifactId>
 	<version>3.0.0</version>
 	<name>XR3Player</name>
+	<description>Dominant Future Generation JavaFX Media Player</description>
+	<url>https://github.com/goxr3plus/XR3Player</url>
+
+	<!-- Output to jar format -->
+	<packaging>jar</packaging>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -15,6 +20,7 @@
 	</properties>
 
 	<build>
+		<finalName>XR3Player</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
@@ -57,6 +63,43 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+
+			<!-- Make this jar executable -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>application.Main</mainClass>
+							<classpathPrefix>XR3Player_lib/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- Copy project dependency -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<!-- exclude junit, we need runtime dependency only -->
+							<excludeArtifactIds> junit </excludeArtifactIds>
+							<outputDirectory>${project.build.directory}/XR3Player_lib/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -163,6 +206,4 @@
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
 	</dependencies>
-
-	<description>Dominant Future Generation JavaFX Media Player</description>
 </project>
