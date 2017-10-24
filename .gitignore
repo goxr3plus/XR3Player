@@ -53,3 +53,5 @@ Temporary Items
 *.mp3
 /bin/
 /target/
+
+/libraries
