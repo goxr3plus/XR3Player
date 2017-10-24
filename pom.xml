@@ -29,7 +29,7 @@
 		</resources>
 		<!-- <testSourceDirectory>testing</testSourceDirectory> -->
 		<plugins>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>3.0.1</version>
@@ -42,7 +42,8 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
+			-->
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.0.0-M1</version>
@@ -55,6 +56,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -74,7 +76,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>application.Main</mainClass>
+							<mainClass>main.java.com.goxr3plus.xr3player.application.Main</mainClass>
 							<classpathPrefix>XR3Player_lib/</classpathPrefix>
 						</manifest>
 					</archive>

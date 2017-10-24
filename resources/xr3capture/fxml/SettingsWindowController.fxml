@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="509.0" prefWidth="611.0" styleClass="settings-controller" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xr3capture.SettingsWindowController">
+<BorderPane fx:id="root" prefHeight="509.0" prefWidth="611.0" styleClass="settings-controller" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.goxr3plus.xr3player.xr3capture.SettingsWindowController">
    <center>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>

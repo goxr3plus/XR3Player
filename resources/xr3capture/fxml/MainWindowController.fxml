@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xr3capture.MainWindowController">
+<StackPane fx:id="root" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.goxr3plus.xr3player.xr3capture.MainWindowController">
    <children>
       <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: black; -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: white; -fx-border-style: solid;">
          <top>

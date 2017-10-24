@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.media.MediaView?>
 
-<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="visualizerPane" focusTraversable="true" style="-fx-background-color: transparent;">
          <center>
