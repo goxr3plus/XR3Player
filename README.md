@@ -59,7 +59,7 @@ XR3Player is an opensource Java/JavaFX Media Player,WebBrowser,Media File Organi
 
 #### Tutorial and Informations:
 
-Download Java 8 here : Java 1.8.0_131(8 Update 131)++ required . ( https://www.java.com/en/ )
+Download Java 8 here : Java 1.8.0_141++ required . ( https://www.java.com/en/ )
 
 How to install? ( https://www.youtube.com/watch?v=Cs8rqYloZPo )
 
