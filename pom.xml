@@ -123,7 +123,7 @@
 			<version>8.40.14</version>
 		</dependency>
 		<dependency>
-			<groupId>com.jfoenix</groupId>
+			<groupId>com.jfoenix</groupId>	
 			<artifactId>jfoenix</artifactId>
 			<version>1.9.1</version>
 		</dependency>
@@ -153,7 +153,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>
