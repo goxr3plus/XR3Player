@@ -34,14 +34,27 @@ public class EmotionListsController {
 		dislikedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "DislikedMediaPlayList", dislikedMediaList.getDatabaseTableName());
 		likedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "LikedMediaPlayList", likedMediaList.getDatabaseTableName());
 		lovedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "LovedMediaPlayList", lovedMediaList.getDatabaseTableName());
+		
+		//Bidirectional binding with Instant Search
+		hatedMediaListController.getInstantSearch().selectedProperty()
+				.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+		dislikedMediaListController.getInstantSearch().selectedProperty()
+				.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+		likedMediaListController.getInstantSearch().selectedProperty()
+				.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+		lovedMediaListController.getInstantSearch().selectedProperty()
+				.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
 	}
 	
 	/**
-	 * This method accepts a song path and based on the emotion the user expressed for it , the song will be added on one of the EmotionsList (for
-	 * example LikedSongs) and will automatically determine if it needs to be removed from some other emotion list that it was .
+	 * This method accepts a song path and based on the emotion the user
+	 * expressed for it , the song will be added on one of the EmotionsList (for
+	 * example LikedSongs) and will automatically determine if it needs to be
+	 * removed from some other emotion list that it was .
 	 * 
 	 * <br>
-	 * For example if it was on liked songs and the user disliked it will go on the disliked songs list etc.
+	 * For example if it was on liked songs and the user disliked it will go on
+	 * the disliked songs list etc.
 	 * 
 	 * @param songPath
 	 * @param emotion
@@ -94,7 +107,8 @@ public class EmotionListsController {
 	}
 	
 	/**
-	 * Update the Emotion SmartControllers based on the boolean given for each Emotion SmartController
+	 * Update the Emotion SmartControllers based on the boolean given for each
+	 * Emotion SmartController
 	 * 
 	 * @param updateHated
 	 * @param updateDisliked
@@ -114,7 +128,8 @@ public class EmotionListsController {
 	}
 	
 	/**
-	 * Checks if the Media is contained in any of the emotion lists , if not it's emotion is neutral by default
+	 * Checks if the Media is contained in any of the emotion lists , if not
+	 * it's emotion is neutral by default
 	 * 
 	 * @param mediaPath
 	 */
