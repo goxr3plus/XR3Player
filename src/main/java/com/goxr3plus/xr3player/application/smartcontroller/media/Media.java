@@ -170,7 +170,7 @@ public abstract class Media {
 		
 		// ....initialize
 		mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? SONG_IMAGE : VIDEO_IMAGE));
-		playStatus = new SimpleIntegerProperty(0);
+		playStatus = new SimpleIntegerProperty(-2);
 		
 		//getInfoBuy
 		ImageView imageView1 = new ImageView(INFOBUY_IMAGE);
@@ -648,7 +648,7 @@ public abstract class Media {
 								setFilePath(oldFilePath);
 								ActionTool.showNotification("Rename Failed", "The action can not been completed:\nA file with that name already exists.", Duration.millis(1500),
 										NotificationType.WARNING);
-								//controller.renameWorking = false;
+								//controller.renameWorking = false
 								return;
 							}
 							
@@ -658,7 +658,7 @@ public abstract class Media {
 								ActionTool.showNotification("Rename Failed",
 										"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
 										Duration.millis(1500), NotificationType.WARNING);
-								//controller.renameWorking = false;
+								//controller.renameWorking = false
 								return;
 							}
 							
@@ -692,6 +692,9 @@ public abstract class Media {
 									
 									//object
 									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
+									
+									//change the text of Marquee
+									xPlayerController.getMediaFileMarquee().setText(InfoTool.getFileName(newFilePath));
 									
 								}
 							});

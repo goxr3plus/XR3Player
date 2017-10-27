@@ -1501,8 +1501,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	@Override
 	public void valueChanged(double value) {
 		controlVolume();
-		//volumeDiscLabel.setText(String.valueOf((int) value));
+		//volumeDiscLabel.setText(String.valueOf((int) value))
 		disc.setVolume((int) ( value * 100 ));
+	}
+
+	/**
+	 * @return the mediaFileMarquee
+	 */
+	public Marquee getMediaFileMarquee() {
+		return mediaFileMarquee;
 	}
 	
 }
