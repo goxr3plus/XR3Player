@@ -27,7 +27,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<fx:root prefHeight="411.0" prefWidth="666.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="411.0" prefWidth="666.0" styleClass="smartController" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTabPane fx:id="modesTabPane" side="RIGHT">
          <tabs>
@@ -73,13 +73,16 @@
                      <top>
                         <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <children>
-                              <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#f58007" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="30.0" selected="true" style="-fx-background-color: #252525;" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
+                              <JFXCheckBox fx:id="instantSearch" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
                                  <tooltip>
                                     <Tooltip text="Instant Search " />
                                  </tooltip>
                                  <HBox.margin>
                                     <Insets left="4.0" right="4.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </JFXCheckBox>
                               <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="189.0">
                                  <children>
