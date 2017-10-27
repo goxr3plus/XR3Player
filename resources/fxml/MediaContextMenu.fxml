@@ -7,23 +7,23 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on (CTRL+ENTER)">
         <items>
           <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
             <MenuItem fx:id="startOnPlayer1" mnemonicParsing="false" onAction="#action" text="xPlayer ~1">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
             <MenuItem fx:id="startOnPlayer2" mnemonicParsing="false" onAction="#action" text="xPlayer ~2">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
         </items>
@@ -39,17 +39,17 @@
         <items>
           <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
             <MenuItem fx:id="stopPlayer1" mnemonicParsing="false" onAction="#action" text="xPlayer ~1">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
             <MenuItem fx:id="stopPlayer2" mnemonicParsing="false" onAction="#action" text="xPlayer ~2">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
         </items>

@@ -19,12 +19,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.Audio;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.AudioType;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.AudioType;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 /**

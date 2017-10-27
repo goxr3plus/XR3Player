@@ -8,8 +8,8 @@ import java.io.File;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
 /**
  * A custom TreeItem which represents a File

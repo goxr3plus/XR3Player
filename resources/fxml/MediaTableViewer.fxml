@@ -6,10 +6,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root prefHeight="433.0" prefWidth="718.0" stylesheets="@../style/application.css" tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="433.0" prefWidth="718.0" stylesheets="@../style/application.css" tableMenuButtonVisible="true" type="TableView" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
       <TableColumn fx:id="number" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="#" />
-      <TableColumn fx:id="hasBeenPlayed" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Has been Played?">
+      <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Has been Played?">
          <graphic>
             <ImageView>
                <image>

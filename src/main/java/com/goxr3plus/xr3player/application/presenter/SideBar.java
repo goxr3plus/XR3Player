@@ -21,9 +21,9 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.services.CreateZipService;
 import main.java.com.goxr3plus.xr3player.application.services.ExportZipService;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.services.Operation;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**

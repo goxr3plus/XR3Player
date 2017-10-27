@@ -41,7 +41,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.AudioType;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.AudioType;
 
 /**
  * Provides useful methods for retrieving informations.
