@@ -101,7 +101,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 89);
-		internalInformation.put("ReleasedDate", "?/10/2017");
+		internalInformation.put("ReleasedDate", "28/10/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -130,7 +130,8 @@ public class Main extends Application {
 	public static final EmotionsWindow emotionsWindow = new EmotionsWindow();
 	
 	/**
-	 * This window is being used to export files from the application to the outside world
+	 * This window is being used to export files from the application to the
+	 * outside world
 	 */
 	public static final ExportWindowController exportWindow = new ExportWindowController();
 	
@@ -146,7 +147,8 @@ public class Main extends Application {
 	public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
 	
 	/**
-	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
+	 * This class is used to capture the computer Screen or a part of it [ Check
+	 * XR3Capture package]
 	 */
 	public static CaptureWindow captureWindow = new CaptureWindow();
 	
@@ -244,20 +246,21 @@ public class Main extends Application {
 	public static PlayListModesSplitPane playListModesSplitPane = new PlayListModesSplitPane();
 	
 	/**
-	 * The Login Mode where the user of the applications has to choose an account to login
+	 * The Login Mode where the user of the applications has to choose an
+	 * account to login
 	 */
 	public static LoginMode loginMode = new LoginMode();
 	
 	/**
-	 * Entering in this mode you can change the user settings and other things that have to do with the user....
+	 * Entering in this mode you can change the user settings and other things
+	 * that have to do with the user....
 	 */
 	public static UserMode userMode = new UserMode();
 	
-	/***
-	 * This BorderPane has in the center the root , at the left the SideBar and on the Top the TopBar
+	/**
+	 * This JavaFX TabPane represents a TabPane for Navigation between
+	 * application Modes
 	 */
-	// private static BorderPane applicationBorderPane = new BorderPane();
-	
 	public static JFXTabPane specialJFXTabPane = new JFXTabPane();
 	
 	private static void handle(WindowEvent exit) {
@@ -331,8 +334,8 @@ public class Main extends Application {
 		applicationProperties.setUpdatePropertiesLocked(false);
 		
 		//------------------Experiments------------------
-		// ScenicView.show(scene);
-		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+		// ScenicView.show(scene)
+		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 	}
 	
@@ -345,7 +348,6 @@ public class Main extends Application {
 		consoleWindow.getWindow().initOwner(window);
 		settingsWindow.getWindow().initOwner(window);
 		aboutWindow.getWindow().initOwner(window);
-		//searchWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
 		welcomeScreen.getWindow().initOwner(window);
 		
@@ -522,53 +524,56 @@ public class Main extends Application {
 			}
 			
 			//--------- Create the Menu Items of available users for Settings Window
-			loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !userr.getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
-				
-				//Create the MenuItem
-				MenuItem menuItem = new MenuItem(InfoTool.getMinString(userr.getUserName(), 50));
-				
-				//Set Image
-				ImageView imageView = new ImageView(userr.getImageView().getImage());
-				imageView.setFitWidth(24);
-				imageView.setFitHeight(24);
-				menuItem.setGraphic(imageView);
-				
-				//Set Action
-				menuItem.setOnAction(a -> {
+			if (loginMode.teamViewer.getItemsObservableList().size() == 1)
+				settingsWindow.getCopySettingsMenuButton().setDisable(true);
+			else
+				loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !userr.getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
 					
-					//Ask the user
-					if (ActionTool.doQuestion("Soore you want to ovveride your current user settings with the one that you selected from the menu ?",
-							settingsWindow.getCopySettingsMenuButton(), window))
+					//Create the MenuItem
+					MenuItem menuItem = new MenuItem(InfoTool.getMinString(userr.getUserName(), 50));
+					
+					//Set Image
+					ImageView imageView = new ImageView(userr.getImageView().getImage());
+					imageView.setFitWidth(24);
+					imageView.setFitHeight(24);
+					menuItem.setGraphic(imageView);
+					
+					//Set Action
+					menuItem.setOnAction(a -> {
 						
-						//Don't block the application due to IO Operations
-						new Thread(() -> {
+						//Ask the user
+						if (ActionTool.doQuestion("Soore you want to ovveride your current user settings with the one that you selected from the menu ?",
+								settingsWindow.getCopySettingsMenuButton(), window))
 							
-							//Delete the current settings from the User
-							ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings"
-									+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
-							
-							//Transfer the settings from the other user
-							ActionTool.copy(
-									InfoTool.getAbsoluteDatabasePathWithSeparator() + userr.getUserName() + File.separator + "settings" + File.separator
-											+ InfoTool.USER_SETTINGS_FILE_NAME,
-									InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings" + File.separator
-											+ InfoTool.USER_SETTINGS_FILE_NAME);
-							
-							//Reload the application settings now...							
-							Platform.runLater(Main::loadApplicationSettings);
-						}).start();
+							//Don't block the application due to IO Operations
+							new Thread(() -> {
+								
+								//Delete the current settings from the User
+								ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings"
+										+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
+								
+								//Transfer the settings from the other user
+								ActionTool.copy(
+										InfoTool.getAbsoluteDatabasePathWithSeparator() + userr.getUserName() + File.separator + "settings" + File.separator
+												+ InfoTool.USER_SETTINGS_FILE_NAME,
+										InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings" + File.separator
+												+ InfoTool.USER_SETTINGS_FILE_NAME);
+								
+								//Reload the application settings now...							
+								Platform.runLater(Main::loadApplicationSettings);
+							}).start();
+						
+					});
 					
+					//Disable if user has no settings defined
+					if (!new File(
+							InfoTool.getAbsoluteDatabasePathWithSeparator() + userr.getUserName() + File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
+									.exists())
+						menuItem.setDisable(true);
+					
+					//Finally add the Menu Item
+					settingsWindow.getCopySettingsMenuButton().getItems().add(menuItem);
 				});
-				
-				//Disable if user has no settings defined
-				if (!new File(
-						InfoTool.getAbsoluteDatabasePathWithSeparator() + userr.getUserName() + File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
-								.exists())
-					menuItem.setDisable(true);
-				
-				//Finally add the Menu Item
-				settingsWindow.getCopySettingsMenuButton().getItems().add(menuItem);
-			});
 			
 			//----Update the UserInformation properties file when the total libraries change
 			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
@@ -599,7 +604,8 @@ public class Main extends Application {
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * Checks if the Current Java Version is the appropriate for the application [[SuppressWarningsSpartan]]
+	 * Checks if the Current Java Version is the appropriate for the application
+	 * [[SuppressWarningsSpartan]]
 	 */
 	private void checkJavaCombatibility() {
 		
@@ -900,8 +906,9 @@ public class Main extends Application {
 	static boolean backgroundFound;
 	
 	/**
-	 * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is
-	 * being added :)
+	 * Determines the background image of the application based on if a custom
+	 * image exists inside the database .If not then the default image is being
+	 * added :)
 	 * 
 	 */
 	private static void determineBackgroundImage() {
