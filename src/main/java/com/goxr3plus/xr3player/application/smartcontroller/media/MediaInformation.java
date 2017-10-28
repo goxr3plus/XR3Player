@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3AudioHeader;
@@ -29,11 +28,13 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
- * Allows you to view informations about the selected song like the album image,to search for it on the web,to buy this song on iTunes,Amazon.
+ * Allows you to view informations about the selected song like the album
+ * image,to search for it on the web,to buy this song on iTunes,Amazon.
  *
  * @author GOXR3PLUS STUDIO
  */
@@ -184,6 +185,12 @@ public class MediaInformation extends BorderPane {
 			}
 		});
 		
+		//ImageView
+		imageView.setOnMouseReleased(m -> {
+			if (media != null)
+				Main.pictureWindowController.showMediaFileImage(media.getFilePath());
+		});
+		
 	}
 	
 	/**
@@ -197,7 +204,8 @@ public class MediaInformation extends BorderPane {
 	}
 	
 	/**
-	 * Using this Service as an external Thread which updates the Information based on the selected Media
+	 * Using this Service as an external Thread which updates the Information
+	 * based on the selected Media
 	 * 
 	 * @author GOXR3PLUS
 	 *

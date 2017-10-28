@@ -56,7 +56,7 @@ public final class ActionTool {
 	private static Random random = new Random();
 	
 	/** The warning image. */
-	//private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png");
+	//private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png")
 	
 	/** The question image. */
 	private static ImageView questionImage = InfoTool.getImageViewFromResourcesFolder("question.png");
@@ -141,7 +141,7 @@ public final class ActionTool {
 	public static boolean copy(String source , String destination) {
 		boolean succeess = true;
 		
-		//System.out.println("Copying ->" + source + "\n\tto ->" + destination);
+		//System.out.println("Copying ->" + source + "\n\tto ->" + destination)
 		
 		try {
 			Files.copy(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
@@ -166,7 +166,7 @@ public final class ActionTool {
 	public static boolean copy(InputStream source , String destination) {
 		boolean succeess = true;
 		
-		//System.out.println("Copying ->" + source + "\n\tto ->" + destination);
+		//System.out.println("Copying ->" + source + "\n\tto ->" + destination)
 		
 		try {
 			System.out.println(Files.copy(source, Paths.get(destination), StandardCopyOption.REPLACE_EXISTING));
@@ -190,7 +190,7 @@ public final class ActionTool {
 	public static boolean move(String source , String destination) {
 		boolean succeess = true;
 		
-		//System.out.println("Moving ->" + source + "\n\tto ->" + destination);
+		//System.out.println("Moving ->" + source + "\n\tto ->" + destination)
 		
 		try {
 			Files.move(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
@@ -526,7 +526,8 @@ public final class ActionTool {
 	//	}
 	
 	/**
-	 * Returns a Random Number from 0 to ...what i have choosen in method see the doc
+	 * Returns a Random Number from 0 to ...what i have choosen in method see
+	 * the doc
 	 *
 	 * @return A random integer
 	 */
@@ -537,7 +538,8 @@ public final class ActionTool {
 	/**
 	 * Return random table name.
 	 *
-	 * @return Returns a RandomTableName for the database in format ("_"+randomNumber)
+	 * @return Returns a RandomTableName for the database in format
+	 *         ("_"+randomNumber)
 	 */
 	public static String returnRandomTableName() {
 		return "_" + returnRandom();
@@ -560,7 +562,8 @@ public final class ActionTool {
 	 *            The absolute path of the File|Folder
 	 * @param fileType
 	 *            Create DIRECTORY OR FILE ?
-	 * @return True if exists or have been successfully created , otherwise false
+	 * @return True if exists or have been successfully created , otherwise
+	 *         false
 	 */
 	public static boolean createFileOrFolder(String absoluteFilePath , FileType fileType) {
 		return createFileOrFolder(new File(absoluteFilePath), fileType);
@@ -573,7 +576,8 @@ public final class ActionTool {
 	 *            The absolute path of the File|Folder
 	 * @param fileType
 	 *            Create DIRECTORY OR FILE ?
-	 * @return True if exists or have been successfully created , otherwise false
+	 * @return True if exists or have been successfully created , otherwise
+	 *         false
 	 */
 	public static boolean createFileOrFolder(File file , FileType fileType) {
 		//Already exists?

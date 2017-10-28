@@ -299,6 +299,13 @@ public class ConsoleWindowController extends StackPane {
 	}
 	
 	/**
+	 * Close the Window
+	 */
+	public void close() {
+		window.close();
+	}
+	
+	/**
 	 * Show the Window
 	 */
 	public void show() {
@@ -312,7 +319,8 @@ public class ConsoleWindowController extends StackPane {
 	 * Shows the Window.
 	 * 
 	 * @param settingsTab
-	 *            The default tab you want to be selected when the window is shown
+	 *            The default tab you want to be selected when the window is
+	 *            shown
 	 */
 	public void showWindow(ConsoleTab consoleTab) {
 		

@@ -82,6 +82,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ExportWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
+import main.java.com.goxr3plus.xr3player.application.windows.PictureWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.WelcomeScreen;
@@ -128,6 +129,8 @@ public class Main extends Application {
 	
 	/** The rename window. */
 	public static final EmotionsWindow emotionsWindow = new EmotionsWindow();
+	
+	public static final PictureWindowController pictureWindowController = new PictureWindowController();
 	
 	/**
 	 * This window is being used to export files from the application to the
@@ -350,6 +353,7 @@ public class Main extends Application {
 		aboutWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
 		welcomeScreen.getWindow().initOwner(window);
+		pictureWindowController.getWindow().initOwner(window);
 		
 		// --------- Fix the Background ------------
 		determineBackgroundImage();
