@@ -275,7 +275,7 @@
                                              <content>
                                                 <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" styleClass="segmented-button-bar">
                                                    <children>
-                                                      <Label maxHeight="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Extra - - -" HBox.hgrow="NEVER">
+                                                      <Label maxHeight="1.7976931348623157E308" minWidth="0.0" styleClass="applicationSettingsLabel" text="Extra - - -" HBox.hgrow="NEVER">
                                                          <HBox.margin>
                                                             <Insets right="2.0" />
                                                          </HBox.margin>

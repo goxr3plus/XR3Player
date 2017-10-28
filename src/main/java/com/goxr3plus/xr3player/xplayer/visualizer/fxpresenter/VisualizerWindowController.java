@@ -15,6 +15,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -62,15 +63,6 @@ public class VisualizerWindowController extends StackPane {
 	private BorderPane topBar;
 	
 	@FXML
-	private Button minimize;
-	
-	@FXML
-	private StackPane progressBarStackPane;
-	
-	@FXML
-	private ProgressBar progressBar;
-	
-	@FXML
 	private MenuButton menuPopButton;
 	
 	@FXML
@@ -100,7 +92,30 @@ public class VisualizerWindowController extends StackPane {
 	@FXML
 	private Slider transparencySlider;
 	
+	@FXML
+	private Button minimize;
+	
+	@FXML
+	private Button maxOrNormalize;
+	
+	@FXML
+	private Button close;
+	
+	@FXML
+	private Label visualizerLabel;
+	
+	@FXML
+	private StackPane progressBarStackPane;
+	
+	@FXML
+	private ProgressBar progressBar;
+	
+	@FXML
+	private Label progressLabel;
+	
 	// ------------------------------------
+	
+	private BorderlessScene scene;
 	
 	/** The window. */
 	private Stage window;
@@ -154,7 +169,7 @@ public class VisualizerWindowController extends StackPane {
 	private void initialize() {
 		
 		// -- Scene
-		BorderlessScene scene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150);
+		scene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150);
 		scene.setMoveControl(topBar);
 		scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue()));
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
@@ -173,12 +188,7 @@ public class VisualizerWindowController extends StackPane {
 		});
 		
 		// --- MouseListeners
-		addEventHandler(MouseEvent.MOUSE_MOVED, m -> {
-			pauseTransition.playFromStart();
-			topBar.setVisible(true);
-			setCursor(Cursor.HAND);
-			xPlayerController.getVisualizer().setCursor(Cursor.HAND);
-		});
+		addEventHandler(MouseEvent.MOUSE_MOVED, m -> restartPauseTransition());
 		
 		// -- KeyListeners
 		scene.setOnKeyReleased(key -> {
@@ -198,29 +208,34 @@ public class VisualizerWindowController extends StackPane {
 		
 		// -------------Top Bar Elements---------------
 		
+		//visualizerLabrel
+		visualizerLabel.setText("Visualizer { " + xPlayerController.getKey() + " }");
+		
+		//progressLabel
+		progressLabel.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("%.02f %%"));
+		
 		// menuPopButton
-		menuPopButton.textProperty()
-				.bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("[%.02f %%]").concat("Deck [" + xPlayerController.getKey() + "]"));
 		menuPopButton.setOnMouseReleased(a -> {
 			Bounds bounds = menuPopButton.localToScreen(menuPopButton.getBoundsInLocal());
-			visualizerContextMenu.show(menuPopButton, bounds.getMaxX(), bounds.getMinY());
+			visualizerContextMenu.show(menuPopButton, bounds.getMaxX(), bounds.getMaxY());
 		});
 		
 		// ----------------------------- Minimize
-		minimize.setOnAction(action ->
-		
-		removeVisualizer());
+		minimize.setOnAction(action -> removeVisualizer());
+		maxOrNormalize.setOnAction(a -> scene.maximizeStage());
+		close.setOnAction(minimize.getOnAction());
 		
 		// transparencySlider
 		transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
 		
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> {
-			if (!topBar.isHover() && window.isShowing() && !menuPopButton.isShowing()) {
+			if (!topBar.isHover() && window.isShowing() && !visualizerContextMenu.isShowing()) {
 				topBar.setVisible(false);
 				setCursor(Cursor.NONE);
 				xPlayerController.getVisualizer().setCursor(Cursor.NONE);
 			}
+			System.out.println("PauseTransition Finished");
 		});
 		
 		//--------------------------
@@ -305,7 +320,8 @@ public class VisualizerWindowController extends StackPane {
 	}
 	
 	/**
-	 * Find the appropriate background or foreground Image , based on if any Images have been ever selected from the User
+	 * Find the appropriate background or foreground Image , based on if any
+	 * Images have been ever selected from the User
 	 *
 	 * @param type
 	 *            the type
@@ -407,6 +423,20 @@ public class VisualizerWindowController extends StackPane {
 		
 		// show the window
 		window.show();
+		
+		//Restart the PauseTransition
+		restartPauseTransition();
+	}
+	
+	/**
+	 * Restarts the PauseTransition
+	 */
+	private void restartPauseTransition() {
+		pauseTransition.playFromStart();
+		topBar.setVisible(true);
+		setCursor(Cursor.HAND);
+		xPlayerController.getVisualizer().setCursor(Cursor.HAND);
+		System.out.println("PauseTransition Restarted");
 	}
 	
 	/**
