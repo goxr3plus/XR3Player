@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -178,11 +177,12 @@ public class TopBar extends BorderPane {
 					Main.libraryMode.getTopSplitPane().getItems().add(
 							JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown()) == 0 ? 1 : 0,
 							Main.playListModesSplitPane);
-					//Main.libraryMode.getBottomSplitPane().getItems().clear();
-					//Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0));
+					Main.libraryMode.updateTopSplitPaneDivider();
+					//Main.libraryMode.getBottomSplitPane().getItems().clear()
+					//Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0))
 					
-					//Main.libraryMode.updateBottomSplitPaneDivider();
-					//Main.multipleTabs.reverseSplitPaneItems();
+					//Main.libraryMode.updateBottomSplitPaneDivider()
+					//Main.multipleTabs.reverseSplitPaneItems()
 					
 					// Update window Mode
 					windowMode = WindowMode.MAINMODE;
@@ -201,8 +201,9 @@ public class TopBar extends BorderPane {
 					
 					//Update the libraryMode firstly
 					Main.playListModesSplitPane.saveSplitPaneDivider();
-					//Main.libraryMode.saveBottomSplitPaneDivider();
-					//Main.libraryMode.getBottomSplitPane().getItems().clear();
+					Main.libraryMode.saveTopSplitPaneDivider();
+					//Main.libraryMode.saveBottomSplitPaneDivider()
+					//Main.libraryMode.getBottomSplitPane().getItems().clear()
 					Main.libraryMode.getTopSplitPane().getItems().remove(Main.playListModesSplitPane);
 					
 					// Work
@@ -210,7 +211,7 @@ public class TopBar extends BorderPane {
 					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.playListModesSplitPane);
 					SplitPane.setResizableWithParent(Main.treeManager, Boolean.FALSE);
 					Main.djMode.updateBottomSplitPaneDivider();
-					//Main.multipleTabs.reverseSplitPaneItems();
+					//Main.multipleTabs.reverseSplitPaneItems()
 					
 					// Update window Mode
 					windowMode = WindowMode.DJMODE;

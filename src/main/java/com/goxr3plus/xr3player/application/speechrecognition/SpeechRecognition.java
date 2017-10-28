@@ -16,8 +16,10 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import net.sourceforge.javaflacencoder.FLACFileWriter;
 
@@ -30,6 +32,9 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 	
 	@FXML
 	private JFXToggleButton activateSpeechRecognition;
+	
+	@FXML
+	private Button close;
 	
 	// -------------------------------------------------------------
 	
@@ -94,6 +99,9 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 		//Set Center
 		borderPane.setCenter(vsPane2);
 		
+		//close
+		close.setOnAction(a -> Main.consoleWindow.getWindow().close());
+		
 		//activateSpeechRecognition
 		activateSpeechRecognition.selectedProperty().addListener(l -> {
 			//Selected?
@@ -117,6 +125,29 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 				//Follow the Caret
 				cssTextArea.moveTo(cssTextArea.getLength());
 				cssTextArea.requestFollowCaret();
+				
+				//VERY OBSOLETE WAY TO NOTIFY USER AFTER 2 SECONDS THAT HE CAN START SPEAKING...
+				//THIS WILL BE CHANGED SOON!
+				new Thread(() -> {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					
+					//Run it on JavaFX Thread
+					Platform.runLater(() -> {
+						if (activateSpeechRecognition.isSelected()) {
+							String text2 = "Hearing you ..... \n";
+							cssTextArea.appendText(text2);
+							cssTextArea.setStyle(cssTextArea.getText().length() - text2.length(), cssTextArea.getLength() - 1, style.replace("white", "firebrick"));
+							
+							//Follow the Caret
+							cssTextArea.moveTo(cssTextArea.getLength());
+							cssTextArea.requestFollowCaret();
+						}
+					});
+				}).start();
 				
 				//Turn off speech Recognition
 			} else {
@@ -170,8 +201,7 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 			//Print to Console
 			System.out.println(output[0]);
 			
-		} else
-			System.out.println("Output was null");
+		}
 	}
 	
 	/**

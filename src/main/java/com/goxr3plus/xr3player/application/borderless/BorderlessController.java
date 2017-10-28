@@ -181,7 +181,6 @@ public class BorderlessController {
 	 * @param node
 	 *        the node.
 	 */
-	@SuppressWarnings("boxing")
 	protected void setMoveControl(final Node node) {
 		final Delta delta = new Delta();
 		final Delta eventSource = new Delta();

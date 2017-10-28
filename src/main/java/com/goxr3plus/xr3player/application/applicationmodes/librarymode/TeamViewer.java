@@ -176,7 +176,7 @@ public class TeamViewer {
 					searchWord.set("");
 				
 				//Local Search 
-				if (key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE) {
+				if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
 					String keySmall = key.getText();
 					searchWord.set(searchWord.get() + keySmall);
 					pauseTransition.playFromStart();

@@ -22,7 +22,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -228,7 +227,7 @@ public class RenameWindow extends VBox {
 	 * @param title
 	 *            The text if the title Label
 	 */
-	private void show(String text , double x , double y , String title) {
+	public void show(String text , double x , double y , String title) {
 		
 		titleLabel.setText(title);
 		inputField.setText(text);

@@ -337,7 +337,7 @@ public class LoginMode extends BorderPane {
 			}
 		}).start();
 		
-		//	setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;");
+		//	setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 		// -- libraryToolBar
 		userToolBar.disableProperty().bind(teamViewer.centerItemProperty().isNull());
@@ -345,11 +345,11 @@ public class LoginMode extends BorderPane {
 		// -- botttomHBox
 		botttomHBox.getChildren().add(userSearchBox);
 		
-		// createLibrary
+		// createUser
 		createUser.setOnAction(a -> createNewUser(createUser));
 		
 		//newUser
-		newUser.setOnAction(a -> createNewUser(createUser));
+		newUser.setOnAction(a -> createNewUser(newUser));
 		newUser.visibleProperty().bind(Bindings.size(teamViewer.itemsObservableList).isEqualTo(0));
 		
 		//loginButton
@@ -615,7 +615,7 @@ public class LoginMode extends BorderPane {
 					searchWord.set("");
 				
 				//Local Search 
-				if (key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE) {
+				if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
 					String keySmall = key.getText();
 					searchWord.set(searchWord.get() + keySmall);
 					pauseTransition.playFromStart();
