@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3AudioHeader;
@@ -349,7 +350,7 @@ public class MediaInformation extends BorderPane {
 								format.setText("-");
 							});
 						}
-					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException ex) {
+					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException ex) {
 						//ex.printStackTrace();
 					}
 					

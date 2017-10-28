@@ -102,7 +102,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 89);
-		internalInformation.put("ReleasedDate", "28/10/2017");
+		internalInformation.put("ReleasedDate", "29/10/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -887,6 +887,7 @@ public class Main extends Application {
 		
 		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
 		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
 	}
 	
 	//------------------------------------- Methods not used very often--------------------------------------------------

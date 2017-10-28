@@ -434,7 +434,7 @@ public final class InfoTool {
 						return new ByteArrayInputStream(id3v2Tag.getAlbumImage());
 				}
 			} catch (Exception ex) {
-				logger.log(Level.WARNING, "Can't get Album Image", ex);
+				//logger.log(Level.WARNING, "Can't get Album Image", ex);
 			}
 		
 		return null;// fatal error here

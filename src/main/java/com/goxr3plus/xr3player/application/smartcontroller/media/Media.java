@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
+import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3File;
@@ -300,7 +301,7 @@ public abstract class Media {
 				bitRate.set((int) new MP3File(file).getMP3AudioHeader().getBitRateAsNumber());
 			else
 				bitRate.set(-1);
-		} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException e) {
+		} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException e) {
 			e.printStackTrace();
 		}
 		
