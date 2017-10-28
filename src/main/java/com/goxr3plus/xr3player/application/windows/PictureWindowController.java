@@ -57,6 +57,9 @@ public class PictureWindowController extends StackPane {
 	@FXML
 	private Button save;
 	
+	@FXML
+	private Button close;
+	
 	//--------------------------------------------------------
 	
 	/** The logger. */
@@ -112,11 +115,15 @@ public class PictureWindowController extends StackPane {
 				new Thread(() -> saveToFile(pictureUpdaterService.getImage(), file)).start();
 				
 				//Show a Notification to  User
-				ActionTool.showNotification("Exporting Album Image", "From File: \n" + InfoTool.getMinString(InfoTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100),
-						Duration.seconds(2), NotificationType.SIMPLE);
+				ActionTool.showNotification("Exporting Album Image",
+						"From File: \n" + InfoTool.getMinString(InfoTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100), Duration.seconds(2),
+						NotificationType.SIMPLE);
 				
 			});
 		});
+		
+		//Close
+		close.setOnAction(a -> close());
 		
 	}
 	

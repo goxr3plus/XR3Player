@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.Genre;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Representing an Video File.
  *
