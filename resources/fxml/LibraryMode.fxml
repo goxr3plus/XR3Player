@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="570.0" prefWidth="763.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="570.0" prefWidth="763.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>

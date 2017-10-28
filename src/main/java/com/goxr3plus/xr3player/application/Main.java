@@ -70,10 +70,10 @@ import main.java.com.goxr3plus.xr3player.application.smartcontroller.services.Me
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.application.speciallists.PlayedMediaList;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.versionupdate.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.webbrowser.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.application.windows.ApplicationInformationWindow;

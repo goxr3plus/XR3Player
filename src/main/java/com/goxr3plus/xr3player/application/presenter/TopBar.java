@@ -17,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -66,14 +67,11 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private Tab webModeTab;
-
 	
 	// ----------------------------------------------
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
-	
-
 	
 	/**
 	 * The current Window Mode
@@ -134,9 +132,6 @@ public class TopBar extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		
-		
-
 		//---------------------------------------------------
 		
 		// restartButton
@@ -162,6 +157,10 @@ public class TopBar extends BorderPane {
 		
 		//----------------------------START: TABS---------------------------------
 		
+		//DummyStackPane technique to fix  Main Mode Disc Problems
+		StackPane dummyStackPane = new StackPane();
+		dummyStackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		
 		mainModeTab.setOnSelectionChanged(l -> {
 			if (mainModeTab.isSelected()) {
 				//System.out.println("MainMode Selected")
@@ -173,7 +172,8 @@ public class TopBar extends BorderPane {
 					Main.djMode.saveBottomSplitPaneDivider();
 					Main.djMode.getBottomSplitPane().getItems().clear();
 					
-					//Check firstly if the mode is upside down or not				
+					//Check firstly if the mode is upside down or not	
+					Main.libraryMode.getTopSplitPane().getItems().remove(dummyStackPane);
 					Main.libraryMode.getTopSplitPane().getItems().add(
 							JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown()) == 0 ? 1 : 0,
 							Main.playListModesSplitPane);
@@ -203,8 +203,9 @@ public class TopBar extends BorderPane {
 					Main.playListModesSplitPane.saveSplitPaneDivider();
 					Main.libraryMode.saveTopSplitPaneDivider();
 					//Main.libraryMode.saveBottomSplitPaneDivider()
-					//Main.libraryMode.getBottomSplitPane().getItems().clear()
+					//Main.libraryMode.getBottomSplitPane().getItems().clear()	
 					Main.libraryMode.getTopSplitPane().getItems().remove(Main.playListModesSplitPane);
+					Main.libraryMode.getTopSplitPane().getItems().add(dummyStackPane);
 					
 					// Work
 					Main.djMode.getBottomSplitPane().getItems().clear();
@@ -312,6 +313,5 @@ public class TopBar extends BorderPane {
 	public WindowMode getWindowMode() {
 		return windowMode;
 	}
-	
 	
 }
