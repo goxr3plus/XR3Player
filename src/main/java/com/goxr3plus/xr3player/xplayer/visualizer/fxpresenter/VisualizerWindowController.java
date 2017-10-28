@@ -93,9 +93,6 @@ public class VisualizerWindowController extends StackPane {
 	private Slider transparencySlider;
 	
 	@FXML
-	private Button minimize;
-	
-	@FXML
 	private Button maxOrNormalize;
 	
 	@FXML
@@ -221,9 +218,8 @@ public class VisualizerWindowController extends StackPane {
 		});
 		
 		// ----------------------------- Minimize
-		minimize.setOnAction(action -> removeVisualizer());
 		maxOrNormalize.setOnAction(a -> scene.maximizeStage());
-		close.setOnAction(minimize.getOnAction());
+		close.setOnAction(action -> removeVisualizer());
 		
 		// transparencySlider
 		transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));

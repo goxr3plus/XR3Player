@@ -1104,7 +1104,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.RESUMED) {
 			
 			Platform.runLater(() -> {
-				playerStatusLabel.setText("Player is Resumed ");
+				playerStatusLabel.setText("Resuming");
 				resumeCode();
 				
 				//Notification
@@ -1121,7 +1121,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
 			
 			Platform.runLater(() -> {
-				playerStatusLabel.setText("Player is Paused ");
+				playerStatusLabel.setText("Paused");
 				pauseCode();
 				
 				//Notification
@@ -1148,7 +1148,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					// Change Marquee text
 					//mediaFileMarquee.setText("Player is Stopped");
-					playerStatusLabel.setText("Player is Stopped");
+					playerStatusLabel.setText("Stopped");
 					
 					disc.calculateAngleByValue(0, 0, true);
 					disc.repaint();
@@ -1179,7 +1179,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			// Status.SEEKING
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKING) {
 			
-			Platform.runLater(() -> playerStatusLabel.setText("Player is Seeking "));
+			Platform.runLater(() -> playerStatusLabel.setText("Seeking"));
 			
 			// Status.SEEKED
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKED) {

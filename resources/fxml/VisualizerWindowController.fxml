@@ -112,18 +112,7 @@
          <right>
             <HBox alignment="TOP_CENTER" spacing="3.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="minimize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="-">
-                     <tooltip>
-                        <Tooltip text="Minimize" />
-                     </tooltip>
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="maxOrNormalize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="25.0" styleClass="windowButton" text="+">
+                  <Button fx:id="maxOrNormalize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="windowButton" text="+">
                      <tooltip>
                         <Tooltip text="Maximize/Normalize" />
                      </tooltip>
@@ -134,7 +123,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="close" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="X">
+                  <Button fx:id="close" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="windowButton" text="X">
                      <tooltip>
                         <Tooltip text="Close" />
                      </tooltip>
