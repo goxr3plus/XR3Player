@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\GOXR3PLUS\Desktop\XR3Player.jar</jar>
+  <outfile>C:\Users\GOXR3PLUS\Desktop\XR3Player.exe</outfile>
+  <errTitle>You have to download the newest Java Version</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl>https://github.com/goxr3plus/XR3Player/issues</supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\GOXR3PLUS\Desktop\XR3Player Installer\xr3player.ico</icon>
+  <singleInstance>
+    <mutexName>singleXR3Player</mutexName>
+    <windowTitle></windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0_131</minVersion>
+    <maxVersion>1.9.0</maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>32/64</runtimeBits>
+    <maxHeapSize>3064</maxHeapSize>
+  </jre>
+  <splash>
+    <file>C:\Users\GOXR3PLUS\Desktop\XR3Player Installer\logo.bmp</file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>60</timeout>
+    <timeoutErr>true</timeoutErr>
+  </splash>
+  <versionInfo>
+    <fileVersion>3.0.0.0</fileVersion>
+    <txtFileVersion>3.0.0.0 </txtFileVersion>
+    <fileDescription>XR3Player Application</fileDescription>
+    <copyright>Copyright (C) 2015 - 2302 GOXR3Plus Studio</copyright>
+    <productVersion>3.0.0.0</productVersion>
+    <txtProductVersion>3.0.0.0</txtProductVersion>
+    <productName>XR3Player</productName>
+    <companyName>GOXR3Plus Studio</companyName>
+    <internalName>GOXR3Plus Studio</internalName>
+    <originalFilename>XR3Player.exe</originalFilename>
+    <trademarks>GOXR3Plus Studio </trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+  <messages>
+    <startupErr>An error occurred while starting the application.</startupErr>
+    <bundledJreErr>This application was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted.</bundledJreErr>
+    <jreVersionErr>This application requires a Java Runtime Environment</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>
