@@ -127,7 +127,8 @@ public class Library extends StackPane {
 	private StringProperty description;
 	
 	/**
-	 * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
+	 * // create a rotation transform starting at 0 degrees, rotating about
+	 * pivot point 0, 0.
 	 */
 	// Rotate rotationTransform = new Rotate(0, 0, 0)
 	
@@ -139,7 +140,8 @@ public class Library extends StackPane {
 	public enum SaveMode {
 		
 		/**
-		 * Songs are not copied into the database so if they are deleted they don't exist anymore.
+		 * Songs are not copied into the database so if they are deleted they
+		 * don't exist anymore.
 		 */
 		ORIGINAL_PATH,
 		
@@ -445,7 +447,7 @@ public class Library extends StackPane {
 		nameLabel.setText(libraryName);
 		nameLabel.getTooltip().setText(libraryName);
 		nameLabel.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() != Status.RUNNING)
+			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.libraryMode.teamViewer.getViewer().centerItemProperty().get() == Library.this)//Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() != Status.RUNNING)
 				renameLibrary(nameLabel);
 		});
 		
@@ -453,14 +455,14 @@ public class Library extends StackPane {
 		ratingLabel.visibleProperty().bind(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty());
 		ratingLabel.textProperty().bind(starsProperty().asString());
 		ratingLabel.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY)
+			if (m.getButton() == MouseButton.PRIMARY && Main.libraryMode.teamViewer.getViewer().centerItemProperty().get() == Library.this)
 				updateLibraryStars(ratingLabel);
 		});
 		
 		// ----InformationLabel
 		informationLabel.setOnMouseReleased(m -> {
-			//  if (Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() == Status.RUNNING)
-			Main.libraryMode.libraryInformation.showWindow(this);
+			if (Main.libraryMode.teamViewer.getViewer().centerItemProperty().get() == Library.this)
+				Main.libraryMode.libraryInformation.showWindow(this);
 		});
 		
 		// ----DescriptionLabel
@@ -588,7 +590,8 @@ public class Library extends StackPane {
 	//    }
 	
 	/**
-	 * Updates the position variable of Library in database so the next time viewer position it correct.
+	 * Updates the position variable of Library in database so the next time
+	 * viewer position it correct.
 	 *
 	 * @param newPosition
 	 *            The new position of the Library
@@ -770,7 +773,7 @@ public class Library extends StackPane {
 		controller.renameWorking = true;
 		
 		// Open the Window
-		Main.renameWindow.show(getLibraryName(), n, "Library Renaming",FileCategory.DIRECTORY);
+		Main.renameWindow.show(getLibraryName(), n, "Library Renaming", FileCategory.DIRECTORY);
 		
 		// Bind 1
 		Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());
@@ -808,7 +811,8 @@ public class Library extends StackPane {
 		stars.bind(Main.starWindow.starsProperty());
 		
 		/***
-		 * This InvalidationListener is used when i want to change the stars of the Library
+		 * This InvalidationListener is used when i want to change the stars of
+		 * the Library
 		 */
 		InvalidationListener updateStarsInvalidation = new InvalidationListener() {
 			@Override
@@ -1232,7 +1236,8 @@ public class Library extends StackPane {
 	 * This method is called when a key is released.
 	 *
 	 * @param key
-	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
+	 *            An event which indicates that a keystroke occurred in a
+	 *            javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
 		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())

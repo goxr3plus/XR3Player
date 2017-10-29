@@ -270,17 +270,17 @@
             <Insets top="25.0" />
          </padding>
       </VBox>
-      <VBox fx:id="reloadVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
+      <VBox fx:id="reloadVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" style="-fx-background-color: rgb(40,40,40,0.95);">
          <children>
-            <Button fx:id="reloadPlayListButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-background-radius: 20; -fx-font-size: 18; -fx-font-weight: bold;" text="Reload">
+            <Button fx:id="reloadPlayListButton" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="666.0" style="-fx-background-radius: 0; -fx-font-size: 35; -fx-font-weight: bold;" text="Reload Playlist" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                <tooltip>
-                  <Tooltip text="Cancel" />
+                  <Tooltip text="Reload Playlist" />
                </tooltip>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/bigReload.png" />
                      </image>
@@ -288,9 +288,6 @@
                </graphic>
             </Button>
          </children>
-         <padding>
-            <Insets top="25.0" />
-         </padding>
       </VBox>
    </children>
 </fx:root>

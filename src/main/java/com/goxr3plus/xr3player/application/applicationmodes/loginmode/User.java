@@ -25,6 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.applicationmodes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -62,7 +63,8 @@ public class User extends StackPane {
 	private static final Logger logger = Logger.getLogger(User.class.getName());
 	
 	/**
-	 * Here are stored all the informations about the user and other things like opened libraries etc.
+	 * Here are stored all the informations about the user and other things like
+	 * opened libraries etc.
 	 */
 	private PropertiesDb userInformationDb;
 	
@@ -207,12 +209,15 @@ public class User extends StackPane {
 		nameField.setText(getUserName());
 		nameField.getTooltip().setText(getUserName());
 		nameField.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
+			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.loginMode.teamViewer.centerItemProperty().get() == User.this)// Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
 				renameUser(nameField);
 		});
 		
 		// ----InformationLabel
-		informationLabel.setOnMouseReleased(m -> Main.loginMode.userInformation.showWindow(this));
+		informationLabel.setOnMouseReleased(m -> {
+			if (Main.loginMode.teamViewer.centerItemProperty().get() == User.this)
+				Main.loginMode.userInformation.showWindow(this);
+		});
 		
 		// ----DescriptionLabel
 		descriptionLabel.visibleProperty()
@@ -291,7 +296,7 @@ public class User extends StackPane {
 	public void renameUser(Node node) {
 		
 		// Open the Window
-		Main.renameWindow.show(getUserName(), node, "User Renaming",FileCategory.DIRECTORY);
+		Main.renameWindow.show(getUserName(), node, "User Renaming", FileCategory.DIRECTORY);
 		
 		// Bind 
 		nameField.textProperty().bind(Main.renameWindow.inputField.textProperty());
@@ -303,7 +308,8 @@ public class User extends StackPane {
 	 * This method is called when a key is released.
 	 *
 	 * @param key
-	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
+	 *            An event which indicates that a keystroke occurred in a
+	 *            javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
 		if (Main.loginMode.userInformation.isShowing() || getPosition() != loginMode.teamViewer.getCenterIndex())
