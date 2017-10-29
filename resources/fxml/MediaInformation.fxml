@@ -23,17 +23,21 @@
          <top>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" HBox.hgrow="SOMETIMES">
-                     <image>
-                        <Image url="@../image/noAlbumImage.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
+                  <Button fx:id="mediaImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 0; -fx-border-color: black;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </ImageView>
+                     <graphic>
+                        <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../image/noAlbumImage.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <VBox prefHeight="54.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" wrapText="true" VBox.vgrow="ALWAYS" />
@@ -45,9 +49,6 @@
                </BorderPane.margin>
             </HBox>
          </top>
-         <bottom>
-            <Button fx:id="moreButton" disable="true" mnemonicParsing="false" text="More..." BorderPane.alignment="CENTER" />
-         </bottom>
          <center>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <content>

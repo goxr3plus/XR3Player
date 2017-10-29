@@ -237,7 +237,7 @@
                                                 </Button>
                                                 <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
                                                    <graphic>
-                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
+                                                      <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
                                                    </graphic>
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />

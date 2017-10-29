@@ -44,6 +44,9 @@ public class MediaInformation extends BorderPane {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private Button mediaImageButton;
+	
+	@FXML
 	private ImageView imageView;
 	
 	@FXML
@@ -186,8 +189,8 @@ public class MediaInformation extends BorderPane {
 			}
 		});
 		
-		//ImageView
-		imageView.setOnMouseReleased(m -> {
+		// mediaImageButton
+		mediaImageButton.setOnAction(m -> {
 			if (media != null)
 				Main.pictureWindowController.showMediaFileImage(media.getFilePath());
 		});

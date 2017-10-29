@@ -52,17 +52,17 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJDisc;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter.DJFilterCategory;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilterListener;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
-import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter.DJFilterCategory;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
+import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerPlayService;
@@ -269,8 +269,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private VisualizerWindowController visualizerWindow;
 	
 	/**
-	 * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
-	 * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
+	 * This controller contains a Visualizer and a Label which describes every
+	 * time (for some milliseconds) which type of visualizer is being displayed
+	 * (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
 	 */
 	private final VisualizerStackController visualizerStackController = new VisualizerStackController();
 	
@@ -387,7 +388,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
-	 * Returns the XPlayerStackPane back to the XPlayerController if it is on XPlayer external Window
+	 * Returns the XPlayerStackPane back to the XPlayerController if it is on
+	 * XPlayer external Window
 	 */
 	public void restorePlayerStackPane() {
 		this.getChildren().add(getXPlayerStackPane());
@@ -441,7 +443,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		// openMediaFileFolder
-		mediaTagImageButton.setOnAction(action -> openAudioInExplorer());
+		mediaTagImageButton.setOnAction(action -> Main.pictureWindowController.showMediaFileImage(xPlayerModel.songPathProperty().get()));
 		mediaTagImageButton.setOnDragDetected(audioDragEvent);
 		
 		// openFile
@@ -529,7 +531,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
-	 * This method is called to change the Emotion Image of the Media based on the current Emotion
+	 * This method is called to change the Emotion Image of the Media based on
+	 * the current Emotion
 	 * 
 	 * @param emotion
 	 */
@@ -606,7 +609,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
-	 * You can use this method to add or minus from the player volume For example you can call adjustVolume(+1) or adjustVolume(-1)
+	 * You can use this method to add or minus from the player volume For
+	 * example you can call adjustVolume(+1) or adjustVolume(-1)
 	 *
 	 * @param value
 	 *            the value
@@ -1227,7 +1231,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @param absolutePath
 	 *            The absolute path of the file
 	 * @param startingSecond
-	 *            From which second to start the audio , this will not be exactly accurate
+	 *            From which second to start the audio , this will not be
+	 *            exactly accurate
 	 */
 	public void playSong(String absolutePath , int startingSecond) {
 		
@@ -1355,7 +1360,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
-	 * If the player is paused it resume it else if it is stopped it replays the Media
+	 * If the player is paused it resume it else if it is stopped it replays the
+	 * Media
 	 */
 	public void playOrReplay() {
 		if (xPlayer.isPaused()) // paused?
@@ -1504,7 +1510,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//volumeDiscLabel.setText(String.valueOf((int) value))
 		disc.setVolume((int) ( value * 100 ));
 	}
-
+	
 	/**
 	 * @return the mediaFileMarquee
 	 */

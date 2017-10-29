@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
@@ -27,14 +28,14 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
- * Mechanism of showing the opened libraries each opened library is represented by a Tab.
+ * Mechanism of showing the opened libraries each opened library is represented
+ * by a Tab.
  *
  * @author GOXR3PLUS STUDIO
  */
@@ -250,10 +251,13 @@ public class MultipleLibraries extends StackPane {
 		indicator.progressProperty().bind(library.getSmartController().getIndicator().progressProperty());
 		indicator.setMaxSize(35, 15);
 		
-		// text
-		Text text = new Text();
-		text.setStyle("-fx-font-size:70%; -fx-fill:black;");
-		text.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"));
+		// label
+		Label label = new Label();
+		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		label.setAlignment(Pos.CENTER);
+		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
+		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
+		//label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"))
 		// text.visibleProperty().bind(library.getSmartController().inputService.runningProperty())
 		
 		Marquee marquee = new Marquee();
@@ -261,7 +265,7 @@ public class MultipleLibraries extends StackPane {
 		//marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
 		//tab.textProperty().bind(marquee.textProperty())
 		
-		stack.getChildren().addAll(indicator, text);
+		stack.getChildren().addAll(indicator, label);
 		stack.setManaged(false);
 		stack.setVisible(false);
 		

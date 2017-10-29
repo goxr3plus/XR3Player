@@ -66,9 +66,9 @@
                                  <children>
                                     <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
                                        <graphic>
-                                          <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../image/right.png" />
+                                                <Image url="@../image/nextt.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -81,9 +81,9 @@
                                     </JFXButton>
                                     <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
                                        <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../image/Plus-32.png" />
+                                                <Image url="@../image/plus.png" />
                                              </image>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
@@ -96,9 +96,9 @@
                                     </JFXButton>
                                     <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
                                        <graphic>
-                                          <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                              <image>
-                                                <Image url="@../image/right.png" />
+                                                <Image url="@../image/nextt.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -119,9 +119,9 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true" styleClass="last">
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="last">
                                        <image>
-                                          <Image url="@../image/menu.png" />
+                                          <Image url="@../image/grid.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

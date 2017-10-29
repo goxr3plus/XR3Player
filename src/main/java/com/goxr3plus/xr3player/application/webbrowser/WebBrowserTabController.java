@@ -19,8 +19,10 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -30,13 +32,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebHistory.Entry;
+import javafx.scene.web.WebView;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import javafx.scene.web.WebView;
 
 /**
  * This class represents a Tab from The WebBrowser
@@ -166,15 +167,18 @@ public class WebBrowserTabController extends StackPane {
 		indicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
 		indicator.setMaxSize(30, 11);
 		
-		// text
-		Text text = new Text();
-		text.setStyle("-fx-font-size:70%;");
-		text.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"));
+		// label
+		Label label = new Label();
+		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		label.setAlignment(Pos.CENTER);
+		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
+		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
+		//label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"))
 		
 		Marquee marquee = new Marquee();
 		marquee.textProperty().bind(tab.getTooltip().textProperty());
 		
-		stack.getChildren().addAll(indicator, text);
+		stack.getChildren().addAll(indicator, label);
 		stack.setManaged(false);
 		stack.setVisible(false);
 		
@@ -195,7 +199,7 @@ public class WebBrowserTabController extends StackPane {
 		tab.setGraphic(hBox);
 		
 		//ContextMenu
-		tab.setContextMenu(new WebBrowserTabContextMenu(this,webBrowserController));
+		tab.setContextMenu(new WebBrowserTabContextMenu(this, webBrowserController));
 		
 		//-------------------Items------------------------
 		
@@ -251,7 +255,8 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * Return the Search Url for the Search Provider For example for `Google` returns `https://www.google.com/search?q=`
+	 * Return the Search Url for the Search Provider For example for `Google`
+	 * returns `https://www.google.com/search?q=`
 	 * 
 	 * @param searchProvider
 	 * @return The Search Engine Url
@@ -271,7 +276,8 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * Return the Search Url for the Search Provider For example for `Google` returns `https://www.google.com/search?q=`
+	 * Return the Search Url for the Search Provider For example for `Google`
+	 * returns `https://www.google.com/search?q=`
 	 * 
 	 * @param searchProvider
 	 * @return The Search Engine Url
@@ -291,7 +297,8 @@ public class WebBrowserTabController extends StackPane {
 	}
 	
 	/**
-	 * Loads the given website , either directly if the url is a valid WebSite Url or using a SearchEngine like Google
+	 * Loads the given website , either directly if the url is a valid WebSite
+	 * Url or using a SearchEngine like Google
 	 * 
 	 * @param webSite
 	 */
