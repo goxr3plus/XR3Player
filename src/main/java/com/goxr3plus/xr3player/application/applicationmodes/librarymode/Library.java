@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXCheckBox;
 
-import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;

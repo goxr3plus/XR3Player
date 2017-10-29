@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.services.FoldersModeService;
@@ -225,7 +226,7 @@ public class SmartControllerFoldersMode extends StackPane {
 			
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 			//	Main.songsContextMenu.showContextMenu(row.itemProperty().get(), smartController.getGenre(), mouseEvent.getScreenX(), mouseEvent.getScreenY(), smartController, row);
-			//Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
+			Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
 	}
 	
