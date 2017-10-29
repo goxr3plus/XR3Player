@@ -66,6 +66,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.applicationmodes.loginmode.services.UsersInfoLoader;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -425,7 +426,7 @@ public class LoginMode extends BorderPane {
 			return;
 		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Creating new User");
+		Main.renameWindow.show("", owner, "Creating new User",FileCategory.DIRECTORY);
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(userCreationInvalidator);

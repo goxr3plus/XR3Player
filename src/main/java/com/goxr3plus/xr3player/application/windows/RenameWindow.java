@@ -4,6 +4,9 @@
 package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -25,6 +28,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -71,7 +75,8 @@ public class RenameWindow extends VBox {
 	private boolean accepted = false;
 	
 	/** The not allow. */
-	String[] notAllow = new String[]{ "/" , "\\" , ":" , "*" , "?" , "\"" , "<" , ">" , "|" , "'" , "." };
+	
+	Set<String> notAllow = Stream.of("/", "\\", ":", "*", "?", "\"", "<", ">", "|", "'", ".").collect(Collectors.toSet());
 	
 	/**
 	 * Constructor
@@ -84,7 +89,6 @@ public class RenameWindow extends VBox {
 		window.setMinWidth(300);
 		window.setWidth(440);
 		window.setHeight(80);
-		//window.initModality(Modality.);
 		window.initStyle(StageStyle.TRANSPARENT);
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
@@ -129,11 +133,11 @@ public class RenameWindow extends VBox {
 		// inputField
 		getChildren().add(inputField);
 		inputField.setMinSize(420, 32);
-		inputField.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.) \n **Press Escape to Exit**"));
 		inputField.setPromptText("Type Here...");
+		inputField.setTooltip(new Tooltip("Not allowed:(<) (>) (:) (\\\") (/) (\\\\) (|) (?) (*) (') (.)"));
 		inputField.setStyle("-fx-font-weight:bold; -fx-font-size:14;");
 		//inputField.setPrefColumnCount(200)
-		//inputField.prefColumnCountProperty().bind(inputField.textProperty().length().add(1));
+		//inputField.prefColumnCountProperty().bind(inputField.textProperty().length().add(1))
 		inputField.textProperty().addListener((observable , oldValue , newValue) -> {
 			//Check newValue
 			if (newValue != null) {
@@ -189,7 +193,7 @@ public class RenameWindow extends VBox {
 	 *            True if accepted , False if not
 	 */
 	public void close(boolean accepted) {
-		//	System.out.println("Rename Window Close called with accepted := " + accepted);
+		//	System.out.println("Rename Window Close called with accepted := " + accepted)
 		this.accepted = accepted;
 		window.close();
 	}
@@ -204,15 +208,25 @@ public class RenameWindow extends VBox {
 	 * @param title
 	 *            The text if the title Label
 	 */
-	public void show(String text , Node n , String title) {
+	public void show(String text , Node n , String title , FileCategory fileCategory) {
 		
 		// Auto Calculate the position
 		Bounds bounds = n.localToScreen(n.getBoundsInLocal());
-		//show(text, bounds.getMinX() + 5, bounds.getMaxY(), title);
-		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2);
+		//show(text, bounds.getMinX() + 5, bounds.getMaxY(), title)
+		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2)
 		show(text, bounds.getMinX() - 440 / 2 + bounds.getWidth() / 2, bounds.getMaxY(), title);
 		
-		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2);
+		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2)	
+		if (!notAllow.contains(".") && fileCategory == FileCategory.DIRECTORY) {
+			inputField.getTooltip().setText("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*) (') (.)");
+			notAllow.add(".");
+			notAllow.add("'");
+		} else if (fileCategory == FileCategory.FILE) {
+			inputField.getTooltip().setText("Not allowed:(<) (>) (:) (\") (/) (\\) (|) (?) (*)");
+			notAllow.remove(".");
+			notAllow.remove("'");
+		}
+		
 	}
 	
 	/**
@@ -227,7 +241,7 @@ public class RenameWindow extends VBox {
 	 * @param title
 	 *            The text if the title Label
 	 */
-	public void show(String text , double x , double y , String title) {
+	private void show(String text , double x , double y , String title) {
 		
 		titleLabel.setText(title);
 		inputField.setText(text);
@@ -263,8 +277,11 @@ public class RenameWindow extends VBox {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not
-	 *         be able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on
+	 *         the user's system). The Stage might be "showing", yet the user
+	 *         might not be able to see it due to the Stage being rendered
+	 *         behind another window or due to the Stage being positioned off
+	 *         the monitor.
 	 * 
 	 *
 	 * @defaultValue false
@@ -274,8 +291,11 @@ public class RenameWindow extends VBox {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not
-	 *         be able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on
+	 *         the user's system). The Stage might be "showing", yet the user
+	 *         might not be able to see it due to the Stage being rendered
+	 *         behind another window or due to the Stage being positioned off
+	 *         the monitor.
 	 * 
 	 */
 	public boolean isShowing() {

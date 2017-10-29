@@ -41,6 +41,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.Genre;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -769,7 +770,7 @@ public class Library extends StackPane {
 		controller.renameWorking = true;
 		
 		// Open the Window
-		Main.renameWindow.show(getLibraryName(), n, "Library Renaming");
+		Main.renameWindow.show(getLibraryName(), n, "Library Renaming",FileCategory.DIRECTORY);
 		
 		// Bind 1
 		Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());

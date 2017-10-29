@@ -612,7 +612,7 @@ public abstract class Media {
 		
 		// Open Window
 		String extension = "." + InfoTool.getFileExtension(getFilePath());
-		Main.renameWindow.show(getTitle(), node, "Media Renaming");
+		Main.renameWindow.show(getTitle(), node, "Media Renaming", FileCategory.FILE);
 		String oldFilePath = getFilePath();
 		
 		// Bind

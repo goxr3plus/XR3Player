@@ -30,6 +30,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -100,12 +101,14 @@ public class LibraryMode extends BorderPane {
 	// protected boolean dragDetected
 	
 	/**
-	 * The mechanism which allows you to transport items between libraries and more.
+	 * The mechanism which allows you to transport items between libraries and
+	 * more.
 	 */
 	public final SearchBox librariesSearcher = new SearchBox(SearchBoxType.LIBRARYSEARCHBOX);
 	
 	/**
-	 * The mechanism which allows you to view the libraries as components with image etc.
+	 * The mechanism which allows you to view the libraries as components with
+	 * image etc.
 	 */
 	public TeamViewer teamViewer;
 	
@@ -115,7 +118,8 @@ public class LibraryMode extends BorderPane {
 	//--------Images ------------------------------
 	
 	/**
-	 * Default image of a library(which has not a costume one selected by the user.
+	 * Default image of a library(which has not a costume one selected by the
+	 * user.
 	 */
 	public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg");
 	/**
@@ -135,12 +139,14 @@ public class LibraryMode extends BorderPane {
 	public LibraryContextMenu librariesContextMenu = new LibraryContextMenu();
 	
 	/**
-	 * This binding contains a number which shows how many libraries are currently opened
+	 * This binding contains a number which shows how many libraries are
+	 * currently opened
 	 */
 	public SimpleIntegerProperty openedLibraries = new SimpleIntegerProperty();
 	
 	/**
-	 * This binding contains a number which shows how many libraries have currently no items at all
+	 * This binding contains a number which shows how many libraries have
+	 * currently no items at all
 	 */
 	public SimpleIntegerProperty emptyLibraries = new SimpleIntegerProperty();
 	
@@ -274,7 +280,8 @@ public class LibraryMode extends BorderPane {
 	}
 	
 	/**
-	 * Update Settings Total Library only if this Library exists and it is on settings mode
+	 * Update Settings Total Library only if this Library exists and it is on
+	 * settings mode
 	 * 
 	 * @param name
 	 */
@@ -397,7 +404,7 @@ public class LibraryMode extends BorderPane {
 		this.openLibraryAfterCreation = openLibraryAfterCreation;
 		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Creating " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library");
+		Main.renameWindow.show("", owner, "Creating " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library", FileCategory.DIRECTORY);
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);

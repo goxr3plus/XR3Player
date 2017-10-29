@@ -26,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
+import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -290,7 +291,7 @@ public class User extends StackPane {
 	public void renameUser(Node node) {
 		
 		// Open the Window
-		Main.renameWindow.show(getUserName(), node, "User Renaming");
+		Main.renameWindow.show(getUserName(), node, "User Renaming",FileCategory.DIRECTORY);
 		
 		// Bind 
 		nameField.textProperty().bind(Main.renameWindow.inputField.textProperty());
