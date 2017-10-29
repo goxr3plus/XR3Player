@@ -26,14 +26,14 @@ Github
 [![Visualizer](http://img.youtube.com/vi/pf33A4lnO_s/0.jpg)](https://www.youtube.com/watch?v=pf33A4lnO_s)
 
 ## Update 86 Main Mode
-![Main Mode](https://user-images.githubusercontent.com/20374208/30670989-64eb141a-9e6d-11e7-9887-5300d5edd6e1.png)
+![Main Mode](https://user-images.githubusercontent.com/20374208/32140164-0d264f96-bc5f-11e7-8d52-7d29d71dec65.png)
 
 
 ## Update 85 DJMode
-![DJMode](https://user-images.githubusercontent.com/20374208/30524938-c75c5e98-9c05-11e7-9c85-bf17f7f0a629.png)
+![DJMode](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png)
 
 ## Update 85 Login Screen
-![Login Screen](https://user-images.githubusercontent.com/20374208/30524977-7c576248-9c06-11e7-8a6c-c5c1ced6530b.png)
+![Login Screen](https://user-images.githubusercontent.com/20374208/32140183-dba984aa-bc5f-11e7-8526-d52d08691cfc.png)
 
 # Amazing Visualizations
 [![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
