@@ -186,6 +186,13 @@
  
 /* .table-row-cell */
 
+.table-row-cell{
+	-fx-table-cell-border-color: transparent;
+    -fx-background-color: #202020;
+    -fx-background-insets: 0.0, 0.0 0.0 0.0 0.0;
+    -fx-padding: 0.0em;
+}
+
 .table-row-cell:disabled{
 	-fx-opacity:0.5;
 	-fx-background-color:darkgray;	  
@@ -200,9 +207,16 @@
     -fx-fill: white ;
 } 
 
+
+
 /*.table-row-cell:focused .text {
      -fx-fill: white ;
 } */
+
+.table-row-cell:hover{
+	-fx-table-cell-border-color: #303030;
+	-fx-table-cell-border-width: 2;
+}
 
 .table-row-cell:hover .text , .table-row-cell:selected .text{
      -fx-fill: black ;    
@@ -226,12 +240,6 @@
 	 -fx-background-color:rgb(255.0,97.0,0.0);
 }
 
-
-.table-row-cell{
-    -fx-background-color: #202020;
-    -fx-background-insets: 0.0, 0.0 0.0 0.0 0.0;
-    -fx-padding: 0.0em;
-}
 
 .table-view .filler {
   
