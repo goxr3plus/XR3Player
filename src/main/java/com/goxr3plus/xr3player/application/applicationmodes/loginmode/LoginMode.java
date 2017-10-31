@@ -315,18 +315,19 @@ public class LoginMode extends BorderPane {
 				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
 				
 				//----sourceForgeDownloadsLabel
-				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
-				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-				httpcon.setConnectTimeout(10000);
-				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-				
-				//Read line by line
-				String responseSB = in.lines().collect(Collectors.joining());
-				in.close();
-				
-				String text = "Sourceforge: [ " + responseSB.split("/total")[0].split("textLength=\"510\">")[1] + " ]";
-				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
-				
+//				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
+//				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+//				httpcon.setConnectTimeout(10000);
+//				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+//				
+//				//Read line by line
+//				String responseSB = in.lines().collect(Collectors.joining());
+//				in.close();
+//				
+//				System.out.println(responseSB);
+//				String text = "Sourceforge: [ " + responseSB.split("/total")[0].split("x=\"98.5\" y=\"14\">")[1] + " ]";
+				Platform.runLater(() -> sourceForgeDownloadsLabel.setText("Sourceforge: [ ? ]"));
+//				
 				//throw new IOException("Exception get out of the building!!!")
 			} catch (Exception ex) {
 				ex.printStackTrace();

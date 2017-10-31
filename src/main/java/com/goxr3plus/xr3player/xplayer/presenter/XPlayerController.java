@@ -70,10 +70,10 @@ import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerSeekService;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerWindowController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.XPlayerVisualizer;
-import streamplayer.Status;
-import streamplayer.StreamPlayerEvent;
-import streamplayer.StreamPlayerException;
-import streamplayer.StreamPlayerListener;
+import main.java.goxr3plus.javastreamplayer.stream.Status;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
 /**
  * Represents the graphical interface for the deck.

@@ -23,7 +23,7 @@ import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.Media
 import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
-import streamplayer.ThreadFactoryWithNamePrefix;
+import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**
  * The Class FileFilterThread.
