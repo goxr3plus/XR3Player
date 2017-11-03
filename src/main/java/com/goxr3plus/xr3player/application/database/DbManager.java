@@ -25,14 +25,14 @@ import javafx.concurrent.Task;
 import javafx.scene.control.Tab;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.applicationmodes.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.application.applicationmodes.loginmode.User;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.services.Operation;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
 /**
  * This class is managing the database of the application.
@@ -58,7 +58,7 @@ public class DbManager {
 	/**
 	 * The KeyValueDb
 	 */
-	//private JSONDB keyValueDb = new JSONDB(this);
+	//private JSONDB keyValueDb = new JSONDB(this)
 	
 	/**
 	 * Here are stored all the settings for the user account
@@ -201,14 +201,16 @@ public class DbManager {
 	}
 	
 	/**
-	 * Using this methods to control commits across the application so not to have unexpected lags.
+	 * Using this methods to control commits across the application so not to
+	 * have unexpected lags.
 	 */
 	public void commit() {
 		commitExecutor.execute(commitRunnable);
 	}
 	
 	/**
-	 * Using this methods to control commit + vacuum across the application so not to have unexpected lags.
+	 * Using this methods to control commit + vacuum across the application so
+	 * not to have unexpected lags.
 	 * 
 	 */
 	public void commitAndVacuum() {
@@ -302,7 +304,8 @@ public class DbManager {
 	}
 	
 	/**
-	 * Loads all [ Opened-Libraries ] and the [ Last-Opened-Library ] as properties from the UserInformation.properties file
+	 * Loads all [ Opened-Libraries ] and the [ Last-Opened-Library ] as
+	 * properties from the UserInformation.properties file
 	 * [[SuppressWarningsSpartan]]
 	 */
 	public void loadOpenedLibraries() {
@@ -370,7 +373,8 @@ public class DbManager {
 	}
 	
 	/**
-	 * Stores the last opened library - That means the library that was selected on the Multiple Libraries Tab Pane <br>
+	 * Stores the last opened library - That means the library that was selected
+	 * on the Multiple Libraries Tab Pane <br>
 	 * !Must be called from JavaFX Thread!
 	 */
 	private void storeLastOpenedLibrary() {
@@ -393,7 +397,8 @@ public class DbManager {
 	}
 	
 	/**
-	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
+	 * Stores all the opened libraries and the last selected one as properties
+	 * to the UserInformation.properties file <br>
 	 * !Must be called from JavaFX Thread!
 	 * 
 	 * @param openedLibrariesTabs

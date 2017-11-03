@@ -56,12 +56,12 @@ import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter.D
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilterListener;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.Genre;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
+import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;

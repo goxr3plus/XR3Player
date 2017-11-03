@@ -22,12 +22,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.FilesMode;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.services.Operation;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.smartcontroller.enums.FilesMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
 /**
  * @author GOXR3PLUS

@@ -2,9 +2,9 @@ package main.java.com.goxr3plus.xr3player.application.speciallists;
 
 import javafx.application.Platform;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.enums.Genre;
-import main.java.com.goxr3plus.xr3player.application.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
+import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 public class EmotionListsController {
 	

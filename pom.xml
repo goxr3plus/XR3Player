@@ -90,6 +90,10 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com </url>
+		</repository>
 	</repositories>
 
 	<!-- Dependencies -->
@@ -116,6 +120,12 @@
 			<artifactId>FX-BorderlessScene</artifactId>
 			<version>V1.1.0</version>
 		</dependency>
+		<!--<dependency>
+			<groupId>de.jensd</groupId>
+			<artifactId>fontawesomefx</artifactId>
+			<version>8.9</version>
+		</dependency>
+		-->
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>

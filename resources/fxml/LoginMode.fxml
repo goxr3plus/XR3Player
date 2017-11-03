@@ -39,7 +39,7 @@
                         <StackPane fx:id="usersStackView" BorderPane.alignment="CENTER">
                            <children>
                               <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="192.0" StackPane.alignment="BOTTOM_CENTER" />
-                              <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" text="+Create New User +">
+                              <Button fx:id="newUser" alignment="CENTER" mnemonicParsing="false" prefHeight="73.0" prefWidth="156.0" text="Create new user [ + ]">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
