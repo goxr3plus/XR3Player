@@ -228,7 +228,6 @@ public class MediaTableViewer extends TableView<Media> {
 		getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> {
-			//System.out.println("Entered Selection Model Listener");
 			
 			//Hold the Current Selected Count
 			int currentSelectedCount = getSelectedCount();

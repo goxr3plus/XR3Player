@@ -51,7 +51,7 @@ public class DbManager {
 	private final ExecutorService commitExecutor = Executors.newSingleThreadExecutor();
 	
 	/** If true -> The database notifications are shown */
-	private final boolean showNotifications = false;
+	private static final boolean SHOWNOTIFICATIONS = false;
 	
 	//----------------------
 	
@@ -74,7 +74,7 @@ public class DbManager {
 		} catch (SQLException ex) {
 			Main.logger.log(Level.WARNING, ex.getMessage(), ex);
 		} finally {
-			if (showNotifications)
+			if (SHOWNOTIFICATIONS)
 				ActionTool.showNotification("Commited", "Changes saved successfully", Duration.millis(150), NotificationType.INFORMATION);
 		}
 		
@@ -170,7 +170,7 @@ public class DbManager {
 	 * @return the showNotifications
 	 */
 	public boolean isShowNotifications() {
-		return showNotifications;
+		return SHOWNOTIFICATIONS;
 	}
 	
 	public Connection getConnection() {
