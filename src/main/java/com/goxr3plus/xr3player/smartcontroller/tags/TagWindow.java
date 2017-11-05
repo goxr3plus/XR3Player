@@ -1,6 +1,8 @@
 package main.java.com.goxr3plus.xr3player.smartcontroller.tags;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,7 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -82,6 +87,20 @@ public class TagWindow extends StackPane {
 		window.getScene().setOnKeyReleased(k -> {
 			if (k.getCode() == KeyCode.ESCAPE)
 				window.close();
+		});		
+		window.getScene().setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
+		window.getScene().setOnDragDropped(drop -> {
+			// Keeping the absolute path
+			String absolutePath;
+			
+			// File?
+			for (File file : drop.getDragboard().getFiles()) {
+				absolutePath = file.getAbsolutePath();
+				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
+					openAudio(file.getAbsolutePath(), TagTabCategory.BASICINFO);
+					break;
+				}
+			}
 		});
 	}
 	
@@ -98,7 +117,7 @@ public class TagWindow extends StackPane {
 		artWorkTab.setContent(artWork);
 		//ImageView
 		artWork.getImageView().fitWidthProperty().bind(window.widthProperty().subtract(20));
-		artWork.getImageView().fitHeightProperty().bind(window.heightProperty().subtract(20));
+		artWork.getImageView().fitHeightProperty().bind(window.heightProperty().subtract(110));
 		
 		//id3v1Tab
 		id3v1Tab.setContent(id3V1Controller);
@@ -150,16 +169,16 @@ public class TagWindow extends StackPane {
 			tabPane.getTabs().clear();
 			
 			//mp3?
-			if (extension.equalsIgnoreCase(".mp3")) {
+			if (extension.equalsIgnoreCase("mp3")) {
 				
 				//Add the tabs
 				tabPane.getTabs().addAll(basicInfoTab, artWorkTab, id3v1Tab, id3v2Tab);
 				
 				//Check the tabCategory
 				if (tabCategory == TagTabCategory.BASICINFO)
-					tabPane.getSelectionModel().select(1);
+					tabPane.getSelectionModel().select(0);
 				else if (tabCategory == TagTabCategory.ARTWORK)
-					tabPane.getSelectionModel().select(2);
+					tabPane.getSelectionModel().select(1);
 				
 				//basicInfoTab
 				mp3BasicInfo.updateInformation(new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
@@ -182,6 +201,8 @@ public class TagWindow extends StackPane {
 				mp3BasicInfo.updateInformation(new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
 				
 			}
+			
+			show();
 		}
 	}
 	

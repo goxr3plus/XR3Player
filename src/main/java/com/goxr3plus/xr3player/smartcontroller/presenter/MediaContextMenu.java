@@ -30,6 +30,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
  * The default context menu for song items of application.
@@ -170,7 +171,7 @@ public class MediaContextMenu extends ContextMenu {
 	private MenuItem showFile;
 	
 	@FXML
-	private MenuItem properties;
+	private MenuItem editFileInfo;
 	
 	// -------------------------------------------------------------
 	
@@ -219,7 +220,6 @@ public class MediaContextMenu extends ContextMenu {
 	@FXML
 	private void initialize() {
 		
-		properties.setDisable(true);
 	}
 	
 	/**
@@ -356,6 +356,8 @@ public class MediaContextMenu extends ContextMenu {
 			media.updateStars(node);
 		else if (source == showFile) // File path
 			ActionTool.openFileLocation(media.getFilePath());
+		else if (source == editFileInfo)
+			Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO);
 		else if (e.getSource() == copyOrMove) // copyTo
 			Main.exportWindow.show(controller);
 		else

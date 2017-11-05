@@ -406,7 +406,7 @@
             </ImageView>
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="properties" mnemonicParsing="false" onAction="#action" text="Properties... (CTRL+P)">
+      <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="View/Edit File Info... (CTRL+I)">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

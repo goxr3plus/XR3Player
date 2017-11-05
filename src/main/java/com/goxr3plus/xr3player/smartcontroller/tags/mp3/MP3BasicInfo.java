@@ -2,7 +2,6 @@ package main.java.com.goxr3plus.xr3player.smartcontroller.tags.mp3;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,22 +20,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
 public class MP3BasicInfo extends StackPane {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private ImageView imageView;
 	
 	@FXML
 	private Label title;
@@ -145,38 +135,7 @@ public class MP3BasicInfo extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
-		setOnDragDetected(drag -> {
-			if (media != null) {
-				
-				/* Allow copy transfer mode */
-				Dragboard db = startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
-				
-				/* Put a String into the dragBoard */
-				ClipboardContent content = new ClipboardContent();
-				content.putFiles(Arrays.asList(new File(media.getFilePath())));
-				db.setContent(content);
-				
-				/* Set the DragView */
-				media.setDragView(db);
-				
-			}
-			drag.consume();
-		});
 		
-		setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-		setOnDragDropped(drop -> {
-			// Keeping the absolute path
-			String absolutePath;
-			
-			// File?
-			for (File file : drop.getDragboard().getFiles()) {
-				absolutePath = file.getAbsolutePath();
-				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-					updateInformation(new Audio(file.getAbsolutePath(), 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
-					break;
-				}
-			}
-		});
 		
 	}
 	
@@ -217,7 +176,6 @@ public class MP3BasicInfo extends StackPane {
 		private String _isPadding;
 		private String _isProtected;
 		private String _isPrivate;
-		private Image image;
 		
 		/**
 		 * Updates the image shown.
@@ -244,16 +202,7 @@ public class MP3BasicInfo extends StackPane {
 				@Override
 				protected Void call() throws Exception {
 					
-					//== image
-					image = null;
-					try {
-						image = media.getAlbumImage();
-					} catch (Exception ex) {
-						//ex.printStackTrace();
-					}
-					
 					Platform.runLater(() -> {
-						imageView.setImage(image != null ? image : nullImage);
 						
 						//== title
 						title.textProperty().bind(media.titleProperty());

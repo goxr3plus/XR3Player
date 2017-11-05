@@ -56,6 +56,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFo
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
  * Used to control big amounts of Media using a TableViewer mechanism
@@ -149,7 +150,8 @@ public class SmartController extends StackPane {
 	private final Genre genre;
 	
 	/**
-	 * The name of the database table (eg. @see ActionTool.returnRandomTableName())
+	 * The name of the database table (eg. @see
+	 * ActionTool.returnRandomTableName())
 	 */
 	private final String dataBaseTableName;
 	
@@ -211,12 +213,14 @@ public class SmartController extends StackPane {
 	// --------------------------------------------------
 	
 	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer without the search activated
+	 * The Vertical ScrollBar position of SmartController TableViewer without
+	 * the search activated
 	 */
 	private double verticalScrollValueWithoutSearch = -1;
 	
 	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer when the the search activated
+	 * The Vertical ScrollBar position of SmartController TableViewer when the
+	 * the search activated
 	 */
 	private double verticalScrollValueWithSearch = -1;
 	
@@ -297,7 +301,8 @@ public class SmartController extends StackPane {
 							Main.playedSongs.remove(media.getFilePath(), true);
 					} else if (code == KeyCode.ENTER)
 						Main.xPlayersList.getXPlayerController(0).playSong(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
-					
+					else if (key.isControlDown() && code == KeyCode.I)
+						Main.tagWindow.openAudio(tableViewer.getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO);
 				}
 				
 			}
@@ -535,7 +540,8 @@ public class SmartController extends StackPane {
 	 */
 	
 	/**
-	 * Prepares the delete operation when more than one Media files will be deleted.
+	 * Prepares the delete operation when more than one Media files will be
+	 * deleted.
 	 *
 	 * @param permanent
 	 *            <br>
@@ -564,7 +570,8 @@ public class SmartController extends StackPane {
 	 *
 	 * @param permanent
 	 *            <br>
-	 *            true->storage medium + (play list)/library false->only from (play list)/library<br>
+	 *            true->storage medium + (play list)/library false->only from
+	 *            (play list)/library<br>
 	 */
 	private void removeSelected(boolean permanent) {
 		
@@ -716,7 +723,8 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * This method is used from updateLabel() method to append Text to detailsCssTextArea
+	 * This method is used from updateLabel() method to append Text to
+	 * detailsCssTextArea
 	 * 
 	 * @param text1
 	 * @param text2
@@ -839,7 +847,8 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Calculates the total entries in the database table [it MUST be called from external thread cause it may lag the application ]
+	 * Calculates the total entries in the database table [it MUST be called
+	 * from external thread cause it may lag the application ]
 	 */
 	public synchronized void calculateTotalEntries() {
 		// calculate the total entries
@@ -931,7 +940,8 @@ public class SmartController extends StackPane {
 	 * 
 	 * @param newMaximumPerPage
 	 * @param updateSmartController
-	 *            If true the loadService will start (Memory consuming ;( ) use with great care
+	 *            If true the loadService will start (Memory consuming ;( ) use
+	 *            with great care
 	 */
 	public void setNewMaximumPerPage(int newMaximumPerPage , boolean updateSmartController) {
 		if (maximumPerPage == newMaximumPerPage)
@@ -1090,7 +1100,8 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Return the number of the final List counting from <b>firstList->0 SecondList->1 ....</b>
+	 * Return the number of the final List counting from <b>firstList->0
+	 * SecondList->1 ....</b>
 	 *
 	 * @return the int
 	 */
