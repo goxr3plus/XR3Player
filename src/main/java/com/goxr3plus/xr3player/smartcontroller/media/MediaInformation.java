@@ -352,6 +352,19 @@ public class MediaInformation extends BorderPane {
 								encoder.setText("-");
 								channel.setText("-");
 								format.setText("-");
+								
+								mpegVersion.setText("-");
+								mpegLayer.setText("-");
+								totalFrames.setText("-");
+								noOfSamples.setText("-");
+								mp3StartByte.setText("-");
+								empasis.setText("-");
+								isVariableBitRate.setText("-");
+								isOriginal.setText("-");
+								isCopyrighted.setText("-");
+								isPadding.setText("-");
+								isProtected.setText("-");
+								isPrivate.setText("-");
 							});
 						}
 					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException ex) {
