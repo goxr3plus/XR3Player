@@ -25,13 +25,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
-public class MP3BasicInfo extends BorderPane {
+public class MP3BasicInfo extends StackPane {
 	
 	//--------------------------------------------------------------
 	
@@ -128,7 +128,7 @@ public class MP3BasicInfo extends BorderPane {
 	public MP3BasicInfo() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MP3BasicInfo.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

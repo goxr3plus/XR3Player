@@ -80,10 +80,6 @@ public class ArtWork extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//ImageView
-		//imageView.fitWidthProperty().bind(window.widthProperty().subtract(20));
-		//imageView.fitHeightProperty().bind(window.heightProperty().subtract(110));
-		
 		//Save
 		save.setOnAction(a -> {
 			Optional.ofNullable(Main.specialChooser.prepareToExportImage(Main.window, "cover" + InfoTool.RANDOM.nextInt(50000) + ".png")).ifPresent(file -> {
@@ -125,6 +121,13 @@ public class ArtWork extends StackPane {
 	public void showMediaFileImage(String absolutePath) {
 		if (absolutePath != null)
 			pictureUpdaterService.startService(absolutePath);
+	}
+	
+	/**
+	 * @return the imageView
+	 */
+	public ImageView getImageView() {
+		return imageView;
 	}
 	
 	/**
@@ -175,7 +178,7 @@ public class ArtWork extends StackPane {
 						
 						//Set the Image
 						if (image != null)
-							imageView.setImage(image);
+							getImageView().setImage(image);
 						
 						//Show the Notification Label
 						notificationLabel.setVisible(image == null);

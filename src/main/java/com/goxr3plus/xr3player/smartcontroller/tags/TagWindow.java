@@ -52,7 +52,7 @@ public class TagWindow extends StackPane {
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	/** The Window */
-	private Stage window = new Stage();
+	private final Stage window = new Stage();
 	
 	//For MP3
 	private final MP3BasicInfo mp3BasicInfo = new MP3BasicInfo();
@@ -66,7 +66,7 @@ public class TagWindow extends StackPane {
 	public TagWindow() {
 		
 		// ------------------------------------FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ArtWorkController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TagWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -96,6 +96,9 @@ public class TagWindow extends StackPane {
 		
 		//artWorkTab
 		artWorkTab.setContent(artWork);
+		//ImageView
+		artWork.getImageView().fitWidthProperty().bind(window.widthProperty().subtract(20));
+		artWork.getImageView().fitHeightProperty().bind(window.heightProperty().subtract(20));
 		
 		//id3v1Tab
 		id3v1Tab.setContent(id3V1Controller);
