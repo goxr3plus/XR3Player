@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.windows;
+package main.java.com.goxr3plus.xr3player.smartcontroller.tags;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,15 +15,11 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -38,7 +34,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
  * @author GOXR3PLUS
  *
  */
-public class PictureWindowController extends StackPane {
+public class ArtWork extends StackPane {
 	
 	//--------------------------------------------------------
 	
@@ -52,40 +48,22 @@ public class PictureWindowController extends StackPane {
 	private Label notificationLabel;
 	
 	@FXML
-	private Label fileNameLabel;
-	
-	@FXML
 	private Button save;
-	
-	@FXML
-	private Button close;
 	
 	//--------------------------------------------------------
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	/** The Window */
-	private Stage window = new Stage();
-	
 	private final PictureUpdaterService pictureUpdaterService = new PictureUpdaterService();
 	
 	/**
 	 * Constructor
 	 */
-	public PictureWindowController() {
-		
-		//Prepare the Window
-		window.setTitle("Picture Viewer");
-		window.initStyle(StageStyle.UTILITY);
-		window.setScene(new Scene(this));
-		window.getScene().setOnKeyReleased(k -> {
-			if (k.getCode() == KeyCode.ESCAPE)
-				window.close();
-		});
+	public ArtWork() {
 		
 		// ------------------------------------FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "PictureWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ArtWorkController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -103,8 +81,8 @@ public class PictureWindowController extends StackPane {
 	private void initialize() {
 		
 		//ImageView
-		imageView.fitWidthProperty().bind(window.widthProperty().subtract(20));
-		imageView.fitHeightProperty().bind(window.heightProperty().subtract(110));
+		//imageView.fitWidthProperty().bind(window.widthProperty().subtract(20));
+		//imageView.fitHeightProperty().bind(window.heightProperty().subtract(110));
 		
 		//Save
 		save.setOnAction(a -> {
@@ -122,9 +100,6 @@ public class PictureWindowController extends StackPane {
 			});
 		});
 		
-		//Close
-		close.setOnAction(a -> close());
-		
 	}
 	
 	/**
@@ -140,30 +115,6 @@ public class PictureWindowController extends StackPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * @return the window
-	 */
-	public Stage getWindow() {
-		return window;
-	}
-	
-	/**
-	 * Close the Window
-	 */
-	public void close() {
-		window.close();
-	}
-	
-	/**
-	 * Show the Window
-	 */
-	public void show() {
-		if (!window.isShowing())
-			window.show();
-		else
-			window.requestFocus();
 	}
 	
 	/**
@@ -207,7 +158,7 @@ public class PictureWindowController extends StackPane {
 				protected Void call() throws Exception {
 					
 					//FileName
-					String fileName = InfoTool.getFileName(fileAbsolutePath);
+					//String fileName = InfoTool.getFileName(fileAbsolutePath)
 					
 					//Try to find the album image for the given Audio File
 					Image dummyImage = InfoTool.getAudioAlbumImage(fileAbsolutePath, -1, -1);
@@ -220,7 +171,7 @@ public class PictureWindowController extends StackPane {
 						save.setDisable(image == null);
 						
 						//Show the File Name
-						fileNameLabel.setText(fileName);
+						//fileNameLabel.setText(fileName)
 						
 						//Set the Image
 						if (image != null)
@@ -229,7 +180,6 @@ public class PictureWindowController extends StackPane {
 						//Show the Notification Label
 						notificationLabel.setVisible(image == null);
 						
-						show();
 					});
 					
 					return null;

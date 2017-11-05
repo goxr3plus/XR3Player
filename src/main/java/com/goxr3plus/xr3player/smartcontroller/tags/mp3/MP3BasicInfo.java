@@ -1,7 +1,4 @@
-/*
- * 
- */
-package main.java.com.goxr3plus.xr3player.smartcontroller.media;
+package main.java.com.goxr3plus.xr3player.smartcontroller.tags.mp3;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,23 +26,14 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
-import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
-/**
- * Allows you to view informations about the selected song like the album
- * image,to search for it on the web,to buy this song on iTunes,Amazon.
- *
- * @author GOXR3PLUS STUDIO
- */
-public class MediaInformation extends BorderPane {
+public class MP3BasicInfo extends BorderPane {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private Button mediaImageButton;
 	
 	@FXML
 	private ImageView imageView;
@@ -137,7 +125,7 @@ public class MediaInformation extends BorderPane {
 	/**
 	 * Constructor.
 	 */
-	public MediaInformation() {
+	public MP3BasicInfo() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaInformation.fxml"));
@@ -188,12 +176,6 @@ public class MediaInformation extends BorderPane {
 					break;
 				}
 			}
-		});
-		
-		// mediaImageButton
-		mediaImageButton.setOnAction(m -> {
-			if (media != null)
-				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.ARTWORK);
 		});
 		
 	}

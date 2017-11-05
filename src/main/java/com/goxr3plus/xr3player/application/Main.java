@@ -76,7 +76,6 @@ import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ExportWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
-import main.java.com.goxr3plus.xr3player.application.windows.PictureWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.WelcomeScreen;
@@ -86,6 +85,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextM
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControllerSearcher.AdvancedSearch;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaFilterService;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerWindowController.Type;
@@ -130,7 +130,10 @@ public class Main extends Application {
 	/** The rename window. */
 	public static final EmotionsWindow emotionsWindow = new EmotionsWindow();
 	
-	public static final PictureWindowController pictureWindowController = new PictureWindowController();
+	/**
+	 * Audio Tagging Window
+	 */
+	public static final TagWindow tagWindow = new TagWindow();
 	
 	/**
 	 * This window is being used to export files from the application to the
@@ -353,7 +356,7 @@ public class Main extends Application {
 		aboutWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
 		welcomeScreen.getWindow().initOwner(window);
-		pictureWindowController.getWindow().initOwner(window);
+		tagWindow.getWindow().initOwner(window);
 		
 		// --------- Fix the Background ------------
 		determineBackgroundImage();
@@ -623,7 +626,7 @@ public class Main extends Application {
 		//String build = javaVersionElements[4]
 		//System.out.println(Arrays.asList(javaVersionElements))
 		
-		if (Integer.parseInt(major) < 8 || Integer.parseInt(update) < 141 )
+		if (Integer.parseInt(major) < 8 || Integer.parseInt(update) < 141)
 			ActionTool.showNotification("Problematic Java Version Installed!", "XR3Player needs at least Java [ 1.8.0_141 ] -> Installed Java Version [ "
 					+ System.getProperty("java.version") + " ]\nThe application may crash or not work at all!\n Update your Java Version :)", Duration.seconds(40),
 					NotificationType.ERROR);

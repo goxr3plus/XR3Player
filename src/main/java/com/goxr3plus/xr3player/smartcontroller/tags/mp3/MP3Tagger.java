@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.smartcontroller.tags;
+package main.java.com.goxr3plus.xr3player.smartcontroller.tags.mp3;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
