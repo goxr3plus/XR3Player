@@ -19,7 +19,10 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.mp3.ID3v1;
@@ -203,7 +206,8 @@ public class TagWindow extends StackPane {
 			}
 			
 			show();
-		}
+		}else
+			ActionTool.showNotification("No File", "No File has been selected ...", Duration.seconds(2), NotificationType.SIMPLE);
 	}
 	
 }

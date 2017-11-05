@@ -298,7 +298,7 @@ public class MP3BasicInfo extends StackPane {
 							});
 						}
 					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException ex) {
-						//ex.printStackTrace();
+						//ex.printStackTrace()
 					}
 					
 					return null;
