@@ -34,7 +34,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
  * @author GOXR3PLUS
  *
  */
-public class ArtWork extends StackPane {
+public class ArtWorkController extends StackPane {
 	
 	//--------------------------------------------------------
 	
@@ -60,7 +60,7 @@ public class ArtWork extends StackPane {
 	/**
 	 * Constructor
 	 */
-	public ArtWork() {
+	public ArtWorkController() {
 		
 		// ------------------------------------FXMLLOADER
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ArtWorkController.fxml"));

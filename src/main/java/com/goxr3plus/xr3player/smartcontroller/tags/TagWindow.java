@@ -64,7 +64,7 @@ public class TagWindow extends StackPane {
 	
 	//For MP3
 	private final MP3BasicInfo mp3BasicInfo = new MP3BasicInfo();
-	private final ArtWork artWork = new ArtWork();
+	private final ArtWorkController artWork = new ArtWorkController();
 	private final ID3v1 id3V1Controller = new ID3v1();
 	private final ID3v2 id3V2Controller = new ID3v2();
 	
