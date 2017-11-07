@@ -9,6 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
+/** This class is capable of fully modifying mp3 ID3V1 tags
+ * @author GOXR3PLUS
+ *
+ */
 public class ID3v1 extends StackPane {
 	
 	//--------------------------------------------------------------
