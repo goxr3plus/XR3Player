@@ -120,12 +120,8 @@
 			<artifactId>FX-BorderlessScene</artifactId>
 			<version>V1.1.0</version>
 		</dependency>
-		<!--<dependency>
-			<groupId>de.jensd</groupId>
-			<artifactId>fontawesomefx</artifactId>
-			<version>8.9</version>
-		</dependency>
-		-->
+		<!--<dependency> <groupId>de.jensd</groupId> <artifactId>fontawesomefx</artifactId> 
+			<version>8.9</version> </dependency> -->
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
@@ -201,5 +197,11 @@
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
+		<!-- WEB BROWSER SUPPORT -->
+		<dependency>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>JavaFX-Web-Browser</artifactId>
+			<version>V3.0.0</version>
+		</dependency>
 	</dependencies>
 </project>
