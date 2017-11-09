@@ -94,7 +94,7 @@ import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 /**
  * The Main class from which the application is starting.
  *
- * @author GOXR3PLUS
+ * @author GOXR3PLUS STUDIO
  */
 public class Main extends Application {
 	
