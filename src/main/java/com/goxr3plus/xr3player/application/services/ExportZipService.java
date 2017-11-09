@@ -146,8 +146,16 @@ public class ExportZipService extends Service<Boolean> {
 					ZipEntry ze = zis.getNextEntry();
 					
 					// Count entries
-					ZipFile zip = new ZipFile(inputZip);
-					double counter = 0 , total = zip.size();
+					double counter = 0 , total = 0;
+					try (ZipFile zip = new ZipFile(inputZip)) {
+						total = zip.size(); //total entries of the zip file
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					
+					//We don't want division by 0 
+					if (total == 0)
+						total = 1;
 					
 					//Start
 					for (byte[] buffer = new byte[1024]; ze != null;) {
@@ -183,7 +191,6 @@ public class ExportZipService extends Service<Boolean> {
 					
 					zis.closeEntry();
 					zis.close();
-					zip.close();
 					
 				} catch (IOException ex) {
 					exception = ex.getMessage();

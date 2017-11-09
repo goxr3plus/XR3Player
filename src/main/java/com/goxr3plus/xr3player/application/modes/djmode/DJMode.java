@@ -67,19 +67,22 @@ public class DJMode extends BorderPane {
 	public void initialize() {
 		
 		//XPlayer 1
-		Main.xPlayersList.addXPlayerController(new XPlayerController(1));
-		Main.xPlayersList.getXPlayerController(1).makeTheDisc(Color.rgb(0, 144, 255), 45, 0, 125, Side.RIGHT);
-		Main.xPlayersList.getXPlayerController(1).makeTheVisualizer(Side.LEFT);
-		hBox.getChildren().add(0, Main.xPlayersList.getXPlayerController(1));
-		HBox.setHgrow(Main.xPlayersList.getXPlayerController(1), Priority.ALWAYS);
+		XPlayerController xPlayer1 = new XPlayerController(1);
+		Main.xPlayersList.addXPlayerController(xPlayer1);
+		xPlayer1.makeTheDisc(Color.rgb(0, 144, 255), 45, 0, 125, Side.RIGHT);
+		xPlayer1.makeTheVisualizer(Side.LEFT);
+		hBox.getChildren().add(0, xPlayer1);
+		HBox.setHgrow(xPlayer1, Priority.ALWAYS);
 		
 		//XPlayer 2
-		Main.xPlayersList.addXPlayerController(new XPlayerController(2));
-		Main.xPlayersList.getXPlayerController(2).makeTheDisc(Color.rgb(255, 95, 0), 45, 0, 125, Side.LEFT);
-		Main.xPlayersList.getXPlayerController(2).makeTheVisualizer(Side.RIGHT);
-		hBox.getChildren().add(Main.xPlayersList.getXPlayerController(2));
-		HBox.setHgrow(Main.xPlayersList.getXPlayerController(2), Priority.ALWAYS);
+		XPlayerController xPlayer2 = new XPlayerController(2);
+		Main.xPlayersList.addXPlayerController(xPlayer2);
+		xPlayer2.makeTheDisc(Color.rgb(255, 95, 0), 45, 0, 125, Side.LEFT);
+		xPlayer2.makeTheVisualizer(Side.RIGHT);
+		hBox.getChildren().add(xPlayer2);
+		HBox.setHgrow(xPlayer2, Priority.ALWAYS);
 		
+		//Add the KeyListeners
 		addKeyListeners();
 		
 		// removeThis
