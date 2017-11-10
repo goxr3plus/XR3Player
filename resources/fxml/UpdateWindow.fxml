@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <bottom>
@@ -88,7 +88,7 @@
             </StackPane>
          </bottom>
          <center>
-            <JFXTabPane styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab fx:id="releasesHistoryTab" closable="false" styleClass="sTab" text="Releases History">
                      <content>

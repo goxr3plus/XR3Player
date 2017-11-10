@@ -195,18 +195,6 @@
                               <DropShadow />
                            </effect>
                         </PieChart>
-                        <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Data%20Protection-24.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
                         <Button fx:id="importDatabase" layoutX="460.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -215,6 +203,18 @@
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../image/Accept%20Database-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Data%20Protection-24.png" />
                                  </image>
                               </ImageView>
                            </graphic>

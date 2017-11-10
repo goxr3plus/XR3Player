@@ -25,6 +25,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.jfoenix.controls.JFXTabPane;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -58,6 +60,9 @@ public class UpdateWindow extends StackPane {
 	
 	@FXML
 	private Button download;
+	
+	@FXML
+	private JFXTabPane tabPane;
 	
 	@FXML
 	private Button gitHubButton;
@@ -184,7 +189,8 @@ public class UpdateWindow extends StackPane {
 	}
 	
 	/**
-	 * This method is fetching data from github to check if the is a new update for XR3Player
+	 * This method is fetching data from github to check if the is a new update
+	 * for XR3Player
 	 * 
 	 * @param showTheWindow
 	 *            If not update is available then don't show the window
@@ -248,6 +254,7 @@ public class UpdateWindow extends StackPane {
 				} else {
 					window.setTitle("New update is available!");
 					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!! |  Current : ->( " + currentVersion + " )<-");
+					tabPane.getSelectionModel().select(1);
 				}
 				
 				//Read the JSON response
@@ -413,7 +420,8 @@ public class UpdateWindow extends StackPane {
 	private final String style3 = style.replace("bold", "400");
 	
 	/**
-	 * Streams the given update and appends it to the InlineCssTextArea in a specific format
+	 * Streams the given update and appends it to the InlineCssTextArea in a
+	 * specific format
 	 * 
 	 * @param textArea
 	 * @param Element
