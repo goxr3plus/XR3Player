@@ -253,7 +253,7 @@ public class UpdateWindow extends StackPane {
 					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
 				} else {
 					window.setTitle("New update is available!");
-					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!! |  Current : ->( " + currentVersion + " )<-");
+					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
 					tabPane.getSelectionModel().select(1);
 				}
 				

@@ -58,6 +58,9 @@ public class EmotionsWindow extends BorderPane {
 	@FXML
 	private Label titleLabel;
 	
+	@FXML
+	private Button close;
+	
 	// ----------------     
 	
 	/** The window */
@@ -159,6 +162,9 @@ public class EmotionsWindow extends BorderPane {
 			emotion = Emotion.LOVE;
 			emotionLabel.setText(emotion.toString());
 		});
+		
+		//== close
+		close.setOnAction(a -> close(false));
 		
 	}
 	
