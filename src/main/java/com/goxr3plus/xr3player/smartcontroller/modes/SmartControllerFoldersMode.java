@@ -9,12 +9,15 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
@@ -95,6 +98,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		//TreeView
 		treeView.setRoot(root);
 		treeView.setShowRoot(false);
+		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		// Mouse Released Event
 		treeView.setOnMouseReleased(this::treeViewMouseReleased);
@@ -110,8 +114,9 @@ public class SmartControllerFoldersMode extends StackPane {
 				Dragboard board = startDragAndDrop(TransferMode.LINK);
 				
 				// Put a String on DragBoard
-				ClipboardContent content = new ClipboardContent();
-				content.putFiles(Arrays.asList(new File(source.getFullPath())));
+				ClipboardContent content = new ClipboardContent();		
+				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath()))
+						.collect(Collectors.toList()));
 				
 				board.setContent(content);
 				event.consume();
