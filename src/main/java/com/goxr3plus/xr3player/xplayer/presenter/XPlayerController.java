@@ -1177,6 +1177,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					// Notification
 					//ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500), NotificationType.SIMPLE);
 					
+					//== Visualizer Window 
+					visualizerWindow.getProgressBar().setProgress(0);
 				}
 				
 			});

@@ -237,7 +237,7 @@ public class StarWindow extends GridPane {
 		
 		// Auto Calculate the position
 		Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-		show(stars, bounds.getMinX() - 200 + bounds.getWidth() / 2, bounds.getMaxY());
+		show(stars, bounds.getMinX() - 202 + bounds.getWidth() / 2, bounds.getMaxY());
 		
 	}
 	
