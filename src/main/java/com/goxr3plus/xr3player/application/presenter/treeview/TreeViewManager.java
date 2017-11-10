@@ -9,7 +9,6 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -92,10 +91,11 @@ public class TreeViewManager extends BorderPane {
 		
 		// Drag Implementation
 		systemTreeView.setOnDragDetected(event -> {
-			FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
+			//FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
 			
 			//The host is not allowed
-			if (source != null && !source.getValue().equals(hostName)) {
+			//if (source != null && !source.getValue().equals(hostName)) {
+			if (!systemTreeView.getSelectionModel().getSelectedItems().isEmpty()) {
 				
 				// Allow this transfer Mode
 				Dragboard board = startDragAndDrop(TransferMode.LINK);
@@ -201,7 +201,7 @@ public class TreeViewManager extends BorderPane {
 			// source.setGraphic(new ImageView(SystemRoot.folderImage))
 			
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-			 Main.treeViewContextMenu.show( source.getFullPath() , mouseEvent.getScreenX(), mouseEvent.getScreenY());
+			Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
 	}
 	

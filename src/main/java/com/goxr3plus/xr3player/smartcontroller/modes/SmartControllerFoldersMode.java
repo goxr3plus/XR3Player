@@ -6,10 +6,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
@@ -105,16 +103,17 @@ public class SmartControllerFoldersMode extends StackPane {
 		
 		// Drag Implementation
 		treeView.setOnDragDetected(event -> {
-			FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
+			//FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
 			
 			//The host is not allowed
-			if (source != null && source != root) {
+			//if (source != null && source != root) {
+			if (!treeView.getSelectionModel().getSelectedItems().isEmpty()) {
 				
 				// Allow this transfer Mode
 				Dragboard board = startDragAndDrop(TransferMode.LINK);
 				
 				// Put a String on DragBoard
-				ClipboardContent content = new ClipboardContent();		
+				ClipboardContent content = new ClipboardContent();
 				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath()))
 						.collect(Collectors.toList()));
 				
@@ -130,7 +129,9 @@ public class SmartControllerFoldersMode extends StackPane {
 		progressIndicator.progressProperty().bind(service.progressProperty());
 		
 		//collapseTree
-		collapseTree.setOnAction(a -> {
+		collapseTree.setOnAction(a ->
+		
+		{
 			//Trick for CPU based on this question -> https://stackoverflow.com/questions/15490268/manually-expand-collapse-all-treeitems-memory-cost-javafx-2-2
 			root.setExpanded(false);
 			
