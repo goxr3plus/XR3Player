@@ -801,7 +801,7 @@ public class Library extends StackPane {
 		// Bind
 		Main.libraryMode.libraryInformation.getStarsLabel().textProperty().bind(Main.starWindow.starsProperty().asString());
 		
-		Main.starWindow.show(starsProperty().get(), n);
+		Main.starWindow.show(getLibraryName(), starsProperty().get(), n);
 		
 		//Keep a reference to the previous stars
 		double previousStars = stars.get();

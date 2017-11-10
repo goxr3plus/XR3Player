@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import org.controlsfx.control.textfield.TextFields;
 
+import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -81,8 +82,12 @@ public class RenameWindow extends VBox {
 	private boolean accepted = false;
 	
 	/** The not allow. */
-	
 	private Set<String> notAllow = Stream.of("/", "\\", ":", "*", "?", "\"", "<", ">", "|", "'", ".").collect(Collectors.toSet());
+	
+	/**
+	 * The timeLine which controls the animations of the Window
+	 */
+	private Timeline timeLine = new Timeline();
 	
 	/**
 	 * Constructor
@@ -119,7 +124,7 @@ public class RenameWindow extends VBox {
 				close(false);
 		});
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue && window.isShowing())
+			if (!newValue && window.isShowing() && timeLine.getStatus() != Status.RUNNING)
 				close(false);
 		});
 		
@@ -211,9 +216,9 @@ public class RenameWindow extends VBox {
 		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
 		
 		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		timeIn.setOnFinished(f -> window.close());
-		timeIn.play();
+		timeLine.getKeyFrames().setAll(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeLine.setOnFinished(f -> window.close());
+		timeLine.playFromStart();
 		//------------ END of Animation------------------
 		
 	}
@@ -229,6 +234,10 @@ public class RenameWindow extends VBox {
 	 *            The text if the title Label
 	 */
 	public void show(String text , Node n , String title , FileCategory fileCategory) {
+		
+		//Stop the TimeLine
+		timeLine.stop();
+		window.close();
 		
 		// Auto Calculate the position
 		Bounds bounds = n.localToScreen(n.getBoundsInLocal());

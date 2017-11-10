@@ -5,6 +5,7 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -53,10 +54,13 @@ public class EmotionsWindow extends BorderPane {
 	@FXML
 	private Label emotionLabel;
 	
+	@FXML
+	private Label titleLabel;
+	
 	// ----------------     
 	
 	/** The window */
-	private Stage window = new Stage();
+	private final Stage window = new Stage();
 	
 	/** The Emotion of the User */
 	private Emotion emotion = Emotion.NEUTRAL;
@@ -71,15 +75,17 @@ public class EmotionsWindow extends BorderPane {
 	private boolean accepted;
 	
 	/**
+	 * The timeLine which controls the animations of the Window
+	 */
+	private Timeline timeLine = new Timeline();
+	
+	/**
 	 * Constructor
 	 */
 	public EmotionsWindow() {
 		
 		// Window
-		window.setTitle("Rename Window");
-		window.setWidth(216);
-		window.setHeight(72);
-		//window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Emotions Window");
 		window.initStyle(StageStyle.TRANSPARENT);
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
@@ -100,7 +106,7 @@ public class EmotionsWindow extends BorderPane {
 		// ----------------------------------Scene
 		window.setScene(new Scene(this, Color.TRANSPARENT));
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue && window.isShowing())
+			if (!newValue && window.isShowing() && timeLine.getStatus() != Status.RUNNING)
 				close(false);
 		});
 	}
@@ -162,15 +168,20 @@ public class EmotionsWindow extends BorderPane {
 	 *            the node
 	 * 
 	 */
-	public void show(Node n) {
+	public void show(String text , Node n) {
+		
+		//Stop the TimeLine
+		timeLine.stop();
+		window.close();
+		
+		//titleLabel
+		titleLabel.setText(text);
+		titleLabel.getTooltip().setText(text);
 		
 		// Auto Calculate the position
 		Bounds bounds = n.localToScreen(n.getBoundsInLocal());
-		//show(text, bounds.getMinX() + 5, bounds.getMaxY(), title);
-		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2);
-		show(bounds.getMinX() - 216 / 2 + bounds.getWidth() / 2, bounds.getMaxY());
+		show(bounds.getMinX() - 200 + bounds.getWidth() / 2, bounds.getMaxY());
 		
-		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2);
 	}
 	
 	/**
@@ -281,7 +292,7 @@ public class EmotionsWindow extends BorderPane {
 	 *            True if accepted , False if not
 	 */
 	private void close(boolean accepted) {
-		//	System.out.println("Emotions Window Close called with accepted := " + accepted);
+		//	System.out.println("Emotions Window Close called with accepted := " + accepted)
 		this.accepted = accepted;
 		
 		//------------Animation------------------
@@ -295,9 +306,9 @@ public class EmotionsWindow extends BorderPane {
 		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
 		
 		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		timeIn.setOnFinished(f -> window.close());
-		timeIn.play();
+		timeLine.getKeyFrames().setAll(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeLine.setOnFinished(f -> window.close());
+		timeLine.playFromStart();
 		//------------ END of Animation------------------
 		
 	}

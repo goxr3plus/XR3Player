@@ -547,7 +547,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public void updateEmotion(Node node) {
 		
 		// Show the Window
-		Main.emotionsWindow.show(node);
+		Main.emotionsWindow.show(InfoTool.getFileName(xPlayerModel.getSongPath()), node);
 		
 		// Listener
 		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {

@@ -5,6 +5,7 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -49,10 +50,13 @@ public class StarWindow extends GridPane {
 	@FXML
 	private Label starsLabel;
 	
+	@FXML
+	private Label titleLabel;
+	
 	//-------------------------------------
 	
 	/** The window. */
-	private Stage window;
+	private final Stage window = new Stage();;
 	
 	/** The gc. */
 	private GraphicsContext gc;
@@ -76,6 +80,11 @@ public class StarWindow extends GridPane {
 	private static final Image star = InfoTool.getImageFromResourcesFolder("star.png");
 	
 	String[] labelText = { "No Stars" , "Very Bad" , "Bad" , "Very Bored" , "Bored" , "Almost Fine" , "Fine" , "Good" , "Very Good" , "Amazing" , "Excellent" };
+	
+	/**
+	 * The timeLine which controls the animations of the Window
+	 */
+	private Timeline timeLine = new Timeline();
 	
 	/**
 	 * Constructor.
@@ -102,18 +111,17 @@ public class StarWindow extends GridPane {
 	private void initialize() {
 		
 		// Window
-		window = new Stage();
+		window.setTitle("Stars Window");
 		window.initStyle(StageStyle.TRANSPARENT);
-		//window.initModality(Modality.APPLICATION_MODAL);
 		window.setAlwaysOnTop(true);
 		
 		// Graphics Context 2D
 		gc = canvas.getGraphicsContext2D();
 		
 		// Canvas
-		canvas.setOnMouseDragged(this::computeStars);
-		canvas.setOnMouseReleased(this::computeStars);
-		canvas.setOnMouseMoved(this::computeFakeStars);
+		canvas.setOnMouseDragged(m -> computeStars(m, false));
+		canvas.setOnMouseReleased(m -> computeStars(m, false));
+		canvas.setOnMouseMoved(m -> computeStars(m, true));
 		canvas.setOnMouseExited(m -> repaintStars(getStars()));
 		
 		// close
@@ -130,7 +138,7 @@ public class StarWindow extends GridPane {
 				close(false);
 		});
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue && window.isShowing())
+			if (!newValue && window.isShowing() && timeLine.getStatus() != Status.RUNNING)
 				close(false);
 		});
 		
@@ -217,12 +225,20 @@ public class StarWindow extends GridPane {
 	 * @param node
 	 *            the node
 	 */
-	public void show(double stars , Node node) {
+	public void show(String text , double stars , Node node) {
+		
+		//Stop the TimeLine
+		timeLine.stop();
+		window.close();
+		
+		//titleLabel
+		titleLabel.setText(text);
+		titleLabel.getTooltip().setText(text);
+		
 		// Auto Calculate the position
 		Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-		show(stars, bounds.getMinX() - 200 / 2 + bounds.getWidth() / 2, bounds.getMaxY());
+		show(stars, bounds.getMinX() - 200 + bounds.getWidth() / 2, bounds.getMaxY());
 		
-		//show(stars, bounds.getMinX() + 5, bounds.getMaxY());
 	}
 	
 	/**
@@ -299,9 +315,9 @@ public class StarWindow extends GridPane {
 		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
 		
 		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		timeIn.setOnFinished(f -> window.close());
-		timeIn.play();
+		timeLine.getKeyFrames().setAll(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeLine.setOnFinished(f -> window.close());
+		timeLine.playFromStart();
 		//------------ END of Animation------------------
 		
 	}
@@ -309,61 +325,45 @@ public class StarWindow extends GridPane {
 	/**
 	 * Computes the stars based on the mouse position on screen
 	 */
-	private void computeStars(MouseEvent m) {
-		int x = (int) m.getX();
-		
-		if (x <= 5)
-			setStars(0);
-		else if (x >= 144)
-			setStars(5);
-		else if (x >= 133)
-			setStars(4.5);
-		else if (x >= 115)
-			setStars(4);
-		else if (x >= 105)
-			setStars(3.5);
-		else if (x >= 85)
-			setStars(3);
-		else if (x >= 74)
-			setStars(2.5);
-		else if (x >= 55)
-			setStars(2);
-		else if (x >= 45)
-			setStars(1.5);
-		else if (x >= 25)
-			setStars(1);
-		else if (x >= 12)
-			setStars(0.5);
-	}
-	
 	/**
-	 * Computes the stars based on the mouse position on screen
+	 * @param m
+	 *            The MouseEvent
+	 * @param fakeStars
+	 *            If True it just displays stars but doesn't actually changes
+	 *            them ( just repainting canvas )
 	 */
-	private void computeFakeStars(MouseEvent m) {
+	private void computeStars(MouseEvent m , boolean fakeStars) {
 		int x = (int) m.getX();
 		
+		double var = 0.0;
+		
 		if (x <= 5)
-			repaintStars(0);
-		else if (x >= 144)
-			repaintStars(5);
-		else if (x >= 133)
-			repaintStars(4.5);
+			var = ( 0 );
+		else if (x >= 144) {
+			var = ( 5 );
+		} else if (x >= 133)
+			var = ( 4.5 );
 		else if (x >= 115)
-			repaintStars(4);
+			var = ( 4 );
 		else if (x >= 105)
-			repaintStars(3.5);
+			var = ( 3.5 );
 		else if (x >= 85)
-			repaintStars(3);
+			var = ( 3 );
 		else if (x >= 74)
-			repaintStars(2.5);
+			var = ( 2.5 );
 		else if (x >= 55)
-			repaintStars(2);
+			var = ( 2 );
 		else if (x >= 45)
-			repaintStars(1.5);
+			var = ( 1.5 );
 		else if (x >= 25)
-			repaintStars(1);
+			var = ( 1 );
 		else if (x >= 12)
-			repaintStars(0.5);
+			var = ( 0.5 );
+		
+		if (!fakeStars)
+			setStars(var);
+		else
+			repaintStars(var);
 	}
 	
 	/**

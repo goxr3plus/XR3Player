@@ -772,7 +772,7 @@ public abstract class Media {
 	public void updateStars(Node node) {
 		
 		// Show the Window
-		Main.starWindow.show(Double.parseDouble(stars.get().getText()), node);
+		Main.starWindow.show(getFileName(), Double.parseDouble(stars.get().getText()), node);
 		
 		// Keep in memory stars ...
 		final double previousStars = Double.parseDouble(stars.get().getText());
@@ -868,7 +868,7 @@ public abstract class Media {
 	public void updateEmotion(Node node) {
 		
 		// Show the Window
-		Main.emotionsWindow.show(node);
+		Main.emotionsWindow.show(getFileName(), node);
 		
 		// Listener
 		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
