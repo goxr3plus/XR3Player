@@ -66,6 +66,24 @@ public class XPlayerModel {
 	 */
 	
 	/**
+	 * Gets the song path
+	 *
+	 * @return The song extension
+	 */
+	public String getSongPath() {
+		return songPath.get();
+	}
+	
+	/**
+	 * Gets the song path
+	 *
+	 * @return The song extension
+	 */
+	public String getSongExtension() {
+		return songExtension.get();
+	}
+	
+	/**
 	 * Gets the current angle time.
 	 *
 	 * @return The current angle time of the player
@@ -95,7 +113,8 @@ public class XPlayerModel {
 	/**
 	 * Gets the equalizer array.
 	 *
-	 * @return Return the array which contains the equalizer values for the player
+	 * @return Return the array which contains the equalizer values for the
+	 *         player
 	 */
 	public float[] getEqualizerArray() {
 		return equalizerArray;
@@ -119,7 +138,26 @@ public class XPlayerModel {
 	 * -----------------------------------------------------------------------
 	 * 
 	 * -----------------------------------------------------------------------
+	 * 
 	 */
+	
+	/**
+	 * Sets the song path
+	 *
+	 * @return The song extension
+	 */
+	public void setSongPath(String songPath) {
+		this.songPath.set(songPath);
+	}
+	
+	/**
+	 * Sets the song extension
+	 *
+	 * @return The song extension
+	 */
+	public void setSongExtension(String songExtension) {
+		this.songExtension.set(songExtension);
+	}
 	
 	/**
 	 * Set the current angle time of the player.
