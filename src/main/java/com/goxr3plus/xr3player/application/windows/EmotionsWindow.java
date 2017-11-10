@@ -5,8 +5,14 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -18,10 +24,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -179,7 +185,21 @@ public class EmotionsWindow extends BorderPane {
 		
 		//Set once
 		window.setX(x);
-		window.setY(y);
+		
+		//------------Animation------------------
+		//Y axis
+		double yIni = y + 50;
+		double yEnd = y;
+		window.setY(yIni);
+		
+		//Create  Double Property
+		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+		
+		//Create Time Line
+		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeIn.play();
+		//------------ END of Animation------------------
 		
 		window.show();
 		
@@ -207,8 +227,11 @@ public class EmotionsWindow extends BorderPane {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not
-	 *         be able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on
+	 *         the user's system). The Stage might be "showing", yet the user
+	 *         might not be able to see it due to the Stage being rendered
+	 *         behind another window or due to the Stage being positioned off
+	 *         the monitor.
 	 * 
 	 *
 	 * @defaultValue false
@@ -218,8 +241,11 @@ public class EmotionsWindow extends BorderPane {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not
-	 *         be able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on
+	 *         the user's system). The Stage might be "showing", yet the user
+	 *         might not be able to see it due to the Stage being rendered
+	 *         behind another window or due to the Stage being positioned off
+	 *         the monitor.
 	 * 
 	 */
 	public boolean isShowing() {
@@ -255,9 +281,25 @@ public class EmotionsWindow extends BorderPane {
 	 *            True if accepted , False if not
 	 */
 	private void close(boolean accepted) {
-	//	System.out.println("Emotions Window Close called with accepted := " + accepted);
+		//	System.out.println("Emotions Window Close called with accepted := " + accepted);
 		this.accepted = accepted;
-		window.close();
+		
+		//------------Animation------------------
+		//Y axis
+		double yIni = window.getY();
+		double yEnd = window.getY() + 50;
+		window.setY(yIni);
+		
+		//Create  Double Property
+		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+		
+		//Create Time Line
+		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeIn.setOnFinished(f -> window.close());
+		timeIn.play();
+		//------------ END of Animation------------------
+		
 	}
 	
 	/**
@@ -270,7 +312,8 @@ public class EmotionsWindow extends BorderPane {
 	}
 	
 	/**
-	 * The user is passing a button and an emotion and this method sets the correct graphic based on the emotion given
+	 * The user is passing a button and an emotion and this method sets the
+	 * correct graphic based on the emotion given
 	 * 
 	 * @param button
 	 * @param emotion

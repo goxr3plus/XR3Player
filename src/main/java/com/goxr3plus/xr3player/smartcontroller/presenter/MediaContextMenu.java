@@ -265,12 +265,12 @@ public class MediaContextMenu extends ContextMenu {
 		show(Main.window, x - super.getWidth(), y - 1);
 		previousGenre = genre;
 		
+		//------------Animation------------------
+		
 		//Y axis
 		double yIni = y - 50;
-		double yEnd = super.getY();
+		double yEnd = y;
 		super.setY(yIni);
-		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
-		yProperty.addListener((ob , n , n1) -> super.setY(n1.doubleValue()));
 		
 		//X axis
 		//	double xIni = screenX - super.getWidth() + super.getWidth() * 14 / 100 + 30;
@@ -279,11 +279,15 @@ public class MediaContextMenu extends ContextMenu {
 		//	final DoubleProperty xProperty = new SimpleDoubleProperty(xIni);
 		//	xProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
 		
-		//Timeline
-		Timeline timeIn = new Timeline();
-		timeIn.getKeyFrames().addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		//Create  Double Property
+		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+		yProperty.addListener((ob , n , n1) -> super.setY(n1.doubleValue()));
+		
+		//Create Time Line
+		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.30), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
 		//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
 		timeIn.play();
+		//------------ END of Animation------------------
 		
 	}
 	

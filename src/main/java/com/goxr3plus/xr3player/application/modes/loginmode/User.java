@@ -297,7 +297,7 @@ public class User extends StackPane {
 		Main.renameWindow.show(getUserName(), node, "User Renaming", FileCategory.DIRECTORY);
 		
 		// Bind 
-		nameField.textProperty().bind(Main.renameWindow.inputField.textProperty());
+		nameField.textProperty().bind(Main.renameWindow.getInputField().textProperty());
 		
 		Main.renameWindow.showingProperty().addListener(renameInvalidator);
 	}

@@ -616,8 +616,8 @@ public abstract class Media {
 		String oldFilePath = getFilePath();
 		
 		// Bind
-		title.bind(Main.renameWindow.inputField.textProperty());
-		fileName.bind(Main.renameWindow.inputField.textProperty().concat(extension));
+		title.bind(Main.renameWindow.getInputField().textProperty());
+		fileName.bind(Main.renameWindow.getInputField().textProperty().concat(extension));
 		
 		// When the Rename Window is closed do the rename
 		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {

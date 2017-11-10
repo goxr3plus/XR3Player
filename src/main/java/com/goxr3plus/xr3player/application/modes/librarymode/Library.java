@@ -780,7 +780,7 @@ public class Library extends StackPane {
 			tab.getTooltip().textProperty().bind(nameLabel.textProperty());
 		
 		// Bind 2
-		nameLabel.textProperty().bind(Main.renameWindow.inputField.textProperty());
+		nameLabel.textProperty().bind(Main.renameWindow.getInputField().textProperty());
 		
 		//Add Invalidation Listener
 		Main.renameWindow.showingProperty().addListener(renameInvalidator);

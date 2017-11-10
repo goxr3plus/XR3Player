@@ -5,6 +5,10 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
@@ -23,6 +27,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -230,12 +235,26 @@ public class StarWindow extends GridPane {
 	 * @param y
 	 *            the y
 	 */
-	public void show(double stars , double x , double y) {
+	private void show(double stars , double x , double y) {
 		setStars(stars);
 		
 		//Set once
 		window.setX(x);
-		window.setY(y);
+		
+		//------------Animation------------------
+		//Y axis
+		double yIni = y + 50;
+		double yEnd = y;
+		window.setY(yIni);
+		
+		//Create  Double Property
+		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+		
+		//Create Time Line
+		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeIn.play();
+		//------------ END of Animation------------------
 		
 		window.show();
 		
@@ -266,9 +285,25 @@ public class StarWindow extends GridPane {
 	 *            True if accepted , False if not
 	 */
 	private void close(boolean accepted) {
-	//	System.out.println("Star Window Close called with accepted := " + accepted);
+		//	System.out.println("Star Window Close called with accepted := " + accepted);
 		this.accepted = accepted;
-		window.close();
+		
+		//------------Animation------------------
+		//Y axis
+		double yIni = window.getY();
+		double yEnd = window.getY() + 50;
+		window.setY(yIni);
+		
+		//Create  Double Property
+		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+		
+		//Create Time Line
+		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		timeIn.setOnFinished(f -> window.close());
+		timeIn.play();
+		//------------ END of Animation------------------
+		
 	}
 	
 	/**
