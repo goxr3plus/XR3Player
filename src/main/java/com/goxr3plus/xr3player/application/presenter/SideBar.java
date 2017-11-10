@@ -277,64 +277,81 @@ public class SideBar extends BorderPane {
 		//		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area.");
 		
 		// importDataBase
-		importDataBase.setOnAction(e -> {
-			if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
-				
-				File file = Main.specialChooser.selectDBFile(Main.window);
-				if (file != null) {
-					// Change the Scene View
-					Main.updateScreen.setVisible(true);
-					Main.updateScreen.getProgressBar().progressProperty().bind(unZipper.progressProperty());
-					
-					// Import the new database
-					unZipper.importDataBase(file.getAbsolutePath());
-				}
-			}
-		});
+		importDataBase.setOnAction(e -> importDatabase());
 		
 		// exportDataBase
-		exportDataBase.setOnAction(a -> {
-			if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
-				
-				File file = Main.specialChooser.exportDBFile(Main.window);
-				if (file != null) {
-					
-					// Change the Scene View
-					Main.updateScreen.setVisible(true);
-					Main.updateScreen.getProgressBar().progressProperty().bind(zipper.progressProperty());
-					
-					// Export the database
-					zipper.exportDataBase(file.getAbsolutePath(), InfoTool.getAbsoluteDatabasePathPlain());
-				}
-			}
-		});
+		exportDataBase.setOnAction(a -> exportDatabase());
 		
 		// deleteDataBase
-		deleteDataBase.setOnAction(a -> {
-			if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
-					"Are you soore you want to delete the database?\nYou can keep a copy before deleting it by using export database functionality.\n\nAfter that the application will automatically restart...",
-					Main.window)) {
-				
-				// Close database connections
-				if (Main.dbManager != null)
-					Main.dbManager.manageConnection(Operation.CLOSE);
-				
-				// Clear the Previous database manager
-				ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
-				
-				// Show Update Screen
-				Main.updateScreen.setVisible(true);
-				Main.updateScreen.getProgressBar().progressProperty().unbind();
-				Main.updateScreen.getProgressBar().setProgress(-1);
-				Main.updateScreen.getLabel().setText("Restarting....");
-				
-				// Exit the application
-				Main.canSaveData = false;
-				Main.restartTheApplication(false);
-				
-			}
-		});
+		deleteDataBase.setOnAction(a -> deleteDatabase());
 		
+	}
+	
+	/**
+	 * Delete the previous and import a new Database to XR3Player
+	 */
+	public void importDatabase() {
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
+				"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
+				Main.window)) {
+			
+			File file = Main.specialChooser.selectDBFile(Main.window);
+			if (file != null) {
+				// Change the Scene View
+				Main.updateScreen.setVisible(true);
+				Main.updateScreen.getProgressBar().progressProperty().bind(unZipper.progressProperty());
+				
+				// Import the new database
+				unZipper.importDataBase(file.getAbsolutePath());
+			}
+		}
+	}
+	
+	/**
+	 * Export XR3Player Database
+	 */
+	public void exportDatabase() {
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
+			
+			File file = Main.specialChooser.exportDBFile(Main.window);
+			if (file != null) {
+				
+				// Change the Scene View
+				Main.updateScreen.setVisible(true);
+				Main.updateScreen.getProgressBar().progressProperty().bind(zipper.progressProperty());
+				
+				// Export the database
+				zipper.exportDataBase(file.getAbsolutePath(), InfoTool.getAbsoluteDatabasePathPlain());
+			}
+		}
+	}
+	
+	/**
+	 * Delete XR3Player Database
+	 */
+	public void deleteDatabase() {
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
+				"ARE YOU SOORE YOU WANT TO PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
+				Main.window)) {
+			
+			// Close database connections
+			if (Main.dbManager != null)
+				Main.dbManager.manageConnection(Operation.CLOSE);
+			
+			// Clear the Previous database manager
+			ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+			
+			// Show Update Screen
+			Main.updateScreen.setVisible(true);
+			Main.updateScreen.getProgressBar().progressProperty().unbind();
+			Main.updateScreen.getProgressBar().setProgress(-1);
+			Main.updateScreen.getLabel().setText("Restarting....");
+			
+			// Exit the application
+			Main.canSaveData = false;
+			Main.restartTheApplication(false);
+			
+		}
 	}
 	
 }

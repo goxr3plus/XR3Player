@@ -55,7 +55,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -134,13 +133,19 @@ public class LoginMode extends BorderPane {
 	private PieChart librariesPieChart;
 	
 	@FXML
-	private PieChart downloadsPieChart;
+	private Button exportDatabase;
 	
 	@FXML
-	private Hyperlink visitCreatorHyperLink;
+	private Button importDatabase;
+	
+	@FXML
+	private Button deleteDatabase;
 	
 	@FXML
 	private Hyperlink youtubeTutorialsHyperLink;
+	
+	@FXML
+	private Hyperlink visitCreatorHyperLink;
 	
 	@FXML
 	private VBox downloadsVBox;
@@ -179,7 +184,7 @@ public class LoginMode extends BorderPane {
 	
 	private final ObservableList<PieChart.Data> librariesPieChartData = FXCollections.observableArrayList();
 	
-	private final ObservableList<PieChart.Data> downloadsPieChartData = FXCollections.observableArrayList();
+	//private final ObservableList<PieChart.Data> downloadsPieChartData = FXCollections.observableArrayList();
 	
 	//---
 	
@@ -277,22 +282,22 @@ public class LoginMode extends BorderPane {
 		//librariesPieChart
 		librariesPieChart.setData(librariesPieChartData);
 		
-		//downloadsPieChart
-		downloadsPieChartData.addAll(new PieChart.Data("Source...", 240), new PieChart.Data("Git...", 142));
-		downloadsPieChart.setData(downloadsPieChartData);
-		
-		final Label caption = new Label("");
-		caption.setTextFill(Color.DARKORANGE);
-		caption.setStyle("-fx-font: 24 arial;");
-		for (final PieChart.Data data : downloadsPieChart.getData()) {
-			data.getNode().setOnMouseEntered(m -> {
-				System.out.println("Entered");
-				caption.setTranslateX(m.getSceneX());
-				caption.setTranslateY(m.getSceneY());
-				caption.setText(String.valueOf(data.getPieValue()) + "%");
-			});
-			
-		}
+		//		//downloadsPieChart
+		//		downloadsPieChartData.addAll(new PieChart.Data("Source...", 240), new PieChart.Data("Git...", 142));
+		//		downloadsPieChart.setData(downloadsPieChartData);
+		//		
+		//		final Label caption = new Label("");
+		//		caption.setTextFill(Color.DARKORANGE);
+		//		caption.setStyle("-fx-font: 24 arial;");
+		//		for (final PieChart.Data data : downloadsPieChart.getData()) {
+		//			data.getNode().setOnMouseEntered(m -> {
+		//				System.out.println("Entered");
+		//				caption.setTranslateX(m.getSceneX());
+		//				caption.setTranslateY(m.getSceneY());
+		//				caption.setText(String.valueOf(data.getPieValue()) + "%");
+		//			});
+		//			
+		//		}
 		
 		//Initialize
 		teamViewer = new Viewer(horizontalScrollBar);
@@ -411,6 +416,15 @@ public class LoginMode extends BorderPane {
 		
 		//splitPane
 		splitPane.setDividerPosition(0, 0.8);
+		
+		//== exportDatabase
+		exportDatabase.setOnAction(a -> Main.sideBar.exportDatabase());
+		
+		//== importDatabase
+		importDatabase.setOnAction(a -> Main.sideBar.importDatabase());
+		
+		//== deleteDatabase
+		deleteDatabase.setOnAction(a -> Main.sideBar.deleteDatabase());
 	}
 	
 	/**

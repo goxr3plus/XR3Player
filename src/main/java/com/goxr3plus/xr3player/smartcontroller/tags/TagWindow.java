@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.jfoenix.controls.JFXTabPane;
 
@@ -17,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
@@ -43,6 +43,9 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.tags.mp3.MP3BasicInfo;
 public class TagWindow extends StackPane {
 	
 	//--------------------------------------------------------
+	
+	@FXML
+	private SplitPane splitPane;
 	
 	@FXML
 	private ListView<String> listView;
@@ -195,7 +198,7 @@ public class TagWindow extends StackPane {
 		if (selectedItem != null) {
 			listView.getSelectionModel().select(selectedItem);
 			listView.scrollTo(selectedItem);
-		}else
+		} else
 			listView.getSelectionModel().select(0);
 	}
 	
@@ -211,7 +214,7 @@ public class TagWindow extends StackPane {
 		//Clear listView
 		if (clearListView) {
 			listView.setItems(Arrays.asList(absolutePath).stream().collect(Collectors.toCollection(FXCollections::observableArrayList)));
-			listView.getSelectionModel().select(0);		
+			listView.getSelectionModel().select(0);
 		}
 		
 		//Check the absolutePath

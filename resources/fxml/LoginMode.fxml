@@ -188,23 +188,51 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <StackPane>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <PieChart fx:id="librariesPieChart" maxHeight="450.0" maxWidth="450.0" style="-fx-background-color: #101010; -fx-border-color: white;" title="Libraries Per User" StackPane.alignment="CENTER_LEFT">
+                        <PieChart fx:id="librariesPieChart" maxHeight="450.0" maxWidth="450.0" style="-fx-background-color: #101010; -fx-border-color: white;" title="Libraries Per User" HBox.hgrow="ALWAYS">
                            <effect>
                               <DropShadow />
                            </effect>
                         </PieChart>
-                        <PieChart fx:id="downloadsPieChart" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: black; -fx-border-color: white;" title="XR3Player Downloads" visible="false" StackPane.alignment="CENTER_RIGHT">
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </PieChart>
+                        <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Data%20Protection-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="importDatabase" layoutX="460.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Accept%20Database-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="deleteDatabase" layoutX="550.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Delete Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Delete%20Database-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </StackPane>
+                  </HBox>
                </items>
             </SplitPane>
          </children>
@@ -294,7 +322,7 @@
    <top>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxWidth="-Infinity" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #202020; -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~ XR3Player ~" fx:id="xr3PlayerLabel">
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxWidth="-Infinity" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #202020; -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~  XR3Player  ~" fx:id="xr3PlayerLabel">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>

@@ -8,7 +8,7 @@
 
 <fx:root prefHeight="544.0" prefWidth="864.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.4" prefHeight="160.0" prefWidth="200.0">
+      <SplitPane fx:id="splitPane" dividerPositions="0.4" prefHeight="160.0" prefWidth="200.0">
          <items>
             <ListView fx:id="listView" />
             <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane">
