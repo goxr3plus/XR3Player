@@ -432,7 +432,7 @@ public class VisualizerWindowController extends StackPane {
 		topBar.setVisible(true);
 		setCursor(Cursor.HAND);
 		xPlayerController.getVisualizer().setCursor(Cursor.HAND);
-		System.out.println("PauseTransition Restarted");
+		//System.out.println("PauseTransition Restarted")
 	}
 	
 	/**

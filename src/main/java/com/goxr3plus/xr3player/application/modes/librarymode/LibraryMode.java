@@ -397,10 +397,7 @@ public class LibraryMode extends BorderPane {
 	 * 
 	 * @param owner
 	 */
-	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation) {
-		if (Main.renameWindow.isShowing())
-			return;
-		
+	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation) {	
 		this.openLibraryAfterCreation = openLibraryAfterCreation;
 		
 		// Open rename window

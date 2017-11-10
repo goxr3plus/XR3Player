@@ -98,7 +98,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private GridPane basicGridPane;
 	
 	@FXML
-	private Button previousSongButton;
+	private BorderPane discBorderPane;
+	
+	@FXML
+	private StackPane diskStackPane;
 	
 	@FXML
 	private ToggleButton muteButton;
@@ -110,16 +113,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button stopButton;
 	
 	@FXML
-	private Button backwardButton;
-	
-	@FXML
 	private Button replayButton;
-	
-	@FXML
-	private Button forwardButton;
-	
-	@FXML
-	private Button nextSongButton;
 	
 	@FXML
 	private StackPane visualizerStackPane;
@@ -152,16 +146,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button maximizeVisualizer;
 	
 	@FXML
-	private BorderPane discBorderPane;
-	
-	@FXML
-	private StackPane diskStackPane;
+	private HBox mediaNameHBox;
 	
 	@FXML
 	private Button emotionsButton;
-	
-	@FXML
-	private HBox mediaNameHBox;
 	
 	@FXML
 	private Button mediaTagImageButton;
@@ -174,6 +162,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label totalTimeLabel;
+	
+	@FXML
+	private Button previousSongButton;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private Button nextSongButton;
 	
 	@FXML
 	private Tab equalizerTab;
@@ -191,13 +191,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button extendPlayer;
 	
 	@FXML
-	private MenuItem openFile;
-	
-	@FXML
 	private Menu transferMedia;
 	
 	@FXML
 	private MenuItem showEmotionLists;
+	
+	@FXML
+	private Button openFile;
 	
 	@FXML
 	private StackPane regionStackPane;
@@ -566,7 +566,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					//Add it the one of the emotions list
 					new Thread(() -> Main.emotionListsController.makeEmotionDecisition(xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion())).start();
 					
-					//System.out.println(Main.emotionsWindow.getEmotion());
+					//System.out.println(Main.emotionsWindow.getEmotion())
 					
 				}
 			}

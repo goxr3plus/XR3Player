@@ -424,42 +424,52 @@
                         </HBox>
                      </right>
                      <left>
-                        <MenuButton minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Menu" BorderPane.alignment="CENTER">
-                          <items>
-                            <MenuItem fx:id="openFile" mnemonicParsing="false" text="Open File">
+                        <HBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <MenuButton minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Menu">
+                                <items>
+                                    <Menu fx:id="transferMedia" mnemonicParsing="false" text="Clone To">
+                                       <items>
+                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
+                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
+                                          <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
+                                       </items>
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/Clone-20.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Menu>
+                                    <MenuItem fx:id="showEmotionLists" mnemonicParsing="false" text="Emotion Lists">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/Neutral-20.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                </items>
+                              </MenuButton>
+                              <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Open File or Folder" />
+                                 </tooltip>
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../image/folder.png" />
+                                          <Image url="@../image/add.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
-                              </MenuItem>
-                              <Menu fx:id="transferMedia" mnemonicParsing="false" text="Clone To">
-                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
-                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
-                                    <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
-                                 </items>
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Clone-20.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Menu>
-                              <MenuItem fx:id="showEmotionLists" mnemonicParsing="false" text="Emotion Lists">
-                                 <graphic>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Neutral-20.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                          </items>
-                        </MenuButton>
+                              </Button>
+                           </children>
+                        </HBox>
                      </left>
                   </BorderPane>
                </top>

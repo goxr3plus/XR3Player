@@ -3,17 +3,13 @@
  */
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 
@@ -67,9 +63,9 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.Us
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 
 /**
@@ -315,19 +311,19 @@ public class LoginMode extends BorderPane {
 				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
 				
 				//----sourceForgeDownloadsLabel
-//				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
-//				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-//				httpcon.setConnectTimeout(10000);
-//				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-//				
-//				//Read line by line
-//				String responseSB = in.lines().collect(Collectors.joining());
-//				in.close();
-//				
-//				System.out.println(responseSB);
-//				String text = "Sourceforge: [ " + responseSB.split("/total")[0].split("x=\"98.5\" y=\"14\">")[1] + " ]";
+				//				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
+				//				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+				//				httpcon.setConnectTimeout(10000);
+				//				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				//				
+				//				//Read line by line
+				//				String responseSB = in.lines().collect(Collectors.joining());
+				//				in.close();
+				//				
+				//				System.out.println(responseSB);
+				//				String text = "Sourceforge: [ " + responseSB.split("/total")[0].split("x=\"98.5\" y=\"14\">")[1] + " ]";
 				Platform.runLater(() -> sourceForgeDownloadsLabel.setText("Sourceforge: [ ? ]"));
-//				
+				//				
 				//throw new IOException("Exception get out of the building!!!")
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -423,11 +419,9 @@ public class LoginMode extends BorderPane {
 	 * @param owner
 	 */
 	public void createNewUser(Node owner) {
-		if (Main.renameWindow.isShowing())
-			return;
 		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Creating new User",FileCategory.DIRECTORY);
+		Main.renameWindow.show("", owner, "Creating new User", FileCategory.DIRECTORY);
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(userCreationInvalidator);

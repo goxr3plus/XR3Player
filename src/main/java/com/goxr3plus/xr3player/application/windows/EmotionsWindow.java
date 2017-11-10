@@ -5,11 +5,11 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
-import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.Animation.Status;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -106,7 +107,7 @@ public class EmotionsWindow extends BorderPane {
 		// ----------------------------------Scene
 		window.setScene(new Scene(this, Color.TRANSPARENT));
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue && window.isShowing() && timeLine.getStatus() != Status.RUNNING)
+			if (!newValue && window.isShowing())// && Main.renameWindow.getTimeLine().getStatus() != Status.RUNNING && Main.starWindow.getTimeLine().getStatus() != Status.RUNNING)
 				close(false);
 		});
 	}
@@ -343,6 +344,13 @@ public class EmotionsWindow extends BorderPane {
 			else if (emotion == Emotion.LOVE)
 				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.loveImage);
 		});
+	}
+	
+	/**
+	 * @return the timeLine
+	 */
+	public Timeline getTimeLine() {
+		return timeLine;
 	}
 	
 	/**

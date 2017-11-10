@@ -35,6 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -124,7 +125,7 @@ public class RenameWindow extends VBox {
 				close(false);
 		});
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue && window.isShowing() && timeLine.getStatus() != Status.RUNNING)
+			if (!newValue && window.isShowing())// && Main.starWindow.getTimeLine().getStatus() != Status.RUNNING && Main.emotionsWindow.getTimeLine().getStatus() != Status.RUNNING)
 				close(false);
 		});
 		
@@ -357,6 +358,13 @@ public class RenameWindow extends VBox {
 	 */
 	public TextField getInputField() {
 		return inputField;
+	}
+	
+	/**
+	 * @return the timeLine
+	 */
+	public Timeline getTimeLine() {
+		return timeLine;
 	}
 	
 }

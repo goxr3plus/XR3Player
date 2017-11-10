@@ -29,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -138,7 +139,7 @@ public class StarWindow extends GridPane {
 				close(false);
 		});
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue && window.isShowing() && timeLine.getStatus() != Status.RUNNING)
+			if (!newValue && window.isShowing())// && Main.renameWindow.getTimeLine().getStatus() != Status.RUNNING && Main.emotionsWindow.getTimeLine().getStatus() != Status.RUNNING)
 				close(false);
 		});
 		
@@ -371,6 +372,13 @@ public class StarWindow extends GridPane {
 	 */
 	public Stage getWindow() {
 		return window;
+	}
+	
+	/**
+	 * @return the timeLine
+	 */
+	public Timeline getTimeLine() {
+		return timeLine;
 	}
 	
 }
