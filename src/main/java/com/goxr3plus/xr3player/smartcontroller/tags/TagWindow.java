@@ -5,15 +5,20 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.jfoenix.controls.JFXTabPane;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
@@ -38,6 +43,9 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.tags.mp3.MP3BasicInfo;
 public class TagWindow extends StackPane {
 	
 	//--------------------------------------------------------
+	
+	@FXML
+	private ListView<String> listView;
 	
 	@FXML
 	private JFXTabPane tabPane;
@@ -90,7 +98,7 @@ public class TagWindow extends StackPane {
 		window.getScene().setOnKeyReleased(k -> {
 			if (k.getCode() == KeyCode.ESCAPE)
 				window.close();
-		});		
+		});
 		window.getScene().setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
 		window.getScene().setOnDragDropped(drop -> {
 			// Keeping the absolute path
@@ -100,7 +108,7 @@ public class TagWindow extends StackPane {
 			for (File file : drop.getDragboard().getFiles()) {
 				absolutePath = file.getAbsolutePath();
 				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-					openAudio(file.getAbsolutePath(), TagTabCategory.BASICINFO);
+					openAudio(file.getAbsolutePath(), TagTabCategory.BASICINFO, true);
 					break;
 				}
 			}
@@ -127,6 +135,25 @@ public class TagWindow extends StackPane {
 		
 		//id3v2Tab
 		id3v2Tab.setContent(id3V2Controller);
+		
+		//listView
+		listView.setCellFactory(lv -> new ListCell<String>() {
+			@Override
+			public void updateItem(String item , boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+				} else {
+					String text = InfoTool.getFileName(item); // get text from item
+					setText(text);
+					setTooltip(new Tooltip(item));
+				}
+			}
+		});
+		listView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue != null)
+				openAudio(newValue, TagTabCategory.CURRENT, false);
+		});
 		
 	}
 	
@@ -155,6 +182,24 @@ public class TagWindow extends StackPane {
 	}
 	
 	/**
+	 * Opens multiple audio files at once ( based on the ListView that is
+	 * created)
+	 * 
+	 * @param list
+	 *            A given observable list containing all the absolute file paths
+	 * @param selectedItem
+	 *            Not null if a specific file item must be selected first
+	 */
+	public void openMultipleAudioFiles(ObservableList<String> list , String selectedItem) {
+		listView.setItems(list);
+		if (selectedItem != null) {
+			listView.getSelectionModel().select(selectedItem);
+			listView.scrollTo(selectedItem);
+		}else
+			listView.getSelectionModel().select(0);
+	}
+	
+	/**
 	 * Open the TagWindow based on the extension of the Audio
 	 * 
 	 * @param absolutePath
@@ -162,7 +207,14 @@ public class TagWindow extends StackPane {
 	 * @param tabCategory
 	 *            The tag tab category
 	 */
-	public void openAudio(String absolutePath , TagTabCategory tabCategory) {
+	public void openAudio(String absolutePath , TagTabCategory tabCategory , boolean clearListView) {
+		//Clear listView
+		if (clearListView) {
+			listView.setItems(Arrays.asList(absolutePath).stream().collect(Collectors.toCollection(FXCollections::observableArrayList)));
+			listView.getSelectionModel().select(0);		
+		}
+		
+		//Check the absolutePath
 		if (absolutePath != null) {
 			
 			//Find file extension
@@ -206,7 +258,7 @@ public class TagWindow extends StackPane {
 			}
 			
 			show();
-		}else
+		} else
 			ActionTool.showNotification("No File", "No File has been selected ...", Duration.seconds(2), NotificationType.SIMPLE);
 	}
 	

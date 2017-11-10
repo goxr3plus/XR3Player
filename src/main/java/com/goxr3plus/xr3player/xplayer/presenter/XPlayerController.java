@@ -444,7 +444,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		// openMediaFileFolder
-		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(), TagTabCategory.ARTWORK));
+		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(), TagTabCategory.ARTWORK, true));
 		mediaTagImageButton.setOnDragDetected(audioDragEvent);
 		
 		// openFile

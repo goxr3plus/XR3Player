@@ -191,7 +191,7 @@ public class MediaInformation extends BorderPane {
 		});
 		
 		// mediaImageButton
-		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media != null ? media.getFilePath() : null, TagTabCategory.ARTWORK));
+		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media != null ? media.getFilePath() : null, TagTabCategory.ARTWORK,true));
 		
 	}
 	

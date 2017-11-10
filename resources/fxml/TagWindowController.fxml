@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="480.0" prefWidth="675.0" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="544.0" prefWidth="864.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane" stylesheets="@../style/application.css">
-         <tabs>
-            <Tab fx:id="basicInfoTab" text="Basic Info" />
-            <Tab fx:id="artWorkTab" text="Artwork" />
-            <Tab fx:id="id3v1Tab" text="ID3v1" />
-            <Tab fx:id="id3v2Tab" text="ID3v2" />
-         </tabs>
-      </JFXTabPane>
+      <SplitPane dividerPositions="0.4" prefHeight="160.0" prefWidth="200.0">
+         <items>
+            <ListView fx:id="listView" />
+            <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane">
+               <tabs>
+                  <Tab fx:id="basicInfoTab" text="Basic Info" />
+                  <Tab fx:id="artWorkTab" text="Artwork" />
+                  <Tab fx:id="id3v1Tab" text="ID3v1" />
+                  <Tab fx:id="id3v2Tab" text="ID3v2" />
+               </tabs>
+            </JFXTabPane>
+         </items>
+      </SplitPane>
    </children>
 </fx:root>

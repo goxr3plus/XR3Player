@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -302,7 +303,13 @@ public class SmartController extends StackPane {
 					} else if (code == KeyCode.ENTER)
 						Main.xPlayersList.getXPlayerController(0).playSong(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 					else if (key.isControlDown() && code == KeyCode.I)
-						Main.tagWindow.openAudio(tableViewer.getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO);
+						//More than 1 selected?
+						if (tableViewer.getSelectedCount() > 1)
+							Main.tagWindow.openMultipleAudioFiles(tableViewer.getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
+									.collect(Collectors.toCollection(FXCollections::observableArrayList)), tableViewer.getSelectionModel().getSelectedItem().getFilePath());
+						//Only one file selected
+						else
+							Main.tagWindow.openAudio(tableViewer.getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO,true);
 				}
 				
 			}

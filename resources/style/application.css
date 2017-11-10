@@ -215,7 +215,7 @@
 
 .table-row-cell:hover{
 	-fx-table-cell-border-color: #303030;
-	-fx-table-cell-border-width: 2;
+	-fx-table-cell-border-width: 2.0;
 }
 
 .table-row-cell:hover .text , .table-row-cell:selected .text{
@@ -323,6 +323,10 @@
 *                            ListView                               *
 
 ******************************************************************************/
+
+.list-view{
+	-fx-background-color:#101010;	
+}
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: linear-gradient(#328BDB 0.0%, #207BCF 25.0%, #1973C9 75.0%, #0A65BF 100.0%);

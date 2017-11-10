@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -15,6 +16,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -360,9 +362,15 @@ public class MediaContextMenu extends ContextMenu {
 			media.updateStars(node);
 		else if (source == showFile) // File path
 			ActionTool.openFileLocation(media.getFilePath());
-		else if (source == editFileInfo)
-			Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO);
-		else if (e.getSource() == copyOrMove) // copyTo
+		else if (source == editFileInfo) {
+			//More than 1 selected?
+			if (controller.getTableViewer().getSelectedCount() > 1)
+				Main.tagWindow.openMultipleAudioFiles(controller.getTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
+						.collect(Collectors.toCollection(FXCollections::observableArrayList)), controller.getTableViewer().getSelectionModel().getSelectedItem().getFilePath());
+			//Only one file selected
+			else
+				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO,true);
+		} else if (e.getSource() == copyOrMove) // copyTo
 			Main.exportWindow.show(controller);
 		else
 			try {
