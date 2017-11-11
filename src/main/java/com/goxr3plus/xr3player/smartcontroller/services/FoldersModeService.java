@@ -75,7 +75,8 @@ public class FoldersModeService extends Service<Void> {
 					
 					//================Prepare based on the Files User want to Export=============
 					
-					if (filesMode == FilesMode.CURRENT_PAGE) {  // CURRENT_PAGE
+					if (filesMode == FilesMode.CURRENT_PAGE || smartControllerFoldersMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
+						System.out.println("Entered for Search Window");
 						
 						//Count total files that will be exported
 						totalProgress = smartControllerFoldersMode.getSmartController().getItemsObservableList().size();
