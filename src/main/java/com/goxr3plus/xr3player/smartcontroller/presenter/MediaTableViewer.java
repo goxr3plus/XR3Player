@@ -363,7 +363,8 @@ public class MediaTableViewer extends TableView<Media> {
 				// gestureSourceString = "null"
 				
 				// The drag must come from source other than the owner
-				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != smartController.getTableViewer()) {
+				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != smartController.getTableViewer()
+						&& dragOver.getGestureSource() != smartController.foldersMode) {
 					dragOver.acceptTransferModes(TransferMode.LINK);
 				}
 			});

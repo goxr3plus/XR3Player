@@ -85,6 +85,24 @@ public class SmartControllerFoldersMode extends StackPane {
 			logger.log(Level.SEVERE, "", ex);
 		}
 		
+		// --Drag Over
+		super.setOnDragOver(dragOver -> {
+			
+			// The drag must come from source other than the owner
+			if (dragOver.getGestureSource() != smartController.getTableViewer() && dragOver.getGestureSource() != smartController.foldersMode)
+				dragOver.acceptTransferModes(TransferMode.LINK);
+			
+		});
+		
+		// --Drag Dropped
+		super.setOnDragDropped(drop -> {
+			// Has Files? + isFree()?
+			if (drop.getDragboard().hasFiles() && smartController.isFree(true))
+				smartController.getInputService().start(drop.getDragboard().getFiles());
+			
+			drop.setDropCompleted(true);
+		});
+		
 	}
 	
 	/**

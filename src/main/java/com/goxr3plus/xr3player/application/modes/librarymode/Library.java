@@ -382,7 +382,7 @@ public class Library extends StackPane {
 				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (dragOver.getGestureSource() != controller.getTableViewer())
+			if (dragOver.getGestureSource() != controller.getTableViewer() && dragOver.getGestureSource()!= controller.foldersMode)
 				dragOver.acceptTransferModes(TransferMode.LINK);
 			
 		});

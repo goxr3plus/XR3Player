@@ -209,7 +209,7 @@ public class SmartController extends StackPane {
 	
 	// --------------------------------------------------
 	
-	SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
+	public final SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
 	
 	// --------------------------------------------------
 	

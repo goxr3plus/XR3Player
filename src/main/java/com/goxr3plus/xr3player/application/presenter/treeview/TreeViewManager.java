@@ -42,7 +42,7 @@ public class TreeViewManager extends BorderPane {
 	private TreeView<String> systemTreeView;
 	
 	//	@FXML
-	//	private Button searchButton;
+	//	private Button searchButton
 	
 	@FXML
 	private Button collapseTree;
