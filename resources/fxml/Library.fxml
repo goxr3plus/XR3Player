@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
          <viewport>
@@ -126,6 +126,6 @@
 		<Cursor fx:constant="HAND" />
 	</cursor>
    <effect>
-      <DropShadow height="47.69" radius="23.345" width="47.69" />
+      <DropShadow />
    </effect>
 </fx:root>

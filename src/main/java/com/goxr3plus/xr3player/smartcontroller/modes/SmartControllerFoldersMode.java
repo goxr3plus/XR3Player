@@ -13,9 +13,11 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
@@ -35,6 +37,9 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.FoldersModeSer
 public class SmartControllerFoldersMode extends StackPane {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private Label topLabel;
 	
 	@FXML
 	private Button settings;
@@ -96,7 +101,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		super.setOnDragOver(dragOver -> {
 			
 			// The drag must come from source other than the owner
-			if (dragOver.getGestureSource() != smartController.getTableViewer() && dragOver.getGestureSource() != smartController.foldersMode)
+			if (dragOver.getGestureSource() != smartController.getTableViewer())// && dragOver.getGestureSource() != smartController.foldersMode)
 				dragOver.acceptTransferModes(TransferMode.LINK);
 			
 		});
@@ -144,6 +149,33 @@ public class SmartControllerFoldersMode extends StackPane {
 				
 				board.setContent(content);
 				event.consume();
+			}
+		});
+		
+		//Custom Cell Factory
+		treeView.setCellFactory(tv -> new TreeCell<String>() {
+			@Override
+			public void updateItem(String item , boolean empty) {
+				super.updateItem(item, empty);
+				getStyleClass().remove("tree-cell-2");
+				if (empty) {
+					setGraphic(null);
+					setText("");
+				} else {
+					setText(item);
+					setGraphic(getTreeItem().getGraphic());
+					
+					String absoluteFilePath = ( (FileTreeItem) getTreeItem() ).getFullPath();
+					
+					//We don't care about directories
+					if (!new File(absoluteFilePath).isDirectory()) {
+						boolean existsInPlayList = smartController.containsFile(absoluteFilePath);
+						
+						//Check if the file exists inside the SmartController Playlist
+						if (!existsInPlayList)
+							getStyleClass().add("tree-cell-2");
+					}
+				}
 			}
 		});
 		
@@ -225,7 +257,7 @@ public class SmartControllerFoldersMode extends StackPane {
 			// source is expanded
 			if (!source.isExpanded() && source.getChildren().isEmpty()) {
 				//if (source.isDirectory())
-				//source.setGraphic(new ImageView(SystemRoot.openedFolderImage));
+				//source.setGraphic(new ImageView(SystemRoot.openedFolderImage))
 				
 				//Check if the TreeItem has not children yet
 				if (source.getChildren().isEmpty()) {
@@ -236,14 +268,45 @@ public class SmartControllerFoldersMode extends StackPane {
 					// directory?				
 					if (mainPath.toFile().isDirectory())
 						try (DirectoryStream<Path> stream = Files.newDirectoryStream(mainPath)) {
+							boolean showOnlyFilesThatExistToPlaylist = ( (Control) Main.settingsWindow.getPlayListsSettingsController().getFilesToShowUnderFolders()
+									.getSelectedToggle() ).getTooltip().getText().equals("1");
 							
 							//Run the Stream
 							stream.forEach(path -> {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
 								if (!path.toFile().isHidden() && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
-									FileTreeItem treeNode = new FileTreeItem(path.toString());
-									source.getChildren().add(treeNode);
+									
+									//We don't care about directories
+									if (!path.toFile().isDirectory()) {
+										
+										//showOnlyFilesThatExistToPlaylist ? if so -> check if the file exists inside the Playlist								
+										if (showOnlyFilesThatExistToPlaylist) {
+											if (smartController.containsFile(path.toFile().getAbsolutePath())) {
+												
+												//Create the TreeItem		
+												FileTreeItem treeNode = new FileTreeItem(path.toString());
+												
+												//Append
+												source.getChildren().add(treeNode);
+											}
+										} else {
+											
+											//Create the TreeItem		
+											FileTreeItem treeNode = new FileTreeItem(path.toString());
+											
+											//Append
+											source.getChildren().add(treeNode);
+											
+										}
+									} else {
+										
+										//Create the TreeItem
+										FileTreeItem treeNode = new FileTreeItem(path.toString());
+										
+										//Append
+										source.getChildren().add(treeNode);
+									}
 								}
 								
 							});
@@ -304,6 +367,13 @@ public class SmartControllerFoldersMode extends StackPane {
 	 */
 	public Label getDetailsLabel() {
 		return detailsLabel;
+	}
+	
+	/**
+	 * @return the topLabel
+	 */
+	public Label getTopLabel() {
+		return topLabel;
 	}
 	
 }

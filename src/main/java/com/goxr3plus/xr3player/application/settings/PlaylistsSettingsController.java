@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +50,10 @@ public class PlaylistsSettingsController extends BorderPane {
 	private ToggleGroup totalFilesShownGroup;
 	
 	@FXML
-	private ToggleGroup associatedFoldersMediaGroup;
+	private ToggleGroup whichFilesToShowGenerally;
+	
+	@FXML
+	private ToggleGroup filesToShowUnderFolders;
 	
 	// -------------------------------------------------------------
 	
@@ -133,6 +137,26 @@ public class PlaylistsSettingsController extends BorderPane {
 				ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500), NotificationType.ERROR);
 		});
 		
+		//--------------------FOLDERS MODE---------------------------------
+		
+		//whichFilesToShowGenerally
+		whichFilesToShowGenerally.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-FoldersMode-WhichFilesToShowGenerally", ( (Control) newValue ).getTooltip().getText());
+			
+		});
+		
+		//filesToShowUnderFolders
+		filesToShowUnderFolders.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-FoldersMode-FilesToShowUnderFolders", ( (Control) newValue ).getTooltip().getText());
+			
+		});
+		
+		//--------------------END OF FOLDERS MODE---------------------------------
+		
 	}
 	
 	/**
@@ -186,6 +210,20 @@ public class PlaylistsSettingsController extends BorderPane {
 	 */
 	public JFXTabPane getInnerTabPane() {
 		return innerTabPane;
+	}
+	
+	/**
+	 * @return the whichFilesToShowGenerally
+	 */
+	public ToggleGroup getWhichFilesToShowGenerally() {
+		return whichFilesToShowGenerally;
+	}
+	
+	/**
+	 * @return the filesToShowUnderFolders
+	 */
+	public ToggleGroup getFilesToShowUnderFolders() {
+		return filesToShowUnderFolders;
 	}
 	
 }

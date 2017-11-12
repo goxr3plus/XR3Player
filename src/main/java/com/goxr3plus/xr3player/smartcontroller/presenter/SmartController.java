@@ -309,7 +309,7 @@ public class SmartController extends StackPane {
 									.collect(Collectors.toCollection(FXCollections::observableArrayList)), tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 						//Only one file selected
 						else
-							Main.tagWindow.openAudio(tableViewer.getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO,true);
+							Main.tagWindow.openAudio(tableViewer.getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO, true);
 				}
 				
 			}
@@ -879,6 +879,32 @@ public class SmartController extends StackPane {
 			} catch (SQLException | InterruptedException ex) {
 				ex.printStackTrace();
 			}
+	}
+	
+	/**
+	 * Checks if the Current SmartController database contains the file
+	 * 
+	 * @param absoluteFilePath
+	 *            The AbsoluteFilePath
+	 * @return True if contains the file path or false if not
+	 */
+	public boolean containsFile(String absoluteFilePath) {
+		if (genre == Genre.SEARCHWINDOW)
+			return false;
+		else {
+			try (PreparedStatement pStatement = Main.dbManager.getConnection().prepareStatement("SELECT COUNT(PATH) FROM '" + getDataBaseTableName() + "' WHERE PATH=?")) {
+				
+				//Total items
+				pStatement.setString(1, absoluteFilePath);
+				return pStatement.executeQuery().getInt(1) > 0;
+				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			
+			return false;
+		}
+		
 	}
 	
 	@Override

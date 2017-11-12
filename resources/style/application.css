@@ -1043,7 +1043,7 @@
 
 .tree-cell:selected {
     -fx-font-weight: bold ;
-    -fx-text-fill:orange; 
+    -fx-text-fill:white; 
 }
 .tree-cell {
     -fx-padding: 0.75em 0.0em 0.75em 0.0em ;
@@ -1059,6 +1059,15 @@
     -fx-background-color: white;
 }
 
+.tree-cell-2 {
+    -fx-text-fill: firebrick ;
+    -fx-font-weight:bold;
+}
+
+.tree-cell-2:selected {
+    -fx-font-weight: bold ;
+    -fx-text-fill:firebrick; 
+}
 
 
 

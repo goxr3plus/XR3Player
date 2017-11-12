@@ -35,6 +35,7 @@ public class FileTreeItem extends TreeItem<String> {
 		super(absolutePath);
 		this.fullPath = absolutePath;
 		
+		
 		//Is this a directory?
 		File file = new File(fullPath);
 		isDirectory = file.isDirectory();
@@ -95,4 +96,6 @@ public class FileTreeItem extends TreeItem<String> {
 	public boolean isDirectory() {
 		return isDirectory;
 	}
+	
+	
 }

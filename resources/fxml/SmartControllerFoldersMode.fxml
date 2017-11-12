@@ -21,7 +21,7 @@
                <children>
                   <HBox>
                      <children>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="Associated Folders Explorer" HBox.hgrow="ALWAYS">
+                        <Label fx:id="topLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="Associated Folders Explorer" HBox.hgrow="ALWAYS">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -80,7 +80,7 @@
                   <TreeView fx:id="treeView" />
                </children>
             </VBox>
-            <Label fx:id="detailsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" visible="false">
+            <Label fx:id="detailsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" visible="false" wrapText="true">
                <tooltip>
                   <Tooltip text="Displays from which folders the Playlist Media are coming from ..." />
                </tooltip>

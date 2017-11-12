@@ -62,6 +62,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.treeview.TreeView
 import main.java.com.goxr3plus.xr3player.application.presenter.treeview.TreeViewManager;
 import main.java.com.goxr3plus.xr3player.application.services.VacuumProgressService;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
+import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.application.speciallists.PlayedMediaList;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -88,7 +89,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaFilterSer
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerWindowController.Type;
 import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
@@ -567,7 +567,7 @@ public class Main extends Application {
 												+ InfoTool.USER_SETTINGS_FILE_NAME);
 								
 								//Reload the application settings now...							
-								Platform.runLater(Main::loadApplicationSettings);
+								Platform.runLater(ApplicationSettingsLoader::loadApplicationSettings);
 							}).start();
 						
 					});
@@ -762,136 +762,6 @@ public class Main extends Application {
 		}, "Restart Application Thread").start();
 	}
 	
-	/**
-	 * Loads all the application settings from the property file
-	 */
-	public static void loadApplicationSettings() {
-		try {
-			
-			//Start
-			//System.out.println("\n\n-----App Settings--------------\n");
-			
-			//--------------------Now continue normally----------------------------------------------
-			
-			//Lock the update properties
-			dbManager.getPropertiesDb().setUpdatePropertiesLocked(true);
-			
-			//Load the Properties
-			dbManager.getPropertiesDb().getProperties().clear();
-			dbManager.getPropertiesDb().loadProperties();
-			
-			//Get the properties
-			Properties settings = dbManager.getPropertiesDb().getProperties();
-			
-			//Restore all to default before loading the settings
-			settingsWindow.restoreAll();
-			
-			//----------   Load all the settings from the config.properties --------------------
-			
-			//--KeyBindings-Settings
-			Optional.ofNullable(settings.getProperty("ShortCuts-KeyBindings"))
-					.ifPresent(s -> settingsWindow.getNativeKeyBindings().getKeyBindingsActive().setSelected(Boolean.parseBoolean(s)));
-			
-			Optional.ofNullable(settings.getProperty("ShortCuts-SelectedPlayer"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getNativeKeyBindings().getxPlayerSelected(), Integer.valueOf(s)));
-			
-			//--General-Settings-SideBar
-			Optional.ofNullable(settings.getProperty("General-SideBarSide"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
-			
-			//--General-Settings-SideBar
-			Optional.ofNullable(settings.getProperty("General-NotificationsPosition"))
-					.ifPresent(s -> JavaFXTools.selectToogleWithText(settingsWindow.getGeneralSettingsController().getNotificationsPosition(), s));
-			
-			//--General-Settings-LibraryMode
-			playListModesSplitPane.updateSplitPaneDivider();
-			libraryMode.updateTopSplitPaneDivider();
-			libraryMode.updateBottomSplitPaneDivider();
-			//			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))
-			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)));
-			//			
-			//--General-Settings-DJMode
-			djMode.updateTopSplitPaneDivider();
-			djMode.updateBottomSplitPaneDivider();
-			//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
-			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)));
-			//			
-			//--Libraries-Settings
-			Optional.ofNullable(settings.getProperty("Libraries-ShowWidgets"))
-					.ifPresent(s -> settingsWindow.getLibrariesSettingsController().getShowWidgets().setSelected(Boolean.parseBoolean(s)));
-			
-			//--Playlists-Settings-Search
-			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
-					.ifPresent(s -> settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
-			
-			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
-			
-			//--Playlists-Settings-General
-			
-			Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(), Integer.valueOf(s)));
-			
-			Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
-			
-			//--XPlayers-Visualizer-Settings
-			Optional.ofNullable(settings.getProperty("XPlayers-Visualizer-ShowFPS")).ifPresent(s -> {
-				
-				//Set the Value to the CheckBox
-				settingsWindow.getxPlayersSettingsController().getShowFPS().setSelected(Boolean.parseBoolean(s));
-				
-				//Update all the players
-				xPlayersList.getList().forEach(xPlayerController -> xPlayerController.getVisualizer().setShowFPS(Boolean.parseBoolean(s)));
-				
-			});
-			
-			//--XPlayers-General-Settings
-			Optional.ofNullable(settings.getProperty("XPlayers-General-StartAtOnce"))
-					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getStartImmediately().setSelected(Boolean.parseBoolean(s)));
-			
-			Optional.ofNullable(settings.getProperty("XPlayers-General-AskSecurityQuestion"))
-					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().setSelected(Boolean.parseBoolean(s)));
-			
-			Optional.ofNullable(settings.getProperty("XPlayers-General-ShowPlayerNotifications"))
-					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().setSelected(Boolean.parseBoolean(s)));
-			
-			Optional.ofNullable(settings.getProperty("XPlayers-General-SkipButtonSeconds"))
-					.ifPresent(s -> settingsWindow.getxPlayersSettingsController().getSkipSlider().setValue(Integer.parseInt(s)));
-			
-			//----Determine the Visualizer Images
-			Main.xPlayersList.getList().forEach(xPlayerController -> {
-				
-				//If the key is not there add background image by default			
-				if (Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared")).isPresent())
-					xPlayerController.getVisualizerWindow().clearImage(Type.BACKGROUND);
-				else
-					xPlayerController.getVisualizerWindow().findAppropriateImage(Type.BACKGROUND);
-				
-				//Always add foreground image
-				xPlayerController.getVisualizerWindow().findAppropriateImage(Type.FOREGROUND);
-				
-				//Determine the visualizer display mode
-				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-DisplayMode"))
-						.ifPresent(s -> xPlayerController.getVisualizer().displayMode.set(Integer.valueOf(s)));
-				
-			});
-			//----------                        --------------------
-			
-			//Finish
-			//System.out.println("\n-----App Settings Finish--------------\n\n");
-			
-			//Re-enable Properties Updating
-			dbManager.getPropertiesDb().setUpdatePropertiesLocked(false);
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		
-		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
-		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
-	}
 	
 	//------------------------------------- Methods not used very often--------------------------------------------------
 	

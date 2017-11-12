@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.Control;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -68,6 +69,27 @@ public class FoldersModeService extends Service<Void> {
 				//Create a new LinkedHashSet
 				Set<String> set = new LinkedHashSet<>();
 				
+				//Determine filesMode
+				switch ( ( (Control) Main.settingsWindow.getPlayListsSettingsController().getWhichFilesToShowGenerally().getSelectedToggle() ).getTooltip().getText()) {
+					case "1":
+						filesMode = FilesMode.SELECTED_MEDIA;
+						break;
+					case "2":
+						filesMode = FilesMode.CURRENT_PAGE;
+						break;
+					case "3":
+						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
+						break;
+					default:
+						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
+				}
+				
+				//Change Top Label Text
+				Platform.runLater(() -> smartControllerFoldersMode.getTopLabel().setText("Associated Folders Explorer -> " + filesMode.toString()));
+				
+				//Change Details Label Text
+				Platform.runLater(() -> smartControllerFoldersMode.getDetailsLabel().setText("No associated Folders found -> " + filesMode.toString()));
+				
 				try {
 					
 					//Total and Count = 0
@@ -75,7 +97,26 @@ public class FoldersModeService extends Service<Void> {
 					
 					//================Prepare based on the Files User want to Export=============
 					
-					if (filesMode == FilesMode.CURRENT_PAGE || smartControllerFoldersMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
+					if (filesMode == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
+						
+						//Count total files that will be exported
+						totalProgress = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().size();
+						
+						// Stream
+						Stream<Media> stream = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().stream();
+						stream.forEach(media -> {
+							if (isCancelled())
+								stream.close();
+							else {
+								//Add all the items to set
+								set.add(new File(media.getFilePath()).getParentFile().getAbsolutePath());
+								
+								//Update the progress
+								updateProgress(++progress, totalProgress);
+							}
+						});
+						
+					} else if (filesMode == FilesMode.CURRENT_PAGE || smartControllerFoldersMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
 						System.out.println("Entered for Search Window");
 						
 						//Count total files that will be exported
@@ -88,25 +129,6 @@ public class FoldersModeService extends Service<Void> {
 								stream.close();
 							else {
 								//Add item path to the set
-								set.add(new File(media.getFilePath()).getParentFile().getAbsolutePath());
-								
-								//Update the progress
-								updateProgress(++progress, totalProgress);
-							}
-						});
-						
-					} else if (filesMode == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
-						
-						//Count total files that will be exported
-						totalProgress = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().size();
-						
-						// Stream
-						Stream<Media> stream = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().stream();
-						stream.forEach(media -> {
-							if (isCancelled())
-								stream.close();
-							else {
-								//Add all the items to set
 								set.add(new File(media.getFilePath()).getParentFile().getAbsolutePath());
 								
 								//Update the progress

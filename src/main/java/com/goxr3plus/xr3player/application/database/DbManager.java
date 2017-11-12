@@ -27,10 +27,11 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
+import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
@@ -582,7 +583,7 @@ public class DbManager {
 							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading User Settings Part ( 2 )..."));
 							
 							//-----------------------Load the application settings-------------------------------					
-							Main.loadApplicationSettings();
+							ApplicationSettingsLoader.loadApplicationSettings();
 							
 						});
 						
