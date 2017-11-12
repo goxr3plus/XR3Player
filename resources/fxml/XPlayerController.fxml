@@ -7,7 +7,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
@@ -426,32 +425,22 @@
                      <left>
                         <HBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <MenuButton minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Menu">
+                              <MenuButton fx:id="transferMedia" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Transfer To">
                                 <items>
-                                    <Menu fx:id="transferMedia" mnemonicParsing="false" text="Clone To">
-                                       <items>
-                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
-                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
-                                          <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
-                                       </items>
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/Clone-20.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Menu>
-                                    <MenuItem fx:id="showEmotionLists" mnemonicParsing="false" text="Emotion Lists">
-                                       <graphic>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/Neutral-20.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </MenuItem>
+                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
+                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
+                                    <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
                                 </items>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/Clone-20.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Transfer the Audio to the selected Player" />
+                                 </tooltip>
                               </MenuButton>
                               <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
                                  <cursor>
@@ -464,6 +453,21 @@
                                     <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../image/add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Open player settings" />
+                                 </tooltip>
+                                 <graphic>
+                                    <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/Settings-32.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

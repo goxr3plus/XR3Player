@@ -29,8 +29,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
@@ -56,6 +55,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter.D
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilterListener;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
+import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -191,13 +191,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button extendPlayer;
 	
 	@FXML
-	private Menu transferMedia;
-	
-	@FXML
-	private MenuItem showEmotionLists;
+	private MenuButton transferMedia;
 	
 	@FXML
 	private Button openFile;
+	
+	@FXML
+	private Button settings;
 	
 	@FXML
 	private StackPane regionStackPane;
@@ -526,9 +526,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
 		emotionsButton.setOnAction(a -> updateEmotion(emotionsButton));
 		
-		//=showEmotionLists
-		showEmotionLists.setOnAction(a -> Main.playListModesTabPane.selectTab(1));
-		
+		//=settings
+		settings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.XPLAYERS));
 	}
 	
 	/**
