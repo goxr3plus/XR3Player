@@ -26,12 +26,12 @@ Github
 ## JavaFX Visualizations+Strange Music
 [![Visualizer](http://img.youtube.com/vi/pf33A4lnO_s/0.jpg)](https://www.youtube.com/watch?v=pf33A4lnO_s)
 
-## Update 89 Login Screen
-![Login Screen](https://user-images.githubusercontent.com/20374208/32140183-dba984aa-bc5f-11e7-8526-d52d08691cfc.png)
+## Update 90 Login Screen
+![Login Screen](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png)
 
 
-## Update 89 Main Mode
-![Main Mode](https://user-images.githubusercontent.com/20374208/32140164-0d264f96-bc5f-11e7-8d52-7d29d71dec65.png)
+## Update 90 Main Mode
+![Main Mode](https://user-images.githubusercontent.com/20374208/32696558-e9bab2f6-c783-11e7-9b63-409cda833ed9.png)
 
 
 ## Update 89 DJMode
