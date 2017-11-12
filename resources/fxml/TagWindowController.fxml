@@ -1,25 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
 <fx:root prefHeight="544.0" prefWidth="864.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane fx:id="splitPane" dividerPositions="0.4" prefHeight="160.0" prefWidth="200.0">
-         <items>
-            <ListView fx:id="listView" />
-            <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane">
-               <tabs>
-                  <Tab fx:id="basicInfoTab" text="Basic Info" />
-                  <Tab fx:id="artWorkTab" text="Artwork" />
-                  <Tab fx:id="id3v1Tab" text="ID3v1" />
-                  <Tab fx:id="id3v2Tab" text="ID3v2" />
-               </tabs>
-            </JFXTabPane>
-         </items>
-      </SplitPane>
+      <BorderPane style="-fx-background-color: #202020;">
+         <center>
+            <SplitPane fx:id="splitPane" dividerPositions="0.4" BorderPane.alignment="CENTER">
+               <items>
+                  <ListView fx:id="listView" />
+                  <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane">
+                     <tabs>
+                        <Tab fx:id="basicInfoTab" text="Basic Info" />
+                        <Tab fx:id="artWorkTab" text="Artwork" />
+                        <Tab fx:id="id3v1Tab" text="ID3v1" />
+                        <Tab fx:id="id3v2Tab" text="ID3v2" />
+                     </tabs>
+                  </JFXTabPane>
+               </items>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </SplitPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" spacing="1.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/nextt.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Previous" />
+                     </tooltip>
+                  </JFXButton>
+                  <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" rotate="-180.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/nextt.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Previous" />
+                     </tooltip>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" top="4.0" />
+               </padding>
+            </HBox>
+         </bottom>
+      </BorderPane>
    </children>
 </fx:root>

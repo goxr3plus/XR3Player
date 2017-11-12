@@ -188,7 +188,7 @@
 
 .table-row-cell{
 	-fx-table-cell-border-color: transparent;
-    -fx-background-color: #202020;
+    -fx-background-color: #101010;
     -fx-background-insets: 0.0, 0.0 0.0 0.0 0.0;
     -fx-padding: 0.0em;
 }
@@ -207,6 +207,12 @@
     -fx-fill: white ;
 } 
 
+.table-row-cell:even { /* <=== changed to even */
+    -fx-background-color: #202020;
+}
+
+
+
 
 
 /*.table-row-cell:focused .text {
@@ -214,7 +220,7 @@
 } */
 
 .table-row-cell:hover{
-	-fx-table-cell-border-color: #303030;
+	-fx-table-cell-border-color: white;
 	-fx-table-cell-border-width: 2.0;
 }
 
@@ -237,7 +243,8 @@
 
 .table-row-cell:hover , .table-row-cell:selected{
 	/*-fx-background-color:rgb(0.0,191.0,255.0);*/
-	 -fx-background-color:rgb(255.0,97.0,0.0);
+	/*-fx-background-color: linear-gradient(#328BDB 0.0%, #207BCF 25.0%, #1973C9 75.0%, #0A65BF 100.0%);*/
+	-fx-background-color: linear-gradient(#FF9400 0.0%, #FF7F00 25.0%, #FF5D00 75.0%, #FF4300 100.0%);
 }
 
 
@@ -330,15 +337,17 @@
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: linear-gradient(#328BDB 0.0%, #207BCF 25.0%, #1973C9 75.0%, #0A65BF 100.0%);
-    -fx-text-fill: white;
+    
 }
 
 .list-cell{
-	-fx-font-size:15.0;
+	-fx-font-weight:bold;
+	-fx-text-fill: white;
+	-fx-background-color: #101010;
 }
 
 .list-cell:even { /* <=== changed to even */
-    -fx-background-color: white;
+    -fx-background-color: #202020;
 }
 
 .list-cell:filled:hover {

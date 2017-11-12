@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.collections.FXCollections;
@@ -64,6 +65,12 @@ public class TagWindow extends StackPane {
 	
 	@FXML
 	private Tab id3v2Tab;
+	
+	@FXML
+	private JFXButton previous;
+	
+	@FXML
+	private JFXButton next;
 	
 	//--------------------------------------------------------
 	
@@ -131,7 +138,7 @@ public class TagWindow extends StackPane {
 		artWorkTab.setContent(artWork);
 		//ImageView
 		artWork.getImageView().fitWidthProperty().bind(window.widthProperty().subtract(20));
-		artWork.getImageView().fitHeightProperty().bind(window.heightProperty().subtract(110));
+		artWork.getImageView().fitHeightProperty().bind(window.heightProperty().subtract(145));
 		
 		//id3v1Tab
 		id3v1Tab.setContent(id3V1Controller);
@@ -156,6 +163,30 @@ public class TagWindow extends StackPane {
 		listView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
 				openAudio(newValue, TagTabCategory.CURRENT, false);
+			
+			//previous
+			//previous.setDisable(listView.getSelectionModel().getSelectedIndex() == 0)
+			
+			//next
+			//next.setDisable(listView.getSelectionModel().getSelectedIndex() == listView.getItems().size() - 1)
+		});
+		
+		//previous
+		previous.setOnAction(a -> {
+			//Rotation on list if you finish start
+			if (listView.getSelectionModel().getSelectedIndex() != 0)
+				listView.getSelectionModel().selectPrevious();
+			else
+				listView.getSelectionModel().selectLast();
+		});
+		
+		//next
+		next.setOnAction(a -> {
+			//Rotation on list if you finish start
+			if (listView.getSelectionModel().getSelectedIndex() != listView.getItems().size() - 1)
+				listView.getSelectionModel().selectNext();
+			else
+				listView.getSelectionModel().selectFirst();
 		});
 		
 	}
@@ -215,13 +246,22 @@ public class TagWindow extends StackPane {
 		if (clearListView) {
 			listView.setItems(Arrays.asList(absolutePath).stream().collect(Collectors.toCollection(FXCollections::observableArrayList)));
 			listView.getSelectionModel().select(0);
+			previous.setDisable(true);
+			next.setDisable(true);
+		}else {
+			previous.setDisable(false);
+			next.setDisable(false);
 		}
+			
 		
 		//Check the absolutePath
 		if (absolutePath != null) {
 			
 			//Find file extension
 			String extension = InfoTool.getFileExtension(absolutePath);
+			
+			//Current Tab
+			int currentTabSelected = tabPane.getSelectionModel().getSelectedIndex();
 			
 			//Clear Tab Pane Tabs
 			tabPane.getTabs().clear();
@@ -237,6 +277,8 @@ public class TagWindow extends StackPane {
 					tabPane.getSelectionModel().select(0);
 				else if (tabCategory == TagTabCategory.ARTWORK)
 					tabPane.getSelectionModel().select(1);
+				else if (tabCategory == TagTabCategory.CURRENT)
+					tabPane.getSelectionModel().select(currentTabSelected);
 				
 				//basicInfoTab
 				mp3BasicInfo.updateInformation(new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
