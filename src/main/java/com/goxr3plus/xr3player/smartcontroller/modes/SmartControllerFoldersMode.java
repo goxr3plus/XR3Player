@@ -27,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
+import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FoldersModeService;
@@ -34,6 +35,12 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.FoldersModeSer
 public class SmartControllerFoldersMode extends StackPane {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private Button settings;
+	
+	@FXML
+	private Button refresh;
 	
 	@FXML
 	private TreeView<String> treeView;
@@ -158,6 +165,15 @@ public class SmartControllerFoldersMode extends StackPane {
 			
 			//Trick for CPU
 			root.setExpanded(true);
+		});
+		
+		//refresh
+		refresh.setOnAction(a -> recreateTree());
+		
+		//settings
+		settings.setOnAction(a -> {
+			Main.settingsWindow.getPlayListsSettingsController().getInnerTabPane().getSelectionModel().select(2);
+			Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS);
 		});
 		
 	}

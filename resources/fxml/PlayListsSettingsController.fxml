@@ -23,7 +23,7 @@
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
    <center>
-      <JFXTabPane side="RIGHT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+      <JFXTabPane fx:id="innerTabPane" side="RIGHT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
          <tabs>
             <Tab text="Search ">
                <content>

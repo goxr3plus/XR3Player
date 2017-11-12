@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,9 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 public class PlaylistsSettingsController extends BorderPane {
 	
 	/** -----------------------------------------------------. */
+	
+	@FXML
+	private JFXTabPane innerTabPane;
 	
 	@FXML
 	private JFXCheckBox instantSearch;
@@ -175,6 +179,13 @@ public class PlaylistsSettingsController extends BorderPane {
 	 */
 	public ToggleGroup getFileSearchGroup() {
 		return fileSearchGroup;
+	}
+	
+	/**
+	 * @return the innerTabPane
+	 */
+	public JFXTabPane getInnerTabPane() {
+		return innerTabPane;
 	}
 	
 }
