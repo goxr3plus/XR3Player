@@ -20,6 +20,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
@@ -147,6 +149,7 @@ public class TagWindow extends StackPane {
 		id3v2Tab.setContent(id3V2Controller);
 		
 		//listView
+		//listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)
 		listView.setCellFactory(lv -> new ListCell<String>() {
 			@Override
 			public void updateItem(String item , boolean empty) {
@@ -163,16 +166,29 @@ public class TagWindow extends StackPane {
 		listView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
 				openAudio(newValue, TagTabCategory.CURRENT, false);
+		});
+		
+		// Drag Implementation
+		listView.setOnDragDetected(event -> {
 			
-			//previous
-			//previous.setDisable(listView.getSelectionModel().getSelectedIndex() == 0)
-			
-			//next
-			//next.setDisable(listView.getSelectionModel().getSelectedIndex() == listView.getItems().size() - 1)
+			if (!listView.getSelectionModel().getSelectedItems().isEmpty()) {
+				
+				// Allow this transfer Mode
+				Dragboard board = startDragAndDrop(TransferMode.LINK);
+				
+				// Put a String on DragBoard
+				ClipboardContent content = new ClipboardContent();
+				content.putFiles(listView.getSelectionModel().getSelectedItems().stream().map(item -> new File(item)).collect(Collectors.toList()));
+				
+				board.setContent(content);
+				event.consume();
+			}
 		});
 		
 		//previous
 		previous.setOnAction(a -> {
+			//listView.getSelectionModel().clearSelection()
+			
 			//Rotation on list if you finish start
 			if (listView.getSelectionModel().getSelectedIndex() != 0)
 				listView.getSelectionModel().selectPrevious();
@@ -182,6 +198,8 @@ public class TagWindow extends StackPane {
 		
 		//next
 		next.setOnAction(a -> {
+			//listView.getSelectionModel().clearSelection()
+			
 			//Rotation on list if you finish start
 			if (listView.getSelectionModel().getSelectedIndex() != listView.getItems().size() - 1)
 				listView.getSelectionModel().selectNext();
@@ -248,11 +266,10 @@ public class TagWindow extends StackPane {
 			listView.getSelectionModel().select(0);
 			previous.setDisable(true);
 			next.setDisable(true);
-		}else {
+		} else {
 			previous.setDisable(false);
 			next.setDisable(false);
 		}
-			
 		
 		//Check the absolutePath
 		if (absolutePath != null) {

@@ -114,7 +114,7 @@ public class MediaTableViewer extends TableView<Media> {
 	
 	/** The bpm. */
 	@FXML
-	private TableColumn<Media,?> bpm;
+	private TableColumn<Media,Integer> bpm;
 	
 	/** The key. */
 	@FXML
@@ -506,6 +506,9 @@ public class MediaTableViewer extends TableView<Media> {
 		
 		//bitRate
 		bitRate.setCellValueFactory(new PropertyValueFactory<>("bitRate"));
+		
+		//bpm
+		bpm.setCellValueFactory(new PropertyValueFactory<>("bpm"));
 		
 		//		this.getColumns().addListener((ListChangeListener <? super TableColumn<Media, ?>>) ( c -> {
 		//			c.getList().stream().forEach(column->{

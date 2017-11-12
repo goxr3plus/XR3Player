@@ -4,7 +4,6 @@
 package main.java.com.goxr3plus.xr3player.smartcontroller.media;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Paths;
@@ -12,11 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3File;
-import org.jaudiotagger.tag.TagException;
+import org.jaudiotagger.tag.id3.ID3v24FieldKey;
+import org.jaudiotagger.tag.id3.ID3v24Tag;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -110,6 +107,9 @@ public abstract class Media {
 	
 	/** The times played. */
 	private SimpleIntegerProperty bitRate;
+	
+	/** The times played. */
+	private SimpleIntegerProperty bpm;
 	
 	/** The number of the Media inside the PlayList */
 	private SimpleIntegerProperty number;
@@ -218,6 +218,7 @@ public abstract class Media {
 		this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
 		this.bitRate = new SimpleIntegerProperty();
+		this.bpm = new SimpleIntegerProperty();
 		this.number = new SimpleIntegerProperty(number);
 		
 		//Stars
@@ -297,11 +298,28 @@ public abstract class Media {
 		//-- BitRate etc
 		try {
 			//exists ? + mp3 ?
-			if (fileExists.get() && localDuration != 0 && file.length() != 0 && "mp3".equals(fileType.get()))
-				bitRate.set((int) new MP3File(file).getMP3AudioHeader().getBitRateAsNumber());
-			else
+			if (fileExists.get() && localDuration != 0 && file.length() != 0 && "mp3".equals(fileType.get())) {
+				MP3File mp3File = new MP3File(file);
+				
+				bitRate.set((int) mp3File.getMP3AudioHeader().getBitRateAsNumber());
+				
+				String bpmTag = "";
+				
+				if (mp3File.hasID3v2Tag()) {
+					ID3v24Tag tag = mp3File.getID3v2TagAsv24();
+					
+					bpmTag = tag.getFirst(ID3v24FieldKey.BPM);
+					
+					if (!bpmTag.equals("")) {
+						bpm.set((int) Double.parseDouble(bpmTag));
+					} else {
+						bpm.set(-1);
+					}
+				}
+			} else
 				bitRate.set(-1);
-		} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException e) {
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -498,6 +516,15 @@ public abstract class Media {
 	 */
 	public SimpleIntegerProperty bitRateProperty() {
 		return bitRate;
+	}
+	
+	/**
+	 * Beats per minute of audio
+	 * 
+	 * @return The bpm
+	 */
+	public SimpleIntegerProperty bpmProperty() {
+		return bpm;
 	}
 	
 	/**
@@ -1039,6 +1066,13 @@ public abstract class Media {
 	 */
 	public SimpleIntegerProperty getBitRate() {
 		return bitRate;
+	}
+	
+	/**
+	 * @return The bpm
+	 */
+	public SimpleIntegerProperty getBpm() {
+		return bpm;
 	}
 	
 	/**

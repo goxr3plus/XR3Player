@@ -70,7 +70,7 @@
                </image>
             </ImageView>
          </graphic></TableColumn>
-      <TableColumn fx:id="fileSize" maxWidth="250.0" minWidth="130.0" prefWidth="139.0" text="File Size">
+      <TableColumn fx:id="fileSize" maxWidth="250.0" minWidth="130.0" prefWidth="139.0" text="File Size" visible="false">
          <graphic>
             <ImageView>
                <image>
@@ -142,7 +142,7 @@
             </ImageView>
          </graphic></TableColumn>
       <TableColumn fx:id="genre" prefWidth="75.0" text="Genre-[Not implemented]" visible="false" />
-      <TableColumn fx:id="bpm" prefWidth="75.0" text="Bpm-[Not implemented]" visible="false" />
+      <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bpm" />
       <TableColumn fx:id="key" prefWidth="75.0" text="Key-[Not implemented]" visible="false" />
       <TableColumn fx:id="harmonic" prefWidth="75.0" text="Harmonic-[Not implemented]" visible="false" />
       <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate" />
