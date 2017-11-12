@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerWindowController.Type;
@@ -38,6 +39,9 @@ public class ApplicationSettingsLoader {
 			Main.settingsWindow.restoreAll();
 			
 			//----------   Load all the settings from the config.properties --------------------
+			
+			//======================START OF Color-Pickers-Settings======================
+			Optional.ofNullable(settings.getProperty("Libraries-Background-Color")).ifPresent(color -> Main.libraryMode.getColorPicker().setValue(Color.web(color)));
 			
 			//======================START OF KeyBindings-Settings======================
 			

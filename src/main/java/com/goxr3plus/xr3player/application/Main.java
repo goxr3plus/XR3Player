@@ -38,6 +38,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -325,8 +326,10 @@ public class Main extends Application {
 		//Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
-		//Show Welcome Screen?	
+		//============= ApplicationProperties GLOBAL
 		Properties properties = applicationProperties.loadProperties();
+		
+		//WelcomeScreen
 		if (properties.getProperty("Show-Welcome-Screen") == null)
 			welcomeScreen.show();
 		else
@@ -337,6 +340,10 @@ public class Main extends Application {
 				else
 					welcomeScreen.close();
 			});
+		
+		//Users Color Picker
+		Optional.ofNullable(properties.getProperty("Users-Background-Color")).ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
+		
 		applicationProperties.setUpdatePropertiesLocked(false);
 		
 		//------------------Experiments------------------
@@ -761,7 +768,6 @@ public class Main extends Application {
 			}
 		}, "Restart Application Thread").start();
 	}
-	
 	
 	//------------------------------------- Methods not used very often--------------------------------------------------
 	

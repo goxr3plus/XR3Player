@@ -18,6 +18,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
@@ -32,6 +33,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
@@ -94,6 +96,9 @@ public class LibraryMode extends BorderPane {
 	private HBox botttomHBox;
 	
 	@FXML
+	private ColorPicker colorPicker;
+	
+	@FXML
 	private SplitPane bottomSplitPane;
 	
 	// ------------------------------------------------
@@ -121,7 +126,7 @@ public class LibraryMode extends BorderPane {
 	 * Default image of a library(which has not a costume one selected by the
 	 * user.
 	 */
-	public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg");
+	public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg")
 	/**
 	 * A classic warning image to inform the user about something
 	 * 
@@ -194,7 +199,7 @@ public class LibraryMode extends BorderPane {
 						Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1, teamViewer.getViewer().getItemsObservableList().size(), null, false);
 						
 						// Add the library
-						//currentLib.goOnSelectionMode(selectionModeToggle.isSelected());
+						//currentLib.goOnSelectionMode(selectionModeToggle.isSelected())
 						teamViewer.getViewer().addItem(currentLib, true);
 						
 						// Add a row on libraries table
@@ -376,6 +381,17 @@ public class LibraryMode extends BorderPane {
 		librariesInfoLabel.textProperty().bind(Bindings.concat("Totally -> [ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",
 				openedLibraries, " ] Opened", " , [ ", emptyLibraries, " ] Empty"));
 		
+		//== colorPicker
+		colorPicker.setValue(Color.web("#00E5BB"));
+		colorPicker.setOnAction(a -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
+		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
+			
+			//Format to WebColor
+			String webColor = JavaFXTools.colorToWebColor(newColor);
+			
+			//Set the style
+			this.teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
+		});
 	}
 	
 	/**
@@ -397,7 +413,7 @@ public class LibraryMode extends BorderPane {
 	 * 
 	 * @param owner
 	 */
-	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation) {	
+	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation) {
 		this.openLibraryAfterCreation = openLibraryAfterCreation;
 		
 		// Open rename window
@@ -498,7 +514,7 @@ public class LibraryMode extends BorderPane {
 				|| ( !turnDown && topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
 			return;
 		
-		//this.saveTopSplitPaneDivider();
+		//this.saveTopSplitPaneDivider()
 		double temp = topSplitPaneDivider[0];
 		topSplitPaneDivider[0] = topSplitPaneDivider[1];
 		topSplitPaneDivider[1] = temp;
@@ -506,10 +522,10 @@ public class LibraryMode extends BorderPane {
 		boolean libraryIsOnTop = topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane);
 		topSplitPane.getItems().clear();
 		if (libraryIsOnTop) {
-			//System.out.println("Entered first if!");
+			//System.out.println("Entered first if!")
 			topSplitPane.getItems().addAll(bottomSplitPane, Main.playListModesSplitPane);
 		} else {
-			//System.out.println("Entered second if!");
+			//System.out.println("Entered second if!")
 			topSplitPane.getItems().addAll(Main.playListModesSplitPane, bottomSplitPane);
 		}
 		
@@ -539,5 +555,13 @@ public class LibraryMode extends BorderPane {
 	public BorderPane getBorderPane() {
 		return borderPane;
 	}
+
+	/**
+	 * @return the colorPicker
+	 */
+	public ColorPicker getColorPicker() {
+		return colorPicker;
+	}
+
 	
 }

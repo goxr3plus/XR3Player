@@ -41,6 +41,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -55,6 +56,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -64,6 +66,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchB
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 
@@ -124,6 +127,9 @@ public class LoginMode extends BorderPane {
 	private Button openUserContextMenu;
 	
 	@FXML
+	private ColorPicker colorPicker;
+	
+	@FXML
 	private Label usersInfoLabel;
 	
 	@FXML
@@ -133,10 +139,10 @@ public class LoginMode extends BorderPane {
 	private PieChart librariesPieChart;
 	
 	@FXML
-	private Button exportDatabase;
+	private Button importDatabase;
 	
 	@FXML
-	private Button importDatabase;
+	private Button exportDatabase;
 	
 	@FXML
 	private Button deleteDatabase;
@@ -425,6 +431,18 @@ public class LoginMode extends BorderPane {
 		
 		//== deleteDatabase
 		deleteDatabase.setOnAction(a -> Main.sideBar.deleteDatabase());
+		
+		//== color picker
+		colorPicker.setValue(Color.web("#00E5BB"));
+		colorPicker.setOnAction(a -> Main.applicationProperties.updateProperty("Users-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
+		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
+			
+			//Format to WebColor
+			String webColor = JavaFXTools.colorToWebColor(newColor);
+			
+			//Set the style
+			this.teamViewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
+		});
 	}
 	
 	/**
@@ -504,6 +522,13 @@ public class LoginMode extends BorderPane {
 		return splitPane;
 	}
 	
+	/**
+	 * @return the colorPicker
+	 */
+	public ColorPicker getColorPicker() {
+		return colorPicker;
+	}
+
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 
@@ -664,7 +689,7 @@ public class LoginMode extends BorderPane {
 			
 			// clip.set
 			setClip(clip);
-			setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+			setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60, #141414 60.2%, #00E5BB 87%);");
 			//setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 			
 			// ScrollBar

@@ -20,6 +20,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
@@ -29,6 +30,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
+import main.java.com.goxr3plus.xr3player.application.presenter.treeview.SystemRoot;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -163,8 +165,6 @@ public class SmartControllerFoldersMode extends StackPane {
 					setText("");
 				} else {
 					setText(item);
-					setGraphic(getTreeItem().getGraphic());
-					
 					String absoluteFilePath = ( (FileTreeItem) getTreeItem() ).getFullPath();
 					
 					//We don't care about directories
@@ -174,7 +174,15 @@ public class SmartControllerFoldersMode extends StackPane {
 						//Check if the file exists inside the SmartController Playlist
 						if (!existsInPlayList)
 							getStyleClass().add("tree-cell-2");
+						
+						setGraphic(getTreeItem().getGraphic());
+					} else {
+						if (getTreeItem().isExpanded())
+							setGraphic(new ImageView(SystemRoot.openedFolderImage));
+						else
+							setGraphic(new ImageView(SystemRoot.closedFolderImage));
 					}
+					
 				}
 			}
 		});

@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
@@ -31,7 +32,8 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Selects the Toogle with the given text from the toggle group or else selects nothing
+	 * Selects the Toogle with the given text from the toggle group or else
+	 * selects nothing
 	 * 
 	 * @param toggleGroup
 	 */
@@ -44,7 +46,8 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Returns the Index of the Selected Toggle inside the ToggleGroup (counting from 0)
+	 * Returns the Index of the Selected Toggle inside the ToggleGroup (counting
+	 * from 0)
 	 * 
 	 * @param g
 	 * @return The index of the Selected Toggle
@@ -54,7 +57,8 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Selects the Toggle in position Index inside the toggle group (counting from 0 )
+	 * Selects the Toggle in position Index inside the toggle group (counting
+	 * from 0 )
 	 * 
 	 * @param g
 	 * @param index
@@ -64,7 +68,8 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Searches for any Image that contains the given title -> example ["background"] inside the given folder
+	 * Searches for any Image that contains the given title -> example
+	 * ["background"] inside the given folder
 	 * 
 	 * @return The absolute path of the image file or null if not exists
 	 */
@@ -90,7 +95,8 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Check if any image with that title exists -> for example ["background"] inside the Folder given , i don't have the extension
+	 * Check if any image with that title exists -> for example ["background"]
+	 * inside the Folder given , i don't have the extension
 	 * 
 	 * @param title
 	 * @param folderToSearch
@@ -104,7 +110,8 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Deletes any image which has that title , for example ["background"] searching on the given Folder
+	 * Deletes any image which has that title , for example ["background"]
+	 * searching on the given Folder
 	 * 
 	 * @param title
 	 * @param folderToSearch
@@ -136,15 +143,17 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Open's a select Window and if the user selects an image it saves it with the given title and to the given folder , the extension is
-	 * automatically found from the original one Image
+	 * Open's a select Window and if the user selects an image it saves it with
+	 * the given title and to the given folder , the extension is automatically
+	 * found from the original one Image
 	 * 
 	 * @param imageNameToDelete
 	 *            The images containing this name will be deleted
 	 * @param folderForSaving
 	 *            This folder must already exist!
 	 * 
-	 * @return The image file which of course can be null if the user doesn't selected anything
+	 * @return The image file which of course can be null if the user doesn't
+	 *         selected anything
 	 */
 	public static Optional<File> selectAndSaveImage(String title , String folderForSaving , FileAndFolderChooser specialChooser , Stage window) {
 		
@@ -174,5 +183,17 @@ public final class JavaFXTools {
 		}).start();
 		
 		return Optional.ofNullable(imageFile);
+	}
+	
+	/**
+	 * Return the hex web string from the given color for example (#302015)
+	 * 
+	 * @param color
+	 *            The given color
+	 * @return The hex web string from the given color for example (#302015)
+	 */
+	public static String colorToWebColor(Color color) {
+		return String.format("#%02X%02X%02X", (int) ( color.getRed() * 255 ), (int) ( color.getGreen() * 255 ), (int) ( color.getBlue() * 255 ));
+		
 	}
 }

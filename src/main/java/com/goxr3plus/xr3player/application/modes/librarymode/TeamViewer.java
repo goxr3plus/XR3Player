@@ -215,7 +215,7 @@ public class TeamViewer {
 			
 			// clip.set
 			setClip(clip);
-			setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, purple 87%);");
+			setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, #00E5BB 87%);");
 			//setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 			
 			// ScrollBar

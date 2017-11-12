@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
@@ -132,6 +133,14 @@
                                     <Insets />
                                  </HBox.margin>
                               </Button>
+                              <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </ColorPicker>
                            </children>
                         </HBox>
                      </center>
@@ -145,7 +154,7 @@
                               <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
                            </center>
                            <right>
-                              <HBox fx:id="botttomHBox" alignment="CENTER" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
+                              <HBox fx:id="botttomHBox" alignment="CENTER_LEFT" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
                            </right>
                         </BorderPane>
                      </children>
