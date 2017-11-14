@@ -15,7 +15,18 @@
 [license-image1]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image2]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
-![Main Mode](https://user-images.githubusercontent.com/20374208/32696558-e9bab2f6-c783-11e7-9b63-409cda833ed9.png)
+### Screenshots
+
+| Login Screen | Main Mode | DJMode |
+|:-:|:-:|:-:|
+| ![First](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png) | ![Sec](https://user-images.githubusercontent.com/20374208/32696558-e9bab2f6-c783-11e7-9b63-409cda833ed9.png) | ![Third](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png) |
+
+### Videos
+
+| Visualizers Demostration | Update 90 Demostration |
+|:-:|:-:|
+| [![First](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)  | [![Second](http://img.youtube.com/vi/XibVlgtNi9Y/0.jpg)](https://www.youtube.com/watch?v=XibVlgtNi9Y) |
+
 
 -------------------------------------------------------------------------------------
 ## Download XR3Player
@@ -143,20 +154,6 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 - [**Java-Stream-Player**](https://github.com/goxr3plus/java-stream-player) Java Advanced Audio Controller Library (WAV, AU, AIFF, MP3, OGG VORBIS, FLAC, MONKEY's AUDIO and SPEEX audio formats ).
 - [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
-
-
-
-## Update 90 Login Screen
-![Login Screen](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png)
-
-## Update 89 DJMode
-![DJMode](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png)
-
-
-# Visualizer Video 1
-[![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
-
----------
   
  
 
