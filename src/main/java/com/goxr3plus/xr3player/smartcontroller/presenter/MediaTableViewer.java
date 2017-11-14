@@ -173,11 +173,6 @@ public class MediaTableViewer extends TableView<Media> {
 	private int previousSelectedCount = 0;
 	
 	/**
-	 * The selected row of the tableview , i need to impement this!
-	 */
-	//private TableRow<Media> selectedRow = new TableRow<>();
-	
-	/**
 	 * Constructor.
 	 */
 	public MediaTableViewer(SmartController smartController) {
@@ -215,6 +210,7 @@ public class MediaTableViewer extends TableView<Media> {
 			placeHolderLabel.setText("Drag && Drop or Import/Paste Media...");
 			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; -fx-cursor:hand;");
 			placeHolderLabel.setOnMouseReleased(m -> smartController.getToolsContextMenu().show(placeHolderLabel, m.getScreenX(), m.getScreenY()));
+			placeHolderLabel.setGraphic(InfoTool.getImageViewFromResourcesFolder("import24.png"));
 		} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
 			placeHolderLabel.setText("Search Media from all the playlists...");
 			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
@@ -351,20 +347,9 @@ public class MediaTableViewer extends TableView<Media> {
 			
 			// --Drag Over
 			setOnDragOver(dragOver -> {
-				// System.out.println(over.getGestureSource() + "," +
-				// controller.tableViewer)
-				
-				// // Check if the drag come from the same source
-				// String gestureSourceString
-				// if (over.getGestureSource() != null)
-				// gestureSourceString = over.getGestureSource()
-				// .toString()
-				// else
-				// gestureSourceString = "null"
 				
 				// The drag must come from source other than the owner
-				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != smartController.getTableViewer()
-						&& dragOver.getGestureSource() != smartController.foldersMode) {
+				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != this) {
 					dragOver.acceptTransferModes(TransferMode.LINK);
 				}
 			});

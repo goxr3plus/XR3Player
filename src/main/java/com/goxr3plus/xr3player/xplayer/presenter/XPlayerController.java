@@ -429,7 +429,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		playerExtraSettings = new XPlayerExtraSettings(this);
 		
 		//== borderPane
-		borderPane.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
+		borderPane.setOnDragOver(dragOver -> {
+			if (!flipPane.isBackVisible())
+				dragOver.acceptTransferModes(TransferMode.LINK);
+		});
 		borderPane.setOnDragDropped(audioDropEvent);
 		
 		//== regionStackPane

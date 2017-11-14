@@ -220,8 +220,8 @@
 } */
 
 .table-row-cell:hover{
-	-fx-table-cell-border-color: white;
-	-fx-table-cell-border-width: 2.0;
+	-fx-table-cell-border-color: transparent;
+	/*-fx-table-cell-border-width: 2.0;*/
 }
 
 .table-row-cell:hover .text , .table-row-cell:selected .text{
