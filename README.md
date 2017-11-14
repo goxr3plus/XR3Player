@@ -35,6 +35,9 @@
   - Multiple Libraries/Playlists support
   - Audio effects
   - System monitor ( CPU , RAM )
+- _**Much more**_
+  - _XR3Player is actively developed. More features will come!_
+
 
 ## QUESTIONS
 
