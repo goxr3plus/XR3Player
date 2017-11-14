@@ -75,7 +75,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-  Also(warning!):
+    Also(warning!):
  
     1)You are not allowed to sell this product to third party.
 
@@ -85,7 +85,7 @@
        notices that are currently in this file, and this list of conditions without
        modification.
    
-  Special thanks!
+     Special thanks!
 
     ->Images contained into this application are downloaded from < https://icons8.com >
 
@@ -94,6 +94,27 @@
      Copyright © <2015-2307>  (www.goxr3plus.co.nf) . All rights reserved.
   </p>
 </details>
+
+## Specs / Open-source libraries:
+
+- [**Java 8 Update 141 ++**] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) Java language
+- [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond
+- [**JFoenix**](http://www.jfoenix.com/)     JavaFX Material Design Library
+- [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
+- [**FX-BorderlessScene**](https://github.com/goxr3plus/FX-BorderlessScene) Undecorated JavaFX Scene with implemented move, resize, minimise, maximise, close and Windows Aero Snap controls.
+- [**JavaSysmon**](https://github.com/goxr3plus/javasysmon) Manage OS processes and get cpu and memory stats cross-platform in Java. 
+- [**Jnativehook**](https://github.com/kwhat/jnativehook) Global keyboard and mouse listeners for Java .
+- [**Sqlite-jdbc**](https://github.com/xerial/sqlite-jdbc) SQLite JDBC Driver .
+- [**Commons-Validator**](https://commons.apache.org/proper/commons-validator/) A common issue when receiving data either electronically or from user input is verifying the integrity of the data. This work is repetitive and becomes even more complicated when different sets of validation rules need to be applied to the same set of data based on locale. Error messages may also vary by locale. This package addresses some of these issues to speed development and maintenance of validation rules.
+- [**EasyBind**](https://github.com/TomasMikula/EasyBind) EasyBind leverages lambdas to reduce boilerplate when creating custom bindings, provides a type-safe alternative to Bindings.select* methods (inspired by Anton Nashatyrev's feature request, planned for JavaFX 9) and adds monadic operations to ObservableValue.
+- [**JSoup**](https://jsoup.org/) Java library for working with real-world HTML. It provides a very convenient API for extracting and manipulating data, using the best of DOM, CSS, and jquery-like methods.
+- [**JSON-Simple**](json-simple) Java 7+ toolkit to quickly develop RFC 4627 JSON compatible applications
+- [**Java-Google-Speech-API**](https://github.com/goxr3plus/java-google-speech-api) J.A.R.V.I.S. Java Speech API: Just A Reliable Vocal Interpreter & Synthesizer. This is a project for the Java Speech API. The program interprets vocal inputs into text and synthesizes voices from text input. The program supports dozens of languages and even has the ability to auto-detect languages!
+- [**JAudioTagger**](http://www.jthink.net/jaudiotagger/) Jaudiotagger is the Audio Tagging library used by Jaikoz for tagging data in Audio files.
+- [**Java-Stream-Player**](https://github.com/goxr3plus/java-stream-player) Java Advanced Audio Controller Library (WAV, AU, AIFF, MP3, OGG VORBIS, FLAC, MONKEY's AUDIO and SPEEX audio formats ).
+- [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
+- [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
+
 
 
 ## Update 90 Login Screen
