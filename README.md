@@ -17,6 +17,9 @@
 [license-image2]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
 -------------------------------------------------------------------------------------
+## Download XR3Player
+
+Download it visiting [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 
 ## Features
 - **App**
