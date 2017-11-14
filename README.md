@@ -28,7 +28,7 @@
   - Advanced Tag Editor
   - File Organizer
   - File Explorer
-  - Multiple Libraries/Playlist support
+  - Multiple Libraries/Playlists support
   - Audio effects
   - System monitor ( CPU , RAM )
 
