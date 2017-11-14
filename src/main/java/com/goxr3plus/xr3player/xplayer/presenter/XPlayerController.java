@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -98,6 +99,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private GridPane basicGridPane;
 	
 	@FXML
+	private SplitPane leftSplitPane;
+	
+	@FXML
 	private BorderPane discBorderPane;
 	
 	@FXML
@@ -144,6 +148,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button maximizeVisualizer;
+	
+	@FXML
+	private SplitPane rightSplitPane;
 	
 	@FXML
 	private HBox mediaNameHBox;

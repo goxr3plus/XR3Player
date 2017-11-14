@@ -20,7 +20,7 @@
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
-            <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0">
+            <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
                <center>
                   <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
                      <children>
@@ -161,7 +161,7 @@
                   </StackPane>
                </top>
             </BorderPane>
-            <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
+            <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" SplitPane.resizableWithParent="false" />
         </items>
       </SplitPane>
    </center>

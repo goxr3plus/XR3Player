@@ -60,8 +60,7 @@ public class PlayListModesTabPane extends StackPane {
 	private void initialize() {
 		
 		//
-		openedLibrariesTab.setContent(Main.libraryMode.multipleLibs);
-		
+		openedLibrariesTab.setContent(Main.libraryMode.multipleLibs);	
 		//
 		emotionListsTab.setContent(new BorderPane(Main.emotionsTabPane));
 		//

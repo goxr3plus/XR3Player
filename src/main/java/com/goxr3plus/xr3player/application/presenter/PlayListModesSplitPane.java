@@ -62,7 +62,8 @@ public class PlayListModesSplitPane extends BorderPane {
 		//== splitPane
 		splitPane.getItems().clear();
 		splitPane.getItems().addAll(Main.playListModesTabPane, Main.mediaInformation);
-		SplitPane.setResizableWithParent(Main.mediaInformation, Boolean.FALSE);
+		SplitPane.setResizableWithParent(Main.playListModesTabPane, Boolean.FALSE);
+		SplitPane.setResizableWithParent(Main.mediaInformation, Boolean.FALSE);	
 		updateSplitPaneDivider();
 	}
 	

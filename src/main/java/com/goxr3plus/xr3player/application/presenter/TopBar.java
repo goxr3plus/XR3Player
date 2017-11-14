@@ -177,6 +177,7 @@ public class TopBar extends BorderPane {
 					Main.libraryMode.getTopSplitPane().getItems().add(
 							JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown()) == 0 ? 1 : 0,
 							Main.playListModesSplitPane);
+					SplitPane.setResizableWithParent(Main.playListModesSplitPane, Boolean.FALSE);
 					Main.libraryMode.updateTopSplitPaneDivider();
 					//Main.libraryMode.getBottomSplitPane().getItems().clear()
 					//Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0))
@@ -210,6 +211,7 @@ public class TopBar extends BorderPane {
 					// Work
 					Main.djMode.getBottomSplitPane().getItems().clear();
 					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.playListModesSplitPane);
+					SplitPane.setResizableWithParent(Main.playListModesSplitPane, Boolean.FALSE);
 					SplitPane.setResizableWithParent(Main.treeManager, Boolean.FALSE);
 					Main.djMode.updateBottomSplitPaneDivider();
 					//Main.multipleTabs.reverseSplitPaneItems()

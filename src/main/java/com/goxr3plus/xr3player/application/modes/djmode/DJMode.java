@@ -229,7 +229,7 @@ public class DJMode extends BorderPane {
 		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(hBox) ) || ( !turnDown && topSplitPane.getItems().get(0).equals(hBox) ))
 			return;
 		
-		//this.saveTopSplitPaneDivider();
+		//this.saveTopSplitPaneDivider()
 		double temp = topSplitPaneDivider[0];
 		topSplitPaneDivider[0] = topSplitPaneDivider[1];
 		topSplitPaneDivider[1] = temp;
@@ -240,6 +240,10 @@ public class DJMode extends BorderPane {
 			topSplitPane.getItems().addAll(bottomSplitPane, hBox);
 		else
 			topSplitPane.getItems().addAll(hBox, bottomSplitPane);
+		
+		//Fix layout problems
+		SplitPane.setResizableWithParent(bottomSplitPane, Boolean.FALSE);
+		SplitPane.setResizableWithParent(hBox, Boolean.FALSE);
 		
 		this.updateTopSplitPaneDivider();
 		

@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <items>
-            <HBox fx:id="hBox" alignment="CENTER" spacing="4.0">
+            <HBox fx:id="hBox" alignment="CENTER" spacing="4.0" SplitPane.resizableWithParent="false">
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <StackPane minHeight="0.0" prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0">
                            <center>
@@ -42,7 +42,7 @@
                      </children>
                   </StackPane>
                </children></HBox>
-            <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
+            <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" SplitPane.resizableWithParent="false" />
          </items>
       </SplitPane>
    </center>
