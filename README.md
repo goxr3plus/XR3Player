@@ -15,6 +15,8 @@
 [license-image1]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image2]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
+![Main Mode](https://user-images.githubusercontent.com/20374208/32696558-e9bab2f6-c783-11e7-9b63-409cda833ed9.png)
+
 -------------------------------------------------------------------------------------
 ## Download XR3Player
 
@@ -95,6 +97,30 @@
   </p>
 </details>
 
+## Building
+
+To build XR3Player, you will need:
+
+* [JDK 8+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) - Oracle or OpenJDK
+* [maven](http://maven.apache.org/) - Version 3 recommended
+
+After installing these tools simply run 'mvn clean package' and find the jar in the target folder.
+
+Other Useful maven lifecycles:
+
+* clean - remove binaries, docs and temporary build files
+* compile - compile the library
+* package - package compiled code into a jar
+
+# Contributing
+
+If you have added a feature or fixed a bug in mp3agic please submit a pull request as follows:
+
+* Fork the project
+* Write the code for your feature or bug fix
+* Commit and do not mess with version or history
+* Submit a pull request
+
 ## Specs / Open-source libraries:
 
 - [**Java 8 Update 141++**](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) Java language .
@@ -119,11 +145,6 @@
 
 ## Update 90 Login Screen
 ![Login Screen](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png)
-
-
-## Update 90 Main Mode
-![Main Mode](https://user-images.githubusercontent.com/20374208/32696558-e9bab2f6-c783-11e7-9b63-409cda833ed9.png)
-
 
 ## Update 89 DJMode
 ![DJMode](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png)
