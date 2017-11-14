@@ -102,7 +102,7 @@
 To build XR3Player, you will need:
 
 * [JDK 8+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) - Oracle or OpenJDK
-* [maven](http://maven.apache.org/) - Version 3 recommended
+* [Maven](http://maven.apache.org/) - Version 3 recommended
 
 After installing these tools simply run 'mvn clean package' and find the jar in the target folder.
 
@@ -114,7 +114,7 @@ Other Useful maven lifecycles:
 
 # Contributing
 
-If you have added a feature or fixed a bug in mp3agic please submit a pull request as follows:
+If you have added a feature or fixed a bug in XR3Player please submit a pull request as follows:
 
 * Fork the project
 * Write the code for your feature or bug fix
@@ -150,7 +150,7 @@ If you have added a feature or fixed a bug in mp3agic please submit a pull reque
 ![DJMode](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png)
 
 
-# Amazing Visualizations
+# Visualizer Video 1
 [![Visualizer](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo)
 
 ---------
