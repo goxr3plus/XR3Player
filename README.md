@@ -112,7 +112,7 @@ Other Useful maven lifecycles:
 * compile - compile the library
 * package - package compiled code into a jar
 
-# Contributing
+## Contributing
 
 If you have added a feature or fixed a bug in XR3Player please submit a pull request as follows:
 
