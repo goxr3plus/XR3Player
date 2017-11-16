@@ -1,6 +1,4 @@
-
-	
- *{
+*{
  	-light-black: rgb(74.0, 75.0, 78.0);
     -dark-highlight: rgb(87.0, 89.0, 92.0);
     -dark-black: rgb(39.0, 40.0, 40.0);
@@ -1085,7 +1083,6 @@
 
 .tree-cell-2 {
     -fx-text-fill: firebrick ;
-    -fx-font-weight:bold;
 }
 
 .tree-cell-2:selected {

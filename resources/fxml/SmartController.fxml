@@ -154,7 +154,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </MenuItem>
-                                        <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import File">
+                                        <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import Files">
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">
                                                    <image>
