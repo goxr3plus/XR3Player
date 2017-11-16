@@ -203,5 +203,11 @@
 			<artifactId>JavaFX-Web-Browser</artifactId>
 			<version>V3.0.0</version>
 		</dependency>
+		<!-- Dropbox -->
+		<dependency>
+			<groupId>com.dropbox.core</groupId>
+			<artifactId>dropbox-core-sdk</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 	</dependencies>
 </project>

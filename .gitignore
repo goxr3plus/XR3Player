@@ -46,7 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Ignore XR3Player test code
+# Ignore XR3Player folders
 /XR3Database
 /rubbishCode
 *.flac
@@ -55,3 +55,8 @@ Temporary Items
 /target/
 
 /libraries
+dropbox-app-tokens.json
+
+/downloads
+/uploads
+dropbox-app-info.json
