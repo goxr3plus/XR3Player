@@ -45,6 +45,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.JavaFXWebBrowser.browser.WebBrowserController;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
+import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.application.database.DbManager;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.modes.djmode.DJMode;
@@ -90,7 +91,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaFilterSer
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
-import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * The Main class from which the application is starting.
@@ -282,8 +282,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		width = 1380;
-		height = 800;
+		//width = 1380;
+		//height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();

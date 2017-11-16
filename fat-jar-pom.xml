@@ -5,7 +5,7 @@
 
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
-	<version>3.0.90</version>
+	<version>3.0.91</version>
 	<name>XR3Player</name>
 	<description>Dominant Future Generation JavaFX Media Player</description>
 	<url>https://github.com/goxr3plus/XR3Player</url>
@@ -208,11 +208,24 @@
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
+			
 		<!-- WEB BROWSER SUPPORT -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
 			<version>V3.0.0</version>
+		</dependency>
+		<!-- XR3Capture -->
+		<dependency>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>xr3capture</artifactId>
+			<version>V3.11</version>
+		</dependency>
+		<!-- Dropbox -->
+		<dependency>
+			<groupId>com.dropbox.core</groupId>
+			<artifactId>dropbox-core-sdk</artifactId>
+			<version>3.0.5</version>
 		</dependency>
 	</dependencies>
 </project>

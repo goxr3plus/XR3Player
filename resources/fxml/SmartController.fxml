@@ -270,7 +270,7 @@
             <Insets top="25.0" />
          </padding>
       </VBox>
-      <VBox fx:id="reloadVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" style="-fx-background-color: rgb(40,40,40,0.95);">
+      <VBox fx:id="reloadVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
             <Button fx:id="reloadPlayListButton" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="666.0" style="-fx-background-radius: 0; -fx-font-size: 35; -fx-font-weight: bold;" text="Reload Playlist" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                <tooltip>

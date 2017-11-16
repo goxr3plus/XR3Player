@@ -56,6 +56,9 @@ public class SmartControllerFoldersMode extends StackPane {
 	private Label detailsLabel;
 	
 	@FXML
+	private Button backToMedia;
+	
+	@FXML
 	private VBox indicatorVBox;
 	
 	@FXML
@@ -216,6 +219,9 @@ public class SmartControllerFoldersMode extends StackPane {
 			Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS);
 		});
 		
+		//backToMedia
+		backToMedia.setOnAction(a -> smartController.getModesTabPane().getSelectionModel().select(0));
+		
 	}
 	
 	/**
@@ -232,8 +238,7 @@ public class SmartControllerFoldersMode extends StackPane {
 	}
 	
 	/**
-	 * Recreates the tree from the bottom based on the SmartController
-	 * 1)Settings 2)Files
+	 * Recreates the tree from the bottom based on the SmartController 1)Settings 2)Files
 	 */
 	public void recreateTree() {
 		

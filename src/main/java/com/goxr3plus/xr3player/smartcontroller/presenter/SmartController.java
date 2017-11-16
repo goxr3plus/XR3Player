@@ -1270,6 +1270,14 @@ public class SmartController extends StackPane {
 	public VBox getReloadVBox() {
 		return reloadVBox;
 	}
+
+	/**
+	 * @return the modesTabPane
+	 */
+	public JFXTabPane getModesTabPane() {
+		return modesTabPane;
+	}
+
 	
 	/*-----------------------------------------------------------------------
 	 * 

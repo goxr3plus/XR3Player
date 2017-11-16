@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -80,16 +82,30 @@
                   <TreeView fx:id="treeView" />
                </children>
             </VBox>
-            <Label fx:id="detailsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" visible="false" wrapText="true">
+            <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" wrapText="true">
                <tooltip>
                   <Tooltip text="Displays from which folders the Playlist Media are coming from ..." />
                </tooltip>
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/Playlist-32.png" />
-                     </image>
-                  </ImageView>
+                  <Button fx:id="backToMedia" mnemonicParsing="false" text="Back to Media" textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Playlist-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <Reflection>
+                           <input>
+                              <DropShadow />
+                           </input>
+                        </Reflection>
+                     </effect>
+                  </Button>
                </graphic>
             </Label>
          </children>
