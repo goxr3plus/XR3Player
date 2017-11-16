@@ -47,6 +47,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -108,7 +109,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane diskStackPane;
 	
 	@FXML
-	private ToggleButton muteButton;
+	private VBox vBox1;
 	
 	@FXML
 	private Button playPauseButton;
@@ -117,7 +118,34 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button stopButton;
 	
 	@FXML
+	private ToggleButton muteButton;
+	
+	@FXML
 	private Button replayButton;
+	
+	@FXML
+	private HBox hBox1;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private Label elapsedTimeLabel;
+	
+	@FXML
+	private Label remainingTimeLabel;
+	
+	@FXML
+	private Label totalTimeLabel;
+	
+	@FXML
+	private Button previousSongButton;
+	
+	@FXML
+	private Button nextSongButton;
 	
 	@FXML
 	private StackPane visualizerStackPane;
@@ -157,27 +185,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button mediaTagImageButton;
-	
-	@FXML
-	private Label elapsedTimeLabel;
-	
-	@FXML
-	private Label remainingTimeLabel;
-	
-	@FXML
-	private Label totalTimeLabel;
-	
-	@FXML
-	private Button previousSongButton;
-	
-	@FXML
-	private Button backwardButton;
-	
-	@FXML
-	private Button forwardButton;
-	
-	@FXML
-	private Button nextSongButton;
 	
 	@FXML
 	private Tab equalizerTab;
@@ -937,7 +944,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, vBox);
 		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS)		
-		diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
+		//	diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
+		discBorderPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
+		//	diskStackPane.boundsInParentProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
 		
 		//Add disc and volume disc to StackPane
 		diskStackPane.getChildren().addAll(disc, volumeDisc);
@@ -947,10 +956,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * Recalculates the Canvas size to the preferred size
 	 */
 	private void reCalculateCanvasSize() {
-		double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1;
+		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1;
+		
+		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - hBox1.getHeight() - vBox1.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size, size);
-		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight());
+		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
 		//System.out.println("Redrawing canvas")
 	}
 	
@@ -958,10 +969,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * Makes the DJDisc fit correctly into it's StackPane
 	 */
 	public void reCalculateDiscStackPane() {
+		
 		//Call it for the DJDisc
 		reCalculateCanvasSize();
 		
-		//System.out.println(disc.getPrefWidth());
+		//System.out.println(disc.getPrefWidth())
 		
 		//Find the correct size for the VolumeDisc			
 		double size;
@@ -992,7 +1004,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// Mute?
 		xPlayer.setMute(muteButton.isSelected());
-		//System.out.println("Mute is Selected? " + muteButton.isSelected());
+		//System.out.println("Mute is Selected? " + muteButton.isSelected())
 		
 		// Volume
 		controlVolume();
@@ -1519,6 +1531,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public Marquee getMediaFileMarquee() {
 		return mediaFileMarquee;
+	}
+	
+	/**
+	 * @return the diskStackPane
+	 */
+	public StackPane getDiskStackPane() {
+		return diskStackPane;
 	}
 	
 }

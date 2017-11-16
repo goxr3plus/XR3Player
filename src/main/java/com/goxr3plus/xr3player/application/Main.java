@@ -137,8 +137,7 @@ public class Main extends Application {
 	public static final TagWindow tagWindow = new TagWindow();
 	
 	/**
-	 * This window is being used to export files from the application to the
-	 * outside world
+	 * This window is being used to export files from the application to the outside world
 	 */
 	public static final ExportWindowController exportWindow = new ExportWindowController();
 	
@@ -154,8 +153,7 @@ public class Main extends Application {
 	public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
 	
 	/**
-	 * This class is used to capture the computer Screen or a part of it [ Check
-	 * XR3Capture package]
+	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
 	 */
 	public static CaptureWindow captureWindow = new CaptureWindow();
 	
@@ -253,20 +251,17 @@ public class Main extends Application {
 	public static PlayListModesSplitPane playListModesSplitPane = new PlayListModesSplitPane();
 	
 	/**
-	 * The Login Mode where the user of the applications has to choose an
-	 * account to login
+	 * The Login Mode where the user of the applications has to choose an account to login
 	 */
 	public static LoginMode loginMode = new LoginMode();
 	
 	/**
-	 * Entering in this mode you can change the user settings and other things
-	 * that have to do with the user....
+	 * Entering in this mode you can change the user settings and other things that have to do with the user....
 	 */
 	public static UserMode userMode = new UserMode();
 	
 	/**
-	 * This JavaFX TabPane represents a TabPane for Navigation between
-	 * application Modes
+	 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
 	 */
 	public static JFXTabPane specialJFXTabPane = new JFXTabPane();
 	
@@ -346,11 +341,9 @@ public class Main extends Application {
 		
 		applicationProperties.setUpdatePropertiesLocked(false);
 		
-			
 		//------------------Experiments------------------
 		// ScenicView.show(scene)
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
-		
 		
 		//XR3AutoUpdater exit message
 		System.out.println("XR3Player ready to rock!");
@@ -622,8 +615,7 @@ public class Main extends Application {
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * Checks if the Current Java Version is the appropriate for the application
-	 * [[SuppressWarningsSpartan]]
+	 * Checks if the Current Java Version is the appropriate for the application [[SuppressWarningsSpartan]]
 	 */
 	private void checkJavaCombatibility() {
 		
@@ -794,8 +786,7 @@ public class Main extends Application {
 	static boolean backgroundFound;
 	
 	/**
-	 * Determines the background image of the application based on if a custom
-	 * image exists inside the database .If not then the default image is being
+	 * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is being
 	 * added :)
 	 * 
 	 */
