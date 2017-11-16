@@ -51,6 +51,7 @@ public class Dropbox {
 		
 		//Create the Client
 		DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+		System.out.println(client.files().getTemporaryLink("/musica/troyboi - medusa dayz.mp3").getLink());
 		
 		// Get current account info
 		FullAccount account = client.users().getCurrentAccount();

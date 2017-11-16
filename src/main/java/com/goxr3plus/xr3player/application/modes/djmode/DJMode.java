@@ -93,74 +93,75 @@ public class DJMode extends BorderPane {
 	/**
 	 * Adds the appropriate key listeners to the Parent.
 	 */
+	@Deprecated
 	private final void addKeyListeners() {
 		
-		// Key Pressed Events
-		setOnKeyPressed(key -> {
-			
-			KeyCode keyCode = key.getCode();
-			
-			// -->Xplayer_1||XPlayer_2 Volume++
-			if (keyCode == KeyCode.W) {
-				
-				if (key.isShiftDown()) {
-					if (Main.xPlayersList.getXPlayerController(1).getVolume() < 101) {
-						Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
-					}
-				} else if (key.isControlDown()) {
-					if (Main.xPlayersList.getXPlayerController(2).getVolume() < 101) {
-						Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
-					}
-				}
-				
-				// -->Xplayer_1||XPlayer_2 Volume--
-			} else if (keyCode == KeyCode.Q) {
-				
-				if (key.isShiftDown()) {
-					if (Main.xPlayersList.getXPlayerController(1).getVolume() > -1) {
-						Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
-					}
-				} else if (key.isControlDown()) {
-					if (Main.xPlayersList.getXPlayerController(2).getVolume() > -1) {
-						Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
-					}
-				}
-			}
-			
-		});
-		
-		setOnKeyReleased(key -> {
-			KeyCode keyCode = key.getCode();
-			
-			// Xplayer_1||Xplayer2.Resume
-			if (keyCode == KeyCode.DIGIT1) {
-				
-				if (key.isShiftDown())
-					Main.xPlayersList.getXPlayer(1).resume();
-				else if (key.isControlDown())
-					Main.xPlayersList.getXPlayer(2).resume();
-				
-				// Xplayer_1||Xplayer_2.Pause
-			} else if (keyCode == KeyCode.DIGIT2) {
-				
-				if (key.isShiftDown())
-					Main.xPlayersList.getXPlayer(1).pause();
-				else if (key.isControlDown())
-					Main.xPlayersList.getXPlayer(2).pause();
-				
-				// Xplayer_1||Xplayer_2.Stop
-			} else if (keyCode == KeyCode.DIGIT3) {
-				
-				if (key.isShiftDown()) {
-					if (Main.xPlayersList.getXPlayer(1).isPausedOrPlaying())
-						Main.xPlayersList.getXPlayer(1).stop();
-				} else if (key.isControlDown() && Main.xPlayersList.getXPlayer(2).isPausedOrPlaying())
-					Main.xPlayersList.getXPlayer(2).stop();
-				
-				// DJBeats
-			}
-			
-		});
+//		// Key Pressed Events
+//		setOnKeyPressed(key -> {
+//			
+//			KeyCode keyCode = key.getCode();
+//			
+//			// -->Xplayer_1||XPlayer_2 Volume++
+//			if (keyCode == KeyCode.W) {
+//				
+//				if (key.isShiftDown()) {
+//					if (Main.xPlayersList.getXPlayerController(1).getVolume() < 101) {
+//						Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() + 1);
+//					}
+//				} else if (key.isControlDown()) {
+//					if (Main.xPlayersList.getXPlayerController(2).getVolume() < 101) {
+//						Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() + 1);
+//					}
+//				}
+//				
+//				// -->Xplayer_1||XPlayer_2 Volume--
+//			} else if (keyCode == KeyCode.Q) {
+//				
+//				if (key.isShiftDown()) {
+//					if (Main.xPlayersList.getXPlayerController(1).getVolume() > -1) {
+//						Main.xPlayersList.getXPlayerController(1).setVolume(Main.xPlayersList.getXPlayerController(1).getVolume() - 1);
+//					}
+//				} else if (key.isControlDown()) {
+//					if (Main.xPlayersList.getXPlayerController(2).getVolume() > -1) {
+//						Main.xPlayersList.getXPlayerController(2).setVolume(Main.xPlayersList.getXPlayerController(2).getVolume() - 1);
+//					}
+//				}
+//			}
+//			
+//		});
+//		
+//		setOnKeyReleased(key -> {
+//			KeyCode keyCode = key.getCode();
+//			
+//			// Xplayer_1||Xplayer2.Resume
+//			if (keyCode == KeyCode.DIGIT1) {
+//				
+//				if (key.isShiftDown())
+//					Main.xPlayersList.getXPlayer(1).resume();
+//				else if (key.isControlDown())
+//					Main.xPlayersList.getXPlayer(2).resume();
+//				
+//				// Xplayer_1||Xplayer_2.Pause
+//			} else if (keyCode == KeyCode.DIGIT2) {
+//				
+//				if (key.isShiftDown())
+//					Main.xPlayersList.getXPlayer(1).pause();
+//				else if (key.isControlDown())
+//					Main.xPlayersList.getXPlayer(2).pause();
+//				
+//				// Xplayer_1||Xplayer_2.Stop
+//			} else if (keyCode == KeyCode.DIGIT3) {
+//				
+//				if (key.isShiftDown()) {
+//					if (Main.xPlayersList.getXPlayer(1).isPausedOrPlaying())
+//						Main.xPlayersList.getXPlayer(1).stop();
+//				} else if (key.isControlDown() && Main.xPlayersList.getXPlayer(2).isPausedOrPlaying())
+//					Main.xPlayersList.getXPlayer(2).stop();
+//				
+//				// DJBeats
+//			}
+//			
+//		});
 		
 	}
 	

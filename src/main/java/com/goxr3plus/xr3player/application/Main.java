@@ -287,8 +287,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		//width = 1380;
-		//height = 800;
+		width = 1380;
+		height = 800;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();

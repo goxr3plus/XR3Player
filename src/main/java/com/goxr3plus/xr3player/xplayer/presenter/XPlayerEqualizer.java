@@ -33,16 +33,16 @@ public class XPlayerEqualizer extends BorderPane {
 	private HBox bottomHBox;
 	
 	@FXML
-	private VBox sideVBox;
+	private TilePane tilePane;
+	
+	@FXML
+	private HBox hbox;
 	
 	@FXML
 	private Menu presets;
 	
 	@FXML
 	private MenuItem resetFilters;
-	
-	@FXML
-	private TilePane tilePane;
 	
 	//----------------------------------------------------
 	
@@ -159,7 +159,7 @@ public class XPlayerEqualizer extends BorderPane {
 		//Add the Children
 		vBox2.getChildren().addAll(balanceFilter, balanceFilter.getFilterLabel());
 		
-		sideVBox.getChildren().addAll(vBox);
+		hbox.getChildren().addAll(vBox);
 		
 		//resetFilers
 		resetFilters.setOnAction(action -> {

@@ -15,7 +15,7 @@
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <items>
-            <HBox fx:id="hBox" alignment="CENTER" spacing="4.0" SplitPane.resizableWithParent="false">
+            <HBox fx:id="hBox" alignment="CENTER" minWidth="0.0" spacing="4.0" SplitPane.resizableWithParent="false">
                <children>
                   <StackPane minHeight="0.0" prefHeight="150.0" prefWidth="200.0">
                      <children>
