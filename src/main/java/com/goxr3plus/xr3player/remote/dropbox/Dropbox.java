@@ -9,12 +9,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
-import com.dropbox.core.v1.DbxClientV1;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DeletedMetadata;
 import com.dropbox.core.v2.files.DownloadErrorException;
@@ -69,7 +69,7 @@ public class Dropbox {
 		
 	}
 	
-	public static void listAllFiles(DbxClientV2 client , String path , TreeMap<String,Metadata> children , ArrayList<String> arrayList) {
+	public static void listAllFiles(DbxClientV2 client , String path , SortedMap<String,Metadata> children , List<String> arrayList) {
 		try {
 			ListFolderResult result = null;
 			try {
@@ -187,11 +187,8 @@ public class Dropbox {
 		System.out.println("Size : " + InfoTool.getFileSizeEdited(size));
 		
 		//Try to upload the File
-		uploader.uploadAndFinish(new ProgressInputStream(fileInput, size, new ProgressInputStream.Listener() {
-			@Override
-			public void uploadProgress(long completed , long totalSize) {
+		uploader.uploadAndFinish(new ProgressInputStream(fileInput, size,(long completed , long totalSize) -> {
 				System.out.println( ( completed * 100 ) / totalSize + " %");
-			}
 		}));
 		
 	}
