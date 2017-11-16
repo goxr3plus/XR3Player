@@ -346,10 +346,14 @@ public class Main extends Application {
 		
 		applicationProperties.setUpdatePropertiesLocked(false);
 		
+			
 		//------------------Experiments------------------
 		// ScenicView.show(scene)
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
+		
+		//XR3AutoUpdater exit message
+		System.out.println("XR3Player ready to rock!");
 	}
 	
 	private void startPart2() {
