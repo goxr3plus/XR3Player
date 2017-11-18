@@ -10,8 +10,8 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.JuliaSet;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Oscilloscope;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Polyspiral;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sierpinski;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprite3D;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprite3D.Shape3D;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprites3D;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprites3D.Shape3D;
 
 /**
  * The Class VisualizerDrawer.
@@ -24,7 +24,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	private Polyspiral polySpiral = new Polyspiral(this);
 	protected final Sierpinski sierpinski = new Sierpinski(this);
 	private final JuliaSet juliaSet = new JuliaSet(this);
-	private Sprite3D sprite3D = new Sprite3D(this, Shape3D.SPHERE);
+	private Sprites3D sprite3D = new Sprites3D(this, Shape3D.SPHERE);
 	
 	// -----------------------------Images---------------------------------
 	

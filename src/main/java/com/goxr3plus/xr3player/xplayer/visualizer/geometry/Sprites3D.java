@@ -16,7 +16,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawe
 /**
  * The Class Sprite3D.
  */
-public class Sprite3D {
+public class Sprites3D {
 	
 	/**
 	 * The Class Point3D.
@@ -146,7 +146,7 @@ public class Sprite3D {
 	 *
 	 * @param gc the gc
 	 */
-	public Sprite3D(VisualizerDrawer visualizerDrawer, Shape3D shape) {
+	public Sprites3D(VisualizerDrawer visualizerDrawer, Shape3D shape) {
 		// super(gc);
 		this.visualizerDrawer = visualizerDrawer;
 		
