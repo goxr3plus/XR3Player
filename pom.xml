@@ -82,6 +82,38 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- duplicate-finder-maven-plugin -->
+			<plugin>
+				<groupId>org.basepom.maven</groupId>
+				<artifactId>duplicate-finder-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<printEqualFiles>false</printEqualFiles>
+					<failBuildInCaseOfDifferentContentConflict>false</failBuildInCaseOfDifferentContentConflict>
+					<failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict>
+					<failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
+					<checkCompileClasspath>true</checkCompileClasspath>
+					<checkRuntimeClasspath>true</checkRuntimeClasspath>
+					<checkTestClasspath>true</checkTestClasspath>
+					<skip>false</skip>
+					<quiet>false</quiet>
+					<preferLocal>true</preferLocal>
+					<useResultFile>true</useResultFile>
+					<resultFileMinClasspathCount>2</resultFileMinClasspathCount>
+					<resultFile>${project.build.directory}/duplicate-finder-result.xml</resultFile>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -204,12 +236,32 @@
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
 			<version>V3.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.jfoenix</groupId>
+					<artifactId>jfoenix</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-validator</groupId>
+					<artifactId>commons-validator</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- XR3Capture -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>xr3capture</artifactId>
 			<version>V3.11</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.jfoenix</groupId>
+					<artifactId>jfoenix</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.controlsfx</groupId>
+					<artifactId>controlsfx</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Dropbox -->
 		<dependency>
