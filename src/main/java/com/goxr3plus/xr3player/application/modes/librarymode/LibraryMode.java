@@ -118,7 +118,7 @@ public class LibraryMode extends BorderPane {
 	public TeamViewer teamViewer;
 	
 	/** The mechanism behind of opening multiple libraries. */
-	public final MultipleLibraries multipleLibs = new MultipleLibraries();
+	public final OpenedLibrariesView multipleLibs = new OpenedLibrariesView();
 	
 	//--------Images ------------------------------
 	

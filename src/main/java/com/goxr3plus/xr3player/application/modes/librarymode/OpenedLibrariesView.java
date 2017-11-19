@@ -39,7 +39,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
  *
  * @author GOXR3PLUS STUDIO
  */
-public class MultipleLibraries extends StackPane {
+public class OpenedLibrariesView extends StackPane {
 	
 	@FXML
 	private JFXTabPane tabPane;
@@ -65,9 +65,9 @@ public class MultipleLibraries extends StackPane {
 	/**
 	 * Constructor.
 	 */
-	public MultipleLibraries() {
+	public OpenedLibrariesView() {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MultipleLibraries.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "OpenedLibrariesView.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

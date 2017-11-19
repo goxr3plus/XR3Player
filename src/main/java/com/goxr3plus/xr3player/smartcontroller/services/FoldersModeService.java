@@ -220,8 +220,7 @@ public class FoldersModeService extends Service<Void> {
 				}
 				
 				/**
-				 * Count files in a directory (including files in all sub
-				 * directories)
+				 * Count files in a directory (including files in all sub directories)
 				 * 
 				 * @param directory
 				 *            The full path of the directory
