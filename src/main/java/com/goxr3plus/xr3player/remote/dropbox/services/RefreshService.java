@@ -37,6 +37,7 @@ public class RefreshService extends Service<Void> {
 	
 	// Create Dropbox client
 	DbxRequestConfig config = new DbxRequestConfig("XR3Player");
+	DbxClientV2 client;
 	
 	/**
 	 * Constructor
@@ -63,7 +64,8 @@ public class RefreshService extends Service<Void> {
 				try {
 					
 					//Create the Client
-					DbxClientV2 client = new DbxClientV2(config, dropBoxViewer.getAccessToken());
+					if (client == null)
+						client = new DbxClientV2(config, dropBoxViewer.getAccessToken());
 					
 					// Get current account info
 					FullAccount account = client.users().getCurrentAccount();
@@ -107,8 +109,9 @@ public class RefreshService extends Service<Void> {
 								boolean subFileOfCurrentFolder = path.equals(parent.replace("\\", "/"));
 								System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
 								
-								//Add to TreeView
+								//Add to TreeView						
 								Platform.runLater(() -> {
+									
 									dropBoxViewer.getRoot().getChildren().add(new RemoteFileTreeItem(folder));
 								});
 								
