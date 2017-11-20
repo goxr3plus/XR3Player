@@ -84,7 +84,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </JFXCheckBox>
-                              <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="189.0">
+                              <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="232.0">
                                  <children>
                                     <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
                                        <tooltip>
@@ -131,6 +131,18 @@
                                        <HBox.margin>
                                           <Insets bottom="2.0" top="2.0" />
                                        </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton">
+                                       <tooltip>
+                                          <Tooltip text="Open Playlist Settings" />
+                                       </tooltip>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/gear.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
                                  </children>
                               </HBox>
@@ -190,15 +202,6 @@
                                                 </ImageView>
                                              </graphic>
                                           </Menu>
-                                          <MenuItem fx:id="showSettings" mnemonicParsing="false" text="Settings">
-                                             <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/gear.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
                                           <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">

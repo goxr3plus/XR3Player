@@ -92,5 +92,6 @@ public class EmotionsTabPane extends StackPane {
 	public JFXTabPane getTabPane() {
 		return tabPane;
 	}
+
 	
 }

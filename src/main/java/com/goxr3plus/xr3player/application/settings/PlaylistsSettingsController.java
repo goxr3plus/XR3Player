@@ -110,6 +110,7 @@ public class PlaylistsSettingsController extends BorderPane {
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
 			
+			System.out.println("Maximum per playlist are : ...");
 			int maximumPerPlaylist = getMaximumPerPlaylist();
 			
 			//First Update all the Libraries

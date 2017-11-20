@@ -105,6 +105,9 @@ public class SmartController extends StackPane {
 	private Button next;
 	
 	@FXML
+	private Button settings;
+	
+	@FXML
 	private MenuButton toolsMenuButton;
 	
 	@FXML
@@ -118,9 +121,6 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private MenuItem exportFiles;
-	
-	@FXML
-	private MenuItem showSettings;
 	
 	@FXML
 	private MenuItem clearAll;
@@ -151,8 +151,7 @@ public class SmartController extends StackPane {
 	private final Genre genre;
 	
 	/**
-	 * The name of the database table (eg. @see
-	 * ActionTool.returnRandomTableName())
+	 * The name of the database table (eg. @see ActionTool.returnRandomTableName())
 	 */
 	private final String dataBaseTableName;
 	
@@ -177,7 +176,8 @@ public class SmartController extends StackPane {
 	private IntegerProperty currentPage = new SimpleIntegerProperty(0);
 	
 	/** Maximum items allowed per page. */
-	private int maximumPerPage = 50;
+	public static int DEFAULT_MAXIMUM_PER_PAGE = 50;
+	private int maximumPerPage = DEFAULT_MAXIMUM_PER_PAGE;
 	
 	// ---------Services--------------------------
 	
@@ -214,14 +214,12 @@ public class SmartController extends StackPane {
 	// --------------------------------------------------
 	
 	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer without
-	 * the search activated
+	 * The Vertical ScrollBar position of SmartController TableViewer without the search activated
 	 */
 	private double verticalScrollValueWithoutSearch = -1;
 	
 	/**
-	 * The Vertical ScrollBar position of SmartController TableViewer when the
-	 * the search activated
+	 * The Vertical ScrollBar position of SmartController TableViewer when the the search activated
 	 */
 	private double verticalScrollValueWithSearch = -1;
 	
@@ -452,8 +450,11 @@ public class SmartController extends StackPane {
 			}
 		});
 		
-		//showSettings
-		showSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS));
+		//settings
+		settings.setOnAction(a -> {
+			Main.settingsWindow.getPlayListsSettingsController().getInnerTabPane().getSelectionModel().select(1);
+			Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS);
+		});
 		
 		//importFolder
 		importFolder.setOnAction(a -> {
@@ -547,8 +548,7 @@ public class SmartController extends StackPane {
 	 */
 	
 	/**
-	 * Prepares the delete operation when more than one Media files will be
-	 * deleted.
+	 * Prepares the delete operation when more than one Media files will be deleted.
 	 *
 	 * @param permanent
 	 *            <br>
@@ -577,8 +577,7 @@ public class SmartController extends StackPane {
 	 *
 	 * @param permanent
 	 *            <br>
-	 *            true->storage medium + (play list)/library false->only from
-	 *            (play list)/library<br>
+	 *            true->storage medium + (play list)/library false->only from (play list)/library<br>
 	 */
 	private void removeSelected(boolean permanent) {
 		
@@ -730,8 +729,7 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * This method is used from updateLabel() method to append Text to
-	 * detailsCssTextArea
+	 * This method is used from updateLabel() method to append Text to detailsCssTextArea
 	 * 
 	 * @param text1
 	 * @param text2
@@ -854,8 +852,7 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Calculates the total entries in the database table [it MUST be called
-	 * from external thread cause it may lag the application ]
+	 * Calculates the total entries in the database table [it MUST be called from external thread cause it may lag the application ]
 	 */
 	public synchronized void calculateTotalEntries() {
 		// calculate the total entries
@@ -973,15 +970,23 @@ public class SmartController extends StackPane {
 	 * 
 	 * @param newMaximumPerPage
 	 * @param updateSmartController
-	 *            If true the loadService will start (Memory consuming ;( ) use
-	 *            with great care
+	 *            If true the loadService will start (Memory consuming ;( ) use with great care
 	 */
 	public void setNewMaximumPerPage(int newMaximumPerPage , boolean updateSmartController) {
 		if (maximumPerPage == newMaximumPerPage)
 			return;
 		
-		//Change it
-		currentPage.set( ( maximumPerPage == 50 ) ? currentPage.get() / 2 : currentPage.get() * 2 + ( currentPage.get() % 2 == 0 ? 0 : 1 ));
+		//We need to know how much percent the newMaximumPerPage is to the oldMaximumPerPage
+		
+		//------------------------ I FOLLOW THE BELOW PRINCIPAL -------------------------
+		
+		//[If you want to know what percent A is of B, you simple divide A by B,
+		//then take that number and move the decimal place two spaces to the right.That's your percentage!]
+		//so...........
+		
+		double formula = (double) maximumPerPage / newMaximumPerPage;
+		currentPage.set((int) ( currentPage.get() * formula ));
+		//currentPage.set( ( maximumPerPage == 50 ) ? currentPage.get() / 2 : currentPage.get() * 2 + ( currentPage.get() % 2 == 0 ? 0 : 1 ));
 		maximumPerPage = newMaximumPerPage;
 		reloadVBox.setVisible(true);
 		//if (updateSmartController && isFree(false))
@@ -1133,8 +1138,7 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * Return the number of the final List counting from <b>firstList->0
-	 * SecondList->1 ....</b>
+	 * Return the number of the final List counting from <b>firstList->0 SecondList->1 ....</b>
 	 *
 	 * @return the int
 	 */
@@ -1270,14 +1274,13 @@ public class SmartController extends StackPane {
 	public VBox getReloadVBox() {
 		return reloadVBox;
 	}
-
+	
 	/**
 	 * @return the modesTabPane
 	 */
 	public JFXTabPane getModesTabPane() {
 		return modesTabPane;
 	}
-
 	
 	/*-----------------------------------------------------------------------
 	 * 

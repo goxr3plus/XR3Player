@@ -13,9 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
+
+import com.dropbox.core.v2.teamlog.TimeUnit;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -202,16 +205,14 @@ public class DbManager {
 	}
 	
 	/**
-	 * Using this methods to control commits across the application so not to
-	 * have unexpected lags.
+	 * Using this methods to control commits across the application so not to have unexpected lags.
 	 */
 	public void commit() {
 		commitExecutor.execute(commitRunnable);
 	}
 	
 	/**
-	 * Using this methods to control commit + vacuum across the application so
-	 * not to have unexpected lags.
+	 * Using this methods to control commit + vacuum across the application so not to have unexpected lags.
 	 * 
 	 */
 	public void commitAndVacuum() {
@@ -305,9 +306,7 @@ public class DbManager {
 	}
 	
 	/**
-	 * Loads all [ Opened-Libraries ] and the [ Last-Opened-Library ] as
-	 * properties from the UserInformation.properties file
-	 * [[SuppressWarningsSpartan]]
+	 * Loads all [ Opened-Libraries ] and the [ Last-Opened-Library ] as properties from the UserInformation.properties file [[SuppressWarningsSpartan]]
 	 */
 	public void loadOpenedLibraries() {
 		
@@ -337,19 +336,35 @@ public class DbManager {
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {
+				
+				//Library Mode Tab Pane Selection Listener
 				Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
 					
-					// Give a refresh to the newly selected ,!! ONLY IF IT HAS NO ITEMS !! 
-					if (!Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && ( (SmartController) newTab.getContent() ).isFree(false)
-							&& ( (SmartController) newTab.getContent() ).getItemsObservableList().isEmpty()) {
+					// Give refresh based on the below formula
+					SmartController smartController = ( (SmartController) newTab.getContent() );
+					if ( ( !Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
+							|| smartController.getReloadVBox().isVisible()) {
 						
-						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, false);
+						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
 						
 						storeOpenedLibraries();
 					}
 					
-					//System.out.println("Changed...");
+					//System.out.println("Changed...")
 					storeLastOpenedLibrary();
+				});
+				
+				//Emotion Lists Tab Pane Selection Listener
+				Main.emotionsTabPane.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
+					
+					// Give refresh based on the below formula
+					SmartController smartController = ( (SmartController) newTab.getContent() );
+					if ( ( !Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
+							|| smartController.getReloadVBox().isVisible()) {
+						
+						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
+						
+					}
 				});
 				
 				//Load the Last Opened Library
@@ -374,8 +389,7 @@ public class DbManager {
 	}
 	
 	/**
-	 * Stores the last opened library - That means the library that was selected
-	 * on the Multiple Libraries Tab Pane <br>
+	 * Stores the last opened library - That means the library that was selected on the Multiple Libraries Tab Pane <br>
 	 * !Must be called from JavaFX Thread!
 	 */
 	private void storeLastOpenedLibrary() {
@@ -398,8 +412,7 @@ public class DbManager {
 	}
 	
 	/**
-	 * Stores all the opened libraries and the last selected one as properties
-	 * to the UserInformation.properties file <br>
+	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
 	 * !Must be called from JavaFX Thread!
 	 * 
 	 * @param openedLibrariesTabs
@@ -480,9 +493,9 @@ public class DbManager {
 			return new Task<Void>() {
 				@Override
 				protected Void call() throws Exception {
-					int totalSteps = 4;
+					//int totalSteps = 4;				
 					
-					// -------------------------- Load all the libraries
+					// -------------------------- Load all the libraries -------------------------------------------------
 					try (ResultSet resultSet = getConnection().createStatement().executeQuery("SELECT* FROM LIBRARIES;");
 							ResultSet dbCounter = getConnection().createStatement().executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
 						
@@ -520,12 +533,35 @@ public class DbManager {
 							//Add all the Libraries to the Library Viewer
 							Main.libraryMode.teamViewer.getViewer().addMultipleItems(libraries);
 							
-							//Change Label Text
-							Main.updateScreen.getLabel().setText("Loading Opened Libraries...");
 						});
 						
-						//Update the Progress
-						//updateProgress(2, totalSteps);
+						//Load PlayerMediaList
+						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Emotion Lists..."));
+						Main.playedSongs.uploadFromDataBase();
+						Main.emotionListsController.hatedMediaList.uploadFromDataBase();
+						Main.emotionListsController.dislikedMediaList.uploadFromDataBase();
+						Main.emotionListsController.likedMediaList.uploadFromDataBase();
+						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
+						
+						//-----------------------Load the application settings-------------------------------		
+						CountDownLatch countDown1 = new CountDownLatch(1);
+						Platform.runLater(() -> {
+							//Change label text
+							Main.updateScreen.getLabel().setText("Loading Settings...");
+							
+							//Load application settings
+							ApplicationSettingsLoader.loadApplicationSettings();
+							
+							//Change Label Text
+							Main.updateScreen.getLabel().setText("Loading Opened Libraries...");
+							
+							//Count down
+							countDown1.countDown();
+							
+						});
+						
+						//Wait for the application settings to be loaded
+						countDown1.await();
 						
 						//Load the Opened Libraries
 						loadOpenedLibraries();
@@ -541,24 +577,14 @@ public class DbManager {
 							
 						});
 						
-						//Load PlayerMediaList
-						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading database data..."));
-						Main.playedSongs.uploadFromDataBase();
-						Main.emotionListsController.hatedMediaList.uploadFromDataBase();
-						Main.emotionListsController.dislikedMediaList.uploadFromDataBase();
-						Main.emotionListsController.likedMediaList.uploadFromDataBase();
-						Main.emotionListsController.lovedMediaList.uploadFromDataBase();
-						
-						//Update the Progress
-						//updateProgress(3, totalSteps);
-						
+						//
 						Platform.runLater(() -> {
 							
 							//Change Label Text
-							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading User Settings Part ( 1 )..."));
+							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Bindings..."));
 							
 							//Update the emotion smart controller 
-							Main.emotionListsController.updateEmotionSmartControllers(true, true, true, true);
+							Main.emotionListsController.updateEmotionSmartControllers(true, false, false, false);
 							
 							//Refresh all the XPlayers PlayLists
 							Main.xPlayersList.getList().stream()
@@ -578,12 +604,6 @@ public class DbManager {
 							//For XPLayersLists
 							Main.xPlayersList.getList().stream().forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch()
 									.selectedProperty().bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
-							
-							//Change Label Text
-							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading User Settings Part ( 2 )..."));
-							
-							//-----------------------Load the application settings-------------------------------					
-							ApplicationSettingsLoader.loadApplicationSettings();
 							
 						});
 						
