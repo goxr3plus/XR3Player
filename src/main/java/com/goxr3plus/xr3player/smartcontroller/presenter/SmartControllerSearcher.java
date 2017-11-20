@@ -284,15 +284,15 @@ public class SmartControllerSearcher extends HBox {
 						//try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 						
 						//Fetch the items from the database
-						Platform.runLater(() -> controller.getCancelButton().setText("Validating..."));
+						Platform.runLater(() -> controller.getCancelButton().setText("Adding data to list..."));
 						List<Media> array = new ArrayList<>();
 						for (Audio song = null; resultSet.next();) {
-							//song = new Audio(resultSet.getString("PATH"), 5, 5, "f", "s", controller.genre);
+							//song = new Audio(resultSet.getString("PATH"), 5, 5, "f", "s", controller.genre)
 							song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
 									resultSet.getString("HOUR"), controller.getGenre(), array.size() + 1);
 							array.add(song);
 							
-							// updateProgress(++counter, controller.getMaximumPerPage());
+							// updateProgress(++counter, controller.getMaximumPerPage())
 						}
 						
 						//Add the the items to the observable list
@@ -315,159 +315,159 @@ public class SmartControllerSearcher extends HBox {
 		
 	}
 	
-//	/**
-//	 * This class contains more advanced search features.
-//	 *
-//	 * @author GOXR3PLUS
-//	 */
-//	public static class AdvancedSearch extends BorderPane {
-//		
-//		/** The search field. */
-//		@FXML
-//		private JFXTextField searchField;
-//		
-//		/** The search on fly. */
-//		@FXML
-//		private JFXToggleButton searchOnFly;
-//		
-//		/** The case sensitive. */
-//		@FXML
-//		private JFXCheckBox caseSensitive;
-//		
-//		/** The bottom V box. */
-//		@FXML
-//		private VBox bottomVBox;
-//		
-//		/** The pop over. */
-//		private PopOver popOver = new PopOver();
-//		
-//		/** The controller. */
-//		SmartController controller;
-//		
-//		/**
-//		 * Constructor.
-//		 */
-//		public AdvancedSearch() {
-//			
-//			// Load the f x m l file
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SearchSettings.fxml"));
-//			loader.setController(this);
-//			loader.setRoot(this);
-//			
-//			try {
-//				loader.load();
-//			} catch (IOException ex) {
-//				Main.logger.log(Level.WARNING, "", ex);
-//			}
-//			
-//		}
-//		
-//		/**
-//		 * Called as soon as .fxml has been initialized
-//		 */
-//		@FXML
-//		private void initialize() {
-//			
-//			// TagsBar
-//			//			TagsBar tagsBar = new TagsBar();
-//			//			tagsBar.setMaxWidth(InfoTool.getScreenWidth() / 2.5);
-//			//			tagsBar.getEntries().addAll(RadioStationsController.musicGenres);
-//			//			bottomVBox.getChildren().add(tagsBar);
-//			
-//			// PopOver
-//			popOver.setContentNode(this);
-//			popOver.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-//			popOver.setDetachable(false);
-//			popOver.setAutoHide(true);
-//			popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-//			popOver.setOnHidden(h -> controller.getSearchService().getSearchField().textProperty().unbind());
-//			
-//			// this
-//			setOnMouseEntered(m -> requestFocus());
-//			
-//			searchField.setContextMenu(new ContextMenu());
-//			
-//		}
-//		
-//		/**
-//		 * Search on fly selected.
-//		 *
-//		 * @return true, if successful
-//		 */
-//		public boolean searchOnFlySelected() {
-//			return searchOnFly.isSelected();
-//		}
-//		
-//		/**
-//		 * Shows the Advanced Search with the given parameters.
-//		 *
-//		 * @param node
-//		 *            the node
-//		 * @param controller
-//		 *            the controller
-//		 */
-//		public void show(Node node , SmartController controller) {
-//			searchField.editableProperty().bind(controller.getSearchService().getService().runningProperty().not());
-//			this.controller = controller;
-//			searchField.setText(this.controller.getSearchService().getSearchField().getText());
-//			this.controller.getSearchService().getSearchField().textProperty().bind(searchField.textProperty());
-//			
-//			// Find the correct arrow location
-//			double width = popOver.getWidth();
-//			double height = popOver.getHeight();
-//			Bounds bounds = controller.getSearchService().getSearchField().localToScreen(controller.getSearchService().getSearchField().getBoundsInLocal());
-//			boolean fitOnTop = bounds.getMinY() - height > 0; // top?
-//			boolean fitOnLeft = bounds.getMinX() - width > 0; // left?
-//			boolean fitOnRight = bounds.getMaxX() + width < InfoTool.getScreenWidth();// right?
-//			boolean fitOnBottom = bounds.getMaxY() + height < InfoTool.getScreenHeight(); // bottom?
-//			
-//			if (fitOnTop)
-//				popOver.setArrowLocation(ArrowLocation.BOTTOM_CENTER);
-//			else if (fitOnBottom)
-//				popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-//			else if (fitOnLeft)
-//				popOver.setArrowLocation(ArrowLocation.RIGHT_CENTER);
-//			else if (fitOnRight)
-//				popOver.setArrowLocation(ArrowLocation.LEFT_CENTER);
-//			
-//			popOver.show(node);
-//			searchField.requestFocus();
-//		}
-//		
-//		/**
-//		 * Checks if is showing.
-//		 *
-//		 * @return true, if is showing
-//		 */
-//		public boolean isShowing() {
-//			return popOver.isShowing();
-//		}
-//		
-//		/**
-//		 * Showing property.
-//		 *
-//		 * @return the read only boolean property
-//		 */
-//		public ReadOnlyBooleanProperty showingProperty() {
-//			return popOver.showingProperty();
-//		}
-//		
-//		/**
-//		 * Gets the text for searching.
-//		 *
-//		 * @return the text for searching
-//		 */
-//		public String getTextForSearching() {
-//			return searchField.getText();
-//		}
-//		
-//		/**
-//		 * Hide.
-//		 */
-//		public void hide() {
-//			popOver.hide();
-//		}
-//		
-//	}
+	//	/**
+	//	 * This class contains more advanced search features.
+	//	 *
+	//	 * @author GOXR3PLUS
+	//	 */
+	//	public static class AdvancedSearch extends BorderPane {
+	//		
+	//		/** The search field. */
+	//		@FXML
+	//		private JFXTextField searchField;
+	//		
+	//		/** The search on fly. */
+	//		@FXML
+	//		private JFXToggleButton searchOnFly;
+	//		
+	//		/** The case sensitive. */
+	//		@FXML
+	//		private JFXCheckBox caseSensitive;
+	//		
+	//		/** The bottom V box. */
+	//		@FXML
+	//		private VBox bottomVBox;
+	//		
+	//		/** The pop over. */
+	//		private PopOver popOver = new PopOver();
+	//		
+	//		/** The controller. */
+	//		SmartController controller;
+	//		
+	//		/**
+	//		 * Constructor.
+	//		 */
+	//		public AdvancedSearch() {
+	//			
+	//			// Load the f x m l file
+	//			FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SearchSettings.fxml"));
+	//			loader.setController(this);
+	//			loader.setRoot(this);
+	//			
+	//			try {
+	//				loader.load();
+	//			} catch (IOException ex) {
+	//				Main.logger.log(Level.WARNING, "", ex);
+	//			}
+	//			
+	//		}
+	//		
+	//		/**
+	//		 * Called as soon as .fxml has been initialized
+	//		 */
+	//		@FXML
+	//		private void initialize() {
+	//			
+	//			// TagsBar
+	//			//			TagsBar tagsBar = new TagsBar();
+	//			//			tagsBar.setMaxWidth(InfoTool.getScreenWidth() / 2.5);
+	//			//			tagsBar.getEntries().addAll(RadioStationsController.musicGenres);
+	//			//			bottomVBox.getChildren().add(tagsBar);
+	//			
+	//			// PopOver
+	//			popOver.setContentNode(this);
+	//			popOver.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+	//			popOver.setDetachable(false);
+	//			popOver.setAutoHide(true);
+	//			popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
+	//			popOver.setOnHidden(h -> controller.getSearchService().getSearchField().textProperty().unbind());
+	//			
+	//			// this
+	//			setOnMouseEntered(m -> requestFocus());
+	//			
+	//			searchField.setContextMenu(new ContextMenu());
+	//			
+	//		}
+	//		
+	//		/**
+	//		 * Search on fly selected.
+	//		 *
+	//		 * @return true, if successful
+	//		 */
+	//		public boolean searchOnFlySelected() {
+	//			return searchOnFly.isSelected();
+	//		}
+	//		
+	//		/**
+	//		 * Shows the Advanced Search with the given parameters.
+	//		 *
+	//		 * @param node
+	//		 *            the node
+	//		 * @param controller
+	//		 *            the controller
+	//		 */
+	//		public void show(Node node , SmartController controller) {
+	//			searchField.editableProperty().bind(controller.getSearchService().getService().runningProperty().not());
+	//			this.controller = controller;
+	//			searchField.setText(this.controller.getSearchService().getSearchField().getText());
+	//			this.controller.getSearchService().getSearchField().textProperty().bind(searchField.textProperty());
+	//			
+	//			// Find the correct arrow location
+	//			double width = popOver.getWidth();
+	//			double height = popOver.getHeight();
+	//			Bounds bounds = controller.getSearchService().getSearchField().localToScreen(controller.getSearchService().getSearchField().getBoundsInLocal());
+	//			boolean fitOnTop = bounds.getMinY() - height > 0; // top?
+	//			boolean fitOnLeft = bounds.getMinX() - width > 0; // left?
+	//			boolean fitOnRight = bounds.getMaxX() + width < InfoTool.getScreenWidth();// right?
+	//			boolean fitOnBottom = bounds.getMaxY() + height < InfoTool.getScreenHeight(); // bottom?
+	//			
+	//			if (fitOnTop)
+	//				popOver.setArrowLocation(ArrowLocation.BOTTOM_CENTER);
+	//			else if (fitOnBottom)
+	//				popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
+	//			else if (fitOnLeft)
+	//				popOver.setArrowLocation(ArrowLocation.RIGHT_CENTER);
+	//			else if (fitOnRight)
+	//				popOver.setArrowLocation(ArrowLocation.LEFT_CENTER);
+	//			
+	//			popOver.show(node);
+	//			searchField.requestFocus();
+	//		}
+	//		
+	//		/**
+	//		 * Checks if is showing.
+	//		 *
+	//		 * @return true, if is showing
+	//		 */
+	//		public boolean isShowing() {
+	//			return popOver.isShowing();
+	//		}
+	//		
+	//		/**
+	//		 * Showing property.
+	//		 *
+	//		 * @return the read only boolean property
+	//		 */
+	//		public ReadOnlyBooleanProperty showingProperty() {
+	//			return popOver.showingProperty();
+	//		}
+	//		
+	//		/**
+	//		 * Gets the text for searching.
+	//		 *
+	//		 * @return the text for searching
+	//		 */
+	//		public String getTextForSearching() {
+	//			return searchField.getText();
+	//		}
+	//		
+	//		/**
+	//		 * Hide.
+	//		 */
+	//		public void hide() {
+	//			popOver.hide();
+	//		}
+	//		
+	//	}
 	
 }

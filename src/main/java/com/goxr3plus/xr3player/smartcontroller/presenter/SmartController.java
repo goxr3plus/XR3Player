@@ -20,9 +20,12 @@ import org.fxmisc.richtext.InlineCssTextArea;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTabPane;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,6 +36,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -82,6 +86,9 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private InlineCssTextArea detailCssTextArea;
+	
+	@FXML
+	private Label quickSearchTextField;
 	
 	@FXML
 	private HBox searchBarHBox;
@@ -267,6 +274,10 @@ public class SmartController extends StackPane {
 	
 	//---------------------------------------------------------------------------------------------------------------------
 	
+	/** The pause transition. */
+	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+	private final StringProperty searchWord = new SimpleStringProperty("");
+	
 	/**
 	 * Called as soon as FXML file has been loaded
 	 */
@@ -281,6 +292,8 @@ public class SmartController extends StackPane {
 				goPrevious();
 			else if (key.isControlDown() && code == KeyCode.RIGHT)
 				goNext();
+			else if (key.getCode() == KeyCode.BACK_SPACE)
+				searchWord.set("");
 			else if (tableViewer.getSelectedCount() > 0) { // TableViewer
 				
 				if (code == KeyCode.DELETE && SmartController.this.genre != Genre.SEARCHWINDOW)
@@ -312,31 +325,41 @@ public class SmartController extends StackPane {
 				
 			}
 			
+			//Local Search 
+			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
+				String keySmall = key.getText().toLowerCase();
+				searchWord.set(searchWord.get() + keySmall);
+				pauseTransition.playFromStart();
+				
+				//Check if searchWord is empty
+				if (!searchWord.get().isEmpty()) {
+					boolean[] found = { false };
+					//Find the first matching item
+					getItemsObservableList().forEach(media -> {
+						if (media.getTitle().toLowerCase().contains(searchWord.get()) && !found[0]) {
+							this.tableViewer.getSelectionModel().clearSelection();
+							this.tableViewer.getSelectionModel().select(media);
+							this.tableViewer.scrollTo(media);
+							found[0] = true;
+						}
+					});
+				}
+			}
+			
 		});
+		
+		// PauseTransition
+		pauseTransition.setOnFinished(f -> searchWord.set(""));
+		
+		// QuickSearchTextField
+		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
+		quickSearchTextField.textProperty().bind(searchWord);
 		
 		// ------ tableViewer	
 		centerStackPane.getChildren().add(tableViewer);
 		tableViewer.toBack();
 		
-		// ------ region
-		//indicatorVBox.setVisible(false);
-		
-		// FunIndicator
-		//	FunIndicator funIndicator = new FunIndicator();
-		//	//super.getChildren().add(super.getChildren().size() - 1, funIndicator);
-		//	funIndicator.setPrefSize(50, 50);
-		//	indicatorVBox.getChildren().add(0, funIndicator);
-		//	region.visibleProperty().addListener((observable, oldValue, newValue) -> {
-		//	    if (!region.isVisible())
-		//		funIndicator.pause();
-		//	    else {
-		//		funIndicator.setFromColor(Color.WHITE);
-		//		funIndicator.start();
-		//	    }
-		//	});
-		
 		// ------ progress indicator
-		//funIndicator.visibleProperty().bind(region.visibleProperty());
 		indicator.setVisible(true);
 		//indicator.visibleProperty().bind(region.visibleProperty())
 		indicatorVBox.setVisible(false);
@@ -416,10 +439,6 @@ public class SmartController extends StackPane {
 					});
 				
 			}
-			//	    System.out.println("CurrentPape:" + currentPage.get() + " , PageField:" + Integer.valueOf(pageField.getText()) + " ->"
-			//		    + currentPage.isEqualTo(Integer.valueOf(pageField.getText())).get() + " , Property:"
-			//		    + currentPage.isEqualTo(Integer.valueOf(pageField.getText())));
-			
 		});
 		
 		pageField.setOnAction(handler);
@@ -524,6 +543,8 @@ public class SmartController extends StackPane {
 				reloadVBox.setVisible(false);
 			}
 		});
+		
+		//quickSearchTextField
 		
 	}
 	

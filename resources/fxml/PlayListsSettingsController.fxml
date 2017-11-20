@@ -96,7 +96,6 @@
                                     <RadioMenuItem mnemonicParsing="false" text="300" toggleGroup="$totalFilesShownGroup" />
                                     <RadioMenuItem mnemonicParsing="false" text="400" toggleGroup="$totalFilesShownGroup" />
                                     <RadioMenuItem mnemonicParsing="false" text="500" toggleGroup="$totalFilesShownGroup" />
-                                    <RadioMenuItem mnemonicParsing="false" text="1000" toggleGroup="$totalFilesShownGroup" />
                                  </items>
                               </MenuButton>
                            </children>
