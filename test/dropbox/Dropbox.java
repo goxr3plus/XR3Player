@@ -28,7 +28,6 @@ import com.dropbox.core.v2.files.UploadUploader;
 import com.dropbox.core.v2.users.FullAccount;
 
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressInputStream;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressOutputStream;
 
 /**

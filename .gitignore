@@ -63,3 +63,4 @@ dropbox-app-tokens.json
 /dropbox-app-info.json
 .settings
 /.rebel.xml.bak
+BuildAndDeploy.bat

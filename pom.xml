@@ -231,7 +231,7 @@
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
 
-		<!-- WEB BROWSER SUPPORT -->
+		<!-- WEB BROWSER SUPPORT <dependency> -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
@@ -247,6 +247,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- Locally testing WebBrowser <dependency> <groupId>sample</groupId> 
+			<artifactId>com.sample</artifactId> <version>1.0</version> <scope>system</scope> 
+			<systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.0.0.jar</systemPath> 
+			</dependency> -->
 		<!-- XR3Capture -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
