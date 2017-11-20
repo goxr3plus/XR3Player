@@ -19,7 +19,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;

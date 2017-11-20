@@ -67,7 +67,7 @@ public class RefreshService extends Service<Void> {
 					
 					// Get current account info
 					FullAccount account = client.users().getCurrentAccount();
-					Platform.runLater(() -> dropBoxViewer.getTopLabel().setText("User ~ [ " + account.getName().getDisplayName()));
+					Platform.runLater(() -> dropBoxViewer.getTopLabel().setText(" " + account.getName().getDisplayName()));
 					
 					TreeMap<String,Metadata> children = new TreeMap<>();
 					listAllFiles(client, "", children);
