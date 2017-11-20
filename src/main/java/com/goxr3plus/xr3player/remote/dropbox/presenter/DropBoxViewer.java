@@ -1,6 +1,8 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +21,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
@@ -145,23 +148,42 @@ public class DropBoxViewer extends StackPane {
 	 */
 	public void requestDropBoxAuthorization() {
 		
-		//Show authentication browser
-		authenticationBrowser.showAuthenticationWindow();
-		
-		//Wait for access token
-		authenticationBrowser.accessTokenProperty().addListener((observable , oldValue , newValue) -> {
-			if (!newValue.equals("")) {
-				accessToken = newValue;
-				System.out.println("[" + accessToken + "]");
-				authenticationBrowser.getWindow().close();
-				
-				//loginVBox
-				loginVBox.setVisible(false);
-				
-				//Go Make It
-				recreateTree();
-			}
-		});
+		//Check if already we have an access-token for the user
+		Properties properties = Main.userMode.getUser().getUserInformationDb().loadProperties();
+		accessToken = properties.getProperty("DropBox-Access-Token");
+		if (accessToken != null) {
+			
+			//loginVBox
+			loginVBox.setVisible(false);
+			
+			//Go Make It
+			recreateTree();
+			
+		} else {
+			//Show authentication browser
+			authenticationBrowser.showAuthenticationWindow();
+			
+			//Wait for access token
+			authenticationBrowser.accessTokenProperty().addListener((observable , oldValue , newValue) -> {
+				if (!newValue.equals("")) {
+					accessToken = newValue;
+					
+					//Close the AuthenticationBrowser
+					authenticationBrowser.getWindow().close();
+					
+					//Save on the database
+					Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Token", accessToken);
+					
+					//loginVBox
+					loginVBox.setVisible(false);
+					
+					//Go Make It
+					recreateTree();
+					
+					System.out.println("[" + accessToken + "]");
+				}
+			});
+		}
 	}
 	
 	/**

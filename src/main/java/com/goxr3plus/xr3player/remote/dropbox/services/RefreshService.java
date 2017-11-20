@@ -37,7 +37,7 @@ public class RefreshService extends Service<Void> {
 	
 	// Create Dropbox client
 	DbxRequestConfig config = new DbxRequestConfig("XR3Player");
-	DbxClientV2 client;
+	private DbxClientV2 client;
 	
 	/**
 	 * Constructor
@@ -180,5 +180,11 @@ public class RefreshService extends Service<Void> {
 			}
 		};
 	}
-	
+
+	/**
+	 * @return the client
+	 */
+	public DbxClientV2 getClient() {
+		return client;
+	}
 }

@@ -235,7 +235,7 @@
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
-			<version>V3.0.0</version>
+			<version>V3.1.0</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.jfoenix</groupId>
