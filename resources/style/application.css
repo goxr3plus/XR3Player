@@ -1114,6 +1114,18 @@
 	-fx-fill:white;
 }
 
+.dropbox-progress-indicator{
+	-color:  #007EE5;
+	-fx-accent:linear-gradient(
+        from 0.0px 0.75em to 0.75em 0.0px,
+        repeat,
+        -color 0.0%,
+       -color 49.0%,
+        derive(-color, 30.0%) 50.0%,
+        derive(-color, 30.0%) 99.0%
+    );
+}
+
 /* .progress-bar{
 	-fx-progress-color:orange;
 }

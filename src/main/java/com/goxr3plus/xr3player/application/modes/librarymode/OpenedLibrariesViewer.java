@@ -34,12 +34,11 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
- * Mechanism of showing the opened libraries each opened library is represented
- * by a Tab.
+ * Mechanism of showing the opened libraries each opened library is represented by a Tab.
  *
  * @author GOXR3PLUS STUDIO
  */
-public class OpenedLibrariesView extends StackPane {
+public class OpenedLibrariesViewer extends StackPane {
 	
 	@FXML
 	private JFXTabPane tabPane;
@@ -65,9 +64,9 @@ public class OpenedLibrariesView extends StackPane {
 	/**
 	 * Constructor.
 	 */
-	public OpenedLibrariesView() {
+	public OpenedLibrariesViewer() {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "OpenedLibrariesView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "OpenedLibrariesViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

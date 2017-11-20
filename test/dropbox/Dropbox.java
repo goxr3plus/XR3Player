@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox;
+package dropbox;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -188,8 +188,8 @@ public class Dropbox {
 		System.out.println("Size : " + InfoTool.getFileSizeEdited(size));
 		
 		//Try to upload the File
-		uploader.uploadAndFinish(new ProgressInputStream(fileInput, size,(long completed , long totalSize) -> {
-				System.out.println( ( completed * 100 ) / totalSize + " %");
+		uploader.uploadAndFinish(new ProgressInputStream(fileInput, size, (long completed , long totalSize) -> {
+			System.out.println( ( completed * 100 ) / totalSize + " %");
 		}));
 		
 	}

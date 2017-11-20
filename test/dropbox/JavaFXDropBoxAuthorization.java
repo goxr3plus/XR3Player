@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.authorization;
+package dropbox;
 
 import java.io.BufferedReader;
 import java.io.File;

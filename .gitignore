@@ -59,4 +59,7 @@ dropbox-app-tokens.json
 
 /downloads
 /uploads
-dropbox-app-info.json
+/test
+/dropbox-app-info.json
+.settings
+/.rebel.xml.bak

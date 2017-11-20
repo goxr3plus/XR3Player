@@ -284,7 +284,7 @@ public class SmartControllerSearcher extends HBox {
 						//try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 						
 						//Fetch the items from the database
-						Platform.runLater(() -> controller.getCancelButton().setText("Adding data to list..."));
+						Platform.runLater(() -> controller.getCancelButton().setText("Adding data..."));
 						List<Media> arrayList = new ArrayList<>();
 						while (resultSet.next()) {
 							//Add the Audio to the ArrayList

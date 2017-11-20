@@ -25,6 +25,9 @@ public class PlayListModesTabPane extends StackPane {
 	private Tab openedLibrariesTab;
 	
 	@FXML
+	private Tab dropBoxTab;
+	
+	@FXML
 	private Tab emotionListsTab;
 	
 	@FXML
@@ -60,11 +63,14 @@ public class PlayListModesTabPane extends StackPane {
 	private void initialize() {
 		
 		//
-		openedLibrariesTab.setContent(Main.libraryMode.multipleLibs);	
+		openedLibrariesTab.setContent(Main.libraryMode.multipleLibs);
+		//
+		dropBoxTab.setContent(Main.dropBoxViewer);
 		//
 		emotionListsTab.setContent(new BorderPane(Main.emotionsTabPane));
 		//
 		searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
+		
 	}
 	
 	/**

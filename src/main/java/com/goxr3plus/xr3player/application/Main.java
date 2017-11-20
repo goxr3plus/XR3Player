@@ -82,6 +82,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.WelcomeScreen;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
@@ -102,7 +103,7 @@ public class Main extends Application {
 	static {
 		//----------Properties-------------
 		internalInformation.put("Version", 91);
-		internalInformation.put("ReleasedDate", "17/11/2017");
+		internalInformation.put("ReleasedDate", "20/11/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -176,7 +177,7 @@ public class Main extends Application {
 	public static final TreeViewManager treeManager = new TreeViewManager();
 	
 	/** The Constant advancedSearch. */
-	//public static final AdvancedSearch advancedSearch = new AdvancedSearch();
+	//public static final AdvancedSearch advancedSearch = new AdvancedSearch()
 	
 	public static final MediaInformation mediaInformation = new MediaInformation();
 	//
@@ -238,6 +239,8 @@ public class Main extends Application {
 	
 	/** The Constant djMode. */
 	public static DJMode djMode = new DJMode();
+	
+	public static DropBoxViewer dropBoxViewer = new DropBoxViewer();
 	
 	public static EmotionsTabPane emotionsTabPane = new EmotionsTabPane(emotionListsController);
 	
@@ -360,6 +363,7 @@ public class Main extends Application {
 		updateWindow.getWindow().initOwner(window);
 		welcomeScreen.getWindow().initOwner(window);
 		tagWindow.getWindow().initOwner(window);
+		dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
 		
 		// --------- Fix the Background ------------
 		determineBackgroundImage();
