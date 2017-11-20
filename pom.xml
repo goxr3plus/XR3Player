@@ -231,7 +231,7 @@
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
 
-		<!-- WEB BROWSER SUPPORT <dependency> -->
+		<!-- WEB BROWSER SUPPORT -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
