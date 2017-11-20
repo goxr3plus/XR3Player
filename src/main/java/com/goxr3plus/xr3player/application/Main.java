@@ -86,7 +86,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControllerSearcher.AdvancedSearch;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaFilterService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
@@ -177,7 +176,7 @@ public class Main extends Application {
 	public static final TreeViewManager treeManager = new TreeViewManager();
 	
 	/** The Constant advancedSearch. */
-	public static final AdvancedSearch advancedSearch = new AdvancedSearch();
+	//public static final AdvancedSearch advancedSearch = new AdvancedSearch();
 	
 	public static final MediaInformation mediaInformation = new MediaInformation();
 	//
