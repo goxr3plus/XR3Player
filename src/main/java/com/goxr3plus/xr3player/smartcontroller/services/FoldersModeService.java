@@ -210,8 +210,8 @@ public class FoldersModeService extends Service<Void> {
 					
 					//Append the total Files of each folder
 					smartControllerFoldersMode.getRoot().getChildren().forEach(treeItem -> {
-						int totalFiles = countFiles(new File( ( (FileTreeItem) treeItem ).getFullPath()));
-						String text = treeItem.getValue() + " [ " + totalFiles + " ]" + " [ " + ( (FileTreeItem) treeItem ).getFullPath() + " ] ";
+						int[] totalFiles = countFiles(new File( ( (FileTreeItem) treeItem ).getFullPath()));
+						String text = treeItem.getValue() + " [ " + totalFiles[1] + " / " + totalFiles[0] + " ]" + " [ " + ( (FileTreeItem) treeItem ).getFullPath() + " ] ";
 						
 						Platform.runLater(() -> treeItem.setValue(text));
 					});
@@ -224,10 +224,11 @@ public class FoldersModeService extends Service<Void> {
 				 * 
 				 * @param directory
 				 *            The full path of the directory
-				 * @return Total number of files contained in this folder
+				 * @return Position [0] Total number of files contained in this folder <br>
+				 *         Position [1] Total number of files contained in this folder && inside the Playlist Database <br>
 				 */
-				private int countFiles(File dir) {
-					int[] count = { 0 };
+				private int[] countFiles(File dir) {
+					int[] count = { 0 , 0 };
 					
 					//Folder exists?
 					if (dir.exists())
@@ -241,6 +242,8 @@ public class FoldersModeService extends Service<Void> {
 											
 											if (InfoTool.isAudioSupported(file + ""))
 												++count[0];
+											if (smartControllerFoldersMode.getSmartController().containsFile(file.toAbsolutePath().toString()))
+												++count[1];
 											
 											if (isCancelled()) {
 												return FileVisitResult.TERMINATE;
@@ -268,7 +271,7 @@ public class FoldersModeService extends Service<Void> {
 						}
 					
 					//System.out.println("Total Files=" + count[0])
-					return count[0];
+					return count;
 				}
 				
 			};

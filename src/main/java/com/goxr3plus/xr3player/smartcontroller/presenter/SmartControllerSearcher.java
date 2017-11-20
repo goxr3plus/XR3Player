@@ -158,7 +158,7 @@ public class SmartControllerSearcher extends HBox {
 	public TextField getSearchField() {
 		return searchField;
 	}
-
+	
 	/**
 	 * The Class SearchService.
 	 */
