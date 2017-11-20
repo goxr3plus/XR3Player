@@ -106,14 +106,12 @@ public class LibraryMode extends BorderPane {
 	// protected boolean dragDetected
 	
 	/**
-	 * The mechanism which allows you to transport items between libraries and
-	 * more.
+	 * The mechanism which allows you to transport items between libraries and more.
 	 */
 	public final SearchBox librariesSearcher = new SearchBox(SearchBoxType.LIBRARYSEARCHBOX);
 	
 	/**
-	 * The mechanism which allows you to view the libraries as components with
-	 * image etc.
+	 * The mechanism which allows you to view the libraries as components with image etc.
 	 */
 	public TeamViewer teamViewer;
 	
@@ -123,8 +121,7 @@ public class LibraryMode extends BorderPane {
 	//--------Images ------------------------------
 	
 	/**
-	 * Default image of a library(which has not a costume one selected by the
-	 * user.
+	 * Default image of a library(which has not a costume one selected by the user.
 	 */
 	public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg")
 	/**
@@ -144,14 +141,12 @@ public class LibraryMode extends BorderPane {
 	public LibraryContextMenu librariesContextMenu = new LibraryContextMenu();
 	
 	/**
-	 * This binding contains a number which shows how many libraries are
-	 * currently opened
+	 * This binding contains a number which shows how many libraries are currently opened
 	 */
 	public SimpleIntegerProperty openedLibraries = new SimpleIntegerProperty();
 	
 	/**
-	 * This binding contains a number which shows how many libraries have
-	 * currently no items at all
+	 * This binding contains a number which shows how many libraries have currently no items at all
 	 */
 	public SimpleIntegerProperty emptyLibraries = new SimpleIntegerProperty();
 	
@@ -231,6 +226,8 @@ public class LibraryMode extends BorderPane {
 						//Bidirectional binding with Instant Search
 						currentLib.getSmartController().getInstantSearch().selectedProperty()
 								.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+						//Fix maximum per playlist
+						currentLib.getSmartController().setNewMaximumPerPage(Main.settingsWindow.getPlayListsSettingsController().getMaximumPerPlaylist(), false);
 						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
@@ -285,8 +282,7 @@ public class LibraryMode extends BorderPane {
 	}
 	
 	/**
-	 * Update Settings Total Library only if this Library exists and it is on
-	 * settings mode
+	 * Update Settings Total Library only if this Library exists and it is on settings mode
 	 * 
 	 * @param name
 	 */
@@ -555,13 +551,12 @@ public class LibraryMode extends BorderPane {
 	public BorderPane getBorderPane() {
 		return borderPane;
 	}
-
+	
 	/**
 	 * @return the colorPicker
 	 */
 	public ColorPicker getColorPicker() {
 		return colorPicker;
 	}
-
 	
 }

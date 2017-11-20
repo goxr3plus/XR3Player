@@ -110,7 +110,7 @@ public class PlaylistsSettingsController extends BorderPane {
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
 			
-			int maximumPerPlaylist = Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText());
+			int maximumPerPlaylist = getMaximumPerPlaylist();
 			
 			//First Update all the Libraries
 			Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController().setNewMaximumPerPage(maximumPerPlaylist, true));
@@ -175,6 +175,15 @@ public class PlaylistsSettingsController extends BorderPane {
 		
 		//playedFilesDetectionGroup
 		JavaFXTools.selectToggleOnIndex(playedFilesDetectionGroup, 1);
+	}
+	
+	/**
+	 * The maximum items per playlist page allowed
+	 * 
+	 * @return The maximum items per playlist page allowed
+	 */
+	public int getMaximumPerPlaylist() {
+		return Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText());
 	}
 	
 	/**
