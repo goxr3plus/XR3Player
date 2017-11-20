@@ -70,7 +70,7 @@ public class DatabaseList {
 	 * @param column
 	 * @return
 	 */
-	public boolean isColumnExists(String table , String column) {
+	public boolean doesColumnExists(String table , String column) {
 		try {
 			Main.dbManager.getConnection().prepareStatement("SELECT " + column + " FROM '" + table + "'").executeQuery();
 			return true;

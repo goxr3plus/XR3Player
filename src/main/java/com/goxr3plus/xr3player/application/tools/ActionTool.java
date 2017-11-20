@@ -357,8 +357,8 @@ public final class ActionTool {
 			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(GeneralSettingsController.notificationPosition);
 		else {
 			ImageView imageView = new ImageView(image);
-			//imageView.setFitWidth(25);
-			//imageView.setFitHeight(25);
+			//imageView.setFitWidth(25)
+			//imageView.setFitHeight(25)
 			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle()
 					.position(GeneralSettingsController.notificationPosition);
 		}

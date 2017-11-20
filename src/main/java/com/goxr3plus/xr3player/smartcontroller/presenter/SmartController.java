@@ -452,7 +452,7 @@ public class SmartController extends StackPane {
 		
 		//settings
 		settings.setOnAction(a -> {
-			Main.settingsWindow.getPlayListsSettingsController().getInnerTabPane().getSelectionModel().select(1);
+			Main.settingsWindow.getPlayListsSettingsController().getInnerTabPane().getSelectionModel().select(0);
 			Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS);
 		});
 		

@@ -215,7 +215,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		
 		//settings
 		settings.setOnAction(a -> {
-			Main.settingsWindow.getPlayListsSettingsController().getInnerTabPane().getSelectionModel().select(2);
+			Main.settingsWindow.getPlayListsSettingsController().getInnerTabPane().getSelectionModel().select(1);
 			Main.settingsWindow.showWindow(SettingsTab.PLAYLISTS);
 		});
 		

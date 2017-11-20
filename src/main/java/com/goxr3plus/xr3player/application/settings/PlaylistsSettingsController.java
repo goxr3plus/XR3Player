@@ -11,7 +11,8 @@ import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Control;
-import javafx.scene.control.Labeled;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
@@ -35,16 +36,13 @@ public class PlaylistsSettingsController extends BorderPane {
 	private JFXTabPane innerTabPane;
 	
 	@FXML
-	private JFXCheckBox instantSearch;
-	
-	@FXML
-	private ToggleGroup fileSearchGroup;
-	
-	@FXML
 	private ToggleGroup playedFilesDetectionGroup;
 	
 	@FXML
 	private JFXButton clearPlayedFilesHistory;
+	
+	@FXML
+	private MenuButton totalItemsMenuButton;
 	
 	@FXML
 	private ToggleGroup totalFilesShownGroup;
@@ -54,6 +52,12 @@ public class PlaylistsSettingsController extends BorderPane {
 	
 	@FXML
 	private ToggleGroup filesToShowUnderFolders;
+	
+	@FXML
+	private JFXCheckBox instantSearch;
+	
+	@FXML
+	private ToggleGroup fileSearchGroup;
 	
 	// -------------------------------------------------------------
 	
@@ -106,28 +110,33 @@ public class PlaylistsSettingsController extends BorderPane {
 		
 		//totalFilesShownGroup
 		totalFilesShownGroup.selectedToggleProperty().addListener(listener -> {
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
-			
-			System.out.println("Maximum per playlist are : ...");
-			int maximumPerPlaylist = getMaximumPerPlaylist();
-			
-			//First Update all the Libraries
-			Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController().setNewMaximumPerPage(maximumPerPlaylist, true));
-			
-			//Secondly Update the Search Window PlayList
-			Main.searchWindowSmartController.setNewMaximumPerPage(maximumPerPlaylist, true);
-			
-			//Thirdly Update all the XPlayers SmartController
-			Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-					.forEach(controller -> controller.setNewMaximumPerPage(maximumPerPlaylist, true));
-			
-			//Finally all the Emotion Lists Controllers
-			Main.emotionListsController.hatedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
-			Main.emotionListsController.dislikedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
-			Main.emotionListsController.likedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
-			Main.emotionListsController.lovedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+			//Sometimes it reports a madafacka null for some reason 
+			if (totalFilesShownGroup.getSelectedToggle() != null) {
+				
+				//Update the properties file
+				Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
+				
+				int maximumPerPlaylist = getMaximumPerPlaylist();
+				
+				//Update totalItemsMenuButton
+				totalItemsMenuButton.setText(Integer.toString(maximumPerPlaylist));
+				
+				//First Update all the Libraries
+				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController().setNewMaximumPerPage(maximumPerPlaylist, true));
+				
+				//Secondly Update the Search Window PlayList
+				Main.searchWindowSmartController.setNewMaximumPerPage(maximumPerPlaylist, true);
+				
+				//Thirdly Update all the XPlayers SmartController
+				Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+						.forEach(controller -> controller.setNewMaximumPerPage(maximumPerPlaylist, true));
+				
+				//Finally all the Emotion Lists Controllers
+				Main.emotionListsController.hatedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+				Main.emotionListsController.dislikedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+				Main.emotionListsController.likedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+				Main.emotionListsController.lovedMediaListController.setNewMaximumPerPage(maximumPerPlaylist, true);
+			}
 		});
 		
 		//clearPlayedFilesHistory
@@ -184,7 +193,7 @@ public class PlaylistsSettingsController extends BorderPane {
 	 * @return The maximum items per playlist page allowed
 	 */
 	public int getMaximumPerPlaylist() {
-		return Integer.parseInt( ( (Labeled) totalFilesShownGroup.getSelectedToggle() ).getText());
+		return Integer.parseInt( ( (RadioMenuItem) totalFilesShownGroup.getSelectedToggle() ).getText());
 	}
 	
 	/**
