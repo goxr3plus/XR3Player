@@ -285,20 +285,19 @@ public class SmartControllerSearcher extends HBox {
 						
 						//Fetch the items from the database
 						Platform.runLater(() -> controller.getCancelButton().setText("Adding data to list..."));
-						List<Media> array = new ArrayList<>();
-						for (Audio song = null; resultSet.next();) {
-							//song = new Audio(resultSet.getString("PATH"), 5, 5, "f", "s", controller.genre)
-							song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
-									resultSet.getString("HOUR"), controller.getGenre(), array.size() + 1);
-							array.add(song);
+						List<Media> arrayList = new ArrayList<>();
+						while (resultSet.next()) {
+							//Add the Audio to the ArrayList
+							arrayList.add(new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
+									resultSet.getString("HOUR"), controller.getGenre(), arrayList.size() + 1));
 							
-							// updateProgress(++counter, controller.getMaximumPerPage())
+							updateProgress(++counter, controller.getMaximumPerPage());
 						}
 						
 						//Add the the items to the observable list
 						CountDownLatch countDown = new CountDownLatch(1);
 						Platform.runLater(() -> {
-							controller.getItemsObservableList().addAll(array);
+							controller.getItemsObservableList().addAll(arrayList);
 							countDown.countDown();
 						});
 						countDown.await();

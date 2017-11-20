@@ -19,7 +19,7 @@
    <children>
       <StackPane>
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox>
                <children>
                   <HBox>
                      <children>
@@ -79,7 +79,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <TreeView fx:id="treeView" />
+                  <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" wrapText="true">
