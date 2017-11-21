@@ -2,27 +2,39 @@ package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.jfoenix.controls.JFXButton;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
 
@@ -31,7 +43,10 @@ public class DropBoxViewer extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private Label topLabel;
+	private MenuButton topMenuButton;
+	
+	@FXML
+	private MenuItem signOut;
 	
 	@FXML
 	private Button refresh;
@@ -52,19 +67,25 @@ public class DropBoxViewer extends StackPane {
 	private VBox loginVBox;
 	
 	@FXML
+	private ListView<String> savedAccountsListView;
+	
+	@FXML
+	private Button loginWithSavedAccount;
+	
+	@FXML
+	private Button deleteSavedAccount;
+	
+	@FXML
 	private Button authorizationButton;
-	
-	@FXML
-	private TextField accessTokenTextField;
-	
-	@FXML
-	private Button loginButton;
 	
 	@FXML
 	private VBox errorVBox;
 	
 	@FXML
 	private JFXButton tryAgain;
+	
+	@FXML
+	private ProgressIndicator tryAgainIndicator;
 	
 	// -------------------------------------------------------------
 	
@@ -77,13 +98,16 @@ public class DropBoxViewer extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	private final RemoteFileTreeItem root = new RemoteFileTreeItem("root");
+	//Create a fake root element
+	private final DropBoxFileTreeItem root = new DropBoxFileTreeItem("root", null);
 	
 	// -------------------------------------------------------------
 	
 	private final DropboxAuthenticationBrowser authenticationBrowser = new DropboxAuthenticationBrowser();
 	
 	private String accessToken;
+	
+	public static final Image dropBoxImage = InfoTool.getImageFromResourcesFolder("dropbox.png");
 	
 	/**
 	 * Constructor.
@@ -141,6 +165,81 @@ public class DropBoxViewer extends StackPane {
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
 		
+		//Add binding to accessTokenProperty
+		authenticationBrowser.accessTokenProperty().addListener((observable , oldValue , newValue) -> {
+			//Check if empty
+			if (!newValue.isEmpty()) {
+				accessToken = newValue;
+				
+				//Show message to the User
+				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
+						DropBoxViewer.dropBoxImage);
+				
+				//Save on the database
+				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();
+				propertiesDb.updateProperty("DropBox-Access-Tokens", propertiesDb.getProperty("DropBox-Access-Tokens") + "<>:<>" + accessToken);
+				
+				//loginVBox
+				loginVBox.setVisible(false);
+				
+				//Go Make It
+				recreateTree();
+				
+				//Refresh Saved Accounts
+				refreshSavedAccounts();
+			}
+		});
+		
+		//loginVBox
+		loginVBox.setVisible(true);
+		
+		//signOut
+		signOut.setOnAction(a -> {
+			
+			//cancel the service
+			refreshService.cancel();
+			
+			//loginVBox
+			loginVBox.setVisible(true);
+			
+		});
+		
+		//loginWithSavedAccount
+		loginWithSavedAccount.disableProperty().bind(savedAccountsListView.getSelectionModel().selectedItemProperty().isNull());
+		loginWithSavedAccount.setOnAction(a -> {
+			
+			//AccessToken
+			accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
+			
+			//Go Make It
+			recreateTree();
+		});
+		
+		//deleteSavedAccount
+		deleteSavedAccount.disableProperty().bind(loginWithSavedAccount.disabledProperty());
+		deleteSavedAccount.setOnAction(a -> {
+			
+			//Clear the selected item
+			ObservableList<String> items = savedAccountsListView.getItems();
+			if (items != null) {
+				items.remove(savedAccountsListView.getSelectionModel().getSelectedItem());
+				Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
+			}
+		});
+		
+		//tryAgain
+		tryAgain.setOnAction(a -> checkForInternetConnection());
+		
+	}
+	
+	/**
+	 * Refreshes the Saved Accounts Lists View
+	 */
+	public void refreshSavedAccounts() {
+		
+		//savedAccountsListView
+		Optional.ofNullable(Main.userMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> savedAccountsListView
+				.setItems(Stream.of(accessTokens.split(Pattern.quote("<>:<>"))).collect(Collectors.toCollection(FXCollections::observableArrayList))));
 	}
 	
 	/**
@@ -148,42 +247,9 @@ public class DropBoxViewer extends StackPane {
 	 */
 	public void requestDropBoxAuthorization() {
 		
-		//Check if already we have an access-token for the user
-		Properties properties = Main.userMode.getUser().getUserInformationDb().loadProperties();
-		accessToken = properties.getProperty("DropBox-Access-Token");
-		if (accessToken != null) {
-			
-			//loginVBox
-			loginVBox.setVisible(false);
-			
-			//Go Make It
-			recreateTree();
-			
-		} else {
-			//Show authentication browser
-			authenticationBrowser.showAuthenticationWindow();
-			
-			//Wait for access token
-			authenticationBrowser.accessTokenProperty().addListener((observable , oldValue , newValue) -> {
-				if (!newValue.equals("")) {
-					accessToken = newValue;
-					
-					//Close the AuthenticationBrowser
-					authenticationBrowser.getWindow().close();
-					
-					//Save on the database
-					Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Token", accessToken);
-					
-					//loginVBox
-					loginVBox.setVisible(false);
-					
-					//Go Make It
-					recreateTree();
-					
-					System.out.println("[" + accessToken + "]");
-				}
-			});
-		}
+		//Show authentication browser
+		authenticationBrowser.showAuthenticationWindow();
+		
 	}
 	
 	/**
@@ -219,7 +285,7 @@ public class DropBoxViewer extends StackPane {
 	 */
 	private void treeViewMouseReleased(MouseEvent mouseEvent) {
 		//Get the selected item
-		RemoteFileTreeItem source = (RemoteFileTreeItem) treeView.getSelectionModel().getSelectedItem();
+		DropBoxFileTreeItem source = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		
 		// host is not on the game
 		if (source == null || source == root) {
@@ -251,9 +317,29 @@ public class DropBoxViewer extends StackPane {
 	}
 	
 	/**
+	 * Checks for internet connection
+	 */
+	void checkForInternetConnection() {
+		
+		//tryAgainIndicator
+		tryAgainIndicator.setVisible(true);
+		
+		//Check for internet connection
+		Thread thread = new Thread(() -> {
+			boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
+			Platform.runLater(() -> {
+				errorVBox.setVisible(!hasInternet);
+				tryAgainIndicator.setVisible(false);
+			});
+		}, "Internet Connection Tester Thread");
+		thread.setDaemon(true);
+		thread.start();
+	}
+	
+	/**
 	 * @return the root of the tree
 	 */
-	public RemoteFileTreeItem getRoot() {
+	public DropBoxFileTreeItem getRoot() {
 		return root;
 	}
 	
@@ -262,21 +348,6 @@ public class DropBoxViewer extends StackPane {
 	 */
 	public ProgressIndicator getProgressIndicator() {
 		return progressIndicator;
-	}
-	
-	/**
-	 * @param progressIndicator
-	 *            the progressIndicator to set
-	 */
-	public void setProgressIndicator(ProgressIndicator progressIndicator) {
-		this.progressIndicator = progressIndicator;
-	}
-	
-	/**
-	 * @return the topLabel
-	 */
-	public Label getTopLabel() {
-		return topLabel;
 	}
 	
 	/**
@@ -308,11 +379,24 @@ public class DropBoxViewer extends StackPane {
 	}
 	
 	/**
-	 * @param refreshLabel
-	 *            the refreshLabel to set
+	 * @return the topMenuButton
 	 */
-	public void setRefreshLabel(Label refreshLabel) {
-		this.refreshLabel = refreshLabel;
+	public MenuButton getTopMenuButton() {
+		return topMenuButton;
+	}
+	
+	/**
+	 * @return the loginVBox
+	 */
+	public VBox getLoginVBox() {
+		return loginVBox;
+	}
+	
+	/**
+	 * @return the errorVBox
+	 */
+	public VBox getErrorVBox() {
+		return errorVBox;
 	}
 	
 }

@@ -23,12 +23,15 @@ import com.dropbox.core.v2.users.FullAccount;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressOutputStream;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxFileTreeItem;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.RemoteFileTreeItem;
 
-public class RefreshService extends Service<Void> {
+public class RefreshService extends Service<Boolean> {
 	
 	/**
 	 * DropBoxViewer
@@ -36,8 +39,9 @@ public class RefreshService extends Service<Void> {
 	public DropBoxViewer dropBoxViewer;
 	
 	// Create Dropbox client
-	DbxRequestConfig config = new DbxRequestConfig("XR3Player");
+	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
 	private DbxClientV2 client;
+	private String previousAccessToken;
 	
 	/**
 	 * Constructor
@@ -47,37 +51,64 @@ public class RefreshService extends Service<Void> {
 	public RefreshService(DropBoxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		
-		this.setOnSucceeded(s -> {
+		//On Succesfully exiting
+		setOnSucceeded(s -> {
+			
+			//Check if failed
+			if (!getValue()) {
+				
+				//Set Login Visible Again
+				dropBoxViewer.getLoginVBox().setVisible(true);
+				
+				//Show message to the User
+				ActionTool.showNotification("Authantication Failed",
+						"Failed connecting in that Dropbox Account, try : \n1) Connect again with a new Dropbox Account \n2) Connect with another saved DropBox Account \n3) Delete this corrupted saved account",
+						Duration.millis(3000), NotificationType.ERROR);
+			}
 		});
 		
-		this.setOnFailed(f -> {
-			
-		});
 	}
 	
 	@Override
-	protected Task<Void> createTask() {
-		return new Task<Void>() {
+	public void restart() {
+		
+		//Set LoginScreen not visible 
+		dropBoxViewer.getLoginVBox().setVisible(false);
+		
+		//Restart
+		super.restart();
+	}
+	
+	@Override
+	protected Task<Boolean> createTask() {
+		return new Task<Boolean>() {
 			@Override
-			protected Void call() throws Exception {
-				
+			protected Boolean call() throws Exception {
 				try {
 					
 					//Create the Client
-					if (client == null)
+					if (client == null || previousAccessToken == null || !previousAccessToken.equals(dropBoxViewer.getAccessToken())) {
+						previousAccessToken = dropBoxViewer.getAccessToken();
 						client = new DbxClientV2(config, dropBoxViewer.getAccessToken());
+					}
 					
 					// Get current account info
 					FullAccount account = client.users().getCurrentAccount();
-					Platform.runLater(() -> dropBoxViewer.getTopLabel().setText(" " + account.getName().getDisplayName()));
+					Platform.runLater(() -> dropBoxViewer.getTopMenuButton().setText(" " + account.getName().getDisplayName()));
 					
 					TreeMap<String,Metadata> children = new TreeMap<>();
 					listAllFiles(client, "", children);
 				} catch (Exception ex) {
 					ex.printStackTrace();
+					
+					//Check if there is Internet Connection
+					if (!InfoTool.isReachableByPing("www.google.com"))
+						Platform.runLater(() -> dropBoxViewer.getErrorVBox().setVisible(true));
+					
+					return false;
 				}
 				
-				return null;
+				return true;
 			}
 			
 			/**
@@ -98,13 +129,13 @@ public class RefreshService extends Service<Void> {
 					}
 					
 					while (true) {
-						for (Metadata md : result.getEntries()) {
-							if (md instanceof DeletedMetadata) { //Deleted
-								children.remove(md.getPathLower());
-							} else if (md instanceof FolderMetadata) { //Folder
-								String folder = md.getPathLower();
-								String parent = new File(md.getPathLower()).getParent();
-								children.put(folder, md);
+						for (Metadata metadata : result.getEntries()) {
+							if (metadata instanceof DeletedMetadata) { //Deleted
+								children.remove(metadata.getPathLower());
+							} else if (metadata instanceof FolderMetadata) { //Folder
+								String folder = metadata.getPathLower();
+								String parent = new File(metadata.getPathLower()).getParent();
+								children.put(folder, metadata);
 								
 								boolean subFileOfCurrentFolder = path.equals(parent.replace("\\", "/"));
 								System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
@@ -112,21 +143,21 @@ public class RefreshService extends Service<Void> {
 								//Add to TreeView						
 								Platform.runLater(() -> {
 									
-									dropBoxViewer.getRoot().getChildren().add(new RemoteFileTreeItem(folder));
+									dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(folder, metadata));
 								});
 								
 								listAllFiles(client, folder, children);
-							} else if (md instanceof FileMetadata) { //File
-								String file = md.getPathLower();
-								String parent = new File(md.getPathLower()).getParent();
-								children.put(file, md);
+							} else if (metadata instanceof FileMetadata) { //File
+								String file = metadata.getPathLower();
+								String parent = new File(metadata.getPathLower()).getParent();
+								children.put(file, metadata);
 								
 								boolean subFileOfCurrentFolder = path.equals(parent.replace("\\", "/"));
 								System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
 								
 								//Add to TreeView
 								Platform.runLater(() -> {
-									dropBoxViewer.getRoot().getChildren().add(new RemoteFileTreeItem(file));
+									dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(file, metadata));
 								});
 							}
 						}
@@ -178,9 +209,24 @@ public class RefreshService extends Service<Void> {
 				//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
 				
 			}
+			
+			/**
+			 * Collapses the whole TreeView
+			 * 
+			 * @param item
+			 */
+			//			private void getTreeViewItem(TreeItem<String> item , String value) {
+			//				if (item == null || item.isLeaf())
+			//					return;
+			//				
+			//				if(item.getValue().equals(value)) {
+			//					return ;
+			//				}
+			//				item.getChildren().forEach(child -> getTreeViewItem(child));
+			//			}
 		};
 	}
-
+	
 	/**
 	 * @return the client
 	 */

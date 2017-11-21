@@ -1522,6 +1522,10 @@
 	-fx-text-fill:white;
 }
 
+.menu-button .arrow-button .arrow{
+	-fx-background-color:white;
+}
+
 .visWindowMenuButton .label{	
 	-fx-text-fill:white;
 }

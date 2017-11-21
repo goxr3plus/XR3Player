@@ -137,6 +137,17 @@ public class PropertiesDb {
 	}
 	
 	/**
+	 * Returns the property with that key
+	 * 
+	 * @param key
+	 *            The property key
+	 * @return Returns the property with that key
+	 */
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
+	
+	/**
 	 * Get the properties instance of this class
 	 * 
 	 * @return the properties

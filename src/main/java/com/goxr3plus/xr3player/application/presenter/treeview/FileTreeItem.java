@@ -39,10 +39,11 @@ public class FileTreeItem extends TreeItem<String> {
 		//Is this a directory?
 		File file = new File(fullPath);
 		isDirectory = file.isDirectory();
+		
 		//Does it exists?
 		if (file.exists()) {
 			//It is directory?
-			if (isDirectory())
+			if (isDirectory)
 				setImage(SystemRoot.closedFolderImage);
 			
 			else {

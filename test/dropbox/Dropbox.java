@@ -46,7 +46,8 @@ public class Dropbox {
 		DbxRequestConfig config = new DbxRequestConfig("XR3Player");
 		
 		//Get access token from dropbox-app-tokens.json		
-		ACCESS_TOKEN = new String(Files.readAllBytes(Paths.get("dropbox-app-tokens.json"))).split("\"access_token\" : ")[1].replace("\"", "").replace("}", "").trim();
+		//ACCESS_TOKEN = new String(Files.readAllBytes(Paths.get("dropbox-app-tokens.json"))).split("\"access_token\" : ")[1].replace("\"", "").replace("}", "").trim();
+		ACCESS_TOKEN = "BKzil3I5dP8AAAAAAAAAXLHg1CRPzEAxVc6AhLLfUgAOJvKpPk8iRiH64AbmQQXI";
 		
 		//Create the Client
 		DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);

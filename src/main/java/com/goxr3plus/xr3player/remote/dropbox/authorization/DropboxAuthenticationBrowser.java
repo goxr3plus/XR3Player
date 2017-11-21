@@ -34,9 +34,9 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3capture.tools.ActionTool;
-import main.java.com.goxr3plus.xr3capture.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 
 /**
  * Opens a browser inside the application for DropBox Authentication Process
@@ -75,8 +75,8 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	//Identifying information about XR3Player		 
 	private DbxAppInfo appInfo = new DbxAppInfo("5dx1fba89qsx2l6", "z2avrmbnnrmwvqa");
 	DbxRequestConfig requestConfig = new DbxRequestConfig("XR3Player");
-	DbxWebAuth webAuth = new DbxWebAuth(requestConfig, appInfo);
-	DbxWebAuth.Request webAuthRequest = DbxWebAuth.newRequestBuilder().withNoRedirect().build();
+	DbxWebAuth webAuth;
+	DbxWebAuth.Request webAuthRequest;
 	
 	/**
 	 * Constructor
@@ -110,11 +110,12 @@ public class DropboxAuthenticationBrowser extends StackPane {
 		webEngine = webView.getEngine();
 		
 		// progressBar
+		progressBar.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
 		progressBar.progressProperty().bind(webEngine.getLoadWorker().progressProperty());
 		
 		//Add listener to the WebEngine
 		webEngine.getLoadWorker().stateProperty().addListener((observable , oldState , newState) -> {
-			if (newState == Worker.State.SUCCEEDED && webEngine.getLocation().equalsIgnoreCase("https://www.dropbox.com/1/oauth2/authorize_submit")) {
+			if (newState == Worker.State.SUCCEEDED && "https://www.dropbox.com/1/oauth2/authorize_submit".equalsIgnoreCase(webEngine.getLocation())) {
 				Document doc = webEngine.getDocument();
 				try {
 					Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -144,6 +145,8 @@ public class DropboxAuthenticationBrowser extends StackPane {
 						//Set the access token
 						accessToken.set(authFinish.getAccessToken());
 						
+						//System.out.println("Browser -> [" + accessToken.get() + "]")
+						
 						//Close the window
 						window.close();
 					} catch (DbxException ex) {
@@ -164,11 +167,15 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	 */
 	public void showAuthenticationWindow() {
 		
-		// Run through Dropbox API authorization process		
-		String authorizeUrl = webAuth.authorize(webAuthRequest);
+		//Clear the previous cookies
+		java.net.CookieHandler.setDefault(new com.sun.webkit.network.CookieManager());
+		
+		// Run through Dropbox API authorization process	
+		webAuth = new DbxWebAuth(requestConfig, appInfo);
+		webAuthRequest = DbxWebAuth.newRequestBuilder().withNoRedirect().build();
 		
 		//Load it
-		webEngine.load(authorizeUrl);
+		webEngine.load(webAuth.authorize(webAuthRequest));
 		
 		//Show the Window
 		window.show();

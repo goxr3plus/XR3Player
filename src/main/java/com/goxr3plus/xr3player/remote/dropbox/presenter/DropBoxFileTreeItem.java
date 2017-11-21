@@ -2,6 +2,9 @@ package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
 import java.io.File;
 
+import com.dropbox.core.v2.files.FolderMetadata;
+import com.dropbox.core.v2.files.Metadata;
+
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +15,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 /**
  * A custom TreeItem which represents a File
  */
-public class RemoteFileTreeItem extends TreeItem<String> {
+public class DropBoxFileTreeItem extends TreeItem<String> {
 	
 	public static final Image x = InfoTool.getImageFromResourcesFolder("x.png");
 	
@@ -22,6 +25,8 @@ public class RemoteFileTreeItem extends TreeItem<String> {
 	/** Defines if this File is a Directory */
 	private boolean isDirectory;
 	
+	private Metadata metadata;
+	
 	/**
 	 * Constructor.
 	 *
@@ -29,17 +34,16 @@ public class RemoteFileTreeItem extends TreeItem<String> {
 	 *            The absolute path of the file or folder
 	 * 
 	 */
-	public RemoteFileTreeItem(String absolutePath) {
+	public DropBoxFileTreeItem(String absolutePath, Metadata metadata) {
 		super(absolutePath);
 		this.fullPath = absolutePath;
+		this.metadata = metadata;
 		
 		//Is this a directory?
-		File file = new File(fullPath);
-		isDirectory = file.isDirectory();
-		//Does it exists?
-		//if (file.exists()) {
+		isDirectory = this.metadata == null || this.metadata instanceof FolderMetadata;
+		
 		//It is directory?
-		if (isDirectory())
+		if (isDirectory)
 			setImage(SystemRoot.closedFolderImage);
 		
 		else {
@@ -49,8 +53,6 @@ public class RemoteFileTreeItem extends TreeItem<String> {
 			else
 				setImage(SystemRoot.fileImage);
 		}
-		//		} else
-		//			setImage(x);
 		
 		// set the value
 		if (!fullPath.endsWith(File.separator)) {
@@ -64,7 +66,6 @@ public class RemoteFileTreeItem extends TreeItem<String> {
 			
 		}
 		
-		//this.setValue(InfoTool.getFileName(absolutePath));
 	}
 	
 	/**
@@ -92,6 +93,13 @@ public class RemoteFileTreeItem extends TreeItem<String> {
 	 */
 	public boolean isDirectory() {
 		return isDirectory;
+	}
+	
+	/**
+	 * @return the metadata
+	 */
+	public Metadata getMetadata() {
+		return metadata;
 	}
 	
 }

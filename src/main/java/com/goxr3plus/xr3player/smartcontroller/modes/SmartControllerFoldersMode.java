@@ -171,7 +171,7 @@ public class SmartControllerFoldersMode extends StackPane {
 					String absoluteFilePath = ( (FileTreeItem) getTreeItem() ).getFullPath();
 					
 					//We don't care about directories
-					if (!new File(absoluteFilePath).isDirectory()) {
+					if (! ( (FileTreeItem) getTreeItem() ).isDirectory()) {
 						boolean existsInPlayList = smartController.containsFile(absoluteFilePath);
 						
 						//Check if the file exists inside the SmartController Playlist
