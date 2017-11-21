@@ -341,6 +341,7 @@ public class DbManager {
 					// Give refresh based on the below formula
 					Optional.ofNullable(newTab).ifPresent(tab -> {
 						SmartController smartController = ( (SmartController) tab.getContent() );
+						
 						//Check 
 						if ( ( smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
 							

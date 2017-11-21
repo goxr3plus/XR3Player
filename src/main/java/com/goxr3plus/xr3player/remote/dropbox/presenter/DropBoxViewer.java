@@ -99,7 +99,7 @@ public class DropBoxViewer extends StackPane {
 	// -------------------------------------------------------------
 	
 	//Create a fake root element
-	private final DropBoxFileTreeItem root = new DropBoxFileTreeItem("root", null);
+	private final DropBoxFileTreeItem root = new DropBoxFileTreeItem("", null);
 	
 	// -------------------------------------------------------------
 	
