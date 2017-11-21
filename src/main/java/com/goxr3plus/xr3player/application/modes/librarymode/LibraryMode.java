@@ -226,8 +226,10 @@ public class LibraryMode extends BorderPane {
 						//Bidirectional binding with Instant Search
 						currentLib.getSmartController().getInstantSearch().selectedProperty()
 								.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
+						
 						//Fix maximum per playlist
 						currentLib.getSmartController().setNewMaximumPerPage(Main.settingsWindow.getPlayListsSettingsController().getMaximumPerPlaylist(), false);
+						currentLib.getSmartController().getReloadVBox().setVisible(false);
 						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);

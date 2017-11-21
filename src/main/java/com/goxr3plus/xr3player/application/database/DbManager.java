@@ -339,17 +339,21 @@ public class DbManager {
 				Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
 					
 					// Give refresh based on the below formula
-					SmartController smartController = ( (SmartController) newTab.getContent() );
-					if ( ( !Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
-							|| smartController.getReloadVBox().isVisible()) {
+					Optional.ofNullable(newTab).ifPresent(tab -> {
+						SmartController smartController = ( (SmartController) tab.getContent() );
+						//Check 
+						if ( ( smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
+							
+							//Refresh the SmartController
+							smartController.getLoadService().startService(false, true, true);
+							
+							//Store the Opened Libraries
+							storeOpenedLibraries();
+						}
 						
-						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
-						
-						storeOpenedLibraries();
-					}
-					
-					//System.out.println("Changed...")
-					storeLastOpenedLibrary();
+						//System.out.println("Changed...")
+						storeLastOpenedLibrary();
+					});
 				});
 				
 				//Emotion Lists Tab Pane Selection Listener
@@ -602,7 +606,6 @@ public class DbManager {
 							//For XPLayersLists
 							Main.xPlayersList.getList().stream().forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch()
 									.selectedProperty().bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
-							
 							
 							//Load Saved DropBox Accounts
 							Main.dropBoxViewer.refreshSavedAccounts();

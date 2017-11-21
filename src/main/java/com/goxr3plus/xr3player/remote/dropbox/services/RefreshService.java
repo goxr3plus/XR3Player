@@ -141,8 +141,7 @@ public class RefreshService extends Service<Boolean> {
 								System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
 								
 								//Add to TreeView						
-								Platform.runLater(() -> {
-									
+								Platform.runLater(() -> {						
 									dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(folder, metadata));
 								});
 								

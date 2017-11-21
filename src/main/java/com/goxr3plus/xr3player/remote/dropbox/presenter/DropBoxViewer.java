@@ -190,6 +190,9 @@ public class DropBoxViewer extends StackPane {
 			}
 		});
 		
+		//errorVBox
+		errorVBox.setVisible(false);
+		
 		//loginVBox
 		loginVBox.setVisible(true);
 		

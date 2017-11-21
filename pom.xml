@@ -140,7 +140,7 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>1.9.1</version>
+			<version>1.10.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
