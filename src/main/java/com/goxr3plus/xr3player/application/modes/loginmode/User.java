@@ -47,6 +47,9 @@ public class User extends StackPane {
 	private Label descriptionLabel;
 	
 	@FXML
+	private Label dropBoxLabel;
+	
+	@FXML
 	private Label informationLabel;
 	
 	@FXML
@@ -61,8 +64,7 @@ public class User extends StackPane {
 	private static final Logger logger = Logger.getLogger(User.class.getName());
 	
 	/**
-	 * Here are stored all the informations about the user and other things like
-	 * opened libraries etc.
+	 * Here are stored all the informations about the user and other things like opened libraries etc.
 	 */
 	private PropertiesDb userInformationDb;
 	
@@ -306,8 +308,7 @@ public class User extends StackPane {
 	 * This method is called when a key is released.
 	 *
 	 * @param key
-	 *            An event which indicates that a keystroke occurred in a
-	 *            javafx.scene.Node.
+	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
 		if (Main.loginMode.userInformation.isShowing() || getPosition() != loginMode.teamViewer.getCenterIndex())
@@ -419,6 +420,13 @@ public class User extends StackPane {
 	 */
 	public Label getDescriptionLabel() {
 		return descriptionLabel;
+	}
+	
+	/**
+	 * @return the dropBoxLabel
+	 */
+	public Label getDropBoxLabel() {
+		return dropBoxLabel;
 	}
 	
 }

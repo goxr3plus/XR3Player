@@ -90,22 +90,6 @@
          <center>
             <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab fx:id="releasesHistoryTab" closable="false" styleClass="sTab" text="Releases History">
-                     <content>
-                        <ScrollPane fitToHeight="true" fitToWidth="true">
-                           <content>
-                              <Accordion fx:id="gitHubAccordion" />
-                           </content>
-                        </ScrollPane>
-                     </content>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/balloons.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Tab>
                   <Tab fx:id="whatsNewTab" closable="false" styleClass="sTab" text="What's new ?">
                      <content>
                         <BorderPane fx:id="whatsNewContainer" />
@@ -113,7 +97,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/analytics.png" />
+                              <Image url="@../image/balloons.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -141,6 +125,15 @@
                            </image>
                         </ImageView>
                      </graphic>
+                  </Tab>
+                  <Tab fx:id="releasesHistoryTab" closable="false" disable="true" styleClass="sTab">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                           <content>
+                              <Accordion fx:id="gitHubAccordion" />
+                           </content>
+                        </ScrollPane>
+                     </content>
                   </Tab>
                </tabs>
             </JFXTabPane>

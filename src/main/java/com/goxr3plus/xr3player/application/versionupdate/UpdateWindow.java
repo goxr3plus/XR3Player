@@ -7,8 +7,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,9 +16,6 @@ import java.util.stream.Collectors;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.json.simple.JsonArray;
-import org.json.simple.JsonObject;
-import org.json.simple.Jsoner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -114,7 +109,7 @@ public class UpdateWindow extends StackPane {
 	
 	private int update;
 	
-	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;";
+	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;  -rtfx-background-color:transparent;";
 	
 	/**
 	 * The Thread which is responsible for the update check
@@ -189,8 +184,7 @@ public class UpdateWindow extends StackPane {
 	}
 	
 	/**
-	 * This method is fetching data from github to check if the is a new update
-	 * for XR3Player
+	 * This method is fetching data from github to check if the is a new update for XR3Player
 	 * 
 	 * @param showTheWindow
 	 *            If not update is available then don't show the window
@@ -224,9 +218,9 @@ public class UpdateWindow extends StackPane {
 	private void searchForUpdatesPart2(boolean showTheWindow) {
 		try {
 			
-			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
+			//Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
 			
-			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
+			Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
 			
 			Element lastArticle = doc.getElementsByTag("article").last();
 			
@@ -235,82 +229,82 @@ public class UpdateWindow extends StackPane {
 			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
 				return;
 			
-			//GitHub Releases
-			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
-			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-			
-			//Read line by line
-			String responseSB = in.lines().collect(Collectors.joining());
-			in.close();
+			//			//GitHub Releases
+			//			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
+			//			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+			//			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+			//			
+			//			//Read line by line
+			//			String responseSB = in.lines().collect(Collectors.joining());
+			//			in.close();
 			
 			// Update is available or not?
 			Platform.runLater(() -> {
 				
-				//--TopLabel
-				if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
-					window.setTitle("You have the latest update!");
-					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
-				} else {
-					window.setTitle("New update is available!");
-					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
-					tabPane.getSelectionModel().select(1);
-				}
-				
-				//Read the JSON response
-				JsonArray jsonRoot;
-				try {
-					jsonRoot = (JsonArray) Jsoner.deserialize(responseSB);
-					//Avoid recreating again panes if no new releases have come
-					boolean create = jsonRoot.stream().count() != gitHubAccordion.getPanes().size();
-					if (create)
-						gitHubAccordion.getPanes().clear();
-					
-					//For Each
-					int[] counter = { 0 };
-					jsonRoot.forEach(item -> {
-						//--
-						String prerelease = ( (JsonObject) item ).get("prerelease").toString();
-						
-						//--
-						String tagName = ( (JsonObject) item ).get("tag_name").toString();
-						
-						//--
-						String[] downloads = { "" };
-						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> downloads[0] = ( (JsonObject) item2 ).get("download_count").toString());
-						downloads[0] = ( downloads[0].isEmpty() ? "-" : downloads[0] );
-						
-						//--
-						String[] size = { "" };
-						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> size[0] = ( (JsonObject) item2 ).get("size").toString());
-						size[0] = ( size[0].isEmpty() ? "-" : InfoTool.getFileSizeEdited(Long.parseLong(size[0])) );
-						
-						//--
-						String[] createdAt = { ( (JsonObject) item ).get("created_at").toString() };
-						
-						//--
-						String[] publishedAt = { ( (JsonObject) item ).get("published_at").toString() };
-						
-						//Create or Reuse the existing Panes of Accordion
-						GitHubRelease release;
-						if (!create)
-							release = (GitHubRelease) gitHubAccordion.getPanes().get(counter[0]++);
-						else {
-							release = new GitHubRelease();
-							gitHubAccordion.getPanes().add(release);
-						}
-						
-						//Update the GitHubRelease Pane
-						release.setText("Update -> ( " + tagName.toLowerCase().replace("v3.", "") + " ) Downloads ( " + downloads[0] + " )");
-						release.updateLabels(Boolean.toString(!Boolean.parseBoolean(prerelease)), downloads[0], size[0], publishedAt[0].substring(0, 10),
-								createdAt[0].substring(0, 10));
-						
-					});
-					gitHubAccordion.setExpandedPane(gitHubAccordion.getPanes().get(0));
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					ActionTool.showNotification("Message", "Failed to connect update server :(\n Try again in 5 seconds", Duration.seconds(3), NotificationType.ERROR);
-				}
+				//				//--TopLabel
+				//				if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
+				//					window.setTitle("You have the latest update!");
+				//					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
+				//				} else {
+				//					window.setTitle("New update is available!");
+				//					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
+				//					tabPane.getSelectionModel().select(1);
+				//				}
+				//				
+				//				//Read the JSON response
+				//				JsonArray jsonRoot;
+				//				try {
+				//					jsonRoot = (JsonArray) Jsoner.deserialize(responseSB);
+				//					//Avoid recreating again panes if no new releases have come
+				//					boolean create = jsonRoot.stream().count() != gitHubAccordion.getPanes().size();
+				//					if (create)
+				//						gitHubAccordion.getPanes().clear();
+				//					
+				//					//For Each
+				//					int[] counter = { 0 };
+				//					jsonRoot.forEach(item -> {
+				//						//--
+				//						String prerelease = ( (JsonObject) item ).get("prerelease").toString();
+				//						
+				//						//--
+				//						String tagName = ( (JsonObject) item ).get("tag_name").toString();
+				//						
+				//						//--
+				//						String[] downloads = { "" };
+				//						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> downloads[0] = ( (JsonObject) item2 ).get("download_count").toString());
+				//						downloads[0] = ( downloads[0].isEmpty() ? "-" : downloads[0] );
+				//						
+				//						//--
+				//						String[] size = { "" };
+				//						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> size[0] = ( (JsonObject) item2 ).get("size").toString());
+				//						size[0] = ( size[0].isEmpty() ? "-" : InfoTool.getFileSizeEdited(Long.parseLong(size[0])) );
+				//						
+				//						//--
+				//						String[] createdAt = { ( (JsonObject) item ).get("created_at").toString() };
+				//						
+				//						//--
+				//						String[] publishedAt = { ( (JsonObject) item ).get("published_at").toString() };
+				//						
+				//						//Create or Reuse the existing Panes of Accordion
+				//						GitHubRelease release;
+				//						if (!create)
+				//							release = (GitHubRelease) gitHubAccordion.getPanes().get(counter[0]++);
+				//						else {
+				//							release = new GitHubRelease();
+				//							gitHubAccordion.getPanes().add(release);
+				//						}
+				//						
+				//						//Update the GitHubRelease Pane
+				//						release.setText("Update -> ( " + tagName.toLowerCase().replace("v3.", "") + " ) Downloads ( " + downloads[0] + " )");
+				//						release.updateLabels(Boolean.toString(!Boolean.parseBoolean(prerelease)), downloads[0], size[0], publishedAt[0].substring(0, 10),
+				//								createdAt[0].substring(0, 10));
+				//						
+				//					});
+				//					gitHubAccordion.setExpandedPane(gitHubAccordion.getPanes().get(0));
+				//				} catch (Exception ex) {
+				//					ex.printStackTrace();
+				//					ActionTool.showNotification("Message", "Failed to connect update server :(\n Try again in 5 seconds", Duration.seconds(3), NotificationType.ERROR);
+				//				}
 				
 				//Clear the textAreas
 				whatsNewTextArea.clear();
@@ -321,8 +315,8 @@ public class UpdateWindow extends StackPane {
 				doc.getElementsByTag("article").stream().collect(Collectors.toCollection(ArrayDeque::new)).descendingIterator()
 						.forEachRemaining(element -> analyzeUpdate(whatsNewTextArea, element));
 				
-				//textArea.moveTo(gitHubTextArea.getLength());
-				//textArea.requestFollowCaret();
+				whatsNewTextArea.moveTo(0);
+				whatsNewTextArea.requestFollowCaret();
 				
 				// --------------------------------------- upcomingTextArea -----------------------------------
 				doc.getElementsByTag("section").stream().filter(section -> "Upcoming Features".equals(section.id())).forEach(section -> {
@@ -367,8 +361,8 @@ public class UpdateWindow extends StackPane {
 					
 				});
 				
-				//upcomingFeaturesTextArea.moveTo(upcomingFeaturesTextArea.getLength());
-				//upcomingFeaturesTextArea.requestFollowCaret();
+				//upcomingFeaturesTextArea.moveTo(upcomingFeaturesTextArea.getLength())
+				//upcomingFeaturesTextArea.requestFollowCaret()
 				
 				// --------------------------------------- knownBugsTextArea -----------------------------------		
 				doc.getElementsByTag("section").stream().filter(section -> "Bugs".equals(section.id())).forEach(section -> {
@@ -398,8 +392,8 @@ public class UpdateWindow extends StackPane {
 					
 				});
 				
-				//knownBugsTextArea.moveTo(knownBugsTextArea.getLength());
-				//knownBugsTextArea.requestFollowCaret();
+				//knownBugsTextArea.moveTo(knownBugsTextArea.getLength())
+				//knownBugsTextArea.requestFollowCaret()
 			});
 			
 			//show?
@@ -419,52 +413,114 @@ public class UpdateWindow extends StackPane {
 	private final String style2 = style.replace("white", "#329CFF");
 	private final String style3 = style.replace("bold", "400");
 	
+	//For [ New , Improved , Bug Fixes ] counters
+	private final String sectionNewCounters = style.replace("white", "#00D993");
+	private final String sectionImrpovedCounters = style.replace("white", "#00BBEF");
+	private final String sectionBugsFixedCounters = style.replace("white", "#F0004C");
+	
+	//Other styles
+	private final String updateStyle = style.replace("transparent", "#000000");
+	private final String releaseDateStyle = style.replace("white", "#3DFF53");
+	private final String minimumJREStyle = style.replace("white", "#FF8800");
+	private final String changeLogStyle = style.replace("white", "#FFEC00");
+	private final String newStyle = style.replace("transparent", "#00D993");
+	private final String improvedStyle = style.replace("transparent", "#00BBEF");
+	private final String bugFixesStyle = style.replace("transparent", "#F0004C");
+	
 	/**
-	 * Streams the given update and appends it to the InlineCssTextArea in a
-	 * specific format
+	 * Streams the given update and appends it to the InlineCssTextArea in a specific format
 	 * 
 	 * @param textArea
 	 * @param Element
 	 */
 	private void analyzeUpdate(InlineCssTextArea textArea , Element element) {
-		
-		// Append the text to the textArea
-		//		String updateNumber = "\n\n-------------Update (" + element.id() + ")-------------\n";
-		//		textArea.appendText(updateNumber);
-		//		textArea.setStyle(textArea.getLength() - updateNumber.length(), textArea.getLength() - 1, style);
 		textArea.appendText("\n\n");
 		
-		// Information
-		textArea.appendText("  Information: ");
-		textArea.setStyle(textArea.getLength() - 13, textArea.getLength() - 1, style.replace("white", "#329CFF"));
-		textArea.appendText(element.getElementsByClass("about").text() + "\n");
-		textArea.setStyle(textArea.getLength() - element.getElementsByClass("about").text().length() - 1, textArea.getLength() - 1, style3);
+		//Update Version
+		int id = Integer.parseInt(element.id());
+		
+		// Update 
+		String text = "\t\t\t\t\t\t\t\t\t\t Update  ~  " + id + " \n";
+		textArea.appendText(text);
+		textArea.setStyle(textArea.getLength() - text.length() + 11, textArea.getLength() - 1, updateStyle);
 		
 		// Release Date
-		textArea.appendText("  Release Date: ");
-		textArea.setStyle(textArea.getLength() - 14, textArea.getLength() - 1, style.replace("white", "#3DFF53"));
-		textArea.appendText(element.getElementsByClass("releasedate").text() + "\n");
+		text = "\t\t\t\t\t\t  Released: ";
+		textArea.appendText(text);
+		textArea.setStyle(textArea.getLength() - text.length() + 7, textArea.getLength() - 1, releaseDateStyle);
+		textArea.appendText(element.getElementsByClass("releasedate").text() + " ");
 		textArea.setStyle(textArea.getLength() - element.getElementsByClass("releasedate").text().length() - 1, textArea.getLength() - 1, style3);
 		
 		// Minimum JRE
-		textArea.appendText("  Minimum Java Version: ");
-		textArea.setStyle(textArea.getLength() - 22, textArea.getLength() - 1, style.replace("white", "orange"));
+		text = "  Requires Java: ";
+		textArea.appendText(text);
+		textArea.setStyle(textArea.getLength() - text.length() - 1, textArea.getLength() - 1, minimumJREStyle);
 		textArea.appendText(element.getElementsByClass("minJavaVersion").text() + "\n");
 		textArea.setStyle(textArea.getLength() - element.getElementsByClass("minJavaVersion").text().length() - 1, textArea.getLength() - 1, style3);
 		
 		// ChangeLog
-		textArea.appendText("  ChangeLog:\n");
-		textArea.setStyle(textArea.getLength() - 11, textArea.getLength() - 1, style.replace("white", "#FFEC00"));
-		final AtomicInteger counter = new AtomicInteger(-1);
-		Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(improvement -> {
-			if (counter.addAndGet(1) >= 1) {
-				String s = "\t" + counter + " ";
-				textArea.appendText(s);
-				textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style2);
-				textArea.appendText(improvement + "\n");
-				textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
-			}
-		});
+		if (id < 91) { //After Update 91 change log contains more sections
+			text = "  ChangeLog:\n";
+			textArea.appendText(text);
+			textArea.setStyle(textArea.getLength() - text.length() - 1, textArea.getLength() - 1, changeLogStyle);
+			
+			final AtomicInteger counter = new AtomicInteger(-1);
+			Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(improvement -> {
+				if (counter.addAndGet(1) >= 1) {
+					String s = "\t" + counter + " ";
+					textArea.appendText(s);
+					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style2);
+					textArea.appendText(improvement + "\n");
+					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+				}
+			});
+		} else {
+			
+			//new
+			text = "      New/Added \n";
+			textArea.appendText(text);
+			textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, newStyle);
+			final AtomicInteger counter = new AtomicInteger(-1);
+			Arrays.asList(element.getElementsByClass("new").text().split("\\*")).forEach(improvement -> {
+				if (counter.addAndGet(1) >= 1) {
+					String s = "\t\t" + counter + " ";
+					textArea.appendText(s);
+					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionNewCounters);
+					textArea.appendText(improvement + "\n");
+					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+				}
+			});
+			
+			//improved
+			text = "      Improved \n";
+			textArea.appendText(text);
+			textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, improvedStyle);
+			final AtomicInteger counter2 = new AtomicInteger(-1);
+			Arrays.asList(element.getElementsByClass("improved").text().split("\\*")).forEach(improvement -> {
+				if (counter2.addAndGet(1) >= 1) {
+					String s = "\t\t" + counter2 + " ";
+					textArea.appendText(s);
+					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionImrpovedCounters);
+					textArea.appendText(improvement + "\n");
+					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+				}
+			});
+			
+			//fixed
+			text = "      Bug Fixes \n";
+			textArea.appendText(text);
+			textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, bugFixesStyle);
+			final AtomicInteger counter3 = new AtomicInteger(-1);
+			Arrays.asList(element.getElementsByClass("fixed").text().split("\\*")).forEach(improvement -> {
+				if (counter3.addAndGet(1) >= 1) {
+					String s = "\t\t" + counter3 + " ";
+					textArea.appendText(s);
+					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionBugsFixedCounters);
+					textArea.appendText(improvement + "\n");
+					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+				}
+			});
+		}
 	}
 	
 	/**

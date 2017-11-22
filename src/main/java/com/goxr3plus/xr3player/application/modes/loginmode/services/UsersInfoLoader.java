@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.json.simple.DeserializationException;
@@ -21,10 +22,9 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.chart.PieChart;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
  * @author GOXR3PLUS
@@ -108,6 +108,10 @@ public class UsersInfoLoader extends Service<Boolean> {
 							//--User Description
 							Optional.ofNullable(userInformationSettings.getProperty("User-Description"))
 									.ifPresent(description -> Platform.runLater(() -> user.getDescriptionLabel().setText(description)));
+							
+							//--Drop-Box-Accounts
+							Optional.ofNullable(userInformationSettings.getProperty("DropBox-Access-Tokens")).ifPresent(
+									accessTokens -> Platform.runLater(() -> user.getDropBoxLabel().setText(Integer.toString(accessTokens.split(Pattern.quote("<>:<>")).length))));
 							
 						} //If the UserInformation Properties File doesn't exit try to take Total-Libraries information from the actual sqlite.db file
 							//this process is slow as fu.ck that's why i am keeping information inside a properties file generally...
