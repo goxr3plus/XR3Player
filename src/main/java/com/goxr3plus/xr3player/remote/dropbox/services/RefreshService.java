@@ -43,6 +43,7 @@ public class RefreshService extends Service<Boolean> {
 	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
 	private DbxClientV2 client;
 	private String previousAccessToken;
+	private String startingPath;
 	
 	/**
 	 * Constructor
@@ -52,7 +53,7 @@ public class RefreshService extends Service<Boolean> {
 	public RefreshService(DropBoxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		
-		//On Succesfully exiting
+		//On Succesfuly exiting
 		setOnSucceeded(s -> {
 			
 			//Check if failed
@@ -70,8 +71,14 @@ public class RefreshService extends Service<Boolean> {
 		
 	}
 	
-	@Override
-	public void restart() {
+	/**
+	 * Restart the Service
+	 * 
+	 * @param path
+	 *            The path to follow and open the Tree
+	 */
+	public void startService(String path) {
+		this.startingPath = path;
 		
 		//Set LoginScreen not visible 
 		dropBoxViewer.getLoginVBox().setVisible(false);
@@ -98,7 +105,9 @@ public class RefreshService extends Service<Boolean> {
 					Platform.runLater(() -> dropBoxViewer.getTopMenuButton().setText(" " + account.getName().getDisplayName()));
 					
 					TreeMap<String,Metadata> children = new TreeMap<>();
-					listAllFiles(client, "", children);
+					
+					System.out.println("Starting path : " + startingPath);
+					listAllFiles(client, startingPath, children);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					
@@ -131,49 +140,29 @@ public class RefreshService extends Service<Boolean> {
 					
 					while (true) {
 						for (Metadata metadata : result.getEntries()) {
-							if (metadata instanceof DeletedMetadata) { //Deleted
-								children.remove(metadata.getPathLower());
-							} else if (metadata instanceof FolderMetadata) { //Folder
+							if (metadata instanceof DeletedMetadata) { // Deleted
+								//	children.remove(metadata.getPathLower());
+							} else if (metadata instanceof FolderMetadata) { // Folder
 								String folder = metadata.getPathLower();
 								String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-								children.put(folder, metadata);
+								//children.put(folder, metadata)
 								
-								boolean subFileOfCurrentFolder = path.equals(parent);
-								System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
+								//boolean subFileOfCurrentFolder = path.equals(parent);
+								//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
 								
-								//Add to TreeView						
-								Platform.runLater(() -> {
-									if (!subFileOfCurrentFolder)
-										getTreeViewItem(dropBoxViewer.getRoot(), path).getChildren().add(new DropBoxFileTreeItem(folder, metadata));
-									else {
-										DropBoxFileTreeItem dropBoxFileTreeItem = getTreeViewItem(dropBoxViewer.getRoot(), parent);
-										if (dropBoxFileTreeItem != null)
-											dropBoxFileTreeItem.getChildren().add(new DropBoxFileTreeItem(folder, metadata));
-									}
-									
-								});
+								//Add to TreeView	
+								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
 								
-								listAllFiles(client, folder, children);
+								//listAllFiles(client, folder, children);
 							} else if (metadata instanceof FileMetadata) { //File
 								String file = metadata.getPathLower();
 								String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-								children.put(file, metadata);
+								//children.put(file, metadata)
 								
-								boolean subFileOfCurrentFolder = path.equals(parent);
-								System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
+								//boolean subFileOfCurrentFolder = path.equals(parent);
+								//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
 								
-								//Add to TreeView
-								Platform.runLater(() -> {
-									if (!subFileOfCurrentFolder)
-										getTreeViewItem(dropBoxViewer.getRoot(), path).getChildren().add(new DropBoxFileTreeItem(file, metadata));
-									else {
-										DropBoxFileTreeItem dropBoxFileTreeItem = getTreeViewItem(dropBoxViewer.getRoot(), parent);
-										if (dropBoxFileTreeItem != null)
-											dropBoxFileTreeItem.getChildren().add(new DropBoxFileTreeItem(file, metadata));
-									}
-									
-								});
-								
+								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
 							}
 						}
 						
@@ -182,7 +171,7 @@ public class RefreshService extends Service<Boolean> {
 						
 						try {
 							result = client.files().listFolderContinue(result.getCursor());
-							System.out.println("Entered result next");
+							//System.out.println("Entered result next")
 						} catch (ListFolderContinueErrorException ex) {
 							ex.printStackTrace();
 						}
@@ -231,11 +220,16 @@ public class RefreshService extends Service<Boolean> {
 			 * @param item
 			 */
 			private DropBoxFileTreeItem getTreeViewItem(TreeItem<String> item , String value) {
+				//System.out.println("Current Item Value: " + item.getValue() + " Search Value: " + value);
 				if (item != null && item.getValue().equals(value))
 					return (DropBoxFileTreeItem) item;
 				
+				//Check if it is leaf
+				//if (!item.isLeaf())
 				for (TreeItem<String> child : item.getChildren())
 					getTreeViewItem(child, value);
+				//else
+				//	return getTreeViewItem(item, value);
 				
 				return null;
 			}

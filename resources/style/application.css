@@ -9,6 +9,53 @@
 
 /*******************************************************************************
 
+*                           bread-crumb-bar                                        *
+
+******************************************************************************/
+
+
+.bread-crumb-bar {
+     -fx-background-color: #101010;
+}
+
+ .bread-crumb-bar .button {
+    /*-fx-padding: 8.0 12.0 8.0 20.0;
+    -fx-border-color: null;
+    -fx-border-insets: 0.0;
+    -fx-content-display: left;
+    -fx-background-position: left center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-shape: null;
+    */
+}
+
+/*.bread-crumb-bar .first {
+    -fx-background-color: transparent ;
+    -fx-border-color: transparent;
+    -fx-font-size: 1.11em;
+    -fx-text-fill: #000;
+    -fx-background-image: null;
+    -fx-shape: null;
+    -fx-padding: 8.0 12.0 8.0 0.0;
+}
+.crumb {
+    -fx-text-fill: white;
+    
+}
+.crumb:hover, .crumb:selected,  .crumb:focused {
+    -fx-background-color: rgba(0.0,0.0,0.0,0.1);
+    -fx-border-color: null;
+  -fx-font-weight:bold;
+    -fx-text-fill: white;
+    
+}
+
+*/
+
+/*******************************************************************************
+
 *                           SplitPane                                        *
 
 ******************************************************************************/

@@ -1,6 +1,8 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,11 +10,15 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.controlsfx.control.BreadCrumbBar;
+import org.controlsfx.control.BreadCrumbBar.BreadCrumbActionEvent;
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -53,6 +59,9 @@ public class DropBoxViewer extends StackPane {
 	
 	@FXML
 	private Button collapseTree;
+	
+	@FXML
+	private BreadCrumbBar<String> breadCrumbBar;
 	
 	@FXML
 	private TreeView<String> treeView;
@@ -160,7 +169,7 @@ public class DropBoxViewer extends StackPane {
 		});
 		
 		//refresh
-		refresh.setOnAction(a -> recreateTree());
+		refresh.setOnAction(a -> recreateTree(""));
 		
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
@@ -183,7 +192,7 @@ public class DropBoxViewer extends StackPane {
 				loginVBox.setVisible(false);
 				
 				//Go Make It
-				recreateTree();
+				recreateTree("");
 				
 				//Refresh Saved Accounts
 				refreshSavedAccounts();
@@ -215,7 +224,7 @@ public class DropBoxViewer extends StackPane {
 			accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
 			
 			//Go Make It
-			recreateTree();
+			recreateTree("");
 		});
 		
 		//deleteSavedAccount
@@ -232,6 +241,19 @@ public class DropBoxViewer extends StackPane {
 		
 		//tryAgain
 		tryAgain.setOnAction(a -> checkForInternetConnection());
+		
+		//breadCrumbBar
+		breadCrumbBar.setOnCrumbAction(new EventHandler<BreadCrumbBar.BreadCrumbActionEvent<String>>() {
+			@Override
+			public void handle(BreadCrumbActionEvent<String> bae) {
+				
+				//Recreate Tree
+				String value = breadCrumbBar.getSelectedCrumb().getValue();
+				recreateTree(value.isEmpty() ? "" : "/" + value);
+				
+				System.out.println("Entered Bread Crumb Bar Action");			
+			}
+		});
 		
 	}
 	
@@ -271,13 +293,35 @@ public class DropBoxViewer extends StackPane {
 	/**
 	 * Recreates the TreeView
 	 */
-	public void recreateTree() {
+	public void recreateTree(String path) {
 		
 		//Clear all the children
 		root.getChildren().clear();
 		
+		//BreadCrumbBar
+		if (path.isEmpty()) {
+			
+			//Build the Model
+			TreeItem<String> model = BreadCrumbBar.buildTreeModel("");
+			breadCrumbBar.setSelectedCrumb(model);
+			
+			//PRINT
+			System.out.println(Arrays.asList(path.split("/")));
+		} else {
+			
+			//Build the Model
+			TreeItem<String> model = BreadCrumbBar.buildTreeModel((String[]) Arrays.asList(path.split("/")).toArray(new String[0]));
+			
+			//Add all the items to the model
+			breadCrumbBar.setSelectedCrumb(model);
+			
+			//PRINT
+			System.out.println(Arrays.asList(path.split("/")));
+			
+		}
+		
 		//Start the Service
-		refreshService.restart();
+		refreshService.startService(path);
 	}
 	
 	/**
@@ -297,24 +341,9 @@ public class DropBoxViewer extends StackPane {
 		}
 		
 		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 1) {
-			
-			// source is expanded
-			if (!source.isExpanded() && source.getChildren().isEmpty()) {
-				
-				//Check if the TreeItem has not children yet
-				if (source.getChildren().isEmpty()) {
-					
-				} else {
-					// if you want to implement rescanning a
-					// directory
-					// for
-					// changes this would be the place to do it
-				}
-				
-				source.setExpanded(true);
+			if (source.isDirectory()) {
+				recreateTree(source.getMetadata().getPathLower());
 			}
-			
-		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 			
 		}
 	}
@@ -400,6 +429,13 @@ public class DropBoxViewer extends StackPane {
 	 */
 	public VBox getErrorVBox() {
 		return errorVBox;
+	}
+	
+	/**
+	 * @return the breadCrumbBar
+	 */
+	public BreadCrumbBar<String> getBreadCrumbBar() {
+		return breadCrumbBar;
 	}
 	
 }
