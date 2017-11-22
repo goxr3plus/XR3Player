@@ -96,6 +96,7 @@ public class DropboxAuthenticationBrowser extends StackPane {
 		
 		//Create the Window	
 		window.setTitle("Dropbox Sign In");
+		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setScene(new Scene(this));
 	}

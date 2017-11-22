@@ -125,13 +125,6 @@ public class RefreshService extends Service<Boolean> {
 						//Check if folder is empty
 						Platform.runLater(() -> dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty()));
 						
-					} else { //Here refreshSavedAccounts
-						
-						///DbxClientV2 client 
-						dropBoxViewer.getSavedAccountsListView().getItems().forEach(item -> {
-							DbxClientV2 client = new DbxClientV2(config, item);
-						});
-						
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();

@@ -29,6 +29,7 @@
     -fx-border-color: transparent;
     -fx-shape: null;
     */
+    -fx-cursor:hand;
 }
 
 /*.bread-crumb-bar .first {

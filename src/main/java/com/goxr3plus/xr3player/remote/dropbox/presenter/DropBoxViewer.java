@@ -23,14 +23,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -254,18 +258,40 @@ public class DropBoxViewer extends StackPane {
 		tryAgain.setOnAction(a -> checkForInternetConnection());
 		
 		//breadCrumbBar
-		breadCrumbBar.setOnCrumbAction(new EventHandler<BreadCrumbBar.BreadCrumbActionEvent<String>>() {
+		breadCrumbBar.setOnCrumbAction(event -> {
+			
+			//Recreate Tree
+			String value = event.getSelectedCrumb().getValue();
+			if ("DROPBOX ROOT".equals(value))
+				recreateTree("");
+			else
+				recreateTree(refreshService.getStartingPath().split(value)[0] + value);
+			
+		});
+		
+		//savedAccountsListView
+		savedAccountsListView.setCellFactory(lv -> new ListCell<String>() {
 			@Override
-			public void handle(BreadCrumbActionEvent<String> bae) {
-				
-				//Recreate Tree
-				String value = bae.getSelectedCrumb().getValue();
-				if ("DROPBOX ROOT".equals(value))
-					recreateTree("");
-				else {
-					recreateTree(refreshService.getStartingPath().split(value)[0] + value);
-					//System.out.println("\n\nBreadCrumbBar Value : " + value + " , Find Path :" + findPath)
+			public void updateItem(String item , boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+				} else {
+					//String text = item.contains("<>:<>") ? item.split("<>:<>")[0] : item; // get text from item
+					setText(item);
+					setTooltip(new Tooltip(item));
+					this.setGraphic(new ImageView(dropBoxImage));
 				}
+			}
+		});
+		savedAccountsListView.setOnKeyReleased(key -> {
+			if (key.getCode() == KeyCode.ENTER && !savedAccountsListView.getItems().isEmpty()) {
+				
+				//AccessToken
+				accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
+				
+				//Go Make It
+				recreateTree("");
 				
 			}
 		});
