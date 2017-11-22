@@ -82,7 +82,20 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </BreadCrumbBar>
-                  <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <StackPane>
+                     <children>
+                        <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                        <Label fx:id="emptyFolderLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="This folder is empty " textAlignment="CENTER" wrapText="true">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/folder.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </StackPane>
                </children>
             </VBox>
          </children>
@@ -92,7 +105,7 @@
             <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="110.0" styleClass="dropbox-progress-indicator" />
          </graphic>
       </Label>
-      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #007EE5;" visible="false">
+      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #007EE5;">
          <children>
             <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
@@ -114,38 +127,51 @@
                         <Reflection />
                      </effect>
                   </Button>
-                  <VBox alignment="CENTER" minWidth="0.0">
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Saved DropBox Accounts" />
-                        <ListView fx:id="savedAccountsListView" minWidth="0.0" VBox.vgrow="ALWAYS" />
-                        <HBox>
+                        <VBox alignment="CENTER" minWidth="0.0">
                            <children>
-                              <Button fx:id="loginWithSavedAccount" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Log in " HBox.hgrow="ALWAYS">
-                                 <tooltip>
-                                    <Tooltip text="Automatically login with an already saved DropBox Account" />
-                                 </tooltip>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <InnerShadow />
-                                 </effect>
-                              </Button>
-                              <Button fx:id="deleteSavedAccount" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Delete" HBox.hgrow="ALWAYS">
-                                 <tooltip>
-                                    <Tooltip text="Delete this saved DropBox Account from database" />
-                                 </tooltip>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <InnerShadow />
-                                 </effect>
-                              </Button>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Saved DropBox Accounts" />
+                              <ListView fx:id="savedAccountsListView" minWidth="0.0" VBox.vgrow="ALWAYS" />
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="loginWithSavedAccount" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Log in " HBox.hgrow="ALWAYS">
+                                       <tooltip>
+                                          <Tooltip text="Automatically login with an already saved DropBox Account" />
+                                       </tooltip>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <InnerShadow />
+                                       </effect>
+                                    </Button>
+                                    <Button fx:id="deleteSavedAccount" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Delete" HBox.hgrow="ALWAYS">
+                                       <tooltip>
+                                          <Tooltip text="Delete this saved DropBox Account from database" />
+                                       </tooltip>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <InnerShadow />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
+                        <Label fx:id="dropBoxAccountsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0 Saved DropBox Accounts" textAlignment="CENTER" wrapText="true">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/dropbox.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
                      </children>
-                  </VBox>
+                  </StackPane>
                </items>
             </SplitPane>
          </children>

@@ -23,7 +23,6 @@ import com.dropbox.core.v2.users.FullAccount;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.control.TreeItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -44,6 +43,7 @@ public class RefreshService extends Service<Boolean> {
 	private DbxClientV2 client;
 	private String previousAccessToken;
 	private String startingPath;
+	private boolean refreshSavedAccounts;
 	
 	/**
 	 * Constructor
@@ -87,27 +87,52 @@ public class RefreshService extends Service<Boolean> {
 		super.restart();
 	}
 	
+	/**
+	 * This method checks any saved accounts and refreshes ListView to show Account mail etc .. instead of plaing Access_Tokens
+	 */
+	public void refreshSavedAccounts(boolean refreshAccounts) {
+		refreshAccounts = true;
+		
+		//Restart
+		super.restart();
+	}
+	
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() throws Exception {
+				
 				try {
-					
-					//Create the Client
-					if (client == null || previousAccessToken == null || !previousAccessToken.equals(dropBoxViewer.getAccessToken())) {
-						previousAccessToken = dropBoxViewer.getAccessToken();
-						client = new DbxClientV2(config, dropBoxViewer.getAccessToken());
+					//Do we want to refreshSavedAccounts or list files for one particular connected account?
+					if (!refreshSavedAccounts) {
+						
+						//Create the Client
+						if (client == null || previousAccessToken == null || !previousAccessToken.equals(dropBoxViewer.getAccessToken())) {
+							previousAccessToken = dropBoxViewer.getAccessToken();
+							client = new DbxClientV2(config, dropBoxViewer.getAccessToken());
+						}
+						
+						// Get current account info
+						FullAccount account = client.users().getCurrentAccount();
+						Platform.runLater(() -> dropBoxViewer.getTopMenuButton().setText(" " + account.getName().getDisplayName()));
+						
+						TreeMap<String,Metadata> children = new TreeMap<>();
+						
+						//List all the files brooooo!
+						listAllFiles(client, startingPath, children);
+						
+						//Check if folder is empty
+						Platform.runLater(() -> dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty()));
+						
+					} else { //Here refreshSavedAccounts
+						
+						///DbxClientV2 client 
+						dropBoxViewer.getSavedAccountsListView().getItems().forEach(item -> {
+							DbxClientV2 client = new DbxClientV2(config, item);
+						});
+						
 					}
-					
-					// Get current account info
-					FullAccount account = client.users().getCurrentAccount();
-					Platform.runLater(() -> dropBoxViewer.getTopMenuButton().setText(" " + account.getName().getDisplayName()));
-					
-					TreeMap<String,Metadata> children = new TreeMap<>();
-					
-					System.out.println("Starting path : " + startingPath);
-					listAllFiles(client, startingPath, children);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					
@@ -145,7 +170,7 @@ public class RefreshService extends Service<Boolean> {
 							} else if (metadata instanceof FolderMetadata) { // Folder
 								String folder = metadata.getPathLower();
 								String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-								//children.put(folder, metadata)
+								children.put(folder, metadata);
 								
 								//boolean subFileOfCurrentFolder = path.equals(parent);
 								//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
@@ -157,7 +182,7 @@ public class RefreshService extends Service<Boolean> {
 							} else if (metadata instanceof FileMetadata) { //File
 								String file = metadata.getPathLower();
 								String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-								//children.put(file, metadata)
+								children.put(file, metadata);
 								
 								//boolean subFileOfCurrentFolder = path.equals(parent);
 								//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
@@ -215,24 +240,24 @@ public class RefreshService extends Service<Boolean> {
 			}
 			
 			/**
-			 * Collapses the whole TreeView
+			 * Collapses the whole TreeView THIS METHOD IS BUGGED AS FUCK...DAAADADAYYDUUMN MA BRO
 			 * 
 			 * @param item
 			 */
-			private DropBoxFileTreeItem getTreeViewItem(TreeItem<String> item , String value) {
-				//System.out.println("Current Item Value: " + item.getValue() + " Search Value: " + value);
-				if (item != null && item.getValue().equals(value))
-					return (DropBoxFileTreeItem) item;
-				
-				//Check if it is leaf
-				//if (!item.isLeaf())
-				for (TreeItem<String> child : item.getChildren())
-					getTreeViewItem(child, value);
-				//else
-				//	return getTreeViewItem(item, value);
-				
-				return null;
-			}
+			//			private DropBoxFileTreeItem getTreeViewItem(TreeItem<String> item , String value) {
+			//				//System.out.println("Current Item Value: " + item.getValue() + " Search Value: " + value);
+			//				if (item != null && item.getValue().equals(value))
+			//					return (DropBoxFileTreeItem) item;
+			//				
+			//				//Check if it is leaf
+			//				//if (!item.isLeaf())
+			//				for (TreeItem<String> child : item.getChildren())
+			//					getTreeViewItem(child, value);
+			//				//else
+			//				//	return getTreeViewItem(item, value);
+			//				
+			//				return null;
+			//			}
 		};
 	}
 	
@@ -242,4 +267,12 @@ public class RefreshService extends Service<Boolean> {
 	public DbxClientV2 getClient() {
 		return client;
 	}
+	
+	/**
+	 * @return the startingPath
+	 */
+	public String getStartingPath() {
+		return startingPath;
+	}
+	
 }

@@ -86,10 +86,13 @@
                <tooltip>
                   <Tooltip text="Image is missing !!" />
                </tooltip>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
             </Label>
             <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="543545" textAlignment="CENTER">
                <cursor>
-                  <Cursor fx:constant="HAND" />
+                  <Cursor fx:constant="DEFAULT" />
                </cursor>
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">

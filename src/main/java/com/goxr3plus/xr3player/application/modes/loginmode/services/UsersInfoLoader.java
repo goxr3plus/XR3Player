@@ -110,8 +110,14 @@ public class UsersInfoLoader extends Service<Boolean> {
 									.ifPresent(description -> Platform.runLater(() -> user.getDescriptionLabel().setText(description)));
 							
 							//--Drop-Box-Accounts
-							Optional.ofNullable(userInformationSettings.getProperty("DropBox-Access-Tokens")).ifPresent(
-									accessTokens -> Platform.runLater(() -> user.getDropBoxLabel().setText(Integer.toString(accessTokens.split(Pattern.quote("<>:<>")).length))));
+							Optional.ofNullable(userInformationSettings.getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {
+								
+								if (accessTokens.contains("<>:<>")) //Check if we have multiple access tokens
+									Platform.runLater(() -> user.getDropBoxLabel().setText(Integer.toString(accessTokens.split(Pattern.quote("<>:<>")).length)));
+								else if (!accessTokens.isEmpty()) //Check if we have one access token
+									Platform.runLater(() -> user.getDropBoxLabel().setText(Integer.toString(1)));
+								
+							});
 							
 						} //If the UserInformation Properties File doesn't exit try to take Total-Libraries information from the actual sqlite.db file
 							//this process is slow as fu.ck that's why i am keeping information inside a properties file generally...

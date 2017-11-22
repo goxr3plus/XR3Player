@@ -1,8 +1,8 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,6 +96,12 @@ public class DropBoxViewer extends StackPane {
 	@FXML
 	private ProgressIndicator tryAgainIndicator;
 	
+	@FXML
+	private Label emptyFolderLabel;
+	
+	@FXML
+	private Label dropBoxAccountsLabel;
+	
 	// -------------------------------------------------------------
 	
 	/** The logger. */
@@ -148,7 +154,7 @@ public class DropBoxViewer extends StackPane {
 		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		// Mouse Released Event
-		treeView.setOnMouseReleased(this::treeViewMouseReleased);
+		treeView.setOnMouseClicked(this::mouseClicked);
 		
 		//refreshLabel
 		refreshLabel.visibleProperty().bind(refreshService.runningProperty());
@@ -169,7 +175,7 @@ public class DropBoxViewer extends StackPane {
 		});
 		
 		//refresh
-		refresh.setOnAction(a -> recreateTree(""));
+		refresh.setOnAction(a -> recreateTree(refreshService.getStartingPath()));
 		
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
@@ -186,7 +192,9 @@ public class DropBoxViewer extends StackPane {
 				
 				//Save on the database
 				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();
-				propertiesDb.updateProperty("DropBox-Access-Tokens", propertiesDb.getProperty("DropBox-Access-Tokens") + "<>:<>" + accessToken);
+				propertiesDb.updateProperty("DropBox-Access-Tokens",
+						( propertiesDb.getProperty("DropBox-Access-Tokens") == null ? "" : propertiesDb.getProperty("DropBox-Access-Tokens") )
+								+ ( savedAccountsListView.getItems().isEmpty() ? "" : "<>:<>" ) + accessToken);
 				
 				//loginVBox
 				loginVBox.setVisible(false);
@@ -236,6 +244,9 @@ public class DropBoxViewer extends StackPane {
 			if (items != null) {
 				items.remove(savedAccountsListView.getSelectionModel().getSelectedItem());
 				Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
+				
+				//DropBoxAccountsLabel
+				dropBoxAccountsLabel.setVisible(items.isEmpty());
 			}
 		});
 		
@@ -248,10 +259,14 @@ public class DropBoxViewer extends StackPane {
 			public void handle(BreadCrumbActionEvent<String> bae) {
 				
 				//Recreate Tree
-				String value = breadCrumbBar.getSelectedCrumb().getValue();
-				recreateTree(value.isEmpty() ? "" : "/" + value);
+				String value = bae.getSelectedCrumb().getValue();
+				if ("DROPBOX ROOT".equals(value))
+					recreateTree("");
+				else {
+					recreateTree(refreshService.getStartingPath().split(value)[0] + value);
+					//System.out.println("\n\nBreadCrumbBar Value : " + value + " , Find Path :" + findPath)
+				}
 				
-				System.out.println("Entered Bread Crumb Bar Action");			
 			}
 		});
 		
@@ -263,8 +278,15 @@ public class DropBoxViewer extends StackPane {
 	public void refreshSavedAccounts() {
 		
 		//savedAccountsListView
-		Optional.ofNullable(Main.userMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> savedAccountsListView
-				.setItems(Stream.of(accessTokens.split(Pattern.quote("<>:<>"))).collect(Collectors.toCollection(FXCollections::observableArrayList))));
+		Optional.ofNullable(Main.userMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {
+			if (accessTokens.contains("<>:<>")) //Check if we have multiple access tokens
+				savedAccountsListView.setItems(Stream.of(accessTokens.split(Pattern.quote("<>:<>"))).collect(Collectors.toCollection(FXCollections::observableArrayList)));
+			else if (!accessTokens.isEmpty()) //Check if we have one access token
+				savedAccountsListView.setItems(Stream.of(accessTokens).collect(Collectors.toCollection(FXCollections::observableArrayList)));
+		});
+		
+		//DropBoxAccountsLabel
+		dropBoxAccountsLabel.setVisible(savedAccountsListView.getItems().isEmpty());
 	}
 	
 	/**
@@ -302,21 +324,26 @@ public class DropBoxViewer extends StackPane {
 		if (path.isEmpty()) {
 			
 			//Build the Model
-			TreeItem<String> model = BreadCrumbBar.buildTreeModel("");
+			TreeItem<String> model = BreadCrumbBar.buildTreeModel("DROPBOX ROOT");
 			breadCrumbBar.setSelectedCrumb(model);
 			
 			//PRINT
-			System.out.println(Arrays.asList(path.split("/")));
+			//System.out.println(Arrays.asList(path.split("/")))
 		} else {
 			
+			//Build the ArrayList
+			ArrayList<String> arrayList = new ArrayList<>();
+			arrayList.add("DROPBOX ROOT");
+			arrayList.addAll(Arrays.asList(path.replaceFirst(Pattern.quote("/"), "").split("/")));
+			
 			//Build the Model
-			TreeItem<String> model = BreadCrumbBar.buildTreeModel((String[]) Arrays.asList(path.split("/")).toArray(new String[0]));
+			TreeItem<String> model = BreadCrumbBar.buildTreeModel((String[]) arrayList.toArray(new String[0]));
 			
 			//Add all the items to the model
 			breadCrumbBar.setSelectedCrumb(model);
 			
 			//PRINT
-			System.out.println(Arrays.asList(path.split("/")));
+			//System.out.println(Arrays.asList(path.split("/")))
 			
 		}
 		
@@ -330,7 +357,7 @@ public class DropBoxViewer extends StackPane {
 	 * @param mouseEvent
 	 *            [[SuppressWarningsSpartan]]
 	 */
-	private void treeViewMouseReleased(MouseEvent mouseEvent) {
+	private void mouseClicked(MouseEvent mouseEvent) {
 		//Get the selected item
 		DropBoxFileTreeItem source = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		
@@ -436,6 +463,20 @@ public class DropBoxViewer extends StackPane {
 	 */
 	public BreadCrumbBar<String> getBreadCrumbBar() {
 		return breadCrumbBar;
+	}
+	
+	/**
+	 * @return the emptyFolderLabel
+	 */
+	public Label getEmptyFolderLabel() {
+		return emptyFolderLabel;
+	}
+	
+	/**
+	 * @return the savedAccountsListView
+	 */
+	public ListView<String> getSavedAccountsListView() {
+		return savedAccountsListView;
 	}
 	
 }

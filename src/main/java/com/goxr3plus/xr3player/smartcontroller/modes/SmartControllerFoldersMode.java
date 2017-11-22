@@ -134,7 +134,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		// Mouse Released Event
-		treeView.setOnMouseReleased(this::treeViewMouseReleased);
+		treeView.setOnMouseClicked(this::treeViewMouseClicked);
 		
 		// Drag Implementation
 		treeView.setOnDragDetected(event -> {
@@ -255,7 +255,7 @@ public class SmartControllerFoldersMode extends StackPane {
 	 * @param mouseEvent
 	 *            [[SuppressWarningsSpartan]]
 	 */
-	private void treeViewMouseReleased(MouseEvent mouseEvent) {
+	private void treeViewMouseClicked(MouseEvent mouseEvent) {
 		//Get the selected item
 		FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		

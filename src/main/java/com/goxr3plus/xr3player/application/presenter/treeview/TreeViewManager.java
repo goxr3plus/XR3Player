@@ -87,7 +87,7 @@ public class TreeViewManager extends BorderPane {
 		systemTreeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		// Mouse Released Event
-		systemTreeView.setOnMouseReleased(this::treeViewMouseReleased);
+		systemTreeView.setOnMouseClicked(this::treeViewMouseClicked);
 		
 		// Drag Implementation
 		systemTreeView.setOnDragDetected(event -> {
@@ -146,7 +146,7 @@ public class TreeViewManager extends BorderPane {
 	 * @param mouseEvent
 	 *            [[SuppressWarningsSpartan]]
 	 */
-	private void treeViewMouseReleased(MouseEvent mouseEvent) {
+	private void treeViewMouseClicked(MouseEvent mouseEvent) {
 		//Get the selected item
 		FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
 		
