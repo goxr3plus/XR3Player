@@ -83,8 +83,11 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <VBox.margin>
-                        <Insets bottom="3.0" />
+                        <Insets />
                      </VBox.margin>
+                     <padding>
+                        <Insets bottom="3.0" />
+                     </padding>
                   </BreadCrumbBar>
                   <StackPane>
                      <children>
