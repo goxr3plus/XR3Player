@@ -382,7 +382,7 @@ public class LoginMode extends BorderPane {
 		
 		// restartButton
 		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton, Main.window))
+			if (ActionTool.doQuestion("Restart", "Soore you want to restart the application?", restartButton, Main.window))
 				Main.restartTheApplication(true);
 		});
 		
@@ -465,7 +465,8 @@ public class LoginMode extends BorderPane {
 	 */
 	public void deleteUser(Node owner) {
 		//Ask
-		if (ActionTool.doQuestion("Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]", owner, Main.window)) {
+		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]", owner,
+				Main.window)) {
 			
 			//Try to delete it
 			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + teamViewer.getSelectedItem().getUserName())))
@@ -528,7 +529,7 @@ public class LoginMode extends BorderPane {
 	public ColorPicker getColorPicker() {
 		return colorPicker;
 	}
-
+	
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 

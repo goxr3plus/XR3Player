@@ -126,8 +126,7 @@ public class Library extends StackPane {
 	private StringProperty description;
 	
 	/**
-	 * // create a rotation transform starting at 0 degrees, rotating about
-	 * pivot point 0, 0.
+	 * // create a rotation transform starting at 0 degrees, rotating about pivot point 0, 0.
 	 */
 	// Rotate rotationTransform = new Rotate(0, 0, 0)
 	
@@ -139,8 +138,7 @@ public class Library extends StackPane {
 	public enum SaveMode {
 		
 		/**
-		 * Songs are not copied into the database so if they are deleted they
-		 * don't exist anymore.
+		 * Songs are not copied into the database so if they are deleted they don't exist anymore.
 		 */
 		ORIGINAL_PATH,
 		
@@ -589,8 +587,7 @@ public class Library extends StackPane {
 	//    }
 	
 	/**
-	 * Updates the position variable of Library in database so the next time
-	 * viewer position it correct.
+	 * Updates the position variable of Library in database so the next time viewer position it correct.
 	 *
 	 * @param newPosition
 	 *            The new position of the Library
@@ -683,7 +680,7 @@ public class Library extends StackPane {
 		try (PreparedStatement libUImage = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET LIBRARYIMAGE=?  WHERE NAME=?")) {
 			
 			// Ask if user is sure...
-			if (ActionTool.doQuestion("Reset to default the image of this library?", this, Main.window)) {
+			if (ActionTool.doQuestion("Reset Image", "Reset to default the image of this library?", this, Main.window)) {
 				
 				// Delete the [[old]] image if exist
 				if (imageName != null && !new File(getAbsoluteImagePath()).delete())
@@ -810,8 +807,7 @@ public class Library extends StackPane {
 		stars.bind(Main.starWindow.starsProperty());
 		
 		/***
-		 * This InvalidationListener is used when i want to change the stars of
-		 * the Library
+		 * This InvalidationListener is used when i want to change the stars of the Library
 		 */
 		InvalidationListener updateStarsInvalidation = new InvalidationListener() {
 			@Override
@@ -848,7 +844,7 @@ public class Library extends StackPane {
 	 * Delete the library.
 	 */
 	public void deleteLibrary(Node owner) {
-		if (controller.isFree(true) && ActionTool.doQuestion("Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner, Main.window)) {
+		if (controller.isFree(true) && ActionTool.doQuestion("Delete Library","Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner, Main.window)) {
 			
 			try {
 				
@@ -1235,8 +1231,7 @@ public class Library extends StackPane {
 	 * This method is called when a key is released.
 	 *
 	 * @param key
-	 *            An event which indicates that a keystroke occurred in a
-	 *            javafx.scene.Node.
+	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
 		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())

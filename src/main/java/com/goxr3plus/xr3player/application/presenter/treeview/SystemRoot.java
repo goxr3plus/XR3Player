@@ -23,26 +23,30 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  */
 public class SystemRoot {
 	
-	/** The Constant folderImage. */
-	public static final Image closedFolderImage = InfoTool.getImageFromResourcesFolder("folder.png");
-	
 	/** The Constant openedFolderImage. */
-	public static final Image openedFolderImage = InfoTool.getImageFromResourcesFolder("openedFolder.png");
+	public static final Image OPENED_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("openedFolder.png");
+	
+	/** The Constant folderImage. */
+	public static final Image CLOSED_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("folder.png");
 	
 	/** The Constant fileImage. */
-	public static final Image fileImage = InfoTool.getImageFromResourcesFolder("file.png");
+	public static final Image FILE_IMAGE = InfoTool.getImageFromResourcesFolder("file.png");
 	
-	public static final Image musicFolderImage = InfoTool.getImageFromResourcesFolder("Music Folder-20.png");
+	public static final Image PICTURE_IMAGE = InfoTool.getImageFromResourcesFolder("picture.png");
 	
-	public static final Image videosFolderImage = InfoTool.getImageFromResourcesFolder("Movies Folder-20.png");
+	public static final Image PDF_IMAGE = InfoTool.getImageFromResourcesFolder("pdf.png");
 	
-	public static final Image documentsFolderImage = InfoTool.getImageFromResourcesFolder("Documents Folder-20.png");
+	public static final Image MUSIC_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("Music Folder-20.png");
 	
-	public static final Image downloadsFolderImage = InfoTool.getImageFromResourcesFolder("Downloads Folder-20.png");
+	public static final Image VIDEOS_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("Movies Folder-20.png");
 	
-	public static final Image picturesFolderImage = InfoTool.getImageFromResourcesFolder("Pictures Folder-20.png");
+	public static final Image DOCUMENTS_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("Documents Folder-20.png");
 	
-	public static final Image userFolderImage = InfoTool.getImageFromResourcesFolder("User Folder-20.png");
+	public static final Image DOWNLOADS_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("Downloads Folder-20.png");
+	
+	public static final Image PICTURES_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("Pictures Folder-20.png");
+	
+	public static final Image USER_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("User Folder-20.png");
 	
 	/** The host name. */
 	String hostName = "computer";
@@ -72,7 +76,7 @@ public class SystemRoot {
 		
 		// User Folder
 		FileTreeItem userFolder = new FileTreeItem(userHome);
-		( (ImageView) userFolder.getGraphic() ).setImage(userFolderImage);
+		( (ImageView) userFolder.getGraphic() ).setImage(USER_FOLDER_IMAGE);
 		root.getChildren().add(userFolder);
 		
 		//Based on the Operating System
@@ -80,27 +84,27 @@ public class SystemRoot {
 			
 			//Documents
 			FileTreeItem documentsFolder = new FileTreeItem(userHome + File.separator + "Documents");
-			( (ImageView) documentsFolder.getGraphic() ).setImage(documentsFolderImage);
+			( (ImageView) documentsFolder.getGraphic() ).setImage(DOCUMENTS_FOLDER_IMAGE);
 			root.getChildren().add(documentsFolder);
 			
 			//Downloads
 			FileTreeItem downloadsFolder = new FileTreeItem(userHome + File.separator + "Downloads");
-			( (ImageView) downloadsFolder.getGraphic() ).setImage(downloadsFolderImage);
+			( (ImageView) downloadsFolder.getGraphic() ).setImage(DOWNLOADS_FOLDER_IMAGE);
 			root.getChildren().add(downloadsFolder);
 			
 			//Music
 			FileTreeItem musicFolder = new FileTreeItem(userHome + File.separator + "Music");
-			( (ImageView) musicFolder.getGraphic() ).setImage(musicFolderImage);
+			( (ImageView) musicFolder.getGraphic() ).setImage(MUSIC_FOLDER_IMAGE);
 			root.getChildren().add(musicFolder);
 			
 			//Pictures
 			FileTreeItem picturesFolder = new FileTreeItem(userHome + File.separator + "Pictures");
-			( (ImageView) picturesFolder.getGraphic() ).setImage(picturesFolderImage);
+			( (ImageView) picturesFolder.getGraphic() ).setImage(PICTURES_FOLDER_IMAGE);
 			root.getChildren().add(picturesFolder);
 			
 			//Videos
 			FileTreeItem videosFolder = new FileTreeItem(userHome + File.separator + "Videos");
-			( (ImageView) videosFolder.getGraphic() ).setImage(videosFolderImage);
+			( (ImageView) videosFolder.getGraphic() ).setImage(VIDEOS_FOLDER_IMAGE);
 			root.getChildren().add(videosFolder);
 			
 		}

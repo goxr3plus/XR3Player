@@ -85,7 +85,7 @@ public final class JavaFXTools {
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			absolutePath = paths.filter(path -> {
 				File file = path.toFile();
-				return !file.isDirectory() && title.equals(InfoTool.getFileTitle(file.getAbsolutePath())) && InfoTool.isImage(file.getAbsolutePath());
+				return !file.isDirectory() && title.equals(InfoTool.getFileTitle(file.getAbsolutePath())) && InfoTool.isImageSupported(file.getAbsolutePath());
 			}).findFirst().map(path -> path.toAbsolutePath().toString()).orElse(null);
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -128,7 +128,7 @@ public final class JavaFXTools {
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			paths.forEach(path -> {
 				File file = path.toFile();
-				if (!file.isDirectory() && InfoTool.getFileTitle(file.getAbsolutePath()).equals(title) && InfoTool.isImage(file.getAbsolutePath()))
+				if (!file.isDirectory() && InfoTool.getFileTitle(file.getAbsolutePath()).equals(title) && InfoTool.isImageSupported(file.getAbsolutePath()))
 					file.delete(); //-> to be fixed
 			});
 		} catch (IOException ex) {

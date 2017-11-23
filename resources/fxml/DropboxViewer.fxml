@@ -90,14 +90,72 @@
                         <Insets bottom="3.0" />
                      </padding>
                   </BreadCrumbBar>
-                  <StackPane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <StackPane maxHeight="1.7976931348623157E308" style="-fx-background-color: #202020;" VBox.vgrow="ALWAYS">
                      <children>
-                        <SplitPane dividerPositions="0.8" style="-fx-background-color: #202020;">
-                           <items>
-                              <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                              <VBox alignment="CENTER" fillWidth="false" prefWidth="124.0" style="-fx-background-color: #202020;">
+                        <VBox spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
                                  <children>
-                                    <Button fx:id="downloadButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Download File" wrapText="true">
+                                    <Button fx:id="createFolder" alignment="CENTER" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="New Folder" wrapText="true">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Download Selected File" />
+                                       </tooltip>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <MenuButton fx:id="deleteMenuButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Delete">
+                                      <items>
+                                        <MenuItem fx:id="deleteFile" mnemonicParsing="false" text="Delete">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/delete.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                        <MenuItem fx:id="permanentlyDeleteFile" mnemonicParsing="false" text="Permanently Delete">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/delete.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MenuItem>
+                                      </items>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuButton>
+                                    <Button fx:id="renameFile" alignment="CENTER" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/rename.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Download Selected File" />
+                                       </tooltip>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="downloadFile" alignment="CENTER" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Download" wrapText="true">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -113,9 +171,13 @@
                                        </cursor>
                                     </Button>
                                  </children>
-                              </VBox>
-                           </items>
-                        </SplitPane>
+                              </HBox>
+                              <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets top="3.0" />
+                           </padding>
+                        </VBox>
                         <Label fx:id="emptyFolderLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="This folder is empty " textAlignment="CENTER" visible="false" wrapText="true">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">

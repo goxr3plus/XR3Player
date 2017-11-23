@@ -35,7 +35,6 @@ public class FileTreeItem extends TreeItem<String> {
 		super(absolutePath);
 		this.fullPath = absolutePath;
 		
-		
 		//Is this a directory?
 		File file = new File(fullPath);
 		isDirectory = file.isDirectory();
@@ -44,14 +43,18 @@ public class FileTreeItem extends TreeItem<String> {
 		if (file.exists()) {
 			//It is directory?
 			if (isDirectory)
-				setImage(SystemRoot.closedFolderImage);
+				setImage(SystemRoot.CLOSED_FOLDER_IMAGE);
 			
 			else {
 				//Is it a music file?
-				if (InfoTool.isAudioSupported(absolutePath))
+				if (InfoTool.isAudio(absolutePath))
 					setImage(Media.SONG_IMAGE);
+				else if (InfoTool.isImage(absolutePath))
+					setImage(SystemRoot.PICTURE_IMAGE);
+				else if (InfoTool.isPdf(absolutePath))
+					setImage(SystemRoot.PDF_IMAGE);
 				else
-					setImage(SystemRoot.fileImage);
+					setImage(SystemRoot.FILE_IMAGE);
 			}
 		} else
 			setImage(x);
@@ -97,6 +100,5 @@ public class FileTreeItem extends TreeItem<String> {
 	public boolean isDirectory() {
 		return isDirectory;
 	}
-	
 	
 }

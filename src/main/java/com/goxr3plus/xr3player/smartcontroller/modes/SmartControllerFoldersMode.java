@@ -181,9 +181,9 @@ public class SmartControllerFoldersMode extends StackPane {
 						setGraphic(getTreeItem().getGraphic());
 					} else {
 						if (getTreeItem().isExpanded())
-							setGraphic(new ImageView(SystemRoot.openedFolderImage));
+							setGraphic(new ImageView(SystemRoot.OPENED_FOLDER_IMAGE));
 						else
-							setGraphic(new ImageView(SystemRoot.closedFolderImage));
+							setGraphic(new ImageView(SystemRoot.CLOSED_FOLDER_IMAGE));
 					}
 					
 				}

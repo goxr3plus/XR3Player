@@ -1,17 +1,13 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DeletedMetadata;
-import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.FolderMetadata;
 import com.dropbox.core.v2.files.ListFolderContinueErrorException;
@@ -27,11 +23,14 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressOutputStream;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxFileTreeItem;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
 
 public class RefreshService extends Service<Boolean> {
+	
+	public enum DropBoxOperation {
+		REFRESH, DELETE, PERMANENTLY_DELETE, RENAME;
+	}
 	
 	/**
 	 * DropBoxViewer
@@ -42,8 +41,12 @@ public class RefreshService extends Service<Boolean> {
 	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
 	private DbxClientV2 client;
 	private String previousAccessToken;
-	private String startingPath;
-	private boolean refreshSavedAccounts;
+	private String currentPath;
+	
+	/**
+	 * This path is being used to delete files
+	 */
+	private DropBoxOperation operation;
 	
 	/**
 	 * Constructor
@@ -53,7 +56,7 @@ public class RefreshService extends Service<Boolean> {
 	public RefreshService(DropBoxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		
-		//On Succesfuly exiting
+		//On Successful exiting
 		setOnSucceeded(s -> {
 			
 			//Check if failed
@@ -71,14 +74,29 @@ public class RefreshService extends Service<Boolean> {
 		
 	}
 	
+	//	/**
+	//	 * This method checks any saved accounts and refreshes ListView to show Account mail etc .. instead of plaing Access_Tokens
+	//	 */
+	//	@Deprecated
+	//	private void refreshSavedAccounts(boolean refreshAccounts) {
+	//		refreshAccounts = true;
+	//		
+	//		//Restart
+	//		super.restart();
+	//	}
+	
 	/**
 	 * Restart the Service
 	 * 
 	 * @param path
 	 *            The path to follow and open the Tree
 	 */
-	public void startService(String path) {
-		this.startingPath = path;
+	public void refresh(String path) {
+		this.currentPath = path;
+		this.operation = DropBoxOperation.REFRESH;
+		
+		//Clear all the children
+		dropBoxViewer.getRoot().getChildren().clear();
 		
 		//Set LoginScreen not visible 
 		dropBoxViewer.getLoginVBox().setVisible(false);
@@ -88,10 +106,10 @@ public class RefreshService extends Service<Boolean> {
 	}
 	
 	/**
-	 * This method checks any saved accounts and refreshes ListView to show Account mail etc .. instead of plaing Access_Tokens
+	 * After calling this method the Service will find the selected file or files and delete them from Dropbox Account
 	 */
-	public void refreshSavedAccounts(boolean refreshAccounts) {
-		refreshAccounts = true;
+	public void delete(DropBoxOperation operation) {
+		this.operation = operation;
 		
 		//Restart
 		super.restart();
@@ -104,8 +122,9 @@ public class RefreshService extends Service<Boolean> {
 			protected Boolean call() throws Exception {
 				
 				try {
-					//Do we want to refreshSavedAccounts or list files for one particular connected account?
-					if (!refreshSavedAccounts) {
+					
+					//REFRESH?
+					if (operation == DropBoxOperation.REFRESH) {
 						
 						//Create the Client
 						if (client == null || previousAccessToken == null || !previousAccessToken.equals(dropBoxViewer.getAccessToken())) {
@@ -120,11 +139,14 @@ public class RefreshService extends Service<Boolean> {
 						TreeMap<String,Metadata> children = new TreeMap<>();
 						
 						//List all the files brooooo!
-						listAllFiles(client, startingPath, children);
+						listAllFiles(client, currentPath, children);
 						
 						//Check if folder is empty
 						Platform.runLater(() -> dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty()));
 						
+					} else if (operation == DropBoxOperation.DELETE) {
+						dropBoxViewer.getTreeView().getSelectionModel().getSelectedItems().forEach(item -> delete( ( (DropBoxFileTreeItem) item ).getMetadata().getPathLower()));
+						Platform.runLater(() -> refresh(currentPath));
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -202,59 +224,28 @@ public class RefreshService extends Service<Boolean> {
 			}
 			
 			/**
-			 * Download Dropbox File to Local Computer
+			 * Deletes the given file or folder from Dropbox Account
 			 * 
-			 * @param client
-			 *            Current connected client
-			 * @param dropBoxFilePath
-			 *            The file path on the Dropbox cloud server -> [/foldername/something.txt]
-			 * @param localFileAbsolutePath
-			 *            The absolute file path of the File on the Local File System
-			 * @throws DbxException
-			 * @throws DownloadErrorException
-			 * @throws IOException
+			 * @param path
+			 *            The path of the Dropbox File or Folder
 			 */
-			public void downloadFile(DbxClientV2 client , String dropBoxFilePath , String localFileAbsolutePath) throws DownloadErrorException , DbxException , IOException {
-				//Create DbxDownloader
-				DbxDownloader<FileMetadata> dl = client.files().download(dropBoxFilePath);
-				
-				//FileOutputStream
-				FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);
-				System.out.println("Downloading .... " + dropBoxFilePath);
-				
-				//Add a progress Listener
-				dl.download(new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
-					System.out.println( ( completed * 100 ) / totalSize + " %");
-				}));
-				
-				//Fast way...
-				//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
-				
+			public void delete(String path) {
+				try {
+					if (operation == DropBoxOperation.DELETE)
+						client.files().deleteV2(path);
+					else
+						client.files().permanentlyDelete(path);
+				} catch (DbxException dbxe) {
+					dbxe.printStackTrace();
+				}
 			}
 			
-			/**
-			 * Collapses the whole TreeView THIS METHOD IS BUGGED AS FUCK...DAAADADAYYDUUMN MA BRO
-			 * 
-			 * @param item
-			 */
-			//			private DropBoxFileTreeItem getTreeViewItem(TreeItem<String> item , String value) {
-			//				//System.out.println("Current Item Value: " + item.getValue() + " Search Value: " + value);
-			//				if (item != null && item.getValue().equals(value))
-			//					return (DropBoxFileTreeItem) item;
-			//				
-			//				//Check if it is leaf
-			//				//if (!item.isLeaf())
-			//				for (TreeItem<String> child : item.getChildren())
-			//					getTreeViewItem(child, value);
-			//				//else
-			//				//	return getTreeViewItem(item, value);
-			//				
-			//				return null;
-			//			}
 		};
 	}
 	
 	/**
+	 * The client
+	 * 
 	 * @return the client
 	 */
 	public DbxClientV2 getClient() {
@@ -262,10 +253,12 @@ public class RefreshService extends Service<Boolean> {
 	}
 	
 	/**
-	 * @return the startingPath
+	 * The Current Path on Dropbox Account
+	 * 
+	 * @return The Current Path on Dropbox Account
 	 */
-	public String getStartingPath() {
-		return startingPath;
+	public String getCurrentPath() {
+		return currentPath;
 	}
 	
 }

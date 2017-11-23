@@ -1,7 +1,5 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
-import java.io.File;
-
 import com.dropbox.core.v2.files.FolderMetadata;
 import com.dropbox.core.v2.files.Metadata;
 
@@ -19,9 +17,6 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 	
 	public static final Image x = InfoTool.getImageFromResourcesFolder("x.png");
 	
-	/** Stores the full path to the file or directory. */
-	private String fullPath;
-	
 	/** Defines if this File is a Directory */
 	private boolean isDirectory;
 	
@@ -30,13 +25,12 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 	/**
 	 * Constructor.
 	 *
-	 * @param absolutePath
+	 * @param value
 	 *            The absolute path of the file or folder
 	 * 
 	 */
-	public DropBoxFileTreeItem(String absolutePath, Metadata metadata) {
-		super(absolutePath);
-		this.fullPath = absolutePath;
+	public DropBoxFileTreeItem(String value, Metadata metadata) {
+		super(value);
 		this.metadata = metadata;
 		
 		//Is this a directory?
@@ -44,26 +38,18 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 		
 		//It is directory?
 		if (isDirectory)
-			setImage(SystemRoot.closedFolderImage);
+			setImage(SystemRoot.CLOSED_FOLDER_IMAGE);
 		
 		else {
 			//Is it a music file?
-			if (InfoTool.isAudioSupported(absolutePath))
+			if (InfoTool.isAudio(value))
 				setImage(Media.SONG_IMAGE);
+			else if (InfoTool.isImage(value))
+				setImage(SystemRoot.PICTURE_IMAGE);
+			else if (InfoTool.isPdf(value))
+				setImage(SystemRoot.PDF_IMAGE);
 			else
-				setImage(SystemRoot.fileImage);
-		}
-		
-		// set the value
-		if (!fullPath.endsWith(File.separator)) {
-			// set the value (which is what is displayed in the tree)
-			String value = absolutePath;
-			int indexOf = value.lastIndexOf(File.separator);
-			if (indexOf > 0)
-				this.setValue(value.substring(indexOf + 1));
-			else
-				this.setValue(value);
-			
+				setImage(SystemRoot.FILE_IMAGE);
 		}
 		
 	}
@@ -75,15 +61,6 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 	 */
 	private void setImage(Image image) {
 		setGraphic(new ImageView(image));
-	}
-	
-	/**
-	 * Gets the full path.
-	 *
-	 * @return the full path
-	 */
-	public String getFullPath() {
-		return fullPath;
 	}
 	
 	/**

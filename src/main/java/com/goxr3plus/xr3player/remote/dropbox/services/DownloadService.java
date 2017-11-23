@@ -10,6 +10,7 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
 
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
@@ -71,6 +72,10 @@ public class DownloadService extends Service<Boolean> {
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
+					
+					//Show message to the User
+					Platform.runLater(() -> ActionTool.showNotification("Download Failed", "Failed to download File/Folder :\n[ " + dropBoxFilePath + " ]", Duration.millis(3000),
+							NotificationType.ERROR));
 				}
 				
 				return true;

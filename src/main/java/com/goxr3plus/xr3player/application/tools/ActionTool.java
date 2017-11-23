@@ -436,7 +436,7 @@ public final class ActionTool {
 	 *            The node owner of the Alert
 	 * @return true, if successful
 	 */
-	public static boolean doQuestion(String text , Node node , Stage window) {
+	public static boolean doQuestion(String headerText , String text , Node node , Stage window) {
 		boolean[] questionAnswer = { false };
 		
 		// Show Alert
@@ -444,7 +444,7 @@ public final class ActionTool {
 		alert.initOwner(window);
 		alert.initStyle(StageStyle.UTILITY);
 		alert.setGraphic(questionImage);
-		alert.setHeaderText("Question");
+		alert.setHeaderText(headerText);
 		alert.setContentText(text);
 		
 		// Make sure that JavaFX doesn't cut the text with ...
@@ -526,8 +526,7 @@ public final class ActionTool {
 	//	}
 	
 	/**
-	 * Returns a Random Number from 0 to ...what i have choosen in method see
-	 * the doc
+	 * Returns a Random Number from 0 to ...what i have choosen in method see the doc
 	 *
 	 * @return A random integer
 	 */
@@ -538,8 +537,7 @@ public final class ActionTool {
 	/**
 	 * Return random table name.
 	 *
-	 * @return Returns a RandomTableName for the database in format
-	 *         ("_"+randomNumber)
+	 * @return Returns a RandomTableName for the database in format ("_"+randomNumber)
 	 */
 	public static String returnRandomTableName() {
 		return "_" + returnRandom();
@@ -562,8 +560,7 @@ public final class ActionTool {
 	 *            The absolute path of the File|Folder
 	 * @param fileType
 	 *            Create DIRECTORY OR FILE ?
-	 * @return True if exists or have been successfully created , otherwise
-	 *         false
+	 * @return True if exists or have been successfully created , otherwise false
 	 */
 	public static boolean createFileOrFolder(String absoluteFilePath , FileType fileType) {
 		return createFileOrFolder(new File(absoluteFilePath), fileType);
@@ -576,8 +573,7 @@ public final class ActionTool {
 	 *            The absolute path of the File|Folder
 	 * @param fileType
 	 *            Create DIRECTORY OR FILE ?
-	 * @return True if exists or have been successfully created , otherwise
-	 *         false
+	 * @return True if exists or have been successfully created , otherwise false
 	 */
 	public static boolean createFileOrFolder(File file , FileType fileType) {
 		//Already exists?

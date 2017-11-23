@@ -556,7 +556,7 @@ public class Main extends Application {
 					menuItem.setOnAction(a -> {
 						
 						//Ask the user
-						if (ActionTool.doQuestion("Soore you want to ovveride your current user settings with the one that you selected from the menu ?",
+						if (ActionTool.doQuestion("Override Settings", "Soore you want to override your current user settings with the one that you selected from the menu ?",
 								settingsWindow.getCopySettingsMenuButton(), window))
 							
 							//Don't block the application due to IO Operations

@@ -136,7 +136,7 @@ public class TopBar extends BorderPane {
 		
 		// restartButton
 		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Soore you want to restart the application?", restartButton, Main.window))
+			if (ActionTool.doQuestion("Restart", "Soore you want to restart the application?", restartButton, Main.window))
 				Main.restartTheApplication(true);
 		});
 		

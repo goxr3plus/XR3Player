@@ -335,7 +335,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
 					// Ask Question?
 					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
-						if (ActionTool.doQuestion("A song is already playing on this deck.\n Are you sure you want to replace it?",
+						if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
 								visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
 							playSong(absolutePath);
 					} else

@@ -48,6 +48,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService.DropBoxOperation;
 
 public class DropBoxViewer extends StackPane {
 	
@@ -72,7 +73,22 @@ public class DropBoxViewer extends StackPane {
 	private TreeView<String> treeView;
 	
 	@FXML
-	private Button downloadButton;
+	private MenuButton deleteMenuButton;
+	
+	@FXML
+	private Button createFolder;
+	
+	@FXML
+	private MenuItem deleteFile;
+	
+	@FXML
+	private MenuItem permanentlyDeleteFile;
+	
+	@FXML
+	private Button renameFile;
+	
+	@FXML
+	private Button downloadFile;
 	
 	@FXML
 	private Label refreshLabel;
@@ -198,7 +214,7 @@ public class DropBoxViewer extends StackPane {
 		});
 		
 		//refresh
-		refresh.setOnAction(a -> recreateTree(refreshService.getStartingPath()));
+		refresh.setOnAction(a -> recreateTree(refreshService.getCurrentPath()));
 		
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
@@ -313,7 +329,7 @@ public class DropBoxViewer extends StackPane {
 			if ("DROPBOX ROOT".equals(value))
 				recreateTree("");
 			else
-				recreateTree(refreshService.getStartingPath().split(value)[0] + value);
+				recreateTree(refreshService.getCurrentPath().split(value)[0] + value);
 			
 		});
 		
@@ -344,18 +360,43 @@ public class DropBoxViewer extends StackPane {
 			}
 		});
 		
-		//downloadButton
-		downloadButton.disableProperty().bind(treeView.getSelectionModel().selectedItemProperty().isNull());
-		downloadButton.setOnAction(a -> {
+		//downloadFile
+		downloadFile.disableProperty().bind(treeView.getSelectionModel().selectedItemProperty().isNull());
+		downloadFile.setOnAction(a -> {
 			
 			//Get the selected file
 			DropBoxFileTreeItem selectedItem = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
 			
 			//Show save dialog
 			File file = Main.specialChooser.showSaveDialog(selectedItem.getValue());
-			if (file != null) {
+			if (file != null)
 				new DownloadService(this).startService(selectedItem.getMetadata().getPathLower(), file.getAbsolutePath());
-			}
+			
+		});
+		
+		//deleteMenuButton
+		deleteMenuButton.disableProperty().bind(treeView.getSelectionModel().selectedItemProperty().isNull());
+		
+		//deleteFile
+		deleteFile.setOnAction(a -> {
+			int selectedItems = treeView.getSelectionModel().getSelectedIndices().size();
+			if (ActionTool.doQuestion("Delete",
+					"Are you sure you want to delete "
+							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + treeView.getSelectionModel().getSelectedItem().getValue() + " ] " )
+							+ " from your Dropbox?",
+					deleteMenuButton, Main.window))
+				this.refreshService.delete(DropBoxOperation.DELETE);
+		});
+		
+		//permanentlyDeleteFile
+		permanentlyDeleteFile.setOnAction(a -> {
+			int selectedItems = treeView.getSelectionModel().getSelectedIndices().size();
+			if (ActionTool.doQuestion("PERMANENT Delete",
+					"Are you sure you want to delete "
+							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + treeView.getSelectionModel().getSelectedItem().getValue() + " ] " )
+							+ " from your Dropbox PERMANENTLY?",
+					deleteMenuButton, Main.window))
+				this.refreshService.delete(DropBoxOperation.PERMANENTLY_DELETE);
 		});
 		
 	}
@@ -405,9 +446,6 @@ public class DropBoxViewer extends StackPane {
 	 */
 	public void recreateTree(String path) {
 		
-		//Clear all the children
-		root.getChildren().clear();
-		
 		//BreadCrumbBar
 		if (path.isEmpty()) {
 			
@@ -436,7 +474,7 @@ public class DropBoxViewer extends StackPane {
 		}
 		
 		//Start the Service
-		refreshService.startService(path);
+		refreshService.refresh(path);
 	}
 	
 	/**
@@ -455,7 +493,7 @@ public class DropBoxViewer extends StackPane {
 			return;
 		}
 		
-		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 1) {
+		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
 			if (source.isDirectory()) {
 				recreateTree(source.getMetadata().getPathLower());
 			}
