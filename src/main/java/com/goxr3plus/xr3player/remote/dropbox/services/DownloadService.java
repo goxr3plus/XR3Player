@@ -106,7 +106,7 @@ public class DownloadService extends Service<Boolean> {
 				dl.download(new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
 					System.out.println( ( completed * 100 ) / totalSize + " %");
 					
-					this.updateProgress(completed, totalSize);
+					//this.updateProgress(completed, totalSize);
 				}));
 				
 				//Fast way...

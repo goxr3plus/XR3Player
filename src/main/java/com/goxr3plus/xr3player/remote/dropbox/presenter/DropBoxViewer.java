@@ -16,6 +16,8 @@ import org.controlsfx.control.BreadCrumbBar;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,6 +44,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -49,6 +52,8 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAut
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService.DropBoxOperation;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 public class DropBoxViewer extends StackPane {
 	
@@ -397,6 +402,39 @@ public class DropBoxViewer extends StackPane {
 							+ " from your Dropbox PERMANENTLY?",
 					deleteMenuButton, Main.window))
 				this.refreshService.delete(DropBoxOperation.PERMANENTLY_DELETE);
+		});
+		
+		//createFolder
+		createFolder.setOnAction(a -> {
+			
+			//Show the window
+			Main.renameWindow.show("", createFolder, "Create Dropbox Folder", FileCategory.FILE);
+			
+					
+			// When the Rename Window is closed do the rename
+			Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
+				
+				@Override
+				public void invalidated(Observable observable) {
+					
+					// Remove the Listener
+					Main.renameWindow.showingProperty().removeListener(this);
+					
+					// !Showing
+					if (!Main.renameWindow.isShowing()) {
+						
+						// !XPressed && // Old name != New name
+						if (Main.renameWindow.wasAccepted()) {
+							
+							//Try to create
+							refreshService.createFolder(refreshService.getCurrentPath() + "/" + Main.renameWindow.getInputField().getText());
+							
+						}
+						
+					} // RenameWindow is still showing
+				}// invalidated
+			});
+			
 		});
 		
 	}

@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.CreateFolderResult;
 import com.dropbox.core.v2.files.DeletedMetadata;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.FolderMetadata;
@@ -42,6 +43,7 @@ public class RefreshService extends Service<Boolean> {
 	private DbxClientV2 client;
 	private String previousAccessToken;
 	private String currentPath;
+	private String folderName;
 	
 	/**
 	 * This path is being used to delete files
@@ -115,6 +117,20 @@ public class RefreshService extends Service<Boolean> {
 		super.restart();
 	}
 	
+	/**
+	 * Create a new Folder with that name on Dropbox Account
+	 * 
+	 * @param folderName
+	 *            The new folder name
+	 */
+	public void createFolder(String folderName) {
+		this.folderName = folderName;
+		this.operation = DropBoxOperation.CREATE_FOLDER;
+		
+		//Restart
+		super.restart();
+	}
+	
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
@@ -145,7 +161,19 @@ public class RefreshService extends Service<Boolean> {
 						Platform.runLater(() -> dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty()));
 						
 					} else if (operation == DropBoxOperation.DELETE) {
+						
+						//Delete all the selected files and folders
 						dropBoxViewer.getTreeView().getSelectionModel().getSelectedItems().forEach(item -> delete( ( (DropBoxFileTreeItem) item ).getMetadata().getPathLower()));
+						
+						//Refresh
+						Platform.runLater(() -> refresh(currentPath));
+						
+					} else if (operation == DropBoxOperation.CREATE_FOLDER) {
+						
+						//Create Folder
+						createFolder(folderName);
+						
+						//Refresh
 						Platform.runLater(() -> refresh(currentPath));
 					}
 				} catch (Exception ex) {
@@ -234,9 +262,18 @@ public class RefreshService extends Service<Boolean> {
 					if (operation == DropBoxOperation.DELETE)
 						client.files().deleteV2(path);
 					else
-						client.files().permanentlyDelete(path);
+						client.files().permanentlyDelete(path); //SUPPORTED ONLY ON BUSINESS PLAN
+						
+					//Show message to the User
+					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
+							NotificationType.INFORMATION));
+					
 				} catch (DbxException dbxe) {
 					dbxe.printStackTrace();
+					
+					//Show message to the User
+					Platform.runLater(
+							() -> ActionTool.showNotification("Failed deleting files", "Failed to delete selected files/folders", Duration.millis(2000), NotificationType.ERROR));
 				}
 			}
 			
@@ -251,6 +288,30 @@ public class RefreshService extends Service<Boolean> {
 					client.files().moveV2(oldPath, newPath);
 				} catch (DbxException dbxe) {
 					dbxe.printStackTrace();
+				}
+			}
+			
+			/**
+			 * Create a folder from Dropbox Account
+			 * 
+			 * @param path
+			 *            Folder name
+			 */
+			public void createFolder(String path) {
+				try {
+					
+					//Create new folder
+					CreateFolderResult result = client.files().createFolderV2(path, true);
+					
+					//Show message to the User
+					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
+							Duration.millis(2000), NotificationType.INFORMATION));
+					
+				} catch (DbxException dbxe) {
+					dbxe.printStackTrace();
+					
+					//Show message to the User
+					Platform.runLater(() -> ActionTool.showNotification("Failed creating folder", "Folder was not created", Duration.millis(2000), NotificationType.ERROR));
 				}
 			}
 			
