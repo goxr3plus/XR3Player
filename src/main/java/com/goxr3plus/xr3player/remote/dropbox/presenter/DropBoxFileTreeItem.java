@@ -44,10 +44,14 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 			//Is it a music file?
 			if (InfoTool.isAudio(value))
 				setImage(Media.SONG_IMAGE);
+			else if (InfoTool.isVideo(value))
+				setImage(SystemRoot.VIDEO_IMAGE);
 			else if (InfoTool.isImage(value))
 				setImage(SystemRoot.PICTURE_IMAGE);
 			else if (InfoTool.isPdf(value))
 				setImage(SystemRoot.PDF_IMAGE);
+			else if(InfoTool.isZip(value))
+				setImage(SystemRoot.ZIP_IMAGE);
 			else
 				setImage(SystemRoot.FILE_IMAGE);
 		}

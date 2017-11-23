@@ -54,9 +54,6 @@ public class TreeViewManager extends BorderPane {
 	 */
 	private final SystemRoot systemRoot = new SystemRoot();
 	
-	/** The libraries tree. */
-	public TreeItem<String> librariesTree = new TreeItem<>("Libraries", InfoTool.getImageViewFromResourcesFolder("folder.png"));
-	
 	/** The host name. */
 	String hostName = "computer";
 	
@@ -177,7 +174,7 @@ public class TreeViewManager extends BorderPane {
 							stream.forEach(path -> {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
-								if (!path.toFile().isHidden() && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
+								if (!path.toFile().isHidden()) {// && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
 									FileTreeItem treeNode = new FileTreeItem(path.toString());
 									source.getChildren().add(treeNode);
 								}

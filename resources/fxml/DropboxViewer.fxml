@@ -122,7 +122,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </MenuItem>
-                                        <MenuItem fx:id="permanentlyDeleteFile" mnemonicParsing="false" text="Permanently Delete">
+                                        <MenuItem fx:id="permanentlyDeleteFile" disable="true" mnemonicParsing="false" text="Permanently Delete">
                                              <graphic>
                                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

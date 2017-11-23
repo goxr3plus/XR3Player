@@ -32,9 +32,13 @@ public class SystemRoot {
 	/** The Constant fileImage. */
 	public static final Image FILE_IMAGE = InfoTool.getImageFromResourcesFolder("file.png");
 	
+	public static final Image VIDEO_IMAGE = InfoTool.getImageFromResourcesFolder("video.png");
+	
 	public static final Image PICTURE_IMAGE = InfoTool.getImageFromResourcesFolder("picture.png");
 	
 	public static final Image PDF_IMAGE = InfoTool.getImageFromResourcesFolder("pdf.png");
+	
+	public static final Image ZIP_IMAGE = InfoTool.getImageFromResourcesFolder("zip.png");
 	
 	public static final Image MUSIC_FOLDER_IMAGE = InfoTool.getImageFromResourcesFolder("Music Folder-20.png");
 	

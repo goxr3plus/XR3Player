@@ -105,9 +105,12 @@ public final class InfoTool {
 	private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv"));
 	private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg", "gif"));
 	
-	private static final Set<String> ALL_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg", "opus", "aac", "flac", "aiff", "au", "speex", "webm", "wma", "amr",
-			"ape", "awb", "dct", "dss", "dvf", "3gp", "aa", "aax", "act", "m4a", "m4b", "m4p", "mpc", "msv", "oga", "mogg", "raw", "tta"));
-	private static final Set<String> ALL_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg", "gif", "bmp", "exif", "tiff", "webp", "heif", "bat", "bpg", "svg"));
+	private static final Set<String> POPULAR_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg", "opus", "aac", "flac", "aiff", "au", "speex", "webm", "wma", "amr",
+			"ape", "awb", "dct", "dss", "dvf", "aa", "aax", "act", "m4a", "m4b", "m4p", "mpc", "msv", "oga", "mogg", "raw", "tta"));	
+	private static final Set<String> POPULAR_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv", "avi", "wmv", "mov", "3gp"));	
+	private static final Set<String> POPULAR_IMAGE_EXTENSIONS = new HashSet<>(
+			Arrays.asList("png", "jpg", "jpeg", "gif", "bmp", "exif", "tiff", "webp", "heif", "bat", "bpg", "svg"));
+	private static final Set<String> POPULAR_ZIP_EXTENSIONS = new HashSet<>(Arrays.asList("zip","7z","rar","zipx","bz2","gz"));	
 	// ------------------------------------Important-------------------------------------------------------------------
 	
 	/** The name of the application user [example:Alexander] */
@@ -567,7 +570,7 @@ public final class InfoTool {
 	//------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * 1)Checks if this file is <b>audio</b><br>
+	 * 1)Checks if this file is <b>Audio</b><br>
 	 * 2)If is supported by the application.
 	 * 
 	 * @param fileName
@@ -576,11 +579,24 @@ public final class InfoTool {
 	 */
 	public static boolean isAudio(String fileName) {
 		String extension = getFileExtension(fileName);
-		return extension != null && ALL_AUDIO_EXTENSIONS.contains(extension);
+		return extension != null && POPULAR_AUDIO_EXTENSIONS.contains(extension);
 	}
 	
 	/**
-	 * 1)Checks if this file is <b>image</b><br>
+	 * 1)Checks if this file is <b>Video</b><br>
+	 * 2)If is supported by the application.
+	 * 
+	 * @param fileName
+	 *            The File Name
+	 * @return True if the file is an Video else false
+	 */
+	public static boolean isVideo(String fileName) {
+		String extension = getFileExtension(fileName);
+		return extension != null && POPULAR_VIDEO_EXTENSIONS.contains(extension);
+	}
+	
+	/**
+	 * 1)Checks if this file is <b>Image</b><br>
 	 * 
 	 * @param fileName
 	 *            The File Name
@@ -588,11 +604,11 @@ public final class InfoTool {
 	 */
 	public static boolean isImage(String fileName) {
 		String extension = getFileExtension(fileName);
-		return extension != null && ALL_IMAGE_EXTENSIONS.contains(extension);
+		return extension != null && POPULAR_IMAGE_EXTENSIONS.contains(extension);
 	}
 	
 	/**
-	 * 1)Checks if this file is <b>pdf</b><br>
+	 * 1)Checks if this file is <b>PDF</b><br>
 	 * 
 	 * @param fileName
 	 *            The File Name
@@ -601,6 +617,18 @@ public final class InfoTool {
 	public static boolean isPdf(String fileName) {
 		String extension = getFileExtension(fileName);
 		return extension != null && "pdf".equals(extension);
+	}
+	
+	/**
+	 * 1)Checks if this file is <b>ZIP</b><br>
+	 * 
+	 * @param fileName
+	 *            The File Name
+	 * @return True if the file is an ZIP else false
+	 */
+	public static boolean isZip(String fileName) {
+		String extension = getFileExtension(fileName);
+		return extension != null && POPULAR_ZIP_EXTENSIONS.contains(extension);
 	}
 	
 	//------------------------------------------------------------------------------------------------------

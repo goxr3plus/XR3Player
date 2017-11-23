@@ -52,8 +52,7 @@ public abstract class Media {
 	private SimpleObjectProperty<ImageView> mediaType;
 	
 	/**
-	 * Determines if the Media has been played or is currently playing or has
-	 * not been played at all
+	 * Determines if the Media has been played or is currently playing or has not been played at all
 	 */
 	private SimpleIntegerProperty playStatus;
 	
@@ -120,15 +119,11 @@ public abstract class Media {
 	
 	public static final Image SONG_IMAGE = InfoTool.getImageFromResourcesFolder("song.png");
 	
-	
 	/** The image to be displayed if the Media is Song + MISSING */
 	public static final Image SONG_MISSING_IMAGE = InfoTool.getImageFromResourcesFolder("songMissing.png");
 	
 	/** The image to be displayed if the Media is Song + CORRUPTED */
 	public static final Image SONG_CORRUPTED_IMAGE = InfoTool.getImageFromResourcesFolder("songCorrupted.png");
-	
-	/** The video image. */
-	public static final Image VIDEO_IMAGE = InfoTool.getImageFromResourcesFolder("video.png");
 	
 	/** The image to be shown when the Media has been already Played */
 	public static final Image PLAYED_IMAGE = InfoTool.getImageFromResourcesFolder("success.png");
@@ -160,18 +155,16 @@ public abstract class Media {
 	 * @param timesPlayed
 	 *            The times the Media has been played
 	 * @param dateImported
-	 *            The date the Media was imported <b> if null given then the
-	 *            imported time will be the current date </b>
+	 *            The date the Media was imported <b> if null given then the imported time will be the current date </b>
 	 * @param hourImported
-	 *            The hour the Media was imported <b> if null given then the
-	 *            imported hour will be the current time </b>
+	 *            The hour the Media was imported <b> if null given then the imported hour will be the current time </b>
 	 * @param genre
 	 *            The genre of the Media <b> see the Genre class for more </b>
 	 */
 	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre, int number) {
 		
 		// ....initialize
-		mediaType = new SimpleObjectProperty<>(new ImageView(InfoTool.isAudioSupported(path) ? SONG_IMAGE : VIDEO_IMAGE));
+		mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
 		playStatus = new SimpleIntegerProperty(-2);
 		
 		//getInfoBuy
@@ -262,8 +255,7 @@ public abstract class Media {
 	//!!!!!!!!!!!!!!!!!!THIS METHOD NEEDS FIXING!!!!!!!!!!!!!!!!!
 	
 	/**
-	 * When a files appears or dissapears it's information like size , image etc
-	 * must be fixed to represent it's current status
+	 * When a files appears or dissapears it's information like size , image etc must be fixed to represent it's current status
 	 */
 	private void fixTheInformations(boolean doUpdate) {
 		
@@ -558,8 +550,7 @@ public abstract class Media {
 	 * @param c
 	 *            the controller
 	 * @param deleteStatement
-	 *            The prepared Statement which will delete the items from the
-	 *            SQL DataBase
+	 *            The prepared Statement which will delete the items from the SQL DataBase
 	 */
 	public void delete(boolean permanent , boolean doQuestion , boolean commit , SmartController c , PreparedStatement deleteStatement) {
 		
@@ -627,8 +618,7 @@ public abstract class Media {
 	 * @param controller
 	 *            the controller
 	 * @param node
-	 *            The node based on which the Rename Window will be position
-	 *            [[SuppressWarningsSpartan]]
+	 *            The node based on which the Rename Window will be position [[SuppressWarningsSpartan]]
 	 */
 	public void rename(Node node) {
 		
@@ -925,8 +915,7 @@ public abstract class Media {
 	}
 	
 	/**
-	 * This method is called to change the Emotion Image of the Media based on
-	 * the current Emotion
+	 * This method is called to change the Emotion Image of the Media based on the current Emotion
 	 * 
 	 * @param emotion
 	 */
@@ -1152,8 +1141,7 @@ public abstract class Media {
 	// ----------------------------------------------------------------------
 	
 	/**
-	 * This method is used during drag so the drag view has an image
-	 * representing the album image of the media.
+	 * This method is used during drag so the drag view has an image representing the album image of the media.
 	 *
 	 * @param db
 	 *            the new drag view

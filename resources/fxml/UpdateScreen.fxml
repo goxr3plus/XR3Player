@@ -28,7 +28,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Label alignment="CENTER" contentDisplay="RIGHT" style="-fx-font-size: 18;" styleClass="applicationSettingsLabel" text="Build with love" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+      <Label alignment="CENTER" contentDisplay="RIGHT" style="-fx-font-size: 18;" styleClass="applicationSettingsLabel" text="Build with love by Alex" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

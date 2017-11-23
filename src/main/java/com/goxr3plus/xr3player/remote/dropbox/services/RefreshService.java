@@ -240,6 +240,20 @@ public class RefreshService extends Service<Boolean> {
 				}
 			}
 			
+			/**
+			 * Renames the given file or folder from Dropbox Account
+			 * 
+			 * @param oldPath
+			 * @param newPath
+			 */
+			public void rename(String oldPath , String newPath) {
+				try {
+					client.files().moveV2(oldPath, newPath);
+				} catch (DbxException dbxe) {
+					dbxe.printStackTrace();
+				}
+			}
+			
 		};
 	}
 	
