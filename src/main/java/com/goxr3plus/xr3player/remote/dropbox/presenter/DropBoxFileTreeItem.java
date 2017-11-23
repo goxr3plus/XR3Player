@@ -50,7 +50,7 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 				setImage(SystemRoot.PICTURE_IMAGE);
 			else if (InfoTool.isPdf(value))
 				setImage(SystemRoot.PDF_IMAGE);
-			else if(InfoTool.isZip(value))
+			else if (InfoTool.isZip(value))
 				setImage(SystemRoot.ZIP_IMAGE);
 			else
 				setImage(SystemRoot.FILE_IMAGE);

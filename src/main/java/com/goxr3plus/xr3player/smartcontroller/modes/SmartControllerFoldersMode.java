@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -142,15 +143,15 @@ public class SmartControllerFoldersMode extends StackPane {
 			
 			//The host is not allowed
 			//if (source != null && source != root) {
-			if (!treeView.getSelectionModel().getSelectedItems().isEmpty()) {
+			ObservableList<TreeItem<String>> selectedItems = treeView.getSelectionModel().getSelectedItems();
+			if (!selectedItems.isEmpty()) {
 				
 				// Allow this transfer Mode
 				Dragboard board = startDragAndDrop(TransferMode.LINK);
 				
 				// Put a String on DragBoard
 				ClipboardContent content = new ClipboardContent();
-				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath()))
-						.collect(Collectors.toList()));
+				content.putFiles(selectedItems.stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath())).collect(Collectors.toList()));
 				
 				board.setContent(content);
 				event.consume();

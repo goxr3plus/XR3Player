@@ -29,7 +29,7 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
 public class RefreshService extends Service<Boolean> {
 	
 	public enum DropBoxOperation {
-		REFRESH, DELETE, PERMANENTLY_DELETE, RENAME;
+		REFRESH, CREATE_FOLDER, DELETE, PERMANENTLY_DELETE, RENAME;
 	}
 	
 	/**
