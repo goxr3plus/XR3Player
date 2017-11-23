@@ -9,6 +9,7 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.Metadata;
 
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -29,7 +30,7 @@ public class DownloadService extends Service<Boolean> {
 	// Create Dropbox client
 	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
 	private DbxClientV2 client;
-	private String dropBoxFilePath;
+	private Metadata dropBoxFileMetadata;
 	private String localFileAbsolutePath;
 	
 	/**
@@ -48,8 +49,8 @@ public class DownloadService extends Service<Boolean> {
 	 * @param path
 	 *            The path to follow and open the Tree
 	 */
-	public void startService(String dropBoxFilePath , String localFileAbsolutePath) {
-		this.dropBoxFilePath = dropBoxFilePath;
+	public void startService(Metadata dropBoxFileMetadata , String localFileAbsolutePath) {
+		this.dropBoxFileMetadata = dropBoxFileMetadata;
 		this.localFileAbsolutePath = localFileAbsolutePath;
 		
 		//Restart
@@ -68,14 +69,18 @@ public class DownloadService extends Service<Boolean> {
 					client = new DbxClientV2(config, dropBoxViewer.getAccessToken());
 					
 					//Try to download the File
-					downloadFile(client, dropBoxFilePath, localFileAbsolutePath);
+					downloadFile(client, dropBoxFileMetadata.getPathLower(), localFileAbsolutePath);
+					
+					//Show message to the User
+					Platform.runLater(() -> ActionTool.showNotification("Download completed", "Completed downloading File :\n[ " + dropBoxFileMetadata.getName() + " ]",
+							Duration.millis(3000), NotificationType.SIMPLE, DropBoxViewer.dropBoxImage));
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					
 					//Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Download Failed", "Failed to download File/Folder :\n[ " + dropBoxFilePath + " ]", Duration.millis(3000),
-							NotificationType.ERROR));
+					Platform.runLater(() -> ActionTool.showNotification("Download Failed", "Failed to download File :\n[ " + dropBoxFileMetadata.getName() + " ]",
+							Duration.millis(3000), NotificationType.ERROR));
 				}
 				
 				return true;
@@ -95,6 +100,7 @@ public class DownloadService extends Service<Boolean> {
 			 * @throws IOException
 			 */
 			public void downloadFile(DbxClientV2 client , String dropBoxFilePath , String localFileAbsolutePath) throws DownloadErrorException , DbxException , IOException {
+				
 				//Create DbxDownloader
 				DbxDownloader<FileMetadata> dl = client.files().download(dropBoxFilePath);
 				
@@ -104,7 +110,7 @@ public class DownloadService extends Service<Boolean> {
 				
 				//Add a progress Listener
 				dl.download(new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
-					System.out.println( ( completed * 100 ) / totalSize + " %");
+					//System.out.println( ( completed * 100 ) / totalSize + " %");
 					
 					//this.updateProgress(completed, totalSize);
 				}));

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Used to track progress of OutputStream User with care i found the code on Internet loll!!!!!!!! i am crying from laughs
+ * Used to track progress of OutputStream User
  * 
  * @author GOXR3PLUS
  *

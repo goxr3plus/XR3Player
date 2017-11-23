@@ -140,7 +140,7 @@
                                           </ImageView>
                                        </graphic>
                                     </MenuButton>
-                                    <Button fx:id="renameFile" alignment="CENTER" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
+                                    <Button fx:id="renameFile" alignment="CENTER" disable="true" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

@@ -44,7 +44,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
-import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -53,7 +52,6 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
-import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 public class DropBoxViewer extends StackPane {
 	
@@ -372,10 +370,15 @@ public class DropBoxViewer extends StackPane {
 			//Get the selected file
 			DropBoxFileTreeItem selectedItem = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
 			
-			//Show save dialog
-			File file = Main.specialChooser.showSaveDialog(selectedItem.getValue());
-			if (file != null)
-				new DownloadService(this).startService(selectedItem.getMetadata().getPathLower(), file.getAbsolutePath());
+			if (!selectedItem.isDirectory()) {
+				
+				//Show save dialog	
+				File file = Main.specialChooser.showSaveDialog(selectedItem.getValue());
+				if (file != null)
+					new DownloadService(this).startService(selectedItem.getMetadata(), file.getAbsolutePath());
+				
+			} else //NOT SUPPORTED YET
+				ActionTool.showNotification("No supported", "Folder download is not supported yet :) ", Duration.seconds(2), NotificationType.WARNING);
 			
 		});
 		
@@ -410,7 +413,6 @@ public class DropBoxViewer extends StackPane {
 			//Show the window
 			Main.renameWindow.show("", createFolder, "Create Dropbox Folder", FileCategory.FILE);
 			
-					
 			// When the Rename Window is closed do the rename
 			Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
 				
