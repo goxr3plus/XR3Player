@@ -139,21 +139,8 @@ public class DropboxAuthenticationBrowser extends StackPane {
 					//Finish Authorization
 					String code = div.getElementsByTag("input").first().attr("data-token");
 					
-					try {
-						// Run through Dropbox API authorization process
-						DbxAuthFinish authFinish = webAuth.finishFromCode(code);
-						
-						//Set the access token
-						accessToken.set(authFinish.getAccessToken());
-						
-						//System.out.println("Browser -> [" + accessToken.get() + "]")
-						
-						//Close the window
-						window.close();
-					} catch (DbxException ex) {
-						ex.printStackTrace();
-						ActionTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)", Duration.millis(2000), NotificationType.ERROR);
-					}
+					//Finish
+					produceAccessToken(code);
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -171,15 +158,50 @@ public class DropboxAuthenticationBrowser extends StackPane {
 		//Clear the previous cookies
 		java.net.CookieHandler.setDefault(new com.sun.webkit.network.CookieManager());
 		
+		//Load it
+		webEngine.load(getAuthonticationRequestURL());
+		
+		//Show the Window
+		window.show();
+	}
+	
+	/**
+	 * Starts authorization and returns a "authorization URL" on the Dropbox website that gives the lets the user grant your app access to their Dropbox
+	 * account.
+	 * 
+	 * @return The "authorization URL" on the Dropbox website that gives the lets the user grant your app access to their Dropbox account.
+	 */
+	public String getAuthonticationRequestURL() {
+		
 		// Run through Dropbox API authorization process	
 		webAuth = new DbxWebAuth(requestConfig, appInfo);
 		webAuthRequest = DbxWebAuth.newRequestBuilder().withNoRedirect().build();
 		
-		//Load it
-		webEngine.load(webAuth.authorize(webAuthRequest));
-		
-		//Show the Window
-		window.show();
+		return webAuth.authorize(webAuthRequest);
+	}
+	
+	/**
+	 * Given the Authorization Code it produces the AccessToken needed to access DropBox Account
+	 * 
+	 * @param code
+	 *            The OAuth2 DropBox AuthorizationCode
+	 */
+	public void produceAccessToken(String code) {
+		try {
+			// Run through Dropbox API authorization process
+			DbxAuthFinish authFinish = webAuth.finishFromCode(code);
+			
+			//Set the access token
+			accessToken.set(authFinish.getAccessToken());
+			
+			//System.out.println("Browser -> [" + accessToken.get() + "]")
+			
+			//Close the window
+			window.close();
+		} catch (DbxException ex) {
+			ex.printStackTrace();
+			ActionTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)", Duration.millis(2000), NotificationType.ERROR);
+		}
 	}
 	
 	/**

@@ -1,5 +1,6 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,14 +12,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.controlsfx.control.BreadCrumbBar;
-import org.controlsfx.control.BreadCrumbBar.BreadCrumbActionEvent;
 
 import com.jfoenix.controls.JFXButton;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -29,6 +28,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -46,6 +46,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
 
 public class DropBoxViewer extends StackPane {
@@ -71,6 +72,9 @@ public class DropBoxViewer extends StackPane {
 	private TreeView<String> treeView;
 	
 	@FXML
+	private Button downloadButton;
+	
+	@FXML
 	private Label refreshLabel;
 	
 	@FXML
@@ -92,6 +96,9 @@ public class DropBoxViewer extends StackPane {
 	private Button authorizationButton;
 	
 	@FXML
+	private Button authorizationButton2;
+	
+	@FXML
 	private VBox errorVBox;
 	
 	@FXML
@@ -105,6 +112,18 @@ public class DropBoxViewer extends StackPane {
 	
 	@FXML
 	private Label dropBoxAccountsLabel;
+	
+	@FXML
+	private VBox authorizationCodeVBox;
+	
+	@FXML
+	private TextField authorizationCodeTextField;
+	
+	@FXML
+	private Button authorizationCodeOkButton;
+	
+	@FXML
+	private Button authorizationCodeCancelButton;
 	
 	// -------------------------------------------------------------
 	
@@ -184,6 +203,16 @@ public class DropBoxViewer extends StackPane {
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
 		
+		//authorizationButton2
+		authorizationButton2.setOnAction(a -> {
+			
+			//authorizationCodeVBox
+			authorizationCodeVBox.setVisible(true);
+			
+			//Open the default external Browser
+			ActionTool.openWebSite(authenticationBrowser.getAuthonticationRequestURL());
+		});
+		
 		//Add binding to accessTokenProperty
 		authenticationBrowser.accessTokenProperty().addListener((observable , oldValue , newValue) -> {
 			//Check if empty
@@ -203,6 +232,12 @@ public class DropBoxViewer extends StackPane {
 				//loginVBox
 				loginVBox.setVisible(false);
 				
+				//authorizationCodeVBox
+				authorizationCodeVBox.setVisible(false);
+				
+				//authorizationCodeTextField
+				authorizationCodeTextField.clear();
+				
 				//Go Make It
 				recreateTree("");
 				
@@ -216,6 +251,19 @@ public class DropBoxViewer extends StackPane {
 		
 		//loginVBox
 		loginVBox.setVisible(true);
+		
+		//authorizationCodeVBox
+		authorizationCodeVBox.setVisible(false);
+		
+		//authorizationCodeCancelButton
+		authorizationCodeCancelButton.setOnAction(a -> authorizationCodeVBox.setVisible(false));
+		
+		//authorizationCodeOkButton
+		authorizationCodeOkButton.disableProperty().bind(authorizationCodeTextField.textProperty().isEmpty());
+		authorizationCodeOkButton.setOnAction(a -> authenticationBrowser.produceAccessToken(authorizationCodeTextField.getText().trim()));
+		
+		//authorizationCodeTextField
+		authorizationCodeTextField.setOnAction(a -> authenticationBrowser.produceAccessToken(authorizationCodeTextField.getText().trim()));
 		
 		//signOut
 		signOut.setOnAction(a -> {
@@ -293,6 +341,20 @@ public class DropBoxViewer extends StackPane {
 				//Go Make It
 				recreateTree("");
 				
+			}
+		});
+		
+		//downloadButton
+		downloadButton.disableProperty().bind(treeView.getSelectionModel().selectedItemProperty().isNull());
+		downloadButton.setOnAction(a -> {
+			
+			//Get the selected file
+			DropBoxFileTreeItem selectedItem = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
+			
+			//Show save dialog
+			File file = Main.specialChooser.showSaveDialog(selectedItem.getValue());
+			if (file != null) {
+				new DownloadService(this).startService(selectedItem.getMetadata().getPathLower(), file.getAbsolutePath());
 			}
 		});
 		
