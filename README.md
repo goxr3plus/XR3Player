@@ -48,6 +48,7 @@
 
 ## Features
 - **App**
+  - Full Dropbox Accounts access ( new ) !
   - Support fully .mp3,.wav files
   - Partly supports .ogg,.flac,.au files
   - Multiple User Accounts
