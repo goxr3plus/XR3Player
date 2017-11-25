@@ -49,8 +49,8 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.RefreshService.DropBoxOperation;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 
 public class DropBoxViewer extends StackPane {
@@ -151,7 +151,7 @@ public class DropBoxViewer extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	private final RefreshService refreshService = new RefreshService(this);
+	private final DropboxService dropBoxService = new DropboxService(this);
 	
 	// -------------------------------------------------------------
 	
@@ -199,10 +199,10 @@ public class DropBoxViewer extends StackPane {
 		treeView.setOnMouseClicked(this::mouseClicked);
 		
 		//refreshLabel
-		refreshLabel.visibleProperty().bind(refreshService.runningProperty());
+		refreshLabel.visibleProperty().bind(dropBoxService.runningProperty());
 		
 		//Progress Indicator
-		progressIndicator.progressProperty().bind(refreshService.progressProperty());
+		progressIndicator.progressProperty().bind(dropBoxService.progressProperty());
 		
 		//collapseTree
 		collapseTree.setOnAction(a -> {
@@ -217,7 +217,7 @@ public class DropBoxViewer extends StackPane {
 		});
 		
 		//refresh
-		refresh.setOnAction(a -> recreateTree(refreshService.getCurrentPath()));
+		refresh.setOnAction(a -> recreateTree(dropBoxService.getCurrentPath()));
 		
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
@@ -288,7 +288,7 @@ public class DropBoxViewer extends StackPane {
 		signOut.setOnAction(a -> {
 			
 			//cancel the service
-			refreshService.cancel();
+			dropBoxService.cancel();
 			
 			//loginVBox
 			loginVBox.setVisible(true);
@@ -332,7 +332,7 @@ public class DropBoxViewer extends StackPane {
 			if ("DROPBOX ROOT".equals(value))
 				recreateTree("");
 			else
-				recreateTree(refreshService.getCurrentPath().split(value)[0] + value);
+				recreateTree(dropBoxService.getCurrentPath().split(value)[0] + value);
 			
 		});
 		
@@ -393,7 +393,7 @@ public class DropBoxViewer extends StackPane {
 							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + treeView.getSelectionModel().getSelectedItem().getValue() + " ] " )
 							+ " from your Dropbox?",
 					deleteMenuButton, Main.window))
-				this.refreshService.delete(DropBoxOperation.DELETE);
+				this.dropBoxService.delete(DropBoxOperation.DELETE);
 		});
 		
 		//permanentlyDeleteFile
@@ -404,7 +404,7 @@ public class DropBoxViewer extends StackPane {
 							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + treeView.getSelectionModel().getSelectedItem().getValue() + " ] " )
 							+ " from your Dropbox PERMANENTLY?",
 					deleteMenuButton, Main.window))
-				this.refreshService.delete(DropBoxOperation.PERMANENTLY_DELETE);
+				this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
 		});
 		
 		//createFolder
@@ -429,7 +429,7 @@ public class DropBoxViewer extends StackPane {
 						if (Main.renameWindow.wasAccepted()) {
 							
 							//Try to create
-							refreshService.createFolder(refreshService.getCurrentPath() + "/" + Main.renameWindow.getInputField().getText());
+							dropBoxService.createFolder(dropBoxService.getCurrentPath() + "/" + Main.renameWindow.getInputField().getText());
 							
 						}
 						
@@ -514,7 +514,7 @@ public class DropBoxViewer extends StackPane {
 		}
 		
 		//Start the Service
-		refreshService.refresh(path);
+		dropBoxService.refresh(path);
 	}
 	
 	/**

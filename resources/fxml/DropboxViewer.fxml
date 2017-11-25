@@ -29,11 +29,19 @@
          <children>
             <VBox>
                <children>
-                  <HBox style="-fx-background-color: #151515;">
+                  <HBox alignment="CENTER" style="-fx-background-color: #151515;">
                      <children>
-                        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <TextField focusTraversable="false" minWidth="0.0" prefWidth="193.0" promptText="search...">
+                           <HBox.margin>
+                              <Insets left="3.0" />
+                           </HBox.margin>
+                           <tooltip>
+                              <Tooltip text="Search everything on your Dropbox Account" />
+                           </tooltip>
+                        </TextField>
+                        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                            <children>
-                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" popupSide="RIGHT" text="Dropbox ~ User Name">
+                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Dropbox ~ User Name">
                                 <items>
                                   <MenuItem fx:id="signOut" mnemonicParsing="false" text="Sign out" />
                                 </items>
@@ -47,36 +55,6 @@
                               </MenuButton>
                            </children>
                         </HBox>
-                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/replay.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Refresh" />
-                           </tooltip>
-                        </Button>
-                        <Button fx:id="collapseTree" layoutX="541.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/collapse.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Collapse All" />
-                           </tooltip>
-                        </Button>
                      </children>
                   </HBox>
                   <BreadCrumbBar fx:id="breadCrumbBar">
@@ -169,6 +147,36 @@
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                    </Button>
+                                    <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/replay.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Refresh" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/collapse.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Collapse All" />
+                                       </tooltip>
                                     </Button>
                                  </children>
                               </HBox>

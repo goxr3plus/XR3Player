@@ -27,7 +27,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxFileTreeItem;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
 
-public class RefreshService extends Service<Boolean> {
+public class DropboxService extends Service<Boolean> {
 	
 	public enum DropBoxOperation {
 		REFRESH, CREATE_FOLDER, DELETE, PERMANENTLY_DELETE, RENAME;
@@ -55,7 +55,7 @@ public class RefreshService extends Service<Boolean> {
 	 * 
 	 * @param dropBoxViewer
 	 */
-	public RefreshService(DropBoxViewer dropBoxViewer) {
+	public DropboxService(DropBoxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		
 		//On Successful exiting
@@ -114,24 +114,24 @@ public class RefreshService extends Service<Boolean> {
 		this.operation = operation;
 		
 		//Restart
-		super.restart();
-	}
-	
-	/**
-	 * Create a new Folder with that name on Dropbox Account
-	 * 
-	 * @param folderName
-	 *            The new folder name
-	 */
-	public void createFolder(String folderName) {
-		this.folderName = folderName;
-		this.operation = DropBoxOperation.CREATE_FOLDER;
-		
-		//Restart
-		super.restart();
-	}
-	
-	@Override
+		super.restart();                                                             ``
+	}                                                                                ``
+	                                                                                 ``
+	/**                                                                              ``
+	 * Create a new Folder with that name on Dropbox Account                         ``
+	 *                                                                               ``
+	 * @param folderName                                                             ``
+	 *            The new folder name                                                ``
+	 */                                                                              ``
+	public void createFolder(String folderName) {                                    ``
+		this.folderName = folderName;                                                ``
+		this.operation = DropBoxOperation.CREATE_FOLDER;                             ``
+		                                                                             ``
+		//Restart                                                                    ``
+		super.restart();                                                             ``
+	}                                                                                ``
+	                                                                                 ``
+	@Override                                                                        ``
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			@Override
