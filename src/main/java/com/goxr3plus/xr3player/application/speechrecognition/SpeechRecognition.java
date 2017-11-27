@@ -52,7 +52,7 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 	final Microphone mic = new Microphone(FLACFileWriter.FLAC);
 	
 	//GSpeechDuplex for Speech Recognition
-	GSpeechDuplex duplex = new GSpeechDuplex("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
+	GSpeechDuplex duplex = new GSpeechDuplex("AIzaSyDIGjsPzpRkx2iHW04K_DJpDakyt_vniEE");
 	
 	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;";
 	

@@ -114,24 +114,24 @@ public class DropboxService extends Service<Boolean> {
 		this.operation = operation;
 		
 		//Restart
-		super.restart();                                                             ``
-	}                                                                                ``
-	                                                                                 ``
-	/**                                                                              ``
-	 * Create a new Folder with that name on Dropbox Account                         ``
-	 *                                                                               ``
-	 * @param folderName                                                             ``
-	 *            The new folder name                                                ``
-	 */                                                                              ``
-	public void createFolder(String folderName) {                                    ``
-		this.folderName = folderName;                                                ``
-		this.operation = DropBoxOperation.CREATE_FOLDER;                             ``
-		                                                                             ``
-		//Restart                                                                    ``
-		super.restart();                                                             ``
-	}                                                                                ``
-	                                                                                 ``
-	@Override                                                                        ``
+		super.restart();                                                             
+	}                                                                                
+	                                                                                 
+	/**                                                                              
+	 * Create a new Folder with that name on Dropbox Account                         
+	 *                                                                              
+	 * @param folderName                                                            
+	 *            The new folder name                                               
+	 */                                                                             
+	public void createFolder(String folderName) {                                   
+		this.folderName = folderName;                                               
+		this.operation = DropBoxOperation.CREATE_FOLDER;                            
+		                                                                            
+		//Restart                                                                   
+		super.restart();                                                            
+	}                                                                               
+	                                                                                
+	@Override                                                                       
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			@Override
