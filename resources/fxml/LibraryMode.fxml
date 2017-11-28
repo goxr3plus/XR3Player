@@ -154,7 +154,7 @@
                         </StackPane>
                      </top>
                   </BorderPane>
-                  <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Press here to create your first playlist/library" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Press here to create your first library" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
                            <image>

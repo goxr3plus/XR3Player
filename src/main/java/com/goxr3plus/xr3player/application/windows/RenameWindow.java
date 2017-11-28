@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import org.controlsfx.control.textfield.TextFields;
 
-import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -35,7 +34,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -279,21 +277,7 @@ public class RenameWindow extends VBox {
 		
 		//Set once
 		window.setX(x);
-		
-		//------------Animation------------------
-		//Y axis
-		double yIni = y + 50;
-		double yEnd = y;
-		window.setY(yIni);
-		
-		//Create  Double Property
-		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
-		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
-		
-		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		timeIn.play();
-		//------------ END of Animation------------------
+		window.setY(y);
 		
 		window.show();
 		
@@ -313,6 +297,21 @@ public class RenameWindow extends VBox {
 			
 			window.setX(x);
 			window.setY(y);
+			
+			//------------Animation------------------
+			//Y axis
+			double yIni = y + 50;
+			double yEnd = y;
+			window.setY(yIni);
+			
+			//Create  Double Property
+			final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+			yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+			
+			//Create Time Line
+			Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+			timeIn.play();
+			//------------ END of Animation------------------
 		}
 		
 		//	
@@ -321,11 +320,8 @@ public class RenameWindow extends VBox {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on
-	 *         the user's system). The Stage might be "showing", yet the user
-	 *         might not be able to see it due to the Stage being rendered
-	 *         behind another window or due to the Stage being positioned off
-	 *         the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not be
+	 *         able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
 	 * 
 	 *
 	 * @defaultValue false
@@ -335,11 +331,8 @@ public class RenameWindow extends VBox {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on
-	 *         the user's system). The Stage might be "showing", yet the user
-	 *         might not be able to see it due to the Stage being rendered
-	 *         behind another window or due to the Stage being positioned off
-	 *         the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not be
+	 *         able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
 	 * 
 	 */
 	public boolean isShowing() {

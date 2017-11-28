@@ -203,25 +203,11 @@ public class EmotionsWindow extends BorderPane {
 		
 		//Set once
 		window.setX(x);
-		
-		//------------Animation------------------
-		//Y axis
-		double yIni = y + 50;
-		double yEnd = y;
-		window.setY(yIni);
-		
-		//Create  Double Property
-		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
-		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
-		
-		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		timeIn.play();
-		//------------ END of Animation------------------
+		window.setY(y);
 		
 		window.show();
 		
-		//Set it again
+		//Set it again -- NEEDS FIXING
 		if (x <= -1 && y <= -1)
 			window.centerOnScreen();
 		else {
@@ -238,18 +224,29 @@ public class EmotionsWindow extends BorderPane {
 			window.setX(x);
 			window.setY(y);
 			
-			emotionLabel.setText("?");
+			//------------Animation------------------
+			//Y axis
+			double yIni = y + 50;
+			double yEnd = y;
+			window.setY(yIni);
+			
+			//Create  Double Property
+			final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+			yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+			
+			//Create Time Line
+			Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+			timeIn.play();
+			//------------ END of Animation------------------
 		}
 		
-		//	
+		//Set default label text
+		emotionLabel.setText("?");
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on
-	 *         the user's system). The Stage might be "showing", yet the user
-	 *         might not be able to see it due to the Stage being rendered
-	 *         behind another window or due to the Stage being positioned off
-	 *         the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not be
+	 *         able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
 	 * 
 	 *
 	 * @defaultValue false
@@ -259,11 +256,8 @@ public class EmotionsWindow extends BorderPane {
 	}
 	
 	/**
-	 * @return Whether or not this {@code Stage} is showing (that is, open on
-	 *         the user's system). The Stage might be "showing", yet the user
-	 *         might not be able to see it due to the Stage being rendered
-	 *         behind another window or due to the Stage being positioned off
-	 *         the monitor.
+	 * @return Whether or not this {@code Stage} is showing (that is, open on the user's system). The Stage might be "showing", yet the user might not be
+	 *         able to see it due to the Stage being rendered behind another window or due to the Stage being positioned off the monitor.
 	 * 
 	 */
 	public boolean isShowing() {
@@ -330,8 +324,7 @@ public class EmotionsWindow extends BorderPane {
 	}
 	
 	/**
-	 * The user is passing a button and an emotion and this method sets the
-	 * correct graphic based on the emotion given
+	 * The user is passing a button and an emotion and this method sets the correct graphic based on the emotion given
 	 * 
 	 * @param button
 	 * @param emotion

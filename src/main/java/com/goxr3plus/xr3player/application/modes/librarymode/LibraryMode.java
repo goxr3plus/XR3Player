@@ -380,7 +380,9 @@ public class LibraryMode extends BorderPane {
 				openedLibraries, " ] Opened", " , [ ", emptyLibraries, " ] Empty"));
 		
 		//== colorPicker
-		colorPicker.setValue(Color.web("#00E5BB"));
+		String defaultWebColor = "#ef4949";
+		colorPicker.setValue(Color.web(defaultWebColor));
+		teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
 		colorPicker.setOnAction(a -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
 		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
 			
@@ -388,7 +390,7 @@ public class LibraryMode extends BorderPane {
 			String webColor = JavaFXTools.colorToWebColor(newColor);
 			
 			//Set the style
-			this.teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
+			teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
 		});
 	}
 	

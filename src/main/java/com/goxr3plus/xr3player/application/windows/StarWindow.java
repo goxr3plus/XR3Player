@@ -257,25 +257,11 @@ public class StarWindow extends GridPane {
 		
 		//Set once
 		window.setX(x);
-		
-		//------------Animation------------------
-		//Y axis
-		double yIni = y + 50;
-		double yEnd = y;
-		window.setY(yIni);
-		
-		//Create  Double Property
-		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
-		yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
-		
-		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		timeIn.play();
-		//------------ END of Animation------------------
+		window.setY(y);
 		
 		window.show();
 		
-		//Set it again
+		//Set it again -- NEEDS FIXING
 		if (x <= -1 && y <= -1)
 			window.centerOnScreen();
 		else {
@@ -291,6 +277,21 @@ public class StarWindow extends GridPane {
 			
 			window.setX(x);
 			window.setY(y);
+			
+			//------------Animation------------------
+			//Y axis
+			double yIni = y + 50;
+			double yEnd = y;
+			window.setY(yIni);
+			
+			//Create  Double Property
+			final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+			yProperty.addListener((ob , n , n1) -> window.setY(n1.doubleValue()));
+			
+			//Create Time Line
+			Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+			timeIn.play();
+			//------------ END of Animation------------------
 		}
 		
 	}
@@ -330,8 +331,7 @@ public class StarWindow extends GridPane {
 	 * @param m
 	 *            The MouseEvent
 	 * @param fakeStars
-	 *            If True it just displays stars but doesn't actually changes
-	 *            them ( just repainting canvas )
+	 *            If True it just displays stars but doesn't actually changes them ( just repainting canvas )
 	 */
 	private void computeStars(MouseEvent m , boolean fakeStars) {
 		int x = (int) m.getX();
