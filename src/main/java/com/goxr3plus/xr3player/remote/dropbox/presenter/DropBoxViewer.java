@@ -67,9 +67,6 @@ public class DropBoxViewer extends StackPane {
 	private Button refresh;
 	
 	@FXML
-	private Button collapseTree;
-	
-	@FXML
 	private BreadCrumbBar<String> breadCrumbBar;
 	
 	@FXML
@@ -203,18 +200,6 @@ public class DropBoxViewer extends StackPane {
 		
 		//Progress Indicator
 		progressIndicator.progressProperty().bind(dropBoxService.progressProperty());
-		
-		//collapseTree
-		collapseTree.setOnAction(a -> {
-			//Trick for CPU based on this question -> https://stackoverflow.com/questions/15490268/manually-expand-collapse-all-treeitems-memory-cost-javafx-2-2
-			root.setExpanded(false);
-			
-			//Set not expanded all the children
-			collapseTreeView(root, false);
-			
-			//Trick for CPU
-			root.setExpanded(true);
-		});
 		
 		//refresh
 		refresh.setOnAction(a -> recreateTree(dropBoxService.getCurrentPath()));

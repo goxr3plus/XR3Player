@@ -32,9 +32,13 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Button fx:id="settings" layoutX="541.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="24.0" style="-fx-background-radius: 0;">
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" style="-fx-background-color: #202020;">
+                     <children>
+                        <Button fx:id="settings" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../image/Settings-32.png" />
                                  </image>
@@ -47,11 +51,11 @@
                               <Tooltip text="settings" />
                            </tooltip>
                         </Button>
-                        <Button fx:id="refresh" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="24.0" style="-fx-background-radius: 0;">
+                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Synchronize-24.png" />
+                                    <Image url="@../image/refresh.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -62,11 +66,11 @@
                               <Tooltip text="Refresh" />
                            </tooltip>
                         </Button>
-                        <Button fx:id="collapseTree" layoutX="541.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="24.0" style="-fx-background-radius: 0;">
+                        <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/collapse.png" />
+                                    <Image url="@../image/shrink.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -82,7 +86,7 @@
                   <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" visible="false" wrapText="true">
                <tooltip>
                   <Tooltip text="Displays from which folders the Playlist Media are coming from ..." />
                </tooltip>

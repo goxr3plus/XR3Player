@@ -114,24 +114,24 @@ public class DropboxService extends Service<Boolean> {
 		this.operation = operation;
 		
 		//Restart
-		super.restart();                                                             
-	}                                                                                
-	                                                                                 
-	/**                                                                              
-	 * Create a new Folder with that name on Dropbox Account                         
-	 *                                                                              
-	 * @param folderName                                                            
-	 *            The new folder name                                               
-	 */                                                                             
-	public void createFolder(String folderName) {                                   
-		this.folderName = folderName;                                               
-		this.operation = DropBoxOperation.CREATE_FOLDER;                            
-		                                                                            
+		super.restart();
+	}
+	
+	/**
+	 * Create a new Folder with that name on Dropbox Account
+	 * 
+	 * @param folderName
+	 *            The new folder name
+	 */
+	public void createFolder(String folderName) {
+		this.folderName = folderName;
+		this.operation = DropBoxOperation.CREATE_FOLDER;
+		
 		//Restart                                                                   
-		super.restart();                                                            
-	}                                                                               
-	                                                                                
-	@Override                                                                       
+		super.restart();
+	}
+	
+	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			@Override
@@ -176,13 +176,35 @@ public class DropboxService extends Service<Boolean> {
 						//Refresh
 						Platform.runLater(() -> refresh(currentPath));
 					}
+				} catch (ListFolderErrorException ex) {
+					ex.printStackTrace();
+					
+					//Show to user about the error
+					Platform.runLater(
+							() -> ActionTool.showNotification("Missing Folder", "Folder : [ " + currentPath + " ] doesn't exist.", Duration.seconds(2), NotificationType.ERROR));
+					
+					//Check the Internet Connection
+					checkConnection();
+					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					
-					//Check if there is Internet Connection
-					if (!InfoTool.isReachableByPing("www.google.com"))
-						Platform.runLater(() -> dropBoxViewer.getErrorVBox().setVisible(true));
+					//Check the Internet Connection
+					checkConnection();
 					
+					return false;
+				}
+				return true;
+			}
+			
+			/**
+			 * Check if there is Internet Connection
+			 */
+			private boolean checkConnection() {
+				
+				//Check if there is Internet Connection
+				if (!InfoTool.isReachableByPing("www.google.com")) {
+					Platform.runLater(() -> dropBoxViewer.getErrorVBox().setVisible(true));
 					return false;
 				}
 				
@@ -196,59 +218,52 @@ public class DropboxService extends Service<Boolean> {
 			 * @param path
 			 * @param children
 			 * @param arrayList
+			 * @throws DbxException
+			 * @throws ListFolderErrorException
 			 */
-			public void listAllFiles(DbxClientV2 client , String path , SortedMap<String,Metadata> children) {
-				try {
-					ListFolderResult result = null;
-					try {
-						result = client.files().listFolder(path);
-					} catch (ListFolderErrorException ex) {
-						ex.printStackTrace();
+			public void listAllFiles(DbxClientV2 client , String path , SortedMap<String,Metadata> children) throws ListFolderErrorException , DbxException {
+				
+				ListFolderResult result = client.files().listFolder(path);
+				
+				while (true) {
+					for (Metadata metadata : result.getEntries()) {
+						if (metadata instanceof DeletedMetadata) { // Deleted
+							//	children.remove(metadata.getPathLower());
+						} else if (metadata instanceof FolderMetadata) { // Folder
+							String folder = metadata.getPathLower();
+							String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
+							children.put(folder, metadata);
+							
+							//boolean subFileOfCurrentFolder = path.equals(parent);
+							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
+							
+							//Add to TreeView	
+							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+							
+							//listAllFiles(client, folder, children);
+						} else if (metadata instanceof FileMetadata) { //File
+							String file = metadata.getPathLower();
+							String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
+							children.put(file, metadata);
+							
+							//boolean subFileOfCurrentFolder = path.equals(parent);
+							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
+							
+							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+						}
 					}
 					
-					while (true) {
-						for (Metadata metadata : result.getEntries()) {
-							if (metadata instanceof DeletedMetadata) { // Deleted
-								//	children.remove(metadata.getPathLower());
-							} else if (metadata instanceof FolderMetadata) { // Folder
-								String folder = metadata.getPathLower();
-								String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-								children.put(folder, metadata);
-								
-								//boolean subFileOfCurrentFolder = path.equals(parent);
-								//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
-								
-								//Add to TreeView	
-								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
-								
-								//listAllFiles(client, folder, children);
-							} else if (metadata instanceof FileMetadata) { //File
-								String file = metadata.getPathLower();
-								String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-								children.put(file, metadata);
-								
-								//boolean subFileOfCurrentFolder = path.equals(parent);
-								//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
-								
-								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
-							}
-						}
-						
-						if (!result.getHasMore())
-							break;
-						
-						try {
-							result = client.files().listFolderContinue(result.getCursor());
-							//System.out.println("Entered result next")
-						} catch (ListFolderContinueErrorException ex) {
-							ex.printStackTrace();
-						}
+					if (!result.getHasMore())
+						break;
+					
+					try {
+						result = client.files().listFolderContinue(result.getCursor());
+						//System.out.println("Entered result next")
+					} catch (ListFolderContinueErrorException ex) {
+						ex.printStackTrace();
 					}
-				} catch (DbxException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
+				
 			}
 			
 			/**
