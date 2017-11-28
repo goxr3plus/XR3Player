@@ -91,7 +91,7 @@ public class LoginMode extends BorderPane {
 	private ScrollBar horizontalScrollBar;
 	
 	@FXML
-	private Button newUser;
+	private Button createFirstUser;
 	
 	@FXML
 	private Label quickSearchTextField;
@@ -239,8 +239,13 @@ public class LoginMode extends BorderPane {
 				if (!teamViewer.itemsObservableList.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
 					
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
+						
+						//Create the new user and add it 
 						User user = new User(newName, teamViewer.itemsObservableList.size(), LoginMode.this);
 						teamViewer.addUser(user, true);
+						
+						//Add to PieChart
+						//librariesPieChartData.add(new PieChart.Data(newName, 0));
 						
 						//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
 						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
@@ -358,8 +363,8 @@ public class LoginMode extends BorderPane {
 		createUser.setOnAction(a -> createNewUser(createUser));
 		
 		//newUser
-		newUser.setOnAction(a -> createNewUser(newUser));
-		newUser.visibleProperty().bind(Bindings.size(teamViewer.itemsObservableList).isEqualTo(0));
+		createFirstUser.setOnAction(a -> createNewUser(createFirstUser));
+		createFirstUser.visibleProperty().bind(Bindings.size(teamViewer.itemsObservableList).isEqualTo(0));
 		
 		//loginButton
 		loginButton.setOnAction(a -> Main.startAppWithUser(teamViewer.getSelectedItem()));
@@ -469,9 +474,16 @@ public class LoginMode extends BorderPane {
 				Main.window)) {
 			
 			//Try to delete it
-			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + teamViewer.getSelectedItem().getUserName())))
-				teamViewer.deleteUser(teamViewer.getSelectedItem());
-			else
+			User selectedUser = teamViewer.getSelectedItem();
+			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName()))) {
+				
+				//Delete from the Model Viewer
+				teamViewer.deleteUser(selectedUser);
+				
+				//Delete from PieChart
+				librariesPieChartData.stream().filter(data -> data.getName().equals(selectedUser.getUserName())).findFirst().ifPresent(data -> librariesPieChartData.remove(data));
+				
+			} else
 				ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
 		}
 	}

@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
@@ -26,7 +27,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
@@ -47,10 +47,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	private JFXButton addNewLibrary;
 	
 	@FXML
-	private Region emptyLabelRegion;
-	
-	@FXML
-	private Label emptyLabel;
+	private Button emptyLabel;
 	
 	// -----------------------------------------------------------------------
 	
@@ -93,9 +90,6 @@ public class OpenedLibrariesViewer extends StackPane {
 			else
 				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).openLibrary(true, false);
 		});
-		
-		//== emptyLabelRegion
-		emptyLabelRegion.visibleProperty().bind(emptyLabel.visibleProperty());
 		
 		//== emptyLabel
 		itemsWrapperProperty = new SimpleListProperty<>(tabPane.getTabs());
@@ -410,9 +404,11 @@ public class OpenedLibrariesViewer extends StackPane {
 	}
 	
 	/**
-	 * @return the emptyLabel
+	 * The label that indicates not libraries are opened or created
+	 * 
+	 * @return The emptyLabel
 	 */
-	public Label getEmptyLabel() {
+	public Button getEmptyLabel() {
 		return emptyLabel;
 	}
 	

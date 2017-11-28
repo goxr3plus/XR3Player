@@ -405,14 +405,14 @@ public class Main extends Application {
 		libraryMode.librariesContextMenu.hide();
 		
 		//Remove this to be soore...
-		libraryMode.getTopSplitPane().getItems().remove(libraryMode.getBorderPane());
+		libraryMode.getTopSplitPane().getItems().remove(libraryMode.getNoLibrariesStackPane());
 		
 		libraryMode.getTopSplitPane().getItems().add(playListModesSplitPane);
-		libraryMode.getBottomSplitPane().getItems().add(libraryMode.getBorderPane());
+		libraryMode.getBottomSplitPane().getItems().add(libraryMode.getNoLibrariesStackPane());
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
 		
 		libraryMode.multipleLibs.getEmptyLabel().textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
-				.then("Click here to create a library...").otherwise("Click here to open the first available library..."));
+				.then("Press here to create your first playlist/library").otherwise("Press here to open the first available playlist/library"));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----------ApplicationStackPane---------

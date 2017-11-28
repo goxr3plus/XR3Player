@@ -98,7 +98,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 								Platform.runLater(() -> {
 									//Add Pie Chart Data
 									if (totalLibraries > 0)
-										Main.loginMode.getLibrariesPieChartData().add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries));
+										Main.loginMode.getLibrariesPieChartData().add(new PieChart.Data(user.getUserName(), totalLibraries));
 									
 									//Update User Label
 									user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries));
@@ -135,7 +135,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 								
 								// --Create connection and load user information
 								try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
-										ResultSet dbCounter = connection.createStatement().executeQuery("SELECT COUNT(*) FROM LIBRARIES;");) {
+										ResultSet dbCounter = connection.createStatement().executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
 									
 									int[] totalLibraries = { 0 };
 									totalLibraries[0] += dbCounter.getInt(1);
@@ -146,7 +146,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 										
 										//Add Pie Chart Data
 										if (totalLibraries[0] > 0)
-											Main.loginMode.getLibrariesPieChartData().add(new PieChart.Data(InfoTool.getMinString(user.getUserName(), 4), totalLibraries[0]));
+											Main.loginMode.getLibrariesPieChartData().add(new PieChart.Data(user.getUserName(), totalLibraries[0]));
 										
 										//Update User Label
 										user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));

@@ -51,16 +51,13 @@ public class LibraryMode extends BorderPane {
 	private SplitPane topSplitPane;
 	
 	@FXML
-	private BorderPane borderPane;
+	private StackPane noLibrariesStackPane;
 	
 	@FXML
 	private StackPane librariesStackView;
 	
 	@FXML
 	private ScrollBar horizontalScrollBar;
-	
-	@FXML
-	private Button newLibrary;
 	
 	@FXML
 	private Label quickSearchTextField;
@@ -90,13 +87,16 @@ public class LibraryMode extends BorderPane {
 	private Button openLibraryContextMenu;
 	
 	@FXML
+	private ColorPicker colorPicker;
+	
+	@FXML
 	private Label librariesInfoLabel;
 	
 	@FXML
 	private HBox botttomHBox;
 	
 	@FXML
-	private ColorPicker colorPicker;
+	private Button createFirstLibrary;
 	
 	@FXML
 	private SplitPane bottomSplitPane;
@@ -309,8 +309,8 @@ public class LibraryMode extends BorderPane {
 		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
 		
 		// newLibrary
-		newLibrary.setOnAction(a -> createNewLibrary(newLibrary, true));
-		newLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
+		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary, true));
+		createFirstLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
 		//selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.getViewer().goOnSelectionMode(newValue));
@@ -548,17 +548,17 @@ public class LibraryMode extends BorderPane {
 	}
 	
 	/**
-	 * @return the borderPane
-	 */
-	public BorderPane getBorderPane() {
-		return borderPane;
-	}
-	
-	/**
 	 * @return the colorPicker
 	 */
 	public ColorPicker getColorPicker() {
 		return colorPicker;
+	}
+	
+	/**
+	 * @return the noLibrariesStackPane
+	 */
+	public StackPane getNoLibrariesStackPane() {
+		return noLibrariesStackPane;
 	}
 	
 }

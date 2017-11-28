@@ -3,26 +3,19 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="325.0" prefWidth="612.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="325.0" prefWidth="612.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;">
          <children>
-            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="3.0">
-               <tabs>
-                  <Tab text="Example1" />
-                  <Tab text="Example2" />
-               </tabs>
-            </JFXTabPane>
+            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="3.0" />
             <JFXButton fx:id="addNewLibrary" layoutX="1.0" layoutY="-1.0" style="-fx-border-color: transparent orange transparent firebrick; -fx-border-radius: 0 45 45 0; -fx-background-radius: 0 45 45 0;" text="+" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0">
                <tooltip>
                   <Tooltip text="New Tab" />
@@ -37,16 +30,23 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <Region fx:id="emptyLabelRegion" style="-fx-background-color: black;" visible="false" />
-      <Label fx:id="emptyLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-background-color: rgb(0,0,0,0.85); -fx-text-fill: white;" text="Click here to create a library..." visible="false" wrapText="true">
+      <Button fx:id="emptyLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Press here to create your first playlist/library" textAlignment="CENTER" wrapText="true">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../image/Playlist-32.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-         <effect>
-            <DropShadow color="#ff0808" />
-         </effect>
-         <StackPane.margin>
-            <Insets left="10.0" right="10.0" />
-         </StackPane.margin></Label>
+         <tooltip>
+            <Tooltip text="XR3Player supports multiple users , in order to use it your must create an login with a user :)" />
+         </tooltip>
+      </Button>
    </children>
 </fx:root>
