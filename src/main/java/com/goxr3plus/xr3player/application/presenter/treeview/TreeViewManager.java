@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
@@ -39,13 +40,13 @@ public class TreeViewManager extends BorderPane {
 	// -------------------------------------
 	
 	@FXML
-	private TreeView<String> systemTreeView;
-	
-	//	@FXML
-	//	private Button searchButton
+	private TextField searchField;
 	
 	@FXML
 	private Button collapseTree;
+	
+	@FXML
+	private TreeView<String> systemTreeView;
 	
 	// -------------------------------------
 	
@@ -135,6 +136,15 @@ public class TreeViewManager extends BorderPane {
 		
 		item.setExpanded(expanded);
 		item.getChildren().forEach(child -> collapseTreeView(child, expanded));
+	}
+	
+	/**
+	 * Finds first TreeView element matching the given text
+	 * 
+	 * @param text
+	 */
+	private void findElementMatching(String text) {
+		
 	}
 	
 	/**
