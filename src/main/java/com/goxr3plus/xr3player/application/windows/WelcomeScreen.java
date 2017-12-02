@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -29,10 +30,10 @@ public class WelcomeScreen extends BorderPane {
 	private VBox screen1;
 	
 	@FXML
-	private Button close;
+	private JFXCheckBox showOnStartUp;
 	
 	@FXML
-	private JFXCheckBox showOnStartUp;
+	private JFXButton startButton;
 	
 	// -------------------------------------------------------------
 	/** The logger. */
@@ -60,7 +61,8 @@ public class WelcomeScreen extends BorderPane {
 		
 		// --window
 		window.setTitle("Welcome");
-		window.initStyle(StageStyle.UTILITY);
+		window.initStyle(StageStyle.TRANSPARENT);
+		window.initModality(Modality.APPLICATION_MODAL);
 		window.setResizable(false);
 		
 	}
@@ -73,7 +75,7 @@ public class WelcomeScreen extends BorderPane {
 		window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		
 		//close
-		close.setOnAction(a -> close());
+		startButton.setOnAction(a -> close());
 		
 		//dontShowAgain
 		showOnStartUp.selectedProperty()
