@@ -18,6 +18,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -27,6 +28,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -41,7 +43,10 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
  *
  * @author GOXR3PLUS
  */
-public class MediaTableViewer extends TableView<Media> {
+public class MediaTableViewer extends StackPane {
+	
+	@FXML
+	private TableView<Media> tableView;
 	
 	@FXML
 	private TableColumn<Media,Integer> number;
@@ -160,6 +165,9 @@ public class MediaTableViewer extends TableView<Media> {
 	@FXML
 	private TableColumn<Media,?> singer;
 	
+	@FXML
+	private Label dragAndDropLabel;
+	
 	//-------------------------------------------------
 	
 	/** The image. */
@@ -201,7 +209,7 @@ public class MediaTableViewer extends TableView<Media> {
 	private void initialize() {
 		
 		//------------------------------TableViewer---------------------------
-		setItems(smartController.getItemsObservableList());
+		tableView.setItems(smartController.getItemsObservableList());
 		
 		//Add the place holder for the tableView
 		Label placeHolderLabel = new Label();
@@ -218,12 +226,12 @@ public class MediaTableViewer extends TableView<Media> {
 			placeHolderLabel.setText("No Media in this emotions list ...");
 			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
 		}
-		setPlaceholder(placeHolderLabel);
+		tableView.setPlaceholder(placeHolderLabel);
 		
 		//--Allow Multiple Selection
-		getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
-		getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> {
+		tableView.getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> {
 			
 			//Hold the Current Selected Count
 			int currentSelectedCount = getSelectedCount();
@@ -237,13 +245,13 @@ public class MediaTableViewer extends TableView<Media> {
 		});
 		
 		//Update the Media Information when Selected Item changes
-		getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
 				Main.mediaInformation.updateInformation(newValue);
 		});
 		
 		//--KeyListener
-		setOnKeyReleased(key -> {
+		tableView.setOnKeyReleased(key -> {
 			if ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.C) {
 				System.out.println("Control+C was released");
 				
@@ -257,7 +265,7 @@ public class MediaTableViewer extends TableView<Media> {
 		});
 		
 		//--Row Factory
-		setRowFactory(rf -> {
+		tableView.setRowFactory(rf -> {
 			TableRow<Media> row = new TableRow<>();
 			
 			// use EasyBind to access the valueProperty of the itemProperty
@@ -280,7 +288,7 @@ public class MediaTableViewer extends TableView<Media> {
 				if (row.itemProperty().getValue() != null) {
 					
 					if (m.getButton() == MouseButton.SECONDARY && !row.isDisable())
-						smartController.getTableViewer().getSelectionModel().select(row.getIndex());
+						tableView.getSelectionModel().select(row.getIndex());
 					
 					//Primary
 					if (m.getButton() == MouseButton.PRIMARY) {
@@ -288,7 +296,7 @@ public class MediaTableViewer extends TableView<Media> {
 							row.itemProperty().get().rename(row);
 						
 					} //Secondary
-					else if (m.getButton() == MouseButton.SECONDARY && !smartController.getTableViewer().getSelectionModel().getSelectedItems().isEmpty())
+					else if (m.getButton() == MouseButton.SECONDARY && !tableView.getSelectionModel().getSelectedItems().isEmpty())
 						Main.songsContextMenu.showContextMenu(row.itemProperty().get(), smartController.getGenre(), m.getScreenX(), m.getScreenY(), smartController, row);
 				}
 			});
@@ -317,21 +325,21 @@ public class MediaTableViewer extends TableView<Media> {
 		});
 		
 		// --Drag Detected
-		setOnDragDetected(event -> {
-			if (getSelectedCount() != 0 && event.getScreenY() > localToScreen(getBoundsInLocal()).getMinY() + 30) {
+		tableView.setOnDragDetected(event -> {
+			if (getSelectedCount() != 0 && event.getScreenY() > tableView.localToScreen(tableView.getBoundsInLocal()).getMinY() + 30) {
 				
 				/* allow copy transfer mode */
-				Dragboard db = startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
+				Dragboard db = tableView.startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
 				
 				/* put a string on drag board */
 				ClipboardContent content = new ClipboardContent();
 				
 				// PutFiles
-				content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
+				content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
 				
 				// Single Drag and Drop ?
 				if (content.getFiles().size() == 1)
-					getSelectionModel().getSelectedItem().setDragView(db);
+					tableView.getSelectionModel().getSelectedItem().setDragView(db);
 				// Multiple Drag and Drop ?
 				else {
 					ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
@@ -343,23 +351,30 @@ public class MediaTableViewer extends TableView<Media> {
 			event.consume();
 		});
 		
+		// dragAndDropLabel
+		dragAndDropLabel.setVisible(false);
+		
 		if (smartController.getGenre() == Genre.LIBRARYMEDIA) {
 			
 			// --Drag Over
-			setOnDragOver(dragOver -> {
+			tableView.setOnDragOver(dragOver -> {
 				
 				// The drag must come from source other than the owner
-				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != this) {
-					dragOver.acceptTransferModes(TransferMode.LINK);
-				}
+				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != tableView)
+					dragAndDropLabel.setVisible(true);
+				
 			});
 			
-			//Drag Entered and Exited
-			//setOnDragEntered(d -> navigationHBox.setVisible(false))
-			//setOnDragExited(d -> navigationHBox.setVisible(true))
+			dragAndDropLabel.setOnDragOver(dragOver -> {
+				
+				// The drag must come from source other than the owner
+				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != tableView)
+					dragOver.acceptTransferModes(TransferMode.LINK);
+				
+			});
 			
 			// --Drag Dropped
-			setOnDragDropped(drop -> {
+			dragAndDropLabel.setOnDragDropped(drop -> {
 				// Has Files? + isFree()?
 				if (drop.getDragboard().hasFiles() && smartController.isFree(true))
 					smartController.getInputService().start(drop.getDragboard().getFiles());
@@ -367,17 +382,10 @@ public class MediaTableViewer extends TableView<Media> {
 				drop.setDropCompleted(true);
 			});
 			
+			// Drag Exited
+			dragAndDropLabel.setOnDragExited(drop -> dragAndDropLabel.setVisible(false));
+			
 		}
-		
-		// setOnDragDone(d -> {
-		// System.out.println(
-		// "Drag Done,is drop completed?" + d.isDropCompleted() + " , is
-		// accepted?" + d.isAccepted());
-		// System.out.println("Accepted Mode:" +
-		// d.getAcceptedTransferMode());
-		// System.out.println(" Target:" + d.getTarget() + " Gesture
-		// Target:" + d.getGestureTarget());
-		// });
 		
 		//--------------------------Other-----------------------------------
 		String center = "-fx-alignment:CENTER-LEFT;";
@@ -510,7 +518,7 @@ public class MediaTableViewer extends TableView<Media> {
 	 * @return An int representing the total selected items in the table
 	 */
 	public int getSelectedCount() {
-		return getSelectionModel().getSelectedItems().size();
+		return tableView.getSelectionModel().getSelectedItems().size();
 	}
 	
 	/**
@@ -522,7 +530,7 @@ public class MediaTableViewer extends TableView<Media> {
 		final ClipboardContent content = new ClipboardContent();
 		
 		// PutFiles
-		content.putFiles(getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
+		content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
 		
 		//Set the Content
 		clipboard.setContent(content);
@@ -543,4 +551,16 @@ public class MediaTableViewer extends TableView<Media> {
 		if (clipboard.hasFiles() && smartController.isFree(true))
 			smartController.getInputService().start(clipboard.getFiles());
 	}
+	
+	/**
+	 * @return the tableView
+	 */
+	public TableView<Media> getTableView() {
+		return tableView;
+	}
+	
+	public TableViewSelectionModel<Media> getSelectionModel() {
+		return tableView.getSelectionModel();
+	}
+	
 }

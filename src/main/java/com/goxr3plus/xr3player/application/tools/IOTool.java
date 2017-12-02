@@ -36,7 +36,7 @@ public class IOTool {
 		else
 			try {
 				//If yes returns the real file name
-				if (WindowsShortcut.isPotentialValidLink(file))
+				if ("lnk".equals(InfoTool.getFileExtension(absoluteFilePath)) && WindowsShortcut.isPotentialValidLink(file))
 					absoluteFilePath = new WindowsShortcut(file).getRealFilename();
 				return new FileTypeAndAbsolutePath(FileType.SHORTCUT, absoluteFilePath);
 			} catch (IOException | ParseException e) {

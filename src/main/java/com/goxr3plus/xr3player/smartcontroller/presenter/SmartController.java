@@ -302,9 +302,9 @@ public class SmartController extends StackPane {
 					if (code == KeyCode.F)
 						ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
 					else if (code == KeyCode.Q)
-						tableViewer.getSelectionModel().getSelectedItem().updateStars(tableViewer);
+						tableViewer.getSelectionModel().getSelectedItem().updateStars(tableViewer.getTableView());
 					else if (code == KeyCode.R)
-						tableViewer.getSelectionModel().getSelectedItem().rename(tableViewer);
+						tableViewer.getSelectionModel().getSelectedItem().rename(tableViewer.getTableView());
 					else if (code == KeyCode.U) {
 						Media media = tableViewer.getSelectionModel().getSelectedItem();
 						if (!Main.playedSongs.containsFile(media.getFilePath()))
@@ -339,7 +339,7 @@ public class SmartController extends StackPane {
 						if (media.getTitle().toLowerCase().contains(searchWord.get()) && !found[0]) {
 							this.tableViewer.getSelectionModel().clearSelection();
 							this.tableViewer.getSelectionModel().select(media);
-							this.tableViewer.scrollTo(media);
+							this.tableViewer.getTableView().scrollTo(media);
 							found[0] = true;
 						}
 					});
@@ -857,9 +857,9 @@ public class SmartController extends StackPane {
 		// update the label
 		updateLabel();
 		// refresh the tableViewer
-		tableViewer.refresh();
-		if (!tableViewer.getSortOrder().isEmpty())
-			tableViewer.sort();
+		tableViewer.getTableView().refresh();
+		if (!tableViewer.getTableView().getSortOrder().isEmpty())
+			tableViewer.getTableView().sort();
 		
 	}
 	
@@ -1172,7 +1172,7 @@ public class SmartController extends StackPane {
 	 */
 	public Optional<ScrollBar> getVerticalScrollBar() {
 		
-		return Optional.ofNullable((ScrollBar) getTableViewer().lookup(".scroll-bar:vertical"));
+		return Optional.ofNullable((ScrollBar) getTableViewer().getTableView().lookup(".scroll-bar:vertical"));
 	}
 	
 	/**
