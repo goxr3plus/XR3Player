@@ -223,6 +223,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private JFXSpinner fxSpinner;
 	
 	@FXML
+	private Label dragAndDropLabel;
+	
+	@FXML
 	private Label fxLabel;
 	
 	@FXML
@@ -371,7 +374,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
 			
 			event.setDropCompleted(true);
-			
+			event.consume();
 		}
 	};
 	
@@ -455,10 +458,27 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//== borderPane
 		borderPane.setOnDragOver(dragOver -> {
+			//Check if FlipPane is on the front side
+			if (!flipPane.isBackVisible())
+				dragAndDropLabel.setVisible(true);
+			
+			dragOver.consume();
+		});
+		
+		//== dragAndDropLabel
+		dragAndDropLabel.setVisible(false);
+		dragAndDropLabel.setOnDragOver(dragOver -> {
+			//Check if FlipPane is on the front side
 			if (!flipPane.isBackVisible())
 				dragOver.acceptTransferModes(TransferMode.LINK);
+			
+			dragOver.consume();
 		});
-		borderPane.setOnDragDropped(audioDropEvent);
+		dragAndDropLabel.setOnDragExited(event -> {
+			dragAndDropLabel.setVisible(false);
+			event.consume();
+		});
+		dragAndDropLabel.setOnDragDropped(audioDropEvent);
 		
 		//== regionStackPane
 		regionStackPane.setVisible(false);
