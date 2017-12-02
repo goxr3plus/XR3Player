@@ -62,7 +62,7 @@
       </VBox>
    </center>
    <right>
-      <JFXButton fx:id="startButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="265.0" prefWidth="186.0" style="-fx-background-radius: 0;" text=" Lets start !" BorderPane.alignment="CENTER">
+      <JFXButton fx:id="startButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="265.0" prefWidth="186.0" style="-fx-background-radius: 0;" text="Press here to start !" BorderPane.alignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -277,8 +277,14 @@ public final class ActionTool {
 				return false;
 			}
 			
-			ActionTool.showNotification("Opening file", "Opening in File Explorer :\n" + absolutePath, Duration.millis(1500), NotificationType.INFORMATION);
-			Desktop.getDesktop().open(new File(absolutePath));
+			//Check File existance
+			File file = new File(absolutePath);
+			if (file.exists()) {
+				ActionTool.showNotification("Opening file", "Opening in File Explorer :\n" + absolutePath, Duration.millis(1500), NotificationType.INFORMATION);
+				Desktop.getDesktop().open(file);
+			} else
+				ActionTool.showNotification("Can't open file", "Can't open in File Explorer :\n" + absolutePath + " \n because it doesn't exists !", Duration.millis(1500),
+						NotificationType.INFORMATION);
 		} catch (IOException ex) {
 			ActionTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]", Duration.millis(2500), NotificationType.INFORMATION);
 			logger.log(Level.INFO, "", ex);
