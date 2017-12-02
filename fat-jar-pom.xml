@@ -5,7 +5,7 @@
 
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
-	<version>3.0.91</version>
+	<version>3.0.92</version>
 	<name>XR3Player</name>
 	<description>Dominant Future Generation JavaFX Media Player</description>
 	<url>https://github.com/goxr3plus/XR3Player</url>
@@ -46,9 +46,9 @@
 				</configuration>
 			</plugin>
 
-		
-			
-			
+
+
+
 			<!-- Maven Assembly Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -59,7 +59,7 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
-					<!--  Jar Final Name -->
+					<!-- Jar Final Name -->
 					<finalName>XR3Player</finalName>
 					<!-- MainClass in mainfest make a executable jar -->
 					<archive>
@@ -92,7 +92,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
@@ -119,7 +119,7 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>1.9.1</version>
+			<version>1.10.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
@@ -205,27 +205,57 @@
 			<artifactId>java-stream-player</artifactId>
 			<version>V1.1.0</version>
 		</dependency>
+
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
-			
+
 		<!-- WEB BROWSER SUPPORT -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
-			<version>V3.0.0</version>
+			<version>V3.1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.jfoenix</groupId>
+					<artifactId>jfoenix</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-validator</groupId>
+					<artifactId>commons-validator</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<!-- Locally testing WebBrowser <dependency> <groupId>sample</groupId> 
+			<artifactId>com.sample</artifactId> <version>1.0</version> <scope>system</scope> 
+			<systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.0.0.jar</systemPath> 
+			</dependency> -->
 		<!-- XR3Capture -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>xr3capture</artifactId>
 			<version>V3.11</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.jfoenix</groupId>
+					<artifactId>jfoenix</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.controlsfx</groupId>
+					<artifactId>controlsfx</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Dropbox -->
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
 			<version>3.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>4.2.0</version>
 		</dependency>
 	</dependencies>
 </project>

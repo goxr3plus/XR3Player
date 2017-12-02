@@ -3,12 +3,11 @@ package main.java.com.goxr3plus.xr3player.xplayer.services;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
 import javafx.application.Platform;
@@ -22,10 +21,9 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.AudioType;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
+import mslinks.ShellLink;
 
 /**
  * This Service is used to start the Audio of XR3Player
@@ -64,7 +62,13 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * @param secondsToSkip
 	 */
 	public void startPlayService(String fileAbsolutePath , int secondsToSkip) {
-		if (locked || isRunning() || fileAbsolutePath == null || !InfoTool.isAudioSupported(fileAbsolutePath))
+		if (locked || isRunning() || fileAbsolutePath == null)
+			return;
+		
+		//Check if the file is a symbolic link and resolve it
+		
+		//Check if it is an Audio
+		if (!InfoTool.isAudioSupported(fileAbsolutePath))
 			return;
 		
 		// The path of the audio file

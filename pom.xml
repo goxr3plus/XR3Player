@@ -203,6 +203,11 @@
 			<artifactId>json-simple</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.github.vatbub</groupId>
+			<artifactId>mslinks</artifactId>
+			<version>1.0.4</version>
+		</dependency> -->
 		<!-- JAVA-GOOGLE-SPEECH-API -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
@@ -272,11 +277,11 @@
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
 			<version>3.0.5</version>
-		</dependency>
-		<dependency>
+		</dependency>	
+		<!-- <dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna</artifactId>
 			<version>4.2.0</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 </project>
