@@ -155,6 +155,9 @@ public class DropboxService extends Service<Boolean> {
 		this.folderName = folderName;
 		this.operation = DropBoxOperation.CREATE_FOLDER;
 		
+		//RefreshLabel
+		dropBoxViewer.getRefreshLabel().setText("Creating requested folder ...");
+		
 		//Restart                                                                   
 		super.restart();
 	}
