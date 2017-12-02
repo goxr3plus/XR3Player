@@ -356,6 +356,7 @@ public class Main extends Application {
 		// ---- InitOwners -------
 		starWindow.getWindow().initOwner(window);
 		renameWindow.getWindow().initOwner(window);
+		emotionsWindow.getWindow().initOwner(window);
 		exportWindow.getWindow().initOwner(window);
 		consoleWindow.getWindow().initOwner(window);
 		settingsWindow.getWindow().initOwner(window);
