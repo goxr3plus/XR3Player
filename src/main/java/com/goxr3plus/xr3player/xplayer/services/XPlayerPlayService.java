@@ -3,8 +3,6 @@ package main.java.com.goxr3plus.xr3player.xplayer.services;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Arrays;
@@ -23,7 +21,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.AudioType;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
-import mslinks.ShellLink;
 
 /**
  * This Service is used to start the Audio of XR3Player
