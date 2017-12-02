@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Port;
+
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -49,10 +52,10 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 	//----------------------------------------------------------
 	
 	//Microphone
-	final Microphone mic = new Microphone(FLACFileWriter.FLAC);
+	private Microphone mic;
 	
 	//GSpeechDuplex for Speech Recognition
-	GSpeechDuplex duplex = new GSpeechDuplex("AIzaSyDIGjsPzpRkx2iHW04K_DJpDakyt_vniEE");
+	GSpeechDuplex duplex;
 	
 	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;";
 	
@@ -74,10 +77,34 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 			logger.log(Level.SEVERE, "", ex);
 		}
 		
-		//Duplex
-		duplex.setLanguage("en");
-		duplex.addResponseListener(this);
+		//Find a microphone
+		detectAvailableMicrophone();
 		
+	}
+	
+	/**
+	 * Retryes to find a Microphone to start Speech Recognition
+	 */
+	public void detectAvailableMicrophone() {
+		try {
+			//Microphone
+			if (mic != null)
+				mic.close();
+			
+			mic = new Microphone(FLACFileWriter.FLAC);
+			
+			//Duplex
+			if (duplex != null)
+				duplex.stopSpeechRecognition();
+			
+			duplex = new GSpeechDuplex("AIzaSyDIGjsPzpRkx2iHW04K_DJpDakyt_vniEE");
+			duplex.setLanguage("en");
+			duplex.addResponseListener(this);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			this.setDisable(true);
+		}
 	}
 	
 	/**
@@ -104,65 +131,70 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 		
 		//activateSpeechRecognition
 		activateSpeechRecognition.selectedProperty().addListener(l -> {
-			//Selected?
-			if (activateSpeechRecognition.isSelected()) {
-				activateSpeechRecognition.setText("Stop Speech Recognition");
+			
+			//Check the Microphone
+			if (AudioSystem.isLineSupported(Port.Info.MICROPHONE)) {
 				
-				//Start the Thread
-				new Thread(() -> {
-					try {
-						duplex.recognize(mic.getTargetDataLine(), mic.getAudioFormat());
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
+				//Selected?
+				if (activateSpeechRecognition.isSelected()) {
+					activateSpeechRecognition.setText("Stop Speech Recognition");
 					
-				}).start();
-				
-				String text = "Starting Speech Recognition , wait 2 seconds... \n";
-				cssTextArea.appendText(text);
-				cssTextArea.setStyle(cssTextArea.getText().length() - text.length(), cssTextArea.getLength() - 1, style.replace("white", "#329CFF"));
-				
-				//Follow the Caret
-				cssTextArea.moveTo(cssTextArea.getLength());
-				cssTextArea.requestFollowCaret();
-				
-				//VERY OBSOLETE WAY TO NOTIFY USER AFTER 2 SECONDS THAT HE CAN START SPEAKING...
-				//THIS WILL BE CHANGED SOON!
-				new Thread(() -> {
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					
-					//Run it on JavaFX Thread
-					Platform.runLater(() -> {
-						if (activateSpeechRecognition.isSelected()) {
-							String text2 = "Hearing you ..... \n";
-							cssTextArea.appendText(text2);
-							cssTextArea.setStyle(cssTextArea.getText().length() - text2.length(), cssTextArea.getLength() - 1, style.replace("white", "firebrick"));
-							
-							//Follow the Caret
-							cssTextArea.moveTo(cssTextArea.getLength());
-							cssTextArea.requestFollowCaret();
+					//Start the Thread
+					new Thread(() -> {
+						try {
+							duplex.recognize(mic.getTargetDataLine(), mic.getAudioFormat());
+						} catch (Exception ex) {
+							ex.printStackTrace();
 						}
-					});
-				}).start();
-				
-				//Turn off speech Recognition
-			} else {
-				mic.close();
-				duplex.stopSpeechRecognition();
-				
-				String text = "Speech Recognition stopped \n";
-				cssTextArea.appendText(text);
-				cssTextArea.setStyle(cssTextArea.getText().length() - text.length(), cssTextArea.getLength() - 1, style.replace("white", "#329CFF"));
-				
-				//Follow the Caret
-				cssTextArea.moveTo(cssTextArea.getLength());
-				cssTextArea.requestFollowCaret();
-				
-				activateSpeechRecognition.setText("Start Speech Recognition");
+						
+					}).start();
+					
+					String text = "Starting Speech Recognition , wait 2 seconds... \n";
+					cssTextArea.appendText(text);
+					cssTextArea.setStyle(cssTextArea.getText().length() - text.length(), cssTextArea.getLength() - 1, style.replace("white", "#329CFF"));
+					
+					//Follow the Caret
+					cssTextArea.moveTo(cssTextArea.getLength());
+					cssTextArea.requestFollowCaret();
+					
+					//VERY OBSOLETE WAY TO NOTIFY USER AFTER 2 SECONDS THAT HE CAN START SPEAKING...
+					//THIS WILL BE CHANGED SOON!
+					new Thread(() -> {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						
+						//Run it on JavaFX Thread
+						Platform.runLater(() -> {
+							if (activateSpeechRecognition.isSelected()) {
+								String text2 = "Hearing you ..... \n";
+								cssTextArea.appendText(text2);
+								cssTextArea.setStyle(cssTextArea.getText().length() - text2.length(), cssTextArea.getLength() - 1, style.replace("white", "firebrick"));
+								
+								//Follow the Caret
+								cssTextArea.moveTo(cssTextArea.getLength());
+								cssTextArea.requestFollowCaret();
+							}
+						});
+					}).start();
+					
+					//Turn off speech Recognition
+				} else {
+					mic.close();
+					duplex.stopSpeechRecognition();
+					
+					String text = "Speech Recognition stopped \n";
+					cssTextArea.appendText(text);
+					cssTextArea.setStyle(cssTextArea.getText().length() - text.length(), cssTextArea.getLength() - 1, style.replace("white", "#329CFF"));
+					
+					//Follow the Caret
+					cssTextArea.moveTo(cssTextArea.getLength());
+					cssTextArea.requestFollowCaret();
+					
+					activateSpeechRecognition.setText("Start Speech Recognition");
+				}
 			}
 		});
 		

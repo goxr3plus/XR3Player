@@ -13,18 +13,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root minWidth="0.0" style="-fx-background-color: rgb(255,255,255,0.9);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minWidth="0.0" prefHeight="487.0" prefWidth="248.0" style="-fx-background-color: rgb(255,255,255,0.9);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search...">
-               <tooltip>
-                  <Tooltip text="Search everything on your Dropbox Account" />
-               </tooltip>
-               <VBox.margin>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </VBox.margin>
-            </TextField>
             <HBox>
                <children>
                   <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="System Explorer" HBox.hgrow="ALWAYS">
@@ -53,10 +45,18 @@
                   </Button>
                </children>
             </HBox>
-            <TreeView fx:id="systemTreeView" VBox.vgrow="ALWAYS">
+            <TreeView fx:id="treeView" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin></TreeView>
+            <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." styleClass="tree-view-search-box">
+               <tooltip>
+                  <Tooltip text="Search everything on your Dropbox Account" />
+               </tooltip>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
          </children>
       </VBox>
    </center>

@@ -1391,6 +1391,22 @@
 	-fx-font-size:15.0;
 }
 
+
+.tree-view-search-box {
+    -fx-background-radius: 45;
+    -fx-border-radius:45; 
+    -fx-border-width:1.0;
+    
+    -fx-background-color:white;
+    -fx-text-fill:black;
+    -fx-prompt-text-fill:#808080;
+    -fx-font-weight:bold;    
+}
+
+.tree-view-search-box:hover{
+   -fx-border-width:2;
+}
+
  /*******************************************************************************
 
 *								StationCofigurator                          *

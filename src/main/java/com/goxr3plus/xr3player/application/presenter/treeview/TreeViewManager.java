@@ -46,7 +46,7 @@ public class TreeViewManager extends BorderPane {
 	private Button collapseTree;
 	
 	@FXML
-	private TreeView<String> systemTreeView;
+	private TreeView<String> treeView;
 	
 	// -------------------------------------
 	
@@ -81,26 +81,26 @@ public class TreeViewManager extends BorderPane {
 	private void initialize() {
 		
 		// ------------------------- TreeView ----------------------------------
-		systemTreeView.setRoot(systemRoot.getRoot());
-		systemTreeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		treeView.setRoot(systemRoot.getRoot());
+		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		// Mouse Released Event
-		systemTreeView.setOnMouseClicked(this::treeViewMouseClicked);
+		treeView.setOnMouseClicked(this::treeViewMouseClicked);
 		
 		// Drag Implementation
-		systemTreeView.setOnDragDetected(event -> {
+		treeView.setOnDragDetected(event -> {
 			//FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
 			
 			//The host is not allowed
 			//if (source != null && !source.getValue().equals(hostName)) {
-			if (!systemTreeView.getSelectionModel().getSelectedItems().isEmpty()) {
+			if (!treeView.getSelectionModel().getSelectedItems().isEmpty()) {
 				
 				// Allow this transfer Mode
 				Dragboard board = startDragAndDrop(TransferMode.LINK);
 				
 				// Put a String on DragBoard
 				ClipboardContent content = new ClipboardContent();
-				content.putFiles(systemTreeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath()))
+				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath()))
 						.collect(Collectors.toList()));
 				
 				board.setContent(content);
@@ -121,6 +121,11 @@ public class TreeViewManager extends BorderPane {
 			
 			//Trick for CPU
 			systemRoot.getRoot().setExpanded(true);
+		});
+		
+		//searchField
+		searchField.textProperty().addListener(l -> {
+			System.out.println(treeView.getChildrenUnmodifiable().size());
 		});
 		
 	}
@@ -155,7 +160,7 @@ public class TreeViewManager extends BorderPane {
 	 */
 	private void treeViewMouseClicked(MouseEvent mouseEvent) {
 		//Get the selected item
-		FileTreeItem source = (FileTreeItem) systemTreeView.getSelectionModel().getSelectedItem();
+		FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		
 		// host is not on the game
 		if (source == null || source.getValue().equals(hostName)) {
