@@ -1,8 +1,9 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
 
-import java.io.File;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
@@ -20,6 +21,7 @@ import com.dropbox.core.v2.users.FullAccount;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.TreeItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -30,7 +32,7 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
 public class DropboxService extends Service<Boolean> {
 	
 	public enum DropBoxOperation {
-		REFRESH, CREATE_FOLDER, DELETE, PERMANENTLY_DELETE, RENAME;
+		REFRESH, SEARCH, CREATE_FOLDER, DELETE, PERMANENTLY_DELETE, RENAME;
 	}
 	
 	/**
@@ -44,6 +46,7 @@ public class DropboxService extends Service<Boolean> {
 	private String previousAccessToken;
 	private String currentPath;
 	private String folderName;
+	private String searchWord;
 	
 	/**
 	 * This path is being used to delete files
@@ -103,6 +106,28 @@ public class DropboxService extends Service<Boolean> {
 		//Set LoginScreen not visible 
 		dropBoxViewer.getLoginVBox().setVisible(false);
 		
+		//RefreshLabel
+		dropBoxViewer.getRefreshLabel().setText("Connecting to Server ...");
+		
+		//Restart
+		super.restart();
+	}
+	
+	/**
+	 * Search whole Dropbox for the given word
+	 * 
+	 * @param searchWord
+	 */
+	public void search(String searchWord) {
+		this.searchWord = searchWord.toLowerCase();
+		this.operation = DropBoxOperation.SEARCH;
+		
+		//Clear all the children
+		dropBoxViewer.getRoot().getChildren().clear();
+		
+		//RefreshLabel
+		dropBoxViewer.getRefreshLabel().setText("Searching for matching files ...");
+		
 		//Restart
 		super.restart();
 	}
@@ -112,6 +137,9 @@ public class DropboxService extends Service<Boolean> {
 	 */
 	public void delete(DropBoxOperation operation) {
 		this.operation = operation;
+		
+		//RefreshLabel
+		dropBoxViewer.getRefreshLabel().setText("Deleting requested files ...");
 		
 		//Restart
 		super.restart();
@@ -155,18 +183,25 @@ public class DropboxService extends Service<Boolean> {
 						TreeMap<String,Metadata> children = new TreeMap<>();
 						
 						//List all the files brooooo!
-						listAllFiles(client, currentPath, children);
+						listAllFiles(currentPath, children, false, true);
 						
 						//Check if folder is empty
-						Platform.runLater(() -> dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty()));
+						Platform.runLater(() -> {
+							dropBoxViewer.getSearchResultsLabel().setVisible(false);
+							dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty());
+						});
 						
 					} else if (operation == DropBoxOperation.DELETE) {
 						
 						//Delete all the selected files and folders
-						dropBoxViewer.getTreeView().getSelectionModel().getSelectedItems().forEach(item -> delete( ( (DropBoxFileTreeItem) item ).getMetadata().getPathLower()));
+						List<TreeItem<String>> list = dropBoxViewer.getTreeView().getSelectionModel().getSelectedItems().stream().collect(Collectors.toList());
 						
-						//Refresh
-						Platform.runLater(() -> refresh(currentPath));
+						//Remove from the TreeView one by one
+						list.forEach(item -> {
+							if (delete( ( (DropBoxFileTreeItem) item ).getMetadata().getPathLower()))
+								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().remove(item));
+							
+						});
 						
 					} else if (operation == DropBoxOperation.CREATE_FOLDER) {
 						
@@ -175,6 +210,25 @@ public class DropboxService extends Service<Boolean> {
 						
 						//Refresh
 						Platform.runLater(() -> refresh(currentPath));
+					} else if (operation == DropBoxOperation.SEARCH) {
+						
+						TreeMap<String,Metadata> children = new TreeMap<>();
+						
+						//Search Everything
+						search("", children);
+						
+						Platform.runLater(() -> {
+							
+							//Set Label Visible
+							dropBoxViewer.getSearchResultsLabel().setVisible(true);
+							
+							//Add all found items to the TreeView
+							children.forEach((pathLower , metadata) -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+							
+							//Set Label Visible
+							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(children.size()));
+						});
+						
 					}
 				} catch (ListFolderErrorException ex) {
 					ex.printStackTrace();
@@ -221,7 +275,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
-			public void listAllFiles(DbxClientV2 client , String path , SortedMap<String,Metadata> children) throws ListFolderErrorException , DbxException {
+			public void listAllFiles(String path , SortedMap<String,Metadata> children , boolean recursive , boolean appendToMap) throws ListFolderErrorException , DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
@@ -231,8 +285,9 @@ public class DropboxService extends Service<Boolean> {
 							//	children.remove(metadata.getPathLower());
 						} else if (metadata instanceof FolderMetadata) { // Folder
 							String folder = metadata.getPathLower();
-							String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-							children.put(folder, metadata);
+							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
+							if (appendToMap)
+								children.put(folder, metadata);
 							
 							//boolean subFileOfCurrentFolder = path.equals(parent);
 							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
@@ -240,16 +295,62 @@ public class DropboxService extends Service<Boolean> {
 							//Add to TreeView	
 							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
 							
-							//listAllFiles(client, folder, children);
+							if (recursive)
+								listAllFiles(folder, children, recursive, appendToMap);
 						} else if (metadata instanceof FileMetadata) { //File
 							String file = metadata.getPathLower();
-							String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
-							children.put(file, metadata);
+							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
+							if (appendToMap)
+								children.put(file, metadata);
 							
 							//boolean subFileOfCurrentFolder = path.equals(parent);
 							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
-							
+							//Add to TreeView	
 							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+						}
+					}
+					
+					if (!result.getHasMore())
+						break;
+					
+					try {
+						result = client.files().listFolderContinue(result.getCursor());
+						//System.out.println("Entered result next")
+					} catch (ListFolderContinueErrorException ex) {
+						ex.printStackTrace();
+					}
+				}
+				
+			}
+			
+			/**
+			 * List all the Files inside DropboxAccount
+			 * 
+			 * @param client
+			 * @param path
+			 * @param children
+			 * @param arrayList
+			 * @throws DbxException
+			 * @throws ListFolderErrorException
+			 */
+			public void search(String path , SortedMap<String,Metadata> children) throws ListFolderErrorException , DbxException {
+				
+				ListFolderResult result = client.files().listFolder(path);
+				
+				while (true) {
+					for (Metadata metadata : result.getEntries()) {
+						if (metadata instanceof DeletedMetadata) { // Deleted
+							//	children.remove(metadata.getPathLower())
+						} else if (metadata instanceof FolderMetadata) { // Folder
+							String folder = metadata.getPathLower();
+							if (metadata.getName().toLowerCase().contains(searchWord))
+								children.put(folder, metadata);
+							
+							//Run again
+							search(folder, children);
+						} else if (metadata instanceof FileMetadata) { //File
+							if (metadata.getName().toLowerCase().contains(searchWord))
+								children.put(metadata.getPathLower(), metadata);
 						}
 					}
 					
@@ -272,7 +373,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @param path
 			 *            The path of the Dropbox File or Folder
 			 */
-			public void delete(String path) {
+			public boolean delete(String path) {
 				try {
 					if (operation == DropBoxOperation.DELETE)
 						client.files().deleteV2(path);
@@ -283,12 +384,15 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
 							NotificationType.INFORMATION));
 					
+					return true;
 				} catch (DbxException dbxe) {
 					dbxe.printStackTrace();
 					
 					//Show message to the User
 					Platform.runLater(
 							() -> ActionTool.showNotification("Failed deleting files", "Failed to delete selected files/folders", Duration.millis(2000), NotificationType.ERROR));
+					
+					return false;
 				}
 			}
 			
@@ -312,7 +416,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @param path
 			 *            Folder name
 			 */
-			public void createFolder(String path) {
+			public boolean createFolder(String path) {
 				try {
 					
 					//Create new folder
@@ -322,11 +426,14 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
 							Duration.millis(2000), NotificationType.INFORMATION));
 					
+					return true;
 				} catch (DbxException dbxe) {
 					dbxe.printStackTrace();
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Failed creating folder", "Folder was not created", Duration.millis(2000), NotificationType.ERROR));
+					
+					return false;
 				}
 			}
 			

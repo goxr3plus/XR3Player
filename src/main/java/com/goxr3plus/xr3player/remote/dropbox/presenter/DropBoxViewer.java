@@ -58,6 +58,9 @@ public class DropBoxViewer extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private TextField searchField;
+	
+	@FXML
 	private MenuButton topMenuButton;
 	
 	@FXML
@@ -68,6 +71,9 @@ public class DropBoxViewer extends StackPane {
 	
 	@FXML
 	private BreadCrumbBar<String> breadCrumbBar;
+	
+	@FXML
+	private Label searchResultsLabel;
 	
 	@FXML
 	private TreeView<String> treeView;
@@ -202,7 +208,12 @@ public class DropBoxViewer extends StackPane {
 		progressIndicator.progressProperty().bind(dropBoxService.progressProperty());
 		
 		//refresh
-		refresh.setOnAction(a -> recreateTree(dropBoxService.getCurrentPath()));
+		refresh.setOnAction(a -> {
+			if (!searchField.getText().isEmpty())
+				search(searchField.getText());
+			else
+				recreateTree(dropBoxService.getCurrentPath());
+		});
 		
 		// authorizationButton
 		authorizationButton.setOnAction(a -> requestDropBoxAuthorization());
@@ -424,6 +435,19 @@ public class DropBoxViewer extends StackPane {
 			
 		});
 		
+		//searchResultsLabel
+		searchResultsLabel.setVisible(false);
+		
+		//createFolder
+		createFolder.disableProperty().bind(searchResultsLabel.visibleProperty());
+		
+		//searchField
+		searchField.textProperty().addListener((observable , oldValue , newValue) -> {
+			if (searchField.getText().isEmpty())
+				search("");
+		});
+		searchField.setOnAction(a -> search(searchField.getText()));
+		
 	}
 	
 	/**
@@ -464,6 +488,20 @@ public class DropBoxViewer extends StackPane {
 		
 		item.setExpanded(expanded);
 		item.getChildren().forEach(child -> collapseTreeView(child, expanded));
+	}
+	
+	/**
+	 * Starts the Dropbox Service Search functionality based on the given word
+	 * 
+	 * @param searchWord
+	 */
+	public void search(String searchWord) {
+		
+		//Navigate back to root if searchWord is empty
+		if (searchWord.isEmpty()) {
+			recreateTree("");
+		} else
+			dropBoxService.search(searchWord);
 	}
 	
 	/**
@@ -629,5 +667,20 @@ public class DropBoxViewer extends StackPane {
 	public ListView<String> getSavedAccountsListView() {
 		return savedAccountsListView;
 	}
+	
+	/**
+	 * @return the searchResultsLabel
+	 */
+	public Label getSearchResultsLabel() {
+		return searchResultsLabel;
+	}
+
+	/**
+	 * @return the searchField
+	 */
+	public TextField getSearchField() {
+		return searchField;
+	}
+
 	
 }

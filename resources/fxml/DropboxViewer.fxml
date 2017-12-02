@@ -33,7 +33,7 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT" layoutX="206.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                            <children>
-                              <TextField focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." style="-fx-background-radius: 45;">
+                              <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." style="-fx-background-radius: 45;">
                                  <HBox.margin>
                                     <Insets left="3.0" />
                                  </HBox.margin>
@@ -64,17 +64,19 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <BreadCrumbBar fx:id="breadCrumbBar">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="3.0" />
-                     </padding>
-                  </BreadCrumbBar>
+                  <StackPane>
+                     <children>
+                        <BreadCrumbBar fx:id="breadCrumbBar">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <padding>
+                              <Insets bottom="3.0" />
+                           </padding>
+                        </BreadCrumbBar>
+                        <Label fx:id="searchResultsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 15; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="- Search Results -" />
+                     </children>
+                  </StackPane>
                   <StackPane maxHeight="1.7976931348623157E308" style="-fx-background-color: #202020;" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox spacing="5.0">
