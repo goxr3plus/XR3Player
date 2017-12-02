@@ -5,10 +5,6 @@ package main.java.com.goxr3plus.xr3player.xplayer.presenter;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -64,9 +60,10 @@ import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.F
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.FileType;
+import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
+import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.tools.WindowsShortcut;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -329,56 +326,25 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//We don't want the player to start if the drop event is for the XPlayer PlayList
 		if (!flipPane.isBackVisible()) {
 			
-			// Keeping the absolute path
-			String absolutePath;
-			
 			// File?
 			for (File file : event.getDragboard().getFiles()) {
-				
-				//Path
-				absolutePath = file.getAbsolutePath();
-				FileType fileType = FileType.ORIGINAL_FILE;
 				
 				//No directories allowed
 				if (!file.isDirectory()) {
 					
-					//Check if it is symbolic link
-					if (Files.isSymbolicLink(Paths.get(absolutePath))) {
-						try {
-							System.out.println("Below File is symbolic link");
-							absolutePath = Files.readSymbolicLink(Paths.get(absolutePath)).toFile().getAbsolutePath();
-							fileType = FileType.SYMBOLIC_LINK;
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						
-						//Check if it isShortCut
-					} else {
-						try {
-							boolean isShortCut = WindowsShortcut.isPotentialValidLink(file);
-							System.out.println("Below File is Windows File" + isShortCut);
-							if (isShortCut) {
-								absolutePath = new WindowsShortcut(file).getRealFilename();
-								fileType = FileType.SHORTCUT;
-							}
-						} catch (IOException | ParseException e) {
-							e.printStackTrace();
-						}
-					}
-					
-					//Print the absolute File Path
-					System.out.println(absolutePath);
+					//Get it
+					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
 					
 					//Check if File exists
-					if (!new File(absolutePath).exists()) {
+					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 						ActionTool.showNotification("File doesn't exist",
-								( fileType == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " shows to a file that doesn't exists anymore.",
+								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " shows to a file that doesn't exists anymore.",
 								Duration.millis(2000), NotificationType.INFORMATION);
 						return;
 					}
 					
 					//Check if this File is Supported by XR3Player 
-					if (!InfoTool.isAudioSupported(absolutePath)) {
+					if (!InfoTool.isAudioSupported(ftaap.getFileAbsolutePath())) {
 						ActionTool.showNotification("File not supported", "XR3Player doesn't supports the given File", Duration.millis(2000), NotificationType.INFORMATION);
 						return;
 					}
@@ -387,9 +353,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
 						if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
 								visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
-							playSong(absolutePath);
+							playSong(ftaap.getFileAbsolutePath());
 					} else
-						playSong(absolutePath);
+						playSong(ftaap.getFileAbsolutePath());
 					break;
 				}
 			}

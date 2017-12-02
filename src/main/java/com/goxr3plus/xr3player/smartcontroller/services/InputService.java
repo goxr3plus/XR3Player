@@ -22,6 +22,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
@@ -72,8 +73,15 @@ public class InputService extends Service<Void> {
 		job = "upload from system";
 		
 		// We need only directories or media files
-		this.list = list1.stream().filter(file -> file.isDirectory() || ( file.isFile() && InfoTool.isAudioSupported(file.getAbsolutePath()) )).collect(Collectors.toList());
+		this.list = list1.stream()
+				//Find real path for symbolic links etc
+				.map(file -> new File(IOTool.getRealPathFromFile(file.getAbsolutePath()).getFileAbsolutePath()))
+				//Filter only the files we want
+				.filter(file -> file.isDirectory() || ( file.isFile() && InfoTool.isAudioSupported(file.getAbsolutePath()) ))
+				//Collect everything to a list
+				.collect(Collectors.toList());
 		smartController.depositWorking = true;
+		
 		// System.out.println(this.list)
 		
 		//Clear the text of imformation text field
@@ -114,9 +122,14 @@ public class InputService extends Service<Void> {
 	@Override
 	protected Task<Void> createTask() {
 		return new Task<Void>() {
+			/*
+			 * (non-Javadoc)
+			 * @see javafx.concurrent.Task#call()
+			 */
 			@Override
 			protected Void call() throws Exception {
 				
+				//Keep Important Variables here
 				totalFiles = progress = 0;
 				String date = InfoTool.getCurrentDate() , time = InfoTool.getLocalTime();
 				
@@ -144,6 +157,7 @@ public class InputService extends Service<Void> {
 							// File or Folder exists?
 							if (isCancelled())
 								break;
+							
 							totalFiles += countFiles(file);
 							
 							// Update informationTextArea
@@ -170,28 +184,20 @@ public class InputService extends Service<Void> {
 							smartController.getInformationTextArea().appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
 						});
 						
+						//Add all Files absolute paths to the database table
 						for (File file : list)
 							if (file.exists() && !isCancelled())
 								try {
 									Files.walkFileTree(Paths.get(file.getPath()), new HashSet<FileVisitOption>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE,
 											new SimpleFileVisitor<Path>() {
 												@Override
-												public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
+												public FileVisitResult visitFile(Path filePath , BasicFileAttributes attrs) throws IOException {
 													
 													// System.out.println("Adding...."+s.toString())
 													
-													// cancelled?
-													//if (isCancelled())
-													//	paths.close();
-													
 													// supported?
-													if (InfoTool.isAudioSupported(file + ""))
-														insertMedia(file + "", 0, 0, date, time, preparedInsert);
-													
-													//					// Update informationTextArea				   
-													//					File f = path.toFile();
-													//					if (f.isDirectory())
-													//					    Platform.runLater(() -> informationTextArea.appendText("Folder: " + f.getName() + "\n"));
+													if (InfoTool.isAudioSupported(filePath + ""))
+														insertMedia(filePath + "", 0, 0, date, time, preparedInsert);
 													
 													// update progress
 													updateProgress(++progress, totalFiles);
@@ -200,8 +206,8 @@ public class InputService extends Service<Void> {
 												}
 												
 												@Override
-												public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
-													System.err.printf("Visiting failed for %s\n", file);
+												public FileVisitResult visitFileFailed(Path filePath , IOException e) throws IOException {
+													System.err.printf("Visiting failed for %s\n", filePath);
 													
 													return FileVisitResult.SKIP_SUBTREE;
 												}
@@ -281,19 +287,19 @@ public class InputService extends Service<Void> {
 					try {
 						Files.walkFileTree(Paths.get(dir.getPath()), new HashSet<>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
 							@Override
-							public FileVisitResult visitFile(Path file , BasicFileAttributes attrs) throws IOException {
+							public FileVisitResult visitFile(Path filePath , BasicFileAttributes attrs) throws IOException {
 								
 								//System.out.println("It is symbolic link?"+Files.isSymbolicLink(file));
 								
-								if (InfoTool.isAudioSupported(file + ""))
+								if (InfoTool.isAudioSupported(filePath + ""))
 									++count[0];
 								
 								return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;
 							}
 							
 							@Override
-							public FileVisitResult visitFileFailed(Path file , IOException e) throws IOException {
-								System.err.printf("Visiting failed for %s\n", file);
+							public FileVisitResult visitFileFailed(Path filePath , IOException e) throws IOException {
+								System.err.printf("Visiting failed for %s\n", filePath);
 								
 								return FileVisitResult.SKIP_SUBTREE;
 							}
