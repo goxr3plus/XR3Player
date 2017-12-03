@@ -57,6 +57,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerArtistsMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
@@ -134,6 +135,9 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private Tab foldersModeTab;
+	
+	@FXML
+	private Tab artistsModeTab;
 	
 	@FXML
 	private VBox indicatorVBox;
@@ -217,6 +221,8 @@ public class SmartController extends StackPane {
 	// --------------------------------------------------
 	
 	public final SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
+	
+	public final SmartControllerArtistsMode artistsMode = new SmartControllerArtistsMode(this);
 	
 	// --------------------------------------------------
 	
@@ -526,11 +532,14 @@ public class SmartController extends StackPane {
 		
 		//------------------------SMART CONTROLLER MODES-----------------
 		foldersModeTab.setContent(foldersMode);
+		artistsModeTab.setContent(artistsMode);
 		
 		//--Change Listener for Modes Tab Pane
 		modesTabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue == foldersModeTab)
 				foldersMode.recreateTree();
+			else if (newValue == artistsModeTab)
+				artistsMode.refreshArtistsMode();
 		});
 		
 		//reloadVBox

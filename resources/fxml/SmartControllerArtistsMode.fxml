@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
+         <items>
+            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane fx:id="borderPane" />
+         </items>
+      </SplitPane>
+      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
+         <children>
+            <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" style="-fx-accent: orange;" />
+         </children>
+         <padding>
+            <Insets top="25.0" />
+         </padding>
+      </VBox>
+   </children>
+</fx:root>

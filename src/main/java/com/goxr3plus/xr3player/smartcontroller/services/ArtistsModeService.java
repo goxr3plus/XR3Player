@@ -15,24 +15,31 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.id3.ID3v24FieldKey;
+import org.jaudiotagger.tag.id3.ID3v24Tag;
+
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.control.Control;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.FilesMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
-import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerArtistsMode;
 
-public class FoldersModeService extends Service<Void> {
+public class ArtistsModeService extends Service<Void> {
 	
 	/** A private instance of the SmartController it belongs */
-	private final SmartControllerFoldersMode smartControllerFoldersMode;
+	private final SmartControllerArtistsMode smartControllerArtistsMode;
 	
 	private final FilesCounterService filesCounterService = new FilesCounterService();
 	
@@ -55,9 +62,8 @@ public class FoldersModeService extends Service<Void> {
 	 * 
 	 * @param smartController
 	 */
-	public FoldersModeService(SmartControllerFoldersMode smartControllerFoldersMode) {
-		this.smartControllerFoldersMode = smartControllerFoldersMode;
-		
+	public ArtistsModeService(SmartControllerArtistsMode smartControllerArtistsMode) {
+		this.smartControllerArtistsMode = smartControllerArtistsMode;
 	}
 	
 	@Override
@@ -67,28 +73,29 @@ public class FoldersModeService extends Service<Void> {
 			protected Void call() throws Exception {
 				
 				//Create a new LinkedHashSet
-				Set<String> set = new LinkedHashSet<>();
+				Set<String> set = new HashSet<>();
+				filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
 				
 				//Determine filesMode
-				switch ( ( (Control) Main.settingsWindow.getPlayListsSettingsController().getWhichFilesToShowGenerally().getSelectedToggle() ).getTooltip().getText()) {
-					case "1":
-						filesMode = FilesMode.SELECTED_MEDIA;
-						break;
-					case "2":
-						filesMode = FilesMode.CURRENT_PAGE;
-						break;
-					case "3":
-						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
-						break;
-					default:
-						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
-				}
+				//				switch ( ( (Control) Main.settingsWindow.getPlayListsSettingsController().getWhichFilesToShowGenerally().getSelectedToggle() ).getTooltip().getText()) {
+				//					case "1":
+				//						filesMode = FilesMode.SELECTED_MEDIA;
+				//						break;
+				//					case "2":
+				//						filesMode = FilesMode.CURRENT_PAGE;
+				//						break;
+				//					case "3":
+				//						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
+				//						break;
+				//					default:
+				//						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
+				//				}
 				
 				//Change Top Label Text
-				Platform.runLater(() -> smartControllerFoldersMode.getTopLabel().setText("Associated Folders Explorer -> " + filesMode.toString()));
+				//	Platform.runLater(() -> smartControllerArtistsMode.getTopLabel().setText("Associated Folders Explorer -> " + filesMode.toString()));
 				
 				//Change Details Label Text
-				Platform.runLater(() -> smartControllerFoldersMode.getDetailsLabel().setText("No associated Folders found -> " + filesMode.toString()));
+				//	Platform.runLater(() -> smartControllerArtistsMode.getDetailsLabel().setText("No associated Folders found -> " + filesMode.toString()));
 				
 				try {
 					
@@ -100,10 +107,10 @@ public class FoldersModeService extends Service<Void> {
 					if (filesMode == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 						
 						//Count total files that will be exported
-						totalProgress = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().size();
+						totalProgress = smartControllerArtistsMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().size();
 						
 						// Stream
-						Stream<Media> stream = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().stream();
+						Stream<Media> stream = smartControllerArtistsMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().stream();
 						stream.forEach(media -> {
 							if (isCancelled())
 								stream.close();
@@ -116,14 +123,14 @@ public class FoldersModeService extends Service<Void> {
 							}
 						});
 						
-					} else if (filesMode == FilesMode.CURRENT_PAGE || smartControllerFoldersMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
+					} else if (filesMode == FilesMode.CURRENT_PAGE || smartControllerArtistsMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
 						System.out.println("Entered for Search Window");
 						
 						//Count total files that will be exported
-						totalProgress = smartControllerFoldersMode.getSmartController().getItemsObservableList().size();
+						totalProgress = smartControllerArtistsMode.getSmartController().getItemsObservableList().size();
 						
 						// Stream
-						Stream<Media> stream = smartControllerFoldersMode.getSmartController().getItemsObservableList().stream();
+						Stream<Media> stream = smartControllerArtistsMode.getSmartController().getItemsObservableList().stream();
 						stream.forEach(media -> {
 							if (isCancelled())
 								stream.close();
@@ -136,13 +143,13 @@ public class FoldersModeService extends Service<Void> {
 							}
 						});
 						
-					} else if (filesMode == FilesMode.EVERYTHING_ON_PLAYLIST && smartControllerFoldersMode.getSmartController().getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
+					} else if (filesMode == FilesMode.EVERYTHING_ON_PLAYLIST && smartControllerArtistsMode.getSmartController().getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
 						
 						//Count total files that will be exported
-						totalProgress = smartControllerFoldersMode.getSmartController().getTotalInDataBase();
+						totalProgress = smartControllerArtistsMode.getSmartController().getTotalInDataBase();
 						
 						// Stream
-						String query = "SELECT(PATH) FROM '" + smartControllerFoldersMode.getSmartController().getDataBaseTableName() + "'";
+						String query = "SELECT(PATH) FROM '" + smartControllerArtistsMode.getSmartController().getDataBaseTableName() + "'";
 						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);) {
 							
 							// Fetch the items from the database
@@ -150,9 +157,24 @@ public class FoldersModeService extends Service<Void> {
 								if (isCancelled())
 									break;
 								else {
-									//Add all the items to set
-									set.add(new File(resultSet.getString("PATH")).getParentFile().getAbsolutePath());
+									File file = new File(resultSet.getString("PATH"));
 									
+									//exists ? + mp3 ?
+									if (file.exists() && file.length() != 0 && "mp3".equals(InfoTool.getFileExtension(file.getAbsolutePath()))) {
+										MP3File mp3File = new MP3File(file);
+										
+										String artist = "";
+										
+										if (mp3File.hasID3v2Tag()) {
+											ID3v24Tag tag = mp3File.getID3v2TagAsv24();
+											
+											artist = tag.getFirst(ID3v24FieldKey.ARTIST);
+											
+											//System.out.println("Artist : " + artist);// + " , Album Artist : " + tag.getFirst(ID3v24FieldKey.ALBUM_ARTIST));
+											
+											set.add(artist);
+										}
+									}
 									//Update the progress
 									updateProgress(++progress, totalProgress);
 								}
@@ -164,24 +186,8 @@ public class FoldersModeService extends Service<Void> {
 					}
 					
 					//For each item on set
-					Platform.runLater(() -> {
-						
-						//Add all the items
-						set.forEach(filePath -> {
-							FileTreeItem treeItem = new FileTreeItem(filePath);
-							treeItem.setValue(treeItem.getValue());
-							
-							//Add the item to the TreeView
-							smartControllerFoldersMode.getRoot().getChildren().add(treeItem);
-							
-						});
-						
-						//Define if details label will be visible or not
-						smartControllerFoldersMode.getDetailsLabel().setVisible(set.isEmpty());
-						
-						//Start FilesCounterService
-						filesCounterService.restart();
-					});
+					ObservableList<String> observableList = set.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
+					Platform.runLater(() -> smartControllerArtistsMode.getListView().setItems(observableList));
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -208,14 +214,14 @@ public class FoldersModeService extends Service<Void> {
 				@Override
 				protected Void call() throws Exception {
 					
-					//Append the total Files of each folder
-					smartControllerFoldersMode.getRoot().getChildren().forEach(treeItem -> {
-						int[] totalFiles = countFiles(new File( ( (FileTreeItem) treeItem ).getFullPath()));
-						String text = treeItem.getValue() + " [ " + totalFiles[1] + " / " + totalFiles[0] + " ]" + " [ " + ( (FileTreeItem) treeItem ).getFullPath() + " ] ";
-						
-						Platform.runLater(() -> treeItem.setValue(text));
-					});
-					
+					//					//Append the total Files of each folder
+					//					smartControllerArtistsMode.getRoot().getChildren().forEach(treeItem -> {
+					//						int[] totalFiles = countFiles(new File( ( (FileTreeItem) treeItem ).getFullPath()));
+					//						String text = treeItem.getValue() + " [ " + totalFiles[1] + " / " + totalFiles[0] + " ]" + " [ " + ( (FileTreeItem) treeItem ).getFullPath() + " ] ";
+					//						
+					//						Platform.runLater(() -> treeItem.setValue(text));
+					//					});
+					//					
 					return null;
 				}
 				
@@ -242,7 +248,7 @@ public class FoldersModeService extends Service<Void> {
 											
 											if (InfoTool.isAudioSupported(file + ""))
 												++count[0];
-											if (smartControllerFoldersMode.getSmartController().containsFile(file.toAbsolutePath().toString()))
+											if (smartControllerArtistsMode.getSmartController().containsFile(file.toAbsolutePath().toString()))
 												++count[1];
 											
 											if (isCancelled()) {
