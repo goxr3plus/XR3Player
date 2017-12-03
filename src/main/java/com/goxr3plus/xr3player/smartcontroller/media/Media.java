@@ -769,11 +769,16 @@ public abstract class Media {
 			// Prepare Statement
 			dataRename.setString(1, newFilePath);
 			dataRename.setString(2, oldFilePath);
-			if (dataRename.executeUpdate() > 0) //Check
+			if (dataRename.executeUpdate() > 0) { //Check
 				smartController.getItemsObservableList().forEach(media -> {
 					if (media.getFilePath().equals(oldFilePath))
 						media.setFilePath(newFilePath);
 				});
+				smartController.artistsMode.getMediaTableViewer().getTableView().getItems().forEach(media -> {
+					if (media.getFilePath().equals(oldFilePath))
+						media.setFilePath(newFilePath);
+				});
+			}
 			
 		} catch (SQLException ex) {
 			Main.logger.log(Level.WARNING, "", ex);
@@ -867,12 +872,16 @@ public abstract class Media {
 			// Prepare Statement
 			preparedUStars.setDouble(1, getStars());
 			preparedUStars.setString(2, getFilePath());
-			if (preparedUStars.executeUpdate() > 0)// && controller1 != controller) //Check 
-				//controller1.getLoadService().startService(false, false, true);
+			if (preparedUStars.executeUpdate() > 0) {// && controller1 != controller) //Check 
 				smartController.getItemsObservableList().forEach(media -> {
 					if (media.getFilePath().equals(Media.this.getFilePath()))
 						media.starsProperty().get().setText(String.valueOf(getStars()));
 				});
+				smartController.artistsMode.getMediaTableViewer().getTableView().getItems().forEach(media -> {
+					if (media.getFilePath().equals(Media.this.getFilePath()))
+						media.starsProperty().get().setText(String.valueOf(getStars()));
+				});			
+			}
 			
 		} catch (Exception ex) {
 			Main.logger.log(Level.WARNING, "", ex);

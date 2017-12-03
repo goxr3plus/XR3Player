@@ -42,6 +42,9 @@ public class SmartControllerArtistsMode extends StackPane {
 	private VBox indicatorVBox;
 	
 	@FXML
+	private Label progressLabel;
+	
+	@FXML
 	private ProgressIndicator progressIndicator;
 	
 	// -------------------------------------------------------------
@@ -69,7 +72,7 @@ public class SmartControllerArtistsMode extends StackPane {
 	 */
 	public SmartControllerArtistsMode(SmartController smartController) {
 		this.smartController = smartController;
-		this.mediaTableViewer = new MediaTableViewer(smartController,Mode.ARTISTS);
+		this.mediaTableViewer = new MediaTableViewer(smartController, Mode.ARTISTS);
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartControllerArtistsMode.fxml"));
@@ -102,7 +105,7 @@ public class SmartControllerArtistsMode extends StackPane {
 		//listView
 		listView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
-				service.refreshTableView(newValue);
+				refreshTableView();
 		});
 		
 		//listView - cellFactory
@@ -137,6 +140,13 @@ public class SmartControllerArtistsMode extends StackPane {
 	}
 	
 	/**
+	 * Refreshes the TableView based on the current artist
+	 */
+	public void refreshTableView() {
+		service.refreshTableView(listView.getSelectionModel().getSelectedItem());
+	}
+	
+	/**
 	 * @return the smartController
 	 */
 	public SmartController getSmartController() {
@@ -156,12 +166,19 @@ public class SmartControllerArtistsMode extends StackPane {
 	public Label getDetailsLabel() {
 		return detailsLabel;
 	}
-
+	
 	/**
 	 * @return the mediaTableViewer
 	 */
 	public MediaTableViewer getMediaTableViewer() {
 		return mediaTableViewer;
+	}
+	
+	/**
+	 * @return the progressLabel
+	 */
+	public Label getProgressLabel() {
+		return progressLabel;
 	}
 	
 }

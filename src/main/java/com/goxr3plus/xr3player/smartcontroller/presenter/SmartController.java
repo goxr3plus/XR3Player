@@ -76,7 +76,6 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private StackPane centerStackPane;
-
 	
 	@FXML
 	private HBox searchBarHBox;
@@ -267,7 +266,6 @@ public class SmartController extends StackPane {
 	
 	//---------------------------------------------------------------------------------------------------------------------
 	
-
 	/**
 	 * Called as soon as FXML file has been loaded
 	 */
@@ -507,12 +505,9 @@ public class SmartController extends StackPane {
 		removeSelected(permanent);
 		
 		// Update
-		if (previousTotal != getTotalInDataBase()) {
-			//	    if (genre == Genre.LIBRARYMEDIA)
-			//		Main.libraryMode.multipleLibs.getSelectedLibrary().updateSettingsTotalLabel();
-			
+		if (previousTotal != getTotalInDataBase())
 			loadService.startService(true, true, true);
-		}
+		
 	}
 	
 	/**
@@ -539,18 +534,34 @@ public class SmartController extends StackPane {
 		boolean permanent1 = answers.get(1);
 		
 		// Remove selected items
-		if (genre == Genre.SEARCHWINDOW)
-			//Call the delete for each selected item
-			tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
-		else
-			try (PreparedStatement preparedDelete = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
+		if (genre == Genre.SEARCHWINDOW) {
+			
+			if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
 				
 				//Call the delete for each selected item
-				tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
+				artistsMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
+						.forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
 				
-				// Library?
-				//		if (genre == Genre.LIBRARYMEDIA)
-				//		    Main.libraryMode.updateLibraryTotalLabel(controllerName);
+				//Update artistsMode
+				artistsMode.refreshTableView();
+			} else
+				//Call the delete for each selected item
+				tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
+			
+		} else
+			try (PreparedStatement preparedDelete = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
+				
+				if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
+					
+					//Call the delete for each selected item
+					artistsMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
+							.forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
+					
+					//Update artistsMode
+					artistsMode.refreshTableView();
+				} else
+					//Call the delete for each selected item
+					tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
 				
 			} catch (Exception ex) {
 				Main.logger.log(Level.WARNING, "", ex);
@@ -683,7 +694,8 @@ public class SmartController extends StackPane {
 		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text1.length(), tableViewer.getDetailCssTextArea().getLength() - 1, style1);
 		
 		tableViewer.getDetailCssTextArea().appendText(text2 + " " + ( !appendComma ? "" : ", " ));
-		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text2.length() - ( appendComma ? 3 : 1 ), tableViewer.getDetailCssTextArea().getLength() - 1, style2);
+		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text2.length() - ( appendComma ? 3 : 1 ),
+				tableViewer.getDetailCssTextArea().getLength() - 1, style2);
 	}
 	
 	/**

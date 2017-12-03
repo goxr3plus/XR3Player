@@ -18,6 +18,7 @@ import org.apache.commons.io.FileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -36,8 +37,7 @@ public class MediaFilterService {
 	private final BooleanProperty threadStopped = new SimpleBooleanProperty(false);
 	
 	/**
-	 * This executor service is used in order the playerState events to be
-	 * executed in an order
+	 * This executor service is used in order the playerState events to be executed in an order
 	 */
 	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("Files Filter Service"));
 	
@@ -79,16 +79,21 @@ public class MediaFilterService {
 	private void startFilteringControllers() {
 		
 		//Filter Selected Opened Library SmartController
-		libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController()));
+		libraryMode.multipleLibs.getSelectedLibrary()
+				.ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList()));
+		libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(),
+				selectedLibrary.getSmartController().artistsMode.getMediaTableViewer().getTableView().getItems()));
 		
 		//Filter XPlayer PlayLists SmartControllers
-		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(this::filterController);
+		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+				.forEach(smartController -> filterController(smartController, smartController.artistsMode.getMediaTableViewer().getTableView().getItems()));
 		
 		//Filter Emotion Lists SmartControllers
-		Main.emotionsTabPane.getTabPane().getTabs().forEach(tab -> filterController((SmartController) tab.getContent()));
+		Main.emotionsTabPane.getTabPane().getTabs().forEach(
+				tab -> filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).artistsMode.getMediaTableViewer().getTableView().getItems()));
 		
 		//Filter SearchWindow SmartController
-		filterController(Main.searchWindowSmartController);
+		filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.getItemsObservableList());
 		
 	}
 	
@@ -98,7 +103,7 @@ public class MediaFilterService {
 	 * @throws InterruptedException
 	 *             the interrupted exception [[SuppressWarningsSpartan]]
 	 */
-	private void filterController(SmartController controller) {
+	private void filterController(SmartController controller , ObservableList<Media> observableList) {
 		
 		// Don't enter if controller is null
 		if (controller == null)
@@ -125,7 +130,7 @@ public class MediaFilterService {
 			int mode = JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup());
 			
 			//For each media File of the Controller
-			controller.getItemsObservableList().stream().forEach(media -> {
+			observableList.stream().forEach(media -> {
 				
 				// ---------File exists--------?
 				Platform.runLater(() -> media.fileExistsProperty().set(Paths.get(media.getFilePath()).toFile().exists()));

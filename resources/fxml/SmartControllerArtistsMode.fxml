@@ -50,10 +50,13 @@
             </Button>
          </graphic>
       </Label>
-      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
+      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
          <children>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Detecting Artists" textAlignment="CENTER" wrapText="true" />
-            <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" style="-fx-accent: orange;" />
+            <Label fx:id="progressLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="817.0" style="-fx-border-color: transparent; -fx-font-size: 18;" styleClass="applicationSettingsLabel2" text="Detecting Artists" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ProgressIndicator fx:id="progressIndicator" progress="0.0" style="-fx-font-size: 14;" />
+               </graphic>
+            </Label>
          </children>
          <padding>
             <Insets top="25.0" />
