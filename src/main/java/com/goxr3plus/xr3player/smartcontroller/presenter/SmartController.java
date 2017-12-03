@@ -13,19 +13,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import org.fxmisc.richtext.InlineCssTextArea;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTabPane;
 
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,7 +30,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -44,7 +37,6 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -57,12 +49,12 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerArtistsMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
-import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
  * Used to control big amounts of Media using a TableViewer mechanism
@@ -84,12 +76,7 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private StackPane centerStackPane;
-	
-	@FXML
-	private InlineCssTextArea detailCssTextArea;
-	
-	@FXML
-	private Label quickSearchTextField;
+
 	
 	@FXML
 	private HBox searchBarHBox;
@@ -259,7 +246,7 @@ public class SmartController extends StackPane {
 		this.dataBaseTableName = dataBaseTableName;
 		
 		// Initialise
-		tableViewer = new MediaTableViewer(this);
+		tableViewer = new MediaTableViewer(this, Mode.MEDIA);
 		searchService = new SmartControllerSearcher(this);
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
@@ -280,86 +267,12 @@ public class SmartController extends StackPane {
 	
 	//---------------------------------------------------------------------------------------------------------------------
 	
-	/** The pause transition. */
-	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
-	private final StringProperty searchWord = new SimpleStringProperty("");
-	
+
 	/**
 	 * Called as soon as FXML file has been loaded
 	 */
 	@FXML
 	private void initialize() {
-		
-		// ------ centerStackPane
-		centerStackPane.setOnKeyReleased(key -> {
-			KeyCode code = key.getCode();
-			
-			if (key.isControlDown() && code == KeyCode.LEFT)
-				goPrevious();
-			else if (key.isControlDown() && code == KeyCode.RIGHT)
-				goNext();
-			else if (key.getCode() == KeyCode.BACK_SPACE)
-				searchWord.set("");
-			else if (tableViewer.getSelectedCount() > 0) { // TableViewer
-				
-				if (code == KeyCode.DELETE && SmartController.this.genre != Genre.SEARCHWINDOW)
-					prepareDelete(key.isShiftDown());
-				else if (key.isControlDown()) { //Short Cuts
-					if (code == KeyCode.F)
-						ActionTool.openFileLocation(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
-					else if (code == KeyCode.Q)
-						tableViewer.getSelectionModel().getSelectedItem().updateStars(tableViewer.getTableView());
-					else if (code == KeyCode.R)
-						tableViewer.getSelectionModel().getSelectedItem().rename(tableViewer.getTableView());
-					else if (code == KeyCode.U) {
-						Media media = tableViewer.getSelectionModel().getSelectedItem();
-						if (!Main.playedSongs.containsFile(media.getFilePath()))
-							Main.playedSongs.add(media.getFilePath(), true);
-						else
-							Main.playedSongs.remove(media.getFilePath(), true);
-					} else if (code == KeyCode.ENTER)
-						Main.xPlayersList.getXPlayerController(0).playSong(tableViewer.getSelectionModel().getSelectedItem().getFilePath());
-					else if (key.isControlDown() && code == KeyCode.I)
-						//More than 1 selected?
-						if (tableViewer.getSelectedCount() > 1)
-							Main.tagWindow.openMultipleAudioFiles(tableViewer.getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
-									.collect(Collectors.toCollection(FXCollections::observableArrayList)), tableViewer.getSelectionModel().getSelectedItem().getFilePath());
-						//Only one file selected
-						else
-							Main.tagWindow.openAudio(tableViewer.getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO, true);
-				}
-				
-			}
-			
-			//Local Search 
-			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
-				String keySmall = key.getText().toLowerCase();
-				searchWord.set(searchWord.get() + keySmall);
-				pauseTransition.playFromStart();
-				
-				//Check if searchWord is empty
-				if (!searchWord.get().isEmpty()) {
-					boolean[] found = { false };
-					//Find the first matching item
-					getItemsObservableList().forEach(media -> {
-						if (media.getTitle().toLowerCase().contains(searchWord.get()) && !found[0]) {
-							this.tableViewer.getSelectionModel().clearSelection();
-							this.tableViewer.getSelectionModel().select(media);
-							this.tableViewer.getTableView().scrollTo(media);
-							found[0] = true;
-						}
-					});
-				}
-			}
-			
-		});
-		
-		// PauseTransition
-		pauseTransition.setOnFinished(f -> searchWord.set(""));
-		
-		// QuickSearchTextField
-		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
-		quickSearchTextField.textProperty().bind(searchWord);
 		
 		// ------ tableViewer	
 		centerStackPane.getChildren().add(tableViewer);
@@ -714,7 +627,7 @@ public class SmartController extends StackPane {
 		//System.out.println(this.getName() + " called UpdateLabel()");
 		
 		//Clear the text area
-		detailCssTextArea.clear();
+		tableViewer.getDetailCssTextArea().clear();
 		
 		String total = "Total : ";
 		String _total = InfoTool.getNumberWithDots(totalInDataBase.get());
@@ -766,11 +679,11 @@ public class SmartController extends StackPane {
 	 * @param appendComma
 	 */
 	private void appendToDetails(String text1 , String text2 , boolean appendComma , String style1) {
-		detailCssTextArea.appendText(text1);
-		detailCssTextArea.setStyle(detailCssTextArea.getLength() - text1.length(), detailCssTextArea.getLength() - 1, style1);
+		tableViewer.getDetailCssTextArea().appendText(text1);
+		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text1.length(), tableViewer.getDetailCssTextArea().getLength() - 1, style1);
 		
-		detailCssTextArea.appendText(text2 + " " + ( !appendComma ? "" : ", " ));
-		detailCssTextArea.setStyle(detailCssTextArea.getLength() - text2.length() - ( appendComma ? 3 : 1 ), detailCssTextArea.getLength() - 1, style2);
+		tableViewer.getDetailCssTextArea().appendText(text2 + " " + ( !appendComma ? "" : ", " ));
+		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text2.length() - ( appendComma ? 3 : 1 ), tableViewer.getDetailCssTextArea().getLength() - 1, style2);
 	}
 	
 	/**

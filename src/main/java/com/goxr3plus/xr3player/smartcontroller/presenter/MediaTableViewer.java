@@ -6,7 +6,12 @@ import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import org.fxmisc.easybind.EasyBind;
+import org.fxmisc.richtext.InlineCssTextArea;
 
+import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +42,8 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
  * Representing the data of SmartController.
@@ -166,9 +173,19 @@ public class MediaTableViewer extends StackPane {
 	private TableColumn<Media,?> singer;
 	
 	@FXML
+	private InlineCssTextArea detailCssTextArea;
+	
+	@FXML
+	private Label quickSearchTextField;
+	
+	@FXML
 	private Label dragAndDropLabel;
 	
 	//-------------------------------------------------
+	
+	/** The pause transition. */
+	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+	private final StringProperty searchWord = new SimpleStringProperty("");
 	
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
@@ -180,11 +197,14 @@ public class MediaTableViewer extends StackPane {
 	
 	private int previousSelectedCount = 0;
 	
+	private final Mode mode;
+	
 	/**
 	 * Constructor.
 	 */
-	public MediaTableViewer(SmartController smartController) {
+	public MediaTableViewer(SmartController smartController, Mode mode) {
 		this.smartController = smartController;
+		this.mode = mode;
 		
 		canvas.setWidth(100);
 		canvas.setHeight(100);
@@ -203,30 +223,32 @@ public class MediaTableViewer extends StackPane {
 	}
 	
 	/**
-	 * Called as soon as .fxml has been initialized
+	 * Called as soon as .fxml has been initialized [[SuppressWarningsSpartan]]
 	 */
 	@FXML
 	private void initialize() {
 		
 		//------------------------------TableViewer---------------------------
-		tableView.setItems(smartController.getItemsObservableList());
-		
-		//Add the place holder for the tableView
-		Label placeHolderLabel = new Label();
-		
-		if (smartController.getGenre() == Genre.LIBRARYMEDIA) {
-			placeHolderLabel.setText("Drag && Drop or Import/Paste Media...");
-			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; -fx-cursor:hand;");
-			placeHolderLabel.setOnMouseReleased(m -> smartController.getToolsContextMenu().show(placeHolderLabel, m.getScreenX(), m.getScreenY()));
-			placeHolderLabel.setGraphic(InfoTool.getImageViewFromResourcesFolder("import24.png"));
-		} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
-			placeHolderLabel.setText("Search Media from all the playlists...");
-			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
-		} else if (smartController.getGenre() == Genre.EMOTIONSMEDIA) {
-			placeHolderLabel.setText("No Media in this emotions list ...");
-			placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
+		if (mode == Mode.MEDIA) {
+			tableView.setItems(smartController.getItemsObservableList());
+			
+			//Add the place holder for the tableView
+			Label placeHolderLabel = new Label();
+			
+			if (smartController.getGenre() == Genre.LIBRARYMEDIA) {
+				placeHolderLabel.setText("Drag && Drop or Import/Paste Media...");
+				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; -fx-cursor:hand;");
+				placeHolderLabel.setOnMouseReleased(m -> smartController.getToolsContextMenu().show(placeHolderLabel, m.getScreenX(), m.getScreenY()));
+				placeHolderLabel.setGraphic(InfoTool.getImageViewFromResourcesFolder("import24.png"));
+			} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
+				placeHolderLabel.setText("Search Media from all the playlists...");
+				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
+			} else if (smartController.getGenre() == Genre.EMOTIONSMEDIA) {
+				placeHolderLabel.setText("No Media in this emotions list ...");
+				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
+			}
+			tableView.setPlaceholder(placeHolderLabel);
 		}
-		tableView.setPlaceholder(placeHolderLabel);
 		
 		//--Allow Multiple Selection
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -301,26 +323,6 @@ public class MediaTableViewer extends StackPane {
 				}
 			});
 			
-			//Needs fixing!!!
-			//KeyListener
-			//			row.setOnKeyReleased(k -> {
-			//				System.out.println("Key Released....");
-			//				KeyCode code = k.getCode();
-			//				
-			//				if (code == KeyCode.R)
-			//					row.itemProperty().get().rename(smartController, row);
-			//				else if (code == KeyCode.S)
-			//					smartController.getTableViewer().getSelectionModel().getSelectedItem().updateStars(smartController, row);
-			//			});
-			
-			// it's also possible to do this with the standard API, but
-			// there are lots of
-			// superfluous warnings sent to standard out:
-			// row.setStyle("-fx-background-color:red");
-			// row.disableProperty().bind(
-			// Bindings.selectBoolean(row.itemProperty(),
-			// "fileExists").not());
-			
 			return row;
 		});
 		
@@ -354,7 +356,7 @@ public class MediaTableViewer extends StackPane {
 		// dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
 		
-		if (smartController.getGenre() == Genre.LIBRARYMEDIA) {
+		if (smartController.getGenre() == Genre.LIBRARYMEDIA && mode == Mode.MEDIA) {
 			
 			// --Drag Over
 			tableView.setOnDragOver(dragOver -> {
@@ -503,12 +505,77 @@ public class MediaTableViewer extends StackPane {
 		//bpm
 		bpm.setCellValueFactory(new PropertyValueFactory<>("bpm"));
 		
-		//		this.getColumns().addListener((ListChangeListener <? super TableColumn<Media, ?>>) ( c -> {
-		//			c.getList().stream().forEach(column->{
-		//				System.out.printf("%s ,",column.getText());
-		//			});
-		//			System.out.println();
-		//		}));
+		// PauseTransition
+		pauseTransition.setOnFinished(f -> searchWord.set(""));
+		
+		// QuickSearchTextField
+		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
+		quickSearchTextField.textProperty().bind(searchWord);
+		
+		// ------ centerStackPane
+		setOnKeyReleased(key -> {
+			KeyCode code = key.getCode();
+			
+			if (key.isControlDown() && code == KeyCode.LEFT && mode != Mode.ARTISTS)
+				smartController.goPrevious();
+			else if (key.isControlDown() && code == KeyCode.RIGHT && mode != Mode.ARTISTS)
+				smartController.goNext();
+			else if (key.getCode() == KeyCode.BACK_SPACE)
+				searchWord.set("");
+			else if (getSelectedCount() > 0) { // TableViewer
+				
+				if (code == KeyCode.DELETE && smartController.getGenre() != Genre.SEARCHWINDOW)
+					smartController.prepareDelete(key.isShiftDown());
+				else if (key.isControlDown()) { //Short Cuts
+					if (code == KeyCode.F)
+						ActionTool.openFileLocation(getSelectionModel().getSelectedItem().getFilePath());
+					else if (code == KeyCode.Q)
+						getSelectionModel().getSelectedItem().updateStars(getTableView());
+					else if (code == KeyCode.R)
+						getSelectionModel().getSelectedItem().rename(getTableView());
+					else if (code == KeyCode.U) {
+						Media media = getSelectionModel().getSelectedItem();
+						if (!Main.playedSongs.containsFile(media.getFilePath()))
+							Main.playedSongs.add(media.getFilePath(), true);
+						else
+							Main.playedSongs.remove(media.getFilePath(), true);
+					} else if (code == KeyCode.ENTER)
+						Main.xPlayersList.getXPlayerController(0).playSong(getSelectionModel().getSelectedItem().getFilePath());
+					else if (key.isControlDown() && code == KeyCode.I)
+						//More than 1 selected?
+						if (getSelectedCount() > 1)
+							Main.tagWindow.openMultipleAudioFiles(
+									getSelectionModel().getSelectedItems().stream().map(Media::getFilePath).collect(Collectors.toCollection(FXCollections::observableArrayList)),
+									getSelectionModel().getSelectedItem().getFilePath());
+						//Only one file selected
+						else
+							Main.tagWindow.openAudio(getSelectionModel().getSelectedItem().getFilePath(), TagTabCategory.BASICINFO, true);
+				}
+				
+			}
+			
+			//Local Search 
+			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
+				String keySmall = key.getText().toLowerCase();
+				searchWord.set(searchWord.get() + keySmall);
+				pauseTransition.playFromStart();
+				
+				//Check if searchWord is empty
+				if (!searchWord.get().isEmpty()) {
+					boolean[] found = { false };
+					//Find the first matching item
+					smartController.getItemsObservableList().forEach(media -> {
+						if (media.getTitle().toLowerCase().contains(searchWord.get()) && !found[0]) {
+							getSelectionModel().clearSelection();
+							getSelectionModel().select(media);
+							getTableView().scrollTo(media);
+							found[0] = true;
+						}
+					});
+				}
+			}
+			
+		});
 		
 	}
 	
@@ -561,6 +628,13 @@ public class MediaTableViewer extends StackPane {
 	
 	public TableViewSelectionModel<Media> getSelectionModel() {
 		return tableView.getSelectionModel();
+	}
+	
+	/**
+	 * @return the detailCssTextArea
+	 */
+	public InlineCssTextArea getDetailCssTextArea() {
+		return detailCssTextArea;
 	}
 	
 }

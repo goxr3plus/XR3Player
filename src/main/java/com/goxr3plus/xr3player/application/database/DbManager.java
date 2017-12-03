@@ -513,10 +513,28 @@ public class DbManager {
 						
 						// Load all the libraries
 						while (resultSet.next()) {
-							//Add the library to the List of Libraries
-							libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
-									resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"), resultSet.getInt("SAVEMODE"),
-									resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
+							
+							//Create a CountDown Latch
+							CountDownLatch countDown = new CountDownLatch(1);
+							
+							//Run on JavaFX Thread
+							Platform.runLater(() -> {
+								
+								//Add the library to the List of Libraries
+								try {
+									libraries.add(new Library(resultSet.getString("NAME"), resultSet.getString("TABLENAME"), resultSet.getDouble("STARS"),
+											resultSet.getString("DATECREATED"), resultSet.getString("TIMECREATED"), resultSet.getString("DESCRIPTION"),
+											resultSet.getInt("SAVEMODE"), resultSet.getInt("POSITION"), resultSet.getString("LIBRARYIMAGE"), resultSet.getBoolean("OPENED")));
+								} catch (SQLException e) {
+									e.printStackTrace();
+								}
+								
+								//Countdown
+								countDown.countDown();
+							});
+							
+							//Await for the CountDown
+							countDown.await();
 							
 							//Change Label Text
 							++counter[0];

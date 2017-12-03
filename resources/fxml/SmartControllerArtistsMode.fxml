@@ -1,24 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
          <items>
-            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
-            <BorderPane fx:id="borderPane" />
+            <ListView fx:id="listView" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false" />
+            <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false" />
          </items>
       </SplitPane>
+      <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No songs in Playlist !" textAlignment="CENTER" visible="false" wrapText="true">
+         <tooltip>
+            <Tooltip />
+         </tooltip>
+         <graphic>
+            <Button fx:id="backToMedia" mnemonicParsing="false" text="Back to Media" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Playlist-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Reflection>
+                     <input>
+                        <DropShadow />
+                     </input>
+                  </Reflection>
+               </effect>
+            </Button>
+         </graphic>
+      </Label>
       <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Detecting Artists" textAlignment="CENTER" wrapText="true" />
             <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" style="-fx-accent: orange;" />
          </children>
          <padding>
