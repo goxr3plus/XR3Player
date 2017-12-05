@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+      <MenuItem fx:id="showInExplorer" mnemonicParsing="false" text="Show in Explorer" />
+  </items>
+</fx:root>

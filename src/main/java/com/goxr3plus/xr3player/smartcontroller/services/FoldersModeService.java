@@ -22,7 +22,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Control;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.presenter.treeview.FileTreeItem;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.FilesMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;

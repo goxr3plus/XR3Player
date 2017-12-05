@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.presenter.treeview;
+package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -24,7 +24,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class TreeViewContextMenu extends ContextMenu {
+public class DropboxFileContextMenu extends ContextMenu {
 	
 	//--------------------------------------------------------------
 	
@@ -41,7 +41,7 @@ public class TreeViewContextMenu extends ContextMenu {
 	/**
 	 * Constructor.
 	 */
-	public TreeViewContextMenu() {
+	public DropboxFileContextMenu() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TreeViewContextMenu.fxml"));

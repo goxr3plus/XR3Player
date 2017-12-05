@@ -60,13 +60,13 @@ import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabP
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.UpdateScreen;
-import main.java.com.goxr3plus.xr3player.application.presenter.treeview.TreeViewContextMenu;
-import main.java.com.goxr3plus.xr3player.application.presenter.treeview.TreeViewManager;
 import main.java.com.goxr3plus.xr3player.application.services.VacuumProgressService;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.application.speciallists.PlayedMediaList;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewContextMenu;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewManager;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
