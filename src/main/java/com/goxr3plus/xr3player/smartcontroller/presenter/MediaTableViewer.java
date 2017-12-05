@@ -268,8 +268,9 @@ public class MediaTableViewer extends StackPane {
 		
 		//Update the Media Information when Selected Item changes
 		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue != null)
+			if (newValue != null) {
 				Main.mediaInformation.updateInformation(newValue);
+			}
 		});
 		
 		//--KeyListener
@@ -289,6 +290,7 @@ public class MediaTableViewer extends StackPane {
 		//--Row Factory
 		tableView.setRowFactory(rf -> {
 			TableRow<Media> row = new TableRow<>();
+						
 			
 			// use EasyBind to access the valueProperty of the itemProperty
 			// of the cell:

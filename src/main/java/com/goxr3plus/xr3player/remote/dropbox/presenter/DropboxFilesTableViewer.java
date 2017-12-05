@@ -116,8 +116,10 @@ public class DropboxFilesTableViewer extends StackPane {
 		
 		//Update the Media Information when Selected Item changes
 		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
-			//if (newValue != null)
-			//Main.mediaInformation.updateInformation(newValue);
+			if (newValue != null)
+				Main.dropBoxViewer.getOpenFolder().setDisable(!newValue.isDirectory());	
+			else 
+				Main.dropBoxViewer.getOpenFolder().setDisable(true);	
 		});
 		
 		// PauseTransition

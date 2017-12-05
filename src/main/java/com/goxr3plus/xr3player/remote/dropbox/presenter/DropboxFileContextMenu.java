@@ -37,6 +37,9 @@ public class DropboxFileContextMenu extends ContextMenu {
 	@FXML
 	private MenuItem delete;
 	
+	@FXML
+	private MenuItem openFolder;
+	
 	// -------------------------------------------------------------
 	
 	/** The logger. */
@@ -78,6 +81,9 @@ public class DropboxFileContextMenu extends ContextMenu {
 		//rename
 		rename.setOnAction(a -> Main.dropBoxViewer.renameFile(dropboxFile, node));
 		
+		//openFolder
+		openFolder.setOnAction(a -> Main.dropBoxViewer.recreateTableView(dropboxFile.getMetadata().getPathLower()));
+		
 	}
 	
 	/**
@@ -90,6 +96,12 @@ public class DropboxFileContextMenu extends ContextMenu {
 	public void show(DropboxFile dropboxFile , double x , double y , Node node) {
 		this.dropboxFile = dropboxFile;
 		this.node = node;
+		
+		//Open Folder Visibility
+		if (dropboxFile.isDirectory())
+			openFolder.setVisible(true);
+		else
+			openFolder.setVisible(false);
 		
 		// Show it
 		show(Main.window, x, y - 1);

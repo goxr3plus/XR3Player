@@ -82,7 +82,22 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Button fx:id="createFolder" alignment="CENTER" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="New Folder" wrapText="true">
+                                    <Button fx:id="openFolder" alignment="CENTER" disable="true" layoutX="54.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Open" wrapText="true">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/openedFolder.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Download Selected File" />
+                                       </tooltip>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="createFolder" alignment="CENTER" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="New" wrapText="true">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

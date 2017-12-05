@@ -79,6 +79,9 @@ public class DropboxViewer extends StackPane {
 	private MenuButton deleteMenuButton;
 	
 	@FXML
+	private Button openFolder;
+	
+	@FXML
 	private Button createFolder;
 	
 	@FXML
@@ -265,6 +268,13 @@ public class DropboxViewer extends StackPane {
 		
 		//authorizationCodeVBox
 		authorizationCodeVBox.setVisible(false);
+		
+		//openFolder
+		openFolder.setOnAction(a -> {
+			DropboxFile selectedFile = dropboxFilesTableViewer.getTableView().getSelectionModel().getSelectedItem();
+			if (selectedFile != null)
+				recreateTableView(selectedFile.getMetadata().getPathLower());
+		});
 		
 		//authorizationCodeCancelButton
 		authorizationCodeCancelButton.setOnAction(a -> authorizationCodeVBox.setVisible(false));
@@ -729,6 +739,13 @@ public class DropboxViewer extends StackPane {
 	 */
 	public DropboxFileContextMenu getFileContextMenu() {
 		return fileContextMenu;
+	}
+	
+	/**
+	 * @return the openFolder
+	 */
+	public Button getOpenFolder() {
+		return openFolder;
 	}
 	
 }
