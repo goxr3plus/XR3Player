@@ -24,7 +24,7 @@
             <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false" />
          </items>
       </SplitPane>
-      <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No songs in Playlist !" textAlignment="CENTER" visible="false" wrapText="true">
+      <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No songs in Playlist " textAlignment="CENTER" visible="false" wrapText="true">
          <tooltip>
             <Tooltip />
          </tooltip>

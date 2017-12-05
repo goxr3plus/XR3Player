@@ -2,8 +2,6 @@ package main.java.com.goxr3plus.xr3player.application.settings;
 
 import java.util.Optional;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
@@ -162,15 +160,7 @@ public class ApplicationSettingsLoader {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-		
-		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
-		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
-		
-		
+		}		
 	}
 	
 }

@@ -132,12 +132,12 @@ public class ArtistsModeService extends Service<Void> {
 								if (operation == Operation.REFRESH)
 									
 									//Add the artist
-									set.add(findArtistsFromAudioFile(new File(media.getFilePath())));
+									set.add(findArtistsFromAudioFile(new File(media.getFilePath()), media));
 								
 								else {
 									
 									//Find the artist Name
-									String fileArtist = findArtistsFromAudioFile(new File(media.getFilePath()));
+									String fileArtist = findArtistsFromAudioFile(new File(media.getFilePath()), media);
 									
 									//If it equals
 									if (fileArtist.equals(artistName))
@@ -171,12 +171,12 @@ public class ArtistsModeService extends Service<Void> {
 									if (operation == Operation.REFRESH)
 										
 										//Add the artist
-										set.add(findArtistsFromAudioFile(new File(resultSet.getString("PATH"))));
+										set.add(findArtistsFromAudioFile(new File(resultSet.getString("PATH")), null));
 									
 									else {
 										
 										//Find the artist Name
-										String fileArtist = findArtistsFromAudioFile(new File(resultSet.getString("PATH")));
+										String fileArtist = findArtistsFromAudioFile(new File(resultSet.getString("PATH")), null);
 										
 										//If it equals
 										if (fileArtist.equals(artistName))
@@ -214,7 +214,7 @@ public class ArtistsModeService extends Service<Void> {
 							//Set list view items
 							smartControllerArtistsMode.getListView().setItems(observableList);
 						});
-					} else {
+					} else if (operation == Operation.UPDATE_TABLE_VIEW) {
 						//For each item on set
 						ObservableList<Media> observableList = matchingMediaList.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
 						Platform.runLater(() -> {
@@ -238,13 +238,16 @@ public class ArtistsModeService extends Service<Void> {
 			/**
 			 * Return the artist of the given audio file (mp3) actually
 			 * 
-			 * @param audioFile
+			 * @param file
+			 *            The audio File
+			 * @param media
+			 *            The audio File in case it is already a Media Class File
 			 * @return Return the artist of the given audio file (mp3) actually
 			 */
-			private String findArtistsFromAudioFile(File file) {
+			private String findArtistsFromAudioFile(File file , Media media) {
 				
-				//Check file existance , length and extension
-				if (file.exists() && file.length() != 0 && "mp3".equals(InfoTool.getFileExtension(file.getAbsolutePath()))) {
+				//Check file existence , length and extension
+				if (file.exists() && "mp3".equals(media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath())) && file.length() != 0) {
 					
 					//MP3File
 					MP3File mp3File;
