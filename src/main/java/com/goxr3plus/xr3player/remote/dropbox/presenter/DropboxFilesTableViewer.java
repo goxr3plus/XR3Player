@@ -107,7 +107,7 @@ public class DropboxFilesTableViewer extends StackPane {
 		title.setCellValueFactory(new PropertyValueFactory<>("title"));
 		
 		// fileType
-		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("fileType"));
+		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("fileThumbnail"));
 		
 		// actionColumn
 		actionColumn.setCellValueFactory(new PropertyValueFactory<>("actionColumn"));

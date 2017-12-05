@@ -199,43 +199,44 @@
 
 
 
-.table-view{
+.media-table-view{
    -fx-background-color: #202020;
    -fx-table-cell-border-color: transparent;
 }
 
-.table-view:row-selection:constrained-resize .placeholder .label .text{
+
+.media-table-view:row-selection:constrained-resize .placeholder .label .text{
 	-fx-fill:white;
 	-fx-font-weight:bold;
 }
 
-.table-view:focused{
+.media-table-view:focused{
     /*-fx-background-color: transparent;*/
 }
 
 
-.table-view .column-header {
+.media-table-view .column-header {
      -fx-background-color: transparent;
      -fx-border-color:transparent white transparent transparent;
      -fx-border-width:0.1;
 } 
 
-.table-view .column-header-background{
+.media-table-view .column-header-background{
     -fx-background-color: linear-gradient(#131313 0.0%, #424141 100.0%);
 }
 
-.table-view .column-header-background .label{
+.media-table-view .column-header-background .label{
     -fx-background-color: transparent; 
     -fx-font-weight:bold;
     -fx-text-fill: white;
 }
 
-.table-view .table-column{
+.media-table-view .table-column{
 	-fx-alignment:center;
 }
 
  
-/* .table-row-cell */
+/* ------------- .table-row-cell ------------- */
 
 .table-row-cell{
 	-fx-table-cell-border-color: transparent;
@@ -263,13 +264,6 @@
 }
 
 
-
-
-
-/*.table-row-cell:focused .text {
-     -fx-fill: white ;
-} */
-
 .table-row-cell:hover{
 	-fx-table-cell-border-color: transparent;
 	/*-fx-table-cell-border-width: 2.0;*/
@@ -279,14 +273,10 @@
      -fx-fill: black ;    
 }
 
-.table-row-cell:hover:selected .text,.table-row-cell:focused:selected .text{
+.table-row-cell:hover:selected .text, .table-row-cell:focused:selected .text{
 	-fx-fill:white;
 }
 
-
-/*.table-row-cell:focused{
-	-fx-background-color:firebrick;
-}*/
 
 .table-row-cell:focused:disabled{ 
 	-fx-background-color:darkgray;
@@ -299,30 +289,36 @@
 }
 
 
-.table-view .filler {
-  
-}
+/* ------------- row-selection -------------------*/
 
-.table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button{
+.media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button{
 	-fx-background-color:black;	
 	-fx-cursor:hand;
-	-fx-padding:50px;
+	-fx-padding:50.0px;
 }
 
-.table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button:hover{
+.media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button:hover{
 	-fx-background-color:orange;
 }
 
-.table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image{
+.media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image{
 	-fx-background-color:firebrick;
-	-fx-padding:5px;
+	-fx-padding:5.0px;
 }
 
-.table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image:hover{
+.media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image:hover{
 	-fx-background-color:black;
 }
 
 
+
+/*.table-row-cell:focused{
+	-fx-background-color:firebrick;
+}*/
+
+/*.table-row-cell:focused .text {
+     -fx-fill: white ;
+} */
 
 
 /*------------------------------*
@@ -1400,8 +1396,8 @@
 
 
 .tree-view-search-box {
-    -fx-background-radius: 45;
-    -fx-border-radius:45; 
+    -fx-background-radius: 45.0;
+    -fx-border-radius:45.0; 
     -fx-border-width:1.0;
     
     -fx-background-color:white;
@@ -1411,7 +1407,7 @@
 }
 
 .tree-view-search-box:hover{
-   -fx-border-width:2;
+   -fx-border-width:2.0;
 }
 
  /*******************************************************************************

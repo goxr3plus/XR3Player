@@ -20,7 +20,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
  *
  * @author GOXR3PLUS
  */
-public abstract class DropboxFile {
+public class DropboxFile {
 	
 	/** The title. */
 	private SimpleStringProperty title;
@@ -44,8 +44,9 @@ public abstract class DropboxFile {
 	/**
 	 * Constructor
 	 */
-	public DropboxFile(String value, Metadata metadata) {
+	public DropboxFile(Metadata metadata) {
 		this.metadata = metadata;
+		String value = metadata.getName();
 		
 		//---------------------Init properties------------------------------------
 		title = new SimpleStringProperty(value);

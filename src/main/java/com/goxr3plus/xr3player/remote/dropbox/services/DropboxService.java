@@ -2,7 +2,6 @@ package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
 
 import java.util.List;
 import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.dropbox.core.DbxException;
@@ -19,14 +18,15 @@ import com.dropbox.core.v2.files.Metadata;
 import com.dropbox.core.v2.users.FullAccount;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.control.TreeItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFileTreeItem;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFile;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 
 public class DropboxService extends Service<Boolean> {
@@ -101,7 +101,7 @@ public class DropboxService extends Service<Boolean> {
 		this.operation = DropBoxOperation.REFRESH;
 		
 		//Clear all the children
-		dropBoxViewer.getRoot().getChildren().clear();
+		dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().clear();
 		
 		//Set LoginScreen not visible 
 		dropBoxViewer.getLoginVBox().setVisible(false);
@@ -123,7 +123,7 @@ public class DropboxService extends Service<Boolean> {
 		this.operation = DropBoxOperation.SEARCH;
 		
 		//Clear all the children
-		dropBoxViewer.getRoot().getChildren().clear();
+		dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().clear();
 		
 		//RefreshLabel
 		dropBoxViewer.getRefreshLabel().setText("Searching for matching files ...");
@@ -183,26 +183,28 @@ public class DropboxService extends Service<Boolean> {
 						FullAccount account = client.users().getCurrentAccount();
 						Platform.runLater(() -> dropBoxViewer.getTopMenuButton().setText(" " + account.getName().getDisplayName()));
 						
-						TreeMap<String,Metadata> children = new TreeMap<>();
-						
 						//List all the files brooooo!
-						listAllFiles(currentPath, children, false, true);
+						ObservableList<DropboxFile> observableList = FXCollections.observableArrayList();
+						listAllFiles(currentPath, observableList, false, true);
 						
 						//Check if folder is empty
 						Platform.runLater(() -> {
 							dropBoxViewer.getSearchResultsLabel().setVisible(false);
-							dropBoxViewer.getEmptyFolderLabel().setVisible(children.isEmpty());
+							dropBoxViewer.getEmptyFolderLabel().setVisible(observableList.isEmpty());
+							
+							//Set the items to TableView
+							dropBoxViewer.getDropboxFilesTableViewer().getTableView().setItems(observableList);
 						});
 						
 					} else if (operation == DropBoxOperation.DELETE) {
 						
 						//Delete all the selected files and folders
-						List<TreeItem<String>> list = dropBoxViewer.getTreeView().getSelectionModel().getSelectedItems().stream().collect(Collectors.toList());
+						List<DropboxFile> list = dropBoxViewer.getDropboxFilesTableViewer().getSelectionModel().getSelectedItems().stream().collect(Collectors.toList());
 						
 						//Remove from the TreeView one by one
 						list.forEach(item -> {
-							if (delete( ( (DropboxFileTreeItem) item ).getMetadata().getPathLower()))
-								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().remove(item));
+							if (delete(item.getMetadata().getPathLower()))
+								Platform.runLater(() -> dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().remove(item));
 							
 						});
 						
@@ -215,21 +217,20 @@ public class DropboxService extends Service<Boolean> {
 						Platform.runLater(() -> refresh(currentPath));
 					} else if (operation == DropBoxOperation.SEARCH) {
 						
-						TreeMap<String,Metadata> children = new TreeMap<>();
-						
 						//Search Everything
-						search("", children);
+						ObservableList<DropboxFile> observableList = FXCollections.observableArrayList();
+						search("", observableList);
 						
 						Platform.runLater(() -> {
 							
 							//Set Label Visible
 							dropBoxViewer.getSearchResultsLabel().setVisible(true);
 							
-							//Add all found items to the TreeView
-							children.forEach((pathLower , metadata) -> dropBoxViewer.getRoot().getChildren().add(new DropboxFileTreeItem(metadata.getName(), metadata)));
+							//Set the items to TableView
+							dropBoxViewer.getDropboxFilesTableViewer().getTableView().setItems(observableList);
 							
 							//Set Label Visible
-							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(children.size()));
+							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(observableList.size()));
 						});
 						
 					}
@@ -278,38 +279,33 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
-			public void listAllFiles(String path , SortedMap<String,Metadata> children , boolean recursive , boolean appendToMap) throws ListFolderErrorException , DbxException {
+			public void listAllFiles(String path , ObservableList<DropboxFile> children , boolean recursive , boolean appendToMap) throws ListFolderErrorException , DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
 				while (true) {
 					for (Metadata metadata : result.getEntries()) {
 						if (metadata instanceof DeletedMetadata) { // Deleted
-							//	children.remove(metadata.getPathLower());
+							//	children.remove(metadata.getPathLower())
 						} else if (metadata instanceof FolderMetadata) { // Folder
 							String folder = metadata.getPathLower();
-							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
+							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
 							if (appendToMap)
-								children.put(folder, metadata);
+								children.add(new DropboxFile(metadata));
 							
-							//boolean subFileOfCurrentFolder = path.equals(parent);
-							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
-							
-							//Add to TreeView	
-							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropboxFileTreeItem(metadata.getName(), metadata)));
+							//boolean subFileOfCurrentFolder = path.equals(parent)
+							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder)
 							
 							if (recursive)
 								listAllFiles(folder, children, recursive, appendToMap);
 						} else if (metadata instanceof FileMetadata) { //File
 							String file = metadata.getPathLower();
-							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/");
+							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
 							if (appendToMap)
-								children.put(file, metadata);
+								children.add(new DropboxFile(metadata));
 							
-							//boolean subFileOfCurrentFolder = path.equals(parent);
-							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
-							//Add to TreeView	
-							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropboxFileTreeItem(metadata.getName(), metadata)));
+							//boolean subFileOfCurrentFolder = path.equals(parent)
+							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file))
 						}
 					}
 					
@@ -336,7 +332,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
-			public void search(String path , SortedMap<String,Metadata> children) throws ListFolderErrorException , DbxException {
+			public void search(String path , ObservableList<DropboxFile> children) throws ListFolderErrorException , DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
@@ -347,13 +343,13 @@ public class DropboxService extends Service<Boolean> {
 						} else if (metadata instanceof FolderMetadata) { // Folder
 							String folder = metadata.getPathLower();
 							if (metadata.getName().toLowerCase().contains(searchWord))
-								children.put(folder, metadata);
+								children.add(new DropboxFile(metadata));
 							
 							//Run again
 							search(folder, children);
 						} else if (metadata instanceof FileMetadata) { //File
 							if (metadata.getName().toLowerCase().contains(searchWord))
-								children.put(metadata.getPathLower(), metadata);
+								children.add(new DropboxFile(metadata));
 						}
 					}
 					

@@ -13,7 +13,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -177,10 +176,9 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <StackPane>
+                              <StackPane fx:id="innerStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                                    <Label fx:id="emptyFolderLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="This folder is empty " textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="emptyFolderLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: rgb(55,55,55,0.2);" styleClass="applicationSettingsLabel2" text="This folder is empty " textAlignment="CENTER" wrapText="true">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>

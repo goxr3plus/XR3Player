@@ -29,15 +29,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -58,6 +55,9 @@ public class DropboxViewer extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private StackPane innerStackPane;
+	
+	@FXML
 	private TextField searchField;
 	
 	@FXML
@@ -74,9 +74,6 @@ public class DropboxViewer extends StackPane {
 	
 	@FXML
 	private Label searchResultsLabel;
-	
-	@FXML
-	private TreeView<String> treeView;
 	
 	@FXML
 	private MenuButton deleteMenuButton;
@@ -158,21 +155,23 @@ public class DropboxViewer extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	//Create a fake root element
-	private final DropboxFileTreeItem root = new DropboxFileTreeItem("", null);
-	
 	// -------------------------------------------------------------
 	
-	private final DropboxAuthenticationBrowser authenticationBrowser = new DropboxAuthenticationBrowser();
+	public static final Image dropBoxImage = InfoTool.getImageFromResourcesFolder("dropbox.png");
 	
+	// -------------------------------------------------------------	
 	private String accessToken;
 	
-	public static final Image dropBoxImage = InfoTool.getImageFromResourcesFolder("dropbox.png");
+	private final DropboxAuthenticationBrowser authenticationBrowser;
+	
+	private final DropboxFilesTableViewer dropboxFilesTableViewer;
 	
 	/**
 	 * Constructor.
 	 */
 	public DropboxViewer() {
+		authenticationBrowser = new DropboxAuthenticationBrowser();
+		dropboxFilesTableViewer = new DropboxFilesTableViewer();
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DropboxViewer.fxml"));
@@ -184,7 +183,6 @@ public class DropboxViewer extends StackPane {
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
-		
 	}
 	
 	/**
@@ -193,13 +191,12 @@ public class DropboxViewer extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//TreeView
-		treeView.setRoot(root);
-		treeView.setShowRoot(false);
-		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		//DropboxFilesTableViewer
+		innerStackPane.getChildren().add(dropboxFilesTableViewer);
+		dropboxFilesTableViewer.toBack();
 		
 		// Mouse Released Event
-		treeView.setOnMouseClicked(this::mouseClicked);
+		dropboxFilesTableViewer.setOnMouseClicked(this::mouseClicked);
 		
 		//refreshLabel
 		refreshLabel.visibleProperty().bind(dropBoxService.runningProperty());
@@ -360,16 +357,16 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//downloadFile
-		downloadFile.disableProperty().bind(treeView.getSelectionModel().selectedItemProperty().isNull());
+		downloadFile.disableProperty().bind(dropboxFilesTableViewer.getSelectionModel().selectedItemProperty().isNull());
 		downloadFile.setOnAction(a -> {
 			
 			//Get the selected file
-			DropboxFileTreeItem selectedItem = (DropboxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
+			DropboxFile selectedItem = dropboxFilesTableViewer.getSelectionModel().getSelectedItem();
 			
 			if (!selectedItem.isDirectory()) {
 				
 				//Show save dialog	
-				File file = Main.specialChooser.showSaveDialog(selectedItem.getValue());
+				File file = Main.specialChooser.showSaveDialog(selectedItem.getTitle());
 				if (file != null)
 					new DownloadService(this).startService(selectedItem.getMetadata(), file.getAbsolutePath());
 				
@@ -379,14 +376,14 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//deleteMenuButton
-		deleteMenuButton.disableProperty().bind(treeView.getSelectionModel().selectedItemProperty().isNull());
+		deleteMenuButton.disableProperty().bind(dropboxFilesTableViewer.getSelectionModel().selectedItemProperty().isNull());
 		
 		//deleteFile
 		deleteFile.setOnAction(a -> {
-			int selectedItems = treeView.getSelectionModel().getSelectedIndices().size();
+			int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
 			if (ActionTool.doQuestion("Delete",
 					"Are you sure you want to delete "
-							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + treeView.getSelectionModel().getSelectedItem().getValue() + " ] " )
+							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
 							+ " from your Dropbox?",
 					deleteMenuButton, Main.window))
 				this.dropBoxService.delete(DropBoxOperation.DELETE);
@@ -394,10 +391,10 @@ public class DropboxViewer extends StackPane {
 		
 		//permanentlyDeleteFile
 		permanentlyDeleteFile.setOnAction(a -> {
-			int selectedItems = treeView.getSelectionModel().getSelectedIndices().size();
+			int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
 			if (ActionTool.doQuestion("PERMANENT Delete",
 					"Are you sure you want to delete "
-							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + treeView.getSelectionModel().getSelectedItem().getValue() + " ] " )
+							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
 							+ " from your Dropbox PERMANENTLY?",
 					deleteMenuButton, Main.window))
 				this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
@@ -498,9 +495,9 @@ public class DropboxViewer extends StackPane {
 	public void search(String searchWord) {
 		
 		//Navigate back to root if searchWord is empty
-		if (searchWord.isEmpty()) {
+		if (searchWord.isEmpty())
 			recreateTree("");
-		} else
+		else
 			dropBoxService.search(searchWord);
 	}
 	
@@ -547,21 +544,21 @@ public class DropboxViewer extends StackPane {
 	 *            [[SuppressWarningsSpartan]]
 	 */
 	private void mouseClicked(MouseEvent mouseEvent) {
-		//Get the selected item
-		DropboxFileTreeItem source = (DropboxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
-		
-		// host is not on the game
-		if (source == null || source == root) {
-			mouseEvent.consume();
-			return;
-		}
-		
-		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
-			if (source.isDirectory()) {
-				recreateTree(source.getMetadata().getPathLower());
-			}
-			
-		}
+		//		//Get the selected item
+		//		DropboxFile source =  dropboxFilesTableViewer.getSelectionModel().getSelectedItem();
+		//		
+		//		// host is not on the game
+		//		if (source == null || source == root) {
+		//			mouseEvent.consume();
+		//			return;
+		//		}
+		//		
+		//		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
+		//			if (source.isDirectory()) {
+		//				recreateTree(source.getMetadata().getPathLower());
+		//			}
+		//			
+		//		}
 	}
 	
 	/**
@@ -585,13 +582,6 @@ public class DropboxViewer extends StackPane {
 	}
 	
 	/**
-	 * @return the root of the tree
-	 */
-	public DropboxFileTreeItem getRoot() {
-		return root;
-	}
-	
-	/**
 	 * @return the progressIndicator
 	 */
 	public ProgressIndicator getProgressIndicator() {
@@ -610,13 +600,6 @@ public class DropboxViewer extends StackPane {
 	 */
 	public String getAccessToken() {
 		return accessToken;
-	}
-	
-	/**
-	 * @return the treeView
-	 */
-	public TreeView<String> getTreeView() {
-		return treeView;
 	}
 	
 	/**
@@ -674,13 +657,19 @@ public class DropboxViewer extends StackPane {
 	public Label getSearchResultsLabel() {
 		return searchResultsLabel;
 	}
-
+	
 	/**
 	 * @return the searchField
 	 */
 	public TextField getSearchField() {
 		return searchField;
 	}
-
+	
+	/**
+	 * @return the dropboxFilesTableViewer
+	 */
+	public DropboxFilesTableViewer getDropboxFilesTableViewer() {
+		return dropboxFilesTableViewer;
+	}
 	
 }

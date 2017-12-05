@@ -348,7 +348,7 @@ public class Main extends Application {
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 		//XR3AutoUpdater exit message
-		System.out.println("XR3Player ready to rock!");	
+		System.out.println("XR3Player ready to rock!");
 	}
 	
 	private void startPart2() {
@@ -507,7 +507,7 @@ public class Main extends Application {
 		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);		
+		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
 		
 		//Close the LoginMode
 		loginMode.userSearchBox.getSearchBoxWindow().close();
@@ -839,6 +839,12 @@ public class Main extends Application {
 		System.out.println("Hello from Main Method!");
 		
 		System.out.println("Cur Path :-> " + InfoTool.getBasePathForClass(Main.class));
+		
+		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
+		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
 		
 		//		//---------------Check for Duplicate Instance-----------------	
 		//		String id = "XR3PlayerApplication";

@@ -15,7 +15,7 @@
    <children>
       <BorderPane>
          <center>
-            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="number" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="#" />
                   <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Has been Played?">
