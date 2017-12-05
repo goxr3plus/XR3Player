@@ -47,7 +47,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" HBox.hgrow="NEVER">
                            <children>
-                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Dropbox ~ User Name">
+                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Dropbox ~ User  Name">
                                 <items>
                                   <MenuItem fx:id="signOut" mnemonicParsing="false" text="Sign out" />
                                 </items>
@@ -126,7 +126,7 @@
                                           </ImageView>
                                        </graphic>
                                     </MenuButton>
-                                    <Button fx:id="renameFile" alignment="CENTER" disable="true" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
+                                    <Button fx:id="renameButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

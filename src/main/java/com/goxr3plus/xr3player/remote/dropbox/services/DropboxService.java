@@ -47,6 +47,10 @@ public class DropboxService extends Service<Boolean> {
 	private String folderName;
 	private String searchWord;
 	
+	//
+	private DropboxFile dropboxFile;
+	private String newPath;
+	
 	/**
 	 * This path is being used to delete files
 	 */
@@ -161,6 +165,27 @@ public class DropboxService extends Service<Boolean> {
 		super.restart();
 	}
 	
+	/**
+	 * Renames a dropbox file
+	 * 
+	 * @param dropboxFile
+	 *            The dropbox file that will receive this procedure
+	 * @param newPath
+	 *            newPath of file
+	 * 
+	 */
+	public void rename(DropboxFile dropboxFile , String newPath) {
+		this.dropboxFile = dropboxFile;
+		this.newPath = newPath;
+		this.operation = DropBoxOperation.RENAME;
+		
+		//RefreshLabel
+		dropBoxViewer.getRefreshLabel().setText("Renaming requested file ...");
+		
+		//Restart                                                                   
+		super.restart();
+	}
+	
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
@@ -193,6 +218,7 @@ public class DropboxService extends Service<Boolean> {
 							
 							//Set the items to TableView
 							dropBoxViewer.getDropboxFilesTableViewer().getTableView().setItems(observableList);
+							dropBoxViewer.getDropboxFilesTableViewer().updateLabel();
 						});
 						
 					} else if (operation == DropBoxOperation.DELETE) {
@@ -207,6 +233,9 @@ public class DropboxService extends Service<Boolean> {
 							
 						});
 						
+						//Update the bottom label
+						Platform.runLater(() -> dropBoxViewer.getDropboxFilesTableViewer().updateLabel());
+						
 					} else if (operation == DropBoxOperation.CREATE_FOLDER) {
 						
 						//Create Folder
@@ -214,6 +243,18 @@ public class DropboxService extends Service<Boolean> {
 						
 						//Refresh
 						Platform.runLater(() -> refresh(currentPath));
+						
+					} else if (operation == DropBoxOperation.RENAME) {
+						
+						if (rename(dropboxFile.getMetadata().getPathLower(), newPath)) //check if not succeeded
+							ActionTool.showNotification("Success Message", "Succesfully renamed file :)", Duration.millis(1500), NotificationType.SIMPLE);
+						else {
+							ActionTool.showNotification("Error Message",
+									"Failed to rename the File:\n [ " + dropboxFile.getMetadata().getPathLower() + " ] to -> [ " + newPath + " ]", Duration.millis(1500),
+									NotificationType.ERROR);
+							dropboxFile.titleProperty().set(dropboxFile.getMetadata().getName());
+						}
+						
 					} else if (operation == DropBoxOperation.SEARCH) {
 						
 						//Search Everything
@@ -230,6 +271,7 @@ public class DropboxService extends Service<Boolean> {
 							
 							//Set Label Visible
 							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(observableList.size()));
+							dropBoxViewer.getDropboxFilesTableViewer().updateLabel();
 						});
 						
 					}
@@ -400,11 +442,15 @@ public class DropboxService extends Service<Boolean> {
 			 * @param oldPath
 			 * @param newPath
 			 */
-			public void rename(String oldPath , String newPath) {
+			public boolean rename(String oldPath , String newPath) {
 				try {
 					client.files().moveV2(oldPath, newPath);
+					
+					return true;
 				} catch (DbxException dbxe) {
 					dbxe.printStackTrace();
+					
+					return false;
 				}
 			}
 			

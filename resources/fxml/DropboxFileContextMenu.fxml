@@ -2,10 +2,36 @@
 
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
   <items>
-      <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete" />
-      <MenuItem fx:id="download" mnemonicParsing="false" text="Download" />
+      <MenuItem fx:id="download" mnemonicParsing="false" text="Download">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Download%20From%20Cloud-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="rename" mnemonicParsing="false" text="Rename">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/rename.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/x.png" />
+               </image>
+            </ImageView>
+         </graphic></MenuItem>
   </items>
 </fx:root>

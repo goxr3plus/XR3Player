@@ -19,6 +19,15 @@
             <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type" />
+                  <TableColumn fx:id="download" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Download">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@../image/Download%20From%20Cloud-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
                   <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Title">
                      <graphic>
                         <ImageView>

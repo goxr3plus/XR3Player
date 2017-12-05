@@ -182,5 +182,12 @@ public class SmartControllerArtistsMode extends StackPane {
 	public Label getProgressLabel() {
 		return progressLabel;
 	}
+
+	/**
+	 * @return the service
+	 */
+	public ArtistsModeService getService() {
+		return service;
+	}
 	
 }

@@ -22,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -35,7 +36,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -88,7 +88,7 @@ public class DropboxViewer extends StackPane {
 	private MenuItem permanentlyDeleteFile;
 	
 	@FXML
-	private Button renameFile;
+	private Button renameButton;
 	
 	@FXML
 	private Button downloadFile;
@@ -197,9 +197,6 @@ public class DropboxViewer extends StackPane {
 		innerStackPane.getChildren().add(dropboxFilesTableViewer);
 		dropboxFilesTableViewer.toBack();
 		
-		// Mouse Released Event
-		dropboxFilesTableViewer.setOnMouseClicked(this::mouseClicked);
-		
 		//refreshLabel
 		refreshLabel.visibleProperty().bind(dropBoxService.runningProperty());
 		
@@ -211,7 +208,7 @@ public class DropboxViewer extends StackPane {
 			if (!searchField.getText().isEmpty())
 				search(searchField.getText());
 			else
-				recreateTree(dropBoxService.getCurrentPath());
+				recreateTableView(dropBoxService.getCurrentPath());
 		});
 		
 		// authorizationButton
@@ -253,7 +250,7 @@ public class DropboxViewer extends StackPane {
 				authorizationCodeTextField.clear();
 				
 				//Go Make It
-				recreateTree("");
+				recreateTableView("");
 				
 				//Refresh Saved Accounts
 				refreshSavedAccounts();
@@ -298,7 +295,7 @@ public class DropboxViewer extends StackPane {
 			accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
 			
 			//Go Make It
-			recreateTree("");
+			recreateTableView("");
 		});
 		
 		//deleteSavedAccount
@@ -325,9 +322,9 @@ public class DropboxViewer extends StackPane {
 			//Recreate Tree
 			String value = event.getSelectedCrumb().getValue();
 			if ("DROPBOX ROOT".equals(value))
-				recreateTree("");
+				recreateTableView("");
 			else
-				recreateTree(dropBoxService.getCurrentPath().split(value)[0] + value);
+				recreateTableView(dropBoxService.getCurrentPath().split(value)[0] + value);
 			
 		});
 		
@@ -353,54 +350,27 @@ public class DropboxViewer extends StackPane {
 				accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
 				
 				//Go Make It
-				recreateTree("");
+				recreateTableView("");
 				
 			}
 		});
 		
 		//downloadFile
 		downloadFile.disableProperty().bind(dropboxFilesTableViewer.getSelectionModel().selectedItemProperty().isNull());
-		downloadFile.setOnAction(a -> {
-			
-			//Get the selected file
-			DropboxFile selectedItem = dropboxFilesTableViewer.getSelectionModel().getSelectedItem();
-			
-			if (!selectedItem.isDirectory()) {
-				
-				//Show save dialog	
-				File file = Main.specialChooser.showSaveDialog(selectedItem.getTitle());
-				if (file != null)
-					new DownloadService(this).startService(selectedItem.getMetadata(), file.getAbsolutePath());
-				
-			} else //NOT SUPPORTED YET
-				ActionTool.showNotification("No supported", "Folder download is not supported yet :) ", Duration.seconds(2), NotificationType.WARNING);
-			
-		});
+		downloadFile.setOnAction(a -> downloadFile(dropboxFilesTableViewer.getSelectionModel().getSelectedItem()));
 		
 		//deleteMenuButton
 		deleteMenuButton.disableProperty().bind(dropboxFilesTableViewer.getSelectionModel().selectedItemProperty().isNull());
 		
 		//deleteFile
-		deleteFile.setOnAction(a -> {
-			int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
-			if (ActionTool.doQuestion("Delete",
-					"Are you sure you want to delete "
-							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
-							+ " from your Dropbox?",
-					deleteMenuButton, Main.window))
-				this.dropBoxService.delete(DropBoxOperation.DELETE);
-		});
+		deleteFile.setOnAction(a -> deleteSelectedFiles(false));
 		
 		//permanentlyDeleteFile
-		permanentlyDeleteFile.setOnAction(a -> {
-			int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
-			if (ActionTool.doQuestion("PERMANENT Delete",
-					"Are you sure you want to delete "
-							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
-							+ " from your Dropbox PERMANENTLY?",
-					deleteMenuButton, Main.window))
-				this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
-		});
+		permanentlyDeleteFile.setOnAction(a -> deleteSelectedFiles(true));
+		
+		//renameButton
+		renameButton.disableProperty().bind(deleteMenuButton.disabledProperty());
+		renameButton.setOnAction(a -> this.renameFile(dropboxFilesTableViewer.getSelectionModel().getSelectedItem(), renameButton));
 		
 		//createFolder
 		createFolder.setOnAction(a -> {
@@ -449,6 +419,123 @@ public class DropboxViewer extends StackPane {
 		
 	}
 	
+	//------------------------------------------------------------------------------------------
+	
+	/**
+	 * Prepare to delete selected file
+	 * 
+	 * @param permanent
+	 *            True = permanently , false = not permanently
+	 */
+	public void deleteSelectedFiles(boolean permanent) {
+		int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
+		
+		if (!permanent) {
+			if (ActionTool.doQuestion("Delete",
+					"Are you sure you want to delete "
+							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
+							+ " from your Dropbox?",
+					deleteMenuButton, Main.window))
+				this.dropBoxService.delete(DropBoxOperation.DELETE);
+		} else if (ActionTool.doQuestion("PERMANENT Delete",
+				"Are you sure you want to delete "
+						+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
+						+ " from your Dropbox PERMANENTLY?",
+				deleteMenuButton, Main.window))
+			this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
+		
+	}
+	
+	/**
+	 * Prepare to delete selected file
+	 * 
+	 * @param permanent
+	 *            True = permanently , false = not permanently
+	 */
+	public void deleteFile(DropboxFile dropboxFile , boolean permanent) {
+		
+		if (!permanent) {
+			if (ActionTool.doQuestion("Delete", "Are you sure you want to delete [ " + dropboxFile.getTitle() + " ]  from your Dropbox?", deleteMenuButton, Main.window))
+				this.dropBoxService.delete(DropBoxOperation.DELETE);
+		} else if (ActionTool.doQuestion("PERMANENT Delete", "Are you sure you want to delete [" + dropboxFile.getTitle() + " ]  from your Dropbox PERMANENTLY?", deleteMenuButton,
+				Main.window))
+			this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
+		
+	}
+	
+	/**
+	 * Prepare for downloading the selected file
+	 */
+	public void downloadFile(DropboxFile dropboxFile) {
+		
+		//Go
+		if (!dropboxFile.isDirectory()) {
+			
+			//Show save dialog	
+			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
+			if (file != null)
+				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
+			
+		} else //NOT SUPPORTED YET
+			ActionTool.showNotification("No supported", "Folder download is not supported yet :) ", Duration.seconds(2), NotificationType.WARNING);
+		
+	}
+	
+	/**
+	 * Prepare to rename a DropboxFile
+	 * 
+	 * @param dropboxFile
+	 */
+	public void renameFile(DropboxFile dropboxFile , Node node) {
+		// Open Window
+		Main.renameWindow.show(InfoTool.getFileTitle(dropboxFile.getMetadata().getName()), node, "Media Renaming", FileCategory.FILE);
+		String oldName = dropboxFile.getMetadata().getName();
+		
+		// Bind
+		dropboxFile.titleProperty().bind(Main.renameWindow.getInputField().textProperty());
+		
+		// When the Rename Window is closed do the rename
+		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
+			/**
+			 * [[SuppressWarningsSpartan]]
+			 */
+			@Override
+			public void invalidated(Observable observable) {
+				
+				// Remove the Listener
+				Main.renameWindow.showingProperty().removeListener(this);
+				
+				// !Showing
+				if (!Main.renameWindow.isShowing()) {
+					
+					// Remove Binding
+					dropboxFile.titleProperty().unbind();
+					
+					String newName = Main.renameWindow.getInputField().getText()
+							+ ( dropboxFile.isDirectory() ? "" : "." + InfoTool.getFileExtension(dropboxFile.getMetadata().getName()) );
+					
+					// !XPressed && // Old name != New name
+					if (Main.renameWindow.wasAccepted() && !oldName.equals(newName)) {
+						String parent = new File(dropboxFile.getMetadata().getPathLower()).getParent();
+						
+						//Try to do it
+						dropBoxService.rename(dropboxFile, parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName);
+						
+						//						System.out.println("Old Name: " + dropboxFile.getMetadata().getPathLower());
+						//						
+						//						System.out.println("New Name: " + parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName);
+						//						
+					} else // X is pressed by user || // Old name == New name
+						dropboxFile.titleProperty().set(oldName);
+					
+				} // RenameWindow is still showing
+			}// invalidated
+		});
+		//}
+	}
+	
+	//------------------------------------------------------------------------------------------------------
+	
 	/**
 	 * Refreshes the Saved Accounts Lists View
 	 */
@@ -477,19 +564,6 @@ public class DropboxViewer extends StackPane {
 	}
 	
 	/**
-	 * Collapses the whole TreeView
-	 * 
-	 * @param item
-	 */
-	private void collapseTreeView(TreeItem<String> item , boolean expanded) {
-		if (item == null || item.isLeaf())
-			return;
-		
-		item.setExpanded(expanded);
-		item.getChildren().forEach(child -> collapseTreeView(child, expanded));
-	}
-	
-	/**
 	 * Starts the Dropbox Service Search functionality based on the given word
 	 * 
 	 * @param searchWord
@@ -498,15 +572,15 @@ public class DropboxViewer extends StackPane {
 		
 		//Navigate back to root if searchWord is empty
 		if (searchWord.isEmpty())
-			recreateTree("");
+			recreateTableView("");
 		else
 			dropBoxService.search(searchWord);
 	}
 	
 	/**
-	 * Recreates the TreeView
+	 * Recreates the TableView
 	 */
-	public void recreateTree(String path) {
+	public void recreateTableView(String path) {
 		
 		//BreadCrumbBar
 		if (path.isEmpty()) {
@@ -537,30 +611,6 @@ public class DropboxViewer extends StackPane {
 		
 		//Start the Service
 		dropBoxService.refresh(path);
-	}
-	
-	/**
-	 * Used for TreeView mouse released event
-	 * 
-	 * @param mouseEvent
-	 *            [[SuppressWarningsSpartan]]
-	 */
-	private void mouseClicked(MouseEvent mouseEvent) {
-		//		//Get the selected item
-		//		DropboxFile source =  dropboxFilesTableViewer.getSelectionModel().getSelectedItem();
-		//		
-		//		// host is not on the game
-		//		if (source == null || source == root) {
-		//			mouseEvent.consume();
-		//			return;
-		//		}
-		//		
-		//		if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
-		//			if (source.isDirectory()) {
-		//				recreateTree(source.getMetadata().getPathLower());
-		//			}
-		//			
-		//		}
 	}
 	
 	/**
@@ -673,7 +723,7 @@ public class DropboxViewer extends StackPane {
 	public DropboxFilesTableViewer getDropboxFilesTableViewer() {
 		return dropboxFilesTableViewer;
 	}
-
+	
 	/**
 	 * @return the fileContextMenu
 	 */

@@ -389,5 +389,12 @@ public class SmartControllerFoldersMode extends StackPane {
 	public Label getTopLabel() {
 		return topLabel;
 	}
+
+	/**
+	 * @return the service
+	 */
+	public FoldersModeService getService() {
+		return service;
+	}
 	
 }
