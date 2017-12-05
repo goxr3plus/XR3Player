@@ -438,7 +438,7 @@ public class MediaTableViewer extends StackPane {
 			
 		});
 		
-		// hasBeenPlayed
+		// mediaType
 		mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
 		mediaType.setComparator((imageView1 , imageView2) -> {
 			if (imageView1.getImage() == Media.SONG_MISSING_IMAGE && imageView2.getImage() != Media.SONG_MISSING_IMAGE)

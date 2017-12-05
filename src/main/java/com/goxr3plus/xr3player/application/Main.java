@@ -82,7 +82,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.WelcomeScreen;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
@@ -240,7 +240,7 @@ public class Main extends Application {
 	/** The Constant djMode. */
 	public static DJMode djMode = new DJMode();
 	
-	public static DropBoxViewer dropBoxViewer = new DropBoxViewer();
+	public static DropboxViewer dropBoxViewer = new DropboxViewer();
 	
 	public static EmotionsTabPane emotionsTabPane = new EmotionsTabPane(emotionListsController);
 	

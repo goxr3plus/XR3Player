@@ -53,7 +53,7 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 
-public class DropBoxViewer extends StackPane {
+public class DropboxViewer extends StackPane {
 	
 	//--------------------------------------------------------------
 	
@@ -159,7 +159,7 @@ public class DropBoxViewer extends StackPane {
 	// -------------------------------------------------------------
 	
 	//Create a fake root element
-	private final DropBoxFileTreeItem root = new DropBoxFileTreeItem("", null);
+	private final DropboxFileTreeItem root = new DropboxFileTreeItem("", null);
 	
 	// -------------------------------------------------------------
 	
@@ -172,7 +172,7 @@ public class DropBoxViewer extends StackPane {
 	/**
 	 * Constructor.
 	 */
-	public DropBoxViewer() {
+	public DropboxViewer() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DropboxViewer.fxml"));
@@ -236,7 +236,7 @@ public class DropBoxViewer extends StackPane {
 				
 				//Show message to the User
 				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
-						DropBoxViewer.dropBoxImage);
+						DropboxViewer.dropBoxImage);
 				
 				//Save on the database
 				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();
@@ -364,7 +364,7 @@ public class DropBoxViewer extends StackPane {
 		downloadFile.setOnAction(a -> {
 			
 			//Get the selected file
-			DropBoxFileTreeItem selectedItem = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
+			DropboxFileTreeItem selectedItem = (DropboxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
 			
 			if (!selectedItem.isDirectory()) {
 				
@@ -548,7 +548,7 @@ public class DropBoxViewer extends StackPane {
 	 */
 	private void mouseClicked(MouseEvent mouseEvent) {
 		//Get the selected item
-		DropBoxFileTreeItem source = (DropBoxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
+		DropboxFileTreeItem source = (DropboxFileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		
 		// host is not on the game
 		if (source == null || source == root) {
@@ -587,7 +587,7 @@ public class DropBoxViewer extends StackPane {
 	/**
 	 * @return the root of the tree
 	 */
-	public DropBoxFileTreeItem getRoot() {
+	public DropboxFileTreeItem getRoot() {
 		return root;
 	}
 	

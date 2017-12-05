@@ -204,6 +204,11 @@
    -fx-table-cell-border-color: transparent;
 }
 
+.table-view:row-selection:constrained-resize .placeholder .label .text{
+	-fx-fill:white;
+	-fx-font-weight:bold;
+}
+
 .table-view:focused{
     /*-fx-background-color: transparent;*/
 }
@@ -301,6 +306,7 @@
 .table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button{
 	-fx-background-color:black;	
 	-fx-cursor:hand;
+	-fx-padding:50px;
 }
 
 .table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button:hover{
@@ -309,6 +315,7 @@
 
 .table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image{
 	-fx-background-color:firebrick;
+	-fx-padding:5px;
 }
 
 .table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image:hover{

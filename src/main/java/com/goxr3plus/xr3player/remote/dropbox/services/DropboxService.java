@@ -26,8 +26,8 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxFileTreeItem;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFileTreeItem;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 
 public class DropboxService extends Service<Boolean> {
 	
@@ -38,7 +38,7 @@ public class DropboxService extends Service<Boolean> {
 	/**
 	 * DropBoxViewer
 	 */
-	public DropBoxViewer dropBoxViewer;
+	public DropboxViewer dropBoxViewer;
 	
 	// Create Dropbox client
 	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
@@ -58,7 +58,7 @@ public class DropboxService extends Service<Boolean> {
 	 * 
 	 * @param dropBoxViewer
 	 */
-	public DropboxService(DropBoxViewer dropBoxViewer) {
+	public DropboxService(DropboxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		
 		//On Successful exiting
@@ -201,7 +201,7 @@ public class DropboxService extends Service<Boolean> {
 						
 						//Remove from the TreeView one by one
 						list.forEach(item -> {
-							if (delete( ( (DropBoxFileTreeItem) item ).getMetadata().getPathLower()))
+							if (delete( ( (DropboxFileTreeItem) item ).getMetadata().getPathLower()))
 								Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().remove(item));
 							
 						});
@@ -226,7 +226,7 @@ public class DropboxService extends Service<Boolean> {
 							dropBoxViewer.getSearchResultsLabel().setVisible(true);
 							
 							//Add all found items to the TreeView
-							children.forEach((pathLower , metadata) -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+							children.forEach((pathLower , metadata) -> dropBoxViewer.getRoot().getChildren().add(new DropboxFileTreeItem(metadata.getName(), metadata)));
 							
 							//Set Label Visible
 							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(children.size()));
@@ -296,7 +296,7 @@ public class DropboxService extends Service<Boolean> {
 							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder);
 							
 							//Add to TreeView	
-							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropboxFileTreeItem(metadata.getName(), metadata)));
 							
 							if (recursive)
 								listAllFiles(folder, children, recursive, appendToMap);
@@ -309,7 +309,7 @@ public class DropboxService extends Service<Boolean> {
 							//boolean subFileOfCurrentFolder = path.equals(parent);
 							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file));
 							//Add to TreeView	
-							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropBoxFileTreeItem(metadata.getName(), metadata)));
+							Platform.runLater(() -> dropBoxViewer.getRoot().getChildren().add(new DropboxFileTreeItem(metadata.getName(), metadata)));
 						}
 					}
 					

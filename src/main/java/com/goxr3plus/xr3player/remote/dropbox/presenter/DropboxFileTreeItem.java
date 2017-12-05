@@ -13,7 +13,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 /**
  * A custom TreeItem which represents a File
  */
-public class DropBoxFileTreeItem extends TreeItem<String> {
+public class DropboxFileTreeItem extends TreeItem<String> {
 	
 	public static final Image x = InfoTool.getImageFromResourcesFolder("x.png");
 	
@@ -29,7 +29,7 @@ public class DropBoxFileTreeItem extends TreeItem<String> {
 	 *            The absolute path of the file or folder
 	 * 
 	 */
-	public DropBoxFileTreeItem(String value, Metadata metadata) {
+	public DropboxFileTreeItem(String value, Metadata metadata) {
 		super(value);
 		this.metadata = metadata;
 		

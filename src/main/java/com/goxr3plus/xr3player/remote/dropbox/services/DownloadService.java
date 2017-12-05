@@ -18,14 +18,14 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressOutputStream;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropBoxViewer;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 
 public class DownloadService extends Service<Boolean> {
 	
 	/**
 	 * DropBoxViewer
 	 */
-	public DropBoxViewer dropBoxViewer;
+	public DropboxViewer dropBoxViewer;
 	
 	// Create Dropbox client
 	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
@@ -38,7 +38,7 @@ public class DownloadService extends Service<Boolean> {
 	 * 
 	 * @param dropBoxViewer
 	 */
-	public DownloadService(DropBoxViewer dropBoxViewer) {
+	public DownloadService(DropboxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		
 	}
@@ -73,7 +73,7 @@ public class DownloadService extends Service<Boolean> {
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Download completed", "Completed downloading File :\n[ " + dropBoxFileMetadata.getName() + " ]",
-							Duration.millis(3000), NotificationType.SIMPLE, DropBoxViewer.dropBoxImage));
+							Duration.millis(3000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage));
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
