@@ -205,14 +205,18 @@ public class ArtistsModeService extends Service<Void> {
 							
 							//Visibility of details label
 							smartControllerArtistsMode.getDetailsLabel().setVisible(observableList.isEmpty());
+							
 							//Details Label text
 							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0)
 								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
-							else if (observableList.isEmpty())
+							else if (observableList.isEmpty()) {
 								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+							}
 							
 							//Set list view items
 							smartControllerArtistsMode.getListView().setItems(observableList);
+							if (!observableList.isEmpty())
+								smartControllerArtistsMode.getListView().getSelectionModel().select(0);
 						});
 					} else if (operation == Operation.UPDATE_TABLE_VIEW) {
 						//For each item on set
@@ -222,8 +226,14 @@ public class ArtistsModeService extends Service<Void> {
 							//Visibility of details label
 							smartControllerArtistsMode.getDetailsLabel().setVisible(observableList.isEmpty());
 							
-							//Set list view items					
-							smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
+							try {
+								
+								//Set list view items					
+								smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
+								smartControllerArtistsMode.getSmartController().updateLabel();
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
 						});
 					}
 					

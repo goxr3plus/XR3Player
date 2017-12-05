@@ -14,6 +14,8 @@ import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
+import org.fxmisc.richtext.InlineCssTextArea;
+
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTabPane;
 
@@ -164,7 +166,7 @@ public class SmartController extends StackPane {
 	private Node focusOwner;
 	
 	/** The table viewer. */
-	private final MediaTableViewer tableViewer;
+	private final MediaTableViewer normal_mode_mediaTableViewer;
 	
 	/** This list keeps all the Media Items from the TableViewer */
 	private final ObservableList<Media> itemsObservableList = FXCollections.observableArrayList();
@@ -245,7 +247,7 @@ public class SmartController extends StackPane {
 		this.dataBaseTableName = dataBaseTableName;
 		
 		// Initialise
-		tableViewer = new MediaTableViewer(this, Mode.MEDIA);
+		normal_mode_mediaTableViewer = new MediaTableViewer(this, Mode.MEDIA);
 		searchService = new SmartControllerSearcher(this);
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
@@ -273,8 +275,8 @@ public class SmartController extends StackPane {
 	private void initialize() {
 		
 		// ------ tableViewer	
-		centerStackPane.getChildren().add(tableViewer);
-		tableViewer.toBack();
+		centerStackPane.getChildren().add(normal_mode_mediaTableViewer);
+		normal_mode_mediaTableViewer.toBack();
 		
 		// ------ progress indicator
 		indicator.setVisible(true);
@@ -524,8 +526,9 @@ public class SmartController extends StackPane {
 			return;
 		
 		List<Boolean> answers = Main.mediaDeleteWindow.doDeleteQuestion(permanent,
-				tableViewer.getSelectedCount() != 1 ? Integer.toString(tableViewer.getSelectedCount()) : tableViewer.getSelectionModel().getSelectedItem().getFileName(),
-				tableViewer.getSelectedCount(), Main.window);
+				normal_mode_mediaTableViewer.getSelectedCount() != 1 ? Integer.toString(normal_mode_mediaTableViewer.getSelectedCount())
+						: normal_mode_mediaTableViewer.getSelectionModel().getSelectedItem().getFileName(),
+				normal_mode_mediaTableViewer.getSelectedCount(), Main.window);
 		
 		//Check if the user is sure he want's to go on delete action
 		if (!answers.get(0))
@@ -546,7 +549,7 @@ public class SmartController extends StackPane {
 				artistsMode.refreshTableView();
 			} else
 				//Call the delete for each selected item
-				tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
+				normal_mode_mediaTableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
 			
 		} else
 			try (PreparedStatement preparedDelete = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
@@ -561,7 +564,7 @@ public class SmartController extends StackPane {
 					artistsMode.refreshTableView();
 				} else
 					//Call the delete for each selected item
-					tableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
+					normal_mode_mediaTableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
 				
 			} catch (Exception ex) {
 				Main.logger.log(Level.WARNING, "", ex);
@@ -630,21 +633,19 @@ public class SmartController extends StackPane {
 	
 	private static final String style1 = "-fx-font-weight:bold; -fx-font-size:13; -fx-fill:#FF9000;";
 	private static final String style2 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:white;";
+	private static final String style3 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:#00BBFF;";
+	private static final String style4 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:#00E148;";
 	
 	/**
 	 * Updates the label of the smart controller. [[SuppressWarningsSpartan]]
 	 */
 	public void updateLabel() {
-		//System.out.println(this.getName() + " called UpdateLabel()");
-		
-		//Clear the text area
-		tableViewer.getDetailCssTextArea().clear();
 		
 		String total = "Total : ";
 		String _total = InfoTool.getNumberWithDots(totalInDataBase.get());
 		
 		String selected = "Selected : ";
-		String _selected = String.valueOf(tableViewer.getSelectedCount());
+		String _selected = String.valueOf(normal_mode_mediaTableViewer.getSelectedCount());
 		
 		String maxPerPage = "MaxPerPage : ";
 		String _maxPerPage = String.valueOf(maximumPerPage);
@@ -652,30 +653,59 @@ public class SmartController extends StackPane {
 		//Search is Activated?
 		if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
 			
+			//Go
 			String found = "Found ";
 			String _found = String.valueOf(itemsObservableList.size());
 			
+			//Clear the text area
+			normal_mode_mediaTableViewer.getDetailCssTextArea().clear();
+			
 			//Now set the Text
-			appendToDetails(found, _found, true, style1.replace("FF9000", "00BBFF"));
-			appendToDetails(total, _total, true, style1.replace("FF9000", "00E148"));
-			appendToDetails(selected, _selected, true, style1);
-			appendToDetails(maxPerPage, _maxPerPage, false, style1);
+			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), found, _found, true, style3);
+			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), total, _total, true, style4);
+			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), selected, _selected, true, style1);
+			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), maxPerPage, _maxPerPage, false, style1);
 			
 		} else {
 			
-			String showing = "Showing : ";
-			String _showing = InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + " ... "
-					+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size());
-			
-			String maximumPage = "MaximumPage : ";
-			String _maximumPage = InfoTool.getNumberWithDots(getMaximumList());
-			
-			//Now set the Text
-			appendToDetails(total, _total, true, style1.replace("FF9000", "00E148"));
-			appendToDetails(selected, _selected, true, style1);
-			appendToDetails(showing, _showing, true, style1);
-			appendToDetails(maxPerPage, _maxPerPage, true, style1);
-			appendToDetails(maximumPage, _maximumPage, false, style1);
+			//Check if we are on artists mode
+			if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
+				
+				//Keep a reference
+				MediaTableViewer artists_mode_MediaTableViewer = artistsMode.getMediaTableViewer();
+				
+				//Go	
+				_total = InfoTool.getNumberWithDots(artists_mode_MediaTableViewer.getTableView().getItems().size());
+				_selected = String.valueOf(artists_mode_MediaTableViewer.getTableView().getSelectionModel().getSelectedIndices().size());
+				
+				//Clear the text area
+				artists_mode_MediaTableViewer.getDetailCssTextArea().clear();
+				
+				//Now set the Text
+				appendToDetails(artists_mode_MediaTableViewer.getDetailCssTextArea(), total, _total, true, style4);
+				appendToDetails(artists_mode_MediaTableViewer.getDetailCssTextArea(), selected, _selected, false, style1);
+				
+			} else if (modesTabPane.getSelectionModel().getSelectedItem() == normalModeTab) {
+				
+				//Go
+				String showing = "Showing : ";
+				String _showing = InfoTool.getNumberWithDots(maximumPerPage * currentPage.get()) + " ... "
+						+ InfoTool.getNumberWithDots(maximumPerPage * currentPage.get() + itemsObservableList.size());
+				
+				String maximumPage = "MaximumPage : ";
+				String _maximumPage = InfoTool.getNumberWithDots(getMaximumList());
+				
+				//Clear the text area
+				normal_mode_mediaTableViewer.getDetailCssTextArea().clear();
+				
+				//Now set the Text
+				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), total, _total, true, style4);
+				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), selected, _selected, true, style1);
+				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), showing, _showing, true, style1);
+				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), maxPerPage, _maxPerPage, true, style1);
+				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), maximumPage, _maximumPage, false, style1);
+				
+			}
 			
 		}
 		
@@ -689,13 +719,13 @@ public class SmartController extends StackPane {
 	 * @param text2
 	 * @param appendComma
 	 */
-	private void appendToDetails(String text1 , String text2 , boolean appendComma , String style1) {
-		tableViewer.getDetailCssTextArea().appendText(text1);
-		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text1.length(), tableViewer.getDetailCssTextArea().getLength() - 1, style1);
+	private void appendToDetails(InlineCssTextArea inlineCssTextArea , String text1 , String text2 , boolean appendComma , String style1) {
 		
-		tableViewer.getDetailCssTextArea().appendText(text2 + " " + ( !appendComma ? "" : ", " ));
-		tableViewer.getDetailCssTextArea().setStyle(tableViewer.getDetailCssTextArea().getLength() - text2.length() - ( appendComma ? 3 : 1 ),
-				tableViewer.getDetailCssTextArea().getLength() - 1, style2);
+		inlineCssTextArea.appendText(text1);
+		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text1.length(), inlineCssTextArea.getLength() - 1, style1);
+		
+		inlineCssTextArea.appendText(text2 + " " + ( !appendComma ? "" : ", " ));
+		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text2.length() - ( appendComma ? 3 : 1 ), inlineCssTextArea.getLength() - 1, style2);
 	}
 	
 	/**
@@ -791,9 +821,9 @@ public class SmartController extends StackPane {
 		// update the label
 		updateLabel();
 		// refresh the tableViewer
-		tableViewer.getTableView().refresh();
-		if (!tableViewer.getTableView().getSortOrder().isEmpty())
-			tableViewer.getTableView().sort();
+		normal_mode_mediaTableViewer.getTableView().refresh();
+		if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
+			normal_mode_mediaTableViewer.getTableView().sort();
 		
 	}
 	
@@ -1026,7 +1056,7 @@ public class SmartController extends StackPane {
 	 * @return the selected items
 	 */
 	public ObservableList<Media> getSelectedItems() {
-		return tableViewer.getSelectionModel().getSelectedItems();
+		return normal_mode_mediaTableViewer.getSelectionModel().getSelectedItems();
 	}
 	
 	/**
@@ -1169,7 +1199,7 @@ public class SmartController extends StackPane {
 	 * @return the tableViewer
 	 */
 	public MediaTableViewer getTableViewer() {
-		return tableViewer;
+		return normal_mode_mediaTableViewer;
 	}
 	
 	/**
