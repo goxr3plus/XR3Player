@@ -115,6 +115,8 @@ public class SmartControllerArtistsMode extends StackPane {
 				super.updateItem(item, empty);
 				if (empty) {
 					setText(null);
+					setGraphic(null);
+					setTooltip(null);
 				} else {
 					//String text = InfoTool.getFileName(item); // get text from item
 					setGraphic(new ImageView(artistImage));

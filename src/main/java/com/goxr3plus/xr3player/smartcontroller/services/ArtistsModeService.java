@@ -203,14 +203,13 @@ public class ArtistsModeService extends Service<Void> {
 						ObservableList<String> observableList = set.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
 						Platform.runLater(() -> {
 							
-							//Visibility of details label
-							smartControllerArtistsMode.getDetailsLabel().setVisible(observableList.isEmpty());
-							
 							//Details Label text
-							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0)
+							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
 								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
-							else if (observableList.isEmpty()) {
+								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+							} else if (observableList.isEmpty()) {
 								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
 							}
 							
 							//Set list view items
@@ -223,17 +222,28 @@ public class ArtistsModeService extends Service<Void> {
 						ObservableList<Media> observableList = matchingMediaList.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
 						Platform.runLater(() -> {
 							
-							//Visibility of details label
-							smartControllerArtistsMode.getDetailsLabel().setVisible(observableList.isEmpty());
+							//Details Label text
+							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
+								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
+								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
+								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+							}
 							
-							try {
+							//Check if any songs are containing this artist
+							if (!observableList.isEmpty()) {
 								
 								//Set list view items					
 								smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
 								smartControllerArtistsMode.getSmartController().updateLabel();
-							} catch (Exception ex) {
-								ex.printStackTrace();
+								
+							} else {
+								
+								//Remove the artist from the List
+								smartControllerArtistsMode.getListView().getItems().remove(artistName);
 							}
+							
 						});
 					}
 					
