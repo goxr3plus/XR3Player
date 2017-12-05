@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
@@ -127,7 +128,7 @@ public class DropboxFilesTableViewer extends StackPane {
 		
 		// QuickSearchTextField
 		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
-		quickSearchTextField.textProperty().bind(searchWord);
+		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(searchWord));
 		
 		//--------------------------Other-----------------------------------
 		String center = "-fx-alignment:CENTER-LEFT;";

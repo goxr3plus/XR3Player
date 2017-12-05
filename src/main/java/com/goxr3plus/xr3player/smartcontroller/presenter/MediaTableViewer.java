@@ -9,6 +9,7 @@ import org.fxmisc.easybind.EasyBind;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -290,7 +291,6 @@ public class MediaTableViewer extends StackPane {
 		//--Row Factory
 		tableView.setRowFactory(rf -> {
 			TableRow<Media> row = new TableRow<>();
-						
 			
 			// use EasyBind to access the valueProperty of the itemProperty
 			// of the cell:
@@ -512,7 +512,7 @@ public class MediaTableViewer extends StackPane {
 		
 		// QuickSearchTextField
 		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
-		quickSearchTextField.textProperty().bind(searchWord);
+		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(searchWord));
 		
 		// ------ centerStackPane
 		setOnKeyReleased(key -> {

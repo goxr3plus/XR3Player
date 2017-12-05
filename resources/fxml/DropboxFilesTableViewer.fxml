@@ -63,7 +63,7 @@
             <HBox BorderPane.alignment="CENTER">
                <children>
                   <InlineCssTextArea fx:id="detailCssTextArea" editable="false" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0" styleClass="inline-css-text-area" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="quickSearchTextField" styleClass="applicationSettingsLabel" text="Search" />
+                  <Label fx:id="quickSearchTextField" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Search" />
                </children>
             </HBox>
          </bottom>
