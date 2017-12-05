@@ -564,7 +564,7 @@ public class MediaTableViewer extends StackPane {
 				if (!searchWord.get().isEmpty()) {
 					boolean[] found = { false };
 					//Find the first matching item
-					smartController.getItemsObservableList().forEach(media -> {
+					tableView.getItems().forEach(media -> {
 						if (media.getTitle().toLowerCase().contains(searchWord.get()) && !found[0]) {
 							getSelectionModel().clearSelection();
 							getSelectionModel().select(media);
