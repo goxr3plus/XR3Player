@@ -324,7 +324,8 @@ public class User extends StackPane {
 				loginMode.deleteUser(this);
 			else if (code == KeyCode.E)
 				exportImage();
-			
+		} else if (key.getCode() == KeyCode.ENTER) {
+			Main.startAppWithUser(this);
 		}
 	}
 	

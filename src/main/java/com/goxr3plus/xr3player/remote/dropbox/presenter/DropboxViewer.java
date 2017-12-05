@@ -166,6 +166,8 @@ public class DropboxViewer extends StackPane {
 	
 	private final DropboxFilesTableViewer dropboxFilesTableViewer;
 	
+	private final DropboxFileContextMenu fileContextMenu = new DropboxFileContextMenu();
+	
 	/**
 	 * Constructor.
 	 */
@@ -670,6 +672,13 @@ public class DropboxViewer extends StackPane {
 	 */
 	public DropboxFilesTableViewer getDropboxFilesTableViewer() {
 		return dropboxFilesTableViewer;
+	}
+
+	/**
+	 * @return the fileContextMenu
+	 */
+	public DropboxFileContextMenu getFileContextMenu() {
+		return fileContextMenu;
 	}
 	
 }

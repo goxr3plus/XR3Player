@@ -844,7 +844,8 @@ public class Library extends StackPane {
 	 * Delete the library.
 	 */
 	public void deleteLibrary(Node owner) {
-		if (controller.isFree(true) && ActionTool.doQuestion("Delete Library","Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner, Main.window)) {
+		if (controller.isFree(true)
+				&& ActionTool.doQuestion("Delete Library", "Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner, Main.window)) {
 			
 			try {
 				
@@ -1253,8 +1254,8 @@ public class Library extends StackPane {
 				Main.libraryMode.libraryInformation.showWindow(this);
 			else if (code == KeyCode.E)
 				this.exportImage();
-			
-		}
+		} else if (key.getCode() == KeyCode.ENTER)
+			openLibrary(!isOpened(), false);
 	}
 	
 	/*------------------------------------------------------------------------

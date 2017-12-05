@@ -278,7 +278,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
-			public void listAllFiles(String path , ObservableList<DropboxFile> children , boolean recursive , boolean appendToMap) throws ListFolderErrorException , DbxException {
+			public void listAllFiles(String path , ObservableList<DropboxFile> children , boolean recursive , boolean appendToMap) throws DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
@@ -331,7 +331,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
-			public void search(String path , ObservableList<DropboxFile> children) throws ListFolderErrorException , DbxException {
+			public void search(String path , ObservableList<DropboxFile> children) throws DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
