@@ -34,7 +34,7 @@
 
 | Dropbox Access | Amazing Visualizations
 |:-:|:-:|
-| [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) | [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) |
+| ![dropbox support](https://user-images.githubusercontent.com/20374208/33642286-f244c526-da41-11e7-95ff-45f8af06b857.png) | [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) |
 
 
 
