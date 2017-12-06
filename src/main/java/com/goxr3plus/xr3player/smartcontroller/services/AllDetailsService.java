@@ -43,18 +43,24 @@ public class AllDetailsService extends Service<Boolean> {
 	 * @param observableList
 	 */
 	public void restartService(ObservableList<Media> observableList) {
-		//Check if it is null
-		if (observableList != null) {
-			this.observableList = observableList;
-			
-			restart();
-		}
+		//Check if null
+		if (observableList == null)
+			return;
+		
+		//Pass the instance
+		this.observableList = observableList;
+		
+		//Restart the Service
+		restart();
 	}
 	
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			
+			/**
+			 * [[SuppressWarningsSpartan]]
+			 */
 			@Override
 			protected Boolean call() throws Exception {
 				
@@ -79,7 +85,7 @@ public class AllDetailsService extends Service<Boolean> {
 						String year = "";
 						String key = "";
 						
-						//if (file.exists() && localDuration != 0 && media.length() != 0 && "mp3".equals(fileType.get())) {
+						//if (file.exists() && localDuration != 0 && media.length() != 0 && "mp3".equals(fileType.get()))
 						
 						//--------------------MP3--------------------------------
 						if ("mp3".equals(media.getFileType())) {
@@ -101,39 +107,30 @@ public class AllDetailsService extends Service<Boolean> {
 								
 								//-- Artist
 								artist = tag.getFirst(ID3v24FieldKey.ARTIST).trim();
-								media.artistProperty().set(artist.isEmpty() ? "Unknown" : artist);
 								
 								//-- Mood
 								mood = tag.getFirst(ID3v24FieldKey.MOOD).trim();
-								media.moodProperty().set(mood.isEmpty() ? "Unknown" : mood);
 								
 								//-- Album
 								album = tag.getFirst(ID3v24FieldKey.ALBUM).trim();
-								media.albumProperty().set(album.isEmpty() ? "Unknown" : album);
 								
 								//-- Composer
 								composer = tag.getFirst(ID3v24FieldKey.COMPOSER).trim();
-								media.composerProperty().set(composer.isEmpty() ? "Unknown" : composer);
 								
 								//-- Comment
 								comment = tag.getFirst(ID3v24FieldKey.COMMENT).trim();
-								media.commentProperty().set(comment.isEmpty() ? "Unknown" : comment);
 								
 								//-- Genre
 								genre = tag.getFirst(ID3v24FieldKey.GENRE).trim();
-								media.genreProperty().set(genre.isEmpty() ? "Unknown" : genre);
 								
 								//-- Tempo
 								tempo = tag.getFirst(ID3v24FieldKey.TEMPO).trim();
-								media.tempoProperty().set(tempo.isEmpty() ? "Unknown" : tempo);
 								
 								//-- Key
 								key = tag.getFirst(ID3v24FieldKey.KEY).trim();
-								media.keyProperty().set(key.isEmpty() ? "Unknown" : key);
 								
 								//-- Year
 								year = tag.getFirst(ID3v24FieldKey.YEAR).trim();
-								media.yearProperty().set(year.isEmpty() ? "Unknown" : year);
 								
 							}
 							
