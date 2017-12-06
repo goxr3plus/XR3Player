@@ -210,6 +210,8 @@ public class ArtistsModeService extends Service<Void> {
 							} else if (observableList.isEmpty()) {
 								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
 								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+							} else {
+								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
 							}
 							
 							//Set list view items
@@ -229,6 +231,8 @@ public class ArtistsModeService extends Service<Void> {
 							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
 								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
 								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+							} else {
+								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
 							}
 							
 							//Check if any songs are containing this artist
