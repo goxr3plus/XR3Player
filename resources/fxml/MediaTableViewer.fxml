@@ -29,26 +29,33 @@
                   </TableColumn>
                   <TableColumn fx:id="getInfoBuy" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Download / Buy">
                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" visible="false">
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
                               <Image url="@../image/Download%20From%20Cloud-24.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type" />
+                  <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
+                           <image>
+                              <Image url="@../image/flask.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
                   <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Title">
                      <graphic>
-                        <ImageView visible="false">
+                        <ImageView>
                            <image>
-                              <Image url="@../image/Audio%20Wave-20.png" />
+                              <Image url="@../image/eye2.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion" visible="false">
+                  <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion">
                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" visible="false">
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
                               <Image url="@../image/likeFaded.png" />
                            </image>
