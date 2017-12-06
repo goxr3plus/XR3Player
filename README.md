@@ -32,16 +32,16 @@
 |:-:|:-:|
 | ![First](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png) | ![Sec](https://user-images.githubusercontent.com/20374208/32561528-18323d74-c4b5-11e7-9552-f7aeba4f9728.jpg) |
 
-| Dropbox Access | Crazy Visualizations
+| Dropbox Access | Amazing Visualizations
 |:-:|:-:|
-| ![dropbox support](https://user-images.githubusercontent.com/20374208/33642286-f244c526-da41-11e7-95ff-45f8af06b857.png) | [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) |
+| [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) | [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) |
 
 
 
 
 ### Videos
 
-| Full Tutorial | Update 90 Demostration |
+| Full Tutorial | Update 92 Demostration |
 |:-:|:-:|
 | [![First](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak)  | [![Second](http://img.youtube.com/vi/_vDdcAfk4g4/0.jpg)](https://www.youtube.com/watch?v=_vDdcAfk4g4) |
 
