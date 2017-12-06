@@ -41,6 +41,9 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
  */
 public abstract class Media {
 	
+	/** The media type. */
+	private SimpleObjectProperty<ImageView> artwork;
+	
 	/** The title. */
 	private SimpleStringProperty title;
 	
@@ -97,7 +100,7 @@ public abstract class Media {
 	private SimpleStringProperty tempo;
 	
 	private SimpleStringProperty key;
-		
+	
 	private SimpleStringProperty year;
 	
 	/** The drive. */
@@ -156,6 +159,8 @@ public abstract class Media {
 	
 	public static final Image INFOBUY_IMAGE = InfoTool.getImageFromResourcesFolder("Download From Cloud-24.png");
 	
+	public static final Image NO_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
+	
 	/** The genre. */
 	private final Genre smartControllerGenre;
 	
@@ -179,6 +184,10 @@ public abstract class Media {
 		
 		// ....initialize
 		mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
+		ImageView artworkImageView = new ImageView();
+		artworkImageView.setFitWidth(30);
+		artworkImageView.setFitHeight(30);
+		artwork = new SimpleObjectProperty<>(artworkImageView);
 		playStatus = new SimpleIntegerProperty(-2);
 		
 		//getInfoBuy
@@ -332,6 +341,10 @@ public abstract class Media {
 	 */
 	public SimpleObjectProperty<ImageView> mediaTypeProperty() {
 		return mediaType;
+	}
+	
+	public SimpleObjectProperty<ImageView> artworkProperty() {
+		return artwork;
 	}
 	
 	/**
@@ -1193,4 +1206,6 @@ public abstract class Media {
 	 * @return the album image
 	 */
 	public abstract Image getAlbumImage();
+	
+	public abstract Image getAlbumImageFit(int width , int height);
 }

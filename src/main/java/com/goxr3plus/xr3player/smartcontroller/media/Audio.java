@@ -150,6 +150,7 @@ public class Audio extends Media {
 	 *            the height
 	 * @return the album image fit
 	 */
+	@Override
 	public Image getAlbumImageFit(int width , int height) {
 		return !"mp3".equals(getFileType()) || !new File(getFilePath()).exists() ? null : InfoTool.getAudioAlbumImage(getFilePath(), width, height);
 	}

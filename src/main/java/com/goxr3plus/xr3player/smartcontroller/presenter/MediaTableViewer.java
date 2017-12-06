@@ -59,6 +59,9 @@ public class MediaTableViewer extends StackPane {
 	@FXML
 	private TableColumn<Media,Integer> number;
 	
+	@FXML
+	private TableColumn<Media,ImageView> artwork;
+	
 	/** The has been played. */
 	@FXML
 	private TableColumn<Media,Integer> playStatus;
@@ -439,6 +442,18 @@ public class MediaTableViewer extends StackPane {
 			if (imageView1.getImage() == Media.SONG_MISSING_IMAGE && imageView2.getImage() != Media.SONG_MISSING_IMAGE)
 				return 1;
 			else if (imageView1.getImage() != Media.SONG_MISSING_IMAGE && imageView2.getImage() == Media.SONG_MISSING_IMAGE)
+				return -1;
+			else
+				return 0;
+		});
+		
+			
+		//artwork
+		artwork.setCellValueFactory(new PropertyValueFactory<>("artwork"));
+		artwork.setComparator((imageView1 , imageView2) -> {
+			if (imageView1.getImage() == Media.NO_ARTWORK_IMAGE && imageView2.getImage() != Media.NO_ARTWORK_IMAGE)
+				return 1;
+			else if (imageView1.getImage() != Media.NO_ARTWORK_IMAGE && imageView2.getImage() == Media.NO_ARTWORK_IMAGE)
 				return -1;
 			else
 				return 0;

@@ -11,6 +11,8 @@ import org.jaudiotagger.tag.id3.ID3v24Tag;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
 /**
@@ -68,6 +70,9 @@ public class AllDetailsService extends Service<Boolean> {
 				
 				//Try to do it
 				observableList.stream().forEach(media -> {
+					if (this.isCancelled())
+						return;
+					
 					File file = new File(media.getFilePath());
 					
 					try {
@@ -198,6 +203,24 @@ public class AllDetailsService extends Service<Boolean> {
 						e.printStackTrace();
 						success[0] = false;
 					}
+				});
+				
+				//Try to do it for art work this time
+				observableList.stream().forEach(media -> {
+					if (this.isCancelled())
+						return;
+					
+					try {
+						Image image = media.getAlbumImage();
+						//Check if null
+						if (image == null) {
+							image = Media.NO_ARTWORK_IMAGE;
+						}
+						media.artworkProperty().get().setImage(image);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					
 				});
 				
 				return success[0];
