@@ -6,9 +6,9 @@
 > Download it visiting [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 
 
-
-[![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
+[![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
+[![Coverage Status](https://coveralls.io/repos/github/goxr3plus/XR3Player/badge.svg?branch=master)](https://coveralls.io/github/goxr3plus/XR3Player?branch=master)
 [![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GitHub contributors][contributors-image]][contributors-url]
 [![HitCount](http://hits.dwyl.io/goxr3plus/xr3player.svg)](http://hits.dwyl.io/goxr3plus/xr3player)
