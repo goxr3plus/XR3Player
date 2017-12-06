@@ -113,6 +113,25 @@
 					<resultFile>${project.build.directory}/duplicate-finder-result.xml</resultFile>
 				</configuration>
 			</plugin>
+			
+			<!-- code coverage -->
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>4.3.0</version>
+			</plugin>
+
+			<!-- needed by coveralls -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<format>xml</format>
+					<maxmem>256m</maxmem>
+					<check />
+				</configuration>
+			</plugin>
 
 		</plugins>
 	</build>
