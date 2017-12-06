@@ -159,7 +159,7 @@ public class AllDetailsService extends Service<Boolean> {
 						}
 						
 						//----------------------Now fill all the Properties------------------------------
-						String emptyWord = "";
+						String emptyWord = "-";
 						
 						//-- BitRate 			
 						media.bitRateProperty().set(bitrate);
