@@ -10,14 +10,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="868.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="868.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTextField fx:id="searchField" focusColor="#ff0f53" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" promptText="search..." style="-fx-text-fill: white;" unFocusColor="#ff3535" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXTextField>
-      <JFXToggleButton fx:id="speechRecognitionToggle" focusTraversable="false" layoutX="149.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+      <JFXToggleButton fx:id="speechRecognitionToggle" disable="true" focusTraversable="false" layoutX="149.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="292.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />

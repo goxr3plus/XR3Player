@@ -49,7 +49,7 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin></TreeView>
-            <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." styleClass="tree-view-search-box">
+            <TextField fx:id="searchField" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" promptText="search..." styleClass="tree-view-search-box">
                <tooltip>
                   <Tooltip text="Search everything on your Dropbox Account" />
                </tooltip>
