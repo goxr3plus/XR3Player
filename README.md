@@ -22,6 +22,13 @@
 [license-image1]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image2]: https://img.shields.io/github/license/tldr-pages/tldr.svg
 
+### Videos
+
+| Full Tutorial | Update 92 Demostration |
+|:-:|:-:|
+| [![First](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak)  | [![Second](http://img.youtube.com/vi/_vDdcAfk4g4/0.jpg)](https://www.youtube.com/watch?v=_vDdcAfk4g4) |
+
+
 ### Screenshots
 
 | Login Screen | Main Mode 
@@ -35,15 +42,6 @@
 | Dropbox Access | Amazing Visualizations
 |:-:|:-:|
 | ![dropbox support](https://user-images.githubusercontent.com/20374208/33642286-f244c526-da41-11e7-95ff-45f8af06b857.png) | [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) |
-
-
-
-
-### Videos
-
-| Full Tutorial | Update 92 Demostration |
-|:-:|:-:|
-| [![First](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak)  | [![Second](http://img.youtube.com/vi/_vDdcAfk4g4/0.jpg)](https://www.youtube.com/watch?v=_vDdcAfk4g4) |
 
 
 -------------------------------------------------------------------------------------
