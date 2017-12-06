@@ -54,6 +54,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerArtistsMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.AllDetailsService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
@@ -175,7 +176,7 @@ public class SmartController extends StackPane {
 	private IntegerProperty currentPage = new SimpleIntegerProperty(0);
 	
 	/** Maximum items allowed per page. */
-	public static int DEFAULT_MAXIMUM_PER_PAGE = 50;
+	public static final int DEFAULT_MAXIMUM_PER_PAGE = 50;
 	private int maximumPerPage = DEFAULT_MAXIMUM_PER_PAGE;
 	
 	// ---------Services--------------------------
@@ -191,6 +192,9 @@ public class SmartController extends StackPane {
 	
 	/** CopyOrMoveService */
 	private final FilesExportService copyOrMoveService;
+	
+	/** AllDetailsService */
+	private final AllDetailsService allDetailsService;
 	
 	// ---------Security---------------------------
 	
@@ -252,6 +256,7 @@ public class SmartController extends StackPane {
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
 		copyOrMoveService = new FilesExportService(this);
+		allDetailsService = new AllDetailsService(this.itemsObservableList);
 		
 		// --------------------------------FXMLLoader---------------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartController.fxml"));
@@ -1271,6 +1276,13 @@ public class SmartController extends StackPane {
 	 */
 	public JFXTabPane getModesTabPane() {
 		return modesTabPane;
+	}
+
+	/**
+	 * @return the allDetailsService
+	 */
+	public AllDetailsService getAllDetailsService() {
+		return allDetailsService;
 	}
 	
 	/*-----------------------------------------------------------------------

@@ -121,6 +121,9 @@ public class LoadService extends Service<Void> {
 			ex.printStackTrace();
 		}
 		
+		//Call the all detailsService
+		smartController.getAllDetailsService().restart();
+		
 	}
 	
 	@Override

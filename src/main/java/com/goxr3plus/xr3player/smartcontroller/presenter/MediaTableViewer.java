@@ -105,45 +105,32 @@ public class MediaTableViewer extends StackPane {
 	@FXML
 	private TableColumn<Media,String> dateFileModified;
 	
-	/** It is a remix? */
 	@FXML
-	private TableColumn<Media,?> remix;
+	private TableColumn<Media,String> artist;
 	
-	/** The album. */
 	@FXML
-	private TableColumn<Media,?> album;
+	private TableColumn<Media,String> mood;
 	
-	/** The composer. */
 	@FXML
-	private TableColumn<Media,?> composer;
+	private TableColumn<Media,String> album;
 	
-	/** The comment. */
 	@FXML
-	private TableColumn<Media,?> comment;
+	private TableColumn<Media,String> composer;
+	
+	@FXML
+	private TableColumn<Media,String> comment;
 	
 	/** The genre. */
 	@FXML
-	private TableColumn<Media,?> genre;
+	private TableColumn<Media,String> genre;
 	
 	/** The bpm. */
 	@FXML
 	private TableColumn<Media,Integer> bpm;
 	
-	/** The key. */
-	@FXML
-	private TableColumn<Media,?> key;
-	
-	/** The harmonic. */
-	@FXML
-	private TableColumn<Media,?> harmonic;
-	
 	/** The bit rate. */
 	@FXML
 	private TableColumn<Media,Integer> bitRate;
-	
-	/** The year. */
-	@FXML
-	private TableColumn<Media,?> year;
 	
 	/** The drive. */
 	@FXML
@@ -165,13 +152,19 @@ public class MediaTableViewer extends StackPane {
 	@FXML
 	private TableColumn<Media,String> fileSize;
 	
-	/** The album art. */
-	@FXML
-	private TableColumn<Media,?> albumArt;
-	
 	/** The singer. */
 	@FXML
-	private TableColumn<Media,?> singer;
+	private TableColumn<Media,String> tempo;
+	
+	/** The year. */
+	@FXML
+	private TableColumn<Media,String> year;
+	
+	/** The key. */
+	@FXML
+	private TableColumn<Media,String> key;
+	
+	//---------------------------------------------
 	
 	@FXML
 	private InlineCssTextArea detailCssTextArea;
@@ -501,11 +494,38 @@ public class MediaTableViewer extends StackPane {
 		// fileType
 		fileSize.setCellValueFactory(new PropertyValueFactory<>("fileSize"));
 		
+		//artist
+		artist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+		
+		//mood
+		mood.setCellValueFactory(new PropertyValueFactory<>("mood"));
+		
+		//album
+		album.setCellValueFactory(new PropertyValueFactory<>("album"));
+		
+		//composer
+		composer.setCellValueFactory(new PropertyValueFactory<>("composer"));
+		
+		//comment
+		comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
+		
+		//genre
+		genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+		
 		//bitRate
 		bitRate.setCellValueFactory(new PropertyValueFactory<>("bitRate"));
 		
 		//bpm
 		bpm.setCellValueFactory(new PropertyValueFactory<>("bpm"));
+		
+		//tempo
+		tempo.setCellValueFactory(new PropertyValueFactory<>("tempo"));
+		
+		//key
+		key.setCellValueFactory(new PropertyValueFactory<>("key"));
+		
+		//genre
+		year.setCellValueFactory(new PropertyValueFactory<>("year"));
 		
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> searchWord.set(""));

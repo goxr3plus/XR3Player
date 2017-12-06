@@ -243,9 +243,9 @@ public class MediaContextMenu extends ContextMenu {
 		
 		// Don't waste resources
 		if (previousGenre != genre)
-			if (media.getGenre() == Genre.LIBRARYMEDIA)
+			if (media.getSmartController() == Genre.LIBRARYMEDIA)
 				getItems().forEach(item -> item.setVisible(true));
-			else if (media.getGenre() == Genre.SEARCHWINDOW)
+			else if (media.getSmartController() == Genre.SEARCHWINDOW)
 				removeMedia.setVisible(false);
 			
 		//Determine the image

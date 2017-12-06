@@ -55,6 +55,8 @@ public class ArtistsModeService extends Service<Void> {
 	 */
 	private int totalProgress;
 	
+	private final AllDetailsService allDetailsService;
+	
 	/**
 	 * Constructor
 	 * 
@@ -62,7 +64,7 @@ public class ArtistsModeService extends Service<Void> {
 	 */
 	public ArtistsModeService(SmartControllerArtistsMode smartControllerArtistsMode) {
 		this.smartControllerArtistsMode = smartControllerArtistsMode;
-		
+		this.allDetailsService = new AllDetailsService(null);
 	}
 	
 	/**
@@ -242,6 +244,8 @@ public class ArtistsModeService extends Service<Void> {
 								smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
 								smartControllerArtistsMode.getSmartController().updateLabel();
 								
+								//Populate Media Information
+								allDetailsService.restartService(smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems());
 							} else {
 								
 								//Remove the artist from the List

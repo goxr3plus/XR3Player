@@ -11,10 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import org.jaudiotagger.audio.mp3.MP3File;
-import org.jaudiotagger.tag.id3.ID3v24FieldKey;
-import org.jaudiotagger.tag.id3.ID3v24Tag;
-
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -86,6 +82,24 @@ public abstract class Media {
 	/** The date that the File was last modified. */
 	private SimpleStringProperty dateFileModified;
 	
+	private SimpleStringProperty artist;
+	
+	private SimpleStringProperty mood;
+	
+	private SimpleStringProperty album;
+	
+	private SimpleStringProperty composer;
+	
+	private SimpleStringProperty comment;
+	
+	private SimpleStringProperty genre;
+	
+	private SimpleStringProperty tempo;
+	
+	private SimpleStringProperty key;
+		
+	private SimpleStringProperty year;
+	
 	/** The drive. */
 	private SimpleStringProperty drive;
 	
@@ -143,7 +157,7 @@ public abstract class Media {
 	public static final Image INFOBUY_IMAGE = InfoTool.getImageFromResourcesFolder("Download From Cloud-24.png");
 	
 	/** The genre. */
-	private Genre genre;
+	private final Genre smartControllerGenre;
 	
 	/**
 	 * Constructor.
@@ -158,10 +172,10 @@ public abstract class Media {
 	 *            The date the Media was imported <b> if null given then the imported time will be the current date </b>
 	 * @param hourImported
 	 *            The hour the Media was imported <b> if null given then the imported hour will be the current time </b>
-	 * @param genre
-	 *            The genre of the Media <b> see the Genre class for more </b>
+	 * @param smartControllerGenre
+	 *            The smartControllerGenre of the Media <b> see the Genre class for more </b>
 	 */
-	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre, int number) {
+	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre smartControllerGenre, int number) {
 		
 		// ....initialize
 		mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
@@ -211,6 +225,15 @@ public abstract class Media {
 		this.fileName = new SimpleStringProperty(InfoTool.getFileName(path));
 		this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
+		this.artist = new SimpleStringProperty();
+		this.mood = new SimpleStringProperty();
+		this.album = new SimpleStringProperty();
+		this.composer = new SimpleStringProperty();
+		this.comment = new SimpleStringProperty();
+		this.genre = new SimpleStringProperty();
+		this.tempo = new SimpleStringProperty();
+		this.key = new SimpleStringProperty();
+		this.year = new SimpleStringProperty();
 		this.bitRate = new SimpleIntegerProperty();
 		this.bpm = new SimpleIntegerProperty();
 		this.number = new SimpleIntegerProperty(number);
@@ -246,7 +269,7 @@ public abstract class Media {
 		fileExists.addListener((observable , oldValue , newValue) -> fixTheInformations(true));
 		
 		// Media Genre
-		this.genre = genre;
+		this.smartControllerGenre = smartControllerGenre;
 		
 		// Find the correct image
 		fixTheInformations(true);
@@ -263,7 +286,7 @@ public abstract class Media {
 			return;
 		
 		//Keep a reference of the File
-		File file = new File(filePath.get());
+		//File file = new File(filePath.get())
 		
 		//System.out.println("Doing Update ->" + this.fileName.get())
 		
@@ -287,35 +310,6 @@ public abstract class Media {
 		
 		//DurationEdited
 		int localDuration = this.duration.get();
-		
-		//-- BitRate etc
-		try {
-			//exists ? + mp3 ?
-			if (fileExists.get() && localDuration != 0 && file.length() != 0 && "mp3".equals(fileType.get())) {
-				MP3File mp3File = new MP3File(file);
-				
-				bitRate.set((int) mp3File.getMP3AudioHeader().getBitRateAsNumber());
-				
-				String bpmTag = "";
-				
-				if (mp3File.hasID3v2Tag()) {
-					ID3v24Tag tag = mp3File.getID3v2TagAsv24();
-					
-					bpmTag = tag.getFirst(ID3v24FieldKey.BPM);
-					
-					if (!bpmTag.equals("")) {
-						bpm.set((int) Double.parseDouble(bpmTag));
-					} else {
-						bpm.set(-1);
-					}
-				}
-			} else
-				bitRate.set(-1);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		durationEdited.set(!fileExists.get() ? "file missing" : localDuration == -1 ? "corrupted" : localDuration == 0 ? "error" : InfoTool.getTimeEditedOnHours(localDuration));
 		
 		//Image
@@ -444,8 +438,44 @@ public abstract class Media {
 	 *
 	 * @return The Date File last modified property.
 	 */
-	public SimpleStringProperty dateFileModified() {
+	public SimpleStringProperty dateFileModifiedProperty() {
 		return dateFileModified;
+	}
+	
+	public SimpleStringProperty artistProperty() {
+		return artist;
+	}
+	
+	public SimpleStringProperty moodProperty() {
+		return mood;
+	}
+	
+	public SimpleStringProperty albumProperty() {
+		return album;
+	}
+	
+	public SimpleStringProperty composerProperty() {
+		return composer;
+	}
+	
+	public SimpleStringProperty commentProperty() {
+		return comment;
+	}
+	
+	public SimpleStringProperty genreProperty() {
+		return genre;
+	}
+	
+	public SimpleStringProperty tempoProperty() {
+		return tempo;
+	}
+	
+	public SimpleStringProperty keyProperty() {
+		return key;
+	}
+	
+	public SimpleStringProperty yearProperty() {
+		return year;
 	}
 	
 	/**
@@ -880,7 +910,7 @@ public abstract class Media {
 				smartController.artistsMode.getMediaTableViewer().getTableView().getItems().forEach(media -> {
 					if (media.getFilePath().equals(Media.this.getFilePath()))
 						media.starsProperty().get().setText(String.valueOf(getStars()));
-				});			
+				});
 			}
 			
 		} catch (Exception ex) {
@@ -1052,15 +1082,6 @@ public abstract class Media {
 	}
 	
 	/**
-	 * Gets the genre.
-	 *
-	 * @return the genre
-	 */
-	public Genre getGenre() {
-		return genre;
-	}
-	
-	/**
 	 * @return the bitRate
 	 */
 	public SimpleIntegerProperty getBitRate() {
@@ -1079,6 +1100,15 @@ public abstract class Media {
 	 */
 	public SimpleIntegerProperty getNumber() {
 		return number;
+	}
+	
+	/**
+	 * Gets smartControllerGenre
+	 *
+	 * @return The genre of smartControllerGenre Media
+	 */
+	public Genre getSmartController() {
+		return smartControllerGenre;
 	}
 	
 	// --------SETTERS------------------------------------------------------------------------------------
