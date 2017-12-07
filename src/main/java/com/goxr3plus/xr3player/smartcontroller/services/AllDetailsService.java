@@ -74,6 +74,8 @@ public class AllDetailsService extends Service<Boolean> {
 						return;
 					
 					File file = new File(media.getFilePath());
+					if (!file.exists())
+						return;
 					
 					try {
 						
@@ -209,6 +211,11 @@ public class AllDetailsService extends Service<Boolean> {
 				observableList.stream().forEach(media -> {
 					if (this.isCancelled())
 						return;
+					
+					File file = new File(media.getFilePath());
+					if (!file.exists())
+						return;
+					
 					
 					try {
 						Image image = media.getAlbumImage();

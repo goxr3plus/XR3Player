@@ -31,6 +31,7 @@ import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
@@ -267,9 +268,17 @@ public class OpenedLibrariesViewer extends StackPane {
 		imageView.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
 		imageView.managedProperty().bind(imageView.visibleProperty());
 		
+		//LibraryBackground 
+		ImageView libraryBackground = new ImageView();
+		libraryBackground.setFitWidth(24);
+		libraryBackground.setFitHeight(24);
+		libraryBackground.imageProperty().bind(library.getImageView().imageProperty());
+		//libraryBackrgound.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
+		//libraryBackrgound.managedProperty().bind(imageView.visibleProperty());
+		
 		// HBOX
 		HBox hBox = new HBox();
-		hBox.getChildren().addAll(imageView, stack, marquee);
+		hBox.getChildren().addAll(imageView, libraryBackground, stack, marquee);
 		
 		// --Drag Over
 		hBox.setOnDragOver(dragOver -> {
