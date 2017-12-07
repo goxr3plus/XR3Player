@@ -31,7 +31,6 @@ import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
@@ -272,11 +271,12 @@ public class OpenedLibrariesViewer extends StackPane {
 		ImageView libraryBackground = new ImageView();
 		libraryBackground.setFitWidth(24);
 		libraryBackground.setFitHeight(24);
+		libraryBackground.managedProperty().bind(library.getImageView().imageProperty().isNotNull());
 		libraryBackground.imageProperty().bind(Bindings.createObjectBinding(() -> {
 			if (library.getImage() != null)
 				return library.getImage();
 			else
-				return Media.NO_ARTWORK_IMAGE;
+				return null; //Media.NO_ARTWORK_IMAGE
 		}, library.getImageView().imageProperty()));
 		
 		// HBOX
