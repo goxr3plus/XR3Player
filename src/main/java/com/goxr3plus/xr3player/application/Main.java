@@ -102,8 +102,8 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 92);
-		internalInformation.put("ReleasedDate", "06/12/2017");
+		internalInformation.put("Version", 93);
+		internalInformation.put("ReleasedDate", "10/12/2017");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -757,7 +757,7 @@ public class Main extends Application {
 					while ( ( line = bufferedReader.readLine() ) != null) {
 						if (line.isEmpty())
 							break;
-						if (line.contains("XR3Player Application Started"))
+						if (line.contains("XR3Player ready to rock!"))
 							terminate(false);
 					}
 				
