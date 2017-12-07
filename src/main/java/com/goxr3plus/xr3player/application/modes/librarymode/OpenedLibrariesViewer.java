@@ -272,12 +272,16 @@ public class OpenedLibrariesViewer extends StackPane {
 		ImageView libraryBackground = new ImageView();
 		libraryBackground.setFitWidth(24);
 		libraryBackground.setFitHeight(24);
-		libraryBackground.imageProperty().bind(library.getImageView().imageProperty());
-		//libraryBackrgound.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
-		//libraryBackrgound.managedProperty().bind(imageView.visibleProperty());
+		libraryBackground.imageProperty().bind(Bindings.createObjectBinding(() -> {
+			if (library.getImage() != null)
+				return library.getImage();
+			else
+				return Media.NO_ARTWORK_IMAGE;
+		}, library.getImageView().imageProperty()));
 		
 		// HBOX
 		HBox hBox = new HBox();
+		hBox.setSpacing(2);
 		hBox.getChildren().addAll(imageView, libraryBackground, stack, marquee);
 		
 		// --Drag Over
