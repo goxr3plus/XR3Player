@@ -16,6 +16,8 @@ import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.TagException;
+import org.jaudiotagger.tag.id3.ID3v1FieldKey;
+import org.jaudiotagger.tag.id3.ID3v1Tag;
 import org.jaudiotagger.tag.id3.ID3v24FieldKey;
 import org.jaudiotagger.tag.id3.ID3v24Tag;
 
@@ -24,6 +26,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.MenuItem;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -36,6 +39,13 @@ public class ArtistsModeService extends Service<Void> {
 	/** A private instance of the SmartController it belongs */
 	private final SmartControllerArtistsMode smartControllerArtistsMode;
 	
+	private Filter filter = Filter.ARTIST;
+	
+	private enum Filter {
+		
+		ARTIST, ALBUM, GENRE, YEAR, BPM, KEY, COMPOSER, BIT_RATE;
+	}
+	
 	/**
 	 * The operation to be done by the Service
 	 */
@@ -43,7 +53,7 @@ public class ArtistsModeService extends Service<Void> {
 	/**
 	 * The given artistName
 	 */
-	private String artistName = "";
+	private String filterValue = "";
 	
 	/**
 	 * Service Progress
@@ -70,14 +80,17 @@ public class ArtistsModeService extends Service<Void> {
 	/**
 	 * Regenerates all the artists for the ArtistsMode
 	 */
-	public void regenerateArtists() {
+	public void regenerate() {
 		this.operation = Operation.REFRESH;
 		
 		//Clear List
 		smartControllerArtistsMode.getListView().getItems().clear();
 		
 		//Progress Label
-		smartControllerArtistsMode.getProgressLabel().setText("Detecting Artists");
+		smartControllerArtistsMode.getProgressLabel().setText("Generating ...");
+		
+		//determineFilter()
+		determineFilter(false);
 		
 		//Restart the Service
 		this.restart();
@@ -86,17 +99,62 @@ public class ArtistsModeService extends Service<Void> {
 	/**
 	 * Refreshes the TableView based on the current artist
 	 * 
-	 * @param artistName
+	 * @param filterValue
 	 */
-	public void refreshTableView(String artistName) {
-		this.artistName = artistName;
+	public void refreshTableView(String filterValue) {
+		this.filterValue = filterValue;
 		this.operation = Operation.UPDATE_TABLE_VIEW;
 		
-		//Progress Label
-		smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from artist [ " + artistName + " ]");
+		//determineFilter()
+		determineFilter(true);
 		
 		//Restart the Service
 		this.restart();
+	}
+	
+	private void determineFilter(boolean changeLabel) {
+		switch ( ( (MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle() ).getText()) {
+			case "Artist":
+				filter = Filter.ARTIST;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from artist [ " + filterValue + " ]");
+				break;
+			case "Album":
+				filter = Filter.ALBUM;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from album [ " + filterValue + " ]");
+				break;
+			case "Genre":
+				filter = Filter.GENRE;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with genre [ " + filterValue + " ]");
+				break;
+			case "Year":
+				filter = Filter.YEAR;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from year [ " + filterValue + " ]");
+				break;
+			case "BPM":
+				filter = Filter.BPM;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with bpm [ " + filterValue + " ]");
+				break;
+			case "Key":
+				filter = Filter.KEY;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with key [ " + filterValue + " ]");
+				break;
+			case "Composer":
+				filter = Filter.COMPOSER;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from composer [ " + filterValue + " ]");
+				break;
+			case "Bit Rate":
+				filter = Filter.BIT_RATE;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with Bit Rate [ " + filterValue + " ]");
+				break;
+		}
 	}
 	
 	@Override
@@ -134,15 +192,15 @@ public class ArtistsModeService extends Service<Void> {
 								if (operation == Operation.REFRESH)
 									
 									//Add the artist
-									set.add(findArtistsFromAudioFile(new File(media.getFilePath()), media));
+									set.add(findTagFromAudioFile(new File(media.getFilePath()), media));
 								
 								else {
 									
 									//Find the artist Name
-									String fileArtist = findArtistsFromAudioFile(new File(media.getFilePath()), media);
+									String filterVal = findTagFromAudioFile(new File(media.getFilePath()), media);
 									
 									//If it equals
-									if (fileArtist.equals(artistName))
+									if (filterVal.equals(filterValue))
 										matchingMediaList.add(media);
 									
 								}
@@ -173,15 +231,15 @@ public class ArtistsModeService extends Service<Void> {
 									if (operation == Operation.REFRESH)
 										
 										//Add the artist
-										set.add(findArtistsFromAudioFile(new File(resultSet.getString("PATH")), null));
+										set.add(findTagFromAudioFile(new File(resultSet.getString("PATH")), null));
 									
 									else {
 										
 										//Find the artist Name
-										String fileArtist = findArtistsFromAudioFile(new File(resultSet.getString("PATH")), null);
+										String filterVal = findTagFromAudioFile(new File(resultSet.getString("PATH")), null);
 										
 										//If it equals
-										if (fileArtist.equals(artistName))
+										if (filterVal.equals(filterValue))
 											//Add the Media
 											matchingMediaList.add(new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
 													resultSet.getString("DATE"), resultSet.getString("HOUR"), smartControllerArtistsMode.getSmartController().getGenre(),
@@ -209,9 +267,9 @@ public class ArtistsModeService extends Service<Void> {
 							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
 								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
 								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-							} else if (observableList.isEmpty()) {
-								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
-								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+								//							} else if (observableList.isEmpty()) {
+								//								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+								//								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
 							} else {
 								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
 							}
@@ -220,6 +278,9 @@ public class ArtistsModeService extends Service<Void> {
 							smartControllerArtistsMode.getListView().setItems(observableList);
 							if (!observableList.isEmpty())
 								smartControllerArtistsMode.getListView().getSelectionModel().select(0);
+							else
+								//Empty the TableView
+								smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
 						});
 					} else if (operation == Operation.UPDATE_TABLE_VIEW) {
 						//For each item on set
@@ -230,9 +291,9 @@ public class ArtistsModeService extends Service<Void> {
 							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
 								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
 								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
-								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
-								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+								//							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
+								//								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+								//								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
 							} else {
 								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
 							}
@@ -249,7 +310,10 @@ public class ArtistsModeService extends Service<Void> {
 							} else {
 								
 								//Remove the artist from the List
-								smartControllerArtistsMode.getListView().getItems().remove(artistName);
+								smartControllerArtistsMode.getListView().getItems().remove(filterValue);
+								
+								//Empty the TableView
+								smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
 							}
 							
 						});
@@ -272,7 +336,7 @@ public class ArtistsModeService extends Service<Void> {
 			 *            The audio File in case it is already a Media Class File
 			 * @return Return the artist of the given audio file (mp3) actually
 			 */
-			private String findArtistsFromAudioFile(File file , Media media) {
+			private String findTagFromAudioFile(File file , Media media) {
 				
 				//Check file existence , length and extension
 				if (file.exists() && "mp3".equals(media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath())) && file.length() != 0) {
@@ -288,12 +352,40 @@ public class ArtistsModeService extends Service<Void> {
 					
 					//Does it have artist	
 					if (mp3File.hasID3v2Tag()) {
+						
 						ID3v24Tag tag = mp3File.getID3v2TagAsv24();
-						String artist = tag.getFirst(ID3v24FieldKey.ARTIST);
+						
+						if (filter == Filter.ARTIST)
+							return tag.getFirst(ID3v24FieldKey.ARTIST);
+						else if (filter == Filter.ALBUM)
+							return tag.getFirst(ID3v24FieldKey.ALBUM);
+						else if (filter == Filter.GENRE)
+							return tag.getFirst(ID3v24FieldKey.GENRE);
+						else if (filter == Filter.YEAR)
+							return tag.getFirst(ID3v24FieldKey.YEAR);
+						else if (filter == Filter.BPM)
+							return tag.getFirst(ID3v24FieldKey.BPM);
+						else if (filter == Filter.KEY)
+							return tag.getFirst(ID3v24FieldKey.KEY);
+						else if (filter == Filter.COMPOSER)
+							return tag.getFirst(ID3v24FieldKey.COMPOSER);
+						else if (filter == Filter.BIT_RATE)
+							return mp3File.getMP3AudioHeader().getBitRate();
 						
 						//System.out.println("Artist : " + artist);// + " , Album Artist : " + tag.getFirst(ID3v24FieldKey.ALBUM_ARTIST))
 						
-						return artist;
+					} else if (mp3File.hasID3v1Tag()) {
+						
+						ID3v1Tag tag = mp3File.getID3v1Tag();
+						
+						if (filter == Filter.ARTIST)
+							return tag.getFirst(ID3v1FieldKey.ARTIST.toString());
+						else if (filter == Filter.ALBUM)
+							return tag.getFirst(ID3v1FieldKey.ALBUM.toString());
+						else if (filter == Filter.GENRE)
+							return tag.getFirst(ID3v1FieldKey.GENRE.toString());
+						else if (filter == Filter.YEAR)
+							return tag.getFirst(ID3v1FieldKey.YEAR.toString());
 					}
 					
 				}

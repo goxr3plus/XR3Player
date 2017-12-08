@@ -10,7 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +31,12 @@ public class SmartControllerArtistsMode extends StackPane {
 	
 	@FXML
 	private ListView<String> listView;
+	
+	@FXML
+	private ToggleGroup selectedFilter;
+	
+	@FXML
+	private MenuButton filterMenuButton;
 	
 	@FXML
 	private BorderPane borderPane;
@@ -65,7 +74,7 @@ public class SmartControllerArtistsMode extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	public static final Image artistImage = InfoTool.getImageFromResourcesFolder("artist.png");
+	public static final Image artistImage = InfoTool.getImageFromResourcesFolder("funnel.png");
 	
 	/**
 	 * Constructor.
@@ -132,13 +141,30 @@ public class SmartControllerArtistsMode extends StackPane {
 		//borderPane
 		borderPane.setCenter(mediaTableViewer);
 		
+		//selectedFilter
+		selectedFilter.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue != null) {
+				//Regenerate
+				regenerate();
+				String text = ( (MenuItem) newValue ).getText();
+				
+				//FilterMenuButton
+				filterMenuButton.setText("Filter : " + text);
+				
+				//Change Tab Label
+				smartController.getArtistsModeTab().setText("Filter : " + text);
+				
+				//System.out.println("Selected Filter entered...")
+			}
+		});
+		
 	}
 	
 	/**
 	 * Refreshes the whole artists mode [ Heavy procedure for many files ]
 	 */
-	public void refreshArtistsMode() {
-		service.regenerateArtists();
+	public void regenerate() {
+		service.regenerate();
 	}
 	
 	/**
@@ -182,12 +208,19 @@ public class SmartControllerArtistsMode extends StackPane {
 	public Label getProgressLabel() {
 		return progressLabel;
 	}
-
+	
 	/**
 	 * @return the service
 	 */
 	public ArtistsModeService getService() {
 		return service;
+	}
+	
+	/**
+	 * @return the selectedFilter
+	 */
+	public ToggleGroup getSelectedFilter() {
+		return selectedFilter;
 	}
 	
 }

@@ -130,7 +130,7 @@ public class AllDetailsService extends Service<Boolean> {
 								genre = tag.getFirst(ID3v24FieldKey.GENRE).trim();
 								
 								//-- Tempo
-								tempo = tag.getFirst(ID3v24FieldKey.TEMPO).trim();
+								tempo = tag.getFirst(ID3v24FieldKey.ALBUM_ARTIST).trim();
 								
 								//-- Key
 								key = tag.getFirst(ID3v24FieldKey.KEY).trim();

@@ -462,7 +462,7 @@ public class SmartController extends StackPane {
 				foldersMode.recreateTree();
 			} else if (newValue == artistsModeTab) { //artistsModeTab
 				foldersMode.getService().cancel();
-				artistsMode.refreshArtistsMode();
+				artistsMode.regenerate();
 			}
 		});
 		
@@ -1277,12 +1277,19 @@ public class SmartController extends StackPane {
 	public JFXTabPane getModesTabPane() {
 		return modesTabPane;
 	}
-
+	
 	/**
 	 * @return the allDetailsService
 	 */
 	public AllDetailsService getAllDetailsService() {
 		return allDetailsService;
+	}
+	
+	/**
+	 * @return the artistsModeTab
+	 */
+	public Tab getArtistsModeTab() {
+		return artistsModeTab;
 	}
 	
 	/*-----------------------------------------------------------------------

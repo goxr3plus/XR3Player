@@ -5,8 +5,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
@@ -20,8 +23,40 @@
    <children>
       <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
          <items>
-            <ListView fx:id="listView" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false" />
-            <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false" />
+            <BorderPane>
+               <center>
+                  <ListView fx:id="listView" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
+               </center>
+               <top>
+                  <MenuButton fx:id="filterMenuButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-radius: 0;" text="Filter : Artist" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <items>
+                        <RadioMenuItem mnemonicParsing="false" selected="true" text="Artist">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="selectedFilter" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem mnemonicParsing="false" text="Album" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Genre" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Year" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="BPM" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Bit Rate" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Key" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Composer" toggleGroup="$selectedFilter" />
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/funnel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuButton>
+               </top>
+            </BorderPane>
+            <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
+               <top>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Tracks" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER" />
+               </top></BorderPane>
          </items>
       </SplitPane>
       <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No songs in Playlist " textAlignment="CENTER" visible="false" wrapText="true">
@@ -50,7 +85,7 @@
             </Button>
          </graphic>
       </Label>
-      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
+      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
             <Label fx:id="progressLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="817.0" style="-fx-border-color: transparent; -fx-font-size: 18;" styleClass="applicationSettingsLabel2" text="Detecting Artists" textAlignment="CENTER" wrapText="true">
                <graphic>
