@@ -215,7 +215,7 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.10.3</version>
+			<version>1.11.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.cliftonlabs</groupId>
@@ -253,25 +253,18 @@
 			<version>0.3.7.2</version> </dependency> -->
 
 		<!-- WEB BROWSER SUPPORT -->
+		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>JavaFX-Web-Browser</artifactId> 
+			<version>V3.1.0</version> <exclusions> <exclusion> <groupId>com.jfoenix</groupId> 
+			<artifactId>jfoenix</artifactId> </exclusion> <exclusion> <groupId>commons-validator</groupId> 
+			<artifactId>commons-validator</artifactId> </exclusion> </exclusions> </dependency> -->
+		<!-- Locally testing WebBrowser -->
 		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>JavaFX-Web-Browser</artifactId>
-			<version>V3.1.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.jfoenix</groupId>
-					<artifactId>jfoenix</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-validator</groupId>
-					<artifactId>commons-validator</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>sample</groupId>
+			<artifactId>com.sample</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.2.0.jar</systemPath>
 		</dependency>
-		<!-- Locally testing WebBrowser <dependency> <groupId>sample</groupId> 
-			<artifactId>com.sample</artifactId> <version>1.0</version> <scope>system</scope> 
-			<systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.0.0.jar</systemPath> 
-			</dependency> -->
 		<!-- XR3Capture -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>

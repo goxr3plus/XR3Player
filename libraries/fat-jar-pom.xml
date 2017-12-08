@@ -5,7 +5,7 @@
 
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
-	<version>3.0.92</version>
+	<version>3.0.93</version>
 	<name>XR3Player</name>
 	<description>Dominant Future Generation JavaFX Media Player</description>
 	<url>https://github.com/goxr3plus/XR3Player</url>

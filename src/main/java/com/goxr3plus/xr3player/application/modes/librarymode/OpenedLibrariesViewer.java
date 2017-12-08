@@ -267,12 +267,12 @@ public class OpenedLibrariesViewer extends StackPane {
 		imageView.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
 		imageView.managedProperty().bind(imageView.visibleProperty());
 		
-		//LibraryBackground 
-		ImageView libraryBackground = new ImageView();
-		libraryBackground.setFitWidth(24);
-		libraryBackground.setFitHeight(24);
-		libraryBackground.managedProperty().bind(library.getImageView().imageProperty().isNotNull());
-		libraryBackground.imageProperty().bind(Bindings.createObjectBinding(() -> {
+		//tabImage 
+		ImageView tabImage = new ImageView();
+		tabImage.setFitWidth(24);
+		tabImage.setFitHeight(24);
+		tabImage.managedProperty().bind(tabImage.imageProperty().isNotNull());
+		tabImage.imageProperty().bind(Bindings.createObjectBinding(() -> {
 			if (library.getImage() != null)
 				return library.getImage();
 			else
@@ -282,7 +282,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		// HBOX
 		HBox hBox = new HBox();
 		hBox.setSpacing(2);
-		hBox.getChildren().addAll(imageView, libraryBackground, stack, marquee);
+		hBox.getChildren().addAll(imageView, tabImage, stack, marquee);
 		
 		// --Drag Over
 		hBox.setOnDragOver(dragOver -> {
