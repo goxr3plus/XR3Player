@@ -29,12 +29,18 @@
 		</resources>
 		<!-- <testSourceDirectory>testing</testSourceDirectory> -->
 		<plugins>
+
+			<!-- Maven Source Plugin -->
 			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
 				<version>3.0.1</version> <executions> <execution> <id>attach-sources</id> 
 				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
+
+			<!-- Maven Javcadoc Plugin -->
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
 				<version>3.0.0-M1</version> <executions> <execution> <id>attach-javadocs</id> 
 				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
+
+			<!-- Maven Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -253,34 +259,28 @@
 			<version>0.3.7.2</version> </dependency> -->
 
 		<!-- WEB BROWSER SUPPORT -->
-		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>JavaFX-Web-Browser</artifactId> 
-			<version>V3.1.0</version> <exclusions> <exclusion> <groupId>com.jfoenix</groupId> 
-			<artifactId>jfoenix</artifactId> </exclusion> <exclusion> <groupId>commons-validator</groupId> 
-			<artifactId>commons-validator</artifactId> </exclusion> </exclusions> </dependency> -->
-		<!-- Locally testing WebBrowser -->
 		<dependency>
-			<groupId>sample</groupId>
-			<artifactId>com.sample</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.2.0.jar</systemPath>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>JavaFX-Web-Browser</artifactId>
+			<version>V3.2.0</version>
 		</dependency>
+		<!-- Locally testing WebBrowser -->
+		<!-- <dependency> <groupId>JavaFX-Web-Browser</groupId> <artifactId>com.JavaFX-Web-Browser</artifactId> 
+			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.2.0.jar</systemPath> 
+			</dependency> -->
 		<!-- XR3Capture -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>xr3capture</artifactId>
-			<version>V3.11</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.jfoenix</groupId>
-					<artifactId>jfoenix</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.controlsfx</groupId>
-					<artifactId>controlsfx</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>V3.12</version>
+			<!-- <exclusions> <exclusion> <groupId>com.jfoenix</groupId> <artifactId>jfoenix</artifactId> 
+				</exclusion> <exclusion> <groupId>org.controlsfx</groupId> <artifactId>controlsfx</artifactId> 
+				</exclusion> </exclusions> -->
 		</dependency>
+		<!-- Locally testing XR3Capture -->
+		<!-- <dependency> <groupId>XR3Capture</groupId> <artifactId>com.XR3Capture</artifactId> 
+			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/XR3Capture-3.12.jar</systemPath> 
+			</dependency> -->
 		<!-- Dropbox -->
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
