@@ -207,6 +207,14 @@ public class TagWindow extends StackPane {
 				listView.getSelectionModel().selectFirst();
 		});
 		
+		//TabPane 
+		tabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue == id3v1Tab)
+				id3V1Controller.populateTagFields(listView.getSelectionModel().getSelectedItem());
+			else if (newValue == id3v2Tab)
+				id3V2Controller.populateTagFields(listView.getSelectionModel().getSelectedItem());
+			
+		});
 	}
 	
 	/**
@@ -234,8 +242,7 @@ public class TagWindow extends StackPane {
 	}
 	
 	/**
-	 * Opens multiple audio files at once ( based on the ListView that is
-	 * created)
+	 * Opens multiple audio files at once ( based on the ListView that is created)
 	 * 
 	 * @param list
 	 *            A given observable list containing all the absolute file paths

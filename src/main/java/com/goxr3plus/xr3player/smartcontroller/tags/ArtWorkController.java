@@ -164,8 +164,7 @@ public class ArtWorkController extends StackPane {
 					//String fileName = InfoTool.getFileName(fileAbsolutePath)
 					
 					//Try to find the album image for the given Audio File
-					Image dummyImage = InfoTool.getAudioAlbumImage(fileAbsolutePath, -1, -1);
-					image = dummyImage;
+					image = InfoTool.getAudioAlbumImage(fileAbsolutePath, -1, -1);
 					
 					//Run on JavaFX Thread
 					Platform.runLater(() -> {

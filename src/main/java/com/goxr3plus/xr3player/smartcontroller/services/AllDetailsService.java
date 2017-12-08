@@ -215,7 +215,6 @@ public class AllDetailsService extends Service<Boolean> {
 					if (!file.exists())
 						return;
 					
-					
 					try {
 						Image image = media.getAlbumImage();
 						//Check if null
