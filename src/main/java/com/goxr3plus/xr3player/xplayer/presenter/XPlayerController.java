@@ -68,6 +68,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emot
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;
@@ -1153,9 +1154,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
 				
 				//Notification
-				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected())
+				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected()) {
+					
+					//Check if it has Album Image
+					Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+					
+					//Show Notification
 					ActionTool.showNotification("Player [ " + this.getKey() + " ] Opened", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-							NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
+							NotificationType.SIMPLE, image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60);
+				}
 			});
 			
 			// Status.RESUMED			

@@ -73,7 +73,7 @@ public class DownloadService extends Service<Boolean> {
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Download completed", "Completed downloading File :\n[ " + dropBoxFileMetadata.getName() + " ]",
-							Duration.millis(3000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage));
+							Duration.millis(3000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();

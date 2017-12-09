@@ -96,7 +96,7 @@ public class AllDetailsService extends Service<Boolean> {
 				
 				//Add all the Tags to the Media
 				if (operation == AllDetailsServiceOperation.ALL || operation == AllDetailsServiceOperation.TAGS) {
-					System.out.println("Refreshing Tags");
+					//System.out.println("Refreshing Tags")
 					
 					//Try to do it
 					mediaTableViewer.getTableView().getItems().stream().forEach(media -> {
@@ -241,7 +241,7 @@ public class AllDetailsService extends Service<Boolean> {
 				
 				//Try to do it for art work this time
 				if (operation == AllDetailsServiceOperation.ALL || operation == AllDetailsServiceOperation.ARTWORK_COLUMN) {
-					System.out.println("Refreshing ArtWork");
+					//System.out.println("Refreshing ArtWork")
 					
 					//For each
 					mediaTableViewer.getTableView().getItems().stream().forEach(media -> {

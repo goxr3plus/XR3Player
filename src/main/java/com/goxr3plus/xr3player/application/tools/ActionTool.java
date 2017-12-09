@@ -335,7 +335,7 @@ public final class ActionTool {
 	 *            The notification type
 	 */
 	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType) {
-		Platform.runLater(() -> showNotification(title, text, duration, notificationType, null));
+		Platform.runLater(() -> showNotification(title, text, duration, notificationType, null, 0, 0));
 	}
 	
 	/**
@@ -350,7 +350,7 @@ public final class ActionTool {
 	 * @param notificationType
 	 *            The notification type
 	 */
-	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , Image image) {
+	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , Image image , int width , int height) {
 		
 		//Check if it is JavaFX Application Thread
 		if (!Platform.isFxApplicationThread()) {
@@ -363,8 +363,10 @@ public final class ActionTool {
 			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(GeneralSettingsController.notificationPosition);
 		else {
 			ImageView imageView = new ImageView(image);
-			//imageView.setFitWidth(25)
-			//imageView.setFitHeight(25)
+			if (width != 0 && height != 0) {
+				imageView.setFitWidth(width);
+				imageView.setFitHeight(height);
+			}
 			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle()
 					.position(GeneralSettingsController.notificationPosition);
 		}

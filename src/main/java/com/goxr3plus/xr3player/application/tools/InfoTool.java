@@ -391,11 +391,12 @@ public final class InfoTool {
 	 */
 	public static Image getAudioAlbumImage(String absolutePath , int width , int height) {
 		ByteArrayInputStream arrayInputStream = getAudioAlbumImageRaw(absolutePath, width, height);
+		
 		//Does it contain an image
 		if (arrayInputStream != null)
 			return ( width == -1 && height == -1 ) ? new Image(arrayInputStream) : new Image(arrayInputStream, width, height, false, true);
 		
-		return null;// fatal error here
+		return null;
 	}
 	
 	/**

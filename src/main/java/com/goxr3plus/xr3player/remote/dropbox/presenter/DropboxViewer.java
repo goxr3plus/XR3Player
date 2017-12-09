@@ -235,7 +235,7 @@ public class DropboxViewer extends StackPane {
 				
 				//Show message to the User
 				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
-						DropboxViewer.dropBoxImage);
+						DropboxViewer.dropBoxImage,0,0);
 				
 				//Save on the database
 				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();

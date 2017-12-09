@@ -247,7 +247,8 @@ public class DropboxService extends Service<Boolean> {
 					} else if (operation == DropBoxOperation.RENAME) {
 						
 						if (rename(dropboxFile.getMetadata().getPathLower(), newPath)) //check if not succeeded
-							ActionTool.showNotification("Success Message", "Succesfully renamed file :)", Duration.millis(1500), NotificationType.SIMPLE);
+							ActionTool.showNotification("Success Message", "Succesfully renamed file :)", Duration.millis(1500), NotificationType.SIMPLE,
+									DropboxViewer.dropBoxImage, 0, 0);
 						else {
 							ActionTool.showNotification("Error Message",
 									"Failed to rename the File:\n [ " + dropboxFile.getMetadata().getPathLower() + " ] to -> [ " + newPath + " ]", Duration.millis(1500),
@@ -422,7 +423,7 @@ public class DropboxService extends Service<Boolean> {
 						
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
-							NotificationType.INFORMATION));
+							NotificationType.SIMPLE,DropboxViewer.dropBoxImage, 0, 0));
 					
 					return true;
 				} catch (DbxException dbxe) {
@@ -468,7 +469,7 @@ public class DropboxService extends Service<Boolean> {
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
-							Duration.millis(2000), NotificationType.INFORMATION));
+							Duration.millis(2000), NotificationType.SIMPLE,DropboxViewer.dropBoxImage, 0, 0));
 					
 					return true;
 				} catch (DbxException dbxe) {

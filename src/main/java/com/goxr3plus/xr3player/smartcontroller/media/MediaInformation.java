@@ -130,7 +130,7 @@ public class MediaInformation extends StackPane {
 	// -------------------------------------------------------------
 	
 	/** The null image. */
-	private final Image nullImage = InfoTool.getImageFromResourcesFolder("noArtwork.png");
+	public static final Image MISSING_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
 	
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
@@ -297,7 +297,7 @@ public class MediaInformation extends StackPane {
 					}
 					
 					Platform.runLater(() -> {
-						imageView.setImage(image != null ? image : nullImage);
+						imageView.setImage(image != null ? image : MISSING_ARTWORK_IMAGE);
 						
 						//== title
 						title.textProperty().bind(media.titleProperty());
