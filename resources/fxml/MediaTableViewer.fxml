@@ -47,7 +47,7 @@
                   </TableColumn>
                   <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
+                        <ImageView fitHeight="16.0" fitWidth="20.0">
                            <image>
                               <Image url="@../image/flask.png" />
                            </image>
@@ -116,7 +116,14 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>            
-                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false" />
+                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0">
+                           <image>
+                              <Image url="@../image/artist.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
                   <TableColumn fx:id="mood" minWidth="65.0" prefWidth="75.0" text="Mood" visible="false" />
                   <TableColumn fx:id="album" minWidth="65.0" prefWidth="75.0" text="Album" visible="false" />
                   <TableColumn fx:id="composer" minWidth="65.0" prefWidth="75.0" text="Composer" visible="false" />
