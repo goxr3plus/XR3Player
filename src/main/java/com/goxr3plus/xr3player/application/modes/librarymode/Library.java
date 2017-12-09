@@ -382,7 +382,7 @@ public class Library extends StackPane {
 				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (event.getGestureSource() != controller.getTableViewer().getTableView() && event.getGestureSource() != controller.foldersMode
+			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView() && event.getGestureSource() != controller.foldersMode
 					&& event.getGestureSource() != controller.artistsMode.getMediaTableViewer().getTableView())
 				dragAndDropLabel.setVisible(true);
 			
@@ -397,7 +397,7 @@ public class Library extends StackPane {
 				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (event.getGestureSource() != controller.getTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
+			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
 				event.acceptTransferModes(TransferMode.LINK);
 			
 		});

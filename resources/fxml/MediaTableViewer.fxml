@@ -89,15 +89,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                     <TableColumn fx:id="timesPlayed" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Times Played">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/timesPlayed.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </TableColumn>
+                     <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Play Count" />
                   <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Extension" visible="false">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">

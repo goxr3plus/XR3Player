@@ -458,7 +458,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//== borderPane
 		borderPane.setOnDragOver(event -> {
-			System.out.println(event.getGestureSource());
+			//System.out.println(event.getGestureSource());
 			
 			//Check if FlipPane is on the front side
 			if (event.getGestureSource() != mediaFileMarquee) {

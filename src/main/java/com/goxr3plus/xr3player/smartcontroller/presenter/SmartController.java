@@ -193,8 +193,6 @@ public class SmartController extends StackPane {
 	/** CopyOrMoveService */
 	private final FilesExportService copyOrMoveService;
 	
-	/** AllDetailsService */
-	private final AllDetailsService allDetailsService;
 	
 	// ---------Security---------------------------
 	
@@ -256,7 +254,6 @@ public class SmartController extends StackPane {
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
 		copyOrMoveService = new FilesExportService(this);
-		allDetailsService = new AllDetailsService(this.itemsObservableList);
 		
 		// --------------------------------FXMLLoader---------------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartController.fxml"));
@@ -1147,7 +1144,7 @@ public class SmartController extends StackPane {
 	 */
 	public Optional<ScrollBar> getVerticalScrollBar() {
 		
-		return Optional.ofNullable((ScrollBar) getTableViewer().getTableView().lookup(".scroll-bar:vertical"));
+		return Optional.ofNullable((ScrollBar) getNormalModeMediatTableViewer().getTableView().lookup(".scroll-bar:vertical"));
 	}
 	
 	/**
@@ -1209,7 +1206,7 @@ public class SmartController extends StackPane {
 	/**
 	 * @return the tableViewer
 	 */
-	public MediaTableViewer getTableViewer() {
+	public MediaTableViewer getNormalModeMediatTableViewer() {
 		return normal_mode_mediaTableViewer;
 	}
 	
@@ -1278,12 +1275,6 @@ public class SmartController extends StackPane {
 		return modesTabPane;
 	}
 	
-	/**
-	 * @return the allDetailsService
-	 */
-	public AllDetailsService getAllDetailsService() {
-		return allDetailsService;
-	}
 	
 	/**
 	 * @return the artistsModeTab

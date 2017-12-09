@@ -44,6 +44,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.AllDetailsService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
@@ -183,6 +184,9 @@ public class MediaTableViewer extends StackPane {
 	/** The pause transition. */
 	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 	private final StringProperty searchWord = new SimpleStringProperty("");
+	
+	/** AllDetailsService */
+	private final AllDetailsService allDetailsService = new AllDetailsService();
 	
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
@@ -447,7 +451,6 @@ public class MediaTableViewer extends StackPane {
 				return 0;
 		});
 		
-			
 		//artwork
 		artwork.setCellValueFactory(new PropertyValueFactory<>("artwork"));
 		artwork.setComparator((imageView1 , imageView2) -> {
@@ -457,6 +460,10 @@ public class MediaTableViewer extends StackPane {
 				return -1;
 			else
 				return 0;
+		});
+		artwork.visibleProperty().addListener(l -> {
+			if (artwork.isVisible())
+				this.allDetailsService.updateOnlyArtWorkColumn(this);
 		});
 		
 		// title
@@ -575,8 +582,8 @@ public class MediaTableViewer extends StackPane {
 						if (!Main.playedSongs.containsFile(media.getFilePath())) {
 							Main.playedSongs.add(media.getFilePath(), true);
 							Main.playedSongs.appendToTimesPlayed(media.getFilePath(), true);
-						}else {
-							if(Main.playedSongs.remove(media.getFilePath(), true))
+						} else {
+							if (Main.playedSongs.remove(media.getFilePath(), true))
 								media.timesPlayedProperty().set(0);
 							
 						}
@@ -676,6 +683,20 @@ public class MediaTableViewer extends StackPane {
 	 */
 	public InlineCssTextArea getDetailCssTextArea() {
 		return detailCssTextArea;
+	}
+	
+	/**
+	 * @return the artwork
+	 */
+	public TableColumn<Media,ImageView> getArtworkColumn() {
+		return artwork;
+	}
+	
+	/**
+	 * @return the allDetailsService
+	 */
+	public AllDetailsService getAllDetailsService() {
+		return allDetailsService;
 	}
 	
 }

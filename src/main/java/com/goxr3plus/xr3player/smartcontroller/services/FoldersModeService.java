@@ -100,10 +100,10 @@ public class FoldersModeService extends Service<Void> {
 					if (filesMode == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 						
 						//Count total files that will be exported
-						totalProgress = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().size();
+						totalProgress = smartControllerFoldersMode.getSmartController().getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().size();
 						
 						// Stream
-						Stream<Media> stream = smartControllerFoldersMode.getSmartController().getTableViewer().getSelectionModel().getSelectedItems().stream();
+						Stream<Media> stream = smartControllerFoldersMode.getSmartController().getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream();
 						stream.forEach(media -> {
 							if (isCancelled())
 								stream.close();

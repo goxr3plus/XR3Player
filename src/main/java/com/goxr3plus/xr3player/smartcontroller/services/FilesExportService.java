@@ -135,11 +135,11 @@ public class FilesExportService extends Service<Boolean> {
 						} else if (filesToExport == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 							
 							//Count total files that will be exported
-							total = smartController.getTableViewer().getSelectionModel().getSelectedItems().size();
+							total = smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().size();
 							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
-							Stream<Media> stream = smartController.getTableViewer().getSelectionModel().getSelectedItems().stream();
+							Stream<Media> stream = smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream();
 							stream.forEach(media -> {
 								if (isCancelled())
 									stream.close();

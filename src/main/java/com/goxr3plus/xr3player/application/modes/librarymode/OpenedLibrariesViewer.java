@@ -298,7 +298,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		hBox.setOnDragDropped(drop -> {
 			// Has Files? + isFree()?
 			if (drop.getDragboard().hasFiles() && getSelectedLibrary().get().getSmartController().isFree(true)
-					&& drop.getGestureSource() != library.getSmartController().getTableViewer())
+					&& drop.getGestureSource() != library.getSmartController().getNormalModeMediatTableViewer())
 				getSelectedLibrary().get().getSmartController().getInputService().start(drop.getDragboard().getFiles());
 			
 			drop.setDropCompleted(true);

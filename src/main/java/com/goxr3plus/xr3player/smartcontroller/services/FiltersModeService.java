@@ -74,7 +74,7 @@ public class FiltersModeService extends Service<Void> {
 	 */
 	public FiltersModeService(SmartControllerFiltersMode smartControllerArtistsMode) {
 		this.smartControllerArtistsMode = smartControllerArtistsMode;
-		this.allDetailsService = new AllDetailsService(null);
+		this.allDetailsService = new AllDetailsService();
 	}
 	
 	/**
@@ -307,7 +307,7 @@ public class FiltersModeService extends Service<Void> {
 								smartControllerArtistsMode.getSmartController().updateLabel();
 								
 								//Populate Media Information
-								allDetailsService.restartService(smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems());
+								allDetailsService.restartService(smartControllerArtistsMode.getMediaTableViewer());
 							} else {
 								
 								//Remove the artist from the List

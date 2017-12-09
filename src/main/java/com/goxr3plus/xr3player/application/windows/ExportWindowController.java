@@ -195,7 +195,7 @@ public class ExportWindowController extends BorderPane {
 		//define the variable using this switch statement
 		switch ( ( (Labeled) whatFilesToExportGroup.getSelectedToggle() ).getText()) {
 			case "Selected Items":
-				window.setTitle(common + smartController.getTableViewer().getSelectionModel().getSelectedItems().size() + " ]");
+				window.setTitle(common + smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().size() + " ]");
 				filesToExport = FilesMode.SELECTED_MEDIA;
 				break;
 			case "Current Page":
