@@ -128,6 +128,48 @@ public class MediaTableViewer extends StackPane {
 	@FXML
 	private TableColumn<Media,String> genre;
 	
+	@FXML
+	private TableColumn<Media,String> copyright;
+	
+	@FXML
+	private TableColumn<Media,String> track;
+	
+	@FXML
+	private TableColumn<Media,String> track_total;
+	
+	@FXML
+	private TableColumn<Media,String> remixer;
+	
+	@FXML
+	private TableColumn<Media,String> djMixer;
+	
+	@FXML
+	private TableColumn<Media,String> rating;
+	
+	@FXML
+	private TableColumn<Media,String> producer;
+	
+	@FXML
+	private TableColumn<Media,String> performer;
+	
+	@FXML
+	private TableColumn<Media,String> orchestra;
+	
+	@FXML
+	private TableColumn<Media,String> country;
+	
+	@FXML
+	private TableColumn<Media,String> lyricist;
+	
+	@FXML
+	private TableColumn<Media,String> conductor;
+	
+	@FXML
+	private TableColumn<Media,String> amazonID;
+	
+	@FXML
+	private TableColumn<Media,String> encoder;
+	
 	/** The bpm. */
 	@FXML
 	private TableColumn<Media,Integer> bpm;
@@ -546,8 +588,52 @@ public class MediaTableViewer extends StackPane {
 		//key
 		key.setCellValueFactory(new PropertyValueFactory<>("key"));
 		
-		//genre
+		//year
 		year.setCellValueFactory(new PropertyValueFactory<>("year"));
+		
+		//.
+		
+		//copyright
+		copyright.setCellValueFactory(new PropertyValueFactory<>("copyright"));
+		
+		//track
+		track.setCellValueFactory(new PropertyValueFactory<>("track"));
+		
+		//track_total
+		track_total.setCellValueFactory(new PropertyValueFactory<>("track_total"));
+		
+		//remixer
+		remixer.setCellValueFactory(new PropertyValueFactory<>("remixer"));
+		
+		//djMixer
+		djMixer.setCellValueFactory(new PropertyValueFactory<>("djMixer"));
+		
+		//rating
+		rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+		
+		//producer
+		producer.setCellValueFactory(new PropertyValueFactory<>("producer"));
+		
+		//performer
+		performer.setCellValueFactory(new PropertyValueFactory<>("performer"));
+		
+		//orchestra
+		orchestra.setCellValueFactory(new PropertyValueFactory<>("orchestra"));
+		
+		//country
+		country.setCellValueFactory(new PropertyValueFactory<>("country"));
+		
+		//lyricist
+		lyricist.setCellValueFactory(new PropertyValueFactory<>("lyricist"));
+		
+		//conductor
+		conductor.setCellValueFactory(new PropertyValueFactory<>("conductor"));
+		
+		//amazonID
+		amazonID.setCellValueFactory(new PropertyValueFactory<>("amazonID"));
+		
+		//encoder
+		encoder.setCellValueFactory(new PropertyValueFactory<>("encoder"));
 		
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> searchWord.set(""));

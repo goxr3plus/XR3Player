@@ -108,22 +108,34 @@ public class AllDetailsService extends Service<Boolean> {
 						if (!file.exists())
 							return;
 						
+						//Fields
+						int bitrate = -1;
+						String bpm = "";
+						String artist = "";
+						String mood = "";
+						String album = "";
+						String composer = "";
+						String comment = "";
+						String tempo = "";
+						String genre = "";
+						String year = "";
+						String key = "";
+						String copyright = "";
+						String track = "";
+						String track_total = "";
+						String remixer = "";
+						String djMixer = "";
+						String rating = "";
+						String producer = "";
+						String performer = "";
+						String orchestra = "";
+						String country = "";
+						String lyricist = "";
+						String conductor = "";
+						String amazonID = "";
+						String encoder = "";
+						
 						try {
-							
-							//Fields
-							int bitrate = -1;
-							String bpm = "";
-							String artist = "";
-							String mood = "";
-							String album = "";
-							String composer = "";
-							String comment = "";
-							String tempo = "";
-							String genre = "";
-							String year = "";
-							String key = "";
-							
-							//if (file.exists() && localDuration != 0 && media.length() != 0 && "mp3".equals(fileType.get()))
 							
 							//--------------------MP3--------------------------------
 							if ("mp3".equals(media.getFileType())) {
@@ -162,13 +174,57 @@ public class AllDetailsService extends Service<Boolean> {
 									genre = tag.getFirst(ID3v24FieldKey.GENRE).trim();
 									
 									//-- Tempo
-									tempo = tag.getFirst(ID3v24FieldKey.ALBUM_ARTIST).trim();
+									tempo = tag.getFirst(ID3v24FieldKey.TEMPO).trim();
 									
 									//-- Key
 									key = tag.getFirst(ID3v24FieldKey.KEY).trim();
 									
 									//-- Year
 									year = tag.getFirst(ID3v24FieldKey.YEAR).trim();
+									
+									//
+									
+									//-- COPYRIGHT
+									copyright = tag.getFirst(ID3v24FieldKey.COPYRIGHT).trim();
+									
+									//-- TRACK
+									track = tag.getFirst(ID3v24FieldKey.TRACK).trim();
+									
+									//-- TRACK_TOTAL
+									track_total = tag.getFirst(ID3v24FieldKey.TRACK_TOTAL).trim();
+									
+									//-- REMIXER
+									remixer = tag.getFirst(ID3v24FieldKey.REMIXER).trim();
+									
+									//-- DJMIXER
+									djMixer = tag.getFirst(ID3v24FieldKey.DJMIXER).trim();
+									
+									//-- RATING
+									rating = tag.getFirst(ID3v24FieldKey.RATING).trim();
+									
+									//-- PRODUCER
+									producer = tag.getFirst(ID3v24FieldKey.PRODUCER).trim();
+									
+									//-- PERFORMER
+									performer = tag.getFirst(ID3v24FieldKey.PERFORMER).trim();
+									
+									//-- ORCHESTRA
+									orchestra = tag.getFirst(ID3v24FieldKey.ORCHESTRA).trim();
+									
+									//-- COUNTRY
+									country = tag.getFirst(ID3v24FieldKey.COUNTRY).trim();
+									
+									//-- LYRICIST
+									lyricist = tag.getFirst(ID3v24FieldKey.LYRICIST).trim();
+									
+									//-- CONDUCTOR
+									conductor = tag.getFirst(ID3v24FieldKey.CONDUCTOR).trim();
+									
+									//-- AMAZON_ID
+									amazonID = tag.getFirst(ID3v24FieldKey.AMAZON_ID).trim();
+									
+									//-- ENCODER
+									encoder = tag.getFirst(ID3v24FieldKey.ENCODER).trim();
 									
 								}
 								
@@ -196,46 +252,89 @@ public class AllDetailsService extends Service<Boolean> {
 								
 							}
 							
-							//----------------------Now fill all the Properties------------------------------
-							String emptyWord = "-";
-							
-							//-- BitRate 			
-							media.bitRateProperty().set(bitrate);
-							
-							//-- BPM
-							media.bpmProperty().set(bpm.isEmpty() ? -1 : (int) Double.parseDouble(bpm));
-							
-							//-- Artist
-							media.artistProperty().set(artist.isEmpty() ? emptyWord : artist);
-							
-							//-- Mood
-							media.moodProperty().set(mood.isEmpty() ? emptyWord : mood);
-							
-							//-- Album
-							media.albumProperty().set(album.isEmpty() ? emptyWord : album);
-							
-							//-- Composer
-							media.composerProperty().set(composer.isEmpty() ? emptyWord : composer);
-							
-							//-- Comment
-							media.commentProperty().set(comment.isEmpty() ? emptyWord : comment);
-							
-							//-- Genre
-							media.genreProperty().set(genre.isEmpty() ? emptyWord : genre);
-							
-							//-- Tempo
-							media.tempoProperty().set(tempo.isEmpty() ? emptyWord : tempo);
-							
-							//-- Key
-							media.keyProperty().set(key.isEmpty() ? emptyWord : key);
-							
-							//-- Year
-							media.yearProperty().set(year.isEmpty() ? emptyWord : year);
-							
 						} catch (Exception e) {
 							e.printStackTrace();
 							success[0] = false;
 						}
+						
+						//----------------------Now fill all the Properties------------------------------
+						String emptyWord = "-";
+						
+						//-- BitRate 			
+						media.bitRateProperty().set(bitrate);
+						
+						//-- BPM
+						media.bpmProperty().set(bpm.isEmpty() ? -1 : (int) Double.parseDouble(bpm));
+						
+						//-- Artist
+						media.artistProperty().set(artist.isEmpty() ? emptyWord : artist);
+						
+						//-- Mood
+						media.moodProperty().set(mood.isEmpty() ? emptyWord : mood);
+						
+						//-- Album
+						media.albumProperty().set(album.isEmpty() ? emptyWord : album);
+						
+						//-- Composer
+						media.composerProperty().set(composer.isEmpty() ? emptyWord : composer);
+						
+						//-- Comment
+						media.commentProperty().set(comment.isEmpty() ? emptyWord : comment);
+						
+						//-- Genre
+						media.genreProperty().set(genre.isEmpty() ? emptyWord : genre);
+						
+						//-- Tempo
+						media.tempoProperty().set(tempo.isEmpty() ? emptyWord : tempo);
+						
+						//-- Key
+						media.keyProperty().set(key.isEmpty() ? emptyWord : key);
+						
+						//-- Year
+						media.yearProperty().set(year.isEmpty() ? emptyWord : year);
+						
+						//-- COPYRIGHT
+						media.copyrightProperty().set(copyright.isEmpty() ? emptyWord : copyright);
+						
+						//-- TRACK
+						media.trackProperty().set(track.isEmpty() ? emptyWord : track);
+						
+						//-- TRACK_TOTAL
+						media.track_totalProperty().set(track_total.isEmpty() ? emptyWord : track_total);
+						
+						//-- REMIXER
+						media.remixerProperty().set(remixer.isEmpty() ? emptyWord : remixer);
+						
+						//-- DJMIXER
+						media.djMixerProperty().set(djMixer.isEmpty() ? emptyWord : djMixer);
+						
+						//-- RATING
+						media.ratingProperty().set(rating.isEmpty() ? emptyWord : rating);
+						
+						//-- PRODUCER
+						media.producerProperty().set(producer.isEmpty() ? emptyWord : producer);
+						
+						//-- PERFORMER
+						media.performerProperty().set(performer.isEmpty() ? emptyWord : performer);
+						
+						//-- ORCHESTRA
+						media.orchestraProperty().set(orchestra.isEmpty() ? emptyWord : orchestra);
+						
+						//-- COUNTRY
+						media.countryProperty().set(country.isEmpty() ? emptyWord : country);
+						
+						//-- LYRICIST
+						media.lyricistProperty().set(lyricist.isEmpty() ? emptyWord : lyricist);
+						
+						//-- CONDUCTOR
+						media.conductorProperty().set(conductor.isEmpty() ? emptyWord : conductor);
+						
+						//-- AMAZON_ID
+						media.amazonIDProperty().set(amazonID.isEmpty() ? emptyWord : amazonID);
+						
+						//-- ENCODER
+						media.encoderProperty().set(encoder.isEmpty() ? emptyWord : encoder);
+						
 					});
 				}
 				

@@ -103,6 +103,36 @@ public abstract class Media {
 	
 	private SimpleStringProperty year;
 	
+	//
+	
+	private SimpleStringProperty copyright;
+	
+	private SimpleStringProperty track;
+	
+	private SimpleStringProperty track_total;
+	
+	private SimpleStringProperty remixer;
+	
+	private SimpleStringProperty djMixer;
+	
+	private SimpleStringProperty rating;
+	
+	private SimpleStringProperty producer;
+	
+	private SimpleStringProperty performer;
+	
+	private SimpleStringProperty orchestra;
+	
+	private SimpleStringProperty country;
+	
+	private SimpleStringProperty lyricist;
+	
+	private SimpleStringProperty conductor;
+	
+	private SimpleStringProperty amazonID;
+	
+	private SimpleStringProperty encoder;
+	
 	/** The drive. */
 	private SimpleStringProperty drive;
 	
@@ -243,6 +273,20 @@ public abstract class Media {
 		this.tempo = new SimpleStringProperty();
 		this.key = new SimpleStringProperty();
 		this.year = new SimpleStringProperty();
+		this.copyright = new SimpleStringProperty();
+		this.track = new SimpleStringProperty();
+		this.track_total = new SimpleStringProperty();
+		this.remixer = new SimpleStringProperty();
+		this.djMixer = new SimpleStringProperty();
+		this.rating = new SimpleStringProperty();
+		this.producer = new SimpleStringProperty();
+		this.performer = new SimpleStringProperty();
+		this.orchestra = new SimpleStringProperty();
+		this.country = new SimpleStringProperty();
+		this.lyricist = new SimpleStringProperty();
+		this.conductor = new SimpleStringProperty();
+		this.amazonID = new SimpleStringProperty();
+		this.encoder = new SimpleStringProperty();
 		this.bitRate = new SimpleIntegerProperty();
 		this.bpm = new SimpleIntegerProperty();
 		this.number = new SimpleIntegerProperty(number);
@@ -489,6 +533,62 @@ public abstract class Media {
 	
 	public SimpleStringProperty yearProperty() {
 		return year;
+	}
+	
+	public SimpleStringProperty copyrightProperty() {
+		return copyright;
+	}
+	
+	public SimpleStringProperty trackProperty() {
+		return track;
+	}
+	
+	public SimpleStringProperty track_totalProperty() {
+		return track_total;
+	}
+	
+	public SimpleStringProperty remixerProperty() {
+		return remixer;
+	}
+	
+	public SimpleStringProperty djMixerProperty() {
+		return djMixer;
+	}
+	
+	public SimpleStringProperty ratingProperty() {
+		return rating;
+	}
+	
+	public SimpleStringProperty producerProperty() {
+		return producer;
+	}
+	
+	public SimpleStringProperty performerProperty() {
+		return performer;
+	}
+	
+	public SimpleStringProperty orchestraProperty() {
+		return orchestra;
+	}
+	
+	public SimpleStringProperty countryProperty() {
+		return country;
+	}
+	
+	public SimpleStringProperty lyricistProperty() {
+		return lyricist;
+	}
+	
+	public SimpleStringProperty conductorProperty() {
+		return conductor;
+	}
+	
+	public SimpleStringProperty amazonIDProperty() {
+		return amazonID;
+	}
+	
+	public SimpleStringProperty encoderProperty() {
+		return encoder;
 	}
 	
 	/**
