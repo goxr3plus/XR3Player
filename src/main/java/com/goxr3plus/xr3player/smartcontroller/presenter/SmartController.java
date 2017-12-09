@@ -52,7 +52,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
-import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerArtistsMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFiltersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.AllDetailsService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
@@ -214,7 +214,7 @@ public class SmartController extends StackPane {
 	
 	public final SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
 	
-	public final SmartControllerArtistsMode artistsMode = new SmartControllerArtistsMode(this);
+	public final SmartControllerFiltersMode artistsMode = new SmartControllerFiltersMode(this);
 	
 	// --------------------------------------------------
 	

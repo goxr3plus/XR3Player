@@ -106,6 +106,13 @@ public class Main extends Application {
 		internalInformation.put("ReleasedDate", "10/12/2017");
 		
 		System.out.println("Outside of Application Start Method");
+		
+		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
+		Logger.getGlobal().setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
+		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
 	}
 	
 	/**

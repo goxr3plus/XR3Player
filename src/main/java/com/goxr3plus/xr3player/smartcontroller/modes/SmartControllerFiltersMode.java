@@ -23,9 +23,9 @@ import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaTableViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.ArtistsModeService;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.FiltersModeService;
 
-public class SmartControllerArtistsMode extends StackPane {
+public class SmartControllerFiltersMode extends StackPane {
 	
 	//--------------------------------------------------------------
 	
@@ -70,7 +70,7 @@ public class SmartControllerArtistsMode extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	private final ArtistsModeService service = new ArtistsModeService(this);
+	private final FiltersModeService service = new FiltersModeService(this);
 	
 	// -------------------------------------------------------------
 	
@@ -79,12 +79,12 @@ public class SmartControllerArtistsMode extends StackPane {
 	/**
 	 * Constructor.
 	 */
-	public SmartControllerArtistsMode(SmartController smartController) {
+	public SmartControllerFiltersMode(SmartController smartController) {
 		this.smartController = smartController;
 		this.mediaTableViewer = new MediaTableViewer(smartController, Mode.ARTISTS);
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartControllerArtistsMode.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartControllerFiltersMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -212,7 +212,7 @@ public class SmartControllerArtistsMode extends StackPane {
 	/**
 	 * @return the service
 	 */
-	public ArtistsModeService getService() {
+	public FiltersModeService getService() {
 		return service;
 	}
 	

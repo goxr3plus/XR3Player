@@ -32,12 +32,12 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
-import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerArtistsMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFiltersMode;
 
-public class ArtistsModeService extends Service<Void> {
+public class FiltersModeService extends Service<Void> {
 	
 	/** A private instance of the SmartController it belongs */
-	private final SmartControllerArtistsMode smartControllerArtistsMode;
+	private final SmartControllerFiltersMode smartControllerArtistsMode;
 	
 	private Filter filter = Filter.ARTIST;
 	
@@ -72,7 +72,7 @@ public class ArtistsModeService extends Service<Void> {
 	 * 
 	 * @param smartController
 	 */
-	public ArtistsModeService(SmartControllerArtistsMode smartControllerArtistsMode) {
+	public FiltersModeService(SmartControllerFiltersMode smartControllerArtistsMode) {
 		this.smartControllerArtistsMode = smartControllerArtistsMode;
 		this.allDetailsService = new AllDetailsService(null);
 	}
@@ -223,10 +223,11 @@ public class ArtistsModeService extends Service<Void> {
 							
 							int counter = 0;
 							// Fetch the items from the database
-							while (resultSet.next())
+							while (resultSet.next()) {
 								if (isCancelled())
 									break;
 								else {
+									//System.out.println(isCancelled());
 									
 									if (operation == Operation.REFRESH)
 										
@@ -250,7 +251,7 @@ public class ArtistsModeService extends Service<Void> {
 									//Update the progress
 									updateProgress(++progress, totalProgress);
 								}
-							
+							}
 						} catch (Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
 						}
