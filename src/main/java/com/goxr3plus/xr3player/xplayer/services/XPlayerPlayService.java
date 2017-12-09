@@ -246,6 +246,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 			
 			//Add to played songs
 			Main.playedSongs.add(absolutePath, true);
+			Main.playedSongs.appendToTimesPlayed(absolutePath, true);
 			
 			//Check if file already in XPlayer Database History Playlist before trying to add it
 			try (PreparedStatement statement = Main.dbManager.getConnection()

@@ -341,10 +341,13 @@ public class MediaContextMenu extends ContextMenu {
 		
 		//markAsPlayed
 		else if (source == markAsPlayed) {
-			if (!Main.playedSongs.containsFile(media.getFilePath()))
-				System.out.println(Main.playedSongs.add(media.getFilePath(), true));
-			else
-				System.out.println(Main.playedSongs.remove(media.getFilePath(), true));
+			if (!Main.playedSongs.containsFile(media.getFilePath())) {
+				Main.playedSongs.add(media.getFilePath(), true);
+				Main.playedSongs.appendToTimesPlayed(media.getFilePath(), true);
+			}else {
+				if(Main.playedSongs.remove(media.getFilePath(), true))
+					media.timesPlayedProperty().set(0);
+			}
 		}
 		
 		// remove media

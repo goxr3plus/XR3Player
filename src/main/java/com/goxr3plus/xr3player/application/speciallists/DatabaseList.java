@@ -3,6 +3,7 @@ package main.java.com.goxr3plus.xr3player.application.speciallists;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -19,7 +20,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class DatabaseList {
 	
 	/** The LinkedHashSet */
-	private Set<String> set = new LinkedHashSet<>();
+	private Set<FakeMedia> set = new LinkedHashSet<>();
 	
 	/**
 	 * The name of the database table
@@ -51,38 +52,40 @@ public class DatabaseList {
 			
 			//Update 81+ deletes the Emotions Lists from previous databases ( too bad , but wtf to do.... we have to update bro's)
 			else {
-				//Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF EXISTS'" + databaseTableName.replace("Original", "") + "'");
-				//Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF EXISTS'" + "HateddMediaList" + "'");
+				//Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF EXISTS'" + databaseTableName.replace("Original", "") + "'")
+				//Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF EXISTS'" + "HateddMediaList" + "'")
 				
-				//Main.dbManager.getConnection().commit();
+				//Main.dbManager.getConnection().commit()
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 		
-		//System.out.println("Column exists " + isColumnExists(databaseTableName, "STARS"));
+		//System.out.println("Column exists " + isColumnExists(databaseTableName, "STARS"))
 	}
 	
 	/**
 	 * Checks if the Specific column exists inside the database
 	 * 
 	 * @param table
+	 *            The requested table name
 	 * @param column
+	 *            The requested column name
 	 * @return
 	 */
 	public boolean doesColumnExists(String table , String column) {
-		try {
-			Main.dbManager.getConnection().prepareStatement("SELECT " + column + " FROM '" + table + "'").executeQuery();
+		try (PreparedStatement pStatement = Main.dbManager.getConnection().prepareStatement("SELECT " + column + " FROM '" + table + "'")) {
+			pStatement.executeQuery();
 			return true;
 		} catch (SQLException e) {
-			//e.printStackTrace();
+			//e.printStackTrace()
 			return false;
 		}
 	}
 	
 	/**
-	 * Uploads the data from the database table to the list , i call this method when i login into a user to upload the Media that he/she has
-	 * previously heard
+	 * Uploads the data from the database table to the list , i call this method when i login into a user to upload the Media that he/she has previously
+	 * heard
 	 */
 	public void uploadFromDataBase() {
 		
@@ -94,7 +97,7 @@ public class DatabaseList {
 			
 			//Add all
 			while (resultSet.next())
-				set.add(resultSet.getString("PATH"));
+				set.add(new FakeMedia(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED")));
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -105,73 +108,40 @@ public class DatabaseList {
 	/**
 	 * Add a new item.
 	 *
-	 * @param item
+	 * @param path
 	 *            the item
 	 * @return True if succeeded or False if not
 	 */
-	public boolean add(String item , boolean commit) {
+	public boolean add(String path , boolean commit) {
+		boolean[] answer = { false };
 		
-		if (set.add(item))
+		//If it doesn't exists inside the Set
+		if (!containsFile(path))
+			
 			//Try to insert into the database
 			try (PreparedStatement insert = Main.dbManager.getConnection()
 					.prepareStatement("INSERT OR IGNORE INTO '" + databaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?,?)")) {
-				insert.setString(1, item);
+				insert.setString(1, path);
 				insert.setDouble(2, 0.0);
 				insert.setInt(3, 0);
 				insert.setString(4, InfoTool.getCurrentDate());
 				insert.setString(5, InfoTool.getLocalTime());
 				insert.executeUpdate();
 				
-				//Commit
-				if (commit)
-					Main.dbManager.commit();
-				
-				return true;
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-				return false;
-			}
-		
-		return false;
-	}
-	
-	/**
-	 * Add a new item.
-	 *
-	 * @param item
-	 *            the item
-	 * @return True if succeeded or False if not
-	 */
-	public boolean remove(String item , boolean commit) {
-		
-		if (set.remove(item))
-			//Try to delete from the database
-			try (PreparedStatement remove = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + databaseTableName + "' WHERE PATH=?")) {
-				remove.setString(1, item);
-				remove.executeUpdate();
+				//Append
+				set.add(new FakeMedia(path, 0, 0));
 				
 				//Commit
 				if (commit)
 					Main.dbManager.commit();
 				
-				return true;
+				answer[0] = true;
 			} catch (SQLException ex) {
 				ex.printStackTrace();
-				return false;
+				answer[0] = false;
 			}
 		
-		return false;
-	}
-	
-	/**
-	 * Check if a media has been already played.
-	 *
-	 * @param filePath
-	 *            The absolute file path
-	 * @return true, if successful
-	 */
-	public boolean containsFile(String filePath) {
-		return set.contains(filePath);
+		return answer[0];
 	}
 	
 	/**
@@ -184,8 +154,13 @@ public class DatabaseList {
 	 * @return true, if successful
 	 */
 	public boolean renameMedia(String oldName , String newName , boolean commit) {
-		if (!set.remove(oldName))
-			return true;
+		boolean[] answer = { false };
+		
+		//Check if it already exists
+		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(oldName)).findFirst().ifPresent(fakeMedia -> {
+			fakeMedia.setPath(newName);
+			answer[0] = true;
+		});
 		
 		//Update in the database
 		try (PreparedStatement rename = Main.dbManager.getConnection().prepareStatement("UPDATE '" + databaseTableName + "' SET PATH=? WHERE PATH=?")) {
@@ -198,12 +173,95 @@ public class DatabaseList {
 				Main.dbManager.commit();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			return false;
+			answer[0] = false;
 		}
 		
-		//Add to the Set
-		return set.add(newName);
+		return answer[0];
+	}
+	
+	/**
+	 * Append 1 to TimesPlayed on the given FakeMedia Path
+	 * 
+	 * @return true, if successful
+	 */
+	public boolean appendToTimesPlayed(String path , boolean commit) {
+		boolean[] answer = { false };
 		
+		//Check if it already exists
+		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(path)).findFirst().ifPresent(fakeMedia -> {
+			
+			//Update in the database
+			try (PreparedStatement appendToTimePlayed = Main.dbManager.getConnection().prepareStatement("UPDATE '" + databaseTableName + "' SET TIMESPLAYED=? WHERE PATH=?")) {
+				appendToTimePlayed.setInt(1, fakeMedia.getTimesPlayed() + 1);
+				appendToTimePlayed.setString(2, path);
+				appendToTimePlayed.executeUpdate();
+				
+				//Update FakeMedia
+				fakeMedia.setTimesPlayed(fakeMedia.getTimesPlayed() + 1);
+				answer[0] = true;
+				//System.out.println("Path : " + path + " , Times Played :" + fakeMedia.getTimesPlayed())
+				
+				//Commit
+				if (commit)
+					Main.dbManager.commit();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				answer[0] = false;
+			}
+		});
+		
+		return answer[0];
+	}
+	
+	/**
+	 * Add a new item.
+	 *
+	 * @param path
+	 *            the item
+	 * @return True if succeeded or False if not
+	 */
+	public boolean remove(String path , boolean commit) {
+		boolean[] answer = { false };
+		FakeMedia[] fakeM = { null };
+		
+		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(path)).findFirst().ifPresent(fakeMedia -> {
+			fakeM[0] = fakeMedia;
+			
+			//Try to delete from the database
+			try (PreparedStatement remove = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + databaseTableName + "' WHERE PATH=?")) {
+				remove.setString(1, path);
+				remove.executeUpdate();
+				
+				//Commit
+				if (commit)
+					Main.dbManager.commit();
+				
+				answer[0] = true;
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				answer[0] = false;
+			}
+		});
+		
+		//Check if it was found
+		if (fakeM[0] != null)
+			set.remove(fakeM[0]);
+		
+		return answer[0];
+	}
+	
+	/**
+	 * Check if a media has been already played.
+	 *
+	 * @param path
+	 *            The absolute file path
+	 * @return true, if successful
+	 */
+	public boolean containsFile(String path) {
+		boolean[] answer = { false };
+		
+		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(path)).findFirst().ifPresent(fakeMedia -> answer[0] = true);
+		return answer[0];
 	}
 	
 	/**
@@ -213,9 +271,10 @@ public class DatabaseList {
 	 */
 	public boolean clearAll(boolean commit) {
 		
-		try {
+		try (Statement statement = Main.dbManager.getConnection().createStatement()) {
+			
 			//Clear the table
-			Main.dbManager.getConnection().createStatement().executeUpdate("DELETE FROM '" + databaseTableName + "'");
+			statement.executeUpdate("DELETE FROM '" + databaseTableName + "'");
 			if (commit)
 				Main.dbManager.commit();
 			
@@ -227,7 +286,6 @@ public class DatabaseList {
 		}
 		
 		return true;
-		
 	}
 	
 	/**
@@ -235,7 +293,7 @@ public class DatabaseList {
 	 *
 	 * @return the sets the
 	 */
-	public Set<String> getSet() {
+	public Set<FakeMedia> getSet() {
 		return set;
 	}
 	

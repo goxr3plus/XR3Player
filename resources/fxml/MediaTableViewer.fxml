@@ -36,7 +36,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="getInfoBuy" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Download / Buy">
+                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Download / Buy">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
@@ -89,6 +89,15 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
+                     <TableColumn fx:id="timesPlayed" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Times Played">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/timesPlayed.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
                   <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Extension" visible="false">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -106,16 +115,7 @@
                            </image>
                         </ImageView>
                      </graphic>
-                  </TableColumn>
-                  <TableColumn fx:id="timesPlayed" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Times Played-[Not implemented yet]" visible="false">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/timesPlayed.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </TableColumn>
+                  </TableColumn>            
                   <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false" />
                   <TableColumn fx:id="mood" minWidth="65.0" prefWidth="75.0" text="Mood" visible="false" />
                   <TableColumn fx:id="album" minWidth="65.0" prefWidth="75.0" text="Album" visible="false" />

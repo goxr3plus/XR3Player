@@ -572,10 +572,14 @@ public class MediaTableViewer extends StackPane {
 						getSelectionModel().getSelectedItem().rename(getTableView());
 					else if (code == KeyCode.U) {
 						Media media = getSelectionModel().getSelectedItem();
-						if (!Main.playedSongs.containsFile(media.getFilePath()))
+						if (!Main.playedSongs.containsFile(media.getFilePath())) {
 							Main.playedSongs.add(media.getFilePath(), true);
-						else
-							Main.playedSongs.remove(media.getFilePath(), true);
+							Main.playedSongs.appendToTimesPlayed(media.getFilePath(), true);
+						}else {
+							if(Main.playedSongs.remove(media.getFilePath(), true))
+								media.timesPlayedProperty().set(0);
+							
+						}
 					} else if (code == KeyCode.ENTER)
 						Main.xPlayersList.getXPlayerController(0).playSong(getSelectionModel().getSelectedItem().getFilePath());
 					else if (key.isControlDown() && code == KeyCode.I)

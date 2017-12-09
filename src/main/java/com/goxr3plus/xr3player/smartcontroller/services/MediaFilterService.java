@@ -150,14 +150,20 @@ public class MediaFilterService {
 					});
 					
 					//Set Played Status
-					setPlayStatus(media, mediaIsPlaying[0] != -3 ? mediaIsPlaying[0] : Main.playedSongs.getSet().stream().anyMatch(playedFileAbsolutePath -> {
+					setPlayStatus(media, mediaIsPlaying[0] != -3 ? mediaIsPlaying[0] : Main.playedSongs.getSet().stream().anyMatch(playedFile -> {
 						try {
-							return FileUtils.contentEquals(new File(playedFileAbsolutePath), file);
+							return FileUtils.contentEquals(new File(playedFile.getPath()), file);
 						} catch (IOException ex) {
 							ex.printStackTrace();
 						}
 						return false;
 					}) ? -1 : -2);
+					
+					//Set timesPlayed
+					Main.playedSongs.getSet().stream().filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst().ifPresent(playedFile -> {
+						media.timesPlayedProperty().set(playedFile.getTimesPlayed());
+					});
+					
 				} else if (mode == 1) { //Check based on FileName and FileLength -> both must be equal
 					
 					//Go
@@ -177,9 +183,13 @@ public class MediaFilterService {
 					//Set Played Status
 					setPlayStatus(media,
 							mediaIsPlaying[0] != -3 ? mediaIsPlaying[0]
-									: Main.playedSongs.getSet().stream().filter(playedFileAbsolutePath -> playedFileAbsolutePath.toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
-											.anyMatch(playedFile -> new File(playedFile).length() == mediaFileLength) ? -1 : -2);
+									: Main.playedSongs.getSet().stream().filter(playedFile -> playedFile.getPath().toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
+											.anyMatch(playedFile -> new File(playedFile.getPath()).length() == mediaFileLength) ? -1 : -2);
 					
+					//Set timesPlayed
+					Main.playedSongs.getSet().stream().filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst().ifPresent(playedFile -> {
+						media.timesPlayedProperty().set(playedFile.getTimesPlayed());
+					});
 				}
 				
 				// ---------Liked or disliked--------?

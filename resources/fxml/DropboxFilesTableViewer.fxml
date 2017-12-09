@@ -19,9 +19,9 @@
             <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type" />
-                  <TableColumn fx:id="download" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Download">
+                  <TableColumn fx:id="download" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Download">
                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
                               <Image url="@../image/Download%20From%20Cloud-24.png" />
                            </image>
@@ -32,12 +32,12 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/Puzzle-20.png" />
+                              <Image url="@../image/eye2.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="actionColumn" maxWidth="90.0" minWidth="100.0" prefWidth="90.0" resizable="false" text="Action">
+                  <TableColumn fx:id="actionColumn" editable="false" maxWidth="90.0" minWidth="100.0" prefWidth="90.0" resizable="false" sortable="false" text="Action">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
