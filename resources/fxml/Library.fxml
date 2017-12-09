@@ -124,6 +124,15 @@
       		</JFXCheckBox>
          </children>
       </StackPane>
+      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Audio%20Wave%20Filled-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
 	</children>
 	<cursor>
 		<Cursor fx:constant="HAND" />

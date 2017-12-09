@@ -28,19 +28,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.FileType;
+import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
+import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
- * Allows you to view informations about the selected song like the album
- * image,to search for it on the web,to buy this song on iTunes,Amazon.
+ * Allows you to view informations about the selected song like the album image,to search for it on the web,to buy this song on iTunes,Amazon.
  *
  * @author GOXR3PLUS STUDIO
  */
-public class MediaInformation extends BorderPane {
+public class MediaInformation extends StackPane {
 	
 	//--------------------------------------------------------------
 	
@@ -52,9 +57,6 @@ public class MediaInformation extends BorderPane {
 	
 	@FXML
 	private Label title;
-	
-	@FXML
-	private Button moreButton;
 	
 	@FXML
 	private Label drive;
@@ -122,10 +124,13 @@ public class MediaInformation extends BorderPane {
 	@FXML
 	private Label mpegVersion;
 	
+	@FXML
+	private Label dragAndDropLabel;
+	
 	// -------------------------------------------------------------
 	
 	/** The null image. */
-	private final Image nullImage = InfoTool.getImageFromResourcesFolder("noAlbumImage.png");
+	private final Image nullImage = InfoTool.getImageFromResourcesFolder("noArtwork.png");
 	
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
@@ -174,24 +179,49 @@ public class MediaInformation extends BorderPane {
 			}
 			drag.consume();
 		});
+		setOnDragOver(event -> {
+			// The drag must come from source other than the owner
+			if (event.getGestureSource() != this)
+				dragAndDropLabel.setVisible(true);
+		});
 		
-		setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-		setOnDragDropped(drop -> {
-			// Keeping the absolute path
-			String absolutePath;
-			
+		//dragAndDropLabel
+		dragAndDropLabel.setVisible(false);
+		dragAndDropLabel.setOnDragOver(event -> event.acceptTransferModes(TransferMode.LINK));
+		dragAndDropLabel.setOnDragDropped(event -> {
 			// File?
-			for (File file : drop.getDragboard().getFiles()) {
-				absolutePath = file.getAbsolutePath();
-				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-					updateInformation(new Audio(file.getAbsolutePath(), 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
+			for (File file : event.getDragboard().getFiles()) {
+				
+				//No directories allowed
+				if (!file.isDirectory()) {
+					
+					//Get it
+					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+					
+					//Check if File exists
+					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
+						ActionTool.showNotification("File doesn't exist",
+								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+								Duration.millis(2000), NotificationType.INFORMATION);
+						return;
+					}
+					
+					updateInformation(new Audio(ftaap.getFileAbsolutePath(), 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
+					
+					//break
 					break;
 				}
 			}
+			
+			event.consume();
+		});
+		dragAndDropLabel.setOnDragExited(event -> {
+			dragAndDropLabel.setVisible(false);
+			event.consume();
 		});
 		
 		// mediaImageButton
-		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media != null ? media.getFilePath() : null, TagTabCategory.ARTWORK,true));
+		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media != null ? media.getFilePath() : null, TagTabCategory.ARTWORK, true));
 		
 	}
 	
@@ -206,8 +236,7 @@ public class MediaInformation extends BorderPane {
 	}
 	
 	/**
-	 * Using this Service as an external Thread which updates the Information
-	 * based on the selected Media
+	 * Using this Service as an external Thread which updates the Information based on the selected Media
 	 * 
 	 * @author GOXR3PLUS
 	 *

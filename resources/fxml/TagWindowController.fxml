@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -35,38 +37,63 @@
             </SplitPane>
          </center>
          <bottom>
-            <HBox alignment="CENTER" spacing="1.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
+            <StackPane BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                  <HBox alignment="CENTER" spacing="1.0" style="-fx-background-color: #303030;">
+                     <children>
+                        <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/nextt.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Previous" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" rotate="-180.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/nextt.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Previous" />
+                           </tooltip>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="4.0" top="4.0" />
+                     </padding>
+                  </HBox>
+                  <JFXButton fx:id="closeButton" maxHeight="1.7976931348623157E308" style="-fx-background-radius: 0;" text="Close" StackPane.alignment="CENTER_RIGHT">
                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                        <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/nextt.png" />
+                              <Image url="@../image/x.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                     <tooltip>
-                        <Tooltip text="Previous" />
-                     </tooltip>
-                  </JFXButton>
-                  <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" rotate="-180.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/nextt.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Previous" />
-                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                </children>
-               <padding>
-                  <Insets bottom="4.0" top="4.0" />
-               </padding>
-            </HBox>
+            </StackPane>
          </bottom>
       </BorderPane>
+      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Audio%20Wave%20Filled-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
    </children>
 </fx:root>

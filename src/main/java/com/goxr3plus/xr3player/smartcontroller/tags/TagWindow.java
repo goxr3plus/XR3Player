@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
@@ -29,6 +30,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.FileType;
+import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
+import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -74,6 +78,12 @@ public class TagWindow extends StackPane {
 	@FXML
 	private JFXButton next;
 	
+	@FXML
+	private JFXButton closeButton;
+	
+	@FXML
+	private Label dragAndDropLabel;
+	
 	//--------------------------------------------------------
 	
 	/** The logger. */
@@ -104,27 +114,16 @@ public class TagWindow extends StackPane {
 			logger.log(Level.SEVERE, "", ex);
 		}
 		
+		//Window
 		window.setTitle("Tag Window");
 		window.initStyle(StageStyle.UTILITY);
 		window.setScene(new Scene(this));
+		window.getScene().setOnDragOver(event -> dragAndDropLabel.setVisible(true));
 		window.getScene().setOnKeyReleased(k -> {
 			if (k.getCode() == KeyCode.ESCAPE)
 				window.close();
-		});
-		window.getScene().setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-		window.getScene().setOnDragDropped(drop -> {
-			// Keeping the absolute path
-			String absolutePath;
-			
-			// File?
-			for (File file : drop.getDragboard().getFiles()) {
-				absolutePath = file.getAbsolutePath();
-				if (file.isFile() && InfoTool.isAudioSupported(absolutePath)) {
-					openAudio(file.getAbsolutePath(), TagTabCategory.BASICINFO, true);
-					break;
-				}
-			}
-		});
+		});		
+		
 	}
 	
 	/**
@@ -132,6 +131,42 @@ public class TagWindow extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//dragAndDropLabel
+		dragAndDropLabel.setVisible(false);
+		dragAndDropLabel.setOnDragOver(event -> event.acceptTransferModes(TransferMode.LINK));
+		dragAndDropLabel.setOnDragDropped(event -> {
+			// File?
+			for (File file : event.getDragboard().getFiles()) {
+				
+				//No directories allowed
+				if (!file.isDirectory()) {
+					
+					//Get it
+					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+					
+					//Check if File exists
+					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
+						ActionTool.showNotification("File doesn't exist",
+								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+								Duration.millis(2000), NotificationType.INFORMATION);
+						return;
+					}
+					
+					openAudio(file.getAbsolutePath(), TagTabCategory.BASICINFO, true);
+					
+					//break
+					break;
+				}
+			}
+			
+			event.consume();
+			
+		});
+		dragAndDropLabel.setOnDragExited(event -> {
+			dragAndDropLabel.setVisible(false);
+			event.consume();
+		});
 		
 		//basicInfoTab
 		basicInfoTab.setContent(mp3BasicInfo);
@@ -215,6 +250,10 @@ public class TagWindow extends StackPane {
 				id3V2Controller.populateTagFields(listView.getSelectionModel().getSelectedItem());
 			
 		});
+		
+		//closeButton
+		closeButton.setOnAction(a -> close());
+		
 	}
 	
 	/**

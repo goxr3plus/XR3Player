@@ -92,6 +92,9 @@ public class Library extends StackPane {
 	@FXML
 	private JFXCheckBox selectionModeCheckBox;
 	
+	@FXML
+	private Label dragAndDropLabel;
+	
 	// --------------------------------------------
 	
 	// private final CopyProgress copyService = new CopyProgress()
@@ -373,25 +376,41 @@ public class Library extends StackPane {
 		});
 		
 		// --Drag Over
-		super.setOnDragOver(dragOver -> {
-			
+		setOnDragOver(event -> {
 			// Source has files?
-			if (dragOver.getDragboard().hasFiles())
+			if (event.getDragboard().hasFiles())
 				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (dragOver.getGestureSource() != controller.getTableViewer())// && dragOver.getGestureSource()!= controller.foldersMode)
-				dragOver.acceptTransferModes(TransferMode.LINK);
+			if (event.getGestureSource() != controller.getTableViewer().getTableView() && event.getGestureSource() != controller.foldersMode
+					&& event.getGestureSource() != controller.artistsMode.getMediaTableViewer().getTableView())
+				dragAndDropLabel.setVisible(true);
 			
 		});
 		
-		// --Drag Dropped
-		super.setOnDragDropped(drop -> {
-			// Has Files? + isFree()?
-			if (drop.getDragboard().hasFiles() && controller.isFree(true))
-				controller.getInputService().start(drop.getDragboard().getFiles());
+		//dragAndDropLabel
+		dragAndDropLabel.setVisible(false);
+		dragAndDropLabel.setOnDragOver(event -> {
 			
-			drop.setDropCompleted(true);
+			// Source has files?
+			if (event.getDragboard().hasFiles())
+				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
+			
+			// The drag must come from source other than the owner
+			if (event.getGestureSource() != controller.getTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
+				event.acceptTransferModes(TransferMode.LINK);
+			
+		});
+		dragAndDropLabel.setOnDragDropped(event -> {
+			// Has Files? + isFree()?
+			if (event.getDragboard().hasFiles() && controller.isFree(true))
+				controller.getInputService().start(event.getDragboard().getFiles());
+			
+			event.setDropCompleted(true);
+		});
+		dragAndDropLabel.setOnDragExited(event -> {
+			dragAndDropLabel.setVisible(false);
+			event.consume();
 		});
 		
 	}

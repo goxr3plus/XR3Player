@@ -341,7 +341,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					//Check if File exists
 					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 						ActionTool.showNotification("File doesn't exist",
-								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " shows to a file that doesn't exists anymore.",
+								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
 								Duration.millis(2000), NotificationType.INFORMATION);
 						return;
 					}
@@ -457,22 +457,25 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		playerExtraSettings = new XPlayerExtraSettings(this);
 		
 		//== borderPane
-		borderPane.setOnDragOver(dragOver -> {
-			//Check if FlipPane is on the front side
-			if (!flipPane.isBackVisible())
-				dragAndDropLabel.setVisible(true);
+		borderPane.setOnDragOver(event -> {
+			System.out.println(event.getGestureSource());
 			
-			dragOver.consume();
+			//Check if FlipPane is on the front side
+			if (event.getGestureSource() != mediaFileMarquee) {
+				dragAndDropLabel.setVisible(true);
+			}
+			
+			event.consume();
 		});
 		
 		//== dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
-		dragAndDropLabel.setOnDragOver(dragOver -> {
+		dragAndDropLabel.setOnDragOver(event -> {
 			//Check if FlipPane is on the front side
 			if (!flipPane.isBackVisible())
-				dragOver.acceptTransferModes(TransferMode.LINK);
+				event.acceptTransferModes(TransferMode.LINK);
 			
-			dragOver.consume();
+			event.consume();
 		});
 		dragAndDropLabel.setOnDragExited(event -> {
 			dragAndDropLabel.setVisible(false);
