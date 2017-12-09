@@ -17,8 +17,8 @@
          <center>
             <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn fx:id="number" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="#" visible="false" />
-                  <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Artwork" visible="false">
+                  <TableColumn fx:id="number" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="#" />
+                  <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Artwork">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                            <image>
@@ -27,7 +27,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played" visible="false">
+                  <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played">
                      <graphic>
                         <ImageView>
                            <image>
@@ -36,7 +36,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Download / Buy" visible="false">
+                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Download / Buy">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
@@ -45,7 +45,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type" visible="false">
+                  <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="20.0">
                            <image>
@@ -53,7 +53,7 @@
                            </image>
                         </ImageView>
                      </graphic></TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Title" visible="false">
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Title">
                      <graphic>
                         <ImageView>
                            <image>
@@ -62,7 +62,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion" visible="false">
+                  <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
@@ -71,7 +71,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Time" visible="false">
+                  <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Length">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +80,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="stars" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Stars" visible="false">
+                  <TableColumn fx:id="stars" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Stars">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -89,7 +89,7 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                     <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Play Count" visible="false" />
+                     <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Play Count" />
                   <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Extension" visible="false">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -128,26 +128,26 @@
                         </ImageView>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate" visible="false" />
-                  <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bpm" visible="false" />
+                  <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate" />
+                  <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bpm" />
                   <TableColumn fx:id="genre" minWidth="65.0" prefWidth="75.0" text="Genre" visible="false" />
                   <TableColumn fx:id="key" minWidth="65.0" prefWidth="75.0" text="Key" visible="false" />
                   <TableColumn fx:id="year" minWidth="65.0" prefWidth="75.0" text="Year" visible="false" />
                   <TableColumn fx:id="tempo" minWidth="65.0" prefWidth="75.0" text="Tempo" visible="false" />
-                  <TableColumn fx:id="copyright" minWidth="65.0" prefWidth="75.0" text="Copyright" />
-                  <TableColumn fx:id="track" minWidth="65.0" prefWidth="75.0" text="Track" />
-                  <TableColumn fx:id="track_total" minWidth="65.0" prefWidth="75.0" text="Track Total" />
-                  <TableColumn fx:id="remixer" minWidth="65.0" prefWidth="75.0" text="Remixer" />
-                  <TableColumn fx:id="djMixer" minWidth="65.0" prefWidth="75.0" text="DJMixer" />
-                  <TableColumn fx:id="rating" minWidth="65.0" prefWidth="75.0" text="Rating" />
-                  <TableColumn fx:id="producer" minWidth="65.0" prefWidth="75.0" text="Producer" />
-                  <TableColumn fx:id="performer" minWidth="65.0" prefWidth="75.0" text="Performer" />
-                  <TableColumn fx:id="orchestra" minWidth="65.0" prefWidth="75.0" text="Orchestra" />
-                  <TableColumn fx:id="country" minWidth="65.0" prefWidth="75.0" text="Country" />
-                  <TableColumn fx:id="lyricist" minWidth="65.0" prefWidth="75.0" text="Lyricist" />
-                  <TableColumn fx:id="conductor" minWidth="65.0" prefWidth="75.0" text="Conductor" />
-                  <TableColumn fx:id="amazonID" minWidth="65.0" prefWidth="75.0" text="Amazon_ID" />
-                  <TableColumn fx:id="encoder" minWidth="65.0" prefWidth="75.0" text="Encoder" />
+                  <TableColumn fx:id="tempo1" minWidth="65.0" prefWidth="75.0" text="Copyright" visible="false" />
+                  <TableColumn fx:id="tempo11" minWidth="65.0" prefWidth="75.0" text="Track" visible="false" />
+                  <TableColumn fx:id="tempo111" minWidth="65.0" prefWidth="75.0" text="Track Total" visible="false" />
+                  <TableColumn fx:id="tempo1111" minWidth="65.0" prefWidth="75.0" text="Remixer" visible="false" />
+                  <TableColumn fx:id="tempo11111111111111" minWidth="65.0" prefWidth="75.0" text="DJMixer" visible="false" />
+                  <TableColumn fx:id="tempo11111" minWidth="65.0" prefWidth="75.0" text="Rating" visible="false" />
+                  <TableColumn fx:id="tempo111111" minWidth="65.0" prefWidth="75.0" text="Producer" visible="false" />
+                  <TableColumn fx:id="tempo1111111" minWidth="65.0" prefWidth="75.0" text="Performer" visible="false" />
+                  <TableColumn fx:id="tempo11111111" minWidth="65.0" prefWidth="75.0" text="Orchestra" visible="false" />
+                  <TableColumn fx:id="tempo111111111" minWidth="65.0" prefWidth="75.0" text="Country" visible="false" />
+                  <TableColumn fx:id="tempo1111111111" minWidth="65.0" prefWidth="75.0" text="Lyricist" visible="false" />
+                  <TableColumn fx:id="tempo11111111111" minWidth="65.0" prefWidth="75.0" text="Conductor" visible="false" />
+                  <TableColumn fx:id="tempo111111111111" minWidth="65.0" prefWidth="75.0" text="Amazon_ID" visible="false" />
+                  <TableColumn fx:id="tempo1111111111111" minWidth="65.0" prefWidth="75.0" text="Encoder" visible="false" />
                   <TableColumn fx:id="drive" maxWidth="80.0" minWidth="80.0" text="Drive" visible="false">
                      <graphic>
                         <ImageView>
