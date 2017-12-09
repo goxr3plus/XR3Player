@@ -35,15 +35,6 @@ public class AllDetailsService extends Service<Boolean> {
 	}
 	
 	/**
-	 * Constructor
-	 * 
-	 * @param smartController
-	 */
-	public AllDetailsService() {
-		
-	}
-	
-	/**
 	 * Restarts the Service
 	 * 
 	 * @param observableList
