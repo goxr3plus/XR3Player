@@ -383,7 +383,7 @@ public class Library extends StackPane {
 			
 			// The drag must come from source other than the owner
 			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView() && event.getGestureSource() != controller.foldersMode
-					&& event.getGestureSource() != controller.artistsMode.getMediaTableViewer().getTableView())
+					&& event.getGestureSource() != controller.filtersMode.getMediaTableViewer().getTableView())
 				dragAndDropLabel.setVisible(true);
 			
 		});

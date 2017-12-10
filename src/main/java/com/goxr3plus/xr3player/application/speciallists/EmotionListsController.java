@@ -47,14 +47,11 @@ public class EmotionListsController {
 	}
 	
 	/**
-	 * This method accepts a song path and based on the emotion the user
-	 * expressed for it , the song will be added on one of the EmotionsList (for
-	 * example LikedSongs) and will automatically determine if it needs to be
-	 * removed from some other emotion list that it was .
+	 * This method accepts a song path and based on the emotion the user expressed for it , the song will be added on one of the EmotionsList (for example
+	 * LikedSongs) and will automatically determine if it needs to be removed from some other emotion list that it was .
 	 * 
 	 * <br>
-	 * For example if it was on liked songs and the user disliked it will go on
-	 * the disliked songs list etc.
+	 * For example if it was on liked songs and the user disliked it will go on the disliked songs list etc.
 	 * 
 	 * @param songPath
 	 * @param emotion
@@ -62,53 +59,61 @@ public class EmotionListsController {
 	public void makeEmotionDecisition(String songPath , Emotion emotion) {
 		boolean[] updateEmotion = new boolean[4];
 		
-		if (emotion == Emotion.HATE) {
+		try {
 			
-			updateEmotion[0] = hatedMediaList.add(songPath, false);
-			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-			updateEmotion[2] = likedMediaList.remove(songPath, false);
-			updateEmotion[3] = lovedMediaList.remove(songPath, false);
+			if (emotion == Emotion.HATE) {
+				
+				updateEmotion[0] = hatedMediaList.add(songPath, false);
+				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+				updateEmotion[2] = likedMediaList.remove(songPath, false);
+				updateEmotion[3] = lovedMediaList.remove(songPath, false);
+				
+			} else if (emotion == Emotion.DISLIKE) {
+				
+				updateEmotion[0] = hatedMediaList.remove(songPath, false);
+				updateEmotion[1] = dislikedMediaList.add(songPath, false);
+				updateEmotion[2] = likedMediaList.remove(songPath, false);
+				updateEmotion[3] = lovedMediaList.remove(songPath, false);
+				
+			} else if (emotion == Emotion.NEUTRAL) {
+				
+				updateEmotion[0] = hatedMediaList.remove(songPath, false);
+				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+				updateEmotion[2] = likedMediaList.remove(songPath, false);
+				updateEmotion[3] = lovedMediaList.remove(songPath, false);
+				
+			} else if (emotion == Emotion.LIKE) {
+				
+				updateEmotion[0] = hatedMediaList.remove(songPath, false);
+				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+				updateEmotion[2] = likedMediaList.add(songPath, false);
+				updateEmotion[3] = lovedMediaList.remove(songPath, false);
+				
+			} else if (emotion == Emotion.LOVE) {
+				
+				updateEmotion[0] = hatedMediaList.remove(songPath, false);
+				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+				updateEmotion[2] = likedMediaList.remove(songPath, false);
+				updateEmotion[3] = lovedMediaList.add(songPath, false);
+				
+			}
 			
-		} else if (emotion == Emotion.DISLIKE) {
+			//Update all the SmartControllers
+			Platform.runLater(() ->
 			
-			updateEmotion[0] = hatedMediaList.remove(songPath, false);
-			updateEmotion[1] = dislikedMediaList.add(songPath, false);
-			updateEmotion[2] = likedMediaList.remove(songPath, false);
-			updateEmotion[3] = lovedMediaList.remove(songPath, false);
+			updateEmotionSmartControllers(updateEmotion[0], updateEmotion[1], updateEmotion[2], updateEmotion[3]));
 			
-		} else if (emotion == Emotion.NEUTRAL) {
+			//Commit to the Database
+			Main.dbManager.commit();
 			
-			updateEmotion[0] = hatedMediaList.remove(songPath, false);
-			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-			updateEmotion[2] = likedMediaList.remove(songPath, false);
-			updateEmotion[3] = lovedMediaList.remove(songPath, false);
-			
-		} else if (emotion == Emotion.LIKE) {
-			
-			updateEmotion[0] = hatedMediaList.remove(songPath, false);
-			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-			updateEmotion[2] = likedMediaList.add(songPath, false);
-			updateEmotion[3] = lovedMediaList.remove(songPath, false);
-			
-		} else if (emotion == Emotion.LOVE) {
-			
-			updateEmotion[0] = hatedMediaList.remove(songPath, false);
-			updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-			updateEmotion[2] = likedMediaList.remove(songPath, false);
-			updateEmotion[3] = lovedMediaList.add(songPath, false);
-			
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
-		//Update all the SmartControllers
-		Platform.runLater(() -> updateEmotionSmartControllers(updateEmotion[0], updateEmotion[1], updateEmotion[2], updateEmotion[3]));
-		
-		//Commit to the Database
-		Main.dbManager.commit();
 	}
 	
 	/**
-	 * Update the Emotion SmartControllers based on the boolean given for each
-	 * Emotion SmartController
+	 * Update the Emotion SmartControllers based on the boolean given for each Emotion SmartController
 	 * 
 	 * @param updateHated
 	 * @param updateDisliked
@@ -128,8 +133,7 @@ public class EmotionListsController {
 	}
 	
 	/**
-	 * Checks if the Media is contained in any of the emotion lists , if not
-	 * it's emotion is neutral by default
+	 * Checks if the Media is contained in any of the emotion lists , if not it's emotion is neutral by default
 	 * 
 	 * @param mediaPath
 	 */

@@ -212,7 +212,7 @@ public class SmartController extends StackPane {
 	
 	public final SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
 	
-	public final SmartControllerFiltersMode artistsMode = new SmartControllerFiltersMode(this);
+	public final SmartControllerFiltersMode filtersMode = new SmartControllerFiltersMode(this);
 	
 	// --------------------------------------------------
 	
@@ -447,19 +447,19 @@ public class SmartController extends StackPane {
 		
 		//------------------------SMART CONTROLLER MODES-----------------
 		foldersModeTab.setContent(foldersMode);
-		artistsModeTab.setContent(artistsMode);
+		artistsModeTab.setContent(filtersMode);
 		
 		//--Change Listener for Modes Tab Pane
 		modesTabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue == normalModeTab) { //normalModeTab
-				artistsMode.getService().cancel();
+				filtersMode.getService().cancel();
 				foldersMode.getService().cancel();
 			} else if (newValue == foldersModeTab) { //foldersModeTab
-				artistsMode.getService().cancel();
+				filtersMode.getService().cancel();
 				foldersMode.recreateTree();
 			} else if (newValue == artistsModeTab) { //artistsModeTab
 				foldersMode.getService().cancel();
-				artistsMode.regenerate();
+				filtersMode.regenerate();
 			}
 		});
 		
@@ -550,11 +550,11 @@ public class SmartController extends StackPane {
 			if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
 				
 				//Call the delete for each selected item
-				artistsMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
+				filtersMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
 						.forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
 				
 				//Update artistsMode
-				artistsMode.refreshTableView();
+				filtersMode.refreshTableView();
 			} else
 				//Call the delete for each selected item
 				normal_mode_mediaTableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, null));
@@ -565,11 +565,11 @@ public class SmartController extends StackPane {
 				if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
 					
 					//Call the delete for each selected item
-					artistsMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
+					filtersMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
 							.forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
 					
 					//Update artistsMode
-					artistsMode.refreshTableView();
+					filtersMode.refreshTableView();
 				} else
 					//Call the delete for each selected item
 					normal_mode_mediaTableViewer.getSelectionModel().getSelectedItems().iterator().forEachRemaining(r -> r.delete(permanent1, false, false, this, preparedDelete));
@@ -680,7 +680,7 @@ public class SmartController extends StackPane {
 			if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
 				
 				//Keep a reference
-				MediaTableViewer artists_mode_MediaTableViewer = artistsMode.getMediaTableViewer();
+				MediaTableViewer artists_mode_MediaTableViewer = filtersMode.getMediaTableViewer();
 				
 				//Go	
 				_total = InfoTool.getNumberWithDots(artists_mode_MediaTableViewer.getTableView().getItems().size());

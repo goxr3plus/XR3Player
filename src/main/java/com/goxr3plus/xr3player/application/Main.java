@@ -87,7 +87,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaFilterService;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
@@ -607,7 +607,7 @@ public class Main extends Application {
 					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
 			
 			//Filter Thread (Inspecting the Files if existing)
-			new MediaFilterService().start();
+			new MediaUpdaterService().start();
 			new XPlayersFilterService().start();
 			
 			//---------------END:Important Work-----------------------------------------------------------

@@ -29,7 +29,7 @@ import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 /**
  * The Class FileFilterThread.
  */
-public class MediaFilterService {
+public class MediaUpdaterService {
 	
 	/**
 	 * If is true then the Thread has stopped , so i restart it again...
@@ -78,23 +78,47 @@ public class MediaFilterService {
 	 */
 	private void startFilteringControllers() {
 		
-		//Filter Selected Opened Library SmartController
-		libraryMode.multipleLibs.getSelectedLibrary()
-				.ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList()));
-		libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(),
-				selectedLibrary.getSmartController().artistsMode.getMediaTableViewer().getTableView().getItems()));
-		
-		//Filter XPlayer PlayLists SmartControllers
-		Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-				.forEach(smartController -> filterController(smartController, smartController.artistsMode.getMediaTableViewer().getTableView().getItems()));
-		
-		//Filter Emotion Lists SmartControllers
-		Main.emotionsTabPane.getTabPane().getTabs().forEach(
-				tab -> filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).artistsMode.getMediaTableViewer().getTableView().getItems()));
-		
-		//Filter SearchWindow SmartController
-		filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.getItemsObservableList());
-		
+		try {
+			
+			//Filter Selected Opened Libraries Normal Mode TableViews  
+			libraryMode.multipleLibs.getSelectedLibrary()
+					.ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList()));
+			
+			//Filter Selected Opened Libraries Filters Mode TableViews  
+			libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(),
+					selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems()));
+			
+			//--
+			
+			//Filter XPlayer PlayLists Normal Mode TableViews   
+			Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+					.forEach(smartController -> filterController(smartController, smartController.getItemsObservableList()));
+			
+			//Filter XPlayer PlayLists Filters Mode TableViews  
+			Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+					.forEach(smartController -> filterController(smartController, smartController.filtersMode.getMediaTableViewer().getTableView().getItems()));
+			
+			//--
+			
+			//Filter Emotion Lists Normal Mode TableViews   
+			Main.emotionsTabPane.getTabPane().getTabs()
+					.forEach(tab -> filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).getItemsObservableList()));
+			
+			//Filter Emotion Lists Filters Mode TableViews  
+			Main.emotionsTabPane.getTabPane().getTabs().forEach(tab -> filterController((SmartController) tab.getContent(),
+					( (SmartController) tab.getContent() ).filtersMode.getMediaTableViewer().getTableView().getItems()));
+			
+			//--
+			
+			//Filter SearchWindow Normal Mode TableViews  
+			filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.getItemsObservableList());
+			
+			//Filter SearchWindow SmartController
+			filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.filtersMode.getMediaTableViewer().getTableView().getItems());
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	/**
