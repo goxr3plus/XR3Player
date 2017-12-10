@@ -102,6 +102,7 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
+		System.out.println(" Chiao Chiao good night ");
 		internalInformation.put("Version", 93);
 		internalInformation.put("ReleasedDate", "10/12/2017");
 		
