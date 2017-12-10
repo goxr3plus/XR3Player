@@ -33,6 +33,9 @@ public class SmartControllerFiltersMode extends StackPane {
 	private ListView<String> listView;
 	
 	@FXML
+	private Label nothingFoundLabel;
+	
+	@FXML
 	private ToggleGroup selectedFilter;
 	
 	@FXML
@@ -222,5 +225,13 @@ public class SmartControllerFiltersMode extends StackPane {
 	public ToggleGroup getSelectedFilter() {
 		return selectedFilter;
 	}
+
+	/**
+	 * @return the nothingFoundLabel
+	 */
+	public Label getNothingFoundLabel() {
+		return nothingFoundLabel;
+	}
+
 	
 }

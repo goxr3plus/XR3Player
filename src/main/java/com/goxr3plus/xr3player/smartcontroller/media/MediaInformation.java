@@ -127,6 +127,9 @@ public class MediaInformation extends StackPane {
 	@FXML
 	private Label dragAndDropLabel;
 	
+	@FXML
+	private Button showMore;
+	
 	// -------------------------------------------------------------
 	
 	/** The null image. */
@@ -220,8 +223,14 @@ public class MediaInformation extends StackPane {
 			event.consume();
 		});
 		
+		//imageView
+		//imageView.setOnDragDetected(getOnDragDetected())
+		
 		// mediaImageButton
-		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media != null ? media.getFilePath() : null, TagTabCategory.ARTWORK, true));
+		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(), TagTabCategory.ARTWORK, true));
+		
+		//showMore
+		showMore.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(), TagTabCategory.BASICINFO, true));
 		
 	}
 	

@@ -23,10 +23,7 @@
    <children>
       <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
          <items>
-            <BorderPane>
-               <center>
-                  <ListView fx:id="listView" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
-               </center>
+            <BorderPane minHeight="0.0" minWidth="0.0">
                <top>
                   <MenuButton fx:id="filterMenuButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-radius: 0;" text="Filter : Artist" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                      <items>
@@ -52,6 +49,22 @@
                      </graphic>
                   </MenuButton>
                </top>
+               <center>
+                  <StackPane BorderPane.alignment="CENTER">
+                     <children>
+                        <ListView fx:id="listView" />
+                        <Label fx:id="nothingFoundLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Nothing Found :(" textAlignment="CENTER" wrapText="true">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/funnel.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </center>
             </BorderPane>
             <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
                <top>

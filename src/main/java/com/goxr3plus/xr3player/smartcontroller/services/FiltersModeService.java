@@ -268,11 +268,11 @@ public class FiltersModeService extends Service<Void> {
 							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
 								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
 								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-								//							} else if (observableList.isEmpty()) {
-								//								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
-								//								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+							} else if (observableList.isEmpty()) {
+								smartControllerArtistsMode.getNothingFoundLabel().setVisible(true);
 							} else {
 								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
+								smartControllerArtistsMode.getNothingFoundLabel().setVisible(false);
 							}
 							
 							//Set list view items
