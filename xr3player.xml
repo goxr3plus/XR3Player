@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\GOXR3PLUS\Desktop\XR3Player.jar</jar>
-  <outfile>C:\Users\GOXR3PLUS\Desktop\XR3Player.exe</outfile>
+  <jar>C:\Users\GOXR3PLUSSTUDIO\Desktop\XR3Player Release Package\XR3Player.jar</jar>
+  <outfile>C:\Users\GOXR3PLUSSTUDIO\Desktop\XR3Player Release Package\XR3Player.exe</outfile>
   <errTitle>You have to download the newest Java Version</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\GOXR3PLUS\Desktop\XR3Player Installer\xr3player.ico</icon>
+  <icon>C:\Users\GOXR3PLUSSTUDIO\Desktop\XR3Player_Installer_Files\xr3player.ico</icon>
   <singleInstance>
     <mutexName>singleXR3Player</mutexName>
     <windowTitle></windowTitle>
@@ -22,14 +22,14 @@
     <path></path>
     <bundledJre64Bit>false</bundledJre64Bit>
     <bundledJreAsFallback>false</bundledJreAsFallback>
-    <minVersion>1.8.0_131</minVersion>
-    <maxVersion>1.9.0</maxVersion>
+    <minVersion>1.8.0_141</minVersion>
+    <maxVersion>1.8.0_152</maxVersion>
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>32/64</runtimeBits>
     <maxHeapSize>3064</maxHeapSize>
   </jre>
   <splash>
-    <file>C:\Users\GOXR3PLUS\Desktop\XR3Player Installer\logo.bmp</file>
+    <file>C:\Users\GOXR3PLUSSTUDIO\Desktop\XR3Player Release Package\spashScreen.bmp</file>
     <waitForWindow>true</waitForWindow>
     <timeout>60</timeout>
     <timeoutErr>true</timeoutErr>
