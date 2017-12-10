@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
-	<version>3.0.93</version>
+	<version>3.0.94</version>
+
+
 	<name>XR3Player</name>
 	<description>Dominant Future Generation JavaFX Media Player</description>
 	<url>https://github.com/goxr3plus/XR3Player</url>
@@ -17,6 +19,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<my.project.version>94</my.project.version>
 	</properties>
 
 	<build>
@@ -147,7 +150,7 @@
 					<descriptors>
 						<descriptor>src/assembly/assembly.xml</descriptor>
 					</descriptors>
-					<finalName>XR3Player Update ${project.version}</finalName>
+					<finalName>XR3Player Update ${my.project.version}</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>

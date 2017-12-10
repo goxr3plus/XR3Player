@@ -5,16 +5,17 @@
 	<id>bin</id>
 	<formats>
 		<format>zip</format>
+		<format>dir</format>
 	</formats>
 	<includeBaseDirectory> false </includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>${project.basedir}</directory>
+			<directory>${project.basedir}/XR3Player New Release Files</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-				<include>XR3Player New Release Files/license.txt</include>
-				<include>XR3Player New Release Files/XR3Player Manual.pdf</include>	
-				<include>XR3Player New Release Files/XR3Player.exe</include>				
+				<include>license.txt</include>
+				<include>XR3Player Manual.pdf</include>	
+				<include>XR3Player.exe</include>				
 			</includes>
 		</fileSet>
 		<fileSet>
