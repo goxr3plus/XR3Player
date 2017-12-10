@@ -102,17 +102,10 @@ public class Main extends Application {
 	public static Properties internalInformation = new Properties();
 	static {
 		//----------Properties-------------
-		internalInformation.put("Version", 93);
-		internalInformation.put("ReleasedDate", "10/12/2017");
+		internalInformation.put("Version", 94);
+		internalInformation.put("ReleasedDate", "?/12/2017");
 		
-		System.out.println("Outside of Application Start Method");
-		
-		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
-		Logger.getGlobal().setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
+		System.out.println("Outside of Application Start Method");		
 	}
 	
 	/**

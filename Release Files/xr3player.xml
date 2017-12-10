@@ -29,7 +29,7 @@
     <maxHeapSize>3064</maxHeapSize>
   </jre>
   <splash>
-    <file>C:\Users\GOXR3PLUSSTUDIO\Desktop\XR3Player Release Package\spashScreen.bmp</file>
+    <file>C:\Users\GOXR3PLUSSTUDIO\Desktop\XR3Player Release Package\Images\spashScreen.bmp</file>
     <waitForWindow>true</waitForWindow>
     <timeout>60</timeout>
     <timeoutErr>true</timeoutErr>
