@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -26,7 +27,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.SystemRoot;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
@@ -40,7 +43,7 @@ public class DropboxFilesTableViewer extends StackPane {
 	private TableView<DropboxFile> tableView;
 	
 	@FXML
-	private TableColumn<DropboxFile,ImageView> fileThumbnail;
+	private TableColumn<DropboxFile,String> fileThumbnail;
 	
 	@FXML
 	private TableColumn<DropboxFile,Button> download;
@@ -118,9 +121,9 @@ public class DropboxFilesTableViewer extends StackPane {
 		//Update the Media Information when Selected Item changes
 		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
-				Main.dropBoxViewer.getOpenFolder().setDisable(!newValue.isDirectory());	
-			else 
-				Main.dropBoxViewer.getOpenFolder().setDisable(true);	
+				Main.dropBoxViewer.getOpenFolder().setDisable(!newValue.isDirectory());
+			else
+				Main.dropBoxViewer.getOpenFolder().setDisable(true);
 		});
 		
 		// PauseTransition
@@ -138,7 +141,54 @@ public class DropboxFilesTableViewer extends StackPane {
 		title.setCellValueFactory(new PropertyValueFactory<>("title"));
 		
 		// fileType
-		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("fileThumbnail"));
+		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("extension"));
+		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxFile,String>() {
+			private final ImageView imageView = new ImageView();
+			
+			{
+				//setGraphic(imageView)
+				//imageView.setFitWidth(24)
+				//imageView.setFitHeight(24)
+				
+			}
+			
+			@Override
+			protected void updateItem(String item , boolean empty) {
+				super.updateItem(item, empty);
+				
+				if (empty) {
+					setText(null);
+					setGraphic(null);
+				} else {
+					// set the image according to the play status		
+					if (item != null && super.getTableRow().getItem() != null) {
+						
+						setText(null);
+						setGraphic(imageView);
+						
+						//It is directory?	
+						if ( ( (DropboxFile) super.getTableRow().getItem() ).isDirectory())
+							imageView.setImage(SystemRoot.CLOSED_FOLDER_IMAGE);
+						else {
+							//Is it a music file?
+							if (InfoTool.isAudioCheckExtension(item))
+								imageView.setImage(Media.SONG_IMAGE);
+							else if (InfoTool.isVideoCheckExtension(item))
+								imageView.setImage(SystemRoot.VIDEO_IMAGE);
+							else if (InfoTool.isImageCheckExtension(item))
+								imageView.setImage(SystemRoot.PICTURE_IMAGE);
+							else if (InfoTool.isPdfCheckExtension(item))
+								imageView.setImage(SystemRoot.PDF_IMAGE);
+							else if (InfoTool.isZipCheckExtension(item))
+								imageView.setImage(SystemRoot.ZIP_IMAGE);
+							else
+								imageView.setImage(SystemRoot.FILE_IMAGE);
+						}
+					}
+				}
+			}
+			
+		});
 		
 		// actionColumn
 		actionColumn.setCellValueFactory(new PropertyValueFactory<>("actionColumn"));

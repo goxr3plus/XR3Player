@@ -192,8 +192,7 @@ public class TagWindow extends StackPane {
 				if (empty) {
 					setText(null);
 				} else {
-					String text = InfoTool.getFileName(item); // get text from item
-					setText(text);
+					setText(InfoTool.getFileName(item));
 					setTooltip(new Tooltip(item));
 				}
 			}

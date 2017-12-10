@@ -14,7 +14,6 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.systemtreeview.SystemRoot;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
@@ -28,8 +27,7 @@ public class DropboxFile {
 	/** The title. */
 	private SimpleStringProperty title;
 	
-	/** The FILE type. */
-	private SimpleObjectProperty<ImageView> fileThumbnail;
+	private SimpleStringProperty extension;
 	
 	private SimpleObjectProperty<Button> actionColumn;
 	
@@ -57,7 +55,7 @@ public class DropboxFile {
 		
 		//---------------------Init properties------------------------------------
 		title = new SimpleStringProperty(value);
-		fileThumbnail = new SimpleObjectProperty<>(null);
+		extension = new SimpleStringProperty(InfoTool.getFileExtension(value));
 		
 		//actionColumnButton
 		actionColumnButton.setPrefSize(50, 25);
@@ -93,40 +91,11 @@ public class DropboxFile {
 		//-------------------------------ETC---------------------------
 		
 		//Is this a directory?
-		isDirectory = this.metadata == null || this.metadata instanceof FolderMetadata;
-		
-		//It is directory?
-		if (isDirectory)
-			setImage(SystemRoot.CLOSED_FOLDER_IMAGE);
-		
-		else {
-			//Is it a music file?
-			if (InfoTool.isAudio(value))
-				setImage(Media.SONG_IMAGE);
-			else if (InfoTool.isVideo(value))
-				setImage(SystemRoot.VIDEO_IMAGE);
-			else if (InfoTool.isImage(value))
-				setImage(SystemRoot.PICTURE_IMAGE);
-			else if (InfoTool.isPdf(value))
-				setImage(SystemRoot.PDF_IMAGE);
-			else if (InfoTool.isZip(value))
-				setImage(SystemRoot.ZIP_IMAGE);
-			else
-				setImage(SystemRoot.FILE_IMAGE);
-		}
+		isDirectory = this.metadata instanceof FolderMetadata;
 		
 	}
 	
 	// --------Methods------------------------------------------------------------------------------------
-	
-	/**
-	 * Using this method do not write duplicate code using setGraphic(...) everywhere
-	 * 
-	 * @param image
-	 */
-	private void setImage(Image image) {
-		fileThumbnail.set(new ImageView(image));
-	}
 	
 	/**
 	 * Checks if is directory.
@@ -155,8 +124,8 @@ public class DropboxFile {
 		return title;
 	}
 	
-	public SimpleObjectProperty<ImageView> fileThumbnailProperty() {
-		return fileThumbnail;
+	public SimpleStringProperty extensionProperty() {
+		return extension;
 	}
 	
 	public SimpleObjectProperty<Button> actionColumnProperty() {
