@@ -241,16 +241,16 @@ public class UpdateWindow extends StackPane {
 			// Update is available or not?
 			Platform.runLater(() -> {
 				
-				//				//--TopLabel
-				//				if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
-				//					window.setTitle("You have the latest update!");
-				//					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
-				//				} else {
-				//					window.setTitle("New update is available!");
-				//					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
-				//					tabPane.getSelectionModel().select(1);
-				//				}
-				//				
+				//--TopLabel
+				if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
+					window.setTitle("You have the latest update!");
+					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
+				} else {
+					window.setTitle("New update is available!");
+					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
+					tabPane.getSelectionModel().select(1);
+				}
+				
 				//				//Read the JSON response
 				//				JsonArray jsonRoot;
 				//				try {
@@ -404,7 +404,9 @@ public class UpdateWindow extends StackPane {
 				show();
 			}
 			
-		} catch (IOException ex) {
+		} catch (
+		
+		IOException ex) {
 			Platform.runLater(() -> ActionTool.showNotification("Error", "Trying to fetch update information a problem occured", Duration.millis(2500), NotificationType.ERROR));
 			logger.log(Level.WARNING, "", ex);
 		}
