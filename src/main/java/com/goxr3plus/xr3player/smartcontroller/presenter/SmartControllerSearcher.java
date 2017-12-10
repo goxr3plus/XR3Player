@@ -298,6 +298,7 @@ public class SmartControllerSearcher extends HBox {
 						CountDownLatch countDown = new CountDownLatch(1);
 						Platform.runLater(() -> {
 							controller.getItemsObservableList().addAll(arrayList);
+							controller.getNormalModeMediatTableViewer().getAllDetailsService().restartService(controller.getNormalModeMediatTableViewer());
 							countDown.countDown();
 						});
 						countDown.await();
