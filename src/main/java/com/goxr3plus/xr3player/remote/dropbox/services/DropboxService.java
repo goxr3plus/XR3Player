@@ -14,6 +14,7 @@ import com.dropbox.core.v2.files.ListFolderContinueErrorException;
 import com.dropbox.core.v2.files.ListFolderErrorException;
 import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
+import com.dropbox.core.v2.files.RelocationResult;
 import com.dropbox.core.v2.users.FullAccount;
 
 import javafx.application.Platform;
@@ -77,8 +78,6 @@ public class DropboxService extends Service<Boolean> {
 				ActionTool.showNotification("Authantication Failed",
 						"Failed connecting in that Dropbox Account, try : \n1) Connect again with a new Dropbox Account \n2) Connect with another saved DropBox Account \n3) Delete this corrupted saved account",
 						Duration.millis(3000), NotificationType.ERROR);
-			} else {
-				dropBoxViewer.getDropboxFilesTableViewer().sortTable();
 			}
 		});
 		
@@ -222,6 +221,9 @@ public class DropboxService extends Service<Boolean> {
 							dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().clear();
 							dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().addAll(observableList);
 							dropBoxViewer.getDropboxFilesTableViewer().updateLabel();
+							
+							//Sort the Table
+							dropBoxViewer.getDropboxFilesTableViewer().sortTable();
 						});
 						
 					} else if (operation == DropBoxOperation.DELETE) {
@@ -233,11 +235,17 @@ public class DropboxService extends Service<Boolean> {
 						list.forEach(item -> {
 							if (delete(item.getMetadata().getPathLower()))
 								Platform.runLater(() -> dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().remove(item));
-							
 						});
 						
 						//Update the bottom label
-						Platform.runLater(() -> dropBoxViewer.getDropboxFilesTableViewer().updateLabel());
+						Platform.runLater(() -> {
+							
+							//Update the Label
+							dropBoxViewer.getDropboxFilesTableViewer().updateLabel();
+							
+							//Sort the Table
+							dropBoxViewer.getDropboxFilesTableViewer().sortTable();
+						});
 						
 					} else if (operation == DropBoxOperation.CREATE_FOLDER) {
 						
@@ -247,17 +255,10 @@ public class DropboxService extends Service<Boolean> {
 						//Refresh
 						Platform.runLater(() -> refresh(currentPath));
 						
-					} else if (operation == DropBoxOperation.RENAME) {
+					} else if (operation == DropBoxOperation.RENAME) 
 						
-						if (rename(dropboxFile.getMetadata().getPathLower(), newPath)) //check if not succeeded
-							ActionTool.showNotification("Success Message", "Succesfully renamed file :)", Duration.millis(1500), NotificationType.SIMPLE,
-									DropboxViewer.dropBoxImage, 0, 0);
-						else {
-							ActionTool.showNotification("Error Message",
-									"Failed to rename the File:\n [ " + dropboxFile.getMetadata().getPathLower() + " ] to -> [ " + newPath + " ]", Duration.millis(1500),
-									NotificationType.ERROR);
-							dropboxFile.titleProperty().set(dropboxFile.getMetadata().getName());
-						}
+						//Try to rename
+						rename(dropboxFile.getMetadata().getPathLower(), newPath);
 						
 					} else if (operation == DropBoxOperation.SEARCH) {
 						
@@ -277,6 +278,9 @@ public class DropboxService extends Service<Boolean> {
 							//Set Label Visible
 							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(observableList.size()));
 							dropBoxViewer.getDropboxFilesTableViewer().updateLabel();
+							
+							//Sort the Table
+							dropBoxViewer.getDropboxFilesTableViewer().sortTable();
 						});
 						
 					}
@@ -300,194 +304,219 @@ public class DropboxService extends Service<Boolean> {
 				}
 				return true;
 			}
-			
-			/**
-			 * Check if there is Internet Connection
-			 */
-			private boolean checkConnection() {
-				
-				//Check if there is Internet Connection
-				if (!InfoTool.isReachableByPing("www.google.com")) {
-					Platform.runLater(() -> dropBoxViewer.getErrorVBox().setVisible(true));
-					return false;
-				}
-				
-				return true;
-			}
-			
-			/**
-			 * List all the Files inside DropboxAccount
-			 * 
-			 * @param client
-			 * @param path
-			 * @param children
-			 * @param arrayList
-			 * @throws DbxException
-			 * @throws ListFolderErrorException
-			 */
-			public void listAllFiles(String path , ObservableList<DropboxFile> children , boolean recursive , boolean appendToMap) throws DbxException {
-				
-				ListFolderResult result = client.files().listFolder(path);
-				
-				while (true) {
-					for (Metadata metadata : result.getEntries()) {
-						if (metadata instanceof DeletedMetadata) { // Deleted
-							//	children.remove(metadata.getPathLower())
-						} else if (metadata instanceof FolderMetadata) { // Folder
-							String folder = metadata.getPathLower();
-							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
-							if (appendToMap)
-								children.add(new DropboxFile(metadata));
-							
-							//boolean subFileOfCurrentFolder = path.equals(parent)
-							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder)
-							
-							if (recursive)
-								listAllFiles(folder, children, recursive, appendToMap);
-						} else if (metadata instanceof FileMetadata) { //File
-							String file = metadata.getPathLower();
-							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
-							if (appendToMap)
-								children.add(new DropboxFile(metadata));
-							
-							//boolean subFileOfCurrentFolder = path.equals(parent)
-							//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file))
-						}
-					}
-					
-					if (!result.getHasMore())
-						break;
-					
-					try {
-						result = client.files().listFolderContinue(result.getCursor());
-						//System.out.println("Entered result next")
-					} catch (ListFolderContinueErrorException ex) {
-						ex.printStackTrace();
-					}
-				}
-				
-			}
-			
-			/**
-			 * List all the Files inside DropboxAccount
-			 * 
-			 * @param client
-			 * @param path
-			 * @param children
-			 * @param arrayList
-			 * @throws DbxException
-			 * @throws ListFolderErrorException
-			 */
-			public void search(String path , ObservableList<DropboxFile> children) throws DbxException {
-				
-				ListFolderResult result = client.files().listFolder(path);
-				
-				while (true) {
-					for (Metadata metadata : result.getEntries()) {
-						if (metadata instanceof DeletedMetadata) { // Deleted
-							//	children.remove(metadata.getPathLower())
-						} else if (metadata instanceof FolderMetadata) { // Folder
-							String folder = metadata.getPathLower();
-							if (metadata.getName().toLowerCase().contains(searchWord))
-								children.add(new DropboxFile(metadata));
-							
-							//Run again
-							search(folder, children);
-						} else if (metadata instanceof FileMetadata) { //File
-							if (metadata.getName().toLowerCase().contains(searchWord))
-								children.add(new DropboxFile(metadata));
-						}
-					}
-					
-					if (!result.getHasMore())
-						break;
-					
-					try {
-						result = client.files().listFolderContinue(result.getCursor());
-						//System.out.println("Entered result next")
-					} catch (ListFolderContinueErrorException ex) {
-						ex.printStackTrace();
-					}
-				}
-				
-			}
-			
-			/**
-			 * Deletes the given file or folder from Dropbox Account
-			 * 
-			 * @param path
-			 *            The path of the Dropbox File or Folder
-			 */
-			public boolean delete(String path) {
-				try {
-					if (operation == DropBoxOperation.DELETE)
-						client.files().deleteV2(path);
-					else
-						client.files().permanentlyDelete(path); //SUPPORTED ONLY ON BUSINESS PLAN
-						
-					//Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
-							NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
-					
-					return true;
-				} catch (DbxException dbxe) {
-					dbxe.printStackTrace();
-					
-					//Show message to the User
-					Platform.runLater(
-							() -> ActionTool.showNotification("Failed deleting files", "Failed to delete selected files/folders", Duration.millis(2000), NotificationType.ERROR));
-					
-					return false;
-				}
-			}
-			
-			/**
-			 * Renames the given file or folder from Dropbox Account
-			 * 
-			 * @param oldPath
-			 * @param newPath
-			 */
-			public boolean rename(String oldPath , String newPath) {
-				try {
-					client.files().moveV2(oldPath, newPath);
-					
-					return true;
-				} catch (DbxException dbxe) {
-					dbxe.printStackTrace();
-					
-					return false;
-				}
-			}
-			
-			/**
-			 * Create a folder from Dropbox Account
-			 * 
-			 * @param path
-			 *            Folder name
-			 */
-			public boolean createFolder(String path) {
-				try {
-					
-					//Create new folder
-					CreateFolderResult result = client.files().createFolderV2(path, true);
-					
-					//Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
-							Duration.millis(2000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
-					
-					return true;
-				} catch (DbxException dbxe) {
-					dbxe.printStackTrace();
-					
-					//Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Failed creating folder", "Folder was not created", Duration.millis(2000), NotificationType.ERROR));
-					
-					return false;
-				}
-			}
-			
-		};
+	
+	/**
+	 * Check if there is Internet Connection
+	 */
+	private boolean checkConnection() {
+		
+		//Check if there is Internet Connection
+		if (!InfoTool.isReachableByPing("www.google.com")) {
+			Platform.runLater(() -> dropBoxViewer.getErrorVBox().setVisible(true));
+			return false;
+		}
+		
+		return true;
 	}
+	
+	/**
+	 * List all the Files inside DropboxAccount
+	 * 
+	 * @param client
+	 * @param path
+	 * @param children
+	 * @param arrayList
+	 * @throws DbxException
+	 * @throws ListFolderErrorException
+	 */
+	public void listAllFiles(String path , ObservableList<DropboxFile> children , boolean recursive , boolean appendToMap) throws DbxException {
+		
+		ListFolderResult result = client.files().listFolder(path);
+		
+		while (true) {
+			for (Metadata metadata : result.getEntries()) {
+				if (metadata instanceof DeletedMetadata) { // Deleted
+					//	children.remove(metadata.getPathLower())
+				} else if (metadata instanceof FolderMetadata) { // Folder
+					String folder = metadata.getPathLower();
+					//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
+					if (appendToMap)
+						children.add(new DropboxFile(metadata));
+					
+					//boolean subFileOfCurrentFolder = path.equals(parent)
+					//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "Folder ->" + folder)
+					
+					if (recursive)
+						listAllFiles(folder, children, recursive, appendToMap);
+				} else if (metadata instanceof FileMetadata) { //File
+					String file = metadata.getPathLower();
+					//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
+					if (appendToMap)
+						children.add(new DropboxFile(metadata));
+					
+					//boolean subFileOfCurrentFolder = path.equals(parent)
+					//System.out.println( ( subFileOfCurrentFolder ? "" : "\n" ) + "File->" + file + " Media Info: " + InfoTool.isAudioSupported(file))
+				}
+			}
+			
+			if (!result.getHasMore())
+				break;
+			
+			try {
+				result = client.files().listFolderContinue(result.getCursor());
+				//System.out.println("Entered result next")
+			} catch (ListFolderContinueErrorException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+	}
+	
+	/**
+	 * List all the Files inside DropboxAccount
+	 * 
+	 * @param client
+	 * @param path
+	 * @param children
+	 * @param arrayList
+	 * @throws DbxException
+	 * @throws ListFolderErrorException
+	 */
+	public void search(String path , ObservableList<DropboxFile> children) throws DbxException {
+		
+		ListFolderResult result = client.files().listFolder(path);
+		
+		while (true) {
+			for (Metadata metadata : result.getEntries()) {
+				if (metadata instanceof DeletedMetadata) { // Deleted
+					//	children.remove(metadata.getPathLower())
+				} else if (metadata instanceof FolderMetadata) { // Folder
+					String folder = metadata.getPathLower();
+					if (metadata.getName().toLowerCase().contains(searchWord))
+						children.add(new DropboxFile(metadata));
+					
+					//Run again
+					search(folder, children);
+				} else if (metadata instanceof FileMetadata) { //File
+					if (metadata.getName().toLowerCase().contains(searchWord))
+						children.add(new DropboxFile(metadata));
+				}
+			}
+			
+			if (!result.getHasMore())
+				break;
+			
+			try {
+				result = client.files().listFolderContinue(result.getCursor());
+				//System.out.println("Entered result next")
+			} catch (ListFolderContinueErrorException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+	}
+	
+	/**
+	 * Deletes the given file or folder from Dropbox Account
+	 * 
+	 * @param path
+	 *            The path of the Dropbox File or Folder
+	 */
+	public boolean delete(String path) {
+		try {
+			if (operation == DropBoxOperation.DELETE)
+				client.files().deleteV2(path);
+			else
+				client.files().permanentlyDelete(path); //SUPPORTED ONLY ON BUSINESS PLAN
+				
+			//Show message to the User
+			Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
+					NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
+			
+			return true;
+		} catch (DbxException dbxe) {
+			dbxe.printStackTrace();
+			
+			//Show message to the User
+			Platform.runLater(() -> ActionTool.showNotification("Failed deleting files", "Failed to delete selected files/folders", Duration.millis(2000), NotificationType.ERROR));
+			
+			return false;
+		}
+	}
+	
+	/**
+	 * Renames the given file or folder from Dropbox Account
+	 * 
+	 * @param oldPath
+	 * @param newPath
+	 */
+	public boolean rename(String oldPath , String newPath) {
+		try {
+			RelocationResult result = client.files().moveV2(oldPath, newPath);
+			
+			//Run on JavaFX Thread
+			Platform.runLater(() -> {
+				
+				//Show message
+				ActionTool.showNotification("Rename Successful",
+						"Succesfully renamed file :" + "\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + result.getMetadata().getName() + " ]", Duration.millis(2500),
+						NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0);
+				
+				//Return the previous name
+				dropboxFile.setMetadata(result.getMetadata());
+				
+				//Sort the Table
+				dropBoxViewer.getDropboxFilesTableViewer().sortTable();
+			});
+			
+			return true;
+		} catch (DbxException dbxe) {
+			dbxe.printStackTrace();
+			
+			//Run on JavaFX Thread
+			Platform.runLater(() -> {
+				
+				//Show message
+				ActionTool.showNotification("Error Message", "Failed to rename the File:\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + newPath + " ]",
+						Duration.millis(2500), NotificationType.ERROR);
+				
+				//Return the previous name
+				dropboxFile.titleProperty().set(dropboxFile.getMetadata().getName());
+				
+			});
+			
+			return false;
+		}
+	}
+	
+	/**
+	 * Create a folder from Dropbox Account
+	 * 
+	 * @param path
+	 *            Folder name
+	 */
+	public boolean createFolder(String path) {
+		try {
+			
+			//Create new folder
+			CreateFolderResult result = client.files().createFolderV2(path, true);
+			
+			//Show message to the User
+			Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
+					Duration.millis(2000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
+			
+			return true;
+		} catch (DbxException dbxe) {
+			dbxe.printStackTrace();
+			
+			//Show message to the User
+			Platform.runLater(() -> ActionTool.showNotification("Failed creating folder", "Folder was not created", Duration.millis(2000), NotificationType.ERROR));
+			
+			return false;
+		}
+	}
+	
+	};}
 	
 	/**
 	 * The client

@@ -154,4 +154,13 @@ public class DropboxFile {
 		return actionColumnButton;
 	}
 	
+	/**
+	 * @param metadata
+	 *            the metadata to set
+	 */
+	public void setMetadata(Metadata metadata) {
+		this.metadata = metadata;
+		title.set(metadata.getName());
+	}
+	
 }
