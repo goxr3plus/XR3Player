@@ -419,7 +419,7 @@ public class Main extends Application {
 		libraryMode.getBottomSplitPane().getItems().add(libraryMode.getNoLibrariesStackPane());
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
 		
-		libraryMode.multipleLibs.getEmptyLabel().textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
+		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
 				.then("Press here to create your first library").otherwise("Press here to open the first available library"));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
@@ -662,7 +662,7 @@ public class Main extends Application {
 		//I need to check it in case no user is logged in 
 		if (dbManager == null)
 			System.exit(0);
-		else if (libraryMode.multipleLibs.isFree(true)) {
+		else if (libraryMode.openedLibrariesViewer.isFree(true)) {
 			if (!vacuum)
 				System.exit(0);
 			else {

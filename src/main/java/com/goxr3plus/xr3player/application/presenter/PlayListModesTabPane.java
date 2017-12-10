@@ -63,7 +63,7 @@ public class PlayListModesTabPane extends StackPane {
 	private void initialize() {
 		
 		//
-		openedLibrariesTab.setContent(Main.libraryMode.multipleLibs);
+		openedLibrariesTab.setContent(Main.libraryMode.openedLibrariesViewer);
 		//
 		dropBoxTab.setContent(Main.dropBoxViewer);
 		//

@@ -291,7 +291,7 @@ public class SideBar extends BorderPane {
 	 * Delete the previous and import a new Database to XR3Player
 	 */
 	public void importDatabase() {
-		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) ) && ActionTool.doQuestion(
 				"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
 				Main.window)) {
 			
@@ -311,7 +311,7 @@ public class SideBar extends BorderPane {
 	 * Export XR3Player Database
 	 */
 	public void exportDatabase() {
-		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) )) {
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) )) {
 			
 			File file = Main.specialChooser.exportDBFile(Main.window);
 			if (file != null) {
@@ -330,7 +330,7 @@ public class SideBar extends BorderPane {
 	 * Delete XR3Player Database
 	 */
 	public void deleteDatabase() {
-		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.multipleLibs == null || Main.libraryMode.multipleLibs.isFree(true) ) && ActionTool.doQuestion(
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) ) && ActionTool.doQuestion(
 				"ARE YOU SOORE YOU WANT TO PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
 				Main.window)) {
 			

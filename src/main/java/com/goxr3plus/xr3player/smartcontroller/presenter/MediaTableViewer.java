@@ -754,6 +754,14 @@ public class MediaTableViewer extends StackPane {
 	}
 	
 	/**
+	 * Sorts the Table
+	 */
+	public void sortTable() {
+		if (!tableView.getSortOrder().isEmpty())
+			tableView.sort();
+	}
+	
+	/**
 	 * @return the tableView
 	 */
 	public TableView<Media> getTableView() {

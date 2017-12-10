@@ -252,9 +252,9 @@ public class Library extends StackPane {
 					// Rename Tab + Unbind Tab textProperty
 					if (isOpened()) {
 						if (Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
-							Main.libraryMode.multipleLibs.renameTab(oldName, getLibraryName());
+							Main.libraryMode.openedLibrariesViewer.renameTab(oldName, getLibraryName());
 						
-						Main.libraryMode.multipleLibs.getTab(getLibraryName()).getTooltip().textProperty().unbind();
+						Main.libraryMode.openedLibrariesViewer.getTab(getLibraryName()).getTooltip().textProperty().unbind();
 					}
 					
 					// Security Variable
@@ -791,7 +791,7 @@ public class Library extends StackPane {
 		Main.renameWindow.show(getLibraryName(), n, "Library Renaming", FileCategory.DIRECTORY);
 		
 		// Bind 1
-		Tab tab = Main.libraryMode.multipleLibs.getTab(getLibraryName());
+		Tab tab = Main.libraryMode.openedLibrariesViewer.getTab(getLibraryName());
 		if (tab != null)
 			tab.getTooltip().textProperty().bind(nameLabel.textProperty());
 		
@@ -883,7 +883,7 @@ public class Library extends StackPane {
 				
 				// opened? Yes=remove the tab
 				if (isOpened())
-					Main.libraryMode.multipleLibs.removeTab(getLibraryName());
+					Main.libraryMode.openedLibrariesViewer.removeTab(getLibraryName());
 				
 				// Update the libraryViewer
 				Main.libraryMode.teamViewer.getViewer().deleteItem(this);
@@ -917,16 +917,16 @@ public class Library extends StackPane {
 	public void openLibrary(boolean open , boolean firstLoadHack) {
 		if (firstLoadHack) {
 			setLibraryOpened(open, false);
-			Main.libraryMode.multipleLibs.insertTab(this);
+			Main.libraryMode.openedLibrariesViewer.insertTab(this);
 		} else {
 			// Open
 			if (open && !isOpened()) {
 				setLibraryOpened(open, true);
-				Main.libraryMode.multipleLibs.insertTab(this);
+				Main.libraryMode.openedLibrariesViewer.insertTab(this);
 			} // Close 
 			else if (!open && isOpened() && controller.isFree(true)) {
 				setLibraryOpened(open, true);
-				Main.libraryMode.multipleLibs.removeTab(getLibraryName());
+				Main.libraryMode.openedLibrariesViewer.removeTab(getLibraryName());
 			}
 			
 			//Update the UserInformation properties file

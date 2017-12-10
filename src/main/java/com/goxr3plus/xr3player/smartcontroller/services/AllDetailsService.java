@@ -35,6 +35,14 @@ public class AllDetailsService extends Service<Boolean> {
 	}
 	
 	/**
+	 * Constructor
+	 */
+	public AllDetailsService() {
+		
+		//this.setOnSucceeded(s -> mediaTableViewer.getTableView().sort());
+	}
+	
+	/**
 	 * Restarts the Service
 	 * 
 	 * @param observableList

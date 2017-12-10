@@ -54,7 +54,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFiltersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.AllDetailsService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
@@ -830,8 +829,8 @@ public class SmartController extends StackPane {
 		updateLabel();
 		// refresh the tableViewer
 		normal_mode_mediaTableViewer.getTableView().refresh();
-		if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
-			normal_mode_mediaTableViewer.getTableView().sort();
+		//if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
+		//	normal_mode_mediaTableViewer.getTableView().sort();
 		
 	}
 	

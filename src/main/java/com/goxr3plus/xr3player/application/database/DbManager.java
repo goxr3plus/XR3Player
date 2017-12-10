@@ -336,7 +336,7 @@ public class DbManager {
 			Platform.runLater(() -> {
 				
 				//Library Mode Tab Pane Selection Listener
-				Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
+				Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
 					
 					// Give refresh based on the below formula
 					Optional.ofNullable(newTab).ifPresent(tab -> {
@@ -362,7 +362,7 @@ public class DbManager {
 					
 					// Give refresh based on the below formula
 					SmartController smartController = ( (SmartController) newTab.getContent() );
-					if ( ( !Main.libraryMode.multipleLibs.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
+					if ( ( !Main.libraryMode.openedLibrariesViewer.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
 							|| smartController.getReloadVBox().isVisible()) {
 						
 						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
@@ -374,15 +374,15 @@ public class DbManager {
 				Optional.ofNullable(properties.getProperty("Last-Opened-Library")).ifPresent(lastOpenedLibrary -> {
 					
 					//Select the correct library inside the TabPane
-					Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().select(Main.libraryMode.multipleLibs.getTab(lastOpenedLibrary));
+					Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().select(Main.libraryMode.openedLibrariesViewer.getTab(lastOpenedLibrary));
 					
 					//This will change in future update when user can change the default position of Libraries
-					Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.multipleLibs.getSelectedLibrary().get().getPosition());
+					Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.openedLibrariesViewer.getSelectedLibrary().get().getPosition());
 					
 				});
 				
 				//Update last selected Library SmartController if not empty
-				Main.libraryMode.multipleLibs.getSelectedLibrary().ifPresent(selectedLibrary -> {
+				Main.libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> {
 					if (selectedLibrary.getSmartController().isFree(false))
 						selectedLibrary.getSmartController().getLoadService().startService(false, true, false);
 				});
@@ -400,14 +400,14 @@ public class DbManager {
 		//Get the current User
 		getOpenedUser().ifPresent(user -> {
 			
-			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.multipleLibs.getTabs();
+			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
 			
 			//Save the last opened library
 			if (openedLibrariesTabs.isEmpty()) {
 				///System.out.println("Last-Opened-Library is Empty");
 				user.getUserInformationDb().deleteProperty("Last-Opened-Library");
 			} else {
-				Tab tab = Main.libraryMode.multipleLibs.getTabPane().getSelectionModel().getSelectedItem();
+				Tab tab = Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem();
 				//System.out.println("Last-Opened-Library: " + tab.getTooltip().getText());
 				user.getUserInformationDb().updateProperty("Last-Opened-Library", tab.getTooltip().getText());
 			}
@@ -424,7 +424,7 @@ public class DbManager {
 		
 		//Get the opened user and store the opened libraries
 		getOpenedUser().ifPresent(user -> {
-			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.multipleLibs.getTabs();
+			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
 			
 			//			//Save the opened libraries
 			//			if (openedLibrariesTabs.isEmpty())

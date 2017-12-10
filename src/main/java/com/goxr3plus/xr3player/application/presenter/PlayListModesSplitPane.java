@@ -90,9 +90,9 @@ public class PlayListModesSplitPane extends BorderPane {
 		
 		splitPane.getItems().clear();
 		if (Main.topBar.getWindowMode() == WindowMode.MAINMODE)
-			splitPane.getItems().addAll(Main.libraryMode.multipleLibs, Main.mediaInformation);
+			splitPane.getItems().addAll(Main.libraryMode.openedLibrariesViewer, Main.mediaInformation);
 		else
-			splitPane.getItems().addAll(Main.mediaInformation, Main.libraryMode.multipleLibs);
+			splitPane.getItems().addAll(Main.mediaInformation, Main.libraryMode.openedLibrariesViewer);
 		
 		//Set
 		splitPane.setDividerPositions(array);

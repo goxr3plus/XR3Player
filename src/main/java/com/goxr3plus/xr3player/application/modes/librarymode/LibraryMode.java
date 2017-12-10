@@ -116,7 +116,7 @@ public class LibraryMode extends BorderPane {
 	public TeamViewer teamViewer;
 	
 	/** The mechanism behind of opening multiple libraries. */
-	public final OpenedLibrariesViewer multipleLibs = new OpenedLibrariesViewer();
+	public final OpenedLibrariesViewer openedLibrariesViewer = new OpenedLibrariesViewer();
 	
 	//--------Images ------------------------------
 	
@@ -220,7 +220,7 @@ public class LibraryMode extends BorderPane {
 						//Check if the user wants to immediately open library after it's creation
 						if (openLibraryAfterCreation) {
 							currentLib.openLibrary(true, false);
-							Main.libraryMode.multipleLibs.selectTab(currentLib.getLibraryName());
+							Main.libraryMode.openedLibrariesViewer.selectTab(currentLib.getLibraryName());
 						}
 						
 						//Bidirectional binding with Instant Search
