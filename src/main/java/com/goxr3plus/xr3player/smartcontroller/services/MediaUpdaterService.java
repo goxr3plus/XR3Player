@@ -84,10 +84,10 @@ public class MediaUpdaterService {
 			libraryMode.openedLibrariesViewer.getSelectedLibrary()
 					.ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList()));
 			
-			//Do Sorting of Normal Mode TableViews 
-			Platform.runLater(() -> libraryMode.openedLibrariesViewer.getSelectedLibrary()
-					.ifPresent(selectedLibrary -> selectedLibrary.getSmartController().getNormalModeMediatTableViewer().sortTable()));
-			
+//			//Do Sorting of Normal Mode TableViews 
+//			Platform.runLater(() -> libraryMode.openedLibrariesViewer.getSelectedLibrary()
+//					.ifPresent(selectedLibrary -> selectedLibrary.getSmartController().getNormalModeMediatTableViewer().sortTable()));
+//			
 			//Filter Selected Opened Libraries Filters Mode TableViews  
 			libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(),
 					selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems()));
