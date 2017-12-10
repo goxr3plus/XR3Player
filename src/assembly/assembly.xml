@@ -12,8 +12,9 @@
 			<directory>${project.basedir}</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-				<include>license.txt</include>
-				<include>XR3Player Manual.pdf</include>				
+				<include>XR3Player New Release Files/license.txt</include>
+				<include>XR3Player New Release Files/XR3Player Manual.pdf</include>	
+				<include>XR3Player New Release Files/XR3Player.exe</include>				
 			</includes>
 		</fileSet>
 		<fileSet>
