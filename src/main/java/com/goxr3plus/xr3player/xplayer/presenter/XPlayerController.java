@@ -462,7 +462,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//System.out.println(event.getGestureSource());
 			
 			//Check if FlipPane is on the front side
-			if (event.getGestureSource() != mediaFileMarquee) {
+			if (!flipPane.isBackVisible()) { //event.getGestureSource() != mediaFileMarquee) {
 				dragAndDropLabel.setVisible(true);
 			}
 			
