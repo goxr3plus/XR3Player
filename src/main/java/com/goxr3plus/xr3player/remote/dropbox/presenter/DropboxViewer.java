@@ -596,8 +596,7 @@ public class DropboxViewer extends StackPane {
 		if (path.isEmpty()) {
 			
 			//Build the Model
-			TreeItem<String> model = BreadCrumbBar.buildTreeModel("DROPBOX ROOT");
-			breadCrumbBar.setSelectedCrumb(model);
+			breadCrumbBar.setSelectedCrumb(BreadCrumbBar.buildTreeModel("DROPBOX ROOT"));
 			
 			//PRINT
 			//System.out.println(Arrays.asList(path.split("/")))

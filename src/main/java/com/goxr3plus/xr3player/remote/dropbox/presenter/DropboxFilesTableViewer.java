@@ -286,9 +286,11 @@ public class DropboxFilesTableViewer extends StackPane {
 	/**
 	 * This method is used from updateLabel() method to append Text to detailsCssTextArea
 	 * 
+	 * @param inlineCssTextArea
 	 * @param text1
 	 * @param text2
 	 * @param appendComma
+	 * @param style1
 	 */
 	private void appendToDetails(InlineCssTextArea inlineCssTextArea , String text1 , String text2 , boolean appendComma , String style1) {
 		
@@ -297,6 +299,14 @@ public class DropboxFilesTableViewer extends StackPane {
 		
 		inlineCssTextArea.appendText(text2 + " " + ( !appendComma ? "" : ", " ));
 		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text2.length() - ( appendComma ? 3 : 1 ), inlineCssTextArea.getLength() - 1, SmartController.style2);
+	}
+	
+	/**
+	 * Sorts the Table
+	 */
+	public void sortTable() {
+		if (!tableView.getSortOrder().isEmpty())
+			tableView.sort();
 	}
 	
 	/**

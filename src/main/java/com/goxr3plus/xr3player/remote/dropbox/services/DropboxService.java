@@ -77,6 +77,8 @@ public class DropboxService extends Service<Boolean> {
 				ActionTool.showNotification("Authantication Failed",
 						"Failed connecting in that Dropbox Account, try : \n1) Connect again with a new Dropbox Account \n2) Connect with another saved DropBox Account \n3) Delete this corrupted saved account",
 						Duration.millis(3000), NotificationType.ERROR);
+			} else {
+				dropBoxViewer.getDropboxFilesTableViewer().sortTable();
 			}
 		});
 		
@@ -217,7 +219,8 @@ public class DropboxService extends Service<Boolean> {
 							dropBoxViewer.getEmptyFolderLabel().setVisible(observableList.isEmpty());
 							
 							//Set the items to TableView
-							dropBoxViewer.getDropboxFilesTableViewer().getTableView().setItems(observableList);
+							dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().clear();
+							dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().addAll(observableList);
 							dropBoxViewer.getDropboxFilesTableViewer().updateLabel();
 						});
 						
@@ -268,7 +271,8 @@ public class DropboxService extends Service<Boolean> {
 							dropBoxViewer.getSearchResultsLabel().setVisible(true);
 							
 							//Set the items to TableView
-							dropBoxViewer.getDropboxFilesTableViewer().getTableView().setItems(observableList);
+							dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().clear();
+							dropBoxViewer.getDropboxFilesTableViewer().getTableView().getItems().addAll(observableList);
 							
 							//Set Label Visible
 							dropBoxViewer.getSearchResultsLabel().setText("Total Found -> " + InfoTool.getNumberWithDots(observableList.size()));
@@ -423,7 +427,7 @@ public class DropboxService extends Service<Boolean> {
 						
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
-							NotificationType.SIMPLE,DropboxViewer.dropBoxImage, 0, 0));
+							NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
 					
 					return true;
 				} catch (DbxException dbxe) {
@@ -469,7 +473,7 @@ public class DropboxService extends Service<Boolean> {
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
-							Duration.millis(2000), NotificationType.SIMPLE,DropboxViewer.dropBoxImage, 0, 0));
+							Duration.millis(2000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
 					
 					return true;
 				} catch (DbxException dbxe) {
