@@ -8,5 +8,5 @@ package main.java.com.goxr3plus.xr3player.smartcontroller.modes;
  */
 public enum Mode {
 	
-	MEDIA, ASSOCIATED_FOLDERS, ARTISTS;
+	MEDIA, ASSOCIATED_FOLDERS, FILTERS_MODE;
 }

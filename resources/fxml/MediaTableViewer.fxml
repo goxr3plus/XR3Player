@@ -134,20 +134,20 @@
                   <TableColumn fx:id="key" minWidth="65.0" prefWidth="75.0" text="Key" visible="false" />
                   <TableColumn fx:id="year" minWidth="65.0" prefWidth="75.0" text="Year" visible="false" />
                   <TableColumn fx:id="tempo" minWidth="65.0" prefWidth="75.0" text="Tempo" visible="false" />
-                  <TableColumn fx:id="tempo1" minWidth="65.0" prefWidth="75.0" text="Copyright" visible="false" />
-                  <TableColumn fx:id="tempo11" minWidth="65.0" prefWidth="75.0" text="Track" visible="false" />
-                  <TableColumn fx:id="tempo111" minWidth="65.0" prefWidth="75.0" text="Track Total" visible="false" />
-                  <TableColumn fx:id="tempo1111" minWidth="65.0" prefWidth="75.0" text="Remixer" visible="false" />
-                  <TableColumn fx:id="tempo11111111111111" minWidth="65.0" prefWidth="75.0" text="DJMixer" visible="false" />
-                  <TableColumn fx:id="tempo11111" minWidth="65.0" prefWidth="75.0" text="Rating" visible="false" />
-                  <TableColumn fx:id="tempo111111" minWidth="65.0" prefWidth="75.0" text="Producer" visible="false" />
-                  <TableColumn fx:id="tempo1111111" minWidth="65.0" prefWidth="75.0" text="Performer" visible="false" />
-                  <TableColumn fx:id="tempo11111111" minWidth="65.0" prefWidth="75.0" text="Orchestra" visible="false" />
-                  <TableColumn fx:id="tempo111111111" minWidth="65.0" prefWidth="75.0" text="Country" visible="false" />
-                  <TableColumn fx:id="tempo1111111111" minWidth="65.0" prefWidth="75.0" text="Lyricist" visible="false" />
-                  <TableColumn fx:id="tempo11111111111" minWidth="65.0" prefWidth="75.0" text="Conductor" visible="false" />
-                  <TableColumn fx:id="tempo111111111111" minWidth="65.0" prefWidth="75.0" text="Amazon_ID" visible="false" />
-                  <TableColumn fx:id="tempo1111111111111" minWidth="65.0" prefWidth="75.0" text="Encoder" visible="false" />
+                  <TableColumn fx:id="copyright" minWidth="65.0" prefWidth="75.0" text="Copyright" visible="false" />
+                  <TableColumn fx:id="track" minWidth="65.0" prefWidth="75.0" text="Track" visible="false" />
+                  <TableColumn fx:id="track_total" minWidth="65.0" prefWidth="75.0" text="Track Total" visible="false" />
+                  <TableColumn fx:id="remixer" minWidth="65.0" prefWidth="75.0" text="Remixer" visible="false" />
+                  <TableColumn fx:id="djMixer" minWidth="65.0" prefWidth="75.0" text="DJMixer" visible="false" />
+                  <TableColumn fx:id="rating" minWidth="65.0" prefWidth="75.0" text="Rating" visible="false" />
+                  <TableColumn fx:id="producer" minWidth="65.0" prefWidth="75.0" text="Producer" visible="false" />
+                  <TableColumn fx:id="performer" minWidth="65.0" prefWidth="75.0" text="Performer" visible="false" />
+                  <TableColumn fx:id="orchestra" minWidth="65.0" prefWidth="75.0" text="Orchestra" visible="false" />
+                  <TableColumn fx:id="country" minWidth="65.0" prefWidth="75.0" text="Country" visible="false" />
+                  <TableColumn fx:id="lyricist" minWidth="65.0" prefWidth="75.0" text="Lyricist" visible="false" />
+                  <TableColumn fx:id="conductor" minWidth="65.0" prefWidth="75.0" text="Conductor" visible="false" />
+                  <TableColumn fx:id="amazonID" minWidth="65.0" prefWidth="75.0" text="Amazon_ID" visible="false" />
+                  <TableColumn fx:id="encoder" minWidth="65.0" prefWidth="75.0" text="Encoder" visible="false" />
                   <TableColumn fx:id="drive" maxWidth="80.0" minWidth="80.0" text="Drive" visible="false">
                      <graphic>
                         <ImageView>

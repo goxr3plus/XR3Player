@@ -316,20 +316,6 @@ public class MediaTableViewer extends StackPane {
 			}
 		});
 		
-		//--KeyListener
-		tableView.setOnKeyReleased(key -> {
-			if ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.C) {
-				System.out.println("Control+C was released");
-				
-				copySelectedMediaToClipBoard();
-				
-			} else if (smartController.getGenre() == Genre.LIBRARYMEDIA && ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.V )) {
-				System.out.println("Control+V was released");
-				
-				pasteMediaFromClipBoard();
-			}
-		});
-		
 		//--Row Factory
 		tableView.setRowFactory(rf -> {
 			TableRow<Media> row = new TableRow<>();
@@ -642,13 +628,28 @@ public class MediaTableViewer extends StackPane {
 		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(searchWord));
 		
-		// ------ centerStackPane
+		// ------ centerStackPane	
 		setOnKeyReleased(key -> {
 			KeyCode code = key.getCode();
 			
-			if (key.isControlDown() && code == KeyCode.LEFT && mode != Mode.ARTISTS)
+			//Check this firstly
+			if ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.C) {
+				
+				copySelectedMediaToClipBoard();
+				
+				return;
+				
+			} else if (smartController.getGenre() == Genre.LIBRARYMEDIA && ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.V )) {
+				
+				pasteMediaFromClipBoard();
+				
+				return;
+			}
+			
+			//Then this
+			if (key.isControlDown() && code == KeyCode.LEFT && mode != Mode.FILTERS_MODE)
 				smartController.goPrevious();
-			else if (key.isControlDown() && code == KeyCode.RIGHT && mode != Mode.ARTISTS)
+			else if (key.isControlDown() && code == KeyCode.RIGHT && mode != Mode.FILTERS_MODE)
 				smartController.goNext();
 			else if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");
@@ -710,7 +711,6 @@ public class MediaTableViewer extends StackPane {
 			}
 			
 		});
-		
 	}
 	
 	/**
