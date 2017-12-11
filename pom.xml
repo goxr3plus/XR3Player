@@ -197,11 +197,6 @@
 			<artifactId>richtextfx</artifactId>
 			<version>0.8.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>FX-BorderlessScene</artifactId>
-			<version>V1.1.0</version>
-		</dependency>
 		<!--<dependency> <groupId>de.jensd</groupId> <artifactId>fontawesomefx</artifactId> 
 			<version>8.9</version> </dependency> -->
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
@@ -303,9 +298,22 @@
 				</exclusion> </exclusions> -->
 		</dependency>
 		<!-- Locally testing XR3Capture -->
-		<!-- <dependency> <groupId>XR3Capture</groupId> <artifactId>com.XR3Capture</artifactId> 
+		<!-- <dependency> <groupId>com.XR3Capture</groupId> <artifactId>XR3Capture</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/XR3Capture-3.12.jar</systemPath> 
 			</dependency> -->
+
+		<!-- FX-BorderlessScene -->
+		<dependency>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>FX-BorderlessScene</artifactId>
+			<version>V2.0.0</version>
+		</dependency>
+
+		<!-- Locally Testing FX-BorderlessScene -->
+		<!-- <dependency> <groupId>com.FX-BorderlessScene</groupId> <artifactId>FX-BorderlessScene</artifactId> 
+			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/FX-BorderlessScene-2.0.0.jar</systemPath> 
+			</dependency> -->
+
 		<!-- Dropbox -->
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
