@@ -33,7 +33,7 @@
 
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png) | ![Sec](https://user-images.githubusercontent.com/20374208/32696558-e9bab2f6-c783-11e7-9b63-409cda833ed9.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png) | ![Sec](https://user-images.githubusercontent.com/20374208/33807041-87d2fe42-ddd9-11e7-9cd0-4fa172f21f9f.png) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
