@@ -24,9 +24,9 @@
 
 ### Videos
 
-| Full Tutorial | Update 92 Demostration |
+| Full Tutorial | Update 94 Demostration |
 |:-:|:-:|
-| [![First](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak)  | [![Second](http://img.youtube.com/vi/_vDdcAfk4g4/0.jpg)](https://www.youtube.com/watch?v=_vDdcAfk4g4) |
+| [![First](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak)  | [![Second](http://img.youtube.com/vi/Id05W1iJEw8/0.jpg)](https://www.youtube.com/watch?v=Id05W1iJEw8) |
 
 
 ### Screenshots
