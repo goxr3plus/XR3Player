@@ -446,7 +446,6 @@ public class MediaTableViewer extends StackPane {
 			private final ImageView imageView = new ImageView();
 			
 			{
-				setGraphic(imageView);
 				imageView.setFitWidth(24);
 				imageView.setFitHeight(24);
 				
@@ -455,15 +454,21 @@ public class MediaTableViewer extends StackPane {
 			@Override
 			protected void updateItem(Integer item , boolean empty) {
 				super.updateItem(item, empty);
-				
-				// set the image according to the play status		
-				if (item != null)
-					if (item == -2)
-						imageView.setImage(null);
-					else if (item == -1)
-						imageView.setImage(Media.PLAYED_IMAGE);
-					else
-						imageView.setImage(item == 0 ? Media.PLAYING_IMAGE0 : item == 2 ? Media.PLAYING_IMAGE1 : Media.PLAYING_IMAGE2);
+				if (empty) {
+					setText(null);
+					setGraphic(null);
+				} else {
+					setGraphic(imageView);
+					
+					// set the image according to the play status		
+					if (item != null)
+						if (item == -2)
+							imageView.setImage(null);
+						else if (item == -1)
+							imageView.setImage(Media.PLAYED_IMAGE);
+						else
+							imageView.setImage(item == 0 ? Media.PLAYING_IMAGE0 : item == 2 ? Media.PLAYING_IMAGE1 : Media.PLAYING_IMAGE2);
+				}
 			}
 			
 		});
