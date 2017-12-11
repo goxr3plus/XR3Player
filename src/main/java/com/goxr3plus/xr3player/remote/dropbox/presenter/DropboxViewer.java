@@ -55,6 +55,9 @@ public class DropboxViewer extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private ProgressIndicator cachedSearchIndicator;
+	
+	@FXML
 	private StackPane innerStackPane;
 	
 	@FXML
@@ -235,7 +238,7 @@ public class DropboxViewer extends StackPane {
 				
 				//Show message to the User
 				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
-						DropboxViewer.dropBoxImage,0,0);
+						DropboxViewer.dropBoxImage, 0, 0);
 				
 				//Save on the database
 				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();
@@ -252,8 +255,8 @@ public class DropboxViewer extends StackPane {
 				//authorizationCodeTextField
 				authorizationCodeTextField.clear();
 				
-				//Go Make It
-				recreateTableView("");
+				//Connect
+				connect(accessToken);
 				
 				//Refresh Saved Accounts
 				refreshSavedAccounts();
@@ -292,6 +295,9 @@ public class DropboxViewer extends StackPane {
 			//cancel the service
 			dropBoxService.cancel();
 			
+			//cancel cachedSearch Service
+			dropBoxService.getSearchCacheService().cancel();
+			
 			//loginVBox
 			loginVBox.setVisible(true);
 			
@@ -299,29 +305,11 @@ public class DropboxViewer extends StackPane {
 		
 		//loginWithSavedAccount
 		loginWithSavedAccount.disableProperty().bind(savedAccountsListView.getSelectionModel().selectedItemProperty().isNull());
-		loginWithSavedAccount.setOnAction(a -> {
-			
-			//AccessToken
-			accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
-			
-			//Go Make It
-			recreateTableView("");
-		});
+		loginWithSavedAccount.setOnAction(a -> connect(savedAccountsListView.getSelectionModel().getSelectedItem()));
 		
 		//deleteSavedAccount
 		deleteSavedAccount.disableProperty().bind(loginWithSavedAccount.disabledProperty());
-		deleteSavedAccount.setOnAction(a -> {
-			
-			//Clear the selected item
-			ObservableList<String> items = savedAccountsListView.getItems();
-			if (items != null) {
-				items.remove(savedAccountsListView.getSelectionModel().getSelectedItem());
-				Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
-				
-				//DropBoxAccountsLabel
-				dropBoxAccountsLabel.setVisible(items.isEmpty());
-			}
-		});
+		deleteSavedAccount.setOnAction(a -> deleteSelectedAccount());
 		
 		//tryAgain
 		tryAgain.setOnAction(a -> checkForInternetConnection());
@@ -356,13 +344,12 @@ public class DropboxViewer extends StackPane {
 		savedAccountsListView.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ENTER && !savedAccountsListView.getItems().isEmpty()) {
 				
-				//AccessToken
-				accessToken = savedAccountsListView.getSelectionModel().getSelectedItem();
+				//Connect
+				connect(savedAccountsListView.getSelectionModel().getSelectedItem());
 				
-				//Go Make It
-				recreateTableView("");
-				
-			}
+			} else if (key.getCode() == KeyCode.DELETE && !savedAccountsListView.getItems().isEmpty())
+				deleteSelectedAccount();
+			
 		});
 		
 		//downloadFile
@@ -427,6 +414,48 @@ public class DropboxViewer extends StackPane {
 		});
 		searchField.setOnAction(a -> search(searchField.getText()));
 		
+		//cachedSearchIndicator
+		cachedSearchIndicator.progressProperty().bind(dropBoxService.getSearchCacheService().progressProperty());
+	}
+	
+	/**
+	 * Deletes the current selected dropbox account
+	 */
+	private void deleteSelectedAccount() {
+		
+		//Clear the selected item
+		ObservableList<String> items = savedAccountsListView.getItems();
+		if (items != null) {
+			
+			if (ActionTool.doQuestion("Deleting Dropbox Account", "Are you soore you want to delete selected Dropbox Account ?", savedAccountsListView, Main.window)) {
+				
+				//Remove the selected items
+				items.remove(savedAccountsListView.getSelectionModel().getSelectedIndex());
+				
+				//Refresh the properties database
+				Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
+			}
+			
+			//DropBoxAccountsLabel
+			dropBoxAccountsLabel.setVisible(items.isEmpty());
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------
+	
+	/**
+	 * Connect to the given user account
+	 * 
+	 * @param accessToken
+	 */
+	private void connect(String accessToken) {
+		this.accessToken = accessToken;
+		
+		//Clear CachedService Search
+		dropBoxService.getSearchCacheService().getCachedList().clear();
+		
+		//Create the TableView
+		recreateTableView("");
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -745,6 +774,13 @@ public class DropboxViewer extends StackPane {
 	 */
 	public Button getOpenFolder() {
 		return openFolder;
+	}
+	
+	/**
+	 * @return the cachedSearchIndicator
+	 */
+	public ProgressIndicator getCachedSearchIndicator() {
+		return cachedSearchIndicator;
 	}
 	
 }

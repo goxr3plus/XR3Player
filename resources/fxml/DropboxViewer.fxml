@@ -32,6 +32,11 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT" layoutX="206.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                            <children>
+                              <ProgressIndicator fx:id="cachedSearchIndicator" progress="0.0" style="-fx-font-size: 12;">
+                                 <tooltip>
+                                    <Tooltip text="Preparing Cached Search" />
+                                 </tooltip>
+                              </ProgressIndicator>
                               <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." style="-fx-background-radius: 45;">
                                  <HBox.margin>
                                     <Insets left="3.0" />

@@ -1,6 +1,7 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 import com.dropbox.core.DbxException;
@@ -47,6 +48,7 @@ public class DropboxService extends Service<Boolean> {
 	private String currentPath;
 	private String folderName;
 	private String searchWord;
+	private final SearchCacheService searchCacheService;
 	
 	//
 	private DropboxFile dropboxFile;
@@ -64,6 +66,7 @@ public class DropboxService extends Service<Boolean> {
 	 */
 	public DropboxService(DropboxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
+		this.searchCacheService = new SearchCacheService(dropBoxViewer);
 		
 		//On Successful exiting
 		setOnSucceeded(s -> {
@@ -224,8 +227,11 @@ public class DropboxService extends Service<Boolean> {
 							
 							//Sort the Table
 							dropBoxViewer.getDropboxFilesTableViewer().sortTable();
+							
+							//Make the CacheService Available to the bro user
+							if (searchCacheService.getCachedList().isEmpty() && !searchCacheService.isRunning())
+								searchCacheService.prepareCachedSearch(client);
 						});
-						
 					} else if (operation == DropBoxOperation.DELETE) {
 						
 						//Delete all the selected files and folders
@@ -261,11 +267,41 @@ public class DropboxService extends Service<Boolean> {
 						rename(dropboxFile.getMetadata().getPathLower(), newPath);
 						
 					} else if (operation == DropBoxOperation.SEARCH) {
+						ObservableList<DropboxFile> observableList;
 						
-						//Search Everything
-						ObservableList<DropboxFile> observableList = FXCollections.observableArrayList();
-						search("", observableList);
+						//CountDown Latch
+						CountDownLatch countDown = new CountDownLatch(1);
+						boolean[] searchCacheServiceIsRunning = { false };
+						Platform.runLater(() -> {
+							searchCacheServiceIsRunning[0] = searchCacheService.isRunning();
+							countDown.countDown();
+						});
 						
+						//Wait
+						countDown.await();
+						
+						//Check if cached search is available
+						if (!searchCacheService.getCachedList().isEmpty() && !searchCacheServiceIsRunning[0]) {
+							
+							System.out.println("Doing ++CACHED SEARCH++");
+							
+							//Search based on cachedList
+							observableList = cachedSearch(searchCacheService.getCachedList());
+							
+						}
+						
+						//Do normal global search
+						else {
+							
+							System.out.println("Doing --NORMAL SEARCH--");
+							
+							//Search Everything
+							observableList = FXCollections.observableArrayList();
+							search("", observableList);
+							
+						}
+						
+						//Run of JavaFX Thread
 						Platform.runLater(() -> {
 							
 							//Set Label Visible
@@ -378,9 +414,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @param client
 			 * @param path
 			 * @param children
-			 * @param arrayList
 			 * @throws DbxException
-			 * @throws ListFolderErrorException
 			 */
 			public void search(String path , ObservableList<DropboxFile> children) throws DbxException {
 				
@@ -413,6 +447,20 @@ public class DropboxService extends Service<Boolean> {
 						ex.printStackTrace();
 					}
 				}
+				
+			}
+			
+			/**
+			 * List all the Files inside DropboxAccount
+			 * 
+			 * @return
+			 * 
+			 */
+			public ObservableList<DropboxFile> cachedSearch(List<Metadata> cachedList) {
+				
+				//Find matching patterns
+				return cachedList.stream().filter(metadata -> metadata.getName().toLowerCase().contains(searchWord)).map(metadata -> new DropboxFile(metadata))
+						.collect(Collectors.toCollection(FXCollections::observableArrayList));
 				
 			}
 			
@@ -536,6 +584,13 @@ public class DropboxService extends Service<Boolean> {
 	 */
 	public String getCurrentPath() {
 		return currentPath;
+	}
+	
+	/**
+	 * @return the searchCacheService
+	 */
+	public SearchCacheService getSearchCacheService() {
+		return searchCacheService;
 	}
 	
 }
