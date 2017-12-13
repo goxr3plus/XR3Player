@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="3.0" top="2.0" />
    </padding>
@@ -201,7 +201,6 @@
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: black; -fx-background-color: gold; -fx-font-weight: bold; -fx-font-size: 9;" text="Information" />
                         <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="arrowButton2">
                            <items>
-                              <MenuItem fx:id="showWelcomeScreen" mnemonicParsing="false" text="Welcome Screen" />
                               <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />
                               <MenuItem fx:id="showManual" mnemonicParsing="false" text="Application Manual" />
                               <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Donate me a Pear">

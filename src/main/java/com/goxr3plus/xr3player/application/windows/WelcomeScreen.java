@@ -6,15 +6,15 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -22,9 +22,12 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  * @author GOXR3PLUS
  *
  */
-public class WelcomeScreen extends BorderPane {
+public class WelcomeScreen extends StackPane {
 	
 	//---------------------------------------------
+	
+	@FXML
+	private MediaView mediaView;
 	
 	@FXML
 	private VBox screen1;
@@ -33,14 +36,23 @@ public class WelcomeScreen extends BorderPane {
 	private JFXCheckBox showOnStartUp;
 	
 	@FXML
+	private JFXToggleButton sound;
+	
+	@FXML
 	private JFXButton startButton;
+	
+	@FXML
+	private JFXButton exit;
 	
 	// -------------------------------------------------------------
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	/** Window **/
-	private Stage window = new Stage();
+	private final String LOADING_SCREEN_PATH = getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toString();
+	private final String LOADING_SCREEN_SOUND = getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toString();
+	
+	private MediaPlayer mediaPlayer;
+	private MediaPlayer soundPlayer;
 	
 	/**
 	 * Constructor
@@ -59,50 +71,67 @@ public class WelcomeScreen extends BorderPane {
 			
 		}
 		
-		// --window
-		window.setTitle("Welcome");
-		window.initStyle(StageStyle.TRANSPARENT);
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setResizable(false);
-		
 	}
 	
 	@FXML
 	private void initialize() {
 		
-		// Scene
-		window.setScene(new Scene(this));
-		window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		
-		//close
-		startButton.setOnAction(a -> close());
+		//startButton
+		startButton.setOnAction(a -> hideWelcomeScreen());
 		
 		//dontShowAgain
 		showOnStartUp.selectedProperty()
 				.addListener((observable , oldValue , newValue) -> Main.applicationProperties.updateProperty("Show-Welcome-Screen", String.valueOf(newValue.booleanValue())));
 		
+		//exit
+		exit.setOnAction(a -> System.exit(0));
 	}
 	
 	/**
-	 * Shows the Window
+	 * This method should be called only once!! Show the welcome screen
 	 */
-	public void show() {
-		window.sizeToScene();
-		window.show();
+	public void showWelcomeScreen() {
+		
+		try {
+			
+			if (mediaPlayer != null) {
+				mediaPlayer.play();
+				soundPlayer.play();
+			} else {
+				
+				mediaView.setFitWidth(Main.window.getWidth());
+				mediaView.setFitHeight(Main.window.getHeight());
+				mediaPlayer = new MediaPlayer(new Media(LOADING_SCREEN_PATH));
+				mediaView.setMediaPlayer(mediaPlayer);
+				mediaPlayer.setAutoPlay(true);
+				mediaPlayer.setCycleCount(50);
+				mediaPlayer.play();
+				mediaPlayer.setAutoPlay(true);
+				mediaPlayer.setCycleCount(50);
+				
+				//Start the stream player
+				soundPlayer = new MediaPlayer(new Media(LOADING_SCREEN_SOUND));
+				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
+				soundPlayer.play();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		setVisible(true);
 	}
 	
 	/**
-	 * Close the Window
+	 * Hide the welcome screen
 	 */
-	public void close() {
-		window.close();
-	}
-	
-	/**
-	 * @return the window
-	 */
-	public Stage getWindow() {
-		return window;
+	public void hideWelcomeScreen() {
+		
+		if (mediaPlayer != null) {
+			mediaPlayer.dispose();
+			soundPlayer.dispose();
+		}
+		
+		setVisible(false);
 	}
 	
 	/**

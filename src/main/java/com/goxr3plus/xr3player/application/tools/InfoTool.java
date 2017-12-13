@@ -64,6 +64,11 @@ public final class InfoTool {
 	/** The Constant images. */
 	public static final String IMAGES = "/image/";
 	
+	/** The Constant videos. */
+	public static final String VIDEOS = "/video/";
+	
+	public static final String SOUNDS = "/sound/";
+	
 	/** The Constant styLes. */
 	public static final String STYLES = "/style/";
 	

@@ -105,7 +105,7 @@ public class Main extends Application {
 		internalInformation.put("Version", 95);
 		internalInformation.put("ReleasedDate", "?/12/2017");
 		
-		System.out.println("Outside of Application Start Method");		
+		System.out.println("Outside of Application Start Method");
 	}
 	
 	/**
@@ -284,8 +284,8 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		//width = 1380;
-		//height = 800;
+		//width = 1280;
+		//height = 600;
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -328,14 +328,14 @@ public class Main extends Application {
 		
 		//WelcomeScreen
 		if (properties.getProperty("Show-Welcome-Screen") == null)
-			welcomeScreen.show();
+			welcomeScreen.showWelcomeScreen();
 		else
 			Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresent(value -> {
 				welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
 				if (welcomeScreen.getShowOnStartUp().isSelected())
-					welcomeScreen.show();
+					welcomeScreen.showWelcomeScreen();
 				else
-					welcomeScreen.close();
+					welcomeScreen.hideWelcomeScreen();
 			});
 		
 		//Users Color Picker
@@ -362,7 +362,6 @@ public class Main extends Application {
 		settingsWindow.getWindow().initOwner(window);
 		aboutWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
-		welcomeScreen.getWindow().initOwner(window);
 		tagWindow.getWindow().initOwner(window);
 		dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
 		
@@ -417,7 +416,7 @@ public class Main extends Application {
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----------ApplicationStackPane---------
-		applicationStackPane.getChildren().addAll(root, loginMode, updateScreen);
+		applicationStackPane.getChildren().addAll(root, loginMode, updateScreen, welcomeScreen);
 		
 		//----------Load Application Users-------
 		loadTheUsers();

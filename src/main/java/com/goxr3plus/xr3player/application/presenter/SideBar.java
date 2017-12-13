@@ -69,9 +69,6 @@ public class SideBar extends BorderPane {
 	private MenuItem socialMediaToAnything;
 	
 	@FXML
-	private MenuItem showWelcomeScreen;
-	
-	@FXML
 	private MenuItem showApplicationInfo;
 	
 	@FXML
@@ -244,9 +241,6 @@ public class SideBar extends BorderPane {
 		// showApplicationInfo
 		showApplicationInfo.setOnAction(a -> Main.aboutWindow.show());
 		
-		// showWelcomeScreen
-		showWelcomeScreen.setOnAction(a -> Main.welcomeScreen.show());
-		
 		//showManual
 		showManual.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 		
@@ -291,9 +285,10 @@ public class SideBar extends BorderPane {
 	 * Delete the previous and import a new Database to XR3Player
 	 */
 	public void importDatabase() {
-		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) ) && ActionTool.doQuestion(
-				"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
-				Main.window)) {
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) )
+				&& ActionTool.doQuestion(
+						"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
+						Main.window)) {
 			
 			File file = Main.specialChooser.selectDBFile(Main.window);
 			if (file != null) {
@@ -330,9 +325,10 @@ public class SideBar extends BorderPane {
 	 * Delete XR3Player Database
 	 */
 	public void deleteDatabase() {
-		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) ) && ActionTool.doQuestion(
-				"ARE YOU SOORE YOU WANT TO PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
-				Main.window)) {
+		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) )
+				&& ActionTool.doQuestion(
+						"ARE YOU SOORE YOU WANT TO PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
+						Main.window)) {
 			
 			// Close database connections
 			if (Main.dbManager != null)
