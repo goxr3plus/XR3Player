@@ -84,9 +84,6 @@ public final class InfoTool {
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 	
-	/** The Constant playedImage. */
-	//public static final Image playedImage = getImageFromResourcesFolder("played.png");
-	
 	/** Database folder name <b>with out</b> separator [example:XR3DataBase] */
 	private static final String DATABASE_FOLDER_NAME = "XR3DataBase";
 	
