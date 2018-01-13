@@ -20,6 +20,7 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuth;
 import com.jfoenix.controls.JFXButton;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Worker;
@@ -163,10 +164,8 @@ public class DropboxAuthenticationBrowser extends StackPane {
 		});
 		
 		//tryAgain
-		tryAgain.setOnAction(a->webEngine.reload());
+		tryAgain.setOnAction(a -> checkForInternetConnection());
 		
-		//tryAgainIndicator
-		tryAgainIndicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
 	}
 	
 	/**
@@ -221,6 +220,26 @@ public class DropboxAuthenticationBrowser extends StackPane {
 			ex.printStackTrace();
 			ActionTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)", Duration.millis(2000), NotificationType.ERROR);
 		}
+	}
+	
+	/**
+	 * Checks for internet connection
+	 */
+	void checkForInternetConnection() {
+		
+		//tryAgainIndicator
+		tryAgainIndicator.setVisible(true);
+		
+		//Check for internet connection
+		Thread thread = new Thread(() -> {
+			boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
+			Platform.runLater(() -> {
+				errorPane.setVisible(!hasInternet);
+				tryAgainIndicator.setVisible(false);
+			});
+		}, "Internet Connection Tester Thread");
+		thread.setDaemon(true);
+		thread.start();
 	}
 	
 	/**

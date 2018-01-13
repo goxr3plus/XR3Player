@@ -124,7 +124,7 @@ public class DropboxViewer extends StackPane {
 	private Button authorizationButton2;
 	
 	@FXML
-	private VBox errorVBox;
+	private VBox errorPane;
 	
 	@FXML
 	private JFXButton tryAgain;
@@ -264,7 +264,7 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//errorVBox
-		errorVBox.setVisible(false);
+		errorPane.setVisible(false);
 		
 		//loginVBox
 		loginVBox.setVisible(true);
@@ -663,7 +663,7 @@ public class DropboxViewer extends StackPane {
 		Thread thread = new Thread(() -> {
 			boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
 			Platform.runLater(() -> {
-				errorVBox.setVisible(!hasInternet);
+				errorPane.setVisible(!hasInternet);
 				tryAgainIndicator.setVisible(false);
 			});
 		}, "Internet Connection Tester Thread");
@@ -717,7 +717,7 @@ public class DropboxViewer extends StackPane {
 	 * @return the errorVBox
 	 */
 	public VBox getErrorVBox() {
-		return errorVBox;
+		return errorPane;
 	}
 	
 	/**
