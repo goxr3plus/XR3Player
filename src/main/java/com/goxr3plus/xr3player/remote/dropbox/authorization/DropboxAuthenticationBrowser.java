@@ -158,6 +158,8 @@ public class DropboxAuthenticationBrowser extends StackPane {
 					}
 				}
 			} else if (newState == Worker.State.FAILED) {
+				
+				//Set Error Pane Visible
 				errorPane.setVisible(true);
 			}
 			
