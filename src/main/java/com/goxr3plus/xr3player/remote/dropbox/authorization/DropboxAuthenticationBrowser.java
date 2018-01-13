@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
@@ -57,6 +58,9 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	
 	@FXML
 	private JFXButton tryAgain;
+	
+	@FXML
+	private ProgressIndicator tryAgainIndicator;
 	
 	//----------------------------------------------------------------
 	
@@ -116,38 +120,53 @@ public class DropboxAuthenticationBrowser extends StackPane {
 		
 		//Add listener to the WebEngine
 		webEngine.getLoadWorker().stateProperty().addListener((observable , oldState , newState) -> {
-			if (newState == Worker.State.SUCCEEDED && "https://www.dropbox.com/1/oauth2/authorize_submit".equalsIgnoreCase(webEngine.getLocation())) {
-				Document doc = webEngine.getDocument();
-				try {
-					Transformer transformer = TransformerFactory.newInstance().newTransformer();
-					transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-					transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-					transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-					transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-					
-					//transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(System.out, "UTF-8")))
-					
-					StringWriter writer = new StringWriter();
-					transformer.transform(new DOMSource(doc), new StreamResult(writer));
-					String output = writer.toString();
-					//System.out.println(output)
-					
-					org.jsoup.nodes.Document html = Jsoup.parse(output);
-					Element div = html.body().getElementById("auth-code");
-					
-					//Finish Authorization
-					String code = div.getElementsByTag("input").first().attr("data-token");
-					
-					//Finish
-					produceAccessToken(code);
-					
-				} catch (Exception ex) {
-					ex.printStackTrace();
+			if (newState == Worker.State.SUCCEEDED) {
+				
+				//Check for error pane
+				errorPane.setVisible(false);
+				
+				//Check if this is the final authentication page
+				if ("https://www.dropbox.com/1/oauth2/authorize_submit".equalsIgnoreCase(webEngine.getLocation())) {
+					Document doc = webEngine.getDocument();
+					try {
+						Transformer transformer = TransformerFactory.newInstance().newTransformer();
+						transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+						transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+						transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+						transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+						
+						//transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(System.out, "UTF-8")))
+						
+						StringWriter writer = new StringWriter();
+						transformer.transform(new DOMSource(doc), new StreamResult(writer));
+						String output = writer.toString();
+						//System.out.println(output)
+						
+						org.jsoup.nodes.Document html = Jsoup.parse(output);
+						Element div = html.body().getElementById("auth-code");
+						
+						//Finish Authorization
+						String code = div.getElementsByTag("input").first().attr("data-token");
+						
+						//Finish
+						produceAccessToken(code);
+						
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
 				}
+			} else if (newState == Worker.State.FAILED) {
+				errorPane.setVisible(true);
 			}
 			
 		});
+		
+		//tryAgain
+		tryAgain.setOnAction(a->webEngine.reload());
+		
+		//tryAgainIndicator
+		tryAgainIndicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
 	}
 	
 	/**
