@@ -1,10 +1,10 @@
 
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player)
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player) 
+#### TODO List -> Make it the best Media Player ever created!
 
 ## Download XR3Player
 
 > Download it visiting [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
-
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
