@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.Tab?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="498.0" prefWidth="793.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="498.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #353535;" BorderPane.alignment="CENTER">
          <children>
@@ -24,8 +25,15 @@
                <tooltip>
                   <Tooltip text="Restore to default all the settings !" />
                </tooltip>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                     <image>
+                        <Image url="@../image/asc.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="doneButton" mnemonicParsing="false" text="Close" StackPane.alignment="CENTER_RIGHT">
+            <Button fx:id="doneButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;" text="Close" StackPane.alignment="CENTER_RIGHT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -37,7 +45,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <MenuButton fx:id="copySettingsMenuButton" mnemonicParsing="false" popupSide="RIGHT" text="Copy Settings from another User">
+            <MenuButton fx:id="copySettingsMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="35.0" text="Copy Settings from another User">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,14 +69,6 @@
    <center>
       <VBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="restoreDefaults" layoutX="684.0" layoutY="438.0" mnemonicParsing="false" style="-fx-background-radius: 0 0 0 0;;" text="Restore Defaults [ For the Selected Category ]">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Restore defaults settings for the selected tab category" />
-               </tooltip>
-            </Button>
             <JFXTabPane styleClass="specialJFXTabPane">
                <tabs>
                   <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General">
@@ -119,4 +119,25 @@
          </children>
       </VBox>
    </center>
+   <left>
+      <Group BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="restoreDefaults" mnemonicParsing="false" rotate="-90.0" style="-fx-background-radius: 0 0 0 0;;" text="Restore Defaults">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="Only for the selected tab category ." />
+               </tooltip>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                     <image>
+                        <Image url="@../image/asc.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Group>
+   </left>
 </fx:root>
