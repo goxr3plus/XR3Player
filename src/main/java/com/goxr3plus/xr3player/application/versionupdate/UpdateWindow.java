@@ -218,9 +218,9 @@ public class UpdateWindow extends StackPane {
 	private void searchForUpdatesPart2(boolean showTheWindow) {
 		try {
 			
-			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
+			//Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
 			
-			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
+			Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
 			
 			Element lastArticle = doc.getElementsByTag("article").last();
 			
@@ -248,7 +248,7 @@ public class UpdateWindow extends StackPane {
 				} else {
 					window.setTitle("New update is available!");
 					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
-					tabPane.getSelectionModel().select(1);
+					tabPane.getSelectionModel().select(0);
 				}
 				
 				//				//Read the JSON response
@@ -478,50 +478,62 @@ public class UpdateWindow extends StackPane {
 			});
 		} else {
 			
-			//new
-			text = "      New/Added \n";
-			textArea.appendText(text);
-			textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, newStyle);
-			final AtomicInteger counter = new AtomicInteger(-1);
-			Arrays.asList(element.getElementsByClass("new").text().split("\\*")).forEach(improvement -> {
-				if (counter.addAndGet(1) >= 1) {
-					String s = "\t\t" + counter + " ";
-					textArea.appendText(s);
-					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionNewCounters);
-					textArea.appendText(improvement + "\n");
-					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
-				}
-			});
+			//Show or not?
+			if (element.getElementsByClass("new").text().split("\\*").length > 0) {
+				
+				//new
+				text = "      New/Added \n";
+				textArea.appendText(text);
+				textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, newStyle);
+				final AtomicInteger counter = new AtomicInteger(-1);
+				Arrays.asList(element.getElementsByClass("new").text().split("\\*")).forEach(improvement -> {
+					if (counter.addAndGet(1) >= 1) {
+						String s = "\t\t" + counter + " ";
+						textArea.appendText(s);
+						textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionNewCounters);
+						textArea.appendText(improvement + "\n");
+						textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+					}
+				});
+			}
 			
-			//improved
-			text = "      Improved \n";
-			textArea.appendText(text);
-			textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, improvedStyle);
-			final AtomicInteger counter2 = new AtomicInteger(-1);
-			Arrays.asList(element.getElementsByClass("improved").text().split("\\*")).forEach(improvement -> {
-				if (counter2.addAndGet(1) >= 1) {
-					String s = "\t\t" + counter2 + " ";
-					textArea.appendText(s);
-					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionImrpovedCounters);
-					textArea.appendText(improvement + "\n");
-					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
-				}
-			});
+			//Show or not?
+			if (element.getElementsByClass("improved").text().split("\\*").length > 0) {
+				
+				//improved
+				text = "      Improved \n";
+				textArea.appendText(text);
+				textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, improvedStyle);
+				final AtomicInteger counter2 = new AtomicInteger(-1);
+				Arrays.asList(element.getElementsByClass("improved").text().split("\\*")).forEach(improvement -> {
+					if (counter2.addAndGet(1) >= 1) {
+						String s = "\t\t" + counter2 + " ";
+						textArea.appendText(s);
+						textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionImrpovedCounters);
+						textArea.appendText(improvement + "\n");
+						textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+					}
+				});
+			}
 			
-			//fixed
-			text = "      Bug Fixes \n";
-			textArea.appendText(text);
-			textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, bugFixesStyle);
-			final AtomicInteger counter3 = new AtomicInteger(-1);
-			Arrays.asList(element.getElementsByClass("fixed").text().split("\\*")).forEach(improvement -> {
-				if (counter3.addAndGet(1) >= 1) {
-					String s = "\t\t" + counter3 + " ";
-					textArea.appendText(s);
-					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionBugsFixedCounters);
-					textArea.appendText(improvement + "\n");
-					textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
-				}
-			});
+			//Show or not?
+			if (element.getElementsByClass("fixed").text().split("\\*").length > 0) {
+				
+				//fixed
+				text = "      Bug Fixes \n";
+				textArea.appendText(text);
+				textArea.setStyle(textArea.getLength() - text.length() + 5, textArea.getLength() - 1, bugFixesStyle);
+				final AtomicInteger counter3 = new AtomicInteger(-1);
+				Arrays.asList(element.getElementsByClass("fixed").text().split("\\*")).forEach(improvement -> {
+					if (counter3.addAndGet(1) >= 1) {
+						String s = "\t\t" + counter3 + " ";
+						textArea.appendText(s);
+						textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, sectionBugsFixedCounters);
+						textArea.appendText(improvement + "\n");
+						textArea.setStyle(textArea.getLength() - improvement.length() - 1, textArea.getLength() - 1, style3);
+					}
+				});
+			}
 		}
 	}
 	
