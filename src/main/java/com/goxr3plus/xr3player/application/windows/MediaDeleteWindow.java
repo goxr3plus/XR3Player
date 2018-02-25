@@ -1,7 +1,6 @@
 package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;

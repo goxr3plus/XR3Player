@@ -1,7 +1,9 @@
 package main.java.com.goxr3plus.xr3player.xplayer.microphone;
 
 import javax.sound.sampled.AudioFileFormat;
-import com.darkprograms.speech.util.*;
+
+import com.darkprograms.speech.util.Complex;
+import com.darkprograms.speech.util.FFT;
 
 /********************************************************************************************
  * Microphone Analyzer class, detects pitch and volume while extending the microphone class. Implemented as a precursor to a Voice Activity Detection
