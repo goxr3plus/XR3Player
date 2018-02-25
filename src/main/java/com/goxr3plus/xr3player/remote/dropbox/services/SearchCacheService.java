@@ -16,6 +16,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService.DropBoxOperation;
 
 /**
  * The duty of this class is to Cache Dropbox Account Search so it is superior fast :)
@@ -58,7 +59,6 @@ public class SearchCacheService extends Service<Boolean> {
 			@Override
 			protected Boolean call() throws Exception {
 				boolean success = true;
-			
 				
 				//Update Indicator Label
 				Platform.runLater(() -> dropBoxViewer.getCachedSearchIndicator().getTooltip().setText("Preparing Cached Search"));
@@ -91,6 +91,19 @@ public class SearchCacheService extends Service<Boolean> {
 				
 				if (this.isCancelled())
 					return;
+				
+				//Check if DropBoxService is running because if yes
+				//this should wait or else user will have an unpleasant 
+				//experience ( for example long time to refresh and search)
+				while (dropBoxViewer.getDropBoxService().getOperation() == DropBoxOperation.SEARCH
+						|| dropBoxViewer.getDropBoxService().getOperation() == DropBoxOperation.REFRESH) {
+					System.out.println("Dropbox Service is running...");
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 				
 				ListFolderResult result = client.files().listFolder(path);
 				

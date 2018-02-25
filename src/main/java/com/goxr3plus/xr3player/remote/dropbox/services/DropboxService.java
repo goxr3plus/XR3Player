@@ -33,7 +33,7 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 public class DropboxService extends Service<Boolean> {
 	
 	public enum DropBoxOperation {
-		REFRESH, SEARCH, CREATE_FOLDER, DELETE, PERMANENTLY_DELETE, RENAME;
+		REFRESH, SEARCH, CREATE_FOLDER, DELETE, PERMANENTLY_DELETE, RENAME, STOPPED;
 	}
 	
 	/**
@@ -53,6 +53,8 @@ public class DropboxService extends Service<Boolean> {
 	//
 	private DropboxFile dropboxFile;
 	private String newPath;
+	
+	private int searchMatchingFilesCounter;
 	
 	/**
 	 * This path is being used to delete files
@@ -94,7 +96,7 @@ public class DropboxService extends Service<Boolean> {
 	//		refreshAccounts = true;
 	//		
 	//		//Restart
-	//		super.restart();
+	//		restart();
 	//	}
 	
 	/**
@@ -117,7 +119,7 @@ public class DropboxService extends Service<Boolean> {
 		dropBoxViewer.getRefreshLabel().setText("Connecting to Server ...");
 		
 		//Restart
-		super.restart();
+		restart();
 	}
 	
 	/**
@@ -136,7 +138,7 @@ public class DropboxService extends Service<Boolean> {
 		dropBoxViewer.getRefreshLabel().setText("Searching for matching files ...");
 		
 		//Restart
-		super.restart();
+		restart();
 	}
 	
 	/**
@@ -149,7 +151,7 @@ public class DropboxService extends Service<Boolean> {
 		dropBoxViewer.getRefreshLabel().setText("Deleting requested files ...");
 		
 		//Restart
-		super.restart();
+		restart();
 	}
 	
 	/**
@@ -166,7 +168,7 @@ public class DropboxService extends Service<Boolean> {
 		dropBoxViewer.getRefreshLabel().setText("Creating requested folder ...");
 		
 		//Restart                                                                   
-		super.restart();
+		restart();
 	}
 	
 	/**
@@ -187,6 +189,12 @@ public class DropboxService extends Service<Boolean> {
 		dropBoxViewer.getRefreshLabel().setText("Renaming requested file ...");
 		
 		//Restart                                                                   
+		restart();
+	}
+	
+	@Override
+	public void restart() {
+		this.dropBoxViewer.getCancelDropBoxService().setDisable(operation != DropBoxOperation.SEARCH);
 		super.restart();
 	}
 	
@@ -294,6 +302,7 @@ public class DropboxService extends Service<Boolean> {
 						else {
 							
 							System.out.println("Doing --NORMAL SEARCH--");
+							searchMatchingFilesCounter = 0;
 							
 							//Search Everything
 							observableList = FXCollections.observableArrayList();
@@ -336,8 +345,15 @@ public class DropboxService extends Service<Boolean> {
 					//Check the Internet Connection
 					checkConnection();
 					
+					//Change the Operation so CachedSearch works correctly
+					operation = DropBoxOperation.STOPPED;
+					
 					return false;
 				}
+				
+				//Change the Operation so CachedSearch works correctly
+				operation = DropBoxOperation.STOPPED;
+				
 				return true;
 			}
 			
@@ -432,8 +448,13 @@ public class DropboxService extends Service<Boolean> {
 							//Run again
 							search(folder, children);
 						} else if (metadata instanceof FileMetadata) { //File
-							if (metadata.getName().toLowerCase().contains(searchWord))
+							if (metadata.getName().toLowerCase().contains(searchWord)) {
 								children.add(new DropboxFile(metadata));
+								++searchMatchingFilesCounter;
+								Platform.runLater(() -> dropBoxViewer.getRefreshLabel()
+										.setText("Searching , found [ " + InfoTool.getNumberWithDots(searchMatchingFilesCounter) + " ] matching files"));
+								System.out.println(searchMatchingFilesCounter);
+							}
 						}
 					}
 					
@@ -459,7 +480,7 @@ public class DropboxService extends Service<Boolean> {
 			public ObservableList<DropboxFile> cachedSearch(List<Metadata> cachedList) {
 				
 				//Find matching patterns
-				return cachedList.stream().filter(metadata -> metadata.getName().toLowerCase().contains(searchWord)).map(metadata -> new DropboxFile(metadata))
+				return cachedList.stream().filter(metadata -> metadata.getName().toLowerCase().contains(searchWord)).map(DropboxFile::new)
 						.collect(Collectors.toCollection(FXCollections::observableArrayList));
 				
 			}
@@ -591,6 +612,13 @@ public class DropboxService extends Service<Boolean> {
 	 */
 	public SearchCacheService getSearchCacheService() {
 		return searchCacheService;
+	}
+	
+	/**
+	 * @return the operation
+	 */
+	public DropBoxOperation getOperation() {
+		return operation;
 	}
 	
 }

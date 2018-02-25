@@ -106,6 +106,9 @@ public class DropboxViewer extends StackPane {
 	private ProgressIndicator progressIndicator;
 	
 	@FXML
+	private Button cancelDropBoxService;
+	
+	@FXML
 	private VBox loginVBox;
 	
 	@FXML
@@ -149,6 +152,9 @@ public class DropboxViewer extends StackPane {
 	
 	@FXML
 	private Button authorizationCodeCancelButton;
+	
+	@FXML
+	private VBox refreshVBox;
 	
 	// -------------------------------------------------------------
 	
@@ -203,18 +209,18 @@ public class DropboxViewer extends StackPane {
 		innerStackPane.getChildren().add(dropboxFilesTableViewer);
 		dropboxFilesTableViewer.toBack();
 		
-		//refreshLabel
-		refreshLabel.visibleProperty().bind(dropBoxService.runningProperty());
+		//refreshVBox
+		refreshVBox.visibleProperty().bind(getDropBoxService().runningProperty());
 		
 		//Progress Indicator
-		progressIndicator.progressProperty().bind(dropBoxService.progressProperty());
+		progressIndicator.progressProperty().bind(getDropBoxService().progressProperty());
 		
 		//refresh
 		refresh.setOnAction(a -> {
 			if (!searchField.getText().isEmpty())
 				search(searchField.getText());
 			else
-				recreateTableView(dropBoxService.getCurrentPath());
+				recreateTableView(getDropBoxService().getCurrentPath());
 		});
 		
 		// authorizationButton
@@ -293,10 +299,10 @@ public class DropboxViewer extends StackPane {
 		signOut.setOnAction(a -> {
 			
 			//cancel the service
-			dropBoxService.cancel();
+			getDropBoxService().cancel();
 			
 			//cancel cachedSearch Service
-			dropBoxService.getSearchCacheService().cancel();
+			getDropBoxService().getSearchCacheService().cancel();
 			
 			//loginVBox
 			loginVBox.setVisible(true);
@@ -322,7 +328,7 @@ public class DropboxViewer extends StackPane {
 			if ("DROPBOX ROOT".equals(value))
 				recreateTableView("");
 			else
-				recreateTableView(dropBoxService.getCurrentPath().split(value)[0] + value);
+				recreateTableView(getDropBoxService().getCurrentPath().split(value)[0] + value);
 			
 		});
 		
@@ -391,7 +397,7 @@ public class DropboxViewer extends StackPane {
 						if (Main.renameWindow.wasAccepted()) {
 							
 							//Try to create
-							dropBoxService.createFolder(dropBoxService.getCurrentPath() + "/" + Main.renameWindow.getInputField().getText());
+							getDropBoxService().createFolder(getDropBoxService().getCurrentPath() + "/" + Main.renameWindow.getInputField().getText());
 							
 						}
 						
@@ -400,6 +406,9 @@ public class DropboxViewer extends StackPane {
 			});
 			
 		});
+		
+		//cancelDropBoxService
+		cancelDropBoxService.setOnAction(a -> recreateTableView(""));
 		
 		//searchResultsLabel
 		searchResultsLabel.setVisible(false);
@@ -415,7 +424,7 @@ public class DropboxViewer extends StackPane {
 		searchField.setOnAction(a -> search(searchField.getText()));
 		
 		//cachedSearchIndicator
-		cachedSearchIndicator.progressProperty().bind(dropBoxService.getSearchCacheService().progressProperty());
+		cachedSearchIndicator.progressProperty().bind(getDropBoxService().getSearchCacheService().progressProperty());
 	}
 	
 	/**
@@ -452,7 +461,7 @@ public class DropboxViewer extends StackPane {
 		this.accessToken = accessToken;
 		
 		//Clear CachedService Search
-		dropBoxService.getSearchCacheService().getCachedList().clear();
+		getDropBoxService().getSearchCacheService().getCachedList().clear();
 		
 		//Create the TableView
 		recreateTableView("");
@@ -475,13 +484,13 @@ public class DropboxViewer extends StackPane {
 							+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
 							+ " from your Dropbox?",
 					deleteMenuButton, Main.window))
-				this.dropBoxService.delete(DropBoxOperation.DELETE);
+				this.getDropBoxService().delete(DropBoxOperation.DELETE);
 		} else if (ActionTool.doQuestion("PERMANENT Delete",
 				"Are you sure you want to delete "
 						+ ( selectedItems != 1 ? " [ " + selectedItems + " ] items" : " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] " )
 						+ " from your Dropbox PERMANENTLY?",
 				deleteMenuButton, Main.window))
-			this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
+			this.getDropBoxService().delete(DropBoxOperation.PERMANENTLY_DELETE);
 		
 	}
 	
@@ -495,10 +504,10 @@ public class DropboxViewer extends StackPane {
 		
 		if (!permanent) {
 			if (ActionTool.doQuestion("Delete", "Are you sure you want to delete [ " + dropboxFile.getTitle() + " ]  from your Dropbox?", deleteMenuButton, Main.window))
-				this.dropBoxService.delete(DropBoxOperation.DELETE);
+				this.getDropBoxService().delete(DropBoxOperation.DELETE);
 		} else if (ActionTool.doQuestion("PERMANENT Delete", "Are you sure you want to delete [" + dropboxFile.getTitle() + " ]  from your Dropbox PERMANENTLY?", deleteMenuButton,
 				Main.window))
-			this.dropBoxService.delete(DropBoxOperation.PERMANENTLY_DELETE);
+			this.getDropBoxService().delete(DropBoxOperation.PERMANENTLY_DELETE);
 		
 	}
 	
@@ -558,7 +567,7 @@ public class DropboxViewer extends StackPane {
 						String parent = new File(dropboxFile.getMetadata().getPathLower()).getParent();
 						
 						//Try to do it
-						dropBoxService.rename(dropboxFile, parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName);
+						getDropBoxService().rename(dropboxFile, parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName);
 						
 						//						System.out.println("Old Name: " + dropboxFile.getMetadata().getPathLower());
 						//						
@@ -613,7 +622,7 @@ public class DropboxViewer extends StackPane {
 		if (searchWord.isEmpty())
 			recreateTableView("");
 		else
-			dropBoxService.search(searchWord);
+			getDropBoxService().search(searchWord);
 	}
 	
 	/**
@@ -648,7 +657,7 @@ public class DropboxViewer extends StackPane {
 		}
 		
 		//Start the Service
-		dropBoxService.refresh(path);
+		getDropBoxService().refresh(path);
 	}
 	
 	/**
@@ -781,6 +790,20 @@ public class DropboxViewer extends StackPane {
 	 */
 	public ProgressIndicator getCachedSearchIndicator() {
 		return cachedSearchIndicator;
+	}
+	
+	/**
+	 * @return the dropBoxService
+	 */
+	public DropboxService getDropBoxService() {
+		return dropBoxService;
+	}
+	
+	/**
+	 * @return the cancelDropBoxService
+	 */
+	public Button getCancelDropBoxService() {
+		return cancelDropBoxService;
 	}
 	
 }
