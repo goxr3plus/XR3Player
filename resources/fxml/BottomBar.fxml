@@ -5,18 +5,71 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="868.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="1063.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <HBox alignment="CENTER" spacing="2.0">
+         <children>
+            <ProgressBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="11.0" prefWidth="28.0" progress="0.0" styleClass="blueProgressBar">
+               <tooltip>
+                  <Tooltip text="Uploads Progress" />
+               </tooltip>
+            </ProgressBar>
+            <Label fx:id="internetConnectionLabel11" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="19.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/downloading.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Downloads" />
+               </tooltip>
+            </Label>
+            <Label fx:id="internetConnectionLabel1" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="17.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/uploading.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Uploads" />
+               </tooltip>
+            </Label>
+            <ProgressBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="11.0" prefWidth="28.0" progress="0.0" styleClass="blueProgressBar">
+               <tooltip>
+                  <Tooltip text="Uploads Progress" />
+               </tooltip>
+            </ProgressBar>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </HBox>
       <JFXTextField fx:id="searchField" focusColor="#ff0f53" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" promptText="search..." style="-fx-text-fill: white;" unFocusColor="#ff3535" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXTextField>
+      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <padding>
+            <Insets left="4.0" right="4.0" />
+         </padding>
+         <tooltip>
+            <Tooltip text="Can application connect to internet" />
+         </tooltip>
+      </Label>
       <JFXToggleButton fx:id="speechRecognitionToggle" disable="true" focusTraversable="false" layoutX="149.0" layoutY="13.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="292.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
          <cursor>

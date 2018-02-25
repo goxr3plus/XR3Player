@@ -58,6 +58,7 @@ public class SearchCacheService extends Service<Boolean> {
 			@Override
 			protected Boolean call() throws Exception {
 				boolean success = true;
+			
 				
 				//Update Indicator Label
 				Platform.runLater(() -> dropBoxViewer.getCachedSearchIndicator().getTooltip().setText("Preparing Cached Search"));
