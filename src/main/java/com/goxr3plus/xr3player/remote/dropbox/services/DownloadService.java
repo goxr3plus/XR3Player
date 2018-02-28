@@ -104,24 +104,29 @@ public class DownloadService extends Service<Boolean> {
 			public void downloadFile(DbxClientV2 client , String dropBoxFilePath , String localFileAbsolutePath) throws DownloadErrorException , DbxException , IOException {
 				
 				//Create DbxDownloader
-				DbxDownloader<FileMetadata> dl = client.files().download(dropBoxFilePath);
-				
-				//FileOutputStream
-				FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);
-				System.out.println("Downloading .... " + dropBoxFilePath);
-				
-				//Add a progress Listener
-				dl.download(new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
-					//System.out.println( ( completed * 100 ) / totalSize + " %");
+				try (DbxDownloader<FileMetadata> dl = client.files().download(dropBoxFilePath);
+						//FileOutputStream
+						FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);
+						//ProgressOutPutStream
+						ProgressOutputStream output = new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
+							//System.out.println( ( completed * 100 ) / totalSize + " %")
+							
+							//this.updateProgress(completed, totalSize)
+						});) {
+							
+					//FileOutputStream
+					System.out.println("Downloading .... " + dropBoxFilePath);
 					
-					//this.updateProgress(completed, totalSize);
-				}));
-				
-				//Fast way...
-				//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
-				//DbxRawClientV2 rawClient = new DbxRawClientV2(config,dropBoxViewer.getAccessToken());
-				//DbxUserFilesRequests r = new DbxUserFilesRequests(client);
-				
+					//Add a progress Listener
+					dl.download(output);
+					
+					//Fast way...
+					//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
+					//DbxRawClientV2 rawClient = new DbxRawClientV2(config,dropBoxViewer.getAccessToken());
+					//DbxUserFilesRequests r = new DbxUserFilesRequests(client);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 			
 		};
