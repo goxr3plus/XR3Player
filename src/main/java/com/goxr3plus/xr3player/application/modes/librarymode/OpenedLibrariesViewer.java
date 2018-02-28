@@ -81,7 +81,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	private void initialize() {
 		
 		tabPane.getTabs().clear();
-		//tabPane.setId("MultipleLibrariesTabPane");
+		//tabPane.setId("MultipleLibrariesTabPane")
 		
 		// emptyLabel
 		emptyLabel.setOnMouseReleased(m -> {
@@ -257,6 +257,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		marquee.textProperty().bind(tab.getTooltip().textProperty());
 		//marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
 		//tab.textProperty().bind(marquee.textProperty())
+		marquee.checkAnimationValidity(Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected());
 		
 		stack.getChildren().addAll(indicator, label);
 		stack.setManaged(false);

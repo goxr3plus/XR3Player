@@ -35,6 +35,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -187,6 +188,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button maximizeVisualizer;
+	
+	@FXML
+	private Label visualizationsDisabledLabel;
+	
+	@FXML
+	private Button enableHighGraphics;
 	
 	@FXML
 	private HBox mediaNameHBox;
@@ -512,7 +519,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			event.consume();
 		});
 		
-		
 		//== dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
 		dragAndDropLabel.setOnDragOver(event -> {
@@ -532,6 +538,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		regionStackPane.setVisible(false);
 		
 		// mediaFileStackPane	
+		mediaFileMarquee.getLabel().setTooltip(new Tooltip(""));
+		mediaFileMarquee.getLabel().getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
 		mediaFileMarquee.setText("Drag a song on this deck to load it");
 		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
@@ -607,7 +615,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				xPlayerWindow.close();
 		});
 		
-		
 		//focusXPlayerWindow
 		focusXPlayerWindow.setOnMouseReleased(m -> xPlayerWindow.getWindow().requestFocus());
 		
@@ -635,6 +642,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//=emotionsButton
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
 		emotionsButton.setOnAction(a -> updateEmotion(emotionsButton));
+		
+		//enableHighGraphics
+		enableHighGraphics.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.GENERERAL));
 		
 		//=settings
 		settings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.XPLAYERS));
@@ -1144,6 +1154,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@Override
 	public void progress(int nEncodedBytes , long microSecondsPosition , byte[] pcmdata , Map<String,Object> properties) {
+		System.out.println("Entered....");
+		
 		visualizer.writeDSP(pcmdata);
 		
 		if (!isDiscBeingDragged()) {
@@ -1648,6 +1660,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public StackPane getDiskStackPane() {
 		return diskStackPane;
+	}
+	
+	/**
+	 * @return the visualizationsDisabledLabel
+	 */
+	public Label getVisualizationsDisabledLabel() {
+		return visualizationsDisabledLabel;
 	}
 	
 }

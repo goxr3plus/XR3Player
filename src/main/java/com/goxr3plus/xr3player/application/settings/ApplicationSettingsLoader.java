@@ -51,6 +51,13 @@ public class ApplicationSettingsLoader {
 			
 			//======================START OF General-Settings======================
 			
+			//-- High Graphics Mode
+			Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().setSelected(true);
+			Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().setSelected(false);
+			
+			Optional.ofNullable(settings.getProperty("General-High-Graphics"))
+					.ifPresent(s -> Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().setSelected(Boolean.valueOf(s)));
+			
 			//--SideBar side
 			Optional.ofNullable(settings.getProperty("General-SideBarSide"))
 					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(Main.settingsWindow.getGeneralSettingsController().getSideBarSideGroup(), Integer.valueOf(s)));
@@ -160,7 +167,7 @@ public class ApplicationSettingsLoader {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
 	}
 	
 }

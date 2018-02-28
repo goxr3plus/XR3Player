@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -55,6 +56,9 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private JFXTabPane jfxTabPane;
+	
+    @FXML
+    private ImageView highSpeed;
 	
 	@FXML
 	private Tab mainModeTab;
@@ -315,5 +319,13 @@ public class TopBar extends BorderPane {
 	public WindowMode getWindowMode() {
 		return windowMode;
 	}
+
+	/**
+	 * @return the highSpeed
+	 */
+	public ImageView getHighSpeed() {
+		return highSpeed;
+	}
+
 	
 }

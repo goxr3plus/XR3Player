@@ -95,7 +95,7 @@
       </HBox>
    </right>
    <center>
-      <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR3Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
+      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR3Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
          <effect>
             <DropShadow />
          </effect>
@@ -105,6 +105,22 @@
          <BorderPane.margin>
             <Insets right="10.0" />
          </BorderPane.margin>
+         <graphic>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/vip.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="highSpeed" fitHeight="24.0" fitWidth="24.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/high-sped.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </graphic>
       </Label>
    </center>
    <left>

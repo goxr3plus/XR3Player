@@ -11,9 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -26,12 +26,14 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class Marquee extends Pane {
 	
 	@FXML
-	private Text text;
+	private Label label;
 	
 	// minimum distance to Pane bounds
 	private static final double OFFSET = 5;
 	
 	private Timeline timeline = new Timeline();
+	
+	private boolean animationAllowed = true;
 	
 	/**
 	 * Constructor
@@ -63,7 +65,7 @@ public class Marquee extends Pane {
 		setClip(rectangle);
 		
 		// Text
-		text.setManaged(false);
+		//text.setManaged(false)
 		
 		startAnimation();
 	}
@@ -77,7 +79,7 @@ public class Marquee extends Pane {
 	public Marquee setText(String value) {
 		
 		// text
-		text.setText(value);
+		label.setText(value);
 		
 		return this;
 	}
@@ -88,7 +90,7 @@ public class Marquee extends Pane {
 	 * @return The TextProperty
 	 */
 	public StringProperty textProperty() {
-		return text.textProperty();
+		return label.textProperty();
 	}
 	
 	/**
@@ -103,14 +105,14 @@ public class Marquee extends Pane {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				double textWidth = text.getLayoutBounds().getWidth();
+				double textWidth = label.getLayoutBounds().getWidth();
 				double paneWidth = getWidth();
-				double layoutX = text.getLayoutX();
+				double layoutX = label.getLayoutX();
 				
 				if (2 * OFFSET + textWidth <= paneWidth && layoutX >= OFFSET) {
 					// stop, if the pane is large enough and the position is
 					// correct
-					text.setLayoutX(OFFSET);
+					label.setLayoutX(OFFSET);
 					timeline.stop();
 				} else {
 					if ( ( rightMovement && layoutX >= OFFSET ) || ( !rightMovement && layoutX + textWidth + OFFSET <= paneWidth )) {
@@ -124,7 +126,7 @@ public class Marquee extends Pane {
 					} else {
 						layoutX -= 1;
 					}
-					text.setLayoutX(layoutX);
+					label.setLayoutX(layoutX);
 				}
 			}
 		});
@@ -133,17 +135,35 @@ public class Marquee extends Pane {
 		
 		// listen to bound changes of the elements to start/stop the
 		// animation
-		InvalidationListener listener = o -> {
-			double textWidth = text.getLayoutBounds().getWidth();
-			double paneWidth = getWidth();
-			text.setLayoutX(5);
-			if (textWidth + 2 * OFFSET > paneWidth && timeline.getStatus() != Animation.Status.RUNNING)
-				timeline.play();
-		};
+		InvalidationListener listener = o -> checkAnimationValidity(animationAllowed);
 		
-		text.layoutBoundsProperty().addListener(listener);
+		label.layoutBoundsProperty().addListener(listener);
 		widthProperty().addListener(listener);
 		
+	}
+	
+	/**
+	 * Starts or stops the animation based on the given boolean
+	 */
+	public void checkAnimationValidity(boolean continueAnimation) {
+		animationAllowed = continueAnimation;
+		if (animationAllowed) {
+			double textWidth = label.getLayoutBounds().getWidth();
+			double paneWidth = getWidth();
+			label.setLayoutX(5);
+			if (textWidth + 2 * OFFSET > paneWidth && timeline.getStatus() != Animation.Status.RUNNING)
+				timeline.play();
+		} else {
+			label.setLayoutX(OFFSET);
+			timeline.stop();
+		}
+	}
+
+	/**
+	 * @return the label
+	 */
+	public Label getLabel() {
+		return label;
 	}
 	
 }

@@ -6,6 +6,7 @@ package main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
 
@@ -20,7 +21,7 @@ abstract class Visualizer extends VisualizerDrawer {
 	private final PaintService animationService = new PaintService();
 	
 	/**
-	 * Constructor 
+	 * Constructor
 	 * 
 	 * @param text
 	 */
@@ -186,6 +187,10 @@ abstract class Visualizer extends VisualizerDrawer {
 			if (xPlayerController != null && xPlayerController.getDisc() != null)
 				xPlayerController.getDisc().repaint();
 			
+			//CHECK IF VISUALIZERS ARE ENABLED
+			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
+				return;
+			
 			// Avoid null pointer and also check if we have permission to draw the visualizer
 			if (xPlayerController != null && !xPlayerController.getVisualizerStackController().isVisible()) {
 				clear();
@@ -222,53 +227,53 @@ abstract class Visualizer extends VisualizerDrawer {
 			}
 			
 			// Can draw?
-//			if (draw) {
-//				clear();
-//				switch (displayMode.get()) {
-//					
-//					case 0:
-//						drawOscilloscope(false);
-//						break;
-//					case 1:
-//						drawOscilloscope(true);
-//						break;
-//					case 2:
-//						drawOscilloScopeLines();
-//						break;
-//					case 3:
-//						drawSpectrumBars();
-//						break;
-//					case 4:
-//						drawVUMeter();
-//						break;
-//					case 5:
-//						drawPolySpiral();
-//						break;
-//					case 6:
-//						drawCircleWithLines();
-//						break;
-//					case 7:
-//						drawSierpinski();
-//						break;
-//					case 8:
-//						drawSprite3D();
-//						break;
-//					case 9:
-//						drawJuliaSet();
-//						break;
-//					default:
-//						break;
-//				}
-//				
-//				// -- Show FPS if necessary.
-//				if (showFPS) {
-//					gc.setFill(Color.BLACK);
-//					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
-//					gc.setStroke(Color.WHITE);
-//					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
-//				}
-//				
-//			} // END: if draw == TRUE
+			if (draw) {
+				clear();
+				switch (displayMode.get()) {
+					
+					case 0:
+						drawOscilloscope(false);
+						break;
+					case 1:
+						drawOscilloscope(true);
+						break;
+					case 2:
+						drawOscilloScopeLines();
+						break;
+					case 3:
+						drawSpectrumBars();
+						break;
+					case 4:
+						drawVUMeter();
+						break;
+					case 5:
+						drawPolySpiral();
+						break;
+					case 6:
+						drawCircleWithLines();
+						break;
+					case 7:
+						drawSierpinski();
+						break;
+					case 8:
+						drawSprite3D();
+						break;
+					case 9:
+						drawJuliaSet();
+						break;
+					default:
+						break;
+				}
+				
+				// -- Show FPS if necessary.
+				if (showFPS) {
+					gc.setFill(Color.BLACK);
+					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
+					gc.setStroke(Color.WHITE);
+					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
+				}
+				
+			} // END: if draw == TRUE
 			
 			// --------------------------------------------------------------------------------------RUBBISH
 			// CODE

@@ -163,9 +163,9 @@
                                                 </BorderPane>
                                              </items>
                                           </SplitPane>
-                                          <SplitPane fx:id="leftSplitPane" dividerPositions="0.28468468468468466" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" SplitPane.resizableWithParent="false">
+                                          <SplitPane fx:id="leftSplitPane" dividerPositions="0.2126126126126126" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" SplitPane.resizableWithParent="false">
                                              <items>
-                                                <VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="115.0" prefWidth="202.0" spacing="2.0" SplitPane.resizableWithParent="false">
+                                                <VBox alignment="TOP_CENTER" maxHeight="140.0" minHeight="-Infinity" minWidth="0.0" prefHeight="115.0" prefWidth="202.0" spacing="2.0" SplitPane.resizableWithParent="false">
                                                    <children>
                                                       <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                                          <children>
@@ -311,6 +311,22 @@
                                                             <Insets bottom="2.0" left="5.0" right="2.0" top="2.0" />
                                                          </padding>
                                                       </HBox>
+                                                      <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
+                                                         <graphic>
+                                                            <Button fx:id="enableHighGraphics" alignment="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../image/high-sped.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                         </graphic>
+                                                      </Label>
                                                    </children>
                                                 </StackPane>
                                              </items>
@@ -368,7 +384,7 @@
                               </GridPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <bottom>
                               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" spacing="10.0" BorderPane.alignment="CENTER">
                                  <children>

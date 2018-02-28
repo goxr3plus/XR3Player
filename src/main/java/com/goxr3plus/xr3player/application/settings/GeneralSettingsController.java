@@ -14,7 +14,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 
@@ -118,6 +120,35 @@ public class GeneralSettingsController extends BorderPane {
 			
 		});
 		
+		//highGraphicsToggle
+		highGraphicsToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
+			boolean value = newValue.booleanValue();
+			//System.out.println("High graphics is :"+value)
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("General-High-Graphics", String.valueOf(value));
+			
+			//Disable all Marquee from moving
+			Main.xPlayersList.getList().forEach(controller -> {
+				
+				//Marquee
+				controller.getMediaFileMarquee().checkAnimationValidity(value);
+				
+				//getVisualizationsDisabledLabel
+				controller.getVisualizationsDisabledLabel().setVisible(!value);
+				
+			});
+			
+			//For each Library
+			Main.libraryMode.openedLibrariesViewer.getTabs().forEach(tab -> ( (Marquee) ( (HBox) tab.getGraphic() ).getChildren().get(3) ).checkAnimationValidity(value));
+			
+			//For the Web Browser
+			Main.webBrowser.setMovingTitlesEnabled(value);
+			
+			Main.topBar.getHighSpeed().setVisible(value);
+			Main.topBar.getHighSpeed().setManaged(value);
+		});
+		
 	}
 	
 	/**
@@ -201,6 +232,13 @@ public class GeneralSettingsController extends BorderPane {
 	 */
 	public ToggleGroup getNotificationsPosition() {
 		return notificationsPosition;
+	}
+	
+	/**
+	 * @return the highGraphicsToggle
+	 */
+	public JFXToggleButton getHighGraphicsToggle() {
+		return highGraphicsToggle;
 	}
 	
 }
