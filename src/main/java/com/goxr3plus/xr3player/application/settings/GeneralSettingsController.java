@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +40,9 @@ public class GeneralSettingsController extends BorderPane {
 	
 	@FXML
 	private ToggleGroup notificationsPosition;
+	
+	@FXML
+	private JFXToggleButton highGraphicsToggle;
 	
 	// -------------------------------------------------------------
 	
@@ -151,8 +155,6 @@ public class GeneralSettingsController extends BorderPane {
 				break;
 		}
 	}
-	
-	
 	
 	/**
 	 * Restores all the settings that have to do with the category of the class
