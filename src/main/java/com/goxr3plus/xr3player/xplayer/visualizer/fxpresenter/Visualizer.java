@@ -181,11 +181,13 @@ abstract class Visualizer extends VisualizerDrawer {
 		@Override
 		public void handle(long nanos) {
 			
+			System.out.println("Visualizer Running...");
+			
 			//System.out.println("MaxPer50Millis : " + maximumFramesPer50Milliseconds + " Current frames drawn:" + framesPerSecond);
 			
 			// --XRPlayer controller?
-			if (xPlayerController != null && xPlayerController.getDisc() != null)
-				xPlayerController.getDisc().repaint();
+//			if (xPlayerController != null && xPlayerController.getDisc() != null)
+//				xPlayerController.getDisc().repaint();
 			
 			//CHECK IF VISUALIZERS ARE ENABLED
 			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
