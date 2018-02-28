@@ -131,6 +131,11 @@ abstract class Visualizer extends VisualizerDrawer {
 		 */
 		private boolean draw = true;
 		
+		//FPS
+		private long previousTime = 0;
+		private float secondsElapsedSinceLastFpsUpdate = 0f;
+		private int framesSinceLastFpsUpdate = 0;
+		
 		@Override
 		public void start() {
 			// Values must be >0
@@ -181,17 +186,26 @@ abstract class Visualizer extends VisualizerDrawer {
 		@Override
 		public void handle(long nanos) {
 			
-			System.out.println("Visualizer Running...");
-			
-			//System.out.println("MaxPer50Millis : " + maximumFramesPer50Milliseconds + " Current frames drawn:" + framesPerSecond);
-			
-			// --XRPlayer controller?
-//			if (xPlayerController != null && xPlayerController.getDisc() != null)
-//				xPlayerController.getDisc().repaint();
-			
 			//CHECK IF VISUALIZERS ARE ENABLED
 			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
 				return;
+			
+			if (previousTime == 0) {
+				previousTime = nanos;
+				return;
+			}
+			
+			float secondsElapsed = ( nanos - previousTime ) / 1e9f;
+			previousTime = nanos;
+			
+			secondsElapsedSinceLastFpsUpdate += secondsElapsed;
+			framesSinceLastFpsUpdate++;
+			if (secondsElapsedSinceLastFpsUpdate >= 0.5f) {
+				int fps = Math.round(framesSinceLastFpsUpdate / secondsElapsedSinceLastFpsUpdate);
+				System.out.println(fps);
+				secondsElapsedSinceLastFpsUpdate = 0;
+				framesSinceLastFpsUpdate = 0;
+			}
 			
 			// Avoid null pointer and also check if we have permission to draw the visualizer
 			if (xPlayerController != null && !xPlayerController.getVisualizerStackController().isVisible()) {
@@ -231,49 +245,49 @@ abstract class Visualizer extends VisualizerDrawer {
 			// Can draw?
 			if (draw) {
 				clear();
-				switch (displayMode.get()) {
-					
-					case 0:
-						drawOscilloscope(false);
-						break;
-					case 1:
-						drawOscilloscope(true);
-						break;
-					case 2:
-						drawOscilloScopeLines();
-						break;
-					case 3:
-						drawSpectrumBars();
-						break;
-					case 4:
-						drawVUMeter();
-						break;
-					case 5:
-						drawPolySpiral();
-						break;
-					case 6:
-						drawCircleWithLines();
-						break;
-					case 7:
-						drawSierpinski();
-						break;
-					case 8:
-						drawSprite3D();
-						break;
-					case 9:
-						drawJuliaSet();
-						break;
-					default:
-						break;
-				}
+				//				switch (displayMode.get()) {
+				//					
+				//					case 0:
+				drawOscilloscope(false);
+				//						break;
+				//					case 1:
+				//						drawOscilloscope(true);
+				//						break;
+				//					case 2:
+				//						drawOscilloScopeLines();
+				//						break;
+				//					case 3:
+				//						drawSpectrumBars();
+				//						break;
+				//					case 4:
+				//						drawVUMeter();
+				//						break;
+				//					case 5:
+				//						drawPolySpiral();
+				//						break;
+				//					case 6:
+				//						drawCircleWithLines();
+				//						break;
+				//					case 7:
+				//						drawSierpinski();
+				//						break;
+				//					case 8:
+				//						drawSprite3D();
+				//						break;
+				//					case 9:
+				//						drawJuliaSet();
+				//						break;
+				//					default:
+				//						break;
+				//				}
 				
-				// -- Show FPS if necessary.
-				if (showFPS) {
-					gc.setFill(Color.BLACK);
-					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
-					gc.setStroke(Color.WHITE);
-					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
-				}
+				//				// -- Show FPS if necessary.
+				//				if (showFPS) {
+				//					gc.setFill(Color.BLACK);
+				//					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
+				//					gc.setStroke(Color.WHITE);
+				//					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
+				//				}
 				
 			} // END: if draw == TRUE
 			

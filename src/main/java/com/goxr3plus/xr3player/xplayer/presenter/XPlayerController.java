@@ -1154,8 +1154,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@Override
 	public void progress(int nEncodedBytes , long microSecondsPosition , byte[] pcmdata , Map<String,Object> properties) {
-		System.out.println("Entered....");
-		visualizer.writeDSP(pcmdata);
+		//System.out.println("Entered....");
+		
+		//Check if DSP is allowed
+		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
+			visualizer.writeDSP(pcmdata);
 		
 		if (!isDiscBeingDragged()) {
 			
@@ -1204,7 +1207,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted + "");
 					
 					//if (xPlayerController != null && xPlayerController.getDisc() != null)
-						disc.repaint();
+					disc.repaint();
 				});
 				
 			}

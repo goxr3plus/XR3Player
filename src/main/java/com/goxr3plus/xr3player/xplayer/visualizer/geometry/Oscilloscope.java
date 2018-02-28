@@ -165,6 +165,6 @@ public class Oscilloscope {
 	    xOld = x;
 	    yOld = y;
 	}
-    }
-
+	}
+	
 }
