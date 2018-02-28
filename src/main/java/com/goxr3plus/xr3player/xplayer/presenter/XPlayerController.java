@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
@@ -96,6 +97,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private StackPane xPlayerStackPane;
+	
+	@FXML
+	private BorderPane rootBorderPane;
+	
+	@FXML
+	private StackPane modesStackPane;
 	
 	@FXML
 	private BorderPane borderPane;
@@ -197,7 +204,43 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Tab padTab;
 	
 	@FXML
+	private BorderPane smBorderPane;
+	
+	@FXML
+	private Button smPlayPauseButton;
+	
+	@FXML
+	private Button smStopButton;
+	
+	@FXML
+	private ToggleButton smMuteButton;
+	
+	@FXML
+	private Button smReplayButton;
+	
+	@FXML
+	private Slider smTimeSlider;
+	
+	@FXML
+	private Slider smVolumeSlider;
+	
+	@FXML
+	private StackPane smImageViewStackPane;
+	
+	@FXML
+	private ImageView smImageView;
+	
+	@FXML
+	private Label smMediaTitle;
+	
+	@FXML
 	private Label topInfoLabel;
+	
+	@FXML
+	private Label modeToggleLabel;
+	
+	@FXML
+	private JFXToggleButton modeToggle;
 	
 	@FXML
 	private JFXToggleButton settingsToggle;
@@ -224,10 +267,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private JFXSpinner fxSpinner;
 	
 	@FXML
-	private Label dragAndDropLabel;
+	private Label fxLabel;
 	
 	@FXML
-	private Label fxLabel;
+	private Label dragAndDropLabel;
 	
 	@FXML
 	private Label restorePlayer;
@@ -457,9 +500,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		visualizerWindow = new VisualizerWindowController(this);
 		playerExtraSettings = new XPlayerExtraSettings(this);
 		
-		//== borderPane
-		borderPane.setOnDragOver(event -> {
-			//System.out.println(event.getGestureSource());
+		//== modesStackPane
+		modesStackPane.setOnDragOver(event -> {
+			//System.out.println(event.getGestureSource())
 			
 			//Check if FlipPane is on the front side
 			if (!flipPane.isBackVisible()) { //event.getGestureSource() != mediaFileMarquee) {
@@ -468,6 +511,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			
 			event.consume();
 		});
+		
 		
 		//== dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
@@ -518,9 +562,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//Fix fast the image
 			( (ImageView) playPauseButton.getGraphic() ).setImage(xPlayer.isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
 		});
+		smPlayPauseButton.setOnAction(playPauseButton.getOnAction());
 		
 		//== replayButton
 		replayButton.setOnAction(a -> replay());
+		smReplayButton.setOnAction(replayButton.getOnAction());
 		
 		//== stopButton
 		stopButton.setOnAction(a -> stop());
@@ -530,7 +576,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//flipPane
 		flipPane.setFlipTime(150);
-		flipPane.getFront().getChildren().addAll(basicGridPane);
+		flipPane.getFront().getChildren().addAll(modesStackPane);
 		flipPane.getBack().getChildren().addAll(playerExtraSettings);
 		
 		settingsToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
@@ -539,7 +585,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			else
 				flipPane.flipToFront();
 		});
-		borderPane.setCenter(flipPane);
+		rootBorderPane.setCenter(flipPane);
+		
+		//modeToggle
+		modeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
+			if (!newValue) {
+				smBorderPane.setVisible(true);
+				modeToggleLabel.setText("Basic");
+			} else {
+				smBorderPane.setVisible(false);
+				modeToggleLabel.setText("Advanced");
+			}
+		});
 		
 		//RestorePlayerVBox
 		restorePlayer.getParent().visibleProperty().bind(xPlayerWindow.getWindow().showingProperty());
@@ -549,6 +606,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			if (m.getButton() == MouseButton.PRIMARY)
 				xPlayerWindow.close();
 		});
+		
 		
 		//focusXPlayerWindow
 		focusXPlayerWindow.setOnMouseReleased(m -> xPlayerWindow.getWindow().requestFocus());
@@ -580,6 +638,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//=settings
 		settings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.XPLAYERS));
+		
+		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
+		
 	}
 	
 	/**
@@ -902,6 +963,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// initialize
 		disc = new DJDisc(136, 136, color, volume, maximumVolume);
+		
+		//smImageView
+		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {

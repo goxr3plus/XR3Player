@@ -220,7 +220,7 @@
             </VBox>
          </children>
       </StackPane>
-      <VBox fx:id="refreshVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #202020;">
+      <VBox fx:id="refreshVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #202020;" visible="false">
          <children>
             <Label fx:id="refreshLabel" alignment="CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Connecting to Server" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
             <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="110.0" styleClass="dropbox-progress-indicator" />

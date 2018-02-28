@@ -408,7 +408,15 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//cancelDropBoxService
-		cancelDropBoxService.setOnAction(a -> recreateTableView(""));
+		cancelDropBoxService.setOnAction(a -> {
+			
+			//It was on Search?
+			if (dropBoxService.getOperation() == DropBoxOperation.SEARCH)
+				dropBoxService.getSearchCacheService().prepareCachedSearch(dropBoxService.getClient());
+			
+			//Recreate
+			recreateTableView("");
+		});
 		
 		//searchResultsLabel
 		searchResultsLabel.setVisible(false);
@@ -425,6 +433,30 @@ public class DropboxViewer extends StackPane {
 		
 		//cachedSearchIndicator
 		cachedSearchIndicator.progressProperty().bind(getDropBoxService().getSearchCacheService().progressProperty());
+		
+		//Trying to change the "Done" Text of ProgressIndicator from Cached Search
+//		cachedSearchIndicator.progressProperty().addListener((observable , oldValue , newValue) -> {
+//			// If progress is 100% then show Text
+//			if (newValue.doubleValue() >= 1) {
+//				
+//				// Apply CSS so you can lookup the text
+//				cachedSearchIndicator.applyCss();
+//				
+//				// This text replaces "Done"
+//				//( (Text) cachedSearchIndicator.lookup(".text.percentage") ).setText("Cached Search Ready");
+//				Text text = ( (Text) cachedSearchIndicator.lookup(".percentage") );
+//				text.setText("23");
+//				
+//				cachedSearchIndicator.applyCss();
+//				
+//				progressIndicator.setPrefWidth(text.getLayoutBounds().getWidth());
+//				
+//				cachedSearchIndicator.applyCss();
+//				
+//				System.out.println("Cached Search Ready!!!!");
+//			}
+//			
+//		});
 	}
 	
 	/**
@@ -524,9 +556,14 @@ public class DropboxViewer extends StackPane {
 			if (file != null)
 				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
 			
-		} else //NOT SUPPORTED YET
+		} else { //NOT SUPPORTED YET
+			//Show save dialog	
+			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
+			if (file != null)
+				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
+			
 			ActionTool.showNotification("No supported", "Folder download is not supported yet :) ", Duration.seconds(2), NotificationType.WARNING);
-		
+		}
 	}
 	
 	/**

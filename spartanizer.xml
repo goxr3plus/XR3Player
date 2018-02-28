@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <spartan version="5.0">
     <notations>
-        <notation kind="Cent" value="cent"/>
-        <notation kind="Dollar" value="$"/>
+        <notation kind="Cent" value="param"/>
+        <notation kind="Dollar" value="result"/>
     </notations>
     <tippers>
         <tipper enabled="true" id="-5043727367787844893"/>

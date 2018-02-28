@@ -32,8 +32,12 @@ public class SearchCacheService extends Service<Boolean> {
 	private final List<Metadata> cachedList;
 	private DbxClientV2 client;
 	private DropboxViewer dropBoxViewer;
-	private String searchWord;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param dropBoxViewer
+	 */
 	public SearchCacheService(DropboxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		cachedList = new ArrayList<>();
@@ -44,7 +48,7 @@ public class SearchCacheService extends Service<Boolean> {
 	 * 
 	 * @param client
 	 */
-	protected void prepareCachedSearch(DbxClientV2 client) {
+	public void prepareCachedSearch(DbxClientV2 client) {
 		this.client = client;
 		cachedList.clear();
 		
@@ -92,12 +96,18 @@ public class SearchCacheService extends Service<Boolean> {
 				if (this.isCancelled())
 					return;
 				
-				//Check if DropBoxService is running because if yes
-				//this should wait or else user will have an unpleasant 
-				//experience ( for example long time to refresh and search)
-				while (dropBoxViewer.getDropBoxService().getOperation() == DropBoxOperation.SEARCH
-						|| dropBoxViewer.getDropBoxService().getOperation() == DropBoxOperation.REFRESH) {
-					System.out.println("Dropbox Service is running...");
+				//System.out.println("Running...");
+				
+				//Exit if normal search is on progress , it will populate the 
+				if (dropBoxViewer.getDropBoxService().getOperation() == DropBoxOperation.SEARCH) {
+					//System.out.println("Search Cache Service exiting ....");
+					
+					//Cancel the Service and let the DropboxService search
+					//to populate the cachedList
+					this.cancel();
+				} else if (dropBoxViewer.getDropBoxService().getOperation() == DropBoxOperation.REFRESH) {
+					//System.out.println("Dropbox Service is running...");
+					
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {

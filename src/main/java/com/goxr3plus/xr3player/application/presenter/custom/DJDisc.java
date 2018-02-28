@@ -663,6 +663,13 @@ public class DJDisc extends StackPane {
 		int rotation = m.getDeltaY() < 1 ? 1 : -1;
 		setVolume(getVolume() - rotation);
 	}
+
+	/**
+	 * @return the imageView
+	 */
+	public ImageView getImageView() {
+		return imageView;
+	}
 	
 	//	/**
 	//	 * @return the volumeLabel

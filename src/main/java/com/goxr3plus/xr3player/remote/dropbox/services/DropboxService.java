@@ -88,17 +88,6 @@ public class DropboxService extends Service<Boolean> {
 		
 	}
 	
-	//	/**
-	//	 * This method checks any saved accounts and refreshes ListView to show Account mail etc .. instead of plaing Access_Tokens
-	//	 */
-	//	@Deprecated
-	//	private void refreshSavedAccounts(boolean refreshAccounts) {
-	//		refreshAccounts = true;
-	//		
-	//		//Restart
-	//		restart();
-	//	}
-	
 	/**
 	 * Restart the Service
 	 * 
@@ -304,8 +293,13 @@ public class DropboxService extends Service<Boolean> {
 							System.out.println("Doing --NORMAL SEARCH--");
 							searchMatchingFilesCounter = 0;
 							
-							//Search Everything
+							//Prepare an observableList
 							observableList = FXCollections.observableArrayList();
+							
+							//Clear Cached Search
+							searchCacheService.getCachedList().clear();
+							
+							//Start a normal Search
 							search("", observableList);
 							
 						}
@@ -401,7 +395,7 @@ public class DropboxService extends Service<Boolean> {
 							if (recursive)
 								listAllFiles(folder, children, recursive, appendToMap);
 						} else if (metadata instanceof FileMetadata) { //File
-							String file = metadata.getPathLower();
+							//String file = metadata.getPathLower()
 							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
 							if (appendToMap)
 								children.add(new DropboxFile(metadata));
@@ -451,10 +445,18 @@ public class DropboxService extends Service<Boolean> {
 							if (metadata.getName().toLowerCase().contains(searchWord)) {
 								children.add(new DropboxFile(metadata));
 								++searchMatchingFilesCounter;
+								
+								//Refresh the Search Label
 								Platform.runLater(() -> dropBoxViewer.getRefreshLabel()
 										.setText("Searching , found [ " + InfoTool.getNumberWithDots(searchMatchingFilesCounter) + " ] matching files"));
-								System.out.println(searchMatchingFilesCounter);
+								
+								//System.out.println(searchMatchingFilesCounter)
 							}
+							
+							//Add each and every item to the cached search list
+							searchCacheService.getCachedList().add(metadata);
+							
+							//System.out.println(searchCacheService.getCachedList().size());
 						}
 					}
 					
@@ -529,7 +531,7 @@ public class DropboxService extends Service<Boolean> {
 						
 						//Show message
 						ActionTool.showNotification("Rename Successful",
-								"Succesfully renamed file :" + "\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + result.getMetadata().getName() + " ]",
+								"Succesfully renamed file :\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + result.getMetadata().getName() + " ]",
 								Duration.millis(2500), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0);
 						
 						//Return the previous name

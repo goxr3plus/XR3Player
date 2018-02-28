@@ -222,53 +222,53 @@ abstract class Visualizer extends VisualizerDrawer {
 			}
 			
 			// Can draw?
-			if (draw) {
-				clear();
-				switch (displayMode.get()) {
-					
-					case 0:
-						drawOscilloscope(false);
-						break;
-					case 1:
-						drawOscilloscope(true);
-						break;
-					case 2:
-						drawOscilloScopeLines();
-						break;
-					case 3:
-						drawSpectrumBars();
-						break;
-					case 4:
-						drawVUMeter();
-						break;
-					case 5:
-						drawPolySpiral();
-						break;
-					case 6:
-						drawCircleWithLines();
-						break;
-					case 7:
-						drawSierpinski();
-						break;
-					case 8:
-						drawSprite3D();
-						break;
-					case 9:
-						drawJuliaSet();
-						break;
-					default:
-						break;
-				}
-				
-				// -- Show FPS if necessary.
-				if (showFPS) {
-					gc.setFill(Color.BLACK);
-					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
-					gc.setStroke(Color.WHITE);
-					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
-				}
-				
-			} // END: if draw == TRUE
+//			if (draw) {
+//				clear();
+//				switch (displayMode.get()) {
+//					
+//					case 0:
+//						drawOscilloscope(false);
+//						break;
+//					case 1:
+//						drawOscilloscope(true);
+//						break;
+//					case 2:
+//						drawOscilloScopeLines();
+//						break;
+//					case 3:
+//						drawSpectrumBars();
+//						break;
+//					case 4:
+//						drawVUMeter();
+//						break;
+//					case 5:
+//						drawPolySpiral();
+//						break;
+//					case 6:
+//						drawCircleWithLines();
+//						break;
+//					case 7:
+//						drawSierpinski();
+//						break;
+//					case 8:
+//						drawSprite3D();
+//						break;
+//					case 9:
+//						drawJuliaSet();
+//						break;
+//					default:
+//						break;
+//				}
+//				
+//				// -- Show FPS if necessary.
+//				if (showFPS) {
+//					gc.setFill(Color.BLACK);
+//					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
+//					gc.setStroke(Color.WHITE);
+//					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
+//				}
+//				
+//			} // END: if draw == TRUE
 			
 			// --------------------------------------------------------------------------------------RUBBISH
 			// CODE

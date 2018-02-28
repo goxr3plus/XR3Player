@@ -7,6 +7,8 @@ import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.DbxRawClientV2;
+import com.dropbox.core.v2.files.DbxUserFilesRequests;
 import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.Metadata;
@@ -117,6 +119,8 @@ public class DownloadService extends Service<Boolean> {
 				
 				//Fast way...
 				//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
+				//DbxRawClientV2 rawClient = new DbxRawClientV2(config,dropBoxViewer.getAccessToken());
+				//DbxUserFilesRequests r = new DbxUserFilesRequests(client);
 				
 			}
 			
