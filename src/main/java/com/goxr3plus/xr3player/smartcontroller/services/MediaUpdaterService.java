@@ -39,7 +39,7 @@ public class MediaUpdaterService {
 	/**
 	 * This executor service is used in order the playerState events to be executed in an order
 	 */
-	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("Files Filter Service"));
+	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("Media Updater Service "));
 	
 	/**
 	 * Start the Thread.
@@ -59,7 +59,7 @@ public class MediaUpdaterService {
 			} finally {
 				//Platform.runLater(
 				//		() -> ActionTool.showNotification("Message", "FilesFilterThread ->exited", Duration.millis(1500), NotificationType.ERROR))
-				System.out.println("FileFilterService Thread exited!!!");
+				System.out.println("Media Update Service Thread exited!!!");
 				Platform.runLater(() -> threadStopped.set(true));
 			}
 		};

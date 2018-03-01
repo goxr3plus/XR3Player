@@ -114,6 +114,7 @@ public class DropboxAuthenticationBrowser extends StackPane {
 		
 		//WebEngine
 		webEngine = webView.getEngine();
+		webEngine.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0");
 		
 		// progressBar
 		progressBar.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());

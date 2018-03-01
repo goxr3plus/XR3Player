@@ -163,7 +163,7 @@ public class BottomBar extends HBox {
 				}
 				
 			}
-		}, "Internet Connection Checker Thread");
+		}, "App Running Time Checker Thread");
 		
 		timeThread.setDaemon(true);
 		timeThread.start();

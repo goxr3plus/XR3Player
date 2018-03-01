@@ -22,7 +22,7 @@ public class XPlayersFilterService {
 	/**
 	 * This executor service is used in order the playerState events to be executed in an order
 	 */
-	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("Files Filter Service"));
+	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("XPlayers Filter Service "));
 	
 	/**
 	 * Start the Thread.
@@ -48,7 +48,7 @@ public class XPlayersFilterService {
 			} catch (Exception ex) {
 				Main.logger.log(Level.INFO, "", ex);
 			} finally {
-				System.out.println("XPlayersFilterService Thread exited!!!");
+				System.out.println("XPlayers Filter Service Thread exited!!!");
 				Platform.runLater(() -> threadStopped.set(true));
 			}
 		};

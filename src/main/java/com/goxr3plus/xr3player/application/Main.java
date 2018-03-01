@@ -101,6 +101,9 @@ public class Main extends Application {
 	
 	public static Properties internalInformation = new Properties();
 	static {
+		//Important for Web Browser
+		System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+		
 		//----------Properties-------------
 		internalInformation.put("Version", 96);
 		internalInformation.put("ReleasedDate", "30/02/2018");
@@ -835,6 +838,7 @@ public class Main extends Application {
 	 *            the arguments
 	 */
 	public static void main(String[] args) {
+		//Continue
 		System.out.println("Hello from Main Method!");
 		
 		System.out.println("Cur Path :-> " + InfoTool.getBasePathForClass(Main.class));
