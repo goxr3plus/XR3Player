@@ -173,6 +173,7 @@ public class TagWindow extends StackPane {
 		
 		//artWorkTab
 		artWorkTab.setContent(artWork);
+		
 		//ImageView
 		artWork.getImageView().fitWidthProperty().bind(window.widthProperty().subtract(20));
 		artWork.getImageView().fitHeightProperty().bind(window.heightProperty().subtract(145));

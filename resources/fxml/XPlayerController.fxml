@@ -384,7 +384,7 @@
                               </GridPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                            <bottom>
                               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" spacing="10.0" BorderPane.alignment="CENTER">
                                  <children>
@@ -459,7 +459,7 @@
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Slider fx:id="smTimeSlider" minWidth="5.0" styleClass="transparency-slider" />
-                                                <Label style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="00:00/05:55" />
+                                                <Label fx:id="smTimeSliderLabel" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="00:00/05:55" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -481,7 +481,7 @@
                                                 </ImageView>
                                              </children>
                                           </HBox>
-                                          <Label style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0%" />
+                                          <Label fx:id="smVolumeSliderLabel" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0%" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -507,7 +507,14 @@
                                     </StackPane>
                                  </center>
                                  <bottom>
-                                    <Label fx:id="smMediaTitle" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 15;" styleClass="applicationSettingsLabel2" text="Zwirek - Rebel" BorderPane.alignment="CENTER" />
+                                    <Label fx:id="smMediaTitle" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 15;" styleClass="applicationSettingsLabel2" text="Zwirek - Rebel" BorderPane.alignment="CENTER">
+                                       <tooltip>
+                                          <Tooltip text="Empty Tooltip" />
+                                       </tooltip>
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </BorderPane.margin>
+                                    </Label>
                                  </bottom>
                               </BorderPane>
                            </center>

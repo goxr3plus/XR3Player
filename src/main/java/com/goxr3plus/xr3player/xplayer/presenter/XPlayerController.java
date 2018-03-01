@@ -229,7 +229,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Slider smTimeSlider;
 	
 	@FXML
+	private Label smTimeSliderLabel;
+	
+	@FXML
 	private Slider smVolumeSlider;
+	
+	@FXML
+	private Label smVolumeSliderLabel;
 	
 	@FXML
 	private StackPane smImageViewStackPane;
@@ -546,6 +552,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
 		mediaNameHBox.getChildren().add(1, mediaFileMarquee);
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
+		
+		//smMediaTitle
+		smMediaTitle.textProperty().bind(mediaFileMarquee.getLabel().textProperty());
+		smMediaTitle.getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
 		
 		// openMediaFileFolder
 		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(), TagTabCategory.ARTWORK, true));
@@ -976,6 +986,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
+		smImageView.fitWidthProperty().bind(smImageViewStackPane.widthProperty().subtract(20));
+		smImageView.fitHeightProperty().bind(smImageViewStackPane.heightProperty().subtract(20));
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
@@ -1186,29 +1198,48 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			String millisecondsFormatted = InfoTool.millisecondsToTime(microSecondsPosition / 1000);
 			// System.out.println(milliFormat)
 			
-			// Paint the Disc
+			//Paint the Modes
 			if (!xPlayer.isStopped()) {
 				
-				// Update the disc Angle
-				disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
-				// Update the disc time
-				disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormatted);
+				//TotalTime and CurrentTime
+				int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentTime();
 				
-				//Update the below labels - this might be costly in terms of cpu
-				Platform.runLater(() -> {
+				if (!modeToggle.isSelected()) { //Simple Mode for most of Users
 					
-					//TotalTime and CurrentTime
-					int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentTime();
+					//Run on JavaFX Thread
+					Platform.runLater(() -> {
+						
+						//Simple Mode
+						smTimeSlider.setMin(0);
+						smTimeSlider.setMax(totalTime);
+						smTimeSlider.setValue(currentTime);
+						
+						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ) + "  / "
+								+ InfoTool.getTimeEdited(totalTime));
+					});
 					
-					//== RemainingTimeLabel
-					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ));
+				} else { //Advanced DJ Disc Mode
 					
-					//== ElapsedTimeLabel
-					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted + "");
+					// Update the disc Angle
+					disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
 					
-					//if (xPlayerController != null && xPlayerController.getDisc() != null)
-					disc.repaint();
-				});
+					// Update the disc time
+					disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormatted);
+					
+					//Run on JavaFX Thread
+					Platform.runLater(() -> {
+						
+						//== RemainingTimeLabel
+						remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ));
+						
+						//== ElapsedTimeLabel
+						elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted);
+						
+						//if (xPlayerController != null && xPlayerController.getDisc() != null)
+						disc.repaint();
+						
+					});
+				}
 				
 			}
 			
