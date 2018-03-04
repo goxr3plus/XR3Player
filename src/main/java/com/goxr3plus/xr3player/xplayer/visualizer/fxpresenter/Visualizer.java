@@ -248,7 +248,7 @@ abstract class Visualizer extends VisualizerDrawer {
 				//				switch (displayMode.get()) {
 				//					
 				//					case 0:
-				drawOscilloscope(false);
+				//drawOscilloscope(false);
 				//						break;
 				//					case 1:
 				//						drawOscilloscope(true);
@@ -266,7 +266,7 @@ abstract class Visualizer extends VisualizerDrawer {
 				//						drawPolySpiral();
 				//						break;
 				//					case 6:
-				//						drawCircleWithLines();
+										drawCircleWithLines();
 				//						break;
 				//					case 7:
 				//						drawSierpinski();

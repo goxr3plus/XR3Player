@@ -185,9 +185,9 @@ public class DJDisc extends StackPane {
 		
 		// rotate a square using time line attached to the rotation transform's
 		// angle property.
-		rotationAnimation.getKeyFrames().add(new KeyFrame(Duration.millis(2100), new KeyValue(rotationTransf.angleProperty(), 360)));
+		rotationAnimation.getKeyFrames().add(new KeyFrame(Duration.millis(10000), new KeyValue(rotationTransf.angleProperty(), 360)));
 		rotationAnimation.setCycleCount(Animation.INDEFINITE);
-		//rotationAnimation.play();
+		//rotationAnimation.play()
 		
 		// When no album image exists this Label is shown
 		Label noAlbumImageLabel = new Label("-");
@@ -367,7 +367,7 @@ public class DJDisc extends StackPane {
 		// ----------------------------------------------------------------------------------------------
 		
 		// Refresh the timeField
-		timeField.setText(time);
+		//timeField.setText(time)
 		
 	}
 	
@@ -555,22 +555,22 @@ public class DJDisc extends StackPane {
 	 * Resume the rotation of the disc.
 	 */
 	public void resumeRotation() {
-		rotationAnimation.play();
+		//rotationAnimation.play();
 	}
 	
 	/**
 	 * Pause the rotation of the disc.
 	 */
 	public void pauseRotation() {
-		rotationAnimation.pause();
+		//rotationAnimation.pause();
 	}
 	
 	/**
 	 * Stops the Rotation Animation
 	 */
 	public void stopRotation() {
-		rotationAnimation.jumpTo(Duration.ZERO);
-		rotationAnimation.pause();
+		//rotationAnimation.jumpTo(Duration.ZERO);
+		//rotationAnimation.pause();
 	}
 	
 	/**
