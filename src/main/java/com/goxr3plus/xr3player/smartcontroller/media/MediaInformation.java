@@ -182,6 +182,7 @@ public class MediaInformation extends StackPane {
 			}
 			drag.consume();
 		});
+		mediaImageButton.setOnDragDetected(getOnDragDetected());
 		setOnDragOver(event -> {
 			// The drag must come from source other than the owner
 			if (event.getGestureSource() != this)
