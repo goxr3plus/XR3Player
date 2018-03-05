@@ -10,8 +10,8 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -30,13 +30,13 @@ public class WelcomeScreen extends StackPane {
 	private MediaView mediaView;
 	
 	@FXML
-	private VBox screen1;
-	
-	@FXML
 	private JFXCheckBox showOnStartUp;
 	
 	@FXML
 	private JFXToggleButton sound;
+	
+	@FXML
+	private Label versionLabel;
 	
 	@FXML
 	private JFXButton startButton;
@@ -139,6 +139,20 @@ public class WelcomeScreen extends StackPane {
 	 */
 	public JFXCheckBox getShowOnStartUp() {
 		return showOnStartUp;
+	}
+
+	/**
+	 * @return the versionLabel
+	 */
+	public Label getVersionLabel() {
+		return versionLabel;
+	}
+
+	/**
+	 * @param versionLabel the versionLabel to set
+	 */
+	public void setVersionLabel(Label versionLabel) {
+		this.versionLabel = versionLabel;
 	}
 	
 }

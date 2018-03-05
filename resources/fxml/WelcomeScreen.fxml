@@ -10,94 +10,84 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-
-<fx:root prefHeight="627.0" prefWidth="1039.0" style="-fx-background-color: #101010;" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="15.0" minWidth="15.0" prefHeight="627.0" prefWidth="1200.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MediaView fx:id="mediaView" fitHeight="600.0" fitWidth="1200.0" preserveRatio="false" />
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="774.0" stylesheets="@../style/application.css">
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
-         <center>
-            <VBox fx:id="screen1" alignment="TOP_CENTER" spacing="15.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" spacing="15.0">
-                     <children>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                           <image>
-                              <Image url="@../image/smallLogo.jpg" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" prefWidth="33.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="+" />
-                        <ImageView layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                           <image>
-                              <Image url="@../image/love.png" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" layoutX="130.0" layoutY="10.0" prefWidth="33.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="=" />
-                        <ImageView layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                           <image>
-                              <Image url="@../image/icon.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" spacing="25.0" style="-fx-background-color: #101010;">
-                     <children>
-                        <JFXCheckBox fx:id="showOnStartUp" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Show welcome screen again ?" />
-                        <JFXToggleButton fx:id="sound" selected="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00" />
-                     </children>
-                  </HBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </BorderPane.margin>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </VBox>
-         </center>
-         <top>
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="97.0" prefWidth="458.0" style="-fx-border-color: transparent; -fx-background-color: #101010;" styleClass="applicationSettingsLabel2" text="Welcome to XR3Player  , i hope you love it as much as i do making it :) " BorderPane.alignment="CENTER" />
-         </top>
-         <bottom>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-radius: 0; -fx-font-size: 30;" text="Press here to start" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/application_background.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="50.0" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="133.0" prefWidth="153.0" style="-fx-background-radius: 0; -fx-font-size: 30;" text="Exit" textAlignment="CENTER" wrapText="true">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-               </children>
-            </HBox>
-         </bottom>
-      </BorderPane>
+      <MediaView fx:id="mediaView" preserveRatio="false" />
+      <ImageView preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@../image/VisualizerForeground.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" spacing="25.0" style="-fx-background-color: rgb(10,10,10,0.6);" StackPane.alignment="TOP_RIGHT">
+         <children>
+            <JFXCheckBox fx:id="showOnStartUp" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Show welcome screen again ?" />
+            <JFXToggleButton fx:id="sound" selected="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" graphicTextGap="15.0" style="-fx-border-color: transparent; -fx-background-color: #101010;" styleClass="applicationSettingsLabel2" text="GOXR3PLUS STUDIO" StackPane.alignment="BOTTOM_LEFT">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+               <image>
+                  <Image url="@../image/smallLogo.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+         <StackPane.margin>
+            <Insets bottom="10.0" />
+         </StackPane.margin>
+      </Label>
+      <Label fx:id="versionLabel" alignment="CENTER" graphicTextGap="15.0" layoutX="10.0" layoutY="569.0" style="-fx-border-color: transparent; -fx-background-color: #101010; -fx-font-size: 25; -fx-font-weight: bold;" styleClass="applicationSettingsLabel2" text="XR3Player" StackPane.alignment="BOTTOM_RIGHT">
+         <graphic>
+            <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+               <image>
+                  <Image url="@../image/icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <StackPane.margin>
+            <Insets bottom="10.0" />
+         </StackPane.margin>
+      </Label>
+      <VBox alignment="CENTER" pickOnBounds="false" spacing="15.0" StackPane.alignment="CENTER">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 0; -fx-font-size: 30;" text="Start" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                     <image>
+                        <Image url="@../image/nextt.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="50.0" style="-fx-background-radius: 0; -fx-font-size: 30;" text="Exit" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </VBox>
    </children>
 </fx:root>

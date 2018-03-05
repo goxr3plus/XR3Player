@@ -100,13 +100,14 @@ import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
 public class Main extends Application {
 	
 	public static Properties internalInformation = new Properties();
+	public static final int APPLICATION_VERSION = 97;
 	static {
 		//Important for Web Browser
 		System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
 		
 		//----------Properties-------------
-		internalInformation.put("Version", 96);
-		internalInformation.put("ReleasedDate", "30/02/2018");
+		internalInformation.put("Version", APPLICATION_VERSION);
+		internalInformation.put("ReleasedDate", "12/03/2018");
 		
 		System.out.println("Outside of Application Start Method");
 	}
@@ -330,6 +331,7 @@ public class Main extends Application {
 		Properties properties = applicationProperties.loadProperties();
 		
 		//WelcomeScreen
+		welcomeScreen.getVersionLabel().setText("XR3Player V." + APPLICATION_VERSION);
 		if (properties.getProperty("Show-Welcome-Screen") == null)
 			welcomeScreen.showWelcomeScreen();
 		else
