@@ -241,6 +241,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smVolumeSliderLabel;
 	
 	@FXML
+	private HBox hBox11;
+	
+	@FXML
+	private Button smBackwardButton;
+	
+	@FXML
+	private Button smForwardButton;
+	
+	@FXML
 	private ToggleButton smMuteButton;
 	
 	@FXML
@@ -281,7 +290,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label bugLabel;
-	
 	
 	@FXML
 	private Label fxLabel;
@@ -572,8 +580,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		// topInfoLabel
 		topInfoLabel.setText("Player {" + this.getKey() + "}");
 		
+		//== forwardButton
+		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
+		smForwardButton.setOnAction(forwardButton.getOnAction());
+		smForwardButton.textProperty().bind(forwardButton.textProperty());
+		
 		//== backwardButton
 		backwardButton.setOnAction(a -> seek(-Integer.parseInt(backwardButton.getText())));
+		smBackwardButton.setOnAction(backwardButton.getOnAction());
+		smBackwardButton.textProperty().bind(backwardButton.textProperty());
 		
 		//== playPauseButton
 		playPauseButton.setOnAction(fire -> {
@@ -596,9 +611,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		stopButton.setOnAction(a -> stop());
 		smStopButton.setOnAction(stopButton.getOnAction());
 		
-		//== forwardButton
-		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
-		
+
 		//flipPane
 		flipPane.setFlipTime(150);
 		flipPane.getFront().getChildren().addAll(modesStackPane);
@@ -1241,8 +1254,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//System.out.println("Entered....");
 		
 		//Check if DSP is allowed
-		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
-			visualizer.writeDSP(pcmdata);
+		//if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
+		//	visualizer.writeDSP(pcmdata);
 		
 		if (!isDiscBeingDragged()) {
 			
