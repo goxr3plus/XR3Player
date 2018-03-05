@@ -139,12 +139,12 @@ abstract class Visualizer extends VisualizerDrawer {
 		@Override
 		public void start() {
 			// Values must be >0
-			if (canvasWidth <= 0 || canvasHeight <= 0)
-				canvasHeight = canvasWidth = 1;
-			
-			next50Milliseconds = nextSecond = 0L;
-			super.start();
-			running.set(true);
+//			if (canvasWidth <= 0 || canvasHeight <= 0)
+//				canvasHeight = canvasWidth = 1;
+//			
+//			next50Milliseconds = nextSecond = 0L;
+//			super.start();
+//			running.set(true);
 		}
 		
 		@Override
@@ -152,6 +152,9 @@ abstract class Visualizer extends VisualizerDrawer {
 			super.stop();
 			running.set(false);
 		}
+		
+
+		
 		
 		/**
 		 * @return True if AnimationTimer is running
@@ -185,6 +188,8 @@ abstract class Visualizer extends VisualizerDrawer {
 		
 		@Override
 		public void handle(long nanos) {
+			
+			System.out.println("Animation Timer is Running");
 			
 			//CHECK IF VISUALIZERS ARE ENABLED
 			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
@@ -245,49 +250,49 @@ abstract class Visualizer extends VisualizerDrawer {
 			// Can draw?
 			if (draw) {
 				clear();
-				//				switch (displayMode.get()) {
-				//					
-				//					case 0:
-				//drawOscilloscope(false);
-				//						break;
-				//					case 1:
-				//						drawOscilloscope(true);
-				//						break;
-				//					case 2:
-				//						drawOscilloScopeLines();
-				//						break;
-				//					case 3:
-				//						drawSpectrumBars();
-				//						break;
-				//					case 4:
-				//						drawVUMeter();
-				//						break;
-				//					case 5:
-				//						drawPolySpiral();
-				//						break;
-				//					case 6:
-										drawCircleWithLines();
-				//						break;
-				//					case 7:
-				//						drawSierpinski();
-				//						break;
-				//					case 8:
-				//						drawSprite3D();
-				//						break;
-				//					case 9:
-				//						drawJuliaSet();
-				//						break;
-				//					default:
-				//						break;
-				//				}
+				switch (displayMode.get()) {
+					
+					case 0:
+						drawOscilloscope(false);
+						break;
+					case 1:
+						drawOscilloscope(true);
+						break;
+					case 2:
+						drawOscilloScopeLines();
+						break;
+					case 3:
+						drawSpectrumBars();
+						break;
+					case 4:
+						drawVUMeter();
+						break;
+					case 5:
+						drawPolySpiral();
+						break;
+					case 6:
+						drawCircleWithLines();
+						break;
+					case 7:
+						drawSierpinski();
+						break;
+					case 8:
+						drawSprite3D();
+						break;
+					case 9:
+						drawJuliaSet();
+						break;
+					default:
+						break;
+				}
 				
-				//				// -- Show FPS if necessary.
-				//				if (showFPS) {
-				//					gc.setFill(Color.BLACK);
-				//					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
-				//					gc.setStroke(Color.WHITE);
-				//					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
-				//				}
+				// -- Show FPS if necessary.
+				if (showFPS) {
+					gc.setFill(Color.BLACK);
+					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
+					gc.setStroke(Color.WHITE);
+					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); //+ " (FRRH: " + frameRateRatioHint + ")"
+				}
 				
 			} // END: if draw == TRUE
 			

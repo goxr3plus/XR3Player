@@ -1638,7 +1638,7 @@
 }
 
 .transparency-slider .thumb:hover{	
-	-fx-border-width:5.0;
+	/* -fx-border-width:5.0; */
 }
 
 .transparency-slider .track{

@@ -164,14 +164,14 @@ public class XPlayerEqualizer extends BorderPane {
 		//resetFilers
 		resetFilters.setOnAction(action -> {
 			//Pan
-			panFilter.setValue(0.5);
+			panFilter.setValue(0.5,true);
 			
 			//Balance
-			balanceFilter.setValue(0.5);
+			balanceFilter.setValue(0.5,true);
 			
 			//Reset every  filter to it's default value 
 			for (DJFilter filter : djFilters)
-				filter.setValue(0.5);
+				filter.setValue(0.5,true);
 		});
 		
 		// Add all
@@ -348,7 +348,7 @@ public class XPlayerEqualizer extends BorderPane {
 						transformedValue = Math.abs(fakeValue);
 					
 					//Apply
-					djFilters.get(i).setValue(transformedValue);
+					djFilters.get(i).setValue(transformedValue,true);
 				}
 				
 			});

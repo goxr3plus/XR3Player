@@ -214,16 +214,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private BorderPane smBorderPane;
 	
 	@FXML
-	private Button smPlayPauseButton;
+	private StackPane smImageViewStackPane;
 	
 	@FXML
-	private Button smStopButton;
+	private ImageView smImageView;
 	
 	@FXML
-	private ToggleButton smMuteButton;
-	
-	@FXML
-	private Button smReplayButton;
+	private Label smMediaTitle;
 	
 	@FXML
 	private Slider smTimeSlider;
@@ -232,19 +229,28 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smTimeSliderLabel;
 	
 	@FXML
+	private Button smMinimizeVolume;
+	
+	@FXML
 	private Slider smVolumeSlider;
+	
+	@FXML
+	private Button smMaximizeVolume;
 	
 	@FXML
 	private Label smVolumeSliderLabel;
 	
 	@FXML
-	private StackPane smImageViewStackPane;
+	private ToggleButton smMuteButton;
 	
 	@FXML
-	private ImageView smImageView;
+	private Button smReplayButton;
 	
 	@FXML
-	private Label smMediaTitle;
+	private Button smPlayPauseButton;
+	
+	@FXML
+	private Button smStopButton;
 	
 	@FXML
 	private Label topInfoLabel;
@@ -276,8 +282,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	@FXML
 	private Label bugLabel;
 	
-	@FXML
-	private JFXSpinner fxSpinner;
 	
 	@FXML
 	private Label fxLabel;
@@ -507,6 +511,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			
 			//System.out.println("Entered Menu Button");
 		});
+		smMuteButton.selectedProperty().bindBidirectional(muteButton.selectedProperty());
 		
 		//
 		xPlayerPlayList = new XPlayerPlaylist(this);
@@ -579,6 +584,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			
 			//Fix fast the image
 			( (ImageView) playPauseButton.getGraphic() ).setImage(xPlayer.isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+			( (ImageView) smPlayPauseButton.getGraphic() ).setImage(xPlayer.isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
 		});
 		smPlayPauseButton.setOnAction(playPauseButton.getOnAction());
 		
@@ -588,6 +594,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//== stopButton
 		stopButton.setOnAction(a -> stop());
+		smStopButton.setOnAction(stopButton.getOnAction());
 		
 		//== forwardButton
 		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
@@ -658,6 +665,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//=settings
 		settings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.XPLAYERS));
+		
+		//smMinimizeVolume
+		smMinimizeVolume.setOnAction(a -> minimizeVolume());
+		//smMaximizeVolume
+		smMaximizeVolume.setOnAction(a -> maximizeVolume());
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
@@ -747,21 +759,21 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 *            the value
 	 */
 	public void adjustVolume(int value) {
-		volumeDisc.setValue(volumeDisc.getValue() + value);
+		volumeDisc.setValue(volumeDisc.getValue() + value, true);
 	}
 	
 	/**
 	 * Adjust the volume to the maximum value.
 	 */
 	public void maximizeVolume() {
-		volumeDisc.setValue(volumeDisc.getMaximumValue());
+		volumeDisc.setValue(volumeDisc.getMaximumValue() + 1.00, true);
 	}
 	
 	/**
 	 * Adjust the volume to the minimum value.
 	 */
 	public void minimizeVolume() {
-		volumeDisc.setValue(0);
+		volumeDisc.setValue(0, true);
 	}
 	
 	/**
@@ -771,7 +783,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 *            the new volume
 	 */
 	public void setVolume(int value) {
-		volumeDisc.setValue(value);
+		volumeDisc.setValue(value, true);
 	}
 	
 	/**
@@ -808,7 +820,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		visualizer.startVisualizer();
 		
 		// Pause Image
-		// radialMenu.resumeOrPause.setGraphic(radialMenu.pauseImageView);
+		// radialMenu.resumeOrPause.setGraphic(radialMenu.pauseImageView)
 	}
 	
 	/**
@@ -827,7 +839,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		visualizer.stopVisualizer();
 		
 		// Play Image
-		// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
+		// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView)
 	}
 	
 	/**
@@ -986,8 +998,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
-		smImageView.fitWidthProperty().bind(smImageViewStackPane.widthProperty().subtract(20));
-		smImageView.fitHeightProperty().bind(smImageViewStackPane.heightProperty().subtract(20));
+		smImageView.fitWidthProperty().bind(
+				Bindings.when(smImageViewStackPane.widthProperty().lessThan(smBorderPane.widthProperty())).then(smImageViewStackPane.widthProperty().subtract(20)).otherwise(0));
+		smImageView.fitHeightProperty().bind(
+				Bindings.when(smImageViewStackPane.heightProperty().lessThan(smBorderPane.heightProperty())).then(smImageViewStackPane.heightProperty().subtract(20)).otherwise(0));
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
@@ -1048,12 +1062,70 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				}
 		});
 		
+		///smTimeSlider
+		smTimeSlider.setOnMouseMoved(m -> {
+			// File is either corrupted or error or no File entered yet
+			if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1) {
+				smTimeSlider.setCursor(noSeekCursor);
+				//smTimeSlider.setDisable(true);
+				// !discIsDragging
+			} else if (!discIsDragging) {
+				smTimeSlider.setCursor(Cursor.OPEN_HAND);
+				//smTimeSlider.setDisable(false);
+			}
+		});
+		smTimeSlider.setOnMouseReleased(disc.getCanvas().getOnMouseReleased());
+		smTimeSlider.setOnMouseDragged(m -> {
+			// MouseButton==Primary || Secondary
+			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
+				
+				// RadialMenu!showing and duration!=0 and duration!=-1
+				if (xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
+					
+					//TotalTime and CurrentTime					
+					int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
+					
+					// Set the cursor
+					smTimeSlider.setCursor(Cursor.CLOSED_HAND);
+					
+					// Try to do the dragging
+					discIsDragging = true;
+					xPlayerModel.setCurrentAngleTime((int) smTimeSlider.getValue());
+					disc.calculateAngleByMouse(m, currentTime, totalTime);
+					
+					//smTimeSliderLabel
+					smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "  / " + InfoTool.getTimeEdited(totalTime));
+				}
+		});
+		
 		//---VBOX------
 		//		VBox vBox = new VBox();
 		//		
 		//volumeDisc
 		volumeDisc = new DJFilter(30, 30, Color.MEDIUMSPRINGGREEN, volume, minimumVolume, maximumVolume, DJFilterCategory.VOLUME_FILTER);
 		volumeDisc.addDJDiscListener(this);
+		
+		//smVolumeSlider
+		smVolumeSlider.setMin(0);
+		smVolumeSlider.setMax(maximumVolume - 1.00);
+		smVolumeSlider.valueProperty().addListener(l -> {
+			
+			//Set the value to the volumeDisc
+			volumeDisc.setValue(smVolumeSlider.getValue(), false);
+			
+			//Update the Volume
+			controlVolume();
+			
+			//Update the Label
+			smVolumeSliderLabel.setText((int) smVolumeSlider.getValue() + " %");
+			
+			//Change the disc value
+			disc.setVolume((int) ( smVolumeSlider.getValue() * 100 ));
+			
+			//Print
+			//System.out.println((int) smVolumeSlider.getValue() + ", " + maximumVolume);
+		});
+		smVolumeSlider.setValue(volume);
 		
 		//		
 		//		//---volumeDiscLabel
@@ -1214,6 +1286,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 						smTimeSlider.setMax(totalTime);
 						smTimeSlider.setValue(currentTime);
 						
+						//smTimeSliderLabel
 						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ) + "  / "
 								+ InfoTool.getTimeEdited(totalTime));
 					});
@@ -1350,6 +1423,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					//== Visualizer Window 
 					visualizerWindow.getProgressBar().setProgress(0);
+					
+					//smTimeSlider
+					smTimeSlider.setValue(0);
+					
+					//smTimeSliderLabel
+					smTimeSliderLabel.setText(InfoTool.getTimeEdited(0) + "  / " + InfoTool.getTimeEdited(xPlayerModel.getDuration()));
 				}
 				
 			});
@@ -1678,9 +1757,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@Override
 	public void valueChanged(double value) {
-		controlVolume();
+		//controlVolume();
 		//volumeDiscLabel.setText(String.valueOf((int) value))
-		disc.setVolume((int) ( value * 100 ));
+		smVolumeSlider.setValue(value);
+		//disc.setVolume((int) ( value * 100 ));
 	}
 	
 	/**
@@ -1702,6 +1782,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public Label getVisualizationsDisabledLabel() {
 		return visualizationsDisabledLabel;
+	}
+	
+	/**
+	 * @return the smPlayPauseButton
+	 */
+	public Button getSmPlayPauseButton() {
+		return smPlayPauseButton;
 	}
 	
 }

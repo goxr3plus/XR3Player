@@ -41,6 +41,10 @@ public class XPlayersFilterService {
 						( (ImageView) xPlayerController.getPlayPauseButton().getGraphic() )
 								.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
 						
+						//-------Set the appropriate image for the PlayPauseButton based on the status of the Player
+						( (ImageView) xPlayerController.getSmPlayPauseButton().getGraphic() )
+								.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+						
 						// ---------Liked or disliked--------?
 						xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
 						

@@ -91,7 +91,7 @@ public class DJFilter extends StackPane {
 		canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::onMouseDragged);
 		
 		resizeDisc(width, height);
-		setValue(currentValue);
+		setValue(currentValue,true);
 	}
 	
 	/**
@@ -241,13 +241,14 @@ public class DJFilter extends StackPane {
 	 * Calculates the angle based on the given value and the maximum value allowed.
 	 *
 	 */
-	public void setValue(double newValue) {
+	public void setValue(double newValue , boolean notifyListeners) {
 		
 		//Find the current angle based on the new value given + the maximum value
 		angle = (int) ( ( maximumValue == 0.0 || newValue == 0.0 ) ? 0.0 : newValue == maximumValue ? 360.0 : - ( ( 360.0 * newValue ) / maximumValue ) );
 		
 		//Notify all the Listeners
-		listeners.forEach(listener -> listener.valueChanged(getValue()));
+		if (notifyListeners)
+			listeners.forEach(listener -> listener.valueChanged(getValue()));
 		
 		//Repaint
 		repaint();
