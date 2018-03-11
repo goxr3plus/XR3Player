@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.versionupdate;
+package main.java.com.goxr3plus.xr3player.application.updater;
 
 import java.io.BufferedReader;
 import java.io.File;

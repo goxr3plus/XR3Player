@@ -48,6 +48,7 @@ import main.java.com.goxr3plus.javafxwebbrowser.browser.WebBrowserController;
 import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.application.database.DbManager;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
+import main.java.com.goxr3plus.xr3player.application.database.services.VacuumProgressService;
 import main.java.com.goxr3plus.xr3player.application.modes.djmode.DJMode;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.LibraryMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode;
@@ -60,7 +61,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabP
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.UpdateScreen;
-import main.java.com.goxr3plus.xr3player.application.services.VacuumProgressService;
+import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
@@ -69,10 +70,10 @@ import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewCont
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewManager;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.application.updater.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.versionupdate.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ApplicationInformationWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
@@ -81,7 +82,6 @@ import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChoose
 import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
-import main.java.com.goxr3plus.xr3player.application.windows.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;

@@ -7,21 +7,39 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="263.0" prefWidth="588.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="358.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane minHeight="0.0">
          <center>
             <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
+                  <Tab fx:id="onlineMusicTab" closable="false" text="Online Music">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/youtube24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
                   <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries">
                    <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Library-32.png" />
+                              <Image url="@../image/Music%20Folder-20.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      </Tab>
+                  <Tab fx:id="searchEverythingTab" closable="false" text="Global Search">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/searchIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
                   <Tab fx:id="dropBoxTab" closable="false" text="Dropbox">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -40,11 +58,11 @@
                         </ImageView>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="searchEverythingTab" closable="false" text="Search Everything">
+                  <Tab fx:id="searchEverythingTab11" closable="false" text="Downloads">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/searchIcon.png" />
+                              <Image url="@../image/downloading.png" />
                            </image>
                         </ImageView>
                      </graphic>

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.windows;
+package main.java.com.goxr3plus.xr3player.application.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -24,7 +23,6 @@ import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 
 /**
  * @author GOXR3PLUS
