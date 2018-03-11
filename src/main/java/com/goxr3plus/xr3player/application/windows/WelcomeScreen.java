@@ -11,12 +11,20 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 
 /**
  * @author GOXR3PLUS
@@ -104,15 +112,24 @@ public class WelcomeScreen extends StackPane {
 				mediaPlayer = new MediaPlayer(new Media(LOADING_SCREEN_PATH));
 				mediaView.setMediaPlayer(mediaPlayer);
 				mediaPlayer.setAutoPlay(true);
-				mediaPlayer.setCycleCount(50);
+				//mediaPlayer.setRate(3.0)
+				mediaPlayer.setStartTime(Duration.seconds(0));
+				mediaPlayer.setStopTime(Duration.seconds(8));
+				//mediaPlayer.setCycleCount(50)
 				mediaPlayer.play();
 				mediaPlayer.setAutoPlay(true);
-				mediaPlayer.setCycleCount(50);
+				//mediaPlayer.setCycleCount(50)
+				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
 				
 				//Start the stream player
 				soundPlayer = new MediaPlayer(new Media(LOADING_SCREEN_SOUND));
 				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
 				soundPlayer.play();
+				
+				
+				//Set the background Image
+				setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
+						BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -140,16 +157,17 @@ public class WelcomeScreen extends StackPane {
 	public JFXCheckBox getShowOnStartUp() {
 		return showOnStartUp;
 	}
-
+	
 	/**
 	 * @return the versionLabel
 	 */
 	public Label getVersionLabel() {
 		return versionLabel;
 	}
-
+	
 	/**
-	 * @param versionLabel the versionLabel to set
+	 * @param versionLabel
+	 *            the versionLabel to set
 	 */
 	public void setVersionLabel(Label versionLabel) {
 		this.versionLabel = versionLabel;
