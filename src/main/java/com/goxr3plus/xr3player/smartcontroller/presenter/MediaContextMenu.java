@@ -196,7 +196,7 @@ public class MediaContextMenu extends ContextMenu {
 	/** The previous genre. */
 	Genre previousGenre = Genre.UNKNOWN;
 	
-	String encoding = "UTF-8";
+	private final String encoding = "UTF-8";
 	
 	/**
 	 * Constructor.

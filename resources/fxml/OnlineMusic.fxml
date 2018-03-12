@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
@@ -20,22 +19,9 @@
                         <VBox spacing="10.0" styleClass="online-music-root-vbox">
                            <children>
                               <Label maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Recommendation" />
-                              <ScrollPane fitToWidth="true" maxWidth="1.7976931348623157E308">
+                              <ScrollPane fitToWidth="true">
                                  <content>
-                                    <TilePane fx:id="recommendationsView" hgap="15.0" maxWidth="1.7976931348623157E308" vgap="25.0">
-                                       <children>
-                                          <VBox maxWidth="1.7976931348623157E308" styleClass="online-music-vbox-box">
-                                             <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../image/application_background.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-vbox-box-label" text="Top Songs" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </TilePane>
+                                    <TilePane fx:id="recommendationsView" hgap="15.0" vgap="25.0" />
                                  </content>
                               </ScrollPane>
                            </children>
@@ -65,30 +51,7 @@
                               <Label maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Genres" />
                               <ScrollPane fitToWidth="true">
                                  <content>
-                                    <TilePane fx:id="genresView" hgap="15.0" vgap="25.0">
-                                       <children>
-                                          <VBox styleClass="online-music-vbox-box">
-                                             <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../image/application_background.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-vbox-box-label" text="Top Songs" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </TilePane>
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="239.0" spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Mood" />
-                              <ScrollPane fitToWidth="true">
-                                 <content>
-                                    <TilePane fx:id="moodView" hgap="15.0" vgap="25.0" />
+                                    <TilePane fx:id="genresView" hgap="15.0" vgap="25.0" />
                                  </content>
                               </ScrollPane>
                            </children>
@@ -103,7 +66,20 @@
                               </ScrollPane>
                            </children>
                         </VBox>
+                        <VBox layoutX="10.0" layoutY="239.0" spacing="10.0" styleClass="online-music-root-vbox">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Mood" />
+                              <ScrollPane fitToWidth="true">
+                                 <content>
+                                    <TilePane fx:id="moodView" hgap="15.0" vgap="25.0" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
                      </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
                   </VBox>
                </content>
             </ScrollPane>
