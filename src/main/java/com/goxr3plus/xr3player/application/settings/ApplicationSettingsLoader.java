@@ -158,6 +158,9 @@ public class ApplicationSettingsLoader {
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-DisplayMode"))
 						.ifPresent(s -> xPlayerController.getVisualizer().displayMode.set(Integer.valueOf(s)));
 				
+				//Check if it is on simple or advanced mode
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Advanced-Mode"))
+						.ifPresent(s -> xPlayerController.getModeToggle().setSelected(Boolean.valueOf(s)));
 			});
 			
 			//----------                        --------------------

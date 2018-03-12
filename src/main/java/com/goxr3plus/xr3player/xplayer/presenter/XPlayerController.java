@@ -64,6 +64,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
@@ -632,6 +633,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				smBorderPane.setVisible(false);
 				modeToggleLabel.setText("Advanced");
 			}
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
 		});
 		
 		//RestorePlayerVBox
@@ -1824,4 +1828,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return smPlayPauseButton;
 	}
 	
+	/**
+	 * @return the modeToggle
+	 */
+	public JFXToggleButton getModeToggle() {
+		return modeToggle;
+		
+	}
 }

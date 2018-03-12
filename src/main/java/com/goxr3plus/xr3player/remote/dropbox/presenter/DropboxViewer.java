@@ -558,10 +558,10 @@ public class DropboxViewer extends StackPane {
 			
 		} else { //NOT SUPPORTED YET
 			//Show save dialog	
-			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
-			if (file != null)
-				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
-			
+//			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
+//			if (file != null)
+//				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
+//			
 			ActionTool.showNotification("No supported", "Folder download is not supported yet :) ", Duration.seconds(2), NotificationType.WARNING);
 		}
 	}
