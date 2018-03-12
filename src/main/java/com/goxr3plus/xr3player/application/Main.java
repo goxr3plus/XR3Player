@@ -390,8 +390,9 @@ public class Main extends Application {
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab3", userMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab4", webBrowser));
+		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane()));
+		specialJFXTabPane.getTabs().add(new Tab("tab4", userMode));
+		specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
 		specialJFXTabPane.setTabMaxWidth(0);
 		specialJFXTabPane.setTabMaxHeight(0);
 		

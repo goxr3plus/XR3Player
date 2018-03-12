@@ -55,16 +55,19 @@ public class TopBar extends BorderPane {
 	private Label xr3Label;
 	
 	@FXML
-	private JFXTabPane jfxTabPane;
+	private ImageView highSpeed;
 	
-    @FXML
-    private ImageView highSpeed;
+	@FXML
+	private JFXTabPane jfxTabPane;
 	
 	@FXML
 	private Tab mainModeTab;
 	
 	@FXML
 	private Tab djModeTab;
+	
+	@FXML
+	private Tab moviesModeTab;
 	
 	@FXML
 	private Tab userModeTab;
@@ -109,7 +112,12 @@ public class TopBar extends BorderPane {
 		/**
 		 * The window is on web browser mode
 		 */
-		WEBMODE;
+		WEBMODE,
+		
+		/**
+		 * The window is on movie mode
+		 */
+		MOVIEMODE;
 		
 	}
 	
@@ -232,12 +240,27 @@ public class TopBar extends BorderPane {
 			}
 		});
 		
+		moviesModeTab.setOnSelectionChanged(l -> {
+			if (moviesModeTab.isSelected()) {
+				//System.out.println("userModeTab Selected")
+				
+				//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
+				Main.specialJFXTabPane.getSelectionModel().select(2);
+				
+				// Update window Mode
+				windowMode = WindowMode.MOVIEMODE;
+				
+				//Hide the searchBox that is coming from LibraryMode
+				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
+			}
+		});
+		
 		userModeTab.setOnSelectionChanged(l -> {
 			if (userModeTab.isSelected()) {
 				//System.out.println("userModeTab Selected")
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
-				Main.specialJFXTabPane.getSelectionModel().select(2);
+				Main.specialJFXTabPane.getSelectionModel().select(3);
 				
 				// Update window Mode
 				windowMode = WindowMode.USERMODE;
@@ -252,7 +275,7 @@ public class TopBar extends BorderPane {
 				//System.out.println("webModeTab Selected")
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(3).isSelected())
-				Main.specialJFXTabPane.getSelectionModel().select(3);
+				Main.specialJFXTabPane.getSelectionModel().select(4);
 				
 				// Update window Mode
 				windowMode = WindowMode.WEBMODE;
@@ -319,13 +342,12 @@ public class TopBar extends BorderPane {
 	public WindowMode getWindowMode() {
 		return windowMode;
 	}
-
+	
 	/**
 	 * @return the highSpeed
 	 */
 	public ImageView getHighSpeed() {
 		return highSpeed;
 	}
-
 	
 }

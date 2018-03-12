@@ -126,13 +126,13 @@
    <left>
       <HBox alignment="CENTER" minWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="42.0" prefWidth="350.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS" HBox.hgrow="ALWAYS">
+            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS" HBox.hgrow="ALWAYS">
                <tabs>
-                  <Tab fx:id="mainModeTab" text="Main">
+                  <Tab fx:id="mainModeTab">
                      <graphic>
                         <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Library-32.png" />
+                              <Image url="@../image/playlist.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -140,11 +140,11 @@
                         <Tooltip text="Library Mode" />
                      </tooltip>
                   </Tab>
-                  <Tab fx:id="djModeTab" text="DJ">
+                  <Tab fx:id="djModeTab">
                      <graphic>
                         <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/MusicRecord-32.png" />
+                              <Image url="@../image/disc-jockey.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -152,7 +152,19 @@
                         <Tooltip text="DJ Mode" />
                      </tooltip>
                   </Tab>
-                  <Tab fx:id="userModeTab" text="User">
+                  <Tab fx:id="moviesModeTab">
+                     <graphic>
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/video-player.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Movie Mode" />
+                     </tooltip>
+                  </Tab>
+                  <Tab fx:id="userModeTab">
                      <graphic>
                         <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -161,11 +173,11 @@
                         </ImageView>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="webModeTab" text="Web">
+                  <Tab fx:id="webModeTab">
                      <graphic>
                         <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Globe-32.png" />
+                              <Image url="@../image/chrome.png" />
                            </image>
                         </ImageView>
                      </graphic>
