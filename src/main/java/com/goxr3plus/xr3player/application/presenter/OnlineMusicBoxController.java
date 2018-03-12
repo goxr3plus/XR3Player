@@ -102,7 +102,7 @@ public class OnlineMusicBoxController extends StackPane {
 		descriptionLabel.setText("'" + description + "'");
 		
 		//
-		this.setOnMouseReleased(m -> ActionTool.openWebSite(url));
+		this.setOnMouseClicked(m -> ActionTool.openWebSite(url));
 		
 		stackLabel.visibleProperty().bind(this.hoverProperty());
 		

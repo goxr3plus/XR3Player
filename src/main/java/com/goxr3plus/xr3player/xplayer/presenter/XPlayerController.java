@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.application.Platform;
@@ -559,7 +558,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		// mediaFileStackPane	
 		mediaFileMarquee.getLabel().setTooltip(new Tooltip(""));
 		mediaFileMarquee.getLabel().getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
-		mediaFileMarquee.setText("Drag a song on this deck to load it");
+		mediaFileMarquee.setText("Drag&Drop a song here");
 		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
@@ -611,7 +610,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		stopButton.setOnAction(a -> stop());
 		smStopButton.setOnAction(stopButton.getOnAction());
 		
-
 		//flipPane
 		flipPane.setFlipTime(150);
 		flipPane.getFront().getChildren().addAll(modesStackPane);
@@ -1040,9 +1038,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
 					
 				}
+				
 				// SecondaryMouseButton
-			} else if (m.getButton() == MouseButton.SECONDARY)
+			} else if (m.getButton() == MouseButton.SECONDARY) {
 				discIsDragging = false;
+			}
 		});
 		
 		// Canvas Mouse Dragging
@@ -1087,7 +1087,27 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				//smTimeSlider.setDisable(false);
 			}
 		});
-		smTimeSlider.setOnMouseReleased(disc.getCanvas().getOnMouseReleased());
+		smTimeSlider.setOnMouseReleased(m -> {
+			
+			// PrimaryMouseButton
+			if (m.getButton() == MouseButton.PRIMARY) {
+				
+				// discIsDragging and MouseButton==Primary
+				// and duration!=0 and duration!=-1
+				if (discIsDragging && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
+					
+					// Try to seek
+					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
+					
+				}
+				
+				discIsDragging = false;
+				
+				// SecondaryMouseButton
+			} else if (m.getButton() == MouseButton.SECONDARY) {
+				discIsDragging = false;
+			}
+		});
 		smTimeSlider.setOnMouseDragged(m -> {
 			// MouseButton==Primary || Secondary
 			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
