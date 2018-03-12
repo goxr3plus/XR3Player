@@ -64,7 +64,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
@@ -1103,6 +1102,17 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					// Try to seek
 					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
 					
+				} else if (!discIsDragging) {
+					
+					//TotalTime and CurrentTime					
+					int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
+					
+					// Keep the disc refreshed based on time slider value
+					xPlayerModel.setCurrentAngleTime((int) smTimeSlider.getValue());
+					disc.calculateAngleByMouse(m, currentTime, totalTime);
+					
+					// Try to seek
+					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
 				}
 				
 				discIsDragging = false;
