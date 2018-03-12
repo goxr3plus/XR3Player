@@ -56,6 +56,7 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserMode;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
+import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
@@ -243,6 +244,8 @@ public class Main extends Application {
 	
 	/** The Constant djMode. */
 	public static DJMode djMode = new DJMode();
+	
+	public static OnlineMusicController onlineMusicController = new OnlineMusicController();
 	
 	public static DropboxViewer dropBoxViewer = new DropboxViewer();
 	

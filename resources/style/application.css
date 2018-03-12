@@ -1697,4 +1697,46 @@
 	-fx-border-width:2.0;
 }
 
+/*******************************************************************************
 
+*                           Online Music                            *
+
+******************************************************************************/
+
+.online-music-root{
+	-fx-background-color:#101010;
+}
+
+.online-music-root-vbox{
+	 -fx-padding:0.0 10.0 0.0 0.0;
+}
+
+.online-music-title-label{
+	-fx-font-size:17.0;
+	-fx-background-color:#202020;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-cursor:hand;
+	-fx-alignment:center;
+}
+
+
+.online-music-vbox-box{
+	-fx-background-color:#202020;
+}
+
+
+.online-music-vbox-box-label{
+	-fx-background-color:#202020;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-border-color:transparent transparent firebrick transparent;
+	-fx-border-width:2.0;
+}
+
+.online-music-vbox-box-stack-label{
+	-fx-background-color:rgb(20.0,20.0,20.0,0.8);
+	-fx-text-fill:orange;
+	-fx-font-weight:bold;
+	-fx-cursor:hand;
+}

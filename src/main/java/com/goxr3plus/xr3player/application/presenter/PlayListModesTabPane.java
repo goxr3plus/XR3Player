@@ -22,7 +22,13 @@ public class PlayListModesTabPane extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private Tab onlineMusicTab;
+	
+	@FXML
 	private Tab openedLibrariesTab;
+	
+	@FXML
+	private Tab searchEverythingTab;
 	
 	@FXML
 	private Tab dropBoxTab;
@@ -31,7 +37,7 @@ public class PlayListModesTabPane extends StackPane {
 	private Tab emotionListsTab;
 	
 	@FXML
-	private Tab searchEverythingTab;
+	private Tab downloadsTab;
 	
 	// -------------------------------------------------------------
 	
@@ -62,6 +68,8 @@ public class PlayListModesTabPane extends StackPane {
 	@FXML
 	private void initialize() {
 		
+		//
+		onlineMusicTab.setContent(Main.onlineMusicController);
 		//
 		openedLibrariesTab.setContent(Main.libraryMode.openedLibrariesViewer);
 		//
