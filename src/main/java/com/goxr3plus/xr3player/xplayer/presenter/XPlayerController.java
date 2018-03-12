@@ -1092,6 +1092,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		});
 		smTimeSlider.setOnMouseReleased(m -> {
 			
+			//Check if the slider is not allowed to move
+			if (smTimeSlider.getCursor() == noSeekCursor)
+				smTimeSlider.setValue(0);
+			
 			// PrimaryMouseButton
 			if (m.getButton() == MouseButton.PRIMARY) {
 				
@@ -1118,9 +1122,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				discIsDragging = false;
 				
 				// SecondaryMouseButton
-			} else if (m.getButton() == MouseButton.SECONDARY) {
+			} else if (m.getButton() == MouseButton.SECONDARY)
 				discIsDragging = false;
-			}
+			
 		});
 		smTimeSlider.setOnMouseDragged(m -> {
 			// MouseButton==Primary || Secondary

@@ -79,6 +79,9 @@ public class PlayListModesTabPane extends StackPane {
 		//
 		searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
 		
+		
+		//Select the second Tab
+		onlineMusicTab.getTabPane().getSelectionModel().select(1);
 	}
 	
 	/**
