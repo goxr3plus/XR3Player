@@ -176,11 +176,21 @@
 			<id>jcenter</id>
 			<url>http://jcenter.bintray.com </url>
 		</repository>
+		<repository>
+			<id>com.teamdev</id>
+			<url>http://maven.teamdev.com/repository/products</url>
+		</repository>
 	</repositories>
 
 	<!-- Dependencies -->
 
 	<dependencies>
+		<!-- CHROMIUM BROWSER -->
+		<dependency>
+			<groupId>com.teamdev.jxbrowser</groupId>
+			<artifactId>jxbrowser-win</artifactId>
+			<version>6.19.1</version>
+		</dependency>
 		<!-- JAVAFX GRAPHICS LIBRARIES -->
 		<dependency>
 			<groupId>org.controlsfx</groupId>
@@ -279,15 +289,15 @@
 			<version>0.3.7.2</version> </dependency> -->
 
 		<!-- WEB BROWSER SUPPORT -->
-	 	<dependency>
+		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>JavaFX-Web-Browser</artifactId>
 			<version>V3.5.0</version>
-		</dependency> 
+		</dependency>
 		<!-- Locally testing WebBrowser -->
-	<!-- 	 <dependency> <groupId>JavaFX-Web-Browser</groupId> <artifactId>com.JavaFX-Web-Browser</artifactId> 
+		<!-- <dependency> <groupId>JavaFX-Web-Browser</groupId> <artifactId>com.JavaFX-Web-Browser</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.5.0.jar</systemPath> 
-			</dependency>  -->
+			</dependency> -->
 		<!-- XR3Capture -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>

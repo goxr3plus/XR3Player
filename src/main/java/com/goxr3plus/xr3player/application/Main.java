@@ -17,11 +17,14 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXTabPane;
+import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -71,10 +74,10 @@ import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewCont
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewManager;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.application.updater.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.updater.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ApplicationInformationWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
@@ -390,7 +393,13 @@ public class Main extends Application {
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane()));
+		
+		System.setProperty("teamdev.license.info", "true");
+		Browser browser = new Browser();
+		BrowserView view = new BrowserView(browser);	
+		browser.loadURL("https://www.fmovies.se/");
+		
+		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane(view)));
 		specialJFXTabPane.getTabs().add(new Tab("tab4", userMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
 		specialJFXTabPane.setTabMaxWidth(0);
