@@ -2,7 +2,7 @@
 
 #### > ----XR3Player Update 97 will be the last for Java 8 ----
 
-#### > ----XR3Player Update 98++ will need Java9 ----
+#### > ----XR3Player Update 98++ will need Java 9 ----
 
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player) 
