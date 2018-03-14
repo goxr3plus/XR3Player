@@ -28,6 +28,9 @@
 |:-:|:-:|
 | [![First](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak)  | [![Second](http://img.youtube.com/vi/Id05W1iJEw8/0.jpg)](https://www.youtube.com/watch?v=Id05W1iJEw8) |
 
+### Chromium Browser Build in Using [JFXBrowser](https://www.teamdev.com/jxbrowser)  since Update 97
+
+[![First](http://img.youtube.com/vi/ScpAjIjUbtY/0.jpg)](https://www.youtube.com/watch?v=ScpAjIjUbtY)
 
 ### Screenshots
 
