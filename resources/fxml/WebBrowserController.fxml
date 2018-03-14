@@ -4,38 +4,225 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" prefHeight="632.0" prefWidth="1017.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.85);">
+      <BorderPane minHeight="0.0" style="-fx-background-color: rgb(0,0,0,0.85);">
          <center>
             <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                  <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                      <tabs>
                         <Tab text="Example1" />
                         <Tab text="Example2" />
                      </tabs>
                   </JFXTabPane>
-                  <JFXButton fx:id="addTab" style="-fx-border-radius: 0 45 45 0; -fx-border-width: 2; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <tooltip>
-                        <Tooltip text="New Tab" />
-                     </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
                </children>
                <padding>
                   <Insets top="3.0" />
                </padding>
             </AnchorPane>
          </center>
+         <right>
+            <BorderPane id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="2.0" left="3.0" top="2.0" />
+               </padding>
+               <center>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false" prefWidth="71.0">
+                     <content>
+                        <VBox alignment="CENTER" minHeight="0.0" spacing="20.0">
+                           <children>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <JFXButton fx:id="youtube" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/youtube.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                       <VBox.margin>
+                                          <Insets left="3.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="soundCloud" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="13.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/soundcloud.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="facebook" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="62.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/facebook.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="printerest" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="13.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/pinterest.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="twitter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="62.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/twitter.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="linkedIn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="114.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/linkedin.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="dropBox" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="114.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/dropbox.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="gmail" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="322.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/gmail.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="googleDrive" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="374.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/google-drive.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                    <JFXButton fx:id="googleMaps" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/maps.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Install new Updates" />
+                                       </tooltip>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </center>
+               <top>
+                  <StackPane BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton fx:id="addTab" maxWidth="1.7976931348623157E308" style="-fx-border-radius: 0; -fx-border-width: 2; -fx-background-radius: 0; -fx-font-weight: bold;" styleClass="arrowButton1" text="+ Tab" StackPane.alignment="CENTER_RIGHT">
+                           <tooltip>
+                              <Tooltip text="New Tab" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </StackPane>
+               </top>
+            </BorderPane>
+         </right>
       </BorderPane>
    </children>
 </fx:root>

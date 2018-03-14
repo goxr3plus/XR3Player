@@ -103,9 +103,6 @@ public class WebBrowserTabController extends StackPane {
 	private Button goButton;
 	
 	@FXML
-	private JFXCheckBox requestMobileSite;
-	
-	@FXML
 	private MenuItem about;
 	
 	@FXML
@@ -429,7 +426,6 @@ public class WebBrowserTabController extends StackPane {
 		searchEngineComboBox.getSelectionModel().select(1);
 		
 		//requestMobileSite
-		requestMobileSite.setVisible(false);
 		//		requestMobileSite.selectedProperty().addListener((observable , oldValue , newValue) -> {
 		//			if (newValue)
 		//				browser.setUserAgent("Mozilla/5.0 (Android 6.1; Mobile; rv:58.0) Gecko/20100101 Firefox/58.0");
@@ -536,12 +532,10 @@ public class WebBrowserTabController extends StackPane {
 			else {
 				switch (searchEngineComboBox.getSelectionModel().getSelectedItem().toLowerCase()) {
 					case "bing":
-						finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
-						break;
 					case "duckduckgo":
 						finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
 						break;
-					case "yahoo":
+					case "yahoo": //I need to find a solution for this
 						finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
 						break;
 					default: //then google
@@ -553,7 +547,6 @@ public class WebBrowserTabController extends StackPane {
 			
 			//Load it 
 			browser.loadURL(finalWebsiteFristPart + finalWebsiteSecondPart);
-			
 		} catch (UnsupportedEncodingException ex) {
 			ex.printStackTrace();
 		}
@@ -724,12 +717,7 @@ public class WebBrowserTabController extends StackPane {
 			// If there's link under mouse pointer, create and add
 			// the "Open link in new window" menu item to our context menu
 			if (!params.getLinkText().isEmpty())
-				contextMenu.getItems().add(createMenuItem("Open link in new Tab", () -> {
-					Main.webBrowser.getTabPane().getTabs().add(
-							Main.webBrowser.getTabPane().getTabs().indexOf(Main.webBrowser.getTabPane().getSelectionModel().getSelectedItem()) + 1,
-							Main.webBrowser.createNewTab(params.getLinkURL()).getTab());
-					System.out.println("params.getLinkURL()  " + params.getLinkURL());
-				}));
+				contextMenu.getItems().add(createMenuItem("Open link in new Tab", () -> Main.webBrowser.addNewTabOnTheEnd(params.getLinkURL())));
 			
 			// Create and add "Reload" menu item to our context menu
 			contextMenu.getItems().add(createMenuItem("Reload", () -> params.getBrowser().reload()));

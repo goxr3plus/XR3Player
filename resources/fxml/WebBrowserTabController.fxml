@@ -76,14 +76,6 @@
                            </cursor>
                         </Button>
                         <TextField fx:id="searchBar" promptText="Search..." style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-text-area" HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="searchEngineComboBox" prefHeight="28.0" prefWidth="121.0" promptText="Search Engine">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </ComboBox>
                         <Button fx:id="goButton" mnemonicParsing="false" style="-fx-background-radius: 0 45 45 0;" text="Go">
                            <tooltip>
                               <Tooltip text="Load the Web Site" />
@@ -92,29 +84,32 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <MenuButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                        <ComboBox fx:id="searchEngineComboBox" prefHeight="28.0" prefWidth="121.0" promptText="Search Engine">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <MenuButton contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-radius: 0;">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
                            <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Settings-32.png" />
+                                    <Image url="@../image/menu2.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                            <items>
                               <MenuItem mnemonicParsing="false">
                                  <graphic>
-                                    <JFXCheckBox fx:id="requestMobileSite" text="Request Mobile Site" textFill="WHITE" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem mnemonicParsing="false">
-                                 <graphic>
                                     <JFXCheckBox fx:id="movingTitleAnimation" selected="true" text="Moving Title Animation" textFill="WHITE" />
                                  </graphic>
                               </MenuItem>
-                              <MenuItem fx:id="about" mnemonicParsing="false" text="About ?" />
+                              <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser" />
                            </items>
                         </MenuButton>
                      </children>

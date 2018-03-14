@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3capture.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 public class OnlineMusicBoxController extends StackPane {
@@ -102,7 +102,11 @@ public class OnlineMusicBoxController extends StackPane {
 		descriptionLabel.setText("'" + description + "'");
 		
 		//
-		this.setOnMouseClicked(m -> ActionTool.openWebSite(url));
+		setOnMouseClicked(m -> {
+			Main.webBrowser.addNewTabOnTheEnd(url);
+			Main.topBar.selectTab(4);
+			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
+		});
 		
 		stackLabel.visibleProperty().bind(this.hoverProperty());
 		

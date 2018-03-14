@@ -1740,3 +1740,61 @@
 	-fx-font-weight:bold;
 	-fx-cursor:hand;
 }
+
+
+/*******************************************************************************
+
+*                          Combo Box                            *
+
+******************************************************************************/
+
+
+.combo-box-base{
+    -fx-background-color: #202020;
+    -fx-padding: 2 2;
+}
+
+.combo-box-base:editable{
+    -fx-background-color: #FF0;
+}
+
+.combo-box-base:editable > .text-field {
+    -fx-border-image-source: null;
+    -fx-background-color: transparent;
+    -fx-padding: 1 0;
+}
+
+.combo-box-base > .arrow-button {
+   -fx-background-color: #202020;
+   -fx-padding: 0 4;
+  }
+
+.combo-box-base > .arrow-button > .arrow {
+    -fx-background-color: white;
+    -fx-background-insets: 0 0 0 0;
+    -fx-padding: 2 4;
+    -fx-shape: "M 0 0 H 7 L 3.5 4 z";
+}
+
+.combo-box-popup > .list-view {
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-color: black;
+    -fx-background-color: white;
+    -fx-background-insets: 0, 1;
+}
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-padding: 1 10;
+    -fx-background: red;
+}
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected {
+    -fx-background: green;
+    -fx-background-color: orange !important;
+}
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:hover,
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected:hover {
+    -fx-background-color: silver !important;
+}
+.combo-box-popup > .list-view > .placeholder > .label {
+    -fx-text-fill: blue;
+}

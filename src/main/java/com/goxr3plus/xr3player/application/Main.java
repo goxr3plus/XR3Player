@@ -17,8 +17,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXTabPane;
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;

@@ -349,5 +349,13 @@ public class TopBar extends BorderPane {
 	public ImageView getHighSpeed() {
 		return highSpeed;
 	}
+
+	/**
+	 * @return the webModeTab
+	 */
+	public Tab getWebModeTab() {
+		return webModeTab;
+	}
+
 	
 }
