@@ -1,3 +1,11 @@
+# !IMPORTANT NOTIFICATION!
+
+----XR3Player Update 97 will be the last for Java 8 ----
+
+----XR3Player Update 98++ will need Java9 ----
+
+Enjoy :)
+
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player) 
 #### TODO List -> Make it the best Media Player ever created!
@@ -51,9 +59,10 @@
 
 ## Features
 - **App**
-  - Full Dropbox Accounts access ( new ) !
+  - Chromium Web Browser Build In
+  - Full Dropbox access
   - Support fully .mp3,.wav files
-  - Partly supports .ogg,.flac,.au files
+  - Very Partly supports .ogg,.flac,.au files [To be fixed ]
   - Multiple User Accounts
   - Configurable via multiple settings
   - Build in web browser
@@ -72,7 +81,7 @@
 <details>
   <summary>Which Java Version i need ?</summary>
   <p>
-    Java 1.8.0_141 ++ Required ! Download Java 8 here : ( https://www.java.com/en/ )
+    Java 1.8.0_161 ++ Required ! Download Java 8 here : ( https://www.java.com/en/ )
   </p>
 </details>
 
