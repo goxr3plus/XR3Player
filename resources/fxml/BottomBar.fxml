@@ -19,7 +19,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXTextField>
-      <MenuButton minHeight="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="24.0" style="-fx-font-size: 11;" text="Fast Settings">
+      <MenuButton minHeight="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="24.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings">
         <items>
           <MenuItem mnemonicParsing="false">
                <graphic>

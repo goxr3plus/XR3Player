@@ -1177,6 +1177,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//System.out.println((int) smVolumeSlider.getValue() + ", " + maximumVolume);
 		});
 		smVolumeSlider.setValue(volume);
+		smVolumeSlider.setOnScroll(scroll -> this.setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
 		
 		//		
 		//		//---volumeDiscLabel
