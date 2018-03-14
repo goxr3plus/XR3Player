@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- <?import commons.javafx.webbrowser.browser.SearchEngineComboBox?> -->
+
+<fx:root prefHeight="448.0" prefWidth="667.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane">
+         <top>
+            <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="667.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="backwardButton" mnemonicParsing="false" style="-fx-background-radius: 45 0 0 45;">
+                           <graphic>
+                              <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/right.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Back" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="reloadButton" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                           <graphic>
+                              <ImageView fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/refresh.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Reload Web Site" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="forwardButton" mnemonicParsing="false" style="-fx-background-radius: 0 45 45 0;">
+                           <graphic>
+                              <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/right.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Forward" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <TextField fx:id="searchBar" promptText="Search..." style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-text-area" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="searchEngineComboBox" prefHeight="28.0" prefWidth="121.0" promptText="Search Engine">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Button fx:id="goButton" mnemonicParsing="false" style="-fx-background-radius: 0 45 45 0;" text="Go">
+                           <tooltip>
+                              <Tooltip text="Load the Web Site" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <MenuButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Settings-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <items>
+                              <MenuItem mnemonicParsing="false">
+                                 <graphic>
+                                    <JFXCheckBox fx:id="requestMobileSite" text="Request Mobile Site" textFill="WHITE" />
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem mnemonicParsing="false">
+                                 <graphic>
+                                    <JFXCheckBox fx:id="movingTitleAnimation" selected="true" text="Moving Title Animation" textFill="WHITE" />
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="about" mnemonicParsing="false" text="About ?" />
+                           </items>
+                        </MenuButton>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+            </VBox>
+         </top>
+      </BorderPane>
+      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);" visible="false">
+         <children>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/warning.png" />
+               </image>
+            </ImageView>
+            <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true" />
+            <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" text="&#10;1.Check the address for typing errors such as ww.example.com instead of www.example.com&#10;&#10;2.If you are unable to load any pages, check your computer’s network connection.&#10;&#10;3.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin></TextArea>
+            <JFXButton fx:id="tryAgain" buttonType="RAISED" contentDisplay="RIGHT" ripplerFill="#fa0c0c" text="Try Again">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ProgressIndicator fx:id="tryAgainIndicator" styleClass="dropbox-progress-indicator" visible="false" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
+</fx:root>

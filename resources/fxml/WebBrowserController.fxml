@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.85);">
+         <center>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                     <tabs>
+                        <Tab text="Example1" />
+                        <Tab text="Example2" />
+                     </tabs>
+                  </JFXTabPane>
+                  <JFXButton fx:id="addTab" style="-fx-border-radius: 0 45 45 0; -fx-border-width: 2; -fx-background-radius: 0 45 45 0;" styleClass="arrowButton1" text="+" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <tooltip>
+                        <Tooltip text="New Tab" />
+                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets top="3.0" />
+               </padding>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</fx:root>

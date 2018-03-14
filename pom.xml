@@ -185,6 +185,12 @@
 	<!-- Dependencies -->
 
 	<dependencies>
+	    <!-- Image4j -->
+		<dependency>
+			<groupId>com.github.imcdonagh</groupId>
+			<artifactId>image4j</artifactId>
+			<version>0.7.2</version>
+		</dependency>
 		<!-- CHROMIUM BROWSER -->
 		<dependency>
 			<groupId>com.teamdev.jxbrowser</groupId>
@@ -289,11 +295,8 @@
 			<version>0.3.7.2</version> </dependency> -->
 
 		<!-- WEB BROWSER SUPPORT -->
-		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>JavaFX-Web-Browser</artifactId>
-			<version>V3.5.0</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>JavaFX-Web-Browser</artifactId> 
+			<version>V3.5.0</version> </dependency> -->
 		<!-- Locally testing WebBrowser -->
 		<!-- <dependency> <groupId>JavaFX-Web-Browser</groupId> <artifactId>com.JavaFX-Web-Browser</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.5.0.jar</systemPath> 

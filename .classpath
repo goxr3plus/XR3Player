@@ -16,6 +16,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/github/imcdonagh/image4j/0.7.2/image4j-0.7.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/teamdev/jxbrowser/jxbrowser-win/6.19.1/jxbrowser-win-6.19.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/teamdev/jxbrowser/jxbrowser/6.19.1/jxbrowser-6.19.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/controlsfx/controlsfx/8.40.14/controlsfx-8.40.14.jar" sourcepath="M2_REPO/org/controlsfx/controlsfx/8.40.14/controlsfx-8.40.14-sources.jar"/>
@@ -49,8 +50,6 @@
 	<classpathentry kind="var" path="M2_REPO/com/googlecode/soundlibs/tritonus-share/0.3.7.4/tritonus-share-0.3.7.4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jflac/jflac-codec/1.5.2/jflac-codec-1.5.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/github/Trilarion/java-vorbis-support/v1.0.0/java-vorbis-support-v1.0.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/JavaFX-Web-Browser/V3.5.0/JavaFX-Web-Browser-V3.5.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/imcdonagh/image4j/0.7.2/image4j-0.7.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/xr3capture/V3.12/xr3capture-V3.12.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/FX-BorderlessScene/V2.0.0/FX-BorderlessScene-V2.0.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/dropbox/core/dropbox-core-sdk/3.0.6/dropbox-core-sdk-3.0.6.jar"/>
@@ -60,5 +59,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/license.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

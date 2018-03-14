@@ -24,7 +24,6 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -47,7 +46,6 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import main.java.com.goxr3plus.javafxwebbrowser.browser.WebBrowserController;
 import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.application.database.DbManager;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
@@ -77,6 +75,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.Util;
 import main.java.com.goxr3plus.xr3player.application.updater.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ApplicationInformationWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController;
@@ -86,6 +85,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChoose
 import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
+import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
@@ -395,11 +395,11 @@ public class Main extends Application {
 		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
 		
 		System.setProperty("teamdev.license.info", "true");
-		Browser browser = new Browser();
-		BrowserView view = new BrowserView(browser);	
-		browser.loadURL("https://www.fmovies.se/");
+		//		Browser browser = new Browser();
+		//		BrowserView view = new BrowserView(browser);	
+		//		browser.loadURL("https://www.fmovies.se/");
 		
-		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane(view)));
+		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane()));
 		specialJFXTabPane.getTabs().add(new Tab("tab4", userMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
 		specialJFXTabPane.setTabMaxWidth(0);
@@ -671,10 +671,10 @@ public class Main extends Application {
 		
 		//I need to check it in case no user is logged in 
 		if (dbManager == null)
-			System.exit(0);
+			Util.terminateXR3Player(0);
 		else if (libraryMode.openedLibrariesViewer.isFree(true)) {
 			if (!vacuum)
-				System.exit(0);
+				Util.terminateXR3Player(0);
 			else {
 				VacuumProgressService vService = new VacuumProgressService();
 				updateScreen.getLabel().textProperty().bind(vService.messageProperty());
@@ -863,16 +863,6 @@ public class Main extends Application {
 		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
-		
-		//		//---------------Check for Duplicate Instance-----------------	
-		//		String id = "XR3PlayerApplication";
-		//		try {
-		//			JUnique.acquireLock(id, null);
-		//		} catch (AlreadyLockedException e) { // Application already running.
-		//			System.out.println("Duplicate instance detected...exiting...");
-		//			System.exit(0);
-		//		}
-		//		//------------END OF: Check for Duplicate Instance-------------------
 		
 		launch(args);
 	}
