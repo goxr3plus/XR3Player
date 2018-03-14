@@ -4,20 +4,17 @@
 package main.java.com.goxr3plus.xr3player.chromium;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.Browser;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
@@ -38,11 +35,39 @@ public class WebBrowserController extends StackPane {
 	public static boolean MOVING_TITLES_ENABLED = true;
 	
 	//------------------------------------------------------------
-	@FXML
-	private Button showVersion;
 	
 	@FXML
-	private TabPane tabPane;
+	private JFXTabPane tabPane;
+	
+	@FXML
+	private JFXButton youtube;
+	
+	@FXML
+	private JFXButton soundCloud;
+	
+	@FXML
+	private JFXButton facebook;
+	
+	@FXML
+	private JFXButton printerest;
+	
+	@FXML
+	private JFXButton twitter;
+	
+	@FXML
+	private JFXButton linkedIn;
+	
+	@FXML
+	private JFXButton dropBox;
+	
+	@FXML
+	private JFXButton gmail;
+	
+	@FXML
+	private JFXButton googleDrive;
+	
+	@FXML
+	private JFXButton googleMaps;
 	
 	@FXML
 	private JFXButton addTab;
@@ -79,6 +104,31 @@ public class WebBrowserController extends StackPane {
 		//addTab
 		addTab.setOnAction(a -> createAndAddNewTab());
 		
+		//Extra Stuff
+		youtube.setOnAction(a -> openFamousSite("https://www.youtube.com/"));
+		
+		soundCloud.setOnAction(a -> openFamousSite("https://www.soundcloud.com"));
+		
+		facebook.setOnAction(a -> openFamousSite("https://www.facebook.com"));
+		
+		printerest.setOnAction(a -> openFamousSite("https://www.pinterest.com"));
+		
+		twitter.setOnAction(a -> openFamousSite("https://www.twitter.com"));
+		
+		linkedIn.setOnAction(a -> openFamousSite("https://www.linkedin.com/"));
+		
+		dropBox.setOnAction(a -> openFamousSite("https://www.dropbox.com"));
+		
+		gmail.setOnAction(a -> openFamousSite("https://www.gmail.com"));
+		
+		googleDrive.setOnAction(a -> openFamousSite("https://www.google.com"));
+		
+		googleMaps.setOnAction(a -> openFamousSite("https://maps.google.com/"));
+	}
+	
+	private void openFamousSite(String url) {
+		createAndAddNewTab(url);
+		tabPane.getSelectionModel().selectLast();
 	}
 	
 	/**

@@ -23,7 +23,6 @@
                   <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                      <tabs>
                         <Tab text="Example1" />
-                        <Tab text="Example2" />
                      </tabs>
                   </JFXTabPane>
                </children>
@@ -56,7 +55,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Youtube" />
                                        </tooltip>
                                        <VBox.margin>
                                           <Insets left="3.0" />
@@ -74,7 +73,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open  SoundCloud" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="facebook" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="62.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -89,7 +88,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Facebook" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="printerest" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="13.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -104,7 +103,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Printerest" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="twitter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="62.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -119,7 +118,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Twitter" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="linkedIn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="114.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -134,7 +133,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open  LinkedIn" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="dropBox" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="114.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -149,7 +148,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Dropbox" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="gmail" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="322.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -164,7 +163,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Gmail" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="googleDrive" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="374.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -179,7 +178,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Open Google Cloud" />
                                        </tooltip>
                                     </JFXButton>
                                     <JFXButton fx:id="googleMaps" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
@@ -194,7 +193,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
-                                          <Tooltip text="Install new Updates" />
+                                          <Tooltip text="Opem Google Maps" />
                                        </tooltip>
                                     </JFXButton>
                                  </children>

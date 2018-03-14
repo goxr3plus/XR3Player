@@ -27,8 +27,6 @@ import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
 import com.teamdev.jxbrowser.chromium.events.LoadEvent;
 import com.teamdev.jxbrowser.chromium.events.NetError;
 import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.RenderEvent;
-import com.teamdev.jxbrowser.chromium.events.RenderListener;
 import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 
@@ -37,6 +35,7 @@ import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -46,7 +45,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -182,6 +180,32 @@ public class WebBrowserTabController extends StackPane {
 		//-------------------Browser------------------------
 		browser = new Browser();
 		
+		//--Render Listener
+		//		browser.addRenderListener(new RenderListener() {
+		//			
+		//			@Override
+		//			public void onRenderCreated(RenderEvent arg0) {
+		//				System.out.println("Render process is created and ready to work.");
+		//			}
+		//			
+		//			@Override
+		//			public void onRenderGone(RenderEvent arg0) {
+		//				System.out.println("Render process is exited, crashed or killed.");
+		//				
+		//			}
+		//			
+		//			@Override
+		//			public void onRenderResponsive(RenderEvent arg0) {
+		//				System.out.println("Render process is no longer hung.");
+		//			}
+		//			
+		//			@Override
+		//			public void onRenderUnresponsive(RenderEvent arg0) {
+		//				System.out.println("Render process is hung.");
+		//			}
+		//			
+		//		});
+		
 		//-------------------BrowserView------------------------
 		browserView = new BrowserView(browser);
 		browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
@@ -231,19 +255,55 @@ public class WebBrowserTabController extends StackPane {
 		
 		//-------------------TAB------------------------
 		tab.setTooltip(new Tooltip(""));
-		//	tab.getTooltip().textProperty().bind(webEngine.titleProperty());
+		//	tab.getTooltip().textProperty().bind(webEngine.titleProperty())
 		
 		// Graphic
 		StackPane stack = new StackPane();
+		stack.setPadding(new Insets(0, 5, 0, 5));
+		stack.setAlignment(Pos.TOP_CENTER);
 		
 		// indicator
-		ProgressBar indicator = new ProgressBar();
+		ProgressIndicator indicator = new ProgressIndicator();
+		indicator.getStyleClass().add("dropbox-progress-indicator");		
+		//	indicator.progressProperty().bind(webEngine.getLoadWorker().progressProperty())
+		//	indicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty())
+		indicator.setMaxSize(20, 20);
 		
+		// label
+		Label label = new Label();
+		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		label.setAlignment(Pos.CENTER);
+		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
+		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
+		//label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"))
+		// text.visibleProperty().bind(library.getSmartController().inputService.runningProperty())
+		
+		Marquee marquee = new Marquee();
+		marquee.textProperty().bind(tab.getTooltip().textProperty());
+		
+		stack.getChildren().addAll(indicator);
+		stack.setManaged(false);
+		stack.setVisible(true);
+		
+		// stack
+		indicator.visibleProperty().addListener(l -> {
+			if (indicator.isVisible()) {
+				stack.setManaged(true);
+				stack.setVisible(true);
+			} else {
+				stack.setManaged(false);
+				stack.setVisible(false);
+			}
+		});
+		
+		//--Load Listener
 		browser.addLoadListener(new LoadAdapter() {
 			@Override
 			public void onStartLoadingFrame(StartLoadingEvent event) {
 				if (event.isMainFrame()) {
 					System.out.println("Main frame has started loading");
+					
+					//Platform.runLater(() -> indicator.setVisible(true));
 				}
 			}
 			
@@ -251,6 +311,8 @@ public class WebBrowserTabController extends StackPane {
 			public void onProvisionalLoadingFrame(ProvisionalLoadingEvent event) {
 				if (event.isMainFrame()) {
 					System.out.println("Provisional load was committed for a frame");
+					
+					//Platform.runLater(() -> indicator.setVisible(true));
 				}
 			}
 			
@@ -258,6 +320,7 @@ public class WebBrowserTabController extends StackPane {
 			public void onFinishLoadingFrame(FinishLoadingEvent event) {
 				if (event.isMainFrame()) {
 					System.out.println("Main frame has finished loading");
+					
 				}
 			}
 			
@@ -273,8 +336,15 @@ public class WebBrowserTabController extends StackPane {
 			public void onDocumentLoadedInFrame(FrameLoadEvent event) {
 				System.out.println("Frame document is loaded.");
 				
-				//Set Search Bar Text 
-				Platform.runLater(() -> searchBar.setText(browser.getURL()));
+				//Set Search Bar Text 			
+				Platform.runLater(() -> {
+					try {
+						searchBar.setText(browser.getURL());
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				});
+				
 			}
 			
 			@Override
@@ -283,7 +353,9 @@ public class WebBrowserTabController extends StackPane {
 				
 				//Run On JavaFX Thread
 				Platform.runLater(() -> {
-					System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL());
+					//System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL())
+					
+					//indicator.setVisible(false);
 					
 					backwardButton.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(1).getURL()));
 					forwardButton
@@ -301,68 +373,13 @@ public class WebBrowserTabController extends StackPane {
 			}
 		});
 		
-		browser.addRenderListener(new RenderListener() {
-			
-			@Override
-			public void onRenderCreated(RenderEvent arg0) {
-				System.out.println("Render process is created and ready to work.");
-			}
-			
-			@Override
-			public void onRenderGone(RenderEvent arg0) {
-				System.out.println("Render process is exited, crashed or killed.");
-				
-			}
-			
-			@Override
-			public void onRenderResponsive(RenderEvent arg0) {
-				System.out.println("Render process is no longer hung.");
-			}
-			
-			@Override
-			public void onRenderUnresponsive(RenderEvent arg0) {
-				System.out.println("Render process is hung.");
-			}
-			
-		});
-		//	indicator.progressProperty().bind(webEngine.getLoadWorker().progressProperty());
-		//	indicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
-		indicator.setMaxSize(30, 11);
-		
-		// label
-		Label label = new Label();
-		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		label.setAlignment(Pos.CENTER);
-		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
-		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
-		//label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"))
-		// text.visibleProperty().bind(library.getSmartController().inputService.runningProperty())
-		
-		Marquee marquee = new Marquee();
-		marquee.textProperty().bind(tab.getTooltip().textProperty());
-		
-		stack.getChildren().addAll(indicator, label);
-		//stack.setManaged(false)
-		stack.setVisible(true);
-		
-		// stack
-		indicator.visibleProperty().addListener(l -> {
-			if (indicator.isVisible()) {
-				stack.setManaged(true);
-				stack.setVisible(true);
-			} else {
-				stack.setManaged(false);
-				stack.setVisible(false);
-			}
-		});
-		
 		//facIconImageView 
 		facIconImageView.setFitWidth(20);
 		facIconImageView.setFitHeight(20);
 		facIconImageView.setSmooth(true);
 		facIconImageView.setVisible(true);
-		//facIconImageView.visibleProperty().bind(indicator.visibleProperty().not());
-		//facIconImageView.managedProperty().bind(facIconImageView.imageProperty().isNotNull().and(indicator.visibleProperty().not()));
+		//facIconImageView.visibleProperty().bind(indicator.visibleProperty().not())
+		//facIconImageView.managedProperty().bind(facIconImageView.imageProperty().isNotNull().and(indicator.visibleProperty().not()))
 		
 		// HBOX
 		HBox hBox = new HBox();
@@ -388,7 +405,9 @@ public class WebBrowserTabController extends StackPane {
 		//			else
 		//				searchBar.textProperty().bind(webEngine.locationProperty());
 		//		});
-		searchBar.setOnAction(a -> loadWebSite(searchBar.getText()));
+		searchBar.setOnAction(a ->
+		
+		loadWebSite(searchBar.getText()));
 		searchBar.focusedProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue)
 				Platform.runLater(() -> searchBar.selectAll());
@@ -564,11 +583,7 @@ public class WebBrowserTabController extends StackPane {
 	 * Loads the current website , or if none then loads the default website
 	 */
 	public void reloadWebSite() {
-		//if(browser.getURL().isEmpty())
-		//	if (!getHistory().getEntries().isEmpty())
 		browser.reload();
-		//else
-		//	loadDefaultWebSite();
 	}
 	
 	/**
@@ -639,21 +654,6 @@ public class WebBrowserTabController extends StackPane {
 		thread.setDaemon(true);
 		thread.start();
 	}
-	
-	/**
-	 * @return the history
-	 */
-	//	public WebHistory getHistory() {
-	//		return history;
-	//	}
-	//	
-	//	/**
-	//	 * @param history
-	//	 *            the history to set
-	//	 */
-	//	public void setHistory(WebHistory history) {
-	//		this.history = history;
-	//	}
 	
 	/**
 	 * Determines if the tab title will have a moving animation or not
