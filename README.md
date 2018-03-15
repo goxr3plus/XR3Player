@@ -1,4 +1,6 @@
-# [DOWNLOAD](https://goxr3plus.github.io/xr3player.io/)
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player) [DOWNLOAD](https://goxr3plus.github.io/xr3player.io/)
+#### TODO List -> Make it the best Media Player ever created!
+
 
 ### !IMPORTANT NOTIFICATION!
 
@@ -7,8 +9,6 @@
 #### > ----XR3Player Update 98++ will need Java 9 ----
 
 
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player) 
-#### TODO List -> Make it the best Media Player ever created!
 
 ## Download XR3Player
 
