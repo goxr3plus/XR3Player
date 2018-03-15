@@ -1,4 +1,6 @@
-# !IMPORTANT NOTIFICATION!
+# [DOWNLOAD](https://goxr3plus.github.io/xr3player.io/)
+
+### !IMPORTANT NOTIFICATION!
 
 #### > ----XR3Player Update 97 will be the last for Java 8 ----
 
@@ -180,4 +182,4 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
   
  
-
+# [DOWNLOAD](https://goxr3plus.github.io/xr3player.io/)
