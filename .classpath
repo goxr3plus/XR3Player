@@ -56,5 +56,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/license.jar"/>
+	<classpathentry kind="lib" path="libraries/scenicView.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -10,138 +9,139 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="1063.0" style="-fx-background-color: #101010; -fx-border-width: 2;" stylesheets="@../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <JFXTextField fx:id="searchField" focusColor="#ff0f53" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" promptText="search..." style="-fx-text-fill: white;" unFocusColor="#ff3535" visible="false">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXTextField>
-      <MenuButton minHeight="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="24.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings">
-        <items>
-          <MenuItem mnemonicParsing="false">
+
+<fx:root prefHeight="30.0" prefWidth="1138.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;" BorderPane.alignment="CENTER">
+         <children>
+            <MenuButton minHeight="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="24.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings">
+               <items>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <JFXToggleButton fx:id="keyBindings" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <JFXToggleButton fx:id="speechRecognitionToggle" disable="true" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+                     </graphic>
+                  </MenuItem>
+               </items>
                <graphic>
-                  <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/menu2.png" />
+                     </image>
+                  </ImageView>
                </graphic>
-            </MenuItem>
-          <MenuItem mnemonicParsing="false">
+            </MenuButton>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip text="Can application connect to internet" />
+               </tooltip>
+            </Label>
+            <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
                <graphic>
-                  <JFXToggleButton fx:id="keyBindings" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Wi-Fi-24.png" />
+                     </image>
+                  </ImageView>
                </graphic>
-            </MenuItem>
-            <MenuItem mnemonicParsing="false">
+               <tooltip>
+                  <Tooltip text="Internet connection is available?" />
+               </tooltip>
+            </Label>
+            <Label fx:id="internetConnectionDescriptionLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Disconnected" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip text="Internet connection is available?" />
+               </tooltip>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="339.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+            </Label>
+            <Label fx:id="currentTimeLabel" alignment="CENTER" layoutX="522.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="17:14" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip text="Current System Time" />
+               </tooltip>
                <graphic>
-                  <JFXToggleButton fx:id="speechRecognitionToggle" disable="true" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/stopwatch.png" />
+                     </image>
+                  </ImageView>
                </graphic>
-            </MenuItem>
-        </items>
-         <graphic>
-            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/menu2.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </MenuButton>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-         <tooltip>
-            <Tooltip text="Can application connect to internet" />
-         </tooltip>
-      </Label>
-      <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-         <graphic>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="566.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="/" textAlignment="CENTER" textFill="#1fdbcf" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+            </Label>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Wi-Fi-24.png" />
+                  <Image url="@../image/Time-24.png" />
                </image>
             </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Internet connection is available?" />
-         </tooltip>
-      </Label>
-      <Label fx:id="internetConnectionDescriptionLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Disconnected" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-         <tooltip>
-            <Tooltip text="Internet connection is available?" />
-         </tooltip>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="339.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-      </Label>
-      <Label fx:id="currentTimeLabel" alignment="CENTER" layoutX="522.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="17:14" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-         <tooltip>
-            <Tooltip text="Current System Time" />
-         </tooltip>
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/stopwatch.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="566.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="/" textAlignment="CENTER" textFill="#1fdbcf" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-      </Label>
-      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/Time-24.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="00:20" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-         <tooltip>
-            <Tooltip text="Total time the application is being alive" />
-         </tooltip>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="591.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <padding>
-            <Insets left="4.0" right="4.0" />
-         </padding>
-      </Label>
-   </children>
+            <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="00:20" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip text="Total time the application is being alive" />
+               </tooltip>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="591.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+   </center>
 </fx:root>

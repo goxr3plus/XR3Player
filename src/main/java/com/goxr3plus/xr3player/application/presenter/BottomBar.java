@@ -6,14 +6,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
@@ -27,12 +26,9 @@ import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowContro
  * @author GOXR3PLUS
  *
  */
-public class BottomBar extends HBox {
+public class BottomBar extends BorderPane {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private JFXTextField searchField;
 	
 	@FXML
 	private JFXToggleButton speechRecognitionToggle;
@@ -209,7 +205,7 @@ public class BottomBar extends HBox {
 		super.getChildren().add(ramMonitor);
 		
 		// -- searchField
-		searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
+		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
 	}
 	
 	/**
@@ -219,12 +215,6 @@ public class BottomBar extends HBox {
 		return keyBindings;
 	}
 	
-	/**
-	 * @return the searchField
-	 */
-	public JFXTextField getSearchField() {
-		return searchField;
-	}
 	
 	/**
 	 * @return the speechRecognitionToggle

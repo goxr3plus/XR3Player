@@ -1350,28 +1350,29 @@
 }*/
 
 
-.search-box .text-field, .libraries-search-box .text-field {
+/* .search-box .text-field, .libraries-search-box .text-field {*/
 	/*-fx-effect: dropshadow( three-pass-box, red , 10.0, 0.0,0.0,0.0);*/
     /*-fx-background-insets:3.0;*/
-    -fx-background-insets: -0.1, 2.0;
-    /*-fx-background-radius: 5.0;
+     /*-fx-background-radius: 5.0;
     -fx-border-radius:5.0;*/
+    /*-fx-background-insets: -0.1, 2.0;
     -fx-border-width:1.0;
     -fx-prompt-text-fill:black;
     -fx-text-fill:black;
     -fx-font-size:13.0;
     -fx-font-weight:bold;       
-}
+}*/
 
 
-.search-box .text-field:focused, .libraries-search-box .text-field:focused,.search-box .text-field:hover, .libraries-search-box .text-field:hover{
+/* .search-box .text-field:focused, .libraries-search-box .text-field:focused,.search-box .text-field:hover, .libraries-search-box .text-field:hover{ */
 	/*-fx-effect: null;*/
-	-fx-background-color: firebrick;
+	 /*-fx-background-insets: -0.1, 2.0;*/
+	/*-fx-background-color: firebrick;
 	-fx-border-color:white;
 	-fx-text-fill:white;
 	-fx-prompt-text-fill:white;
-    /*-fx-background-insets: -0.1, 2.0;*/
-}
+   
+}*/
 
 .search-box-window-item{
 	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
@@ -1809,4 +1810,18 @@
 .menu-button > .arrow-button > .arrow {
  -fx-shape: "M3.5 0 L7 10 Q3.5 7 0 10z";
  /* arrow down = M3.5 10 L7 0 Q3.5 3 0 0z */
+}
+
+/*******************************************************************************
+
+*                         TextFields                        *
+
+******************************************************************************/
+
+
+.dark-text-field,.search-box .text-field, .libraries-search-box .text-field{
+	
+	-fx-background-color:#303030;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
 }

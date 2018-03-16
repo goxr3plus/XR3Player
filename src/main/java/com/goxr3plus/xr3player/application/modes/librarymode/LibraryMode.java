@@ -376,7 +376,7 @@ public class LibraryMode extends BorderPane {
 		//		}));
 		
 		//----librariesInfoLabel
-		librariesInfoLabel.textProperty().bind(Bindings.concat("Totally -> [ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",
+		librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",
 				openedLibraries, " ] Opened", " , [ ", emptyLibraries, " ] Empty"));
 		
 		//== colorPicker

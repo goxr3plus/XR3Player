@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.scenicview.ScenicView;
+
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.az;
 
@@ -358,7 +360,7 @@ public class Main extends Application {
 		applicationProperties.setUpdatePropertiesLocked(false);
 		
 		//------------------Experiments------------------
-		// ScenicView.show(scene)
+		//ScenicView.show(scene);
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 		//XR3AutoUpdater exit message
@@ -474,8 +476,8 @@ public class Main extends Application {
 		bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
 		
 		//-------------TOP BAR--------------------
-		bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
-		bottomBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
+	//	bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
+		//bottomBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
 		
 	}
 	
@@ -653,7 +655,7 @@ public class Main extends Application {
 			//---------------END:Important Work-----------------------------------------------------------
 			
 			//This bitch doesn't work for some reason that i will find and smash his bitchy ass 
-			bottomBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
+			//bottomBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
 			
 			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
 			dbManager.loadApplicationDataBase();

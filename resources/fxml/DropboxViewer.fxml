@@ -234,13 +234,13 @@
             </Button>
          </children>
       </VBox>
-      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #007EE5;" visible="false">
+      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #007EE5;">
          <children>
             <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
-                  <VBox alignment="CENTER" spacing="30.0">
+                  <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="authorizationButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Sign in using internal XR3Player Web Browser -&gt; Recommended" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="authorizationButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Sign in using internal XR3Player Web Browser -&gt; Recommended" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -258,7 +258,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button fx:id="authorizationButton2" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Sign in using Firefox , Opera , Chrome , Safari" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="authorizationButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Sign in using Firefox , Opera , Chrome , Safari" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -277,6 +277,9 @@
                            </effect>
                         </Button>
                      </children>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
                   </VBox>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
