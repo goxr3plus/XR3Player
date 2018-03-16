@@ -29,7 +29,7 @@
       <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" spacing="25.0" style="-fx-background-color: rgb(10,10,10,0.6);" StackPane.alignment="TOP_RIGHT">
          <children>
             <JFXCheckBox fx:id="showOnStartUp" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Show welcome screen again ?" />
-            <JFXToggleButton fx:id="sound" selected="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00" />
+            <JFXToggleButton fx:id="sound" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00" />
          </children>
       </HBox>
       <Label alignment="CENTER" graphicTextGap="15.0" style="-fx-border-color: transparent; -fx-background-color: #101010;" styleClass="applicationSettingsLabel2" text="GOXR3PLUS STUDIO" StackPane.alignment="BOTTOM_LEFT">

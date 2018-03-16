@@ -1,10 +1,7 @@
 package main.java.com.goxr3plus.xr3player.application.tools;
 
-import com.teamdev.jxbrowser.chromium.Browser;
-
 import javafx.application.Platform;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
 
 public class Util {
 	
@@ -13,36 +10,36 @@ public class Util {
 	}// Operating systems.
 	
 	private static OS os = null;
-	private static final String operSys = System.getProperty("os.name").toLowerCase();
+	private static final String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
 	
 	public static OS getOS() {
 		if (os == null) {
-			if (operSys.contains("win"))
+			if (OPERATING_SYSTEM.contains("win"))
 				os = OS.WINDOWS;
-			else if (operSys.contains("nix") || operSys.contains("nux") || operSys.contains("aix")) {
+			else if (OPERATING_SYSTEM.contains("nix") || OPERATING_SYSTEM.contains("nux") || OPERATING_SYSTEM.contains("aix")) {
 				os = OS.LINUX;
-			} else if (operSys.contains("mac"))
+			} else if (OPERATING_SYSTEM.contains("mac"))
 				os = OS.MAC;
-			else if (operSys.contains("sunos"))
+			else if (OPERATING_SYSTEM.contains("sunos"))
 				os = OS.SOLARIS;
 		}
 		return os;
 	}
 	
 	public static boolean isWindows() {
-		return operSys.contains("win");
+		return OPERATING_SYSTEM.contains("win");
 	}
 	
 	public static boolean isLinux() {
-		return ( operSys.contains("nix") || operSys.contains("nux") || operSys.contains("aix") );
+		return ( OPERATING_SYSTEM.contains("nix") || OPERATING_SYSTEM.contains("nux") || OPERATING_SYSTEM.contains("aix") );
 	}
 	
 	public static boolean isMac() {
-		return operSys.contains("mac");
+		return OPERATING_SYSTEM.contains("mac");
 	}
 	
 	public static boolean isSolaris() {
-		return operSys.contains("sunos");
+		return OPERATING_SYSTEM.contains("sunos");
 	}
 	
 	/**
@@ -56,6 +53,7 @@ public class Util {
 		switch (Util.getOS()) {
 			case WINDOWS:
 				new Thread(() -> {
+					//Disposing all Browsers...
 					Main.webBrowser.disposeAllBrowsers();
 					System.exit(code);
 				}).start();
@@ -63,6 +61,7 @@ public class Util {
 			case LINUX:
 			case MAC:
 				Platform.runLater(() -> {
+					//Disposing all Browsers...
 					Main.webBrowser.disposeAllBrowsers();
 					System.exit(code);
 				});

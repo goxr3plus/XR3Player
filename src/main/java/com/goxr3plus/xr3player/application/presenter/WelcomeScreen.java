@@ -23,6 +23,7 @@ import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.Util;
 
 /**
  * @author GOXR3PLUS
@@ -90,7 +91,7 @@ public class WelcomeScreen extends StackPane {
 				.addListener((observable , oldValue , newValue) -> Main.applicationProperties.updateProperty("Show-Welcome-Screen", String.valueOf(newValue.booleanValue())));
 		
 		//exit
-		exit.setOnAction(a -> System.exit(0));
+		exit.setOnAction(a -> Util.terminateXR3Player(0));
 	}
 	
 	/**

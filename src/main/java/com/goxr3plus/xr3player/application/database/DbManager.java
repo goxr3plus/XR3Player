@@ -33,8 +33,11 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.Util;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
+import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
+import java.util.stream.Stream;
 
 /**
  * This class is managing the database of the application.
@@ -98,12 +101,12 @@ public class DbManager {
 				manageConnection(Operation.CLOSE);
 			}
 			// exit
-			System.exit(0);
+			Util.terminateXR3Player(0);
 		} catch (SQLException ex) {
 			Main.logger.log(Level.WARNING, ex.getMessage(), ex);
-			System.exit(-1);
+			Util.terminateXR3Player(-1);
 		} finally {
-			System.exit(0);
+			Util.terminateXR3Player(0);
 		}
 		
 	};
@@ -487,7 +490,7 @@ public class DbManager {
 			setOnFailed(fail -> {
 				Main.updateScreen.getProgressBar().progressProperty().unbind();
 				ActionTool.showNotification("Fatal Error!", "DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500), NotificationType.ERROR);
-				System.exit(0);
+				Util.terminateXR3Player(0);
 			});
 		}
 		
@@ -622,10 +625,10 @@ public class DbManager {
 									.forEach(controller -> controller.getInstantSearch().selectedProperty()
 											.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
 							
-							//For XPLayersLists
-							Main.xPlayersList.getList().stream().forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch()
-									.selectedProperty().bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
-							
+							Stream<XPlayerController> cs1;
+							cs1 = Main.xPlayersList.getList().stream();
+							cs1.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch().selectedProperty()
+									.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
 							//Load Saved DropBox Accounts
 							Main.dropBoxViewer.refreshSavedAccounts();
 						});
@@ -633,8 +636,8 @@ public class DbManager {
 						//Update the Progress
 						//updateProgress(4, 4);
 						
-					} catch (Exception ex) {
-						Main.logger.log(Level.SEVERE, "", ex);
+					} catch (Exception param) {
+						Main.logger.log(Level.SEVERE, "", param);
 					}
 					
 					return null;

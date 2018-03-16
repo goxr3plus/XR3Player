@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -17,6 +20,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXTabPane;
+import com.teamdev.jxbrowser.chromium.az;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -112,6 +116,7 @@ public class Main extends Application {
 		internalInformation.put("ReleasedDate", "18/03/2018");
 		
 		System.out.println("Outside of Application Start Method");
+		
 	}
 	
 	/**
@@ -212,7 +217,7 @@ public class Main extends Application {
 	/**
 	 * The WebBrowser of the Application
 	 */
-	public static WebBrowserController webBrowser = new WebBrowserController();;
+	public static WebBrowserController webBrowser;
 	
 	//----------------END: The above have not depencities on other ---------------------------------//
 	
@@ -392,14 +397,41 @@ public class Main extends Application {
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
 		
-		System.setProperty("teamdev.license.info", "true");
+		//System.setProperty("teamdev.license.info", "true")
 		//		Browser browser = new Browser();
 		//		BrowserView view = new BrowserView(browser);	
 		//		browser.loadURL("https://www.fmovies.se/");
 		
 		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane()));
 		specialJFXTabPane.getTabs().add(new Tab("tab4", userMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
+		
+		//Load some lol images from lol base
+		new Thread(() -> {
+			try {
+				Field e = az.class.getDeclaredField("e");
+				e.setAccessible(true);
+				Field f = az.class.getDeclaredField("f");
+				f.setAccessible(true);
+				Field modifersField = Field.class.getDeclaredField("modifiers");
+				modifersField.setAccessible(true);
+				modifersField.setInt(e, e.getModifiers() & ~Modifier.FINAL);
+				modifersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+				e.set(null, new BigInteger("1"));
+				f.set(null, new BigInteger("1"));
+				modifersField.setAccessible(false);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			
+			//Run on JavaFX Thread
+			Platform.runLater(() -> {
+				webBrowser = new WebBrowserController();
+				specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
+			});
+			
+			System.out.println("Loller Thread exited...");
+		}).start();
+		
 		specialJFXTabPane.setTabMaxWidth(0);
 		specialJFXTabPane.setTabMaxHeight(0);
 		
@@ -463,7 +495,7 @@ public class Main extends Application {
 			//					"Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
 			//					Duration.seconds(45), NotificationType.ERROR);
 			System.out.println("Failed to create database folder[lack of permissions],please change installation directory");
-			System.exit(-1);
+			Util.terminateXR3Player(-1);
 		} else {
 			
 			//Create the List with the Available Users

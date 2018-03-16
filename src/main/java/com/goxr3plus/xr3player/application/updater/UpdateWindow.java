@@ -41,6 +41,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.Util;
 
 /**
  * @author GOXR3PLUS
@@ -591,7 +592,7 @@ public class UpdateWindow extends StackPane {
 						if (line.isEmpty())
 							break;
 						if (line.contains(applicationName + " Application Started"))
-							System.exit(0);
+							Util.terminateXR3Player(0);
 					}
 				
 			} catch (IOException | InterruptedException ex) {
