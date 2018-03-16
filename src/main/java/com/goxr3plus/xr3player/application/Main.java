@@ -57,9 +57,9 @@ import main.java.com.goxr3plus.xr3player.application.modes.librarymode.LibraryMo
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserMode;
+import main.java.com.goxr3plus.xr3player.application.modes.moviemode.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
-import main.java.com.goxr3plus.xr3player.application.presenter.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
