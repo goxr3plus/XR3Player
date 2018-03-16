@@ -185,7 +185,7 @@
 	<!-- Dependencies -->
 
 	<dependencies>
-	    <!-- Image4j -->
+		<!-- Image4j -->
 		<dependency>
 			<groupId>com.github.imcdonagh</groupId>
 			<artifactId>image4j</artifactId>
@@ -332,6 +332,12 @@
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
 			<version>3.0.6</version>
+		</dependency>
+		<!-- Plularizer -->
+		<dependency>
+			<groupId>org.atteo</groupId>
+			<artifactId>evo-inflector</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 		<!-- <dependency> <groupId>net.java.dev.jna</groupId> <artifactId>jna</artifactId> 
 			<version>4.2.0</version> </dependency> -->

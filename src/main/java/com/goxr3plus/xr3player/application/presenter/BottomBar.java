@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
@@ -31,13 +32,16 @@ public class BottomBar extends BorderPane {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private JFXToggleButton speechRecognitionToggle;
+	private HBox hBox;
+	
+	@FXML
+	private JFXToggleButton showHideSideBar;
 	
 	@FXML
 	private JFXToggleButton keyBindings;
 	
 	@FXML
-	private JFXToggleButton showHideSideBar;
+	private JFXToggleButton speechRecognitionToggle;
 	
 	@FXML
 	private Label internetConnectionLabel;
@@ -201,8 +205,7 @@ public class BottomBar extends BorderPane {
 				ramMonitor.restartUpdater();
 		});
 		
-		super.getChildren().add(cpuMonitor);
-		super.getChildren().add(ramMonitor);
+		hBox.getChildren().addAll(cpuMonitor, ramMonitor);
 		
 		// -- searchField
 		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
@@ -214,7 +217,6 @@ public class BottomBar extends BorderPane {
 	public JFXToggleButton getKeyBindings() {
 		return keyBindings;
 	}
-	
 	
 	/**
 	 * @return the speechRecognitionToggle

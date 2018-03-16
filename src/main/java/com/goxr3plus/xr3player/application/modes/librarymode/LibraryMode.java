@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import org.atteo.evo.inflector.English;
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.beans.InvalidationListener;
@@ -376,8 +378,13 @@ public class LibraryMode extends BorderPane {
 		//		}));
 		
 		//----librariesInfoLabel
-		librariesInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), " ] Libraries", " , [ ",
-				openedLibraries, " ] Opened", " , [ ", emptyLibraries, " ] Empty"));
+		librariesInfoLabel.textProperty()
+				.bind(Bindings
+						.createStringBinding(
+								() -> "[ " + teamViewer.getViewer().itemsWrapperProperty().sizeProperty().get() + " ] "
+										+ English.plural("Library", teamViewer.getViewer().itemsWrapperProperty().sizeProperty().get()) + " , [ " + openedLibraries.get()
+										+ " ] Opened , [ " + emptyLibraries.get() + " ] Empty",
+								teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), openedLibraries, emptyLibraries));
 		
 		//== colorPicker
 		String defaultWebColor = "#ef4949";

@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -35,6 +36,9 @@ public class WelcomeScreen extends StackPane {
 	
 	@FXML
 	private MediaView mediaView;
+	
+	@FXML
+	private HBox topHBox;
 	
 	@FXML
 	private JFXCheckBox showOnStartUp;
@@ -125,7 +129,6 @@ public class WelcomeScreen extends StackPane {
 				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
 				soundPlayer.play();
 				
-				
 				//Set the background Image
 				setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
 						BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
@@ -170,6 +173,13 @@ public class WelcomeScreen extends StackPane {
 	 */
 	public void setVersionLabel(Label versionLabel) {
 		this.versionLabel = versionLabel;
+	}
+	
+	/**
+	 * @return the topHBox
+	 */
+	public HBox getTopHBox() {
+		return topHBox;
 	}
 	
 }

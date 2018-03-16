@@ -317,6 +317,9 @@ public class Main extends Application {
 		window.show();
 		window.close();
 		
+		//welcomeScreen
+		scene.setMoveControl(welcomeScreen.getTopHBox());
+		
 		//Continue
 		startPart2();
 		

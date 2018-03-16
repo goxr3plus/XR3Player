@@ -3,6 +3,7 @@
  */
 package main.java.com.goxr3plus.xr3player.application.presenter;
 
+import org.atteo.evo.inflector.English;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.application.Platform;
@@ -210,9 +211,9 @@ public class SearchBox extends HBox {
 		private void done() {
 			// Change Label text
 			if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
-				getSearchBoxWindow().setLabelText("Found [ " + found + " ] " + ( found == 1 ? "User" : " Users" ));
+				getSearchBoxWindow().setLabelText("Found [ " + found + " ] " + English.plural("User", found));
 			else if (searchBoxType == SearchBoxType.LIBRARYSEARCHBOX)
-				searchBoxWindow.setLabelText("Found [ " + found + " ] " + ( found == 1 ? "Library" : " Libraries" ));
+				searchBoxWindow.setLabelText("Found [ " + found + " ] " + English.plural("Library", found));
 			
 			// Show the Window
 			getSearchBoxWindow().getWindow().show();

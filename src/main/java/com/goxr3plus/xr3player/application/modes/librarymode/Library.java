@@ -46,6 +46,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 
 /**
  * A class which hold all the functionality of a digital library.
@@ -185,15 +186,13 @@ public class Library extends StackPane {
 		@Override
 		public void invalidated(Observable observable) {
 			
-			// Remove the Listener
-			Main.renameWindow.showingProperty().removeListener(this);
-			
+			ReadOnlyBooleanProperty p1;
+			p1 = Main.renameWindow.showingProperty();
+			p1.removeListener(this);
 			// !Showing
 			if (!Main.renameWindow.isShowing()) {
 				
-				// old && new -> name
-				String oldName = getLibraryName();
-				String newName = Main.renameWindow.getUserInput();
+				String oldName = getLibraryName() , newName = Main.renameWindow.getUserInput();
 				boolean duplicate = false;
 				
 				try {
@@ -213,8 +212,8 @@ public class Library extends StackPane {
 								libURename.setString(1, newName);
 								libURename.setString(2, oldName);
 								libURename.executeUpdate();
-							} catch (Exception ex) {
-								ex.printStackTrace();
+							} catch (Exception param) {
+								param.printStackTrace();
 							}
 							
 							// Rename library folder

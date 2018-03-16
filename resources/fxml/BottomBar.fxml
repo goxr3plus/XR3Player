@@ -15,7 +15,7 @@
 
 <fx:root prefHeight="30.0" prefWidth="1138.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;" BorderPane.alignment="CENTER">
+      <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;" BorderPane.alignment="CENTER">
          <children>
             <MenuButton minHeight="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="24.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings">
                <items>

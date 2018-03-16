@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
+import org.atteo.evo.inflector.English;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
@@ -423,7 +424,9 @@ public class LoginMode extends BorderPane {
 		youtubeTutorialsHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.TUTORIALS));
 		
 		//----usersInfoLabel
-		usersInfoLabel.textProperty().bind(Bindings.concat("[ ", teamViewer.itemsWrapperProperty().sizeProperty(), " ] Users"));
+		usersInfoLabel.textProperty().bind(Bindings.createStringBinding(
+				() -> "[ " + teamViewer.itemsWrapperProperty().sizeProperty().get() + " ] " + English.plural("User", teamViewer.itemsWrapperProperty().sizeProperty().get()),
+				teamViewer.itemsWrapperProperty().sizeProperty()));
 		
 		//splitPane
 		splitPane.setDividerPosition(0, 0.8);
