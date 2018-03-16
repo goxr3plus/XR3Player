@@ -3,9 +3,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root fx:id="root" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: white;" type="Pane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #202020;" type="Pane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <Label fx:id="label" layoutX="5.0" layoutY="3.0" style="-fx-text-fill: black; -fx-font-size: 13; -fx-font-weight: 400;" text="Stopped" />
+      <Label fx:id="label" layoutX="5.0" layoutY="3.0" style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: 400;" text="Stopped" />
   </children>
   
   <!--  

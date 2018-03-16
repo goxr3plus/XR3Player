@@ -291,7 +291,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		
 		// HBOX
 		HBox hBox = new HBox();
-		hBox.setSpacing(2);
+		hBox.setStyle("-fx-background-color:#000000;");
 		hBox.getChildren().addAll(imageView, tabImage, stack, marquee, closeButton);
 		
 		// --Drag Over

@@ -19,8 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.scenicview.ScenicView;
-
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.az;
 
@@ -61,6 +59,7 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserMode;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
+import main.java.com.goxr3plus.xr3player.application.presenter.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
@@ -401,13 +400,7 @@ public class Main extends Application {
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
-		
-		//System.setProperty("teamdev.license.info", "true")
-		//		Browser browser = new Browser();
-		//		BrowserView view = new BrowserView(browser);	
-		//		browser.loadURL("https://www.fmovies.se/");
-		
-		specialJFXTabPane.getTabs().add(new Tab("tab3", new BorderPane()));
+		specialJFXTabPane.getTabs().add(new Tab("tab3", new MovieModeController()));
 		specialJFXTabPane.getTabs().add(new Tab("tab4", userMode));
 		
 		//Load some lol images from lol base

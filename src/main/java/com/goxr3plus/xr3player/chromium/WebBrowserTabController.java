@@ -396,6 +396,7 @@ public class WebBrowserTabController extends StackPane {
 		
 		// HBOX
 		HBox hBox = new HBox();
+		hBox.setStyle("-fx-background-color:#000000;");
 		hBox.setOnMouseClicked(m -> {
 			if (m.getButton() == MouseButton.MIDDLE)
 				webBrowserController.removeTab(tab);
