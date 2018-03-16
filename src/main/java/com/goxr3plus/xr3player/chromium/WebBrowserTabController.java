@@ -374,20 +374,33 @@ public class WebBrowserTabController extends StackPane {
 		});
 		
 		//facIconImageView 
-		facIconImageView.setFitWidth(20);
-		facIconImageView.setFitHeight(20);
+		facIconImageView.setFitWidth(25);
+		facIconImageView.setFitHeight(25);
 		facIconImageView.setSmooth(true);
-		facIconImageView.setVisible(true);
-		//facIconImageView.visibleProperty().bind(indicator.visibleProperty().not())
-		//facIconImageView.managedProperty().bind(facIconImageView.imageProperty().isNotNull().and(indicator.visibleProperty().not()))
+		
+		//iconLabel
+		Label iconLabel = new Label();
+		iconLabel.setGraphic(facIconImageView);
+		iconLabel.setStyle("-fx-background-color:#202020");
+		//iconLabel.visibleProperty().bind(indicator.visibleProperty().not())
+		//iconLabel.managedProperty().bind(facIconImageView.imageProperty().isNotNull().and(indicator.visibleProperty().not()))
+		
+		//X Button
+		JFXButton closeButton = new JFXButton("X");
+		int maxSize = 25;
+		closeButton.setMinSize(maxSize, maxSize);
+		closeButton.setPrefSize(maxSize, maxSize);
+		closeButton.setMaxSize(maxSize, maxSize);
+		closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
+		closeButton.setOnAction(a -> this.webBrowserController.removeTab(tab));
 		
 		// HBOX
 		HBox hBox = new HBox();
 		hBox.setOnMouseClicked(m -> {
 			if (m.getButton() == MouseButton.MIDDLE)
-				this.webBrowserController.removeTab(tab);
+				webBrowserController.removeTab(tab);
 		});
-		hBox.getChildren().addAll(facIconImageView, stack, marquee);
+		hBox.getChildren().addAll(iconLabel, stack, marquee, closeButton);
 		tab.setGraphic(hBox);
 		
 		//ContextMenu

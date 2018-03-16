@@ -268,6 +268,15 @@ public class OpenedLibrariesViewer extends StackPane {
 		imageView.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
 		imageView.managedProperty().bind(imageView.visibleProperty());
 		
+		//X Button
+		JFXButton closeButton = new JFXButton("X");
+		int maxSize = 25;
+		closeButton.setMinSize(maxSize, maxSize);
+		closeButton.setPrefSize(maxSize, maxSize);
+		closeButton.setMaxSize(maxSize, maxSize);
+		closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
+		closeButton.setOnAction(a -> removeTab(tab));
+		
 		//tabImage 
 		ImageView tabImage = new ImageView();
 		tabImage.setFitWidth(24);
@@ -283,7 +292,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		// HBOX
 		HBox hBox = new HBox();
 		hBox.setSpacing(2);
-		hBox.getChildren().addAll(imageView, tabImage, stack, marquee);
+		hBox.getChildren().addAll(imageView, tabImage, stack, marquee, closeButton);
 		
 		// --Drag Over
 		hBox.setOnDragOver(dragOver -> {
