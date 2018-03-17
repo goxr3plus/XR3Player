@@ -26,7 +26,6 @@
     <maxVersion>1.8.0_900</maxVersion>
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>32/64</runtimeBits>
-    <maxHeapSize>3064</maxHeapSize>
   </jre>
   <splash>
     <file>D:\GitHub\XR3Player\XR3Player Etc Files\images\spashScreen.bmp</file>
