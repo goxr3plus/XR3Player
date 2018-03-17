@@ -34,6 +34,8 @@ public class WebBrowserController extends StackPane {
 	
 	public static boolean MOVING_TITLES_ENABLED = true;
 	
+	public final ChromiumFullScreenController chromiumFullScreenController = new ChromiumFullScreenController();
+	
 	//------------------------------------------------------------
 	
 	@FXML

@@ -29,6 +29,7 @@ import com.teamdev.jxbrowser.chromium.events.NetError;
 import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
+import com.teamdev.jxbrowser.chromium.javafx.DefaultPopupHandler;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -78,6 +79,9 @@ public class WebBrowserTabController extends StackPane {
 	
 	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private Button goFullScreen;
 	
 	@FXML
 	private WebView webView;
@@ -209,6 +213,7 @@ public class WebBrowserTabController extends StackPane {
 		//-------------------BrowserView------------------------
 		browserView = new BrowserView(browser);
 		browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
+		browser.setPopupHandler(new DefaultPopupHandler());
 		borderPane.setCenter(browserView);
 		
 		//Continue
@@ -264,7 +269,7 @@ public class WebBrowserTabController extends StackPane {
 		
 		// indicator
 		ProgressIndicator indicator = new ProgressIndicator();
-		indicator.getStyleClass().add("dropbox-progress-indicator");		
+		indicator.getStyleClass().add("dropbox-progress-indicator");
 		//	indicator.progressProperty().bind(webEngine.getLoadWorker().progressProperty())
 		//	indicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty())
 		indicator.setMaxSize(20, 20);
@@ -490,6 +495,9 @@ public class WebBrowserTabController extends StackPane {
 			
 			alert.showAndWait();
 		});
+		
+		//goFullScreen
+		goFullScreen.setOnAction(a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
 	}
 	
 	/**
@@ -700,6 +708,13 @@ public class WebBrowserTabController extends StackPane {
 			//ex.printStackTrace()
 			facIconImageView.setImage(null);
 		}
+	}
+	
+	/**
+	 * @return the borderPane
+	 */
+	public BorderPane getBorderPane() {
+		return borderPane;
 	}
 	
 	/**

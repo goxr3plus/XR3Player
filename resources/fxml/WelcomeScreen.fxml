@@ -70,7 +70,7 @@
             <DropShadow />
          </effect>
          <children>
-            <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 0; -fx-font-size: 30;" text="Start" textAlignment="CENTER" wrapText="true">
+            <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 90; -fx-font-size: 30;" text="Start" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

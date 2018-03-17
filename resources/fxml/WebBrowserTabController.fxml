@@ -30,6 +30,24 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="667.0" VBox.vgrow="ALWAYS">
                      <children>
+                        <Button fx:id="goFullScreen" layoutX="10.0" layoutY="15.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                           <graphic>
+                              <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                 <image>
+                                    <Image url="@../image/extend.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="FULL SCREEN MODE" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
                         <Button fx:id="backwardButton" mnemonicParsing="false" style="-fx-background-radius: 45 0 0 45;">
                            <graphic>
                               <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
