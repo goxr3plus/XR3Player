@@ -197,11 +197,6 @@
 			<artifactId>jxbrowser-win</artifactId>
 			<version>6.19.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.teamdev.jxbrowser</groupId>
-			<artifactId>jxbrowser-linux64</artifactId>
-			<version>6.19.1</version>
-		</dependency>
 		<!-- JAVAFX GRAPHICS LIBRARIES -->
 		<dependency>
 			<groupId>org.controlsfx</groupId>

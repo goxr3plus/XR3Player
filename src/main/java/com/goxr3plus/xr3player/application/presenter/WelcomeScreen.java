@@ -59,8 +59,6 @@ public class WelcomeScreen extends StackPane {
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	private final String LOADING_SCREEN_PATH = getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toString();
-	private final String LOADING_SCREEN_SOUND = getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toString();
 	
 	private MediaPlayer mediaPlayer;
 	private MediaPlayer soundPlayer;
@@ -112,7 +110,7 @@ public class WelcomeScreen extends StackPane {
 				
 				mediaView.setFitWidth(Main.window.getWidth());
 				mediaView.setFitHeight(Main.window.getHeight());
-				mediaPlayer = new MediaPlayer(new Media(LOADING_SCREEN_PATH));
+				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
 				mediaView.setMediaPlayer(mediaPlayer);
 				mediaPlayer.setAutoPlay(true);
 				//mediaPlayer.setRate(3.0)
@@ -125,7 +123,7 @@ public class WelcomeScreen extends StackPane {
 				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
 				
 				//Start the stream player
-				soundPlayer = new MediaPlayer(new Media(LOADING_SCREEN_SOUND));
+				soundPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString()));
 				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
 				soundPlayer.play();
 				
