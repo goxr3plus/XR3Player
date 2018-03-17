@@ -118,6 +118,8 @@ public class Main extends Application {
 		
 		System.out.println("Outside of Application Start Method");
 		
+		//Extract Location
+		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabasePathWithSeparator());
 	}
 	
 	/**
@@ -472,7 +474,7 @@ public class Main extends Application {
 		bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
 		
 		//-------------TOP BAR--------------------
-	//	bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
+		//	bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
 		//bottomBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
 		
 	}

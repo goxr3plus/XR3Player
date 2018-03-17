@@ -51,6 +51,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -167,19 +168,15 @@ public class WebBrowserTabController extends StackPane {
 	@FXML
 	private void initialize() {
 		
+		//StackPane
+		setOnKeyReleased(k -> {
+			if (k.getCode() == KeyCode.F11)
+				webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this);
+		});
+		
 		//---------------ERROR PANE---
 		//tryAgain
 		tryAgain.setOnAction(a -> checkForInternetConnection());
-		
-		//-------------------WebView------------------------	
-		// hide webview scrollbars whenever they appear.
-		//	webView.getChildrenUnmodifiable().addListener((Change<? extends Node> change) -> {
-		//	    Set<Node> deadSeaScrolls = webView.lookupAll(".scroll-bar");
-		//	    for (Node scroll : deadSeaScrolls) {
-		//		scroll.setVisible(false);
-		//		scroll.setManaged(false);
-		//	    }
-		//	});
 		
 		//-------------------Browser------------------------
 		browser = new Browser();

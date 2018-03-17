@@ -24,6 +24,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3capture.tools.ActionTool;
+import main.java.com.goxr3plus.xr3capture.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -74,7 +76,8 @@ public class ChromiumFullScreenController extends StackPane {
 		window.initStyle(StageStyle.UNDECORATED);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setAlwaysOnTop(false);
-		window.setFullScreenExitHint("Press ESCAPE to exit full screen ");
+		window.setFullScreenExitHint("Press F11 to exit full screen");
+		//window.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.F11))
 		window.setOnCloseRequest(c -> removeBrowserView());
 		
 		// FXMLLOADER
@@ -101,13 +104,9 @@ public class ChromiumFullScreenController extends StackPane {
 		scene.setFill(Color.rgb(0, 0, 0));
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		
-		this.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent);
-		window.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent);
-		scene.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent);
-		
 		// -- KeyListeners
 		scene.setOnKeyReleased(key -> {
-			if (key.getCode() == KeyCode.ESCAPE)
+			if (key.getCode() == KeyCode.F11)
 				removeBrowserView();
 		});
 		
@@ -142,7 +141,7 @@ public class ChromiumFullScreenController extends StackPane {
 		this.webBrowserTabController = webBrowserTabController;
 		
 		//Add Event Handler
-		browserView.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent);
+		//browserView.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent)
 		
 		//Set the browserView
 		webBrowserTabController.getBorderPane().setCenter(null);
@@ -152,9 +151,9 @@ public class ChromiumFullScreenController extends StackPane {
 		
 		//Show the window on full screen
 		window.setFullScreen(true);
-		window.toFront();
 		window.show();
-		window.toFront();
+		
+		ActionTool.showNotification("Hint!", "Press F11 to exit full screen ", Duration.seconds(2), NotificationType.INFORMATION);
 	}
 	
 	/**
@@ -163,7 +162,7 @@ public class ChromiumFullScreenController extends StackPane {
 	private void removeBrowserView() {
 		
 		//Remove Event Handler
-		this.browserView.removeEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent);
+		//this.browserView.removeEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent)
 		
 		//Restore the browserView
 		browserPane.getChildren().remove(null);
