@@ -29,7 +29,7 @@
          <children>
             <VBox alignment="CENTER" spacing="1.0">
                <children>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" spacing="5.0">
                      <children>
                         <Button fx:id="restartButton" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="R">
                            <tooltip>
@@ -77,7 +77,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Change Background">
+                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Background">
                      <items>
                         <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
                         <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />

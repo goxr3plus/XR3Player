@@ -846,6 +846,7 @@
   .windowButton{
   	-fx-font-size:9.0;	
   	-fx-font-weight:bold;
+  	-fx-background-radius:0.0;
   }
   
   
@@ -1375,9 +1376,9 @@
 }*/
 
 .search-box-window-item{
-	-fx-background-color:rgb(0.0,0.0,0.0,0.9);
+	-fx-background-color:white;
 	/*-fx-background-radius:5.0;*/
-	-fx-text-fill:white;
+	-fx-text-fill:black;
 	-fx-font-size:15.0;	
 	-fx-font-weight:bold;
 	-fx-cursor:hand;
@@ -1385,8 +1386,8 @@
 }
 
 .search-box-window-item:hover{
-	-fx-background-color:black;	
-	-fx-text-fill:firebrick;
+	-fx-background-color:#353535;	
+	-fx-text-fill:white;
 }
 
 .search-box-window-label{

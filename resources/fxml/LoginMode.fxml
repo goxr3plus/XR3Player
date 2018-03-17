@@ -349,7 +349,7 @@
                   <Insets bottom="2.0" />
                </padding>
             </Label>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0" style="-fx-background-color: #151515;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0" style="-fx-background-color: #151515; -fx-background-radius: 0 0 15 15;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
@@ -399,7 +399,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Change Background">
+                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Background">
                     <items>
                       <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
                       <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />

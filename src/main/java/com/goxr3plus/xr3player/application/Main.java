@@ -114,12 +114,12 @@ public class Main extends Application {
 		
 		//----------Properties-------------
 		internalInformation.put("Version", APPLICATION_VERSION);
-		internalInformation.put("ReleasedDate", "18/03/2018");
+		internalInformation.put("ReleasedDate", "17/03/2018");
 		
 		System.out.println("Outside of Application Start Method");
 		
 		//Extract Location
-		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabasePathWithSeparator());
+		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
 	}
 	
 	/**
@@ -488,6 +488,12 @@ public class Main extends Application {
 		
 		//Set Update Screen Visible
 		updateScreen.setVisible(true);
+		
+		//Create Chromium Folder
+		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium", FileType.DIRECTORY)) {
+			System.out.println("Failed to create chromium folder");
+			Util.terminateXR3Player(-1);
+		}
 		
 		//Create Database folder if not exists
 		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
