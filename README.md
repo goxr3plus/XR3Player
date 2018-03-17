@@ -1,4 +1,4 @@
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( Modern + Advanced JavaFX Media Player) [![Download XR3Player](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/xr3player/files/V3.97/XR3Player.Update.97.zip/download)
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player ( New Generation JavaFX Media Player) [![Download XR3Player](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/xr3player/files/V3.97/XR3Player.Update.97.zip/download)
 #### TODO List -> Make it the best Media Player ever created!
 
 
@@ -44,7 +44,7 @@
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png) | ![Sec](https://user-images.githubusercontent.com/20374208/32561528-18323d74-c4b5-11e7-9552-f7aeba4f9728.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png) | ![Sec](https://user-images.githubusercontent.com/20374208/37551127-97cb65ea-29a2-11e8-8bad-37a459255cbc.png) |
 
 | Dropbox Access | Amazing Visualizations
 |:-:|:-:|
