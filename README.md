@@ -1,19 +1,6 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player [![Download XR3Player](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/xr3player/files/V3.97/XR3Player.Update.97.zip/download) 
-# ( New Generation JavaFX Media Player) 
-#### TODO List -> Make it the best Media Player ever created!
 
-
-### !IMPORTANT NOTIFICATION!
-
-#### > ----XR3Player Update 97 will be the last for Java 8 ----
-
-#### > ----XR3Player Update 98++ will need Java 9 ----
-
-
-
-## Download XR3Player
-
-> Download it visiting [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
+> [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
@@ -30,6 +17,13 @@
 [license-url]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image1]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image2]: https://img.shields.io/github/license/tldr-pages/tldr.svg
+
+### !IMPORTANT NOTIFICATION!
+
+#### > ----XR3Player Update 97 will be the last for Java 8 ----
+
+#### > ----XR3Player Update 98++ will need Java 9 ----
+
 
 ### Videos
 
