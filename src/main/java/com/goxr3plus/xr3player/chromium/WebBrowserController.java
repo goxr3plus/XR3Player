@@ -178,7 +178,7 @@ public class WebBrowserController extends StackPane {
 	 * @param webSite
 	 */
 	public void addNewTabOnTheEnd(String webSite) {
-		tabPane.getTabs().add(tabPane.getTabs().indexOf(tabPane.getSelectionModel().getSelectedItem()) + 1, createNewTab(webSite).getTab());
+		tabPane.getTabs().add(createNewTab(webSite).getTab());
 	}
 	
 	/**
