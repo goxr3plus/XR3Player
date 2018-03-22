@@ -20,9 +20,9 @@
 
 ### !IMPORTANT NOTIFICATION!
 
-#### > ----XR3Player Update 97 will be the last for Java 8 ----
+#### > ----XR3Player Update 100 will be the last for Java 8 ----
 
-#### > ----XR3Player Update 98++ will need Java 9 ----
+#### > ----XR3Player Update 101++ will need Java 9 ----
 
 
 ### Videos
@@ -117,6 +117,12 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 * Write the code for your feature or bug fix
 * Commit and do not mess with version or history
 * Submit a pull request
+
+## About JXBrowser
+
+>XR3Player uses JxBrowser http://www.teamdev.com/jxbrowser, which is a proprietary software, owned by TeamDev Ltd. The use of JxBrowser >is governed by JxBrowser Product Licence Agreement http://www.teamdev.com/jxbrowser-licence-agreement. 
+>You may not use JxBrowser separately from XR3Player project without explicit permission of TeamDev Ltd.
+
 
 ## Specs / Open-source libraries:
 
