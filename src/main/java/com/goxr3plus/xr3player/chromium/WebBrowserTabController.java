@@ -20,6 +20,11 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.ContextMenuHandler;
 import com.teamdev.jxbrowser.chromium.ContextMenuParams;
+import com.teamdev.jxbrowser.chromium.PopupContainer;
+import com.teamdev.jxbrowser.chromium.PopupHandler;
+import com.teamdev.jxbrowser.chromium.PopupParams;
+import com.teamdev.jxbrowser.chromium.events.DisposeEvent;
+import com.teamdev.jxbrowser.chromium.events.DisposeListener;
 import com.teamdev.jxbrowser.chromium.events.FailLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.FrameLoadEvent;
@@ -34,11 +39,13 @@ import com.teamdev.jxbrowser.chromium.javafx.DefaultPopupHandler;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -58,7 +65,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
@@ -180,6 +189,18 @@ public class WebBrowserTabController extends StackPane {
 		
 		//-------------------Browser------------------------
 		browser = new Browser();
+		browser.setPopupHandler(new PopupHandler() {
+		    public PopupContainer handlePopup(PopupParams params) {
+		        return new PopupContainer() {
+
+					@Override
+					public void insertBrowser(Browser browser , java.awt.Rectangle arg1) {
+						
+						System.out.println("PopUp occured!!!");
+					}
+				};
+			}
+		});
 		
 		//--Render Listener
 		//		browser.addRenderListener(new RenderListener() {
@@ -210,7 +231,7 @@ public class WebBrowserTabController extends StackPane {
 		//-------------------BrowserView------------------------
 		browserView = new BrowserView(browser);
 		browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
-		browser.setPopupHandler(new DefaultPopupHandler());
+		//browser.setPopupHandler(new DefaultPopupHandler());
 		borderPane.setCenter(browserView);
 		
 		//Continue
