@@ -109,5 +109,13 @@ public class PlayListModesTabPane extends StackPane {
 	public Tab getSearchEverythingTab() {
 		return searchEverythingTab;
 	}
+
+	/**
+	 * @return the openedLibrariesTab
+	 */
+	public Tab getOpenedLibrariesTab() {
+		return openedLibrariesTab;
+	}
+
 	
 }

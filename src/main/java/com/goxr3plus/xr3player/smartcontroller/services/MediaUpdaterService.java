@@ -55,9 +55,6 @@ public class MediaUpdaterService {
 				for (;; Thread.sleep(900)) {
 					
 					startFilteringControllers();
-					//	else {
-					//		System.out.println("Media Updater Service not entered...");
-					//	}
 					
 				}
 				
@@ -91,19 +88,20 @@ public class MediaUpdaterService {
 			if (Main.topBar.isTabSelected(0) || Main.topBar.isTabSelected(1)) {
 				
 				//Selected + Opened Library
-				libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> {
-					
-					//Find the controller
-					SmartController controller = (SmartController) Main.libraryMode.openedLibrariesViewer.getTab(selectedLibrary.getLibraryName()).getContent();
-					
-					//Normal Mode
-					if (controller.getNormalModeTab().isSelected())
-						filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
-					
-					//Filters Mode 
-					else if (controller.getFiltersModeTab().isSelected())
-						selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems();
-				});
+				if (Main.playListModesTabPane.getOpenedLibrariesTab().isSelected())
+					libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> {
+						
+						//Find the controller
+						SmartController controller = (SmartController) Main.libraryMode.openedLibrariesViewer.getTab(selectedLibrary.getLibraryName()).getContent();
+						
+						//Normal Mode
+						if (controller.getNormalModeTab().isSelected())
+							filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
+						
+						//Filters Mode 
+						else if (controller.getFiltersModeTab().isSelected())
+							selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems();
+					});
 				
 				//-------------
 				
