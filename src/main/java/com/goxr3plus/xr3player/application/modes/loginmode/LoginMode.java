@@ -3,13 +3,17 @@
  */
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.atteo.evo.inflector.English;
@@ -328,18 +332,19 @@ public class LoginMode extends BorderPane {
 				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
 				
 				//----sourceForgeDownloadsLabel
-				//				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
-				//				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-				//				httpcon.setConnectTimeout(10000);
-				//				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-				//				
-				//				//Read line by line
-				//				String responseSB = in.lines().collect(Collectors.joining());
-				//				in.close();
-				//				
-				//				System.out.println(responseSB);
-				//				String text = "Sourceforge: [ " + responseSB.split("/total")[0].split("x=\"98.5\" y=\"14\">")[1] + " ]";
-				Platform.runLater(() -> sourceForgeDownloadsLabel.setText("Sourceforge: [ ? ]"));
+				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
+				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+				httpcon.setConnectTimeout(10000);
+				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				
+				//Read line by line
+				String responseSB = in.lines().collect(Collectors.joining());
+				in.close();
+				
+				//System.out.println(responseSB)
+				String splitPart_0 = responseSB.split("/total")[0];
+				String text = "Sourceforge: [ " + splitPart_0.substring(splitPart_0.length() - 4, splitPart_0.length()).replace(">", "") + " ]";
+				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
 				//				
 				//throw new IOException("Exception get out of the building!!!")
 			} catch (Exception ex) {
