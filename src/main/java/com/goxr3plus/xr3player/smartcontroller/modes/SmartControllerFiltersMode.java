@@ -155,7 +155,7 @@ public class SmartControllerFiltersMode extends StackPane {
 				filterMenuButton.setText("Filter : " + text);
 				
 				//Change Tab Label
-				smartController.getArtistsModeTab().setText("Filter : " + text);
+				smartController.getFiltersModeTab().setText("Filter : " + text);
 				
 				//System.out.println("Selected Filter entered...")
 			}

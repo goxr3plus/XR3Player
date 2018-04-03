@@ -79,7 +79,6 @@ public class PlayListModesTabPane extends StackPane {
 		//
 		searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
 		
-		
 		//Select the second Tab
 		onlineMusicTab.getTabPane().getSelectionModel().select(1);
 	}
@@ -95,6 +94,20 @@ public class PlayListModesTabPane extends StackPane {
 		//In case of Search Window Tab  Request focus of Search Field
 		//if (index == 2)
 		//	Main.searchWindowSmartController.getSearchService().getSearchField().requestFocus();
+	}
+	
+	/**
+	 * @return the emotionListsTab
+	 */
+	public Tab getEmotionListsTab() {
+		return emotionListsTab;
+	}
+	
+	/**
+	 * @return the searchEverythingTab
+	 */
+	public Tab getSearchEverythingTab() {
+		return searchEverythingTab;
 	}
 	
 }

@@ -235,7 +235,7 @@
                   </ImageView>
                </graphic>
             </Tab>
-            <Tab fx:id="artistsModeTab" text="Filter : Artists">
+            <Tab fx:id="filtersModeTab" text="Filter : Artists">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>

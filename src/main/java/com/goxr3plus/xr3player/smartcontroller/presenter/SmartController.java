@@ -125,7 +125,7 @@ public class SmartController extends StackPane {
 	private Tab foldersModeTab;
 	
 	@FXML
-	private Tab artistsModeTab;
+	private Tab filtersModeTab;
 	
 	@FXML
 	private VBox indicatorVBox;
@@ -191,7 +191,6 @@ public class SmartController extends StackPane {
 	
 	/** CopyOrMoveService */
 	private final FilesExportService copyOrMoveService;
-	
 	
 	// ---------Security---------------------------
 	
@@ -446,7 +445,7 @@ public class SmartController extends StackPane {
 		
 		//------------------------SMART CONTROLLER MODES-----------------
 		foldersModeTab.setContent(foldersMode);
-		artistsModeTab.setContent(filtersMode);
+		filtersModeTab.setContent(filtersMode);
 		
 		//--Change Listener for Modes Tab Pane
 		modesTabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
@@ -456,7 +455,7 @@ public class SmartController extends StackPane {
 			} else if (newValue == foldersModeTab) { //foldersModeTab
 				filtersMode.getService().cancel();
 				foldersMode.recreateTree();
-			} else if (newValue == artistsModeTab) { //artistsModeTab
+			} else if (newValue == filtersModeTab) { //artistsModeTab
 				foldersMode.getService().cancel();
 				filtersMode.regenerate();
 			}
@@ -546,7 +545,7 @@ public class SmartController extends StackPane {
 		// Remove selected items
 		if (genre == Genre.SEARCHWINDOW) {
 			
-			if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
+			if (modesTabPane.getSelectionModel().getSelectedItem() == filtersModeTab) {
 				
 				//Call the delete for each selected item
 				filtersMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
@@ -561,7 +560,7 @@ public class SmartController extends StackPane {
 		} else
 			try (PreparedStatement preparedDelete = Main.dbManager.getConnection().prepareStatement("DELETE FROM '" + dataBaseTableName + "' WHERE PATH=?")) {
 				
-				if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
+				if (modesTabPane.getSelectionModel().getSelectedItem() == filtersModeTab) {
 					
 					//Call the delete for each selected item
 					filtersMode.getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().iterator()
@@ -676,7 +675,7 @@ public class SmartController extends StackPane {
 		} else {
 			
 			//Check if we are on artists mode
-			if (modesTabPane.getSelectionModel().getSelectedItem() == artistsModeTab) {
+			if (modesTabPane.getSelectionModel().getSelectedItem() == filtersModeTab) {
 				
 				//Keep a reference
 				MediaTableViewer artists_mode_MediaTableViewer = filtersMode.getMediaTableViewer();
@@ -1274,12 +1273,18 @@ public class SmartController extends StackPane {
 		return modesTabPane;
 	}
 	
+	/**
+	 * @return the filtersModeTab
+	 */
+	public Tab getFiltersModeTab() {
+		return filtersModeTab;
+	}
 	
 	/**
-	 * @return the artistsModeTab
+	 * @return the normalModeTab
 	 */
-	public Tab getArtistsModeTab() {
-		return artistsModeTab;
+	public Tab getNormalModeTab() {
+		return normalModeTab;
 	}
 	
 	/*-----------------------------------------------------------------------

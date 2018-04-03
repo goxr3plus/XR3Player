@@ -304,6 +304,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	// -----------------------------------------------------------------------------
 	
+	private boolean isExtended = false;
+	
 	public final Logger logger = Logger.getLogger(getClass().getName());
 	
 	// ------------------------- Images/ImageViews --------------------------
@@ -655,10 +657,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//extendPlayer
 		extendPlayer.textProperty().bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore").otherwise("Extend"));
 		extendPlayer.setOnAction(ac -> {
-			if (xPlayerWindow.getWindow().isShowing())
-				xPlayerWindow.close();
-			else
+			if (!xPlayerWindow.getWindow().isShowing()) {
 				xPlayerWindow.show();
+				isExtended = true;
+			} else {
+				xPlayerWindow.close();
+				isExtended = false;
+			}
 		});
 		
 		//transferMedia
@@ -1853,4 +1858,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return modeToggle;
 		
 	}
+	
+	/**
+	 * @return the isExtended
+	 */
+	public boolean isExtended() {
+		return isExtended;
+	}
+	
 }

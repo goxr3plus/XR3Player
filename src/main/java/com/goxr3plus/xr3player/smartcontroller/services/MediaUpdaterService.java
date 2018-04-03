@@ -19,6 +19,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -51,8 +52,14 @@ public class MediaUpdaterService {
 				Platform.runLater(() -> threadStopped.set(false));
 				
 				//Run forever , except if i interrupt it ;)
-				for (;; Thread.sleep(900))
+				for (;; Thread.sleep(900)) {
+					
 					startFilteringControllers();
+					//	else {
+					//		System.out.println("Media Updater Service not entered...");
+					//	}
+					
+				}
 				
 			} catch (Exception ex) {
 				Main.logger.log(Level.INFO, "", ex);
@@ -80,45 +87,90 @@ public class MediaUpdaterService {
 		
 		try {
 			
-			//Filter Selected Opened Libraries Normal Mode TableViews  
-			libraryMode.openedLibrariesViewer.getSelectedLibrary()
-					.ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList()));
+			//Don't enter in case of 
+			if (Main.topBar.isTabSelected(0) || Main.topBar.isTabSelected(1)) {
+				
+				//Selected + Opened Library
+				libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> {
+					
+					//Find the controller
+					SmartController controller = (SmartController) Main.libraryMode.openedLibrariesViewer.getTab(selectedLibrary.getLibraryName()).getContent();
+					
+					//Normal Mode
+					if (controller.getNormalModeTab().isSelected())
+						filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
+					
+					//Filters Mode 
+					else if (controller.getFiltersModeTab().isSelected())
+						selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems();
+				});
+				
+				//-------------
+				
+				//Search Window
+				if (Main.playListModesTabPane.getSearchEverythingTab().isSelected()) {
+					
+					//Find the controller
+					SmartController controller = (SmartController) Main.playListModesTabPane.getSearchEverythingTab().getContent();
+					
+					//Normal Mode
+					if (controller.getNormalModeTab().isSelected())
+						filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.getItemsObservableList());
+					
+					//Filter mode
+					else if (controller.getFiltersModeTab().isSelected())
+						filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.filtersMode.getMediaTableViewer().getTableView().getItems());
+				}
+			}
 			
-//			//Do Sorting of Normal Mode TableViews 
-//			Platform.runLater(() -> libraryMode.openedLibrariesViewer.getSelectedLibrary()
-//					.ifPresent(selectedLibrary -> selectedLibrary.getSmartController().getNormalModeMediatTableViewer().sortTable()));
-//			
-			//Filter Selected Opened Libraries Filters Mode TableViews  
-			libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> filterController(selectedLibrary.getSmartController(),
-					selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems()));
+			//XPlayers
+			Main.xPlayersList.getList().stream()
+					//Only if the Settings Mode is selected
+					.filter(xPlayerController -> xPlayerController.getSettingsToggle().isSelected())
+					//Extra filtering
+					.filter(xPlayerController -> {
+						//If extended pass
+						if (xPlayerController.isExtended())
+							return true;
+						//Or else check more through
+						else {
+							//For player 0
+							if (xPlayerController.getKey() == 0 && Main.topBar.isTabSelected(0))
+								return true;
+							//For other players
+							else if (xPlayerController.getKey() != 0 && Main.topBar.isTabSelected(1))
+								return true;
+						}
+						return false;
+					})
+					//Map the filtered XPlayerControllers
+					.map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(controller -> {
+						
+						//Normal Mode  
+						if (controller.getNormalModeTab().isSelected())
+							filterController(controller, controller.getItemsObservableList());
+						
+						//Filters Mode
+						else if (controller.getFiltersModeTab().isSelected())
+							filterController(controller, controller.filtersMode.getMediaTableViewer().getTableView().getItems());
+					});
 			
 			//--
 			
-			//Filter XPlayer PlayLists Normal Mode TableViews   
-			Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-					.forEach(smartController -> filterController(smartController, smartController.getItemsObservableList()));
-			
-			//Filter XPlayer PlayLists Filters Mode TableViews  
-			Main.xPlayersList.getList().stream().map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-					.forEach(smartController -> filterController(smartController, smartController.filtersMode.getMediaTableViewer().getTableView().getItems()));
-			
-			//--
-			
-			//Filter Emotion Lists Normal Mode TableViews   
-			Main.emotionsTabPane.getTabPane().getTabs()
-					.forEach(tab -> filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).getItemsObservableList()));
-			
-			//Filter Emotion Lists Filters Mode TableViews  
-			Main.emotionsTabPane.getTabPane().getTabs().forEach(tab -> filterController((SmartController) tab.getContent(),
-					( (SmartController) tab.getContent() ).filtersMode.getMediaTableViewer().getTableView().getItems()));
+			//Don't enter in case of 
+			if ( ( Main.topBar.isTabSelected(0) || Main.topBar.isTabSelected(1) ) && Main.playListModesTabPane.getEmotionListsTab().isSelected())
+				//Filter Emotion Lists Normal Mode TableViews   
+				Main.emotionsTabPane.getTabPane().getTabs().stream().filter(Tab::isSelected).findFirst().ifPresent(tab -> {
+					
+					//Normal Mode
+					filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).getItemsObservableList());
+					
+					//Filters Mode
+					filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).filtersMode.getMediaTableViewer().getTableView().getItems());
+					
+				});
 			
 			//--
-			
-			//Filter SearchWindow Normal Mode TableViews  
-			filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.getItemsObservableList());
-			
-			//Filter SearchWindow SmartController
-			filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.filtersMode.getMediaTableViewer().getTableView().getItems());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
