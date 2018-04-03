@@ -110,11 +110,11 @@ public class Main extends Application {
 	public static final int APPLICATION_VERSION = 97;
 	static {
 		//Important for Web Browser
-		System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
 		
 		//----------Properties-------------
 		internalInformation.put("Version", APPLICATION_VERSION);
-		internalInformation.put("ReleasedDate", "17/03/2018");
+		internalInformation.put("ReleasedDate", "8/04/2018");
 		
 		System.out.println("Outside of Application Start Method");
 		
