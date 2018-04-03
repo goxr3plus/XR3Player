@@ -633,6 +633,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				modeToggleLabel.setText("Advanced");
 			}
 			
+			//Go away from history
+			settingsToggle.setSelected(false);
+			
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
 		});
