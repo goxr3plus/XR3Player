@@ -107,7 +107,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
 public class Main extends Application {
 	
 	public static Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 97;
+	public static final int APPLICATION_VERSION = 98;
 	static {
 		//Important for Web Browser
 		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
