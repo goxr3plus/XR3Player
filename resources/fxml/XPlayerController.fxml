@@ -327,7 +327,7 @@
                                                             </Button>
                                                          </graphic>
                                                       </Label>
-                                                      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Visualizers not available on XR3Player due to bug problems . Gonna fix it on future releases ." textAlignment="CENTER" wrapText="true" />
+                                                      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Visualizers not available on XR3Player due to bug problems . Gonna fix it on future releases ." textAlignment="CENTER" visible="false" wrapText="true" />
                                                    </children>
                                                 </StackPane>
                                              </items>
@@ -385,7 +385,7 @@
                               </GridPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>

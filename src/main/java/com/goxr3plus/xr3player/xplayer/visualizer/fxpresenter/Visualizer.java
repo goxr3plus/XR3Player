@@ -4,6 +4,7 @@
 package main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -139,12 +140,12 @@ abstract class Visualizer extends VisualizerDrawer {
 		@Override
 		public void start() {
 			// Values must be >0
-//			if (canvasWidth <= 0 || canvasHeight <= 0)
-//				canvasHeight = canvasWidth = 1;
-//			
-//			next50Milliseconds = nextSecond = 0L;
-//			super.start();
-//			running.set(true);
+			if (canvasWidth <= 0 || canvasHeight <= 0)
+				canvasHeight = canvasWidth = 1;
+			
+			next50Milliseconds = nextSecond = 0L;
+			super.start();
+			running.set(true);
 		}
 		
 		@Override
@@ -188,8 +189,7 @@ abstract class Visualizer extends VisualizerDrawer {
 		
 		@Override
 		public void handle(long nanos) {
-			
-			System.out.println("Animation Timer is Running");
+					
 			
 			//CHECK IF VISUALIZERS ARE ENABLED
 			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
@@ -246,6 +246,8 @@ abstract class Visualizer extends VisualizerDrawer {
 				framesPerSecond = 0;
 				nextSecond = nanos + ONE_SECOND_NANOS;
 			}
+			
+			//System.out.println("Animation Timer is Running");
 			
 			// Can draw?
 			if (draw) {

@@ -1303,7 +1303,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//Check if DSP is allowed
 		//if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
-		//	visualizer.writeDSP(pcmdata);
+		visualizer.writeDSP(pcmdata);
 		
 		if (!isDiscBeingDragged()) {
 			
