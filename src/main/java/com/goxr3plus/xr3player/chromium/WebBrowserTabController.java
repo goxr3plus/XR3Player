@@ -351,20 +351,18 @@ public class WebBrowserTabController extends StackPane {
 				@Override
 				public void onDocumentLoadedInMainFrame(LoadEvent event) {
 					System.out.println("Main frame document is loaded.");
-					System.out.println("Current Thread Name : " + Thread.currentThread().getName());
 					
+					//Backward and Forward buttons
 					boolean backwardDisabled = browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(1).getURL());
 					boolean forwardDisabled = browser.getCurrentNavigationEntry().getURL()
 							.equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL());
+					
+					//Strings
 					String currentTitle = browser.getTitle();
 					String currentURL = browser.getURL();
 					
-					System.out.println("Backward Disabled?( " + backwardDisabled + " ) ,\n Forward Disabled? ( " + forwardDisabled + " )");
-					System.out.println("Title : ( " + browser.getTitle() + " ) , URL : ( " + browser.getURL() + ")");
-					
 					//Run On JavaFX Thread
 					Platform.runLater(() -> {
-						//System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL())
 						
 						backwardButton.setDisable(backwardDisabled);
 						forwardButton.setDisable(forwardDisabled);
