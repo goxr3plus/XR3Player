@@ -30,7 +30,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -335,7 +334,7 @@ public final class ActionTool {
 	 *            The notification type
 	 */
 	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType) {
-		Platform.runLater(() -> showNotification(title, text, duration, notificationType, null, 0, 0));
+		Platform.runLater(() -> showNotification(title, text, duration, notificationType, null));
 	}
 	
 	/**
@@ -345,31 +344,24 @@ public final class ActionTool {
 	 *            The notification title
 	 * @param text
 	 *            The notification text
-	 * @param duration
+	 * @param d
 	 *            The duration that notification will be visible
 	 * @param notificationType
 	 *            The notification type
 	 */
-	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , Image image , int width , int height) {
+	public static void showNotification(String title , String text , Duration d , NotificationType notificationType , ImageView imageView) {
 		
 		//Check if it is JavaFX Application Thread
 		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> showNotification(title, text, duration, notificationType));
+			Platform.runLater(() -> showNotification(title, text, d, notificationType, imageView));
 			return;
 		}
 		
 		Notifications notification1;
-		if (image == null)
-			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(GeneralSettingsController.notificationPosition);
-		else {
-			ImageView imageView = new ImageView(image);
-			if (width != 0 && height != 0) {
-				imageView.setFitWidth(width);
-				imageView.setFitHeight(height);
-			}
-			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).graphic(imageView).darkStyle()
-					.position(GeneralSettingsController.notificationPosition);
-		}
+		if (imageView == null)
+			notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition);
+		else
+			notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(imageView);
 		
 		switch (notificationType) {
 			case CONFIRM:
@@ -394,48 +386,6 @@ public final class ActionTool {
 	}
 	
 	/**
-	 * Shows an Alert
-	 * 
-	 * @param title
-	 * @param headerText
-	 * @param contentText
-	 */
-	public static void showAlert(String title , String headerText , String contentText) {
-		
-		// Show Alert
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.initStyle(StageStyle.UTILITY);
-		alert.initOwner(Main.window);
-		//alert.setGraphic(questionImage)
-		alert.setTitle(title);
-		alert.setHeaderText(title);
-		alert.setContentText(contentText);
-		alert.showAndWait();
-	}
-	
-	/**
-	 * Makes a question to the user.
-	 *
-	 * @param text
-	 *            the text
-	 * @return true, if successful
-	 */
-	public static boolean doQuestion(String text , Stage window) {
-		boolean[] questionAnswer = { false };
-		
-		// Show Alert
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initStyle(StageStyle.UTILITY);
-		alert.initOwner(window);
-		alert.setGraphic(questionImage);
-		alert.setHeaderText("Question");
-		alert.setContentText(text);
-		alert.showAndWait().ifPresent(answer -> questionAnswer[0] = ( answer == ButtonType.OK ));
-		
-		return questionAnswer[0];
-	}
-	
-	/**
 	 * Makes a question to the user.
 	 *
 	 * @param text
@@ -448,90 +398,51 @@ public final class ActionTool {
 		boolean[] questionAnswer = { false };
 		
 		// Show Alert
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initOwner(window);
-		alert.initStyle(StageStyle.UTILITY);
-		alert.setGraphic(questionImage);
-		alert.setHeaderText(headerText);
-		alert.setContentText(text);
+		Alert alert = JavaFXTools.createAlert(null, headerText, text, AlertType.CONFIRMATION, StageStyle.UTILITY, window, questionImage);
 		
 		// Make sure that JavaFX doesn't cut the text with ...
 		alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label).forEach(item -> ( (Label) node ).setMinHeight(Region.USE_PREF_SIZE));
 		
-		// I noticed that height property is notified after width property
-		// that's why i choose to add the listener here
-		alert.heightProperty().addListener(l -> {
-			
-			// Width and Height of the Alert
-			int alertWidth = (int) alert.getWidth();
-			int alertHeight = (int) alert.getHeight();
-			
-			// Here it prints 0!!
-			//System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight);
-			
-			// Find the bounds of the node
-			Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-			int x = (int) ( bounds.getMinX() + bounds.getWidth() / 2 - alertWidth / 2 );
-			int y = (int) ( bounds.getMinY() + bounds.getHeight() / 2 - alertHeight / 2 );
-			
-			// Check if Alert goes out of the Screen on X Axis
-			if (x + alertWidth > InfoTool.getVisualScreenWidth())
-				x = (int) ( InfoTool.getVisualScreenWidth() - alertWidth );
-			else if (x < 0)
-				x = 0;
-			
-			// Check if Alert goes out of the Screen on Y AXIS
-			if (y + alertHeight > InfoTool.getVisualScreenHeight())
-				y = (int) ( InfoTool.getVisualScreenHeight() - alertHeight );
-			else if (y < 0)
-				y = 0;
-			
-			// Set the X and Y of the Alert
-			alert.setX(x);
-			alert.setY(y);
-		});
+		if (node != null) {
+			// I noticed that height property is notified after width property
+			// that's why i choose to add the listener here
+			alert.heightProperty().addListener(l -> {
+				
+				// Width and Height of the Alert
+				int alertWidth = (int) alert.getWidth();
+				int alertHeight = (int) alert.getHeight();
+				
+				// Here it prints 0!!
+				//System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight);
+				
+				// Find the bounds of the node
+				Bounds bounds = node.localToScreen(node.getBoundsInLocal());
+				int x = (int) ( bounds.getMinX() + bounds.getWidth() / 2 - alertWidth / 2 );
+				int y = (int) ( bounds.getMinY() + bounds.getHeight() / 2 - alertHeight / 2 );
+				
+				// Check if Alert goes out of the Screen on X Axis
+				if (x + alertWidth > InfoTool.getVisualScreenWidth())
+					x = (int) ( InfoTool.getVisualScreenWidth() - alertWidth );
+				else if (x < 0)
+					x = 0;
+				
+				// Check if Alert goes out of the Screen on Y AXIS
+				if (y + alertHeight > InfoTool.getVisualScreenHeight())
+					y = (int) ( InfoTool.getVisualScreenHeight() - alertHeight );
+				else if (y < 0)
+					y = 0;
+				
+				// Set the X and Y of the Alert
+				alert.setX(x);
+				alert.setY(y);
+			});
+		}
 		
 		// Show the Alert
 		alert.showAndWait().ifPresent(answer -> questionAnswer[0] = ( answer == ButtonType.OK ));
 		
 		return questionAnswer[0];
 	}
-	
-	//	/**
-	//	 * Delete confirmation.
-	//	 *
-	//	 * @param permanent
-	//	 *            the permanent
-	//	 * @param text
-	//	 *            the text
-	//	 * @param i
-	//	 *            the i
-	//	 * @return true, if successful
-	//	 */
-	//	public static boolean doDeleteQuestion(boolean permanent , String text , int i , Stage window) {
-	//		boolean[] questionAnswer = { false };
-	//		
-	//		String unique = "\n [" + text + "]";
-	//		String multiple = "[" + text + " items]";
-	//		
-	//		Alert alert = new Alert(AlertType.CONFIRMATION);
-	//		alert.initStyle(StageStyle.UTILITY);
-	//		alert.initOwner(window);
-	//		alert.setGraphic(!permanent ? questionImage : warningImage);
-	//		alert.setHeaderText(!permanent ? "Remove selection" + ( i > 1 ? "s " + multiple : unique ) + " from List?"
-	//				: "Are you sure you want to permanently delete " + ( i > 1 ? "these " + multiple : "this item " + unique ) + " ?");
-	//		alert.setContentText(!permanent ? "Are you sure you want to remove the selected " + ( i > 1 ? "items" : "item" ) + " from the List?"
-	//				: "If you delete the selection " + ( i > 1 ? "s  they" : "it" ) + " will be permanenlty lost.");
-	//		// LookUpButton
-	//		( (Button) alert.getDialogPane().lookupButton(ButtonType.OK) ).setDefaultButton(false);
-	//		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
-	//		alert.showAndWait().ifPresent(answer -> {
-	//			if (answer == ButtonType.OK)
-	//				questionAnswer[0] = true;
-	//		});
-	//		
-	//		return questionAnswer[0];
-	//	}
 	
 	/**
 	 * Returns a Random Number from 0 to ...what i have choosen in method see the doc

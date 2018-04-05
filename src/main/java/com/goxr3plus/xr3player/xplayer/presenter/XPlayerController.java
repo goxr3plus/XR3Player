@@ -64,6 +64,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
@@ -1405,7 +1406,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					//Show Notification
 					ActionTool.showNotification("Player [ " + this.getKey() + " ] Opened", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-							NotificationType.SIMPLE, image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60);
+							NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
 				}
 			});
 			

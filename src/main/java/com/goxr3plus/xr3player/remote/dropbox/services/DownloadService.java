@@ -18,6 +18,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressOutputStream;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
@@ -75,7 +76,7 @@ public class DownloadService extends Service<Boolean> {
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Download completed", "Completed downloading File :\n[ " + dropBoxFileMetadata.getName() + " ]",
-							Duration.millis(3000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
+							Duration.millis(3000), NotificationType.SIMPLE, JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1, -1)));
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();

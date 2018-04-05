@@ -267,9 +267,6 @@ public class SideBar extends BorderPane {
 		//snapShot
 		snapshot.setOnAction(a -> CaptureWindow.stage.show());
 		
-		//	ActionTool.showAlert("Snapshot Window", "Read the below.",
-		//		"Hello BRO!\n\n FIRST\n\nEnable KeyBindings from Settings Window (Settings->Check KeyBindings CheckBox)\n\n THEN\n\n[ HOLD ALT KEY ] in order the snapshot window to be visible,then select an area of the screen with your mouse \n\n[RELEASE ALT KEY] or PRESS [ ESCAPE OR BACKSPACE ] to close the snapshot window \n\n FINALLY\n\nPress : [ ENTER OR SPACE ] to capture the selected area.");
-		
 		// importDataBase
 		importDataBase.setOnAction(e -> importDatabase());
 		
@@ -286,9 +283,9 @@ public class SideBar extends BorderPane {
 	 */
 	public void importDatabase() {
 		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) )
-				&& ActionTool.doQuestion(
+				&& ActionTool.doQuestion(null,
 						"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
-						Main.window)) {
+						null, Main.window)) {
 			
 			File file = Main.specialChooser.selectDBFile(Main.window);
 			if (file != null) {
@@ -326,9 +323,9 @@ public class SideBar extends BorderPane {
 	 */
 	public void deleteDatabase() {
 		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) )
-				&& ActionTool.doQuestion(
+				&& ActionTool.doQuestion(null,
 						"ARE YOU SOORE YOU WANT TO PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
-						Main.window)) {
+						null, Main.window)) {
 			
 			// Close database connections
 			if (Main.dbManager != null)

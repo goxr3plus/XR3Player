@@ -26,6 +26,7 @@ import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFile;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
@@ -502,7 +503,7 @@ public class DropboxService extends Service<Boolean> {
 						
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
-							NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
+							NotificationType.SIMPLE, JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1,-1)));
 					
 					return true;
 				} catch (DbxException dbxe) {
@@ -532,7 +533,7 @@ public class DropboxService extends Service<Boolean> {
 						//Show message
 						ActionTool.showNotification("Rename Successful",
 								"Succesfully renamed file :\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + result.getMetadata().getName() + " ]",
-								Duration.millis(2500), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0);
+								Duration.millis(2500), NotificationType.SIMPLE, JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1,-1));
 						
 						//Return the previous name
 						dropboxFile.setMetadata(result.getMetadata());
@@ -575,7 +576,7 @@ public class DropboxService extends Service<Boolean> {
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
-							Duration.millis(2000), NotificationType.SIMPLE, DropboxViewer.dropBoxImage, 0, 0));
+							Duration.millis(2000), NotificationType.SIMPLE, JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1,-1)));
 					
 					return true;
 				} catch (DbxException dbxe) {

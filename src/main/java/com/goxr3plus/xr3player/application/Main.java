@@ -729,13 +729,10 @@ public class Main extends Application {
 	 * This method is used to exit the application
 	 */
 	public static void confirmApplicationExit() {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.initStyle(StageStyle.UTILITY);
-		alert.initOwner(window);
-		alert.setTitle("Terminate the application?");
+		Alert alert = JavaFXTools.createAlert("Exit XR3Player?", "Vacuum is clearing junks from database\n(In future updates it will be automatical)",
+				"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n", AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
 		
-		alert.setHeaderText("Vacuum is clearing junks from database\n(In future updates it will be automatical)");
-		alert.setContentText("Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n");
+		//Create Custom Buttons
 		ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
 		ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 		ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -791,7 +788,7 @@ public class Main extends Application {
 					// Ask the user
 					if (askUser)
 						Platform.runLater(() -> {
-							if (ActionTool.doQuestion("Restart failed.... force shutdown?", Main.window))
+							if (ActionTool.doQuestion(null, "Restart failed.... force shutdown?", null, Main.window))
 								terminate(false);
 						});
 					else {

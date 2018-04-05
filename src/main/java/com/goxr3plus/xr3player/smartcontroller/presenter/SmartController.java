@@ -416,8 +416,8 @@ public class SmartController extends StackPane {
 		
 		// clearAll
 		clearAll.setOnAction(ac -> {
-			if (ActionTool.doQuestion("You want to remove all the Files from ->" + this + "\n\nThis of course doesn't mean that they will be deleted from your computer",
-					Main.window))
+			if (ActionTool.doQuestion(null, "You want to remove all the Files from ->" + this + "\n\nThis of course doesn't mean that they will be deleted from your computer",
+					null, Main.window))
 				clearDataBaseTable();
 		});
 		

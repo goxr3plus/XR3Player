@@ -43,6 +43,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
@@ -244,7 +245,7 @@ public class DropboxViewer extends StackPane {
 				
 				//Show message to the User
 				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
-						DropboxViewer.dropBoxImage, 0, 0);
+						JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1, -1));
 				
 				//Save on the database
 				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();
@@ -435,28 +436,28 @@ public class DropboxViewer extends StackPane {
 		cachedSearchIndicator.progressProperty().bind(getDropBoxService().getSearchCacheService().progressProperty());
 		
 		//Trying to change the "Done" Text of ProgressIndicator from Cached Search
-//		cachedSearchIndicator.progressProperty().addListener((observable , oldValue , newValue) -> {
-//			// If progress is 100% then show Text
-//			if (newValue.doubleValue() >= 1) {
-//				
-//				// Apply CSS so you can lookup the text
-//				cachedSearchIndicator.applyCss();
-//				
-//				// This text replaces "Done"
-//				//( (Text) cachedSearchIndicator.lookup(".text.percentage") ).setText("Cached Search Ready");
-//				Text text = ( (Text) cachedSearchIndicator.lookup(".percentage") );
-//				text.setText("23");
-//				
-//				cachedSearchIndicator.applyCss();
-//				
-//				progressIndicator.setPrefWidth(text.getLayoutBounds().getWidth());
-//				
-//				cachedSearchIndicator.applyCss();
-//				
-//				System.out.println("Cached Search Ready!!!!");
-//			}
-//			
-//		});
+		//		cachedSearchIndicator.progressProperty().addListener((observable , oldValue , newValue) -> {
+		//			// If progress is 100% then show Text
+		//			if (newValue.doubleValue() >= 1) {
+		//				
+		//				// Apply CSS so you can lookup the text
+		//				cachedSearchIndicator.applyCss();
+		//				
+		//				// This text replaces "Done"
+		//				//( (Text) cachedSearchIndicator.lookup(".text.percentage") ).setText("Cached Search Ready");
+		//				Text text = ( (Text) cachedSearchIndicator.lookup(".percentage") );
+		//				text.setText("23");
+		//				
+		//				cachedSearchIndicator.applyCss();
+		//				
+		//				progressIndicator.setPrefWidth(text.getLayoutBounds().getWidth());
+		//				
+		//				cachedSearchIndicator.applyCss();
+		//				
+		//				System.out.println("Cached Search Ready!!!!");
+		//			}
+		//			
+		//		});
 	}
 	
 	/**
@@ -558,10 +559,10 @@ public class DropboxViewer extends StackPane {
 			
 		} else { //NOT SUPPORTED YET
 			//Show save dialog	
-//			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
-//			if (file != null)
-//				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
-//			
+			//			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
+			//			if (file != null)
+			//				new DownloadService(this).startService(dropboxFile.getMetadata(), file.getAbsolutePath());
+			//			
 			ActionTool.showNotification("No supported", "Folder download is not supported yet :) ", Duration.seconds(2), NotificationType.WARNING);
 		}
 	}

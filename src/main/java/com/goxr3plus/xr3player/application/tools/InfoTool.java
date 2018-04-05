@@ -711,9 +711,9 @@ public final class InfoTool {
 	 *            the image name
 	 * @return Returns an image which is already into the resources folder of the application
 	 */
-	public static Image getImageFromCurrentFolder(String folderName , String imageName) {
-		return new Image(InfoTool.class.getResourceAsStream("/" + folderName + "/" + imageName));
-	}
+	//	public static Image getImageFromCurrentFolder(String folderName , String imageName) {
+	//		return new Image(InfoTool.class.getResourceAsStream("/" + folderName + "/" + imageName));
+	//	}
 	
 	/**
 	 * Use this method to retrieve an ImageView from the resources of the application.
@@ -723,8 +723,10 @@ public final class InfoTool {
 	 * @return Returns an ImageView using method getImageFromResourcesFolder(String imageName);
 	 */
 	public static ImageView getImageViewFromResourcesFolder(String imageName) {
-		return new ImageView(new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName)));
+		return new ImageView(getImageFromResourcesFolder(imageName));
 	}
+	
+
 	
 	/**
 	 * Returns the current hour in format h:mm a

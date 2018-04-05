@@ -12,11 +12,16 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import javafx.application.Platform;
+import javafx.geometry.Bounds;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
 
@@ -32,8 +37,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Selects the Toogle with the given text from the toggle group or else
-	 * selects nothing
+	 * Selects the Toogle with the given text from the toggle group or else selects nothing
 	 * 
 	 * @param toggleGroup
 	 */
@@ -46,8 +50,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Returns the Index of the Selected Toggle inside the ToggleGroup (counting
-	 * from 0)
+	 * Returns the Index of the Selected Toggle inside the ToggleGroup (counting from 0)
 	 * 
 	 * @param g
 	 * @return The index of the Selected Toggle
@@ -57,8 +60,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Selects the Toggle in position Index inside the toggle group (counting
-	 * from 0 )
+	 * Selects the Toggle in position Index inside the toggle group (counting from 0 )
 	 * 
 	 * @param g
 	 * @param index
@@ -68,8 +70,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Searches for any Image that contains the given title -> example
-	 * ["background"] inside the given folder
+	 * Searches for any Image that contains the given title -> example ["background"] inside the given folder
 	 * 
 	 * @return The absolute path of the image file or null if not exists
 	 */
@@ -95,8 +96,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Check if any image with that title exists -> for example ["background"]
-	 * inside the Folder given , i don't have the extension
+	 * Check if any image with that title exists -> for example ["background"] inside the Folder given , i don't have the extension
 	 * 
 	 * @param title
 	 * @param folderToSearch
@@ -110,8 +110,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Deletes any image which has that title , for example ["background"]
-	 * searching on the given Folder
+	 * Deletes any image which has that title , for example ["background"] searching on the given Folder
 	 * 
 	 * @param title
 	 * @param folderToSearch
@@ -143,8 +142,7 @@ public final class JavaFXTools {
 	}
 	
 	/**
-	 * Open's a select Window and if the user selects an image it saves it with
-	 * the given title and to the given folder , the extension is automatically
+	 * Open's a select Window and if the user selects an image it saves it with the given title and to the given folder , the extension is automatically
 	 * found from the original one Image
 	 * 
 	 * @param imageNameToDelete
@@ -152,8 +150,7 @@ public final class JavaFXTools {
 	 * @param folderForSaving
 	 *            This folder must already exist!
 	 * 
-	 * @return The image file which of course can be null if the user doesn't
-	 *         selected anything
+	 * @return The image file which of course can be null if the user doesn't selected anything
 	 */
 	public static Optional<File> selectAndSaveImage(String title , String folderForSaving , FileAndFolderChooser specialChooser , Stage window) {
 		
@@ -196,4 +193,100 @@ public final class JavaFXTools {
 		return String.format("#%02X%02X%02X", (int) ( color.getRed() * 255 ), (int) ( color.getGreen() * 255 ), (int) ( color.getBlue() * 255 ));
 		
 	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Creates an Alert with the given parameters
+	 * 
+	 * @param title
+	 * @param headerText
+	 * @param contentText
+	 * @param alertType
+	 * @param stageStyle
+	 * @param owner
+	 * @param graphic
+	 * @return The created Alert based on the given parameters
+	 */
+	public static Alert createAlert(String title , String headerText , String contentText , AlertType alertType , StageStyle stageStyle , Stage owner , ImageView graphic) {
+		
+		// Show Alert
+		Alert alert = new Alert(alertType);
+		if (title != null)
+			alert.setTitle(title);
+		if (headerText != null)
+			alert.setHeaderText(headerText);
+		if (contentText != null)
+			alert.setContentText(contentText);
+		if (stageStyle != null)
+			alert.initStyle(stageStyle);
+		if (owner != null)
+			alert.initOwner(owner);
+		if (graphic != null)
+			alert.setGraphic(graphic);
+		
+		//Make sure alert is not outside the screen so app becomes unresponsible
+		alert.heightProperty().addListener(l -> {
+			
+			// Width and Height of the Alert
+			double alertWidth = alert.getWidth();
+			double alertHeight = alert.getHeight();
+			double alertScreenX = alert.getX();
+			double alertScreenY = alert.getY();
+			
+			// Check if Alert goes out of the Screen on X Axis
+			if (alertScreenX + alertWidth > InfoTool.getVisualScreenWidth())
+				alertScreenX = (int) ( InfoTool.getVisualScreenWidth() - alertWidth );
+			else if (alertScreenX < 0)
+				alertScreenX = 0;
+			
+			// Check if Alert goes out of the Screen on Y AXIS
+			if (alertScreenY + alertHeight > InfoTool.getVisualScreenHeight())
+				alertScreenY = (int) ( InfoTool.getVisualScreenHeight() - alertHeight );
+			else if (alertScreenY < 0)
+				alertScreenY = 0;
+			
+			// Set the X and Y of the Alert
+			alert.setX(alertScreenX);
+			alert.setY(alertScreenY);
+		});
+		
+		return alert;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Use this method to retrieve an ImageView from the resources of the application.
+	 *
+	 * @param imageName
+	 *            the image name
+	 * @return Returns an ImageView using method getImageFromResourcesFolder(String imageName);
+	 */
+	public static ImageView getImageViewFromResourcesFolder(String imageName , double width , double height) {
+		ImageView imageView = new ImageView(InfoTool.getImageFromResourcesFolder(imageName));
+		if (width == -1 || height == -1 || width == 0 || height == 0)
+			return imageView;
+		imageView.setFitWidth(width);
+		imageView.setFitHeight(height);
+		return imageView;
+	}
+	
+	/**
+	 * Returns an ImageView containing the given image fitting on the given size
+	 * 
+	 * @param image
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public static ImageView getImageView(Image image , double width , double height) {
+		ImageView imageView = new ImageView(image);
+		if (width == -1 || height == -1 || width == 0 || height == 0)
+			return imageView;
+		imageView.setFitWidth(width);
+		imageView.setFitHeight(height);
+		return imageView;
+	}
+	
 }

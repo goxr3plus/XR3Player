@@ -65,6 +65,7 @@ import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import net.sf.image4j.codec.ico.ICODecoder;
 
 /**
@@ -450,15 +451,8 @@ public class WebBrowserTabController extends StackPane {
 			movingTitleAnimation.setSelected(WebBrowserController.MOVING_TITLES_ENABLED);
 			
 			//showVersion
-			about.setOnAction(a -> {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.initStyle(StageStyle.UTILITY);
-				alert.setTitle("JavaFX Browser");
-				alert.setHeaderText(null);
-				alert.setContentText("Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO");
-				
-				alert.showAndWait();
-			});
+			about.setOnAction(a -> JavaFXTools.createAlert("Browser Information", null, "Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO",
+					AlertType.INFORMATION, StageStyle.UTILITY, Main.window, null).showAndWait());
 			
 			//goFullScreen
 			goFullScreen.setOnAction(a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
