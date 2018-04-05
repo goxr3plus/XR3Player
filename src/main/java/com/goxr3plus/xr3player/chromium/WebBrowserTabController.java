@@ -189,18 +189,19 @@ public class WebBrowserTabController extends StackPane {
 		
 		//-------------------Browser------------------------
 		browser = new Browser();
-		browser.setPopupHandler(new PopupHandler() {
-		    public PopupContainer handlePopup(PopupParams params) {
-		        return new PopupContainer() {
-
-					@Override
-					public void insertBrowser(Browser browser , java.awt.Rectangle arg1) {
-						
-						System.out.println("PopUp occured!!!");
-					}
-				};
-			}
-		});
+//		browser.setPopupHandler(new PopupHandler() {
+//		    public PopupContainer handlePopup(PopupParams params) {
+//		        return new PopupContainer() {
+//
+//					@Override
+//					public void insertBrowser(Browser browser , java.awt.Rectangle arg1) {
+//						
+//						System.out.println(browser.getURL().contains("fmovies.com"));
+//						System.out.println("PopUp occured!!!");
+//					}
+//				};
+//			}
+//		});
 		
 		//--Render Listener
 		//		browser.addRenderListener(new RenderListener() {
@@ -231,7 +232,7 @@ public class WebBrowserTabController extends StackPane {
 		//-------------------BrowserView------------------------
 		browserView = new BrowserView(browser);
 		browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
-		//browser.setPopupHandler(new DefaultPopupHandler());
+		browser.setPopupHandler(new DefaultPopupHandler());
 		borderPane.setCenter(browserView);
 		
 		//Continue
