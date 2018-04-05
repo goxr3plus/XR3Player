@@ -233,5 +233,6 @@ public class SmartControllerFiltersMode extends StackPane {
 		return nothingFoundLabel;
 	}
 
+
 	
 }

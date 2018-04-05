@@ -448,14 +448,25 @@ public class SmartController extends StackPane {
 		filtersModeTab.setContent(filtersMode);
 		
 		//--Change Listener for Modes Tab Pane
-		modesTabPane.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue == normalModeTab) { //normalModeTab
+		normalModeTab.setOnSelectionChanged(l -> {
+			if (normalModeTab.isSelected()) {
+				System.out.println("Normal Mode selected");
 				filtersMode.getService().cancel();
 				foldersMode.getService().cancel();
-			} else if (newValue == foldersModeTab) { //foldersModeTab
+				filtersMode.getService().cancel();
+			}
+		});
+		foldersModeTab.setOnSelectionChanged(l -> {
+			if (foldersModeTab.isSelected()) {
+				System.out.println("Folders Mode selected");
 				filtersMode.getService().cancel();
 				foldersMode.recreateTree();
-			} else if (newValue == filtersModeTab) { //artistsModeTab
+				filtersMode.getService().cancel();
+			}
+		});
+		filtersModeTab.setOnSelectionChanged(l -> {
+			if (filtersModeTab.isSelected()) {
+				System.out.println("Filters Mode selected");
 				foldersMode.getService().cancel();
 				filtersMode.regenerate();
 			}

@@ -227,7 +227,6 @@ public class FiltersModeService extends Service<Void> {
 								if (isCancelled())
 									break;
 								else {
-									//System.out.println(isCancelled());
 									
 									if (operation == Operation.REFRESH)
 										
@@ -338,6 +337,7 @@ public class FiltersModeService extends Service<Void> {
 			 * @return Return the artist of the given audio file (mp3) actually
 			 */
 			private String findTagFromAudioFile(File file , Media media) {
+				System.out.println(file.getName());
 				
 				//Check file existence , length and extension
 				if (file.exists() && "mp3".equals(media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath())) && file.length() != 0) {
