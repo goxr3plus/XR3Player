@@ -167,7 +167,7 @@ public class WebBrowserController extends StackPane {
 				createAndAddNewTab();
 			
 			//Dispose the browser
-			disposeBrowser(webBrowserTab.browser);
+			disposeBrowser(webBrowserTab.getBrowser());
 		});
 		
 		return webBrowserTab;
@@ -208,7 +208,7 @@ public class WebBrowserController extends StackPane {
 	 * Dispose all the browsers , this method is used before the application exits :)
 	 */
 	public void disposeAllBrowsers() {
-		tabPane.getTabs().stream().forEach(tab -> ( (WebBrowserTabController) tab.getContent() ).browser.dispose());
+		tabPane.getTabs().stream().forEach(tab -> ( (WebBrowserTabController) tab.getContent() ).getBrowser().dispose());
 	}
 	
 	/**

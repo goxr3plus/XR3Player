@@ -124,21 +124,14 @@ public class WebBrowserTabController extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	/** The engine. */
-	public Browser browser;
-	BrowserView browserView;
-	//WebEngine webEngine;
-	
-	/** The web history */
-	//private WebHistory history;
-	//private ObservableList<WebHistory.Entry> historyEntryList;
+	/** The browser and it's View */
+	private Browser browser;
+	private BrowserView browserView;
 	
 	private final Tab tab;
-	private String firstWebSite;
-	
 	private final WebBrowserController webBrowserController;
-	
 	private final ImageView facIconImageView = new ImageView();
+	private String firstWebSite;
 	
 	/**
 	 * Constructor
@@ -199,30 +192,30 @@ public class WebBrowserTabController extends StackPane {
 			//		});
 			
 			//--Render Listener
-			browser.addRenderListener(new RenderListener() {
-				
-				@Override
-				public void onRenderCreated(RenderEvent arg0) {
-					System.out.println("Render process is created and ready to work.");
-				}
-				
-				@Override
-				public void onRenderGone(RenderEvent arg0) {
-					System.out.println("Render process is exited, crashed or killed.");
-					
-				}
-				
-				@Override
-				public void onRenderResponsive(RenderEvent arg0) {
-					System.out.println("Render process is no longer hung.");
-				}
-				
-				@Override
-				public void onRenderUnresponsive(RenderEvent arg0) {
-					System.out.println("Render process is hung.");
-				}
-				
-			});
+			//			browser.addRenderListener(new RenderListener() {
+			//				
+			//				@Override
+			//				public void onRenderCreated(RenderEvent arg0) {
+			//					System.out.println("Render process is created and ready to work.");
+			//				}
+			//				
+			//				@Override
+			//				public void onRenderGone(RenderEvent arg0) {
+			//					System.out.println("Render process is exited, crashed or killed.");
+			//					
+			//				}
+			//				
+			//				@Override
+			//				public void onRenderResponsive(RenderEvent arg0) {
+			//					System.out.println("Render process is no longer hung.");
+			//				}
+			//				
+			//				@Override
+			//				public void onRenderUnresponsive(RenderEvent arg0) {
+			//					System.out.println("Render process is hung.");
+			//				}
+			//				
+			//			});
 			
 			//-------------------BrowserView------------------------
 			browserView = new BrowserView(browser);
@@ -684,6 +677,21 @@ public class WebBrowserTabController extends StackPane {
 	 */
 	public BorderPane getBorderPane() {
 		return borderPane;
+	}
+	
+	/**
+	 * @return the browser
+	 */
+	public Browser getBrowser() {
+		return browser;
+	}
+	
+	/**
+	 * @param browser
+	 *            the browser to set
+	 */
+	public void setBrowser(Browser browser) {
+		this.browser = browser;
 	}
 	
 	/**
