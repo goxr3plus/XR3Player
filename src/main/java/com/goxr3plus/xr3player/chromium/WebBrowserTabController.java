@@ -341,15 +341,10 @@ public class WebBrowserTabController extends StackPane {
 				@Override
 				public void onDocumentLoadedInFrame(FrameLoadEvent event) {
 					System.out.println("Frame document is loaded.");
+					String currentURL = browser.getURL();
 					
 					//Set Search Bar Text 			
-					Platform.runLater(() -> {
-						try {
-							searchBar.setText(browser.getURL());
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
-					});
+					Platform.runLater(() -> searchBar.setText(currentURL));
 					
 				}
 				
@@ -358,28 +353,31 @@ public class WebBrowserTabController extends StackPane {
 					System.out.println("Main frame document is loaded.");
 					System.out.println("Current Thread Name : " + Thread.currentThread().getName());
 					
+					boolean backwardDisabled = browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(1).getURL());
+					boolean forwardDisabled = browser.getCurrentNavigationEntry().getURL()
+							.equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL());
+					String currentTitle = browser.getTitle();
+					String currentURL = browser.getURL();
+					
+					System.out.println("Backward Disabled?( " + backwardDisabled + " ) ,\n Forward Disabled? ( " + forwardDisabled + " )");
+					System.out.println("Title : ( " + browser.getTitle() + " ) , URL : ( " + browser.getURL() + ")");
+					
 					//Run On JavaFX Thread
 					Platform.runLater(() -> {
-						try {
-							//System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL())
-							
-							//indicator.setVisible(false);
-							
-							//backwardButton.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(1).getURL()));
-							//forwardButton.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL()));
-							
-							//Tab Title
-							//tab.getTooltip().setText(browser.getTitle());
-							
-							//Set Search Bar Text 
-							//searchBar.setText(browser.getURL());
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
+						//System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL())
+						
+						backwardButton.setDisable(backwardDisabled);
+						forwardButton.setDisable(forwardDisabled);
+						
+						//Tab Title
+						tab.getTooltip().setText(currentTitle);
+						
+						//Set Search Bar Text 
+						searchBar.setText(currentURL);
 					});
 					
 					//Determine FavIcon
-					//determineFavIcon();
+					new Thread(() -> determineFavIcon(currentURL)).start();
 				}
 			});
 			
@@ -417,9 +415,7 @@ public class WebBrowserTabController extends StackPane {
 			
 			//-------------------Items------------------------
 			
-			searchBar.setOnAction(a ->
-			
-			loadWebSite(searchBar.getText()));
+			searchBar.setOnAction(a -> loadWebSite(searchBar.getText()));
 			searchBar.focusedProperty().addListener((observable , oldValue , newValue) -> {
 				if (newValue)
 					Platform.runLater(() -> searchBar.selectAll());
@@ -456,15 +452,11 @@ public class WebBrowserTabController extends StackPane {
 			searchEngineComboBox.getItems().addAll("Google", "DuckDuckGo", "Bing", "Yahoo");
 			searchEngineComboBox.getSelectionModel().select(1);
 			
-			
 			//movingTitleAnimation
 			movingTitleAnimation.selectedProperty().addListener((observable , oldValue , newValue) -> {
 				marquee.checkAnimationValidity(newValue);
 			});
 			movingTitleAnimation.setSelected(WebBrowserController.MOVING_TITLES_ENABLED);
-			
-			//Load the website
-			loadWebSite(firstWebSite);
 			
 			//showVersion
 			about.setOnAction(a -> {
@@ -479,6 +471,9 @@ public class WebBrowserTabController extends StackPane {
 			
 			//goFullScreen
 			goFullScreen.setOnAction(a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
+			
+			//Finally load the firstWebSite
+			loadWebSite(firstWebSite);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -665,11 +660,11 @@ public class WebBrowserTabController extends StackPane {
 	/**
 	 * Find the favicon for the current website
 	 */
-	private void determineFavIcon() {
+	private void determineFavIcon(String url) {
 		
 		try {
 			//Determine the full url
-			String favIconFullURL = getHostName(browser.getURL()) + "favicon.ico";
+			String favIconFullURL = getHostName(url) + "favicon.ico";
 			//System.out.println(favIconFullURL)
 			
 			//Create HttpURLConnection 
@@ -678,11 +673,11 @@ public class WebBrowserTabController extends StackPane {
 			List<BufferedImage> image = ICODecoder.read(httpcon.getInputStream());
 			
 			//Set the favicon
-			facIconImageView.setImage(SwingFXUtils.toFXImage(image.get(0), null));
+			Platform.runLater(() -> facIconImageView.setImage(SwingFXUtils.toFXImage(image.get(0), null)));
 			
 		} catch (Exception ex) {
-			//ex.printStackTrace()
-			facIconImageView.setImage(null);
+			ex.printStackTrace();
+			Platform.runLater(() -> facIconImageView.setImage(null));
 		}
 	}
 	
