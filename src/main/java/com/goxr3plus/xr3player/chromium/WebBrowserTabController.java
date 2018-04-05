@@ -20,11 +20,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.ContextMenuHandler;
 import com.teamdev.jxbrowser.chromium.ContextMenuParams;
-import com.teamdev.jxbrowser.chromium.PopupContainer;
-import com.teamdev.jxbrowser.chromium.PopupHandler;
-import com.teamdev.jxbrowser.chromium.PopupParams;
-import com.teamdev.jxbrowser.chromium.events.DisposeEvent;
-import com.teamdev.jxbrowser.chromium.events.DisposeListener;
 import com.teamdev.jxbrowser.chromium.events.FailLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.FrameLoadEvent;
@@ -32,6 +27,8 @@ import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
 import com.teamdev.jxbrowser.chromium.events.LoadEvent;
 import com.teamdev.jxbrowser.chromium.events.NetError;
 import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
+import com.teamdev.jxbrowser.chromium.events.RenderEvent;
+import com.teamdev.jxbrowser.chromium.events.RenderListener;
 import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import com.teamdev.jxbrowser.chromium.javafx.DefaultPopupHandler;
@@ -39,13 +36,11 @@ import com.teamdev.jxbrowser.chromium.javafx.DefaultPopupHandler;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -65,9 +60,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
@@ -177,346 +170,318 @@ public class WebBrowserTabController extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//StackPane
-		setOnKeyReleased(k -> {
-			if (k.getCode() == KeyCode.F11)
-				webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this);
-		});
-		
-		//---------------ERROR PANE---
-		//tryAgain
-		tryAgain.setOnAction(a -> checkForInternetConnection());
-		
-		//-------------------Browser------------------------
-		browser = new Browser();
-//		browser.setPopupHandler(new PopupHandler() {
-//		    public PopupContainer handlePopup(PopupParams params) {
-//		        return new PopupContainer() {
-//
-//					@Override
-//					public void insertBrowser(Browser browser , java.awt.Rectangle arg1) {
-//						
-//						System.out.println(browser.getURL().contains("fmovies.com"));
-//						System.out.println("PopUp occured!!!");
-//					}
-//				};
-//			}
-//		});
-		
-		//--Render Listener
-		//		browser.addRenderListener(new RenderListener() {
-		//			
-		//			@Override
-		//			public void onRenderCreated(RenderEvent arg0) {
-		//				System.out.println("Render process is created and ready to work.");
-		//			}
-		//			
-		//			@Override
-		//			public void onRenderGone(RenderEvent arg0) {
-		//				System.out.println("Render process is exited, crashed or killed.");
-		//				
-		//			}
-		//			
-		//			@Override
-		//			public void onRenderResponsive(RenderEvent arg0) {
-		//				System.out.println("Render process is no longer hung.");
-		//			}
-		//			
-		//			@Override
-		//			public void onRenderUnresponsive(RenderEvent arg0) {
-		//				System.out.println("Render process is hung.");
-		//			}
-		//			
-		//		});
-		
-		//-------------------BrowserView------------------------
-		browserView = new BrowserView(browser);
-		browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
-		browser.setPopupHandler(new DefaultPopupHandler());
-		borderPane.setCenter(browserView);
-		
-		//Continue
-		
-		//browser.pro
-		//		webEngine.getLoadWorker().exceptionProperty().addListener(error -> {
-		//			//System.out.println("WebEngine exception occured" + error.toString())
-		//			checkForInternetConnection();
-		//		});
-		//		com.sun.javafx.webkit.WebConsoleListener
-		//				.setDefaultListener((webView , message , lineNumber , sourceId) -> System.out.println("Console: [" + sourceId + ":" + lineNumber + "] " + message));
-		//		
-		//Add listener to the WebEngine
-		//webEngine.getLoadWorker().stateProperty().addListener(new FavIconProvider());
-		//webEngine.getLoadWorker().stateProperty().addListener(new DownloadDetector());
-		//		webEngine.getLoadWorker().stateProperty().addListener((observable , oldState , newState) -> {
-		//			if (newState == Worker.State.SUCCEEDED) {
-		//				
-		//				//Check for error pane
-		//				errorPane.setVisible(false);
-		//				
-		//			} else if (newState == Worker.State.FAILED) {
-		//				
-		//				//Check for error pane
-		//				errorPane.setVisible(true);
-		//			}
-		//		});
-		//		
-		//		webEngine.setOnError(error -> {
-		//			//System.out.println("WebEngine error occured")
-		//			checkForInternetConnection();
-		//		});
-		
-		//handle pop up windows
-		//webEngine.setCreatePopupHandler(l -> webBrowserController.createAndAddNewTab().getWebView().getEngine());
-		//System.out.println(webEngine.getUserAgent())
-		//webEngine.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0")
-		//System.out.println(webEngine.getUserAgent())
-		
-		//History
-		//	setHistory(webEngine.getHistory());
-		//	historyEntryList = getHistory().getEntries();
-		//	SimpleListProperty<Entry> list = new SimpleListProperty<>(historyEntryList);
-		
-		//-------------------TAB------------------------
-		tab.setTooltip(new Tooltip(""));
-		//	tab.getTooltip().textProperty().bind(webEngine.titleProperty())
-		
-		// Graphic
-		StackPane stack = new StackPane();
-		stack.setPadding(new Insets(0, 5, 0, 5));
-		stack.setAlignment(Pos.TOP_CENTER);
-		
-		// indicator
-		ProgressIndicator indicator = new ProgressIndicator();
-		indicator.getStyleClass().add("dropbox-progress-indicator");
-		//	indicator.progressProperty().bind(webEngine.getLoadWorker().progressProperty())
-		//	indicator.visibleProperty().bind(webEngine.getLoadWorker().runningProperty())
-		indicator.setMaxSize(20, 20);
-		
-		// label
-		Label label = new Label();
-		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		label.setAlignment(Pos.CENTER);
-		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
-		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
-		//label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"))
-		// text.visibleProperty().bind(library.getSmartController().inputService.runningProperty())
-		
-		Marquee marquee = new Marquee();
-		marquee.textProperty().bind(tab.getTooltip().textProperty());
-		
-		stack.getChildren().addAll(indicator);
-		stack.setManaged(false);
-		stack.setVisible(true);
-		
-		// stack
-		indicator.visibleProperty().addListener(l -> {
-			if (indicator.isVisible()) {
-				stack.setManaged(true);
-				stack.setVisible(true);
-			} else {
-				stack.setManaged(false);
-				stack.setVisible(false);
-			}
-		});
-		
-		//--Load Listener
-		browser.addLoadListener(new LoadAdapter() {
-			@Override
-			public void onStartLoadingFrame(StartLoadingEvent event) {
-				if (event.isMainFrame()) {
-					System.out.println("Main frame has started loading");
-					
-					//Platform.runLater(() -> indicator.setVisible(true));
-				}
-			}
+		try {
 			
-			@Override
-			public void onProvisionalLoadingFrame(ProvisionalLoadingEvent event) {
-				if (event.isMainFrame()) {
-					System.out.println("Provisional load was committed for a frame");
-					
-					//Platform.runLater(() -> indicator.setVisible(true));
-				}
-			}
+			//StackPane
+			setOnKeyReleased(k -> {
+				if (k.getCode() == KeyCode.F11)
+					webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this);
+			});
 			
-			@Override
-			public void onFinishLoadingFrame(FinishLoadingEvent event) {
-				if (event.isMainFrame()) {
-					System.out.println("Main frame has finished loading");
-					
-				}
-			}
+			//---------------ERROR PANE---
+			//tryAgain
+			tryAgain.setOnAction(a -> checkForInternetConnection());
 			
-			@Override
-			public void onFailLoadingFrame(FailLoadingEvent event) {
-				NetError errorCode = event.getErrorCode();
-				if (event.isMainFrame()) {
-					System.out.println("Main frame has failed loading: " + errorCode);
-				}
-			}
+			//-------------------Browser------------------------
+			browser = new Browser();
+			//		browser.setPopupHandler(new PopupHandler() {
+			//		    public PopupContainer handlePopup(PopupParams params) {
+			//		        return new PopupContainer() {
+			//
+			//					@Override
+			//					public void insertBrowser(Browser browser , java.awt.Rectangle arg1) {
+			//						
+			//						System.out.println(browser.getURL().contains("fmovies.com"));
+			//						System.out.println("PopUp occured!!!");
+			//					}
+			//				};
+			//			}
+			//		});
 			
-			@Override
-			public void onDocumentLoadedInFrame(FrameLoadEvent event) {
-				System.out.println("Frame document is loaded.");
+			//--Render Listener
+			browser.addRenderListener(new RenderListener() {
 				
-				//Set Search Bar Text 			
-				Platform.runLater(() -> {
-					try {
-						searchBar.setText(browser.getURL());
-					} catch (Exception ex) {
-						ex.printStackTrace();
+				@Override
+				public void onRenderCreated(RenderEvent arg0) {
+					System.out.println("Render process is created and ready to work.");
+				}
+				
+				@Override
+				public void onRenderGone(RenderEvent arg0) {
+					System.out.println("Render process is exited, crashed or killed.");
+					
+				}
+				
+				@Override
+				public void onRenderResponsive(RenderEvent arg0) {
+					System.out.println("Render process is no longer hung.");
+				}
+				
+				@Override
+				public void onRenderUnresponsive(RenderEvent arg0) {
+					System.out.println("Render process is hung.");
+				}
+				
+			});
+			
+			//-------------------BrowserView------------------------
+			browserView = new BrowserView(browser);
+			browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
+			browser.setPopupHandler(new DefaultPopupHandler());
+			borderPane.setCenter(browserView);
+			
+			//Continue
+			
+			//browser.pro
+			//		webEngine.getLoadWorker().exceptionProperty().addListener(error -> {
+			//			//System.out.println("WebEngine exception occured" + error.toString())
+			//			checkForInternetConnection();
+			//		});
+			//		com.sun.javafx.webkit.WebConsoleListener
+			//				.setDefaultListener((webView , message , lineNumber , sourceId) -> System.out.println("Console: [" + sourceId + ":" + lineNumber + "] " + message));
+			//		
+			//Add listener to the WebEngine
+			//webEngine.getLoadWorker().stateProperty().addListener(new FavIconProvider());
+			//webEngine.getLoadWorker().stateProperty().addListener(new DownloadDetector());
+			//		webEngine.getLoadWorker().stateProperty().addListener((observable , oldState , newState) -> {
+			//			if (newState == Worker.State.SUCCEEDED) {
+			//				
+			//				//Check for error pane
+			//				errorPane.setVisible(false);
+			//				
+			//			} else if (newState == Worker.State.FAILED) {
+			//				
+			//				//Check for error pane
+			//				errorPane.setVisible(true);
+			//			}
+			//		});
+			//		
+			//		webEngine.setOnError(error -> {
+			//			//System.out.println("WebEngine error occured")
+			//			checkForInternetConnection();
+			//		});
+			
+			//handle pop up windows
+			//webEngine.setCreatePopupHandler(l -> webBrowserController.createAndAddNewTab().getWebView().getEngine())
+			
+			//-------------------TAB------------------------
+			tab.setTooltip(new Tooltip(""));
+			
+			// Graphic
+			StackPane stack = new StackPane();
+			stack.setPadding(new Insets(0, 5, 0, 5));
+			stack.setAlignment(Pos.TOP_CENTER);
+			
+			// indicator
+			ProgressIndicator indicator = new ProgressIndicator();
+			indicator.getStyleClass().add("dropbox-progress-indicator");
+			indicator.setMaxSize(20, 20);
+			
+			// label
+			Label label = new Label();
+			label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			label.setAlignment(Pos.CENTER);
+			label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
+			label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
+			
+			Marquee marquee = new Marquee();
+			marquee.textProperty().bind(tab.getTooltip().textProperty());
+			
+			stack.getChildren().addAll(indicator);
+			stack.setManaged(false);
+			stack.setVisible(true);
+			
+			// stack
+			indicator.visibleProperty().addListener(l -> {
+				if (indicator.isVisible()) {
+					stack.setManaged(true);
+					stack.setVisible(true);
+				} else {
+					stack.setManaged(false);
+					stack.setVisible(false);
+				}
+			});
+			
+			//--Load Listener
+			browser.addLoadListener(new LoadAdapter() {
+				@Override
+				public void onStartLoadingFrame(StartLoadingEvent event) {
+					if (event.isMainFrame()) {
+						System.out.println("Main frame has started loading");
+						
+						//Platform.runLater(() -> indicator.setVisible(true))
 					}
-				});
+				}
 				
-			}
+				@Override
+				public void onProvisionalLoadingFrame(ProvisionalLoadingEvent event) {
+					if (event.isMainFrame()) {
+						System.out.println("Provisional load was committed for a frame");
+						
+						//Platform.runLater(() -> indicator.setVisible(true))
+					}
+				}
+				
+				@Override
+				public void onFinishLoadingFrame(FinishLoadingEvent event) {
+					if (event.isMainFrame()) {
+						System.out.println("Main frame has finished loading");
+						
+					}
+				}
+				
+				@Override
+				public void onFailLoadingFrame(FailLoadingEvent event) {
+					NetError errorCode = event.getErrorCode();
+					if (event.isMainFrame()) {
+						System.out.println("Main frame has failed loading: " + errorCode);
+					}
+				}
+				
+				@Override
+				public void onDocumentLoadedInFrame(FrameLoadEvent event) {
+					System.out.println("Frame document is loaded.");
+					
+					//Set Search Bar Text 			
+					Platform.runLater(() -> {
+						try {
+							searchBar.setText(browser.getURL());
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					});
+					
+				}
+				
+				@Override
+				public void onDocumentLoadedInMainFrame(LoadEvent event) {
+					System.out.println("Main frame document is loaded.");
+					System.out.println("Current Thread Name : " + Thread.currentThread().getName());
+					
+					//Run On JavaFX Thread
+					Platform.runLater(() -> {
+						try {
+							//System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL())
+							
+							//indicator.setVisible(false);
+							
+							//backwardButton.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(1).getURL()));
+							//forwardButton.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL()));
+							
+							//Tab Title
+							//tab.getTooltip().setText(browser.getTitle());
+							
+							//Set Search Bar Text 
+							//searchBar.setText(browser.getURL());
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					});
+					
+					//Determine FavIcon
+					//determineFavIcon();
+				}
+			});
 			
-			@Override
-			public void onDocumentLoadedInMainFrame(LoadEvent event) {
-				System.out.println("Main frame document is loaded.");
-				
-				//Run On JavaFX Thread
-				Platform.runLater(() -> {
-					//System.out.println(browser.getCurrentNavigationEntry().getURL() + " , " + browser.getNavigationEntryAtIndex(1).getURL())
-					
-					//indicator.setVisible(false);
-					
-					backwardButton.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(1).getURL()));
-					forwardButton
-							.setDisable(browser.getCurrentNavigationEntry().getURL().equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL()));
-					
-					//Tab Title
-					tab.getTooltip().setText(browser.getTitle());
-					
-					//Set Search Bar Text 
-					searchBar.setText(browser.getURL());
-				});
-				
-				//Determine FavIcon
-				determineFavIcon();
-			}
-		});
-		
-		//facIconImageView 
-		facIconImageView.setFitWidth(25);
-		facIconImageView.setFitHeight(25);
-		facIconImageView.setSmooth(true);
-		
-		//iconLabel
-		Label iconLabel = new Label();
-		iconLabel.setGraphic(facIconImageView);
-		iconLabel.setStyle("-fx-background-color:#202020");
-		//iconLabel.visibleProperty().bind(indicator.visibleProperty().not())
-		//iconLabel.managedProperty().bind(facIconImageView.imageProperty().isNotNull().and(indicator.visibleProperty().not()))
-		
-		//X Button
-		JFXButton closeButton = new JFXButton("X");
-		int maxSize = 25;
-		closeButton.setMinSize(maxSize, maxSize);
-		closeButton.setPrefSize(maxSize, maxSize);
-		closeButton.setMaxSize(maxSize, maxSize);
-		closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
-		closeButton.setOnAction(a -> this.webBrowserController.removeTab(tab));
-		
-		// HBOX
-		HBox hBox = new HBox();
-		hBox.setStyle("-fx-background-color:#000000;");
-		hBox.setOnMouseClicked(m -> {
-			if (m.getButton() == MouseButton.MIDDLE)
-				webBrowserController.removeTab(tab);
-		});
-		hBox.getChildren().addAll(iconLabel, stack, marquee, closeButton);
-		tab.setGraphic(hBox);
-		
-		//ContextMenu
-		tab.setContextMenu(new WebBrowserTabContextMenu(this, webBrowserController));
-		
-		//-------------------Items------------------------
-		
-		//searchBar
-		//		webEngine.getLoadWorker().runningProperty().addListener((observable , oldValue , newValue) -> {
-		//			//if (list.size() > 0)
-		//			//	System.out.println(getHistory().getEntries().get(getHistory().getCurrentIndex()).getUrl());
-		//			
-		//			if (!newValue) // if !running
-		//				searchBar.textProperty().unbind();
-		//			else
-		//				searchBar.textProperty().bind(webEngine.locationProperty());
-		//		});
-		searchBar.setOnAction(a ->
-		
-		loadWebSite(searchBar.getText()));
-		searchBar.focusedProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue)
-				Platform.runLater(() -> searchBar.selectAll());
-		});
-		
-		//Proposing sites
-		//new AutoCompleteTextField().bindAutoCompletion(searchBar, 15, true, WebBrowserController.WEBSITE_PROPOSALS);
-		
-		//goButton
-		goButton.setOnAction(searchBar.getOnAction());
-		
-		//reloadButton
-		reloadButton.setOnAction(a -> reloadWebSite());
-		
-		//backwardButton
-		forwardButton.setDisable(true);
-		backwardButton.setOnAction(a -> goBack());
-		backwardButton.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.MIDDLE) //Create and add it next to this tab
-				webBrowserController.getTabPane().getTabs().add(webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
-						webBrowserController.createNewTab(browser.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() - 1).getURL()).getTab());
-		});
-		
-		//forwardButton
-		forwardButton.setDisable(true);
-		forwardButton.setOnAction(a -> goForward());
-		forwardButton.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.MIDDLE) //Create and add it next to this tab
-				webBrowserController.getTabPane().getTabs().add(webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
-						webBrowserController.createNewTab(browser.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() + 1).getURL()).getTab());
-		});
-		
-		//searchEngineComboBox
-		searchEngineComboBox.getItems().addAll("Google", "DuckDuckGo", "Bing", "Yahoo");
-		searchEngineComboBox.getSelectionModel().select(1);
-		
-		//requestMobileSite
-		//		requestMobileSite.selectedProperty().addListener((observable , oldValue , newValue) -> {
-		//			if (newValue)
-		//				browser.setUserAgent("Mozilla/5.0 (Android 6.1; Mobile; rv:58.0) Gecko/20100101 Firefox/58.0");
-		//			else
-		//				browser.setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36");
-		//			
-		//			System.out.println(browser.getUserAgent());
-		//			
-		//			//Reload the website
-		//			reloadWebSite();
-		//		});
-		
-		//movingTitleAnimation
-		movingTitleAnimation.selectedProperty().addListener((observable , oldValue , newValue) -> {
-			marquee.checkAnimationValidity(newValue);
-		});
-		movingTitleAnimation.setSelected(WebBrowserController.MOVING_TITLES_ENABLED);
-		
-		//Load the website
-		loadWebSite(firstWebSite);
-		
-		//showVersion
-		about.setOnAction(a -> {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.initStyle(StageStyle.UTILITY);
-			alert.setTitle("JavaFX Browser");
-			alert.setHeaderText(null);
-			alert.setContentText("Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO");
+			//facIconImageView 
+			facIconImageView.setFitWidth(25);
+			facIconImageView.setFitHeight(25);
+			facIconImageView.setSmooth(true);
 			
-			alert.showAndWait();
-		});
-		
-		//goFullScreen
-		goFullScreen.setOnAction(a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
+			//iconLabel
+			Label iconLabel = new Label();
+			iconLabel.setGraphic(facIconImageView);
+			iconLabel.setStyle("-fx-background-color:#202020");
+			
+			//X Button
+			JFXButton closeButton = new JFXButton("X");
+			int maxSize = 25;
+			closeButton.setMinSize(maxSize, maxSize);
+			closeButton.setPrefSize(maxSize, maxSize);
+			closeButton.setMaxSize(maxSize, maxSize);
+			closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
+			closeButton.setOnAction(a -> this.webBrowserController.removeTab(tab));
+			
+			// HBOX
+			HBox hBox = new HBox();
+			hBox.setStyle("-fx-background-color:#000000;");
+			hBox.setOnMouseClicked(m -> {
+				if (m.getButton() == MouseButton.MIDDLE)
+					webBrowserController.removeTab(tab);
+			});
+			hBox.getChildren().addAll(iconLabel, stack, marquee, closeButton);
+			tab.setGraphic(hBox);
+			
+			//ContextMenu
+			tab.setContextMenu(new WebBrowserTabContextMenu(this, webBrowserController));
+			
+			//-------------------Items------------------------
+			
+			searchBar.setOnAction(a ->
+			
+			loadWebSite(searchBar.getText()));
+			searchBar.focusedProperty().addListener((observable , oldValue , newValue) -> {
+				if (newValue)
+					Platform.runLater(() -> searchBar.selectAll());
+			});
+			
+			//Proposing sites
+			//new AutoCompleteTextField().bindAutoCompletion(searchBar, 15, true, WebBrowserController.WEBSITE_PROPOSALS)
+			
+			//goButton
+			goButton.setOnAction(searchBar.getOnAction());
+			
+			//reloadButton
+			reloadButton.setOnAction(a -> reloadWebSite());
+			
+			//backwardButton
+			forwardButton.setDisable(true);
+			backwardButton.setOnAction(a -> goBack());
+			backwardButton.setOnMouseReleased(m -> {
+				if (m.getButton() == MouseButton.MIDDLE) //Create and add it next to this tab
+					webBrowserController.getTabPane().getTabs().add(webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
+							webBrowserController.createNewTab(browser.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() - 1).getURL()).getTab());
+			});
+			
+			//forwardButton
+			forwardButton.setDisable(true);
+			forwardButton.setOnAction(a -> goForward());
+			forwardButton.setOnMouseReleased(m -> {
+				if (m.getButton() == MouseButton.MIDDLE) //Create and add it next to this tab
+					webBrowserController.getTabPane().getTabs().add(webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
+							webBrowserController.createNewTab(browser.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() + 1).getURL()).getTab());
+			});
+			
+			//searchEngineComboBox
+			searchEngineComboBox.getItems().addAll("Google", "DuckDuckGo", "Bing", "Yahoo");
+			searchEngineComboBox.getSelectionModel().select(1);
+			
+			
+			//movingTitleAnimation
+			movingTitleAnimation.selectedProperty().addListener((observable , oldValue , newValue) -> {
+				marquee.checkAnimationValidity(newValue);
+			});
+			movingTitleAnimation.setSelected(WebBrowserController.MOVING_TITLES_ENABLED);
+			
+			//Load the website
+			loadWebSite(firstWebSite);
+			
+			//showVersion
+			about.setOnAction(a -> {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.initStyle(StageStyle.UTILITY);
+				alert.setTitle("JavaFX Browser");
+				alert.setHeaderText(null);
+				alert.setContentText("Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO");
+				
+				alert.showAndWait();
+			});
+			
+			//goFullScreen
+			goFullScreen.setOnAction(a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	/**
@@ -570,11 +535,7 @@ public class WebBrowserTabController extends StackPane {
 	 * 
 	 * @param webSite
 	 */
-	public void loadWebSite(String webSite) {
-		
-		//Check null or empty
-		//		if (webSite == null || webSite.isEmpty())
-		//			return;
+	private void loadWebSite(String webSite) {
 		
 		//Search if it is a valid WebSite url
 		String load = !new UrlValidator().isValid(webSite) ? null : webSite;
@@ -633,8 +594,6 @@ public class WebBrowserTabController extends StackPane {
 	 */
 	public void goBack() {
 		browser.goBack();
-		//	getHistory().go(historyEntryList.size() > 1 && getHistory().getCurrentIndex() > 0 ? -1 : 0);
-		//System.out.println(history.getCurrentIndex() + "," + historyEntryList.size())
 	}
 	
 	/**
@@ -643,8 +602,6 @@ public class WebBrowserTabController extends StackPane {
 	 */
 	public void goForward() {
 		browser.goForward();
-		//getHistory().go(historyEntryList.size() > 1 && getHistory().getCurrentIndex() < historyEntryList.size() - 1 ? 1 : 0);
-		//System.out.println(history.getCurrentIndex() + "," + historyEntryList.size())
 	}
 	
 	/**

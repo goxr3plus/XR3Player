@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.Util;
 
@@ -30,7 +31,7 @@ public class WebBrowserController extends StackPane {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
-	public static final String VERSION = "Version 3.6.0";
+	public static final String VERSION = "Version 3."+Main.APPLICATION_VERSION+".0";
 	
 	public static boolean MOVING_TITLES_ENABLED = true;
 	
