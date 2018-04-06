@@ -51,8 +51,6 @@ public class UserContextMenu extends ContextMenu {
 	
 	/** The library. */
 	private User user;
-	private LoginMode loginMode;
-	
 	/**
 	 * Instantiates a new library context menu.
 	 * 
@@ -60,8 +58,6 @@ public class UserContextMenu extends ContextMenu {
 	 */
 	// Constructor
 	public UserContextMenu(LoginMode loginMode) {
-		this.loginMode = loginMode;
-		
 		login.setOnAction(a -> Main.startAppWithUser(user));
 		
 		rename.setOnAction(ac -> user.renameUser(user));
@@ -72,7 +68,7 @@ public class UserContextMenu extends ContextMenu {
 		
 		exportImage.setOnAction(a -> user.exportImage());
 		
-		delete.setOnAction(ac -> loginMode.deleteUser(user));
+		delete.setOnAction(ac -> loginMode.teamViewer.getSelectedItem().deleteUser(user));
 		
 		internetImage.setDisable(true);
 		// exportImage.setDisable(true)

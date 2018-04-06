@@ -6,15 +6,17 @@ package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
+import org.controlsfx.control.PopOver.ArrowLocation;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.SpecialPopOver;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -22,48 +24,37 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class UserInformation extends StackPane {
-	
-	// --------------------------------------------------------------------
+public class UserInformation2 extends StackPane {
 	
 	@FXML
-	private JFXButton goBack;
+	private TextArea commentsArea;
 	
 	@FXML
-	private ImageView userImage;
+	private Label totalLibraries;
 	
 	@FXML
-	private Label userName;
+	private Label dateLabel;
 	
 	@FXML
-	private JFXButton rename;
+	private Label timeLabel;
 	
 	@FXML
-	private JFXButton delete;
-	
-	@FXML
-	private Label dateCreated;
-	
-	@FXML
-	private Label timeCreated;
-	
-	@FXML
-	private Label librariesLabel;
-	
-	@FXML
-	private JFXTextArea commentsArea;
+	private Label totalCharsLabel;
 	
 	// --------------------------------------------------------------------
 	
 	private User user;
 	
+	/** The Constant popOver. */
+	private SpecialPopOver popOver;
+	
 	/**
 	 * Constructor.
 	 */
-	public UserInformation() {
+	public UserInformation2() {
 		
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserInformation2.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -82,30 +73,29 @@ public class UserInformation extends StackPane {
 	 * @param user
 	 *            The given user
 	 */
-	public void show(User user) {
+	public void showWindow(User user) {
 		this.user = user;
 		
-		//--UserName
-		userName.textProperty().bind(user.getNameField().textProperty());
-		
 		//--Date Label
-		dateCreated.setText(user.getDateCreated());
-		
+		dateLabel.setText(user.getDateCreated());
 		//--Time Label		
-		timeCreated.setText(user.getTimeCreated());
-		
-		//--LibrariesLabel
-		librariesLabel.setText(user.getTotalLibrariesLabel().getText());
-		
+		timeLabel.setText(user.getTimeCreated());
+		//--Total Libraries		
+		totalLibraries.setText(user.getTotalLibrariesLabel().getText());
 		//--Comments Area		
 		commentsArea.setText(user.getDescriptionLabel().getText());
 		
-		//--rename
-		rename.setOnAction(a -> user.renameUser(userName));
-		
-		//--delete
-		delete.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(delete));
-		
+		//Show the PopOver
+		popOver.showPopOver(user);
+	}
+	
+	/**
+	 * Check if the PopOver is Showing
+	 * 
+	 * @return True if showing , false if not
+	 */
+	public boolean isShowing() {
+		return popOver.isShowing();
 	}
 	
 	/**
@@ -133,6 +123,26 @@ public class UserInformation extends StackPane {
 	@FXML
 	public void initialize() {
 		
+		// -------------Create the PopOver-------------------------------
+		popOver = new SpecialPopOver();
+		popOver.setTitle("Information");
+		popOver.getScene().setFill(Color.TRANSPARENT);
+		popOver.setAutoFix(true);
+		popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
+		popOver.setArrowSize(25);
+		popOver.setDetachable(false);
+		popOver.setAutoHide(true);
+		popOver.setHeaderAlwaysVisible(true);
+		popOver.setContentNode(this);
+		popOver.showingProperty().addListener((observable , oldValue , newValue) -> {
+			//			if (!newValue)  //on hidden
+			//				System.out.println("Closed...");
+			//			
+		});
+		
+		//-- Total Characters
+		totalCharsLabel.textProperty().bind(commentsArea.textProperty().length().asString());
+		
 		//-- Comments Area
 		commentsArea.textProperty().addListener(c -> {
 			if (user != null)
@@ -150,6 +160,11 @@ public class UserInformation extends StackPane {
 		});
 		
 		commentsArea.hoverProperty().addListener(l -> commentsArea.requestFocus());
+		
+		commentsArea.setOnKeyReleased(key -> {
+			if (key.getCode() == KeyCode.ESCAPE)
+				popOver.hide();
+		});
 		
 	}
 	

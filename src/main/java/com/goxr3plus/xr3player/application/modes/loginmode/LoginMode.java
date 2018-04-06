@@ -215,7 +215,7 @@ public class LoginMode extends BorderPane {
 	/** The context menu of the users */
 	public UserContextMenu userContextMenu = new UserContextMenu(this);
 	
-	public UserInformation userInformation = new UserInformation();
+	public UserInformation2 userInformation = new UserInformation2();
 	
 	/**
 	 * Loads all the information about each user
@@ -389,7 +389,7 @@ public class LoginMode extends BorderPane {
 		
 		//deleteUser
 		//deleteUser.disableProperty().bind(newUser.visibleProperty())
-		deleteUser.setOnAction(a -> deleteUser(deleteUser));
+		deleteUser.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(deleteUser));
 		
 		// restartButton
 		restartButton.setOnAction(a -> {
@@ -475,28 +475,7 @@ public class LoginMode extends BorderPane {
 		
 	}
 	
-	/**
-	 * Used to delete a User
-	 */
-	public void deleteUser(Node owner) {
-		//Ask
-		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ " + teamViewer.getSelectedItem().getUserName() + " ]", owner,
-				Main.window)) {
-			
-			//Try to delete it
-			User selectedUser = teamViewer.getSelectedItem();
-			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName()))) {
-				
-				//Delete from the Model Viewer
-				teamViewer.deleteUser(selectedUser);
-				
-				//Delete from PieChart
-				librariesPieChartData.stream().filter(data -> data.getName().equals(selectedUser.getUserName())).findFirst().ifPresent(data -> librariesPieChartData.remove(data));
-				
-			} else
-				ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
-		}
-	}
+	
 	
 	/**
 	 * Gets the previous.

@@ -1,116 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<fx:root prefHeight="300.0" prefWidth="330.0" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" stylesheets="@../style/userInformation.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane styleClass="librarySettings" stylesheets="@../style/application.css">
-         <padding>
-            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-         </padding>
-         <center>
-            <VBox BorderPane.alignment="CENTER">
-               <children>
-                  <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="204.0" promptText="comments...." wrapText="true" />
-               </children>
-            </VBox>
-         </center>
-         <top>
-            <GridPane BorderPane.alignment="CENTER">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="99.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="190.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Total Libraries:">
-                     <tooltip>
-                        <Tooltip text="Total songs in Library" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cabinet.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DateCreated" GridPane.rowIndex="1">
-                     <tooltip>
-                        <Tooltip text="Date the Library was created" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/dateImported.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Time Created" GridPane.rowIndex="2">
-                     <tooltip>
-                        <Tooltip text="Hour the Library was created" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/timeImported.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="totalLibraries" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1">
-                     <tooltip>
-                        <Tooltip text="Total songs in Library" />
-                     </tooltip>
-                  </Label>
-                  <Label fx:id="dateLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <tooltip>
-                        <Tooltip text="Date the Library was created" />
-                     </tooltip>
-                  </Label>
-                  <Label fx:id="timeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <tooltip>
-                        <Tooltip text="Hour the Library was created" />
-                     </tooltip>
-                  </Label>
-                  <Label fx:id="totalCharsLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Total letters" GridPane.rowIndex="3">
-                     <tooltip>
-                        <Tooltip text="Total Characters in comments" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/sms.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-                  <Label fx:id="totalCharsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <tooltip>
-                        <Tooltip text="Rating in Stars " />
-                     </tooltip>
-                  </Label>
-               </children>
-            </GridPane>
-         </top>
-      </BorderPane>
+      <HBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: #303030;">
+         <children>
+            <JFXButton fx:id="goBack" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308">
+               <graphic>
+                  <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/right.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Back" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <BorderPane minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+               <top>
+                  <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="351.0" layoutY="25.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../image/noImage.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="userImage" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                     </left>
+                     <center>
+                        <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15; -fx-border-color: transparent firebrick transparent firebrick;" text="Local Account" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="42.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="userName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="42.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                 <children>
+                                    <JFXButton fx:id="rename" focusTraversable="false" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Rename">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/rename.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Delete">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </top>
+               <center>
+                  <JFXTabPane minHeight="0.0" minWidth="0.0" styleClass="specialJFXTabPane" stylesheets="@../style/application.css" BorderPane.alignment="CENTER">
+                     <tabs>
+                        <Tab text="General Information">
+                           <content>
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #202020;">
+                                 <children>
+                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Date Created : 1/1/2018" />
+                                    <Label fx:id="timeCreated" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Time Created :  16:02 pm" />
+                                    <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Total Libraries : 15" />
+                                    <Label layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Comments" />
+                                    <JFXTextArea fx:id="commentsArea" focusColor="#a84840" maxWidth="-Infinity" prefWidth="700.0" promptText="here...." style="-fx-font-size: 20;" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/About-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+               </center>
+            </BorderPane>
+         </children>
+      </HBox>
    </children>
 </fx:root>

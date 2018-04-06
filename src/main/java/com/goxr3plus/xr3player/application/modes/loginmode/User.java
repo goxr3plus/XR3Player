@@ -305,6 +305,29 @@ public class User extends StackPane {
 	}
 	
 	/**
+	 * Used to delete a User
+	 */
+	public void deleteUser(Node owner) {
+		//Ask
+		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ " + Main.loginMode.teamViewer.getSelectedItem().getUserName() + " ]",
+				owner, Main.window)) {
+			
+			//Try to delete it		
+			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getUserName()))) {
+				
+				//Delete from the Model Viewer
+				Main.loginMode.teamViewer.deleteUser(this);
+				
+				//Delete from PieChart
+				Main.loginMode.getLibrariesPieChartData().stream().filter(data -> data.getName().equals(this.getUserName())).findFirst()
+						.ifPresent(data -> Main.loginMode.getLibrariesPieChartData().remove(data));
+				
+			} else
+				ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
+		}
+	}
+	
+	/**
 	 * This method is called when a key is released.
 	 *
 	 * @param key
@@ -321,7 +344,7 @@ public class User extends StackPane {
 			if (code == KeyCode.R)
 				renameUser(this);
 			else if (code == KeyCode.DELETE || code == KeyCode.D)
-				loginMode.deleteUser(this);
+				deleteUser(this);
 			else if (code == KeyCode.E)
 				exportImage();
 		} else if (key.getCode() == KeyCode.ENTER) {
