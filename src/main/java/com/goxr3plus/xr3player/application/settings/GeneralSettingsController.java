@@ -15,10 +15,13 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 
 /**
  * @author GOXR3PLUS
@@ -117,6 +120,9 @@ public class GeneralSettingsController extends BorderPane {
 			
 			//Turn Library Mode Upside Down or The Opposite
 			determineNotificationBarPosition();
+			
+			//Show a small notification to user
+			ActionTool.showNotification("Notification Position", "Hi!!", Duration.seconds(1), NotificationType.SIMPLE);
 			
 		});
 		
