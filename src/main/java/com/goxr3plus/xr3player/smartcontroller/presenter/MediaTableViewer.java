@@ -490,9 +490,9 @@ public class MediaTableViewer extends StackPane {
 			if (imageView1.getImage() == Media.NO_ARTWORK_IMAGE && imageView2.getImage() != Media.NO_ARTWORK_IMAGE)
 				return 1;
 			else if (imageView1.getImage() != Media.NO_ARTWORK_IMAGE && imageView2.getImage() == Media.NO_ARTWORK_IMAGE)
-				return -1;
-			else
 				return 0;
+			else
+				return -1;
 		});
 		artwork.visibleProperty().addListener(l -> {
 			if (artwork.isVisible())

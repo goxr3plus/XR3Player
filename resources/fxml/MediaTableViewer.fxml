@@ -17,7 +17,7 @@
          <center>
             <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn fx:id="number" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="#" />
+                  <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
                   <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Artwork">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
