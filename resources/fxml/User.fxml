@@ -101,14 +101,14 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
                <graphic>
-                  <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Library-32.png" />
+                        <Image url="@../image/playlist.png" />
                      </image>
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets bottom="7.0" left="7.0" right="5.0" top="4.0" />
+                  <Insets bottom="5.0" left="7.0" right="5.0" top="5.0" />
                </padding>
                <tooltip>
                   <Tooltip text="Total Libraries" />

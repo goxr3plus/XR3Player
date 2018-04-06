@@ -207,7 +207,7 @@ abstract class Visualizer extends VisualizerDrawer {
 			framesSinceLastFpsUpdate++;
 			if (secondsElapsedSinceLastFpsUpdate >= 0.5f) {
 				int fps = Math.round(framesSinceLastFpsUpdate / secondsElapsedSinceLastFpsUpdate);
-				System.out.println(fps);
+				//System.out.println(fps)
 				secondsElapsedSinceLastFpsUpdate = 0;
 				framesSinceLastFpsUpdate = 0;
 			}
