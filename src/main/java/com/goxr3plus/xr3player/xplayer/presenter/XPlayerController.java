@@ -44,6 +44,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -160,6 +161,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button nextSongButton;
 	
 	@FXML
+	private StackPane visualizerStackTopParent;
+	
+	@FXML
 	private StackPane visualizerStackPane;
 	
 	@FXML
@@ -169,7 +173,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label visualizerVisibleLabel;
 	
 	@FXML
-	private HBox visualizerMaximizedHBox;
+	private FlowPane visualizerMaximizedBox;
 	
 	@FXML
 	private Label visualizerMinimize;
@@ -214,7 +218,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private BorderPane smBorderPane;
 	
 	@FXML
-	private StackPane smImageViewStackPane;
+	private StackPane smModeCenterStackPane;
 	
 	@FXML
 	private ImageView smImageView;
@@ -239,6 +243,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label smVolumeSliderLabel;
+	
+	@FXML
+	private JFXToggleButton showVisualizer;
 	
 	@FXML
 	private HBox hBox11;
@@ -631,9 +638,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			if (!newValue) {
 				smBorderPane.setVisible(true);
 				modeToggleLabel.setText("Basic");
+				
+				//Fix the Visualizer
+				simple_And_Advanced_Mode_Fix_Visualizer();
+				
 			} else {
 				smBorderPane.setVisible(false);
 				modeToggleLabel.setText("Advanced");
+				
+				//Fix the Visualizer
+				simple_And_Advanced_Mode_Fix_Visualizer();
 			}
 			
 			//Go away from history
@@ -641,6 +655,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
+		});
+		
+		//showVisualizer
+		showVisualizer.selectedProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//Fix the Visualizer
+			simple_And_Advanced_Mode_Fix_Visualizer();
+			
+			//Update the properties file
+			//Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
 		});
 		
 		//RestorePlayerVBox
@@ -696,6 +720,35 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
+	}
+	
+	/**
+	 * Fixes the Visualizer StackPane when adding it on Simple Mode or Advanced Mode
+	 */
+	private void simple_And_Advanced_Mode_Fix_Visualizer() {
+		
+		//If we are on the simple Mode
+		if (!modeToggle.isSelected()) {
+			//If the ShowVisualizer on Simple Mode is Selected
+			if (showVisualizer.isSelected()) {
+				visualizerStackTopParent.getChildren().remove(visualizerStackPane);
+				//Check for no duplicates
+				if (!smModeCenterStackPane.getChildren().contains(visualizerStackPane))
+					smModeCenterStackPane.getChildren().add(visualizerStackPane);
+				//If it isn't
+			} else {
+				smModeCenterStackPane.getChildren().remove(visualizerStackPane);
+				//Check for no duplicates
+				if (!visualizerStackTopParent.getChildren().contains(visualizerStackPane))
+					visualizerStackTopParent.getChildren().add(visualizerStackPane);
+			}
+			//If we are on Advanced Mode
+		} else {
+			smModeCenterStackPane.getChildren().remove(visualizerStackPane);
+			//Check for no duplicates
+			if (!visualizerStackTopParent.getChildren().contains(visualizerStackPane))
+				visualizerStackTopParent.getChildren().add(visualizerStackPane);
+		}
 	}
 	
 	/**
@@ -982,9 +1035,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		visualizerVisibleLabel.visibleProperty().bind(visualizerVisible.selectedProperty().not());
 		
 		// visualizerMaximizedHBox
-		visualizerMaximizedHBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty());
+		visualizerMaximizedBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty());
+		
 		// visualizerMinimize
 		visualizerMinimize.setOnMouseReleased(m -> visualizerWindow.removeVisualizer());
+		
 		// visualizerRequestFocus
 		visualizerRequestFocus.setOnMouseReleased(m -> visualizerWindow.getStage().requestFocus());
 		
@@ -998,6 +1053,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//Pad
 		xPlayerPad = new XPlayerPad(this);
 		padTab.setContent(xPlayerPad);
+		
 	}
 	
 	/**
@@ -1022,9 +1078,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
 		smImageView.fitWidthProperty().bind(
-				Bindings.when(smImageViewStackPane.widthProperty().lessThan(smBorderPane.widthProperty())).then(smImageViewStackPane.widthProperty().subtract(20)).otherwise(0));
-		smImageView.fitHeightProperty().bind(
-				Bindings.when(smImageViewStackPane.heightProperty().lessThan(smBorderPane.heightProperty())).then(smImageViewStackPane.heightProperty().subtract(20)).otherwise(0));
+				Bindings.when(smModeCenterStackPane.widthProperty().lessThan(smBorderPane.widthProperty())).then(smModeCenterStackPane.widthProperty().subtract(20)).otherwise(0));
+		smImageView.fitHeightProperty().bind(Bindings.when(smModeCenterStackPane.heightProperty().lessThan(smBorderPane.heightProperty()))
+				.then(smModeCenterStackPane.heightProperty().subtract(20)).otherwise(0));
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
