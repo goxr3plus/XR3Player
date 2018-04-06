@@ -18,11 +18,8 @@
          <viewport>
             <Rectangle2D />
          </viewport>
-         <image>
-            <Image url="@../image/playlistImage.png" />
-         </image>
 		</ImageView>
-		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-border-color: transparent firebrick transparent firebrick;" styleClass="libraryNameLabel" text="Name" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
+		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-border-color: transparent firebrick transparent firebrick; -fx-font-size: 17; -fx-background-color: #202020;" styleClass="libraryNameLabel" text="Name" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
 			<tooltip>
 				<Tooltip />
 			</tooltip>

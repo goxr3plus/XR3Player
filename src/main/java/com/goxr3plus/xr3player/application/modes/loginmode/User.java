@@ -188,15 +188,15 @@ public class User extends StackPane {
 		});
 		
 		// Clip
-		Rectangle rect = new Rectangle();
-		rect.widthProperty().bind(this.widthProperty());
-		rect.heightProperty().bind(this.heightProperty());
-		rect.setArcWidth(25);
-		rect.setArcHeight(25);
+		//		Rectangle rect = new Rectangle();
+		//		rect.widthProperty().bind(this.widthProperty());
+		//		rect.heightProperty().bind(this.heightProperty());
+		//		rect.setArcWidth(25);
+		//		rect.setArcHeight(25);
 		// rect.setEffect(new Reflection());
 		
 		// StackPane -> this
-		this.setClip(rect);
+		//		this.setClip(rect);
 		// Reflection reflection = new Reflection();
 		// reflection.setInput(new DropShadow(4, Color.WHITE));
 		// this.setEffect(reflection);
@@ -224,6 +224,8 @@ public class User extends StackPane {
 				.bind(descriptionLabel.textProperty().isEmpty().not().and(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty()));
 		descriptionLabel.setOnMouseReleased(informationLabel.getOnMouseReleased());
 		
+		//-- 
+		warningLabel.setVisible(false);
 	}
 	
 	/**
@@ -321,7 +323,6 @@ public class User extends StackPane {
 				//Delete from PieChart
 				Main.loginMode.getLibrariesPieChartData().stream().filter(data -> data.getName().equals(this.getUserName())).findFirst()
 						.ifPresent(data -> Main.loginMode.getLibrariesPieChartData().remove(data));
-				
 				
 				//Flip Pane flip to Front
 				Main.loginMode.flipPane.flipToFront();

@@ -8,9 +8,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
 <fx:root styleClass="library" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -19,10 +17,23 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: rgb(0,0,0,0.7); -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: firebrick transparent transparent transparent;" text="user name here" wrapText="true" StackPane.alignment="CENTER">
+      <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
+         <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/warning.png" />
+               </image>
+            </ImageView>
+         </graphic>
          <tooltip>
-            <Tooltip />
+            <Tooltip text="Image is missing !!" />
          </tooltip>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <StackPane.margin>
+            <Insets left="2.0" top="95.0" />
+         </StackPane.margin>
       </Label>
       <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
          <graphic>
@@ -38,87 +49,75 @@
          <tooltip>
             <Tooltip text="User description" />
          </tooltip>
-      </Label>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="7.0" StackPane.alignment="BOTTOM_RIGHT">
-         <children>
-            <Label fx:id="dropBoxLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="0" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <graphic>
-                  <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/dropbox.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Connected DropBox Accounts" />
-               </tooltip>
-            </Label>
-            <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="32.0" layoutY="10.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/About-32.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true" />
-               </tooltip>
-            </Label>
-         </children>
          <StackPane.margin>
-            <Insets bottom="2.0" right="3.0" />
+            <Insets left="2.0" top="55.0" />
          </StackPane.margin>
-      </HBox>
-      <VBox alignment="BOTTOM_LEFT" minHeight="0.0" minWidth="0.0" pickOnBounds="false" spacing="10.0">
+      </Label>
+      <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" wrapText="true" StackPane.alignment="TOP_LEFT">
          <cursor>
-            <Cursor fx:constant="V_RESIZE" />
+            <Cursor fx:constant="HAND" />
          </cursor>
-         <children>
-            <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" visible="false">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/warning.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Image is missing !!" />
-               </tooltip>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </Label>
-            <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" layoutX="315.0" layoutY="154.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="0" textAlignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <graphic>
-                  <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/playlist.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets bottom="5.0" left="7.0" right="5.0" top="5.0" />
-               </padding>
-               <tooltip>
-                  <Tooltip text="Total Libraries" />
-               </tooltip>
-               <VBox.margin>
-                  <Insets bottom="3.0" left="3.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
+         <graphic>
+            <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/About-32.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true" />
+         </tooltip>
+         <StackPane.margin>
+            <Insets left="2.0" top="5.0" />
+         </StackPane.margin>
+      </Label>
+      <Label fx:id="dropBoxLabel" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <graphic>
+            <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/dropbox.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Connected DropBox Accounts" />
+         </tooltip>
+         <padding>
+            <Insets bottom="5.0" left="7.0" right="5.0" top="5.0" />
+         </padding>
+         <StackPane.margin>
+            <Insets right="2.0" top="50.0" />
+         </StackPane.margin>
+      </Label>
+      <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <graphic>
+            <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/playlist.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets bottom="5.0" left="7.0" right="5.0" top="5.0" />
+         </padding>
+         <tooltip>
+            <Tooltip text="Total Libraries" />
+         </tooltip>
+         <StackPane.margin>
+            <Insets right="2.0" top="5.0" />
+         </StackPane.margin>
+      </Label>
+      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: #202020; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: transparent firebrick transparent firebrick;" text="Name" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
+         <tooltip>
+            <Tooltip />
+         </tooltip>
+      </Label>
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />
