@@ -165,7 +165,7 @@
                                           </SplitPane>
                                           <SplitPane fx:id="leftSplitPane" dividerPositions="0.2126126126126126" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" SplitPane.resizableWithParent="false">
                                              <items>
-                                                <VBox alignment="TOP_CENTER" maxHeight="140.0" minHeight="-Infinity" minWidth="0.0" prefHeight="115.0" prefWidth="202.0" spacing="2.0" SplitPane.resizableWithParent="false">
+                                                <VBox alignment="TOP_CENTER" maxHeight="140.0" minHeight="130.0" minWidth="0.0" prefWidth="202.0" spacing="2.0" style="-fx-background-color: #202020;" SplitPane.resizableWithParent="false">
                                                    <children>
                                                       <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                                          <children>

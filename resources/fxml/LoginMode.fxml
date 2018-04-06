@@ -339,17 +339,22 @@
       </HBox>
    </bottom>
    <top>
-      <StackPane BorderPane.alignment="CENTER">
-         <children>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxWidth="-Infinity" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #202020; -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~  XR3Player  ~" fx:id="xr3PlayerLabel">
+      <BorderPane style="-fx-background-color: #101010;" BorderPane.alignment="CENTER">
+         <center>
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-color: firebrick firebrick transparent firebrick; -fx-border-width: 3; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~  XR3Player  ~" BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>
                <padding>
                   <Insets bottom="2.0" />
                </padding>
+               <BorderPane.margin>
+                  <Insets right="5.0" />
+               </BorderPane.margin>
             </Label>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0" style="-fx-background-color: #151515; -fx-background-radius: 0 0 15 15;" translateY="-2.0" StackPane.alignment="CENTER_RIGHT">
+         </center>
+         <right>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
@@ -410,13 +415,7 @@
                   </MenuButton>
                </children>
             </VBox>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <padding>
-            <Insets left="5.0" right="1.0" top="3.0" />
-         </padding>
-      </StackPane>
+         </right>
+      </BorderPane>
    </top>
 </fx:root>
