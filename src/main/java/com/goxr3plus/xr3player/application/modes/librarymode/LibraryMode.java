@@ -125,7 +125,7 @@ public class LibraryMode extends BorderPane {
 	/**
 	 * Default image of a library(which has not a costume one selected by the user.
 	 */
-	public static Image defaultImage;//= InfoTool.getImageFromDocuments("visualizer.jpg")
+	public static Image defaultImage = InfoTool.getImageFromResourcesFolder("playlistImage.png");
 	/**
 	 * A classic warning image to inform the user about something
 	 * 

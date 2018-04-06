@@ -3,12 +3,6 @@
 *                         userInformationMode                        *
 
 ******************************************************************************/
-
-.button:hover{
-	-fx-background-color:rgb(255.0,255.0,255.0,0.4);
-}
-
-
 .infoLabel{
 	-fx-text-fill:white;
 	-fx-font-weight:bold;

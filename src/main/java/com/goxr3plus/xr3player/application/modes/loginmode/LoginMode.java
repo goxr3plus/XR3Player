@@ -42,6 +42,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
@@ -65,9 +66,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.UsersInfoLoader;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -84,6 +87,48 @@ public class LoginMode extends BorderPane {
 	//-------------------------------------
 	
 	@FXML
+	private Hyperlink youtubeTutorialsHyperLink;
+	
+	@FXML
+	private Hyperlink visitCreatorHyperLink;
+	
+	@FXML
+	private VBox downloadsVBox;
+	
+	@FXML
+	private Label sourceForgeDownloadsLabel1;
+	
+	@FXML
+	private Label sourceForgeDownloadsLabel;
+	
+	@FXML
+	private Label gitHubDownloadsLabel;
+	
+	@FXML
+	private Label xr3PlayerLabel;
+	
+	@FXML
+	private Button restartButton;
+	
+	@FXML
+	private Button minimize;
+	
+	@FXML
+	private Button maxOrNormalize;
+	
+	@FXML
+	private Button exitApplication;
+	
+	@FXML
+	private MenuItem chooseBackground;
+	
+	@FXML
+	private MenuItem resetBackground;
+	
+	@FXML
+	private StackPane centerStackPane;
+	
+	@FXML
 	private SplitPane splitPane;
 	
 	@FXML
@@ -94,9 +139,6 @@ public class LoginMode extends BorderPane {
 	
 	@FXML
 	private ScrollBar horizontalScrollBar;
-	
-	@FXML
-	private Button createFirstUser;
 	
 	@FXML
 	private Label quickSearchTextField;
@@ -141,6 +183,9 @@ public class LoginMode extends BorderPane {
 	private HBox botttomHBox;
 	
 	@FXML
+	private Button createFirstUser;
+	
+	@FXML
 	private PieChart librariesPieChart;
 	
 	@FXML
@@ -151,45 +196,6 @@ public class LoginMode extends BorderPane {
 	
 	@FXML
 	private Button deleteDatabase;
-	
-	@FXML
-	private Hyperlink youtubeTutorialsHyperLink;
-	
-	@FXML
-	private Hyperlink visitCreatorHyperLink;
-	
-	@FXML
-	private VBox downloadsVBox;
-	
-	@FXML
-	private Label sourceForgeDownloadsLabel1;
-	
-	@FXML
-	private Label sourceForgeDownloadsLabel;
-	
-	@FXML
-	private Label gitHubDownloadsLabel;
-	
-	@FXML
-	private Label xr3PlayerLabel;
-	
-	@FXML
-	private Button restartButton;
-	
-	@FXML
-	private Button minimize;
-	
-	@FXML
-	private Button maxOrNormalize;
-	
-	@FXML
-	private Button exitApplication;
-	
-	@FXML
-	private MenuItem chooseBackground;
-	
-	@FXML
-	private MenuItem resetBackground;
 	
 	// --------------------------------------------
 	
@@ -215,12 +221,16 @@ public class LoginMode extends BorderPane {
 	/** The context menu of the users */
 	public UserContextMenu userContextMenu = new UserContextMenu(this);
 	
-	public UserInformation2 userInformation = new UserInformation2();
+	//public UserInformation2 userInformation = new UserInformation2();
+	
+	public final UserInformation userInformation = new UserInformation(UserCategory.NO_LOGGED_IN);
 	
 	/**
 	 * Loads all the information about each user
 	 */
 	public UsersInfoLoader usersInfoLoader = new UsersInfoLoader();
+	
+	public final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 	
 	//---------------------------------------
 	
@@ -250,7 +260,7 @@ public class LoginMode extends BorderPane {
 						teamViewer.addUser(user, true);
 						
 						//Add to PieChart
-						//librariesPieChartData.add(new PieChart.Data(newName, 0));
+						librariesPieChartData.add(new PieChart.Data(newName, 0));
 						
 						//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
 						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
@@ -295,25 +305,16 @@ public class LoginMode extends BorderPane {
 	@FXML
 	private void initialize() {
 		
+		//flipPane
+		flipPane.setFlipTime(150);
+		flipPane.getFront().getChildren().addAll(centerStackPane.getChildren());
+		flipPane.getBack().getChildren().addAll(userInformation);
+		
+		//centerStackPane
+		centerStackPane.getChildren().add(flipPane);
+		
 		//librariesPieChart
 		librariesPieChart.setData(librariesPieChartData);
-		
-		//		//downloadsPieChart
-		//		downloadsPieChartData.addAll(new PieChart.Data("Source...", 240), new PieChart.Data("Git...", 142));
-		//		downloadsPieChart.setData(downloadsPieChartData);
-		//		
-		//		final Label caption = new Label("");
-		//		caption.setTextFill(Color.DARKORANGE);
-		//		caption.setStyle("-fx-font: 24 arial;");
-		//		for (final PieChart.Data data : downloadsPieChart.getData()) {
-		//			data.getNode().setOnMouseEntered(m -> {
-		//				System.out.println("Entered");
-		//				caption.setTranslateX(m.getSceneX());
-		//				caption.setTranslateY(m.getSceneY());
-		//				caption.setText(String.valueOf(data.getPieValue()) + "%");
-		//			});
-		//			
-		//		}
 		
 		//Initialize
 		teamViewer = new Viewer(horizontalScrollBar);
@@ -475,8 +476,6 @@ public class LoginMode extends BorderPane {
 		
 	}
 	
-	
-	
 	/**
 	 * Gets the previous.
 	 *
@@ -529,6 +528,13 @@ public class LoginMode extends BorderPane {
 	 */
 	public ColorPicker getColorPicker() {
 		return colorPicker;
+	}
+	
+	/**
+	 * @return the centerStackPane
+	 */
+	public StackPane getCenterStackPane() {
+		return centerStackPane;
 	}
 	
 	/*-----------------------------------------------------------------------

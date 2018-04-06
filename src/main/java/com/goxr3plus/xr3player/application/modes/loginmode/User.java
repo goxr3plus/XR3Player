@@ -216,7 +216,7 @@ public class User extends StackPane {
 		// ----InformationLabel
 		informationLabel.setOnMouseReleased(m -> {
 			if (Main.loginMode.teamViewer.centerItemProperty().get() == User.this)
-				Main.loginMode.userInformation.showWindow(this);
+				Main.loginMode.userInformation.show(this);
 		});
 		
 		// ----DescriptionLabel
@@ -322,6 +322,10 @@ public class User extends StackPane {
 				Main.loginMode.getLibrariesPieChartData().stream().filter(data -> data.getName().equals(this.getUserName())).findFirst()
 						.ifPresent(data -> Main.loginMode.getLibrariesPieChartData().remove(data));
 				
+				
+				//Flip Pane flip to Front
+				Main.loginMode.flipPane.flipToFront();
+				
 			} else
 				ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2), NotificationType.ERROR);
 		}
@@ -334,7 +338,7 @@ public class User extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
-		if (Main.loginMode.userInformation.isShowing() || getPosition() != loginMode.teamViewer.getCenterIndex())
+		if (getPosition() != loginMode.teamViewer.getCenterIndex())
 			return;
 		
 		//Check if Control is down

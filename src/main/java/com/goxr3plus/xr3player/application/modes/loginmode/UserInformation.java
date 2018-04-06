@@ -55,12 +55,19 @@ public class UserInformation extends StackPane {
 	
 	// --------------------------------------------------------------------
 	
+	public enum UserCategory {
+		LOGGED_IN, NO_LOGGED_IN;
+	}
+	
 	private User user;
+	
+	UserCategory userCategory;
 	
 	/**
 	 * Constructor.
 	 */
-	public UserInformation() {
+	public UserInformation(UserCategory userCategory) {
+		this.userCategory = userCategory;
 		
 		// ----------------------------------FXMLLoader-------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserInformation.fxml"));
@@ -86,25 +93,36 @@ public class UserInformation extends StackPane {
 		this.user = user;
 		
 		//--UserName
-		userName.textProperty().bind(user.getNameField().textProperty());
+		userName.textProperty().bindBidirectional(user.getNameField().textProperty());
 		
 		//--Date Label
-		dateCreated.setText(user.getDateCreated());
+		dateCreated.setText("Date Created : " + user.getDateCreated());
 		
 		//--Time Label		
-		timeCreated.setText(user.getTimeCreated());
+		timeCreated.setText("Time Created : " + user.getTimeCreated());
 		
 		//--LibrariesLabel
-		librariesLabel.setText(user.getTotalLibrariesLabel().getText());
+		librariesLabel.setText("Total Libraries : " + user.getTotalLibrariesLabel().getText());
 		
 		//--Comments Area		
 		commentsArea.setText(user.getDescriptionLabel().getText());
 		
 		//--rename
-		rename.setOnAction(a -> user.renameUser(userName));
+		rename.setOnAction(a -> user.renameUser(rename));
 		
 		//--delete
 		delete.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(delete));
+		
+		//--goBack
+		goBack.setOnAction(a -> Main.loginMode.flipPane.flipToFront());
+		
+		//--imageView
+		userImage.imageProperty().bind(user.getImageView().imageProperty());
+		userImage.setOnMouseReleased(m -> user.changeUserImage());
+		
+		//User Category
+		if (userCategory == UserCategory.NO_LOGGED_IN)
+			Main.loginMode.flipPane.flipToBack();
 		
 	}
 	

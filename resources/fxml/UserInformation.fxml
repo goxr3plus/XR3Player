@@ -41,7 +41,7 @@
                      <left>
                         <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="351.0" layoutY="25.0" pickOnBounds="true">
+                              <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="351.0" layoutY="25.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@../image/noImage.png" />
                                  </image>
@@ -49,7 +49,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </ImageView>
-                              <ImageView fx:id="userImage" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
+                              <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
