@@ -667,7 +667,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			simple_And_Advanced_Mode_Fix_Visualizer();
 			
 			//Update the properties file
-			//Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Simple-Mode-Visualizers-Enabled", String.valueOf(showVisualizer.isSelected()));
 		});
 		
 		//RestorePlayerVBox
@@ -959,10 +959,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			xPlayer.setGain((double) volumeDisc.getValue() / 100.00);
 			// }
 			
-//			//Update PropertiesDB
-//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
-//			
-//			System.out.println(getVolume());
+			//			//Update PropertiesDB
+			//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
+			//			
+			//			System.out.println(getVolume());
 		} catch (Exception ex) {
 			
 			logger.log(Level.INFO, "\n", ex);
@@ -1913,6 +1913,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public boolean isExtended() {
 		return isExtended;
+	}
+	
+	/**
+	 * @return the showVisualizer
+	 */
+	public JFXToggleButton getShowVisualizer() {
+		return showVisualizer;
 	}
 	
 }

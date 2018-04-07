@@ -168,6 +168,9 @@ public class ApplicationSettingsLoader {
 				//Check if muted
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Muted")).ifPresent(s -> xPlayerController.setMute(Boolean.parseBoolean(s)));
 				
+				//Check if Visualizers Enabled on Simple Mode
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Simple-Mode-Visualizers-Enabled")).ifPresent(s -> xPlayerController.getShowVisualizer().setSelected(Boolean.parseBoolean(s)));
+				
 			});
 			
 			//----------                        --------------------
