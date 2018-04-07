@@ -780,6 +780,8 @@
 	-fx-text-fill:#202020;
 }
 
+
+/*
 .jfx-button:armed,
 .jfx-button:hover,
 .jfx-button:focused{
@@ -791,6 +793,8 @@
     -fx-background-radius: 3.0px;
     -fx-background-insets: 0.0px;
 }
+
+*/
 
  
  

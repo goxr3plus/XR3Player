@@ -59,7 +59,6 @@ public class WelcomeScreen extends StackPane {
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	
 	private MediaPlayer mediaPlayer;
 	private MediaPlayer soundPlayer;
 	
@@ -103,27 +102,27 @@ public class WelcomeScreen extends StackPane {
 		
 		try {
 			
-			if (mediaPlayer != null) {
-				mediaPlayer.play();
+			if (mediaPlayer != null && soundPlayer != null) {
+				//mediaPlayer.play();
 				soundPlayer.play();
 			} else {
 				
-				mediaView.setFitWidth(Main.window.getWidth());
-				mediaView.setFitHeight(Main.window.getHeight());
-				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
-				mediaView.setMediaPlayer(mediaPlayer);
-				mediaPlayer.setAutoPlay(true);
-				//mediaPlayer.setRate(3.0)
-				mediaPlayer.setStartTime(Duration.seconds(0));
-				mediaPlayer.setStopTime(Duration.seconds(8));
-				//mediaPlayer.setCycleCount(50)
-				mediaPlayer.play();
-				mediaPlayer.setAutoPlay(true);
-				//mediaPlayer.setCycleCount(50)
-				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
+				//				mediaView.setFitWidth(Main.window.getWidth());
+				//				mediaView.setFitHeight(Main.window.getHeight());
+				//				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
+				//				mediaView.setMediaPlayer(mediaPlayer);
+				//				mediaPlayer.setAutoPlay(true);
+				//				//mediaPlayer.setRate(3.0)
+				//				mediaPlayer.setStartTime(Duration.seconds(0));
+				//				mediaPlayer.setStopTime(Duration.seconds(8));
+				//				//mediaPlayer.setCycleCount(50)
+				//				mediaPlayer.play();
+				//				mediaPlayer.setAutoPlay(true);
+				//				//mediaPlayer.setCycleCount(50)
+				//				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
 				
-				//Start the stream player
-				soundPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString()));
+				Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString());
+				soundPlayer = new MediaPlayer(m1);
 				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
 				soundPlayer.play();
 				
@@ -145,6 +144,9 @@ public class WelcomeScreen extends StackPane {
 		
 		if (mediaPlayer != null) {
 			mediaPlayer.dispose();
+		}
+		
+		if (soundPlayer != null) {
 			soundPlayer.dispose();
 		}
 		
