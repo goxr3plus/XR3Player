@@ -1842,7 +1842,15 @@
 
 
 
+.dark-text-area{
+	
+	-fx-background-color:white;
+	-fx-text-fill:white;
+}
 
+.dark-text-area .content {
+    -fx-background-color: #202020;
+}
 
 
 

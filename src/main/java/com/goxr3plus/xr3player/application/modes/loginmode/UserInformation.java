@@ -4,14 +4,16 @@
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -45,13 +47,16 @@ public class UserInformation extends StackPane {
 	private Label dateCreated;
 	
 	@FXML
-	private Label timeCreated;
-	
-	@FXML
 	private Label librariesLabel;
 	
 	@FXML
-	private JFXTextArea commentsArea;
+	private Label commentsLabel;
+	
+	@FXML
+	private TextArea commentsArea;
+	
+	@FXML
+	private JFXButton goBack2;
 	
 	// --------------------------------------------------------------------
 	
@@ -93,13 +98,10 @@ public class UserInformation extends StackPane {
 		this.user = user;
 		
 		//--UserName
-		userName.textProperty().bindBidirectional(user.getNameField().textProperty());
+		userName.textProperty().bind(user.getNameField().textProperty());
 		
 		//--Date Label
-		dateCreated.setText("Date Created : " + user.getDateCreated());
-		
-		//--Time Label		
-		timeCreated.setText("Time Created : " + user.getTimeCreated());
+		dateCreated.setText(user.getDateCreated() + " " + user.getTimeCreated());
 		
 		//--LibrariesLabel
 		librariesLabel.setText("Total Libraries : " + user.getTotalLibrariesLabel().getText());
@@ -115,10 +117,17 @@ public class UserInformation extends StackPane {
 		
 		//--goBack
 		goBack.setOnAction(a -> Main.loginMode.flipPane.flipToFront());
+		goBack2.setOnAction(goBack.getOnAction());
 		
 		//--imageView
 		userImage.imageProperty().bind(user.getImageView().imageProperty());
 		userImage.setOnMouseReleased(m -> user.changeUserImage());
+		
+		//-- commentsLabel
+		commentsLabel.textProperty().bind(commentsArea.textProperty().length().asString());
+		
+		//-- commentsArea
+		Optional.ofNullable(user.getUserInformationDb().getProperty("User-Description")).ifPresent(comment -> commentsArea.setText(comment));
 		
 		//User Category
 		if (userCategory == UserCategory.NO_LOGGED_IN)
@@ -153,18 +162,24 @@ public class UserInformation extends StackPane {
 		
 		//-- Comments Area
 		commentsArea.textProperty().addListener(c -> {
-			if (user != null)
-				if (commentsArea.getText().length() <= 200)
-					user.getDescriptionLabel().setText(commentsArea.getText());
-				else
-					commentsArea.setText(commentsArea.getText().substring(0, 200));
+			//User?=null
+			if (user != null) {
+				String text = commentsArea.getText();
+				//Check
+				if (!text.isEmpty() && text.length() > 2000)
+					commentsArea.setText(text.substring(0, 2000));
+			}
 		});
 		
 		commentsArea.setOnMouseExited(exit -> {
-			if (user != null)
+			if (user != null) {
+				
+				//User Description Label
+				user.getDescriptionLabel().setText(commentsArea.getText());
+				
 				//Save on the properties file
 				user.getUserInformationDb().updateProperty("User-Description", commentsArea.getText());
-			
+			}
 		});
 		
 		commentsArea.hoverProperty().addListener(l -> commentsArea.requestFocus());

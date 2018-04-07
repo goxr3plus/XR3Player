@@ -2,11 +2,11 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -43,12 +43,21 @@
                            <children>
                               <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="351.0" layoutY="25.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../image/noImage.png" />
+                                    <Image url="@../image/noImage2.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </ImageView>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" style="-fx-font-weight: bold;" text="Add Image">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/plus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
                               <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -60,7 +69,7 @@
                      <center>
                         <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15; -fx-border-color: transparent firebrick transparent firebrick;" text="Local Account" textAlignment="CENTER" wrapText="true">
+                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15; -fx-border-color: transparent firebrick transparent firebrick;" text="Local Account" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="42.0" />
                                  </font>
@@ -116,11 +125,35 @@
                            <content>
                               <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #202020;">
                                  <children>
-                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Date Created : 1/1/2018" />
-                                    <Label fx:id="timeCreated" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Time Created :  16:02 pm" />
-                                    <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Total Libraries : 15" />
-                                    <Label layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="Comments" />
-                                    <JFXTextArea fx:id="commentsArea" focusColor="#a84840" maxWidth="-Infinity" prefWidth="700.0" promptText="here...." style="-fx-font-size: 20;" />
+                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/calendar.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Label>
+                                    <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/playlist.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Label>
+                                    <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/chat.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" VBox.vgrow="ALWAYS">
+                                       <graphic>
+                                          <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="notes..." styleClass="dark-text-area" wrapText="true" />
+                                       </graphic>
+                                    </Label>
                                  </children>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -139,6 +172,21 @@
                   </JFXTabPane>
                </center>
             </BorderPane>
+            <JFXButton fx:id="goBack2" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/right.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Back" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </HBox>
    </children>
