@@ -527,6 +527,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//radialMenu.mute.setSelected(muteButton.isSelected());
 			
 			//System.out.println("Entered Menu Button");
+			
+			//Update PropertiesDB
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Muted", String.valueOf(muteButton.isSelected()));
+			
 		});
 		smMuteButton.selectedProperty().bindBidirectional(muteButton.selectedProperty());
 		
@@ -1681,6 +1685,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public void setMute(boolean value) {
 		muteButton.setSelected(value);
 		xPlayer.setMute(value);
+		
 	}
 	
 	/**

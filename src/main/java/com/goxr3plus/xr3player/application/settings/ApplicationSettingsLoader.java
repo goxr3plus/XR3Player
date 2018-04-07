@@ -161,6 +161,13 @@ public class ApplicationSettingsLoader {
 				//Check if it is on simple or advanced mode
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Advanced-Mode"))
 						.ifPresent(s -> xPlayerController.getModeToggle().setSelected(Boolean.valueOf(s)));
+				
+				//Check the volume bar
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Volume-Bar")).ifPresent(s -> xPlayerController.setVolume(Integer.parseInt(s)));
+				
+				//Check if muted
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Muted")).ifPresent(s -> xPlayerController.setMute(Boolean.parseBoolean(s)));
+				
 			});
 			
 			//----------                        --------------------
