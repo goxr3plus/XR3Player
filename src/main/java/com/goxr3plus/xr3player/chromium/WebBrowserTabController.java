@@ -18,6 +18,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.BrowserException;
 import com.teamdev.jxbrowser.chromium.ContextMenuHandler;
 import com.teamdev.jxbrowser.chromium.ContextMenuParams;
 import com.teamdev.jxbrowser.chromium.events.FailLoadingEvent;
@@ -456,10 +457,11 @@ public class WebBrowserTabController extends StackPane {
 			
 			//Finally load the firstWebSite
 			loadWebSite(firstWebSite);
+		} catch (BrowserException ex) {
+			System.exit(-1);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			if(ex.getMessage().equals("The Chromium profile directory is already used/locked by another BrowserContext instance or process."))
-				System.exit(-1);
+			//The Chromium profile directory is already used/locked by another BrowserContext instance or process.
 		}
 	}
 	
