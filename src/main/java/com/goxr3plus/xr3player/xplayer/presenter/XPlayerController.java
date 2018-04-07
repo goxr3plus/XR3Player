@@ -963,6 +963,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
 			//			
 			//			System.out.println(getVolume());
+			
+			visualizerStackController.replayLabelEffect("Vol: " + getVolume()+" %");
 		} catch (Exception ex) {
 			
 			logger.log(Level.INFO, "\n", ex);
