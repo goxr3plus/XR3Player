@@ -95,7 +95,7 @@
       </HBox>
    </right>
    <center>
-      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR3Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
+      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR4Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
          <effect>
             <DropShadow />
          </effect>
@@ -126,7 +126,7 @@
    <left>
       <HBox alignment="CENTER" minWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" styleClass="specialJFXTabPane" tabClosingPolicy="ALL_TABS" HBox.hgrow="ALWAYS">
+            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                <tabs>
                   <Tab fx:id="mainModeTab">
                      <graphic>
@@ -160,6 +160,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="User Mode" />
+                     </tooltip>
                   </Tab>
                   <Tab fx:id="webModeTab">
                      <graphic>
