@@ -128,6 +128,9 @@ public class XPlayerPlayService extends Service<Boolean> {
 			@Override
 			protected Boolean call() throws Exception {
 				
+				AudioType[] audioType = { null };
+				String audioFullPath = null;
+				
 				try {
 					
 					// Stop the previous audio
@@ -138,17 +141,18 @@ public class XPlayerPlayService extends Service<Boolean> {
 					updateMessage("File Configuration ...");
 					
 					// duration
-					xPlayerController.getxPlayerModel().setDuration(InfoTool.durationInSeconds(xPlayerController.getxPlayerModel().songPathProperty().get(),
-							checkAudioTypeAndUpdateXPlayerModel(xPlayerController.getxPlayerModel().songPathProperty().get())));
+					audioFullPath = xPlayerController.getxPlayerModel().songPathProperty().get();
+					audioType[0] = checkAudioTypeAndUpdateXPlayerModel(audioFullPath);
+					xPlayerController.getxPlayerModel().setDuration(InfoTool.durationInSeconds(audioFullPath, audioType[0]));
 					
 					// extension
-					xPlayerController.getxPlayerModel().songExtensionProperty().set(InfoTool.getFileExtension(xPlayerController.getxPlayerModel().songPathProperty().get()));
+					xPlayerController.getxPlayerModel().songExtensionProperty().set(InfoTool.getFileExtension(audioFullPath));
 					
 					//== TotalTimeLabel
 					Platform.runLater(() -> xPlayerController.getTotalTimeLabel().setText(InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
 					
 					// ----------------------- Load the Album Image
-					image = InfoTool.getAudioAlbumImage(xPlayerController.getxPlayerModel().songPathProperty().get(), -1, -1);
+					image = InfoTool.getAudioAlbumImage(audioFullPath, -1, -1);
 					
 					// ---------------------- Open the Audio
 					updateMessage("Opening ...");
@@ -172,17 +176,25 @@ public class XPlayerPlayService extends Service<Boolean> {
 						xPlayerController.getDisc().calculateAngleByValue(secondsToSkip, xPlayerController.getxPlayerModel().getDuration(), true);
 					}
 					// ----------------------- Configuration
-					//			updateMessage("Applying Settings ...");
+					//			updateMessage("Applying Settings ...")
 					//
 					//			// Configure Media Settings
-					//			configureMediaSettings(false);
+					//			configureMediaSettings(false)
 					
 					// ....well let's go
 				} catch (Exception ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
-					Platform.runLater(
-							() -> ActionTool.showNotification("ERROR", "Can't play \n[" + InfoTool.getMinString(xPlayerController.getxPlayerModel().songPathProperty().get(), 30)
-									+ "]\n" + "It is corrupted or maybe unsupported", Duration.millis(1500), NotificationType.ERROR));
+					Platform.runLater(() -> {
+						String audioPath = xPlayerController.getxPlayerModel().songPathProperty().get();
+						
+						//Check if File doesn't exists
+						if (audioType[0] != null && audioPath != null && !new File(audioPath).exists())
+							ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...", Duration.seconds(2), NotificationType.ERROR);
+						else //Or else maybe corrupted ? Who the duck knows.... dayuuumn
+							ActionTool.showNotification("Can't play current Audio", "Can't play \n["
+									+ InfoTool.getMinString(xPlayerController.getxPlayerModel().songPathProperty().get(), 30) + "]\nIt is corrupted or maybe unsupported",
+									Duration.millis(1500), NotificationType.ERROR);
+					});
 					return false;
 				} finally {
 					
