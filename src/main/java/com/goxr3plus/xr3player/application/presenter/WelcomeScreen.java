@@ -11,11 +11,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
@@ -32,6 +28,9 @@ import main.java.com.goxr3plus.xr3player.application.tools.Util;
 public class WelcomeScreen extends StackPane {
 	
 	//---------------------------------------------
+	
+	@FXML
+	private ImageView backgroundImage;
 	
 	@FXML
 	private MediaView mediaView;
@@ -92,6 +91,14 @@ public class WelcomeScreen extends StackPane {
 		
 		//exit
 		exit.setOnAction(a -> Util.terminateXR3Player(0));
+		
+		//mediaView
+		mediaView.setVisible(false);
+		
+		//backgroundImage
+		backgroundImage.fitWidthProperty().bind(this.widthProperty());
+		backgroundImage.fitHeightProperty().bind(this.heightProperty());
+		
 	}
 	
 	/**
@@ -126,8 +133,8 @@ public class WelcomeScreen extends StackPane {
 				soundPlayer.play();
 				
 				//Set the background Image
-				setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
-						BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
+				//setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
+				//		BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

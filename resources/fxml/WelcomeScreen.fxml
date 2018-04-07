@@ -17,6 +17,14 @@
 
 <fx:root minHeight="15.0" minWidth="15.0" prefHeight="627.0" prefWidth="1200.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <ImageView fx:id="backgroundImage" fitHeight="610.0" fitWidth="1018.0" layoutX="360.0" layoutY="74.0">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@../image/application_background.jpg" />
+         </image>
+      </ImageView>
       <MediaView fx:id="mediaView" preserveRatio="false" />
       <ImageView preserveRatio="true">
          <viewport>
@@ -70,6 +78,7 @@
             <DropShadow />
          </effect>
          <children>
+            <Label prefHeight="56.0" prefWidth="305.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Have dreams , goals and passion for life !" />
             <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 90; -fx-font-size: 30;" text="Start" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
