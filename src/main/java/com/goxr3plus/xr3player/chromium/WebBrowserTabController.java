@@ -661,7 +661,7 @@ public class WebBrowserTabController extends StackPane {
 			Platform.runLater(() -> facIconImageView.setImage(SwingFXUtils.toFXImage(image.get(0), null)));
 			
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			Platform.runLater(() -> facIconImageView.setImage(null));
 		}
 	}

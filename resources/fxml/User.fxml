@@ -47,7 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <tooltip>
-            <Tooltip text="User description" />
+            <Tooltip text="User has a note" />
          </tooltip>
          <StackPane.margin>
             <Insets left="2.0" top="55.0" />
@@ -113,7 +113,7 @@
             <Insets right="2.0" top="5.0" />
          </StackPane.margin>
       </Label>
-      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: #202020; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: transparent firebrick transparent firebrick;" text="Name" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
+      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: #202020; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: transparent firebrick transparent firebrick;" text="Name" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER">
          <tooltip>
             <Tooltip />
          </tooltip>

@@ -98,10 +98,10 @@ public class UserInformation extends StackPane {
 		this.user = user;
 		
 		//--UserName
-		userName.textProperty().bind(user.getNameField().textProperty());
+		userName.setText(user.getNameField().getText());
 		
 		//--Date Label
-		dateCreated.setText("Created : "+user.getDateCreated() + " " + user.getTimeCreated());
+		dateCreated.setText("Created : " + user.getDateCreated() + " " + user.getTimeCreated());
 		
 		//--LibrariesLabel
 		librariesLabel.setText("Libraries : " + user.getTotalLibrariesLabel().getText());

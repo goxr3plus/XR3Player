@@ -81,11 +81,11 @@
                               </Label>
                               <HBox alignment="CENTER_LEFT" spacing="15.0">
                                  <children>
-                                    <JFXButton fx:id="rename" focusTraversable="false" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Rename">
+                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Delete">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../image/rename.png" />
+                                                <Image url="@../image/delete.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -93,11 +93,11 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXButton>
-                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Delete">
+                                    <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Rename" visible="false">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../image/delete.png" />
+                                                <Image url="@../image/rename.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>

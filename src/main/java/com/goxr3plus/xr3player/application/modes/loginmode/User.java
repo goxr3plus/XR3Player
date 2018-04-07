@@ -458,7 +458,7 @@ public class User extends StackPane {
 	public Label getDropBoxLabel() {
 		return dropBoxLabel;
 	}
-
+	
 	/**
 	 * @return the descriptionProperty
 	 */
