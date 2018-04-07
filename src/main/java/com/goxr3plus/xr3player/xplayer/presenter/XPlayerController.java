@@ -94,6 +94,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	public static final Image playImage = InfoTool.getImageFromResourcesFolder("play.png");
 	public static final Image pauseImage = InfoTool.getImageFromResourcesFolder("pause.png");
+	private static final XPlayerControllerContextMenu contextMenu = new XPlayerControllerContextMenu();
 	
 	//-----------------------------------------------
 	
@@ -284,13 +285,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button extendPlayer;
 	
 	@FXML
-	private MenuButton transferMedia;
+	private Button showMenu;
 	
 	@FXML
 	private Button openFile;
 	
 	@FXML
 	private Button settings;
+	
+	@FXML
+	private MenuButton transferMedia;
 	
 	@FXML
 	private StackPane regionStackPane;
@@ -588,6 +592,22 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// openFile
 		openFile.setOnAction(action -> openFileChooser());
+		
+		// showMenu
+		showMenu.setOnMouseReleased(m -> {
+			
+			//If there is no Media
+			if (xPlayerModel.getSongPath() == null) {
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				return;
+				//Check if Media exists
+			} else if (!new File(xPlayerModel.getSongPath()).exists()) {
+				ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...", Duration.seconds(2), NotificationType.INFORMATION);
+				return;
+			}
+			
+			XPlayerController.contextMenu.showContextMenu(this.xPlayerModel.getSongPath(), m.getScreenX(), m.getScreenY(), showMenu);
+		});
 		
 		// topInfoLabel
 		topInfoLabel.setText("Player {" + this.getKey() + "}");
@@ -964,7 +984,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//			
 			//			System.out.println(getVolume());
 			
-			visualizerStackController.replayLabelEffect("Vol: " + getVolume()+" %");
+			visualizerStackController.replayLabelEffect("Vol: " + getVolume() + " %");
 		} catch (Exception ex) {
 			
 			logger.log(Level.INFO, "\n", ex);

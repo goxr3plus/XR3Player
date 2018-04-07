@@ -665,23 +665,21 @@
                      <left>
                         <HBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <MenuButton fx:id="transferMedia" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
-                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
-                                    <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
-                                </items>
+                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Show Menu" />
+                                 </tooltip>
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../image/Clone-20.png" />
+                                          <Image url="@../image/menu.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Transfer the Audio to the selected Player" />
-                                 </tooltip>
-                              </MenuButton>
+                              </Button>
                               <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -712,6 +710,23 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
+                              <MenuButton fx:id="transferMedia" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
+                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
+                                    <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
+                                </items>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/collapse-two-arrows-diagonal-symbol.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Transfer the Audio to the selected Player" />
+                                 </tooltip>
+                              </MenuButton>
                            </children>
                         </HBox>
                      </left>

@@ -13,6 +13,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
  */
 public class XPlayersList {
 	
+	
 	/** The list. */
 	private List<XPlayerController> list;
 	

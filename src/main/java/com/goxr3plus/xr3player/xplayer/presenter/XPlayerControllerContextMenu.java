@@ -1,0 +1,338 @@
+/*
+ * 
+ */
+package main.java.com.goxr3plus.xr3player.xplayer.presenter;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
+
+/**
+ * The default context menu for song items of application.
+ *
+ * @author GOXR3PLUS
+ */
+public class XPlayerControllerContextMenu extends ContextMenu {
+	
+	//--------------------------------------------------------------
+	
+	@FXML
+	private Menu getInfoBuy;
+	
+	@FXML
+	private MenuItem amazonUS;
+	
+	@FXML
+	private MenuItem amazonUK;
+	
+	@FXML
+	private MenuItem amazonCanada;
+	
+	@FXML
+	private MenuItem amazonGermany;
+	
+	@FXML
+	private MenuItem amazonFrance;
+	
+	@FXML
+	private MenuItem amazonSpain;
+	
+	@FXML
+	private MenuItem amazonItaly;
+	
+	@FXML
+	private MenuItem amazonJapan;
+	
+	@FXML
+	private MenuItem amazonChina;
+	
+	@FXML
+	private MenuItem soundCloud;
+	
+	@FXML
+	private MenuItem jamendo;
+	
+	@FXML
+	private MenuItem tuneIn;
+	
+	@FXML
+	private MenuItem hDTracks;
+	
+	@FXML
+	private MenuItem cDUniverse;
+	
+	@FXML
+	private MenuItem lastfm;
+	
+	@FXML
+	private MenuItem librefm;
+	
+	@FXML
+	private MenuItem youtube;
+	
+	@FXML
+	private MenuItem vimeo;
+	
+	@FXML
+	private MenuItem google;
+	
+	@FXML
+	private MenuItem duckduckgo;
+	
+	@FXML
+	private MenuItem bing;
+	
+	@FXML
+	private MenuItem yahoo;
+	
+	@FXML
+	private MenuItem wikipedia;
+	
+	@FXML
+	private Menu findLyrics;
+	
+	@FXML
+	private MenuItem lyricFinderOrg;
+	
+	@FXML
+	private MenuItem lyricsCom;
+	
+	@FXML
+	private MenuItem copy;
+	
+	@FXML
+	private MenuItem showFile;
+	
+	@FXML
+	private MenuItem editFileInfo;
+	
+	// -------------------------------------------------------------
+	
+	/** The logger. */
+	private final Logger logger = Logger.getLogger(getClass().getName());
+	
+	/**
+	 * The node based on which the Rename or Star Window will be position
+	 */
+	private Node node;
+	
+	/** The media. */
+	private String mediaPath;
+	
+	private final String encoding = "UTF-8";
+	
+	/**
+	 * Constructor.
+	 */
+	public XPlayerControllerContextMenu() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerControllerContextMenu.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			logger.log(Level.SEVERE, "", ex);
+		}
+		
+	}
+	
+	/**
+	 * Called as soon as .FXML is loaded from FXML Loader
+	 */
+	@FXML
+	private void initialize() {
+		
+	}
+	
+	/**
+	 * Shows the context menu based on the variables below.
+	 *
+	 * @param media
+	 *            the media
+	 * @param genre
+	 *            the genre
+	 * @param x
+	 *            the d
+	 * @param y
+	 *            the e
+	 * @param controller1
+	 *            The smartcontroller that is calling this method
+	 * @param node
+	 */
+	public void showContextMenu(String mediaPath , double x , double y , Node node) {
+		
+		this.node = node;
+		this.mediaPath = mediaPath;
+		
+		// Show it
+		show(Main.window, x - super.getWidth(), y - 1);
+		
+		//------------Animation------------------
+		
+		//Y axis
+		double yIni = y - 50;
+		double yEnd = y;
+		super.setY(yIni);
+		
+		//X axis
+		//	double xIni = screenX - super.getWidth() + super.getWidth() * 14 / 100 + 30;
+		//	double xEnd = screenX - super.getWidth() + super.getWidth() * 14 / 100;
+		//	super.setX(xIni);
+		//	final DoubleProperty xProperty = new SimpleDoubleProperty(xIni);
+		//	xProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+		
+		//Create  Double Property
+		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
+		yProperty.addListener((ob , n , n1) -> super.setY(n1.doubleValue()));
+		
+		//Create Time Line
+		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.30), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
+		timeIn.play();
+		//------------ END of Animation------------------
+		
+	}
+	
+	/**
+	 * Shows a popOver with informations for this Song.
+	 *
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 */
+	public void showPopOver(double x , double y) {
+		// this.media = media
+		// pop.show(media)
+	}
+	
+	/**
+	 * @param e
+	 */
+	@FXML
+	public void action(ActionEvent e) {
+		Object source = e.getSource();
+		
+		if (source == copy) {
+			//Get Native System ClipBoard
+			final Clipboard clipboard = Clipboard.getSystemClipboard();
+			final ClipboardContent content = new ClipboardContent();
+			
+			// PutFiles
+			content.putFiles(Arrays.asList(new File(mediaPath)));
+			
+			//Set the Content
+			clipboard.setContent(content);
+			
+			ActionTool.showNotification("Copied to Clipboard",
+					"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(3.5),
+					NotificationType.INFORMATION);
+		} else if (source == showFile) // File path
+			ActionTool.openFileLocation(mediaPath);
+		else if (source == editFileInfo)
+			Main.tagWindow.openAudio(mediaPath, TagTabCategory.BASICINFO, true);
+		else
+			try {
+				
+				//---------------------SEARCH ON WEB--------------------------------------------
+				//Music Sites
+				if (source == soundCloud)
+					ActionTool.openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == jamendo)
+					ActionTool.openWebSite("https://www.jamendo.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == tuneIn)
+					ActionTool.openWebSite("http://tunein.com/search/?query=" + URLEncoder.encode(mediaPath, encoding));
+				//Amazon
+				else if (source == amazonUS)
+					ActionTool.openWebSite("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonUK)
+					ActionTool.openWebSite("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonCanada)
+					ActionTool.openWebSite("https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonGermany)
+					ActionTool.openWebSite("https://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonFrance)
+					ActionTool.openWebSite("https://www.amazon.fr/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonSpain)
+					ActionTool.openWebSite("https://www.amazon.es/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonItaly)
+					ActionTool.openWebSite("https://www.amazon.it/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonJapan)
+					ActionTool.openWebSite("https://www.amazon.co.jp/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == amazonChina)
+					ActionTool.openWebSite("https://www.amazon.cn/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+				
+				//Music Sites
+				else if (source == hDTracks)
+					ActionTool.openWebSite("http://www.hdtracks.com/catalogsearch/result/?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == cDUniverse)
+					ActionTool.openWebSite("http://www.cduniverse.com/sresult.asp?HT_Search=ALL&HT_Search_Info=" + URLEncoder.encode(mediaPath, encoding) + "&style=all");
+				
+				//Radios
+				else if (source == lastfm)
+					ActionTool.openWebSite("https://www.last.fm/search?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == librefm)
+					ActionTool.openWebSite("https://libre.fm/search.php?search_term=" + URLEncoder.encode(mediaPath, encoding) + "&search_type=artist");
+				
+				//Video WebSites
+				else if (source == youtube)
+					ActionTool.openWebSite("https://www.youtube.com/results?search_query=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == vimeo)
+					ActionTool.openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+				
+				//Search-Engines
+				else if (source == google)
+					ActionTool.openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == duckduckgo)
+					ActionTool.openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == bing)
+					ActionTool.openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == yahoo)
+					ActionTool.openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(mediaPath, encoding));
+				
+				//Wikipedia
+				else if (source == wikipedia)
+					ActionTool.openWebSite("https://www.wikipedia.org/wiki/Special:Search?search=" + URLEncoder.encode(mediaPath, encoding));
+				
+				//-----------------------FIND LYRICS------------------------------------------------
+				else if (source == lyricFinderOrg)
+					ActionTool.openWebSite("http://search.lyricfinder.org/?query=" + URLEncoder.encode(mediaPath, encoding));
+				else if (source == lyricsCom)
+					ActionTool.openWebSite("http://www.lyrics.com/lyrics/" + URLEncoder.encode(mediaPath, encoding));
+				
+			} catch (UnsupportedEncodingException ex) {
+				ex.printStackTrace();
+			}
+		
+	}
+	
+}
