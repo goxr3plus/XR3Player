@@ -101,10 +101,10 @@ public class UserInformation extends StackPane {
 		userName.textProperty().bind(user.getNameField().textProperty());
 		
 		//--Date Label
-		dateCreated.setText(user.getDateCreated() + " " + user.getTimeCreated());
+		dateCreated.setText("Created : "+user.getDateCreated() + " " + user.getTimeCreated());
 		
 		//--LibrariesLabel
-		librariesLabel.setText("Total Libraries : " + user.getTotalLibrariesLabel().getText());
+		librariesLabel.setText("Libraries : " + user.getTotalLibrariesLabel().getText());
 		
 		//--Comments Area		
 		commentsArea.setText(user.getDescriptionLabel().getText());
@@ -160,7 +160,21 @@ public class UserInformation extends StackPane {
 	@FXML
 	public void initialize() {
 		
-		//-- Comments Area
+		//---------------- Comments Area----------------------------------
+		commentsArea.hoverProperty().addListener(l -> commentsArea.requestFocus());
+		commentsArea.focusedProperty().addListener(l -> {
+			if (!commentsArea.isFocused()) {
+				System.out.println("Lost Focus");
+				
+				//User Description Label
+				user.getDescriptionProperty().set(commentsArea.getText());
+				
+				System.out.println("After seting Description");
+				
+				//Save on the properties file
+				user.getUserInformationDb().updateProperty("User-Description", commentsArea.getText());
+			}
+		});
 		commentsArea.textProperty().addListener(c -> {
 			//User?=null
 			if (user != null) {
@@ -170,20 +184,6 @@ public class UserInformation extends StackPane {
 					commentsArea.setText(text.substring(0, 2000));
 			}
 		});
-		
-		commentsArea.setOnMouseExited(exit -> {
-			if (user != null) {
-				
-				//User Description Label
-				user.getDescriptionLabel().setText(commentsArea.getText());
-				
-				//Save on the properties file
-				user.getUserInformationDb().updateProperty("User-Description", commentsArea.getText());
-			}
-		});
-		
-		commentsArea.hoverProperty().addListener(l -> commentsArea.requestFocus());
-		
 	}
 	
 }

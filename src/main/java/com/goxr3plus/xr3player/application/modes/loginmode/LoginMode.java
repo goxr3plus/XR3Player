@@ -349,7 +349,7 @@ public class LoginMode extends BorderPane {
 				//				
 				//throw new IOException("Exception get out of the building!!!")
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				//ex.printStackTrace();
 				Platform.runLater(() -> {
 					downloadsVBox.setManaged(false);
 					downloadsVBox.setVisible(false);

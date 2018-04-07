@@ -107,7 +107,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 							
 							//--User Description
 							Optional.ofNullable(userInformationSettings.getProperty("User-Description"))
-									.ifPresent(description -> Platform.runLater(() -> user.getDescriptionLabel().setText(description)));
+									.ifPresent(description -> Platform.runLater(() -> user.getDescriptionProperty().set(description)));
 							
 							//--Drop-Box-Accounts
 							Optional.ofNullable(userInformationSettings.getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,7 +22,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
@@ -59,6 +59,8 @@ public class User extends StackPane {
 	private Label totalLibrariesLabel;
 	
 	// --------------------------------------------
+	
+	private final SimpleStringProperty descriptionProperty = new SimpleStringProperty("");
 	
 	/** The logger for this class */
 	private static final Logger logger = Logger.getLogger(User.class.getName());
@@ -220,8 +222,7 @@ public class User extends StackPane {
 		});
 		
 		// ----DescriptionLabel
-		descriptionLabel.visibleProperty()
-				.bind(descriptionLabel.textProperty().isEmpty().not().and(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty()));
+		descriptionLabel.visibleProperty().bind(descriptionProperty.isEmpty().not());
 		descriptionLabel.setOnMouseReleased(informationLabel.getOnMouseReleased());
 		
 		//-- 
@@ -456,6 +457,13 @@ public class User extends StackPane {
 	 */
 	public Label getDropBoxLabel() {
 		return dropBoxLabel;
+	}
+
+	/**
+	 * @return the descriptionProperty
+	 */
+	public SimpleStringProperty getDescriptionProperty() {
+		return descriptionProperty;
 	}
 	
 }
