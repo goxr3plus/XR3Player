@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.speechrecognition;
+package main.java.com.goxr3plus.xr3player.airobot;
 
 import java.io.IOException;
 import java.util.logging.Level;
