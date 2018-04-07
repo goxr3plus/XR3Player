@@ -1,4 +1,7 @@
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player [![Download XR3Player](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/xr3player/files/V3.97/XR3Player.Update.97.zip/download) 
+### Requires Java 8 Update 161
+### Non Java 9 Compatible yet
+
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player [![Download XR3Player](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/xr3player/files/V3.98/XR3Player.Update.98.zip/download)
 
 > [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 
@@ -35,11 +38,11 @@
 
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/32696559-ea4dcec4-c783-11e7-829d-a1eb98bc038a.png) | ![Sec](https://user-images.githubusercontent.com/20374208/33807041-87d2fe42-ddd9-11e7-9cd0-4fa172f21f9f.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/38458113-cb51d73a-3aa2-11e8-83d9-34df4e9b9ee2.png) | ![Sec](https://user-images.githubusercontent.com/20374208/38458115-ccf7556a-3aa2-11e8-8070-9d44737b6e30.png) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/32140165-0fb7a2dc-bc5f-11e7-9088-f41beb538fe4.png) | ![Sec](https://user-images.githubusercontent.com/20374208/37551127-97cb65ea-29a2-11e8-8bad-37a459255cbc.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/38458114-cb7e3140-3aa2-11e8-92ff-2cbb5ae21969.png) | ![Sec](https://user-images.githubusercontent.com/20374208/37551127-97cb65ea-29a2-11e8-8bad-37a459255cbc.png) |
 
 | Dropbox Access | Amazing Visualizations
 |:-:|:-:|
