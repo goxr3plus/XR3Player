@@ -163,7 +163,7 @@ public class ApplicationSettingsLoader {
 						.ifPresent(s -> xPlayerController.getModeToggle().setSelected(Boolean.valueOf(s)));
 				
 				//Check the volume bar
-				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Volume-Bar")).ifPresent(s -> xPlayerController.setVolume(Integer.parseInt(s)));
+				//Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Volume-Bar")).ifPresent(s -> xPlayerController.setVolume(Integer.parseInt(s)));
 				
 				//Check if muted
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Muted")).ifPresent(s -> xPlayerController.setMute(Boolean.parseBoolean(s)));

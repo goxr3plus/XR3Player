@@ -61,13 +61,13 @@ public class PropertiesDb {
 		if (updatePropertiesLocked)
 			return;
 		
-		///System.out.println("Updating Property!");
-		
-		//Check if exists [ Create if Not ] 
-		ActionTool.createFileOrFolder(fileAbsolutePath, FileType.FILE);
+		///System.out.println("Updating Property!")
 		
 		//Submit it to the executors Service
 		updateExecutorService.submit(() -> {
+			//Check if exists [ Create if Not ] 
+			ActionTool.createFileOrFolder(fileAbsolutePath, FileType.FILE);
+			
 			try (InputStream inStream = new FileInputStream(fileAbsolutePath); OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
 				
 				//load  properties

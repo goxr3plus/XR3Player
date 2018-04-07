@@ -340,7 +340,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public boolean discIsDragging;
 	
 	//-----CustomDJFilter
-	Label volumeDiscLabel;
 	DJFilter volumeDisc;
 	
 	// -------------------------ETC --------------------------
@@ -864,6 +863,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public void setVolume(int value) {
 		volumeDisc.setValue(value, true);
+		
 	}
 	
 	/**
@@ -928,6 +928,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public void controlVolume() {
 		
 		try {
+			//Crazy Code here.......
 			// if (key == 1 || key == 2) {
 			// if (djMode.balancer.getVolume() < 100) { // <100
 			//
@@ -958,6 +959,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			xPlayer.setGain((double) volumeDisc.getValue() / 100.00);
 			// }
 			
+//			//Update PropertiesDB
+//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
+//			
+//			System.out.println(getVolume());
 		} catch (Exception ex) {
 			
 			logger.log(Level.INFO, "\n", ex);
@@ -1242,30 +1247,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//Change the disc value
 			disc.setVolume((int) ( smVolumeSlider.getValue() * 100 ));
 			
-			//Print
-			//System.out.println((int) smVolumeSlider.getValue() + ", " + maximumVolume);
 		});
 		smVolumeSlider.setValue(volume);
-		smVolumeSlider.setOnScroll(scroll -> this.setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
+		smVolumeSlider.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
 		
-		//		
-		//		//---volumeDiscLabel
-		//volumeDiscLabel = new Label(String.valueOf(volume));
-		//		volumeDiscLabel.getStyleClass().add("applicationSettingsLabel2");
-		//		volumeDiscLabel.setMinWidth(35);
-		//		volumeDiscLabel.setMaxWidth(35);
-		//		volumeDiscLabel.setTextAlignment(TextAlignment.CENTER);
-		//		volumeDiscLabel.setAlignment(Pos.CENTER);
-		
-		//Add the Children
-		//vBox.getChildren().addAll(volumeDisc, volumeDiscLabel);
-		//vBox.setAlignment(Pos.CENTER);
-		
-		//( (StackPane) discBorderPane.getBottom() ).getChildren().add(0, vBox);
-		//HBox.setHgrow(disc.getTimeField(), Priority.ALWAYS)		
-		//	diskStackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
+		//Recalculate Volume Disc Size
 		discBorderPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
-		//	diskStackPane.boundsInParentProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
 		
 		//Add disc and volume disc to StackPane
 		diskStackPane.getChildren().addAll(disc, volumeDisc);
