@@ -152,18 +152,6 @@
                         <Tooltip text="DJ Mode" />
                      </tooltip>
                   </Tab>
-                  <Tab fx:id="moviesModeTab">
-                     <graphic>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/video-player.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Movie Mode" />
-                     </tooltip>
-                  </Tab>
                   <Tab fx:id="userModeTab">
                      <graphic>
                         <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -181,6 +169,18 @@
                            </image>
                         </ImageView>
                      </graphic>
+                  </Tab>
+                  <Tab fx:id="moviesModeTab">
+                     <graphic>
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/video-player.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Movie Mode" />
+                     </tooltip>
                   </Tab>
                </tabs>
             </JFXTabPane>

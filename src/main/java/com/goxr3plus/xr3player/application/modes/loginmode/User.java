@@ -218,7 +218,7 @@ public class User extends StackPane {
 		// ----InformationLabel
 		informationLabel.setOnMouseReleased(m -> {
 			if (Main.loginMode.teamViewer.centerItemProperty().get() == User.this)
-				Main.loginMode.userInformation.show(this);
+				Main.loginMode.userInformation.setUser(this);
 		});
 		
 		// ----DescriptionLabel

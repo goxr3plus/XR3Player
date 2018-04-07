@@ -9,7 +9,7 @@ import java.util.logging.Level;
 
 import com.jfoenix.controls.JFXButton;
 
-import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -94,7 +94,7 @@ public class UserInformation extends StackPane {
 	 * @param user
 	 *            The given user
 	 */
-	public void show(User user) {
+	public void setUser(User user) {
 		this.user = user;
 		
 		//--UserName
@@ -110,14 +110,29 @@ public class UserInformation extends StackPane {
 		commentsArea.setText(user.getDescriptionLabel().getText());
 		
 		//--rename
-		rename.setOnAction(a -> user.renameUser(rename));
+		if (userCategory == UserCategory.NO_LOGGED_IN) {
+			rename.setOnAction(a -> user.renameUser(rename));
+			
+			//--delete
+			delete.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(delete));
+		}
 		
 		//--delete
-		delete.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(delete));
+		if (userCategory == UserCategory.LOGGED_IN)
+			delete.setVisible(false);
 		
 		//--goBack
-		goBack.setOnAction(a -> Main.loginMode.flipPane.flipToFront());
-		goBack2.setOnAction(goBack.getOnAction());
+		if (userCategory == UserCategory.NO_LOGGED_IN) {
+			goBack.setOnAction(a -> Main.loginMode.flipPane.flipToFront());
+			goBack2.setOnAction(goBack.getOnAction());
+		} else if (userCategory == UserCategory.LOGGED_IN) {
+			goBack.setVisible(false);
+			goBack.setMaxSize(0, 0);
+			goBack.setMinSize(0, 0);
+			goBack2.setMaxSize(0, 0);
+			goBack2.setMinSize(0, 0);
+			goBack2.setVisible(false);
+		}
 		
 		//--imageView
 		userImage.imageProperty().bind(user.getImageView().imageProperty());
@@ -164,12 +179,12 @@ public class UserInformation extends StackPane {
 		commentsArea.hoverProperty().addListener(l -> commentsArea.requestFocus());
 		commentsArea.focusedProperty().addListener(l -> {
 			if (!commentsArea.isFocused()) {
-				System.out.println("Lost Focus");
+				//	System.out.println("Lost Focus");
 				
 				//User Description Label
 				user.getDescriptionProperty().set(commentsArea.getText());
 				
-				System.out.println("After seting Description");
+				//	System.out.println("After seting Description");
 				
 				//Save on the properties file
 				user.getUserInformationDb().updateProperty("User-Description", commentsArea.getText());

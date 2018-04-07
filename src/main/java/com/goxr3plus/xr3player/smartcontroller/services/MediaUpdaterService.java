@@ -85,7 +85,7 @@ public class MediaUpdaterService {
 		try {
 			
 			//Don't enter in case of 
-			if (Main.topBar.isTabSelected(0) || Main.topBar.isTabSelected(1)) {
+			if (Main.topBar.isTabSelected(Main.topBar.getMainModeTab()) || Main.topBar.isTabSelected(Main.topBar.getDjModeTab())) {
 				
 				//Selected + Opened Library
 				if (Main.playListModesTabPane.getOpenedLibrariesTab().isSelected())
@@ -133,10 +133,10 @@ public class MediaUpdaterService {
 						//Or else check more through
 						else {
 							//For player 0
-							if (xPlayerController.getKey() == 0 && Main.topBar.isTabSelected(0))
+							if (xPlayerController.getKey() == 0 && Main.topBar.isTabSelected(Main.topBar.getMainModeTab()))
 								return true;
 							//For other players
-							else if (xPlayerController.getKey() != 0 && Main.topBar.isTabSelected(1))
+							else if (xPlayerController.getKey() != 0 && Main.topBar.isTabSelected(Main.topBar.getDjModeTab()))
 								return true;
 						}
 						return false;
@@ -156,7 +156,7 @@ public class MediaUpdaterService {
 			//--
 			
 			//Don't enter in case of 
-			if ( ( Main.topBar.isTabSelected(0) || Main.topBar.isTabSelected(1) ) && Main.playListModesTabPane.getEmotionListsTab().isSelected())
+			if ( ( Main.topBar.isTabSelected(Main.topBar.getMainModeTab()) || Main.topBar.isTabSelected(Main.topBar.getDjModeTab()) ) && Main.playListModesTabPane.getEmotionListsTab().isSelected())
 				//Filter Emotion Lists Normal Mode TableViews   
 				Main.emotionsTabPane.getTabPane().getTabs().stream().filter(Tab::isSelected).findFirst().ifPresent(tab -> {
 					

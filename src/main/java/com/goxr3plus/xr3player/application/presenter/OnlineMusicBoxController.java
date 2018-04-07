@@ -104,7 +104,7 @@ public class OnlineMusicBoxController extends StackPane {
 		//
 		setOnMouseClicked(m -> {
 			Main.webBrowser.addNewTabOnTheEnd(url);
-			Main.topBar.selectTab(4);
+			Main.topBar.selectTab(Main.topBar.getWebModeTab());
 			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
 		});
 		

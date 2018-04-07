@@ -192,7 +192,7 @@ public class ApplicationSettingsController extends BorderPane {
 				restoreAll();
 				
 				//Delete the current settings from the User
-				ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + Main.userMode.getUser().getUserName() + File.separator + "settings"
+				ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + Main.userInfoMode.getUser().getUserName() + File.separator + "settings"
 						+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
 				
 				//Lock the update properties

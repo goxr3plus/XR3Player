@@ -69,12 +69,12 @@
                      <center>
                         <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15; -fx-border-color: transparent firebrick transparent firebrick;" text="Local Account" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="userName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="42.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="userName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15; -fx-border-color: transparent firebrick transparent firebrick;" text="Local Account" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="42.0" />
                                  </font>
@@ -125,7 +125,7 @@
                            <content>
                               <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #202020;">
                                  <children>
-                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
+                                    <Label fx:id="dateCreated" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -133,7 +133,7 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Label>
-                                    <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
+                                    <Label fx:id="librariesLabel" alignment="CENTER" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>

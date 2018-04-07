@@ -248,7 +248,7 @@ public class DropboxViewer extends StackPane {
 						JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1, -1));
 				
 				//Save on the database
-				PropertiesDb propertiesDb = Main.userMode.getUser().getUserInformationDb();
+				PropertiesDb propertiesDb = Main.userInfoMode.getUser().getUserInformationDb();
 				propertiesDb.updateProperty("DropBox-Access-Tokens",
 						( propertiesDb.getProperty("DropBox-Access-Tokens") == null ? "" : propertiesDb.getProperty("DropBox-Access-Tokens") )
 								+ ( savedAccountsListView.getItems().isEmpty() ? "" : "<>:<>" ) + accessToken);
@@ -475,7 +475,7 @@ public class DropboxViewer extends StackPane {
 				items.remove(savedAccountsListView.getSelectionModel().getSelectedIndex());
 				
 				//Refresh the properties database
-				Main.userMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
+				Main.userInfoMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
 			}
 			
 			//DropBoxAccountsLabel
@@ -628,7 +628,7 @@ public class DropboxViewer extends StackPane {
 	public void refreshSavedAccounts() {
 		
 		//savedAccountsListView
-		Optional.ofNullable(Main.userMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {
+		Optional.ofNullable(Main.userInfoMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {
 			if (accessTokens.contains("<>:<>")) //Check if we have multiple access tokens
 				savedAccountsListView.setItems(Stream.of(accessTokens.split(Pattern.quote("<>:<>"))).collect(Collectors.toCollection(FXCollections::observableArrayList)));
 			else if (!accessTokens.isEmpty()) //Check if we have one access token

@@ -294,8 +294,8 @@ public class TopBar extends BorderPane {
 	 * 
 	 * @param index
 	 */
-	public void selectTab(int index) {
-		jfxTabPane.getSelectionModel().select(index);
+	public void selectTab(Tab tab) {
+		jfxTabPane.getSelectionModel().select(tab);
 	}
 	
 	/**
@@ -304,8 +304,8 @@ public class TopBar extends BorderPane {
 	 * @param index
 	 * @return True if the tab is selected or false if not
 	 */
-	public boolean isTabSelected(int index) {
-		return jfxTabPane.getSelectionModel().isSelected(index);
+	public boolean isTabSelected(Tab tab) {
+		return tab.isSelected();
 	}
 	
 	/**
@@ -349,13 +349,40 @@ public class TopBar extends BorderPane {
 	public ImageView getHighSpeed() {
 		return highSpeed;
 	}
-
+	
 	/**
 	 * @return the webModeTab
 	 */
 	public Tab getWebModeTab() {
 		return webModeTab;
 	}
-
+	
+	/**
+	 * @return the mainModeTab
+	 */
+	public Tab getMainModeTab() {
+		return mainModeTab;
+	}
+	
+	/**
+	 * @return the djModeTab
+	 */
+	public Tab getDjModeTab() {
+		return djModeTab;
+	}
+	
+	/**
+	 * @return the moviesModeTab
+	 */
+	public Tab getMoviesModeTab() {
+		return moviesModeTab;
+	}
+	
+	/**
+	 * @return the userModeTab
+	 */
+	public Tab getUserModeTab() {
+		return userModeTab;
+	}
 	
 }

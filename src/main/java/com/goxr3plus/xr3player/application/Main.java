@@ -55,7 +55,8 @@ import main.java.com.goxr3plus.xr3player.application.modes.djmode.DJMode;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.LibraryMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
-import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserMode;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.application.modes.moviemode.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
@@ -228,7 +229,7 @@ public class Main extends Application {
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
 		specialJFXTabPane.getTabs().add(new Tab("tab3", new MovieModeController()));
-		specialJFXTabPane.getTabs().add(new Tab("tab4", userMode));
+		specialJFXTabPane.getTabs().add(new Tab("tab4", userInfoMode));
 		
 		//Load some lol images from lol base
 		new Thread(() -> {
@@ -265,8 +266,8 @@ public class Main extends Application {
 		specialJFXTabPane.getTabs().forEach(tab -> {
 			final int index = counter.addAndGet(1);
 			tab.selectedProperty().addListener((observable , oldValue , newValue) -> {
-				if (specialJFXTabPane.getTabs().get(index).isSelected() && !topBar.isTabSelected(index))
-					topBar.selectTab(index);
+				if (specialJFXTabPane.getTabs().get(index).isSelected() && !topBar.isTabSelected(tab))
+					topBar.selectTab(tab);
 				//System.out.println("Entered Tab " + index) //this is inside curly braces with the above if
 				
 			});
@@ -413,7 +414,7 @@ public class Main extends Application {
 			s.start();
 			
 			//Do the below until the database is initialized
-			userMode.setUser(selectedUser);
+			userInfoMode.setUser(selectedUser);
 			
 			try {
 				s.join();
@@ -895,7 +896,7 @@ public class Main extends Application {
 	/**
 	 * Entering in this mode you can change the user settings and other things that have to do with the user....
 	 */
-	public static UserMode userMode = new UserMode();
+	public static UserInformation userInfoMode = new UserInformation(UserCategory.LOGGED_IN);
 	
 	/**
 	 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
