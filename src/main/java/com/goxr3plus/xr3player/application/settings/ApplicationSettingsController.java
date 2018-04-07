@@ -160,7 +160,7 @@ public class ApplicationSettingsController extends BorderPane {
 		restoreDefaults.setOnAction(a -> {
 			
 			//Ask the madafacka user :)
-			if (ActionTool.doQuestion("Restore category settings","Soore you want to restore defaults for the selected category of settings", restoreDefaults, Main.window)) {
+			if (ActionTool.doQuestion("Restore category settings", "Soore you want to restore defaults for the selected category of settings", restoreDefaults, Main.window)) {
 				
 				//Find the selected Tab
 				Tab selectedTab = generalTab.getTabPane().getSelectionModel().getSelectedItem();
@@ -183,7 +183,7 @@ public class ApplicationSettingsController extends BorderPane {
 		restoreAllSettings.setOnAction(a -> {
 			
 			//Ask the user if wants to restore all the settings to default
-			if (ActionTool.doQuestion("Restore all settings","Soore you want to restore <All The Settings> to default", restoreAllSettings, Main.window)) {
+			if (ActionTool.doQuestion("Restore all settings", "Soore you want to restore <All The Settings> to default", restoreAllSettings, Main.window)) {
 				
 				//Lock the update properties
 				Main.dbManager.getPropertiesDb().setUpdatePropertiesLocked(true);

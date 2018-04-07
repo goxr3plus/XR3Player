@@ -198,6 +198,9 @@ public class GeneralSettingsController extends BorderPane {
 	 */
 	public void restoreSettings() {
 		
+		//highGraphicsToggle
+		highGraphicsToggle.setSelected(false);
+		
 		//notificationsPosition
 		JavaFXTools.selectToogleWithText(notificationsPosition, "BOTTOM_LEFT");
 		
