@@ -458,6 +458,8 @@ public class WebBrowserTabController extends StackPane {
 			loadWebSite(firstWebSite);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			if(ex.getMessage().equals("The Chromium profile directory is already used/locked by another BrowserContext instance or process."))
+				System.exit(-1);
 		}
 	}
 	
