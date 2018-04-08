@@ -45,7 +45,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets left="5.0" right="10.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="backwardButton" mnemonicParsing="false" style="-fx-background-radius: 45 0 0 45;">
@@ -102,7 +102,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ComboBox fx:id="searchEngineComboBox" prefHeight="28.0" prefWidth="121.0" promptText="Search Engine">
+                        <ComboBox fx:id="searchEngineComboBox" prefHeight="35.0" prefWidth="160.0" promptText="Search Engine">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -110,7 +110,7 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <MenuButton contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-radius: 0;">
+                        <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="60.0" style="-fx-background-radius: 0;">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
