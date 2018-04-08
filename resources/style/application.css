@@ -785,6 +785,7 @@
 .jfx-button:hover,
 .jfx-button:focused{
     -fx-background-color:rgb(255.0,255.0,255.0,0.9);
+    -fx-text-fill:black;
 }
 
 .jfx-button {
