@@ -156,7 +156,8 @@ public class MediaUpdaterService {
 			//--
 			
 			//Don't enter in case of 
-			if ( ( Main.topBar.isTabSelected(Main.topBar.getMainModeTab()) || Main.topBar.isTabSelected(Main.topBar.getDjModeTab()) ) && Main.playListModesTabPane.getEmotionListsTab().isSelected())
+			if ( ( Main.topBar.isTabSelected(Main.topBar.getMainModeTab()) || Main.topBar.isTabSelected(Main.topBar.getDjModeTab()) )
+					&& Main.playListModesTabPane.getEmotionListsTab().isSelected())
 				//Filter Emotion Lists Normal Mode TableViews   
 				Main.emotionsTabPane.getTabPane().getTabs().stream().filter(Tab::isSelected).findFirst().ifPresent(tab -> {
 					

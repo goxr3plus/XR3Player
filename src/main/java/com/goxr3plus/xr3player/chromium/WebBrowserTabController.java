@@ -43,6 +43,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -64,6 +65,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.chromium.services.ChromiumUpdaterService;
 import net.sf.image4j.codec.ico.ICODecoder;
 
 /**
@@ -131,6 +133,7 @@ public class WebBrowserTabController extends StackPane {
 	private final WebBrowserController webBrowserController;
 	private final ImageView facIconImageView = new ImageView();
 	private String firstWebSite;
+	private JFXButton audioButton;
 	
 	/**
 	 * Constructor
@@ -384,11 +387,24 @@ public class WebBrowserTabController extends StackPane {
 			//X Button
 			JFXButton closeButton = new JFXButton("X");
 			int maxSize = 25;
+			closeButton.setFocusTraversable(false);
 			closeButton.setMinSize(maxSize, maxSize);
 			closeButton.setPrefSize(maxSize, maxSize);
 			closeButton.setMaxSize(maxSize, maxSize);
 			closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
 			closeButton.setOnAction(a -> this.webBrowserController.removeTab(tab));
+			
+			//X Button
+			audioButton = new JFXButton("");
+			audioButton.setFocusTraversable(false);
+			audioButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			audioButton.setGraphic(new ImageView(ChromiumUpdaterService.unMutedImage));
+			int maxSize2 = 32;
+			audioButton.setMinSize(maxSize2, maxSize);
+			audioButton.setPrefSize(maxSize2, maxSize);
+			audioButton.setMaxSize(maxSize2, maxSize);
+			audioButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
+			audioButton.setOnAction(a -> browser.setAudioMuted(!browser.isAudioMuted()));
 			
 			// HBOX
 			HBox hBox = new HBox();
@@ -397,7 +413,7 @@ public class WebBrowserTabController extends StackPane {
 				if (m.getButton() == MouseButton.MIDDLE)
 					webBrowserController.removeTab(tab);
 			});
-			hBox.getChildren().addAll(iconLabel, stack, marquee, closeButton);
+			hBox.getChildren().addAll(iconLabel, stack, marquee, audioButton, closeButton);
 			tab.setGraphic(hBox);
 			
 			//ContextMenu
@@ -687,6 +703,13 @@ public class WebBrowserTabController extends StackPane {
 	 */
 	public void setBrowser(Browser browser) {
 		this.browser = browser;
+	}
+	
+	/**
+	 * @return the audioButton
+	 */
+	public JFXButton getAudioButton() {
+		return audioButton;
 	}
 	
 	/**
