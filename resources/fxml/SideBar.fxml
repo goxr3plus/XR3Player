@@ -19,7 +19,7 @@
       <Insets bottom="2.0" left="3.0" top="2.0" />
    </padding>
    <center>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false" prefWidth="71.0">
+      <ScrollPane fitToHeight="true" hbarPolicy="NEVER" minHeight="0.0" pickOnBounds="false" prefWidth="71.0">
          <content>
             <VBox alignment="CENTER" minHeight="0.0" spacing="20.0">
                <children>
@@ -95,6 +95,49 @@
                   </VBox>
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 13;" text="Convert" />
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/youtube24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <items>
+                              <MenuItem fx:id="downloadYoutubePlaylist" mnemonicParsing="false" text="Download Youtube Playlist">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/youtube24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="socialMediaToMP3" mnemonicParsing="false" text="Convert Social Media Video to MP3">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/youtube24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="socialMediaToAnything" mnemonicParsing="false" text="Download Social Media Video to any Format ">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/audioToVideo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuItem>
+                           </items>
+                        </MenuButton>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="Tools" />
                         <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" text=" ">
                            <graphic>
@@ -154,51 +197,8 @@
                   </VBox>
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 13;" text="Convert" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/youtube24.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <items>
-                              <MenuItem fx:id="downloadYoutubePlaylist" mnemonicParsing="false" text="Download Youtube Playlist">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/youtube24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem fx:id="socialMediaToMP3" mnemonicParsing="false" text="Convert Social Media Video to MP3">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/youtube24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem fx:id="socialMediaToAnything" mnemonicParsing="false" text="Download Social Media Video to any Format ">
-                                 <graphic>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/audioToVideo.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                           </items>
-                        </MenuButton>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" spacing="10.0">
-                     <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="About" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;">
                            <items>
                               <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />
                               <MenuItem fx:id="showManual" mnemonicParsing="false" text="Application Manual" />
@@ -219,7 +219,7 @@
                               </ImageView>
                            </graphic>
                            <VBox.margin>
-                              <Insets left="3.0" />
+                              <Insets />
                            </VBox.margin>
                         </MenuButton>
                      </children>
