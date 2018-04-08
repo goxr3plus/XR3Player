@@ -21,6 +21,7 @@ import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.Util;
+import main.java.com.goxr3plus.xr3player.chromium.services.ChromiumUpdaterService;
 
 /**
  * @author GOXR3PLUS
@@ -31,12 +32,13 @@ public class WebBrowserController extends StackPane {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
-	public static final String VERSION = "Version 3."+Main.APPLICATION_VERSION+".0";
+	public static final String VERSION = "Version 3." + Main.APPLICATION_VERSION + ".0";
 	
 	public static boolean MOVING_TITLES_ENABLED = true;
 	
 	public final ChromiumFullScreenController chromiumFullScreenController = new ChromiumFullScreenController();
 	
+	public final ChromiumUpdaterService chromiumUpdaterService = new ChromiumUpdaterService(this);
 	//------------------------------------------------------------
 	
 	@FXML
@@ -280,6 +282,16 @@ public class WebBrowserController extends StackPane {
 	public void setMovingTitlesEnabled(boolean value) {
 		MOVING_TITLES_ENABLED = value;
 		tabPane.getTabs().forEach(tab -> ( (WebBrowserTabController) tab.getContent() ).setMovingTitleEnabled(value));
+	}
+	
+	/**
+	 * Start the chromiumUpdaterService which is actually a background Thread
+	 * reponsible for looking if tabs have audio , are muted/umuted and 
+	 * generally many other things 
+	 * @see ChromiumUpdaterService
+	 */
+	public void startChromiumUpdaterService() {
+		chromiumUpdaterService.start();
 	}
 	
 	/**

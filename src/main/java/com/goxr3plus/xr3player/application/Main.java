@@ -478,9 +478,10 @@ public class Main extends Application {
 			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
 					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
 			
-			//Filter Thread (Inspecting the Files if existing)
+			//Start these important Threads
 			new MediaUpdaterService().start();
 			new XPlayersFilterService().start();
+			webBrowser.startChromiumUpdaterService();
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			

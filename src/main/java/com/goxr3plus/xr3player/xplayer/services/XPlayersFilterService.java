@@ -34,21 +34,37 @@ public class XPlayersFilterService {
 				Platform.runLater(() -> threadStopped.set(false));
 				
 				//Run forever , except if i interrupt it ;)
-				for (;; Thread.sleep(500))
-					Platform.runLater(() -> Main.xPlayersList.getList().forEach(xPlayerController -> {
-						
-						//-------Set the appropriate image for the PlayPauseButton based on the status of the Player
-						( (ImageView) xPlayerController.getPlayPauseButton().getGraphic() )
-								.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
-						
-						//-------Set the appropriate image for the PlayPauseButton based on the status of the Player
-						( (ImageView) xPlayerController.getSmPlayPauseButton().getGraphic() )
-								.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
-						
-						// ---------Liked or disliked--------?
-						xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
-						
-					}));
+				for (;; Thread.sleep(1000))
+					Platform.runLater(() -> Main.xPlayersList.getList().stream()
+							//Extra filtering
+							.filter(xPlayerController -> {
+								//If extended pass
+								if (xPlayerController.isExtended())
+									return true;
+								//Or else check more through
+								else {
+									//For player 0
+									if (xPlayerController.getKey() == 0 && Main.topBar.isTabSelected(Main.topBar.getMainModeTab()))
+										return true;
+									//For other players
+									else if (xPlayerController.getKey() != 0 && Main.topBar.isTabSelected(Main.topBar.getDjModeTab()))
+										return true;
+								}
+								return false;
+							}).forEach(xPlayerController -> {
+								
+								//-------Set the appropriate image for the PlayPauseButton based on the status of the Player
+								( (ImageView) xPlayerController.getPlayPauseButton().getGraphic() )
+										.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+								
+								//-------Set the appropriate image for the PlayPauseButton based on the status of the Player
+								( (ImageView) xPlayerController.getSmPlayPauseButton().getGraphic() )
+										.setImage(xPlayerController.getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+								
+								// ---------Liked or disliked--------?
+								xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
+								
+							}));
 			} catch (Exception ex) {
 				Main.logger.log(Level.INFO, "", ex);
 			} finally {
