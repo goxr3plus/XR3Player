@@ -285,9 +285,9 @@ public class WebBrowserController extends StackPane {
 	}
 	
 	/**
-	 * Start the chromiumUpdaterService which is actually a background Thread
-	 * reponsible for looking if tabs have audio , are muted/umuted and 
-	 * generally many other things 
+	 * Start the chromiumUpdaterService which is actually a background Thread responsible for looking if tabs have audio , are muted/umuted and generally
+	 * many other things
+	 * 
 	 * @see ChromiumUpdaterService
 	 */
 	public void startChromiumUpdaterService() {

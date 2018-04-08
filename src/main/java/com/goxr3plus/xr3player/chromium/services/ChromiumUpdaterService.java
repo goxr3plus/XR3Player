@@ -23,8 +23,8 @@ import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
  */
 public class ChromiumUpdaterService {
 	
-	public static final Image mutedImage = InfoTool.getImageFromResourcesFolder("mute.png");
-	public static final Image unMutedImage = InfoTool.getImageFromResourcesFolder("unmute.png");
+	public static final Image mutedImage = InfoTool.getImageFromResourcesFolder("speakerMuted.png");
+	public static final Image unMutedImage = InfoTool.getImageFromResourcesFolder("speaker.png");
 	
 	/**
 	 * The name of the running Thread/s
@@ -69,7 +69,7 @@ public class ChromiumUpdaterService {
 					
 					if (Main.topBar.isTabSelected(Main.topBar.getWebModeTab())) {
 						checkTabsSound();
-						System.out.println(threadName + " entered if statement");
+						//System.out.println(threadName + " entered if statement");
 					}
 					
 				}
@@ -114,7 +114,12 @@ public class ChromiumUpdaterService {
 				tabController.getAudioButton().setMinSize(maxSize, maxSize);
 				tabController.getAudioButton().setPrefSize(maxSize, maxSize);
 				tabController.getAudioButton().setMaxSize(maxSize, maxSize);
+				tabController.getAudioButton().setVisible(false);
 			}
+			
+			//Site is Loading
+			tabController.getProgressIndicatorStackPane().setManaged(tabController.getBrowser().isLoading());
+			tabController.getProgressIndicatorStackPane().setVisible(tabController.getBrowser().isLoading());
 			
 		});
 	}

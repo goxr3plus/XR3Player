@@ -209,13 +209,16 @@
                <top>
                   <StackPane BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton fx:id="addTab" maxWidth="1.7976931348623157E308" style="-fx-border-radius: 0; -fx-border-width: 2; -fx-background-radius: 0; -fx-font-weight: bold;" styleClass="arrowButton1" text="+ Tab" StackPane.alignment="CENTER_RIGHT">
+                        <JFXButton fx:id="addTab" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-border-radius: 0; -fx-border-width: 2; -fx-background-radius: 0; -fx-font-weight: bold;" styleClass="arrowButton1" text="+ Tab" StackPane.alignment="CENTER_RIGHT">
                            <tooltip>
                               <Tooltip text="New Tab" />
                            </tooltip>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <StackPane.margin>
+                              <Insets right="2.0" />
+                           </StackPane.margin>
                         </JFXButton>
                      </children>
                   </StackPane>

@@ -784,13 +784,14 @@
 .jfx-button:armed,
 .jfx-button:hover,
 .jfx-button:focused{
-    -fx-background-color:rgb(255.0,255.0,255.0,0.8);
+    -fx-background-color:rgb(255.0,255.0,255.0,0.9);
 }
 
 .jfx-button {
     -fx-background-color:rgb(255.0,255.0,255.0,0.4);
-    -fx-background-radius: 3.0px;
+    -fx-background-radius: 0.0px;
     -fx-background-insets: 0.0px;
+    -fx-cursor:hand;
 }
 
  

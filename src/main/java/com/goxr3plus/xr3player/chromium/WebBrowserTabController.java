@@ -33,7 +33,6 @@ import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import com.teamdev.jxbrowser.chromium.javafx.DefaultPopupHandler;
 
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -134,6 +133,8 @@ public class WebBrowserTabController extends StackPane {
 	private final ImageView facIconImageView = new ImageView();
 	private String firstWebSite;
 	private JFXButton audioButton;
+	private StackPane progressIndicatorStackPane;
+	private ProgressIndicator progressIndicator;
 	
 	/**
 	 * Constructor
@@ -179,6 +180,10 @@ public class WebBrowserTabController extends StackPane {
 			
 			//-------------------Browser------------------------
 			browser = new Browser();
+			browserView = new BrowserView(browser);
+			browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
+			browser.setPopupHandler(new DefaultPopupHandler());
+			
 			//		browser.setPopupHandler(new PopupHandler() {
 			//		    public PopupContainer handlePopup(PopupParams params) {
 			//		        return new PopupContainer() {
@@ -193,36 +198,13 @@ public class WebBrowserTabController extends StackPane {
 			//			}
 			//		});
 			
-			//--Render Listener
-			//			browser.addRenderListener(new RenderListener() {
-			//				
-			//				@Override
-			//				public void onRenderCreated(RenderEvent arg0) {
-			//					System.out.println("Render process is created and ready to work.");
-			//				}
-			//				
-			//				@Override
-			//				public void onRenderGone(RenderEvent arg0) {
-			//					System.out.println("Render process is exited, crashed or killed.");
-			//					
-			//				}
-			//				
-			//				@Override
-			//				public void onRenderResponsive(RenderEvent arg0) {
-			//					System.out.println("Render process is no longer hung.");
-			//				}
-			//				
-			//				@Override
-			//				public void onRenderUnresponsive(RenderEvent arg0) {
-			//					System.out.println("Render process is hung.");
-			//				}
-			//				
-			//			});
-			
 			//-------------------BrowserView------------------------
 			browserView = new BrowserView(browser);
-			browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
-			browser.setPopupHandler(new DefaultPopupHandler());
+			browserView.setMouseEventsHandler(e -> {
+				System.out.println(e.getEventType());
+				return e.getButton() == MouseButton.MIDDLE;
+			});
+			
 			borderPane.setCenter(browserView);
 			
 			//Continue
@@ -263,39 +245,25 @@ public class WebBrowserTabController extends StackPane {
 			tab.setTooltip(new Tooltip(""));
 			
 			// Graphic
-			StackPane stack = new StackPane();
-			stack.setPadding(new Insets(0, 5, 0, 5));
-			stack.setAlignment(Pos.TOP_CENTER);
+			progressIndicatorStackPane = new StackPane();
+			progressIndicatorStackPane.setPadding(new Insets(0, 5, 0, 5));
+			progressIndicatorStackPane.setAlignment(Pos.CENTER);
 			
 			// indicator
-			ProgressIndicator indicator = new ProgressIndicator();
-			indicator.getStyleClass().add("dropbox-progress-indicator");
-			indicator.setMaxSize(20, 20);
+			progressIndicator = new ProgressIndicator();
+			progressIndicator.getStyleClass().add("dropbox-progress-indicator");
+			progressIndicator.setMaxSize(20, 20);
+			progressIndicatorStackPane.getChildren().add(progressIndicator);
 			
-			// label
-			Label label = new Label();
-			label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			label.setAlignment(Pos.CENTER);
-			label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
-			label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
-			
+			//			// label
+			//			Label label = new Label();
+			//			label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			//			label.setAlignment(Pos.CENTER);
+			//			label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
+			//			label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
+			//			
 			Marquee marquee = new Marquee();
 			marquee.textProperty().bind(tab.getTooltip().textProperty());
-			
-			stack.getChildren().addAll(indicator);
-			stack.setManaged(false);
-			stack.setVisible(true);
-			
-			// stack
-			indicator.visibleProperty().addListener(l -> {
-				if (indicator.isVisible()) {
-					stack.setManaged(true);
-					stack.setVisible(true);
-				} else {
-					stack.setManaged(false);
-					stack.setVisible(false);
-				}
-			});
 			
 			//--Load Listener
 			browser.addLoadListener(new LoadAdapter() {
@@ -304,7 +272,6 @@ public class WebBrowserTabController extends StackPane {
 					if (event.isMainFrame()) {
 						System.out.println("Main frame has started loading");
 						
-						//Platform.runLater(() -> indicator.setVisible(true))
 					}
 				}
 				
@@ -313,7 +280,6 @@ public class WebBrowserTabController extends StackPane {
 					if (event.isMainFrame()) {
 						System.out.println("Provisional load was committed for a frame");
 						
-						//Platform.runLater(() -> indicator.setVisible(true))
 					}
 				}
 				
@@ -375,18 +341,28 @@ public class WebBrowserTabController extends StackPane {
 			});
 			
 			//facIconImageView 
-			facIconImageView.setFitWidth(25);
-			facIconImageView.setFitHeight(25);
+			facIconImageView.setFitWidth(20);
+			facIconImageView.setFitHeight(20);
 			facIconImageView.setSmooth(true);
 			
 			//iconLabel
 			Label iconLabel = new Label();
+			iconLabel.setPadding(new Insets(0, 5, 0, 5));
+			iconLabel.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			iconLabel.setAlignment(Pos.CENTER);
+			iconLabel.setFocusTraversable(false);
+			int maxSize = 25;
+			iconLabel.setMinSize(maxSize, maxSize);
+			iconLabel.setPrefSize(maxSize, maxSize);
+			iconLabel.setMaxSize(maxSize, maxSize);
 			iconLabel.setGraphic(facIconImageView);
-			iconLabel.setStyle("-fx-background-color:#202020");
+			iconLabel.setStyle("-fx-background-color:#303030");
+			
+			//Loading 
 			
 			//X Button
 			JFXButton closeButton = new JFXButton("X");
-			int maxSize = 25;
+			maxSize = 25;
 			closeButton.setFocusTraversable(false);
 			closeButton.setMinSize(maxSize, maxSize);
 			closeButton.setPrefSize(maxSize, maxSize);
@@ -396,13 +372,19 @@ public class WebBrowserTabController extends StackPane {
 			
 			//X Button
 			audioButton = new JFXButton("");
+			audioButton.setVisible(false);
 			audioButton.setFocusTraversable(false);
 			audioButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-			audioButton.setGraphic(new ImageView(ChromiumUpdaterService.unMutedImage));
-			int maxSize2 = 32;
-			audioButton.setMinSize(maxSize2, maxSize);
-			audioButton.setPrefSize(maxSize2, maxSize);
-			audioButton.setMaxSize(maxSize2, maxSize);
+			ImageView imageView = new ImageView(ChromiumUpdaterService.unMutedImage);
+			imageView.setFitWidth(20);
+			imageView.setFitHeight(20);
+			imageView.setSmooth(true);
+			imageView.setPreserveRatio(false);
+			audioButton.setGraphic(imageView);
+			maxSize = 0;
+			audioButton.setMinSize(maxSize, maxSize);
+			audioButton.setPrefSize(maxSize, maxSize);
+			audioButton.setMaxSize(maxSize, maxSize);
 			audioButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
 			audioButton.setOnAction(a -> browser.setAudioMuted(!browser.isAudioMuted()));
 			
@@ -413,7 +395,7 @@ public class WebBrowserTabController extends StackPane {
 				if (m.getButton() == MouseButton.MIDDLE)
 					webBrowserController.removeTab(tab);
 			});
-			hBox.getChildren().addAll(iconLabel, stack, marquee, audioButton, closeButton);
+			hBox.getChildren().addAll(progressIndicatorStackPane, iconLabel, marquee, audioButton, closeButton);
 			tab.setGraphic(hBox);
 			
 			//ContextMenu
@@ -710,6 +692,20 @@ public class WebBrowserTabController extends StackPane {
 	 */
 	public JFXButton getAudioButton() {
 		return audioButton;
+	}
+	
+	/**
+	 * @return the progressIndicator
+	 */
+	public ProgressIndicator getProgressIndicator() {
+		return progressIndicator;
+	}
+	
+	/**
+	 * @return the progressIndicatorStackPane
+	 */
+	public StackPane getProgressIndicatorStackPane() {
+		return progressIndicatorStackPane;
 	}
 	
 	/**
