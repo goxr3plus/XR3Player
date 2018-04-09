@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<fx:root style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <HBox alignment="CENTER">
+         <children>
+            <JFXButton fx:id="leftArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" text=" ">
+               <graphic>
+                  <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/next2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+               <content>
+                  <HBox fx:id="alphabetBox" alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="1.0">
+                     <children>
+                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="A" />
+                        <JFXButton layoutX="283.0" layoutY="13.0" text="B" />
+                        <JFXButton maxHeight="1.7976931348623157E308" text="C" />
+                        <JFXButton text="D" />
+                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="E" />
+                        <JFXButton text="F" />
+                        <JFXButton text="G" />
+                        <JFXButton text="H" />
+                        <JFXButton text="I" />
+                        <JFXButton text="J" />
+                        <JFXButton text="K" />
+                        <JFXButton text="L" />
+                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="32.0" text="M" />
+                        <JFXButton text="N" />
+                        <JFXButton text="O" />
+                        <JFXButton text="P" />
+                        <JFXButton text="Q" />
+                        <JFXButton text="R" />
+                        <JFXButton text="S" />
+                        <JFXButton text="T" />
+                        <JFXButton text="V" />
+                        <JFXButton text="U" />
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+            <JFXButton fx:id="rightArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="312.0" layoutY="10.0" text=" ">
+               <graphic>
+                  <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/next2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</fx:root>

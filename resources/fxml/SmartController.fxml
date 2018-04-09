@@ -63,158 +63,160 @@
                         </TabPane>
                      </right>
                      <top>
-                        <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                        <VBox minWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <JFXCheckBox fx:id="instantSearch" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
-                                 <tooltip>
-                                    <Tooltip text="Instant Search " />
-                                 </tooltip>
-                                 <HBox.margin>
-                                    <Insets left="4.0" right="4.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXCheckBox>
-                              <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="232.0">
+                              <HBox fx:id="alphabetBarBox" alignment="CENTER" />
+                              <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;">
                                  <children>
-                                    <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
+                                    <JFXCheckBox fx:id="instantSearch" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
                                        <tooltip>
-                                          <Tooltip text="Previous" />
+                                          <Tooltip text="Instant Search " />
                                        </tooltip>
+                                       <HBox.margin>
+                                          <Insets left="4.0" right="4.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXCheckBox>
+                                    <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="232.0">
+                                       <children>
+                                          <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
+                                             <tooltip>
+                                                <Tooltip text="Previous" />
+                                             </tooltip>
+                                             <graphic>
+                                                <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/next2.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 0; -fx-background-color: white; -fx-text-fill: black;">
+                                             <tooltip>
+                                                <Tooltip text="Select a Page and Press Enter" />
+                                             </tooltip>
+                                             <contextMenu>
+                                                <ContextMenu />
+                                             </contextMenu>
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </TextField>
+                                          <Button fx:id="goToPage" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton" text="GO">
+                                             <tooltip>
+                                                <Tooltip text="Go to the selected Page" />
+                                             </tooltip>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
+                                             <tooltip>
+                                                <Tooltip text="Next" />
+                                             </tooltip>
+                                             <graphic>
+                                                <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/next2.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <HBox.margin>
+                                                <Insets bottom="2.0" top="2.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton">
+                                             <tooltip>
+                                                <Tooltip text="Open Playlist Settings" />
+                                             </tooltip>
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/gear.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0 45 45 0;">
                                        <graphic>
-                                          <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../image/right.png" />
+                                                <Image url="@../image/menu2.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
-                                    </Button>
-                                    <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 0; -fx-background-color: white; -fx-text-fill: black;">
-                                       <tooltip>
-                                          <Tooltip text="Select a Page and Press Enter" />
-                                       </tooltip>
                                        <contextMenu>
-                                          <ContextMenu />
+                                          <ContextMenu fx:id="toolsContextMenu">
+                                             <items>
+                                                <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/import24.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </MenuItem>
+                                              <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import Files">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/import24.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </MenuItem>
+                                                <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/export24.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </MenuItem>
+                                                <Menu mnemonicParsing="false" text="Folder" visible="false">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/folder.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Menu>
+                                                <Menu mnemonicParsing="false" text="File" visible="false">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/file.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Menu>
+                                                <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
+                                                   <graphic>
+                                                      <ImageView pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../image/Duster-24.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </MenuItem>
+                                             </items>
+                                          </ContextMenu>
                                        </contextMenu>
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                    </TextField>
-                                    <Button fx:id="goToPage" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton" text="GO">
-                                       <tooltip>
-                                          <Tooltip text="Go to the selected Page" />
-                                       </tooltip>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
-                                       <tooltip>
-                                          <Tooltip text="Next" />
-                                       </tooltip>
-                                       <graphic>
-                                          <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/right.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets bottom="2.0" top="2.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton">
-                                       <tooltip>
-                                          <Tooltip text="Open Playlist Settings" />
-                                       </tooltip>
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/gear.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
+                                    </MenuButton>
                                  </children>
+                                 <padding>
+                                    <Insets left="3.0" right="3.0" />
+                                 </padding>
                               </HBox>
-                              <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-radius: 0 45 45 0;">
-                                 <graphic>
-                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/menu2.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <contextMenu>
-                                    <ContextMenu fx:id="toolsContextMenu">
-                                       <items>
-                                          <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/import24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                        <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import Files">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/import24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                          <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/export24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                          <Menu mnemonicParsing="false" text="Folder" visible="false">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/folder.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Menu>
-                                          <Menu mnemonicParsing="false" text="File" visible="false">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/file.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Menu>
-                                          <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/Duster-24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </MenuItem>
-                                       </items>
-                                    </ContextMenu>
-                                 </contextMenu>
-                              </MenuButton>
                            </children>
-                           <padding>
-                              <Insets left="3.0" right="3.0" />
-                           </padding>
-                           <BorderPane.margin>
-                              <Insets bottom="2.0" top="2.0" />
-                           </BorderPane.margin>
-                        </HBox>
+                        </VBox>
                      </top>
                   </BorderPane>
                </content>

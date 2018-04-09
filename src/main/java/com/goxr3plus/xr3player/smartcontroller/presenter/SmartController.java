@@ -80,6 +80,9 @@ public class SmartController extends StackPane {
 	private StackPane centerStackPane;
 	
 	@FXML
+	private HBox alphabetBarBox;
+	
+	@FXML
 	private HBox searchBarHBox;
 	
 	@FXML
@@ -178,6 +181,8 @@ public class SmartController extends StackPane {
 	public static final int DEFAULT_MAXIMUM_PER_PAGE = 50;
 	private int maximumPerPage = DEFAULT_MAXIMUM_PER_PAGE;
 	
+	AlphabetBar alphabetBar = new AlphabetBar();
+	
 	// ---------Services--------------------------
 	
 	/** The search service. */
@@ -273,6 +278,9 @@ public class SmartController extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//--alphabetBarBox
+		alphabetBarBox.getChildren().add(alphabetBar);
 		
 		// ------ tableViewer	
 		centerStackPane.getChildren().add(normal_mode_mediaTableViewer);
