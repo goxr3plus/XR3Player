@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXToggleButton;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -123,6 +124,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane diskStackPane;
 	
 	@FXML
+	private HBox hBox1;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private StackPane diskStackPane1;
+	
+	@FXML
 	private VBox vBox1;
 	
 	@FXML
@@ -138,13 +151,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button replayButton;
 	
 	@FXML
-	private HBox hBox1;
-	
-	@FXML
-	private Button backwardButton;
-	
-	@FXML
-	private Button forwardButton;
+	private Label advModeVolumeLabel;
 	
 	@FXML
 	private Label elapsedTimeLabel;
@@ -316,7 +323,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	// -----------------------------------------------------------------------------
 	
-	private boolean isExtended = false;
+	/** A Fade Transition */
+	private FadeTransition fadeTransition;
+	
+	/**
+	 * This Variable Determines if the Player is extended or not ( which means it is being shown on an external window different from the main window )
+	 */
+	private boolean isPlayerExtended = false;
 	
 	public final Logger logger = Logger.getLogger(getClass().getName());
 	
@@ -707,10 +720,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		extendPlayer.setOnAction(ac -> {
 			if (!xPlayerWindow.getWindow().isShowing()) {
 				xPlayerWindow.show();
-				isExtended = true;
+				isPlayerExtended = true;
 			} else {
 				xPlayerWindow.close();
-				isExtended = false;
+				isPlayerExtended = false;
 			}
 		});
 		
@@ -740,6 +753,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		smMinimizeVolume.setOnAction(a -> minimizeVolume());
 		//smMaximizeVolume
 		smMaximizeVolume.setOnAction(a -> maximizeVolume());
+		
+		// fadeTranstion
+		fadeTransition = new FadeTransition(Duration.millis(1500), advModeVolumeLabel);
+		fadeTransition.setFromValue(1.0);
+		fadeTransition.setToValue(0.0);
+		advModeVolumeLabel.setOpacity(0);
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
@@ -984,7 +1003,14 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//			
 			//			System.out.println(getVolume());
 			
+			//VisualizerStackController Label
 			visualizerStackController.replayLabelEffect("Vol: " + getVolume() + " %");
+			
+			//Advanced Mode Volume Label
+			if (modeToggle.isSelected()) {
+				advModeVolumeLabel.setText(getVolume() + " %");
+				fadeTransition.playFromStart();
+			}
 		} catch (Exception ex) {
 			
 			logger.log(Level.INFO, "\n", ex);
@@ -1173,6 +1199,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 				}
 		});
+		discBorderPane.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
 		
 		///smTimeSlider
 		smTimeSlider.setOnMouseMoved(m -> {
@@ -1934,7 +1961,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @return the isExtended
 	 */
 	public boolean isExtended() {
-		return isExtended;
+		return isPlayerExtended;
 	}
 	
 	/**

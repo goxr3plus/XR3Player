@@ -72,6 +72,7 @@ public class VisualizerStackController extends StackPane {
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.0);
 		
+		//visualizerTypeLabel
 		visualizerTypeLabel.setOpacity(0);
 		
 		// --- MouseListeners
@@ -88,8 +89,10 @@ public class VisualizerStackController extends StackPane {
 				next.setVisible(false);
 			}
 		});
-		pauseTransition.playFromStart();
 		
+		//Fix start problem
+		previous.setVisible(false);
+		next.setVisible(false);
 	}
 	
 	/**

@@ -57,74 +57,6 @@
                                                    <center>
                                                       <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
                                                    </center>
-                                                   <bottom>
-                                                      <VBox fx:id="vBox1" alignment="CENTER" spacing="2.0" BorderPane.alignment="CENTER">
-                                                         <children>
-                                                            <HBox alignment="CENTER" spacing="2.0" styleClass="segmented-button-bar">
-                                                               <children>
-                                                                  <Button fx:id="playPauseButton" layoutX="331.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <tooltip>
-                                                                        <Tooltip text="Play-Resume" />
-                                                                     </tooltip>
-                                                                     <graphic>
-                                                                        <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../image/play.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                  </Button>
-                                                                  <Button fx:id="stopButton" layoutX="220.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <tooltip>
-                                                                        <Tooltip text="Stop" />
-                                                                     </tooltip>
-                                                                     <graphic>
-                                                                        <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../image/stop.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                  </Button>
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox alignment="CENTER" spacing="2.0" styleClass="segmented-button-bar">
-                                                               <children>
-                                                                  <ToggleButton fx:id="muteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="first">
-                                                                     <graphic>
-                                                                        <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../image/mute.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                  </ToggleButton>
-                                                                  <Button fx:id="replayButton" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <graphic>
-                                                                        <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../image/replay.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                     <tooltip>
-                                                                        <Tooltip text="Replay" />
-                                                                     </tooltip>
-                                                                  </Button>
-                                                               </children>
-                                                            </HBox>
-                                                         </children>
-                                                      </VBox>
-                                                   </bottom>
                                                    <top>
                                                       <HBox fx:id="hBox1" alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                                          <children>
@@ -161,6 +93,87 @@
                                                          </children>
                                                       </HBox>
                                                    </top>
+                                                   <bottom>
+                                                      <StackPane fx:id="diskStackPane1" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <VBox fx:id="vBox1" alignment="CENTER" spacing="2.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER" spacing="2.0" styleClass="segmented-button-bar">
+                                                                     <children>
+                                                                        <Button fx:id="playPauseButton" layoutX="331.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                           <tooltip>
+                                                                              <Tooltip text="Play-Resume" />
+                                                                           </tooltip>
+                                                                           <graphic>
+                                                                              <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@../image/play.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </Button>
+                                                                        <Button fx:id="stopButton" layoutX="220.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                           <tooltip>
+                                                                              <Tooltip text="Stop" />
+                                                                           </tooltip>
+                                                                           <graphic>
+                                                                              <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@../image/stop.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </Button>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" spacing="2.0" styleClass="segmented-button-bar">
+                                                                     <children>
+                                                                        <ToggleButton fx:id="muteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="first">
+                                                                           <graphic>
+                                                                              <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@../image/mute.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </ToggleButton>
+                                                                        <Button fx:id="replayButton" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                           <graphic>
+                                                                              <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@../image/replay.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                           <tooltip>
+                                                                              <Tooltip text="Replay" />
+                                                                           </tooltip>
+                                                                        </Button>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../image/online.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                   </bottom>
                                                 </BorderPane>
                                              </items>
                                           </SplitPane>
@@ -389,7 +402,7 @@
                               </GridPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>
