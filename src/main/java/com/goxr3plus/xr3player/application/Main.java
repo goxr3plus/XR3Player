@@ -718,14 +718,18 @@ public class Main extends Application {
 		
 		System.out.println("Cur Path :-> " + InfoTool.getBasePathForClass(Main.class));
 		
-		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
+		//Try to stop cancerous JAudioTagger Console
 		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
+		//......i know you will again not shut up for some reason....
 		
 		launch(args);
 	}
+	
+	//------------------------------------------------------------------------
+	
 	
 	public static Properties internalInformation = new Properties();
 	public static final int APPLICATION_VERSION = 99;
@@ -735,7 +739,7 @@ public class Main extends Application {
 		
 		//----------Properties-------------
 		internalInformation.put("Version", APPLICATION_VERSION);
-		internalInformation.put("ReleasedDate", "?/04/2018");
+		internalInformation.put("ReleasedDate", "10/04/2018");
 		
 		System.out.println("Outside of Application Start Method");
 		
