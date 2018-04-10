@@ -164,7 +164,7 @@
             </VBox>
             <HBox alignment="CENTER" spacing="15.0">
                <children>
-                  <JFXButton fx:id="okButton" maxHeight="1.7976931348623157E308" text="OK">
+                  <JFXButton fx:id="okButton" focusTraversable="false" maxHeight="1.7976931348623157E308" text="OK">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -173,7 +173,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="cancelButton" layoutX="376.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Nope">
+                  <JFXButton fx:id="cancelButton" focusTraversable="false" layoutX="376.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Nope">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
