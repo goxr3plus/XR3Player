@@ -55,10 +55,10 @@ public class XPlayerEqualizer extends BorderPane {
 	private final XPlayerController xPlayerController;
 	
 	//-----panFilter
-	private CustomDJFilter panFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.PAN, "Left - Right Balance");
+	private CustomDJFilter panFilter = new CustomDJFilter(42, 42, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.PAN, "Left - Right Balance");
 	
 	//-----balanceFilter
-	private CustomDJFilter balanceFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.BALANCE, "Left - Right Balance");
+	private CustomDJFilter balanceFilter = new CustomDJFilter(42, 42, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.BALANCE, "Left - Right Balance");
 	
 	//	
 	//	/** The amplitude filter. */
@@ -131,7 +131,7 @@ public class XPlayerEqualizer extends BorderPane {
 			VBox vBox = new VBox();
 			
 			//-----CustomDJFilter
-			CustomDJFilter generalFilter = new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, Equalizer_Filter_Category.GENERAL, "");
+			CustomDJFilter generalFilter = new CustomDJFilter(42, 42, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, Equalizer_Filter_Category.GENERAL, "");
 			
 			//Add the Children
 			vBox.getChildren().addAll(generalFilter, generalFilter.getFilterLabel());
@@ -176,7 +176,7 @@ public class XPlayerEqualizer extends BorderPane {
 			panFilter.setValue(0.5, true);
 			
 			//Balance
-			balanceFilter.setValue(0.5, true);
+			//balanceFilter.setValue(0.5, true);
 			
 			//Reset every  filter to it's default value 
 			for (DJFilter filter : djFilters)
