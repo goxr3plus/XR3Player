@@ -99,10 +99,10 @@ public class MediaUpdaterService {
 							filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
 						
 						//Filters Mode 
-						else if (controller.getFiltersModeTab().isSelected()) {
-							selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems();
-							System.out.println("Entered Filters Mode");
-						}
+						else if (controller.getFiltersModeTab().isSelected())
+							filterController(selectedLibrary.getSmartController(),
+									selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems());
+						
 					});
 				
 				//-------------
