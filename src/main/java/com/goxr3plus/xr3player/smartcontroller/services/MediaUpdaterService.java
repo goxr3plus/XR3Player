@@ -101,7 +101,7 @@ public class MediaUpdaterService {
 						//Filters Mode 
 						else if (controller.getFiltersModeTab().isSelected())
 							filterController(selectedLibrary.getSmartController(),
-									selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems());
+									selectedLibrary.getSmartController().getFiltersMode().getMediaTableViewer().getTableView().getItems());
 						
 					});
 				
@@ -119,7 +119,7 @@ public class MediaUpdaterService {
 					
 					//Filter mode
 					else if (controller.getFiltersModeTab().isSelected())
-						filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.filtersMode.getMediaTableViewer().getTableView().getItems());
+						filterController(Main.searchWindowSmartController, Main.searchWindowSmartController.getFiltersMode().getMediaTableViewer().getTableView().getItems());
 				}
 			}
 			
@@ -152,7 +152,7 @@ public class MediaUpdaterService {
 						
 						//Filters Mode
 						else if (controller.getFiltersModeTab().isSelected())
-							filterController(controller, controller.filtersMode.getMediaTableViewer().getTableView().getItems());
+							filterController(controller, controller.getFiltersMode().getMediaTableViewer().getTableView().getItems());
 					});
 			
 			//--
@@ -167,7 +167,7 @@ public class MediaUpdaterService {
 					filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).getItemsObservableList());
 					
 					//Filters Mode
-					filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).filtersMode.getMediaTableViewer().getTableView().getItems());
+					filterController((SmartController) tab.getContent(), ( (SmartController) tab.getContent() ).getFiltersMode().getMediaTableViewer().getTableView().getItems());
 					
 				});
 			

@@ -381,8 +381,8 @@ public class Library extends StackPane {
 				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView() && event.getGestureSource() != controller.foldersMode
-					&& event.getGestureSource() != controller.filtersMode.getMediaTableViewer().getTableView())
+			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView() && event.getGestureSource() != controller.getFoldersMode()
+					&& event.getGestureSource() != controller.getFiltersMode().getMediaTableViewer().getTableView())
 				dragAndDropLabel.setVisible(true);
 			
 		});

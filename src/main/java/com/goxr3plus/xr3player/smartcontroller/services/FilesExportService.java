@@ -120,7 +120,11 @@ public class FilesExportService extends Service<Boolean> {
 							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
-							Stream<Media> stream = smartController.getItemsObservableList().stream();
+							Stream<Media> stream =
+									//Is Filter Mode Selected?
+									( !smartController.getFiltersModeTab().isSelected() ) ? smartController.getItemsObservableList().stream()
+											: smartController.getFiltersMode().getMediaTableViewer().getTableView().getItems().stream();
+							//For each item on stream
 							stream.forEach(media -> {
 								if (isCancelled())
 									stream.close();
@@ -139,7 +143,12 @@ public class FilesExportService extends Service<Boolean> {
 							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
-							Stream<Media> stream = smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream();
+							Stream<Media> stream =
+									//Is Filter Mode Selected?
+									( !smartController.getFiltersModeTab().isSelected() )
+											? smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream()
+											: smartController.getFiltersMode().getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().stream();
+							//For each item on stream
 							stream.forEach(media -> {
 								if (isCancelled())
 									stream.close();

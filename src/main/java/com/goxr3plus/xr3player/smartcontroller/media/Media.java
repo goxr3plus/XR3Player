@@ -917,7 +917,7 @@ public abstract class Media {
 					if (media.getFilePath().equals(oldFilePath))
 						media.setFilePath(newFilePath);
 				});
-				smartController.filtersMode.getMediaTableViewer().getTableView().getItems().forEach(media -> {
+				smartController.getFiltersMode().getMediaTableViewer().getTableView().getItems().forEach(media -> {
 					if (media.getFilePath().equals(oldFilePath))
 						media.setFilePath(newFilePath);
 				});
@@ -1020,7 +1020,7 @@ public abstract class Media {
 					if (media.getFilePath().equals(Media.this.getFilePath()))
 						media.starsProperty().get().setText(String.valueOf(getStars()));
 				});
-				smartController.filtersMode.getMediaTableViewer().getTableView().getItems().forEach(media -> {
+				smartController.getFiltersMode().getMediaTableViewer().getTableView().getItems().forEach(media -> {
 					if (media.getFilePath().equals(Media.this.getFilePath()))
 						media.starsProperty().get().setText(String.valueOf(getStars()));
 				});

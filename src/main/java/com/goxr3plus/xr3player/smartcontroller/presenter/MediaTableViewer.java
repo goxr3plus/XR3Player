@@ -797,5 +797,6 @@ public class MediaTableViewer extends StackPane {
 	public AllDetailsService getAllDetailsService() {
 		return allDetailsService;
 	}
+
 	
 }

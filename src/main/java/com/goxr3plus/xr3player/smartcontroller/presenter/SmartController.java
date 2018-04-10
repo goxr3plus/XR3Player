@@ -213,9 +213,9 @@ public class SmartController extends StackPane {
 	
 	// --------------------------------------------------
 	
-	public final SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
+	private final SmartControllerFoldersMode foldersMode = new SmartControllerFoldersMode(this);
 	
-	public final SmartControllerFiltersMode filtersMode = new SmartControllerFiltersMode(this);
+	private final SmartControllerFiltersMode filtersMode = new SmartControllerFiltersMode(this);
 	
 	// --------------------------------------------------
 	
@@ -1304,6 +1304,20 @@ public class SmartController extends StackPane {
 	 */
 	public Tab getNormalModeTab() {
 		return normalModeTab;
+	}
+
+	/**
+	 * @return the filtersMode
+	 */
+	public SmartControllerFiltersMode getFiltersMode() {
+		return filtersMode;
+	}
+
+	/**
+	 * @return the foldersMode
+	 */
+	public SmartControllerFoldersMode getFoldersMode() {
+		return foldersMode;
 	}
 	
 	/*-----------------------------------------------------------------------

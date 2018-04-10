@@ -112,7 +112,7 @@ public class InputService extends Service<Void> {
 		smartController.getCancelButton().setDisable(true);
 		smartController.depositWorking = false;
 		smartController.getLoadService().startService(true, true, true);
-		smartController.foldersMode.recreateTree();
+		smartController.getFoldersMode().recreateTree();
 	}
 	
 	/*
