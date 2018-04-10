@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -14,13 +15,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="343.0" prefWidth="584.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="329.0" prefWidth="607.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="How to export files?">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="What to do with the files ?">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -32,14 +33,14 @@
                               <ToggleGroup fx:id="exportProcedureGroup" />
                            </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton disable="true" focusTraversable="false" styleClass="settingsRadioButton" text="Move" toggleGroup="$exportProcedureGroup" />
+                        <JFXRadioButton disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="settingsRadioButton" text="Move" toggleGroup="$exportProcedureGroup" visible="false" />
                      </children>
                   </HBox>
                </children>
             </VBox>
             <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="What files to export?">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Which files to export ?">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -59,11 +60,11 @@
             </VBox>
             <VBox alignment="CENTER" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Where to export the files?" VBox.vgrow="SOMETIMES" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Where to export the above files ?" VBox.vgrow="SOMETIMES" />
                   <HBox alignment="CENTER">
                      <children>
                         <TextField fx:id="exportField1" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="clear1" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                        <Button fx:id="clear1" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -81,7 +82,7 @@
                               <Tooltip text="Clear Text Field" />
                            </tooltip>
                         </Button>
-                        <Button fx:id="exportButton1" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                        <Button fx:id="exportButton1" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -97,7 +98,7 @@
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="51.0">
                      <children>
                         <TextField fx:id="exportField2" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="clear2" contentDisplay="GRAPHIC_ONLY" layoutX="561.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                        <Button fx:id="clear2" contentDisplay="GRAPHIC_ONLY" layoutX="561.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -115,7 +116,7 @@
                               <Tooltip text="Clear Text Field" />
                            </tooltip>
                         </Button>
-                        <Button fx:id="exportButton2" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                        <Button fx:id="exportButton2" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -128,7 +129,7 @@
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="70.0">
                      <children>
                         <TextField fx:id="exportField3" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="clear3" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                        <Button fx:id="clear3" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -146,7 +147,7 @@
                               <Tooltip text="Clear Text Field" />
                            </tooltip>
                         </Button>
-                        <Button fx:id="exportButton3" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
+                        <Button fx:id="exportButton3" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;" text="..." HBox.hgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -157,13 +158,13 @@
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
             </VBox>
             <HBox alignment="CENTER" spacing="15.0">
                <children>
-                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="77.0" text="OK">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
+                  <JFXButton fx:id="okButton" maxHeight="1.7976931348623157E308" text="OK">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -171,25 +172,22 @@
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="87.0" text="Close">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="cancelButton" layoutX="376.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Nope">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/x.png" />
+                              <Image url="@../image/delete.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
+                  </JFXButton>
                </children>
             </HBox>
          </children>
       </VBox>
    </center>
    <padding>
-      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+      <Insets bottom="15.0" left="2.0" right="2.0" top="2.0" />
    </padding>
 </fx:root>
