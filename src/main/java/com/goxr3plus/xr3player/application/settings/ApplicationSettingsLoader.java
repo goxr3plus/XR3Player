@@ -119,6 +119,9 @@ public class ApplicationSettingsLoader {
 			//======================START OF XPLAYERS-Settings======================
 			
 			//--General
+			Optional.ofNullable(settings.getProperty("XPlayers-General-AllowDiscRotation"))
+					.ifPresent(s -> Main.settingsWindow.getxPlayersSettingsController().getAllowDiscRotation().setSelected(Boolean.parseBoolean(s)));
+			
 			Optional.ofNullable(settings.getProperty("XPlayers-General-StartAtOnce"))
 					.ifPresent(s -> Main.settingsWindow.getxPlayersSettingsController().getStartImmediately().setSelected(Boolean.parseBoolean(s)));
 			
@@ -169,7 +172,8 @@ public class ApplicationSettingsLoader {
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Muted")).ifPresent(s -> xPlayerController.setMute(Boolean.parseBoolean(s)));
 				
 				//Check if Visualizers Enabled on Simple Mode
-				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Simple-Mode-Visualizers-Enabled")).ifPresent(s -> xPlayerController.getShowVisualizer().setSelected(Boolean.parseBoolean(s)));
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Simple-Mode-Visualizers-Enabled"))
+						.ifPresent(s -> xPlayerController.getShowVisualizer().setSelected(Boolean.parseBoolean(s)));
 				
 			});
 			
