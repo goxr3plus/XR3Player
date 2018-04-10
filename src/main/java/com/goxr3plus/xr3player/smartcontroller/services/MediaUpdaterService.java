@@ -99,8 +99,10 @@ public class MediaUpdaterService {
 							filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
 						
 						//Filters Mode 
-						else if (controller.getFiltersModeTab().isSelected())
+						else if (controller.getFiltersModeTab().isSelected()) {
 							selectedLibrary.getSmartController().filtersMode.getMediaTableViewer().getTableView().getItems();
+							System.out.println("Entered Filters Mode");
+						}
 					});
 				
 				//-------------
@@ -109,7 +111,7 @@ public class MediaUpdaterService {
 				if (Main.playListModesTabPane.getSearchEverythingTab().isSelected()) {
 					
 					//Find the controller
-					SmartController controller = (SmartController) Main.playListModesTabPane.getSearchEverythingTab().getContent();
+					SmartController controller = Main.searchWindowSmartController;
 					
 					//Normal Mode
 					if (controller.getNormalModeTab().isSelected())
