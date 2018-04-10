@@ -49,7 +49,7 @@
                                     <Tooltip text="Choose the total number of files to be shown on playlists" />
                                  </tooltip>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Detect played files using" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Detect played files using" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="2">
                                  <tooltip>
                                     <Tooltip text="Choose the way that the played files will be detected on playlists" />
                                  </tooltip>
@@ -205,7 +205,7 @@
                                     <Tooltip text="When you type inside PlayLists search fields the search will start immediatly without pressing enter" />
                                  </tooltip>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Search Files Using" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Search Files Using" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="2" />
                               <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" />
                               <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Absolute Path (C:/../a.mp3) [ Faster ]" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                  <toggleGroup>

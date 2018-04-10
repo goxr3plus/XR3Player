@@ -91,7 +91,7 @@
                                     <Tooltip text="When you drag and drop a media inside the player it will start at once | either way it will stay paused" />
                                  </tooltip>
                               </Label>
-                              <JFXCheckBox fx:id="allowDiscRotation" alignment="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <JFXCheckBox fx:id="allowDiscRotation" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

@@ -763,7 +763,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		if (!playService.isDiscImageNull() && xPlayer.isPlaying())
 			//Is discRotation allowed?
 			if (Main.settingsWindow.getxPlayersSettingsController().getAllowDiscRotation().isSelected())
-				disc.resumeRotation();		
+				disc.resumeRotation();
 			else
 				disc.stopRotation();
 			
