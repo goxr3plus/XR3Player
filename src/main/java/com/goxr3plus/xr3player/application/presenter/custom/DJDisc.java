@@ -555,22 +555,22 @@ public class DJDisc extends StackPane {
 	 * Resume the rotation of the disc.
 	 */
 	public void resumeRotation() {
-		//rotationAnimation.play();
+		rotationAnimation.play();
 	}
 	
 	/**
 	 * Pause the rotation of the disc.
 	 */
 	public void pauseRotation() {
-		//rotationAnimation.pause();
+		rotationAnimation.pause();
 	}
 	
 	/**
 	 * Stops the Rotation Animation
 	 */
 	public void stopRotation() {
-		//rotationAnimation.jumpTo(Duration.ZERO);
-		//rotationAnimation.pause();
+		rotationAnimation.jumpTo(Duration.ZERO);
+		rotationAnimation.pause();
 	}
 	
 	/**
