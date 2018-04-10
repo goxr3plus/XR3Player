@@ -327,7 +327,7 @@ public class DJFilter extends StackPane {
 				angle = - ( 360 - angle ); // make it minus cause i turn it
 				// on the right
 				
-				//System.out.println(getValue());
+				//System.out.println(getValue())
 				
 			}
 			Platform.runLater(this::repaint);

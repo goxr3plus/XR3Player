@@ -14,6 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
+/**
+ * AlphabetBar
+ * 
+ * @author GOXR3PLUSSTUDIO
+ *
+ */
 public class AlphabetBar extends StackPane {
 	
 	//-----------------------------------------------------
@@ -64,6 +70,10 @@ public class AlphabetBar extends StackPane {
 		
 		//Right 
 		rightArrow.setOnAction(a -> scrollPane.setHvalue(scrollPane.getHvalue() + speed));
+		
+		//On Mouse Scrolling
+		scrollPane.setOnScroll(scroll -> scrollPane.setHvalue(scrollPane.getHvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )));
+		
 	}
 	
 	/**
@@ -74,7 +84,11 @@ public class AlphabetBar extends StackPane {
 		//Clear the previous buttons
 		alphabetBox.getChildren().clear();
 		
-		Iterator<String> iterator = LocaleData.getExemplarSet(ULocale.ENGLISH, LocaleData.ES_STANDARD).iterator();
+		Iterator<String> iterator = LocaleData.getExemplarSet(ulocale, LocaleData.ES_STANDARD).iterator();
+		//System.out.println(LocaleData.getExemplarSet(ULocale.CHINESE, LocaleData.ES_STANDARD).size());
+		
+		//	int counter = 0;
+		//For each letter
 		while (iterator.hasNext()) {
 			
 			//Button
@@ -87,6 +101,8 @@ public class AlphabetBar extends StackPane {
 			
 			//Append on bar
 			alphabetBox.getChildren().add(letter);
+			
+			//System.out.println(++counter+" "+iterator.next());
 		}
 		
 	}

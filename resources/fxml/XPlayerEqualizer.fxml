@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -26,10 +27,10 @@
          </content>
       </ScrollPane>
    </center>
-   <bottom>
-      <HBox fx:id="hbox" alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+   <top>
+      <HBox fx:id="hbox" alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="88.0" style="-fx-font-size: 11;" text="Reset">
+            <MenuButton alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" rotate="180.0" style="-fx-font-size: 11; -fx-background-radius: 0;">
               <items>
                   <Menu fx:id="presets" mnemonicParsing="false" text="Presets" visible="false" />
                   <MenuItem fx:id="resetFilters" mnemonicParsing="false" text="Reset All" />
@@ -42,7 +43,8 @@
                   </ImageView>
                </graphic>
             </MenuButton>
+            <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Filter Description" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-   </bottom>
+   </top>
 </fx:root>

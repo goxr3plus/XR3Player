@@ -44,6 +44,9 @@ public class XPlayerEqualizer extends BorderPane {
 	@FXML
 	private MenuItem resetFilters;
 	
+	@FXML
+	private Label descriptionLabel;
+	
 	//----------------------------------------------------
 	
 	/** The logger for this class */
@@ -52,10 +55,10 @@ public class XPlayerEqualizer extends BorderPane {
 	private final XPlayerController xPlayerController;
 	
 	//-----panFilter
-	private CustomDJFilter panFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.PAN);
+	private CustomDJFilter panFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.PAN, "Left - Right Balance");
 	
 	//-----balanceFilter
-	private CustomDJFilter balanceFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.BALANCE);
+	private CustomDJFilter balanceFilter = new CustomDJFilter(30, 30, Color.GOLD, 0.5, -1.0, 1.0, 100, Equalizer_Filter_Category.BALANCE, "Left - Right Balance");
 	
 	//	
 	//	/** The amplitude filter. */
@@ -128,7 +131,7 @@ public class XPlayerEqualizer extends BorderPane {
 			VBox vBox = new VBox();
 			
 			//-----CustomDJFilter
-			CustomDJFilter generalFilter = new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, Equalizer_Filter_Category.GENERAL);
+			CustomDJFilter generalFilter = new CustomDJFilter(30, 30, xPlayerController.getDiscArcColor(), 0.5, -1.0, 1.0, i, Equalizer_Filter_Category.GENERAL, "");
 			
 			//Add the Children
 			vBox.getChildren().addAll(generalFilter, generalFilter.getFilterLabel());
@@ -138,7 +141,14 @@ public class XPlayerEqualizer extends BorderPane {
 			
 			//Add to djFilters
 			djFilters.add(generalFilter);
+			
+			if (i <= 2)
+				generalFilter.setDescription("Bass Filter");
+			else
+				generalFilter.setDescription("Filter " + i);
 		}
+		
+		//Set the description for the filters
 		
 		//-------------------------- Extra Filters--------------------------
 		
@@ -158,20 +168,19 @@ public class XPlayerEqualizer extends BorderPane {
 		
 		//Add the Children
 		vBox2.getChildren().addAll(balanceFilter, balanceFilter.getFilterLabel());
-		
-		hbox.getChildren().addAll(vBox);
+		tilePane.getChildren().add(0, vBox);
 		
 		//resetFilers
 		resetFilters.setOnAction(action -> {
 			//Pan
-			panFilter.setValue(0.5,true);
+			panFilter.setValue(0.5, true);
 			
 			//Balance
-			balanceFilter.setValue(0.5,true);
+			balanceFilter.setValue(0.5, true);
 			
 			//Reset every  filter to it's default value 
 			for (DJFilter filter : djFilters)
-				filter.setValue(0.5,true);
+				filter.setValue(0.5, true);
 		});
 		
 		// Add all
@@ -194,6 +203,13 @@ public class XPlayerEqualizer extends BorderPane {
 	}
 	
 	/**
+	 * @return the descriptionLabel
+	 */
+	public Label getDescriptionLabel() {
+		return descriptionLabel;
+	}
+	
+	/**
 	 * The Category of the Filter
 	 * 
 	 * @author GOXR3PLUS
@@ -213,6 +229,7 @@ public class XPlayerEqualizer extends BorderPane {
 		private int position;
 		private Label filterLabel;
 		private Equalizer_Filter_Category filterCategory;
+		private String description;
 		
 		/**
 		 * Constructor
@@ -227,8 +244,11 @@ public class XPlayerEqualizer extends BorderPane {
 		 * @param filterCategory
 		 */
 		public CustomDJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue, double maximumValue, int position,
-				Equalizer_Filter_Category filterCategory) {
+				Equalizer_Filter_Category filterCategory, String description) {
 			super(width, height, arcColor, currentValue, minimumValue, maximumValue, DJFilterCategory.EQUALIZER_FILTER);
+			
+			//Descriptions
+			this.description = description;
 			
 			//Position
 			this.position = position;
@@ -239,8 +259,12 @@ public class XPlayerEqualizer extends BorderPane {
 			//The Label of the Filter
 			filterLabel = new Label("0.0");
 			filterLabel.getStyleClass().add("applicationSettingsLabel2");
+			filterLabel.setStyle("-fx-font-size:11px");
 			filterLabel.setMinWidth(35);
 			filterLabel.setMaxWidth(35);
+			
+			//Description
+			this.setOnMouseEntered(m -> descriptionLabel.setText(this.description));
 			
 			//Add the DJFilterListener
 			super.addDJDiscListener(this);
@@ -293,6 +317,21 @@ public class XPlayerEqualizer extends BorderPane {
 		 */
 		public Label getFilterLabel() {
 			return filterLabel;
+		}
+		
+		/**
+		 * @return the description
+		 */
+		public String getDescription() {
+			return description;
+		}
+		
+		/**
+		 * @param description
+		 *            the description to set
+		 */
+		public void setDescription(String description) {
+			this.description = description;
 		}
 		
 	}
@@ -348,7 +387,7 @@ public class XPlayerEqualizer extends BorderPane {
 						transformedValue = Math.abs(fakeValue);
 					
 					//Apply
-					djFilters.get(i).setValue(transformedValue,true);
+					djFilters.get(i).setValue(transformedValue, true);
 				}
 				
 			});
