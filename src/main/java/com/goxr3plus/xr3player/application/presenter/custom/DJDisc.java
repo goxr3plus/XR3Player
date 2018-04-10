@@ -297,18 +297,18 @@ public class DJDisc extends StackPane {
 		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, angle, ArcType.OPEN);
 		
 		// Volume Arc
-//		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
-//		canvas.gc.setLineDashes(6);
-//		canvas.gc.setLineWidth(3);
-//		canvas.gc.setStroke(arcColor);
-//		int value = this.getVolume() == 0 ? 0 : (int) ( ( (double) this.getVolume() / (double) this.maximumVolume ) * 180 );
-//		//System.out.println(value)
-//		canvas.gc.setFill(webGrey);
-//		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
-//		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
-//		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
-//		canvas.gc.setLineDashes(0);
-//		canvas.gc.setLineCap(StrokeLineCap.ROUND);
+		//		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
+		//		canvas.gc.setLineDashes(6);
+		//		canvas.gc.setLineWidth(3);
+		//		canvas.gc.setStroke(arcColor);
+		//		int value = this.getVolume() == 0 ? 0 : (int) ( ( (double) this.getVolume() / (double) this.maximumVolume ) * 180 );
+		//		//System.out.println(value)
+		//		canvas.gc.setFill(webGrey);
+		//		canvas.gc.fillArc(11, 11, prefWidth - 22, prefHeight - 22, 90, 360, ArcType.OPEN);
+		//		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, -value, ArcType.OPEN);
+		//		canvas.gc.strokeArc(13, 13, prefWidth - 26, prefHeight - 26, -90, +value, ArcType.OPEN);
+		//		canvas.gc.setLineDashes(0);
+		//		canvas.gc.setLineCap(StrokeLineCap.ROUND);
 		
 		// --------------------------Maths to find the point on the circle
 		// circumference
@@ -663,7 +663,7 @@ public class DJDisc extends StackPane {
 		int rotation = m.getDeltaY() < 1 ? 1 : -1;
 		setVolume(getVolume() - rotation);
 	}
-
+	
 	/**
 	 * @return the imageView
 	 */

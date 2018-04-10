@@ -12,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 /**
  * @author GOXR3PLUS
@@ -20,12 +21,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class XPlayersSettingsController extends BorderPane {
 	
 	/** -----------------------------------------------------. */
-	
-	@FXML
-	private JFXCheckBox showFPS;
-	
-	@FXML
-	private Slider maxVisualizerFPSSlider;
 	
 	@FXML
 	private JFXCheckBox startImmediately;
@@ -38,6 +33,15 @@ public class XPlayersSettingsController extends BorderPane {
 	
 	@FXML
 	private JFXCheckBox showPlayerNotifications;
+	
+	@FXML
+	private JFXCheckBox allowDiscRotation;
+	
+	@FXML
+	private JFXCheckBox showFPS;
+	
+	@FXML
+	private Slider maxVisualizerFPSSlider;
 	
 	// -------------------------------------------------------------
 	
@@ -104,6 +108,17 @@ public class XPlayersSettingsController extends BorderPane {
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-SkipButtonSeconds", Integer.toString((int) secondsToSkipSlider.getValue()));
 		});
+		
+		//allowDiscRotation
+		allowDiscRotation.selectedProperty().addListener(l -> {
+			
+			//Notify all the Players
+			Main.xPlayersList.getList().forEach(XPlayerController::checkDiscRotation);
+			
+			////Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayers-General-AllowDiscRotation", String.valueOf(allowDiscRotation.isSelected()));
+		});
+		
 	}
 	
 	/**
@@ -160,6 +175,13 @@ public class XPlayersSettingsController extends BorderPane {
 	 */
 	public JFXCheckBox getShowPlayerNotifications() {
 		return showPlayerNotifications;
+	}
+	
+	/**
+	 * @return the allowDiscRotation
+	 */
+	public JFXCheckBox getAllowDiscRotation() {
+		return allowDiscRotation;
 	}
 	
 }

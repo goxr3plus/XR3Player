@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="420.0" prefWidth="494.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="420.0" prefWidth="494.0" style="-fx-background-color: black;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <JFXTabPane side="RIGHT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
          <tabs>
@@ -34,19 +34,20 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Start at once">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Start Playing Directly" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                                  <tooltip>
                                     <Tooltip text="When you drag and drop a media inside the player it will start at once | either way it will stay paused" />
                                  </tooltip>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Ask Sequrity Questions" GridPane.rowIndex="1">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Ask Sequrity Questions" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
                                  <tooltip>
                                     <Tooltip text="If another media is playing then a question will be asked if you want to replace it " />
                                  </tooltip>
                               </Label>
-                              <JFXCheckBox fx:id="startImmediately" alignment="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <JFXCheckBox fx:id="startImmediately" alignment="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -54,7 +55,7 @@
                                     <Tooltip text="When you drop a song into the player it wil start immediately" />
                                  </tooltip>
                               </JFXCheckBox>
-                              <JFXCheckBox fx:id="askSecurityQuestion" alignment="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                              <JFXCheckBox fx:id="askSecurityQuestion" alignment="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -62,27 +63,40 @@
                                     <Tooltip text="When you drop a song into the player it will ask security question if other song is already playing" />
                                  </tooltip>
                               </JFXCheckBox>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Skip Buttons (Seconds)" GridPane.rowIndex="3">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Skip Buttons (Seconds)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4">
                                  <tooltip>
                                     <Tooltip text="The Skip Buttons of the Player will skip the selected duration in seconds" />
                                  </tooltip>
                               </Label>
-                              <Slider fx:id="secondsToSkipSlider" majorTickUnit="5.0" max="60.0" maxWidth="-Infinity" min="5.0" minWidth="-Infinity" minorTickCount="5" prefWidth="200.0" showTickLabels="true" showTickMarks="true" styleClass="transparency-slider" value="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                              <Slider fx:id="secondsToSkipSlider" majorTickUnit="5.0" max="60.0" maxWidth="-Infinity" min="5.0" minWidth="-Infinity" minorTickCount="5" prefWidth="200.0" showTickLabels="true" showTickMarks="true" styleClass="transparency-slider" value="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Slider>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Show Player Notifications" GridPane.rowIndex="2">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Show Player Notifications" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
                                  <tooltip>
                                     <Tooltip text="When checked it will show notifications about the player , like when it stops , starts etc." />
                                  </tooltip>
                               </Label>
-                              <JFXCheckBox fx:id="showPlayerNotifications" alignment="CENTER" layoutX="178.0" layoutY="145.0" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                              <JFXCheckBox fx:id="showPlayerNotifications" alignment="CENTER" layoutX="178.0" layoutY="145.0" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <tooltip>
                                     <Tooltip text="When you drop a song into the player it will ask security question if other song is already playing" />
+                                 </tooltip>
+                              </JFXCheckBox>
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Allow Disc Rotation" textAlignment="CENTER" wrapText="true">
+                                 <tooltip>
+                                    <Tooltip text="When you drag and drop a media inside the player it will start at once | either way it will stay paused" />
+                                 </tooltip>
+                              </Label>
+                              <JFXCheckBox fx:id="allowDiscRotation" alignment="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="When you drop a song into the player it wil start immediately" />
                                  </tooltip>
                               </JFXCheckBox>
                            </children>
@@ -113,7 +127,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Show Frames Per Second" />
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Show FPS (frames per second)" textAlignment="CENTER" wrapText="true" />
                               <JFXCheckBox fx:id="showFPS" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -122,7 +136,7 @@
                                     <Tooltip text="Visualizers show Frames Per Second [FPS]" />
                                  </tooltip>
                               </JFXCheckBox>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Maximum FPS" GridPane.rowIndex="1">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Maximum FPS (frames per second)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                                  <tooltip>
                                     <Tooltip text="The maximum frames per second that  are allowed to the visualizers" />
                                  </tooltip>

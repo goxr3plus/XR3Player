@@ -125,7 +125,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	@FXML
 	private StackPane diskStackPane1;
 	
-	
 	@FXML
 	private Button backwardButton;
 	
@@ -756,6 +755,21 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
+	 * Check's if disc rotation is allowed or not and based on player status it start's it or stops it
+	 */
+	public void checkDiscRotation() {
+		
+		//Is Player Playing?
+		if (!playService.isDiscImageNull() && xPlayer.isPlaying())
+			//Is discRotation allowed?
+			if (Main.settingsWindow.getxPlayersSettingsController().getAllowDiscRotation().isSelected())
+				disc.resumeRotation();		
+			else
+				disc.stopRotation();
+			
+	}
+	
+	/**
 	 * Fixes the Visualizer StackPane when adding it on Simple Mode or Advanced Mode
 	 */
 	private void simple_And_Advanced_Mode_Fix_Visualizer() {
@@ -923,8 +937,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		disc.stopFade();
 		
 		// image !=null?
-		if (!playService.isDiscImageNull())
-			disc.resumeRotation();
+		//	if (!playService.isDiscImageNull())
+		checkDiscRotation();
 		
 		// Start the visualizer
 		visualizer.startVisualizer();
