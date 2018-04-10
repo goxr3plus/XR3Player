@@ -50,7 +50,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -124,19 +123,14 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane diskStackPane;
 	
 	@FXML
-	private HBox hBox1;
+	private StackPane diskStackPane1;
+	
 	
 	@FXML
 	private Button backwardButton;
 	
 	@FXML
 	private Button forwardButton;
-	
-	@FXML
-	private StackPane diskStackPane1;
-	
-	@FXML
-	private VBox vBox1;
 	
 	@FXML
 	private Button playPauseButton;
@@ -1105,8 +1099,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		equalizerTab.setContent(equalizer);
 		
 		//Pad
-		xPlayerPad = new XPlayerPad(this);
-		padTab.setContent(xPlayerPad);
+		//xPlayerPad = new XPlayerPad(this);
+		//padTab.setContent(xPlayerPad);
 		
 	}
 	
@@ -1310,7 +1304,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private void reCalculateCanvasSize() {
 		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1;
 		
-		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - hBox1.getHeight() - vBox1.getHeight()) / 1.1;
+		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size, size);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
