@@ -11,6 +11,7 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Labeled;
@@ -24,6 +25,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.FilesMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -225,6 +227,14 @@ public class ExportWindowController extends BorderPane {
 			exportField3.clear();
 		}
 		oldSmartController = smartController;
+		
+		//Disable or enable buttons
+		if (smartController.getFiltersModeTab().isSelected()) {
+			( (Node) whatFilesToExportGroup.getToggles().get(2) ).setDisable(true);
+			JavaFXTools.selectToggleOnIndex(whatFilesToExportGroup, 1);
+		} else {
+			( (Node) whatFilesToExportGroup.getToggles().get(2) ).setDisable(false);
+		}
 		
 		//Show the Window
 		defineFilesToExport();
