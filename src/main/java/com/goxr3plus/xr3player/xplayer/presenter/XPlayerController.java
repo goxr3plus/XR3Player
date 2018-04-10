@@ -220,9 +220,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Tab equalizerTab;
 	
 	@FXML
-	private Tab padTab;
-	
-	@FXML
 	private BorderPane smBorderPane;
 	
 	@FXML

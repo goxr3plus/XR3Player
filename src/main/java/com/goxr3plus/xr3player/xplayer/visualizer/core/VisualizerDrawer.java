@@ -31,9 +31,9 @@ public class VisualizerDrawer extends VisualizerModel {
 	//-----
 	
 	/** The DEFAULT_BACKGROUND_IMAGE */
-	public static final Image DEFAULT_BACKGROUND_IMAGE = InfoTool.getImageFromResourcesFolder("VisualizerBackground.jpg");
+	public static final Image DEFAULT_BACKGROUND_IMAGE =null;//= InfoTool.getImageFromResourcesFolder("VisualizerBackground.jpg");
 	/** The DEFAULT_FOREGROUND_IMAGE */
-	public static final Image DEFAULT_FOREGROUND_IMAGE = InfoTool.getImageFromResourcesFolder("VisualizerForeground.png");
+	public static final Image DEFAULT_FOREGROUND_IMAGE =null;//= InfoTool.getImageFromResourcesFolder("VisualizerForeground.png");
 	
 	//-----
 	
