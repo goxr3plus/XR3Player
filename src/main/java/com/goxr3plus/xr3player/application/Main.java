@@ -127,7 +127,7 @@ public class Main extends Application {
 		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
 	}
 	
-	//----------------START: The below have not depencities on other ---------------------------------//
+	//----------------START: The below have not dependencies on classes ---------------------------------//
 	
 	public static WelcomeScreen welcomeScreen;
 	
@@ -198,17 +198,6 @@ public class Main extends Application {
 	/** The Constant songsContextMenu. */
 	public static MediaContextMenu songsContextMenu;
 	
-	/** The Constant specialChooser. */
-	public static FileAndFolderChooser specialChooser = new FileAndFolderChooser();;
-	
-	//
-	
-	/** XPlayList holds the instances of XPlayerControllers */
-	public static XPlayersList xPlayersList = new XPlayersList();
-	
-	/** The Constant . */
-	public static PlayedMediaList playedSongs = new PlayedMediaList();
-	
 	/** The Constant EmotionListsController. */
 	public static EmotionListsController emotionListsController;
 	
@@ -219,7 +208,18 @@ public class Main extends Application {
 	 */
 	public static WebBrowserController webBrowser;
 	
-	//----------------END: The above have not depencities on other ---------------------------------//
+	//
+	
+	/** The Constant specialChooser. */
+	public static FileAndFolderChooser specialChooser = new FileAndFolderChooser();;
+	
+	/** XPlayList holds the instances of XPlayerControllers */
+	public static XPlayersList xPlayersList = new XPlayersList();
+	
+	/** The Constant . */
+	public static PlayedMediaList playedSongs = new PlayedMediaList();
+	
+	//----------------END: The above have not dependencies on other classes ---------------------------------//
 	
 	//----------------START: Vary basic for the application---------------------------------------//
 	
@@ -240,7 +240,7 @@ public class Main extends Application {
 	
 	//---------------END:Vary basic for the application---------------------------------//
 	
-	// --------------START: The below have depencities on others------------------------
+	// --------------START: The below have dependencies on others------------------------
 	
 	/** The Constant dbManager. */
 	public static DbManager dbManager = new DbManager();
@@ -280,12 +280,12 @@ public class Main extends Application {
 	 */
 	public static JFXTabPane specialJFXTabPane;
 	
-	// --------------END: The below have depencities on others------------------------
+	// --------------END: The below have dependencies on others------------------------
 	
 	@Override
 	public void start(Stage primaryStage) {
 		
-		//----------------START: The below have not depencities on other ---------------------------------//
+		//----------------START: The below have not dependencies on other ---------------------------------//
 		
 		welcomeScreen = new WelcomeScreen();
 		
@@ -363,9 +363,9 @@ public class Main extends Application {
 		
 		//
 		
-		//----------------END: The above have not depencities on other ---------------------------------//
+		//----------------END: The above have not dependencies on other ---------------------------------//
 		
-		// --------------START: The below have depencities on others------------------------
+		// --------------START: The below have depencitdependenciesies on others------------------------
 		
 		/** The Constant libraryMode. */
 		libraryMode = new LibraryMode();
@@ -401,7 +401,7 @@ public class Main extends Application {
 		 */
 		specialJFXTabPane = new JFXTabPane();
 		
-		// --------------END: The below have depencities on others------------w------------
+		// --------------END: The below have dependencies on others------------w------------
 		
 		System.out.println("Entered JavaFX Application Start Method");
 		Platform.setImplicitExit(false);
