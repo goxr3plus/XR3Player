@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
@@ -12,37 +11,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
 <fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <bottom>
-            <StackPane style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
+            <StackPane prefHeight="55.0" style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="gitHubButton" layoutX="961.0" layoutY="24.0" mnemonicParsing="false" text="GitHub " StackPane.alignment="CENTER_LEFT">
-                     <tooltip>
-                        <Tooltip text="Download the latest version" />
-                     </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/GitHub-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="closeWindow" mnemonicParsing="false" text="Close" StackPane.alignment="CENTER_RIGHT">
+                  <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308" text="Close" StackPane.alignment="CENTER_RIGHT">
                      <tooltip>
                         <Tooltip text="Close the Window" />
                      </tooltip>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,41 +30,38 @@
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
-                  <HBox alignment="CENTER" pickOnBounds="false" spacing="5.0">
-                     <children>
-                        <Button fx:id="automaticUpdate" mnemonicParsing="false" text="Automatic Update">
-                           <tooltip>
-                              <Tooltip text="Automatic Update Download" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/Installing%20Updates-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="download" mnemonicParsing="false" text="Manual Download">
-                           <tooltip>
-                              <Tooltip text="Download the latest version" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets bottom="7.0" top="7.0" />
-                     </padding>
-                  </HBox>
+                  </JFXButton>
+                  <JFXButton fx:id="viewOnGithub" focusTraversable="false" layoutX="682.0" layoutY="11.0" maxHeight="1.7976931348623157E308" text="GitHub Page" StackPane.alignment="CENTER_LEFT">
+                     <tooltip>
+                        <Tooltip text="View XR3Player on Github" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/GitHub-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" text="Download Latest Version">
+                     <tooltip>
+                        <Tooltip text="Download the latest XR3Player Version" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Installing%20Updates-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
                <BorderPane.margin>
-                  <Insets left="3.0" right="3.0" top="5.0" />
+                  <Insets top="5.0" />
                </BorderPane.margin>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
             </StackPane>
          </bottom>
          <center>

@@ -20,6 +20,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.animation.PauseTransition;
@@ -28,7 +29,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
@@ -52,28 +52,16 @@ public class UpdateWindow extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private Label topLabel;
+	private JFXButton closeWindow;
 	
 	@FXML
-	private Button download;
+	private JFXButton viewOnGithub;
+	
+	@FXML
+	private JFXButton automaticUpdate;
 	
 	@FXML
 	private JFXTabPane tabPane;
-	
-	@FXML
-	private Button gitHubButton;
-	
-	@FXML
-	private Button automaticUpdate;
-	
-	@FXML
-	private Button closeWindow;
-	
-	@FXML
-	private Tab releasesHistoryTab;
-	
-	@FXML
-	private Accordion gitHubAccordion;
 	
 	@FXML
 	private Tab whatsNewTab;
@@ -92,6 +80,15 @@ public class UpdateWindow extends StackPane {
 	
 	@FXML
 	private BorderPane knownBugsContainer;
+	
+	@FXML
+	private Tab releasesHistoryTab;
+	
+	@FXML
+	private Accordion gitHubAccordion;
+	
+	@FXML
+	private Label topLabel;
 	
 	// -------------------------------------------------------------
 	
@@ -170,14 +167,11 @@ public class UpdateWindow extends StackPane {
 		upcomingFeaturesContainer.setCenter(upcomingFeaturesVirtualPane);
 		knownBugsContainer.setCenter(knownBugsVirtualPane);
 		
-		// -- automaticUpdate
-		automaticUpdate.setOnAction(a -> startXR3PlayerUpdater(update));
-		
-		// -- download
-		download.setOnAction(a -> ActionTool.openWebSite("https://sourceforge.net/projects/xr3player/"));
-		
 		// -- GitHub
-		gitHubButton.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player"));
+		viewOnGithub.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player"));
+		
+		// -- automaticUpdate
+		automaticUpdate.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/releases/latest"));
 		
 		// -- closeWindow
 		closeWindow.setOnAction(a -> window.close());
@@ -399,8 +393,7 @@ public class UpdateWindow extends StackPane {
 			
 			//show?
 			if (showTheWindow || Integer.valueOf(lastArticle.id()) > currentVersion) {
-				download.setDisable(Integer.valueOf(lastArticle.id()) <= currentVersion);
-				automaticUpdate.setDisable(download.isDisable());
+				automaticUpdate.setDisable(Integer.valueOf(lastArticle.id()) <= currentVersion);
 				update = Integer.valueOf(lastArticle.id());
 				show();
 			}
@@ -542,7 +535,8 @@ public class UpdateWindow extends StackPane {
 	 * Calling this method to start the main Application which is XR3Player
 	 * 
 	 */
-	public void startXR3PlayerUpdater(int update) {
+	@Deprecated
+	private void startXR3PlayerUpdater(int update) {
 		String applicationName = "XR3PlayerUpdater";
 		
 		// Start XR3Player Updater
