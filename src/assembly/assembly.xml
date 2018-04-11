@@ -15,14 +15,14 @@
 			<includes>
 				<include>license.txt</include>
 				<include>XR3Player Manual.pdf</include>	
-				<include>XR3Player.exe</include>				
+				<!-- <include>XR3Player.exe</include> -->				
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>${project.build.directory}</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-			    <include>XR3Player.exe</include>
+			    <!-- <include>XR3Player.exe</include> -->
 				<include>*.jar</include>
 				<include>XR3Player_lib</include>
 				<include>XR3Player_lib/*</include>
