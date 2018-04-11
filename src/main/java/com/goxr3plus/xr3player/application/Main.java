@@ -106,8 +106,303 @@ import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
  */
 public class Main extends Application {
 	
+	//------------------------------------------------------------------------
+	
+	/** Holds global application properties */
+	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
+	public static final Logger logger = Logger.getGlobal();
+	public static final Properties internalInformation = new Properties();
+	public static final int APPLICATION_VERSION = 99;
+	static {
+		//Important for Web Browser allowing xss
+		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
+		
+		//----------Properties-------------
+		internalInformation.put("Version", APPLICATION_VERSION);
+		internalInformation.put("ReleasedDate", "11/04/2018");
+		
+		System.out.println("Outside of Application Start Method");
+		
+		//Extract Location
+		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
+	}
+	
+	//----------------START: The below have not depencities on other ---------------------------------//
+	
+	public static WelcomeScreen welcomeScreen;
+	
+	public static MediaDeleteWindow mediaDeleteWindow;
+	
+	/** The star window. */
+	public static StarWindow starWindow;
+	
+	/** The rename window. */
+	public static RenameWindow renameWindow;
+	
+	/** The rename window. */
+	public static EmotionsWindow emotionsWindow;
+	
+	/**
+	 * Audio Tagging Window
+	 */
+	public static TagWindow tagWindow;
+	
+	/**
+	 * This window is being used to export files from the application to the outside world
+	 */
+	public static ExportWindowController exportWindow;
+	
+	/** The About Window of the Application */
+	public static ApplicationInformationWindow aboutWindow;
+	
+	/** The console Window of the Application */
+	public static ConsoleWindowController consoleWindow;
+	
+	/**
+	 * This Window contains the settings for the whole application
+	 */
+	public static ApplicationSettingsController settingsWindow;
+	
+	/**
+	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
+	 */
+	public static CaptureWindow captureWindow;
+	
+	public static UpdateWindow updateWindow;
+	
+	//
+	
+	/** The Top Bar of the Application */
+	public static TopBar topBar;
+	
+	/** The Bottom Bar of the Application */
+	public static BottomBar bottomBar;
+	
+	/** The Side Bar of The Application */
+	public static SideBar sideBar;
+	
+	/** Application Update Screen */
+	public static UpdateScreen updateScreen;
+	
+	/** The TreeView of DJMode */
+	public static TreeViewManager treeManager;
+	
+	/** The Constant advancedSearch. */
+	//public static final AdvancedSearch advancedSearch = new AdvancedSearch()
+	
+	public static MediaInformation mediaInformation;
+	//
+	
+	public static TreeViewContextMenu treeViewContextMenu;
+	
+	/** The Constant songsContextMenu. */
+	public static MediaContextMenu songsContextMenu;
+	
+	/** The Constant specialChooser. */
+	public static FileAndFolderChooser specialChooser = new FileAndFolderChooser();;
+	
+	//
+	
+	/** XPlayList holds the instances of XPlayerControllers */
+	public static XPlayersList xPlayersList = new XPlayersList();
+	
+	/** The Constant . */
+	public static PlayedMediaList playedSongs = new PlayedMediaList();
+	
+	/** The Constant EmotionListsController. */
+	public static EmotionListsController emotionListsController;
+	
+	//
+	
+	/**
+	 * The WebBrowser of the Application
+	 */
+	public static WebBrowserController webBrowser;
+	
+	//----------------END: The above have not depencities on other ---------------------------------//
+	
+	//----------------START: Vary basic for the application---------------------------------------//
+	
+	/** The window. */
+	public static Stage window;
+	
+	/** The scene. */
+	public static BorderlessScene scene;
+	
+	/** The stack pane root. */
+	public static final StackPane applicationStackPane = new StackPane();
+	
+	/** The root. */
+	public static final BorderPane root = new BorderPane();
+	
+	/** The can save data. */
+	public static boolean canSaveData = true;
+	
+	//---------------END:Vary basic for the application---------------------------------//
+	
+	// --------------START: The below have depencities on others------------------------
+	
+	/** The Constant dbManager. */
+	public static DbManager dbManager = new DbManager();
+	
+	/** The Constant libraryMode. */
+	public static LibraryMode libraryMode;
+	
+	/** The Constant djMode. */
+	public static DJMode djMode;
+	
+	public static OnlineMusicController onlineMusicController;
+	
+	public static DropboxViewer dropBoxViewer;
+	
+	public static EmotionsTabPane emotionsTabPane;
+	
+	/** The Search Window Smart Controller of the application */
+	public static SmartController searchWindowSmartController;
+	
+	public static PlayListModesTabPane playListModesTabPane;
+	
+	/** The Constant multipleTabs. */
+	public static PlayListModesSplitPane playListModesSplitPane;
+	
+	/**
+	 * The Login Mode where the user of the applications has to choose an account to login
+	 */
+	public static LoginMode loginMode;
+	
+	/**
+	 * Entering in this mode you can change the user settings and other things that have to do with the user....
+	 */
+	public static UserInformation userInfoMode;
+	
+	/**
+	 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
+	 */
+	public static JFXTabPane specialJFXTabPane;
+	
+	// --------------END: The below have depencities on others------------------------
+	
 	@Override
 	public void start(Stage primaryStage) {
+		
+		//----------------START: The below have not depencities on other ---------------------------------//
+		
+		welcomeScreen = new WelcomeScreen();
+		
+		mediaDeleteWindow = new MediaDeleteWindow();
+		
+		/** The star window. */
+		starWindow = new StarWindow();
+		
+		/** The rename window. */
+		renameWindow = new RenameWindow();
+		
+		/** The rename window. */
+		emotionsWindow = new EmotionsWindow();
+		
+		/**
+		 * Audio Tagging Window
+		 */
+		tagWindow = new TagWindow();
+		
+		/**
+		 * This window is being used to export files from the application to the outside world
+		 */
+		exportWindow = new ExportWindowController();
+		
+		/** The About Window of the Application */
+		aboutWindow = new ApplicationInformationWindow();
+		
+		/** The console Window of the Application */
+		consoleWindow = new ConsoleWindowController();
+		
+		/**
+		 * This Window contains the settings for the whole application
+		 */
+		settingsWindow = new ApplicationSettingsController();
+		
+		/**
+		 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
+		 */
+		captureWindow = new CaptureWindow();
+		
+		updateWindow = new UpdateWindow();
+		
+		//
+		
+		/** The Top Bar of the Application */
+		topBar = new TopBar();
+		
+		/** The Bottom Bar of the Application */
+		bottomBar = new BottomBar();
+		
+		/** The Side Bar of The Application */
+		sideBar = new SideBar();
+		
+		/** Application Update Screen */
+		updateScreen = new UpdateScreen();
+		
+		/** The TreeView of DJMode */
+		treeManager = new TreeViewManager();
+		
+		/** The Constant advancedSearch. */
+		//public static final AdvancedSearch advancedSearch = new AdvancedSearch()
+		
+		mediaInformation = new MediaInformation();
+		//
+		
+		treeViewContextMenu = new TreeViewContextMenu();
+		
+		/** The Constant songsContextMenu. */
+		songsContextMenu = new MediaContextMenu();
+		
+		//
+		
+		/** The Constant EmotionListsController. */
+		emotionListsController = new EmotionListsController();
+		
+		//
+		
+		//----------------END: The above have not depencities on other ---------------------------------//
+		
+		// --------------START: The below have depencities on others------------------------
+		
+		/** The Constant libraryMode. */
+		libraryMode = new LibraryMode();
+		
+		/** The Constant djMode. */
+		djMode = new DJMode();
+		
+		onlineMusicController = new OnlineMusicController();
+		dropBoxViewer = new DropboxViewer();
+		
+		emotionsTabPane = new EmotionsTabPane(emotionListsController);
+		
+		/** The Search Window Smart Controller of the application */
+		searchWindowSmartController = new SmartController(Genre.SEARCHWINDOW, "Searching any Media", null);
+		
+		playListModesTabPane = new PlayListModesTabPane();
+		
+		/** The Constant multipleTabs. */
+		playListModesSplitPane = new PlayListModesSplitPane();
+		
+		/**
+		 * The Login Mode where the user of the applications has to choose an account to login
+		 */
+		loginMode = new LoginMode();
+		
+		/**
+		 * Entering in this mode you can change the user settings and other things that have to do with the user....
+		 */
+		userInfoMode = new UserInformation(UserCategory.LOGGED_IN);
+		
+		/**
+		 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
+		 */
+		specialJFXTabPane = new JFXTabPane();
+		
+		// --------------END: The below have depencities on others------------w------------
+		
 		System.out.println("Entered JavaFX Application Start Method");
 		Platform.setImplicitExit(false);
 		
@@ -727,187 +1022,5 @@ public class Main extends Application {
 		
 		launch(args);
 	}
-	
-	//------------------------------------------------------------------------
-	
-	
-	public static Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 99;
-	static {
-		//Important for Web Browser
-		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
-		
-		//----------Properties-------------
-		internalInformation.put("Version", APPLICATION_VERSION);
-		internalInformation.put("ReleasedDate", "11/04/2018");
-		
-		System.out.println("Outside of Application Start Method");
-		
-		//Extract Location
-		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
-	}
-	
-	/**
-	 * Holds global application properties
-	 */
-	public static PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
-	
-	/** Application logger. */
-	public static final Logger logger = Logger.getGlobal();
-	
-	//----------------START: The below have not depencities on other ---------------------------------//
-	
-	public static final WelcomeScreen welcomeScreen = new WelcomeScreen();
-	
-	public static final MediaDeleteWindow mediaDeleteWindow = new MediaDeleteWindow();
-	
-	/** The star window. */
-	public static final StarWindow starWindow = new StarWindow();
-	
-	/** The rename window. */
-	public static final RenameWindow renameWindow = new RenameWindow();
-	
-	/** The rename window. */
-	public static final EmotionsWindow emotionsWindow = new EmotionsWindow();
-	
-	/**
-	 * Audio Tagging Window
-	 */
-	public static final TagWindow tagWindow = new TagWindow();
-	
-	/**
-	 * This window is being used to export files from the application to the outside world
-	 */
-	public static final ExportWindowController exportWindow = new ExportWindowController();
-	
-	/** The About Window of the Application */
-	public static final ApplicationInformationWindow aboutWindow = new ApplicationInformationWindow();
-	
-	/** The console Window of the Application */
-	public static final ConsoleWindowController consoleWindow = new ConsoleWindowController();
-	
-	/**
-	 * This Window contains the settings for the whole application
-	 */
-	public static ApplicationSettingsController settingsWindow = new ApplicationSettingsController();
-	
-	/**
-	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
-	 */
-	public static CaptureWindow captureWindow = new CaptureWindow();
-	
-	public static UpdateWindow updateWindow = new UpdateWindow();
-	
-	//
-	
-	/** The Top Bar of the Application */
-	public static final TopBar topBar = new TopBar();
-	
-	/** The Bottom Bar of the Application */
-	public static final BottomBar bottomBar = new BottomBar();
-	
-	/** The Side Bar of The Application */
-	public static final SideBar sideBar = new SideBar();
-	
-	/** Application Update Screen */
-	public static final UpdateScreen updateScreen = new UpdateScreen();
-	
-	/** The TreeView of DJMode */
-	public static final TreeViewManager treeManager = new TreeViewManager();
-	
-	/** The Constant advancedSearch. */
-	//public static final AdvancedSearch advancedSearch = new AdvancedSearch()
-	
-	public static final MediaInformation mediaInformation = new MediaInformation();
-	//
-	
-	public static final TreeViewContextMenu treeViewContextMenu = new TreeViewContextMenu();
-	
-	/** The Constant songsContextMenu. */
-	public static final MediaContextMenu songsContextMenu = new MediaContextMenu();
-	
-	/** The Constant specialChooser. */
-	public static final FileAndFolderChooser specialChooser = new FileAndFolderChooser();
-	
-	//
-	
-	/** XPlayList holds the instances of XPlayerControllers */
-	public static final XPlayersList xPlayersList = new XPlayersList();
-	
-	/** The Constant playedSongs. */
-	public static final PlayedMediaList playedSongs = new PlayedMediaList();
-	
-	/** The Constant EmotionListsController. */
-	public static final EmotionListsController emotionListsController = new EmotionListsController();
-	
-	//
-	
-	/**
-	 * The WebBrowser of the Application
-	 */
-	public static WebBrowserController webBrowser;
-	
-	//----------------END: The above have not depencities on other ---------------------------------//
-	
-	//----------------START: Vary basic for the application---------------------------------------//
-	
-	/** The window. */
-	public static Stage window;
-	
-	/** The scene. */
-	public static BorderlessScene scene;
-	
-	/** The stack pane root. */
-	public static final StackPane applicationStackPane = new StackPane();
-	
-	/** The root. */
-	public static final BorderPane root = new BorderPane();
-	
-	/** The can save data. */
-	public static boolean canSaveData = true;
-	
-	//---------------END:Vary basic for the application---------------------------------//
-	
-	// --------------START: The below have depencities on others------------------------
-	
-	/** The Constant dbManager. */
-	public static DbManager dbManager = new DbManager();
-	
-	/** The Constant libraryMode. */
-	public static LibraryMode libraryMode = new LibraryMode();
-	
-	/** The Constant djMode. */
-	public static DJMode djMode = new DJMode();
-	
-	public static OnlineMusicController onlineMusicController = new OnlineMusicController();
-	
-	public static DropboxViewer dropBoxViewer = new DropboxViewer();
-	
-	public static EmotionsTabPane emotionsTabPane = new EmotionsTabPane(emotionListsController);
-	
-	/** The Search Window Smart Controller of the application */
-	public static SmartController searchWindowSmartController = new SmartController(Genre.SEARCHWINDOW, "Searching any Media", null);
-	
-	public static PlayListModesTabPane playListModesTabPane = new PlayListModesTabPane();
-	
-	/** The Constant multipleTabs. */
-	public static PlayListModesSplitPane playListModesSplitPane = new PlayListModesSplitPane();
-	
-	/**
-	 * The Login Mode where the user of the applications has to choose an account to login
-	 */
-	public static LoginMode loginMode = new LoginMode();
-	
-	/**
-	 * Entering in this mode you can change the user settings and other things that have to do with the user....
-	 */
-	public static UserInformation userInfoMode = new UserInformation(UserCategory.LOGGED_IN);
-	
-	/**
-	 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
-	 */
-	public static JFXTabPane specialJFXTabPane = new JFXTabPane();
-	
-	// --------------END: The below have depencities on others------------------------
 	
 }
