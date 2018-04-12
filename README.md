@@ -1,8 +1,7 @@
-### Requires Java 8 Update 161
-### Non Java 9 Compatible yet
+### No need to install Java anymore , i have made custom installers :)
 
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player [![Download XR3Player](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/xr3player/files/V3.98/XR3Player.Update.98.zip/download)
-
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player 
+[Download for Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.99/XR3Player_Installer.exe)
 > [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
@@ -20,13 +19,6 @@
 [license-url]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image1]: https://github.com/goxr3plus/XR3Player/blob/master/license.txt
 [license-image2]: https://img.shields.io/github/license/tldr-pages/tldr.svg
-
-### !IMPORTANT NOTIFICATION!
-
-#### > ----XR3Player Update 100 will be the last for Java 8 ----
-
-#### > ----XR3Player Update 101++ will need Java 9 ----
-
 
 ### Videos
 
