@@ -25,6 +25,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -293,6 +294,10 @@ public class OpenedLibrariesViewer extends StackPane {
 		// HBOX
 		HBox hBox = new HBox();
 		hBox.setStyle("-fx-background-color:#000000;");
+		hBox.setOnMouseClicked(m -> {
+			if (m.getButton() == MouseButton.MIDDLE)
+				removeTab(tab);
+		});
 		hBox.getChildren().addAll(imageView, tabImage, stack, marquee, closeButton);
 		
 		// --Drag Over
