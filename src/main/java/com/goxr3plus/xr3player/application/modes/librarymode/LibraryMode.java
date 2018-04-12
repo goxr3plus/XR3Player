@@ -424,7 +424,7 @@ public class LibraryMode extends BorderPane {
 		this.openLibraryAfterCreation = openLibraryAfterCreation;
 		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Creating " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library", FileCategory.DIRECTORY);
+		Main.renameWindow.show("", owner, "Create " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library", FileCategory.DIRECTORY);
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);

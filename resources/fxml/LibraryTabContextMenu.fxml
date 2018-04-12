@@ -3,10 +3,28 @@
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
   <items>
-    <MenuItem fx:id="showTheLibrary" mnemonicParsing="false" text="Show me the Library" />
+      <MenuItem fx:id="createLibrary" mnemonicParsing="false" text="Create + Open New Library">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/plus.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuItem>
+    <MenuItem fx:id="showTheLibrary" mnemonicParsing="false" text="Show me the Library">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/eye2.png" />
+               </image>
+            </ImageView>
+         </graphic></MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
       <MenuItem fx:id="closeOtherTabs" mnemonicParsing="false" text="Close other Tabs" />
       <MenuItem fx:id="closeTabsRight" mnemonicParsing="false" text="Close Tabs to the Right" />

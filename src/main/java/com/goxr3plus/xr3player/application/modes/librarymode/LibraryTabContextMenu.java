@@ -17,6 +17,9 @@ public class LibraryTabContextMenu extends ContextMenu {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private MenuItem createLibrary;
+	
+	@FXML
 	private MenuItem showTheLibrary;
 	
 	@FXML
@@ -82,5 +85,7 @@ public class LibraryTabContextMenu extends ContextMenu {
 		//closeTab
 		closeTab.setOnAction(a -> Main.libraryMode.openedLibrariesViewer.removeTab(tab));
 		
+		//createLibrary
+		this.createLibrary.setOnAction(a->Main.libraryMode.createNewLibrary(tab.getGraphic(), true));		
 	}
 }
