@@ -900,13 +900,12 @@ public class Main extends Application {
 				System.out.println("XR3PlayerPath is : " + applicationPath[0]);
 				
 				//ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0])
-				ProcessBuilder builder = new ProcessBuilder("cmd /c start " + applicationPath[0]);
-				builder.redirectErrorStream(true);
-				Process process = builder.start();
+				//builder.redirectErrorStream(true)
+				//Process process = builder.start()
+				Process process = Runtime.getRuntime().exec("cmd.exe /c " + applicationPath[0]);
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				
 				//Show message that application is restarting
-				Platform.runLater(() -> ActionTool.showNotification("Restarting Application", "If it take a lot of time do it manually ", Duration.seconds(20),
+				Platform.runLater(() -> ActionTool.showNotification("Restarting Application", "If restart it takes a lot of time do it manually . ", Duration.seconds(20),
 						NotificationType.INFORMATION));
 				
 				//startExitPauseTransition
@@ -945,7 +944,7 @@ public class Main extends Application {
 			updateScreen.setVisible(false);
 			
 			// Show failed message
-			if (seconds != 0)
+			if (seconds != 0 && askUser)
 				Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed", "Wait some more seconds before trying to restart/exit XR3Player manually",
 						Duration.seconds(20), NotificationType.ERROR));
 			
