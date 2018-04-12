@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import java.lang.String?>
@@ -79,6 +80,22 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXCheckBox>
+                                    <StackPane fx:id="searchFieldStackPane" minHeight="0.0" minWidth="0.0">
+                                       <children>
+                                          <JFXButton fx:id="normalSearchButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="Press to Re-activate normal search ">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/flask.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="When you press a letter from alphabetical/numerical bar , normal search needs to be reactivated ." />
+                                             </tooltip>
+                                          </JFXButton>
+                                       </children>
+                                    </StackPane>
                                     <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="232.0">
                                        <children>
                                           <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">

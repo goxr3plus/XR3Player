@@ -7,6 +7,7 @@ import com.ibm.icu.util.LocaleData;
 import com.ibm.icu.util.ULocale;
 import com.jfoenix.controls.JFXButton;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
@@ -38,7 +39,7 @@ public class AlphabetBar extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	private boolean letterPressed = false;
+	private SimpleBooleanProperty letterPressed = new SimpleBooleanProperty(this, "AlphabetBar");
 	private final SmartController smartController;
 	
 	/**
@@ -99,10 +100,14 @@ public class AlphabetBar extends StackPane {
 			JFXButton letter = new JFXButton(iterator.next());
 			
 			//On Action
-			letter.setOnAction(a -> {			
+			letter.setOnAction(a -> {
 				setLetterPressed(true);
+				//Set the text to search field
 				smartController.getSearchService().getSearchField().setText(letter.getText().toUpperCase());
-				smartController.getSearchService().getService().restart();
+				//In case instant search is not activated
+				if (!smartController.getInstantSearch().isSelected())
+					smartController.getInstantSearch();
+				
 				//System.out.println(letter.getText())
 			});
 			
@@ -118,7 +123,7 @@ public class AlphabetBar extends StackPane {
 	 * @return the letterPressed
 	 */
 	public boolean isLetterPressed() {
-		return letterPressed;
+		return letterPressed.get();
 	}
 	
 	/**
@@ -126,7 +131,14 @@ public class AlphabetBar extends StackPane {
 	 *            the letterPressed to set
 	 */
 	public void setLetterPressed(boolean letterPressed) {
-		this.letterPressed = letterPressed;
+		this.letterPressed.set(letterPressed);
+	}
+	
+	/**
+	 * @return the letterPressed
+	 */
+	public SimpleBooleanProperty letterPressedProperty() {
+		return letterPressed;
 	}
 	
 }

@@ -98,16 +98,21 @@ public class SmartControllerSearcher extends HBox {
 		});
 		searchField.editableProperty().bind(service.runningProperty().not());
 		//searchField.disableProperty().bind(Main.advancedSearch.showingProperty())
-		searchField.setOnAction(ac -> {
-			if (smartController.isFree(false)) {
-				saveSettingsBeforeSearch();
-				service.search();
-			}
-		});
+		searchField.setOnAction(ac -> reSearch());
 		
 		//Override the default context menu
 		searchField.setContextMenu(new ContextMenu());
 		
+	}
+	
+	/**
+	 * This method fires a search again based on currently given parameters
+	 */
+	public void reSearch() {
+		if (smartController.isFree(false)) {
+			saveSettingsBeforeSearch();
+			service.search();
+		}
 	}
 	
 	/**

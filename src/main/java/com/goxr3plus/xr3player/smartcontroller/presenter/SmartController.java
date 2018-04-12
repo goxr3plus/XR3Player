@@ -16,6 +16,7 @@ import java.util.logging.Level;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTabPane;
 
@@ -87,6 +88,12 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private JFXCheckBox instantSearch;
+	
+	@FXML
+	private StackPane searchFieldStackPane;
+	
+	@FXML
+	private JFXButton normalSearchButton;
 	
 	@FXML
 	private HBox navigationHBox;
@@ -306,8 +313,16 @@ public class SmartController extends StackPane {
 		cancelButton.setVisible(true);
 		cancelButton.setDisable(true);
 		
-		// ------ searchBarHBox
-		searchBarHBox.getChildren().add(1, searchService);
+		//searchFieldStackPane
+		searchFieldStackPane.getChildren().add(0, searchService);
+		
+		//normalSearchButton
+		normalSearchButton.visibleProperty().bind(alphabetBar.letterPressedProperty());
+		normalSearchButton.setOnAction(a -> {
+			alphabetBar.setLetterPressed(false);
+			//Do a reSearch
+			getSearchService().reSearch();
+		});
 		
 		//------navigationHBox
 		//navigationHBox.disableProperty().bind(this.totalInDataBase.isEqualTo(0))
@@ -1319,12 +1334,19 @@ public class SmartController extends StackPane {
 	public SmartControllerFoldersMode getFoldersMode() {
 		return foldersMode;
 	}
-
+	
 	/**
 	 * @return the alphabetBar
 	 */
 	public AlphabetBar getAlphabetBar() {
 		return alphabetBar;
+	}
+	
+	/**
+	 * @return the searchFieldStackPane
+	 */
+	public StackPane getSearchFieldStackPane() {
+		return searchFieldStackPane;
 	}
 	
 	/*-----------------------------------------------------------------------

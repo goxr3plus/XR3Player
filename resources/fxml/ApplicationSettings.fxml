@@ -123,7 +123,7 @@
    <left>
       <Group BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="restoreDefaults" mnemonicParsing="false" rotate="-90.0" style="-fx-background-radius: 0 0 0 0;;" text="Restore Defaults">
+            <Button fx:id="restoreDefaults" mnemonicParsing="false" rotate="-90.0" style="-fx-background-radius: 0 0 0 0;;" text="Restore Category Defaults">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
