@@ -38,10 +38,14 @@ public class AlphabetBar extends StackPane {
 	
 	// -------------------------------------------------------------
 	
+	private boolean letterPressed = false;
+	private final SmartController smartController;
+	
 	/**
 	 * Constructor.
 	 */
-	public AlphabetBar() {
+	public AlphabetBar(SmartController smartController) {
+		this.smartController = smartController;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AlphabetBar.fxml"));
@@ -95,16 +99,34 @@ public class AlphabetBar extends StackPane {
 			JFXButton letter = new JFXButton(iterator.next());
 			
 			//On Action
-			letter.setOnAction(a -> {
-				System.out.println(letter.getText());
+			letter.setOnAction(a -> {			
+				setLetterPressed(true);
+				smartController.getSearchService().getSearchField().setText(letter.getText().toUpperCase());
+				smartController.getSearchService().getService().restart();
+				//System.out.println(letter.getText())
 			});
 			
 			//Append on bar
 			alphabetBox.getChildren().add(letter);
 			
-			//System.out.println(++counter+" "+iterator.next());
+			//System.out.println(++counter+" "+iterator.next())
 		}
 		
+	}
+	
+	/**
+	 * @return the letterPressed
+	 */
+	public boolean isLetterPressed() {
+		return letterPressed;
+	}
+	
+	/**
+	 * @param letterPressed
+	 *            the letterPressed to set
+	 */
+	public void setLetterPressed(boolean letterPressed) {
+		this.letterPressed = letterPressed;
 	}
 	
 }

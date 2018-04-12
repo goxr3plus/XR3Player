@@ -181,7 +181,7 @@ public class SmartController extends StackPane {
 	public static final int DEFAULT_MAXIMUM_PER_PAGE = 50;
 	private int maximumPerPage = DEFAULT_MAXIMUM_PER_PAGE;
 	
-	AlphabetBar alphabetBar = new AlphabetBar();
+	private final AlphabetBar alphabetBar = new AlphabetBar(this);
 	
 	// ---------Services--------------------------
 	
@@ -1305,19 +1305,26 @@ public class SmartController extends StackPane {
 	public Tab getNormalModeTab() {
 		return normalModeTab;
 	}
-
+	
 	/**
 	 * @return the filtersMode
 	 */
 	public SmartControllerFiltersMode getFiltersMode() {
 		return filtersMode;
 	}
-
+	
 	/**
 	 * @return the foldersMode
 	 */
 	public SmartControllerFoldersMode getFoldersMode() {
 		return foldersMode;
+	}
+
+	/**
+	 * @return the alphabetBar
+	 */
+	public AlphabetBar getAlphabetBar() {
+		return alphabetBar;
 	}
 	
 	/*-----------------------------------------------------------------------

@@ -200,11 +200,11 @@ public class WebBrowserTabController extends StackPane {
 			
 			//-------------------BrowserView------------------------
 			browserView = new BrowserView(browser);
-			browserView.setMouseEventsHandler(e -> {
-				System.out.println(e.getEventType());
-				return e.getButton() == MouseButton.MIDDLE;
-			});
-			
+//			browserView.setMouseEventsHandler(e -> {
+//				System.out.println(e.getEventType());
+//				return e.getButton() == MouseButton.MIDDLE;
+//			});
+//			
 			borderPane.setCenter(browserView);
 			
 			//Continue

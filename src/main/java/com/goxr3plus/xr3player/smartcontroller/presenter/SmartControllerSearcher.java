@@ -41,7 +41,7 @@ public class SmartControllerSearcher extends HBox {
 	
 	/** The controller. */
 	// Variables
-	private SmartController controller;
+	private SmartController smartController;
 	
 	/** The service. */
 	private SearchService service = new SearchService();
@@ -51,11 +51,11 @@ public class SmartControllerSearcher extends HBox {
 	/**
 	 * Constructor.
 	 *
-	 * @param control
+	 * @param smartController
 	 *            the control
 	 */
-	public SmartControllerSearcher(SmartController control) {
-		controller = control;
+	public SmartControllerSearcher(SmartController smartController) {
+		this.smartController = smartController;
 		
 		//Super
 		setAlignment(Pos.CENTER);
@@ -70,19 +70,22 @@ public class SmartControllerSearcher extends HBox {
 		searchField.textProperty().addListener((observable , newValue , oldValue) -> {
 			
 			//Check if the controller is free
-			if (!controller.isFree(false))
+			if (!smartController.isFree(false))
 				return;
 			
 			if (searchField.getText().isEmpty()) {
 				saveSettingBeforeSearch = true;
 				
+				//Reset Aphabetical Bar Letter
+				smartController.getAlphabetBar().setLetterPressed(false);
+				
 				//Reset the page number to the default before search
-				if (service.getPaneNumberBeforeSearch() <= controller.getMaximumList())
-					controller.currentPageProperty().set(service.getPaneNumberBeforeSearch());
+				if (service.getPaneNumberBeforeSearch() <= smartController.getMaximumList())
+					smartController.currentPageProperty().set(service.getPaneNumberBeforeSearch());
 				
 				//continue 
-				controller.getNavigationHBox().setDisable(false);
-				controller.getLoadService().startService(false, false, false);
+				smartController.getNavigationHBox().setDisable(false);
+				smartController.getLoadService().startService(false, false, false);
 				
 			} else if (Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().isSelected()) {
 				saveSettingsBeforeSearch();
@@ -96,7 +99,7 @@ public class SmartControllerSearcher extends HBox {
 		searchField.editableProperty().bind(service.runningProperty().not());
 		//searchField.disableProperty().bind(Main.advancedSearch.showingProperty())
 		searchField.setOnAction(ac -> {
-			if (controller.isFree(false)) {
+			if (smartController.isFree(false)) {
 				saveSettingsBeforeSearch();
 				service.search();
 			}
@@ -116,8 +119,8 @@ public class SmartControllerSearcher extends HBox {
 		if (!saveSettingBeforeSearch)
 			return;
 		
-		service.pageBeforeSearch = controller.currentPageProperty().get();
-		controller.getVerticalScrollBar().ifPresent(scrollBar -> controller.setVerticalScrollValueWithoutSearch(scrollBar.getValue()));
+		service.pageBeforeSearch = smartController.currentPageProperty().get();
+		smartController.getVerticalScrollBar().ifPresent(scrollBar -> smartController.setVerticalScrollValueWithoutSearch(scrollBar.getValue()));
 		saveSettingBeforeSearch = false;
 	}
 	
@@ -164,7 +167,7 @@ public class SmartControllerSearcher extends HBox {
 		public SearchService() {
 			setOnSucceeded(s -> done());
 			setOnFailed(f -> {
-				controller.getNavigationHBox().setDisable(false);
+				smartController.getNavigationHBox().setDisable(false);
 				done();
 			});
 			
@@ -179,14 +182,14 @@ public class SmartControllerSearcher extends HBox {
 			// word = Main.advancedSearch.getTextForSearching();
 			// else
 			word = getSearchField().getText();
-			controller.getIndicatorVBox().visibleProperty().bind(runningProperty());
-			controller.getIndicator().progressProperty().bind(progressProperty());
-			controller.getCancelButton().setText("Searching...");
-			controller.getInformationTextArea().setText("\n Searching ....");
-			controller.getNavigationHBox().setDisable(true);
+			smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
+			smartController.getIndicator().progressProperty().bind(progressProperty());
+			smartController.getCancelButton().setText("Searching...");
+			smartController.getInformationTextArea().setText("\n Searching ....");
+			smartController.getNavigationHBox().setDisable(true);
 			
 			//Clear the list
-			controller.getItemsObservableList().clear();
+			smartController.getItemsObservableList().clear();
 			
 			reset();
 			start();
@@ -196,8 +199,8 @@ public class SmartControllerSearcher extends HBox {
 		 * When the Service is done.
 		 */
 		private void done() {
-			controller.updateList();
-			controller.unbind();
+			smartController.updateList();
+			smartController.unbind();
 		}
 		
 		/**
@@ -230,12 +233,12 @@ public class SmartControllerSearcher extends HBox {
 					
 					//--------------SEARCH WINDOW SPECIAL SEARCH----------------------------
 					
-					if (controller.getGenre() == Genre.SEARCHWINDOW) {
+					if (smartController.getGenre() == Genre.SEARCHWINDOW) {
 						
 						//Let's create the UNION
 						ArrayList<String> queryArray = new ArrayList<>();
 						ObservableList<Library> observableList = Main.libraryMode.teamViewer.getViewer().getItemsObservableList();
-						controller.setTotalInDataBase(observableList.stream().mapToInt(Library::getTotalEntries).sum());
+						smartController.setTotalInDataBase(observableList.stream().mapToInt(Library::getTotalEntries).sum());
 						
 						//Check if any PlayLists exist
 						if (observableList.isEmpty()) {
@@ -254,10 +257,10 @@ public class SmartControllerSearcher extends HBox {
 						
 						//Choose the correct query based on the settings of the user
 						if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
-							queryArray.add(" ) WHERE PATH LIKE '%" + word + "%' GROUP BY PATH LIMIT " + controller.getMaximumPerPage() + " ");
+							queryArray.add(" ) WHERE PATH LIKE '%" + word + "%' GROUP BY PATH LIMIT " + smartController.getMaximumPerPage() + " ");
 						else
 							queryArray.add(" ) WHERE replace(path, rtrim(path, replace(path,'" + File.separator + "','')),'') LIKE '%" + word + "%' GROUP BY PATH LIMIT "
-									+ controller.getMaximumPerPage() + " ");
+									+ smartController.getMaximumPerPage() + " ");
 						
 						query = String.join("", queryArray);
 						//System.out.println(query)
@@ -267,14 +270,16 @@ public class SmartControllerSearcher extends HBox {
 					//--------------NORMAL PLAYLISTS SEARCH----------------------------
 					
 					else {
-						query = "SELECT * FROM '" + controller.getDataBaseTableName() + "' ";
+						query = "SELECT * FROM '" + smartController.getDataBaseTableName() + "' ";
+						
+						String wordQuery = smartController.getAlphabetBar().isLetterPressed() ? word + "%" : ( "%" + word + "%" );
 						
 						//Choose the correct query based on the settings of the user
 						if (Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup().getToggles().get(0).isSelected())
-							query = query + " WHERE PATH LIKE '%" + word + "%' LIMIT " + controller.getMaximumPerPage();
+							query = query + " WHERE PATH LIKE '" + wordQuery + "' LIMIT " + smartController.getMaximumPerPage();
 						else
-							query = query + " WHERE replace(path, rtrim(path, replace(path, '" + File.separator + "', '')), '') LIKE '%" + word + "%' LIMIT "
-									+ controller.getMaximumPerPage();
+							query = query + " WHERE replace(path, rtrim(path, replace(path, '" + File.separator + "', '')), '') LIKE '" + wordQuery + "' LIMIT "
+									+ smartController.getMaximumPerPage();
 					}
 					
 					//System.out.println(query);
@@ -284,21 +289,21 @@ public class SmartControllerSearcher extends HBox {
 						//try (ResultSet resultSet = Main.dbManager.connection1.createStatement().executeQuery(query)) {
 						
 						//Fetch the items from the database
-						Platform.runLater(() -> controller.getCancelButton().setText("Adding data..."));
+						Platform.runLater(() -> smartController.getCancelButton().setText("Adding data..."));
 						List<Media> arrayList = new ArrayList<>();
 						while (resultSet.next()) {
 							//Add the Audio to the ArrayList
 							arrayList.add(new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
-									resultSet.getString("HOUR"), controller.getGenre(), arrayList.size() + 1));
+									resultSet.getString("HOUR"), smartController.getGenre(), arrayList.size() + 1));
 							
-							updateProgress(++counter, controller.getMaximumPerPage());
+							updateProgress(++counter, smartController.getMaximumPerPage());
 						}
 						
 						//Add the the items to the observable list
 						CountDownLatch countDown = new CountDownLatch(1);
 						Platform.runLater(() -> {
-							controller.getItemsObservableList().addAll(arrayList);
-							controller.getNormalModeMediatTableViewer().getAllDetailsService().restartService(controller.getNormalModeMediatTableViewer());
+							smartController.getItemsObservableList().addAll(arrayList);
+							smartController.getNormalModeMediatTableViewer().getAllDetailsService().restartService(smartController.getNormalModeMediatTableViewer());
 							countDown.countDown();
 						});
 						countDown.await();
