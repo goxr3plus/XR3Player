@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,13 +41,10 @@ public class ApplicationSettingsController extends BorderPane {
 	private Button restoreAllSettings;
 	
 	@FXML
-	private Button doneButton;
+	private JFXButton doneButton;
 	
 	@FXML
 	private MenuButton copySettingsMenuButton;
-	
-	@FXML
-	private Button restoreDefaults;
 	
 	@FXML
 	private Tab generalTab;
@@ -62,6 +61,8 @@ public class ApplicationSettingsController extends BorderPane {
 	@FXML
 	private Tab xPlayersTab;
 	
+	@FXML
+	private Button restoreDefaults;
 	//--------------------------------------------------------
 	
 	/** The logger. */
