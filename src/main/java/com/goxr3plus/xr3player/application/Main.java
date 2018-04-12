@@ -902,10 +902,12 @@ public class Main extends Application {
 				//ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0])
 				//builder.redirectErrorStream(true)
 				//Process process = builder.start()
-				Process process = Runtime.getRuntime().exec("cmd.exe /c " + applicationPath[0]);
+				Process process = Runtime.getRuntime().exec("cmd.exe /c \"" + applicationPath[0] + "\"");
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				
 				//Show message that application is restarting
-				Platform.runLater(() -> ActionTool.showNotification("Restarting Application", "If restart it takes a lot of time do it manually . ", Duration.seconds(20),
+				Platform.runLater(() -> ActionTool.showNotification("Restarting Application",
+						"If restart takes a lot of time exit application and restart it manually.\n[ " + applicationPath[0] + " ]", Duration.seconds(20),
 						NotificationType.INFORMATION));
 				
 				//startExitPauseTransition
@@ -921,7 +923,7 @@ public class Main extends Application {
 							terminate(false);
 					}
 				
-			} catch (IOException ex) {
+			} catch (Exception ex) {
 				Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 				Platform.runLater(() -> {
 					updateScreen.setVisible(false);

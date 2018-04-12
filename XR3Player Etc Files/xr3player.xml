@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>D:\GitHub\XR3Player\target\XR3Player.jar</jar>
-  <outfile>D:\GitHub\XR3Player\XR3Player New Release Files\XR3Player.exe</outfile>
+  <outfile>D:\GitHub\XR3Player\target\classes\XR3Player.exe</outfile>
   <errTitle>You have to download the newest Java Version</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
