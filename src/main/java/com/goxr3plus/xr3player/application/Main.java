@@ -112,14 +112,14 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	public static final Logger logger = Logger.getGlobal();
 	public static final Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 99;
+	public static final int APPLICATION_VERSION = 100;
 	static {
 		//Important for Web Browser allowing xss
 		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
 		
 		//----------Properties-------------
 		internalInformation.put("Version", APPLICATION_VERSION);
-		internalInformation.put("ReleasedDate", "13/04/2018");
+		internalInformation.put("ReleasedDate", "?/04/2018");
 		
 		System.out.println("Outside of Application Start Method");
 		
