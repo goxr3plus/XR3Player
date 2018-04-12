@@ -20,7 +20,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<my.project.version>99</my.project.version>
+		<my.project.version>100</my.project.version>
 	</properties>
 
 	<build>
