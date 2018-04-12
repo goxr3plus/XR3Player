@@ -882,46 +882,35 @@ public class Main extends Application {
 		// Restart XR3Player
 		new Thread(() -> {
 			String path = InfoTool.getBasePathForClass(Main.class);
-			String[] applicationPath = { new File(path + "XR3Player.jar").getAbsolutePath() };
+			String[] applicationPath = { new File(path + "XR3Player.exe").getAbsolutePath() };
 			
-			//Show message that application is restarting
-			Platform.runLater(() -> ActionTool.showNotification("Restarting Application",
-					"Application Path:[ " + applicationPath[0] + " ]\n\tIf this takes more than 20 seconds either the computer is slow or it has failed....", Duration.seconds(25),
-					NotificationType.INFORMATION));
+			//Check if the file exists
+			if (!new File(applicationPath[0]).exists()) {
+				//Show message that application is restarting
+				Platform.runLater(() -> ActionTool.showNotification("Application File can't be found", "XR3Player can't be restarted due to unexpected problem ",
+						Duration.seconds(2), NotificationType.ERROR));
+				
+				if (!askUser)
+					terminate(false);
+				else
+					return;
+			}
 			
 			try {
-				
 				System.out.println("XR3PlayerPath is : " + applicationPath[0]);
 				
-				ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0]);
+				//ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0])
+				ProcessBuilder builder = new ProcessBuilder("cmd /c start " + applicationPath[0]);
 				builder.redirectErrorStream(true);
 				Process process = builder.start();
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 				
-				// Wait 20 seconds
-				PauseTransition pause = new PauseTransition(Duration.seconds(20));
-				pause.setOnFinished(f -> {
-					updateScreen.setVisible(false);
-					
-					// Show failed message
-					Platform.runLater(() -> ActionTool.showNotification("Restart Failed", "\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...",
-							Duration.seconds(10), NotificationType.ERROR));
-					
-					// Ask the user
-					if (askUser)
-						Platform.runLater(() -> {
-							if (ActionTool.doQuestion(null, "Restart failed.... force shutdown?", null, Main.window))
-								terminate(false);
-						});
-					else {
-						// Terminate after showing the message for a while
-						PauseTransition forceTerminate = new PauseTransition(Duration.seconds(2));
-						forceTerminate.setOnFinished(fn -> terminate(false));
-						forceTerminate.play();
-					}
-					
-				});
-				pause.play();
+				//Show message that application is restarting
+				Platform.runLater(() -> ActionTool.showNotification("Restarting Application", "If it take a lot of time do it manually ", Duration.seconds(20),
+						NotificationType.INFORMATION));
+				
+				//startExitPauseTransition
+				startExitPauseTransition(20, askUser);
 				
 				// Continuously Read Output
 				String line;
@@ -929,7 +918,7 @@ public class Main extends Application {
 					while ( ( line = bufferedReader.readLine() ) != null) {
 						if (line.isEmpty())
 							break;
-						if (line.contains("XR3Player ready to rock!"))
+						if (line.contains("Outside of Application Start Method"))
 							terminate(false);
 					}
 				
@@ -939,11 +928,42 @@ public class Main extends Application {
 					updateScreen.setVisible(false);
 					
 					// Show failed message
-					Platform.runLater(() -> ActionTool.showNotification("Restart Failed", "\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...",
-							Duration.seconds(10), NotificationType.ERROR));
+					Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed", "Wait some more seconds before trying to restart/exit XR3Player manually",
+							Duration.seconds(20), NotificationType.ERROR));
+					
+					//startExitPauseTransition
+					startExitPauseTransition(0, askUser);
 				});
 			}
 		}, "Restart Application Thread").start();
+	}
+	
+	private static void startExitPauseTransition(int seconds , boolean askUser) {
+		// Wait 20 seconds
+		PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
+		pause.setOnFinished(f -> {
+			updateScreen.setVisible(false);
+			
+			// Show failed message
+			if (seconds != 0)
+				Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed", "Wait some more seconds before trying to restart/exit XR3Player manually",
+						Duration.seconds(20), NotificationType.ERROR));
+			
+			// Ask the user
+			if (askUser)
+				Platform.runLater(() -> {
+					if (ActionTool.doQuestion(null, "Restart failed.... force shutdown?", null, Main.window))
+						terminate(false);
+				});
+			else {
+				// Terminate after showing the message for a while
+				PauseTransition forceTerminate = new PauseTransition(Duration.seconds(2));
+				forceTerminate.setOnFinished(fn -> terminate(false));
+				forceTerminate.play();
+			}
+			
+		});
+		pause.play();
 	}
 	
 	//------------------------------------- Methods not used very often--------------------------------------------------

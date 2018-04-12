@@ -27,12 +27,6 @@
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>32/64</runtimeBits>
   </jre>
-  <splash>
-    <file>D:\GitHub\XR3Player\XR3Player Etc Files\images\spashScreen.bmp</file>
-    <waitForWindow>true</waitForWindow>
-    <timeout>60</timeout>
-    <timeoutErr>true</timeoutErr>
-  </splash>
   <versionInfo>
     <fileVersion>3.0.0.0</fileVersion>
     <txtFileVersion>3.0.0.0 </txtFileVersion>
