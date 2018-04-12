@@ -31,6 +31,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -221,7 +222,7 @@ public class LibraryMode extends BorderPane {
 						
 						//Check if the user wants to immediately open library after it's creation
 						if (openLibraryAfterCreation) {
-							currentLib.openLibrary(true, false);
+							currentLib.setLibraryStatus(LibraryStatus.OPENED, false);
 							Main.libraryMode.openedLibrariesViewer.selectTab(currentLib.getLibraryName());
 						}
 						
@@ -366,7 +367,8 @@ public class LibraryMode extends BorderPane {
 		
 		// -- openOrCloseLibrary
 		openOrCloseLibrary.disableProperty().bind(libraryToolBar.disabledProperty());
-		openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().openLibrary(!teamViewer.getViewer().centerItemProperty().get().isOpened(), false));
+		openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get()
+				.setLibraryStatus(teamViewer.getViewer().centerItemProperty().get().isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false));
 		
 		// -- settingsOfLibrary
 		//openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));

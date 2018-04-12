@@ -905,6 +905,10 @@ public class Library extends StackPane {
 		}
 	}
 	
+	public enum LibraryStatus {
+		OPENED, CLOSED;
+	}
+	
 	/**
 	 * Opens the Library.
 	 *
@@ -913,7 +917,9 @@ public class Library extends StackPane {
 	 * @param firstLoadHack
 	 *            the first load hack
 	 */
-	public void openLibrary(boolean open , boolean firstLoadHack) {
+	public void setLibraryStatus(LibraryStatus status , boolean firstLoadHack) {
+		boolean open = ( status == LibraryStatus.OPENED );
+		
 		if (firstLoadHack) {
 			setLibraryOpened(open, false);
 			Main.libraryMode.openedLibrariesViewer.insertTab(this);
@@ -1261,9 +1267,9 @@ public class Library extends StackPane {
 			
 			KeyCode code = key.getCode();
 			if (code == KeyCode.O)
-				openLibrary(true, false);
+				setLibraryStatus(LibraryStatus.OPENED, false);
 			else if (code == KeyCode.C)
-				openLibrary(false, false);
+				setLibraryStatus(LibraryStatus.CLOSED, false);
 			else if (code == KeyCode.R)
 				renameLibrary(nameLabel);
 			else if (code == KeyCode.DELETE || code == KeyCode.D)
@@ -1273,7 +1279,7 @@ public class Library extends StackPane {
 			else if (code == KeyCode.E)
 				this.exportImage();
 		} else if (key.getCode() == KeyCode.ENTER)
-			openLibrary(!isOpened(), false);
+			setLibraryStatus(isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false);
 	}
 	
 	/*------------------------------------------------------------------------

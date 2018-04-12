@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.presenter.TitleMenuItem;
 
 /**
@@ -23,10 +24,10 @@ import main.java.com.goxr3plus.xr3player.application.presenter.TitleMenuItem;
 public class LibraryContextMenu extends ContextMenu {
 
     /** The open. */
-    MenuItem open = new MenuItem("Open");
+    MenuItem open = new MenuItem("Open(CTRL + O)");
 
     /** The close. */
-    MenuItem close = new MenuItem("Close");
+    MenuItem close = new MenuItem("Close(CTRL + C)");
 
     /** The rename. */
     MenuItem rename = new MenuItem("Rename(CTRL + R)");
@@ -64,9 +65,9 @@ public class LibraryContextMenu extends ContextMenu {
     // Constructor
     public LibraryContextMenu() {
 
-	open.setOnAction(ac -> library.openLibrary(true, false));
+	open.setOnAction(ac -> library.setLibraryStatus(LibraryStatus.OPENED, false));
 
-	close.setOnAction(c -> library.openLibrary(false, false));
+	close.setOnAction(ac -> library.setLibraryStatus(LibraryStatus.CLOSED, false));
 
 	rename.setOnAction(ac -> library.renameLibrary(library));
 
@@ -74,7 +75,7 @@ public class LibraryContextMenu extends ContextMenu {
 
 	resetImage.setOnAction(ac -> library.setDefaultImage());
 
-	exportImage.setOnAction(a -> library.exportImage());
+	exportImage.setOnAction(ac -> library.exportImage());
 
 	settings.setOnAction(ac -> Main.libraryMode.libraryInformation.showWindow(library));
 

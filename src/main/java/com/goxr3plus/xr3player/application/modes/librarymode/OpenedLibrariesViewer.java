@@ -29,6 +29,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -88,7 +89,7 @@ public class OpenedLibrariesViewer extends StackPane {
 			if (Main.libraryMode.teamViewer.getViewer().getItemsObservableList().isEmpty())
 				Main.libraryMode.createNewLibrary(emptyLabel, false);
 			else
-				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).openLibrary(true, false);
+				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).setLibraryStatus(LibraryStatus.OPENED, false);
 		});
 		
 		//== emptyLabel
@@ -330,10 +331,11 @@ public class OpenedLibrariesViewer extends StackPane {
 		//library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty());
 		
 		tab.setOnCloseRequest(c -> {
-			if (!library.getSmartController().isFree(true))
-				c.consume();
-			else
-				library.openLibrary(false, false);
+			if (!library.getSmartController().isFree(true)) {
+				if (c != null)
+					c.consume();
+			} else
+				library.setLibraryStatus(LibraryStatus.CLOSED, false);
 		});
 		
 		tab.setGraphic(hBox);

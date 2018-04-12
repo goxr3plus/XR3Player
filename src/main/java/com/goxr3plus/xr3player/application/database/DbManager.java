@@ -27,6 +27,7 @@ import javafx.scene.control.Tab;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -333,7 +334,7 @@ public class DbManager {
 			
 			//Load all the Opened Libraries
 			Platform.runLater(
-					() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).forEach(library -> library.openLibrary(true, true)));
+					() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).forEach(library -> library.setLibraryStatus(LibraryStatus.OPENED, true)));
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {
