@@ -11,11 +11,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9"/>
 	<classpathentry kind="var" path="M2_REPO/com/github/imcdonagh/image4j/0.7.2/image4j-0.7.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/teamdev/jxbrowser/jxbrowser-win/6.19.1/jxbrowser-win-6.19.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/teamdev/jxbrowser/jxbrowser/6.19.1/jxbrowser-6.19.1.jar"/>

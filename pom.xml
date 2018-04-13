@@ -17,8 +17,8 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>9</maven.compiler.source>
+		<maven.compiler.target>9</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<my.project.version>100</my.project.version>
 	</properties>
@@ -50,8 +50,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>9</source>
+					<target>9</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -202,12 +202,12 @@
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
-			<version>8.40.14</version>
+			<version>9.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>8.0.3</version>
+			<version>9.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
@@ -290,7 +290,6 @@
 			<artifactId>java-stream-player</artifactId>
 			<version>V1.1.0</version>
 		</dependency>
-
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->
@@ -306,7 +305,7 @@
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>xr3capture</artifactId>
-			<version>V3.12</version>
+			<version>V9.12</version>
 			<!-- <exclusions> <exclusion> <groupId>com.jfoenix</groupId> <artifactId>jfoenix</artifactId> 
 				</exclusion> <exclusion> <groupId>org.controlsfx</groupId> <artifactId>controlsfx</artifactId> 
 				</exclusion> </exclusions> -->
