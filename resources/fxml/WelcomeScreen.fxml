@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<fx:root minHeight="15.0" minWidth="15.0" prefHeight="627.0" prefWidth="1200.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="15.0" minWidth="15.0" prefHeight="627.0" prefWidth="1200.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="610.0" fitWidth="1018.0" layoutX="360.0" layoutY="74.0">
          <viewport>
