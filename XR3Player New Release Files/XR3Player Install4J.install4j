@@ -39,7 +39,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
         </text>
       </splashScreen>
-      <java mainClass="main.java.com.goxr3plus.xr3player.application.Main" mainMode="1" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="main.java.com.goxr3plus.xr3player.application.Main" mainMode="1" vmParameters="-Dprism.allowhidpi=false" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="XR3Player.jar" failOnError="false" />
         </classPath>
@@ -49,8 +49,8 @@
       </java>
       <includedFiles />
       <unextractableFiles />
-      <vmOptionsFile mode="none" overwriteMode="0" fileMode="644">
-        <content />
+      <vmOptionsFile mode="content" overwriteMode="0" fileMode="644">
+        <content>-Dprism.allowhidpi=false</content>
       </vmOptionsFile>
       <customScript mode="1" file="">
         <content />
