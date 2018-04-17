@@ -17,8 +17,8 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<maven.compiler.source>9</maven.compiler.source>
-		<maven.compiler.target>9</maven.compiler.target>
+		<maven.compiler.source>1.9</maven.compiler.source>
+		<maven.compiler.target>1.9</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<my.project.version>100</my.project.version>
 	</properties>
@@ -50,8 +50,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<source>9</source>
-					<target>9</target>
+					<source>1.9</source>
+					<target>1.9</target>
+					<release>9</release>
+					<executable>javac9</executable>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -207,7 +209,7 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>1.9.1</version>
+			<version>9.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
@@ -306,9 +308,16 @@
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>xr3capture</artifactId>
 			<version>V9.12</version>
-			<!-- <exclusions> <exclusion> <groupId>com.jfoenix</groupId> <artifactId>jfoenix</artifactId> 
-				</exclusion> <exclusion> <groupId>org.controlsfx</groupId> <artifactId>controlsfx</artifactId> 
-				</exclusion> </exclusions> -->
+			<exclusions>
+				<exclusion>
+					<groupId>com.jfoenix</groupId>
+					<artifactId>jfoenix</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.controlsfx</groupId>
+					<artifactId>controlsfx</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Locally testing XR3Capture -->
 		<!-- <dependency> <groupId>com.XR3Capture</groupId> <artifactId>XR3Capture</artifactId> 

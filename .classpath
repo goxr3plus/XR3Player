@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" output="target/classes" path="src">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -11,55 +16,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/github/imcdonagh/image4j/0.7.2/image4j-0.7.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/teamdev/jxbrowser/jxbrowser-win/6.19.1/jxbrowser-win-6.19.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/teamdev/jxbrowser/jxbrowser/6.19.1/jxbrowser-6.19.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/controlsfx/controlsfx/8.40.14/controlsfx-8.40.14.jar" sourcepath="M2_REPO/org/controlsfx/controlsfx/8.40.14/controlsfx-8.40.14-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/jfoenix/jfoenix/8.0.2/jfoenix-8.0.2.jar" sourcepath="M2_REPO/com/jfoenix/jfoenix/8.0.2/jfoenix-8.0.2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/fxmisc/richtext/richtextfx/0.8.2/richtextfx-0.8.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/reactfx/reactfx/2.0-M5/reactfx-2.0-M5.jar" sourcepath="M2_REPO/org/reactfx/reactfx/2.0-M5/reactfx-2.0-M5-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/fxmisc/undo/undofx/1.4.0/undofx-1.4.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/fxmisc/flowless/flowless/0.6/flowless-0.6.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/fxmisc/wellbehaved/wellbehavedfx/0.3.1/wellbehavedfx-0.3.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/javasysmon/V3.5.0/javasysmon-V3.5.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/1stleg/jnativehook/2.1.0/jnativehook-2.1.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/xerial/sqlite-jdbc/3.20.1/sqlite-jdbc-3.20.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.6/commons-io-2.6.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-validator/commons-validator/1.6/commons-validator-1.6.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.9.2/commons-beanutils-1.9.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/fxmisc/easybind/easybind/1.0.3/easybind-1.0.3.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/jsoup/jsoup/1.11.2/jsoup-1.11.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/cliftonlabs/json-simple/2.3.0/json-simple-2.3.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/java-google-speech-api/V2.1/java-google-speech-api-V2.1.jar" sourcepath="M2_REPO/com/github/goxr3plus/java-google-speech-api/V2.1/java-google-speech-api-V2.1-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/axet/java-flac-encoder/0.3.8/java-flac-encoder-0.3.8.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/json/json/20150729/json-20150729.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/mpatric/mp3agic/0.9.1/mp3agic-0.9.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/jaudiotagger/V2.2.6/jaudiotagger-V2.2.6.jar" sourcepath="M2_REPO/com/github/goxr3plus/jaudiotagger/V2.2.6/jaudiotagger-V2.2.6-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/java-stream-player/V1.1.0/java-stream-player-V1.1.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/googlecode/soundlibs/jlayer/1.0.1.4/jlayer-1.0.1.4.jar"/>
-	<classpathentry kind="var" path="M2_REPO/junit/junit/3.8.2/junit-3.8.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/googlecode/soundlibs/tritonus-share/0.3.7.4/tritonus-share-0.3.7.4.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/jflac/jflac-codec/1.5.2/jflac-codec-1.5.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/Trilarion/java-vorbis-support/v1.0.0/java-vorbis-support-v1.0.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/xr3capture/V3.12/xr3capture-V3.12.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/github/goxr3plus/FX-BorderlessScene/V2.0.0/FX-BorderlessScene-V2.0.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/dropbox/core/dropbox-core-sdk/3.0.6/dropbox-core-sdk-3.0.6.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.7.4/jackson-core-2.7.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libraries/scenicView.jar"/>
-	<classpathentry kind="lib" path="resources/ls/license.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
