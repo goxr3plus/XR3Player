@@ -214,7 +214,7 @@
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
 			<artifactId>richtextfx</artifactId>
-			<version>0.8.2</version>
+			<version>0.9.0</version>
 		</dependency>
 		<!--<dependency> <groupId>de.jensd</groupId> <artifactId>fontawesomefx</artifactId> 
 			<version>8.9</version> </dependency> -->
