@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<fx:root minHeight="15.0" minWidth="15.0" prefHeight="627.0" prefWidth="1200.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="15.0" minWidth="15.0" prefHeight="618.0" prefWidth="897.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="backgroundImage" fitHeight="610.0" fitWidth="1018.0" layoutX="360.0" layoutY="74.0">
+      <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="500.0" layoutX="360.0" layoutY="74.0">
          <viewport>
             <Rectangle2D />
          </viewport>
@@ -84,7 +84,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D />
                      </viewport>
