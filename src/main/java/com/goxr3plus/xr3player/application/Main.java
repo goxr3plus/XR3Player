@@ -454,8 +454,6 @@ public class Main extends Application {
 		//Load the informations about every user
 		loginMode.usersInfoLoader.start();
 		
-		//Check Compatibility
-		checkJavaCombatibility();
 		
 		//Check for updates
 		updateWindow.searchForUpdates(false);
@@ -797,27 +795,6 @@ public class Main extends Application {
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	
-	/**
-	 * Checks if the Current Java Version is the appropriate for the application [[SuppressWarningsSpartan]]
-	 */
-	private void checkJavaCombatibility() {
-		
-//		//String minimumJavaVersion = "1.9.0_121"
-//		String[] javaVersionElements = System.getProperty("java.runtime.version").split("\\.|_|-b");
-//		
-//		//String discard = javaVersionElements[0]
-//		String major = javaVersionElements[1];
-//		//String minor = javaVersionElements[2]
-//		String update = javaVersionElements[3];
-//		//String build = javaVersionElements[4]
-//		//System.out.println(Arrays.asList(javaVersionElements))
-//		
-//		if (Integer.parseInt(major) < 8 || Integer.parseInt(update) < 141)
-//			ActionTool.showNotification("Problematic Java Version Installed!", "XR3Player needs at least Java [ 1.8.0_141 ] -> Installed Java Version [ "
-//					+ System.getProperty("java.version") + " ]\nThe application may crash or not work at all!\n Update your Java Version :)", Duration.seconds(40),
-//					NotificationType.ERROR);
-	}
 	
 	/**
 	 * Terminate the application.
