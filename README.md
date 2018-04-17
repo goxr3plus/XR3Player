@@ -21,7 +21,7 @@
 > [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 ### Videos
 
-| Update 99 with Installers  | Full Tutorial for Update 94 |
+| Update 99 with installers  | Awesome Tutorial |
 |:-:|:-:|
 | [![First](http://img.youtube.com/vi/MCcDs27NESY/0.jpg)](https://www.youtube.com/watch?v=MCcDs27NESY)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
 
