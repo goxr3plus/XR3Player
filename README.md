@@ -7,16 +7,11 @@
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
 [![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![GitHub contributors][contributors-image]][contributors-url]
 [![HitCount](http://hits.dwyl.io/goxr3plus/xr3player.svg)](http://hits.dwyl.io/goxr3plus/xr3player)
 <a href="https://sourceforge.net/projects/xr3player/files/latest/download" rel="nofollow"><img alt="Download XR3Player" src="https://img.shields.io/sourceforge/dt/xr3player.svg"></a>
 [![Total Downloads](https://img.shields.io/github/downloads/goxr3plus/XR3Player/total.svg)](https://github.com/goxr3plus/XR3Player/releases)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![GitHub issues](https://img.shields.io/github/issues/goxr3plus/XR3Player.svg)](https://github.com//goxr3plus/XR3Player/issues)
-
-[contributors-url]: https://github.com/goxr3plus/XR3Player/graphs/contributors
-[contributors-image]: https://img.shields.io/github/contributors/goxr3plus/XR3Player.svg
-
 ### Videos
 
 | Update 99 with installers  | Awesome Tutorial |
