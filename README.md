@@ -1,5 +1,8 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player 
-Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.99/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
+
+> Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.99/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
+
+> Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
@@ -14,7 +17,6 @@ Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/release
 [contributors-url]: https://github.com/goxr3plus/XR3Player/graphs/contributors
 [contributors-image]: https://img.shields.io/github/contributors/goxr3plus/XR3Player.svg
 
-> [XR3Player Website](https://goxr3plus.github.io/xr3player.io/)
 ### Videos
 
 | Update 99 with installers  | Awesome Tutorial |
