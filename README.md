@@ -1,6 +1,5 @@
-### No need to install Java anymore , i have made custom installers :)
-
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player [Download for Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.99/XR3Player_Installer.exe)
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player 
+Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.99/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
@@ -129,5 +128,3 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 - [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
   
- 
-# [DOWNLOAD](https://goxr3plus.github.io/xr3player.io/)
