@@ -61,14 +61,6 @@
 
 
 ## QUESTIONS
-
-<details>
-  <summary>Which Java Version i need ?</summary>
-  <p>
-    Java 1.8.0_161 ++ Required ! Download Java 8 here : ( https://www.java.com/en/ )
-  </p>
-</details>
-
 <details>
   <summary>System Requirements</summary>
   <p>
@@ -92,8 +84,8 @@
 
 To build XR3Player, you will need:
 
-* [JDK 8+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) - Oracle or OpenJDK
-* [Maven](http://maven.apache.org/) - Version 3 recommended
+* [JDK 9+]
+* [Maven](http://maven.apache.org/) - Version 3.5 recommended
 
 After installing these tools simply run 'mvn clean package' and find the jar in the target folder.
 
@@ -120,7 +112,6 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 
 ## Specs / Open-source libraries:
 
-- [**Java 8 Update 161++**](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) Java language .
 - [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond .
 - [**JFoenix**](http://www.jfoenix.com/)  JavaFX Material Design Library .
 - [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
