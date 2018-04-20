@@ -12,7 +12,6 @@
 <a href="https://sourceforge.net/projects/xr3player/files/latest/download" rel="nofollow"><img alt="Download XR3Player" src="https://img.shields.io/sourceforge/dt/xr3player.svg"></a>
 [![Total Downloads](https://img.shields.io/github/downloads/goxr3plus/XR3Player/total.svg)](https://github.com/goxr3plus/XR3Player/releases)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![Coverage Status](https://coveralls.io/repos/github/goxr3plus/XR3Player/badge.svg?branch=master)](https://coveralls.io/github/goxr3plus/XR3Player?branch=master)
 
 [contributors-url]: https://github.com/goxr3plus/XR3Player/graphs/contributors
 [contributors-image]: https://img.shields.io/github/contributors/goxr3plus/XR3Player.svg
