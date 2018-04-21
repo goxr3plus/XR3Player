@@ -15,7 +15,7 @@
     <mergedProjects />
     <codeSigning macEnabled="false" macPkcs12File="" windowsEnabled="false" windowsKeySource="pkcs12" windowsPvkFile="" windowsSpcFile="" windowsPkcs12File="" />
   </application>
-  <files keepModificationTimes="false" missingFilesStrategy="warn" globalExcludeSuffixes="" defaultOverwriteMode="4" defaultUninstallMode="0" launcherOverwriteMode="3" defaultFileMode="644" defaultDirMode="755">
+  <files keepModificationTimes="false" missingFilesStrategy="warn" globalExcludeSuffixes="" defaultOverwriteMode="4" defaultUninstallMode="0" launcherOverwriteMode="4" defaultFileMode="644" defaultDirMode="755">
     <filesets />
     <roots />
     <mountPoints>
@@ -30,7 +30,7 @@
   </files>
   <launchers>
     <launcher name="XR3Player Launcher" id="152" customizedId="ID999" external="false" excludeFromMenu="false" unixMode="755" unixAutoStart="true" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="" useCustomMacosExecutableName="false" customMacosExecutableName="" useJavaMinVersionOverride="false" javaMinVersionOverride="1.8.0_141" useJavaMaxVersionOverride="false" javaMaxVersionOverride="1.8.0_900" checkUpdater="false" updateExecutionMode="unattendedProgress" unattendedUpdateTitle="${i18n:updater.WindowTitle(&quot;${compiler:sys.fullName}&quot;)}">
-      <executable name="XR3Player" type="1" iconSet="true" iconFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/xr3player.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="true" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="false">
+      <executable name="XR3Player" type="1" iconSet="true" iconFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/xr3player.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="true" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
         <versionInfo include="true" fileVersion="3.0.0.0" fileDescription="XR3Player" legalCopyright="Open Source JavaFX Project" internalName="XR3Player" productName="XR3Player" />
       </executable>
       <splashScreen show="true" width="0" height="0" bitmapFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/splash.png" textOverlay="false">
@@ -45,7 +45,10 @@
         </classPath>
         <modulePath />
         <nativeLibraryDirectories />
-        <vmOptions />
+        <vmOptions>
+          <options version="1.9.0" line="-Dprism.allowhidpi=false" />
+          <options version="9" line="-Dprism.allowhidpi=false" />
+        </vmOptions>
       </java>
       <includedFiles />
       <unextractableFiles />
