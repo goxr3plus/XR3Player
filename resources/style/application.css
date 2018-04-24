@@ -526,7 +526,7 @@
 .specialJFXTabPane .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 14.5px; /* before it was 12px */
+    -fx-font-size: 13.5px; /* before it was 12px */
     -fx-font-weight: bold;
     -fx-wrap-text: true;
     -fx-cursor:hand;
