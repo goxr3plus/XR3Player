@@ -12,8 +12,14 @@ import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
  */
 public class ConverterService extends Service<Boolean> {
 	
+	/**
+	 * The full path of audio file
+	 */
 	private String audioPath;
 	
+	/**
+	 * The XPlayerController
+	 */
 	private final XPlayerController xPlayerController;
 	
 	/**

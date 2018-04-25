@@ -1571,7 +1571,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					//Recalculate disc
 					disc.calculateAngleByValue(0, 0, true);
 					disc.repaint();
-					
+						
 					//Reset
 					fixPlayerStop();
 				}
@@ -1593,7 +1593,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * Resets player labels etc to zero
 	 */
 	public void fixPlayerStop() {
-		System.out.println("Entered fixPlayerStop()");
+		//System.out.println("Entered fixPlayerStop()");
 		
 		//== RemainingTimeLabel
 		remainingTimeLabel.setText("00:00");

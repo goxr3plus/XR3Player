@@ -78,13 +78,12 @@
             <DropShadow />
          </effect>
          <children>
-            <Label prefHeight="56.0" prefWidth="305.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Have dreams , goals and passion for life !" />
             <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 90; -fx-font-size: 30;" text="Start" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D />
                      </viewport>
@@ -94,10 +93,21 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="50.0" style="-fx-background-radius: 0; -fx-font-size: 30;" text="Exit" textAlignment="CENTER" wrapText="true">
+            <Label alignment="CENTER" prefHeight="56.0" prefWidth="305.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="“Pursue excellence, and success will follow&quot;" textAlignment="CENTER" />
+            <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="15.0" style="-fx-background-radius: 90; -fx-font-size: 30; -fx-text-fill: firebrick;" text="Exit" textAlignment="CENTER" textFill="#d30b0b" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                     <image>
+                        <Image url="@../image/exit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </JFXButton>
          </children>
       </VBox>
