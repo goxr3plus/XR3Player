@@ -67,11 +67,11 @@ public class XPlayerPlayService extends Service<Boolean> {
 			return;
 		
 		//Check if converter is running
-		if (converterService.isRunning()) {
-			ActionTool.showNotification("Converter is running", "Converter is already running on current player\n give it some seconds to finish", Duration.seconds(4),
-					NotificationType.INFORMATION);
-			return;
-		}
+		//		if (converterService.isRunning()) {
+		//			ActionTool.showNotification("Converter is running", "Converter is already running on current player\n give it some seconds to finish", Duration.seconds(4),
+		//					NotificationType.INFORMATION);
+		//			return;
+		//		}
 		
 		//Test if the audioFile needs to be converted
 		if (!InfoTool.isAudioSupported(fileAbsolutePath)) {
