@@ -26,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="875.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="875.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
@@ -43,13 +43,14 @@
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="221.0" minHeight="10.0" percentHeight="51.0" prefHeight="189.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <SplitPane dividerPositions="0.24165707710011508, 0.4810126582278481" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+                                    <SplitPane dividerPositions="0.24165707710011508, 0.4810126582278481" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
                                        <items>
                                           <SplitPane fx:id="leftSplitPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" SplitPane.resizableWithParent="false">
                                              <items>
@@ -175,64 +176,8 @@
                                                 </BorderPane>
                                              </items>
                                           </SplitPane>
-                                          <SplitPane fx:id="leftSplitPane" dividerPositions="0.2126126126126126" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" SplitPane.resizableWithParent="false">
+                                          <SplitPane fx:id="leftSplitPane" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" SplitPane.resizableWithParent="false">
                                              <items>
-                                                <VBox alignment="TOP_CENTER" maxHeight="140.0" minHeight="130.0" minWidth="0.0" prefWidth="202.0" spacing="2.0" style="-fx-background-color: #202020;" SplitPane.resizableWithParent="false">
-                                                   <children>
-                                                      <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                                         <children>
-                                                            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Elapsed Time" VBox.vgrow="ALWAYS" />
-                                                            <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                                         <children>
-                                                            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining Time" VBox.vgrow="ALWAYS" />
-                                                            <Label fx:id="remainingTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                                         <children>
-                                                            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total Time" VBox.vgrow="ALWAYS" />
-                                                            <Label fx:id="totalTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                                         </children>
-                                                      </VBox>
-                                                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="segmented-button-bar">
-                                                         <children>
-                                                            <Button fx:id="previousSongButton" disable="true" layoutX="10.0" layoutY="14.0" minWidth="0.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="0.0" style="-fx-font-size: 11;" styleClass="first" text="Previous" visible="false">
-                                                               <graphic>
-                                                                  <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../image/backward.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <tooltip>
-                                                                  <Tooltip text="Skip backward n seconds" />
-                                                               </tooltip>
-                                                            </Button>
-                                                            <Button fx:id="nextSongButton" contentDisplay="RIGHT" disable="true" layoutX="397.0" layoutY="14.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="0.0" style="-fx-font-size: 11;" styleClass="last" text="Next" visible="false">
-                                                               <graphic>
-                                                                  <ImageView fitWidth="15.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../image/backward.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <tooltip>
-                                                                  <Tooltip text="Skip forward n seconds" />
-                                                               </tooltip>
-                                                            </Button>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
                                                 <StackPane fx:id="visualizerStackTopParent" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
                                                    <children>
                                                       <StackPane fx:id="visualizerStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
@@ -394,12 +339,39 @@
                                     </SplitPane>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets top="3.0" />
+                                    <Insets />
                                  </BorderPane.margin>
                               </GridPane>
                            </center>
+                           <top>
+                              <HBox BorderPane.alignment="CENTER">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Current" VBox.vgrow="ALWAYS" />
+                                          <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
+                                          <Label fx:id="remainingTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
+                                          <Label fx:id="totalTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets top="1.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </top>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>
