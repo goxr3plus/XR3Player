@@ -73,8 +73,6 @@ public class PlayListModesTabPane extends StackPane {
 		//
 		openedLibrariesTab.setContent(Main.libraryMode.openedLibrariesViewer);
 		//
-		dropBoxTab.setContent(Main.dropBoxViewer);
-		//
 		emotionListsTab.setContent(new BorderPane(Main.emotionsTabPane));
 		//
 		searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
@@ -116,6 +114,14 @@ public class PlayListModesTabPane extends StackPane {
 	public Tab getOpenedLibrariesTab() {
 		return openedLibrariesTab;
 	}
+
+	/**
+	 * @return the dropBoxTab
+	 */
+	public Tab getDropBoxTab() {
+		return dropBoxTab;
+	}
+
 
 	
 }

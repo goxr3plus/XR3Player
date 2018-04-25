@@ -1,38 +1,28 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.authorization;
 
 import java.io.IOException;
-import java.io.StringWriter;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.w3c.dom.Document;
 
 import com.dropbox.core.DbxAppInfo;
 import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuth;
-import com.jfoenix.controls.JFXButton;
+import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
+import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
+import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -49,23 +39,14 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 public class DropboxAuthenticationBrowser extends StackPane {
 	
 	@FXML
-	private WebView webView;
+	private BorderPane borderPane;
 	
 	@FXML
-	private ProgressBar progressBar;
-	
-	@FXML
-	private VBox errorPane;
-	
-	@FXML
-	private JFXButton tryAgain;
-	
-	@FXML
-	private ProgressIndicator tryAgainIndicator;
+	private ProgressIndicator loadingIndicator;
 	
 	//----------------------------------------------------------------
 	
-	private WebEngine webEngine;
+	private Browser browser;
 	
 	/**
 	 * AccessToken Property
@@ -112,61 +93,43 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//WebEngine
-		webEngine = webView.getEngine();
-		//webEngine.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0");
+		//Browser
+		browser = new Browser();
 		
-		// progressBar
-		progressBar.visibleProperty().bind(webEngine.getLoadWorker().runningProperty());
-		progressBar.progressProperty().bind(webEngine.getLoadWorker().progressProperty());
+		//BorderPane
+		borderPane.setCenter(new BrowserView(browser));
 		
-		//Add listener to the WebEngine
-		webEngine.getLoadWorker().stateProperty().addListener((observable , oldState , newState) -> {
-			if (newState == Worker.State.SUCCEEDED) {
-				
-				//Check for error pane
-				errorPane.setVisible(false);
-				
-				//Check if this is the final authentication page
-				if ("https://www.dropbox.com/1/oauth2/authorize_submit".equalsIgnoreCase(webEngine.getLocation())) {
-					Document doc = webEngine.getDocument();
-					try {
-						Transformer transformer = TransformerFactory.newInstance().newTransformer();
-						transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-						transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-						transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-						transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-						
-						//transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(System.out, "UTF-8")))
-						
-						StringWriter writer = new StringWriter();
-						transformer.transform(new DOMSource(doc), new StreamResult(writer));
-						String output = writer.toString();
-						//System.out.println(output)
-						
-						org.jsoup.nodes.Document html = Jsoup.parse(output);
-						Element div = html.body().getElementById("auth-code");
-						
-						//Finish Authorization
-						String code = div.getElementsByTag("input").first().attr("data-token");
-						
-						//Finish
-						produceAccessToken(code);
-						
-					} catch (Exception ex) {
-						ex.printStackTrace();
+		//BrowserView - Load Listener
+		browser.addLoadListener(new LoadAdapter() {
+			/**
+			 * [[SuppressWarningsSpartan]]
+			 */
+			@Override
+			public void onFinishLoadingFrame(FinishLoadingEvent event) {
+				if (event.isMainFrame()) {
+					//System.out.println("Main frame has finished loading");
+					
+					//Strings
+					String currentURL = browser.getURL();
+					
+					//Check if it is the correct url
+					if ("https://www.dropbox.com/1/oauth2/authorize_submit".equals(currentURL)) {
+						String html = event.getBrowser().getHTML();
+						new Thread(() -> {
+							try {
+								//Finish Authorization
+								String code = Jsoup.parse(html).body().getElementById("auth-code").getElementsByTag("input").first().attr("data-token");
+								
+								//Finish
+								Platform.runLater(() -> produceAccessToken(code));
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}).start();
 					}
 				}
-			} else if (newState == Worker.State.FAILED) {
-				
-				//Set Error Pane Visible
-				errorPane.setVisible(true);
 			}
 		});
-		
-		//tryAgain
-		tryAgain.setOnAction(a -> checkForInternetConnection());
 		
 	}
 	
@@ -176,10 +139,11 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	public void showAuthenticationWindow() {
 		
 		//Clear the previous cookies
-		//java.net.CookieHandler.setDefault(new com.sun.webkit.network.CookieManager());
+		browser.getCacheStorage().clearCache();
+		browser.getCookieStorage().deleteAll();
 		
 		//Load it
-		webEngine.load(getAuthonticationRequestURL());
+		browser.loadURL(getAuthonticationRequestURL());
 		
 		//Show the Window
 		window.show();
@@ -225,26 +189,6 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	}
 	
 	/**
-	 * Checks for internet connection
-	 */
-	void checkForInternetConnection() {
-		
-		//tryAgainIndicator
-		tryAgainIndicator.setVisible(true);
-		
-		//Check for internet connection
-		Thread thread = new Thread(() -> {
-			boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
-			Platform.runLater(() -> {
-				errorPane.setVisible(!hasInternet);
-				tryAgainIndicator.setVisible(false);
-			});
-		}, "Internet Connection Tester Thread");
-		thread.setDaemon(true);
-		thread.start();
-	}
-	
-	/**
 	 * @return the accessToken
 	 */
 	public StringProperty accessTokenProperty() {
@@ -256,6 +200,20 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	 */
 	public Stage getWindow() {
 		return window;
+	}
+	
+	/**
+	 * @return the loadingIndicator
+	 */
+	public ProgressIndicator getLoadingIndicator() {
+		return loadingIndicator;
+	}
+	
+	/**
+	 * @return the browser
+	 */
+	public Browser getBrowser() {
+		return browser;
 	}
 	
 }

@@ -72,6 +72,12 @@ public class ChromiumUpdaterService {
 						//System.out.println(threadName + " entered if statement");
 					}
 					
+					//DropboxAuthenticationBrowser
+					if (Main.dropBoxViewer.getAuthenticationBrowser().getWindow().isShowing()) {
+						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator().setManaged(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
+						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator().setVisible(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
+					}
+					
 				}
 				
 			} catch (Exception ex) {

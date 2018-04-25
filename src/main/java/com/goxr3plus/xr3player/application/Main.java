@@ -374,7 +374,6 @@ public class Main extends Application {
 		djMode = new DJMode();
 		
 		onlineMusicController = new OnlineMusicController();
-		dropBoxViewer = new DropboxViewer();
 		
 		emotionsTabPane = new EmotionsTabPane(emotionListsController);
 		
@@ -454,7 +453,6 @@ public class Main extends Application {
 		//Load the informations about every user
 		loginMode.usersInfoLoader.start();
 		
-		
 		//Check for updates
 		updateWindow.searchForUpdates(false);
 		
@@ -502,7 +500,6 @@ public class Main extends Application {
 		aboutWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
 		tagWindow.getWindow().initOwner(window);
-		dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
 		
 		// --------- Fix the Background ------------
 		determineBackgroundImage();
@@ -544,8 +541,15 @@ public class Main extends Application {
 			
 			//Run on JavaFX Thread
 			Platform.runLater(() -> {
+				
+				//Chromium Web Browser
 				webBrowser = new WebBrowserController();
 				specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
+				
+				//Dropbox Viewer
+				dropBoxViewer = new DropboxViewer();
+				dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
+				playListModesTabPane.getDropBoxTab().setContent(Main.dropBoxViewer);
 			});
 			
 			System.out.println("Loller Thread exited...");

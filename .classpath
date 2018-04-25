@@ -23,5 +23,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="localLibraries/jave-1.0.2.jar"/>
+	<classpathentry kind="lib" path="resources/ls/license.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

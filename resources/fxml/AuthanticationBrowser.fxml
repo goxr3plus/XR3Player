@@ -1,50 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.web.WebView?>
 
-<fx:root prefHeight="651.0" prefWidth="528.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="651.0" prefWidth="528.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane>
-         <center>
-            <WebView fx:id="webView" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
-         </center>
+      <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0">
          <bottom>
-            <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" prefHeight="12.0" prefWidth="587.0" progress="0.3" BorderPane.alignment="CENTER" />
+            <ProgressIndicator fx:id="loadingIndicator" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #252525;" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
-      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);" visible="false">
-         <children>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/warning.png" />
-               </image>
-            </ImageView>
-            <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true" />
-            <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" text="&#10;1. If you are unable to load any pages, check your computer’s network connection.&#10;&#10;2. If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true">
-               <VBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </VBox.margin></TextArea>
-            <JFXButton fx:id="tryAgain" buttonType="RAISED" contentDisplay="RIGHT" ripplerFill="#fa0c0c" text="Try Again">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ProgressIndicator fx:id="tryAgainIndicator" styleClass="dropbox-progress-indicator" visible="false" />
-               </graphic>
-            </JFXButton>
-         </children>
-      </VBox>
    </children>
 </fx:root>
