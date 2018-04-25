@@ -1,11 +1,15 @@
 package main.java.com.goxr3plus.xr3player.xplayer.services;
 
+import java.io.File;
 import java.util.logging.Level;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 
@@ -48,8 +52,23 @@ public class XPlayerSeekService extends Service<Boolean> {
 	 * @param stopPlayer
 	 */
 	public void startSeekService(long bytesToSkip , boolean stopPlayer) {
-		if (locked || isRunning() || xPlayerController.getxPlayerModel().songPathProperty().get() == null)
+		String absoluteFilePath = xPlayerController.getxPlayerModel().songPathProperty().get();
+		
+		//First security check
+		if (locked || isRunning() || absoluteFilePath == null)
 			return;
+		
+		//Check if the file exists 
+		if (!new File(absoluteFilePath).exists()) {
+			ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...", Duration.seconds(2), NotificationType.ERROR);
+			done();
+			
+			//Fix the labels
+			xPlayerController.fixPlayerStop();
+			
+			return;
+		}
+		
 		//Check if the bytesTheUser wants to skip are more than the total bytes of the audio
 		if (bytesToSkip > xPlayerController.getxPlayer().getTotalBytes())
 			return;

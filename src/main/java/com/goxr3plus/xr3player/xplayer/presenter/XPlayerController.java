@@ -1554,15 +1554,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 				} else {
 					
-					// Set time to 0 to not have problems with SeekService
-					xPlayerModel.setCurrentTime(0);
-					
 					// Change Marquee text
 					//mediaFileMarquee.setText("Player is Stopped");
 					playerStatusLabel.setText("Stopped");
 					
-					disc.calculateAngleByValue(0, 0, true);
-					disc.repaint();
+					// Set time to 0 to not have problems with SeekService
+					xPlayerModel.setCurrentTime(0);
 					
 					// disk
 					disc.stopRotation();
@@ -1571,26 +1568,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					// Visualizer
 					visualizer.stopVisualizer();
 					
-					// Play Image
-					// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView);
+					//Recalculate disc
+					disc.calculateAngleByValue(0, 0, true);
+					disc.repaint();
 					
-					//== RemainingTimeLabel
-					remainingTimeLabel.setText("00:00");
-					
-					//== ElapsedTimeLabel
-					elapsedTimeLabel.setText("00:00");
-					
-					// Notification
-					//ActionTool.showNotification("Player " + this.getKey(), "Player[ " + this.getKey() + " ] has stopped...", Duration.millis(500), NotificationType.SIMPLE);
-					
-					//== Visualizer Window 
-					visualizerWindow.getProgressBar().setProgress(0);
-					
-					//smTimeSlider
-					smTimeSlider.setValue(0);
-					
-					//smTimeSliderLabel
-					smTimeSliderLabel.setText(InfoTool.getTimeEdited(0) + "  / " + InfoTool.getTimeEdited(xPlayerModel.getDuration()));
+					//Reset
+					fixPlayerStop();
 				}
 				
 			});
@@ -1604,6 +1587,28 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKED) {
 			//TODO i need to add code here
 		}
+	}
+	
+	/**
+	 * Resets player labels etc to zero
+	 */
+	public void fixPlayerStop() {
+		System.out.println("Entered fixPlayerStop()");
+		
+		//== RemainingTimeLabel
+		remainingTimeLabel.setText("00:00");
+		
+		//== ElapsedTimeLabel
+		elapsedTimeLabel.setText("00:00");
+		
+		//== Visualizer Window 
+		visualizerWindow.getProgressBar().setProgress(0);
+		
+		//smTimeSlider
+		smTimeSlider.setValue(0);
+		
+		//smTimeSliderLabel
+		smTimeSliderLabel.setText(InfoTool.getTimeEdited(0) + "  / " + InfoTool.getTimeEdited(xPlayerModel.getDuration()));
 	}
 	
 	//	@Override
@@ -1974,6 +1979,27 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public JFXToggleButton getShowVisualizer() {
 		return showVisualizer;
+	}
+	
+	/**
+	 * @return the remainingTimeLabel
+	 */
+	public Label getRemainingTimeLabel() {
+		return remainingTimeLabel;
+	}
+	
+	/**
+	 * @return the elapsedTimeLabel
+	 */
+	public Label getElapsedTimeLabel() {
+		return elapsedTimeLabel;
+	}
+	
+	/**
+	 * @return the smTimeSliderLabel
+	 */
+	public Label getSmTimeSliderLabel() {
+		return smTimeSliderLabel;
 	}
 	
 }
