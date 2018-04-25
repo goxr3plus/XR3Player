@@ -61,9 +61,17 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * @param secondsToSkip
 	 */
 	public void startPlayService(String fileAbsolutePath , int secondsToSkip) {
+		
 		//First Security Check
 		if (locked || isRunning() || fileAbsolutePath == null)
 			return;
+		
+		//Check if converter is running
+		if (converterService.isRunning()) {
+			ActionTool.showNotification("Converter is running", "Converter is already running on current player\n give it some seconds to finish", Duration.seconds(4),
+					NotificationType.INFORMATION);
+			return;
+		}
 		
 		//Test if the audioFile needs to be converted
 		if (!InfoTool.isAudioSupported(fileAbsolutePath)) {
@@ -72,7 +80,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 			if (InfoTool.isAudio(fileAbsolutePath)) {
 				
 				//Show information to the user
-				ActionTool.showNotification("Audio not supported", "Current Audio format is not supported\n so it will automatically be converted into .mp3 and play :).",
+				ActionTool.showNotification("File is converting", "Current audio file format is not supported:\n so it will automatically be converted into .mp3.",
 						Duration.seconds(4), NotificationType.INFORMATION);
 				
 				//Give it a convert
@@ -81,7 +89,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 				return;
 			} else {
 				//Show information to the user
-				ActionTool.showNotification("No Audio File", "This file isn't supported at all", Duration.seconds(4), NotificationType.INFORMATION);
+				ActionTool.showNotification("No Audio File", "Can't play this file format", Duration.seconds(4), NotificationType.INFORMATION);
 			}
 			
 			return;

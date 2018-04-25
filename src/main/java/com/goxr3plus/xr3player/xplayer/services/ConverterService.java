@@ -5,6 +5,7 @@ import java.io.File;
 import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncodingAttributes;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
@@ -59,14 +60,8 @@ public class ConverterService extends Service<Boolean> {
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
 		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
 		
-		//For the done method
-		if (this.isRunning())
-			byPass = true;
-		else
-			byPass = false;
-		
 		//Restart the Service
-		this.restart();
+		restart();
 	}
 	
 	/**
@@ -74,19 +69,11 @@ public class ConverterService extends Service<Boolean> {
 	 */
 	private void done() {
 		
-		// Remove the unidirectional binding
-		xPlayerController.getFxLabel().textProperty().unbind();
-		xPlayerController.getRegionStackPane().visibleProperty().unbind();
-		xPlayerController.getRegionStackPane().setVisible(false);
+		//		// Remove the unidirectional binding
+		//		xPlayerController.getFxLabel().textProperty().unbind();
+		//		xPlayerController.getRegionStackPane().visibleProperty().unbind();
+		//		xPlayerController.getRegionStackPane().setVisible(false);
 		
-		//Using this variable in case this Service is restarted multiple times on row
-		if (!byPass)
-			
-			//If Succeeded
-			if (getValue())
-				xPlayerController.playSong(newFileAsbolutePath);
-			else
-				ActionTool.showNotification("Convert failed", "Couldn't convert given media to .mp3 ", Duration.seconds(2), NotificationType.WARNING);
 	}
 	
 	@Override
@@ -94,6 +81,7 @@ public class ConverterService extends Service<Boolean> {
 		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() throws Exception {
+				boolean succeeded = true;
 				
 				try {
 					
@@ -111,8 +99,8 @@ public class ConverterService extends Service<Boolean> {
 				//Create the media folder if not existing
 				String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
 				if (!ActionTool.createFileOrFolder(folderName, FileType.DIRECTORY)) {
-					System.out.println("Failed to create media folder");
-					return false;
+					ActionTool.showNotification("Internal Error", "Can't create Media Folder for converted files", Duration.seconds(4), NotificationType.WARNING);
+					succeeded = false;
 				}
 				
 				//New File Name
@@ -134,13 +122,17 @@ public class ConverterService extends Service<Boolean> {
 					new Encoder().encode(source, target, attrs);
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					return false;
+					succeeded = false;
 				}
-				
-				Thread.sleep(2000);
 				
 				//Set Message
 				super.updateMessage("Convert finished...");
+				
+				//Check if succeeded
+				if (succeeded)
+					Platform.runLater(() -> xPlayerController.playSong(newFileAsbolutePath));
+				else
+					ActionTool.showNotification("Convert failed", "Couldn't convert given media to .mp3 ", Duration.seconds(4), NotificationType.WARNING);
 				
 				return true;
 			}
