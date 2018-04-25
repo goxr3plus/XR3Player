@@ -103,12 +103,12 @@ public final class InfoTool {
 	//    private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = Stream.of("png", "jpg", "jpeg")
 	//	    .collect(Collectors.toCollection(HashSet::new))
 	//Java 7 Way and back
-	private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg"));
+	private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav"));
 	private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv"));
 	private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = new HashSet<>(Arrays.asList("png", "jpg", "jpeg", "gif"));
 	
 	private static final Set<String> POPULAR_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3", "wav", "ogg", "opus", "aac", "flac", "aiff", "au", "speex", "webm", "wma", "amr",
-			"ape", "awb", "dct", "dss", "dvf", "aa", "aax", "act", "m4a", "m4b", "m4p", "mpc", "msv", "oga", "mogg", "raw", "tta"));
+			"ape", "awb", "dct", "dss", "dvf", "aa", "aax", "act", "m4a", "m4b", "m4p", "mpc", "msv", "oga", "mogg", "raw", "tta","aifc","ac3","spx"));
 	private static final Set<String> POPULAR_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4", "flv", "avi", "wmv", "mov", "3gp"));
 	private static final Set<String> POPULAR_IMAGE_EXTENSIONS = new HashSet<>(
 			Arrays.asList("png", "jpg", "jpeg", "gif", "bmp", "exif", "tiff", "webp", "heif", "bat", "bpg", "svg"));

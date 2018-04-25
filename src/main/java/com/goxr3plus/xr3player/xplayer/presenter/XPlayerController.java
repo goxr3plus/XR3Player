@@ -300,7 +300,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label bugLabel;
 	
 	@FXML
-	private Label fxLabel;
+	private Label playerLoadingLabel;
 	
 	@FXML
 	private Label dragAndDropLabel;
@@ -431,10 +431,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					}
 					
 					//Check if this File is Supported by XR3Player 
-					if (!InfoTool.isAudioSupported(ftaap.getFileAbsolutePath())) {
-						ActionTool.showNotification("File not supported", "XR3Player doesn't supports the given File", Duration.millis(2000), NotificationType.INFORMATION);
-						return;
-					}
+//					if (!InfoTool.isAudioSupported(ftaap.getFileAbsolutePath())) {
+//						ActionTool.showNotification("File not supported", "XR3Player doesn't supports the given File", Duration.millis(2000), NotificationType.INFORMATION);
+//						return;
+//					}
 					
 					//Check if XPlayer is already active
 					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
@@ -924,7 +924,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	public Label getFxLabel() {
-		return fxLabel;
+		return playerLoadingLabel;
 	}
 	
 	/**
@@ -2000,6 +2000,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public Label getSmTimeSliderLabel() {
 		return smTimeSliderLabel;
+	}
+
+	/**
+	 * @return the playerLoadingLabel
+	 */
+	public Label getPlayerLoadingLabel() {
+		return playerLoadingLabel;
 	}
 	
 }

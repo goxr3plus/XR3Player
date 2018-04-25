@@ -359,5 +359,6 @@
 			<artifactId>icu4j</artifactId>
 			<version>61.1</version>
 		</dependency>
+		<!-- JAVE -->
 	</dependencies>
 </project>

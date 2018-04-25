@@ -49,6 +49,7 @@ Temporary Items
 # Ignore XR3Player folders
 /XR3Database
 /rubbishCode
+/localLibraries
 *.flac
 *.mp3
 /bin/

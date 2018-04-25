@@ -350,36 +350,42 @@ public final class ActionTool {
 	 */
 	public static void showNotification(String title , String text , Duration d , NotificationType notificationType , ImageView imageView) {
 		
-		//Check if it is JavaFX Application Thread
-		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> showNotification(title, text, d, notificationType, imageView));
-			return;
-		}
-		
-		Notifications notification1;
-		if (imageView == null)
-			notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition);
-		else
-			notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(imageView);
-		
-		switch (notificationType) {
-			case CONFIRM:
-				notification1.showConfirm();
-				break;
-			case ERROR:
-				notification1.showError();
-				break;
-			case INFORMATION:
-				notification1.showInformation();
-				break;
-			case SIMPLE:
-				notification1.show();
-				break;
-			case WARNING:
-				notification1.showWarning();
-				break;
-			default:
-				break;
+		try {
+			
+			//Check if it is JavaFX Application Thread
+			if (!Platform.isFxApplicationThread()) {
+				Platform.runLater(() -> showNotification(title, text, d, notificationType, imageView));
+				return;
+			}
+			
+			Notifications notification1;
+			if (imageView == null)
+				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition);
+			else
+				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(imageView);
+			
+			switch (notificationType) {
+				case CONFIRM:
+					notification1.showConfirm();
+					break;
+				case ERROR:
+					notification1.showError();
+					break;
+				case INFORMATION:
+					notification1.showInformation();
+					break;
+				case SIMPLE:
+					notification1.show();
+					break;
+				case WARNING:
+					notification1.showWarning();
+					break;
+				default:
+					break;
+			}
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
 	}

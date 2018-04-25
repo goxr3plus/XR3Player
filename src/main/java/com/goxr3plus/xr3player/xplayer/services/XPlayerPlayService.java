@@ -40,7 +40,8 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 */
 	private volatile boolean locked;
 	
-	private XPlayerController xPlayerController;
+	private final XPlayerController xPlayerController;
+	private final ConverterService converterService;
 	
 	/**
 	 * Constructor
@@ -49,6 +50,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 */
 	public XPlayerPlayService(XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
+		this.converterService = new ConverterService(xPlayerController);
 	}
 	
 	/**
@@ -59,14 +61,31 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * @param secondsToSkip
 	 */
 	public void startPlayService(String fileAbsolutePath , int secondsToSkip) {
+		//First Security Check
 		if (locked || isRunning() || fileAbsolutePath == null)
 			return;
 		
-		//Check if the file is a symbolic link and resolve it
-		
-		//Check if it is an Audio
-		if (!InfoTool.isAudioSupported(fileAbsolutePath))
+		//Test if the audioFile needs to be converted
+		if (!InfoTool.isAudioSupported(fileAbsolutePath)) {
+			
+			//If it is really an audio file
+			if (InfoTool.isAudio(fileAbsolutePath)) {
+				
+				//Show information to the user
+				ActionTool.showNotification("Audio not supported", "Current Audio format is not supported\n so it will automatically be converted into .mp3 and play :).",
+						Duration.seconds(4), NotificationType.INFORMATION);
+				
+				//Give it a convert
+				converterService.convert(fileAbsolutePath);
+				
+				return;
+			} else {
+				//Show information to the user
+				ActionTool.showNotification("No Audio File", "This file isn't supported at all", Duration.seconds(4), NotificationType.INFORMATION);
+			}
+			
 			return;
+		}
 		
 		// The path of the audio file
 		xPlayerController.getxPlayerModel().songPathProperty().set(fileAbsolutePath);
