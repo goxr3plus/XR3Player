@@ -28,7 +28,6 @@ public class ConverterService extends Service<Boolean> {
 	 */
 	private String fileAbsolutePath;
 	private String newFileAsbolutePath;
-	private boolean byPass = false;
 	
 	/**
 	 * The XPlayerController
