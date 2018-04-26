@@ -167,7 +167,7 @@ public class RenameWindow extends VBox {
 		//		window.setWidth(inputField.getWidth() + 50);
 		//	});
 		inputField.setOnAction(myHandler);
-		inputField.getStyleClass().add("special-text-field");
+		inputField.getStyleClass().add("dark-text-field");
 		
 		// okButton
 		okButton.setOnAction(myHandler);

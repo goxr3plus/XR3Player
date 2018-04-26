@@ -128,6 +128,8 @@ public class ConverterService extends Service<Boolean> {
 				//Set Message
 				super.updateMessage("Convert finished...");
 				
+				System.out.println("After the error");
+				
 				//Check if succeeded
 				if (succeeded)
 					Platform.runLater(() -> xPlayerController.playSong(newFileAsbolutePath));
