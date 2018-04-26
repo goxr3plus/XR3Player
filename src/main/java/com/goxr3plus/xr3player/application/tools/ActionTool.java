@@ -386,6 +386,7 @@ public final class ActionTool {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			showNotification(title, text, d, notificationType, imageView);
 		}
 		
 	}

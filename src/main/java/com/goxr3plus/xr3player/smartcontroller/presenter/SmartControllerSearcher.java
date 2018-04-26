@@ -109,10 +109,10 @@ public class SmartControllerSearcher extends HBox {
 	 * This method fires a search again based on currently given parameters
 	 */
 	public void reSearch() {
-		if (smartController.isFree(false)) {
-			saveSettingsBeforeSearch();
-			service.search();
-		}
+		if (!smartController.isFree(false))
+			return;
+		saveSettingsBeforeSearch();
+		service.search();
 	}
 	
 	/**

@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 
 import org.controlsfx.control.textfield.TextFields;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -24,7 +26,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -51,10 +52,10 @@ public class RenameWindow extends VBox {
 	private Label charsField;
 	
 	@FXML
-	private Button okButton;
+	private JFXButton okButton;
 	
 	@FXML
-	private Button closeButton;
+	private JFXButton closeButton;
 	
 	// ----------------
 	
@@ -166,6 +167,7 @@ public class RenameWindow extends VBox {
 		//		window.setWidth(inputField.getWidth() + 50);
 		//	});
 		inputField.setOnAction(myHandler);
+		inputField.getStyleClass().add("special-text-field");
 		
 		// okButton
 		okButton.setOnAction(myHandler);
