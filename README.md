@@ -14,9 +14,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/goxr3plus/XR3Player.svg)](https://github.com//goxr3plus/XR3Player/issues)
 ### Videos
 
-| Update 99 with installers  | Awesome Tutorial |
+| V.100 | Awesome Tutorial |
 |:-:|:-:|
-| [![First](http://img.youtube.com/vi/MCcDs27NESY/0.jpg)](https://www.youtube.com/watch?v=MCcDs27NESY)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
+| [![First](http://img.youtube.com/vi/MEBue5LhXCI/0.jpg)](https://www.youtube.com/watch?v=MEBue5LhXCI)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
 
 ### Screenshots
 
@@ -27,10 +27,6 @@
 | DJ Mode | Web Browser 
 |:-:|:-:|
 | ![First](https://user-images.githubusercontent.com/20374208/38458114-cb7e3140-3aa2-11e8-92ff-2cbb5ae21969.png) | ![Sec](https://user-images.githubusercontent.com/20374208/37551127-97cb65ea-29a2-11e8-8bad-37a459255cbc.png) |
-
-| Dropbox Access | Amazing Visualizations
-|:-:|:-:|
-| ![dropbox support](https://user-images.githubusercontent.com/20374208/33642286-f244c526-da41-11e7-95ff-45f8af06b857.png) | [![Visualizations](http://img.youtube.com/vi/y16A6jzuaNo/0.jpg)](https://www.youtube.com/watch?v=y16A6jzuaNo) |
 
 
 -------------------------------------------------------------------------------------
