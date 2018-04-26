@@ -852,7 +852,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * Opens a FileChooser so the user can select a song File
 	 */
 	public void openFileChooser() {
-		File file = Main.specialChooser.selectSongFile(Main.window);
+		File file = Main.specialChooser.selectSongFile2(Main.window);
 		if (file != null)
 			playSong(file.getAbsolutePath());
 	}

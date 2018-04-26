@@ -2,10 +2,12 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -37,6 +39,8 @@ public class FileAndFolderChooser {
 	private FileChooser mediaFileChooser = new FileChooser();
 	private FileChooser imageFileChooser = new FileChooser();
 	
+	private final ExtensionFilter audioFilter;
+	
 	/**
 	 * Constructor
 	 */
@@ -45,15 +49,17 @@ public class FileAndFolderChooser {
 		databaseFolderChooser.initialDirectoryProperty().bindBidirectional(lastKnownDBDirectoryProperty);
 		mediaFileChooser.initialDirectoryProperty().bindBidirectional(lastKnownMediaDirectoryProperty);
 		imageFileChooser.initialDirectoryProperty().bindBidirectional(lastKnownImageDirectoryProperty);
+		
+		//Special Audio Files Filter
+		audioFilter = new FileChooser.ExtensionFilter("Audio Files", InfoTool.POPULAR_AUDIO_EXTENSIONS_LIST.stream().map(m -> "*." + m).collect(Collectors.toList()));
 	}
 	
 	// -----------------------------------------------------------------------------------------------------------------/
 	/**
-	 * Show the dialog to connectedUser to select the dataBase that wants to
-	 * import.
+	 * Show the dialog to connectedUser to select the dataBase that wants to import.
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @return the file
 	 */
 	public File selectDBFile(Stage window) {
@@ -74,7 +80,7 @@ public class FileAndFolderChooser {
 	 * Prepare to export dbManager.
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @return the file
 	 */
 	public File exportDBFile(Stage window) {
@@ -92,11 +98,10 @@ public class FileAndFolderChooser {
 	}
 	
 	/**
-	 * Show's a dialog that allows user to select any directory from the
-	 * operating system
+	 * Show's a dialog that allows user to select any directory from the operating system
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @return the file
 	 */
 	public File selectFolder(Stage window) {
@@ -116,7 +121,7 @@ public class FileAndFolderChooser {
 	 * Prepares to save an ImageFile
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @param imagePath
 	 * @return the file
 	 */
@@ -138,13 +143,12 @@ public class FileAndFolderChooser {
 	 * Prepares to select an image.
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @return The Selected Image or Null if nothing is selected
 	 */
 	public File prepareToSelectImage(Stage window) {
 		imageFileChooser.getExtensionFilters().clear();
-		imageFileChooser.getExtensionFilters()
-				.addAll(new FileChooser.ExtensionFilter("All Images", new String[]{ "*.png" , "*.jpg" , "*.jpeg" , "*.gif" }));
+		imageFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", new String[]{ "*.png" , "*.jpg" , "*.jpeg" , "*.gif" }));
 		imageFileChooser.setTitle("Choose an Image");
 		File file = imageFileChooser.showOpenDialog(window);
 		if (file != null) {
@@ -161,7 +165,7 @@ public class FileAndFolderChooser {
 	 * Prepares to import multiple Song Files and Folders.
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @return the list
 	 */
 	public List<File> prepareToImportSongFiles(Stage window) {
@@ -184,9 +188,29 @@ public class FileAndFolderChooser {
 	 * @param window
 	 * @return The Selected file from the User
 	 */
-	public File selectSongFile(Stage window) {
+	//	public File selectSongFile(Stage window) {
+	//		mediaFileChooser.getExtensionFilters().clear();
+	//		mediaFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
+	//		mediaFileChooser.setTitle("Choose Media File");
+	//		File file = mediaFileChooser.showOpenDialog(window);
+	//		if (file != null) {
+	//			// Set the property to the directory of the chosenFile so the
+	//			// fileChooser will open here next
+	//			lastKnownMediaDirectoryProperty.setValue(file.getParentFile());
+	//		}
+	//		return file;
+	//	}
+	
+	/**
+	 * Shows the default FileExplorer so the user can select a song File.
+	 * 
+	 * @param window
+	 * @return The Selected file from the User
+	 */
+	public File selectSongFile2(Stage window) {
+		
 		mediaFileChooser.getExtensionFilters().clear();
-		mediaFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
+		mediaFileChooser.getExtensionFilters().addAll(audioFilter);
 		mediaFileChooser.setTitle("Choose Media File");
 		File file = mediaFileChooser.showOpenDialog(window);
 		if (file != null) {
@@ -214,7 +238,7 @@ public class FileAndFolderChooser {
 	 * Open a dialog that allows user to select a directory.
 	 *
 	 * @param window
-	 *        the window
+	 *            the window
 	 * @return the file
 	 */
 	//    public File chooseDirectory(Stage window) {
