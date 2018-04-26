@@ -12,11 +12,6 @@
 [![Total Downloads](https://img.shields.io/github/downloads/goxr3plus/XR3Player/total.svg)](https://github.com/goxr3plus/XR3Player/releases)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![GitHub issues](https://img.shields.io/github/issues/goxr3plus/XR3Player.svg)](https://github.com//goxr3plus/XR3Player/issues)
-### Videos
-
-| V.100 | Awesome Tutorial |
-|:-:|:-:|
-| [![First](http://img.youtube.com/vi/MEBue5LhXCI/0.jpg)](https://www.youtube.com/watch?v=MEBue5LhXCI)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
 
 ### Screenshots
 
@@ -28,6 +23,11 @@
 |:-:|:-:|
 | ![First](https://user-images.githubusercontent.com/20374208/38458114-cb7e3140-3aa2-11e8-92ff-2cbb5ae21969.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39334178-4c29e042-49b6-11e8-97cf-6922ecf3da8d.png) |
 
+### Videos
+
+| V.100 | Awesome Tutorial |
+|:-:|:-:|
+| [![First](http://img.youtube.com/vi/MEBue5LhXCI/0.jpg)](https://www.youtube.com/watch?v=MEBue5LhXCI)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
 
 -------------------------------------------------------------------------------------
 
