@@ -12,10 +12,10 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.json.simple.DeserializationException;
-import org.json.simple.JsonArray;
-import org.json.simple.JsonObject;
-import org.json.simple.Jsoner;
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonException;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsoner;
 
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -210,7 +210,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 									user.getUserInformationDb().updateProperty("Last-Opened-Library", lastOpenedLibrary);
 								}
 								
-							} catch (IOException | DeserializationException e) {
+							} catch (IOException | JsonException e) {
 								e.printStackTrace();
 								//  logger.severe("SettingsWindowController - exception: " + e); //$NON-NLS-1$
 							}
