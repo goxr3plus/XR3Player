@@ -73,29 +73,26 @@
   </p>
 </details>
 
-## Building
+# How to fork and support this project
 
 To build XR3Player, you will need:
 
 * [JDK 9+]
-* [Maven](http://maven.apache.org/) - Version 3.5 recommended
+* [Maven](http://maven.apache.org/) - Version 3.5.3++ recommended
 
-After installing these tools simply run 'mvn clean package' and find the jar in the target folder.
+There is are some dependencies that are not on Maven Central ( you can find those .jars on the folder called **localLibraries**) :
 
-Other Useful maven lifecycles:
+**JAVE** and **javasysmon(for it i created a repository on github so don't worry)**
 
-* clean - remove binaries, docs and temporary build files
-* compile - compile the library
-* package - package compiled code into a jar
+For them [follow this tutorial to add them to your Local Maven Repository](https://www.mkyong.com/maven/how-to-include-library-manully-into-maven-local-repository/) 
 
-## Contributing
+For example in my computer i do the following :
 
-If you have added a feature or fixed a bug in XR3Player please submit a pull request as follows:
+> mvn install:install-file -Dfile=D:\GitHub\XR3Player\localLibraries\jave-1.0.2.jar -DgroupId=it.sauronsoftware.jave -DartifactId=jave -Dversion=1.0.2 -Dpackaging=jar
 
-* Fork the project
-* Write the code for your feature or bug fix
-* Commit and do not mess with version or history
-* Submit a pull request
+---
+
+Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with Java 9
 
 ## About JxBrowser
 
@@ -104,6 +101,7 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 
 
 ## Specs / Open-source libraries:
+
 
 - [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond .
 - [**JFoenix**](http://www.jfoenix.com/)  JavaFX Material Design Library .
@@ -115,10 +113,10 @@ If you have added a feature or fixed a bug in XR3Player please submit a pull req
 - [**Commons-Validator**](https://commons.apache.org/proper/commons-validator/) A common issue when receiving data either electronically or from user input is verifying the integrity of the data. This work is repetitive and becomes even more complicated when different sets of validation rules need to be applied to the same set of data based on locale. Error messages may also vary by locale. This package addresses some of these issues to speed development and maintenance of validation rules.
 - [**EasyBind**](https://github.com/TomasMikula/EasyBind) EasyBind leverages lambdas to reduce boilerplate when creating custom bindings, provides a type-safe alternative to Bindings.select* methods (inspired by Anton Nashatyrev's feature request, planned for JavaFX 9) and adds monadic operations to ObservableValue.
 - [**JSoup**](https://jsoup.org/) Java library for working with real-world HTML. It provides a very convenient API for extracting and manipulating data, using the best of DOM, CSS, and jquery-like methods.
-- [**JSON-Simple**](json-simple) Java 7+ toolkit to quickly develop RFC 4627 JSON compatible applications
+- [**JSON-Simple**](https://github.com/cliftonlabs/json-simple) Java 7+ toolkit to quickly develop RFC 4627 JSON compatible applications
 - [**Java-Google-Speech-API**](https://github.com/goxr3plus/java-google-speech-api) J.A.R.V.I.S. Java Speech API: Just A Reliable Vocal Interpreter & Synthesizer. This is a project for the Java Speech API. The program interprets vocal inputs into text and synthesizes voices from text input. The program supports dozens of languages and even has the ability to auto-detect languages!
 - [**JAudioTagger**](http://www.jthink.net/jaudiotagger/) Jaudiotagger is the Audio Tagging library used by Jaikoz for tagging data in Audio files.
 - [**Java-Stream-Player**](https://github.com/goxr3plus/java-stream-player) Java Advanced Audio Controller Library (WAV, AU, AIFF, MP3, OGG VORBIS, FLAC, MONKEY's AUDIO and SPEEX audio formats ).
 - [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
-  
+- [**JAVE**](http://www.sauronsoftware.it/projects/jave/)The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project
