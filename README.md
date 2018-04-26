@@ -73,29 +73,30 @@
   </p>
 </details>
 
-## Building
+# How to fork and support this project
 
 To build XR3Player, you will need:
 
 * [JDK 9+]
-* [Maven](http://maven.apache.org/) - Version 3.5 recommended
+* [Maven](http://maven.apache.org/) - Version 3.5.3++ recommended
+
+There is are some dependencies that are not on Maven Central ( you can find those .jars on the folder called **localLibraries**) :
+
+**JAVE** and **javasysmon(for it i created a repository on github so don't worry)**
+
+For them [follow this tutorial to add them to your Local Maven Repository](https://www.mkyong.com/maven/how-to-include-library-manully-into-maven-local-repository/) 
+
+For example in my computer i do the following :
+
+> mvn install:install-file -Dfile=D:\GitHub\XR3Player\localLibraries\jave-1.0.2.jar -DgroupId=it.sauronsoftware.jave -DartifactId=jave -Dversion=1.0.2 -Dpackaging=jar
+
+---
 
 After installing these tools simply run 'mvn clean package' and find the jar in the target folder.
 
-Other Useful maven lifecycles:
+# To build the project
 
-* clean - remove binaries, docs and temporary build files
-* compile - compile the library
-* package - package compiled code into a jar
-
-## Contributing
-
-If you have added a feature or fixed a bug in XR3Player please submit a pull request as follows:
-
-* Fork the project
-* Write the code for your feature or bug fix
-* Commit and do not mess with version or history
-* Submit a pull request
+Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with Java 9
 
 ## About JxBrowser
 
