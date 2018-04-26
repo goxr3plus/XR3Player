@@ -33,7 +33,8 @@
 
 ## Features
 - **App**
-  - Support fully .mp3,.wav files
+  - Support fully .mp3
+  - Support almost all audio formats through smart converting
   - Chromium Web Browser
   - Full Dropbox access
   - Multiple User Accounts
