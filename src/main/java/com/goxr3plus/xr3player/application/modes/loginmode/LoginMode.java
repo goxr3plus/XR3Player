@@ -66,6 +66,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode.Viewer;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.UsersInfoLoader;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
@@ -86,116 +87,117 @@ public class LoginMode extends BorderPane {
 	
 	//-------------------------------------
 	
-	@FXML
-	private Hyperlink youtubeTutorialsHyperLink;
-	
-	@FXML
-	private Hyperlink visitCreatorHyperLink;
-	
-	@FXML
-	private VBox downloadsVBox;
-	
-	@FXML
-	private Label sourceForgeDownloadsLabel1;
-	
-	@FXML
-	private Label sourceForgeDownloadsLabel;
-	
-	@FXML
-	private Label gitHubDownloadsLabel;
-	
-	@FXML
-	private Label xr3PlayerLabel;
-	
-	@FXML
-	private Button restartButton;
-	
-	@FXML
-	private Button minimize;
-	
-	@FXML
-	private Button maxOrNormalize;
-	
-	@FXML
-	private Button exitApplication;
-	
-	@FXML
-	private MenuItem chooseBackground;
-	
-	@FXML
-	private MenuItem resetBackground;
-	
-	@FXML
-	private StackPane centerStackPane;
-	
-	@FXML
-	private SplitPane splitPane;
-	
-	@FXML
-	private BorderPane borderPane;
-	
-	@FXML
-	private StackPane usersStackView;
-	
-	@FXML
-	private ScrollBar horizontalScrollBar;
-	
-	@FXML
-	private Label quickSearchTextField;
-	
-	@FXML
-	private GridPane topGrid;
-	
-	@FXML
-	private JFXToggleButton selectionModeToggle;
-	
-	@FXML
-	private ToolBar userToolBar;
-	
-	@FXML
-	private Button deleteUser;
-	
-	@FXML
-	private Button renameUser;
-	
-	@FXML
-	private Button loginButton;
-	
-	@FXML
-	private JFXButton previous;
-	
-	@FXML
-	private JFXButton createUser;
-	
-	@FXML
-	private JFXButton next;
-	
-	@FXML
-	private Button openUserContextMenu;
-	
-	@FXML
-	private ColorPicker colorPicker;
-	
-	@FXML
-	private Label usersInfoLabel;
-	
-	@FXML
-	private HBox botttomHBox;
-	
-	@FXML
-	private Button createFirstUser;
-	
-	@FXML
-	private PieChart librariesPieChart;
-	
-	@FXML
-	private Button importDatabase;
-	
-	@FXML
-	private Button exportDatabase;
-	
-	@FXML
-	private Button deleteDatabase;
+    @FXML
+    private Hyperlink youtubeTutorialsHyperLink;
+
+    @FXML
+    private Hyperlink visitCreatorHyperLink;
+
+    @FXML
+    private VBox downloadsVBox;
+
+    @FXML
+    private Label sourceForgeDownloadsLabel1;
+
+    @FXML
+    private Label sourceForgeDownloadsLabel;
+
+    @FXML
+    private Label gitHubDownloadsLabel;
+
+    @FXML
+    private Label xr3PlayerLabel;
+
+    @FXML
+    private JFXButton restartButton;
+
+    @FXML
+    private JFXButton minimize;
+
+    @FXML
+    private JFXButton maxOrNormalize;
+
+    @FXML
+    private JFXButton exitApplication;
+
+    @FXML
+    private MenuItem chooseBackground;
+
+    @FXML
+    private MenuItem resetBackground;
+
+    @FXML
+    private StackPane centerStackPane;
+
+    @FXML
+    private SplitPane splitPane;
+
+    @FXML
+    private BorderPane borderPane;
+
+    @FXML
+    private StackPane usersStackView;
+
+    @FXML
+    private ScrollBar horizontalScrollBar;
+
+    @FXML
+    private Label quickSearchTextField;
+
+    @FXML
+    private GridPane topGrid;
+
+    @FXML
+    private JFXToggleButton selectionModeToggle;
+
+    @FXML
+    private ToolBar userToolBar;
+
+    @FXML
+    private Button deleteUser;
+
+    @FXML
+    private Button renameUser;
+
+    @FXML
+    private Button loginButton;
+
+    @FXML
+    private JFXButton previous;
+
+    @FXML
+    private JFXButton createUser;
+
+    @FXML
+    private JFXButton next;
+
+    @FXML
+    private Button openUserContextMenu;
+
+    @FXML
+    private ColorPicker colorPicker;
+
+    @FXML
+    private Label usersInfoLabel;
+
+    @FXML
+    private HBox botttomHBox;
+
+    @FXML
+    private Button createFirstUser;
+
+    @FXML
+    private PieChart librariesPieChart;
+
+    @FXML
+    private Button importDatabase;
+
+    @FXML
+    private Button exportDatabase;
+
+    @FXML
+    private Button deleteDatabase;
+
 	
 	// --------------------------------------------
 	

@@ -218,6 +218,10 @@ public class BottomBar extends BorderPane {
 		return keyBindings;
 	}
 	
+	public JFXToggleButton getShowHideSideBar() {
+		return showHideSideBar;
+	}
+	
 	/**
 	 * @return the speechRecognitionToggle
 	 */

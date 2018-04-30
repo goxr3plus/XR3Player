@@ -28,7 +28,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: rgb(20,20,20,0.85); -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
@@ -127,51 +127,33 @@
                <children>
                   <HBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="restartButton" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="R">
-                           <tooltip>
-                              <Tooltip text="Restart" />
-                           </tooltip>
+                        <JFXButton fx:id="restartButton" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" text="R">
                            <font>
-                              <Font size="9.0" />
+                              <Font size="8.0" />
                            </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="minimize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="-">
-                           <tooltip>
-                              <Tooltip text="Minimize" />
-                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="minimize" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" text="-">
                            <font>
-                              <Font size="9.0" />
+                              <Font size="8.0" />
                            </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="maxOrNormalize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="25.0" styleClass="windowButton" text="+">
-                           <tooltip>
-                              <Tooltip text="Maximize/Normalize" />
-                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="maxOrNormalize" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" text="+">
                            <font>
-                              <Font size="9.0" />
+                              <Font size="8.0" />
                            </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="exitApplication" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" styleClass="windowButton" text="X">
-                           <tooltip>
-                              <Tooltip text="Close" />
-                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="exitApplication" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" text="X">
                            <font>
-                              <Font size="9.0" />
+                              <Font size="8.0" />
                            </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
+                        </JFXButton>
                      </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
                   </HBox>
                   <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Background">
                     <items>

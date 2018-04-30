@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -34,16 +35,16 @@ public class TopBar extends BorderPane {
 	// ----------------------------------------------
 	
 	@FXML
-	private Button restartButton;
+	private JFXButton restartButton;
 	
 	@FXML
-	private Button minimize;
+	private JFXButton minimize;
 	
 	@FXML
-	private Button maxOrNormalize;
+	private JFXButton maxOrNormalize;
 	
 	@FXML
-	private Button exitApplication;
+	private JFXButton exitApplication;
 	
 	@FXML
 	private MenuItem chooseBackground;
@@ -58,6 +59,9 @@ public class TopBar extends BorderPane {
 	private ImageView highSpeed;
 	
 	@FXML
+	private JFXButton showHideSideBar;
+	
+	@FXML
 	private JFXTabPane jfxTabPane;
 	
 	@FXML
@@ -67,13 +71,13 @@ public class TopBar extends BorderPane {
 	private Tab djModeTab;
 	
 	@FXML
-	private Tab moviesModeTab;
-	
-	@FXML
 	private Tab userModeTab;
 	
 	@FXML
 	private Tab webModeTab;
+	
+	@FXML
+	private Tab moviesModeTab;
 	
 	// ----------------------------------------------
 	
@@ -286,6 +290,11 @@ public class TopBar extends BorderPane {
 		});
 		
 		//----------------------------END: TABS---------------------------------
+		
+		//showHideSideBar
+		showHideSideBar.setOnAction(a -> {
+			Main.bottomBar.getShowHideSideBar().setSelected(!Main.bottomBar.getShowHideSideBar().isSelected());
+		});
 		
 	}
 	
