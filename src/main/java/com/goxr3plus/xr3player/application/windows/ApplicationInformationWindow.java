@@ -10,10 +10,11 @@ import java.util.logging.Logger;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -41,13 +42,13 @@ public class ApplicationInformationWindow extends BorderPane {
 	private InlineCssTextArea cssTextArea;
 	
 	@FXML
-	private Button close;
+	private JFXButton reportBug;
 	
 	@FXML
-	private Button visitWebsite;
+	private JFXButton visitWebsite;
 	
 	@FXML
-	private Button reportBug;
+	private JFXButton close;
 	
 	// -------------------------------------------------------------
 	/** The logger. */
@@ -97,84 +98,90 @@ public class ApplicationInformationWindow extends BorderPane {
 		centerVBox.getChildren().remove(cssTextArea);
 		centerVBox.getChildren().add(0, vsPane);
 		
+		// --Style
+		String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;";
+		
 		// Information - Copyright
 		String text = "A cross platform Java/JavaFX Media Player\n";
 		cssTextArea.appendText(text);
 		
 		text = "Copyright (C) <2015-2350>  (www.goxr3plus.co.nf) . All rights reserved.\n\n";
 		cssTextArea.appendText(text);
-		
-		// --Style
-		String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:black;";
+		cssTextArea.setStyle(0, cssTextArea.getLength() - 1, style);
 		
 		// Author-Version-Release Date-Home Page
 		text = "Author :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
 		cssTextArea.appendText("GOXR3Plus Studio\n");
 		
 		text = "Version :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
 		cssTextArea.appendText(Main.internalInformation.get("Version") + "\n");
 		
 		text = "Release Date :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
 		cssTextArea.appendText(Main.internalInformation.get("ReleasedDate") + "\n");
 		
 		text = "Home Page :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
 		cssTextArea.appendText("https://sourceforge.net/projects/xr3player\n\n");
 		
+		String style2 = style.replace("white", "green");
 		// Java Version - Java Vendor - Java Home
 		text = "Java Version :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "green"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style2);
 		cssTextArea.appendText(System.getProperty("java.version") + "\n");
 		
 		text = "Java Vendor :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "green"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style2);
 		cssTextArea.appendText(System.getProperty("java.vendor") + "\n");
 		
 		text = "Java Home :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "green"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style2);
 		cssTextArea.appendText(System.getProperty("java.home") + "\n\n");
 		
+		String style3 = style.replace("white", "orange");
 		// OS Name - Os Architecture - Os Version
 		text = "Os Name :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "orange"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style3);
 		cssTextArea.appendText(System.getProperty("os.name") + "\n");
 		
 		text = "Os Arch :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "orange"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style3);
 		cssTextArea.appendText(System.getProperty("os.arch") + "\n");
 		
 		text = "Os Version :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "orange"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style3);
 		cssTextArea.appendText(System.getProperty("os.version") + "\n\n");
 		
+		String style4 = style.replace("white", "firebrick");
 		// User Name - User Home - User directory
 		text = "User Name :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "firebrick"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style4);
 		cssTextArea.appendText(System.getProperty("user.name") + "\n");
 		
 		text = "User Home :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "firebrick"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style4);
 		cssTextArea.appendText(System.getProperty("user.home") + "\n");
 		
 		text = "User Dir :\t";
 		cssTextArea.appendText(text);
-		cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style.replace("black", "firebrick"));
+		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style4);
 		cssTextArea.appendText(InfoTool.getBasePathForClass(Main.class) + "\n");
+		
+		cssTextArea.setStyle(0, cssTextArea.getLength() - 1, style);
 		
 		// --close
 		close.setOnAction(a -> window.close());
