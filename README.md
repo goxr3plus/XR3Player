@@ -1,6 +1,6 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player 
 
-> Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.100/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
+> Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.101/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
