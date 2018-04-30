@@ -806,6 +806,22 @@
     -fx-cursor:hand;
 }
 
+.jfx-button2:armed,
+.jfx-button2:hover,
+.jfx-button2:focused{
+    -fx-background-color:rgb(0,0,0,0.8);
+    -fx-text-fill:black;
+}
+
+.jfx-button2 {
+    -fx-background-color:rgb(0,0,0,0.4);
+    -fx-background-radius: 0.0px;
+    -fx-background-insets: 0.0px;
+    -fx-cursor:hand;
+}
+
+
+
  
  
  /**About SongButton  ----------------------------------------*/

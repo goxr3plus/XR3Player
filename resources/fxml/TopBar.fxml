@@ -102,7 +102,7 @@
    <left>
       <HBox alignment="CENTER" minWidth="0.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="showHideSideBar" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" ">
+            <JFXButton fx:id="showHideSideBar" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button2" text=" ">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
