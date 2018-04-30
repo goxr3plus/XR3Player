@@ -12,12 +12,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<fx:root prefHeight="30.0" prefWidth="1138.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="30.0" prefWidth="1138.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton minHeight="-Infinity" mnemonicParsing="false" popupSide="TOP" prefHeight="24.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings">
+            <MenuButton focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" popupSide="TOP" prefHeight="0.0" prefWidth="0.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings" visible="false">
                <items>
                   <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -43,17 +42,6 @@
                   </ImageView>
                </graphic>
             </MenuButton>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <padding>
-                  <Insets left="4.0" right="4.0" />
-               </padding>
-               <tooltip>
-                  <Tooltip text="Can application connect to internet" />
-               </tooltip>
-            </Label>
             <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
