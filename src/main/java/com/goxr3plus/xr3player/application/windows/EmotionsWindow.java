@@ -5,6 +5,8 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -36,6 +38,9 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class EmotionsWindow extends BorderPane {
 	
 	@FXML
+	private Label titleLabel;
+	
+	@FXML
 	private Button hate;
 	
 	@FXML
@@ -51,13 +56,7 @@ public class EmotionsWindow extends BorderPane {
 	private Button love;
 	
 	@FXML
-	private Label emotionLabel;
-	
-	@FXML
-	private Label titleLabel;
-	
-	@FXML
-	private Button close;
+	private JFXButton close;
 	
 	// ----------------     
 	
@@ -142,23 +141,23 @@ public class EmotionsWindow extends BorderPane {
 		
 		hate.setOnMouseEntered(m -> {
 			emotion = Emotion.HATE;
-			emotionLabel.setText(emotion.toString());
+			//emotionLabel.setText(emotion.toString());
 		});
 		dislike.setOnMouseEntered(m -> {
 			emotion = Emotion.DISLIKE;
-			emotionLabel.setText(emotion.toString());
+			//emotionLabel.setText(emotion.toString());
 		});
 		neutral.setOnMouseEntered(m -> {
 			emotion = Emotion.NEUTRAL;
-			emotionLabel.setText(emotion.toString());
+			//emotionLabel.setText(emotion.toString());
 		});
 		like.setOnMouseEntered(m -> {
 			emotion = Emotion.LIKE;
-			emotionLabel.setText(emotion.toString());
+			//emotionLabel.setText(emotion.toString());
 		});
 		love.setOnMouseEntered(m -> {
 			emotion = Emotion.LOVE;
-			emotionLabel.setText(emotion.toString());
+			//emotionLabel.setText(emotion.toString());
 		});
 		
 		//== close
@@ -239,7 +238,7 @@ public class EmotionsWindow extends BorderPane {
 		}
 		
 		//Set default label text
-		emotionLabel.setText("?");
+		//emotionLabel.setText("?");
 	}
 	
 	/**

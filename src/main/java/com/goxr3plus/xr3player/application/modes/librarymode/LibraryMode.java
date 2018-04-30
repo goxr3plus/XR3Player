@@ -312,7 +312,7 @@ public class LibraryMode extends BorderPane {
 		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
 		
 		// newLibrary
-		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary, true));
+		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary.getGraphic(), true));
 		createFirstLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
