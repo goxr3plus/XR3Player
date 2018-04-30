@@ -370,7 +370,7 @@ public class WebBrowserTabController extends StackPane {
 			closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
 			closeButton.setOnAction(a -> this.webBrowserController.removeTab(tab));
 			
-			//X Button
+			//Audio Button
 			audioButton = new JFXButton("");
 			audioButton.setVisible(false);
 			audioButton.setFocusTraversable(false);

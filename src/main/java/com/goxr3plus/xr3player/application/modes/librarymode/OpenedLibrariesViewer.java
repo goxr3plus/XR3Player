@@ -272,6 +272,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		
 		//X Button
 		JFXButton closeButton = new JFXButton("X");
+		closeButton.setFocusTraversable(false);
 		int maxSize = 25;
 		closeButton.setMinSize(maxSize, maxSize);
 		closeButton.setPrefSize(maxSize, maxSize);
@@ -293,7 +294,8 @@ public class OpenedLibrariesViewer extends StackPane {
 		
 		// HBOX
 		HBox hBox = new HBox();
-		hBox.setStyle("-fx-background-color:#000000;");
+		hBox.setStyle("-fx-background-color:#101010;");
+		hBox.setAlignment(Pos.CENTER);
 		hBox.setOnMouseClicked(m -> {
 			if (m.getButton() == MouseButton.MIDDLE)
 				removeTab(tab);
