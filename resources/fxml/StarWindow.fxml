@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root prefHeight="101.0" prefWidth="406.0" styleClass="starWindow" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="101.0" prefWidth="406.0" styleClass="starWindow" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="-Infinity" prefWidth="244.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="0.0" prefWidth="82.0" />
@@ -25,35 +24,7 @@
       <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="ok" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-         <tooltip>
-            <Tooltip text="Save+Close" />
-         </tooltip>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <GridPane.margin>
-            <Insets left="5.0" right="5.0" />
-         </GridPane.margin></Button>
       <Canvas fx:id="canvas" height="33.0" style="-fx-cursor: hand;" width="160.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button fx:id="close" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-         <tooltip>
-            <Tooltip text="Cancel" />
-         </tooltip>
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@../image/x.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <GridPane.margin>
-            <Insets left="5.0" right="5.0" />
-         </GridPane.margin>
-      </Button>
       <Label fx:id="starsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: transparent;" styleClass="applicationSettingsLabel2" text="Perfect!" GridPane.columnSpan="3" GridPane.rowIndex="2" />
       <HBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="3">
          <padding>
@@ -70,6 +41,36 @@
             </Label>
          </children>
       </HBox>
+      <JFXButton fx:id="ok" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/check.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Okay" />
+         </tooltip>
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin>
+      </JFXButton>
+      <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/x-button.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Cancel" />
+         </tooltip>
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin>
+      </JFXButton>
    </children>
    <padding>
       <Insets bottom="2.0" left="2.0" />

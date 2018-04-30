@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -108,6 +109,10 @@ public class EmotionsWindow extends BorderPane {
 		window.setScene(new Scene(this, Color.TRANSPARENT));
 		window.focusedProperty().addListener((observable , oldValue , newValue) -> {
 			if (!newValue && window.isShowing())// && Main.renameWindow.getTimeLine().getStatus() != Status.RUNNING && Main.starWindow.getTimeLine().getStatus() != Status.RUNNING)
+				close(false);
+		});
+		window.getScene().setOnKeyReleased(key -> {
+			if (key.getCode() == KeyCode.ESCAPE)
 				close(false);
 		});
 	}
@@ -223,8 +228,8 @@ public class EmotionsWindow extends BorderPane {
 			
 			//------------Animation------------------
 			//Y axis
-			double yIni = y + 50;
-			double yEnd = y;
+			double yIni = y - getHeight() - 50;
+			double yEnd = y - getHeight() / 2 - 10;
 			window.setY(yIni);
 			
 			//Create  Double Property

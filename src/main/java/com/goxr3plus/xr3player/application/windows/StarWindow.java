@@ -5,6 +5,8 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -18,7 +20,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -38,19 +39,19 @@ public class StarWindow extends GridPane {
 	//--------------------------------
 	
 	@FXML
-	private Button ok;
-	
-	@FXML
 	private Canvas canvas;
-	
-	@FXML
-	private Button close;
 	
 	@FXML
 	private Label starsLabel;
 	
 	@FXML
 	private Label titleLabel;
+	
+	@FXML
+	private JFXButton ok;
+	
+	@FXML
+	private JFXButton close;
 	
 	//-------------------------------------
 	
@@ -278,9 +279,10 @@ public class StarWindow extends GridPane {
 			
 			//------------Animation------------------
 			//Y axis
-			double yIni = y + 50;
-			double yEnd = y;
+			double yIni = y - getHeight() - 50;
+			double yEnd = y - getHeight() / 2 - 10;
 			window.setY(yIni);
+			window.setX(x - 20);
 			
 			//Create  Double Property
 			final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
