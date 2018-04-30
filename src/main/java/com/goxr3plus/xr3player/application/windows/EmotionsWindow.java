@@ -229,8 +229,9 @@ public class EmotionsWindow extends BorderPane {
 			//------------Animation------------------
 			//Y axis
 			double yIni = y - getHeight() - 50;
-			double yEnd = y - getHeight() / 2 - 10;
+			double yEnd = y - getHeight() / 2 - 15;
 			window.setY(yIni);
+			window.setX(x-80);
 			
 			//Create  Double Property
 			final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
