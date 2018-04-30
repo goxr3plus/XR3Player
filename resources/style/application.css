@@ -448,9 +448,20 @@
   -fx-border-color:white transparent transparent transparent;
 }
 
- .dialog-pane .button{
-   -fx-cursor:hand;
- }
+ 
+ .dialog-pane .button:armed,
+.dialog-pane .button:hover,
+.dialog-pane .button:focused{
+    -fx-background-color:rgb(255.0,255.0,255.0,0.9);
+    -fx-text-fill:black;
+}
+
+.dialog-pane .button {
+    -fx-background-color:rgb(255.0,255.0,255.0,0.4);
+    -fx-background-radius: 0.0px;
+    -fx-background-insets: 0.0px;
+    -fx-cursor:hand;
+}
 
 /* .dialog-pane .button:hover{   
 	-fx-background-color:rgb(255.0,119.0,0.0,0.7);

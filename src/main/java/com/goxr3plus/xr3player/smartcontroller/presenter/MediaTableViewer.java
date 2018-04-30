@@ -279,10 +279,10 @@ public class MediaTableViewer extends StackPane {
 			Label placeHolderLabel = new Label();
 			
 			if (smartController.getGenre() == Genre.LIBRARYMEDIA) {
-				placeHolderLabel.setText("Drag && Drop or Import/Paste Media...");
+				placeHolderLabel.setText("Import Media ...");
 				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; -fx-cursor:hand;");
 				placeHolderLabel.setOnMouseReleased(m -> smartController.getToolsContextMenu().show(placeHolderLabel, m.getScreenX(), m.getScreenY()));
-				placeHolderLabel.setGraphic(InfoTool.getImageViewFromResourcesFolder("import24.png"));
+				placeHolderLabel.setGraphic(InfoTool.getImageViewFromResourcesFolder("import.png"));
 			} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
 				placeHolderLabel.setText("Search Media from all the playlists...");
 				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
