@@ -81,7 +81,7 @@ public class ChromiumFullScreenController extends StackPane {
 		window.setOnCloseRequest(c -> removeBrowserView());
 		
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ChromiumFullScreenController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserFullScreenController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

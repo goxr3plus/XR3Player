@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="browserPane" />
       <HBox fx:id="topBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: #505050; -fx-background-radius: 45;" visible="false" StackPane.alignment="TOP_CENTER">

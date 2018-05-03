@@ -52,7 +52,7 @@ public class WebBrowserTabContextMenu extends ContextMenu {
 		this.webBrowserController = webBrowserController;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "WebBrowserTabContextMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserTabContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

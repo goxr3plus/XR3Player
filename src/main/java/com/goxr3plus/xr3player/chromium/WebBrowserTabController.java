@@ -149,7 +149,7 @@ public class WebBrowserTabController extends StackPane {
 		this.tab.setContent(this);
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "WebBrowserTabController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserTabController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

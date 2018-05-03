@@ -85,7 +85,7 @@ public class WebBrowserController extends StackPane {
 	public WebBrowserController() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "WebBrowserController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

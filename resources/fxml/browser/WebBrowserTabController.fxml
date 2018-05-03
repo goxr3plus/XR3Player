@@ -22,7 +22,7 @@
 
 <!-- <?import commons.javafx.webbrowser.browser.SearchEngineComboBox?> -->
 
-<fx:root prefHeight="448.0" prefWidth="667.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="448.0" prefWidth="667.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane">
          <top>
@@ -34,7 +34,7 @@
                            <graphic>
                               <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                  <image>
-                                    <Image url="@../image/extend.png" />
+                                    <Image url="@../../image/extend.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -52,7 +52,7 @@
                            <graphic>
                               <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/right.png" />
+                                    <Image url="@../../image/right.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -67,7 +67,7 @@
                            <graphic>
                               <ImageView fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/refresh.png" />
+                                    <Image url="@../../image/refresh.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -82,7 +82,7 @@
                            <graphic>
                               <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/right.png" />
+                                    <Image url="@../../image/right.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -117,7 +117,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/menu2.png" />
+                                    <Image url="@../../image/menu2.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -143,7 +143,7 @@
          <children>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/warning.png" />
+                  <Image url="@../../image/warning.png" />
                </image>
             </ImageView>
             <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true" />
