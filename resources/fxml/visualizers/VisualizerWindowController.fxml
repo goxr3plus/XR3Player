@@ -22,7 +22,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="visualizerPane" focusTraversable="true" style="-fx-background-color: transparent;">
          <center>
@@ -82,7 +82,7 @@
                           <items>
                             <MenuItem mnemonicParsing="false">
                                  <graphic>
-                                    <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" min="0.01" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="transparency-slider" stylesheets="@../style/application.css" value="0.9">
+                                    <Slider fx:id="transparencySlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" min="0.01" minorTickCount="20" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="transparency-slider" stylesheets="@../../style/application.css" value="0.9">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -97,7 +97,7 @@
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/menu2.png" />
+                        <Image url="@../../image/menu2.png" />
                      </image>
                   </ImageView>
                </graphic>

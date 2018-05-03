@@ -77,7 +77,7 @@ public class ApplicationSettingsController extends BorderPane {
 	private PlaylistsSettingsController playListsSettingsController = new PlaylistsSettingsController();
 	private LibrariesSettingsController librariesSettingsController = new LibrariesSettingsController();
 	private KeyBindingsController nativeKeyBindingsController = new KeyBindingsController();
-	private XPlayersSettingsController xPlayersSettingsController = new XPlayersSettingsController();
+	private XPlayerSettings xPlayersSettingsController = new XPlayerSettings();
 	
 	/**
 	 * Constructor.
@@ -246,7 +246,7 @@ public class ApplicationSettingsController extends BorderPane {
 	/**
 	 * @return the xPlayersSettingsController
 	 */
-	public XPlayersSettingsController getxPlayersSettingsController() {
+	public XPlayerSettings getxPlayersSettingsController() {
 		return xPlayersSettingsController;
 	}
 	

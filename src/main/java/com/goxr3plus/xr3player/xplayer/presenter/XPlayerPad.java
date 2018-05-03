@@ -31,7 +31,7 @@ public class XPlayerPad extends BorderPane {
 		this.xPlayerController = xPlayerController;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerPad.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerPad.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

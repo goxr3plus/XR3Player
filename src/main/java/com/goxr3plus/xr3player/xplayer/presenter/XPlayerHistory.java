@@ -22,7 +22,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class XPlayerExtraSettings extends BorderPane {
+public class XPlayerHistory extends BorderPane {
 	
 	// ------------------------
 	
@@ -43,12 +43,12 @@ public class XPlayerExtraSettings extends BorderPane {
 	 * @param xPlayerUI
 	 *            the x player UI
 	 */
-	public XPlayerExtraSettings(XPlayerController xPlayerUI) {
+	public XPlayerHistory(XPlayerController xPlayerUI) {
 		
 		this.xPlayerUI = xPlayerUI;
 		
 		// --------------------------FXMLLoader--------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerExtraSettingsController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerHistory.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

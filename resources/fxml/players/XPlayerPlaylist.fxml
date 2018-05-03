@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="409.0" prefWidth="632.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="409.0" prefWidth="632.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane" style="-fx-background-color: transparent;">
          <top>

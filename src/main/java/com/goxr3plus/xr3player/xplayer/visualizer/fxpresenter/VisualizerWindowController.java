@@ -145,7 +145,7 @@ public class VisualizerWindowController extends StackPane {
 		window.setOnCloseRequest(c -> removeVisualizer());
 		
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "VisualizerWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.VISUALIZERS_FXMLS + "VisualizerWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

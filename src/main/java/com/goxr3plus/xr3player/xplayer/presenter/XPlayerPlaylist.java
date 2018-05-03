@@ -75,7 +75,7 @@ public class XPlayerPlaylist extends StackPane {
 		this.xPlayerUI = xPlayerUI;
 		
 		// ------------------------------FXMLLoader-----------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerPlaylist.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerPlaylist.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

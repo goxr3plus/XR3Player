@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="172.0" prefWidth="301.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="172.0" prefWidth="301.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="next" mnemonicParsing="false" style="-fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-border-width: 2; -fx-font-weight: bold;" text="&gt;" StackPane.alignment="CENTER_RIGHT">
          <StackPane.margin>

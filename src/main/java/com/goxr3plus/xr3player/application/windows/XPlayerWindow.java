@@ -51,7 +51,7 @@ public class XPlayerWindow extends BorderPane {
 		getWindow().setOnCloseRequest(c -> close());
 		
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

@@ -356,7 +356,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private XPlayerWindow xPlayerWindow;
 	
 	/** The x player settings controller. */
-	private XPlayerExtraSettings playerExtraSettings;
+	private XPlayerHistory playerExtraSettings;
 	
 	/** The x player model. */
 	private XPlayerModel xPlayerModel;
@@ -475,7 +475,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// ----------------------------------- FXMLLoader
 		// -------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -543,7 +543,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//
 		xPlayerPlayList = new XPlayerPlaylist(this);
 		visualizerWindow = new VisualizerWindowController(this);
-		playerExtraSettings = new XPlayerExtraSettings(this);
+		playerExtraSettings = new XPlayerHistory(this);
 		
 		//== modesStackPane
 		modesStackPane.setOnDragOver(event -> {
@@ -1799,7 +1799,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	/**
 	 * @return the playerExtraSettings
 	 */
-	public XPlayerExtraSettings getPlayerExtraSettings() {
+	public XPlayerHistory getPlayerExtraSettings() {
 		return playerExtraSettings;
 	}
 	

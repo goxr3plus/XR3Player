@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="86.0" prefWidth="241.0" style="-fx-background-color: rgb(0,0,0,0.8);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="86.0" prefWidth="241.0" style="-fx-background-color: rgb(0,0,0,0.8);" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox spacing="6.0" BorderPane.alignment="CENTER">
          <children>

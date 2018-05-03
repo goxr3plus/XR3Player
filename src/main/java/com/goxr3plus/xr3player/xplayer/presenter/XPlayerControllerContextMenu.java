@@ -153,7 +153,7 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 	public XPlayerControllerContextMenu() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "XPlayerControllerContextMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerControllerContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

@@ -17,7 +17,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -26,7 +26,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -35,7 +35,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -44,7 +44,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -53,7 +53,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -62,7 +62,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -71,7 +71,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -80,7 +80,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -89,7 +89,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/amazon24.png" />
+                              <Image url="@../../image/amazon24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -98,7 +98,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/amazon24.png" />
+                        <Image url="@../../image/amazon24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -107,7 +107,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/soundcloud24.png" />
+                        <Image url="@../../image/soundcloud24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -117,7 +117,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/jamendo24.png" />
+                        <Image url="@../../image/jamendo24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -126,7 +126,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/tunein24.png" />
+                        <Image url="@../../image/tunein24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -135,7 +135,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/hDTracks.png" />
+                        <Image url="@../../image/hDTracks.png" />
                      </image></ImageView>
                </graphic>
             </MenuItem>
@@ -143,7 +143,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/cDUniverse.png" />
+                        <Image url="@../../image/cDUniverse.png" />
                      </image></ImageView>
                </graphic>
             </MenuItem>
@@ -152,7 +152,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/lastfm24.png" />
+                        <Image url="@../../image/lastfm24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -161,7 +161,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/librefm24.png" />
+                        <Image url="@../../image/librefm24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -171,7 +171,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/youtube24.png" />
+                        <Image url="@../../image/youtube24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -180,7 +180,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/vimeo24.png" />
+                        <Image url="@../../image/vimeo24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -190,7 +190,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/google24.png" />
+                        <Image url="@../../image/google24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -199,7 +199,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/duckduckgo24.png" />
+                        <Image url="@../../image/duckduckgo24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -208,7 +208,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/bing24.png" />
+                        <Image url="@../../image/bing24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -217,7 +217,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/yahoo24.png" />
+                        <Image url="@../../image/yahoo24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -226,7 +226,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/wikipedia.png" />
+                        <Image url="@../../image/wikipedia.png" />
                      </image></ImageView>
                </graphic>
             </MenuItem>
@@ -234,7 +234,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Add%20Shopping%20Cart-24.png" />
+                  <Image url="@../../image/Add%20Shopping%20Cart-24.png" />
                </image>
             </ImageView>
          </graphic>
@@ -245,7 +245,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Lyrics-24.png" />
+                        <Image url="@../../image/Lyrics-24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -254,7 +254,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Lyrics-24.png" />
+                        <Image url="@../../image/Lyrics-24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -263,7 +263,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Lyrics-24.png" />
+                  <Image url="@../../image/Lyrics-24.png" />
                </image>
             </ImageView>
          </graphic>
@@ -273,7 +273,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Copy-24.png" />
+                  <Image url="@../../image/Copy-24.png" />
                </image>
             </ImageView>
          </graphic>
@@ -283,7 +283,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/path.png" />
+                  <Image url="@../../image/path.png" />
                </image>
             </ImageView>
          </graphic>
@@ -292,7 +292,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/tag.png" />
+                  <Image url="@../../image/tag.png" />
                </image>
             </ImageView>
          </graphic>
