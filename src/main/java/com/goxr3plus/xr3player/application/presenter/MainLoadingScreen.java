@@ -21,7 +21,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 /**
  * The Class UpdateScreen.
  */
-public class UpdateScreen extends StackPane {
+public class MainLoadingScreen extends StackPane {
 
     @FXML
     private Rectangle rectangle;
@@ -43,7 +43,7 @@ public class UpdateScreen extends StackPane {
     /**
      * Logger for this class
      */
-    private static final Logger logger = Logger.getLogger(UpdateScreen.class.getName());
+    private static final Logger logger = Logger.getLogger(MainLoadingScreen.class.getName());
 
     TranslateTransition translate1;
     TranslateTransition translate2;
@@ -51,8 +51,8 @@ public class UpdateScreen extends StackPane {
     /**
      * Constructor.
      */
-    public UpdateScreen() {
-	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UpdateScreen.fxml"));
+    public MainLoadingScreen() {
+	FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MainLoadingScreen.fxml"));
 	loader.setController(this);
 	loader.setRoot(this);
 

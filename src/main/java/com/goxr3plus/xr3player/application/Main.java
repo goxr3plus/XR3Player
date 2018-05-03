@@ -65,7 +65,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSpli
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
-import main.java.com.goxr3plus.xr3player.application.presenter.UpdateScreen;
+import main.java.com.goxr3plus.xr3player.application.presenter.MainLoadingScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
@@ -182,7 +182,7 @@ public class Main extends Application {
 	public static SideBar sideBar;
 	
 	/** Application Update Screen */
-	public static UpdateScreen updateScreen;
+	public static MainLoadingScreen updateScreen;
 	
 	/** The TreeView of DJMode */
 	public static TreeViewManager treeManager;
@@ -340,7 +340,7 @@ public class Main extends Application {
 		sideBar = new SideBar();
 		
 		/** Application Update Screen */
-		updateScreen = new UpdateScreen();
+		updateScreen = new MainLoadingScreen();
 		
 		/** The TreeView of DJMode */
 		treeManager = new TreeViewManager();
