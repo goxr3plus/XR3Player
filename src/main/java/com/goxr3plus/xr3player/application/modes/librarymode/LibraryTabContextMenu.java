@@ -48,7 +48,7 @@ public class LibraryTabContextMenu extends ContextMenu {
 		this.tab = tab;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibraryTabContextMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "LibraryTabContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

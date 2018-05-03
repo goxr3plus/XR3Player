@@ -257,7 +257,7 @@ public class LibraryMode extends BorderPane {
 	public LibraryMode() {
 		
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibraryMode.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "LibraryMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

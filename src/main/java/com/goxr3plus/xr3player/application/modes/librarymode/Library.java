@@ -336,7 +336,7 @@ public class Library extends StackPane {
 		
 		// ----------------------------------FXMLLoader-------------------------------------
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "Library.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "Library.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

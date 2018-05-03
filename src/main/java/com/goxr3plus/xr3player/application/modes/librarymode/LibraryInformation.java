@@ -58,7 +58,7 @@ public class LibraryInformation extends BorderPane {
 	public LibraryInformation() {
 		
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibraryInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "LibraryInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

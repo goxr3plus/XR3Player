@@ -65,7 +65,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	 */
 	public OpenedLibrariesViewer() {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "OpenedLibrariesViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "OpenedLibrariesViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

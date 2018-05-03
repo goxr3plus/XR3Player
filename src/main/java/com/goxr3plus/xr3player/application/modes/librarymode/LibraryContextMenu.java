@@ -39,19 +39,19 @@ public class LibraryContextMenu extends ContextMenu {
     Menu image = new Menu("Image");
 
     /** The set image. */
-    Menu setImage = new Menu("change...");
+    Menu setImage = new Menu("Change...");
 
     /** The local image. */
-    MenuItem localImage = new MenuItem("local");
+    MenuItem localImage = new MenuItem("Local");
 
     /** The internet image. */
-    MenuItem internetImage = new MenuItem("internet");
+    MenuItem internetImage = new MenuItem("Internet");
 
     /** The export image. */
-    MenuItem exportImage = new MenuItem("export...CTRL + E)");
+    MenuItem exportImage = new MenuItem("Export...CTRL + E)");
 
     /** The reset image. */
-    MenuItem resetImage = new MenuItem("default");
+    MenuItem resetImage = new MenuItem("Default");
 
     /** The settings. */
     MenuItem settings = new MenuItem("Settings(CTRL + S)");
@@ -118,7 +118,7 @@ public class LibraryContextMenu extends ContextMenu {
 	resetImage.setDisable(exportImage.isDisable());
 
 	// Show it
-	show(window, x - 15 - super.getWidth() + super.getWidth() * 14 / 100, y - 1);
+	show(window, x - 35 - super.getWidth() + super.getWidth() * 14 / 100, y - 1);
 
 	//Y axis
 	double yIni = y - 50;

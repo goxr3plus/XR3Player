@@ -12,7 +12,7 @@
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/plus.png" />
+                  <Image url="@../../image/plus.png" />
                </image>
             </ImageView>
          </graphic>
@@ -21,7 +21,7 @@
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/eye2.png" />
+                  <Image url="@../../image/eye2.png" />
                </image>
             </ImageView>
          </graphic></MenuItem>
