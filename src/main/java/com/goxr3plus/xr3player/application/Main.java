@@ -840,7 +840,7 @@ public class Main extends Application {
 		ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 		ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
-		alert.getButtonTypes().setAll(exit, vacuum, cancel);
+		alert.getButtonTypes().setAll(exit , vacuum, cancel);
 		
 		//Pick the answer
 		alert.showAndWait().ifPresent(answer -> {

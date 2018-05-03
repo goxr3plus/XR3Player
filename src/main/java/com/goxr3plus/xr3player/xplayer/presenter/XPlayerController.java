@@ -113,12 +113,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private BorderPane borderPane;
 	
 	@FXML
-	private GridPane basicGridPane;
-	
-	@FXML
-	private SplitPane leftSplitPane;
-	
-	@FXML
 	private BorderPane discBorderPane;
 	
 	@FXML
@@ -576,11 +570,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		// mediaFileStackPane	
 		mediaFileMarquee.getLabel().setTooltip(new Tooltip(""));
 		mediaFileMarquee.getLabel().getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
-		mediaFileMarquee.setText("Drag&Drop a song here");
+		mediaFileMarquee.setText("No media");
 		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
-		mediaNameHBox.getChildren().add(1, mediaFileMarquee);
+		mediaNameHBox.getChildren().add(2, mediaFileMarquee);
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		//smMediaTitle
