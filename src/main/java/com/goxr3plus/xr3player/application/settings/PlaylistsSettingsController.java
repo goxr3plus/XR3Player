@@ -70,7 +70,7 @@ public class PlaylistsSettingsController extends BorderPane {
 	public PlaylistsSettingsController() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "PlayListsSettingsController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "PlayListsSettingsController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

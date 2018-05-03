@@ -18,7 +18,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
  * @author GOXR3PLUS
  *
  */
-public class XPlayerSettings extends BorderPane {
+public class XPlayerSettingsController extends BorderPane {
 	
 	/** -----------------------------------------------------. */
 	
@@ -51,10 +51,10 @@ public class XPlayerSettings extends BorderPane {
 	/**
 	 * Constructor.
 	 */
-	public XPlayerSettings() {
+	public XPlayerSettingsController() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "XPlayerSettings.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "XPlayerSettingsController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

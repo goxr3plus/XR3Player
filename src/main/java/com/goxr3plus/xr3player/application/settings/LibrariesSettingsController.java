@@ -36,7 +36,7 @@ public class LibrariesSettingsController extends BorderPane {
 	public LibrariesSettingsController() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LibrariesSettingsController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "LibrariesSettingsController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

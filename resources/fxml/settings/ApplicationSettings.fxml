@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="498.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="498.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #353535;" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
-                        <Image url="@../image/asc.png" />
+                        <Image url="@../../image/asc.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -38,7 +38,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/x-button.png" />
+                        <Image url="@../../image/x-button.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -50,7 +50,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/team.png" />
+                        <Image url="@../../image/team.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -76,7 +76,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/icon.png" />
+                              <Image url="@../../image/icon.png" />
                            </image>
                         </ImageView>
                      </graphic></Tab>
@@ -84,7 +84,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/menu2.png" />
+                              <Image url="@../../image/menu2.png" />
                            </image>
                         </ImageView>
                      </graphic></Tab>
@@ -92,7 +92,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Library-32.png" />
+                              <Image url="@../../image/Library-32.png" />
                            </image>
                         </ImageView>
                      </graphic></Tab>
@@ -100,7 +100,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/keyboard.png" />
+                              <Image url="@../../image/keyboard.png" />
                            </image>
                         </ImageView>
                      </graphic></Tab>
@@ -108,7 +108,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/MusicRecord-32.png" />
+                              <Image url="@../../image/MusicRecord-32.png" />
                            </image>
                         </ImageView>
                      </graphic></Tab>
@@ -133,7 +133,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
-                        <Image url="@../image/asc.png" />
+                        <Image url="@../../image/asc.png" />
                      </image>
                   </ImageView>
                </graphic>

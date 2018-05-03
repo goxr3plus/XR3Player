@@ -77,7 +77,7 @@ public class ApplicationSettingsController extends BorderPane {
 	private PlaylistsSettingsController playListsSettingsController = new PlaylistsSettingsController();
 	private LibrariesSettingsController librariesSettingsController = new LibrariesSettingsController();
 	private KeyBindingsController nativeKeyBindingsController = new KeyBindingsController();
-	private XPlayerSettings xPlayersSettingsController = new XPlayerSettings();
+	private XPlayerSettingsController xPlayersSettingsController = new XPlayerSettingsController();
 	
 	/**
 	 * Constructor.
@@ -85,7 +85,7 @@ public class ApplicationSettingsController extends BorderPane {
 	public ApplicationSettingsController() {
 		
 		// ------------------------------------FXMLLOADER-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ApplicationSettings.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "ApplicationSettings.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -246,7 +246,7 @@ public class ApplicationSettingsController extends BorderPane {
 	/**
 	 * @return the xPlayersSettingsController
 	 */
-	public XPlayerSettings getxPlayersSettingsController() {
+	public XPlayerSettingsController getxPlayersSettingsController() {
 		return xPlayersSettingsController;
 	}
 	

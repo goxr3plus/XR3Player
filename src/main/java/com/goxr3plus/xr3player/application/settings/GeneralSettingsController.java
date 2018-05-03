@@ -62,7 +62,7 @@ public class GeneralSettingsController extends BorderPane {
 	public GeneralSettingsController() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "GeneralSettingsController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "GeneralSettingsController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

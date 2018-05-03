@@ -60,7 +60,7 @@ public class KeyBindingsController extends BorderPane {
 		addKeyListeners();
 		
 		// ------------------------------------FXMLLOADER-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "KeyBindingsController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "KeyBindingsController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
