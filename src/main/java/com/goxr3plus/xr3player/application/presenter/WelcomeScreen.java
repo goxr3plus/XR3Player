@@ -33,9 +33,6 @@ public class WelcomeScreen extends StackPane {
 	private ImageView backgroundImage;
 	
 	@FXML
-	private MediaView mediaView;
-	
-	@FXML
 	private HBox topHBox;
 	
 	@FXML
@@ -93,7 +90,7 @@ public class WelcomeScreen extends StackPane {
 		exit.setOnAction(a -> Util.terminateXR3Player(0));
 		
 		//mediaView
-		mediaView.setVisible(false);
+		//mediaView.setVisible(false);
 		
 		//backgroundImage
 		backgroundImage.fitWidthProperty().bind(this.widthProperty());
@@ -106,39 +103,39 @@ public class WelcomeScreen extends StackPane {
 	 */
 	public void showWelcomeScreen() {
 		
-		try {
-			
-			if (mediaPlayer != null && soundPlayer != null) {
-				//mediaPlayer.play();
-				soundPlayer.play();
-			} else {
-				
-				//				mediaView.setFitWidth(Main.window.getWidth());
-				//				mediaView.setFitHeight(Main.window.getHeight());
-				//				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
-				//				mediaView.setMediaPlayer(mediaPlayer);
-				//				mediaPlayer.setAutoPlay(true);
-				//				//mediaPlayer.setRate(3.0)
-				//				mediaPlayer.setStartTime(Duration.seconds(0));
-				//				mediaPlayer.setStopTime(Duration.seconds(8));
-				//				//mediaPlayer.setCycleCount(50)
-				//				mediaPlayer.play();
-				//				mediaPlayer.setAutoPlay(true);
-				//				//mediaPlayer.setCycleCount(50)
-				//				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
-				
-				Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString());
-				soundPlayer = new MediaPlayer(m1);
-				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
-				soundPlayer.play();
-				
-				//Set the background Image
-				//setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
-				//		BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+//		try {
+//			
+//			if (mediaPlayer != null && soundPlayer != null) {
+//				//mediaPlayer.play();
+//				soundPlayer.play();
+//			} else {
+//				
+//				//				mediaView.setFitWidth(Main.window.getWidth());
+//				//				mediaView.setFitHeight(Main.window.getHeight());
+//				//				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
+//				//				mediaView.setMediaPlayer(mediaPlayer);
+//				//				mediaPlayer.setAutoPlay(true);
+//				//				//mediaPlayer.setRate(3.0)
+//				//				mediaPlayer.setStartTime(Duration.seconds(0));
+//				//				mediaPlayer.setStopTime(Duration.seconds(8));
+//				//				//mediaPlayer.setCycleCount(50)
+//				//				mediaPlayer.play();
+//				//				mediaPlayer.setAutoPlay(true);
+//				//				//mediaPlayer.setCycleCount(50)
+//				//				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
+//				
+//				Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString());
+//				soundPlayer = new MediaPlayer(m1);
+//				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
+//				soundPlayer.play();
+//				
+//				//Set the background Image
+//				//setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
+//				//		BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
+//			}
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
 		
 		setVisible(true);
 	}
