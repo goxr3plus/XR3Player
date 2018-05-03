@@ -234,7 +234,7 @@ public class RenameWindow extends VBox {
 	 * @param title
 	 *            The text if the title Label
 	 */
-	public void show(String text , Node n , String title , FileCategory fileCategory) {
+	public void show(String text , Node n , String title , FileCategory fileCategory , double... xPositionExtra) {
 		
 		//Stop the TimeLine
 		timeLine.stop();
@@ -244,7 +244,7 @@ public class RenameWindow extends VBox {
 		Bounds bounds = n.localToScreen(n.getBoundsInLocal());
 		//show(text, bounds.getMinX() + 5, bounds.getMaxY(), title)
 		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2)
-		show(text, bounds.getMinX() - 440 / 2 + bounds.getWidth() / 2, bounds.getMaxY(), title);
+		show(text, bounds.getMinX() - 440 / 2 + bounds.getWidth() / 2 + (xPositionExtra != null ? 0 : xPositionExtra[0]), bounds.getMaxY(), title);
 		
 		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2)	
 		if (!notAllow.contains(".") && fileCategory == FileCategory.DIRECTORY) {
