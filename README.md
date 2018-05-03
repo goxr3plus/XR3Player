@@ -79,13 +79,18 @@ To build XR3Player, you will need:
 
 There is are some dependencies that are not on Maven Central ( you can find those .jars on the folder called **localLibraries**) :
 
-**JAVE** and **javasysmon(for it i created a repository on github so don't worry)**
+**JAVE** and **JAVE(for it i created a repository on github so don't worry)**
+**JAVASYSMON** and **JAVASYSMON(for it i created a repository on github so don't worry)**
 
 For them [follow this tutorial to add them to your Local Maven Repository](https://www.mkyong.com/maven/how-to-include-library-manully-into-maven-local-repository/) 
 
-For example in my computer i do the following :
+For example (for JAVE) [Github Repository by GOXR3PLUS](https://github.com/goxr3plus/JAVE) in my computer i do the following :
 
 > mvn install:install-file -Dfile=D:\GitHub\XR3Player\localLibraries\jave-1.0.2.jar -DgroupId=it.sauronsoftware.jave -DartifactId=jave -Dversion=1.0.2 -Dpackaging=jar
+
+For example (for JAVASYSMON) [Github Repository by GOXR3PLUS](https://github.com/goxr3plus/javasysmon) in my computer i do the following :
+
+> mvn install:install-file -Dfile=D:\GitHub\XR3Player\localLibraries\javasysmon-0.3.6.0.jar -DgroupId=local.github.goxr3plus -DartifactId=javasysmon -Dversion=3.6.0 -Dpackaging=jar
 
 ---
 
