@@ -52,7 +52,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
-import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFiltersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
@@ -259,14 +259,14 @@ public class SmartController extends StackPane {
 		this.dataBaseTableName = dataBaseTableName;
 		
 		// Initialise
-		normal_mode_mediaTableViewer = new MediaTableViewer(this, Mode.MEDIA);
+		normal_mode_mediaTableViewer = new MediaTableViewer(this, SmartControllerMode.MEDIA);
 		searchService = new SmartControllerSearcher(this);
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
 		copyOrMoveService = new FilesExportService(this);
 		
 		// --------------------------------FXMLLoader---------------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "SmartController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

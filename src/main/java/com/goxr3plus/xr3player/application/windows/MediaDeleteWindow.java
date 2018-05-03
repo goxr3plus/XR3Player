@@ -46,7 +46,7 @@ public class MediaDeleteWindow extends BorderPane {
 	public MediaDeleteWindow() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaDeleteWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaDeleteWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

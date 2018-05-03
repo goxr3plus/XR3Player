@@ -204,7 +204,7 @@ public class MediaContextMenu extends ContextMenu {
 	public MediaContextMenu() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaContextMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

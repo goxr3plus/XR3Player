@@ -84,10 +84,10 @@ public class SmartControllerFiltersMode extends StackPane {
 	 */
 	public SmartControllerFiltersMode(SmartController smartController) {
 		this.smartController = smartController;
-		this.mediaTableViewer = new MediaTableViewer(smartController, Mode.FILTERS_MODE);
+		this.mediaTableViewer = new MediaTableViewer(smartController, SmartControllerMode.FILTERS_MODE);
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartControllerFiltersMode.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "SmartControllerFiltersMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

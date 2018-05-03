@@ -93,7 +93,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		this.smartController = smartController;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SmartControllerFoldersMode.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "SmartControllerFoldersMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<fx:root prefHeight="189.0" prefWidth="458.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<fx:root prefHeight="189.0" prefWidth="458.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
    <center>
       <VBox alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,7 +36,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/question.png" />
+                        <Image url="@../../image/question.png" />
                      </image>
                   </ImageView>
                </graphic>

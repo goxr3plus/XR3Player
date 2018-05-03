@@ -148,7 +148,7 @@ public class MediaInformation extends StackPane {
 	public MediaInformation() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

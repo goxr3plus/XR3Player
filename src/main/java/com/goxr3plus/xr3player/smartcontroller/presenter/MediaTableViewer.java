@@ -43,7 +43,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
-import main.java.com.goxr3plus.xr3player.smartcontroller.modes.Mode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.AllDetailsService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
@@ -240,12 +240,12 @@ public class MediaTableViewer extends StackPane {
 	
 	private int previousSelectedCount = 0;
 	
-	private final Mode mode;
+	private final SmartControllerMode mode;
 	
 	/**
 	 * Constructor.
 	 */
-	public MediaTableViewer(SmartController smartController, Mode mode) {
+	public MediaTableViewer(SmartController smartController, SmartControllerMode mode) {
 		this.smartController = smartController;
 		this.mode = mode;
 		
@@ -253,7 +253,7 @@ public class MediaTableViewer extends StackPane {
 		canvas.setHeight(100);
 		
 		// FXMLLOADRE
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaTableViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaTableViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -272,7 +272,7 @@ public class MediaTableViewer extends StackPane {
 	private void initialize() {
 		
 		//------------------------------TableViewer---------------------------
-		if (mode == Mode.MEDIA) {
+		if (mode == SmartControllerMode.MEDIA) {
 			tableView.setItems(smartController.getItemsObservableList());
 			
 			//Add the place holder for the tableView
@@ -386,7 +386,7 @@ public class MediaTableViewer extends StackPane {
 		// dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
 		
-		if (smartController.getGenre() == Genre.LIBRARYMEDIA && mode == Mode.MEDIA) {
+		if (smartController.getGenre() == Genre.LIBRARYMEDIA && mode == SmartControllerMode.MEDIA) {
 			
 			// --Drag Over
 			tableView.setOnDragOver(dragOver -> {
@@ -652,9 +652,9 @@ public class MediaTableViewer extends StackPane {
 			}
 			
 			//Then this
-			if (key.isControlDown() && code == KeyCode.LEFT && mode != Mode.FILTERS_MODE)
+			if (key.isControlDown() && code == KeyCode.LEFT && mode != SmartControllerMode.FILTERS_MODE)
 				smartController.goPrevious();
-			else if (key.isControlDown() && code == KeyCode.RIGHT && mode != Mode.FILTERS_MODE)
+			else if (key.isControlDown() && code == KeyCode.RIGHT && mode != SmartControllerMode.FILTERS_MODE)
 				smartController.goNext();
 			else if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");

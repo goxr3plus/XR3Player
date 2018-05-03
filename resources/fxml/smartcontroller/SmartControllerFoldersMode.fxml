@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane>
          <children>
@@ -27,7 +27,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Folder%20Tree-24.png" />
+                                    <Image url="@../../image/Folder%20Tree-24.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -40,7 +40,7 @@
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/Settings-32.png" />
+                                    <Image url="@../../image/Settings-32.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -55,7 +55,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/refresh.png" />
+                                    <Image url="@../../image/refresh.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -70,7 +70,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/shrink.png" />
+                                    <Image url="@../../image/shrink.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -95,7 +95,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Playlist-32.png" />
+                              <Image url="@../../image/Playlist-32.png" />
                            </image>
                         </ImageView>
                      </graphic>

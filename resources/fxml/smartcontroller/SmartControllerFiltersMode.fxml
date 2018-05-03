@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
          <items>
@@ -43,7 +43,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/funnel.png" />
+                              <Image url="@../../image/funnel.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -57,7 +57,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/funnel.png" />
+                                    <Image url="@../../image/funnel.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -81,7 +81,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Playlist-32.png" />
+                        <Image url="@../../image/Playlist-32.png" />
                      </image>
                   </ImageView>
                </graphic>

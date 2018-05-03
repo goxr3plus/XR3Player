@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <center>
@@ -22,7 +22,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                            <image>
-                              <Image url="@../image/artwork.jpg" />
+                              <Image url="@../../image/artwork.jpg" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -31,7 +31,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/played.png" />
+                              <Image url="@../../image/played.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -40,7 +40,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
-                              <Image url="@../image/Download%20From%20Cloud-24.png" />
+                              <Image url="@../../image/Download%20From%20Cloud-24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -49,7 +49,7 @@
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="20.0">
                            <image>
-                              <Image url="@../image/flask.png" />
+                              <Image url="@../../image/flask.png" />
                            </image>
                         </ImageView>
                      </graphic></TableColumn>
@@ -57,7 +57,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/eye2.png" />
+                              <Image url="@../../image/eye2.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -66,7 +66,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
-                              <Image url="@../image/likeFaded.png" />
+                              <Image url="@../../image/likeFaded.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -75,7 +75,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/duration.png" />
+                              <Image url="@../../image/duration.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -84,7 +84,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/smallStar.png" />
+                              <Image url="@../../image/smallStar.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -94,7 +94,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Puzzle-20.png" />
+                              <Image url="@../../image/Puzzle-20.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -103,7 +103,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/Front%20View-20.png" />
+                              <Image url="@../../image/Front%20View-20.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -112,7 +112,7 @@
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0">
                            <image>
-                              <Image url="@../image/artist.png" />
+                              <Image url="@../../image/artist.png" />
                            </image>
                         </ImageView>
                      </graphic></TableColumn>
@@ -123,7 +123,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/comment.png" />
+                              <Image url="@../../image/comment.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -152,7 +152,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/drive.png" />
+                              <Image url="@../../image/drive.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -163,7 +163,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/timeImported.png" />
+                              <Image url="@../../image/timeImported.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -172,7 +172,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/dateImported.png" />
+                              <Image url="@../../image/dateImported.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -181,7 +181,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Add%20File-20.png" />
+                              <Image url="@../../image/Add%20File-20.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -190,7 +190,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/Edit%20File-20.png" />
+                              <Image url="@../../image/Edit%20File-20.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -217,7 +217,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Audio%20Wave%20Filled-24.png" />
+                  <Image url="@../../image/Audio%20Wave%20Filled-24.png" />
                </image>
             </ImageView>
          </graphic>

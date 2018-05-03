@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <top>
@@ -29,7 +29,7 @@
                      <graphic>
                         <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../image/noArtwork.png" />
+                              <Image url="@../../image/noArtwork.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -151,7 +151,7 @@
                <graphic>
                   <ImageView fx:id="imageView1" pickOnBounds="true" translateY="4.0">
                      <image>
-                        <Image url="@../image/more.png" />
+                        <Image url="@../../image/more.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -168,7 +168,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Audio%20Wave%20Filled-24.png" />
+                  <Image url="@../../image/Audio%20Wave%20Filled-24.png" />
                </image>
             </ImageView>
          </graphic>

@@ -89,8 +89,10 @@ public final class InfoTool {
 	
 	public static final String BROWSER_FXMLS = "/fxml/browser/";
 	
-	/** The Constant fxmls. */
 	public static final String SETTINGS_FXMLS = "/fxml/settings/";
+	
+	public static final String SMARTCONTROLLER_FXMLS = "/fxml/smartcontroller/";
+	
 	
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
