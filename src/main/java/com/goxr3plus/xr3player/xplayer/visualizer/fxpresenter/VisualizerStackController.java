@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -31,13 +32,13 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel
 public class VisualizerStackController extends StackPane {
 	
 	@FXML
-	private Button next;
+	private JFXButton next;
 	
 	@FXML
-	private Label visualizerTypeLabel;
+	private Label descriptionLabel;
 	
 	@FXML
-	private Button previous;
+	private JFXButton previous;
 	
 	// --------------------------------------
 	
@@ -68,12 +69,12 @@ public class VisualizerStackController extends StackPane {
 	private void initialize() {
 		
 		// fadeTranstion
-		fadeTransition = new FadeTransition(Duration.millis(1500), visualizerTypeLabel);
+		fadeTransition = new FadeTransition(Duration.millis(1500), descriptionLabel);
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.0);
 		
-		//visualizerTypeLabel
-		visualizerTypeLabel.setOpacity(0);
+		//descriptionLabel
+		descriptionLabel.setOpacity(0);
 		
 		// --- MouseListeners
 		addEventHandler(MouseEvent.MOUSE_MOVED, m -> {
@@ -101,7 +102,7 @@ public class VisualizerStackController extends StackPane {
 	 * @param text
 	 */
 	public void replayLabelEffect(String text) {
-		visualizerTypeLabel.setText(text);
+		descriptionLabel.setText(text);
 		fadeTransition.playFromStart();
 	}
 	

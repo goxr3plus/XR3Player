@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="172.0" prefWidth="301.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="172.0" prefWidth="301.0" style="-fx-background-color: #101010;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="next" mnemonicParsing="false" style="-fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-border-width: 2; -fx-font-weight: bold;" text="&gt;" StackPane.alignment="CENTER_RIGHT">
-         <StackPane.margin>
-            <Insets right="5.0" />
-         </StackPane.margin>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Label fx:id="visualizerTypeLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: black;" text="Rosette" textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
+      <JFXButton fx:id="next" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" text=" " StackPane.alignment="CENTER_RIGHT">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/next2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: white;" text="visual description" textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="5.0" left="2.0" right="2.0" top="2.0" />
          </StackPane.margin></Label>
-      <Button fx:id="previous" mnemonicParsing="false" style="-fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-border-width: 2; -fx-font-weight: bold;" text="&lt;" StackPane.alignment="CENTER_LEFT">
-         <StackPane.margin>
-            <Insets left="5.0" />
-         </StackPane.margin>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <JFXButton fx:id="previous" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="140.0" layoutY="79.0" text=" " StackPane.alignment="CENTER_LEFT">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
+               <image>
+                  <Image url="@../../image/next2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </fx:root>

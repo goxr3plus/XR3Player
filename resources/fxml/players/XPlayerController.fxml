@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
@@ -179,7 +180,10 @@
                                                       <StackPane fx:id="visualizerStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                                                          <children>
                                                             <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #202020; -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Stopped" textAlignment="CENTER" wrapText="true" />
-                                                            <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Visualizer Invisible" visible="false" />
+                                                            <Label fx:id="visualizerVisibleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-border-color: firebrick;" text="Visualizer invisible">
+                                                               <StackPane.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </StackPane.margin></Label>
                                                             <FlowPane fx:id="visualizerMaximizedBox" alignment="CENTER" columnHalignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="186.0" vgap="15.0" visible="false" StackPane.alignment="CENTER">
                                                                <children>
                                                                   <Label fx:id="visualizerMinimize" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Restore">
@@ -211,15 +215,9 @@
                                                                   <Insets left="5.0" />
                                                                </StackPane.margin>
                                                             </FlowPane>
-                                                            <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" maxHeight="20.0" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefWidth="125.0" spacing="10.0" style="-fx-background-color: rgb(255,255,255,0.95); -fx-background-radius: 0 0 10 10;" StackPane.alignment="TOP_CENTER">
+                                                            <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" maxHeight="32.0" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" spacing="7.0" style="-fx-background-color: #151515;" StackPane.alignment="TOP_CENTER">
                                                                <children>
-                                                                  <Button fx:id="visualizerSettings" layoutX="153.0" layoutY="10.0" mnemonicParsing="false" styleClass="arrowButton2">
-                                                                     <tooltip>
-                                                                        <Tooltip text="Visualizer Extra" />
-                                                                     </tooltip>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
+                                                                  <JFXButton fx:id="visualizerSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button3" text=" ">
                                                                      <graphic>
                                                                         <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
@@ -227,8 +225,11 @@
                                                                            </image>
                                                                         </ImageView>
                                                                      </graphic>
-                                                                  </Button>
-                                                                  <ToggleButton fx:id="visualizerVisible" mnemonicParsing="false" selected="true" styleClass="arrowButton2">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Visualizer Settings" />
+                                                                     </tooltip>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="showVisualizerButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" styleClass="jfx-button3" text=" ">
                                                                      <graphic>
                                                                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
@@ -239,17 +240,14 @@
                                                                            </cursor>
                                                                         </ImageView>
                                                                      </graphic>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </ToggleButton>
-                                                                  <Button fx:id="maximizeVisualizer" mnemonicParsing="false" styleClass="arrowButton2">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Visibility of Visualizer" />
+                                                                     </tooltip>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="maximizeVisualizer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" styleClass="jfx-button3" text=" ">
                                                                      <tooltip>
                                                                         <Tooltip text="Maximize Visualizer" />
                                                                      </tooltip>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
                                                                      <graphic>
                                                                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
@@ -257,16 +255,16 @@
                                                                            </image>
                                                                         </ImageView>
                                                                      </graphic>
-                                                                  </Button>
+                                                                  </JFXButton>
                                                                </children>
                                                                <StackPane.margin>
-                                                                  <Insets top="2.0" />
+                                                                  <Insets />
                                                                </StackPane.margin>
                                                                <padding>
-                                                                  <Insets bottom="2.0" left="5.0" right="2.0" top="2.0" />
+                                                                  <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
                                                                </padding>
                                                             </HBox>
-                                                            <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
+                                                            <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="CENTER">
                                                                <graphic>
                                                                   <Button fx:id="enableHighGraphics" alignment="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
                                                                      <graphic>
@@ -367,7 +365,7 @@
                               </HBox>
                            </top>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>
@@ -589,7 +587,7 @@
                      <right>
                         <HBox alignment="CENTER" minWidth="0.0" spacing="1.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="modeToggleLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" text="Basic">
+                              <Label fx:id="modeToggleLabel" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" text="Basic">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
@@ -604,7 +602,7 @@
                                     </JFXToggleButton>
                                  </graphic>
                               </Label>
-                              <Label alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" text="History">
+                              <Label alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" text="History">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
@@ -619,7 +617,7 @@
                                     </JFXToggleButton>
                                  </graphic>
                               </Label>
-                              <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="RIGHT" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                              <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

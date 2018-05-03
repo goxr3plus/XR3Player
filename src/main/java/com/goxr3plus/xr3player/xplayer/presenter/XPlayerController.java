@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.animation.FadeTransition;
@@ -18,6 +19,7 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -147,21 +149,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label advModeVolumeLabel;
 	
 	@FXML
-	private Label elapsedTimeLabel;
-	
-	@FXML
-	private Label remainingTimeLabel;
-	
-	@FXML
-	private Label totalTimeLabel;
-	
-	@FXML
-	private Button previousSongButton;
-	
-	@FXML
-	private Button nextSongButton;
-	
-	@FXML
 	private StackPane visualizerStackTopParent;
 	
 	@FXML
@@ -186,13 +173,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private HBox visualizerSettingsHBox;
 	
 	@FXML
-	private Button visualizerSettings;
+	private JFXButton visualizerSettings;
 	
 	@FXML
-	private ToggleButton visualizerVisible;
+	private JFXButton showVisualizerButton;
 	
 	@FXML
-	private Button maximizeVisualizer;
+	private JFXButton maximizeVisualizer;
 	
 	@FXML
 	private Label visualizationsDisabledLabel;
@@ -211,6 +198,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Tab equalizerTab;
+	
+	@FXML
+	private Label elapsedTimeLabel;
+	
+	@FXML
+	private Label remainingTimeLabel;
+	
+	@FXML
+	private Label totalTimeLabel;
 	
 	@FXML
 	private BorderPane smBorderPane;
@@ -388,6 +384,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	private final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 	
+	private final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
+	
 	//======= Events ===========
 	
 	public final EventHandler<? super MouseEvent> audioDragEvent = event -> {
@@ -431,10 +429,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					}
 					
 					//Check if this File is Supported by XR3Player 
-//					if (!InfoTool.isAudioSupported(ftaap.getFileAbsolutePath())) {
-//						ActionTool.showNotification("File not supported", "XR3Player doesn't supports the given File", Duration.millis(2000), NotificationType.INFORMATION);
-//						return;
-//					}
+					//					if (!InfoTool.isAudioSupported(ftaap.getFileAbsolutePath())) {
+					//						ActionTool.showNotification("File not supported", "XR3Player doesn't supports the given File", Duration.millis(2000), NotificationType.INFORMATION);
+					//						return;
+					//					}
 					
 					//Check if XPlayer is already active
 					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
@@ -749,6 +747,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.0);
 		advModeVolumeLabel.setOpacity(0);
+		
+		//smBorderPane
+		smBorderPane.setVisible(true);
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
@@ -1071,7 +1072,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// VisualizerStackController
 		visualizerStackController.getChildren().add(0, visualizer);
-		visualizerStackController.visibleProperty().bind(visualizerVisible.selectedProperty());
+		visualizerStackController.visibleProperty().bind(visualizerVisibility);
 		visualizerStackController.addListenersToButtons(this);
 		
 		// Add VisualizerStackController to the VisualizerStackPane
@@ -1087,14 +1088,17 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		});
 		
 		// maximizeVisualizer
-		maximizeVisualizer.disableProperty().bind(visualizerVisible.selectedProperty().not());
+		maximizeVisualizer.disableProperty().bind(visualizerVisibility.not());
 		maximizeVisualizer.setOnAction(e -> visualizerWindow.displayVisualizer());
 		
-		// visualizerVisible
-		visualizerVisible.selectedProperty().addListener((observable , oldValue , newValue) -> visualizerVisible.setGraphic(newValue ? eye : eyeDisabled));
+		// showVisualizerButton
+		showVisualizerButton.setOnAction(a -> visualizerVisibility.set(!visualizerVisibility.get()));
+		
+		//visualizerVisibility
+		visualizerVisibility.addListener((observable , oldValue , newValue) -> showVisualizerButton.setGraphic(newValue ? eye : eyeDisabled));
 		
 		// visualizerVisibleLabel
-		visualizerVisibleLabel.visibleProperty().bind(visualizerVisible.selectedProperty().not());
+		visualizerVisibleLabel.visibleProperty().bind(visualizerVisibility.not());
 		
 		// visualizerMaximizedHBox
 		visualizerMaximizedBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty());
@@ -1571,7 +1575,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					//Recalculate disc
 					disc.calculateAngleByValue(0, 0, true);
 					disc.repaint();
-						
+					
 					//Reset
 					fixPlayerStop();
 				}
@@ -2001,7 +2005,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public Label getSmTimeSliderLabel() {
 		return smTimeSliderLabel;
 	}
-
+	
 	/**
 	 * @return the playerLoadingLabel
 	 */
