@@ -218,12 +218,6 @@
 		</dependency>
 		<!--<dependency> <groupId>de.jensd</groupId> <artifactId>fontawesomefx</artifactId> 
 			<version>8.9</version> </dependency> -->
-		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
-		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>javasysmon</artifactId>
-			<version>V3.5.0</version>
-		</dependency>
 		<dependency>
 			<groupId>com.1stleg</groupId>
 			<artifactId>jnativehook</artifactId>
@@ -364,6 +358,12 @@
 			<groupId>it.sauronsoftware.jave</groupId>
 			<artifactId>jave</artifactId>
 			<version>1.0.2</version>
+		</dependency>
+		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
+		<dependency>
+			<groupId>local.github.goxr3plus</groupId>
+			<artifactId>javasysmon</artifactId>
+			<version>3.6.0</version>
 		</dependency>
 	</dependencies>
 </project>
