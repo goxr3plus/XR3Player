@@ -76,7 +76,7 @@ public class DropboxFilesTableViewer extends StackPane {
 	public DropboxFilesTableViewer() {
 		
 		// FXMLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DropboxFilesTableViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxFilesTableViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

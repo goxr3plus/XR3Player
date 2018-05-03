@@ -93,6 +93,7 @@ public final class InfoTool {
 	
 	public static final String SMARTCONTROLLER_FXMLS = "/fxml/smartcontroller/";
 	
+	public static final String DROPBOX_FXMLS = "/fxml/dropbox/";
 	
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";

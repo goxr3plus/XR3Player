@@ -36,7 +36,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
  * @author GOXR3PLUS
  *
  */
-public class DropboxAuthenticationBrowser extends StackPane {
+public class DropboxAuthanticationBrowser extends StackPane {
 	
 	@FXML
 	private BorderPane borderPane;
@@ -67,10 +67,10 @@ public class DropboxAuthenticationBrowser extends StackPane {
 	/**
 	 * Constructor
 	 */
-	public DropboxAuthenticationBrowser() {
+	public DropboxAuthanticationBrowser() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AuthanticationBrowser.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxAuthanticationBrowser.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

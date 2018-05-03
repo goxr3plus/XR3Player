@@ -45,7 +45,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthenticationBrowser;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthanticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService.DropBoxOperation;
@@ -175,7 +175,7 @@ public class DropboxViewer extends StackPane {
 	// -------------------------------------------------------------	
 	private String accessToken;
 	
-	private final DropboxAuthenticationBrowser authenticationBrowser;
+	private final DropboxAuthanticationBrowser authenticationBrowser;
 	
 	private final DropboxFilesTableViewer dropboxFilesTableViewer;
 	
@@ -185,11 +185,11 @@ public class DropboxViewer extends StackPane {
 	 * Constructor.
 	 */
 	public DropboxViewer() {
-		authenticationBrowser = new DropboxAuthenticationBrowser();
+		authenticationBrowser = new DropboxAuthanticationBrowser();
 		dropboxFilesTableViewer = new DropboxFilesTableViewer();
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DropboxViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -728,7 +728,7 @@ public class DropboxViewer extends StackPane {
 	/**
 	 * @return the authenticationBrowser
 	 */
-	public DropboxAuthenticationBrowser getAuthenticationBrowser() {
+	public DropboxAuthanticationBrowser getAuthenticationBrowser() {
 		return authenticationBrowser;
 	}
 	

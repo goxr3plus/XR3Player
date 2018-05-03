@@ -54,7 +54,7 @@ public class DropboxFileContextMenu extends ContextMenu {
 	public DropboxFileContextMenu() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DropboxFileContextMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxFileContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

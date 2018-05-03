@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <center>
@@ -23,7 +23,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0">
                            <image>
-                              <Image url="@../image/Download%20From%20Cloud-24.png" />
+                              <Image url="@../../image/Download%20From%20Cloud-24.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -32,7 +32,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../image/eye2.png" />
+                              <Image url="@../../image/eye2.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -41,7 +41,7 @@
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/menu2.png" />
+                              <Image url="@../../image/menu2.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -72,7 +72,7 @@
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Audio%20Wave%20Filled-24.png" />
+                  <Image url="@../../image/Audio%20Wave%20Filled-24.png" />
                </image>
             </ImageView>
          </graphic>
