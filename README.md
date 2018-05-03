@@ -1,6 +1,6 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player 
 
-> Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.100/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
+> Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.101/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
@@ -17,7 +17,7 @@
 
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/38458113-cb51d73a-3aa2-11e8-83d9-34df4e9b9ee2.png) | ![Sec](https://user-images.githubusercontent.com/20374208/38458115-ccf7556a-3aa2-11e8-8070-9d44737b6e30.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/38458113-cb51d73a-3aa2-11e8-83d9-34df4e9b9ee2.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39456478-590c0308-4cef-11e8-9449-97839af5ecbf.png) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
