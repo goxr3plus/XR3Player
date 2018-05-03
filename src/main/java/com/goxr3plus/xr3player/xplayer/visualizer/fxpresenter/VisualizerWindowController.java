@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -93,22 +94,19 @@ public class VisualizerWindowController extends StackPane {
 	private Slider transparencySlider;
 	
 	@FXML
-	private Button maxOrNormalize;
+	private JFXButton maxOrNormalize;
 	
 	@FXML
-	private Button close;
+	private JFXButton close;
 	
 	@FXML
 	private Label visualizerLabel;
 	
 	@FXML
-	private StackPane progressBarStackPane;
+	private Label progressLabel;
 	
 	@FXML
 	private ProgressBar progressBar;
-	
-	@FXML
-	private Label progressLabel;
 	
 	// ------------------------------------
 	
@@ -174,15 +172,15 @@ public class VisualizerWindowController extends StackPane {
 		// ---Size Listeners
 		
 		// width-height Listeners
-		window.widthProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue.intValue() <= 200 && progressBarStackPane.isVisible()) {
-				progressBarStackPane.setVisible(false);
-				progressBarStackPane.setManaged(false);
-			} else if (newValue.intValue() > 200 && !progressBarStackPane.isVisible()) {
-				progressBarStackPane.setVisible(true);
-				progressBarStackPane.setManaged(true);
-			}
-		});
+//		window.widthProperty().addListener((observable , oldValue , newValue) -> {
+//			if (newValue.intValue() <= 200 && progressBarStackPane.isVisible()) {
+//				progressBarStackPane.setVisible(false);
+//				progressBarStackPane.setManaged(false);
+//			} else if (newValue.intValue() > 200 && !progressBarStackPane.isVisible()) {
+//				progressBarStackPane.setVisible(true);
+//				progressBarStackPane.setManaged(true);
+//			}
+//		});
 		
 		// --- MouseListeners
 		addEventHandler(MouseEvent.MOUSE_MOVED, m -> restartPauseTransition());
@@ -316,8 +314,7 @@ public class VisualizerWindowController extends StackPane {
 	}
 	
 	/**
-	 * Find the appropriate background or foreground Image , based on if any
-	 * Images have been ever selected from the User
+	 * Find the appropriate background or foreground Image , based on if any Images have been ever selected from the User
 	 *
 	 * @param type
 	 *            the type

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -20,9 +20,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.media.MediaView?>
-<?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="262.0" prefWidth="537.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="visualizerPane" focusTraversable="true" style="-fx-background-color: transparent;">
          <center>
@@ -32,13 +31,10 @@
                </children>
             </StackPane>
          </center></BorderPane>
-      <BorderPane fx:id="topBar" maxHeight="46.0" minHeight="35.0" prefHeight="46.0" prefWidth="527.0" style="-fx-background-color: rgb(255,255,255,0.85); -fx-border-color: #202020; -fx-border-width: 3;" StackPane.alignment="TOP_CENTER">
+      <BorderPane fx:id="topBar" maxHeight="-Infinity" minHeight="16.0" prefHeight="37.0" prefWidth="533.0" style="-fx-background-color: #202020; -fx-border-color: #202020; -fx-border-width: 3;" StackPane.alignment="TOP_CENTER">
          <StackPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets left="2.0" right="2.0" />
          </StackPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
-         </padding>
          <left>
             <MenuButton fx:id="menuPopButton" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="visWindowMenuButton" BorderPane.alignment="CENTER">
                <cursor>
@@ -95,7 +91,7 @@
                   </ContextMenu>
                </contextMenu>
                <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/menu2.png" />
                      </image>
@@ -112,59 +108,43 @@
          <right>
             <HBox alignment="TOP_CENTER" spacing="3.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="maxOrNormalize" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="windowButton" text="+">
+                  <JFXButton fx:id="maxOrNormalize" focusTraversable="false" text="+">
                      <tooltip>
                         <Tooltip text="Maximize/Normalize" />
                      </tooltip>
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="close" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="windowButton" text="X">
+                  </JFXButton>
+                  <JFXButton fx:id="close" focusTraversable="false" text="x">
                      <tooltip>
                         <Tooltip text="Close" />
                      </tooltip>
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
+                  </JFXButton>
                </children>
             </HBox>
          </right>
          <center>
-            <Label fx:id="visualizerLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="Visualizer { 0 }" BorderPane.alignment="CENTER">
+            <Label fx:id="visualizerLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="Visualizer { 0 }" BorderPane.alignment="CENTER">
                <effect>
                   <DropShadow />
                </effect>
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>
-               <graphic>
-                  <StackPane fx:id="progressBarStackPane">
-                     <children>
-                        <ProgressBar fx:id="progressBar" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="13.0" prefWidth="53.0" progress="0.0" />
-                        <Label fx:id="progressLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 11; -fx-background-color: rgb(0,0,0,0.3);" text="0 %" textAlignment="CENTER" wrapText="true">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip />
-                           </tooltip>
-                        </Label>
-                     </children>
-                  </StackPane>
-               </graphic>
                <BorderPane.margin>
                   <Insets right="5.0" />
                </BorderPane.margin>
+               <graphic>
+                  <Label fx:id="progressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 11; -fx-background-color: rgb(0,0,0,0.3);" text="0 %" textAlignment="CENTER" wrapText="true">
+                     <tooltip>
+                        <Tooltip />
+                     </tooltip>
+                     <graphic>
+                        <ProgressBar fx:id="progressBar" focusTraversable="false" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="8.0" prefWidth="50.0" progress="0.0" />
+                     </graphic>
+                  </Label>
+               </graphic>
             </Label>
          </center>
       </BorderPane>
+      <StackPane fx:id="progressBarStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" prefHeight="16.0" prefWidth="376.0" />
    </children>
 </fx:root>
