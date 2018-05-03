@@ -285,7 +285,8 @@
 .table-row-cell:hover , .table-row-cell:selected{
 	/*-fx-background-color:rgb(0.0,191.0,255.0);*/
 	/*-fx-background-color: linear-gradient(#328BDB 0.0%, #207BCF 25.0%, #1973C9 75.0%, #0A65BF 100.0%);*/
-	-fx-background-color: linear-gradient(#FF9400 0.0%, #FF7F00 25.0%, #FF5D00 75.0%, #FF4300 100.0%);
+	-fx-background-color:rgb(255.0,106,0.0,0.85);
+	/*-fx-background-color: linear-gradient(#FF9400 0.0%, #FF7F00 25.0%, #FF5D00 75.0%, #FF4300 100.0%);*/
 }
 
 
