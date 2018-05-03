@@ -312,7 +312,7 @@ public class LibraryMode extends BorderPane {
 		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
 		
 		// newLibrary
-		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary.getGraphic(), true));
+		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary.getGraphic(), true,true));
 		createFirstLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
@@ -422,11 +422,11 @@ public class LibraryMode extends BorderPane {
 	 * 
 	 * @param owner
 	 */
-	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation) {
+	public void createNewLibrary(Node owner , boolean openLibraryAfterCreation,boolean... exactPositioning) {
 		this.openLibraryAfterCreation = openLibraryAfterCreation;
 		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Create " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library", FileCategory.DIRECTORY);
+		Main.renameWindow.show("", owner, "Create " + ( !openLibraryAfterCreation ? "" : "+ Open " ) + "new Library", FileCategory.DIRECTORY,exactPositioning);
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);

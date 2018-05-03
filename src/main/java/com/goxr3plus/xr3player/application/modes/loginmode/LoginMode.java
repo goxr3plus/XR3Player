@@ -87,117 +87,116 @@ public class LoginMode extends BorderPane {
 	
 	//-------------------------------------
 	
-    @FXML
-    private Hyperlink youtubeTutorialsHyperLink;
-
-    @FXML
-    private Hyperlink visitCreatorHyperLink;
-
-    @FXML
-    private VBox downloadsVBox;
-
-    @FXML
-    private Label sourceForgeDownloadsLabel1;
-
-    @FXML
-    private Label sourceForgeDownloadsLabel;
-
-    @FXML
-    private Label gitHubDownloadsLabel;
-
-    @FXML
-    private Label xr3PlayerLabel;
-
-    @FXML
-    private JFXButton restartButton;
-
-    @FXML
-    private JFXButton minimize;
-
-    @FXML
-    private JFXButton maxOrNormalize;
-
-    @FXML
-    private JFXButton exitApplication;
-
-    @FXML
-    private MenuItem chooseBackground;
-
-    @FXML
-    private MenuItem resetBackground;
-
-    @FXML
-    private StackPane centerStackPane;
-
-    @FXML
-    private SplitPane splitPane;
-
-    @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private StackPane usersStackView;
-
-    @FXML
-    private ScrollBar horizontalScrollBar;
-
-    @FXML
-    private Label quickSearchTextField;
-
-    @FXML
-    private GridPane topGrid;
-
-    @FXML
-    private JFXToggleButton selectionModeToggle;
-
-    @FXML
-    private ToolBar userToolBar;
-
-    @FXML
-    private Button deleteUser;
-
-    @FXML
-    private Button renameUser;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private JFXButton previous;
-
-    @FXML
-    private JFXButton createUser;
-
-    @FXML
-    private JFXButton next;
-
-    @FXML
-    private Button openUserContextMenu;
-
-    @FXML
-    private ColorPicker colorPicker;
-
-    @FXML
-    private Label usersInfoLabel;
-
-    @FXML
-    private HBox botttomHBox;
-
-    @FXML
-    private Button createFirstUser;
-
-    @FXML
-    private PieChart librariesPieChart;
-
-    @FXML
-    private Button importDatabase;
-
-    @FXML
-    private Button exportDatabase;
-
-    @FXML
-    private Button deleteDatabase;
-
+	@FXML
+	private Hyperlink youtubeTutorialsHyperLink;
+	
+	@FXML
+	private Hyperlink visitCreatorHyperLink;
+	
+	@FXML
+	private VBox downloadsVBox;
+	
+	@FXML
+	private Label sourceForgeDownloadsLabel1;
+	
+	@FXML
+	private Label sourceForgeDownloadsLabel;
+	
+	@FXML
+	private Label gitHubDownloadsLabel;
+	
+	@FXML
+	private Label xr3PlayerLabel;
+	
+	@FXML
+	private JFXButton restartButton;
+	
+	@FXML
+	private JFXButton minimize;
+	
+	@FXML
+	private JFXButton maxOrNormalize;
+	
+	@FXML
+	private JFXButton exitApplication;
+	
+	@FXML
+	private MenuItem chooseBackground;
+	
+	@FXML
+	private MenuItem resetBackground;
+	
+	@FXML
+	private StackPane centerStackPane;
+	
+	@FXML
+	private SplitPane splitPane;
+	
+	@FXML
+	private BorderPane borderPane;
+	
+	@FXML
+	private StackPane usersStackView;
+	
+	@FXML
+	private ScrollBar horizontalScrollBar;
+	
+	@FXML
+	private Label quickSearchTextField;
+	
+	@FXML
+	private GridPane topGrid;
+	
+	@FXML
+	private JFXToggleButton selectionModeToggle;
+	
+	@FXML
+	private ToolBar userToolBar;
+	
+	@FXML
+	private Button deleteUser;
+	
+	@FXML
+	private Button renameUser;
+	
+	@FXML
+	private Button loginButton;
+	
+	@FXML
+	private JFXButton previous;
+	
+	@FXML
+	private JFXButton createUser;
+	
+	@FXML
+	private JFXButton next;
+	
+	@FXML
+	private Button openUserContextMenu;
+	
+	@FXML
+	private ColorPicker colorPicker;
+	
+	@FXML
+	private Label usersInfoLabel;
+	
+	@FXML
+	private HBox botttomHBox;
+	
+	@FXML
+	private Button createFirstUser;
+	
+	@FXML
+	private PieChart librariesPieChart;
+	
+	@FXML
+	private Button importDatabase;
+	
+	@FXML
+	private Button exportDatabase;
+	
+	@FXML
+	private Button deleteDatabase;
 	
 	// --------------------------------------------
 	
@@ -372,7 +371,7 @@ public class LoginMode extends BorderPane {
 		createUser.setOnAction(a -> createNewUser(createUser));
 		
 		//newUser
-		createFirstUser.setOnAction(a -> createNewUser(createFirstUser));
+		createFirstUser.setOnAction(a -> createNewUser(createFirstUser.getGraphic(), true));
 		createFirstUser.visibleProperty().bind(Bindings.size(teamViewer.itemsObservableList).isEqualTo(0));
 		
 		//loginButton
@@ -468,10 +467,10 @@ public class LoginMode extends BorderPane {
 	 * 
 	 * @param owner
 	 */
-	public void createNewUser(Node owner) {
+	public void createNewUser(Node owner , boolean... exactPositioning) {
 		
 		// Open rename window
-		Main.renameWindow.show("", owner, "Creating new User", FileCategory.DIRECTORY);
+		Main.renameWindow.show("", owner, "Creating new User", FileCategory.DIRECTORY, exactPositioning);
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(userCreationInvalidator);

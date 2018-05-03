@@ -1,36 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="325.0" prefWidth="612.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="325.0" prefWidth="612.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;">
-         <children>
-            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="3.0" />
-            <JFXButton fx:id="addNewLibrary" layoutX="1.0" layoutY="-1.0" style="-fx-border-color: transparent orange transparent firebrick; -fx-border-radius: 0 45 45 0; -fx-background-radius: 0 45 45 0;" text="+" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0">
-               <tooltip>
-                  <Tooltip text="New Tab" />
-               </tooltip>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <styleClass>
-                  <String fx:value="applicationSettingsLabel2" />
-                  <String fx:value="starWindow" />
-               </styleClass>
-            </JFXButton>
-         </children>
-      </AnchorPane>
-      <Button fx:id="emptyLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Press here to create your first playlist/library" textAlignment="CENTER" wrapText="true">
+      <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" />
+      <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Press here to create your first playlist/library" textAlignment="CENTER" wrapText="true">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>

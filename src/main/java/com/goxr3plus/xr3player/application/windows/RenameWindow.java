@@ -234,17 +234,18 @@ public class RenameWindow extends VBox {
 	 * @param title
 	 *            The text if the title Label
 	 */
-	public void show(String text , Node n , String title , FileCategory fileCategory , double... xPositionExtra) {
+	public void show(String text , Node n , String title , FileCategory fileCategory , boolean... exactPositioning) {
 		
 		//Stop the TimeLine
 		timeLine.stop();
 		window.close();
 		
+		
 		// Auto Calculate the position
 		Bounds bounds = n.localToScreen(n.getBoundsInLocal());
 		//show(text, bounds.getMinX() + 5, bounds.getMaxY(), title)
 		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2)
-		show(text, bounds.getMinX() - 440 / 2 + bounds.getWidth() / 2 + (xPositionExtra != null ? 0 : xPositionExtra[0]), bounds.getMaxY(), title);
+		show(text, exactPositioning.length == 0 ? bounds.getMinX() - 440 / 2 + bounds.getWidth() / 2 : bounds.getMinX() + 60, bounds.getMaxY(), title);
 		
 		//System.out.println(bounds.getMinX() + " , " + getWidth() + " , " + bounds.getWidth() / 2)	
 		if (!notAllow.contains(".") && fileCategory == FileCategory.DIRECTORY) {

@@ -46,10 +46,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	private JFXTabPane tabPane;
 	
 	@FXML
-	private JFXButton addNewLibrary;
-	
-	@FXML
-	private Button emptyLabel;
+	private Button createFirstLibrary;
 	
 	// -----------------------------------------------------------------------
 	
@@ -85,31 +82,18 @@ public class OpenedLibrariesViewer extends StackPane {
 		tabPane.getTabs().clear();
 		//tabPane.setId("MultipleLibrariesTabPane")
 		
-		// emptyLabel
-		emptyLabel.setOnMouseReleased(m -> {
+		// createFirstLibrary
+		createFirstLibrary.setOnMouseReleased(m -> {
 			if (Main.libraryMode.teamViewer.getViewer().getItemsObservableList().isEmpty())
-				Main.libraryMode.createNewLibrary(emptyLabel.getGraphic(), true);
+				Main.libraryMode.createNewLibrary(createFirstLibrary.getGraphic(), true, true);
 			else
 				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).setLibraryStatus(LibraryStatus.OPENED, false);
 		});
 		
 		//== emptyLabel
 		itemsWrapperProperty = new SimpleListProperty<>(tabPane.getTabs());
-		emptyLabel.visibleProperty().bind(itemsWrapperProperty.emptyProperty());
-		
-		// TabPane
-		//tabPane.setId("LibrariesTabPane");
-		
-		//	tabPane.setOnMouseMoved(m -> {
-		//	    if (!m.isControlDown())
-		//		resetCursor();
-		//	    else
-		//		setControlCursor();
-		//	});	
-		
-		//== addTab
-		addNewLibrary.setOnAction(a -> Main.libraryMode.createNewLibrary(addNewLibrary, true));
-		
+		createFirstLibrary.visibleProperty().bind(itemsWrapperProperty.emptyProperty());
+			
 	}
 	
 	//    /**
@@ -441,7 +425,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	 * @return The emptyLabel
 	 */
 	public Button getEmptyLabel() {
-		return emptyLabel;
+		return createFirstLibrary;
 	}
 	
 }
