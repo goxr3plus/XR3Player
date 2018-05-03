@@ -12,7 +12,6 @@ import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +23,7 @@ import main.java.com.goxr3plus.xr3player.application.database.services.ExportZip
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
 /**
@@ -34,6 +34,9 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 public class SideBar extends BorderPane {
 	
 	//-----------------------------------------------------
+	
+	@FXML
+	private JFXButton openTaskManager;
 	
 	@FXML
 	private JFXButton applicationUpdate;
@@ -51,15 +54,6 @@ public class SideBar extends BorderPane {
 	private MenuItem deleteDataBase;
 	
 	@FXML
-	private JFXButton applicationConsole;
-	
-	@FXML
-	private JFXButton applicationSettings;
-	
-	@FXML
-	private Button snapshot;
-	
-	@FXML
 	private MenuItem downloadYoutubePlaylist;
 	
 	@FXML
@@ -67,6 +61,15 @@ public class SideBar extends BorderPane {
 	
 	@FXML
 	private MenuItem socialMediaToAnything;
+	
+	@FXML
+	private JFXButton applicationConsole;
+	
+	@FXML
+	private JFXButton applicationSettings;
+	
+	@FXML
+	private JFXButton snapshot;
 	
 	@FXML
 	private MenuItem showApplicationInfo;
@@ -276,6 +279,21 @@ public class SideBar extends BorderPane {
 		// deleteDataBase
 		deleteDataBase.setOnAction(a -> deleteDatabase());
 		
+		//openTaskManager
+		openTaskManager.setOnAction(a -> {
+			new Thread(() -> {
+				try {
+					Runtime.getRuntime().exec("cmd /c start taskmgr");
+				} catch (IOException e) {
+					e.printStackTrace();
+					//Show Message to User
+					ActionTool.showNotification("Failed Opening Task Manager", "Failed Opening default Task Manager", Duration.millis(2000), NotificationType.ERROR);
+				}
+			}).start();
+			
+			//Show Message to User
+			ActionTool.showNotification("Opening Task Manager", "Opening default system Task Manager", Duration.millis(2000), NotificationType.INFORMATION);
+		});
 	}
 	
 	/**

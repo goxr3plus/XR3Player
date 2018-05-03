@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="767.0" prefWidth="74.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="767.0" prefWidth="74.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="3.0" top="2.0" />
    </padding>
@@ -23,6 +23,29 @@
          <content>
             <VBox alignment="CENTER" minHeight="0.0" spacing="20.0">
                <children>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="Tasks" />
+                        <JFXButton fx:id="openTaskManager" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/task.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Install new Updates" />
+                           </tooltip>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="Update" />
@@ -100,7 +123,7 @@
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/youtube24.png" />
+                                    <Image url="@../image/youtube.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -197,24 +220,17 @@
                   </VBox>
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="About" />
+                        <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="Help" />
                         <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;">
                            <items>
                               <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />
                               <MenuItem fx:id="showManual" mnemonicParsing="false" text="Application Manual" />
-                              <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Donate me a Pear">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/Pear-24.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></MenuItem>
+                              <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Donate" />
                            </items>
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/vip.png" />
+                                    <Image url="@../image/help.png" />
                                  </image>
                               </ImageView>
                            </graphic>
