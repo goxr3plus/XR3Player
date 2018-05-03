@@ -145,6 +145,5 @@
             </Label>
          </center>
       </BorderPane>
-      <StackPane fx:id="progressBarStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" prefHeight="16.0" prefWidth="376.0" />
    </children>
 </fx:root>
