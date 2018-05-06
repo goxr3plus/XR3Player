@@ -20,7 +20,7 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
@@ -98,7 +98,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 								Platform.runLater(() -> {
 									//Add Pie Chart Data
 									if (totalLibraries > 0)
-										Main.loginMode.getLibrariesPieChartData().add(new PieChart.Data(user.getUserName(), totalLibraries));
+										Main.loginMode.getSeries().getData().add(new XYChart.Data<String,Number>(user.getUserName(), totalLibraries));
 									
 									//Update User Label
 									user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries));
@@ -146,7 +146,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 										
 										//Add Pie Chart Data
 										if (totalLibraries[0] > 0)
-											Main.loginMode.getLibrariesPieChartData().add(new PieChart.Data(user.getUserName(), totalLibraries[0]));
+											Main.loginMode.getSeries().getData().add(new XYChart.Data<String,Number>(user.getUserName(), totalLibraries[0]));
 										
 										//Update User Label
 										user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries[0]));

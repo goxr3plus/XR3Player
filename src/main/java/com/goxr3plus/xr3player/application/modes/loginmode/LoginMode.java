@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
 import java.io.BufferedReader;
@@ -45,7 +42,10 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
@@ -185,9 +185,6 @@ public class LoginMode extends BorderPane {
 	private Button createFirstUser;
 	
 	@FXML
-	private PieChart librariesPieChart;
-	
-	@FXML
 	private Button importDatabase;
 	
 	@FXML
@@ -196,11 +193,16 @@ public class LoginMode extends BorderPane {
 	@FXML
 	private Button deleteDatabase;
 	
+	@FXML
+	private BarChart<String,Number> librariesBarChart;
+	
 	// --------------------------------------------
 	
-	private final ObservableList<PieChart.Data> librariesPieChartData = FXCollections.observableArrayList();
-	
-	//private final ObservableList<PieChart.Data> downloadsPieChartData = FXCollections.observableArrayList();
+	private final CategoryAxis xAxis = new CategoryAxis();
+	private final NumberAxis yAxis = new NumberAxis();
+	//defining a series
+	XYChart.Series<String,Number> series = new XYChart.Series<>();
+	//private final ObservableList<PieChart.Data> librariesPieChartData = FXCollections.observableArrayList()	
 	
 	//---
 	
@@ -259,7 +261,8 @@ public class LoginMode extends BorderPane {
 						teamViewer.addUser(user, true);
 						
 						//Add to PieChart
-						librariesPieChartData.add(new PieChart.Data(newName, 0));
+						//						librariesPieChartData.add(new PieChart.Data(newName, 0));
+						series.getData().add(new XYChart.Data<String,Number>(newName, 0));
 						
 						//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
 						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
@@ -312,8 +315,8 @@ public class LoginMode extends BorderPane {
 		//centerStackPane
 		centerStackPane.getChildren().add(flipPane);
 		
-		//librariesPieChart
-		librariesPieChart.setData(librariesPieChartData);
+		//librariesBarChart
+		librariesBarChart.getData().add(series);
 		
 		//Initialize
 		teamViewer = new Viewer(horizontalScrollBar);
@@ -494,13 +497,6 @@ public class LoginMode extends BorderPane {
 	}
 	
 	/**
-	 * @return the librariesPieChartData
-	 */
-	public ObservableList<PieChart.Data> getLibrariesPieChartData() {
-		return librariesPieChartData;
-	}
-	
-	/**
 	 * @return the xr3PlayerLabel
 	 */
 	public Label getXr3PlayerLabel() {
@@ -534,6 +530,13 @@ public class LoginMode extends BorderPane {
 	 */
 	public StackPane getCenterStackPane() {
 		return centerStackPane;
+	}
+	
+	/**
+	 * @return the series
+	 */
+	public XYChart.Series<String,Number> getSeries() {
+		return series;
 	}
 	
 	/*-----------------------------------------------------------------------

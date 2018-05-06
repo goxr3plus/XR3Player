@@ -119,9 +119,9 @@ public class User extends StackPane {
 									+ InfoTool.USER_INFORMATION_FILE_NAME);
 							
 							//Change Pie Data Name
-							Main.loginMode.getLibrariesPieChartData().forEach(pieData -> {
-								if (pieData.getName().equals(InfoTool.getMinString(oldName, 4)))
-									pieData.setName(InfoTool.getMinString(newName, 4));
+							Main.loginMode.getSeries().getData().forEach(pieData -> {
+								if (pieData.getXValue().equals(InfoTool.getMinString(oldName, 4)))
+									pieData.setXValue(InfoTool.getMinString(newName, 4));
 							});
 						} else
 							ActionTool.showNotification("Error", "An error occured trying to rename the user", Duration.seconds(2), NotificationType.ERROR);
@@ -325,8 +325,8 @@ public class User extends StackPane {
 				Main.loginMode.teamViewer.deleteUser(this);
 				
 				//Delete from PieChart
-				Main.loginMode.getLibrariesPieChartData().stream().filter(data -> data.getName().equals(this.getUserName())).findFirst()
-						.ifPresent(data -> Main.loginMode.getLibrariesPieChartData().remove(data));
+				Main.loginMode.getSeries().getData().stream().filter(data -> data.getXValue().equals(this.getUserName())).findFirst()
+						.ifPresent(data -> Main.loginMode.getSeries().getData().remove(data));
 				
 				//Flip Pane flip to Front
 				Main.loginMode.flipPane.flipToFront();

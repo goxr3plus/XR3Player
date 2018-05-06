@@ -406,7 +406,7 @@
                                           </Button>
                                        </children>
                                     </HBox>
-                                    <BarChart fx:id="librariesBarChart" title="Libraries Per user" VBox.vgrow="ALWAYS">
+                                    <BarChart fx:id="librariesBarChart" animated="false" legendSide="TOP" title="Libraries Per user" titleSide="BOTTOM" VBox.vgrow="ALWAYS">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
