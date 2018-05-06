@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -33,6 +34,12 @@ public class BottomBar extends BorderPane {
 	
 	@FXML
 	private HBox hBox;
+	
+	@FXML
+	private MenuItem chooseBackground;
+	
+	@FXML
+	private MenuItem resetBackground;
 	
 	@FXML
 	private JFXToggleButton showHideSideBar;
@@ -208,7 +215,13 @@ public class BottomBar extends BorderPane {
 		hBox.getChildren().addAll(cpuMonitor, ramMonitor);
 		
 		// -- searchField
-		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2));
+		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2))
+		
+		//chooseBackground
+		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		
+		//resetBackground
+		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 	}
 	
 	/**

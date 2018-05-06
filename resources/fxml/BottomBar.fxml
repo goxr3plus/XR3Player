@@ -16,6 +16,15 @@
    <center>
       <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;" BorderPane.alignment="CENTER">
          <children>
+            <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" text="Background">
+               <items>
+                  <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
+                  <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
+               </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
             <MenuButton focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" popupSide="TOP" prefHeight="0.0" prefWidth="0.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings" visible="false">
                <items>
                   <MenuItem mnemonicParsing="false">
@@ -42,6 +51,14 @@
                   </ImageView>
                </graphic>
             </MenuButton>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+            </Label>
             <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />

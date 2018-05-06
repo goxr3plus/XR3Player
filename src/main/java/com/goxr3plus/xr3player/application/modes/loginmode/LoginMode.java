@@ -50,7 +50,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
@@ -66,7 +65,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode.Viewer;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.UsersInfoLoader;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
@@ -121,10 +119,10 @@ public class LoginMode extends BorderPane {
 	private JFXButton exitApplication;
 	
 	@FXML
-	private MenuItem chooseBackground;
+	private JFXButton donate;
 	
 	@FXML
-	private MenuItem resetBackground;
+	private JFXButton about;
 	
 	@FXML
 	private StackPane centerStackPane;
@@ -408,11 +406,11 @@ public class LoginMode extends BorderPane {
 		//exitButton
 		exitApplication.setOnAction(a -> Main.confirmApplicationExit());
 		
-		//chooseBackground
-		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		//donate
+		donate.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 		
-		//resetBackground
-		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
+		// about
+		about.setOnAction(a -> Main.aboutWindow.show());
 		
 		// previous
 		previous.setOnAction(a -> teamViewer.previous());

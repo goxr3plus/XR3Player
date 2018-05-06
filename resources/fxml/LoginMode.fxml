@@ -9,8 +9,6 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -30,7 +28,7 @@
 
 <fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: rgb(20,20,20,0.85); -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #050505; -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                <cursor>
@@ -110,7 +108,7 @@
    <top>
       <BorderPane style="-fx-background-color: #101010;" BorderPane.alignment="CENTER">
          <center>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-color: firebrick firebrick transparent firebrick; -fx-border-width: 3; -fx-border-radius: 0 0 15 15; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~  XR3Player   ~" BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-width: 3; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~  XR3Player   ~" BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>
@@ -151,20 +149,33 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding>
                   </HBox>
-                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10;" text="Background">
-                    <items>
-                      <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
-                      <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
-                    </items>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </MenuButton>
+                  <HBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="Donate">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/charity.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="About">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/about.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
                </children>
+               <BorderPane.margin>
+                  <Insets right="5.0" />
+               </BorderPane.margin>
             </VBox>
          </right>
       </BorderPane>

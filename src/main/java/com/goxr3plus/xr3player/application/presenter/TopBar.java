@@ -13,14 +13,12 @@ import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -33,24 +31,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 public class TopBar extends BorderPane {
 	
 	// ----------------------------------------------
-	
-	@FXML
-	private JFXButton restartButton;
-	
-	@FXML
-	private JFXButton minimize;
-	
-	@FXML
-	private JFXButton maxOrNormalize;
-	
-	@FXML
-	private JFXButton exitApplication;
-	
-	@FXML
-	private MenuItem chooseBackground;
-	
-	@FXML
-	private MenuItem resetBackground;
 	
 	@FXML
 	private Label xr3Label;
@@ -78,6 +58,24 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private Tab moviesModeTab;
+	
+	@FXML
+	private JFXButton restartButton;
+	
+	@FXML
+	private JFXButton minimize;
+	
+	@FXML
+	private JFXButton maxOrNormalize;
+	
+	@FXML
+	private JFXButton exitApplication;
+	
+	@FXML
+	private JFXButton donate;
+	
+	@FXML
+	private JFXButton about;
 	
 	// ----------------------------------------------
 	
@@ -165,11 +163,11 @@ public class TopBar extends BorderPane {
 		// close
 		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());
 		
-		//chooseBackground
-		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		//donate
+		donate.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 		
-		//resetBackground
-		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
+		// about
+		about.setOnAction(a -> Main.aboutWindow.show());
 		
 		//----------------------------START: TABS---------------------------------
 		
