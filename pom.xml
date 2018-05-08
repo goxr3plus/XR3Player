@@ -209,7 +209,7 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>9.0.3</version>
+			<version>9.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>

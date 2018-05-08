@@ -36,9 +36,6 @@ public class LibraryInformation extends BorderPane {
 	private Label dateLabel;
 	
 	@FXML
-	private Label timeLabel;
-	
-	@FXML
 	private Label starsLabel;
 	
 	@FXML
@@ -80,9 +77,7 @@ public class LibraryInformation extends BorderPane {
 		this.library = library;
 		
 		//--Date Label
-		dateLabel.setText(library.getDateCreated());
-		//--Time Label
-		timeLabel.setText(library.getTimeCreated());
+		dateLabel.setText(library.getDateCreated() + " " + library.getTimeCreated());
 		//--Stars Label
 		starsLabel.textProperty().bind(library.getRatingLabel().textProperty());
 		//--Total Items
@@ -158,8 +153,6 @@ public class LibraryInformation extends BorderPane {
 				totalItems.textProperty().unbind();
 			}
 		});
-		
-		// GlyphsDude.setIcon(totalItems, FontAwesomeIcon.CLOUD, "1.5em")
 		
 		// starsLabel
 		starsLabel.setOnMouseReleased(m -> library.updateLibraryStars(library));

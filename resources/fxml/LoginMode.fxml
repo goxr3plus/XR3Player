@@ -365,11 +365,11 @@
                               </Button>
                            </children>
                         </StackPane>
-                        <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" prefWidth="200.0">
+                        <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0">
                            <children>
                               <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="42.0" prefWidth="750.0">
+                                    <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="750.0">
                                        <children>
                                           <Button fx:id="importDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                              <cursor>

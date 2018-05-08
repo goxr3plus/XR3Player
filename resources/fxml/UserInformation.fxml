@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" stylesheets="@../style/userInformation.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" stylesheets="@../style/userInformation.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: #303030;">
          <children>
@@ -151,7 +151,7 @@
                                        </graphic></Label>
                                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" VBox.vgrow="ALWAYS">
                                        <graphic>
-                                          <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="notes..." styleClass="dark-text-area" wrapText="true" />
+                                          <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="notes..." style="-fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" />
                                        </graphic>
                                     </Label>
                                  </children>
