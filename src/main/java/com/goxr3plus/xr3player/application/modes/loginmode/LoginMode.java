@@ -193,15 +193,15 @@ public class LoginMode extends BorderPane {
 	@FXML
 	private Button deleteDatabase;
 	
-	@FXML
-	private BarChart<String,Number> librariesBarChart;
+	//@FXML
+	//private BarChart<String,Number> librariesBarChart;
 	
 	// --------------------------------------------
 	
-	private final CategoryAxis xAxis = new CategoryAxis();
-	private final NumberAxis yAxis = new NumberAxis();
+	//private final CategoryAxis xAxis = new CategoryAxis();
+	//private final NumberAxis yAxis = new NumberAxis();
 	//defining a series
-	XYChart.Series<String,Number> series = new XYChart.Series<>();
+	//XYChart.Series<String,Number> series = new XYChart.Series<>();
 	//private final ObservableList<PieChart.Data> librariesPieChartData = FXCollections.observableArrayList()	
 	
 	//---
@@ -262,7 +262,7 @@ public class LoginMode extends BorderPane {
 						
 						//Add to PieChart
 						//						librariesPieChartData.add(new PieChart.Data(newName, 0));
-						series.getData().add(new XYChart.Data<String,Number>(newName, 0));
+						//series.getData().add(new XYChart.Data<String,Number>(newName, 0));
 						
 						//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
 						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
@@ -316,7 +316,7 @@ public class LoginMode extends BorderPane {
 		centerStackPane.getChildren().add(flipPane);
 		
 		//librariesBarChart
-		librariesBarChart.getData().add(series);
+		//librariesBarChart.getData().add(series);
 		
 		//Initialize
 		teamViewer = new Viewer(horizontalScrollBar);
@@ -535,9 +535,9 @@ public class LoginMode extends BorderPane {
 	/**
 	 * @return the series
 	 */
-	public XYChart.Series<String,Number> getSeries() {
-		return series;
-	}
+//	public XYChart.Series<String,Number> getSeries() {
+//		return series;
+//	}
 	
 	/*-----------------------------------------------------------------------
 	 * 
