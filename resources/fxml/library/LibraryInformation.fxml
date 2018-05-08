@@ -12,19 +12,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
 <fx:root prefHeight="390.0" prefWidth="348.0" style="-fx-background-color: #202020;" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
    </padding>
-   <center>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="204.0" promptText="comments...." style="-fx-font-size: 15; -fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" />
-         </children>
-      </VBox>
-   </center>
    <top>
       <GridPane prefHeight="186.0" prefWidth="342.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -88,7 +80,7 @@
                   <Tooltip text="Total songs in Library" />
                </tooltip>
             </Label>
-            <Label fx:id="dateLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="dateLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="- " GridPane.columnIndex="1" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Date the Library was created" />
                </tooltip>
@@ -117,4 +109,7 @@
       <URL value="@../../style/application.css" />
       <URL value="@../../style/userInformation.css" />
    </stylesheets>
+   <center>
+      <TextArea fx:id="commentsArea" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="204.0" promptText="comments...." style="-fx-font-size: 15; -fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" BorderPane.alignment="CENTER" />
+   </center>
 </fx:root>

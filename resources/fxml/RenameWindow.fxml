@@ -30,7 +30,10 @@
                   <Tooltip text="Okay" />
                </tooltip>
             </JFXButton>
-            <JFXButton fx:id="closeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="283.0" layoutY="10.0" text=" ">
+            <JFXButton fx:id="closeButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="283.0" layoutY="10.0" text=" ">
+               <tooltip>
+                  <Tooltip text="Cancel" />
+               </tooltip>
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,9 +41,6 @@
                      </image>
                   </ImageView>
                </graphic>
-               <tooltip>
-                  <Tooltip text="Cancel" />
-               </tooltip>
             </JFXButton>
          </children>
       </HBox>

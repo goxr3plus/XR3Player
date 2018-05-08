@@ -188,6 +188,17 @@
 	<!-- Dependencies -->
 
 	<dependencies>
+		<!-- ikonli -->
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-javafx</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-typicons-pack</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 		<!-- Image4j -->
 		<dependency>
 			<groupId>com.github.imcdonagh</groupId>
