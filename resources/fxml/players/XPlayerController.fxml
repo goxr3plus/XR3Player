@@ -576,7 +576,7 @@
                      <left>
                         <HBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="29.0" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -584,11 +584,7 @@
                                     <Tooltip text="Show Menu" />
                                  </tooltip>
                                  <graphic>
-                                    <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../image/menu2.png" />
-                                       </image>
-                                    </ImageView>
+                                    <FontIcon iconColor="#08c9eb" iconLiteral="typ-th-large-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
                               <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
@@ -599,7 +595,7 @@
                                     <Tooltip text="Open File or Folder" />
                                  </tooltip>
                                  <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="typ-folder-add" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="ORANGE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
                               <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
