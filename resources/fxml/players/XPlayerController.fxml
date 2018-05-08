@@ -457,16 +457,16 @@
                            <left>
                               <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="15.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="29.0">
+                                    <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="typ-volume-up" iconSize="32" selectionEnd="0" selectionStart="0" />
+                                          <FontIcon iconColor="WHITE" iconLiteral="typ-volume-up" iconSize="28" selectionEnd="0" selectionStart="0" />
                                        </graphic>
                                     </Button>
                                     <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" styleClass="transparency-slider" VBox.vgrow="ALWAYS" />
-                                    <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="29.0">
+                                    <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
