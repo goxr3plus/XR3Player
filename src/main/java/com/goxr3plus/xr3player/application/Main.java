@@ -112,7 +112,7 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	public static final Logger logger = Logger.getGlobal();
 	public static final Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 103;
+	public static final int APPLICATION_VERSION = 104;
 	static {
 		//Important for Web Browser allowing xss
 		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
