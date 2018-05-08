@@ -12,7 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
          <viewport>
@@ -67,7 +67,7 @@
          <graphic>
             <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../image/About-32.png" />
+                  <Image url="@../../image/inform.png" />
                </image>
             </ImageView>
          </graphic>
@@ -96,7 +96,7 @@
             <Insets top="95.0" />
          </StackPane.margin>
       </Label>
-      <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="5435452" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+      <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="543545 2" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>

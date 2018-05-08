@@ -65,7 +65,7 @@ public class User extends StackPane {
 	/** The logger for this class */
 	private static final Logger logger = Logger.getLogger(User.class.getName());
 	
-	public static final Image DEFAULT_USER_IMAGE = InfoTool.getImageFromResourcesFolder("application_background.jpg");
+	public static final Image DEFAULT_USER_IMAGE = InfoTool.getImageFromResourcesFolder("user_image.jpg");
 	
 	/**
 	 * Here are stored all the informations about the user and other things like opened libraries etc.
@@ -207,7 +207,9 @@ public class User extends StackPane {
 		
 		//imageView
 		String absoluteImagePath = JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
-		if (absoluteImagePath != null)
+		if (absoluteImagePath == null)
+			setDefaultImage();
+		else
 			imageView.setImage(new Image(new File(absoluteImagePath).toURI() + ""));
 		
 		//Name

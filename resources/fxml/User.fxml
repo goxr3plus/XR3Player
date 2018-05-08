@@ -16,9 +16,6 @@
          <viewport>
             <Rectangle2D />
          </viewport>
-         <image>
-            <Image url="@../image/application_background.jpg" />
-         </image>
       </ImageView>
       <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
          <graphic>
