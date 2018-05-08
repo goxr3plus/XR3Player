@@ -23,7 +23,7 @@
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <center>
-      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR4Player " BorderPane.alignment="CENTER" fx:id="xr3Label">
+      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-background-radius: 0 0 15 15; -fx-border-radius: 0 0 15 15; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="XR4Player  " BorderPane.alignment="CENTER" fx:id="xr3Label">
          <effect>
             <DropShadow />
          </effect>
@@ -133,6 +133,28 @@
    <right>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="Donate">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/charity.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="About">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/about.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
             <HBox alignment="TOP_CENTER" spacing="5.0">
                <children>
                   <JFXButton fx:id="restartButton" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" text="R">
@@ -159,28 +181,6 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" spacing="5.0">
-               <children>
-                  <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="Donate">
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/charity.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="About">
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/about.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
             </HBox>
          </children>
       </VBox>
