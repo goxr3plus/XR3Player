@@ -24,6 +24,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
@@ -255,43 +256,28 @@
                                                                         <HBox alignment="CENTER" spacing="3.0">
                                                                            <children>
                                                                               <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
-                                                                                 <graphic>
-                                                                                    <ImageView fitHeight="28.0" fitWidth="28.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                                                       <image>
-                                                                                          <Image url="@../image/nextt.png" />
-                                                                                       </image>
-                                                                                    </ImageView>
-                                                                                 </graphic>
                                                                                  <tooltip>
                                                                                     <Tooltip text="Previous" />
                                                                                  </tooltip>
+                                                                                 <graphic>
+                                                                                    <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
+                                                                                 </graphic>
                                                                               </JFXButton>
                                                                               <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                                                                                 <graphic>
-                                                                                    <ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
-                                                                                       <image>
-                                                                                          <Image url="@../image/addUser.png" />
-                                                                                       </image>
-                                                                                       <cursor>
-                                                                                          <Cursor fx:constant="HAND" />
-                                                                                       </cursor>
-                                                                                    </ImageView>
-                                                                                 </graphic>
                                                                                  <tooltip>
                                                                                     <Tooltip text="Create new User" />
                                                                                  </tooltip>
+                                                                                 <graphic>
+                                                                                    <FontIcon iconColor="WHITE" iconLiteral="typ-user-add" iconSize="38" selectionEnd="0" />
+                                                                                 </graphic>
                                                                               </JFXButton>
                                                                               <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
-                                                                                 <graphic>
-                                                                                    <ImageView fitHeight="28.0" fitWidth="28.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                                                                       <image>
-                                                                                          <Image url="@../image/nextt.png" />
-                                                                                       </image>
-                                                                                    </ImageView>
-                                                                                 </graphic>
                                                                                  <tooltip>
                                                                                     <Tooltip text="Next" />
                                                                                  </tooltip>
+                                                                                 <graphic>
+                                                                                    <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
+                                                                                 </graphic>
                                                                               </JFXButton>
                                                                            </children>
                                                                            <HBox.margin>
@@ -302,16 +288,12 @@
                                                                            <cursor>
                                                                               <Cursor fx:constant="HAND" />
                                                                            </cursor>
-                                                                           <graphic>
-                                                                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" styleClass="last">
-                                                                                 <image>
-                                                                                    <Image url="@../image/grid.png" />
-                                                                                 </image>
-                                                                              </ImageView>
-                                                                           </graphic>
                                                                            <tooltip>
                                                                               <Tooltip text="Open Context Menu" />
                                                                            </tooltip>
+                                                                           <graphic>
+                                                                              <FontIcon iconColor="#2cee97" iconLiteral="typ-th-large-outline" iconSize="32" selectionEnd="0" />
+                                                                           </graphic>
                                                                         </Button>
                                                                         <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="64.0">
                                                                            <cursor>

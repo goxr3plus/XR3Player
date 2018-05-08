@@ -14,8 +14,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="570.0" prefWidth="763.0" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="570.0" prefWidth="763.0" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
@@ -59,49 +60,34 @@
                                     <HBox alignment="CENTER" spacing="3.0">
                                        <children>
                                           <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
-                                             <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/nextt.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
                                              <tooltip>
                                                 <Tooltip text="Previous" />
                                              </tooltip>
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <graphic>
+                                                <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
+                                             </graphic>
                                           </JFXButton>
                                           <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                                             <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/plus.png" />
-                                                   </image>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </ImageView>
-                                             </graphic>
                                              <tooltip>
                                                 <Tooltip text="Create new Library" />
                                              </tooltip>
+                                             <graphic>
+                                                <FontIcon iconColor="#2cee97" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
+                                             </graphic>
                                           </JFXButton>
                                           <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
-                                             <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                                   <image>
-                                                      <Image url="@../../image/nextt.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
                                              <tooltip>
                                                 <Tooltip text="Next" />
                                              </tooltip>
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <graphic>
+                                                <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
+                                             </graphic>
                                           </JFXButton>
                                        </children>
                                        <HBox.margin>
@@ -112,19 +98,15 @@
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="last">
-                                             <image>
-                                                <Image url="@../../image/grid.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <tooltip>
                                           <Tooltip text="Open Library Context Menu" />
                                        </tooltip>
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
+                                       <graphic>
+                                          <FontIcon iconColor="#2cee97" iconLiteral="typ-th-large-outline" iconSize="32" selectionEnd="0" />
+                                       </graphic>
                                     </Button>
                                     <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
                                        <cursor>

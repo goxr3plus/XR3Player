@@ -199,6 +199,11 @@
 			<artifactId>ikonli-typicons-pack</artifactId>
 			<version>2.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-fontawesome-pack</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 		<!-- Image4j -->
 		<dependency>
 			<groupId>com.github.imcdonagh</groupId>

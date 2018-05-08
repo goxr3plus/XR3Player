@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <center>
@@ -20,73 +21,41 @@
                   <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
                   <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Artwork">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/artwork.jpg" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-file-image-o" iconSize="20" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played">
                      <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../image/played.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-notes-outline" iconSize="25" />
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Download / Buy">
+                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Search on Web">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                           <image>
-                              <Image url="@../../image/Download%20From%20Cloud-24.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-firefox" iconSize="20" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="20.0">
-                           <image>
-                              <Image url="@../../image/flask.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-filter" iconSize="24" />
                      </graphic></TableColumn>
                   <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Title">
                      <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../image/eye2.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-directions" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                           <image>
-                              <Image url="@../../image/likeFaded.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-thumbs-up" iconSize="25" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Length">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/duration.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="stars" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Stars">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/smallStar.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#ffea29" iconLiteral="typ-star" iconSize="24" />
                      </graphic>
                   </TableColumn>
                      <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Play Count" />

@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root prefHeight="30.0" prefWidth="1138.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -66,16 +67,12 @@
                <padding>
                   <Insets left="4.0" right="4.0" />
                </padding>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/Wi-Fi-24.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
                <tooltip>
                   <Tooltip text="Internet connection is available?" />
                </tooltip>
+               <graphic>
+                  <FontIcon iconColor="#16a8e0" iconLiteral="typ-wi-fi" iconSize="28" />
+               </graphic>
             </Label>
             <Label fx:id="internetConnectionDescriptionLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Disconnected" textAlignment="CENTER" wrapText="true">
                <cursor>
@@ -107,11 +104,7 @@
                   <Tooltip text="Current System Time" />
                </tooltip>
                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/stopwatch.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24" />
                </graphic>
             </Label>
             <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="566.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="/" textAlignment="CENTER" textFill="#1fdbcf" wrapText="true">
