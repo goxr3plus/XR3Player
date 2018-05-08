@@ -713,8 +713,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				xPlayerWindow.show();
 				isPlayerExtended = true;
 				sizeStackedFontIcon.getChildren().get(0).setVisible(true);
-				sizeStackedFontIcon.getChildren().get(1).setVisible(false);
-				
+				sizeStackedFontIcon.getChildren().get(1).setVisible(false);		
 			} else {
 				xPlayerWindow.close();
 				isPlayerExtended = false;

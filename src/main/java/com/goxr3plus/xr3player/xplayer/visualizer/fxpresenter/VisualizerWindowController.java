@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kordamp.ikonli.javafx.StackedFontIcon;
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.animation.PauseTransition;
@@ -97,6 +99,9 @@ public class VisualizerWindowController extends StackPane {
 	private JFXButton maxOrNormalize;
 	
 	@FXML
+	private StackedFontIcon sizeStackedFontIcon;
+	
+	@FXML
 	private JFXButton close;
 	
 	@FXML
@@ -172,15 +177,15 @@ public class VisualizerWindowController extends StackPane {
 		// ---Size Listeners
 		
 		// width-height Listeners
-//		window.widthProperty().addListener((observable , oldValue , newValue) -> {
-//			if (newValue.intValue() <= 200 && progressBarStackPane.isVisible()) {
-//				progressBarStackPane.setVisible(false);
-//				progressBarStackPane.setManaged(false);
-//			} else if (newValue.intValue() > 200 && !progressBarStackPane.isVisible()) {
-//				progressBarStackPane.setVisible(true);
-//				progressBarStackPane.setManaged(true);
-//			}
-//		});
+		//		window.widthProperty().addListener((observable , oldValue , newValue) -> {
+		//			if (newValue.intValue() <= 200 && progressBarStackPane.isVisible()) {
+		//				progressBarStackPane.setVisible(false);
+		//				progressBarStackPane.setManaged(false);
+		//			} else if (newValue.intValue() > 200 && !progressBarStackPane.isVisible()) {
+		//				progressBarStackPane.setVisible(true);
+		//				progressBarStackPane.setManaged(true);
+		//			}
+		//		});
 		
 		// --- MouseListeners
 		addEventHandler(MouseEvent.MOUSE_MOVED, m -> restartPauseTransition());
@@ -218,6 +223,17 @@ public class VisualizerWindowController extends StackPane {
 		// ----------------------------- Minimize
 		maxOrNormalize.setOnAction(a -> scene.maximizeStage());
 		close.setOnAction(action -> removeVisualizer());
+		
+		//stage
+		scene.maximizedProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue) {
+				sizeStackedFontIcon.getChildren().get(0).setVisible(true);
+				sizeStackedFontIcon.getChildren().get(1).setVisible(false);
+			} else {
+				sizeStackedFontIcon.getChildren().get(1).setVisible(true);
+				sizeStackedFontIcon.getChildren().get(0).setVisible(false);
+			}
+		});
 		
 		// transparencySlider
 		transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
