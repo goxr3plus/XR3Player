@@ -24,6 +24,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="875.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
@@ -83,7 +84,7 @@
                                                                         </ImageView>
                                                                      </graphic>
                                                                   </Button>
-                                                                  <Button fx:id="stopButton" layoutX="220.0" layoutY="14.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
+                                                                  <Button fx:id="stopButton" layoutX="220.0" layoutY="14.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
                                                                      <cursor>
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
@@ -91,11 +92,7 @@
                                                                         <Tooltip text="Stop" />
                                                                      </tooltip>
                                                                      <graphic>
-                                                                        <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/stop.png" />
-                                                                           </image>
-                                                                        </ImageView>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="typ-media-stop" iconSize="32" selectionEnd="0" selectionStart="0" />
                                                                      </graphic>
                                                                   </Button>
                                                                </children>
@@ -119,41 +116,24 @@
                                                                <children>
                                                                   <ToggleButton fx:id="muteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="first">
                                                                      <graphic>
-                                                                        <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/mute.png" />
-                                                                           </image>
-                                                                        </ImageView>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="typ-volume-mute" iconSize="32" selectionEnd="0" selectionStart="0" />
                                                                      </graphic>
                                                                   </ToggleButton>
-                                                                  <Button fx:id="replayButton" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
+                                                                  <Button fx:id="replayButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="40.0" style="-fx-font-size: 11;">
                                                                      <cursor>
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
-                                                                     <graphic>
-                                                                        <ImageView fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/replay.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
                                                                      <tooltip>
                                                                         <Tooltip text="Replay" />
                                                                      </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
                                                                   </Button>
                                                                </children>
                                                             </HBox>
                                                          </children>
                                                       </FlowPane>
-                                                      <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
-                                                         <graphic>
-                                                            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../image/online.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                      </Label>
                                                    </children>
                                                 </StackPane>
                                              </bottom>
@@ -207,17 +187,13 @@
                                                             </FlowPane>
                                                             <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" maxHeight="32.0" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" spacing="7.0" style="-fx-background-color: #151515;" StackPane.alignment="TOP_CENTER">
                                                                <children>
-                                                                  <JFXButton fx:id="visualizerSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button3" text=" ">
-                                                                     <graphic>
-                                                                        <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/Maintenance-24.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
+                                                                  <JFXButton fx:id="visualizerSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button3" text=" ">
                                                                      <tooltip>
                                                                         <Tooltip text="Visualizer Settings" />
                                                                      </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-spanner" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
                                                                   </JFXButton>
                                                                   <JFXButton fx:id="showVisualizerButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" styleClass="jfx-button3" text=" ">
                                                                      <graphic>
@@ -234,16 +210,12 @@
                                                                         <Tooltip text="Visibility of Visualizer" />
                                                                      </tooltip>
                                                                   </JFXButton>
-                                                                  <JFXButton fx:id="maximizeVisualizer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" styleClass="jfx-button3" text=" ">
+                                                                  <JFXButton fx:id="maximizeVisualizer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button3" text=" ">
                                                                      <tooltip>
                                                                         <Tooltip text="Maximize Visualizer" />
                                                                      </tooltip>
                                                                      <graphic>
-                                                                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/extend.png" />
-                                                                           </image>
-                                                                        </ImageView>
+                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-maximise" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                                      </graphic>
                                                                   </JFXButton>
                                                                </children>
@@ -295,64 +267,74 @@
                               </SplitPane>
                            </center>
                            <top>
-                              <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="871.0" spacing="2.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                              <StackPane BorderPane.alignment="CENTER">
                                  <children>
-                                    <HBox maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                                    <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="871.0" spacing="2.0" style="-fx-background-color: #202020;">
                                        <children>
-                                          <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                          <HBox maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Current" VBox.vgrow="ALWAYS" />
-                                                <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Current" VBox.vgrow="ALWAYS" />
+                                                      <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
+                                                      <Label fx:id="remainingTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
+                                                      <Label fx:id="totalTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
+                                                   </children>
+                                                </VBox>
                                              </children>
-                                          </VBox>
-                                          <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
-                                                <Label fx:id="remainingTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                             </children>
-                                          </VBox>
-                                          <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
-                                                <Label fx:id="totalTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                             </children>
-                                          </VBox>
+                                          </HBox>
+                                          <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../image/likeFaded.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="Express your emotion for this Song" />
+                                             </tooltip>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
+                                             <graphic>
+                                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
                                        </children>
+                                       <padding>
+                                          <Insets left="2.0" top="5.0" />
+                                       </padding>
                                     </HBox>
-                                    <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;">
+                                    <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
                                        <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../image/likeFaded.png" />
+                                                <Image url="@../../image/online.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
-                                       <tooltip>
-                                          <Tooltip text="Express your emotion for this Song" />
-                                       </tooltip>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
-                                    <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
-                                       <graphic>
-                                          <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
-                                       </graphic>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
+                                    </Label>
                                  </children>
-                                 <padding>
-                                    <Insets left="2.0" top="5.0" />
-                                 </padding>
-                                 <BorderPane.margin>
-                                    <Insets top="1.0" />
-                                 </BorderPane.margin>
-                              </HBox>
+                              </StackPane>
                            </top>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>
@@ -581,10 +563,15 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <tooltip>
-                                    <Tooltip text="Open Player to external Window" />
+                                    <Tooltip text="Open to external window" />
                                  </tooltip>
                                  <graphic>
-                                    <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-maximise" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <StackedFontIcon fx:id="sizeStackedFontIcon">
+                                       <children>
+                                          <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0" selectionStart="0" visible="false" />
+                                          <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-maximise" iconSize="24" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                                       </children>
+                                    </StackedFontIcon>
                                  </graphic>
                               </Button>
                            </children>

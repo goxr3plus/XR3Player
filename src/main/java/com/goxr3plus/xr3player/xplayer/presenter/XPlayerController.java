@@ -11,6 +11,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.javafx.StackedFontIcon;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -48,7 +51,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -125,13 +127,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button backwardButton;
 	
 	@FXML
-	private Button forwardButton;
-	
-	@FXML
 	private Button playPauseButton;
 	
 	@FXML
 	private Button stopButton;
+	
+	@FXML
+	private Button forwardButton;
 	
 	@FXML
 	private ToggleButton muteButton;
@@ -141,6 +143,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label advModeVolumeLabel;
+	
+	@FXML
+	private SplitPane leftSplitPane;
 	
 	@FXML
 	private StackPane visualizerStackTopParent;
@@ -182,16 +187,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button enableHighGraphics;
 	
 	@FXML
-	private HBox mediaNameHBox;
-	
-	@FXML
-	private Button emotionsButton;
-	
-	@FXML
-	private Button mediaTagImageButton;
-	
-	@FXML
 	private Tab equalizerTab;
+	
+	@FXML
+	private HBox mediaNameHBox;
 	
 	@FXML
 	private Label elapsedTimeLabel;
@@ -201,6 +200,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label totalTimeLabel;
+	
+	@FXML
+	private Button emotionsButton;
+	
+	@FXML
+	private Button mediaTagImageButton;
 	
 	@FXML
 	private BorderPane smBorderPane;
@@ -215,31 +220,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smMediaTitle;
 	
 	@FXML
-	private Slider smTimeSlider;
-	
-	@FXML
-	private Label smTimeSliderLabel;
-	
-	@FXML
-	private Button smMinimizeVolume;
-	
-	@FXML
-	private Slider smVolumeSlider;
-	
-	@FXML
-	private Button smMaximizeVolume;
-	
-	@FXML
-	private Label smVolumeSliderLabel;
-	
-	@FXML
 	private JFXToggleButton showVisualizer;
 	
 	@FXML
-	private HBox hBox11;
+	private Button smBackwardButton;
 	
 	@FXML
-	private Button smBackwardButton;
+	private Button smPlayPauseButton;
+	
+	@FXML
+	private Button smStopButton;
 	
 	@FXML
 	private Button smForwardButton;
@@ -251,10 +241,22 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button smReplayButton;
 	
 	@FXML
-	private Button smPlayPauseButton;
+	private Button smMaximizeVolume;
 	
 	@FXML
-	private Button smStopButton;
+	private Slider smVolumeSlider;
+	
+	@FXML
+	private Button smMinimizeVolume;
+	
+	@FXML
+	private Label smVolumeSliderLabel;
+	
+	@FXML
+	private Slider smTimeSlider;
+	
+	@FXML
+	private Label smTimeSliderLabel;
 	
 	@FXML
 	private Label topInfoLabel;
@@ -270,6 +272,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button extendPlayer;
+	
+	@FXML
+	private StackedFontIcon sizeStackedFontIcon;
 	
 	@FXML
 	private Button showMenu;
@@ -698,14 +703,19 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		focusXPlayerWindow.setOnMouseReleased(m -> xPlayerWindow.getWindow().requestFocus());
 		
 		//extendPlayer
-		extendPlayer.textProperty().bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore").otherwise("Extend"));
+		extendPlayer.getTooltip().textProperty().bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore to parent window").otherwise("Open to external window"));
 		extendPlayer.setOnAction(ac -> {
 			if (!xPlayerWindow.getWindow().isShowing()) {
 				xPlayerWindow.show();
 				isPlayerExtended = true;
+				sizeStackedFontIcon.getChildren().get(0).setVisible(true);
+				sizeStackedFontIcon.getChildren().get(1).setVisible(false);
+				
 			} else {
 				xPlayerWindow.close();
 				isPlayerExtended = false;
+				sizeStackedFontIcon.getChildren().get(1).setVisible(true);
+				sizeStackedFontIcon.getChildren().get(0).setVisible(false);
 			}
 		});
 		
