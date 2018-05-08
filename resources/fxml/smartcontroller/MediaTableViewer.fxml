@@ -59,42 +59,19 @@
                      </graphic>
                   </TableColumn>
                      <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Play Count" />
-                  <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Extension" visible="false">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/Puzzle-20.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </TableColumn>
+                  <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Extension" visible="false" />
                   <TableColumn fx:id="fileSize" maxWidth="250.0" minWidth="130.0" prefWidth="139.0" text="File Size" visible="false">
                      <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../image/Front%20View-20.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-inbox" iconSize="24" />
                      </graphic>
                   </TableColumn>            
-                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false">
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0">
-                           <image>
-                              <Image url="@../../image/artist.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></TableColumn>
+                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" />
                   <TableColumn fx:id="mood" minWidth="65.0" prefWidth="75.0" text="Mood" visible="false" />
                   <TableColumn fx:id="album" minWidth="65.0" prefWidth="75.0" text="Album" visible="false" />
                   <TableColumn fx:id="composer" minWidth="65.0" prefWidth="75.0" text="Composer" visible="false" />
                   <TableColumn fx:id="comment" minWidth="65.0" prefWidth="75.0" text="Comment" visible="false">
                      <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../image/comment.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-commenting" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate" />
@@ -119,49 +96,29 @@
                   <TableColumn fx:id="encoder" minWidth="65.0" prefWidth="75.0" text="Encoder" visible="false" />
                   <TableColumn fx:id="drive" maxWidth="80.0" minWidth="80.0" text="Drive" visible="false">
                      <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../image/drive.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-laptop" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="filePath" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Path" visible="false" />
                   <TableColumn fx:id="fileName" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Name" visible="false" />
                   <TableColumn fx:id="hourImported" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Time Imported" visible="false">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/timeImported.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="dateImported" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date Imported" visible="false">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/dateImported.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-calendar" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="dateFileCreated" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date File Created" visible="false">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/Add%20File-20.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-calendar-plus-o" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="dateFileModified" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date File Modified" visible="false">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/Edit%20File-20.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-calendar-check-o" iconSize="24" />
                      </graphic>
                   </TableColumn>
                </columns>
