@@ -127,7 +127,7 @@
                                                                         <Tooltip text="Replay" />
                                                                      </tooltip>
                                                                      <graphic>
-                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                                      </graphic>
                                                                   </Button>
                                                                </children>
@@ -327,7 +327,7 @@
                               </StackPane>
                            </top>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>
@@ -444,7 +444,7 @@
                                           <Tooltip text="Replay" />
                                        </tooltip>
                                                    <graphic>
-                                                      <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                                      <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                    </graphic>
                                     </Button>
                                              </children>
