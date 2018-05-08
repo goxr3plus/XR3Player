@@ -192,23 +192,16 @@
                                                                         <Tooltip text="Visualizer Settings" />
                                                                      </tooltip>
                                                                      <graphic>
-                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-spanner" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="typ-spanner" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                                      </graphic>
                                                                   </JFXButton>
-                                                                  <JFXButton fx:id="showVisualizerButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" styleClass="jfx-button3" text=" ">
-                                                                     <graphic>
-                                                                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/eye.png" />
-                                                                           </image>
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="DEFAULT" />
-                                                                           </cursor>
-                                                                        </ImageView>
-                                                                     </graphic>
+                                                                  <JFXButton fx:id="showVisualizerButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button3" text=" ">
                                                                      <tooltip>
                                                                         <Tooltip text="Visibility of Visualizer" />
                                                                      </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon fx:id="visualizerEyeIcon" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
                                                                   </JFXButton>
                                                                   <JFXButton fx:id="maximizeVisualizer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="19.0" layoutY="12.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button3" text=" ">
                                                                      <tooltip>

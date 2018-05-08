@@ -118,9 +118,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private BorderPane discBorderPane;
 	
 	@FXML
-	private StackPane diskStackPane;
-	
-	@FXML
 	private StackPane diskStackPane1;
 	
 	@FXML
@@ -142,7 +139,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button replayButton;
 	
 	@FXML
-	private Label advModeVolumeLabel;
+	private StackPane diskStackPane;
 	
 	@FXML
 	private SplitPane leftSplitPane;
@@ -178,6 +175,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private JFXButton showVisualizerButton;
 	
 	@FXML
+	private FontIcon visualizerEyeIcon;
+	
+	@FXML
 	private JFXButton maximizeVisualizer;
 	
 	@FXML
@@ -206,6 +206,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button mediaTagImageButton;
+	
+	@FXML
+	private Label advModeVolumeLabel;
 	
 	@FXML
 	private BorderPane smBorderPane;
@@ -320,8 +323,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	// ------------------------- Images/ImageViews --------------------------
 	
-	private final ImageView eye = InfoTool.getImageViewFromResourcesFolder("eye.png");
-	private final ImageView eyeDisabled = InfoTool.getImageViewFromResourcesFolder("eyeDisabled.png");
+	//private final ImageView eye = InfoTool.getImageViewFromResourcesFolder("eye.png");
+	//private final ImageView eyeDisabled = InfoTool.getImageViewFromResourcesFolder("eyeDisabled.png");
 	
 	private static final Image noSeek = InfoTool.getImageFromResourcesFolder("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
 	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
@@ -703,7 +706,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		focusXPlayerWindow.setOnMouseReleased(m -> xPlayerWindow.getWindow().requestFocus());
 		
 		//extendPlayer
-		extendPlayer.getTooltip().textProperty().bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore to parent window").otherwise("Open to external window"));
+		extendPlayer.getTooltip().textProperty()
+				.bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore to parent window").otherwise("Open to external window"));
 		extendPlayer.setOnAction(ac -> {
 			if (!xPlayerWindow.getWindow().isShowing()) {
 				xPlayerWindow.show();
@@ -1099,7 +1103,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		showVisualizerButton.setOnAction(a -> visualizerVisibility.set(!visualizerVisibility.get()));
 		
 		//visualizerVisibility
-		visualizerVisibility.addListener((observable , oldValue , newValue) -> showVisualizerButton.setGraphic(newValue ? eye : eyeDisabled));
+		visualizerVisibility.addListener((observable , oldValue , newValue) -> visualizerEyeIcon.setFill(newValue ? Color.web("#d4ff00") : Color.FIREBRICK));
 		
 		// visualizerVisibleLabel
 		visualizerVisibleLabel.visibleProperty().bind(visualizerVisibility.not());
@@ -1324,7 +1328,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * Recalculates the Canvas size to the preferred size
 	 */
 	private void reCalculateCanvasSize() {
-		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1;
+		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1
 		
 		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
 		
