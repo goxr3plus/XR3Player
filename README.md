@@ -129,6 +129,7 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 ## Specs / Open-source libraries:
 
 
+- [**Ikonli Font Icons packs**](https://aalmiray.github.io/ikonli) Ikonli provides icon packs that can be used in Java applications. Currently Swing and JavaFX UI toolkits are supported.
 - [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond .
 - [**JFoenix**](http://www.jfoenix.com/)  JavaFX Material Design Library .
 - [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
