@@ -4,8 +4,11 @@ import java.io.File;
 
 import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.Encoder;
+import it.sauronsoftware.jave.EncoderProgressListener;
 import it.sauronsoftware.jave.EncodingAttributes;
+import it.sauronsoftware.jave.MultimediaInfo;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
@@ -29,6 +32,7 @@ public class ConverterService extends Service<Boolean> {
 	private String fileAbsolutePath;
 	private String newFileAsbolutePath;
 	private ConvertProgressListener listener = new ConvertProgressListener();
+	private final SimpleDoubleProperty convertProgress = new SimpleDoubleProperty();
 	
 	/**
 	 * The XPlayerController
@@ -43,22 +47,28 @@ public class ConverterService extends Service<Boolean> {
 		
 		this.setOnSucceeded(s -> done());
 		this.setOnCancelled(c -> done());
-		this.setOnFailed(f -> done());
+		this.setOnFailed(c -> done());
 	}
 	
 	/**
 	 * Start the Service for the given file
+	 * @param <convertProgress>
 	 * 
 	 * @param fileAbsolutePath
 	 */
-	public void convert(String fileAbsolutePath) {
+	public <convertProgress> void convert(String fileAbsolutePath) {
 		
 		//Set the full fileAbsolutePath
 		this.fileAbsolutePath = fileAbsolutePath;
 		
+		//Set Progress to 0
+		convertProgress.set(-1.0);
+		
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
 		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
+		xPlayerController.getProgressIndicator().progressProperty().bind(convertProgress);
+		
 		
 		//Restart the Service
 		restart();
@@ -119,7 +129,7 @@ public class ConverterService extends Service<Boolean> {
 					EncodingAttributes attrs = new EncodingAttributes();
 					attrs.setFormat("mp3");
 					attrs.setAudioAttributes(audio);
-					new Encoder().encode(source, target, attrs,listener);
+					new Encoder().encode(source, target, attrs, listener);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					succeeded = false;
@@ -139,6 +149,51 @@ public class ConverterService extends Service<Boolean> {
 				return true;
 			}
 		};
+	}
+	
+	public class ConvertProgressListener implements EncoderProgressListener {
+		int current = 1;
+		
+		public ConvertProgressListener() {
+		}
+		
+		public void message(String m) {
+			//      if ((ConverterFrame.this.inputfiles.length > 1) && 
+			//        (this.current < ConverterFrame.this.inputfiles.length)) {
+			//        ConverterFrame.this.encodingMessageLabel.setText(this.current + "/" + ConverterFrame.this.inputfiles.length);
+			//      }
+		}
+		
+		public void progress(int p) {
+			
+			double progress = p / 1000.00;
+			System.out.println(progress);
+			Platform.runLater(() -> convertProgress.set(progress));
+			//      ConverterFrame.this.encodingProgressLabel.setText(progress + "%");
+			//      if (p >= 1000) {
+			//        if (ConverterFrame.this.inputfiles.length > 1)
+			//        {
+			//          this.current += 1;
+			//          if (this.current > ConverterFrame.this.inputfiles.length)
+			//          {
+			//            ConverterFrame.this.encodingMessageLabel.setText("Encoding Complete!");
+			//            ConverterFrame.this.convertButton.setEnabled(true);
+			//          }
+			//        }
+			//        else if (p == 1001)
+			//        {
+			//          ConverterFrame.this.encodingMessageLabel.setText("Encoding Failed!");
+			//          ConverterFrame.this.convertButton.setEnabled(true);
+			//        }
+			//        else
+			//        {
+			//          ConverterFrame.this.encodingMessageLabel.setText("Encoding Complete!");
+			//          ConverterFrame.this.convertButton.setEnabled(true);
+			//        }
+		}
+		
+		public void sourceInfo(MultimediaInfo m) {
+		}
 	}
 	
 }

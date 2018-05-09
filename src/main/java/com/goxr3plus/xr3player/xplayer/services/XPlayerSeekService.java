@@ -42,6 +42,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 		this.xPlayerController = xPlayerController;
 		setOnSucceeded(s -> done());
 		setOnFailed(f -> done());
+		
 	}
 	
 	/**
@@ -65,6 +66,9 @@ public class XPlayerSeekService extends Service<Boolean> {
 			
 			//Fix the labels
 			xPlayerController.fixPlayerStop();
+			
+			//Set Indicator Progress
+			xPlayerController.getProgressIndicator().progressProperty().set(-1.0);
 			
 			return;
 		}

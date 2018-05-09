@@ -635,7 +635,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <ProgressIndicator>
+                  <ProgressIndicator fx:id="progressIndicator">
                      <StackPane.margin>
                         <Insets bottom="30.0" top="20.0" />
                      </StackPane.margin>

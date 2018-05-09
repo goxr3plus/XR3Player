@@ -101,6 +101,8 @@ public class XPlayerPlayService extends Service<Boolean> {
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
 		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
+		xPlayerController.getProgressIndicator().progressProperty().unbind();
+		xPlayerController.getProgressIndicator().progressProperty().set(-1.0);
 		
 		// Bytes to Skip
 		this.secondsToSkip = secondsToSkip;

@@ -35,6 +35,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
@@ -118,6 +119,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private BorderPane discBorderPane;
 	
 	@FXML
+	private StackPane diskStackPane;
+	
+	@FXML
 	private StackPane diskStackPane1;
 	
 	@FXML
@@ -137,9 +141,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button replayButton;
-	
-	@FXML
-	private StackPane diskStackPane;
 	
 	@FXML
 	private SplitPane leftSplitPane;
@@ -296,6 +297,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label bugLabel;
+	
+	@FXML
+	private ProgressIndicator progressIndicator;
 	
 	@FXML
 	private Label playerLoadingLabel;
@@ -713,7 +717,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				xPlayerWindow.show();
 				isPlayerExtended = true;
 				sizeStackedFontIcon.getChildren().get(0).setVisible(true);
-				sizeStackedFontIcon.getChildren().get(1).setVisible(false);		
+				sizeStackedFontIcon.getChildren().get(1).setVisible(false);
 			} else {
 				xPlayerWindow.close();
 				isPlayerExtended = false;
@@ -1976,6 +1980,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public JFXToggleButton getModeToggle() {
 		return modeToggle;
 		
+	}
+	
+	public ProgressIndicator getProgressIndicator() {
+		return progressIndicator;
 	}
 	
 	/**
