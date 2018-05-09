@@ -34,7 +34,7 @@
 
 | V.100 | Awesome Tutorial |
 |:-:|:-:|
-| [![First](http://img.youtube.com/vi/MEBue5LhXCI/0.jpg)](https://www.youtube.com/watch?v=MEBue5LhXCI)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
+| [![First](http://img.youtube.com/vi/328bsim5ltg/0.jpg)](https://www.youtube.com/watch?v=328bsim5ltg)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
 
 -------------------------------------------------------------------------------------
 
