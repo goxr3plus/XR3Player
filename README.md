@@ -1,8 +1,10 @@
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player 
+# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
+
 
 > Download installer for [ Windows](https://github.com/goxr3plus/XR3Player/releases/download/V3.102/XR3Player_Installer.exe) ,  Linux (not yet available )  ,  Mac (not yet available)
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
+
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
@@ -12,6 +14,11 @@
 [![Total Downloads](https://img.shields.io/github/downloads/goxr3plus/XR3Player/total.svg)](https://github.com/goxr3plus/XR3Player/releases)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![GitHub issues](https://img.shields.io/github/issues/goxr3plus/XR3Player.svg)](https://github.com//goxr3plus/XR3Player/issues)
+
+### Keep the bro alive :)
+
+<a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
+<a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
 ### Screenshots
 
