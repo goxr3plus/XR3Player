@@ -28,6 +28,7 @@ public class ConverterService extends Service<Boolean> {
 	 */
 	private String fileAbsolutePath;
 	private String newFileAsbolutePath;
+	private ConvertProgressListener listener = new ConvertProgressListener();
 	
 	/**
 	 * The XPlayerController
@@ -118,7 +119,7 @@ public class ConverterService extends Service<Boolean> {
 					EncodingAttributes attrs = new EncodingAttributes();
 					attrs.setFormat("mp3");
 					attrs.setAudioAttributes(audio);
-					new Encoder().encode(source, target, attrs);
+					new Encoder().encode(source, target, attrs,listener);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					succeeded = false;
