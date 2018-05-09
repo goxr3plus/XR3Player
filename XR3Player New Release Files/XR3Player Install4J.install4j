@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="7.0.4" transformSequenceNumber="7">
   <directoryPresets config="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images" />
-  <application name="XR3Player" distributionSourceDir="" applicationId="8282-0762-8339-5307" mediaDir="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="true" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="XR3Player" publisher="GOXR3PLUS STUDIO" publisherWeb="http://www.goxr3plus.co.nf" version="V.3.102" allPathsRelative="false" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" macVolumeId="e75eb469510ca3ab" javaMinVersion="9.0.4" javaMaxVersion="9.9.9" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <application name="XR3Player" distributionSourceDir="" applicationId="8282-0762-8339-5307" mediaDir="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="true" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="XR3Player" publisher="GOXR3PLUS STUDIO" publisherWeb="http://www.goxr3plus.co.nf" version="V.3.104" allPathsRelative="false" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" macVolumeId="e75eb469510ca3ab" javaMinVersion="9.0.4" javaMaxVersion="9.9.9" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -29,14 +29,14 @@
     <components />
   </files>
   <launchers>
-    <launcher name="XR3Player Launcher" id="152" customizedId="ID999" external="false" excludeFromMenu="false" unixMode="755" unixAutoStart="true" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="" useCustomMacosExecutableName="false" customMacosExecutableName="" useJavaMinVersionOverride="false" javaMinVersionOverride="1.8.0_141" useJavaMaxVersionOverride="false" javaMaxVersionOverride="1.8.0_900" checkUpdater="false" updateExecutionMode="unattendedProgress" unattendedUpdateTitle="${i18n:updater.WindowTitle(&quot;${compiler:sys.fullName}&quot;)}">
+    <launcher name="XR3Player Launcher" id="152" customizedId="ID999" external="false" excludeFromMenu="false" unixMode="755" unixAutoStart="true" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="true" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="" useCustomMacosExecutableName="false" customMacosExecutableName="" useJavaMinVersionOverride="false" javaMinVersionOverride="1.8.0_141" useJavaMaxVersionOverride="false" javaMaxVersionOverride="1.8.0_900" checkUpdater="false" updateExecutionMode="unattendedProgress" unattendedUpdateTitle="${i18n:updater.WindowTitle(&quot;${compiler:sys.fullName}&quot;)}">
       <executable name="XR3Player" type="1" iconSet="true" iconFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/xr3player.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="true" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
         <versionInfo include="true" fileVersion="3.0.0.0" fileDescription="XR3Player" legalCopyright="Open Source JavaFX Project" internalName="XR3Player" productName="XR3Player" />
       </executable>
-      <splashScreen show="true" width="0" height="0" bitmapFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/splash.png" textOverlay="false">
+      <splashScreen show="true" width="600" height="400" bitmapFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/splash.png" textOverlay="true">
         <text>
-          <statusLine x="20" y="20" text="" fontSize="8" fontColor="0,0,0" bold="false" />
-          <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
+          <statusLine x="258" y="372" text="" fontSize="10" fontColor="204,255,51" bold="true" />
+          <versionLine x="265" y="74" text="${compiler:sys.version}" fontSize="14" fontColor="204,255,0" bold="true" />
         </text>
       </splashScreen>
       <java mainClass="main.java.com.goxr3plus.xr3player.application.Main" mainMode="1" vmParameters="-Dprism.allowhidpi=false" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
@@ -1248,7 +1248,7 @@ return console.askYesNo(message, true);
                       </void>
                       <void property="imageFile">
                         <object class="com.install4j.api.beans.ExternalFile">
-                          <string>icon:${installer:sys.installerApplicationMode}_header.png</string>
+                          <string>C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/icon.png</string>
                         </object>
                       </void>
                       <void property="imageInsets">
