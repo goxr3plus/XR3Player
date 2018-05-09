@@ -17,11 +17,11 @@
 
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/38458113-cb51d73a-3aa2-11e8-83d9-34df4e9b9ee2.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39456478-590c0308-4cef-11e8-9449-97839af5ecbf.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/39787545-8e9887cc-532e-11e8-928d-88bfed16feef.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39787543-8dea1142-532e-11e8-8243-492308a77a55.png) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/38458114-cb7e3140-3aa2-11e8-92ff-2cbb5ae21969.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39334178-4c29e042-49b6-11e8-97cf-6922ecf3da8d.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/39787544-8e5cf496-532e-11e8-99dd-a994ad968b0e.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39334178-4c29e042-49b6-11e8-97cf-6922ecf3da8d.png) |
 
 ### Videos
 
