@@ -54,7 +54,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-home" iconSize="20" />
                      </graphic>
                   </JFXButton>
-                  <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." styleClass="jfx-text-area" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
                   <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-search" iconSize="20" />

@@ -189,7 +189,8 @@ public class WebBrowserTabController extends StackPane {
 				String browser_url = browser.getURL();
 				
 				//Check for PopUps
-				if (browser_url.contains("fmovies.com"))
+				System.out.println("Browser URL: " + browser_url);
+				if (browser_url.contains("fmovies.se"))
 					return;
 				
 				//Show the Window
