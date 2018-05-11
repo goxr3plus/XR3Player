@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -55,6 +56,14 @@
                      </graphic>
                   </JFXButton>
                   <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="copyText" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="176.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-content-copy" iconSize="20" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Copy Address Bar text" />
+                     </tooltip>
+                  </JFXButton>
                   <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-search" iconSize="20" />

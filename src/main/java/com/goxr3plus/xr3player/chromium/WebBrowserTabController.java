@@ -5,6 +5,7 @@ package main.java.com.goxr3plus.xr3player.chromium;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -13,6 +14,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
@@ -52,6 +54,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -61,10 +65,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.chromium.services.ChromiumUpdaterService;
 import net.sf.image4j.codec.ico.ICODecoder;
 
@@ -101,6 +108,9 @@ public class WebBrowserTabController extends StackPane {
 	
 	@FXML
 	private TextField searchBar;
+	
+	@FXML
+	private JFXButton copyText;
 	
 	@FXML
 	private JFXButton goButton;
@@ -478,6 +488,24 @@ public class WebBrowserTabController extends StackPane {
 			
 			//Finally load the firstWebSite
 			loadWebSite(firstWebSite);
+			
+			//copyText
+			copyText.setOnAction(a -> {
+				//Get Native System ClipBoard
+				final Clipboard clipboard = Clipboard.getSystemClipboard();
+				final ClipboardContent content = new ClipboardContent();
+				
+				// PutFiles
+				content.putString(searchBar.getText());
+				
+				//Set the Content
+				clipboard.setContent(content);
+				
+				//Notification
+				ActionTool.showNotification("Copied to Clipboard",
+						"Search bar text copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
+						Duration.seconds(2), NotificationType.INFORMATION);
+			});
 		} catch (BrowserException ex) {
 			System.exit(-1);
 		} catch (Exception ex) {

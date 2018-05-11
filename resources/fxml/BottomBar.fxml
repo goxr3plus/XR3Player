@@ -85,14 +85,6 @@
                   <Tooltip text="Internet connection is available?" />
                </tooltip>
             </Label>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="339.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <padding>
-                  <Insets left="4.0" right="4.0" />
-               </padding>
-            </Label>
             <Label fx:id="currentTimeLabel" alignment="CENTER" layoutX="522.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="17:14" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
@@ -104,23 +96,15 @@
                   <Tooltip text="Current System Time" />
                </tooltip>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24" />
+                  <FontIcon iconColor="#16a8e0" iconLiteral="fa-clock-o" iconSize="24" />
                </graphic>
             </Label>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="566.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="/" textAlignment="CENTER" textFill="#1fdbcf" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <padding>
-                  <Insets left="4.0" right="4.0" />
-               </padding>
-            </Label>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/Time-24.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="00:20" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <FontIcon iconColor="#16a8e0" iconLiteral="typ-plug" iconSize="24">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </FontIcon>
+            <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="20 minutes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
