@@ -1701,6 +1701,24 @@
 }
 
 
+
+
+
+.menu-button{
+	-fx-background-radius:0.0;
+}
+
+.menu-button2 .label{
+	-fx-text-fill:white;
+}
+
+.menu-button2 .label:hover{
+	-fx-background-color:transparent;
+	-fx-text-fill:white;
+}
+
+
+
 /*******************************************************************************
 
 *                           VisualizerWindow                             *    

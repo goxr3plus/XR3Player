@@ -94,6 +94,15 @@ public class Marquee extends Pane {
 	}
 	
 	/**
+	 * The text of Marquee
+	 * 
+	 * @return The text of Marquee
+	 */
+	public String getText() {
+		return label.textProperty().get();
+	}
+	
+	/**
 	 * This method starts the Animation of the marquee
 	 */
 	private final void startAnimation() {
@@ -158,7 +167,7 @@ public class Marquee extends Pane {
 			timeline.stop();
 		}
 	}
-
+	
 	/**
 	 * @return the label
 	 */

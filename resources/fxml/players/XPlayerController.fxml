@@ -301,6 +301,16 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
+                                          <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="menu-button2">
+                                            <items>
+                                              <MenuItem fx:id="copyFileTitle" mnemonicParsing="false" text="Copy File Title" />
+                                              <MenuItem fx:id="copyFileLocation" mnemonicParsing="false" text="Copy File Location" />
+                                                <MenuItem fx:id="copyFile" mnemonicParsing="false" text="Copy File" />
+                                            </items>
+                                             <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="gmi-content-copy" iconSize="20" />
+                                             </graphic>
+                                          </MenuButton>
                                           <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
                                              <graphic>
                                                 <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
@@ -327,7 +337,7 @@
                               </StackPane>
                            </top>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>

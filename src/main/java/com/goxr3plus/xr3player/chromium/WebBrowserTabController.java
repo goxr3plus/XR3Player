@@ -5,7 +5,6 @@ package main.java.com.goxr3plus.xr3player.chromium;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -14,7 +13,6 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import org.apache.commons.validator.routines.UrlValidator;
 

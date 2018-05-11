@@ -35,6 +35,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
@@ -44,6 +45,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -204,6 +206,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button emotionsButton;
+	
+	@FXML
+	private MenuItem copyFileTitle;
+	
+	@FXML
+	private MenuItem copyFileLocation;
+	
+	@FXML
+	private MenuItem copyFile;
 	
 	@FXML
 	private Button mediaTagImageButton;
@@ -599,6 +610,90 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// openFile
 		openFile.setOnAction(action -> openFileChooser());
+		
+		//copyFileTitle
+		copyFileTitle.setOnAction(a -> {
+			
+			//If there is no Media
+			if (xPlayerModel.getSongPath() == null) {
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				return;
+			}
+			
+			//Get Native System ClipBoard
+			final Clipboard clipboard = Clipboard.getSystemClipboard();
+			final ClipboardContent content = new ClipboardContent();
+			
+			// PutFiles
+			content.putString(mediaFileMarquee.getText());
+			
+			//Set the Content
+			clipboard.setContent(content);
+			
+			//Check if it has Album Image
+			Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+			
+			//Notification
+			ActionTool.showNotification("Copied to Clipboard",
+					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(2),
+					NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+		});
+		
+		//copyFileLocation
+		copyFileLocation.setOnAction(a -> {
+			
+			//If there is no Media
+			if (xPlayerModel.getSongPath() == null) {
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				return;
+			}
+			
+			//Get Native System ClipBoard
+			final Clipboard clipboard = Clipboard.getSystemClipboard();
+			final ClipboardContent content = new ClipboardContent();
+			
+			// PutFiles
+			content.putString(xPlayerModel.getSongPath());
+			
+			//Set the Content
+			clipboard.setContent(content);
+			
+			//Check if it has Album Image
+			Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+			
+			//Notification
+			ActionTool.showNotification("Copied to Clipboard",
+					"Media File Full Path copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
+					Duration.seconds(2), NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+		});
+		
+		//copyFile
+		copyFile.setOnAction(a -> {
+			
+			//If there is no Media
+			if (xPlayerModel.getSongPath() == null) {
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				return;
+			}
+			
+			//Get Native System ClipBoard
+			final Clipboard clipboard = Clipboard.getSystemClipboard();
+			final ClipboardContent content = new ClipboardContent();
+			
+			// PutFiles
+			content.putFiles(Arrays.asList(new File(xPlayerModel.getSongPath())));
+			
+			//Set the Content
+			clipboard.setContent(content);
+			
+			//Check if it has Album Image
+			Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+			
+			//Notification
+			ActionTool.showNotification("Copied to Clipboard",
+					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(2),
+					NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+		});
 		
 		// showMenu
 		showMenu.setOnMouseReleased(m -> {
