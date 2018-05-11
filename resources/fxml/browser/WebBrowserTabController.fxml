@@ -4,139 +4,95 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <!-- <?import commons.javafx.webbrowser.browser.SearchEngineComboBox?> -->
 
-<fx:root prefHeight="448.0" prefWidth="667.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="448.0" prefWidth="667.0" style="-fx-background-color: #101010;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane">
          <top>
-            <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="667.0" spacing="5.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="667.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Button fx:id="goFullScreen" layoutX="10.0" layoutY="15.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                  <JFXButton fx:id="goFullScreen" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="48.0" layoutY="15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="#36ff4a" iconLiteral="typ-arrow-maximise" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-arrow-back" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="reloadButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-sync" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-arrow-forward" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="118.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-home" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." styleClass="jfx-text-area" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-search" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="30.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <items>
+                        <Menu mnemonicParsing="false" text="Search Engine">
+                          <items>
+                              <RadioMenuItem mnemonicParsing="false" selected="true" text="Google">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="searchEngineGroup" />
+                                 </toggleGroup>
+                              </RadioMenuItem>
+                              <RadioMenuItem mnemonicParsing="false" text="DuckDuckGo" toggleGroup="$searchEngineGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Bing" toggleGroup="$searchEngineGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Yahoo" toggleGroup="$searchEngineGroup" />
+                          </items>
+                        </Menu>
+                        <MenuItem mnemonicParsing="false">
                            <graphic>
-                              <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                                 <image>
-                                    <Image url="@../../image/extend.png" />
-                                 </image>
-                              </ImageView>
+                              <JFXCheckBox fx:id="movingTitleAnimation" selected="true" text="Moving Title Animation" textFill="WHITE" />
                            </graphic>
-                           <tooltip>
-                              <Tooltip text="FULL SCREEN MODE" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <HBox.margin>
-                              <Insets left="5.0" right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="backwardButton" mnemonicParsing="false" style="-fx-background-radius: 45 0 0 45;">
-                           <graphic>
-                              <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/right.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Back" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="reloadButton" mnemonicParsing="false" style="-fx-background-radius: 0;">
-                           <graphic>
-                              <ImageView fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/refresh.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Reload Web Site" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="forwardButton" mnemonicParsing="false" style="-fx-background-radius: 0 45 45 0;">
-                           <graphic>
-                              <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/right.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Forward" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <TextField fx:id="searchBar" promptText="Search..." style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-text-area" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="goButton" mnemonicParsing="false" style="-fx-background-radius: 0 45 45 0;" text="Go">
-                           <tooltip>
-                              <Tooltip text="Load the Web Site" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <ComboBox fx:id="searchEngineComboBox" prefHeight="35.0" prefWidth="160.0" promptText="Search Engine">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                        <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="60.0" style="-fx-background-radius: 0;">
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/menu2.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <items>
-                              <MenuItem mnemonicParsing="false">
-                                 <graphic>
-                                    <JFXCheckBox fx:id="movingTitleAnimation" selected="true" text="Moving Title Animation" textFill="WHITE" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser" />
-                           </items>
-                        </MenuButton>
-                     </children>
-                  </HBox>
+                        </MenuItem>
+                        <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser" />
+                     </items>
+                     <graphic>
+                        <FontIcon iconColor="#19a3ff" iconLiteral="typ-th-large-outline" iconSize="20" />
+                     </graphic>
+                  </MenuButton>
                </children>
-               <padding>
-                  <Insets bottom="3.0" />
-               </padding>
-            </VBox>
+               <BorderPane.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" />
+               </BorderPane.margin>
+            </HBox>
          </top>
       </BorderPane>
       <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);" visible="false">

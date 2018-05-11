@@ -204,6 +204,11 @@
 			<artifactId>ikonli-fontawesome-pack</artifactId>
 			<version>2.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-material-pack</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 		<!-- Image4j -->
 		<dependency>
 			<groupId>com.github.imcdonagh</groupId>
@@ -374,16 +379,14 @@
 			<groupId>it.sauronsoftware.jave</groupId>
 			<artifactId>jave</artifactId>
 			<version>1.0.2</version>
-<!-- 			<scope>system</scope>
-			<systemPath>${project.basedir}/localLibraries/jave-1.0.2.jar</systemPath> -->
+			<!-- <scope>system</scope> <systemPath>${project.basedir}/localLibraries/jave-1.0.2.jar</systemPath> -->
 		</dependency>
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
 			<groupId>local.github.goxr3plus</groupId>
 			<artifactId>javasysmon</artifactId>
 			<version>3.6.0</version>
-<!-- 			<scope>system</scope>
-			<systemPath>${project.basedir}/localLibraries/javasysmon-0.3.6.0.jar</systemPath> -->
+			<!-- <scope>system</scope> <systemPath>${project.basedir}/localLibraries/javasysmon-0.3.6.0.jar</systemPath> -->
 		</dependency>
 	</dependencies>
 </project>

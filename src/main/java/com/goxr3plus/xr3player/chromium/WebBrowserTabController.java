@@ -40,15 +40,16 @@ import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -58,7 +59,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
@@ -84,28 +84,31 @@ public class WebBrowserTabController extends StackPane {
 	private BorderPane borderPane;
 	
 	@FXML
-	private Button goFullScreen;
+	private JFXButton goFullScreen;
 	
 	@FXML
-	private WebView webView;
+	private JFXButton backwardButton;
 	
 	@FXML
-	private Button backwardButton;
+	private JFXButton reloadButton;
 	
 	@FXML
-	private Button reloadButton;
+	private JFXButton forwardButton;
 	
 	@FXML
-	private Button forwardButton;
+	private JFXButton homeButton;
 	
 	@FXML
 	private TextField searchBar;
 	
 	@FXML
-	private ComboBox<String> searchEngineComboBox;
+	private JFXButton goButton;
 	
 	@FXML
-	private Button goButton;
+	private ToggleGroup searchEngineGroup;
+	
+	@FXML
+	private JFXCheckBox movingTitleAnimation;
 	
 	@FXML
 	private MenuItem about;
@@ -118,9 +121,6 @@ public class WebBrowserTabController extends StackPane {
 	
 	@FXML
 	private ProgressIndicator tryAgainIndicator;
-	
-	@FXML
-	private JFXCheckBox movingTitleAnimation;
 	
 	// -------------------------------------------------------------
 	
@@ -200,11 +200,11 @@ public class WebBrowserTabController extends StackPane {
 			
 			//-------------------BrowserView------------------------
 			browserView = new BrowserView(browser);
-//			browserView.setMouseEventsHandler(e -> {
-//				System.out.println(e.getEventType());
-//				return e.getButton() == MouseButton.MIDDLE;
-//			});
-//			
+			//			browserView.setMouseEventsHandler(e -> {
+			//				System.out.println(e.getEventType());
+			//				return e.getButton() == MouseButton.MIDDLE;
+			//			});
+			//			
 			borderPane.setCenter(browserView);
 			
 			//Continue
@@ -436,9 +436,8 @@ public class WebBrowserTabController extends StackPane {
 							webBrowserController.createNewTab(browser.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() + 1).getURL()).getTab());
 			});
 			
-			//searchEngineComboBox
-			searchEngineComboBox.getItems().addAll("Google", "DuckDuckGo", "Bing", "Yahoo");
-			searchEngineComboBox.getSelectionModel().select(1);
+			//homeButton
+			homeButton.setOnAction(a -> loadDefaultWebSite());
 			
 			//movingTitleAnimation
 			movingTitleAnimation.selectedProperty().addListener((observable , oldValue , newValue) -> {
@@ -506,7 +505,7 @@ public class WebBrowserTabController extends StackPane {
 	 * @return Get the default url home page for the selected search provider
 	 */
 	public String getSelectedEngineHomeUrl() {
-		return getSearchEngineHomeUrl(searchEngineComboBox.getSelectionModel().getSelectedItem());
+		return getSearchEngineHomeUrl( ( (RadioMenuItem) searchEngineGroup.getSelectedToggle() ).getText());
 	}
 	
 	/**
@@ -530,7 +529,7 @@ public class WebBrowserTabController extends StackPane {
 			if (searchBar.getText().isEmpty())
 				finalWebsiteSecondPart = "";
 			else {
-				switch (searchEngineComboBox.getSelectionModel().getSelectedItem().toLowerCase()) {
+				switch ( ( (RadioMenuItem) searchEngineGroup.getSelectedToggle() ).getText()) {
 					case "bing":
 					case "duckduckgo":
 						finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
@@ -581,13 +580,6 @@ public class WebBrowserTabController extends StackPane {
 	 */
 	public void goForward() {
 		browser.goForward();
-	}
-	
-	/**
-	 * @return the webView
-	 */
-	public WebView getWebView() {
-		return webView;
 	}
 	
 	/**
