@@ -28,7 +28,7 @@
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/39787544-8e5cf496-532e-11e8-99dd-a994ad968b0e.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39830631-abdc74b4-53ca-11e8-835d-407c0e73659c.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/39787544-8e5cf496-532e-11e8-99dd-a994ad968b0e.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39950026-51ea6a10-5587-11e8-8dd0-ac42098da6c9.png) |
 
 ### Videos
 
