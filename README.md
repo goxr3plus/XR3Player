@@ -28,13 +28,13 @@
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/39787544-8e5cf496-532e-11e8-99dd-a994ad968b0e.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39334178-4c29e042-49b6-11e8-97cf-6922ecf3da8d.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/39787544-8e5cf496-532e-11e8-99dd-a994ad968b0e.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39830631-abdc74b4-53ca-11e8-835d-407c0e73659c.png) |
 
 ### Videos
 
-| V.100 | Awesome Tutorial |
+| V.103 | Awesome Tutorial |
 |:-:|:-:|
-| [![First](http://img.youtube.com/vi/MEBue5LhXCI/0.jpg)](https://www.youtube.com/watch?v=MEBue5LhXCI)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
+| [![First](http://img.youtube.com/vi/328bsim5ltg/0.jpg)](https://www.youtube.com/watch?v=328bsim5ltg)  | [![Second](http://img.youtube.com/vi/pLug--wWoak/0.jpg)](https://www.youtube.com/watch?v=pLug--wWoak) |
 
 -------------------------------------------------------------------------------------
 
@@ -129,6 +129,7 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 ## Specs / Open-source libraries:
 
 
+- [**Ikonli Font Icons packs**](https://aalmiray.github.io/ikonli) Ikonli provides icon packs that can be used in Java applications. Currently Swing and JavaFX UI toolkits are supported.
 - [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond .
 - [**JFoenix**](http://www.jfoenix.com/)  JavaFX Material Design Library .
 - [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
