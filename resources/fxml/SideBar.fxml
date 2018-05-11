@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="767.0" prefWidth="74.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
@@ -227,16 +228,12 @@
                               <MenuItem fx:id="showManual" mnemonicParsing="false" text="Application Manual" />
                               <MenuItem fx:id="donation" mnemonicParsing="false" style="-fx-text-fill: rgb(64,255,164);" text="Donate" />
                            </items>
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/help.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-help" iconSize="32" />
+                           </graphic>
                         </MenuButton>
                      </children>
                   </VBox>
