@@ -164,7 +164,7 @@ public class User extends StackPane {
 				InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator + InfoTool.USER_INFORMATION_FILE_NAME, false);
 		
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "User.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "User.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

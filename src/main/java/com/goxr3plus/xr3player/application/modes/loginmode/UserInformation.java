@@ -75,7 +75,7 @@ public class UserInformation extends StackPane {
 		this.userCategory = userCategory;
 		
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UserInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "UserInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

@@ -85,7 +85,7 @@ public final class InfoTool {
 	/** The Constant fxmls. */
 	public static final String PLAYERS_FXMLS = "/fxml/players/";
 	
-	public static final String VISUALIZERS_FXMLS = "/fxml/visualizers/";
+	public static final String VISUALIZERS_FXMLS = "/fxml/visualizer/";
 	
 	public static final String BROWSER_FXMLS = "/fxml/browser/";
 	
@@ -96,6 +96,8 @@ public final class InfoTool {
 	public static final String DROPBOX_FXMLS = "/fxml/dropbox/";
 	
 	public static final String LIBRARIES_FXMLS = "/fxml/library/";
+	
+	public static final String USER_FXMLS = "/fxml/user/";
 	
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
