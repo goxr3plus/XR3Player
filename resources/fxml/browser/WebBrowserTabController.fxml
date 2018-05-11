@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
@@ -77,11 +77,7 @@
                               <RadioMenuItem mnemonicParsing="false" text="Yahoo" toggleGroup="$searchEngineGroup" />
                           </items>
                         </Menu>
-                        <MenuItem mnemonicParsing="false">
-                           <graphic>
-                              <JFXCheckBox fx:id="movingTitleAnimation" selected="true" text="Moving Title Animation" textFill="WHITE" />
-                           </graphic>
-                        </MenuItem>
+                        <CheckMenuItem fx:id="movingTitleAnimation" mnemonicParsing="false" text="Moving Title Animation" />
                         <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser" />
                      </items>
                      <graphic>

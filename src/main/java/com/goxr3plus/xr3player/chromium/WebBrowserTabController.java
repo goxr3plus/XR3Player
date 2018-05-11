@@ -3,6 +3,7 @@
  */
 package main.java.com.goxr3plus.xr3player.chromium;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -16,7 +17,6 @@ import java.util.logging.Logger;
 import org.apache.commons.validator.routines.UrlValidator;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.BrowserException;
 import com.teamdev.jxbrowser.chromium.ContextMenuHandler;
@@ -30,7 +30,6 @@ import com.teamdev.jxbrowser.chromium.events.NetError;
 import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
-import com.teamdev.jxbrowser.chromium.javafx.DefaultPopupHandler;
 
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -39,11 +38,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioMenuItem;
@@ -59,6 +59,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
@@ -108,7 +109,7 @@ public class WebBrowserTabController extends StackPane {
 	private ToggleGroup searchEngineGroup;
 	
 	@FXML
-	private JFXCheckBox movingTitleAnimation;
+	private CheckMenuItem movingTitleAnimation;
 	
 	@FXML
 	private MenuItem about;
@@ -182,29 +183,48 @@ public class WebBrowserTabController extends StackPane {
 			browser = new Browser();
 			browserView = new BrowserView(browser);
 			browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
-			browser.setPopupHandler(new DefaultPopupHandler());
+			browser.setPopupHandler(params -> (Browser popUpBrowser , Rectangle initialBounds) -> {
+				
+				//Check if the site is allowed to display popups
+				String browser_url = browser.getURL();
+				
+				//Check for PopUps
+				if (browser_url.contains("fmovies.com"))
+					return;
+				
+				//Show the Window
+				Platform.runLater(() -> {
+					
+					//Create a Stage
+					Stage stage = new Stage();
+					StackPane root = new StackPane();
+					Scene scene = new Scene(root, 800, 600);
+					root.getChildren().add(new BrowserView(popUpBrowser));
+					stage.setScene(scene);
+					stage.setTitle("Popup");
+					
+					//Initial Bounds
+					if (!initialBounds.isEmpty()) {
+						stage.setX(initialBounds.getLocation().getX());
+						stage.setY(initialBounds.getLocation().getY());
+						stage.setWidth(initialBounds.width);
+						stage.setHeight(initialBounds.height);
+					}
+					
+					//On Stage Close Request
+					stage.setOnCloseRequest(c -> popUpBrowser.dispose());
+					
+					//On Browser Dispose Listener
+					popUpBrowser.addDisposeListener(disp -> Platform.runLater(stage::close));
+					
+					//Show Stage
+					stage.show();
+					
+				});
+				
+			});
 			
-			//		browser.setPopupHandler(new PopupHandler() {
-			//		    public PopupContainer handlePopup(PopupParams params) {
-			//		        return new PopupContainer() {
-			//
-			//					@Override
-			//					public void insertBrowser(Browser browser , java.awt.Rectangle arg1) {
-			//						
-			//						System.out.println(browser.getURL().contains("fmovies.com"));
-			//						System.out.println("PopUp occured!!!");
-			//					}
-			//				};
-			//			}
-			//		});
-			
-			//-------------------BrowserView------------------------
-			browserView = new BrowserView(browser);
-			//			browserView.setMouseEventsHandler(e -> {
-			//				System.out.println(e.getEventType());
-			//				return e.getButton() == MouseButton.MIDDLE;
-			//			});
-			//			
+			//-------------------BorderPane------------------------	
 			borderPane.setCenter(browserView);
 			
 			//Continue
@@ -267,6 +287,7 @@ public class WebBrowserTabController extends StackPane {
 			
 			//--Load Listener
 			browser.addLoadListener(new LoadAdapter() {
+				
 				@Override
 				public void onStartLoadingFrame(StartLoadingEvent event) {
 					if (event.isMainFrame()) {
@@ -403,7 +424,9 @@ public class WebBrowserTabController extends StackPane {
 			
 			//-------------------Items------------------------
 			
-			searchBar.setOnAction(a -> loadWebSite(searchBar.getText()));
+			searchBar.setOnAction(a ->
+			
+			loadWebSite(searchBar.getText()));
 			searchBar.focusedProperty().addListener((observable , oldValue , newValue) -> {
 				if (newValue)
 					Platform.runLater(() -> searchBar.selectAll());
@@ -719,23 +742,23 @@ public class WebBrowserTabController extends StackPane {
 			this.pane = parent;
 		}
 		
-		public void showContextMenu(final ContextMenuParams params) {
-			Platform.runLater(() -> createAndDisplayContextMenu(params));
+		public void showContextMenu(final ContextMenuParams p) {
+			Platform.runLater(() -> createAndDisplayContextMenu(p));
 		}
 		
-		private void createAndDisplayContextMenu(final ContextMenuParams params) {
+		private void createAndDisplayContextMenu(final ContextMenuParams p) {
 			final ContextMenu contextMenu = new ContextMenu();
 			
 			// If there's link under mouse pointer, create and add
 			// the "Open link in new window" menu item to our context menu
-			if (!params.getLinkText().isEmpty())
-				contextMenu.getItems().add(createMenuItem("Open link in new Tab", () -> Main.webBrowser.addNewTabOnTheEnd(params.getLinkURL())));
+			if (!p.getLinkText().isEmpty())
+				contextMenu.getItems().add(createMenuItem("Open link in new Tab", () -> Main.webBrowser.addNewTabOnTheEnd(p.getLinkURL())));
 			
 			// Create and add "Reload" menu item to our context menu
-			contextMenu.getItems().add(createMenuItem("Reload", () -> params.getBrowser().reload()));
+			contextMenu.getItems().add(createMenuItem("Reload", () -> p.getBrowser().reload()));
 			
 			// Display context menu at required location on screen
-			java.awt.Point location = params.getLocation();
+			java.awt.Point location = p.getLocation();
 			Point2D screenLocation = pane.localToScreen(location.x, location.y);
 			contextMenu.show(Main.window, screenLocation.getX(), screenLocation.getY());
 		}

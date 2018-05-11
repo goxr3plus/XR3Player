@@ -973,15 +973,15 @@
  
  .menu-item:focused {
  	-color: rgb(255.0,95.0,0.0);
-	-fx-background-color:linear-gradient(
+	/*-fx-background-color:linear-gradient(
         from 0.0px 0.75em to 0.75em 0.0px,
         repeat,
         -color 0.0%,
        -color 49.0%,
         derive(-color, 30.0%) 50.0%,
         derive(-color, 30.0%) 99.0%
-    );
- 	-fx-background-radius:10.0;
+    );*/
+    -fx-background-color:rgb(255.0,106.0,0.0,0.85);
  }
  
  .menu-item:focused .label{

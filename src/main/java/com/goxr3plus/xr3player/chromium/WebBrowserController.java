@@ -4,6 +4,8 @@
 package main.java.com.goxr3plus.xr3player.chromium;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -39,6 +41,8 @@ public class WebBrowserController extends StackPane {
 	public final ChromiumFullScreenController chromiumFullScreenController = new ChromiumFullScreenController();
 	
 	public final ChromiumUpdaterService chromiumUpdaterService = new ChromiumUpdaterService(this);
+	
+	protected final Set<String> addBlockSet = new HashSet<>();
 	//------------------------------------------------------------
 	
 	@FXML
@@ -94,6 +98,9 @@ public class WebBrowserController extends StackPane {
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
+		
+		//addBlockSet
+		addBlockSet.add("fmovies.com");
 	}
 	
 	/**
@@ -292,6 +299,15 @@ public class WebBrowserController extends StackPane {
 	 */
 	public void startChromiumUpdaterService() {
 		chromiumUpdaterService.start();
+	}
+	
+	/**
+	 * In an attempt to block add popups created this Set of blocked websites
+	 * 
+	 * @return A Set of blocked websites
+	 */
+	public Set<String> getAddBlockSet() {
+		return addBlockSet;
 	}
 	
 	/**
