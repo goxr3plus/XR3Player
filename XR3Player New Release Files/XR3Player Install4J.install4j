@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="7.0.4" transformSequenceNumber="7">
   <directoryPresets config="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images" />
-  <application name="XR3Player" distributionSourceDir="" applicationId="8282-0762-8339-5307" mediaDir="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="true" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="XR3Player" publisher="GOXR3PLUS STUDIO" publisherWeb="http://www.goxr3plus.co.nf" version="V.3.105" allPathsRelative="false" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" macVolumeId="e75eb469510ca3ab" javaMinVersion="9.0.4" javaMaxVersion="9.9.9" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <application name="XR3Player" distributionSourceDir="" applicationId="8282-0762-8339-5307" mediaDir="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="true" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="XR3Player" publisher="GOXR3PLUS STUDIO" publisherWeb="https://goxr3plus.github.io/xr3player.io/" version="Version 3.105" allPathsRelative="false" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" macVolumeId="e75eb469510ca3ab" javaMinVersion="9.0.4" javaMaxVersion="9.9.9" allowBetaVM="false" jdkMode="jdk" jdkName="JDK 9.0">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -30,12 +30,12 @@
   </files>
   <launchers>
     <launcher name="XR3Player Launcher" id="152" customizedId="ID999" external="false" excludeFromMenu="false" unixMode="755" unixAutoStart="true" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="true" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="" useCustomMacosExecutableName="false" customMacosExecutableName="" useJavaMinVersionOverride="false" javaMinVersionOverride="1.8.0_141" useJavaMaxVersionOverride="false" javaMaxVersionOverride="1.8.0_900" checkUpdater="false" updateExecutionMode="unattendedProgress" unattendedUpdateTitle="${i18n:updater.WindowTitle(&quot;${compiler:sys.fullName}&quot;)}">
-      <executable name="XR3Player" type="1" iconSet="true" iconFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/xr3player.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="true" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
-        <versionInfo include="true" fileVersion="3.0.0.0" fileDescription="XR3Player" legalCopyright="Open Source JavaFX Project" internalName="XR3Player" productName="XR3Player" />
+      <executable name="XR3Player" type="1" iconSet="true" iconFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/xr3player.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="append" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="true" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
+        <versionInfo include="true" fileVersion="" fileDescription="XR3Player" legalCopyright="Open Source JavaFX Project" internalName="XR3Player" productName="XR3Player" />
       </executable>
       <splashScreen show="true" width="600" height="400" bitmapFile="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/splash.png" textOverlay="true">
         <text>
-          <statusLine x="258" y="372" text="" fontSize="10" fontColor="204,255,51" bold="true" />
+          <statusLine x="264" y="367" text="By ${compiler:sys.publisher}" fontSize="10" fontColor="204,255,51" bold="true" />
           <versionLine x="265" y="74" text="${compiler:sys.version}" fontSize="14" fontColor="204,255,0" bold="true" />
         </text>
       </splashScreen>
@@ -365,6 +365,14 @@ return console.askOkCancel(message, true);
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.InstallationDirectoryChooserComponent">
+                      <void property="labelColor">
+                        <object class="java.awt.Color">
+                          <int>255</int>
+                          <int>255</int>
+                          <int>255</int>
+                          <int>255</int>
+                        </object>
+                      </void>
                       <void property="requestFocus">
                         <boolean>true</boolean>
                       </void>
@@ -1018,7 +1026,16 @@ return console.askYesNo(message, true);
           <group name="Main" id="37" customizedId="" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" />
+                <object class="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
+                  <void property="foregroundColor">
+                    <object class="java.awt.Color">
+                      <int>255</int>
+                      <int>255</int>
+                      <int>255</int>
+                      <int>255</int>
+                    </object>
+                  </void>
+                </object>
               </java>
             </serializedBean>
             <beans>
@@ -1032,15 +1049,34 @@ return console.askYesNo(message, true);
                 <visibilityScript />
                 <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="Watermark" id="39" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" enabled="true" commentSet="false" comment="" insetTop="0" insetLeft="5" insetBottom="0" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent name="Watermark" id="39" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="5" insetBottom="5" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.SeparatorComponent">
-                      <void property="enabledTitleText">
-                        <boolean>false</boolean>
+                      <void property="labelColor">
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>0</int>
+                          <int>0</int>
+                          <int>255</int>
+                        </object>
+                      </void>
+                      <void property="labelFontSizePercent">
+                        <int>200</int>
+                      </void>
+                      <void property="labelFontStyle">
+                        <object class="java.lang.Enum" method="valueOf">
+                          <class>com.install4j.runtime.beans.formcomponents.FontStyle</class>
+                          <string>BOLD</string>
+                        </object>
+                      </void>
+                      <void property="labelIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/goxr3plus logo.png</string>
+                        </object>
                       </void>
                       <void property="labelText">
-                        <string>install4j</string>
+                        <string>GOXR3PLUS STUDIO</string>
                       </void>
                     </object>
                   </java>
@@ -1107,7 +1143,7 @@ return console.askYesNo(message, true);
                   </void>
                   <void property="imageFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>${compiler:sys.install4jHome}/resource/styles/wizard.png</string>
+                      <string>C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images/x3banner.png</string>
                     </object>
                   </void>
                   <void property="insets">
@@ -1224,9 +1260,9 @@ return console.askYesNo(message, true);
                     <object class="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
                       <void property="backgroundColor">
                         <object class="java.awt.Color">
-                          <int>255</int>
-                          <int>255</int>
-                          <int>255</int>
+                          <int>32</int>
+                          <int>32</int>
+                          <int>32</int>
                           <int>255</int>
                         </object>
                       </void>
@@ -1235,6 +1271,14 @@ return console.askYesNo(message, true);
                           <void property="bottom">
                             <boolean>true</boolean>
                           </void>
+                        </object>
+                      </void>
+                      <void property="foregroundColor">
+                        <object class="java.awt.Color">
+                          <int>255</int>
+                          <int>255</int>
+                          <int>255</int>
+                          <int>255</int>
                         </object>
                       </void>
                       <void property="imageAnchor">
@@ -1348,6 +1392,22 @@ return console.askYesNo(message, true);
                     <object class="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup">
                       <void property="alignFirstLabel">
                         <boolean>false</boolean>
+                      </void>
+                      <void property="backgroundColor">
+                        <object class="java.awt.Color">
+                          <int>32</int>
+                          <int>32</int>
+                          <int>32</int>
+                          <int>255</int>
+                        </object>
+                      </void>
+                      <void property="borderColor">
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>0</int>
+                          <int>0</int>
+                          <int>255</int>
+                        </object>
                       </void>
                       <void property="insets">
                         <object class="java.awt.Insets">
