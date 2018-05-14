@@ -65,7 +65,7 @@ public class FileAndFolderChooser {
 	public File selectDBFile(Stage window) {
 		databaseFolderChooser.getExtensionFilters().clear();
 		databaseFolderChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("zip", "*.zip"));
-		databaseFolderChooser.setTitle("Select the database zip folder(it must contains xr3sign.txt in order to be a valid)");
+		databaseFolderChooser.setTitle("Select the database zip folder");
 		databaseFolderChooser.setInitialFileName("example name (XR3Database.zip)");
 		File file = databaseFolderChooser.showOpenDialog(window);
 		if (file != null) {
