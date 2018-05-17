@@ -73,7 +73,7 @@
                   <VBox alignment="CENTER" spacing="5.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 13;" text="Database" />
-                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;">
+                        <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button">
                            <items>
                               <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
                                  <graphic>
@@ -120,7 +120,7 @@
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 13;" text="Convert" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -222,7 +222,7 @@
                   <VBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-background-color: #303030; -fx-font-weight: bold; -fx-font-size: 15;" text="Help" />
-                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;">
+                        <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button">
                            <items>
                               <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />
                               <MenuItem fx:id="showManual" mnemonicParsing="false" text="Application Manual" />

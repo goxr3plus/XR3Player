@@ -47,7 +47,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.application.database.DbManager;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.database.services.VacuumProgressService;
@@ -60,12 +59,12 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInforma
 import main.java.com.goxr3plus.xr3player.application.modes.moviemode.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
+import main.java.com.goxr3plus.xr3player.application.presenter.MainLoadingScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
-import main.java.com.goxr3plus.xr3player.application.presenter.MainLoadingScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
@@ -98,6 +97,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterSe
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
+import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * The Main class from which the application is starting.

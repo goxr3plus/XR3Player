@@ -836,7 +836,7 @@
     -fx-text-fill:black;
 }
 
-.jfx-button {
+.jfx-button,.jfx-menu-button {
     -fx-background-color:rgb(255.0,255.0,255.0,0.4);
     -fx-background-radius: 0.0px;
     -fx-background-insets: 0.0px;

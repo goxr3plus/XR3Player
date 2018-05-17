@@ -16,7 +16,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.services.CreateZipService;
 import main.java.com.goxr3plus.xr3player.application.database.services.ExportZipService;
@@ -25,6 +24,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
+import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * This class is used as the SideBar of the application.

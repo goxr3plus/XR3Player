@@ -338,21 +338,10 @@
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.5.0.jar</systemPath> 
 			</dependency> -->
 		<!-- XR3Capture -->
-		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>xr3capture</artifactId>
-			<version>V9.12</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.jfoenix</groupId>
-					<artifactId>jfoenix</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.controlsfx</groupId>
-					<artifactId>controlsfx</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>xr3capture</artifactId> 
+			<version>V9.12</version> <exclusions> <exclusion> <groupId>com.jfoenix</groupId> 
+			<artifactId>jfoenix</artifactId> </exclusion> <exclusion> <groupId>org.controlsfx</groupId> 
+			<artifactId>controlsfx</artifactId> </exclusion> </exclusions> </dependency> -->
 		<!-- Locally testing XR3Capture -->
 		<!-- <dependency> <groupId>com.XR3Capture</groupId> <artifactId>XR3Capture</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/XR3Capture-3.12.jar</systemPath> 
