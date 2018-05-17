@@ -10,7 +10,7 @@
 	<includeBaseDirectory> false </includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>${project.basedir}/XR3Player New Release Files</directory>
+			<directory>${project.basedir}/releases</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
 				<include>license.txt</include>
