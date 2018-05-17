@@ -386,7 +386,7 @@ public class MediaTableViewer extends StackPane {
 		// dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
 		
-		System.out.println(smartController.getGenre() + " , " + SmartControllerMode.MEDIA);
+		//System.out.println(smartController.getGenre() + " , " + SmartControllerMode.MEDIA);
 		if (smartController.getGenre() == Genre.LIBRARYMEDIA && mode == SmartControllerMode.MEDIA) {
 			
 			// --Drag Over
