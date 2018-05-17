@@ -9,8 +9,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
-import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 public class XPlayersFilterService {
 	

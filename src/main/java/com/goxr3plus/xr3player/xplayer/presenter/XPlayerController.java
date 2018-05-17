@@ -80,6 +80,10 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
+import main.java.com.goxr3plus.xr3player.streamplayer.Status;
+import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerEvent;
+import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerException;
+import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerListener;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerPlayService;
@@ -87,10 +91,6 @@ import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerSeekService;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerWindowController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.XPlayerVisualizer;
-import main.java.goxr3plus.javastreamplayer.stream.Status;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
 /**
  * Represents the graphical interface for the deck.

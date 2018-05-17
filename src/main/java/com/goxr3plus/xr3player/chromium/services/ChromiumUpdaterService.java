@@ -16,7 +16,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
-import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
+import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
 
 /**
  * The Class FileFilterThread.

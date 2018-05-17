@@ -303,10 +303,28 @@
 			<version>V2.2.6</version>
 		</dependency>
 		<!-- AUDIO SUPPORT -->
+		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>java-stream-player</artifactId> 
+			<version>V1.1.0</version> </dependency> -->
+		<!-- AUDIO SUPPORT -->
 		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>java-stream-player</artifactId>
-			<version>V1.1.0</version>
+			<groupId>com.googlecode.soundlibs</groupId>
+			<artifactId>mp3spi</artifactId>
+			<version>1.9.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jflac</groupId>
+			<artifactId>jflac-codec</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.Trilarion</groupId>
+			<artifactId>java-vorbis-support</artifactId>
+			<version>v1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.soundlibs</groupId>
+			<artifactId>tritonus-share</artifactId>
+			<version>0.3.7.4</version>
 		</dependency>
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 

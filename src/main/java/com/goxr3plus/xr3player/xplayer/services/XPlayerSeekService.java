@@ -10,8 +10,8 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerException;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 
 /**
  * This Service is used to skip the Audio of XPlayer to different time.
