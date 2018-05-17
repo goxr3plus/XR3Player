@@ -99,6 +99,8 @@ public final class InfoTool {
 	
 	public static final String USER_FXMLS = "/fxml/user/";
 	
+	public static final String XR3CAPTURE_FXMLS = "/fxml/xr3capture/";
+	
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 	

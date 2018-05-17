@@ -20,11 +20,11 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.xr3capture.model.CaptureWindowModel;
 
@@ -43,7 +44,9 @@ import main.java.com.goxr3plus.xr3player.xr3capture.model.CaptureWindowModel;
  *
  * @author GOXR3PLUS
  */
-public class CaptureWindowController extends Stage {
+public class CaptureWindowController extends StackPane {
+	
+	private Stage stage;
 	
 	/** The stack pane. */
 	@FXML
@@ -225,11 +228,17 @@ public class CaptureWindowController extends Stage {
 	 */
 	public CaptureWindowController() {
 		
-		setX(0);
-		setY(0);
-		getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")));
-		initStyle(StageStyle.TRANSPARENT);
-		setAlwaysOnTop(true);
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.XR3CAPTURE_FXMLS + "CaptureWindowController.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			//logger.log(Level.SEVERE, "", ex)
+			ex.printStackTrace();
+		}
 		
 	}
 	
@@ -254,12 +263,17 @@ public class CaptureWindowController extends Stage {
 	@FXML
 	public void initialize() {
 		
-		// System.out.println("CaptureWindow initialized")
+		stage = new Stage();
+		stage.setX(0);
+		stage.setY(0);
+		//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")))
+		stage.initStyle(StageStyle.TRANSPARENT);
+		stage.setAlwaysOnTop(true);
 		
 		// Scene
 		Scene scene = new Scene(stackPane, data.getScreenWidth(), data.getScreenHeight(), Color.TRANSPARENT);
 		scene.setCursor(Cursor.NONE);
-		setScene(scene);
+		stage.setScene(scene);
 		addKeyHandlers();
 		
 		// Canvas
@@ -317,7 +331,7 @@ public class CaptureWindowController extends Stage {
 		// decreasing from the DOWN side
 		
 		// kemodel.yPressed
-		getScene().setOnKeyPressed(key -> {
+		stage.getScene().setOnKeyPressed(key -> {
 			if (key.isShiftDown())
 				data.getShiftPressed().set(true);
 			
@@ -339,14 +353,14 @@ public class CaptureWindowController extends Stage {
 		});
 		
 		// keyReleased
-		getScene().setOnKeyReleased(key -> {
+		stage.getScene().setOnKeyReleased(key -> {
 			
 			if (key.getCode() == KeyCode.SHIFT)
 				data.getShiftPressed().set(false);
 			
 			if (key.getCode() == KeyCode.RIGHT) {
 				if (key.isControlDown()) {
-					data.setMouseXNow((int) getWidth());
+					data.setMouseXNow((int) stage.getWidth());
 					repaintCanvas();
 				}
 				data.getRightPressed().set(false);
@@ -370,7 +384,7 @@ public class CaptureWindowController extends Stage {
 			
 			if (key.getCode() == KeyCode.DOWN) {
 				if (key.isControlDown()) {
-					data.setMouseYNow((int) getHeight());
+					data.setMouseYNow((int) stage.getHeight());
 					repaintCanvas();
 				}
 				data.getDownPressed().set(false);
@@ -396,7 +410,7 @@ public class CaptureWindowController extends Stage {
 				
 				// show the appropriate windows
 				CaptureWindow.stage.show();
-				close();
+				stage.close();
 			} else if (key.getCode() == KeyCode.ENTER || key.getCode() == KeyCode.SPACE) {
 				// Stop MaryTTS
 				//Main.textToSpeech.stopSpeaking();
@@ -456,14 +470,14 @@ public class CaptureWindowController extends Stage {
 					
 					// Repaint the Canvas
 					Platform.runLater(() -> {
-						gc.clearRect(0, 0, getWidth(), getHeight());
+						gc.clearRect(0, 0, stage.getWidth(), stage.getHeight());
 						gc.setFill(data.background);
-						gc.fillRect(0, 0, getWidth(), getHeight());
+						gc.fillRect(0, 0, stage.getWidth(), stage.getHeight());
 						gc.setFill(Color.BLACK);
-						gc.fillOval(getWidth() / 2 - 90, getHeight() / 2 - 165, 250, 250);
+						gc.fillOval(stage.getWidth() / 2 - 90, stage.getHeight() / 2 - 165, 250, 250);
 						gc.setFill(Color.WHITE);
 						gc.setFont(Font.font("", FontWeight.BOLD, 120));
-						gc.fillText(Integer.toString(a), getWidth() / 2, getHeight() / 2);
+						gc.fillText(Integer.toString(a), stage.getWidth() / 2, stage.getHeight() / 2);
 						
 						// Unlock the Parent Thread
 						count.countDown();
@@ -497,7 +511,7 @@ public class CaptureWindowController extends Stage {
 				
 				Platform.runLater(() -> {
 					// Clear the canvas
-					gc.clearRect(0, 0, getWidth(), getHeight());
+					gc.clearRect(0, 0, stage.getWidth(), stage.getHeight());
 					
 					// Wait for frame Render
 					waitFrameRender.start();
@@ -515,9 +529,9 @@ public class CaptureWindowController extends Stage {
 	 */
 	protected void repaintCanvas() {
 		
-		gc.clearRect(0, 0, getWidth(), getHeight());
+		gc.clearRect(0, 0, stage.getWidth(), stage.getHeight());
 		gc.setFill(Color.rgb(0, 0, 0, 0.8));
-		gc.fillRect(0, 0, getWidth(), getHeight());
+		gc.fillRect(0, 0, stage.getWidth(), stage.getHeight());
 		
 		gc.setFont(data.font);
 		
@@ -561,8 +575,8 @@ public class CaptureWindowController extends Stage {
 	private void selectWholeScreen() {
 		data.setMouseXPressed(0);
 		data.setMouseYPressed(0);
-		data.setMouseXNow((int) getWidth());
-		data.setMouseYNow((int) getHeight());
+		data.setMouseXNow((int) stage.getWidth());
+		data.setMouseYNow((int) stage.getHeight());
 		repaintCanvas();
 	}
 	
@@ -570,10 +584,10 @@ public class CaptureWindowController extends Stage {
 	 * Prepares the Window for the User.
 	 */
 	public void prepareForCapture() {
-		show();
+		stage.show();
 		repaintCanvas();
 		CaptureWindow.stage.close();
-		settingsWindowController.close();
+		settingsWindowController.getStage().close();
 		//if (settingsWindowController.getMarryTTSToggle().isSelected())
 		//  Main.textToSpeech.speak("Select an area of the screen dragging your mouse and then press Enter or Space");
 	}
@@ -629,7 +643,7 @@ public class CaptureWindowController extends Stage {
 			
 			// Show the SaveDialog
 			fileSaver.get().setInitialFileName("ScreenShot" + data.getRandom().nextInt(50000));
-			File file = fileSaver.get().showSaveDialog(CaptureWindowController.this);
+			File file = fileSaver.get().showSaveDialog(stage);
 			if (file == null)
 				repaintCanvas();
 			else {
@@ -645,7 +659,7 @@ public class CaptureWindowController extends Stage {
 		private void done() {
 			
 			CaptureWindow.stage.show();
-			close();
+			stage.close();
 			
 			//Was it seccussful?
 			if (!getValue())

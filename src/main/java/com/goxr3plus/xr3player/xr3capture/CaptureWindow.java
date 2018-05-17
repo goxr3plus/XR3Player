@@ -50,24 +50,24 @@ public class CaptureWindow {
 			
 			// stage
 			stage.setTitle("XR3Capture Version 9!");
-			//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")));
+			//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")))
 			stage.initStyle(StageStyle.TRANSPARENT);
 			stage.setAlwaysOnTop(true);
 			
 			// MainWindowController
-			FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/MainWindowController.fxml"));
-			loader1.load();
-			mainWindowController = loader1.getController();
+			//FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/MainWindowController.fxml"))
+			//loader1.load()
+			mainWindowController = new MainWindowController();
 			
 			// CaptureWindowController
-			FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/CaptureWindowController.fxml"));
-			loader2.load();
-			captureWindowController = loader2.getController();
+			//FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/CaptureWindowController.fxml"))
+			//	loader2.load()
+			captureWindowController = new CaptureWindowController();
 			
 			// SettingsController
-			FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/SettingsWindowController.fxml"));
-			loader3.load();
-			settingsWindowController = loader3.getController();
+			//	FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/SettingsWindowController.fxml"))
+			//	loader3.load()
+			settingsWindowController = new SettingsWindowController();
 			
 			// Add References between controllers
 			mainWindowController.addControllerReferences(captureWindowController, settingsWindowController);
@@ -78,7 +78,7 @@ public class CaptureWindow {
 			//DataBase.loadDataBaseSettings(settingsWindowController)
 			
 			// Finally
-			stage.setScene(new Scene(loader1.getRoot(), Color.TRANSPARENT));
+			stage.setScene(new Scene(mainWindowController, Color.TRANSPARENT));
 			//stage.show()
 			
 			stage.setOnShown(s -> startPositionFixThread());

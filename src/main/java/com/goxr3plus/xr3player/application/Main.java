@@ -500,6 +500,7 @@ public class Main extends Application {
 		aboutWindow.getWindow().initOwner(window);
 		updateWindow.getWindow().initOwner(window);
 		tagWindow.getWindow().initOwner(window);
+		captureWindow.stage.initOwner(window);
 		
 		// --------- Fix the Background ------------
 		determineBackgroundImage();

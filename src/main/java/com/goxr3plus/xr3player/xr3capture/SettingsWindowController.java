@@ -3,22 +3,28 @@
  */
 package main.java.com.goxr3plus.xr3player.xr3capture;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
  * The Class SettingsWindowController.
  *
  * @author GOXR3PLUS
  */
-public class SettingsWindowController extends Stage {
+public class SettingsWindowController extends BorderPane {
+	
+	private Stage stage;
 	
 	/** The root. */
 	@FXML
@@ -43,16 +49,32 @@ public class SettingsWindowController extends Stage {
 	/** The capture window controller. */
 	CaptureWindowController captureWindowController;
 	
+	public SettingsWindowController() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.XR3CAPTURE_FXMLS + "SettingsWindowController.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			//logger.log(Level.SEVERE, "", ex);
+			ex.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Will be called as soon as FXML file is loaded.
 	 */
 	@FXML
 	private void initialize() {
 		
-		setTitle("Settings");
-		getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")));
-		setScene(new Scene(root));
-		centerOnScreen();
+		stage = new Stage();
+		stage.setTitle("Settings");
+		//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")));
+		stage.setScene(new Scene(root));
+		stage.centerOnScreen();
 		
 		// orientation
 		orientation.selectedProperty().addListener((observable , oldValue , newValue) -> {
@@ -70,12 +92,13 @@ public class SettingsWindowController extends Stage {
 	/**
 	 * Add the needed references from the other controllers.
 	 *
-	 * @param mainWindowController the main window controller
-	 * @param captureWindowController the capture window controller
+	 * @param mainWindowController
+	 *            the main window controller
+	 * @param captureWindowController
+	 *            the capture window controller
 	 */
 	@SuppressWarnings("hiding")
-	public void addControllerReferences(MainWindowController mainWindowController ,
-	        CaptureWindowController captureWindowController) {
+	public void addControllerReferences(MainWindowController mainWindowController , CaptureWindowController captureWindowController) {
 		
 		this.mainWindowController = mainWindowController;
 		this.captureWindowController = captureWindowController;
@@ -112,8 +135,7 @@ public class SettingsWindowController extends Stage {
 	/**
 	 * Gets the marry TTS toggle.
 	 *
-	 * @return The toggle which is for enabling/disabling text to speech
-	 *         recognition
+	 * @return The toggle which is for enabling/disabling text to speech recognition
 	 */
 	public JFXToggleButton getMarryTTSToggle() {
 		return marryttsToggle;
@@ -132,24 +154,42 @@ public class SettingsWindowController extends Stage {
 	 */
 	
 	/**
-	 * @param precisionSlider the precisionSlider to set
+	 * @param precisionSlider
+	 *            the precisionSlider to set
 	 */
 	public void setPrecisionSlider(JFXSlider precisionSlider) {
 		this.precisionSlider = precisionSlider;
 	}
 	
 	/**
-	 * @param orientation the orientation to set
+	 * @param orientation
+	 *            the orientation to set
 	 */
 	public void setOrientation(JFXToggleButton orientation) {
 		this.orientation = orientation;
 	}
 	
 	/**
-	 * @param marryttsToggle the marryttsToggle to set
+	 * @param marryttsToggle
+	 *            the marryttsToggle to set
 	 */
 	public void setMarryttsToggle(JFXToggleButton marryttsToggle) {
 		this.marryttsToggle = marryttsToggle;
+	}
+	
+	/**
+	 * @return the stage
+	 */
+	public Stage getStage() {
+		return stage;
+	}
+	
+	/**
+	 * @param stage
+	 *            the stage to set
+	 */
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 	
 }

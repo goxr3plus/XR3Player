@@ -1,21 +1,25 @@
 package main.java.com.goxr3plus.xr3player.xr3capture;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
  * The Scene of the primary window of the application.
  *
  * @author GOXR3PLUS
  */
-public class MainWindowController {
+public class MainWindowController extends StackPane {
 	
 	/** The root. */
 	@FXML
@@ -67,6 +71,25 @@ public class MainWindowController {
 	CaptureWindowController captureWindowController;
 	
 	/**
+	 * Constructor
+	 */
+	public MainWindowController() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.XR3CAPTURE_FXMLS + "MainWindowController.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			//logger.log(Level.SEVERE, "", ex)
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	/**
 	 * Add the needed references from the other controllers.
 	 *
 	 * @param captureWindowController
@@ -88,7 +111,7 @@ public class MainWindowController {
 	public void initialize() {
 		
 		// more
-		more.setOnAction(a -> settingsWindowController.show());
+		more.setOnAction(a -> settingsWindowController.getStage().show());
 		
 		// minimize
 		minimize.setOnAction(a -> CaptureWindow.stage.setIconified(true));
