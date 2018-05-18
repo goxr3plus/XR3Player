@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updateDescriptor baseUrl="">
+  <entry targetMediaFileId="154" updatableVersionMin="" updatableVersionMax="" fileName="XR3Player_Installer.exe" newVersion="Version 3.105" newMediaFileId="154" fileSize="149280256" md5Sum="fc68182182ce6f62b443f2ff055fba7d" bundledJre="windows-amd64-9.0.4" archive="false" singleBundle="false">
+    <comment language="en" />
+  </entry>
+</updateDescriptor>

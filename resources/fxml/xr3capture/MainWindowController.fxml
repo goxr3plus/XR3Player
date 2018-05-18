@@ -26,12 +26,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="minimize" focusTraversable="false" prefHeight="32.0" prefWidth="32.0" ripplerFill="#1f9dd1" styleClass="jfx-button" text="-" HBox.hgrow="ALWAYS">
+                  <JFXButton fx:id="minimize" contentDisplay="TEXT_ONLY" focusTraversable="false" minHeight="32.0" minWidth="32.0" ripplerFill="#1f9dd1" styleClass="jfx-button" text="-" HBox.hgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="exitButton" focusTraversable="false" prefHeight="32.0" prefWidth="32.0" ripplerFill="#1f9dd1" styleClass="jfx-button" text="X" HBox.hgrow="ALWAYS">
+                  <JFXButton fx:id="exitButton" contentDisplay="TEXT_ONLY" focusTraversable="false" minHeight="32.0" minWidth="32.0" ripplerFill="#1f9dd1" style="-fx-font-size: 11;" styleClass="jfx-button" text="X" HBox.hgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXButton>

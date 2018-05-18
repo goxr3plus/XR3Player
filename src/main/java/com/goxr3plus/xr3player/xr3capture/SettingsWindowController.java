@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -59,7 +58,7 @@ public class SettingsWindowController extends BorderPane {
 		try {
 			loader.load();
 		} catch (IOException ex) {
-			//logger.log(Level.SEVERE, "", ex);
+			//logger.log(Level.SEVERE, "", ex)
 			ex.printStackTrace();
 		}
 	}

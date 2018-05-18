@@ -1,7 +1,6 @@
 package main.java.com.goxr3plus.xr3player.xr3capture;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
