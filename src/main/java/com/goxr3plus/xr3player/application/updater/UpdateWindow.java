@@ -105,7 +105,6 @@ public class UpdateWindow extends StackPane {
 	private final VirtualizedScrollPane<InlineCssTextArea> upcomingFeaturesVirtualPane = new VirtualizedScrollPane<>(upcomingFeaturesTextArea);
 	private final VirtualizedScrollPane<InlineCssTextArea> knownBugsVirtualPane = new VirtualizedScrollPane<>(knownBugsTextArea);
 	
-	private int update;
 	
 	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;  -rtfx-background-color:transparent;";
 	
@@ -144,6 +143,11 @@ public class UpdateWindow extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
+		
+		// -- whatsNewVirtualPane , upcomingFeaturesVirtualPane , knownBugsVirtualPane
+		whatsNewVirtualPane.setFocusTraversable(false);
+		upcomingFeaturesVirtualPane.setFocusTraversable(false);
+		knownBugsVirtualPane.setFocusTraversable(false);
 		
 		// -- whatsNewTextArea
 		whatsNewTextArea.setEditable(false);
@@ -392,9 +396,9 @@ public class UpdateWindow extends StackPane {
 			});
 			
 			//show?
-			if (showTheWindow || Integer.valueOf(lastArticle.id()) > currentVersion) {
-				automaticUpdate.setDisable(Integer.valueOf(lastArticle.id()) <= currentVersion);
-				update = Integer.valueOf(lastArticle.id());
+			int latestUpdate = Integer.parseInt(lastArticle.id());
+			if (showTheWindow || latestUpdate > currentVersion) {
+				automaticUpdate.setDisable(latestUpdate <= currentVersion);
 				show();
 			}
 			

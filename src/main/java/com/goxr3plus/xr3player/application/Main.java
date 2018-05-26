@@ -614,7 +614,7 @@ public class Main extends Application {
 		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
 			//			ActionTool.showNotification("Please exit the application and change it's installation directory!",
 			//					"Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
-			//					Duration.seconds(45), NotificationType.ERROR);
+			//					Duration.seconds(45), NotificationType.ERROR)
 			System.out.println("Failed to create database folder[lack of permissions],please change installation directory");
 			Util.terminateXR3Player(-1);
 		} else {
@@ -636,24 +636,24 @@ public class Main extends Application {
 			//----------------------The 5-10 below lines are being used only to support updates below <72 where the `config.properties` file has been on DataBase Root folder[XR3DataBase]------------------------------
 			
 			//So copy the config.properties from the DataBase Root folder to the settings folder of each user
-			File configFile = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + InfoTool.USER_SETTINGS_FILE_NAME);
-			try {
-				if (configFile.exists())
-					Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)
-							.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain())).forEach(path -> {
-								
-								//Create settings folder if it doesn't exist
-								File settingsFolder = new File(path + File.separator + "settings");
-								if (!settingsFolder.exists())
-									settingsFolder.mkdir();
-								
-								//Now copy the it bro!
-								ActionTool.copy(configFile.getAbsolutePath(), settingsFolder.getAbsolutePath() + File.separator + InfoTool.USER_SETTINGS_FILE_NAME);
-							});
-				configFile.delete();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//			File configFile = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + InfoTool.USER_SETTINGS_FILE_NAME);
+			//			try {
+			//				if (configFile.exists())
+			//					Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)
+			//							.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain())).forEach(path -> {
+			//								
+			//								//Create settings folder if it doesn't exist
+			//								File settingsFolder = new File(path + File.separator + "settings");
+			//								if (!settingsFolder.exists())
+			//									settingsFolder.mkdir();
+			//								
+			//								//Now copy the it bro!
+			//								ActionTool.copy(configFile.getAbsolutePath(), settingsFolder.getAbsolutePath() + File.separator + InfoTool.USER_SETTINGS_FILE_NAME);
+			//							});
+			//				configFile.delete();
+			//			} catch (IOException e) {
+			//				e.printStackTrace();
+			//			}
 			
 		}
 		
