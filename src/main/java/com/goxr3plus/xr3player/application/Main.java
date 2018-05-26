@@ -410,15 +410,6 @@ public class Main extends Application {
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
-		
-		//---------------------------------------
-		//TODO
-		//width = 1280;
-		//height = 600;
-		//TODO
-		//Testing on Bigger Screens
-		//---------------------------------------
-		
 		window.setWidth(width * 0.95);
 		window.setHeight(height * 0.95);
 		window.centerOnScreen();
@@ -841,7 +832,7 @@ public class Main extends Application {
 		ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 		ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
-		alert.getButtonTypes().setAll(exit , vacuum, cancel);
+		alert.getButtonTypes().setAll(exit, vacuum, cancel);
 		
 		//Pick the answer
 		alert.showAndWait().ifPresent(answer -> {
