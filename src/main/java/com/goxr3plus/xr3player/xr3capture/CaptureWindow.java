@@ -25,7 +25,7 @@ public class CaptureWindow {
 	private Thread positionFixerThread;
 	
 	/** The stage. */
-	public static Stage stage = new Stage();
+	private Stage stage;
 	
 	/** The main window controller. */
 	public MainWindowController mainWindowController;
@@ -47,7 +47,8 @@ public class CaptureWindow {
 		try {
 			
 			// stage
-			stage.setTitle("XR3Capture Version 9!");
+			stage = new Stage();
+			stage.setTitle("XR3Capture");
 			//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")))
 			stage.initStyle(StageStyle.TRANSPARENT);
 			stage.setAlwaysOnTop(true);
@@ -55,12 +56,12 @@ public class CaptureWindow {
 			// MainWindowController
 			//FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/MainWindowController.fxml"))
 			//loader1.load()
-			mainWindowController = new MainWindowController();
+			mainWindowController = new MainWindowController(stage);
 			
 			// CaptureWindowController
 			//FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/CaptureWindowController.fxml"))
 			//	loader2.load()
-			captureWindowController = new CaptureWindowController();
+			captureWindowController = new CaptureWindowController(stage);
 			
 			// SettingsController
 			//	FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/SettingsWindowController.fxml"))
@@ -144,6 +145,13 @@ public class CaptureWindow {
 	private void stopPositionFixThread() {
 		if (positionFixerThread != null && positionFixerThread.isAlive())
 			positionFixerThread.interrupt();
+	}
+	
+	/**
+	 * @return the stage
+	 */
+	public Stage getStage() {
+		return stage;
 	}
 	
 }

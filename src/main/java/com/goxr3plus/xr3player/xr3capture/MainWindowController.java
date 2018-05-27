@@ -11,6 +11,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -69,10 +70,13 @@ public class MainWindowController extends StackPane {
 	/** The capture window controller. */
 	CaptureWindowController captureWindowController;
 	
+	private final Stage captureWindowStage;
+	
 	/**
 	 * Constructor
 	 */
-	public MainWindowController() {
+	public MainWindowController(Stage captureWindowStage) {
+		this.captureWindowStage = captureWindowStage;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.XR3CAPTURE_FXMLS + "MainWindowController.fxml"));
@@ -96,7 +100,6 @@ public class MainWindowController extends StackPane {
 	 * @param settingsWindowController
 	 *            the settings window controller
 	 */
-	@SuppressWarnings("hiding")
 	public void addControllerReferences(CaptureWindowController captureWindowController , SettingsWindowController settingsWindowController) {
 		
 		this.captureWindowController = captureWindowController;
@@ -113,15 +116,11 @@ public class MainWindowController extends StackPane {
 		more.setOnAction(a -> settingsWindowController.getStage().show());
 		
 		// minimize
-		minimize.setOnAction(a -> CaptureWindow.stage.setIconified(true));
+		minimize.setOnAction(a -> captureWindowStage.setIconified(true));
 		
 		// exitButton
 		exitButton.setText("Close");
-		exitButton.setOnAction(a -> {
-			CaptureWindow.stage.close();
-			//DataBase.saveDataBaseSettings(settingsWindowController);
-			// Platform.exit();
-		});
+		exitButton.setOnAction(a -> captureWindowStage.close());
 		
 		// captureButton
 		captureButton.setOnAction(a -> captureWindowController.prepareForCapture());

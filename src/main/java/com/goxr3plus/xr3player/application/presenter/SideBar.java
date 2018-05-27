@@ -268,7 +268,7 @@ public class SideBar extends BorderPane {
 		applicationConsole.setOnAction(a -> Main.consoleWindow.show());
 		
 		//snapShot
-		snapshot.setOnAction(a -> CaptureWindow.stage.show());
+		snapshot.setOnAction(a -> Main.captureWindow.getStage().show());
 		
 		// importDataBase
 		importDataBase.setOnAction(e -> importDatabase());

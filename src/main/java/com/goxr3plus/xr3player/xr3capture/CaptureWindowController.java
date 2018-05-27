@@ -48,6 +48,8 @@ public class CaptureWindowController extends StackPane {
 	
 	private Stage stage;
 	
+	private final Stage captureWindowStage;
+	
 	/** The stack pane. */
 	@FXML
 	private StackPane stackPane;
@@ -226,7 +228,8 @@ public class CaptureWindowController extends StackPane {
 	/**
 	 * Constructor.
 	 */
-	public CaptureWindowController() {
+	public CaptureWindowController(Stage captureWindowStage) {
+		this.captureWindowStage = captureWindowStage;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.XR3CAPTURE_FXMLS + "CaptureWindowController.fxml"));
@@ -409,7 +412,7 @@ public class CaptureWindowController extends StackPane {
 				deActivateAllKeys();
 				
 				// show the appropriate windows
-				CaptureWindow.stage.show();
+				captureWindowStage.show();
 				stage.close();
 			} else if (key.getCode() == KeyCode.ENTER || key.getCode() == KeyCode.SPACE) {
 				// Stop MaryTTS
@@ -586,7 +589,7 @@ public class CaptureWindowController extends StackPane {
 	public void prepareForCapture() {
 		stage.show();
 		repaintCanvas();
-		CaptureWindow.stage.close();
+		captureWindowStage.close();
 		settingsWindowController.getStage().close();
 		//if (settingsWindowController.getMarryTTSToggle().isSelected())
 		//  Main.textToSpeech.speak("Select an area of the screen dragging your mouse and then press Enter or Space");
@@ -658,7 +661,7 @@ public class CaptureWindowController extends StackPane {
 		 */
 		private void done() {
 			
-			CaptureWindow.stage.show();
+			captureWindowStage.show();
 			stage.close();
 			
 			//Was it seccussful?
