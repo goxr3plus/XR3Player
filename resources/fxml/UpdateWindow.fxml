@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <bottom>
@@ -43,7 +43,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" text="Download Latest Version">
+                  <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" text="Download latest update">
                      <tooltip>
                         <Tooltip text="Download the latest XR3Player Version" />
                      </tooltip>

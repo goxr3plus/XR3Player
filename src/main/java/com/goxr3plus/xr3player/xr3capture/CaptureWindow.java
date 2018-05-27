@@ -6,11 +6,9 @@ package main.java.com.goxr3plus.xr3player.xr3capture;
 import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
