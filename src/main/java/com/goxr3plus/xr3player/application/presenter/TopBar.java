@@ -158,7 +158,7 @@ public class TopBar extends BorderPane {
 		minimize.setOnAction(ac -> Main.window.setIconified(true));
 		
 		// maximize_normalize
-		maxOrNormalize.setOnAction(ac -> Main.scene.maximizeStage());
+		maxOrNormalize.setOnAction(ac -> Main.borderlessScene.maximizeStage());
 		
 		// close
 		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());

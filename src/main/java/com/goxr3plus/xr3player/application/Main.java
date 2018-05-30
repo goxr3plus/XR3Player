@@ -227,7 +227,7 @@ public class Main extends Application {
 	public static Stage window;
 	
 	/** The scene. */
-	public static BorderlessScene scene;
+	public static BorderlessScene borderlessScene;
 	
 	/** The stack pane root. */
 	public static final StackPane applicationStackPane = new StackPane();
@@ -422,15 +422,16 @@ public class Main extends Application {
 		
 		// Create BorderlessScene 
 		final int screenMinWidth = 800 , screenMinHeight = 600;
-		scene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
-		scene.setMoveControl(loginMode.getXr3PlayerLabel());
-		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		window.setScene(scene);
+		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
+		borderlessScene.setMoveControl(loginMode.getXr3PlayerLabel());
+		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
+		window.setScene(borderlessScene);
 		window.show();
 		window.close();
 		
 		//welcomeScreen
-		scene.setMoveControl(welcomeScreen.getTopHBox());
+		borderlessScene.setMoveControl(welcomeScreen.getTopHBox());
 		
 		//Continue
 		startPart2();
@@ -690,7 +691,7 @@ public class Main extends Application {
 		sideBar.prepareForLoginMode(false);
 		
 		//Top Bar is the new Move Controls
-		scene.setMoveControl(topBar.getXr3Label());
+		borderlessScene.setMoveControl(topBar.getXr3Label());
 		
 		//Set root visible
 		root.setVisible(true);
