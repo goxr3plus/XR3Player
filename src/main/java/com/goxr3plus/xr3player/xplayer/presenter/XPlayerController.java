@@ -50,6 +50,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -433,8 +434,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		if (!flipPane.isBackVisible()) {
 			
 			// File?
-			for (File file : event.getDragboard().getFiles()) {
-				
+			for (File file : event.getDragboard().getFiles())
 				//No directories allowed
 				if (!file.isDirectory()) {
 					
@@ -449,12 +449,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 						return;
 					}
 					
-					//Check if this File is Supported by XR3Player 
-					//					if (!InfoTool.isAudioSupported(ftaap.getFileAbsolutePath())) {
-					//						ActionTool.showNotification("File not supported", "XR3Player doesn't supports the given File", Duration.millis(2000), NotificationType.INFORMATION);
-					//						return;
-					//					}
-					
 					//Check if XPlayer is already active
 					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
 						if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
@@ -463,8 +457,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					} else
 						playSong(ftaap.getFileAbsolutePath());
 					break;
+					
 				}
-			}
 			
 			// // URL?
 			// if (xPlayer.isPausedOrPlaying()) {
@@ -574,6 +568,45 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			}
 			
 			event.consume();
+		});
+		
+		//Key Listener
+		modesStackPane.setOnKeyReleased(key -> {
+			
+			//Check if any file path is pasted
+			if ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.V) {
+				
+				//Get Native System ClipBoard
+				final Clipboard clipboard = Clipboard.getSystemClipboard();
+				
+				// Has Files? + isFree()?
+				if (clipboard.hasFiles())
+					// File?
+					for (File file : clipboard.getFiles())
+						//No directories allowed
+						if (!file.isDirectory()) {
+							
+							//Get it
+							FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+							
+							//Check if File exists
+							if (!new File(ftaap.getFileAbsolutePath()).exists()) {
+								ActionTool.showNotification("File doesn't exist",
+										( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+										Duration.millis(2000), NotificationType.INFORMATION);
+								return;
+							}
+							
+							//Check if XPlayer is already active
+							if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
+								if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
+										visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+									playSong(ftaap.getFileAbsolutePath());
+							} else
+								playSong(ftaap.getFileAbsolutePath());
+							break;
+						}
+			}
 		});
 		
 		//== dragAndDropLabel
