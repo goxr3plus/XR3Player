@@ -503,6 +503,9 @@
                                              <graphic>
                                                 <FontIcon iconColor="WHITE" iconLiteral="typ-volume-up" iconSize="28" selectionEnd="0" selectionStart="0" />
                                              </graphic>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
                                           </Button>
                                           <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                                              <styleClass>
@@ -518,7 +521,7 @@
                                                 <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="typ-volume" iconSize="32" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
                                              </graphic>
                                              <VBox.margin>
-                                                <Insets top="5.0" />
+                                                <Insets top="8.0" />
                                              </VBox.margin>
                                           </Button>
                                        </children>

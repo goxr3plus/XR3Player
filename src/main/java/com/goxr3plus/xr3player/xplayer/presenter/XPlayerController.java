@@ -1325,11 +1325,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			// File is either corrupted or error or no File entered yet
 			if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1) {
 				smTimeSlider.setCursor(noSeekCursor);
-				//smTimeSlider.setDisable(true);
+				//smTimeSlider.setDisable(true)
 				// !discIsDragging
 			} else if (!discIsDragging) {
 				smTimeSlider.setCursor(Cursor.OPEN_HAND);
-				//smTimeSlider.setDisable(false);
+				//smTimeSlider.setDisable(false)
 			}
 		});
 		smTimeSlider.setOnMouseReleased(m -> {
@@ -1570,6 +1570,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ) + "  / "
 								+ InfoTool.getTimeEdited(totalTime));
 						
+						//smTimeSliderProgress
 						smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 					});
 					
@@ -1694,6 +1695,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					//Reset
 					fixPlayerStop();
+					
+					//smTimeSliderProgress
+					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 				}
 				
 			});
