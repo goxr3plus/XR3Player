@@ -129,6 +129,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane diskStackPane1;
 	
 	@FXML
+	private ToggleButton muteButton;
+	
+	@FXML
+	private Button replayButton;
+	
+	@FXML
 	private Button backwardButton;
 	
 	@FXML
@@ -139,12 +145,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Button forwardButton;
-	
-	@FXML
-	private ToggleButton muteButton;
-	
-	@FXML
-	private Button replayButton;
 	
 	@FXML
 	private SplitPane leftSplitPane;
@@ -159,7 +159,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label playerStatusLabel;
 	
 	@FXML
-	private Label visualizerVisibleLabel;
+	private JFXButton visualizerVisibleLabel;
+	
+	@FXML
+	private FontIcon visualizerEyeIcon1;
 	
 	@FXML
 	private FlowPane visualizerMaximizedBox;
@@ -237,7 +240,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smMediaTitle;
 	
 	@FXML
-	private JFXToggleButton showVisualizer;
+	private ToggleButton smMuteButton;
+	
+	@FXML
+	private Button smReplayButton;
 	
 	@FXML
 	private Button smBackwardButton;
@@ -252,22 +258,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button smForwardButton;
 	
 	@FXML
-	private ToggleButton smMuteButton;
-	
-	@FXML
-	private Button smReplayButton;
-	
-	@FXML
-	private Button smMaximizeVolume;
-	
-	@FXML
-	private Slider smVolumeSlider;
-	
-	@FXML
-	private Button smMinimizeVolume;
-	
-	@FXML
-	private Label smVolumeSliderLabel;
+	private JFXToggleButton showVisualizer;
 	
 	@FXML
 	private ProgressBar smTimeSliderProgress;
@@ -277,6 +268,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label smTimeSliderLabel;
+	
+	@FXML
+	private Label smVolumeSliderLabel;
+	
+	@FXML
+	private Button smMaximizeVolume;
+	
+	@FXML
+	private Slider smVolumeSlider;
+	
+	@FXML
+	private Button smMinimizeVolume;
 	
 	@FXML
 	private Label topInfoLabel;
@@ -1242,6 +1245,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// visualizerVisibleLabel
 		visualizerVisibleLabel.visibleProperty().bind(visualizerVisibility.not());
+		visualizerVisibleLabel.setOnAction(a -> visualizerVisibility.set(true));
 		
 		// visualizerMaximizedHBox
 		visualizerMaximizedBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty());
@@ -1290,6 +1294,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				Bindings.when(smModeCenterStackPane.widthProperty().lessThan(smBorderPane.widthProperty())).then(smModeCenterStackPane.widthProperty().subtract(20)).otherwise(0));
 		smImageView.fitHeightProperty().bind(Bindings.when(smModeCenterStackPane.heightProperty().lessThan(smBorderPane.heightProperty()))
 				.then(smModeCenterStackPane.heightProperty().subtract(20)).otherwise(0));
+		smImageView.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(70));
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
