@@ -1263,9 +1263,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		equalizer = new XPlayerEqualizer(this);
 		equalizerTab.setContent(equalizer);
 		
-		//Pad
-		//xPlayerPad = new XPlayerPad(this);
-		//padTab.setContent(xPlayerPad);
+		//Pad 8
+		//xPlayerPad = new XPlayerPad(this)
+		//padTab.setContent(xPlayerPad)
 		
 	}
 	
@@ -1295,6 +1295,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		smImageView.fitHeightProperty().bind(Bindings.when(smModeCenterStackPane.heightProperty().lessThan(smBorderPane.heightProperty()))
 				.then(smModeCenterStackPane.heightProperty().subtract(20)).otherwise(0));
 		smImageView.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(70));
+		smModeCenterStackPane.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(60));
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
