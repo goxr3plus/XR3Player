@@ -1433,8 +1433,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				}
 		});
 		
-		//---VBOX------
-		//		VBox vBox = new VBox();
 		//		
 		//volumeDisc
 		volumeDisc = new DJFilter(30, 30, Color.MEDIUMSPRINGGREEN, volume, minimumVolume, maximumVolume, DJFilterCategory.VOLUME_FILTER);
@@ -1465,7 +1463,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		discBorderPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
 		
 		//Add disc and volume disc to StackPane
-		diskStackPane.getChildren().addAll(disc, volumeDisc);
+		diskStackPane.getChildren().addAll(disc);//, volumeDisc);
 	}
 	
 	/**
