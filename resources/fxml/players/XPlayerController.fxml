@@ -3,12 +3,15 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
@@ -357,6 +360,50 @@
                                        </BorderPane.margin>
                                     </Label>
                                  </bottom>
+                                 <right>
+                                    <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0">
+                                             <children>
+                                                <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <graphic>
+                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-volume-up" iconSize="28" selectionEnd="0" selectionStart="0" />
+                                                   </graphic>
+                                                </Button>
+                                                <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+                                                   <styleClass>
+                                                      <String fx:value="transparency-slider" />
+                                                      <String fx:value="transparency-slider2" />
+                                                   </styleClass>
+                                                </Slider>
+                                                <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <graphic>
+                                                      <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="typ-volume" iconSize="32" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
+                                                   </graphic>
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                          <Group HBox.hgrow="NEVER">
+                                             <children>
+                                                <Label fx:id="smVolumeSliderLabel" alignment="CENTER" rotate="90.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="36%">
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </Label>
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </HBox>
+                                 </right>
                               </BorderPane>
                            </center>
                            <top>
@@ -464,45 +511,24 @@
                                  </children>
                               </HBox>
                            </top>
-                           <left>
-                              <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="15.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="typ-volume-up" iconSize="28" selectionEnd="0" selectionStart="0" />
-                                       </graphic>
-                                    </Button>
-                                    <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" styleClass="transparency-slider" VBox.vgrow="ALWAYS" />
-                                    <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <graphic>
-                                          <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="typ-volume" iconSize="32" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
-                                       </graphic>
-                                    </Button>
-                                    <Label fx:id="smVolumeSliderLabel" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0%">
-                                       <padding>
-                                          <Insets left="5.0" right="5.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                                 <BorderPane.margin>
-                                    <Insets left="5.0" right="5.0" />
-                                 </BorderPane.margin>
-                              </VBox>
-                           </left>
                            <bottom>
                               <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Slider fx:id="smTimeSlider" minWidth="5.0" styleClass="transparency-slider" HBox.hgrow="ALWAYS" />
+                                    <StackPane HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <ProgressBar fx:id="smTimeSliderProgress" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="14.0" progress="0.0" styleClass="transparent-progress-bar" />
+                                          <Slider fx:id="smTimeSlider" maxWidth="1.7976931348623157E308" minWidth="5.0">
+                                             <styleClass>
+                                                <String fx:value="transparency-slider" />
+                                                <String fx:value="transparency-slider3" />
+                                             </styleClass>
+                                          </Slider>
+                                       </children>
+                                    </StackPane>
                                     <Label fx:id="smTimeSliderLabel" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="00:00/05:55" />
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets bottom="5.0" top="5.0" />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </BorderPane.margin>
                               </HBox>
                            </bottom>

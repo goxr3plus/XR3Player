@@ -1294,7 +1294,14 @@
     -fx-background-insets: 3.0;
     -fx-padding: 0.2em;
 }
+
+.transparent-progress-bar:determinate .track{
+	-fx-background-color:rgb(0,0,0,0.5);
+}
   
+  .transparent-progress-bar > .bar{
+	-fx-accent:firebrick;
+}
   
  /*******************************************************************************
 
@@ -1762,6 +1769,14 @@
 }
 
 
+.transparency-slider2:vertical .track{
+	-fx-pref-width:13.0px;	
+}
+
+.transparency-slider3 .track{
+	-fx-pref-height:15px;
+	-fx-background-color:transparent;
+}
 
 /*******************************************************************************
 

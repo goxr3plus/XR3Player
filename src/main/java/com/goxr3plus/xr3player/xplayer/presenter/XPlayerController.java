@@ -36,6 +36,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
@@ -266,6 +267,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label smVolumeSliderLabel;
+	
+	@FXML
+	private ProgressBar smTimeSliderProgress;
 	
 	@FXML
 	private Slider smTimeSlider;
@@ -1355,6 +1359,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					// Try to seek
 					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
+					
 				}
 				
 				discIsDragging = false;
@@ -1384,6 +1389,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					//smTimeSliderLabel
 					smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "  / " + InfoTool.getTimeEdited(totalTime));
+					
+					//smTimeSliderProgress
+					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 				}
 		});
 		
@@ -1561,6 +1569,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 						//smTimeSliderLabel
 						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ) + "  / "
 								+ InfoTool.getTimeEdited(totalTime));
+						
+						smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 					});
 					
 				} else { //Advanced DJ Disc Mode
