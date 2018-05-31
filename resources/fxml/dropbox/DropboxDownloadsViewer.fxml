@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<fx:root prefHeight="381.0" prefWidth="857.0" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+   <children>
+      <VBox alignment="TOP_CENTER" />
+   </children>
+</fx:root>
