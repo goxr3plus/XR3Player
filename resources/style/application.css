@@ -239,8 +239,15 @@
     -fx-padding: 0.4em 1.833333em 0.4em 1.833333em;
 }
 
+.toggle-button2:hover{
+   -fx-background-color:rgb(255.0,106.0,0.0);
+}
+
 .toggle-button2:selected{
     -fx-background-color:rgb(255.0,106.0,0.0);
+    -fx-border-color:black;
+    -fx-border-radius:32.0;
+    -fx-border-width:2.0px;
 }
 
 /*******************************************************************************
@@ -1309,7 +1316,7 @@
 }
 
 .transparent-progress-bar:determinate .track{
-	-fx-background-color:rgb(0,0,0,0.5);
+	-fx-background-color:rgb(0.0,0.0,0.0,0.5);
 }
   
   .transparent-progress-bar > .bar{
@@ -1787,7 +1794,7 @@
 }
 
 .transparency-slider3 .track{
-	-fx-pref-height:15px;
+	-fx-pref-height:15.0px;
 	-fx-background-color:transparent;
 }
 
