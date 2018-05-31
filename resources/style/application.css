@@ -230,6 +230,19 @@
 	/*-fx-background-color:firebrick;*/
 }
 
+.toggle-button2{
+    -fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
+    -fx-background-insets: 0.0, 1.0 1.0 1.0 0.0, 2.0 1.0 1.0 1.0;
+    -fx-padding: 0.4em 1.833333em 0.4em 1.833333em;
+}
+
+.toggle-button2:selected{
+    -fx-background-color:rgb(255.0,106.0,0.0);
+}
+
 /*******************************************************************************
 
 *                            TableView                               *
