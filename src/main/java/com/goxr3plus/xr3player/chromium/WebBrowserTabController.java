@@ -93,6 +93,9 @@ public class WebBrowserTabController extends StackPane {
 	private JFXButton goFullScreen;
 	
 	@FXML
+	private JFXButton openInDefaultBrowser;
+	
+	@FXML
 	private JFXButton backwardButton;
 	
 	@FXML
@@ -487,6 +490,9 @@ public class WebBrowserTabController extends StackPane {
 			//Finally load the firstWebSite
 			loadWebSite(firstWebSite);
 			
+			//openInDefaultBrowser
+			openInDefaultBrowser.setOnAction(a -> ActionTool.openWebSite(browser.getURL()));
+			
 			//copyText
 			copyText.setOnAction(a -> {
 				//Get Native System ClipBoard
@@ -702,7 +708,7 @@ public class WebBrowserTabController extends StackPane {
 			Platform.runLater(() -> facIconImageView.setImage(SwingFXUtils.toFXImage(image.get(0), null)));
 			
 		} catch (Exception ex) {
-			//ex.printStackTrace();
+			//ex.printStackTrace()
 			Platform.runLater(() -> facIconImageView.setImage(null));
 		}
 	}

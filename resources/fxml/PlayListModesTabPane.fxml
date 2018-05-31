@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="358.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="358.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane minHeight="0.0">
          <center>
@@ -70,7 +69,19 @@
                      <content>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel2" text="Coming on next updates..." />
+                              <JFXTabPane minHeight="0.0" side="RIGHT" styleClass="specialJFXTabPane">
+                                 <tabs>
+                                    <Tab fx:id="dropBoxTab1" closable="false" text="Dropbox ">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/dropbox.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Tab>
+                                 </tabs>
+                              </JFXTabPane>
                            </children></StackPane>
                      </content>
                   </Tab>

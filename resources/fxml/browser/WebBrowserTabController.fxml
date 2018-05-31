@@ -69,6 +69,14 @@
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-search" iconSize="20" />
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="#33f5eb" iconLiteral="fa-globe" iconSize="20" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Open in default browser" />
+                     </tooltip>
+                  </JFXButton>
                   <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="30.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;">
                      <HBox.margin>
                         <Insets />
