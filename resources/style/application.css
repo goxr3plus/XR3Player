@@ -1265,6 +1265,21 @@
 
 ******************************************************************************/
 
+.progress-label{
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-font-size:20;
+	-color: firebrick;
+	-fx-background-color:linear-gradient(
+        from 0.0px 0.75em to 0.75em 0.0px,
+        repeat,
+        -color 0.0%,
+       -color 49.0%,
+        derive(-color, 30.0%) 50.0%,
+        derive(-color, 30.0%) 99.0%
+    );
+}
+
 .progress-indicator{
 	-color: firebrick;
 	-fx-accent:linear-gradient(

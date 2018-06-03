@@ -39,7 +39,8 @@ public class AllDetailsService extends Service<Boolean> {
 	 */
 	public AllDetailsService() {
 		
-		this.setOnSucceeded(s -> mediaTableViewer.sortTable());
+		setOnSucceeded(s -> mediaTableViewer.sortTable());
+		setOnFailed(f-> mediaTableViewer.sortTable());
 	}
 	
 	/**

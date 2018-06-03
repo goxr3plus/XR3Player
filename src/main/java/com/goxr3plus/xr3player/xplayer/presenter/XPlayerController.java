@@ -119,6 +119,36 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private BorderPane borderPane;
 	
 	@FXML
+	private HBox mediaNameHBox;
+	
+	@FXML
+	private Label elapsedTimeLabel;
+	
+	@FXML
+	private Label remainingTimeLabel;
+	
+	@FXML
+	private Label totalTimeLabel;
+	
+	@FXML
+	private Button emotionsButton;
+	
+	@FXML
+	private MenuItem copyFileTitle;
+	
+	@FXML
+	private MenuItem copyFileLocation;
+	
+	@FXML
+	private MenuItem copyFile;
+	
+	@FXML
+	private Button mediaTagImageButton;
+	
+	@FXML
+	private Label advModeVolumeLabel;
+	
+	@FXML
 	private BorderPane discBorderPane;
 	
 	@FXML
@@ -146,9 +176,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private ToggleButton muteButton;
 	
 	@FXML
-	private Tab equalizerTab;
-	
-	@FXML
 	private StackPane visualizerStackTopParent;
 	
 	@FXML
@@ -156,6 +183,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label playerStatusLabel;
+	
+	@FXML
+	private Label visualizerLabel;
 	
 	@FXML
 	private JFXButton visualizerVisibleLabel;
@@ -194,37 +224,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button enableHighGraphics;
 	
 	@FXML
-	private Tab equalizerTab1;
-	
-	@FXML
-	private HBox mediaNameHBox;
-	
-	@FXML
-	private Label elapsedTimeLabel;
-	
-	@FXML
-	private Label remainingTimeLabel;
-	
-	@FXML
-	private Label totalTimeLabel;
-	
-	@FXML
-	private Button emotionsButton;
-	
-	@FXML
-	private MenuItem copyFileTitle;
-	
-	@FXML
-	private MenuItem copyFileLocation;
-	
-	@FXML
-	private MenuItem copyFile;
-	
-	@FXML
-	private Button mediaTagImageButton;
-	
-	@FXML
-	private Label advModeVolumeLabel;
+	private Tab equalizerTab;
 	
 	@FXML
 	private BorderPane smBorderPane;
@@ -312,9 +312,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private StackPane regionStackPane;
-	
-	@FXML
-	private Label bugLabel;
 	
 	@FXML
 	private ProgressIndicator progressIndicator;
@@ -1254,6 +1251,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// playerStatusLabel
 		playerStatusLabel.visibleProperty().bind(visualizer.getAnimationService().runningProperty().not());
+		visualizerLabel.visibleProperty().bind(playerStatusLabel.visibleProperty());
 		
 		//Equalizer
 		equalizer = new XPlayerEqualizer(this);
@@ -1669,7 +1667,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.RESUMED) {
 			
 			Platform.runLater(() -> {
-				playerStatusLabel.setText("Resuming");
+				//playerStatusLabel.setText("Resuming");
 				resumeCode();
 				
 				//Notification
@@ -1686,7 +1684,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
 			
 			Platform.runLater(() -> {
-				playerStatusLabel.setText("Paused");
+				playerStatusLabel.setText("Status : " + " Paused");
 				pauseCode();
 				
 				//Notification
@@ -1710,7 +1708,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 					// Change Marquee text
 					//mediaFileMarquee.setText("Player is Stopped");
-					playerStatusLabel.setText("Stopped");
+					playerStatusLabel.setText("Status : " + " Stopped");
 					
 					// Set time to 0 to not have problems with SeekService
 					xPlayerModel.setCurrentTime(0);
@@ -1738,7 +1736,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			// Status.SEEKING
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKING) {
 			
-			Platform.runLater(() -> playerStatusLabel.setText("Seeking"));
+			//Platform.runLater(() -> playerStatusLabel.setText("Status : "+" Seeking"));
 			
 			// Status.SEEKED
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKED) {
