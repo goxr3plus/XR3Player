@@ -40,7 +40,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
@@ -129,9 +128,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane diskStackPane1;
 	
 	@FXML
-	private ToggleButton muteButton;
-	
-	@FXML
 	private Button replayButton;
 	
 	@FXML
@@ -147,7 +143,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button forwardButton;
 	
 	@FXML
-	private SplitPane leftSplitPane;
+	private ToggleButton muteButton;
+	
+	@FXML
+	private Tab equalizerTab;
 	
 	@FXML
 	private StackPane visualizerStackTopParent;
@@ -195,7 +194,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button enableHighGraphics;
 	
 	@FXML
-	private Tab equalizerTab;
+	private Tab equalizerTab1;
 	
 	@FXML
 	private HBox mediaNameHBox;
@@ -273,15 +272,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smVolumeSliderLabel;
 	
 	@FXML
-	private Button smMaximizeVolume;
-	
-	@FXML
-	private Slider smVolumeSlider;
-	
-	@FXML
-	private Button smMinimizeVolume;
-	
-	@FXML
 	private Label topInfoLabel;
 	
 	@FXML
@@ -312,6 +302,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private MenuButton transferMedia;
 	
 	@FXML
+	private Button smMaximizeVolume;
+	
+	@FXML
+	private Slider smVolumeSlider;
+	
+	@FXML
+	private Button smMinimizeVolume;
+	
+	@FXML
 	private StackPane regionStackPane;
 	
 	@FXML
@@ -340,14 +339,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	/**
 	 * This Variable Determines if the Player is extended or not ( which means it is being shown on an external window different from the main window )
 	 */
-	private boolean isPlayerExtended = false;
+	private boolean isPlayerExtended;
 	
 	public final Logger logger = Logger.getLogger(getClass().getName());
 	
 	// ------------------------- Images/ImageViews --------------------------
-	
-	//private final ImageView eye = InfoTool.getImageViewFromResourcesFolder("eye.png");
-	//private final ImageView eyeDisabled = InfoTool.getImageViewFromResourcesFolder("eyeDisabled.png");
 	
 	private static final Image noSeek = InfoTool.getImageFromResourcesFolder("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
 	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
