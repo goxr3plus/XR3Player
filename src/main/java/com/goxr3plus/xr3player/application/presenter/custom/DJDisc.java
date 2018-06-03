@@ -244,7 +244,7 @@ public class DJDisc extends StackPane {
 				canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
 				
 				// ImageView
-				int val = 5;
+				int val = smallCircleRadius;
 				imageView.setTranslateX(val);
 				imageView.setTranslateY(val);
 				imageView.setFitWidth(width - val * 2);
@@ -269,8 +269,12 @@ public class DJDisc extends StackPane {
 			}
 	}
 	
-	//For performance;
-	private static final Color webGrey = Color.web("#353535");
+	//private static final Color webGrey = Color.web("#353535")
+	
+	// draw the progress oval circumference	
+	int smallCircleRadius = 35;
+	int minus = smallCircleRadius - 1;
+	int minus2 = smallCircleRadius + 3;
 	
 	/**
 	 * Repaints the disc.
@@ -287,15 +291,6 @@ public class DJDisc extends StackPane {
 		canvas.gc.setFill(Color.TRANSPARENT);
 		canvas.gc.fillRect(0, 0, prefWidth, prefHeight);
 		
-		// Arc Background Oval
-		canvas.gc.setLineWidth(7);
-		canvas.gc.setStroke(Color.WHITE);
-		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, 360.00 + angle, ArcType.OPEN);
-		
-		// Arc Foreground Oval 
-		canvas.gc.setStroke(arcColor);
-		canvas.gc.strokeArc(5, 5, prefWidth - 10, prefHeight - 10, 90, angle, ArcType.OPEN);
-		
 		// Volume Arc
 		//		canvas.gc.setLineCap(StrokeLineCap.SQUARE);
 		//		canvas.gc.setLineDashes(6);
@@ -310,50 +305,59 @@ public class DJDisc extends StackPane {
 		//		canvas.gc.setLineDashes(0);
 		//		canvas.gc.setLineCap(StrokeLineCap.ROUND);
 		
-		// --------------------------Maths to find the point on the circle
-		// circumference
-		// draw the progress oval
+		// --------------------------Maths to find the point on the circle-----------------------
 		
-		// here i add + 89 to the angle cause the Java has where i have 0
-		// degrees the 90 degrees.
+		// Arc Background Oval
+		canvas.gc.setLineWidth(smallCircleRadius);
+		canvas.gc.setStroke(Color.WHITE);
+		canvas.gc.strokeArc(smallCircleRadius, smallCircleRadius, prefWidth - 2 * smallCircleRadius, prefHeight - 2 * smallCircleRadius, 90, angle + 360.00, ArcType.OPEN);
+		
+		// Arc Foreground Oval 
+		canvas.gc.setStroke(arcColor);
+		canvas.gc.strokeArc(smallCircleRadius, smallCircleRadius, prefWidth - 2 * smallCircleRadius, prefHeight - smallCircleRadius * 2, 90, angle, ArcType.OPEN);
+		
+		// Here i add + 89 to the angle cause the Java has where i have 0 degrees the 90 degrees.
 		// I am counting the 0 degrees from the top center of the circle and
 		// Java calculates them from the right mid of the circle and it is
 		// going left , i calculate them clock wise
 		int angle2 = this.angle + 89;
-		int minus = 8;
 		
 		// Find the point on the circle circumference
-		circlePointX = Math.round( ( (int) ( prefWidth - minus ) ) / 2 + Math.cos(Math.toRadians(-angle2)) * ( (int) ( prefWidth - minus ) / 2 ));
-		circlePointY = Math.round( ( (int) ( prefHeight - minus ) ) / 2 + Math.sin(Math.toRadians(-angle2)) * ( (int) ( prefHeight - minus ) / 2 ));
+		circlePointX = Math.round( ( prefWidth - minus ) / 2.00 + ( prefWidth - minus ) / 2.00 * Math.cos(Math.toRadians(-angle2)));
+		circlePointY = Math.round( ( prefHeight - minus ) / 2.00 + ( prefHeight - minus ) / 2.00 * Math.sin(Math.toRadians(-angle2)));
 		
 		// System.out.println("Width:" + canvas.getWidth() + " , Height:" + canvas.getHeight() + " , Angle: " + this.angle)
 		// System.out.println(circlePointX + "," + circlePointY)
 		
-		int ovalWidth = 7;
-		int ovalHeight = 7;
-		
 		// fix the circle position
-		if (-angle >= 0 && -angle <= 90) {
-			circlePointX = circlePointX - ovalWidth / 2 + 2;
-			circlePointY = circlePointY + 1;
-		} else if (-angle > 90 && -angle <= 180) {
-			circlePointX = circlePointX - ovalWidth / 2 + 3;
-			circlePointY = circlePointY - ovalWidth / 2 + 2;
-		} else if (-angle > 180 && -angle <= 270) {
-			circlePointX = circlePointX + 2;
-			circlePointY = circlePointY - ovalWidth / 2 + 2;
-		} else if (-angle > 270) {
-			circlePointX = circlePointX + 2;
-			// previousY = previousY - 7
+		int positiveAngle = -angle;
+		if (positiveAngle >= 0 && positiveAngle <= 90)
+			if (positiveAngle < 50) {
+				circlePointX -= 1.2 * smallCircleRadius;
+				circlePointY -= smallCircleRadius / 2.5;
+			} else {
+				circlePointX -= 1.5 * smallCircleRadius;
+				circlePointY -= smallCircleRadius / 1.8;
+			}
+		else if (positiveAngle > 90 && positiveAngle <= 180) {
+			circlePointX -= 1.5 * smallCircleRadius;
+			circlePointY -= 1.5 * smallCircleRadius;
+		} else if (positiveAngle > 180 && positiveAngle <= 270) {
+			circlePointX -= smallCircleRadius / 1.6;
+			circlePointY -= 1.35 * smallCircleRadius;
+		} else if (positiveAngle > 270) {
+			circlePointX -= smallCircleRadius / 1.6;
+			circlePointY -= smallCircleRadius / 2.0;
 		}
 		
-		canvas.gc.setLineWidth(5);
-		canvas.gc.setStroke(Color.BLACK);
-		canvas.gc.strokeOval(circlePointX, circlePointY, ovalWidth, ovalHeight);
+		canvas.gc.setLineWidth(smallCircleRadius / 2);
+		canvas.gc.setStroke(Color.web("#202020"));
+		canvas.gc.strokeOval(circlePointX + smallCircleRadius, circlePointY + smallCircleRadius, smallCircleRadius, smallCircleRadius);
 		
 		canvas.gc.setFill(arcColor);
-		canvas.gc.fillOval(circlePointX, circlePointY, ovalWidth, ovalHeight);
+		canvas.gc.fillOval(circlePointX + smallCircleRadius, circlePointY + smallCircleRadius, smallCircleRadius, smallCircleRadius);
 		
+		System.out.println(-angle);
 		// System.out.println("Angle is:" + ( -this.angle ))
 		// System.out.println("FormatedX is: " + previousX + ", FormatedY is: "
 		// + previousY)
@@ -387,7 +391,7 @@ public class DJDisc extends StackPane {
 	 */
 	public int getValue(int maximum) {
 		
-		return ( maximum * -angle ) / 360;
+		return ( -maximum * angle ) / 360;
 	}
 	
 	/**
@@ -500,7 +504,7 @@ public class DJDisc extends StackPane {
 			this.time = InfoTool.getTimeEdited(total);
 		
 		//Final 
-		//this.time = time + "\n," + InfoTool.getTimeEdited(total);
+		//this.time = time + "\n," + InfoTool.getTimeEdited(total)
 	}
 	
 	/**
