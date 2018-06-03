@@ -117,7 +117,7 @@
                            <center>
                               <SplitPane dividerPositions="0.3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <items>
-                                    <BorderPane fx:id="discBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                                    <BorderPane fx:id="discBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" SplitPane.resizableWithParent="false">
                                        <center>
                                           <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
                                        </center>
@@ -212,7 +212,7 @@
                                           </StackPane>
                                        </bottom>
                                     </BorderPane>
-                                    <JFXTabPane minHeight="0.0" minWidth="0.0" side="RIGHT" styleClass="specialJFXTabPane">
+                                    <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
                                         <Tab>
                                              <graphic>
@@ -667,17 +667,12 @@
             </BorderPane>
             <StackPane fx:id="regionStackPane" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false">
                <children>
-                  <Label fx:id="bugLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sorry if the player lags here , bugs are bugs :) " textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
                   <ProgressIndicator fx:id="progressIndicator">
                      <StackPane.margin>
                         <Insets bottom="30.0" top="20.0" />
                      </StackPane.margin>
                   </ProgressIndicator>
-                  <Label fx:id="playerLoadingLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="center label">
+                  <Label fx:id="playerLoadingLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label" visible="false">
                      <font>
                         <Font size="15.0" />
                      </font>
