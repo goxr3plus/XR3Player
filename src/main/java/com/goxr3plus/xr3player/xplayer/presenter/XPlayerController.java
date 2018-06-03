@@ -1470,7 +1470,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size);
-		disc.changeHoverCircleRadius((int) ( size / 10 ), true);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
 		//System.out.println("Redrawing canvas")
 	}

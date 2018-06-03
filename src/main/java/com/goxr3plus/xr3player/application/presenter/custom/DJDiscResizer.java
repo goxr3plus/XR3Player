@@ -50,7 +50,6 @@ public class DJDiscResizer extends Application {
 		//System.out.println("Redrawing canvas")
 		System.out.println(size);
 		
-		djDisc.changeHoverCircleRadius((int) ( size / 10 ), true);
 	}
 	
 	/**

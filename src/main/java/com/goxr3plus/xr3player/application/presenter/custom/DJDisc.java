@@ -225,68 +225,55 @@ public class DJDisc extends StackPane {
 	public void resizeDisc(double perimeterr) {
 		int perimeter = (int) Math.round(perimeterr);
 		
-		//int height = (int) Math.round(height1)
+		//Disc radius
+		double radius = perimeter / 2.00;
 		
-		//System.out.println("Given:" + width1 + " , Rounded:" + width)
+		// {Maximum,Preferred} Size
+		setMinSize(perimeter, perimeter);
+		setMaxSize(perimeter, perimeter);
+		setPrefSize(perimeter, perimeter);
+		canvas.setWidth(perimeter);
+		canvas.setHeight(perimeter);
+		canvas.setClip(new Circle(radius, radius, radius));
 		
-		if (perimeter < 30)
-			return;
-		else {
-			
-			//Disc radius
-			double radius = perimeter / 2.00;
-			
-			// {Maximum,Preferred} Size
-			setMinSize(perimeter, perimeter);
-			setMaxSize(perimeter, perimeter);
-			setPrefSize(perimeter, perimeter);
-			canvas.setWidth(perimeter);
-			canvas.setHeight(perimeter);
-			canvas.setClip(new Circle(radius, radius, radius));
-			
-			// ImageView
-			int val = smallCirclePerimeter;
-			imageView.setTranslateX(val);
-			imageView.setTranslateY(val);
-			imageView.setFitWidth(perimeter - 2 * val);
-			imageView.setFitHeight(perimeter - 2 * val);
-			imageView.setSmooth(true);
-			imageView.setPreserveRatio(false);
-			imageView.setClip(new Circle(radius - 2 * val, radius - 2 * val, radius - 2 * val));
-			
-			// timeField
-			//timeField.setTranslateY(-height * 26 / 100.00)
-			
-			// volumeField
-			//volumeLabel.setTranslateY(+height * 26 / 100.00)
-			
-			//rotationTransformation
-			rotationTransf.setPivotX(perimeter / 2.00 - 2 * val);
-			rotationTransf.setPivotY(perimeter / 2.00 - 2 * val);
-			
-			//Repaint
-			repaint();
-		}
+		//Fix the small hover disc
+		changeHoverCircleRadius(perimeter / 10, true, perimeter, radius);
+		
+		// timeField
+		//timeField.setTranslateY(-height * 26 / 100.00)
+		
+		// volumeField
+		//volumeLabel.setTranslateY(+height * 26 / 100.00)
+		
+		//Repaint
+		//repaint()
+		
 	}
 	
 	//private static final Color webGrey = Color.web("#353535")
 	
-	public void changeHoverCircleRadius(int newPerimeter , boolean repaint) {
+	/**
+	 * Change the size of small circle
+	 * 
+	 * @param newPerimeter
+	 * @param repaint
+	 */
+	private void changeHoverCircleRadius(int newPerimeter , boolean repaint , int discPerimeter , double discRadius) {
 		smallCirclePerimeter = newPerimeter;
 		minus = smallCirclePerimeter - 1;
 		minus2 = smallCirclePerimeter + 3;
-		
-		double width = getPrefWidth();
-		double height = getPrefHeight();
-		double halfWidth = width / 2.00 , halfHeight = height / 2.00;
 		
 		// ImageView
 		int val = smallCirclePerimeter;
 		imageView.setTranslateX(val);
 		imageView.setTranslateY(val);
-		imageView.setFitWidth(width - 2 * val);
-		imageView.setFitHeight(height - 2 * val);
-		imageView.setClip(new Circle(halfWidth - 2 * val, halfHeight - 2 * val, halfWidth - 2 * val));
+		imageView.setFitWidth(discPerimeter - 2 * val);
+		imageView.setFitHeight(discPerimeter - 2 * val);
+		imageView.setClip(new Circle(discRadius - 2 * val, discRadius - 2 * val, discRadius - 2 * val));
+		
+		//rotationTransformation
+		rotationTransf.setPivotX(discPerimeter / 2.00 - 2 * val);
+		rotationTransf.setPivotY(discPerimeter / 2.00 - 2 * val);
 		
 		//repaint?
 		if (repaint)
@@ -297,6 +284,7 @@ public class DJDisc extends StackPane {
 	int smallCirclePerimeter = 35;
 	int minus = smallCirclePerimeter - 1;
 	int minus2 = smallCirclePerimeter + 3;
+	private final Color darkGrey = Color.web("#202020");
 	
 	/**
 	 * Repaints the disc.
@@ -332,7 +320,8 @@ public class DJDisc extends StackPane {
 		// Arc Background Oval
 		canvas.gc.setLineWidth(smallCirclePerimeter);
 		canvas.gc.setStroke(Color.WHITE);
-		canvas.gc.strokeArc(smallCirclePerimeter, smallCirclePerimeter, prefWidth - 2 * smallCirclePerimeter, prefHeight - 2 * smallCirclePerimeter, 90, angle + 360.00, ArcType.OPEN);
+		canvas.gc.strokeArc(smallCirclePerimeter, smallCirclePerimeter, prefWidth - 2 * smallCirclePerimeter, prefHeight - 2 * smallCirclePerimeter, 90, angle + 360.00,
+				ArcType.OPEN);
 		
 		// Arc Foreground Oval 
 		canvas.gc.setStroke(arcColor);
@@ -373,7 +362,7 @@ public class DJDisc extends StackPane {
 		}
 		
 		canvas.gc.setLineWidth(smallCirclePerimeter / 2);
-		canvas.gc.setStroke(Color.web("#202020"));
+		canvas.gc.setStroke(darkGrey);
 		canvas.gc.strokeOval(circlePointX + smallCirclePerimeter, circlePointY + smallCirclePerimeter, smallCirclePerimeter, smallCirclePerimeter);
 		
 		canvas.gc.setFill(arcColor);
