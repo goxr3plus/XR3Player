@@ -223,6 +223,10 @@ public class DJDisc extends StackPane {
 	 *            the height
 	 */
 	public void resizeDisc(double perimeterr) {
+		//Avoid divide by zero
+		if (perimeterr < 1)
+			return;
+		
 		int perimeter = (int) Math.round(perimeterr);
 		
 		//Disc radius
