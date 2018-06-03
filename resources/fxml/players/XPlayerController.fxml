@@ -677,7 +677,7 @@
                         <Insets bottom="30.0" top="20.0" />
                      </StackPane.margin>
                   </ProgressIndicator>
-                  <Label fx:id="playerLoadingLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label" visible="false">
+                  <Label fx:id="playerLoadingLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label">
                      <font>
                         <Font size="15.0" />
                      </font>
