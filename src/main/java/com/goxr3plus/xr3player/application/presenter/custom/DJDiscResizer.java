@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class DJDiscResizer extends Application {
 	
 	StackPane stackPane = new StackPane();
-	DJDisc djDisc = new DJDisc(200, 200, Color.FIREBRICK, 50, 150);
+	DJDisc djDisc = new DJDisc(200, Color.FIREBRICK, 50, 150);
 	
 	public void start(Stage primary) {
 		
@@ -45,9 +45,10 @@ public class DJDiscResizer extends Application {
 	public void reCalculateCanvasSize() {
 		double size = Math.min(stackPane.getWidth(), stackPane.getHeight()) / 1.2;
 		
-		djDisc.resizeDisc(size, size);
+		djDisc.resizeDisc(size);
 		///djDisc.getCanvas().redraw()
 		//System.out.println("Redrawing canvas")
+		System.out.println(size);
 	}
 	
 	/**

@@ -123,7 +123,7 @@ public class DJDisc extends StackPane {
 	 * @param maximumVolume
 	 *            The maximum volume of the disc [[SuppressWarningsSpartan]]
 	 */
-	public DJDisc(int width, int height, Color arcColor, int volume, int maximumVolume) {
+	public DJDisc(int perimeter, Color arcColor, int volume, int maximumVolume) {
 		this.maximumVolume = maximumVolume;
 		
 		super.setPickOnBounds(true);
@@ -180,7 +180,7 @@ public class DJDisc extends StackPane {
 		// fade.play()
 		
 		// rotation transform starting at 0 degrees, rotating about pivot point
-		rotationTransf = new Rotate(0, width / 2.00 - 10, height / 2.00 - 10);
+		rotationTransf = new Rotate(0, perimeter / 2.00 - 10, perimeter / 2.00 - 10);
 		imageView.getTransforms().add(rotationTransf);
 		
 		// rotate a square using time line attached to the rotation transform's
@@ -201,7 +201,7 @@ public class DJDisc extends StackPane {
 		canvas.setOnMouseDragged(this::onMouseDragged);
 		setOnScroll(this::onScroll);
 		
-		resizeDisc(width, height);
+		resizeDisc(perimeter);
 	}
 	
 	/**
@@ -222,54 +222,76 @@ public class DJDisc extends StackPane {
 	 * @param height1
 	 *            the height
 	 */
-	public void resizeDisc(double width1 , double height1) {
-		int width = (int) Math.round(width1);
-		int height = width;
+	public void resizeDisc(double perimeterr) {
+		int perimeter = (int) Math.round(perimeterr);
 		
 		//int height = (int) Math.round(height1)
 		
 		//System.out.println("Given:" + width1 + " , Rounded:" + width)
 		
-		if (width == height)
-			if ( ( width >= 30 && height >= 30 )) {
-				
-				double halfWidth = width / 2.00 , halfHeight = height / 2.00;
-				
-				// {Maximum,Preferred} Size
-				setMinSize(width, height);
-				setMaxSize(width, height);
-				setPrefSize(width, height);
-				canvas.setWidth(width);
-				canvas.setHeight(height);
-				canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
-				
-				// ImageView
-				int val = smallCircleRadius;
-				imageView.setTranslateX(val);
-				imageView.setTranslateY(val);
-				imageView.setFitWidth(width - val * 2);
-				imageView.setFitHeight(height - val * 2);
-				imageView.setSmooth(true);
-				imageView.setPreserveRatio(false);
-				imageView.setClip(new Circle(halfWidth - val * 2, halfHeight - val * 2, halfWidth - val * 2));
-				
-				// timeField
-				//timeField.setTranslateY(-height * 26 / 100.00);
-				
-				// volumeField
-				//volumeLabel.setTranslateY(+height * 26 / 100.00);
-				
-				//rotationTransformation
-				rotationTransf.setPivotX(width / 2.00 - val * 2);
-				rotationTransf.setPivotY(height / 2.00 - val * 2);
-				
-				repaint();
-			} else {
-				//Main.logger.info("DJDisc resizing failed.. \nfor width: " + width + " height: " + height);
-			}
+		if (perimeter < 30)
+			return;
+		else {
+			
+			//Disc radius
+			double radius = perimeter / 2.00;
+			
+			// {Maximum,Preferred} Size
+			setMinSize(perimeter, perimeter);
+			setMaxSize(perimeter, perimeter);
+			setPrefSize(perimeter, perimeter);
+			canvas.setWidth(perimeter);
+			canvas.setHeight(perimeter);
+			canvas.setClip(new Circle(radius, radius, radius));
+			
+			// ImageView
+			int val = smallCircleRadius;
+			imageView.setTranslateX(val);
+			imageView.setTranslateY(val);
+			imageView.setFitWidth(perimeter - 2 * val);
+			imageView.setFitHeight(perimeter - 2 * val);
+			imageView.setSmooth(true);
+			imageView.setPreserveRatio(false);
+			imageView.setClip(new Circle(radius - 2 * val, radius - 2 * val, radius - 2 * val));
+			
+			// timeField
+			//timeField.setTranslateY(-height * 26 / 100.00)
+			
+			// volumeField
+			//volumeLabel.setTranslateY(+height * 26 / 100.00)
+			
+			//rotationTransformation
+			rotationTransf.setPivotX(perimeter / 2.00 - 2 * val);
+			rotationTransf.setPivotY(perimeter / 2.00 - 2 * val);
+			
+			//Repaint
+			repaint();
+		}
 	}
 	
 	//private static final Color webGrey = Color.web("#353535")
+	
+	public void changeHoverCircleRadius(int newRadius , boolean repaint) {
+		smallCircleRadius = newRadius;
+		minus = smallCircleRadius - 1;
+		minus2 = smallCircleRadius + 3;
+		
+		double width = getPrefWidth();
+		double height = getPrefHeight();
+		double halfWidth = width / 2.00 , halfHeight = height / 2.00;
+		
+		// ImageView
+		int val = smallCircleRadius;
+		imageView.setTranslateX(val);
+		imageView.setTranslateY(val);
+		imageView.setFitWidth(width - 2 * val);
+		imageView.setFitHeight(height - 2 * val);
+		imageView.setClip(new Circle(halfWidth - 2 * val, halfHeight - 2 * val, halfWidth - 2 * val));
+		
+		//repaint?
+		if (repaint)
+			repaint();
+	}
 	
 	// draw the progress oval circumference	
 	int smallCircleRadius = 35;

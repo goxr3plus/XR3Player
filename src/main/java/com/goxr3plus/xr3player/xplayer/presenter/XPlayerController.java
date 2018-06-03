@@ -1280,7 +1280,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public void makeTheDisc(Color color , int volume , int minimumVolume , int maximumVolume , Side side) {
 		
 		// initialize
-		disc = new DJDisc(136, 136, color, volume, maximumVolume);
+		disc = new DJDisc(136, color, volume, maximumVolume);
 		
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
@@ -1458,7 +1458,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		discBorderPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
 		
 		//Add disc and volume disc to StackPane
-		diskStackPane.getChildren().addAll(disc);//, volumeDisc);
+		diskStackPane.getChildren().addAll(disc);//, volumeDisc)
 	}
 	
 	/**
@@ -1469,7 +1469,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
 		
-		disc.resizeDisc(size, size);
+		disc.resizeDisc(size);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
 		//System.out.println("Redrawing canvas")
 	}
