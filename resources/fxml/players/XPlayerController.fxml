@@ -6,7 +6,6 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -29,7 +28,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="875.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="902.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
@@ -205,10 +204,13 @@
                                                       <HBox alignment="CENTER" />
                                                    </children>
                                                    <StackPane.margin>
-                                                      <Insets bottom="5.0" top="5.0" />
+                                                      <Insets />
                                                    </StackPane.margin>
                                                 </FlowPane>
                                              </children>
+                                             <BorderPane.margin>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="5.0" />
+                                             </BorderPane.margin>
                                           </StackPane>
                                        </bottom>
                                     </BorderPane>
@@ -627,48 +629,46 @@
                      </left>
                   </BorderPane>
                </top>
-               <right>
-                  <HBox alignment="BOTTOM_CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+               <left>
+                  <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                      <children>
-                        <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0">
-                           <children>
-                              <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
-                                 <styleClass>
-                                    <String fx:value="transparency-slider" />
-                                    <String fx:value="transparency-slider2" />
-                                 </styleClass>
-                              </Slider>
-                              <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="24" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
-                                 </graphic>
-                                 <VBox.margin>
-                                    <Insets top="8.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <Group HBox.hgrow="NEVER" />
+                        <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="24" selectionEnd="0" selectionStart="0" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+                           <styleClass>
+                              <String fx:value="transparency-slider" />
+                              <String fx:value="transparency-slider2" />
+                           </styleClass>
+                        </Slider>
+                        <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="24" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
-                  </HBox>
-               </right>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </left>
             </BorderPane>
             <StackPane fx:id="regionStackPane" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false">
                <children>

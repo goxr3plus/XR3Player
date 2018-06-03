@@ -24,9 +24,9 @@ public class DJDiscResizer extends Application {
 		stackPane.getChildren().add(djDisc);
 		
 		//Add Listeners the the StackPane
-		//stackPane.boundsInParentProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
+		//stackPane.boundsInParentProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize())
 		stackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
-		//stackPane.heightProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
+		//stackPane.heightProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize())
 		
 		//Scene
 		Scene scene = new Scene(borderPane, 500, 500);
@@ -49,6 +49,8 @@ public class DJDiscResizer extends Application {
 		///djDisc.getCanvas().redraw()
 		//System.out.println("Redrawing canvas")
 		System.out.println(size);
+		
+		djDisc.changeHoverCircleRadius((int) ( size / 10 ), true);
 	}
 	
 	/**
