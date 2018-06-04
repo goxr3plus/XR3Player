@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
-	<version>3.107</version>
+	<version>3.108</version>
 
 
 	<name>XR3Player</name>
@@ -20,7 +20,7 @@
 		<maven.compiler.source>1.9</maven.compiler.source>
 		<maven.compiler.target>1.9</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<my.project.version>107</my.project.version>
+		<my.project.version>108</my.project.version>
 	</properties>
 
 	<build>
