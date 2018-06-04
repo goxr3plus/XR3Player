@@ -52,7 +52,7 @@ public class MediaUpdaterService {
 				Platform.runLater(() -> threadStopped.set(false));
 				
 				//Run forever , except if i interrupt it ;)
-				for (;; Thread.sleep(900)) {
+				for (;; Thread.sleep(1500)) {
 					
 					startFilteringControllers();
 					
