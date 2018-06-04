@@ -70,6 +70,7 @@ import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSetting
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.application.speciallists.PlayedMediaList;
+import main.java.com.goxr3plus.xr3player.application.speciallists.StarredMediaList;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewContextMenu;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewManager;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -257,6 +258,8 @@ public class Main extends Application {
 	
 	public static EmotionsTabPane emotionsTabPane;
 	
+	public static StarredMediaList starredMediaList;
+	
 	/** The Search Window Smart Controller of the application */
 	public static SmartController searchWindowSmartController;
 	
@@ -376,6 +379,8 @@ public class Main extends Application {
 		onlineMusicController = new OnlineMusicController();
 		
 		emotionsTabPane = new EmotionsTabPane(emotionListsController);
+		
+		starredMediaList = new StarredMediaList();
 		
 		/** The Search Window Smart Controller of the application */
 		searchWindowSmartController = new SmartController(Genre.SEARCHWINDOW, "Searching any Media", null);

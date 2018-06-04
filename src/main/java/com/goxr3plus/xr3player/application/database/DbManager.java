@@ -563,6 +563,7 @@ public class DbManager {
 						//Load PlayerMediaList
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Emotion Lists..."));
 						Main.playedSongs.uploadFromDataBase();
+						Main.starredMediaList.uploadFromDataBase();
 						Main.emotionListsController.hatedMediaList.uploadFromDataBase();
 						Main.emotionListsController.dislikedMediaList.uploadFromDataBase();
 						Main.emotionListsController.likedMediaList.uploadFromDataBase();

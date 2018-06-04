@@ -240,11 +240,6 @@ public class MediaUpdaterService {
 						return false;
 					}) ? -1 : -2);
 					
-					//Set timesPlayed
-					Main.playedSongs.getSet().stream().filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst().ifPresent(playedFile -> {
-						media.timesPlayedProperty().set(playedFile.getTimesPlayed());
-					});
-					
 				} else if (mode == 1) { //Check based on FileName and FileLength -> both must be equal
 					
 					//Go
@@ -267,11 +262,21 @@ public class MediaUpdaterService {
 									: Main.playedSongs.getSet().stream().filter(playedFile -> playedFile.getPath().toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
 											.anyMatch(playedFile -> new File(playedFile.getPath()).length() == mediaFileLength) ? -1 : -2);
 					
-					//Set timesPlayed
-					Main.playedSongs.getSet().stream().filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst().ifPresent(playedFile -> {
-						media.timesPlayedProperty().set(playedFile.getTimesPlayed());
-					});
 				}
+				
+				//Set timesPlayed
+				Main.playedSongs.getSet().stream().filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst().ifPresent(playedFile -> {
+					media.timesPlayedProperty().set(playedFile.getTimesPlayed());
+				});
+				
+				//Set stars
+				Main.starredMediaList.getSet().stream().filter(starredFile -> media.getFilePath().equals(starredFile.getPath())).findFirst().ifPresent(starredFile -> {
+					//Run of JavaFX Thread
+					Platform.runLater(() -> {
+						if (!media.starsProperty().get().textProperty().isBound())
+							media.starsProperty().get().setText(String.valueOf(starredFile.getStars()));
+					});
+				});
 				
 				// ---------Liked or disliked--------?
 				media.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(media.getFilePath()));

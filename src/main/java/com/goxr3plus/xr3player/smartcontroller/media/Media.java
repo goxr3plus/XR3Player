@@ -991,6 +991,9 @@ public abstract class Media {
 								media.starsProperty().get().setText(stars.get().getText());
 						});
 						
+						//Update the StarredMediaList
+						Main.starredMediaList.addOrUpdateStars(Media.this.getFilePath(), Double.valueOf(stars.get().getText()), false);
+						
 						//Commit
 						Main.dbManager.commit();
 					} else
@@ -1028,7 +1031,7 @@ public abstract class Media {
 			
 		} catch (Exception ex) {
 			Main.logger.log(Level.WARNING, "", ex);
-			//	ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR);
+			//	ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR)
 		}
 	}
 	

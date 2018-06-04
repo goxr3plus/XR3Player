@@ -20,7 +20,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class DatabaseList {
 	
 	/** The LinkedHashSet */
-	private Set<FakeMedia> set = new LinkedHashSet<>();
+	private final Set<FakeMedia> set = new LinkedHashSet<>();
 	
 	/**
 	 * The name of the database table
@@ -175,40 +175,6 @@ public class DatabaseList {
 			ex.printStackTrace();
 			answer[0] = false;
 		}
-		
-		return answer[0];
-	}
-	
-	/**
-	 * Append 1 to TimesPlayed on the given FakeMedia Path
-	 * 
-	 * @return true, if successful
-	 */
-	public boolean appendToTimesPlayed(String path , boolean commit) {
-		boolean[] answer = { false };
-		
-		//Check if it already exists
-		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(path)).findFirst().ifPresent(fakeMedia -> {
-			
-			//Update in the database
-			try (PreparedStatement appendToTimePlayed = Main.dbManager.getConnection().prepareStatement("UPDATE '" + databaseTableName + "' SET TIMESPLAYED=? WHERE PATH=?")) {
-				appendToTimePlayed.setInt(1, fakeMedia.getTimesPlayed() + 1);
-				appendToTimePlayed.setString(2, path);
-				appendToTimePlayed.executeUpdate();
-				
-				//Update FakeMedia
-				fakeMedia.setTimesPlayed(fakeMedia.getTimesPlayed() + 1);
-				answer[0] = true;
-				//System.out.println("Path : " + path + " , Times Played :" + fakeMedia.getTimesPlayed())
-				
-				//Commit
-				if (commit)
-					Main.dbManager.commit();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-				answer[0] = false;
-			}
-		});
 		
 		return answer[0];
 	}
