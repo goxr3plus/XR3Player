@@ -1,6 +1,5 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 
-
 > Download installer for [ Windows](https://goxr3plus.github.io/xr3player.io/) ,  Linux (not yet available )  ,  Mac (not yet available)
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
@@ -14,10 +13,16 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 [![GitHub issues](https://img.shields.io/github/issues/goxr3plus/XR3Player.svg)](https://github.com//goxr3plus/XR3Player/issues)
 
-### Keep the bro alive :)
+### Show some love 
 
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
+
+> New in Update 107 ( Players User Interface redesign )
+
+![screenshot1205](https://user-images.githubusercontent.com/20374208/40893545-9baaadc4-67aa-11e8-80c0-6ff72256591e.png)
+8
+
 
 ### Screenshots
 
