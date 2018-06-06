@@ -21,7 +21,7 @@
 > New in Update 107 ( Players User Interface redesign )
 
 ![screenshot1205](https://user-images.githubusercontent.com/20374208/40893545-9baaadc4-67aa-11e8-80c0-6ff72256591e.png)
-8
+
 
 
 ### Screenshots
