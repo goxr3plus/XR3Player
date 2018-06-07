@@ -779,6 +779,8 @@ public class Main extends Application {
 			
 			//----Bind Label to User Name
 			sideBar.getNameLabel().setText(userInfoMode.getUserName().getText());
+			sideBar.getUserImageView().imageProperty().bind(userInfoMode.getUserImage().imageProperty());
+			
 			//sideBar.getNameLabel().textProperty().bind(userInfoMode.getUserName().textProperty())
 			
 			//Start these important Threads

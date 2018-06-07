@@ -15,6 +15,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" stylesheets="@../../style/userInformation.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -41,23 +43,12 @@
                      <left>
                         <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="351.0" layoutY="25.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../image/noImage2.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" style="-fx-font-weight: bold;" text="Add Image">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../image/plus.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Label>
+                              <StackedFontIcon fx:id="noImageStackedFontIcon">
+                                 <children>
+                                    <FontIcon iconColor="WHITE" iconLiteral="far-user-circle" iconSize="190" />
+                                    <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="50" translateY="-15.0" />
+                                 </children>
+                              </StackedFontIcon>
                               <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />

@@ -30,10 +30,15 @@
                   <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="nameLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="XR3Player" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
-                        <StackedFontIcon style="-fx-background-color: #202020;">
+                        <StackedFontIcon fx:id="stackedFontIcon" style="-fx-background-color: #202020;">
                            <children>
-                              <ImageView fx:id="userImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                              <FontIcon fx:id="userFontIconImage" iconColor="WHITE" iconLiteral="far-user-circle" iconSize="85" selectionEnd="0" />
+                              <ImageView fx:id="userImageView" pickOnBounds="true" />
+                              <StackedFontIcon fx:id="noImageStackedFontIcon">
+                                 <children>
+                                    <FontIcon fx:id="userFontIconImage" iconColor="WHITE" iconLiteral="far-user-circle" iconSize="85" selectionEnd="0" />
+                                    <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="20" translateY="-8.0" />
+                                 </children>
+                              </StackedFontIcon>
                            </children>
                         </StackedFontIcon>
                      </children>

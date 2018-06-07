@@ -7,15 +7,17 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import org.kordamp.ikonli.javafx.StackedFontIcon;
+
 import com.jfoenix.controls.JFXButton;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -32,16 +34,19 @@ public class UserInformation extends StackPane {
 	private JFXButton goBack;
 	
 	@FXML
+	private StackedFontIcon noImageStackedFontIcon;
+	
+	@FXML
 	private ImageView userImage;
 	
 	@FXML
 	private Label userName;
 	
 	@FXML
-	private JFXButton rename;
+	private JFXButton delete;
 	
 	@FXML
-	private JFXButton delete;
+	private JFXButton rename;
 	
 	@FXML
 	private Label dateCreated;
@@ -138,6 +143,17 @@ public class UserInformation extends StackPane {
 		userImage.imageProperty().bind(user.getImageView().imageProperty());
 		userImage.setOnMouseReleased(m -> user.changeUserImage());
 		
+		// Clip
+		Rectangle rect = new Rectangle();
+		rect.widthProperty().set(userImage.getFitHeight());
+		rect.heightProperty().set(userImage.getFitHeight());
+		rect.setArcWidth(90);
+		rect.setArcHeight(90);
+		userImage.setClip(rect);
+		
+		//noImageStackedFontIcon
+		noImageStackedFontIcon.visibleProperty().bind(userImage.imageProperty().isNull());
+		
 		//-- commentsLabel
 		commentsLabel.textProperty().bind(commentsArea.textProperty().length().asString());
 		
@@ -200,19 +216,27 @@ public class UserInformation extends StackPane {
 			}
 		});
 	}
-
+	
 	/**
 	 * @return the userName
 	 */
 	public Label getUserName() {
 		return userName;
 	}
-
+	
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(Label userName) {
 		this.userName = userName;
+	}
+	
+	/**
+	 * @return the userImage
+	 */
+	public ImageView getUserImage() {
+		return userImage;
 	}
 	
 }

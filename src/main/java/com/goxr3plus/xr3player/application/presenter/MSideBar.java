@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -19,6 +20,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.services.CreateZipService;
@@ -34,13 +36,19 @@ public class MSideBar extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private Label nameLabel;
+	
+	@FXML
+	private StackedFontIcon stackedFontIcon;
+	
+	@FXML
 	private ImageView userImageView;
 	
 	@FXML
-	private FontIcon userFontIconImage;
+	private StackedFontIcon noImageStackedFontIcon;
 	
 	@FXML
-	private Label nameLabel;
+	private FontIcon userFontIconImage;
 	
 	@FXML
 	private ToggleButton mainModeToggle;
@@ -64,6 +72,9 @@ public class MSideBar extends StackPane {
 	private JFXButton applicationUpdate;
 	
 	@FXML
+	private JFXButton applicationSettings;
+	
+	@FXML
 	private MenuButton applicationDatabase;
 	
 	@FXML
@@ -76,9 +87,6 @@ public class MSideBar extends StackPane {
 	private MenuItem deleteDataBase;
 	
 	@FXML
-	private JFXButton applicationSettings;
-	
-	@FXML
 	private MenuItem showApplicationInfo;
 	
 	@FXML
@@ -88,13 +96,13 @@ public class MSideBar extends StackPane {
 	private MenuItem donation;
 	
 	@FXML
-	private JFXButton openTaskManager;
+	private JFXButton snapshot;
 	
 	@FXML
 	private JFXButton applicationConsole;
 	
 	@FXML
-	private JFXButton snapshot;
+	private JFXButton openTaskManager;
 	
 	@FXML
 	private MenuItem downloadYoutubePlaylist;
@@ -325,6 +333,26 @@ public class MSideBar extends StackPane {
 			else if (newToggle == this.moviesToggle)
 				Main.topBar.selectTab(Main.topBar.getMoviesModeTab());
 		});
+		
+		// StackView
+		//this.maxWidthProperty().bind(imageView.fitWidthProperty())
+		//this.maxHeightProperty().bind(imageView.fitHeightProperty())
+		
+		// ImageView
+		userImageView.fitWidthProperty().bind(stackedFontIcon.heightProperty());
+		userImageView.fitHeightProperty().bind(stackedFontIcon.heightProperty());
+		userImageView.setOnMouseReleased(m -> Main.userInfoMode.getUser().changeUserImage());
+		
+		// Clip
+		Rectangle rect = new Rectangle();
+		rect.widthProperty().bind(stackedFontIcon.heightProperty());
+		rect.heightProperty().bind(stackedFontIcon.heightProperty());
+		rect.setArcWidth(90);
+		rect.setArcHeight(90);
+		userImageView.setClip(rect);
+		
+		//noImageStackedFontIcon
+		noImageStackedFontIcon.visibleProperty().bind(userImageView.imageProperty().isNull());
 	}
 	
 	/**
@@ -432,12 +460,19 @@ public class MSideBar extends StackPane {
 	public ToggleButton getMoviesToggle() {
 		return moviesToggle;
 	}
-
+	
 	/**
 	 * @return the nameLabel
 	 */
 	public Label getNameLabel() {
 		return nameLabel;
+	}
+	
+	/**
+	 * @return the userImageView
+	 */
+	public ImageView getUserImageView() {
+		return userImageView;
 	}
 	
 }
