@@ -48,6 +48,9 @@
                                     <FontIcon iconColor="WHITE" iconLiteral="far-user-circle" iconSize="190" />
                                     <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="50" translateY="-15.0" />
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </StackedFontIcon>
                               <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                                  <cursor>
@@ -55,12 +58,15 @@
                                  </cursor>
                               </ImageView>
                            </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </StackPane>
                      </left>
                      <center>
                         <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="userName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                              <Label fx:id="userName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="42.0" />
                                  </font>
