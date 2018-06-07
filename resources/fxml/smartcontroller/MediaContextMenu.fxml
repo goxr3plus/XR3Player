@@ -6,12 +6,13 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on (CTRL+ENTER)">
-        <items>
-          <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
+         <items>
+            <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -26,18 +27,14 @@
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
-        </items>
+         </items>
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/circledPlay24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="far-play-circle" iconSize="24" />
          </graphic>
       </Menu>
       <Menu fx:id="stopPlayer" mnemonicParsing="false" text="Stop Player">
-        <items>
-          <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
+         <items>
+            <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -52,20 +49,16 @@
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuItem>
-        </items>
+         </items>
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Stop-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-stop-circle" iconSize="24" />
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
       <Menu fx:id="getInfoBuy" mnemonicParsing="false" text="Get Info/Buy">
-        <items>
+         <items>
             <Menu mnemonicParsing="false" text="Amazon">
-              <items>
+               <items>
                   <MenuItem fx:id="amazonUS" mnemonicParsing="false" onAction="#action" text="US (Amazon.com)">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -75,7 +68,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                <MenuItem fx:id="amazonUK" mnemonicParsing="false" onAction="#action" text="UK (Amazon.com)">
+                  <MenuItem fx:id="amazonUK" mnemonicParsing="false" onAction="#action" text="UK (Amazon.com)">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -147,7 +140,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-              </items>
+               </items>
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -166,7 +159,7 @@
                </graphic>
             </MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-          <MenuItem fx:id="jamendo" mnemonicParsing="false" onAction="#action" text="Jamendo">
+            <MenuItem fx:id="jamendo" mnemonicParsing="false" onAction="#action" text="Jamendo">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -189,7 +182,8 @@
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/hDTracks.png" />
-                     </image></ImageView>
+                     </image>
+                  </ImageView>
                </graphic>
             </MenuItem>
             <MenuItem fx:id="cDUniverse" mnemonicParsing="false" onAction="#action" text="CD Universe">
@@ -197,7 +191,8 @@
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/cDUniverse.png" />
-                     </image></ImageView>
+                     </image>
+                  </ImageView>
                </graphic>
             </MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
@@ -280,21 +275,18 @@
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/wikipedia.png" />
-                     </image></ImageView>
+                     </image>
+                  </ImageView>
                </graphic>
             </MenuItem>
-        </items>
+         </items>
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Add%20Shopping%20Cart-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
          </graphic>
       </Menu>
       <Menu fx:id="findLyrics" mnemonicParsing="false" text="Find Lyrics">
-        <items>
-          <MenuItem fx:id="lyricFinderOrg" mnemonicParsing="false" onAction="#action" text="LyricFinder.org">
+         <items>
+            <MenuItem fx:id="lyricFinderOrg" mnemonicParsing="false" onAction="#action" text="LyricFinder.org">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -312,7 +304,7 @@
                   </ImageView>
                </graphic>
             </MenuItem>
-        </items>
+         </items>
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -344,56 +336,33 @@
          <items>
             <MenuItem fx:id="copyOrMove" mnemonicParsing="false" onAction="#action" text="Copy/Move">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/copyFile.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
                </graphic>
             </MenuItem>
          </items>
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Share-24.png" />
-               </image></ImageView>
+            <FontIcon iconColor="#2cbad0" iconLiteral="fas-share-alt" iconSize="20" />
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
-      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
+      <MenuItem fx:id="rename1" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/rename.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Copy-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="paste" mnemonicParsing="false" onAction="#action" text="Paste (CTRL+V)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Paste-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-paste" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="removeMedia" mnemonicParsing="false" onAction="#action" text="Remove ({Shift} Delete)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/delete.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
          </graphic>
       </MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
@@ -406,13 +375,9 @@
             </ImageView>
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="View/Edit File Info... (CTRL+I)">
+      <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="File Info... (CTRL+I)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/tag.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-tags" iconSize="20" />
          </graphic>
       </MenuItem>
    </items>

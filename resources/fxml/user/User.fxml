@@ -9,6 +9,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root styleClass="library" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -17,71 +19,57 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/warning.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Image is missing !!" />
-         </tooltip>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
+      <VBox mouseTransparent="true" spacing="15.0">
+         <children>
+            <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/inform.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true" />
+               </tooltip>
+               <graphic>
+                  <FontIcon iconColor="#e8ac14" iconLiteral="fas-info-circle" iconSize="32" />
+               </graphic>
+            </Label>
+            <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="User has a note" />
+               </tooltip>
+               <graphic>
+                  <FontIcon iconColor="#329a15" iconLiteral="fas-comments" iconSize="32" />
+               </graphic>
+            </Label>
+            <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-radius: 45; -fx-background-color: white;" textAlignment="CENTER">
+               <tooltip>
+                  <Tooltip text="Image is missing !!" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <graphic>
+                  <FontIcon iconColor="#d74418" iconLiteral="fa-warning" iconSize="32" translateX="5.0" />
+               </graphic>
+            </Label>
+         </children>
          <StackPane.margin>
-            <Insets left="2.0" top="95.0" />
+            <Insets left="10.0" top="10.0" />
          </StackPane.margin>
-      </Label>
-      <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/comment.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <tooltip>
-            <Tooltip text="User has a note" />
-         </tooltip>
-         <StackPane.margin>
-            <Insets left="2.0" top="55.0" />
-         </StackPane.margin>
-      </Label>
-      <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 15;" textAlignment="CENTER" wrapText="true" StackPane.alignment="TOP_LEFT">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/inform.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true" />
-         </tooltip>
-         <StackPane.margin>
-            <Insets left="2.0" top="5.0" />
-         </StackPane.margin>
-      </Label>
+      </VBox>
       <Label fx:id="dropBoxLabel" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-         <graphic>
-            <ImageView fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/dropbox.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <tooltip>
             <Tooltip text="Connected DropBox Accounts" />
          </tooltip>
@@ -91,6 +79,9 @@
          <StackPane.margin>
             <Insets right="2.0" top="50.0" />
          </StackPane.margin>
+         <graphic>
+            <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="24" />
+         </graphic>
       </Label>
       <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
