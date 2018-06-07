@@ -26,43 +26,15 @@
             <BorderPane minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                <top>
                   <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                     <left>
-                        <StackPane fx:id="imageViewStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
-                           <children>
-                              <StackedFontIcon fx:id="noImageStackedFontIcon">
-                                 <children>
-                                    <FontIcon iconColor="WHITE" iconLiteral="far-user-circle" iconSize="190" />
-                                    <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="50" translateY="-15.0" />
-                                 </children>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </StackedFontIcon>
-                              <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </StackPane>
-                     </left>
                      <center>
                         <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="userName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                              <Label fx:id="userName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="42.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15; -fx-border-color: transparent firebrick transparent firebrick;" text="Local Account" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="42.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                              <HBox alignment="CENTER">
                                  <children>
                                     <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Delete">
                                        <cursor>
@@ -72,7 +44,7 @@
                                           <FontIcon iconColor="#fc5e5e" iconLiteral="typ-delete" iconSize="24" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Rename" visible="false">
+                                    <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" style="-fx-text-fill: white;" text="Rename" visible="false">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -108,6 +80,29 @@
                            </graphic>
                         </JFXButton>
                      </top>
+                     <right>
+                        <StackPane fx:id="imageViewStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                           <children>
+                              <StackedFontIcon fx:id="noImageStackedFontIcon">
+                                 <children>
+                                    <FontIcon iconColor="WHITE" iconLiteral="far-user-circle" iconSize="190" />
+                                    <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="50" translateY="-15.0" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </StackedFontIcon>
+                              <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </StackPane>
+                     </right>
                   </BorderPane>
                </top>
                <center>
