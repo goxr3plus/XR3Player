@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -18,30 +19,15 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" stylesheets="@../../style/userInformation.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: #303030;">
          <children>
-            <JFXButton fx:id="goBack" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308">
-               <graphic>
-                  <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/right.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Back" />
-               </tooltip>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
             <BorderPane minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                <top>
                   <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                      <left>
-                        <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                        <StackPane fx:id="imageViewStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                            <children>
                               <StackedFontIcon fx:id="noImageStackedFontIcon">
                                  <children>
@@ -78,17 +64,13 @@
                               </Label>
                               <HBox alignment="CENTER_LEFT" spacing="15.0">
                                  <children>
-                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Delete">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/delete.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
+                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Delete">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="#fc5e5e" iconLiteral="typ-delete" iconSize="24" />
+                                       </graphic>
                                     </JFXButton>
                                     <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="1.7976931348623157E308" style="-fx-text-fill: white;" text="Rename" visible="false">
                                        <graphic>
@@ -113,6 +95,19 @@
                            </padding>
                         </VBox>
                      </center>
+                     <top>
+                        <JFXButton fx:id="goBack" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Back" BorderPane.alignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="Back" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-circle-left" iconSize="32" />
+                           </graphic>
+                        </JFXButton>
+                     </top>
                   </BorderPane>
                </top>
                <center>
@@ -122,30 +117,21 @@
                            <content>
                               <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #202020;">
                                  <children>
-                                    <Label fx:id="dateCreated" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
+                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
                                        <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/calendar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Label>
-                                    <Label fx:id="librariesLabel" alignment="CENTER" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
+                                          <FontIcon iconColor="WHITE" iconLiteral="gmi-date-range" iconSize="32" />
+                                       </graphic>
+                                    </Label>
+                                    <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
                                        <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/playlist.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Label>
+                                          <FontIcon iconColor="WHITE" iconLiteral="gmi-audiotrack" iconSize="32" />
+                                       </graphic>
+                                    </Label>
                                     <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0">
                                        <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/chat.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Label>
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="45" text="" />
+                                       </graphic>
+                                    </Label>
                                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" VBox.vgrow="ALWAYS">
                                        <graphic>
                                           <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="notes..." style="-fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" />
@@ -158,33 +144,18 @@
                               </VBox>
                            </content>
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/About-32.png" />
-                                 </image>
-                              </ImageView>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle" iconSize="24" />
                            </graphic>
                         </Tab>
                      </tabs>
                   </JFXTabPane>
                </center>
             </BorderPane>
-            <JFXButton fx:id="goBack2" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/right.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Back" />
-               </tooltip>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
          </children>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@../../style/userInformation.css" />
+      <URL value="@../../style/application.css" />
+   </stylesheets>
 </fx:root>

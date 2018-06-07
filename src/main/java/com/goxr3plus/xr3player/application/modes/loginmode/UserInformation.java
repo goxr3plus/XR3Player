@@ -34,6 +34,9 @@ public class UserInformation extends StackPane {
 	private JFXButton goBack;
 	
 	@FXML
+	private StackPane imageViewStackPane;
+	
+	@FXML
 	private StackedFontIcon noImageStackedFontIcon;
 	
 	@FXML
@@ -59,9 +62,6 @@ public class UserInformation extends StackPane {
 	
 	@FXML
 	private TextArea commentsArea;
-	
-	@FXML
-	private JFXButton goBack2;
 	
 	// --------------------------------------------------------------------
 	
@@ -129,27 +129,25 @@ public class UserInformation extends StackPane {
 		//--goBack
 		if (userCategory == UserCategory.NO_LOGGED_IN) {
 			goBack.setOnAction(a -> Main.loginMode.flipPane.flipToFront());
-			goBack2.setOnAction(goBack.getOnAction());
 		} else if (userCategory == UserCategory.LOGGED_IN) {
 			goBack.setVisible(false);
 			goBack.setMaxSize(0, 0);
 			goBack.setMinSize(0, 0);
-			goBack2.setMaxSize(0, 0);
-			goBack2.setMinSize(0, 0);
-			goBack2.setVisible(false);
 		}
 		
 		//--imageView
+		userImage.setFitWidth(imageViewStackPane.getHeight());
+		userImage.setFitHeight(imageViewStackPane.getHeight());
 		userImage.imageProperty().bind(user.getImageView().imageProperty());
 		userImage.setOnMouseReleased(m -> user.changeUserImage());
 		
 		// Clip
-		Rectangle rect = new Rectangle();
-		rect.widthProperty().set(userImage.getFitHeight());
-		rect.heightProperty().set(userImage.getFitHeight());
-		rect.setArcWidth(90);
-		rect.setArcHeight(90);
-		userImage.setClip(rect);
+		Rectangle clip = new Rectangle();
+		clip.widthProperty().set(imageViewStackPane.getHeight());
+		clip.heightProperty().set(imageViewStackPane.getHeight());
+		clip.setArcWidth(90);
+		clip.setArcHeight(90);
+		userImage.setClip(clip);
 		
 		//noImageStackedFontIcon
 		noImageStackedFontIcon.visibleProperty().bind(userImage.imageProperty().isNull());

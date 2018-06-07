@@ -344,12 +344,12 @@ public class MSideBar extends StackPane {
 		userImageView.setOnMouseReleased(m -> Main.userInfoMode.getUser().changeUserImage());
 		
 		// Clip
-		Rectangle rect = new Rectangle();
-		rect.widthProperty().bind(stackedFontIcon.heightProperty());
-		rect.heightProperty().bind(stackedFontIcon.heightProperty());
-		rect.setArcWidth(90);
-		rect.setArcHeight(90);
-		userImageView.setClip(rect);
+		Rectangle clip = new Rectangle();
+		clip.widthProperty().bind(stackedFontIcon.heightProperty());
+		clip.heightProperty().bind(stackedFontIcon.heightProperty());
+		clip.setArcWidth(90);
+		clip.setArcHeight(90);
+		userImageView.setClip(clip);
 		
 		//noImageStackedFontIcon
 		noImageStackedFontIcon.visibleProperty().bind(userImageView.imageProperty().isNull());

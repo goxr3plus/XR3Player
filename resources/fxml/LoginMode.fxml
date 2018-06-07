@@ -8,6 +8,8 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -28,7 +30,7 @@
 
 <fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #050505; -fx-border-color: firebrick transparent transparent transparent; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #050505; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                <cursor>
@@ -143,6 +145,18 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" styleClass="jfx-menu-button">
+                           <items>
+                              <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
+                              <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
+                           </items>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="far-image" />
+                           </graphic>
+                        </MenuButton>
                      </children>
                      <padding>
                         <Insets top="1.0" />
@@ -346,7 +360,7 @@
                                  <children>
                                     <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="750.0">
                                        <children>
-                                          <Button fx:id="importDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="importDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -358,7 +372,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -370,7 +384,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button fx:id="deleteDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" text="Delete Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="deleteDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Delete Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>

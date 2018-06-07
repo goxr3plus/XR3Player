@@ -598,6 +598,9 @@ public class Main extends Application {
 		bottomBar.getKeyBindings().selectedProperty().bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
 		bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
 		
+		//-------------User Image View----------
+		sideBar.getUserImageView().imageProperty().bind(userInfoMode.getUserImage().imageProperty());
+		
 		//-------------TOP BAR--------------------
 		//	bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
 		//bottomBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
@@ -779,7 +782,6 @@ public class Main extends Application {
 			
 			//----Bind Label to User Name
 			sideBar.getNameLabel().setText(userInfoMode.getUserName().getText());
-			sideBar.getUserImageView().imageProperty().bind(userInfoMode.getUserImage().imageProperty());
 			
 			//sideBar.getNameLabel().textProperty().bind(userInfoMode.getUserName().textProperty())
 			

@@ -42,14 +42,11 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
@@ -107,6 +104,18 @@ public class LoginMode extends BorderPane {
 	private Label xr3PlayerLabel;
 	
 	@FXML
+	private JFXButton donate;
+	
+	@FXML
+	private JFXButton about;
+	
+	@FXML
+	private MenuItem chooseBackground;
+	
+	@FXML
+	private MenuItem resetBackground;
+	
+	@FXML
 	private JFXButton restartButton;
 	
 	@FXML
@@ -117,12 +126,6 @@ public class LoginMode extends BorderPane {
 	
 	@FXML
 	private JFXButton exitApplication;
-	
-	@FXML
-	private JFXButton donate;
-	
-	@FXML
-	private JFXButton about;
 	
 	@FXML
 	private StackPane centerStackPane;
@@ -192,9 +195,6 @@ public class LoginMode extends BorderPane {
 	
 	@FXML
 	private Button deleteDatabase;
-	
-	//@FXML
-	//private BarChart<String,Number> librariesBarChart;
 	
 	// --------------------------------------------
 	
@@ -461,6 +461,12 @@ public class LoginMode extends BorderPane {
 			//Set the style
 			this.teamViewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
 		});
+		
+		//chooseBackground
+		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		
+		//resetBackground
+		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 	}
 	
 	/**
@@ -535,9 +541,9 @@ public class LoginMode extends BorderPane {
 	/**
 	 * @return the series
 	 */
-//	public XYChart.Series<String,Number> getSeries() {
-//		return series;
-//	}
+	//	public XYChart.Series<String,Number> getSeries() {
+	//		return series;
+	//	}
 	
 	/*-----------------------------------------------------------------------
 	 * 
