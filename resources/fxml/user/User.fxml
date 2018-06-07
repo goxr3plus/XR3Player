@@ -19,7 +19,7 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <VBox mouseTransparent="true" spacing="15.0">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="162.0" prefWidth="50.0" spacing="15.0" StackPane.alignment="TOP_LEFT">
          <children>
             <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;" textAlignment="CENTER" wrapText="true">
                <cursor>
