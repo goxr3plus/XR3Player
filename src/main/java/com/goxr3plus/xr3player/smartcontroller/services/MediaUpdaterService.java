@@ -192,7 +192,7 @@ public class MediaUpdaterService {
 		
 		boolean[] controllerIsFree = { false };
 		
-		// Synchronise with javaFX thread
+		// Synchronize with javaFX thread
 		CountDownLatch latch = new CountDownLatch(1);
 		Platform.runLater(() -> {
 			controllerIsFree[0] = controller.isFree(false);
