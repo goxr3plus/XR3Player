@@ -311,6 +311,20 @@ public class MSideBar extends StackPane {
 			//Show Message to User
 			ActionTool.showNotification("Opening Task Manager", "Opening default system Task Manager", Duration.millis(2000), NotificationType.INFORMATION);
 		});
+		
+		//modeTeam
+		modeTeam.selectedToggleProperty().addListener((observable , oldToggle , newToggle) -> {
+			if (newToggle == this.mainModeToggle)
+				Main.topBar.selectTab(Main.topBar.getMainModeTab());
+			else if (newToggle == this.djModeToggle)
+				Main.topBar.selectTab(Main.topBar.getDjModeTab());
+			else if (newToggle == this.userInfoToggle)
+				Main.topBar.selectTab(Main.topBar.getUserModeTab());
+			else if (newToggle == this.browserToggle)
+				Main.topBar.selectTab(Main.topBar.getWebModeTab());
+			else if (newToggle == this.moviesToggle)
+				Main.topBar.selectTab(Main.topBar.getMoviesModeTab());
+		});
 	}
 	
 	/**
@@ -380,6 +394,43 @@ public class MSideBar extends StackPane {
 			Main.restartTheApplication(false);
 			
 		}
+	}
+	
+	/**
+	 * @return the mainModeToggle
+	 */
+	public ToggleButton getMainModeToggle() {
+		return mainModeToggle;
+	}
+	
+	/**
+	 * @return the djModeToggle
+	 */
+	public ToggleButton getDjModeToggle() {
+		return djModeToggle;
+	}
+	
+	/**
+	 * /**
+	 * 
+	 * @return the userInfoToggle
+	 */
+	public ToggleButton getUserInfoToggle() {
+		return userInfoToggle;
+	}
+	
+	/**
+	 * @return the browserToggle
+	 */
+	public ToggleButton getBrowserToggle() {
+		return browserToggle;
+	}
+	
+	/**
+	 * @return the moviesToggle
+	 */
+	public ToggleButton getMoviesToggle() {
+		return moviesToggle;
 	}
 	
 }

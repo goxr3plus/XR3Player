@@ -205,6 +205,7 @@ public class TopBar extends BorderPane {
 				}
 				//if (!Main.specialJFXTabPane.getTabs().get(0).isSelected())
 				Main.specialJFXTabPane.getSelectionModel().select(0);
+				Main.sideBar.getMainModeToggle().setSelected(true);
 			}
 		});
 		
@@ -236,6 +237,7 @@ public class TopBar extends BorderPane {
 				}
 				//if (!Main.specialJFXTabPane.getTabs().get(1).isSelected())
 				Main.specialJFXTabPane.getSelectionModel().select(1);
+				Main.sideBar.getDjModeToggle().setSelected(true);
 				
 				//Hide the searchBox that is coming from LibraryMode
 				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
@@ -248,6 +250,7 @@ public class TopBar extends BorderPane {
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
 				Main.specialJFXTabPane.getSelectionModel().select(2);
+				Main.sideBar.getMoviesToggle().setSelected(true);
 				
 				// Update window Mode
 				windowMode = WindowMode.MOVIEMODE;
@@ -263,6 +266,7 @@ public class TopBar extends BorderPane {
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
 				Main.specialJFXTabPane.getSelectionModel().select(3);
+				Main.sideBar.getUserInfoToggle().setSelected(true);
 				
 				// Update window Mode
 				windowMode = WindowMode.USERMODE;
@@ -278,6 +282,7 @@ public class TopBar extends BorderPane {
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(3).isSelected())
 				Main.specialJFXTabPane.getSelectionModel().select(4);
+				Main.sideBar.getBrowserToggle().setSelected(true);
 				
 				// Update window Mode
 				windowMode = WindowMode.WEBMODE;

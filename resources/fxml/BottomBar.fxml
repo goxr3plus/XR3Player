@@ -106,23 +106,6 @@
                   <Insets left="4.0" right="4.0" />
                </padding>
             </Label>
-            <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" styleClass="jfx-menu-button" text="Background">
-               <items>
-                  <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
-                  <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
-               </items>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </MenuButton>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="672.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <padding>
-                  <Insets left="4.0" right="4.0" />
-               </padding>
-            </Label>
          </children>
       </HBox>
    </center>

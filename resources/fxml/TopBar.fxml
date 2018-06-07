@@ -5,6 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
@@ -15,6 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root maxHeight="51.0" minHeight="-Infinity" prefHeight="51.0" prefWidth="988.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 2;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
@@ -119,6 +122,18 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" styleClass="jfx-menu-button">
+                     <items>
+                        <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
+                        <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-image" />
+                     </graphic>
+                  </MenuButton>
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" spacing="5.0">

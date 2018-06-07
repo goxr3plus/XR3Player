@@ -585,7 +585,7 @@ public class Main extends Application {
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
 		
 		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
-				.then("Press here to create your first library").otherwise("Press here to open the first available library"));
+				.then("Create Playlist").otherwise("Open first playlist"));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----------ApplicationStackPane---------

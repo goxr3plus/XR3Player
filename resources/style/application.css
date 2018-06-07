@@ -1969,7 +1969,7 @@
 
 ******************************************************************************/
      
-.menu-button > .arrow-button > .arrow {
+.menu-button2 > .arrow-button > .arrow {
  -fx-shape: "M3.5 0 L7 10 Q3.5 7 0 10z";
  /* arrow down = M3.5 10 L7 0 Q3.5 3 0 0z */
 }
