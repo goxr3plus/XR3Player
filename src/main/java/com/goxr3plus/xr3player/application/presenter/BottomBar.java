@@ -36,12 +36,6 @@ public class BottomBar extends BorderPane {
 	private HBox hBox;
 	
 	@FXML
-	private MenuItem chooseBackground;
-	
-	@FXML
-	private MenuItem resetBackground;
-	
-	@FXML
 	private JFXToggleButton showHideSideBar;
 	
 	@FXML
@@ -217,11 +211,6 @@ public class BottomBar extends BorderPane {
 		// -- searchField
 		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2))
 		
-		//chooseBackground
-		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
-		
-		//resetBackground
-		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 	}
 	
 	/**

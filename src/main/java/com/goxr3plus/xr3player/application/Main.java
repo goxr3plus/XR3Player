@@ -584,8 +584,8 @@ public class Main extends Application {
 		libraryMode.getBottomSplitPane().getItems().add(libraryMode.getNoLibrariesStackPane());
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
 		
-		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty().bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty())
-				.then("Create Playlist").otherwise("Open first playlist"));
+		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty()
+				.bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty()).then("Create Playlist").otherwise("Open first playlist"));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----------ApplicationStackPane---------
@@ -776,6 +776,10 @@ public class Main extends Application {
 			//----Update the UserInformation properties file when the total libraries change
 			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
 					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
+			
+			//----Bind Label to User Name
+			sideBar.getNameLabel().setText(userInfoMode.getUserName().getText());
+			//sideBar.getNameLabel().textProperty().bind(userInfoMode.getUserName().textProperty())
 			
 			//Start these important Threads
 			new MediaUpdaterService().start();

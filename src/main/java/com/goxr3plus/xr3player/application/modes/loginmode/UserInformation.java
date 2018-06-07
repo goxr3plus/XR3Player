@@ -200,5 +200,19 @@ public class UserInformation extends StackPane {
 			}
 		});
 	}
+
+	/**
+	 * @return the userName
+	 */
+	public Label getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(Label userName) {
+		this.userName = userName;
+	}
 	
 }

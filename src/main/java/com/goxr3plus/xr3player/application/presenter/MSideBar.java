@@ -432,5 +432,12 @@ public class MSideBar extends StackPane {
 	public ToggleButton getMoviesToggle() {
 		return moviesToggle;
 	}
+
+	/**
+	 * @return the nameLabel
+	 */
+	public Label getNameLabel() {
+		return nameLabel;
+	}
 	
 }

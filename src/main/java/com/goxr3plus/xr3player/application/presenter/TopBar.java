@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
@@ -60,6 +61,18 @@ public class TopBar extends BorderPane {
 	private Tab moviesModeTab;
 	
 	@FXML
+	private JFXButton donate;
+	
+	@FXML
+	private JFXButton about;
+	
+	@FXML
+	private MenuItem chooseBackground;
+	
+	@FXML
+	private MenuItem resetBackground;
+	
+	@FXML
 	private JFXButton restartButton;
 	
 	@FXML
@@ -70,12 +83,6 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private JFXButton exitApplication;
-	
-	@FXML
-	private JFXButton donate;
-	
-	@FXML
-	private JFXButton about;
 	
 	// ----------------------------------------------
 	
@@ -299,6 +306,11 @@ public class TopBar extends BorderPane {
 			Main.bottomBar.getShowHideSideBar().setSelected(!Main.bottomBar.getShowHideSideBar().isSelected());
 		});
 		
+		//chooseBackground
+		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		
+		//resetBackground
+		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 	}
 	
 	/**
