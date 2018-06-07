@@ -6,6 +6,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -66,61 +67,26 @@
                   <Tooltip text="Side Bar" />
                </tooltip>
             </JFXButton>
-            <JFXTabPane fx:id="jfxTabPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="42.0" prefWidth="300.0" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+            <TextField focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="search...." styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
+            <JFXTabPane fx:id="jfxTabPane" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                <tabs>
                   <Tab fx:id="mainModeTab">
-                     <graphic>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/playlist.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <tooltip>
                         <Tooltip text="Library Mode" />
                      </tooltip>
                   </Tab>
                   <Tab fx:id="djModeTab">
-                     <graphic>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/disc-jockey.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <tooltip>
                         <Tooltip text="DJ Mode" />
                      </tooltip>
                   </Tab>
                   <Tab fx:id="userModeTab">
-                     <graphic>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/team.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <tooltip>
                         <Tooltip text="User Mode" />
                      </tooltip>
                   </Tab>
-                  <Tab fx:id="webModeTab">
-                     <graphic>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/chrome.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Tab>
+                  <Tab fx:id="webModeTab" />
                   <Tab fx:id="moviesModeTab">
-                     <graphic>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/video-player.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <tooltip>
                         <Tooltip text="Movie Mode" />
                      </tooltip>

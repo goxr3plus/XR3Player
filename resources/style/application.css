@@ -1268,7 +1268,7 @@
 .progress-label{
 	-fx-text-fill:white;
 	-fx-font-weight:bold;
-	-fx-font-size:20;
+	-fx-font-size:20.0;
 	-color: firebrick;
 	-fx-background-color:linear-gradient(
         from 0.0px 0.75em to 0.75em 0.0px,
@@ -2003,13 +2003,42 @@
 
 
 
+/*******************************************************************************
+
+*                         Side - Bar                        *
+
+******************************************************************************/
 
 
+.side-bar{
+	-fx-background-color:#202020;
+}
 
 
+.toggle-button3,.jfx-menu-button2,.jfx-button4{
+    -fx-background-color:rgb(20,20,20);
+    -fx-text-fill:white;
+    -fx-background-radius: 0.0px;
+    -fx-background-insets: 0.0px;
+    -fx-cursor:hand;
+    -fx-font-weight:bold;
+}
 
+/*.toggle-button3:armed,
+.toggle-button3:hover,
+.toggle-button3:focused{
+   
+}
+*
+*/
 
+.toggle-button3:hover,.jfx-button4:hover{
+	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
+}
 
+.toggle-button3:selected{
+   -fx-background-color:rgb(255.0,106.0,0.0,0.65);
+}
 
 
 

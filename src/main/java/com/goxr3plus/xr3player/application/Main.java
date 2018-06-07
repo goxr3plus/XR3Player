@@ -35,6 +35,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -59,11 +60,11 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInforma
 import main.java.com.goxr3plus.xr3player.application.modes.moviemode.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
+import main.java.com.goxr3plus.xr3player.application.presenter.MSideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.MainLoadingScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
-import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
@@ -180,7 +181,7 @@ public class Main extends Application {
 	public static BottomBar bottomBar;
 	
 	/** The Side Bar of The Application */
-	public static SideBar sideBar;
+	public static MSideBar sideBar;
 	
 	/** Application Update Screen */
 	public static MainLoadingScreen updateScreen;
@@ -340,7 +341,7 @@ public class Main extends Application {
 		bottomBar = new BottomBar();
 		
 		/** The Side Bar of The Application */
-		sideBar = new SideBar();
+		sideBar = new MSideBar();
 		
 		/** Application Update Screen */
 		updateScreen = new MainLoadingScreen();
@@ -506,7 +507,7 @@ public class Main extends Application {
 		// ---------LoginMode ------------
 		loginMode.getXr3PlayerLabel().setText("~" + window.getTitle() + "~");
 		loginMode.userSearchBox.registerListeners(window);
-		loginMode.setLeft(sideBar);
+		//loginMode.setLeft(sideBar);
 		
 		// -------Root-----------
 		root.setVisible(false);
@@ -556,6 +557,8 @@ public class Main extends Application {
 		
 		specialJFXTabPane.setTabMaxWidth(0);
 		specialJFXTabPane.setTabMaxHeight(0);
+		specialJFXTabPane.setFocusTraversable(false);
+		specialJFXTabPane.setOnKeyReleased(KeyEvent::consume);
 		
 		//Add listeners to each tab
 		final AtomicInteger counter = new AtomicInteger(-1);

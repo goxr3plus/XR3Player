@@ -2,8 +2,8 @@ package main.java.com.goxr3plus.xr3player.application.presenter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -12,9 +12,13 @@ import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.services.CreateZipService;
@@ -24,19 +28,37 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
-import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
-/**
- * This class is used as the SideBar of the application.
- *
- * @author GOXR3PLUS
- */
-public class SideBar extends BorderPane {
+public class MSideBar extends StackPane {
 	
-	//-----------------------------------------------------
+	//--------------------------------------------------------------
 	
 	@FXML
-	private JFXButton openTaskManager;
+	private ImageView userImageView;
+	
+	@FXML
+	private FontIcon userFontIconImage;
+	
+	@FXML
+	private Label nameLabel;
+	
+	@FXML
+	private ToggleButton mainModeToggle;
+	
+	@FXML
+	private ToggleGroup modeTeam;
+	
+	@FXML
+	private ToggleButton djModeToggle;
+	
+	@FXML
+	private ToggleButton userInfoToggle;
+	
+	@FXML
+	private ToggleButton browserToggle;
+	
+	@FXML
+	private ToggleButton moviesToggle;
 	
 	@FXML
 	private JFXButton applicationUpdate;
@@ -54,22 +76,7 @@ public class SideBar extends BorderPane {
 	private MenuItem deleteDataBase;
 	
 	@FXML
-	private MenuItem downloadYoutubePlaylist;
-	
-	@FXML
-	private MenuItem socialMediaToMP3;
-	
-	@FXML
-	private MenuItem socialMediaToAnything;
-	
-	@FXML
-	private JFXButton applicationConsole;
-	
-	@FXML
 	private JFXButton applicationSettings;
-	
-	@FXML
-	private JFXButton snapshot;
 	
 	@FXML
 	private MenuItem showApplicationInfo;
@@ -80,13 +87,25 @@ public class SideBar extends BorderPane {
 	@FXML
 	private MenuItem donation;
 	
+	@FXML
+	private JFXButton openTaskManager;
+	
+	@FXML
+	private JFXButton applicationConsole;
+	
+	@FXML
+	private JFXButton snapshot;
+	
+	@FXML
+	private MenuItem downloadYoutubePlaylist;
+	
+	@FXML
+	private MenuItem socialMediaToMP3;
+	
+	@FXML
+	private MenuItem socialMediaToAnything;
+	
 	// -------------------------------------------------------------
-	
-	/** The logger. */
-	private final Logger logger = Logger.getLogger(getClass().getName());
-	
-	/** The internet thread. */
-	Thread internetThread;
 	
 	/** The zipper. */
 	public final CreateZipService zipper = new CreateZipService();
@@ -97,17 +116,17 @@ public class SideBar extends BorderPane {
 	/**
 	 * Constructor.
 	 */
-	public SideBar() {
+	public MSideBar() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MSideBar.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
 		try {
 			loader.load();
 		} catch (IOException ex) {
-			logger.log(Level.SEVERE, "", ex);
+			ex.printStackTrace();
 		}
 		
 	}
@@ -209,8 +228,6 @@ public class SideBar extends BorderPane {
 		//Set the orientation
 		this.setNodeOrientation(orientation);
 	}
-	
-	String style = "-fx-background-radius: 15 0 0 15; -fx-background-color:black; -fx-border-width:0 4 0 0;";
 	
 	/**
 	 * Prepares the SideBar to be shown for LoginMode

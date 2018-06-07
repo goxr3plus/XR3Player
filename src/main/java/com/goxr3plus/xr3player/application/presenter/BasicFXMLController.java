@@ -8,7 +8,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 public class BasicFXMLController {
 	
-	//-----------------------------------------------------
+	//--------------------------------------------------------------
 	
 	// -------------------------------------------------------------
 	
@@ -18,7 +18,7 @@ public class BasicFXMLController {
 	public BasicFXMLController() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "name.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
