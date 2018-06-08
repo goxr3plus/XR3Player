@@ -28,9 +28,6 @@ public class PlayListModesTabPane extends StackPane {
 	private Tab openedLibrariesTab;
 	
 	@FXML
-	private Tab searchEverythingTab;
-	
-	@FXML
 	private Tab dropBoxTab;
 	
 	@FXML
@@ -38,6 +35,9 @@ public class PlayListModesTabPane extends StackPane {
 	
 	@FXML
 	private Tab downloadsTab;
+	
+	@FXML
+	private Tab dropBoxTab1;
 	
 	// -------------------------------------------------------------
 	
@@ -75,7 +75,7 @@ public class PlayListModesTabPane extends StackPane {
 		//
 		emotionListsTab.setContent(new BorderPane(Main.emotionsTabPane));
 		//
-		searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
+		//searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
 		
 		//Select the second Tab
 		onlineMusicTab.getTabPane().getSelectionModel().select(1);
@@ -101,27 +101,19 @@ public class PlayListModesTabPane extends StackPane {
 		return emotionListsTab;
 	}
 	
-	/**
-	 * @return the searchEverythingTab
-	 */
-	public Tab getSearchEverythingTab() {
-		return searchEverythingTab;
-	}
-
+	
 	/**
 	 * @return the openedLibrariesTab
 	 */
 	public Tab getOpenedLibrariesTab() {
 		return openedLibrariesTab;
 	}
-
+	
 	/**
 	 * @return the dropBoxTab
 	 */
 	public Tab getDropBoxTab() {
 		return dropBoxTab;
 	}
-
-
 	
 }

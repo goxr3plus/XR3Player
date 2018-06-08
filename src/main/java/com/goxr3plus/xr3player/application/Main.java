@@ -87,6 +87,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ExportWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.application.windows.MediaDeleteWindow;
+import main.java.com.goxr3plus.xr3player.application.windows.MediaSearchWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
@@ -148,6 +149,8 @@ public class Main extends Application {
 	 * Audio Tagging Window
 	 */
 	public static TagWindow tagWindow;
+	
+	public static MediaSearchWindow mediaSearchWindow;
 	
 	/**
 	 * This window is being used to export files from the application to the outside world
@@ -374,7 +377,7 @@ public class Main extends Application {
 		
 		//----------------END: The above have not dependencies on other ---------------------------------//
 		
-		// --------------START: The below have depencitdependenciesies on others------------------------
+		// --------------START: The below have dependencies on others------------------------
 		
 		/** The Constant libraryMode. */
 		libraryMode = new LibraryMode();
@@ -410,6 +413,8 @@ public class Main extends Application {
 		 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
 		 */
 		specialJFXTabPane = new JFXTabPane();
+		
+		mediaSearchWindow = new MediaSearchWindow();
 		
 		// --------------END: The below have dependencies on others------------w------------
 		
@@ -509,7 +514,15 @@ public class Main extends Application {
 		// ---------LoginMode ------------
 		loginMode.getXr3PlayerLabel().setText("~" + window.getTitle() + "~");
 		loginMode.userSearchBox.registerListeners(window);
-		//loginMode.setLeft(sideBar);
+		//loginMode.setLeft(sideBar)
+		
+		// ---------mediaSearchWindow ------------
+		mediaSearchWindow.registerListeners(window, topBar.getSearchField());
+		topBar.getSearchField().setOnMouseReleased(m -> mediaSearchWindow.recalculateAndshow(topBar.getSearchField()));
+		topBar.getSearchField().focusedProperty().addListener(l -> {
+			if (topBar.getSearchField().isFocused())
+				mediaSearchWindow.recalculateAndshow(topBar.getSearchField());
+		});
 		
 		// -------Root-----------
 		root.setVisible(false);

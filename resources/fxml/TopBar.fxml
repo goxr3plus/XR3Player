@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root maxHeight="51.0" minHeight="-Infinity" prefHeight="51.0" prefWidth="988.0" style="-fx-background-color: rgb(42,42,42); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 2;" styleClass="topBar" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
@@ -65,7 +66,12 @@
                   <Tooltip text="Side Bar" />
                </tooltip>
             </JFXButton>
-            <TextField focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="search...." styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-background-color: #303030;">
+               <children>
+                  <TextField fx:id="searchField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="search...." styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20" />
+               </children>
+            </HBox>
             <JFXTabPane fx:id="jfxTabPane" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                <tabs>
                   <Tab fx:id="mainModeTab">

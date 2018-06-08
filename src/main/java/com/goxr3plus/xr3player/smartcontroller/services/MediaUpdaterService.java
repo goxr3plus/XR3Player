@@ -108,7 +108,7 @@ public class MediaUpdaterService {
 				//-------------
 				
 				//Search Window
-				if (Main.playListModesTabPane.getSearchEverythingTab().isSelected()) {
+				if (Main.mediaSearchWindow.getWindow().isShowing()) {
 					
 					//Find the controller
 					SmartController controller = Main.searchWindowSmartController;

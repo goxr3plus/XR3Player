@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -43,6 +44,9 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private JFXButton showHideSideBar;
+	
+	@FXML
+	private TextField searchField;
 	
 	@FXML
 	private JFXTabPane jfxTabPane;
@@ -360,5 +364,12 @@ public class TopBar extends BorderPane {
 	public Tab getUserModeTab() {
 		return userModeTab;
 	}
-	
+
+	/**
+	 * @return the searchField
+	 */
+	public TextField getSearchField() {
+		return searchField;
+	}
+
 }
