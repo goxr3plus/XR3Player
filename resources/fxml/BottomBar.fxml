@@ -98,14 +98,6 @@
                   <Tooltip text="Total time the application is being alive" />
                </tooltip>
             </Label>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="591.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="|" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <padding>
-                  <Insets left="4.0" right="4.0" />
-               </padding>
-            </Label>
          </children>
       </HBox>
    </center>

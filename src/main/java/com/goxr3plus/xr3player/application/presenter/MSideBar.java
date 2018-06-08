@@ -19,12 +19,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.services.CreateZipService;
 import main.java.com.goxr3plus.xr3player.application.database.services.ExportZipService;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -67,6 +70,9 @@ public class MSideBar extends StackPane {
 	
 	@FXML
 	private ToggleButton moviesToggle;
+	
+	@FXML
+	private HBox performanceHBox;
 	
 	@FXML
 	private JFXButton applicationUpdate;
@@ -120,6 +126,10 @@ public class MSideBar extends StackPane {
 	
 	/** The un zipper. */
 	public final ExportZipService unZipper = new ExportZipService();
+	
+	//System Monitors for CPU + RAM
+	private final SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
+	private final SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
 	
 	/**
 	 * Constructor.
@@ -353,6 +363,24 @@ public class MSideBar extends StackPane {
 		
 		//noImageStackedFontIcon
 		noImageStackedFontIcon.visibleProperty().bind(userImageView.imageProperty().isNull());
+		
+		// cpuMonitor
+		cpuMonitor.setOnMouseReleased(r -> {
+			if (cpuMonitor.isRunning())
+				cpuMonitor.stopUpdater();
+			else
+				cpuMonitor.restartUpdater();
+		});
+		
+		// ramMonitor
+		ramMonitor.setOnMouseReleased(r -> {
+			if (ramMonitor.isRunning())
+				ramMonitor.stopUpdater();
+			else
+				ramMonitor.restartUpdater();
+		});
+		
+		performanceHBox.getChildren().addAll(cpuMonitor, ramMonitor);
 	}
 	
 	/**

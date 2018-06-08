@@ -87,6 +87,16 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Performance" />
+                  <HBox fx:id="performanceHBox" alignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
             <BorderPane id="sideBar" minHeight="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="279.0" prefWidth="219.0">
                <padding>
                   <Insets bottom="2.0" left="3.0" top="2.0" />

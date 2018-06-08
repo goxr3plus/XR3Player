@@ -12,7 +12,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -73,9 +72,7 @@ public class BottomBar extends BorderPane {
 	
 	private int minutes = -1;
 	
-	//System Monitors for CPU + RAM
-	private final SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);
-	private final SystemMonitor ramMonitor = new SystemMonitor(Monitor.RAM);
+
 	
 	/**
 	 * Constructor.
@@ -189,24 +186,6 @@ public class BottomBar extends BorderPane {
 		
 		//showHideSideBar
 		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> Main.sideBar.toogleBar());
-		
-		// ----------------------------cpuMonitor
-		cpuMonitor.setOnMouseReleased(r -> {
-			if (cpuMonitor.isRunning())
-				cpuMonitor.stopUpdater();
-			else
-				cpuMonitor.restartUpdater();
-		});
-		
-		// ----------------------------ramMonitor
-		ramMonitor.setOnMouseReleased(r -> {
-			if (ramMonitor.isRunning())
-				ramMonitor.stopUpdater();
-			else
-				ramMonitor.restartUpdater();
-		});
-		
-		hBox.getChildren().addAll(cpuMonitor, ramMonitor);
 		
 		// -- searchField
 		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2))
