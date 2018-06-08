@@ -89,7 +89,7 @@
                                                 <MenuItem fx:id="copyFile" mnemonicParsing="false" text="Copy File" />
                                             </items>
                                              <graphic>
-                                                <FontIcon iconColor="WHITE" iconLiteral="gmi-content-copy" iconSize="20" />
+                                                <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20" />
                                              </graphic>
                                              <styleClass>
                                                 <String fx:value="menu-button2" />

@@ -57,16 +57,12 @@
                      </graphic>
                   </Button>
                   <Button fx:id="neutral" layoutX="70.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/likeFaded.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-sentiment-neutral" iconSize="40" />
+                     </graphic>
                   </Button>
                   <Button fx:id="like" layoutX="52.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
                      <cursor>
@@ -94,16 +90,12 @@
    </center>
    <right>
       <JFXButton fx:id="close" focusTraversable="false" maxHeight="1.7976931348623157E308" text="Cancel" BorderPane.alignment="CENTER">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/x-button.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <BorderPane.margin>
             <Insets right="5.0" top="5.0" />
          </BorderPane.margin>
+         <graphic>
+            <FontIcon iconColor="#dd3f3f" iconLiteral="gmi-cancel" iconSize="28" />
+         </graphic>
       </JFXButton>
    </right>
    <padding>

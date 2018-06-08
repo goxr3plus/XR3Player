@@ -32,7 +32,7 @@
                <children>
                   <JFXButton fx:id="goFullScreen" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="48.0" layoutY="15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#36ff4a" iconLiteral="typ-arrow-maximise" iconSize="20" />
+                        <FontIcon iconColor="#33ee7e" iconLiteral="typ-arrow-maximise" iconSize="28" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button3" text=" ">
@@ -58,7 +58,7 @@
                   <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
                   <JFXButton fx:id="copyText" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="176.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-content-copy" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Copy Address Bar text" />
@@ -71,7 +71,7 @@
                   </JFXButton>
                   <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#33f5eb" iconLiteral="fas-globe" iconSize="20" />
+                        <FontIcon iconColor="#2adace" iconLiteral="fas-globe" iconSize="20" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Open in default browser" />
