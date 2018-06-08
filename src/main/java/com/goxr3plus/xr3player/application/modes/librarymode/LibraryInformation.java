@@ -27,9 +27,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class LibraryInformation extends BorderPane {
 	
 	@FXML
-	private TextArea commentsArea;
-	
-	@FXML
 	private Label totalItems;
 	
 	@FXML
@@ -39,7 +36,10 @@ public class LibraryInformation extends BorderPane {
 	private Label starsLabel;
 	
 	@FXML
-	private Label totalCharsLabel;
+	private Label commentsLabel;
+	
+	@FXML
+	private TextArea commentsArea;
 	
 	// --------------------------------------------------------------------
 	
@@ -158,15 +158,16 @@ public class LibraryInformation extends BorderPane {
 		starsLabel.setOnMouseReleased(m -> library.updateLibraryStars(library));
 		
 		//-- Total Characters
-		totalCharsLabel.textProperty().bind(commentsArea.textProperty().length().asString());
+		commentsLabel.textProperty().bind(commentsArea.textProperty().length().asString());
 		
 		//-- Comments Area
+		int maximumChars = 400;
 		commentsArea.textProperty().addListener(c -> {
 			if (library != null)
-				if (commentsArea.getText().length() <= 200)
+				if (commentsArea.getText().length() <= maximumChars)
 					library.setDescription(commentsArea.getText());
 				else
-					commentsArea.setText(commentsArea.getText().substring(0, 200));
+					commentsArea.setText(commentsArea.getText().substring(0, maximumChars));
 		});
 		
 		commentsArea.setOnMouseExited(exit -> {

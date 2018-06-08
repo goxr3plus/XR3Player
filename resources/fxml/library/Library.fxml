@@ -26,14 +26,7 @@
 				<Tooltip />
 			</tooltip>
 		</Label>
-      <Label fx:id="ratingLabel" alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="47.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14;" text="5.0" StackPane.alignment="TOP_RIGHT">
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/smallStar.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Label fx:id="ratingLabel" alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14;" text="5.0" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -43,6 +36,9 @@
          <StackPane.margin>
             <Insets top="40.0" />
          </StackPane.margin>
+         <graphic>
+            <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="24" />
+         </graphic>
       </Label>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="162.0" prefWidth="50.0" spacing="15.0" StackPane.alignment="TOP_LEFT">
          <children>
@@ -84,17 +80,10 @@
             <Insets bottom="5.0" left="5.0" top="5.0" />
          </StackPane.margin>
       </VBox>
-      <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="543545 2" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+      <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="99999" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-         <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/song.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <padding>
             <Insets left="4.0" right="4.0" />
          </padding>
@@ -104,6 +93,9 @@
          <StackPane.margin>
             <Insets top="5.0" />
          </StackPane.margin>
+         <graphic>
+            <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24" />
+         </graphic>
       </Label>
       <StackPane fx:id="progressBarStackPane" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
          <children>

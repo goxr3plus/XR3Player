@@ -48,7 +48,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="gmi-date-range" iconSize="32" />
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-date-range" iconSize="32" />
                </graphic>
             </Label>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
@@ -80,13 +80,9 @@
                   <Tooltip text="Rating in Stars " />
                </tooltip>
             </Label>
-            <Label fx:id="totalCharsLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="100" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                <graphic>
-                  <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0">
-                     <graphic>
-                        <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55" text="" />
-                     </graphic>
-                  </Label>
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55" text="" />
                </graphic>
             </Label>
          </children>
