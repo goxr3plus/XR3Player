@@ -104,10 +104,10 @@ public class MediaSearchWindow extends BorderPane {
 		try {
 			window.show();
 			recalculateWindowPosition(searchField);
-			//			window.requestFocus();
-			System.out.println("X: "+window.getX() + " Y: " + window.getY());
-			System.out.println("Width: "+window.getWidth() + " Y: " + window.getY());
-			System.out.println(window.isShowing());
+			//window.requestFocus()
+			//System.out.println("X: "+window.getX() + " Y: " + window.getY())
+			//System.out.println("Width: "+window.getWidth() + " Y: " + window.getY())
+			System.out.println("Window Showing : " + window.isShowing());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

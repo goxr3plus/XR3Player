@@ -112,24 +112,24 @@
                            <content>
                               <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #202020;">
                                  <children>
-                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
-                                       <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="gmi-date-range" iconSize="32" />
-                                       </graphic>
-                                    </Label>
                                     <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
                                        <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="gmi-audiotrack" iconSize="32" />
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="32" />
+                                       </graphic>
+                                    </Label>
+                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
+                                       <graphic>
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-date-range" iconSize="32" />
                                        </graphic>
                                     </Label>
                                     <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0">
                                        <graphic>
-                                          <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="45" text="" />
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55" text="" />
                                        </graphic>
                                     </Label>
                                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" VBox.vgrow="ALWAYS">
                                        <graphic>
-                                          <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="notes..." style="-fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" />
+                                          <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="comments..." style="-fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" />
                                        </graphic>
                                     </Label>
                                  </children>

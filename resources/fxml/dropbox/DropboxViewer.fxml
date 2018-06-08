@@ -156,7 +156,7 @@
                                           <Insets left="15.0" />
                                        </HBox.margin>
                                        <graphic>
-                                          <FontIcon iconColor="#2ec5cd" iconLiteral="fas-sync-alt" iconSize="24" />
+                                          <FontIcon iconColor="#2ec5cd" iconLiteral="fas-sync-alt" iconSize="20" />
                                        </graphic>
                                     </Button>
                                  </children>
