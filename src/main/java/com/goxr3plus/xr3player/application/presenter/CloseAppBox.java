@@ -66,7 +66,7 @@ public class CloseAppBox extends StackPane {
 	}
 	
 	/**
-	 * Called as soon as .fxml is initialised
+	 * Called as soon as fxml is initialized
 	 */
 	@FXML
 	private void initialize() {

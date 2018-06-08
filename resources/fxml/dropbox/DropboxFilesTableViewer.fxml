@@ -11,39 +11,31 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <center>
             <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type" />
+                  <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-filter" iconSize="24" />
+                     </graphic></TableColumn>
                   <TableColumn fx:id="download" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Download">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                           <image>
-                              <Image url="@../../image/Download%20From%20Cloud-24.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Title">
                      <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../image/eye2.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-directions" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="actionColumn" editable="false" maxWidth="90.0" minWidth="100.0" prefWidth="90.0" resizable="false" sortable="false" text="Action">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/menu2.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#09aceb" iconLiteral="typ-th-large-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
                      </graphic>
                   </TableColumn>
                </columns>

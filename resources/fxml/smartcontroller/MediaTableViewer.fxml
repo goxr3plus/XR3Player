@@ -31,7 +31,7 @@
                   </TableColumn>
                   <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Search on Web">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-firefox" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">

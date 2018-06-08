@@ -21,8 +21,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.BreadCrumbBar?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane>
          <children>
@@ -37,7 +38,7 @@
                                     <Tooltip text="Preparing Cached Search" />
                                  </tooltip>
                               </ProgressIndicator>
-                              <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." style="-fx-background-radius: 45;">
+                              <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." style="-fx-background-radius: 45;" styleClass="dark-text-field">
                                  <HBox.margin>
                                     <Insets left="3.0" />
                                  </HBox.margin>
@@ -52,16 +53,12 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" HBox.hgrow="NEVER">
                            <children>
-                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Dropbox ~ User  Name">
+                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="user name">
                                 <items>
                                   <MenuItem fx:id="signOut" mnemonicParsing="false" text="Sign out" />
                                 </items>
                                  <graphic>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../image/dropbox.png" />
-                                       </image>
-                                    </ImageView>
+                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="24" />
                                  </graphic>
                               </MenuButton>
                            </children>
@@ -88,102 +85,67 @@
                               <HBox alignment="CENTER">
                                  <children>
                                     <Button fx:id="openFolder" alignment="CENTER" disable="true" layoutX="54.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Open" wrapText="true">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/openedFolder.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="#e1a524" iconLiteral="far-folder-open" iconSize="24" />
+                                       </graphic>
                                     </Button>
                                     <Button fx:id="createFolder" alignment="CENTER" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="New" wrapText="true">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/add.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="#e1a524" iconLiteral="far-folder" iconSize="24" />
+                                       </graphic>
                                     </Button>
-                                    <MenuButton fx:id="deleteMenuButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Delete">
+                                    <MenuButton fx:id="deleteMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="34.0" style="-fx-background-radius: 0;" text="Delete">
                                       <items>
                                         <MenuItem fx:id="deleteFile" mnemonicParsing="false" text="Delete">
                                              <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/delete.png" />
-                                                   </image>
-                                                </ImageView>
+                                                <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
                                              </graphic>
                                           </MenuItem>
                                         <MenuItem fx:id="permanentlyDeleteFile" disable="true" mnemonicParsing="false" text="Permanently Delete">
                                              <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/delete.png" />
-                                                   </image>
-                                                </ImageView>
+                                                <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
                                              </graphic>
                                           </MenuItem>
                                       </items>
                                        <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/delete.png" />
-                                             </image>
-                                          </ImageView>
+                                          <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
                                        </graphic>
                                     </MenuButton>
                                     <Button fx:id="renameButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/rename.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-edit" iconSize="24" />
+                                       </graphic>
                                     </Button>
                                     <Button fx:id="downloadFile" alignment="CENTER" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Download" wrapText="true">
-                                       <graphic>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/Download%20From%20Cloud-24.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="24" />
+                                       </graphic>
                                     </Button>
                                     <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/refresh.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -193,6 +155,9 @@
                                        <HBox.margin>
                                           <Insets left="15.0" />
                                        </HBox.margin>
+                                       <graphic>
+                                          <FontIcon iconColor="#2ec5cd" iconLiteral="fas-sync-alt" iconSize="24" />
+                                       </graphic>
                                     </Button>
                                  </children>
                               </HBox>
@@ -200,11 +165,7 @@
                                  <children>
                                     <Label fx:id="emptyFolderLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: rgb(55,55,55,0.2);" styleClass="applicationSettingsLabel2" text="This folder is empty " textAlignment="CENTER" wrapText="true">
                                        <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/folder.png" />
-                                             </image>
-                                          </ImageView>
+                                          <FontIcon iconColor="#e1a524" iconLiteral="fas-inbox" iconSize="24" />
                                        </graphic>
                                     </Label>
                                  </children>
@@ -234,20 +195,13 @@
             </Button>
          </children>
       </VBox>
-      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #007EE5;">
+      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #007EE5;" visible="false">
          <children>
             <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
                   <VBox alignment="CENTER" spacing="5.0">
                      <children>
                         <Button fx:id="authorizationButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Sign in using internal XR3Player Web Browser -&gt; Recommended" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/dropbox.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -257,15 +211,11 @@
                            <effect>
                               <DropShadow />
                            </effect>
+                           <graphic>
+                              <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
+                           </graphic>
                         </Button>
                         <Button fx:id="authorizationButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Sign in using Firefox , Opera , Chrome , Safari" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/dropbox.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -275,6 +225,9 @@
                            <effect>
                               <DropShadow />
                            </effect>
+                           <graphic>
+                              <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
+                           </graphic>
                         </Button>
                      </children>
                      <padding>
@@ -317,11 +270,7 @@
                         </VBox>
                         <Label fx:id="dropBoxAccountsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0 Saved DropBox Accounts" textAlignment="CENTER" wrapText="true">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/dropbox.png" />
-                                 </image>
-                              </ImageView>
+                              <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
                            </graphic>
                         </Label>
                      </children>
