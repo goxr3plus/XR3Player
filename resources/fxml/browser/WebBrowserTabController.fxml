@@ -37,22 +37,22 @@
                   </JFXButton>
                   <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-arrow-back" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-left" iconSize="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="reloadButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-sync" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-arrow-forward" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-right" iconSize="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="118.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-home" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-home" iconSize="20" />
                      </graphic>
                   </JFXButton>
                   <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
@@ -66,12 +66,12 @@
                   </JFXButton>
                   <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-search" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#33f5eb" iconLiteral="fa-globe" iconSize="20" />
+                        <FontIcon iconColor="#33f5eb" iconLiteral="fas-globe" iconSize="20" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Open in default browser" />
