@@ -36,11 +36,11 @@ public class MediaSearchWindow {
 		//Window
 		window = new Stage();
 		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, Main.searchWindowSmartController, 400, 300);
-		window.setScene(borderlessScene);
-		window.focusedProperty().addListener(l -> {
-			if (!window.isFocused())
-				window.hide();
-		});
+		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
+		window.setScene(borderlessScene);		
+		window.setWidth(800);
+		window.setHeight(450);
 	}
 	
 	/**
@@ -76,16 +76,16 @@ public class MediaSearchWindow {
 	 * This method registers some listeners to the main window so when main windows changes his size or position then the Search Window recalculates it's
 	 * position.
 	 * 
-	 * @param window1
+	 * @param owner
 	 * @param searchField
 	 */
-	public void registerListeners(Window window1 , Node searchField) {
+	public void registerListeners(Window owner , Node searchField) {
 		// Care so the Search Window is recalculating it's position
 		Main.window.xProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
 		Main.window.yProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
 		Main.window.widthProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
 		Main.window.heightProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
-		window.initOwner(window1);
+		window.initOwner(owner);
 	}
 	
 	/**

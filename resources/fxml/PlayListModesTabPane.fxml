@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root prefHeight="358.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -14,41 +15,12 @@
             <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab fx:id="onlineMusicTab" closable="false" text="Online Music">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/youtube24.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                     <content>
+                        <FontIcon />
+                     </content>
                   </Tab>
-                  <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries">
-                   <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Music%20Folder-20.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     </Tab>
-                  <Tab fx:id="searchEverythingTab" closable="false" text="Global Search">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/searchIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="dropBoxTab" closable="false" text="Dropbox">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/dropbox.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Tab>
+                  <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries" />
+                  <Tab fx:id="dropBoxTab" closable="false" text="Dropbox" />
                   <Tab fx:id="emotionListsTab" closable="false" text="Emotion Lists">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

@@ -264,7 +264,8 @@ public class MediaContextMenu extends ContextMenu {
 		this.controller = controller1;
 		
 		// Show it
-		show(Main.window, x - super.getWidth(), y - 1);
+		show((Main.mediaSearchWindow.getWindow().isShowing() && Main.mediaSearchWindow.getWindow().isFocused()) ? Main.mediaSearchWindow.getWindow() : Main.window,
+				x - super.getWidth(), y - 1);
 		previousGenre = genre;
 		
 		//------------Animation------------------
@@ -344,8 +345,8 @@ public class MediaContextMenu extends ContextMenu {
 			if (!Main.playedSongs.containsFile(media.getFilePath())) {
 				Main.playedSongs.add(media.getFilePath(), true);
 				Main.playedSongs.appendToTimesPlayed(media.getFilePath(), true);
-			}else {
-				if(Main.playedSongs.remove(media.getFilePath(), true))
+			} else {
+				if (Main.playedSongs.remove(media.getFilePath(), true))
 					media.timesPlayedProperty().set(0);
 			}
 		}
@@ -368,11 +369,13 @@ public class MediaContextMenu extends ContextMenu {
 		else if (source == editFileInfo) {
 			//More than 1 selected?
 			if (controller.getNormalModeMediatTableViewer().getSelectedCount() > 1)
-				Main.tagWindow.openMultipleAudioFiles(controller.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
-						.collect(Collectors.toCollection(FXCollections::observableArrayList)), controller.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItem().getFilePath());
+				Main.tagWindow.openMultipleAudioFiles(
+						controller.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
+								.collect(Collectors.toCollection(FXCollections::observableArrayList)),
+						controller.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItem().getFilePath());
 			//Only one file selected
 			else
-				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO,true);
+				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO, true);
 		} else if (e.getSource() == copyOrMove) // copyTo
 			Main.exportWindow.show(controller);
 		else
