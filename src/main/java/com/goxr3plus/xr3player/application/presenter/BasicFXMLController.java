@@ -31,7 +31,7 @@ public class BasicFXMLController {
 	}
 	
 	/**
-	 * Called as soon as .fxml is initialised
+	 * Called as soon as fxml is initialized
 	 */
 	@FXML
 	private void initialize() {
