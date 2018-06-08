@@ -69,7 +69,7 @@ public class ChromiumUpdaterService {
 					
 					if (Main.topBar.isTabSelected(Main.topBar.getWebModeTab())) {
 						checkTabsSound();
-						//System.out.println(threadName + " entered if statement");
+						//System.out.println(threadName + " entered if statement")
 					}
 					
 					//DropboxAuthenticationBrowser

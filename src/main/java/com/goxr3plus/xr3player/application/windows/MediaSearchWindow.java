@@ -97,12 +97,13 @@ public class MediaSearchWindow extends BorderPane {
 	 */
 	public void recalculateAndshow(Node searchField) {
 		try {
-		window.show();
-		window.requestFocus();
-		//recalculateWindowPosition(searchField);
-		System.out.println("Entered recalculateAndShow");
-		System.out.println(window.getX() + "," + window.getY());
-		}catch(Exception ex) {
+			window.show();
+			window.requestFocus();
+			recalculateWindowPosition(searchField);
+			window.requestFocus();
+			System.out.println("Entered recalculateAndShow");
+			System.out.println(window.getX() + "," + window.getY());
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
