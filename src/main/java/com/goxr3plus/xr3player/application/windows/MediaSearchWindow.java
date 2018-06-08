@@ -3,8 +3,15 @@
  */
 package main.java.com.goxr3plus.xr3player.application.windows;
 
+import java.io.IOException;
+
+import com.jfoenix.controls.JFXButton;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -15,7 +22,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 /**
  * The Class LibrariesSearchWindow.
  */
-public class MediaSearchWindow {
+public class MediaSearchWindow extends BorderPane {
 	
 	// -------------------------------------------------------------
 	
@@ -26,6 +33,9 @@ public class MediaSearchWindow {
 	
 	// -------------------------------------------------------------
 	
+	@FXML
+	private JFXButton close;
+	
 	// -------------------------------------------------------------
 	
 	/**
@@ -33,14 +43,39 @@ public class MediaSearchWindow {
 	 */
 	public MediaSearchWindow() {
 		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaSearchWindow.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Called as soon as fxml is initialized
+	 */
+	@FXML
+	private void initialize() {
+		
+		//Root
+		setCenter(Main.searchWindowSmartController);
+		
 		//Window
 		window = new Stage();
-		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, Main.searchWindowSmartController, 400, 300);
+		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, this, 400, 300);
 		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
-		window.setScene(borderlessScene);		
+		window.setScene(borderlessScene);
 		window.setWidth(800);
 		window.setHeight(450);
+		
+		//close
+		close.setOnAction(a -> window.close());
 	}
 	
 	/**
@@ -61,8 +96,15 @@ public class MediaSearchWindow {
 	 * Recalculates the position and shows the window
 	 */
 	public void recalculateAndshow(Node searchField) {
-		recalculateWindowPosition(searchField);
+		try {
 		window.show();
+		window.requestFocus();
+		//recalculateWindowPosition(searchField);
+		System.out.println("Entered recalculateAndShow");
+		System.out.println(window.getX() + "," + window.getY());
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	/**

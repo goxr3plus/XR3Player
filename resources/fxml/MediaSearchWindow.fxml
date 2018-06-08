@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+
+<fx:root prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+   <top>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Search Window" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button4" text=" ">
+               <graphic>
+                  <FontIcon iconColor="#d03535" iconLiteral="gmi-cancel" iconSize="24" />
+               </graphic>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+</fx:root>
