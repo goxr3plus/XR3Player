@@ -654,7 +654,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="24" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
+                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="gmi-volume-mute" iconSize="24" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
                               <Insets top="8.0" />
