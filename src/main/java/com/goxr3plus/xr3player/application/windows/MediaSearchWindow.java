@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -73,6 +74,10 @@ public class MediaSearchWindow extends BorderPane {
 		window.setScene(borderlessScene);
 		window.setWidth(800);
 		window.setHeight(450);
+		window.getScene().setOnKeyReleased(key -> {
+			if (key.getCode() == KeyCode.ESCAPE)
+				close();
+		});
 		
 		//close
 		close.setOnAction(a -> window.close());
@@ -98,11 +103,11 @@ public class MediaSearchWindow extends BorderPane {
 	public void recalculateAndshow(Node searchField) {
 		try {
 			window.show();
-			window.requestFocus();
 			recalculateWindowPosition(searchField);
-			window.requestFocus();
-			System.out.println("Entered recalculateAndShow");
-			System.out.println(window.getX() + "," + window.getY());
+			//			window.requestFocus();
+			System.out.println("X: "+window.getX() + " Y: " + window.getY());
+			System.out.println("Width: "+window.getWidth() + " Y: " + window.getY());
+			System.out.println(window.isShowing());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

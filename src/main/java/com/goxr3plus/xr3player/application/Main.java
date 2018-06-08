@@ -519,10 +519,10 @@ public class Main extends Application {
 		// ---------mediaSearchWindow ------------
 		mediaSearchWindow.registerListeners(window, topBar.getSearchField());
 		topBar.getSearchField().setOnMouseReleased(m -> mediaSearchWindow.recalculateAndshow(topBar.getSearchField()));
-		topBar.getSearchField().focusedProperty().addListener(l -> {
-			if (topBar.getSearchField().isFocused())
-				mediaSearchWindow.recalculateAndshow(topBar.getSearchField());
-		});
+//		topBar.getSearchField().focusedProperty().addListener(l -> {
+//			if (topBar.getSearchField().isFocused())
+//				mediaSearchWindow.recalculateAndshow(topBar.getSearchField());
+//		});
 		
 		// -------Root-----------
 		root.setVisible(false);
@@ -615,10 +615,6 @@ public class Main extends Application {
 		
 		//-------------User Image View----------
 		sideBar.getUserImageView().imageProperty().bind(userInfoMode.getUserImage().imageProperty());
-		
-		//-------------TOP BAR--------------------
-		//	bottomBar.getSearchField().textProperty().bindBidirectional(searchWindowSmartController.getSearchService().getSearchField().textProperty());
-		//bottomBar.getSearchField().disableProperty().bind(searchWindowSmartController.getIndicatorVBox().visibleProperty());
 		
 	}
 	

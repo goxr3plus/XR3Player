@@ -150,16 +150,16 @@ public class SearchBoxWindow extends BorderPane {
 	 * This method registers some listeners to the main window so when main windows changes his size or position then the Search Window recalculates
 	 * it's position.
 	 * 
-	 * @param window1
+	 * @param owner
 	 * @param searchField
 	 */
-	public void registerListeners(Window window1 , Node searchField) {
+	public void registerListeners(Window owner , Node searchField) {
 		// Care so the Search Window is recalculating it's position
 		Main.window.xProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
 		Main.window.yProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
 		Main.window.widthProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
 		Main.window.heightProperty().addListener((observable , oldValue , newValue) -> recalculateWindowPosition(searchField));
-		this.window.initOwner(window1);
+		this.window.initOwner(owner);
 	}
 	
 	/**
