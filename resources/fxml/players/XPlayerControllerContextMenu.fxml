@@ -6,8 +6,9 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <Menu fx:id="getInfoBuy" mnemonicParsing="false" text="Get Info/Buy">
         <items>
@@ -232,11 +233,7 @@
             </MenuItem>
         </items>
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Add%20Shopping%20Cart-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
          </graphic>
       </Menu>
       <Menu fx:id="findLyrics" mnemonicParsing="false" text="Find Lyrics">
@@ -271,11 +268,7 @@
       <SeparatorMenuItem mnemonicParsing="false" />
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Copy-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
          </graphic>
       </MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
@@ -290,11 +283,7 @@
       </MenuItem>
       <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="View/Edit File Info... (CTRL+I)">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/tag.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-tags" iconSize="20" />
          </graphic>
       </MenuItem>
    </items>

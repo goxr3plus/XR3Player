@@ -2,45 +2,28 @@
 
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
       <MenuItem fx:id="openFolder" mnemonicParsing="false" text="Open Folder">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/folder.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="#dd9837" iconLiteral="far-folder-open" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="download" mnemonicParsing="false" text="Download">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Download%20From%20Cloud-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="rename" mnemonicParsing="false" text="Rename">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/rename.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/x.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
          </graphic></MenuItem>
   </items>
 </fx:root>
