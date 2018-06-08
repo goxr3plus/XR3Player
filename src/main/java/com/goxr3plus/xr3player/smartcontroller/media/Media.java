@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -23,6 +25,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
@@ -187,7 +190,7 @@ public abstract class Media {
 	/** The image to be shown when the Media has been already Played */
 	public static final Image PLAYING_IMAGE2 = InfoTool.getImageFromResourcesFolder("compact-disc2.png");
 	
-	public static final Image INFOBUY_IMAGE = InfoTool.getImageFromResourcesFolder("Download From Cloud-24.png");
+
 	
 	public static final Image NO_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
 	
@@ -220,26 +223,27 @@ public abstract class Media {
 		artwork = new SimpleObjectProperty<>(artworkImageView);
 		playStatus = new SimpleIntegerProperty(-2);
 		
-		//getInfoBuy
-		ImageView imageView1 = new ImageView(INFOBUY_IMAGE);
-		imageView1.setFitWidth(20);
-		imageView1.setFitHeight(20);
+		//Download
+		FontIcon downloadIcon = new FontIcon("fas-cloud-download-alt");
+		downloadIcon.setIconSize(16);
+		downloadIcon.setIconColor(Color.WHITE);
 		
-		Button button1 = new Button("", imageView1);
-		button1.setPrefSize(24, 24);
-		button1.setMinSize(24, 24);
-		button1.setMaxSize(24, 24);
-		button1.setStyle("-fx-cursor:hand");
-		button1.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		button1.setOnMouseReleased(m -> {
+		Button searchMediaOnWeb = new Button("", downloadIcon);
+		searchMediaOnWeb.setPrefSize(24, 24);
+		searchMediaOnWeb.setMinSize(24, 24);
+		searchMediaOnWeb.setMaxSize(24, 24);
+		searchMediaOnWeb.setStyle("-fx-cursor:hand");
+		searchMediaOnWeb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		searchMediaOnWeb.setOnMouseReleased(m -> {
 			try {
-				ActionTool.openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+				Main.webBrowser.createTabAndSelect("https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+				Main.topBar.selectTab(Main.topBar.getWebModeTab());
+			} catch (UnsupportedEncodingException ex) {
+				ex.printStackTrace();
 			}
 		});
 		
-		getInfoBuy = new SimpleObjectProperty<>(button1);
+		getInfoBuy = new SimpleObjectProperty<>(searchMediaOnWeb);
 		
 		//Like Dislike or Neutral Feelings
 		

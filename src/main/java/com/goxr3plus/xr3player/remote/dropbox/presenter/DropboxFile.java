@@ -3,6 +3,8 @@
  */
 package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import com.dropbox.core.v2.files.FolderMetadata;
 import com.dropbox.core.v2.files.Metadata;
 
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
@@ -73,12 +76,12 @@ public class DropboxFile {
 		
 		this.actionColumn = new SimpleObjectProperty<>(actionColumnButton);
 		
-		//downloadButton
-		ImageView imageView1 = new ImageView(Media.INFOBUY_IMAGE);
-		imageView1.setFitWidth(20);
-		imageView1.setFitHeight(20);
+		//downloadButton	
+		FontIcon downloadIcon = new FontIcon("fas-cloud-download-alt");
+		downloadIcon.setIconSize(16);
+		downloadIcon.setIconColor(Color.WHITE);
 		
-		Button downloadButton = new Button("", imageView1);
+		Button downloadButton = new Button("", downloadIcon);
 		downloadButton.setPrefSize(24, 24);
 		downloadButton.setMinSize(24, 24);
 		downloadButton.setMaxSize(24, 24);

@@ -117,30 +117,34 @@ public class WebBrowserController extends StackPane {
 		addTab.setOnAction(a -> createAndAddNewTab());
 		
 		//Extra Stuff
-		youtube.setOnAction(a -> openFamousSite("https://www.youtube.com/"));
+		youtube.setOnAction(a -> createTabAndSelect("https://www.youtube.com/"));
 		
-		soundCloud.setOnAction(a -> openFamousSite("https://www.soundcloud.com"));
+		soundCloud.setOnAction(a -> createTabAndSelect("https://www.soundcloud.com"));
 		
-		facebook.setOnAction(a -> openFamousSite("https://www.facebook.com"));
+		facebook.setOnAction(a -> createTabAndSelect("https://www.facebook.com"));
 		
-		printerest.setOnAction(a -> openFamousSite("https://www.pinterest.com"));
+		printerest.setOnAction(a -> createTabAndSelect("https://www.pinterest.com"));
 		
-		twitter.setOnAction(a -> openFamousSite("https://www.twitter.com"));
+		twitter.setOnAction(a -> createTabAndSelect("https://www.twitter.com"));
 		
-		linkedIn.setOnAction(a -> openFamousSite("https://www.linkedin.com/"));
+		linkedIn.setOnAction(a -> createTabAndSelect("https://www.linkedin.com/"));
 		
-		dropBox.setOnAction(a -> openFamousSite("https://www.dropbox.com"));
+		dropBox.setOnAction(a -> createTabAndSelect("https://www.dropbox.com"));
 		
-		gmail.setOnAction(a -> openFamousSite("https://www.gmail.com"));
+		gmail.setOnAction(a -> createTabAndSelect("https://www.gmail.com"));
 		
-		googleDrive.setOnAction(a -> openFamousSite("https://www.google.com"));
+		googleDrive.setOnAction(a -> createTabAndSelect("https://www.google.com"));
 		
-		googleMaps.setOnAction(a -> openFamousSite("https://maps.google.com/"));
+		googleMaps.setOnAction(a -> createTabAndSelect("https://maps.google.com/"));
 	}
 	
-	private void openFamousSite(String url) {
-		createAndAddNewTab(url);
-		tabPane.getSelectionModel().selectLast();
+	/**
+	 * Creates a new Tab and selects it
+	 * 
+	 * @param url
+	 */
+	public void createTabAndSelect(String url) {
+		tabPane.getSelectionModel().select(createAndAddNewTab(url).getTab());
 	}
 	
 	/**
