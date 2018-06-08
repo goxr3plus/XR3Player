@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kordamp.ikonli.javafx.StackedFontIcon;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
@@ -59,30 +61,6 @@ public class TopBar extends BorderPane {
 	
 	@FXML
 	private Tab moviesModeTab;
-	
-	@FXML
-	private JFXButton donate;
-	
-	@FXML
-	private JFXButton about;
-	
-	@FXML
-	private MenuItem chooseBackground;
-	
-	@FXML
-	private MenuItem resetBackground;
-	
-	@FXML
-	private JFXButton restartButton;
-	
-	@FXML
-	private JFXButton minimize;
-	
-	@FXML
-	private JFXButton maxOrNormalize;
-	
-	@FXML
-	private JFXButton exitApplication;
 	
 	// ----------------------------------------------
 	
@@ -153,28 +131,8 @@ public class TopBar extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		//---------------------------------------------------
-		
-		// restartButton
-		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Restart", "Soore you want to restart the application?", restartButton, Main.window))
-				Main.restartTheApplication(true);
-		});
-		
-		// minimize
-		minimize.setOnAction(ac -> Main.window.setIconified(true));
-		
-		// maximize_normalize
-		maxOrNormalize.setOnAction(ac -> Main.borderlessScene.maximizeStage());
-		
-		// close
-		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());
-		
-		//donate
-		donate.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
-		
-		// about
-		about.setOnAction(a -> Main.aboutWindow.show());
+		//Root
+		this.setRight(new CloseAppBox());
 		
 		//----------------------------START: TABS---------------------------------
 		
@@ -305,12 +263,6 @@ public class TopBar extends BorderPane {
 		showHideSideBar.setOnAction(a -> {
 			Main.bottomBar.getShowHideSideBar().setSelected(!Main.bottomBar.getShowHideSideBar().isSelected());
 		});
-		
-		//chooseBackground
-		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
-		
-		//resetBackground
-		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 	}
 	
 	/**

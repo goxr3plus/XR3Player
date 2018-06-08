@@ -243,7 +243,7 @@
                                                                   <Insets left="5.0" right="5.0" />
                                                                </StackPane.margin>
                                                                <graphic>
-                                                                  <FontIcon fx:id="visualizerEyeIcon1" iconColor="#ff4d00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                  <FontIcon iconColor="#ff4d00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                                </graphic>
                                                                <tooltip>
                                                                   <Tooltip text="Click to make visualizer visible again " />
@@ -637,7 +637,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="24" selectionEnd="0" selectionStart="0" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="20" selectionEnd="0" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
                               <Insets bottom="5.0" />
@@ -654,7 +654,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="gmi-volume-mute" iconSize="24" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
+                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="20" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
                               <Insets top="8.0" />

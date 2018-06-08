@@ -46,7 +46,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
@@ -64,6 +63,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.UsersInfoLoader;
+import main.java.com.goxr3plus.xr3player.application.presenter.CloseAppBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
@@ -101,31 +101,10 @@ public class LoginMode extends BorderPane {
 	private Label gitHubDownloadsLabel;
 	
 	@FXML
+	private BorderPane topBorderPane;
+	
+	@FXML
 	private Label xr3PlayerLabel;
-	
-	@FXML
-	private JFXButton donate;
-	
-	@FXML
-	private JFXButton about;
-	
-	@FXML
-	private MenuItem chooseBackground;
-	
-	@FXML
-	private MenuItem resetBackground;
-	
-	@FXML
-	private JFXButton restartButton;
-	
-	@FXML
-	private JFXButton minimize;
-	
-	@FXML
-	private JFXButton maxOrNormalize;
-	
-	@FXML
-	private JFXButton exitApplication;
 	
 	@FXML
 	private StackPane centerStackPane;
@@ -394,26 +373,8 @@ public class LoginMode extends BorderPane {
 		//deleteUser.disableProperty().bind(newUser.visibleProperty())
 		deleteUser.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(deleteUser));
 		
-		// restartButton
-		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Restart", "Soore you want to restart the application?", restartButton, Main.window))
-				Main.restartTheApplication(true);
-		});
-		
-		// minimize
-		minimize.setOnAction(ac -> Main.window.setIconified(true));
-		
-		// maximize_normalize
-		maxOrNormalize.setOnAction(ac -> Main.borderlessScene.maximizeStage());
-		
-		//exitButton
-		exitApplication.setOnAction(a -> Main.confirmApplicationExit());
-		
-		//donate
-		donate.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
-		
-		// about
-		about.setOnAction(a -> Main.aboutWindow.show());
+		//topBorderPane
+		topBorderPane.setRight(new CloseAppBox());
 		
 		// previous
 		previous.setOnAction(a -> teamViewer.previous());
@@ -461,12 +422,6 @@ public class LoginMode extends BorderPane {
 			//Set the style
 			this.teamViewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
 		});
-		
-		//chooseBackground
-		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
-		
-		//resetBackground
-		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
 	}
 	
 	/**

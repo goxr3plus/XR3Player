@@ -289,6 +289,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
+		// --------Window---------
+		window = primaryStage;
+		final int screenMinWidth = 800 , screenMinHeight = 600;
+		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
+		
 		//----------------START: The below have not dependencies on other ---------------------------------//
 		
 		welcomeScreen = new WelcomeScreen();
@@ -412,7 +417,6 @@ public class Main extends Application {
 		Platform.setImplicitExit(false);
 		
 		// --------Window---------
-		window = primaryStage;
 		window.setTitle("XR3Player V." + internalInformation.get("Version"));
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
@@ -426,9 +430,7 @@ public class Main extends Application {
 			exit.consume();
 		});
 		
-		// Create BorderlessScene 
-		final int screenMinWidth = 800 , screenMinHeight = 600;
-		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
+		// Borderless Scene
 		borderlessScene.setMoveControl(loginMode.getXr3PlayerLabel());
 		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");

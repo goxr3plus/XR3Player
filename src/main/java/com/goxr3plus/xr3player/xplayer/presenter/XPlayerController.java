@@ -191,9 +191,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private JFXButton visualizerVisibleLabel;
 	
 	@FXML
-	private FontIcon visualizerEyeIcon1;
-	
-	@FXML
 	private FlowPane visualizerMaximizedBox;
 	
 	@FXML

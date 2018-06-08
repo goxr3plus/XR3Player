@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root maxWidth="-Infinity" minWidth="-Infinity" prefWidth="406.0" style="-fx-background-color: #050505;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -48,16 +49,12 @@
                      </cursor>
                   </Button>
                   <Button fx:id="dislike" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/dislike.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-down" iconSize="20" />
+                     </graphic>
                   </Button>
                   <Button fx:id="neutral" layoutX="70.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
                      <graphic>
@@ -72,28 +69,20 @@
                      </cursor>
                   </Button>
                   <Button fx:id="like" layoutX="52.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/like.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="20" />
+                     </graphic>
                   </Button>
                   <Button fx:id="love" layoutX="33.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true" translateY="1.0">
-                           <image>
-                              <Image url="@../image/love.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="24" />
+                     </graphic>
                   </Button>
                </children>
             </HBox>
