@@ -16,7 +16,7 @@
          <center>
             <StackPane fx:id="innerStackPane" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" pickOnBounds="true" />
                   <Label fx:id="notificationLabel" alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="No album image">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fa-image" iconSize="200" />
@@ -40,7 +40,7 @@
                   </Button>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="5.0" top="10.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </BorderPane.margin>
             </HBox>
          </bottom>
