@@ -18,7 +18,7 @@
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
-> New in Update 107 ( Players User Interface redesign )
+> New in Update 108 ( Huge User Interface Improvements and Bug Fixes )
 
 ![screenshot1205](https://user-images.githubusercontent.com/20374208/40893545-9baaadc4-67aa-11e8-80c0-6ff72256591e.png)
 
@@ -28,11 +28,11 @@
 
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/39787545-8e9887cc-532e-11e8-928d-88bfed16feef.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39787543-8dea1142-532e-11e8-8243-492308a77a55.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/41197020-b5dfe3be-6c58-11e8-87b6-6f592b04bc36.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41197021-b603de54-6c58-11e8-8955-689d79753eb0.jpg) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/39787544-8e5cf496-532e-11e8-99dd-a994ad968b0e.png) | ![Sec](https://user-images.githubusercontent.com/20374208/39950026-51ea6a10-5587-11e8-8dd0-ac42098da6c9.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/41197022-b62635da-6c58-11e8-9988-93acdfb24422.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41197023-b64870aa-6c58-11e8-90c4-cb884d3a174a.jpg) |
 
 ### Videos
 
