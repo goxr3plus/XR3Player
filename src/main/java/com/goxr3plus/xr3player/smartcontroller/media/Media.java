@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -45,7 +46,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
 public abstract class Media {
 	
 	/** The media type. */
-	private SimpleObjectProperty<ImageView> artwork;
+	private SimpleObjectProperty<StackedFontIcon> artwork;
 	
 	/** The title. */
 	private SimpleStringProperty title;
@@ -190,9 +191,7 @@ public abstract class Media {
 	/** The image to be shown when the Media has been already Played */
 	public static final Image PLAYING_IMAGE2 = InfoTool.getImageFromResourcesFolder("compact-disc2.png");
 	
-
-	
-	public static final Image NO_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
+	//public static final Image NO_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
 	
 	/** The genre. */
 	private final Genre smartControllerGenre;
@@ -215,13 +214,23 @@ public abstract class Media {
 	 */
 	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre smartControllerGenre, int number) {
 		
-		// ....initialize
-		mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
-		ImageView artworkImageView = new ImageView();
-		artworkImageView.setFitWidth(30);
-		artworkImageView.setFitHeight(30);
-		artwork = new SimpleObjectProperty<>(artworkImageView);
-		playStatus = new SimpleIntegerProperty(-2);
+		//ArtWork FontIcon
+		FontIcon artWorkImage = new FontIcon("fa-file-image-o");
+		artWorkImage.setIconSize(30);
+		artWorkImage.setIconColor(Color.WHITE);
+		
+		//ArtWork ImageView
+		ImageView artWorkImageView = new ImageView();
+		artWorkImageView.setFitWidth(30);
+		artWorkImageView.setFitHeight(30);
+		artWorkImageView.visibleProperty().bind(artWorkImageView.imageProperty().isNotNull());
+		
+		//StackedFontIcon
+		StackedFontIcon artWorkStack = new StackedFontIcon();
+		artWorkStack.getChildren().addAll(artWorkImage, artWorkImageView);
+		
+		//ArtWork object
+		artwork = new SimpleObjectProperty<>(artWorkStack);
 		
 		//Download
 		FontIcon downloadIcon = new FontIcon("fas-cloud-download-alt");
@@ -262,6 +271,8 @@ public abstract class Media {
 		likeDislikeNeutral = new SimpleObjectProperty<>(button);
 		//----------
 		
+		this.mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
+		this.playStatus = new SimpleIntegerProperty(-2);
 		this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
 		this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
 		this.filePath = new SimpleStringProperty(path);
@@ -391,7 +402,7 @@ public abstract class Media {
 		return mediaType;
 	}
 	
-	public SimpleObjectProperty<ImageView> artworkProperty() {
+	public SimpleObjectProperty<StackedFontIcon> artworkProperty() {
 		return artwork;
 	}
 	
@@ -1065,7 +1076,7 @@ public abstract class Media {
 					//Add it the one of the emotions list
 					Main.emotionListsController.makeEmotionDecisition(Media.this.getFilePath(), Main.emotionsWindow.getEmotion())).start();
 					
-					//System.out.println(Main.emotionsWindow.getEmotion());
+					//System.out.println(Main.emotionsWindow.getEmotion())
 					
 				}
 			}

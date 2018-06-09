@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.fxmisc.easybind.EasyBind;
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
@@ -61,7 +62,7 @@ public class MediaTableViewer extends StackPane {
 	private TableColumn<Media,Integer> number;
 	
 	@FXML
-	private TableColumn<Media,ImageView> artwork;
+	private TableColumn<Media,StackedFontIcon> artwork;
 	
 	/** The has been played. */
 	@FXML
@@ -487,10 +488,12 @@ public class MediaTableViewer extends StackPane {
 		
 		//artwork
 		artwork.setCellValueFactory(new PropertyValueFactory<>("artwork"));
-		artwork.setComparator((imageView1 , imageView2) -> {
-			if (imageView1.getImage() == Media.NO_ARTWORK_IMAGE && imageView2.getImage() != Media.NO_ARTWORK_IMAGE)
+		artwork.setComparator((stackedFontIcon1 , stackedFontIcon2) -> {
+			ImageView imageView1 = (ImageView) stackedFontIcon1.getChildren().get(1);
+			ImageView imageView2 = (ImageView) stackedFontIcon2.getChildren().get(1);
+			if (imageView1.getImage() == null && imageView2.getImage() != null)
 				return 1;
-			else if (imageView1.getImage() != Media.NO_ARTWORK_IMAGE && imageView2.getImage() == Media.NO_ARTWORK_IMAGE)
+			else if (imageView1.getImage() != null && imageView2.getImage() == null)
 				return 0;
 			else
 				return -1;
@@ -788,7 +791,7 @@ public class MediaTableViewer extends StackPane {
 	/**
 	 * @return the artwork
 	 */
-	public TableColumn<Media,ImageView> getArtworkColumn() {
+	public TableColumn<Media,StackedFontIcon> getArtworkColumn() {
 		return artwork;
 	}
 	

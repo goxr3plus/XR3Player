@@ -11,6 +11,7 @@ import org.jaudiotagger.tag.id3.ID3v24Tag;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaTableViewer;
 
@@ -40,7 +41,7 @@ public class AllDetailsService extends Service<Boolean> {
 	public AllDetailsService() {
 		
 		setOnSucceeded(s -> mediaTableViewer.sortTable());
-		setOnFailed(f-> mediaTableViewer.sortTable());
+		setOnFailed(f -> mediaTableViewer.sortTable());
 	}
 	
 	/**
@@ -363,11 +364,11 @@ public class AllDetailsService extends Service<Boolean> {
 						
 						try {
 							Image image = media.getAlbumImage();
-							//Check if null
-							if (image == null) {
-								image = Media.NO_ARTWORK_IMAGE;
-							}
-							media.artworkProperty().get().setImage(image);
+//							//Check if null
+//							if (image == null) {
+//								image = Media.NO_ARTWORK_IMAGE;
+//							}
+							( (ImageView) media.artworkProperty().get().getChildren().get(1) ).setImage(image);
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
