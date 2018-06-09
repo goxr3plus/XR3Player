@@ -800,7 +800,7 @@ public class Main extends Application {
 			//Start these important Threads
 			//new MediaUpdaterService().start();
 			//new XPlayersFilterService().start()
-			//webBrowser.startChromiumUpdaterService();
+			webBrowser.startChromiumUpdaterService();
 			
 			//-----Bottom Bar Threads----------
 			bottomBar.startInternetCheckingThread();

@@ -23,8 +23,8 @@ import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefi
  */
 public class ChromiumUpdaterService {
 	
-	public static final Image mutedImage = InfoTool.getImageFromResourcesFolder("speakerMuted.png");
-	public static final Image unMutedImage = InfoTool.getImageFromResourcesFolder("speaker.png");
+	//public static final Image mutedImage = InfoTool.getImageFromResourcesFolder("speakerMuted.png");
+	//public static final Image unMutedImage = InfoTool.getImageFromResourcesFolder("speaker.png");
 	
 	/**
 	 * The name of the running Thread/s
@@ -104,29 +104,39 @@ public class ChromiumUpdaterService {
 		webBrowserController.getTabPane().getTabs().forEach(tab -> {
 			WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
 			
-			//Is Audio Playing?
-			if (tabController.getBrowser().isAudioPlaying()) {
-				int width = 32;
-				int height = 25;
-				tabController.getAudioButton().setMinSize(width, height);
-				tabController.getAudioButton().setPrefSize(width, height);
-				tabController.getAudioButton().setMaxSize(width, height);
-				tabController.getAudioButton().setVisible(true);
+			try {
 				
-				//Is Audio Muted or Unmuted?
-				( (ImageView) tabController.getAudioButton().getGraphic() ).setImage(tabController.getBrowser().isAudioMuted() ? mutedImage : unMutedImage);
-			} else {
-				int maxSize = 0;
-				tabController.getAudioButton().setMinSize(maxSize, maxSize);
-				tabController.getAudioButton().setPrefSize(maxSize, maxSize);
-				tabController.getAudioButton().setMaxSize(maxSize, maxSize);
-				tabController.getAudioButton().setVisible(false);
+				//Is Audio Playing?
+				if (tabController.getBrowser().isAudioPlaying()) {
+					int width = 32;
+					int height = 25;
+					tabController.getAudioButton().setMinSize(width, height);
+					tabController.getAudioButton().setPrefSize(width, height);
+					tabController.getAudioButton().setMaxSize(width, height);
+					tabController.getAudioButton().setVisible(true);
+					
+					//Is Audio Muted or unmuted?
+					if (tabController.getBrowser().isAudioMuted()) {
+						tabController.mutedImage.setVisible(true);
+						tabController.unmutedImage.setVisible(false);
+					} else {
+						tabController.mutedImage.setVisible(false);
+						tabController.unmutedImage.setVisible(true);
+					}
+				} else {
+					int maxSize = 0;
+					tabController.getAudioButton().setMinSize(maxSize, maxSize);
+					tabController.getAudioButton().setPrefSize(maxSize, maxSize);
+					tabController.getAudioButton().setMaxSize(maxSize, maxSize);
+					tabController.getAudioButton().setVisible(false);
+				}
+				
+				//Site is Loading
+				tabController.getProgressIndicatorStackPane().setManaged(tabController.getBrowser().isLoading());
+				tabController.getProgressIndicatorStackPane().setVisible(tabController.getBrowser().isLoading());
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
-			
-			//Site is Loading
-			tabController.getProgressIndicatorStackPane().setManaged(tabController.getBrowser().isLoading());
-			tabController.getProgressIndicatorStackPane().setVisible(tabController.getBrowser().isLoading());
-			
 		});
 	}
 	

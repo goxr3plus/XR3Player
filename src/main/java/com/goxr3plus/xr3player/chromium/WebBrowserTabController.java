@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.validator.routines.UrlValidator;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
 import com.teamdev.jxbrowser.chromium.Browser;
@@ -61,6 +63,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -147,6 +150,10 @@ public class WebBrowserTabController extends StackPane {
 	private JFXButton audioButton;
 	private StackPane progressIndicatorStackPane;
 	private ProgressIndicator progressIndicator;
+	
+	public StackedFontIcon soundStack;
+	public final FontIcon mutedImage = new FontIcon("gmi-volume-off");
+	public final FontIcon unmutedImage = new FontIcon("fas-volume-up");
 	
 	/**
 	 * Constructor
@@ -408,18 +415,21 @@ public class WebBrowserTabController extends StackPane {
 			audioButton.setVisible(false);
 			audioButton.setFocusTraversable(false);
 			audioButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-			ImageView imageView = new ImageView(ChromiumUpdaterService.unMutedImage);
-			imageView.setFitWidth(20);
-			imageView.setFitHeight(20);
-			imageView.setSmooth(true);
-			imageView.setPreserveRatio(false);
-			audioButton.setGraphic(imageView);
+			
+			soundStack = new StackedFontIcon();
+			mutedImage.setIconSize(24);
+			mutedImage.setIconColor(Color.WHITE);
+			unmutedImage.setIconSize(20);
+			unmutedImage.setIconColor(Color.WHITE);
+			soundStack.getChildren().addAll(mutedImage, unmutedImage);
+			
 			maxSize = 0;
 			audioButton.setMinSize(maxSize, maxSize);
 			audioButton.setPrefSize(maxSize, maxSize);
 			audioButton.setMaxSize(maxSize, maxSize);
 			audioButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
 			audioButton.setOnAction(a -> browser.setAudioMuted(!browser.isAudioMuted()));
+			audioButton.setGraphic(soundStack);
 			
 			// HBOX
 			HBox hBox = new HBox();
