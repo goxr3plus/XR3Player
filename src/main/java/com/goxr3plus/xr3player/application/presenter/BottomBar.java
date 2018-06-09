@@ -72,7 +72,7 @@ public class BottomBar extends BorderPane {
 	
 	private int minutes = -1;
 	
-
+	private boolean internetPreviousStatus = false;
 	
 	/**
 	 * Constructor.
@@ -95,29 +95,31 @@ public class BottomBar extends BorderPane {
 	/**
 	 * Starts a Thread that continuously checks for internet connection
 	 */
-	private void startInternetCheckingThread() {
+	public void startInternetCheckingThread() {
 		
 		if (internetConnectionThread != null)
 			return;
 		
-		//Initialise
+		//Initialize
 		internetConnectionThread = new Thread(() -> {
+			boolean[] newStatus = { false };
+			//Just to update the image for the firstTime
+			boolean firstHack = true;
 			
 			//Run Forever
 			while (true) {
 				
+				newStatus[0] = InfoTool.isReachableByPing("www.google.com");
+				
 				//Try to connect
-				if (InfoTool.isReachableByPing("www.google.com")) {
+				if (newStatus[0] != internetPreviousStatus || firstHack)
 					Platform.runLater(() -> {
-						internetConnectionLabel.setDisable(false);
-						internetConnectionDescriptionLabel.setText("Connected");
+						internetConnectionLabel.setDisable(!newStatus[0]);
+						internetConnectionDescriptionLabel.setText(newStatus[0] ? "Connected" : "Disconnected");
 					});
-				} else {
-					Platform.runLater(() -> {
-						internetConnectionLabel.setDisable(true);
-						internetConnectionDescriptionLabel.setText("Disconnected");
-					});
-				}
+				
+				internetPreviousStatus = newStatus[0];
+				firstHack = false;
 				
 				//Sleep sometime [ Don't lag the CPU]
 				try {
@@ -136,20 +138,19 @@ public class BottomBar extends BorderPane {
 	/**
 	 * Starts a Thread that is checking the current System Time and the application running Time
 	 */
-	private void startTimingThread() {
+	public void startAppRunningTimeThread() {
 		
 		if (timeThread != null)
 			return;
 		
-		//Initialise
+		//Initialize
 		timeThread = new Thread(() -> {
 			
 			//Run Forever
 			while (true) {
 				
 				Platform.runLater(() -> {
-					String currentTimeme = LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a"));
-					currentTimeLabel.setText(currentTimeme);
+					currentTimeLabel.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a")));
 					runningTimeLabel.setText(++minutes + ( minutes == 1 ? " minute" : " minutes" ));
 				});
 				
@@ -180,15 +181,8 @@ public class BottomBar extends BorderPane {
 		//SpeechRecognitionToggle
 		speechRecognitionToggle.setOnAction(a -> Main.consoleWindow.showWindow(ConsoleTab.SPEECH_RECOGNITION));
 		
-		//Start the Threads
-		startInternetCheckingThread();
-		startTimingThread();
-		
 		//showHideSideBar
 		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> Main.sideBar.toogleBar());
-		
-		// -- searchField
-		//searchField.setOnMouseReleased(m -> Main.playListModesTabPane.selectTab(2))
 		
 	}
 	

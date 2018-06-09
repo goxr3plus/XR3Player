@@ -17,10 +17,12 @@ import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -29,9 +31,6 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import javafx.scene.image.Image;
-import javafx.collections.ObservableList;
-import com.teamdev.jxbrowser.chromium.CacheStorage;
 
 /**
  * Opens a browser inside the application for DropBox Authentication Process
