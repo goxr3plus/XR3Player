@@ -2022,7 +2022,7 @@
 
 
 .toggle-button3,.jfx-menu-button2,.jfx-button4{
-    -fx-background-color:rgb(20,20,20);
+    -fx-background-color:rgb(20.0,20.0,20.0);
     -fx-text-fill:white;
     -fx-background-radius: 0.0px;
     -fx-background-insets: 0.0px;
@@ -2038,7 +2038,11 @@
 *
 */
 
-.toggle-button3:hover,.jfx-button4:hover{
+.toggle-button3:hover{
+	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
+}
+
+.jfx-button4:hover{
 	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
 }
 

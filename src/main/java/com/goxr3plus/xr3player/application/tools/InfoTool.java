@@ -60,7 +60,7 @@ public final class InfoTool {
 	public static final String WEBSITE_URL = "http://goxr3plus.co.nf";
 	
 	/** WebSite url */
-	public static final String GITHUB_URL = "http://goxr3plus.co.nf";
+	public static final String GITHUB_URL = "https://github.com/goxr3plus/XR3Player";
 	
 	/** XR3Player Tutorials */
 	public static final String TUTORIALS = "https://www.youtube.com/playlist?list=PL-xqaiRUr_iRKDkpFWPfSRFmJvHSr1VJI";
