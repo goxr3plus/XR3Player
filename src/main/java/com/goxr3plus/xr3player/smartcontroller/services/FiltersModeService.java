@@ -231,7 +231,7 @@ public class FiltersModeService extends Service<Void> {
 							int counter = 0;
 							// Fetch the items from the database
 							while (resultSet.next()) {
-							//	System.out.println("Is cancelled :?" + isCancelled());
+								//	System.out.println("Is cancelled :?" + isCancelled());
 								if (!smartController.filtersModeSelected || isCancelled())
 									break;
 								else {
@@ -265,66 +265,69 @@ public class FiltersModeService extends Service<Void> {
 						
 					}
 					
-					if (operation == Operation.REFRESH) {
-						//For each item on set
-						set.remove("");
-						ObservableList<String> observableList = set.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
-						Platform.runLater(() -> {
-							
-							//Details Label text
-							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
-								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
-								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-							} else if (observableList.isEmpty()) {
-								smartControllerArtistsMode.getNothingFoundLabel().setVisible(true);
-							} else {
-								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
-								smartControllerArtistsMode.getNothingFoundLabel().setVisible(false);
-							}
-							
-							//Set list view items
-							smartControllerArtistsMode.getListView().setItems(observableList);
-							if (!observableList.isEmpty())
-								smartControllerArtistsMode.getListView().getSelectionModel().select(0);
-							else
-								//Empty the TableView
-								smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
-						});
-					} else if (operation == Operation.UPDATE_TABLE_VIEW) {
-						//For each item on set
-						ObservableList<Media> observableList = matchingMediaList.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
-						Platform.runLater(() -> {
-							
-							//Details Label text
-							if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
-								smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
-								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-								//							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
-								//								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
-								//								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-							} else {
-								smartControllerArtistsMode.getDetailsLabel().setVisible(false);
-							}
-							
-							//Check if any songs are containing this artist
-							if (!observableList.isEmpty()) {
+					if (!smartController.filtersModeSelected || isCancelled()) {
+						
+						if (operation == Operation.REFRESH) {
+							//For each item on set
+							set.remove("");
+							ObservableList<String> observableList = set.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
+							Platform.runLater(() -> {
 								
-								//Set list view items					
-								smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
-								smartControllerArtistsMode.getSmartController().updateLabel();
+								//Details Label text
+								if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
+									smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
+									smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+								} else if (observableList.isEmpty()) {
+									smartControllerArtistsMode.getNothingFoundLabel().setVisible(true);
+								} else {
+									smartControllerArtistsMode.getDetailsLabel().setVisible(false);
+									smartControllerArtistsMode.getNothingFoundLabel().setVisible(false);
+								}
 								
-								//Populate Media Information
-								allDetailsService.restartService(smartControllerArtistsMode.getMediaTableViewer());
-							} else {
+								//Set list view items
+								smartControllerArtistsMode.getListView().setItems(observableList);
+								if (!observableList.isEmpty())
+									smartControllerArtistsMode.getListView().getSelectionModel().select(0);
+								else
+									//Empty the TableView
+									smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
+							});
+						} else if (operation == Operation.UPDATE_TABLE_VIEW) {
+							//For each item on set
+							ObservableList<Media> observableList = matchingMediaList.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
+							Platform.runLater(() -> {
 								
-								//Remove the artist from the List
-								smartControllerArtistsMode.getListView().getItems().remove(filterValue);
+								//Details Label text
+								if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
+									smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
+									smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+									//							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
+									//								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+									//								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+								} else {
+									smartControllerArtistsMode.getDetailsLabel().setVisible(false);
+								}
 								
-								//Empty the TableView
-								smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
-							}
-							
-						});
+								//Check if any songs are containing this artist
+								if (!observableList.isEmpty()) {
+									
+									//Set list view items					
+									smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
+									smartControllerArtistsMode.getSmartController().updateLabel();
+									
+									//Populate Media Information
+									allDetailsService.restartService(smartControllerArtistsMode.getMediaTableViewer());
+								} else {
+									
+									//Remove the artist from the List
+									smartControllerArtistsMode.getListView().getItems().remove(filterValue);
+									
+									//Empty the TableView
+									smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
+								}
+								
+							});
+						}
 					}
 					
 				} catch (Exception ex) {

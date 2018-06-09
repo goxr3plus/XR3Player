@@ -99,7 +99,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
-import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayersFilterService;
 import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
@@ -798,7 +797,7 @@ public class Main extends Application {
 			
 			//Start these important Threads
 			new MediaUpdaterService().start();
-			new XPlayersFilterService().start();
+			//new XPlayersFilterService().start()
 			webBrowser.startChromiumUpdaterService();
 			
 			//---------------END:Important Work-----------------------------------------------------------

@@ -1638,8 +1638,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	@Override
 	public void statusUpdated(StreamPlayerEvent streamPlayerEvent) {
 		
+		//Player status
+		Status status = streamPlayerEvent.getPlayerStatus();
+		
 		// Status.OPENED
-		if (streamPlayerEvent.getPlayerStatus() == Status.OPENED && xPlayer.getSourceDataLine() != null) {
+		if (status == Status.OPENED && xPlayer.getSourceDataLine() != null) {
 			
 			visualizer.setupDSP(xPlayer.getSourceDataLine());
 			visualizer.startDSP(xPlayer.getSourceDataLine());
@@ -1661,7 +1664,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			});
 			
 			// Status.RESUMED			
-		} else if (streamPlayerEvent.getPlayerStatus() == Status.RESUMED) {
+		} else if (status == Status.RESUMED) {
 			
 			Platform.runLater(() -> {
 				//playerStatusLabel.setText("Resuming");
@@ -1673,9 +1676,12 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			});
 			
 			// Status.PLAYING
-		} else if (streamPlayerEvent.getPlayerStatus() == Status.PLAYING) {
+		} else if (status == Status.PLAYING) {
 			
-			Platform.runLater(this::resumeCode);
+			Platform.runLater(() -> {
+				resumeCode();
+				
+			});
 			
 			// Status.PAUSED
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
@@ -1690,7 +1696,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			});
 			
 			// Status.STOPPED
-		} else if (streamPlayerEvent.getPlayerStatus() == Status.STOPPED) {
+		} else if (status == Status.STOPPED) {
 			
 			visualizer.stopDSP();
 			
@@ -1731,14 +1737,26 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			});
 			
 			// Status.SEEKING
-		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKING) {
+		} else if (status == Status.SEEKING) {
 			
 			//Platform.runLater(() -> playerStatusLabel.setText("Status : "+" Seeking"));
 			
 			// Status.SEEKED
-		} else if (streamPlayerEvent.getPlayerStatus() == Status.SEEKED) {
+		} else if (status == Status.SEEKED) {
 			//TODO i need to add code here
 		}
+		
+		System.out.println(streamPlayerEvent.getPlayerStatus());
+		
+		//Fix the images
+		if (status == Status.STOPPED || status == Status.RESUMED || status == Status.PLAYING)
+			Platform.runLater(() -> {
+				//Advanced Mode
+				( (ImageView) getPlayPauseButton().getGraphic() ).setImage(getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+				
+				//SmMode
+				( (ImageView) getSmPlayPauseButton().getGraphic() ).setImage(getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+			});
 	}
 	
 	/**

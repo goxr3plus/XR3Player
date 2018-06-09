@@ -61,7 +61,7 @@ public class StreamPlayerEventLauncher implements Callable<String> {
      * @param listeners
      *            the listeners
      */
-    public StreamPlayerEventLauncher(Object source, Status playerStatus, int encodedStreamPosition, Object description,
+    private StreamPlayerEventLauncher(Object source, Status playerStatus, int encodedStreamPosition, Object description,
 	    List<StreamPlayerListener> listeners) {
 	this.source = source;
 	this.playerState = playerStatus;

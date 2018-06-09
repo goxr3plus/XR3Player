@@ -141,8 +141,15 @@ public class MediaUpdaterService {
 						}
 						return false;
 					})
-					//Map the filtered XPlayerControllers
-					.map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController()).forEach(controller -> {
+					
+					//For each
+					.forEach(xPlayerController -> {
+						
+						//Fix the emotion image
+						xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
+						
+						//Find the smartController
+						SmartController controller = xPlayerController.getxPlayerPlayList().getSmartController();
 						
 						//Normal Mode  
 						if (controller.getNormalModeTab().isSelected())
