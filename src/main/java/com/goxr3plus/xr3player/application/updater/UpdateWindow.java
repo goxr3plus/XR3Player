@@ -105,7 +105,6 @@ public class UpdateWindow extends StackPane {
 	private final VirtualizedScrollPane<InlineCssTextArea> upcomingFeaturesVirtualPane = new VirtualizedScrollPane<>(upcomingFeaturesTextArea);
 	private final VirtualizedScrollPane<InlineCssTextArea> knownBugsVirtualPane = new VirtualizedScrollPane<>(knownBugsTextArea);
 	
-	
 	private final String style = "-fx-font-weight:bold; -fx-font-size:14; -fx-fill:white;  -rtfx-background-color:transparent;";
 	
 	/**
@@ -172,7 +171,7 @@ public class UpdateWindow extends StackPane {
 		knownBugsContainer.setCenter(knownBugsVirtualPane);
 		
 		// -- GitHub
-		viewOnGithub.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player"));
+		viewOnGithub.setOnAction(a -> ActionTool.openWebSite(InfoTool.GITHUB_URL));
 		
 		// -- automaticUpdate
 		automaticUpdate.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/releases/latest"));

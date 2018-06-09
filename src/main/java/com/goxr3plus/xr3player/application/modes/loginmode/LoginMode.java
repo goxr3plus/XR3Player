@@ -387,7 +387,7 @@ public class LoginMode extends BorderPane {
 		teamViewer.toBack();
 		
 		//visitCreatorHyperLink
-		visitCreatorHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE));
+		visitCreatorHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE_URL));
 		
 		//youtubeTutorialsHyperLink
 		youtubeTutorialsHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.TUTORIALS));

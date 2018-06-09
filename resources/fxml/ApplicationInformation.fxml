@@ -9,10 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root prefHeight="462.0" prefWidth="530.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <Label fx:id="topLabel" alignment="CENTER" graphicTextGap="10.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 19;" text="XR3Player ( The Great )" BorderPane.alignment="CENTER">
+      <Label fx:id="topLabel" alignment="CENTER" graphicTextGap="10.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 19;" text="XR3Player ( The absolute ! )" BorderPane.alignment="CENTER">
          <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,31 +29,24 @@
             <InlineCssTextArea fx:id="cssTextArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="495.0" styleClass="dark-text-area" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" maxHeight="35.0" spacing="10.0">
                <children>
+                  <JFXButton fx:id="visitGithub" focusTraversable="false" layoutX="228.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Github">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fab-github" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="visitWebsite" focusTraversable="false" layoutX="366.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Website">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-globe" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="reportBug" focusTraversable="false" layoutX="414.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Bug Reports">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/bug.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-bug" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="visitWebsite" focusTraversable="false" layoutX="366.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Vist Website">
+                  <JFXButton fx:id="close" focusTraversable="false" layoutX="410.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Close">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/GitHub-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="close" focusTraversable="false" layoutX="410.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Close">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/x-button.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                      </graphic>
                   </JFXButton>
                </children>

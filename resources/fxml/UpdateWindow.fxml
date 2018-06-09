@@ -8,10 +8,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -19,40 +18,28 @@
          <bottom>
             <StackPane prefHeight="55.0" style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308" text="Close" StackPane.alignment="CENTER_RIGHT">
+                  <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Close" StackPane.alignment="CENTER_RIGHT">
                      <tooltip>
                         <Tooltip text="Close the Window" />
                      </tooltip>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/x.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="viewOnGithub" focusTraversable="false" layoutX="682.0" layoutY="11.0" maxHeight="1.7976931348623157E308" text="GitHub Page" StackPane.alignment="CENTER_LEFT">
+                  <JFXButton fx:id="viewOnGithub" focusTraversable="false" layoutX="682.0" layoutY="11.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="GitHub Page" StackPane.alignment="CENTER_LEFT">
                      <tooltip>
                         <Tooltip text="View XR3Player on Github" />
                      </tooltip>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/GitHub-32.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fab-github" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" text="Download latest update">
+                  <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Download latest update">
                      <tooltip>
                         <Tooltip text="Download the latest XR3Player Version" />
                      </tooltip>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Installing%20Updates-32.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#91ff5a" iconLiteral="fas-cloud-download-alt" iconSize="32" />
                      </graphic>
                   </JFXButton>
                </children>
@@ -72,11 +59,7 @@
                         <BorderPane fx:id="whatsNewContainer" />
                      </content>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/balloons.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-bullhorn" iconSize="24" />
                      </graphic>
                   </Tab>
                   <Tab fx:id="upcomingFeaturesTab" closable="false" styleClass="sTab" text="Upcoming Features">
@@ -84,11 +67,7 @@
                         <BorderPane fx:id="upcomingFeaturesContainer" />
                      </content>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/flask.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#32d3d9" iconLiteral="fas-flask" iconSize="24" />
                      </graphic>
                   </Tab>
                   <Tab fx:id="knowBugsTab" closable="false" styleClass="sTab" text="Known Bugs">
@@ -96,11 +75,7 @@
                         <BorderPane fx:id="knownBugsContainer" />
                      </content>
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/bug.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#f24d4d" iconLiteral="fas-bug" iconSize="24" />
                      </graphic>
                   </Tab>
                   <Tab fx:id="releasesHistoryTab" closable="false" disable="true" styleClass="sTab">
@@ -116,7 +91,7 @@
             </JFXTabPane>
          </center>
          <top>
-            <Label fx:id="topLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="46.0" style="-fx-font-size: 15;" styleClass="applicationSettingsLabel2" text="Top Bar  " BorderPane.alignment="CENTER">
+            <Label fx:id="topLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="46.0" style="-fx-font-size: 15; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Bar" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="5.0" />
                </BorderPane.margin>

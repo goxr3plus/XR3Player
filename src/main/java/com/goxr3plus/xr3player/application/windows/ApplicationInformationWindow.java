@@ -42,10 +42,13 @@ public class ApplicationInformationWindow extends BorderPane {
 	private InlineCssTextArea cssTextArea;
 	
 	@FXML
-	private JFXButton reportBug;
+	private JFXButton visitGithub;
 	
 	@FXML
 	private JFXButton visitWebsite;
+	
+	@FXML
+	private JFXButton reportBug;
 	
 	@FXML
 	private JFXButton close;
@@ -187,7 +190,10 @@ public class ApplicationInformationWindow extends BorderPane {
 		close.setOnAction(a -> window.close());
 		
 		// --visitWebsite
-		visitWebsite.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE));
+		visitWebsite.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE_URL));
+		
+		// --visitGithub
+		visitGithub.setOnAction(a -> ActionTool.openWebSite(InfoTool.GITHUB_URL));
 		
 		// --reportBug
 		reportBug.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/issues"));
