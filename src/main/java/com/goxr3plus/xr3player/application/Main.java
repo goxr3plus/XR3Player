@@ -518,10 +518,10 @@ public class Main extends Application {
 		// ---------mediaSearchWindow ------------
 		mediaSearchWindow.registerListeners(window, topBar.getSearchField());
 		topBar.getSearchField().setOnMouseReleased(m -> mediaSearchWindow.recalculateAndshow(topBar.getSearchField()));
-//		topBar.getSearchField().focusedProperty().addListener(l -> {
-//			if (topBar.getSearchField().isFocused())
-//				mediaSearchWindow.recalculateAndshow(topBar.getSearchField());
-//		});
+		//		topBar.getSearchField().focusedProperty().addListener(l -> {
+		//			if (topBar.getSearchField().isFocused())
+		//				mediaSearchWindow.recalculateAndshow(topBar.getSearchField());
+		//		});
 		
 		// -------Root-----------
 		root.setVisible(false);
@@ -694,7 +694,8 @@ public class Main extends Application {
 	 *            The user selected to be logged in the application
 	 */
 	public static void startAppWithUser(User selectedUser) {
-		//SHUT THE FUCK UP BASTARD MOTHER FUCKER CANCER !!!!!!!!!!! WTF !!!!!!!  CANCERED THE CONSOLE CANCER!!!! JAUDIOTAGGER LOGGER
+		
+		//Close JAUDIOTAGGER LOGGER
 		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
@@ -802,18 +803,9 @@ public class Main extends Application {
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			
-			//This bitch doesn't work for some reason that i will find and smash his bitchy ass 
-			//bottomBar.getSearchField().setOnAction(a -> searchWindowSmartController.getSearchService().getSearchField().getOnAction());
-			
 			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
 			dbManager.loadApplicationDataBase();
 			
-			//---------------ROOT ----------------
-			//			root.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> {
-			//				xPlayersList.getList().forEach(xPlayerController -> {
-			//					xPlayerController.reCalculateDiscStackPane();
-			//				});
-			//			});
 		});
 		pause.playFromStart();
 	}
@@ -1036,6 +1028,7 @@ public class Main extends Application {
 		System.out.println("Cur Path :-> " + InfoTool.getBasePathForClass(Main.class));
 		
 		//Try to stop cancerous JAudioTagger Console
+		Logger.getGlobal().setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
 		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
