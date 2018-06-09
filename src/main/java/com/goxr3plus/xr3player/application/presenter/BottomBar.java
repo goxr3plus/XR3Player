@@ -145,12 +145,17 @@ public class BottomBar extends BorderPane {
 		
 		//Initialize
 		timeThread = new Thread(() -> {
+			String[] localTime = { "" };
 			
 			//Run Forever
 			while (true) {
 				
+				//Find local time
+				localTime[0] = LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a"));
+				
+				//Run on JavaFX Thread
 				Platform.runLater(() -> {
-					currentTimeLabel.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a")));
+					currentTimeLabel.setText(localTime[0]);
 					runningTimeLabel.setText(++minutes + ( minutes == 1 ? " minute" : " minutes" ));
 				});
 				
