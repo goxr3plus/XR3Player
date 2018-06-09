@@ -65,7 +65,7 @@ public class FiltersModeService extends Service<Void> {
 	 */
 	private int totalProgress;
 	
-	private final AllDetailsService allDetailsService;
+	private final MediaTagsService allDetailsService;
 	
 	/**
 	 * Constructor
@@ -74,7 +74,7 @@ public class FiltersModeService extends Service<Void> {
 	 */
 	public FiltersModeService(SmartControllerFiltersMode smartControllerArtistsMode) {
 		this.smartControllerArtistsMode = smartControllerArtistsMode;
-		this.allDetailsService = new AllDetailsService();
+		this.allDetailsService = new MediaTagsService();
 	}
 	
 	/**

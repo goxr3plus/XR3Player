@@ -28,7 +28,8 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
 import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
 
 /**
- * The Class FileFilterThread.
+ * This Service tries to keep all the playlists updated based on the database. For example let's say that you just opened a new library , the stars ,
+ * emotions etc of each media needs to be checked and updated every so for changes.
  */
 public class MediaUpdaterService {
 	
@@ -187,7 +188,7 @@ public class MediaUpdaterService {
 	private void filterController(SmartController controller , ObservableList<Media> observableList) {
 		
 		// Don't enter if controller is null
-		if (controller == null)
+		if (controller == null || observableList.isEmpty())
 			return;
 		
 		boolean[] controllerIsFree = { false };

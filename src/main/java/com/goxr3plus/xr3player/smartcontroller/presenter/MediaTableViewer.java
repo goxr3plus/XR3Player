@@ -45,7 +45,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMode;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.AllDetailsService;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaTagsService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
@@ -229,7 +229,7 @@ public class MediaTableViewer extends StackPane {
 	private final StringProperty searchWord = new SimpleStringProperty("");
 	
 	/** AllDetailsService */
-	private final AllDetailsService allDetailsService = new AllDetailsService();
+	private final MediaTagsService allDetailsService = new MediaTagsService();
 	
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
@@ -798,7 +798,7 @@ public class MediaTableViewer extends StackPane {
 	/**
 	 * @return the allDetailsService
 	 */
-	public AllDetailsService getAllDetailsService() {
+	public MediaTagsService getAllDetailsService() {
 		return allDetailsService;
 	}
 	

@@ -23,7 +23,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaTableVie
  * @author GOXR3PLUSSTUDIO
  *
  */
-public class AllDetailsService extends Service<Boolean> {
+public class MediaTagsService extends Service<Boolean> {
 	
 	/** MediaTableViewer instance reference */
 	private MediaTableViewer mediaTableViewer;
@@ -37,7 +37,7 @@ public class AllDetailsService extends Service<Boolean> {
 	/**
 	 * Constructor
 	 */
-	public AllDetailsService() {
+	public MediaTagsService() {
 		
 		setOnSucceeded(s -> mediaTableViewer.sortTable());
 		setOnFailed(f -> mediaTableViewer.sortTable());
