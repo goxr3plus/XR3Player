@@ -35,6 +35,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
@@ -52,9 +53,9 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
-import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFiltersMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFoldersMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
@@ -138,13 +139,13 @@ public class SmartController extends StackPane {
 	private Tab filtersModeTab;
 	
 	@FXML
-	private VBox indicatorVBox;
-	
-	@FXML
-	private ProgressIndicator indicator;
+	private VBox loadingVBox;
 	
 	@FXML
 	private Button cancelButton;
+	
+	@FXML
+	private ProgressBar loadingProgressBar;
 	
 	@FXML
 	private TextArea informationTextArea;
@@ -294,9 +295,9 @@ public class SmartController extends StackPane {
 		normal_mode_mediaTableViewer.toBack();
 		
 		// ------ progress indicator
-		indicator.setVisible(true);
+		loadingProgressBar.setVisible(true);
 		//indicator.visibleProperty().bind(region.visibleProperty())
-		indicatorVBox.setVisible(false);
+		loadingVBox.setVisible(false);
 		
 		// ------ cancel
 		cancelButton.hoverProperty().addListener((observable , oldValue , newValue) -> cancelButton.setText(cancelButton.isHover() ? "cancel" : previousCancelText));
@@ -632,7 +633,7 @@ public class SmartController extends StackPane {
 		// Controller
 		getIndicator().setProgress(-1);
 		getCancelButton().setText("Clearing...");
-		indicatorVBox.setVisible(true);
+		loadingVBox.setVisible(true);
 		
 		// New Thread
 		new Thread(() -> {
@@ -660,7 +661,7 @@ public class SmartController extends StackPane {
 				
 				//Make the Region Disappear in the fog of hell ououou
 				Platform.runLater(() -> {
-					indicatorVBox.setVisible(false);
+					loadingVBox.setVisible(false);
 					getCancelButton().setText("Cancel");
 				});
 				
@@ -678,7 +679,7 @@ public class SmartController extends StackPane {
 		//		Main.libraryMode.updateLibraryTotalLabel(controllerName);
 	}
 	
-	public static final String style1 = "-fx-font-weight:bold; -fx-font-size:13; -fx-fill:white;";
+	public static final String style1 = "-fx-font-weight:bold; -fx-font-size:13; -fx-fill:#FF9000;";
 	public static final String style2 = "-fx-font-weight:bold; -fx-font-size:13;  -fx-fill:white;";
 	public static final String style3 = "-fx-font-weight:bold; -fx-font-size:13;  -fx-fill:#00BBFF;";
 	public static final String style4 = "-fx-font-weight:bold; -fx-font-size:13;  -fx-fill:white;";
@@ -701,7 +702,7 @@ public class SmartController extends StackPane {
 		if (searchService.isActive() || genre == Genre.SEARCHWINDOW) {
 			
 			//Go
-			String found = "Found ";
+			String found = "Found : ";
 			String _found = String.valueOf(itemsObservableList.size());
 			
 			//Clear the text area
@@ -709,7 +710,7 @@ public class SmartController extends StackPane {
 			
 			//Now set the Text
 			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), found, _found, true, style3);
-			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), total, _total, true, style4);
+			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), total, _total, true, style1);
 			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), selected, _selected, true, style1);
 			appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), maxPerPage, _maxPerPage, false, style1);
 			
@@ -746,7 +747,7 @@ public class SmartController extends StackPane {
 				normal_mode_mediaTableViewer.getDetailCssTextArea().clear();
 				
 				//Now set the Text
-				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), total, _total, true, style4);
+				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), total, _total, true, style3);
 				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), selected, _selected, true, style1);
 				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), showing, _showing, true, style1);
 				appendToDetails(normal_mode_mediaTableViewer.getDetailCssTextArea(), maxPerPage, _maxPerPage, true, style1);
@@ -828,9 +829,9 @@ public class SmartController extends StackPane {
 	 * Unbind.
 	 */
 	public void unbind() {
-		indicatorVBox.visibleProperty().unbind();
-		indicatorVBox.setVisible(false);
-		indicator.progressProperty().unbind();
+		loadingVBox.visibleProperty().unbind();
+		loadingVBox.setVisible(false);
+		loadingProgressBar.progressProperty().unbind();
 	}
 	
 	/**
@@ -1111,8 +1112,8 @@ public class SmartController extends StackPane {
 	 *
 	 * @return the indicator
 	 */
-	public ProgressIndicator getIndicator() {
-		return indicator;
+	public ProgressBar getIndicator() {
+		return loadingProgressBar;
 	}
 	
 	/**
@@ -1232,7 +1233,7 @@ public class SmartController extends StackPane {
 	 * @return the indicatorVBox
 	 */
 	public VBox getIndicatorVBox() {
-		return indicatorVBox;
+		return loadingVBox;
 	}
 	
 	/**

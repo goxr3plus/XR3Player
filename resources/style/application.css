@@ -1330,13 +1330,17 @@
     -fx-padding: 0.2em;
 }
 
-.transparent-progress-bar:determinate .track{
+.transparent-progress-bar:determinate .track,.transparent-progress-bar:indeterminate .track{
 	-fx-background-color:rgb(0.0,0.0,0.0,0.5);
 }
+
   
-  .transparent-progress-bar > .bar{
+.transparent-progress-bar > .bar,.transparent-progress-bar:indeterminate .bar{
 	-fx-accent:firebrick;
 }
+
+
+
   
  /*******************************************************************************
 

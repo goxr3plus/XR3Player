@@ -11,12 +11,11 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -28,7 +27,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="411.0" prefWidth="666.0" styleClass="smartController" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="411.0" prefWidth="666.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTabPane fx:id="modesTabPane" side="RIGHT">
          <tabs>
@@ -232,7 +231,7 @@
             </Tab>
             <Tab fx:id="filtersModeTab" text="Filters">
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="24" />
+                  <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
                </graphic>
             </Tab>
          </tabs>
@@ -241,10 +240,9 @@
             <String fx:value="specialJFXTabPane" />
          </styleClass>
       </JFXTabPane>
-      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
+      <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
          <children>
-            <ProgressIndicator fx:id="indicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="617.0" progress="0.0" />
-            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-background-radius: 20; -fx-font-size: 18; -fx-font-weight: bold;" text="Cancel">
+            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-font-size: 18;" styleClass="jfx-button4" text="Cancel">
                <tooltip>
                   <Tooltip text="Cancel" />
                </tooltip>
@@ -252,11 +250,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TitledPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="487.0" text="More Info">
-               <content>
-                  <TextArea fx:id="informationTextArea" text="Normally this text should not appear ...." wrapText="true" />
-               </content>
-            </TitledPane>
+            <ProgressBar fx:id="loadingProgressBar" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" styleClass="transparent-progress-bar" />
+            <TextArea fx:id="informationTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="618.0" styleClass="dark-text-area" text="Normally this text should not appear ...." wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextArea>
          </children>
          <StackPane.margin>
             <Insets />
