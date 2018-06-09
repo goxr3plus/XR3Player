@@ -12,17 +12,13 @@ import java.lang.reflect.Modifier;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.Spliterator;
-import java.util.Spliterators;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.az;
@@ -1027,13 +1023,13 @@ public class Main extends Application {
 	 *            the arguments
 	 */
 	public static void main(String[] args) {
-		//Continue
-		//System.out.println("Hello from Main Method!");
 		
+		//Current Application Path
 		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
 		
 		//Stop JAudioTagger Logger Messages
 		LogManager.getLogManager().reset();
+		//System.out.println("Name : " + LogManager.getLogManager().getLoggerNames().nextElement());
 		//		while (LogManager.getLogManager().getLoggerNames().hasMoreElements()) {
 		//			
 		//			String param = (String) LogManager.getLogManager().getLoggerNames().nextElement();

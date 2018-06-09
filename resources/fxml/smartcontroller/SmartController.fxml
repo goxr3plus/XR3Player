@@ -236,7 +236,7 @@
                   <FontIcon iconColor="#ddaa33" iconLiteral="gmi-folder" iconSize="24" />
                </graphic>
             </Tab>
-            <Tab fx:id="filtersModeTab" text="Filters">
+            <Tab fx:id="filtersModeTab" text="Filter : Artists">
                <graphic>
                   <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
                </graphic>
