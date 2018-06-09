@@ -14,8 +14,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane>
          <children>
@@ -34,52 +35,40 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" style="-fx-background-color: #202020;">
+                  <HBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #202020;">
                      <children>
-                        <Button fx:id="settings" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/Settings-32.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="settings" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <tooltip>
                               <Tooltip text="settings" />
                            </tooltip>
-                        </Button>
-                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/refresh.png" />
-                                 </image>
-                              </ImageView>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
                            </graphic>
+                        </Button>
+                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <tooltip>
                               <Tooltip text="Refresh" />
                            </tooltip>
-                        </Button>
-                        <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/shrink.png" />
-                                 </image>
-                              </ImageView>
+                              <FontIcon iconColor="#32abe8" iconLiteral="fas-sync-alt" iconSize="20" />
                            </graphic>
+                        </Button>
+                        <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <tooltip>
                               <Tooltip text="Collapse All" />
                            </tooltip>
+                           <graphic>
+                              <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0" selectionStart="0" />
+                           </graphic>
                         </Button>
                      </children>
                   </HBox>

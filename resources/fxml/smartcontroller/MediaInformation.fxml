@@ -150,7 +150,7 @@
          <bottom>
             <Button fx:id="showMore" contentDisplay="RIGHT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Edit tags" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+                  <Insets left="5.0" right="5.0" />
                </BorderPane.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />

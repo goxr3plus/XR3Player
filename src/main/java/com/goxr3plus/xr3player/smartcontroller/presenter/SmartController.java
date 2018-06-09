@@ -678,10 +678,10 @@ public class SmartController extends StackPane {
 		//		Main.libraryMode.updateLibraryTotalLabel(controllerName);
 	}
 	
-	public static final String style1 = "-fx-font-weight:bold; -fx-font-size:13; -fx-fill:#FF9000;";
-	public static final String style2 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:white;";
-	public static final String style3 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:#00BBFF;";
-	public static final String style4 = "-fx-font-weight:400; -fx-font-size:13;  -fx-fill:#00E148;";
+	public static final String style1 = "-fx-font-weight:bold; -fx-font-size:13; -fx-fill:white;";
+	public static final String style2 = "-fx-font-weight:bold; -fx-font-size:13;  -fx-fill:white;";
+	public static final String style3 = "-fx-font-weight:bold; -fx-font-size:13;  -fx-fill:#00BBFF;";
+	public static final String style4 = "-fx-font-weight:bold; -fx-font-size:13;  -fx-fill:white;";
 	
 	/**
 	 * Updates the label of the smart controller. [[SuppressWarningsSpartan]]

@@ -154,6 +154,10 @@ public class FiltersModeService extends Service<Void> {
 				if (changeLabel)
 					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with Bit Rate [ " + filterValue + " ]");
 				break;
+			default:
+				filter = Filter.ARTIST;
+				if (changeLabel)
+					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from artist [ " + filterValue + " ]");
 		}
 	}
 	

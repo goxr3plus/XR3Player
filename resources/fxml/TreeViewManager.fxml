@@ -34,10 +34,10 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <tooltip>
-                        <Tooltip text="Collapse All" />
+                        <Tooltip text="Collapse Tree View" />
                      </tooltip>
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="far-minus-square" iconSize="23" />
+                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0" selectionStart="0" />
                      </graphic>
                   </Button>
                </children>
