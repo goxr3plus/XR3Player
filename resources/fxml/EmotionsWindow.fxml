@@ -77,7 +77,7 @@
             <Insets right="5.0" top="5.0" />
          </BorderPane.margin>
          <graphic>
-            <FontIcon iconColor="#d72d2d" iconLiteral="fas-times" iconSize="24" />
+            <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
          </graphic>
       </JFXButton>
    </right>
