@@ -177,7 +177,7 @@ public class FiltersModeService extends Service<Void> {
 					
 					//================Prepare based on the Files User want to Export=============
 					if (smartControllerArtistsMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
-						System.out.println("Entered for Search Window");
+						//System.out.println("Entered for Search Window");
 						
 						//Count total files that will be exported
 						totalProgress = smartControllerArtistsMode.getSmartController().getItemsObservableList().size();
@@ -337,7 +337,7 @@ public class FiltersModeService extends Service<Void> {
 			 * @return Return the artist of the given audio file (mp3) actually
 			 */
 			private String findTagFromAudioFile(File file , Media media) {
-				System.out.println(file.getName());
+				//System.out.println(file.getName());
 				
 				//Check file existence , length and extension
 				if (file.exists() && "mp3".equals(media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath())) && file.length() != 0) {

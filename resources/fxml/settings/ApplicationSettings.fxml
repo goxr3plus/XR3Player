@@ -26,13 +26,6 @@
                <tooltip>
                   <Tooltip text="Restore to default all the settings !" />
                </tooltip>
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                     <image>
-                        <Image url="@../../image/asc.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
             <JFXButton fx:id="doneButton" focusTraversable="false" maxHeight="1.7976931348623157E308" text="Close" StackPane.alignment="CENTER_RIGHT">
                <graphic>
@@ -46,15 +39,7 @@
                   <Tooltip text="Close the Window" />
                </tooltip>
             </JFXButton>
-            <MenuButton fx:id="copySettingsMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="35.0" text="Copy Settings from another User">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/team.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </MenuButton>
+            <MenuButton fx:id="copySettingsMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="35.0" text="Copy Settings from User" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -72,46 +57,11 @@
          <children>
             <JFXTabPane styleClass="specialJFXTabPane">
                <tabs>
-                  <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Tab>
-                <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/menu2.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Tab>
-                  <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/Library-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Tab>
-                <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/keyboard.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Tab>
-                  <Tab closable="false" styleClass="sTab" text="Players" fx:id="xPlayersTab">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/MusicRecord-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Tab>
+                  <Tab fx:id="generalTab" closable="false" styleClass="sTab" text="General" />
+                <Tab fx:id="playListsTab" closable="false" styleClass="sTab" text="PlayLists" />
+                  <Tab fx:id="librariesTab" closable="false" styleClass="sTab" text="Libraries" />
+                <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab" text="ShortCuts" />
+                  <Tab closable="false" styleClass="sTab" text="Players" fx:id="xPlayersTab" />
                </tabs>
                <VBox.margin>
                   <Insets />
@@ -130,13 +80,6 @@
                <tooltip>
                   <Tooltip text="Only for the selected tab category ." />
                </tooltip>
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                     <image>
-                        <Image url="@../../image/asc.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
          </children>
       </Group>
