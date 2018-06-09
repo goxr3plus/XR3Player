@@ -42,19 +42,19 @@ public class EmotionsWindow extends BorderPane {
 	private Label titleLabel;
 	
 	@FXML
-	private Button hate;
+	private JFXButton hate;
 	
 	@FXML
-	private Button dislike;
+	private JFXButton dislike;
 	
 	@FXML
-	private Button neutral;
+	private JFXButton neutral;
 	
 	@FXML
-	private Button like;
+	private JFXButton like;
 	
 	@FXML
-	private Button love;
+	private JFXButton love;
 	
 	@FXML
 	private JFXButton close;
@@ -231,7 +231,7 @@ public class EmotionsWindow extends BorderPane {
 			double yIni = y - getHeight() - 50;
 			double yEnd = y - getHeight() / 2 - 15;
 			window.setY(yIni);
-			window.setX(x-80);
+			window.setX(x - 80);
 			
 			//Create  Double Property
 			final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);

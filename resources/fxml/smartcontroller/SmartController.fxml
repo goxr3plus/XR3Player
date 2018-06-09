@@ -222,21 +222,17 @@
                   </BorderPane>
                </content>
                <graphic>
-                  <FontIcon iconColor="#ffe81f" iconLiteral="gmi-album" iconSize="24" />
+                  <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
                </graphic>
           </Tab>
             <Tab fx:id="foldersModeTab" text="Folders">
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/Folder%20Tree-24.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="#ddaa33" iconLiteral="gmi-folder" iconSize="24" />
                </graphic>
             </Tab>
-            <Tab fx:id="filtersModeTab" text="Filter : Artists">
+            <Tab fx:id="filtersModeTab" text="Filters">
                <graphic>
-                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-filter" iconSize="24" />
+                  <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="24" />
                </graphic>
             </Tab>
          </tabs>
