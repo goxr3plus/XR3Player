@@ -215,7 +215,7 @@ public abstract class Media {
 	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre smartControllerGenre, int number) {
 		
 		//ArtWork FontIcon
-		FontIcon artWorkImage = new FontIcon("fa-file-image-o");
+		FontIcon artWorkImage = new FontIcon("gmi-album");
 		artWorkImage.setIconSize(30);
 		artWorkImage.setIconColor(Color.WHITE);
 		
@@ -233,11 +233,11 @@ public abstract class Media {
 		artwork = new SimpleObjectProperty<>(artWorkStack);
 		
 		//Download
-		FontIcon downloadIcon = new FontIcon("fas-cloud-download-alt");
-		downloadIcon.setIconSize(16);
-		downloadIcon.setIconColor(Color.WHITE);
+		FontIcon searchOnWebIcon = new FontIcon("fas-cloud-download-alt");
+		searchOnWebIcon.setIconSize(16);
+		searchOnWebIcon.setIconColor(Color.WHITE);
 		
-		Button searchMediaOnWeb = new Button("", downloadIcon);
+		Button searchMediaOnWeb = new Button("", searchOnWebIcon);
 		searchMediaOnWeb.setPrefSize(24, 24);
 		searchMediaOnWeb.setMinSize(24, 24);
 		searchMediaOnWeb.setMaxSize(24, 24);
