@@ -505,6 +505,13 @@ public class SmartController extends StackPane {
 				reloadVBox.setVisible(false);
 			}
 		});
+		//Automatically reload the playlist
+		reloadPlayListButton.hoverProperty().addListener(l -> {
+			if (isFree(true)) {
+				loadService.startService(false, true, false);
+				reloadVBox.setVisible(false);
+			}
+		});
 		
 		//quickSearchTextField
 		
