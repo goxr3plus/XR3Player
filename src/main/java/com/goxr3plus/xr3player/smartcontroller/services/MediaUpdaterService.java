@@ -123,8 +123,6 @@ public class MediaUpdaterService {
 			
 			//XPlayers
 			Main.xPlayersList.getList().stream()
-					//Only if the Settings Mode is selected
-					.filter(xPlayerController -> xPlayerController.getSettingsToggle().isSelected())
 					//Extra filtering
 					.filter(xPlayerController -> {
 						//If extended pass
@@ -148,16 +146,19 @@ public class MediaUpdaterService {
 						//Fix the emotion image
 						xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
 						
-						//Find the smartController
-						SmartController controller = xPlayerController.getxPlayerPlayList().getSmartController();
-						
-						//Normal Mode  
-						if (controller.getNormalModeTab().isSelected())
-							filterController(controller, controller.getItemsObservableList());
-						
-						//Filters Mode
-						else if (controller.getFiltersModeTab().isSelected())
-							filterController(controller, controller.getFiltersMode().getMediaTableViewer().getTableView().getItems());
+						//Only if the Settings Mode is selected
+						if (xPlayerController.getSettingsToggle().isSelected()) {
+							//Find the smartController
+							SmartController controller = xPlayerController.getxPlayerPlayList().getSmartController();
+							
+							//Normal Mode  
+							if (controller.getNormalModeTab().isSelected())
+								filterController(controller, controller.getItemsObservableList());
+							
+							//Filters Mode
+							else if (controller.getFiltersModeTab().isSelected())
+								filterController(controller, controller.getFiltersMode().getMediaTableViewer().getTableView().getItems());
+						}
 					});
 			
 			//--

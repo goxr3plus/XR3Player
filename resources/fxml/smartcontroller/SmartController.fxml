@@ -231,12 +231,12 @@
                   <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
                </graphic>
           </Tab>
-            <Tab fx:id="foldersModeTab" text="Folders">
+            <Tab fx:id="foldersModeTab" disable="true" text="Coming...">
                <graphic>
                   <FontIcon iconColor="#ddaa33" iconLiteral="gmi-folder" iconSize="24" />
                </graphic>
             </Tab>
-            <Tab fx:id="filtersModeTab" text="Filter : Artists">
+            <Tab fx:id="filtersModeTab" disable="true" text="Coming...">
                <graphic>
                   <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
                </graphic>

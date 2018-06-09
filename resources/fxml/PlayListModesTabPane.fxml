@@ -32,7 +32,7 @@
                         <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="20" />
                      </graphic>
                   </Tab>
-                  <Tab fx:id="downloadsTab" closable="false" disable="true" text="Downloads ( Coming... )">
+                  <Tab fx:id="downloadsTab" closable="false" disable="true" text="Coming...">
                      <content>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>

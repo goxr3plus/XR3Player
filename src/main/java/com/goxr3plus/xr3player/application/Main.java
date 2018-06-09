@@ -798,7 +798,7 @@ public class Main extends Application {
 			//sideBar.getNameLabel().textProperty().bind(userInfoMode.getUserName().textProperty())
 			
 			//Start these important Threads
-			//new MediaUpdaterService().start();
+			new MediaUpdaterService().start();
 			//new XPlayersFilterService().start()
 			webBrowser.startChromiumUpdaterService();
 			
