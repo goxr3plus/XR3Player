@@ -30,7 +30,7 @@
                   <Tooltip text="Cancel" />
                </tooltip>
                <graphic>
-                  <FontIcon iconColor="#ff4747" iconLiteral="fas-times" iconSize="24" />
+                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                </graphic>
             </JFXButton>
          </children>

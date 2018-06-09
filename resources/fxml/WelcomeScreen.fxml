@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <fx:root minHeight="15.0" minWidth="15.0" prefHeight="618.0" prefWidth="897.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -78,36 +79,19 @@
             <DropShadow />
          </effect>
          <children>
-            <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 90; -fx-font-size: 30;" styleClass="jfx-button2" text="Start" textAlignment="CENTER" wrapText="true">
+            <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 90; -fx-font-size: 30;" styleClass="jfx-button4" text="Start" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                     <image>
-                        <Image url="@../image/nextt.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="WHITE" iconLiteral="fa-arrow-circle-right" iconSize="55" />
                </graphic>
             </JFXButton>
             <Label alignment="CENTER" prefHeight="56.0" prefWidth="305.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="“Pursue excellence, and success will follow&quot;" textAlignment="CENTER" />
-            <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="15.0" style="-fx-background-radius: 90; -fx-font-size: 30; -fx-text-fill: firebrick;" styleClass="jfx-button2" text="Exit" textAlignment="CENTER" textFill="#d30b0b" wrapText="true">
+            <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="15.0" style="-fx-background-radius: 90; -fx-font-size: 30;" styleClass="jfx-button4" text="Exit" textAlignment="CENTER" textFill="#d30b0b" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                     <image>
-                        <Image url="@../image/exit.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </JFXButton>
          </children>
       </VBox>
