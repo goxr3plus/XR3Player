@@ -2,8 +2,6 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
@@ -15,29 +13,26 @@
             <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
                <tabs>
                   <Tab fx:id="onlineMusicTab" closable="false" text="Online Music">
-                     <content>
-                        <FontIcon />
-                     </content>
+                   <graphic>
+                        <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="20" />
+                     </graphic>
                   </Tab>
-                  <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries" />
-                  <Tab fx:id="dropBoxTab" closable="false" text="Dropbox" />
+                  <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries">
+                   <graphic>
+                        <FontIcon iconColor="#dba637" iconLiteral="fas-folder-open" iconSize="20" />
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="dropBoxTab" closable="false" text="Dropbox">
+                   <graphic>
+                        <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
+                     </graphic>
+                  </Tab>
                   <Tab fx:id="emotionListsTab" closable="false" text="Emotion Lists">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/love.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="20" />
                      </graphic>
                   </Tab>
                   <Tab fx:id="downloadsTab" closable="false" disable="true" text="Downloads ( Coming... )">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/downloading.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <content>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
@@ -45,17 +40,16 @@
                                  <tabs>
                                     <Tab fx:id="dropBoxTab1" closable="false" text="Dropbox ">
                                        <graphic>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../image/dropbox.png" />
-                                             </image>
-                                          </ImageView>
+                                          <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
                                        </graphic>
                                     </Tab>
                                  </tabs>
                               </JFXTabPane>
                            </children></StackPane>
                      </content>
+                     <graphic>
+                        <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="20" />
+                     </graphic>
                   </Tab>
                </tabs>
             </JFXTabPane>
