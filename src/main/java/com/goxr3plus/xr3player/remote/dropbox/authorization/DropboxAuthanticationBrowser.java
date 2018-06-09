@@ -29,6 +29,9 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import javafx.scene.image.Image;
+import javafx.collections.ObservableList;
+import com.teamdev.jxbrowser.chromium.CacheStorage;
 
 /**
  * Opens a browser inside the application for DropBox Authentication Process
@@ -82,9 +85,15 @@ public class DropboxAuthanticationBrowser extends StackPane {
 		
 		//Create the Window	
 		window.setTitle("Dropbox Sign In");
-		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
+		ObservableList<Image> i1;
+		i1 = window.getIcons();
+		Image i2;
+		i2 = InfoTool.getImageFromResourcesFolder("icon.png");
+		i1.add(i2);
 		window.initModality(Modality.APPLICATION_MODAL);
-		window.setScene(new Scene(this));
+		Scene s1;
+		s1 = new Scene(this);
+		window.setScene(s1);
 	}
 	
 	/**
@@ -96,10 +105,7 @@ public class DropboxAuthanticationBrowser extends StackPane {
 		//Browser
 		browser = new Browser();
 		
-		//BorderPane
 		borderPane.setCenter(new BrowserView(browser));
-		
-		//BrowserView - Load Listener
 		browser.addLoadListener(new LoadAdapter() {
 			/**
 			 * [[SuppressWarningsSpartan]]
@@ -107,20 +113,12 @@ public class DropboxAuthanticationBrowser extends StackPane {
 			@Override
 			public void onFinishLoadingFrame(FinishLoadingEvent event) {
 				if (event.isMainFrame()) {
-					//System.out.println("Main frame has finished loading");
-					
-					//Strings
 					String currentURL = browser.getURL();
-					
-					//Check if it is the correct url
 					if ("https://www.dropbox.com/1/oauth2/authorize_submit".equals(currentURL)) {
 						String html = event.getBrowser().getHTML();
 						new Thread(() -> {
 							try {
-								//Finish Authorization
 								String code = Jsoup.parse(html).body().getElementById("auth-code").getElementsByTag("input").first().attr("data-token");
-								
-								//Finish
 								Platform.runLater(() -> produceAccessToken(code));
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -138,7 +136,6 @@ public class DropboxAuthanticationBrowser extends StackPane {
 	 */
 	public void showAuthenticationWindow() {
 		
-		//Clear the previous cookies
 		browser.getCacheStorage().clearCache();
 		browser.getCookieStorage().deleteAll();
 		
