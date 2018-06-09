@@ -125,10 +125,10 @@ public class MediaInformation extends StackPane {
 	private Label mpegVersion;
 	
 	@FXML
-	private Label dragAndDropLabel;
+	private Button showMore;
 	
 	@FXML
-	private Button showMore;
+	private Label dragAndDropLabel;
 	
 	// -------------------------------------------------------------
 	
@@ -226,6 +226,7 @@ public class MediaInformation extends StackPane {
 		
 		//imageView
 		//imageView.setOnDragDetected(getOnDragDetected())
+		imageView.visibleProperty().bind(imageView.imageProperty().isNotNull());
 		
 		// mediaImageButton
 		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(), TagTabCategory.ARTWORK, true));
@@ -303,11 +304,11 @@ public class MediaInformation extends StackPane {
 					try {
 						image = media.getAlbumImage();
 					} catch (Exception ex) {
-						//ex.printStackTrace();
+						//ex.printStackTrace()
 					}
 					
 					Platform.runLater(() -> {
-						imageView.setImage(image != null ? image : MISSING_ARTWORK_IMAGE);
+						imageView.setImage(image);
 						
 						//== title
 						title.textProperty().bind(media.titleProperty());

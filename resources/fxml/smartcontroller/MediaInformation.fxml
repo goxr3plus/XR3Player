@@ -15,30 +15,34 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <top>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="mediaImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 0; -fx-border-color: black;">
+                  <Button fx:id="mediaImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="jfx-button4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                     <graphic>
-                        <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../../image/noArtwork.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
                      <tooltip>
                         <Tooltip text="Press to view file details and tags" />
                      </tooltip>
+                     <graphic>
+                        <StackedFontIcon>
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="90" />
+                              <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </StackedFontIcon>
+                     </graphic>
                   </Button>
                   <VBox prefHeight="54.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -144,23 +148,16 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </StackPane.margin>
          <bottom>
-            <Button fx:id="showMore" contentDisplay="RIGHT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="More" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+            <Button fx:id="showMore" contentDisplay="RIGHT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Edit tags" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                </BorderPane.margin>
-               <graphic>
-                  <ImageView fx:id="imageView1" pickOnBounds="true" translateY="4.0">
-                     <image>
-                        <Image url="@../../image/more.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fa-tags" iconSize="24" />
+               </graphic>
             </Button>
          </bottom>
       </BorderPane>
