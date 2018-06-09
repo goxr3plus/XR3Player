@@ -7,16 +7,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="511.0" prefWidth="736.0" style="-fx-background-color: black;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="511.0" prefWidth="736.0" style="-fx-background-color: black;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -29,28 +29,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="5.0" prefHeight="25.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Side-bar position" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Side-bar screen position" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
                <tooltip>
                   <Tooltip text="Determines the horizontal position of the side bar" />
                </tooltip></Label>
-            <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT " GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <tooltip>
-                  <Tooltip text="The Side Bar will be at the left of the Window" />
-               </tooltip>
-               <toggleGroup>
-                  <ToggleGroup fx:id="sideBarPositionGroup" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT" toggleGroup="$sideBarPositionGroup" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <tooltip>
-                  <Tooltip text="The Side Bar will be at the left of the Window" />
-               </tooltip>
-            </JFXRadioButton>
-            <JFXRadioButton contentDisplay="BOTTOM" disable="true" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No " GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <JFXRadioButton contentDisplay="BOTTOM" disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" selected="true" styleClass="settingsRadioButton" text="No " visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
@@ -58,12 +45,12 @@
                   <ToggleGroup fx:id="libraryModeUpsideDown" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton disable="true" focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <JFXRadioButton disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="settingsRadioButton" text="Yes" toggleGroup="$libraryModeUpsideDown" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
             </JFXRadioButton>
-            <JFXRadioButton contentDisplay="BOTTOM" disable="true" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="No" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXRadioButton contentDisplay="BOTTOM" disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" selected="true" styleClass="settingsRadioButton" text="No" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
@@ -71,20 +58,20 @@
                   <ToggleGroup fx:id="djModeUpsideDown" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton disable="true" focusTraversable="false" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <JFXRadioButton disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="settingsRadioButton" text="Yes" toggleGroup="$djModeUpsideDown" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="The Side Bar will be at the left of the Window" />
                </tooltip>
             </JFXRadioButton>
-            <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="TODO" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4">
+            <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="applicationSettingsLabel" text="TODO" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="DJ Players will be shown on top or below the playlists" />
                </tooltip></Label>
-            <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="TODO" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
+            <Label alignment="CENTER" disable="true" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="applicationSettingsLabel" text="TODO" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="The Libraries will be shown on the top or below the playlists" />
                </tooltip></Label>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Notifications position on screen" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Notifications screen position" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Choose where will notifications will appear on the Screen" />
                </tooltip>
@@ -111,7 +98,7 @@
                   </JFXRadioButton>
                </children>
                <GridPane.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
                </GridPane.margin>
             </StackPane>
             <StackPane GridPane.columnIndex="3" GridPane.rowIndex="1">
@@ -133,7 +120,7 @@
                   </JFXRadioButton>
                </children>
                <GridPane.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="10.0" top="10.0" />
                </GridPane.margin>
             </StackPane>
             <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -155,7 +142,7 @@
                   </JFXRadioButton>
                </children>
                <GridPane.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="10.0" top="10.0" />
                </GridPane.margin>
             </StackPane>
             <Label alignment="CENTER" layoutX="10.0" layoutY="125.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="High Graphics" textAlignment="CENTER" wrapText="true">
@@ -163,11 +150,7 @@
                   <Tooltip text="High Graphics Mode is designed for strong computers that have the processing power to handle XR3Player extra features" />
                </tooltip>
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/high-sped.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="#fc4848" iconLiteral="fas-tachometer-alt" iconSize="50" />
                </graphic>
             </Label>
             <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" GridPane.columnIndex="1" GridPane.columnSpan="3">
@@ -185,6 +168,23 @@
                   </JFXToggleButton>
                </graphic>
             </Label>
+            <HBox alignment="CENTER" spacing="55.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <children>
+                  <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="LEFT ">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sideBarPositionGroup" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton focusTraversable="false" styleClass="settingsRadioButton" text="RIGHT" toggleGroup="$sideBarPositionGroup">
+                     <tooltip>
+                        <Tooltip text="The Side Bar will be at the left of the Window" />
+                     </tooltip>
+                  </JFXRadioButton>
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </center>
