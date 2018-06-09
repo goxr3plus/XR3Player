@@ -92,7 +92,7 @@
                                           </JFXButton>
                                        </children>
                                     </StackPane>
-                                    <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="286.0">
+                                    <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="179.0">
                                        <children>
                                           <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
                                              <tooltip>
@@ -135,6 +135,13 @@
                                                 <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
                                              </graphic>
                                           </Button>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER">
+                                       <children>
                                           <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton">
                                              <tooltip>
                                                 <Tooltip text="Open Playlist Settings" />
@@ -240,7 +247,7 @@
             <String fx:value="specialJFXTabPane" />
          </styleClass>
       </JFXTabPane>
-      <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
+      <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
             <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" style="-fx-font-size: 18;" styleClass="jfx-button4" text="Cancel">
                <tooltip>

@@ -12,12 +12,17 @@ import java.lang.reflect.Modifier;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.az;
@@ -123,7 +128,7 @@ public class Main extends Application {
 		internalInformation.put("Version", APPLICATION_VERSION);
 		internalInformation.put("ReleasedDate", "Check updates window");
 		
-		System.out.println("Outside of Application Start Method");
+		//System.out.println("Outside of Application Start Method");
 		
 		//Extract Location
 		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
@@ -566,7 +571,7 @@ public class Main extends Application {
 				playListModesTabPane.getDropBoxTab().setContent(Main.dropBoxViewer);
 			});
 			
-			System.out.println("Loller Thread exited...");
+			//System.out.println("Loller Thread exited...");
 		}).start();
 		
 		specialJFXTabPane.setTabMaxWidth(0);
@@ -695,11 +700,11 @@ public class Main extends Application {
 	 */
 	public static void startAppWithUser(User selectedUser) {
 		
-		//Close JAUDIOTAGGER LOGGER
-		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
+		//		//Close JAUDIOTAGGER LOGGER
+		//		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
 		
 		//Close the LoginMode
 		loginMode.userSearchBox.getSearchBoxWindow().close();
@@ -1023,16 +1028,22 @@ public class Main extends Application {
 	 */
 	public static void main(String[] args) {
 		//Continue
-		System.out.println("Hello from Main Method!");
+		//System.out.println("Hello from Main Method!");
 		
-		System.out.println("Cur Path :-> " + InfoTool.getBasePathForClass(Main.class));
+		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
 		
-		//Try to stop cancerous JAudioTagger Console
-		Logger.getGlobal().setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
-		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
+		//Stop JAudioTagger Logger Messages
+		LogManager.getLogManager().reset();
+		//		while (LogManager.getLogManager().getLoggerNames().hasMoreElements()) {
+		//			
+		//			String param = (String) LogManager.getLogManager().getLoggerNames().nextElement();
+		//			System.out.println("Name : " + param);
+		//		}
+		//		Logger.getGlobal().setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger.tag").setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File").setLevel(Level.OFF);
+		//		Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag").setLevel(Level.OFF);
 		//......i know you will again not shut up for some reason....
 		
 		launch(args);

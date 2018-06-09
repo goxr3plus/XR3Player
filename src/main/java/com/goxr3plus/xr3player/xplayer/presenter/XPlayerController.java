@@ -1746,10 +1746,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//TODO i need to add code here
 		}
 		
-		System.out.println(streamPlayerEvent.getPlayerStatus());
-		
 		//Fix the images
-		if (status == Status.STOPPED || status == Status.RESUMED || status == Status.PLAYING)
+		if (status == Status.STOPPED || status == Status.RESUMED || status == Status.PLAYING || status == Status.PAUSED)
 			Platform.runLater(() -> {
 				//Advanced Mode
 				( (ImageView) getPlayPauseButton().getGraphic() ).setImage(getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);

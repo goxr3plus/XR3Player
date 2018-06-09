@@ -265,8 +265,8 @@ public class FiltersModeService extends Service<Void> {
 						
 					}
 					
-					if (!smartController.filtersModeSelected || isCancelled()) {
-						
+					//Security check
+					if (smartController.filtersModeSelected && !isCancelled()) {
 						if (operation == Operation.REFRESH) {
 							//For each item on set
 							set.remove("");
