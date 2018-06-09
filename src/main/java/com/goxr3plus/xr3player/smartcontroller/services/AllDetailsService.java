@@ -131,7 +131,7 @@ public class AllDetailsService extends Service<Boolean> {
 						String key = "";
 						String copyright = "";
 						String track = "";
-						String track_total = "";
+						String trackTotal = "";
 						String remixer = "";
 						String djMixer = "";
 						String rating = "";
@@ -200,7 +200,7 @@ public class AllDetailsService extends Service<Boolean> {
 									track = tag.getFirst(ID3v24FieldKey.TRACK).trim();
 									
 									//-- TRACK_TOTAL
-									track_total = tag.getFirst(ID3v24FieldKey.TRACK_TOTAL).trim();
+									trackTotal = tag.getFirst(ID3v24FieldKey.TRACK_TOTAL).trim();
 									
 									//-- REMIXER
 									remixer = tag.getFirst(ID3v24FieldKey.REMIXER).trim();
@@ -309,7 +309,7 @@ public class AllDetailsService extends Service<Boolean> {
 						media.trackProperty().set(track.isEmpty() ? emptyWord : track);
 						
 						//-- TRACK_TOTAL
-						media.track_totalProperty().set(track_total.isEmpty() ? emptyWord : track_total);
+						media.track_totalProperty().set(trackTotal.isEmpty() ? emptyWord : trackTotal);
 						
 						//-- REMIXER
 						media.remixerProperty().set(remixer.isEmpty() ? emptyWord : remixer);
@@ -362,11 +362,9 @@ public class AllDetailsService extends Service<Boolean> {
 							return;
 						
 						try {
+							//Image can be null , remember.
 							Image image = media.getAlbumImage();
-//							//Check if null
-//							if (image == null) {
-//								image = Media.NO_ARTWORK_IMAGE;
-//							}
+							
 							( (ImageView) media.artworkProperty().get().getChildren().get(1) ).setImage(image);
 						} catch (Exception ex) {
 							ex.printStackTrace();

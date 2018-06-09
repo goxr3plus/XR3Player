@@ -2,23 +2,17 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<fx:root style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<fx:root style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
          <children>
-            <JFXButton fx:id="leftArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" text=" ">
+            <JFXButton fx:id="leftArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" text=" ">
                <graphic>
-                  <ImageView id="arrowButton" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/next2.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
                </graphic>
             </JFXButton>
             <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
@@ -51,13 +45,9 @@
                   </HBox>
                </content>
             </ScrollPane>
-            <JFXButton fx:id="rightArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="312.0" layoutY="10.0" text=" ">
+            <JFXButton fx:id="rightArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="312.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" text=" ">
                <graphic>
-                  <ImageView id="arrowButton" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/next2.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
                </graphic>
             </JFXButton>
          </children>

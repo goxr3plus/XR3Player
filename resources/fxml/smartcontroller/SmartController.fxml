@@ -236,7 +236,7 @@
             </Tab>
             <Tab fx:id="filtersModeTab" text="Filter : Artists">
                <graphic>
-                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-cog" iconSize="24" />
+                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-filter" iconSize="24" />
                </graphic>
             </Tab>
          </tabs>
