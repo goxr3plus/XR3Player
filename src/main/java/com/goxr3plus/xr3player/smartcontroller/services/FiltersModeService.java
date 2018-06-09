@@ -33,11 +33,13 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerFiltersMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 public class FiltersModeService extends Service<Void> {
 	
 	/** A private instance of the SmartController it belongs */
 	private final SmartControllerFiltersMode smartControllerArtistsMode;
+	private final SmartController smartController;
 	
 	private Filter filter = Filter.ARTIST;
 	
@@ -72,7 +74,8 @@ public class FiltersModeService extends Service<Void> {
 	 * 
 	 * @param smartController
 	 */
-	public FiltersModeService(SmartControllerFiltersMode smartControllerArtistsMode) {
+	public FiltersModeService(SmartController smartController, SmartControllerFiltersMode smartControllerArtistsMode) {
+		this.smartController = smartController;
 		this.smartControllerArtistsMode = smartControllerArtistsMode;
 		this.allDetailsService = new MediaTagsService();
 	}
@@ -189,7 +192,7 @@ public class FiltersModeService extends Service<Void> {
 						// Stream
 						Stream<Media> stream = smartControllerArtistsMode.getSmartController().getItemsObservableList().stream();
 						stream.forEach(media -> {
-							if (isCancelled())
+							if (!smartController.filtersModeSelected || isCancelled())
 								stream.close();
 							else {
 								
@@ -228,7 +231,8 @@ public class FiltersModeService extends Service<Void> {
 							int counter = 0;
 							// Fetch the items from the database
 							while (resultSet.next()) {
-								if (isCancelled())
+							//	System.out.println("Is cancelled :?" + isCancelled());
+								if (!smartController.filtersModeSelected || isCancelled())
 									break;
 								else {
 									

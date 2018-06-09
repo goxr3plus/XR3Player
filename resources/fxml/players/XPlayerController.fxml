@@ -318,19 +318,15 @@
                                                                   <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
                                                                </padding>
                                                             </HBox>
-                                                            <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="CENTER">
+                                                            <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
                                                                <graphic>
-                                                                  <Button fx:id="enableHighGraphics" alignment="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
-                                                                     <graphic>
-                                                                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/high-sped.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
+                                                                  <Button fx:id="enableHighGraphics" alignment="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button4" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
                                                                      <cursor>
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#fc4848" iconLiteral="fas-tachometer-alt" iconSize="32" />
+                                                                     </graphic>
                                                                   </Button>
                                                                </graphic>
                                                             </Label>

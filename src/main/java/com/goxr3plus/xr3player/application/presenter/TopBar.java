@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.kordamp.ikonli.javafx.StackedFontIcon;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
@@ -15,7 +15,6 @@ import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -23,7 +22,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 
@@ -40,7 +38,7 @@ public class TopBar extends BorderPane {
 	private Label xr3Label;
 	
 	@FXML
-	private ImageView highSpeed;
+	private FontIcon highGraphics;
 	
 	@FXML
 	private JFXButton showHideSideBar;
@@ -326,8 +324,8 @@ public class TopBar extends BorderPane {
 	/**
 	 * @return the highSpeed
 	 */
-	public ImageView getHighSpeed() {
-		return highSpeed;
+	public FontIcon getHighGraphics() {
+		return highGraphics;
 	}
 	
 	/**
@@ -364,12 +362,12 @@ public class TopBar extends BorderPane {
 	public Tab getUserModeTab() {
 		return userModeTab;
 	}
-
+	
 	/**
 	 * @return the searchField
 	 */
 	public TextField getSearchField() {
 		return searchField;
 	}
-
+	
 }

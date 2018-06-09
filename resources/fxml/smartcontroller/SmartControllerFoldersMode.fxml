@@ -7,8 +7,6 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -80,24 +78,13 @@
                   <Tooltip text="Displays from which folders the Playlist Media are coming from ..." />
                </tooltip>
                <graphic>
-                  <Button fx:id="backToMedia" mnemonicParsing="false" text="Back to Media" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/Playlist-32.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <Button fx:id="backToMedia" mnemonicParsing="false" prefWidth="173.0" style="-fx-font-size: 25;" styleClass="jfx-button4" text="Back" textAlignment="CENTER" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                     <effect>
-                        <Reflection>
-                           <input>
-                              <DropShadow />
-                           </input>
-                        </Reflection>
-                     </effect>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-arrow-alt-circle-left" iconSize="52" />
+                     </graphic>
                   </Button>
                </graphic>
             </Label>

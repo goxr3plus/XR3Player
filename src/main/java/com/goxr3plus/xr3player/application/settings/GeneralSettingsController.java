@@ -151,8 +151,8 @@ public class GeneralSettingsController extends BorderPane {
 			//For the Web Browser
 			Main.webBrowser.setMovingTitlesEnabled(value);
 			
-			Main.topBar.getHighSpeed().setVisible(value);
-			Main.topBar.getHighSpeed().setManaged(value);
+			Main.topBar.getHighGraphics().setVisible(value);
+			Main.topBar.getHighGraphics().setManaged(value);
 		});
 		
 	}

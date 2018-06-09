@@ -304,6 +304,9 @@ public class SmartControllerSearcher extends HBox {
 							updateProgress(++counter, smartController.getMaximumPerPage());
 						}
 						
+						//Show 100%
+						updateProgress(smartController.getMaximumPerPage(), smartController.getMaximumPerPage());
+						
 						//Add the the items to the observable list
 						CountDownLatch countDown = new CountDownLatch(1);
 						Platform.runLater(() -> {

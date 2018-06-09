@@ -36,7 +36,6 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
@@ -478,6 +477,8 @@ public class SmartController extends StackPane {
 				filtersMode.getService().cancel();
 				foldersMode.getService().cancel();
 				filtersMode.getService().cancel();
+				
+				filtersModeSelected = false;
 			}
 		});
 		foldersModeTab.setOnSelectionChanged(l -> {
@@ -486,6 +487,8 @@ public class SmartController extends StackPane {
 				filtersMode.getService().cancel();
 				foldersMode.recreateTree();
 				filtersMode.getService().cancel();
+				
+				filtersModeSelected = false;
 			}
 		});
 		filtersModeTab.setOnSelectionChanged(l -> {
@@ -493,6 +496,9 @@ public class SmartController extends StackPane {
 				System.out.println("Filters Mode selected");
 				foldersMode.getService().cancel();
 				filtersMode.regenerate();
+				filtersModeSelected = true;
+			} else {
+				filtersModeSelected = false;
 			}
 		});
 		
@@ -517,6 +523,8 @@ public class SmartController extends StackPane {
 		//quickSearchTextField
 		
 	}
+	
+	public volatile boolean filtersModeSelected = false;
 	
 	/*-----------------------------------------------------------------------
 	 * 

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,7 +14,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -30,16 +32,16 @@ public class SmartControllerFiltersMode extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private ListView<String> listView;
-	
-	@FXML
-	private Label nothingFoundLabel;
+	private MenuButton filterMenuButton;
 	
 	@FXML
 	private ToggleGroup selectedFilter;
 	
 	@FXML
-	private MenuButton filterMenuButton;
+	private ListView<String> listView;
+	
+	@FXML
+	private Label nothingFoundLabel;
 	
 	@FXML
 	private BorderPane borderPane;
@@ -51,13 +53,16 @@ public class SmartControllerFiltersMode extends StackPane {
 	private Button backToMedia;
 	
 	@FXML
-	private VBox indicatorVBox;
+	private VBox loadingVBox;
 	
 	@FXML
-	private Label progressLabel;
+	private Label loadingVBoxLabel;
 	
 	@FXML
-	private ProgressIndicator progressIndicator;
+	private ProgressBar loadingProgressBar;
+	
+	@FXML
+	private JFXButton cancelButton;
 	
 	// -------------------------------------------------------------
 	
@@ -73,7 +78,7 @@ public class SmartControllerFiltersMode extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	private final FiltersModeService service = new FiltersModeService(this);
+	private final FiltersModeService service;
 	
 	// -------------------------------------------------------------
 	
@@ -83,6 +88,7 @@ public class SmartControllerFiltersMode extends StackPane {
 	 * Constructor.
 	 */
 	public SmartControllerFiltersMode(SmartController smartController) {
+		this.service = new FiltersModeService(smartController, this);
 		this.smartController = smartController;
 		this.mediaTableViewer = new MediaTableViewer(smartController, SmartControllerMode.FILTERS_MODE);
 		
@@ -106,10 +112,10 @@ public class SmartControllerFiltersMode extends StackPane {
 	private void initialize() {
 		
 		//indicatorVBox
-		indicatorVBox.visibleProperty().bind(service.runningProperty());
+		loadingVBox.visibleProperty().bind(service.runningProperty());
 		
 		//progressIndicator
-		progressIndicator.progressProperty().bind(service.progressProperty());
+		loadingProgressBar.progressProperty().bind(service.progressProperty());
 		
 		//backToMedia
 		backToMedia.setOnAction(a -> smartController.getModesTabPane().getSelectionModel().select(0));
@@ -161,6 +167,9 @@ public class SmartControllerFiltersMode extends StackPane {
 			}
 		});
 		
+		//cancelButton
+		cancelButton.setOnAction(backToMedia.getOnAction());
+		
 	}
 	
 	/**
@@ -209,7 +218,7 @@ public class SmartControllerFiltersMode extends StackPane {
 	 * @return the progressLabel
 	 */
 	public Label getProgressLabel() {
-		return progressLabel;
+		return loadingVBoxLabel;
 	}
 	
 	/**
@@ -225,14 +234,12 @@ public class SmartControllerFiltersMode extends StackPane {
 	public ToggleGroup getSelectedFilter() {
 		return selectedFilter;
 	}
-
+	
 	/**
 	 * @return the nothingFoundLabel
 	 */
 	public Label getNothingFoundLabel() {
 		return nothingFoundLabel;
 	}
-
-
 	
 }
