@@ -80,7 +80,7 @@ public class AlphabetBar extends StackPane {
 			rightArrow.setOnAction(a -> scrollPane.setHvalue(scrollPane.getHvalue() + speed));
 			
 			//On Mouse Scrolling
-			scrollPane.setOnScroll(scroll -> scrollPane.setHvalue(scrollPane.getHvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )));
+			//scrollPane.setOnScroll(scroll -> scrollPane.setHvalue(scrollPane.getHvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )))
 		} else {
 			//Left
 			leftArrow.setOnAction(a -> scrollPane.setVvalue(scrollPane.getVvalue() - speed));
@@ -89,7 +89,7 @@ public class AlphabetBar extends StackPane {
 			rightArrow.setOnAction(a -> scrollPane.setVvalue(scrollPane.getVvalue() + speed));
 			
 			//On Mouse Scrolling
-			scrollPane.setOnScroll(scroll -> scrollPane.setVvalue(scrollPane.getVvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )));
+			//scrollPane.setOnScroll(scroll -> scrollPane.setVvalue(scrollPane.getVvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )))
 		}
 		
 	}
