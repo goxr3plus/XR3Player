@@ -21,7 +21,7 @@
                   <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
                   <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Artwork">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-file-image-o" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played">
@@ -36,13 +36,9 @@
                   </TableColumn>
                   <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-filter" iconSize="24" />
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="28" />
                      </graphic></TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Title">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-directions" iconSize="24" />
-                     </graphic>
-                  </TableColumn>
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Name" />
                   <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="typ-thumbs-up" iconSize="25" />

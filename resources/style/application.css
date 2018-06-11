@@ -281,7 +281,7 @@
 } 
 
 .media-table-view .column-header-background{
-    -fx-background-color: linear-gradient(#131313 0.0%, #424141 100.0%);
+    -fx-background-color: #151515;
 }
 
 .media-table-view .column-header-background .label{
