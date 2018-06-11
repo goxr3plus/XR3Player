@@ -5,8 +5,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -20,25 +18,17 @@
          <children>
             <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="Donate">
+                  <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" styleClass="jfx-button4" text="Donate">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/charity.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#f2d13e" iconLiteral="fa-money" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" text="About">
+                  <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" styleClass="jfx-button4" text="About">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/about.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle" />
                      </graphic>
                   </JFXButton>
-                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" styleClass="jfx-menu-button">
+                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" styleClass="jfx-button4">
                      <items>
                         <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
                         <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
