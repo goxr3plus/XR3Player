@@ -328,9 +328,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	@FXML
 	private Label focusXPlayerWindow;
 	
-	@FXML
-	private FontIcon visualizerEyeIcon1;
-	
 	// -----------------------------------------------------------------------------
 	
 	/** A Fade Transition */
@@ -639,6 +636,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//smMediaTitle
 		smMediaTitle.textProperty().bind(mediaFileMarquee.getLabel().textProperty());
 		smMediaTitle.getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
+		smMediaTitle.setCursor(Cursor.HAND);
+		smMediaTitle.setOnMouseClicked(m -> openAudioInExplorer());
 		
 		// openMediaFileFolder
 		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(), TagTabCategory.ARTWORK, true));
@@ -1295,7 +1294,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		smModeCenterStackPane.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(60));
 		smModeCenterStackPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> {
 			//if (smAlbumFontIcon.isVisible())
-				smAlbumFontIcon.setIconSize((int) ( ( newValue.getHeight() + 1 ) / 1.4 + 1 ));
+			smAlbumFontIcon.setIconSize((int) ( ( newValue.getHeight() + 1 ) / 1.4 + 1 ));
 		});
 		
 		//smAlbumFontIcon
