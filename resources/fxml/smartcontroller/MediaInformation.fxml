@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,9 +17,9 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane>
+      <BorderPane prefHeight="574.0" prefWidth="345.0">
          <top>
             <HBox BorderPane.alignment="CENTER">
                <children>
@@ -161,13 +160,9 @@
             </Button>
          </bottom>
       </BorderPane>
-      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
+      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" wrapText="true">
          <graphic>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/Audio%20Wave%20Filled-24.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
          </graphic>
       </Label>
    </children>

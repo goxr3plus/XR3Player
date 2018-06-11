@@ -51,7 +51,7 @@
                   </TableColumn>
                   <TableColumn fx:id="stars" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Stars">
                      <graphic>
-                        <FontIcon iconColor="#ffea29" iconLiteral="typ-star" iconSize="24" />
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-star" iconSize="24" />
                      </graphic>
                   </TableColumn>
                      <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Play Count" />

@@ -10,8 +10,9 @@ import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -32,24 +33,25 @@ public class AlphabetBar extends StackPane {
 	private ScrollPane scrollPane;
 	
 	@FXML
-	private HBox alphabetBox;
+	private Pane alphabetBox;
 	
 	@FXML
 	private JFXButton rightArrow;
-	
 	// -------------------------------------------------------------
 	
 	private SimpleBooleanProperty letterPressed = new SimpleBooleanProperty(this, "AlphabetBar");
 	private final SmartController smartController;
+	private final Orientation orientation;
 	
 	/**
 	 * Constructor.
 	 */
-	public AlphabetBar(SmartController smartController) {
+	public AlphabetBar(SmartController smartController, Orientation orientation) {
 		this.smartController = smartController;
+		this.orientation = orientation;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AlphabetBar.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + ( orientation == Orientation.HORIZONTAL ? "AlphabetBar.fxml" : "VAlphabetBar.fxml" )));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -70,14 +72,25 @@ public class AlphabetBar extends StackPane {
 		
 		double speed = 0.10;
 		
-		//Left
-		leftArrow.setOnAction(a -> scrollPane.setHvalue(scrollPane.getHvalue() - speed));
-		
-		//Right 
-		rightArrow.setOnAction(a -> scrollPane.setHvalue(scrollPane.getHvalue() + speed));
-		
-		//On Mouse Scrolling
-		scrollPane.setOnScroll(scroll -> scrollPane.setHvalue(scrollPane.getHvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )));
+		if (orientation == Orientation.HORIZONTAL) {
+			//Left
+			leftArrow.setOnAction(a -> scrollPane.setHvalue(scrollPane.getHvalue() - speed));
+			
+			//Right 
+			rightArrow.setOnAction(a -> scrollPane.setHvalue(scrollPane.getHvalue() + speed));
+			
+			//On Mouse Scrolling
+			scrollPane.setOnScroll(scroll -> scrollPane.setHvalue(scrollPane.getHvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )));
+		} else {
+			//Left
+			leftArrow.setOnAction(a -> scrollPane.setVvalue(scrollPane.getVvalue() - speed));
+			
+			//Right 
+			rightArrow.setOnAction(a -> scrollPane.setVvalue(scrollPane.getVvalue() + speed));
+			
+			//On Mouse Scrolling
+			scrollPane.setOnScroll(scroll -> scrollPane.setVvalue(scrollPane.getVvalue() + ( scroll.getDeltaY() > 0 ? speed : -speed )));
+		}
 		
 	}
 	
@@ -98,6 +111,8 @@ public class AlphabetBar extends StackPane {
 			
 			//Button
 			JFXButton letter = new JFXButton(iterator.next());
+			letter.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			letter.getStyleClass().add("jfx-button4");
 			
 			//On Action
 			letter.setOnAction(a -> {

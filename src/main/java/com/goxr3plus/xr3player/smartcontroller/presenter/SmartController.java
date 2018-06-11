@@ -30,6 +30,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -188,7 +189,7 @@ public class SmartController extends StackPane {
 	public static final int DEFAULT_MAXIMUM_PER_PAGE = 50;
 	private int maximumPerPage = DEFAULT_MAXIMUM_PER_PAGE;
 	
-	private final AlphabetBar alphabetBar = new AlphabetBar(this);
+	private final AlphabetBar alphabetBar = new AlphabetBar(this, Orientation.VERTICAL);
 	
 	// ---------Services--------------------------
 	
@@ -287,7 +288,8 @@ public class SmartController extends StackPane {
 	private void initialize() {
 		
 		//--alphabetBarBox
-		alphabetBarBox.getChildren().add(alphabetBar);
+		//alphabetBarBox.getChildren().add(alphabetBar);
+		this.mainBorder.setLeft(alphabetBar);
 		
 		// ------ tableViewer	
 		centerStackPane.getChildren().add(normal_mode_mediaTableViewer);
