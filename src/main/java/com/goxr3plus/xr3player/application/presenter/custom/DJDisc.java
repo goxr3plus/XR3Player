@@ -38,7 +38,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCa
 public class DJDisc extends StackPane {
 	
 	/** The Constant NULL_IMAGE. */
-	private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noDiscImage.png");
+	//private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noDiscImage.png");
 	
 	/** The Constant NULL_IMAGE. */
 	private static final Image VOLUME_IMAGE = InfoTool.getImageFromResourcesFolder("unmute.png");
@@ -192,7 +192,7 @@ public class DJDisc extends StackPane {
 		// When no album image exists this Label is shown
 		Label noAlbumImageLabel = new Label("-");
 		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
-		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isEqualTo(NULL_IMAGE));
+		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isNull());
 		
 		getChildren().addAll(canvas, imageView, noAlbumImageLabel);
 		
@@ -557,7 +557,7 @@ public class DJDisc extends StackPane {
 		if (image != null)
 			imageView.setImage(image);
 		else
-			imageView.setImage(NULL_IMAGE);
+			imageView.setImage(null);
 		
 	}
 	

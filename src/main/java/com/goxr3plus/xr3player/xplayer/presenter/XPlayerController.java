@@ -233,6 +233,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private ImageView smImageView;
 	
 	@FXML
+	private FontIcon smAlbumFontIcon;
+	
+	@FXML
 	private Label smMediaTitle;
 	
 	@FXML
@@ -324,6 +327,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label focusXPlayerWindow;
+	
+	@FXML
+	private FontIcon visualizerEyeIcon1;
 	
 	// -----------------------------------------------------------------------------
 	
@@ -1285,8 +1291,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				Bindings.when(smModeCenterStackPane.widthProperty().lessThan(smBorderPane.widthProperty())).then(smModeCenterStackPane.widthProperty().subtract(20)).otherwise(0));
 		smImageView.fitHeightProperty().bind(Bindings.when(smModeCenterStackPane.heightProperty().lessThan(smBorderPane.heightProperty()))
 				.then(smModeCenterStackPane.heightProperty().subtract(20)).otherwise(0));
-		smImageView.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(70));
+		smImageView.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(70).and(smImageView.imageProperty().isNotNull()));
 		smModeCenterStackPane.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(60));
+		smModeCenterStackPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> {
+			//if (smAlbumFontIcon.isVisible())
+				smAlbumFontIcon.setIconSize((int) ( ( newValue.getHeight() + 1 ) / 1.4 + 1 ));
+		});
+		
+		//smAlbumFontIcon
+		smAlbumFontIcon.visibleProperty().bind(smImageView.visibleProperty().not());
 		
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
