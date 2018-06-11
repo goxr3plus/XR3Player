@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -80,8 +81,10 @@ public class ApplicationInformationWindow extends BorderPane {
 		// --window
 		window.setTitle("About-Report Bug");
 		window.initStyle(StageStyle.UTILITY);
-		//window.setMaxWidth(600);
-		//window.setMaxHeight(520);
+		window.getScene().setOnKeyReleased(k -> {
+			if (k.getCode() == KeyCode.ESCAPE)
+				window.close();
+		});
 		
 	}
 	
