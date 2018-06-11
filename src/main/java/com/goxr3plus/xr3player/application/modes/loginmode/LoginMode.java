@@ -427,14 +427,7 @@ public class LoginMode extends BorderPane {
 		return xr3PlayerLabel;
 	}
 	
-	/**
-	 * @param xr3PlayerLabel
-	 *            the xr3PlayerLabel to set
-	 */
-	public void setXr3PlayerLabel(Label xr3PlayerLabel) {
-		this.xr3PlayerLabel = xr3PlayerLabel;
-	}
-	
+
 	/**
 	 * @return the splitPane
 	 */

@@ -223,7 +223,7 @@ public class UpdateWindow extends StackPane {
 			Element lastArticle = doc.getElementsByTag("article").last();
 			
 			// Not disturb the user every time the application starts if there is not new update
-			int currentVersion = (int) Main.internalInformation.get("Version");
+			int currentVersion = Main.APPLICATION_VERSION;
 			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
 				return;
 			

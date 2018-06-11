@@ -107,7 +107,7 @@
    <top>
       <BorderPane fx:id="topBorderPane" style="-fx-background-color: #101010;" BorderPane.alignment="CENTER">
          <center>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-width: 3; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="~  XR3Player    ~" BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-width: 3; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="XR3Player V." BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>

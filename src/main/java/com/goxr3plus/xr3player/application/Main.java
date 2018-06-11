@@ -125,7 +125,7 @@ public class Main extends Application {
 	public static final int APPLICATION_VERSION = 109;
 	private static final Logger[] pin;
 	static {
-		//Important for Web Browser allowing xss
+		//Important for JavaFX Web Browser allowing xss
 		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
 		
 		//----------Properties-------------
@@ -136,8 +136,8 @@ public class Main extends Application {
 		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
 		
 		//Disable loggers				
-		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("org.jaudiotagger.tag") , Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File") ,
-				Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag") };
+		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") };
+		// Logger.getLogger("org.jaudiotagger.tag") , Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File") , Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag")
 		
 		for (Logger l : pin) {
 			l.setLevel(Level.OFF);
@@ -436,7 +436,7 @@ public class Main extends Application {
 		Platform.setImplicitExit(false);
 		
 		// --------Window---------
-		window.setTitle("XR3Player V." + internalInformation.get("Version"));
+		window.setTitle("XR3Player V." + APPLICATION_VERSION);
 		double width = InfoTool.getVisualScreenWidth();
 		double height = InfoTool.getVisualScreenHeight();
 		window.setWidth(width * 0.95);
@@ -482,7 +482,7 @@ public class Main extends Application {
 		Properties properties = applicationProperties.loadProperties();
 		
 		//WelcomeScreen
-		welcomeScreen.getVersionLabel().setText("XR3Player V." + APPLICATION_VERSION);
+		welcomeScreen.getVersionLabel().setText(window.getTitle());
 		if (properties.getProperty("Show-Welcome-Screen") == null)
 			welcomeScreen.showWelcomeScreen();
 		else
@@ -581,7 +581,7 @@ public class Main extends Application {
 		determineBackgroundImage();
 		
 		// ---------LoginMode ------------
-		loginMode.getXr3PlayerLabel().setText("~" + window.getTitle() + "~");
+		loginMode.getXr3PlayerLabel().setText(window.getTitle());
 		loginMode.userSearchBox.registerListeners(window);
 		//loginMode.setLeft(sideBar)
 		

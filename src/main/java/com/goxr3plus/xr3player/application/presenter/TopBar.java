@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -292,7 +291,7 @@ public class TopBar extends BorderPane {
 	public void addXR3LabelBinding() {
 		
 		// XR3Label
-		xr3Label.setText(">- XR3Player Update " + Main.internalInformation.get("Version") + " (BETA) -<");
+		xr3Label.setText("XR3Player V." + Main.APPLICATION_VERSION);
 		
 		//		xr3Label.textProperty().bind(Bindings.createStringBinding(() -> MessageFormat.format(">-XR3Player (BETA) V.{0} -<  Width=[{1}],Height=[{2}]",
 		//				Main.internalInformation.get("Version"), Main.window.getWidth(), Main.window.getHeight()), Main.window.widthProperty(), Main.window.heightProperty()));

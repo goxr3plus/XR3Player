@@ -121,7 +121,7 @@ public class ApplicationInformationWindow extends BorderPane {
 		text = "Version :\t";
 		cssTextArea.appendText(text);
 		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
-		cssTextArea.appendText(Main.internalInformation.get("Version") + "\n");
+		cssTextArea.appendText(Main.APPLICATION_VERSION + "\n");
 		
 		text = "Release Date :\t";
 		cssTextArea.appendText(text);
