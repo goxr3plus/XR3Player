@@ -38,7 +38,7 @@
                               </JFXButton>
                               <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
                                  <tooltip>
-                                    <Tooltip text="Previous" />
+                                    <Tooltip text="Next" />
                                  </tooltip>
                                  <graphic>
                                     <FontIcon iconColor="#e0e023" iconLiteral="fas-arrow-alt-circle-right" iconSize="28" />
