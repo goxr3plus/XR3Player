@@ -302,43 +302,6 @@ public class LoginMode extends BorderPane {
 		quickSearchTextField.visibleProperty().bind(teamViewer.searchWordProperty().isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.searchWordProperty()));
 		
-		//----sourceForgeDownloadsLabel
-		new Thread(() -> {
-			try {
-				
-				//---gitHubDownloadsLabel					
-				String text2 = "GitHub: [ "
-						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
-								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
-						+ " ]";
-				Platform.runLater(() -> gitHubDownloadsLabel.setText(text2));
-				
-				//----sourceForgeDownloadsLabel
-				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://img.shields.io/sourceforge/dt/xr3player.svg").openConnection();
-				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-				httpcon.setConnectTimeout(10000);
-				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-				
-				//Read line by line
-				String responseSB = in.lines().collect(Collectors.joining());
-				in.close();
-				
-				//System.out.println(responseSB)
-				String splitPart_0 = responseSB.split("/total")[0];
-				String text = "Sourceforge: [ " + splitPart_0.substring(splitPart_0.length() - 4, splitPart_0.length()).replace(">", "") + " ]";
-				Platform.runLater(() -> sourceForgeDownloadsLabel.setText(text));
-				//				
-				//throw new IOException("Exception get out of the building!!!")
-			} catch (Exception ex) {
-				//ex.printStackTrace();
-				Platform.runLater(() -> {
-					downloadsVBox.setManaged(false);
-					downloadsVBox.setVisible(false);
-				});
-				
-			}
-		}).start();
-		
 		//	setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 		// -- libraryToolBar
@@ -499,6 +462,27 @@ public class LoginMode extends BorderPane {
 	//	public XYChart.Series<String,Number> getSeries() {
 	//		return series;
 	//	}
+	
+	/**
+	 * @return the downloadsVBox
+	 */
+	public VBox getDownloadsVBox() {
+		return downloadsVBox;
+	}
+	
+	/**
+	 * @return the sourceForgeDownloadsLabel
+	 */
+	public Label getSourceForgeDownloadsLabel() {
+		return sourceForgeDownloadsLabel;
+	}
+	
+	/**
+	 * @return the gitHubDownloadsLabel
+	 */
+	public Label getGitHubDownloadsLabel() {
+		return gitHubDownloadsLabel;
+	}
 	
 	/*-----------------------------------------------------------------------
 	 * 

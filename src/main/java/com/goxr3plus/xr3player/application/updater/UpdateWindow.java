@@ -218,7 +218,7 @@ public class UpdateWindow extends StackPane {
 			
 			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
 			
-			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/");
+			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
 			
 			Element lastArticle = doc.getElementsByTag("article").last();
 			

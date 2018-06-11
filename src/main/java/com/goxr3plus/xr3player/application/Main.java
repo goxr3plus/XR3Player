@@ -10,8 +10,11 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,6 +23,12 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.IOUtils;
+
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonException;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsoner;
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.az;
 
@@ -491,6 +500,61 @@ public class Main extends Application {
 		
 		//XR3AutoUpdater exit message
 		System.out.println("XR3Player ready to rock!");
+		
+		//---- Update Downloads Labels
+		new Thread(() -> {
+			try {
+				
+				//---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------				
+				String text2 = "GitHub: [ "
+						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
+								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
+						+ " ]";
+				Platform.runLater(() -> loginMode.getGitHubDownloadsLabel().setText(text2));
+				
+			} catch (Exception ex) {
+				//ex.printStackTrace()
+				Platform.runLater(() -> {
+					loginMode.getGitHubDownloadsLabel().setText("GitHub: [ ? ]");
+					//loginMode.getDownloadsVBox().setManaged(false)
+					//loginMode.getDownloadsVBox().setVisible(false)
+				});
+				
+			}
+			
+			try {
+				//---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS ----------------------
+				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
+						.openConnection();
+				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+				httpcon.setConnectTimeout(10000);
+				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				
+				//Read line by line
+				String response = in.lines().collect(Collectors.joining());
+				in.close();
+				
+				//Parse JSON
+				JsonObject jsonRoot = (JsonObject) Jsoner.deserialize(response);
+				JsonArray oses = (JsonArray) jsonRoot.get("oses");
+				
+				//Count total downloads
+				int[] counter = { 0 };
+				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JsonArray) os ).get(1).toString()));
+				
+				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
+				
+			} catch (Exception ex) {
+				//ex.printStackTrace()
+				Platform.runLater(() -> {
+					loginMode.getGitHubDownloadsLabel().setText("SourceForge: [ ? ]");
+					//loginMode.getDownloadsVBox().setManaged(false)
+					///loginMode.getDownloadsVBox().setVisible(false)
+				});
+				
+			}
+		}).start();
+		
 	}
 	
 	private void startPart2() {
