@@ -136,7 +136,7 @@ public class Main extends Application {
 		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
 		
 		//Disable loggers				
-		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") };
+		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
 		// Logger.getLogger("org.jaudiotagger.tag") , Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File") , Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag")
 		
 		for (Logger l : pin) {
