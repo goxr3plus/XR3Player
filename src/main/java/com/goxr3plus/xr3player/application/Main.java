@@ -122,7 +122,7 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	public static final Logger logger = Logger.getGlobal();
 	public static final Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 109;
+	public static final int APPLICATION_VERSION = 110;
 	private static final Logger[] pin;
 	static {
 		//Important for JavaFX Web Browser allowing xss
