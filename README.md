@@ -24,6 +24,9 @@
 
 ![screenshot1205](https://user-images.githubusercontent.com/20374208/40893545-9baaadc4-67aa-11e8-80c0-6ff72256591e.png)
 
+> New in update 109 ( look this cute alpabetical bar and black colors , ooooo so sweet )
+
+![newtablestyle](https://user-images.githubusercontent.com/20374208/41265549-78c807f0-6dfb-11e8-8d0a-95e40abfe6f2.png)
 
 
 ### Screenshots
