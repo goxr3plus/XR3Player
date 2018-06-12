@@ -106,7 +106,7 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 - [**JFoenix**](http://www.jfoenix.com/)  JavaFX Material Design Library .
 - [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
 - [**FX-BorderlessScene**](https://github.com/goxr3plus/FX-BorderlessScene) Undecorated JavaFX Scene with implemented move, resize, minimise, maximise, close and Windows Aero Snap controls.
-- [**JavaSysmon**](https://github.com/goxr3plus/javasysmon) Manage OS processes and get cpu and memory stats cross-platform in Java. 
+- [**JavaSysmon2**](https://github.com/goxr3plus/javasysmon2) Manage OS processes and get cpu and memory stats cross-platform in Java. 
 - [**Jnativehook**](https://github.com/kwhat/jnativehook) Global keyboard and mouse listeners for Java .
 - [**Sqlite-jdbc**](https://github.com/xerial/sqlite-jdbc) SQLite JDBC Driver .
 - [**Commons-Validator**](https://commons.apache.org/proper/commons-validator/) A common issue when receiving data either electronically or from user input is verifying the integrity of the data. This work is repetitive and becomes even more complicated when different sets of validation rules need to be applied to the same set of data based on locale. Error messages may also vary by locale. This package addresses some of these issues to speed development and maintenance of validation rules.
@@ -118,4 +118,4 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 - [**Java-Stream-Player**](https://github.com/goxr3plus/java-stream-player) Java Advanced Audio Controller Library (WAV, AU, AIFF, MP3, OGG VORBIS, FLAC, MONKEY's AUDIO and SPEEX audio formats ).
 - [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
-- [**JAVE**](http://www.sauronsoftware.it/projects/jave/) The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project
+- [**JAVE2**](https://github.com/goxr3plus/jave2) The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project
