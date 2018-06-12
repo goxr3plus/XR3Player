@@ -7,6 +7,7 @@ import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderProgressListener;
 import it.sauronsoftware.jave.EncodingAttributes;
 import it.sauronsoftware.jave.MultimediaInfo;
+import it.sauronsoftware.jave.MultimediaObject;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
@@ -113,32 +114,34 @@ public class ConverterService extends Service<Boolean> {
 					succeeded = false;
 				}
 				
-				//New File Name
-				newFileAsbolutePath = folderName + File.separator + InfoTool.getFileTitle(fileAbsolutePath) + ".mp3";
-				
-				//Convert any audio format to .mp3
-				try {
-					File source = new File(fileAbsolutePath);
-					
-					File target = new File(newFileAsbolutePath);
-					AudioAttributes audio = new AudioAttributes();
-					audio.setCodec("libmp3lame");
-					audio.setBitRate(128000);
-					audio.setChannels(2);
-					audio.setSamplingRate(44100);
-					EncodingAttributes attrs = new EncodingAttributes();
-					attrs.setFormat("mp3");
-					attrs.setAudioAttributes(audio);
-					new Encoder().encode(source, target, attrs, listener);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					succeeded = false;
-				}
+				//Check if it is already .mp3
+				if (!"mp3".equals(InfoTool.getFileExtension(fileAbsolutePath))) {
+					newFileAsbolutePath = folderName + File.separator + InfoTool.getFileTitle(fileAbsolutePath) + ".mp3";
+					//Convert any audio format to .mp3
+					try {
+						File source = new File(fileAbsolutePath);
+						
+						File target = new File(newFileAsbolutePath);
+						AudioAttributes audio = new AudioAttributes();
+						audio.setCodec("libmp3lame");
+						audio.setBitRate(128000);
+						audio.setChannels(2);
+						audio.setSamplingRate(44100);
+						EncodingAttributes attrs = new EncodingAttributes();
+						attrs.setFormat("mp3");
+						attrs.setAudioAttributes(audio);
+						new Encoder().encode(new MultimediaObject(source), target, attrs, listener);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						succeeded = false;
+					}
+				} else
+					newFileAsbolutePath = fileAbsolutePath;
 				
 				//Set Message
 				super.updateMessage("Convert finished...");
 				
-				System.out.println("After the error");
+				//System.out.println("After the error")
 				
 				//Check if succeeded
 				if (succeeded)
@@ -167,7 +170,8 @@ public class ConverterService extends Service<Boolean> {
 		public void progress(int p) {
 			
 			double progress = p / 1000.00;
-			//System.out.println(progress)
+			System.out.println(progress);
+			
 			Platform.runLater(() -> convertProgress.set(progress));
 			//      ConverterFrame.this.encodingProgressLabel.setText(progress + "%");
 			//      if (p >= 1000) {

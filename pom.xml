@@ -386,19 +386,24 @@
 			<artifactId>icu4j</artifactId>
 			<version>61.1</version>
 		</dependency>
-		<!-- JAVE -->
+		<!-- JAVE2 -->
 		<dependency>
-			<groupId>it.sauronsoftware.jave</groupId>
-			<artifactId>jave</artifactId>
-			<version>1.0.2</version>
-			<!-- <scope>system</scope> <systemPath>${project.basedir}/localLibraries/jave-1.0.2.jar</systemPath> -->
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>jave2</artifactId>
+			<version>V2.1.0</version>
 		</dependency>
+		<!-- <dependency> <groupId>it.sauronsoftware.jave</groupId> <artifactId>jave</artifactId> 
+			<version>1.0.2</version> <scope>system</scope> <systemPath>${project.basedir}/localLibraries/jave-1.0.2.jar</systemPath> 
+			</dependency> -->
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
-			<groupId>local.github.goxr3plus</groupId>
-			<artifactId>javasysmon</artifactId>
-			<version>3.6.0</version>
-			<!-- <scope>system</scope> <systemPath>${project.basedir}/localLibraries/javasysmon-0.3.6.0.jar</systemPath> -->
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>javasysmon2</artifactId>
+			<version>8.0.0</version>
 		</dependency>
+		<!-- <dependency> <groupId>local.github.goxr3plus</groupId> <artifactId>javasysmon</artifactId> 
+			<version>3.6.0</version> <scope>system</scope> <systemPath>${project.basedir}/localLibraries/javasysmon-0.3.6.0.jar</systemPath> 
+			</dependency> -->
+
 	</dependencies>
 </project>
