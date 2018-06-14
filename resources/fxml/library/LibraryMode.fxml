@@ -33,21 +33,27 @@
                         </StackPane>
                      </center>
                      <bottom>
-                        <BorderPane style="-fx-background-color: rgb(0,0,0,0.7);" BorderPane.alignment="CENTER">
+                        <BorderPane style="-fx-background-color: rgb(0,0,0,0.85);" BorderPane.alignment="CENTER">
                            <center>
-                              <HBox fx:id="libraryToolBar" alignment="CENTER" prefHeight="45.0" styleClass="segmented-button-bar" BorderPane.alignment="CENTER">
+                              <HBox fx:id="libraryToolBar" alignment="CENTER" prefHeight="45.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" style="-fx-font-size: 12;" styleClass="first" text="Delete">
+                                    <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="Delete">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <HBox.margin>
+                                          <Insets right="1.0" />
+                                       </HBox.margin>
                                     </Button>
-                                    <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" style="-fx-font-size: 12;" text="Rename">
+                                    <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="Rename">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <HBox.margin>
+                                          <Insets right="1.0" />
+                                       </HBox.margin>
                                     </Button>
-                                    <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" text="OPEN" textAlignment="CENTER" wrapText="true">
+                                    <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="OPEN" textAlignment="CENTER" wrapText="true">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -57,7 +63,7 @@
                                     </Button>
                                     <HBox alignment="CENTER" spacing="3.0">
                                        <children>
-                                          <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                                          <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-button4" text=" ">
                                              <tooltip>
                                                 <Tooltip text="Previous" />
                                              </tooltip>
@@ -68,7 +74,7 @@
                                                 <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                                          <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text=" ">
                                              <tooltip>
                                                 <Tooltip text="Create new Library" />
                                              </tooltip>
@@ -76,7 +82,7 @@
                                                 <FontIcon iconColor="#2cee97" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
+                                          <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="jfx-button4" text=" ">
                                              <tooltip>
                                                 <Tooltip text="Next" />
                                              </tooltip>
@@ -92,7 +98,7 @@
                                           <Insets left="3.0" right="3.0" />
                                        </HBox.margin>
                                     </HBox>
-                                    <Button fx:id="openLibraryContextMenu" contentDisplay="GRAPHIC_ONLY" layoutX="284.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
+                                    <Button fx:id="openLibraryContextMenu" contentDisplay="GRAPHIC_ONLY" layoutX="284.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="jfx-button4">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -103,7 +109,7 @@
                                           <Insets />
                                        </HBox.margin>
                                        <graphic>
-                                          <FontIcon iconColor="#2cee97" iconLiteral="typ-th-large-outline" iconSize="32" selectionEnd="0" />
+                                          <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
                                        </graphic>
                                     </Button>
                                     <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
@@ -134,7 +140,7 @@
                         </StackPane>
                      </top>
                   </BorderPane>
-                  <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Create playlist" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Create playlist" textAlignment="CENTER" visible="false" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
