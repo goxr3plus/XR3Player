@@ -9,8 +9,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
@@ -46,16 +44,12 @@
       <HBox alignment="CENTER" minWidth="0.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="showHideSideBar" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button2" text=" ">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/grid.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
                <tooltip>
                   <Tooltip text="Side Bar" />
                </tooltip>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="typ-th-large" iconSize="32" selectionEnd="0" selectionStart="0" />
+               </graphic>
             </JFXButton>
             <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-background-color: #303030;">
                <children>

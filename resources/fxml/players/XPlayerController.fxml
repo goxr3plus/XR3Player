@@ -67,7 +67,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;">
+                                          <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                                              <graphic>
                                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -82,7 +82,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0">
+                                          <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="jfx-button4">
                                             <items>
                                               <MenuItem fx:id="copyFileTitle" mnemonicParsing="false" text="Copy File Title" />
                                               <MenuItem fx:id="copyFileLocation" mnemonicParsing="false" text="Copy File Location" />
@@ -91,12 +91,8 @@
                                              <graphic>
                                                 <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20" />
                                              </graphic>
-                                             <styleClass>
-                                                <String fx:value="menu-button2" />
-                                                <String fx:value="menu-button3" />
-                                             </styleClass>
                                           </MenuButton>
-                                          <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;">
+                                          <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;" styleClass="jfx-button4">
                                              <graphic>
                                                 <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
                                              </graphic>
@@ -320,7 +316,7 @@
                                                             </HBox>
                                                             <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
                                                                <graphic>
-                                                                  <Button fx:id="enableHighGraphics" alignment="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button4" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
+                                                                  <Button fx:id="enableHighGraphics" alignment="CENTER" focusTraversable="false" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button2" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
                                                                      <cursor>
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
@@ -354,7 +350,7 @@
                               </SplitPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <center>
@@ -554,7 +550,7 @@
                                     </JFXToggleButton>
                                  </graphic>
                               </Label>
-                              <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                              <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -579,7 +575,7 @@
                      <left>
                         <HBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="29.0" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="29.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -587,10 +583,10 @@
                                     <Tooltip text="Show Menu" />
                                  </tooltip>
                                  <graphic>
-                                    <FontIcon iconColor="#08c9eb" iconLiteral="typ-th-large-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="#08c9eb" iconLiteral="typ-th-small" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -601,7 +597,7 @@
                                     <FontIcon iconColor="ORANGE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -612,7 +608,7 @@
                                     <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
-                              <MenuButton fx:id="transferMedia" maxHeight="29.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;">
+                              <MenuButton fx:id="transferMedia" maxHeight="29.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
                                   <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
@@ -633,7 +629,7 @@
                <left>
                   <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
+                        <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -650,7 +646,7 @@
                               <String fx:value="transparency-slider2" />
                            </styleClass>
                         </Slider>
-                        <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0">
+                        <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

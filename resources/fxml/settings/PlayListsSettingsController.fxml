@@ -165,7 +165,7 @@
                      </children></StackPane>
                </content>
                <graphic>
-                  <FontIcon iconColor="#ddaa33" iconLiteral="gmi-folder" iconSize="24" />
+                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
                </graphic>
             </Tab>
             <Tab text="Search ">

@@ -6,17 +6,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
-import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController.ConsoleTab;
@@ -30,6 +30,9 @@ import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowContro
 public class BottomBar extends BorderPane {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private ToggleButton barEnabledToggle;
 	
 	@FXML
 	private HBox hBox;
@@ -55,6 +58,9 @@ public class BottomBar extends BorderPane {
 	@FXML
 	private Label runningTimeLabel;
 	
+	@FXML
+	private JFXButton enableBar;
+	
 	// -------------------------------------------------------------
 	
 	/** The logger. */
@@ -72,6 +78,9 @@ public class BottomBar extends BorderPane {
 	
 	private int minutes = -1;
 	
+	/**
+	 * Using this variable in order to avoid extra CPU or GPU usage by Internet connection checker thread
+	 */
 	private boolean internetPreviousStatus = false;
 	
 	/**
@@ -79,8 +88,8 @@ public class BottomBar extends BorderPane {
 	 */
 	public BottomBar() {
 		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "BottomBar.fxml"));
+		FXMLLoader loader;
+		loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "BottomBar.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
