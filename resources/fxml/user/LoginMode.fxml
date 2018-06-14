@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #050505; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
@@ -41,7 +41,7 @@
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/SlideShare-32.png" />
+                              <Image url="@../../image/SlideShare-32.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -60,7 +60,7 @@
                      <graphic>
                         <ImageView fitHeight="58.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/smallLogo.jpg" />
+                              <Image url="@../../image/smallLogo.jpg" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -288,7 +288,7 @@
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../image/Accept%20Database-24.png" />
+                                                      <Image url="@../../image/Accept%20Database-24.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
@@ -300,7 +300,7 @@
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../image/Data%20Protection-24.png" />
+                                                      <Image url="@../../image/Data%20Protection-24.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
@@ -312,7 +312,7 @@
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../image/Delete%20Database-24.png" />
+                                                      <Image url="@../../image/Delete%20Database-24.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>

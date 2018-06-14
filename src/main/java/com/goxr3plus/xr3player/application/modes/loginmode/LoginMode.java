@@ -267,7 +267,7 @@ public class LoginMode extends BorderPane {
 	public LoginMode() {
 		
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "LoginMode.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "LoginMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -295,7 +295,7 @@ public class LoginMode extends BorderPane {
 		centerStackPane.getChildren().add(flipPane);
 		
 		//librariesBarChart
-		//librariesBarChart.getData().add(series);
+		//librariesBarChart.getData().add(series)
 		
 		//Initialize
 		teamViewer = new Viewer(horizontalScrollBar);
@@ -427,7 +427,6 @@ public class LoginMode extends BorderPane {
 		return xr3PlayerLabel;
 	}
 	
-
 	/**
 	 * @return the splitPane
 	 */
