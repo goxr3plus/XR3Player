@@ -54,34 +54,79 @@
                      <VBox.margin>
                         <Insets bottom="15.0" top="15.0" />
                      </VBox.margin></Label>
-                  <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Main Mode">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="modeTeam" />
-                     </toggleGroup>
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-university" iconSize="32" />
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="djModeToggle" alignment="CENTER_LEFT" layoutX="10.0" layoutY="31.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="DJ Mode" toggleGroup="$modeTeam">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-dot-circle" iconSize="32" />
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="userInfoToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="User Information" toggleGroup="$modeTeam">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-user-circle-o" iconSize="32" />
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="browserToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="Chromium Browser" toggleGroup="$modeTeam">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="32" />
-                     </graphic>
-                  </ToggleButton>
-                  <ToggleButton fx:id="moviesToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="Online Movies" toggleGroup="$modeTeam">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-local-movies" iconSize="32" />
-                     </graphic>
-                  </ToggleButton>
+                  <StackPane>
+                     <children>
+                        <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Main Mode">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="modeTeam" />
+                           </toggleGroup>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-university" iconSize="32" />
+                           </graphic>
+                        </ToggleButton>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </FontIcon>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="61.0">
+                     <children>
+                        <ToggleButton fx:id="djModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="DJ Mode" toggleGroup="$modeTeam">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-dot-circle" iconSize="32" />
+                           </graphic>
+                        </ToggleButton>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </FontIcon>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="261.0">
+                     <children>
+                        <ToggleButton fx:id="userInfoToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="User" toggleGroup="$modeTeam">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-user-circle-o" iconSize="32" />
+                           </graphic>
+                        </ToggleButton>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </FontIcon>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="301.0">
+                     <children>
+                        <ToggleButton fx:id="browserToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="Browser" toggleGroup="$modeTeam">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="32" />
+                           </graphic>
+                        </ToggleButton>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </FontIcon>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="341.0">
+                     <children>
+                        <ToggleButton fx:id="moviesToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="Movies" toggleGroup="$modeTeam">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-local-movies" iconSize="32" />
+                           </graphic>
+                        </ToggleButton>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </FontIcon>
+                     </children>
+                  </StackPane>
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />

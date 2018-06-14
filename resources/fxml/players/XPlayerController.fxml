@@ -594,7 +594,7 @@
                                     <Tooltip text="Open File or Folder" />
                                  </tooltip>
                                  <graphic>
-                                    <FontIcon iconColor="ORANGE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="WHITE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
                               <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
