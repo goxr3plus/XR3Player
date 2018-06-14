@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<fx:root prefHeight="445.0" prefWidth="627.0" styleClass="media-information" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="445.0" prefWidth="627.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <top>

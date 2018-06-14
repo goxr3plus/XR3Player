@@ -118,7 +118,7 @@ public class MP3BasicInfo extends StackPane {
 	public MP3BasicInfo() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MP3BasicInfo.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.TAGS_FXMLS + "MP3BasicInfo.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

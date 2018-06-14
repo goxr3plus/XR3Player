@@ -55,7 +55,7 @@ public class ID3v1 extends StackPane {
 	public ID3v1() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ID3V1.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.TAGS_FXMLS + "ID3V1.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

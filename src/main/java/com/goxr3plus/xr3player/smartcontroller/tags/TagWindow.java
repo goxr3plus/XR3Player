@@ -104,7 +104,7 @@ public class TagWindow extends StackPane {
 	public TagWindow() {
 		
 		// ------------------------------------FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TagWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.TAGS_FXMLS + "TagWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
