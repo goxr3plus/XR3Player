@@ -112,7 +112,7 @@
                                           <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
                                        </graphic>
                                     </Button>
-                                    <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
+                                    <ColorPicker fx:id="colorPicker" focusTraversable="false" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>

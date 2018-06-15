@@ -467,7 +467,7 @@ public class Main extends Application {
 		window.show();
 		
 		//---Login Mode---- It must be set after the window has been shown
-		loginMode.getSplitPane().setDividerPositions(0.65, 0.35);
+		//loginMode.getSplitPane().setDividerPositions(0.65, 0.35)
 		
 		//Load the informations about every user
 		loginMode.usersInfoLoader.start();

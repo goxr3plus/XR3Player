@@ -110,9 +110,6 @@ public class LoginMode extends BorderPane {
 	private StackPane centerStackPane;
 	
 	@FXML
-	private SplitPane splitPane;
-	
-	@FXML
 	private BorderPane borderPane;
 	
 	@FXML
@@ -131,7 +128,7 @@ public class LoginMode extends BorderPane {
 	private JFXToggleButton selectionModeToggle;
 	
 	@FXML
-	private ToolBar userToolBar;
+	private HBox toolBarHBox;
 	
 	@FXML
 	private Button deleteUser;
@@ -304,8 +301,8 @@ public class LoginMode extends BorderPane {
 		
 		//	setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
-		// -- libraryToolBar
-		userToolBar.disableProperty().bind(teamViewer.centerItemProperty().isNull());
+		// -- toolBarHBox
+		//toolBarHBox.disableProperty().bind(teamViewer.centerItemProperty().isNull());
 		
 		// -- botttomHBox
 		botttomHBox.getChildren().add(userSearchBox);
@@ -319,7 +316,7 @@ public class LoginMode extends BorderPane {
 		
 		//loginButton
 		loginButton.setOnAction(a -> Main.startAppWithUser(teamViewer.getSelectedItem()));
-		loginButton.disableProperty().bind(userToolBar.disabledProperty());
+		//loginButton.disableProperty().bind(toolBarHBox.disabledProperty());
 		
 		//openUserContextMenu
 		openUserContextMenu.setOnAction(a -> {
@@ -359,9 +356,6 @@ public class LoginMode extends BorderPane {
 		usersInfoLabel.textProperty().bind(Bindings.createStringBinding(
 				() -> "[ " + teamViewer.itemsWrapperProperty().sizeProperty().get() + " ] " + English.plural("User", teamViewer.itemsWrapperProperty().sizeProperty().get()),
 				teamViewer.itemsWrapperProperty().sizeProperty()));
-		
-		//splitPane
-		splitPane.setDividerPosition(0, 0.8);
 		
 		//== exportDatabase
 		exportDatabase.setOnAction(a -> Main.sideBar.exportDatabase());
@@ -427,12 +421,6 @@ public class LoginMode extends BorderPane {
 		return xr3PlayerLabel;
 	}
 	
-	/**
-	 * @return the splitPane
-	 */
-	public SplitPane getSplitPane() {
-		return splitPane;
-	}
 	
 	/**
 	 * @return the colorPicker

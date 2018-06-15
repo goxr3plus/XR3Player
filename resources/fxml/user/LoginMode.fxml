@@ -10,10 +10,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -27,7 +24,7 @@
 
 <fx:root prefHeight="651.0" prefWidth="752.0" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #050505; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #151515; -fx-border-width: 3;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                <cursor>
@@ -107,7 +104,7 @@
    <top>
       <BorderPane fx:id="topBorderPane" style="-fx-background-color: #101010;" BorderPane.alignment="CENTER">
          <center>
-            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-width: 3; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="XR3Player V." BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
+            <Label id="LoginScreenTopLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="298.0" style="-fx-background-radius: 0 0 15 15; -fx-background-color: #101010; -fx-border-width: 3; -fx-font-size: 25; -fx-text-fill: white; -fx-font-weight: bold;" text="XR3Player V. " BorderPane.alignment="CENTER" fx:id="xr3PlayerLabel">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>
@@ -126,205 +123,194 @@
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <SplitPane fx:id="splitPane" dividerPositions="0.7" orientation="VERTICAL" VBox.vgrow="ALWAYS">
-                     <items>
-                        <StackPane minHeight="0.0">
-                           <children>
-                              <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" minHeight="0.0">
-                                 <center>
-                                    <StackPane fx:id="usersStackView" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="192.0" StackPane.alignment="BOTTOM_CENTER" />
-                                          <Label fx:id="quickSearchTextField" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Search" StackPane.alignment="BOTTOM_LEFT" />
-                                       </children>
-                                    </StackPane>
-                                 </center>
-                                 <bottom>
-                                    <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: rgb(255,255,255,0.4); -fx-border-color: transparent transparent firebrick transparent; -fx-border-width: 3;">
-                                             <content>
-                                                <StackPane>
+                  <StackPane maxHeight="1.7976931348623157E308" minHeight="0.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" minHeight="0.0">
+                           <center>
+                              <StackPane fx:id="usersStackView" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="192.0" StackPane.alignment="BOTTOM_CENTER" />
+                                    <Label fx:id="quickSearchTextField" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Search" StackPane.alignment="BOTTOM_LEFT" />
+                                 </children>
+                              </StackPane>
+                           </center>
+                           <bottom>
+                              <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: rgb(255,255,255,0.4);">
+                                       <content>
+                                          <StackPane>
+                                             <children>
+                                                <GridPane fx:id="topGrid" pickOnBounds="false" visible="false">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
+                                                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
                                                    <children>
-                                                      <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="161.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: black; -fx-background-radius: 45 45 0 0; -fx-border-color: firebrick; -fx-border-radius: 15 15 0 0; -fx-border-width: 2.5;" text="^Libraries ^" visible="false">
-                                                         <effect>
-                                                            <DropShadow />
-                                                         </effect>
-                                                      </Label>
-                                                      <GridPane fx:id="topGrid" pickOnBounds="false" visible="false">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
-                                                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="462.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <JFXToggleButton fx:id="selectionModeToggle" disable="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Selection Mode" textFill="WHITE" visible="false">
-                                                               <tooltip>
-                                                                  <Tooltip text="Enable Libraries Selection" />
-                                                               </tooltip>
-                                                            </JFXToggleButton>
-                                                         </children>
-                                                      </GridPane>
-                                                      <BorderPane>
-                                                         <center>
-                                                            <ToolBar fx:id="userToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="672.0" BorderPane.alignment="CENTER">
-                                                              <items>
-                                                                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="segmented-button-bar">
-                                                                     <children>
-                                                                        <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="35.0" styleClass="first" text="Delete ">
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                        </Button>
-                                                                        <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" text="Rename">
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                        </Button>
-                                                                        <Button fx:id="loginButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="37.0" style="-fx-font-size: 16;" text="Login " textAlignment="CENTER" wrapText="true">
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                        </Button>
-                                                                        <HBox alignment="CENTER" spacing="3.0">
-                                                                           <children>
-                                                                              <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
-                                                                                 <tooltip>
-                                                                                    <Tooltip text="Previous" />
-                                                                                 </tooltip>
-                                                                                 <graphic>
-                                                                                    <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
-                                                                                 </graphic>
-                                                                              </JFXButton>
-                                                                              <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                                                                                 <tooltip>
-                                                                                    <Tooltip text="Create new User" />
-                                                                                 </tooltip>
-                                                                                 <graphic>
-                                                                                    <FontIcon iconColor="WHITE" iconLiteral="typ-user-add" iconSize="38" selectionEnd="0" />
-                                                                                 </graphic>
-                                                                              </JFXButton>
-                                                                              <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
-                                                                                 <tooltip>
-                                                                                    <Tooltip text="Next" />
-                                                                                 </tooltip>
-                                                                                 <graphic>
-                                                                                    <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
-                                                                                 </graphic>
-                                                                              </JFXButton>
-                                                                           </children>
-                                                                           <HBox.margin>
-                                                                              <Insets left="3.0" right="3.0" />
-                                                                           </HBox.margin>
-                                                                        </HBox>
-                                                                        <Button fx:id="openUserContextMenu" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="last">
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                           <tooltip>
-                                                                              <Tooltip text="Open Context Menu" />
-                                                                           </tooltip>
-                                                                           <graphic>
-                                                                              <FontIcon iconColor="#2cee97" iconLiteral="typ-th-large-outline" iconSize="32" selectionEnd="0" />
-                                                                           </graphic>
-                                                                        </Button>
-                                                                        <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="64.0">
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                        </ColorPicker>
-                                                                     </children>
-                                                                  </HBox>
-                                                              </items>
-                                                            </ToolBar>
-                                                         </center>
-                                                      </BorderPane>
+                                                      <JFXToggleButton fx:id="selectionModeToggle" disable="true" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Selection Mode" textFill="WHITE" visible="false">
+                                                         <tooltip>
+                                                            <Tooltip text="Enable Libraries Selection" />
+                                                         </tooltip>
+                                                      </JFXToggleButton>
                                                    </children>
-                                                </StackPane>
-                                             </content>
-                                          </ScrollPane>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="3.0" />
-                                       </padding>
-                                    </VBox>
-                                 </bottom>
-                                 <top>
-                                    <BorderPane BorderPane.alignment="CENTER">
-                                       <center>
-                                          <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: #050505;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
-                                       </center>
-                                       <left>
-                                          <HBox fx:id="botttomHBox" alignment="CENTER" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
-                                       </left>
-                                    </BorderPane>
-                                 </top>
+                                                </GridPane>
+                                                <BorderPane style="-fx-background-color: rgb(0,0,0,0.85);">
+                                                   <center>
+                                                      <HBox fx:id="toolBarHBox" alignment="CENTER" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Button fx:id="deleteUser" mnemonicParsing="false" prefHeight="35.0" style="-fx-font-size: 16;" styleClass="jfx-button4" text="Delete ">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <HBox.margin>
+                                                                  <Insets right="5.0" />
+                                                               </HBox.margin>
+                                                            </Button>
+                                                            <Button fx:id="renameUser" mnemonicParsing="false" prefHeight="35.0" style="-fx-font-size: 16;" styleClass="jfx-button4" text="Rename">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <HBox.margin>
+                                                                  <Insets right="5.0" />
+                                                               </HBox.margin>
+                                                            </Button>
+                                                            <Button fx:id="loginButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="37.0" style="-fx-font-size: 16;" styleClass="jfx-button" text="Login " textAlignment="CENTER" wrapText="true">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <HBox alignment="CENTER" spacing="3.0">
+                                                               <children>
+                                                                  <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Previous" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
+                                                                     </graphic>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Create new User" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="typ-user-add" iconSize="38" selectionEnd="0" />
+                                                                     </graphic>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Next" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
+                                                                     </graphic>
+                                                                  </JFXButton>
+                                                               </children>
+                                                               <HBox.margin>
+                                                                  <Insets left="3.0" right="3.0" />
+                                                               </HBox.margin>
+                                                            </HBox>
+                                                            <Button fx:id="openUserContextMenu" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="jfx-button4">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <tooltip>
+                                                                  <Tooltip text="Open Context Menu" />
+                                                               </tooltip>
+                                                               <graphic>
+                                                                  <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
+                                                               </graphic>
+                                                            </Button>
+                                                            <ColorPicker fx:id="colorPicker" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" />
+                                                               </HBox.margin>
+                                                            </ColorPicker>
+                                                         </children>
+                                                      </HBox>
+                                                   </center>
+                                                </BorderPane>
+                                             </children>
+                                          </StackPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </VBox>
+                           </bottom>
+                           <top>
+                              <BorderPane BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: #050505;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <left>
+                                    <HBox fx:id="botttomHBox" alignment="CENTER" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
+                                 </left>
                               </BorderPane>
-                              <Button fx:id="createFirstUser" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Create User" textAlignment="CENTER" wrapText="true">
+                           </top>
+                        </BorderPane>
+                        <Button fx:id="createFirstUser" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Create User" textAlignment="CENTER" visible="false" wrapText="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="XR3Player supports multiple users , in order to use it your must create an login with a user :)" />
+                           </tooltip>
+                           <graphic>
+                              <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="55" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </StackPane>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="750.0">
+                           <children>
+                              <Button fx:id="importDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
-                                 <tooltip>
-                                    <Tooltip text="XR3Player supports multiple users , in order to use it your must create an login with a user :)" />
-                                 </tooltip>
                                  <graphic>
-                                    <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="55" />
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../image/Accept%20Database-24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../image/Data%20Protection-24.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="deleteDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Delete Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../image/Delete%20Database-24.png" />
+                                       </image>
+                                    </ImageView>
                                  </graphic>
                               </Button>
                            </children>
-                        </StackPane>
-                        <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0">
-                           <children>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="750.0">
-                                       <children>
-                                          <Button fx:id="importDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/Accept%20Database-24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                          <Button fx:id="exportDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Export Database BACKUP" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/Data%20Protection-24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                          <Button fx:id="deleteDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Delete Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/Delete%20Database-24.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
                         </HBox>
-                     </items>
-                  </SplitPane>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>
