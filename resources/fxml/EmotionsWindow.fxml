@@ -34,7 +34,7 @@
                <children>
                   <JFXButton fx:id="hate" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#dd3f3f" iconLiteral="gmi-sentiment-very-dissatisfied" iconSize="40" />
+                        <FontIcon iconColor="#dd3f3f" iconLiteral="far-frown" iconSize="40" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="dislike" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="248.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
