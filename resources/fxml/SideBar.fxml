@@ -92,11 +92,6 @@
                               <FontIcon iconColor="WHITE" iconLiteral="fa-user-circle-o" iconSize="32" />
                            </graphic>
                         </ToggleButton>
-                        <FontIcon fx:id="userInfoVolumeIcon" iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </FontIcon>
                      </children>
                   </StackPane>
                   <StackPane layoutX="10.0" layoutY="301.0">
@@ -120,11 +115,6 @@
                               <FontIcon iconColor="WHITE" iconLiteral="gmi-local-movies" iconSize="32" />
                            </graphic>
                         </ToggleButton>
-                        <FontIcon fx:id="moviesVolumeIcon" iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </FontIcon>
                      </children>
                   </StackPane>
                </children>

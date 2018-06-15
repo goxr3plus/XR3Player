@@ -10,13 +10,11 @@ import java.util.logging.Level;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
 import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
+import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 /**
  * The Class FileFilterThread.
@@ -65,6 +63,7 @@ public class ChromiumUpdaterService {
 				Platform.runLater(() -> threadStopped.set(false));
 				
 				//Run forever , except if i interrupt it ;)
+				
 				for (;; Thread.sleep(1000)) {
 					
 					if (Main.topBar.isTabSelected(Main.topBar.getWebModeTab())) {
@@ -77,6 +76,26 @@ public class ChromiumUpdaterService {
 						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator().setManaged(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
 						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator().setVisible(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
 					}
+					
+					//----------------------------Check if volume is enabled ---------------------------
+					
+					//Main Mode
+					XPlayerController controller = Main.xPlayersList.getXPlayerController(0);
+					Main.sideBar.getMainModeVolumeIcon().setVisible(controller.getxPlayer().isPlaying() && !controller.getxPlayer().getMute());
+					
+					//DJ Mode
+					XPlayerController controller1 = Main.xPlayersList.getXPlayerController(1);
+					XPlayerController controller2 = Main.xPlayersList.getXPlayerController(2);
+					Main.sideBar.getDjModeVolumeIcon().setVisible( ( controller1.getxPlayer().isPlaying() && !controller1.getxPlayer().getMute() )
+							|| ( controller2.getxPlayer().isPlaying() && !controller2.getxPlayer().getMute() ));
+					
+					//Browser Mode
+					Main.sideBar.getBrowserVolumeIcon().setVisible(webBrowserController.getTabPane().getTabs().stream().filter(tab -> {
+						WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
+						
+						//Is Audio Playing? && Audio is Not Muted
+						return tabController.getBrowser().isAudioPlaying() && !tabController.getBrowser().isAudioMuted();
+					}).findFirst().isPresent());
 					
 				}
 				

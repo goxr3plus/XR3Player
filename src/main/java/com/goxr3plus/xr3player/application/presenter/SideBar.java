@@ -72,9 +72,6 @@ public class SideBar extends StackPane {
 	private ToggleButton userInfoToggle;
 	
 	@FXML
-	private FontIcon userInfoVolumeIcon;
-	
-	@FXML
 	private ToggleButton browserToggle;
 	
 	@FXML
@@ -82,9 +79,6 @@ public class SideBar extends StackPane {
 	
 	@FXML
 	private ToggleButton moviesToggle;
-	
-	@FXML
-	private FontIcon moviesVolumeIcon;
 	
 	@FXML
 	private HBox performanceHBox;
@@ -400,9 +394,7 @@ public class SideBar extends StackPane {
 		//Side Bar Volume Icons
 		mainModeVolumeIcon.setVisible(false);
 		djModeVolumeIcon.setVisible(false);
-		userInfoVolumeIcon.setVisible(false);
 		browserVolumeIcon.setVisible(false);
-		moviesVolumeIcon.setVisible(false);
 	}
 	
 	/**
@@ -540,24 +532,10 @@ public class SideBar extends StackPane {
 	}
 	
 	/**
-	 * @return the userInfoVolumeIcon
-	 */
-	public FontIcon getUserInfoVolumeIcon() {
-		return userInfoVolumeIcon;
-	}
-	
-	/**
 	 * @return the browserVolumeIcon
 	 */
 	public FontIcon getBrowserVolumeIcon() {
 		return browserVolumeIcon;
-	}
-	
-	/**
-	 * @return the moviesVolumeIcon
-	 */
-	public FontIcon getMoviesVolumeIcon() {
-		return moviesVolumeIcon;
 	}
 	
 }
