@@ -5,6 +5,8 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.IOException;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.animation.Interpolator;
@@ -67,12 +69,6 @@ public class EmotionsWindow extends BorderPane {
 	/** The Emotion of the User */
 	private Emotion emotion = Emotion.NEUTRAL;
 	
-//	public static final Image hateImage = InfoTool.getImageFromResourcesFolder("angry.png");
-//	public static final Image dislikeImage = InfoTool.getImageFromResourcesFolder("dislike.png");
-//	public static final Image neutralImage = InfoTool.getImageFromResourcesFolder("likeFaded.png");
-//	public static final Image likeImage = InfoTool.getImageFromResourcesFolder("like.png");
-//	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
-	
 	/** The accepted. */
 	private boolean accepted;
 	
@@ -80,6 +76,8 @@ public class EmotionsWindow extends BorderPane {
 	 * The timeLine which controls the animations of the Window
 	 */
 	private Timeline timeLine = new Timeline();
+	
+	public static final String NEUTRAL_LITERAL = "gmi-sentiment-neutral";
 	
 	/**
 	 * Constructor
@@ -332,19 +330,29 @@ public class EmotionsWindow extends BorderPane {
 	 * @param button
 	 * @param emotion
 	 */
-	public void giveEmotionImageToButton(Button button , Emotion emotion) {
+	public void giveEmotionImageToButton(Button button , Emotion emotion , int size) {
 		//Make sure it will run on JavaFX Thread
 		Platform.runLater(() -> {
-			if (emotion == Emotion.HATE)
-				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.hateImage);
-			else if (emotion == Emotion.DISLIKE)
-				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.dislikeImage);
-			else if (emotion == Emotion.NEUTRAL)
-				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.neutralImage);
-			else if (emotion == Emotion.LIKE)
-				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.likeImage);
-			else if (emotion == Emotion.LOVE)
-				( (ImageView) button.getGraphic() ).setImage(EmotionsWindow.loveImage);
+			FontIcon emotionIcon = new FontIcon();
+			emotionIcon.setIconSize(size);
+			emotionIcon.setIconColor(Color.WHITE);
+			
+			if (emotion == Emotion.HATE) {
+				emotionIcon.setIconColor(Color.web("#dd3f3f"));
+				emotionIcon.setIconLiteral("gmi-sentiment-very-dissatisfied");
+			} else if (emotion == Emotion.DISLIKE) {
+				emotionIcon.setIconLiteral("far-thumbs-down");
+			} else if (emotion == Emotion.NEUTRAL) {
+				emotionIcon.setIconLiteral("gmi-sentiment-neutral");
+			} else if (emotion == Emotion.LIKE) {
+				emotionIcon.setIconLiteral("far-thumbs-up");
+			} else if (emotion == Emotion.LOVE) {
+				emotionIcon.setIconColor(Color.web("#dd3f3f"));
+				emotionIcon.setIconLiteral("far-heart");
+			}
+			
+			//Set the graphic finally
+			button.setGraphic(emotionIcon);
 		});
 	}
 	

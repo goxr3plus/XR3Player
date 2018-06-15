@@ -238,6 +238,7 @@ public abstract class Media {
 		searchOnWebIcon.setIconColor(Color.WHITE);
 		
 		Button searchMediaOnWeb = new Button("", searchOnWebIcon);
+		searchMediaOnWeb.getStyleClass().add("jfx-button2");
 		searchMediaOnWeb.setPrefSize(24, 24);
 		searchMediaOnWeb.setMinSize(24, 24);
 		searchMediaOnWeb.setMaxSize(24, 24);
@@ -254,21 +255,21 @@ public abstract class Media {
 		
 		getInfoBuy = new SimpleObjectProperty<>(searchMediaOnWeb);
 		
-		//Like Dislike or Neutral Feelings
+		//ArtWork FontIcon
+		FontIcon emotionIcon = new FontIcon("gmi-sentiment-neutral");
+		emotionIcon.setIconSize(24);
+		emotionIcon.setIconColor(Color.WHITE);
 		
-		ImageView imageView = new ImageView(EmotionsWindow.neutralImage);
-		imageView.setFitWidth(24);
-		imageView.setFitHeight(24);
+		Button emotionButton = new Button("", emotionIcon);
+		emotionButton.getStyleClass().add("jfx-button2");
+		emotionButton.setPrefSize(24, 24);
+		emotionButton.setMinSize(24, 24);
+		emotionButton.setMaxSize(24, 24);
+		emotionButton.setStyle("-fx-cursor:hand");
+		emotionButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		emotionButton.setOnAction(a -> updateEmotion(emotionButton));
 		
-		Button button = new Button("", imageView);
-		button.setPrefSize(24, 24);
-		button.setMinSize(24, 24);
-		button.setMaxSize(24, 24);
-		button.setStyle("-fx-cursor:hand");
-		button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		button.setOnAction(a -> updateEmotion(button));
-		
-		likeDislikeNeutral = new SimpleObjectProperty<>(button);
+		likeDislikeNeutral = new SimpleObjectProperty<>(emotionButton);
 		//----------
 		
 		this.mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
@@ -308,10 +309,11 @@ public abstract class Media {
 		
 		//Stars
 		Button starsButton = new Button(String.valueOf(stars));
+		starsButton.getStyleClass().add("jfx-button5");
+		starsButton.setFocusTraversable(false);
 		starsButton.setPrefSize(50, 25);
 		starsButton.setMinSize(50, 25);
 		starsButton.setMaxSize(50, 25);
-		starsButton.setStyle("-fx-cursor:hand; -fx-background-color:black; -fx-text-fill:white;");
 		starsButton.setOnAction(a -> updateStars(starsButton));
 		
 		this.stars = new SimpleObjectProperty<>(starsButton);
@@ -1090,7 +1092,20 @@ public abstract class Media {
 	 * @param emotion
 	 */
 	public void changeEmotionImage(Emotion emotion) {
-		Main.emotionsWindow.giveEmotionImageToButton(likeDislikeNeutral.get(), emotion);
+		int size = 24;
+		
+		if (emotion == Emotion.HATE)
+			size = 24;
+		else if (emotion == Emotion.DISLIKE)
+			size = 20;
+		else if (emotion == Emotion.NEUTRAL)
+			size = 24;
+		else if (emotion == Emotion.LIKE)
+			size = 20;
+		else if (emotion == Emotion.LOVE)
+			size = 20;
+		
+		Main.emotionsWindow.giveEmotionImageToButton(likeDislikeNeutral.get(), emotion, size);
 	}
 	
 	// --------GETTERS------------------------------------------------------------------------------------

@@ -4,8 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -36,16 +34,12 @@
                <children>
                   <JFXButton fx:id="hate" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/angry.png" />
-                           </image>
-                        </ImageView>
+                        <FontIcon iconColor="#dd3f3f" iconLiteral="gmi-sentiment-very-dissatisfied" iconSize="40" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="dislike" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="248.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-down" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-down" iconSize="32" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="neutral" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
@@ -55,12 +49,12 @@
                   </JFXButton>
                   <JFXButton fx:id="like" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="32" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="love" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="24" />
+                        <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="32" />
                      </graphic>
                   </JFXButton>
                </children>

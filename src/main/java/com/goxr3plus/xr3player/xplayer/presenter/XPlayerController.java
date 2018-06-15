@@ -149,6 +149,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private FontIcon albumImageFontIcon;
 	
 	@FXML
+	private ImageView mediaTagImageView;
+	
+	@FXML
 	private Label advModeVolumeLabel;
 	
 	@FXML
@@ -951,7 +954,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @param emotion
 	 */
 	public void changeEmotionImage(Emotion emotion) {
-		Main.emotionsWindow.giveEmotionImageToButton(emotionsButton, emotion);
+		Main.emotionsWindow.giveEmotionImageToButton(emotionsButton, emotion, 24);
 	}
 	
 	/**
@@ -2196,6 +2199,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 */
 	public Label getPlayerLoadingLabel() {
 		return playerLoadingLabel;
+	}
+
+	/**
+	 * @return the mediaTagImageView
+	 */
+	public ImageView getMediaTagImageView() {
+		return mediaTagImageView;
 	}
 	
 }

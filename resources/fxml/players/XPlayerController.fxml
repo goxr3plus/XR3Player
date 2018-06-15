@@ -96,7 +96,7 @@
                                                 <StackedFontIcon>
                                                    <children>
                                                       <FontIcon fx:id="albumImageFontIcon" iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
-                                                      <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
+                                                      <ImageView fx:id="mediaTagImageView" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
                                                    </children>
                                                 </StackedFontIcon>
                                              </graphic>

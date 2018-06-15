@@ -277,7 +277,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		// Replace the image of the disc
 		xPlayerController.getDisc().replaceImage(image);
-		( (ImageView) xPlayerController.getMediaTagImageButton().getGraphic() ).setImage(xPlayerController.getDisc().getImage());
+		xPlayerController.getMediaTagImageView().setImage(xPlayerController.getDisc().getImage());
 		
 		// add to played songs...
 		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();

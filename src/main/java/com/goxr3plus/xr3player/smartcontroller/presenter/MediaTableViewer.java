@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.fxmisc.easybind.EasyBind;
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import javafx.animation.PauseTransition;
@@ -430,10 +431,11 @@ public class MediaTableViewer extends StackPane {
 		// likeDislikeNeutral
 		emotions.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
 		emotions.setComparator((button1 , button2) -> {
-			if ( ( (ImageView) button1.getGraphic() ).getImage() == EmotionsWindow.neutralImage && ( (ImageView) button2.getGraphic() ).getImage() != EmotionsWindow.neutralImage)
+			if ( ( (FontIcon) button1.getGraphic() ).getIconLiteral() == EmotionsWindow.NEUTRAL_LITERAL
+					&& ( (FontIcon) button2.getGraphic() ).getIconLiteral() != EmotionsWindow.NEUTRAL_LITERAL)
 				return 1;
-			else if ( ( (ImageView) button1.getGraphic() ).getImage() != EmotionsWindow.neutralImage
-					&& ( (ImageView) button2.getGraphic() ).getImage() == EmotionsWindow.neutralImage)
+			else if ( ( (FontIcon) button1.getGraphic() ).getIconLiteral() != EmotionsWindow.NEUTRAL_LITERAL
+					&& ( (FontIcon) button2.getGraphic() ).getIconLiteral() == EmotionsWindow.NEUTRAL_LITERAL)
 				return -1;
 			else
 				return 0;

@@ -24,13 +24,6 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <graphic>
-                  <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/inform.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
                <tooltip>
                   <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true" />
                </tooltip>
@@ -65,7 +58,7 @@
             <Insets left="10.0" top="10.0" />
          </StackPane.margin>
       </VBox>
-      <Label fx:id="dropBoxLabel" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+      <Label fx:id="dropBoxLabel" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="1" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -76,13 +69,13 @@
             <Insets bottom="5.0" left="7.0" right="5.0" top="5.0" />
          </padding>
          <StackPane.margin>
-            <Insets right="2.0" top="50.0" />
+            <Insets right="2.0" top="65.0" />
          </StackPane.margin>
          <graphic>
-            <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="24" />
+            <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="42" />
          </graphic>
       </Label>
-      <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+      <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="1" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -96,7 +89,7 @@
             <Insets right="2.0" top="5.0" />
          </StackPane.margin>
          <graphic>
-            <FontIcon iconColor="#e8216a" iconLiteral="gmi-library-music" iconSize="24" />
+            <FontIcon iconColor="#e8216a" iconLiteral="gmi-library-music" iconSize="42" />
          </graphic>
       </Label>
       <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: #202020; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: transparent firebrick transparent firebrick;" text="Name" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER">
