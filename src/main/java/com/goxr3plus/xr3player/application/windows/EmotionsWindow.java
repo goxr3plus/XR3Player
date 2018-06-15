@@ -67,11 +67,11 @@ public class EmotionsWindow extends BorderPane {
 	/** The Emotion of the User */
 	private Emotion emotion = Emotion.NEUTRAL;
 	
-	public static final Image hateImage = InfoTool.getImageFromResourcesFolder("angry.png");
-	public static final Image dislikeImage = InfoTool.getImageFromResourcesFolder("dislike.png");
-	public static final Image neutralImage = InfoTool.getImageFromResourcesFolder("likeFaded.png");
-	public static final Image likeImage = InfoTool.getImageFromResourcesFolder("like.png");
-	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
+//	public static final Image hateImage = InfoTool.getImageFromResourcesFolder("angry.png");
+//	public static final Image dislikeImage = InfoTool.getImageFromResourcesFolder("dislike.png");
+//	public static final Image neutralImage = InfoTool.getImageFromResourcesFolder("likeFaded.png");
+//	public static final Image likeImage = InfoTool.getImageFromResourcesFolder("like.png");
+//	public static final Image loveImage = InfoTool.getImageFromResourcesFolder("love.png");
 	
 	/** The accepted. */
 	private boolean accepted;

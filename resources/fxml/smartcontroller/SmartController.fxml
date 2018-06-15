@@ -237,7 +237,7 @@
           </Tab>
             <Tab fx:id="foldersModeTab" disable="true" text="Coming...">
                <graphic>
-                  <FontIcon iconColor="#ddaa33" iconLiteral="gmi-folder" iconSize="24" />
+                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
                </graphic>
             </Tab>
             <Tab fx:id="filtersModeTab" disable="true" text="Coming...">

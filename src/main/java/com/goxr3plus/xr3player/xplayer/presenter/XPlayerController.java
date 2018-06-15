@@ -146,6 +146,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button mediaTagImageButton;
 	
 	@FXML
+	private FontIcon albumImageFontIcon;
+	
+	@FXML
 	private Label advModeVolumeLabel;
 	
 	@FXML
@@ -630,7 +633,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		mediaFileMarquee.setOnMouseClicked(m -> openAudioInExplorer());
 		mediaFileMarquee.setCursor(Cursor.HAND);
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
-		mediaNameHBox.getChildren().add(2, mediaFileMarquee);
+		mediaNameHBox.getChildren().add(1, mediaFileMarquee);
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
 		
 		//smMediaTitle
@@ -642,6 +645,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		// openMediaFileFolder
 		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(), TagTabCategory.ARTWORK, true));
 		mediaTagImageButton.setOnDragDetected(audioDragEvent);
+		
+		//albumImageFontIcon
 		
 		// openFile
 		openFile.setOnAction(action -> openFileChooser());

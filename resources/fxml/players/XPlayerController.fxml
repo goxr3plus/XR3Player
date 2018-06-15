@@ -68,19 +68,15 @@
                                              </children>
                                           </HBox>
                                           <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                                             <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/likeFaded.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
                                              <tooltip>
                                                 <Tooltip text="Express your emotion for this Song" />
                                              </tooltip>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
+                                             <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="gmi-sentiment-neutral" iconSize="24" />
+                                             </graphic>
                                           </Button>
                                           <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="jfx-button4">
                                             <items>
@@ -93,12 +89,17 @@
                                              </graphic>
                                           </MenuButton>
                                           <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;" styleClass="jfx-button4">
-                                             <graphic>
-                                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
-                                             </graphic>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
+                                             <graphic>
+                                                <StackedFontIcon>
+                                                   <children>
+                                                      <FontIcon fx:id="albumImageFontIcon" iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
+                                                      <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" />
+                                                   </children>
+                                                </StackedFontIcon>
+                                             </graphic>
                                           </Button>
                                        </children>
                                        <padding>
