@@ -34,7 +34,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
-public class MSideBar extends StackPane {
+public class SideBar extends StackPane {
 	
 	//--------------------------------------------------------------
 	
@@ -60,16 +60,31 @@ public class MSideBar extends StackPane {
 	private ToggleGroup modeTeam;
 	
 	@FXML
+	private FontIcon mainModeVolumeIcon;
+	
+	@FXML
 	private ToggleButton djModeToggle;
+	
+	@FXML
+	private FontIcon djModeVolumeIcon;
 	
 	@FXML
 	private ToggleButton userInfoToggle;
 	
 	@FXML
+	private FontIcon userInfoVolumeIcon;
+	
+	@FXML
 	private ToggleButton browserToggle;
 	
 	@FXML
+	private FontIcon browserVolumeIcon;
+	
+	@FXML
 	private ToggleButton moviesToggle;
+	
+	@FXML
+	private FontIcon moviesVolumeIcon;
 	
 	@FXML
 	private HBox performanceHBox;
@@ -134,10 +149,10 @@ public class MSideBar extends StackPane {
 	/**
 	 * Constructor.
 	 */
-	public MSideBar() {
+	public SideBar() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MSideBar.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -381,6 +396,13 @@ public class MSideBar extends StackPane {
 		});
 		
 		performanceHBox.getChildren().addAll(cpuMonitor, ramMonitor);
+		
+		//Side Bar Volume Icons
+		mainModeVolumeIcon.setVisible(false);
+		djModeVolumeIcon.setVisible(false);
+		userInfoVolumeIcon.setVisible(false);
+		browserVolumeIcon.setVisible(false);
+		moviesVolumeIcon.setVisible(false);
 	}
 	
 	/**
@@ -501,6 +523,41 @@ public class MSideBar extends StackPane {
 	 */
 	public ImageView getUserImageView() {
 		return userImageView;
+	}
+	
+	/**
+	 * @return the mainModeVolumeIcon
+	 */
+	public FontIcon getMainModeVolumeIcon() {
+		return mainModeVolumeIcon;
+	}
+	
+	/**
+	 * @return the djModeVolumeIcon
+	 */
+	public FontIcon getDjModeVolumeIcon() {
+		return djModeVolumeIcon;
+	}
+	
+	/**
+	 * @return the userInfoVolumeIcon
+	 */
+	public FontIcon getUserInfoVolumeIcon() {
+		return userInfoVolumeIcon;
+	}
+	
+	/**
+	 * @return the browserVolumeIcon
+	 */
+	public FontIcon getBrowserVolumeIcon() {
+		return browserVolumeIcon;
+	}
+	
+	/**
+	 * @return the moviesVolumeIcon
+	 */
+	public FontIcon getMoviesVolumeIcon() {
+		return moviesVolumeIcon;
 	}
 	
 }

@@ -68,7 +68,7 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInforma
 import main.java.com.goxr3plus.xr3player.application.modes.moviemode.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
-import main.java.com.goxr3plus.xr3player.application.presenter.MSideBar;
+import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.MainLoadingScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
@@ -198,7 +198,7 @@ public class Main extends Application {
 	public static BottomBar bottomBar;
 	
 	/** The Side Bar of The Application */
-	public static MSideBar sideBar;
+	public static SideBar sideBar;
 	
 	/** Application Update Screen */
 	public static MainLoadingScreen updateScreen;
@@ -363,7 +363,7 @@ public class Main extends Application {
 		bottomBar = new BottomBar();
 		
 		/** The Side Bar of The Application */
-		sideBar = new MSideBar();
+		sideBar = new SideBar();
 		
 		/** Application Update Screen */
 		updateScreen = new MainLoadingScreen();
