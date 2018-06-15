@@ -33,7 +33,6 @@ import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
