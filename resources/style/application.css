@@ -2020,7 +2020,7 @@
 	-fx-background-color:#202020;
 	-fx-text-fill:white;
 	-fx-fill:white;
-	-fx-accent: white ;
+	-fx-accent: firebrick ;
 }
 
 .dark-text-area .content {
