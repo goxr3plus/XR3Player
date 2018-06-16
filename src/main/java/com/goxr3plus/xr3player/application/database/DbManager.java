@@ -610,7 +610,7 @@ public class DbManager {
 							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Bindings..."));
 							
 							//Update the emotion smart controller 
-							Main.emotionListsController.updateEmotionSmartControllers(true, false, false, false);
+							//Main.emotionListsController.updateEmotionSmartControllers(true, false, false, false);
 							
 							//Refresh all the XPlayers PlayLists
 							Main.xPlayersList.getList().stream()

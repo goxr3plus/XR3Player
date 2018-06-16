@@ -1,10 +1,14 @@
 package main.java.com.goxr3plus.xr3player.application.speciallists;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javafx.application.Platform;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
 
 public class EmotionListsController {
 	
@@ -19,9 +23,17 @@ public class EmotionListsController {
 	public final SmartController lovedMediaListController;
 	
 	/**
+	 * This executor service is used in order the emotion update events to be executed in an order
+	 */
+	private ExecutorService emotionsUpdaterExecutorService;
+	
+	/**
 	 * Constructor
 	 */
 	public EmotionListsController() {
+		
+		//emotionsUpdaterExecutorService
+		emotionsUpdaterExecutorService = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("EmotionsUpdaterService-"));
 		
 		//Lists
 		hatedMediaList = new HatedSongsList();
@@ -59,57 +71,60 @@ public class EmotionListsController {
 	public void makeEmotionDecisition(String songPath , Emotion emotion) {
 		boolean[] updateEmotion = new boolean[4];
 		
-		try {
-			
-			if (emotion == Emotion.HATE) {
+		//Submit
+		emotionsUpdaterExecutorService.submit(() -> {
+			try {
 				
-				updateEmotion[0] = hatedMediaList.add(songPath, false);
-				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-				updateEmotion[2] = likedMediaList.remove(songPath, false);
-				updateEmotion[3] = lovedMediaList.remove(songPath, false);
+				if (emotion == Emotion.HATE) {
+					
+					updateEmotion[0] = hatedMediaList.add(songPath, false);
+					updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+					updateEmotion[2] = likedMediaList.remove(songPath, false);
+					updateEmotion[3] = lovedMediaList.remove(songPath, false);
+					
+				} else if (emotion == Emotion.DISLIKE) {
+					
+					updateEmotion[0] = hatedMediaList.remove(songPath, false);
+					updateEmotion[1] = dislikedMediaList.add(songPath, false);
+					updateEmotion[2] = likedMediaList.remove(songPath, false);
+					updateEmotion[3] = lovedMediaList.remove(songPath, false);
+					
+				} else if (emotion == Emotion.NEUTRAL) {
+					
+					updateEmotion[0] = hatedMediaList.remove(songPath, false);
+					updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+					updateEmotion[2] = likedMediaList.remove(songPath, false);
+					updateEmotion[3] = lovedMediaList.remove(songPath, false);
+					
+				} else if (emotion == Emotion.LIKE) {
+					
+					updateEmotion[0] = hatedMediaList.remove(songPath, false);
+					updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+					updateEmotion[2] = likedMediaList.add(songPath, false);
+					updateEmotion[3] = lovedMediaList.remove(songPath, false);
+					
+				} else if (emotion == Emotion.LOVE) {
+					
+					updateEmotion[0] = hatedMediaList.remove(songPath, false);
+					updateEmotion[1] = dislikedMediaList.remove(songPath, false);
+					updateEmotion[2] = likedMediaList.remove(songPath, false);
+					updateEmotion[3] = lovedMediaList.add(songPath, false);
+					
+				}
 				
-			} else if (emotion == Emotion.DISLIKE) {
+				//Update all the SmartControllers
+//				Platform.runLater(() ->
+//				
+//				updateEmotionSmartControllers(updateEmotion[0], updateEmotion[1], updateEmotion[2], updateEmotion[3]));
 				
-				updateEmotion[0] = hatedMediaList.remove(songPath, false);
-				updateEmotion[1] = dislikedMediaList.add(songPath, false);
-				updateEmotion[2] = likedMediaList.remove(songPath, false);
-				updateEmotion[3] = lovedMediaList.remove(songPath, false);
+				//Commit to the Database
+				Main.dbManager.commit();
 				
-			} else if (emotion == Emotion.NEUTRAL) {
-				
-				updateEmotion[0] = hatedMediaList.remove(songPath, false);
-				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-				updateEmotion[2] = likedMediaList.remove(songPath, false);
-				updateEmotion[3] = lovedMediaList.remove(songPath, false);
-				
-			} else if (emotion == Emotion.LIKE) {
-				
-				updateEmotion[0] = hatedMediaList.remove(songPath, false);
-				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-				updateEmotion[2] = likedMediaList.add(songPath, false);
-				updateEmotion[3] = lovedMediaList.remove(songPath, false);
-				
-			} else if (emotion == Emotion.LOVE) {
-				
-				updateEmotion[0] = hatedMediaList.remove(songPath, false);
-				updateEmotion[1] = dislikedMediaList.remove(songPath, false);
-				updateEmotion[2] = likedMediaList.remove(songPath, false);
-				updateEmotion[3] = lovedMediaList.add(songPath, false);
-				
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
-			
-			//Update all the SmartControllers
-			Platform.runLater(() ->
-			
-			updateEmotionSmartControllers(updateEmotion[0], updateEmotion[1], updateEmotion[2], updateEmotion[3]));
-			
-			//Commit to the Database
-			Main.dbManager.commit();
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		
+		});
+				
 	}
 	
 	/**
@@ -120,17 +135,17 @@ public class EmotionListsController {
 	 * @param updateLiked
 	 * @param updateLoved
 	 */
-	public void updateEmotionSmartControllers(boolean updateHated , boolean updateDisliked , boolean updateLiked , boolean updateLoved) {
-		
-		if (updateHated)
-			hatedMediaListController.getLoadService().startService(false, false, true);
-		if (updateDisliked)
-			dislikedMediaListController.getLoadService().startService(false, false, true);
-		if (updateLiked)
-			likedMediaListController.getLoadService().startService(false, false, true);
-		if (updateLoved)
-			lovedMediaListController.getLoadService().startService(false, false, true);
-	}
+//	public void updateEmotionSmartControllers(boolean updateHated , boolean updateDisliked , boolean updateLiked , boolean updateLoved) {
+//		
+//		if (updateHated)
+//			hatedMediaListController.getLoadService().startService(false, false, true);
+//		if (updateDisliked)
+//			dislikedMediaListController.getLoadService().startService(false, false, true);
+//		if (updateLiked)
+//			likedMediaListController.getLoadService().startService(false, false, true);
+//		if (updateLoved)
+//			lovedMediaListController.getLoadService().startService(false, false, true);
+//	}
 	
 	/**
 	 * Checks if the Media is contained in any of the emotion lists , if not it's emotion is neutral by default
