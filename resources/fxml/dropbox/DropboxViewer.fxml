@@ -38,7 +38,7 @@
                                     <Tooltip text="Preparing Cached Search" />
                                  </tooltip>
                               </ProgressIndicator>
-                              <TextField fx:id="searchField" focusTraversable="false" minWidth="0.0" prefHeight="25.0" prefWidth="243.0" promptText="search..." style="-fx-background-radius: 45;" styleClass="dark-text-field">
+                              <TextField fx:id="searchField" focusTraversable="false" maxWidth="1.7976931348623157E308" minWidth="0.0" prefHeight="25.0" promptText="search..." style="-fx-background-radius: 45;" styleClass="dark-text-field" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="3.0" />
                                  </HBox.margin>
@@ -53,7 +53,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" HBox.hgrow="NEVER">
                            <children>
-                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="user name">
+                              <MenuButton fx:id="topMenuButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="user name">
                                 <items>
                                   <MenuItem fx:id="signOut" mnemonicParsing="false" text="Sign out" />
                                 </items>
@@ -84,7 +84,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Button fx:id="openFolder" alignment="CENTER" disable="true" layoutX="54.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Open" wrapText="true">
+                                    <Button fx:id="openFolder" alignment="CENTER" disable="true" layoutX="54.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Open" wrapText="true">
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
@@ -95,7 +95,7 @@
                                           <FontIcon iconColor="#e1a524" iconLiteral="far-folder-open" iconSize="24" />
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="createFolder" alignment="CENTER" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" text="New" wrapText="true">
+                                    <Button fx:id="createFolder" alignment="CENTER" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="New" wrapText="true">
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
@@ -106,7 +106,7 @@
                                           <FontIcon iconColor="#e1a524" iconLiteral="far-folder" iconSize="24" />
                                        </graphic>
                                     </Button>
-                                    <MenuButton fx:id="deleteMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="34.0" style="-fx-background-radius: 0;" text="Delete">
+                                    <MenuButton fx:id="deleteMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="34.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Delete">
                                       <items>
                                         <MenuItem fx:id="deleteFile" mnemonicParsing="false" text="Delete">
                                              <graphic>
@@ -123,7 +123,7 @@
                                           <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
                                        </graphic>
                                     </MenuButton>
-                                    <Button fx:id="renameButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Rename" wrapText="true">
+                                    <Button fx:id="renameButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Rename" wrapText="true">
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
@@ -134,7 +134,7 @@
                                           <FontIcon iconColor="WHITE" iconLiteral="fas-edit" iconSize="24" />
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="downloadFile" alignment="CENTER" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Download" wrapText="true">
+                                    <Button fx:id="downloadFile" alignment="CENTER" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Download" wrapText="true">
                                        <tooltip>
                                           <Tooltip text="Download Selected File" />
                                        </tooltip>
@@ -145,7 +145,7 @@
                                           <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="24" />
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;">
+                                    <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -181,7 +181,7 @@
             </VBox>
          </children>
       </StackPane>
-      <VBox fx:id="refreshVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #202020;">
+      <VBox fx:id="refreshVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #202020;" visible="false">
          <children>
             <Label fx:id="refreshLabel" alignment="CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Connecting to Server" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
             <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="110.0" styleClass="dropbox-progress-indicator" />

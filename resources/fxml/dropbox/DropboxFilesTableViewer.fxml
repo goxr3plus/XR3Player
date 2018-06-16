@@ -28,11 +28,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Title">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-directions" iconSize="24" />
-                     </graphic>
-                  </TableColumn>
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Name" />
                   <TableColumn fx:id="actionColumn" editable="false" maxWidth="90.0" minWidth="100.0" prefWidth="90.0" resizable="false" sortable="false" text="Action">
                      <graphic>
                         <FontIcon iconColor="#09aceb" iconLiteral="typ-th-large-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
