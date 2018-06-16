@@ -38,8 +38,6 @@ public class DropboxFile {
 	
 	//---------------------------------------------------------------------
 	
-	public static final Image x = InfoTool.getImageFromResourcesFolder("x.png");
-	
 	//----------------------------------------
 	
 	/** Defines if this File is a Directory */
@@ -47,7 +45,7 @@ public class DropboxFile {
 	
 	private Metadata metadata;
 	
-	private final Button actionColumnButton = new Button("...");
+	private final Button actionColumnButton = new Button("");
 	
 	/**
 	 * Constructor
@@ -60,11 +58,17 @@ public class DropboxFile {
 		title = new SimpleStringProperty(value);
 		extension = new SimpleStringProperty(InfoTool.getFileExtension(value));
 		
+		//ArtWork FontIcon
+		FontIcon menuFontIcon = new FontIcon("typ-th-small");
+		menuFontIcon.setIconSize(30);
+		menuFontIcon.setIconColor(Color.WHITE);
+		
 		//actionColumnButton
+		actionColumnButton.setGraphic(menuFontIcon);
 		actionColumnButton.setPrefSize(50, 25);
 		actionColumnButton.setMinSize(50, 25);
 		actionColumnButton.setMaxSize(50, 25);
-		actionColumnButton.setStyle("-fx-cursor:hand; -fx-background-color:white; -fx-text-fill:black;");
+		actionColumnButton.getStyleClass().add("jfx-button4");
 		actionColumnButton.setOnMouseReleased(m -> {
 			
 			//Find the bounds
