@@ -454,8 +454,6 @@ public class MediaTableViewer extends StackPane {
 			
 			{
 				icon.setIconSize(24);
-				icon.setIconColor(Color.WHITE);
-				
 			}
 			
 			@Override
@@ -474,8 +472,10 @@ public class MediaTableViewer extends StackPane {
 						else if (item == -1) {
 							icon.setIconLiteral("fas-play-circle");
 							icon.setIconColor(Color.web("#ceff26"));
-						} else
+						} else {
 							icon.setIconLiteral(item == 0 ? "gmi-filter-1" : item == 1 ? "gmi-filter-2" : "gmi-filter-3");
+							icon.setIconColor(Color.WHITE);
+						}
 				}
 			}
 			
