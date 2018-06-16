@@ -195,13 +195,13 @@
             </Button>
          </children>
       </VBox>
-      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #007EE5;" visible="false">
+      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #303030;" visible="false">
          <children>
             <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
                   <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="authorizationButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Sign in using internal XR3Player Web Browser -&gt; Recommended" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                        <Button fx:id="authorizationButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Sign in using internal XR3Player Web Browser -&gt; Recommended" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -215,7 +215,7 @@
                               <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
                            </graphic>
                         </Button>
-                        <Button fx:id="authorizationButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Sign in using Firefox , Opera , Chrome , Safari" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                        <Button fx:id="authorizationButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Sign in using Firefox , Opera , Chrome , Safari" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -279,21 +279,21 @@
             </SplitPane>
          </children>
       </VBox>
-      <VBox fx:id="authorizationCodeVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #007EE5;" visible="false">
+      <VBox fx:id="authorizationCodeVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #007EE5;">
          <children>
-            <TextField fx:id="authorizationCodeTextField" focusTraversable="false" prefHeight="54.0" promptText="Copy and paste DropBox authorization code here...">
+            <TextField fx:id="authorizationCodeTextField" focusTraversable="false" prefHeight="54.0" promptText="Copy and paste DropBox authorization code here..." styleClass="dark-text-field">
                <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="20.0" />
+                  <Insets left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <HBox alignment="CENTER" spacing="15.0">
+            <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <Button fx:id="authorizationCodeOkButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="102.0" text="OK">
+                  <Button fx:id="authorizationCodeOkButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="102.0" styleClass="jfx-button4" text="OK">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="authorizationCodeCancelButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="102.0" text="Cancel">
+                  <Button fx:id="authorizationCodeCancelButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="102.0" styleClass="jfx-button4" text="Cancel">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

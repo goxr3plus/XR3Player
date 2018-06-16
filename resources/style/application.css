@@ -2008,18 +2008,19 @@
 
 .dark-text-field,.search-box .text-field, .libraries-search-box .text-field{
 	
-	-fx-background-color:#303030;
+	-fx-background-color:#202020;
 	-fx-text-fill:white;
 	-fx-font-weight:bold;
+	-fx-accent: firebrick ;
 }
 
 
 
-.dark-text-area{
-	
+.dark-text-area{	
 	-fx-background-color:#202020;
 	-fx-text-fill:white;
 	-fx-fill:white;
+	-fx-accent: white ;
 }
 
 .dark-text-area .content {

@@ -115,7 +115,7 @@
                   </Label>
                </children>
             </HBox>
-            <JFXButton fx:id="enableBar" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="enable">
+            <JFXButton fx:id="enableBar" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="enable" visible="false">
                <graphic>
                   <FontIcon fx:id="barEnabledFontIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
                </graphic></JFXButton>
