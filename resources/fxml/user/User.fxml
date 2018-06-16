@@ -58,7 +58,7 @@
             <Insets left="10.0" top="10.0" />
          </StackPane.margin>
       </VBox>
-      <Label fx:id="dropBoxLabel" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="1" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+      <Label fx:id="dropBoxLabel" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -75,7 +75,7 @@
             <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="42" />
          </graphic>
       </Label>
-      <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="1" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+      <Label fx:id="totalLibrariesLabel" alignment="CENTER" graphicTextGap="5.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-font-weight: bold;" text="0" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
