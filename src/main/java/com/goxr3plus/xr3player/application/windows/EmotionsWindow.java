@@ -140,26 +140,26 @@ public class EmotionsWindow extends BorderPane {
 			close(true);
 		});
 		
-		hate.setOnMouseEntered(m -> {
-			emotion = Emotion.HATE;
-			//emotionLabel.setText(emotion.toString());
-		});
-		dislike.setOnMouseEntered(m -> {
-			emotion = Emotion.DISLIKE;
-			//emotionLabel.setText(emotion.toString());
-		});
-		neutral.setOnMouseEntered(m -> {
-			emotion = Emotion.NEUTRAL;
-			//emotionLabel.setText(emotion.toString());
-		});
-		like.setOnMouseEntered(m -> {
-			emotion = Emotion.LIKE;
-			//emotionLabel.setText(emotion.toString());
-		});
-		love.setOnMouseEntered(m -> {
-			emotion = Emotion.LOVE;
-			//emotionLabel.setText(emotion.toString());
-		});
+//		hate.setOnMouseEntered(m -> {
+//			emotion = Emotion.HATE;
+//			//emotionLabel.setText(emotion.toString());
+//		});
+//		dislike.setOnMouseEntered(m -> {
+//			emotion = Emotion.DISLIKE;
+//			//emotionLabel.setText(emotion.toString());
+//		});
+//		neutral.setOnMouseEntered(m -> {
+//			emotion = Emotion.NEUTRAL;
+//			//emotionLabel.setText(emotion.toString());
+//		});
+//		like.setOnMouseEntered(m -> {
+//			emotion = Emotion.LIKE;
+//			//emotionLabel.setText(emotion.toString());
+//		});
+//		love.setOnMouseEntered(m -> {
+//			emotion = Emotion.LOVE;
+//			//emotionLabel.setText(emotion.toString());
+//		});
 		
 		//== close
 		close.setOnAction(a -> close(false));
