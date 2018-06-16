@@ -866,8 +866,8 @@ public class Main extends Application {
 			webBrowser.startChromiumUpdaterService();
 			
 			//-----Bottom Bar Threads----------
-			bottomBar.startInternetCheckingThread();
-			bottomBar.startAppRunningTimeThread();
+		//	bottomBar.internetCheckerService.restart()
+		//	bottomBar.timerCheckerService.restart()
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			

@@ -18,9 +18,9 @@
 
 <fx:root prefHeight="30.0" prefWidth="1138.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <ToggleButton fx:id="barEnabledToggle" mnemonicParsing="false" styleClass="toggle-button3" BorderPane.alignment="CENTER">
+      <ToggleButton fx:id="barEnabledToggle" mnemonicParsing="false" style="-fx-background-color: #151515;" styleClass="toggle-button3" BorderPane.alignment="CENTER">
          <graphic>
-            <FontIcon iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+            <FontIcon fx:id="barEnabledFontIcon" iconColor="#c95d4c" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
          </graphic>
          <tooltip>
             <Tooltip text="Enable - Disable bottom bar" />
@@ -30,7 +30,7 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;" visible="false">
+            <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;">
                <children>
                   <MenuButton focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" popupSide="TOP" prefHeight="0.0" prefWidth="0.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings" visible="false">
                      <items>
@@ -115,7 +115,10 @@
                   </Label>
                </children>
             </HBox>
-            <JFXButton fx:id="enableBar" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Enable bottom bar" />
+            <JFXButton fx:id="enableBar" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="enable">
+               <graphic>
+                  <FontIcon fx:id="barEnabledFontIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+               </graphic></JFXButton>
          </children>
       </StackPane>
    </center>

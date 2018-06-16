@@ -1,22 +1,24 @@
 package main.java.com.goxr3plus.xr3player.application.presenter;
 
 import java.io.IOException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.services.StoppableService;
+import main.java.com.goxr3plus.xr3player.application.presenter.services.StoppableService.StoppableServiceCategory;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController.ConsoleTab;
@@ -33,6 +35,9 @@ public class BottomBar extends BorderPane {
 	
 	@FXML
 	private ToggleButton barEnabledToggle;
+	
+	@FXML
+	private FontIcon barEnabledFontIcon;
 	
 	@FXML
 	private HBox hBox;
@@ -66,22 +71,8 @@ public class BottomBar extends BorderPane {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
-	/**
-	 * This Thread checks for Internet Connection
-	 */
-	private Thread internetConnectionThread;
-	
-	/**
-	 * This Thread checks for System Time
-	 */
-	private Thread timeThread;
-	
-	private int minutes = -1;
-	
-	/**
-	 * Using this variable in order to avoid extra CPU or GPU usage by Internet connection checker thread
-	 */
-	private boolean internetPreviousStatus = false;
+	public final StoppableService internetCheckerService = new StoppableService(StoppableServiceCategory.INTERNET_CHECKER);
+	public final StoppableService timerCheckerService = new StoppableService(StoppableServiceCategory.TIMER_CHECKER);
 	
 	/**
 	 * Constructor.
@@ -102,88 +93,6 @@ public class BottomBar extends BorderPane {
 	}
 	
 	/**
-	 * Starts a Thread that continuously checks for internet connection
-	 */
-	public void startInternetCheckingThread() {
-		
-		if (internetConnectionThread != null)
-			return;
-		
-		//Initialize
-		internetConnectionThread = new Thread(() -> {
-			boolean[] newStatus = { false };
-			//Just to update the image for the firstTime
-			boolean firstHack = true;
-			
-			//Run Forever
-			while (true) {
-				
-				newStatus[0] = InfoTool.isReachableByPing("www.google.com");
-				
-				//Try to connect
-				if (newStatus[0] != internetPreviousStatus || firstHack)
-					Platform.runLater(() -> {
-						internetConnectionLabel.setDisable(!newStatus[0]);
-						internetConnectionDescriptionLabel.setText(newStatus[0] ? "Connected" : "Disconnected");
-					});
-				
-				internetPreviousStatus = newStatus[0];
-				firstHack = false;
-				
-				//Sleep sometime [ Don't lag the CPU]
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		}, "Internet Connection Checker Thread");
-		
-		internetConnectionThread.setDaemon(true);
-		internetConnectionThread.start();
-	}
-	
-	/**
-	 * Starts a Thread that is checking the current System Time and the application running Time
-	 */
-	public void startAppRunningTimeThread() {
-		
-		if (timeThread != null)
-			return;
-		
-		//Initialize
-		timeThread = new Thread(() -> {
-			String[] localTime = { "" };
-			
-			//Run Forever
-			while (true) {
-				
-				//Find local time
-				localTime[0] = LocalTime.now().format(DateTimeFormatter.ofPattern("h:mm a"));
-				
-				//Run on JavaFX Thread
-				Platform.runLater(() -> {
-					currentTimeLabel.setText(localTime[0]);
-					runningTimeLabel.setText(++minutes + ( minutes == 1 ? " minute" : " minutes" ));
-				});
-				
-				//Sleep sometime [ Don't lag the CPU]
-				try {
-					Thread.sleep(60000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		}, "App Running Time Checker Thread");
-		
-		timeThread.setDaemon(true);
-		timeThread.start();
-		
-	}
-	
-	/**
 	 * Called as soon as .FXML is loaded from FXML Loader
 	 */
 	@FXML
@@ -198,6 +107,22 @@ public class BottomBar extends BorderPane {
 		//showHideSideBar
 		showHideSideBar.selectedProperty().addListener((observable , oldValue , newValue) -> Main.sideBar.toogleBar());
 		
+		//enableBar
+		enableBar.setOnAction(a -> barEnabledToggle.setSelected(!barEnabledToggle.isSelected()));
+		enableBar.visibleProperty().bind(barEnabledToggle.selectedProperty().not());
+		
+		//barEnabledToggle
+		barEnabledToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue) {
+				internetCheckerService.restart();
+				timerCheckerService.restart();
+				barEnabledFontIcon.setIconColor(Color.web("#d4ff00"));
+			} else {
+				internetCheckerService.cancel();
+				timerCheckerService.cancel();
+				barEnabledFontIcon.setIconColor(Color.web("#c95d4c"));
+			}
+		});
 	}
 	
 	/**
@@ -216,6 +141,34 @@ public class BottomBar extends BorderPane {
 	 */
 	public JFXToggleButton getSpeechRecognitionToggle() {
 		return speechRecognitionToggle;
+	}
+	
+	/**
+	 * @return the internetConnectionLabel
+	 */
+	public Label getInternetConnectionLabel() {
+		return internetConnectionLabel;
+	}
+	
+	/**
+	 * @return the currentTimeLabel
+	 */
+	public Label getCurrentTimeLabel() {
+		return currentTimeLabel;
+	}
+	
+	/**
+	 * @return the runningTimeLabel
+	 */
+	public Label getRunningTimeLabel() {
+		return runningTimeLabel;
+	}
+	
+	/**
+	 * @return the internetConnectionDescriptionLabel
+	 */
+	public Label getInternetConnectionDescriptionLabel() {
+		return internetConnectionDescriptionLabel;
 	}
 	
 }
