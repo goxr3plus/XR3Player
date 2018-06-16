@@ -175,23 +175,6 @@ public abstract class Media {
 	/** The image to be displayed if the Media is Song + CORRUPTED */
 	public static final Image SONG_CORRUPTED_IMAGE = InfoTool.getImageFromResourcesFolder("songCorrupted.png");
 	
-//	/** The image to be shown when the Media has been already Played */
-//	public static final Image PLAYED_IMAGE = InfoTool.getImageFromResourcesFolder("success.png");
-//	
-//	/** The image to be shown when the Media has been already Played */
-//	public static final Image PLAYING_IMAGE = InfoTool.getImageFromResourcesFolder("compact-disc.png");
-//	
-//	/** The image to be shown when the Media has been already Played */
-//	public static final Image PLAYING_IMAGE0 = InfoTool.getImageFromResourcesFolder("compact-disc0.png");
-//	
-//	/** The image to be shown when the Media has been already Played */
-//	public static final Image PLAYING_IMAGE1 = InfoTool.getImageFromResourcesFolder("compact-disc1.png");
-//	
-//	/** The image to be shown when the Media has been already Played */
-//	public static final Image PLAYING_IMAGE2 = InfoTool.getImageFromResourcesFolder("compact-disc2.png");
-	
-	//public static final Image NO_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
-	
 	/** The genre. */
 	private final Genre smartControllerGenre;
 	

@@ -24,7 +24,7 @@
                   </TableColumn>
                   <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played">
                      <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-notes-outline" iconSize="25" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-play-circle" iconSize="22" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Search on Web">
