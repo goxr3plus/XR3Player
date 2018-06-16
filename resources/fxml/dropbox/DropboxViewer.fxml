@@ -181,11 +181,11 @@
             </VBox>
          </children>
       </StackPane>
-      <VBox fx:id="refreshVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #202020;" visible="false">
+      <VBox fx:id="refreshVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #202020;">
          <children>
             <Label fx:id="refreshLabel" alignment="CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Connecting to Server" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
             <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="110.0" styleClass="dropbox-progress-indicator" />
-            <Button fx:id="cancelDropBoxService" mnemonicParsing="false" text="Cancel">
+            <Button fx:id="cancelDropBoxService" mnemonicParsing="false" prefHeight="67.0" prefWidth="135.0" styleClass="jfx-button4" text="Cancel">
                <tooltip>
                   <Tooltip text="Cancel Service" />
                </tooltip>
@@ -279,7 +279,7 @@
             </SplitPane>
          </children>
       </VBox>
-      <VBox fx:id="authorizationCodeVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #007EE5;">
+      <VBox fx:id="authorizationCodeVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #007EE5;" visible="false">
          <children>
             <TextField fx:id="authorizationCodeTextField" focusTraversable="false" prefHeight="54.0" promptText="Copy and paste DropBox authorization code here..." styleClass="dark-text-field">
                <VBox.margin>
