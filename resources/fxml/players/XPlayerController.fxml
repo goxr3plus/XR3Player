@@ -75,7 +75,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                              <graphic>
-                                                <FontIcon iconColor="WHITE" iconLiteral="gmi-sentiment-neutral" iconSize="24" />
+                                                <FontIcon iconColor="WHITE" iconLiteral="fa-square-o" iconSize="24" />
                                              </graphic>
                                           </Button>
                                           <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="jfx-button4">

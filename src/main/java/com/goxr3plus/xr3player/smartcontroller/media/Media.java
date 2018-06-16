@@ -255,8 +255,8 @@ public abstract class Media {
 		getInfoBuy = new SimpleObjectProperty<>(searchMediaOnWeb);
 		
 		//ArtWork FontIcon
-		FontIcon emotionIcon = new FontIcon("gmi-sentiment-neutral");
-		emotionIcon.setIconSize(24);
+		FontIcon emotionIcon = new FontIcon("fa-square-o");
+		emotionIcon.setIconSize(28);
 		emotionIcon.setIconColor(Color.WHITE);
 		
 		Button emotionButton = new Button("", emotionIcon);
