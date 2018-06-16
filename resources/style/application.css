@@ -2035,25 +2035,20 @@
 }
 
 
-.toggle-button3,.jfx-menu-button2,.jfx-button4,.dark-menu-button{
+/*******************************************************************************
+
+*                        Dark Buttons etc                    *
+
+******************************************************************************/
+
+
+.toggle-button3,.jfx-menu-button2,.jfx-button4,.dark-menu-button,.dark-round-jfx-button{
     -fx-background-color:rgb(20.0,20.0,20.0);
     -fx-text-fill:white;
     -fx-background-radius: 0.0px;
     -fx-background-insets: 0.0px;
     -fx-cursor:hand;
     -fx-font-weight:bold;
-}
-
-/*.toggle-button3:armed,
-.toggle-button3:hover,
-.toggle-button3:focused{
-   
-}
-*
-*/
-
-.jfx-button4:hover,.dark-menu-button:hover{
-	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
 }
 
 .dark-menu-button .label{
@@ -2064,12 +2059,31 @@
 	-fx-background-color:transparent;
 }
 
+
+.jfx-button4:hover,.dark-menu-button:hover{
+	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
+}
+
+
 .toggle-button3:hover{
 	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
 }
 
 .toggle-button3:selected{
    -fx-background-color:rgb(255.0,106.0,0.0,0.65);
+}
+
+/*.toggle-button3:armed,
+.toggle-button3:hover,
+.toggle-button3:focused{
+   
+}
+*
+*/
+
+.dark-round-jfx-button{
+	-fx-background-radius:45.0;
+	-fx-background-color:#000000;
 }
 
 

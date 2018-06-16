@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -29,9 +30,6 @@
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="902.0" style="-fx-background-color: rgb(0,0,0,0.7);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <padding>
-      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-   </padding>
    <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" fx:id="xPlayerStackPane">
          <children>
@@ -43,28 +41,25 @@
                            <top>
                               <StackPane BorderPane.alignment="CENTER">
                                  <children>
-                                    <HBox fx:id="mediaNameHBox" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="871.0" spacing="2.0" style="-fx-background-color: #202020;">
+                                    <HBox fx:id="mediaNameHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="32.0" spacing="2.0" style="-fx-background-color: #151515;">
                                        <children>
-                                          <HBox maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                                          <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Current" VBox.vgrow="ALWAYS" />
-                                                      <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Remaining" VBox.vgrow="ALWAYS" />
-                                                      <Label fx:id="remainingTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Total" VBox.vgrow="ALWAYS" />
-                                                      <Label fx:id="totalTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-font-size: 10; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" />
-                                                   </children>
-                                                </VBox>
+                                                <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
+                                                   <graphic>
+                                                      <FontIcon iconColor="#29ff8b" iconLiteral="icm-clock2" iconSize="18" />
+                                                   </graphic>
+                                                </Label>
+                                                <Label fx:id="remainingTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
+                                                   <graphic>
+                                                      <FontIcon iconColor="#fc4f4f" iconLiteral="icm-clock2" iconSize="18" />
+                                                   </graphic>
+                                                </Label>
+                                                <Label fx:id="totalTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
+                                                   <graphic>
+                                                      <FontIcon iconColor="#3bd9f5" iconLiteral="icm-clock2" iconSize="18" />
+                                                   </graphic>
+                                                </Label>
                                              </children>
                                           </HBox>
                                           <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
@@ -103,8 +98,11 @@
                                           </Button>
                                        </children>
                                        <padding>
-                                          <Insets left="2.0" top="5.0" />
+                                          <Insets bottom="5.0" left="2.0" top="5.0" />
                                        </padding>
+                                       <StackPane.margin>
+                                          <Insets />
+                                       </StackPane.margin>
                                     </HBox>
                                     <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
                                        <graphic>
@@ -121,12 +119,12 @@
                                        <center>
                                           <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
                                        </center>
-                                       <bottom>
-                                          <StackPane fx:id="diskStackPane1" maxWidth="-Infinity" prefWidth="304.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                                       <top>
+                                          <StackPane fx:id="diskStackPane1" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                                              <children>
-                                                <FlowPane alignment="CENTER" hgap="5.0" vgap="5.0">
+                                                <FlowPane alignment="CENTER" hgap="5.0" prefWidth="382.0" style="-fx-background-color: transparent;" vgap="5.0">
                                                    <children>
-                                                      <Button fx:id="replayButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" style="-fx-font-size: 11; -fx-background-radius: 32;">
+                                                      <Button fx:id="replayButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" styleClass="dark-round-jfx-button">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -134,10 +132,14 @@
                                                             <Tooltip text="Replay" />
                                                          </tooltip>
                                                          <graphic>
-                                                            <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                            <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="32" selectionEnd="0" selectionStart="0" text="">
+                                                               <rotationAxis>
+                                                                  <Point3D />
+                                                               </rotationAxis>
+                                                            </FontIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button fx:id="backwardButton" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 11; -fx-background-radius: 32;" text="60" textAlignment="CENTER" wrapText="true">
+                                                      <Button fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
                                                          <graphic>
                                                             <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -154,7 +156,7 @@
                                                       </Button>
                                                       <HBox alignment="CENTER" spacing="5.0">
                                                          <children>
-                                                            <Button fx:id="playPauseButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0">
+                                                            <Button fx:id="playPauseButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
                                                                <graphic>
                                                                   <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                                                      <image>
@@ -169,7 +171,7 @@
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </Button>
-                                                            <Button fx:id="stopButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" style="-fx-font-size: 11; -fx-background-radius: 32;">
+                                                            <Button fx:id="stopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
@@ -182,7 +184,7 @@
                                                             </Button>
                                                          </children>
                                                       </HBox>
-                                                      <Button fx:id="forwardButton" contentDisplay="RIGHT" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 11; -fx-background-radius: 32;" styleClass="last" text="60">
+                                                      <Button fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60">
                                                          <graphic>
                                                             <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -197,12 +199,6 @@
                                                             <Tooltip text="Skip forward n seconds" />
                                                          </tooltip>
                                                       </Button>
-                                                      <ToggleButton fx:id="muteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 32;" styleClass="toggle-button2">
-                                                         <graphic>
-                                                            <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
-                                                         </graphic>
-                                                      </ToggleButton>
-                                                      <HBox alignment="CENTER" />
                                                    </children>
                                                    <StackPane.margin>
                                                       <Insets />
@@ -210,10 +206,13 @@
                                                 </FlowPane>
                                              </children>
                                              <BorderPane.margin>
-                                                <Insets bottom="2.0" left="2.0" right="2.0" top="5.0" />
+                                                <Insets right="1.0" />
                                              </BorderPane.margin>
+                                             <padding>
+                                                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                             </padding>
                                           </StackPane>
-                                       </bottom>
+                                       </top>
                                     </BorderPane>
                                     <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
@@ -379,12 +378,7 @@
                                        <children>
                                           <FlowPane alignment="CENTER" hgap="5.0" prefHeight="64.0" prefWidth="394.0" vgap="5.0">
                                              <children>
-                                    <ToggleButton fx:id="smMuteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 32;" styleClass="toggle-button2">
-                                                   <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
-                                                   </graphic>
-                                    </ToggleButton>
-                                    <Button fx:id="smReplayButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" style="-fx-font-size: 11; -fx-background-radius: 32;">
+                                    <Button fx:id="smReplayButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" styleClass="dark-round-jfx-button">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -392,10 +386,10 @@
                                           <Tooltip text="Replay" />
                                        </tooltip>
                                                    <graphic>
-                                                      <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                      <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="32" selectionEnd="0" selectionStart="0" />
                                                    </graphic>
                                     </Button>
-                                    <Button fx:id="smBackwardButton" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 11; -fx-background-radius: 32;" text="60" textAlignment="CENTER" wrapText="true">
+                                    <Button fx:id="smBackwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
                                        <graphic>
                                           <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -412,7 +406,7 @@
                                     </Button>
                                                 <HBox alignment="CENTER" spacing="5.0">
                                                    <children>
-                                                      <Button fx:id="smPlayPauseButton" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0">
+                                                      <Button fx:id="smPlayPauseButton" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" styleClass="dark-round-jfx-button">
                                                          <graphic>
                                                 <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -427,7 +421,7 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </Button>
-                                          <Button fx:id="smStopButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" style="-fx-font-size: 11; -fx-background-radius: 32;">
+                                          <Button fx:id="smStopButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -440,7 +434,7 @@
                                           </Button>
                                                    </children>
                                                 </HBox>
-                                    <Button fx:id="smForwardButton" contentDisplay="RIGHT" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 11; -fx-background-radius: 32;" styleClass="last" text="60">
+                                    <Button fx:id="smForwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60">
                                        <graphic>
                                           <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -512,21 +506,32 @@
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic></Label>
-                              <ToggleButton fx:id="modeToggle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Disc Mode" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Disc Mode" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon fx:id="visualizerEyeIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon fx:id="visualizerEyeIcon1" iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
                                     <Insets left="2.0" right="2.0" />
                                  </HBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="settingsToggle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="settingsToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon fx:id="visualizerEyeIcon2" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon fx:id="visualizerEyeIcon2" iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
                                     <Insets right="2.0" />
                                  </HBox.margin>
+                              </ToggleButton>
+                              <ToggleButton fx:id="muteButton" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3">
+                                 <graphic>
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="2.0" />
+                                 </HBox.margin>
+                                 <tooltip>
+                                    <Tooltip text="Mute Player" />
+                                 </tooltip>
                               </ToggleButton>
                               <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
@@ -605,7 +610,7 @@
                   </BorderPane>
                </top>
                <left>
-                  <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                  <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
                            <cursor>
@@ -629,7 +634,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="20" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
+                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="28" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
                               <Insets top="8.0" />

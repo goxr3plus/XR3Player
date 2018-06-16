@@ -179,9 +179,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button forwardButton;
 	
 	@FXML
-	private ToggleButton muteButton;
-	
-	@FXML
 	private StackPane visualizerStackTopParent;
 	
 	@FXML
@@ -245,9 +242,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smMediaTitle;
 	
 	@FXML
-	private ToggleButton smMuteButton;
-	
-	@FXML
 	private Button smReplayButton;
 	
 	@FXML
@@ -281,13 +275,19 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label topInfoLabel;
 	
 	@FXML
-	private Label modeToggleLabel;
+	private ToggleButton modeToggle;
 	
 	@FXML
-	private JFXToggleButton modeToggle;
+	private FontIcon visualizerEyeIcon1;
 	
 	@FXML
-	private JFXToggleButton settingsToggle;
+	private ToggleButton settingsToggle;
+	
+	@FXML
+	private FontIcon visualizerEyeIcon2;
+	
+	@FXML
+	private ToggleButton muteButton;
 	
 	@FXML
 	private Button extendPlayer;
@@ -512,7 +512,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	/**
 	 * @return the settingsToggle
 	 */
-	public JFXToggleButton getSettingsToggle() {
+	public ToggleButton getSettingsToggle() {
 		return settingsToggle;
 	}
 	
@@ -553,7 +553,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Muted", String.valueOf(muteButton.isSelected()));
 			
 		});
-		smMuteButton.selectedProperty().bindBidirectional(muteButton.selectedProperty());
 		
 		//
 		xPlayerPlayList = new XPlayerPlaylist(this);
@@ -756,7 +755,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		// topInfoLabel
 		topInfoLabel.setText("Player ");
-		( (FontIcon) topInfoLabel.getGraphic() ).setIconLiteral("gmi-filter-"+(getKey()+1));
+		( (FontIcon) topInfoLabel.getGraphic() ).setIconLiteral("gmi-filter-" + ( getKey() + 1 ));
 		
 		//== forwardButton
 		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
@@ -806,14 +805,14 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		modeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
 			if (!newValue) {
 				smBorderPane.setVisible(true);
-				modeToggleLabel.setText("Basic");
+				//modeToggleLabel.setText("Basic")
 				
 				//Fix the Visualizer
 				simple_And_Advanced_Mode_Fix_Visualizer();
 				
 			} else {
 				smBorderPane.setVisible(false);
-				modeToggleLabel.setText("Advanced");
+				//modeToggleLabel.setText("Advanced")
 				
 				//Fix the Visualizer
 				simple_And_Advanced_Mode_Fix_Visualizer();
@@ -2151,7 +2150,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	/**
 	 * @return the modeToggle
 	 */
-	public JFXToggleButton getModeToggle() {
+	public ToggleButton getModeToggle() {
 		return modeToggle;
 		
 	}
