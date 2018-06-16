@@ -56,12 +56,12 @@
                      </VBox.margin></Label>
                   <StackPane>
                      <children>
-                        <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Main Mode">
+                        <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Libraries Mode">
                            <toggleGroup>
                               <ToggleGroup fx:id="modeTeam" />
                            </toggleGroup>
                            <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-university" iconSize="32" />
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-library-music" iconSize="32" />
                            </graphic>
                         </ToggleButton>
                         <FontIcon fx:id="mainModeVolumeIcon" iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
@@ -87,7 +87,7 @@
                   </StackPane>
                   <StackPane layoutX="10.0" layoutY="261.0">
                      <children>
-                        <ToggleButton fx:id="userInfoToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="User" toggleGroup="$modeTeam">
+                        <ToggleButton fx:id="userInfoToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="User Information" toggleGroup="$modeTeam">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fa-user-circle-o" iconSize="32" />
                            </graphic>
