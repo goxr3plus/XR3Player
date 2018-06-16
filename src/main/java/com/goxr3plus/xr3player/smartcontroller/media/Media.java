@@ -1098,7 +1098,7 @@ public abstract class Media {
 		else if (emotion == Emotion.DISLIKE)
 			size = 20;
 		else if (emotion == Emotion.NEUTRAL)
-			size = 24;
+			size = 28;
 		else if (emotion == Emotion.LIKE)
 			size = 20;
 		else if (emotion == Emotion.LOVE)

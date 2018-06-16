@@ -77,7 +77,7 @@ public class EmotionsWindow extends BorderPane {
 	 */
 	private Timeline timeLine = new Timeline();
 	
-	public static final String NEUTRAL_LITERAL = "gmi-sentiment-neutral";
+	public static final String NEUTRAL_LITERAL = "fa-square-o";
 	
 	/**
 	 * Constructor
@@ -338,16 +338,16 @@ public class EmotionsWindow extends BorderPane {
 			emotionIcon.setIconColor(Color.WHITE);
 			
 			if (emotion == Emotion.HATE) {
-				emotionIcon.setIconColor(Color.web("#dd3f3f"));
+				//emotionIcon.setIconColor(Color.web("#dd3f3f"))
 				emotionIcon.setIconLiteral("far-frown");
 			} else if (emotion == Emotion.DISLIKE) {
 				emotionIcon.setIconLiteral("far-thumbs-down");
 			} else if (emotion == Emotion.NEUTRAL) {
-				emotionIcon.setIconLiteral("gmi-sentiment-neutral");
+				emotionIcon.setIconLiteral(NEUTRAL_LITERAL);
 			} else if (emotion == Emotion.LIKE) {
 				emotionIcon.setIconLiteral("far-thumbs-up");
 			} else if (emotion == Emotion.LOVE) {
-				emotionIcon.setIconColor(Color.web("#dd3f3f"));
+				//emotionIcon.setIconColor(Color.web("#dd3f3f"))
 				emotionIcon.setIconLiteral("far-heart");
 			}
 			
