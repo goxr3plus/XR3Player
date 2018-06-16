@@ -35,7 +35,7 @@
    <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" fx:id="xPlayerStackPane">
          <children>
-            <BorderPane fx:id="rootBorderPane" prefHeight="200.0" prefWidth="200.0">
+            <BorderPane fx:id="rootBorderPane">
                <center>
                   <StackPane fx:id="modesStackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -78,7 +78,7 @@
                                                 <FontIcon iconColor="WHITE" iconLiteral="fa-square-o" iconSize="24" />
                                              </graphic>
                                           </Button>
-                                          <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="jfx-button4">
+                                          <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="dark-menu-button">
                                             <items>
                                               <MenuItem fx:id="copyFileTitle" mnemonicParsing="false" text="Copy File Title" />
                                               <MenuItem fx:id="copyFileLocation" mnemonicParsing="false" text="Copy File Location" />
@@ -503,58 +503,32 @@
                <top>
                   <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                      <center>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" minWidth="0.0" prefHeight="28.0" spacing="4.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text=" Player" HBox.hgrow="ALWAYS">
+                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="1.0" />
+                                    <Insets left="2.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic></Label>
-                           </children>
-                           <padding>
-                              <Insets bottom="2.0" top="2.0" />
-                           </padding>
-                           <BorderPane.margin>
-                              <Insets left="2.0" />
-                           </BorderPane.margin>
-                        </HBox>
-                     </center>
-                     <right>
-                        <HBox alignment="CENTER" minWidth="0.0" spacing="1.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label fx:id="modeToggleLabel" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" text="Basic">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <padding>
-                                    <Insets left="3.0" right="3.0" />
-                                 </padding>
+                              <ToggleButton fx:id="modeToggle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Disc Mode" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <JFXToggleButton fx:id="modeToggle" focusTraversable="false" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="17.0" text=" " textOverrun="CLIP" toggleColor="WHITE" toggleLineColor="#72ef13" unToggleLineColor="#f43e13">
-                                       <font>
-                                          <Font size="1.0" />
-                                       </font>
-                                    </JFXToggleButton>
+                                    <FontIcon fx:id="visualizerEyeIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #202020;" text="History">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <padding>
-                                    <Insets left="3.0" right="3.0" />
-                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="2.0" right="2.0" />
+                                 </HBox.margin>
+                              </ToggleButton>
+                              <ToggleButton fx:id="settingsToggle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <JFXToggleButton fx:id="settingsToggle" focusTraversable="false" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="17.0" text=" " textOverrun="CLIP" toggleColor="WHITE" toggleLineColor="#72ef13" unToggleLineColor="#f43e13">
-                                       <font>
-                                          <Font size="1.0" />
-                                       </font>
-                                    </JFXToggleButton>
+                                    <FontIcon fx:id="visualizerEyeIcon2" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
-                              </Label>
-                              <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets right="2.0" />
+                                 </HBox.margin>
+                              </ToggleButton>
+                              <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -572,14 +546,14 @@
                               </Button>
                            </children>
                            <BorderPane.margin>
-                              <Insets left="2.0" />
+                              <Insets />
                            </BorderPane.margin>
                         </HBox>
-                     </right>
+                     </center>
                      <left>
-                        <HBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                        <HBox maxHeight="36.0" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="29.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -590,7 +564,7 @@
                                     <FontIcon iconColor="#08c9eb" iconLiteral="typ-th-small" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -601,7 +575,7 @@
                                     <FontIcon iconColor="WHITE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="29.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
+                              <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -612,7 +586,7 @@
                                     <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                               </Button>
-                              <MenuButton fx:id="transferMedia" maxHeight="29.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                              <MenuButton fx:id="transferMedia" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
                                   <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />

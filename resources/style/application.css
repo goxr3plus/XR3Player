@@ -1734,6 +1734,7 @@
 ******************************************************************************/
 
 .menu-button{
+	-fx-background-radius:0.0;
 	-fx-cursor:hand;
 }
    
@@ -1759,14 +1760,6 @@
 	-fx-background-color:rgb(0.0,0.0,0.0,0.7);
 	-fx-background-radius:45.0;
 	-fx-text-fill:white;
-}
-
-
-
-
-
-.menu-button{
-	-fx-background-radius:0.0;
 }
 
 .menu-button2 .label{
@@ -2042,7 +2035,7 @@
 }
 
 
-.toggle-button3,.jfx-menu-button2,.jfx-button4{
+.toggle-button3,.jfx-menu-button2,.jfx-button4,.dark-menu-button{
     -fx-background-color:rgb(20.0,20.0,20.0);
     -fx-text-fill:white;
     -fx-background-radius: 0.0px;
@@ -2059,17 +2052,30 @@
 *
 */
 
-.toggle-button3:hover{
+.jfx-button4:hover,.dark-menu-button:hover{
 	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
 }
 
-.jfx-button4:hover{
+.dark-menu-button .label{
+	-fx-background-color:transparent;
+}
+
+.dark-menu-button .label:hover{
+	-fx-background-color:transparent;
+}
+
+.toggle-button3:hover{
 	-fx-background-color:rgb(255.0,106.0,0.0,0.9);
 }
 
 .toggle-button3:selected{
    -fx-background-color:rgb(255.0,106.0,0.0,0.65);
 }
+
+
+
+
+
 
 
 
