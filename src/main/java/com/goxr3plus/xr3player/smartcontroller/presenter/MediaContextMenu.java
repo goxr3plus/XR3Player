@@ -270,8 +270,8 @@ public class MediaContextMenu extends ContextMenu {
 			stopPlayer.getItems().get(i).setGraphic(!playerEnergized ? null : stopFontIcon);
 		}
 		
-		//Mark Played/Unplayed
-		this.markAsPlayed.setText("Mark as " + ( Main.playedSongs.containsFile(media.getFilePath()) ? "Unplayed" : "Played" ) + " (CTRL+U)");
+		//Mark Played or Not Played
+		this.markAsPlayed.setText("Mark as " + ( !Main.playedSongs.containsFile(media.getFilePath()) ? "Played" : "Not Played" ) + " (CTRL+U)");
 		
 		this.node = node;
 		this.media = media;

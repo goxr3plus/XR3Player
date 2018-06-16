@@ -13,7 +13,7 @@
    <top>
       <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0" style="-fx-font-size: 14; -fx-border-color: transparent; -fx-background-color: #050505;" styleClass="applicationSettingsLabel2" text="Name" HBox.hgrow="ALWAYS">
+            <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0" style="-fx-font-size: 14; -fx-border-color: transparent; -fx-background-color: #050505;" styleClass="applicationSettingsLabel2" text=" Name " HBox.hgrow="ALWAYS">
                <tooltip>
                   <Tooltip text="Empty Tooltip" />
                </tooltip>
@@ -34,7 +34,7 @@
                <children>
                   <JFXButton fx:id="hate" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#dd3f3f" iconLiteral="far-frown" iconSize="40" />
+                        <FontIcon iconColor="#dd3f3f" iconLiteral="icm-angry2" iconSize="40" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="dislike" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="248.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">

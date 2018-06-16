@@ -339,7 +339,7 @@ public class EmotionsWindow extends BorderPane {
 			
 			if (emotion == Emotion.HATE) {
 				//emotionIcon.setIconColor(Color.web("#dd3f3f"))
-				emotionIcon.setIconLiteral("far-frown");
+				emotionIcon.setIconLiteral("icm-angry2");
 			} else if (emotion == Emotion.DISLIKE) {
 				emotionIcon.setIconLiteral("far-thumbs-down");
 			} else if (emotion == Emotion.NEUTRAL) {

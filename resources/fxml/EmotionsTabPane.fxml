@@ -11,7 +11,7 @@
          <tabs>
             <Tab fx:id="hateTab" closable="false" text="Hated">
                <graphic>
-                  <FontIcon iconColor="#dd3f3f" iconLiteral="far-frown" iconSize="24" />
+                  <FontIcon iconColor="#dd3f3f" iconLiteral="icm-angry2" iconSize="24" />
                </graphic>
             </Tab>
             <Tab fx:id="dislikeTab" closable="false" text="Disliked">
