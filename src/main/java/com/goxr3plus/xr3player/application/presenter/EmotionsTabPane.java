@@ -92,6 +92,33 @@ public class EmotionsTabPane extends StackPane {
 	public JFXTabPane getTabPane() {
 		return tabPane;
 	}
-
+	
+	/**
+	 * @return the hateTab
+	 */
+	public Tab getHateTab() {
+		return hateTab;
+	}
+	
+	/**
+	 * @return the dislikeTab
+	 */
+	public Tab getDislikeTab() {
+		return dislikeTab;
+	}
+	
+	/**
+	 * @return the likeTab
+	 */
+	public Tab getLikeTab() {
+		return likeTab;
+	}
+	
+	/**
+	 * @return the loveTab
+	 */
+	public Tab getLoveTab() {
+		return loveTab;
+	}
 	
 }

@@ -333,8 +333,8 @@ public class DbManager {
 			//			});
 			
 			//Load all the Opened Libraries
-			Platform.runLater(
-					() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).forEach(library -> library.setLibraryStatus(LibraryStatus.OPENED, true)));
+			Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened)
+					.forEach(library -> library.setLibraryStatus(LibraryStatus.OPENED, true)));
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {
@@ -366,8 +366,8 @@ public class DbManager {
 					
 					// Give refresh based on the below formula
 					SmartController smartController = ( (SmartController) newTab.getContent() );
-					if ( ( !Main.libraryMode.openedLibrariesViewer.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
-							|| smartController.getReloadVBox().isVisible()) {
+					if ( ( !Main.libraryMode.openedLibrariesViewer.getTabPane().getTabs().isEmpty() && smartController.isFree(false)
+							&& smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
 						
 						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
 						
@@ -610,7 +610,7 @@ public class DbManager {
 							Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Bindings..."));
 							
 							//Update the emotion smart controller 
-							//Main.emotionListsController.updateEmotionSmartControllers(true, false, false, false);
+							Main.emotionListsController.updateSelectedSmartController(new boolean[]{ true , true , true , true });
 							
 							//Refresh all the XPlayers PlayLists
 							Main.xPlayersList.getList().stream()

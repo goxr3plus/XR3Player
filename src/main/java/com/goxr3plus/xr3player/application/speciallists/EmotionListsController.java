@@ -112,10 +112,8 @@ public class EmotionListsController {
 					
 				}
 				
-				//Update all the SmartControllers
-//				Platform.runLater(() ->
-//				
-//				updateEmotionSmartControllers(updateEmotion[0], updateEmotion[1], updateEmotion[2], updateEmotion[3]));
+				//Update in a very smart way
+				Platform.runLater(() -> updateSelectedSmartController(updateEmotion));
 				
 				//Commit to the Database
 				Main.dbManager.commit();
@@ -124,28 +122,29 @@ public class EmotionListsController {
 				ex.printStackTrace();
 			}
 		});
-				
+		
 	}
 	
 	/**
-	 * Update the Emotion SmartControllers based on the boolean given for each Emotion SmartController
-	 * 
-	 * @param updateHated
-	 * @param updateDisliked
-	 * @param updateLiked
-	 * @param updateLoved
+	 * Updates the Selected SmartController in a Smart Way
 	 */
-//	public void updateEmotionSmartControllers(boolean updateHated , boolean updateDisliked , boolean updateLiked , boolean updateLoved) {
-//		
-//		if (updateHated)
-//			hatedMediaListController.getLoadService().startService(false, false, true);
-//		if (updateDisliked)
-//			dislikedMediaListController.getLoadService().startService(false, false, true);
-//		if (updateLiked)
-//			likedMediaListController.getLoadService().startService(false, false, true);
-//		if (updateLoved)
-//			lovedMediaListController.getLoadService().startService(false, false, true);
-//	}
+	public void updateSelectedSmartController(boolean[] updateEmotion) {
+		
+		//Show ReloadVBox for every SmartController
+		if (updateEmotion[0])
+			hatedMediaListController.getReloadVBox().setVisible(true);
+		if (updateEmotion[1])
+			dislikedMediaListController.getReloadVBox().setVisible(true);
+		if (updateEmotion[2])
+			likedMediaListController.getReloadVBox().setVisible(true);
+		if (updateEmotion[3])
+			lovedMediaListController.getReloadVBox().setVisible(true);
+		
+		//If the emotions Tab Pane is Selected we need an instant refresh
+		if (Main.playListModesTabPane.getEmotionListsTab().isSelected())
+			( (SmartController) Main.emotionsTabPane.getTabPane().getSelectionModel().getSelectedItem().getContent() ).getLoadService().startService(false, false, true);
+		
+	}
 	
 	/**
 	 * Checks if the Media is contained in any of the emotion lists , if not it's emotion is neutral by default
