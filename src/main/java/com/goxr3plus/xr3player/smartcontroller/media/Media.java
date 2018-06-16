@@ -216,14 +216,14 @@ public abstract class Media {
 		
 		//Download
 		FontIcon searchOnWebIcon = new FontIcon("fas-cloud-download-alt");
-		searchOnWebIcon.setIconSize(16);
+		searchOnWebIcon.setIconSize(18);
 		searchOnWebIcon.setIconColor(Color.WHITE);
 		
 		Button searchMediaOnWeb = new Button("", searchOnWebIcon);
 		searchMediaOnWeb.getStyleClass().add("jfx-button2");
-		searchMediaOnWeb.setPrefSize(24, 24);
-		searchMediaOnWeb.setMinSize(24, 24);
-		searchMediaOnWeb.setMaxSize(24, 24);
+		searchMediaOnWeb.setPrefSize(28, 24);
+		searchMediaOnWeb.setMinSize(28, 24);
+		searchMediaOnWeb.setMaxSize(28, 24);
 		searchMediaOnWeb.setStyle("-fx-cursor:hand");
 		searchMediaOnWeb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		searchMediaOnWeb.setOnMouseReleased(m -> {
@@ -237,12 +237,12 @@ public abstract class Media {
 		
 		getInfoBuy = new SimpleObjectProperty<>(searchMediaOnWeb);
 		
-		//ArtWork FontIcon
-		FontIcon emotionIcon = new FontIcon("fa-square-o");
-		emotionIcon.setIconSize(28);
-		emotionIcon.setIconColor(Color.WHITE);
+		//Emotions FontIcon
+//		FontIcon emotionIcon = new FontIcon("fa-square-o")
+//		emotionIcon.setIconSize(28)
+//		emotionIcon.setIconColor(Color.WHITE)
 		
-		Button emotionButton = new Button("", emotionIcon);
+		Button emotionButton = new Button("");
 		emotionButton.getStyleClass().add("jfx-button2");
 		emotionButton.setPrefSize(24, 24);
 		emotionButton.setMinSize(24, 24);

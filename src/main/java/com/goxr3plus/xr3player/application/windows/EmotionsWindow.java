@@ -24,8 +24,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -343,7 +341,7 @@ public class EmotionsWindow extends BorderPane {
 			} else if (emotion == Emotion.DISLIKE) {
 				emotionIcon.setIconLiteral("far-thumbs-down");
 			} else if (emotion == Emotion.NEUTRAL) {
-				emotionIcon.setIconLiteral(NEUTRAL_LITERAL);
+				//emotionIcon.setIconLiteral(NEUTRAL_LITERAL)
 			} else if (emotion == Emotion.LIKE) {
 				emotionIcon.setIconLiteral("far-thumbs-up");
 			} else if (emotion == Emotion.LOVE) {
