@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -24,7 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -252,8 +254,20 @@ public class MediaContextMenu extends ContextMenu {
 		for (int i = 0; i <= 2; i++) {
 			boolean playerEnergized = Main.xPlayersList.getXPlayer(i).isOpened() || Main.xPlayersList.getXPlayer(i).isPausedOrPlaying()
 					|| Main.xPlayersList.getXPlayer(i).isSeeking();
-			( (ImageView) startPlayer.getItems().get(i).getGraphic() ).setImage(!playerEnergized ? null : Media.PLAYING_IMAGE);
-			( (ImageView) stopPlayer.getItems().get(i).getGraphic() ).setImage(!playerEnergized ? null : Media.PLAYING_IMAGE);
+			
+			//PlayFontIcon
+			FontIcon playFontIcon = new FontIcon("fas-play-circle");
+			playFontIcon.setIconSize(24);
+			playFontIcon.setIconColor(Color.web("#ceff26"));
+			
+			//StopFontIcon
+			FontIcon stopFontIcon = new FontIcon("fas-stop-circle");
+			stopFontIcon.setIconSize(24);
+			stopFontIcon.setIconColor(Color.web("#ff3c26"));
+			
+			//Set it to the items
+			startPlayer.getItems().get(i).setGraphic(!playerEnergized ? null : playFontIcon);
+			stopPlayer.getItems().get(i).setGraphic(!playerEnergized ? null : stopFontIcon);
 		}
 		
 		//Mark Played/Unplayed
@@ -264,7 +278,7 @@ public class MediaContextMenu extends ContextMenu {
 		this.controller = controller1;
 		
 		// Show it
-		show((Main.mediaSearchWindow.getWindow().isShowing() && Main.mediaSearchWindow.getWindow().isFocused()) ? Main.mediaSearchWindow.getWindow() : Main.window,
+		show( ( Main.mediaSearchWindow.getWindow().isShowing() && Main.mediaSearchWindow.getWindow().isFocused() ) ? Main.mediaSearchWindow.getWindow() : Main.window,
 				x - super.getWidth(), y - 1);
 		previousGenre = genre;
 		

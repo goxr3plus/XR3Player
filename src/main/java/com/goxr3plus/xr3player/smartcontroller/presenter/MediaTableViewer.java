@@ -37,6 +37,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -447,11 +448,13 @@ public class MediaTableViewer extends StackPane {
 		// hasBeenPlayed
 		playStatus.setCellValueFactory(new PropertyValueFactory<>("playStatus"));
 		playStatus.setCellFactory(col -> new TableCell<Media,Integer>() {
-			private final ImageView imageView = new ImageView();
+			
+			//Icon FontIcon
+			FontIcon icon = new FontIcon();
 			
 			{
-				imageView.setFitWidth(24);
-				imageView.setFitHeight(24);
+				icon.setIconSize(24);
+				icon.setIconColor(Color.WHITE);
 				
 			}
 			
@@ -462,16 +465,17 @@ public class MediaTableViewer extends StackPane {
 					setText(null);
 					setGraphic(null);
 				} else {
-					setGraphic(imageView);
+					setGraphic(icon);
 					
 					// set the image according to the play status		
 					if (item != null)
 						if (item == -2)
-							imageView.setImage(null);
-						else if (item == -1)
-							imageView.setImage(Media.PLAYED_IMAGE);
-						else
-							imageView.setImage(item == 0 ? Media.PLAYING_IMAGE0 : item == 2 ? Media.PLAYING_IMAGE1 : Media.PLAYING_IMAGE2);
+							setGraphic(null);
+						else if (item == -1) {
+							icon.setIconLiteral("fas-play-circle");
+							icon.setIconColor(Color.web("#ceff26"));
+						} else
+							icon.setIconLiteral(item == 0 ? "gmi-filter-1" : item == 1 ? "gmi-filter-2" : "gmi-filter-3");
 				}
 			}
 			

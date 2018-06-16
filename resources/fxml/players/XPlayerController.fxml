@@ -505,10 +505,13 @@
                      <center>
                         <HBox alignment="CENTER" maxHeight="-Infinity" minWidth="0.0" prefHeight="28.0" spacing="4.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="topInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text=" Player { 0 }   " HBox.hgrow="ALWAYS">
+                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text=" Player" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="1.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
+                                 </graphic></Label>
                            </children>
                            <padding>
                               <Insets bottom="2.0" top="2.0" />

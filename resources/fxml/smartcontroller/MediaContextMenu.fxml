@@ -12,46 +12,22 @@
    <items>
       <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on (CTRL+ENTER)">
          <items>
-            <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MenuItem>
-            <MenuItem fx:id="startOnPlayer1" mnemonicParsing="false" onAction="#action" text="xPlayer ~1">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MenuItem>
-            <MenuItem fx:id="startOnPlayer2" mnemonicParsing="false" onAction="#action" text="xPlayer ~2">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MenuItem>
+            <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="Player 1" />
+            <MenuItem fx:id="startOnPlayer1" mnemonicParsing="false" onAction="#action" text="Player 2" />
+            <MenuItem fx:id="startOnPlayer2" mnemonicParsing="false" onAction="#action" text="Player 3" />
          </items>
          <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="far-play-circle" iconSize="24" />
+            <FontIcon iconColor="#ceff26" iconLiteral="far-play-circle" iconSize="24" />
          </graphic>
       </Menu>
       <Menu fx:id="stopPlayer" mnemonicParsing="false" text="Stop Player">
          <items>
-            <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="xPlayer ~0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MenuItem>
-            <MenuItem fx:id="stopPlayer1" mnemonicParsing="false" onAction="#action" text="xPlayer ~1">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MenuItem>
-            <MenuItem fx:id="stopPlayer2" mnemonicParsing="false" onAction="#action" text="xPlayer ~2">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MenuItem>
+            <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="Player 1" />
+            <MenuItem fx:id="stopPlayer1" mnemonicParsing="false" onAction="#action" text="Player 2" />
+            <MenuItem fx:id="stopPlayer2" mnemonicParsing="false" onAction="#action" text="Player 3" />
          </items>
          <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-stop-circle" iconSize="24" />
+            <FontIcon iconColor="#fc4848" iconLiteral="fas-stop-circle" iconSize="24" />
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />

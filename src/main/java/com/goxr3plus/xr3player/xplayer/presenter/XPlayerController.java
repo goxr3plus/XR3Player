@@ -755,7 +755,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		});
 		
 		// topInfoLabel
-		topInfoLabel.setText("Player {" + this.getKey() + "}");
+		topInfoLabel.setText("Player ");
+		( (FontIcon) topInfoLabel.getGraphic() ).setIconLiteral("gmi-filter-"+(getKey()+1));
 		
 		//== forwardButton
 		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
@@ -2200,7 +2201,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public Label getPlayerLoadingLabel() {
 		return playerLoadingLabel;
 	}
-
+	
 	/**
 	 * @return the mediaTagImageView
 	 */
