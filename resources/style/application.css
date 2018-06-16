@@ -2021,6 +2021,7 @@
 	-fx-text-fill:white;
 	-fx-fill:white;
 	-fx-accent: firebrick ;
+	-fx-font-weight:bold;
 }
 
 .dark-text-area .content {
