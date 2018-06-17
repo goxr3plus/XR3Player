@@ -216,9 +216,10 @@ public class VisualizerWindowController extends StackPane {
 		
 		// -------------Top Bar Elements---------------
 		
-		//visualizerLabrel
+		//visualizerLabel
 		visualizerLabel.setText("Visualizer");
 		visualizerLabelFontIcon.setIconLiteral("gmi-filter-" + ( xPlayerController.getKey() + 1 ));
+		window.setTitle("Visualizer " + ( xPlayerController.getKey() + 1 ));
 		
 		//progressLabel
 		progressLabel.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("%.02f %%"));
