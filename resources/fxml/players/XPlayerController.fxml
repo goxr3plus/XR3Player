@@ -62,17 +62,6 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                                             <tooltip>
-                                                <Tooltip text="Express your emotion for this Song" />
-                                             </tooltip>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                             <graphic>
-                                                <FontIcon iconColor="WHITE" iconLiteral="fa-square-o" iconSize="24" />
-                                             </graphic>
-                                          </Button>
                                           <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="dark-menu-button">
                                             <items>
                                               <MenuItem fx:id="copyFileTitle" mnemonicParsing="false" text="Copy File Title" />
@@ -113,7 +102,7 @@
                               </StackPane>
                            </top>
                            <center>
-                              <SplitPane dividerPositions="0.3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                              <SplitPane dividerPositions="0.45" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <items>
                                     <BorderPane fx:id="discBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" SplitPane.resizableWithParent="false">
                                        <center>
@@ -220,7 +209,7 @@
                                              <graphic>
                                                 <Label>
                                                    <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="gmi-timeline" iconSize="24" />
+                                                      <FontIcon iconColor="WHITE" iconLiteral="icm-spinner4" iconSize="24" />
                                                    </graphic>
                                                    <tooltip>
                                                       <Tooltip text="Visualizer" />
@@ -233,21 +222,27 @@
                                                       <StackPane fx:id="visualizerStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                                                          <children>
                                                             <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #202020; -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Status : Stopped" textAlignment="CENTER" wrapText="true" />
-                                                            <Label fx:id="visualizerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" opacity="0.95" styleClass="progress-label" text="Visualizer" textAlignment="CENTER" wrapText="true">
-                                                               <StackPane.margin>
-                                                                  <Insets left="5.0" right="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                            <JFXButton fx:id="visualizerVisibleLabel" buttonType="RAISED" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button3" text="Visualizer Invisible" visible="false">
+                                                            <Label fx:id="visualizerLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 20;" styleClass="progress-label" text="Visualizer" textAlignment="CENTER" wrapText="true">
                                                                <StackPane.margin>
                                                                   <Insets left="5.0" right="5.0" />
                                                                </StackPane.margin>
                                                                <graphic>
-                                                                  <FontIcon iconColor="#ff4d00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                  <FontIcon iconColor="WHITE" iconLiteral="icm-spinner4" iconSize="24" />
                                                                </graphic>
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <JFXButton fx:id="visualizerVisibleLabel" buttonType="RAISED" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Show Visualizer" textAlignment="CENTER" visible="false" wrapText="true">
+                                                               <StackPane.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </StackPane.margin>
                                                                <tooltip>
                                                                   <Tooltip text="Click to make visualizer visible again " />
                                                                </tooltip>
+                                                               <graphic>
+                                                                  <FontIcon fx:id="visualizerEyeIcon3" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="64" selectionEnd="0" selectionStart="0" />
+                                                               </graphic>
                                                             </JFXButton>
                                                             <FlowPane fx:id="visualizerMaximizedBox" alignment="CENTER" columnHalignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="186.0" vgap="15.0" visible="false" StackPane.alignment="CENTER">
                                                                <children>
@@ -314,7 +309,7 @@
                                                                   <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
                                                                </padding>
                                                             </HBox>
-                                                            <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
+                                                            <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="CENTER">
                                                                <graphic>
                                                                   <Button fx:id="enableHighGraphics" alignment="CENTER" focusTraversable="false" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button2" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
                                                                      <cursor>
@@ -451,12 +446,12 @@
                                     </Button>
                                                 <HBox alignment="CENTER">
                                                    <children>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="gmi-timeline" iconSize="32" />
                                                       <JFXToggleButton fx:id="showVisualizer" ellipsisString="...#f43e13" focusTraversable="false" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="17.0" text=" " textOverrun="CLIP" toggleColor="WHITE" toggleLineColor="#b6ff45" unToggleLineColor="#f43e13">
                                                          <font>
                                                             <Font size="1.0" />
                                                          </font>
                                                       </JFXToggleButton>
+                                                      <FontIcon iconColor="WHITE" iconLiteral="icm-spinner4" iconSize="32" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -499,6 +494,17 @@
                      <center>
                         <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
                            <children>
+                              <Button fx:id="emotionsButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                                 <tooltip>
+                                    <Tooltip text="Express your emotion for this Song" />
+                                 </tooltip>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets left="2.0" />
+                                 </HBox.margin>
+                              </Button>
                               <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="2.0" />
