@@ -39,8 +39,17 @@ public class MediaTagsService extends Service<Boolean> {
 	 */
 	public MediaTagsService() {
 		
-		setOnSucceeded(s -> mediaTableViewer.sortTable());
-		setOnFailed(f -> mediaTableViewer.sortTable());
+		setOnSucceeded(s -> done());
+		setOnFailed(f -> done());
+	}
+	
+	private void done() {
+		
+		//Try to Sort the table
+		mediaTableViewer.sortTable();
+		
+		//Refresh the Main Mode Table View
+		mediaTableViewer.getSmartController().getNormalModeMediatTableViewer().getTableView().refresh();
 	}
 	
 	/**

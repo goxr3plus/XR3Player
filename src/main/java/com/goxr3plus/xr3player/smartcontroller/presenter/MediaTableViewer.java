@@ -807,5 +807,12 @@ public class MediaTableViewer extends StackPane {
 	public MediaTagsService getAllDetailsService() {
 		return allDetailsService;
 	}
+
+	/**
+	 * @return the smartController
+	 */
+	public SmartController getSmartController() {
+		return smartController;
+	}
 	
 }
