@@ -407,8 +407,8 @@ public class LibraryMode extends BorderPane {
 			teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
 		});
 		
-		//noLibrariesStackPane
-		noLibrariesStackPane.visibleProperty().bind(djModeStackPane.visibleProperty().not());
+		//bottomSplitPane
+		bottomSplitPane.visibleProperty().bind(djModeStackPane.visibleProperty().not());
 	}
 	
 	/**
