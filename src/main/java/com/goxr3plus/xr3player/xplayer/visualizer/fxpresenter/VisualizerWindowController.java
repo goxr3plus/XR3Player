@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
@@ -106,6 +107,9 @@ public class VisualizerWindowController extends StackPane {
 	
 	@FXML
 	private Label visualizerLabel;
+	
+	@FXML
+	private FontIcon visualizerLabelFontIcon;
 	
 	@FXML
 	private Label progressLabel;
@@ -209,7 +213,8 @@ public class VisualizerWindowController extends StackPane {
 		// -------------Top Bar Elements---------------
 		
 		//visualizerLabrel
-		visualizerLabel.setText("Visualizer { " + xPlayerController.getKey() + " }");
+		visualizerLabel.setText("Visualizer");
+		visualizerLabelFontIcon.setIconLiteral("gmi-filter-" + ( xPlayerController.getKey() + 1 ));
 		
 		//progressLabel
 		progressLabel.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("%.02f %%"));
