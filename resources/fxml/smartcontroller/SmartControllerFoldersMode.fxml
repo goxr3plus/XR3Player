@@ -7,8 +7,6 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +14,7 @@
 
 <fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane>
+      <StackPane style="-fx-background-color: #202020;">
          <children>
             <VBox>
                <children>
@@ -24,18 +22,17 @@
                      <children>
                         <Label fx:id="topLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="Associated Folders Explorer" HBox.hgrow="ALWAYS">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/Folder%20Tree-24.png" />
-                                 </image>
-                              </ImageView>
+                              <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
                            </graphic>
+                           <padding>
+                              <Insets bottom="3.0" top="3.0" />
+                           </padding>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #202020;">
+                  <HBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="settings" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;">
+                        <Button fx:id="settings" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -46,7 +43,7 @@
                               <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
                            </graphic>
                         </Button>
-                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;">
+                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -57,7 +54,7 @@
                               <FontIcon iconColor="#32abe8" iconLiteral="fas-sync-alt" iconSize="20" />
                            </graphic>
                         </Button>
-                        <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;">
+                        <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -69,6 +66,9 @@
                            </graphic>
                         </Button>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="2.0" top="2.0" />
+                     </VBox.margin>
                   </HBox>
                   <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                </children>
