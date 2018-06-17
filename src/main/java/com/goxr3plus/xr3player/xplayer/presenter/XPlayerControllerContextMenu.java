@@ -193,6 +193,12 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 		this.node = node;
 		this.mediaPath = mediaPath;
 		
+		//Fix first time show problem
+		if (super.getWidth() == 0) {
+			show(Main.window);
+			hide();
+		}
+		
 		// Show it
 		show(Main.window, x - super.getWidth(), y - 1);
 		

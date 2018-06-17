@@ -51,6 +51,7 @@ public class UserContextMenu extends ContextMenu {
 	
 	/** The library. */
 	private User user;
+	
 	/**
 	 * Instantiates a new library context menu.
 	 * 
@@ -98,6 +99,12 @@ public class UserContextMenu extends ContextMenu {
 		// customize the menu accordingly
 		exportImage.setDisable(user.getImageView().getImage() == null);
 		resetImage.setDisable(exportImage.isDisable());
+		
+		//Fix first time show problem
+		if (super.getWidth() == 0) {
+			show(Main.window);
+			hide();
+		}
 		
 		// Show it
 		show(window, x - 15 - super.getWidth() + super.getWidth() * 14 / 100, y - 1);

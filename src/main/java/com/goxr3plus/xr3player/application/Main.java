@@ -658,8 +658,6 @@ public class Main extends Application {
 		root.setCenter(specialJFXTabPane);
 		
 		//---------LibraryMode ------------			
-		libraryMode.librariesContextMenu.show(window, 0, 0);
-		libraryMode.librariesContextMenu.hide();
 		
 		//Remove this to be soore...
 		libraryMode.getTopSplitPane().getItems().remove(libraryMode.getNoLibrariesStackPane());

@@ -277,6 +277,12 @@ public class MediaContextMenu extends ContextMenu {
 		this.media = media;
 		this.controller = controller1;
 		
+		//Fix first time show problem
+		if (super.getWidth() == 0) {
+			show(Main.window);
+			hide();
+		}
+		
 		// Show it
 		show( ( Main.mediaSearchWindow.getWindow().isShowing() && Main.mediaSearchWindow.getWindow().isFocused() ) ? Main.mediaSearchWindow.getWindow() : Main.window,
 				x - super.getWidth(), y - 1);
