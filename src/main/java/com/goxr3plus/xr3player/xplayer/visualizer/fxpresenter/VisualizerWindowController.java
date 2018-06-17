@@ -182,18 +182,16 @@ public class VisualizerWindowController extends StackPane {
 		scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue()));
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		
-		// ---Size Listeners
-		
-		// width-height Listeners
-		//		window.widthProperty().addListener((observable , oldValue , newValue) -> {
-		//			if (newValue.intValue() <= 200 && progressBarStackPane.isVisible()) {
-		//				progressBarStackPane.setVisible(false);
-		//				progressBarStackPane.setManaged(false);
-		//			} else if (newValue.intValue() > 200 && !progressBarStackPane.isVisible()) {
-		//				progressBarStackPane.setVisible(true);
-		//				progressBarStackPane.setManaged(true);
-		//			}
-		//		});
+		// width listener
+		window.widthProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue.intValue() <= 250 && visualizerLabel.isVisible()) {
+				visualizerLabel.setVisible(false);
+				visualizerLabel.setManaged(false);
+			} else if (newValue.intValue() > 250 && !visualizerLabel.isVisible()) {
+				visualizerLabel.setVisible(true);
+				visualizerLabel.setManaged(true);
+			}
+		});
 		
 		// --- MouseListeners
 		addEventHandler(MouseEvent.MOUSE_MOVED, m -> restartPauseTransition());
