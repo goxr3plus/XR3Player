@@ -163,7 +163,7 @@
                         </StackPane>
                      </items>
                   </SplitPane>
-                  <StackPane fx:id="djModeStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" visible="false" />
+                  <StackPane fx:id="djModeStackPane" minHeight="0.0" minWidth="0.0" visible="false" />
                </children>
             </StackPane>
         </items>
