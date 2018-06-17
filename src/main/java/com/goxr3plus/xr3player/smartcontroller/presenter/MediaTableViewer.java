@@ -11,6 +11,8 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -18,8 +20,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
@@ -43,7 +47,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
+import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMode;
@@ -82,7 +86,7 @@ public class MediaTableViewer extends StackPane {
 	private TableColumn<Media,Button> getInfoBuy;
 	
 	@FXML
-	private TableColumn<Media,Button> emotions;
+	private TableColumn<Media,Integer> emotions;
 	
 	/** The duration. */
 	@FXML
@@ -429,17 +433,88 @@ public class MediaTableViewer extends StackPane {
 		//getInfoBuy
 		getInfoBuy.setCellValueFactory(new PropertyValueFactory<>("getInfoBuy"));
 		
-		// likeDislikeNeutral
-		emotions.setCellValueFactory(new PropertyValueFactory<>("likeDislikeNeutral"));
-		emotions.setComparator((button1 , button2) -> {
-			if ( ( (FontIcon) button1.getGraphic() ).getIconLiteral() == EmotionsWindow.NEUTRAL_LITERAL
-					&& ( (FontIcon) button2.getGraphic() ).getIconLiteral() != EmotionsWindow.NEUTRAL_LITERAL)
-				return 1;
-			else if ( ( (FontIcon) button1.getGraphic() ).getIconLiteral() != EmotionsWindow.NEUTRAL_LITERAL
-					&& ( (FontIcon) button2.getGraphic() ).getIconLiteral() == EmotionsWindow.NEUTRAL_LITERAL)
-				return -1;
-			else
-				return 0;
+		//emotion
+		emotions.setCellValueFactory(new PropertyValueFactory<>("emotion"));
+		emotions.setCellFactory(col -> new TableCell<Media,Integer>() {
+			
+			/**
+			 * Update the emotion the user is feeling for this Media
+			 */
+			public void updateEmotion(Media media , Node node) {				
+				// Show the Window
+				Main.emotionsWindow.show(media.getFileName(), node);//getFileName()
+				
+				// Listener
+				Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
+					/**
+					 * [[SuppressWarningsSpartan]]
+					 */
+					@Override
+					public void invalidated(Observable o) {
+						
+						// Remove the listener
+						Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
+						
+						// !showing?
+						if (!Main.emotionsWindow.getWindow().isShowing() && Main.emotionsWindow.wasAccepted()) {
+							
+							//Add it the one of the emotions list
+							new Thread(() -> Main.emotionListsController.makeEmotionDecisition(media.getFilePath(), Main.emotionsWindow.getEmotion())).start();
+							
+						}
+					}
+				});
+				
+			}
+			
+			@Override
+			protected void updateItem(Integer item , boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+					setGraphic(null);
+				} else {
+					int size = 24;
+					Emotion emotion = Emotion.NEUTRAL;
+					
+					//Emotion Button
+					Button emotionButton = new Button("");
+					emotionButton.getStyleClass().add("jfx-button2");
+					emotionButton.setPrefSize(24, 24);
+					emotionButton.setMinSize(24, 24);
+					emotionButton.setMaxSize(24, 24);
+					emotionButton.setStyle("-fx-cursor:hand");
+					emotionButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+					emotionButton.setOnAction(a -> updateEmotion(getTableRow().getItem(), emotionButton));
+					setGraphic(emotionButton);
+					
+					// set the image according to the play status		
+					if (item != null) {
+						if (item == 1) {
+							emotion = Emotion.HATE;
+							size = 24;
+						} else if (item == 2) {
+							emotion = Emotion.DISLIKE;
+							size = 20;
+						} else if (item == 0) {
+							emotion = Emotion.NEUTRAL;
+							size = 28;
+						} else if (item == 3) {
+							emotion = Emotion.LIKE;
+							size = 20;
+						} else if (item == 4) {
+							emotion = Emotion.LOVE;
+							size = 20;
+						}
+						
+						//Now set the graphic
+						emotionButton.setGraphic(Main.emotionsWindow.getEmotionFontIcon(emotion, size));
+						
+					}
+					
+				}
+			}
+			
 		});
 		
 		// number
@@ -807,7 +882,7 @@ public class MediaTableViewer extends StackPane {
 	public MediaTagsService getAllDetailsService() {
 		return allDetailsService;
 	}
-
+	
 	/**
 	 * @return the smartController
 	 */

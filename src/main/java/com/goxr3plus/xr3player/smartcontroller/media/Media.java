@@ -62,7 +62,7 @@ public abstract class Media {
 	private SimpleObjectProperty<Button> getInfoBuy;
 	
 	/** Liked Disliked or Neutral feelings */
-	private SimpleObjectProperty<Button> likeDislikeNeutral;
+	private SimpleIntegerProperty emotion;
 	
 	/** The duration edited. */
 	private SimpleStringProperty durationEdited;
@@ -237,23 +237,8 @@ public abstract class Media {
 		
 		getInfoBuy = new SimpleObjectProperty<>(searchMediaOnWeb);
 		
-		//Emotions FontIcon
-//		FontIcon emotionIcon = new FontIcon("fa-square-o")
-//		emotionIcon.setIconSize(28)
-//		emotionIcon.setIconColor(Color.WHITE)
-		
-		Button emotionButton = new Button("");
-		emotionButton.getStyleClass().add("jfx-button2");
-		emotionButton.setPrefSize(24, 24);
-		emotionButton.setMinSize(24, 24);
-		emotionButton.setMaxSize(24, 24);
-		emotionButton.setStyle("-fx-cursor:hand");
-		emotionButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		emotionButton.setOnAction(a -> updateEmotion(emotionButton));
-		
-		likeDislikeNeutral = new SimpleObjectProperty<>(emotionButton);
 		//----------
-		
+		this.emotion = new SimpleIntegerProperty(0);
 		this.mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
 		this.playStatus = new SimpleIntegerProperty(-2);
 		this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
@@ -413,8 +398,8 @@ public abstract class Media {
 	 *
 	 * @return the simple object property
 	 */
-	public SimpleObjectProperty<Button> likeDislikeNeutralProperty() {
-		return likeDislikeNeutral;
+	public SimpleIntegerProperty emotionProperty() {
+		return emotion;
 	}
 	
 	/**
@@ -1034,39 +1019,7 @@ public abstract class Media {
 		}
 	}
 	
-	/**
-	 * Update the emotion the user is feeling for this Media
-	 */
-	public void updateEmotion(Node node) {
-		
-		// Show the Window
-		Main.emotionsWindow.show(getFileName(), node);
-		
-		// Listener
-		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
-			/**
-			 * [[SuppressWarningsSpartan]]
-			 */
-			@Override
-			public void invalidated(Observable o) {
-				
-				// Remove the listener
-				Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
-				
-				// !showing?
-				if (!Main.emotionsWindow.getWindow().isShowing() && Main.emotionsWindow.wasAccepted()) {
-					
-					new Thread(() ->
-					//Add it the one of the emotions list
-					Main.emotionListsController.makeEmotionDecisition(Media.this.getFilePath(), Main.emotionsWindow.getEmotion())).start();
-					
-					//System.out.println(Main.emotionsWindow.getEmotion())
-					
-				}
-			}
-		});
-		
-	}
+
 	
 	/**
 	 * This method is called to change the Emotion Image of the Media based on the current Emotion
@@ -1074,20 +1027,18 @@ public abstract class Media {
 	 * @param emotion
 	 */
 	public void changeEmotionImage(Emotion emotion) {
-		int size = 24;
 		
 		if (emotion == Emotion.HATE)
-			size = 24;
+			this.emotion.set(1);
 		else if (emotion == Emotion.DISLIKE)
-			size = 20;
+			this.emotion.set(2);
 		else if (emotion == Emotion.NEUTRAL)
-			size = 28;
+			this.emotion.set(0);
 		else if (emotion == Emotion.LIKE)
-			size = 20;
+			this.emotion.set(3);
 		else if (emotion == Emotion.LOVE)
-			size = 20;
+			this.emotion.set(4);
 		
-		Main.emotionsWindow.giveEmotionImageToButton(likeDislikeNeutral.get(), emotion, size);
 	}
 	
 	// --------GETTERS------------------------------------------------------------------------------------

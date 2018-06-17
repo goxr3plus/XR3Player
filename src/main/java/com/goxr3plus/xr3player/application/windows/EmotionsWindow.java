@@ -140,26 +140,26 @@ public class EmotionsWindow extends BorderPane {
 			close(true);
 		});
 		
-//		hate.setOnMouseEntered(m -> {
-//			emotion = Emotion.HATE;
-//			//emotionLabel.setText(emotion.toString());
-//		});
-//		dislike.setOnMouseEntered(m -> {
-//			emotion = Emotion.DISLIKE;
-//			//emotionLabel.setText(emotion.toString());
-//		});
-//		neutral.setOnMouseEntered(m -> {
-//			emotion = Emotion.NEUTRAL;
-//			//emotionLabel.setText(emotion.toString());
-//		});
-//		like.setOnMouseEntered(m -> {
-//			emotion = Emotion.LIKE;
-//			//emotionLabel.setText(emotion.toString());
-//		});
-//		love.setOnMouseEntered(m -> {
-//			emotion = Emotion.LOVE;
-//			//emotionLabel.setText(emotion.toString());
-//		});
+		//		hate.setOnMouseEntered(m -> {
+		//			emotion = Emotion.HATE;
+		//			//emotionLabel.setText(emotion.toString());
+		//		});
+		//		dislike.setOnMouseEntered(m -> {
+		//			emotion = Emotion.DISLIKE;
+		//			//emotionLabel.setText(emotion.toString());
+		//		});
+		//		neutral.setOnMouseEntered(m -> {
+		//			emotion = Emotion.NEUTRAL;
+		//			//emotionLabel.setText(emotion.toString());
+		//		});
+		//		like.setOnMouseEntered(m -> {
+		//			emotion = Emotion.LIKE;
+		//			//emotionLabel.setText(emotion.toString());
+		//		});
+		//		love.setOnMouseEntered(m -> {
+		//			emotion = Emotion.LOVE;
+		//			//emotionLabel.setText(emotion.toString());
+		//		});
 		
 		//== close
 		close.setOnAction(a -> close(false));
@@ -329,29 +329,41 @@ public class EmotionsWindow extends BorderPane {
 	 * @param emotion
 	 */
 	public void giveEmotionImageToButton(Button button , Emotion emotion , int size) {
+		
 		//Make sure it will run on JavaFX Thread
-		Platform.runLater(() -> {
-			FontIcon emotionIcon = new FontIcon();
-			emotionIcon.setIconSize(size);
-			emotionIcon.setIconColor(Color.WHITE);
-			
-			if (emotion == Emotion.HATE) {
-				//emotionIcon.setIconColor(Color.web("#dd3f3f"))
-				emotionIcon.setIconLiteral("icm-angry2");
-			} else if (emotion == Emotion.DISLIKE) {
-				emotionIcon.setIconLiteral("far-thumbs-down");
-			} else if (emotion == Emotion.NEUTRAL) {
-				//emotionIcon.setIconLiteral(NEUTRAL_LITERAL)
-			} else if (emotion == Emotion.LIKE) {
-				emotionIcon.setIconLiteral("far-thumbs-up");
-			} else if (emotion == Emotion.LOVE) {
-				//emotionIcon.setIconColor(Color.web("#dd3f3f"))
-				emotionIcon.setIconLiteral("far-heart");
-			}
-			
-			//Set the graphic finally
-			button.setGraphic(emotionIcon);
-		});
+		Platform.runLater(() -> button.setGraphic(getEmotionFontIcon(emotion, size)));
+	}
+	
+	/**
+	 * Get FontIcon based on the emotion
+	 * 
+	 * @param emotion
+	 * @param size
+	 * @return
+	 */
+	public FontIcon getEmotionFontIcon(Emotion emotion , int size) {
+		
+		//Make sure it will run on JavaFX Thread
+		FontIcon emotionIcon = new FontIcon();
+		emotionIcon.setIconSize(size);
+		emotionIcon.setIconColor(Color.WHITE);
+		
+		if (emotion == Emotion.HATE) {
+			//emotionIcon.setIconColor(Color.web("#dd3f3f"))
+			emotionIcon.setIconLiteral("icm-angry2");
+		} else if (emotion == Emotion.DISLIKE) {
+			emotionIcon.setIconLiteral("far-thumbs-down");
+		} else if (emotion == Emotion.NEUTRAL) {
+			//emotionIcon.setIconLiteral(NEUTRAL_LITERAL)
+		} else if (emotion == Emotion.LIKE) {
+			emotionIcon.setIconLiteral("far-thumbs-up");
+		} else if (emotion == Emotion.LOVE) {
+			//emotionIcon.setIconColor(Color.web("#dd3f3f"))
+			emotionIcon.setIconLiteral("far-heart");
+		}
+		
+		//Set the graphic finally
+		return emotionIcon;
 	}
 	
 	/**
