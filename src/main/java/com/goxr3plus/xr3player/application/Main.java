@@ -125,8 +125,6 @@ public class Main extends Application {
 	public static final int APPLICATION_VERSION = 111;
 	private static final Logger[] pin;
 	static {
-		//Important for JavaFX Web Browser allowing xss
-		//System.setProperty("sun.net.http.allowRestrictedHeaders", "true")
 		
 		//----------Properties-------------
 		internalInformation.put("Version", APPLICATION_VERSION);
@@ -137,7 +135,6 @@ public class Main extends Application {
 		
 		//Disable loggers				
 		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
-		// Logger.getLogger("org.jaudiotagger.tag") , Logger.getLogger("org.jaudiotagger.audio.mp3.MP3File") , Logger.getLogger("org.jaudiotagger.tag.id3.ID3v23Tag")
 		
 		for (Logger l : pin) {
 			l.setLevel(Level.OFF);
@@ -588,10 +585,6 @@ public class Main extends Application {
 		// ---------mediaSearchWindow ------------
 		mediaSearchWindow.registerListeners(window, topBar.getSearchField());
 		topBar.getSearchField().setOnMouseReleased(m -> mediaSearchWindow.recalculateAndshow(topBar.getSearchField()));
-		//		topBar.getSearchField().focusedProperty().addListener(l -> {
-		//			if (topBar.getSearchField().isFocused())
-		//				mediaSearchWindow.recalculateAndshow(topBar.getSearchField());
-		//		});
 		
 		// -------Root-----------
 		root.setVisible(false);
@@ -636,7 +629,7 @@ public class Main extends Application {
 				playListModesTabPane.getDropBoxTab().setContent(Main.dropBoxViewer);
 			});
 			
-			//System.out.println("Loller Thread exited...");
+			//System.out.println("Loller Thread exited...")
 		}).start();
 		
 		specialJFXTabPane.setTabMaxWidth(0);
@@ -703,9 +696,6 @@ public class Main extends Application {
 		
 		//Create Database folder if not exists
 		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
-			//			ActionTool.showNotification("Please exit the application and change it's installation directory!",
-			//					"Fatal Error Occured trying to create \n the root database folder [ XR3DataBase] \n Maybe the application has not the permission to create this folder.",
-			//					Duration.seconds(45), NotificationType.ERROR)
 			System.out.println("Failed to create database folder[lack of permissions],please change installation directory");
 			Util.terminateXR3Player(-1);
 		} else {
@@ -723,28 +713,6 @@ public class Main extends Application {
 			//avoid error
 			if (!loginMode.teamViewer.getItemsObservableList().isEmpty())
 				loginMode.teamViewer.setCenterIndex(loginMode.teamViewer.getItemsObservableList().size() / 2);
-			
-			//----------------------The 5-10 below lines are being used only to support updates below <72 where the `config.properties` file has been on DataBase Root folder[XR3DataBase]------------------------------
-			
-			//So copy the config.properties from the DataBase Root folder to the settings folder of each user
-			//			File configFile = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + InfoTool.USER_SETTINGS_FILE_NAME);
-			//			try {
-			//				if (configFile.exists())
-			//					Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)
-			//							.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain())).forEach(path -> {
-			//								
-			//								//Create settings folder if it doesn't exist
-			//								File settingsFolder = new File(path + File.separator + "settings");
-			//								if (!settingsFolder.exists())
-			//									settingsFolder.mkdir();
-			//								
-			//								//Now copy the it bro!
-			//								ActionTool.copy(configFile.getAbsolutePath(), settingsFolder.getAbsolutePath() + File.separator + InfoTool.USER_SETTINGS_FILE_NAME);
-			//							});
-			//				configFile.delete();
-			//			} catch (IOException e) {
-			//				e.printStackTrace();
-			//			}
 			
 		}
 		
@@ -864,8 +832,8 @@ public class Main extends Application {
 			webBrowser.startChromiumUpdaterService();
 			
 			//-----Bottom Bar Threads----------
-		//	bottomBar.internetCheckerService.restart()
-		//	bottomBar.timerCheckerService.restart()
+			//	bottomBar.internetCheckerService.restart()
+			//	bottomBar.timerCheckerService.restart()
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			
