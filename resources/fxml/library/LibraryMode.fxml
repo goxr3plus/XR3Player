@@ -16,150 +16,154 @@
 
 <fx:root prefHeight="570.0" prefWidth="763.0" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <SplitPane fx:id="topSplitPane" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="topSplitPane" orientation="VERTICAL" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
         <items>
-            <StackPane fx:id="noLibrariesStackPane" minHeight="0.0" minWidth="0.0">
+            <StackPane fx:id="bottomStackPane" minWidth="0.0" SplitPane.resizableWithParent="false">
                <children>
-                  <BorderPane minHeight="0.0" minWidth="0.0">
-                     <center>
-                        <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
+                  <SplitPane fx:id="bottomSplitPane" minWidth="0.0" style="-fx-background-color: transparent;">
+                     <items>
+                        <StackPane fx:id="noLibrariesStackPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
                            <children>
-                              <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="175.0" StackPane.alignment="BOTTOM_CENTER" />
-                              <Label fx:id="quickSearchTextField" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Search" StackPane.alignment="BOTTOM_LEFT" />
-                           </children>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                        </StackPane>
-                     </center>
-                     <bottom>
-                        <BorderPane style="-fx-background-color: rgb(0,0,0,0.85);" BorderPane.alignment="CENTER">
-                           <center>
-                              <HBox fx:id="libraryToolBar" alignment="CENTER" prefHeight="45.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="Delete">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <HBox.margin>
-                                          <Insets right="1.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="Rename">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <HBox.margin>
-                                          <Insets right="1.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="OPEN" textAlignment="CENTER" wrapText="true">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                    <HBox alignment="CENTER" spacing="3.0">
-                                       <children>
-                                          <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-button4" text=" ">
-                                             <tooltip>
-                                                <Tooltip text="Previous" />
-                                             </tooltip>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <graphic>
-                                                <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text=" ">
-                                             <tooltip>
-                                                <Tooltip text="Create new Library" />
-                                             </tooltip>
-                                             <graphic>
-                                                <FontIcon iconColor="#2cee97" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="jfx-button4" text=" ">
-                                             <tooltip>
-                                                <Tooltip text="Next" />
-                                             </tooltip>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <graphic>
-                                                <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="3.0" right="3.0" />
-                                       </HBox.margin>
-                                    </HBox>
-                                    <Button fx:id="openLibraryContextMenu" contentDisplay="GRAPHIC_ONLY" layoutX="284.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="jfx-button4">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <tooltip>
-                                          <Tooltip text="Open Library Context Menu" />
-                                       </tooltip>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
-                                       </graphic>
-                                    </Button>
-                                    <ColorPicker fx:id="colorPicker" focusTraversable="false" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </ColorPicker>
-                                 </children>
-                              </HBox>
-                           </center>
-                        </BorderPane>
-                     </bottom>
-                     <top>
-                        <StackPane prefHeight="32.0" prefWidth="761.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <BorderPane>
+                              <BorderPane minHeight="0.0" minWidth="0.0">
                                  <center>
-                                    <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: #101010;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
+                                    <StackPane fx:id="librariesStackView" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <ScrollBar fx:id="horizontalScrollBar" max="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="175.0" StackPane.alignment="BOTTOM_CENTER" />
+                                          <Label fx:id="quickSearchTextField" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Search" StackPane.alignment="BOTTOM_LEFT" />
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets />
+                                       </BorderPane.margin>
+                                    </StackPane>
                                  </center>
-                                 <left>
-                                    <HBox fx:id="botttomHBox" alignment="CENTER_LEFT" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
-                                 </left>
+                                 <bottom>
+                                    <BorderPane style="-fx-background-color: rgb(0,0,0,0.85);" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <HBox fx:id="libraryToolBar" alignment="CENTER" prefHeight="45.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="deleteLibrary" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="Delete">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <HBox.margin>
+                                                      <Insets right="1.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="renameLibrary" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="Rename">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <HBox.margin>
+                                                      <Insets right="1.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="openOrCloseLibrary" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" styleClass="jfx-button4" text="OPEN" textAlignment="CENTER" wrapText="true">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <HBox alignment="CENTER" spacing="3.0">
+                                                   <children>
+                                                      <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-button4" text=" ">
+                                                         <tooltip>
+                                                            <Tooltip text="Previous" />
+                                                         </tooltip>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <graphic>
+                                                            <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                      <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text=" ">
+                                                         <tooltip>
+                                                            <Tooltip text="Create new Library" />
+                                                         </tooltip>
+                                                         <graphic>
+                                                            <FontIcon iconColor="#2cee97" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                      <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="jfx-button4" text=" ">
+                                                         <tooltip>
+                                                            <Tooltip text="Next" />
+                                                         </tooltip>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <graphic>
+                                                            <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="3.0" right="3.0" />
+                                                   </HBox.margin>
+                                                </HBox>
+                                                <Button fx:id="openLibraryContextMenu" contentDisplay="GRAPHIC_ONLY" layoutX="284.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="41.0" styleClass="jfx-button4">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <tooltip>
+                                                      <Tooltip text="Open Library Context Menu" />
+                                                   </tooltip>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <graphic>
+                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
+                                                   </graphic>
+                                                </Button>
+                                                <ColorPicker fx:id="colorPicker" focusTraversable="false" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </HBox.margin>
+                                                </ColorPicker>
+                                             </children>
+                                          </HBox>
+                                       </center>
+                                    </BorderPane>
+                                 </bottom>
+                                 <top>
+                                    <StackPane prefHeight="32.0" prefWidth="761.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <BorderPane>
+                                             <center>
+                                                <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: #101010;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
+                                             </center>
+                                             <left>
+                                                <HBox fx:id="botttomHBox" alignment="CENTER_LEFT" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                       </children>
+                                    </StackPane>
+                                 </top>
                               </BorderPane>
+                              <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Create playlist" textAlignment="CENTER" visible="false" wrapText="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="XR3Player supports multiple users , in order to use it your must create an login with a user :)" />
+                                 </tooltip>
+                                 <graphic>
+                                    <HBox alignment="CENTER" spacing="15.0">
+                                       <children>
+                                          <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="55" />
+                                       </children>
+                                    </HBox>
+                                 </graphic>
+                              </Button>
                            </children>
                         </StackPane>
-                     </top>
-                  </BorderPane>
-                  <Button fx:id="createFirstLibrary" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: #202020FA; -fx-border-color: transparent; -fx-background-radius: 0; -fx-font-size: 30;" styleClass="applicationSettingsLabel2" text="Create playlist" textAlignment="CENTER" visible="false" wrapText="true">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <tooltip>
-                        <Tooltip text="XR3Player supports multiple users , in order to use it your must create an login with a user :)" />
-                     </tooltip>
-                     <graphic>
-                        <HBox alignment="CENTER" spacing="15.0">
-                           <children>
-                              <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="55" />
-                           </children>
-                        </HBox>
-                     </graphic>
-                  </Button>
-               </children>
-            </StackPane>
-            <StackPane fx:id="djModeStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" SplitPane.resizableWithParent="false">
-               <children>
-                  <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
+                     </items>
+                  </SplitPane>
+                  <StackPane fx:id="djModeStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" visible="false" />
                </children>
             </StackPane>
         </items>

@@ -90,16 +90,16 @@ public class GeneralSettingsController extends BorderPane {
 			Main.sideBar.changeSide(JavaFXTools.getIndexOfSelectedToggle(sideBarPositionGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT : NodeOrientation.RIGHT_TO_LEFT);
 		});
 		
-		//libraryModeUpsideDown
-		libraryModeUpsideDown.selectedToggleProperty().addListener(listener -> {
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("General-LibraryModeUpsideDown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown)));
-			
-			//Turn Library Mode Upside Down or The Opposite
-			Main.libraryMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown) == 0);
-			
-		});
+//		//libraryModeUpsideDown
+//		libraryModeUpsideDown.selectedToggleProperty().addListener(listener -> {
+//			
+//			//Update the properties file
+//			Main.dbManager.getPropertiesDb().updateProperty("General-LibraryModeUpsideDown", Integer.toString(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown)));
+//			
+//			//Turn Library Mode Upside Down or The Opposite
+//			Main.libraryMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(libraryModeUpsideDown) == 0);
+//			
+//		});
 		
 /*		//djModeUpsideDown
 		djModeUpsideDown.selectedToggleProperty().addListener(listener -> {

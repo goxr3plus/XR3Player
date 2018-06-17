@@ -68,8 +68,8 @@ public class ApplicationSettingsLoader {
 			
 			//--LibraryMode
 			Main.playListModesSplitPane.updateSplitPaneDivider();
-			Main.libraryMode.updateTopSplitPaneDivider();
-			Main.libraryMode.updateBottomSplitPaneDivider();
+			//Main.libraryMode.updateTopSplitPaneDivider();
+			//Main.libraryMode.updateBottomSplitPaneDivider();
 			//			Optional.ofNullable(settings.getProperty("General-LibraryModeUpsideDown"))
 			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)))
 			//			

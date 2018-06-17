@@ -102,11 +102,13 @@ public class LibraryMode extends BorderPane {
 	private Button createFirstLibrary;
 	
 	@FXML
-	private StackPane djModeStackPane;
+	private StackPane bottomStackPane;
 	
 	@FXML
 	private SplitPane bottomSplitPane;
 	
+	@FXML
+	private StackPane djModeStackPane;
 	// ------------------------------------------------
 	
 	// protected boolean dragDetected
@@ -484,66 +486,66 @@ public class LibraryMode extends BorderPane {
 	
 	//----------------------------
 	
-	/**
-	 * Updates the SplitPane DividerPositions based on the saved array
-	 */
-	public void updateTopSplitPaneDivider() {
-		topSplitPane.setDividerPositions(topSplitPaneDivider);
-	}
-	
-	/**
-	 * Updates the SplitPane DividerPositions based on the saved array
-	 */
-	public void updateBottomSplitPaneDivider() {
-		bottomSplitPane.setDividerPositions(bottomSplitPaneDivider);
-	}
-	
-	//----------------------------	
-	
-	/**
-	 * Saves current divider positions of SplitPane into an array
-	 */
-	public void saveTopSplitPaneDivider() {
-		topSplitPaneDivider = topSplitPane.getDividerPositions();
-	}
-	
-	/**
-	 * Saves current divider positions of SplitPane into an array
-	 */
-	public void saveBottomSplitPaneDivider() {
-		bottomSplitPaneDivider = bottomSplitPane.getDividerPositions();
-	}
-	
-	/**
-	 * Turns the Library Mode Upside Down or opposite
-	 * 
-	 * @param turnDown
-	 */
-	public void turnUpsideDownSplitPane(boolean turnDown) {
-		
-		//Check if it can enter based on the library border pane position
-		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) )
-				|| ( !turnDown && topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
-			return;
-		
-		//this.saveTopSplitPaneDivider()
-		double temp = topSplitPaneDivider[0];
-		topSplitPaneDivider[0] = topSplitPaneDivider[1];
-		topSplitPaneDivider[1] = temp;
-		
-		boolean libraryIsOnTop = topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane);
-		topSplitPane.getItems().clear();
-		if (libraryIsOnTop) {
-			//System.out.println("Entered first if!")
-			topSplitPane.getItems().addAll(bottomSplitPane, Main.playListModesSplitPane);
-		} else {
-			//System.out.println("Entered second if!")
-			topSplitPane.getItems().addAll(Main.playListModesSplitPane, bottomSplitPane);
-		}
-		
-		this.updateTopSplitPaneDivider();
-		
-	}
+//	/**
+//	 * Updates the SplitPane DividerPositions based on the saved array
+//	 */
+//	public void updateTopSplitPaneDivider() {
+//		topSplitPane.setDividerPositions(topSplitPaneDivider);
+//	}
+//	
+//	/**
+//	 * Updates the SplitPane DividerPositions based on the saved array
+//	 */
+//	public void updateBottomSplitPaneDivider() {
+//		bottomSplitPane.setDividerPositions(bottomSplitPaneDivider);
+//	}
+//	
+//	//----------------------------	
+//	
+//	/**
+//	 * Saves current divider positions of SplitPane into an array
+//	 */
+//	public void saveTopSplitPaneDivider() {
+//		topSplitPaneDivider = topSplitPane.getDividerPositions();
+//	}
+//	
+//	/**
+//	 * Saves current divider positions of SplitPane into an array
+//	 */
+//	public void saveBottomSplitPaneDivider() {
+//		bottomSplitPaneDivider = bottomSplitPane.getDividerPositions();
+//	}
+//	
+//	/**
+//	 * Turns the Library Mode Upside Down or opposite
+//	 * 
+//	 * @param turnDown
+//	 */
+//	public void turnUpsideDownSplitPane(boolean turnDown) {
+//		
+//		//Check if it can enter based on the library border pane position
+//		if ( ( turnDown && !topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) )
+//				|| ( !turnDown && topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
+//			return;
+//		
+//		//this.saveTopSplitPaneDivider()
+//		double temp = topSplitPaneDivider[0];
+//		topSplitPaneDivider[0] = topSplitPaneDivider[1];
+//		topSplitPaneDivider[1] = temp;
+//		
+//		boolean libraryIsOnTop = topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane);
+//		topSplitPane.getItems().clear();
+//		if (libraryIsOnTop) {
+//			//System.out.println("Entered first if!")
+//			topSplitPane.getItems().addAll(bottomSplitPane, Main.playListModesSplitPane);
+//		} else {
+//			//System.out.println("Entered second if!")
+//			topSplitPane.getItems().addAll(Main.playListModesSplitPane, bottomSplitPane);
+//		}
+//		
+//		this.updateTopSplitPaneDivider();
+//		
+//	}
 	
 	//----------------------------
 	
@@ -574,12 +576,19 @@ public class LibraryMode extends BorderPane {
 	public StackPane getNoLibrariesStackPane() {
 		return noLibrariesStackPane;
 	}
-
+	
 	/**
 	 * @return the djModeStackPane
 	 */
 	public StackPane getDjModeStackPane() {
 		return djModeStackPane;
+	}
+	
+	/**
+	 * @return the bottomStackPane
+	 */
+	public StackPane getBottomStackPane() {
+		return bottomStackPane;
 	}
 	
 }

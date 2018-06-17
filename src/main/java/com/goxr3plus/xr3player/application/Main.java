@@ -42,6 +42,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -663,14 +664,17 @@ public class Main extends Application {
 		});
 		root.setCenter(specialJFXTabPane);
 		
-		//---------LibraryMode ------------			
+		//---------LibraryMode ------------	
 		
-		//Remove this to be sure
-		libraryMode.getTopSplitPane().getItems().remove(libraryMode.getNoLibrariesStackPane());
-		
+		//TopSplitPane
 		libraryMode.getTopSplitPane().getItems().add(playListModesSplitPane);
-		libraryMode.getBottomSplitPane().getItems().add(libraryMode.getNoLibrariesStackPane());
+		SplitPane.setResizableWithParent(playListModesSplitPane, Boolean.FALSE);
+		libraryMode.getTopSplitPane().setDividerPositions(0.4, 0.6);
+		
+		//BottomSplitPane
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
+		SplitPane.setResizableWithParent(xPlayersList.getXPlayerController(0), Boolean.FALSE);
+		libraryMode.getBottomSplitPane().setDividerPositions(0.65, 0.35);
 		
 		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty()
 				.bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty()).then("Create Playlist").otherwise("Open first playlist"));
