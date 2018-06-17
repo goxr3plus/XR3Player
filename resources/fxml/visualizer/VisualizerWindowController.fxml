@@ -75,7 +75,7 @@
                               <MenuItem fx:id="setDefaultForeground" mnemonicParsing="false" text="default" />
                            </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Opacity">
+                        <Menu disable="true" mnemonicParsing="false" text="Opacity" visible="false">
                           <items>
                             <MenuItem mnemonicParsing="false">
                                  <graphic>

@@ -244,7 +244,7 @@ public class VisualizerWindowController extends StackPane {
 		});
 		
 		// transparencySlider
-		transparencySlider.disableProperty().bind(window.showingProperty().not());
+		//transparencySlider.disableProperty().bind(window.showingProperty().not());
 		transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
 		
 		// PauseTransition
