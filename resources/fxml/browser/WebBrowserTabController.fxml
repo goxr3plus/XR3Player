@@ -30,33 +30,33 @@
          <top>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="667.0" spacing="5.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="goFullScreen" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="48.0" layoutY="15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="goFullScreen" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="48.0" layoutY="15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="#33ee7e" iconLiteral="typ-arrow-maximise" iconSize="28" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-left" iconSize="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="reloadButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="reloadButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-right" iconSize="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="118.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="118.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-home" iconSize="20" />
                      </graphic>
                   </JFXButton>
                   <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
-                  <JFXButton fx:id="copyText" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="176.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="copyText" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="176.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20" />
                      </graphic>
@@ -64,12 +64,12 @@
                         <Tooltip text="Copy Address Bar text" />
                      </tooltip>
                   </JFXButton>
-                  <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button3" text=" ">
+                  <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="#2adace" iconLiteral="fas-globe" iconSize="20" />
                      </graphic>
@@ -77,7 +77,7 @@
                         <Tooltip text="Open in default browser" />
                      </tooltip>
                   </JFXButton>
-                  <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="30.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;">
+                  <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="30.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;" styleClass="dark-menu-button">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
