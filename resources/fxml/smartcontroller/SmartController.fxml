@@ -234,7 +234,7 @@
                   <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
                </graphic>
           </Tab>
-            <Tab fx:id="foldersModeTab" disable="true" text="Coming...">
+            <Tab fx:id="foldersModeTab" text="Folders View">
                <graphic>
                   <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
                </graphic>

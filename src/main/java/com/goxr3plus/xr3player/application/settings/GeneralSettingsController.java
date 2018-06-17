@@ -122,7 +122,7 @@ public class GeneralSettingsController extends BorderPane {
 			determineNotificationBarPosition();
 			
 			//Show a small notification to user
-			ActionTool.showNotification("Notification Position", "Hi!!", Duration.seconds(1), NotificationType.SIMPLE);
+			//ActionTool.showNotification("Notification Position", "Hi!!", Duration.seconds(1), NotificationType.SIMPLE)
 			
 		});
 		

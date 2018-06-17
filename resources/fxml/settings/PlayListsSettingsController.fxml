@@ -71,7 +71,7 @@
                                     <Tooltip text="Clear the History of played files " />
                                  </tooltip>
                               </Label>
-                              <JFXButton fx:id="clearPlayedFilesHistory" alignment="CENTER" contentDisplay="CENTER" styleClass="arrowButton" text="Press here to clear" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                              <JFXButton fx:id="clearPlayedFilesHistory" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" styleClass="arrowButton" text="Press here to clear" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
                                  <tooltip>
                                     <Tooltip text="All the history of played songs will be cleared [ Not from Players though..]" />
                                  </tooltip>

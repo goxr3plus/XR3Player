@@ -631,8 +631,13 @@ public class DbManager {
 							cs1 = Main.xPlayersList.getList().stream();
 							cs1.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getInstantSearch().selectedProperty()
 									.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
+							
 							//Load Saved DropBox Accounts
 							Main.dropBoxViewer.refreshSavedAccounts();
+							
+							//Resize Main Window
+							Main.window.setWidth(Main.window.getWidth()+1);
+							Main.window.setHeight(Main.window.getHeight()+1);
 						});
 						
 						//Update the Progress

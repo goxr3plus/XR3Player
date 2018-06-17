@@ -141,10 +141,11 @@ public class PlaylistsSettingsController extends BorderPane {
 		
 		//clearPlayedFilesHistory
 		clearPlayedFilesHistory.setOnAction(a -> {
-			if (Main.playedSongs.clearAll(true))
-				ActionTool.showNotification("Message", "Successfully cleared played files from database", Duration.millis(1500), NotificationType.INFORMATION);
-			else
-				ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500), NotificationType.ERROR);
+			if (ActionTool.doQuestion(null, "Are you sure ? ", clearPlayedFilesHistory, Main.window))
+				if (Main.playedSongs.clearAll(true))
+					ActionTool.showNotification("Message", "Successfully cleared played files from database", Duration.millis(1500), NotificationType.INFORMATION);
+				else
+					ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500), NotificationType.ERROR);
 		});
 		
 		//--------------------FOLDERS MODE---------------------------------
