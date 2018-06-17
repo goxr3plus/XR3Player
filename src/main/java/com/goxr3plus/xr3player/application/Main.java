@@ -669,12 +669,12 @@ public class Main extends Application {
 		//TopSplitPane
 		libraryMode.getTopSplitPane().getItems().add(playListModesSplitPane);
 		SplitPane.setResizableWithParent(playListModesSplitPane, Boolean.FALSE);
-		libraryMode.getTopSplitPane().setDividerPositions(0.4, 0.6);
+		libraryMode.getTopSplitPane().setDividerPositions(0.45);
 		
 		//BottomSplitPane
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
 		SplitPane.setResizableWithParent(xPlayersList.getXPlayerController(0), Boolean.FALSE);
-		libraryMode.getBottomSplitPane().setDividerPositions(0.65, 0.35);
+		libraryMode.getBottomSplitPane().setDividerPositions(0.65);
 		
 		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty()
 				.bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty()).then("Create Playlist").otherwise("Open first playlist"));

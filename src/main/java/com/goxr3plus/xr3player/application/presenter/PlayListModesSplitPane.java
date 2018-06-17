@@ -33,7 +33,7 @@ public class PlayListModesSplitPane extends BorderPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	// Variables
-	private double[] splitPaneDivider = { 0.4 , 0.6 };
+	private double[] splitPaneDivider = { 0.18 , 0.83 };
 	
 	/**
 	 * Constructor.
@@ -61,9 +61,10 @@ public class PlayListModesSplitPane extends BorderPane {
 		
 		//== splitPane
 		splitPane.getItems().clear();
-		splitPane.getItems().addAll(Main.playListModesTabPane, Main.mediaInformation);
+		splitPane.getItems().addAll(Main.treeManager,Main.playListModesTabPane, Main.mediaInformation);
 		SplitPane.setResizableWithParent(Main.playListModesTabPane, Boolean.FALSE);
 		SplitPane.setResizableWithParent(Main.mediaInformation, Boolean.FALSE);	
+		SplitPane.setResizableWithParent(Main.treeManager, Boolean.FALSE);	
 		updateSplitPaneDivider();
 	}
 	
