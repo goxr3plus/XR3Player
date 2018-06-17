@@ -20,24 +20,21 @@
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
-> New in Update 108 ( Huge User Interface Improvements and Bug Fixes )
+> New in Update 110 ( Huge UI/UX changes , bug fixes , performance booster ) ?
 
-![screenshot1205](https://user-images.githubusercontent.com/20374208/40893545-9baaadc4-67aa-11e8-80c0-6ff72256591e.png)
-
-> New in update 109 ( look this cute alpabetical bar and black colors , ooooo so sweet )
-
-![newtablestyle](https://user-images.githubusercontent.com/20374208/41265549-78c807f0-6dfb-11e8-8d0a-95e40abfe6f2.png)
+![screenshot_6](https://user-images.githubusercontent.com/20374208/41504875-307b0382-7204-11e8-8134-cb3a666d51ee.png)
+![screenshot_7](https://user-images.githubusercontent.com/20374208/41504876-309ba3bc-7204-11e8-9c3f-426b1ef642a3.png)
 
 
 ### Screenshots
 
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/41197020-b5dfe3be-6c58-11e8-87b6-6f592b04bc36.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41197021-b603de54-6c58-11e8-8955-689d79753eb0.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/41197020-b5dfe3be-6c58-11e8-87b6-6f592b04bc36.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41504875-307b0382-7204-11e8-8134-cb3a666d51ee.png) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/41197022-b62635da-6c58-11e8-9988-93acdfb24422.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41197023-b64870aa-6c58-11e8-90c4-cb884d3a174a.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/41504876-309ba3bc-7204-11e8-9c3f-426b1ef642a3.png) | ![Sec](https://user-images.githubusercontent.com/20374208/41197023-b64870aa-6c58-11e8-90c4-cb884d3a174a.jpg) |
 
 ### Videos
 
