@@ -859,8 +859,7 @@ public class Main extends Application {
 			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
 			dbManager.loadApplicationDataBase();
 			
-			window.setWidth(window.getWidth()+1);
-			window.setHeight(window.getHeight()+1);
+			
 		});
 		pause.playFromStart();
 	}
