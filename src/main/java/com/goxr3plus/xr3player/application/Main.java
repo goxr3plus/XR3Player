@@ -465,8 +465,8 @@ public class Main extends Application {
 		//Continue
 		startPart2();
 		
-		//Show the Window
-		window.show();
+		//Count Downloads
+		countDownloads();
 		
 		//---Login Mode---- It must be set after the window has been shown
 		//loginMode.getSplitPane().setDividerPositions(0.65, 0.35)
@@ -505,9 +505,18 @@ public class Main extends Application {
 		//ScenicView.show(scene)
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
+		//Show the Window
+		window.show();
+		
 		//XR3AutoUpdater exit message
 		System.out.println("XR3Player ready to rock!");
 		
+	}
+	
+	/**
+	 * Count application downloads from Github and SourceForge
+	 */
+	private void countDownloads() {
 		//---- Update Downloads Labels
 		new Thread(() -> {
 			try {
