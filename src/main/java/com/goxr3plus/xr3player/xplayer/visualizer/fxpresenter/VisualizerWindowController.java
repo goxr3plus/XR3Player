@@ -11,6 +11,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
@@ -95,6 +96,9 @@ public class VisualizerWindowController extends StackPane {
 	
 	@FXML
 	private Slider transparencySlider;
+	
+	@FXML
+	private JFXCheckBox keepTopBarVisible;
 	
 	@FXML
 	private JFXButton maxOrNormalize;
@@ -241,16 +245,17 @@ public class VisualizerWindowController extends StackPane {
 		});
 		
 		// transparencySlider
+		transparencySlider.disableProperty().bind(window.showingProperty().not());
 		transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
 		
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> {
-			if (!topBar.isHover() && window.isShowing() && !visualizerContextMenu.isShowing()) {
+			if (!topBar.isHover() && window.isShowing() && !visualizerContextMenu.isShowing() && !keepTopBarVisible.isSelected()) {
 				topBar.setVisible(false);
 				setCursor(Cursor.NONE);
 				xPlayerController.getVisualizer().setCursor(Cursor.NONE);
 			}
-			System.out.println("PauseTransition Finished");
+			//System.out.println("PauseTransition Finished")
 		});
 		
 		//--------------------------
