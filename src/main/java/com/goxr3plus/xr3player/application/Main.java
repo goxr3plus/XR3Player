@@ -13,6 +13,7 @@ import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 
@@ -303,6 +305,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
+		//Current Application Path
+		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
+		
 		// --------Window---------
 		window = primaryStage;
 		final int screenMinWidth = 800 , screenMinHeight = 600;
@@ -497,7 +502,7 @@ public class Main extends Application {
 		applicationProperties.setUpdatePropertiesLocked(false);
 		
 		//------------------Experiments------------------
-		//ScenicView.show(scene);
+		//ScenicView.show(scene)
 		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 		//XR3AutoUpdater exit message
@@ -607,10 +612,10 @@ public class Main extends Application {
 				f.setAccessible(true);
 				Field modifersField = Field.class.getDeclaredField("modifiers");
 				modifersField.setAccessible(true);
-				modifersField.setInt(e, e.getModifiers() & ~Modifier.FINAL);
-				modifersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-				e.set(null, new BigInteger("1"));
-				f.set(null, new BigInteger("1"));
+				modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
+				modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
+				e.set(null, BigInteger.valueOf(1));
+				f.set(null, BigInteger.valueOf(1));
 				modifersField.setAccessible(false);
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -652,7 +657,7 @@ public class Main extends Application {
 		
 		//---------LibraryMode ------------			
 		
-		//Remove this to be soore...
+		//Remove this to be sure
 		libraryMode.getTopSplitPane().getItems().remove(libraryMode.getNoLibrariesStackPane());
 		
 		libraryMode.getTopSplitPane().getItems().add(playListModesSplitPane);
@@ -702,10 +707,12 @@ public class Main extends Application {
 			
 			//Create the List with the Available Users
 			AtomicInteger counter = new AtomicInteger();
-			try {
-				loginMode.teamViewer.addMultipleUsers(Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)
-						.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
+			try (Stream<Path> stream = Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)) {
+				
+				//Append all available users
+				loginMode.teamViewer.addMultipleUsers(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
 						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode)).collect(Collectors.toList()));
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1056,12 +1063,6 @@ public class Main extends Application {
 	 *            the arguments
 	 */
 	public static void main(String[] args) {
-		
-		//Current Application Path
-		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
-		
-		//Stop JAudioTagger Logger Messages
-		//LogManager.getLogManager().reset();
 		
 		//Launch JavaFX Application
 		launch(args);
