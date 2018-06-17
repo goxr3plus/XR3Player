@@ -54,10 +54,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -131,9 +131,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label totalTimeLabel;
 	
 	@FXML
-	private Button emotionsButton;
-	
-	@FXML
 	private MenuItem copyFileTitle;
 	
 	@FXML
@@ -194,13 +191,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private JFXButton visualizerVisibleLabel;
 	
 	@FXML
-	private FlowPane visualizerMaximizedBox;
-	
-	@FXML
-	private Label visualizerMinimize;
-	
-	@FXML
-	private Label visualizerRequestFocus;
+	private FontIcon visualizerEyeIcon3;
 	
 	@FXML
 	private HBox visualizerSettingsHBox;
@@ -216,6 +207,15 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private JFXButton maximizeVisualizer;
+	
+	@FXML
+	private VBox visualizerMaximizedBox;
+	
+	@FXML
+	private JFXButton visualizerMinimize;
+	
+	@FXML
+	private JFXButton visualizerRequestFocus;
 	
 	@FXML
 	private Label visualizationsDisabledLabel;
@@ -272,19 +272,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smVolumeSliderLabel;
 	
 	@FXML
+	private Button emotionsButton;
+	
+	@FXML
 	private Label topInfoLabel;
 	
 	@FXML
 	private ToggleButton modeToggle;
 	
 	@FXML
-	private FontIcon visualizerEyeIcon1;
-	
-	@FXML
 	private ToggleButton settingsToggle;
-	
-	@FXML
-	private FontIcon visualizerEyeIcon2;
 	
 	@FXML
 	private ToggleButton muteButton;
@@ -329,10 +326,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label dragAndDropLabel;
 	
 	@FXML
-	private Label restorePlayer;
+	private JFXButton restorePlayer;
 	
 	@FXML
-	private Label focusXPlayerWindow;
+	private JFXButton focusXPlayerWindow;
 	
 	// -----------------------------------------------------------------------------
 	
@@ -839,13 +836,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		restorePlayer.getParent().visibleProperty().bind(xPlayerWindow.getWindow().showingProperty());
 		
 		//restorePlayer
-		restorePlayer.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY)
-				xPlayerWindow.close();
-		});
+		restorePlayer.setOnAction(m -> xPlayerWindow.close());
 		
 		//focusXPlayerWindow
-		focusXPlayerWindow.setOnMouseReleased(m -> xPlayerWindow.getWindow().requestFocus());
+		focusXPlayerWindow.setOnAction(m -> xPlayerWindow.getWindow().requestFocus());
 		
 		//extendPlayer
 		extendPlayer.getTooltip().textProperty()
@@ -1254,10 +1248,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		visualizerMaximizedBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty());
 		
 		// visualizerMinimize
-		visualizerMinimize.setOnMouseReleased(m -> visualizerWindow.removeVisualizer());
+		visualizerMinimize.setOnAction(m -> visualizerWindow.removeVisualizer());
 		
 		// visualizerRequestFocus
-		visualizerRequestFocus.setOnMouseReleased(m -> visualizerWindow.getStage().requestFocus());
+		visualizerRequestFocus.setOnAction(m -> visualizerWindow.getStage().requestFocus());
 		
 		// playerStatusLabel
 		playerStatusLabel.visibleProperty().bind(visualizer.getAnimationService().runningProperty().not());

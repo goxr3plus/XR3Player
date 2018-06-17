@@ -244,37 +244,6 @@
                                                                   <FontIcon fx:id="visualizerEyeIcon3" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="64" selectionEnd="0" selectionStart="0" />
                                                                </graphic>
                                                             </JFXButton>
-                                                            <FlowPane fx:id="visualizerMaximizedBox" alignment="CENTER" columnHalignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="186.0" vgap="15.0" visible="false" StackPane.alignment="CENTER">
-                                                               <children>
-                                                                  <Label fx:id="visualizerMinimize" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Restore">
-                                                                     <graphic>
-                                                                        <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/extend.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </Label>
-                                                                  <Label fx:id="visualizerRequestFocus" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Focus Visualizer">
-                                                                     <graphic>
-                                                                        <ImageView fitHeight="16.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../image/eye2.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </Label>
-                                                               </children>
-                                                               <StackPane.margin>
-                                                                  <Insets left="5.0" />
-                                                               </StackPane.margin>
-                                                            </FlowPane>
                                                             <HBox fx:id="visualizerSettingsHBox" alignment="CENTER" maxHeight="32.0" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" spacing="7.0" style="-fx-background-color: #151515;" StackPane.alignment="TOP_CENTER">
                                                                <children>
                                                                   <JFXButton fx:id="visualizerSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button3" text=" ">
@@ -309,6 +278,20 @@
                                                                   <Insets bottom="5.0" left="8.0" right="8.0" top="5.0" />
                                                                </padding>
                                                             </HBox>
+                                                            <VBox fx:id="visualizerMaximizedBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                                               <children>
+                                                                  <JFXButton fx:id="visualizerMinimize" contentDisplay="BOTTOM" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Restore" VBox.vgrow="ALWAYS">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="typ-arrow-minimise" iconSize="32" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="visualizerRequestFocus" contentDisplay="BOTTOM" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Focus Visualizer" VBox.vgrow="ALWAYS">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="typ-eye-outline" iconSize="32" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
+                                                                  </JFXButton>
+                                                               </children>
+                                                            </VBox>
                                                             <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="CENTER">
                                                                <graphic>
                                                                   <Button fx:id="enableHighGraphics" alignment="CENTER" focusTraversable="false" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button2" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
@@ -514,7 +497,7 @@
                                  </graphic></Label>
                               <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Disc Mode" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon fx:id="visualizerEyeIcon1" iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
                                     <Insets left="2.0" right="2.0" />
@@ -522,7 +505,7 @@
                               </ToggleButton>
                               <ToggleButton fx:id="settingsToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon fx:id="visualizerEyeIcon2" iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
                                     <Insets right="2.0" />
@@ -677,24 +660,18 @@
             </Label>
          </children>
       </StackPane>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="15.0" style="-fx-background-color: #151515;" visible="false">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" visible="false">
          <children>
-            <Label fx:id="restorePlayer" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Restore Player">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+            <JFXButton fx:id="restorePlayer" contentDisplay="BOTTOM" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Restore Player" VBox.vgrow="ALWAYS">
                <graphic>
-                  <FontIcon iconColor="#ff3d3d" iconLiteral="typ-arrow-minimise" iconSize="32" selectionEnd="0" selectionStart="0" />
+                  <FontIcon iconColor="WHITE" iconLiteral="typ-arrow-minimise" iconSize="32" selectionEnd="0" selectionStart="0" />
                </graphic>
-            </Label>
-            <Label fx:id="focusXPlayerWindow" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Request Focus">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="focusXPlayerWindow" contentDisplay="BOTTOM" focusTraversable="false" layoutX="10.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Request Focus" VBox.vgrow="ALWAYS">
                <graphic>
-                  <FontIcon iconLiteral="typ-eye-outline" iconSize="32" selectionEnd="0" selectionStart="0" />
+                  <FontIcon iconColor="WHITE" iconLiteral="typ-eye-outline" iconSize="32" selectionEnd="0" selectionStart="0" />
                </graphic>
-            </Label>
+            </JFXButton>
          </children>
       </VBox>
    </children>
