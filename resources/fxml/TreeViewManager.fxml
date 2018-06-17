@@ -22,8 +22,11 @@
                      <graphic>
                         <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
                      </graphic>
+                     <padding>
+                        <Insets bottom="2.0" top="2.0" />
+                     </padding>
                   </Label>
-                  <Button fx:id="collapseTree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="24.0" style="-fx-background-radius: 0;">
+                  <Button fx:id="collapseTree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -35,6 +38,9 @@
                      </graphic>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
             <TreeView fx:id="treeView" VBox.vgrow="ALWAYS">
                <VBox.margin>
