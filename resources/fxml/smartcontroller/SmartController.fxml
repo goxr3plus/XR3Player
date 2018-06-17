@@ -17,7 +17,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -69,9 +68,9 @@
                               <VBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <HBox fx:id="alphabetBarBox" alignment="CENTER" />
-                                    <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: black;">
+                                    <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: #101010;">
                                        <children>
-                                          <JFXCheckBox fx:id="instantSearch" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true">
+                                          <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#a8950a" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#ffe81f" wrapText="true">
                                              <tooltip>
                                                 <Tooltip text="Instant Search " />
                                              </tooltip>
@@ -96,7 +95,7 @@
                                           </StackPane>
                                           <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="179.0">
                                              <children>
-                                                <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
+                                                <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" styleClass="jfx-button4">
                                                    <tooltip>
                                                       <Tooltip text="Previous" />
                                                    </tooltip>
@@ -104,18 +103,18 @@
                                                       <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
                                                    </graphic>
                                                 </Button>
-                                                <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 0; -fx-background-color: white; -fx-text-fill: black;">
+                                                <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-background-radius: 0;" styleClass="dark-text-field">
                                                    <tooltip>
                                                       <Tooltip text="Select a Page and Press Enter" />
                                                    </tooltip>
                                                    <contextMenu>
                                                       <ContextMenu />
                                                    </contextMenu>
-                                                   <effect>
-                                                      <DropShadow />
-                                                   </effect>
+                                                   <HBox.margin>
+                                                      <Insets left="1.0" />
+                                                   </HBox.margin>
                                                 </TextField>
-                                                <Button fx:id="goToPage" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton" text="GO">
+                                                <Button fx:id="goToPage" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" styleClass="jfx-button4" text="GO">
                                                    <tooltip>
                                                       <Tooltip text="Go to the selected Page" />
                                                    </tooltip>
@@ -123,10 +122,10 @@
                                                       <Insets />
                                                    </HBox.margin>
                                                    <graphic>
-                                                      <FontIcon iconColor="#32abe8" iconLiteral="fas-sync-alt" iconSize="20" />
+                                                      <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20" />
                                                    </graphic>
                                                 </Button>
-                                                <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="arrowButton">
+                                                <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
                                                    <tooltip>
                                                       <Tooltip text="Next" />
                                                    </tooltip>
@@ -144,7 +143,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER">
                                              <children>
-                                                <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-font-weight: bold; -fx-font-size: 8; -fx-text-fill: white; -fx-background-radius: 0; -fx-border-color: transparent black;" styleClass="arrowButton">
+                                                <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" styleClass="jfx-button4">
                                                    <tooltip>
                                                       <Tooltip text="Open Playlist Settings" />
                                                    </tooltip>
@@ -152,7 +151,7 @@
                                                       <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" />
                                                    </graphic>
                                                 </Button>
-                                                <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0 45 45 0;">
+                                                <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" styleClass="dark-menu-button">
                                                    <contextMenu>
                                                       <ContextMenu fx:id="toolsContextMenu">
                                                          <items>

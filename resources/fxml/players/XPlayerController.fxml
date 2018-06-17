@@ -677,7 +677,7 @@
             </Label>
          </children>
       </StackPane>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="15.0" style="-fx-background-color: rgb(0,0,0,0.7);" visible="false">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="15.0" style="-fx-background-color: #151515;" visible="false">
          <children>
             <Label fx:id="restorePlayer" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: white; -fx-font-size: 13; -fx-font-weight: bold;" text="Restore Player">
                <cursor>
