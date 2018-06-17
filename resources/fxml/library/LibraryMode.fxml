@@ -157,7 +157,11 @@
                   </Button>
                </children>
             </StackPane>
-            <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" SplitPane.resizableWithParent="false" />
+            <StackPane fx:id="djModeStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" SplitPane.resizableWithParent="false">
+               <children>
+                  <SplitPane fx:id="bottomSplitPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" />
+               </children>
+            </StackPane>
         </items>
       </SplitPane>
    </center>

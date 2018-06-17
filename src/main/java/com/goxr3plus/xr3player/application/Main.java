@@ -608,9 +608,8 @@ public class Main extends Application {
 		
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab2", djMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab3", new MovieModeController()));
-		specialJFXTabPane.getTabs().add(new Tab("tab4", userInfoMode));
+		specialJFXTabPane.getTabs().add(new Tab("tab2", new MovieModeController()));
+		specialJFXTabPane.getTabs().add(new Tab("tab3", userInfoMode));
 		
 		//Load some lol images from lol base
 		new Thread(() -> {

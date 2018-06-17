@@ -74,8 +74,8 @@ public class ApplicationSettingsLoader {
 			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)))
 			//			
 			//--DJMode
-			Main.djMode.updateTopSplitPaneDivider();
-			Main.djMode.updateBottomSplitPaneDivider();
+		//	Main.djMode.updateTopSplitPaneDivider();
+		//	Main.djMode.updateBottomSplitPaneDivider();
 			//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
 			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)))
 			//		

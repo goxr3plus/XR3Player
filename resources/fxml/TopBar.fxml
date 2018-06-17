@@ -59,27 +59,10 @@
             </HBox>
             <JFXTabPane fx:id="jfxTabPane" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                <tabs>
-                  <Tab fx:id="mainModeTab">
-                     <tooltip>
-                        <Tooltip text="Library Mode" />
-                     </tooltip>
-                  </Tab>
-                  <Tab fx:id="djModeTab">
-                     <tooltip>
-                        <Tooltip text="DJ Mode" />
-                     </tooltip>
-                  </Tab>
-                  <Tab fx:id="userModeTab">
-                     <tooltip>
-                        <Tooltip text="User Mode" />
-                     </tooltip>
-                  </Tab>
+                  <Tab fx:id="mainModeTab" />
+                  <Tab fx:id="userModeTab" />
                   <Tab fx:id="webModeTab" />
-                  <Tab fx:id="moviesModeTab">
-                     <tooltip>
-                        <Tooltip text="Movie Mode" />
-                     </tooltip>
-                  </Tab>
+                  <Tab fx:id="moviesModeTab" />
                </tabs>
             </JFXTabPane>
          </children>

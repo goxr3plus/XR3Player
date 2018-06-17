@@ -101,7 +101,7 @@ public class GeneralSettingsController extends BorderPane {
 			
 		});
 		
-		//djModeUpsideDown
+/*		//djModeUpsideDown
 		djModeUpsideDown.selectedToggleProperty().addListener(listener -> {
 			
 			//Update the properties file
@@ -110,7 +110,7 @@ public class GeneralSettingsController extends BorderPane {
 			//Turn Library Mode Upside Down or The Opposite
 			Main.djMode.turnUpsideDownSplitPane(JavaFXTools.getIndexOfSelectedToggle(djModeUpsideDown) != 0);
 			
-		});
+		});*/
 		
 		//notificationsPosition
 		notificationsPosition.selectedToggleProperty().addListener(listener -> {

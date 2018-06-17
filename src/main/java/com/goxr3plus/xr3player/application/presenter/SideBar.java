@@ -341,11 +341,19 @@ public class SideBar extends StackPane {
 		
 		//modeTeam
 		modeTeam.selectedToggleProperty().addListener((observable , oldToggle , newToggle) -> {
-			if (newToggle == this.mainModeToggle)
+			if (newToggle == this.mainModeToggle) {
 				Main.topBar.selectTab(Main.topBar.getMainModeTab());
-			else if (newToggle == this.djModeToggle)
-				Main.topBar.selectTab(Main.topBar.getDjModeTab());
-			else if (newToggle == this.userInfoToggle)
+				
+				//Fix things
+				Main.libraryMode.getDjModeStackPane().setVisible(false);
+				
+			} else if (newToggle == this.djModeToggle) {
+				Main.topBar.selectTab(Main.topBar.getMainModeTab());
+				
+				//Fix things
+				Main.libraryMode.getDjModeStackPane().setVisible(true);
+				
+			} else if (newToggle == this.userInfoToggle)
 				Main.topBar.selectTab(Main.topBar.getUserModeTab());
 			else if (newToggle == this.browserToggle)
 				Main.topBar.selectTab(Main.topBar.getWebModeTab());

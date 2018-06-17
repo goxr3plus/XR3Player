@@ -52,9 +52,6 @@ public class TopBar extends BorderPane {
 	private Tab mainModeTab;
 	
 	@FXML
-	private Tab djModeTab;
-	
-	@FXML
 	private Tab userModeTab;
 	
 	@FXML
@@ -145,20 +142,22 @@ public class TopBar extends BorderPane {
 			if (mainModeTab.isSelected()) {
 				//System.out.println("MainMode Selected")
 				
-				if (windowMode != WindowMode.MAINMODE && !Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
+				if (windowMode != WindowMode.MAINMODE) {// && !Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
 					
+						
 					//Update the djMode firstly
-					Main.playListModesSplitPane.saveSplitPaneDivider();
-					Main.djMode.saveBottomSplitPaneDivider();
-					Main.djMode.getBottomSplitPane().getItems().clear();
+					//					Main.playListModesSplitPane.saveSplitPaneDivider();
+					//					Main.djMode.saveBottomSplitPaneDivider();
+					//					Main.djMode.getBottomSplitPane().getItems().clear();
+					//					
+					//					//Check firstly if the mode is upside down or not	
+					//					Main.libraryMode.getTopSplitPane().getItems().remove(dummyStackPane);
+					//					Main.libraryMode.getTopSplitPane().getItems().add(
+					//							JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown()) == 0 ? 1 : 0,
+					//							Main.playListModesSplitPane);
+					//					SplitPane.setResizableWithParent(Main.playListModesSplitPane, Boolean.FALSE);
+					//					Main.libraryMode.updateTopSplitPaneDivider();
 					
-					//Check firstly if the mode is upside down or not	
-					Main.libraryMode.getTopSplitPane().getItems().remove(dummyStackPane);
-					Main.libraryMode.getTopSplitPane().getItems().add(
-							JavaFXTools.getIndexOfSelectedToggle(Main.settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown()) == 0 ? 1 : 0,
-							Main.playListModesSplitPane);
-					SplitPane.setResizableWithParent(Main.playListModesSplitPane, Boolean.FALSE);
-					Main.libraryMode.updateTopSplitPaneDivider();
 					//Main.libraryMode.getBottomSplitPane().getItems().clear()
 					//Main.libraryMode.getBottomSplitPane().getItems().addAll(Main.multipleTabs, Main.xPlayersList.getXPlayerController(0))
 					
@@ -173,41 +172,38 @@ public class TopBar extends BorderPane {
 				Main.specialJFXTabPane.getSelectionModel().select(0);
 				Main.sideBar.getMainModeToggle().setSelected(true);
 			}
-		});
-		
-		djModeTab.setOnSelectionChanged(l -> {
-			if (djModeTab.isSelected()) {
-				//System.out.println("djModeTab Selected")
+			
+/*			if (windowMode != WindowMode.DJMODE) {// && Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
 				
-				if (windowMode != WindowMode.DJMODE && Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
-					
-					//Update the libraryMode firstly
-					Main.playListModesSplitPane.saveSplitPaneDivider();
-					Main.libraryMode.saveTopSplitPaneDivider();
-					//Main.libraryMode.saveBottomSplitPaneDivider()
-					//Main.libraryMode.getBottomSplitPane().getItems().clear()	
-					Main.libraryMode.getTopSplitPane().getItems().remove(Main.playListModesSplitPane);
-					Main.libraryMode.getTopSplitPane().getItems().add(dummyStackPane);
-					
-					// Work
-					Main.djMode.getBottomSplitPane().getItems().clear();
-					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.playListModesSplitPane);
-					SplitPane.setResizableWithParent(Main.playListModesSplitPane, Boolean.FALSE);
-					SplitPane.setResizableWithParent(Main.treeManager, Boolean.FALSE);
-					Main.djMode.updateBottomSplitPaneDivider();
-					//Main.multipleTabs.reverseSplitPaneItems()
-					
-					// Update window Mode
-					windowMode = WindowMode.DJMODE;
-					
-				}
-				//if (!Main.specialJFXTabPane.getTabs().get(1).isSelected())
-				Main.specialJFXTabPane.getSelectionModel().select(1);
-				Main.sideBar.getDjModeToggle().setSelected(true);
+				Main.libraryMode.getDjModeStackPane().setVisible(true);
 				
-				//Hide the searchBox that is coming from LibraryMode
-				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
+				//					//Update the libraryMode firstly
+				//					Main.playListModesSplitPane.saveSplitPaneDivider();
+				//					Main.libraryMode.saveTopSplitPaneDivider();
+				//					//Main.libraryMode.saveBottomSplitPaneDivider()
+				//					//Main.libraryMode.getBottomSplitPane().getItems().clear()	
+				//					Main.libraryMode.getTopSplitPane().getItems().remove(Main.playListModesSplitPane);
+				//					Main.libraryMode.getTopSplitPane().getItems().add(dummyStackPane);
+				//					
+				//					// Work
+				//					Main.djMode.getBottomSplitPane().getItems().clear();
+				//					Main.djMode.getBottomSplitPane().getItems().addAll(Main.treeManager, Main.playListModesSplitPane);
+				//					SplitPane.setResizableWithParent(Main.playListModesSplitPane, Boolean.FALSE);
+				//					SplitPane.setResizableWithParent(Main.treeManager, Boolean.FALSE);
+				//					Main.djMode.updateBottomSplitPaneDivider();
+				//Main.multipleTabs.reverseSplitPaneItems()
+				
+				// Update window Mode
+				windowMode = WindowMode.DJMODE;
+				
 			}
+			//if (!Main.specialJFXTabPane.getTabs().get(1).isSelected())
+			Main.specialJFXTabPane.getSelectionModel().select(1);
+			Main.sideBar.getDjModeToggle().setSelected(true);
+			
+			//Hide the searchBox that is coming from LibraryMode
+			Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
+		}*/
 		});
 		
 		moviesModeTab.setOnSelectionChanged(l -> {
@@ -215,7 +211,7 @@ public class TopBar extends BorderPane {
 				//System.out.println("userModeTab Selected")
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
-				Main.specialJFXTabPane.getSelectionModel().select(2);
+				Main.specialJFXTabPane.getSelectionModel().select(1);
 				Main.sideBar.getMoviesToggle().setSelected(true);
 				
 				// Update window Mode
@@ -231,7 +227,7 @@ public class TopBar extends BorderPane {
 				//System.out.println("userModeTab Selected")
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(2).isSelected())
-				Main.specialJFXTabPane.getSelectionModel().select(3);
+				Main.specialJFXTabPane.getSelectionModel().select(2);
 				Main.sideBar.getUserInfoToggle().setSelected(true);
 				
 				// Update window Mode
@@ -247,7 +243,7 @@ public class TopBar extends BorderPane {
 				//System.out.println("webModeTab Selected")
 				
 				//if (!Main.specialJFXTabPane.getTabs().get(3).isSelected())
-				Main.specialJFXTabPane.getSelectionModel().select(4);
+				Main.specialJFXTabPane.getSelectionModel().select(3);
 				Main.sideBar.getBrowserToggle().setSelected(true);
 				
 				// Update window Mode
@@ -339,13 +335,6 @@ public class TopBar extends BorderPane {
 	 */
 	public Tab getMainModeTab() {
 		return mainModeTab;
-	}
-	
-	/**
-	 * @return the djModeTab
-	 */
-	public Tab getDjModeTab() {
-		return djModeTab;
 	}
 	
 	/**
