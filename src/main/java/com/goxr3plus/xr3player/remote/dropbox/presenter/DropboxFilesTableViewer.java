@@ -28,7 +28,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
@@ -165,28 +167,21 @@ public class DropboxFilesTableViewer extends StackPane {
 						
 						//It is directory?	
 						if ( ( (DropboxFile) super.getTableRow().getItem() ).isDirectory()) { //DIRECTORY
-							icon.setIconLiteral("fas-folder");
-							icon.setIconColor(Color.web("#ddaa33"));
+							JavaFXTools.setFontIcon(this, icon, "fas-folder", FileTreeItem.folderColor);
 						} else {
 							//Is it a music file?
 							if (InfoTool.isAudioCheckExtension(item)) {           //AUDIO
-								icon.setIconLiteral("fas-file-audio");
-								icon.setIconColor(Color.web("#ff4a4a"));
+								JavaFXTools.setFontIcon(this, icon, "fas-file-audio", FileTreeItem.audioColor);
 							} else if (InfoTool.isVideoCheckExtension(item)) {    //VIDEO
-								icon.setIconLiteral("fas-file-video");
-								icon.setIconColor(Color.WHITE);
+								JavaFXTools.setFontIcon(this, icon, "fas-file-video", Color.WHITE);
 							} else if (InfoTool.isImageCheckExtension(item)) {    //PICTURE
-								icon.setIconLiteral("fas-file-image");
-								icon.setIconColor(Color.WHITE);
+								JavaFXTools.setFontIcon(this, icon, "fas-file-image", Color.WHITE);
 							} else if (InfoTool.isPdfCheckExtension(item)) {      //PDF
-								icon.setIconLiteral("fas-file-pdf");
-								icon.setIconColor(Color.web("#d62641"));
+								JavaFXTools.setFontIcon(this, icon, "fas-file-pdf", FileTreeItem.pdfColor);
 							} else if (InfoTool.isZipCheckExtension(item)) {      //ZIP
-								icon.setIconLiteral("fas-file-archive");
-								icon.setIconColor(Color.WHITE);
+								JavaFXTools.setFontIcon(this, icon, "fas-file-archive", Color.WHITE);
 							} else {                                              //FILE
-								icon.setIconLiteral("fas-file");
-								icon.setIconColor(Color.WHITE);
+								JavaFXTools.setFontIcon(this, icon, "fas-file", Color.WHITE);
 							}
 						}
 					}

@@ -251,7 +251,6 @@ public class MediaTableViewer extends StackPane {
 	private final SmartControllerMode mode;
 	
 	//Colors
-	private Color audioColor = Color.web("#ff4a4a");
 	private Color lightGreen = Color.web("#ceff26");
 	
 	/**
@@ -584,11 +583,11 @@ public class MediaTableViewer extends StackPane {
 					// set the image according to the play status		
 					if (item != null)
 						if (item == -1) {  //Missing
-							JavaFXTools.setFontIcon(this, icon, "fa-deaf", audioColor);
+							JavaFXTools.setFontIcon(this, icon, "fa-deaf", Color.WHITE);
 						} else if (item == 0) { //Corrupted
-							JavaFXTools.setFontIcon(this, icon, "fas-bug", audioColor);
+							JavaFXTools.setFontIcon(this, icon, "fas-bug", Color.WHITE);
 						} else if (item == 1) { //Okay
-							JavaFXTools.setFontIcon(this, icon, "gmi-audiotrack", audioColor);
+							JavaFXTools.setFontIcon(this, icon, "gmi-audiotrack", Color.WHITE);
 						}
 				}
 			}

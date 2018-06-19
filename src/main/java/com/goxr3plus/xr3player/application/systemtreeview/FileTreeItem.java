@@ -27,6 +27,12 @@ public class FileTreeItem extends TreeItem<String> {
 	 */
 	private FontIcon icon = new FontIcon();
 	
+	//--------------- Colors ----------------
+	public static final Color folderColor = Color.web("#ddaa33");
+	public static final Color audioColor = Color.web("#ff4a4a");
+	public static final Color pdfColor = Color.web("#d62641");
+	public static final Color fileColor = Color.web("#d74418");
+	
 	/**
 	 * Constructor.
 	 *
@@ -40,6 +46,7 @@ public class FileTreeItem extends TreeItem<String> {
 		
 		//icon
 		icon.setIconSize(18);
+		setGraphic(icon);
 		
 		//Is this a directory?
 		File file = new File(fullPath);
@@ -49,25 +56,25 @@ public class FileTreeItem extends TreeItem<String> {
 		if (file.exists()) {
 			//It is directory?
 			if (isDirectory)
-				setFontIcon("fas-folder", Color.web("#ddaa33"));
+				setFontIcon("fas-folder", folderColor);
 			
 			else {
 				//Is it a music file?
 				if (InfoTool.isAudio(absolutePath))
-					setFontIcon("fas-file-audio", Color.web("#ff4a4a"));
+					setFontIcon("fas-file-audio", audioColor);
 				else if (InfoTool.isVideo(absolutePath))
 					setFontIcon("fas-file-video", Color.WHITE);
 				else if (InfoTool.isImage(absolutePath))
 					setFontIcon("fas-file-image", Color.WHITE);
 				else if (InfoTool.isPdf(absolutePath))
-					setFontIcon("fas-file-pdf", Color.web("#d62641"));
+					setFontIcon("fas-file-pdf", pdfColor);
 				else if (InfoTool.isZip(absolutePath))
 					setFontIcon("fas-file-archive", Color.WHITE);
 				else
 					setFontIcon("fas-file", Color.WHITE);
 			}
 		} else
-			setFontIcon("fas-file", Color.web("#d74418"));
+			setFontIcon("fas-file", fileColor);
 		
 		// set the value
 		if (!fullPath.endsWith(File.separator)) {
@@ -93,7 +100,6 @@ public class FileTreeItem extends TreeItem<String> {
 	private void setFontIcon(String iconLiteral , Color color) {
 		icon.setIconLiteral(iconLiteral);
 		icon.setIconColor(color);
-		setGraphic(icon);
 	}
 	
 	/**

@@ -14,12 +14,10 @@ import java.util.stream.Stream;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
