@@ -608,9 +608,9 @@ public class DropboxViewer extends StackPane {
 						//Try to do it
 						getDropBoxService().rename(dropboxFile, parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName);
 						
-						//						System.out.println("Old Name: " + dropboxFile.getMetadata().getPathLower());
+						//						System.out.println("Old Name: " + dropboxFile.getMetadata().getPathLower())
 						//						
-						//						System.out.println("New Name: " + parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName);
+						//						System.out.println("New Name: " + parent.replace("\\", "/") + ( parent.equals("\\") ? "" : "/" ) + newName)
 						//						
 					} else // X is pressed by user || // Old name == New name
 						dropboxFile.titleProperty().set(oldName);

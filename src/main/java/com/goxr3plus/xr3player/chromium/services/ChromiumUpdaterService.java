@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -20,9 +22,6 @@ import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
  * The Class FileFilterThread.
  */
 public class ChromiumUpdaterService {
-	
-	//public static final Image mutedImage = InfoTool.getImageFromResourcesFolder("speakerMuted.png");
-	//public static final Image unMutedImage = InfoTool.getImageFromResourcesFolder("speaker.png");
 	
 	/**
 	 * The name of the running Thread/s
@@ -80,22 +79,21 @@ public class ChromiumUpdaterService {
 					//----------------------------Check if volume is enabled ---------------------------
 					
 					//Main Mode
-					XPlayerController controller = Main.xPlayersList.getXPlayerController(0);
-					Main.sideBar.getMainModeVolumeIcon().setVisible(controller.getxPlayer().isPlaying() && !controller.getxPlayer().getMute());
+					boolean muted = Main.xPlayersList.getXPlayerController(0).isMuteButtonSelected();
+					( (FontIcon) Main.sideBar.getMainModeVolumeButton().getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
 					
 					//DJ Mode
-					XPlayerController controller1 = Main.xPlayersList.getXPlayerController(1);
-					XPlayerController controller2 = Main.xPlayersList.getXPlayerController(2);
-					Main.sideBar.getDjModeVolumeIcon().setVisible( ( controller1.getxPlayer().isPlaying() && !controller1.getxPlayer().getMute() )
-							|| ( controller2.getxPlayer().isPlaying() && !controller2.getxPlayer().getMute() ));
+					muted = ( Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() ) && ( Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected() );
+					( (FontIcon) Main.sideBar.getDjModeVolumeButton().getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
 					
 					//Browser Mode
-					Main.sideBar.getBrowserVolumeIcon().setVisible(webBrowserController.getTabPane().getTabs().stream().filter(tab -> {
+					muted = webBrowserController.getTabPane().getTabs().stream().filter(tab -> {
 						WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
 						
 						//Is Audio Playing? && Audio is Not Muted
 						return tabController.getBrowser().isAudioPlaying() && !tabController.getBrowser().isAudioMuted();
-					}).findFirst().isPresent());
+					}).findFirst().isPresent();
+					( (FontIcon) Main.sideBar.getBrowserVolumeButton().getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
 					
 				}
 				

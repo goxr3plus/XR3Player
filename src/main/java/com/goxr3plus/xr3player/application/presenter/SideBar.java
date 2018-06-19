@@ -60,13 +60,13 @@ public class SideBar extends StackPane {
 	private ToggleGroup modeTeam;
 	
 	@FXML
-	private FontIcon mainModeVolumeIcon;
+	private JFXButton mainModeVolumeButton;
 	
 	@FXML
 	private ToggleButton djModeToggle;
 	
 	@FXML
-	private FontIcon djModeVolumeIcon;
+	private JFXButton djModeVolumeButton;
 	
 	@FXML
 	private ToggleButton userInfoToggle;
@@ -75,7 +75,7 @@ public class SideBar extends StackPane {
 	private ToggleButton browserToggle;
 	
 	@FXML
-	private FontIcon browserVolumeIcon;
+	private JFXButton browserVolumeButton;
 	
 	@FXML
 	private ToggleButton moviesToggle;
@@ -399,10 +399,20 @@ public class SideBar extends StackPane {
 		
 		performanceHBox.getChildren().addAll(cpuMonitor, ramMonitor);
 		
-		//Side Bar Volume Icons
-		mainModeVolumeIcon.setVisible(false);
-		djModeVolumeIcon.setVisible(false);
-		browserVolumeIcon.setVisible(false);
+		//MainModeVolumeButton
+		mainModeVolumeButton.setOnAction(a -> {
+			Main.xPlayersList.getXPlayerController(0).revertMuteButton();
+			boolean muted = Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected();
+			( (FontIcon) mainModeVolumeButton.getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+		});
+		//DjModeVolumeButton
+		djModeVolumeButton.setOnAction(a -> {
+			Main.xPlayersList.getXPlayerController(1).revertMuteButton();
+			Main.xPlayersList.getXPlayerController(2).revertMuteButton();
+			boolean muted = ( Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() ) && ( Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected() );
+			( (FontIcon) djModeVolumeButton.getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+		});
+		
 	}
 	
 	/**
@@ -526,24 +536,24 @@ public class SideBar extends StackPane {
 	}
 	
 	/**
-	 * @return the mainModeVolumeIcon
+	 * @return the mainModeVolumeButton
 	 */
-	public FontIcon getMainModeVolumeIcon() {
-		return mainModeVolumeIcon;
+	public JFXButton getMainModeVolumeButton() {
+		return mainModeVolumeButton;
 	}
 	
 	/**
-	 * @return the djModeVolumeIcon
+	 * @return the djModeVolumeButton
 	 */
-	public FontIcon getDjModeVolumeIcon() {
-		return djModeVolumeIcon;
+	public JFXButton getDjModeVolumeButton() {
+		return djModeVolumeButton;
 	}
 	
 	/**
-	 * @return the browserVolumeIcon
+	 * @return the browserVolumeButton
 	 */
-	public FontIcon getBrowserVolumeIcon() {
-		return browserVolumeIcon;
+	public JFXButton getBrowserVolumeButton() {
+		return browserVolumeButton;
 	}
 	
 }

@@ -56,7 +56,7 @@
                      </VBox.margin></Label>
                   <StackPane>
                      <children>
-                        <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Libraries Mode">
+                        <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Libraries">
                            <toggleGroup>
                               <ToggleGroup fx:id="modeTeam" />
                            </toggleGroup>
@@ -64,30 +64,30 @@
                               <FontIcon iconColor="WHITE" iconLiteral="gmi-library-music" iconSize="32" />
                            </graphic>
                         </ToggleButton>
-                        <FontIcon fx:id="mainModeVolumeIcon" iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </FontIcon>
+                        <JFXButton fx:id="mainModeVolumeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="42.0" styleClass="jfx-button2" StackPane.alignment="TOP_RIGHT">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </StackPane>
                   <StackPane layoutX="10.0" layoutY="61.0">
                      <children>
-                        <ToggleButton fx:id="djModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="DJ Mode" toggleGroup="$modeTeam">
+                        <ToggleButton fx:id="djModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="DJ " toggleGroup="$modeTeam">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fas-dot-circle" iconSize="32" />
                            </graphic>
                         </ToggleButton>
-                        <FontIcon fx:id="djModeVolumeIcon" iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </FontIcon>
+                        <JFXButton fx:id="djModeVolumeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="42.0" styleClass="jfx-button2" StackPane.alignment="TOP_RIGHT">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </StackPane>
                   <StackPane layoutX="10.0" layoutY="261.0">
                      <children>
-                        <ToggleButton fx:id="userInfoToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="User Information" toggleGroup="$modeTeam">
+                        <ToggleButton fx:id="userInfoToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="User" toggleGroup="$modeTeam">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fa-user-circle-o" iconSize="32" />
                            </graphic>
@@ -101,11 +101,11 @@
                               <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="32" />
                            </graphic>
                         </ToggleButton>
-                        <FontIcon fx:id="browserVolumeIcon" iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="24" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </FontIcon>
+                        <JFXButton fx:id="browserVolumeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="42.0" styleClass="jfx-button2" StackPane.alignment="TOP_RIGHT">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </StackPane>
                   <StackPane layoutX="10.0" layoutY="341.0">
@@ -252,19 +252,15 @@
                                     <FlowPane alignment="CENTER" hgap="2.0" vgap="2.0">
                                        <children>
                                           <JFXButton fx:id="openTaskManager" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="jfx-button4" text=" ">
-                                             <graphic>
-                                                <ImageView pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../image/task.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                              <tooltip>
                                                 <Tooltip text="Install new Updates" />
                                              </tooltip>
+                                             <graphic>
+                                                <FontIcon iconColor="WHITE" iconLiteral="fa-tasks" iconSize="32" />
+                                             </graphic>
                                           </JFXButton>
                                           <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
                                              <items>

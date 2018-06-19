@@ -2202,4 +2202,25 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return mediaTagImageView;
 	}
 	
+	/**
+	 * @return the muteButton
+	 */
+	public ToggleButton getMuteButton() {
+		return muteButton;
+	}
+	
+	/**
+	 * @return Is the muteButton Selected?
+	 */
+	public boolean isMuteButtonSelected() {
+		return muteButton.isSelected();
+	}
+	
+	/**
+	 * muteButton.setSelected(!muteButton.isSelected());
+	 */
+	public void revertMuteButton() {
+		muteButton.setSelected(!muteButton.isSelected());
+	}
+	
 }
