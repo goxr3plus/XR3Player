@@ -578,7 +578,8 @@ public class DropboxViewer extends StackPane {
 		String oldName = dropboxFile.getMetadata().getName();
 		
 		// Bind
-		dropboxFile.titleProperty().bind(Main.renameWindow.getInputField().textProperty());
+		String extension = InfoTool.getFileExtension(dropboxFile.getMetadata().getName());
+		dropboxFile.titleProperty().bind(Main.renameWindow.getInputField().textProperty().concat("." + extension));
 		
 		// When the Rename Window is closed do the rename
 		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
