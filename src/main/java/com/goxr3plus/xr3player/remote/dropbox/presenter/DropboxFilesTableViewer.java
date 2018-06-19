@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
@@ -25,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.SystemRoot;
@@ -143,13 +145,11 @@ public class DropboxFilesTableViewer extends StackPane {
 		// fileType
 		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("extension"));
 		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxFile,String>() {
-			private final ImageView imageView = new ImageView();
+			//Icon FontIcon
+			FontIcon icon = new FontIcon();
 			
 			{
-				//setGraphic(imageView)
-				//imageView.setFitWidth(24)
-				//imageView.setFitHeight(24)
-				
+				icon.setIconSize(24);
 			}
 			
 			@Override
@@ -164,25 +164,33 @@ public class DropboxFilesTableViewer extends StackPane {
 					if (item != null && super.getTableRow().getItem() != null) {
 						
 						setText(null);
-						setGraphic(imageView);
+						setGraphic(icon);
 						
 						//It is directory?	
-						if ( ( (DropboxFile) super.getTableRow().getItem() ).isDirectory())
-							imageView.setImage(SystemRoot.CLOSED_FOLDER_IMAGE);
-						else {
+						if ( ( (DropboxFile) super.getTableRow().getItem() ).isDirectory()) { //DIRECTORY
+							icon.setIconLiteral("fas-folder");
+							icon.setIconColor(Color.web("#ddaa33"));
+						} else {
 							//Is it a music file?
-							if (InfoTool.isAudioCheckExtension(item))
-								imageView.setImage(Media.SONG_IMAGE);
-							else if (InfoTool.isVideoCheckExtension(item))
-								imageView.setImage(SystemRoot.VIDEO_IMAGE);
-							else if (InfoTool.isImageCheckExtension(item))
-								imageView.setImage(SystemRoot.PICTURE_IMAGE);
-							else if (InfoTool.isPdfCheckExtension(item))
-								imageView.setImage(SystemRoot.PDF_IMAGE);
-							else if (InfoTool.isZipCheckExtension(item))
-								imageView.setImage(SystemRoot.ZIP_IMAGE);
-							else
-								imageView.setImage(SystemRoot.FILE_IMAGE);
+							if (InfoTool.isAudioCheckExtension(item)) {           //AUDIO
+								icon.setIconLiteral("fas-file-audio");
+								icon.setIconColor(Color.web("#ff4a4a"));
+							} else if (InfoTool.isVideoCheckExtension(item)) {    //VIDEO
+								icon.setIconLiteral("fas-file-video");
+								icon.setIconColor(Color.WHITE);
+							} else if (InfoTool.isImageCheckExtension(item)) {    //PICTURE
+								icon.setIconLiteral("fas-file-image");
+								icon.setIconColor(Color.WHITE);
+							} else if (InfoTool.isPdfCheckExtension(item)) {      //PDF
+								icon.setIconLiteral("fas-file-pdf");
+								icon.setIconColor(Color.web("#d62641"));
+							} else if (InfoTool.isZipCheckExtension(item)) {      //ZIP
+								icon.setIconLiteral("fas-file-archive");
+								icon.setIconColor(Color.WHITE);
+							} else {                                              //FILE
+								icon.setIconLiteral("fas-file");
+								icon.setIconColor(Color.WHITE);
+							}
 						}
 					}
 				}

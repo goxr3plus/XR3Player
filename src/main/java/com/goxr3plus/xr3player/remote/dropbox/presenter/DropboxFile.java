@@ -82,14 +82,14 @@ public class DropboxFile {
 		
 		//downloadButton	
 		FontIcon downloadIcon = new FontIcon("fas-cloud-download-alt");
-		downloadIcon.setIconSize(16);
+		downloadIcon.setIconSize(18);
 		downloadIcon.setIconColor(Color.WHITE);
 		
 		Button downloadButton = new Button("", downloadIcon);
-		downloadButton.setPrefSize(24, 24);
-		downloadButton.setMinSize(24, 24);
-		downloadButton.setMaxSize(24, 24);
-		downloadButton.setStyle("-fx-cursor:hand");
+		downloadButton.getStyleClass().add("jfx-button2");
+		downloadButton.setPrefSize(28, 24);
+		downloadButton.setMinSize(28, 24);
+		downloadButton.setMaxSize(28, 24);
 		downloadButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		downloadButton.setOnMouseReleased(m -> Main.dropBoxViewer.downloadFile(this));
 		
