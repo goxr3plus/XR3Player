@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
@@ -160,6 +163,14 @@ public class SmartControllerFoldersMode extends StackPane {
 		
 		//Custom Cell Factory
 		treeView.setCellFactory(tv -> new TreeCell<String>() {
+			
+			/** FontIcon */
+			private FontIcon icon = new FontIcon();
+			
+			{
+				icon.setIconSize(24);
+			}
+			
 			@Override
 			public void updateItem(String item , boolean empty) {
 				super.updateItem(item, empty);
@@ -182,12 +193,24 @@ public class SmartControllerFoldersMode extends StackPane {
 						setGraphic(getTreeItem().getGraphic());
 					} else {
 						if (getTreeItem().isExpanded())
-							setGraphic(new ImageView(SystemRoot.OPENED_FOLDER_IMAGE));
+							setFontIcon("fas-folder-open", Color.web("#ddaa33"));
 						else
-							setGraphic(new ImageView(SystemRoot.CLOSED_FOLDER_IMAGE));
+							setFontIcon("fas-folder", Color.web("#ddaa33"));
 					}
 					
 				}
+			}
+			
+			/**
+			 * Set Graphic Font Icon
+			 * 
+			 * @param iconLiteral
+			 * @param color
+			 */
+			private void setFontIcon(String iconLiteral , Color color) {
+				icon.setIconLiteral(iconLiteral);
+				icon.setIconColor(color);
+				setGraphic(icon);
 			}
 		});
 		
@@ -389,7 +412,7 @@ public class SmartControllerFoldersMode extends StackPane {
 	public Label getTopLabel() {
 		return topLabel;
 	}
-
+	
 	/**
 	 * @return the service
 	 */
