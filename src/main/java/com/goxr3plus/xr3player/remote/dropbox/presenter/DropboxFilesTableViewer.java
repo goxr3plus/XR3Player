@@ -215,6 +215,8 @@ public class DropboxFilesTableViewer extends StackPane {
 					if (m.getButton() == MouseButton.PRIMARY) {
 						if (m.getClickCount() == 2 && row.itemProperty().get().isDirectory())
 							Main.dropBoxViewer.recreateTableView(row.itemProperty().get().getMetadata().getPathLower());
+						if (m.getClickCount() == 2 && !row.itemProperty().get().isDirectory())
+							Main.dropBoxViewer.renameFile(row.itemProperty().get(), row);
 						
 						//Secondary
 					} else if (m.getButton() == MouseButton.SECONDARY && !tableView.getSelectionModel().getSelectedItems().isEmpty()) {

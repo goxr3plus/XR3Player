@@ -13,12 +13,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -111,6 +108,15 @@ public class DropboxFile {
 	 */
 	public boolean isDirectory() {
 		return isDirectory;
+	}
+	
+	/**
+	 * Checks if is FILE.
+	 *
+	 * @return true, if is FILE
+	 */
+	public boolean isFile() {
+		return !isDirectory;
 	}
 	
 	/**
