@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -172,8 +173,6 @@ public class TreeViewManager extends BorderPane {
 			
 			// source is expanded
 			if (!source.isExpanded() && source.getChildren().isEmpty()) {
-				//if (source.isDirectory())
-				//source.setGraphic(new ImageView(SystemRoot.openedFolderImage));
 				
 				//Check if the TreeItem has not children yet
 				if (source.getChildren().isEmpty()) {
@@ -200,12 +199,16 @@ public class TreeViewManager extends BorderPane {
 							x.printStackTrace();
 						}
 					
+					source.expandedProperty().addListener((l , oldValue , newValue) -> source.getIcon().setIconLiteral(newValue ? "fas-folder-open" : "fas-folder")
+					
+					);
 				} else {
 					// if you want to implement rescanning a
 					// directory
 					// for
 					// changes this would be the place to do it
 				}
+				
 				source.setExpanded(true);
 			}
 			

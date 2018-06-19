@@ -114,4 +114,11 @@ public class FileTreeItem extends TreeItem<String> {
 		return isDirectory;
 	}
 	
+	/**
+	 * @return the icon
+	 */
+	public FontIcon getIcon() {
+		return icon;
+	}
+	
 }
