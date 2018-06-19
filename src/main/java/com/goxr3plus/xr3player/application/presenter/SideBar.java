@@ -407,6 +407,7 @@ public class SideBar extends StackPane {
 		});
 		//DjModeVolumeButton
 		djModeVolumeButton.setOnAction(a -> {
+			boolean mute = Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() || Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected();
 			Main.xPlayersList.getXPlayerController(1).revertMuteButton();
 			Main.xPlayersList.getXPlayerController(2).revertMuteButton();
 			boolean muted = ( Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() ) && ( Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected() );
