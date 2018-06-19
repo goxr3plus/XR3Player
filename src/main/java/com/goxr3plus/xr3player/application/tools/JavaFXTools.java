@@ -11,8 +11,11 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
@@ -287,6 +290,19 @@ public final class JavaFXTools {
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);
 		return imageView;
+	}
+	
+	/**
+	 * Set Graphic Font Icon
+	 * 
+	 * @param icon
+	 * @param iconLiteral
+	 * @param color
+	 */
+	public static void setFontIcon(Labeled node , FontIcon icon , String iconLiteral , Color color) {
+		icon.setIconLiteral(iconLiteral);
+		icon.setIconColor(color);
+		node.setGraphic(icon);
 	}
 	
 }

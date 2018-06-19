@@ -46,6 +46,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -76,7 +77,7 @@ public class MediaTableViewer extends StackPane {
 	
 	/** The media type. */
 	@FXML
-	private TableColumn<Media,ImageView> mediaType;
+	private TableColumn<Media,Integer> mediaType;
 	
 	/** The title. */
 	@FXML
@@ -248,6 +249,10 @@ public class MediaTableViewer extends StackPane {
 	private int previousSelectedCount = 0;
 	
 	private final SmartControllerMode mode;
+	
+	//Colors
+	private Color audioColor = Color.web("#ff4a4a");
+	private Color lightGreen = Color.web("#ceff26");
 	
 	/**
 	 * Constructor.
@@ -440,7 +445,7 @@ public class MediaTableViewer extends StackPane {
 			/**
 			 * Update the emotion the user is feeling for this Media
 			 */
-			public void updateEmotion(Media media , Node node) {				
+			public void updateEmotion(Media media , Node node) {
 				// Show the Window
 				Main.emotionsWindow.show(media.getFileName(), node);//getFileName()
 				
@@ -546,7 +551,7 @@ public class MediaTableViewer extends StackPane {
 							setGraphic(null);
 						else if (item == -1) {
 							icon.setIconLiteral("fas-play-circle");
-							icon.setIconColor(Color.web("#ceff26"));
+							icon.setIconColor(lightGreen);
 						} else {
 							icon.setIconLiteral(item == 0 ? "gmi-filter-1" : item == 1 ? "gmi-filter-2" : "gmi-filter-3");
 							icon.setIconColor(Color.WHITE);
@@ -558,13 +563,36 @@ public class MediaTableViewer extends StackPane {
 		
 		// mediaType
 		mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
-		mediaType.setComparator((imageView1 , imageView2) -> {
-			if (imageView1.getImage() == Media.SONG_MISSING_IMAGE && imageView2.getImage() != Media.SONG_MISSING_IMAGE)
-				return 1;
-			else if (imageView1.getImage() != Media.SONG_MISSING_IMAGE && imageView2.getImage() == Media.SONG_MISSING_IMAGE)
-				return -1;
-			else
-				return 0;
+		mediaType.setCellFactory(col -> new TableCell<Media,Integer>() {
+			
+			//Icon FontIcon
+			FontIcon icon = new FontIcon();
+			
+			{
+				icon.setIconSize(24);
+			}
+			
+			@Override
+			protected void updateItem(Integer item , boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+					setGraphic(null);
+				} else {
+					setGraphic(icon);
+					
+					// set the image according to the play status		
+					if (item != null)
+						if (item == -1) {  //Missing
+							JavaFXTools.setFontIcon(this, icon, "fa-deaf", audioColor);
+						} else if (item == 0) { //Corrupted
+							JavaFXTools.setFontIcon(this, icon, "fas-bug", audioColor);
+						} else if (item == 1) { //Okay
+							JavaFXTools.setFontIcon(this, icon, "gmi-audiotrack", audioColor);
+						}
+				}
+			}
+			
 		});
 		
 		//artwork

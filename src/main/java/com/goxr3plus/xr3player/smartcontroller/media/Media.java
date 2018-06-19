@@ -51,7 +51,7 @@ public abstract class Media {
 	private SimpleStringProperty title;
 	
 	/** The media type. */
-	private SimpleObjectProperty<ImageView> mediaType;
+	private SimpleIntegerProperty mediaType;
 	
 	/**
 	 * Determines if the Media has been played or is currently playing or has not been played at all
@@ -239,7 +239,7 @@ public abstract class Media {
 		
 		//----------
 		this.emotion = new SimpleIntegerProperty(0);
-		this.mediaType = new SimpleObjectProperty<>(new ImageView(SONG_IMAGE));
+		this.mediaType = new SimpleIntegerProperty(1);
 		this.playStatus = new SimpleIntegerProperty(-2);
 		this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
 		this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
@@ -351,11 +351,11 @@ public abstract class Media {
 		
 		//Image
 		if (!fileExists.get()) //File is missing ?
-			mediaType.get().setImage(SONG_MISSING_IMAGE);
+			mediaType.set(-1);
 		else if (this.duration.get() != -1) // Not corrupted
-			mediaType.get().setImage(SONG_IMAGE);
+			mediaType.set(1);
 		else if (this.duration.get() == -1) //Corrupted
-			mediaType.get().setImage(SONG_CORRUPTED_IMAGE);
+			mediaType.set(0);
 		
 	}
 	
@@ -367,7 +367,7 @@ public abstract class Media {
 	 *
 	 * @return the simple object property
 	 */
-	public SimpleObjectProperty<ImageView> mediaTypeProperty() {
+	public SimpleIntegerProperty mediaTypeProperty() {
 		return mediaType;
 	}
 	
@@ -1018,8 +1018,6 @@ public abstract class Media {
 			//	ActionTool.showNotification("Error Message", "Failed to update the stars:/n" + ex.getMessage(), Duration.millis(1500), NotificationType.ERROR)
 		}
 	}
-	
-
 	
 	/**
 	 * This method is called to change the Emotion Image of the Media based on the current Emotion
