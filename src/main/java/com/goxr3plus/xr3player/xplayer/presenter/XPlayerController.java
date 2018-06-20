@@ -40,6 +40,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
@@ -122,6 +123,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private HBox mediaNameHBox;
 	
 	@FXML
+	private HBox timersBox;
+	
+	@FXML
 	private Label elapsedTimeLabel;
 	
 	@FXML
@@ -129,6 +133,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label totalTimeLabel;
+	
+	@FXML
+	private MenuButton copyButton;
 	
 	@FXML
 	private MenuItem copyFileTitle;
@@ -150,6 +157,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private Label advModeVolumeLabel;
+	
+	@FXML
+	private SplitPane internalSplitPane;
 	
 	@FXML
 	private BorderPane discBorderPane;
@@ -303,6 +313,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private MenuButton transferMedia;
+	
+	@FXML
+	private VBox volumeBarBox;
 	
 	@FXML
 	private Button smMaximizeVolume;
@@ -1189,7 +1202,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @param side
 	 *            the side
 	 */
-	public void makeTheVisualizer(Side side) {
+	public void makeTheVisualizer() {
 		
 		// Visualizer
 		visualizer = new XPlayerVisualizer(this);
@@ -1470,6 +1483,49 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//Add disc and volume disc to StackPane
 		diskStackPane.getChildren().addAll(disc);//, volumeDisc)
+		
+		//---------------------SIDE------------------------------------------------
+		changeSide(side);
+	}
+	
+	/** Keep track on which side the Player Currently is . Give a fake value for the beginning */
+	Side currentSide = Side.LEFT;
+	
+	/**
+	 * Change the Side of XPlayerController , either to right or left MA NIGAAAA!!!
+	 * 
+	 * @param newSide
+	 */
+	public void changeSide(Side newSide) {
+		//Check if already is in the given side
+		if (currentSide == newSide)
+			return;
+		else
+			currentSide = newSide;
+		
+		//DO YOUR JOB
+		if (newSide == Side.LEFT) {
+			
+			internalSplitPane.getItems().remove(discBorderPane);
+			internalSplitPane.getItems().add(0, discBorderPane);
+			
+			rootBorderPane.getChildren().remove(volumeBarBox);
+			rootBorderPane.setLeft(volumeBarBox);
+			
+			mediaNameHBox.getChildren().clear();
+			mediaNameHBox.getChildren().addAll(timersBox, mediaFileMarquee, copyButton, mediaTagImageButton);
+		} else if (newSide == Side.RIGHT) {
+			
+			internalSplitPane.getItems().remove(discBorderPane);
+			internalSplitPane.getItems().add(1, discBorderPane);
+			
+			rootBorderPane.getChildren().remove(volumeBarBox);
+			rootBorderPane.setRight(volumeBarBox);
+			
+			mediaNameHBox.getChildren().clear();
+			mediaNameHBox.getChildren().addAll(mediaTagImageButton, copyButton, mediaFileMarquee, timersBox);
+			//HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
+		}
 	}
 	
 	/**

@@ -60,14 +60,14 @@ public class DJMode extends BorderPane {
 		//XPlayer 1
 		Main.xPlayersList.addXPlayerController(xPlayer1);
 		xPlayer1.makeTheDisc(Color.rgb(0, 144, 255), 45, 0, 125, Side.RIGHT);
-		xPlayer1.makeTheVisualizer(Side.LEFT);
+		xPlayer1.makeTheVisualizer();
 		hBox.getChildren().add(0, xPlayer1);
 		HBox.setHgrow(xPlayer1, Priority.ALWAYS);
 		
 		//XPlayer 2
 		Main.xPlayersList.addXPlayerController(xPlayer2);
 		xPlayer2.makeTheDisc(Color.rgb(255, 95, 0), 45, 0, 125, Side.LEFT);
-		xPlayer2.makeTheVisualizer(Side.RIGHT);
+		xPlayer2.makeTheVisualizer();
 		hBox.getChildren().add(xPlayer2);
 		HBox.setHgrow(xPlayer2, Priority.ALWAYS);
 		
@@ -77,7 +77,7 @@ public class DJMode extends BorderPane {
 		// removeThis
 		//	removeThis.setOnAction(a -> hBox.getChildren().remove(removeThis.getParent()));
 		
-		Main.libraryMode.getDjModeStackPane().getChildren().add(hBox);	
+		Main.libraryMode.getDjModeStackPane().getChildren().add(hBox);
 	}
 	
 	/**

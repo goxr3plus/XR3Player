@@ -50,7 +50,7 @@
             </HBox>
             <VBox alignment="CENTER_LEFT">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Navigator">
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Navigator ">
                      <VBox.margin>
                         <Insets bottom="15.0" top="15.0" />
                      </VBox.margin></Label>
@@ -274,7 +274,7 @@
                                                 <Tooltip text="Install new Updates" />
                                              </tooltip>
                                              <graphic>
-                                                <FontIcon iconColor="#29f2ee" iconLiteral="fa-tasks" iconSize="32" />
+                                                <FontIcon iconColor="WHITE" iconLiteral="fa-tasks" iconSize="32" />
                                              </graphic>
                                           </JFXButton>
                                           <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
