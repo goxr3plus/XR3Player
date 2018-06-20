@@ -66,7 +66,12 @@
                         </ToggleButton>
                         <JFXButton fx:id="mainModeVolumeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="42.0" styleClass="jfx-button2" StackPane.alignment="TOP_RIGHT">
                            <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                              <StackedFontIcon fx:id="mainModeStackedFont">
+                                 <children>
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="32" layoutX="10.0" layoutY="42.0" visible="false" />
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                                 </children>
+                              </StackedFontIcon>
                            </graphic>
                         </JFXButton>
                      </children>
@@ -80,7 +85,12 @@
                         </ToggleButton>
                         <JFXButton fx:id="djModeVolumeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="42.0" styleClass="jfx-button2" StackPane.alignment="TOP_RIGHT">
                            <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                              <StackedFontIcon fx:id="djModeStackedFont">
+                                 <children>
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="32" layoutX="10.0" layoutY="42.0" visible="false" />
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                                 </children>
+                              </StackedFontIcon>
                            </graphic>
                         </JFXButton>
                      </children>
@@ -103,7 +113,12 @@
                         </ToggleButton>
                         <JFXButton fx:id="browserVolumeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="42.0" styleClass="jfx-button2" StackPane.alignment="TOP_RIGHT">
                            <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                              <StackedFontIcon fx:id="browserStackedFont">
+                                 <children>
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="32" layoutX="10.0" layoutY="42.0" visible="false" />
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-up" iconSize="32" />
+                                 </children>
+                              </StackedFontIcon>
                            </graphic>
                         </JFXButton>
                      </children>
@@ -204,7 +219,7 @@
                                                 </MenuItem>
                                              </items>
                                              <graphic>
-                                                <FontIcon iconColor="WHITE" iconLiteral="fas-database" iconSize="32" />
+                                                <FontIcon iconColor="#9b9da8" iconLiteral="fas-database" iconSize="32" />
                                              </graphic>
                                           </MenuButton>
                                           <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
@@ -259,7 +274,7 @@
                                                 <Tooltip text="Install new Updates" />
                                              </tooltip>
                                              <graphic>
-                                                <FontIcon iconColor="WHITE" iconLiteral="fa-tasks" iconSize="32" />
+                                                <FontIcon iconColor="#29f2ee" iconLiteral="fa-tasks" iconSize="32" />
                                              </graphic>
                                           </JFXButton>
                                           <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">

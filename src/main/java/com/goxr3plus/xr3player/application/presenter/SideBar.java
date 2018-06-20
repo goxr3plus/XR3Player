@@ -32,6 +32,7 @@ import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSetting
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
 public class SideBar extends StackPane {
@@ -63,10 +64,16 @@ public class SideBar extends StackPane {
 	private JFXButton mainModeVolumeButton;
 	
 	@FXML
+	private StackedFontIcon mainModeStackedFont;
+	
+	@FXML
 	private ToggleButton djModeToggle;
 	
 	@FXML
 	private JFXButton djModeVolumeButton;
+	
+	@FXML
+	private StackedFontIcon djModeStackedFont;
 	
 	@FXML
 	private ToggleButton userInfoToggle;
@@ -76,6 +83,9 @@ public class SideBar extends StackPane {
 	
 	@FXML
 	private JFXButton browserVolumeButton;
+	
+	@FXML
+	private StackedFontIcon browserStackedFont;
 	
 	@FXML
 	private ToggleButton moviesToggle;
@@ -401,18 +411,29 @@ public class SideBar extends StackPane {
 		
 		//MainModeVolumeButton
 		mainModeVolumeButton.setOnAction(a -> {
-			Main.xPlayersList.getXPlayerController(0).revertMuteButton();
-			boolean muted = Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected();
-			( (FontIcon) mainModeVolumeButton.getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+			boolean mute = !mainModeStackedFont.getChildren().get(0).isVisible();
+			Main.xPlayersList.getXPlayerController(0).getMuteButton().setSelected(mute);
+			mainModeStackedFont.getChildren().get(1).setVisible(!mute);
 		});
+		mainModeStackedFont.getChildren().get(0).visibleProperty().bind(mainModeStackedFont.getChildren().get(1).visibleProperty().not());
+		
 		//DjModeVolumeButton
 		djModeVolumeButton.setOnAction(a -> {
-			boolean mute = Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() || Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected();
-			Main.xPlayersList.getXPlayerController(1).revertMuteButton();
-			Main.xPlayersList.getXPlayerController(2).revertMuteButton();
-			boolean muted = ( Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() ) && ( Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected() );
-			( (FontIcon) djModeVolumeButton.getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+			boolean mute = !djModeStackedFont.getChildren().get(0).isVisible();
+			Main.xPlayersList.getXPlayerController(1).getMuteButton().setSelected(mute);
+			Main.xPlayersList.getXPlayerController(2).getMuteButton().setSelected(mute);
+			djModeStackedFont.getChildren().get(1).setVisible(!mute);
 		});
+		djModeStackedFont.getChildren().get(0).visibleProperty().bind(djModeStackedFont.getChildren().get(1).visibleProperty().not());
+		
+		//BrowserVolumeButton
+		browserVolumeButton.setOnAction(a -> {
+			boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
+			//Mute or Unmute webrowser tabs
+			Main.webBrowser.getTabPane().getTabs().forEach(tab -> ( (WebBrowserTabController) tab.getContent() ).getBrowser().setAudioMuted(mute));
+			browserStackedFont.getChildren().get(1).setVisible(!mute);
+		});
+		browserStackedFont.getChildren().get(0).visibleProperty().bind(browserStackedFont.getChildren().get(1).visibleProperty().not());
 		
 	}
 	
@@ -555,6 +576,27 @@ public class SideBar extends StackPane {
 	 */
 	public JFXButton getBrowserVolumeButton() {
 		return browserVolumeButton;
+	}
+	
+	/**
+	 * @return the browserStackedFont
+	 */
+	public StackedFontIcon getBrowserStackedFont() {
+		return browserStackedFont;
+	}
+	
+	/**
+	 * @return the djModeStackedFont
+	 */
+	public StackedFontIcon getDjModeStackedFont() {
+		return djModeStackedFont;
+	}
+	
+	/**
+	 * @return the mainModeStackedFont
+	 */
+	public StackedFontIcon getMainModeStackedFont() {
+		return mainModeStackedFont;
 	}
 	
 }

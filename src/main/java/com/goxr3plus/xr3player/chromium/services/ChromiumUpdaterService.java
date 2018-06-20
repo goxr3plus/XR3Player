@@ -7,8 +7,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
-import org.kordamp.ikonli.javafx.FontIcon;
-
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,7 +14,6 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
 import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
-import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 /**
  * The Class FileFilterThread.
@@ -80,20 +77,20 @@ public class ChromiumUpdaterService {
 					
 					//Main Mode
 					boolean muted = Main.xPlayersList.getXPlayerController(0).isMuteButtonSelected();
-					( (FontIcon) Main.sideBar.getMainModeVolumeButton().getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+					Main.sideBar.getMainModeStackedFont().getChildren().get(1).setVisible(!muted);
 					
 					//DJ Mode
 					muted = ( Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() ) && ( Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected() );
-					( (FontIcon) Main.sideBar.getDjModeVolumeButton().getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+					Main.sideBar.getDjModeStackedFont().getChildren().get(1).setVisible(!muted);
 					
 					//Browser Mode
-					muted = webBrowserController.getTabPane().getTabs().stream().filter(tab -> {
+					boolean notMuted = webBrowserController.getTabPane().getTabs().stream().filter(tab -> {
 						WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
 						
-						//Is Audio Playing? && Audio is Not Muted
-						return tabController.getBrowser().isAudioPlaying() && !tabController.getBrowser().isAudioMuted();
+						//Is audio not muted?
+						return !tabController.getBrowser().isAudioMuted();
 					}).findFirst().isPresent();
-					( (FontIcon) Main.sideBar.getBrowserVolumeButton().getGraphic() ).setIconLiteral(!muted ? "gmi-volume-up" : "gmi-volume-off");
+					Main.sideBar.getBrowserStackedFont().getChildren().get(1).setVisible(notMuted);
 					
 				}
 				
