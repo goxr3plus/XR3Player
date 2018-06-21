@@ -101,13 +101,13 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
 	
 	/** The dsp. */
-	private KJDSPAudioDataConsumer dsp = null;
+	private KJDSPAudioDataConsumer dsp;
 	
 	/** The dsp has started. */
-	private boolean dspHasStarted = false;
+	private boolean dspHasStarted;
 	
 	/** The peak color. */
-	protected Color peakColor = null;
+	protected Color peakColor;
 	
 	/** The peaks. */
 	protected int[] peaks = new int[DEFAULT_SPECTRUM_ANALYSER_BAND_COUNT];
@@ -147,7 +147,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	protected float saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
 	
 	/** The source data line. */
-	public SourceDataLine sourceDataLine = null;
+	public SourceDataLine sourceDataLine;
 	
 	/** The old left. */
 	// -- VU Meter
@@ -164,13 +164,13 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	
 	/** The frames per second. */
 	// -- FPS calculations.
-	protected int framesPerSecond = 0;
+	protected int framesPerSecond;
 	
 	/** The fps. */
 	public int fps = DEFAULT_FPS;
 	
 	/** The show FPS. */
-	public boolean showFPS = false;
+	public boolean showFPS;
 	
 	/**
 	 * Default Constructor.
@@ -204,14 +204,12 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Called by the KJDigitalSignalProcessingAudioDataConsumer.
 	 * 
 	 * @param pLeftChannel
-	 *        Audio data for the left channel.
+	 *            Audio data for the left channel.
 	 * @param pRightChannel
-	 *        Audio data for the right channel.
+	 *            Audio data for the right channel.
 	 * @param pFrameRateRatioHint
-	 *        A float value representing the ratio of the current frame rate
-	 *        to the desired frame rate. It is used to keep DSP animation
-	 *        consistent if the frame rate drop below the desired frame
-	 *        rate.
+	 *            A float value representing the ratio of the current frame rate to the desired frame rate. It is used to keep DSP animation consistent if
+	 *            the frame rate drop below the desired frame rate.
 	 */
 	@Override
 	public synchronized void process(float[] pLeftChannel , float[] pRightChannel , float pFrameRateRatioHint) {
@@ -225,17 +223,15 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Setup DSP.
 	 *
 	 * @param line
-	 *        the new up DSP
+	 *            the new up DSP
 	 */
 	public void setupDSP(SourceDataLine line) {
 		if (dsp != null) {
 			// Number of Channels
-			dsp.setChannelMode(
-					line.getFormat().getChannels() == 1 ? KJDSPAudioDataConsumer.ChannelMode.MONO : KJDSPAudioDataConsumer.ChannelMode.STEREO);
+			dsp.setChannelMode(line.getFormat().getChannels() == 1 ? KJDSPAudioDataConsumer.ChannelMode.MONO : KJDSPAudioDataConsumer.ChannelMode.STEREO);
 			
 			// SampleSizeInBits
-			dsp.setSampleType(line.getFormat().getSampleSizeInBits() == 8 ? KJDSPAudioDataConsumer.SampleType.EIGHT_BIT
-					: KJDSPAudioDataConsumer.SampleType.SIXTEEN_BIT);
+			dsp.setSampleType(line.getFormat().getSampleSizeInBits() == 8 ? KJDSPAudioDataConsumer.SampleType.EIGHT_BIT : KJDSPAudioDataConsumer.SampleType.SIXTEEN_BIT);
 		}
 	}
 	
@@ -243,7 +239,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Starts DSP.
 	 *
 	 * @param line
-	 *        the line
+	 *            the line
 	 */
 	public void startDSP(SourceDataLine line) {
 		if (line != null)
@@ -292,7 +288,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Write PCM data to DSP.
 	 *
 	 * @param pcmdata
-	 *        the pcmdata
+	 *            the pcmdata
 	 */
 	public void writeDSP(byte[] pcmdata) {
 		if (dsp != null)
@@ -381,8 +377,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	}
 	
 	/**
-	 * Gets the default spectrum analyzer colors. Colors are starting from green
-	 * and ending to red.
+	 * Gets the default spectrum analyzer colors. Colors are starting from green and ending to red.
 	 *
 	 * @return the default spectrum analyzer colors
 	 */
@@ -404,8 +399,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * Gets the display mode.
 	 *
-	 * @return Returns the current display mode, DISPLAY_MODE_SCOPE or
-	 *         DISPLAY_MODE_SPECTRUM_ANALYSER or DISPLAY_MODE_VUMETER.
+	 * @return Returns the current display mode, DISPLAY_MODE_SCOPE or DISPLAY_MODE_SPECTRUM_ANALYSER or DISPLAY_MODE_VUMETER.
 	 */
 	public synchronized int getDisplayMode() {
 		return displayMode.get();
@@ -414,8 +408,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * Gets the spectrum analyser band count.
 	 *
-	 * @return Returns the current number of bands displayed by the spectrum
-	 *         analyser.
+	 * @return Returns the current number of bands displayed by the spectrum analyser.
 	 */
 	public synchronized int getSpectrumAnalyserBandCount() {
 		return saBands;
@@ -442,8 +435,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * Gets the spectrum analyser colors.
 	 *
-	 * @return Returns the color scale used to render the spectrum analyser
-	 *         bars.
+	 * @return Returns the color scale used to render the spectrum analyser bars.
 	 */
 	public synchronized Color[] getSpectrumAnalyserColors() {
 		return spectrumAnalyserColors;
@@ -452,8 +444,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * Checks if is showing FPS.
 	 *
-	 * @return Returns 'true' if "Frames Per Second" are being calculated and
-	 *         displayed.
+	 * @return Returns 'true' if "Frames Per Second" are being calculated and displayed.
 	 */
 	public boolean isShowingFPS() {
 		return showFPS;
@@ -498,7 +489,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the peaks enabled.
 	 *
 	 * @param peaksEnabled
-	 *        the new peaks enabled
+	 *            the new peaks enabled
 	 */
 	public void setPeaksEnabled(boolean peaksEnabled) {
 		this.peaksEnabled = peaksEnabled;
@@ -508,7 +499,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Set visual peak color.
 	 *
 	 * @param c
-	 *        the new peak color
+	 *            the new peak color
 	 */
 	public void setPeakColor(Color c) {
 		peakColor = c;
@@ -518,7 +509,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Set peak fall off delay.
 	 *
 	 * @param waitFPS
-	 *        the new peak delay
+	 *            the new peak delay
 	 */
 	public void setPeakDelay(int waitFPS) {
 		int min = Math.round( ( DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO - DEFAULT_SPECTRUM_ANALYSER_PEAK_DELAY_FPS_RATIO_RANGE ) * fps);
@@ -534,7 +525,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the frames per second.
 	 *
 	 * @param fps
-	 *        the new frames per second
+	 *            the new frames per second
 	 */
 	public void setFramesPerSecond(int fps) {
 		this.fps = fps;
@@ -544,7 +535,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the current display mode.
 	 *
 	 * @param pMode
-	 *        the new display mode
+	 *            the new display mode
 	 */
 	public synchronized void setDisplayMode(int pMode) {
 		displayMode.set(pMode);
@@ -554,18 +545,17 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the color of the scope.
 	 *
 	 * @param pColor
-	 *        the new scope color
+	 *            the new scope color
 	 */
 	public synchronized void setScopeColor(Color pColor) {
 		scopeColor = pColor;
 	}
 	
 	/**
-	 * When 'true' is passed as a parameter, will overlay the "Frames Per
-	 * Seconds" achieved by the component.
+	 * When 'true' is passed as a parameter, will overlay the "Frames Per Seconds" achieved by the component.
 	 *
 	 * @param pState
-	 *        the new show FPS
+	 *            the new show FPS
 	 */
 	public synchronized void setShowFPS(boolean pState) {
 		showFPS = pState;
@@ -575,7 +565,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the numbers of bands rendered by the spectrum analyser.
 	 *
 	 * @param pCount
-	 *        Cannot be more than half the "FFT sample size".
+	 *            Cannot be more than half the "FFT sample size".
 	 */
 	public synchronized void setSpectrumAnalyserBandCount(int pCount) {
 		
@@ -589,7 +579,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the spectrum analyzer band decay rate.
 	 *
 	 * @param pDecay
-	 *        Must be a number between 0.0 and 1.0 exclusive.
+	 *            Must be a number between 0.0 and 1.0 exclusive.
 	 */
 	public synchronized void setSpectrumAnalyserDecay(float pDecay) {
 		if ( ( pDecay >= MIN_SPECTRUM_ANALYSER_DECAY ) && ( pDecay <= MAX_SPECTRUM_ANALYSER_DECAY )) {
@@ -602,7 +592,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Sets the spectrum analyzer color scale.
 	 *
 	 * @param pColors
-	 *        Any amount of colors may be used. Must not be null.
+	 *            Any amount of colors may be used. Must not be null.
 	 */
 	public synchronized void setSpectrumAnalyserColors(Color[] pColors) {
 		spectrumAnalyserColors = pColors;
@@ -610,12 +600,10 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	}
 	
 	/**
-	 * Sets the FFT sample size to be just for calculating the spectrum analyzer
-	 * values. The default is 512.
+	 * Sets the FFT sample size to be just for calculating the spectrum analyzer values. The default is 512.
 	 *
 	 * @param pSize
-	 *        Cannot be more than the size of the sample provided by the
-	 *        DSP.
+	 *            Cannot be more than the size of the sample provided by the DSP.
 	 */
 	public synchronized void setSpectrumAnalyserFFTSampleSize(int pSize) {
 		saFFTSampleSize = pSize;
@@ -628,9 +616,9 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * Stereo merge.
 	 *
 	 * @param pLeft
-	 *        the left
+	 *            the left
 	 * @param pRight
-	 *        the right
+	 *            the right
 	 * @return A float[] array from merging left and right speakers
 	 */
 	public float[] stereoMerge(float[] pLeft , float[] pRight) {
@@ -641,15 +629,13 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	}
 	
 	/**
-	 * Returns an array which has length<array length> and contains frequencies
-	 * in every cell which has a value from 0.00 to 1.00.
+	 * Returns an array which has length<array length> and contains frequencies in every cell which has a value from 0.00 to 1.00.
 	 *
 	 * @param pSample
-	 *        the sample
+	 *            the sample
 	 * @param arrayLength
-	 *        the array length
-	 * @return An array which has length<array length> and contains frequencies
-	 *         in every cell which has a value from 0.00 to 1.00.
+	 *            the array length
+	 * @return An array which has length<array length> and contains frequencies in every cell which has a value from 0.00 to 1.00.
 	 */
 	public float[] returnBandsArray(float[] pSample , int arrayLength) {
 		
@@ -665,7 +651,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 				wFs += wFFT[a + b];
 			
 			// -- Log filter.
-			wFs = ( wFs = wFs * (float) Math.log(band + 2.00) ) > 1.0f ? 1.0f : wFs;
+			wFs = ( wFs *= (float) Math.log(band + 2.00) ) > 1.0f ? 1.0f : wFs;
 			// wFs = (wFs > 1.0f) ? 1.0f : wFs
 			
 			// -- Compute SA decay...
