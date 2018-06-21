@@ -90,9 +90,9 @@ import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerPlayService;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerSeekService;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerStackController;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.VisualizerWindowController;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter.XPlayerVisualizer;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
 
 /**
  * Represents the graphical interface for the deck.

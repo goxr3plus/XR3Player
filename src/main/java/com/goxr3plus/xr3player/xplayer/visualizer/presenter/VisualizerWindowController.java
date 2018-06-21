@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter;
+package main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;

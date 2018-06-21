@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.fxpresenter;
+package main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;

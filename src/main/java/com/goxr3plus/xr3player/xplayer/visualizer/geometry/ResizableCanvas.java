@@ -18,7 +18,7 @@ public class ResizableCanvas extends Canvas {
      */
     public void redraw() {
 
-       // System.out.println(" Real Canvas Width is:" + getWidth() + " , Real Canvas Height is:" + getHeight() + "\n");
+       // System.out.println(" Real Canvas Width is:" + getWidth() + " , Real Canvas Height is:" + getHeight() + "\n")
 
     	gc.setLineWidth(3);
         gc.clearRect(0, 0, getWidth(), getHeight());
