@@ -20,21 +20,13 @@
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
-> New in Update 110 ( Huge UI/UX changes , bug fixes , performance booster ) ?
-
-![screenshot_6](https://user-images.githubusercontent.com/20374208/41504875-307b0382-7204-11e8-8134-cb3a666d51ee.png)
-![screenshot_7](https://user-images.githubusercontent.com/20374208/41504876-309ba3bc-7204-11e8-9c3f-426b1ef642a3.png)
-
-
-### Screenshots
-
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/41197020-b5dfe3be-6c58-11e8-87b6-6f592b04bc36.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41504875-307b0382-7204-11e8-8134-cb3a666d51ee.png) |
+| ![First](https://user-images.githubusercontent.com/20374208/41749902-c0997c12-75c1-11e8-83db-99cb66d618fa.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41747869-3320f6e8-75b8-11e8-8aaf-baa2c40d9ba7.png) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/41504876-309ba3bc-7204-11e8-9c3f-426b1ef642a3.png) | ![Sec](https://user-images.githubusercontent.com/20374208/41197023-b64870aa-6c58-11e8-90c4-cb884d3a174a.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/41747871-34c572bc-75b8-11e8-886b-129c757a07f8.png) | ![Sec](https://user-images.githubusercontent.com/20374208/41749903-c0c136da-75c1-11e8-9bf5-842fc2cf376f.jpg) |
 
 ### Videos
 
