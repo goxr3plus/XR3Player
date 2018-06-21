@@ -125,7 +125,7 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	public static final Logger logger = Logger.getGlobal();
 	public static final Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 111;
+	public static final int APPLICATION_VERSION = 112;
 	private static final Logger[] pin;
 	static {
 		
@@ -139,9 +139,8 @@ public class Main extends Application {
 		//Disable loggers				
 		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
 		
-		for (Logger l : pin) {
+		for (Logger l : pin)
 			l.setLevel(Level.OFF);
-		}
 	}
 	
 	//----------------START: The below have not dependencies on classes ---------------------------------//
@@ -858,7 +857,6 @@ public class Main extends Application {
 			
 			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
 			dbManager.loadApplicationDataBase();
-			
 			
 		});
 		pause.playFromStart();
