@@ -65,7 +65,7 @@ public class VisualizerDrawer extends VisualizerModel {
 				imageW = imageH = canvasHeight / 2.00;
 			
 			//Draw it
-			gc.drawImage(foregroundImage, ( canvasWidth / 2 - imageW / 2 ) - imageW * array[0] / 2, ( canvasHeight / 2 - imageH / 2 ) - imageH * array[0] / 2,
+			gc.drawImage(foregroundImage, ( canvasWidth / 2.00 - imageW / 2 ) - imageW * array[0] / 2, ( canvasHeight / 2.00 - imageH / 2 ) - imageH * array[0] / 2,
 					imageW + imageW * array[0], imageH + imageH * array[0]);
 			
 		}
@@ -84,8 +84,9 @@ public class VisualizerDrawer extends VisualizerModel {
 			// gc.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 			
 			//Compute
-			double imageW = backgroundImage.getWidth();
-			double imageH = backgroundImage.getHeight();//= foregroundImage.getHeight()
+			//double imageW = backgroundImage.getWidth();
+			//double imageH = backgroundImage.getHeight();
+			//= foregroundImage.getHeight()
 			//	    if (canvasWidth < canvasHeight)
 			//		imageW = imageH = canvasWidth / 2.00;
 			//	    else
@@ -93,11 +94,11 @@ public class VisualizerDrawer extends VisualizerModel {
 			
 			//Draw it
 			double front = Math.abs(array[0]) / 4;
-			gc.drawImage(backgroundImage, 0 - front * canvasWidth, 0 - front * canvasHeight, canvasWidth + ( front * canvasWidth ) * 2,
+			gc.drawImage(backgroundImage, - ( front * canvasWidth ), - ( front * canvasHeight ), canvasWidth + ( front * canvasWidth ) * 2,
 					canvasHeight + ( front * canvasHeight ) * 2);
 			//	    gc.drawImage(backgroundImage,canvasWidth - imageW) - imageW * array[0] / 2,
 			//	    (canvasHeight - imageH) - imageH * array[0], imageW + imageW * array[0],
-			//	    imageH + imageH * array[0]);
+			//	    imageH + imageH * array[0])
 		}
 	}
 	
