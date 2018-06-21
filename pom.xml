@@ -380,7 +380,7 @@
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>jave2</artifactId>
-			<version>V2.1.0</version>
+			<version>V2.2.0</version>
 		</dependency>
 		<!-- <dependency> <groupId>it.sauronsoftware.jave</groupId> <artifactId>jave</artifactId> 
 			<version>1.0.2</version> <scope>system</scope> <systemPath>${project.basedir}/localLibraries/jave-1.0.2.jar</systemPath> 
