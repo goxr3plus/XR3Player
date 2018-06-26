@@ -14,19 +14,6 @@
          <center>
             <JFXTabPane minHeight="0.0" minWidth="0.0" side="LEFT" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab fx:id="onlineMusicTab" closable="false">
-                     <graphic>
-                        <Group>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Online Music" textAlignment="CENTER" wrapText="true">
-                                 <graphic>
-                                    <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="20" />
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </Group>
-                     </graphic>
-                  </Tab>
                   <Tab fx:id="openedLibrariesTab" closable="false">
                      <graphic>
                         <Group>
@@ -47,6 +34,19 @@
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Dropbox" textAlignment="CENTER" wrapText="true">
                                  <graphic>
                                     <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="onlineMusicTab" closable="false">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Online Music" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="20" />
                                  </graphic>
                               </Label>
                            </children>

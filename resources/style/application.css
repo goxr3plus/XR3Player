@@ -2042,7 +2042,7 @@
 ******************************************************************************/
 
 
-.toggle-button3,.jfx-menu-button2,.jfx-button4,.dark-menu-button,.dark-round-jfx-button{
+.toggle-button3,.jfx-menu-button2,.jfx-button4,.dark-menu-button,.dark-round-jfx-button,.jfx-button-dark-white-selection{
     -fx-background-color:rgb(20.0,20.0,20.0);
     -fx-text-fill:white;
     -fx-background-radius: 0.0px;
@@ -2084,6 +2084,11 @@
 .dark-round-jfx-button{
 	-fx-background-radius:45.0;
 	-fx-background-color:#000000;
+}
+
+.jfx-button-white-selection:hover{
+	-fx-background-color:#FFFFFF;
+	-fx-text-fill:#000000;
 }
 
 

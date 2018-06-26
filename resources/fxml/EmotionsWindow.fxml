@@ -34,7 +34,7 @@
                <children>
                   <JFXButton fx:id="hate" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#dd3f3f" iconLiteral="icm-angry2" iconSize="40" />
+                        <FontIcon iconColor="WHITE" iconLiteral="icm-angry2" iconSize="40" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="dislike" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="248.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
@@ -42,11 +42,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-down" iconSize="32" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="neutral" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-square-o" iconSize="40" visible="false" />
-                     </graphic>
-                  </JFXButton>
+                  <JFXButton fx:id="neutral" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text="-" />
                   <JFXButton fx:id="like" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="32" />
@@ -54,7 +50,7 @@
                   </JFXButton>
                   <JFXButton fx:id="love" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="32" />
+                        <FontIcon iconColor="WHITE" iconLiteral="far-heart" iconSize="32" />
                      </graphic>
                   </JFXButton>
                </children>
@@ -66,7 +62,7 @@
       </VBox>
    </center>
    <right>
-      <JFXButton fx:id="close" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Cancel" BorderPane.alignment="CENTER">
+      <JFXButton fx:id="close" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Cancel" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets right="5.0" top="5.0" />
          </BorderPane.margin>

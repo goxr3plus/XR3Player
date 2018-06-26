@@ -12,7 +12,7 @@
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Search Window" HBox.hgrow="ALWAYS" />
-            <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button4" text=" ">
+            <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-dark-white-selection" text=" ">
                <graphic>
                   <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                </graphic>
