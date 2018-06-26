@@ -71,11 +71,11 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInforma
 import main.java.com.goxr3plus.xr3player.application.modes.moviemode.MovieModeController;
 import main.java.com.goxr3plus.xr3player.application.presenter.BottomBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.EmotionsTabPane;
-import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.MainLoadingScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicController;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSplitPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
+import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
@@ -532,8 +532,8 @@ public class Main extends Application {
 				ex.printStackTrace();
 				Platform.runLater(() -> {
 					loginMode.getGitHubDownloadsLabel().setText("GitHub: [ ? ]");
-					//loginMode.getDownloadsVBox().setManaged(false)
-					//loginMode.getDownloadsVBox().setVisible(false)
+					loginMode.getDownloadsVBox().setManaged(false);
+					loginMode.getDownloadsVBox().setVisible(false);
 				});
 				
 			}
@@ -564,8 +564,8 @@ public class Main extends Application {
 				ex.printStackTrace();
 				Platform.runLater(() -> {
 					loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ ? ]");
-					//loginMode.getDownloadsVBox().setManaged(false)
-					///loginMode.getDownloadsVBox().setVisible(false)
+					loginMode.getDownloadsVBox().setManaged(false);
+					loginMode.getDownloadsVBox().setVisible(false);
 				});
 				
 			}

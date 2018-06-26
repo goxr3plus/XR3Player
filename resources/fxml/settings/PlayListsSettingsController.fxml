@@ -19,12 +19,12 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="433.0" prefWidth="618.0" style="-fx-background-color: black;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="433.0" prefWidth="618.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
    <center>
-      <JFXTabPane fx:id="innerTabPane" side="RIGHT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+      <JFXTabPane fx:id="innerTabPane" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
          <tabs>
             <Tab text="Media">
                <content>
@@ -53,7 +53,7 @@
                                     <Tooltip text="Choose the way that the played files will be detected on playlists" />
                                  </tooltip>
                               </Label>
-                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="Exact File Content (  More accurate | CPU costly )" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                              <JFXRadioButton contentDisplay="BOTTOM" focusTraversable="false" styleClass="settingsRadioButton" text="Exact File Content (  More accurate | CPU costly )" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="playedFilesDetectionGroup" />
                                  </toggleGroup>
@@ -61,7 +61,7 @@
                                     <Tooltip text="Most accurate option but it is also consuming more Disk " />
                                  </tooltip>
                               </JFXRadioButton>
-                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommended)" toggleGroup="$playedFilesDetectionGroup" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                              <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="File Name + File Size (Recommended)" textAlignment="CENTER" toggleGroup="$playedFilesDetectionGroup" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                  <tooltip>
                                     <Tooltip text="Not catching everything but it is not consuming too much disk" />
                                  </tooltip>
@@ -76,7 +76,7 @@
                                     <Tooltip text="All the history of played songs will be cleared [ Not from Players though..]" />
                                  </tooltip>
                               </JFXButton>
-                              <MenuButton fx:id="totalItemsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" text="50" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <MenuButton fx:id="totalItemsMenuButton" alignment="CENTER" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="54.0" prefWidth="124.0" styleClass="dark-menu-button" text="50" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                  <items>
                                     <RadioMenuItem mnemonicParsing="false" selected="true" text="50">
                                        <toggleGroup>

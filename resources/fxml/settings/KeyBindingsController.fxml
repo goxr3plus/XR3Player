@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="470.0" prefWidth="552.0" style="-fx-background-color: black;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="470.0" prefWidth="552.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <HBox spacing="5.0" BorderPane.alignment="CENTER">
          <children>
@@ -91,12 +91,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="552.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXCheckBox fx:id="keyBindingsActive" checkedColor="#119c8c" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="settingsRadioButton" text="Activate KeyBindings" unCheckedColor="#9c101b" HBox.hgrow="ALWAYS">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXCheckBox>
-            <MenuButton fx:id="choosedPlayerMenuButton" mnemonicParsing="false" text="Choosed Player = { 0 }">
+            <MenuButton fx:id="choosedPlayerMenuButton" mnemonicParsing="false" styleClass="dark-menu-button" text="Choosed Player = { 0 }">
               <items>
                   <RadioMenuItem mnemonicParsing="false" selected="true" text="xPlayer 0">
                      <toggleGroup>
@@ -107,6 +102,11 @@
                   <RadioMenuItem mnemonicParsing="false" text="xPlayer 2" toggleGroup="$xPlayerSelected" />
               </items>
             </MenuButton>
+            <JFXCheckBox fx:id="keyBindingsActive" checkedColor="#119c8c" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="settingsRadioButton" text="Activate KeyBindings" unCheckedColor="#9c101b" HBox.hgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXCheckBox>
          </children>
       </HBox>
    </bottom>

@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="420.0" prefWidth="494.0" style="-fx-background-color: black;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="420.0" prefWidth="494.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <JFXTabPane side="RIGHT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+      <JFXTabPane styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
          <tabs>
             <Tab text="General">
                <content>
@@ -104,7 +104,7 @@
                   </StackPane>
                </content>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-music" iconSize="20" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-wrench" iconSize="20" />
                </graphic>
             </Tab>
             <Tab text="Visualizer ">
@@ -131,7 +131,7 @@
                                     <Tooltip text="Visualizers show Frames Per Second [FPS]" />
                                  </tooltip>
                               </JFXCheckBox>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Maximum FPS (frames per second)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                              <Label alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Maximum frames per second - FPS [TODO]" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                                  <tooltip>
                                     <Tooltip text="The maximum frames per second that  are allowed to the visualizers" />
                                  </tooltip>
@@ -147,7 +147,7 @@
                   </StackPane>
                </content>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="gmi-timeline" iconSize="24" />
+                  <FontIcon iconColor="WHITE" iconLiteral="icm-spinner4" iconSize="24" />
                </graphic>
             </Tab>
          </tabs>
