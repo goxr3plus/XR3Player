@@ -25,7 +25,7 @@
                   <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="closeButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="283.0" layoutY="10.0" styleClass="jfx-button4" text=" ">
+            <JFXButton fx:id="closeButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="283.0" layoutY="10.0" styleClass="jfx-button-dark-white-selection" text=" ">
                <tooltip>
                   <Tooltip text="Cancel" />
                </tooltip>

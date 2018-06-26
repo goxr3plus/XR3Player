@@ -92,7 +92,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.Util;
 import main.java.com.goxr3plus.xr3player.application.updater.UpdateWindow;
-import main.java.com.goxr3plus.xr3player.application.windows.ApplicationInformationWindow;
+import main.java.com.goxr3plus.xr3player.application.windows.AboutWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ExportWindowController;
@@ -171,7 +171,7 @@ public class Main extends Application {
 	public static ExportWindowController exportWindow;
 	
 	/** The About Window of the Application */
-	public static ApplicationInformationWindow aboutWindow;
+	public static AboutWindow aboutWindow;
 	
 	/** The console Window of the Application */
 	public static ConsoleWindowController consoleWindow;
@@ -339,7 +339,7 @@ public class Main extends Application {
 		exportWindow = new ExportWindowController();
 		
 		/** The About Window of the Application */
-		aboutWindow = new ApplicationInformationWindow();
+		aboutWindow = new AboutWindow();
 		
 		/** The console Window of the Application */
 		consoleWindow = new ConsoleWindowController();

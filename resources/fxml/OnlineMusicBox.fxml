@@ -4,13 +4,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox styleClass="online-music-vbox-box">
+      <VBox alignment="CENTER" styleClass="online-music-vbox-box">
          <children>
-            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="200.0" styleClass="online-music-vbox-box-label" text="Top Songs" textAlignment="CENTER" wrapText="true" />
+            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-vbox-box-label" text="Top Songs" textAlignment="CENTER" wrapText="true" />
+            <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="200" />
          </children>
       </VBox>
       <Label fx:id="stackLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="online-music-vbox-box-stack-label" text="Search" textAlignment="CENTER" visible="false" wrapText="true" />

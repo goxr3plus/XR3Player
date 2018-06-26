@@ -29,25 +29,28 @@
             <InlineCssTextArea fx:id="cssTextArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="495.0" styleClass="dark-text-area" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" maxHeight="35.0" spacing="10.0">
                <children>
-                  <JFXButton fx:id="visitGithub" focusTraversable="false" layoutX="228.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Github">
+                  <JFXButton fx:id="visitGithub" focusTraversable="false" layoutX="228.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Github">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fab-github" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="visitWebsite" focusTraversable="false" layoutX="366.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Website">
+                  <JFXButton fx:id="visitWebsite" focusTraversable="false" layoutX="366.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Website">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-globe" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="reportBug" focusTraversable="false" layoutX="414.0" layoutY="10.0" maxHeight="1.7976931348623157E308" text="Bug Reports">
+                  <JFXButton fx:id="reportBug" focusTraversable="false" layoutX="414.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Bug Reports">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-bug" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="close" focusTraversable="false" layoutX="410.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Close">
+                  <JFXButton fx:id="close" focusTraversable="false" layoutX="410.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Close">
                      <graphic>
                         <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                      </graphic>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
                   </JFXButton>
                </children>
                <VBox.margin>

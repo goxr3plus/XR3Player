@@ -76,27 +76,27 @@ public class OnlineMusicBoxController extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//imageView
-		switch (category) {
-			case RECOMMENDED:
-				imageView.setImage(recommendedImage);
-				break;
-			case GENRES:
-				imageView.setImage(genresImage);
-				break;
-			case ACTIVITIES:
-				imageView.setImage(activitiesImage);
-				break;
-			case MOOD:
-				imageView.setImage(moodImage);
-				break;
-			case EDITORSPICK:
-				imageView.setImage(editorsPickImage);
-				break;
-			case CHARTS:
-				imageView.setImage(chartsImage);
-				break;
-		}
+//		//imageView
+//		switch (category) {
+//			case RECOMMENDED:
+//				imageView.setImage(recommendedImage);
+//				break;
+//			case GENRES:
+//				imageView.setImage(genresImage);
+//				break;
+//			case ACTIVITIES:
+//				imageView.setImage(activitiesImage);
+//				break;
+//			case MOOD:
+//				imageView.setImage(moodImage);
+//				break;
+//			case EDITORSPICK:
+//				imageView.setImage(editorsPickImage);
+//				break;
+//			case CHARTS:
+//				imageView.setImage(chartsImage);
+//				break;
+//		}
 		
 		//descriptionLabel
 		descriptionLabel.setText("'" + description + "'");

@@ -18,7 +18,7 @@
          <bottom>
             <StackPane prefHeight="55.0" style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Close" StackPane.alignment="CENTER_RIGHT">
+                  <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
                      <tooltip>
                         <Tooltip text="Close the Window" />
                      </tooltip>

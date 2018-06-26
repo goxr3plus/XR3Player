@@ -80,7 +80,7 @@
                         <Insets bottom="4.0" top="4.0" />
                      </padding>
                   </HBox>
-                  <JFXButton fx:id="closeButton" focusTraversable="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Close" StackPane.alignment="CENTER_RIGHT">
+                  <JFXButton fx:id="closeButton" focusTraversable="false" styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

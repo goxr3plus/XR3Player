@@ -29,7 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  * @author GOXR3PLUS
  *
  */
-public class ApplicationInformationWindow extends BorderPane {
+public class AboutWindow extends BorderPane {
 	
 	//---------------------------------------------
 	
@@ -64,10 +64,10 @@ public class ApplicationInformationWindow extends BorderPane {
 	/**
 	 * Constructor
 	 */
-	public ApplicationInformationWindow() {
+	public AboutWindow() {
 		
 		// ------------------------------------FXMLLOADER--------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ApplicationInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AboutWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

@@ -29,12 +29,12 @@
                   <FontIcon iconColor="WHITE" iconLiteral="fas-share" iconSize="24" />
                </graphic>
             </Button>
-            <JFXButton fx:id="doneButton" focusTraversable="false" maxHeight="1.7976931348623157E308" text="Close" StackPane.alignment="CENTER_RIGHT">
+            <JFXButton fx:id="doneButton" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
                <tooltip>
                   <Tooltip text="Close the Window" />
                </tooltip>
                <graphic>
-                  <FontIcon iconColor="#940000" iconLiteral="fas-times" iconSize="24" />
+                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                </graphic>
             </JFXButton>
             <MenuButton fx:id="copySettingsMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="35.0" text="Copy Settings from User">
