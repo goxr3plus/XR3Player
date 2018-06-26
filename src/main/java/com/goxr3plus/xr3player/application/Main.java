@@ -529,7 +529,7 @@ public class Main extends Application {
 				Platform.runLater(() -> loginMode.getGitHubDownloadsLabel().setText(text2));
 				
 			} catch (Exception ex) {
-				//ex.printStackTrace()
+				ex.printStackTrace();
 				Platform.runLater(() -> {
 					loginMode.getGitHubDownloadsLabel().setText("GitHub: [ ? ]");
 					//loginMode.getDownloadsVBox().setManaged(false)
@@ -543,7 +543,7 @@ public class Main extends Application {
 				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
 						.openConnection();
 				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-				httpcon.setConnectTimeout(10000);
+				httpcon.setConnectTimeout(60000);
 				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 				
 				//Read line by line
@@ -561,9 +561,9 @@ public class Main extends Application {
 				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
 				
 			} catch (Exception ex) {
-				//ex.printStackTrace()
+				ex.printStackTrace();
 				Platform.runLater(() -> {
-					loginMode.getGitHubDownloadsLabel().setText("SourceForge: [ ? ]");
+					loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ ? ]");
 					//loginMode.getDownloadsVBox().setManaged(false)
 					///loginMode.getDownloadsVBox().setVisible(false)
 				});

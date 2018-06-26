@@ -51,7 +51,7 @@
             <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
          <tooltip>
             <Tooltip text="Cancel" />
          </tooltip>
