@@ -125,7 +125,7 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	public static final Logger logger = Logger.getGlobal();
 	public static final Properties internalInformation = new Properties();
-	public static final int APPLICATION_VERSION = 112;
+	public static final int APPLICATION_VERSION = 113;
 	private static final Logger[] pin;
 	static {
 		

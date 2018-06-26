@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="7.0.6" transformSequenceNumber="7">
   <directoryPresets config="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J/Images" />
-  <application name="XR3Player" distributionSourceDir="" applicationId="8282-0762-8339-5307" mediaDir="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J" mediaFilePattern="XR3Player_Installer" compression="9" lzmaCompression="true" pack200Compression="true" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="XR3Player" publisher="GOXR3PLUS STUDIO" publisherWeb="https://goxr3plus.github.io/xr3player.io/" version="3.112" allPathsRelative="false" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" macVolumeId="e75eb469510ca3ab" javaMinVersion="9.0.4" javaMaxVersion="9.9.9" allowBetaVM="false" jdkMode="jdk" jdkName="JDK 9.0">
+  <application name="XR3Player" distributionSourceDir="" applicationId="8282-0762-8339-5307" mediaDir="C:/Users/GOXR3PLUSSTUDIO/Desktop/XR3P Install 4J" mediaFilePattern="XR3Player_Installer" compression="9" lzmaCompression="true" pack200Compression="true" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="XR3Player" publisher="GOXR3PLUS STUDIO" publisherWeb="https://goxr3plus.github.io/xr3player.io/" version="3.113" allPathsRelative="false" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" macVolumeId="e75eb469510ca3ab" javaMinVersion="9.0.4" javaMaxVersion="9.9.9" allowBetaVM="false" jdkMode="jdk" jdkName="JDK 9.0">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -1522,7 +1522,7 @@ return console.askYesNo(message, true);
     </styles>
   </installerGui>
   <mediaSets>
-    <windows name="Windows" id="154" customizedId="" mediaFileName="" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="false" includedJRE="windows-amd64-9.0.4" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+    <windows name="Windows" id="154" customizedId="" mediaFileName="" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="false" includedJRE="windows-amd64-9.0.4" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="true" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers />
