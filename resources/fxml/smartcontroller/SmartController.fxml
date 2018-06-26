@@ -8,7 +8,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
@@ -17,8 +16,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -157,56 +154,22 @@
                                                          <items>
                                                             <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
                                                                <graphic>
-                                                                  <ImageView pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/import24.png" />
-                                                                     </image>
-                                                                  </ImageView>
+                                                                  <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
                                                                </graphic>
                                                             </MenuItem>
                                                           <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import Files">
                                                                <graphic>
-                                                                  <ImageView pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/import24.png" />
-                                                                     </image>
-                                                                  </ImageView>
+                                                                  <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
                                                                </graphic>
                                                             </MenuItem>
                                                             <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
                                                                <graphic>
-                                                                  <ImageView pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/export24.png" />
-                                                                     </image>
-                                                                  </ImageView>
+                                                                  <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
                                                                </graphic>
                                                             </MenuItem>
-                                                            <Menu mnemonicParsing="false" text="Folder" visible="false">
+                                                            <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear List">
                                                                <graphic>
-                                                                  <ImageView pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/folder.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                            </Menu>
-                                                            <Menu mnemonicParsing="false" text="File" visible="false">
-                                                               <graphic>
-                                                                  <ImageView pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/file.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                            </Menu>
-                                                            <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear All">
-                                                               <graphic>
-                                                                  <ImageView pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/Duster-24.png" />
-                                                                     </image>
-                                                                  </ImageView>
+                                                                  <FontIcon iconColor="#fa4c34" iconLiteral="far-window-close" iconSize="24" />
                                                                </graphic>
                                                             </MenuItem>
                                                          </items>
