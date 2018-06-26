@@ -477,51 +477,86 @@
                      <center>
                         <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="emotionsButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                                 <tooltip>
-                                    <Tooltip text="Express your emotion for this Song" />
-                                 </tooltip>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="2.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="2.0" />
-                                 </HBox.margin>
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
-                                 </graphic></Label>
                               <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="DJ" HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
-                                    <Insets left="2.0" right="2.0" />
+                                    <Insets left="1.0" right="1.0" />
                                  </HBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="settingsToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Played Tracks" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
-                                    <Insets right="2.0" />
+                                    <Insets right="1.0" />
                                  </HBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="muteButton" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3">
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </HBox>
+                     </center>
+                     <top>
+                        <HBox maxHeight="36.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox maxHeight="36.0" minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Show Menu" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="#08c9eb" iconLiteral="typ-th-small" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Open File or Folder" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Open player settings" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </Button>
+                                    <MenuButton fx:id="transferMedia" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
+                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
+                                          <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
+                                      </items>
+                                       <tooltip>
+                                          <Tooltip text="Transfer the Audio to the selected Player" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="#d4ff00" iconLiteral="typ-flow-switch" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </MenuButton>
+                                 </children>
+                              </HBox>
+                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="29.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic>
-                                 <HBox.margin>
-                                    <Insets right="2.0" />
-                                 </HBox.margin>
-                                 <tooltip>
-                                    <Tooltip text="Mute Player" />
-                                 </tooltip>
-                              </ToggleButton>
+                              </Label>
                               <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -539,68 +574,21 @@
                                  </graphic>
                               </Button>
                            </children>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
                         </HBox>
-                     </center>
-                     <left>
-                        <HBox maxHeight="36.0" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <tooltip>
-                                    <Tooltip text="Show Menu" />
-                                 </tooltip>
-                                 <graphic>
-                                    <FontIcon iconColor="#08c9eb" iconLiteral="typ-th-small" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="openFile" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <tooltip>
-                                    <Tooltip text="Open File or Folder" />
-                                 </tooltip>
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="typ-folder-add" iconSize="28" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="settings" alignment="CENTER" contentDisplay="RIGHT" layoutX="82.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <tooltip>
-                                    <Tooltip text="Open player settings" />
-                                 </tooltip>
-                                 <graphic>
-                                    <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                              </Button>
-                              <MenuButton fx:id="transferMedia" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
-                                  <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
-                                    <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
-                                </items>
-                                 <tooltip>
-                                    <Tooltip text="Transfer the Audio to the selected Player" />
-                                 </tooltip>
-                                 <graphic>
-                                    <FontIcon iconColor="#d4ff00" iconLiteral="typ-flow-switch" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                              </MenuButton>
-                           </children>
-                        </HBox>
-                     </left>
+                     </top>
                   </BorderPane>
                </top>
                <left>
                   <VBox fx:id="volumeBarBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                      <children>
+                        <Button fx:id="emotionsButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                           <tooltip>
+                              <Tooltip text="Express your emotion for this Song" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                         <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -629,6 +617,14 @@
                               <Insets top="8.0" />
                            </VBox.margin>
                         </Button>
+                        <ToggleButton fx:id="muteButton" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Mute Player" />
+                           </tooltip>
+                        </ToggleButton>
                      </children>
                      <BorderPane.margin>
                         <Insets />

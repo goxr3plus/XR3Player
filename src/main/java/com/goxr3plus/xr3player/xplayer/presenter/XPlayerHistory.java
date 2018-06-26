@@ -7,14 +7,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXTabPane;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -22,20 +19,17 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  *
  * @author GOXR3PLUS
  */
-public class XPlayerHistory extends BorderPane {
+public class XPlayerHistory extends StackPane {
 	
 	// ------------------------
 	
 	@FXML
-	private JFXTabPane tabPane;
-	
-	@FXML
-	private Tab historyPlaylistTab;
+	private BorderPane borderPane;
 	
 	// ------------------------
 	
 	/** The x player UI. */
-	XPlayerController xPlayerUI;
+	private final XPlayerController xPlayerUI;
 	
 	/**
 	 * Constructor.
@@ -69,31 +63,17 @@ public class XPlayerHistory extends BorderPane {
 		// When this can be visible?
 		this.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE)
-				xPlayerUI.getSettingsToggle().setSelected(false);
+				xPlayerUI.getHistoryToggle().setSelected(false);
 		});
-		this.visibleProperty().bind(xPlayerUI.getSettingsToggle().selectedProperty());
+/*		this.visibleProperty().bind(xPlayerUI.getHistoryToggle().selectedProperty());
 		this.visibleProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue) // true?
 				this.requestFocus();
-		});
+		});*/
 		
 		// ----PlayListTab
-		historyPlaylistTab.setContent(xPlayerUI.getxPlayerPlayList());
+		borderPane.setCenter(xPlayerUI.getxPlayerPlayList());
 		
-	}
-	
-	/**
-	 * @return the historyPlaylistTab
-	 */
-	public Tab getHistoryPlaylistTab() {
-		return historyPlaylistTab;
-	}
-	
-	/**
-	 * @return the tabPane
-	 */
-	public TabPane getTabPane() {
-		return tabPane;
 	}
 	
 }

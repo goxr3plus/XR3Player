@@ -147,7 +147,7 @@ public class MediaUpdaterService {
 						xPlayerController.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
 						
 						//Only if the Settings Mode is selected
-						if (xPlayerController.getSettingsToggle().isSelected()) {
+						if (xPlayerController.getHistoryToggle().isSelected()) {
 							//Find the smartController
 							SmartController controller = xPlayerController.getxPlayerPlayList().getSmartController();
 							

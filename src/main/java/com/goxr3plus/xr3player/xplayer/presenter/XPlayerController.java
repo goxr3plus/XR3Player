@@ -291,7 +291,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private ToggleButton modeToggle;
 	
 	@FXML
-	private ToggleButton settingsToggle;
+	private ToggleButton historyToggle;
 	
 	@FXML
 	private ToggleButton muteButton;
@@ -386,7 +386,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private XPlayerWindow xPlayerWindow;
 	
 	/** The x player settings controller. */
-	private XPlayerHistory playerExtraSettings;
+	private XPlayerHistory history;
 	
 	/** The x player model. */
 	private XPlayerModel xPlayerModel;
@@ -519,11 +519,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return xPlayerStackPane;
 	}
 	
-	/**
-	 * @return the settingsToggle
+	/** 
+	 * @return historyToggle
 	 */
-	public ToggleButton getSettingsToggle() {
-		return settingsToggle;
+	public ToggleButton getHistoryToggle() {
+		return historyToggle;
 	}
 	
 	/**
@@ -567,7 +567,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//
 		xPlayerPlayList = new XPlayerPlaylist(this);
 		visualizerWindow = new VisualizerWindowController(this);
-		playerExtraSettings = new XPlayerHistory(this);
+		history = new XPlayerHistory(this);
 		
 		//== modesStackPane
 		modesStackPane.setOnDragOver(event -> {
@@ -801,9 +801,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//flipPane
 		flipPane.setFlipTime(150);
 		flipPane.getFront().getChildren().addAll(modesStackPane);
-		flipPane.getBack().getChildren().addAll(playerExtraSettings);
+		flipPane.getBack().getChildren().addAll(history);
 		
-		settingsToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
+		historyToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue) // true?
 				flipPane.flipToBack();
 			else
@@ -829,7 +829,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			}
 			
 			//Go away from history
-			settingsToggle.setSelected(false);
+			historyToggle.setSelected(false);
 			
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
@@ -2038,7 +2038,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @return the playerExtraSettings
 	 */
 	public XPlayerHistory getPlayerExtraSettings() {
-		return playerExtraSettings;
+		return history;
 	}
 	
 	/**

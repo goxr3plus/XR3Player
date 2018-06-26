@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTabPane?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="382.0" prefWidth="459.0" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <StackPane BorderPane.alignment="CENTER">
-         <children>
-            <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
-               <tabs>
-                  <Tab fx:id="historyPlaylistTab" closable="false" text="History Playlist">
-                     <content>
-                        <ScrollPane />
-                     </content>
-                  </Tab>
-               </tabs>
-            </JFXTabPane>
-         </children>
-      </StackPane>
-   </center>
+
+<fx:root prefHeight="400.0" prefWidth="600.0" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane" />
+   </children>
 </fx:root>
