@@ -24,7 +24,7 @@
                   <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="24" />
                </graphic>
             </Tab>
-            <Tab fx:id="loveTab" closable="false" text="Loved">
+            <Tab fx:id="loveTab" closable="false" text="Loved  ">
                <graphic>
                   <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="24" />
                </graphic>

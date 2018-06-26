@@ -282,6 +282,12 @@ public class MediaTableViewer extends StackPane {
 	@FXML
 	private void initialize() {
 		
+		//ArtWork FontIcon
+		FontIcon openFolderIcon = new FontIcon("far-folder-open");
+		openFolderIcon.setIconSize(30);
+		openFolderIcon.setIconColor(Color.web("#ddaa33"));
+		
+		
 		//------------------------------TableViewer---------------------------
 		if (mode == SmartControllerMode.MEDIA) {
 			tableView.setItems(smartController.getItemsObservableList());
@@ -293,7 +299,7 @@ public class MediaTableViewer extends StackPane {
 				placeHolderLabel.setText("Import Media ...");
 				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; -fx-cursor:hand;");
 				placeHolderLabel.setOnMouseReleased(m -> smartController.getToolsContextMenu().show(placeHolderLabel, m.getScreenX(), m.getScreenY()));
-				placeHolderLabel.setGraphic(InfoTool.getImageViewFromResourcesFolder("import.png"));
+				placeHolderLabel.setGraphic(openFolderIcon);
 			} else if (smartController.getGenre() == Genre.SEARCHWINDOW) {
 				placeHolderLabel.setText("Search Media from all the playlists...");
 				placeHolderLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold; ");
