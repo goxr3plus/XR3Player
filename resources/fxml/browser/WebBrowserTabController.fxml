@@ -71,7 +71,7 @@
                   </JFXButton>
                   <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
                      <graphic>
-                        <FontIcon iconColor="#2adace" iconLiteral="fas-globe" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-globe" iconSize="20" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Open in default browser" />
@@ -98,7 +98,7 @@
                         <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser" />
                      </items>
                      <graphic>
-                        <FontIcon iconColor="#19a3ff" iconLiteral="typ-th-large-outline" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="20" />
                      </graphic>
                   </MenuButton>
                </children>

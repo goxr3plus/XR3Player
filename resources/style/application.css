@@ -1911,8 +1911,8 @@
 }
 
 .online-music-vbox-box-stack-label{
-	-fx-background-color:rgb(20.0,20.0,20.0,0.8);
-	-fx-text-fill:orange;
+	-fx-background-color:rgb(20.0,20.0,20.0,0.95);
+	-fx-text-fill:white;
 	-fx-font-weight:bold;
 	-fx-cursor:hand;
 }

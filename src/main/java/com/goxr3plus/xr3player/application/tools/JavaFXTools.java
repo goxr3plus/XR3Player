@@ -300,7 +300,8 @@ public final class JavaFXTools {
 	public static void setFontIcon(Labeled node , FontIcon icon , String iconLiteral , Color color) {
 		icon.setIconLiteral(iconLiteral);
 		icon.setIconColor(color);
-		node.setGraphic(icon);
+		if (node != null)
+			node.setGraphic(icon);
 	}
 	
 }

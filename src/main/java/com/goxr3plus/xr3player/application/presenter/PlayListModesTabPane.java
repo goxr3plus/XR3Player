@@ -74,11 +74,9 @@ public class PlayListModesTabPane extends StackPane {
 		openedLibrariesTab.setContent(Main.libraryMode.openedLibrariesViewer);
 		//
 		emotionListsTab.setContent(new BorderPane(Main.emotionsTabPane));
-		//
-		//searchEverythingTab.setContent(new BorderPane(Main.searchWindowSmartController));
 		
-		//Select the second Tab
-		onlineMusicTab.getTabPane().getSelectionModel().select(1);
+		//Select openedLibrariesTab
+		onlineMusicTab.getTabPane().getSelectionModel().select(openedLibrariesTab);
 	}
 	
 	/**
@@ -89,9 +87,6 @@ public class PlayListModesTabPane extends StackPane {
 	public void selectTab(int index) {
 		openedLibrariesTab.getTabPane().getSelectionModel().select(index);
 		
-		//In case of Search Window Tab  Request focus of Search Field
-		//if (index == 2)
-		//	Main.searchWindowSmartController.getSearchService().getSearchField().requestFocus();
 	}
 	
 	/**
@@ -100,7 +95,6 @@ public class PlayListModesTabPane extends StackPane {
 	public Tab getEmotionListsTab() {
 		return emotionListsTab;
 	}
-	
 	
 	/**
 	 * @return the openedLibrariesTab

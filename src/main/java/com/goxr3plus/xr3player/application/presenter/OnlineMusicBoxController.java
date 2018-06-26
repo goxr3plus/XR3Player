@@ -4,24 +4,26 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 
 public class OnlineMusicBoxController extends StackPane {
 	
 	// -------------------------------------------------------------
 	
 	@FXML
-	private ImageView imageView;
+	private Label descriptionLabel;
 	
 	@FXML
-	private Label descriptionLabel;
+	private FontIcon fontIcon;
 	
 	@FXML
 	private Label stackLabel;
@@ -33,14 +35,6 @@ public class OnlineMusicBoxController extends StackPane {
 	
 	private final String url;
 	private final String description;
-	
-	//Images
-	private final Image recommendedImage = InfoTool.getImageFromResourcesFolder("online-music-recommendation.jpg");
-	private final Image genresImage = InfoTool.getImageFromResourcesFolder("online-music-genres.jpg");
-	private final Image activitiesImage = InfoTool.getImageFromResourcesFolder("online-music-activites.jpg");
-	private final Image moodImage = InfoTool.getImageFromResourcesFolder("online-music-mood.jpg");
-	private final Image editorsPickImage = InfoTool.getImageFromResourcesFolder("online-music-editor-pick.jpg");
-	private final Image chartsImage = InfoTool.getImageFromResourcesFolder("online-music-charts.jpg");
 	
 	//Online-Music-Categories
 	public enum OnlineMusicCategory {
@@ -76,36 +70,34 @@ public class OnlineMusicBoxController extends StackPane {
 	@FXML
 	private void initialize() {
 		
-//		//imageView
-//		switch (category) {
-//			case RECOMMENDED:
-//				imageView.setImage(recommendedImage);
-//				break;
-//			case GENRES:
-//				imageView.setImage(genresImage);
-//				break;
-//			case ACTIVITIES:
-//				imageView.setImage(activitiesImage);
-//				break;
-//			case MOOD:
-//				imageView.setImage(moodImage);
-//				break;
-//			case EDITORSPICK:
-//				imageView.setImage(editorsPickImage);
-//				break;
-//			case CHARTS:
-//				imageView.setImage(chartsImage);
-//				break;
-//		}
+		switch (category) {
+			case RECOMMENDED:
+				JavaFXTools.setFontIcon(null, fontIcon, "far-hand-peace", Color.WHITE);
+				break;
+			case GENRES:
+				JavaFXTools.setFontIcon(null, fontIcon, "far-user", Color.WHITE);
+				break;
+			case ACTIVITIES:
+				JavaFXTools.setFontIcon(null, fontIcon, "icm-rocket", Color.WHITE);
+				break;
+			case MOOD:
+				JavaFXTools.setFontIcon(null, fontIcon, "far-smile", Color.WHITE);
+				break;
+			case EDITORSPICK:
+				JavaFXTools.setFontIcon(null, fontIcon, "far-gem", Color.WHITE);
+				break;
+			case CHARTS:
+				JavaFXTools.setFontIcon(null, fontIcon, "fas-chart-bar", Color.WHITE);
+				break;
+		}
 		
 		//descriptionLabel
 		descriptionLabel.setText("'" + description + "'");
 		
-		//
+		//Mouse Events
 		setOnMouseClicked(m -> {
 			Main.webBrowser.addNewTabOnTheEnd(url);
 			Main.topBar.selectTab(Main.topBar.getWebModeTab());
-			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
 		});
 		
 		stackLabel.visibleProperty().bind(this.hoverProperty());

@@ -184,7 +184,7 @@
             </ScrollPane>
          </bottom>
          <top>
-            <JFXButton fx:id="addTab" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Tab" BorderPane.alignment="CENTER">
+            <JFXButton fx:id="addTab" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Tab" BorderPane.alignment="CENTER">
                <tooltip>
                   <Tooltip text="Back" />
                </tooltip>

@@ -31,7 +31,7 @@
                      <graphic>
                         <Group>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Dropbox" textAlignment="CENTER" wrapText="true">
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text=" Dropbox " textAlignment="CENTER" wrapText="true">
                                  <graphic>
                                     <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
                                  </graphic>
