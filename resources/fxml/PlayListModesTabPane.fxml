@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -10,29 +12,61 @@
    <children>
       <BorderPane minHeight="0.0">
          <center>
-            <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+            <JFXTabPane minHeight="0.0" minWidth="0.0" side="LEFT" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab fx:id="onlineMusicTab" closable="false" text="Online Music">
-                   <graphic>
-                        <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="20" />
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="openedLibrariesTab" closable="false" text="Opened Libraries">
-                   <graphic>
-                        <FontIcon iconColor="#dba637" iconLiteral="fas-folder-open" iconSize="20" />
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="dropBoxTab" closable="false" text="Dropbox">
-                   <graphic>
-                        <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="emotionListsTab" closable="false" text="Emotion Lists">
+                  <Tab fx:id="onlineMusicTab" closable="false">
                      <graphic>
-                        <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="20" />
+                        <Group>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Online Music" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="20" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="downloadsTab" closable="false" disable="true" text="Coming...">
+                  <Tab fx:id="openedLibrariesTab" closable="false">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Opened Libraries" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <FontIcon iconColor="#dba637" iconLiteral="fas-folder-open" iconSize="20" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="dropBoxTab" closable="false">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Dropbox" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="emotionListsTab" closable="false">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Emotion Lists">
+                                 <graphic>
+                                    <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="20" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="downloadsTab" closable="false" disable="true">
                      <content>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
@@ -48,7 +82,15 @@
                            </children></StackPane>
                      </content>
                      <graphic>
-                        <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="20" />
+                        <Group>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Coming...">
+                                 <graphic>
+                                    <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="20" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </Group>
                      </graphic>
                   </Tab>
                </tabs>

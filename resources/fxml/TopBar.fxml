@@ -53,7 +53,7 @@
             </JFXButton>
             <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-background-color: #303030;">
                <children>
-                  <TextField fx:id="searchField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="search...." styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="what are you looking for ?" styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
                   <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20" />
                </children>
             </HBox>
