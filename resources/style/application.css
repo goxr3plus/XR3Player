@@ -1098,7 +1098,7 @@
     -fx-background-color:transparent;
 	-fx-background-radius: 2.0em;	
 	-fx-border-radius: 2.0em;	
-	-fx-border-width:2px;
+	-fx-border-width:2.0px;
 }
 
 
@@ -1826,15 +1826,32 @@
 }
 
 .transparency-slider .thumb{	
-	-fx-background-color:firebrick;
-	-fx-background-radius:90.0;
-	-fx-border-color:white;
-	-fx-border-radius:90.0;
-	-fx-border-width:2.0;
+   -fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, -light-black 2.0%, -dark-black 98.0%);
+	-fx-background-radius:0.0;
+	-fx-border-color:#151515;
+	-fx-border-radius:0.0;
+	-fx-border-width:1.0;
+
+    /*-fx-background-image :url("../image/played.png"); */
+     
+}
+
+.transparency-slider:vertical .thumb{	
+	-fx-pref-width:25.0px;
+}
+
+.transparency-slider:horizontal .thumb{	
+	-fx-pref-height:36.0px;
 }
 
 .transparency-slider .thumb:hover{	
-	/* -fx-border-width:5.0; */
+	-fx-background-color:
+        -darkest-black,
+        -dark-highlight,
+        linear-gradient(to bottom, rgb(255.0,106.0,0.0) 2.0%, rgb(255.0,106.0,100) 98.0%);
 }
 
 .transparency-slider .track{
@@ -1852,6 +1869,10 @@
 .transparency-slider3 .track{
 	-fx-pref-height:15.0px;
 	-fx-background-color:transparent;
+}
+
+.transparency-slider3 .thumb{	
+	-fx-pref-height:25.0px;
 }
 
 /*******************************************************************************
