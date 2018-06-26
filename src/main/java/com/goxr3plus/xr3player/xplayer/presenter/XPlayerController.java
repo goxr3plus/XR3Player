@@ -519,7 +519,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return xPlayerStackPane;
 	}
 	
-	/** 
+	/**
 	 * @return historyToggle
 	 */
 	public ToggleButton getHistoryToggle() {
@@ -1616,12 +1616,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@Override
 	public void progress(int nEncodedBytes , long microSecondsPosition , byte[] pcmdata , Map<String,Object> properties) {
-		//System.out.println("Entered....");
 		
-		//Check if DSP is allowed
-		//if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
-		visualizer.writeDSP(pcmdata);
+		//Return immediately
+		if (historyToggle.isSelected())
+			return;
 		
+		//System.out.println("Entered Progress...")
+		
+		//Allow DSP ?
+		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected() && visualizerVisibility.get())
+			visualizer.writeDSP(pcmdata);
+		
+		//Disc is being draggged?
 		if (!isDiscBeingDragged()) {
 			
 			// previousTime = xPlayerUI.xPlayer.currentTime
@@ -1652,9 +1658,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			if (!xPlayer.isStopped()) {
 				
 				//TotalTime and CurrentTime
-				int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentTime();
+				int totalTime = xPlayerModel.getDuration();
+				int currentTime = xPlayerModel.getCurrentTime();
 				
-				if (!modeToggle.isSelected()) { //Simple Mode for most of Users
+				if (!modeToggle.isSelected())  //Simple Mode for most of Users
 					
 					//Run on JavaFX Thread
 					Platform.runLater(() -> {
@@ -1671,8 +1678,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 						//smTimeSliderProgress
 						smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 					});
-					
-				} else { //Advanced DJ Disc Mode
+				
+				else { //Advanced DJ Disc Mode
 					
 					// Update the disc Angle
 					disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
@@ -1689,7 +1696,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 						//== ElapsedTimeLabel
 						elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted);
 						
-						//if (xPlayerController != null && xPlayerController.getDisc() != null)
+						//== Repaint the Disc
 						disc.repaint();
 						
 					});
@@ -1697,12 +1704,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				
 			}
 			
-			// if (!visualizer.isRunning())
-			// Platform.runLater(this::resumeCode);
-			
 		}
-		
-		// System.out.println(xPlayer.currentTime)
 	}
 	
 	@Override

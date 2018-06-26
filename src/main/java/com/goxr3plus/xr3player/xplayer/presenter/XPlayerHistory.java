@@ -28,18 +28,15 @@ public class XPlayerHistory extends StackPane {
 	
 	// ------------------------
 	
-	/** The x player UI. */
-	private final XPlayerController xPlayerUI;
+	private final XPlayerController xPlayerController;
 	
 	/**
 	 * Constructor.
 	 *
-	 * @param xPlayerUI
-	 *            the x player UI
 	 */
-	public XPlayerHistory(XPlayerController xPlayerUI) {
+	public XPlayerHistory(XPlayerController xPlayerController) {
 		
-		this.xPlayerUI = xPlayerUI;
+		this.xPlayerController = xPlayerController;
 		
 		// --------------------------FXMLLoader--------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerHistory.fxml"));
@@ -63,16 +60,15 @@ public class XPlayerHistory extends StackPane {
 		// When this can be visible?
 		this.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE)
-				xPlayerUI.getHistoryToggle().setSelected(false);
+				xPlayerController.getHistoryToggle().setSelected(false);
 		});
-/*		this.visibleProperty().bind(xPlayerUI.getHistoryToggle().selectedProperty());
-		this.visibleProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue) // true?
-				this.requestFocus();
-		});*/
+		/*
+		 * this.visibleProperty().bind(xPlayerUI.getHistoryToggle().selectedProperty()); this.visibleProperty().addListener((observable , oldValue , newValue)
+		 * -> { if (newValue) // true? this.requestFocus(); });
+		 */
 		
 		// ----PlayListTab
-		borderPane.setCenter(xPlayerUI.getxPlayerPlayList());
+		borderPane.setCenter(xPlayerController.getxPlayerPlayList());
 		
 	}
 	

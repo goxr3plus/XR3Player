@@ -221,10 +221,9 @@
                                                    <children>
                                                       <StackPane fx:id="visualizerStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                                                          <children>
-                                                            <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #202020; -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Status : Stopped" textAlignment="CENTER" wrapText="true" />
                                                             <Label fx:id="visualizerLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 20;" styleClass="progress-label" text="Visualizer" textAlignment="CENTER" wrapText="true">
                                                                <StackPane.margin>
-                                                                  <Insets left="5.0" right="5.0" />
+                                                                  <Insets />
                                                                </StackPane.margin>
                                                                <graphic>
                                                                   <FontIcon iconColor="WHITE" iconLiteral="icm-spinner4" iconSize="24" />
@@ -233,6 +232,7 @@
                                                                   <Font size="18.0" />
                                                                </font>
                                                             </Label>
+                                                            <Label fx:id="playerStatusLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: white;" text="Status : Stopped" textAlignment="CENTER" wrapText="true" StackPane.alignment="BOTTOM_CENTER" />
                                                             <JFXButton fx:id="visualizerVisibleLabel" buttonType="RAISED" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Show Visualizer" textAlignment="CENTER" visible="false" wrapText="true">
                                                                <StackPane.margin>
                                                                   <Insets left="5.0" right="5.0" />
@@ -500,7 +500,7 @@
                         </HBox>
                      </center>
                      <top>
-                        <HBox maxHeight="36.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" maxHeight="36.0" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                            <children>
                               <HBox maxHeight="36.0" minHeight="0.0" minWidth="0.0">
                                  <children>
@@ -557,6 +557,14 @@
                                     <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic>
                               </Label>
+                              <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="jfx-button4">
+                                 <tooltip>
+                                    <Tooltip text="Express your emotion for this Song" />
+                                 </tooltip>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                               <Button fx:id="extendPlayer" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Extend" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -581,14 +589,6 @@
                <left>
                   <VBox fx:id="volumeBarBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="emotionsButton" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                           <tooltip>
-                              <Tooltip text="Express your emotion for this Song" />
-                           </tooltip>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
                         <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
