@@ -1080,11 +1080,15 @@
 	-fx-background-color:transparent;
   }
   
+  .scroll-pane .corner{		
+  -fx-background-color:#202020 !important;
+}
+  
   
   /* The main scrollbar CSS class of ListView */
  .scroll-bar:horizontal ,
   .scroll-bar:vertical{
-    -fx-background-color:rgb(255.0,255.0,255.0,0.8);
+    -fx-background-color:#202020;
     -fx-cursor: hand ;
 	
 }
@@ -1092,9 +1096,17 @@
 /* The increment and decrement button CSS class of scrollbar */
  .increment-button , .decrement-button {
     -fx-background-color:transparent;
-	-fx-background-radius: 2.0em;
-	
-	
+	-fx-background-radius: 2.0em;	
+	-fx-border-radius: 2.0em;	
+	-fx-border-width:2px;
+}
+
+
+
+.increment-arrow , .decrement-arrow{
+	-fx-background-color:white;
+	-fx-border-color:white;
+	-fx-background-radius: 2.0em;	
 }
 
 /* The main scrollbar **track** CSS class  */
@@ -1112,16 +1124,29 @@
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
  .scroll-bar:horizontal .thumb,
  .scroll-bar:vertical .thumb {
-    -fx-background-color:white;
+    -fx-background-color: white;
 	/*-fx-background-insets: 2.0, 0.0, 0.0;*/
 	-fx-background-radius: 2.0em;
+
 	
 	
 }
 
-/* ------------------------------------------------------------------------------------- */
-/** EVENT CSS **/
-/* ------------------------------------------------------------------------------------- */
+/*.scroll-bar:vertical{
+	-fx-pref-width:10px;
+}
+
+.scroll-bar:horizontal{
+	-fx-pref-height:10px;
+}
+
+.scroll-bar:vertical:hover{
+	-fx-pref-width:20px;
+}
+
+.scroll-bar:horizontal:hover{
+	-fx-pref-height:20px;
+}*/
 
 /* The main scrollbar **track** CSS class on event of "hover" and "pressed" */
 
@@ -1142,10 +1167,13 @@
 }
 
 
- .increment-button:hover , .decrement-button:hover {
-    -fx-background-color:derive(#202020,100.0%);
+.increment-button:hover , .decrement-button:hover {
+	-fx-background-color:#151515;
+	-fx-border-color:white;
+	-fx-padding:10.0px;
+    /*  -fx-background-color:derive(#202020,100.0%);
 	-fx-border-color:derive(#202020,80.0%);	
-	/*-fx-padding:10.0px;*/
+	-fx-padding:10.0px;*/
 }
  
  
