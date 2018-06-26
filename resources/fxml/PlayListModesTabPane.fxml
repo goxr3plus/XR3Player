@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="358.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="530.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane minHeight="0.0">
          <center>
@@ -20,7 +20,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Opened Libraries" textAlignment="CENTER" wrapText="true">
                                  <graphic>
-                                    <FontIcon iconColor="#dba637" iconLiteral="fas-folder-open" iconSize="20" />
+                                    <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="32" />
                                  </graphic>
                               </Label>
                            </children>
@@ -33,7 +33,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text=" Dropbox " textAlignment="CENTER" wrapText="true">
                                  <graphic>
-                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
+                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
                                  </graphic>
                               </Label>
                            </children>
@@ -46,7 +46,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Online Music" textAlignment="CENTER" wrapText="true">
                                  <graphic>
-                                    <FontIcon iconColor="#d03030" iconLiteral="fab-youtube" iconSize="20" />
+                                    <FontIcon iconColor="#ff3c26" iconLiteral="far-gem" iconSize="25" />
                                  </graphic>
                               </Label>
                            </children>
@@ -59,7 +59,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Emotion Lists">
                                  <graphic>
-                                    <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="20" />
+                                    <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="25" />
                                  </graphic>
                               </Label>
                            </children>
@@ -86,7 +86,7 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Coming...">
                                  <graphic>
-                                    <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="20" />
+                                    <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="25" />
                                  </graphic>
                               </Label>
                            </children>
