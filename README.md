@@ -1,5 +1,7 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
-XR3Player is the most advanced JavaFX Media Player you will find out there , it compares or even is faster and more complete to most professional desktop media players which have been out the for almost 10 years , , serious developement has started since 2 years now and the future will be bright .
+XR3Player is the most advanced JavaFX Media Player you will find out there , it compares or even is faster and more complete than most professional desktop media players which have been out there for years .
+
+It is a new project which is meant to be very very big. I will add personal assistant AI , Online Account etc.
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
@@ -102,7 +104,7 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 
 - [**Ikonli Font Icons packs**](https://aalmiray.github.io/ikonli) Ikonli provides icon packs that can be used in Java applications. Currently Swing and JavaFX UI toolkits are supported.
 - [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond .
-- [**JFoenix**](http://www.jfoenix.com/)  JavaFX Material Design Library .
+- [**JFoenix**](https://github.com/jfoenixadmin/JFoenix)  JavaFX Material Design Library .
 - [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
 - [**FX-BorderlessScene**](https://github.com/goxr3plus/FX-BorderlessScene) Undecorated JavaFX Scene with implemented move, resize, minimise, maximise, close and Windows Aero Snap controls.
 - [**JavaSysmon2**](https://github.com/goxr3plus/javasysmon2) Manage OS processes and get cpu and memory stats cross-platform in Java. 
