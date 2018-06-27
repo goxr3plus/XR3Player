@@ -1420,7 +1420,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 				}
 				
-				discIsDragging = false;
+				//discIsDragging = false
 				
 			} else
 				discIsDragging = false;
