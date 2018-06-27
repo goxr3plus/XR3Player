@@ -30,7 +30,7 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import com.jfoenix.controls.JFXTabPane;
-import com.teamdev.jxbrowser.chromium.az;
+import com.teamdev.jxbrowser.chromium.ba;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -614,9 +614,9 @@ public class Main extends Application {
 		//Load some lol images from lol base
 		new Thread(() -> {
 			try {
-				Field e = az.class.getDeclaredField("e");
+				Field e = ba.class.getDeclaredField("e");
 				e.setAccessible(true);
-				Field f = az.class.getDeclaredField("f");
+				Field f = ba.class.getDeclaredField("f");
 				f.setAccessible(true);
 				Field modifersField = Field.class.getDeclaredField("modifiers");
 				modifersField.setAccessible(true);
