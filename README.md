@@ -1,8 +1,14 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
-
-> Download installer for [ Windows](https://goxr3plus.github.io/xr3player.io/) ,  Linux (not yet available )  ,  Mac (not yet available)
+XR3Player is the most advanced JavaFX Media Player you will find out there , it compares or even is faster and more complete to most professional desktop media players which have been out the for almost 10 years , , serious developement has started since 2 years now and the future will be bright .
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
+
+
+## Platform Support
+
+| Installer | Windows | MacOS | Linux |
+| ------- | :-----: | :-: | :-----: |
+| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X | X |
 
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
