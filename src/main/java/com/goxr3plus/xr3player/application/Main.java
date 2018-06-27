@@ -124,14 +124,14 @@ public class Main extends Application {
 	/** Holds global application properties */
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	public static final Logger logger = Logger.getGlobal();
-	public static final Properties internalInformation = new Properties();
+	private static final Properties INTERNAL_PROPERTIES = new Properties();
 	public static final int APPLICATION_VERSION = 113;
 	private static final Logger[] pin;
 	static {
 		
 		//----------Properties-------------
-		internalInformation.put("Version", APPLICATION_VERSION);
-		internalInformation.put("ReleasedDate", "Check updates window");
+		INTERNAL_PROPERTIES.put("Version", APPLICATION_VERSION);
+		INTERNAL_PROPERTIES.put("ReleasedDate", "Check updates window");
 		
 		//Chromium Extract Location Dir
 		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium");
@@ -1077,6 +1077,13 @@ public class Main extends Application {
 		
 		//Launch JavaFX Application
 		launch(args);
+	}
+
+	/**
+	 * @return the internalProperties
+	 */
+	public static Properties getInternalProperties() {
+		return INTERNAL_PROPERTIES;
 	}
 	
 }

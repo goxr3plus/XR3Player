@@ -129,7 +129,7 @@ public class AboutWindow extends BorderPane {
 		text = "Release Date :\t";
 		cssTextArea.appendText(text);
 		//	cssTextArea.setStyle(cssTextArea.getLength() - text.length(), cssTextArea.getLength() - 1, style);
-		cssTextArea.appendText(Main.internalInformation.get("ReleasedDate") + "\n");
+		cssTextArea.appendText(Main.getInternalProperties().get("ReleasedDate") + "\n");
 		
 		text = "Home Page :\t";
 		cssTextArea.appendText(text);
