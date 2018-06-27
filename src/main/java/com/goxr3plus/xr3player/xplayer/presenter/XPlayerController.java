@@ -1390,6 +1390,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			}
 		});
 		smTimeSlider.setOnMouseReleased(m -> {
+			//Security check
+			if (!passTimerSecurityTest())
+				return;
 			
 			//Check if the slider is not allowed to move
 			if (smTimeSlider.getCursor() == noSeekCursor)
@@ -1426,7 +1429,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				discIsDragging = false;
 			
 		});
+		smTimeSlider.setOnMousePressed(m -> {
+			//Security check
+			if (!passTimerSecurityTest())
+				return;
+		});
 		smTimeSlider.setOnMouseDragged(m -> {
+			//Security check
+			if (!passTimerSecurityTest())
+				return;
+			
 			// MouseButton==Primary || Secondary
 			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
 				
@@ -1486,6 +1498,20 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//---------------------SIDE------------------------------------------------
 		changeSide(side);
+	}
+	
+	/**
+	 * Just a small security check for the time slider
+	 */
+	private boolean passTimerSecurityTest() {
+		
+		//Security check
+		if (xPlayerModel.getSongPath() == null) {
+			smTimeSlider.setValue(0.0);
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/** Keep track on which side the Player Currently is . Give a fake value for the beginning */

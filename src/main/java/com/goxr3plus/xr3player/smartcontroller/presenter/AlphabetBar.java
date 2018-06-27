@@ -43,7 +43,7 @@ public class AlphabetBar extends StackPane {
 	private final SmartController smartController;
 	private final Orientation orientation;
 	
-	private static final List<String> ENGLISH = IntStream.rangeClosed('A', 'Z').mapToObj(c -> String.valueOf((char) c)).collect(Collectors.toList());
+	private static final List<String> ENGLISH_ALPHABET = IntStream.rangeClosed('A', 'Z').mapToObj(c -> String.valueOf((char) c)).collect(Collectors.toList());
 	
 	/**
 	 * Constructor.
@@ -66,11 +66,11 @@ public class AlphabetBar extends StackPane {
 	}
 	
 	/**
-	 * Called as soon as .fxml is initialised
+	 * Called as soon as .fxml is initialized
 	 */
 	@FXML
 	private void initialize() {
-		changeLanguageBar(ENGLISH);
+		changeLanguageBar(ENGLISH_ALPHABET);
 		
 		double speed = 0.10;
 		
@@ -96,8 +96,9 @@ public class AlphabetBar extends StackPane {
 		
 	}
 	
-	/**
-	 * @param ulocale
+
+	/** Change the letters of Language Bar
+	 * @param list 
 	 */
 	public void changeLanguageBar(List<String> list) {
 		

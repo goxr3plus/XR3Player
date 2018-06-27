@@ -371,11 +371,8 @@
 		<!-- <dependency> <groupId>fm.last</groupId> <artifactId>coverartarchive-api</artifactId> 
 			<version>2.1.0</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
-<!-- 		<dependency>
-			<groupId>com.ibm.icu</groupId>
-			<artifactId>icu4j</artifactId>
-			<version>61.1</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.ibm.icu</groupId> <artifactId>icu4j</artifactId> 
+			<version>61.1</version> </dependency> -->
 		<!-- JAVE2 -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
