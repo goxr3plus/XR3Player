@@ -1340,8 +1340,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 				}
 				
-				// SecondaryMouseButton
-			} else if (m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
+			} else
 				discIsDragging = false;
 			
 		});
@@ -1423,8 +1422,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				
 				discIsDragging = false;
 				
-				// SecondaryMouseButton
-			} else if (m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
+			} else
 				discIsDragging = false;
 			
 		});
