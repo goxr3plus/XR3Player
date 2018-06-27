@@ -1185,7 +1185,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 *
 	 * @return True if disc is being dragged
 	 */
-	public boolean isDiscBeingDragged() {
+	public boolean isDiscDragging() {
 		return discIsDragging;
 	}
 	
@@ -1341,19 +1341,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				}
 				
 				// SecondaryMouseButton
-			} else if (m.getButton() == MouseButton.SECONDARY) {
+			} else if (m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
 				discIsDragging = false;
-			}
+			
 		});
 		
 		// Canvas Mouse Dragging
 		disc.getCanvas().setOnMouseDragged(m -> {
 			
 			// MouseButton==Primary || Secondary
-			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
+			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
 				
-				// RadialMenu!showing and duration!=0 and duration!=-1
-				//if (!radialMenu.isHidden() && 
+				// duration!=0 and duration!=-1
 				if (xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 					
 					//TotalTime and CurrentTime					
@@ -1425,7 +1424,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				discIsDragging = false;
 				
 				// SecondaryMouseButton
-			} else if (m.getButton() == MouseButton.SECONDARY)
+			} else if (m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
 				discIsDragging = false;
 			
 		});
@@ -1440,9 +1439,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				return;
 			
 			// MouseButton==Primary || Secondary
-			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY)
+			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
 				
-				// RadialMenu!showing and duration!=0 and duration!=-1
+				// duration!=0 and duration!=-1
 				if (xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
 					
 					//TotalTime and CurrentTime					
@@ -1462,6 +1461,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					//smTimeSliderProgress
 					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 				}
+			
+			System.out.println(discIsDragging);
 		});
 		
 		//		
@@ -1654,7 +1655,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			visualizer.writeDSP(pcmdata);
 		
 		//Disc is being draggged?
-		if (!isDiscBeingDragged()) {
+		if (!isDiscDragging()) {
 			
 			// previousTime = xPlayerUI.xPlayer.currentTime
 			
