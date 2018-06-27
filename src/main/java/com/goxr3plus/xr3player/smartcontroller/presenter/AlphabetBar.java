@@ -1,10 +1,10 @@
 package main.java.com.goxr3plus.xr3player.smartcontroller.presenter;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import com.ibm.icu.util.LocaleData;
-import com.ibm.icu.util.ULocale;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -43,6 +43,8 @@ public class AlphabetBar extends StackPane {
 	private final SmartController smartController;
 	private final Orientation orientation;
 	
+	private static final List<String> ENGLISH = IntStream.rangeClosed('A', 'Z').mapToObj(c -> String.valueOf((char) c)).collect(Collectors.toList());
+	
 	/**
 	 * Constructor.
 	 */
@@ -68,7 +70,7 @@ public class AlphabetBar extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
-		changeLanguageBar(ULocale.ENGLISH);
+		changeLanguageBar(ENGLISH);
 		
 		double speed = 0.10;
 		
@@ -97,28 +99,35 @@ public class AlphabetBar extends StackPane {
 	/**
 	 * @param ulocale
 	 */
-	public void changeLanguageBar(ULocale ulocale) {
+	public void changeLanguageBar(List<String> list) {
 		
 		//Clear the previous buttons
 		alphabetBox.getChildren().clear();
 		
-		Iterator<String> iterator = LocaleData.getExemplarSet(ulocale, LocaleData.ES_STANDARD).iterator();
+		//Iterator<String> iterator = LocaleData.getExemplarSet(ulocale, LocaleData.ES_STANDARD).iterator();
 		//System.out.println(LocaleData.getExemplarSet(ULocale.CHINESE, LocaleData.ES_STANDARD).size());
 		
 		//	int counter = 0;
 		//For each letter
-		while (iterator.hasNext()) {
-			
+		/*
+		 * while (iterator.hasNext()) { //Button JFXButton letter = new JFXButton(iterator.next()); letter.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		 * letter.getStyleClass().add("jfx-button4"); //On Action letter.setOnAction(a -> { setLetterPressed(true); //Set the text to search field
+		 * smartController.getSearchService().getSearchField().setText(letter.getText().toUpperCase()); //In case instant search is not activated if
+		 * (!smartController.getInstantSearch().isSelected()) smartController.getInstantSearch(); //System.out.println(letter.getText()) }); //Append on bar
+		 * alphabetBox.getChildren().add(letter); //System.out.println(++counter+" "+iterator.next()) }
+		 */
+		
+		list.forEach(letter -> {
 			//Button
-			JFXButton letter = new JFXButton(iterator.next());
-			letter.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			letter.getStyleClass().add("jfx-button4");
+			JFXButton button = new JFXButton(letter);
+			button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			button.getStyleClass().add("jfx-button4");
 			
 			//On Action
-			letter.setOnAction(a -> {
+			button.setOnAction(a -> {
 				setLetterPressed(true);
 				//Set the text to search field
-				smartController.getSearchService().getSearchField().setText(letter.getText().toUpperCase());
+				smartController.getSearchService().getSearchField().setText(letter);
 				//In case instant search is not activated
 				if (!smartController.getInstantSearch().isSelected())
 					smartController.getInstantSearch();
@@ -127,10 +136,8 @@ public class AlphabetBar extends StackPane {
 			});
 			
 			//Append on bar
-			alphabetBox.getChildren().add(letter);
-			
-			//System.out.println(++counter+" "+iterator.next())
-		}
+			alphabetBox.getChildren().add(button);
+		});
 		
 	}
 	
