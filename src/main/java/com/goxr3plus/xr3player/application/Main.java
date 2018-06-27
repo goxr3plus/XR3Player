@@ -120,12 +120,16 @@ import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 public class Main extends Application {
 	
 	//------------------------------------------------------------------------
+	/** Global Logger */
+	public static final Logger logger = Logger.getGlobal();
 	
 	/** Holds global application properties */
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
-	public static final Logger logger = Logger.getGlobal();
+	
+	//Internal Information
 	public static final int APPLICATION_VERSION = 113;
 	public static final String RELEASE_DATE = "Check updates window";
+	
 	private static final Logger[] pin;
 	static {
 		
@@ -134,7 +138,6 @@ public class Main extends Application {
 		
 		//Disable loggers				
 		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
-		
 		for (Logger l : pin)
 			l.setLevel(Level.OFF);
 	}
