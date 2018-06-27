@@ -29,11 +29,11 @@
 # Screenshots
 | Login Screen | Main Mode 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/41749902-c0997c12-75c1-11e8-83db-99cb66d618fa.jpg) | ![Sec](https://user-images.githubusercontent.com/20374208/41747869-3320f6e8-75b8-11e8-8aaf-baa2c40d9ba7.png) |
+| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/login_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/main_mode.jpg) |
 
 | DJ Mode | Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/41747871-34c572bc-75b8-11e8-886b-129c757a07f8.png) | ![Sec](https://user-images.githubusercontent.com/20374208/41749903-c0c136da-75c1-11e8-9bf5-842fc2cf376f.jpg) |
+| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/dj_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/web_browser.jpg) |
 
 -------------------------------------------------------------------------------------
 
