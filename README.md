@@ -6,9 +6,9 @@ It is a new project which is meant to be very very big. I will add personal assi
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
 
-## Platform Support
+## Platform Support ( 64 bit )
 
-| Installer | Windows | MacOS | Linux |
+| Installer | Windows x64 | MacOS x64| Linux x64 |
 | ------- | :-----: | :-: | :-----: |
 | Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X | X |
 
