@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
@@ -23,20 +25,18 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.binding.StringBinding;
 
 /**
  * Mechanism of showing the opened libraries each opened library is represented by a Tab.
@@ -96,7 +96,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		//== emptyLabel
 		itemsWrapperProperty = new SimpleListProperty<>(tabPane.getTabs());
 		createFirstLibrary.visibleProperty().bind(itemsWrapperProperty.emptyProperty());
-			
+		
 	}
 	
 	//    /**
@@ -248,9 +248,9 @@ public class OpenedLibrariesViewer extends StackPane {
 		stack.setVisible(false);
 		
 		//ImageView
-		ImageView imageView = new ImageView(noItemsImage);
-		imageView.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
-		imageView.managedProperty().bind(imageView.visibleProperty());
+		FontIcon fontIcon = JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 20);
+		fontIcon.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
+		fontIcon.managedProperty().bind(fontIcon.visibleProperty());
 		
 		//X Button
 		JFXButton closeButton = new JFXButton("X");
@@ -282,7 +282,7 @@ public class OpenedLibrariesViewer extends StackPane {
 			if (m.getButton() == MouseButton.MIDDLE)
 				removeTab(tab);
 		});
-		hBox.getChildren().addAll(imageView, tabImage, stack, marquee, closeButton);
+		hBox.getChildren().addAll(fontIcon, tabImage, stack, marquee, closeButton);
 		
 		// --Drag Over
 		hBox.setOnDragOver(dragOver -> {
