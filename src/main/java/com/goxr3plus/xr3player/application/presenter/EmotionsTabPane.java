@@ -75,15 +75,10 @@ public class EmotionsTabPane extends StackPane {
 		
 		//loveTab
 		loveTab.setContent(emotionListsController.lovedMediaListController);
-	}
-	
-	/**
-	 * Select the tab with the given index in the TabPane
-	 * 
-	 * @param index
-	 */
-	public void selectTab(int index) {
-		tabPane.getSelectionModel().select(index);
+		
+		//Set Tab Selected
+		tabPane.getSelectionModel().select(loveTab);
+		
 	}
 	
 	/**

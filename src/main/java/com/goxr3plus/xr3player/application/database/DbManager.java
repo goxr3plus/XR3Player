@@ -612,6 +612,10 @@ public class DbManager {
 							//Update the emotion smart controller 
 							Main.emotionListsController.updateSelectedSmartController(new boolean[]{ true , true , true , true });
 							
+							//Update the selected smart controller
+							( (SmartController) Main.emotionsTabPane.getTabPane().getSelectionModel().getSelectedItem().getContent() ).getLoadService().startService(false, false,
+									true);
+							
 							//Refresh all the XPlayers PlayLists
 							Main.xPlayersList.getList().stream()
 									.forEach(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController().getLoadService().startService(false, false, false));
@@ -636,8 +640,8 @@ public class DbManager {
 							Main.dropBoxViewer.refreshSavedAccounts();
 							
 							//Resize Main Window
-							Main.window.setWidth(Main.window.getWidth()+1);
-							Main.window.setHeight(Main.window.getHeight()+1);
+							Main.window.setWidth(Main.window.getWidth() + 1);
+							Main.window.setHeight(Main.window.getHeight() + 1);
 						});
 						
 						//Update the Progress
