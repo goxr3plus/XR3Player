@@ -37,12 +37,6 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCa
  */
 public class DJDisc extends StackPane {
 	
-	/** The Constant NULL_IMAGE. */
-	//private static final Image NULL_IMAGE = InfoTool.getImageFromResourcesFolder("noDiscImage.png");
-	
-	/** The Constant NULL_IMAGE. */
-	private static final Image VOLUME_IMAGE = InfoTool.getImageFromResourcesFolder("unmute.png");
-	
 	/** The listeners. */
 	private final ArrayList<DJDiscListener> listeners = new ArrayList<>();
 	
@@ -164,12 +158,10 @@ public class DJDisc extends StackPane {
 			listeners.forEach(l -> l.volumeChanged(newValue.intValue()));
 			repaint();
 		});
-		ImageView graphic = new ImageView(VOLUME_IMAGE);
-		imageView.setFitWidth(15);
-		imageView.setFitHeight(15);
-		imageView.setSmooth(true);
-		volumeLabel.setGraphic(graphic);
-		volumeLabel.setGraphicTextGap(1);
+		/*
+		 * ImageView graphic = new ImageView(VOLUME_IMAGE); imageView.setFitWidth(15); imageView.setFitHeight(15); imageView.setSmooth(true);
+		 * volumeLabel.setGraphic(graphic); volumeLabel.setGraphicTextGap(1);
+		 */
 		
 		// Fade animation for centerDisc
 		fade = new FadeTransition(new Duration(1000), canvas);

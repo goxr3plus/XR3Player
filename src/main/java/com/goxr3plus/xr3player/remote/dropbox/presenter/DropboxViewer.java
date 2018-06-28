@@ -33,11 +33,10 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
@@ -168,10 +167,6 @@ public class DropboxViewer extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	// -------------------------------------------------------------
-	
-	public static final Image dropBoxImage = InfoTool.getImageFromResourcesFolder("dropbox.png");
-	
 	// -------------------------------------------------------------	
 	private String accessToken;
 	
@@ -180,6 +175,8 @@ public class DropboxViewer extends StackPane {
 	private final DropboxFilesTableViewer dropboxFilesTableViewer;
 	
 	private final DropboxFileContextMenu fileContextMenu = new DropboxFileContextMenu();
+	
+	public final Color FONT_ICON_COLOR = Color.web("#25c1ff");
 	
 	/**
 	 * Constructor.
@@ -244,8 +241,8 @@ public class DropboxViewer extends StackPane {
 				accessToken = newValue;
 				
 				//Show message to the User
-				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
-						JavaFXTools.getImageView(DropboxViewer.dropBoxImage, -1, -1));
+				ActionTool.showFontIconNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
+						JavaFXTools.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 64));
 				
 				//Save on the database
 				PropertiesDb propertiesDb = Main.userInfoMode.getUser().getUserInformationDb();
@@ -344,7 +341,7 @@ public class DropboxViewer extends StackPane {
 					//String text = item.contains("<>:<>") ? item.split("<>:<>")[0] : item; // get text from item
 					setText(item);
 					setTooltip(new Tooltip(item));
-					this.setGraphic(new ImageView(dropBoxImage));
+					setGraphic(JavaFXTools.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 32));
 				}
 			}
 		});

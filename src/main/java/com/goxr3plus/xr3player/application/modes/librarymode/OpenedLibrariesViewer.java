@@ -34,6 +34,9 @@ import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.L
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.binding.StringBinding;
 
 /**
  * Mechanism of showing the opened libraries each opened library is represented by a Tab.
@@ -50,7 +53,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	
 	// -----------------------------------------------------------------------
 	
-	private static final Image noItemsImage = InfoTool.getImageFromResourcesFolder("noMusic.png");
+	//private static final Image noItemsImage = InfoTool.getImageFromResourcesFolder("noMusic.png");
 	
 	/**
 	 * This class wraps an ObservableList
@@ -220,25 +223,20 @@ public class OpenedLibrariesViewer extends StackPane {
 		// where is "" it must be
 		// InfoTool.getMinString(library.getLibraryName(), 15)
 		Tab tab = new Tab("", library.getSmartController());
-		tab.setTooltip(new Tooltip(library.getLibraryName()));
-		
-		// Graphic
+		Tooltip t1;
+		String s1 = library.getLibraryName();
+		t1 = new Tooltip(s1);
+		tab.setTooltip(t1);
 		StackPane stack = new StackPane();
-		
-		// indicator
 		ProgressBar indicator = new ProgressBar();
 		indicator.progressProperty().bind(library.getSmartController().getIndicator().progressProperty());
 		indicator.setMaxSize(35, 15);
 		
-		// label
 		Label label = new Label();
 		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		label.setAlignment(Pos.CENTER);
 		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
 		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
-		//label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100.00).asString("%.02f %%"))
-		// text.visibleProperty().bind(library.getSmartController().inputService.runningProperty())
-		
 		Marquee marquee = new Marquee();
 		marquee.textProperty().bind(tab.getTooltip().textProperty());
 		//marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
@@ -262,7 +260,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		closeButton.setPrefSize(maxSize, maxSize);
 		closeButton.setMaxSize(maxSize, maxSize);
 		closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
-		closeButton.setOnAction(a -> removeTab(tab));
+		closeButton.setOnAction(λ -> removeTab(tab));
 		
 		//tabImage 
 		ImageView tabImage = new ImageView();

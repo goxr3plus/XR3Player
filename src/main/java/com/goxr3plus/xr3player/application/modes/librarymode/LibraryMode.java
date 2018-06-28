@@ -132,11 +132,6 @@ public class LibraryMode extends BorderPane {
 	 * Default image of a library(which has not a costume one selected by the user.
 	 */
 	public static Image defaultImage = InfoTool.getImageFromResourcesFolder("playlistImage.png");
-	/**
-	 * A classic warning image to inform the user about something
-	 * 
-	 */
-	public static final Image warningImage = InfoTool.getImageFromResourcesFolder("warning.png");
 	
 	private boolean openLibraryAfterCreation;
 	
@@ -308,7 +303,7 @@ public class LibraryMode extends BorderPane {
 	@FXML
 	public void initialize() {
 		
-		//Initialise
+		//Initialize
 		teamViewer = new TeamViewer(this);
 		quickSearchTextField.visibleProperty().bind(teamViewer.getViewer().searchWordProperty().isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.getViewer().searchWordProperty()));
@@ -465,11 +460,11 @@ public class LibraryMode extends BorderPane {
 		return horizontalScrollBar;
 	}
 	
-	// Variables
-	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
-	
-	// Variables
-	private double[] bottomSplitPaneDivider = { 0.6 , 0.4 };
+//	// Variables
+//	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
+//	
+//	// Variables
+//	private double[] bottomSplitPaneDivider = { 0.6 , 0.4 };
 	
 	//	/**
 	//	 * Updates the values of array that holds DividerPositions of splitPane

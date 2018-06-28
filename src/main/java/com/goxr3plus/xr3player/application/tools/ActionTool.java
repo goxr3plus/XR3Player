@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.Notifications;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
@@ -334,6 +335,60 @@ public final class ActionTool {
 	 */
 	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType) {
 		Platform.runLater(() -> showNotification(title, text, duration, notificationType, null));
+	}
+	
+	/**
+	 * Show a notification.
+	 *
+	 * @param title
+	 *            The notification title
+	 * @param text
+	 *            The notification text
+	 * @param d
+	 *            The duration that notification will be visible
+	 * @param notificationType
+	 *            The notification type
+	 */
+	public static void showFontIconNotification(String title , String text , Duration d , NotificationType notificationType , FontIcon icon) {
+		
+		try {
+			
+			//Check if it is JavaFX Application Thread
+			if (!Platform.isFxApplicationThread()) {
+				Platform.runLater(() -> showFontIconNotification(title, text, d, notificationType, icon));
+				return;
+			}
+			
+			Notifications notification1;
+			if (icon == null)
+				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition);
+			else
+				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(icon);
+			
+			switch (notificationType) {
+				case CONFIRM:
+					notification1.showConfirm();
+					break;
+				case ERROR:
+					notification1.showError();
+					break;
+				case INFORMATION:
+					notification1.showInformation();
+					break;
+				case SIMPLE:
+					notification1.show();
+					break;
+				case WARNING:
+					notification1.showWarning();
+					break;
+				default:
+					break;
+			}
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
 	}
 	
 	/**

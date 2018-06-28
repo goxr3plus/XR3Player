@@ -304,4 +304,28 @@ public final class JavaFXTools {
 			node.setGraphic(icon);
 	}
 	
+	/**
+	 * Get the requested Font Icon
+	 * 
+	 * @param iconLiteral
+	 * @param color
+	 * @param size
+	 * @return
+	 */
+	public static FontIcon getFontIcon(String iconLiteral , Color color , int size) {
+		
+		//Create the Icon
+		FontIcon icon = new FontIcon(iconLiteral);
+		
+		//Set Icon Color
+		icon.setIconColor(color);
+		
+		//Set Size
+		if (size != 0)
+			icon.setIconSize(size);
+		
+		
+		return icon;
+	}
+	
 }
