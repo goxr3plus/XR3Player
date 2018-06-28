@@ -371,7 +371,7 @@ public class DropboxViewer extends StackPane {
 		
 		//renameButton
 		renameButton.disableProperty().bind(deleteMenuButton.disabledProperty());
-		renameButton.setOnAction(a -> this.renameFile(dropboxFilesTableViewer.getSelectionModel().getSelectedItem(), renameButton));
+		renameButton.setOnAction(a -> renameFile(dropboxFilesTableViewer.getSelectionModel().getSelectedItem(), renameButton));
 		
 		//createFolder
 		createFolder.setOnAction(a -> {
@@ -570,13 +570,14 @@ public class DropboxViewer extends StackPane {
 	 * @param dropboxFile
 	 */
 	public void renameFile(DropboxFile dropboxFile , Node node) {
-		// Open Window
+		
+		// Show Rename Window
 		Main.renameWindow.show(InfoTool.getFileTitle(dropboxFile.getMetadata().getName()), node, "Media Renaming", FileCategory.FILE);
 		String oldName = dropboxFile.getMetadata().getName();
 		
 		// Bind
-		String extension = InfoTool.getFileExtension(dropboxFile.getMetadata().getName());
-		dropboxFile.titleProperty().bind(Main.renameWindow.getInputField().textProperty().concat("." + extension));
+		dropboxFile.titleProperty()
+				.bind(Main.renameWindow.getInputField().textProperty().concat(!dropboxFile.isFile() ? "" : "." + InfoTool.getFileExtension(dropboxFile.getMetadata().getName())));
 		
 		// When the Rename Window is closed do the rename
 		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
