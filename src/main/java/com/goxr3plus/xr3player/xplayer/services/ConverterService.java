@@ -2,12 +2,6 @@ package main.java.com.goxr3plus.xr3player.xplayer.services;
 
 import java.io.File;
 
-import it.sauronsoftware.jave.AudioAttributes;
-import it.sauronsoftware.jave.Encoder;
-import it.sauronsoftware.jave.EncoderProgressListener;
-import it.sauronsoftware.jave.EncodingAttributes;
-import it.sauronsoftware.jave.MultimediaInfo;
-import it.sauronsoftware.jave.MultimediaObject;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
@@ -18,6 +12,12 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
+import ws.schild.jave.AudioAttributes;
+import ws.schild.jave.Encoder;
+import ws.schild.jave.EncoderProgressListener;
+import ws.schild.jave.EncodingAttributes;
+import ws.schild.jave.MultimediaInfo;
+import ws.schild.jave.MultimediaObject;
 
 /**
  * Used by XR3Player to convert all unsupported audio formats to .mp3

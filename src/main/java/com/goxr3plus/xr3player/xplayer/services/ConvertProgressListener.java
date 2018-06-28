@@ -1,7 +1,7 @@
 package main.java.com.goxr3plus.xr3player.xplayer.services;
 
-import it.sauronsoftware.jave.EncoderProgressListener;
-import it.sauronsoftware.jave.MultimediaInfo;
+import ws.schild.jave.EncoderProgressListener;
+import ws.schild.jave.MultimediaInfo;
 
 public class ConvertProgressListener implements EncoderProgressListener {
 	int current = 1;
@@ -19,7 +19,7 @@ public class ConvertProgressListener implements EncoderProgressListener {
 	public void progress(int p) {
 		
 		      double progress = p / 1000.00;
-		      System.out.println(progress);
+		//  System.out.println(progress);
 		//      ConverterFrame.this.encodingProgressLabel.setText(progress + "%");
 		//      if (p >= 1000) {
 		//        if (ConverterFrame.this.inputfiles.length > 1)
