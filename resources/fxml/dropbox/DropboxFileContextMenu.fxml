@@ -13,12 +13,12 @@
       </MenuItem>
       <MenuItem fx:id="download" mnemonicParsing="false" text="Download">
          <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
+            <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="rename" mnemonicParsing="false" text="Rename">
          <graphic>
-            <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
+            <FontIcon iconColor="#51eeec" iconLiteral="fas-edit" iconSize="20" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete">

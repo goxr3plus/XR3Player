@@ -131,7 +131,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="fas-edit" iconSize="24" />
+                                          <FontIcon iconColor="#51eeec" iconLiteral="fas-edit" iconSize="24" />
                                        </graphic>
                                     </Button>
                                     <Button fx:id="downloadFile" alignment="CENTER" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Download" wrapText="true">
@@ -142,7 +142,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <graphic>
-                                          <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="24" />
+                                          <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="24" />
                                        </graphic>
                                     </Button>
                                     <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
