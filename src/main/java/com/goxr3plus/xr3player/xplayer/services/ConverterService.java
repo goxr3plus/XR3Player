@@ -34,6 +34,7 @@ public class ConverterService extends Service<Boolean> {
 	private String newFileAsbolutePath;
 	private ConvertProgressListener listener = new ConvertProgressListener();
 	private final SimpleDoubleProperty convertProgress = new SimpleDoubleProperty();
+	private Encoder encoder;
 	
 	/**
 	 * The XPlayerController
@@ -130,7 +131,11 @@ public class ConverterService extends Service<Boolean> {
 						EncodingAttributes attrs = new EncodingAttributes();
 						attrs.setFormat("mp3");
 						attrs.setAudioAttributes(audio);
-						new Encoder().encode(new MultimediaObject(source), target, attrs, listener);
+						//Initialize if encoder is null
+						if (encoder == null)
+							encoder = new Encoder();
+						//Go do it
+						encoder.encode(new MultimediaObject(source), target, attrs, listener);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 						succeeded = false;
