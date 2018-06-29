@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
+import org.controlsfx.control.Notifications;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -510,6 +511,8 @@ public class Main extends Application {
 		//XR3AutoUpdater exit message
 		System.out.println("XR3Player ready to rock!");
 		
+		//Show on notification
+		Notifications.create().darkStyle().hideAfter(Duration.millis(1)).show();	
 	}
 	
 	/**
