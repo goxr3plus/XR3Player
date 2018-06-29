@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -32,6 +34,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -197,9 +200,7 @@ public abstract class Media {
 	public Media(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre smartControllerGenre, int number) {
 		
 		//ArtWork FontIcon
-		FontIcon artWorkImage = new FontIcon("gmi-album");
-		artWorkImage.setIconSize(30);
-		artWorkImage.setIconColor(Color.WHITE);
+		FontIcon artWorkImage = JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 30);
 		
 		//ArtWork ImageView
 		ImageView artWorkImageView = new ImageView();
@@ -215,9 +216,7 @@ public abstract class Media {
 		artwork = new SimpleObjectProperty<>(artWorkStack);
 		
 		//Download
-		FontIcon searchOnWebIcon = new FontIcon("fas-cloud-download-alt");
-		searchOnWebIcon.setIconSize(18);
-		searchOnWebIcon.setIconColor(Color.WHITE);
+		FontIcon searchOnWebIcon = JavaFXTools.getFontIcon("fas-cloud-download-alt", Color.WHITE, 18);
 		
 		Button searchMediaOnWeb = new Button("", searchOnWebIcon);
 		searchMediaOnWeb.getStyleClass().add("jfx-button2");
@@ -275,13 +274,13 @@ public abstract class Media {
 		this.number = new SimpleIntegerProperty(number);
 		
 		//Stars
-		Button starsButton = new Button(String.valueOf(stars));
-		starsButton.getStyleClass().add("jfx-button5");
-		starsButton.setFocusTraversable(false);
+		JFXButton starsButton = new JFXButton(String.valueOf(stars));
+		starsButton.getStyleClass().add("jfx-button-dark-white-selection");
 		starsButton.setPrefSize(50, 25);
 		starsButton.setMinSize(50, 25);
 		starsButton.setMaxSize(50, 25);
 		starsButton.setOnAction(a -> updateStars(starsButton));
+		starsButton.setFocusTraversable(false);
 		
 		this.stars = new SimpleObjectProperty<>(starsButton);
 		//-----------
