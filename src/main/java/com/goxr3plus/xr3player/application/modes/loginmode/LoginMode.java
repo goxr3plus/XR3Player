@@ -1,18 +1,11 @@
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
-import org.apache.commons.io.IOUtils;
 import org.atteo.evo.inflector.English;
 
 import com.jfoenix.controls.JFXButton;
@@ -25,7 +18,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -47,8 +39,6 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -421,7 +411,6 @@ public class LoginMode extends BorderPane {
 		return xr3PlayerLabel;
 	}
 	
-	
 	/**
 	 * @return the colorPicker
 	 */
@@ -491,10 +480,10 @@ public class LoginMode extends BorderPane {
 	public class Viewer extends Region {
 		
 		/** The Constant WIDTH. */
-		private double WIDTH = 120;
+		private double width = 120;
 		
 		/** The Constant HEIGHT. */
-		private double HEIGHT = WIDTH + ( WIDTH * 0.4 );
+		private double height = width + ( width * 0.4 );
 		
 		/** The duration. */
 		private final Duration duration = Duration.millis(450);
@@ -503,13 +492,13 @@ public class LoginMode extends BorderPane {
 		private final Interpolator interpolator = Interpolator.EASE_BOTH;
 		
 		/** The Constant SPACING. */
-		private double SPACING = 120;
+		private double spacing = 120;
 		
 		/** The Constant LEFT_OFFSET. */
-		private double LEFT_OFFSET = -110;
+		private double leftOffSet = -110;
 		
 		/** The Constant RIGHT_OFFSET. */
-		private double RIGHT_OFFSET = 110;
+		private double rightOffSet = 110;
 		
 		/** The Constant SCALE_SMALL. */
 		private static final double SCALE_SMALL = 0.6;
@@ -698,10 +687,10 @@ public class LoginMode extends BorderPane {
 			
 			// keep centered centered
 			
-			WIDTH = getHeight();
-			HEIGHT = WIDTH;// + (WIDTH * 0.4)
+			width = getHeight();
+			height = width;// + (WIDTH * 0.4)
 			
-			double variable = WIDTH / var;
+			double variable = width / var;
 			centered.setLayoutX( ( getWidth() - variable ) / 2); //WIDTH/var) / 2)
 			centered.setLayoutY( ( getHeight() - variable ) / 2); //HEIGHT / var) / 2)
 			
@@ -719,17 +708,19 @@ public class LoginMode extends BorderPane {
 			
 			// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
 			// if (previousWidth != (int) WIDTH ||
-			if (previousHeight != (int) HEIGHT) {
+			if (previousHeight != (int) height) {
 				// System.out.println("Updating Library Size")
 				
+				//Library Size
+				double size = height / var;
+				
 				// Update ImageView width and height
-				SPACING = HEIGHT / ( var + 0.5 );
-				LEFT_OFFSET = - ( SPACING - 10 );
-				RIGHT_OFFSET = -LEFT_OFFSET;
+				spacing = height / ( var + 0.5 );
+				leftOffSet = - ( spacing - size / 2.0 );
+				rightOffSet = -leftOffSet;
+				
 				// For-Each
 				itemsObservableList.forEach(user -> {
-					double size = HEIGHT / var;
-					
 					// --
 					user.getImageView().setFitWidth(size);
 					user.getImageView().setFitHeight(size);
@@ -737,8 +728,8 @@ public class LoginMode extends BorderPane {
 					user.setMaxHeight(size);
 				});
 				
-				// Dont Fuck the CPU!
-				double currentSize = WIDTH / var; // the current size of each
+				// Don't fuck CPU mother too hard , let her breath a lil bit
+				double currentSize = width / var; // the current size of each
 				// library
 				boolean doUpdate = Math.abs(currentSize - lastSize) > 2;
 				// System.out.println("Do update?:" + doUpdate + " , " +
@@ -748,8 +739,8 @@ public class LoginMode extends BorderPane {
 					update();
 			}
 			
-			previousWidth = (int) WIDTH;
-			previousHeight = (int) HEIGHT;
+			previousWidth = (int) width;
+			previousHeight = (int) height;
 			// System.out.println("Counter:" + (++counter) + " , " + getWidth()
 			// + "," + getHeight())
 			
@@ -798,7 +789,7 @@ public class LoginMode extends BorderPane {
 			itemsObservableList.add(user);
 			
 			// --
-			double size = HEIGHT / var;
+			double size = height / var;
 			
 			user.getImageView().setFitWidth(size);
 			user.getImageView().setFitHeight(size);
@@ -979,7 +970,7 @@ public class LoginMode extends BorderPane {
 					
 					double newX = -leftGroup.getChildren().size() *
 							
-							SPACING + SPACING * i + LEFT_OFFSET;
+							spacing + spacing * i + leftOffSet;
 					
 					keyFrames.add(new KeyFrame(duration,
 							
@@ -1023,7 +1014,7 @@ public class LoginMode extends BorderPane {
 					
 					final double newX = rightGroup.getChildren().size() *
 							
-							SPACING - SPACING * i + RIGHT_OFFSET;
+							spacing - spacing * i + rightOffSet;
 					
 					keyFrames.add(new KeyFrame(duration,
 							

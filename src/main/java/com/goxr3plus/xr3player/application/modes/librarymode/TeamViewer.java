@@ -320,11 +320,14 @@ public class TeamViewer {
 			if (previousHeight != (int) height) {
 				// System.out.println("Updating Library Size")
 				
+				//Library Size
+				double size = height / var;
+				
 				// Update ImageView width and height
 				spacing = height / ( var + 0.5 );
-				leftOffSet = - ( spacing - 10 );
+				leftOffSet = - ( spacing - size/2.0 );
 				rightOffSet = -leftOffSet;
-				double size = height / var;
+			
 				// For-Each
 				itemsObservableList.forEach(library -> {
 					// --
