@@ -12,7 +12,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -477,7 +476,7 @@
                      <center>
                         <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
                            <children>
-                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="DJ" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go DJ" HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
@@ -485,7 +484,7 @@
                                     <Insets left="1.0" right="1.0" />
                                  </HBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go History" HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
@@ -637,16 +636,18 @@
             </BorderPane>
             <StackPane fx:id="regionStackPane" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false">
                <children>
-                  <ProgressIndicator fx:id="progressIndicator">
-                     <StackPane.margin>
-                        <Insets bottom="30.0" top="20.0" />
-                     </StackPane.margin>
-                  </ProgressIndicator>
-                  <Label fx:id="playerLoadingLabel" alignment="CENTER" prefHeight="32.0" prefWidth="255.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="playerLoadingLabel" alignment="CENTER" contentDisplay="BOTTOM" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <graphic>
+                              <ProgressBar fx:id="progressBar" minHeight="10.0" minWidth="10.0" prefHeight="25.0" prefWidth="170.0" styleClass="transparent-progress-bar" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </StackPane>
             <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">

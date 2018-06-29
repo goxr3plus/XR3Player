@@ -330,7 +330,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane regionStackPane;
 	
 	@FXML
-	private ProgressIndicator progressIndicator;
+	private ProgressBar progressBar;
 	
 	@FXML
 	private Label playerLoadingLabel;
@@ -2233,7 +2233,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	public ProgressIndicator getProgressIndicator() {
-		return progressIndicator;
+		return progressBar;
 	}
 	
 	/**
