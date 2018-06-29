@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.controlsfx.control.Notifications;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXToggleButton;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -17,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.Util;
@@ -80,7 +84,24 @@ public class WelcomeScreen extends StackPane {
 	private void initialize() {
 		
 		//startButton
-		startButton.setOnAction(a -> hideWelcomeScreen());
+		startButton.setOnAction(a -> {
+			
+			//Hide Welcome Screen
+			hideWelcomeScreen();
+			
+			//Start a Thread
+			new Thread(() -> {
+				try {
+					Thread.sleep(500);
+					
+					//Show on notification
+					Platform.runLater(() -> Notifications.create().darkStyle().text("Welcome to XR3Player V." + Main.APPLICATION_VERSION).hideAfter(Duration.seconds(2)).show());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}).start();
+			
+		});
 		
 		//dontShowAgain
 		showOnStartUp.selectedProperty()
@@ -103,39 +124,39 @@ public class WelcomeScreen extends StackPane {
 	 */
 	public void showWelcomeScreen() {
 		
-//		try {
-//			
-//			if (mediaPlayer != null && soundPlayer != null) {
-//				//mediaPlayer.play();
-//				soundPlayer.play();
-//			} else {
-//				
-//				//				mediaView.setFitWidth(Main.window.getWidth());
-//				//				mediaView.setFitHeight(Main.window.getHeight());
-//				//				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
-//				//				mediaView.setMediaPlayer(mediaPlayer);
-//				//				mediaPlayer.setAutoPlay(true);
-//				//				//mediaPlayer.setRate(3.0)
-//				//				mediaPlayer.setStartTime(Duration.seconds(0));
-//				//				mediaPlayer.setStopTime(Duration.seconds(8));
-//				//				//mediaPlayer.setCycleCount(50)
-//				//				mediaPlayer.play();
-//				//				mediaPlayer.setAutoPlay(true);
-//				//				//mediaPlayer.setCycleCount(50)
-//				//				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
-//				
-//				Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString());
-//				soundPlayer = new MediaPlayer(m1);
-//				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
-//				soundPlayer.play();
-//				
-//				//Set the background Image
-//				//setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
-//				//		BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
-//			}
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
+		//		try {
+		//			
+		//			if (mediaPlayer != null && soundPlayer != null) {
+		//				//mediaPlayer.play();
+		//				soundPlayer.play();
+		//			} else {
+		//				
+		//				//				mediaView.setFitWidth(Main.window.getWidth());
+		//				//				mediaView.setFitHeight(Main.window.getHeight());
+		//				//				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
+		//				//				mediaView.setMediaPlayer(mediaPlayer);
+		//				//				mediaPlayer.setAutoPlay(true);
+		//				//				//mediaPlayer.setRate(3.0)
+		//				//				mediaPlayer.setStartTime(Duration.seconds(0));
+		//				//				mediaPlayer.setStopTime(Duration.seconds(8));
+		//				//				//mediaPlayer.setCycleCount(50)
+		//				//				mediaPlayer.play();
+		//				//				mediaPlayer.setAutoPlay(true);
+		//				//				//mediaPlayer.setCycleCount(50)
+		//				//				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
+		//				
+		//				Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString());
+		//				soundPlayer = new MediaPlayer(m1);
+		//				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
+		//				soundPlayer.play();
+		//				
+		//				//Set the background Image
+		//				//setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
+		//				//		BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
+		//			}
+		//		} catch (Exception ex) {
+		//			ex.printStackTrace();
+		//		}
 		
 		setVisible(true);
 	}
