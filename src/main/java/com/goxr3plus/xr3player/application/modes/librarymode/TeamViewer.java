@@ -324,10 +324,9 @@ public class TeamViewer {
 				spacing = height / ( var + 0.5 );
 				leftOffSet = - ( spacing - 10 );
 				rightOffSet = -leftOffSet;
+				double size = height / var;
 				// For-Each
 				itemsObservableList.forEach(library -> {
-					double size = height / var;
-					
 					// --
 					library.getImageView().setFitWidth(size);
 					library.getImageView().setFitHeight(size);
@@ -335,7 +334,7 @@ public class TeamViewer {
 					library.setMaxHeight(size);
 				});
 				
-				// Dont Fuck the CPU
+				// Don't fuck CPU mother too hard , let her breath a lil bit
 				double currentSize = width / var; // the current size of each
 				// library
 				boolean doUpdate = Math.abs(currentSize - lastSize) > 2;
