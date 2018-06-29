@@ -507,12 +507,14 @@ public class Main extends Application {
 		
 		//Show the Window
 		window.show();
+		window.setOnShown(s -> {
+			//Show on notification
+			Notifications.create().darkStyle().hideAfter(Duration.millis(1)).show();
+		});
 		
 		//XR3AutoUpdater exit message
 		System.out.println("XR3Player ready to rock!");
 		
-		//Show on notification
-		Notifications.create().darkStyle().hideAfter(Duration.millis(1)).show();	
 	}
 	
 	/**
