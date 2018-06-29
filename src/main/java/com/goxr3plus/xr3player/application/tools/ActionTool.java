@@ -121,9 +121,14 @@ public final class ActionTool {
 				logger.log(Level.WARNING, ex.getMessage(), ex);
 				showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500), NotificationType.WARNING);
 			}
-		} else {
-			showNotification("Not Supported", "This function is only supported in Windows \n I am trying my best to implement it and on other operating systems :)",
-					Duration.millis(1500), NotificationType.WARNING);
+		} else { //For MacOS and Linux
+			try {
+				Desktop.getDesktop().browseFileDirectory(new File(path));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				showNotification("Not Supported", "This function is only supported in Windows \n I am trying my best to implement it and on other operating systems :)",
+						Duration.millis(1500), NotificationType.WARNING);
+			}
 		}
 		
 	}
