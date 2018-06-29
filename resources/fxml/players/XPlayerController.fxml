@@ -28,40 +28,40 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="594.0" prefWidth="902.0" style="-fx-background-color: rgb(15,15,15,0.9);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="594.0" prefWidth="902.0" style="-fx-background-color: rgb(15,15,15,0.9);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" fx:id="xPlayerStackPane">
          <children>
-            <BorderPane fx:id="rootBorderPane">
+            <BorderPane fx:id="rootBorderPane" minHeight="0.0" minWidth="0.0">
                <center>
-                  <StackPane fx:id="modesStackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <StackPane fx:id="modesStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                      <children>
-                        <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                        <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0">
                            <top>
-                              <StackPane BorderPane.alignment="CENTER">
+                              <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <HBox fx:id="mediaNameHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="32.0" spacing="2.0" style="-fx-background-color: #151515;">
+                                    <HBox fx:id="mediaNameHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="40.0" spacing="2.0" style="-fx-background-color: #151515;">
                                        <children>
                                           <HBox fx:id="timersBox" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="elapsedTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
                                                    <graphic>
                                                       <FontIcon iconColor="#29ff8b" iconLiteral="icm-clock2" iconSize="18" />
                                                    </graphic>
                                                 </Label>
-                                                <Label fx:id="remainingTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="remainingTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
                                                    <graphic>
                                                       <FontIcon iconColor="#fc4f4f" iconLiteral="icm-clock2" iconSize="18" />
                                                    </graphic>
                                                 </Label>
-                                                <Label fx:id="totalTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="totalTimeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="00:00" HBox.hgrow="ALWAYS">
                                                    <graphic>
                                                       <FontIcon iconColor="#3bd9f5" iconLiteral="icm-clock2" iconSize="18" />
                                                    </graphic>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <MenuButton fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="dark-menu-button">
+                                          <MenuButton fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" styleClass="dark-menu-button">
                                             <items>
                                               <MenuItem fx:id="copyFileTitle" mnemonicParsing="false" text="Copy File Title" />
                                               <MenuItem fx:id="copyFileLocation" mnemonicParsing="false" text="Copy File Location" />
@@ -71,7 +71,7 @@
                                                 <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20" />
                                              </graphic>
                                           </MenuButton>
-                                          <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;" styleClass="jfx-button4">
+                                          <Button fx:id="mediaTagImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0; -fx-border-color: black;" styleClass="jfx-button4">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -92,7 +92,7 @@
                                           <Insets />
                                        </StackPane.margin>
                                     </HBox>
-                                    <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
+                                    <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
                                        <graphic>
                                           <FontIcon iconColor="WHITE" iconLiteral="fa-volume-up" iconSize="32" />
                                        </graphic>
@@ -105,10 +105,10 @@
                                  <items>
                                     <BorderPane fx:id="discBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" SplitPane.resizableWithParent="false">
                                        <center>
-                                          <StackPane fx:id="diskStackPane" BorderPane.alignment="CENTER" />
+                                          <StackPane fx:id="diskStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
                                        </center>
                                        <top>
-                                          <StackPane fx:id="diskStackPane1" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                                          <StackPane fx:id="diskStackPane1" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                                              <children>
                                                 <FlowPane alignment="CENTER" hgap="5.0" prefWidth="382.0" style="-fx-background-color: transparent;" vgap="5.0">
                                                    <children>
@@ -327,7 +327,7 @@
                               </SplitPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <center>
@@ -556,7 +556,7 @@
                                     <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic>
                               </Label>
-                              <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="jfx-button4">
+                              <Button fx:id="emotionsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="jfx-button4">
                                  <tooltip>
                                     <Tooltip text="Express your emotion for this Song" />
                                  </tooltip>
