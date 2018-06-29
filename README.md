@@ -14,7 +14,7 @@ Some futuristic features that are coming :
 
 | Installer | Windows x64 | MacOS x64| Linux x64 |
 | ------- | :-----: | :-: | :-----: |
-| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X | X |
+| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X (coming soon) | X (coming soon) |
 
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
