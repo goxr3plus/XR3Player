@@ -3,33 +3,29 @@
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-  <items>
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
       <MenuItem fx:id="createLibrary" mnemonicParsing="false" text="Create + Open New Library">
          <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/plus.png" />
-               </image>
-            </ImageView>
+            <FontIcon iconColor="#d4ff00" iconLiteral="typ-plus" iconSize="24" selectionEnd="0" />
          </graphic>
       </MenuItem>
-    <MenuItem fx:id="showTheLibrary" mnemonicParsing="false" text="Show me the Library">
+      <MenuItem fx:id="showTheLibrary" mnemonicParsing="false" text="Show me the Library">
          <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/eye2.png" />
-               </image>
-            </ImageView>
-         </graphic></MenuItem>
+            <FontIcon fx:id="visualizerEyeIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+         </graphic>
+      </MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
       <MenuItem fx:id="closeOtherTabs" mnemonicParsing="false" text="Close other Tabs" />
       <MenuItem fx:id="closeTabsRight" mnemonicParsing="false" text="Close Tabs to the Right" />
       <MenuItem fx:id="closeTabsLeft" mnemonicParsing="false" text="Close Tabs to the Left" />
       <SeparatorMenuItem mnemonicParsing="false" />
-      <MenuItem fx:id="closeTab" mnemonicParsing="false" text="Close Tab" />
-  </items>
+      <MenuItem fx:id="closeTab" mnemonicParsing="false" text="Close Tab">
+         <graphic>
+            <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+         </graphic>
+      </MenuItem>
+   </items>
 </fx:root>

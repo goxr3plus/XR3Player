@@ -117,7 +117,7 @@ public class DownloadService extends Service<Boolean> {
 								//System.out.println( ( completed * 100 ) / totalSize + " %")
 								
 								//this.updateProgress(completed, totalSize)
-							});) {
+							})) {
 								
 						//FileOutputStream
 						System.out.println("Downloading .... " + dropBoxFilePath);
@@ -137,7 +137,7 @@ public class DownloadService extends Service<Boolean> {
 					//Create DbxDownloader
 					try (DbxDownloader<DownloadZipResult> dl = client.files().downloadZip(dropBoxFilePath);
 							//FileOutputStream
-							FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);) {
+							FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath)) {
 						
 						//FileOutputStream
 						System.out.println("Downloading .... " + dropBoxFilePath);
@@ -145,10 +145,6 @@ public class DownloadService extends Service<Boolean> {
 						//Add a progress Listener
 						dl.download(fOut);
 						
-						//Fast way...
-						//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
-						//DbxRawClientV2 rawClient = new DbxRawClientV2(config,dropBoxViewer.getAccessToken())
-						//DbxUserFilesRequests r = new DbxUserFilesRequests(client)
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}

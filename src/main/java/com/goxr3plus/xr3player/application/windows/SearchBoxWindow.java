@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,7 +53,7 @@ public class SearchBoxWindow extends BorderPane {
 	
 	/** The close. */
 	@FXML
-	private Button close;
+	private JFXButton close;
 	
 	// -------------------------------------------------------------
 	

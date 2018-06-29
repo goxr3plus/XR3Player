@@ -552,7 +552,7 @@
                                     </MenuButton>
                                  </children>
                               </HBox>
-                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="29.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player" HBox.hgrow="ALWAYS">
+                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="29.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player " HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic>
