@@ -5,6 +5,8 @@ package main.java.com.goxr3plus.xr3player.application.presenter.custom;
 
 import java.util.ArrayList;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -28,6 +30,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
@@ -82,6 +85,11 @@ public class DJDisc extends StackPane {
 	
 	/** The fade. */
 	private final FadeTransition fade;
+	
+	/**
+	 * Default Font Icon
+	 */
+	private final FontIcon noAlbumImageFontIcon = JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 16);
 	
 	/** The image view. */
 	private final ImageView imageView = new ImageView();
@@ -174,6 +182,7 @@ public class DJDisc extends StackPane {
 		// rotation transform starting at 0 degrees, rotating about pivot point
 		rotationTransf = new Rotate(0, perimeter / 2.00 - 10, perimeter / 2.00 - 10);
 		imageView.getTransforms().add(rotationTransf);
+		imageView.setMouseTransparent(true);
 		
 		// rotate a square using time line attached to the rotation transform's
 		// angle property.
@@ -181,12 +190,12 @@ public class DJDisc extends StackPane {
 		rotationAnimation.setCycleCount(Animation.INDEFINITE);
 		//rotationAnimation.play()
 		
-		// When no album image exists this Label is shown
-		Label noAlbumImageLabel = new Label("-");
-		noAlbumImageLabel.setStyle("-fx-text-fill:white; -fx-font-weight:bold;");
-		noAlbumImageLabel.visibleProperty().bind(imageView.imageProperty().isNull());
+		// When no album image exists
+		noAlbumImageFontIcon.setIconColor(arcColor);
+		noAlbumImageFontIcon.visibleProperty().bind(imageView.imageProperty().isNull());
+		noAlbumImageFontIcon.setMouseTransparent(true);
 		
-		getChildren().addAll(canvas, imageView, noAlbumImageLabel);
+		getChildren().addAll(canvas, imageView, noAlbumImageFontIcon);
 		
 		// MouseListeners
 		//canvas.setOnMousePressed(m -> canvas.setCursor(Cursor.CLOSED_HAND))
@@ -266,6 +275,9 @@ public class DJDisc extends StackPane {
 		imageView.setFitWidth(discPerimeter - 2 * val);
 		imageView.setFitHeight(discPerimeter - 2 * val);
 		imageView.setClip(new Circle(discRadius - 2 * val, discRadius - 2 * val, discRadius - 2 * val));
+		
+		//Font Icon
+		noAlbumImageFontIcon.setIconSize((int) ( imageView.getFitWidth()/1.05 ));
 		
 		//rotationTransformation
 		rotationTransf.setPivotX(discPerimeter / 2.00 - 2 * val);
