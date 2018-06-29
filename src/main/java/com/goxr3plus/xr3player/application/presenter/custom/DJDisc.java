@@ -183,6 +183,11 @@ public class DJDisc extends StackPane {
 		rotationTransf = new Rotate(0, perimeter / 2.00 - 10, perimeter / 2.00 - 10);
 		imageView.getTransforms().add(rotationTransf);
 		imageView.setMouseTransparent(true);
+		imageView.visibleProperty().bind(imageView.imageProperty().isNotNull());
+		imageView.visibleProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue)
+				resizeDisc(localPerimeter);
+		});
 		
 		// rotate a square using time line attached to the rotation transform's
 		// angle property.
@@ -194,6 +199,10 @@ public class DJDisc extends StackPane {
 		noAlbumImageFontIcon.setIconColor(arcColor);
 		noAlbumImageFontIcon.visibleProperty().bind(imageView.imageProperty().isNull());
 		noAlbumImageFontIcon.setMouseTransparent(true);
+		noAlbumImageFontIcon.visibleProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue)
+				resizeDisc(localPerimeter);
+		});
 		
 		getChildren().addAll(canvas, imageView, noAlbumImageFontIcon);
 		
@@ -215,6 +224,8 @@ public class DJDisc extends StackPane {
 		listeners.add(listener);
 	}
 	
+	private int localPerimeter;
+	
 	/**
 	 * Resizes the disc to the given values.
 	 *
@@ -229,6 +240,7 @@ public class DJDisc extends StackPane {
 			return;
 		
 		int perimeter = (int) Math.round(perimeterr);
+		localPerimeter = perimeter;
 		
 		//Disc radius
 		double radius = perimeter / 2.00;
@@ -267,17 +279,21 @@ public class DJDisc extends StackPane {
 		smallCirclePerimeter = newPerimeter;
 		minus = smallCirclePerimeter - 1;
 		minus2 = smallCirclePerimeter + 3;
-		
-		// ImageView
 		int val = smallCirclePerimeter;
-		imageView.setTranslateX(val);
-		imageView.setTranslateY(val);
-		imageView.setFitWidth(discPerimeter - 2 * val);
-		imageView.setFitHeight(discPerimeter - 2 * val);
-		imageView.setClip(new Circle(discRadius - 2 * val, discRadius - 2 * val, discRadius - 2 * val));
+		int width = discPerimeter - 2 * val;
+		
+		// ImageView	
+		if (imageView.isVisible()) {
+			imageView.setTranslateX(val);
+			imageView.setTranslateY(val);
+			imageView.setFitWidth(width);
+			imageView.setFitHeight(discPerimeter - 2 * val);
+			imageView.setClip(new Circle(discRadius - 2 * val, discRadius - 2 * val, discRadius - 2 * val));
+		}
 		
 		//Font Icon
-		noAlbumImageFontIcon.setIconSize((int) ( imageView.getFitWidth()/1.05 ));
+		if (noAlbumImageFontIcon.isVisible())
+			noAlbumImageFontIcon.setIconSize((int) ( width / 1.05 ));
 		
 		//rotationTransformation
 		rotationTransf.setPivotX(discPerimeter / 2.00 - 2 * val);
