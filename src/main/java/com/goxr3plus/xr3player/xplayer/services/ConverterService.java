@@ -175,7 +175,7 @@ public class ConverterService extends Service<Boolean> {
 		public void progress(int p) {
 			
 			double progress = p / 1000.00;
-			System.out.println(progress);
+			//System.out.println(progress);
 			
 			Platform.runLater(() -> convertProgress.set(progress));
 			//      ConverterFrame.this.encodingProgressLabel.setText(progress + "%");
