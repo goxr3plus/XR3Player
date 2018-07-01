@@ -1,7 +1,11 @@
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
-XR3Player is the most advanced JavaFX Media Player you will find out there , it compares or even is faster and more complete than most professional desktop media players which have been out there for years .
+XR3Player is the most advanced JavaFX Media Player . It is growing with every release , hopefully one day it will dominate the media players market.
 
-It is a new project which is meant to be very very big. I will add personal assistant AI , Online Account etc.
+Some futuristic features that are coming :
+1) Personal assistant AI 
+2) Online Accounts with subscription
+3) Home music assistant through AI
+4) Home visualizations through lights 
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
@@ -10,7 +14,7 @@ It is a new project which is meant to be very very big. I will add personal assi
 
 | Installer | Windows x64 | MacOS x64| Linux x64 |
 | ------- | :-----: | :-: | :-----: |
-| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X | X |
+| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X (coming soon) | X (coming soon) |
 
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
