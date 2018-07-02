@@ -1,6 +1,5 @@
 package main.java.com.goxr3plus.xr3player.speechrecognition;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +26,7 @@ public class GoogleSpeechTest {
 	
 	private final Microphone microphone = new Microphone(Type.WAVE);
 	private AudioInputStream audio = null;
+	private boolean stopSpeechRecognition;
 	
 	public GoogleSpeechTest() {
 		
@@ -63,6 +63,8 @@ public class GoogleSpeechTest {
 	 * Start sending audio to Google Cloud Speech Recognition Servers
 	 */
 	public void initGoogleSpeechClient() {
+		System.out.println("Entered ...initGoogleSpeechClient");
+		stopSpeechRecognition = false;
 		
 		//Send audio from Microphone to Google Servers and return Text
 		try (SpeechClient client = SpeechClient.create()) {
@@ -83,6 +85,8 @@ public class GoogleSpeechTest {
 				
 				public void onError(Throwable t) {
 					System.err.println(t);
+					//stopSpeechRecognition = true;
+					//initGoogleSpeechClient();
 				}
 			};
 			
@@ -97,46 +101,48 @@ public class GoogleSpeechTest {
 			clientStream.send(request);
 			
 			//Infinity loop from microphone
-			while (true) {
+			while (!stopSpeechRecognition) {
 				byte[] data = new byte[10];
 				try {
 					audio.read(data);
-				} catch (IOException e) {
-					System.out.println(e);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 				request = StreamingRecognizeRequest.newBuilder().setAudioContent(ByteString.copyFrom(data)).build();
 				clientStream.send(request);
 			}
 			
 		} catch (Exception ex) {
-			System.out.println(ex);
+			ex.printStackTrace();
 		}
+		
+		System.out.println("Exited initGoogleSpeechClient");
 	}
 	
 	/**
 	 * Checks if the Microphone is available
 	 */
 	public static void checkMicrophoneAvailability() {
-		enumerateMicrophones().forEach((string , info) -> {
-			System.out.println("Name :" + string);
-		});
+		System.out.println("Available Microphones : [ " + enumerateMicrophones().size() + " ]");
+		
+		enumerateMicrophones().forEach((mixer , info) -> System.out
+				.println("\nName : " + mixer.getName() + " , Description : " + mixer.getDescription() + " , Vendor : " + mixer.getVendor() + " , Version : " + mixer.getVersion()));
 	}
 	
 	/**
 	 * Generates a hashmap to simplify the microphone selection process. The keyset is the name of the audio device's Mixer The value is the first
 	 * lineInfo from that Mixer.
 	 * 
-	 * @author Aaron Gokaslan (Skylion)
 	 * @return The generated hashmap
 	 */
-	public static HashMap<String,Line.Info> enumerateMicrophones() {
-		HashMap<String,Line.Info> out = new HashMap<String,Line.Info>();
+	public static HashMap<Mixer.Info,Line.Info> enumerateMicrophones() {
+		HashMap<Mixer.Info,Line.Info> out = new HashMap<>();
 		Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
 		for (Mixer.Info info : mixerInfos) {
 			Mixer m = AudioSystem.getMixer(info);
 			Line.Info[] lineInfos = m.getTargetLineInfo();
 			if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class))//Only adds to hashmap if it is audio input device
-				out.put(info.getName(), lineInfos[0]);//Please enjoy my pun
+				out.put(info, lineInfos[0]);//Please enjoy my pun
 		}
 		return out;
 	}
