@@ -321,6 +321,14 @@
 			<artifactId>tritonus-share</artifactId>
 			<version>0.3.7.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/tritonus-all -->
+		<dependency>
+			<groupId>com.googlecode.soundlibs</groupId>
+			<artifactId>tritonus-all</artifactId>
+			<version>0.3.7.2</version>
+		</dependency>
+
+
 		<!-- AUDIO EXPERIMENTAL TESTS -->
 		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
 			<version>0.3.7.2</version> </dependency> -->

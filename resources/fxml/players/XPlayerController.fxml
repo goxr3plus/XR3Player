@@ -201,6 +201,21 @@
                                              </padding>
                                           </StackPane>
                                        </top>
+                                       <right>
+                                          <StackPane fx:id="diskStackPane11" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                                             <padding>
+                                                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                             </padding>
+                                             <children>
+                                                <Slider fx:id="speedSlider" max="8.0" maxHeight="200.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" value="4.0">
+                                                   <styleClass>
+                                                      <String fx:value="transparency-slider" />
+                                                      <String fx:value="transparency-slider2" />
+                                                   </styleClass>
+                                                </Slider>
+                                             </children>
+                                          </StackPane>
+                                       </right>
                                     </BorderPane>
                                     <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>

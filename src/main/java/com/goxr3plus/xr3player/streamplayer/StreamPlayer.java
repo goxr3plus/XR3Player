@@ -51,7 +51,7 @@ import javazoom.spi.PropertiesContainer;
 import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerException.PlayerException;
 
 /**
- * StreamPlayer is a class based on JavaSound API. It has been successfully tested under JSE 1.8.x.
+ * StreamPlayer is a class based on JavaSound API. It has been successfully tested under JSE 1.9.x.
  */
 /**
  * @author GOXR3PLUS (www.goxr3plus.co.nf)
@@ -418,13 +418,63 @@ public class StreamPlayer implements Callable<Void> {
 	
 	/** The frame size. */
 	// private int frameSize
+	private double speedFactor = 1;
+	
+	public void setSpeedFactor(double speedFactor) throws LineUnavailableException, StreamPlayerException {
+		this.speedFactor = speedFactor;
+		
+		AudioFormat sourceFormat = audioInputStream.getFormat();
+		
+		logger.info(() -> "Create Line : Source format : " + sourceFormat + "\n");
+		
+		// Calculate the Sample Size in bits
+		int nSampleSizeInBits = sourceFormat.getSampleSizeInBits();
+		if (sourceFormat.getEncoding() == AudioFormat.Encoding.ULAW || sourceFormat.getEncoding() == AudioFormat.Encoding.ALAW || nSampleSizeInBits <= 0
+				|| nSampleSizeInBits != 8)
+			nSampleSizeInBits = 16;
+		
+		AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, (float) ( sourceFormat.getSampleRate() * speedFactor ), nSampleSizeInBits,
+				sourceFormat.getChannels(), nSampleSizeInBits / 8 * sourceFormat.getChannels(), sourceFormat.getSampleRate(), false);
+		
+		// int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
+		
+		logger.info(() -> "Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate=" + targetFormat.getFrameRate() + ",Bit Rate=" + targetFormat.getSampleSizeInBits()
+				+ "Target format: " + targetFormat + "\n");
+		
+		// Keep a reference on encoded stream to progress notification.
+		encodedAudioInputStream = audioInputStream;
+		
+		// Create decoded Stream
+		audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
+		DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(), AudioSystem.NOT_SPECIFIED);
+		if (!AudioSystem.isLineSupported(lineInfo))
+			throw new StreamPlayerException(PlayerException.LINE_NOT_SUPPORTED);
+		
+		//----------About the mixer
+		if (mixerName == null)
+			// Primary Sound Driver
+			mixerName = getMixers().get(0);
+		
+		//Continue
+		Mixer mixer = getMixer(mixerName);
+		if (mixer == null) {
+			sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
+			mixerName = null;
+		} else {
+			logger.info("Mixer: " + mixer.getMixerInfo());
+			sourceDataLine = (SourceDataLine) mixer.getLine(lineInfo);
+		}
+		
+		sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
+		
+	}
 	
 	/**
 	 * Inits a DateLine.<br>
 	 * 
 	 * From the AudioInputStream, i.e. from the sound file, we fetch information about the format of the audio data. These information include the
-	 * sampling frequency, the number of channels and the size of the samples. There information are needed to ask JavaSound for a suitable output
-	 * line for this audio file. Furthermore, we have to give JavaSound a hint about how big the internal buffer for the line should be. Here, we say
+	 * sampling frequency, the number of channels and the size of the samples. There information are needed to ask JavaSound for a suitable output line
+	 * for this audio file. Furthermore, we have to give JavaSound a hint about how big the internal buffer for the line should be. Here, we say
 	 * AudioSystem.NOT_SPECIFIED, signaling that we don't care about the exact size. JavaSound will use some default value for the buffer size.
 	 *
 	 * @throws LineUnavailableException
@@ -448,8 +498,8 @@ public class StreamPlayer implements Callable<Void> {
 					|| nSampleSizeInBits != 8)
 				nSampleSizeInBits = 16;
 			
-			AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, sourceFormat.getSampleRate(), nSampleSizeInBits, sourceFormat.getChannels(),
-					nSampleSizeInBits / 8 * sourceFormat.getChannels(), sourceFormat.getSampleRate(), false);
+			AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, (float) ( sourceFormat.getSampleRate() * speedFactor ), nSampleSizeInBits,
+					sourceFormat.getChannels(), nSampleSizeInBits / 8 * sourceFormat.getChannels(), sourceFormat.getSampleRate(), false);
 			
 			// int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
 			
@@ -1167,8 +1217,8 @@ public class StreamPlayer implements Callable<Void> {
 	}
 	
 	/**
-	 * Set SourceDataLine buffer size. It affects audio latency. (the delay between line.write(data) and real sound). Minimum value should be over
-	 * 10000 bytes.
+	 * Set SourceDataLine buffer size. It affects audio latency. (the delay between line.write(data) and real sound). Minimum value should be over 10000
+	 * bytes.
 	 * 
 	 * @param size
 	 *            -1 means maximum buffer size available.
@@ -1216,8 +1266,8 @@ public class StreamPlayer implements Callable<Void> {
 	}
 	
 	/**
-	 * Represents a control for the relative balance of a stereo signal between two stereo speakers. The valid range of values is -1.0 (left channel
-	 * only) to 1.0 (right channel only). The default is 0.0 (centered).
+	 * Represents a control for the relative balance of a stereo signal between two stereo speakers. The valid range of values is -1.0 (left channel only)
+	 * to 1.0 (right channel only). The default is 0.0 (centered).
 	 *
 	 * @param fBalance
 	 *            the new balance

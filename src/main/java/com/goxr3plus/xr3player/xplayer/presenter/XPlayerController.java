@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.LineUnavailableException;
+
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
@@ -186,16 +188,22 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button forwardButton;
 	
 	@FXML
+	private StackPane diskStackPane11;
+	
+	@FXML
+	private Slider speedSlider;
+	
+	@FXML
 	private StackPane visualizerStackTopParent;
 	
 	@FXML
 	private StackPane visualizerStackPane;
 	
 	@FXML
-	private Label playerStatusLabel;
+	private Label visualizerLabel;
 	
 	@FXML
-	private Label visualizerLabel;
+	private Label playerStatusLabel;
 	
 	@FXML
 	private JFXButton visualizerVisibleLabel;
@@ -282,25 +290,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Label smVolumeSliderLabel;
 	
 	@FXML
-	private Button emotionsButton;
-	
-	@FXML
-	private Label topInfoLabel;
-	
-	@FXML
 	private ToggleButton modeToggle;
 	
 	@FXML
 	private ToggleButton historyToggle;
-	
-	@FXML
-	private ToggleButton muteButton;
-	
-	@FXML
-	private Button extendPlayer;
-	
-	@FXML
-	private StackedFontIcon sizeStackedFontIcon;
 	
 	@FXML
 	private Button showMenu;
@@ -315,6 +308,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private MenuButton transferMedia;
 	
 	@FXML
+	private Label topInfoLabel;
+	
+	@FXML
+	private Button emotionsButton;
+	
+	@FXML
+	private Button extendPlayer;
+	
+	@FXML
+	private StackedFontIcon sizeStackedFontIcon;
+	
+	@FXML
 	private VBox volumeBarBox;
 	
 	@FXML
@@ -327,13 +332,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button smMinimizeVolume;
 	
 	@FXML
+	private ToggleButton muteButton;
+	
+	@FXML
 	private StackPane regionStackPane;
 	
 	@FXML
-	private ProgressBar progressBar;
+	private Label playerLoadingLabel;
 	
 	@FXML
-	private Label playerLoadingLabel;
+	private ProgressBar progressBar;
 	
 	@FXML
 	private Label dragAndDropLabel;
@@ -343,7 +351,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private JFXButton focusXPlayerWindow;
-	
 	// -----------------------------------------------------------------------------
 	
 	/** A Fade Transition */
@@ -909,7 +916,26 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
+		//speedSlider
+		speedSlider.valueProperty().addListener(l -> {
+			int current_second = this.xPlayerModel.getCurrentTime();
+			//xPlayer.stop();
+			double value = speedSlider.getValue() / 4.0;
+			try {
+				xPlayer.setSpeedFactor(value);
+			} catch (LineUnavailableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (StreamPlayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Speed ..." + value);
+			//seek(current_second);
+		});
+		
 	}
+	
 	
 	/**
 	 * Check's if disc rotation is allowed or not and based on player status it start's it or stops it
