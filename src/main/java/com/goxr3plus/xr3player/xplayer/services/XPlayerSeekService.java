@@ -43,6 +43,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 		this.xPlayerController = xPlayerController;
 		setOnSucceeded(s -> done());
 		setOnFailed(f -> done());
+		setOnCancelled(f -> done());
 		
 	}
 	
@@ -134,7 +135,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 				
 				// ----------------------- Seek the Media
 				updateMessage(!xPlayerController.speedIncreaseWorking ? "Skipping the Audio"
-						: "Speed Level : x" + InfoTool.getMinString2(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 3));
+						: "Speed Level : x" + InfoTool.getMinString2(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 4));
 				
 				//Stop?
 				if (stopPlayer)

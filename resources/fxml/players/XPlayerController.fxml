@@ -203,12 +203,17 @@
                                                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                              </padding>
                                              <children>
-                                                <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="16.0" maxHeight="200.0" minHeight="0.0" minWidth="0.0" minorTickCount="8" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" showTickMarks="true" snapToTicks="true" value="8.0">
-                                                   <styleClass>
-                                                      <String fx:value="transparency-slider" />
-                                                      <String fx:value="transparency-slider2" />
-                                                   </styleClass>
-                                                </Slider>
+                                                <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" prefWidth="50.0" StackPane.alignment="CENTER">
+                                                   <children>
+                                                      <Label fx:id="speedLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 15; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="+1.85" />
+                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
+                                                         <styleClass>
+                                                            <String fx:value="transparency-slider" />
+                                                            <String fx:value="transparency-slider2" />
+                                                         </styleClass>
+                                                      </Slider>
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </StackPane>
                                        </right>
@@ -606,7 +611,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+                        <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="300.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="transparency-slider" />
                               <String fx:value="transparency-slider2" />
@@ -620,7 +625,7 @@
                               <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="28" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
-                              <Insets top="8.0" />
+                              <Insets bottom="5.0" top="8.0" />
                            </VBox.margin>
                         </Button>
                         <ToggleButton fx:id="muteButton" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3">

@@ -193,6 +193,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private StackPane speedSliderStackPane;
 	
 	@FXML
+	private Label speedLabel;
+	
+	@FXML
 	private Slider speedSlider;
 	
 	@FXML
@@ -933,22 +936,27 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			
 			//Make some transformations
 			if (intValue > speedSliderHalf) {
-				speedFactor = value / ( speedSliderHalf /1.5);
+				speedFactor = value / ( speedSliderHalf / 1 );
 			} else if (intValue < speedSliderHalf && intValue != 0) {
 				speedFactor = value / speedSliderHalf;
 			} else if (intValue == 0) {
-				speedFactor = 0.1;
+				speedFactor = 0.05;
 			}
 			
-			System.out.println(Math.ceil(speedSlider.getValue()) + " , " + value + " , Speed Factor : " + speedFactor);
+			//System.out.println(Math.ceil(speedSlider.getValue()) + " , " + value + " , Speed Factor : " + speedFactor);
+			
+			//SpeedLabel
+			speedLabel.setText( ( speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString(String.valueOf(speedFactor), 4));
 			
 			//Do it!
 			xPlayer.setSpeedFactor(speedFactor);
-			if (xPlayer.isPausedOrPlaying())
+			if (xPlayer.isPausedOrPlaying()) {
+				seekService.cancel();
 				seek(0);
+			}
 		});
 		
-		speedSlider.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ) ))));	
+		speedSlider.setOnScroll(scroll -> setVolume((int) Math.ceil(speedSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ))));
 	}
 	
 	/**
@@ -1413,7 +1421,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 				}
 		});
-		discBorderPane.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
+		diskStackPane.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
 		
 		///smTimeSlider
 		smTimeSlider.setOnMouseMoved(m -> {
