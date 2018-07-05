@@ -946,7 +946,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//System.out.println(Math.ceil(speedSlider.getValue()) + " , " + value + " , Speed Factor : " + speedFactor);
 			
 			//SpeedLabel
-			speedLabel.setText( ( speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString(String.valueOf(speedFactor), 4));
+			speedLabel.setText( ( speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString2(String.valueOf(speedFactor), 4));
 			
 			//Do it!
 			xPlayer.setSpeedFactor(speedFactor);
@@ -956,7 +956,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			}
 		});
 		
-		speedSlider.setOnScroll(scroll -> setVolume((int) Math.ceil(speedSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ))));
+		speedSlider.setOnScroll(scroll -> speedSlider.setValue((int) Math.ceil(speedSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ))));
 	}
 	
 	/**
