@@ -145,19 +145,15 @@
                                                       <HBox alignment="CENTER" spacing="5.0">
                                                          <children>
                                                             <Button fx:id="playPauseButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
-                                                               <graphic>
-                                                                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/play.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
                                                                <tooltip>
                                                                   <Tooltip text="Play-Resume" />
                                                                </tooltip>
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
+                                                               <graphic>
+                                                                  <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                               </graphic>
                                                             </Button>
                                                             <Button fx:id="stopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
                                                                <cursor>
@@ -167,7 +163,7 @@
                                                                   <Tooltip text="Stop" />
                                                                </tooltip>
                                                                <graphic>
-                                                                  <FontIcon iconColor="WHITE" iconLiteral="typ-media-stop" iconSize="32" selectionEnd="0" selectionStart="0" />
+                                                                  <FontIcon iconColor="WHITE" iconLiteral="fa-stop" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                                </graphic>
                                                             </Button>
                                                          </children>
@@ -399,19 +395,15 @@
                                                 <HBox alignment="CENTER" spacing="5.0">
                                                    <children>
                                                       <Button fx:id="smPlayPauseButton" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" styleClass="dark-round-jfx-button">
-                                                         <graphic>
-                                                <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../image/play.png" />
-                                                   </image>
-                                                </ImageView>
-                                                         </graphic>
                                                          <tooltip>
                                                 <Tooltip text="Play-Resume" />
                                                          </tooltip>
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="32" selectionEnd="0" selectionStart="0" />
+                                                         </graphic>
                                                       </Button>
                                           <Button fx:id="smStopButton" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
                                              <cursor>
@@ -421,7 +413,7 @@
                                                 <Tooltip text="Stop" />
                                              </tooltip>
                                                          <graphic>
-                                                            <FontIcon iconColor="WHITE" iconLiteral="typ-media-stop" iconSize="32" selectionEnd="0" selectionStart="0" />
+                                                            <FontIcon iconColor="WHITE" iconLiteral="fa-stop" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                          </graphic>
                                           </Button>
                                                    </children>

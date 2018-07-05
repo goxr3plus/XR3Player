@@ -103,8 +103,10 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVis
  */
 public class XPlayerController extends StackPane implements DJFilterListener, StreamPlayerListener {
 	
-	public static final Image playImage = InfoTool.getImageFromResourcesFolder("play.png");
-	public static final Image pauseImage = InfoTool.getImageFromResourcesFolder("pause.png");
+	private final FontIcon playIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 24);
+	private final FontIcon smPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 32);
+	private final FontIcon pauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 24);
+	private final FontIcon smPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 32);
 	private static final XPlayerControllerContextMenu contextMenu = new XPlayerControllerContextMenu();
 	
 	//-----------------------------------------------
@@ -791,9 +793,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			else
 				playOrReplay();
 			
-			//Fix fast the image
-			( (ImageView) playPauseButton.getGraphic() ).setImage(xPlayer.isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
-			( (ImageView) smPlayPauseButton.getGraphic() ).setImage(xPlayer.isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+			//Advanced Mode
+			playPauseButton.setGraphic(xPlayer.isPlaying() ? pauseIcon : playIcon);
+			
+			//Simple Mode
+			smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
 		});
 		smPlayPauseButton.setOnAction(playPauseButton.getOnAction());
 		
@@ -935,7 +939,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		});
 		
 	}
-	
 	
 	/**
 	 * Check's if disc rotation is allowed or not and based on player status it start's it or stops it
@@ -1873,10 +1876,10 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		if (status == Status.STOPPED || status == Status.RESUMED || status == Status.PLAYING || status == Status.PAUSED)
 			Platform.runLater(() -> {
 				//Advanced Mode
-				( (ImageView) getPlayPauseButton().getGraphic() ).setImage(getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+				playPauseButton.setGraphic(xPlayer.isPlaying() ? pauseIcon : playIcon);
 				
-				//SmMode
-				( (ImageView) getSmPlayPauseButton().getGraphic() ).setImage(getxPlayer().isPlaying() ? XPlayerController.pauseImage : XPlayerController.playImage);
+				//Simple Mode
+				smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
 			});
 	}
 	

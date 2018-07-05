@@ -60,7 +60,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import main.java.com.goxr3plus.xr3player.application.database.DbManager;
+import main.java.com.goxr3plus.xr3player.application.database.DatabaseManager;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.database.services.VacuumProgressService;
 import main.java.com.goxr3plus.xr3player.application.modes.djmode.DJMode;
@@ -261,7 +261,7 @@ public class Main extends Application {
 	// --------------START: The below have dependencies on others------------------------
 	
 	/** The Constant dbManager. */
-	public static DbManager dbManager = new DbManager();
+	public static DatabaseManager dbManager = new DatabaseManager();
 	
 	/** The Constant libraryMode. */
 	public static LibraryMode libraryMode;

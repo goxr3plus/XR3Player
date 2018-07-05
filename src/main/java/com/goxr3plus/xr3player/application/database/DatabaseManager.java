@@ -45,7 +45,7 @@ import java.util.stream.Stream;
  *
  * @author GOXR3PLUS
  */
-public class DbManager {
+public class DatabaseManager {
 	
 	/** The connection 1. */
 	private Connection connection;
@@ -122,7 +122,7 @@ public class DbManager {
 	 */
 	public void initialize(String userName) {
 		
-		// Initialise
+		// Initialize
 		InfoTool.setUserName(userName);
 		
 		//Create the settingsFolder
