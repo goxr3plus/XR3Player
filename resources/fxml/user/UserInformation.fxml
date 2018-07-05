@@ -36,12 +36,12 @@
                               </Label>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Delete">
+                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Delete">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <graphic>
-                                          <FontIcon iconColor="#fc5e5e" iconLiteral="typ-delete" iconSize="24" />
+                                          <FontIcon iconColor="#fc5e5e" iconLiteral="fas-times" iconSize="24" />
                                        </graphic>
                                     </JFXButton>
                                     <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" style="-fx-text-fill: white;" text="Rename" visible="false">
