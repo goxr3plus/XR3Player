@@ -69,10 +69,7 @@ public class DatabaseExportService extends Service<Boolean> {
 		});
 		
 		//Cancelled
-		setOnCancelled(c -> {
-			done();
-			showErrorNotification("Service Cancelled");
-		});
+		setOnCancelled(c -> done());
 		
 		//Set Cancel Action
 		Main.updateScreen.getCancelButton().setDisable(false);
@@ -81,12 +78,13 @@ public class DatabaseExportService extends Service<Boolean> {
 		//Restart the Service
 		restart();
 		
-		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.SUCCESS);
-		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
-		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.CONFIRM);
-		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.INFORMATION);
-		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.WARNING);
-		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.SIMPLE);
+		//Testing notifications :)
+		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.SUCCESS)
+		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.ERROR)
+		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.CONFIRM)
+		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.INFORMATION)
+		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.WARNING)
+		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.SIMPLE)
 		
 	}
 	
