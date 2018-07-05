@@ -949,11 +949,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			speedLabel.setText( ( speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString2(String.valueOf(speedFactor), 4));
 			
 			//Do it!
-			xPlayer.setSpeedFactor(speedFactor);
-			if (xPlayer.isPausedOrPlaying()) {
-				speedIncreaseWorking = true;
-				seekService.cancel();
-				seek(0);
+			if (xPlayer.getSpeedFactor() != speedFactor) {
+				xPlayer.setSpeedFactor(speedFactor);
+				if (xPlayer.isPausedOrPlaying()) {
+					speedIncreaseWorking = true;
+					seekService.cancel();
+					seek(0);
+				}
 			}
 		});
 		
@@ -1979,7 +1981,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		
 		//If second==0
 		if (seconds == 0) {
-			speedIncreaseWorking = true;
 			securityPass = true;
 		}
 		

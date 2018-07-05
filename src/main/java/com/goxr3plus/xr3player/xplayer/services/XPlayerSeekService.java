@@ -57,8 +57,6 @@ public class XPlayerSeekService extends Service<Boolean> {
 	public void startSeekService(long bytesToSkip , boolean stopPlayer) {
 		String absoluteFilePath = xPlayerController.getxPlayerModel().songPathProperty().get();
 		
-		System.out.println("--------------------" + xPlayerController.discIsDragging + "-----------------------");
-		
 		//First security check
 		if (locked || isRunning() || absoluteFilePath == null) {
 			return;
