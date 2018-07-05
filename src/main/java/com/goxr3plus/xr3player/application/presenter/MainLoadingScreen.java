@@ -84,6 +84,8 @@ public class MainLoadingScreen extends StackPane {
 		translate1 = new TranslateTransition(Duration.millis(1000), leftRectangle);
 		translate2 = new TranslateTransition(Duration.millis(1000), rightRectangle);
 		
+		translate1.setOnFinished(f -> rightRectangle.setVisible(false));
+		translate2.setOnFinished(f -> leftRectangle.setVisible(false));
 	}
 	
 	/**

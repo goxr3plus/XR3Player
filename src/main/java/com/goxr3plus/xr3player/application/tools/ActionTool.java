@@ -370,21 +370,25 @@ public final class ActionTool {
 			else
 				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(icon);
 			
+			//Show the notification
 			switch (notificationType) {
 				case CONFIRM:
-					notification1.showConfirm();
+					notification1.graphic(JavaFXTools.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
 					break;
 				case ERROR:
-					notification1.showError();
+					notification1.graphic(JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
 					break;
 				case INFORMATION:
-					notification1.showInformation();
+					notification1.graphic(JavaFXTools.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
 					break;
 				case SIMPLE:
 					notification1.show();
 					break;
 				case WARNING:
-					notification1.showWarning();
+					notification1.graphic(JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
+					break;
+				case SUCCESS:
+					notification1.graphic(JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
 					break;
 				default:
 					break;
@@ -424,21 +428,25 @@ public final class ActionTool {
 			else
 				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(imageView);
 			
+			//Show the notification
 			switch (notificationType) {
 				case CONFIRM:
-					notification1.showConfirm();
+					notification1.graphic(JavaFXTools.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
 					break;
 				case ERROR:
-					notification1.showError();
+					notification1.graphic(JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
 					break;
 				case INFORMATION:
-					notification1.showInformation();
+					notification1.graphic(JavaFXTools.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
 					break;
 				case SIMPLE:
 					notification1.show();
 					break;
 				case WARNING:
-					notification1.showWarning();
+					notification1.graphic(JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
+					break;
+				case SUCCESS:
+					notification1.graphic(JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
 					break;
 				default:
 					break;

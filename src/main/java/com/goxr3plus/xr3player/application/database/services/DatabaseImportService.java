@@ -28,7 +28,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
  * @author SuperGoliath
  *
  */
-public class ExportZipService extends Service<Boolean> {
+public class DatabaseImportService extends Service<Boolean> {
 	
 	/** The input zip. */
 	private String inputZip;
@@ -42,7 +42,7 @@ public class ExportZipService extends Service<Boolean> {
 	/**
 	 * Constructor.
 	 */
-	public ExportZipService() {
+	public DatabaseImportService() {
 		
 		setOnSucceeded(s -> {
 			// done()
@@ -99,6 +99,7 @@ public class ExportZipService extends Service<Boolean> {
 		
 		//Restart the Service
 		restart();
+		
 	}
 	
 	@Override

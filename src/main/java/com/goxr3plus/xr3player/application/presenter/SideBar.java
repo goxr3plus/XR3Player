@@ -24,8 +24,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.database.services.CreateZipService;
-import main.java.com.goxr3plus.xr3player.application.database.services.ExportZipService;
+import main.java.com.goxr3plus.xr3player.application.database.services.DatabaseExportService;
+import main.java.com.goxr3plus.xr3player.application.database.services.DatabaseImportService;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
@@ -141,10 +141,10 @@ public class SideBar extends StackPane {
 	// -------------------------------------------------------------
 	
 	/** The zipper. */
-	public final CreateZipService zipper = new CreateZipService();
+	public final DatabaseExportService zipper = new DatabaseExportService();
 	
 	/** The un zipper. */
-	public final ExportZipService unZipper = new ExportZipService();
+	public final DatabaseImportService unZipper = new DatabaseImportService();
 	
 	//System Monitors for CPU + RAM
 	private final SystemMonitor cpuMonitor = new SystemMonitor(Monitor.CPU);

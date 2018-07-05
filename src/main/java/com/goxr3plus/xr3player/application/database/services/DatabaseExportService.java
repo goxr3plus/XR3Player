@@ -15,11 +15,9 @@ import java.util.zip.ZipOutputStream;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 
 /**
@@ -27,7 +25,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
  *
  * @author SuperGoliath
  */
-public class CreateZipService extends Service<Boolean> {
+public class DatabaseExportService extends Service<Boolean> {
 	
 	/** The file list. */
 	List<String> fileList = new ArrayList<>();
@@ -59,8 +57,7 @@ public class CreateZipService extends Service<Boolean> {
 			
 			// Check the Value
 			if (getValue()) {
-				ActionTool.showFontIconNotification("Completed", "Successfully exported the database", Duration.seconds(3), NotificationType.SIMPLE,
-						JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32));
+				ActionTool.showNotification("Completed", "Successfully exported the database", Duration.seconds(3), NotificationType.SUCCESS);
 			} else
 				showErrorNotification(exception);
 		});
@@ -84,11 +81,18 @@ public class CreateZipService extends Service<Boolean> {
 		//Restart the Service
 		restart();
 		
+		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.SUCCESS);
+		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
+		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.CONFIRM);
+		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.INFORMATION);
+		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.WARNING);
+		ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.SIMPLE);
+		
 	}
 	
 	private void showErrorNotification(String reason) {
-		ActionTool.showFontIconNotification("Failed", "Failed to export database :\n Reason [ " + ( reason.isEmpty() ? "Unknown" : reason ) + "]", Duration.seconds(3),
-				NotificationType.SIMPLE, JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32));
+		ActionTool.showNotification("Failed", "Failed to export database :\n Reason [ " + ( reason.isEmpty() ? "Unknown" : reason ) + "]", Duration.seconds(3),
+				NotificationType.ERROR);
 	}
 	
 	/**
@@ -122,10 +126,8 @@ public class CreateZipService extends Service<Boolean> {
 					for (String file : fileList) {
 						
 						//Check if service is cancelled
-						if (isCancelled()) {
-							System.out.println("Service is cancelled");
+						if (isCancelled())
 							break;
-						}
 						
 						// Refresh the label Text
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("OUT:" + file));
