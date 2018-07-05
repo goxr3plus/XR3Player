@@ -354,45 +354,18 @@ public final class ActionTool {
 	 * @param notificationType
 	 *            The notification type
 	 */
-	public static void showFontIconNotification(String title , String text , Duration d , NotificationType notificationType , FontIcon icon) {
+	public static void showFontIconNotification(String title , String text , Duration duration , NotificationType notificationType , FontIcon icon) {
 		
 		try {
 			
 			//Check if it is JavaFX Application Thread
 			if (!Platform.isFxApplicationThread()) {
-				Platform.runLater(() -> showFontIconNotification(title, text, d, notificationType, icon));
+				Platform.runLater(() -> showFontIconNotification(title, text, duration, notificationType, icon));
 				return;
 			}
 			
-			Notifications notification1;
-			if (icon == null)
-				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition);
-			else
-				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(icon);
-			
 			//Show the notification
-			switch (notificationType) {
-				case CONFIRM:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
-					break;
-				case ERROR:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
-					break;
-				case INFORMATION:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
-					break;
-				case SIMPLE:
-					notification1.show();
-					break;
-				case WARNING:
-					notification1.graphic(JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
-					break;
-				case SUCCESS:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
-					break;
-				default:
-					break;
-			}
+			showNotification2(title, text, duration, notificationType, icon);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -407,55 +380,66 @@ public final class ActionTool {
 	 *            The notification title
 	 * @param text
 	 *            The notification text
-	 * @param d
+	 * @param duration
 	 *            The duration that notification will be visible
 	 * @param notificationType
 	 *            The notification type
 	 */
-	public static void showNotification(String title , String text , Duration d , NotificationType notificationType , ImageView imageView) {
+	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , ImageView imageView) {
 		
 		try {
 			
 			//Check if it is JavaFX Application Thread
 			if (!Platform.isFxApplicationThread()) {
-				Platform.runLater(() -> showNotification(title, text, d, notificationType, imageView));
+				Platform.runLater(() -> showNotification(title, text, duration, notificationType, imageView));
 				return;
 			}
 			
-			Notifications notification1;
-			if (imageView == null)
-				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition);
-			else
-				notification1 = Notifications.create().title(title).text(text).hideAfter(d).darkStyle().position(GeneralSettingsController.notificationPosition).graphic(imageView);
-			
 			//Show the notification
-			switch (notificationType) {
-				case CONFIRM:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
-					break;
-				case ERROR:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
-					break;
-				case INFORMATION:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
-					break;
-				case SIMPLE:
-					notification1.show();
-					break;
-				case WARNING:
-					notification1.graphic(JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
-					break;
-				case SUCCESS:
-					notification1.graphic(JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
-					break;
-				default:
-					break;
-			}
+			showNotification2(title, text, duration, notificationType, imageView);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * Just a helper method for showNotification methods
+	 */
+	private static void showNotification2(String title , String text , Duration duration , NotificationType notificationType , Node graphic) {
+		Notifications notification1;
+		
+		//Set graphic
+		if (graphic == null)
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(GeneralSettingsController.notificationPosition);
+		else
+			notification1 = Notifications.create().title(title).text(text).hideAfter(duration).darkStyle().position(GeneralSettingsController.notificationPosition)
+					.graphic(graphic);
+		
+		//Show the notification
+		switch (notificationType) {
+			case CONFIRM:
+				notification1.graphic(JavaFXTools.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
+				break;
+			case ERROR:
+				notification1.graphic(JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
+				break;
+			case INFORMATION:
+				notification1.graphic(JavaFXTools.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
+				break;
+			case SIMPLE:
+				notification1.show();
+				break;
+			case WARNING:
+				notification1.graphic(JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
+				break;
+			case SUCCESS:
+				notification1.graphic(JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
+				break;
+			default:
+				break;
+		}
 	}
 	
 	/**
