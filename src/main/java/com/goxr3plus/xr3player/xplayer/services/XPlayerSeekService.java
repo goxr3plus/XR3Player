@@ -57,7 +57,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 	public void startSeekService(long bytesToSkip , boolean stopPlayer) {
 		String absoluteFilePath = xPlayerController.getxPlayerModel().songPathProperty().get();
 		
-		System.out.println("--------------------"+xPlayerController.discIsDragging+"-----------------------");
+		System.out.println("--------------------" + xPlayerController.discIsDragging + "-----------------------");
 		
 		//First security check
 		if (locked || isRunning() || absoluteFilePath == null) {
@@ -91,14 +91,17 @@ public class XPlayerSeekService extends Service<Boolean> {
 		this.bytesToSkip = bytesToSkip;
 		
 		// Create Binding
-		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
-		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
+		if (!xPlayerController.speedIncreaseWorking) {
+			xPlayerController.getFxLabel().textProperty().bind(messageProperty());
+			xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
+		}
 		
 		// lock the Service
 		locked = true;
 		
 		// Restart
-		restart();
+		reset();
+		start();
 	}
 	
 	/**
@@ -137,7 +140,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 				boolean succeded = true;
 				
 				// ----------------------- Seek the Media
-				updateMessage(!xPlayerController.speedIncreaseWorking ? "Skipping the Audio"
+				updateMessage(!xPlayerController.speedIncreaseWorking ? "Going to : [ " + InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getCurrentAngleTime()) + " ]"
 						: "Speed Level : x" + InfoTool.getMinString2(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 4));
 				
 				//Stop?

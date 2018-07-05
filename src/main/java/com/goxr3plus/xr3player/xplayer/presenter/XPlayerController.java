@@ -951,6 +951,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			//Do it!
 			xPlayer.setSpeedFactor(speedFactor);
 			if (xPlayer.isPausedOrPlaying()) {
+				speedIncreaseWorking = true;
 				seekService.cancel();
 				seek(0);
 			}
@@ -1226,15 +1227,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			logger.log(Level.INFO, "\n", ex);
 		}
 		
-	}
-	
-	/**
-	 * Checks if the djDisc is being dragged by user.
-	 *
-	 * @return True if disc is being dragged
-	 */
-	public boolean isDiscDragging() {
-		return discIsDragging;
 	}
 	
 	/**
@@ -1701,7 +1693,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			visualizer.writeDSP(pcmdata);
 		
 		//Disc is being draggged?
-		if (!isDiscDragging()) {
+		if (!discIsDragging) {
 			
 			// previousTime = xPlayerUI.xPlayer.currentTime
 			
