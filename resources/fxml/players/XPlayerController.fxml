@@ -198,12 +198,12 @@
                                           </StackPane>
                                        </top>
                                        <right>
-                                          <StackPane fx:id="diskStackPane11" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                                          <StackPane fx:id="speedSliderStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                                              <padding>
                                                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                              </padding>
                                              <children>
-                                                <Slider fx:id="speedSlider" max="8.0" maxHeight="200.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" value="4.0">
+                                                <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="16.0" maxHeight="200.0" minHeight="0.0" minWidth="0.0" minorTickCount="8" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" showTickMarks="true" snapToTicks="true" value="8.0">
                                                    <styleClass>
                                                       <String fx:value="transparency-slider" />
                                                       <String fx:value="transparency-slider2" />

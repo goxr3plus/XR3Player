@@ -190,7 +190,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private Button forwardButton;
 	
 	@FXML
-	private StackPane diskStackPane11;
+	private StackPane speedSliderStackPane;
 	
 	@FXML
 	private Slider speedSlider;
@@ -921,23 +921,34 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
 		//speedSlider
+		double speedSliderHalf = (int) speedSlider.getMax() / 2.0;
+		//speedSlider.disableProperty().bind(seekService.runningProperty())
 		speedSlider.valueProperty().addListener(l -> {
-			int current_second = this.xPlayerModel.getCurrentTime();
-			//xPlayer.stop();
-			double value = speedSlider.getValue() / 4.0;
-			try {
-				xPlayer.setSpeedFactor(value);
-			} catch (LineUnavailableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (StreamPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			//int current_second = this.xPlayerModel.getCurrentTime()
+			double value = Math.round(speedSlider.getValue());
+			int intValue = (int) value;
+			
+			//Normal by default
+			double speedFactor = 1;
+			
+			//Make some transformations
+			if (intValue > speedSliderHalf) {
+				speedFactor = value / ( speedSliderHalf /1.5);
+			} else if (intValue < speedSliderHalf && intValue != 0) {
+				speedFactor = value / speedSliderHalf;
+			} else if (intValue == 0) {
+				speedFactor = 0.1;
 			}
-			System.out.println("Speed ..." + value);
-			//seek(current_second);
+			
+			System.out.println(Math.ceil(speedSlider.getValue()) + " , " + value + " , Speed Factor : " + speedFactor);
+			
+			//Do it!
+			xPlayer.setSpeedFactor(speedFactor);
+			if (xPlayer.isPausedOrPlaying())
+				seek(0);
 		});
 		
+		speedSlider.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ) ))));	
 	}
 	
 	/**
@@ -1588,7 +1599,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private void reCalculateCanvasSize() {
 		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1
 		
-		double size = Math.min(discBorderPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
+		double size = Math.min(discBorderPane.getWidth() - speedSliderStackPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
@@ -1955,6 +1966,8 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	//---------------------------------------------------Player Actions------------------------------------------------------------------
 	
+	public boolean speedIncreaseWorking = false;
+	
 	/**
 	 * Tries to skip forward or backward
 	 * 
@@ -1962,9 +1975,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 *            Seconds to seek
 	 */
 	public void seek(int seconds) {
-		boolean ok = false;
-		if (seconds == 0)
-			return;
+		boolean securityPass = false;
+		
+		//If second==0
+		if (seconds == 0) {
+			speedIncreaseWorking = true;
+			securityPass = true;
+		}
 		
 		//
 		
@@ -1972,16 +1989,16 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			
 			System.out.println("Skipping backwards ...[" + seconds + "] seconds");
 			
-			ok = true;
+			securityPass = true;
 		} else if (seconds > 0 && ( seconds + xPlayerModel.getCurrentTime() <= xPlayerModel.getDuration() )) { //positive seek
 			
 			System.out.println("Skipping forward ...[" + seconds + "] seconds");
 			
-			ok = true;
+			securityPass = true;
 		}
 		
 		//Ok/?
-		if (ok) {
+		if (securityPass) {
 			
 			// Add or Remove
 			xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + seconds);

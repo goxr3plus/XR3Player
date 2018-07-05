@@ -125,6 +125,11 @@ public class StreamPlayer implements Callable<Void> {
 	/** The encoded audio length. */
 	private int encodedAudioLength = -1;
 	
+	/**
+	 * Speed Factor of the Audio
+	 */
+	private double speedFactor = 1;
+	
 	/** The Constant EXTERNAL_BUFFER_SIZE. */
 	private static final int EXTERNAL_BUFFER_SIZE = 4096;
 	
@@ -418,54 +423,61 @@ public class StreamPlayer implements Callable<Void> {
 	
 	/** The frame size. */
 	// private int frameSize
-	private double speedFactor = 1;
 	
-	public void setSpeedFactor(double speedFactor) throws LineUnavailableException, StreamPlayerException {
+	/**
+	 * Change the Speed Rate of the Audio , this variable affects the Sample Rate , for example 1.0 is normal , 0.5 is half the speed and 2.0 is double
+	 * the speed Note that you have to restart the audio for this to take effect
+	 * 
+	 * @param speedFactor
+	 * @throws LineUnavailableException
+	 * @throws StreamPlayerException
+	 */
+	public void setSpeedFactor(double speedFactor) {
 		this.speedFactor = speedFactor;
 		
-		AudioFormat sourceFormat = audioInputStream.getFormat();
-		
-		logger.info(() -> "Create Line : Source format : " + sourceFormat + "\n");
-		
-		// Calculate the Sample Size in bits
-		int nSampleSizeInBits = sourceFormat.getSampleSizeInBits();
-		if (sourceFormat.getEncoding() == AudioFormat.Encoding.ULAW || sourceFormat.getEncoding() == AudioFormat.Encoding.ALAW || nSampleSizeInBits <= 0
-				|| nSampleSizeInBits != 8)
-			nSampleSizeInBits = 16;
-		
-		AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, (float) ( sourceFormat.getSampleRate() * speedFactor ), nSampleSizeInBits,
-				sourceFormat.getChannels(), nSampleSizeInBits / 8 * sourceFormat.getChannels(), sourceFormat.getSampleRate(), false);
-		
-		// int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
-		
-		logger.info(() -> "Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate=" + targetFormat.getFrameRate() + ",Bit Rate=" + targetFormat.getSampleSizeInBits()
-				+ "Target format: " + targetFormat + "\n");
-		
-		// Keep a reference on encoded stream to progress notification.
-		encodedAudioInputStream = audioInputStream;
-		
-		// Create decoded Stream
-		audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
-		DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(), AudioSystem.NOT_SPECIFIED);
-		if (!AudioSystem.isLineSupported(lineInfo))
-			throw new StreamPlayerException(PlayerException.LINE_NOT_SUPPORTED);
-		
-		//----------About the mixer
-		if (mixerName == null)
-			// Primary Sound Driver
-			mixerName = getMixers().get(0);
-		
-		//Continue
-		Mixer mixer = getMixer(mixerName);
-		if (mixer == null) {
-			sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
-			mixerName = null;
-		} else {
-			logger.info("Mixer: " + mixer.getMixerInfo());
-			sourceDataLine = (SourceDataLine) mixer.getLine(lineInfo);
-		}
-		
-		sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
+		//		AudioFormat sourceFormat = audioInputStream.getFormat();
+		//		
+		//		logger.info(() -> "Create Line : Source format : " + sourceFormat + "\n");
+		//		
+		//		// Calculate the Sample Size in bits
+		//		int nSampleSizeInBits = sourceFormat.getSampleSizeInBits();
+		//		if (sourceFormat.getEncoding() == AudioFormat.Encoding.ULAW || sourceFormat.getEncoding() == AudioFormat.Encoding.ALAW || nSampleSizeInBits <= 0
+		//				|| nSampleSizeInBits != 8)
+		//			nSampleSizeInBits = 16;
+		//		
+		//		AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, (float) ( sourceFormat.getSampleRate() * speedFactor ), nSampleSizeInBits,
+		//				sourceFormat.getChannels(), nSampleSizeInBits / 8 * sourceFormat.getChannels(), sourceFormat.getSampleRate(), false);
+		//		
+		//		// int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
+		//		
+		//		logger.info(() -> "Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate=" + targetFormat.getFrameRate() + ",Bit Rate=" + targetFormat.getSampleSizeInBits()
+		//				+ "Target format: " + targetFormat + "\n");
+		//		
+		//		// Keep a reference on encoded stream to progress notification.
+		//		encodedAudioInputStream = audioInputStream;
+		//		
+		//		// Create decoded Stream
+		//		audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
+		//		DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(), AudioSystem.NOT_SPECIFIED);
+		//		if (!AudioSystem.isLineSupported(lineInfo))
+		//			throw new StreamPlayerException(PlayerException.LINE_NOT_SUPPORTED);
+		//		
+		//		//----------About the mixer
+		//		if (mixerName == null)
+		//			// Primary Sound Driver
+		//			mixerName = getMixers().get(0);
+		//		
+		//		//Continue
+		//		Mixer mixer = getMixer(mixerName);
+		//		if (mixer == null) {
+		//			sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
+		//			mixerName = null;
+		//		} else {
+		//			logger.info("Mixer: " + mixer.getMixerInfo());
+		//			sourceDataLine = (SourceDataLine) mixer.getLine(lineInfo);
+		//		}
+		//		
+		//		sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
 		
 	}
 	
@@ -1319,6 +1331,13 @@ public class StreamPlayer implements Callable<Void> {
 	}
 	
 	/**
+	 * @return The Speech Factor of the Audio
+	 */
+	public double getSpeedFactor() {
+		return this.speedFactor;
+	}
+	
+	/**
 	 * Checks if is unknown.
 	 *
 	 * @return If Status==STATUS.UNKNOWN.
@@ -1380,5 +1399,7 @@ public class StreamPlayer implements Callable<Void> {
 	public boolean isSeeking() {
 		return status == Status.SEEKING;
 	}
+	
+	
 	
 }

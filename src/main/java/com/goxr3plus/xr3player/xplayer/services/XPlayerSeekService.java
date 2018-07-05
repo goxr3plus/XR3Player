@@ -9,6 +9,7 @@ import javafx.scene.Cursor;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerException;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
@@ -109,6 +110,9 @@ public class XPlayerSeekService extends Service<Boolean> {
 		// Stop disc dragging!
 		xPlayerController.discIsDragging = false;
 		
+		//Speed Control
+		xPlayerController.speedIncreaseWorking = false;
+		
 		// Put the appropriate Cursor
 		xPlayerController.getDisc().getCanvas().setCursor(Cursor.OPEN_HAND);
 		
@@ -129,7 +133,8 @@ public class XPlayerSeekService extends Service<Boolean> {
 				boolean succeded = true;
 				
 				// ----------------------- Seek the Media
-				updateMessage("Skipping the Audio");
+				updateMessage(!xPlayerController.speedIncreaseWorking ? "Skipping the Audio"
+						: "Speed Level : x" + InfoTool.getMinString2(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 3));
 				
 				//Stop?
 				if (stopPlayer)
