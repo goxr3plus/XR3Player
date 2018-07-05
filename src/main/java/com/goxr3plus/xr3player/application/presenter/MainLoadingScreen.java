@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -24,19 +26,22 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class MainLoadingScreen extends StackPane {
 	
 	@FXML
-	private Rectangle rectangle;
-	
-	@FXML
 	private Rectangle leftRectangle;
 	
 	@FXML
 	private Rectangle rightRectangle;
 	
 	@FXML
+	private Rectangle rectangle;
+	
+	@FXML
 	private ProgressBar progressBar;
 	
 	@FXML
-	private Label label;
+	private Label descriptionLabel;
+	
+	@FXML
+	private JFXButton cancelButton;
 	
 	// -------------------------------------------------------------------------------------
 	
@@ -105,7 +110,7 @@ public class MainLoadingScreen extends StackPane {
 	 * @return the label
 	 */
 	public Label getLabel() {
-		return label;
+		return descriptionLabel;
 	}
 	
 	/**
@@ -113,6 +118,13 @@ public class MainLoadingScreen extends StackPane {
 	 */
 	public ProgressBar getProgressBar() {
 		return progressBar;
+	}
+	
+	/**
+	 * @return the cancelButton
+	 */
+	public JFXButton getCancelButton() {
+		return cancelButton;
 	}
 	
 }

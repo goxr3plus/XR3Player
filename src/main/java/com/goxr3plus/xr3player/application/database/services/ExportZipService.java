@@ -93,6 +93,11 @@ public class ExportZipService extends Service<Boolean> {
 	public void importDataBase(String zipFolder) {
 		inputZip = zipFolder;
 		reset();
+		
+		//Set Cancel Action
+		Main.updateScreen.getCancelButton().setDisable(true);
+		
+		//Restart the Service
 		restart();
 	}
 	

@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.controlsfx.control.Notifications;
-
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 
 /**
  * This class is used as a Service which is exporting the applications database as a zip folder.
@@ -35,53 +38,57 @@ public class CreateZipService extends Service<Boolean> {
 	/** The source folder. */
 	String sourceFolder;
 	
-	/** The success. */
-	Notifications success = Notifications.create().title("Mission Completed").text("Successfully exported the database!");
-	
-	/** The fail. */
-	Notifications fail = Notifications.create().title("Mission Failed").text("Failed to export the database!");
-	
 	/** The exception. */
 	String exception;
 	
 	/**
 	 * This method is using a Service to export the dataBase into a zip folder.
 	 *
-	 * @param zip
+	 * @param zipFile
 	 *            The Destination zip Folder
-	 * @param sourceFolder1
+	 * @param sourceFolder
 	 *            The source Folder
 	 */
-	public void exportDataBase(String zip , String sourceFolder1) {
+	public void exportDataBase(String zipFile , String sourceFolder) {
+		this.zipFile = zipFile;
+		this.sourceFolder = sourceFolder;
 		
-		// initialize these variables
-		zipFile = zip;
-		this.sourceFolder = sourceFolder1;
-		
+		//Success
 		setOnSucceeded(s -> {
 			done();
 			
 			// Check the Value
-			if (getValue())
-				success.show();
-			else
-				fail.text(exception).showError();
+			if (getValue()) {
+				ActionTool.showFontIconNotification("Completed", "Successfully exported the database", Duration.seconds(3), NotificationType.SIMPLE,
+						JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32));
+			} else
+				showErrorNotification(exception);
 		});
 		
+		//Failure
 		setOnFailed(f -> {
 			done();
-			fail.text(exception).showError();
+			showErrorNotification("Service Failed");
 		});
 		
+		//Cancelled
 		setOnCancelled(c -> {
 			done();
-			fail.showError();
+			showErrorNotification("Service Cancelled");
 		});
 		
-		// start the service
-		reset();
+		//Set Cancel Action
+		Main.updateScreen.getCancelButton().setDisable(false);
+		Main.updateScreen.getCancelButton().setOnAction(a -> cancel());
+		
+		//Restart the Service
 		restart();
 		
+	}
+	
+	private void showErrorNotification(String reason) {
+		ActionTool.showFontIconNotification("Failed", "Failed to export database :\n Reason [ " + ( reason.isEmpty() ? "Unknown" : reason ) + "]", Duration.seconds(3),
+				NotificationType.SIMPLE, JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32));
 	}
 	
 	/**
@@ -90,6 +97,7 @@ public class CreateZipService extends Service<Boolean> {
 	private void done() {
 		Main.updateScreen.setVisible(false);
 		Main.updateScreen.getProgressBar().progressProperty().unbind();
+		Main.updateScreen.getCancelButton().setDisable(true);
 		
 	}
 	
@@ -112,6 +120,12 @@ public class CreateZipService extends Service<Boolean> {
 					
 					// Start
 					for (String file : fileList) {
+						
+						//Check if service is cancelled
+						if (isCancelled()) {
+							System.out.println("Service is cancelled");
+							break;
+						}
 						
 						// Refresh the label Text
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("OUT:" + file));
@@ -145,6 +159,10 @@ public class CreateZipService extends Service<Boolean> {
 					exception = ex.getMessage();
 					return false;
 				}
+				
+				//Delete the zip folder if cancelled
+				if (isCancelled())
+					new File(zipFile).delete();
 				
 				return true;
 			}
