@@ -100,7 +100,7 @@ public class ExportWindowController extends BorderPane {
 	public ExportWindowController() {
 		
 		// -----------------------------------------FXMLLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ExportWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "ExportWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

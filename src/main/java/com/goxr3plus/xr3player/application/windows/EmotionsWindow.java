@@ -91,7 +91,7 @@ public class EmotionsWindow extends BorderPane {
 		window.setAlwaysOnTop(true);
 		
 		// ----------------------------------FXMLLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "EmotionsWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "EmotionsWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

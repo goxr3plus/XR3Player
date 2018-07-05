@@ -118,7 +118,7 @@ public class UpdateWindow extends StackPane {
 	public UpdateWindow() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "UpdateWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "UpdateWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

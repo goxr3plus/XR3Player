@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="101.0" prefWidth="406.0" styleClass="starWindow" stylesheets="@../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="101.0" prefWidth="406.0" styleClass="starWindow" stylesheets="@../../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="-Infinity" prefWidth="270.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="0.0" prefWidth="50.0" />

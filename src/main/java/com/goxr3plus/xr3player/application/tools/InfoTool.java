@@ -106,6 +106,8 @@ public final class InfoTool {
 	
 	public static final String TAGS_FXMLS = "/fxml/tags/";
 	
+	public static final String WINDOW_FXMLS = "/fxml/windows/";
+	
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
 	

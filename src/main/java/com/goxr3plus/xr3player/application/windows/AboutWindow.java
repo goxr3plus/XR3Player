@@ -67,7 +67,7 @@ public class AboutWindow extends BorderPane {
 	public AboutWindow() {
 		
 		// ------------------------------------FXMLLOADER--------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "AboutWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "AboutWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

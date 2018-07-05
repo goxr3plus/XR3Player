@@ -84,7 +84,7 @@ public class ConsoleWindowController extends StackPane {
 	public ConsoleWindowController() {
 		
 		// ------------------------------------FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ConsoleWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "ConsoleWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

@@ -92,7 +92,7 @@ public class StarWindow extends GridPane {
 	public StarWindow() {
 		
 		// ----------------------------------FXMLLoader----------------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "StarWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS+ "StarWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

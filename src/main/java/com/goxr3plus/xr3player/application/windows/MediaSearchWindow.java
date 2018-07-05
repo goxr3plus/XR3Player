@@ -45,7 +45,7 @@ public class MediaSearchWindow extends BorderPane {
 	public MediaSearchWindow() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MediaSearchWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "MediaSearchWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

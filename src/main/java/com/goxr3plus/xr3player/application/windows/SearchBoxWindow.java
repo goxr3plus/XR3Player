@@ -68,7 +68,7 @@ public class SearchBoxWindow extends BorderPane {
 	public SearchBoxWindow() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SearchBoxWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "SearchBoxWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
