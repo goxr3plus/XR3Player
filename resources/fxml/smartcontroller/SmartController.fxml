@@ -197,14 +197,14 @@
                   <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
                </graphic>
           </Tab>
-            <Tab fx:id="foldersModeTab" disable="true" text="Coming....">
+            <Tab fx:id="foldersModeTab" disable="true">
                <graphic>
-                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
+                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="1" />
                </graphic>
             </Tab>
-            <Tab fx:id="filtersModeTab" disable="true" text="Coming....">
+            <Tab fx:id="filtersModeTab" disable="true">
                <graphic>
-                  <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
+                  <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="1" />
                </graphic>
             </Tab>
          </tabs>
