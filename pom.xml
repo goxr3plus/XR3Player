@@ -417,10 +417,10 @@
 		<!-- <dependency> <groupId>local.github.goxr3plus</groupId> <artifactId>javasysmon</artifactId> 
 			<version>3.6.0</version> <scope>system</scope> <systemPath>${project.basedir}/localLibraries/javasysmon-0.3.6.0.jar</systemPath> 
 			</dependency> -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.google.cloud</groupId>
 			<artifactId>google-cloud-speech</artifactId>
 			<version>0.53.0-alpha</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 </project>
