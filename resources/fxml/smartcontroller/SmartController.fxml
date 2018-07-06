@@ -199,12 +199,12 @@
           </Tab>
             <Tab fx:id="foldersModeTab" disable="true">
                <graphic>
-                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="1" />
+                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="1" visible="false" />
                </graphic>
             </Tab>
             <Tab fx:id="filtersModeTab" disable="true">
                <graphic>
-                  <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="1" />
+                  <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="1" visible="false" />
                </graphic>
             </Tab>
          </tabs>
