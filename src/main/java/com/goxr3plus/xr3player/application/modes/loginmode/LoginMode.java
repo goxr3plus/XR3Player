@@ -52,7 +52,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.UserInformation.UserCategory;
-import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.UsersInfoLoader;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.UsersLoaderService;
 import main.java.com.goxr3plus.xr3player.application.presenter.CloseAppBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
@@ -188,14 +188,12 @@ public class LoginMode extends BorderPane {
 	/** The context menu of the users */
 	public UserContextMenu userContextMenu = new UserContextMenu(this);
 	
-	//public UserInformation2 userInformation = new UserInformation2();
-	
 	public final UserInformation userInformation = new UserInformation(UserCategory.NO_LOGGED_IN);
 	
 	/**
 	 * Loads all the information about each user
 	 */
-	public UsersInfoLoader usersInfoLoader = new UsersInfoLoader();
+	public UsersLoaderService usersLoaderService = new UsersLoaderService();
 	
 	public final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 	

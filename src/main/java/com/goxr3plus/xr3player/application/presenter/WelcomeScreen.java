@@ -4,23 +4,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.controlsfx.control.Notifications;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXToggleButton;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.Util;
@@ -88,18 +82,6 @@ public class WelcomeScreen extends StackPane {
 			
 			//Hide Welcome Screen
 			hideWelcomeScreen();
-			
-			//Start a Thread
-			new Thread(() -> {
-				try {
-					Thread.sleep(500);
-					
-					//Show on notification
-					Platform.runLater(() -> Notifications.create().darkStyle().text("Welcome to XR3Player V." + Main.APPLICATION_VERSION).hideAfter(Duration.seconds(2)).show());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}).start();
 			
 		});
 		
@@ -174,7 +156,12 @@ public class WelcomeScreen extends StackPane {
 			soundPlayer.dispose();
 		}
 		
+		//Load the informations about every user
+		Main.loginMode.usersLoaderService.start();
+		
 		setVisible(false);
+		
+		
 	}
 	
 	/**

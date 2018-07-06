@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
-import org.controlsfx.control.Notifications;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -471,12 +470,6 @@ public class Main extends Application {
 		//---Login Mode---- It must be set after the window has been shown
 		//loginMode.getSplitPane().setDividerPositions(0.65, 0.35)
 		
-		//Load the informations about every user
-		loginMode.usersInfoLoader.start();
-		
-		//Check for updates
-		updateWindow.searchForUpdates(false);
-		
 		//Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
@@ -507,6 +500,9 @@ public class Main extends Application {
 		
 		//Show the Window
 		window.show();
+		
+		//Check for updates
+		updateWindow.searchForUpdates(false);
 		
 		//XR3AutoUpdater exit message
 		System.out.println("XR3Player ready to rock!");

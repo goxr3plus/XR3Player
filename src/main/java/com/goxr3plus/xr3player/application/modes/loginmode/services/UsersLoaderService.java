@@ -20,22 +20,23 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.chart.XYChart;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 
 /**
  * @author GOXR3PLUS
  *
  */
-public class UsersInfoLoader extends Service<Boolean> {
+public class UsersLoaderService extends Service<Boolean> {
 	
 	/**
 	 * Constructor
 	 */
-	public UsersInfoLoader() {
+	public UsersLoaderService() {
 		
 		this.setOnSucceeded(s -> done());
 		this.setOnFailed(f -> done());
@@ -50,7 +51,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 		//Bindings
 		Main.updateScreen.setVisible(true);
 		Main.updateScreen.getProgressBar().progressProperty().bind(progressProperty());
-		Main.updateScreen.getLabel().setText("---Loadings Users Information---");
+		Main.updateScreen.getLabel().setText("Loading....");
 		
 		//Start
 		super.start();
@@ -60,6 +61,10 @@ public class UsersInfoLoader extends Service<Boolean> {
 	 * Called when Service is done
 	 */
 	private void done() {
+		
+		//Show Notification
+		ActionTool.showNotification("Welcome :)", null, Duration.seconds(2), NotificationType.SUCCESS);
+		
 		//Bindings
 		Main.updateScreen.getProgressBar().progressProperty().unbind();
 		Main.updateScreen.setVisible(false);
@@ -98,7 +103,7 @@ public class UsersInfoLoader extends Service<Boolean> {
 								Platform.runLater(() -> {
 									//Add Pie Chart Data
 									//if (totalLibraries > 0)
-										//Main.loginMode.getSeries().getData().add(new XYChart.Data<String,Number>(user.getUserName(), totalLibraries));
+									//Main.loginMode.getSeries().getData().add(new XYChart.Data<String,Number>(user.getUserName(), totalLibraries));
 									
 									//Update User Label
 									user.getTotalLibrariesLabel().setText(Integer.toString(totalLibraries));
