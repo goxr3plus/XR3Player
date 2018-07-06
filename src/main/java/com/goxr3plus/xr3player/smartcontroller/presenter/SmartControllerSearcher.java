@@ -21,6 +21,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -52,7 +53,7 @@ public class SmartControllerSearcher extends HBox {
 	 * Constructor.
 	 *
 	 * @param smartController
-	 *            the control
+	 *            The SmartController
 	 */
 	public SmartControllerSearcher(SmartController smartController) {
 		this.smartController = smartController;
@@ -60,6 +61,7 @@ public class SmartControllerSearcher extends HBox {
 		//Super
 		setAlignment(Pos.CENTER);
 		getChildren().add(searchField);
+		HBox.setHgrow(searchField, Priority.ALWAYS);
 		getStyleClass().add("search-box");
 		
 		// searchField

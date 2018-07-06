@@ -78,7 +78,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </JFXCheckBox>
-                                          <StackPane fx:id="searchFieldStackPane" minHeight="0.0" minWidth="0.0">
+                                          <StackPane fx:id="searchFieldStackPane" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                                              <children>
                                                 <JFXButton fx:id="normalSearchButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="Back to normal search ">
                                                    <tooltip>
