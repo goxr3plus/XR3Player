@@ -11,8 +11,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.sound.sampled.LineUnavailableException;
-
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
@@ -197,12 +195,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	
 	@FXML
 	private FontIcon speedLabelFontIcon;
-	
-	@FXML
-	private ProgressBar topSpeedProgressBar;
-	
-	@FXML
-	private ProgressBar bottomSpeedProgressBar;
 	
 	@FXML
 	private Slider speedSlider;
@@ -971,18 +963,6 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			}
 		});
 		speedSlider.setOnScroll(scroll -> speedSlider.setValue((int) Math.ceil(speedSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ))));
-		speedSlider.heightProperty().addListener((observable , oldValue , newValue) -> {
-			double halfHeight = newValue.doubleValue() / 2.0;
-			System.out.println("Half Height : " + halfHeight);
-			
-			topSpeedProgressBar.setMinSize(0, 0);
-			topSpeedProgressBar.setPrefSize(120, halfHeight);
-			topSpeedProgressBar.setMaxSize(120, halfHeight);
-			
-			bottomSpeedProgressBar.setMinSize(0, 0);
-			bottomSpeedProgressBar.setPrefSize(120, halfHeight);
-			bottomSpeedProgressBar.setMaxSize(120, halfHeight);
-		});
 	}
 	
 	/**
