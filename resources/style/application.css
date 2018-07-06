@@ -1851,7 +1851,7 @@
 	-fx-background-color:
         -darkest-black,
         -dark-highlight,
-        linear-gradient(to bottom, rgb(255.0,106.0,0.0) 2.0%, rgb(255.0,106.0,100) 98.0%);
+        linear-gradient(to bottom, rgb(255.0,106.0,0.0) 2.0%, rgb(255.0,106.0,100.0) 98.0%);
 }
 
 .transparency-slider .track{
@@ -1866,14 +1866,46 @@
 	-fx-pref-width:13.0px;	
 }
 
-.transparency-slider3 .track{
+.transparency-slider3:horizontal .track{
 	-fx-pref-height:15.0px;
 	-fx-background-color:transparent;
 }
 
-.transparency-slider3 .thumb{	
+.transparency-slider3:vertical .track{
+	-fx-pref-height:25.0px;
+	-fx-background-color:transparent;
+}
+
+.transparency-slider3:vertical  .thumb{	
+	-fx-pref-width:35.0px;
+}
+
+.transparency-slider3:horizontal  .thumb{	
 	-fx-pref-height:25.0px;
 }
+
+/* Speed Slider */
+.speed-slider:vertical .track{
+	-fx-pref-width:12.0px;	
+	-fx-background-color:transparent;
+}
+
+.speed-slider:vertical  .thumb{	
+	-fx-pref-width:35.0px;
+}
+
+
+/* Volume Slider */
+.volume-slider:vertical .track{
+	-fx-pref-width:15.0px;
+	-fx-background-radius:0.0px;	
+}
+
+.volume-slider:vertical  .thumb{	
+	-fx-pref-width:32.0px;
+}
+
+
 
 /*******************************************************************************
 

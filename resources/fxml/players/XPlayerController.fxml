@@ -7,6 +7,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -204,15 +205,33 @@
                                                    <children>
                                                       <Label fx:id="speedLabel" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 13; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="1.0">
                                                          <graphic>
-                                                            <FontIcon iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                            <FontIcon fx:id="speedLabelFontIcon" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                          </graphic>
                                                       </Label>
-                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
-                                                         <styleClass>
-                                                            <String fx:value="transparency-slider" />
-                                                            <String fx:value="transparency-slider2" />
-                                                         </styleClass>
-                                                      </Slider>
+                                                      <StackPane VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <VBox alignment="CENTER">
+                                                               <children>
+                                                                  <Group translateX="1.0" VBox.vgrow="ALWAYS">
+                                                                     <children>
+                                                                        <ProgressBar fx:id="topSpeedProgressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="120.0" progress="0.32" rotate="-90.0" styleClass="transparent-progress-bar" />
+                                                                     </children>
+                                                                  </Group>
+                                                                  <Group layoutX="-141.0" layoutY="180.0" translateX="1.0">
+                                                                     <children>
+                                                                        <ProgressBar fx:id="bottomSpeedProgressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="120.0" progress="0.32" rotate="90.0" styleClass="transparent-progress-bar" />
+                                                                     </children>
+                                                                  </Group>
+                                                               </children>
+                                                            </VBox>
+                                                            <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0">
+                                                               <styleClass>
+                                                                  <String fx:value="transparency-slider" />
+                                                                  <String fx:value="speed-slider" />
+                                                               </styleClass>
+                                                            </Slider>
+                                                         </children>
+                                                      </StackPane>
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -604,6 +623,14 @@
                <left>
                   <VBox fx:id="volumeBarBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                      <children>
+                        <ToggleButton fx:id="muteButton" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3">
+                           <tooltip>
+                              <Tooltip text="Mute Player" />
+                           </tooltip>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
+                           </graphic>
+                        </ToggleButton>
                         <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -612,13 +639,13 @@
                               <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="20" selectionEnd="0" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
-                              <Insets bottom="5.0" />
+                              <Insets bottom="5.0" top="6.0" />
                            </VBox.margin>
                         </Button>
                         <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="300.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="transparency-slider" />
-                              <String fx:value="transparency-slider2" />
+                              <String fx:value="volume-slider" />
                            </styleClass>
                         </Slider>
                         <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
@@ -629,17 +656,9 @@
                               <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="28" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
                            </graphic>
                            <VBox.margin>
-                              <Insets bottom="5.0" top="8.0" />
+                              <Insets bottom="2.0" top="8.0" />
                            </VBox.margin>
                         </Button>
-                        <ToggleButton fx:id="muteButton" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-volume-off" iconSize="28" selectionEnd="0" selectionStart="0" />
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Mute Player" />
-                           </tooltip>
-                        </ToggleButton>
                      </children>
                      <BorderPane.margin>
                         <Insets />
