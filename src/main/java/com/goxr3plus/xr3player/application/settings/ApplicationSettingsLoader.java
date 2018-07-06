@@ -74,8 +74,8 @@ public class ApplicationSettingsLoader {
 			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getLibraryModeUpsideDown(), Integer.valueOf(s)))
 			//			
 			//--DJMode
-		//	Main.djMode.updateTopSplitPaneDivider();
-		//	Main.djMode.updateBottomSplitPaneDivider();
+			//	Main.djMode.updateTopSplitPaneDivider();
+			//	Main.djMode.updateBottomSplitPaneDivider();
 			//			Optional.ofNullable(settings.getProperty("General-DjModeUpsideDown"))
 			//					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(settingsWindow.getGeneralSettingsController().getDjModeUpsideDown(), Integer.valueOf(s)))
 			//		
@@ -163,8 +163,12 @@ public class ApplicationSettingsLoader {
 				
 				//Check if it is on simple or advanced mode
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Advanced-Mode"))
-						.ifPresent(s -> xPlayerController.getModeToggle().setSelected(Boolean.valueOf(s)));
-				
+						.ifPresentOrElse(s -> xPlayerController.getModeToggle().setSelected(Boolean.valueOf(s)), () -> {
+							//DJ Mode players have it selected by default
+							if (xPlayerController.getKey() == 1 || xPlayerController.getKey() == 2)
+								xPlayerController.getModeToggle().setSelected(true);
+						});
+						
 				//Check the volume bar
 				//Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Volume-Bar")).ifPresent(s -> xPlayerController.setVolume(Integer.parseInt(s)));
 				
