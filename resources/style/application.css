@@ -1884,14 +1884,25 @@
 	-fx-pref-height:25.0px;
 }
 
-/* Speed Slider */
-.speed-slider:vertical .track{
-	-fx-pref-width:12.0px;	
+/* Timer Slider */
+.timer-slider .track{
+	-fx-pref-height:25.0px;
 	-fx-background-color:transparent;
 }
 
+.timer-slider  .thumb{	
+	-fx-pref-width:20.0px;
+	-fx-pref-height:22.0px;
+}
+
+/* Speed Slider */
+.speed-slider:vertical .track{
+	-fx-pref-width:15.0px;	
+	-fx-background-radius:0.0px;
+}
+
 .speed-slider:vertical  .thumb{	
-	-fx-pref-width:35.0px;
+	-fx-pref-width:30.0px;
 }
 
 

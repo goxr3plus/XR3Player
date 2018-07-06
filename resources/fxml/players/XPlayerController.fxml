@@ -7,7 +7,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -208,30 +207,12 @@
                                                             <FontIcon fx:id="speedLabelFontIcon" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                          </graphic>
                                                       </Label>
-                                                      <StackPane VBox.vgrow="ALWAYS">
-                                                         <children>
-                                                            <VBox alignment="CENTER">
-                                                               <children>
-                                                                  <Group translateX="1.0" VBox.vgrow="ALWAYS">
-                                                                     <children>
-                                                                        <ProgressBar fx:id="topSpeedProgressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="120.0" progress="0.32" rotate="-90.0" styleClass="transparent-progress-bar" />
-                                                                     </children>
-                                                                  </Group>
-                                                                  <Group layoutX="-141.0" layoutY="180.0" translateX="1.0">
-                                                                     <children>
-                                                                        <ProgressBar fx:id="bottomSpeedProgressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="120.0" progress="0.32" rotate="90.0" styleClass="transparent-progress-bar" />
-                                                                     </children>
-                                                                  </Group>
-                                                               </children>
-                                                            </VBox>
-                                                            <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0">
-                                                               <styleClass>
-                                                                  <String fx:value="transparency-slider" />
-                                                                  <String fx:value="speed-slider" />
-                                                               </styleClass>
-                                                            </Slider>
-                                                         </children>
-                                                      </StackPane>
+                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
+                                                         <styleClass>
+                                                            <String fx:value="transparency-slider" />
+                                                            <String fx:value="speed-slider" />
+                                                         </styleClass>
+                                                      </Slider>
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -479,11 +460,11 @@
                                        <children>
                                           <StackPane HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ProgressBar fx:id="smTimeSliderProgress" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="14.0" progress="0.0" styleClass="transparent-progress-bar" />
+                                                <ProgressBar fx:id="smTimeSliderProgress" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="15.0" progress="0.0" styleClass="transparent-progress-bar" />
                                                 <Slider fx:id="smTimeSlider" maxWidth="1.7976931348623157E308" minWidth="5.0">
                                                    <styleClass>
                                                       <String fx:value="transparency-slider" />
-                                                      <String fx:value="transparency-slider3" />
+                                                      <String fx:value="timer-slider" />
                                                    </styleClass>
                                                 </Slider>
                                              </children>
