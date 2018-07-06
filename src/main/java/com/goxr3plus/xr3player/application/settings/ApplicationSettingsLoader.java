@@ -149,10 +149,9 @@ public class ApplicationSettingsLoader {
 			Main.xPlayersList.getList().forEach(xPlayerController -> {
 				
 				//If the key is not there add background image by default			
-				if (Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared")).isPresent())
-					xPlayerController.getVisualizerWindow().clearImage(Type.BACKGROUND);
-				else
-					xPlayerController.getVisualizerWindow().findAppropriateImage(Type.BACKGROUND);
+				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared")).ifPresentOrElse(
+						v -> xPlayerController.getVisualizerWindow().clearImage(Type.BACKGROUND),
+						() -> xPlayerController.getVisualizerWindow().findAppropriateImage(Type.BACKGROUND));
 				
 				//Always add foreground image
 				xPlayerController.getVisualizerWindow().findAppropriateImage(Type.FOREGROUND);
