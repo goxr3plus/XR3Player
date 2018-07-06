@@ -197,12 +197,16 @@
                                              </padding>
                                           </StackPane>
                                        </top>
-                                       <right>
+                                       <left>
                                           <StackPane fx:id="speedSliderStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                                              <children>
                                                 <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="50.0" StackPane.alignment="CENTER">
                                                    <children>
-                                                      <Label fx:id="speedLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 13; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="+1.85" />
+                                                      <Label fx:id="speedLabel" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 13; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="1.0">
+                                                         <graphic>
+                                                            <FontIcon iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                         </graphic>
+                                                      </Label>
                                                       <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
                                                          <styleClass>
                                                             <String fx:value="transparency-slider" />
@@ -216,7 +220,7 @@
                                                 <Insets left="2.0" right="2.0" />
                                              </padding>
                                           </StackPane>
-                                       </right>
+                                       </left>
                                     </BorderPane>
                                     <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
@@ -513,7 +517,7 @@
                      <top>
                         <HBox alignment="CENTER" maxHeight="36.0" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                            <children>
-                              <HBox maxHeight="36.0" minHeight="0.0" minWidth="0.0">
+                              <HBox fx:id="toolsHBox" maxHeight="36.0" minHeight="0.0" minWidth="0.0">
                                  <children>
                                     <Button fx:id="showMenu" alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" textAlignment="CENTER" wrapText="true">
                                        <cursor>

@@ -301,6 +301,9 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	private ToggleButton historyToggle;
 	
 	@FXML
+	private HBox toolsHBox;
+	
+	@FXML
 	private Button showMenu;
 	
 	@FXML
@@ -1576,22 +1579,53 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			internalSplitPane.getItems().remove(discBorderPane);
 			internalSplitPane.getItems().add(0, discBorderPane);
 			
+			//Volume Slider
 			rootBorderPane.getChildren().remove(volumeBarBox);
 			rootBorderPane.setLeft(volumeBarBox);
 			
 			mediaNameHBox.getChildren().clear();
 			mediaNameHBox.getChildren().addAll(timersBox, mediaFileMarquee, copyButton, mediaTagImageButton);
+			
+			//Speed Slider
+			discBorderPane.getChildren().remove(speedSliderStackPane);
+			discBorderPane.setLeft(speedSliderStackPane);
+			
+			//Modes HBox
+			HBox modesHBox = (HBox) modeToggle.getParent();
+			modesHBox.getChildren().clear();
+			modesHBox.getChildren().addAll(modeToggle, historyToggle);
+			
+			//Top HBox
+			HBox topHBox = (HBox) topInfoLabel.getParent();
+			topHBox.getChildren().clear();
+			topHBox.getChildren().addAll(toolsHBox, topInfoLabel, emotionsButton, extendPlayer);
+			
 		} else if (newSide == Side.RIGHT) {
 			
 			internalSplitPane.getItems().remove(discBorderPane);
 			internalSplitPane.getItems().add(1, discBorderPane);
 			
+			//Volume Slider
 			rootBorderPane.getChildren().remove(volumeBarBox);
 			rootBorderPane.setRight(volumeBarBox);
 			
 			mediaNameHBox.getChildren().clear();
 			mediaNameHBox.getChildren().addAll(mediaTagImageButton, copyButton, mediaFileMarquee, timersBox);
-			//HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
+			
+			//Speed Slider
+			discBorderPane.getChildren().remove(speedSliderStackPane);
+			discBorderPane.setRight(speedSliderStackPane);
+			
+			//Modes HBox
+			HBox modesHBox = (HBox) modeToggle.getParent();
+			modesHBox.getChildren().clear();
+			modesHBox.getChildren().addAll(historyToggle, modeToggle);
+			
+			//Top HBox
+			HBox topHBox = (HBox) topInfoLabel.getParent();
+			topHBox.getChildren().clear();
+			topHBox.getChildren().addAll(extendPlayer, emotionsButton, topInfoLabel, toolsHBox);
+			
 		}
 	}
 	
