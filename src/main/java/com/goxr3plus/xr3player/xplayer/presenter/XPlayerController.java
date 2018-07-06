@@ -943,14 +943,14 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 				speedFactor = 0.05;
 			}
 			
-			//System.out.println(Math.ceil(speedSlider.getValue()) + " , " + value + " , Speed Factor : " + speedFactor);
-			
 			//SpeedLabel
 			speedLabel.setText( ( speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString2(String.valueOf(speedFactor), 4));
 			
 			//Do it!
 			if (xPlayer.getSpeedFactor() != speedFactor) {
 				xPlayer.setSpeedFactor(speedFactor);
+				
+				//If the player is paused or playing 
 				if (xPlayer.isPausedOrPlaying()) {
 					speedIncreaseWorking = true;
 					seekService.cancel();
