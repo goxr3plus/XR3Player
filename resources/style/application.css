@@ -2144,6 +2144,15 @@
     -fx-font-weight:bold;
 }
 
+.jfx-button-dark-white-selection{
+	 -fx-background-color:rgb(20.0,20.0,20.0) !important;
+    -fx-text-fill:white !important;
+    -fx-background-radius: 0.0px;
+    -fx-background-insets: 0.0px;
+    -fx-cursor:hand;
+    -fx-font-weight:bold;
+}
+
 .dark-menu-button .label{
 	-fx-background-color:transparent;
 }
@@ -2179,7 +2188,7 @@
 	-fx-background-color:#000000;
 }
 
-.jfx-button-white-selection:hover{
+.jfx-button-white-selection:hover,.jfx-button-dark-white-selection:hover{
 	-fx-background-color:#FFFFFF !important;
 	-fx-text-fill:#000000 !important;
 }
