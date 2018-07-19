@@ -22,7 +22,6 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -336,6 +335,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Button smMaximizeVolume;
 	
 	@FXML
+	private ProgressBar volumeSliderProgBar;
+	
+	@FXML
 	private Slider smVolumeSlider;
 	
 	@FXML
@@ -358,6 +360,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private JFXButton focusXPlayerWindow;
+	
 	// -----------------------------------------------------------------------------
 	
 	/** A Fade Transition */
@@ -1397,6 +1400,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//smVolumeSlider
 			smVolumeSlider.setValue(newValue.doubleValue());
 			
+			//volumeSliderProgBar
+			volumeSliderProgBar.setProgress(smVolumeSlider.getValue() / smVolumeSlider.getMax());
+			
 		});
 		
 		///smTimeSlider
@@ -1490,17 +1496,15 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		//smVolumeSlider
 		smVolumeSlider.setMin(0);
 		smVolumeSlider.setMax(maximumVolume - 1.00);
-		smVolumeSlider.valueProperty().addListener(l -> {
-			
-			//Set the value to the volumeDisc
-			disc.setVolume(smVolumeSlider.getValue());
-			
-		});
+		smVolumeSlider.valueProperty().addListener(l -> disc.setVolume(smVolumeSlider.getValue()));
 		smVolumeSlider.setValue(volume);
-		smVolumeSlider.setOnScroll(scroll -> {
-			//(int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))
-			adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2);
-		});
+		smVolumeSlider.setOnScroll(scroll -> adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2));
+		smVolumeSlider.heightProperty().addListener(l -> volumeSliderProgBar.setPrefWidth(smVolumeSlider.getHeight()));
+		
+		//volumeSliderProgBar
+		volumeSliderProgBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+		
+		//DiscStackPane
 		diskStackPane.setOnScroll(smVolumeSlider.getOnScroll());
 		
 		//Recalculate Volume Disc Size

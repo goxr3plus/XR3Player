@@ -72,7 +72,7 @@ public class DJMode extends BorderPane {
 		
 		//XPlayer 2
 		Main.xPlayersList.addXPlayerController(xPlayer2);
-		xPlayer2.makeTheDisc(Color.rgb(255, 95, 0), 50, 0, 126, Side.LEFT);
+		xPlayer2.makeTheDisc(Color.web("#fc4f4f"), 50, 0, 126, Side.LEFT);
 		xPlayer2.makeTheVisualizer();
 		hBox.getChildren().add(xPlayer2);
 		HBox.setHgrow(xPlayer2, Priority.ALWAYS);
