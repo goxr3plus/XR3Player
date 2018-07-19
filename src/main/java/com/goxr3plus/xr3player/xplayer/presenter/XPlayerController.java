@@ -1499,10 +1499,11 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		smVolumeSlider.valueProperty().addListener(l -> disc.setVolume(smVolumeSlider.getValue()));
 		smVolumeSlider.setValue(volume);
 		smVolumeSlider.setOnScroll(scroll -> adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2));
-		smVolumeSlider.heightProperty().addListener(l -> volumeSliderProgBar.setPrefWidth(smVolumeSlider.getHeight()));
+		volumeSliderProgBar.prefWidthProperty().bind(smVolumeSlider.heightProperty());
 		
-		//volumeSliderProgBar
+		//volumeSliderProgBar	
 		volumeSliderProgBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+		volumeSliderProgBar.setProgress(smVolumeSlider.getValue() / smVolumeSlider.getMax());
 		
 		//DiscStackPane
 		diskStackPane.setOnScroll(smVolumeSlider.getOnScroll());
