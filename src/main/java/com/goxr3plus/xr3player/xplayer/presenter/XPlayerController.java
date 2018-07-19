@@ -964,6 +964,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			}
 		});
 		speedSlider.setOnScroll(scroll -> speedSlider.setValue((int) Math.ceil(speedSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ))));
+		
+		//progressBar
+		progressBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
 	}
 	
 	/**
