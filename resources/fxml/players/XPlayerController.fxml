@@ -628,7 +628,7 @@
                            <children>
                               <Group>
                                  <children>
-                                    <ProgressBar fx:id="volumeSliderProgBar" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="20.0" prefWidth="100.0" progress="0.0" rotate="-90.0" styleClass="transparent-volume-progress-bar" />
+                                    <ProgressBar fx:id="volumeSliderProgBar" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="20.0" prefWidth="300.0" progress="0.0" rotate="-90.0" styleClass="transparent-volume-progress-bar" />
                                  </children>
                               </Group>
                               <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="300.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL">

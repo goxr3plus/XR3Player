@@ -1493,6 +1493,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			System.out.println(discIsDragging);
 		});
 		
+		//smTimeSliderProgress
+		smTimeSliderProgress.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+		
 		//smVolumeSlider
 		smVolumeSlider.setMin(0);
 		smVolumeSlider.setMax(maximumVolume - 1.00);
