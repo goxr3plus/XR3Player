@@ -220,13 +220,9 @@ public class OpenedLibrariesViewer extends StackPane {
 	 */
 	public void insertTab(Library library) {
 		
-		// where is "" it must be
-		// InfoTool.getMinString(library.getLibraryName(), 15)
+		//Create the tab
 		Tab tab = new Tab("", library.getSmartController());
-		Tooltip t1;
-		String s1 = library.getLibraryName();
-		t1 = new Tooltip(s1);
-		tab.setTooltip(t1);
+		tab.setTooltip(new Tooltip(library.getLibraryName()));
 		StackPane stack = new StackPane();
 		ProgressBar indicator = new ProgressBar();
 		indicator.progressProperty().bind(library.getSmartController().getIndicator().progressProperty());
