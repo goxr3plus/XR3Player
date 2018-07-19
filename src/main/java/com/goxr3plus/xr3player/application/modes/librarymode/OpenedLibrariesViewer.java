@@ -13,6 +13,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
@@ -31,6 +32,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
@@ -256,7 +258,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		closeButton.setPrefSize(maxSize, maxSize);
 		closeButton.setMaxSize(maxSize, maxSize);
 		closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
-		closeButton.setOnAction(λ -> removeTab(tab));
+		closeButton.setOnAction(l -> removeTab(tab));
 		
 		//tabImage 
 		ImageView tabImage = new ImageView();
@@ -280,18 +282,22 @@ public class OpenedLibrariesViewer extends StackPane {
 		});
 		hBox.getChildren().addAll(fontIcon, tabImage, stack, marquee, closeButton);
 		
-		// --Drag Over
-		hBox.setOnDragOver(dragOver -> {
-			// The drag must come from source other than the owner
+		// --Drag Events
+		PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
+		hBox.setOnDragExited(drag -> pauseTransition.stop());
+		hBox.setOnDragEntered(dragOver -> {
 			if (dragOver.getDragboard().hasFiles()) {
 				//&& dragOver.getGestureSource() != library.getSmartController().tableViewer) 
 				dragOver.acceptTransferModes(TransferMode.LINK);
-				tabPane.getSelectionModel().select(tab);
+				pauseTransition.playFromStart();
+				pauseTransition.setOnFinished(f -> tabPane.getSelectionModel().select(tab));
 			}
 		});
 		
 		// --Drag Dropped
-		hBox.setOnDragDropped(drop -> {
+		hBox.setOnDragDropped(drop ->
+		
+		{
 			// Has Files? + isFree()?
 			if (drop.getDragboard().hasFiles() && getSelectedLibrary().get().getSmartController().isFree(true)
 					&& drop.getGestureSource() != library.getSmartController().getNormalModeMediatTableViewer())
@@ -312,8 +318,8 @@ public class OpenedLibrariesViewer extends StackPane {
 				// tab.setGraphic(null)
 			}
 		});
-		//library.getLibraryProgressIndicator().progressProperty().bind(indicator.progressProperty());
-		//library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty());
+		//library.getLibraryProgressIndicator().progressProperty().bind(indicator.progressProperty())
+		//library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty())
 		
 		tab.setOnCloseRequest(c -> {
 			if (!library.getSmartController().isFree(true)) {
