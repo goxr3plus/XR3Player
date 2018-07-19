@@ -334,11 +334,6 @@ public class LibraryMode extends BorderPane {
 		librariesStackView.getChildren().addAll(teamViewer.getViewer(), librariesSearcher.region, librariesSearcher.searchProgress);
 		teamViewer.getViewer().toBack();
 		
-		// XPlayer - 0
-		Main.xPlayersList.addXPlayerController(new XPlayerController(0));
-		Main.xPlayersList.getXPlayerController(0).makeTheDisc(Color.rgb(255, 95, 0), 45, 0, 125, Side.LEFT);
-		Main.xPlayersList.getXPlayerController(0).makeTheVisualizer();
-		
 		// -- openLibrariesContextMenu
 		openLibraryContextMenu.setOnAction(a -> {
 			Library library = teamViewer.getViewer().getSelectedItem();

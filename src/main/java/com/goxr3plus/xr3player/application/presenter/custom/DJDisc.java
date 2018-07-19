@@ -13,6 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
@@ -21,7 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
@@ -64,6 +64,7 @@ public class DJDisc extends StackPane {
 	
 	/** The Constant MAXIMUM_VOLUME. */
 	private final int maximumVolume;
+	private final SimpleIntegerProperty currentVolume;
 	
 	/** The time. */
 	// About the Time
@@ -95,7 +96,7 @@ public class DJDisc extends StackPane {
 	private final ImageView imageView = new ImageView();
 	
 	/** The volume label. */
-	private final DragAdjustableLabel volumeLabel;
+	//private final DragAdjustableLabel volumeLabel;
 	
 	/**
 	 * The X of the Point that is in the circle circumference
@@ -127,6 +128,7 @@ public class DJDisc extends StackPane {
 	 */
 	public DJDisc(int perimeter, Color arcColor, int volume, int maximumVolume) {
 		this.maximumVolume = maximumVolume;
+		this.currentVolume = new SimpleIntegerProperty(volume);
 		
 		super.setPickOnBounds(true);
 		
@@ -159,13 +161,13 @@ public class DJDisc extends StackPane {
 		//timeField.setStyle("-fx-background-color:white;");
 		
 		// volumeLabel
-		volumeLabel = new DragAdjustableLabel(volume, 0, maximumVolume);
-		// volumeLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/style/Younger
-		// than me Bold.ttf"), 18))
-		volumeLabel.currentValueProperty().addListener((observable , oldValue , newValue) -> {
-			listeners.forEach(l -> l.volumeChanged(newValue.intValue()));
-			repaint();
-		});
+		//		volumeLabel = new DragAdjustableLabel(volume, 0, maximumVolume);
+		//		// volumeLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/style/Younger
+		//		// than me Bold.ttf"), 18))
+		//		volumeLabel.currentValueProperty().addListener((observable , oldValue , newValue) -> {
+		//			listeners.forEach(l -> l.volumeChanged(newValue.intValue()));
+		//			repaint();
+		//		});
 		/*
 		 * ImageView graphic = new ImageView(VOLUME_IMAGE); imageView.setFitWidth(15); imageView.setFitHeight(15); imageView.setSmooth(true);
 		 * volumeLabel.setGraphic(graphic); volumeLabel.setGraphicTextGap(1);
@@ -209,7 +211,7 @@ public class DJDisc extends StackPane {
 		// MouseListeners
 		//canvas.setOnMousePressed(m -> canvas.setCursor(Cursor.CLOSED_HAND))
 		canvas.setOnMouseDragged(this::onMouseDragged);
-		setOnScroll(this::onScroll);
+		//setOnScroll(this::onScroll);
 		
 		resizeDisc(perimeter);
 	}
@@ -430,20 +432,11 @@ public class DJDisc extends StackPane {
 	}
 	
 	/**
-	 * Returns the volume of the disc.
-	 *
-	 * @return The Current Volume Value
-	 */
-	private int getVolume() {
-		return volumeLabel.getCurrentValue();
-	}
-	
-	/**
 	 * Returns the maximum volume allowed.
 	 *
 	 * @return The Maximum Volume allowed in the Disc
 	 */
-	private int getMaximumVolume() {
+	public int getMaximumVolume() {
 		
 		return maximumVolume;
 	}
@@ -548,13 +541,13 @@ public class DJDisc extends StackPane {
 	 * @param volume
 	 *            the new volume
 	 */
-	public void setVolume(int volume) {
-		if (volume > -1 && volume < getMaximumVolume() + 1)
-			Platform.runLater(() -> volumeLabel.setCurrentValue(volume));
+	public void setVolume(double volume) {
+		if (volume > -1 && volume < maximumVolume)
+			this.currentVolume.set((int) Math.ceil(volume));
 		else if (volume < 0)
-			Platform.runLater(() -> volumeLabel.setCurrentValue(0));
-		else if (volume > getMaximumVolume())
-			Platform.runLater(() -> volumeLabel.setCurrentValue(getMaximumVolume()));
+			this.currentVolume.set(0);
+		else if (volume >= maximumVolume)
+			this.currentVolume.set(maximumVolume);
 	}
 	
 	/**
@@ -698,16 +691,27 @@ public class DJDisc extends StackPane {
 	 * @param m
 	 *            the m
 	 */
-	private void onScroll(ScrollEvent m) {
-		int rotation = m.getDeltaY() < 1 ? 1 : -1;
-		setVolume(getVolume() - rotation);
-	}
-	
+	//	private void onScroll(ScrollEvent m) {
+	//		int rotation = m.getDeltaY() < 1 ? 1 : -1;
+	//		setVolume(getVolume() - rotation);
+	//	}
+	//	
 	/**
 	 * @return the imageView
 	 */
 	public ImageView getImageView() {
 		return imageView;
+	}
+	
+	/**
+	 * @return the currentVolume
+	 */
+	public int getCurrentVolume() {
+		return currentVolume.get();
+	}
+	
+	public SimpleIntegerProperty currentVolumeProperty() {
+		return currentVolume;
 	}
 	
 	//	/**

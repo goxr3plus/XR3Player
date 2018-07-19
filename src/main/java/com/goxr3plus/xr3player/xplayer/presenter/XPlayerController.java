@@ -22,6 +22,7 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -63,9 +64,6 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJDisc;
-import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter;
-import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter.DJFilterCategory;
-import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilterListener;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
@@ -99,7 +97,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVis
  *
  * @author GOXR3PLUS
  */
-public class XPlayerController extends StackPane implements DJFilterListener, StreamPlayerListener {
+public class XPlayerController extends StackPane implements StreamPlayerListener {
 	
 	private final FontIcon playIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 24);
 	private final FontIcon smPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 32);
@@ -393,7 +391,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public boolean discIsDragging;
 	
 	//-----CustomDJFilter
-	DJFilter volumeDisc;
+	//DJFilter volumeDisc;
 	
 	// -------------------------ETC --------------------------
 	
@@ -1074,7 +1072,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	 * @return the volume
 	 */
 	public int getVolume() {
-		return (int) volumeDisc.getValue();
+		return (int) disc.getCurrentVolume();
 	}
 	
 	/**
@@ -1087,38 +1085,38 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	}
 	
 	/**
-	 * You can use this method to add or minus from the player volume For example you can call adjustVolume(+1) or adjustVolume(-1)
-	 *
-	 * @param value
-	 *            the value
-	 */
-	public void adjustVolume(int value) {
-		volumeDisc.setValue(volumeDisc.getValue() + value, true);
-	}
-	
-	/**
-	 * Adjust the volume to the maximum value.
-	 */
-	public void maximizeVolume() {
-		volumeDisc.setValue(volumeDisc.getMaximumValue() + 1.00, true);
-	}
-	
-	/**
-	 * Adjust the volume to the minimum value.
-	 */
-	public void minimizeVolume() {
-		volumeDisc.setValue(0, true);
-	}
-	
-	/**
 	 * Set the volume to this value.
 	 *
 	 * @param value
 	 *            the new volume
 	 */
 	public void setVolume(int value) {
-		volumeDisc.setValue(value, true);
+		disc.setVolume(value);
 		
+	}
+	
+	/**
+	 * You can use this method to add or minus from the player volume For example you can call adjustVolume(+1) or adjustVolume(-1)
+	 *
+	 * @param value
+	 *            the value
+	 */
+	public void adjustVolume(int value) {
+		disc.setVolume(disc.getCurrentVolume() + value);
+	}
+	
+	/**
+	 * Adjust the volume to the maximum value.
+	 */
+	public void maximizeVolume() {
+		disc.setVolume(disc.getMaximumVolume());
+	}
+	
+	/**
+	 * Adjust the volume to the minimum value.
+	 */
+	public void minimizeVolume() {
+		disc.setVolume(0);
 	}
 	
 	/**
@@ -1183,41 +1181,11 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 	public void controlVolume() {
 		
 		try {
-			//Crazy Code here.......
-			// if (key == 1 || key == 2) {
-			// if (djMode.balancer.getVolume() < 100) { // <100
-			//
-			// Main.xPlayersList.getXPlayer(1).setGain(
-			// ((Main.xPlayersList.getXPlayerUI(1).getVolume() / 100.00) *
-			// (djMode.balancer.getVolume()))
-			// / 100.00);
-			// Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerUI(2).getVolume()
-			// / 100.00);
-			//
-			// } else if (djMode.balancer.getVolume() == 100) { // ==100
-			//
-			// Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerUI(1).getVolume()
-			// / 100.00);
-			// Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerUI(2).getVolume()
-			// / 100.00);
-			//
-			// } else if (djMode.balancer.getVolume() > 100) { // >100
-			//
-			// Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerUI(1).getVolume()
-			// / 100.00);
-			// Main.xPlayersList.getXPlayer(2).setGain(((Main.xPlayersList.getXPlayerUI(2).getVolume()
-			// / 100.00)
-			// * (200 - djMode.balancer.getVolume())) / 100.00);
-			//
-			// }
-			// } else if (key == 0) {
-			xPlayer.setGain((double) volumeDisc.getValue() / 100.00);
-			// }
+			
+			xPlayer.setGain((double) disc.getCurrentVolume() / 100.00);
 			
 			//			//Update PropertiesDB
 			//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
-			//			
-			//			System.out.println(getVolume());
 			
 			//VisualizerStackController Label
 			visualizerStackController.replayLabelEffect("Vol: " + getVolume() + " %");
@@ -1418,7 +1386,18 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 					
 				}
 		});
-		diskStackPane.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
+		disc.currentVolumeProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//Update the Volume
+			controlVolume();
+			
+			//Update the Label
+			smVolumeSliderLabel.setText(disc.getCurrentVolume() + " %");
+			
+			//smVolumeSlider
+			smVolumeSlider.setValue(newValue.doubleValue());
+			
+		});
 		
 		///smTimeSlider
 		smTimeSlider.setOnMouseMoved(m -> {
@@ -1508,31 +1487,21 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 			System.out.println(discIsDragging);
 		});
 		
-		//		
-		//volumeDisc
-		volumeDisc = new DJFilter(30, 30, Color.MEDIUMSPRINGGREEN, volume, minimumVolume, maximumVolume, DJFilterCategory.VOLUME_FILTER);
-		volumeDisc.addDJDiscListener(this);
-		
 		//smVolumeSlider
 		smVolumeSlider.setMin(0);
 		smVolumeSlider.setMax(maximumVolume - 1.00);
 		smVolumeSlider.valueProperty().addListener(l -> {
 			
 			//Set the value to the volumeDisc
-			volumeDisc.setValue(smVolumeSlider.getValue(), false);
-			
-			//Update the Volume
-			controlVolume();
-			
-			//Update the Label
-			smVolumeSliderLabel.setText((int) smVolumeSlider.getValue() + " %");
-			
-			//Change the disc value
-			disc.setVolume((int) ( smVolumeSlider.getValue() * 100 ));
+			disc.setVolume(smVolumeSlider.getValue());
 			
 		});
 		smVolumeSlider.setValue(volume);
-		smVolumeSlider.setOnScroll(scroll -> setVolume((int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))));
+		smVolumeSlider.setOnScroll(scroll -> {
+			//(int) Math.ceil( ( smVolumeSlider.getValue() + ( scroll.getDeltaY() > 0 ? 2 : -2 ) ))
+			adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2);
+		});
+		diskStackPane.setOnScroll(smVolumeSlider.getOnScroll());
 		
 		//Recalculate Volume Disc Size
 		discBorderPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
@@ -1661,7 +1630,7 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		else
 			size = disc.getPrefWidth() / 1.15;
 		
-		volumeDisc.resizeDisc(size, size);
+		//volumeDisc.resizeDisc(size, size);
 	}
 	
 	/**
@@ -2269,13 +2238,13 @@ public class XPlayerController extends StackPane implements DJFilterListener, St
 		return playService;
 	}
 	
-	@Override
-	public void valueChanged(double value) {
-		//controlVolume();
-		//volumeDiscLabel.setText(String.valueOf((int) value))
-		smVolumeSlider.setValue(value);
-		//disc.setVolume((int) ( value * 100 ));
-	}
+	//	@Override
+	//	public void valueChanged(double value) {
+	//		//controlVolume();
+	//		//volumeDiscLabel.setText(String.valueOf((int) value))
+	//		smVolumeSlider.setValue(value);
+	//		//disc.setVolume((int) ( value * 100 ));
+	//	}
 	
 	/**
 	 * @return the mediaFileMarquee
