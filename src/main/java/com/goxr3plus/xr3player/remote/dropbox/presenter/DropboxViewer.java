@@ -25,16 +25,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -129,10 +126,13 @@ public class DropboxViewer extends StackPane {
 	private TreeView<String> treeView;
 	
 	@FXML
-	private ListView<String> savedAccountsListView;
+	private Button loginWithSavedAccount;
 	
 	@FXML
-	private Button loginWithSavedAccount;
+	private VBox loadingAccountsVBox;
+	
+	@FXML
+	private ProgressBar accountsProgressBar;
 	
 	@FXML
 	private Button deleteSavedAccount;
@@ -184,7 +184,7 @@ public class DropboxViewer extends StackPane {
 	
 	private final DropboxFileContextMenu fileContextMenu = new DropboxFileContextMenu();
 	
-	public final Color FONT_ICON_COLOR = Color.web("#25c1ff");
+	public final static Color FONT_ICON_COLOR = Color.web("#25c1ff");
 	
 	/**
 	 * Constructor.
@@ -211,9 +211,25 @@ public class DropboxViewer extends StackPane {
 	@FXML
 	private void initialize() {
 		
+		//loadingAccountsVBox
+		loadingAccountsVBox.visibleProperty().bind(accountsService.runningProperty());
+		
+		//accountsProgressBar
+		accountsProgressBar.progressProperty().bind(accountsService.progressProperty());
+		
 		//treeView
-		treeView.setRoot(new TreeItem<String>("Accounts"));
 		treeView.setShowRoot(false);
+		treeView.setRoot(new TreeItem<String>("Accounts"));
+		treeView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+			//Check if it is leaf
+			if (newValue.isLeaf()) {
+				loginWithSavedAccount.setDisable(false);
+				deleteSavedAccount.setDisable(false);
+			} else {
+				loginWithSavedAccount.setDisable(true);
+				deleteSavedAccount.setDisable(true);
+			}
+		});
 		
 		//DropboxFilesTableViewer
 		innerStackPane.getChildren().add(dropboxFilesTableViewer);
@@ -320,11 +336,9 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//loginWithSavedAccount
-		loginWithSavedAccount.disableProperty().bind(savedAccountsListView.getSelectionModel().selectedItemProperty().isNull());
-		loginWithSavedAccount.setOnAction(a -> connect(savedAccountsListView.getSelectionModel().getSelectedItem()));
+		loginWithSavedAccount.setOnAction(a -> connect(treeView.getSelectionModel().getSelectedItem().getValue()));
 		
 		//deleteSavedAccount
-		deleteSavedAccount.disableProperty().bind(loginWithSavedAccount.disabledProperty());
 		deleteSavedAccount.setOnAction(a -> deleteSelectedAccount());
 		
 		//tryAgain
@@ -343,31 +357,31 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//savedAccountsListView
-		savedAccountsListView.setItems(savedAccountsArray);
-		savedAccountsListView.setCellFactory(lv -> new ListCell<String>() {
-			@Override
-			public void updateItem(String item , boolean empty) {
-				super.updateItem(item, empty);
-				if (empty) {
-					setText(null);
-				} else {
-					//String text = item.contains("<>:<>") ? item.split("<>:<>")[0] : item; // get text from item
-					setText(item);
-					setTooltip(new Tooltip(item));
-					setGraphic(JavaFXTools.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 32));
-				}
-			}
-		});
-		savedAccountsListView.setOnKeyReleased(key -> {
-			if (key.getCode() == KeyCode.ENTER && !savedAccountsListView.getItems().isEmpty()) {
-				
-				//Connect
-				connect(savedAccountsListView.getSelectionModel().getSelectedItem());
-				
-			} else if (key.getCode() == KeyCode.DELETE && !savedAccountsListView.getItems().isEmpty())
-				deleteSelectedAccount();
-			
-		});
+		//		savedAccountsListView.setItems(savedAccountsArray);
+		//		savedAccountsListView.setCellFactory(lv -> new ListCell<String>() {
+		//			@Override
+		//			public void updateItem(String item , boolean empty) {
+		//				super.updateItem(item, empty);
+		//				if (empty) {
+		//					setText(null);
+		//				} else {
+		//					//String text = item.contains("<>:<>") ? item.split("<>:<>")[0] : item; // get text from item
+		//					setText(item);
+		//					setTooltip(new Tooltip(item));
+		//					setGraphic(JavaFXTools.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 32));
+		//				}
+		//			}
+		//		});
+		//		savedAccountsListView.setOnKeyReleased(key -> {
+		//			if (key.getCode() == KeyCode.ENTER && !savedAccountsListView.getItems().isEmpty()) {
+		//				
+		//				//Connect
+		//				connect(savedAccountsListView.getSelectionModel().getSelectedItem());
+		//				
+		//			} else if (key.getCode() == KeyCode.DELETE && !savedAccountsListView.getItems().isEmpty())
+		//				deleteSelectedAccount();
+		//			
+		//		});
 		
 		//downloadFile
 		downloadFile.disableProperty().bind(dropboxFilesTableViewer.getSelectionModel().selectedItemProperty().isNull());
@@ -478,10 +492,10 @@ public class DropboxViewer extends StackPane {
 		//Clear the selected item
 		if (savedAccountsArray != null) {
 			
-			if (ActionTool.doQuestion("Deleting Dropbox Account", "Are you soore you want to delete selected Dropbox Account ?", savedAccountsListView, Main.window)) {
+			if (ActionTool.doQuestion("Deleting Dropbox Account", "Are you soore you want to delete selected Dropbox Account ?", treeView, Main.window)) {
 				
 				//Remove the selected items
-				savedAccountsArray.remove(savedAccountsListView.getSelectionModel().getSelectedIndex());
+				savedAccountsArray.remove(treeView.getSelectionModel().getSelectedIndex());
 				
 				//Refresh the properties database
 				Main.userInfoMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", savedAccountsArray.stream().collect(Collectors.joining("<>:<>")));
@@ -648,6 +662,9 @@ public class DropboxViewer extends StackPane {
 		
 		//DropBoxAccountsLabel
 		dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
+		
+		//Start Accounts Service
+		accountsService.restartService();
 	}
 	
 	/**
@@ -790,13 +807,6 @@ public class DropboxViewer extends StackPane {
 	 */
 	public Label getEmptyFolderLabel() {
 		return emptyFolderLabel;
-	}
-	
-	/**
-	 * @return the savedAccountsListView
-	 */
-	public ListView<String> getSavedAccountsListView() {
-		return savedAccountsListView;
 	}
 	
 	/**

@@ -6,7 +6,10 @@ import com.dropbox.core.v2.DbxClientV2;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
+import javafx.scene.paint.Color;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 
 public class AccountsService extends Service<Boolean> {
@@ -17,6 +20,8 @@ public class AccountsService extends Service<Boolean> {
 	public DropboxViewer dropBoxViewer;
 	
 	private final DbxRequestConfig config = new DbxRequestConfig("XR3Player");
+	
+	private final Color goldColor = Color.web("#f4c425");
 	
 	/**
 	 * Constructor
@@ -31,6 +36,7 @@ public class AccountsService extends Service<Boolean> {
 	 * Restart the Service
 	 */
 	public void restartService() {
+		
 		//Clear TreeView
 		dropBoxViewer.getTreeView().getRoot().getChildren().clear();
 		
@@ -63,9 +69,10 @@ public class AccountsService extends Service<Boolean> {
 						//Filter
 						filter(item -> item.getValue().equals(email)).findFirst().ifPresentOrElse(
 								//Append AccessTokens to this  TreeItem
-								item -> item.getChildren().add(new TreeItem<String>(accessToken)),
+								item -> item.getChildren().add(produceTreeItem(accessToken, JavaFXTools.getFontIcon("fas-key", goldColor, 20))),
 								//Append this as a parent item which will have leafs	
-								() -> dropBoxViewer.getTreeView().getRoot().getChildren().add(new TreeItem<String>(email)));
+								() -> dropBoxViewer.getTreeView().getRoot().getChildren()
+										.add(produceTreeItem(email, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32))));
 						
 					} catch (DbxException e) {
 						e.printStackTrace();
@@ -75,6 +82,19 @@ public class AccountsService extends Service<Boolean> {
 				});
 				
 				return true;
+			}
+			
+			/**
+			 * Fast method to produce TreeItems without duplicate code
+			 * 
+			 * @param value
+			 * @return
+			 */
+			private TreeItem<String> produceTreeItem(String value , Node graphic) {
+				TreeItem<String> treeItem = new TreeItem<>(value);
+				treeItem.setGraphic(graphic);
+				
+				return treeItem;
 			}
 			
 		};

@@ -5,9 +5,9 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
@@ -240,7 +240,6 @@
                            <children>
                               <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010;" styleClass="online-music-title-label" text="Accounts" />
                               <TreeView fx:id="treeView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
-                              <ListView fx:id="savedAccountsListView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
                               <HBox>
                                  <children>
                                     <Button fx:id="loginWithSavedAccount" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button4" text="Log in " HBox.hgrow="ALWAYS">
@@ -277,6 +276,18 @@
                               <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
                            </graphic>
                         </Label>
+                        <VBox fx:id="loadingAccountsVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: #151515;" visible="false">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="817.0" style="-fx-border-color: transparent; -fx-font-size: 18;" styleClass="applicationSettingsLabel2" text="Refreshing" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <ProgressBar fx:id="accountsProgressBar" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" styleClass="transparent-progress-bar" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="25.0" />
+                           </padding>
+                        </VBox>
                      </children>
                   </StackPane>
                </items>
