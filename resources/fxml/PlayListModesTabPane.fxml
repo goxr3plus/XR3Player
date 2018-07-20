@@ -46,7 +46,7 @@
                            <children>
                               <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane">
                                  <tabs>
-                                    <Tab fx:id="dropBoxTab" closable="false" text="Dropbox ">
+                                    <Tab fx:id="dropBoxDownloadsTab" closable="false" text="Dropbox ">
                                        <graphic>
                                           <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
                                        </graphic>
