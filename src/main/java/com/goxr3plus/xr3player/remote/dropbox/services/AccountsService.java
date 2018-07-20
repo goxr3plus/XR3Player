@@ -1,5 +1,10 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
@@ -55,6 +60,9 @@ public class AccountsService extends Service<Boolean> {
 				int[] counter = { 0 };
 				int[] totalSize = { dropBoxViewer.getSavedAccountsArray().size() };
 				
+				//Create a multimap
+				Map<String,List<String>> multimap = new HashMap<>();
+				
 				//For each item on the list view
 				dropBoxViewer.getSavedAccountsArray().forEach(accessToken -> {
 					
@@ -66,22 +74,32 @@ public class AccountsService extends Service<Boolean> {
 						//Get informations for the client
 						String email = client.users().getCurrentAccount().getEmail();
 						
-						//Here we append items to the treeView in a smart way
-						dropBoxViewer.getTreeView().getRoot().getChildren().stream().
-						//Filter
-						filter(item -> item.getValue().equals(email)).findFirst().ifPresentOrElse(
-								//Append AccessTokens to this  TreeItem
-								item -> item.getChildren()
-										.add(produceTreeItem(InfoTool.getMinString(accessToken, 8), accessToken, JavaFXTools.getFontIcon("fas-key", goldColor, 20))),
-								//Append this as a parent item which will have leafs	
-								() -> dropBoxViewer.getTreeView().getRoot().getChildren()
-										.add(produceTreeItem(email, accessToken, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32))));
+						//Add to the map
+						multimap.computeIfAbsent(email, k -> new ArrayList<>()).add(accessToken);
 						
 					} catch (DbxException e) {
 						e.printStackTrace();
 					}
 					
 					updateProgress(++counter[0], totalSize[0]);
+				});
+				
+				//Based on multimap add the values
+				multimap.forEach((key , list) -> {
+					
+					//Check if list is empty
+					if (!list.isEmpty()) {
+						//Parent represents the client and it contains the accesstokens as leafs
+						DropboxClientTreeItem parent = produceTreeItem(key + " [ " + list.size() + " ]", null,
+								JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32));
+						
+						//For each element on the list
+						list.forEach(accessToken -> parent.getChildren()
+								.add(produceTreeItem(InfoTool.getMinString(accessToken, 25), accessToken, JavaFXTools.getFontIcon("fas-key", goldColor, 20))));
+						
+						//Append to the treeview root item
+						dropBoxViewer.getTreeView().getRoot().getChildren().add(parent);
+					}
 				});
 				
 				return true;
@@ -93,7 +111,7 @@ public class AccountsService extends Service<Boolean> {
 			 * @param value
 			 * @return
 			 */
-			private TreeItem<String> produceTreeItem(String value , String accessToken , Node graphic) {
+			private DropboxClientTreeItem produceTreeItem(String value , String accessToken , Node graphic) {
 				DropboxClientTreeItem treeItem = new DropboxClientTreeItem(value, accessToken);
 				treeItem.setGraphic(graphic);
 				

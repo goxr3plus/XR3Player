@@ -222,7 +222,7 @@ public class DropboxViewer extends StackPane {
 		
 		//treeView
 		treeView.setShowRoot(false);
-		treeView.setRoot(new TreeItem<String>("Accounts"));
+		treeView.setRoot(new DropboxClientTreeItem("Accounts", null));
 		treeView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			//Check for null
 			if (newValue == null)
@@ -505,7 +505,7 @@ public class DropboxViewer extends StackPane {
 			if (ActionTool.doQuestion("Deleting Dropbox Account", "Are you soore you want to delete selected Dropbox Account ?", treeView, Main.window)) {
 				
 				//Remove the selected items
-				savedAccountsArray.remove(treeView.getSelectionModel().getSelectedIndex());
+				savedAccountsArray.remove( ( (DropboxClientTreeItem) treeView.getSelectionModel().getSelectedItem() ).getAccessToken());
 				
 				//Refresh the properties database
 				Main.userInfoMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", savedAccountsArray.stream().collect(Collectors.joining("<>:<>")));
@@ -515,8 +515,8 @@ public class DropboxViewer extends StackPane {
 			dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
 		}
 		
-		//refreshAccounts
-		refreshAccounts.setOnAction(a -> accountsService.restartService());
+		//Start Accounts Service
+		accountsService.restartService();
 	}
 	
 	//------------------------------------------------------------------------------------------
