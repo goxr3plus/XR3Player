@@ -116,7 +116,7 @@ public class DownloadService extends Service<Boolean> {
 							ProgressOutputStream output = new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
 								//System.out.println( ( completed * 100 ) / totalSize + " %")
 								
-								//this.updateProgress(completed, totalSize)
+								this.updateProgress( ( completed * 100 ), totalSize);
 							})) {
 								
 						//FileOutputStream
@@ -144,7 +144,6 @@ public class DownloadService extends Service<Boolean> {
 						
 						//Add a progress Listener
 						dl.download(fOut);
-						
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}

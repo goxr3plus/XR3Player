@@ -33,6 +33,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -45,6 +46,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthanticationBrowser;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.services.AccountsService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService.DropBoxOperation;
@@ -58,9 +60,6 @@ public class DropboxViewer extends StackPane {
 	private ProgressIndicator cachedSearchIndicator;
 	
 	@FXML
-	private StackPane innerStackPane;
-	
-	@FXML
 	private TextField searchField;
 	
 	@FXML
@@ -70,22 +69,19 @@ public class DropboxViewer extends StackPane {
 	private MenuItem signOut;
 	
 	@FXML
-	private Button refresh;
-	
-	@FXML
 	private BreadCrumbBar<String> breadCrumbBar;
 	
 	@FXML
 	private Label searchResultsLabel;
 	
 	@FXML
-	private MenuButton deleteMenuButton;
-	
-	@FXML
 	private Button openFolder;
 	
 	@FXML
 	private Button createFolder;
+	
+	@FXML
+	private MenuButton deleteMenuButton;
 	
 	@FXML
 	private MenuItem deleteFile;
@@ -100,6 +96,18 @@ public class DropboxViewer extends StackPane {
 	private Button downloadFile;
 	
 	@FXML
+	private Button refresh;
+	
+	@FXML
+	private StackPane innerStackPane;
+	
+	@FXML
+	private Label emptyFolderLabel;
+	
+	@FXML
+	private VBox refreshVBox;
+	
+	@FXML
 	private Label refreshLabel;
 	
 	@FXML
@@ -112,6 +120,15 @@ public class DropboxViewer extends StackPane {
 	private VBox loginVBox;
 	
 	@FXML
+	private Button authorizationButton;
+	
+	@FXML
+	private Button authorizationButton2;
+	
+	@FXML
+	private TreeView<String> treeView;
+	
+	@FXML
 	private ListView<String> savedAccountsListView;
 	
 	@FXML
@@ -119,24 +136,6 @@ public class DropboxViewer extends StackPane {
 	
 	@FXML
 	private Button deleteSavedAccount;
-	
-	@FXML
-	private Button authorizationButton;
-	
-	@FXML
-	private Button authorizationButton2;
-	
-	@FXML
-	private VBox errorPane;
-	
-	@FXML
-	private JFXButton tryAgain;
-	
-	@FXML
-	private ProgressIndicator tryAgainIndicator;
-	
-	@FXML
-	private Label emptyFolderLabel;
 	
 	@FXML
 	private Label dropBoxAccountsLabel;
@@ -154,7 +153,13 @@ public class DropboxViewer extends StackPane {
 	private Button authorizationCodeCancelButton;
 	
 	@FXML
-	private VBox refreshVBox;
+	private VBox errorPane;
+	
+	@FXML
+	private JFXButton tryAgain;
+	
+	@FXML
+	private ProgressIndicator tryAgainIndicator;
 	
 	// -------------------------------------------------------------
 	
@@ -164,6 +169,9 @@ public class DropboxViewer extends StackPane {
 	// -------------------------------------------------------------
 	
 	private final DropboxService dropBoxService = new DropboxService(this);
+	private final AccountsService accountsService = new AccountsService(this);
+	
+	private final ObservableList<String> savedAccountsArray = FXCollections.observableArrayList();
 	
 	// -------------------------------------------------------------
 	
@@ -202,6 +210,10 @@ public class DropboxViewer extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//treeView
+		treeView.setRoot(new TreeItem<String>("Accounts"));
+		treeView.setShowRoot(false);
 		
 		//DropboxFilesTableViewer
 		innerStackPane.getChildren().add(dropboxFilesTableViewer);
@@ -248,7 +260,7 @@ public class DropboxViewer extends StackPane {
 				PropertiesDb propertiesDb = Main.userInfoMode.getUser().getUserInformationDb();
 				propertiesDb.updateProperty("DropBox-Access-Tokens",
 						( propertiesDb.getProperty("DropBox-Access-Tokens") == null ? "" : propertiesDb.getProperty("DropBox-Access-Tokens") )
-								+ ( savedAccountsListView.getItems().isEmpty() ? "" : "<>:<>" ) + accessToken);
+								+ ( savedAccountsArray.isEmpty() ? "" : "<>:<>" ) + accessToken);
 				
 				//loginVBox
 				loginVBox.setVisible(false);
@@ -331,6 +343,7 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//savedAccountsListView
+		savedAccountsListView.setItems(savedAccountsArray);
 		savedAccountsListView.setCellFactory(lv -> new ListCell<String>() {
 			@Override
 			public void updateItem(String item , boolean empty) {
@@ -463,20 +476,19 @@ public class DropboxViewer extends StackPane {
 	private void deleteSelectedAccount() {
 		
 		//Clear the selected item
-		ObservableList<String> items = savedAccountsListView.getItems();
-		if (items != null) {
+		if (savedAccountsArray != null) {
 			
 			if (ActionTool.doQuestion("Deleting Dropbox Account", "Are you soore you want to delete selected Dropbox Account ?", savedAccountsListView, Main.window)) {
 				
 				//Remove the selected items
-				items.remove(savedAccountsListView.getSelectionModel().getSelectedIndex());
+				savedAccountsArray.remove(savedAccountsListView.getSelectionModel().getSelectedIndex());
 				
 				//Refresh the properties database
-				Main.userInfoMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", items.stream().collect(Collectors.joining("<>:<>")));
+				Main.userInfoMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", savedAccountsArray.stream().collect(Collectors.joining("<>:<>")));
 			}
 			
 			//DropBoxAccountsLabel
-			dropBoxAccountsLabel.setVisible(items.isEmpty());
+			dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
 		}
 	}
 	
@@ -629,13 +641,13 @@ public class DropboxViewer extends StackPane {
 		//savedAccountsListView
 		Optional.ofNullable(Main.userInfoMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {
 			if (accessTokens.contains("<>:<>")) //Check if we have multiple access tokens
-				savedAccountsListView.setItems(Stream.of(accessTokens.split(Pattern.quote("<>:<>"))).collect(Collectors.toCollection(FXCollections::observableArrayList)));
+				savedAccountsArray.addAll(Stream.of(accessTokens.split(Pattern.quote("<>:<>"))).collect(Collectors.toCollection(FXCollections::observableArrayList)));
 			else if (!accessTokens.isEmpty()) //Check if we have one access token
-				savedAccountsListView.setItems(Stream.of(accessTokens).collect(Collectors.toCollection(FXCollections::observableArrayList)));
+				savedAccountsArray.addAll(Stream.of(accessTokens).collect(Collectors.toCollection(FXCollections::observableArrayList)));
 		});
 		
 		//DropBoxAccountsLabel
-		dropBoxAccountsLabel.setVisible(savedAccountsListView.getItems().isEmpty());
+		dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
 	}
 	
 	/**
@@ -841,6 +853,20 @@ public class DropboxViewer extends StackPane {
 	 */
 	public Button getCancelDropBoxService() {
 		return cancelDropBoxService;
+	}
+	
+	/**
+	 * @return the treeView
+	 */
+	public TreeView<String> getTreeView() {
+		return treeView;
+	}
+	
+	/**
+	 * @return the savedAccountsArray
+	 */
+	public ObservableList<String> getSavedAccountsArray() {
+		return savedAccountsArray;
 	}
 	
 }

@@ -13,8 +13,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -195,13 +195,13 @@
             </Button>
          </children>
       </VBox>
-      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #303030;" visible="false">
+      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #303030;">
          <children>
             <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
                   <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="authorizationButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Sign in using internal XR3Player Web Browser -&gt; Recommended" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                        <Button fx:id="authorizationButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Sign in ( internal browser )" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -215,7 +215,7 @@
                               <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
                            </graphic>
                         </Button>
-                        <Button fx:id="authorizationButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Sign in using Firefox , Opera , Chrome , Safari" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                        <Button fx:id="authorizationButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Sign in ( external browser)" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -238,11 +238,12 @@
                      <children>
                         <VBox alignment="CENTER" minWidth="0.0">
                            <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Saved DropBox Accounts" />
-                              <ListView fx:id="savedAccountsListView" minWidth="0.0" VBox.vgrow="ALWAYS" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010;" styleClass="online-music-title-label" text="Accounts" />
+                              <TreeView fx:id="treeView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="savedAccountsListView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
                               <HBox>
                                  <children>
-                                    <Button fx:id="loginWithSavedAccount" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Log in " HBox.hgrow="ALWAYS">
+                                    <Button fx:id="loginWithSavedAccount" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button4" text="Log in " HBox.hgrow="ALWAYS">
                                        <tooltip>
                                           <Tooltip text="Automatically login with an already saved DropBox Account" />
                                        </tooltip>
@@ -250,25 +251,28 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <effect>
-                                          <InnerShadow />
+                                          <DropShadow />
                                        </effect>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="ri-contacts" iconSize="24" />
+                                       </graphic>
                                     </Button>
-                                    <Button fx:id="deleteSavedAccount" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Delete" HBox.hgrow="ALWAYS">
+                                    <Button fx:id="deleteSavedAccount" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button-dark-white-selection" text="Delete" HBox.hgrow="NEVER">
                                        <tooltip>
                                           <Tooltip text="Delete this saved DropBox Account from database" />
                                        </tooltip>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <effect>
-                                          <InnerShadow />
-                                       </effect>
+                                       <graphic>
+                                          <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="24" />
+                                       </graphic>
                                     </Button>
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
-                        <Label fx:id="dropBoxAccountsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0 Saved DropBox Accounts" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="dropBoxAccountsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="0 Saved DropBox Accounts" textAlignment="CENTER" visible="false" wrapText="true">
                            <graphic>
                               <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
                            </graphic>
