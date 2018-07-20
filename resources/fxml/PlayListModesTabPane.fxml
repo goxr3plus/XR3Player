@@ -66,11 +66,11 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="downloadsTab" closable="false" disable="true">
+                  <Tab fx:id="downloadsTab" closable="false">
                      <content>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <JFXTabPane minHeight="0.0" side="RIGHT" styleClass="specialJFXTabPane">
+                              <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane">
                                  <tabs>
                                     <Tab fx:id="dropBoxTab1" closable="false" text="Dropbox ">
                                        <graphic>
@@ -82,7 +82,7 @@
                            </children></StackPane>
                      </content>
                      <graphic>
-                        <Group visible="false">
+                        <Group>
                            <children>
                               <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Coming...">
                                  <graphic>
