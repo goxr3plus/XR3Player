@@ -195,7 +195,7 @@
             </Button>
          </children>
       </VBox>
-      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #303030;">
+      <VBox fx:id="loginVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #303030;" visible="false">
          <children>
             <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
@@ -330,15 +330,15 @@
             <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text=" Firefox or Opera or Chrome or Safari browser will be opened . You will login to your Dropbox Account  and grant permission to XR3Player . After it paste the Authorization code you will be given to the  below textfield and press ok ." textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,1);" visible="false">
+      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #151515;">
          <children>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/warning.png" />
                </image>
             </ImageView>
-            <Label styleClass="sideBarSectionLabel" text="Unable to Connect " textAlignment="CENTER" wrapText="true" />
-            <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" prefHeight="156.0" prefWidth="587.0" text="&#10;&#10;1.Check your computer’s network connection.&#10;&#10;2.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true">
+            <Label styleClass="applicationSettingsLabel" text="Unable to Connect " textAlignment="CENTER" wrapText="true" />
+            <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" prefHeight="156.0" prefWidth="587.0" styleClass="dark-text-area" text="&#10;&#10;1.Check your computer’s network connection.&#10;&#10;2.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true">
                <VBox.margin>
                   <Insets left="5.0" right="5.0" />
                </VBox.margin></TextArea>
