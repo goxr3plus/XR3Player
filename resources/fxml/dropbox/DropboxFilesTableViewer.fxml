@@ -17,7 +17,7 @@
    <children>
       <BorderPane>
          <center>
-            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="actionColumn" editable="false" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" sortable="false" text="Menu">
                      <graphic>
