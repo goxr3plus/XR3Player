@@ -43,6 +43,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthanticationBrowser;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloadedFile;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.AccountsService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService;
@@ -343,7 +344,7 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//loginWithSavedAccount
-		loginWithSavedAccount.setOnAction(a -> connect(( (DropboxClientTreeItem) treeView.getSelectionModel().getSelectedItem() ).getAccessToken()));
+		loginWithSavedAccount.setOnAction(a -> connect( ( (DropboxClientTreeItem) treeView.getSelectionModel().getSelectedItem() ).getAccessToken()));
 		
 		//deleteSavedAccount
 		deleteSavedAccount.setOnAction(a -> deleteSelectedAccount());
@@ -590,17 +591,31 @@ public class DropboxViewer extends StackPane {
 			
 			//Show save dialog	
 			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
-			if (file != null)
-				new DownloadService(this).startService(dropboxFile, file.getAbsolutePath());
+			downloadFilePart2(dropboxFile, file);
 			
 			//Directory
 		} else {
 			
 			//Show save dialog	
 			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle() + ".zip");
-			if (file != null)
-				new DownloadService(this).startService(dropboxFile, file.getAbsolutePath());
+			downloadFilePart2(dropboxFile, file);
+			
 		}
+	}
+	
+	/**
+	 * This method is called automatically by downloadFile method , dunno touch :) ATTENTION!!! FIRE !! hahah joking :)
+	 */
+	private void downloadFilePart2(DropboxFile dropboxFile , File file) {
+		if (file == null)
+			return;
+		
+		//Create a new DropboxDownloadedFile
+		DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(new DownloadService(this));
+		//Append it to the TableViewer
+		Main.dropboxDownloadsTableViewer.getObservableList().add(dropboxDownloadedFile);
+		//Start the download Service
+		dropboxDownloadedFile.getDownloadService().startService(dropboxFile, file.getAbsolutePath());
 	}
 	
 	/**
