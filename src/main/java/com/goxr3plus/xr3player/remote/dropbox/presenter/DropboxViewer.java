@@ -123,22 +123,25 @@ public class DropboxViewer extends StackPane {
 	private Button authorizationButton2;
 	
 	@FXML
+	private Button refreshAccounts;
+	
+	@FXML
 	private TreeView<String> treeView;
 	
 	@FXML
 	private Button loginWithSavedAccount;
 	
 	@FXML
-	private VBox loadingAccountsVBox;
-	
-	@FXML
-	private ProgressBar accountsProgressBar;
-	
-	@FXML
 	private Button deleteSavedAccount;
 	
 	@FXML
 	private Label dropBoxAccountsLabel;
+	
+	@FXML
+	private VBox loadingAccountsVBox;
+	
+	@FXML
+	private ProgressBar accountsProgressBar;
 	
 	@FXML
 	private VBox authorizationCodeVBox;
@@ -221,6 +224,10 @@ public class DropboxViewer extends StackPane {
 		treeView.setShowRoot(false);
 		treeView.setRoot(new TreeItem<String>("Accounts"));
 		treeView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+			//Check for null
+			if (newValue == null)
+				return;
+			
 			//Check if it is leaf
 			if (newValue.isLeaf()) {
 				loginWithSavedAccount.setDisable(false);
@@ -482,6 +489,9 @@ public class DropboxViewer extends StackPane {
 		//			}
 		//			
 		//		});
+		
+		//refreshAccounts
+		refreshAccounts.setOnAction(a -> accountsService.restartService());
 	}
 	
 	/**
@@ -504,6 +514,9 @@ public class DropboxViewer extends StackPane {
 			//DropBoxAccountsLabel
 			dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
 		}
+		
+		//refreshAccounts
+		refreshAccounts.setOnAction(a -> accountsService.restartService());
 	}
 	
 	//------------------------------------------------------------------------------------------

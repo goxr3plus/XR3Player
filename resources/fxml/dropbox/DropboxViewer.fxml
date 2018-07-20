@@ -238,20 +238,32 @@
                      <children>
                         <VBox alignment="CENTER" minWidth="0.0">
                            <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010;" styleClass="online-music-title-label" text="Accounts" />
+                              <HBox>
+                                 <children>
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #101010;" styleClass="online-music-title-label" text="Saved Accounts" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="refreshAccounts" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="28.0" style="-fx-background-radius: 0;" styleClass="jfx-button-dark-white-selection">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Refresh saved accounts" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="#2ec5cd" iconLiteral="fas-sync-alt" iconSize="20" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
                               <TreeView fx:id="treeView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
                               <HBox>
                                  <children>
-                                    <Button fx:id="loginWithSavedAccount" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button4" text="Log in " HBox.hgrow="ALWAYS">
+                                    <Button fx:id="loginWithSavedAccount" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button4" text="Log in " HBox.hgrow="ALWAYS">
                                        <tooltip>
                                           <Tooltip text="Automatically login with an already saved DropBox Account" />
                                        </tooltip>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
                                        <graphic>
                                           <FontIcon iconColor="WHITE" iconLiteral="ri-contacts" iconSize="24" />
                                        </graphic>

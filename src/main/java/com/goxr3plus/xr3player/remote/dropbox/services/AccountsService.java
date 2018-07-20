@@ -9,7 +9,9 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.paint.Color;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxClientTreeItem;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 
 public class AccountsService extends Service<Boolean> {
@@ -69,10 +71,11 @@ public class AccountsService extends Service<Boolean> {
 						//Filter
 						filter(item -> item.getValue().equals(email)).findFirst().ifPresentOrElse(
 								//Append AccessTokens to this  TreeItem
-								item -> item.getChildren().add(produceTreeItem(accessToken, JavaFXTools.getFontIcon("fas-key", goldColor, 20))),
+								item -> item.getChildren()
+										.add(produceTreeItem(InfoTool.getMinString(accessToken, 8), accessToken, JavaFXTools.getFontIcon("fas-key", goldColor, 20))),
 								//Append this as a parent item which will have leafs	
 								() -> dropBoxViewer.getTreeView().getRoot().getChildren()
-										.add(produceTreeItem(email, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32))));
+										.add(produceTreeItem(email, accessToken, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32))));
 						
 					} catch (DbxException e) {
 						e.printStackTrace();
@@ -90,8 +93,8 @@ public class AccountsService extends Service<Boolean> {
 			 * @param value
 			 * @return
 			 */
-			private TreeItem<String> produceTreeItem(String value , Node graphic) {
-				TreeItem<String> treeItem = new TreeItem<>(value);
+			private TreeItem<String> produceTreeItem(String value , String accessToken , Node graphic) {
+				DropboxClientTreeItem treeItem = new DropboxClientTreeItem(value, accessToken);
 				treeItem.setGraphic(graphic);
 				
 				return treeItem;
