@@ -1505,7 +1505,18 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		smVolumeSlider.valueProperty().addListener(l -> disc.setVolume(smVolumeSlider.getValue()));
 		smVolumeSlider.setValue(volume);
 		smVolumeSlider.setOnScroll(scroll -> adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2));
-		volumeSliderProgBar.prefWidthProperty().bind(smVolumeSlider.heightProperty());
+		smVolumeSlider.heightProperty().addListener((obserable , oldValue , newValue) -> {
+			//Set the Height
+			volumeSliderProgBar.setPrefWidth(newValue.doubleValue());
+			
+			//Keep fixed the UI
+			if (getKey() == 0) {
+				Main.xPlayersList.getXPlayerController(1).getVolumeSliderProgBar().setPrefWidth(newValue.doubleValue());
+				Main.xPlayersList.getXPlayerController(2).getVolumeSliderProgBar().setPrefWidth(newValue.doubleValue());
+			} else
+				Main.xPlayersList.getXPlayerController(0).getVolumeSliderProgBar().setPrefWidth(newValue.doubleValue());
+			
+		});
 		
 		//volumeSliderProgBar	
 		volumeSliderProgBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
@@ -2365,6 +2376,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	public void revertMuteButton() {
 		muteButton.setSelected(!muteButton.isSelected());
+	}
+	
+	/**
+	 * @return the volumeSliderProgBar
+	 */
+	public ProgressBar getVolumeSliderProgBar() {
+		return volumeSliderProgBar;
 	}
 	
 }
