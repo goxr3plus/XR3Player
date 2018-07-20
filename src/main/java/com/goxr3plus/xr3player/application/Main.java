@@ -102,6 +102,7 @@ import main.java.com.goxr3plus.xr3player.application.windows.MediaSearchWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloadsTableViewer;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
@@ -275,6 +276,8 @@ public class Main extends Application {
 	public static EmotionsTabPane emotionsTabPane;
 	
 	public static StarredMediaList starredMediaList;
+	
+	public static DropboxDownloadsTableViewer dropboxDownloadsTableViewer;
 	
 	/** The Search Window Smart Controller of the application */
 	public static SmartController searchWindowSmartController;
@@ -635,7 +638,9 @@ public class Main extends Application {
 				//Dropbox Viewer
 				dropBoxViewer = new DropboxViewer();
 				dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
-				playListModesTabPane.getDropBoxTab().setContent(Main.dropBoxViewer);
+				playListModesTabPane.getDropBoxTab().setContent(dropBoxViewer);
+				dropboxDownloadsTableViewer = new DropboxDownloadsTableViewer();
+				playListModesTabPane.getDropBoxDownloadsTab().setContent(dropboxDownloadsTableViewer);
 			});
 			
 			//System.out.println("Loller Thread exited...")

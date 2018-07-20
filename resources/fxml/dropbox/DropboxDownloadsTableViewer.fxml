@@ -23,7 +23,7 @@
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Name" />
-                  <TableColumn fx:id="title1" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Progress" />
+                  <TableColumn fx:id="progressBox" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Progress" />
                   <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fa-filter" iconSize="24" />

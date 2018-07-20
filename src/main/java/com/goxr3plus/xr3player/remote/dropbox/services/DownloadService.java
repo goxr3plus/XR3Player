@@ -34,6 +34,8 @@ public class DownloadService extends Service<Boolean> {
 	private DbxClientV2 client;
 	private DropboxFile dropboxFile;
 	private String localFileAbsolutePath;
+	private DbxDownloader<FileMetadata> downloadFile;
+	private DbxDownloader<DownloadZipResult> downloadFolder;
 	
 	/**
 	 * Constructor
@@ -86,8 +88,8 @@ public class DownloadService extends Service<Boolean> {
 							"Failed to download " + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + ":\n[ " + dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.ERROR));
 				}
-				
 				return true;
+				
 			}
 			
 			/**
@@ -109,21 +111,21 @@ public class DownloadService extends Service<Boolean> {
 				//Simple File
 				if (!dropboxFile.isDirectory()) {
 					//Create DbxDownloader
-					try (DbxDownloader<FileMetadata> dl = client.files().download(dropBoxFilePath);
-							//FileOutputStream
+					downloadFile = client.files().download(dropBoxFilePath);
+					try (//FileOutputStream
 							FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);
 							//ProgressOutPutStream
-							ProgressOutputStream output = new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed , long totalSize) -> {
+							ProgressOutputStream output = new ProgressOutputStream(fOut, downloadFile.getResult().getSize(), (long completed , long totalSize) -> {
 								//System.out.println( ( completed * 100 ) / totalSize + " %")
 								
-								this.updateProgress( ( completed * 100 ), totalSize);
+								updateProgress( ( completed * 100 ), totalSize);
 							})) {
 								
 						//FileOutputStream
 						System.out.println("Downloading .... " + dropBoxFilePath);
 						
 						//Add a progress Listener
-						dl.download(output);
+						downloadFile.download(output);
 						
 						//Fast way...
 						//client.files().downloadBuilder(file).download(new FileOutputStream("downloads/" + md.getName()))
@@ -135,7 +137,8 @@ public class DownloadService extends Service<Boolean> {
 					//Directory
 				} else {
 					//Create DbxDownloader
-					try (DbxDownloader<DownloadZipResult> dl = client.files().downloadZip(dropBoxFilePath);
+					downloadFolder = client.files().downloadZip(dropBoxFilePath);
+					try (
 							//FileOutputStream
 							FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath)) {
 						
@@ -143,7 +146,7 @@ public class DownloadService extends Service<Boolean> {
 						System.out.println("Downloading .... " + dropBoxFilePath);
 						
 						//Add a progress Listener
-						dl.download(fOut);
+						downloadFolder.download(fOut);
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -155,10 +158,42 @@ public class DownloadService extends Service<Boolean> {
 	}
 	
 	/**
+	 * This method attempts to cancel the download of the file
+	 */
+	public void cancelDownload() {
+		//Cancel file download
+		if (downloadFile != null) {
+			downloadFile.close();
+			//Cancel folder download
+		} else if (downloadFolder != null) {
+			downloadFolder.close();
+		}
+		
+		//Show message to the User
+		Platform.runLater(() -> ActionTool.showNotification("Download Canclled",
+				"Cancelled download " + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + ":\n[ " + dropboxFile.getMetadata().getName() + " ]", Duration.millis(3000),
+				NotificationType.WARNING));
+	}
+	
+	/**
 	 * @return the client
 	 */
 	public DbxClientV2 getClient() {
 		return client;
+	}
+	
+	/**
+	 * @return the dropboxFile
+	 */
+	public DropboxFile getDropboxFile() {
+		return dropboxFile;
+	}
+	
+	/**
+	 * @return the localFileAbsolutePath
+	 */
+	public String getLocalFileAbsolutePath() {
+		return localFileAbsolutePath;
 	}
 	
 }

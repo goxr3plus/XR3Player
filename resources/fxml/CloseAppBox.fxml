@@ -16,11 +16,52 @@
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0">
          <children>
+            <HBox alignment="TOP_CENTER" spacing="5.0">
+               <children>
+                  <JFXButton fx:id="restartButton" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="R">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="minimize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-dark-white-selection" text="-">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="#f77272" iconLiteral="fas-window-minimize" iconSize="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="+">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <StackedFontIcon fx:id="sizeStackedFontIcon">
+                           <children>
+                              <FontIcon iconColor="#d4ff00" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
+                              <FontIcon iconColor="#d4ff00" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                           </children>
+                        </StackedFontIcon>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="exitApplication" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-dark-white-selection" text="X">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="#ff5959" iconLiteral="fa-close" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
             <HBox alignment="CENTER" spacing="5.0">
                <children>
                   <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" styleClass="jfx-button4" text="Donate">
                      <graphic>
-                        <FontIcon iconColor="#f2d13e" iconLiteral="fa-money" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-money" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" styleClass="jfx-button4" text="About">
@@ -41,47 +82,6 @@
                      </graphic>
                   </MenuButton>
                </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" spacing="5.0">
-               <children>
-                  <JFXButton fx:id="restartButton" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="R">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="minimize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="-">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-window-minimize" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="+">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                     <graphic>
-                        <StackedFontIcon fx:id="sizeStackedFontIcon">
-                           <children>
-                              <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="18" selectionEnd="0" selectionStart="0" visible="false" />
-                              <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-maximise" iconSize="18" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
-                           </children>
-                        </StackedFontIcon>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="exitApplication" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="X">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-window-close" iconSize="17" />
-                     </graphic>
-                  </JFXButton>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
             </HBox>
          </children>
       </VBox>

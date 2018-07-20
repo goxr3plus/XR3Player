@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane minHeight="0.0" minWidth="0.0" stylesheets="@../../style/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="1.0">
+         <children>
+            <ProgressBar fx:id="downloadProgress" minHeight="10.0" prefHeight="20.0" progress="0.52" HBox.hgrow="ALWAYS">
+               <styleClass>
+                  <String fx:value="transparent-progress-bar" />
+                  <String fx:value="transparent-volume-progress-bar2" />
+               </styleClass></ProgressBar>
+            <JFXButton fx:id="cancelDownload" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-dark-white-selection" text=" ">
+               <tooltip>
+                  <Tooltip text="Cancel Download" />
+               </tooltip>
+               <graphic>
+                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="openFileLocation" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="110.0" layoutY="10.0" styleClass="jfx-button-dark-white-selection" text=" ">
+               <tooltip>
+                  <Tooltip text="Open File Location" />
+               </tooltip>
+               <graphic>
+                  <FontIcon iconColor="#e1a524" iconLiteral="far-folder-open" iconSize="24" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</StackPane>

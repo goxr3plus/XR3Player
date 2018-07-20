@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
+package main.java.com.goxr3plus.xr3player.remote.dropbox.downloads;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -31,6 +31,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFile;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
@@ -47,7 +48,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	private TableColumn<DropboxFile,String> fileThumbnail;
 	
 	@FXML
-	private TableColumn<DropboxFile,Button> download;
+	private TableColumn<DropboxFile,StackPane> progressBox;
 	
 	@FXML
 	private TableColumn<DropboxFile,String> title;
@@ -60,9 +61,6 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	
 	@FXML
 	private Label quickSearchTextField;
-	
-	@FXML
-	private Label dragAndDropLabel;
 	
 	//-------------------------------------------------
 	private int previousSelectedCount = 0;
@@ -77,7 +75,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	public DropboxDownloadsTableViewer() {
 		
 		// FXMLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxFilesTableViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxDownloadsTableViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -194,7 +192,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 		actionColumn.setCellValueFactory(new PropertyValueFactory<>("actionColumn"));
 		
 		// download
-		download.setCellValueFactory(new PropertyValueFactory<>("download"));
+		progressBox.setCellValueFactory(new PropertyValueFactory<>("progressBox"));
 		
 		//------------------------------------------------------------
 		

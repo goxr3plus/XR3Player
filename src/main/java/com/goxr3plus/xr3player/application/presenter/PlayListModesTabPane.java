@@ -37,7 +37,7 @@ public class PlayListModesTabPane extends StackPane {
 	private Tab downloadsTab;
 	
 	@FXML
-	private Tab dropBoxTab1;
+	private Tab dropBoxDownloadsTab;
 	
 	// -------------------------------------------------------------
 	
@@ -109,5 +109,13 @@ public class PlayListModesTabPane extends StackPane {
 	public Tab getDropBoxTab() {
 		return dropBoxTab;
 	}
+
+	/**
+	 * @return the dropBoxDownloadsTab
+	 */
+	public Tab getDropBoxDownloadsTab() {
+		return dropBoxDownloadsTab;
+	}
+
 	
 }
