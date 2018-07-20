@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane minHeight="0.0" minWidth="0.0" stylesheets="@../../style/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" minWidth="0.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="1.0">
          <children>
@@ -36,4 +36,4 @@
          </children>
       </HBox>
    </children>
-</StackPane>
+</fx:root>

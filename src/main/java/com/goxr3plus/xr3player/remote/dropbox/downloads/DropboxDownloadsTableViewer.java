@@ -15,7 +15,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
@@ -53,9 +52,6 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	private TableColumn<DropboxDownloadedFile,String> title;
 	
 	@FXML
-	private TableColumn<DropboxDownloadedFile,Button> actionColumn;
-	
-	@FXML
 	private InlineCssTextArea detailCssTextArea;
 	
 	@FXML
@@ -69,7 +65,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	private final StringProperty searchWord = new SimpleStringProperty("");
 	
 	private final ObservableList<DropboxDownloadedFile> observableList = FXCollections.observableArrayList();
-		
+	
 	/**
 	 * Constructor.
 	 */
@@ -94,8 +90,10 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		
 		//------------------------------TableViewer---------------------------
+		
+		//Set Items
+		tableView.setItems(observableList);
 		
 		//--Allow Multiple Selection
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -190,45 +188,10 @@ public class DropboxDownloadsTableViewer extends StackPane {
 			
 		});
 		
-		// actionColumn
-		actionColumn.setCellValueFactory(new PropertyValueFactory<>("actionColumn"));
-		
 		// download
 		progressBox.setCellValueFactory(new PropertyValueFactory<>("progressBox"));
 		
 		//------------------------------------------------------------
-		
-		//		//--Row Factory
-		//		tableView.setRowFactory(rf -> {
-		//			TableRow<DropboxDownloadedFile> row = new TableRow<>();
-		//			
-		//			//Mouse Listener
-		//			row.setFocusTraversable(true);
-		//			row.setOnMouseReleased(m -> {
-		//				//We don't need null rows (rows without items)
-		//				if (row.itemProperty().getValue() != null) {
-		//					
-		//					if (m.getButton() == MouseButton.SECONDARY && !row.isDisable())
-		//						tableView.getSelectionModel().select(row.getIndex());
-		//					
-		//					//Primary
-		//					if (m.getButton() == MouseButton.PRIMARY) {
-		//						if (m.getClickCount() == 2 && row.itemProperty().get().isDirectory())
-		//							Main.dropBoxViewer.recreateTableView(row.itemProperty().get().getMetadata().getPathLower());
-		//						if (m.getClickCount() == 2 && !row.itemProperty().get().isDirectory())
-		//							Main.dropBoxViewer.renameFile(row.itemProperty().get(), row);
-		//						
-		//						//Secondary
-		//					} else if (m.getButton() == MouseButton.SECONDARY && !tableView.getSelectionModel().getSelectedItems().isEmpty()) {
-		//						
-		//						//Show the contextMenu
-		//						Main.dropBoxViewer.getFileContextMenu().show(row.itemProperty().get(), m.getScreenX(), m.getScreenY(), row);
-		//					}
-		//				}
-		//			});
-		//			
-		//			return row;
-		//		});
 		
 		//--KeyListener
 		tableView.setOnKeyReleased(key -> {
@@ -337,7 +300,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	public InlineCssTextArea getDetailCssTextArea() {
 		return detailCssTextArea;
 	}
-
+	
 	/**
 	 * @return the observableList
 	 */

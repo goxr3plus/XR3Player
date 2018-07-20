@@ -17,17 +17,12 @@
          <center>
             <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn fx:id="actionColumn" editable="false" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" sortable="false" text="Menu">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="24" selectionEnd="0" selectionStart="0" />
-                     </graphic>
-                  </TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Name" />
-                  <TableColumn fx:id="progressBox" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Progress" />
                   <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fa-filter" iconSize="24" />
                      </graphic></TableColumn>
+                  <TableColumn fx:id="progressBox" maxWidth="-1.0" minWidth="170.0" prefWidth="170.0" text="Progress" />
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="464.0" text="Name" />
                </columns>
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

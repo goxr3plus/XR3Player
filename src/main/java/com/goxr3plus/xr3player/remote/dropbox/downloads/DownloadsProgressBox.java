@@ -34,7 +34,7 @@ public class DownloadsProgressBox extends StackPane {
 		this.dropBoxDownloadedFile = dropBoxDownloadedFile;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "DownloadsProgressBox.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DownloadsProgressBox.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		

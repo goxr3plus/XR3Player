@@ -168,8 +168,8 @@ public class DownloadService extends Service<Boolean> {
 		}
 		
 		//Show message to the User
-		Platform.runLater(() -> ActionTool.showNotification("Download Canclled",
-				"Cancelled download " + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + ":\n[ " + dropboxFile.getMetadata().getName() + " ]", Duration.millis(3000),
+		Platform.runLater(() -> ActionTool.showNotification("Download Cancelled",
+				"Download cancelled for" + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + ":\n[ " + dropboxFile.getMetadata().getName() + " ]", Duration.millis(3000),
 				NotificationType.WARNING));
 	}
 	
