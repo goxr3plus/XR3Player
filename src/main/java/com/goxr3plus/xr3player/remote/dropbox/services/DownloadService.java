@@ -78,6 +78,9 @@ public class DownloadService extends Service<Boolean> {
 							"Completed downloading " + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + " :\n[ " + dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
 					
+					//Update the progress
+					updateProgress(1, 1);
+					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					

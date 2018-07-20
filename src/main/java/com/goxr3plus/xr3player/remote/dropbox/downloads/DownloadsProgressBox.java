@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -56,8 +57,10 @@ public class DownloadsProgressBox extends StackPane {
 		downloadProgress.progressProperty().bind(dropBoxDownloadedFile.getDownloadService().progressProperty());
 		
 		//cancelDownload
+		cancelDownload.disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty());
 		cancelDownload.setOnAction(a -> {
 			dropBoxDownloadedFile.getDownloadService().cancelDownload();
+			Main.dropboxDownloadsTableViewer.getObservableList().remove(dropBoxDownloadedFile);
 		});
 		
 		//openFileLocation
