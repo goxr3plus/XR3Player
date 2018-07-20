@@ -611,11 +611,11 @@ public class DropboxViewer extends StackPane {
 			return;
 		
 		//Create a new DropboxDownloadedFile
-		DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(new DownloadService(this));
+		DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(new DownloadService(this, dropboxFile, file.getAbsolutePath()));
 		//Append it to the TableViewer
 		Main.dropboxDownloadsTableViewer.getObservableList().add(dropboxDownloadedFile);
 		//Start the download Service
-		dropboxDownloadedFile.getDownloadService().startService(dropboxFile, file.getAbsolutePath());
+		dropboxDownloadedFile.getDownloadService().startService();
 	}
 	
 	/**

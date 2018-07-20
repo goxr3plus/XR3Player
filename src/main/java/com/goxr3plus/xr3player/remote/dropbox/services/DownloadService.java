@@ -42,20 +42,18 @@ public class DownloadService extends Service<Boolean> {
 	 * 
 	 * @param dropBoxViewer
 	 */
-	public DownloadService(DropboxViewer dropBoxViewer) {
+	public DownloadService(DropboxViewer dropBoxViewer, DropboxFile dropboxFile, String localFileAbsolutePath) {
 		this.dropBoxViewer = dropBoxViewer;
 		
+		this.dropboxFile = dropboxFile;
+		this.localFileAbsolutePath = localFileAbsolutePath;
 	}
 	
 	/**
 	 * Restart the Service
 	 * 
-	 * @param path
-	 *            The path to follow and open the Tree
 	 */
-	public void startService(DropboxFile dropboxFile , String localFileAbsolutePath) {
-		this.dropboxFile = dropboxFile;
-		this.localFileAbsolutePath = localFileAbsolutePath;
+	public void startService() {
 		
 		//Restart
 		super.restart();

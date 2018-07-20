@@ -51,6 +51,7 @@ public class DropboxDownloadedFile {
 	public DropboxDownloadedFile(DownloadService downloadService) {
 		this.downloadService = downloadService;
 		String value = InfoTool.getFileName(downloadService.getLocalFileAbsolutePath());
+		System.out.println(downloadService.getLocalFileAbsolutePath());
 		
 		//---------------------Init properties------------------------------------
 		title = new SimpleStringProperty(value);
