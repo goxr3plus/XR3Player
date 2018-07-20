@@ -348,7 +348,7 @@
                               </SplitPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                            <center>
                               <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <center>

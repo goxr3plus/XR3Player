@@ -1019,6 +1019,11 @@ public abstract class Media {
 	}
 	
 	/**
+	 * Keep track of previous emotion so not change the current image again and again
+	 */
+	private int previousEmotion = 0;
+	
+	/**
 	 * This method is called to change the Emotion Image of the Media based on the current Emotion
 	 * 
 	 * @param emotion
