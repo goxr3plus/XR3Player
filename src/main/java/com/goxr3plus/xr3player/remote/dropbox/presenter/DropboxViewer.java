@@ -343,7 +343,7 @@ public class DropboxViewer extends StackPane {
 		});
 		
 		//loginWithSavedAccount
-		loginWithSavedAccount.setOnAction(a -> connect(treeView.getSelectionModel().getSelectedItem().getValue()));
+		loginWithSavedAccount.setOnAction(a -> connect(( (DropboxClientTreeItem) treeView.getSelectionModel().getSelectedItem() ).getAccessToken()));
 		
 		//deleteSavedAccount
 		deleteSavedAccount.setOnAction(a -> deleteSelectedAccount());
