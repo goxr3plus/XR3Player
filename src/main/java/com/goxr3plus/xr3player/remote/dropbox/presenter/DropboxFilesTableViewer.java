@@ -13,6 +13,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -22,13 +23,18 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -70,6 +76,12 @@ public class DropboxFilesTableViewer extends StackPane {
 	/** The pause transition. */
 	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 	private final StringProperty searchWord = new SimpleStringProperty("");
+	
+	/** The canvas. */
+	private Canvas canvas = new Canvas();
+	
+	/** The image. */
+	private WritableImage image = new WritableImage(100, 100);
 	
 	/**
 	 * Constructor.
@@ -260,6 +272,28 @@ public class DropboxFilesTableViewer extends StackPane {
 				}
 			}
 			
+		});
+		
+		// --Drag Detected
+		tableView.setOnDragDetected(event -> {
+			if (getSelectedCount() != 0 && event.getScreenY() > tableView.localToScreen(tableView.getBoundsInLocal()).getMinY() + 30) {
+				
+				/* allow copy transfer mode */
+				Dragboard db = tableView.startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
+				
+				/* put a string on drag board */
+				ClipboardContent content = new ClipboardContent();
+				
+				// PutFiles
+				content.putString(tableView.getSelectionModel().getSelectedItem().getMetadata().getPathLower());
+				
+				// DragView
+				ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
+				db.setDragView(canvas.snapshot(null, image), 50, 0);
+				
+				db.setContent(content);
+			}
+			event.consume();
 		});
 		
 	}

@@ -664,6 +664,11 @@
                   </VBox>
                </left>
             </BorderPane>
+            <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
+               </graphic>
+            </Label>
             <StackPane fx:id="regionStackPane" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false">
                <children>
                   <VBox alignment="CENTER">
@@ -680,11 +685,15 @@
                   </VBox>
                </children>
             </StackPane>
-            <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
-               </graphic>
-            </Label>
+            <StackPane fx:id="downloadStackPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: rgb(0,0,0,0.8);">
+               <children>
+                  <Label fx:id="downloadingLabel" alignment="CENTER" contentDisplay="BOTTOM" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
          </children>
       </StackPane>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" visible="false">

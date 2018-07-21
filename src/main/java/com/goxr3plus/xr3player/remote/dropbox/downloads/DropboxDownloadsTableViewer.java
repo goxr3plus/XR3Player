@@ -15,6 +15,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
@@ -22,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -65,6 +67,11 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	private final StringProperty searchWord = new SimpleStringProperty("");
 	
 	private final ObservableList<DropboxDownloadedFile> observableList = FXCollections.observableArrayList();
+	
+	/** The canvas. */
+	private Canvas canvas = new Canvas();
+	/** The image. */
+	private WritableImage image = new WritableImage(100, 100);
 	
 	/**
 	 * Constructor.
@@ -199,8 +206,6 @@ public class DropboxDownloadsTableViewer extends StackPane {
 			//Find it
 			if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");
-//			else if (key.getCode() == KeyCode.DELETE)
-//				Main.dropBoxViewer.deleteSelectedFiles(false);
 			
 			//Local Search 
 			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {

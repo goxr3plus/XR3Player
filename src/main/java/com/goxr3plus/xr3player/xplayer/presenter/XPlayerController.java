@@ -170,16 +170,16 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackPane diskStackPane1;
 	
 	@FXML
-	private Button replayButton;
+	private Button playPauseButton;
+	
+	@FXML
+	private Button stopButton;
 	
 	@FXML
 	private Button backwardButton;
 	
 	@FXML
-	private Button playPauseButton;
-	
-	@FXML
-	private Button stopButton;
+	private Button replayButton;
 	
 	@FXML
 	private Button forwardButton;
@@ -344,6 +344,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Button smMinimizeVolume;
 	
 	@FXML
+	private Label dragAndDropLabel;
+	
+	@FXML
 	private StackPane regionStackPane;
 	
 	@FXML
@@ -353,7 +356,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private ProgressBar progressBar;
 	
 	@FXML
-	private Label dragAndDropLabel;
+	private StackPane downloadStackPane;
+	
+	@FXML
+	private Label downloadingLabel;
 	
 	@FXML
 	private JFXButton restorePlayer;
@@ -461,43 +467,39 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//We don't want the player to start if the drop event is for the XPlayer PlayList
 		if (!flipPane.isBackVisible()) {
+			Dragboard dragBoard = event.getDragboard();
 			
 			// File?
-			for (File file : event.getDragboard().getFiles())
-				//No directories allowed
-				if (!file.isDirectory()) {
-					
-					//Get it
-					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
-					
-					//Check if File exists
-					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
-						ActionTool.showNotification("File doesn't exist",
-								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
-								Duration.millis(2000), NotificationType.INFORMATION);
-						return;
-					}
-					
-					//Check if XPlayer is already active
-					if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
-						if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
-								visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+			if (dragBoard.hasFiles()) {
+				for (File file : dragBoard.getFiles())
+					//No directories allowed
+					if (!file.isDirectory()) {
+						
+						//Get it
+						FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+						
+						//Check if File exists
+						if (!new File(ftaap.getFileAbsolutePath()).exists()) {
+							ActionTool.showNotification("File doesn't exist",
+									( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+									Duration.millis(2000), NotificationType.INFORMATION);
+							return;
+						}
+						
+						//Check if XPlayer is already active
+						if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
+							if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
+									visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+								playSong(ftaap.getFileAbsolutePath());
+						} else
 							playSong(ftaap.getFileAbsolutePath());
-					} else
-						playSong(ftaap.getFileAbsolutePath());
-					break;
-					
-				}
-			
-			// // URL?
-			// if (xPlayer.isPausedOrPlaying()) {
-			// // OK?
-			// if (ActionTool
-			// .doQuestion("A song is already playing on this deck.\n Are you
-			// sure you want to replace it?"))
-			// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
-			// } else
-			// xPlayer.playSong(dragDrop.getDragboard().getUrl().toString());
+						break;
+						
+					}
+				//String
+			} else if (dragBoard.hasString()) {
+				System.out.println(dragBoard.getString());
+			}
 			
 			event.setDropCompleted(true);
 			event.consume();
@@ -967,6 +969,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//progressBar
 		progressBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+		
+		//downloadStackPane
+		downloadStackPane.setVisible(false);
 	}
 	
 	/**
