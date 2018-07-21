@@ -1580,7 +1580,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	}
 	
 	/** Keep track on which side the Player Currently is . Give a fake value for the beginning */
-	Side currentSide = Side.LEFT;
+	Side discCurrentSide = Side.LEFT;
 	
 	/**
 	 * Change the Side of XPlayerController , either to right or left MA NIGAAAA!!!
@@ -1589,10 +1589,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	public void changeSide(Side newSide) {
 		//Check if already is in the given side
-		if (currentSide == newSide)
+		if (discCurrentSide == newSide)
 			return;
 		else
-			currentSide = newSide;
+			discCurrentSide = newSide;
 		
 		//DO YOUR JOB
 		if (newSide == Side.LEFT) {
@@ -1621,6 +1621,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			topHBox.getChildren().clear();
 			topHBox.getChildren().addAll(toolsHBox, topInfoLabel, emotionsButton, extendPlayer);
 			
+			//JFXTabPane
+			equalizerTab.getTabPane().setSide(Side.RIGHT);
+			
+			//toolsHBox
+			toolsHBox.getChildren().clear();
+			toolsHBox.getChildren().addAll(showMenu, openFile, settings, transferMedia);
+			
 		} else if (newSide == Side.RIGHT) {
 			
 			internalSplitPane.getItems().remove(discBorderPane);
@@ -1646,6 +1653,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			HBox topHBox = (HBox) topInfoLabel.getParent();
 			topHBox.getChildren().clear();
 			topHBox.getChildren().addAll(extendPlayer, emotionsButton, topInfoLabel, toolsHBox);
+			
+			//JFXTabPane
+			equalizerTab.getTabPane().setSide(Side.LEFT);
+			
+			//toolsHBox
+			toolsHBox.getChildren().clear();
+			toolsHBox.getChildren().addAll(transferMedia, settings, openFile, showMenu);
 			
 		}
 	}
