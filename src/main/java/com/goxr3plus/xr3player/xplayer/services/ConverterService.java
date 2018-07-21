@@ -59,7 +59,7 @@ public class ConverterService extends Service<Boolean> {
 	 * 
 	 * @param fileAbsolutePath
 	 */
-	public <convertProgress> void convert(String fileAbsolutePath) {
+	public void convert(String fileAbsolutePath) {
 		
 		//Set the full fileAbsolutePath
 		this.fileAbsolutePath = fileAbsolutePath;
@@ -106,7 +106,7 @@ public class ConverterService extends Service<Boolean> {
 				}
 				
 				//Set Message
-				super.updateMessage("Converting audio...");
+				updateMessage("Converting ( " + InfoTool.getFileExtension(fileAbsolutePath) + ") to ( mp3 ) ...");
 				
 				//Create the media folder if not existing
 				String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";

@@ -13,7 +13,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -75,12 +74,20 @@ public class XPlayerPlayService extends Service<Boolean> {
 		
 		//Test if the audioFile needs to be converted
 		if (!InfoTool.isAudioSupported(fileAbsolutePath)) {
-			
-			//If it is really an audio file
-			if (InfoTool.isAudio(fileAbsolutePath)) {
+			if (InfoTool.isAudio(fileAbsolutePath)) {    //Check if we have Audio
 				
 				//Show information to the user
 				ActionTool.showNotification("File is converting", "Current audio file format is not supported:\n so it will automatically be converted into .mp3.",
+						Duration.seconds(4), NotificationType.INFORMATION);
+				
+				//Give it a convert
+				converterService.convert(fileAbsolutePath);
+				
+				return;
+				
+			} else if (InfoTool.isVideo(fileAbsolutePath)) { //Check if we have Video
+				//Show information to the user
+				ActionTool.showNotification("File is converting", "Current Video file format is not supported:\n so it will automatically be converted into .mp3.",
 						Duration.seconds(4), NotificationType.INFORMATION);
 				
 				//Give it a convert
