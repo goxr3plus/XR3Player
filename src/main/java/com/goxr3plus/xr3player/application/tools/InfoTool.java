@@ -137,7 +137,7 @@ public final class InfoTool {
 	public static final List<String> POPULAR_AUDIO_EXTENSIONS_LIST = Arrays.asList("mp3", "wav", "ogg", "opus", "aac", "flac", "aiff", "au", "speex", "webm", "wma", "amr", "ape",
 			"awb", "dct", "dss", "dvf", "aa", "aax", "act", "m4a", "m4b", "m4p", "mpc", "msv", "oga", "mogg", "raw", "tta", "aifc", "ac3", "spx");
 	public static final List<String> POPULAR_VIDEO_EXTENSIONS_LIST = Arrays.asList("mp4", "flv", "avi", "wmv", "mov", "3gp", "webm", "mkv", "vob", "yuv", "m4v", "svi", "3g2",
-			"f4v", "f4p", "f4a", "f4b");
+			"f4v", "f4p", "f4a", "f4b","swf");
 	
 	public static final Set<String> POPULAR_AUDIO_EXTENSIONS = new HashSet<>(POPULAR_AUDIO_EXTENSIONS_LIST);
 	private static final Set<String> POPULAR_VIDEO_EXTENSIONS = new HashSet<>(POPULAR_VIDEO_EXTENSIONS_LIST);

@@ -685,9 +685,9 @@
                   </VBox>
                </children>
             </StackPane>
-            <StackPane fx:id="downloadStackPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: rgb(0,0,0,0.8);">
+            <StackPane fx:id="downloadStackPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false">
                <children>
-                  <Label fx:id="downloadingLabel" alignment="CENTER" contentDisplay="BOTTOM" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="label">
+                  <Label fx:id="downloadingLabel" alignment="CENTER" contentDisplay="BOTTOM" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="dropbox download label">
                      <font>
                         <Font size="15.0" />
                      </font>
