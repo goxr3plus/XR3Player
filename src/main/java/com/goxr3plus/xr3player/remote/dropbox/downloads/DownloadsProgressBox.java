@@ -1,6 +1,8 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.downloads;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -21,6 +23,9 @@ public class DownloadsProgressBox extends StackPane {
 	
 	@FXML
 	private JFXButton cancelDownload;
+	
+	@FXML
+	private JFXButton deleteFile;
 	
 	@FXML
 	private JFXButton openFileLocation;
@@ -57,14 +62,31 @@ public class DownloadsProgressBox extends StackPane {
 		downloadProgress.progressProperty().bind(dropBoxDownloadedFile.getDownloadService().progressProperty());
 		
 		//cancelDownload
-		cancelDownload.disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty());
+		cancelDownload.disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty().not());
 		cancelDownload.setOnAction(a -> {
 			dropBoxDownloadedFile.getDownloadService().cancelDownload();
 			Main.dropboxDownloadsTableViewer.getObservableList().remove(dropBoxDownloadedFile);
 		});
 		
+		//deleteFile
+		deleteFile.setOnAction(action -> {
+			List<Boolean> answers = Main.mediaDeleteWindow.doDeleteQuestion(false, dropBoxDownloadedFile.getTitle(), 1, Main.window);
+			
+			//Check if the user is sure he want's to go on delete action
+			if (!answers.get(0))
+				return;
+			//Check if the delete will be finally permanent or not
+			boolean permanent = answers.get(1);
+			
+			//Check if the delete is permanent
+			if (permanent)
+				ActionTool.deleteFile(new File(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
+			
+			Main.dropboxDownloadsTableViewer.getObservableList().remove(dropBoxDownloadedFile);
+			
+		});
+		
 		//openFileLocation
-		openFileLocation.disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty());
 		openFileLocation.setOnAction(a -> ActionTool.openFileLocation(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
 	}
 	
