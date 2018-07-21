@@ -199,8 +199,8 @@ public class DropboxDownloadsTableViewer extends StackPane {
 			//Find it
 			if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");
-			else if (key.getCode() == KeyCode.DELETE)
-				Main.dropBoxViewer.deleteSelectedFiles(false);
+//			else if (key.getCode() == KeyCode.DELETE)
+//				Main.dropBoxViewer.deleteSelectedFiles(false);
 			
 			//Local Search 
 			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
