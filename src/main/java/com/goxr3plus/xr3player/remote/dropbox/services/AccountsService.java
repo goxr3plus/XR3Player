@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
@@ -30,6 +31,8 @@ public class AccountsService extends Service<Boolean> {
 	
 	private final Color goldColor = Color.web("#f4c425");
 	
+	private List<String> expandedTreeItems;
+	
 	/**
 	 * Constructor
 	 * 
@@ -37,12 +40,16 @@ public class AccountsService extends Service<Boolean> {
 	 */
 	public AccountsService(DropboxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
+		
 	}
 	
 	/**
 	 * Restart the Service
 	 */
 	public void restartService() {
+		
+		//Keep track of the previously expanded TreeItems
+		expandedTreeItems = dropBoxViewer.getTreeView().getRoot().getChildren().stream().filter(TreeItem::isExpanded).map(TreeItem::getValue).collect(Collectors.toList());
 		
 		//Clear TreeView
 		dropBoxViewer.getTreeView().getRoot().getChildren().clear();
@@ -99,6 +106,10 @@ public class AccountsService extends Service<Boolean> {
 						
 						//Append to the treeview root item
 						dropBoxViewer.getTreeView().getRoot().getChildren().add(parent);
+						
+						//DEcide if the parent will be expanded
+						if (expandedTreeItems.contains(parent.getValue()))
+							parent.setExpanded(true);
 					}
 				});
 				
