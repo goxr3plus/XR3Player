@@ -49,7 +49,8 @@ public class AccountsService extends Service<Boolean> {
 	public void restartService() {
 		
 		//Keep track of the previously expanded TreeItems
-		expandedTreeItems = dropBoxViewer.getTreeView().getRoot().getChildren().stream().filter(TreeItem::isExpanded).map(TreeItem::getValue).collect(Collectors.toList());
+		expandedTreeItems = dropBoxViewer.getTreeView().getRoot().getChildren().stream().filter(TreeItem::isExpanded).map(item -> ( (DropboxClientTreeItem) item ).getEmail())
+				.collect(Collectors.toList());
 		
 		//Clear TreeView
 		dropBoxViewer.getTreeView().getRoot().getChildren().clear();
@@ -92,23 +93,23 @@ public class AccountsService extends Service<Boolean> {
 				});
 				
 				//Based on multimap add the values
-				multimap.forEach((key , list) -> {
+				multimap.forEach((email , list) -> {
 					
 					//Check if list is empty
 					if (!list.isEmpty()) {
 						//Parent represents the client and it contains the accesstokens as leafs
-						DropboxClientTreeItem parent = produceTreeItem(key + " [ " + list.size() + " ]", null,
+						DropboxClientTreeItem parent = produceTreeItem(email + " [ " + list.size() + " ]", "no token", email,
 								JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32));
 						
 						//For each element on the list
 						list.forEach(accessToken -> parent.getChildren()
-								.add(produceTreeItem(InfoTool.getMinString(accessToken, 25), accessToken, JavaFXTools.getFontIcon("fas-key", goldColor, 20))));
+								.add(produceTreeItem(InfoTool.getMinString(accessToken, 25), accessToken, email, JavaFXTools.getFontIcon("fas-key", goldColor, 20))));
 						
 						//Append to the treeview root item
 						dropBoxViewer.getTreeView().getRoot().getChildren().add(parent);
 						
 						//DEcide if the parent will be expanded
-						if (expandedTreeItems.contains(parent.getValue()))
+						if (expandedTreeItems.contains(email))
 							parent.setExpanded(true);
 					}
 				});
@@ -122,8 +123,8 @@ public class AccountsService extends Service<Boolean> {
 			 * @param value
 			 * @return
 			 */
-			private DropboxClientTreeItem produceTreeItem(String value , String accessToken , Node graphic) {
-				DropboxClientTreeItem treeItem = new DropboxClientTreeItem(value, accessToken);
+			private DropboxClientTreeItem produceTreeItem(String value , String accessToken , String email , Node graphic) {
+				DropboxClientTreeItem treeItem = new DropboxClientTreeItem(value, accessToken, email);
 				treeItem.setGraphic(graphic);
 				
 				return treeItem;

@@ -223,7 +223,7 @@ public class DropboxViewer extends StackPane {
 		
 		//treeView
 		treeView.setShowRoot(false);
-		treeView.setRoot(new DropboxClientTreeItem("Accounts", null));
+		treeView.setRoot(new DropboxClientTreeItem("Accounts", "no token", "no email"));
 		treeView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			//Check for null
 			if (newValue == null)

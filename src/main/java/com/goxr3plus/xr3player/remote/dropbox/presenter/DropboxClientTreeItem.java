@@ -10,7 +10,8 @@ import javafx.scene.control.TreeItem;
  */
 public class DropboxClientTreeItem extends TreeItem<String> {
 	
-	private String accessToken;
+	private final String accessToken;
+	private final String email;
 	
 	/**
 	 * Constructor.
@@ -19,9 +20,10 @@ public class DropboxClientTreeItem extends TreeItem<String> {
 	 *            The client accessToken
 	 * 
 	 */
-	public DropboxClientTreeItem(String value, String accessToken) {
+	public DropboxClientTreeItem(String value, String accessToken, String email) {
 		super(value);
 		this.accessToken = accessToken;
+		this.email = email;
 		
 	}
 	
@@ -30,6 +32,13 @@ public class DropboxClientTreeItem extends TreeItem<String> {
 	 */
 	public String getAccessToken() {
 		return accessToken;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
 	}
 	
 }
