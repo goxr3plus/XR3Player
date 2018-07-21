@@ -203,7 +203,7 @@
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
-      <MenuItem fx:id="rename1" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
+      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
          <graphic>
             <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
          </graphic>
