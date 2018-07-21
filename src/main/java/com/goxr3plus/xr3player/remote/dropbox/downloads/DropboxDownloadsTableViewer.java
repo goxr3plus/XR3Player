@@ -1,7 +1,9 @@
 package main.java.com.goxr3plus.xr3player.remote.dropbox.downloads;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -24,12 +26,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -73,7 +79,6 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	
 	/** The canvas. */
 	private Canvas canvas = new Canvas();
-
 	
 	/**
 	 * Constructor.
@@ -234,6 +239,35 @@ public class DropboxDownloadsTableViewer extends StackPane {
 				}
 			}
 			
+		});
+		
+		// --Drag Detected
+		tableView.setOnDragDetected(event -> {
+			if (getSelectedCount() != 0 && event.getScreenY() > tableView.localToScreen(tableView.getBoundsInLocal()).getMinY() + 30) {
+				
+				/* allow copy transfer mode */
+				Dragboard db = tableView.startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
+				
+				/* put a string on drag board */
+				ClipboardContent content = new ClipboardContent();
+				
+				// PutFiles
+				content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getDownloadService().getLocalFileAbsolutePath()))
+						.collect(Collectors.toList()));
+				
+				// Single Drag and Drop ?
+				if (content.getFiles().size() == 1) {
+					ActionTool.paintCanvas(canvas.getGraphicsContext2D(), tableView.getSelectionModel().getSelectedItem().getTitle(), 100, 100);
+					db.setDragView(canvas.snapshot(null, image), 50, 0);
+					// Multiple Drag and Drop ?
+				} else {
+					ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
+					db.setDragView(canvas.snapshot(null, image), 50, 0);
+				}
+				
+				db.setContent(content);
+			}
+			event.consume();
 		});
 		
 	}
