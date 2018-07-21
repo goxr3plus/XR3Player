@@ -26,7 +26,7 @@ public class FileAndFolderChooser {
 	 *
 	 */
 	public enum FileType {
-		MUSIC, IMAGE, DBFILE;
+	MUSIC, IMAGE, DBFILE;
 	}
 	
 	private static SimpleObjectProperty<File> lastKnownDirectoryProperty = new SimpleObjectProperty<>();
@@ -231,7 +231,13 @@ public class FileAndFolderChooser {
 	public File showSaveDialog(String initialFileName) {
 		databaseFolderChooser.getExtensionFilters().clear();
 		databaseFolderChooser.setInitialFileName(initialFileName);
-		return databaseFolderChooser.showSaveDialog(Main.window);
+		File file = databaseFolderChooser.showSaveDialog(Main.window);
+		if (file != null) {
+			// Set the property to the directory of the chosenFile so the
+			// fileChooser will open here next
+			lastKnownDBDirectoryProperty.setValue(file.getParentFile());
+		}
+		return file;
 	}
 	
 	/**
