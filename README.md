@@ -33,13 +33,14 @@ Some futuristic features that are coming :
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
 # Screenshots
-| Login Screen | Main Mode 
-|:-:|:-:|
-| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/login_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/main_mode.jpg) |
 
-| DJ Mode | Web Browser 
+| DJ UI | Chromium Web Browser 
 |:-:|:-:|
 | ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/dj_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/web_browser.jpg) |
+
+| Multiple Users | Advanced UI 
+|:-:|:-:|
+| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/login_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/main_mode.jpg) |
 
 -------------------------------------------------------------------------------------
 
