@@ -32,6 +32,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -237,6 +238,12 @@ public class DropboxViewer extends StackPane {
 				loginWithSavedAccount.setDisable(true);
 				deleteSavedAccount.setDisable(true);
 			}
+		});
+		treeView.setOnKeyReleased(key -> {
+			if (key.getCode() == KeyCode.ENTER) //ENTER
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> connect( ( (DropboxClientTreeItem) item ).getAccessToken()));
+			else if (key.getCode() == KeyCode.DELETE) //DELETE
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> deleteSelectedAccount());
 		});
 		
 		//DropboxFilesTableViewer
@@ -501,7 +508,7 @@ public class DropboxViewer extends StackPane {
 	private void deleteSelectedAccount() {
 		
 		//Clear the selected item
-		if (savedAccountsArray != null) {
+		if (savedAccountsArray != null && treeView.getSelectionModel().getSelectedItem() != null) {
 			
 			if (ActionTool.doQuestion("Deleting Dropbox Account", "Are you soore you want to delete selected Dropbox Account ?", treeView, Main.window)) {
 				
@@ -510,14 +517,17 @@ public class DropboxViewer extends StackPane {
 				
 				//Refresh the properties database
 				Main.userInfoMode.getUser().getUserInformationDb().updateProperty("DropBox-Access-Tokens", savedAccountsArray.stream().collect(Collectors.joining("<>:<>")));
+				
+				//Start Accounts Service
+				if (!savedAccountsArray.isEmpty())
+					accountsService.restartService();
 			}
 			
 			//DropBoxAccountsLabel
 			dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
+			
 		}
 		
-		//Start Accounts Service
-		accountsService.restartService();
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -697,7 +707,8 @@ public class DropboxViewer extends StackPane {
 		dropBoxAccountsLabel.setVisible(savedAccountsArray.isEmpty());
 		
 		//Start Accounts Service
-		accountsService.restartService();
+		if (!savedAccountsArray.isEmpty())
+			accountsService.restartService();
 	}
 	
 	/**
