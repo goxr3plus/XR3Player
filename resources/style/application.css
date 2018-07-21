@@ -269,6 +269,14 @@
 	-fx-font-weight:bold;
 }
 
+.media-table-view:row-selection:constrained-resize .column-header-background .filler{
+	-fx-background-color: #151515;
+}
+
+.media-table-view:row-selection .column-header-background .filler{
+	-fx-background-color: #151515;
+}
+
 .media-table-view:focused{
     /*-fx-background-color: transparent;*/
 }
@@ -354,20 +362,23 @@
 .media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button{
 	-fx-background-color:black;	
 	-fx-cursor:hand;
-	-fx-padding:50.0px;
+	-fx-padding:5.0px;
+	-fx-min-width:32px !important;
+	-fx-max-width:32px !important;
+	-fx-pref-width:32px !important;
 }
 
 .media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button:hover{
-	-fx-background-color:orange;
+	-fx-background-color:black;
 }
 
 .media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image{
-	-fx-background-color:firebrick;
-	-fx-padding:5.0px;
+	-fx-background-color:white;
+	-fx-padding:6.0px;
 }
 
 .media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button .show-hide-column-image:hover{
-	-fx-background-color:black;
+	-fx-background-color:white;
 }
 
 
@@ -1080,10 +1091,9 @@
 	-fx-background-color:transparent;
   }
   
-  .scroll-pane .corner{		
-  -fx-background-color:#202020 !important;
-}
-  
+  .corner {    
+    -fx-background-color: #202020 ;
+  }
   
   /* The main scrollbar CSS class of ListView */
  .scroll-bar:horizontal ,

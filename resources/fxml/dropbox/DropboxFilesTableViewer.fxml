@@ -13,11 +13,11 @@
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" minWidth="0.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane>
+      <BorderPane minHeight="0.0" minWidth="0.0">
          <center>
-            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="667.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="actionColumn" editable="false" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" sortable="false" text="Menu">
                      <graphic>
@@ -33,18 +33,18 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="200.0" text="Name" />
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="500.0" text="Name" />
                </columns>
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
                <styleClass>
                   <String fx:value="drop-box-table-view" />
                   <String fx:value="media-table-view" />
                </styleClass>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </center>
          <bottom>
