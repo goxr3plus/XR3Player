@@ -11,17 +11,17 @@
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" minWidth="0.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane>
+      <BorderPane minHeight="0.0" minWidth="0.0">
          <center>
-            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="fileThumbnail" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fa-filter" iconSize="24" />
                      </graphic></TableColumn>
-                  <TableColumn fx:id="progressBox" maxWidth="-1.0" minWidth="170.0" prefWidth="170.0" text="Progress" />
+                  <TableColumn fx:id="progressBox" maxWidth="-1.0" minWidth="200.0" prefWidth="200.0" text="Progress" />
                   <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="464.0" text="Name" />
                </columns>
                <padding>

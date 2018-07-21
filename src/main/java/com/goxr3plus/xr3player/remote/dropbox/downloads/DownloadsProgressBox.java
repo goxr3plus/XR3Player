@@ -74,7 +74,7 @@ public class DownloadsProgressBox extends StackPane {
 		});
 		
 		//deleteFile
-		disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty());
+		deleteFile.disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty());
 		deleteFile.setOnAction(action -> {
 			List<Boolean> answers = Main.mediaDeleteWindow.doDeleteQuestion(false, dropBoxDownloadedFile.getTitle(), 1, Main.window);
 			
