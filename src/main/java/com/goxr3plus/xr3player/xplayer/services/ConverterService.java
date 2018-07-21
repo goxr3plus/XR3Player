@@ -106,7 +106,7 @@ public class ConverterService extends Service<Boolean> {
 				}
 				
 				//Set Message
-				updateMessage("Converting ( " + InfoTool.getFileExtension(fileAbsolutePath) + ") to ( mp3 ) ...");
+				updateMessage("Converting ( " + InfoTool.getFileExtension(fileAbsolutePath) + " ) to ( mp3 )");
 				
 				//Create the media folder if not existing
 				String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
