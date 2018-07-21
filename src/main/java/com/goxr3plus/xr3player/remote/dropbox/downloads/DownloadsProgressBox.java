@@ -65,10 +65,16 @@ public class DownloadsProgressBox extends StackPane {
 		cancelDownload.disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty().not());
 		cancelDownload.setOnAction(a -> {
 			dropBoxDownloadedFile.getDownloadService().cancelDownload();
+			
+			//Remove from TableViewer
 			Main.dropboxDownloadsTableViewer.getObservableList().remove(dropBoxDownloadedFile);
+			
+			//Delete from computer
+			ActionTool.deleteFile(new File(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
 		});
 		
 		//deleteFile
+		disableProperty().bind(dropBoxDownloadedFile.getDownloadService().runningProperty());
 		deleteFile.setOnAction(action -> {
 			List<Boolean> answers = Main.mediaDeleteWindow.doDeleteQuestion(false, dropBoxDownloadedFile.getTitle(), 1, Main.window);
 			

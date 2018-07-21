@@ -84,11 +84,10 @@ public class MediaDeleteWindow extends BorderPane {
 		final List<Boolean> arrayList = Arrays.asList(false, false);
 		JavaFXTools.selectToggleOnIndex(group, permanent ? 1 : 0);
 		
-		//Create the Alert
-		
-		Alert alert = JavaFXTools.createAlert(null, "", ( numberOfItems <= 1 ? "[" + text : "Selected [" + text + " items" ) + "]", AlertType.CONFIRMATION, StageStyle.UTILITY,
-				window, null);	
+		//Create the Alert	
+		Alert alert = JavaFXTools.createAlert(null, "", "", AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
 		alert.getDialogPane().setContent(this);
+		mediaNameLabel.setText( ( numberOfItems <= 1 ? "[" + text : "Selected [" + text + " items" ) + "]");
 		
 		// LookUpButton
 		( (Button) alert.getDialogPane().lookupButton(ButtonType.OK) ).setDefaultButton(false);

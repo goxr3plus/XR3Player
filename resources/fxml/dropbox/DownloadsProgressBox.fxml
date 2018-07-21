@@ -30,7 +30,7 @@
                   <Tooltip text="Open File Location" />
                </tooltip>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="ri-remove" iconSize="24" />
+                  <FontIcon iconColor="#f83e3e" iconLiteral="ri-remove" iconSize="24" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="openFileLocation" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="110.0" layoutY="10.0" styleClass="jfx-button-dark-white-selection" text=" ">

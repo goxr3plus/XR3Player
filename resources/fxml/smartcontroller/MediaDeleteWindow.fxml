@@ -4,29 +4,27 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<fx:root prefHeight="189.0" prefWidth="458.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<fx:root prefHeight="189.0" prefWidth="458.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXRadioButton selected="true" styleClass="settingsRadioButton" text="Delete from Playlist only">
+            <JFXRadioButton selected="true" styleClass="settingsRadioButton" text="Delete from List only">
                <toggleGroup>
                   <ToggleGroup fx:id="group" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton styleClass="settingsRadioButton" text="Delete from Playlist and Computer" toggleGroup="$group" />
+            <JFXRadioButton styleClass="settingsRadioButton" text="Delete from List and Computer" toggleGroup="$group" />
          </children>
       </VBox>
    </center>
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Are you soore you want to delete ?">
+            <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Security question">
                <padding>
                   <Insets bottom="3.0" />
                </padding>
@@ -34,11 +32,7 @@
                   <Insets bottom="3.0" />
                </VBox.margin>
                <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/question.png" />
-                     </image>
-                  </ImageView>
+                  <FontIcon iconColor="#ea1cf5" iconLiteral="ri-question" iconSize="24" />
                </graphic>
             </Label>
             <Label fx:id="mediaNameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Sona Name .mp3 or some other extension here" />
