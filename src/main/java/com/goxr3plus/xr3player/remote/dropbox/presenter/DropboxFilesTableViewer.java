@@ -77,16 +77,20 @@ public class DropboxFilesTableViewer extends StackPane {
 	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 	private final StringProperty searchWord = new SimpleStringProperty("");
 	
-	/** The canvas. */
-	private Canvas canvas = new Canvas();
-	
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
+	
+	/** The canvas. */
+	private Canvas canvas = new Canvas();
 	
 	/**
 	 * Constructor.
 	 */
 	public DropboxFilesTableViewer() {
+		
+		//Canvas
+		canvas.setWidth(100);
+		canvas.setHeight(100);
 		
 		// FXMLoader
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxFilesTableViewer.fxml"));
@@ -285,10 +289,10 @@ public class DropboxFilesTableViewer extends StackPane {
 				ClipboardContent content = new ClipboardContent();
 				
 				// PutFiles
-				content.putString(tableView.getSelectionModel().getSelectedItem().getMetadata().getPathLower());
+				content.putString("#dropbox_item#");
 				
 				// DragView
-				ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
+				ActionTool.paintCanvas(canvas.getGraphicsContext2D(), tableView.getSelectionModel().getSelectedItem().getTitle(), 100, 100);
 				db.setDragView(canvas.snapshot(null, image), 50, 0);
 				
 				db.setContent(content);

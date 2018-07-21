@@ -260,6 +260,7 @@ public class MediaTableViewer extends StackPane {
 		this.smartController = smartController;
 		this.mode = mode;
 		
+		//Canvas
 		canvas.setWidth(100);
 		canvas.setHeight(100);
 		
@@ -286,7 +287,6 @@ public class MediaTableViewer extends StackPane {
 		FontIcon openFolderIcon = new FontIcon("far-folder-open");
 		openFolderIcon.setIconSize(30);
 		openFolderIcon.setIconColor(Color.web("#ddaa33"));
-		
 		
 		//------------------------------TableViewer---------------------------
 		if (mode == SmartControllerMode.MEDIA) {

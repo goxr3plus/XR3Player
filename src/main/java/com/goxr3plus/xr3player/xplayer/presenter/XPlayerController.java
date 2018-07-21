@@ -75,6 +75,8 @@ import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.application.windows.XPlayerWindow;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DownloadsProgressBox;
+import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloadedFile;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
@@ -498,7 +500,30 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					}
 				//String
 			} else if (dragBoard.hasString()) {
-				System.out.println(dragBoard.getString());
+				String stringo = dragBoard.getString();
+				
+				//Check if it is a direct drag and drop from dropbox
+				if (stringo.contains("#dropbox_item#")) {
+					
+					//Keep a reference to it
+					DropboxDownloadedFile dropboxDownloadedFile = Main.dropBoxViewer
+							.downloadFile(Main.dropBoxViewer.getDropboxFilesTableViewer().getSelectionModel().getSelectedItem());
+					
+					//DownloadsProgressBox
+					DownloadsProgressBox progressBox = new DownloadsProgressBox(dropboxDownloadedFile);
+					downloadingLabel.setText("Downloading file from Dropbox");
+					downloadingLabel.setGraphic(progressBox);
+					
+					//downloadStackPane
+					downloadStackPane.visibleProperty().bind(dropboxDownloadedFile.getDownloadService().runningProperty());
+					
+					//Play if finally the file has been successfully downloaded
+					dropboxDownloadedFile.getDownloadService().setOnSucceeded(s -> {
+						if (new File(dropboxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()).exists())
+							playSong(dropboxDownloadedFile.getDownloadService().getLocalFileAbsolutePath());
+					});
+				}
+				
 			}
 			
 			event.setDropCompleted(true);

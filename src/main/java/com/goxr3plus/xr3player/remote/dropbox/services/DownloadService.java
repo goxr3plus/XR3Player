@@ -81,6 +81,7 @@ public class DownloadService extends Service<Boolean> {
 					//Update the progress
 					updateProgress(1, 1);
 					
+					return true;
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					
@@ -88,9 +89,9 @@ public class DownloadService extends Service<Boolean> {
 					Platform.runLater(() -> ActionTool.showNotification("Download Failed",
 							"Failed to download " + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + ":\n[ " + dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.ERROR));
-				}
-				return true;
-				
+					
+					return false;
+				}				
 			}
 			
 			/**

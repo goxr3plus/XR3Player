@@ -584,21 +584,21 @@ public class DropboxViewer extends StackPane {
 	/**
 	 * Prepare for downloading the selected file
 	 */
-	public void downloadFile(DropboxFile dropboxFile) {
+	public DropboxDownloadedFile downloadFile(DropboxFile dropboxFile) {
 		
 		//Simple File
 		if (!dropboxFile.isDirectory()) {
 			
 			//Show save dialog	
 			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
-			downloadFilePart2(dropboxFile, file);
+			return downloadFilePart2(dropboxFile, file);
 			
 			//Directory
 		} else {
 			
 			//Show save dialog	
 			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle() + ".zip");
-			downloadFilePart2(dropboxFile, file);
+			return downloadFilePart2(dropboxFile, file);
 			
 		}
 	}
@@ -606,16 +606,21 @@ public class DropboxViewer extends StackPane {
 	/**
 	 * This method is called automatically by downloadFile method , dunno touch :) ATTENTION!!! FIRE !! hahah joking :)
 	 */
-	private void downloadFilePart2(DropboxFile dropboxFile , File file) {
+	private DropboxDownloadedFile downloadFilePart2(DropboxFile dropboxFile , File file) {
 		if (file == null)
-			return;
+			return null;
 		
 		//Create a new DropboxDownloadedFile
-		DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(new DownloadService(this, dropboxFile, file.getAbsolutePath()));
+		DownloadService downloadService = new DownloadService(this, dropboxFile, file.getAbsolutePath());
+		DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(downloadService);
+		
 		//Append it to the TableViewer
 		Main.dropboxDownloadsTableViewer.getObservableList().add(dropboxDownloadedFile);
 		//Start the download Service
 		dropboxDownloadedFile.getDownloadService().startService();
+		
+		//dropboxDownloadedFile
+		return dropboxDownloadedFile;
 	}
 	
 	/**

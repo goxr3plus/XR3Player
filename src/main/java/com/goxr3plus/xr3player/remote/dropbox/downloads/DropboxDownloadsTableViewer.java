@@ -68,15 +68,21 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	
 	private final ObservableList<DropboxDownloadedFile> observableList = FXCollections.observableArrayList();
 	
-	/** The canvas. */
-	private Canvas canvas = new Canvas();
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
+	
+	/** The canvas. */
+	private Canvas canvas = new Canvas();
+
 	
 	/**
 	 * Constructor.
 	 */
 	public DropboxDownloadsTableViewer() {
+		
+		//Canvas
+		canvas.setWidth(100);
+		canvas.setHeight(100);
 		
 		// FXMLoader
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxDownloadsTableViewer.fxml"));
