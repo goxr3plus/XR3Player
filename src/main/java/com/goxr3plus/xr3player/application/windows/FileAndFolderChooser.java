@@ -3,6 +3,7 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.DirectoryChooser;
@@ -51,7 +52,8 @@ public class FileAndFolderChooser {
 		imageFileChooser.initialDirectoryProperty().bindBidirectional(lastKnownImageDirectoryProperty);
 		
 		//Special Audio Files Filter
-		audioFilter = new FileChooser.ExtensionFilter("Audio Files", InfoTool.POPULAR_AUDIO_EXTENSIONS_LIST.stream().map(m -> "*." + m).collect(Collectors.toList()));
+		audioFilter = new FileChooser.ExtensionFilter("Audio Files",
+				Stream.of(InfoTool.POPULAR_AUDIO_EXTENSIONS_LIST, InfoTool.POPULAR_VIDEO_EXTENSIONS_LIST).flatMap(List::stream).map(m -> "*." + m).collect(Collectors.toList()));
 	}
 	
 	// -----------------------------------------------------------------------------------------------------------------/
@@ -170,7 +172,7 @@ public class FileAndFolderChooser {
 	 */
 	public List<File> prepareToImportSongFiles(Stage window) {
 		mediaFileChooser.getExtensionFilters().clear();
-		mediaFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All", "*.mp3", "*.wav"));
+		mediaFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Audio", "*.mp3"));
 		mediaFileChooser.setTitle("Select or Drag and Drop Files || Folders into the PlayList");
 		List<File> files = mediaFileChooser.showOpenMultipleDialog(window);
 		if (files != null) {
@@ -188,26 +190,7 @@ public class FileAndFolderChooser {
 	 * @param window
 	 * @return The Selected file from the User
 	 */
-	//	public File selectSongFile(Stage window) {
-	//		mediaFileChooser.getExtensionFilters().clear();
-	//		mediaFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
-	//		mediaFileChooser.setTitle("Choose Media File");
-	//		File file = mediaFileChooser.showOpenDialog(window);
-	//		if (file != null) {
-	//			// Set the property to the directory of the chosenFile so the
-	//			// fileChooser will open here next
-	//			lastKnownMediaDirectoryProperty.setValue(file.getParentFile());
-	//		}
-	//		return file;
-	//	}
-	
-	/**
-	 * Shows the default FileExplorer so the user can select a song File.
-	 * 
-	 * @param window
-	 * @return The Selected file from the User
-	 */
-	public File selectSongFile2(Stage window) {
+	public File selectSongFile(Stage window) {
 		
 		mediaFileChooser.getExtensionFilters().clear();
 		mediaFileChooser.getExtensionFilters().addAll(audioFilter);

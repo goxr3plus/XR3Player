@@ -1097,7 +1097,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 * Opens a FileChooser so the user can select a song File
 	 */
 	public void openFileChooser() {
-		File file = Main.specialChooser.selectSongFile2(Main.window);
+		File file = Main.specialChooser.selectSongFile(Main.window);
 		if (file != null)
 			playSong(file.getAbsolutePath());
 	}
