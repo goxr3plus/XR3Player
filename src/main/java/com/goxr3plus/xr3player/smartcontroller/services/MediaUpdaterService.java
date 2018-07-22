@@ -21,7 +21,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -222,53 +221,8 @@ public class MediaUpdaterService {
 				// ---------File exists--------?
 				Platform.runLater(() -> media.fileExistsProperty().set(Paths.get(media.getFilePath()).toFile().exists()));
 				
-				if (mode == 0) { // Check based on File Content [ The content must be absolutely the same ] 
-					
-					//Go
-					File file = new File(media.getFilePath());
-					
-					//Check if this media is already playing in some player
-					//cause we want to set different image if so...
-					int[] mediaIsPlaying = { -3 };
-					Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-						String path = xPlayerController.getxPlayerModel().songPathProperty().get();
-						if (path != null && path.equals(media.getFilePath()))
-							mediaIsPlaying[0] = xPlayerController.getKey();
-					});
-					
-					//Set Played Status
-					setPlayStatus(media, mediaIsPlaying[0] != -3 ? mediaIsPlaying[0] : Main.playedSongs.getSet().stream().anyMatch(playedFile -> {
-						try {
-							return FileUtils.contentEquals(new File(playedFile.getPath()), file);
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
-						return false;
-					}) ? -1 : -2);
-					
-				} else if (mode == 1) { //Check based on FileName and FileLength -> both must be equal
-					
-					//Go
-					String mediaName = InfoTool.getFileName(media.getFilePath()).toLowerCase();
-					// String mediaPath = media.getFilePath().toLowerCase()
-					long mediaFileLength = new File(media.getFilePath()).length();
-					
-					//Check if this media is already playing in some player
-					//cause we want to set different image if so...
-					int[] mediaIsPlaying = { -3 };
-					Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-						String path = xPlayerController.getxPlayerModel().songPathProperty().get();
-						if (path != null && path.equals(media.getFilePath()))
-							mediaIsPlaying[0] = xPlayerController.getKey();
-					});
-					
-					//Set Played Status
-					setPlayStatus(media,
-							mediaIsPlaying[0] != -3 ? mediaIsPlaying[0]
-									: Main.playedSongs.getSet().stream().filter(playedFile -> playedFile.getPath().toLowerCase().contains(mediaName)) // || mediaPath.toLowerCase().contains(InfoTool.getFileName(playedFileAbsolutePath))
-											.anyMatch(playedFile -> new File(playedFile.getPath()).length() == mediaFileLength) ? -1 : -2);
-					
-				}
+				//Set Played Status
+				determinePlayedStatus(media, mode);
 				
 				//Set timesPlayed
 				Main.playedSongs.getSet().stream().filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst().ifPresent(playedFile -> {
@@ -304,8 +258,41 @@ public class MediaUpdaterService {
 	 * 
 	 * @param played
 	 */
-	private static void setPlayStatus(Media m , int playStatus) {
-		Platform.runLater(() -> m.setPlayedStatus(playStatus));
+	private static void determinePlayedStatus(Media media , int mode) {
+		
+		//Check if this media is already playing in some player
+		//cause we want to set different image if so...
+		int[] playedStatus = { Media.UNKNOWN_PLAYED_STATUS };
+		Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
+			String path = xPlayerController.getxPlayerModel().songPathProperty().get();
+			if (path != null && path.equals(media.getFilePath()))
+				playedStatus[0] = xPlayerController.getKey();
+			
+		});
+		
+		//Pass this if the media is currently being played by some player
+		if (playedStatus[0] == Media.UNKNOWN_PLAYED_STATUS) {
+			
+			playedStatus[0] = Main.playedSongs.getSet().stream().anyMatch(playedFile -> {
+				
+				if (mode == 0) // Check based on File Content [ The content must be absolutely the same ] 
+					
+					//Check if the contents match exactly with FileUtils library
+					try {
+						return FileUtils.contentEquals(new File(playedFile.getPath()), new File(media.getFilePath()));
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				
+				else if (mode == 1) //Check based on FileName
+					return playedFile.getFileName().contains(media.getFileName());
+				
+				return false;
+			}) ? Media.HAS_BEEN_PLAYED : Media.NEVER_PLAYED;
+			
+		}
+		
+		media.setPlayedStatus(playedStatus[0]);
 	}
 	
 }

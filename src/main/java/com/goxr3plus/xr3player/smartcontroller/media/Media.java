@@ -1210,30 +1210,12 @@ public abstract class Media {
 		this.duration.set(duration);
 	}
 	
-	/**
-	 * Sets the times played.
-	 *
-	 * @param timesPlayed
-	 *            the times played
-	 * @param controller
-	 *            the controller
-	 */
-	//    protected void setTimesPlayed(int timesPlayed, SmartController controller) {
-	//	this.timesPlayed.set(timesPlayed);
-	//
-	//	// Update the dataBase
-	//	try (PreparedStatement preparedUTimesPlayed = Main.dbManager.connection1.prepareStatement("UPDATE '" + controller.getDataBaseTableName() + "' SET TIMESPLAYED=? WHERE PATH=?")) {
-	//
-	//	    preparedUTimesPlayed.setInt(1, getTimesPlayed());
-	//	    preparedUTimesPlayed.setString(2, getFilePath());
-	//	    preparedUTimesPlayed.executeUpdate();
-	//	    Main.dbManager.commit();
-	//
-	//	} catch (Exception ex) {
-	//	    Main.logger.log(Level.WARNING, "", ex);
-	//	}
-	//
-	//    }
+	//The variables below are used to the played status of the media
+	//Just to be more understandable for the future programmers i added
+	//the below variables with names :)
+	public static final int HAS_BEEN_PLAYED = -1;
+	public static final int NEVER_PLAYED = -2;
+	public static final int UNKNOWN_PLAYED_STATUS = -3;
 	
 	/**
 	 * Sets playStatus
@@ -1248,8 +1230,7 @@ public abstract class Media {
 		this.playStatus.set(playStatus);
 	}
 	
-	// ------------------ABSTRACT METHODS
-	// ----------------------------------------------------------------------
+	// ------------------ABSTRACT METHODS ----------------------------------------------------------------------
 	
 	/**
 	 * This method is used during drag so the drag view has an image representing the album image of the media.
