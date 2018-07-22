@@ -329,6 +329,8 @@ public class Main extends Application {
 		borderlessScene.setMoveControl(topBar.getXr3Label());
 		borderlessScene.setMoveControl(welcomeScreen.getTopHBox());
 		window.setScene(borderlessScene);
+		window.show();
+		window.close();
 		
 		//Continue
 		startPart2();
@@ -347,16 +349,13 @@ public class Main extends Application {
 		
 		//WelcomeScreen
 		welcomeScreen.getVersionLabel().setText(window.getTitle());
-		if (properties.getProperty("Show-Welcome-Screen") == null)
-			welcomeScreen.showWelcomeScreen();
-		else
-			Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresent(value -> {
-				welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
-				if (welcomeScreen.getShowOnStartUp().isSelected())
-					welcomeScreen.showWelcomeScreen();
-				else
-					welcomeScreen.hideWelcomeScreen();
-			});
+		Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresentOrElse(value -> {
+			welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
+			if (welcomeScreen.getShowOnStartUp().isSelected())
+				welcomeScreen.showWelcomeScreen();
+			else
+				welcomeScreen.hideWelcomeScreen();
+		}, () -> welcomeScreen.showWelcomeScreen());
 		
 		//Users Color Picker
 		Optional.ofNullable(properties.getProperty("Users-Background-Color")).ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
