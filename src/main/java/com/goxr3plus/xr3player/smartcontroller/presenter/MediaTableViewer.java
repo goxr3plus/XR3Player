@@ -40,6 +40,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -572,6 +573,7 @@ public class MediaTableViewer extends StackPane {
 		playStatus.setCellFactory(col -> new TableCell<Media,Integer>() {
 			
 			//Icon FontIcon
+			HBox hbox = new HBox();
 			FontIcon icon = new FontIcon();
 			
 			{

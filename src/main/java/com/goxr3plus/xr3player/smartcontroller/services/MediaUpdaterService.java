@@ -285,7 +285,10 @@ public class MediaUpdaterService {
 					}
 				
 				else if (mode == 1) //Check based on FileName
-					return playedFile.getFileName().contains(media.getFileName());
+					return playedFile.getPath().contains(media.getFileName());
+				
+				// .anyMatch(
+				//			playedFile -> new File(playedFile.getPath()).length() == new File(media.getFilePath()).length()) ? Media.HAS_BEEN_PLAYED : Media.NEVER_PLAYED ;
 				
 				return false;
 			}) ? Media.HAS_BEEN_PLAYED : Media.NEVER_PLAYED;
