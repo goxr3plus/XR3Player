@@ -338,9 +338,6 @@ public class Main extends Application {
 		//Count Downloads
 		countDownloads();
 		
-		//---Login Mode---- It must be set after the window has been shown
-		//loginMode.getSplitPane().setDividerPositions(0.65, 0.35)
-		
 		//Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
@@ -364,7 +361,6 @@ public class Main extends Application {
 		
 		//------------------Experiments------------------
 		//ScenicView.show(scene)
-		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
 		
 		//Show the Window
 		window.show();
