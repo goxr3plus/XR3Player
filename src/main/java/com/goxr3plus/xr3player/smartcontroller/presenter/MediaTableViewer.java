@@ -44,6 +44,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.StarBadge;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -99,7 +100,7 @@ public class MediaTableViewer extends StackPane {
 	
 	/** The stars. */
 	@FXML
-	private TableColumn<Media,Button> stars;
+	private TableColumn<Media,Double> stars;
 	
 	/** The hour imported. */
 	@FXML
@@ -527,6 +528,38 @@ public class MediaTableViewer extends StackPane {
 			
 		});
 		
+		// stars
+		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
+		stars.setCellFactory(col -> new TableCell<Media,Double>() {
+			
+			StarBadge starBadgeButton = new StarBadge(0.0);
+			
+			{
+				
+			}
+			
+			@Override
+			protected void updateItem(Double item , boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+					setGraphic(null);
+				} else {
+					
+					//Check if item is null
+					if (getTableRow().getItem() != null) {
+						
+						//Star Badge
+						starBadgeButton.setOnAction(a -> getTableRow().getItem().updateStars(starBadgeButton));
+						starBadgeButton.setStars(getTableRow().getItem().getStars());
+						
+						setGraphic(starBadgeButton);
+					}
+				}
+			}
+			
+		});
+		
 		// number
 		number.setCellValueFactory(new PropertyValueFactory<>("number"));
 		
@@ -632,17 +665,6 @@ public class MediaTableViewer extends StackPane {
 		
 		// dateFileCreated
 		dateFileModified.setCellValueFactory(new PropertyValueFactory<>("dateFileModified"));
-		
-		// stars
-		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
-		stars.setComparator((button1 , button2) -> {
-			if (Double.parseDouble(button1.getText()) > Double.parseDouble(button2.getText()))
-				return 1;
-			else if (Double.parseDouble(button1.getText()) < Double.parseDouble(button2.getText()))
-				return -1;
-			else
-				return 0;
-		});
 		
 		// timesHeard
 		timesPlayed.setCellValueFactory(new PropertyValueFactory<>("timesPlayed"));

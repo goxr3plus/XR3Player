@@ -274,8 +274,6 @@ public abstract class Media {
 		this.number = new SimpleIntegerProperty(number);
 		
 		//Stars
-		StarBadge starBadgeButton = new StarBadge(stars);
-		starBadgeButton.setOnAction(a -> updateStars(starBadgeButton));
 		this.stars = new SimpleDoubleProperty(stars);
 		//-----------
 		
@@ -918,7 +916,7 @@ public abstract class Media {
 		Main.starWindow.show(getFileName(), stars.get(), node);
 		
 		// Keep in memory stars ...
-		final double previousStars = Double.parseDouble(String.valueOf(stars));
+		final double previousStars = stars.get();
 		stars.bind(Main.starWindow.starsProperty());
 		
 		// Listener

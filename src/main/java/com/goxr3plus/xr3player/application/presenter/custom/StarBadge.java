@@ -53,7 +53,9 @@ public class StarBadge extends Button {
 	 */
 	public void setStars(double stars) {
 		this.stars = stars;
-		label.setText(String.valueOf(stars));
+		//System.err.println("Label " + label);
+		if (label != null)
+			label.setText(String.valueOf(stars));
 	}
 	
 	/**
