@@ -21,6 +21,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -259,7 +260,9 @@ public abstract class Media {
 		buyButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		buyButton.setOnMouseReleased(m -> Main.songsContextMenu.showContextMenu(this, Genre.BUYBUTTON, m.getScreenX(), m.getScreenY(), null, buyButton));
 		
+		//HBox
 		HBox hbox = new HBox(searchButton, youtubeButton, buyButton);
+		hbox.setAlignment(Pos.CENTER);
 		getInfoBuy = new SimpleObjectProperty<>(hbox);
 		
 		//----------

@@ -10,11 +10,11 @@
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="804.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="444.0" prefWidth="804.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane minHeight="0.0" minWidth="0.0">
+      <BorderPane>
          <center>
-            <TableView fx:id="tableView" minHeight="0.0" minWidth="0.0" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
                   <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="85.0" minWidth="32.0" prefWidth="85.0" resizable="false" sortable="false" text="Search,Buy,Share">
