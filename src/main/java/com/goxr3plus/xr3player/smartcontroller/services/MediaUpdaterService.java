@@ -276,14 +276,21 @@ public class MediaUpdaterService {
 				});
 				
 				//Set stars
-				Main.starredMediaList.getSet().stream().filter(starredFile -> media.getFilePath().equals(starredFile.getPath())).findFirst().ifPresent(starredFile -> {
-					//Run of JavaFX Thread
-					Platform.runLater(() -> {
-						if (!media.starsProperty().isBound())
-							media.starsProperty().set(starredFile.getStars());
-					});
-				});
-				
+				//The is a problem with this , what if the file is the same but ... in different path
+				//I should use FileUtils.contentEquals in the future but i don't want to take high the CPU usage...
+				Main.starredMediaList.getSet().stream()
+						//Filter
+						.filter(starredFile -> ( media.getFilePath().equals(starredFile.getPath()) ) && media.getStars() != starredFile.getStars())
+						//Find first matching
+						.findFirst().ifPresent(starredFile -> {
+							
+							//Run of JavaFX Thread
+							Platform.runLater(() -> {
+								if (!media.starsProperty().isBound())
+									media.starsProperty().set(starredFile.getStars());
+							});
+						});
+						
 				// ---------Liked or disliked--------?
 				media.changeEmotionImage(Main.emotionListsController.getEmotionForMedia(media.getFilePath()));
 				
