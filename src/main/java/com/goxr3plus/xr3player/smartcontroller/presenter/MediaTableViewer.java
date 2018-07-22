@@ -86,7 +86,7 @@ public class MediaTableViewer extends StackPane {
 	private TableColumn<Media,String> title;
 	
 	@FXML
-	private TableColumn<Media,Button> getInfoBuy;
+	private TableColumn<Media,HBox> getInfoBuy;
 	
 	@FXML
 	private TableColumn<Media,Integer> emotions;

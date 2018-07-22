@@ -10,26 +10,32 @@
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="804.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane>
+      <BorderPane minHeight="0.0" minWidth="0.0">
          <center>
-            <TableView fx:id="tableView" prefHeight="433.0" prefWidth="718.0" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" minHeight="0.0" minWidth="0.0" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
+                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="85.0" minWidth="32.0" prefWidth="85.0" resizable="false" sortable="false" text="Search,Buy,Share">
+                     <graphic>
+                        <HBox alignment="CENTER" spacing="6.0">
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="20" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fab-youtube" iconSize="20" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="20" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </TableColumn>
                   <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Artwork">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="26" />
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="playStatus" maxWidth="1.7976931348623157E308" minWidth="32.0" prefWidth="32.0" text="Played">
+                  <TableColumn fx:id="playStatus" maxWidth="-1.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-play-circle" iconSize="22" />
-                     </graphic>
-                  </TableColumn>
-                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" sortable="false" text="Search on Web">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-cloud-download-alt" iconSize="20" />
                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" resizable="false" text="Type">

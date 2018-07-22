@@ -27,6 +27,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -61,7 +62,7 @@ public abstract class Media {
 	private SimpleIntegerProperty playStatus;
 	
 	/** Get Information or Buy */
-	private SimpleObjectProperty<Button> getInfoBuy;
+	private SimpleObjectProperty<HBox> getInfoBuy;
 	
 	/** Liked Disliked or Neutral feelings */
 	private SimpleIntegerProperty emotion;
@@ -214,17 +215,15 @@ public abstract class Media {
 		//ArtWork object
 		artwork = new SimpleObjectProperty<>(artWorkStack);
 		
-		//Download
-		FontIcon searchOnWebIcon = JavaFXTools.getFontIcon("fas-cloud-download-alt", Color.WHITE, 18);
-		
-		Button searchMediaOnWeb = new Button("", searchOnWebIcon);
-		searchMediaOnWeb.getStyleClass().add("jfx-button2");
-		searchMediaOnWeb.setPrefSize(28, 24);
-		searchMediaOnWeb.setMinSize(28, 24);
-		searchMediaOnWeb.setMaxSize(28, 24);
-		searchMediaOnWeb.setStyle("-fx-cursor:hand");
-		searchMediaOnWeb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		searchMediaOnWeb.setOnMouseReleased(m -> {
+		//search Button	
+		Button searchButton = new Button("", JavaFXTools.getFontIcon("fab-chrome", Color.WHITE, 18));
+		searchButton.getStyleClass().add("jfx-button2");
+		searchButton.setPrefSize(28, 24);
+		searchButton.setMinSize(28, 24);
+		searchButton.setMaxSize(28, 24);
+		searchButton.setStyle("-fx-cursor:hand");
+		searchButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		searchButton.setOnMouseReleased(m -> {
 			try {
 				Main.webBrowser.createTabAndSelect("https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
 				Main.topBar.selectTab(Main.topBar.getWebModeTab());
@@ -233,7 +232,35 @@ public abstract class Media {
 			}
 		});
 		
-		getInfoBuy = new SimpleObjectProperty<>(searchMediaOnWeb);
+		//Youtube button		
+		Button youtubeButton = new Button("", JavaFXTools.getFontIcon("fab-youtube", Color.WHITE, 18));
+		youtubeButton.getStyleClass().add("jfx-button2");
+		youtubeButton.setPrefSize(28, 24);
+		youtubeButton.setMinSize(28, 24);
+		youtubeButton.setMaxSize(28, 24);
+		youtubeButton.setStyle("-fx-cursor:hand");
+		youtubeButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		youtubeButton.setOnMouseReleased(m -> {
+			try {
+				Main.webBrowser.createTabAndSelect("https://www.youtube.com/results?search_query=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+				Main.topBar.selectTab(Main.topBar.getWebModeTab());
+			} catch (UnsupportedEncodingException ex) {
+				ex.printStackTrace();
+			}
+		});
+		//Buy button		
+		Button buyButton = new Button("", JavaFXTools.getFontIcon("fas-shopping-cart", Color.WHITE, 18));
+		buyButton.getStyleClass().add("jfx-button2");
+		buyButton.setPrefSize(28, 24);
+		buyButton.setMinSize(28, 24);
+		buyButton.setMaxSize(28, 24);
+		buyButton.setStyle("-fx-cursor:hand");
+		buyButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		buyButton.setOnMouseReleased(m -> {
+		});
+		
+		HBox hbox = new HBox(searchButton, youtubeButton, buyButton);
+		getInfoBuy = new SimpleObjectProperty<>(hbox);
 		
 		//----------
 		this.emotion = new SimpleIntegerProperty(0);
@@ -379,7 +406,7 @@ public abstract class Media {
 	 *
 	 * @return the simple object property
 	 */
-	public SimpleObjectProperty<Button> getInfoBuyProperty() {
+	public SimpleObjectProperty<HBox> getInfoBuyProperty() {
 		return getInfoBuy;
 	}
 	
