@@ -17,8 +17,6 @@ public class StarBadge extends Button {
 	
 	// -------------------------------------------------------------
 	
-	private double stars;
-	
 	/**
 	 * Constructor.
 	 */
@@ -52,8 +50,6 @@ public class StarBadge extends Button {
 	 * @param stars
 	 */
 	public void setStars(double stars) {
-		this.stars = stars;
-		//System.err.println("Label " + label);
 		if (label != null)
 			label.setText(String.valueOf(stars));
 	}
