@@ -83,6 +83,8 @@ public class WelcomeScreen extends StackPane {
 			//Hide Welcome Screen
 			hideWelcomeScreen();
 			
+			//Unbind
+			unBindBackgroundImageView();
 		});
 		
 		//dontShowAgain
@@ -93,12 +95,20 @@ public class WelcomeScreen extends StackPane {
 		exit.setOnAction(a -> Util.terminateXR3Player(0));
 		
 		//mediaView
-		//mediaView.setVisible(false);
+		//mediaView.setVisible(false)
 		
 		//backgroundImage
 		backgroundImage.fitWidthProperty().bind(this.widthProperty());
 		backgroundImage.fitHeightProperty().bind(this.heightProperty());
 		
+	}
+	
+	/**
+	 * Un-bind backgroundImage
+	 */
+	private void unBindBackgroundImageView() {
+		backgroundImage.fitWidthProperty().unbind();
+		backgroundImage.fitHeightProperty().unbind();
 	}
 	
 	/**
@@ -160,7 +170,6 @@ public class WelcomeScreen extends StackPane {
 		Main.loginMode.usersLoaderService.start();
 		
 		setVisible(false);
-		
 		
 	}
 	

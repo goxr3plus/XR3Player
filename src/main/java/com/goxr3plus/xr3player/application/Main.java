@@ -949,14 +949,8 @@ public class Main extends Application {
 	public static void changeBackgroundImage() {
 		
 		//Check the response
-		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window).ifPresent(imageFile -> {
-			//			BackgroundImage bgImg = new BackgroundImage(new Image(imageFile.toURI() + ""), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-			//					new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
-			//			loginMode.setBackground(new Background(bgImg));
-			//			root.setBackground(new Background(bgImg));
-			
-			loginMode.getBackgroundImageView().setImage(new Image(imageFile.toURI() + ""));
-		});
+		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window)
+				.ifPresent(imageFile -> loginMode.getBackgroundImageView().setImage(new Image(imageFile.toURI() + "")));
 		
 	}
 	
@@ -969,20 +963,12 @@ public class Main extends Application {
 	 */
 	private static void determineBackgroundImage() {
 		
-		//Check if it returns null
-		Image image = JavaFXTools.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
-		
-		//Find the default one for the application
-		if (image == null)
-			image = InfoTool.getImageFromResourcesFolder("application_background.jpg");
-		
-		//Set the background Image
-		//		BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-		//				new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
-		//		loginMode.setBackground(new Background(bgImg));
-		//		root.setBackground(new Background(bgImg));
-		loginMode.getBackgroundImageView().setImage(image);
-		
+		//Set the background image to the ImageView
+		Optional.ofNullable(JavaFXTools.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain())).
+		//If the image exists
+				ifPresentOrElse(image -> loginMode.getBackgroundImageView().setImage(image),
+						//If it doesn't set the default
+						() -> loginMode.getBackgroundImageView().setImage(InfoTool.getImageFromResourcesFolder("application_background.jpg")));
 	}
 	
 	/**
