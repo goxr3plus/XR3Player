@@ -39,6 +39,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -68,9 +69,12 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
  * @author GOXR3PLUS
  *
  */
-public class LoginMode extends BorderPane {
+public class LoginMode extends StackPane {
 	
 	//-------------------------------------
+	
+	@FXML
+	private ImageView backgroundImageView;
 	
 	@FXML
 	private Hyperlink youtubeTutorialsHyperLink;
@@ -449,6 +453,13 @@ public class LoginMode extends BorderPane {
 	 */
 	public Label getGitHubDownloadsLabel() {
 		return gitHubDownloadsLabel;
+	}
+	
+	/**
+	 * @return the backgroundImageView
+	 */
+	public ImageView getBackgroundImageView() {
+		return backgroundImageView;
 	}
 	
 	/*-----------------------------------------------------------------------

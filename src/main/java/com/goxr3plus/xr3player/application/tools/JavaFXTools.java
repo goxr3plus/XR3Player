@@ -142,6 +142,11 @@ public final class JavaFXTools {
 		
 	}
 	
+	private static final int maximumImageWidth = 4096;
+	private static final int maximumImageHeight = 2160;
+	private static final int minimumImageWidth = 60;
+	private static final int minimumImageHeight = 60;
+	
 	/**
 	 * Open's a select Window and if the user selects an image it saves it with the given title and to the given folder , the extension is automatically
 	 * found from the original one Image
@@ -163,9 +168,9 @@ public final class JavaFXTools {
 		Image image = new Image(imageFile.toURI() + "");
 		
 		//Check width and height
-		if (image.getWidth() > 8000 || image.getHeight() > 8000 || image.getWidth() < 200 || image.getHeight() < 200) {
-			ActionTool.showNotification("Warning", "Maximum Size Allowed 8000*8000 \nMinimum Size Allowed 200*200 \n\tCurrent is:" + image.getWidth() + "x" + image.getHeight(),
-					Duration.millis(2000), NotificationType.WARNING);
+		if (image.getWidth() > maximumImageWidth || image.getHeight() > maximumImageHeight || image.getWidth() < minimumImageWidth || image.getHeight() < minimumImageHeight) {
+			ActionTool.showNotification("Warning", "Maximum Size Allowed " + maximumImageWidth + "*" + maximumImageHeight + "\nMinimum Size Allowed " + minimumImageWidth + "*"
+					+ minimumImageHeight + " \n\tCurrent is:" + image.getWidth() + "x" + image.getHeight(), Duration.millis(2000), NotificationType.WARNING);
 			return Optional.ofNullable(null);
 		}
 		
@@ -323,7 +328,6 @@ public final class JavaFXTools {
 		//Set Size
 		if (size != 0)
 			icon.setIconSize(size);
-		
 		
 		return icon;
 	}

@@ -47,11 +47,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -534,7 +529,8 @@ public class Main extends Application {
 		// ---------LoginMode ------------
 		loginMode.getXr3PlayerLabel().setText(window.getTitle());
 		loginMode.userSearchBox.registerListeners(window);
-		//loginMode.setLeft(sideBar)
+		loginMode.getBackgroundImageView().fitWidthProperty().bind(window.widthProperty());
+		loginMode.getBackgroundImageView().fitHeightProperty().bind(window.heightProperty());
 		
 		// ---------mediaSearchWindow ------------
 		mediaSearchWindow.registerListeners(window, topBar.getSearchField());
@@ -698,6 +694,10 @@ public class Main extends Application {
 		updateScreen.getProgressBar().setProgress(-1);
 		updateScreen.getLabel().setText("Launching...");
 		updateScreen.setVisible(true);
+		
+		//Prepare the BackgroundImageView
+		loginMode.getChildren().remove(loginMode.getBackgroundImageView());
+		applicationStackPane.getChildren().add(0, loginMode.getBackgroundImageView());
 		
 		//SideBar	
 		sideBar.prepareForLoginMode(false);
@@ -950,10 +950,12 @@ public class Main extends Application {
 		
 		//Check the response
 		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window).ifPresent(imageFile -> {
-			BackgroundImage bgImg = new BackgroundImage(new Image(imageFile.toURI() + ""), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-					new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
-			loginMode.setBackground(new Background(bgImg));
-			root.setBackground(new Background(bgImg));
+			//			BackgroundImage bgImg = new BackgroundImage(new Image(imageFile.toURI() + ""), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+			//					new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
+			//			loginMode.setBackground(new Background(bgImg));
+			//			root.setBackground(new Background(bgImg));
+			
+			loginMode.getBackgroundImageView().setImage(new Image(imageFile.toURI() + ""));
 		});
 		
 	}
@@ -975,10 +977,11 @@ public class Main extends Application {
 			image = InfoTool.getImageFromResourcesFolder("application_background.jpg");
 		
 		//Set the background Image
-		BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-				new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
-		loginMode.setBackground(new Background(bgImg));
-		root.setBackground(new Background(bgImg));
+		//		BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		//				new BackgroundSize(window.getWidth(), window.getHeight(), true, true, true, true));
+		//		loginMode.setBackground(new Background(bgImg));
+		//		root.setBackground(new Background(bgImg));
+		loginMode.getBackgroundImageView().setImage(image);
 		
 	}
 	
