@@ -36,6 +36,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.Util;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 import java.util.stream.Stream;
@@ -484,6 +485,10 @@ public class DatabaseManager {
 					Main.updateScreen.getProgressBar().progressProperty().unbind();
 				});
 				pause1.playFromStart();
+				
+				//Start important services
+				new MediaUpdaterService().start();
+				Main.webBrowser.startChromiumUpdaterService();
 				
 			});
 			

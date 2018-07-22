@@ -108,7 +108,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
@@ -697,12 +696,12 @@ public class Main extends Application {
 		loginMode.userSearchBox.getSearchBoxWindow().close();
 		loginMode.setVisible(false);
 		updateScreen.getProgressBar().setProgress(-1);
-		updateScreen.getLabel().setText("--Starting--");
+		updateScreen.getLabel().setText("Launching...");
 		updateScreen.setVisible(true);
 		
 		//SideBar	
 		sideBar.prepareForLoginMode(false);
-
+		
 		//Set root visible
 		root.setVisible(true);
 		
@@ -781,17 +780,6 @@ public class Main extends Application {
 			
 			//----Bind Label to User Name
 			sideBar.getNameLabel().setText(userInfoMode.getUserName().getText());
-			
-			//sideBar.getNameLabel().textProperty().bind(userInfoMode.getUserName().textProperty())
-			
-			//Start these important Threads
-			new MediaUpdaterService().start();
-			//new XPlayersFilterService().start()
-			webBrowser.startChromiumUpdaterService();
-			
-			//-----Bottom Bar Threads----------
-			//	bottomBar.internetCheckerService.restart()
-			//	bottomBar.timerCheckerService.restart()
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			
