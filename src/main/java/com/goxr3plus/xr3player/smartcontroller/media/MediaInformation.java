@@ -317,7 +317,7 @@ public class MediaInformation extends StackPane {
 						duration.setText(media.durationEditedProperty().get());
 						
 						//== stars
-						stars.textProperty().bind(media.starsProperty().get().textProperty());
+						stars.textProperty().bind(media.starsProperty().asString());
 						
 						//== drive
 						drive.setText(media.getDrive());

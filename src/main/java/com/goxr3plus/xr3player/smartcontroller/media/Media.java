@@ -14,11 +14,10 @@ import java.util.logging.Level;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
-import com.jfoenix.controls.JFXButton;
-
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
+import main.java.com.goxr3plus.xr3player.application.presenter.custom.StarBadge;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -77,7 +77,7 @@ public abstract class Media {
 	private SimpleIntegerProperty timesPlayed;
 	
 	/** The stars. */
-	private SimpleObjectProperty<Button> stars;
+	private SimpleDoubleProperty stars;
 	
 	/** The hour imported. */
 	private SimpleStringProperty hourImported;
@@ -274,15 +274,9 @@ public abstract class Media {
 		this.number = new SimpleIntegerProperty(number);
 		
 		//Stars
-		JFXButton starsButton = new JFXButton(String.valueOf(stars));
-		starsButton.getStyleClass().add("jfx-button-dark-white-selection");
-		starsButton.setPrefSize(50, 25);
-		starsButton.setMinSize(50, 25);
-		starsButton.setMaxSize(50, 25);
-		starsButton.setOnAction(a -> updateStars(starsButton));
-		starsButton.setFocusTraversable(false);
-		
-		this.stars = new SimpleObjectProperty<>(starsButton);
+		StarBadge starBadgeButton = new StarBadge(stars);
+		starBadgeButton.setOnAction(a -> updateStars(starBadgeButton));
+		this.stars = new SimpleDoubleProperty(stars);
 		//-----------
 		
 		this.timesPlayed = new SimpleIntegerProperty(timesPlayed);
@@ -442,7 +436,7 @@ public abstract class Media {
 	 *
 	 * @return the simple double property
 	 */
-	public SimpleObjectProperty<Button> starsProperty() {
+	public SimpleDoubleProperty starsProperty() {
 		return stars;
 	}
 	
@@ -921,11 +915,11 @@ public abstract class Media {
 	public void updateStars(Node node) {
 		
 		// Show the Window
-		Main.starWindow.show(getFileName(), Double.parseDouble(stars.get().getText()), node);
+		Main.starWindow.show(getFileName(), stars.get(), node);
 		
 		// Keep in memory stars ...
-		final double previousStars = Double.parseDouble(stars.get().getText());
-		stars.get().textProperty().bind(Main.starWindow.starsProperty().asString());
+		final double previousStars = Double.parseDouble(String.valueOf(stars));
+		stars.bind(Main.starWindow.starsProperty());
 		
 		// Listener
 		Main.starWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
@@ -942,7 +936,7 @@ public abstract class Media {
 				if (!Main.starWindow.getWindow().isShowing()) {
 					
 					// unbind stars property
-					stars.get().textProperty().unbind();
+					stars.unbind();
 					
 					// Accepted?
 					if (Main.starWindow.wasAccepted()) {
@@ -971,16 +965,16 @@ public abstract class Media {
 						//Update the SearchWindow
 						Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
 							if (media.getFilePath().equals(Media.this.getFilePath()))
-								media.starsProperty().get().setText(stars.get().getText());
+								media.starsProperty().set(stars.get());
 						});
 						
 						//Update the StarredMediaList
-						Main.starredMediaList.addOrUpdateStars(Media.this.getFilePath(), Double.valueOf(stars.get().getText()), false);
+						Main.starredMediaList.addOrUpdateStars(Media.this.getFilePath(), stars.get(), false);
 						
 						//Commit
 						Main.dbManager.commit();
 					} else
-						stars.get().setText(String.valueOf(previousStars));
+						stars.set(previousStars);
 				}
 			}
 		});
@@ -1004,11 +998,11 @@ public abstract class Media {
 			if (preparedUStars.executeUpdate() > 0) {// && controller1 != controller) //Check 
 				smartController.getItemsObservableList().forEach(media -> {
 					if (media.getFilePath().equals(Media.this.getFilePath()))
-						media.starsProperty().get().setText(String.valueOf(getStars()));
+						media.starsProperty().set(stars.get());
 				});
 				smartController.getFiltersMode().getMediaTableViewer().getTableView().getItems().forEach(media -> {
 					if (media.getFilePath().equals(Media.this.getFilePath()))
-						media.starsProperty().get().setText(String.valueOf(getStars()));
+						media.starsProperty().set(stars.get());
 				});
 			}
 			
@@ -1114,7 +1108,7 @@ public abstract class Media {
 	 * @return the stars
 	 */
 	public double getStars() {
-		return Double.parseDouble(stars.get().getText());
+		return stars.get();
 	}
 	
 	/**

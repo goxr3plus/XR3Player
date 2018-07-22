@@ -279,8 +279,8 @@ public class MediaUpdaterService {
 				Main.starredMediaList.getSet().stream().filter(starredFile -> media.getFilePath().equals(starredFile.getPath())).findFirst().ifPresent(starredFile -> {
 					//Run of JavaFX Thread
 					Platform.runLater(() -> {
-						if (!media.starsProperty().get().textProperty().isBound())
-							media.starsProperty().get().setText(String.valueOf(starredFile.getStars()));
+						if (!media.starsProperty().isBound())
+							media.starsProperty().set(starredFile.getStars());
 					});
 				});
 				
