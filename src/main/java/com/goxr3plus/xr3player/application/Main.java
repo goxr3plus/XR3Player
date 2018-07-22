@@ -304,17 +304,91 @@ public class Main extends Application {
 	
 	// --------------END: The below have dependencies on others------------------------
 	
+	final int screenMinWidth = 800 , screenMinHeight = 600;
+	
 	@Override
 	public void start(Stage primaryStage) {
+		System.out.println("Entered JavaFX Application Start Method");
 		
 		//Current Application Path
 		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
 		
 		// --------Window---------
 		window = primaryStage;
-		final int screenMinWidth = 800 , screenMinHeight = 600;
-		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
+		window.setTitle("XR3Player V." + APPLICATION_VERSION);
+		window.setWidth(InfoTool.getVisualScreenWidth() * 0.95);
+		window.setHeight(InfoTool.getVisualScreenHeight() * 0.95);
+		window.centerOnScreen();
+		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
+		window.centerOnScreen();
+		window.setOnCloseRequest(exit -> {
+			confirmApplicationExit();
+			exit.consume();
+		});
 		
+		// Borderless Scene
+		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
+		startPart1();
+		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
+		borderlessScene.setMoveControl(loginMode.getXr3PlayerLabel());
+		borderlessScene.setMoveControl(topBar.getXr3Label());
+		borderlessScene.setMoveControl(welcomeScreen.getTopHBox());
+		window.setScene(borderlessScene);
+		
+		//Continue
+		startPart2();
+		
+		//Count Downloads
+		countDownloads();
+		
+		//---Login Mode---- It must be set after the window has been shown
+		//loginMode.getSplitPane().setDividerPositions(0.65, 0.35)
+		
+		//Delete AutoUpdate if it exists
+		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
+		
+		//============= ApplicationProperties GLOBAL
+		Properties properties = applicationProperties.loadProperties();
+		
+		//WelcomeScreen
+		welcomeScreen.getVersionLabel().setText(window.getTitle());
+		if (properties.getProperty("Show-Welcome-Screen") == null)
+			welcomeScreen.showWelcomeScreen();
+		else
+			Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresent(value -> {
+				welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
+				if (welcomeScreen.getShowOnStartUp().isSelected())
+					welcomeScreen.showWelcomeScreen();
+				else
+					welcomeScreen.hideWelcomeScreen();
+			});
+		
+		//Users Color Picker
+		Optional.ofNullable(properties.getProperty("Users-Background-Color")).ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
+		
+		applicationProperties.setUpdatePropertiesLocked(false);
+		
+		//------------------Experiments------------------
+		//ScenicView.show(scene)
+		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
+		
+		//Show the Window
+		window.show();
+		
+		//Check for updates
+		updateWindow.searchForUpdates(false);
+		
+		//XR3AutoUpdater exit message
+		Platform.setImplicitExit(false);
+		System.out.println("XR3Player ready to rock!");
+		
+	}
+	
+	/**
+	 * This method creates the intances of the needed classes in order the application to run
+	 */
+	private void startPart1() {
 		//----------------START: The below have not dependencies on other ---------------------------------//
 		
 		welcomeScreen = new WelcomeScreen();
@@ -435,143 +509,11 @@ public class Main extends Application {
 		mediaSearchWindow = new MediaSearchWindow();
 		
 		// --------------END: The below have dependencies on others------------w------------
-		
-		System.out.println("Entered JavaFX Application Start Method");
-		Platform.setImplicitExit(false);
-		
-		// --------Window---------
-		window.setTitle("XR3Player V." + APPLICATION_VERSION);
-		double width = InfoTool.getVisualScreenWidth();
-		double height = InfoTool.getVisualScreenHeight();
-		window.setWidth(width * 0.95);
-		window.setHeight(height * 0.95);
-		window.centerOnScreen();
-		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
-		window.centerOnScreen();
-		window.setOnCloseRequest(exit -> {
-			confirmApplicationExit();
-			exit.consume();
-		});
-		
-		// Borderless Scene
-		borderlessScene.setMoveControl(loginMode.getXr3PlayerLabel());
-		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
-		window.setScene(borderlessScene);
-		window.show();
-		window.close();
-		
-		//welcomeScreen
-		borderlessScene.setMoveControl(welcomeScreen.getTopHBox());
-		
-		//Continue
-		startPart2();
-		
-		//Count Downloads
-		countDownloads();
-		
-		//---Login Mode---- It must be set after the window has been shown
-		//loginMode.getSplitPane().setDividerPositions(0.65, 0.35)
-		
-		//Delete AutoUpdate if it exists
-		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
-		
-		//============= ApplicationProperties GLOBAL
-		Properties properties = applicationProperties.loadProperties();
-		
-		//WelcomeScreen
-		welcomeScreen.getVersionLabel().setText(window.getTitle());
-		if (properties.getProperty("Show-Welcome-Screen") == null)
-			welcomeScreen.showWelcomeScreen();
-		else
-			Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresent(value -> {
-				welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
-				if (welcomeScreen.getShowOnStartUp().isSelected())
-					welcomeScreen.showWelcomeScreen();
-				else
-					welcomeScreen.hideWelcomeScreen();
-			});
-		
-		//Users Color Picker
-		Optional.ofNullable(properties.getProperty("Users-Background-Color")).ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
-		
-		applicationProperties.setUpdatePropertiesLocked(false);
-		
-		//------------------Experiments------------------
-		//ScenicView.show(scene)
-		// root.setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('/image/background.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
-		
-		//Show the Window
-		window.show();
-		
-		//Check for updates
-		updateWindow.searchForUpdates(false);
-		
-		//XR3AutoUpdater exit message
-		System.out.println("XR3Player ready to rock!");
-		
 	}
 	
 	/**
-	 * Count application downloads from Github and SourceForge
+	 * This method makes further additions to secure everything will start running smoothly
 	 */
-	private void countDownloads() {
-		//---- Update Downloads Labels
-		new Thread(() -> {
-			try {
-				
-				//---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------				
-				String text2 = "GitHub: [ "
-						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
-								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
-						+ " ]";
-				Platform.runLater(() -> loginMode.getGitHubDownloadsLabel().setText(text2));
-				
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				Platform.runLater(() -> {
-					loginMode.getGitHubDownloadsLabel().setText("GitHub: [ ? ]");
-					loginMode.getDownloadsVBox().setManaged(false);
-					loginMode.getDownloadsVBox().setVisible(false);
-				});
-				
-			}
-			
-			try {
-				//---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS ----------------------
-				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
-						.openConnection();
-				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-				httpcon.setConnectTimeout(60000);
-				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-				
-				//Read line by line
-				String response = in.lines().collect(Collectors.joining());
-				in.close();
-				
-				//Parse JSON
-				JsonObject jsonRoot = (JsonObject) Jsoner.deserialize(response);
-				JsonArray oses = (JsonArray) jsonRoot.get("oses");
-				
-				//Count total downloads
-				int[] counter = { 0 };
-				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JsonArray) os ).get(1).toString()));
-				
-				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
-				
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				Platform.runLater(() -> {
-					loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ ? ]");
-					loginMode.getDownloadsVBox().setManaged(false);
-					loginMode.getDownloadsVBox().setVisible(false);
-				});
-				
-			}
-		}).start();
-		
-	}
-	
 	private void startPart2() {
 		
 		// ---- InitOwners -------
@@ -600,9 +542,10 @@ public class Main extends Application {
 		topBar.getSearchField().setOnMouseReleased(m -> mediaSearchWindow.recalculateAndshow(topBar.getSearchField()));
 		
 		// -------Root-----------
-		root.setVisible(false);
 		topBar.addXR3LabelBinding();
+		root.setVisible(false);
 		root.setTop(topBar);
+		root.setLeft(sideBar);
 		root.setBottom(bottomBar);
 		
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
@@ -757,13 +700,9 @@ public class Main extends Application {
 		updateScreen.getLabel().setText("--Starting--");
 		updateScreen.setVisible(true);
 		
-		//SideBar
-		root.setLeft(sideBar);
+		//SideBar	
 		sideBar.prepareForLoginMode(false);
-		
-		//Top Bar is the new Move Controls
-		borderlessScene.setMoveControl(topBar.getXr3Label());
-		
+
 		//Set root visible
 		root.setVisible(true);
 		
@@ -1066,6 +1005,66 @@ public class Main extends Application {
 		
 		//Set the default one
 		determineBackgroundImage();
+	}
+	
+	/**
+	 * Count application downloads from Github and SourceForge
+	 */
+	private void countDownloads() {
+		//---- Update Downloads Labels
+		new Thread(() -> {
+			try {
+				
+				//---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------				
+				String text2 = "GitHub: [ "
+						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
+								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
+						+ " ]";
+				Platform.runLater(() -> loginMode.getGitHubDownloadsLabel().setText(text2));
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				Platform.runLater(() -> {
+					loginMode.getGitHubDownloadsLabel().setText("GitHub: [ ? ]");
+					loginMode.getDownloadsVBox().setManaged(false);
+					loginMode.getDownloadsVBox().setVisible(false);
+				});
+				
+			}
+			
+			try {
+				//---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS ----------------------
+				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
+						.openConnection();
+				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+				httpcon.setConnectTimeout(60000);
+				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				
+				//Read line by line
+				String response = in.lines().collect(Collectors.joining());
+				in.close();
+				
+				//Parse JSON
+				JsonObject jsonRoot = (JsonObject) Jsoner.deserialize(response);
+				JsonArray oses = (JsonArray) jsonRoot.get("oses");
+				
+				//Count total downloads
+				int[] counter = { 0 };
+				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JsonArray) os ).get(1).toString()));
+				
+				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				Platform.runLater(() -> {
+					loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ ? ]");
+					loginMode.getDownloadsVBox().setManaged(false);
+					loginMode.getDownloadsVBox().setVisible(false);
+				});
+				
+			}
+		}).start();
+		
 	}
 	
 	/**
