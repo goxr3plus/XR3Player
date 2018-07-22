@@ -325,6 +325,7 @@ public final class ActionTool {
 		
 		return true;
 	}
+
 	
 	/**
 	 * Show a notification.
