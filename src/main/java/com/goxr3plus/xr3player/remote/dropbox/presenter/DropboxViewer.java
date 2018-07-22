@@ -695,6 +695,9 @@ public class DropboxViewer extends StackPane {
 	 */
 	public void refreshSavedAccounts() {
 		
+		//Clear ArrayFirst
+		savedAccountsArray.clear();
+		
 		//savedAccountsListView
 		Optional.ofNullable(Main.userInfoMode.getUser().getUserInformationDb().getProperty("DropBox-Access-Tokens")).ifPresent(accessTokens -> {
 			if (accessTokens.contains("<>:<>")) //Check if we have multiple access tokens
