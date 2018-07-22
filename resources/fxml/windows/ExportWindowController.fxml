@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="329.0" prefWidth="607.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="280.0" prefWidth="665.0" style="-fx-background-color: #252525;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="What to do with the files ?">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="What to do with the files ...">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -39,7 +39,7 @@
             </VBox>
             <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Which files to export ?">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Which files to export ...">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -57,12 +57,35 @@
                   </HBox>
                </children>
             </VBox>
+            <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Export as ...">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" disable="true" spacing="10.0">
+                     <children>
+                        <JFXRadioButton focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Folder">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="exportAsGroup" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton focusTraversable="false" layoutX="10.0" layoutY="10.0" styleClass="settingsRadioButton" text="Zip Folder">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="whatFilesToExportGroup1" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <VBox alignment="CENTER" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Where to export the above files ?" VBox.vgrow="SOMETIMES" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Where to export the above files ?" VBox.vgrow="SOMETIMES" />
                   <HBox alignment="CENTER">
                      <children>
-                        <TextField fx:id="exportField1" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="exportField1" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick folder to export..." style="-fx-background-radius: 0;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
                         <Button fx:id="clear1" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -92,7 +115,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="51.0">
                      <children>
-                        <TextField fx:id="exportField2" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="exportField2" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
                         <Button fx:id="clear2" contentDisplay="GRAPHIC_ONLY" layoutX="561.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -119,7 +142,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="70.0">
                      <children>
-                        <TextField fx:id="exportField3" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="exportField3" editable="false" focusTraversable="false" maxWidth="1.7976931348623157E308" mouseTransparent="true" promptText="pick another folder to export..." style="-fx-background-radius: 0;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
                         <Button fx:id="clear3" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -149,24 +172,27 @@
                   <Insets left="15.0" right="15.0" />
                </VBox.margin>
             </VBox>
-            <HBox alignment="CENTER" spacing="15.0">
+            <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <JFXButton fx:id="okButton" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="OK">
+                  <JFXButton fx:id="okButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="OK" HBox.hgrow="ALWAYS">
                      <graphic>
                         <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="cancelButton" focusTraversable="false" layoutX="376.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Nope">
+                  <JFXButton fx:id="cancelButton" focusTraversable="false" layoutX="376.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Cancel" HBox.hgrow="ALWAYS">
                      <graphic>
                         <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
                      </graphic>
                   </JFXButton>
                </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
    </center>
    <padding>
-      <Insets bottom="15.0" left="2.0" right="2.0" top="2.0" />
+      <Insets bottom="5.0" left="2.0" right="2.0" top="2.0" />
    </padding>
 </fx:root>
