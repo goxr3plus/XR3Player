@@ -248,6 +248,7 @@ public abstract class Media {
 				ex.printStackTrace();
 			}
 		});
+		
 		//Buy button		
 		Button buyButton = new Button("", JavaFXTools.getFontIcon("fas-shopping-cart", Color.WHITE, 18));
 		buyButton.getStyleClass().add("jfx-button2");
@@ -256,8 +257,7 @@ public abstract class Media {
 		buyButton.setMaxSize(28, 24);
 		buyButton.setStyle("-fx-cursor:hand");
 		buyButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		buyButton.setOnMouseReleased(m -> {
-		});
+		buyButton.setOnMouseReleased(m -> Main.songsContextMenu.showContextMenu(this, Genre.BUYBUTTON, m.getScreenX(), m.getScreenY(), null, buyButton));
 		
 		HBox hbox = new HBox(searchButton, youtubeButton, buyButton);
 		getInfoBuy = new SimpleObjectProperty<>(hbox);
@@ -1206,7 +1206,7 @@ public abstract class Media {
 	 *
 	 * @return The genre of smartControllerGenre Media
 	 */
-	public Genre getSmartController() {
+	public Genre getSmartControllerGenre() {
 		return smartControllerGenre;
 	}
 	

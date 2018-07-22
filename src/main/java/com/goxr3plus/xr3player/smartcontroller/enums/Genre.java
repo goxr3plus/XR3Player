@@ -21,6 +21,6 @@ public enum Genre {
 	//    /** The radiostation. */
 	//    RADIOSTATION,
 	/** The unknown. */
-	UNKNOWN;
+	BUYBUTTON, UNKNOWN;
 	
 }

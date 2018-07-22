@@ -245,9 +245,12 @@ public class MediaContextMenu extends ContextMenu {
 		
 		// Don't waste resources
 		if (previousGenre != genre)
-			if (media.getSmartController() == Genre.LIBRARYMEDIA)
+			if (genre == Genre.BUYBUTTON) { //Smart trick
+				getItems().forEach(item -> item.setVisible(false));
+				getInfoBuy.setVisible(true);
+			} else if (media.getSmartControllerGenre() == Genre.LIBRARYMEDIA)
 				getItems().forEach(item -> item.setVisible(true));
-			else if (media.getSmartController() == Genre.SEARCHWINDOW)
+			else if (media.getSmartControllerGenre() == Genre.SEARCHWINDOW)
 				removeMedia.setVisible(false);
 			
 		//Determine the image
