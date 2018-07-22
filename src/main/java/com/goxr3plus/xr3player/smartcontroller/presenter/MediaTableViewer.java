@@ -448,6 +448,20 @@ public class MediaTableViewer extends StackPane {
 		emotions.setCellValueFactory(new PropertyValueFactory<>("emotion"));
 		emotions.setCellFactory(col -> new TableCell<Media,Integer>() {
 			
+			//Emotion Button
+			Button emotionButton = new Button("");
+			
+			{
+				
+				emotionButton.getStyleClass().add("jfx-button2");
+				emotionButton.setPrefSize(24, 24);
+				emotionButton.setMinSize(24, 24);
+				emotionButton.setMaxSize(24, 24);
+				emotionButton.setStyle("-fx-cursor:hand");
+				emotionButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+				
+			}
+			
 			/**
 			 * Update the emotion the user is feeling for this Media
 			 */
@@ -489,13 +503,6 @@ public class MediaTableViewer extends StackPane {
 					Emotion emotion = Emotion.NEUTRAL;
 					
 					//Emotion Button
-					Button emotionButton = new Button("");
-					emotionButton.getStyleClass().add("jfx-button2");
-					emotionButton.setPrefSize(24, 24);
-					emotionButton.setMinSize(24, 24);
-					emotionButton.setMaxSize(24, 24);
-					emotionButton.setStyle("-fx-cursor:hand");
-					emotionButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 					emotionButton.setOnAction(a -> updateEmotion(getTableRow().getItem(), emotionButton));
 					setGraphic(emotionButton);
 					
@@ -532,11 +539,8 @@ public class MediaTableViewer extends StackPane {
 		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
 		stars.setCellFactory(col -> new TableCell<Media,Double>() {
 			
-			StarBadge starBadgeButton = new StarBadge(0.0);
-			
-			{
-				
-			}
+			//Star Badge
+			StarBadge starBadge = new StarBadge(0.0);
 			
 			@Override
 			protected void updateItem(Double item , boolean empty) {
@@ -550,10 +554,10 @@ public class MediaTableViewer extends StackPane {
 					if (getTableRow().getItem() != null) {
 						
 						//Star Badge
-						starBadgeButton.setOnAction(a -> getTableRow().getItem().updateStars(starBadgeButton));
-						starBadgeButton.setStars(getTableRow().getItem().getStars());
+						starBadge.setOnAction(a -> getTableRow().getItem().updateStars(starBadge));
+						starBadge.setStars(getTableRow().getItem().getStars());
 						
-						setGraphic(starBadgeButton);
+						setGraphic(starBadge);
 					}
 				}
 			}

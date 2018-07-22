@@ -271,7 +271,7 @@ public class MediaTagsService extends Service<Boolean> {
 							}
 							
 						} catch (Exception e) {
-							e.printStackTrace();
+							System.err.println("MediaTagsService problem : " + e.getMessage());
 							success[0] = false;
 						}
 						
