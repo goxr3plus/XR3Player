@@ -80,11 +80,12 @@ public class WelcomeScreen extends StackPane {
 		//startButton
 		startButton.setOnAction(a -> {
 			
+			//Unbind
+			unBindBackgroundImageView();
+			
 			//Hide Welcome Screen
 			hideWelcomeScreen();
 			
-			//Unbind
-			unBindBackgroundImageView();
 		});
 		
 		//dontShowAgain
