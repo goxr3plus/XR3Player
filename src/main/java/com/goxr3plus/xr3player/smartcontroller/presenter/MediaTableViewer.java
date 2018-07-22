@@ -339,18 +339,18 @@ public class MediaTableViewer extends StackPane {
 		tableView.setRowFactory(rf -> {
 			TableRow<Media> row = new TableRow<>();
 			
-			// use EasyBind to access the valueProperty of the itemProperty
-			// of the cell:
-			row.disableProperty().bind(
-					// start at itemProperty of row
-					EasyBind.select(row.itemProperty())
-							// map to fileExistsProperty[a boolean] of item,
-							// if item non-null
-							.selectObject(Media::fileExistsProperty)
-							// map to BooleanBinding checking if false
-							.map(x -> !x.booleanValue())
-							// value to use if item was null
-							.orElse(false));
+//			// use EasyBind to access the valueProperty of the itemProperty
+//			// of the cell:
+//			row.disableProperty().bind(
+//					// start at itemProperty of row
+//					EasyBind.select(row.itemProperty())
+//							// map to fileExistsProperty[a boolean] of item,
+//							// if item non-null
+//							.selectObject(Media::fileExistsProperty)
+//							// map to BooleanBinding checking if false
+//							.map(x -> !x.booleanValue())
+//							// value to use if item was null
+//							.orElse(false));
 			
 			//Mouse Listener
 			row.setFocusTraversable(true);

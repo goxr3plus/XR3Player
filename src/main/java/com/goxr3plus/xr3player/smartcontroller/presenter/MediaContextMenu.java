@@ -250,8 +250,11 @@ public class MediaContextMenu extends ContextMenu {
 				getInfoBuy.setVisible(true);
 			} else if (media.getSmartControllerGenre() == Genre.LIBRARYMEDIA)
 				getItems().forEach(item -> item.setVisible(true));
-			else if (media.getSmartControllerGenre() == Genre.SEARCHWINDOW)
+			else if (media.getSmartControllerGenre() == Genre.SEARCHWINDOW) {
+				getItems().forEach(item -> item.setVisible(true));
 				removeMedia.setVisible(false);
+			}else
+				getItems().forEach(item -> item.setVisible(true));
 			
 		//Determine the image
 		for (int i = 0; i <= 2; i++) {
