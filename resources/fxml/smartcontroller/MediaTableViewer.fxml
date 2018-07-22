@@ -22,7 +22,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="26" />
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="playStatus" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Played">
+                  <TableColumn fx:id="playStatus" maxWidth="1.7976931348623157E308" minWidth="32.0" prefWidth="32.0" text="Played">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-play-circle" iconSize="22" />
                      </graphic>

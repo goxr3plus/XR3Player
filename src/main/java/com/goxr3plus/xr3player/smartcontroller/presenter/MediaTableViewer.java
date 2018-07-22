@@ -573,12 +573,7 @@ public class MediaTableViewer extends StackPane {
 		playStatus.setCellFactory(col -> new TableCell<Media,Integer>() {
 			
 			//Icon FontIcon
-			HBox hbox = new HBox();
-			FontIcon icon = new FontIcon();
-			
-			{
-				icon.setIconSize(24);
-			}
+			HBox flowPane = new HBox();
 			
 			@Override
 			protected void updateItem(Integer item , boolean empty) {
@@ -587,19 +582,28 @@ public class MediaTableViewer extends StackPane {
 					setText(null);
 					setGraphic(null);
 				} else {
-					setGraphic(icon);
+					//Clear the flowPane
+					flowPane.getChildren().clear();
 					
 					// set the image according to the play status		
-					if (item != null)
-						if (item == -2)
+					if (item != null) {
+						if (item == -2)  //UNKNOWN
 							setGraphic(null);
-						else if (item == -1) {
-							icon.setIconLiteral("fas-play-circle");
-							icon.setIconColor(lightGreen);
-						} else {
-							icon.setIconLiteral(item == 0 ? "gmi-filter-1" : item == 1 ? "gmi-filter-2" : "gmi-filter-3");
-							icon.setIconColor(Color.WHITE);
+						else if (item == -1) { //Already played
+							setGraphic(JavaFXTools.getFontIcon("fas-play-circle", lightGreen, 24));
+						} else { //BEING PLAYED BY SOME PLAYERS
+							
+							String mediaPath = getTableRow().getItem().getFilePath();
+							Main.xPlayersList.getList().stream().sorted((o1 , o2) -> Integer.valueOf(o1.getKey()).compareTo(o2.getKey())).forEach(controller -> {
+								String path = controller.getxPlayerModel().songPathProperty().get();
+								//Check if it matches
+								if (path!=null && path.equals(mediaPath))
+									flowPane.getChildren().addAll(JavaFXTools.getFontIcon("gmi-filter-" + ( controller.getKey() + 1 ), Color.WHITE, 24));
+								
+							});
+							setGraphic(flowPane);
 						}
+					}
 				}
 			}
 			
