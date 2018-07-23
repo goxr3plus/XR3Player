@@ -102,6 +102,7 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagWindow;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
@@ -209,6 +210,9 @@ public class Main extends Application {
 	
 	/** The Constant songsContextMenu. */
 	public static MediaContextMenu songsContextMenu;
+	
+	/** The Constant songsContextMenu. */
+	public static ShopContextMenu shopContextMenu;
 	
 	/** The Constant EmotionListsController. */
 	public static EmotionListsController emotionListsController;
@@ -448,6 +452,7 @@ public class Main extends Application {
 		
 		/** The Constant songsContextMenu. */
 		songsContextMenu = new MediaContextMenu();
+		shopContextMenu = new ShopContextMenu();
 		
 		//
 		

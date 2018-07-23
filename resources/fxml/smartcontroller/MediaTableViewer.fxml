@@ -42,7 +42,7 @@
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="28" />
                      </graphic></TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="title" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" text="Name" />
                   <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="typ-thumbs-up" iconSize="26" />
@@ -65,7 +65,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fa-inbox" iconSize="24" />
                      </graphic>
                   </TableColumn>            
-                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" />
+                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false" />
                   <TableColumn fx:id="mood" minWidth="65.0" prefWidth="75.0" text="Mood" visible="false" />
                   <TableColumn fx:id="album" minWidth="65.0" prefWidth="75.0" text="Album" visible="false" />
                   <TableColumn fx:id="composer" minWidth="65.0" prefWidth="75.0" text="Composer" visible="false" />

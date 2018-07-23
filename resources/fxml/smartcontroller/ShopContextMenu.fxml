@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <Menu mnemonicParsing="false" text="Amazon">
+         <items>
+            <MenuItem fx:id="amazonUS" mnemonicParsing="false" onAction="#action" text="US (Amazon.com)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonUK" mnemonicParsing="false" onAction="#action" text="UK (Amazon.com)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonCanada" mnemonicParsing="false" onAction="#action" text="Canada (Amazon.ca)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonGermany" mnemonicParsing="false" onAction="#action" text="Germany (Amazon.de)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonFrance" mnemonicParsing="false" onAction="#action" text="France (Amazon.fr)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonSpain" mnemonicParsing="false" onAction="#action" text="Spain (Amazon.es)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonItaly" mnemonicParsing="false" onAction="#action" text="Italy (Amazon.it)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonJapan" mnemonicParsing="false" onAction="#action" text="Japan (Amazon.co.jp)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonChina" mnemonicParsing="false" onAction="#action" text="China (Amazon.cn)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+         </items>
+         <graphic>
+            <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+         </graphic>
+      </Menu>
+      <MenuItem fx:id="soundCloud" mnemonicParsing="false" onAction="#action" text="SoundCloud">
+         <graphic>
+            <FontIcon iconColor="#ffa72d" iconLiteral="fab-soundcloud" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="jamendo" mnemonicParsing="false" onAction="#action" text="Jamendo">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="ri-globe" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="tuneIn" mnemonicParsing="false" onAction="#action" text="TuneIn">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="ri-globe" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="hDTracks" mnemonicParsing="false" onAction="#action" text="HDTracks">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="ri-globe" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="cDUniverse" mnemonicParsing="false" onAction="#action" text="CD Universe">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="ri-globe" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="lastfm" mnemonicParsing="false" onAction="#action" text="Last.fm">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fab-lastfm" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="librefm" mnemonicParsing="false" onAction="#action" text="Libre.fm">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="ri-globe" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="youtube" mnemonicParsing="false" onAction="#action" text="Youtube">
+         <graphic>
+            <FontIcon iconColor="#d72525" iconLiteral="fab-youtube" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="vimeo" mnemonicParsing="false" onAction="#action" text="Vimeo">
+         <graphic>
+            <FontIcon iconColor="#2dbbee" iconLiteral="fab-vimeo" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="google" mnemonicParsing="false" onAction="#action" text="Google">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fab-google" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="duckduckgo" mnemonicParsing="false" onAction="#action" text="DuckDuckgo">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="ri-globe" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="bing" mnemonicParsing="false" onAction="#action" text="Bing">
+         <graphic>
+            <FontIcon iconColor="#eb9832" iconLiteral="ri-bing" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="yahoo" mnemonicParsing="false" onAction="#action" text="Yahoo">
+         <graphic>
+            <FontIcon iconColor="#1faae1" iconLiteral="fab-vimeo" iconSize="18" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="wikipedia" mnemonicParsing="false" onAction="#action" text="Wikipedia">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fab-wikipedia-w" iconSize="18" />
+         </graphic>
+      </MenuItem>
+   </items>
+</fx:root>

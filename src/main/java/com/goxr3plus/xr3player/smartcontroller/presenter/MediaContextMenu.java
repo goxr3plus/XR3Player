@@ -73,75 +73,6 @@ public class MediaContextMenu extends ContextMenu {
 	private Menu getInfoBuy;
 	
 	@FXML
-	private MenuItem amazonUS;
-	
-	@FXML
-	private MenuItem amazonUK;
-	
-	@FXML
-	private MenuItem amazonCanada;
-	
-	@FXML
-	private MenuItem amazonGermany;
-	
-	@FXML
-	private MenuItem amazonFrance;
-	
-	@FXML
-	private MenuItem amazonSpain;
-	
-	@FXML
-	private MenuItem amazonItaly;
-	
-	@FXML
-	private MenuItem amazonJapan;
-	
-	@FXML
-	private MenuItem amazonChina;
-	
-	@FXML
-	private MenuItem soundCloud;
-	
-	@FXML
-	private MenuItem jamendo;
-	
-	@FXML
-	private MenuItem tuneIn;
-	
-	@FXML
-	private MenuItem hDTracks;
-	
-	@FXML
-	private MenuItem cDUniverse;
-	
-	@FXML
-	private MenuItem lastfm;
-	
-	@FXML
-	private MenuItem librefm;
-	
-	@FXML
-	private MenuItem youtube;
-	
-	@FXML
-	private MenuItem vimeo;
-	
-	@FXML
-	private MenuItem google;
-	
-	@FXML
-	private MenuItem duckduckgo;
-	
-	@FXML
-	private MenuItem bing;
-	
-	@FXML
-	private MenuItem yahoo;
-	
-	@FXML
-	private MenuItem wikipedia;
-	
-	@FXML
 	private Menu findLyrics;
 	
 	@FXML
@@ -182,8 +113,6 @@ public class MediaContextMenu extends ContextMenu {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
-	//private final Image soundWave = InfoTool.getImageFromResourcesFolder("Audio Wave Filled-24.png");
-	
 	/**
 	 * The node based on which the Rename or Star Window will be position
 	 */
@@ -223,22 +152,22 @@ public class MediaContextMenu extends ContextMenu {
 	 */
 	@FXML
 	private void initialize() {
-		
+		this.getInfoBuy.getItems().addAll(new ShopContextMenu().getItems());
 	}
 	
 	/**
 	 * Shows the context menu based on the variables below.
 	 *
 	 * @param media
-	 *            the media
+	 *            Given media file
 	 * @param genre
 	 *            the genre
 	 * @param x
-	 *            the d
+	 *            Horizontal mouse position on the screen
 	 * @param y
-	 *            the e
+	 *            Vertical mouse position on the screen
 	 * @param controller1
-	 *            The smartcontroller that is calling this method
+	 *            The SmartController that is calling this method
 	 * @param node
 	 */
 	public void showContextMenu(Media media , Genre genre , double x , double y , SmartController controller1 , Node node) {
@@ -319,19 +248,7 @@ public class MediaContextMenu extends ContextMenu {
 		//------------ END of Animation------------------
 		
 	}
-	
-	/**
-	 * Shows a popOver with informations for this Song.
-	 *
-	 * @param x
-	 *            the x
-	 * @param y
-	 *            the y
-	 */
-	public void showPopOver(double x , double y) {
-		// this.media = media
-		// pop.show(media)
-	}
+
 	
 	/**
 	 * Open the given website on the build in Chromium
@@ -417,68 +334,8 @@ public class MediaContextMenu extends ContextMenu {
 		else
 			try {
 				
-				//---------------------SEARCH ON WEB--------------------------------------------
-				//Music Sites
-				if (source == soundCloud)
-					openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == jamendo)
-					openWebSite("https://www.jamendo.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == tuneIn)
-					openWebSite("http://tunein.com/search/?query=" + URLEncoder.encode(media.getTitle(), encoding));
-				//Amazon
-				else if (source == amazonUS)
-					openWebSite("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonUK)
-					openWebSite("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonCanada)
-					openWebSite("https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonGermany)
-					openWebSite("https://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonFrance)
-					openWebSite("https://www.amazon.fr/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonSpain)
-					openWebSite("https://www.amazon.es/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonItaly)
-					openWebSite("https://www.amazon.it/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonJapan)
-					openWebSite("https://www.amazon.co.jp/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == amazonChina)
-					openWebSite("https://www.amazon.cn/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
-				
-				//Music Sites
-				else if (source == hDTracks)
-					openWebSite("http://www.hdtracks.com/catalogsearch/result/?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == cDUniverse)
-					openWebSite("http://www.cduniverse.com/sresult.asp?HT_Search=ALL&HT_Search_Info=" + URLEncoder.encode(media.getTitle(), encoding) + "&style=all");
-				
-				//Radios
-				else if (source == lastfm)
-					openWebSite("https://www.last.fm/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == librefm)
-					openWebSite("https://libre.fm/search.php?search_term=" + URLEncoder.encode(media.getTitle(), encoding) + "&search_type=artist");
-				
-				//Video WebSites
-				else if (source == youtube)
-					openWebSite("https://www.youtube.com/results?search_query=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == vimeo)
-					openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				
-				//Search-Engines
-				else if (source == google)
-					openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == duckduckgo)
-					openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == bing)
-					openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
-				else if (source == yahoo)
-					openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(media.getTitle(), encoding));
-				
-				//Wikipedia
-				else if (source == wikipedia)
-					openWebSite("https://www.wikipedia.org/wiki/Special:Search?search=" + URLEncoder.encode(media.getTitle(), encoding));
-				
 				//-----------------------FIND LYRICS------------------------------------------------
-				else if (source == lyricFinderOrg)
+				if (source == lyricFinderOrg)
 					openWebSite("http://search.lyricfinder.org/?query=" + URLEncoder.encode(media.getTitle(), encoding));
 				else if (source == lyricsCom)
 					openWebSite("http://www.lyrics.com/lyrics/" + URLEncoder.encode(media.getTitle(), encoding));

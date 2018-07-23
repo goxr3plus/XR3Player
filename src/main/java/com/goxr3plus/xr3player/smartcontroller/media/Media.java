@@ -258,7 +258,7 @@ public abstract class Media {
 		buyButton.setMaxSize(28, 24);
 		buyButton.setStyle("-fx-cursor:hand");
 		buyButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		buyButton.setOnMouseReleased(m -> Main.songsContextMenu.showContextMenu(this, Genre.BUYBUTTON, m.getScreenX(), m.getScreenY(), null, buyButton));
+		buyButton.setOnMouseReleased(m -> Main.shopContextMenu.showContextMenu(this, m.getScreenX(), m.getScreenY()));
 		
 		//HBox
 		HBox hbox = new HBox(searchButton, youtubeButton, buyButton);
