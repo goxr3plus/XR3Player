@@ -151,12 +151,8 @@ public class DatabaseManager {
 			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 			connection.setAutoCommit(false);
 			
-			//if (!data1Exist)
-			
 			//This method keeps backward compatibility with previous XR3Player versions
 			createDatabaseMissingTables();
-			
-			//keyValueDb.recreateJSonDataBase();
 			
 		} catch (SQLException ex) {
 			Main.logger.log(Level.SEVERE, "", ex);
@@ -237,12 +233,11 @@ public class DatabaseManager {
 	 * @return true, if successful
 	 */
 	public boolean doesTableExist(String tableName) {
-		// SQLite table names are case insensitive, but comparison is case
-		// sensitive by default. To make this work properly in all cases you
-		// need to add COLLATE NOCASE
+		// SQLite table names are case insensitive, but comparison is case sensitive by default.
+		// To make this work properly in all cases you need to add COLLATE NOCASE
 		try (ResultSet r = connection.createStatement().executeQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
 			int total = r.getInt(1);
-			return total == 0 ? false : true;
+			return total == 0;
 		} catch (SQLException ex) {
 			Main.logger.log(Level.INFO, "", ex);
 		}
@@ -255,7 +250,7 @@ public class DatabaseManager {
 	 */
 	public void createDatabaseMissingTables() {
 		
-		Main.logger.info("1-->Checking for missing database tables");
+		Main.logger.info("Creating (if any) missing database tables...");
 		
 		try (Statement statement = connection.createStatement()) {
 			
@@ -264,10 +259,6 @@ public class DatabaseManager {
 					"CREATE TABLE IF NOT EXISTS LIBRARIES (NAME          TEXT    PRIMARY KEY   NOT NULL," + "TABLENAME TEXT NOT NULL," + "STARS         DOUBLE     NOT NULL,"
 							+ "DATECREATED          TEXT   	NOT NULL," + "TIMECREATED          TEXT    NOT NULL," + "DESCRIPTION   TEXT    NOT NULL,"
 							+ "SAVEMODE      INT     NOT NULL," + "POSITION      INT     NOT NULL," + "LIBRARYIMAGE  TEXT," + "OPENED BOOLEAN NOT NULL )");
-			
-			// -----------Radio Stations Table ------------//
-			//  statement.executeUpdate("CREATE TABLE '" + InfoTool.RADIO_STATIONS_DATABASE_TABLE_NAME + "'(NAME TEXT PRIMARY KEY NOT NULL,"
-			//	    + "STREAMURL TEXT NOT NULL," + "TAGS TEXT NOT NULL," + "DESCRIPTION TEXT," + "STARS DOUBLE NOT NULL)");
 			
 			// ----------XPlayers PlayLists Tables ----------//
 			for (int i = 0; i < 3; i++)

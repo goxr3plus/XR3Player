@@ -593,8 +593,6 @@ public class Main extends Application {
 			tab.selectedProperty().addListener((observable , oldValue , newValue) -> {
 				if (specialJFXTabPane.getTabs().get(index).isSelected() && !topBar.isTabSelected(tab))
 					topBar.selectTab(tab);
-				//System.out.println("Entered Tab " + index) //this is inside curly braces with the above if
-				
 			});
 		});
 		root.setCenter(specialJFXTabPane);
@@ -642,13 +640,13 @@ public class Main extends Application {
 		
 		//Create Chromium Folder
 		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium", FileType.DIRECTORY)) {
-			System.out.println("Failed to create chromium folder");
+			System.err.println("Failed to create chromium folder");
 			Util.terminateXR3Player(-1);
 		}
 		
 		//Create Database folder if not exists
 		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
-			System.out.println("Failed to create database folder[lack of permissions],please change installation directory");
+			System.err.println("Failed to create database folder[lack of permissions],please change installation directory");
 			Util.terminateXR3Player(-1);
 		} else {
 			
