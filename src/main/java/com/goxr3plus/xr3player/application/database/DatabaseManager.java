@@ -392,54 +392,50 @@ public class DatabaseManager {
 	 * Stores the last opened library - That means the library that was selected on the Multiple Libraries Tab Pane <br>
 	 * !Must be called from JavaFX Thread!
 	 */
-	private void storeLastOpenedLibrary() {
+	public void storeLastOpenedLibrary() {
 		
 		//Get the current User
 		getOpenedUser().ifPresent(user -> {
 			
-			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
-			
-			//Save the last opened library
-			if (openedLibrariesTabs.isEmpty()) {
-				///System.out.println("Last-Opened-Library is Empty")
+			//Save the last opened(selected) library if any
+			if (Main.libraryMode.openedLibrariesViewer.getTabs().isEmpty())
 				user.getUserInformationDb().deleteProperty("Last-Opened-Library");
-			} else {
-				Tab tab = Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem();
-				//System.out.println("Last-Opened-Library: " + tab.getTooltip().getText())
-				user.getUserInformationDb().updateProperty("Last-Opened-Library", tab.getTooltip().getText());
-			}
+			else
+				user.getUserInformationDb().updateProperty("Last-Opened-Library",
+						Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem().getTooltip().getText());
+			
 		});
 	}
 	
-	//	/**
-	//	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
-	//	 * !Must be called from JavaFX Thread!
-	//	 * 
-	//	 * @param openedLibrariesTabs
-	//	 */
-	//	public void storeOpenedLibraries() {
-	//		
-	//		//Get the opened user and store the opened libraries
-	//		getOpenedUser().ifPresent(user -> {
-	//			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
-	//			
-	//			//			//Save the opened libraries
-	//			//			if (openedLibrariesTabs.isEmpty())
-	//			//				user.getUserInformationDb().deleteProperty("Opened-Libraries");
-	//			//			else {
-	//			//				
-	//			//				//Join all library names to a string using as separator char "<|>:<|>"
-	//			//				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
-	//			//				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
-	//			//				
-	//			//				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
-	//			//			}
-	//			
-	//			//Save the last opened library
-	//			storeLastOpenedLibrary();
-	//		});
-	//		
-	//	}
+	/**
+	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
+	 * !Must be called from JavaFX Thread!
+	 * 
+	 * @param openedLibrariesTabs
+	 */
+	public void storeOpenedLibraries() {
+		
+		//Get the opened user and store the opened libraries
+		//		getOpenedUser().ifPresent(user -> {
+		//			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
+		//			
+		//			//			//Save the opened libraries
+		//			//			if (openedLibrariesTabs.isEmpty())
+		//			//				user.getUserInformationDb().deleteProperty("Opened-Libraries");
+		//			//			else {
+		//			//				
+		//			//				//Join all library names to a string using as separator char "<|>:<|>"
+		//			//				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
+		//			//				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
+		//			//				
+		//			//				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
+		//			//			}
+		//			
+		//			//Save the last opened library
+		//			storeLastOpenedLibrary();
+		//		});
+		storeLastOpenedLibrary();
+	}
 	
 	/**
 	 * DataLoader.
@@ -462,7 +458,7 @@ public class DatabaseManager {
 				//----------------Do the animation with rectangles---------------------
 				Main.updateScreen.closeUpdateScreen();
 				
-				//----------------Finall Settings---------------------
+				//----------------Final Settings---------------------
 				// update library viewer
 				Main.libraryMode.teamViewer.getViewer().update();
 				
