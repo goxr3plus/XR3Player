@@ -102,7 +102,7 @@ public class User extends StackPane {
 				if (Main.renameWindow.wasAccepted()) {
 					
 					// duplicate?
-					if (!Main.loginMode.teamViewer.getItemsObservableList().stream().anyMatch(user -> user != User.this && user.getUserName().equalsIgnoreCase(newName))
+					if (!Main.loginMode.teamViewer.getItemsObservableList().stream().anyMatch(user -> user != User.this && ( (User) user ).getUserName().equalsIgnoreCase(newName))
 							|| newName.equalsIgnoreCase(oldName)) {
 						
 						File originalFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + oldName);
@@ -156,7 +156,7 @@ public class User extends StackPane {
 	 */
 	public User(String userName, int position, LoginMode loginMode) {
 		this.setUserName(userName);
-		this.setPosition(position);
+		this.updatePosition(position);
 		this.loginMode = loginMode;
 		
 		//Create the UserInformation DB
@@ -291,7 +291,7 @@ public class User extends StackPane {
 	 * @param position
 	 *            the position to set
 	 */
-	public void setPosition(int position) {
+	public void updatePosition(int position) {
 		this.position = position;
 	}
 	
@@ -317,14 +317,14 @@ public class User extends StackPane {
 	 */
 	public void deleteUser(Node owner) {
 		//Ask
-		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ " + Main.loginMode.teamViewer.getSelectedItem().getUserName() + " ]",
+		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.teamViewer.getSelectedItem() ).getUserName() + " ]",
 				owner, Main.window)) {
 			
 			//Try to delete it		
 			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getUserName()))) {
 				
 				//Delete from the Model Viewer
-				Main.loginMode.teamViewer.deleteUser(this);
+				Main.loginMode.teamViewer.deleteItem(this);
 				
 				//Delete from PieChart
 				//Main.loginMode.getSeries().getData().stream().filter(data -> data.getXValue().equals(this.getUserName())).findFirst()

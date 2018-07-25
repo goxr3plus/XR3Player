@@ -21,6 +21,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerPlaylist;
 
 /**
  * 
@@ -122,7 +123,7 @@ public class PlaylistsSettingsController extends BorderPane {
 				totalItemsMenuButton.setText(Integer.toString(maximumPerPlaylist));
 				
 				//First Update all the Libraries
-				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(library -> library.getSmartController().setNewMaximumPerPage(maximumPerPlaylist, true));
+				Main.libraryMode.viewer.getItemsObservableList().forEach(library -> ( (XPlayerPlaylist) library ).getSmartController().setNewMaximumPerPage(maximumPerPlaylist, true));
 				
 				//Secondly Update the Search Window PlayList
 				Main.searchWindowSmartController.setNewMaximumPerPage(maximumPerPlaylist, true);

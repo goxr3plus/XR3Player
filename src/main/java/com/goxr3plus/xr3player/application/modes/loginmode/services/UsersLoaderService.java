@@ -22,6 +22,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -86,7 +87,8 @@ public class UsersLoaderService extends Service<Boolean> {
 				try {
 					
 					// -- For every user
-					Main.loginMode.teamViewer.getItemsObservableList().forEach(user -> {
+					Main.loginMode.teamViewer.getItemsObservableList().forEach(userr -> {
+						User user = (User) userr;
 						
 						//Check if the UserInformation Properties File exist
 						if (new File(user.getUserInformationDb().getFileAbsolutePath()).exists()) {

@@ -204,8 +204,8 @@ public class Library extends StackPane {
 					if (Main.renameWindow.wasAccepted() && !libraryName.equals(newName)) {
 						
 						// duplicate?
-						if (! ( duplicate = Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream()
-								.anyMatch(library -> library != Library.this && library.getLibraryName().equals(newName)) )) {
+						if (! ( duplicate = Main.libraryMode.viewer.getItemsObservableList().stream()
+								.anyMatch(library -> library != Library.this && ( (Library) library ).getLibraryName().equals(newName)) )) {
 							
 							try (PreparedStatement libURename = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET NAME=? WHERE NAME=? ;")) {
 								// Update SQL Database
@@ -378,7 +378,7 @@ public class Library extends StackPane {
 		setOnDragOver(event -> {
 			// Source has files?
 			if (event.getDragboard().hasFiles())
-				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
+				Main.libraryMode.viewer.setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
 			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView() && event.getGestureSource() != controller.getFoldersMode()
@@ -393,7 +393,7 @@ public class Library extends StackPane {
 			
 			// Source has files?
 			if (event.getDragboard().hasFiles())
-				Main.libraryMode.teamViewer.getViewer().setCenterIndex(this.getPosition());
+				Main.libraryMode.viewer.setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
 			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
@@ -462,7 +462,7 @@ public class Library extends StackPane {
 		nameLabel.setText(libraryName);
 		nameLabel.getTooltip().setText(libraryName);
 		nameLabel.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.libraryMode.teamViewer.getViewer().centerItemProperty().get() == Library.this)//Main.libraryMode.teamViewer.getViewer().getTimeline().getStatus() != Status.RUNNING)
+			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.libraryMode.viewer.centerItemProperty().get() == Library.this)//Main.libraryMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
 				renameLibrary(nameLabel);
 		});
 		
@@ -470,13 +470,13 @@ public class Library extends StackPane {
 		ratingLabel.visibleProperty().bind(Main.settingsWindow.getLibrariesSettingsController().getShowWidgets().selectedProperty());
 		ratingLabel.textProperty().bind(starsProperty().asString());
 		ratingLabel.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY && Main.libraryMode.teamViewer.getViewer().centerItemProperty().get() == Library.this)
+			if (m.getButton() == MouseButton.PRIMARY && Main.libraryMode.viewer.centerItemProperty().get() == Library.this)
 				updateLibraryStars(ratingLabel);
 		});
 		
 		// ----InformationLabel
 		informationLabel.setOnMouseReleased(m -> {
-			if (Main.libraryMode.teamViewer.getViewer().centerItemProperty().get() == Library.this)
+			if (Main.libraryMode.viewer.centerItemProperty().get() == Library.this)
 				Main.libraryMode.libraryInformation.showWindow(this);
 		});
 		
@@ -885,7 +885,7 @@ public class Library extends StackPane {
 					Main.libraryMode.openedLibrariesViewer.removeTab(getLibraryName());
 				
 				// Update the libraryViewer
-				Main.libraryMode.teamViewer.getViewer().deleteItem(this);
+				Main.libraryMode.viewer.deleteItem(this);
 				
 				// Commit
 				Main.dbManager.commit();
@@ -1259,7 +1259,7 @@ public class Library extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
-		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.teamViewer.getViewer().getCenterIndex())
+		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.viewer.getCenterIndex())
 			return;
 		
 		//Check if Control is down

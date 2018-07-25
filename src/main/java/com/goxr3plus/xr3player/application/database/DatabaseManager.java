@@ -17,13 +17,13 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
+import java.util.stream.Stream;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.control.Tab;
+import javafx.scene.Node;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
@@ -39,7 +39,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
-import java.util.stream.Stream;
 
 /**
  * This class is managing the database of the application.
@@ -237,7 +236,7 @@ public class DatabaseManager {
 		// To make this work properly in all cases you need to add COLLATE NOCASE
 		try (ResultSet r = connection.createStatement().executeQuery("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "' COLLATE NOCASE ")) {
 			int total = r.getInt(1);
-			return total == 0;
+			return total != 0;
 		} catch (SQLException ex) {
 			Main.logger.log(Level.INFO, "", ex);
 		}
@@ -296,7 +295,8 @@ public class DatabaseManager {
 	
 	//-------------------------------------------------------------------
 	public Optional<User> getOpenedUser() {
-		return Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> user.getUserName().equals(InfoTool.getUserName())).findFirst();
+		return (Optional<User>) Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getUserName().equals(InfoTool.getUserName()))
+				.map(user -> (User) user).findFirst();
 	}
 	
 	/**
@@ -325,8 +325,8 @@ public class DatabaseManager {
 			//			});
 			
 			//Load all the Opened Libraries
-			Platform.runLater(() -> Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened)
-					.forEach(library -> library.setLibraryStatus(LibraryStatus.OPENED, true)));
+			Platform.runLater(() -> Main.libraryMode.viewer.getItemsObservableList().stream().filter(library -> ( (Library) library ).isOpened())
+					.forEach(library -> ( (Library) library ).setLibraryStatus(LibraryStatus.OPENED, true)));
 			
 			//Add Selection Model ChangeListener 
 			Platform.runLater(() -> {
@@ -374,7 +374,7 @@ public class DatabaseManager {
 					Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().select(Main.libraryMode.openedLibrariesViewer.getTab(lastOpenedLibrary));
 					
 					//This will change in future update when user can change the default position of Libraries
-					Main.libraryMode.teamViewer.getViewer().setCenterIndex(Main.libraryMode.openedLibrariesViewer.getSelectedLibrary().get().getPosition());
+					Main.libraryMode.viewer.setCenterIndex(Main.libraryMode.openedLibrariesViewer.getSelectedLibrary().get().getPosition());
 					
 				});
 				
@@ -460,7 +460,7 @@ public class DatabaseManager {
 				
 				//----------------Final Settings---------------------
 				// update library viewer
-				Main.libraryMode.teamViewer.getViewer().update();
+				Main.libraryMode.viewer.update();
 				
 				//---------------Set the update Screen invisible---------------------
 				PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
@@ -501,7 +501,7 @@ public class DatabaseManager {
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("Loading Libraries....[ 0 / " + totalLibraries + " ]"));
 						
 						//Kepp a List of all Libraries
-						final List<Library> libraries = new ArrayList<>(totalLibraries);
+						final List<Node> libraries = new ArrayList<>(totalLibraries);
 						int[] counter = { 0 };
 						
 						// Load all the libraries
@@ -545,7 +545,7 @@ public class DatabaseManager {
 							Main.updateScreen.getLabel().setText("Adding Libraries ...");
 							
 							//Add all the Libraries to the Library Viewer
-							Main.libraryMode.teamViewer.getViewer().addMultipleItems(libraries);
+							Main.libraryMode.viewer.addMultipleItems(libraries);
 							
 						});
 						
@@ -616,7 +616,7 @@ public class DatabaseManager {
 									.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty());
 							
 							//For Libraries
-							Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController)
+							Main.libraryMode.viewer.getItemsObservableList().stream().map(library -> ( (Library) library ).getSmartController())
 									.forEach(controller -> controller.getInstantSearch().selectedProperty()
 											.bindBidirectional(Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().selectedProperty()));
 							

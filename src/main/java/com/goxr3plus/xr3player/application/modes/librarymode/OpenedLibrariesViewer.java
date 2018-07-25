@@ -89,10 +89,10 @@ public class OpenedLibrariesViewer extends StackPane {
 		
 		// createFirstLibrary
 		createFirstLibrary.setOnMouseReleased(m -> {
-			if (Main.libraryMode.teamViewer.getViewer().getItemsObservableList().isEmpty())
+			if (Main.libraryMode.viewer.getItemsObservableList().isEmpty())
 				Main.libraryMode.createNewLibrary(createFirstLibrary.getGraphic(), true, true);
 			else
-				Main.libraryMode.teamViewer.getViewer().getItemsObservableList().get(0).setLibraryStatus(LibraryStatus.OPENED, false);
+				( (Library) Main.libraryMode.viewer.getItemsObservableList().get(0) ).setLibraryStatus(LibraryStatus.OPENED, false);
 		});
 		
 		//== emptyLabel

@@ -829,7 +829,7 @@ public abstract class Media {
 							}
 							
 							//Inform all Libraries SmartControllers 
-							Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(smartController -> {
+							Main.libraryMode.viewer.getItemsObservableList().stream().map(library -> ( (Library) library ).getSmartController()).forEach(smartController -> {
 								
 								internalDataBaseRename(smartController, newFilePath, oldFilePath);
 								
@@ -969,7 +969,7 @@ public abstract class Media {
 					if (Main.starWindow.wasAccepted()) {
 						
 						//Inform all Libraries SmartControllers
-						Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().map(Library::getSmartController).forEach(smartController -> {
+						Main.libraryMode.viewer.getItemsObservableList().stream().map(library -> ( (Library) library ).getSmartController()).forEach(smartController -> {
 							
 							internalDataBaseUpdateStars(smartController);
 							

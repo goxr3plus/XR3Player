@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
+import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.windows.SearchBoxWindow;
 
 /**
@@ -188,15 +190,16 @@ public class SearchBox extends HBox {
 					
 					// matcher
 					if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
-						Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> user.getUserName().toLowerCase().contains(word)).forEach(user -> {
-							Platform.runLater(() -> getSearchBoxWindow().addItem(user.getUserName(), ac -> Main.loginMode.teamViewer.setCenterIndex(user.getPosition())));
+						Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getUserName().toLowerCase().contains(word)).forEach(user -> {
+							Platform.runLater(() -> getSearchBoxWindow().addItem( ( (User) user ).getUserName(),
+									ac -> Main.loginMode.teamViewer.setCenterIndex( ( (User) user ).getPosition())));
 							++found;
 						});
 					else if (searchBoxType == SearchBoxType.LIBRARYSEARCHBOX)
-						Main.libraryMode.teamViewer.getViewer().getItemsObservableList().stream().filter(library -> library.getLibraryName().toLowerCase().contains(word))
+						Main.libraryMode.viewer.getItemsObservableList().stream().filter(library -> ( (Library) library ).getLibraryName().toLowerCase().contains(word))
 								.forEach(library -> {
-									Platform.runLater(() -> searchBoxWindow.addItem(library.getLibraryName(),
-											ac -> Main.libraryMode.teamViewer.getViewer().setCenterIndex(library.getPosition())));
+									Platform.runLater(() -> searchBoxWindow.addItem( ( (Library) library ).getLibraryName(),
+											ac -> Main.libraryMode.viewer.setCenterIndex( ( (Library) library ).getPosition())));
 									++found;
 								});
 					return null;

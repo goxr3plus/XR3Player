@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -244,8 +245,8 @@ public class SmartControllerSearcher extends HBox {
 						
 						//Let's create the UNION
 						ArrayList<String> queryArray = new ArrayList<>();
-						ObservableList<Library> observableList = Main.libraryMode.teamViewer.getViewer().getItemsObservableList();
-						smartController.setTotalInDataBase(observableList.stream().mapToInt(Library::getTotalEntries).sum());
+						ObservableList<Node> observableList = Main.libraryMode.viewer.getItemsObservableList();
+						smartController.setTotalInDataBase(observableList.stream().mapToInt(library -> ( (Library) library ).getTotalEntries()).sum());
 						
 						//Check if any PlayLists exist
 						if (observableList.isEmpty()) {
@@ -255,11 +256,11 @@ public class SmartControllerSearcher extends HBox {
 						queryArray.add("SELECT * FROM (");
 						
 						//For Each
-						Main.libraryMode.teamViewer.getViewer().getItemsObservableList().forEach(lib -> {
-							if (lib.getPosition() != observableList.size() - 1)
-								queryArray.add(" SELECT * FROM '" + lib.getDataBaseTableName() + "' UNION ALL ");
+						Main.libraryMode.viewer.getItemsObservableList().forEach(lib -> {
+							if ( ( (Library) lib ).getPosition() != observableList.size() - 1)
+								queryArray.add(" SELECT * FROM '" + ( (Library) lib ).getDataBaseTableName() + "' UNION ALL ");
 							else
-								queryArray.add(" SELECT * FROM '" + lib.getDataBaseTableName() + "' ");
+								queryArray.add(" SELECT * FROM '" + ( (Library) lib ).getDataBaseTableName() + "' ");
 						});
 						
 						//Choose the correct query based on the settings of the user

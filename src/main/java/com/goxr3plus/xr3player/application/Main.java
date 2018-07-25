@@ -610,7 +610,7 @@ public class Main extends Application {
 		libraryMode.getBottomSplitPane().setDividerPositions(0.65);
 		
 		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty()
-				.bind(Bindings.when(libraryMode.teamViewer.getViewer().itemsWrapperProperty().emptyProperty()).then("Create Playlist").otherwise("Open first playlist"));
+				.bind(Bindings.when(libraryMode.viewer.itemsWrapperProperty().emptyProperty()).then("Create Playlist").otherwise("Open first playlist"));
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----------ApplicationStackPane---------
@@ -655,7 +655,7 @@ public class Main extends Application {
 			try (Stream<Path> stream = Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)) {
 				
 				//Append all available users
-				loginMode.teamViewer.addMultipleUsers(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
+				loginMode.teamViewer.addMultipleItems(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
 						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode)).collect(Collectors.toList()));
 				
 			} catch (IOException e) {
@@ -721,13 +721,13 @@ public class Main extends Application {
 			if (loginMode.teamViewer.getItemsObservableList().size() == 1)
 				settingsWindow.getCopySettingsMenuButton().setDisable(true);
 			else
-				loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !userr.getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
+				loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !( (User) userr ).getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
 					
 					//Create the MenuItem
-					MenuItem menuItem = new MenuItem(InfoTool.getMinString(userr.getUserName(), 50));
+					MenuItem menuItem = new MenuItem(InfoTool.getMinString(( (User) userr ).getUserName(), 50));
 					
 					//Set Image
-					ImageView imageView = new ImageView(userr.getImageView().getImage());
+					ImageView imageView = new ImageView(( (User) userr ).getImageView().getImage());
 					imageView.setFitWidth(24);
 					imageView.setFitHeight(24);
 					menuItem.setGraphic(imageView);
@@ -748,7 +748,7 @@ public class Main extends Application {
 								
 								//Transfer the settings from the other user
 								ActionTool.copy(
-										InfoTool.getAbsoluteDatabasePathWithSeparator() + userr.getUserName() + File.separator + "settings" + File.separator
+										InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getUserName() + File.separator + "settings" + File.separator
 												+ InfoTool.USER_SETTINGS_FILE_NAME,
 										InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings" + File.separator
 												+ InfoTool.USER_SETTINGS_FILE_NAME);
@@ -761,7 +761,7 @@ public class Main extends Application {
 					
 					//Disable if user has no settings defined
 					if (!new File(
-							InfoTool.getAbsoluteDatabasePathWithSeparator() + userr.getUserName() + File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
+							InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getUserName() + File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
 									.exists())
 						menuItem.setDisable(true);
 					
@@ -770,7 +770,7 @@ public class Main extends Application {
 				});
 			
 			//----Update the UserInformation properties file when the total libraries change
-			libraryMode.teamViewer.getViewer().itemsWrapperProperty().sizeProperty()
+			libraryMode.viewer.itemsWrapperProperty().sizeProperty()
 					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
 			
 			//----Bind Label to User Name

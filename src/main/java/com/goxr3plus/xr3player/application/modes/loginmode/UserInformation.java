@@ -119,7 +119,7 @@ public class UserInformation extends StackPane {
 			rename.setOnAction(a -> user.renameUser(rename));
 			
 			//--delete
-			delete.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(delete));
+			delete.setOnAction(a -> ( (User) Main.loginMode.teamViewer.getSelectedItem() ).deleteUser(delete));
 		}
 		
 		//--delete

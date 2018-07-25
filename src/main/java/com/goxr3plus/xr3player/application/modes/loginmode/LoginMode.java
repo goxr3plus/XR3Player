@@ -57,6 +57,7 @@ import main.java.com.goxr3plus.xr3player.application.modes.loginmode.services.Us
 import main.java.com.goxr3plus.xr3player.application.presenter.CloseAppBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
+import main.java.com.goxr3plus.xr3player.application.presenter.Viewer;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
@@ -220,13 +221,13 @@ public class LoginMode extends StackPane {
 				String newName = Main.renameWindow.getUserInput();
 				
 				// if can pass
-				if (!teamViewer.itemsObservableList.stream().anyMatch(user -> user.getUserName().equalsIgnoreCase(newName))) {
+				if (!teamViewer.getItemsObservableList().stream().anyMatch(user -> ( (User) user ).getUserName().equalsIgnoreCase(newName))) {
 					
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
 						
 						//Create the new user and add it 
-						User user = new User(newName, teamViewer.itemsObservableList.size(), LoginMode.this);
-						teamViewer.addUser(user, true);
+						User user = new User(newName, teamViewer.getItemsObservableList().size(), LoginMode.this);
+						teamViewer.addItem(user, true);
 						
 						//Add to PieChart
 						//						librariesPieChartData.add(new PieChart.Data(newName, 0));
@@ -283,18 +284,10 @@ public class LoginMode extends StackPane {
 		//centerStackPane
 		centerStackPane.getChildren().add(flipPane);
 		
-		//librariesBarChart
-		//librariesBarChart.getData().add(series)
-		
 		//Initialize
-		teamViewer = new Viewer(horizontalScrollBar);
+		teamViewer = new Viewer(this, horizontalScrollBar);
 		quickSearchTextField.visibleProperty().bind(teamViewer.searchWordProperty().isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.searchWordProperty()));
-		
-		//	setStyle("-fx-background-color:rgb(0,0,0,0.9); -fx-background-size:100% 100%; -fx-background-image:url('file:C://Users//GOXR3PLUS//Desktop//sea.jpg'); -fx-background-position: center center; -fx-background-repeat:stretch;")
-		
-		// -- toolBarHBox
-		//toolBarHBox.disableProperty().bind(teamViewer.centerItemProperty().isNull());
 		
 		// -- botttomHBox
 		botttomHBox.getChildren().add(userSearchBox);
@@ -304,26 +297,25 @@ public class LoginMode extends StackPane {
 		
 		//newUser
 		createFirstUser.setOnAction(a -> createNewUser(createFirstUser.getGraphic(), true));
-		createFirstUser.visibleProperty().bind(Bindings.size(teamViewer.itemsObservableList).isEqualTo(0));
+		createFirstUser.visibleProperty().bind(Bindings.size(teamViewer.getItemsObservableList()).isEqualTo(0));
 		
 		//loginButton
-		loginButton.setOnAction(a -> Main.startAppWithUser(teamViewer.getSelectedItem()));
-		//loginButton.disableProperty().bind(toolBarHBox.disabledProperty());
+		loginButton.setOnAction(a -> Main.startAppWithUser((User) teamViewer.getSelectedItem()));
 		
 		//openUserContextMenu
 		openUserContextMenu.setOnAction(a -> {
-			User user = teamViewer.getSelectedItem();
+			User user = (User) teamViewer.getSelectedItem();
 			Bounds bounds = user.localToScreen(user.getBoundsInLocal());
 			userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
 		});
 		
 		//renameUser
 		//renameUser.disableProperty().bind(deleteUser.disabledProperty())
-		renameUser.setOnAction(a -> teamViewer.getSelectedItem().renameUser(renameUser));
+		renameUser.setOnAction(a -> ( (User) teamViewer.getSelectedItem() ).renameUser(renameUser));
 		
 		//deleteUser
 		//deleteUser.disableProperty().bind(newUser.visibleProperty())
-		deleteUser.setOnAction(a -> Main.loginMode.teamViewer.getSelectedItem().deleteUser(deleteUser));
+		deleteUser.setOnAction(a -> ( (User) Main.loginMode.teamViewer.getSelectedItem() ).deleteUser(deleteUser));
 		
 		//topBorderPane
 		topBorderPane.setRight(new CloseAppBox());
@@ -393,7 +385,7 @@ public class LoginMode extends StackPane {
 	 *
 	 * @return the previous
 	 */
-	protected Button getPrevious() {
+	public Button getPrevious() {
 		return previous;
 	}
 	
@@ -402,7 +394,7 @@ public class LoginMode extends StackPane {
 	 *
 	 * @return the next
 	 */
-	protected Button getNext() {
+	public Button getNext() {
 		return next;
 	}
 	
@@ -460,614 +452,6 @@ public class LoginMode extends StackPane {
 	 */
 	public ImageView getBackgroundImageView() {
 		return backgroundImageView;
-	}
-	
-	/*-----------------------------------------------------------------------
-	 * 
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * 
-	 * 						    Libraries Viewer
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * -----------------------------------------------------------------------
-	 */
-	/**
-	 * This class allows you to view items
-	 *
-	 * @author GOXR3PLUS
-	 */
-	public class Viewer extends Region {
-		
-		/** The Constant WIDTH. */
-		private double width = 120;
-		
-		/** The Constant HEIGHT. */
-		private double height = width + ( width * 0.4 );
-		
-		/** The duration. */
-		private final Duration duration = Duration.millis(450);
-		
-		/** The interpolator. */
-		private final Interpolator interpolator = Interpolator.EASE_BOTH;
-		
-		/** The Constant SPACING. */
-		private double spacing = 120;
-		
-		/** The Constant LEFT_OFFSET. */
-		private double leftOffSet = -110;
-		
-		/** The Constant RIGHT_OFFSET. */
-		private double rightOffSet = 110;
-		
-		/** The Constant SCALE_SMALL. */
-		private static final double SCALE_SMALL = 0.6;
-		
-		/** The items. */
-		private final ObservableList<User> itemsObservableList = FXCollections.observableArrayList();
-		/**
-		 * This class wraps an ObservableList
-		 */
-		private final SimpleListProperty<User> itemsWrapperProperty = new SimpleListProperty<>(itemsObservableList);
-		
-		/**
-		 * Holds the center item of TeamViewer
-		 */
-		private final ObjectProperty<User> centerItemProperty = new SimpleObjectProperty<>(null);
-		
-		/** The centered. */
-		private final Group centered = new Group();
-		
-		/** The left group. */
-		private final Group leftGroup = new Group();
-		
-		/** The center group. */
-		private final Group centerGroup = new Group();
-		
-		/** The right group. */
-		private final Group rightGroup = new Group();
-		
-		/** The center index. */
-		private int centerIndex;
-		
-		/** The scroll bar. */
-		private final ScrollBar scrollBar;
-		
-		/** The time line */
-		private final Timeline timeline = new Timeline();
-		
-		private final Rectangle clip = new Rectangle();
-		
-		/** The pause transition. */
-		private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1.5));
-		private StringProperty searchWord = new SimpleStringProperty("");
-		
-		/**
-		 * Constructor
-		 * 
-		 * @param scrollBar
-		 */
-		public Viewer(ScrollBar scrollBar) {
-			this.scrollBar = scrollBar;
-			
-			// -- Scroll Listener
-			setOnScroll(scroll -> {
-				if (scroll.getDeltaX() < 0)
-					next();
-				else if (scroll.getDeltaX() > 0)
-					previous();
-			});
-			
-			// --- Mouse Listeners
-			setOnMouseEntered(m -> {
-				if (!isFocused())
-					requestFocus();
-			});
-			
-			// -- KeyListeners
-			setOnKeyPressed(key -> {
-				if (key.getCode() == KeyCode.RIGHT)
-					next();
-				else if (key.getCode() == KeyCode.LEFT)
-					previous();
-				else if (key.getCode() == KeyCode.BACK_SPACE)
-					searchWord.set("");
-				
-				//Local Search 
-				if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
-					String keySmall = key.getText();
-					searchWord.set(searchWord.get() + keySmall);
-					pauseTransition.playFromStart();
-					
-					//Check if searchWord is empty
-					if (!searchWord.get().isEmpty()) {
-						boolean[] found = { false };
-						//Find the first matching item
-						getItemsObservableList().forEach(user -> {
-							if (user.getUserName().contains(searchWord.get()) && !found[0]) {
-								this.setCenterIndex(user.getPosition());
-								found[0] = true;
-							}
-						});
-					}
-				}
-			});
-			
-			// PauseTransition
-			pauseTransition.setOnFinished(f -> searchWord.set(""));
-			
-			// this.setOnMouseMoved(m -> {
-			//
-			// if (dragDetected) {
-			// System.out.println("Mouse Moving... with drag detected");
-			//
-			// try {
-			// Robot robot = new Robot();
-			// robot.mouseMove((int) m.getScreenX(),
-			// (int) this.localToScreen(this.getBoundsInLocal()).getMinY() + 2);
-			// } catch (AWTException ex) {
-			// ex.printStackTrace();
-			// }
-			// }
-			// })
-			
-			// clip.set
-			setClip(clip);
-			setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60, #141414 60.2%, #00E5BB 87%);");
-			//setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
-			
-			// ScrollBar
-			scrollBar.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(2));
-			scrollBar.valueProperty().addListener((observable , oldValue , newValue) -> {
-				int newVal = (int) Math.round(newValue.doubleValue());
-				int oldVal = (int) Math.round(oldValue.doubleValue());
-				// new!=old
-				if (newVal != oldVal)
-					setCenterIndex(newVal);
-				
-				// System.out.println(scrollBar.getValue())
-			});
-			
-			// create content
-			centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
-			
-			getChildren().addAll(centered);
-		}
-		
-		/**
-		 * The Collection that holds all the Library Viewer Items
-		 * 
-		 * @return The Collection that holds all the Libraries
-		 */
-		public ObservableList<User> getItemsObservableList() {
-			return itemsObservableList;
-		}
-		
-		/**
-		 * This class wraps an ObservableList
-		 *
-		 * @return the itemsWrapperProperty
-		 */
-		public SimpleListProperty<User> itemsWrapperProperty() {
-			return itemsWrapperProperty;
-		}
-		
-		/**
-		 * @return the centerItem
-		 */
-		public ObjectProperty<User> centerItemProperty() {
-			return centerItemProperty;
-		}
-		
-		/**
-		 * Returns the Index of the List center Item
-		 * 
-		 * @return Returns the Index of the List center Item
-		 */
-		public int getCenterIndex() {
-			return centerIndex;
-		}
-		
-		// ----About the last size of each Library
-		double lastSize;
-		
-		// ----About the width and height of LibraryMode Clip
-		int previousWidth;
-		int previousHeight;
-		
-		int counter;
-		double var = 1.5;
-		
-		@Override
-		protected void layoutChildren() {
-			
-			// update clip to our size
-			clip.setWidth(getWidth());
-			clip.setHeight(getHeight());
-			
-			// keep centered centered
-			
-			width = getHeight();
-			height = width;// + (WIDTH * 0.4)
-			
-			double variable = width / var;
-			centered.setLayoutX( ( getWidth() - variable ) / 2); //WIDTH/var) / 2)
-			centered.setLayoutY( ( getHeight() - variable ) / 2); //HEIGHT / var) / 2)
-			
-			// centered.setLayoutX((getWidth() - WIDTH) / 2)
-			// centered.setLayoutY((getHeight() - HEIGHT) / 2)
-			
-			//-----jfSlider.setLayoutX(getWidth() / 2 - 150);
-			
-			//jfSlider.setLayoutX(0);
-			//jfSlider.setLayoutY(double g snoopy dogg);
-			//jfSlider.resize(getWidth(), 15);
-			
-			//--- jfSlider.resize(300, 15);
-			//--- jfSlider.setLayoutY(getHeight() - jfSlider.getHeight());
-			
-			// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
-			// if (previousWidth != (int) WIDTH ||
-			if (previousHeight != (int) height) {
-				// System.out.println("Updating Library Size")
-				
-				//Library Size
-				double size = height / var;
-				
-				// Update ImageView width and height
-				spacing = height / ( var + 0.5 );
-				leftOffSet = - ( spacing - size / 2.0 );
-				rightOffSet = -leftOffSet;
-				
-				// For-Each
-				itemsObservableList.forEach(user -> {
-					// --
-					user.getImageView().setFitWidth(size);
-					user.getImageView().setFitHeight(size);
-					user.setMaxWidth(size);
-					user.setMaxHeight(size);
-				});
-				
-				// Don't fuck CPU mother too hard , let her breath a lil bit
-				double currentSize = width / var; // the current size of each
-				// library
-				boolean doUpdate = Math.abs(currentSize - lastSize) > 2;
-				// System.out.println("Do update?:" + doUpdate + " , " +
-				// Math.abs(currentSize - lastSize) + "SSD.U2\n")
-				lastSize = currentSize;
-				if (doUpdate)
-					update();
-			}
-			
-			previousWidth = (int) width;
-			previousHeight = (int) height;
-			// System.out.println("Counter:" + (++counter) + " , " + getWidth()
-			// + "," + getHeight())
-			
-		}
-		
-		/**
-		 * @return The selected item from the List (That means the center index)
-		 */
-		public User getSelectedItem() {
-			return itemsObservableList.get(centerIndex);
-		}
-		
-		//	/**
-		//	 * Go on selection mode.
-		//	 *
-		//	 * @param way
-		//	 *            the way
-		//	 */
-		//	public void goOnSelectionMode(boolean way) {
-		//	    for (Library library : items)
-		//		library.goOnSelectionMode(way);
-		//	}
-		
-		/**
-		 * Add multiple users at once.
-		 *
-		 * @param list
-		 *            The List with the users to be added
-		 */
-		public void addMultipleUsers(List<User> list) {
-			list.forEach(user -> this.addUser(user, false));
-			
-			// update
-			update();
-		}
-		
-		/**
-		 * Add the new library.
-		 *
-		 * @param user
-		 *            The User to be added
-		 * @param update
-		 *            Do the update on the list?
-		 */
-		public void addUser(User user , boolean update) {
-			itemsObservableList.add(user);
-			
-			// --
-			double size = height / var;
-			
-			user.getImageView().setFitWidth(size);
-			user.getImageView().setFitHeight(size);
-			user.setMaxWidth(size);
-			user.setMaxHeight(size);
-			
-			// --
-			user.setOnMouseClicked(m -> {
-				
-				if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
-					
-					// If it isn't the same User again
-					if ( ( (User) centerGroup.getChildren().get(0) ).getPosition() != user.getPosition()) {
-						
-						setCenterIndex(user.getPosition());
-						// scrollBar.setValue(library.getPosition())
-					}
-					
-				} else if (m.getButton() == MouseButton.SECONDARY) {
-					
-					// if isn't the same User again
-					if ( ( (User) centerGroup.getChildren().get(0) ).getPosition() != user.getPosition()) {
-						
-						setCenterIndex(user.getPosition());
-						// scrollBar.setValue(library.getPosition())
-						
-						timeline.setOnFinished(v -> {
-							Bounds bounds = user.localToScreen(user.getBoundsInLocal());
-							userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
-							timeline.setOnFinished(null);
-						});
-						
-					} else { // if is the same User again
-						Bounds bounds = user.localToScreen(user.getBoundsInLocal());
-						userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
-					}
-				}
-				
-			});
-			
-			// MAX
-			scrollBar.setMax(itemsObservableList.size() - 1.00);
-			
-			//Update?
-			if (update)
-				update();
-		}
-		
-		//	/**
-		//	 * Recalculate the position of all the libraries.
-		//	 *
-		//	 * @param commit
-		//	 *            the commit
-		//	 */
-		//	public void updateLibrariesPositions(boolean commit) {
-		//
-		//	    for (int i = 0; i < items.size(); i++)
-		//		items.get(i).updatePosition(i);
-		//
-		//	    if (commit)
-		//		Main.dbManager.commit();
-		//	}
-		
-		/**
-		 * Deletes the specific user from the list
-		 * 
-		 * @param user
-		 *            User to be deleted
-		 */
-		public void deleteUser(User user) {
-			itemsObservableList.remove(user);
-			
-			for (int i = 0; i < itemsObservableList.size(); i++)
-				itemsObservableList.get(i).setPosition(i);
-			
-			calculateCenterAfterDelete();
-		}
-		
-		/**
-		 * Recalculate the center index after a delete occurs.
-		 */
-		private void calculateCenterAfterDelete() {
-			
-			// center index
-			if (!leftGroup.getChildren().isEmpty())
-				centerIndex = leftGroup.getChildren().size() - 1;
-			else
-				// if (!rightGroup.getChildren().isEmpty())
-				// centerIndex = 0
-				// else
-				centerIndex = 0;
-			
-			// Max
-			scrollBar.setMax(itemsObservableList.size() - 1.00);
-			
-			update();
-			
-		}
-		
-		/**
-		 * Sets the center index.
-		 *
-		 * @param i
-		 *            the new center index
-		 */
-		public void setCenterIndex(int i) {
-			if (centerIndex != i) {
-				centerIndex = i;
-				update();
-				
-				// Update the ScrollBar Value
-				scrollBar.setValue(centerIndex);
-			}
-		}
-		
-		/**
-		 * Goes to next Item (RIGHT).
-		 */
-		public void next() {
-			if (centerIndex + 1 < itemsObservableList.size())
-				setCenterIndex(centerIndex + 1);
-		}
-		
-		/**
-		 * Goes to previous item(LEFT).
-		 */
-		public void previous() {
-			if (centerIndex > 0)
-				setCenterIndex(centerIndex - 1);
-		}
-		
-		/**
-		 * Update the library viewer so it shows the center index correctly.
-		 */
-		public void update() {
-			
-			// Reconstruct Groups
-			leftGroup.getChildren().clear();
-			centerGroup.getChildren().clear();
-			rightGroup.getChildren().clear();
-			
-			if (!itemsObservableList.isEmpty()) {
-				
-				// If only on item exists
-				if (itemsObservableList.size() == 1) {
-					centerGroup.getChildren().add(itemsObservableList.get(0));
-					centerIndex = 0;
-				} else {
-					
-					// LEFT,
-					for (int i = 0; i < centerIndex; i++)
-						leftGroup.getChildren().add(itemsObservableList.get(i));
-					
-					// CENTER,
-					if (centerIndex == itemsObservableList.size()) {
-						centerGroup.getChildren().add(leftGroup.getChildren().get(centerIndex - 1));
-					} else
-						centerGroup.getChildren().add(itemsObservableList.get(centerIndex));
-					
-					// RIGHT
-					for (int i = itemsObservableList.size() - 1; i > centerIndex; i--)
-						rightGroup.getChildren().add(itemsObservableList.get(i));
-					
-				}
-				
-				// stop old time line
-				if (timeline.getStatus() == Status.RUNNING)
-					timeline.stop();
-				
-				// clear the old keyFrames
-				timeline.getKeyFrames().clear();
-				final ObservableList<KeyFrame> keyFrames = timeline.getKeyFrames();
-				
-				// LEFT KEYFRAMES
-				for (int i = 0; i < leftGroup.getChildren().size(); i++) {
-					
-					final User it = itemsObservableList.get(i);
-					
-					double newX = -leftGroup.getChildren().size() *
-							
-							spacing + spacing * i + leftOffSet;
-					
-					keyFrames.add(new KeyFrame(duration,
-							
-							new KeyValue(it.translateXProperty(), newX, interpolator),
-							
-							new KeyValue(it.scaleXProperty(), SCALE_SMALL, interpolator),
-							
-							new KeyValue(it.scaleYProperty(), SCALE_SMALL, interpolator)));
-					
-					// new KeyValue(it.angle, 45.0, INTERPOLATOR)))
-					
-				}
-				
-				// CENTER ITEM KEYFRAME
-				final User centerItem;
-				if (itemsObservableList.size() == 1)
-					centerItem = itemsObservableList.get(0);
-				else
-					centerItem = (User) centerGroup.getChildren().get(0);
-				
-				//The Property Center Item
-				this.centerItemProperty.set(centerItem);
-				
-				keyFrames.add(new KeyFrame(duration,
-						
-						new KeyValue(centerItem.translateXProperty(), 0, interpolator),
-						
-						new KeyValue(centerItem.scaleXProperty(), 1.0, interpolator),
-						
-						new KeyValue(centerItem.scaleYProperty(), 1.0, interpolator)));// ,
-				
-				// new KeyValue(centerItem.rotationTransform.angleProperty(),
-				// 360)));
-				
-				// new KeyValue(centerItem.angle, 90, INTERPOLATOR)));
-				
-				// RIGHT KEYFRAMES
-				for (int i = 0; i < rightGroup.getChildren().size(); i++) {
-					
-					final User it = itemsObservableList.get(itemsObservableList.size() - i - 1);
-					
-					final double newX = rightGroup.getChildren().size() *
-							
-							spacing - spacing * i + rightOffSet;
-					
-					keyFrames.add(new KeyFrame(duration,
-							
-							new KeyValue(it.translateXProperty(), newX, interpolator),
-							
-							new KeyValue(it.scaleXProperty(), SCALE_SMALL, interpolator),
-							
-							// new
-							// KeyValue(it.rotationTransform.angleProperty(),
-							// -360)));
-							
-							new KeyValue(it.scaleYProperty(), SCALE_SMALL, interpolator)));
-					
-					// new KeyValue(it.angle, 135.0, INTERPOLATOR)));
-					
-				}
-				
-				// play animation
-				timeline.setAutoReverse(true);
-				timeline.play();
-			} else
-				//The Property Center Item
-				this.centerItemProperty.set(null);
-			
-			// Previous and Next Visibility
-			getNext().setDisable(rightGroup.getChildren().isEmpty());
-			getPrevious().setDisable(leftGroup.getChildren().isEmpty());
-			
-		}
-		
-		/**
-		 * @return The Timeline
-		 */
-		public Animation getTimeline() {
-			return timeline;
-		}
-		
-		/**
-		 * @return the searchWord
-		 */
-		public StringProperty searchWordProperty() {
-			return searchWord;
-		}
-		
 	}
 	
 }

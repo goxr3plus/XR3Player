@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.InvalidAccessTokenException;
 import com.dropbox.core.v2.DbxClientV2;
 
 import javafx.concurrent.Service;
@@ -85,6 +86,8 @@ public class AccountsService extends Service<Boolean> {
 						//Add to the map
 						multimap.computeIfAbsent(email, k -> new ArrayList<>()).add(accessToken);
 						
+					} catch (InvalidAccessTokenException e) {
+						System.err.println(e.getMessage());
 					} catch (DbxException e) {
 						e.printStackTrace();
 					}

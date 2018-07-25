@@ -69,7 +69,7 @@ public class UserContextMenu extends ContextMenu {
 		
 		exportImage.setOnAction(a -> user.exportImage());
 		
-		delete.setOnAction(ac -> loginMode.teamViewer.getSelectedItem().deleteUser(user));
+		delete.setOnAction(ac -> ( (User) loginMode.teamViewer.getSelectedItem() ).deleteUser(user));
 		
 		internetImage.setDisable(true);
 		// exportImage.setDisable(true)

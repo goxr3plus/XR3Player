@@ -34,6 +34,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
+import main.java.com.goxr3plus.xr3player.application.presenter.Viewer;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -121,7 +122,7 @@ public class LibraryMode extends BorderPane {
 	/**
 	 * The mechanism which allows you to view the libraries as components with image etc.
 	 */
-	public TeamViewer teamViewer;
+	public Viewer viewer;
 	
 	/** The mechanism behind of opening multiple libraries. */
 	public final OpenedLibrariesViewer openedLibrariesViewer = new OpenedLibrariesViewer();
@@ -172,7 +173,7 @@ public class LibraryMode extends BorderPane {
 				String name = Main.renameWindow.getUserInput();
 				
 				// if can pass
-				if (!teamViewer.getViewer().getItemsObservableList().stream().anyMatch(lib -> lib.getLibraryName().equals(name))) {
+				if (!viewer.getItemsObservableList().stream().anyMatch(lib -> ( (Library) lib ).getLibraryName().equals(name))) {
 					String tableName;
 					boolean validName;
 					
@@ -194,11 +195,11 @@ public class LibraryMode extends BorderPane {
 								+ "TIMESPLAYED  INT     NOT NULL," + "DATE        TEXT   	NOT NULL," + "HOUR        TEXT    NOT NULL)");
 						
 						// Create the Library
-						Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1, teamViewer.getViewer().getItemsObservableList().size(), null, false);
+						Library currentLib = new Library(name, dataBaseTableName, 0, null, null, null, 1, viewer.getItemsObservableList().size(), null, false);
 						
 						// Add the library
 						//currentLib.goOnSelectionMode(selectionModeToggle.isSelected())
-						teamViewer.getViewer().addItem(currentLib, true);
+						viewer.addItem(currentLib, true);
 						
 						// Add a row on libraries table
 						insertNewLibrary.setString(1, name);
@@ -279,9 +280,9 @@ public class LibraryMode extends BorderPane {
 	public Optional<Library> getLibraryWithName(String name) {
 		
 		// Find that
-		for (Library library : teamViewer.getViewer().getItemsObservableList())
-			if (library.getLibraryName().equals(name))
-				return Optional.of(library);
+		for (Node library : viewer.getItemsObservableList())
+			if ( ( (Library) library ).getLibraryName().equals(name))
+				return Optional.of((Library) library);
 			
 		return Optional.ofNullable(null);
 	}
@@ -304,56 +305,56 @@ public class LibraryMode extends BorderPane {
 	public void initialize() {
 		
 		//Initialize
-		teamViewer = new TeamViewer(this);
-		quickSearchTextField.visibleProperty().bind(teamViewer.getViewer().searchWordProperty().isEmpty().not());
-		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.getViewer().searchWordProperty()));
+		viewer = new Viewer(this, horizontalScrollBar);
+		quickSearchTextField.visibleProperty().bind(viewer.searchWordProperty().isEmpty().not());
+		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(viewer.searchWordProperty()));
 		
 		// createLibrary
 		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
 		
 		// newLibrary
 		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary.getGraphic(), true, true));
-		createFirstLibrary.visibleProperty().bind(Bindings.size(teamViewer.getViewer().getItemsObservableList()).isEqualTo(0));
+		createFirstLibrary.visibleProperty().bind(Bindings.size(viewer.getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
-		//selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.getViewer().goOnSelectionMode(newValue));
+		//selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.goOnSelectionMode(newValue));
 		
 		// searchLibrary
 		botttomHBox.getChildren().add(librariesSearcher);
 		
 		// previous
-		previous.setOnAction(a -> teamViewer.getViewer().previous());
+		previous.setOnAction(a -> viewer.previous());
 		
 		// next
-		next.setOnAction(a -> teamViewer.getViewer().next());
+		next.setOnAction(a -> viewer.next());
 		
 		//showSettings
 		//showSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.LIBRARIES))
 		
 		// StackPane
-		librariesStackView.getChildren().addAll(teamViewer.getViewer(), librariesSearcher.region, librariesSearcher.searchProgress);
-		teamViewer.getViewer().toBack();
+		librariesStackView.getChildren().addAll(viewer, librariesSearcher.region, librariesSearcher.searchProgress);
+		viewer.toBack();
 		
 		// -- openLibrariesContextMenu
 		openLibraryContextMenu.setOnAction(a -> {
-			Library library = teamViewer.getViewer().getSelectedItem();
+			Library library = (Library) viewer.getSelectedItem();
 			Bounds bounds = library.localToScreen(library.getBoundsInLocal());
 			librariesContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, library);
 		});
 		
 		// -- libraryToolBar
-		libraryToolBar.disableProperty().bind(teamViewer.getViewer().centerItemProperty().isNull());
+		libraryToolBar.disableProperty().bind(viewer.centerItemProperty().isNull());
 		
 		// -- renameLibrary
-		renameLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().renameLibrary(renameLibrary));
+		renameLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() ).renameLibrary(renameLibrary));
 		
 		// -- deleteLibrary
-		deleteLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get().deleteLibrary(deleteLibrary));
+		deleteLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() ).deleteLibrary(deleteLibrary));
 		
 		// -- openOrCloseLibrary 
-		teamViewer.getViewer().centerItemProperty().addListener((observable , oldValue , newValue) -> {
+		viewer.centerItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null)
-				openOrCloseLibrary.textProperty().bind(Bindings.when(teamViewer.getViewer().centerItemProperty().get().openedProperty()).then("CLOSE").otherwise("OPEN"));
+				openOrCloseLibrary.textProperty().bind(Bindings.when( ( (Library) viewer.centerItemProperty().get() ).openedProperty()).then("CLOSE").otherwise("OPEN"));
 			else {
 				openOrCloseLibrary.textProperty().unbind();
 				openOrCloseLibrary.setText("...");
@@ -362,31 +363,29 @@ public class LibraryMode extends BorderPane {
 		
 		// -- openOrCloseLibrary
 		openOrCloseLibrary.disableProperty().bind(libraryToolBar.disabledProperty());
-		openOrCloseLibrary.setOnAction(a -> teamViewer.getViewer().centerItemProperty().get()
-				.setLibraryStatus(teamViewer.getViewer().centerItemProperty().get().isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false));
+		openOrCloseLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() )
+				.setLibraryStatus( ( (Library) viewer.centerItemProperty().get() ).isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false));
 		
 		// -- settingsOfLibrary
-		//openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.getViewer().centerItemProperty().get()));
+		//openLibraryInformation.setOnAction(a -> libraryInformation.showWindow(teamViewer.centerItemProperty().get()));
 		
 		// -- goToLibraryPlayList
-		//		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.getViewer().centerItemProperty().get()).ifPresent(library -> {
+		//		goToLibraryPlayList.setOnAction(a -> Optional.ofNullable(teamViewer.centerItemProperty().get()).ifPresent(library -> {
 		//			if (library.isOpened())
 		//				multipleLibs.selectTab(library.getLibraryName());
 		//		}));
 		
 		//----librariesInfoLabel
 		librariesInfoLabel.textProperty()
-				.bind(Bindings
-						.createStringBinding(
-								() -> "[ " + teamViewer.getViewer().itemsWrapperProperty().sizeProperty().get() + " ] "
-										+ English.plural("Library", teamViewer.getViewer().itemsWrapperProperty().sizeProperty().get()) + " , [ " + openedLibraries.get()
-										+ " ] Opened , [ " + emptyLibraries.get() + " ] Empty",
-								teamViewer.getViewer().itemsWrapperProperty().sizeProperty(), openedLibraries, emptyLibraries));
+				.bind(Bindings.createStringBinding(
+						() -> "[ " + viewer.itemsWrapperProperty().sizeProperty().get() + " ] " + English.plural("Library", viewer.itemsWrapperProperty().sizeProperty().get())
+								+ " , [ " + openedLibraries.get() + " ] Opened , [ " + emptyLibraries.get() + " ] Empty",
+						viewer.itemsWrapperProperty().sizeProperty(), openedLibraries, emptyLibraries));
 		
 		//== colorPicker
 		String defaultWebColor = "#ef4949";
 		colorPicker.setValue(Color.web(defaultWebColor));
-		teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
+		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
 		colorPicker.setOnAction(a -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
 		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
 			
@@ -394,7 +393,7 @@ public class LibraryMode extends BorderPane {
 			String webColor = JavaFXTools.colorToWebColor(newColor);
 			
 			//Set the style
-			teamViewer.getViewer().setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
+			viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
 		});
 		
 		//bottomSplitPane
@@ -405,14 +404,14 @@ public class LibraryMode extends BorderPane {
 	 * Recalculates the opened libraries
 	 */
 	public void calculateOpenedLibraries() {
-		openedLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isOpened).count());
+		openedLibraries.set((int) viewer.getItemsObservableList().stream().filter(library -> ( (Library) library ).isOpened()).count());
 	}
 	
 	/**
 	 * Recalculates the empty libraries
 	 */
 	public void calculateEmptyLibraries() {
-		emptyLibraries.set((int) teamViewer.getViewer().getItemsObservableList().stream().filter(Library::isEmpty).count());
+		emptyLibraries.set((int) viewer.getItemsObservableList().stream().filter(library -> ( (Library) library ).isEmpty()).count());
 	}
 	
 	/**
@@ -455,11 +454,11 @@ public class LibraryMode extends BorderPane {
 		return horizontalScrollBar;
 	}
 	
-//	// Variables
-//	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
-//	
-//	// Variables
-//	private double[] bottomSplitPaneDivider = { 0.6 , 0.4 };
+	//	// Variables
+	//	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
+	//	
+	//	// Variables
+	//	private double[] bottomSplitPaneDivider = { 0.6 , 0.4 };
 	
 	//	/**
 	//	 * Updates the values of array that holds DividerPositions of splitPane
