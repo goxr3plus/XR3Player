@@ -345,7 +345,8 @@ public class DatabaseManager {
 							smartController.getLoadService().startService(false, true, true);
 							
 							//Store the Opened Libraries
-							storeOpenedLibraries();
+							//storeOpenedLibraries()
+							
 						}
 						
 						//System.out.println("Changed...")
@@ -400,45 +401,45 @@ public class DatabaseManager {
 			
 			//Save the last opened library
 			if (openedLibrariesTabs.isEmpty()) {
-				///System.out.println("Last-Opened-Library is Empty");
+				///System.out.println("Last-Opened-Library is Empty")
 				user.getUserInformationDb().deleteProperty("Last-Opened-Library");
 			} else {
 				Tab tab = Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem();
-				//System.out.println("Last-Opened-Library: " + tab.getTooltip().getText());
+				//System.out.println("Last-Opened-Library: " + tab.getTooltip().getText())
 				user.getUserInformationDb().updateProperty("Last-Opened-Library", tab.getTooltip().getText());
 			}
 		});
 	}
 	
-	/**
-	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
-	 * !Must be called from JavaFX Thread!
-	 * 
-	 * @param openedLibrariesTabs
-	 */
-	public void storeOpenedLibraries() {
-		
-		//Get the opened user and store the opened libraries
-		getOpenedUser().ifPresent(user -> {
-			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
-			
-			//			//Save the opened libraries
-			//			if (openedLibrariesTabs.isEmpty())
-			//				user.getUserInformationDb().deleteProperty("Opened-Libraries");
-			//			else {
-			//				
-			//				//Join all library names to a string using as separator char "<|>:<|>"
-			//				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
-			//				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
-			//				
-			//				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
-			//			}
-			
-			//Save the last opened library
-			storeLastOpenedLibrary();
-		});
-		
-	}
+	//	/**
+	//	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
+	//	 * !Must be called from JavaFX Thread!
+	//	 * 
+	//	 * @param openedLibrariesTabs
+	//	 */
+	//	public void storeOpenedLibraries() {
+	//		
+	//		//Get the opened user and store the opened libraries
+	//		getOpenedUser().ifPresent(user -> {
+	//			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
+	//			
+	//			//			//Save the opened libraries
+	//			//			if (openedLibrariesTabs.isEmpty())
+	//			//				user.getUserInformationDb().deleteProperty("Opened-Libraries");
+	//			//			else {
+	//			//				
+	//			//				//Join all library names to a string using as separator char "<|>:<|>"
+	//			//				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
+	//			//				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
+	//			//				
+	//			//				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
+	//			//			}
+	//			
+	//			//Save the last opened library
+	//			storeLastOpenedLibrary();
+	//		});
+	//		
+	//	}
 	
 	/**
 	 * DataLoader.
@@ -464,10 +465,6 @@ public class DatabaseManager {
 				//----------------Finall Settings---------------------
 				// update library viewer
 				Main.libraryMode.teamViewer.getViewer().update();
-				//Main.libraryMode.libraryViewer.goOnSelectionMode(false)
-				
-				// set libraries tree expanded
-				//Main.treeManager.librariesTree.setExpanded(true)
 				
 				//---------------Set the update Screen invisible---------------------
 				PauseTransition pause1 = new PauseTransition(Duration.seconds(1));
@@ -496,7 +493,7 @@ public class DatabaseManager {
 			return new Task<Void>() {
 				@Override
 				protected Void call() throws Exception {
-					//int totalSteps = 4;				
+					//int totalSteps = 4				
 					
 					// -------------------------- Load all the libraries -------------------------------------------------
 					try (ResultSet resultSet = getConnection().createStatement().executeQuery("SELECT* FROM LIBRARIES;");
@@ -543,7 +540,7 @@ public class DatabaseManager {
 						}
 						
 						//Update the Progress
-						//updateProgress(1, totalSteps);
+						//updateProgress(1, totalSteps)
 						
 						//Run of JavaFX Thread
 						Platform.runLater(() -> {
@@ -641,7 +638,7 @@ public class DatabaseManager {
 						});
 						
 						//Update the Progress
-						//updateProgress(4, 4);
+						//updateProgress(4, 4)
 						
 					} catch (Exception param) {
 						Main.logger.log(Level.SEVERE, "", param);
