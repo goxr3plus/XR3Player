@@ -16,7 +16,7 @@
          <center>
             <TableView fx:id="tableView" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
+                  <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" resizable="false" text="#" />
                   <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="85.0" minWidth="32.0" prefWidth="85.0" resizable="false" sortable="false" text="Search,Buy,Share">
                      <graphic>
                         <HBox alignment="CENTER" spacing="6.0">
@@ -42,7 +42,7 @@
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="28" />
                      </graphic></TableColumn>
-                  <TableColumn fx:id="title" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" text="Name" />
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="Name" />
                   <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" resizable="false" text="Emotion">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="typ-thumbs-up" iconSize="26" />
@@ -74,8 +74,8 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fa-commenting" iconSize="24" />
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate" />
-                  <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bpm" />
+                  <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Bit Rate" />
+                  <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" resizable="false" text="Bpm" />
                   <TableColumn fx:id="genre" minWidth="65.0" prefWidth="75.0" text="Genre" visible="false" />
                   <TableColumn fx:id="key" minWidth="65.0" prefWidth="75.0" text="Key" visible="false" />
                   <TableColumn fx:id="year" minWidth="65.0" prefWidth="75.0" text="Year" visible="false" />

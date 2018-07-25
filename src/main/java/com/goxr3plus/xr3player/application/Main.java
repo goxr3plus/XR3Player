@@ -200,9 +200,6 @@ public class Main extends Application {
 	/** The TreeView of DJMode */
 	public static TreeViewManager treeManager;
 	
-	/** The Constant advancedSearch. */
-	//public static final AdvancedSearch advancedSearch = new AdvancedSearch()
-	
 	public static MediaInformation mediaInformation;
 	//
 	
