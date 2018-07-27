@@ -27,9 +27,8 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                  <VBox maxWidth="1.7976931348623157E308" spacing="5.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="nameLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="XR3Player " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
                         <StackedFontIcon fx:id="stackedFontIcon" style="-fx-background-color: #202020;">
                            <children>
                               <ImageView fx:id="userImageView" pickOnBounds="true" />
@@ -44,16 +43,20 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </StackedFontIcon>
+                        <Label fx:id="nameLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="XR3Player " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="8.0" top="8.0" />
+                           </padding>
+                        </Label>
                      </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
                   </VBox>
                </children>
             </HBox>
             <VBox alignment="CENTER_LEFT">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Navigator ">
-                     <VBox.margin>
-                        <Insets bottom="15.0" top="15.0" />
-                     </VBox.margin></Label>
                   <StackPane>
                      <children>
                         <ToggleButton fx:id="mainModeToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Libraries">

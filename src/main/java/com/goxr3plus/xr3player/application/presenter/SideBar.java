@@ -389,7 +389,8 @@ public class SideBar extends StackPane {
 		userImageView.setClip(clip);
 		
 		//noImageStackedFontIcon
-		noImageStackedFontIcon.visibleProperty().bind(userImageView.imageProperty().isNull());
+		noImageStackedFontIcon.visibleProperty().bind(stackedFontIcon.hoverProperty().or(userImageView.imageProperty().isNull()));
+		noImageStackedFontIcon.setOnMouseReleased(m -> Main.userInfoMode.getUser().changeUserImage());
 		
 		// cpuMonitor
 		cpuMonitor.setOnMouseReleased(r -> {
