@@ -99,7 +99,7 @@ public class FilesExportService extends Service<Boolean> {
 			protected Boolean call() throws Exception {
 				
 				//For each given target directory
-				targetDirectories.stream().forEach(targetDirectory -> {
+				targetDirectories.forEach(targetDirectory -> {
 					if (isCancelled())
 						return;
 					
@@ -188,11 +188,14 @@ public class FilesExportService extends Service<Boolean> {
 						}
 					} catch (Exception ex) {
 						ex.printStackTrace();
-						//return false;
 					}
 				});
 				
-				return true;
+				//Check if cancelled
+				if (isCancelled())
+					return false;
+				else
+					return true;
 			}
 			
 			/**

@@ -183,7 +183,7 @@
 
 .white-black-label{
 	-fx-text-fill:white;
-	-fx-font-size:14px;
+	-fx-font-size:14.0px;
 	-fx-font-weight:bold;
 	-fx-background-color:#151515;
 }
@@ -369,9 +369,9 @@
 	-fx-background-color:black;	
 	-fx-cursor:hand;
 	-fx-padding:5.0px;
-	-fx-min-width:32px !important;
-	-fx-max-width:32px !important;
-	-fx-pref-width:32px !important;
+	-fx-min-width:32.0px !important;
+	-fx-max-width:32.0px !important;
+	-fx-pref-width:32.0px !important;
 }
 
 .media-table-view:row-selection:constrained-resize .column-header-background .show-hide-columns-button:hover{
@@ -1405,13 +1405,13 @@
 }
 
 .transparent-volume-progress-bar1 > .bar,.transparent-volume-progress-bar2:indeterminate .bar{
-	-fx-accent:rgb(255, 95, 0);
+	-fx-accent:rgb(255.0, 95.0, 0.0);
 	-fx-background-radius:0.0;
 	-fx-border-radius:0.0;
 }
 
 .transparent-volume-progress-bar2 > .bar,.transparent-volume-progress-bar2:indeterminate .bar{
-	-fx-accent:rgb(0, 144, 255);
+	-fx-accent:rgb(0.0, 144.0, 255.0);
 	-fx-background-radius:0.0;
 	-fx-border-radius:0.0;
 }
@@ -2131,7 +2131,7 @@
 ******************************************************************************/
 
 
-.dark-text-field,.search-box .text-field, .libraries-search-box .text-field{
+.dark-text-field,.search-box .text-field, .libraries-search-box .text-field,.dark-text-field-rectangle{
 	
 	-fx-background-color:#202020;
 	-fx-text-fill:white;
@@ -2139,7 +2139,9 @@
 	-fx-accent: firebrick ;
 }
 
-
+.dark-text-field-rectangle{
+	-fx-background-radius:0.0px;
+}
 
 .dark-text-area{	
 	-fx-background-color:#202020;

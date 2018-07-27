@@ -8,17 +8,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.jfoenix.controls.JFXButton;
+
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -28,6 +34,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.FilesMode;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
@@ -40,43 +47,25 @@ public class ExportWindowController extends BorderPane {
 	// --------------------------------------------
 	
 	@FXML
-	private ToggleGroup exportProcedureGroup;
+	private VBox containerVBox;
 	
 	@FXML
 	private ToggleGroup whatFilesToExportGroup;
 	
 	@FXML
-	private TextField exportField1;
+	private ToggleGroup exportAsGroup;
 	
 	@FXML
-	private Button clear1;
+	private VBox exportFoldersVBox;
 	
 	@FXML
-	private Button exportButton1;
+	private JFXButton addFolder;
 	
 	@FXML
-	private TextField exportField2;
+	private JFXButton okButton;
 	
 	@FXML
-	private Button clear2;
-	
-	@FXML
-	private Button exportButton2;
-	
-	@FXML
-	private TextField exportField3;
-	
-	@FXML
-	private Button clear3;
-	
-	@FXML
-	private Button exportButton3;
-	
-	@FXML
-	private Button okButton;
-	
-	@FXML
-	private Button cancelButton;
+	private JFXButton cancelButton;
 	
 	// ----------------------------------
 	
@@ -95,6 +84,11 @@ public class ExportWindowController extends BorderPane {
 	private FilesMode filesToExport;
 	
 	/**
+	 * This class wraps an ObservableList
+	 */
+	private final SimpleListProperty<Media> itemsWrapperProperty = new SimpleListProperty<>();
+	
+	/**
 	 * Constructor
 	 */
 	public ExportWindowController() {
@@ -111,6 +105,7 @@ public class ExportWindowController extends BorderPane {
 		}
 		
 		// Window
+		window.setResizable(false);
 		window.initStyle(StageStyle.UTILITY);
 		window.setScene(new Scene(this));
 		window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
@@ -126,37 +121,25 @@ public class ExportWindowController extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		// exportButtons
-		exportButton1.setOnAction(a -> pickFolder(exportField1));
-		exportButton2.setOnAction(a -> pickFolder(exportField2));
-		exportButton3.setOnAction(a -> pickFolder(exportField3));
-		
-		// clearButtons
-		clear1.setOnAction(a -> exportField1.clear());
-		clear2.setOnAction(a -> exportField2.clear());
-		clear3.setOnAction(a -> exportField3.clear());
-		
 		// whatFilesToExportGroup
 		whatFilesToExportGroup.selectedToggleProperty().addListener(l -> defineFilesToExport());
 		
-		// okButton
-		okButton.disableProperty().bind(exportField1.textProperty().isEmpty().and(exportField2.textProperty().isEmpty()).and(exportField3.textProperty().isEmpty()));
+		// okButton		
 		okButton.setOnAction(a -> {
+			List<File> foldersList = exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField().getText()).filter(text -> !text.isEmpty())
+					.map(File::new).collect(Collectors.toList());
+			
+			//Check if folders List is empty
+			if (foldersList.isEmpty()) {
+				ActionTool.showNotification("Message", "You must select at least one folder to export the files", Duration.seconds(2), NotificationType.INFORMATION);
+				return;
+			}
 			
 			//Define the Operation
-			Operation operation = "Copy".equalsIgnoreCase( ( (Labeled) exportProcedureGroup.getSelectedToggle() ).getText()) ? Operation.COPY : Operation.MOVE;
-			
-			//Create the directories for export !
-			List<File> directories = new ArrayList<>();
-			if (!exportField1.getText().isEmpty())
-				directories.add(new File(exportField1.getText()));
-			if (!exportField2.getText().isEmpty())
-				directories.add(new File(exportField2.getText()));
-			if (!exportField3.getText().isEmpty())
-				directories.add(new File(exportField3.getText()));
+			Operation operation = Operation.COPY;
 			
 			//Nailed it!
-			smartController.getCopyOrMoveService().startOperation(directories, operation, filesToExport);
+			smartController.getCopyOrMoveService().startOperation(foldersList, operation, filesToExport);
 			
 			window.close();
 		});
@@ -164,6 +147,27 @@ public class ExportWindowController extends BorderPane {
 		// cancelButton
 		cancelButton.setOnAction(a -> window.close());
 		
+		//addFolder
+		addFolder.setOnAction(a -> createFolderPickerBox());
+		
+		//Create one Folder Picker at least
+		createFolderPickerBox();
+	}
+	
+	/**
+	 * Creates a new Box that allows user to pick another folder too
+	 */
+	private void createFolderPickerBox() {
+		ExportWindowFolderHBox box = new ExportWindowFolderHBox();
+		
+		//Button
+		box.getPickFolderButton().setOnAction(a -> pickFolder(box.getTextField()));
+		
+		//OKButton
+		okButton.disableProperty().unbind();
+		
+		//exportFoldersVBox
+		exportFoldersVBox.getChildren().add(box);
 	}
 	
 	/**
@@ -177,7 +181,7 @@ public class ExportWindowController extends BorderPane {
 		//Selected any folder?
 		if (file != null) {
 			//We don't want the same folder to be selected 2 times or more
-			if (Arrays.asList(exportField1, exportField2, exportField3).stream().filter(field -> exportField != field)
+			if (exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField()).filter(field -> exportField != field)
 					.filter(field -> field.getText().equals(file.getAbsolutePath())).findAny().isPresent())
 				ActionTool.showNotification("Duplicate Selection", "This folder has already been selected", Duration.seconds(2), NotificationType.INFORMATION);
 			else
@@ -197,7 +201,8 @@ public class ExportWindowController extends BorderPane {
 		//define the variable using this switch statement
 		switch ( ( (Labeled) whatFilesToExportGroup.getSelectedToggle() ).getText()) {
 			case "Selected Items":
-				window.setTitle(common + smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().size() + " ]");
+				itemsWrapperProperty.setValue(smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems());
+				window.titleProperty().bind(Bindings.createStringBinding(() -> common + itemsWrapperProperty.sizeProperty().get() + " ]", itemsWrapperProperty.sizeProperty()));
 				filesToExport = FilesMode.SELECTED_MEDIA;
 				break;
 			case "Current Page":
@@ -221,11 +226,18 @@ public class ExportWindowController extends BorderPane {
 	public void show(SmartController smartController) {
 		this.smartController = smartController;
 		
-		if (oldSmartController != smartController) {
-			exportField1.clear();
-			exportField2.clear();
-			exportField3.clear();
-		}
+		//Window Title Property
+		window.titleProperty().unbind();
+		
+		//Super
+		super.disableProperty().unbind();
+		super.disableProperty().bind(smartController.getCopyOrMoveService().runningProperty());
+		
+		//Check which SmartController is calling
+		if (oldSmartController != smartController)
+			exportFoldersVBox.getChildren().forEach(box -> ( (ExportWindowFolderHBox) box ).getTextField().clear());
+		
+		//OldSmartController
 		oldSmartController = smartController;
 		
 		//Disable or enable buttons
