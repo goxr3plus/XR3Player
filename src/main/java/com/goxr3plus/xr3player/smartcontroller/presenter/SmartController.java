@@ -34,6 +34,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -142,13 +143,16 @@ public class SmartController extends StackPane {
 	private VBox loadingVBox;
 	
 	@FXML
-	private Button cancelButton;
+	private Label descriptionLabel;
 	
 	@FXML
 	private ProgressBar loadingProgressBar;
 	
 	@FXML
-	private TextArea informationTextArea;
+	private Button cancelButton;
+	
+	@FXML
+	private TextArea descriptionArea;
 	
 	@FXML
 	private VBox reloadVBox;
@@ -301,16 +305,16 @@ public class SmartController extends StackPane {
 		loadingVBox.setVisible(false);
 		
 		// ------ cancel
-		cancelButton.hoverProperty().addListener((observable , oldValue , newValue) -> cancelButton.setText(cancelButton.isHover() ? "cancel" : previousCancelText));
-		cancelButton.textProperty().addListener((observable , oldValue , newValue) -> {
-			if (!"cancel".equals(cancelButton.getText())) {
-				previousCancelText = cancelButton.getText();
-				
-				//Change it if it is hovered
-				if (cancelButton.isHover())
-					cancelButton.setText("cancel");
-			}
-		});
+//		cancelButton.hoverProperty().addListener((observable , oldValue , newValue) -> cancelButton.setText(cancelButton.isHover() ? "cancel" : previousCancelText));
+//		cancelButton.textProperty().addListener((observable , oldValue , newValue) -> {
+//			if (!"cancel".equals(cancelButton.getText())) {
+//				previousCancelText = cancelButton.getText();
+//				
+//				//Change it if it is hovered
+//				if (cancelButton.isHover())
+//					cancelButton.setText("cancel");
+//			}
+//		});
 		//cancel.visibleProperty().bind(region.visibleProperty())
 		cancelButton.setVisible(true);
 		cancelButton.setDisable(true);
@@ -642,7 +646,7 @@ public class SmartController extends StackPane {
 		
 		// Controller
 		getIndicator().setProgress(-1);
-		getCancelButton().setText("Clearing...");
+		descriptionLabel.setText("Clearing...");
 		loadingVBox.setVisible(true);
 		
 		// New Thread
@@ -1065,14 +1069,6 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * @param informationTextArea
-	 *            the informationTextArea to set
-	 */
-	public void setInformationTextArea(TextArea informationTextArea) {
-		this.informationTextArea = informationTextArea;
-	}
-	
-	/**
 	 * @param verticalScrollValueWithoutSearch
 	 *            the verticalScrollValueWithoutSearch to set
 	 */
@@ -1270,8 +1266,8 @@ public class SmartController extends StackPane {
 	/**
 	 * @return the informationTextArea
 	 */
-	public TextArea getInformationTextArea() {
-		return informationTextArea;
+	public TextArea getDescriptionArea() {
+		return descriptionArea;
 	}
 	
 	/**
@@ -1365,6 +1361,13 @@ public class SmartController extends StackPane {
 	 */
 	public StackPane getSearchFieldStackPane() {
 		return searchFieldStackPane;
+	}
+	
+	/**
+	 * @return the descriptionLabel
+	 */
+	public Label getDescriptionLabel() {
+		return descriptionLabel;
 	}
 	
 	/*-----------------------------------------------------------------------

@@ -192,8 +192,8 @@ public class SmartControllerSearcher extends HBox {
 			word = getSearchField().getText();
 			smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 			smartController.getIndicator().progressProperty().bind(progressProperty());
-			smartController.getCancelButton().setText("Searching...");
-			smartController.getInformationTextArea().setText("\n Searching ....");
+			smartController.getDescriptionLabel().setText("Searching...");
+			smartController.getDescriptionArea().setText("\n Searching ....");
 			smartController.getNavigationHBox().setDisable(true);
 			
 			//Clear the list

@@ -85,13 +85,13 @@ public class InputService extends Service<Void> {
 		// System.out.println(this.list)
 		
 		//Clear the text of imformation text field
-		smartController.getInformationTextArea().clear();
+		smartController.getDescriptionArea().clear();
 		
 		// Binds
 		smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 		smartController.getIndicator().progressProperty().bind(progressProperty());
 		smartController.getCancelButton().setDisable(false);
-		smartController.getCancelButton().setText("Counting...");
+		smartController.getDescriptionLabel().setText("Counting...");
 		smartController.getCancelButton().setOnAction(e -> {
 			super.cancel();
 			smartController.getCancelButton().setDisable(true);
@@ -134,7 +134,7 @@ public class InputService extends Service<Void> {
 				String date = InfoTool.getCurrentDate() , time = InfoTool.getLocalTime();
 				
 				// Update informationTextArea
-				Platform.runLater(() -> smartController.getInformationTextArea().appendText("\nCounting files from ....\n"));
+				Platform.runLater(() -> smartController.getDescriptionArea().appendText("\nCounting files from ....\n"));
 				
 				//Initialize the prepared statement
 				try (PreparedStatement preparedInsert = Main.dbManager.getConnection()
@@ -151,7 +151,7 @@ public class InputService extends Service<Void> {
 								continue;
 							
 							// Update informationTextArea
-							Platform.runLater(() -> smartController.getInformationTextArea().appendText( ( !file.isDirectory() ? "File" : "Folder" ) + ": " + file.getName()));
+							Platform.runLater(() -> smartController.getDescriptionArea().appendText( ( !file.isDirectory() ? "File" : "Folder" ) + ": " + file.getName()));
 							
 							int previousTotal = totalFiles;
 							// File or Folder exists?
@@ -161,7 +161,7 @@ public class InputService extends Service<Void> {
 							totalFiles += countFiles(file);
 							
 							// Update informationTextArea
-							Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n\t-> Total: [ " + ( totalFiles - previousTotal ) + " ]\n"));
+							Platform.runLater(() -> smartController.getDescriptionArea().appendText("\n\t-> Total: [ " + ( totalFiles - previousTotal ) + " ]\n"));
 							
 						}
 						
@@ -179,10 +179,11 @@ public class InputService extends Service<Void> {
 						//			batchcount = 0;
 						
 						// Update informationTextArea and cancel button
-						Platform.runLater(() -> {
-							smartController.getCancelButton().setText("Inserting...");
-							smartController.getInformationTextArea().appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
-						});
+						if (!isCancelled())
+							Platform.runLater(() -> {
+								smartController.getDescriptionLabel().setText("Inserting...");
+								smartController.getDescriptionArea().appendText("\nInserting: [ " + totalFiles + " ] Files...\n");
+							});
 						
 						//Add all Files absolute paths to the database table
 						for (File file : list)
@@ -245,8 +246,8 @@ public class InputService extends Service<Void> {
 				final CountDownLatch latch = new CountDownLatch(1);
 				Platform.runLater(() -> {
 					smartController.getCancelButton().setDisable(true);
-					smartController.getCancelButton().setText("Saving...");
-					smartController.getInformationTextArea().appendText("Saving...");
+					smartController.getDescriptionLabel().setText("Saving...");
+					smartController.getDescriptionArea().appendText("Saving...");
 					latch.countDown();
 				});
 				try {

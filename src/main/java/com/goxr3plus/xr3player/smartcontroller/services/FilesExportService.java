@@ -71,7 +71,7 @@ public class FilesExportService extends Service<Boolean> {
 			// Bindings
 			smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 			smartController.getIndicator().progressProperty().bind(progressProperty());
-			smartController.getCancelButton().setText("Exporting...");
+			smartController.getDescriptionLabel().setText("Exporting...");
 			smartController.getCancelButton().setDisable(false);
 			smartController.getCancelButton().setOnAction(e -> {
 				super.cancel();
@@ -117,7 +117,7 @@ public class FilesExportService extends Service<Boolean> {
 							
 							//Count total files that will be exported
 							total = smartController.getItemsObservableList().size();
-							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+							Platform.runLater(() -> smartController.getDescriptionArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
 							Stream<Media> stream =
@@ -140,7 +140,7 @@ public class FilesExportService extends Service<Boolean> {
 							
 							//Count total files that will be exported
 							total = smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().size();
-							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+							Platform.runLater(() -> smartController.getDescriptionArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
 							Stream<Media> stream =
@@ -164,7 +164,7 @@ public class FilesExportService extends Service<Boolean> {
 							
 							//Count total files that will be exported
 							total = smartController.getTotalInDataBase();
-							Platform.runLater(() -> smartController.getInformationTextArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
+							Platform.runLater(() -> smartController.getDescriptionArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
 							String query = "SELECT* FROM '" + smartController.getDataBaseTableName() + "'";
@@ -214,10 +214,10 @@ public class FilesExportService extends Service<Boolean> {
 				
 				//Go
 				if (operation == Operation.COPY) {
-					Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n Copying ->" + fileName));
+					Platform.runLater(() -> smartController.getDescriptionArea().appendText("\n Copying ->" + fileName));
 					ActionTool.copy(sourceFilePath, destination);
 				} else {
-					Platform.runLater(() -> smartController.getInformationTextArea().appendText("\n Moving ->" + fileName));
+					Platform.runLater(() -> smartController.getDescriptionArea().appendText("\n Moving ->" + fileName));
 					ActionTool.move(sourceFilePath, destination);
 				}
 			}
