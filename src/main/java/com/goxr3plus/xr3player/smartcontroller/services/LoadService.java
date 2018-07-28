@@ -83,7 +83,7 @@ public class LoadService extends Service<Void> {
 				smartController.updateWorking = true;
 				smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 				smartController.getIndicator().progressProperty().bind(progressProperty());
-				smartController.getDescriptionLabel().setText("Updating...");
+				smartController.getDescriptionLabel().setText("Gathering media information...");
 				smartController.getDescriptionArea().setText("\n Updating the playlist....");
 				smartController.getItemsObservableList().clear();
 				super.reset();
