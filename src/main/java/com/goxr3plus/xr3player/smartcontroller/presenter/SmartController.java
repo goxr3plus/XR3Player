@@ -48,6 +48,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.Viewer;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -305,16 +306,16 @@ public class SmartController extends StackPane {
 		loadingVBox.setVisible(false);
 		
 		// ------ cancel
-//		cancelButton.hoverProperty().addListener((observable , oldValue , newValue) -> cancelButton.setText(cancelButton.isHover() ? "cancel" : previousCancelText));
-//		cancelButton.textProperty().addListener((observable , oldValue , newValue) -> {
-//			if (!"cancel".equals(cancelButton.getText())) {
-//				previousCancelText = cancelButton.getText();
-//				
-//				//Change it if it is hovered
-//				if (cancelButton.isHover())
-//					cancelButton.setText("cancel");
-//			}
-//		});
+		//		cancelButton.hoverProperty().addListener((observable , oldValue , newValue) -> cancelButton.setText(cancelButton.isHover() ? "cancel" : previousCancelText));
+		//		cancelButton.textProperty().addListener((observable , oldValue , newValue) -> {
+		//			if (!"cancel".equals(cancelButton.getText())) {
+		//				previousCancelText = cancelButton.getText();
+		//				
+		//				//Change it if it is hovered
+		//				if (cancelButton.isHover())
+		//					cancelButton.setText("cancel");
+		//			}
+		//		});
 		//cancel.visibleProperty().bind(region.visibleProperty())
 		cancelButton.setVisible(true);
 		cancelButton.setDisable(true);
@@ -525,8 +526,6 @@ public class SmartController extends StackPane {
 				reloadVBox.setVisible(false);
 			}
 		});
-		
-		//quickSearchTextField
 		
 	}
 	
@@ -1368,6 +1367,13 @@ public class SmartController extends StackPane {
 	 */
 	public Label getDescriptionLabel() {
 		return descriptionLabel;
+	}
+	
+	/**
+	 * @return the mainBorder
+	 */
+	public BorderPane getMainBorder() {
+		return mainBorder;
 	}
 	
 	/*-----------------------------------------------------------------------

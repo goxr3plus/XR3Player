@@ -19,6 +19,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,6 +30,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,9 +38,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.Viewer;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -46,7 +50,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import javafx.beans.property.ReadOnlyBooleanProperty;
 
 /**
  * A class which hold all the functionality of a digital library.
@@ -923,6 +926,7 @@ public class Library extends StackPane {
 		if (firstLoadHack) {
 			setLibraryOpened(open, false);
 			Main.libraryMode.openedLibrariesViewer.insertTab(this);
+			getSmartController().getMainBorder().setTop(new BorderPane(new Viewer(Main.libraryMode, new ScrollBar())));
 		} else {
 			// Open
 			if (open && !isOpened()) {
