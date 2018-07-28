@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
 public class MediaViewer extends StackPane {
 	
@@ -17,10 +18,13 @@ public class MediaViewer extends StackPane {
 	
 	// -------------------------------------------------------------
 	
+	private final Media media;
+	
 	/**
 	 * Constructor.
 	 */
-	public MediaViewer() {
+	public MediaViewer(Media media) {
+		this.media = media;
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaViewer.fxml"));
@@ -48,6 +52,13 @@ public class MediaViewer extends StackPane {
 	 */
 	public ImageView getImageView() {
 		return imageView;
+	}
+
+	/**
+	 * @return the media
+	 */
+	public Media getMedia() {
+		return media;
 	}
 	
 }

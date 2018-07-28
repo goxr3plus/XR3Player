@@ -30,7 +30,19 @@
    <children>
       <SplitPane fx:id="viewerSplitPane" dividerPositions="0.25" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: rgb(0,0,0,0.8);">
          <items>
-            <StackPane fx:id="viewerStackPane" prefHeight="150.0" prefWidth="200.0" />
+            <StackPane fx:id="viewerStackPane" minHeight="0.0" minWidth="0.0">
+               <children>
+                  <VBox fx:id="mediaViewerVBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
+                     <children>
+                        <Label fx:id="mediaViewerLabel" alignment="CENTER" styleClass="white-black-label" text="Description Label" />
+                        <ProgressBar fx:id="mediaViewerProgress" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" styleClass="transparent-progress-bar" />
+                     </children>
+                     <padding>
+                        <Insets top="25.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </StackPane>
             <JFXTabPane fx:id="modesTabPane" side="RIGHT">
                <tabs>
                 <Tab fx:id="normalModeTab" text="Media">

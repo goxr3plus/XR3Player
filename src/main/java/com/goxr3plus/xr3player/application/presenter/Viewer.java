@@ -459,10 +459,8 @@ public class Viewer extends Region {
 				if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
 					
 					// If it isn't the same User again
-					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer) {
-						
+					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer)
 						setCenterIndex(itemsObservableList.indexOf(mediaViewer));
-					}
 					
 				}
 				

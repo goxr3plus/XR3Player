@@ -63,6 +63,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.modes.SmartControllerMo
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FilesExportService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.InputService;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
+import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaViewerService;
 
 /**
  * Used to control big amounts of Media using a TableViewer mechanism
@@ -78,6 +79,15 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private StackPane viewerStackPane;
+	
+	@FXML
+	private VBox mediaViewerVBox;
+	
+	@FXML
+	private Label mediaViewerLabel;
+	
+	@FXML
+	private ProgressBar mediaViewerProgress;
 	
 	@FXML
 	private JFXTabPane modesTabPane;
@@ -205,21 +215,24 @@ public class SmartController extends StackPane {
 	private final AlphabetBar alphabetBar = new AlphabetBar(this, Orientation.VERTICAL);
 	
 	/** This Viewer allows SmartController to display boxes with Media Album Images */
-	private final Viewer viewer = new Viewer(this);
+	private final Viewer mediaViewer = new Viewer(this);
 	
 	// ---------Services--------------------------
 	
-	/** The search service. */
+	/** This Service is providing search functionality for the Playlist */
 	private final SmartControllerSearcher searchService;
 	
-	/** The load service. */
+	/** This Service is used to reload/update the Playlist */
 	private final LoadService loadService;
 	
-	/** The input service. */
+	/** This Service is used to insert Media into the Playlist */
 	private final InputService inputService;
 	
+	/** This service is used to export files from Playlist */
+	private final FilesExportService filesExportService;
+	
 	/** CopyOrMoveService */
-	private final FilesExportService copyOrMoveService;
+	private final MediaViewerService mediaViewerService;
 	
 	// ---------Security---------------------------
 	
@@ -280,7 +293,8 @@ public class SmartController extends StackPane {
 		searchService = new SmartControllerSearcher(this);
 		loadService = new LoadService(this);
 		inputService = new InputService(this);
-		copyOrMoveService = new FilesExportService(this);
+		filesExportService = new FilesExportService(this);
+		mediaViewerService = new MediaViewerService(this);
 		
 		// --------------------------------FXMLLoader---------------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "SmartController.fxml"));
@@ -539,7 +553,12 @@ public class SmartController extends StackPane {
 		});
 		
 		//viewerStackPane
-		viewerStackPane.getChildren().add(viewer);
+		viewerStackPane.getChildren().add(0, mediaViewer);
+		
+		//mediaViewerVBox
+		mediaViewerVBox.visibleProperty().bind(mediaViewerService.runningProperty());
+		mediaViewerProgress.progressProperty().bind(mediaViewerService.progressProperty());
+		mediaViewerLabel.textProperty().bind(mediaViewerService.messageProperty());
 		
 	}
 	
@@ -830,7 +849,7 @@ public class SmartController extends StackPane {
 		} else if (updateWorking) {
 			isFree = false;
 			message = "Updating";
-		} else if (copyOrMoveService.isRunning()) {
+		} else if (filesExportService.isRunning()) {
 			isFree = false;
 			message = "Copy-Move Service";
 		}
@@ -899,12 +918,7 @@ public class SmartController extends StackPane {
 		//normal_mode_mediaTableViewer.getTableView().refresh();
 		//if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
 		//	normal_mode_mediaTableViewer.getTableView().sort();
-		
-		//Update the Viewer
-		viewer.deleteAllItems();
-		viewer.addMultipleItems(itemsObservableList.stream().map(item -> {
-			return new MediaViewer();
-		}).collect(Collectors.toList()));
+	
 	}
 	
 	/**
@@ -1219,31 +1233,31 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
-	 * @return the searchService
+	 * @return searchService
 	 */
 	public SmartControllerSearcher getSearchService() {
 		return searchService;
 	}
 	
 	/**
-	 * @return the loadService
+	 * @return loadService
 	 */
 	public LoadService getLoadService() {
 		return loadService;
 	}
 	
 	/**
-	 * @return the inputService
+	 * @return inputService
 	 */
 	public InputService getInputService() {
 		return inputService;
 	}
 	
 	/**
-	 * @return the copyOrMoveService
+	 * @return filesExportService
 	 */
-	public FilesExportService getCopyOrMoveService() {
-		return copyOrMoveService;
+	public FilesExportService getFilesExportService() {
+		return filesExportService;
 	}
 	
 	/**
@@ -1393,6 +1407,13 @@ public class SmartController extends StackPane {
 	 */
 	public BorderPane getMainBorder() {
 		return mainBorder;
+	}
+
+	/**
+	 * @return the viewer
+	 */
+	public Viewer getMediaViewer() {
+		return mediaViewer;
 	}
 	
 	/*-----------------------------------------------------------------------

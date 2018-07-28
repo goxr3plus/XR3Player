@@ -134,7 +134,7 @@ public class ExportWindowController extends BorderPane {
 			Operation operation = Operation.COPY;
 			
 			//Nailed it!
-			smartController.getCopyOrMoveService().startOperation(foldersList, operation, filesToExport,
+			smartController.getFilesExportService().startOperation(foldersList, operation, filesToExport,
 					( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder") ? FileType.DIRECTORY : FileType.ZIP);
 			
 			window.close();
@@ -264,7 +264,7 @@ public class ExportWindowController extends BorderPane {
 		
 		//Super
 		super.disableProperty().unbind();
-		super.disableProperty().bind(smartController.getCopyOrMoveService().runningProperty());
+		super.disableProperty().bind(smartController.getFilesExportService().runningProperty());
 		
 		//Check which SmartController is calling
 		if (oldSmartController != smartController)
