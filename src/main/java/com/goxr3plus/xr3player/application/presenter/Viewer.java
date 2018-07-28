@@ -29,6 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.LibraryMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
  * This class allows you to view the libraries.
@@ -89,7 +90,7 @@ public class Viewer extends Region {
 	private int centerIndex;
 	
 	/** The scroll bar. */
-	private final ScrollBar scrollBar;
+	private ScrollBar scrollBar;
 	
 	/** The time line */
 	private final Timeline timeline = new Timeline();
@@ -102,6 +103,7 @@ public class Viewer extends Region {
 	
 	private LibraryMode libraryMode;
 	private LoginMode loginMode;
+	private SmartController smartController;
 	
 	public Viewer(LibraryMode libraryMode, ScrollBar scrollBar) {
 		this.libraryMode = libraryMode;
@@ -112,6 +114,11 @@ public class Viewer extends Region {
 	public Viewer(LoginMode loginMode, ScrollBar scrollBar) {
 		this.loginMode = loginMode;
 		this.scrollBar = scrollBar;
+		init();
+	}
+	
+	public Viewer(SmartController smartController) {
+		this.smartController = smartController;
 		init();
 	}
 	
@@ -200,6 +207,12 @@ public class Viewer extends Region {
 		centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
 		
 		getChildren().addAll(centered);
+		
+		//Now let's check if SmartController !=null
+		if (smartController != null) {
+			
+		}
+		
 	}
 	
 	/**
@@ -287,8 +300,7 @@ public class Viewer extends Region {
 					Library libraryy = (Library) library;
 					libraryy.getImageView().setFitWidth(size);
 					libraryy.getImageView().setFitHeight(size);
-					libraryy.setMaxWidth(size);
-					libraryy.setMaxHeight(size);
+					libraryy.setMaxSize(size, size);
 				});
 			else if (loginMode != null)
 				itemsObservableList.forEach(user -> {
@@ -296,8 +308,7 @@ public class Viewer extends Region {
 					User userr = (User) user;
 					userr.getImageView().setFitWidth(size);
 					userr.getImageView().setFitHeight(size);
-					userr.setMaxWidth(size);
-					userr.setMaxHeight(size);
+					userr.setMaxSize(size,size);
 				});
 			
 			// the current size of each
@@ -353,8 +364,7 @@ public class Viewer extends Region {
 			Library library = (Library) node;
 			library.getImageView().setFitWidth(size);
 			library.getImageView().setFitHeight(size);
-			library.setMaxWidth(size);
-			library.setMaxHeight(size);
+			library.setMaxSize(size,size);
 			
 			// --
 			node.setOnMouseClicked(m -> {
@@ -392,8 +402,7 @@ public class Viewer extends Region {
 			User user = (User) node;
 			user.getImageView().setFitWidth(size);
 			user.getImageView().setFitHeight(size);
-			user.setMaxWidth(size);
-			user.setMaxHeight(size);
+			user.setMaxSize(size,size);
 			
 			// --
 			user.setOnMouseClicked(m -> {
@@ -455,6 +464,19 @@ public class Viewer extends Region {
 			for (int i = 0; i < itemsObservableList.size(); i++)
 				( (User) itemsObservableList.get(i) ).updatePosition(i);
 			
+		//Recalculate the center index after a delete occurs.
+		calculateCenterAfterDelete();
+	}
+	
+	/**
+	 * Deletes all the items from the Viewer
+	 */
+	public void deleteAllItems() {
+		
+		//Clear all the items
+		this.itemsObservableList.clear();
+		
+		//Recalculate the center index after a delete occurs.
 		calculateCenterAfterDelete();
 	}
 	

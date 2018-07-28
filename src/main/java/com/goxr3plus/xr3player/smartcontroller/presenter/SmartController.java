@@ -868,6 +868,11 @@ public class SmartController extends StackPane {
 	}
 	
 	/**
+	 * This Viewer allows SmartController to display boxes with Media Album Images
+	 */
+	Viewer viewer = new Viewer(this);
+	
+	/**
 	 * Updates the List.
 	 */
 	public void updateList() {
@@ -885,7 +890,7 @@ public class SmartController extends StackPane {
 		//normal_mode_mediaTableViewer.getTableView().refresh();
 		//if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
 		//	normal_mode_mediaTableViewer.getTableView().sort();
-		
+		viewer.getItemsObservableList().
 	}
 	
 	/**
