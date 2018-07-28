@@ -119,9 +119,6 @@ public class ExportWindowController extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		// whatFilesToExportGroup
-		whatFilesToExportGroup.selectedToggleProperty().addListener(l -> defineFilesToExport());
-		
 		// okButton		
 		okButton.setOnAction(a -> {
 			List<File> foldersList = exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField().getText()).filter(text -> !text.isEmpty())
@@ -150,7 +147,13 @@ public class ExportWindowController extends BorderPane {
 		addFolder.setOnAction(a -> createFolderPickerBox());
 		
 		//exportAsGroup
-		exportAsGroup.selectedToggleProperty().addListener(l -> {
+		exportAsGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//Null is not allowed!
+			if (newValue == null) {
+				exportAsGroup.selectToggle(oldValue);
+				return;
+			}
 			
 			//Check if the Folder Option is selected
 			if ( ( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder")) {
@@ -159,9 +162,22 @@ public class ExportWindowController extends BorderPane {
 						.forEach(textField -> textField.setText(textField.getText().replaceAll(".zip", "")));
 			} else {
 				//Fix the value for each TextField
-				exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField()).filter(textField -> !textField.getText().isEmpty())
-						.forEach(textField -> textField.appendText(".zip"));
+				exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField())
+						.filter(textField -> !textField.getText().isEmpty() && !textField.getText().contains(".zip")).forEach(textField -> textField.appendText(".zip"));
 			}
+		});
+		
+		//exportAsGroup
+		whatFilesToExportGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//Null is not allowed!
+			if (newValue == null) {
+				whatFilesToExportGroup.selectToggle(oldValue);
+				return;
+			}
+			
+			//Define
+			defineFilesToExport();
 		});
 		
 		//Create one Folder Picker at least
@@ -179,6 +195,9 @@ public class ExportWindowController extends BorderPane {
 		
 		//OKButton
 		okButton.disableProperty().unbind();
+		
+		//Delete
+		box.getDeleteBoxButton().setOnAction(a -> exportFoldersVBox.getChildren().remove(box));
 		
 		//exportFoldersVBox
 		exportFoldersVBox.getChildren().add(box);
@@ -211,6 +230,8 @@ public class ExportWindowController extends BorderPane {
 		if (smartController == null)
 			return;
 		
+		//Window Title Property
+		window.titleProperty().unbind();
 		String common = "PlayList -> [ " + smartController.getName() + " ] , Total Media to export -> [ ";
 		
 		//define the variable using this switch statement
@@ -240,9 +261,6 @@ public class ExportWindowController extends BorderPane {
 	 */
 	public void show(SmartController smartController) {
 		this.smartController = smartController;
-		
-		//Window Title Property
-		window.titleProperty().unbind();
 		
 		//Super
 		super.disableProperty().unbind();

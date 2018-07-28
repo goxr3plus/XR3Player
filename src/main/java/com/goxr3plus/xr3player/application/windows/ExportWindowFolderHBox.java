@@ -17,6 +17,9 @@ public class ExportWindowFolderHBox extends HBox {
 	//--------------------------------------------------------------
 	
 	@FXML
+	private Button deleteBoxButton;
+	
+	@FXML
 	private Button pickFolderButton;
 	
 	// -------------------------------------------------------------
@@ -80,6 +83,13 @@ public class ExportWindowFolderHBox extends HBox {
 	 */
 	public TextField getTextField() {
 		return textField;
+	}
+
+	/**
+	 * @return the deleteBoxButton
+	 */
+	public Button getDeleteBoxButton() {
+		return deleteBoxButton;
 	}
 	
 }

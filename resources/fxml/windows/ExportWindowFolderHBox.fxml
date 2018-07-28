@@ -7,7 +7,15 @@
 
 <fx:root alignment="CENTER_RIGHT" minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="200.0" stylesheets="@../../style/application.css" type="HBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="pickFolderButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" style="-fx-background-radius: 0;">
+      <Button fx:id="deleteBoxButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" styleClass="jfx-button-dark-white-selection">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <FontIcon iconColor="#fc452d" iconLiteral="fas-minus" iconSize="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="pickFolderButton" layoutX="169.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" styleClass="jfx-button-dark-white-selection">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

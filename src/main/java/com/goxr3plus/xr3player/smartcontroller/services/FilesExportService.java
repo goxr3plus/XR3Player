@@ -113,12 +113,13 @@ public class FilesExportService extends Service<Boolean> {
 						return;
 					
 					//Update SmartController Description Label
-					Platform.runLater(() -> smartController.getDescriptionLabel().setText("Producing : " + InfoTool.getFileTitle(targetDirectory.getAbsolutePath())));
+					Platform.runLater(() -> smartController.getDescriptionLabel().setText("Producing : " + InfoTool.getFileName(targetDirectory.getAbsolutePath())));
 					
 					try {
 						
 						//Create the targetDirectory
-						targetDirectory.mkdir();
+						if (fileType == FileType.DIRECTORY)
+							targetDirectory.mkdir();
 						
 						//Keep a counter for the process
 						count = 0;
@@ -164,8 +165,8 @@ public class FilesExportService extends Service<Boolean> {
 							Platform.runLater(() -> smartController.getDescriptionArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
-							String query = "SELECT* FROM '" + smartController.getDataBaseTableName() + "'";
-							try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);) {
+							try (ResultSet resultSet = Main.dbManager.getConnection().createStatement()
+									.executeQuery("SELECT* FROM '" + smartController.getDataBaseTableName() + "'");) {
 								
 								//Make a list of all the items
 								List<String> list = new ArrayList<>();
@@ -218,20 +219,26 @@ public class FilesExportService extends Service<Boolean> {
 						}
 					});
 				} else if (fileType == FileType.ZIP) {
-					ZipUtil.packEntries(stream.map(File::new).toArray(File[]::new), targetDirectory, fileName -> {
-						if (isCancelled())
-							return null;
-						
-						//Append Text to Description Area
-						Platform.runLater(() -> smartController.getDescriptionArea().appendText("\n Compressing ->" + fileName));
-						
-						System.out.println(fileName);
-						
-						//Update the progress
-						updateProgress(++count, total);
-						
-						return fileName;
-					});
+					try {
+						ZipUtil.packEntries(stream.map(File::new).toArray(File[]::new), targetDirectory, fileName -> {
+							if (isCancelled())
+								return null;
+							
+							//Append Text to Description Area
+							Platform.runLater(() -> smartController.getDescriptionArea().appendText("\n Compressing ->" + fileName));
+							
+							//Update the progress
+							updateProgress(++count, total);
+							
+							return fileName;
+						});
+					} catch (Exception ex) {
+						//Check if access is denied
+						if (ex.getMessage().contains("(The process cannot access the file because it is being used by another process)"))
+							ActionTool.showNotification("Error Message", "[ " + InfoTool.getFileName(targetDirectory.getAbsolutePath()) + " ]\n"
+									+ "The process cannot access the file because it is being used by another process", Duration.seconds(4), NotificationType.ERROR);
+						ex.printStackTrace();
+					}
 				}
 			}
 			
