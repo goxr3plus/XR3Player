@@ -177,37 +177,24 @@ public class Viewer extends Region {
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> searchWord.set(""));
 		
-		// this.setOnMouseMoved(m -> {
-		//
-		// if (dragDetected) {
-		// System.out.println("Mouse Moving... with drag detected");
-		//
-		// try {
-		// Robot robot = new Robot();
-		// robot.mouseMove((int) m.getScreenX(),
-		// (int) this.localToScreen(this.getBoundsInLocal()).getMinY() + 2);
-		// } catch (AWTException ex) {
-		// ex.printStackTrace();
-		// }
-		// }
-		// })
-		
 		// clip.set
 		setClip(clip);
 		setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, #00E5BB 87%);");
 		//setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 		
 		// ScrollBar
-		scrollBar.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(2));
-		scrollBar.valueProperty().addListener((observable , oldValue , newValue) -> {
-			int newVal = (int) Math.round(newValue.doubleValue());
-			int oldVal = (int) Math.round(oldValue.doubleValue());
-			// new!=old
-			if (newVal != oldVal)
-				setCenterIndex(newVal);
-			
-			// System.out.println(scrollBar.getValue())
-		});
+		if (scrollBar != null) {
+			scrollBar.visibleProperty().bind(itemsWrapperProperty.sizeProperty().greaterThan(2));
+			scrollBar.valueProperty().addListener((observable , oldValue , newValue) -> {
+				int newVal = (int) Math.round(newValue.doubleValue());
+				int oldVal = (int) Math.round(oldValue.doubleValue());
+				// new!=old
+				if (newVal != oldVal)
+					setCenterIndex(newVal);
+				
+				// System.out.println(scrollBar.getValue())
+			});
+		}
 		
 		// create content
 		centered.getChildren().addAll(leftGroup, rightGroup, centerGroup);
@@ -276,30 +263,16 @@ public class Viewer extends Region {
 		// keep centered centered
 		
 		width = getHeight();
-		height = width;// + (WIDTH * 0.4)
+		height = width;
 		
 		double variable = width / var;
-		centered.setLayoutX( ( getWidth() - variable ) / 2); //WIDTH/var) / 2)
-		centered.setLayoutY( ( getHeight() - variable ) / 2); //HEIGHT / var) / 2)
-		
-		// centered.setLayoutX((getWidth() - WIDTH) / 2)
-		// centered.setLayoutY((getHeight() - HEIGHT) / 2)
-		
-		//-----jfSlider.setLayoutX(getWidth() / 2 - 150);
-		
-		//jfSlider.setLayoutX(0);
-		//jfSlider.setLayoutY(double g snoopy dogg);
-		//jfSlider.resize(getWidth(), 15);
-		
-		//--- jfSlider.resize(300, 15);
-		//--- jfSlider.setLayoutY(getHeight() - jfSlider.getHeight());
+		centered.setLayoutX( ( getWidth() - variable ) / 2);
+		centered.setLayoutY( ( getHeight() - variable ) / 2);
 		
 		// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
-		// if (previousWidth != (int) WIDTH ||
 		if (previousHeight != (int) height) {
-			// System.out.println("Updating Library Size")
 			
-			//Library Size
+			//Size
 			double size = height / var;
 			
 			// Update ImageView width and height
@@ -327,33 +300,20 @@ public class Viewer extends Region {
 					userr.setMaxHeight(size);
 				});
 			
-			// Don't fuck CPU mother too hard , let her breath a lil bit
-			double currentSize = width / var; // the current size of each
-			// library
+			// the current size of each
+			double currentSize = width / var;
 			boolean doUpdate = Math.abs(currentSize - lastSize) > 2;
-			// System.out.println("Do update?:" + doUpdate + " , " +
-			// Math.abs(currentSize - lastSize) + "SSD.U2\n")
 			lastSize = currentSize;
+			
+			//Update?
 			if (doUpdate)
 				update();
 		}
 		
 		previousWidth = (int) width;
 		previousHeight = (int) height;
-		// System.out.println("Counter:" + (++counter) + " , " + getWidth() + "," + getHeight())
 		
 	}
-	
-	//	/**
-	//	 * Go on selection mode.
-	//	 *
-	//	 * @param way
-	//	 *            the way
-	//	 */
-	//	public void goOnSelectionMode(boolean way) {
-	//		for (Library library : itemsObservableList)
-	//			library.goOnSelectionMode(way);
-	//	}
 	
 	/**
 	 * Add multiple libraries at once.
@@ -471,7 +431,8 @@ public class Viewer extends Region {
 		}
 		
 		// MAX
-		scrollBar.setMax(itemsObservableList.size() - 1.00);
+		if (scrollBar != null)
+			scrollBar.setMax(itemsObservableList.size() - 1.00);
 		
 		//Update?
 		if (update)
@@ -512,7 +473,8 @@ public class Viewer extends Region {
 			centerIndex = 0;
 		
 		// Max
-		scrollBar.setMax(itemsObservableList.size() - 1.00);
+		if (scrollBar != null)
+			scrollBar.setMax(itemsObservableList.size() - 1.00);
 		
 		update();
 		
@@ -530,7 +492,8 @@ public class Viewer extends Region {
 			update();
 			
 			// Update the ScrollBar Value
-			scrollBar.setValue(centerIndex);
+			if (scrollBar != null)
+				scrollBar.setValue(centerIndex);
 		}
 	}
 	
