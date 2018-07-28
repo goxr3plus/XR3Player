@@ -28,7 +28,7 @@
                         </HBox>
                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" text="Artwork">
+                  <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" text="Artwork" visible="false">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="26" />
                      </graphic>
