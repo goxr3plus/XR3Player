@@ -12,6 +12,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -27,194 +28,199 @@
 
 <fx:root prefHeight="411.0" prefWidth="666.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXTabPane fx:id="modesTabPane" side="RIGHT">
-         <tabs>
-          <Tab fx:id="normalModeTab" text="Media">
-               <content>
-                  <BorderPane fx:id="mainBorder" minHeight="1.0" style="-fx-background-color: rgb(0,0,0,0.8);">
-                     <right>
-                        <TabPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="0.0" prefWidth="0.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" visible="false" BorderPane.alignment="CENTER">
-                          <tabs>
-                            <Tab text="Songs+">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </Tab>
-                            <Tab text="Artists+">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </Tab>
-                              <Tab text="Albums+">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                </content>
-                              </Tab>
-                              <Tab text="Folders+">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                </content>
-                              </Tab>
-                          </tabs>
-                        </TabPane>
-                     </right>
-                     <center>
-                        <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="viewerSplitPane" dividerPositions="0.25" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: rgb(0,0,0,0.8);">
+         <items>
+            <StackPane fx:id="viewerStackPane" prefHeight="150.0" prefWidth="200.0" />
+            <JFXTabPane fx:id="modesTabPane" side="RIGHT">
+               <tabs>
+                <Tab fx:id="normalModeTab" text="Media">
+                     <content>
+                        <BorderPane fx:id="mainBorder" minHeight="1.0" style="-fx-background-color: rgb(0,0,0,0.8);">
+                           <right>
+                              <TabPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="0.0" prefWidth="0.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" visible="false" BorderPane.alignment="CENTER">
+                                <tabs>
+                                  <Tab text="Songs+">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </Tab>
+                                  <Tab text="Artists+">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </Tab>
+                                    <Tab text="Albums+">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </Tab>
+                                    <Tab text="Folders+">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </Tab>
+                                </tabs>
+                              </TabPane>
+                           </right>
                            <center>
-                              <StackPane fx:id="centerStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
-                           </center>
-                           <top>
-                              <VBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <HBox fx:id="alphabetBarBox" alignment="CENTER" />
-                                    <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: #101010;">
+                              <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <StackPane fx:id="centerStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <top>
+                                    <VBox minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#a8950a" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#ffe81f" wrapText="true">
-                                             <tooltip>
-                                                <Tooltip text="Instant Search " />
-                                             </tooltip>
-                                             <HBox.margin>
-                                                <Insets left="4.0" right="4.0" />
-                                             </HBox.margin>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </JFXCheckBox>
-                                          <StackPane fx:id="searchFieldStackPane" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                                          <HBox fx:id="alphabetBarBox" alignment="CENTER" />
+                                          <HBox fx:id="searchBarHBox" alignment="CENTER" minWidth="0.0" prefHeight="37.0" style="-fx-background-color: #101010;">
                                              <children>
-                                                <JFXButton fx:id="normalSearchButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="Back to normal search ">
+                                                <JFXCheckBox fx:id="instantSearch" alignment="CENTER" checkedColor="#a8950a" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="21.0" selected="true" text=" " textAlignment="CENTER" unCheckedColor="#ffe81f" wrapText="true">
                                                    <tooltip>
-                                                      <Tooltip text="When you press a letter from alphabetical/numerical bar , normal search needs to be reactivated ." />
-                                                   </tooltip>
-                                                   <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="fas-share" iconSize="20" />
-                                                   </graphic>
-                                                </JFXButton>
-                                             </children>
-                                          </StackPane>
-                                          <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="179.0">
-                                             <children>
-                                                <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" styleClass="jfx-button4">
-                                                   <tooltip>
-                                                      <Tooltip text="Previous" />
-                                                   </tooltip>
-                                                   <graphic>
-                                                      <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
-                                                   </graphic>
-                                                </Button>
-                                                <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-background-radius: 0;" styleClass="dark-text-field">
-                                                   <tooltip>
-                                                      <Tooltip text="Select a Page and Press Enter" />
-                                                   </tooltip>
-                                                   <contextMenu>
-                                                      <ContextMenu />
-                                                   </contextMenu>
-                                                   <HBox.margin>
-                                                      <Insets left="1.0" />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Button fx:id="goToPage" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" styleClass="jfx-button4" text="GO">
-                                                   <tooltip>
-                                                      <Tooltip text="Go to the selected Page" />
+                                                      <Tooltip text="Instant Search " />
                                                    </tooltip>
                                                    <HBox.margin>
-                                                      <Insets />
+                                                      <Insets left="4.0" right="4.0" />
                                                    </HBox.margin>
-                                                   <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20" />
-                                                   </graphic>
-                                                </Button>
-                                                <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                                                   <tooltip>
-                                                      <Tooltip text="Next" />
-                                                   </tooltip>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </JFXCheckBox>
+                                                <StackPane fx:id="searchFieldStackPane" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <JFXButton fx:id="normalSearchButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="Back to normal search ">
+                                                         <tooltip>
+                                                            <Tooltip text="When you press a letter from alphabetical/numerical bar , normal search needs to be reactivated ." />
+                                                         </tooltip>
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="fas-share" iconSize="20" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                   </children>
+                                                </StackPane>
+                                                <HBox fx:id="navigationHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="25.0" prefWidth="179.0">
+                                                   <children>
+                                                      <Button fx:id="previous" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" styleClass="jfx-button4">
+                                                         <tooltip>
+                                                            <Tooltip text="Previous" />
+                                                         </tooltip>
+                                                         <graphic>
+                                                            <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
+                                                         </graphic>
+                                                      </Button>
+                                                      <TextField fx:id="pageField" alignment="CENTER" maxHeight="-Infinity" maxWidth="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" promptText="page..." style="-fx-background-radius: 0;" styleClass="dark-text-field">
+                                                         <tooltip>
+                                                            <Tooltip text="Select a Page and Press Enter" />
+                                                         </tooltip>
+                                                         <contextMenu>
+                                                            <ContextMenu />
+                                                         </contextMenu>
+                                                         <HBox.margin>
+                                                            <Insets left="1.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                      <Button fx:id="goToPage" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" styleClass="jfx-button4" text="GO">
+                                                         <tooltip>
+                                                            <Tooltip text="Go to the selected Page" />
+                                                         </tooltip>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20" />
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="next" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                                                         <tooltip>
+                                                            <Tooltip text="Next" />
+                                                         </tooltip>
+                                                         <HBox.margin>
+                                                            <Insets bottom="2.0" top="2.0" />
+                                                         </HBox.margin>
+                                                         <graphic>
+                                                            <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
                                                    <HBox.margin>
-                                                      <Insets bottom="2.0" top="2.0" />
+                                                      <Insets left="5.0" />
                                                    </HBox.margin>
-                                                   <graphic>
-                                                      <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
-                                                   </graphic>
-                                                </Button>
+                                                </HBox>
+                                                <HBox alignment="CENTER">
+                                                   <children>
+                                                      <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" styleClass="jfx-button4">
+                                                         <tooltip>
+                                                            <Tooltip text="Open Playlist Settings" />
+                                                         </tooltip>
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" />
+                                                         </graphic>
+                                                      </Button>
+                                                      <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" styleClass="dark-menu-button">
+                                                         <contextMenu>
+                                                            <ContextMenu fx:id="toolsContextMenu">
+                                                               <items>
+                                                                  <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                                <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import Files">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                                  <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                                  <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear List">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#fa4c34" iconLiteral="far-window-close" iconSize="24" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                               </items>
+                                                            </ContextMenu>
+                                                         </contextMenu>
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="22" selectionEnd="0" selectionStart="0" />
+                                                         </graphic>
+                                                      </MenuButton>
+                                                   </children>
+                                                </HBox>
                                              </children>
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </HBox>
-                                          <HBox alignment="CENTER">
-                                             <children>
-                                                <Button fx:id="settings" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" styleClass="jfx-button4">
-                                                   <tooltip>
-                                                      <Tooltip text="Open Playlist Settings" />
-                                                   </tooltip>
-                                                   <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" />
-                                                   </graphic>
-                                                </Button>
-                                                <MenuButton fx:id="toolsMenuButton" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="28.0" styleClass="dark-menu-button">
-                                                   <contextMenu>
-                                                      <ContextMenu fx:id="toolsContextMenu">
-                                                         <items>
-                                                            <MenuItem fx:id="importFolder" mnemonicParsing="false" text="Import Folder">
-                                                               <graphic>
-                                                                  <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
-                                                               </graphic>
-                                                            </MenuItem>
-                                                          <MenuItem fx:id="importFiles" mnemonicParsing="false" text="Import Files">
-                                                               <graphic>
-                                                                  <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
-                                                               </graphic>
-                                                            </MenuItem>
-                                                            <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
-                                                               <graphic>
-                                                                  <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
-                                                               </graphic>
-                                                            </MenuItem>
-                                                            <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear List">
-                                                               <graphic>
-                                                                  <FontIcon iconColor="#fa4c34" iconLiteral="far-window-close" iconSize="24" />
-                                                               </graphic>
-                                                            </MenuItem>
-                                                         </items>
-                                                      </ContextMenu>
-                                                   </contextMenu>
-                                                   <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="22" selectionEnd="0" selectionStart="0" />
-                                                   </graphic>
-                                                </MenuButton>
-                                             </children>
+                                             <padding>
+                                                <Insets left="3.0" right="3.0" />
+                                             </padding>
                                           </HBox>
                                        </children>
-                                       <padding>
-                                          <Insets left="3.0" right="3.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </top>
+                                    </VBox>
+                                 </top>
+                              </BorderPane>
+                           </center>
                         </BorderPane>
-                     </center>
-                  </BorderPane>
-               </content>
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
-               </graphic>
-          </Tab>
-            <Tab fx:id="foldersModeTab" disable="true">
-               <graphic>
-                  <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="1" visible="false" />
-               </graphic>
-            </Tab>
-            <Tab fx:id="filtersModeTab" disable="true">
-               <graphic>
-                  <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="1" visible="false" />
-               </graphic>
-            </Tab>
-         </tabs>
-         <styleClass>
-            <String fx:value="magicTabPaneVersion2" />
-            <String fx:value="specialJFXTabPane" />
-         </styleClass>
-      </JFXTabPane>
+                     </content>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
+                     </graphic>
+                </Tab>
+                  <Tab fx:id="foldersModeTab" disable="true">
+                     <graphic>
+                        <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="1" visible="false" />
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="filtersModeTab" disable="true">
+                     <graphic>
+                        <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="1" visible="false" />
+                     </graphic>
+                  </Tab>
+               </tabs>
+               <styleClass>
+                  <String fx:value="magicTabPaneVersion2" />
+                  <String fx:value="specialJFXTabPane" />
+               </styleClass>
+            </JFXTabPane>
+         </items>
+      </SplitPane>
       <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
             <Label fx:id="descriptionLabel" alignment="CENTER" styleClass="white-black-label" text="Description Label" />

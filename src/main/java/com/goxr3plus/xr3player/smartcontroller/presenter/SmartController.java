@@ -40,6 +40,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -71,6 +72,12 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.services.LoadService;
 public class SmartController extends StackPane {
 	
 	//----------------------------------------------------------------
+	
+	@FXML
+	private SplitPane viewerSplitPane;
+	
+	@FXML
+	private StackPane viewerStackPane;
 	
 	@FXML
 	private JFXTabPane modesTabPane;
@@ -196,6 +203,9 @@ public class SmartController extends StackPane {
 	private int maximumPerPage = DEFAULT_MAXIMUM_PER_PAGE;
 	
 	private final AlphabetBar alphabetBar = new AlphabetBar(this, Orientation.VERTICAL);
+	
+	/** This Viewer allows SmartController to display boxes with Media Album Images */
+	private final Viewer viewer = new Viewer(this);
 	
 	// ---------Services--------------------------
 	
@@ -528,8 +538,8 @@ public class SmartController extends StackPane {
 			}
 		});
 		
-		//MainBorder
-		mainBorder.setTop(new BorderPane(viewer));
+		//viewerStackPane
+		viewerStackPane.getChildren().add(viewer);
 		
 	}
 	
@@ -870,11 +880,6 @@ public class SmartController extends StackPane {
 			loadService.startService(false, true, false);
 		}
 	}
-	
-	/**
-	 * This Viewer allows SmartController to display boxes with Media Album Images
-	 */
-	Viewer viewer = new Viewer(this);
 	
 	/**
 	 * Updates the List.

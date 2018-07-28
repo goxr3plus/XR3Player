@@ -351,7 +351,7 @@ public class Viewer extends Region {
 		list.forEach(l -> addItem(l, false));
 		
 		// update
-		update();
+		calculateCenterIndex();
 	}
 	
 	/**
@@ -454,6 +454,20 @@ public class Viewer extends Region {
 			mediaViewer.getImageView().setFitHeight(size);
 			mediaViewer.setMaxSize(size, size);
 			
+			mediaViewer.setOnMouseClicked(m -> {
+				
+				if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
+					
+					// If it isn't the same User again
+					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer) {
+						
+						setCenterIndex(itemsObservableList.indexOf(mediaViewer));
+					}
+					
+				}
+				
+			});
+			
 		}
 		
 		// MAX
@@ -482,7 +496,7 @@ public class Viewer extends Region {
 				( (User) itemsObservableList.get(i) ).updatePosition(i);
 			
 		//Recalculate the center index after a delete occurs.
-		calculateCenterAfterDelete();
+		calculateCenterIndex();
 	}
 	
 	/**
@@ -494,13 +508,13 @@ public class Viewer extends Region {
 		this.itemsObservableList.clear();
 		
 		//Recalculate the center index after a delete occurs.
-		calculateCenterAfterDelete();
+		calculateCenterIndex();
 	}
 	
 	/**
 	 * Recalculate the center index after a delete occurs.
 	 */
-	private void calculateCenterAfterDelete() {
+	private void calculateCenterIndex() {
 		
 		// center index
 		if (!leftGroup.getChildren().isEmpty())

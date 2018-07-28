@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
@@ -21,7 +20,4 @@
 	<cursor>
 		<Cursor fx:constant="HAND" />
 	</cursor>
-   <effect>
-      <DropShadow />
-   </effect>
 </fx:root>
