@@ -8,6 +8,7 @@ import org.jaudiotagger.tag.id3.ID3v1Tag;
 import org.jaudiotagger.tag.id3.ID3v24FieldKey;
 import org.jaudiotagger.tag.id3.ID3v24Tag;
 
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
@@ -45,6 +46,9 @@ public class MediaTagsService extends Service<Boolean> {
 	
 	private void done() {
 		
+		//Unbind
+		mediaTableViewer.getSmartController().unbind();
+		
 		//Try to Sort the table
 		mediaTableViewer.sortTable();
 		
@@ -72,8 +76,15 @@ public class MediaTagsService extends Service<Boolean> {
 		else
 			this.operation = AllDetailsServiceOperation.TAGS;
 		
+		//Bindings
+		mediaTableViewer.getSmartController().getIndicatorVBox().visibleProperty().bind(runningProperty());
+		mediaTableViewer.getSmartController().getIndicator().progressProperty().bind(progressProperty());
+		mediaTableViewer.getSmartController().getDescriptionLabel().setText("Gathering media information...");
+		mediaTableViewer.getSmartController().getDescriptionArea().setText("\n Gathering media information for playlist....");
+		
 		//Restart the Service
-		restart();
+		reset();
+		start();
 	}
 	
 	/**
@@ -111,6 +122,10 @@ public class MediaTagsService extends Service<Boolean> {
 			protected Boolean call() throws Exception {
 				
 				boolean[] success = { true };
+				int[] counter = { 0 };
+				int[] total = { mediaTableViewer.getSmartController().getItemsObservableList().size() };
+				if (operation == AllDetailsServiceOperation.ALL)
+					total[0] *= 2;
 				
 				//Add all the Tags to the Media
 				if (operation == AllDetailsServiceOperation.ALL || operation == AllDetailsServiceOperation.TAGS) {
@@ -353,17 +368,23 @@ public class MediaTagsService extends Service<Boolean> {
 						//-- ENCODER
 						media.encoderProperty().set(encoder.isEmpty() ? emptyWord : encoder);
 						
+						//Update the progress
+						updateProgress(++counter[0], total[0]);
 					});
+					
 				}
 				
 				//Try to do it for art work this time
 				if (operation == AllDetailsServiceOperation.ALL || operation == AllDetailsServiceOperation.ARTWORK_COLUMN) {
-					//System.out.println("Refreshing ArtWork")
+					Platform.runLater(() -> mediaTableViewer.getSmartController().getDescriptionLabel().setText("Finding album artwork..."));
 					
 					//For each
 					mediaTableViewer.getTableView().getItems().stream().forEach(media -> {
 						if (this.isCancelled())
 							return;
+						
+						//Update Progress
+						updateProgress(++counter[0], total[0]);
 						
 						//Check file 
 						File file = new File(media.getFilePath());
@@ -378,6 +399,7 @@ public class MediaTagsService extends Service<Boolean> {
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
+						
 					});
 				}
 				

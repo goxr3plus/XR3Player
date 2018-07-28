@@ -883,7 +883,7 @@ public class SmartController extends StackPane {
 		// update the label
 		updateLabel();
 		// refresh the tableViewer
-		normal_mode_mediaTableViewer.getTableView().refresh();
+		//normal_mode_mediaTableViewer.getTableView().refresh();
 		//if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
 		//	normal_mode_mediaTableViewer.getTableView().sort();
 		
