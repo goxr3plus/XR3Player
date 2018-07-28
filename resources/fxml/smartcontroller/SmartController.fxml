@@ -215,7 +215,7 @@
             <String fx:value="specialJFXTabPane" />
          </styleClass>
       </JFXTabPane>
-      <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
+      <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
          <children>
             <Label fx:id="descriptionLabel" alignment="CENTER" styleClass="white-black-label" text="Description Label" />
             <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="15.0" vgap="15.0">

@@ -22,7 +22,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerPlaylist;
 
 /**
  * 
