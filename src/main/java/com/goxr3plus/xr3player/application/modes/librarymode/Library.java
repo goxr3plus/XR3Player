@@ -926,7 +926,6 @@ public class Library extends StackPane {
 		if (firstLoadHack) {
 			setLibraryOpened(open, false);
 			Main.libraryMode.openedLibrariesViewer.insertTab(this);
-			getSmartController().getMainBorder().setTop(new BorderPane(new Viewer(Main.libraryMode, new ScrollBar())));
 		} else {
 			// Open
 			if (open && !isOpened()) {

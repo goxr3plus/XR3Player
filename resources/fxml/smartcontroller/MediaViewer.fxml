@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@../../image/application_background.jpg" />
+         </image>
+		</ImageView>
+	</children>
+	<cursor>
+		<Cursor fx:constant="HAND" />
+	</cursor>
+   <effect>
+      <DropShadow />
+   </effect>
+</fx:root>

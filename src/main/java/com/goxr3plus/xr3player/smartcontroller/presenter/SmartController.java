@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -527,6 +528,9 @@ public class SmartController extends StackPane {
 			}
 		});
 		
+		//MainBorder
+		mainBorder.setTop(new BorderPane(viewer));
+		
 	}
 	
 	public volatile boolean filtersModeSelected = false;
@@ -890,7 +894,12 @@ public class SmartController extends StackPane {
 		//normal_mode_mediaTableViewer.getTableView().refresh();
 		//if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
 		//	normal_mode_mediaTableViewer.getTableView().sort();
-		viewer.getItemsObservableList().
+		
+		//Update the Viewer
+		viewer.deleteAllItems();
+		viewer.addMultipleItems(itemsObservableList.stream().map(item -> {
+			return new MediaViewer();
+		}).collect(Collectors.toList()));
 	}
 	
 	/**

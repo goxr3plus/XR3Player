@@ -29,6 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.LibraryMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.LoginMode;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
 /**
@@ -308,7 +309,15 @@ public class Viewer extends Region {
 					User userr = (User) user;
 					userr.getImageView().setFitWidth(size);
 					userr.getImageView().setFitHeight(size);
-					userr.setMaxSize(size,size);
+					userr.setMaxSize(size, size);
+				});
+			else if (smartController != null)
+				itemsObservableList.forEach(mediaViewerr -> {
+					// --
+					MediaViewer mediaViewer = (MediaViewer) mediaViewerr;
+					mediaViewer.getImageView().setFitWidth(size);
+					mediaViewer.getImageView().setFitHeight(size);
+					mediaViewer.setMaxSize(size, size);
 				});
 			
 			// the current size of each
@@ -364,7 +373,7 @@ public class Viewer extends Region {
 			Library library = (Library) node;
 			library.getImageView().setFitWidth(size);
 			library.getImageView().setFitHeight(size);
-			library.setMaxSize(size,size);
+			library.setMaxSize(size, size);
 			
 			// --
 			node.setOnMouseClicked(m -> {
@@ -399,10 +408,11 @@ public class Viewer extends Region {
 				
 			});
 		} else if (loginMode != null) {
+			
 			User user = (User) node;
 			user.getImageView().setFitWidth(size);
 			user.getImageView().setFitHeight(size);
-			user.setMaxSize(size,size);
+			user.setMaxSize(size, size);
 			
 			// --
 			user.setOnMouseClicked(m -> {
@@ -437,6 +447,13 @@ public class Viewer extends Region {
 				}
 				
 			});
+		} else if (smartController != null) {
+			
+			MediaViewer mediaViewer = (MediaViewer) node;
+			mediaViewer.getImageView().setFitWidth(size);
+			mediaViewer.getImageView().setFitHeight(size);
+			mediaViewer.setMaxSize(size, size);
+			
 		}
 		
 		// MAX
