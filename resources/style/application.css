@@ -2143,6 +2143,10 @@
 	-fx-background-radius:0.0px;
 }
 
+.dark-text-field-rectangle:disabled{
+   -fx-opacity: 1.0;
+}
+
 .dark-text-area{	
 	-fx-background-color:#202020;
 	-fx-text-fill:white;

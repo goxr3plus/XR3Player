@@ -55,6 +55,7 @@ public class ExportWindowFolderHBox extends HBox {
 		textField.setPromptText("pick folder to export...");
 		textField.setFocusTraversable(false);
 		textField.setEditable(false);
+		textField.setDisable(true);
 		textField.setMinWidth(0);
 		textField.setMaxHeight(0);
 		HBox.setHgrow(textField, Priority.ALWAYS);

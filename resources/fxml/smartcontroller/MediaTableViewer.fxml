@@ -134,7 +134,10 @@
             <HBox style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                <children>
                   <InlineCssTextArea fx:id="detailCssTextArea" editable="false" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0" styleClass="inline-css-text-area" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="quickSearchTextField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="Search..." />
+                  <Label fx:id="quickSearchTextField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="Search...">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding></Label>
                </children>
             </HBox>
          </bottom>
