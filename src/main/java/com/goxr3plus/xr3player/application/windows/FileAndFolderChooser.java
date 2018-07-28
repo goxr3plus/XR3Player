@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -20,15 +21,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  */
 public class FileAndFolderChooser {
 	
-	/**
-	 * To be implemented to reduce the methods of this class
-	 * 
-	 * @author GOXR3PLUS
-	 *
-	 */
-	public enum FileType {
-	MUSIC, IMAGE, DBFILE;
-	}
 	
 	private static SimpleObjectProperty<File> lastKnownDirectoryProperty = new SimpleObjectProperty<>();
 	private static SimpleObjectProperty<File> lastKnownDBDirectoryProperty = new SimpleObjectProperty<>();
@@ -211,8 +203,11 @@ public class FileAndFolderChooser {
 	 *
 	 * @return the file
 	 */
-	public File showSaveDialog(String initialFileName) {
+	public File showSaveDialog(String initialFileName,FileType fileType) {
 		databaseFolderChooser.getExtensionFilters().clear();
+		if(fileType == FileType.ZIP) {
+			databaseFolderChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("zip", "*.zip"));
+		}
 		databaseFolderChooser.setInitialFileName(initialFileName);
 		File file = databaseFolderChooser.showSaveDialog(Main.window);
 		if (file != null) {

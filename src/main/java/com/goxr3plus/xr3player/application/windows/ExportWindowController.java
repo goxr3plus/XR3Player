@@ -5,15 +5,12 @@ package main.java.com.goxr3plus.xr3player.application.windows;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +27,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
@@ -139,7 +137,8 @@ public class ExportWindowController extends BorderPane {
 			Operation operation = Operation.COPY;
 			
 			//Nailed it!
-			smartController.getCopyOrMoveService().startOperation(foldersList, operation, filesToExport);
+			smartController.getCopyOrMoveService().startOperation(foldersList, operation, filesToExport,
+					( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder") ? FileType.DIRECTORY : FileType.ZIP);
 			
 			window.close();
 		});
@@ -149,6 +148,21 @@ public class ExportWindowController extends BorderPane {
 		
 		//addFolder
 		addFolder.setOnAction(a -> createFolderPickerBox());
+		
+		//exportAsGroup
+		exportAsGroup.selectedToggleProperty().addListener(l -> {
+			
+			//Check if the Folder Option is selected
+			if ( ( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder")) {
+				//Fix the value for each TextField
+				exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField()).filter(textField -> !textField.getText().isEmpty())
+						.forEach(textField -> textField.setText(textField.getText().replaceAll(".zip", "")));
+			} else {
+				//Fix the value for each TextField
+				exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField()).filter(textField -> !textField.getText().isEmpty())
+						.forEach(textField -> textField.appendText(".zip"));
+			}
+		});
 		
 		//Create one Folder Picker at least
 		createFolderPickerBox();
@@ -176,7 +190,8 @@ public class ExportWindowController extends BorderPane {
 	 * @param exportField
 	 */
 	private void pickFolder(TextField exportField) {
-		File file = Main.specialChooser.showSaveDialog(smartController.getName());
+		File file = Main.specialChooser.showSaveDialog(smartController.getName(),
+				( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder") ? FileType.DIRECTORY : FileType.ZIP);
 		
 		//Selected any folder?
 		if (file != null) {

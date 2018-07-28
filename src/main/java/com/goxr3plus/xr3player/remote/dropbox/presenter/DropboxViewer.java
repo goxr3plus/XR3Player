@@ -43,6 +43,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthanticationBrowser;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloadedFile;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.services.AccountsService;
@@ -600,14 +601,14 @@ public class DropboxViewer extends StackPane {
 		if (!dropboxFile.isDirectory()) {
 			
 			//Show save dialog	
-			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle());
+			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle(),FileType.FILE);
 			return downloadFilePart2(dropboxFile, file);
 			
 			//Directory
 		} else {
 			
 			//Show save dialog	
-			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle() + ".zip");
+			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle() + ".zip",FileType.DIRECTORY);
 			return downloadFilePart2(dropboxFile, file);
 			
 		}

@@ -527,7 +527,7 @@ public final class ActionTool {
 	 *
 	 */
 	public enum FileType {
-		DIRECTORY, FILE;
+		DIRECTORY, FILE ,ZIP;
 	}
 	
 	/**
