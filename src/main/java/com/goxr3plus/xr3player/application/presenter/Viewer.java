@@ -46,10 +46,10 @@ public class Viewer extends Region {
 	private double height = width + 0.4 * width;
 	
 	/** The duration. */
-	private final Duration duration = Duration.millis(450);
+	private Duration duration;
 	
 	/** The interpolator. */
-	private final Interpolator interpolator = Interpolator.EASE_BOTH;
+	private Interpolator interpolator;
 	
 	/** The Constant SPACING. */
 	private double spacing = 120;
@@ -109,17 +109,23 @@ public class Viewer extends Region {
 	public Viewer(LibraryMode libraryMode, ScrollBar scrollBar) {
 		this.libraryMode = libraryMode;
 		this.scrollBar = scrollBar;
+		duration = Duration.millis(450);
+		interpolator = Interpolator.EASE_BOTH;
 		init();
 	}
 	
 	public Viewer(LoginMode loginMode, ScrollBar scrollBar) {
 		this.loginMode = loginMode;
 		this.scrollBar = scrollBar;
+		duration = Duration.millis(450);
+		interpolator = Interpolator.EASE_BOTH;
 		init();
 	}
 	
 	public Viewer(SmartController smartController) {
 		this.smartController = smartController;
+		duration = Duration.millis(150);
+		interpolator = Interpolator.EASE_BOTH;
 		init();
 	}
 	
@@ -272,8 +278,6 @@ public class Viewer extends Region {
 	
 	@Override
 	protected void layoutChildren() {
-		
-		System.out.print("Laying out children...." + getWidth() + "," + getHeight());
 		
 		// update clip to our size
 		clip.setWidth(getWidth());
@@ -690,6 +694,8 @@ public class Viewer extends Region {
 				
 			}
 			
+			//duration = Duration.millis(150)
+			
 			// stop old time line
 			if (timeline.getStatus() == Status.RUNNING)
 				timeline.stop();
@@ -771,7 +777,6 @@ public class Viewer extends Region {
 			timeline.setAutoReverse(true);
 			timeline.play();
 			
-			layoutChildren();
 		} else
 			//The Property Center Item
 			this.centerItemProperty.set(null);

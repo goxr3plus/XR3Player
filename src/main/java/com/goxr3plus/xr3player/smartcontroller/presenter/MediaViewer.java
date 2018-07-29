@@ -1,12 +1,18 @@
 package main.java.com.goxr3plus.xr3player.smartcontroller.presenter;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
@@ -64,13 +70,12 @@ public class MediaViewer extends StackPane {
 	public Media getMedia() {
 		return media;
 	}
-
+	
 	/**
 	 * @return the mediaName
 	 */
 	public Label getNameLabel() {
 		return nameLabel;
 	}
-
 	
 }

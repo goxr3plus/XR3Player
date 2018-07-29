@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -553,7 +552,7 @@ public class SmartController extends StackPane {
 		});
 		
 		//viewerStackPane
-		viewerStackPane.getChildren().add(0, mediaViewer);
+		viewerStackPane.getChildren().add(0, new BorderPane(mediaViewer));
 		
 		//mediaViewerVBox
 		mediaViewerVBox.visibleProperty().bind(mediaViewerService.runningProperty());
@@ -1423,6 +1422,13 @@ public class SmartController extends StackPane {
 	 */
 	public MediaViewerService getMediaViewerService() {
 		return mediaViewerService;
+	}
+	
+	/**
+	 * @return the viewerSplitPane
+	 */
+	public SplitPane getViewerSplitPane() {
+		return viewerSplitPane;
 	}
 	
 	/*-----------------------------------------------------------------------

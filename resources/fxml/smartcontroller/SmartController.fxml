@@ -30,7 +30,7 @@
    <children>
       <SplitPane fx:id="viewerSplitPane" dividerPositions="0.25" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: rgb(0,0,0,0.8);">
          <items>
-            <StackPane fx:id="viewerStackPane" minHeight="0.0" minWidth="0.0">
+            <StackPane fx:id="viewerStackPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
                <children>
                   <VBox fx:id="mediaViewerVBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
                      <children>

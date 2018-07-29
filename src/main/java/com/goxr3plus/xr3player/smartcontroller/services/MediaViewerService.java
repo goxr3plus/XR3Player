@@ -1,5 +1,7 @@
 package main.java.com.goxr3plus.xr3player.smartcontroller.services;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +10,11 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
@@ -41,6 +48,16 @@ public class MediaViewerService extends Service<Void> {
 	// Work done
 	public void done() {
 		
+		try {
+			//	double[] positions = smartController.getViewerSplitPane().getDividerPositions();
+			//	positions[0] += 0.002;
+			//	smartController.getViewerSplitPane().setDividerPositions(positions);
+			
+			//	positions[0] -= 0.005;
+			//	smartController.getViewerSplitPane().setDividerPositions(positions);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -78,6 +95,27 @@ public class MediaViewerService extends Service<Void> {
 							mediaViewer.getNameLabel().setText(media.getTitle());
 							mediaViewer.getNameLabel().setVisible(true);
 						}
+						
+						// --Drag Detected
+						mediaViewer.setOnDragDetected(event -> {
+							
+							/* allow copy transfer mode */
+							Dragboard db = mediaViewer.startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
+							
+							/* put a string on drag board */
+							ClipboardContent content = new ClipboardContent();
+							
+							// PutFiles
+							content.putFiles(Arrays.asList(new File(media.getFilePath())));
+							
+							//Set DragView
+							JavaFXTools.setDragView(db, media.getAlbumImageFit(100, 100), media.getTitle());
+							
+							//Set Content
+							db.setContent(content);
+							
+							event.consume();
+						});
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}

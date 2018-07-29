@@ -14,12 +14,16 @@ import java.util.stream.Stream;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -330,6 +334,22 @@ public final class JavaFXTools {
 			icon.setIconSize(size);
 		
 		return icon;
+	}
+	
+	public static void setDragView(Dragboard dragBoard , Image image , String fileName) {
+		// System.out.println("AlbumIamge=["+getAlbumImage()+"]")
+		if (image != null)
+			dragBoard.setDragView(image, 50, 0);
+		else {
+			WritableImage writableImage = new WritableImage(100, 100);
+			Canvas canvas = new Canvas();
+			canvas.setWidth(100);
+			canvas.setHeight(100);
+			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), fileName, 100, 100);
+			SnapshotParameters params = new SnapshotParameters();
+			params.setFill(Color.TRANSPARENT);
+			dragBoard.setDragView(canvas.snapshot(params, writableImage), 50, 0);
+		}
 	}
 	
 }

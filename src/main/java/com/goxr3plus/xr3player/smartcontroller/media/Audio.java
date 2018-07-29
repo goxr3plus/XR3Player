@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
@@ -68,8 +69,8 @@ public class Audio extends Media {
 	 * @param genre
 	 *            The genre of the Media <b> see the Genre class for more </b>
 	 */
-	public Audio(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre,int number) {
-		super(path, stars, timesPlayed, dateImported, hourImported, genre,number);
+	public Audio(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre, int number) {
+		super(path, stars, timesPlayed, dateImported, hourImported, genre, number);
 	}
 	
 	/**
@@ -95,19 +96,7 @@ public class Audio extends Media {
 	 */
 	@Override
 	public void setDragView(Dragboard db) {
-		// System.out.println("AlbumIamge=["+getAlbumImage()+"]")
-		if (getAlbumImage() != null)
-			db.setDragView(getAlbumImageFit(100, 100), 50, 0);
-		else {
-			WritableImage image = new WritableImage(100, 100);
-			Canvas canvas = new Canvas();
-			canvas.setWidth(100);
-			canvas.setHeight(100);
-			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), getFileName(), 100, 100);
-			SnapshotParameters params = new SnapshotParameters();
-			params.setFill(Color.TRANSPARENT);
-			db.setDragView(canvas.snapshot(params, image), 50, 0);
-		}
+		JavaFXTools.setDragView(db, getAlbumImageFit(100, 100), getTitle());
 	}
 	
 	/**
