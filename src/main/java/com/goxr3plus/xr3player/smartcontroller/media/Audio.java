@@ -96,7 +96,7 @@ public class Audio extends Media {
 	 */
 	@Override
 	public void setDragView(Dragboard db) {
-		JavaFXTools.setDragView(db, getAlbumImageFit(100, 100), getTitle());
+		JavaFXTools.setDragView(db, this);
 	}
 	
 	/**

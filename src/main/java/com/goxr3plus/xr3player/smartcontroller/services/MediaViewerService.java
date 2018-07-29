@@ -108,7 +108,7 @@ public class MediaViewerService extends Service<Void> {
 							content.putFiles(Arrays.asList(new File(media.getFilePath())));
 							
 							//Set DragView
-							JavaFXTools.setDragView(db, media.getAlbumImageFit(100, 100), media.getTitle());
+							JavaFXTools.setDragView(db, media);
 							
 							//Set Content
 							db.setContent(content);

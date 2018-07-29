@@ -101,6 +101,7 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloa
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.DragViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -224,13 +225,18 @@ public class Main extends Application {
 	//
 	
 	/** The Constant specialChooser. */
-	public static FileAndFolderChooser specialChooser = new FileAndFolderChooser();;
+	public static FileAndFolderChooser specialChooser = new FileAndFolderChooser();
 	
 	/** XPlayList holds the instances of XPlayerControllers */
 	public static XPlayersList xPlayersList = new XPlayersList();
 	
 	/** The Constant . */
 	public static PlayedMediaList playedSongs = new PlayedMediaList();
+	
+	/**
+	 * Used to provide ui for drag and view
+	 */
+	public final static DragViewer dragViewer = new DragViewer();
 	
 	//----------------END: The above have not dependencies on other classes ---------------------------------//
 	
@@ -614,7 +620,7 @@ public class Main extends Application {
 		libraryMode.librariesSearcher.registerListeners(window);
 		
 		//----------ApplicationStackPane---------
-		applicationStackPane.getChildren().addAll(root, loginMode, updateScreen, welcomeScreen);
+		applicationStackPane.getChildren().addAll(dragViewer, root, loginMode, updateScreen, welcomeScreen);
 		
 		//----------Load Application Users-------
 		loadTheUsers();
@@ -692,7 +698,7 @@ public class Main extends Application {
 		
 		//Prepare the BackgroundImageView
 		loginMode.getChildren().remove(loginMode.getBackgroundImageView());
-		applicationStackPane.getChildren().add(0, loginMode.getBackgroundImageView());
+		applicationStackPane.getChildren().add(1, loginMode.getBackgroundImageView());
 		
 		//SideBar	
 		sideBar.prepareForLoginMode(false);
@@ -721,13 +727,13 @@ public class Main extends Application {
 			if (loginMode.teamViewer.getItemsObservableList().size() == 1)
 				settingsWindow.getCopySettingsMenuButton().setDisable(true);
 			else
-				loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> !( (User) userr ).getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
+				loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
 					
 					//Create the MenuItem
-					MenuItem menuItem = new MenuItem(InfoTool.getMinString(( (User) userr ).getUserName(), 50));
+					MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getUserName(), 50));
 					
 					//Set Image
-					ImageView imageView = new ImageView(( (User) userr ).getImageView().getImage());
+					ImageView imageView = new ImageView( ( (User) userr ).getImageView().getImage());
 					imageView.setFitWidth(24);
 					imageView.setFitHeight(24);
 					menuItem.setGraphic(imageView);
@@ -760,9 +766,8 @@ public class Main extends Application {
 					});
 					
 					//Disable if user has no settings defined
-					if (!new File(
-							InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getUserName() + File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
-									.exists())
+					if (!new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getUserName() + File.separator + "settings" + File.separator
+							+ InfoTool.USER_SETTINGS_FILE_NAME).exists())
 						menuItem.setDisable(true);
 					
 					//Finally add the Menu Item

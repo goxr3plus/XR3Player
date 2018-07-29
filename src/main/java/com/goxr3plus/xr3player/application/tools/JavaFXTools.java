@@ -28,7 +28,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
+import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.DragViewer;
 
 /**
  * This class has some functions that are not there by default in JavaFX 8
@@ -336,20 +339,22 @@ public final class JavaFXTools {
 		return icon;
 	}
 	
-	public static void setDragView(Dragboard dragBoard , Image image , String fileName) {
-		// System.out.println("AlbumIamge=["+getAlbumImage()+"]")
-		if (image != null)
-			dragBoard.setDragView(image, 50, 0);
-		else {
-			WritableImage writableImage = new WritableImage(100, 100);
-			Canvas canvas = new Canvas();
-			canvas.setWidth(100);
-			canvas.setHeight(100);
-			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), fileName, 100, 100);
-			SnapshotParameters params = new SnapshotParameters();
-			params.setFill(Color.TRANSPARENT);
-			dragBoard.setDragView(canvas.snapshot(params, writableImage), 50, 0);
-		}
+	public static void setDragView(Dragboard dragBoard , Media media) {
+		SnapshotParameters params = new SnapshotParameters();
+		params.setFill(Color.TRANSPARENT);
+		dragBoard.setDragView(Main.dragViewer.updateMedia(media).snapshot(params, new WritableImage(150, 150)), 50, 0);
+		//		if (image != null)
+		//			dragBoard.setDragView(image, 50, 0);
+		//		else {
+		//			WritableImage writableImage = new WritableImage(100, 100);
+		//			Canvas canvas = new Canvas();
+		//			canvas.setWidth(100);
+		//			canvas.setHeight(100);
+		//			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), fileName, 100, 100);
+		//			SnapshotParameters params = new SnapshotParameters();
+		//			params.setFill(Color.TRANSPARENT);
+		//			dragBoard.setDragView(canvas.snapshot(params, writableImage), 50, 0);
+		//		}
 	}
 	
 }

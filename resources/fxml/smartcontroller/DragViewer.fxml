@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root pickOnBounds="false" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+		</ImageView>
+      <Label fx:id="nameLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Media Name " textAlignment="CENTER" wrapText="true" />
+	</children>
+	<cursor>
+		<Cursor fx:constant="HAND" />
+	</cursor>
+</fx:root>
