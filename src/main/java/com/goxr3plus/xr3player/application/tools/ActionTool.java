@@ -26,7 +26,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -34,8 +33,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -325,7 +322,6 @@ public final class ActionTool {
 		
 		return true;
 	}
-
 	
 	/**
 	 * Show a notification.
@@ -527,7 +523,7 @@ public final class ActionTool {
 	 *
 	 */
 	public enum FileType {
-		DIRECTORY, FILE ,ZIP;
+		DIRECTORY, FILE, ZIP;
 	}
 	
 	/**
@@ -566,36 +562,6 @@ public final class ActionTool {
 			e.printStackTrace();
 			return false;
 		}
-	}
-	
-	/**
-	 * Paint the given text on the given graphics context.
-	 *
-	 * @param gc
-	 *            the gc
-	 * @param text
-	 *            the text
-	 * @param width
-	 *            the width
-	 * @param height
-	 *            the height
-	 */
-	public static void paintCanvas(GraphicsContext gc , String text , int width , int height) {
-		
-		// Clear
-		gc.clearRect(0, 0, width, height);
-		
-		// Paint it
-		gc.setLineWidth(2);
-		//gc.setLineDashes(3);
-		gc.setFill(Color.web("#202020"));
-		gc.fillRoundRect(0, 0, width, height, 15, 15);
-		//gc.setStroke(Color.BLACK);
-		//gc.strokeRoundRect(0, 0, width, height, 15, 15);
-		gc.setFill(Color.WHITE);
-		gc.setFont(Font.font(null, FontWeight.BOLD, 14));
-		gc.fillText(text, 4, height / 2.00);
-		
 	}
 	
 }

@@ -34,7 +34,6 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -292,8 +291,7 @@ public class DropboxFilesTableViewer extends StackPane {
 				content.putString("#dropbox_item#");
 				
 				// DragView
-				ActionTool.paintCanvas(canvas.getGraphicsContext2D(), tableView.getSelectionModel().getSelectedItem().getTitle(), 100, 100);
-				db.setDragView(canvas.snapshot(null, image), 50, 0);
+				JavaFXTools.setPlainTextDragView(db, tableView.getSelectionModel().getSelectedItem().getTitle());
 				
 				db.setContent(content);
 			}

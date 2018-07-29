@@ -15,7 +15,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Labeled;
@@ -31,7 +30,6 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
-import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.DragViewer;
 
 /**
  * This class has some functions that are not there by default in JavaFX 8
@@ -339,22 +337,28 @@ public final class JavaFXTools {
 		return icon;
 	}
 	
+	/**
+	 * This method is used for the drag view of Media
+	 * 
+	 * @param dragBoard
+	 * @param media
+	 */
 	public static void setDragView(Dragboard dragBoard , Media media) {
 		SnapshotParameters params = new SnapshotParameters();
 		params.setFill(Color.TRANSPARENT);
 		dragBoard.setDragView(Main.dragViewer.updateMedia(media).snapshot(params, new WritableImage(150, 150)), 50, 0);
-		//		if (image != null)
-		//			dragBoard.setDragView(image, 50, 0);
-		//		else {
-		//			WritableImage writableImage = new WritableImage(100, 100);
-		//			Canvas canvas = new Canvas();
-		//			canvas.setWidth(100);
-		//			canvas.setHeight(100);
-		//			ActionTool.paintCanvas(canvas.getGraphicsContext2D(), fileName, 100, 100);
-		//			SnapshotParameters params = new SnapshotParameters();
-		//			params.setFill(Color.TRANSPARENT);
-		//			dragBoard.setDragView(canvas.snapshot(params, writableImage), 50, 0);
-		//		}
+	}
+	
+	/**
+	 * This view is used for plain text drag view
+	 * 
+	 * @param dragBoard
+	 * @param title
+	 */
+	public static void setPlainTextDragView(Dragboard dragBoard , String title) {
+		SnapshotParameters params = new SnapshotParameters();
+		params.setFill(Color.TRANSPARENT);
+		dragBoard.setDragView(Main.dragViewer.updateDropboxMedia(title).snapshot(params, new WritableImage(150, 150)), 50, 0);
 	}
 	
 }

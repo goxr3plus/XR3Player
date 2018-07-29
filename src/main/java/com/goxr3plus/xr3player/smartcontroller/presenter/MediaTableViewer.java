@@ -338,18 +338,18 @@ public class MediaTableViewer extends StackPane {
 		tableView.setRowFactory(rf -> {
 			TableRow<Media> row = new TableRow<>();
 			
-//			// use EasyBind to access the valueProperty of the itemProperty
-//			// of the cell:
-//			row.disableProperty().bind(
-//					// start at itemProperty of row
-//					EasyBind.select(row.itemProperty())
-//							// map to fileExistsProperty[a boolean] of item,
-//							// if item non-null
-//							.selectObject(Media::fileExistsProperty)
-//							// map to BooleanBinding checking if false
-//							.map(x -> !x.booleanValue())
-//							// value to use if item was null
-//							.orElse(false));
+			//			// use EasyBind to access the valueProperty of the itemProperty
+			//			// of the cell:
+			//			row.disableProperty().bind(
+			//					// start at itemProperty of row
+			//					EasyBind.select(row.itemProperty())
+			//							// map to fileExistsProperty[a boolean] of item,
+			//							// if item non-null
+			//							.selectObject(Media::fileExistsProperty)
+			//							// map to BooleanBinding checking if false
+			//							.map(x -> !x.booleanValue())
+			//							// value to use if item was null
+			//							.orElse(false));
 			
 			//Mouse Listener
 			row.setFocusTraversable(true);
@@ -389,11 +389,10 @@ public class MediaTableViewer extends StackPane {
 				
 				// Single Drag and Drop ?
 				if (content.getFiles().size() == 1)
-					tableView.getSelectionModel().getSelectedItem().setDragView(db);
+					JavaFXTools.setDragView(db, tableView.getSelectionModel().getSelectedItem());
 				// Multiple Drag and Drop ?
 				else {
-					ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
-					db.setDragView(canvas.snapshot(null, image), 50, 0);
+					JavaFXTools.setPlainTextDragView(db, "(" + content.getFiles().size() + ")Items");
 				}
 				
 				db.setContent(content);
@@ -596,7 +595,7 @@ public class MediaTableViewer extends StackPane {
 							Main.xPlayersList.getList().stream().sorted((o1 , o2) -> Integer.valueOf(o1.getKey()).compareTo(o2.getKey())).forEach(controller -> {
 								String path = controller.getxPlayerModel().songPathProperty().get();
 								//Check if it matches
-								if (path!=null && path.equals(mediaPath))
+								if (path != null && path.equals(mediaPath))
 									flowPane.getChildren().addAll(JavaFXTools.getFontIcon("gmi-filter-" + ( controller.getKey() + 1 ), Color.WHITE, 24));
 								
 							});

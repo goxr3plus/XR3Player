@@ -81,6 +81,15 @@ public class DragViewer extends StackPane {
 		return nameLabel;
 	}
 	
+	public Node updateDropboxMedia(String title) {
+		
+		getNameLabel().setText(title);
+		getNameLabel().setVisible(true);
+		
+		return nameLabel;
+		
+	}
+	
 	/**
 	 * @return the imageView
 	 */

@@ -255,15 +255,9 @@ public class DropboxDownloadsTableViewer extends StackPane {
 				content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getDownloadService().getLocalFileAbsolutePath()))
 						.collect(Collectors.toList()));
 				
-				// Single Drag and Drop ?
-				if (content.getFiles().size() == 1) {
-					ActionTool.paintCanvas(canvas.getGraphicsContext2D(), tableView.getSelectionModel().getSelectedItem().getTitle(), 100, 100);
-					db.setDragView(canvas.snapshot(null, image), 50, 0);
-					// Multiple Drag and Drop ?
-				} else {
-					ActionTool.paintCanvas(canvas.getGraphicsContext2D(), "(" + content.getFiles().size() + ")Items", 100, 100);
-					db.setDragView(canvas.snapshot(null, image), 50, 0);
-				}
+				//Set Drag View
+				JavaFXTools.setPlainTextDragView(db,
+						content.getFiles().size() == 1 ? tableView.getSelectionModel().getSelectedItem().getTitle() : "(" + content.getFiles().size() + ")Items");
 				
 				db.setContent(content);
 			}
