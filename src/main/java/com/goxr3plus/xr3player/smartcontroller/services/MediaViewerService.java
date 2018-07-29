@@ -1,9 +1,12 @@
 package main.java.com.goxr3plus.xr3player.smartcontroller.services;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -55,7 +58,7 @@ public class MediaViewerService extends Service<Void> {
 				updateMessage("Generating album views");
 				
 				//Update the Viewer
-				smartController.getMediaViewer().addMultipleItems(smartController.getItemsObservableList().stream().map(media -> {
+				List<Node> mediaList = smartController.getItemsObservableList().stream().map(media -> {
 					
 					//Update Progress
 					updateProgress(++counter[0], total);
@@ -67,6 +70,7 @@ public class MediaViewerService extends Service<Void> {
 						//Image can be null , remember.
 						Image image = media.getAlbumImage();
 						
+						//Image exists?
 						if (image != null) {
 							mediaViewer.getImageView().setImage(image);
 							mediaViewer.getNameLabel().setVisible(false);
@@ -79,7 +83,10 @@ public class MediaViewerService extends Service<Void> {
 					}
 					
 					return mediaViewer;
-				}).collect(Collectors.toList()));
+				}).collect(Collectors.toList());
+				
+				//Run on JavaFX Thread
+				Platform.runLater(() -> smartController.getMediaViewer().addMultipleItems(mediaList));
 				
 				return null;
 			}

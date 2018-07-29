@@ -273,6 +273,8 @@ public class Viewer extends Region {
 	@Override
 	protected void layoutChildren() {
 		
+		System.out.print("Laying out children...." + getWidth() + "," + getHeight());
+		
 		// update clip to our size
 		clip.setWidth(getWidth());
 		clip.setHeight(getHeight());
@@ -486,6 +488,7 @@ public class Viewer extends Region {
 			mediaViewer.getImageView().setFitWidth(size);
 			mediaViewer.getImageView().setFitHeight(size);
 			mediaViewer.setMaxSize(size, size);
+			mediaViewer.getNameLabel().setMaxSize(size, size);
 			
 			mediaViewer.setOnMouseClicked(m -> {
 				
@@ -537,8 +540,8 @@ public class Viewer extends Region {
 						Bounds bounds = mediaViewer.localToScreen(mediaViewer.getBoundsInLocal());
 						
 						//Show Context Menu
-						Main.songsContextMenu.showContextMenu(mediaViewer.getMedia(), smartController.getGenre(), bounds.getMinX()+25,
-								bounds.getMinY() + bounds.getHeight() / 4, smartController, mediaViewer);
+						Main.songsContextMenu.showContextMenu(mediaViewer.getMedia(), smartController.getGenre(), bounds.getMinX() + 25, bounds.getMinY() + bounds.getHeight() / 4,
+								smartController, mediaViewer);
 					}
 					
 				}
@@ -551,7 +554,6 @@ public class Viewer extends Region {
 		
 		//Update?
 		if (update)
-			
 			update();
 		
 	}
@@ -768,6 +770,8 @@ public class Viewer extends Region {
 			// play animation
 			timeline.setAutoReverse(true);
 			timeline.play();
+			
+			layoutChildren();
 		} else
 			//The Property Center Item
 			this.centerItemProperty.set(null);
