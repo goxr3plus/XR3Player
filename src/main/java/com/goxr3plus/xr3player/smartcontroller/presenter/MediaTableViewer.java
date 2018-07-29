@@ -20,7 +20,6 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -32,7 +31,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -239,12 +237,6 @@ public class MediaTableViewer extends StackPane {
 	/** AllDetailsService */
 	private final MediaTagsService allDetailsService = new MediaTagsService();
 	
-	/** The image. */
-	private WritableImage image = new WritableImage(100, 100);
-	
-	/** The canvas. */
-	private Canvas canvas = new Canvas();
-	
 	private final SmartController smartController;
 	
 	private int previousSelectedCount = 0;
@@ -261,11 +253,7 @@ public class MediaTableViewer extends StackPane {
 		this.smartController = smartController;
 		this.mode = mode;
 		
-		//Canvas
-		canvas.setWidth(100);
-		canvas.setHeight(100);
-		
-		// FXMLLOADRE
+		// FXML Loader
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaTableViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);

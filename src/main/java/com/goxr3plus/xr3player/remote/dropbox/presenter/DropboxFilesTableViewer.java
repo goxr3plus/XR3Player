@@ -13,7 +13,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -23,7 +22,6 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
@@ -76,20 +74,10 @@ public class DropboxFilesTableViewer extends StackPane {
 	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 	private final StringProperty searchWord = new SimpleStringProperty("");
 	
-	/** The image. */
-	private WritableImage image = new WritableImage(100, 100);
-	
-	/** The canvas. */
-	private Canvas canvas = new Canvas();
-	
 	/**
 	 * Constructor.
 	 */
 	public DropboxFilesTableViewer() {
-		
-		//Canvas
-		canvas.setWidth(100);
-		canvas.setHeight(100);
 		
 		// FXMLoader
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxFilesTableViewer.fxml"));
