@@ -1224,7 +1224,7 @@ public class SmartController extends StackPane {
 	 */
 	public Optional<ScrollBar> getVerticalScrollBar() {
 		
-		return Optional.ofNullable((ScrollBar) getNormalModeMediatTableViewer().getTableView().lookup(".scroll-bar:vertical"));
+		return Optional.ofNullable((ScrollBar) getNormalModeMediaTableViewer().getTableView().lookup(".scroll-bar:vertical"));
 	}
 	
 	/**
@@ -1286,7 +1286,7 @@ public class SmartController extends StackPane {
 	/**
 	 * @return the tableViewer
 	 */
-	public MediaTableViewer getNormalModeMediatTableViewer() {
+	public MediaTableViewer getNormalModeMediaTableViewer() {
 		return normal_mode_mediaTableViewer;
 	}
 	

@@ -110,7 +110,7 @@ public class SmartControllerFoldersMode extends StackPane {
 		super.setOnDragOver(dragOver -> {
 			
 			// The drag must come from source other than the owner
-			if (dragOver.getGestureSource() != smartController.getNormalModeMediatTableViewer())// && dragOver.getGestureSource() != smartController.foldersMode)
+			if (dragOver.getGestureSource() != smartController.getNormalModeMediaTableViewer())// && dragOver.getGestureSource() != smartController.foldersMode)
 				dragOver.acceptTransferModes(TransferMode.LINK);
 			
 		});

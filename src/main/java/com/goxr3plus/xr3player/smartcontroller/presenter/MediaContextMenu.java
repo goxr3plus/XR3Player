@@ -312,20 +312,20 @@ public class MediaContextMenu extends ContextMenu {
 		else if (source == rename)
 			media.rename(node);
 		else if (source == copy)
-			controller.getNormalModeMediatTableViewer().copySelectedMediaToClipBoard();
+			controller.getNormalModeMediaTableViewer().copySelectedMediaToClipBoard();
 		else if (source == paste)
-			controller.getNormalModeMediatTableViewer().pasteMediaFromClipBoard();
+			controller.getNormalModeMediaTableViewer().pasteMediaFromClipBoard();
 		else if (source == stars)
 			media.updateStars(node);
 		else if (source == showFile) // File path
 			ActionTool.openFileLocation(media.getFilePath());
 		else if (source == editFileInfo) {
 			//More than 1 selected?
-			if (controller.getNormalModeMediatTableViewer().getSelectedCount() > 1)
+			if (controller.getNormalModeMediaTableViewer().getSelectedCount() > 1)
 				Main.tagWindow.openMultipleAudioFiles(
-						controller.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
+						controller.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
 								.collect(Collectors.toCollection(FXCollections::observableArrayList)),
-						controller.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItem().getFilePath());
+						controller.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItem().getFilePath());
 			//Only one file selected
 			else
 				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO, true);

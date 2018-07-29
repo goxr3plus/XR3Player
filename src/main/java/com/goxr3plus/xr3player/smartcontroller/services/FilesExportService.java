@@ -144,14 +144,14 @@ public class FilesExportService extends Service<Boolean> {
 						} else if (filesToExport == FilesMode.SELECTED_MEDIA) { // SELECTED_FROM_CURRENT_PAGE
 							
 							//Count total files that will be exported
-							total = smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().size();
+							total = smartController.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems().size();
 							Platform.runLater(() -> smartController.getDescriptionArea().setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 							
 							// Stream
 							Stream<String> stream =
 									//Is Filter Mode Selected?
 									( !smartController.getFiltersModeTab().isSelected() )
-											? smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
+											? smartController.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
 											: smartController.getFiltersMode().getMediaTableViewer().getTableView().getSelectionModel().getSelectedItems().stream()
 													.map(Media::getFilePath);
 							

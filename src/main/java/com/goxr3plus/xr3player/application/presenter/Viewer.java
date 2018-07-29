@@ -334,7 +334,7 @@ public class Viewer extends Region {
 				
 				// Update ImageView width and height
 				spacing = height / ( var - 0.4 );
-				leftOffSet = - 0;
+				leftOffSet = -0;
 				rightOffSet = -leftOffSet;
 				
 				// For-Each
@@ -493,15 +493,56 @@ public class Viewer extends Region {
 					
 					// If it isn't the same User again
 					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer) {
+						
+						//Update Center Index
 						setCenterIndex(itemsObservableList.indexOf(mediaViewer));
-						Main.mediaInformation.updateInformation(mediaViewer.getMedia());
+						
+						//Show Media Information
+						//Main.mediaInformation.updateInformation(mediaViewer.getMedia())
+						
+						//Select the matching item on Playlist
+						smartController.getItemsObservableList().stream().filter(media -> media.getFilePath().equals(mediaViewer.getMedia().getFilePath())).findFirst()
+								.ifPresent(media -> {
+									smartController.getNormalModeMediaTableViewer().getSelectionModel().clearSelection();
+									smartController.getNormalModeMediaTableViewer().getSelectionModel().select(media);
+								});
+					}
+				} else if (m.getButton() == MouseButton.SECONDARY) {
+					
+					// If it isn't the same User again
+					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer) {
+						
+						//Update Center Index
+						setCenterIndex(itemsObservableList.indexOf(mediaViewer));
+						
+						//Select the matching item on Playlist
+						smartController.getItemsObservableList().stream().filter(media -> media.getFilePath().equals(mediaViewer.getMedia().getFilePath())).findFirst()
+								.ifPresent(media -> {
+									smartController.getNormalModeMediaTableViewer().getSelectionModel().clearSelection();
+									smartController.getNormalModeMediaTableViewer().getSelectionModel().select(media);
+								});
+								
+						//Set on timeline finished
+						timeline.setOnFinished(finished -> {
+							//Bounds
+							Bounds bounds = mediaViewer.localToScreen(mediaViewer.getBoundsInLocal());
+							
+							//Show Context Menu
+							Main.songsContextMenu.showContextMenu(mediaViewer.getMedia(), smartController.getGenre(), bounds.getMinX() + 25,
+									bounds.getMinY() + bounds.getHeight() / 4, smartController, mediaViewer);
+							timeline.setOnFinished(null);
+						});
+					} else {
+						//Bounds
+						Bounds bounds = mediaViewer.localToScreen(mediaViewer.getBoundsInLocal());
+						
+						//Show Context Menu
+						Main.songsContextMenu.showContextMenu(mediaViewer.getMedia(), smartController.getGenre(), bounds.getMinX()+25,
+								bounds.getMinY() + bounds.getHeight() / 4, smartController, mediaViewer);
 					}
 					
-					
 				}
-				
 			});
-			
 		}
 		
 		// MAX
@@ -510,7 +551,9 @@ public class Viewer extends Region {
 		
 		//Update?
 		if (update)
+			
 			update();
+		
 	}
 	
 	/**

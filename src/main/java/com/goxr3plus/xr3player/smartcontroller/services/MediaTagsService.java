@@ -53,7 +53,7 @@ public class MediaTagsService extends Service<Boolean> {
 		mediaTableViewer.sortTable();
 		
 		//Refresh the Main Mode Table View
-		mediaTableViewer.getSmartController().getNormalModeMediatTableViewer().getTableView().refresh();
+		mediaTableViewer.getSmartController().getNormalModeMediaTableViewer().getTableView().refresh();
 	}
 	
 	/**

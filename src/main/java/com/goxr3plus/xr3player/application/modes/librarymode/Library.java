@@ -384,7 +384,7 @@ public class Library extends StackPane {
 				Main.libraryMode.viewer.setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView() && event.getGestureSource() != controller.getFoldersMode()
+			if (event.getGestureSource() != controller.getNormalModeMediaTableViewer().getTableView() && event.getGestureSource() != controller.getFoldersMode()
 					&& event.getGestureSource() != controller.getFiltersMode().getMediaTableViewer().getTableView())
 				dragAndDropLabel.setVisible(true);
 			
@@ -399,7 +399,7 @@ public class Library extends StackPane {
 				Main.libraryMode.viewer.setCenterIndex(this.getPosition());
 			
 			// The drag must come from source other than the owner
-			if (event.getGestureSource() != controller.getNormalModeMediatTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
+			if (event.getGestureSource() != controller.getNormalModeMediaTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
 				event.acceptTransferModes(TransferMode.LINK);
 			
 		});

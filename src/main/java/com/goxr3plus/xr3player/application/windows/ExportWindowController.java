@@ -237,7 +237,7 @@ public class ExportWindowController extends BorderPane {
 		//define the variable using this switch statement
 		switch ( ( (Labeled) whatFilesToExportGroup.getSelectedToggle() ).getText()) {
 			case "Selected Items":
-				itemsWrapperProperty.setValue(smartController.getNormalModeMediatTableViewer().getSelectionModel().getSelectedItems());
+				itemsWrapperProperty.setValue(smartController.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems());
 				window.titleProperty().bind(Bindings.createStringBinding(() -> common + itemsWrapperProperty.sizeProperty().get() + " ]", itemsWrapperProperty.sizeProperty()));
 				filesToExport = FilesMode.SELECTED_MEDIA;
 				break;
