@@ -187,7 +187,10 @@ public class Viewer extends Region {
 		
 		// clip.set
 		setClip(clip);
-		setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, #00E5BB 87%);");
+		if (smartController == null)
+			setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, #00E5BB 87%);");
+		else
+			setStyle("-fx-background-color: #151515");
 		//setStyle("-fx-background-color: linear-gradient(to bottom,black 60,#141414 60.2%, purple 87%);")
 		
 		// ScrollBar
@@ -279,56 +282,87 @@ public class Viewer extends Region {
 		width = getHeight();
 		height = width;
 		
-		double variable = width / var;
-		centered.setLayoutX( ( getWidth() - variable ) / 2);
-		centered.setLayoutY( ( getHeight() - variable ) / 2);
+		boolean doUpdate = false;
 		
-		// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
-		if (previousHeight != (int) height) {
+		//Libraries and Users
+		if (smartController == null) {
 			
 			//Size
 			double size = height / var;
 			
-			// Update ImageView width and height
-			spacing = height / ( var + 0.5 );
-			leftOffSet = - ( spacing - size / 2.0 );
-			rightOffSet = -leftOffSet;
+			// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
+			if (previousHeight != (int) height) {
+				
+				// Update ImageView width and height
+				spacing = height / ( var + 0.5 );
+				leftOffSet = - ( spacing - size / 2.0 );
+				rightOffSet = -leftOffSet;
+				
+				// For-Each
+				if (libraryMode != null)
+					itemsObservableList.forEach(library -> {
+						// --
+						Library libraryy = (Library) library;
+						libraryy.getImageView().setFitWidth(size);
+						libraryy.getImageView().setFitHeight(size);
+						libraryy.setMaxSize(size, size);
+					});
+				else if (loginMode != null)
+					itemsObservableList.forEach(user -> {
+						// --
+						User userr = (User) user;
+						userr.getImageView().setFitWidth(size);
+						userr.getImageView().setFitHeight(size);
+						userr.setMaxSize(size, size);
+					});
+				
+				// the current size of each
+				double currentSize = width / var;
+				doUpdate = Math.abs(currentSize - lastSize) > 2;
+				lastSize = currentSize;
+			}
 			
-			// For-Each
-			if (libraryMode != null)
-				itemsObservableList.forEach(library -> {
-					// --
-					Library libraryy = (Library) library;
-					libraryy.getImageView().setFitWidth(size);
-					libraryy.getImageView().setFitHeight(size);
-					libraryy.setMaxSize(size, size);
-				});
-			else if (loginMode != null)
-				itemsObservableList.forEach(user -> {
-					// --
-					User userr = (User) user;
-					userr.getImageView().setFitWidth(size);
-					userr.getImageView().setFitHeight(size);
-					userr.setMaxSize(size, size);
-				});
-			else if (smartController != null)
+			centered.setLayoutX( ( getWidth() - size ) / 2);
+			centered.setLayoutY( ( getHeight() - size ) / 2);
+		} else {
+			
+			//Size
+			double size = height * var;
+			
+			// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
+			if (previousHeight != (int) height) {
+				System.out.println("Enterred here...");
+				
+				// Update ImageView width and height
+				spacing = height / ( var - 0.35 );
+				leftOffSet = - ( spacing - size / 2.0 );
+				rightOffSet = -leftOffSet;
+				
+				// For-Each
 				itemsObservableList.forEach(mediaViewerr -> {
 					// --
 					MediaViewer mediaViewer = (MediaViewer) mediaViewerr;
 					mediaViewer.getImageView().setFitWidth(size);
 					mediaViewer.getImageView().setFitHeight(size);
 					mediaViewer.setMaxSize(size, size);
+					mediaViewer.getNameLabel().setMaxSize(size, size);
 				});
+				
+				// the current size of each
+				double currentSize = width / var;
+				doUpdate = Math.abs(currentSize - lastSize) > 2;
+				lastSize = currentSize;
+				
+			}
 			
-			// the current size of each
-			double currentSize = width / var;
-			boolean doUpdate = Math.abs(currentSize - lastSize) > 2;
-			lastSize = currentSize;
+			centered.setLayoutX( ( getWidth() - size ) / 2);
+			centered.setLayoutY( ( getHeight() - size ) / 2);
 			
-			//Update?
-			if (doUpdate)
-				update();
 		}
+		
+		//Update?
+		if (doUpdate)
+			update();
 		
 		previousWidth = (int) width;
 		previousHeight = (int) height;
@@ -500,13 +534,14 @@ public class Viewer extends Region {
 	/**
 	 * Deletes all the items from the Viewer
 	 */
-	public void deleteAllItems() {
+	public void deleteAllItems(boolean update) {
 		
 		//Clear all the items
-		this.itemsObservableList.clear();
+		itemsObservableList.clear();
 		
 		//Recalculate the center index after a delete occurs.
-		calculateCenterIndex();
+		if (update)
+			calculateCenterIndex();
 	}
 	
 	/**
@@ -651,9 +686,9 @@ public class Viewer extends Region {
 					
 					new KeyValue(centerItem.translateXProperty(), 0, interpolator),
 					
-					new KeyValue(centerItem.scaleXProperty(), 1.0, interpolator),
+					new KeyValue(centerItem.scaleXProperty(), smartController != null ? SCALE_SMALL : 1.0, interpolator),
 					
-					new KeyValue(centerItem.scaleYProperty(), 1.0, interpolator)));// ,
+					new KeyValue(centerItem.scaleYProperty(), smartController != null ? SCALE_SMALL : 1.0, interpolator)));// ,
 			
 			// new KeyValue(centerItem.rotationTransform.angleProperty(),
 			// 360)));

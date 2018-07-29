@@ -124,6 +124,7 @@ public class LoadService extends Service<Void> {
 		//Call the all detailsService
 		smartController.getNormalModeMediatTableViewer().getAllDetailsService().restartService(smartController.getNormalModeMediatTableViewer());
 		
+		
 	}
 	
 	@Override

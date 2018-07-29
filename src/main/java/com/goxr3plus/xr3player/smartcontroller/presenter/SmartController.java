@@ -918,7 +918,9 @@ public class SmartController extends StackPane {
 		//normal_mode_mediaTableViewer.getTableView().refresh();
 		//if (!normal_mode_mediaTableViewer.getTableView().getSortOrder().isEmpty())
 		//	normal_mode_mediaTableViewer.getTableView().sort();
-	
+		
+		//Call MediaViewerService
+		mediaViewerService.startService();
 	}
 	
 	/**
@@ -1408,12 +1410,19 @@ public class SmartController extends StackPane {
 	public BorderPane getMainBorder() {
 		return mainBorder;
 	}
-
+	
 	/**
 	 * @return the viewer
 	 */
 	public Viewer getMediaViewer() {
 		return mediaViewer;
+	}
+	
+	/**
+	 * @return the mediaViewerService
+	 */
+	public MediaViewerService getMediaViewerService() {
+		return mediaViewerService;
 	}
 	
 	/*-----------------------------------------------------------------------

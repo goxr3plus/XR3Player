@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -15,6 +16,9 @@ public class MediaViewer extends StackPane {
 	
 	@FXML
 	private ImageView imageView;
+	
+	@FXML
+	private Label nameLabel;
 	
 	// -------------------------------------------------------------
 	
@@ -53,12 +57,20 @@ public class MediaViewer extends StackPane {
 	public ImageView getImageView() {
 		return imageView;
 	}
-
+	
 	/**
 	 * @return the media
 	 */
 	public Media getMedia() {
 		return media;
 	}
+
+	/**
+	 * @return the mediaName
+	 */
+	public Label getNameLabel() {
+		return nameLabel;
+	}
+
 	
 }
