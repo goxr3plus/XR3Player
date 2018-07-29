@@ -331,7 +331,6 @@ public class Viewer extends Region {
 			
 			// AVOID DOING CALCULATIONS WHEN THE CLIP SIZE IS THE SAME
 			if (previousHeight != (int) height) {
-				System.out.println("Enterred here...");
 				
 				// Update ImageView width and height
 				spacing = height / ( var - 0.35 );
@@ -493,8 +492,11 @@ public class Viewer extends Region {
 				if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
 					
 					// If it isn't the same User again
-					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer)
+					if ( ( (MediaViewer) centerGroup.getChildren().get(0) ) != mediaViewer) {
 						setCenterIndex(itemsObservableList.indexOf(mediaViewer));
+						Main.mediaInformation.updateInformation(mediaViewer.getMedia());
+					}
+					
 					
 				}
 				
