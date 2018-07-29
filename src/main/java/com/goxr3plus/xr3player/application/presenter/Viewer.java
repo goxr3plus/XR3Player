@@ -333,8 +333,8 @@ public class Viewer extends Region {
 			if (previousHeight != (int) height) {
 				
 				// Update ImageView width and height
-				spacing = height / ( var - 0.35 );
-				leftOffSet = - ( spacing - size / 2.0 );
+				spacing = height / ( var - 0.4 );
+				leftOffSet = - 0;
 				rightOffSet = -leftOffSet;
 				
 				// For-Each
