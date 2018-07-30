@@ -317,8 +317,15 @@ public class MediaTableViewer extends StackPane {
 		
 		//Update the Media Information when Selected Item changes
 		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue != null) {
+			if (newValue != null && oldValue != newValue) {
 				Main.mediaInformation.updateInformation(newValue);
+				
+				String path = newValue.getFilePath();
+				
+				smartController.getMediaViewer().getItemsObservableList().stream().filter(media -> ( (MediaViewer) media ).getMedia().getFilePath().equals(path)).findFirst().ifPresent(mediaViewer -> {
+					smartController.getMediaViewer().setCenterIndex(smartController.getMediaViewer().getItemsObservableList().indexOf(mediaViewer));
+				});
+				
 			}
 		});
 		

@@ -48,12 +48,12 @@ public class MediaViewerService extends Service<Void> {
 	public void done() {
 		
 		try {
-			//	double[] positions = smartController.getViewerSplitPane().getDividerPositions();
-			//	positions[0] += 0.002;
-			//	smartController.getViewerSplitPane().setDividerPositions(positions);
+			double[] positions = smartController.getViewerSplitPane().getDividerPositions();
+			positions[0] += 0.005;
+			smartController.getViewerSplitPane().setDividerPositions(positions);
 			
-			//	positions[0] -= 0.005;
-			//	smartController.getViewerSplitPane().setDividerPositions(positions);
+			positions[0] -= 0.0065;
+			smartController.getViewerSplitPane().setDividerPositions(positions);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
