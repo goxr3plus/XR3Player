@@ -20,6 +20,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
 public class MediaViewerService extends Service<Void> {
 	
 	private final SmartController smartController;
+	private boolean positionReverter;
 	
 	/**
 	 * Constructor.
@@ -47,16 +48,26 @@ public class MediaViewerService extends Service<Void> {
 	// Work done
 	public void done() {
 		
-		try {
+		//Below is a smart trick to fix splitpane glitch--------
+		positionReverter = !positionReverter;
+		
+		if (positionReverter) {
 			double[] positions = smartController.getViewerSplitPane().getDividerPositions();
-			positions[0] += 0.005;
+			positions[0] += 0.05;
 			smartController.getViewerSplitPane().setDividerPositions(positions);
 			
-			positions[0] -= 0.0065;
+			positions[0] -= 0.07;
 			smartController.getViewerSplitPane().setDividerPositions(positions);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} else {
+			double[] positions = smartController.getViewerSplitPane().getDividerPositions();
+			positions[0] -= 0.05;
+			smartController.getViewerSplitPane().setDividerPositions(positions);
+			
+			positions[0] += 0.07;
+			smartController.getViewerSplitPane().setDividerPositions(positions);
 		}
+		//----------------------------------------------------------------
+		
 	}
 	
 	@Override
