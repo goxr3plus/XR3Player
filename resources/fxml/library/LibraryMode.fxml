@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tooltip?>
@@ -75,17 +77,26 @@
                                                             <Insets />
                                                          </HBox.margin>
                                                          <graphic>
-                                                            <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
+                                                            <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
                                                          </graphic>
                                                       </JFXButton>
-                                                      <JFXButton fx:id="createLibrary" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text=" ">
-                                                         <tooltip>
-                                                            <Tooltip text="Create new Library" />
-                                                         </tooltip>
+                                                      <MenuButton fx:id="createLibraryMenuButton" mnemonicParsing="false" styleClass="dark-menu-button">
                                                          <graphic>
-                                                            <FontIcon iconColor="#2cee97" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
+                                                            <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                                          </graphic>
-                                                      </JFXButton>
+                                                         <items>
+                                                            <MenuItem fx:id="createLibrary" mnemonicParsing="false" text="Create New Library">
+                                                               <graphic>
+                                                                  <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
+                                                               </graphic>
+                                                            </MenuItem>
+                                                            <MenuItem fx:id="createAndOpenLibrary" mnemonicParsing="false" text="Create + Open New Library">
+                                                               <graphic>
+                                                                  <FontIcon iconColor="#e0b143" iconLiteral="far-folder-open" iconSize="24" />
+                                                               </graphic>
+                                                            </MenuItem>
+                                                         </items>
+                                                      </MenuButton>
                                                       <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="jfx-button4" text=" ">
                                                          <tooltip>
                                                             <Tooltip text="Next" />
@@ -94,7 +105,7 @@
                                                             <Insets />
                                                          </HBox.margin>
                                                          <graphic>
-                                                            <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
+                                                            <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
                                                          </graphic>
                                                       </JFXButton>
                                                    </children>
@@ -113,7 +124,7 @@
                                                       <Insets />
                                                    </HBox.margin>
                                                    <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
+                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="28" selectionEnd="0" selectionStart="0" />
                                                    </graphic>
                                                 </Button>
                                                 <ColorPicker fx:id="colorPicker" focusTraversable="false" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">

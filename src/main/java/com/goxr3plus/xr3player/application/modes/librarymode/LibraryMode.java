@@ -17,11 +17,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
-import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
@@ -40,7 +41,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
-import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 /**
  * This class contains everything needed going on LibraryMode.
@@ -53,6 +53,12 @@ public class LibraryMode extends BorderPane {
 	
 	@FXML
 	private SplitPane topSplitPane;
+	
+	@FXML
+	private StackPane bottomStackPane;
+	
+	@FXML
+	private SplitPane bottomSplitPane;
 	
 	@FXML
 	private StackPane noLibrariesStackPane;
@@ -82,7 +88,13 @@ public class LibraryMode extends BorderPane {
 	private JFXButton previous;
 	
 	@FXML
-	private JFXButton createLibrary;
+	private MenuButton createLibraryMenuButton;
+	
+	@FXML
+	private MenuItem createLibrary;
+	
+	@FXML
+	private MenuItem createAndOpenLibrary;
 	
 	@FXML
 	private JFXButton next;
@@ -103,13 +115,8 @@ public class LibraryMode extends BorderPane {
 	private Button createFirstLibrary;
 	
 	@FXML
-	private StackPane bottomStackPane;
-	
-	@FXML
-	private SplitPane bottomSplitPane;
-	
-	@FXML
 	private StackPane djModeStackPane;
+	
 	// ------------------------------------------------
 	
 	// protected boolean dragDetected
@@ -310,14 +317,17 @@ public class LibraryMode extends BorderPane {
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(viewer.searchWordProperty()));
 		
 		// createLibrary
-		createLibrary.setOnAction(a -> createNewLibrary(createLibrary, false));
+		createLibrary.setOnAction(a -> createNewLibrary(createLibraryMenuButton, false));
+		
+		//createAndOpenLibrary
+		createAndOpenLibrary.setOnAction(a -> createNewLibrary(createLibraryMenuButton, true));
 		
 		// newLibrary
 		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary.getGraphic(), true, true));
 		createFirstLibrary.visibleProperty().bind(Bindings.size(viewer.getItemsObservableList()).isEqualTo(0));
 		
 		// selectionModeToggle
-		//selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.goOnSelectionMode(newValue));
+		//selectionModeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> teamViewer.goOnSelectionMode(newValue))
 		
 		// searchLibrary
 		botttomHBox.getChildren().add(librariesSearcher);
