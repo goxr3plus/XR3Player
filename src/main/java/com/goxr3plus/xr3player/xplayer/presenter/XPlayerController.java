@@ -1222,7 +1222,28 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		try {
 			
-			xPlayer.setGain((double) disc.getCurrentVolume() / 100.00);
+			//Crazy Code here.......
+			if (key == 1 || key == 2) {
+				double masterVolumeSlider = Main.djMode.getMixTabInterface().getMasterVolumeSlider().getValue();
+				if (Main.djMode.getMixTabInterface().getMasterVolumeSlider().getValue() < 125) { // <100
+					
+					Main.xPlayersList.getXPlayer(1).setGain( ( ( Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00 ) * ( masterVolumeSlider ) ) / 100.00);
+					Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00);
+					
+				} else if (masterVolumeSlider == 125) { // ==100
+					
+					Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00);
+					Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00);
+					
+				} else if (masterVolumeSlider > 125) { // >100
+					
+					Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00);
+					Main.xPlayersList.getXPlayer(2).setGain( ( ( Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00 ) * ( 250 - masterVolumeSlider ) ) / 100.00);
+					
+				}
+			} else if (key == 0) {
+				xPlayer.setGain(getVolume() / 100.00);
+			}
 			
 			//			//Update PropertiesDB
 			//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));

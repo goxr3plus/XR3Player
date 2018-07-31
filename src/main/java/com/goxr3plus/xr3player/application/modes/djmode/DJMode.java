@@ -47,7 +47,7 @@ public class DJMode extends BorderPane {
 	public final XPlayerController xPlayer1 = new XPlayerController(1);
 	public final XPlayerController xPlayer2 = new XPlayerController(2);
 	
-	public final MixTabInterface mixTabInterface = new MixTabInterface();
+	private final MixTabInterface mixTabInterface = new MixTabInterface();
 	
 	/**
 	 * Constructor.
@@ -180,6 +180,13 @@ public class DJMode extends BorderPane {
 		
 	}
 	
+	/**
+	 * @return the mixTabInterface
+	 */
+	public MixTabInterface getMixTabInterface() {
+		return mixTabInterface;
+	}
+
 	// Variables
 	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
 	

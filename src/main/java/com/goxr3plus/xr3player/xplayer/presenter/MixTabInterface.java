@@ -8,6 +8,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 public class MixTabInterface extends StackPane {
@@ -56,6 +57,9 @@ public class MixTabInterface extends StackPane {
 		masterVolumeSlider.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> calculateBars());
 		masterVolumeSlider.valueProperty().addListener((observable , oldValue , newValue) -> {
 			calculateBars();
+			
+			//Calculate Volume
+			Main.xPlayersList.getXPlayerController(1).controlVolume();
 		});
 	}
 	

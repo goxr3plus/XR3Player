@@ -31,7 +31,7 @@
                         </ProgressBar>
                      </children>
                   </HBox>
-                  <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="150.0" maxWidth="1.7976931348623157E308" minorTickCount="55" value="75.0">
+                  <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="250.0" maxWidth="1.7976931348623157E308" minorTickCount="55" value="125.0">
                      <styleClass>
                         <String fx:value="transparency-slider" />
                         <String fx:value="timer-slider" />
