@@ -20,13 +20,13 @@
                         <ProgressBar fx:id="volumeProgress1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="transparent-progress-bar" />
-                              <String fx:value="transparent-volume-progress-bar2" />
+                              <String fx:value="transparent-volume-progress-bar2-nostrip" />
                            </styleClass>
                         </ProgressBar>
                         <ProgressBar fx:id="volumeProgress2" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="transparent-progress-bar" />
-                              <String fx:value="transparent-volume-progress-bar3" />
+                              <String fx:value="transparent-volume-progress-bar3-nostrip" />
                            </styleClass>
                         </ProgressBar>
                      </children>

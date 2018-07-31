@@ -1410,8 +1410,6 @@
 	-fx-border-radius:0.0;
 }
 
-
-
 .transparent-volume-progress-bar2 > .bar,.transparent-volume-progress-bar2:indeterminate .bar,.transparent-volume-progress-bar2:determinate .track,.transparent-volume-progress-bar2:indeterminate .track{
 	-fx-accent:rgb(0.0, 144.0, 255.0);
 	-fx-background-radius:0.0;
@@ -1420,6 +1418,20 @@
 
 .transparent-volume-progress-bar3 > .bar,.transparent-volume-progress-bar3:indeterminate .bar,.transparent-volume-progress-bar3:determinate .track,.transparent-volume-progress-bar3:indeterminate .track{
 	-fx-accent:#fc4f4f;
+	-fx-background-radius:0.0;
+	-fx-border-radius:0.0;
+}
+
+.transparent-volume-progress-bar2-nostrip > .bar,.transparent-volume-progress-bar2-nostrip:indeterminate .bar,.transparent-volume-progress-bar2-nostrip:determinate .track,.transparent-volume-progress-bar2-nostrip:indeterminate .track{
+	-fx-accent:rgb(0.0, 144.0, 255.0);
+	-fx-background-color: -fx-accent;
+	-fx-background-radius:0.0;
+	-fx-border-radius:0.0;
+}
+
+.transparent-volume-progress-bar3-nostrip > .bar,.transparent-volume-progress-bar3-nostrip:indeterminate .bar,.transparent-volume-progress-bar3-nostrip:determinate .track,.transparent-volume-progress-bar3-nostrip:indeterminate .track{
+	-fx-accent:#fc4f4f;
+	-fx-background-color: -fx-accent;
 	-fx-background-radius:0.0;
 	-fx-border-radius:0.0;
 }

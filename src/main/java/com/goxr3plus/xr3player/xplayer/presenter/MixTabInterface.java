@@ -48,40 +48,45 @@ public class MixTabInterface extends StackPane {
 	@FXML
 	private void initialize() {
 		
-		//volumeProgress1
-		
-		//volumeProgress2
-		
 		//masterVolumeSlider
+		masterVolumeSlider.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> calculateBars());
 		masterVolumeSlider.valueProperty().addListener((observable , oldValue , newValue) -> {
-			double value = newValue.doubleValue();
-			double half = masterVolumeSlider.getMax() / 2;
-			double masterVolumeSliderWidth = masterVolumeSlider.getWidth();
-			System.out.println(volumeProgress1.getWidth() + volumeProgress2.getWidth());
-			
-			//Progress Max1
-			volumeProgress1.setProgress(1);
-			volumeProgress2.setProgress(1);
-			
-			//Below is mind tricks
-			if ((int) value == (int) half) {
-				volumeProgress1.setMinWidth(masterVolumeSliderWidth / 2);
-				volumeProgress2.setMinWidth(masterVolumeSliderWidth / 2);
-			} else if (value < half) {
-				double progress = 1.0 - ( newValue.doubleValue() / half );
-				double minimumWidth = masterVolumeSlider.getWidth() / 2 + ( masterVolumeSlider.getWidth() / 2 ) * ( progress );
-				volumeProgress1.setMinWidth(masterVolumeSliderWidth - minimumWidth);
-				volumeProgress1.setMaxWidth(masterVolumeSliderWidth - minimumWidth);
-				volumeProgress2.setMinWidth(minimumWidth);
-			} else if (value > half) {
-				double progress = ( newValue.doubleValue() - half ) / half;
-				double minimumWidth = masterVolumeSlider.getWidth() / 2 + ( masterVolumeSlider.getWidth() / 2 ) * ( progress );
-				volumeProgress1.setMinWidth(minimumWidth);
-				volumeProgress2.setMinWidth(masterVolumeSliderWidth - minimumWidth);
-				volumeProgress2.setMaxWidth(masterVolumeSliderWidth - minimumWidth);
-			}
-			
+			calculateBars();
 		});
+	}
+	
+	/**
+	 * Calculate bars positioning
+	 */
+	private void calculateBars() {
+		
+		//Variables
+		double value = masterVolumeSlider.getValue();
+		double half = masterVolumeSlider.getMax() / 2;
+		double masterVolumeSliderWidth = masterVolumeSlider.getWidth();
+		
+		//Progress Max1
+		volumeProgress1.setProgress(1);
+		volumeProgress2.setProgress(1);
+		
+		//Below is mind tricks
+		if ((int) value == (int) half) {
+			volumeProgress1.setMinWidth(masterVolumeSliderWidth / 2);
+			volumeProgress2.setMinWidth(masterVolumeSliderWidth / 2);
+		} else if (value < half) {
+			double progress = 1.0 - ( value / half );
+			double minimumWidth = masterVolumeSlider.getWidth() / 2 + ( masterVolumeSlider.getWidth() / 2 ) * ( progress );
+			volumeProgress1.setMinWidth(masterVolumeSliderWidth - minimumWidth);
+			volumeProgress1.setMaxWidth(masterVolumeSliderWidth - minimumWidth);
+			volumeProgress2.setMinWidth(minimumWidth);
+		} else if (value > half) {
+			double progress = ( value - half ) / half;
+			double minimumWidth = masterVolumeSlider.getWidth() / 2 + ( masterVolumeSlider.getWidth() / 2 ) * ( progress );
+			volumeProgress1.setMinWidth(minimumWidth);
+			volumeProgress2.setMinWidth(masterVolumeSliderWidth - minimumWidth);
+			volumeProgress2.setMaxWidth(masterVolumeSliderWidth - minimumWidth);
+		}
+		
 	}
 	
 }
