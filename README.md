@@ -34,6 +34,10 @@ Some futuristic features that are coming :
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
+| Latest update presentation|
+|:-:|
+| [![First](http://img.youtube.com/vi/tRPT-QL3yEQ/0.jpg)](https://www.youtube.com/watch?v=tRPT-QL3yEQ)  |
+
 # Screenshots
 
 | DJ UI | Chromium Web Browser 
