@@ -151,8 +151,15 @@ public class PlaylistsSettingsController extends BorderPane {
 		//--------------------MEDIA VIEWER---------------------------------
 		
 		//selectMatchingPlaylistItem
-		selectMatchingPlaylistItem.selectedProperty().addListener(
-				l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-SelMatchPlaylistItem", String.valueOf(selectMatchingPlaylistItem.isSelected())));
+		selectMatchingPlaylistItem.selectedProperty().addListener(l -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-SelMatchPlaylistItem", String.valueOf(selectMatchingPlaylistItem.isSelected()));
+			
+			//Fix scrollToMatchingPlaylistItem
+			if (!selectMatchingPlaylistItem.isSelected())
+				scrollToMatchingPlaylistItem.setSelected(false);
+		});
 		
 		//scrollToMatchingPlaylistItem
 		scrollToMatchingPlaylistItem.selectedProperty().addListener(l -> {
@@ -160,8 +167,9 @@ public class PlaylistsSettingsController extends BorderPane {
 			//Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-ScrollToMatchPlaylistItem", String.valueOf(scrollToMatchingPlaylistItem.isSelected()));
 			
-			//Unselect  selectMatchingPlaylistItem 
-			selectMatchingPlaylistItem.setSelected(false);
+			//Fix  selectMatchingPlaylistItem 
+			if (scrollToMatchingPlaylistItem.isSelected())
+				selectMatchingPlaylistItem.setSelected(true);
 		});
 		
 		//--------------------SEARCH---------------------------------
