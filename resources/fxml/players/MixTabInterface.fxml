@@ -9,21 +9,21 @@
 <?import javafx.scene.layout.StackPane?>
 
 
-<StackPane prefHeight="389.0" prefWidth="386.0" stylesheets="@../../style/application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<fx:root prefHeight="389.0" prefWidth="386.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
    <children>
-      <BorderPane>
+      <BorderPane minHeight="0.0" minWidth="0.0">
          <bottom>
-            <StackPane BorderPane.alignment="CENTER">
+            <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="15.0">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="15.0">
                      <children>
-                        <ProgressBar fx:id="smTimeSliderProgress" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                        <ProgressBar fx:id="volumeProgress1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="transparent-progress-bar" />
                               <String fx:value="transparent-volume-progress-bar2" />
                            </styleClass>
                         </ProgressBar>
-                        <ProgressBar fx:id="smTimeSliderProgress1" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                        <ProgressBar fx:id="volumeProgress2" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="transparent-progress-bar" />
                               <String fx:value="transparent-volume-progress-bar3" />
@@ -31,7 +31,7 @@
                         </ProgressBar>
                      </children>
                   </HBox>
-                  <Slider fx:id="smTimeSlider" maxWidth="1.7976931348623157E308" minWidth="5.0">
+                  <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="150.0" maxWidth="1.7976931348623157E308" minorTickCount="55" value="75.0">
                      <styleClass>
                         <String fx:value="transparency-slider" />
                         <String fx:value="timer-slider" />
@@ -39,10 +39,10 @@
                   </Slider>
                </children>
                <BorderPane.margin>
-                  <Insets left="15.0" right="15.0" />
+                  <Insets left="5.0" right="5.0" />
                </BorderPane.margin>
             </StackPane>
          </bottom>
       </BorderPane>
    </children>
-</StackPane>
+</fx:root>

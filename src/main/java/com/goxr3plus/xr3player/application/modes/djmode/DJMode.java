@@ -17,6 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.xplayer.presenter.MixTabInterface;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 /**
@@ -48,8 +49,8 @@ public class DJMode extends BorderPane {
 	public final XPlayerController xPlayer0 = new XPlayerController(0);
 	public final XPlayerController xPlayer1 = new XPlayerController(1);
 	public final XPlayerController xPlayer2 = new XPlayerController(2);
-	public final XPlayerController xPlayer3 = new XPlayerController(3);
 	
+	public final MixTabInterface mixTabInterface = new MixTabInterface();
 	
 	/**
 	 * Constructor.
@@ -75,7 +76,7 @@ public class DJMode extends BorderPane {
 	@FXML
 	public void initialize() {
 		
-		// XPlayer - 0
+		//XPlayer  0
 		Main.xPlayersList.addXPlayerController(xPlayer0);
 		xPlayer0.makeTheDisc(Color.rgb(255, 95, 0), 50, 0, 126, Side.LEFT);
 		xPlayer0.makeTheVisualizer();
@@ -95,13 +96,9 @@ public class DJMode extends BorderPane {
 		HBox.setHgrow(xPlayer2, Priority.ALWAYS);
 		
 		//Mixer Tab
-		Main.xPlayersList.addXPlayerController(xPlayer3);
-		xPlayer3.makeTheDisc(Color.web("#30f4a2"), 50, 0, 126, Side.LEFT);
-		xPlayer3.makeTheVisualizer();	
-		mixerTab.setContent(xPlayer3);
-		HBox.setHgrow(tabPane, Priority.ALWAYS);
+		mixerTab.setContent(mixTabInterface);
 		
-		
+		//Add it to library mode
 		Main.libraryMode.getDjModeStackPane().getChildren().add(hBox);
 	}
 	
