@@ -89,6 +89,9 @@ public class SmartController extends StackPane {
 	private ProgressBar mediaViewerProgress;
 	
 	@FXML
+	private Label noAlbumViewsLabel;
+	
+	@FXML
 	private JFXTabPane modesTabPane;
 	
 	@FXML
@@ -558,7 +561,6 @@ public class SmartController extends StackPane {
 		mediaViewerVBox.visibleProperty().bind(mediaViewerService.runningProperty());
 		mediaViewerProgress.progressProperty().bind(mediaViewerService.progressProperty());
 		mediaViewerLabel.textProperty().bind(mediaViewerService.messageProperty());
-		
 	}
 	
 	public volatile boolean filtersModeSelected = false;
@@ -1429,6 +1431,13 @@ public class SmartController extends StackPane {
 	 */
 	public SplitPane getViewerSplitPane() {
 		return viewerSplitPane;
+	}
+	
+	/**
+	 * @return the noAlbumViewsLabel
+	 */
+	public Label getNoAlbumViewsLabel() {
+		return noAlbumViewsLabel;
 	}
 	
 	/*-----------------------------------------------------------------------
