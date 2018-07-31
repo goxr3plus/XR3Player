@@ -918,16 +918,16 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		});
 		
 		//transferMedia
-//		transferMedia.getItems().get(key).setVisible(false);
-//		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
-//			
-//			//Start the selected player
-//			Main.xPlayersList.getXPlayerController(transferMedia.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
-//			
-//			//Stop the Current Player
-//			stop();
-//			
-//		})));
+		//		transferMedia.getItems().get(key).setVisible(false);
+		//		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
+		//			
+		//			//Start the selected player
+		//			Main.xPlayersList.getXPlayerController(transferMedia.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
+		//			
+		//			//Stop the Current Player
+		//			stop();
+		//			
+		//		})));
 		
 		//=emotionsButton
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
@@ -952,6 +952,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//smBorderPane
 		smBorderPane.setVisible(true);
+		
+		//extendPlayer
+		if (getKey() == 1 || getKey() == 2)
+			extendPlayer.setDisable(true);
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
@@ -2428,22 +2432,19 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public ProgressBar getVolumeSliderProgBar() {
 		return volumeSliderProgBar;
 	}
-
+	
 	/**
 	 * @return the volumeBarBox
 	 */
 	public VBox getVolumeBarBox() {
 		return volumeBarBox;
 	}
-
-
+	
 	/**
 	 * @return the rootBorderPane
 	 */
 	public BorderPane getRootBorderPane() {
 		return rootBorderPane;
 	}
-
-
 	
 }
