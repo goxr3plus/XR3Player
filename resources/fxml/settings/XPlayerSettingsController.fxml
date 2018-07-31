@@ -74,7 +74,7 @@
                               </Slider>
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Show Player Notifications" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
                                  <tooltip>
-                                    <Tooltip text="When checked it will show notifications about the player , like when it stops , starts etc." />
+                                    <Tooltip text="Show general player notifications example ( Player Started + Album Image)" />
                                  </tooltip>
                               </Label>
                               <JFXCheckBox fx:id="showPlayerNotifications" alignment="CENTER" layoutX="178.0" layoutY="145.0" maxWidth="1.7976931348623157E308" selected="true" styleClass="settingsRadioButton" text=" " wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
@@ -82,12 +82,12 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <tooltip>
-                                    <Tooltip text="When you drop a song into the player it will ask security question if other song is already playing" />
+                                    <Tooltip text="Show general player notifications example ( Player Started + Album Image)" />
                                  </tooltip>
                               </JFXCheckBox>
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Allow Disc Rotation" textAlignment="CENTER" wrapText="true">
                                  <tooltip>
-                                    <Tooltip text="When you drag and drop a media inside the player it will start at once | either way it will stay paused" />
+                                    <Tooltip text="If checked and the media has an album image it will rotate it" />
                                  </tooltip>
                               </Label>
                               <JFXCheckBox fx:id="allowDiscRotation" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="settingsRadioButton" text=" " GridPane.columnIndex="1" GridPane.columnSpan="2">
@@ -95,7 +95,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <tooltip>
-                                    <Tooltip text="When you drop a song into the player it wil start immediately" />
+                                    <Tooltip text="If checked and the media has an album image it will rotate it" />
                                  </tooltip>
                               </JFXCheckBox>
                            </children>
