@@ -2238,6 +2238,31 @@
 	-fx-text-fill:#000000 !important;
 }
 
+.jfx-button-red{
+	 -fx-background-color:#ff5959 !important;
+}
+
+.jfx-button-red:hover{
+	 -fx-background-color:#FF0C59 !important;
+}
+
+.jfx-button-green{
+	 -fx-background-color:#A6C400 !important;
+}
+
+.jfx-button-green:hover{
+	 -fx-background-color:#93AD00 !important;
+}
+
+.jfx-button-yellow{
+	 -fx-background-color:#E0B235 !important;
+}
+
+.jfx-button-yellow:hover{
+	 -fx-background-color:#D8AA34 !important;
+}
+
+
 
 
 

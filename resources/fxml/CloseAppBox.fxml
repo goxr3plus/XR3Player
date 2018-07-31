@@ -5,6 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -23,33 +24,36 @@
                         <Font size="8.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="minimize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-dark-white-selection" text="-">
+                  <JFXButton fx:id="minimize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-yellow" text="-">
                      <font>
                         <Font size="8.0" />
                      </font>
                      <graphic>
-                        <FontIcon iconColor="#f77272" iconLiteral="fas-window-minimize" iconSize="17" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-window-minimize" iconSize="17" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="+">
+                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
                      <font>
                         <Font size="8.0" />
                      </font>
                      <graphic>
                         <StackedFontIcon fx:id="sizeStackedFontIcon">
                            <children>
-                              <FontIcon iconColor="#d4ff00" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
-                              <FontIcon iconColor="#d4ff00" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
                            </children>
                         </StackedFontIcon>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="exitApplication" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-dark-white-selection" text="X">
+                  <JFXButton fx:id="exitApplication" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
                      <font>
                         <Font size="8.0" />
                      </font>
                      <graphic>
-                        <FontIcon iconColor="#ff5959" iconLiteral="fa-close" iconSize="20" />
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-close" iconSize="20">
+                           <effect>
+                              <DropShadow />
+                           </effect></FontIcon>
                      </graphic>
                   </JFXButton>
                </children>
