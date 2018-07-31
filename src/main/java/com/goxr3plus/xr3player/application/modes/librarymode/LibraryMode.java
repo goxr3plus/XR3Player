@@ -295,17 +295,6 @@ public class LibraryMode extends BorderPane {
 	}
 	
 	/**
-	 * Update Settings Total Library only if this Library exists and it is on settings mode
-	 * 
-	 * @param name
-	 */
-	//    public void updateLibraryTotalLabel(String name) {
-	//	Library lib = getLibraryWithName(name);
-	//	if (lib != null)
-	//	    lib.updateSettingsTotalLabel();
-	//    }
-	
-	/**
 	 * Called as soon as FXML file has been loaded
 	 */
 	@FXML
