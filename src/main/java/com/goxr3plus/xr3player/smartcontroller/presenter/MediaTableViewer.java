@@ -575,7 +575,7 @@ public class MediaTableViewer extends StackPane {
 		playStatus.setCellFactory(col -> new TableCell<Media,Integer>() {
 			
 			//Icon FontIcon
-			HBox flowPane = new HBox();
+			//HBox flowPane = new HBox();
 			
 			@Override
 			protected void updateItem(Integer item , boolean empty) {
@@ -585,7 +585,7 @@ public class MediaTableViewer extends StackPane {
 					setGraphic(null);
 				} else {
 					//Clear the flowPane
-					flowPane.getChildren().clear();
+					//flowPane.getChildren().clear();
 					
 					// set the image according to the play status		
 					if (item != null) {
@@ -594,16 +594,19 @@ public class MediaTableViewer extends StackPane {
 						else if (item == -1) { //Already played
 							setGraphic(JavaFXTools.getFontIcon("fas-play-circle", lightGreen, 24));
 						} else { //BEING PLAYED BY SOME PLAYERS
+							//							
+							//TO BE FIXES - PROBLEM IF IS PLAYING IN MANY PLAYERS IT MUST SHOW MANY PLAYERS NOT JUST ONE!!!
+							setGraphic(JavaFXTools.getFontIcon("gmi-filter-" + ( item + 1 ), Color.WHITE, 24));
 							
-							String mediaPath = getTableRow().getItem().getFilePath();
-							Main.xPlayersList.getList().stream().sorted((o1 , o2) -> Integer.valueOf(o1.getKey()).compareTo(o2.getKey())).forEach(controller -> {
-								String path = controller.getxPlayerModel().songPathProperty().get();
-								//Check if it matches
-								if (path != null && path.equals(mediaPath))
-									flowPane.getChildren().addAll(JavaFXTools.getFontIcon("gmi-filter-" + ( controller.getKey() + 1 ), Color.WHITE, 24));
-								
-							});
-							setGraphic(flowPane);
+							//							String mediaPath = getTableRow().getItem().getFilePath();
+							//							Main.xPlayersList.getList().stream().sorted((o1 , o2) -> Integer.valueOf(o1.getKey()).compareTo(o2.getKey())).forEach(controller -> {
+							//								String path = controller.getxPlayerModel().songPathProperty().get();
+							//								//Check if it matches
+							//								if (path != null && path.equals(mediaPath))
+							//									flowPane.getChildren().addAll(JavaFXTools.getFontIcon("gmi-filter-" + ( controller.getKey() + 1 ), Color.WHITE, 24));
+							//								
+							//							});
+							//							setGraphic(flowPane);
 						}
 					}
 				}
