@@ -2,6 +2,8 @@ package main.java.com.goxr3plus.xr3player.xplayer.presenter;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
@@ -17,6 +19,9 @@ public class MixTabInterface extends StackPane {
 	
 	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private JFXButton balanceButton;
 	
 	@FXML
 	private ProgressBar volumeProgress1;
@@ -52,6 +57,9 @@ public class MixTabInterface extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//balanceButton
+		balanceButton.setOnAction(a -> masterVolumeSlider.setValue(masterVolumeSlider.getMax() / 2));
 		
 		//masterVolumeSlider
 		masterVolumeSlider.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> calculateBars());

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ProgressBar?>
@@ -7,44 +8,52 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 
 <fx:root prefHeight="389.0" prefWidth="228.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
    <children>
       <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0">
          <bottom>
-            <StackPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="15.0">
+                  <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-red" text="|">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-balance-scale" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
+                  <StackPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #000000;">
                      <children>
-                        <ProgressBar fx:id="volumeProgress1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="15.0">
+                           <children>
+                              <ProgressBar fx:id="volumeProgress1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                                 <styleClass>
+                                    <String fx:value="transparent-progress-bar" />
+                                    <String fx:value="transparent-volume-progress-bar2-nostrip" />
+                                 </styleClass>
+                              </ProgressBar>
+                              <ProgressBar fx:id="volumeProgress2" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                                 <styleClass>
+                                    <String fx:value="transparent-progress-bar" />
+                                    <String fx:value="transparent-volume-progress-bar3-nostrip" />
+                                 </styleClass>
+                              </ProgressBar>
+                           </children>
+                        </HBox>
+                        <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="250.0" maxWidth="1.7976931348623157E308" minorTickCount="55" value="125.0">
                            <styleClass>
-                              <String fx:value="transparent-progress-bar" />
-                              <String fx:value="transparent-volume-progress-bar2-nostrip" />
+                              <String fx:value="transparency-slider" />
+                              <String fx:value="timer-slider" />
                            </styleClass>
-                        </ProgressBar>
-                        <ProgressBar fx:id="volumeProgress2" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
-                           <styleClass>
-                              <String fx:value="transparent-progress-bar" />
-                              <String fx:value="transparent-volume-progress-bar3-nostrip" />
-                           </styleClass>
-                        </ProgressBar>
+                        </Slider>
                      </children>
-                  </HBox>
-                  <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="250.0" maxWidth="1.7976931348623157E308" minorTickCount="55" value="125.0">
-                     <styleClass>
-                        <String fx:value="transparency-slider" />
-                        <String fx:value="timer-slider" />
-                     </styleClass>
-                  </Slider>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </StackPane>
                </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </StackPane>
+            </VBox>
          </bottom>
       </BorderPane>
    </children>
