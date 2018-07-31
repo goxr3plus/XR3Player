@@ -6,12 +6,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 public class MixTabInterface extends StackPane {
 	
 	//--------------------------------------------------------------
+	
+	@FXML
+	private BorderPane borderPane;
 	
 	@FXML
 	private ProgressBar volumeProgress1;
@@ -87,6 +91,20 @@ public class MixTabInterface extends StackPane {
 			volumeProgress2.setMaxWidth(masterVolumeSliderWidth - minimumWidth);
 		}
 		
+	}
+	
+	/**
+	 * @return the borderPane
+	 */
+	public BorderPane getBorderPane() {
+		return borderPane;
+	}
+	
+	/**
+	 * @return the masterVolumeSlider
+	 */
+	public Slider getMasterVolumeSlider() {
+		return masterVolumeSlider;
 	}
 	
 }

@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.StackPane?>
 
 
-<fx:root prefHeight="389.0" prefWidth="386.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<fx:root prefHeight="389.0" prefWidth="228.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
    <children>
-      <BorderPane minHeight="0.0" minWidth="0.0">
+      <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0">
          <bottom>
             <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                <children>

@@ -29,7 +29,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="594.0" prefWidth="902.0" style="-fx-background-color: rgb(15,15,15,0.9);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: rgb(15,15,15,0.9);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" fx:id="xPlayerStackPane">
          <children>

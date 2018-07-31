@@ -39,9 +39,6 @@ public class DJMode extends BorderPane {
 	private Tab mixerTab;
 	
 	@FXML
-	private Tab videoTab;
-	
-	@FXML
 	private Tab foldersModeTab;
 	
 	//--------------------------------------------------------------
@@ -97,6 +94,12 @@ public class DJMode extends BorderPane {
 		
 		//Mixer Tab
 		mixerTab.setContent(mixTabInterface);
+		
+		//mixTabInterface
+		xPlayer1.getRootBorderPane().getChildren().remove(xPlayer1.getVolumeBarBox());
+		mixTabInterface.getBorderPane().setLeft(xPlayer1.getVolumeBarBox());
+		xPlayer2.getRootBorderPane().getChildren().remove(xPlayer2.getVolumeBarBox());
+		mixTabInterface.getBorderPane().setRight(xPlayer2.getVolumeBarBox());
 		
 		//Add it to library mode
 		Main.libraryMode.getDjModeStackPane().getChildren().add(hBox);

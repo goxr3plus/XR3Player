@@ -2428,5 +2428,22 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public ProgressBar getVolumeSliderProgBar() {
 		return volumeSliderProgBar;
 	}
+
+	/**
+	 * @return the volumeBarBox
+	 */
+	public VBox getVolumeBarBox() {
+		return volumeBarBox;
+	}
+
+
+	/**
+	 * @return the rootBorderPane
+	 */
+	public BorderPane getRootBorderPane() {
+		return rootBorderPane;
+	}
+
+
 	
 }
