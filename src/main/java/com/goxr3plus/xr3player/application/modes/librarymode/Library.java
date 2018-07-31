@@ -864,9 +864,9 @@ public class Library extends StackPane {
 	/**
 	 * Delete the library.
 	 */
-	public void deleteLibrary(Node owner) {
+	public void deleteLibrary(Node node) {
 		if (controller.isFree(true)
-				&& ActionTool.doQuestion("Delete Library", "Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", owner, Main.window)) {
+				&& ActionTool.doQuestion("Delete Library", "Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", node, Main.window)) {
 			
 			try {
 				

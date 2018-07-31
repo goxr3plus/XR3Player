@@ -14,7 +14,12 @@
       </MenuItem>
       <MenuItem fx:id="showTheLibrary" mnemonicParsing="false" text="Show me the Library">
          <graphic>
-            <FontIcon fx:id="visualizerEyeIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+            <FontIcon iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="deleteLibrary" mnemonicParsing="false" text="Delete Library">
+         <graphic>
+            <FontIcon iconColor="#f83e3e" iconLiteral="icm-books" iconSize="21" />
          </graphic>
       </MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
