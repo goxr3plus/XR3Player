@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
@@ -918,16 +919,17 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		});
 		
 		//transferMedia
-		//		transferMedia.getItems().get(key).setVisible(false);
-		//		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
-		//			
-		//			//Start the selected player
-		//			Main.xPlayersList.getXPlayerController(transferMedia.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
-		//			
-		//			//Stop the Current Player
-		//			stop();
-		//			
-		//		})));
+		IntStream.rangeClosed(0, 2).filter(item -> item != getKey()).forEach(item -> transferMedia.getItems().add(new MenuItem("->Player { " + ( item + 1 ) + " }")));
+		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
+			
+			//Start the selected player
+			Main.xPlayersList.getXPlayerController(Integer.parseInt(item.getText().replace("->Player { ", "").replace(" }", "")) - 1)
+					.playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
+			
+			//Stop the Current Player
+			stop();
+			
+		})));
 		
 		//=emotionsButton
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());

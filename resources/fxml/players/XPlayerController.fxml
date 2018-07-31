@@ -558,11 +558,6 @@
                                        </graphic>
                                     </Button>
                                     <MenuButton fx:id="transferMedia" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 0 }" />
-                                        <MenuItem mnemonicParsing="false" text="-&gt;Player { 1 }" />
-                                          <MenuItem mnemonicParsing="false" text="-&gt;Player { 2 }" />
-                                      </items>
                                        <tooltip>
                                           <Tooltip text="Transfer the Audio to the selected Player" />
                                        </tooltip>
