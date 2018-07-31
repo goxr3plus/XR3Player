@@ -191,10 +191,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackPane speedSliderStackPane;
 	
 	@FXML
-	private Label speedLabel;
+	private JFXButton speedControlButton;
 	
 	@FXML
-	private FontIcon speedLabelFontIcon;
+	private FontIcon speedLabelFontIcon1;
 	
 	@FXML
 	private Slider speedSlider;
@@ -961,6 +961,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
 		
+		//speedControlButton
+		speedControlButton.setOnAction(a -> speedSlider.setValue(speedSlider.getMax() / 2));
+		
 		//speedSlider
 		double speedSliderHalf = (int) speedSlider.getMax() / 2.0;
 		//speedSlider.disableProperty().bind(seekService.runningProperty())
@@ -981,8 +984,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				speedFactor = 0.05;
 			}
 			
-			//SpeedLabel
-			speedLabel.setText( ( speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString2(String.valueOf(speedFactor), 4));
+			//speedControlButton
+			speedControlButton.setText( ( speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString2(String.valueOf(speedFactor), 4));
 			
 			//Do it!
 			if (xPlayer.getSpeedFactor() != speedFactor) {

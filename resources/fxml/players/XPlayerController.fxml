@@ -207,11 +207,11 @@
                                              <children>
                                                 <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="50.0" StackPane.alignment="CENTER">
                                                    <children>
-                                                      <Label fx:id="speedLabel" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 13; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="1.0">
+                                                      <JFXButton fx:id="speedControlButton" contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 11;" styleClass="jfx-button-dark-white-selection" text="1.0">
                                                          <graphic>
-                                                            <FontIcon fx:id="speedLabelFontIcon" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                            <FontIcon fx:id="speedLabelFontIcon1" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                          </graphic>
-                                                      </Label>
+                                                      </JFXButton>
                                                       <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
                                                          <styleClass>
                                                             <String fx:value="transparency-slider" />
