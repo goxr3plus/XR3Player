@@ -52,29 +52,22 @@
          </graphic>
       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
-      <MenuItem fx:id="markAsPlayed" mnemonicParsing="false" onAction="#action" text="Mark as Played (CTRL+U)">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="far-play-circle" iconSize="22" />
-         </graphic>
-      </MenuItem>
       <MenuItem fx:id="stars" mnemonicParsing="false" onAction="#action" text="Stars (CTRL+Q)">
          <graphic>
             <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="20" />
          </graphic>
       </MenuItem>
-      <Menu mnemonicParsing="false" text="Send To">
-         <items>
-            <MenuItem fx:id="copyOrMove" mnemonicParsing="false" onAction="#action" text="Copy/Move">
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
-               </graphic>
-            </MenuItem>
-         </items>
+      <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
          <graphic>
-            <FontIcon iconColor="#2cbad0" iconLiteral="fas-share-alt" iconSize="20" />
+            <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
          </graphic>
-      </Menu>
+      </MenuItem>
       <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="markAsPlayed" mnemonicParsing="false" onAction="#action" text="Mark as Played (CTRL+U)">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="far-play-circle" iconSize="22" />
+         </graphic>
+      </MenuItem>
       <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
          <graphic>
             <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />

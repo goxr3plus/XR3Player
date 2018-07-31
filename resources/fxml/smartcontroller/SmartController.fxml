@@ -36,7 +36,7 @@
                   <VBox fx:id="mediaViewerVBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
                      <children>
                         <Label fx:id="mediaViewerLabel" alignment="CENTER" styleClass="white-black-label" text="Generating album views" />
-                        <ProgressBar fx:id="mediaViewerProgress" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" styleClass="transparent-progress-bar" />
+                        <ProgressBar fx:id="mediaViewerProgress" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" progress="0.0" styleClass="transparent-progress-bar" />
                      </children>
                      <padding>
                         <Insets top="25.0" />
