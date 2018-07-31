@@ -87,13 +87,6 @@ public class ApplicationSettingsLoader {
 			
 			//======================START OF Playlists-Settings======================
 			
-			//--Search SECTOR
-			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
-					.ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
-			
-			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
-			
 			//--Media Mode SECTOR
 			
 			Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection"))
@@ -101,6 +94,23 @@ public class ApplicationSettingsLoader {
 			
 			Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown"))
 					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(), Integer.valueOf(s)));
+			
+			Optional.ofNullable(settings.getProperty("PlayLists-General-SelMatchMedViewItem"))
+					.ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getSelectMatchingMediaViewItem().setSelected(Boolean.parseBoolean(s)));
+			
+			//--Media Viewer SECTOR
+			Optional.ofNullable(settings.getProperty("PlayLists-MediaViewer-SelMatchPlaylistItem"))
+					.ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getSelectMatchingPlaylistItem().setSelected(Boolean.parseBoolean(s)));
+			
+			Optional.ofNullable(settings.getProperty("PlayLists-MediaViewer-ScrollToMatchPlaylistItem"))
+					.ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getScrollToMatchingPlaylistItem().setSelected(Boolean.parseBoolean(s)));
+			
+			//--Search SECTOR
+			Optional.ofNullable(settings.getProperty("PlayLists-Search-InstantSearch"))
+					.ifPresent(s -> Main.settingsWindow.getPlayListsSettingsController().getInstantSearch().setSelected(Boolean.parseBoolean(s)));
+			
+			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing"))
+					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup(), Integer.valueOf(s)));
 			
 			//--Folders Mode SECTOR
 			Optional.ofNullable(settings.getProperty("PlayLists-FoldersMode-WhichFilesToShowGenerally")).ifPresent(s -> {
