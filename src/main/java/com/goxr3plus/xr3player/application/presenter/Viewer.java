@@ -508,11 +508,26 @@ public class Viewer extends Region {
 						//Main.mediaInformation.updateInformation(mediaViewer.getMedia())
 						
 						//Select the matching item on Playlist
-						smartController.getItemsObservableList().stream().filter(media -> media.getFilePath().equals(mediaViewer.getMedia().getFilePath())).findFirst()
-								.ifPresent(media -> {
-									smartController.getNormalModeMediaTableViewer().getSelectionModel().clearSelection();
-									smartController.getNormalModeMediaTableViewer().getSelectionModel().select(media);
-								});
+						if (Main.settingsWindow.getPlayListsSettingsController().getSelectMatchingPlaylistItem().isSelected())
+							smartController.getItemsObservableList().stream().filter(media -> media.getFilePath().equals(mediaViewer.getMedia().getFilePath())).findFirst()
+									.ifPresent(media -> {
+										
+										//Check if selection is allowed
+										if (Main.settingsWindow.getPlayListsSettingsController().getSelectMatchingPlaylistItem().isSelected()) {
+											
+											//Select
+											smartController.getNormalModeMediaTableViewer().getSelectionModel().clearSelection();
+											smartController.getNormalModeMediaTableViewer().getSelectionModel().select(media);
+											
+										}
+										
+										//Check if scroll is allowed
+										if (Main.settingsWindow.getPlayListsSettingsController().getSelectMatchingPlaylistItem().isSelected()) {
+											
+											//ScrollTo
+											smartController.getNormalModeMediaTableViewer().getTableView().scrollTo(media);
+										}
+									});
 					}
 				} else if (m.getButton() == MouseButton.SECONDARY) {
 					

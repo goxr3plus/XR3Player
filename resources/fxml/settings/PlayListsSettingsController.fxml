@@ -91,9 +91,9 @@
                                     <RadioMenuItem mnemonicParsing="false" text="500" toggleGroup="$totalFilesShownGroup" />
                                  </items>
                               </MenuButton>
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Select matching Media View item" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Select matching Media Viewer item" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                                  <tooltip>
-                                    <Tooltip text="When selecting a matching item from playlist try to scroll to show it " />
+                                    <Tooltip />
                                  </tooltip>
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="fab-buromobelexperte" iconSize="24" />
@@ -134,7 +134,7 @@
                               <JFXCheckBox fx:id="scrollToMatchingPlaylistItem" alignment="CENTER" checkedColor="#119c8c" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text=" " textAlignment="CENTER" unCheckedColor="#9c101b" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Select matching playlist item" textAlignment="CENTER" wrapText="true">
                                  <tooltip>
-                                    <Tooltip text="When selecting a matching item from playlist try to scroll to show it " />
+                                    <Tooltip />
                                  </tooltip>
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="fab-buromobelexperte" iconSize="24" />

@@ -318,13 +318,19 @@ public class MediaTableViewer extends StackPane {
 		//Update the Media Information when Selected Item changes
 		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue != null && oldValue != newValue) {
+				
+				//Synchronize with Media Information
 				Main.mediaInformation.updateInformation(newValue);
 				
-				String path = newValue.getFilePath();
-				
-				smartController.getMediaViewer().getItemsObservableList().stream().filter(media -> ( (MediaViewer) media ).getMedia().getFilePath().equals(path)).findFirst().ifPresent(mediaViewer -> {
-					smartController.getMediaViewer().setCenterIndex(smartController.getMediaViewer().getItemsObservableList().indexOf(mediaViewer));
-				});
+				//Check if selection is allowed
+				if (Main.settingsWindow.getPlayListsSettingsController().getSelectMatchingMediaViewItem().isSelected()) {
+					String path = newValue.getFilePath();
+					
+					//Select
+					smartController.getMediaViewer().getItemsObservableList().stream().filter(media -> ( (MediaViewer) media ).getMedia().getFilePath().equals(path)).findFirst()
+							.ifPresent(
+									mediaViewer -> smartController.getMediaViewer().setCenterIndex(smartController.getMediaViewer().getItemsObservableList().indexOf(mediaViewer)));
+				}
 				
 			}
 		});
@@ -415,8 +421,7 @@ public class MediaTableViewer extends StackPane {
 				// The drag must come from source other than the owner
 				System.out.println(dragOver.getGestureSource());
 				//if(dragOver.getGestureSource().toString().contains("MediaViewer") && dragOver.getGestureSource().)
-					
-					
+				
 				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != tableView)
 					dragOver.acceptTransferModes(TransferMode.LINK);
 				

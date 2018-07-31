@@ -155,8 +155,14 @@ public class PlaylistsSettingsController extends BorderPane {
 				l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-SelMatchPlaylistItem", String.valueOf(selectMatchingPlaylistItem.isSelected())));
 		
 		//scrollToMatchingPlaylistItem
-		scrollToMatchingPlaylistItem.selectedProperty().addListener(
-				l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-ScrollToMatchPlaylistItem", String.valueOf(scrollToMatchingPlaylistItem.isSelected())));
+		scrollToMatchingPlaylistItem.selectedProperty().addListener(l -> {
+			
+			//Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-ScrollToMatchPlaylistItem", String.valueOf(scrollToMatchingPlaylistItem.isSelected()));
+			
+			//Unselect  selectMatchingPlaylistItem 
+			selectMatchingPlaylistItem.setSelected(false);
+		});
 		
 		//--------------------SEARCH---------------------------------
 		
