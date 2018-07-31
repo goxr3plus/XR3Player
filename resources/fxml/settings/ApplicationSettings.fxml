@@ -86,9 +86,9 @@
                <graphic>
                   <Group>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Opened Libraries" textAlignment="CENTER" wrapText="true">
+                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="65.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Playlists" textAlignment="CENTER" wrapText="true">
                            <graphic>
-                              <FontIcon iconColor="#e0b143" iconLiteral="far-folder-open" iconSize="32" />
+                              <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="42" />
                            </graphic>
                         </Label>
                      </children>
@@ -99,9 +99,9 @@
                <graphic>
                   <Group>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="65.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Libraries" textAlignment="CENTER" wrapText="true">
+                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Libraries" textAlignment="CENTER" wrapText="true">
                            <graphic>
-                              <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="42" />
+                              <FontIcon iconColor="#e0b143" iconLiteral="far-folder" iconSize="32" />
                            </graphic>
                         </Label>
                      </children>

@@ -49,16 +49,25 @@ public class PlaylistsSettingsController extends BorderPane {
 	private ToggleGroup totalFilesShownGroup;
 	
 	@FXML
-	private ToggleGroup whichFilesToShowGenerally;
+	private JFXCheckBox selectMatchingMediaViewItem;
 	
 	@FXML
-	private ToggleGroup filesToShowUnderFolders;
+	private JFXCheckBox scrollToMatchingPlaylistItem;
+	
+	@FXML
+	private JFXCheckBox selectMatchingPlaylistItem;
 	
 	@FXML
 	private JFXCheckBox instantSearch;
 	
 	@FXML
 	private ToggleGroup fileSearchGroup;
+	
+	@FXML
+	private ToggleGroup whichFilesToShowGenerally;
+	
+	@FXML
+	private ToggleGroup filesToShowUnderFolders;
 	
 	// -------------------------------------------------------------
 	
@@ -89,21 +98,7 @@ public class PlaylistsSettingsController extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		//--Playlists-Settings-Search--------------
-		
-		//instantSearch
-		instantSearch.selectedProperty().addListener(l -> {
-			
-			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-InstantSearch", String.valueOf(instantSearch.isSelected()));
-			System.out.println("Instant Search Updated...");
-			
-		});
-		
-		//fileSearchGroup
-		fileSearchGroup.selectedToggleProperty().addListener(listener -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-FileSearchUsing",
-				Integer.toString(JavaFXTools.getIndexOfSelectedToggle(fileSearchGroup))));
-		
-		//--Playlists-Settings-General--------------
+		//--------------------GENERAL---------------------------------
 		
 		//playedFilesDetectionGroup
 		playedFilesDetectionGroup.selectedToggleProperty().addListener(listener -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-PlayedFilesDetection",
@@ -149,23 +144,39 @@ public class PlaylistsSettingsController extends BorderPane {
 					ActionTool.showNotification("Message", "Problem occured trying to clear played files from database", Duration.millis(1500), NotificationType.ERROR);
 		});
 		
+		//selectMatchingMediaViewItem
+		selectMatchingMediaViewItem.selectedProperty().addListener(
+				l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-SelMatchMedViewItem", String.valueOf(selectMatchingMediaViewItem.isSelected())));
+		
+		//--------------------MEDIA VIEWER---------------------------------
+		
+		//selectMatchingPlaylistItem
+		selectMatchingPlaylistItem.selectedProperty().addListener(
+				l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-SelMatchPlaylistItem", String.valueOf(selectMatchingPlaylistItem.isSelected())));
+		
+		//scrollToMatchingPlaylistItem
+		scrollToMatchingPlaylistItem.selectedProperty().addListener(
+				l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-MediaViewer-ScrollToMatchPlaylistItem", String.valueOf(scrollToMatchingPlaylistItem.isSelected())));
+		
+		//--------------------SEARCH---------------------------------
+		
+		//instantSearch
+		instantSearch.selectedProperty()
+				.addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-InstantSearch", String.valueOf(instantSearch.isSelected())));
+		
+		//fileSearchGroup
+		fileSearchGroup.selectedToggleProperty().addListener(listener -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-FileSearchUsing",
+				Integer.toString(JavaFXTools.getIndexOfSelectedToggle(fileSearchGroup))));
+		
 		//--------------------FOLDERS MODE---------------------------------
 		
 		//whichFilesToShowGenerally
-		whichFilesToShowGenerally.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-FoldersMode-WhichFilesToShowGenerally", ( (Control) newValue ).getTooltip().getText());
-			
-		});
+		whichFilesToShowGenerally.selectedToggleProperty().addListener((observable , oldValue , newValue) -> Main.dbManager.getPropertiesDb()
+				.updateProperty("PlayLists-FoldersMode-WhichFilesToShowGenerally", ( (Control) newValue ).getTooltip().getText()));
 		
 		//filesToShowUnderFolders
-		filesToShowUnderFolders.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("PlayLists-FoldersMode-FilesToShowUnderFolders", ( (Control) newValue ).getTooltip().getText());
-			
-		});
+		filesToShowUnderFolders.selectedToggleProperty().addListener((observable , oldValue , newValue) -> Main.dbManager.getPropertiesDb()
+				.updateProperty("PlayLists-FoldersMode-FilesToShowUnderFolders", ( (Control) newValue ).getTooltip().getText()));
 		
 		//--------------------END OF FOLDERS MODE---------------------------------
 		
@@ -245,6 +256,27 @@ public class PlaylistsSettingsController extends BorderPane {
 	 */
 	public ToggleGroup getFilesToShowUnderFolders() {
 		return filesToShowUnderFolders;
+	}
+	
+	/**
+	 * @return the selectMatchingMediaViewItem
+	 */
+	public JFXCheckBox getSelectMatchingMediaViewItem() {
+		return selectMatchingMediaViewItem;
+	}
+	
+	/**
+	 * @return the scrollToMatchingPlaylistItem
+	 */
+	public JFXCheckBox getScrollToMatchingPlaylistItem() {
+		return scrollToMatchingPlaylistItem;
+	}
+	
+	/**
+	 * @return the selectMatchingPlaylistItem
+	 */
+	public JFXCheckBox getSelectMatchingPlaylistItem() {
+		return selectMatchingPlaylistItem;
 	}
 	
 }
