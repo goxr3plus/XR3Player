@@ -11,7 +11,7 @@
    <center>
       <HBox fx:id="hBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="4.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+            <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
                <tabs>
                   <Tab fx:id="mixerTab" text="Mixer">
                      <graphic>
