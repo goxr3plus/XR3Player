@@ -124,7 +124,7 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	
 	//Internal Information
-	public static final int APPLICATION_VERSION = 117;
+	public static final int APPLICATION_VERSION = 118;
 	public static final String RELEASE_DATE = "Check updates window";
 	
 	private static final Logger[] pin;
