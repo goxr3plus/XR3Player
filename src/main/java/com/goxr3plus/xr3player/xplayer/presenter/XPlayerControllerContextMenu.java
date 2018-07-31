@@ -229,16 +229,13 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 	}
 	
 	/**
-	 * Shows a popOver with informations for this Song.
-	 *
-	 * @param x
-	 *            the x
-	 * @param y
-	 *            the y
+	 * Open the given website on the build in Chromium
+	 * 
+	 * @param url
 	 */
-	public void showPopOver(double x , double y) {
-		// this.media = media
-		// pop.show(media)
+	private void openWebSite(String url) {
+		Main.webBrowser.createTabAndSelect(url);
+		Main.topBar.selectTab(Main.topBar.getWebModeTab());
 	}
 	
 	/**
@@ -272,68 +269,68 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 				//---------------------SEARCH ON WEB--------------------------------------------
 				//Music Sites
 				if (source == soundCloud)
-					ActionTool.openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == jamendo)
-					ActionTool.openWebSite("https://www.jamendo.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.jamendo.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == tuneIn)
-					ActionTool.openWebSite("http://tunein.com/search/?query=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("http://tunein.com/search/?query=" + URLEncoder.encode(mediaPath, encoding));
 				//Amazon
 				else if (source == amazonUS)
-					ActionTool.openWebSite("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonUK)
-					ActionTool.openWebSite("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonCanada)
-					ActionTool.openWebSite("https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonGermany)
-					ActionTool.openWebSite("https://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonFrance)
-					ActionTool.openWebSite("https://www.amazon.fr/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.fr/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonSpain)
-					ActionTool.openWebSite("https://www.amazon.es/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.es/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonItaly)
-					ActionTool.openWebSite("https://www.amazon.it/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.it/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonJapan)
-					ActionTool.openWebSite("https://www.amazon.co.jp/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.co.jp/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == amazonChina)
-					ActionTool.openWebSite("https://www.amazon.cn/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.amazon.cn/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaPath, encoding));
 				
 				//Music Sites
 				else if (source == hDTracks)
-					ActionTool.openWebSite("http://www.hdtracks.com/catalogsearch/result/?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("http://www.hdtracks.com/catalogsearch/result/?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == cDUniverse)
-					ActionTool.openWebSite("http://www.cduniverse.com/sresult.asp?HT_Search=ALL&HT_Search_Info=" + URLEncoder.encode(mediaPath, encoding) + "&style=all");
+					openWebSite("http://www.cduniverse.com/sresult.asp?HT_Search=ALL&HT_Search_Info=" + URLEncoder.encode(mediaPath, encoding) + "&style=all");
 				
 				//Radios
 				else if (source == lastfm)
-					ActionTool.openWebSite("https://www.last.fm/search?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.last.fm/search?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == librefm)
-					ActionTool.openWebSite("https://libre.fm/search.php?search_term=" + URLEncoder.encode(mediaPath, encoding) + "&search_type=artist");
+					openWebSite("https://libre.fm/search.php?search_term=" + URLEncoder.encode(mediaPath, encoding) + "&search_type=artist");
 				
 				//Video WebSites
 				else if (source == youtube)
-					ActionTool.openWebSite("https://www.youtube.com/results?search_query=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.youtube.com/results?search_query=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == vimeo)
-					ActionTool.openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
 				
 				//Search-Engines
 				else if (source == google)
-					ActionTool.openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == duckduckgo)
-					ActionTool.openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == bing)
-					ActionTool.openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == yahoo)
-					ActionTool.openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(mediaPath, encoding));
 				
 				//Wikipedia
 				else if (source == wikipedia)
-					ActionTool.openWebSite("https://www.wikipedia.org/wiki/Special:Search?search=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("https://www.wikipedia.org/wiki/Special:Search?search=" + URLEncoder.encode(mediaPath, encoding));
 				
 				//-----------------------FIND LYRICS------------------------------------------------
 				else if (source == lyricFinderOrg)
-					ActionTool.openWebSite("http://search.lyricfinder.org/?query=" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("http://search.lyricfinder.org/?query=" + URLEncoder.encode(mediaPath, encoding));
 				else if (source == lyricsCom)
-					ActionTool.openWebSite("http://www.lyrics.com/lyrics/" + URLEncoder.encode(mediaPath, encoding));
+					openWebSite("http://www.lyrics.com/lyrics/" + URLEncoder.encode(mediaPath, encoding));
 				
 			} catch (UnsupportedEncodingException ex) {
 				ex.printStackTrace();
