@@ -1165,6 +1165,23 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	}
 	
 	/**
+	 * Set the speed of the player
+	 * 
+	 * @param speed
+	 */
+	public void setSpeed(double speed) {
+		speedSlider.setValue(speed);
+	}
+	
+	/** Get the speed of the player
+	 * @return 
+	 * 
+	 */
+	public double getSpeed() {
+		return speedSlider.getValue();
+	}
+	
+	/**
 	 * Returns the key of the player.
 	 *
 	 * @return The Key of the Player

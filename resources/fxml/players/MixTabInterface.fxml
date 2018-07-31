@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,11 +20,44 @@
          <bottom>
             <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-red" text="|">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-balance-scale" iconSize="24" />
-                     </graphic>
-                  </JFXButton>
+                  <BorderPane minHeight="0.0" minWidth="0.0">
+                     <center>
+                        <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-red" text="|" BorderPane.alignment="CENTER">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-balance-scale" iconSize="24" />
+                           </graphic>
+                        </JFXButton>
+                     </center>
+                     <VBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </VBox.margin>
+                     <left>
+                        <MenuButton fx:id="sync1" mnemonicParsing="false" text="SYNC" BorderPane.alignment="CENTER">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Speed" />
+                            <MenuItem mnemonicParsing="false" text="Volume" />
+                              <MenuItem mnemonicParsing="false" text="Speed + Volume" />
+                          </items>
+                           <styleClass>
+                              <String fx:value="dark-menu-button" />
+                              <String fx:value="jfx-button-yellow" />
+                           </styleClass>
+                        </MenuButton>
+                     </left>
+                     <right>
+                        <MenuButton fx:id="sync2" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="SYNC" BorderPane.alignment="CENTER">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Speed" />
+                              <MenuItem mnemonicParsing="false" text="Volume" />
+                              <MenuItem mnemonicParsing="false" text="Speed + Volume" />
+                           </items>
+                           <styleClass>
+                              <String fx:value="dark-menu-button" />
+                              <String fx:value="jfx-button-yellow" />
+                           </styleClass>
+                        </MenuButton>
+                     </right>
+                  </BorderPane>
                   <StackPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #000000;">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="15.0">

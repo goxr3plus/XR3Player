@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +23,12 @@ public class MixTabInterface extends StackPane {
 	
 	@FXML
 	private JFXButton balanceButton;
+	
+	@FXML
+	private MenuButton sync1;
+	
+	@FXML
+	private MenuButton sync2;
 	
 	@FXML
 	private ProgressBar volumeProgress1;
@@ -103,6 +110,21 @@ public class MixTabInterface extends StackPane {
 			volumeProgress2.setMaxWidth(masterVolumeSliderWidth - minimumWidth);
 		}
 		
+		//Syncronize Button
+		prepareSynchonizeButtons(sync1, 2, 1);
+		prepareSynchonizeButtons(sync2, 1, 2);
+	}
+	
+	/**
+	 * Fast method to avoid duplicate code
+	 */
+	private void prepareSynchonizeButtons(MenuButton button , int masterKey , int slaveKey) {
+		button.getItems().get(0).setOnAction(a -> Main.xPlayersList.getXPlayerController(slaveKey).setSpeed(Main.xPlayersList.getXPlayerController(masterKey).getSpeed()));
+		button.getItems().get(1).setOnAction(a -> Main.xPlayersList.getXPlayerController(slaveKey).setVolume(Main.xPlayersList.getXPlayerController(masterKey).getVolume()));
+		button.getItems().get(2).setOnAction(a -> {
+			Main.xPlayersList.getXPlayerController(slaveKey).setVolume(Main.xPlayersList.getXPlayerController(masterKey).getVolume());
+			Main.xPlayersList.getXPlayerController(slaveKey).setSpeed(Main.xPlayersList.getXPlayerController(masterKey).getSpeed());
+		});
 	}
 	
 	/**
