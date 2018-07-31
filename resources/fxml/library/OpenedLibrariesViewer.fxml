@@ -16,7 +16,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <tooltip>
-            <Tooltip text="XR3Player supports multiple users , in order to use it your must create an login with a user :)" />
+            <Tooltip text="Create a playlist/library" />
          </tooltip>
          <graphic>
             <HBox alignment="CENTER" spacing="15.0">
