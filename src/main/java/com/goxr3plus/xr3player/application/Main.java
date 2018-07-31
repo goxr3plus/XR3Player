@@ -236,7 +236,7 @@ public class Main extends Application {
 	/**
 	 * Used to provide ui for drag and view
 	 */
-	public final static DragViewer dragViewer = new DragViewer();
+	public static DragViewer dragViewer;
 	
 	//----------------END: The above have not dependencies on other classes ---------------------------------//
 	
@@ -505,6 +505,7 @@ public class Main extends Application {
 		
 		mediaSearchWindow = new MediaSearchWindow();
 		
+		dragViewer = new DragViewer();
 		// --------------END: The below have dependencies on others------------w------------
 	}
 	
