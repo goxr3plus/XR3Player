@@ -918,16 +918,16 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		});
 		
 		//transferMedia
-		transferMedia.getItems().get(key).setVisible(false);
-		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
-			
-			//Start the selected player
-			Main.xPlayersList.getXPlayerController(transferMedia.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
-			
-			//Stop the Current Player
-			stop();
-			
-		})));
+//		transferMedia.getItems().get(key).setVisible(false);
+//		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
+//			
+//			//Start the selected player
+//			Main.xPlayersList.getXPlayerController(transferMedia.getItems().indexOf(item)).playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
+//			
+//			//Stop the Current Player
+//			stop();
+//			
+//		})));
 		
 		//=emotionsButton
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());

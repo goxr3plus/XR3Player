@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<StackPane prefHeight="389.0" prefWidth="386.0" stylesheets="@../../style/application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+   <children>
+      <BorderPane>
+         <bottom>
+            <StackPane BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="15.0">
+                     <children>
+                        <ProgressBar fx:id="smTimeSliderProgress" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                           <styleClass>
+                              <String fx:value="transparent-progress-bar" />
+                              <String fx:value="transparent-volume-progress-bar2" />
+                           </styleClass>
+                        </ProgressBar>
+                        <ProgressBar fx:id="smTimeSliderProgress1" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                           <styleClass>
+                              <String fx:value="transparent-progress-bar" />
+                              <String fx:value="transparent-volume-progress-bar3" />
+                           </styleClass>
+                        </ProgressBar>
+                     </children>
+                  </HBox>
+                  <Slider fx:id="smTimeSlider" maxWidth="1.7976931348623157E308" minWidth="5.0">
+                     <styleClass>
+                        <String fx:value="transparency-slider" />
+                        <String fx:value="timer-slider" />
+                     </styleClass>
+                  </Slider>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </BorderPane.margin>
+            </StackPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

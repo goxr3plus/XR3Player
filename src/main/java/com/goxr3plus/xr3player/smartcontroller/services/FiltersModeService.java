@@ -119,49 +119,44 @@ public class FiltersModeService extends Service<Void> {
 		switch ( ( (MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle() ).getText()) {
 			case "Artist":
 				filter = Filter.ARTIST;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from artist [ " + filterValue + " ]");
 				break;
 			case "Album":
 				filter = Filter.ALBUM;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from album [ " + filterValue + " ]");
 				break;
 			case "Genre":
 				filter = Filter.GENRE;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with genre [ " + filterValue + " ]");
 				break;
 			case "Year":
 				filter = Filter.YEAR;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from year [ " + filterValue + " ]");
 				break;
 			case "BPM":
 				filter = Filter.BPM;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with bpm [ " + filterValue + " ]");
 				break;
 			case "Key":
 				filter = Filter.KEY;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with key [ " + filterValue + " ]");
 				break;
 			case "Composer":
 				filter = Filter.COMPOSER;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from composer [ " + filterValue + " ]");
 				break;
 			case "Bit Rate":
 				filter = Filter.BIT_RATE;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs with Bit Rate [ " + filterValue + " ]");
 				break;
 			default:
 				filter = Filter.ARTIST;
-				if (changeLabel)
-					smartControllerArtistsMode.getProgressLabel().setText("Detecting songs from artist [ " + filterValue + " ]");
 		}
+		
+		//Finally update the text
+		if (changeLabel)
+			setLabelText("Detecting media : Filter -> " + ( (MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle() ).getText());
+	}
+	
+	/**
+	 * Shortcut for set the progress label text
+	 * 
+	 * @return
+	 */
+	private void setLabelText(String text) {
+		smartControllerArtistsMode.getProgressLabel().setText(text + " [ " + filterValue + " ]");
 	}
 	
 	@Override

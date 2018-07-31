@@ -5,9 +5,12 @@ package main.java.com.goxr3plus.xr3player.application.modes.djmode;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXTabPane;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -28,11 +31,25 @@ public class DJMode extends BorderPane {
 	@FXML
 	private HBox hBox;
 	
+	@FXML
+	private JFXTabPane tabPane;
+	
+	@FXML
+	private Tab mixerTab;
+	
+	@FXML
+	private Tab videoTab;
+	
+	@FXML
+	private Tab foldersModeTab;
+	
 	//--------------------------------------------------------------
 	
 	public final XPlayerController xPlayer0 = new XPlayerController(0);
 	public final XPlayerController xPlayer1 = new XPlayerController(1);
 	public final XPlayerController xPlayer2 = new XPlayerController(2);
+	public final XPlayerController xPlayer3 = new XPlayerController(3);
+	
 	
 	/**
 	 * Constructor.
@@ -74,14 +91,16 @@ public class DJMode extends BorderPane {
 		Main.xPlayersList.addXPlayerController(xPlayer2);
 		xPlayer2.makeTheDisc(Color.web("#fc4f4f"), 50, 0, 126, Side.LEFT);
 		xPlayer2.makeTheVisualizer();
-		hBox.getChildren().add(xPlayer2);
+		hBox.getChildren().add(2, xPlayer2);
 		HBox.setHgrow(xPlayer2, Priority.ALWAYS);
 		
-		//Add the KeyListeners
-		//addKeyListeners();
+		//Mixer Tab
+		Main.xPlayersList.addXPlayerController(xPlayer3);
+		xPlayer3.makeTheDisc(Color.web("#30f4a2"), 50, 0, 126, Side.LEFT);
+		xPlayer3.makeTheVisualizer();	
+		mixerTab.setContent(xPlayer3);
+		HBox.setHgrow(tabPane, Priority.ALWAYS);
 		
-		// removeThis
-		//	removeThis.setOnAction(a -> hBox.getChildren().remove(removeThis.getParent()));
 		
 		Main.libraryMode.getDjModeStackPane().getChildren().add(hBox);
 	}

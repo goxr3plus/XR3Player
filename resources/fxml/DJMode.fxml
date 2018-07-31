@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="269.0" prefWidth="405.0" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <HBox fx:id="hBox" alignment="CENTER" minWidth="0.0" spacing="4.0" BorderPane.alignment="CENTER" />
+      <HBox fx:id="hBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="4.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+               <tabs>
+                  <Tab fx:id="mixerTab" text="Mixer">
+                     <graphic>
+                        <FontIcon iconColor="#f5ca30" iconLiteral="gmi-album" iconSize="24" />
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="videoTab" text="Video">
+                     <graphic>
+                        <FontIcon iconColor="#f5ca30" iconLiteral="fas-video" iconSize="24" />
+                     </graphic>
+                  </Tab>
+               </tabs>
+               <styleClass>
+                  <String fx:value="magicTabPaneVersion2" />
+                  <String fx:value="specialJFXTabPane" />
+               </styleClass>
+            </JFXTabPane>
+         </children></HBox>
    </center>
 </fx:root>

@@ -22,7 +22,7 @@
          <items>
             <BorderPane minHeight="0.0" minWidth="0.0">
                <top>
-                  <MenuButton fx:id="filterMenuButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-radius: 0;" text="Filter : Artist" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                  <MenuButton fx:id="filterMenuButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" popupSide="RIGHT" styleClass="dark-menu-button" text="Filter : Artist" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                      <items>
                         <RadioMenuItem mnemonicParsing="false" selected="true" text="Artist">
                            <toggleGroup>
@@ -46,7 +46,7 @@
                   <StackPane BorderPane.alignment="CENTER">
                      <children>
                         <ListView fx:id="listView" />
-                        <Label fx:id="nothingFoundLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="No results" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="nothingFoundLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="No Media Found" textAlignment="CENTER" wrapText="true">
                            <graphic>
                               <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
                            </graphic>
