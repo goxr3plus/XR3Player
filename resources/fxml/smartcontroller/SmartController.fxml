@@ -216,9 +216,9 @@
                         <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="24" />
                      </graphic>
                 </Tab>
-                  <Tab fx:id="filtersModeTab" text="Filters">
+                  <Tab fx:id="filtersModeTab" disable="true">
                      <graphic>
-                        <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
+                        <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" visible="false" />
                      </graphic>
                   </Tab>
                   <Tab fx:id="foldersModeTab" disable="true">

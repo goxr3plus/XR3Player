@@ -732,7 +732,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//Notification
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(2),
-					NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+					NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
 		
 		//copyFileLocation
@@ -760,7 +760,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//Notification
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media File Full Path copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
-					Duration.seconds(2), NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+					Duration.seconds(2), NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
 		
 		//copyFile
@@ -788,7 +788,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//Notification
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(2),
-					NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+					NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
 		
 		// showMenu
@@ -1936,8 +1936,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 					
 					//Show Notification
-					ActionTool.showNotification("Player [ " + this.getKey() + " ] Opened", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-							NotificationType.SIMPLE, JavaFXTools.getImageView(image != null ? image : MediaInformation.MISSING_ARTWORK_IMAGE, 60, 60));
+					ActionTool.showNotification("Playing on deck " + ( getKey() + 1 ), InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+							NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 				}
 			});
 			

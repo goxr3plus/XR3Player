@@ -133,7 +133,7 @@ public class MediaInformation extends StackPane {
 	// -------------------------------------------------------------
 	
 	/** The null image. */
-	public static final Image MISSING_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
+	//public static final Image MISSING_ARTWORK_IMAGE = InfoTool.getImageFromResourcesFolder("noArtwork.png");
 	
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());

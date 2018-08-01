@@ -346,54 +346,23 @@ public final class ActionTool {
 	 *            The notification title
 	 * @param text
 	 *            The notification text
-	 * @param d
-	 *            The duration that notification will be visible
-	 * @param notificationType
-	 *            The notification type
-	 */
-	public static void showFontIconNotification(String title , String text , Duration duration , NotificationType notificationType , FontIcon icon) {
-		
-		try {
-			
-			//Check if it is JavaFX Application Thread
-			if (!Platform.isFxApplicationThread()) {
-				Platform.runLater(() -> showFontIconNotification(title, text, duration, notificationType, icon));
-				return;
-			}
-			
-			//Show the notification
-			showNotification2(title, text, duration, notificationType, icon);
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		
-	}
-	
-	/**
-	 * Show a notification.
-	 *
-	 * @param title
-	 *            The notification title
-	 * @param text
-	 *            The notification text
 	 * @param duration
 	 *            The duration that notification will be visible
 	 * @param notificationType
 	 *            The notification type
 	 */
-	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , ImageView imageView) {
+	public static void showNotification(String title , String text , Duration duration , NotificationType notificationType , Node graphic) {
 		
 		try {
 			
 			//Check if it is JavaFX Application Thread
 			if (!Platform.isFxApplicationThread()) {
-				Platform.runLater(() -> showNotification(title, text, duration, notificationType, imageView));
+				Platform.runLater(() -> showNotification(title, text, duration, notificationType, graphic));
 				return;
 			}
 			
 			//Show the notification
-			showNotification2(title, text, duration, notificationType, imageView);
+			showNotification2(title, text, duration, notificationType, graphic);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -285,7 +285,7 @@ public class DropboxViewer extends StackPane {
 				accessToken = newValue;
 				
 				//Show message to the User
-				ActionTool.showFontIconNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
+				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account", Duration.millis(2000), NotificationType.SIMPLE,
 						JavaFXTools.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 64));
 				
 				//Save on the database

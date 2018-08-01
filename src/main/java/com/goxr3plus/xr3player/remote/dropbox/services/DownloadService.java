@@ -74,7 +74,7 @@ public class DownloadService extends Service<Boolean> {
 					downloadFile(client, dropboxFile, localFileAbsolutePath);
 					
 					//Show message to the User
-					Platform.runLater(() -> ActionTool.showFontIconNotification("Download completed",
+					Platform.runLater(() -> ActionTool.showNotification("Download completed",
 							"Completed downloading " + ( !dropboxFile.isDirectory() ? "File" : "Folder" ) + " :\n[ " + dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
 					

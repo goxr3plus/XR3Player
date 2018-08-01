@@ -502,7 +502,7 @@ public class DropboxService extends Service<Boolean> {
 						client.files().permanentlyDelete(path); //SUPPORTED ONLY ON BUSINESS PLAN
 						
 					//Show message to the User
-					Platform.runLater(() -> ActionTool.showFontIconNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
+					Platform.runLater(() -> ActionTool.showNotification("Delete was successful", "Successfully deleted selected files/folders", Duration.millis(2000),
 							NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
 					
 					return true;
@@ -531,7 +531,7 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> {
 						
 						//Show message
-						ActionTool.showFontIconNotification("Rename Successful",
+						ActionTool.showNotification("Rename Successful",
 								"Succesfully renamed file :\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + result.getMetadata().getName() + " ]",
 								Duration.millis(2500), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64));
 						
@@ -575,7 +575,7 @@ public class DropboxService extends Service<Boolean> {
 					CreateFolderResult result = client.files().createFolderV2(path, true);
 					
 					//Show message to the User
-					Platform.runLater(() -> ActionTool.showFontIconNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
+					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
 							Duration.millis(2000), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
 					
 					return true;
