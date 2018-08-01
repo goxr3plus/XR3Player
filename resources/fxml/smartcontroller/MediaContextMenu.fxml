@@ -57,7 +57,7 @@
             <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="20" />
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="exportFiles" mnemonicParsing="false" text="Export Files">
+      <MenuItem fx:id="exportFiles" mnemonicParsing="false" onAction="#action" text="Export Files">
          <graphic>
             <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
          </graphic>

@@ -82,13 +82,13 @@ public class MediaContextMenu extends ContextMenu {
 	private MenuItem lyricsCom;
 	
 	@FXML
-	private MenuItem markAsPlayed;
-	
-	@FXML
 	private MenuItem stars;
 	
 	@FXML
-	private MenuItem copyOrMove;
+	private MenuItem exportFiles;
+	
+	@FXML
+	private MenuItem markAsPlayed;
 	
 	@FXML
 	private MenuItem rename;
@@ -248,7 +248,6 @@ public class MediaContextMenu extends ContextMenu {
 		//------------ END of Animation------------------
 		
 	}
-
 	
 	/**
 	 * Open the given website on the build in Chromium
@@ -329,9 +328,9 @@ public class MediaContextMenu extends ContextMenu {
 			//Only one file selected
 			else
 				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO, true);
-		} else if (e.getSource() == copyOrMove) // copyTo
+		} else if (source == exportFiles) { // copyTo
 			Main.exportWindow.show(controller);
-		else
+		} else {
 			try {
 				
 				//-----------------------FIND LYRICS------------------------------------------------
@@ -343,6 +342,7 @@ public class MediaContextMenu extends ContextMenu {
 			} catch (UnsupportedEncodingException ex) {
 				ex.printStackTrace();
 			}
+		}
 		
 	}
 	
