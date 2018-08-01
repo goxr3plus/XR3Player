@@ -17,6 +17,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.DisplayMode;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.MicrophoneVisualizer;
 
 /**
@@ -43,7 +44,7 @@ public class MicrophonePCMAnalyzerTest extends Application {
 		//Stage
 		primaryStage.setWidth(500);
 		primaryStage.setHeight(500);
-		primaryStage.setTitle("LORD GOD");
+		primaryStage.setTitle("GOXR3PLUS STUDIO ( DE BRUDA )");
 		
 		//Scene
 		primaryStage.setScene(new Scene(borderPane));
@@ -70,7 +71,7 @@ public class MicrophonePCMAnalyzerTest extends Application {
 		new Thread(() -> {
 			int nBytesRead = 0;
 			byte[] trimBuffer;
-			int audioDataLength = 4096;
+			int audioDataLength = 1024;
 			ByteBuffer audioDataBuffer = ByteBuffer.allocate(audioDataLength);
 			audioDataBuffer.order(ByteOrder.LITTLE_ENDIAN);
 			
@@ -94,19 +95,19 @@ public class MicrophonePCMAnalyzerTest extends Application {
 					//	logger.info(() -> "Underrun> Available=" + sourceDataLine.available() + " , SourceDataLineBuffer=" + sourceDataLine.getBufferSize());
 					
 					//Check if anything has been read
-					if (totalRead > 0) {
-						trimBuffer = audioDataBuffer.array();
-						if (totalRead < trimBuffer.length) {
-							trimBuffer = new byte[totalRead];
-							//Copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array
-							// The number of components copied is equal to the length argument. 
-							System.arraycopy(audioDataBuffer.array(), 0, trimBuffer, 0, totalRead);
-						}
+//					if (totalRead > 0) {
+//						trimBuffer = audioDataBuffer.array();
+//						if (totalRead < trimBuffer.length) {
+//							trimBuffer = new byte[totalRead];
+//							//Copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array
+//							// The number of components copied is equal to the length argument. 
+//							System.arraycopy(audioDataBuffer.array(), 0, trimBuffer, 0, totalRead);
+//						}
 						
 						//Write PCM data
-						visualizer.writeDSP(trimBuffer);
-						System.err.println(trimBuffer[0] + " , Data Length :" + trimBuffer.length);
-					}
+						visualizer.writeDSP(audioDataBuffer.array());
+						System.err.println(totalRead);
+				//	}
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -114,6 +115,7 @@ public class MicrophonePCMAnalyzerTest extends Application {
 		}).start();
 		
 		//Visualizer
+		visualizer.setDisplayMode(Integer.parseInt(DisplayMode.CIRCLE_WITH_LINES.toString()));
 		visualizer.setupDSP(microphone.getTargetDataLine());
 		visualizer.startDSP(microphone.getTargetDataLine());
 		visualizer.startVisualizer();
