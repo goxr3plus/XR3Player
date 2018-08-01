@@ -14,8 +14,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -110,17 +108,12 @@
       </BorderPane>
       <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);" visible="false">
          <children>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/warning.png" />
-               </image>
-            </ImageView>
             <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true" />
             <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" text="&#10;1.Check the address for typing errors such as ww.example.com instead of www.example.com&#10;&#10;2.If you are unable to load any pages, check your computer’s network connection.&#10;&#10;3.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true">
                <VBox.margin>
                   <Insets left="5.0" right="5.0" />
                </VBox.margin></TextArea>
-            <JFXButton fx:id="tryAgain" buttonType="RAISED" contentDisplay="RIGHT" ripplerFill="#fa0c0c" text="Try Again">
+            <JFXButton fx:id="tryAgain" buttonType="RAISED" contentDisplay="RIGHT" ripplerFill="#fa0c0c" styleClass="jfx-button-dark-white-selection" text="Try Again">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

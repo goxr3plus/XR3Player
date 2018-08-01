@@ -19,7 +19,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
@@ -102,9 +101,6 @@ public class MP3BasicInfo extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	/** The null image. */
-	private final Image nullImage = InfoTool.getImageFromResourcesFolder("noAlbumImage.png");
-	
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
@@ -149,8 +145,7 @@ public class MP3BasicInfo extends StackPane {
 	}
 	
 	/**
-	 * Using this Service as an external Thread which updates the Information
-	 * based on the selected Media
+	 * Using this Service as an external Thread which updates the Information based on the selected Media
 	 * 
 	 * @author GOXR3PLUS
 	 *

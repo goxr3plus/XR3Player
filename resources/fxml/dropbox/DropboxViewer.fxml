@@ -328,7 +328,7 @@
             <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text=" Firefox or Opera or Chrome or Safari browser will be opened . You will login to your Dropbox Account  and grant permission to XR3Player . After it paste the Authorization code you will be given to the  below textfield and press ok ." textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #151515;">
+      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: #151515;" visible="false">
          <children>
             <FontIcon iconColor="#fff833" iconLiteral="ri-warning-sign" iconSize="32" />
             <Label styleClass="applicationSettingsLabel" text="Unable to Connect " textAlignment="CENTER" wrapText="true" />

@@ -22,7 +22,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
 <fx:root prefHeight="636.0" prefWidth="930.0" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="backgroundImageView" fitHeight="636.0" fitWidth="930.0" pickOnBounds="true" />
@@ -40,14 +39,7 @@
                      <graphic>
                         <Hyperlink fx:id="youtubeTutorialsHyperLink" style="-fx-border-color: transparent;" styleClass="jfx-button4" text="Youtube Tutorials">
                            <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../image/SlideShare-32.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
+                              <FontIcon iconColor="#e42b2b" iconLiteral="fab-youtube" iconSize="32" />
                            </graphic>
                         </Hyperlink>
                      </graphic>

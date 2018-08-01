@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -45,13 +44,6 @@
                                        </graphic>
                                     </JFXButton>
                                     <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" style="-fx-text-fill: white;" text="Rename" visible="false">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/rename.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>

@@ -17,8 +17,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -82,8 +80,6 @@ public class SmartControllerFiltersMode extends StackPane {
 	
 	// -------------------------------------------------------------
 	
-	public static final Image artistImage = InfoTool.getImageFromResourcesFolder("funnel.png");
-	
 	/**
 	 * Constructor.
 	 */
@@ -137,7 +133,7 @@ public class SmartControllerFiltersMode extends StackPane {
 					setTooltip(null);
 				} else {
 					//String text = InfoTool.getFileName(item); // get text from item
-					setGraphic(new ImageView(artistImage));
+					//setGraphic(new ImageView(artistImage))
 					setText(item);
 					setTooltip(new Tooltip(item));
 				}

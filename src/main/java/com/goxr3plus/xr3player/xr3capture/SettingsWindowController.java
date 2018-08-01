@@ -71,7 +71,6 @@ public class SettingsWindowController extends BorderPane {
 		
 		stage = new Stage();
 		stage.setTitle("Settings");
-		//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")));
 		stage.setScene(new Scene(root));
 		stage.centerOnScreen();
 		
