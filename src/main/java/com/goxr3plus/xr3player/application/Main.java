@@ -110,6 +110,16 @@ import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayersList;
 import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
+ * 
+ *  /       ////       ____
+ *  /       ////      /----\
+ *  /       ////      |----|
+ *  /       ////      |----|
+ *  /       ////      |----|      HALLO MADAFUCKER            
+ *  /       ////      |----|        
+ *  /       ////     /   |  \
+ *  /       ////    |    |   |
+ *  /       ////     \___|__/
  * The Main class from which the application is starting.
  *
  * @author GOXR3PLUS STUDIO
