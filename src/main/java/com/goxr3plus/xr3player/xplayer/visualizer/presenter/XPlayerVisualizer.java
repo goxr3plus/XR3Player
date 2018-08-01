@@ -24,7 +24,6 @@ public class XPlayerVisualizer extends Visualizer {
 	 *            the x player UI
 	 */
 	public XPlayerVisualizer(XPlayerController xPlayerUI) {
-		super("XRPLAYER");
 		
 		this.xPlayerUI = xPlayerUI;
 		this.getAnimationService().passXPlayer(xPlayerUI);

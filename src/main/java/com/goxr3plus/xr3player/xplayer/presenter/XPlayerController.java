@@ -90,6 +90,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerPlayService;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerSeekService;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.DisplayMode;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
@@ -402,9 +403,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/** The disc is being mouse dragged */
 	public boolean discIsDragging;
 	
-	//-----CustomDJFilter
-	//DJFilter volumeDisc;
-	
 	// -------------------------ETC --------------------------
 	
 	private XPlayerPlaylist xPlayerPlayList;
@@ -431,6 +429,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	/** The visualizer. */
 	private XPlayerVisualizer visualizer;
+	private XPlayerVisualizer djVisualizer;
 	
 	/** The equalizer. */
 	private XPlayerEqualizer equalizer;
@@ -1173,8 +1172,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		speedSlider.setValue(speed);
 	}
 	
-	/** Get the speed of the player
-	 * @return 
+	/**
+	 * Get the speed of the player
+	 * 
+	 * @return
 	 * 
 	 */
 	public double getSpeed() {
@@ -1213,6 +1214,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		// Start the visualizer
 		visualizer.startVisualizer();
+		if (djVisualizer != null)
+			djVisualizer.startVisualizer();
 		
 		// Pause Image
 		// radialMenu.resumeOrPause.setGraphic(radialMenu.pauseImageView)
@@ -1232,6 +1235,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		// Stop the Visualizer
 		visualizer.stopVisualizer();
+		if (djVisualizer != null)
+			djVisualizer.stopVisualizer();
 		
 		// Play Image
 		// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView)
@@ -1303,6 +1308,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		// Visualizer
 		visualizer = new XPlayerVisualizer(this);
 		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
+		
+		//DjVisualizer
+		if (this.getKey() == 1 || this.getKey() == 2) {
+			djVisualizer = new XPlayerVisualizer(this);
+			djVisualizer.setDisplayMode(Integer.parseInt(DisplayMode.VERTICAL_VOLUME_METER.toString()));
+		}
 		
 		// Select the correct toggle
 		visualizerWindow.getVisualizerTypeGroup().selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(visualizer.displayMode.get()));
@@ -1807,8 +1818,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		//System.out.println("Entered Progress...")
 		
 		//Allow DSP ?
-		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected() && visualizerVisibility.get())
+		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected() && visualizerVisibility.get()) {
 			visualizer.writeDSP(pcmdata);
+		}
+		
+		//DjVisualizer
+		if (djVisualizer != null)
+			djVisualizer.writeDSP(pcmdata);
 		
 		//Disc is being draggged?
 		if (!discIsDragging) {
@@ -1899,8 +1915,15 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		// Status.OPENED
 		if (status == Status.OPENED && xPlayer.getSourceDataLine() != null) {
 			
+			//Visualizer
 			visualizer.setupDSP(xPlayer.getSourceDataLine());
 			visualizer.startDSP(xPlayer.getSourceDataLine());
+			
+			//DjVisualizer
+			if (djVisualizer != null) {
+				djVisualizer.setupDSP(xPlayer.getSourceDataLine());
+				djVisualizer.startDSP(xPlayer.getSourceDataLine());
+			}
 			
 			Platform.runLater(() -> {
 				//Marquee Text
@@ -1953,7 +1976,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			// Status.STOPPED
 		} else if (status == Status.STOPPED) {
 			
+			//Visualizer
 			visualizer.stopDSP();
+			
+			//DJVisualizer
+			if (djVisualizer != null)
+				djVisualizer.stopDSP();
 			
 			Platform.runLater(() -> {
 				
@@ -1977,6 +2005,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					
 					// Visualizer
 					visualizer.stopVisualizer();
+					
+					//DJVisualizer
+					if (djVisualizer != null)
+						djVisualizer.stopVisualizer();
 					
 					//Recalculate disc
 					disc.calculateAngleByValue(0, 0, true);

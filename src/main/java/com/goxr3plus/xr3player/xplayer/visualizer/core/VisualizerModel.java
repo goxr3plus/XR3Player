@@ -775,6 +775,13 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 			public String toString() {
 				return "9";
 			}
+		},
+		/** Display Julia Fractals */
+		VERTICAL_VOLUME_METER {
+			@Override
+			public String toString() {
+				return "10";
+			}
 		}
 	}
 	

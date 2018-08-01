@@ -24,9 +24,8 @@ abstract class Visualizer extends VisualizerDrawer {
 	/**
 	 * Constructor
 	 * 
-	 * @param text
 	 */
-	public Visualizer(String text) {
+	public Visualizer() {
 		//System.out.println("Visualizer Constructor called...{" + text + "}");
 		
 		// if i didn't add the draw to the @Override resize(double width, double
