@@ -162,6 +162,9 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/** The vu color scale. */
 	protected float vuColorScale;
 	
+	/** The vuV color scale. */
+	protected float vuVColorScale;
+	
 	/** The frames per second. */
 	// -- FPS calculations.
 	protected int framesPerSecond;
@@ -456,6 +459,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	public void computeColorScale() {
 		saColorScale = ( (float) spectrumAnalyserColors.length / canvasHeight ) * barOffset * 1.0f;
 		vuColorScale = ( (float) spectrumAnalyserColors.length / ( canvasWidth - 32 ) ) * 2.0f;
+		vuVColorScale = ( (float) spectrumAnalyserColors.length / ( canvasHeight - 50 ) ) * 2.0f;
 	}
 	
 	/**

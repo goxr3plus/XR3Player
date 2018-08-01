@@ -408,11 +408,47 @@ public class VisualizerDrawer extends VisualizerModel {
 			
 		}
 		
-		int wHeight = ( canvasHeight >> 1 ) - 20;
-		drawVolumeMeterBar(16, 16, (int) ( oldLeft * (float) ( canvasWidth - 32 ) ), wHeight);
-		drawVolumeMeterBar(16, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 32 ) ), wHeight);
+		//int wHeight = ( canvasHeight >> 1 ) - 20;
+		int wWidth = ( canvasWidth >> 1 ) - 5;
+		//drawVolumeMeterBar(16, 16, (int) ( oldLeft * (float) ( canvasWidth - 32 ) ), wHeight);
+		//drawVolumeMeterBar(16, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 32 ) ), wHeight);
+		//		drawVolumeMeterBar(2, 2, (int) ( oldLeft * (float) ( canvasWidth - 2 ) ), wHeight);
+		//		drawVolumeMeterBar(2, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 2 ) ), wHeight);
+		drawVolumeMeterBar(2, canvasHeight, wWidth, (int) ( oldLeft * (float) ( canvasHeight ) ));
+		drawVolumeMeterBar(wWidth + 5, canvasHeight, wWidth + 3, (int) ( oldRight * (float) ( canvasHeight ) ));
+		//System.out.println(oldLeft * (float) ( canvasHeight ));
 		
 	}
+	
+	//	/**
+	//	 * Draw volume meter bar.
+	//	 *
+	//	 * @param x
+	//	 *            the x
+	//	 * @param y
+	//	 *            the y
+	//	 * @param pWidth
+	//	 *            the width
+	//	 * @param pHeight
+	//	 *            the height
+	//	 */
+	//	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
+	//		
+	//		float c = 0;
+	//		int max = x + pWidth;
+	//		for (int a = x; a <= max; a += 2) {
+	//			c += vuColorScale;
+	//			if (c < 256.0f)
+	//				gc.setStroke(spectrumAnalyserColors[(int) c]);
+	//			
+	//			gc.strokeRect(a, y, 2, pHeight);
+	//		}
+	//		
+	//		gc.setStroke(Color.BLACK);
+	//		for (int a = x; a <= max; a += 15) {
+	//			gc.strokeRect(a, y, 1, pHeight);
+	//		}
+	//	}
 	
 	/**
 	 * Draw volume meter bar.
@@ -429,18 +465,23 @@ public class VisualizerDrawer extends VisualizerModel {
 	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
 		
 		float c = 0;
-		int max = x + pWidth;
-		for (int a = x; a <= max; a += 2) {
-			c += vuColorScale;
+		//int max = y + pHeight;
+		System.out.println("Y : " + y);
+		int min = y - pHeight;
+		for (int a = canvasHeight; a >= min; a -= 2) {
+			System.out.println("A : " + a);
+			//y=y-a;
+			//System.out.println("a "+a+" y "+y);
+			c += vuVColorScale;
 			if (c < 256.0f)
 				gc.setStroke(spectrumAnalyserColors[(int) c]);
 			
-			gc.strokeRect(a, y, 2, pHeight);
+			gc.strokeRect(x, a, pWidth, 2);
 		}
 		
 		gc.setStroke(Color.BLACK);
-		for (int a = x; a <= max; a += 15) {
-			gc.strokeRect(a, y, 1, pHeight);
+		for (int a = canvasHeight; a >= min; a -= 55) {
+			gc.strokeRect(x, a, pWidth, 1);
 		}
 	}
 	
