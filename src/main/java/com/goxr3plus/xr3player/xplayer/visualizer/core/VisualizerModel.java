@@ -6,7 +6,7 @@ package main.java.com.goxr3plus.xr3player.xplayer.visualizer.core;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.DataLine;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Color;
@@ -147,7 +147,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	protected float saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
 	
 	/** The source data line. */
-	public SourceDataLine sourceDataLine;
+	public DataLine dataLine;
 	
 	/** The old left. */
 	// -- VU Meter
@@ -228,13 +228,20 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * @param line
 	 *            the new up DSP
 	 */
-	public void setupDSP(SourceDataLine line) {
+	public void setupDSP(DataLine line) {
+		if (dsp == null)
+			dsp = new KJDSPAudioDataConsumer(2048, fps);
+		
 		if (dsp != null) {
 			// Number of Channels
 			dsp.setChannelMode(line.getFormat().getChannels() == 1 ? KJDSPAudioDataConsumer.ChannelMode.MONO : KJDSPAudioDataConsumer.ChannelMode.STEREO);
 			
+			//System.out.println("Channel mode : " + dsp.getChannelMode())
+			
 			// SampleSizeInBits
 			dsp.setSampleType(line.getFormat().getSampleSizeInBits() == 8 ? KJDSPAudioDataConsumer.SampleType.EIGHT_BIT : KJDSPAudioDataConsumer.SampleType.SIXTEEN_BIT);
+			
+			//System.out.println("SampleSizeInBits : " + line.getFormat().getSampleSizeInBits())
 		}
 	}
 	
@@ -244,21 +251,21 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * @param line
 	 *            the line
 	 */
-	public void startDSP(SourceDataLine line) {
+	public void startDSP(DataLine line) {
 		if (line != null)
-			sourceDataLine = line;
+			dataLine = line;
 		
 		// dsp null?
-		if (dsp == null) {
-			dsp = new KJDSPAudioDataConsumer(2048, fps);
+		if (dsp != null) {
+			//dsp = new KJDSPAudioDataConsumer(2048, fps)
 			dsp.add(this);
 		}
 		
-		if (sourceDataLine != null) {
+		if (dataLine != null) {
 			if (dspHasStarted)
 				stopDSP();
 			
-			dsp.start(sourceDataLine);
+			dsp.start(dataLine);
 			dspHasStarted = true;
 			logger.info("DSP started");
 		}

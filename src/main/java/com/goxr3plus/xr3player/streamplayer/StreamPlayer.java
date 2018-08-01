@@ -761,7 +761,7 @@ public class StreamPlayer implements Callable<Void> {
 						int totalRead = 0;
 						
 						// Reads up a specified maximum number of bytes from audio stream 	
-						//wtf i have written here xaxaxoaxoao omg //to fix! cause it is complicated
+						//wtf i have written here omg //to fix! cause it is complicated
 						for (; toRead > 0
 								&& ( nBytesRead = audioInputStream.read(audioDataBuffer.array(), totalRead, toRead) ) != -1; toRead -= nBytesRead, totalRead += nBytesRead)
 							
@@ -784,6 +784,8 @@ public class StreamPlayer implements Callable<Void> {
 							
 							// Compute position in bytes in encoded stream.
 							int nEncodedBytes = getEncodedStreamPosition();
+							
+							System.err.println(trimBuffer[0] + " , Data Length :" + trimBuffer.length);
 							
 							// Notify all registered Listeners
 							listeners.forEach(listener -> {
@@ -1399,7 +1401,5 @@ public class StreamPlayer implements Callable<Void> {
 	public boolean isSeeking() {
 		return status == Status.SEEKING;
 	}
-	
-	
 	
 }

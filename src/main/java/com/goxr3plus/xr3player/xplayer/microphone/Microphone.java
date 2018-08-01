@@ -55,7 +55,7 @@ public class Microphone implements Closeable {
 	public Microphone(AudioFileFormat.Type fileType) {
 		setState(CaptureState.CLOSED);
 		setFileType(fileType);
-		initTargetDataLine();
+		//initTargetDataLine();
 	}
 	
 	/**
@@ -106,7 +106,7 @@ public class Microphone implements Closeable {
 	/**
 	 * Initializes the target data line.
 	 */
-	private void initTargetDataLine() {
+	void initTargetDataLine() {
 		DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, getAudioFormat());
 		try {
 			setTargetDataLine((TargetDataLine) AudioSystem.getLine(dataLineInfo));
@@ -155,7 +155,7 @@ public class Microphone implements Closeable {
 	 * @return Returns AudioFormat to be used later when capturing audio from microphone
 	 */
 	public AudioFormat getAudioFormat() {
-		float sampleRate = 8000.0F;
+		float sampleRate = 16000.0F;
 		//8000,11025,16000,22050,44100
 		int sampleSizeInBits = 16;
 		//8,16

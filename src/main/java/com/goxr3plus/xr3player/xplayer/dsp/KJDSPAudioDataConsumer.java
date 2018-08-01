@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.DataLine;
 
 /**
  * The Class KJDSPAudioDataConsumer.
@@ -27,7 +27,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 	private Object readWriteLock = new Object();
 	
 	/** The source data line. */
-	private SourceDataLine sourceDataLine;
+	private DataLine dataLine;
 	
 	/** The sample size. */
 	private int sampleSize;
@@ -165,6 +165,10 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 		channelMode = pChannelMode;
 	}
 	
+	public ChannelMode getChannelMode() {
+		return channelMode;
+	}
+	
 	/**
 	 * Set the sample Type.
 	 *
@@ -181,7 +185,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 	 * @param pSdl
 	 *            A SourceDataLine.
 	 */
-	public synchronized void start(SourceDataLine pSdl) {
+	public synchronized void start(DataLine pSdl) {
 		
 		// -- Stop processing previous source data line.
 		if (signalProcessor != null)
@@ -191,7 +195,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 			
 			// System.out.println( "ADBS: " + pSdl.getBufferSize() )
 			
-			sourceDataLine = pSdl;
+			dataLine = pSdl;
 			
 			// -- Allocate double the memory than the SDL to prevent
 			// buffer overlapping.
@@ -222,7 +226,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 		signalProcessor.stop();
 		signalProcessor = null;
 		audioDataBuffer = null;
-		sourceDataLine = null;
+		dataLine = null;
 		
 	}
 	
@@ -307,7 +311,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 		 * Instantiates a new signal processor.
 		 */
 		public SignalProcessor() {
-			frameSize = sourceDataLine.getFormat().getFrameSize();
+			frameSize = dataLine.getFormat().getFrameSize();
 		}
 		
 		/**
@@ -319,7 +323,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 			
 			synchronized (readWriteLock) {
 				
-				long wFp = sourceDataLine.getLongFramePosition();
+				long wFp = dataLine.getLongFramePosition();
 				long wNfp = lfp;
 				
 				lfp = wFp;
@@ -475,16 +479,18 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 						fpsAsNS += -wDelay;
 						
 						// -- Keep thread from hogging CPU.
-						try {
-							Thread.sleep(10);
-						} catch (InterruptedException ex) {
-							Logger.getLogger(getClass().getName()).log(Level.WARNING, null, ex);
-						}
+//						try {
+//							Thread.sleep(10);
+//						} catch (InterruptedException ex) {
+//							Logger.getLogger(getClass().getName()).log(Level.WARNING, null, ex);
+//						}
 						
 					}
 					
 				} catch (Exception ex) {
-					Logger.getLogger(getClass().getName()).log(Level.SEVERE, "- DSP Exception: ", ex);
+					ex.printStackTrace();
+					System.exit(0);
+					//Logger.getLogger(getClass().getName()).log(Level.SEVERE, "- DSP Exception: ", ex)
 				}
 				
 			}

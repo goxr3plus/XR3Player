@@ -187,7 +187,7 @@ abstract class Visualizer extends VisualizerDrawer {
 		public void handle(long nanos) {
 			
 			//CHECK IF VISUALIZERS ARE ENABLED
-			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
+			if (Main.settingsWindow != null && !Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
 				return;
 			
 			if (previousTime == 0) {

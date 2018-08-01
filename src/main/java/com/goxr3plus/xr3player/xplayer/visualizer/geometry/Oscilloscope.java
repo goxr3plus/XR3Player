@@ -142,7 +142,7 @@ public class Oscilloscope {
 	visualizerDrawer.gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
 	// System.out.println(colorIndex / (float) colorSize)
 
-	int newSampleCount = (int) (visualizerDrawer.sourceDataLine.getFormat().getFrameRate() * 0.023);
+	int newSampleCount = (int) (visualizerDrawer.dataLine.getFormat().getFrameRate() * 0.023);
 	bandWidth = (float) visualizerDrawer.canvasWidth / (float) newSampleCount;
 	int halfHeight = visualizerDrawer.canvasHeight / 2;
 	int quarterHeight = visualizerDrawer.canvasHeight / 4;
