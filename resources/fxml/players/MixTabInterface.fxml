@@ -21,7 +21,7 @@
                <children>
                   <BorderPane minHeight="0.0" minWidth="0.0">
                      <center>
-                        <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-red" text="|" BorderPane.alignment="CENTER">
+                        <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button-red" text="|" BorderPane.alignment="CENTER">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fa-balance-scale" iconSize="24" />
                            </graphic>

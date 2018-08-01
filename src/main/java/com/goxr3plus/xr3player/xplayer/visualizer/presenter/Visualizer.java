@@ -277,10 +277,11 @@ abstract class Visualizer extends VisualizerDrawer {
 						drawSprite3D();
 						break;
 					case 9:
-						drawJuliaSet();
+						drawVUMeter(Orientation.VERTICAL);
+						
 						break;
 					case 10:
-						drawVUMeter(Orientation.VERTICAL);
+						drawJuliaSet();
 						break;
 					default:
 						break;
