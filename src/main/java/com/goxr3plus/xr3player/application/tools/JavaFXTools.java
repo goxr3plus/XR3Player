@@ -148,7 +148,7 @@ public final class JavaFXTools {
 	}
 	
 	private static final int maximumImageWidth = 4096*2;
-	private static final int maximumImageHeight = 2160*2;
+	private static final int maximumImageHeight = maximumImageWidth;
 	private static final int minimumImageWidth = 60;
 	private static final int minimumImageHeight = 60;
 	
