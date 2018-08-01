@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.speechrecognition;
+package main.java.com.goxr3plus.xr3player.application.tools;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

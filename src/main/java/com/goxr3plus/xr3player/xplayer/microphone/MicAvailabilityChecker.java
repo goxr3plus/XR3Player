@@ -1,6 +1,6 @@
 package main.java.com.goxr3plus.xr3player.xplayer.microphone;
 
-import com.darkprograms.speech.microphone.Microphone;
+import javax.sound.sampled.LineUnavailableException;
 
 import net.sourceforge.javaflacencoder.FLACFileWriter;
 
@@ -18,6 +18,8 @@ public class MicAvailabilityChecker {
 				throw new MicUnaccessibleException("Mic is in use and can't be accessed");
 			}
 			mic.close();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
 		} finally {
 			mic.close();
 			
