@@ -2277,8 +2277,55 @@
 }
 
 
+/******************************************************************************
+ * 
+ * Dark theme
+ * 
+ *****************************************************************************/
 
+.notification-bar.dark > .pane {
+    -fx-background-color: #202020;
+}
 
+.notification-bar.dark > .pane .title,
+.notification-bar.dark > .pane .label {
+    -fx-text-fill: white;
+}
+
+/******************************************************************************
+ * 
+ * Close button
+ * 
+ *****************************************************************************/
+ .notification-bar > .pane .close-button {
+    -fx-background-color: #202020;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 2.0;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+    -fx-alignment: center;
+}
+
+.notification-bar > .pane .close-button:hover {
+    -fx-background-color: firebrick;
+}
+
+.notification-bar > .pane .close-button:pressed {
+    -fx-background-color: firebrick;
+}
+
+.notification-bar > .pane .close-button > .graphic {
+    -fx-background-color: white;
+    -fx-scale-shape: false;
+    -fx-padding: 4.5 4.5 4.5 4.5; /* Graphic is 9x9 px */
+}
+
+.notification-bar > .pane .close-button:hover > .graphic {
+    -fx-background-color: #202020;
+}
+
+.notification-bar > .pane .close-button:pressed > .graphic {
+    -fx-background-color: #202020;
+}
 
 
 
