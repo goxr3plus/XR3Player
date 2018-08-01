@@ -10,6 +10,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -38,6 +39,9 @@ public class MixTabInterface extends StackPane {
 	
 	@FXML
 	private Slider masterVolumeSlider;
+	
+	@FXML
+	private HBox centerHBox;
 	
 	// -------------------------------------------------------------
 	
@@ -139,6 +143,13 @@ public class MixTabInterface extends StackPane {
 	 */
 	public Slider getMasterVolumeSlider() {
 		return masterVolumeSlider;
+	}
+	
+	/**
+	 * @return the centerHBox
+	 */
+	public HBox getCenterHBox() {
+		return centerHBox;
 	}
 	
 }

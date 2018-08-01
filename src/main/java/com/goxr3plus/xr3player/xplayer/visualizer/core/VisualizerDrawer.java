@@ -3,6 +3,7 @@
  */
 package main.java.com.goxr3plus.xr3player.xplayer.visualizer.core;
 
+import javafx.geometry.Orientation;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -369,7 +370,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	/**
 	 * Draws a VUMeter.
 	 */
-	public void drawVUMeter(Color discColor) {
+	public void drawVUMeter(Orientation orientation) {
 		
 		// Background
 		drawBackgroundImage();
@@ -408,47 +409,19 @@ public class VisualizerDrawer extends VisualizerModel {
 			
 		}
 		
-		//int wHeight = ( canvasHeight >> 1 ) - 20;
-		int wWidth = ( canvasWidth >> 1 ) - 5;
-		//drawVolumeMeterBar(16, 16, (int) ( oldLeft * (float) ( canvasWidth - 32 ) ), wHeight);
-		//drawVolumeMeterBar(16, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 32 ) ), wHeight);
-		//		drawVolumeMeterBar(2, 2, (int) ( oldLeft * (float) ( canvasWidth - 2 ) ), wHeight);
-		//		drawVolumeMeterBar(2, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 2 ) ), wHeight);
-		drawVolumeMeterBar(4, canvasHeight, wWidth-1, (int) ( oldLeft * (float) ( canvasHeight ) ),discColor);
-		drawVolumeMeterBar(wWidth + 8, canvasHeight, wWidth-3, (int) ( oldRight * (float) ( canvasHeight ) ),discColor);
-		//System.out.println(oldLeft * (float) ( canvasHeight ));
+		//Horizontal
+		if (orientation == Orientation.HORIZONTAL) {
+			int wHeight = ( canvasHeight >> 1 ) - 5;
+			drawHorizontalVolumeMeterBar(2, 2, (int) ( oldLeft * (float) ( canvasWidth - 2 ) ), wHeight);
+			drawHorizontalVolumeMeterBar(2, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 2 ) ), wHeight);
+			//Vertical 
+		} else {
+			int wWidth = ( canvasWidth >> 1 ) - 5;
+			drawVerticalVolumeMeterBar(4, canvasHeight, wWidth - 1, (int) ( oldLeft * (float) ( canvasHeight ) ));
+			drawVerticalVolumeMeterBar(wWidth + 8, canvasHeight, wWidth - 1, (int) ( oldRight * (float) ( canvasHeight ) ));
+		}
 		
 	}
-	
-	//	/**
-	//	 * Draw volume meter bar.
-	//	 *
-	//	 * @param x
-	//	 *            the x
-	//	 * @param y
-	//	 *            the y
-	//	 * @param pWidth
-	//	 *            the width
-	//	 * @param pHeight
-	//	 *            the height
-	//	 */
-	//	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
-	//		
-	//		float c = 0;
-	//		int max = x + pWidth;
-	//		for (int a = x; a <= max; a += 2) {
-	//			c += vuColorScale;
-	//			if (c < 256.0f)
-	//				gc.setStroke(spectrumAnalyserColors[(int) c]);
-	//			
-	//			gc.strokeRect(a, y, 2, pHeight);
-	//		}
-	//		
-	//		gc.setStroke(Color.BLACK);
-	//		for (int a = x; a <= max; a += 15) {
-	//			gc.strokeRect(a, y, 1, pHeight);
-	//		}
-	//	}
 	
 	/**
 	 * Draw volume meter bar.
@@ -462,24 +435,54 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * @param pHeight
 	 *            the height
 	 */
-	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight,Color discColor) {
+	private void drawHorizontalVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
 		
+		//Draw the rectangles
 		float c = 0;
-		//int max = y + pHeight;
-		//System.out.println("Y : " + y);
+		int max = x + pWidth;
+		for (int a = x; a <= max; a += 2) {
+			c += vuColorScale;
+			if (c < 256.0f)
+				gc.setStroke(spectrumAnalyserColors[(int) c]);
+			
+			gc.strokeRect(a, y, 2, pHeight);
+		}
+		
+		//Drag the rectangles inside rectangles
+		gc.setStroke(Color.BLACK);
+		for (int a = x; a <= max; a += 15) {
+			gc.strokeRect(a, y, 1, pHeight);
+		}
+	}
+	
+	/**
+	 * Draw volume meter bar.
+	 *
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param pWidth
+	 *            the width
+	 * @param pHeight
+	 *            the height
+	 */
+	private void drawVerticalVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
+		
+		//Draw the rectangles
+		gc.setStroke(super.scopeColor);
+		
+		//float c = 0;
 		int min = y - pHeight;
 		for (int a = canvasHeight; a >= min; a -= 2) {
-			//System.out.println("A : " + a);
-			//y=y-a;
-			//System.out.println("a "+a+" y "+y);
-			c += vuVColorScale;
-			if (c < 256.0f)
-				//gc.setStroke(spectrumAnalyserColors[(int) c]);
-				gc.setStroke(discColor);
+			//c += vuVColorScale;
+			//if (c < 256.0f)
+			//gc.setStroke(spectrumAnalyserColors[(int) c]);
 			
 			gc.strokeRect(x, a, pWidth, 2);
 		}
 		
+		//Drag the rectangles inside rectangles
 		gc.setStroke(Color.BLACK);
 		for (int a = canvasHeight; a >= min; a -= 15) {
 			gc.strokeRect(x, a, pWidth, 1);

@@ -95,11 +95,23 @@ public class DJMode extends BorderPane {
 		//Mixer Tab
 		mixerTab.setContent(mixTabInterface);
 		
-		//mixTabInterface
+		//--------------------------mixTabInterface--------------------
+		
+		//--Volume Bar Box
 		xPlayer1.getRootBorderPane().getChildren().remove(xPlayer1.getVolumeBarBox());
 		mixTabInterface.getBorderPane().setLeft(xPlayer1.getVolumeBarBox());
+		
+		//--Dj Visualizer
+		mixTabInterface.getCenterHBox().getChildren().add(xPlayer1.getDjVisualizer());
+		HBox.setHgrow(xPlayer1.getDjVisualizer(), Priority.ALWAYS);
+		
+		//--Volume Bar Box
 		xPlayer2.getRootBorderPane().getChildren().remove(xPlayer2.getVolumeBarBox());
 		mixTabInterface.getBorderPane().setRight(xPlayer2.getVolumeBarBox());
+		
+		//--Dj Visualizer
+		mixTabInterface.getCenterHBox().getChildren().add(xPlayer2.getDjVisualizer());
+		HBox.setHgrow(xPlayer2.getDjVisualizer(), Priority.ALWAYS);
 		
 		//Add it to library mode
 		Main.libraryMode.getDjModeStackPane().getChildren().add(hBox);
@@ -186,7 +198,7 @@ public class DJMode extends BorderPane {
 	public MixTabInterface getMixTabInterface() {
 		return mixTabInterface;
 	}
-
+	
 	// Variables
 	private double[] topSplitPaneDivider = { 0.45 , 0.55 };
 	

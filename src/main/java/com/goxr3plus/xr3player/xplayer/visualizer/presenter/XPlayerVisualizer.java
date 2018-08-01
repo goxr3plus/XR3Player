@@ -23,13 +23,14 @@ public class XPlayerVisualizer extends Visualizer {
 	 * @param xPlayerUI
 	 *            the x player UI
 	 */
-	public XPlayerVisualizer(XPlayerController xPlayerUI) {
+	public XPlayerVisualizer(XPlayerController xPlayerUI, boolean addMouseListener) {
 		
 		this.xPlayerUI = xPlayerUI;
 		this.getAnimationService().passXPlayer(xPlayerUI);
 		
 		setScopeColor(xPlayerUI.getDisc().getArcColor());
-		addMouseListener();
+		if (addMouseListener)
+			addMouseListener();
 	}
 	
 	/**

@@ -4,8 +4,8 @@
 package main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Orientation;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
@@ -153,9 +153,6 @@ abstract class Visualizer extends VisualizerDrawer {
 			running.set(false);
 		}
 		
-
-		
-		
 		/**
 		 * @return True if AnimationTimer is running
 		 */
@@ -188,7 +185,6 @@ abstract class Visualizer extends VisualizerDrawer {
 		
 		@Override
 		public void handle(long nanos) {
-					
 			
 			//CHECK IF VISUALIZERS ARE ENABLED
 			if (!Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected())
@@ -266,7 +262,7 @@ abstract class Visualizer extends VisualizerDrawer {
 						drawSpectrumBars();
 						break;
 					case 4:
-						drawVUMeter(xPlayerController.getDiscArcColor());
+						drawVUMeter(Orientation.HORIZONTAL);
 						break;
 					case 5:
 						drawPolySpiral();
@@ -282,6 +278,9 @@ abstract class Visualizer extends VisualizerDrawer {
 						break;
 					case 9:
 						drawJuliaSet();
+						break;
+					case 10:
+						drawVUMeter(Orientation.VERTICAL);
 						break;
 					default:
 						break;

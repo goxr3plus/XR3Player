@@ -1306,12 +1306,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public void makeTheVisualizer() {
 		
 		// Visualizer
-		visualizer = new XPlayerVisualizer(this);
+		visualizer = new XPlayerVisualizer(this, true);
 		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
 		
 		//DjVisualizer
 		if (this.getKey() == 1 || this.getKey() == 2) {
-			djVisualizer = new XPlayerVisualizer(this);
+			djVisualizer = new XPlayerVisualizer(this, false);
 			djVisualizer.setDisplayMode(Integer.parseInt(DisplayMode.VERTICAL_VOLUME_METER.toString()));
 		}
 		
@@ -2520,6 +2520,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	public BorderPane getRootBorderPane() {
 		return rootBorderPane;
+	}
+	
+	/**
+	 * @return the djVisualizer
+	 */
+	public XPlayerVisualizer getDjVisualizer() {
+		return djVisualizer;
 	}
 	
 }
