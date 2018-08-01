@@ -80,7 +80,6 @@ import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DownloadsProgr
 import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloadedFile;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.MediaInformation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.streamplayer.Status;
 import main.java.com.goxr3plus.xr3player.streamplayer.StreamPlayerEvent;
@@ -1936,8 +1935,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 					
 					//Show Notification
-					ActionTool.showNotification("Playing on deck " + ( getKey() + 1 ), InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-							NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					if (!discIsDragging)
+						ActionTool.showNotification("Playing on deck " + ( getKey() + 1 ), InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+								NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 				}
 			});
 			
