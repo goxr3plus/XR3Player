@@ -369,7 +369,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	/**
 	 * Draws a VUMeter.
 	 */
-	public void drawVUMeter() {
+	public void drawVUMeter(Color discColor) {
 		
 		// Background
 		drawBackgroundImage();
@@ -414,8 +414,8 @@ public class VisualizerDrawer extends VisualizerModel {
 		//drawVolumeMeterBar(16, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 32 ) ), wHeight);
 		//		drawVolumeMeterBar(2, 2, (int) ( oldLeft * (float) ( canvasWidth - 2 ) ), wHeight);
 		//		drawVolumeMeterBar(2, wHeight + 32, (int) ( oldRight * (float) ( canvasWidth - 2 ) ), wHeight);
-		drawVolumeMeterBar(2, canvasHeight, wWidth, (int) ( oldLeft * (float) ( canvasHeight ) ));
-		drawVolumeMeterBar(wWidth + 5, canvasHeight, wWidth + 3, (int) ( oldRight * (float) ( canvasHeight ) ));
+		drawVolumeMeterBar(4, canvasHeight, wWidth-1, (int) ( oldLeft * (float) ( canvasHeight ) ),discColor);
+		drawVolumeMeterBar(wWidth + 8, canvasHeight, wWidth-3, (int) ( oldRight * (float) ( canvasHeight ) ),discColor);
 		//System.out.println(oldLeft * (float) ( canvasHeight ));
 		
 	}
@@ -462,25 +462,26 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * @param pHeight
 	 *            the height
 	 */
-	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight) {
+	private void drawVolumeMeterBar(int x , int y , int pWidth , int pHeight,Color discColor) {
 		
 		float c = 0;
 		//int max = y + pHeight;
-		System.out.println("Y : " + y);
+		//System.out.println("Y : " + y);
 		int min = y - pHeight;
 		for (int a = canvasHeight; a >= min; a -= 2) {
-			System.out.println("A : " + a);
+			//System.out.println("A : " + a);
 			//y=y-a;
 			//System.out.println("a "+a+" y "+y);
 			c += vuVColorScale;
 			if (c < 256.0f)
-				gc.setStroke(spectrumAnalyserColors[(int) c]);
+				//gc.setStroke(spectrumAnalyserColors[(int) c]);
+				gc.setStroke(discColor);
 			
 			gc.strokeRect(x, a, pWidth, 2);
 		}
 		
 		gc.setStroke(Color.BLACK);
-		for (int a = canvasHeight; a >= min; a -= 55) {
+		for (int a = canvasHeight; a >= min; a -= 15) {
 			gc.strokeRect(x, a, pWidth, 1);
 		}
 	}

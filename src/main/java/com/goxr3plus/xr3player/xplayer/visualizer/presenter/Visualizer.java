@@ -267,7 +267,7 @@ abstract class Visualizer extends VisualizerDrawer {
 						drawSpectrumBars();
 						break;
 					case 4:
-						drawVUMeter();
+						drawVUMeter(xPlayerController.getDiscArcColor());
 						break;
 					case 5:
 						drawPolySpiral();
