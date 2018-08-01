@@ -64,7 +64,7 @@ public class UsersLoaderService extends Service<Boolean> {
 	private void done() {
 		
 		//Show Notification
-		ActionTool.showNotification("Welcome :)", null, Duration.seconds(15), NotificationType.SUCCESS);
+		ActionTool.showNotification("Welcome :)", null, Duration.seconds(4), NotificationType.SUCCESS);
 		
 		//Bindings
 		Main.updateScreen.getProgressBar().progressProperty().unbind();

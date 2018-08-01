@@ -41,6 +41,9 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 
 /**
  * This class contains everything needed going on LibraryMode.
@@ -355,14 +358,16 @@ public class LibraryMode extends BorderPane {
 			if (newValue != null)
 				openOrCloseLibrary.textProperty().bind(Bindings.when( ( (Library) viewer.centerItemProperty().get() ).openedProperty()).then("CLOSE").otherwise("OPEN"));
 			else {
-				openOrCloseLibrary.textProperty().unbind();
+				StringProperty p1;
+				p1 = openOrCloseLibrary.textProperty();
+				p1.unbind();
 				openOrCloseLibrary.setText("...");
 			}
 		});
 		
-		// -- openOrCloseLibrary
-		openOrCloseLibrary.disableProperty().bind(libraryToolBar.disabledProperty());
-		openOrCloseLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() )
+		BooleanProperty p1 = openOrCloseLibrary.disableProperty();
+		p1.bind(libraryToolBar.disabledProperty());
+		openOrCloseLibrary.setOnAction(λ -> ( (Library) viewer.centerItemProperty().get() )
 				.setLibraryStatus( ( (Library) viewer.centerItemProperty().get() ).isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false));
 		
 		// -- settingsOfLibrary
@@ -385,15 +390,9 @@ public class LibraryMode extends BorderPane {
 		String defaultWebColor = "#ef4949";
 		colorPicker.setValue(Color.web(defaultWebColor));
 		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
-		colorPicker.setOnAction(a -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
-		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
-			
-			//Format to WebColor
-			String webColor = JavaFXTools.colorToWebColor(newColor);
-			
-			//Set the style
-			viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
-		});
+		colorPicker.setOnAction(λ -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
+		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> viewer
+				.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + JavaFXTools.colorToWebColor(newColor) + "  87%);"));
 		
 		//bottomSplitPane
 		bottomSplitPane.visibleProperty().bind(djModeStackPane.visibleProperty().not());

@@ -18,7 +18,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -142,19 +141,15 @@
                                                       <HBox alignment="CENTER" spacing="5.0">
                                                          <children>
                                                             <Button fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
-                                                               <graphic>
-                                                                  <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/previous.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                                <tooltip>
                                                                   <Tooltip text="Skip backward n seconds" />
                                                                </tooltip>
+                                                               <graphic>
+                                                                  <FontIcon iconColor="WHITE" iconLiteral="fas-backward" iconSize="18" selectionEnd="0" selectionStart="0" />
+                                                               </graphic>
                                                             </Button>
                                                             <Button fx:id="replayButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" styleClass="dark-round-jfx-button">
                                                                <cursor>
@@ -172,19 +167,15 @@
                                                                </graphic>
                                                             </Button>
                                                             <Button fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60">
-                                                               <graphic>
-                                                                  <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../image/next.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                                <tooltip>
                                                                   <Tooltip text="Skip forward n seconds" />
                                                                </tooltip>
+                                                               <graphic>
+                                                                  <FontIcon iconColor="WHITE" iconLiteral="fas-forward" iconSize="18" selectionEnd="0" selectionStart="0" />
+                                                               </graphic>
                                                             </Button>
                                                          </children>
                                                       </HBox>
@@ -352,7 +343,7 @@
                               </SplitPane>
                            </center>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                            <center>
                               <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <center>
@@ -392,19 +383,15 @@
                                                    </graphic>
                                     </Button>
                                     <Button fx:id="smBackwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
-                                       <graphic>
-                                          <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/previous.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
                                           <Tooltip text="Skip backward n seconds" />
                                        </tooltip>
+                                                   <graphic>
+                                                      <FontIcon iconColor="WHITE" iconLiteral="fas-backward" iconSize="18" selectionEnd="0" selectionStart="0" />
+                                                   </graphic>
                                     </Button>
                                                 <HBox alignment="CENTER" spacing="5.0">
                                                    <children>
@@ -433,19 +420,15 @@
                                                    </children>
                                                 </HBox>
                                     <Button fx:id="smForwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60">
-                                       <graphic>
-                                          <ImageView fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../image/next.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <tooltip>
                                           <Tooltip text="Skip forward n seconds" />
                                        </tooltip>
+                                                   <graphic>
+                                                      <FontIcon iconColor="WHITE" iconLiteral="fas-forward" iconSize="18" selectionEnd="0" selectionStart="0" />
+                                                   </graphic>
                                     </Button>
                                                 <HBox alignment="CENTER">
                                                    <children>

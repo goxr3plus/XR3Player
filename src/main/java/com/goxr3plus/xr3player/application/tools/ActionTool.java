@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.Notifications;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
 import javafx.geometry.Bounds;
@@ -30,7 +29,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -50,12 +48,6 @@ public final class ActionTool {
 	
 	/** The random. */
 	private static Random random = new Random();
-	
-	/** The warning image. */
-	//private static ImageView warningImage = InfoTool.getImageViewFromResourcesFolder("warning.png")
-	
-	/** The question image. */
-	private static ImageView questionImage = InfoTool.getImageViewFromResourcesFolder("question.png");
 	
 	/**
 	 * Private Constructor.
@@ -421,7 +413,7 @@ public final class ActionTool {
 		boolean[] questionAnswer = { false };
 		
 		// Show Alert
-		Alert alert = JavaFXTools.createAlert(null, headerText, text, AlertType.CONFIRMATION, StageStyle.UTILITY, window, questionImage);
+		Alert alert = JavaFXTools.createAlert(null, headerText, text, AlertType.CONFIRMATION, StageStyle.UTILITY, window, JavaFXTools.getFontIcon("fas-question-circle", Color.WHITE, 24));
 		
 		// Make sure that JavaFX doesn't cut the text with ...
 		alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label).forEach(item -> ( (Label) node ).setMinHeight(Region.USE_PREF_SIZE));
@@ -436,7 +428,7 @@ public final class ActionTool {
 				int alertHeight = (int) alert.getHeight();
 				
 				// Here it prints 0!!
-				//System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight);
+				//System.out.println("Alert Width: " + alertWidth + " , Alert Height: " + alertHeight)
 				
 				// Find the bounds of the node
 				Bounds bounds = node.localToScreen(node.getBoundsInLocal());

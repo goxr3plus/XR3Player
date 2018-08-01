@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -147,7 +148,7 @@ public final class JavaFXTools {
 		
 	}
 	
-	private static final int maximumImageWidth = 4096*2;
+	private static final int maximumImageWidth = 4096 * 2;
 	private static final int maximumImageHeight = maximumImageWidth;
 	private static final int minimumImageWidth = 60;
 	private static final int minimumImageHeight = 60;
@@ -219,7 +220,7 @@ public final class JavaFXTools {
 	 * @param graphic
 	 * @return The created Alert based on the given parameters
 	 */
-	public static Alert createAlert(String title , String headerText , String contentText , AlertType alertType , StageStyle stageStyle , Stage owner , ImageView graphic) {
+	public static Alert createAlert(String title , String headerText , String contentText , AlertType alertType , StageStyle stageStyle , Stage owner , Node graphic) {
 		
 		// Show Alert
 		Alert alert = new Alert(alertType);

@@ -55,8 +55,6 @@ public class OpenedLibrariesViewer extends StackPane {
 	
 	// -----------------------------------------------------------------------
 	
-	//private static final Image noItemsImage = InfoTool.getImageFromResourcesFolder("noMusic.png");
-	
 	/**
 	 * This class wraps an ObservableList
 	 */

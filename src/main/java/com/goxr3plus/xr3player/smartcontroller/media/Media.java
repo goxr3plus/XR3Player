@@ -169,16 +169,6 @@ public abstract class Media {
 	
 	// ---------END OF PROPERTIES----------------------------------------------------------------------------------
 	
-	/** The image to be displayed if the Media is Song + NO ERRORS */
-	
-	public static final Image SONG_IMAGE = InfoTool.getImageFromResourcesFolder("song.png");
-	
-	/** The image to be displayed if the Media is Song + MISSING */
-	public static final Image SONG_MISSING_IMAGE = InfoTool.getImageFromResourcesFolder("songMissing.png");
-	
-	/** The image to be displayed if the Media is Song + CORRUPTED */
-	public static final Image SONG_CORRUPTED_IMAGE = InfoTool.getImageFromResourcesFolder("songCorrupted.png");
-	
 	/** The genre. */
 	private final Genre smartControllerGenre;
 	
