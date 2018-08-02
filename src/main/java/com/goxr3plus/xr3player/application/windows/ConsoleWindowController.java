@@ -138,7 +138,7 @@ public class ConsoleWindowController extends StackPane {
 		close.setOnAction(a -> window.close());
 		
 		//help
-		help.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+		help.setOnAction(a -> ActionTool.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 		
 		//Add SpeechRecognition
 		tabPane.getTabs().get(1).setContent(this.speechRecognition);
@@ -262,7 +262,7 @@ public class ConsoleWindowController extends StackPane {
 			cssTextArea.clear();
 			success = true;
 		} else if ("help".equals(command)) { //help
-			ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
+			ActionTool.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
 			success = true;
 		} else if ("exit".equals(command) || "close".equals(command)) //close console
 			window.close();

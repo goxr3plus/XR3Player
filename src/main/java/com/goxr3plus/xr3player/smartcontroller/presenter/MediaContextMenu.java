@@ -272,7 +272,7 @@ public class MediaContextMenu extends ContextMenu {
 		else if (source == stars)
 			media.updateStars(node);
 		else if (source == showFile) // File path
-			ActionTool.openFileLocation(media.getFilePath());
+			ActionTool.openFileInExplorer(media.getFilePath());
 		else if (source == editFileInfo) {
 			//More than 1 selected?
 			if (controller.getNormalModeMediaTableViewer().getSelectedCount() > 1)

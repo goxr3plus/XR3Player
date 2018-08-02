@@ -818,7 +818,7 @@ public class MediaTableViewer extends StackPane {
 					smartController.prepareDelete(key.isShiftDown());
 				else if (key.isControlDown()) { //Short Cuts
 					if (code == KeyCode.F)
-						ActionTool.openFileLocation(getSelectionModel().getSelectedItem().getFilePath());
+						ActionTool.openFileInExplorer(getSelectionModel().getSelectedItem().getFilePath());
 					else if (code == KeyCode.Q)
 						getSelectionModel().getSelectedItem().updateStars(getTableView());
 					else if (code == KeyCode.R)

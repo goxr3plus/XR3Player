@@ -93,7 +93,7 @@ public class DownloadsProgressBox extends StackPane {
 		});
 		
 		//openFileLocation
-		openFileLocation.setOnAction(a -> ActionTool.openFileLocation(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
+		openFileLocation.setOnAction(a -> ActionTool.openFileInExplorer(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
 	}
 	
 }

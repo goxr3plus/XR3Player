@@ -188,7 +188,7 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 		if (source == copy) {
 			JavaFXTools.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
 		} else if (source == showFile) {
-			ActionTool.openFileLocation(absoluteFilePath);
+			ActionTool.openFileInExplorer(absoluteFilePath);
 		} else if (source == editFileInfo)
 			Main.tagWindow.openAudio(absoluteFilePath, TagTabCategory.BASICINFO, true);
 		

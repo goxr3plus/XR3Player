@@ -9,6 +9,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.services.TreeViewService;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
  * The Class TreeViewManager.
@@ -103,11 +107,40 @@ public class TreeViewManager extends StackPane {
 		// Mouse Released Event
 		treeView.setOnMouseClicked(this::treeViewMouseClicked);
 		treeView.setOnKeyReleased(key -> {
-			if (key.getCode() == KeyCode.ENTER) {
+			if (key.getCode() == KeyCode.ENTER) { //OPEN/CLOSE FOLDER
+				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> {
 					item.setExpanded(!item.isExpanded());
 					treeView.scrollTo(treeView.getRow(item));
+				});
+				
+			} else if (key.getCode() == KeyCode.R && key.isControlDown()) { //RENAME
+				
+				//Any selected TreeItem ?
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> ( (FileTreeItem) item ).rename(this));
+				
+			} else if (key.getCode() == KeyCode.C && key.isControlDown()) { //COPY
+				
+				//Any selected TreeItem ?
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem())
+						.ifPresent(item -> JavaFXTools.setClipBoard(Arrays.asList(new File( ( (FileTreeItem) item ).getAbsoluteFilePath()))));
+				
+			} else if (key.getCode() == KeyCode.F && key.isControlDown()) { //EXPLORER
+				
+				//Any selected TreeItem ?
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem())
+						.ifPresent(item -> ActionTool.openFileInExplorer( ( (FileTreeItem) item ).getAbsoluteFilePath()));
+				
+			} else if (key.getCode() == KeyCode.I && key.isControlDown()) { //EXPLORER
+				
+				//Any selected TreeItem ?
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> {
+					String absoluteFilePath = ( (FileTreeItem) item ).getAbsoluteFilePath();
+					
+					//If it is an audio file
+					if (InfoTool.isAudio(absoluteFilePath))
+						Main.tagWindow.openAudio(absoluteFilePath, TagTabCategory.BASICINFO, true);
 				});
 			}
 		});

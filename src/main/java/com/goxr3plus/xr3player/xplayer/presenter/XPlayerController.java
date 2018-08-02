@@ -1097,7 +1097,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	public void openAudioInExplorer() {
 		if (xPlayerModel.songPathProperty().get() != null)
-			ActionTool.openFileLocation(xPlayerModel.songPathProperty().get());
+			ActionTool.openFileInExplorer(xPlayerModel.songPathProperty().get());
 	}
 	
 	/**

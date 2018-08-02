@@ -299,7 +299,7 @@ public class SideBar extends StackPane {
 		showApplicationInfo.setOnAction(a -> Main.aboutWindow.show());
 		
 		//showManual
-		showManual.setOnAction(a -> ActionTool.openFile(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+		showManual.setOnAction(a -> ActionTool.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 		
 		// donation
 		donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));

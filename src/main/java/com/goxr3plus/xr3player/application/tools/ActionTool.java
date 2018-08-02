@@ -61,7 +61,7 @@ public final class ActionTool {
 	 * @param path
 	 *            the path
 	 */
-	public static void openFileLocation(String path) {
+	public static void openFileInExplorer(String path) {
 		
 		// Open the Default Browser
 		if (System.getProperty("os.name").toLowerCase().contains("win")) {
@@ -261,7 +261,7 @@ public final class ActionTool {
 	 *            The absolute path of the File
 	 * @return <b>True</b> if succeeded , <b>False</b> if not
 	 */
-	public static boolean openFile(String absolutePath) {
+	public static boolean openFileInEditor(String absolutePath) {
 		
 		try {
 			//Check if Desktop is supported
