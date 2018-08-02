@@ -46,7 +46,6 @@ import main.java.com.goxr3plus.xr3player.application.presenter.custom.StarBadge;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
@@ -886,19 +885,7 @@ public class MediaTableViewer extends StackPane {
 	 * Copies all the selected media files to the Native System ClipBoard
 	 */
 	public void copySelectedMediaToClipBoard() {
-		//Get Native System ClipBoard
-		final Clipboard clipboard = Clipboard.getSystemClipboard();
-		final ClipboardContent content = new ClipboardContent();
-		
-		// PutFiles
-		content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
-		
-		//Set the Content
-		clipboard.setContent(content);
-		
-		ActionTool.showNotification("Copied to Clipboard",
-				"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(3.5),
-				NotificationType.INFORMATION);
+		JavaFXTools.setClipBoard(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
 	}
 	
 	/**

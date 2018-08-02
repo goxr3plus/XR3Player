@@ -8,12 +8,12 @@
 
 <fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
+      <SeparatorMenuItem fx:id="separator1" mnemonicParsing="false" />
       <Menu fx:id="getInfoBuy" mnemonicParsing="false" text="Get Info/Buy">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
          </graphic>
       </Menu>
-      <SeparatorMenuItem fx:id="separator1" mnemonicParsing="false" />
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />

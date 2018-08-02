@@ -1,6 +1,8 @@
 package main.java.com.goxr3plus.xr3player.application.systemtreeview;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +23,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMenu;
 
@@ -91,12 +94,11 @@ public class TreeViewContextMenu extends ContextMenu {
 	@FXML
 	private void initialize() {
 		
-		//getInfoBuy
-		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
-		
 		//PlayContextMenu
 		getItems().addAll(0, playContextMenu.getItems());
 		
+		//getInfoBuy
+		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
 	}
 	
 	/**
@@ -159,6 +161,8 @@ public class TreeViewContextMenu extends ContextMenu {
 		//showFile
 		if (source == showFile)
 			ActionTool.openFileLocation(absoluteFilePath);
+		else if (source == copy)
+			JavaFXTools.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
 		
 	}
 	

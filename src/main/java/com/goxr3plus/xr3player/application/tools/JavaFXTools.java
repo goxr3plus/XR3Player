@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -23,6 +24,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -360,6 +363,27 @@ public final class JavaFXTools {
 		SnapshotParameters params = new SnapshotParameters();
 		params.setFill(Color.TRANSPARENT);
 		dragBoard.setDragView(Main.dragViewer.updateDropboxMedia(title).snapshot(params, new WritableImage(150, 150)), 50, 0);
+	}
+	
+	/**
+	 * Set System Clipboard
+	 * 
+	 * @param items
+	 */
+	public static void setClipBoard(List<File> items) {
+		//Get Native System ClipBoard
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		final ClipboardContent content = new ClipboardContent();
+		
+		// PutFiles
+		content.putFiles(items);
+		
+		//Set the Content
+		clipboard.setContent(content);
+		
+		ActionTool.showNotification("Copied to Clipboard",
+				"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(3.5),
+				NotificationType.INFORMATION);
 	}
 	
 }
