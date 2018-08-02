@@ -28,6 +28,11 @@
             <FontIcon iconColor="#fc4848" iconLiteral="fas-stop-circle" iconSize="24" />
          </graphic>
       </Menu>
+      <Menu fx:id="getInfoBuy" mnemonicParsing="false" text="Get Info/Buy">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
+         </graphic>
+      </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
          <graphic>

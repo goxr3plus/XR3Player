@@ -23,7 +23,6 @@ import javafx.scene.control.MenuItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 
 /**
  * The default context menu for song items of application.
@@ -114,7 +113,7 @@ public class ShopContextMenu extends ContextMenu {
 	 * 
 	 * /** The media.
 	 */
-	private Media media;
+	private String mediaTitle;
 	
 	private final String encoding = "UTF-8";
 	
@@ -136,6 +135,13 @@ public class ShopContextMenu extends ContextMenu {
 		
 	}
 	
+	/** Update the mediaTitle
+	 * @param mediaTitle
+	 */
+	public void updateMediaTitle(String mediaTitle) {
+		this.mediaTitle = mediaTitle;
+	}
+	
 	/**
 	 * Shows the context menu based on the variables below.
 	 *
@@ -147,9 +153,9 @@ public class ShopContextMenu extends ContextMenu {
 	 *            Vertical mouse position on the screen
 	 * 
 	 */
-	public void showContextMenu(Media media , double x , double y) {
+	public void showContextMenu(String mediaTitle , double x , double y) {
 		
-		this.media = media;
+		this.mediaTitle = mediaTitle;
 		
 		//Fix first time show problem
 		if (super.getWidth() == 0) {
@@ -209,62 +215,62 @@ public class ShopContextMenu extends ContextMenu {
 			//---------------------SEARCH ON WEB--------------------------------------------
 			//Music Sites
 			if (source == soundCloud)
-				openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://soundcloud.com/search?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == jamendo)
-				openWebSite("https://www.jamendo.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.jamendo.com/search?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == tuneIn)
-				openWebSite("http://tunein.com/search/?query=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("http://tunein.com/search/?query=" + URLEncoder.encode(mediaTitle, encoding));
 			//Amazon
 			else if (source == amazonUS)
-				openWebSite("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonUK)
-				openWebSite("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonCanada)
-				openWebSite("https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonGermany)
-				openWebSite("https://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.de/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonFrance)
-				openWebSite("https://www.amazon.fr/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.fr/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonSpain)
-				openWebSite("https://www.amazon.es/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.es/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonItaly)
-				openWebSite("https://www.amazon.it/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.it/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonJapan)
-				openWebSite("https://www.amazon.co.jp/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.co.jp/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == amazonChina)
-				openWebSite("https://www.amazon.cn/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.amazon.cn/s/ref=nb_sb_noss?url=search-alias%3Dpopular&field-keywords=" + URLEncoder.encode(mediaTitle, encoding));
 			
 			//Music Sites
 			else if (source == hDTracks)
-				openWebSite("http://www.hdtracks.com/catalogsearch/result/?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("http://www.hdtracks.com/catalogsearch/result/?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == cDUniverse)
-				openWebSite("http://www.cduniverse.com/sresult.asp?HT_Search=ALL&HT_Search_Info=" + URLEncoder.encode(media.getTitle(), encoding) + "&style=all");
+				openWebSite("http://www.cduniverse.com/sresult.asp?HT_Search=ALL&HT_Search_Info=" + URLEncoder.encode(mediaTitle, encoding) + "&style=all");
 			
 			//Radios
 			else if (source == lastfm)
-				openWebSite("https://www.last.fm/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.last.fm/search?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == librefm)
-				openWebSite("https://libre.fm/search.php?search_term=" + URLEncoder.encode(media.getTitle(), encoding) + "&search_type=artist");
+				openWebSite("https://libre.fm/search.php?search_term=" + URLEncoder.encode(mediaTitle, encoding) + "&search_type=artist");
 			
 			//Video WebSites
 			else if (source == youtube)
-				openWebSite("https://www.youtube.com/results?search_query=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.youtube.com/results?search_query=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == vimeo)
-				openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://vimeo.com/search?q=" + URLEncoder.encode(mediaTitle, encoding));
 			
 			//Search-Engines
 			else if (source == google)
-				openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.google.com/search?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == duckduckgo)
-				openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://duckduckgo.com/?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == bing)
-				openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("http://www.bing.com/search?q=" + URLEncoder.encode(mediaTitle, encoding));
 			else if (source == yahoo)
-				openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://search.yahoo.com/search?p=" + URLEncoder.encode(mediaTitle, encoding));
 			
 			//Wikipedia
 			else if (source == wikipedia)
-				openWebSite("https://www.wikipedia.org/wiki/Special:Search?search=" + URLEncoder.encode(media.getTitle(), encoding));
+				openWebSite("https://www.wikipedia.org/wiki/Special:Search?search=" + URLEncoder.encode(mediaTitle, encoding));
 			
 		} catch (UnsupportedEncodingException ex) {
 			ex.printStackTrace();

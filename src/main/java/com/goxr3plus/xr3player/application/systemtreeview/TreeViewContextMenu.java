@@ -10,14 +10,17 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMenu;
 
 /**
  * The default context menu for song items of application.
@@ -29,7 +32,43 @@ public class TreeViewContextMenu extends ContextMenu {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private MenuItem showInExplorer;
+	private Menu startPlayer;
+	
+	@FXML
+	private MenuItem startOnPlayer0;
+	
+	@FXML
+	private MenuItem startOnPlayer1;
+	
+	@FXML
+	private MenuItem startOnPlayer2;
+	
+	@FXML
+	private Menu stopPlayer;
+	
+	@FXML
+	private MenuItem stopPlayer0;
+	
+	@FXML
+	private MenuItem stopPlayer1;
+	
+	@FXML
+	private MenuItem stopPlayer2;
+	
+	@FXML
+	private Menu getInfoBuy;
+	
+	@FXML
+	private MenuItem copy;
+	
+	@FXML
+	private MenuItem rename;
+	
+	@FXML
+	private MenuItem showFile;
+	
+	@FXML
+	private MenuItem editFileInfo;
 	
 	// -------------------------------------------------------------
 	
@@ -61,9 +100,8 @@ public class TreeViewContextMenu extends ContextMenu {
 	 */
 	@FXML
 	private void initialize() {
-		
-		//ShowInExplorer
-		showInExplorer.setOnAction(a -> ActionTool.openFileLocation(absoluteFilePath));
+		//getInfoBuy
+		getInfoBuy.getItems().addAll(new ShopContextMenu().getItems());
 	}
 	
 	/**
@@ -91,6 +129,16 @@ public class TreeViewContextMenu extends ContextMenu {
 		timeIn.getKeyFrames().addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
 		//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
 		timeIn.play();
+	}
+	
+	@FXML
+	void action(ActionEvent event) {
+		Object source = event.getSource();
+		
+		//showFile
+		if (source == showFile)
+			ActionTool.openFileLocation(absoluteFilePath);
+		
 	}
 	
 }

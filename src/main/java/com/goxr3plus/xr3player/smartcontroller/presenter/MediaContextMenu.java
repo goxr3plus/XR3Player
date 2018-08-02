@@ -129,6 +129,8 @@ public class MediaContextMenu extends ContextMenu {
 	
 	private final String encoding = "UTF-8";
 	
+	private final ShopContextMenu shopContextMenu = new ShopContextMenu();
+	
 	/**
 	 * Constructor.
 	 */
@@ -152,7 +154,7 @@ public class MediaContextMenu extends ContextMenu {
 	 */
 	@FXML
 	private void initialize() {
-		this.getInfoBuy.getItems().addAll(new ShopContextMenu().getItems());
+		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
 	}
 	
 	/**
@@ -185,6 +187,9 @@ public class MediaContextMenu extends ContextMenu {
 			} else
 				getItems().forEach(item -> item.setVisible(true));
 			
+		//Update ShopContextMenu
+		shopContextMenu.updateMediaTitle(media.getTitle());
+		
 		//Determine the image
 		for (int i = 0; i <= 2; i++) {
 			boolean playerEnergized = Main.xPlayersList.getXPlayer(i).isOpened() || Main.xPlayersList.getXPlayer(i).isPausedOrPlaying()
