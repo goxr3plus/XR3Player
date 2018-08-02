@@ -214,7 +214,6 @@ public class TreeViewContextMenu extends ContextMenu {
 					treeItem.valueProperty().unbind();
 					
 					String newFilePath = new File(oldFilePath).getParent() + File.separator + Main.renameWindow.getInputField().getText() + extension;
-					System.err.println(newFilePath);
 					
 					// !XPressed && // Old name != New name
 					if (Main.renameWindow.wasAccepted() && !getAbsoluteFilePath().equals(newFilePath)) {
@@ -295,10 +294,13 @@ public class TreeViewContextMenu extends ContextMenu {
 									media.setFilePath(newFilePath);
 							});
 							
+							//Set new file path
+							setAbsoluteFilePath(newFilePath);
+							
 							//Commit to the Database
 							Main.dbManager.commit();
 							
-							ActionTool.showNotification("Success Message", "Successfully rename from :\n" + oldFilePath + " \nto\n" + newFilePath, Duration.millis(1500),
+							ActionTool.showNotification("Success Message", "Successfully rename from :\n" + oldFilePath + " \nto\n" + newFilePath, Duration.millis(2000),
 									NotificationType.SUCCESS);
 							// Exception occurred
 						} catch (Exception ex) {
