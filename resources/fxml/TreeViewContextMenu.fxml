@@ -13,7 +13,7 @@
             <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
          </graphic>
       </Menu>
-      <SeparatorMenuItem mnemonicParsing="false" />
+      <SeparatorMenuItem fx:id="separator1" mnemonicParsing="false" />
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
@@ -24,7 +24,7 @@
             <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
          </graphic>
       </MenuItem>
-      <SeparatorMenuItem mnemonicParsing="false" />
+      <SeparatorMenuItem fx:id="separator2" mnemonicParsing="false" />
       <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File (CTRL+F)">
          <graphic>
             <FontIcon iconColor="#f5d236" iconLiteral="far-folder-open" iconSize="20" />

@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -36,10 +37,16 @@ public class TreeViewContextMenu extends ContextMenu {
 	private Menu getInfoBuy;
 	
 	@FXML
+	private SeparatorMenuItem separator1;
+	
+	@FXML
 	private MenuItem copy;
 	
 	@FXML
 	private MenuItem rename;
+	
+	@FXML
+	private SeparatorMenuItem separator2;
 	
 	@FXML
 	private MenuItem showFile;
@@ -102,6 +109,25 @@ public class TreeViewContextMenu extends ContextMenu {
 	public void show(String absoluteFilePath , double x , double y) {
 		this.absoluteFilePath = absoluteFilePath;
 		
+		//Set all items visible
+		getItems().forEach(item -> item.setVisible(true));
+		
+		//Keep this variables
+		boolean isAudio = InfoTool.isAudio(absoluteFilePath);
+		boolean isVideo = InfoTool.isVideo(absoluteFilePath);
+		
+		//Fix The Menu
+		if (isVideo) {
+			editFileInfo.setVisible(false);
+		} else if (! ( isAudio || isVideo )) {
+			playContextMenu.getStartPlayer().setVisible(false);
+			playContextMenu.getStopPlayer().setVisible(false);
+			editFileInfo.setVisible(false);
+			separator1.setVisible(false);
+			separator2.setVisible(false);
+			getInfoBuy.setVisible(false);
+		}
+		
 		//Update ShopContextMenu
 		shopContextMenu.setMediaTitle(InfoTool.getFileTitle(absoluteFilePath));
 		
@@ -135,8 +161,5 @@ public class TreeViewContextMenu extends ContextMenu {
 			ActionTool.openFileLocation(absoluteFilePath);
 		
 	}
-
-	
-
 	
 }

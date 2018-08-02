@@ -92,7 +92,7 @@ public class PlayContextMenu extends ContextMenu {
 		startPlayer.getItems().forEach(item -> item.setOnAction(a -> playOnDeck(startPlayer.getItems().indexOf(item))));
 		
 		//stopPlayer
-		stopPlayer.getItems().forEach(item -> item.setOnAction(a -> Main.xPlayersList.getXPlayer(startPlayer.getItems().indexOf(item)).stop()));
+		stopPlayer.getItems().forEach(item -> item.setOnAction(a -> Main.xPlayersList.getXPlayer(stopPlayer.getItems().indexOf(item)).stop()));
 	}
 	
 	/**
@@ -144,6 +144,20 @@ public class PlayContextMenu extends ContextMenu {
 	 */
 	public void setAbsoluteMediaPath(String absoluteMediaPath) {
 		this.absoluteMediaPath = absoluteMediaPath;
+	}
+	
+	/**
+	 * @return the startPlayer
+	 */
+	public Menu getStartPlayer() {
+		return startPlayer;
+	}
+	
+	/**
+	 * @return the stopPlayer
+	 */
+	public Menu getStopPlayer() {
+		return stopPlayer;
 	}
 	
 }
