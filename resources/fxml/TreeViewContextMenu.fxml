@@ -1,10 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-  <items>
-      <MenuItem fx:id="showInExplorer" mnemonicParsing="false" text="Show in Explorer" />
-  </items>
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on (CTRL+ENTER)">
+         <items>
+            <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="Player 1" />
+            <MenuItem fx:id="startOnPlayer1" mnemonicParsing="false" onAction="#action" text="Player 2" />
+            <MenuItem fx:id="startOnPlayer2" mnemonicParsing="false" onAction="#action" text="Player 3" />
+         </items>
+         <graphic>
+            <FontIcon iconColor="#ceff26" iconLiteral="far-play-circle" iconSize="24" />
+         </graphic>
+      </Menu>
+      <Menu fx:id="stopPlayer" mnemonicParsing="false" text="Stop Player">
+         <items>
+            <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="Player 1" />
+            <MenuItem fx:id="stopPlayer1" mnemonicParsing="false" onAction="#action" text="Player 2" />
+            <MenuItem fx:id="stopPlayer2" mnemonicParsing="false" onAction="#action" text="Player 3" />
+         </items>
+         <graphic>
+            <FontIcon iconColor="#fc4848" iconLiteral="fas-stop-circle" iconSize="24" />
+         </graphic>
+      </Menu>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
+         <graphic>
+            <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
+         </graphic>
+      </MenuItem>
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File (CTRL+F)">
+         <graphic>
+            <FontIcon iconColor="#f5d236" iconLiteral="far-folder-open" iconSize="20" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="File Info... (CTRL+I)">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-tags" iconSize="20" />
+         </graphic>
+      </MenuItem>
+   </items>
 </fx:root>

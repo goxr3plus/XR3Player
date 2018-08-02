@@ -103,7 +103,7 @@ public class TreeViewManager extends StackPane {
 		// Mouse Released Event
 		treeView.setOnMouseClicked(this::treeViewMouseClicked);
 		treeView.setOnKeyReleased(key -> {
-			if (key.getCode() == KeyCode.SPACE || key.getCode() == KeyCode.ENTER) {
+			if (key.getCode() == KeyCode.ENTER) {
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> {
 					item.setExpanded(!item.isExpanded());
