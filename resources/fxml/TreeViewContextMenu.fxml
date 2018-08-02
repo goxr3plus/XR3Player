@@ -14,23 +14,23 @@
             <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
          </graphic>
       </Menu>
-      <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (CTRL+C)">
+      <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy (C)">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-copy" iconSize="20" />
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (CTRL+R)">
+      <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#action" text="Rename (R)">
          <graphic>
             <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
          </graphic>
       </MenuItem>
       <SeparatorMenuItem fx:id="separator2" mnemonicParsing="false" />
-      <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File (CTRL+F)">
+      <MenuItem fx:id="showFile" mnemonicParsing="false" onAction="#action" text="Show File (F)">
          <graphic>
             <FontIcon iconColor="#f5d236" iconLiteral="far-folder-open" iconSize="20" />
          </graphic>
       </MenuItem>
-      <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="File Info... (CTRL+I)">
+      <MenuItem fx:id="editFileInfo" mnemonicParsing="false" onAction="#action" text="File Info... (I)">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-tags" iconSize="20" />
          </graphic>

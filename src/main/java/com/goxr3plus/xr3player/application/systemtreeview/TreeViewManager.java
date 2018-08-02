@@ -115,24 +115,24 @@ public class TreeViewManager extends StackPane {
 					treeView.scrollTo(treeView.getRow(item));
 				});
 				
-			} else if (key.getCode() == KeyCode.R && key.isControlDown()) { //RENAME
+			} else if (key.getCode() == KeyCode.R) { //RENAME
 				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> ( (FileTreeItem) item ).rename(this));
 				
-			} else if (key.getCode() == KeyCode.C && key.isControlDown()) { //COPY
+			} else if (key.getCode() == KeyCode.C) { //COPY
 				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem())
 						.ifPresent(item -> JavaFXTools.setClipBoard(Arrays.asList(new File( ( (FileTreeItem) item ).getAbsoluteFilePath()))));
 				
-			} else if (key.getCode() == KeyCode.F && key.isControlDown()) { //EXPLORER
+			} else if (key.getCode() == KeyCode.F) { //EXPLORER
 				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem())
 						.ifPresent(item -> ActionTool.openFileInExplorer( ( (FileTreeItem) item ).getAbsoluteFilePath()));
 				
-			} else if (key.getCode() == KeyCode.I && key.isControlDown()) { //EXPLORER
+			} else if (key.getCode() == KeyCode.I) { //EXPLORER
 				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> {
