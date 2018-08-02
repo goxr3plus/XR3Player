@@ -72,7 +72,7 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 	private Node node;
 	
 	/** The media. */
-	private String mediaPath;
+	private String absoluteFilePath;
 	
 	/** ShopContextMenu */
 	private final ShopContextMenu shopContextMenu = new ShopContextMenu();
@@ -114,22 +114,24 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 	/**
 	 * Shows the context menu based on the variables below.
 	 *
-	 * @param media
-	 *            the media
-	 * @param genre
-	 *            the genre
 	 * @param x
-	 *            the d
+	 *            Horizontal mouse position on the screen
 	 * @param y
-	 *            the e
-	 * @param controller1
-	 *            The smartcontroller that is calling this method
+	 *            Vertical mouse position on the screen
+	 * 
 	 * @param node
 	 */
-	public void showContextMenu(String mediaPath , double x , double y , Node node) {
+	public void showContextMenu(String absoluteFilePath , double x , double y , Node node) {
 		
 		this.node = node;
-		this.mediaPath = mediaPath;
+		this.absoluteFilePath = absoluteFilePath;
+		
+		//Update ShopContextMenu
+		shopContextMenu.setMediaTitle(InfoTool.getFileTitle(absoluteFilePath));
+		
+		//Update PlayContextMenu
+		playContextMenu.setAbsoluteMediaPath(absoluteFilePath);
+		playContextMenu.updateItemsImages();
 		
 		//Fix first time show problem
 		if (super.getWidth() == 0) {
@@ -184,11 +186,11 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 		Object source = e.getSource();
 		
 		if (source == copy) {
-			JavaFXTools.setClipBoard(Arrays.asList(new File(mediaPath)));
+			JavaFXTools.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
 		} else if (source == showFile) {
-			ActionTool.openFileLocation(mediaPath);
-		}else if (source == editFileInfo)
-			Main.tagWindow.openAudio(mediaPath, TagTabCategory.BASICINFO, true);
+			ActionTool.openFileLocation(absoluteFilePath);
+		} else if (source == editFileInfo)
+			Main.tagWindow.openAudio(absoluteFilePath, TagTabCategory.BASICINFO, true);
 		
 	}
 	

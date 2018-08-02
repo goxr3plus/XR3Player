@@ -160,11 +160,11 @@ public class MediaContextMenu extends ContextMenu {
 	 *            Horizontal mouse position on the screen
 	 * @param y
 	 *            Vertical mouse position on the screen
-	 * @param controller1
+	 * @param smartController
 	 *            The SmartController that is calling this method
 	 * @param node
 	 */
-	public void showContextMenu(Media media , Genre genre , double x , double y , SmartController controller1 , Node node) {
+	public void showContextMenu(Media media , Genre genre , double x , double y , SmartController smartController , Node node) {
 		
 		// Don't waste resources
 		if (previousGenre != genre)
@@ -191,7 +191,7 @@ public class MediaContextMenu extends ContextMenu {
 		
 		this.node = node;
 		this.media = media;
-		this.controller = controller1;
+		this.controller = smartController;
 		
 		//Fix first time show problem
 		if (super.getWidth() == 0) {
