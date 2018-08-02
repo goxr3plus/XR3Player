@@ -103,6 +103,7 @@ public class SmartControllerSearcher extends HBox {
 		searchService.search(searchField.getText());
 	}
 	
+	
 	/**
 	 * //Save the Settings before the first search -> [ ScrollBar position and current page of the SmartController ]
 	 */

@@ -77,7 +77,7 @@ public class LoadService extends Service<Void> {
 			
 			// Search + Trick for genre.SearchWindow
 			if (smartController.getSearchService().isActive() || smartController.getGenre() == Genre.SEARCHWINDOW)
-				smartController.getSearchService().getService().search();
+				smartController.getSearchService().reSearch();
 			// Reload
 			else {
 				smartController.updateWorking = true;
