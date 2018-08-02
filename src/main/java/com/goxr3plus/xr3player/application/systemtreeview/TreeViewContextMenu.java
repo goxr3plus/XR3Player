@@ -194,7 +194,7 @@ public class TreeViewContextMenu extends ContextMenu {
 		String oldFilePath = getAbsoluteFilePath();
 		
 		// Bind
-		treeItem.valueProperty().bind(Main.renameWindow.getInputField().textProperty().concat(extension));
+		treeItem.valueProperty().bind(Main.renameWindow.getInputField().textProperty().concat(!treeItem.isDirectory() ? extension : ""));
 		
 		// When the Rename Window is closed do the rename
 		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
@@ -213,7 +213,8 @@ public class TreeViewContextMenu extends ContextMenu {
 					// Remove Binding
 					treeItem.valueProperty().unbind();
 					
-					String newFilePath = new File(oldFilePath).getParent() + File.separator + Main.renameWindow.getInputField().getText() + extension;
+					String newFilePath = new File(oldFilePath).getParent() + File.separator + Main.renameWindow.getInputField().getText()
+							+ ( !treeItem.isDirectory() ? extension : "" );
 					
 					// !XPressed && // Old name != New name
 					if (Main.renameWindow.wasAccepted() && !getAbsoluteFilePath().equals(newFilePath)) {
