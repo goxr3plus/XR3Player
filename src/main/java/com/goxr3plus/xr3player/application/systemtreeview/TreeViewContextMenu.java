@@ -167,7 +167,7 @@ public class TreeViewContextMenu extends ContextMenu {
 		else if (source == editFileInfo)
 			Main.tagWindow.openAudio(treeItem.getAbsoluteFilePath(), TagTabCategory.BASICINFO, true);
 		else if (source == rename)
-			treeItem.rename(Main.treeManager);
+			treeItem.rename(Main.topBar);
 	}
 	
 	/**

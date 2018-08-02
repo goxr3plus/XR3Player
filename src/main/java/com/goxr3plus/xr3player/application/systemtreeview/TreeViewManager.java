@@ -55,6 +55,9 @@ public class TreeViewManager extends StackPane {
 	private VBox vBox;
 	
 	@FXML
+	private Label topLabel;
+	
+	@FXML
 	private Button collapseTree;
 	
 	@FXML
@@ -118,7 +121,7 @@ public class TreeViewManager extends StackPane {
 			} else if (key.getCode() == KeyCode.R) { //RENAME
 				
 				//Any selected TreeItem ?
-				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> ( (FileTreeItem) item ).rename(this));
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> ( (FileTreeItem) item ).rename(topLabel));
 				
 			} else if (key.getCode() == KeyCode.C) { //COPY
 				

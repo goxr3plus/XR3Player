@@ -820,9 +820,9 @@ public class MediaTableViewer extends StackPane {
 					if (code == KeyCode.F)
 						ActionTool.openFileInExplorer(getSelectionModel().getSelectedItem().getFilePath());
 					else if (code == KeyCode.Q)
-						getSelectionModel().getSelectedItem().updateStars(getTableView());
+						getSelectionModel().getSelectedItem().updateStars(smartController.getSearchFieldStackPane());
 					else if (code == KeyCode.R)
-						getSelectionModel().getSelectedItem().rename(getTableView());
+						getSelectionModel().getSelectedItem().rename(smartController.getSearchFieldStackPane());
 					else if (code == KeyCode.U) {
 						Media media = getSelectionModel().getSelectedItem();
 						if (!Main.playedSongs.containsFile(media.getFilePath())) {
