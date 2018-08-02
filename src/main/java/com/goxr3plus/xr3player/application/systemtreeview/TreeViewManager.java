@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import org.controlsfx.control.textfield.TextFields;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -28,8 +29,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -204,13 +203,15 @@ public class TreeViewManager extends StackPane {
 							stream.forEach(path -> {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
-								if (!path.toFile().isHidden()) {// && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
+								if (!path.toFile().isHidden()) {  //Future Filters ->>> && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
 									FileTreeItem treeNode = new FileTreeItem(path.toString());
 									source.getChildren().add(treeNode);
 								}
 								
 							});
 							
+							//Keep scroll position
+							Platform.runLater(() -> treeView.scrollTo(treeView.getRow(source)));
 						} catch (IOException x) {
 							x.printStackTrace();
 						}
