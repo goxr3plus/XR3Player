@@ -14,7 +14,7 @@ public enum Operation {
 	/** The close. */
 	CLOSE,
 	/** The open. */
-	OPEN,
+	OPEN, SEARCH, RENAME,
 	/** The refresh. */
 	REFRESH,
 	/** The update */

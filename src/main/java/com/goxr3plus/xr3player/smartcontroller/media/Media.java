@@ -873,6 +873,9 @@ public abstract class Media {
 									media.setFilePath(newFilePath);
 							});
 							
+							//Let's also fix the TreeView
+							Main.treeManager.getService().rename(oldFilePath, newFilePath);
+							
 							//Commit to the Database
 							Main.dbManager.commit();
 							

@@ -34,7 +34,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.systemtreeview.services.TreeViewSearchService;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.services.TreeViewService;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -72,7 +72,7 @@ public class TreeViewManager extends StackPane {
 	/** The host name. */
 	String hostName = "computer";
 	
-	private final TreeViewSearchService searchService = new TreeViewSearchService(this);
+	private final TreeViewService service = new TreeViewService(this);
 	
 	/**
 	 * Constructor.
@@ -150,11 +150,11 @@ public class TreeViewManager extends StackPane {
 		searchField.getStyleClass().add("dark-text-field-rectangle");
 		searchField.setMinWidth(0);
 		searchField.setMaxWidth(Integer.MAX_VALUE);
-		searchField.textProperty().addListener(l -> searchService.search(searchField.getText()));
+		searchField.textProperty().addListener(l -> service.search(searchField.getText()));
 		vBox.getChildren().add(searchField);
 		
 		//searchLabel
-		searchLabel.visibleProperty().bind(searchService.runningProperty());
+		searchLabel.visibleProperty().bind(service.runningProperty());
 	}
 	
 	/**
@@ -227,7 +227,11 @@ public class TreeViewManager extends StackPane {
 							x.printStackTrace();
 						}
 					
-					source.expandedProperty().addListener((l , oldValue , newValue) -> source.getIcon().setIconLiteral(newValue ? "fas-folder-open" : "fas-folder")
+					//Change Listener for Folders to change Icon
+					source.expandedProperty().addListener((l , oldValue , newValue) -> {
+						if (source.isDirectory())
+							source.getIcon().setIconLiteral(newValue ? "fas-folder-open" : "fas-folder");
+					}
 					
 					);
 				} else {
@@ -260,6 +264,13 @@ public class TreeViewManager extends StackPane {
 	 */
 	public TreeView<String> getTreeView() {
 		return treeView;
+	}
+	
+	/**
+	 * @return the searchService
+	 */
+	public TreeViewService getService() {
+		return service;
 	}
 	
 }
