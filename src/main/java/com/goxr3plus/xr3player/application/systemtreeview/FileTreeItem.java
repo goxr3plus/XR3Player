@@ -17,7 +17,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 public class FileTreeItem extends TreeItem<String> {
 	
 	/** Stores the full path to the file or directory. */
-	private String fullPath;
+	private String absoluteFilePath;
 	
 	/** Defines if this File is a Directory */
 	private boolean isDirectory;
@@ -36,20 +36,20 @@ public class FileTreeItem extends TreeItem<String> {
 	/**
 	 * Constructor.
 	 *
-	 * @param absolutePath
+	 * @param absoluteFilePath
 	 *            The absolute path of the file or folder
 	 * 
 	 */
-	public FileTreeItem(String absolutePath) {
-		super(absolutePath);
-		this.fullPath = absolutePath;
+	public FileTreeItem(String absoluteFilePath) {
+		super(absoluteFilePath);
+		this.absoluteFilePath = absoluteFilePath;
 		
 		//icon
 		icon.setIconSize(18);
 		setGraphic(icon);
 		
 		//Is this a directory?
-		File file = new File(fullPath);
+		File file = new File(absoluteFilePath);
 		isDirectory = file.isDirectory();
 		
 		//Does it exists?
@@ -60,15 +60,15 @@ public class FileTreeItem extends TreeItem<String> {
 			
 			else {
 				//Is it a music file?
-				if (InfoTool.isAudio(absolutePath))
+				if (InfoTool.isAudio(absoluteFilePath))
 					setFontIcon("fas-file-audio", audioColor);
-				else if (InfoTool.isVideo(absolutePath))
+				else if (InfoTool.isVideo(absoluteFilePath))
 					setFontIcon("fas-file-video", Color.WHITE);
-				else if (InfoTool.isImage(absolutePath))
+				else if (InfoTool.isImage(absoluteFilePath))
 					setFontIcon("fas-file-image", Color.WHITE);
-				else if (InfoTool.isPdf(absolutePath))
+				else if (InfoTool.isPdf(absoluteFilePath))
 					setFontIcon("fas-file-pdf", pdfColor);
-				else if (InfoTool.isZip(absolutePath))
+				else if (InfoTool.isZip(absoluteFilePath))
 					setFontIcon("fas-file-archive", Color.WHITE);
 				else
 					setFontIcon("fas-file", Color.WHITE);
@@ -77,9 +77,9 @@ public class FileTreeItem extends TreeItem<String> {
 			setFontIcon("fas-file", fileColor);
 		
 		// set the value
-		if (!fullPath.endsWith(File.separator)) {
+		if (!absoluteFilePath.endsWith(File.separator)) {
 			// set the value (which is what is displayed in the tree)
-			String value = absolutePath;
+			String value = absoluteFilePath;
 			int indexOf = value.lastIndexOf(File.separator);
 			if (indexOf > 0)
 				this.setValue(value.substring(indexOf + 1));
@@ -107,8 +107,24 @@ public class FileTreeItem extends TreeItem<String> {
 	 *
 	 * @return the full path
 	 */
-	public String getFullPath() {
-		return fullPath;
+	public String getAbsoluteFilePath() {
+		return absoluteFilePath;
+	}
+	
+	public void setAbsoluteFilePath(String fullPath) {
+		this.absoluteFilePath = fullPath;
+		
+		// set the value
+		if (!fullPath.endsWith(File.separator)) {
+			// set the value (which is what is displayed in the tree)
+			String value = fullPath;
+			int indexOf = value.lastIndexOf(File.separator);
+			if (indexOf > 0)
+				this.setValue(value.substring(indexOf + 1));
+			else
+				this.setValue(value);
+			
+		}
 	}
 	
 	/**

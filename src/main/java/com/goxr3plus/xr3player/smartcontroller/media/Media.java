@@ -898,7 +898,7 @@ public abstract class Media {
 	 * @param newFilePath
 	 * @param oldFilePath
 	 */
-	private void internalDataBaseRename(SmartController smartController , String newFilePath , String oldFilePath) {
+	public static void internalDataBaseRename(SmartController smartController , String newFilePath , String oldFilePath) {
 		
 		//if (controller1 != controller) // we already renamed on this controller
 		try (PreparedStatement dataRename = Main.dbManager.getConnection().prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
@@ -1211,7 +1211,7 @@ public abstract class Media {
 	 * @param path
 	 *            the new file path
 	 */
-	private void setFilePath(String path) {
+	public void setFilePath(String path) {
 		this.title.set(InfoTool.getFileTitle(path));
 		this.drive.set(path.substring(0, 1));
 		this.filePath.set(path);

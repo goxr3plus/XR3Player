@@ -210,8 +210,8 @@ public class FoldersModeService extends Service<Void> {
 					
 					//Append the total Files of each folder
 					smartControllerFoldersMode.getRoot().getChildren().forEach(treeItem -> {
-						int[] totalFiles = countFiles(new File( ( (FileTreeItem) treeItem ).getFullPath()));
-						String text = treeItem.getValue() + " [ " + totalFiles[1] + " / " + totalFiles[0] + " ]" + " [ " + ( (FileTreeItem) treeItem ).getFullPath() + " ] ";
+						int[] totalFiles = countFiles(new File( ( (FileTreeItem) treeItem ).getAbsoluteFilePath()));
+						String text = treeItem.getValue() + " [ " + totalFiles[1] + " / " + totalFiles[0] + " ]" + " [ " + ( (FileTreeItem) treeItem ).getAbsoluteFilePath() + " ] ";
 						
 						Platform.runLater(() -> treeItem.setValue(text));
 					});

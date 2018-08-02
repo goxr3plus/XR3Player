@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
@@ -35,7 +35,6 @@ import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.application.systemtreeview.SystemRoot;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FoldersModeService;
@@ -154,7 +153,7 @@ public class SmartControllerFoldersMode extends StackPane {
 				
 				// Put a String on DragBoard
 				ClipboardContent content = new ClipboardContent();
-				content.putFiles(selectedItems.stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath())).collect(Collectors.toList()));
+				content.putFiles(selectedItems.stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getAbsoluteFilePath())).collect(Collectors.toList()));
 				
 				board.setContent(content);
 				event.consume();
@@ -180,7 +179,7 @@ public class SmartControllerFoldersMode extends StackPane {
 					setText("");
 				} else {
 					setText(item);
-					String absoluteFilePath = ( (FileTreeItem) getTreeItem() ).getFullPath();
+					String absoluteFilePath = ( (FileTreeItem) getTreeItem() ).getAbsoluteFilePath();
 					
 					//We don't care about directories
 					if (! ( (FileTreeItem) getTreeItem() ).isDirectory()) {
@@ -300,10 +299,10 @@ public class SmartControllerFoldersMode extends StackPane {
 				if (source.getChildren().isEmpty()) {
 					
 					//Main Path
-					Path mainPath = Paths.get(source.getFullPath());
+					Path mainPath = Paths.get(source.getAbsoluteFilePath());
 					
 					// directory?				
-					if (mainPath.toFile().isDirectory())
+					if (mainPath.toFile().isDirectory()) {
 						try (DirectoryStream<Path> stream = Files.newDirectoryStream(mainPath)) {
 							boolean showOnlyFilesThatExistToPlaylist = ( (Control) Main.settingsWindow.getPlayListsSettingsController().getFilesToShowUnderFolders()
 									.getSelectedToggle() ).getTooltip().getText().equals("1");
@@ -351,7 +350,10 @@ public class SmartControllerFoldersMode extends StackPane {
 						} catch (IOException x) {
 							x.printStackTrace();
 						}
-					
+						
+						//Keep scroll position
+						Platform.runLater(() -> treeView.scrollTo(treeView.getRow(source)));
+					}
 				} else {
 					// if you want to implement rescanning a
 					// directory
@@ -366,7 +368,7 @@ public class SmartControllerFoldersMode extends StackPane {
 			
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 			//	Main.songsContextMenu.showContextMenu(row.itemProperty().get(), smartController.getGenre(), mouseEvent.getScreenX(), mouseEvent.getScreenY(), smartController, row);
-			Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
+			Main.treeViewContextMenu.show(source, mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
 	}
 	

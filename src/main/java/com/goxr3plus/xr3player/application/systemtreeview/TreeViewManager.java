@@ -125,7 +125,7 @@ public class TreeViewManager extends StackPane {
 				
 				// Put a String on DragBoard
 				ClipboardContent content = new ClipboardContent();
-				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getFullPath()))
+				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getAbsoluteFilePath()))
 						.collect(Collectors.toList()));
 				
 				board.setContent(content);
@@ -204,7 +204,7 @@ public class TreeViewManager extends StackPane {
 				if (source.getChildren().isEmpty()) {
 					
 					//Main Path
-					Path mainPath = Paths.get(source.getFullPath());
+					Path mainPath = Paths.get(source.getAbsoluteFilePath());
 					
 					// directory?				
 					if (mainPath.toFile().isDirectory())
@@ -244,7 +244,7 @@ public class TreeViewManager extends StackPane {
 			// source.setGraphic(new ImageView(SystemRoot.folderImage))
 			
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-			Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
+			Main.treeViewContextMenu.show(source, mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
 	}
 	
