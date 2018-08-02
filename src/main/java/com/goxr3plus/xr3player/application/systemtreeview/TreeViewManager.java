@@ -9,7 +9,6 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -19,6 +18,7 @@ import org.controlsfx.control.textfield.TextFields;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -28,9 +28,12 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.systemtreeview.services.TreeViewSearchService;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
@@ -39,7 +42,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
  * @author GOXR3PLUS
  *
  */
-public class TreeViewManager extends BorderPane {
+public class TreeViewManager extends StackPane {
 	
 	// -------------------------------------
 	
@@ -48,6 +51,9 @@ public class TreeViewManager extends BorderPane {
 	
 	@FXML
 	private Button collapseTree;
+	
+	@FXML
+	private Label searchLabel;
 	
 	@FXML
 	private TreeView<String> treeView;
@@ -64,6 +70,8 @@ public class TreeViewManager extends BorderPane {
 	
 	/** The host name. */
 	String hostName = "computer";
+	
+	private final TreeViewSearchService searchService = new TreeViewSearchService(this);
 	
 	/**
 	 * Constructor.
@@ -88,7 +96,7 @@ public class TreeViewManager extends BorderPane {
 	private void initialize() {
 		
 		// ------------------------- TreeView ----------------------------------
-		treeView.setRoot(systemRoot.getRoot());
+		treeView.setRoot(getRoot());
 		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		// Mouse Released Event
@@ -118,44 +126,34 @@ public class TreeViewManager extends BorderPane {
 		//collapseTree
 		collapseTree.setOnAction(a -> {
 			//Trick for CPU based on this question -> https://stackoverflow.com/questions/15490268/manually-expand-collapse-all-treeitems-memory-cost-javafx-2-2
-			systemRoot.getRoot().setExpanded(false);
+			getRoot().setExpanded(false);
 			
 			//Set not expanded all the children
-			collapseTreeView(systemRoot.getRoot(), false);
+			collapseTreeView(getRoot(), false);
 			
 			//Trick for CPU
-			systemRoot.getRoot().setExpanded(true);
+			getRoot().setExpanded(true);
 		});
 		
 		//searchField		
 		searchField.setPromptText("Search...");
 		searchField.getStyleClass().add("dark-text-field-rectangle");
-		searchField.textProperty().addListener(l -> {
-			Optional.ofNullable(findElementMatching(systemRoot.getRoot(), searchField.getText())).ifPresent(item -> treeView.getSelectionModel().select(item));
-			System.out.println("Found : " + findElementMatching(systemRoot.getRoot(), searchField.getText()));
-		});
+		searchField.setMinWidth(0);
+		searchField.setMaxWidth(Integer.MAX_VALUE);
+		searchField.textProperty().addListener(l -> searchService.search(searchField.getText()));
 		vBox.getChildren().add(searchField);
 		
+		//searchLabel
+		searchLabel.visibleProperty().bind(searchService.runningProperty());
 	}
 	
 	/**
-	 * Run all the children of given TreeItem and return back the one matching the value if any
+	 * The root of TreeView
 	 * 
-	 * @param item
-	 * @param value
-	 * @return
+	 * @return The root of TreeView
 	 */
-	private TreeItem<String> findElementMatching(TreeItem<String> item , String value) {
-		if (item != null && item.getValue().equals(value))
-			return item;
-		
-		for (TreeItem<String> child : item.getChildren()) {
-			TreeItem<String> s = findElementMatching(child, value);
-			if (s != null)
-				return s;
-			
-		}
-		return null;
+	public FileTreeItem getRoot() {
+		return systemRoot.getRoot();
 	}
 	
 	/**
@@ -236,6 +234,20 @@ public class TreeViewManager extends BorderPane {
 		} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 			Main.treeViewContextMenu.show(source.getFullPath(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
 		}
+	}
+	
+	/**
+	 * @return the searchLabel
+	 */
+	public Label getSearchLabel() {
+		return searchLabel;
+	}
+	
+	/**
+	 * @return the treeView
+	 */
+	public TreeView<String> getTreeView() {
+		return treeView;
 	}
 	
 }

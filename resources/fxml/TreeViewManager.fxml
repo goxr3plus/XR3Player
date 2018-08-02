@@ -4,20 +4,22 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root minWidth="0.0" prefHeight="487.0" prefWidth="248.0" style="-fx-background-color: rgb(255,255,255,0.9);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <VBox fx:id="vBox" alignment="CENTER" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="275.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="vBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
          <children>
-            <HBox>
+            <HBox minHeight="0.0" minWidth="0.0">
                <children>
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text=" System Explorer " HBox.hgrow="ALWAYS">
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text=" System Explorer " HBox.hgrow="ALWAYS">
                      <graphic>
                         <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
                      </graphic>
@@ -41,11 +43,17 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <TreeView fx:id="treeView" VBox.vgrow="ALWAYS">
+            <TreeView fx:id="treeView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
-               </VBox.margin></TreeView>
+               </VBox.margin>
+            </TreeView>
          </children>
       </VBox>
-   </center>
+      <Label fx:id="searchLabel" alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="white-black-label" text="Searching" visible="false">
+         <graphic>
+            <ProgressIndicator minHeight="0.0" minWidth="0.0" />
+         </graphic>
+      </Label>
+   </children>
 </fx:root>

@@ -104,6 +104,7 @@ public class SmartControllerSearcher extends HBox {
 	}
 	
 	
+	
 	/**
 	 * //Save the Settings before the first search -> [ ScrollBar position and current page of the SmartController ]
 	 */
