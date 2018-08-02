@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,7 +13,7 @@
 
 <fx:root minWidth="0.0" prefHeight="487.0" prefWidth="248.0" style="-fx-background-color: rgb(255,255,255,0.9);" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox alignment="CENTER" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+      <VBox fx:id="vBox" alignment="CENTER" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
          <children>
             <HBox>
                <children>
@@ -46,14 +45,6 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin></TreeView>
-            <TextField fx:id="searchField" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" promptText="search..." styleClass="tree-view-search-box">
-               <tooltip>
-                  <Tooltip text="Search everything on your Dropbox Account" />
-               </tooltip>
-               <VBox.margin>
-                  <Insets bottom="3.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
          </children>
       </VBox>
    </center>

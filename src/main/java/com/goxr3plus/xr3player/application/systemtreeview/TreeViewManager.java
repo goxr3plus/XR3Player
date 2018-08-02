@@ -9,11 +9,13 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import javafx.application.Platform;
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -27,6 +29,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -41,7 +44,7 @@ public class TreeViewManager extends BorderPane {
 	// -------------------------------------
 	
 	@FXML
-	private TextField searchField;
+	private VBox vBox;
 	
 	@FXML
 	private Button collapseTree;
@@ -50,6 +53,9 @@ public class TreeViewManager extends BorderPane {
 	private TreeView<String> treeView;
 	
 	// -------------------------------------
+	
+	/** The search field. */
+	private final TextField searchField = TextFields.createClearableTextField();
 	
 	/**
 	 * The root element of the computer hard drive - drives
@@ -109,9 +115,6 @@ public class TreeViewManager extends BorderPane {
 			}
 		});
 		
-		//searchButton
-		//searchButton.setOnAction(a -> Main.specialChooser.prepareToImportSongFiles(Main.window));
-		
 		//collapseTree
 		collapseTree.setOnAction(a -> {
 			//Trick for CPU based on this question -> https://stackoverflow.com/questions/15490268/manually-expand-collapse-all-treeitems-memory-cost-javafx-2-2
@@ -124,11 +127,35 @@ public class TreeViewManager extends BorderPane {
 			systemRoot.getRoot().setExpanded(true);
 		});
 		
-		//searchField
+		//searchField		
+		searchField.setPromptText("Search...");
+		searchField.getStyleClass().add("dark-text-field-rectangle");
 		searchField.textProperty().addListener(l -> {
-			System.out.println(treeView.getChildrenUnmodifiable().size());
+			Optional.ofNullable(findElementMatching(systemRoot.getRoot(), searchField.getText())).ifPresent(item -> treeView.getSelectionModel().select(item));
+			System.out.println("Found : " + findElementMatching(systemRoot.getRoot(), searchField.getText()));
 		});
+		vBox.getChildren().add(searchField);
 		
+	}
+	
+	/**
+	 * Run all the children of given TreeItem and return back the one matching the value if any
+	 * 
+	 * @param item
+	 * @param value
+	 * @return
+	 */
+	private TreeItem<String> findElementMatching(TreeItem<String> item , String value) {
+		if (item != null && item.getValue().equals(value))
+			return item;
+		
+		for (TreeItem<String> child : item.getChildren()) {
+			TreeItem<String> s = findElementMatching(child, value);
+			if (s != null)
+				return s;
+			
+		}
+		return null;
 	}
 	
 	/**
@@ -142,15 +169,6 @@ public class TreeViewManager extends BorderPane {
 		
 		item.setExpanded(expanded);
 		item.getChildren().forEach(child -> collapseTreeView(child, expanded));
-	}
-	
-	/**
-	 * Finds first TreeView element matching the given text
-	 * 
-	 * @param text
-	 */
-	private void findElementMatching(String text) {
-		
 	}
 	
 	/**
