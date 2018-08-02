@@ -8,26 +8,6 @@
 
 <fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <Menu fx:id="startPlayer" mnemonicParsing="false" text="Play on (CTRL+ENTER)">
-         <items>
-            <MenuItem fx:id="startOnPlayer0" mnemonicParsing="false" onAction="#action" text="Player 1" />
-            <MenuItem fx:id="startOnPlayer1" mnemonicParsing="false" onAction="#action" text="Player 2" />
-            <MenuItem fx:id="startOnPlayer2" mnemonicParsing="false" onAction="#action" text="Player 3" />
-         </items>
-         <graphic>
-            <FontIcon iconColor="#ceff26" iconLiteral="far-play-circle" iconSize="24" />
-         </graphic>
-      </Menu>
-      <Menu fx:id="stopPlayer" mnemonicParsing="false" text="Stop Player">
-         <items>
-            <MenuItem fx:id="stopPlayer0" mnemonicParsing="false" onAction="#action" text="Player 1" />
-            <MenuItem fx:id="stopPlayer1" mnemonicParsing="false" onAction="#action" text="Player 2" />
-            <MenuItem fx:id="stopPlayer2" mnemonicParsing="false" onAction="#action" text="Player 3" />
-         </items>
-         <graphic>
-            <FontIcon iconColor="#fc4848" iconLiteral="fas-stop-circle" iconSize="24" />
-         </graphic>
-      </Menu>
       <Menu fx:id="getInfoBuy" mnemonicParsing="false" text="Get Info/Buy">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />

@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMenu;
 
 /**
@@ -30,30 +31,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMe
 public class TreeViewContextMenu extends ContextMenu {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private Menu startPlayer;
-	
-	@FXML
-	private MenuItem startOnPlayer0;
-	
-	@FXML
-	private MenuItem startOnPlayer1;
-	
-	@FXML
-	private MenuItem startOnPlayer2;
-	
-	@FXML
-	private Menu stopPlayer;
-	
-	@FXML
-	private MenuItem stopPlayer0;
-	
-	@FXML
-	private MenuItem stopPlayer1;
-	
-	@FXML
-	private MenuItem stopPlayer2;
 	
 	@FXML
 	private Menu getInfoBuy;
@@ -76,6 +53,12 @@ public class TreeViewContextMenu extends ContextMenu {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	private String absoluteFilePath;
+	
+	/** ShopContextMenu */
+	private final ShopContextMenu shopContextMenu = new ShopContextMenu();
+	
+	/** PlayContextMenu */
+	private final PlayContextMenu playContextMenu = new PlayContextMenu();
 	
 	/**
 	 * Constructor.
@@ -100,8 +83,13 @@ public class TreeViewContextMenu extends ContextMenu {
 	 */
 	@FXML
 	private void initialize() {
+		
 		//getInfoBuy
-		getInfoBuy.getItems().addAll(new ShopContextMenu().getItems());
+		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
+		
+		//PlayContextMenu
+		getItems().addAll(0, playContextMenu.getItems());
+		
 	}
 	
 	/**
@@ -113,6 +101,13 @@ public class TreeViewContextMenu extends ContextMenu {
 	 */
 	public void show(String absoluteFilePath , double x , double y) {
 		this.absoluteFilePath = absoluteFilePath;
+		
+		//Update ShopContextMenu
+		shopContextMenu.setMediaTitle(InfoTool.getFileTitle(absoluteFilePath));
+		
+		//Update PlayContextMenu
+		playContextMenu.setAbsoluteMediaPath(absoluteFilePath);
+		playContextMenu.updateItemsImages();
 		
 		// Show it
 		show(Main.window, x + 8, y - 1);
@@ -132,7 +127,7 @@ public class TreeViewContextMenu extends ContextMenu {
 	}
 	
 	@FXML
-	void action(ActionEvent event) {
+	public void action(ActionEvent event) {
 		Object source = event.getSource();
 		
 		//showFile
@@ -140,5 +135,8 @@ public class TreeViewContextMenu extends ContextMenu {
 			ActionTool.openFileLocation(absoluteFilePath);
 		
 	}
+
+	
+
 	
 }

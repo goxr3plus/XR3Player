@@ -785,7 +785,7 @@ public class StreamPlayer implements Callable<Void> {
 							// Compute position in bytes in encoded stream.
 							int nEncodedBytes = getEncodedStreamPosition();
 							
-							System.err.println(trimBuffer[0] + " , Data Length :" + trimBuffer.length);
+							//System.err.println(trimBuffer[0] + " , Data Length :" + trimBuffer.length)
 							
 							// Notify all registered Listeners
 							listeners.forEach(listener -> {

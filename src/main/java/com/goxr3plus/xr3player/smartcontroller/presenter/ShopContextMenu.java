@@ -135,10 +135,12 @@ public class ShopContextMenu extends ContextMenu {
 		
 	}
 	
-	/** Update the mediaTitle
+	/**
+	 * Set the mediaTitle
+	 * 
 	 * @param mediaTitle
 	 */
-	public void updateMediaTitle(String mediaTitle) {
+	public void setMediaTitle(String mediaTitle) {
 		this.mediaTitle = mediaTitle;
 	}
 	

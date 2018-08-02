@@ -10,8 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.kordamp.ikonli.javafx.FontIcon;
-
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -26,13 +24,11 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
-import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
@@ -44,30 +40,6 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 public class MediaContextMenu extends ContextMenu {
 	
 	//--------------------------------------------------------------
-	
-	@FXML
-	private Menu startPlayer;
-	
-	@FXML
-	private MenuItem startOnPlayer0;
-	
-	@FXML
-	private MenuItem startOnPlayer1;
-	
-	@FXML
-	private MenuItem startOnPlayer2;
-	
-	@FXML
-	private Menu stopPlayer;
-	
-	@FXML
-	private MenuItem stopPlayer0;
-	
-	@FXML
-	private MenuItem stopPlayer1;
-	
-	@FXML
-	private MenuItem stopPlayer2;
 	
 	@FXML
 	private Menu getInfoBuy;
@@ -129,7 +101,11 @@ public class MediaContextMenu extends ContextMenu {
 	
 	private final String encoding = "UTF-8";
 	
+	/** ShopContextMenu */
 	private final ShopContextMenu shopContextMenu = new ShopContextMenu();
+	
+	/** PlayContextMenu */
+	private final PlayContextMenu playContextMenu = new PlayContextMenu();
 	
 	/**
 	 * Constructor.
@@ -154,7 +130,23 @@ public class MediaContextMenu extends ContextMenu {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//Get Info Buy
 		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
+		
+		//PlayContextMenu
+		getItems().addAll(0, playContextMenu.getItems());
+		
+	}
+	
+	/**
+	 * Adding the song to deck and starting it.
+	 *
+	 * @param deck
+	 *            the deck
+	 */
+	public void playOnDeck(int deck) {
+		Main.xPlayersList.getXPlayerController(deck).playSong(media.getFilePath());
 	}
 	
 	/**
@@ -179,36 +171,20 @@ public class MediaContextMenu extends ContextMenu {
 			if (genre == Genre.BUYBUTTON) { //Smart trick
 				getItems().forEach(item -> item.setVisible(false));
 				getInfoBuy.setVisible(true);
-			} else if (media.getSmartControllerGenre() == Genre.LIBRARYMEDIA)
+			} else if (media.getSmartControllerGenre() == Genre.LIBRARYMEDIA) {
 				getItems().forEach(item -> item.setVisible(true));
-			else if (media.getSmartControllerGenre() == Genre.SEARCHWINDOW) {
+			} else if (media.getSmartControllerGenre() == Genre.SEARCHWINDOW) {
 				getItems().forEach(item -> item.setVisible(true));
 				removeMedia.setVisible(false);
 			} else
 				getItems().forEach(item -> item.setVisible(true));
 			
 		//Update ShopContextMenu
-		shopContextMenu.updateMediaTitle(media.getTitle());
+		shopContextMenu.setMediaTitle(media.getTitle());
 		
-		//Determine the image
-		for (int i = 0; i <= 2; i++) {
-			boolean playerEnergized = Main.xPlayersList.getXPlayer(i).isOpened() || Main.xPlayersList.getXPlayer(i).isPausedOrPlaying()
-					|| Main.xPlayersList.getXPlayer(i).isSeeking();
-			
-			//PlayFontIcon
-			FontIcon playFontIcon = new FontIcon("fas-play-circle");
-			playFontIcon.setIconSize(24);
-			playFontIcon.setIconColor(Color.web("#ceff26"));
-			
-			//StopFontIcon
-			FontIcon stopFontIcon = new FontIcon("fas-stop-circle");
-			stopFontIcon.setIconSize(24);
-			stopFontIcon.setIconColor(Color.web("#ff3c26"));
-			
-			//Set it to the items
-			startPlayer.getItems().get(i).setGraphic(!playerEnergized ? null : playFontIcon);
-			stopPlayer.getItems().get(i).setGraphic(!playerEnergized ? null : stopFontIcon);
-		}
+		//Update PlayContextMenu
+		playContextMenu.setAbsoluteMediaPath(media.getFilePath());
+		playContextMenu.updateItemsImages();
 		
 		//Mark Played or Not Played
 		this.markAsPlayed.setText("Mark as " + ( !Main.playedSongs.containsFile(media.getFilePath()) ? "Played" : "Not Played" ) + " (CTRL+U)");
@@ -271,34 +247,8 @@ public class MediaContextMenu extends ContextMenu {
 	public void action(ActionEvent e) {
 		Object source = e.getSource();
 		
-		// --------------------play on deck 0
-		if (source == startOnPlayer0) {
-			( (Audio) media ).playOnDeck(0, controller);
-			
-			// play on deck 1
-		} else if (source == startOnPlayer1) {
-			( (Audio) media ).playOnDeck(1, controller);
-			
-			// play on deck 2
-		} else if (source == startOnPlayer2) {
-			
-			( (Audio) media ).playOnDeck(2, controller);
-			
-			// ------------------stop deck 0
-		} else if (source == stopPlayer0) {
-			Main.xPlayersList.getXPlayer(0).stop();
-			
-			// stop deck 1
-		} else if (source == stopPlayer1) {
-			Main.xPlayersList.getXPlayer(1).stop();
-			
-			// stop deck 2
-		} else if (source == stopPlayer2) {
-			Main.xPlayersList.getXPlayer(2).stop();
-		}
-		
 		//markAsPlayed
-		else if (source == markAsPlayed) {
+		if (source == markAsPlayed) {
 			if (!Main.playedSongs.containsFile(media.getFilePath())) {
 				Main.playedSongs.add(media.getFilePath(), true);
 				Main.playedSongs.appendToTimesPlayed(media.getFilePath(), true);
