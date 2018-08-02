@@ -6,11 +6,8 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.TreeItem;
-import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewManager;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 
 /**
@@ -85,9 +82,9 @@ public class TreeViewService extends Service<Void> {
 				} else if (operation == Operation.RENAME) {//Operation.RENAME
 					
 					//Search for it if exists in the Tree
-					Optional.ofNullable(findElementMatching2(treeViewManager.getRoot(), oldFilePath)).ifPresentOrElse(
-							item -> Platform.runLater(() -> ( (FileTreeItem) item ).setAbsoluteFilePath(newFilePath)),
-							() -> ActionTool.showNotification("", "", Duration.seconds(2), NotificationType.INFORMATION));
+					Optional.ofNullable(findElementMatching2(treeViewManager.getRoot(), oldFilePath)).ifPresent(
+							//If present
+							item -> Platform.runLater(() -> ( (FileTreeItem) item ).setAbsoluteFilePath(newFilePath)));
 					
 				}
 				
@@ -128,7 +125,7 @@ public class TreeViewService extends Service<Void> {
 				
 				//Loop
 				for (TreeItem<String> child : item.getChildren()) {
-					TreeItem<String> s = findElementMatching(child, fileAbsolutePath);
+					TreeItem<String> s = findElementMatching2(child, fileAbsolutePath);
 					if (s != null)
 						return s;
 					
