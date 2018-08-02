@@ -301,8 +301,10 @@ public class TreeViewContextMenu extends ContextMenu {
 							//Commit to the Database
 							Main.dbManager.commit();
 							
-							ActionTool.showNotification("Success Message", "Successfully rename from :\n" + oldFilePath + " \nto\n" + newFilePath, Duration.millis(2000),
+							//Show message to user
+							ActionTool.showNotification("Success Message", "Successfully rename from :\n" + InfoTool.getFileName(oldFilePath) + " \nto\n" + InfoTool.getFileName(newFilePath), Duration.millis(2000),
 									NotificationType.SUCCESS);
+							
 							// Exception occurred
 						} catch (Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
