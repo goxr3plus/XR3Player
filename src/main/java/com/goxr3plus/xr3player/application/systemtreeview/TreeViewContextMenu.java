@@ -26,6 +26,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.ShopContextMenu;
+import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 
 /**
  * The default context menu for song items of application.
@@ -163,7 +164,8 @@ public class TreeViewContextMenu extends ContextMenu {
 			ActionTool.openFileLocation(absoluteFilePath);
 		else if (source == copy)
 			JavaFXTools.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
-		
+		else if (source == editFileInfo)
+			Main.tagWindow.openAudio(absoluteFilePath, TagTabCategory.BASICINFO, true);
 	}
 	
 }
