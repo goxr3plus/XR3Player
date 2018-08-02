@@ -9,6 +9,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -100,6 +102,15 @@ public class TreeViewManager extends StackPane {
 		
 		// Mouse Released Event
 		treeView.setOnMouseClicked(this::treeViewMouseClicked);
+		treeView.setOnKeyReleased(key -> {
+			if (key.getCode() == KeyCode.SPACE || key.getCode() == KeyCode.ENTER) {
+				//Any selected TreeItem ?
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> {
+					item.setExpanded(!item.isExpanded());
+					treeView.scrollTo(treeView.getRow(item));
+				});
+			}
+		});
 		
 		// Drag Implementation
 		treeView.setOnDragDetected(event -> {
