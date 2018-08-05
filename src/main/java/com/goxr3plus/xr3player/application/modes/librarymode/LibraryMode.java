@@ -13,7 +13,9 @@ import com.jfoenix.controls.JFXButton;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -41,9 +43,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
 
 /**
  * This class contains everything needed going on LibraryMode.
@@ -367,7 +366,7 @@ public class LibraryMode extends BorderPane {
 		
 		BooleanProperty p1 = openOrCloseLibrary.disableProperty();
 		p1.bind(libraryToolBar.disabledProperty());
-		openOrCloseLibrary.setOnAction(λ -> ( (Library) viewer.centerItemProperty().get() )
+		openOrCloseLibrary.setOnAction(l -> ( (Library) viewer.centerItemProperty().get() )
 				.setLibraryStatus( ( (Library) viewer.centerItemProperty().get() ).isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false));
 		
 		// -- settingsOfLibrary
