@@ -440,6 +440,7 @@ public class Library extends StackPane {
 		//this.setEffect(reflection);
 		
 		//Selected Property
+		setSelected(false);
 		selected.addListener((observable , oldValue , newValue) -> {
 			if (newValue)
 				( (DropShadow) super.getEffect() ).setColor(Color.web("#1bb2d7"));
@@ -982,6 +983,10 @@ public class Library extends StackPane {
 	 */
 	public void setSelected(boolean selected) {
 		selectedProperty().set(selected);
+	}
+	
+	public boolean isSelected() {
+		return selectedProperty().get();
 	}
 	
 	/**

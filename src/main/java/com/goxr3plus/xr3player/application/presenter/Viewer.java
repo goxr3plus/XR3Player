@@ -419,11 +419,18 @@ public class Viewer extends Region {
 				
 				if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
 					
+					//Primary MouseButton - //Unselect all the libraries
+					if (m.getButton() == MouseButton.PRIMARY)
+						this.itemsObservableList.forEach(lib -> ( (Library) lib ).setSelected(false));
+					else if (m.getButton() == MouseButton.MIDDLE) //Select the library
+						library.setSelected(!library.isSelected());
+					
 					// If it isn't the same library again
 					if ( ( (Library) centerGroup.getChildren().get(0) ).getPosition() != library.getPosition()) {
 						
 						setCenterIndex(library.getPosition());
 						// scrollBar.setValue(library.getPosition())
+						
 					}
 					
 				} else if (m.getButton() == MouseButton.SECONDARY) {
