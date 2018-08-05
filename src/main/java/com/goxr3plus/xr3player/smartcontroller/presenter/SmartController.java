@@ -239,7 +239,7 @@ public class SmartController extends StackPane {
 	// ---------Security---------------------------
 	
 	public enum WorkOnProgress {
-		NONE, INSERTING_FILES, DELETE_FILES, RENAMING_LIBRARY, UPDATE, SEARCHING_FILES, EXPORTING_FILES;
+		NONE, INSERTING_FILES, DELETE_FILES, RENAMING_LIBRARY, UPDATING_PLAYLIST, SEARCHING_FILES, EXPORTING_FILES;
 	}
 	
 	public volatile WorkOnProgress workOnProgress = WorkOnProgress.NONE;

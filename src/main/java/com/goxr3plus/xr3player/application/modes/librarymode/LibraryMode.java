@@ -246,7 +246,7 @@ public class LibraryMode extends BorderPane {
 						//Check if the user wants to immediately open library after it's creation
 						if (openLibraryAfterCreation || createLibraryFromFiles != null) {
 							currentLib.setLibraryStatus(LibraryStatus.OPENED, false);
-							openedLibrariesViewer.selectTab(currentLib.getLibraryName());
+							//openedLibrariesViewer.selectTab(currentLib.getLibraryName());
 						}
 						
 						//Bidirectional binding with Instant Search

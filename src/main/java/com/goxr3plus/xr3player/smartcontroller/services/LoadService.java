@@ -82,7 +82,7 @@ public class LoadService extends Service<Void> {
 			// Reload
 			else {
 				// Security Value
-				smartController.workOnProgress = WorkOnProgress.UPDATE;
+				smartController.workOnProgress = WorkOnProgress.UPDATING_PLAYLIST;
 				smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 				smartController.getIndicator().progressProperty().bind(progressProperty());
 				smartController.getDescriptionLabel().setText("Loading media...");
