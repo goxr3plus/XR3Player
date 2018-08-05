@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,7 +26,6 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -299,143 +297,7 @@ public class DatabaseManager {
 				.map(user -> (User) user).findFirst();
 	}
 	
-	/**
-	 * Loads all [ Opened-Libraries ] and the [ Last-Opened-Library ] as properties from the UserInformation.properties file [[SuppressWarningsSpartan]]
-	 */
-	public void loadOpenedLibraries() {
-		
-		//Get the current User
-		getOpenedUser().ifPresent(user -> {
-			
-			//Load the properties
-			Properties properties = user.getUserInformationDb().loadProperties();
-			
-			//Load the opened libraries
-			//			Optional.ofNullable(properties.getProperty("Opened-Libraries")).ifPresent(openedLibraries -> {
-			//				
-			//				//Use the split to get all the Opened Libraries Names
-			//				Arrays.asList(openedLibraries.split("\\<\\|\\>\\:\\<\\|\\>")).stream().forEach(name -> {
-			//					Platform.runLater(() -> {
-			//						//System.out.println(name); //debugging
-			//						
-			//						//Get the Library and Open it!
-			//						Main.libraryMode.getLibraryWithName(name).get().libraryOpenClose(true, true);
-			//					});
-			//				});
-			//			});
-			
-			//Load all the Opened Libraries
-			Platform.runLater(() -> Main.libraryMode.viewer.getItemsObservableList().stream().filter(library -> ( (Library) library ).isOpened())
-					.forEach(library -> ( (Library) library ).setLibraryStatus(LibraryStatus.OPENED, true)));
-			
-			//Add Selection Model ChangeListener 
-			Platform.runLater(() -> {
-				
-				//Library Mode Tab Pane Selection Listener
-				Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
-					
-					// Give refresh based on the below formula
-					Optional.ofNullable(newTab).ifPresent(tab -> {
-						SmartController smartController = ( (SmartController) tab.getContent() );
-						
-						//Check 
-						if ( ( smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
-							
-							//Refresh the SmartController
-							smartController.getLoadService().startService(false, true, true);
-							
-							//Store the Opened Libraries
-							//storeOpenedLibraries()
-							
-						}
-						
-						//System.out.println("Changed...")
-						storeLastOpenedLibrary();
-					});
-				});
-				
-				//Emotion Lists Tab Pane Selection Listener
-				Main.emotionsTabPane.getTabPane().getSelectionModel().selectedItemProperty().addListener((observable , oldTab , newTab) -> {
-					
-					// Give refresh based on the below formula
-					SmartController smartController = ( (SmartController) newTab.getContent() );
-					if ( ( !Main.libraryMode.openedLibrariesViewer.getTabPane().getTabs().isEmpty() && smartController.isFree(false)
-							&& smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
-						
-						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
-						
-					}
-				});
-				
-				//Load the Last Opened Library
-				Optional.ofNullable(properties.getProperty("Last-Opened-Library")).ifPresent(lastOpenedLibrary -> {
-					
-					//Select the correct library inside the TabPane
-					Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().select(Main.libraryMode.openedLibrariesViewer.getTab(lastOpenedLibrary));
-					
-					//This will change in future update when user can change the default position of Libraries
-					Main.libraryMode.viewer.setCenterIndex(Main.libraryMode.openedLibrariesViewer.getSelectedLibrary().get().getPosition());
-					
-				});
-				
-				//Update last selected Library SmartController if not empty
-				Main.libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> {
-					if (selectedLibrary.getSmartController().isFree(false))
-						selectedLibrary.getSmartController().getLoadService().startService(false, true, false);
-				});
-			});
-		});
-		
-	}
-	
-	/**
-	 * Stores the last opened library - That means the library that was selected on the Multiple Libraries Tab Pane <br>
-	 * !Must be called from JavaFX Thread!
-	 */
-	public void storeLastOpenedLibrary() {
-		
-		//Get the current User
-		getOpenedUser().ifPresent(user -> {
-			
-			//Save the last opened(selected) library if any
-			if (Main.libraryMode.openedLibrariesViewer.getTabs().isEmpty())
-				user.getUserInformationDb().deleteProperty("Last-Opened-Library");
-			else
-				user.getUserInformationDb().updateProperty("Last-Opened-Library",
-						Main.libraryMode.openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem().getTooltip().getText());
-			
-		});
-	}
-	
-	/**
-	 * Stores all the opened libraries and the last selected one as properties to the UserInformation.properties file <br>
-	 * !Must be called from JavaFX Thread!
-	 * 
-	 * @param openedLibrariesTabs
-	 */
-	public void storeOpenedLibraries() {
-		
-		//Get the opened user and store the opened libraries
-		//		getOpenedUser().ifPresent(user -> {
-		//			ObservableList<Tab> openedLibrariesTabs = Main.libraryMode.openedLibrariesViewer.getTabs();
-		//			
-		//			//			//Save the opened libraries
-		//			//			if (openedLibrariesTabs.isEmpty())
-		//			//				user.getUserInformationDb().deleteProperty("Opened-Libraries");
-		//			//			else {
-		//			//				
-		//			//				//Join all library names to a string using as separator char "<|>:<|>"
-		//			//				String openedLibs = openedLibrariesTabs.stream().map(tab -> tab.getTooltip().getText()).collect(Collectors.joining("<|>:<|>"));
-		//			//				user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
-		//			//				
-		//			//				//System.out.println("Opened Libraries:\n-> " + openedLibs); //debugging
-		//			//			}
-		//			
-		//			//Save the last opened library
-		//			storeLastOpenedLibrary();
-		//		});
-		storeLastOpenedLibrary();
-	}
+
 	
 	/**
 	 * DataLoader.
@@ -579,7 +441,7 @@ public class DatabaseManager {
 						countDown1.await();
 						
 						//Load the Opened Libraries
-						loadOpenedLibraries();
+						Main.libraryMode.loadOpenedLibraries();
 						
 						//Run of JavaFX Thread
 						Platform.runLater(() -> {

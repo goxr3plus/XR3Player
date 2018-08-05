@@ -233,7 +233,7 @@ public class Library extends StackPane {
 							
 							//Update the UserInformation properties file
 							if (isOpened())
-								Main.dbManager.storeOpenedLibraries();
+								Main.libraryMode.storeOpenedLibraries();
 						} else { // duplicate
 							resetTheName();
 							ActionTool.showNotification("Dublicate Name", "Name->" + newName + " is already used from another Library...", Duration.millis(2000),
@@ -892,7 +892,7 @@ public class Library extends StackPane {
 				
 				//Update the UserInformation properties file
 				if (isOpened())
-					Main.dbManager.storeOpenedLibraries();
+					Main.libraryMode.storeOpenedLibraries();
 				
 				//Recalculate those bindings
 				Main.libraryMode.calculateOpenedLibraries();
@@ -935,7 +935,7 @@ public class Library extends StackPane {
 			}
 			
 			//Update the UserInformation properties file
-			Main.dbManager.storeOpenedLibraries();
+			Main.libraryMode.storeOpenedLibraries();
 			
 			//Calculate opened libraries
 			Main.libraryMode.calculateOpenedLibraries();

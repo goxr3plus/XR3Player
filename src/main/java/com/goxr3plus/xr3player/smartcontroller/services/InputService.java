@@ -66,11 +66,16 @@ public class InputService extends Service<Void> {
 	 */
 	public void start(List<File> filesList , boolean... byPassSecurityCheck) {
 		//Check if security needs to be bypassed
-		if (byPassSecurityCheck.length == 0)
+		if (byPassSecurityCheck.length == 0) {
 			//Security check
 			if (!Platform.isFxApplicationThread() || !smartController.isFree(true) || isRunning())
 				return;
-			
+		} else { //Need to bypass security
+			cancel();
+			done();
+			System.out.println("Bypassed security...");
+		}
+		
 		// Security
 		job = "upload from system";
 		
@@ -102,10 +107,6 @@ public class InputService extends Service<Void> {
 		// ....
 		reset();
 		start();
-		
-	}
-	
-	public void start2(List<File> filesList) {
 		
 	}
 	
