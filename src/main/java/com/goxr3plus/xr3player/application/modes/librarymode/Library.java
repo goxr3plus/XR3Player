@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXCheckBox;
-
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -29,8 +27,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -38,6 +36,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -78,21 +77,6 @@ public class Library extends StackPane {
 	
 	@FXML
 	private Label totalItemsLabel;
-	
-	@FXML
-	private StackPane progressBarStackPane;
-	
-	@FXML
-	private ProgressBar progressBar;
-	
-	@FXML
-	private Label progressBarLabel;
-	
-	@FXML
-	private StackPane selectionModeStackPane;
-	
-	@FXML
-	private JFXCheckBox selectionModeCheckBox;
 	
 	@FXML
 	private Label dragAndDropLabel;
@@ -450,10 +434,18 @@ public class Library extends StackPane {
 		//rect.setEffect(new Reflection())
 		//setClip(rect);
 		
-		// StackPane -> this
+		// StackPane -> this		
 		//Reflection reflection = new Reflection()
 		//reflection.setInput(new DropShadow(4, Color.FIREBRICK));
 		//this.setEffect(reflection);
+		
+		//Selected Property
+		selected.addListener((observable , oldValue , newValue) -> {
+			if (newValue)
+				( (DropShadow) super.getEffect() ).setColor(Color.web("#1bb2d7"));
+			else
+				( (DropShadow) super.getEffect() ).setColor(Color.BLACK);
+		});
 		
 		// -----ImageView
 		imageView.setImage(getImage());
@@ -497,8 +489,8 @@ public class Library extends StackPane {
 		new Thread(controller::calculateTotalEntries).start();
 		
 		// ----ProgressBarStackPane
-		progressBarStackPane.setVisible(false);
-		progressBar.setProgress(-1);
+		//progressBarStackPane.setVisible(false);
+		//progressBar.setProgress(-1);
 		// progressBar.progressProperty().bind(copyService.progressProperty());
 		// progressBarLabel.textProperty()
 		// .bind(Bindings.max(0,
@@ -506,7 +498,7 @@ public class Library extends StackPane {
 		// %%"));
 		
 		// ---SelectionModeStackPane
-		selectedProperty().bind(selectionModeCheckBox.selectedProperty());
+		//selectedProperty().bind(selectionModeCheckBox.selectedProperty());
 		
 		// Label error = new Label();
 		// error.setOnDragDetected(drag -> {
@@ -547,15 +539,15 @@ public class Library extends StackPane {
 		
 	}
 	
-	/**
-	 * Change the state of the Library from Normal to Selection Mode.
-	 *
-	 * @param way
-	 *            the way
-	 */
-	public void goOnSelectionMode(boolean way) {
-		selectionModeStackPane.setVisible(way);
-	}
+	//	/**
+	//	 * Change the state of the Library from Normal to Selection Mode.
+	//	 *
+	//	 * @param way
+	//	 *            the way
+	//	 */
+	//	public void goOnSelectionMode(boolean way) {
+	//		selectionModeStackPane.setVisible(way);
+	//	}
 	
 	/**
 	 * Update the Stars of the Library.
@@ -734,15 +726,14 @@ public class Library extends StackPane {
 		//File ?
 		if (file == null)
 			return;
-		progressBarStackPane.setVisible(true);
-		progressBarLabel.setText("Exporting image...");
 		
 		//Start a Thread to copy the File
 		new Thread(() -> {
-			if (!ActionTool.copy(getAbsoluteImagePath(), file.getAbsolutePath()))
+			if (!ActionTool.copy(getAbsoluteImagePath(), file.getAbsolutePath())) {
 				Platform.runLater(() -> ActionTool.showNotification("Exporting Library Image", "Failed to export library image for \nLibrary=[" + getLibraryName() + "]",
 						Duration.millis(2500), NotificationType.SIMPLE));
-			Platform.runLater(() -> progressBarStackPane.setVisible(false));
+			} else
+				Platform.runLater(() -> ActionTool.showNotification("Exported Image", "Successfully exported library image", Duration.millis(2500), NotificationType.SUCCESS));
 		}).start();
 	}
 	

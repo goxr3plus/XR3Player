@@ -244,9 +244,9 @@ public class LibraryMode extends BorderPane {
 						calculateEmptyLibraries();
 						
 						//Check if the user wants to immediately open library after it's creation
-						if (openLibraryAfterCreation || createLibraryFromFiles != null) {
+						if (openLibraryAfterCreation) {
 							currentLib.setLibraryStatus(LibraryStatus.OPENED, false);
-							//openedLibrariesViewer.selectTab(currentLib.getLibraryName());
+							
 						}
 						
 						//Bidirectional binding with Instant Search
@@ -260,8 +260,12 @@ public class LibraryMode extends BorderPane {
 						//Check if directly create library from Files
 						if (createLibraryFromFiles != null) {
 							currentLib.getSmartController().getInputService().start(createLibraryFromFiles);
-							//createLibraryFromFiles = null;
+							createLibraryFromFiles = null;
 						}
+						
+						//Check if the user wants to immediately open library after it's creation
+						if (openLibraryAfterCreation)
+							openedLibrariesViewer.selectTab(currentLib.getLibraryName());
 						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
