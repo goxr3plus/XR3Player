@@ -25,6 +25,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController.WorkOnProgress;
 
 /**
  * Manages the input operations of the SmartController.
@@ -87,7 +88,8 @@ public class InputService extends Service<Void> {
 				.filter(file -> file.isDirectory() || ( file.isFile() && InfoTool.isAudioSupported(file.getAbsolutePath()) ))
 				//Collect everything to a list
 				.collect(Collectors.toList());
-		smartController.depositWorking = true;
+		// Security Value
+		smartController.workOnProgress = WorkOnProgress.INSERTING_FILES;
 		
 		// System.out.println(this.list)
 		
@@ -117,7 +119,8 @@ public class InputService extends Service<Void> {
 		list = null;
 		smartController.unbind();
 		smartController.getCancelButton().setDisable(true);
-		smartController.depositWorking = false;
+		// Security Value
+		smartController.workOnProgress = WorkOnProgress.NONE;
 		smartController.getLoadService().startService(true, true, true);
 		
 		//Check if FoldersMode Tab is Selected

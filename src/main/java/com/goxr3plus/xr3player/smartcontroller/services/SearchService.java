@@ -18,6 +18,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController.WorkOnProgress;
 
 /**
  * The Class SearchService.
@@ -53,6 +54,8 @@ public class SearchService extends Service<Void> {
 	 * You can start the search Service by calling this method.
 	 */
 	public void search(String text) {
+		if (!smartController.isFree(true))
+			return;
 		
 		word = text;
 		smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
@@ -60,6 +63,8 @@ public class SearchService extends Service<Void> {
 		smartController.getDescriptionLabel().setText("Searching...");
 		smartController.getDescriptionArea().setText("\n Searching ....");
 		smartController.getNavigationHBox().setDisable(true);
+		// Security Value
+		smartController.workOnProgress = WorkOnProgress.SEARCHING_FILES;
 		
 		//Clear the list
 		smartController.getItemsObservableList().clear();
@@ -72,6 +77,8 @@ public class SearchService extends Service<Void> {
 	 * When the Service is done.
 	 */
 	private void done() {
+		// Security Value
+		smartController.workOnProgress = WorkOnProgress.NONE;
 		smartController.updateList();
 		smartController.unbind();
 	}
@@ -193,21 +200,20 @@ public class SearchService extends Service<Void> {
 			
 		};
 	}
-
+	
 	/**
 	 * @return the pageBeforeSearch
 	 */
 	public int getPageBeforeSearch() {
 		return pageBeforeSearch;
 	}
-
+	
 	/**
-	 * @param pageBeforeSearch the pageBeforeSearch to set
+	 * @param pageBeforeSearch
+	 *            the pageBeforeSearch to set
 	 */
 	public void setPageBeforeSearch(int pageBeforeSearch) {
 		this.pageBeforeSearch = pageBeforeSearch;
 	}
-	
-	
 	
 }

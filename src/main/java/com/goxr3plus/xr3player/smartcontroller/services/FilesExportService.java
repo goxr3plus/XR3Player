@@ -22,6 +22,9 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.FilesMode;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController.WorkOnProgress;
+import javafx.event.EventHandler;
+import javafx.concurrent.WorkerStateEvent;
 
 /**
  * Copy or Move items
@@ -46,11 +49,11 @@ public class FilesExportService extends Service<Boolean> {
 	public FilesExportService(SmartController smartController) {
 		this.smartController = smartController;
 		
-		setOnSucceeded(s -> {
+		EventHandler<WorkerStateEvent> e1 = s -> {
 			done();
 			ActionTool.showNotification("Success Message", operation + " successfully done for:\n\t" + smartController, Duration.millis(1500), NotificationType.SUCCESS);
-		});
-		
+		};
+		setOnSucceeded(e1);
 		setOnFailed(f -> {
 			done();
 			ActionTool.showNotification("Error Message", operation + " failed for:\n\t" + smartController, Duration.millis(1500), NotificationType.ERROR);
@@ -70,33 +73,38 @@ public class FilesExportService extends Service<Boolean> {
 	 */
 	public void startOperation(List<File> targetDirectories , Operation operation , FilesMode filesToExport , FileType fileType) {
 		if (isRunning() || !smartController.isFree(true))
-			ActionTool.showNotification("Warning Message", "Export can't start", Duration.millis(2000), NotificationType.WARNING);
-		else {
-			this.targetDirectories = targetDirectories;
-			this.operation = operation;
-			this.filesToExport = filesToExport;
-			this.fileType = fileType;
-			
-			// Bindings
-			smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
-			smartController.getIndicator().progressProperty().bind(progressProperty());
-			smartController.getDescriptionLabel().setText("Exporting...");
-			smartController.getCancelButton().setDisable(false);
-			smartController.getCancelButton().setOnAction(e -> {
-				super.cancel();
-				smartController.getCancelButton().setDisable(true);
-			});
-			
-			// start
-			this.reset();
-			this.start();
-		}
+			return;
+		
+		//Security 
+		smartController.workOnProgress = WorkOnProgress.EXPORTING_FILES;
+		
+		//Variables
+		this.targetDirectories = targetDirectories;
+		this.operation = operation;
+		this.filesToExport = filesToExport;
+		this.fileType = fileType;
+		
+		// Bindings
+		smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
+		smartController.getIndicator().progressProperty().bind(progressProperty());
+		smartController.getDescriptionLabel().setText("Exporting...");
+		smartController.getCancelButton().setDisable(false);
+		smartController.getCancelButton().setOnAction(e -> {
+			super.cancel();
+			smartController.getCancelButton().setDisable(true);
+		});
+		
+		// start
+		this.reset();
+		this.start();
+		
 	}
 	
 	/**
 	 * Process has been done
 	 */
 	private void done() {
+		smartController.workOnProgress = WorkOnProgress.NONE;
 		smartController.getCancelButton().setDisable(true);
 		smartController.unbind();
 	}

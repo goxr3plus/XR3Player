@@ -14,6 +14,7 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Audio;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController.WorkOnProgress;
 
 public class LoadService extends Service<Void> {
 	
@@ -80,7 +81,8 @@ public class LoadService extends Service<Void> {
 				smartController.getSearchService().reSearch();
 			// Reload
 			else {
-				smartController.updateWorking = true;
+				// Security Value
+				smartController.workOnProgress = WorkOnProgress.UPDATE;
 				smartController.getIndicatorVBox().visibleProperty().bind(runningProperty());
 				smartController.getIndicator().progressProperty().bind(progressProperty());
 				smartController.getDescriptionLabel().setText("Loading media...");
@@ -103,7 +105,8 @@ public class LoadService extends Service<Void> {
 		commit = false;
 		smartController.updateList();
 		smartController.unbind();
-		smartController.updateWorking = false;
+		// Security Value
+		smartController.workOnProgress = WorkOnProgress.NONE;
 		if (requestFocus)
 			smartController.getCenterStackPane().requestFocus();
 		

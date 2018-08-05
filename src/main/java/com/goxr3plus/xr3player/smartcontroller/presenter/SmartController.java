@@ -238,17 +238,11 @@ public class SmartController extends StackPane {
 	
 	// ---------Security---------------------------
 	
-	/** The deposit working. */
-	public volatile boolean depositWorking;
+	public enum WorkOnProgress {
+		NONE, INSERTING_FILES, DELETE_FILES, RENAMING_LIBRARY, UPDATE, SEARCHING_FILES, EXPORTING_FILES;
+	}
 	
-	/** The un deposit working. */
-	public volatile boolean undepositWorking;
-	
-	/** The rename working. */
-	public volatile boolean renameWorking;
-	
-	/** The update working. */
-	public volatile boolean updateWorking;
+	public volatile WorkOnProgress workOnProgress = WorkOnProgress.NONE;
 	
 	// --------------------------------------------------
 	
@@ -675,7 +669,7 @@ public class SmartController extends StackPane {
 			return;
 		
 		// Security Value
-		undepositWorking = true;
+		workOnProgress = WorkOnProgress.DELETE_FILES;
 		
 		// Controller
 		getIndicator().setProgress(-1);
@@ -715,7 +709,8 @@ public class SmartController extends StackPane {
 			} catch (Exception ex) {
 				Main.logger.log(Level.WARNING, "", ex);
 			} finally {
-				undepositWorking = false;
+				// Security Value
+				workOnProgress = WorkOnProgress.NONE;
 			}
 		}).start();
 		
@@ -832,31 +827,11 @@ public class SmartController extends StackPane {
 	 *         false->if not
 	 */
 	public boolean isFree(boolean showMessage) {
-		boolean isFree = true;
-		String message = null;
+		boolean isFree = ( workOnProgress == WorkOnProgress.NONE );
 		
-		if (depositWorking) {
-			isFree = false;
-			message = "Depositing";
-		} else if (undepositWorking) {
-			isFree = false;
-			message = "Undepositing";
-		} else if (searchService.getService().isRunning()) {
-			isFree = false;
-			message = "Searching";
-		} else if (renameWorking) {
-			isFree = false;
-			message = "Renaming";
-		} else if (updateWorking) {
-			isFree = false;
-			message = "Updating";
-		} else if (filesExportService.isRunning()) {
-			isFree = false;
-			message = "Copy-Move Service";
-		}
-		
-		if (!isFree && showMessage)
-			showMessage(message);
+		//Check if any work is already in progress
+		if (!isFree)
+			showMessage(workOnProgress.toString());
 		
 		return isFree;
 	}
@@ -1439,14 +1414,14 @@ public class SmartController extends StackPane {
 	public Label getNoAlbumViewsLabel() {
 		return noAlbumViewsLabel;
 	}
-
+	
 	/**
 	 * @return the foldersModeTab
 	 */
 	public Tab getFoldersModeTab() {
 		return foldersModeTab;
 	}
-
+	
 	public Tab getSelectedModeTab() {
 		return modesTabPane.getSelectionModel().getSelectedItem();
 	}

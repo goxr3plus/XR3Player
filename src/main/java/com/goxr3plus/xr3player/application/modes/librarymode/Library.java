@@ -47,6 +47,7 @@ import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
+import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController.WorkOnProgress;
 
 /**
  * A class which hold all the functionality of a digital library.
@@ -257,7 +258,7 @@ public class Library extends StackPane {
 					}
 					
 					// Security Variable
-					controller.renameWorking = false;
+					controller.workOnProgress = WorkOnProgress.NONE;
 					
 					// commit
 					if (Main.renameWindow.wasAccepted() && !newName.equals(oldName) && !duplicate)
@@ -784,7 +785,7 @@ public class Library extends StackPane {
 			return;
 		
 		// Security Variable
-		controller.renameWorking = true;
+		controller.workOnProgress = WorkOnProgress.RENAMING_LIBRARY;
 		
 		// Open the Window
 		Main.renameWindow.show(getLibraryName(), n, "Library Renaming", FileCategory.DIRECTORY);

@@ -260,7 +260,7 @@ public class LibraryMode extends BorderPane {
 						//Check if directly create library from Files
 						if (createLibraryFromFiles != null) {
 							currentLib.getSmartController().getInputService().start(createLibraryFromFiles);
-							createLibraryFromFiles = null;
+							//createLibraryFromFiles = null;
 						}
 						
 					} catch (Exception ex) {
@@ -522,12 +522,13 @@ public class LibraryMode extends BorderPane {
 						//Check 
 						if ( ( smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
 							
-							//Refresh the SmartController
-							smartController.getLoadService().startService(false, true, true);
+							//Just a trick when i create a library directly from Folder or Files
+							if (createLibraryFromFiles != null)
+								//Refresh the SmartController
+								smartController.getLoadService().startService(false, true, true);
 							
 							//Store the Opened Libraries
-							//storeOpenedLibraries()
-							
+							//storeOpenedLibraries()		
 						}
 						
 						//System.out.println("Changed...")
@@ -540,8 +541,8 @@ public class LibraryMode extends BorderPane {
 					
 					// Give refresh based on the below formula
 					SmartController smartController = ( (SmartController) newTab.getContent() );
-					if ( ( !openedLibrariesViewer.getTabPane().getTabs().isEmpty() && smartController.isFree(false)
-							&& smartController.getItemsObservableList().isEmpty() ) || smartController.getReloadVBox().isVisible()) {
+					if ( ( !openedLibrariesViewer.getTabPane().getTabs().isEmpty() && smartController.isFree(false) && smartController.getItemsObservableList().isEmpty() )
+							|| smartController.getReloadVBox().isVisible()) {
 						
 						( (SmartController) newTab.getContent() ).getLoadService().startService(false, true, true);
 						
@@ -582,8 +583,7 @@ public class LibraryMode extends BorderPane {
 			if (openedLibrariesViewer.getTabs().isEmpty())
 				user.getUserInformationDb().deleteProperty("Last-Opened-Library");
 			else
-				user.getUserInformationDb().updateProperty("Last-Opened-Library",
-						openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem().getTooltip().getText());
+				user.getUserInformationDb().updateProperty("Last-Opened-Library", openedLibrariesViewer.getTabPane().getSelectionModel().getSelectedItem().getTooltip().getText());
 			
 		});
 	}
