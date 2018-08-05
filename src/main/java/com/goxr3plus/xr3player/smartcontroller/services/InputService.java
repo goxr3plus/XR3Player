@@ -62,13 +62,15 @@ public class InputService extends Service<Void> {
 	 * Start the Service.
 	 *
 	 * @param filesList
-	 *            List that contains the files to be added 
+	 *            List that contains the files to be added
 	 */
-	public void start(List<File> filesList) {
-		//Check if can enter...
-		if (!Platform.isFxApplicationThread() || !smartController.isFree(true) || isRunning())
-			return;
-		
+	public void start(List<File> filesList , boolean... byPassSecurityCheck) {
+		//Check if security needs to be bypassed
+		if (byPassSecurityCheck.length == 0)
+			//Security check
+			if (!Platform.isFxApplicationThread() || !smartController.isFree(true) || isRunning())
+				return;
+			
 		// Security
 		job = "upload from system";
 		
@@ -103,6 +105,10 @@ public class InputService extends Service<Void> {
 		
 	}
 	
+	public void start2(List<File> filesList) {
+		
+	}
+	
 	/**
 	 * When the work is done.
 	 */
@@ -112,7 +118,10 @@ public class InputService extends Service<Void> {
 		smartController.getCancelButton().setDisable(true);
 		smartController.depositWorking = false;
 		smartController.getLoadService().startService(true, true, true);
-		smartController.getFoldersMode().recreateTree();
+		
+		//Check if FoldersMode Tab is Selected
+		if (smartController.getSelectedModeTab() == smartController.getFoldersModeTab())
+			smartController.getFoldersMode().recreateTree();
 	}
 	
 	/*

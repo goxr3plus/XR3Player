@@ -1439,6 +1439,17 @@ public class SmartController extends StackPane {
 	public Label getNoAlbumViewsLabel() {
 		return noAlbumViewsLabel;
 	}
+
+	/**
+	 * @return the foldersModeTab
+	 */
+	public Tab getFoldersModeTab() {
+		return foldersModeTab;
+	}
+
+	public Tab getSelectedModeTab() {
+		return modesTabPane.getSelectionModel().getSelectedItem();
+	}
 	
 	/*-----------------------------------------------------------------------
 	 * 

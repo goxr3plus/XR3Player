@@ -256,7 +256,7 @@ public class LibraryMode extends BorderPane {
 						
 						//Check if directly create library from Files
 						if (createLibraryFromFiles != null) {
-							currentLib.getSmartController().getInputService().start(createLibraryFromFiles);
+							currentLib.getSmartController().getInputService().start(createLibraryFromFiles, true);
 							createLibraryFromFiles = null;
 						}
 						
