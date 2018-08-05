@@ -1,8 +1,11 @@
 package main.java.com.goxr3plus.xr3player.application.modes.librarymode;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 
@@ -99,6 +102,12 @@ public class LibraryMode extends BorderPane {
 	private MenuItem createAndOpenLibrary;
 	
 	@FXML
+	private MenuItem crAndOpenFromFolder;
+	
+	@FXML
+	private MenuItem crAndOpenFromFiles;
+	
+	@FXML
 	private JFXButton next;
 	
 	@FXML
@@ -144,6 +153,7 @@ public class LibraryMode extends BorderPane {
 	public static Image defaultImage = InfoTool.getImageFromResourcesFolder("playlistImage.png");
 	
 	private boolean openLibraryAfterCreation;
+	private List<File> createLibraryFromFiles;
 	
 	//----- Library Specific ------------------
 	
@@ -231,7 +241,7 @@ public class LibraryMode extends BorderPane {
 						calculateEmptyLibraries();
 						
 						//Check if the user wants to immediately open library after it's creation
-						if (openLibraryAfterCreation) {
+						if (openLibraryAfterCreation || createLibraryFromFiles != null) {
 							currentLib.setLibraryStatus(LibraryStatus.OPENED, false);
 							Main.libraryMode.openedLibrariesViewer.selectTab(currentLib.getLibraryName());
 						}
@@ -243,6 +253,12 @@ public class LibraryMode extends BorderPane {
 						//Fix maximum per playlist
 						currentLib.getSmartController().setNewMaximumPerPage(Main.settingsWindow.getPlayListsSettingsController().getMaximumPerPlaylist(), false);
 						currentLib.getSmartController().getReloadVBox().setVisible(false);
+						
+						//Check if directly create library from Files
+						if (createLibraryFromFiles != null) {
+							currentLib.getSmartController().getInputService().start(createLibraryFromFiles);
+							createLibraryFromFiles = null;
+						}
 						
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
@@ -312,6 +328,12 @@ public class LibraryMode extends BorderPane {
 		
 		//createAndOpenLibrary
 		createAndOpenLibrary.setOnAction(a -> createNewLibrary(createLibraryMenuButton, true));
+		
+		//crAndOpenFromFolder
+		crAndOpenFromFolder.setOnAction(a -> createNewLibraryFromFolder(createLibraryMenuButton, true, true));
+		
+		//crAndOpenFromFiles
+		crAndOpenFromFiles.setOnAction(a -> createNewLibraryFromFolder(createLibraryMenuButton, false, false));
 		
 		// newLibrary
 		createFirstLibrary.setOnAction(a -> createNewLibrary(createFirstLibrary.getGraphic(), true, true));
@@ -424,6 +446,35 @@ public class LibraryMode extends BorderPane {
 		
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(creationInvalidator);
+	}
+	
+	/**
+	 * Create a new library from folder
+	 * 
+	 * @param owner
+	 * @param openLibraryAfterCreation
+	 * @param files
+	 */
+	public void createNewLibraryFromFolder(Node owner , boolean openLibraryAfterCreation , boolean importJustOneFolder) {
+		
+		//Import just a folder
+		if (importJustOneFolder) {
+			File file = Main.specialChooser.selectFolder(Main.window);
+			if (file != null)
+				this.createLibraryFromFiles = Arrays.asList(file);
+			else
+				return;
+		} else { //Import many files
+			List<File> list = Main.specialChooser.prepareToImportSongFiles(Main.window);
+			if (list != null && !list.isEmpty())
+				this.createLibraryFromFiles = list;
+			else
+				return;
+			
+		}
+		
+		//Call the original method
+		createNewLibrary(owner, openLibraryAfterCreation);
 	}
 	
 	/**

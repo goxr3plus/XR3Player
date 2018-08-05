@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
@@ -90,11 +91,28 @@
                                                                   <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                                                </graphic>
                                                             </MenuItem>
-                                                            <MenuItem fx:id="createAndOpenLibrary" mnemonicParsing="false" text="Create + Open New Library">
+                                                            <Menu mnemonicParsing="false" text="Create + Open New Library">
+                                                              <items>
+                                                                  <MenuItem fx:id="createAndOpenLibrary" mnemonicParsing="false" text="Empty">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                                  <MenuItem fx:id="crAndOpenFromFolder" mnemonicParsing="false" text="Choose Folder">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                                  <MenuItem fx:id="crAndOpenFromFiles" mnemonicParsing="false" text="Choose Files">
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
+                                                                     </graphic>
+                                                                  </MenuItem>
+                                                              </items>
                                                                <graphic>
-                                                                  <FontIcon iconColor="#e0b143" iconLiteral="far-folder-open" iconSize="24" />
+                                                                  <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                                                </graphic>
-                                                            </MenuItem>
+                                                            </Menu>
                                                          </items>
                                                       </MenuButton>
                                                       <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="jfx-button4" text=" ">

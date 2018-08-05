@@ -61,10 +61,10 @@ public class InputService extends Service<Void> {
 	/**
 	 * Start the Service.
 	 *
-	 * @param list1
-	 *            the list
+	 * @param filesList
+	 *            List that contains the files to be added 
 	 */
-	public void start(List<File> list1) {
+	public void start(List<File> filesList) {
 		//Check if can enter...
 		if (!Platform.isFxApplicationThread() || !smartController.isFree(true) || isRunning())
 			return;
@@ -73,7 +73,7 @@ public class InputService extends Service<Void> {
 		job = "upload from system";
 		
 		// We need only directories or media files
-		this.list = list1.stream()
+		this.list = filesList.stream()
 				//Find real path for symbolic links etc
 				.map(file -> new File(IOTool.getRealPathFromFile(file.getAbsolutePath()).getFileAbsolutePath()))
 				//Filter only the files we want

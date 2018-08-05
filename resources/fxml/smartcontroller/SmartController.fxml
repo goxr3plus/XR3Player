@@ -195,7 +195,7 @@
                                                             </ContextMenu>
                                                          </contextMenu>
                                                          <graphic>
-                                                            <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="22" selectionEnd="0" selectionStart="0" />
+                                                            <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
                                                          </graphic>
                                                       </MenuButton>
                                                    </children>
