@@ -70,7 +70,7 @@ public class LibraryTabContextMenu extends ContextMenu {
 	private void initialize() {
 		
 		//showTheLibrary
-		showTheLibrary.setOnAction(a -> Main.libraryMode.viewer.setCenterIndex(Main.libraryMode.getLibraryWithName(tab.getTooltip().getText()).get().getPosition()));
+		showTheLibrary.setOnAction(a -> Main.libraryMode.viewer.setCenterItem(Main.libraryMode.getLibraryWithName(tab.getTooltip().getText()).get()));
 		
 		//deleteLibrary
 		deleteLibrary.setOnAction(a -> Main.libraryMode.getLibraryWithName(tab.getTooltip().getText()).get().deleteLibrary(tab.getGraphic(), false));

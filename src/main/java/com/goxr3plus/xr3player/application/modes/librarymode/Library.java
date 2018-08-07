@@ -142,7 +142,7 @@ public class Library extends StackPane {
 	private SaveMode saveMode;
 	
 	/** The position. */
-	private int position = -1;
+	//private int position = -1;
 	
 	/** The name of the database image [Example : image.jpg ] */
 	private String imageName;
@@ -314,7 +314,7 @@ public class Library extends StackPane {
 		this.saveMode = saveMode == 1 ? SaveMode.ORIGINAL_PATH : SaveMode.DATABASE_PATH;
 		
 		// Library Position in List
-		this.position = position;
+		//this.position = position;
 		
 		// LibraryImage
 		this.imageName = imageName;
@@ -366,7 +366,7 @@ public class Library extends StackPane {
 		setOnDragOver(event -> {
 			// Source has files?
 			if (event.getDragboard().hasFiles())
-				Main.libraryMode.viewer.setCenterIndex(this.getPosition());
+				Main.libraryMode.viewer.setCenterItem(this);
 			
 			// The drag must come from source other than the owner
 			if (event.getGestureSource() != controller.getNormalModeMediaTableViewer().getTableView() && event.getGestureSource() != controller.getFoldersMode()
@@ -381,7 +381,7 @@ public class Library extends StackPane {
 			
 			// Source has files?
 			if (event.getDragboard().hasFiles())
-				Main.libraryMode.viewer.setCenterIndex(this.getPosition());
+				Main.libraryMode.viewer.setCenterItem(this);
 			
 			// The drag must come from source other than the owner
 			if (event.getGestureSource() != controller.getNormalModeMediaTableViewer().getTableView())// && dragOver.getGestureSource()!= controller.foldersMode)
@@ -608,18 +608,18 @@ public class Library extends StackPane {
 	 * @param newPosition
 	 *            The new position of the Library
 	 */
-	public void updatePosition(int newPosition) {
-		try (PreparedStatement libUPosition = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;")) {
-			position = newPosition;
-			
-			// SQLITE
-			libUPosition.setInt(1, newPosition);
-			libUPosition.setString(2, getLibraryName());
-			libUPosition.executeUpdate();
-		} catch (SQLException ex) {
-			logger.log(Level.WARNING, "", ex);
-		}
-	}
+//	public void updatePosition(int newPosition) {
+//		try (PreparedStatement libUPosition = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;")) {
+//			position = newPosition;
+//			
+//			// SQLITE
+//			libUPosition.setInt(1, newPosition);
+//			libUPosition.setString(2, getLibraryName());
+//			libUPosition.executeUpdate();
+//		} catch (SQLException ex) {
+//			logger.log(Level.WARNING, "", ex);
+//		}
+//	}
 	
 	/**
 	 * Updates the Image File.
@@ -1131,14 +1131,14 @@ public class Library extends StackPane {
 		return dataBaseTableName;
 	}
 	
-	/**
-	 * The position of library into the viewer.
-	 *
-	 * @return the position of library
-	 */
-	public int getPosition() {
-		return position;
-	}
+	//	/**
+	//	 * The position of library into the viewer.
+	//	 *
+	//	 * @return the position of library
+	//	 */
+	//	public int getPosition() {
+	//		return position;
+	//	}
 	
 	/**
 	 * Look SaveMode enum description.
@@ -1277,7 +1277,7 @@ public class Library extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
-		if (Main.libraryMode.libraryInformation.isShowing() || getPosition() != Main.libraryMode.viewer.getCenterIndex())
+		if (Main.libraryMode.libraryInformation.isShowing() || Main.libraryMode.viewer.isCenterItem(this))
 			return;
 		
 		//Check if Control is down

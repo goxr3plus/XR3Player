@@ -236,7 +236,7 @@ public class LibraryMode extends BorderPane {
 						insertNewLibrary.setString(5, currentLib.getTimeCreated());
 						insertNewLibrary.setString(6, currentLib.getDescription());
 						insertNewLibrary.setInt(7, 1);
-						insertNewLibrary.setInt(8, currentLib.getPosition());
+						insertNewLibrary.setInt(8, 0);
 						insertNewLibrary.setString(9, null);
 						insertNewLibrary.setBoolean(10, false);
 						
@@ -602,7 +602,7 @@ public class LibraryMode extends BorderPane {
 					openedLibrariesViewer.getTabPane().getSelectionModel().select(openedLibrariesViewer.getTab(lastOpenedLibrary));
 					
 					//This will change in future update when user can change the default position of Libraries
-					viewer.setCenterIndex(openedLibrariesViewer.getSelectedLibrary().get().getPosition());
+					viewer.setCenterItem(openedLibrariesViewer.getSelectedLibrary().get());
 					
 				});
 				

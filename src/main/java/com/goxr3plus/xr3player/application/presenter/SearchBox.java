@@ -191,15 +191,13 @@ public class SearchBox extends HBox {
 					// matcher
 					if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
 						Main.loginMode.teamViewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getUserName().toLowerCase().contains(word)).forEach(user -> {
-							Platform.runLater(() -> getSearchBoxWindow().addItem( ( (User) user ).getUserName(),
-									ac -> Main.loginMode.teamViewer.setCenterIndex( ( (User) user ).getPosition())));
+							Platform.runLater(() -> getSearchBoxWindow().addItem( ( (User) user ).getUserName(), ac -> Main.loginMode.teamViewer.setCenterItem(user)));
 							++found;
 						});
 					else if (searchBoxType == SearchBoxType.LIBRARYSEARCHBOX)
 						Main.libraryMode.viewer.getItemsObservableList().stream().filter(library -> ( (Library) library ).getLibraryName().toLowerCase().contains(word))
 								.forEach(library -> {
-									Platform.runLater(() -> searchBoxWindow.addItem( ( (Library) library ).getLibraryName(),
-											ac -> Main.libraryMode.viewer.setCenterIndex( ( (Library) library ).getPosition())));
+									Platform.runLater(() -> searchBoxWindow.addItem( ( (Library) library ).getLibraryName(), ac -> Main.libraryMode.viewer.setCenterItem(library)));
 									++found;
 								});
 					return null;

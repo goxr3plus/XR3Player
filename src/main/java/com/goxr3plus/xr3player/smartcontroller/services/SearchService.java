@@ -129,7 +129,7 @@ public class SearchService extends Service<Void> {
 					
 					//For Each
 					Main.libraryMode.viewer.getItemsObservableList().forEach(lib -> {
-						if ( ( (Library) lib ).getPosition() != observableList.size() - 1)
+						if (observableList.indexOf(lib) != observableList.size() - 1)
 							queryArray.add(" SELECT * FROM '" + ( (Library) lib ).getDataBaseTableName() + "' UNION ALL ");
 						else
 							queryArray.add(" SELECT * FROM '" + ( (Library) lib ).getDataBaseTableName() + "' ");

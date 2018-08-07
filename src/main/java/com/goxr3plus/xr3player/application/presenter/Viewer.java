@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -65,6 +66,9 @@ public class Viewer extends Region {
 	
 	/** The items. */
 	private final ObservableList<Node> itemsObservableList = FXCollections.observableArrayList();
+	
+	private SortedList<Node> sortedList;
+	
 	/**
 	 * This class wraps an ObservableList
 	 */
@@ -111,6 +115,7 @@ public class Viewer extends Region {
 		this.scrollBar = scrollBar;
 		duration = Duration.millis(450);
 		interpolator = Interpolator.EASE_BOTH;
+		sortedList = new SortedList<>(itemsObservableList, (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) a ).getLibraryName(), ( (Library) b ).getLibraryName()));
 		init();
 	}
 	
@@ -119,6 +124,7 @@ public class Viewer extends Region {
 		this.scrollBar = scrollBar;
 		duration = Duration.millis(450);
 		interpolator = Interpolator.EASE_BOTH;
+		sortedList = new SortedList<>(itemsObservableList);
 		init();
 	}
 	
@@ -126,6 +132,7 @@ public class Viewer extends Region {
 		this.smartController = smartController;
 		duration = Duration.millis(150);
 		interpolator = Interpolator.EASE_BOTH;
+		sortedList = new SortedList<>(itemsObservableList);
 		init();
 	}
 	
@@ -184,7 +191,7 @@ public class Viewer extends Region {
 						//Find the first matching item
 						getItemsObservableList().forEach(library -> {
 							if ( ( (Library) library ).getLibraryName().contains(searchWord.get()) && !found[0]) {
-								this.setCenterIndex( ( (Library) library ).getPosition());
+								setCenterItem(library);
 								found[0] = true;
 							}
 						});
@@ -192,7 +199,7 @@ public class Viewer extends Region {
 						//Find the first matching item
 						getItemsObservableList().forEach(user -> {
 							if ( ( (User) user ).getUserName().contains(searchWord.get()) && !found[0]) {
-								this.setCenterIndex( ( (User) user ).getPosition());
+								this.setCenterItem(user);
 								found[0] = true;
 							}
 						});
@@ -438,9 +445,9 @@ public class Viewer extends Region {
 						library.setSelected(!library.isSelected());
 					
 					// If it isn't the same library again
-					if ( ( (Library) centerGroup.getChildren().get(0) ).getPosition() != library.getPosition()) {
+					if ( ( (Library) centerGroup.getChildren().get(0) ) != library) {
 						
-						setCenterIndex(library.getPosition());
+						setCenterItem(library);
 						// scrollBar.setValue(library.getPosition())
 						
 					}
@@ -448,9 +455,9 @@ public class Viewer extends Region {
 				} else if (m.getButton() == MouseButton.SECONDARY) {
 					
 					// if isn't the same library again
-					if ( ( (Library) centerGroup.getChildren().get(0) ).getPosition() != library.getPosition()) {
+					if ( ( (Library) centerGroup.getChildren().get(0) ) != library) {
 						
-						setCenterIndex(library.getPosition());
+						setCenterIndex(itemsObservableList.indexOf(library));
 						// scrollBar.setValue(library.getPosition())
 						
 						timeline.setOnFinished(v -> {
@@ -478,18 +485,18 @@ public class Viewer extends Region {
 				if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.MIDDLE) {
 					
 					// If it isn't the same User again
-					if ( ( (User) centerGroup.getChildren().get(0) ).getPosition() != user.getPosition()) {
+					if ( ( (User) centerGroup.getChildren().get(0) ) != user) {
 						
-						setCenterIndex(user.getPosition());
+						setCenterIndex(itemsObservableList.indexOf(user));
 						// scrollBar.setValue(library.getPosition())
 					}
 					
 				} else if (m.getButton() == MouseButton.SECONDARY) {
 					
 					// if isn't the same User again
-					if ( ( (User) centerGroup.getChildren().get(0) ).getPosition() != user.getPosition()) {
+					if ( ( (User) centerGroup.getChildren().get(0) ) != user) {
 						
-						setCenterIndex(user.getPosition());
+						setCenterItem(user);
 						// scrollBar.setValue(library.getPosition())
 						
 						timeline.setOnFinished(v -> {
@@ -605,13 +612,13 @@ public class Viewer extends Region {
 	public void deleteItem(Node item) {
 		itemsObservableList.remove(item);
 		
-		if (libraryMode != null)
-			for (int i = 0; i < itemsObservableList.size(); i++)
-				( (Library) itemsObservableList.get(i) ).updatePosition(i);
-		else if (loginMode != null)
-			for (int i = 0; i < itemsObservableList.size(); i++)
-				( (User) itemsObservableList.get(i) ).updatePosition(i);
-			
+		//		if (libraryMode != null)
+		//			for (int i = 0; i < itemsObservableList.size(); i++)
+		//				( (Library) itemsObservableList.get(i) ).updatePosition(i);
+		//		else if (loginMode != null)
+		//			for (int i = 0; i < itemsObservableList.size(); i++)
+		//				( (User) itemsObservableList.get(i) ).updatePosition(i);
+		
 		//Recalculate the center index after a delete occurs.
 		calculateCenterIndex();
 	}
@@ -624,13 +631,13 @@ public class Viewer extends Region {
 	public void deleteItems(List<Node> items) {
 		itemsObservableList.removeAll(items);
 		
-		if (libraryMode != null)
-			for (int i = 0; i < itemsObservableList.size(); i++)
-				( (Library) itemsObservableList.get(i) ).updatePosition(i);
-		else if (loginMode != null)
-			for (int i = 0; i < itemsObservableList.size(); i++)
-				( (User) itemsObservableList.get(i) ).updatePosition(i);
-			
+		//		if (libraryMode != null)
+		//			for (int i = 0; i < itemsObservableList.size(); i++)
+		//				( (Library) itemsObservableList.get(i) ).updatePosition(i);
+		//		else if (loginMode != null)
+		//			for (int i = 0; i < itemsObservableList.size(); i++)
+		//				( (User) itemsObservableList.get(i) ).updatePosition(i);
+		//			
 		//Recalculate the center index after a delete occurs.
 		calculateCenterIndex();
 	}
@@ -685,6 +692,15 @@ public class Viewer extends Region {
 			if (scrollBar != null)
 				scrollBar.setValue(centerIndex);
 		}
+	}
+	
+	/**
+	 * Set the center item
+	 * 
+	 * @param item
+	 */
+	public void setCenterItem(Node item) {
+		setCenterIndex(itemsObservableList.indexOf(item));
 	}
 	
 	/**

@@ -75,7 +75,7 @@ public class User extends StackPane {
 	/**
 	 * The position of the User into the List
 	 */
-	private int position;
+	//private int position;
 	private String userName;
 	private LoginMode loginMode;
 	
@@ -156,7 +156,7 @@ public class User extends StackPane {
 	 */
 	public User(String userName, int position, LoginMode loginMode) {
 		this.setUserName(userName);
-		this.updatePosition(position);
+		//this.updatePosition(position);
 		this.loginMode = loginMode;
 		
 		//Create the UserInformation DB
@@ -234,12 +234,12 @@ public class User extends StackPane {
 		warningLabel.setVisible(false);
 	}
 	
-	/**
-	 * @return The Position of the user inside the list
-	 */
-	public int getPosition() {
-		return position;
-	}
+//	/**
+//	 * @return The Position of the user inside the list
+//	 */
+//	public int getPosition() {
+//		return position;
+//	}
 	
 	/**
 	 * @return the userName
@@ -287,13 +287,13 @@ public class User extends StackPane {
 			nameField.setText(userName);
 	}
 	
-	/**
-	 * @param position
-	 *            the position to set
-	 */
-	public void updatePosition(int position) {
-		this.position = position;
-	}
+//	/**
+//	 * @param position
+//	 *            the position to set
+//	 */
+//	public void updatePosition(int position) {
+//		this.position = position;
+//	}
 	
 	/**
 	 * Renames the current User.
@@ -345,7 +345,7 @@ public class User extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
-		if (getPosition() != loginMode.teamViewer.getCenterIndex())
+		if (!loginMode.teamViewer.isCenterItem(this))
 			return;
 		
 		//Check if Control is down
