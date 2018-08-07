@@ -384,7 +384,7 @@ public class LibraryMode extends BorderPane {
 		renameLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() ).renameLibrary(renameLibrary));
 		
 		// -- deleteLibrary
-		deleteLibrary.setOnAction(a -> deleteLibraries(null));
+		deleteLibrary.setOnAction(a -> deleteLibraries(null,deleteLibrary));
 		
 		// -- openOrCloseLibrary 
 		viewer.centerItemProperty().addListener((observable , oldValue , newValue) -> {
@@ -443,19 +443,23 @@ public class LibraryMode extends BorderPane {
 	/**
 	 * Delete libraries method
 	 */
-	public void deleteLibraries(Library library) {
+	public void deleteLibraries(Library library , Node node) {
 		//Check for multiple selection
 		if (multipleSelection.isSelected() && viewer.getItemsObservableList().stream().anyMatch(lib -> ( (Library) lib ).isSelected())) {
 			
 			//Collect all the libraries to a list
-			
 			List<Node> list = viewer.getItemsObservableList().stream().filter(lib -> ( (Library) lib ).isSelected()).collect(Collectors.toList());
 			
-			//Delete each selected library
-			list.forEach(lib -> ( (Library) lib ).deleteLibrary(null, true));
-			
-			//Finalize the delete procedure
-			( (Library) list.get(0) ).finalizeLibraryDelete(list);
+			//Ask madafucka user to confirm if he want to take the BIG D from DADDDY AW!
+			if (ActionTool.doQuestion("Confirm Delete", "Confirm that you want to DELETE " + list.size() + " libraries FOREVER", node, Main.window)) {
+				
+				//Delete each selected library
+				list.forEach(lib -> ( (Library) lib ).deleteLibrary(null, true));
+				
+				//Finalize the delete procedure
+				( (Library) list.get(0) ).finalizeLibraryDelete(list);
+				
+			}
 		} else {
 			if (library == null)
 				( (Library) viewer.centerItemProperty().get() ).deleteLibrary(deleteLibrary, false);

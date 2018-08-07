@@ -95,7 +95,7 @@ public class LibraryContextMenu extends ContextMenu {
 		
 		moreInfo.setOnAction(ac -> Main.libraryMode.libraryInformation.showWindow(library));
 		
-		delete.setOnAction(ac -> Main.libraryMode.deleteLibraries(library));
+		delete.setOnAction(ac -> Main.libraryMode.deleteLibraries(library, null));
 	}
 	
 	/**

@@ -158,6 +158,18 @@ public class Viewer extends Region {
 				previous();
 			else if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");
+			else if (key.getCode() == KeyCode.A && key.isControlDown()) {
+				if (libraryMode != null)
+					if (getItemsObservableList().size() == 0)
+						getItemsObservableList().forEach(library -> ( (Library) library ).setSelected(true));
+					else {
+						boolean select = ! ( (Library) getItemsObservableList().get(0) ).isSelected();
+						getItemsObservableList().forEach(library -> ( (Library) library ).setSelected(select));
+					}
+			} else if (key.getCode() == KeyCode.D && key.isControlDown()) {
+				if (libraryMode != null)
+					libraryMode.deleteLibraries(null, null);
+			}
 			
 			//Local Search 
 			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {

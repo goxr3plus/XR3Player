@@ -87,12 +87,12 @@
                                                             <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                                          </graphic>
                                                          <items>
-                                                            <MenuItem fx:id="createLibrary" mnemonicParsing="false" text="Create New Library">
+                                                            <MenuItem fx:id="createLibrary" mnemonicParsing="false" text="Create Library">
                                                                <graphic>
                                                                   <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                                                </graphic>
                                                             </MenuItem>
-                                                            <Menu mnemonicParsing="false" text="Create + Open New Library">
+                                                            <Menu mnemonicParsing="false" text="Create + Open Library">
                                                               <items>
                                                                   <MenuItem fx:id="createAndOpenLibrary" mnemonicParsing="false" text="Empty">
                                                                      <graphic>

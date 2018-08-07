@@ -884,7 +884,6 @@ public class Library extends StackPane {
 				// opened? Yes=remove the tab
 				if (isOpened())
 					Main.libraryMode.openedLibrariesViewer.removeTab(getLibraryName());
-									
 				
 				//This must happen only one time when multiple libraries are being deleted
 				//Or else the application will look garbage
@@ -1292,7 +1291,7 @@ public class Library extends StackPane {
 			else if (code == KeyCode.R)
 				renameLibrary(nameLabel);
 			else if (code == KeyCode.DELETE || code == KeyCode.D)
-				Main.libraryMode.deleteLibraries(this);
+				Main.libraryMode.deleteLibraries(this, null);
 			else if (code == KeyCode.I)
 				Main.libraryMode.libraryInformation.showWindow(this);
 			else if (code == KeyCode.E)
