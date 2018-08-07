@@ -244,7 +244,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		stack.setVisible(false);
 		
 		//ImageView
-		FontIcon fontIcon = JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 20);
+		FontIcon fontIcon = JavaFXTools.getFontIcon("icm-radio-unchecked", Color.web("#d74418"), 20);
 		fontIcon.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
 		fontIcon.managedProperty().bind(fontIcon.visibleProperty());
 		
@@ -278,7 +278,7 @@ public class OpenedLibrariesViewer extends StackPane {
 			if (m.getButton() == MouseButton.MIDDLE)
 				removeTab(tab);
 		});
-		hBox.getChildren().addAll(fontIcon, tabImage, stack, marquee, closeButton);
+		hBox.getChildren().addAll(tabImage,fontIcon, stack, marquee, closeButton);
 		
 		// --Drag Events
 		PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
