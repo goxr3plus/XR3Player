@@ -27,7 +27,7 @@
       <ImageView fx:id="backgroundImageView" fitHeight="636.0" fitWidth="930.0" pickOnBounds="true" />
       <BorderPane stylesheets="@../../style/application.css">
          <bottom>
-            <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #151515; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" prefHeight="75.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass=".button" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                      <cursor>
@@ -93,7 +93,7 @@
                   </VBox>
                </children>
                <BorderPane.margin>
-                  <Insets top="2.0" />
+                  <Insets />
                </BorderPane.margin>
             </HBox>
          </bottom>
@@ -133,7 +133,7 @@
                                  <bottom>
                                     <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: rgb(255,255,255,0.4);">
+                                          <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="79.0" style="-fx-background-color: black;">
                                              <content>
                                                 <StackPane>
                                                    <children>
@@ -263,9 +263,9 @@
                               </Button>
                            </children>
                         </StackPane>
-                        <VBox alignment="CENTER">
+                        <VBox alignment="CENTER" style="-fx-border-color: black;">
                            <children>
-                              <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="750.0">
+                              <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="750.0" style="-fx-background-color: black;">
                                  <children>
                                     <Button fx:id="importDatabase" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Import Database" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                                        <cursor>

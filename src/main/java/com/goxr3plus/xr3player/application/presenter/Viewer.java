@@ -166,7 +166,7 @@ public class Viewer extends Region {
 						boolean select = ! ( (Library) getItemsObservableList().get(0) ).isSelected();
 						getItemsObservableList().forEach(library -> ( (Library) library ).setSelected(select));
 					}
-			} else if (key.getCode() == KeyCode.D && key.isControlDown()) {
+			} else if ( ( key.getCode() == KeyCode.D && key.isControlDown() ) || key.getCode() == KeyCode.DELETE) {
 				if (libraryMode != null)
 					libraryMode.deleteLibraries(null, null);
 			}
