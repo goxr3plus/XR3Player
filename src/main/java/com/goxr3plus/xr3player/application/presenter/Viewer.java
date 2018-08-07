@@ -605,6 +605,25 @@ public class Viewer extends Region {
 	}
 	
 	/**
+	 * Delete all the items from that list that match items in the Viewer
+	 * 
+	 * @param items
+	 */
+	public void deleteItems(List<Node> items) {
+		itemsObservableList.removeAll(items);
+		
+		if (libraryMode != null)
+			for (int i = 0; i < itemsObservableList.size(); i++)
+				( (Library) itemsObservableList.get(i) ).updatePosition(i);
+		else if (loginMode != null)
+			for (int i = 0; i < itemsObservableList.size(); i++)
+				( (User) itemsObservableList.get(i) ).updatePosition(i);
+			
+		//Recalculate the center index after a delete occurs.
+		calculateCenterIndex();
+	}
+	
+	/**
 	 * Deletes all the items from the Viewer
 	 */
 	public void deleteAllItems(boolean update) {

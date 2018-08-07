@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -883,26 +884,40 @@ public class Library extends StackPane {
 				// opened? Yes=remove the tab
 				if (isOpened())
 					Main.libraryMode.openedLibrariesViewer.removeTab(getLibraryName());
+									
 				
-				// Update the libraryViewer
-				Main.libraryMode.viewer.deleteItem(this);
-				
-				// Commit
-				Main.dbManager.commit();
-				
-				//Update the UserInformation properties file
-				if (isOpened())
-					Main.libraryMode.storeOpenedLibraries();
-				
-				//Recalculate those bindings
-				Main.libraryMode.calculateOpenedLibraries();
-				Main.libraryMode.calculateEmptyLibraries();
+				//This must happen only one time when multiple libraries are being deleted
+				//Or else the application will look garbage
+				if (!byPassQuestion)
+					finalizeLibraryDelete(null);
 				
 			} catch (SQLException sql) {
 				logger.log(Level.WARNING, "\n", sql);
 			}
 			
 		}
+	}
+	
+	/**
+	 * Helper method which is used for deleting mutliple libraries
+	 */
+	public void finalizeLibraryDelete(List<Node> list) {
+		
+		// Update the libraryViewer
+		if (list != null)
+			Main.libraryMode.viewer.deleteItem(this);
+		else
+			Main.libraryMode.viewer.deleteItems(list);
+		
+		// Commit
+		Main.dbManager.commit();
+		
+		//Update the UserInformation properties file
+		Main.libraryMode.storeOpenedLibraries();
+		
+		//Recalculate those bindings
+		Main.libraryMode.calculateOpenedLibraries();
+		Main.libraryMode.calculateEmptyLibraries();
 	}
 	
 	public enum LibraryStatus {

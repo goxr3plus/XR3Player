@@ -113,14 +113,13 @@ public class LibraryContextMenu extends ContextMenu {
 	public void show(Window window , double x , double y , Library library) {
 		this.library = library;
 		
+		//Remove dis nuts
+		getItems().remove(open);
+		getItems().remove(close);
+		
 		// customize the menu accordingly
-		if (library.isOpened()) {
-			getItems().remove(open);
-			getItems().add(1, close);
-		} else {
-			getItems().remove(close);
-			getItems().add(1, open);
-		}
+		getItems().add(0, library.isOpened() ? close : open);
+		
 		exportImage.setDisable(library.getAbsoluteImagePath() == null);
 		resetImage.setDisable(exportImage.isDisable());
 		

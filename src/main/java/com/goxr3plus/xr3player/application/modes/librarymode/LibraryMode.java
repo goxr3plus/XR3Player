@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import org.atteo.evo.inflector.English;
 
@@ -445,7 +446,16 @@ public class LibraryMode extends BorderPane {
 	public void deleteLibraries(Library library) {
 		//Check for multiple selection
 		if (multipleSelection.isSelected() && viewer.getItemsObservableList().stream().anyMatch(lib -> ( (Library) lib ).isSelected())) {
-			viewer.getItemsObservableList().forEach(lib -> ( (Library) lib ).deleteLibrary(null, true));
+			
+			//Collect all the libraries to a list
+			
+			List<Node> list = viewer.getItemsObservableList().stream().filter(lib -> ( (Library) lib ).isSelected()).collect(Collectors.toList());
+			
+			//Delete each selected library
+			list.forEach(lib -> ( (Library) lib ).deleteLibrary(null, true));
+			
+			//Finalize the delete procedure
+			( (Library) list.get(0) ).finalizeLibraryDelete(list);
 		} else {
 			if (library == null)
 				( (Library) viewer.centerItemProperty().get() ).deleteLibrary(deleteLibrary, false);
