@@ -223,13 +223,22 @@ public class XPlayerPlayService extends Service<Boolean> {
 					Platform.runLater(() -> {
 						String audioPath = xPlayerController.getxPlayerModel().songPathProperty().get();
 						
-						//Check if File doesn't exists
+						//Media not existing any more?
 						if (audioType[0] != null && audioPath != null && !new File(audioPath).exists())
 							ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...", Duration.seconds(2), NotificationType.ERROR);
-						else //Or else maybe corrupted ? Who the duck knows.... dayuuumn
+						
+						//Not available Audio Devices?
+						else if (xPlayerController.getxPlayer().getMixers().isEmpty())
+							ActionTool.showNotification("No Audio Devices",
+									"We can’t find an audio device.\nMake sure that headphones or speakers are connected.\n For more info, search your device for “Manage audio devices”",
+									Duration.millis(10000), NotificationType.ERROR);
+						
+						//Audio Corrupted?
+						else
 							ActionTool.showNotification("Can't play current Audio", "Can't play \n["
 									+ InfoTool.getMinString(xPlayerController.getxPlayerModel().songPathProperty().get(), 30) + "]\nIt is corrupted or maybe unsupported",
 									Duration.millis(1500), NotificationType.ERROR);
+						
 					});
 					return false;
 				} finally {

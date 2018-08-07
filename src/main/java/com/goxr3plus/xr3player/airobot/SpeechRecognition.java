@@ -102,7 +102,8 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 			duplex.addResponseListener(this);
 			
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
+			System.err.println("No Microphone available");
 			this.setDisable(true);
 		}
 	}
