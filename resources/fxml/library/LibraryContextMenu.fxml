@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <MenuItem fx:id="open" mnemonicParsing="false" text="Open (CTRL + O)">
+         <graphic>
+            <FontIcon iconColor="#d4ff00" iconLiteral="far-folder-open" iconSize="24" selectionEnd="0" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="close" mnemonicParsing="false" text="Close (CTRL + C)">
+         <graphic>
+            <FontIcon iconColor="#d4ff00" iconLiteral="far-folder" iconSize="24" selectionEnd="0" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="rename" mnemonicParsing="false" text="Rename (CTRL + R)">
+         <graphic>
+            <FontIcon iconColor="#44f8b9" iconLiteral="fas-edit" iconSize="20" />
+         </graphic>
+      </MenuItem>
+      <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete (CTRL + D)">
+         <graphic>
+            <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
+         </graphic>
+      </MenuItem>
+      <Menu mnemonicParsing="false" text="Background">
+         <items>
+            <MenuItem fx:id="changeImage" mnemonicParsing="false" text="Change">
+               <graphic>
+                  <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="resetImage" mnemonicParsing="false" text="Reset default">
+               <graphic>
+                  <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="exportImage" mnemonicParsing="false" text="Export image">
+               <graphic>
+                  <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
+               </graphic>
+            </MenuItem>
+         </items>
+         <graphic>
+            <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0" />
+         </graphic>
+      </Menu>
+      <MenuItem fx:id="moreInfo" mnemonicParsing="false" text="More info (CTRL + I)">
+         <graphic>
+            <FontIcon iconColor="#e8ac14" iconLiteral="fas-info-circle" iconSize="24" />
+         </graphic>
+      </MenuItem>
+   </items>
+</fx:root>

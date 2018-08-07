@@ -1,19 +1,22 @@
 package main.java.com.goxr3plus.xr3player.application.modes.librarymode;
 
+import java.io.IOException;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library.LibraryStatus;
-import main.java.com.goxr3plus.xr3player.application.presenter.TitleMenuItem;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode
@@ -23,40 +26,34 @@ import main.java.com.goxr3plus.xr3player.application.presenter.TitleMenuItem;
  */
 public class LibraryContextMenu extends ContextMenu {
 	
-	/** The open. */
-	MenuItem open = new MenuItem("Open(CTRL + O)");
+	// -------------------------------------------------------------
 	
-	/** The close. */
-	MenuItem close = new MenuItem("Close(CTRL + C)");
+	@FXML
+	private MenuItem open;
 	
-	/** The rename. */
-	MenuItem rename = new MenuItem("Rename(CTRL + R)");
+	@FXML
+	private MenuItem close;
 	
-	/** The delete. */
-	MenuItem delete = new MenuItem("Delete(CTRL + D)");
+	@FXML
+	private MenuItem rename;
 	
-	/** The image. */
-	Menu image = new Menu("Image");
+	@FXML
+	private MenuItem delete;
 	
-	/** The set image. */
-	Menu setImage = new Menu("Change...");
+	@FXML
+	private MenuItem changeImage;
 	
-	/** The local image. */
-	MenuItem localImage = new MenuItem("Local");
+	@FXML
+	private MenuItem resetImage;
 	
-	/** The internet image. */
-	MenuItem internetImage = new MenuItem("Internet");
+	@FXML
+	private MenuItem exportImage;
 	
-	/** The export image. */
-	MenuItem exportImage = new MenuItem("Export...CTRL + E)");
+	@FXML
+	private MenuItem moreInfo;
 	
-	/** The reset image. */
-	MenuItem resetImage = new MenuItem("Default");
+	// -------------------------------------------------------------
 	
-	/** The settings. */
-	MenuItem settings = new MenuItem("Settings(CTRL + S)");
-	
-	/** The library. */
 	private Library library;
 	
 	/**
@@ -65,30 +62,40 @@ public class LibraryContextMenu extends ContextMenu {
 	// Constructor
 	public LibraryContextMenu() {
 		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "LibraryContextMenu.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Called as soon as .FXML is loaded from FXML Loader
+	 */
+	@FXML
+	private void initialize() {
+		
 		open.setOnAction(ac -> library.setLibraryStatus(LibraryStatus.OPENED, false));
 		
 		close.setOnAction(ac -> library.setLibraryStatus(LibraryStatus.CLOSED, false));
 		
 		rename.setOnAction(ac -> library.renameLibrary(library));
 		
-		localImage.setOnAction(ac -> library.setNewImage());
+		changeImage.setOnAction(ac -> library.setNewImage());
 		
 		resetImage.setOnAction(ac -> library.setDefaultImage());
 		
 		exportImage.setOnAction(ac -> library.exportImage());
 		
-		settings.setOnAction(ac -> Main.libraryMode.libraryInformation.showWindow(library));
+		moreInfo.setOnAction(ac -> Main.libraryMode.libraryInformation.showWindow(library));
 		
 		delete.setOnAction(ac -> Main.libraryMode.deleteLibraries(library));
-		
-		internetImage.setDisable(true);
-		// exportImage.setDisable(true)
-		
-		setImage.getItems().addAll(localImage, internetImage);
-		image.getItems().addAll(setImage, exportImage, resetImage);
-		
-		getItems().addAll( open, close, rename, settings, image, delete);
-		
 	}
 	
 	/**

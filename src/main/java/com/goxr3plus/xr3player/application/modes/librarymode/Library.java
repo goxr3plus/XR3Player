@@ -1278,7 +1278,7 @@ public class Library extends StackPane {
 				renameLibrary(nameLabel);
 			else if (code == KeyCode.DELETE || code == KeyCode.D)
 				Main.libraryMode.deleteLibraries(this);
-			else if (code == KeyCode.S)
+			else if (code == KeyCode.I)
 				Main.libraryMode.libraryInformation.showWindow(this);
 			else if (code == KeyCode.E)
 				this.exportImage();
