@@ -597,8 +597,10 @@ public class Viewer extends Region {
 			scrollBar.setMax(itemsObservableList.size() - 1.00);
 		
 		//Update?
-		if (update)
+		if (update) {
+			calculateCenterIndex();
 			update();
+		}
 		
 	}
 	
@@ -660,7 +662,10 @@ public class Viewer extends Region {
 	private void calculateCenterIndex() {
 		
 		// center index
-		if (!leftGroup.getChildren().isEmpty())
+		if (!centerGroup.getChildren().isEmpty())
+			centerIndex = this.getNotNullList().indexOf(centerGroup.getChildren().get(0));
+		
+		else if (!leftGroup.getChildren().isEmpty())
 			centerIndex = leftGroup.getChildren().size() - 1;
 		else
 			// if (!rightGroup.getChildren().isEmpty())	
