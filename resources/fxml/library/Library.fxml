@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
@@ -19,11 +19,6 @@
             <Rectangle2D />
          </viewport>
 		</ImageView>
-		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-border-color: transparent firebrick transparent firebrick; -fx-font-size: 17; -fx-background-color: #202020;" styleClass="libraryNameLabel" text="Name" wrapText="true" StackPane.alignment="BOTTOM_CENTER">
-			<tooltip>
-				<Tooltip />
-			</tooltip>
-		</Label>
       <Label fx:id="ratingLabel" alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14;" text="5.0" StackPane.alignment="TOP_RIGHT">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -95,11 +90,20 @@
             <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24" />
          </graphic>
       </Label>
-      <StackPane fx:id="progressBarStackPane" style="-fx-background-color: rgb(255,255,255,0.75);" visible="false">
+      <VBox alignment="BOTTOM_CENTER">
          <children>
-            <ProgressBar fx:id="progressBar" progress="0.0" />
-            <Label fx:id="progressBarLabel" style="-fx-font-weight: bold;" text="la" />
-         </children></StackPane>
+            <CheckBox fx:id="selectedCheckBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #101010;" styleClass="medium-check-box" VBox.vgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+      		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-font-size: 17; -fx-background-color: #151515;" styleClass="libraryNameLabel" text="Library" wrapText="true">
+      			<tooltip>
+      				<Tooltip />
+      			</tooltip>
+      		</Label>
+         </children>
+      </VBox>
       <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />

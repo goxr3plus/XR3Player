@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -34,7 +35,7 @@ public class WelcomeScreen extends StackPane {
 	private HBox topHBox;
 	
 	@FXML
-	private JFXCheckBox showOnStartUp;
+	private CheckBox showOnStartUp;
 	
 	@FXML
 	private JFXToggleButton sound;
@@ -177,7 +178,7 @@ public class WelcomeScreen extends StackPane {
 	/**
 	 * @return the showOnStartUp
 	 */
-	public JFXCheckBox getShowOnStartUp() {
+	public CheckBox getShowOnStartUp() {
 		return showOnStartUp;
 	}
 	

@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -162,12 +163,30 @@
                                     <StackPane prefHeight="32.0" prefWidth="761.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <BorderPane>
-                                             <center>
-                                                <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: #101010;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
-                                             </center>
                                              <left>
                                                 <HBox fx:id="botttomHBox" alignment="CENTER_LEFT" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
                                              </left>
+                                             <center>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <CheckBox fx:id="multipleSelection" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #101010;" styleClass="small-check-box" text="Multiple Selection" textAlignment="CENTER" wrapText="true">
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="2.0" />
+                                                         </padding>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <tooltip>
+                                                            <Tooltip text="If checked you can select multiple libraries" />
+                                                         </tooltip>
+                                                      </CheckBox>
+                                                      <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: #101010;" styleClass="applicationSettingsLabel" text="Text" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
+                                             </center>
                                           </BorderPane>
                                        </children>
                                     </StackPane>

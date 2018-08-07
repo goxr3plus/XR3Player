@@ -26,6 +26,7 @@ import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.effect.DropShadow;
@@ -61,9 +62,6 @@ public class Library extends StackPane {
 	private ImageView imageView;
 	
 	@FXML
-	private Label nameLabel;
-	
-	@FXML
 	private Label ratingLabel;
 	
 	@FXML
@@ -77,6 +75,12 @@ public class Library extends StackPane {
 	
 	@FXML
 	private Label totalItemsLabel;
+	
+	@FXML
+	private CheckBox selectedCheckBox;
+	
+	@FXML
+	private Label nameLabel;
 	
 	@FXML
 	private Label dragAndDropLabel;
@@ -102,8 +106,8 @@ public class Library extends StackPane {
 	/** The stars. */
 	private DoubleProperty stars;
 	
-	/** The selected. */
-	private BooleanProperty selected;
+	//	/** The selected. */
+	//	private BooleanProperty selected;
 	
 	/** The date created. */
 	private String dateCreated = "";
@@ -440,13 +444,14 @@ public class Library extends StackPane {
 		//this.setEffect(reflection);
 		
 		//Selected Property
+		goOnSelectionMode(false);
 		setSelected(false);
-		selected.addListener((observable , oldValue , newValue) -> {
-			if (newValue)
-				( (DropShadow) super.getEffect() ).setColor(Color.web("#1bb2d7"));
-			else
-				( (DropShadow) super.getEffect() ).setColor(Color.BLACK);
-		});
+		//		selected.addListener((observable , oldValue , newValue) -> {
+		//			if (newValue)
+		//				( (DropShadow) super.getEffect() ).setColor(Color.web("#1bb2d7"));
+		//			else
+		//				( (DropShadow) super.getEffect() ).setColor(Color.BLACK);
+		//		});
 		
 		// -----ImageView
 		imageView.setImage(getImage());
@@ -540,15 +545,15 @@ public class Library extends StackPane {
 		
 	}
 	
-	//	/**
-	//	 * Change the state of the Library from Normal to Selection Mode.
-	//	 *
-	//	 * @param way
-	//	 *            the way
-	//	 */
-	//	public void goOnSelectionMode(boolean way) {
-	//		selectionModeStackPane.setVisible(way);
-	//	}
+	/**
+	 * Change the state of the Library from Normal to Selection Mode.
+	 *
+	 * @param way
+	 *            the way
+	 */
+	public void goOnSelectionMode(boolean way) {
+		selectedCheckBox.setVisible(way);
+	}
 	
 	/**
 	 * Update the Stars of the Library.
@@ -982,11 +987,11 @@ public class Library extends StackPane {
 	 *            the new selected
 	 */
 	public void setSelected(boolean selected) {
-		selectedProperty().set(selected);
+		selectedCheckBox.setSelected(selected);
 	}
 	
 	public boolean isSelected() {
-		return selectedProperty().get();
+		return selectedCheckBox.isSelected();
 	}
 	
 	/**
@@ -1027,17 +1032,17 @@ public class Library extends StackPane {
 		return stars;
 	}
 	
-	/**
-	 * Selected property.
-	 *
-	 * @return The Selected Property
-	 */
-	public BooleanProperty selectedProperty() {
-		if (selected == null)
-			selected = new SimpleBooleanProperty(this, "selected", false);
-		
-		return selected;
-	}
+	//	/**
+	//	 * Selected property.
+	//	 *
+	//	 * @return The Selected Property
+	//	 */
+	//	public BooleanProperty selectedProperty() {
+	//		if (selected == null)
+	//			selected = new SimpleBooleanProperty(this, "selected", false);
+	//		
+	//		return selected;
+	//	}
 	
 	/**
 	 * Opened property.

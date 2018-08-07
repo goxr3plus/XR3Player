@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -37,7 +37,11 @@
       </ImageView>
       <HBox fx:id="topHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" spacing="25.0" style="-fx-background-color: rgb(10,10,10,0.6);" StackPane.alignment="TOP_RIGHT">
          <children>
-            <JFXCheckBox fx:id="showOnStartUp" focusTraversable="false" selected="true" styleClass="settingsRadioButton" text="Show welcome screen again ?" />
+            <CheckBox fx:id="showOnStartUp" focusTraversable="false" mnemonicParsing="false" selected="true" styleClass="medium-check-box" text="Show this screen on start up ?">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
             <JFXToggleButton fx:id="sound" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00" visible="false" />
          </children>
          <cursor>

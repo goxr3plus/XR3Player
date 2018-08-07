@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -120,10 +121,13 @@ public class LibraryMode extends BorderPane {
 	private ColorPicker colorPicker;
 	
 	@FXML
-	private Label librariesInfoLabel;
+	private HBox botttomHBox;
 	
 	@FXML
-	private HBox botttomHBox;
+	private CheckBox multipleSelection;
+	
+	@FXML
+	private Label librariesInfoLabel;
 	
 	@FXML
 	private Button createFirstLibrary;
@@ -424,6 +428,15 @@ public class LibraryMode extends BorderPane {
 		
 		//bottomSplitPane
 		bottomSplitPane.visibleProperty().bind(djModeStackPane.visibleProperty().not());
+		
+		//multipleSelection
+		multipleSelection.selectedProperty().addListener(l -> {
+			boolean selected = multipleSelection.isSelected();
+			
+			//For each library
+			viewer.getItemsObservableList().forEach(library -> ( (Library) library ).goOnSelectionMode(selected));
+		});
+		
 	}
 	
 	/**
@@ -774,6 +787,13 @@ public class LibraryMode extends BorderPane {
 	 */
 	public StackPane getBottomStackPane() {
 		return bottomStackPane;
+	}
+	
+	/**
+	 * @return the multipleSelection
+	 */
+	public CheckBox getMultipleSelection() {
+		return multipleSelection;
 	}
 	
 }
