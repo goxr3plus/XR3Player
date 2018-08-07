@@ -242,7 +242,7 @@
                                  <top>
                                     <BorderPane BorderPane.alignment="CENTER">
                                        <center>
-                                          <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="536.0" style="-fx-font-size: 14; -fx-border-color: #050505;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
+                                          <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="536.0" style="-fx-font-size: 14; -fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
                                        </center>
                                        <left>
                                           <HBox fx:id="botttomHBox" alignment="CENTER" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
