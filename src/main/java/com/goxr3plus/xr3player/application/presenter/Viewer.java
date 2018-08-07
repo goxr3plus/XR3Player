@@ -700,7 +700,7 @@ public class Viewer extends Region {
 	 * @param item
 	 */
 	public void setCenterItem(Node item) {
-		setCenterIndex(itemsObservableList.indexOf(item));
+		setCenterIndex(sortedList.indexOf(item));
 	}
 	
 	/**
@@ -710,7 +710,7 @@ public class Viewer extends Region {
 	 * @return True if it is
 	 */
 	public boolean isCenterItem(Node item) {
-		return !itemsObservableList.isEmpty() && itemsObservableList.get(centerIndex).equals(item);
+		return !itemsObservableList.isEmpty() && sortedList.get(centerIndex).equals(item);
 	}
 	
 	/**
@@ -743,23 +743,23 @@ public class Viewer extends Region {
 			
 			// If only on item exists
 			if (itemsObservableList.size() == 1) {
-				centerGroup.getChildren().add(itemsObservableList.get(0));
+				centerGroup.getChildren().add(sortedList.get(0));
 				centerIndex = 0;
 			} else {
 				
 				// LEFT,
 				for (int i = 0; i < centerIndex; i++)
-					leftGroup.getChildren().add(itemsObservableList.get(i));
+					leftGroup.getChildren().add(sortedList.get(i));
 				
 				// CENTER,
 				if (centerIndex == itemsObservableList.size()) {
 					centerGroup.getChildren().add(leftGroup.getChildren().get(centerIndex - 1));
 				} else
-					centerGroup.getChildren().add(itemsObservableList.get(centerIndex));
+					centerGroup.getChildren().add(sortedList.get(centerIndex));
 				
 				// RIGHT
 				for (int i = itemsObservableList.size() - 1; i > centerIndex; i--)
-					rightGroup.getChildren().add(itemsObservableList.get(i));
+					rightGroup.getChildren().add(sortedList.get(i));
 				
 			}
 			
@@ -776,7 +776,7 @@ public class Viewer extends Region {
 			// LEFT KEYFRAMES
 			for (int i = 0; i < leftGroup.getChildren().size(); i++) {
 				
-				final Node it = itemsObservableList.get(i);
+				final Node it = sortedList.get(i);
 				
 				double newX = -leftGroup.getChildren().size() *
 						
@@ -797,7 +797,7 @@ public class Viewer extends Region {
 			// CENTER ITEM KEYFRAME
 			final Node centerItem;
 			if (itemsObservableList.size() == 1)
-				centerItem = itemsObservableList.get(0);
+				centerItem = sortedList.get(0);
 			else
 				centerItem = centerGroup.getChildren().get(0);
 			
@@ -820,7 +820,7 @@ public class Viewer extends Region {
 			// RIGHT KEYFRAMES
 			for (int i = 0; i < rightGroup.getChildren().size(); i++) {
 				
-				final Node it = itemsObservableList.get(itemsObservableList.size() - i - 1);
+				final Node it = sortedList.get(itemsObservableList.size() - i - 1);
 				
 				final double newX = rightGroup.getChildren().size() *
 						
