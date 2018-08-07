@@ -383,7 +383,7 @@ public class LibraryMode extends BorderPane {
 		renameLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() ).renameLibrary(renameLibrary));
 		
 		// -- deleteLibrary
-		deleteLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() ).deleteLibrary(deleteLibrary));
+		deleteLibrary.setOnAction(a -> deleteLibraries(null));
 		
 		// -- openOrCloseLibrary 
 		viewer.centerItemProperty().addListener((observable , oldValue , newValue) -> {
@@ -437,6 +437,21 @@ public class LibraryMode extends BorderPane {
 			viewer.getItemsObservableList().forEach(library -> ( (Library) library ).goOnSelectionMode(selected));
 		});
 		
+	}
+	
+	/**
+	 * Delete libraries method
+	 */
+	public void deleteLibraries(Library library) {
+		//Check for multiple selection
+		if (multipleSelection.isSelected() && viewer.getItemsObservableList().stream().anyMatch(lib -> ( (Library) lib ).isSelected())) {
+			viewer.getItemsObservableList().forEach(lib -> ( (Library) lib ).deleteLibrary(null, true));
+		} else {
+			if (library == null)
+				( (Library) viewer.centerItemProperty().get() ).deleteLibrary(deleteLibrary, false);
+			else
+				library.deleteLibrary(deleteLibrary, false);
+		}
 	}
 	
 	/**

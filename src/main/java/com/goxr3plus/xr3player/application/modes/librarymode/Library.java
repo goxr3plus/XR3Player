@@ -29,7 +29,6 @@ import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -37,7 +36,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
@@ -859,9 +857,13 @@ public class Library extends StackPane {
 	/**
 	 * Delete the library.
 	 */
-	public void deleteLibrary(Node node) {
-		if (controller.isFree(true)
-				&& ActionTool.doQuestion("Delete Library", "Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", node, Main.window)) {
+	public void deleteLibrary(Node node , boolean byPassQuestion) {
+		boolean questionPass = true;
+		
+		if (!byPassQuestion)
+			questionPass = ActionTool.doQuestion("Delete Library", "Confirm that you want to 'delete' this library,\n Name: [" + getLibraryName() + " ]", node, Main.window);
+		
+		if (controller.isFree(true) && questionPass) {
 			
 			try {
 				
@@ -1275,7 +1277,7 @@ public class Library extends StackPane {
 			else if (code == KeyCode.R)
 				renameLibrary(nameLabel);
 			else if (code == KeyCode.DELETE || code == KeyCode.D)
-				deleteLibrary(this);
+				Main.libraryMode.deleteLibraries(this);
 			else if (code == KeyCode.S)
 				Main.libraryMode.libraryInformation.showWindow(this);
 			else if (code == KeyCode.E)

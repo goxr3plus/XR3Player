@@ -79,7 +79,7 @@ public class LibraryContextMenu extends ContextMenu {
 		
 		settings.setOnAction(ac -> Main.libraryMode.libraryInformation.showWindow(library));
 		
-		delete.setOnAction(ac -> library.deleteLibrary(library));
+		delete.setOnAction(ac -> Main.libraryMode.deleteLibraries(library));
 		
 		internetImage.setDisable(true);
 		// exportImage.setDisable(true)
@@ -87,7 +87,7 @@ public class LibraryContextMenu extends ContextMenu {
 		setImage.getItems().addAll(localImage, internetImage);
 		image.getItems().addAll(setImage, exportImage, resetImage);
 		
-		getItems().addAll(new TitleMenuItem("Common"), open, close, rename, new TitleMenuItem("Other"), settings, image, delete);
+		getItems().addAll( open, close, rename, settings, image, delete);
 		
 	}
 	
