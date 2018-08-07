@@ -904,7 +904,7 @@ public class Library extends StackPane {
 	public void finalizeLibraryDelete(List<Node> list) {
 		
 		// Update the libraryViewer
-		if (list != null)
+		if (list == null)
 			Main.libraryMode.viewer.deleteItem(this);
 		else
 			Main.libraryMode.viewer.deleteItems(list);
