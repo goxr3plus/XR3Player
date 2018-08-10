@@ -348,7 +348,7 @@ public class Library extends StackPane {
 		// ----------------------------------Evemt Listeners-------------------------------------
 		
 		// --Scroll Listener
-		setOnScroll(scroll -> updateStars(scroll.getDeltaY() > 0 ? starsProperty().get() + 0.5 : starsProperty().get() - 0.5));
+		//setOnScroll(scroll -> updateStars(scroll.getDeltaY() > 0 ? starsProperty().get() + 0.5 : starsProperty().get() - 0.5))
 		
 		// --Key Listener
 		setOnKeyReleased(this::onKeyReleased);
@@ -554,25 +554,30 @@ public class Library extends StackPane {
 	/**
 	 * Update the Stars of the Library.
 	 *
-	 * @param stars1
+	 * @param stars
 	 *            the stars
 	 */
-	public void updateStars(double stars1) {
+	public void updateStars(double stars) {
 		// An acceptable value has been given
-		if (setStars(stars1))
+		if (setStars(stars)) {
 			//Try
 			try (PreparedStatement libUStars = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET STARS=? WHERE NAME=?;");) {
 				
 				// SQLITE COMMIT
-				libUStars.setDouble(1, stars1);
+				libUStars.setDouble(1, stars);
 				libUStars.setString(2, getLibraryName());
 				libUStars.executeUpdate();
 				
 				//Commit
 				Main.dbManager.commit();
+				
+				//Sort if comparator is selected
+				if (Main.libraryMode.getSelectedSortToggleText().contains("Stars"))
+					Main.libraryMode.viewer.update();
 			} catch (SQLException ex) {
 				logger.log(Level.WARNING, "", ex);
 			}
+		}
 	}
 	
 	/**
@@ -978,6 +983,10 @@ public class Library extends StackPane {
 	private void setLibraryName(String newName) {
 		libraryName = newName;
 		controller.setName(newName);
+		
+		//Sort if comparator is selected
+		if (Main.libraryMode.getSelectedSortToggleText().contains("Name"))
+			Main.libraryMode.viewer.update();
 	}
 	
 	/**

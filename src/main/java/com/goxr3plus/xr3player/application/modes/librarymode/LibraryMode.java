@@ -450,7 +450,6 @@ public class LibraryMode extends BorderPane {
 			
 			//Continue
 			String text = ( (RadioMenuItem) newValue ).getText();
-			System.out.println("Sorting libraries :" + text);
 			
 			//Create a custom comparator
 			if (text.equalsIgnoreCase("Name Ascendant")) {
@@ -458,15 +457,26 @@ public class LibraryMode extends BorderPane {
 			} else if (text.equalsIgnoreCase("Name Descendant")) {
 				viewer.setSortComparator((a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) b ).getLibraryName(), ( (Library) a ).getLibraryName()));
 			} else if (text.equalsIgnoreCase("Stars  Ascendant")) {
-				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) a ).getStars(), ( (Library) b ).getStars()));
-			} else if (text.equalsIgnoreCase("Stars  Descendant")) {
 				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) b ).getStars(), ( (Library) a ).getStars()));
+			} else if (text.equalsIgnoreCase("Stars  Descendant")) {
+				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) a ).getStars(), ( (Library) b ).getStars()));
 			} else if (text.equalsIgnoreCase("Total Media  Ascendant")) {
-				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) a ).getTotalEntries(), ( (Library) b ).getTotalEntries()));
-			} else if (text.equalsIgnoreCase("Total Media  Descendant")) {
 				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) b ).getTotalEntries(), ( (Library) a ).getTotalEntries()));
+			} else if (text.equalsIgnoreCase("Total Media  Descendant")) {
+				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) a ).getTotalEntries(), ( (Library) b ).getTotalEntries()));
 			}
+			
+			viewer.update();
 		});
+	}
+	
+	/**
+	 * Return the text of the selected sort toggle
+	 * 
+	 * @return
+	 */
+	public String getSelectedSortToggleText() {
+		return ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
 	}
 	
 	/**
