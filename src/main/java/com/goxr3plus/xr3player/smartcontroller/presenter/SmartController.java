@@ -830,7 +830,7 @@ public class SmartController extends StackPane {
 		boolean isFree = ( workOnProgress == WorkOnProgress.NONE );
 		
 		//Check if any work is already in progress
-		if (!isFree)
+		if (!isFree && showMessage)
 			showMessage(workOnProgress.toString());
 		
 		return isFree;

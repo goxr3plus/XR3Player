@@ -572,8 +572,10 @@ public class Library extends StackPane {
 				Main.dbManager.commit();
 				
 				//Sort if comparator is selected
-				if (Main.libraryMode.getSelectedSortToggleText().contains("Stars"))
+				if (Main.libraryMode.getSelectedSortToggleText().contains("Stars")) {
+					System.out.println("It contains starssss!!!");
 					Main.libraryMode.viewer.update();
+				}
 			} catch (SQLException ex) {
 				logger.log(Level.WARNING, "", ex);
 			}

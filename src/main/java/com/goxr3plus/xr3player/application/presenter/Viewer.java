@@ -399,7 +399,7 @@ public class Viewer extends Region {
 	 * @param comparator
 	 */
 	public void setSortComparator(Comparator<? super Node> comparator) {
-		this.sortedList.setComparator(comparator);
+		sortedList.setComparator(comparator);
 	}
 	
 	/**

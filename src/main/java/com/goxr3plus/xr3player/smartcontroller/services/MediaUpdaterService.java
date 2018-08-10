@@ -8,6 +8,7 @@ import static main.java.com.goxr3plus.xr3player.application.Main.libraryMode;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -89,17 +90,20 @@ public class MediaUpdaterService {
 					libraryMode.openedLibrariesViewer.getSelectedLibrary().ifPresent(selectedLibrary -> {
 						
 						//Find the controller
-						SmartController controller = (SmartController) Main.libraryMode.openedLibrariesViewer.getTab(selectedLibrary.getLibraryName()).getContent();
-						
-						//Normal Mode
-						if (controller.getNormalModeTab().isSelected())
-							filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
-						
-						//Filters Mode 
-						else if (controller.getFiltersModeTab().isSelected())
-							filterController(selectedLibrary.getSmartController(),
-									selectedLibrary.getSmartController().getFiltersMode().getMediaTableViewer().getTableView().getItems());
-						
+						Optional.ofNullable(Main.libraryMode.openedLibrariesViewer.getTab(selectedLibrary.getLibraryName())).ifPresent(tab -> {
+							
+							//Initialize
+							SmartController controller = (SmartController) tab.getContent();
+							
+							//Normal Mode
+							if (controller.getNormalModeTab().isSelected())
+								filterController(selectedLibrary.getSmartController(), selectedLibrary.getSmartController().getItemsObservableList());
+							
+							//Filters Mode 
+							else if (controller.getFiltersModeTab().isSelected())
+								filterController(selectedLibrary.getSmartController(),
+										selectedLibrary.getSmartController().getFiltersMode().getMediaTableViewer().getTableView().getItems());
+						});
 					});
 				
 				//-------------
