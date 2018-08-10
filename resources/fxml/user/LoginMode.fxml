@@ -8,8 +8,11 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,9 +25,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="636.0" prefWidth="930.0" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="521.0" prefWidth="777.0" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="backgroundImageView" fitHeight="636.0" fitWidth="930.0" pickOnBounds="true" />
+      <ImageView fx:id="backgroundImageView" pickOnBounds="true" />
       <BorderPane stylesheets="@../../style/application.css">
          <bottom>
             <HBox alignment="CENTER" prefHeight="38.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
@@ -185,7 +188,7 @@
                                                                               <Tooltip text="Previous" />
                                                                            </tooltip>
                                                                            <graphic>
-                                                                              <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-back" iconSize="32" selectionEnd="0" />
+                                                                              <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
                                                                            </graphic>
                                                                         </JFXButton>
                                                                         <JFXButton fx:id="createUser" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
@@ -201,7 +204,7 @@
                                                                               <Tooltip text="Next" />
                                                                            </tooltip>
                                                                            <graphic>
-                                                                              <FontIcon iconColor="#2cee97" iconLiteral="typ-arrow-forward" iconSize="32" selectionEnd="0" />
+                                                                              <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
                                                                            </graphic>
                                                                         </JFXButton>
                                                                      </children>
@@ -241,12 +244,56 @@
                                  </bottom>
                                  <top>
                                     <BorderPane BorderPane.alignment="CENTER">
-                                       <center>
-                                          <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="536.0" style="-fx-font-size: 14; -fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Text" BorderPane.alignment="CENTER" />
-                                       </center>
                                        <left>
                                           <HBox fx:id="botttomHBox" alignment="CENTER" prefWidth="216.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER" />
                                        </left>
+                                       <center>
+                                          <HBox BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label fx:id="usersInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Text" HBox.hgrow="ALWAYS" />
+                                                <MenuButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="dark-menu-button" text="Sort">
+                                                   <items>
+                                                      <RadioMenuItem mnemonicParsing="false" selected="true" text="Name Ascendant">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="sortByGroup" />
+                                                         </toggleGroup>
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="far-user" iconSize="20" />
+                                                         </graphic>
+                                                      </RadioMenuItem>
+                                                      <RadioMenuItem mnemonicParsing="false" text="Name Descendant" toggleGroup="$sortByGroup">
+                                                         <graphic>
+                                                            <FontIcon iconColor="WHITE" iconLiteral="far-user" iconSize="20" />
+                                                         </graphic>
+                                                      </RadioMenuItem>
+                                                      <RadioMenuItem mnemonicParsing="false" text="Libraries  Ascendant" toggleGroup="$sortByGroup">
+                                                         <graphic>
+                                                            <FontIcon iconColor="#e8216a" iconLiteral="gmi-library-music" iconSize="24" />
+                                                         </graphic>
+                                                      </RadioMenuItem>
+                                                      <RadioMenuItem mnemonicParsing="false" text="Libraries  Descendant" toggleGroup="$sortByGroup">
+                                                         <graphic>
+                                                            <FontIcon iconColor="#e8216a" iconLiteral="gmi-library-music" iconSize="24" />
+                                                         </graphic>
+                                                      </RadioMenuItem>
+                                                      <RadioMenuItem mnemonicParsing="false" text="Dropbox Accounts  Ascendant" toggleGroup="$sortByGroup">
+                                                         <graphic>
+                                                            <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="24" />
+                                                         </graphic>
+                                                      </RadioMenuItem>
+                                                      <RadioMenuItem mnemonicParsing="false" text="Dropbox Accounts  Descendant" toggleGroup="$sortByGroup">
+                                                         <graphic>
+                                                            <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="24" />
+                                                         </graphic>
+                                                      </RadioMenuItem>
+                                                   </items>
+                                                   <graphic>
+                                                      <FontIcon iconColor="#ffb31b" iconLiteral="fas-sort-alpha-down" iconSize="24" />
+                                                   </graphic>
+                                                </MenuButton>
+                                             </children>
+                                          </HBox>
+                                       </center>
                                     </BorderPane>
                                  </top>
                               </BorderPane>

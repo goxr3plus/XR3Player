@@ -82,12 +82,12 @@ public class UsersLoaderService extends Service<Boolean> {
 			protected Boolean call() throws Exception {
 				//Variables
 				int[] counter = { 0 };
-				int totalUsers = Main.loginMode.teamViewer.getItemsObservableList().size();
+				int totalUsers = Main.loginMode.viewer.getItemsObservableList().size();
 				
 				try {
 					
 					// -- For every user
-					Main.loginMode.teamViewer.getItemsObservableList().forEach(userr -> {
+					Main.loginMode.viewer.getItemsObservableList().forEach(userr -> {
 						User user = (User) userr;
 						
 						//Check if the UserInformation Properties File exist

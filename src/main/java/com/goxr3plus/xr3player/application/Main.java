@@ -672,7 +672,7 @@ public class Main extends Application {
 			try (Stream<Path> stream = Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)) {
 				
 				//Append all available users
-				loginMode.teamViewer.addMultipleItems(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
+				loginMode.viewer.addMultipleItems(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
 						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode)).collect(Collectors.toList()));
 				
 			} catch (IOException e) {
@@ -680,8 +680,8 @@ public class Main extends Application {
 			}
 			
 			//avoid error
-			if (!loginMode.teamViewer.getItemsObservableList().isEmpty())
-				loginMode.teamViewer.setCenterIndex(loginMode.teamViewer.getItemsObservableList().size() / 2);
+			if (!loginMode.viewer.getItemsObservableList().isEmpty())
+				loginMode.viewer.setCenterIndex(loginMode.viewer.getItemsObservableList().size() / 2);
 			
 		}
 		
@@ -735,10 +735,10 @@ public class Main extends Application {
 			}
 			
 			//--------- Create the Menu Items of available users for Settings Window
-			if (loginMode.teamViewer.getItemsObservableList().size() == 1)
+			if (loginMode.viewer.getItemsObservableList().size() == 1)
 				settingsWindow.getCopySettingsMenuButton().setDisable(true);
 			else
-				loginMode.teamViewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
+				loginMode.viewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
 					
 					//Create the MenuItem
 					MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getUserName(), 50));

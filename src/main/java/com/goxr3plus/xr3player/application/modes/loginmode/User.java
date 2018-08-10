@@ -102,7 +102,7 @@ public class User extends StackPane {
 				if (Main.renameWindow.wasAccepted()) {
 					
 					// duplicate?
-					if (!Main.loginMode.teamViewer.getItemsObservableList().stream().anyMatch(user -> user != User.this && ( (User) user ).getUserName().equalsIgnoreCase(newName))
+					if (!Main.loginMode.viewer.getItemsObservableList().stream().anyMatch(user -> user != User.this && ( (User) user ).getUserName().equalsIgnoreCase(newName))
 							|| newName.equalsIgnoreCase(oldName)) {
 						
 						File originalFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + oldName);
@@ -117,6 +117,10 @@ public class User extends StackPane {
 							//Change the absolute path of the UserInformation.properties file
 							getUserInformationDb().setFileAbsolutePath(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator
 									+ InfoTool.USER_INFORMATION_FILE_NAME);
+							
+							//Login Mode Sort Comparator
+							if (Main.loginMode.getSelectedSortToggleText().contains("Name"))
+								Main.loginMode.viewer.sortByComparator(Main.loginMode.getSortComparator());
 							
 							//Change Pie Data Name
 							//							Main.loginMode.getSeries().getData().forEach(pieData -> {
@@ -216,7 +220,7 @@ public class User extends StackPane {
 		nameField.setText(getUserName());
 		nameField.getTooltip().setText(getUserName());
 		nameField.setOnMouseReleased(m -> {
-			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.loginMode.teamViewer.centerItemProperty().get() == User.this)// Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
+			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.loginMode.viewer.centerItemProperty().get() == User.this)// Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
 				renameUser(nameField);
 		});
 		
@@ -235,7 +239,7 @@ public class User extends StackPane {
 	 * Open display information stack pane for this user
 	 */
 	public void displayInformation() {
-		if (Main.loginMode.teamViewer.centerItemProperty().get() == User.this)
+		if (Main.loginMode.viewer.centerItemProperty().get() == User.this)
 			Main.loginMode.userInformation.displayForUser(this);
 	}
 	
@@ -258,6 +262,14 @@ public class User extends StackPane {
 	 */
 	public Label getTotalLibrariesLabel() {
 		return totalLibrariesLabel;
+	}
+	
+	public int getTotalLibraries() {
+		return Integer.parseInt(totalLibrariesLabel.getText());
+	}
+	
+	public int getTotalDropboxAccounts() {
+		return Integer.parseInt(dropBoxLabel.getText());
 	}
 	
 	/**
@@ -323,13 +335,13 @@ public class User extends StackPane {
 	public void deleteUser(Node owner) {
 		//Ask
 		if (ActionTool.doQuestion("Delete User",
-				"Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.teamViewer.getSelectedItem() ).getUserName() + " ]", owner, Main.window)) {
+				"Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.viewer.getSelectedItem() ).getUserName() + " ]", owner, Main.window)) {
 			
 			//Try to delete it		
 			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getUserName()))) {
 				
 				//Delete from the Model Viewer
-				Main.loginMode.teamViewer.deleteItem(this);
+				Main.loginMode.viewer.deleteItem(this);
 				
 				//Delete from PieChart
 				//Main.loginMode.getSeries().getData().stream().filter(data -> data.getXValue().equals(this.getUserName())).findFirst()
@@ -350,7 +362,7 @@ public class User extends StackPane {
 	 *            An event which indicates that a keystroke occurred in a javafx.scene.Node.
 	 */
 	public void onKeyReleased(KeyEvent key) {
-		if (!loginMode.teamViewer.isCenterItem(this))
+		if (!loginMode.viewer.isCenterItem(this))
 			return;
 		
 		//Check if Control is down

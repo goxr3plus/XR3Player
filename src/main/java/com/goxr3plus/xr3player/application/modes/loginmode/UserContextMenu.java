@@ -87,7 +87,7 @@ public class UserContextMenu extends ContextMenu {
 		
 		exportImage.setOnAction(a -> user.exportImage());
 		
-		delete.setOnAction(ac -> ( (User) Main.loginMode.teamViewer.getSelectedItem() ).deleteUser(user));
+		delete.setOnAction(ac -> ( (User) Main.loginMode.viewer.getSelectedItem() ).deleteUser(user));
 		
 		moreInfo.setOnAction(a -> user.displayInformation());
 		

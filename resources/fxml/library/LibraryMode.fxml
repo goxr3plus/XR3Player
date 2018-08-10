@@ -145,7 +145,7 @@
                                                       <Insets />
                                                    </HBox.margin>
                                                    <graphic>
-                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="28" selectionEnd="0" selectionStart="0" />
+                                                      <FontIcon iconColor="WHITE" iconLiteral="typ-th-small" iconSize="32" selectionEnd="0" />
                                                    </graphic>
                                                 </Button>
                                                 <ColorPicker fx:id="colorPicker" focusTraversable="false" maxHeight="-Infinity" prefHeight="35.0" prefWidth="41.0">

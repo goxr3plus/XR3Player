@@ -2,6 +2,7 @@ package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +23,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -130,10 +133,13 @@ public class LoginMode extends StackPane {
 	private ColorPicker colorPicker;
 	
 	@FXML
+	private HBox botttomHBox;
+	
+	@FXML
 	private Label usersInfoLabel;
 	
 	@FXML
-	private HBox botttomHBox;
+	private ToggleGroup sortByGroup;
 	
 	@FXML
 	private Button createFirstUser;
@@ -163,7 +169,7 @@ public class LoginMode extends StackPane {
 	/**
 	 * Allows to see the users in a beautiful way
 	 */
-	public Viewer teamViewer;
+	public Viewer viewer;
 	
 	/**
 	 * The Search Box of the LoginMode
@@ -201,13 +207,13 @@ public class LoginMode extends StackPane {
 				String newName = Main.renameWindow.getUserInput();
 				
 				// if can pass
-				if (!teamViewer.getItemsObservableList().stream().anyMatch(user -> ( (User) user ).getUserName().equalsIgnoreCase(newName))) {
+				if (!viewer.getItemsObservableList().stream().anyMatch(user -> ( (User) user ).getUserName().equalsIgnoreCase(newName))) {
 					
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
 						
 						//Create the new user and add it 
-						User user = new User(newName, teamViewer.getItemsObservableList().size(), LoginMode.this);
-						teamViewer.addItem(user, true);
+						User user = new User(newName, viewer.getItemsObservableList().size(), LoginMode.this);
+						viewer.addItem(user, true);
 						
 						//Add to PieChart
 						//						librariesPieChartData.add(new PieChart.Data(newName, 0));
@@ -265,9 +271,9 @@ public class LoginMode extends StackPane {
 		centerStackPane.getChildren().add(flipPane);
 		
 		//Initialize
-		teamViewer = new Viewer(this, horizontalScrollBar);
-		quickSearchTextField.visibleProperty().bind(teamViewer.searchWordProperty().isEmpty().not());
-		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(teamViewer.searchWordProperty()));
+		viewer = new Viewer(this, horizontalScrollBar);
+		quickSearchTextField.visibleProperty().bind(viewer.searchWordProperty().isEmpty().not());
+		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(viewer.searchWordProperty()));
 		
 		// -- botttomHBox
 		botttomHBox.getChildren().add(userSearchBox);
@@ -277,38 +283,38 @@ public class LoginMode extends StackPane {
 		
 		//newUser
 		createFirstUser.setOnAction(a -> createNewUser(createFirstUser.getGraphic(), true));
-		createFirstUser.visibleProperty().bind(Bindings.size(teamViewer.getItemsObservableList()).isEqualTo(0));
+		createFirstUser.visibleProperty().bind(Bindings.size(viewer.getItemsObservableList()).isEqualTo(0));
 		
 		//loginButton
-		loginButton.setOnAction(a -> Main.startAppWithUser((User) teamViewer.getSelectedItem()));
+		loginButton.setOnAction(a -> Main.startAppWithUser((User) viewer.getSelectedItem()));
 		
 		//openUserContextMenu
 		openUserContextMenu.setOnAction(a -> {
-			User user = (User) teamViewer.getSelectedItem();
+			User user = (User) viewer.getSelectedItem();
 			Bounds bounds = user.localToScreen(user.getBoundsInLocal());
 			userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
 		});
 		
 		//renameUser
 		//renameUser.disableProperty().bind(deleteUser.disabledProperty())
-		renameUser.setOnAction(a -> ( (User) teamViewer.getSelectedItem() ).renameUser(renameUser));
+		renameUser.setOnAction(a -> ( (User) viewer.getSelectedItem() ).renameUser(renameUser));
 		
 		//deleteUser
 		//deleteUser.disableProperty().bind(newUser.visibleProperty())
-		deleteUser.setOnAction(a -> ( (User) Main.loginMode.teamViewer.getSelectedItem() ).deleteUser(deleteUser));
+		deleteUser.setOnAction(a -> ( (User) Main.loginMode.viewer.getSelectedItem() ).deleteUser(deleteUser));
 		
 		//topBorderPane
 		topBorderPane.setRight(new CloseAppBox());
 		
 		// previous
-		previous.setOnAction(a -> teamViewer.previous());
+		previous.setOnAction(a -> viewer.previous());
 		
 		// next
-		next.setOnAction(a -> teamViewer.next());
+		next.setOnAction(a -> viewer.next());
 		
 		//Continue
-		usersStackView.getChildren().add(teamViewer);
-		teamViewer.toBack();
+		usersStackView.getChildren().add(viewer);
+		viewer.toBack();
 		
 		//visitCreatorHyperLink
 		visitCreatorHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE_URL));
@@ -317,9 +323,10 @@ public class LoginMode extends StackPane {
 		youtubeTutorialsHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.TUTORIALS));
 		
 		//----usersInfoLabel
-		usersInfoLabel.textProperty().bind(Bindings.createStringBinding(
-				() -> "[ " + teamViewer.itemsWrapperProperty().sizeProperty().get() + " ] " + English.plural("User", teamViewer.itemsWrapperProperty().sizeProperty().get()),
-				teamViewer.itemsWrapperProperty().sizeProperty()));
+		usersInfoLabel.textProperty()
+				.bind(Bindings.createStringBinding(
+						() -> "[ " + viewer.itemsWrapperProperty().sizeProperty().get() + " ] " + English.plural("User", viewer.itemsWrapperProperty().sizeProperty().get()),
+						viewer.itemsWrapperProperty().sizeProperty()));
 		
 		//== exportDatabase
 		exportDatabase.setOnAction(a -> Main.sideBar.exportDatabase());
@@ -333,7 +340,7 @@ public class LoginMode extends StackPane {
 		//== color picker
 		String defaultWebColor = "#ef4949";
 		colorPicker.setValue(Color.web(defaultWebColor));
-		teamViewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
+		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
 		colorPicker.setOnAction(a -> Main.applicationProperties.updateProperty("Users-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
 		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
 			
@@ -341,8 +348,53 @@ public class LoginMode extends StackPane {
 			String webColor = JavaFXTools.colorToWebColor(newColor);
 			
 			//Set the style
-			this.teamViewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
+			this.viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
 		});
+		//sortByGroup
+		sortByGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue == null)
+				return;
+			
+			//Continue
+			String text = ( (RadioMenuItem) newValue ).getText();
+			
+			//Create a custom comparator
+			viewer.sortByComparator(getSortComparator());
+		});
+	}
+	
+	/**
+	 * Return the text of the selected sort toggle
+	 * 
+	 * @return
+	 */
+	public String getSelectedSortToggleText() {
+		return ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
+	}
+	
+	/**
+	 * Get the sort comparator
+	 * 
+	 * @return
+	 */
+	public Comparator<Node> getSortComparator() {
+		String text = ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
+		
+		if (text.equalsIgnoreCase("Name Ascendant")) {
+			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) a ).getUserName(), ( (User) b ).getUserName());
+		} else if (text.equalsIgnoreCase("Name Descendant")) {
+			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) b ).getUserName(), ( (User) a ).getUserName());
+		} else if (text.equalsIgnoreCase("Libraries  Ascendant")) {
+			return (a , b) -> Double.compare( ( (User) b ).getTotalLibraries(), ( (User) a ).getTotalLibraries());
+		} else if (text.equalsIgnoreCase("Libraries  Descendant")) {
+			return (a , b) -> Double.compare( ( (User) a ).getTotalLibraries(), ( (User) b ).getTotalLibraries());
+		} else if (text.equalsIgnoreCase("Dropbox Accounts  Ascendant")) {
+			return (a , b) -> Double.compare( ( (User) b ).getTotalDropboxAccounts(), ( (User) a ).getTotalDropboxAccounts());
+		} else if (text.equalsIgnoreCase("Dropbox Accounts  Descendant")) {
+			return (a , b) -> Double.compare( ( (User) a ).getTotalDropboxAccounts(), ( (User) b ).getTotalDropboxAccounts());
+		}
+		
+		return null;
 	}
 	
 	/**
