@@ -183,7 +183,7 @@
                                                                   </Button>
                                                                   <HBox alignment="CENTER" spacing="3.0">
                                                                      <children>
-                                                                        <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="arrowButton2" text=" ">
+                                                                        <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 45 0 0 45;" styleClass="jfx-button4" text=" ">
                                                                            <tooltip>
                                                                               <Tooltip text="Previous" />
                                                                            </tooltip>
@@ -199,7 +199,7 @@
                                                                               <FontIcon iconColor="WHITE" iconLiteral="typ-user-add" iconSize="38" selectionEnd="0" />
                                                                            </graphic>
                                                                         </JFXButton>
-                                                                        <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="arrowButton2" text=" ">
+                                                                        <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" style="-fx-background-radius: 0 45 45 0;" styleClass="jfx-button4" text=" ">
                                                                            <tooltip>
                                                                               <Tooltip text="Next" />
                                                                            </tooltip>
