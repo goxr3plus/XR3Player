@@ -72,8 +72,9 @@ public class SearchBox extends HBox {
 		
 		// SearchField
 		searchField.setFocusTraversable(false);
-		searchField.setMinWidth(280);
-		searchField.setPrefWidth(280);
+		searchField.setMinWidth(100);
+		searchField.setPrefWidth(200);
+		searchField.setMaxWidth(Integer.MAX_VALUE);
 		if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
 			searchField.setPromptText("Search Users...");
 		else if (searchBoxType == SearchBoxType.LIBRARYSEARCHBOX)
@@ -101,7 +102,7 @@ public class SearchBox extends HBox {
 		getChildren().add(searchField);
 		
 		// searchBoxWindow
-		searchBoxWindow.getWindow().setWidth(searchField.getPrefWidth());
+		//searchBoxWindow.getWindow().setWidth(searchField.getPrefWidth());
 		
 	}
 	
