@@ -141,9 +141,6 @@ public class Library extends StackPane {
 	/** The save mode. */
 	private SaveMode saveMode;
 	
-	/** The position. */
-	//private int position = -1;
-	
 	/** The name of the database image [Example : image.jpg ] */
 	private String imageName;
 	
@@ -608,18 +605,18 @@ public class Library extends StackPane {
 	 * @param newPosition
 	 *            The new position of the Library
 	 */
-//	public void updatePosition(int newPosition) {
-//		try (PreparedStatement libUPosition = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;")) {
-//			position = newPosition;
-//			
-//			// SQLITE
-//			libUPosition.setInt(1, newPosition);
-//			libUPosition.setString(2, getLibraryName());
-//			libUPosition.executeUpdate();
-//		} catch (SQLException ex) {
-//			logger.log(Level.WARNING, "", ex);
-//		}
-//	}
+	//	public void updatePosition(int newPosition) {
+	//		try (PreparedStatement libUPosition = Main.dbManager.getConnection().prepareStatement("UPDATE LIBRARIES SET POSITION=?  WHERE NAME=?;")) {
+	//			position = newPosition;
+	//			
+	//			// SQLITE
+	//			libUPosition.setInt(1, newPosition);
+	//			libUPosition.setString(2, getLibraryName());
+	//			libUPosition.executeUpdate();
+	//		} catch (SQLException ex) {
+	//			logger.log(Level.WARNING, "", ex);
+	//		}
+	//	}
 	
 	/**
 	 * Updates the Image File.
@@ -1295,9 +1292,12 @@ public class Library extends StackPane {
 			else if (code == KeyCode.I)
 				Main.libraryMode.libraryInformation.showWindow(this);
 			else if (code == KeyCode.E)
-				this.exportImage();
-		} else if (key.getCode() == KeyCode.ENTER)
+				exportImage();
+		} else if (key.getCode() == KeyCode.ENTER) {
 			setLibraryStatus(isOpened() ? LibraryStatus.CLOSED : LibraryStatus.OPENED, false);
+		} else if (key.getCode() == KeyCode.DELETE) {
+			Main.libraryMode.deleteLibraries(this, null);
+		}
 	}
 	
 	/*------------------------------------------------------------------------

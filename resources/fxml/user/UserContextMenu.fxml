@@ -7,14 +7,9 @@
 
 <fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <MenuItem fx:id="open" mnemonicParsing="false" text="Open (CTRL + O)">
+      <MenuItem fx:id="login" mnemonicParsing="false" text="Login ( Enter )">
          <graphic>
             <FontIcon iconColor="#d4ff00" iconLiteral="far-folder-open" iconSize="24" selectionEnd="0" />
-         </graphic>
-      </MenuItem>
-      <MenuItem fx:id="close" mnemonicParsing="false" text="Close (CTRL + C)">
-         <graphic>
-            <FontIcon iconColor="#d4ff00" iconLiteral="far-folder" iconSize="24" selectionEnd="0" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="rename" mnemonicParsing="false" text="Rename (CTRL + R)">

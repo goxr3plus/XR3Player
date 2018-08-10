@@ -726,7 +726,7 @@ public class Main extends Application {
 			s.start();
 			
 			//Do the below until the database is initialized
-			userInfoMode.setUser(selectedUser);
+			userInfoMode.displayForUser(selectedUser);
 			
 			try {
 				s.join();

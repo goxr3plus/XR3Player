@@ -119,10 +119,10 @@ public class User extends StackPane {
 									+ InfoTool.USER_INFORMATION_FILE_NAME);
 							
 							//Change Pie Data Name
-//							Main.loginMode.getSeries().getData().forEach(pieData -> {
-//								if (pieData.getXValue().equals(InfoTool.getMinString(oldName, 4)))
-//									pieData.setXValue(InfoTool.getMinString(newName, 4));
-//							});
+							//							Main.loginMode.getSeries().getData().forEach(pieData -> {
+							//								if (pieData.getXValue().equals(InfoTool.getMinString(oldName, 4)))
+							//									pieData.setXValue(InfoTool.getMinString(newName, 4));
+							//							});
 						} else
 							ActionTool.showNotification("Error", "An error occured trying to rename the user", Duration.seconds(2), NotificationType.ERROR);
 						
@@ -221,10 +221,7 @@ public class User extends StackPane {
 		});
 		
 		// ----InformationLabel
-		informationLabel.setOnMouseReleased(m -> {
-			if (Main.loginMode.teamViewer.centerItemProperty().get() == User.this)
-				Main.loginMode.userInformation.setUser(this);
-		});
+		informationLabel.setOnMouseReleased(m -> displayInformation());
 		
 		// ----DescriptionLabel
 		descriptionLabel.visibleProperty().bind(descriptionProperty.isEmpty().not());
@@ -234,12 +231,20 @@ public class User extends StackPane {
 		warningLabel.setVisible(false);
 	}
 	
-//	/**
-//	 * @return The Position of the user inside the list
-//	 */
-//	public int getPosition() {
-//		return position;
-//	}
+	/**
+	 * Open display information stack pane for this user
+	 */
+	public void displayInformation() {
+		if (Main.loginMode.teamViewer.centerItemProperty().get() == User.this)
+			Main.loginMode.userInformation.displayForUser(this);
+	}
+	
+	//	/**
+	//	 * @return The Position of the user inside the list
+	//	 */
+	//	public int getPosition() {
+	//		return position;
+	//	}
 	
 	/**
 	 * @return the userName
@@ -287,13 +292,13 @@ public class User extends StackPane {
 			nameField.setText(userName);
 	}
 	
-//	/**
-//	 * @param position
-//	 *            the position to set
-//	 */
-//	public void updatePosition(int position) {
-//		this.position = position;
-//	}
+	//	/**
+	//	 * @param position
+	//	 *            the position to set
+	//	 */
+	//	public void updatePosition(int position) {
+	//		this.position = position;
+	//	}
 	
 	/**
 	 * Renames the current User.
@@ -317,8 +322,8 @@ public class User extends StackPane {
 	 */
 	public void deleteUser(Node owner) {
 		//Ask
-		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.teamViewer.getSelectedItem() ).getUserName() + " ]",
-				owner, Main.window)) {
+		if (ActionTool.doQuestion("Delete User",
+				"Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.teamViewer.getSelectedItem() ).getUserName() + " ]", owner, Main.window)) {
 			
 			//Try to delete it		
 			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getUserName()))) {
@@ -360,7 +365,9 @@ public class User extends StackPane {
 				exportImage();
 		} else if (key.getCode() == KeyCode.ENTER) {
 			Main.startAppWithUser(this);
-		}
+		} else if (key.getCode() == KeyCode.DELETE) {
+			deleteUser(this);
+		} 
 	}
 	
 	//----------------------------------------About Images---------------------------------------------------------------

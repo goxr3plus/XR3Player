@@ -668,9 +668,6 @@ public class Viewer extends Region {
 		else if (!leftGroup.getChildren().isEmpty())
 			centerIndex = leftGroup.getChildren().size() - 1;
 		else
-			// if (!rightGroup.getChildren().isEmpty())	
-			// centerIndex = 0	
-			// else
 			centerIndex = 0;
 		
 		// Max

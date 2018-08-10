@@ -99,7 +99,7 @@ public class UserInformation extends StackPane {
 	 * @param user
 	 *            The given user
 	 */
-	public void setUser(User user) {
+	public void displayForUser(User user) {
 		this.user = user;
 		
 		//--UserName

@@ -1,18 +1,21 @@
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode;
 
+import java.io.IOException;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.presenter.TitleMenuItem;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode
@@ -22,62 +25,71 @@ import main.java.com.goxr3plus.xr3player.application.presenter.TitleMenuItem;
  */
 public class UserContextMenu extends ContextMenu {
 	
-	/** The Login. */
-	MenuItem login = new MenuItem("Login");
+	// -------------------------------------------------------------
 	
-	/** The rename. */
-	MenuItem rename = new MenuItem("Rename(CTRL + R)");
+	@FXML
+	private MenuItem login;
 	
-	/** The delete. */
-	MenuItem delete = new MenuItem("Delete(CTRL + D)");
+	@FXML
+	private MenuItem rename;
 	
-	/** The image. */
-	Menu image = new Menu("Image");
+	@FXML
+	private MenuItem delete;
 	
-	/** The set image. */
-	Menu setImage = new Menu("change...");
+	@FXML
+	private MenuItem changeImage;
 	
-	/** The local image. */
-	MenuItem localImage = new MenuItem("local");
+	@FXML
+	private MenuItem resetImage;
 	
-	/** The internet image. */
-	MenuItem internetImage = new MenuItem("internet");
+	@FXML
+	private MenuItem exportImage;
 	
-	/** The export image. */
-	MenuItem exportImage = new MenuItem("export...(CTRL + E)");
+	@FXML
+	private MenuItem moreInfo;
 	
-	/** The reset image. */
-	MenuItem resetImage = new MenuItem("default");
+	// -------------------------------------------------------------
 	
-	/** The library. */
 	private User user;
 	
 	/**
 	 * Instantiates a new library context menu.
-	 * 
-	 * @param loginMode
 	 */
 	// Constructor
-	public UserContextMenu(LoginMode loginMode) {
+	public UserContextMenu() {
+		
+		// ------------------------------------FXMLLOADER ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "UserContextMenu.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Called as soon as .FXML is loaded from FXML Loader
+	 */
+	@FXML
+	private void initialize() {
+		
 		login.setOnAction(a -> Main.startAppWithUser(user));
 		
 		rename.setOnAction(ac -> user.renameUser(user));
 		
-		localImage.setOnAction(ac -> user.changeUserImage());
+		changeImage.setOnAction(ac -> user.changeUserImage());
 		
 		resetImage.setOnAction(ac -> user.setDefaultImage());
 		
 		exportImage.setOnAction(a -> user.exportImage());
 		
-		delete.setOnAction(ac -> ( (User) loginMode.teamViewer.getSelectedItem() ).deleteUser(user));
+		delete.setOnAction(ac -> ( (User) Main.loginMode.teamViewer.getSelectedItem() ).deleteUser(user));
 		
-		internetImage.setDisable(true);
-		// exportImage.setDisable(true)
-		
-		setImage.getItems().addAll(localImage, internetImage);
-		image.getItems().addAll(setImage, exportImage, resetImage);
-		
-		getItems().addAll(new TitleMenuItem("Common"), login, rename, new TitleMenuItem("Other"), image, delete);
+		moreInfo.setOnAction(a -> user.displayInformation());
 		
 	}
 	
