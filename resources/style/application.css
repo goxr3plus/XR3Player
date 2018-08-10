@@ -2200,13 +2200,17 @@
     -fx-font-weight:bold;
 }
 
-.jfx-button-dark-white-selection{
+.jfx-button-dark-white-selection,.split-menu-button:openvertically,.split-menu-button2 .label .text,.split-menu-button2 .arrow-button{
 	 -fx-background-color:rgb(20.0,20.0,20.0) !important;
     -fx-text-fill:white !important;
     -fx-background-radius: 0.0px;
     -fx-background-insets: 0.0px;
     -fx-cursor:hand;
     -fx-font-weight:bold;
+}
+
+.split-menu-button2 .arrow-button .arrow{
+	 -fx-background-color:white;
 }
 
 .dark-menu-button .label{
@@ -2379,5 +2383,7 @@
 	-fx-fill:white;
 	-fx-font-weight:bold;
 }
+
+
 
 

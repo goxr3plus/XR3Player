@@ -32,8 +32,10 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -125,10 +127,13 @@ public class LibraryMode extends BorderPane {
 	private HBox botttomHBox;
 	
 	@FXML
+	private Label librariesInfoLabel;
+	
+	@FXML
 	private CheckBox multipleSelection;
 	
 	@FXML
-	private Label librariesInfoLabel;
+	private ToggleGroup sortByGroup;
 	
 	@FXML
 	private Button createFirstLibrary;
@@ -384,7 +389,7 @@ public class LibraryMode extends BorderPane {
 		renameLibrary.setOnAction(a -> ( (Library) viewer.centerItemProperty().get() ).renameLibrary(renameLibrary));
 		
 		// -- deleteLibrary
-		deleteLibrary.setOnAction(a -> deleteLibraries(null,deleteLibrary));
+		deleteLibrary.setOnAction(a -> deleteLibraries(null, deleteLibrary));
 		
 		// -- openOrCloseLibrary 
 		viewer.centerItemProperty().addListener((observable , oldValue , newValue) -> {
@@ -438,6 +443,30 @@ public class LibraryMode extends BorderPane {
 			viewer.getItemsObservableList().forEach(library -> ( (Library) library ).goOnSelectionMode(selected));
 		});
 		
+		//sortByGroup
+		sortByGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue == null)
+				return;
+			
+			//Continue
+			String text = ( (RadioMenuItem) newValue ).getText();
+			System.out.println("Sorting libraries :" + text);
+			
+			//Create a custom comparator
+			if (text.equalsIgnoreCase("Name Ascendant")) {
+				viewer.setSortComparator((a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) a ).getLibraryName(), ( (Library) b ).getLibraryName()));
+			} else if (text.equalsIgnoreCase("Name Descendant")) {
+				viewer.setSortComparator((a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) b ).getLibraryName(), ( (Library) a ).getLibraryName()));
+			} else if (text.equalsIgnoreCase("Stars  Ascendant")) {
+				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) a ).getStars(), ( (Library) b ).getStars()));
+			} else if (text.equalsIgnoreCase("Stars  Descendant")) {
+				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) b ).getStars(), ( (Library) a ).getStars()));
+			} else if (text.equalsIgnoreCase("Total Media  Ascendant")) {
+				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) a ).getTotalEntries(), ( (Library) b ).getTotalEntries()));
+			} else if (text.equalsIgnoreCase("Total Media  Descendant")) {
+				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) b ).getTotalEntries(), ( (Library) a ).getTotalEntries()));
+			}
+		});
 	}
 	
 	/**

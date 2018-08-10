@@ -10,8 +10,10 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -187,6 +189,23 @@
                                                             <FontIcon iconColor="#ffb31b" iconLiteral="fab-buromobelexperte" iconSize="32" />
                                                          </graphic>
                                                       </CheckBox>
+                                                      <MenuButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="dark-menu-button" text="Sort">
+                                                        <items>
+                                                            <RadioMenuItem mnemonicParsing="false" selected="true" text="Name Ascendant">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="sortByGroup" />
+                                                               </toggleGroup>
+                                                            </RadioMenuItem>
+                                                            <RadioMenuItem mnemonicParsing="false" text="Name Descendant" toggleGroup="$sortByGroup" />
+                                                            <RadioMenuItem mnemonicParsing="false" text="Stars  Ascendant" toggleGroup="$sortByGroup" />
+                                                            <RadioMenuItem mnemonicParsing="false" text="Stars  Descendant" toggleGroup="$sortByGroup" />
+                                                            <RadioMenuItem mnemonicParsing="false" text="Total Media  Ascendant" toggleGroup="$sortByGroup" />
+                                                            <RadioMenuItem mnemonicParsing="false" text="Total Media  Descendant" toggleGroup="$sortByGroup" />
+                                                        </items>
+                                                         <graphic>
+                                                            <FontIcon iconColor="#ffb31b" iconLiteral="fas-sort-alpha-down" iconSize="24" />
+                                                         </graphic>
+                                                      </MenuButton>
                                                    </children>
                                                 </HBox>
                                              </center>

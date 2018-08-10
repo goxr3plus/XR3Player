@@ -1,5 +1,6 @@
 package main.java.com.goxr3plus.xr3player.application.presenter;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.animation.Animation.Status;
@@ -390,6 +391,15 @@ public class Viewer extends Region {
 		previousWidth = (int) width;
 		previousHeight = (int) height;
 		
+	}
+	
+	/**
+	 * Set a custom comporator to the sortList
+	 * 
+	 * @param comparator
+	 */
+	public void setSortComparator(Comparator<? super Node> comparator) {
+		this.sortedList.setComparator(comparator);
 	}
 	
 	/**
