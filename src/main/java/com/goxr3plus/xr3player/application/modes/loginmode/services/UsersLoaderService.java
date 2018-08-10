@@ -132,12 +132,12 @@ public class UsersLoaderService extends Service<Boolean> {
 							//System.out.println("UsersInformationDb doesn't Exists"); //debugging
 							
 							//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
-							ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
+							ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName() + File.separator + "settings"),
 									FileType.DIRECTORY);
 							ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()), FileType.FILE);
 							
 							//Check if the database of this user exists
-							String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "dbFile.db";
+							String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName() + File.separator + "dbFile.db";
 							if (new File(dbFileAbsolutePath).exists()) {
 								
 								// --Create connection and load user information
@@ -185,7 +185,7 @@ public class UsersLoaderService extends Service<Boolean> {
 						//-----------------IT PARSES THE settings.json file from the previous updates which was holding information
 						//-----------------about open libraries and and the last opened library , now that information are stored
 						//-----------------on the userInformation.properties file ;)
-						String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings.json";
+						String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName() + File.separator + "settings.json";
 						
 						//Check if the file exists -- make the simple magic
 						if (new File(jsonFilePath).exists()) {

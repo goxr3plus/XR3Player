@@ -207,7 +207,7 @@ public class LoginMode extends StackPane {
 				String newName = Main.renameWindow.getUserInput();
 				
 				// if can pass
-				if (!viewer.getItemsObservableList().stream().anyMatch(user -> ( (User) user ).getUserName().equalsIgnoreCase(newName))) {
+				if (!viewer.getItemsObservableList().stream().anyMatch(user -> ( (User) user ).getName().equalsIgnoreCase(newName))) {
 					
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
 						
@@ -220,7 +220,7 @@ public class LoginMode extends StackPane {
 						//series.getData().add(new XYChart.Data<String,Number>(newName, 0));
 						
 						//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
-						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getUserName() + File.separator + "settings"),
+						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName() + File.separator + "settings"),
 								FileType.DIRECTORY);
 						ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()), FileType.FILE);
 						
@@ -355,9 +355,6 @@ public class LoginMode extends StackPane {
 			if (newValue == null)
 				return;
 			
-			//Continue
-			String text = ( (RadioMenuItem) newValue ).getText();
-			
 			//Create a custom comparator
 			viewer.sortByComparator(getSortComparator());
 		});
@@ -381,9 +378,9 @@ public class LoginMode extends StackPane {
 		String text = ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
 		
 		if (text.equalsIgnoreCase("Name Ascendant")) {
-			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) a ).getUserName(), ( (User) b ).getUserName());
+			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) a ).getName(), ( (User) b ).getName());
 		} else if (text.equalsIgnoreCase("Name Descendant")) {
-			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) b ).getUserName(), ( (User) a ).getUserName());
+			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) b ).getName(), ( (User) a ).getName());
 		} else if (text.equalsIgnoreCase("Libraries  Ascendant")) {
 			return (a , b) -> Double.compare( ( (User) b ).getTotalLibraries(), ( (User) a ).getTotalLibraries());
 		} else if (text.equalsIgnoreCase("Libraries  Descendant")) {

@@ -449,9 +449,6 @@ public class LibraryMode extends BorderPane {
 			if (newValue == null)
 				return;
 			
-			//Continue
-			String text = ( (RadioMenuItem) newValue ).getText();
-			
 			//Create a custom comparator
 			viewer.sortByComparator(getSortComparator());
 		});

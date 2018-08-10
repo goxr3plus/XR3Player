@@ -111,16 +111,8 @@ import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * 
- *  /       ////       ____
- *  /       ////      /----\
- *  /       ////      |----|
- *  /       ////      |----|
- *  /       ////      |----|      HALLO MADAFUCKER            
- *  /       ////      |----|        
- *  /       ////     /   |  \
- *  /       ////    |    |   |
- *  /       ////     \___|__/
- * The Main class from which the application is starting.
+ * / //// ____ / //// /----\ / //// |----| / //// |----| / //// |----| HALLO MADAFUCKER / //// |----| / //// / | \ / //// | | | / //// \___|__/ The
+ * Main class from which the application is starting.
  *
  * @author GOXR3PLUS STUDIO
  */
@@ -370,6 +362,17 @@ public class Main extends Application {
 			else
 				welcomeScreen.hideWelcomeScreen();
 		}, () -> welcomeScreen.showWelcomeScreen());
+		
+		//Last Logged in user
+		Optional.ofNullable(properties.getProperty("Last-LoggedIn-User")).ifPresent(userName -> {
+			//Check if any user with that name exists
+			Main.loginMode.viewer.getItemsObservableList().stream().filter(item -> ( (User) item ).getName().equals(userName))
+					//Set center item
+					.forEach(item -> {
+						Main.loginMode.viewer.setCenterItem(item);
+						//Main.loginMode.viewer.update()
+					});
+		});
 		
 		//Users Color Picker
 		Optional.ofNullable(properties.getProperty("Users-Background-Color")).ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
@@ -722,7 +725,7 @@ public class Main extends Application {
 		pause.setOnFinished(f -> {
 			
 			//Create this in a Thread
-			Thread s = new Thread(() -> dbManager.initialize(selectedUser.getUserName()));
+			Thread s = new Thread(() -> dbManager.initialize(selectedUser.getName()));
 			s.start();
 			
 			//Do the below until the database is initialized
@@ -738,10 +741,10 @@ public class Main extends Application {
 			if (loginMode.viewer.getItemsObservableList().size() == 1)
 				settingsWindow.getCopySettingsMenuButton().setDisable(true);
 			else
-				loginMode.viewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getUserName().equals(selectedUser.getUserName())).forEach(userr -> {
+				loginMode.viewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getName().equals(selectedUser.getName())).forEach(userr -> {
 					
 					//Create the MenuItem
-					MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getUserName(), 50));
+					MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getName(), 50));
 					
 					//Set Image
 					ImageView imageView = new ImageView( ( (User) userr ).getImageView().getImage());
@@ -760,14 +763,14 @@ public class Main extends Application {
 							new Thread(() -> {
 								
 								//Delete the current settings from the User
-								ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings"
+								ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName() + File.separator + "settings"
 										+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
 								
 								//Transfer the settings from the other user
 								ActionTool.copy(
-										InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getUserName() + File.separator + "settings" + File.separator
+										InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getName() + File.separator + "settings" + File.separator
 												+ InfoTool.USER_SETTINGS_FILE_NAME,
-										InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getUserName() + File.separator + "settings" + File.separator
+										InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName() + File.separator + "settings" + File.separator
 												+ InfoTool.USER_SETTINGS_FILE_NAME);
 								
 								//Reload the application settings now...							
@@ -777,7 +780,7 @@ public class Main extends Application {
 					});
 					
 					//Disable if user has no settings defined
-					if (!new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getUserName() + File.separator + "settings" + File.separator
+					if (!new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getName() + File.separator + "settings" + File.separator
 							+ InfoTool.USER_SETTINGS_FILE_NAME).exists())
 						menuItem.setDisable(true);
 					
@@ -791,6 +794,9 @@ public class Main extends Application {
 			
 			//----Bind Label to User Name
 			sideBar.getNameLabel().setText(userInfoMode.getUserName().getText());
+			
+			//---Store this user as last logged in user
+			Main.applicationProperties.updateProperty("Last-LoggedIn-User", selectedUser.getName());
 			
 			//---------------END:Important Work-----------------------------------------------------------
 			

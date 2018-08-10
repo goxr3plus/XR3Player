@@ -293,7 +293,7 @@ public class DatabaseManager {
 	
 	//-------------------------------------------------------------------
 	public Optional<User> getOpenedUser() {
-		return (Optional<User>) Main.loginMode.viewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getUserName().equals(InfoTool.getUserName()))
+		return (Optional<User>) Main.loginMode.viewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getName().equals(InfoTool.getUserName()))
 				.map(user -> (User) user).findFirst();
 	}
 	

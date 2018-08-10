@@ -191,8 +191,8 @@ public class SearchBox extends HBox {
 					
 					// matcher
 					if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
-						Main.loginMode.viewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getUserName().toLowerCase().contains(word)).forEach(user -> {
-							Platform.runLater(() -> getSearchBoxWindow().addItem( ( (User) user ).getUserName(), ac -> Main.loginMode.viewer.setCenterItem(user)));
+						Main.loginMode.viewer.getItemsObservableList().stream().filter(user -> ( (User) user ).getName().toLowerCase().contains(word)).forEach(user -> {
+							Platform.runLater(() -> getSearchBoxWindow().addItem( ( (User) user ).getName(), ac -> Main.loginMode.viewer.setCenterItem(user)));
 							++found;
 						});
 					else if (searchBoxType == SearchBoxType.LIBRARYSEARCHBOX)

@@ -198,7 +198,7 @@ public class Viewer extends Region {
 					else if (loginMode != null) //LoginMode
 						//Find the first matching item
 						getItemsObservableList().forEach(user -> {
-							if ( ( (User) user ).getUserName().contains(searchWord.get()) && !found[0]) {
+							if ( ( (User) user ).getName().contains(searchWord.get()) && !found[0]) {
 								this.setCenterItem(user);
 								found[0] = true;
 							}
@@ -713,6 +713,8 @@ public class Viewer extends Region {
 	 * @param item
 	 */
 	public void setCenterItem(Node item) {
+		if (item == null)
+			return;
 		setCenterIndex(getNotNullList().indexOf(item));
 	}
 	

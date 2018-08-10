@@ -91,7 +91,7 @@ public class User extends StackPane {
 			if (!Main.renameWindow.isShowing()) {
 				
 				// old && new -> name
-				String oldName = getUserName();
+				String oldName = getName();
 				String newName = Main.renameWindow.getUserInput();
 				boolean success = false;
 				
@@ -102,7 +102,7 @@ public class User extends StackPane {
 				if (Main.renameWindow.wasAccepted()) {
 					
 					// duplicate?
-					if (!Main.loginMode.viewer.getItemsObservableList().stream().anyMatch(user -> user != User.this && ( (User) user ).getUserName().equalsIgnoreCase(newName))
+					if (!Main.loginMode.viewer.getItemsObservableList().stream().anyMatch(user -> user != User.this && ( (User) user ).getName().equalsIgnoreCase(newName))
 							|| newName.equalsIgnoreCase(oldName)) {
 						
 						File originalFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + oldName);
@@ -112,7 +112,7 @@ public class User extends StackPane {
 						if (originalFolder.renameTo(outputFolder)) { //Success			
 							success = true;
 							setUserName(nameField.getText());
-							nameField.getTooltip().setText(getUserName());
+							nameField.getTooltip().setText(getName());
 							
 							//Change the absolute path of the UserInformation.properties file
 							getUserInformationDb().setFileAbsolutePath(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator + "settings" + File.separator
@@ -147,7 +147,7 @@ public class User extends StackPane {
 		 * Resets the name if the user cancels the rename operation
 		 */
 		private void resetTheName() {
-			nameField.setText(getUserName());
+			nameField.setText(getName());
 		}
 	};
 	
@@ -210,15 +210,15 @@ public class User extends StackPane {
 		// this.setEffect(reflection);
 		
 		//imageView
-		String absoluteImagePath = JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
+		String absoluteImagePath = JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 		if (absoluteImagePath == null)
 			setDefaultImage();
 		else
 			imageView.setImage(new Image(new File(absoluteImagePath).toURI() + ""));
 		
 		//Name
-		nameField.setText(getUserName());
-		nameField.getTooltip().setText(getUserName());
+		nameField.setText(getName());
+		nameField.getTooltip().setText(getName());
 		nameField.setOnMouseReleased(m -> {
 			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2 && Main.loginMode.viewer.centerItemProperty().get() == User.this)// Main.loginMode.teamViewer.getTimeline().getStatus() != Status.RUNNING)
 				renameUser(nameField);
@@ -253,7 +253,7 @@ public class User extends StackPane {
 	/**
 	 * @return the userName
 	 */
-	public String getUserName() {
+	public String getName() {
 		return userName;
 	}
 	
@@ -321,7 +321,7 @@ public class User extends StackPane {
 	public void renameUser(Node node) {
 		
 		// Open the Window
-		Main.renameWindow.show(getUserName(), node, "User Renaming", FileCategory.DIRECTORY);
+		Main.renameWindow.show(getName(), node, "User Renaming", FileCategory.DIRECTORY);
 		
 		// Bind 
 		nameField.textProperty().bind(Main.renameWindow.getInputField().textProperty());
@@ -335,10 +335,10 @@ public class User extends StackPane {
 	public void deleteUser(Node owner) {
 		//Ask
 		if (ActionTool.doQuestion("Delete User",
-				"Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.viewer.getSelectedItem() ).getUserName() + " ]", owner, Main.window)) {
+				"Confirm that you want to 'delete' this user ,\n Name: [ " + ( (User) Main.loginMode.viewer.getSelectedItem() ).getName() + " ]", owner, Main.window)) {
 			
 			//Try to delete it		
-			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getUserName()))) {
+			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
 				
 				//Delete from the Model Viewer
 				Main.loginMode.viewer.deleteItem(this);
@@ -403,7 +403,7 @@ public class User extends StackPane {
 	public void changeUserImage() {
 		
 		//Check the response
-		JavaFXTools.selectAndSaveImage("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName(), Main.specialChooser, Main.window)
+		JavaFXTools.selectAndSaveImage("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName(), Main.specialChooser, Main.window)
 				.ifPresent(imageFile -> imageView.setImage(new Image(imageFile.toURI() + "")));
 	}
 	
@@ -424,7 +424,7 @@ public class User extends StackPane {
 		if (file != null)
 			new Thread(() -> {
 				if (!ActionTool.copy(absoluteImagePath, file.getAbsolutePath()))
-					Platform.runLater(() -> ActionTool.showNotification("Exporting User Image", "Failed to export User image for \n User=[" + getUserName() + "]",
+					Platform.runLater(() -> ActionTool.showNotification("Exporting User Image", "Failed to export User image for \n User=[" + getName() + "]",
 							Duration.millis(2500), NotificationType.SIMPLE));
 			}).start();
 		
@@ -436,7 +436,7 @@ public class User extends StackPane {
 	private boolean deleteUserImage() {
 		
 		//Delete the User Image
-		JavaFXTools.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
+		JavaFXTools.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 		
 		return true;
 	}
@@ -447,7 +447,7 @@ public class User extends StackPane {
 	 * @return
 	 */
 	public String getAbsoluteImagePath() {
-		return JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
+		return JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 	}
 	
 	/**
