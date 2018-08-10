@@ -367,7 +367,7 @@ public class User extends StackPane {
 			Main.startAppWithUser(this);
 		} else if (key.getCode() == KeyCode.DELETE) {
 			deleteUser(this);
-		} 
+		}
 	}
 	
 	//----------------------------------------About Images---------------------------------------------------------------
@@ -400,7 +400,8 @@ public class User extends StackPane {
 	 */
 	public void exportImage() {
 		
-		String absoluteImagePath = JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
+		String absoluteImagePath = getAbsoluteImagePath();
+		
 		//Check if image exists
 		if (absoluteImagePath == null)
 			return;
@@ -426,6 +427,15 @@ public class User extends StackPane {
 		JavaFXTools.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
 		
 		return true;
+	}
+	
+	/**
+	 * The absolute path of the user image in the local system
+	 * 
+	 * @return
+	 */
+	public String getAbsoluteImagePath() {
+		return JavaFXTools.getAbsoluteImagePath("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getUserName());
 	}
 	
 	/**

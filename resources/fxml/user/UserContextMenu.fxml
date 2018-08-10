@@ -9,7 +9,7 @@
    <items>
       <MenuItem fx:id="login" mnemonicParsing="false" text="Login ( Enter )">
          <graphic>
-            <FontIcon iconColor="#d4ff00" iconLiteral="far-folder-open" iconSize="24" selectionEnd="0" />
+            <FontIcon iconColor="#d4ff00" iconLiteral="ri-lock-open" iconSize="24" selectionEnd="0" />
          </graphic>
       </MenuItem>
       <MenuItem fx:id="rename" mnemonicParsing="false" text="Rename (CTRL + R)">

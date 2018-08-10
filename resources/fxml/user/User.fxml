@@ -92,7 +92,7 @@
             <FontIcon iconColor="#e8216a" iconLiteral="gmi-library-music" iconSize="42" />
          </graphic>
       </Label>
-      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: #202020; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17; -fx-border-color: transparent firebrick transparent firebrick;" text="Name" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER">
+      <Label fx:id="nameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-background-color: #202020; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 17;" text="Name" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER">
          <tooltip>
             <Tooltip />
          </tooltip>

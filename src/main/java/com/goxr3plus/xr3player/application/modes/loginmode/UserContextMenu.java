@@ -109,7 +109,7 @@ public class UserContextMenu extends ContextMenu {
 		this.user = user;
 		
 		// customize the menu accordingly
-		exportImage.setDisable(user.getImageView().getImage() == null);
+		exportImage.setDisable(user.getAbsoluteImagePath() == null);
 		resetImage.setDisable(exportImage.isDisable());
 		
 		//Fix first time show problem
