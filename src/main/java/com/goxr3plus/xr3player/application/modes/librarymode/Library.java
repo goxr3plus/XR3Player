@@ -572,10 +572,9 @@ public class Library extends StackPane {
 				Main.dbManager.commit();
 				
 				//Sort if comparator is selected
-				if (Main.libraryMode.getSelectedSortToggleText().contains("Stars")) {
-					System.out.println("It contains starssss!!!");
-					Main.libraryMode.viewer.update();
-				}
+				if (Main.libraryMode.getSelectedSortToggleText().contains("Stars"))
+					Main.libraryMode.viewer.sortByComparator(Main.libraryMode.getSortComparator());
+				
 			} catch (SQLException ex) {
 				logger.log(Level.WARNING, "", ex);
 			}
@@ -988,7 +987,7 @@ public class Library extends StackPane {
 		
 		//Sort if comparator is selected
 		if (Main.libraryMode.getSelectedSortToggleText().contains("Name"))
-			Main.libraryMode.viewer.update();
+			Main.libraryMode.viewer.sortByComparator(Main.libraryMode.getSortComparator());
 	}
 	
 	/**

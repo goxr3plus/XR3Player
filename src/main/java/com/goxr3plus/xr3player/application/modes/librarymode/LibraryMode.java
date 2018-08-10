@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -452,21 +453,7 @@ public class LibraryMode extends BorderPane {
 			String text = ( (RadioMenuItem) newValue ).getText();
 			
 			//Create a custom comparator
-			if (text.equalsIgnoreCase("Name Ascendant")) {
-				viewer.setSortComparator((a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) a ).getLibraryName(), ( (Library) b ).getLibraryName()));
-			} else if (text.equalsIgnoreCase("Name Descendant")) {
-				viewer.setSortComparator((a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) b ).getLibraryName(), ( (Library) a ).getLibraryName()));
-			} else if (text.equalsIgnoreCase("Stars  Ascendant")) {
-				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) b ).getStars(), ( (Library) a ).getStars()));
-			} else if (text.equalsIgnoreCase("Stars  Descendant")) {
-				viewer.setSortComparator((a , b) -> Double.compare( ( (Library) a ).getStars(), ( (Library) b ).getStars()));
-			} else if (text.equalsIgnoreCase("Total Media  Ascendant")) {
-				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) b ).getTotalEntries(), ( (Library) a ).getTotalEntries()));
-			} else if (text.equalsIgnoreCase("Total Media  Descendant")) {
-				viewer.setSortComparator((a , b) -> Integer.compare( ( (Library) a ).getTotalEntries(), ( (Library) b ).getTotalEntries()));
-			}
-			
-			viewer.update();
+			viewer.sortByComparator(getSortComparator());
 		});
 	}
 	
@@ -477,6 +464,31 @@ public class LibraryMode extends BorderPane {
 	 */
 	public String getSelectedSortToggleText() {
 		return ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
+	}
+	
+	/**
+	 * Get the sort comparator
+	 * 
+	 * @return
+	 */
+	public Comparator<Node> getSortComparator() {
+		String text = ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
+		
+		if (text.equalsIgnoreCase("Name Ascendant")) {
+			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) a ).getLibraryName(), ( (Library) b ).getLibraryName());
+		} else if (text.equalsIgnoreCase("Name Descendant")) {
+			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (Library) b ).getLibraryName(), ( (Library) a ).getLibraryName());
+		} else if (text.equalsIgnoreCase("Stars  Ascendant")) {
+			return (a , b) -> Double.compare( ( (Library) b ).getStars(), ( (Library) a ).getStars());
+		} else if (text.equalsIgnoreCase("Stars  Descendant")) {
+			return (a , b) -> Double.compare( ( (Library) a ).getStars(), ( (Library) b ).getStars());
+		} else if (text.equalsIgnoreCase("Total Media  Ascendant")) {
+			return (a , b) -> Integer.compare( ( (Library) b ).getTotalEntries(), ( (Library) a ).getTotalEntries());
+		} else if (text.equalsIgnoreCase("Total Media  Descendant")) {
+			return (a , b) -> Integer.compare( ( (Library) a ).getTotalEntries(), ( (Library) b ).getTotalEntries());
+		}
+		
+		return null;
 	}
 	
 	/**

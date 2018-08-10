@@ -398,8 +398,10 @@ public class Viewer extends Region {
 	 * 
 	 * @param comparator
 	 */
-	public void setSortComparator(Comparator<? super Node> comparator) {
+	public void sortByComparator(Comparator<Node> comparator) {
+		sortedList.setComparator(null);
 		sortedList.setComparator(comparator);
+		update();
 	}
 	
 	/**
