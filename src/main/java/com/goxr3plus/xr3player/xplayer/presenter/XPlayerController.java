@@ -1948,7 +1948,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			Platform.runLater(() -> {
 				
 				//WaveForm
-				waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath());
+				if (!seekService.isRunning())
+					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath());
 				
 				//Marquee Text
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
@@ -1989,7 +1990,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				resumeCode();
 				
 				//WaveForm
-				//waveFormVisualization.startPainterService();
+				waveFormVisualization.startPainterService();
 			});
 			
 			// Status.PAUSED
