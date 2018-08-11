@@ -425,5 +425,10 @@
 			<version>1.13</version>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>be.tarsos</groupId>
+			<artifactId>transcoder</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 </project>

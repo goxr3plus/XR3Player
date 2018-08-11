@@ -477,31 +477,6 @@
                </center>
                <top>
                   <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                     <center>
-                        <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
-                           <children>
-                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go DJ" HBox.hgrow="ALWAYS">
-                                 <graphic>
-                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="1.0" right="1.0" />
-                                 </HBox.margin>
-                              </ToggleButton>
-                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go History" HBox.hgrow="ALWAYS">
-                                 <graphic>
-                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets right="1.0" />
-                                 </HBox.margin>
-                              </ToggleButton>
-                           </children>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                        </HBox>
-                     </center>
                      <top>
                         <HBox alignment="CENTER" maxHeight="36.0" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                            <children>
@@ -582,6 +557,52 @@
                            </children>
                         </HBox>
                      </top>
+                     <right>
+                        <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
+                           <children>
+                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go DJ" HBox.hgrow="ALWAYS">
+                                 <graphic>
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="1.0" right="1.0" />
+                                 </HBox.margin>
+                              </ToggleButton>
+                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go History" HBox.hgrow="ALWAYS">
+                                 <graphic>
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="1.0" />
+                                 </HBox.margin>
+                              </ToggleButton>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </HBox>
+                     </right>
+                     <center>
+                        <JFXTabPane styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+                           <tabs>
+                              <Tab text="Simple">
+                                 <graphic>
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                 </graphic>
+                              </Tab>
+                              <Tab text="DJ">
+                                 <graphic>
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" styleClass="speci" />
+                                 </graphic>
+                              </Tab>
+                              <Tab text="History">
+                                 <graphic>
+                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                 </graphic>
+                              </Tab>
+                           </tabs>
+                        </JFXTabPane>
+                     </center>
                   </BorderPane>
                </top>
                <left>

@@ -610,6 +610,14 @@
     -fx-background-color:#252525 !important;  	    
 }
 
+.specialJFXTabPane .tab-header-area .jfx-rippler{
+    -fx-rippler-fill:firebrick !important;
+    -fx-cursor:hand;
+}
+
+.specialJFXTabPane .tab-header-area  .tab-selected-line{
+     -fx-stroke: firebrick !important;
+}
 
 .specialJFXTabPane .tab .tab-label { 
     -fx-alignment: CENTER;
@@ -620,23 +628,13 @@
     -fx-cursor:hand;
 }
 
-.specialJFXTabPane .tab-header-area .jfx-rippler{
-    -fx-rippler-fill :firebrick;
-    -fx-cursor:hand;
-}
-
-.specialJFXTabPane .tab-header-area  .tab-selected-line{
-     -fx-stroke : firebrick !important;
-}
-
 .specialJFXTabPane .tab:hover .tab-label{
 	-fx-text-fill:white;
-	-fx-background-color:black;	
+	-fx-background-color:red !important;	
 	-fx-background-radius: 0.0;
 }
 
 .specialJFXTabPane .tab:selected .tab-label{
-	-fx-background-color:rgb(255.0,110.0,0.0,0.55);
 	-fx-background-color:#FFFFFF27;
 }
 

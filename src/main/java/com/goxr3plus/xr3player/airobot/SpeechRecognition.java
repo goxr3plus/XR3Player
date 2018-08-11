@@ -83,7 +83,7 @@ public class SpeechRecognition extends StackPane implements GSpeechResponseListe
 	}
 	
 	/**
-	 * Retryes to find a Microphone to start Speech Recognition
+	 * Retries to find a Microphone to start Speech Recognition
 	 */
 	public void detectAvailableMicrophone() {
 		try {
