@@ -58,6 +58,10 @@ public class WaveFormPane extends ResizableCanvas {
 		this.waveData = waveData;
 	}
 	
+	public float[] getWaveData() {
+		return waveData;
+	}
+	
 	public void setForeground(Color color) {
 		this.foregroundColor = color;
 		transparentForeground = Color.rgb((int) ( foregroundColor.getRed() * 255 ), (int) ( foregroundColor.getGreen() * 255 ), (int) ( foregroundColor.getBlue() * 255 ), 0.3);
@@ -79,17 +83,13 @@ public class WaveFormPane extends ResizableCanvas {
 	 * Clear the waveform
 	 */
 	public void clear() {
-		//waveData = defaultWave;
-		
-		//Draw a Background Rectangle
-		gc.setFill(backgroundColor);
-		gc.fillRect(0, 0, width, height);
+		gc.clearRect(0, 0, width, height);
 	}
 	
 	/**
 	 * Paint the WaveForm
 	 */
-	public void paintWaveForm() {
+	public void drawWaveForm() {
 		
 		//Draw a Background Rectangle
 		gc.setFill(backgroundColor);

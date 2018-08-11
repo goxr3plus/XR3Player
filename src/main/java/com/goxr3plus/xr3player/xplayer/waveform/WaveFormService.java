@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.util.Random;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioFormat.Encoding;
@@ -20,6 +21,8 @@ import be.tarsos.transcoder.Transcoder;
 import be.tarsos.transcoder.ffmpeg.EncoderException;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
 public class WaveFormService extends Service<Boolean> {
 	
@@ -28,23 +31,23 @@ public class WaveFormService extends Service<Boolean> {
 	private float[] resultingWaveform;
 	private int[] wavAmplitudes;
 	private String fileAbsolutePath;
-	private final WaveVisualization waveVisualization;
+	private final XPlayerController xPlayerController;
+	private final Random random = new Random();
 	
 	/**
 	 * Constructor.
 	 */
-	public WaveFormService(WaveVisualization waveVisualization) {
-		this.waveVisualization = waveVisualization;
+	public WaveFormService(XPlayerController xPlayerController) {
+		this.xPlayerController = xPlayerController;
 		
 		setOnSucceeded(s -> done());
-		setOnFailed(f -> done());
-		setOnCancelled(c -> done());
+		//setOnFailed(f -> done());
+		//setOnCancelled(c -> done());
 	}
 	
 	/**
 	 * Start the external Service Thread.
 	 *
-	 * 
 	 */
 	public void startService(String fileAbsolutePath) {
 		this.fileAbsolutePath = fileAbsolutePath;
@@ -52,6 +55,8 @@ public class WaveFormService extends Service<Boolean> {
 		this.wavAmplitudes = null;
 		
 		//Go
+		//reset();
+		//start();
 		restart();
 	}
 	
@@ -60,9 +65,8 @@ public class WaveFormService extends Service<Boolean> {
 	 */
 	// Work done
 	public void done() {
-		waveVisualization.startPainterService();
-	//	waveVisualization.setWaveData(resultingWaveform);
-	//	waveVisualization.paintWaveForm();
+		xPlayerController.getWaveFormVisualization().setWaveData(resultingWaveform);
+		xPlayerController.getWaveFormVisualization().startPainterService();
 	}
 	
 	@Override
@@ -71,9 +75,11 @@ public class WaveFormService extends Service<Boolean> {
 			
 			@Override
 			protected Boolean call() throws Exception {
+				boolean success = true;
 				
 				//Try to get the resultingWaveForm
 				try {
+					super.updateMessage("Generating Wave Spectrum...");
 					
 					String fileFormat = "mp3";
 					//		                if ("wav".equals(fileFormat))
@@ -81,20 +87,15 @@ public class WaveFormService extends Service<Boolean> {
 					//		                else if ("mp3".equals(fileFormat) || "m4a".equals(fileFormat))
 					resultingWaveform = processFromNoWavFile(fileFormat);
 					
-					System.out.println("Service done successfully");
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					return false;
+					success = false;
 				}
 				
-				return true;
+				super.updateMessage("Done...");
+				return success;
 				
 			}
-			
-			//			private float[] processFromWavFile() throws IOException , UnsupportedAudioFileException {
-			//				File trackFile = new File(trackToAnalyze.getFileFolder(), trackToAnalyze.getFileName());
-			//				return processAmplitudes(getWavAmplitudes(trackFile));
-			//			}
 			
 			/**
 			 * Try to process a Non Wav File
@@ -106,18 +107,28 @@ public class WaveFormService extends Service<Boolean> {
 			 * @throws EncoderException
 			 */
 			private float[] processFromNoWavFile(String fileFormat) throws IOException , UnsupportedAudioFileException , EncoderException {
-				File temporalDecodedFile = File.createTempFile("decoded_" + "trackID", ".wav");
-				File temporalCopiedFile = File.createTempFile("original_" + "trackID", "." + fileFormat);
+				int randomN = random.nextInt(99999);
+				
+				//Create temporary files
+				File temporalDecodedFile = File.createTempFile("decoded_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, ".wav");
+				File temporalCopiedFile = File.createTempFile("original_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, "." + fileFormat);
 				
 				//Create a temporary path
 				Files.copy(new File(fileAbsolutePath).toPath(), temporalCopiedFile.toPath(), options);
 				
-				//Transcode to wav
+				//Transcode to .wav
 				transcodeToWav(temporalCopiedFile, temporalDecodedFile);
 				
 				//Avoid creating amplitudes again for the same file
 				if (wavAmplitudes == null)
 					wavAmplitudes = getWavAmplitudes(temporalDecodedFile);
+				
+				//Delete temporary files
+				temporalDecodedFile.deleteOnExit();
+				temporalCopiedFile.deleteOnExit();
+				temporalDecodedFile.delete();
+				temporalCopiedFile.delete();
+				
 				return processAmplitudes(wavAmplitudes);
 			}
 			
@@ -128,7 +139,7 @@ public class WaveFormService extends Service<Boolean> {
 			 * @return An array with amplitudes
 			 */
 			private float[] processAmplitudes(int[] sourcePcmData) {
-				int width = waveVisualization.width;    // the width of the resulting waveform panel
+				int width = xPlayerController.getWaveFormVisualization().width;    // the width of the resulting waveform panel
 				float[] waveData = new float[width];
 				int samplesPerPixel = sourcePcmData.length / width;
 				
@@ -197,6 +208,12 @@ public class WaveFormService extends Service<Boolean> {
 					}
 				}
 			}
+			
+			//TODO CREATE IN FUTURE
+			//			private float[] processFromWavFile() throws IOException , UnsupportedAudioFileException {
+			//				File trackFile = new File(trackToAnalyze.getFileFolder(), trackToAnalyze.getFileName());
+			//				return processAmplitudes(getWavAmplitudes(trackFile));
+			//			}
 		};
 	}
 	
@@ -207,9 +224,9 @@ public class WaveFormService extends Service<Boolean> {
 	public void setFileAbsolutePath(String fileAbsolutePath) {
 		this.fileAbsolutePath = fileAbsolutePath;
 	}
-
+	
 	public int[] getWavAmplitudes() {
 		return wavAmplitudes;
 	}
-
+	
 }

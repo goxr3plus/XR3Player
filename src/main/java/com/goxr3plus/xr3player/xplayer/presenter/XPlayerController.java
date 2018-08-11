@@ -255,6 +255,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackPane waveStackPane;
 	
 	@FXML
+	private Label waveProgressLabel;
+	
+	@FXML
+	private ProgressBar waveProgressBar;
+	
+	@FXML
 	private BorderPane smBorderPane;
 	
 	@FXML
@@ -450,7 +456,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
 	
 	//
-	WaveVisualization waveFormVisualization = new WaveVisualization(500, 20);
+	private WaveVisualization waveFormVisualization = new WaveVisualization(this, 500, 20);
 	
 	//======= Events ===========
 	
@@ -1415,7 +1421,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//waveFormVisualization
 		waveFormVisualization.setForeground(arcColor);
-		waveStackPane.getChildren().add(waveFormVisualization);
+		waveProgressLabel.textProperty().bind(waveFormVisualization.getWaveService().messageProperty());
+		waveProgressLabel.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty());
+		//waveProgressBar.progressProperty().bind(waveProgressBar.progressProperty());
+		waveStackPane.getChildren().add(0, waveFormVisualization);
 		
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
@@ -1936,10 +1945,11 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				djVisualizer.startDSP(xPlayer.getSourceDataLine());
 			}
 			
-			//WaveForm
-			waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath());
-			
 			Platform.runLater(() -> {
+				
+				//WaveForm
+				waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath());
+				
 				//Marquee Text
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
 				
@@ -1962,7 +1972,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			Platform.runLater(() -> {
 				//playerStatusLabel.setText("Resuming");
 				resumeCode();
-				waveFormVisualization.stopPainterService();
+				
+				//WaveForm
+				if (!waveFormVisualization.getWaveService().isRunning())
+					waveFormVisualization.startPainterService();
 				
 				//Notification
 				//ActionTool.showNotification("Player [ " + this.getKey() + " ] Resuming", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
@@ -1974,7 +1987,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			
 			Platform.runLater(() -> {
 				resumeCode();
-				waveFormVisualization.startPainterService();
+				
+				//WaveForm
+				//waveFormVisualization.startPainterService();
 			});
 			
 			// Status.PAUSED
@@ -1983,6 +1998,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			Platform.runLater(() -> {
 				playerStatusLabel.setText("Status : " + " Paused");
 				pauseCode();
+				
+				//WaveForm
+				waveFormVisualization.stopPainterService();
 				
 				//Notification
 				//	ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
@@ -2004,8 +2022,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				// SeekService running?
 				if (seekService.isRunning()) {
 					
-					// oh yeah
-					
+					// oh yeah	
 				} else {
 					
 					// Change Marquee text
@@ -2546,6 +2563,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	public XPlayerVisualizer getDjVisualizer() {
 		return djVisualizer;
+	}
+	
+	public WaveVisualization getWaveFormVisualization() {
+		return waveFormVisualization;
 	}
 	
 }

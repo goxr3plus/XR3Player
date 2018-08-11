@@ -345,12 +345,12 @@
                            <top>
                               <StackPane fx:id="waveStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label fx:id="waveProgressBar" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                        <graphic>
-                                          <ProgressBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="8.0" styleClass="transparent-progress-bar" />
+                                          <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
                                        </graphic>
                                     </Label>
                                  </children>
