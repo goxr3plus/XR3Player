@@ -44,14 +44,38 @@
                                        <center>
                                           <StackPane fx:id="diskStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
                                        </center>
-                                       <top>
+                                       <left>
+                                          <StackPane fx:id="speedSliderStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="50.0" StackPane.alignment="CENTER">
+                                                   <children>
+                                                      <JFXButton fx:id="speedControlButton" contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 11;" styleClass="jfx-button-dark-white-selection" text="1.0">
+                                                         <graphic>
+                                                            <FontIcon fx:id="speedLabelFontIcon1" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
+                                                         <styleClass>
+                                                            <String fx:value="transparency-slider" />
+                                                            <String fx:value="speed-slider" />
+                                                         </styleClass>
+                                                      </Slider>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </StackPane>
+                                       </left>
+                                       <bottom>
                                           <StackPane fx:id="diskStackPane1" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                                              <children>
                                                 <FlowPane alignment="CENTER" hgap="5.0" prefWidth="382.0" style="-fx-background-color: transparent;" vgap="5.0">
                                                    <children>
                                                       <HBox alignment="CENTER" spacing="5.0">
                                                          <children>
-                                                            <Button fx:id="playPauseButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
+                                                            <Button fx:id="playPauseButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="jfx-button-green">
                                                                <tooltip>
                                                                   <Tooltip text="Play-Resume" />
                                                                </tooltip>
@@ -62,7 +86,7 @@
                                                                   <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                                </graphic>
                                                             </Button>
-                                                            <Button fx:id="stopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="dark-round-jfx-button">
+                                                            <Button fx:id="stopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="jfx-button-red">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
@@ -75,7 +99,7 @@
                                                             </Button>
                                                          </children>
                                                       </HBox>
-                                                      <HBox alignment="CENTER" spacing="5.0">
+                                                      <HBox alignment="CENTER" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" pickOnBounds="false" prefHeight="0.0" prefWidth="0.0" spacing="5.0" visible="false">
                                                          <children>
                                                             <Button fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
                                                                <cursor>
@@ -129,31 +153,21 @@
                                                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                              </padding>
                                           </StackPane>
-                                       </top>
-                                       <left>
-                                          <StackPane fx:id="speedSliderStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                                       </bottom>
+                                       <top>
+                                          <StackPane fx:id="waveStackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
                                              <children>
-                                                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="50.0" StackPane.alignment="CENTER">
-                                                   <children>
-                                                      <JFXButton fx:id="speedControlButton" contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-size: 11;" styleClass="jfx-button-dark-white-selection" text="1.0">
-                                                         <graphic>
-                                                            <FontIcon fx:id="speedLabelFontIcon1" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                                         </graphic>
-                                                      </JFXButton>
-                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
-                                                         <styleClass>
-                                                            <String fx:value="transparency-slider" />
-                                                            <String fx:value="speed-slider" />
-                                                         </styleClass>
-                                                      </Slider>
-                                                   </children>
-                                                </VBox>
+                                                <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
+                                                   </graphic>
+                                                </Label>
                                              </children>
-                                             <padding>
-                                                <Insets left="2.0" right="2.0" />
-                                             </padding>
                                           </StackPane>
-                                       </left>
+                                       </top>
                                     </BorderPane>
                                     <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
@@ -279,7 +293,7 @@
                                  </items>
                               </SplitPane>
                            </center>
-                           <bottom>
+                           <top>
                               <StackPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <HBox fx:id="mediaNameHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="40.0" spacing="2.0" style="-fx-background-color: #151515;">
@@ -337,20 +351,6 @@
                                     <Label fx:id="advModeVolumeLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" opacity="0.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="100 %">
                                        <graphic>
                                           <FontIcon iconColor="WHITE" iconLiteral="fa-volume-up" iconSize="32" />
-                                       </graphic>
-                                    </Label>
-                                 </children>
-                              </StackPane>
-                           </bottom>
-                           <top>
-                              <StackPane fx:id="waveStackPane" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                       <graphic>
-                                          <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
                                        </graphic>
                                     </Label>
                                  </children>
@@ -574,7 +574,7 @@
                      <center>
                         <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
                            <children>
-                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go DJ" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="DJ" HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
@@ -582,7 +582,7 @@
                                     <Insets left="1.0" right="1.0" />
                                  </HBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="Go History" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>

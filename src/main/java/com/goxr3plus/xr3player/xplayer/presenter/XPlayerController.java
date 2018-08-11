@@ -1639,13 +1639,23 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//Fix the Positioning
 			System.out.println("Player : " + this.getKey() + ": " + newValuee);
 			
+			//A cancerous bug is here , so cancerous that it makes me wanna brake the fucking laptop
+			//TODO FIX THIS FUCKING BUG FUCKING FUCKING FUCKING BUG
+			//MAKES THE UI DANCE LIKE A STRIPPER
 			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
-				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
-				positions[0] += 0.03;
-				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
-				System.out.println("Duplicate");
-			}else {
-					previousSliderHeight = newValuee;
+				//				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
+				//				positions[0] += 0.03;
+				//				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+				//				//Run Later
+				//				Platform.runLater(() -> {
+				//					System.out.println("FUCK!!!!!!");
+				//					double[] positions2 = Main.libraryMode.getTopSplitPane().getDividerPositions();
+				//					positions2[0] -= 0.03;
+				//					Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
+				//				});
+				//				System.out.println("Duplicate");
+			} else {
+				previousSliderHeight = newValuee;
 			}
 			
 			//Keep fixed the UI
