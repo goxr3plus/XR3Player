@@ -66,6 +66,7 @@ public class WaveFormService extends Service<Boolean> {
 	 */
 	// Work done
 	private void done() {
+		xPlayerController.getWaveProgressLabel().setText("Wave Spectrum");
 		xPlayerController.getWaveFormVisualization().setWaveData(resultingWaveform);
 		xPlayerController.getWaveFormVisualization().startPainterService();
 		deleteTemporaryFiles();
