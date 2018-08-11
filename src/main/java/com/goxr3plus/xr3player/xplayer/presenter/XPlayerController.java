@@ -1631,7 +1631,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		smVolumeSlider.heightProperty().addListener((observable , oldValue , newValue) -> {
 			
 			//New Value
-			int newValuee = newValue.intValue();
+			double newValuee = newValue.doubleValue();
 			
 			//Set the Height
 			volumeSliderProgBar.setPrefWidth(newValuee);
@@ -1642,21 +1642,21 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//A cancerous bug is here , so cancerous that it makes me wanna brake the fucking laptop
 			//TODO FIX THIS FUCKING BUG FUCKING FUCKING FUCKING BUG
 			//MAKES THE UI DANCE LIKE A STRIPPER
-			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
-				//				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
-				//				positions[0] += 0.03;
-				//				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
-				//				//Run Later
-				//				Platform.runLater(() -> {
-				//					System.out.println("FUCK!!!!!!");
-				//					double[] positions2 = Main.libraryMode.getTopSplitPane().getDividerPositions();
-				//					positions2[0] -= 0.03;
-				//					Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
-				//				});
-				//				System.out.println("Duplicate");
-			} else {
-				previousSliderHeight = newValuee;
-			}
+//			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
+//				//				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
+//				//				positions[0] += 0.03;
+//				//				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+//				//				//Run Later
+//				//				Platform.runLater(() -> {
+//				//					System.out.println("FUCK!!!!!!");
+//				//					double[] positions2 = Main.libraryMode.getTopSplitPane().getDividerPositions();
+//				//					positions2[0] -= 0.03;
+//				//					Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
+//				//				});
+//				//				System.out.println("Duplicate");
+//			} else {
+//				previousSliderHeight = newValuee;
+//			}
 			
 			//Keep fixed the UI
 			if (getKey() == 0) {
@@ -1791,8 +1791,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	private void reCalculateCanvasSize() {
 		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1
-		
-		double size = Math.min(discBorderPane.getWidth() - speedSliderStackPane.getWidth(), discBorderPane.getHeight() - diskStackPane1.getHeight()) / 1.1;
+		double size = Math.min(discBorderPane.getWidth() - speedSliderStackPane.getWidth(),
+				discBorderPane.getHeight() - diskStackPane1.getHeight() - waveFormVisualization.getHeight()) / 1.1;
 		
 		disc.resizeDisc(size);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())

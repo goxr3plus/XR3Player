@@ -114,6 +114,10 @@ public class WaveFormService extends Service<Boolean> {
 				File temporalDecodedFile = File.createTempFile("decoded_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, ".wav");
 				File temporalCopiedFile = File.createTempFile("original_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, "." + fileFormat);
 				
+				//Delete temporary Files on exit
+				temporalDecodedFile.deleteOnExit();
+				temporalCopiedFile.deleteOnExit();
+				
 				//Create a temporary path
 				Files.copy(new File(fileAbsolutePath).toPath(), temporalCopiedFile.toPath(), options);
 				
@@ -125,8 +129,6 @@ public class WaveFormService extends Service<Boolean> {
 					wavAmplitudes = getWavAmplitudes(temporalDecodedFile);
 				
 				//Delete temporary files
-				temporalDecodedFile.deleteOnExit();
-				temporalCopiedFile.deleteOnExit();
 				temporalDecodedFile.delete();
 				temporalCopiedFile.delete();
 				
