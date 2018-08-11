@@ -40,6 +40,9 @@ public class WaveFormService extends Service<Boolean> {
 	public WaveFormService(XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
 		
+		//Bind
+		xPlayerController.getWaveProgressLabel().textProperty().bind(messageProperty());
+		
 		setOnSucceeded(s -> done());
 		//setOnFailed(f -> done());
 		//setOnCancelled(c -> done());
@@ -55,8 +58,6 @@ public class WaveFormService extends Service<Boolean> {
 		this.wavAmplitudes = null;
 		
 		//Go
-		//reset();
-		//start();
 		restart();
 	}
 	

@@ -1419,12 +1419,23 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		// Create DJDisc
 		disc = new DJDisc(136, arcColor, volume, maximumVolume);
 		
-		//waveFormVisualization
+		//------------waveFormVisualization-----------------------
 		waveFormVisualization.setForeground(arcColor);
-		waveProgressLabel.textProperty().bind(waveFormVisualization.getWaveService().messageProperty());
-		waveProgressLabel.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty());
-		//waveProgressBar.progressProperty().bind(waveProgressBar.progressProperty());
+		waveFormVisualization.setOnMouseReleased(m->{
+			
+		});
+		
+		//waveProgressLabel
+		waveProgressLabel.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty().or(waveFormVisualization.getAnimationService().runningProperty().not()));
+		
+		//waveProgressBar
+		waveProgressBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+		waveProgressBar.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty());
+		
+		//Add it to waveStackPane
 		waveStackPane.getChildren().add(0, waveFormVisualization);
+		
+		//----------------------------------------------------------
 		
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
@@ -2568,6 +2579,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	public WaveVisualization getWaveFormVisualization() {
 		return waveFormVisualization;
+	}
+	
+	public Label getWaveProgressLabel() {
+		return waveProgressLabel;
 	}
 	
 }
