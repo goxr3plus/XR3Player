@@ -343,7 +343,7 @@
                               </StackPane>
                            </bottom>
                            <top>
-                              <StackPane fx:id="waveStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                              <StackPane fx:id="waveStackPane" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
                                        <font>

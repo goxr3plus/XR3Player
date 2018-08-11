@@ -152,7 +152,7 @@ public class WaveVisualization extends WaveFormPane {
 			//Set Timer X Position
 			double percent = WaveVisualization.this.xPlayerController.getxPlayerModel().getCurrentTime()
 					/ (double) WaveVisualization.this.xPlayerController.getxPlayerModel().getDuration();
-			System.out.println("percent : " + percent);
+			//System.out.println("percent : " + percent);
 			WaveVisualization.this.setTimerXPosition((int) ( ( percent * WaveVisualization.this.width ) ));
 			
 			//Check if wave data needs to be recalculated
@@ -165,7 +165,7 @@ public class WaveVisualization extends WaveFormPane {
 			WaveVisualization.this.drawWaveForm();
 			
 			//Print
-			System.out.println("Wave Data : " + WaveVisualization.this.getWaveData() + " ,Wave Visualization : " + WaveVisualization.this.getWaveService().getWavAmplitudes());
+			//System.out.println("Wave Data : " + WaveVisualization.this.getWaveData() + " ,Wave Visualization : " + WaveVisualization.this.getWaveService().getWavAmplitudes());
 		}
 		
 		/**

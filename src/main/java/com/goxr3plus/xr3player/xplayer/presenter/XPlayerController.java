@@ -456,7 +456,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
 	
 	//
-	private WaveVisualization waveFormVisualization = new WaveVisualization(this, 500, 20);
+	private WaveVisualization waveFormVisualization;
 	
 	//======= Events ===========
 	
@@ -601,6 +601,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		// -----Important-------------
 		xPlayerWindow = new XPlayerWindow(this);
+		
+		//waveFormVisualization
+		waveFormVisualization = new WaveVisualization(this, 500, 20);
 		
 		//== RadialMenu
 		//radialMenu = new XPlayerRadialMenu(this);
@@ -1421,8 +1424,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//------------waveFormVisualization-----------------------
 		waveFormVisualization.setForeground(arcColor);
-		waveFormVisualization.setOnMouseReleased(m->{
-			
+		waveFormVisualization.setOnMouseReleased(m -> {
+			double percentage = m.getX() / waveFormVisualization.getWidth();
+			seekTo((int) ( percentage * this.getxPlayerModel().getDuration() ));
 		});
 		
 		//waveProgressLabel
