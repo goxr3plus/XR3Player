@@ -1637,7 +1637,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			volumeSliderProgBar.setPrefWidth(newValuee);
 			
 			//Fix the Positioning
-			System.out.println("Player : " + this.getKey() + ": " + newValuee);
+			//System.out.println("Player : " + this.getKey() + ": " + newValuee)
 			
 			//A cancerous bug is here , so cancerous that it makes me wanna brake the fucking laptop
 			//TODO FIX THIS FUCKING BUG FUCKING FUCKING FUCKING BUG

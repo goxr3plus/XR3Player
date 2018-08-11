@@ -19,6 +19,7 @@ import be.tarsos.transcoder.Attributes;
 import be.tarsos.transcoder.DefaultAttributes;
 import be.tarsos.transcoder.Transcoder;
 import be.tarsos.transcoder.ffmpeg.EncoderException;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
@@ -33,6 +34,8 @@ public class WaveFormService extends Service<Boolean> {
 	private String fileAbsolutePath;
 	private final XPlayerController xPlayerController;
 	private final Random random = new Random();
+	private File temp1;
+	private File temp2;
 	
 	/**
 	 * Constructor.
@@ -40,12 +43,9 @@ public class WaveFormService extends Service<Boolean> {
 	public WaveFormService(XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
 		
-		//Bind
-		xPlayerController.getWaveProgressLabel().textProperty().bind(messageProperty());
-		
 		setOnSucceeded(s -> done());
-		//setOnFailed(f -> done());
-		//setOnCancelled(c -> done());
+		setOnFailed(f -> failure());
+		setOnCancelled(c -> failure());
 	}
 	
 	/**
@@ -65,9 +65,23 @@ public class WaveFormService extends Service<Boolean> {
 	 * Done.
 	 */
 	// Work done
-	public void done() {
+	private void done() {
 		xPlayerController.getWaveFormVisualization().setWaveData(resultingWaveform);
 		xPlayerController.getWaveFormVisualization().startPainterService();
+		deleteTemporaryFiles();
+	}
+	
+	private void failure() {
+		xPlayerController.getWaveProgressLabel().setText("Wave Spectrum");
+		deleteTemporaryFiles();
+	}
+	
+	/**
+	 * Delete temporary files
+	 */
+	private void deleteTemporaryFiles() {
+		temp1.delete();
+		temp2.delete();
 	}
 	
 	@Override
@@ -80,7 +94,7 @@ public class WaveFormService extends Service<Boolean> {
 				
 				//Try to get the resultingWaveForm
 				try {
-					super.updateMessage("Generating Wave Spectrum...");
+					Platform.runLater(() -> xPlayerController.getWaveProgressLabel().setText("Generating Wave Spectrum..."));
 					
 					String fileFormat = "mp3";
 					//		                if ("wav".equals(fileFormat))
@@ -93,7 +107,6 @@ public class WaveFormService extends Service<Boolean> {
 					success = false;
 				}
 				
-				super.updateMessage("Done...");
 				return success;
 				
 			}
@@ -113,6 +126,8 @@ public class WaveFormService extends Service<Boolean> {
 				//Create temporary files
 				File temporalDecodedFile = File.createTempFile("decoded_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, ".wav");
 				File temporalCopiedFile = File.createTempFile("original_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, "." + fileFormat);
+				temp1 = temporalDecodedFile;
+				temp2 = temporalCopiedFile;
 				
 				//Delete temporary Files on exit
 				temporalDecodedFile.deleteOnExit();
