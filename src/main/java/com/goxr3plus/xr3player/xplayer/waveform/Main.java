@@ -16,10 +16,10 @@ public class Main extends Application {
 			//Root
 			BorderPane root = new BorderPane();
 			root.setCenter(waveVisualization);
-			root.boundsInLocalProperty().addListener(l -> {
-				waveVisualization.setWidth(root.getWidth());
-				waveVisualization.setHeight(root.getHeight());
-			});
+//			root.boundsInLocalProperty().addListener(l -> {
+//				waveVisualization.setWidth(root.getWidth());
+//				waveVisualization.setHeight(root.getHeight());
+//			});
 			
 			//PrimaryStage
 			primaryStage.setTitle("Dark Side");

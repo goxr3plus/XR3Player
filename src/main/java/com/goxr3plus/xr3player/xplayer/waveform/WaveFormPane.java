@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
  */
 public class WaveFormPane extends ResizableCanvas {
 	
-	private final float[] defaultWave;
+	//private final float[] defaultWave;
 	private float[] waveData;
 	private Color backgroundColor;
 	private Color foregroundColor;
@@ -33,22 +33,19 @@ public class WaveFormPane extends ResizableCanvas {
 	 * @param height
 	 */
 	public WaveFormPane(int width, int height) {
-		defaultWave = new float[width];
+		//defaultWave = new float[width];
 		this.width = width;
 		this.height = height;
-		this.setWidth(width);
-		this.setHeight(height);
-		//this.maxWidth(width);
-		//this.maxHeight(height);
+		setWidth(width);
+		setHeight(height);
 		
 		//Create the default Wave
-		for (int i = 0; i < width; i++)
-			defaultWave[i] = 0.28802148f;
-		waveData = defaultWave;
+		//		for (int i = 0; i < width; i++)
+		//			defaultWave[i] = 0.28802148f;
+		//		waveData = defaultWave;
 		
-		backgroundColor = Color.web("#252525");
-		foregroundColor = Color.ORANGERED;
-		transparentForeground = Color.rgb((int) (foregroundColor.getRed()*255), (int) (foregroundColor.getGreen()*255), (int) (foregroundColor.getBlue()*255), 0.3);
+		setBackgroundColor(Color.web("#252525"));
+		setForeground(Color.ORANGERED);
 		
 	}
 	
@@ -63,6 +60,7 @@ public class WaveFormPane extends ResizableCanvas {
 	
 	public void setForeground(Color color) {
 		this.foregroundColor = color;
+		transparentForeground = Color.rgb((int) ( foregroundColor.getRed() * 255 ), (int) ( foregroundColor.getGreen() * 255 ), (int) ( foregroundColor.getBlue() * 255 ), 0.3);
 	}
 	
 	public void setBackgroundColor(Color color) {
@@ -81,7 +79,7 @@ public class WaveFormPane extends ResizableCanvas {
 	 * Clear the waveform
 	 */
 	public void clear() {
-		waveData = defaultWave;
+		//waveData = defaultWave;
 		
 		//Draw a Background Rectangle
 		gc.setFill(backgroundColor);
@@ -98,12 +96,14 @@ public class WaveFormPane extends ResizableCanvas {
 		gc.fillRect(0, 0, width, height);
 		
 		//Draw the waveform
-		gc.setStroke(foregroundColor);
-		for (int i = 0; i < waveData.length; i++) {
-			int value = (int) ( waveData[i] * height );
-			int y1 = ( height - 2 * value ) / 2;
-			int y2 = y1 + 2 * value;
-			gc.strokeLine(i, y1, i, y2);
+		if (waveData != null) {
+			gc.setStroke(foregroundColor);
+			for (int i = 0; i < waveData.length; i++) {
+				int value = (int) ( waveData[i] * height );
+				int y1 = ( height - 2 * value ) / 2;
+				int y2 = y1 + 2 * value;
+				gc.strokeLine(i, y1, i, y2);
+			}
 		}
 		
 		//Draw a semi transparent Rectangle

@@ -93,6 +93,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
+import main.java.com.goxr3plus.xr3player.xplayer.waveform.WaveVisualization;
 
 /**
  * Represents the graphical interface for the deck.
@@ -120,45 +121,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private BorderPane borderPane;
-	
-	@FXML
-	private HBox mediaNameHBox;
-	
-	@FXML
-	private HBox timersBox;
-	
-	@FXML
-	private Label elapsedTimeLabel;
-	
-	@FXML
-	private Label remainingTimeLabel;
-	
-	@FXML
-	private Label totalTimeLabel;
-	
-	@FXML
-	private MenuButton copyButton;
-	
-	@FXML
-	private MenuItem copyFileTitle;
-	
-	@FXML
-	private MenuItem copyFileLocation;
-	
-	@FXML
-	private MenuItem copyFile;
-	
-	@FXML
-	private Button mediaTagImageButton;
-	
-	@FXML
-	private FontIcon albumImageFontIcon;
-	
-	@FXML
-	private ImageView mediaTagImageView;
-	
-	@FXML
-	private Label advModeVolumeLabel;
 	
 	@FXML
 	private SplitPane internalSplitPane;
@@ -251,6 +213,48 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Tab equalizerTab;
 	
 	@FXML
+	private HBox mediaNameHBox;
+	
+	@FXML
+	private HBox timersBox;
+	
+	@FXML
+	private Label elapsedTimeLabel;
+	
+	@FXML
+	private Label remainingTimeLabel;
+	
+	@FXML
+	private Label totalTimeLabel;
+	
+	@FXML
+	private MenuButton copyButton;
+	
+	@FXML
+	private MenuItem copyFileTitle;
+	
+	@FXML
+	private MenuItem copyFileLocation;
+	
+	@FXML
+	private MenuItem copyFile;
+	
+	@FXML
+	private Button mediaTagImageButton;
+	
+	@FXML
+	private FontIcon albumImageFontIcon;
+	
+	@FXML
+	private ImageView mediaTagImageView;
+	
+	@FXML
+	private Label advModeVolumeLabel;
+	
+	@FXML
+	private StackPane waveStackPane;
+	
+	@FXML
 	private BorderPane smBorderPane;
 	
 	@FXML
@@ -296,12 +300,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Label smVolumeSliderLabel;
 	
 	@FXML
-	private ToggleButton modeToggle;
-	
-	@FXML
-	private ToggleButton historyToggle;
-	
-	@FXML
 	private HBox toolsHBox;
 	
 	@FXML
@@ -327,6 +325,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private StackedFontIcon sizeStackedFontIcon;
+	
+	@FXML
+	private ToggleButton modeToggle;
+	
+	@FXML
+	private ToggleButton historyToggle;
 	
 	@FXML
 	private VBox volumeBarBox;
@@ -376,7 +380,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private FadeTransition fadeTransition;
 	
 	/**
-	 * This Variable Determines if the Player is extended or not ( which means it is being shown on an external window different from the main window )
+	 * This Variable Determines if the Player is extended or not ( which means it is being shown on an external window different from the main window
+	 * )
 	 */
 	private boolean isPlayerExtended;
 	
@@ -421,8 +426,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private VisualizerWindowController visualizerWindow;
 	
 	/**
-	 * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being displayed
-	 * (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
+	 * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
+	 * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
 	 */
 	private final VisualizerStackController visualizerStackController = new VisualizerStackController();
 	
@@ -443,6 +448,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 	
 	private final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
+	
+	//
+	WaveVisualization waveFormVisualization = new WaveVisualization(500, 20);
 	
 	//======= Events ===========
 	
@@ -1393,17 +1401,21 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 *            the width
 	 * @param height
 	 *            the height
-	 * @param color
-	 *            the color
+	 * @param arcColor
+	 *            the color of the disc
 	 * @param volume
 	 *            the volume
 	 * @param side
 	 *            the side
 	 */
-	public void makeTheDisc(Color color , int volume , int minimumVolume , int maximumVolume , Side side) {
+	public void makeTheDisc(Color arcColor , int volume , int minimumVolume , int maximumVolume , Side side) {
 		
-		// initialize
-		disc = new DJDisc(136, color, volume, maximumVolume);
+		// Create DJDisc
+		disc = new DJDisc(136, arcColor, volume, maximumVolume);
+		
+		//waveFormVisualization
+		waveFormVisualization.setForeground(arcColor);
+		waveStackPane.getChildren().add(waveFormVisualization);
 		
 		//smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
@@ -1924,6 +1936,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				djVisualizer.startDSP(xPlayer.getSourceDataLine());
 			}
 			
+			//WaveForm
+			waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath());
+			
 			Platform.runLater(() -> {
 				//Marquee Text
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
@@ -1947,6 +1962,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			Platform.runLater(() -> {
 				//playerStatusLabel.setText("Resuming");
 				resumeCode();
+				waveFormVisualization.stopPainterService();
 				
 				//Notification
 				//ActionTool.showNotification("Player [ " + this.getKey() + " ] Resuming", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
@@ -1958,7 +1974,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			
 			Platform.runLater(() -> {
 				resumeCode();
-				
+				waveFormVisualization.startPainterService();
 			});
 			
 			// Status.PAUSED
@@ -2019,6 +2035,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					
 					//smTimeSliderProgress
 					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
+					
+					//WaveForm
+					waveFormVisualization.stopPainterService();
 				}
 				
 			});
