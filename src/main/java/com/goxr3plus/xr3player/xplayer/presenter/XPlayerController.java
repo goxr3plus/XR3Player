@@ -1628,16 +1628,33 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		smVolumeSlider.valueProperty().addListener(l -> disc.setVolume(smVolumeSlider.getValue()));
 		smVolumeSlider.setValue(volume);
 		smVolumeSlider.setOnScroll(scroll -> adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2));
-		smVolumeSlider.heightProperty().addListener((obserable , oldValue , newValue) -> {
+		smVolumeSlider.heightProperty().addListener((observable , oldValue , newValue) -> {
+			
+			//New Value
+			int newValuee = newValue.intValue();
+			
 			//Set the Height
-			volumeSliderProgBar.setPrefWidth(newValue.doubleValue());
+			volumeSliderProgBar.setPrefWidth(newValuee);
+			
+			//Fix the Positioning
+			System.out.println("Player : " + this.getKey() + ": " + newValuee);
+			
+			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
+				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
+				positions[0] += 0.03;
+				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+				System.out.println("Duplicate");
+			}else {
+					previousSliderHeight = newValuee;
+			}
 			
 			//Keep fixed the UI
 			if (getKey() == 0) {
-				Main.xPlayersList.getXPlayerController(1).getVolumeSliderProgBar().setPrefWidth(newValue.doubleValue());
-				Main.xPlayersList.getXPlayerController(2).getVolumeSliderProgBar().setPrefWidth(newValue.doubleValue());
-			} else
-				Main.xPlayersList.getXPlayerController(0).getVolumeSliderProgBar().setPrefWidth(newValue.doubleValue());
+				Main.xPlayersList.getXPlayerController(1).getVolumeSliderProgBar().setPrefWidth(newValuee);
+				Main.xPlayersList.getXPlayerController(2).getVolumeSliderProgBar().setPrefWidth(newValuee);
+			} else {
+				Main.xPlayersList.getXPlayerController(0).getVolumeSliderProgBar().setPrefWidth(newValuee);
+			}
 			
 		});
 		
@@ -1657,6 +1674,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		//---------------------SIDE------------------------------------------------
 		changeSide(side);
 	}
+	
+	private int previousSliderHeight = 0;
 	
 	/**
 	 * Just a small security check for the time slider
