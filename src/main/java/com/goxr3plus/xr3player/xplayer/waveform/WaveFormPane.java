@@ -83,7 +83,7 @@ public class WaveFormPane extends ResizableCanvas {
 	 * Clear the waveform
 	 */
 	public void clear() {
-		gc.clearRect(0, 0, width, height);
+		gc.clearRect(0, 0, width, height+5);
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class WaveFormPane extends ResizableCanvas {
 		
 		//Draw a Background Rectangle
 		gc.setFill(backgroundColor);
-		gc.fillRect(0, 0, width, height);
+		gc.fillRect(0, 0, width, height+5);
 		
 		//Draw the waveform
 		if (waveData != null) {
