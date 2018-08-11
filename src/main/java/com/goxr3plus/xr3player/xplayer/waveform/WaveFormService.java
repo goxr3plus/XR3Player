@@ -1,4 +1,4 @@
-package tarsosWaveForm;
+package main.java.com.goxr3plus.xr3player.xplayer.waveform;
 
 import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;

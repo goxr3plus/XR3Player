@@ -1,4 +1,4 @@
-package tarsosWaveForm;
+package main.java.com.goxr3plus.xr3player.xplayer.waveform;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

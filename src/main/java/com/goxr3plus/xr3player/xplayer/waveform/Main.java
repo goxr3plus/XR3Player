@@ -1,4 +1,4 @@
-package tarsosWaveForm;
+package main.java.com.goxr3plus.xr3player.xplayer.waveform;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,7 +26,7 @@ public class Main extends Application {
 			primaryStage.setOnCloseRequest(c -> System.exit(0));
 			
 			//Scene
-			Scene scene = new Scene(root, 600, 150);
+			Scene scene = new Scene(root, 600, 40);
 			primaryStage.setScene(scene);
 			
 			//Show

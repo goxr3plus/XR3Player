@@ -1,7 +1,7 @@
 /*
  * 
  */
-package tarsosWaveForm;
+package main.java.com.goxr3plus.xr3player.xplayer.waveform;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -107,6 +107,8 @@ public class WaveVisualization extends WaveFormPane {
 		/*** The animationService can draw */
 		private boolean drawEnabled = true;
 		
+		private long previousNanos = 0;
+		
 		@Override
 		public void start() {
 			// Values must be >0
@@ -129,6 +131,12 @@ public class WaveVisualization extends WaveFormPane {
 		@Override
 		public void handle(long nanos) {
 			//System.out.println("Running...")
+			
+			//Every 300 millis update
+			if (nanos >= previousNanos + 100000 * 1000) { //
+				previousNanos = nanos;
+				WaveVisualization.this.setTimerXPosition(WaveVisualization.this.getTimerXPosition() + 1);
+			}
 			
 			//Paint
 			WaveVisualization.this.setWaveData(processAmplitudes(WaveVisualization.this.getWaveService().getWavAmplitudes()));

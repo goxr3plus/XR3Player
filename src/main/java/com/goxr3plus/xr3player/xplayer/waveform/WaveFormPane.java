@@ -6,7 +6,7 @@
  * License along with Musicott. If not, see <http://www.gnu.org/licenses/>. Copyright (C) 2015 - 2017 Octavio Calleya
  */
 
-package tarsosWaveForm;
+package main.java.com.goxr3plus.xr3player.xplayer.waveform;
 
 import javafx.scene.paint.Color;
 
@@ -21,9 +21,10 @@ public class WaveFormPane extends ResizableCanvas {
 	private float[] waveData;
 	private Color backgroundColor;
 	private Color foregroundColor;
+	private Color transparentForeground;
 	int width;
 	int height;
-	int timerXPosition = 100;
+	private int timerXPosition = 0;
 	
 	/**
 	 * Constructor
@@ -45,8 +46,9 @@ public class WaveFormPane extends ResizableCanvas {
 			defaultWave[i] = 0.28802148f;
 		waveData = defaultWave;
 		
-		backgroundColor = Color.web("#202020");
+		backgroundColor = Color.web("#252525");
 		foregroundColor = Color.ORANGERED;
+		transparentForeground = Color.rgb((int) (foregroundColor.getRed()*255), (int) (foregroundColor.getGreen()*255), (int) (foregroundColor.getBlue()*255), 0.3);
 		
 	}
 	
@@ -67,8 +69,12 @@ public class WaveFormPane extends ResizableCanvas {
 		this.backgroundColor = color;
 	}
 	
-	public void setTimerPosition(int x) {
-		this.timerXPosition = x;
+	public int getTimerXPosition() {
+		return timerXPosition;
+	}
+	
+	public void setTimerXPosition(int timerXPosition) {
+		this.timerXPosition = timerXPosition;
 	}
 	
 	/**
@@ -86,14 +92,10 @@ public class WaveFormPane extends ResizableCanvas {
 	 * Paint the WaveForm
 	 */
 	public void paintWaveForm() {
-		//width = (int) getWidth();
-		//height = (int) getHeight();
 		
 		//Draw a Background Rectangle
 		gc.setFill(backgroundColor);
 		gc.fillRect(0, 0, width, height);
-		
-		System.out.println(width);
 		
 		//Draw the waveform
 		gc.setStroke(foregroundColor);
@@ -105,12 +107,12 @@ public class WaveFormPane extends ResizableCanvas {
 		}
 		
 		//Draw a semi transparent Rectangle
-		gc.setFill(Color.rgb(255,255,255, 0.1));
+		gc.setFill(transparentForeground);
 		gc.fillRect(0, 0, timerXPosition, height);
 		
 		//Draw an horizontal line
-		gc.setStroke(Color.WHITE);
-		gc.strokeLine(timerXPosition, 0, timerXPosition, height);
+		gc.setFill(Color.WHITE);
+		gc.fillOval(timerXPosition, 0, 1, height);
 	}
 	
 }
