@@ -41,9 +41,6 @@
                               <SplitPane fx:id="internalSplitPane" dividerPositions="0.45" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <items>
                                     <BorderPane fx:id="discBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" SplitPane.resizableWithParent="false">
-                                       <center>
-                                          <StackPane fx:id="diskStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
-                                       </center>
                                        <left>
                                           <StackPane fx:id="speedSliderStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                                              <children>
@@ -54,7 +51,7 @@
                                                             <FontIcon fx:id="speedLabelFontIcon1" iconColor="#d4ff00" iconLiteral="icm-meter2" iconSize="24" selectionEnd="0" selectionStart="0" />
                                                          </graphic>
                                                       </JFXButton>
-                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" maxHeight="250.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
+                                                      <Slider fx:id="speedSlider" blockIncrement="0.0" focusTraversable="false" majorTickUnit="8.0" max="32.0" minHeight="0.0" minWidth="0.0" minorTickCount="4" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" snapToTicks="true" value="16.0" VBox.vgrow="ALWAYS">
                                                          <styleClass>
                                                             <String fx:value="transparency-slider" />
                                                             <String fx:value="speed-slider" />
@@ -68,92 +65,6 @@
                                              </padding>
                                           </StackPane>
                                        </left>
-                                       <bottom>
-                                          <StackPane fx:id="diskStackPane1" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <FlowPane alignment="CENTER" hgap="5.0" prefWidth="382.0" style="-fx-background-color: transparent;" vgap="5.0">
-                                                   <children>
-                                                      <HBox alignment="CENTER" spacing="5.0">
-                                                         <children>
-                                                            <Button fx:id="playPauseButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="jfx-button-green">
-                                                               <tooltip>
-                                                                  <Tooltip text="Play-Resume" />
-                                                               </tooltip>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <graphic>
-                                                                  <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                                               </graphic>
-                                                            </Button>
-                                                            <Button fx:id="stopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="jfx-button-red">
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <tooltip>
-                                                                  <Tooltip text="Stop" />
-                                                               </tooltip>
-                                                               <graphic>
-                                                                  <FontIcon iconColor="WHITE" iconLiteral="fa-stop" iconSize="24" selectionEnd="0" selectionStart="0" />
-                                                               </graphic>
-                                                            </Button>
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" pickOnBounds="false" prefHeight="0.0" prefWidth="0.0" spacing="5.0" visible="false">
-                                                         <children>
-                                                            <Button fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <tooltip>
-                                                                  <Tooltip text="Skip backward n seconds" />
-                                                               </tooltip>
-                                                               <graphic>
-                                                                  <FontIcon iconColor="WHITE" iconLiteral="fas-backward" iconSize="18" selectionEnd="0" selectionStart="0" />
-                                                               </graphic>
-                                                            </Button>
-                                                            <Button fx:id="replayButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" styleClass="dark-round-jfx-button">
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <tooltip>
-                                                                  <Tooltip text="Replay" />
-                                                               </tooltip>
-                                                               <graphic>
-                                                                  <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="32" selectionEnd="0" selectionStart="0" text="">
-                                                                     <rotationAxis>
-                                                                        <Point3D />
-                                                                     </rotationAxis>
-                                                                  </FontIcon>
-                                                               </graphic>
-                                                            </Button>
-                                                            <Button fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60">
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <tooltip>
-                                                                  <Tooltip text="Skip forward n seconds" />
-                                                               </tooltip>
-                                                               <graphic>
-                                                                  <FontIcon iconColor="WHITE" iconLiteral="fas-forward" iconSize="18" selectionEnd="0" selectionStart="0" />
-                                                               </graphic>
-                                                            </Button>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                   <StackPane.margin>
-                                                      <Insets />
-                                                   </StackPane.margin>
-                                                </FlowPane>
-                                             </children>
-                                             <BorderPane.margin>
-                                                <Insets right="1.0" />
-                                             </BorderPane.margin>
-                                             <padding>
-                                                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                             </padding>
-                                          </StackPane>
-                                       </bottom>
                                        <top>
                                           <StackPane fx:id="waveStackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
                                              <children>
@@ -168,6 +79,99 @@
                                              </children>
                                           </StackPane>
                                        </top>
+                                       <center>
+                                          <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                             <center>
+                                                <StackPane fx:id="diskStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER" />
+                                             </center>
+                                             <bottom>
+                                                <StackPane fx:id="diskStackPane1" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <FlowPane alignment="CENTER" hgap="5.0" prefWidth="382.0" style="-fx-background-color: transparent;" vgap="5.0">
+                                                         <children>
+                                                            <HBox alignment="CENTER" spacing="5.0">
+                                                               <children>
+                                                                  <Button fx:id="playPauseButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="jfx-button-green">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Play-Resume" />
+                                                                     </tooltip>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
+                                                                  </Button>
+                                                                  <Button fx:id="stopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="42.0" styleClass="jfx-button-red">
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Stop" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="fa-stop" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
+                                                                  </Button>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" pickOnBounds="false" prefHeight="0.0" prefWidth="0.0" spacing="5.0" visible="false">
+                                                               <children>
+                                                                  <Button fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60" textAlignment="CENTER" wrapText="true">
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Skip backward n seconds" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="fas-backward" iconSize="18" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
+                                                                  </Button>
+                                                                  <Button fx:id="replayButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="36.0" styleClass="dark-round-jfx-button">
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Replay" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-sync" iconSize="32" selectionEnd="0" selectionStart="0" text="">
+                                                                           <rotationAxis>
+                                                                              <Point3D />
+                                                                           </rotationAxis>
+                                                                        </FontIcon>
+                                                                     </graphic>
+                                                                  </Button>
+                                                                  <Button fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="1.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="dark-round-jfx-button" text="60">
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Skip forward n seconds" />
+                                                                     </tooltip>
+                                                                     <graphic>
+                                                                        <FontIcon iconColor="WHITE" iconLiteral="fas-forward" iconSize="18" selectionEnd="0" selectionStart="0" />
+                                                                     </graphic>
+                                                                  </Button>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <StackPane.margin>
+                                                            <Insets />
+                                                         </StackPane.margin>
+                                                      </FlowPane>
+                                                   </children>
+                                                   <BorderPane.margin>
+                                                      <Insets right="1.0" />
+                                                   </BorderPane.margin>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                                   </padding>
+                                                </StackPane>
+                                             </bottom>
+                                          </BorderPane>
+                                       </center>
                                     </BorderPane>
                                     <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="5.0" prefWidth="5.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
