@@ -64,20 +64,6 @@
                                              </padding>
                                           </StackPane>
                                        </left>
-                                       <top>
-                                          <StackPane fx:id="waveStackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
-                                                   </graphic>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                       </top>
                                        <center>
                                           <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                              <center>
@@ -487,10 +473,59 @@
                      </children>
                   </StackPane>
                </center>
+               <left>
+                  <VBox fx:id="volumeBarBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="20" selectionEnd="0" selectionStart="0" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="6.0" />
+                           </VBox.margin>
+                        </Button>
+                        <StackPane maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Group>
+                                 <children>
+                                    <ProgressBar fx:id="volumeSliderProgBar" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="20.0" progress="0.0" rotate="-90.0" styleClass="transparent-volume-progress-bar" />
+                                 </children>
+                              </Group>
+                              <Slider fx:id="smVolumeSlider" max="125.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL">
+                                 <styleClass>
+                                    <String fx:value="transparency-slider" />
+                                    <String fx:value="timer-slider" />
+                                 </styleClass>
+                              </Slider>
+                           </children>
+                        </StackPane>
+                        <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="28" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="8.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </left>
                <top>
-                  <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                     <top>
-                        <HBox alignment="CENTER" maxHeight="36.0" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
+                  <VBox fx:id="topVBox" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox fx:id="topHBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" prefHeight="32.0" style="-fx-background-color: #151515;">
                            <children>
                               <HBox fx:id="toolsHBox" maxHeight="36.0" minHeight="0.0" minWidth="0.0">
                                  <children>
@@ -545,7 +580,7 @@
                                     </MenuButton>
                                  </children>
                               </HBox>
-                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="29.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player " HBox.hgrow="ALWAYS">
+                              <Label fx:id="topInfoLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="29.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #151515;" text=" Player  " HBox.hgrow="ALWAYS">
                                  <graphic>
                                     <FontIcon iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" />
                                  </graphic>
@@ -576,9 +611,7 @@
                               </Button>
                            </children>
                         </HBox>
-                     </top>
-                     <center>
-                        <HBox alignment="CENTER" maxHeight="36.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;">
                            <children>
                               <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="DJ" HBox.hgrow="ALWAYS">
                                  <graphic>
@@ -597,63 +630,66 @@
                                  </HBox.margin>
                               </ToggleButton>
                            </children>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
                         </HBox>
-                     </center>
-                  </BorderPane>
+                     </children>
+                  </VBox>
                </top>
-               <left>
-                  <VBox fx:id="volumeBarBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="smMaximizeVolume" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-volume-up" iconSize="20" selectionEnd="0" selectionStart="0" />
-                           </graphic>
-                           <VBox.margin>
-                              <Insets bottom="5.0" top="6.0" />
-                           </VBox.margin>
-                        </Button>
-                        <StackPane maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
+            </BorderPane>
+            <StackPane fx:id="microStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
+               <children>
+                  <BorderPane fx:id="microBorderPane" minHeight="0.0" minWidth="0.0">
+                     <bottom>
+                        <StackPane fx:id="diskStackPane11" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
                            <children>
-                              <Group>
+                              <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0">
                                  <children>
-                                    <ProgressBar fx:id="volumeSliderProgBar" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="20.0" prefWidth="300.0" progress="0.0" rotate="-90.0" styleClass="transparent-volume-progress-bar" />
+                                    <Button fx:id="microPlayPauseButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="jfx-button-green">
+                                       <tooltip>
+                                          <Tooltip text="Play-Resume" />
+                                       </tooltip>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fa-play" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="microStopButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="jfx-button-red">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Stop" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fa-stop" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </Button>
                                  </children>
-                              </Group>
-                              <Slider fx:id="smVolumeSlider" max="125.0" maxHeight="300.0" minHeight="0.0" minWidth="0.0" orientation="VERTICAL">
-                                 <styleClass>
-                                    <String fx:value="transparency-slider" />
-                                    <String fx:value="timer-slider" />
-                                 </styleClass>
-                              </Slider>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="5.0" right="5.0" top="4.0" />
+                           </padding>
+                        </StackPane>
+                     </bottom>
+                     <center>
+                        <StackPane fx:id="waveStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
+                                 </graphic>
+                              </Label>
                            </children>
                         </StackPane>
-                        <Button fx:id="smMinimizeVolume" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="jfx-button4">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <FontIcon fill="#b20c0c" iconColor="WHITE" iconLiteral="fas-volume-off" iconSize="28" selectionEnd="0" selectionFill="#dab9b9" selectionStart="0" />
-                           </graphic>
-                           <VBox.margin>
-                              <Insets bottom="2.0" top="8.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                     <BorderPane.margin>
-                        <Insets />
-                     </BorderPane.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
-                     </padding>
-                  </VBox>
-               </left>
-            </BorderPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </StackPane>
             <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
                <graphic>
                   <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />

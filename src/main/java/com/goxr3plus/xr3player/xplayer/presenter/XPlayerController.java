@@ -140,15 +140,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Slider speedSlider;
 	
 	@FXML
-	private StackPane waveStackPane;
-	
-	@FXML
-	private Label waveProgressLabel;
-	
-	@FXML
-	private ProgressBar waveProgressBar;
-	
-	@FXML
 	private StackPane diskStackPane;
 	
 	@FXML
@@ -305,6 +296,39 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Label smVolumeSliderLabel;
 	
 	@FXML
+	private VBox volumeBarBox;
+	
+	@FXML
+	private Button smMaximizeVolume;
+	
+	@FXML
+	private ProgressBar volumeSliderProgBar;
+	
+	@FXML
+	private Slider smVolumeSlider;
+	
+	@FXML
+	private Button smMinimizeVolume;
+	
+	@FXML
+	private VBox topVBox;
+	
+	@FXML
+	private ToggleButton modeToggle;
+	
+	@FXML
+	private ToggleButton historyToggle;
+	
+	@FXML
+	private StackPane microStackPane;
+	
+	@FXML
+	private BorderPane microBorderPane;
+	
+	@FXML
+	private HBox topHBox;
+	
+	@FXML
 	private HBox toolsHBox;
 	
 	@FXML
@@ -335,25 +359,22 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackedFontIcon sizeStackedFontIcon;
 	
 	@FXML
-	private ToggleButton modeToggle;
+	private StackPane diskStackPane11;
 	
 	@FXML
-	private ToggleButton historyToggle;
+	private Button microPlayPauseButton;
 	
 	@FXML
-	private VBox volumeBarBox;
+	private Button microStopButton;
 	
 	@FXML
-	private Button smMaximizeVolume;
+	private StackPane waveStackPane;
 	
 	@FXML
-	private ProgressBar volumeSliderProgBar;
+	private Label waveProgressLabel;
 	
 	@FXML
-	private Slider smVolumeSlider;
-	
-	@FXML
-	private Button smMinimizeVolume;
+	private ProgressBar waveProgressBar;
 	
 	@FXML
 	private Label dragAndDropLabel;
@@ -592,6 +613,30 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/** Called as soon as the .fxml has been loaded */
 	@FXML
 	private void initialize() {
+		
+		//root
+		xPlayerStackPane.heightProperty().addListener((observable , oldValue , newValue) -> {
+			if (newValue.intValue() < 250) {
+				//Get TopHBox
+				if (!microBorderPane.getChildren().contains(topHBox)) {
+					topVBox.getChildren().remove(topHBox);
+					microBorderPane.setTop(topHBox);
+				}
+				
+				//Visibility
+				microStackPane.setVisible(true);
+			} else {
+				
+				//Get TopHBox
+				if (!topVBox.getChildren().contains(topHBox)) {
+					microBorderPane.getChildren().remove(topHBox);
+					topVBox.getChildren().add(0, topHBox);
+				}
+				
+				//Visibility
+				microStackPane.setVisible(false);
+			}
+		});
 		
 		// -----XPlayer and XPlayerModel-------------
 		xPlayerModel = new XPlayerModel();
@@ -1791,7 +1836,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private void reCalculateCanvasSize() {
 		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1
 		double size = Math.min(discBorderPane.getWidth() - speedSliderStackPane.getWidth(),
-				discBorderPane.getHeight() - diskStackPane1.getHeight() - waveFormVisualization.getHeight()) ;
+				discBorderPane.getHeight() - diskStackPane1.getHeight() - waveFormVisualization.getHeight());
 		
 		disc.resizeDisc(size);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
