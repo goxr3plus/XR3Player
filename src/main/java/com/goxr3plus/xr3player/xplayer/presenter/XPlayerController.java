@@ -103,8 +103,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	private final FontIcon playIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 24);
 	private final FontIcon smPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 32);
+	private final FontIcon microPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 20);
 	private final FontIcon pauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 24);
 	private final FontIcon smPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 32);
+	private final FontIcon microPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 20);
 	private static final XPlayerControllerContextMenu contextMenu = new XPlayerControllerContextMenu();
 	
 	//-----------------------------------------------
@@ -159,6 +161,15 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private Button forwardButton;
+	
+	@FXML
+	private StackPane waveStackPane;
+	
+	@FXML
+	private Label waveProgressLabel;
+	
+	@FXML
+	private ProgressBar waveProgressBar;
 	
 	@FXML
 	private StackPane visualizerStackTopParent;
@@ -314,18 +325,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private VBox topVBox;
 	
 	@FXML
-	private ToggleButton modeToggle;
-	
-	@FXML
-	private ToggleButton historyToggle;
-	
-	@FXML
-	private StackPane microStackPane;
-	
-	@FXML
-	private BorderPane microBorderPane;
-	
-	@FXML
 	private HBox topHBox;
 	
 	@FXML
@@ -359,6 +358,18 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackedFontIcon sizeStackedFontIcon;
 	
 	@FXML
+	private ToggleButton modeToggle;
+	
+	@FXML
+	private ToggleButton historyToggle;
+	
+	@FXML
+	private StackPane microStackPane;
+	
+	@FXML
+	private BorderPane microBorderPane;
+	
+	@FXML
 	private StackPane diskStackPane11;
 	
 	@FXML
@@ -368,13 +379,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Button microStopButton;
 	
 	@FXML
-	private StackPane waveStackPane;
-	
-	@FXML
-	private Label waveProgressLabel;
-	
-	@FXML
-	private ProgressBar waveProgressBar;
+	private Button microReplayButton;
 	
 	@FXML
 	private Label dragAndDropLabel;
@@ -921,16 +926,22 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			
 			//Simple Mode
 			smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
+			
+			//Micro Mode
+			microPlayPauseButton.setGraphic(xPlayer.isPlaying() ? microPauseIcon : microPlayIcon);
 		});
 		smPlayPauseButton.setOnAction(playPauseButton.getOnAction());
+		microPlayPauseButton.setOnAction(playPauseButton.getOnAction());
 		
 		//== replayButton
 		replayButton.setOnAction(a -> replay());
 		smReplayButton.setOnAction(replayButton.getOnAction());
+		microReplayButton.setOnAction(replayButton.getOnAction());
 		
 		//== stopButton
 		stopButton.setOnAction(a -> stop());
 		smStopButton.setOnAction(stopButton.getOnAction());
+		microStopButton.setOnAction(stopButton.getOnAction());
 		
 		//flipPane
 		flipPane.setFlipTime(150);
@@ -2194,6 +2205,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				
 				//Simple Mode
 				smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
+				
+				//Micro Mode
+				microPlayPauseButton.setGraphic(xPlayer.isPlaying() ? microPauseIcon : microPlayIcon);
 			});
 	}
 	
@@ -2689,7 +2703,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public Label getWaveProgressLabel() {
 		return waveProgressLabel;
 	}
-
+	
 	public StackPane getModesStackPane() {
 		return modesStackPane;
 	}

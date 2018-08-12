@@ -655,7 +655,7 @@
                   </VBox>
                </top>
             </BorderPane>
-            <StackPane fx:id="microStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
+            <StackPane fx:id="microStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
                <children>
                   <BorderPane fx:id="microBorderPane" minHeight="0.0" minWidth="0.0">
                      <bottom>
@@ -683,6 +683,17 @@
                                        </tooltip>
                                        <graphic>
                                           <FontIcon iconColor="WHITE" iconLiteral="fa-stop" iconSize="20" selectionEnd="0" selectionStart="0" />
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="microReplayButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="32.0" styleClass="jfx-button-yellow">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <tooltip>
+                                          <Tooltip text="Replay" />
+                                       </tooltip>
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="typ-arrow-sync" iconSize="24" selectionEnd="0" selectionStart="0" />
                                        </graphic>
                                     </Button>
                                  </children>
