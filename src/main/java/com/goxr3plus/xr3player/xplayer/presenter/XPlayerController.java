@@ -616,11 +616,18 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//root
 		xPlayerStackPane.heightProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue.intValue() < 250) {
+			if (newValue.intValue() < 280) {
+				
 				//Get TopHBox
 				if (!microBorderPane.getChildren().contains(topHBox)) {
 					topVBox.getChildren().remove(topHBox);
 					microBorderPane.setTop(topHBox);
+				}
+				
+				//DiscBorderPane
+				if (!microBorderPane.getChildren().contains(waveStackPane)) {
+					discBorderPane.getChildren().remove(waveStackPane);
+					microBorderPane.setCenter(waveStackPane);
 				}
 				
 				//Visibility
@@ -631,6 +638,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				if (!topVBox.getChildren().contains(topHBox)) {
 					microBorderPane.getChildren().remove(topHBox);
 					topVBox.getChildren().add(0, topHBox);
+				}
+				
+				//DiscBorderPane
+				if (!discBorderPane.getChildren().contains(waveStackPane)) {
+					microBorderPane.getChildren().remove(waveStackPane);
+					discBorderPane.setTop(waveStackPane);
 				}
 				
 				//Visibility

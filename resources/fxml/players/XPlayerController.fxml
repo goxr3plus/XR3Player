@@ -157,6 +157,20 @@
                                              </bottom>
                                           </BorderPane>
                                        </center>
+                                       <top>
+                                          <StackPane fx:id="waveStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
+                                                   </graphic>
+                                                </Label>
+                                             </children>
+                                          </StackPane>
+                                       </top>
                                     </BorderPane>
                                     <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
@@ -610,6 +624,12 @@
                                  </graphic>
                               </Button>
                            </children>
+                           <padding>
+                              <Insets bottom="2.0" top="2.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;">
                            <children>
@@ -673,20 +693,6 @@
                            </padding>
                         </StackPane>
                      </bottom>
-                     <center>
-                        <StackPane fx:id="waveStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="33.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label fx:id="waveProgressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" opacity="0.95" style="-fx-background-color: #151515; -fx-font-size: 15;" styleClass="progress-label" text="Wave Spectrum" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <graphic>
-                                    <ProgressBar fx:id="waveProgressBar" prefHeight="8.0" styleClass="transparent-progress-bar" />
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </StackPane>
-                     </center>
                   </BorderPane>
                </children>
             </StackPane>
