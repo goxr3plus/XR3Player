@@ -150,7 +150,7 @@
                   <HBox minHeight="0.0" minWidth="0.0" spacing="10.0">
                      <children>
                         <FontIcon fx:id="visualizerLabelFontIcon" iconColor="WHITE" iconLiteral="gmi-filter-1" iconSize="24" text="" />
-                        <Label fx:id="progressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 11; -fx-background-color: transparent;" text="0 %" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="progressLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 11; -fx-background-color: transparent;" text=" 0%" textAlignment="CENTER" wrapText="true">
                            <tooltip>
                               <Tooltip />
                            </tooltip>
