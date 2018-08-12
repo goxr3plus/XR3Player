@@ -621,7 +621,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		
 		//root
 		xPlayerStackPane.heightProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue.intValue() < 280) {
+			if (newValue.intValue() < 300) {
 				
 				//Get TopHBox
 				if (!microBorderPane.getChildren().contains(topHBox)) {

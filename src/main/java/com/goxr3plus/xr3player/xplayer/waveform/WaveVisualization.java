@@ -139,6 +139,11 @@ public class WaveVisualization extends WaveFormPane {
 		@Override
 		public void handle(long nanos) {
 			
+			//Speed improvement
+			if(!WaveVisualization.this.xPlayerController.getModeToggle().isSelected() && WaveVisualization.this.xPlayerController.getModesStackPane().isVisible()) {
+				return;
+			}
+			
 			//Every 300 millis update
 			//			if (nanos >= previousNanos + 100000 * 1000) { //
 			//				previousNanos = nanos;
