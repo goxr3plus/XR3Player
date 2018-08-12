@@ -1791,7 +1791,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private void reCalculateCanvasSize() {
 		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1
 		double size = Math.min(discBorderPane.getWidth() - speedSliderStackPane.getWidth(),
-				discBorderPane.getHeight() - diskStackPane1.getHeight() - waveFormVisualization.getHeight()) / 1.1;
+				discBorderPane.getHeight() - diskStackPane1.getHeight() - waveFormVisualization.getHeight()) ;
 		
 		disc.resizeDisc(size);
 		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())

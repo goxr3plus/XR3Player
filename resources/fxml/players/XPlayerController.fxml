@@ -165,7 +165,7 @@
                                                       <Insets right="1.0" />
                                                    </BorderPane.margin>
                                                    <padding>
-                                                      <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                                      <Insets bottom="4.0" left="5.0" right="5.0" top="4.0" />
                                                    </padding>
                                                 </StackPane>
                                              </bottom>
@@ -360,7 +360,7 @@
                               </StackPane>
                            </top>
                         </BorderPane>
-                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+                        <BorderPane fx:id="smBorderPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                            <center>
                               <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
                                  <center>
