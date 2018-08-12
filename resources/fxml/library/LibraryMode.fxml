@@ -101,12 +101,12 @@
                                                                         <FontIcon iconColor="#ffe81f" iconLiteral="typ-plus" iconSize="32" selectionEnd="0" />
                                                                      </graphic>
                                                                   </MenuItem>
-                                                                  <MenuItem fx:id="crAndOpenFromFolder" mnemonicParsing="false" text="Choose Folder">
+                                                                  <MenuItem fx:id="crAndOpenFromFolder" mnemonicParsing="false" text="Choose Folder" visible="false">
                                                                      <graphic>
                                                                         <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
                                                                      </graphic>
                                                                   </MenuItem>
-                                                                  <MenuItem fx:id="crAndOpenFromFiles" mnemonicParsing="false" text="Choose Files">
+                                                                  <MenuItem fx:id="crAndOpenFromFiles" mnemonicParsing="false" text="Choose Files" visible="false">
                                                                      <graphic>
                                                                         <FontIcon iconColor="#e8ac14" iconLiteral="far-folder-open" iconSize="24" />
                                                                      </graphic>
