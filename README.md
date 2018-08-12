@@ -1,4 +1,8 @@
-# [download](https://goxr3plus.github.io/xr3player.io/) Latest Version V3.118
+Wave Spectrum Analyzers (++many more) added on Update V3.119 
+
+![screenshot_1](https://user-images.githubusercontent.com/20374208/44005992-1687e064-9e85-11e8-869b-489eb00d7cdf.jpg)
+
+# Latest Version V3.119 [Download](https://goxr3plus.github.io/xr3player.io/)
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 XR3Player is the most advanced JavaFX Media Player . It is growing with every release , hopefully one day it will dominate the media players market.
