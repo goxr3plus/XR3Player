@@ -16,7 +16,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -129,6 +128,27 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private BorderPane discBorderPane;
 	
 	@FXML
+	private StackPane speedSliderStackPane;
+	
+	@FXML
+	private JFXButton speedControlButton;
+	
+	@FXML
+	private FontIcon speedLabelFontIcon1;
+	
+	@FXML
+	private Slider speedSlider;
+	
+	@FXML
+	private StackPane waveStackPane;
+	
+	@FXML
+	private Label waveProgressLabel;
+	
+	@FXML
+	private ProgressBar waveProgressBar;
+	
+	@FXML
 	private StackPane diskStackPane;
 	
 	@FXML
@@ -148,18 +168,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private Button forwardButton;
-	
-	@FXML
-	private StackPane speedSliderStackPane;
-	
-	@FXML
-	private JFXButton speedControlButton;
-	
-	@FXML
-	private FontIcon speedLabelFontIcon1;
-	
-	@FXML
-	private Slider speedSlider;
 	
 	@FXML
 	private StackPane visualizerStackTopParent;
@@ -252,15 +260,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Label advModeVolumeLabel;
 	
 	@FXML
-	private StackPane waveStackPane;
-	
-	@FXML
-	private Label waveProgressLabel;
-	
-	@FXML
-	private ProgressBar waveProgressBar;
-	
-	@FXML
 	private BorderPane smBorderPane;
 	
 	@FXML
@@ -291,7 +290,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Button smForwardButton;
 	
 	@FXML
-	private JFXToggleButton showVisualizer;
+	private ToggleButton showVisualizer;
 	
 	@FXML
 	private ProgressBar smTimeSliderProgress;
@@ -307,6 +306,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private HBox toolsHBox;
+	
+	@FXML
+	private ToggleButton muteButton;
 	
 	@FXML
 	private Button showMenu;
@@ -340,9 +342,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private VBox volumeBarBox;
-	
-	@FXML
-	private ToggleButton muteButton;
 	
 	@FXML
 	private Button smMaximizeVolume;
@@ -1642,21 +1641,21 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//A cancerous bug is here , so cancerous that it makes me wanna brake the fucking laptop
 			//TODO FIX THIS FUCKING BUG FUCKING FUCKING FUCKING BUG
 			//MAKES THE UI DANCE LIKE A STRIPPER
-//			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
-//				//				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
-//				//				positions[0] += 0.03;
-//				//				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
-//				//				//Run Later
-//				//				Platform.runLater(() -> {
-//				//					System.out.println("FUCK!!!!!!");
-//				//					double[] positions2 = Main.libraryMode.getTopSplitPane().getDividerPositions();
-//				//					positions2[0] -= 0.03;
-//				//					Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
-//				//				});
-//				//				System.out.println("Duplicate");
-//			} else {
-//				previousSliderHeight = newValuee;
-//			}
+			//			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
+			//				//				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
+			//				//				positions[0] += 0.03;
+			//				//				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+			//				//				//Run Later
+			//				//				Platform.runLater(() -> {
+			//				//					System.out.println("FUCK!!!!!!");
+			//				//					double[] positions2 = Main.libraryMode.getTopSplitPane().getDividerPositions();
+			//				//					positions2[0] -= 0.03;
+			//				//					Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
+			//				//				});
+			//				//				System.out.println("Duplicate");
+			//			} else {
+			//				previousSliderHeight = newValuee;
+			//			}
 			
 			//Keep fixed the UI
 			if (getKey() == 0) {
@@ -1748,7 +1747,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			
 			//toolsHBox
 			toolsHBox.getChildren().clear();
-			toolsHBox.getChildren().addAll(showMenu, openFile, settings, transferMedia);
+			toolsHBox.getChildren().addAll(muteButton, showMenu, openFile, settings, transferMedia);
 			
 		} else if (newSide == Side.RIGHT) {
 			
@@ -1781,7 +1780,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			
 			//toolsHBox
 			toolsHBox.getChildren().clear();
-			toolsHBox.getChildren().addAll(transferMedia, settings, openFile, showMenu);
+			toolsHBox.getChildren().addAll(transferMedia, settings, openFile, showMenu, muteButton);
 			
 		}
 	}
@@ -2522,7 +2521,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/**
 	 * @return the showVisualizer
 	 */
-	public JFXToggleButton getShowVisualizer() {
+	public ToggleButton getShowVisualizer() {
 		return showVisualizer;
 	}
 	
