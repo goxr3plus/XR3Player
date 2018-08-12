@@ -638,6 +638,10 @@
 	-fx-background-color:#FFFFFF27;
 }
 
+.specialJFXTabPane .tab-selected-line {
+	 -fx-background-color:transparent;
+}
+
 
 /*******************************************************************************
 
