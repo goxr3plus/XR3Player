@@ -632,6 +632,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				
 				//Visibility
 				microStackPane.setVisible(true);
+				modesStackPane.setVisible(false);
 			} else {
 				
 				//Get TopHBox
@@ -647,7 +648,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				}
 				
 				//Visibility
+				modesStackPane.setVisible(true);
 				microStackPane.setVisible(false);
+				
 			}
 		});
 		
@@ -685,6 +688,18 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		xPlayerPlayList = new XPlayerPlaylist(this);
 		visualizerWindow = new VisualizerWindowController(this);
 		history = new XPlayerHistory(this);
+		
+		//== microStackPane
+		microStackPane.setOnDragOver(event -> {
+			//System.out.println(event.getGestureSource())
+			
+			//Check if FlipPane is on the front side
+			//if (!flipPane.isBackVisible()) { //event.getGestureSource() != mediaFileMarquee) {
+			dragAndDropLabel.setVisible(true);
+			//}
+			
+			event.consume();
+		});
 		
 		//== modesStackPane
 		modesStackPane.setOnDragOver(event -> {
@@ -2673,6 +2688,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	public Label getWaveProgressLabel() {
 		return waveProgressLabel;
+	}
+
+	public StackPane getModesStackPane() {
+		return modesStackPane;
 	}
 	
 }

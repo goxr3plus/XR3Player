@@ -195,22 +195,28 @@ abstract class Visualizer extends VisualizerDrawer {
 				return;
 			}
 			
-			float secondsElapsed = ( nanos - previousTime ) / 1e9f;
-			previousTime = nanos;
-			
-			secondsElapsedSinceLastFpsUpdate += secondsElapsed;
-			framesSinceLastFpsUpdate++;
-			if (secondsElapsedSinceLastFpsUpdate >= 0.5f) {
-				int fps = Math.round(framesSinceLastFpsUpdate / secondsElapsedSinceLastFpsUpdate);
-				//System.out.println(fps)
-				secondsElapsedSinceLastFpsUpdate = 0;
-				framesSinceLastFpsUpdate = 0;
-			}
+//			float secondsElapsed = ( nanos - previousTime ) / 1e9f;
+//			previousTime = nanos;
+//			
+//			secondsElapsedSinceLastFpsUpdate += secondsElapsed;
+//			framesSinceLastFpsUpdate++;
+//			if (secondsElapsedSinceLastFpsUpdate >= 0.5f) {
+//				int fps = Math.round(framesSinceLastFpsUpdate / secondsElapsedSinceLastFpsUpdate);
+//				//System.out.println(fps)
+//				secondsElapsedSinceLastFpsUpdate = 0;
+//				framesSinceLastFpsUpdate = 0;
+//			}
 			
 			// Avoid null pointer and also check if we have permission to draw the visualizer
 			if (xPlayerController != null && !xPlayerController.getVisualizerStackController().isVisible()) {
 				clear();
 				draw = false;
+				return;
+			}
+			
+			//No need to draw the visualizer if player is on microMode
+			if (!xPlayerController.getModesStackPane().isVisible()) {
+				clear();
 				return;
 			}
 			
