@@ -17,7 +17,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.DisplayMode;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.VisualizerType;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.MicrophoneVisualizer;
 
 /**
@@ -115,7 +115,7 @@ public class MicrophonePCMAnalyzerTest extends Application {
 		}).start();
 		
 		//Visualizer
-		visualizer.setDisplayMode(Integer.parseInt(DisplayMode.CIRCLE_WITH_LINES.toString()));
+		visualizer.setDisplayMode(Integer.parseInt(VisualizerType.CIRCLE_WITH_LINES.toString()));
 		visualizer.setupDSP(microphone.getTargetDataLine());
 		visualizer.startDSP(microphone.getTargetDataLine());
 		visualizer.startVisualizer();

@@ -54,12 +54,13 @@
                               <RadioMenuItem mnemonicParsing="false" text="Stereo Oscilloscope" toggleGroup="$visualizerTypeGroup" />
                               <RadioMenuItem mnemonicParsing="false" text="Oscilloscope Lines" toggleGroup="$visualizerTypeGroup" />
                               <RadioMenuItem mnemonicParsing="false" text="Spectrum Bars" toggleGroup="$visualizerTypeGroup" />
-                              <RadioMenuItem mnemonicParsing="false" text="Volume Meter" toggleGroup="$visualizerTypeGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Horizontal Volume Meter" toggleGroup="$visualizerTypeGroup" />
                               <RadioMenuItem mnemonicParsing="false" text="Rozete" toggleGroup="$visualizerTypeGroup" />
                               <RadioMenuItem mnemonicParsing="false" text="Circle Lines" toggleGroup="$visualizerTypeGroup" />
                               <RadioMenuItem mnemonicParsing="false" text="Skierpinski Triangles" toggleGroup="$visualizerTypeGroup" />
-                              <RadioMenuItem mnemonicParsing="false" text="Sprite3D (new)" toggleGroup="$visualizerTypeGroup" />
-                              <RadioMenuItem disable="true" mnemonicParsing="false" text="Julia Fractals (new)" toggleGroup="$visualizerTypeGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Sprite3D" toggleGroup="$visualizerTypeGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Vertical Volume Meter" toggleGroup="$visualizerTypeGroup" />
+                              <RadioMenuItem disable="true" mnemonicParsing="false" text="Julia Fractals " toggleGroup="$visualizerTypeGroup" visible="false" />
                           </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Background">

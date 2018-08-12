@@ -88,7 +88,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayer;
 import main.java.com.goxr3plus.xr3player.xplayer.model.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerPlayService;
 import main.java.com.goxr3plus.xr3player.xplayer.services.XPlayerSeekService;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.DisplayMode;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.VisualizerType;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
@@ -1411,7 +1411,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		//DjVisualizer
 		if (this.getKey() == 1 || this.getKey() == 2) {
 			djVisualizer = new XPlayerVisualizer(this, false);
-			djVisualizer.setDisplayMode(Integer.parseInt(DisplayMode.VERTICAL_VOLUME_METER.toString()));
+			djVisualizer.setDisplayMode(Integer.parseInt(VisualizerType.VERTICAL_VOLUME_METER.toString()));
 		}
 		
 		// Select the correct toggle

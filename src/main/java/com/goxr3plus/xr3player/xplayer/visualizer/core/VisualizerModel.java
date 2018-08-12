@@ -59,10 +59,10 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * The maximum that the display mode can reach
 	 */
-	public final static int DISPLAYMODE_MAXIMUM = DisplayMode.values().length - 2; //-1 cause i count from 0
+	public final static int DISPLAYMODE_MAXIMUM = VisualizerType.values().length - 2; //-1 cause i count from 0
 	
 	/** The display mode. */
-	public final SimpleIntegerProperty displayMode = new SimpleIntegerProperty(Integer.parseInt(DisplayMode.CIRCLE_WITH_LINES.toString()));
+	public final SimpleIntegerProperty displayMode = new SimpleIntegerProperty(Integer.parseInt(VisualizerType.CIRCLE_WITH_LINES.toString()));
 	
 	/** The Constant DEFAULT_FPS. */
 	private static final int DEFAULT_FPS = 60;
@@ -707,7 +707,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 *
 	 * @author GOXR3PLUS
 	 */
-	public enum DisplayMode {
+	public enum VisualizerType {
 		
 		/** OSCILLOSCOPE */
 		OSCILLOSCOPE {
