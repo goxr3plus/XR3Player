@@ -140,7 +140,7 @@ public class WaveVisualization extends WaveFormPane {
 		public void handle(long nanos) {
 			
 			//Speed improvement
-			if(!WaveVisualization.this.xPlayerController.getModeToggle().isSelected() && WaveVisualization.this.xPlayerController.getModesStackPane().isVisible()) {
+			if (!WaveVisualization.this.xPlayerController.getModeToggle().isSelected() && WaveVisualization.this.xPlayerController.getModesStackPane().isVisible()) {
 				return;
 			}
 			
@@ -157,8 +157,7 @@ public class WaveVisualization extends WaveFormPane {
 			//Set Timer X Position
 			double percent = WaveVisualization.this.xPlayerController.getxPlayerModel().getCurrentTime()
 					/ (double) WaveVisualization.this.xPlayerController.getxPlayerModel().getDuration();
-			//System.out.println("percent : " + percent);
-			WaveVisualization.this.setTimerXPosition((int) ( ( percent * WaveVisualization.this.width ) ));
+			WaveVisualization.this.setTimerXPosition((int) ( percent * WaveVisualization.this.width ));
 			
 			//Check if wave data needs to be recalculated
 			if (recalculateWaveData) {
