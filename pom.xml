@@ -232,8 +232,6 @@
 			<artifactId>richtextfx</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-		<!--<dependency> <groupId>de.jensd</groupId> <artifactId>fontawesomefx</artifactId> 
-			<version>8.9</version> </dependency> -->
 		<dependency>
 			<groupId>com.1stleg</groupId>
 			<artifactId>jnativehook</artifactId>
@@ -295,9 +293,6 @@
 			<version>V2.2.6</version>
 		</dependency>
 		<!-- AUDIO SUPPORT -->
-		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>java-stream-player</artifactId> 
-			<version>V1.1.0</version> </dependency> -->
-		<!-- AUDIO SUPPORT -->
 		<dependency>
 			<groupId>com.googlecode.soundlibs</groupId>
 			<artifactId>mp3spi</artifactId>
@@ -325,40 +320,16 @@
 			<version>0.3.7.2</version>
 		</dependency>
 
-
-		<!-- AUDIO EXPERIMENTAL TESTS -->
-		<!-- <dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>tritonus-all</artifactId> 
-			<version>0.3.7.2</version> </dependency> -->
-
-		<!-- WEB BROWSER SUPPORT -->
-		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>JavaFX-Web-Browser</artifactId> 
-			<version>V3.5.0</version> </dependency> -->
-		<!-- Locally testing WebBrowser -->
-		<!-- <dependency> <groupId>JavaFX-Web-Browser</groupId> <artifactId>com.JavaFX-Web-Browser</artifactId> 
-			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/JavaFXWebBrowser-3.5.0.jar</systemPath> 
-			</dependency> -->
-		<!-- XR3Capture -->
-		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>xr3capture</artifactId> 
-			<version>V9.12</version> <exclusions> <exclusion> <groupId>com.jfoenix</groupId> 
-			<artifactId>jfoenix</artifactId> </exclusion> <exclusion> <groupId>org.controlsfx</groupId> 
-			<artifactId>controlsfx</artifactId> </exclusion> </exclusions> </dependency> -->
-		<!-- Locally testing XR3Capture -->
-		<!-- <dependency> <groupId>com.XR3Capture</groupId> <artifactId>XR3Capture</artifactId> 
-			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/XR3Capture-3.12.jar</systemPath> 
-			</dependency> -->
-
 		<!-- FX-BorderlessScene -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>FX-BorderlessScene</artifactId>
 			<version>V3.0.0</version>
 		</dependency>
-
 		<!-- Locally Testing FX-BorderlessScene -->
 		<!-- <dependency> <groupId>com.FX-BorderlessScene</groupId> <artifactId>FX-BorderlessScene</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/FX-BorderlessScene-2.0.0.jar</systemPath> 
 			</dependency> -->
-
 		<!-- Dropbox -->
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
@@ -371,51 +342,24 @@
 			<artifactId>evo-inflector</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>net.java.dev.jna</groupId> <artifactId>jna</artifactId> 
-			<version>4.2.0</version> </dependency> -->
-		<!-- <dependency> <groupId>fm.last</groupId> <artifactId>coverartarchive-api</artifactId> 
-			<version>2.1.0</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
-		<!-- <dependency> <groupId>com.ibm.icu</groupId> <artifactId>icu4j</artifactId> 
-			<version>61.1</version> </dependency> -->
+
 		<!-- JAVE2 -->
 		<dependency>
-			<groupId>com.github.GOXR3PLUS-STUDIO.jave2</groupId>
-			<artifactId>jave-all-deps</artifactId>
-			<version>2.4.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.github.GOXR3PLUS-STUDIO.jave2</groupId>
-					<artifactId>jave-native-win32</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.github.GOXR3PLUS-STUDIO.jave2</groupId>
-					<artifactId>jave-native-linux32</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.github.GOXR3PLUS-STUDIO.jave2</groupId>
-					<artifactId>jave-native-linux64</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.github.GOXR3PLUS-STUDIO.jave2</groupId>
-					<artifactId>jave-native-osx64</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>ws.schild</groupId>
+			<artifactId>jave-native-win64</artifactId>
+			<version>2.4.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>it.sauronsoftware.jave</groupId> <artifactId>jave</artifactId> 
-			<version>1.0.2</version> <scope>system</scope> <systemPath>${project.basedir}/localLibraries/jave-1.0.2.jar</systemPath> 
-			</dependency> -->
+		<dependency>
+			<groupId>ws.schild</groupId>
+			<artifactId>jave-core</artifactId>
+			<version>2.4.2</version>
+		</dependency>
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>javasysmon2</artifactId>
 			<version>8.0.0</version>
 		</dependency>
-		<!-- <dependency> <groupId>local.github.goxr3plus</groupId> <artifactId>javasysmon</artifactId> 
-			<version>3.6.0</version> <scope>system</scope> <systemPath>${project.basedir}/localLibraries/javasysmon-0.3.6.0.jar</systemPath> 
-			</dependency> -->
-		<!-- <dependency> <groupId>com.google.cloud</groupId> <artifactId>google-cloud-speech</artifactId> 
-			<version>0.53.0-alpha</version> </dependency> -->
 		<dependency>
 			<groupId>org.zeroturnaround</groupId>
 			<artifactId>zt-zip</artifactId>
