@@ -72,6 +72,20 @@ Some futuristic features that are coming :
   - Support all audio file formats
   - Support all video file formats
 
+- **Java Audio Tutorials and API's by GOXR3PLUS STUDIO**
+  - [Java-Audio-Wave-Spectrum-API](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API/issues/1)
+    ![image](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API/raw/master/images/Screenshot_2.jpg?raw=true)
+  - [Java-Spectrum-Analyser-Tutorials](https://github.com/goxr3plus/Java-Spectrum-Analyser-Tutorials)
+  - [https://github.com/goxr3plus/java-google-speech-api](https://github.com/goxr3plus/java-google-speech-api)
+  - [java-stream-player](https://github.com/goxr3plus/java-stream-player)
+  - [Capture Audio from Microphone and make complex spectrum analyzers](https://github.com/goxr3plus/Java-Microphone-Audio-Spectrum-Analyzers-Tutorial)
+  - [Java-Speech-Recognizer-Tutorial--Calculator](https://github.com/goxr3plus/Java-Speech-Recognizer-Tutorial--Calculator)
+  - [Java+MaryTTS=Java Text To Speech](https://github.com/goxr3plus/Java-Text-To-Speech-Tutorial)
+  - [Java Speech Recognition based on Google Cloud Services ](https://github.com/goxr3plus/Java-Google-Speech-Recognizer)
+  - [Java-Google-Text-To-Speech](https://github.com/goxr3plus/Java-Google-Text-To-Speech)
+  - [Full Google Translate Support using Java](https://github.com/goxr3plus/java-google-translator)
+  - [Professional Java Google Desktop Translator](https://github.com/goxr3plus/Java-Google-Desktop-Translator)
+  - [
 
 ## QUESTIONS
 <details>
