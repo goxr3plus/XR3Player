@@ -1,17 +1,11 @@
-Wave Spectrum Analyzers (++many more) added on Update V3.119 
+# Wave Spectrum Analyzers (++many more) added on Update V3.119 
 
 ![screenshot_1](https://user-images.githubusercontent.com/20374208/44005992-1687e064-9e85-11e8-869b-489eb00d7cdf.jpg)
 
 # Latest Version V3.119 [Download](https://goxr3plus.github.io/xr3player.io/)
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
-XR3Player is the most advanced JavaFX Media Player . It is growing with every release , hopefully one day it will dominate the media players market.
-
-Some futuristic features that are coming :
-1) Personal assistant AI 
-2) Online Accounts with subscription
-3) Home music assistant through AI
-4) Home visualizations through lights 
+The most advanced JavaFX Media Player .... growing to be the best out there .
 
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 
@@ -72,6 +66,24 @@ Some futuristic features that are coming :
   - Support all audio file formats
   - Support all video file formats
 
+## Java Audio Tutorials and API's by GOXR3PLUS STUDIO
+ - **Spectrum Analyzers**
+   - [Java-Audio-Wave-Spectrum-API](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API)
+    ![image](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API/raw/master/images/Screenshot_2.jpg?raw=true)
+   - [Jave Spectrum Analyzers from Audio](https://github.com/goxr3plus/Java-Spectrum-Analyser-Tutorials)
+   - [Capture Audio from Microphone and make complex spectrum analyzers](https://github.com/goxr3plus/Java-Microphone-Audio-Spectrum-Analyzers-Tutorial)
+  
+ - **Java multiple audio formats player**
+   - [Java-stream-player](https://github.com/goxr3plus/java-stream-player)
+  
+ - **Speech Recognition/Translation/Synthenizers**
+   - [Java Speech Recognition/Translation/Synthesizer based on Google Cloud Services](https://github.com/goxr3plus/java-google-speech-api)
+   - [Java-Speech-Recognizer-Tutorial--Calculator](https://github.com/goxr3plus/Java-Speech-Recognizer-Tutorial--Calculator)
+   - [Java+MaryTTS=Java Text To Speech](https://github.com/goxr3plus/Java-Text-To-Speech-Tutorial)
+   - [Java Speech Recognition Program based on Google Cloud Services ](https://github.com/goxr3plus/Java-Google-Speech-Recognizer)
+   - [Java Google Text To Speech](https://github.com/goxr3plus/Java-Google-Text-To-Speech)
+   - [Full Google Translate Support using Java](https://github.com/goxr3plus/java-google-translator)
+   - [Professional Java Google Desktop Translator](https://github.com/goxr3plus/Java-Google-Desktop-Translator)
 
 ## QUESTIONS
 <details>
@@ -102,6 +114,11 @@ To build XR3Player, you will need:
 
 Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with Java 9
 
+>PS A local library named [TarsosTranscoder](TarsosTranscoder) is not included , so if you download the
+ repository you must install the jar of that library locally . 
+>Though don't worry because i will publish it on Maven soon so you don't have to do it , just for now because 
+ i didn't had time to do it :)
+
 ## About JxBrowser
 
 >XR3Player uses JxBrowser http://www.teamdev.com/jxbrowser, which is a proprietary software, owned by TeamDev Ltd. The use of JxBrowser >is governed by JxBrowser Product Licence Agreement http://www.teamdev.com/jxbrowser-licence-agreement. 
@@ -129,3 +146,4 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 - [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
 - [**JAVE2**](https://github.com/goxr3plus/jave2) The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project
+- [**TarsosTranscoder**](https://github.com/goxr3plus/TarsosTranscoder) A java wrapper for ffmpeg to transcode audio. 
