@@ -28,7 +28,7 @@ import ws.schild.jave.MultimediaObject;
 
 public class WaveFormService extends Service<Boolean> {
 	
-	private static final double WAVEFORM_HEIGHT_COEFFICIENT = 2.6; // This fits the waveform to the swing node height
+	private static final double WAVEFORM_HEIGHT_COEFFICIENT = 2.4; // This fits the waveform to the swing node height
 	private static final CopyOption[] options = new CopyOption[]{ COPY_ATTRIBUTES , REPLACE_EXISTING };
 	private float[] resultingWaveform;
 	private int[] wavAmplitudes;
@@ -127,8 +127,9 @@ public class WaveFormService extends Service<Boolean> {
 				int randomN = random.nextInt(99999);
 				
 				//Create temporary files
-				File temporalDecodedFile = File.createTempFile("decoded_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, ".wav");
-				File temporalCopiedFile = File.createTempFile("original_" + InfoTool.getFileTitle(fileAbsolutePath) + randomN, "." + fileFormat);
+				String title = InfoTool.getFileTitle(fileAbsolutePath);
+				File temporalDecodedFile = File.createTempFile("decoded_" + title + randomN, ".wav");
+				File temporalCopiedFile = File.createTempFile("original_" + title + randomN, "." + fileFormat);
 				temp1 = temporalDecodedFile;
 				temp2 = temporalCopiedFile;
 				
@@ -186,17 +187,22 @@ public class WaveFormService extends Service<Boolean> {
 			 */
 			private int[] getWavAmplitudes(File file) throws UnsupportedAudioFileException , IOException {
 				int[] amplitudes;
+				
+				//Start
 				try (AudioInputStream input = AudioSystem.getAudioInputStream(file)) {
 					AudioFormat baseFormat = input.getFormat();
 					
+					//Create encoding
 					Encoding encoding = AudioFormat.Encoding.PCM_UNSIGNED;
 					float sampleRate = baseFormat.getSampleRate();
 					int numChannels = baseFormat.getChannels();
 					
+					//Create decoded format
 					AudioFormat decodedFormat = new AudioFormat(encoding, sampleRate, 16, numChannels, numChannels * 2, sampleRate, false);
 					int available = input.available();
 					amplitudes = new int[available];
 					
+					//PCMDecodedInput
 					try (AudioInputStream pcmDecodedInput = AudioSystem.getAudioInputStream(decodedFormat, input)) {
 						byte[] buffer = new byte[available];
 						pcmDecodedInput.read(buffer, 0, available);
