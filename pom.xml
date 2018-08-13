@@ -262,11 +262,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>org.fxmisc.easybind</groupId>
-			<artifactId>easybind</artifactId>
-			<version>1.0.3</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.fxmisc.easybind</groupId> <artifactId>easybind</artifactId> 
+			<version>1.0.3</version> </dependency> -->
 		<dependency>
 			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
@@ -424,11 +421,6 @@
 			<artifactId>zt-zip</artifactId>
 			<version>1.13</version>
 			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>be.tarsos</groupId>
-			<artifactId>transcoder</artifactId>
-			<version>1.2</version>
 		</dependency>
 	</dependencies>
 </project>

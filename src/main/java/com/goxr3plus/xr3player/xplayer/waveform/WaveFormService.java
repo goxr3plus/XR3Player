@@ -15,15 +15,16 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import be.tarsos.transcoder.Attributes;
-import be.tarsos.transcoder.DefaultAttributes;
-import be.tarsos.transcoder.Transcoder;
-import be.tarsos.transcoder.ffmpeg.EncoderException;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
+import ws.schild.jave.AudioAttributes;
+import ws.schild.jave.Encoder;
+import ws.schild.jave.EncoderException;
+import ws.schild.jave.EncodingAttributes;
+import ws.schild.jave.MultimediaObject;
 
 public class WaveFormService extends Service<Boolean> {
 	
@@ -36,6 +37,7 @@ public class WaveFormService extends Service<Boolean> {
 	private final Random random = new Random();
 	private File temp1;
 	private File temp2;
+	private Encoder encoder;
 	
 	/**
 	 * Constructor.
@@ -216,15 +218,24 @@ public class WaveFormService extends Service<Boolean> {
 			 * @throws EncoderException
 			 */
 			private void transcodeToWav(File sourceFile , File destinationFile) throws EncoderException {
-				Attributes attributes = DefaultAttributes.WAV_PCM_S16LE_STEREO_44KHZ.getAttributes();
 				try {
-					Transcoder.transcode(sourceFile.toString(), destinationFile.toString(), attributes);
-				} catch (EncoderException exception) {
-					if (exception.getMessage().startsWith("Source and target should")) {
-						// even with this error message the library does the conversion, who knows why
-					} else {
-						throw exception;
-					}
+					
+					//Set Audio Attributes
+					AudioAttributes audio = new AudioAttributes();
+					audio.setCodec("pcm_s16le");
+					audio.setChannels(2);
+					audio.setSamplingRate(44100);
+					
+					//Set encoding attributes
+					EncodingAttributes attributes = new EncodingAttributes();
+					attributes.setFormat("wav");
+					attributes.setAudioAttributes(audio);
+					
+					//Encode
+					encoder = encoder != null ? encoder : new Encoder();
+					encoder.encode(new MultimediaObject(sourceFile), destinationFile, attributes);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 			}
 			
