@@ -118,24 +118,30 @@ public class ConverterService extends Service<Boolean> {
 				//Check if it is already .mp3
 				if (!"mp3".equals(InfoTool.getFileExtension(fileAbsolutePath))) {
 					newFileAsbolutePath = folderName + File.separator + InfoTool.getFileTitle(fileAbsolutePath) + ".mp3";
+					
 					//Convert any audio format to .mp3
 					try {
-						File source = new File(fileAbsolutePath);
 						
+						//Files
+						File source = new File(fileAbsolutePath);					
 						File target = new File(newFileAsbolutePath);
+						
+						//Audio Attributes
 						AudioAttributes audio = new AudioAttributes();
 						audio.setCodec("libmp3lame");
 						audio.setBitRate(128000);
 						audio.setChannels(2);
 						audio.setSamplingRate(44100);
+						
+						//Encoding attributes
 						EncodingAttributes attrs = new EncodingAttributes();
 						attrs.setFormat("mp3");
 						attrs.setAudioAttributes(audio);
-						//Initialize if encoder is null
-						if (encoder == null)
-							encoder = new Encoder();
-						//Go do it
+						
+						//Encode                                            
+						encoder = encoder != null ? encoder : new Encoder();
 						encoder.encode(new MultimediaObject(source), target, attrs, listener);
+						
 					} catch (Exception ex) {
 						ex.printStackTrace();
 						succeeded = false;

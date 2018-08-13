@@ -28,7 +28,7 @@ import ws.schild.jave.MultimediaObject;
 
 public class WaveFormService extends Service<Boolean> {
 	
-	private static final double WAVEFORM_HEIGHT_COEFFICIENT = 2.4; // This fits the waveform to the swing node height
+	private static final double WAVEFORM_HEIGHT_COEFFICIENT = 2.5; // This fits the waveform to the swing node height
 	private static final CopyOption[] options = new CopyOption[]{ COPY_ATTRIBUTES , REPLACE_EXISTING };
 	private float[] resultingWaveform;
 	private int[] wavAmplitudes;
@@ -38,6 +38,53 @@ public class WaveFormService extends Service<Boolean> {
 	private File temp1;
 	private File temp2;
 	private Encoder encoder;
+	
+	/**
+	 * Get Wav Amplitudes
+	 * 
+	 * @param file
+	 * @return
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 */
+	private int[] getWavAmplitudes(File file) throws UnsupportedAudioFileException , IOException {
+		System.out.println("Calculting amplitudes");
+		int[] amplitudes = null;
+		double fixer = WAVEFORM_HEIGHT_COEFFICIENT;//4 / 100.00 * waveVisualization.height;
+		System.out.println("fixer :" + fixer);
+		try (AudioInputStream input = AudioSystem.getAudioInputStream(file)) {
+			AudioFormat baseFormat = input.getFormat();
+			
+			Encoding encoding = AudioFormat.Encoding.PCM_UNSIGNED;
+			float sampleRate = baseFormat.getSampleRate();
+			int numChannels = baseFormat.getChannels();
+			
+			AudioFormat decodedFormat = new AudioFormat(encoding, sampleRate, 16, numChannels, numChannels * 2, sampleRate, false);
+			int available = input.available();
+			amplitudes = new int[available];
+			System.out.println("After  decodedFormat");
+			
+			try (AudioInputStream pcmDecodedInput = AudioSystem.getAudioInputStream(decodedFormat, input)) {				
+				byte[] buffer = new byte[available];
+				System.out.println("BEfore read");
+				pcmDecodedInput.read(buffer, 0, available);
+				System.out.println("After read");
+				for (int i = 0; i < available - 1; i += 2) {
+					//System.out.println("Inside Loop");
+					amplitudes[i] = ( ( buffer[i + 1] << 8 ) | buffer[i] & 0xff ) << 16;
+					amplitudes[i] /= 32767;
+					amplitudes[i] *= fixer;
+					
+				}
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		System.out.println("Finished Calculting amplitudes");
+		return amplitudes;
+	}
 	
 	/**
 	 * Constructor.
@@ -240,6 +287,7 @@ public class WaveFormService extends Service<Boolean> {
 					//Encode
 					encoder = encoder != null ? encoder : new Encoder();
 					encoder.encode(new MultimediaObject(sourceFile), destinationFile, attributes);
+					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
