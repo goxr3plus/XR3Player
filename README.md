@@ -114,11 +114,6 @@ To build XR3Player, you will need:
 
 Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with Java 9
 
->PS A local library named [TarsosTranscoder](TarsosTranscoder) is not included , so if you download the
- repository you must install the jar of that library locally . 
->Though don't worry because i will publish it on Maven soon so you don't have to do it , just for now because 
- i didn't had time to do it :)
-
 ## About JxBrowser
 
 >XR3Player uses JxBrowser http://www.teamdev.com/jxbrowser, which is a proprietary software, owned by TeamDev Ltd. The use of JxBrowser >is governed by JxBrowser Product Licence Agreement http://www.teamdev.com/jxbrowser-licence-agreement. 
