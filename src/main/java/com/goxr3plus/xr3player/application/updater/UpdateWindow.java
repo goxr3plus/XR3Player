@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -222,98 +223,26 @@ public class UpdateWindow extends StackPane {
 			
 			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
 			
-			Element lastArticle = doc.getElementsByTag("article").last();
-			
-			// Not disturb the user every time the application starts if there is not new update
 			int currentVersion = Main.APPLICATION_VERSION;
-			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
+			int lastArticleID = Integer.parseInt(doc.getElementsByTag("article").last().id());
+			int latestGithubReleaseTag = getLatestReleaseTag();
+			
+			//Check the latest tag on github
+			if (latestGithubReleaseTag <= Main.APPLICATION_VERSION && !showTheWindow)
 				return false;
-			
-//			//Check if really that release exists....
-//			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
-//			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-//			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-//			
-//			//Read line by line
-//			String responseSB = in.lines().collect(Collectors.joining());
-//			in.close();
-			
-			//			//GitHub Releases
-			//			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
-			//			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-			//			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-			//			
-			//			//Read line by line
-			//			String responseSB = in.lines().collect(Collectors.joining());
-			//			in.close();
 			
 			// Update is available or not?
 			Platform.runLater(() -> {
 				
 				//--TopLabel
-				if (Integer.valueOf(lastArticle.id()) <= currentVersion) {
+				if (lastArticleID <= currentVersion) {
 					window.setTitle("You have the latest update!");
 					topLabel.setText("You have the latest update ->( " + currentVersion + " )<-");
 				} else {
 					window.setTitle("New update is available!");
-					topLabel.setText("New Update ->( " + lastArticle.id() + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
+					topLabel.setText("New Update ->( " + lastArticleID + " )<- is available !!!! | You currently have : ->( " + currentVersion + " )<-");
 					tabPane.getSelectionModel().select(0);
 				}
-				
-				//				//Read the JSON response
-				//				JsonArray jsonRoot;
-				//				try {
-				//					jsonRoot = (JsonArray) Jsoner.deserialize(responseSB);
-				//					//Avoid recreating again panes if no new releases have come
-				//					boolean create = jsonRoot.stream().count() != gitHubAccordion.getPanes().size();
-				//					if (create)
-				//						gitHubAccordion.getPanes().clear();
-				//					
-				//					//For Each
-				//					int[] counter = { 0 };
-				//					jsonRoot.forEach(item -> {
-				//						//--
-				//						String prerelease = ( (JsonObject) item ).get("prerelease").toString();
-				//						
-				//						//--
-				//						String tagName = ( (JsonObject) item ).get("tag_name").toString();
-				//						
-				//						//--
-				//						String[] downloads = { "" };
-				//						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> downloads[0] = ( (JsonObject) item2 ).get("download_count").toString());
-				//						downloads[0] = ( downloads[0].isEmpty() ? "-" : downloads[0] );
-				//						
-				//						//--
-				//						String[] size = { "" };
-				//						( (JsonArray) ( (JsonObject) item ).get("assets") ).forEach(item2 -> size[0] = ( (JsonObject) item2 ).get("size").toString());
-				//						size[0] = ( size[0].isEmpty() ? "-" : InfoTool.getFileSizeEdited(Long.parseLong(size[0])) );
-				//						
-				//						//--
-				//						String[] createdAt = { ( (JsonObject) item ).get("created_at").toString() };
-				//						
-				//						//--
-				//						String[] publishedAt = { ( (JsonObject) item ).get("published_at").toString() };
-				//						
-				//						//Create or Reuse the existing Panes of Accordion
-				//						GitHubRelease release;
-				//						if (!create)
-				//							release = (GitHubRelease) gitHubAccordion.getPanes().get(counter[0]++);
-				//						else {
-				//							release = new GitHubRelease();
-				//							gitHubAccordion.getPanes().add(release);
-				//						}
-				//						
-				//						//Update the GitHubRelease Pane
-				//						release.setText("Update -> ( " + tagName.toLowerCase().replace("v3.", "") + " ) Downloads ( " + downloads[0] + " )");
-				//						release.updateLabels(Boolean.toString(!Boolean.parseBoolean(prerelease)), downloads[0], size[0], publishedAt[0].substring(0, 10),
-				//								createdAt[0].substring(0, 10));
-				//						
-				//					});
-				//					gitHubAccordion.setExpandedPane(gitHubAccordion.getPanes().get(0));
-				//				} catch (Exception ex) {
-				//					ex.printStackTrace();
-				//					ActionTool.showNotification("Message", "Failed to connect update server :(\n Try again in 5 seconds", Duration.seconds(3), NotificationType.ERROR);
-				//				}
 				
 				//Clear the textAreas
 				whatsNewTextArea.clear();
@@ -406,7 +335,7 @@ public class UpdateWindow extends StackPane {
 			});
 			
 			//show?
-			int latestUpdate = Integer.parseInt(lastArticle.id());
+			int latestUpdate = lastArticleID;
 			if (showTheWindow || latestUpdate > currentVersion) {
 				automaticUpdate.setDisable(latestUpdate <= currentVersion);
 				show();
@@ -545,6 +474,35 @@ public class UpdateWindow extends StackPane {
 				});
 			}
 		}
+	}
+	
+	/**
+	 * Checks to see if the latest release tag matches the UpdatePage.html
+	 */
+	public int getLatestReleaseTag() {
+		try {
+			
+			//Check if really that release exists....
+			HttpURLConnection httpcon = (HttpURLConnection) new URL(
+					"https://api.github.com/repos/goxr3plus/XR3Player/releases/latest?client_id=4586aa4feb6c1ab0bf29&client_secret=5bb2ad7481bba8f503616a6c5add7299ab30bcf8")
+							.openConnection();
+			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+			
+			//Read line by line
+			String responseSB = in.lines().collect(Collectors.joining());
+			in.close();
+			
+			//Parse JSon
+			String latestVersion = new JSONObject(responseSB).getString("tag_name");
+			
+			//Return the latest release tag
+			return Integer.parseInt(latestVersion.replaceAll("V3.", ""));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return -1;
+		}
+		
 	}
 	
 	/**

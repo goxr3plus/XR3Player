@@ -25,10 +25,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import com.github.cliftonlabs.json_simple.JsonArray;
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.ba;
 
@@ -126,7 +125,7 @@ public class Main extends Application {
 	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 	
 	//Internal Information
-	public static final int APPLICATION_VERSION = 120;
+	public static final int APPLICATION_VERSION = 118;
 	public static final String RELEASE_DATE = "Check updates window";
 	
 	private static final Logger[] pin;
@@ -974,8 +973,8 @@ public class Main extends Application {
 	static boolean backgroundFound;
 	
 	/**
-	 * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is being
-	 * added :)
+	 * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is
+	 * being added :)
 	 * 
 	 */
 	private static void determineBackgroundImage() {
@@ -1039,12 +1038,11 @@ public class Main extends Application {
 				in.close();
 				
 				//Parse JSON
-				JsonObject jsonRoot = (JsonObject) Jsoner.deserialize(response);
-				JsonArray oses = (JsonArray) jsonRoot.get("oses");
+				JSONArray oses = new JSONObject(response).getJSONArray("oses");
 				
 				//Count total downloads
 				int[] counter = { 0 };
-				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JsonArray) os ).get(1).toString()));
+				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JSONArray) os ).get(1).toString()));
 				
 				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
 				

@@ -1,8 +1,6 @@
 package main.java.com.goxr3plus.xr3player.application.modes.loginmode.services;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,12 +8,6 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import com.github.cliftonlabs.json_simple.JsonArray;
-import com.github.cliftonlabs.json_simple.JsonException;
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
 
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -179,52 +171,6 @@ public class UsersLoaderService extends Service<Boolean> {
 							}
 							
 						}
-						
-						//----------------SUPPORT FOR XR3Player Version 72 and below---------------------------------------------
-						//----------------THIS CODE WILL BE REMOVED SOMEDAY IN THE FUTURE----------------------------------------
-						//-----------------IT PARSES THE settings.json file from the previous updates which was holding information
-						//-----------------about open libraries and and the last opened library , now that information are stored
-						//-----------------on the userInformation.properties file ;)
-						String jsonFilePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName() + File.separator + "settings.json";
-						
-						//Check if the file exists -- make the simple magic
-						if (new File(jsonFilePath).exists()) {
-							//Read the JSON File
-							try (FileReader fileReader = new FileReader(jsonFilePath)) {
-								
-								//JSON Array [ROOT]
-								JsonObject json = (JsonObject) Jsoner.deserialize(fileReader);
-								
-								//Opened Libraries Array
-								JsonArray openedLibraries = (JsonArray) ( (JsonObject) json.get("librariesSystem") ).get("openedLibraries");
-								
-								//For each Library
-								//System.out.println("\n\nUser Name:" + user.getUserName());
-								if (!openedLibraries.isEmpty()) {
-									String openedLibs = openedLibraries.stream().map(libraryObject -> ( (JsonObject) libraryObject ).get("name").toString())
-											.collect(Collectors.joining("<|>:<|>"));
-									//System.out.println("Opened Libraries:\n-> " + openedLibs);
-									user.getUserInformationDb().updateProperty("Opened-Libraries", openedLibs);
-								}
-								
-								//Last selected library 
-								JsonObject lastSelectedLibrary = (JsonObject) ( (JsonObject) json.get("librariesSystem") ).get("lastSelectedLibrary");
-								
-								//If not Last selected library is empty...
-								if (!lastSelectedLibrary.isEmpty()) {
-									String lastOpenedLibrary = lastSelectedLibrary.get("name").toString();
-									//	System.out.println("Last Opened Library: " + lastOpenedLibrary);
-									user.getUserInformationDb().updateProperty("Last-Opened-Library", lastOpenedLibrary);
-								}
-								
-							} catch (IOException | JsonException e) {
-								e.printStackTrace();
-								//  logger.severe("SettingsWindowController - exception: " + e); //$NON-NLS-1$
-							}
-						}
-						
-						//Now delete that fucking JSON File
-						new File(jsonFilePath).delete();
 						
 					});
 					

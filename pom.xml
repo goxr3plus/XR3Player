@@ -268,10 +268,13 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.11.3</version>
 		</dependency>
+		<!-- <dependency> <groupId>com.github.cliftonlabs</groupId> <artifactId>json-simple</artifactId> 
+			<version>3.0.2</version> </dependency> -->
+		<!-- JSON SUPPORT -->
 		<dependency>
-			<groupId>com.github.cliftonlabs</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>3.0.2</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180130</version>
 		</dependency>
 		<!-- <dependency> <groupId>com.github.vatbub</groupId> <artifactId>mslinks</artifactId> 
 			<version>1.0.4</version> </dependency> -->
