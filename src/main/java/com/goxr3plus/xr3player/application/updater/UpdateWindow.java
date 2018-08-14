@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -213,7 +215,7 @@ public class UpdateWindow extends StackPane {
 		
 	}
 	
-	private void searchForUpdatesPart2(boolean showTheWindow) {
+	private boolean searchForUpdatesPart2(boolean showTheWindow) {
 		try {
 			
 			Document doc = Jsoup.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html").get();
@@ -225,7 +227,16 @@ public class UpdateWindow extends StackPane {
 			// Not disturb the user every time the application starts if there is not new update
 			int currentVersion = Main.APPLICATION_VERSION;
 			if (Integer.valueOf(lastArticle.id()) <= currentVersion && !showTheWindow)
-				return;
+				return false;
+			
+//			//Check if really that release exists....
+//			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
+//			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
+//			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+//			
+//			//Read line by line
+//			String responseSB = in.lines().collect(Collectors.joining());
+//			in.close();
 			
 			//			//GitHub Releases
 			//			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases").openConnection();
@@ -401,12 +412,14 @@ public class UpdateWindow extends StackPane {
 				show();
 			}
 			
-		} catch (
-		
-		IOException ex) {
+		} catch (IOException ex) {
+			//Show message to the user
 			Platform.runLater(() -> ActionTool.showNotification("Error", "Trying to fetch update information a problem occured", Duration.millis(2500), NotificationType.ERROR));
-			logger.log(Level.WARNING, "", ex);
+			ex.printStackTrace();
+			return false;
 		}
+		
+		return true;
 	}
 	
 	private final String style2 = style.replace("white", "#329CFF");

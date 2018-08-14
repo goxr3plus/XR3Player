@@ -104,7 +104,7 @@
                   </StackPane>
                </content>
                <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-wrench" iconSize="20" />
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-wrench" iconSize="24" />
                </graphic>
             </Tab>
             <Tab text="Visualizer ">
