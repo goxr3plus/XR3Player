@@ -483,9 +483,7 @@ public class UpdateWindow extends StackPane {
 		try {
 			
 			//Check if really that release exists....
-			HttpURLConnection httpcon = (HttpURLConnection) new URL(
-					"https://api.github.com/repos/goxr3plus/XR3Player/releases/latest")
-							.openConnection();
+			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases/latest").openConnection();
 			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
 			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 			
