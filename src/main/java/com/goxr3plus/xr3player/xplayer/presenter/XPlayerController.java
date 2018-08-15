@@ -2709,4 +2709,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		return modesStackPane;
 	}
 	
+	public ProgressBar getWaveProgressBar() {
+		return waveProgressBar;
+	}
+	
 }

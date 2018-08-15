@@ -16,6 +16,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
@@ -45,6 +46,7 @@ public class WaveFormService extends Service<Boolean> {
 	private Encoder encoder;
 	private ConvertProgressListener listener = new ConvertProgressListener();
 	private WaveFormJob waveFormJob;
+	private SimpleDoubleProperty converterProgress = new SimpleDoubleProperty();
 	
 	/**
 	 * Wave Service type of Job ( not boob job ... )
@@ -61,6 +63,7 @@ public class WaveFormService extends Service<Boolean> {
 	 */
 	public WaveFormService(XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
+		xPlayerController.getWaveProgressBar().progressProperty().bind(converterProgress);
 		
 		setOnSucceeded(s -> done());
 		setOnFailed(f -> failure());
@@ -88,6 +91,7 @@ public class WaveFormService extends Service<Boolean> {
 		this.resultingWaveform = null;
 		if (waveFormJob != WaveFormJob.WAVEFORM)
 			this.wavAmplitudes = null;
+		converterProgress.set(-1);
 		
 		//Go
 		restart();
@@ -260,6 +264,9 @@ public class WaveFormService extends Service<Boolean> {
 				//The width of the resulting waveform panel
 				int width = xPlayerController.getWaveFormVisualization().width;
 				float[] waveData = new float[width];
+				//Check if null
+				if (sourcePcmData == null)
+					return waveData;
 				int samplesPerPixel = sourcePcmData.length / width;
 				
 				//Calculate
@@ -307,7 +314,6 @@ public class WaveFormService extends Service<Boolean> {
 					//Encode
 					encoder = encoder != null ? encoder : new Encoder();
 					encoder.encode(new MultimediaObject(sourceFile), destinationFile, attributes, listener);
-					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -337,7 +343,6 @@ public class WaveFormService extends Service<Boolean> {
 	}
 	
 	public class ConvertProgressListener implements EncoderProgressListener {
-		int current = 1;
 		
 		public ConvertProgressListener() {
 		}
@@ -348,6 +353,7 @@ public class WaveFormService extends Service<Boolean> {
 		public void progress(int p) {
 			
 			double progress = p / 1000.00;
+			Platform.runLater(() -> converterProgress.set(progress));
 			System.out.println(progress);
 			
 		}

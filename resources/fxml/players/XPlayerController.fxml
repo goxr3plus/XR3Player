@@ -655,7 +655,7 @@
                   </VBox>
                </top>
             </BorderPane>
-            <StackPane fx:id="microStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+            <StackPane fx:id="microStackPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;" visible="false">
                <children>
                   <BorderPane fx:id="microBorderPane" minHeight="0.0" minWidth="0.0">
                      <bottom>
