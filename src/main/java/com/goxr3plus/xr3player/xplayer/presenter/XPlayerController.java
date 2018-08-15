@@ -92,6 +92,7 @@ import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
+import main.java.com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
 import main.java.com.goxr3plus.xr3player.xplayer.waveform.WaveVisualization;
 
 /**
@@ -2076,7 +2077,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				
 				//WaveForm
 				if (!seekService.isRunning())
-					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath());
+					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
 				
 				//Marquee Text
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));

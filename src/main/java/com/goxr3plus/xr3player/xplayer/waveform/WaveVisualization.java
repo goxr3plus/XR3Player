@@ -6,6 +6,7 @@ package main.java.com.goxr3plus.xr3player.xplayer.waveform;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
 
 /**
  * The Class Visualizer.
@@ -32,6 +33,7 @@ public class WaveVisualization extends WaveFormPane {
 	 */
 	public WaveVisualization(XPlayerController xPlayerController, int width, int height) {
 		super(width, height);
+		super.setWaveVisualization(this);
 		this.xPlayerController = xPlayerController;
 		waveService = new WaveFormService(xPlayerController);
 		animationService = new PaintService();
@@ -41,8 +43,11 @@ public class WaveVisualization extends WaveFormPane {
 			//System.out.println("New Visualizer Width is:" + newValue);
 			
 			// Canvas Width
-			this.width = newValue.intValue();
+			this.width = Math.round(newValue.floatValue());
+			
+			//Draw single line :)
 			recalculateWaveData = true;
+			clear();
 			
 		});
 		// -------------
@@ -50,9 +55,16 @@ public class WaveVisualization extends WaveFormPane {
 			//System.out.println("New Visualizer Height is:" + newValue);
 			
 			// Canvas Height
-			this.height = newValue.intValue();
+			this.height = Math.round(newValue.floatValue());
+			
+			//Draw single line :)
 			recalculateWaveData = true;
+			clear();
 		});
+		
+		//Tricky mouse events
+		setOnMouseMoved(m -> setMouseXPosition((int) m.getX()));
+		setOnMouseExited(m -> setMouseXPosition(-1));
 	}
 	//--------------------------------------------------------------------------------------//
 	
@@ -81,7 +93,6 @@ public class WaveVisualization extends WaveFormPane {
 	 */
 	public void stopPainterService() {
 		animationService.stop();
-		clear();
 	}
 	
 	/**
@@ -112,11 +123,6 @@ public class WaveVisualization extends WaveFormPane {
 		/*** When this property is <b>true</b> the AnimationTimer is running */
 		private volatile SimpleBooleanProperty running = new SimpleBooleanProperty(false);
 		
-		/*** The animationService can draw */
-		private boolean drawEnabled = true;
-		
-		private long previousNanos = 0;
-		
 		@Override
 		public void start() {
 			// Values must be >0
@@ -127,46 +133,34 @@ public class WaveVisualization extends WaveFormPane {
 			running.set(true);
 		}
 		
-		/**
-		 * If draw is false , nothing will be drawn
-		 * 
-		 * @param enabled
-		 */
-		public void setDrawEnabled(boolean enabled) {
-			drawEnabled = enabled;
-		}
-		
 		@Override
 		public void handle(long nanos) {
 			
 			//Speed improvement
-			if (!WaveVisualization.this.xPlayerController.getModeToggle().isSelected() && WaveVisualization.this.xPlayerController.getModesStackPane().isVisible()) {
+			if (!xPlayerController.getModeToggle().isSelected() && xPlayerController.getModesStackPane().isVisible()) {
 				return;
 			}
 			
-			//Every 300 millis update
-			//			if (nanos >= previousNanos + 100000 * 1000) { //
-			//				previousNanos = nanos;
-			//				WaveVisualization.this.setTimerXPosition(WaveVisualization.this.getTimerXPosition() + 1);
-			//			}
-			
 			//If the player is stopped , stop the animation timer
-			if (!WaveVisualization.this.xPlayerController.getxPlayer().isPlaying())
+			if (!xPlayerController.getxPlayer().isPlaying())
 				super.stop();
 			
 			//Set Timer X Position
-			double percent = WaveVisualization.this.xPlayerController.getxPlayerModel().getCurrentTime()
-					/ (double) WaveVisualization.this.xPlayerController.getxPlayerModel().getDuration();
-			WaveVisualization.this.setTimerXPosition((int) ( percent * WaveVisualization.this.width ));
+			double percent = xPlayerController.getxPlayerModel().getCurrentTime() / (double) xPlayerController.getxPlayerModel().getDuration();
+			setTimerXPosition((int) ( percent * width ));
 			
-			//Check if wave data needs to be recalculated
-			if (recalculateWaveData) {
-				WaveVisualization.this.setWaveData(processAmplitudes(WaveVisualization.this.getWaveService().getWavAmplitudes()));
+			//If resulting wave is not calculated
+			if (getWaveService().getResultingWaveform() == null || recalculateWaveData) {
+				
+				//Start the Service
+				getWaveService().startService(getWaveService().getFileAbsolutePath(), WaveFormJob.WAVEFORM);
 				recalculateWaveData = false;
+				
+				return;
 			}
 			
-			//Draw the wave form
-			WaveVisualization.this.drawWaveForm();
+			//Draw wave
+			paintWaveForm();
 			
 			//Print
 			//System.out.println("Wave Data : " + WaveVisualization.this.getWaveData() + " ,Wave Visualization : " + WaveVisualization.this.getWaveService().getWavAmplitudes());

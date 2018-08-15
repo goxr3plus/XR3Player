@@ -18,12 +18,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderException;
+import ws.schild.jave.EncoderProgressListener;
 import ws.schild.jave.EncodingAttributes;
+import ws.schild.jave.MultimediaInfo;
 import ws.schild.jave.MultimediaObject;
 
 public class WaveFormService extends Service<Boolean> {
@@ -38,52 +43,17 @@ public class WaveFormService extends Service<Boolean> {
 	private File temp1;
 	private File temp2;
 	private Encoder encoder;
+	private ConvertProgressListener listener = new ConvertProgressListener();
+	private WaveFormJob waveFormJob;
 	
 	/**
-	 * Get Wav Amplitudes
+	 * Wave Service type of Job ( not boob job ... )
 	 * 
-	 * @param file
-	 * @return
-	 * @throws UnsupportedAudioFileException
-	 * @throws IOException
+	 * @author GOXR3PLUSSTUDIO
+	 *
 	 */
-	private int[] getWavAmplitudes(File file) throws UnsupportedAudioFileException , IOException {
-		System.out.println("Calculting amplitudes");
-		int[] amplitudes = null;
-		double fixer = WAVEFORM_HEIGHT_COEFFICIENT;//4 / 100.00 * waveVisualization.height;
-		System.out.println("fixer :" + fixer);
-		try (AudioInputStream input = AudioSystem.getAudioInputStream(file)) {
-			AudioFormat baseFormat = input.getFormat();
-			
-			Encoding encoding = AudioFormat.Encoding.PCM_UNSIGNED;
-			float sampleRate = baseFormat.getSampleRate();
-			int numChannels = baseFormat.getChannels();
-			
-			AudioFormat decodedFormat = new AudioFormat(encoding, sampleRate, 16, numChannels, numChannels * 2, sampleRate, false);
-			int available = input.available();
-			amplitudes = new int[available];
-			System.out.println("After  decodedFormat");
-			
-			try (AudioInputStream pcmDecodedInput = AudioSystem.getAudioInputStream(decodedFormat, input)) {				
-				byte[] buffer = new byte[available];
-				System.out.println("BEfore read");
-				pcmDecodedInput.read(buffer, 0, available);
-				System.out.println("After read");
-				for (int i = 0; i < available - 1; i += 2) {
-					//System.out.println("Inside Loop");
-					amplitudes[i] = ( ( buffer[i + 1] << 8 ) | buffer[i] & 0xff ) << 16;
-					amplitudes[i] /= 32767;
-					amplitudes[i] *= fixer;
-					
-				}
-			}catch(Exception ex) {
-				ex.printStackTrace();
-			}
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		System.out.println("Finished Calculting amplitudes");
-		return amplitudes;
+	public enum WaveFormJob {
+		AMPLITUDES_AND_WAVEFORM, WAVEFORM;
 	}
 	
 	/**
@@ -101,10 +71,23 @@ public class WaveFormService extends Service<Boolean> {
 	 * Start the external Service Thread.
 	 *
 	 */
-	public void startService(String fileAbsolutePath) {
+	public void startService(String fileAbsolutePath , WaveFormJob waveFormJob) {
+		
+		//Check
+		if (waveFormJob == WaveFormJob.WAVEFORM)
+			cancel();
+		
+		//Stop the Serivce
+		xPlayerController.getWaveFormVisualization().stopPainterService();
+		
+		//Check if boob job
+		this.waveFormJob = waveFormJob;
+		
+		//Variables
 		this.fileAbsolutePath = fileAbsolutePath;
 		this.resultingWaveform = null;
-		this.wavAmplitudes = null;
+		if (waveFormJob != WaveFormJob.WAVEFORM)
+			this.wavAmplitudes = null;
 		
 		//Go
 		restart();
@@ -130,6 +113,8 @@ public class WaveFormService extends Service<Boolean> {
 	 * Delete temporary files
 	 */
 	private void deleteTemporaryFiles() {
+		if (temp1 == null || temp2 == null)
+			return;
 		temp1.delete();
 		temp2.delete();
 	}
@@ -142,22 +127,32 @@ public class WaveFormService extends Service<Boolean> {
 			protected Boolean call() throws Exception {
 				boolean success = true;
 				
-				//Try to get the resultingWaveForm
 				try {
+					
+					//Run on JavaFX Thread
 					Platform.runLater(() -> xPlayerController.getWaveProgressLabel().setText("Generating Wave Spectrum..."));
 					
-					String fileFormat = "mp3";
-					//		                if ("wav".equals(fileFormat))
-					//		                    resultingWaveform = processFromWavFile();
-					//		                else if ("mp3".equals(fileFormat) || "m4a".equals(fileFormat))
-					resultingWaveform = processFromNoWavFile(fileFormat);
-					
+					//Calculate 
+					if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM) { //AMPLITUDES_AND_AMPLITUDES
+						System.out.println("AMPLITUDES_AND_AMPLITUDES");
+						String fileFormat = "mp3";
+						resultingWaveform = processFromNoWavFile(fileFormat);
+						
+					} else if (waveFormJob == WaveFormJob.WAVEFORM) { //WAVEFORM
+						resultingWaveform = processAmplitudes(wavAmplitudes);
+					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					success = false;
+					
+					//Show not enough disk space error
+					if (ex.getMessage().contains("There is not enough space on the disk"))
+						ActionTool.showNotification("Error", "There is not enough space on the disk \n to create Wave Form Visualization", Duration.seconds(3),
+								NotificationType.ERROR);
+					
+					return false;
 				}
 				
-				return success;
+				return true;
 				
 			}
 			
@@ -202,29 +197,6 @@ public class WaveFormService extends Service<Boolean> {
 			}
 			
 			/**
-			 * Process the amplitudes
-			 * 
-			 * @param sourcePcmData
-			 * @return An array with amplitudes
-			 */
-			private float[] processAmplitudes(int[] sourcePcmData) {
-				int width = xPlayerController.getWaveFormVisualization().width;    // the width of the resulting waveform panel
-				float[] waveData = new float[width];
-				int samplesPerPixel = sourcePcmData.length / width;
-				
-				for (int w = 0; w < width; w++) {
-					float nValue = 0.0f;
-					
-					for (int s = 0; s < samplesPerPixel; s++) {
-						nValue += ( Math.abs(sourcePcmData[w * samplesPerPixel + s]) / 65536.0f );
-					}
-					nValue /= samplesPerPixel;
-					waveData[w] = nValue;
-				}
-				return waveData;
-			}
-			
-			/**
 			 * Get Wav Amplitudes
 			 * 
 			 * @param file
@@ -233,34 +205,82 @@ public class WaveFormService extends Service<Boolean> {
 			 * @throws IOException
 			 */
 			private int[] getWavAmplitudes(File file) throws UnsupportedAudioFileException , IOException {
-				int[] amplitudes;
+				System.out.println("Calculting WAV amplitudes");
+				int[] amplitudes = null;
 				
-				//Start
+				//Get Audio input stream
 				try (AudioInputStream input = AudioSystem.getAudioInputStream(file)) {
 					AudioFormat baseFormat = input.getFormat();
 					
-					//Create encoding
 					Encoding encoding = AudioFormat.Encoding.PCM_UNSIGNED;
 					float sampleRate = baseFormat.getSampleRate();
 					int numChannels = baseFormat.getChannels();
 					
-					//Create decoded format
 					AudioFormat decodedFormat = new AudioFormat(encoding, sampleRate, 16, numChannels, numChannels * 2, sampleRate, false);
 					int available = input.available();
 					amplitudes = new int[available];
 					
-					//PCMDecodedInput
+					//Get the PCM Decoded Audio Input Stream
 					try (AudioInputStream pcmDecodedInput = AudioSystem.getAudioInputStream(decodedFormat, input)) {
-						byte[] buffer = new byte[available];
-						pcmDecodedInput.read(buffer, 0, available);
-						for (int i = 0; i < available - 1; i += 2) {
-							amplitudes[i] = ( ( buffer[i + 1] << 8 ) | buffer[i] & 0xff ) << 16;
-							amplitudes[i] /= 32767;
-							amplitudes[i] *= WAVEFORM_HEIGHT_COEFFICIENT;
-						}
+						final int BUFFER_SIZE = 4096; //this is actually bytes
+						System.out.println(available);
+						
+						//Create a buffer
+						byte[] buffer = new byte[BUFFER_SIZE];
+						
+						//Read all the available data on chunks
+						int counter = 0;
+						while (pcmDecodedInput.readNBytes(buffer, 0, BUFFER_SIZE) > 0)
+							for (int i = 0; i < buffer.length - 1; i += 2, counter += 2) {
+								if (counter == available)
+									break;
+								amplitudes[counter] = ( ( buffer[i + 1] << 8 ) | buffer[i] & 0xff ) << 16;
+								amplitudes[counter] /= 32767;
+								amplitudes[counter] *= WAVEFORM_HEIGHT_COEFFICIENT;
+							}
+					} catch (Exception ex) {
+						ex.printStackTrace();
 					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
+				
 				return amplitudes;
+			}
+			
+			/**
+			 * Process the amplitudes
+			 * 
+			 * @param sourcePcmData
+			 * @return An array with amplitudes
+			 */
+			private float[] processAmplitudes(int[] sourcePcmData) {
+				System.out.println("Processing WAV amplitudes");
+				
+				//The width of the resulting waveform panel
+				int width = xPlayerController.getWaveFormVisualization().width;
+				float[] waveData = new float[width];
+				int samplesPerPixel = sourcePcmData.length / width;
+				
+				//Calculate
+				float nValue;
+				for (int w = 0; w < width; w++) {
+					
+					//For performance keep it here
+					int c = w * samplesPerPixel;
+					nValue = 0.0f;
+					
+					//Keep going
+					for (int s = 0; s < samplesPerPixel; s++) {
+						nValue += ( Math.abs(sourcePcmData[c + s]) / 65536.0f );
+					}
+					
+					//Set WaveData
+					waveData[w] = nValue / samplesPerPixel;
+				}
+				
+				System.out.println("Finished Processing amplitudes");
+				return waveData;
 			}
 			
 			/**
@@ -286,18 +306,13 @@ public class WaveFormService extends Service<Boolean> {
 					
 					//Encode
 					encoder = encoder != null ? encoder : new Encoder();
-					encoder.encode(new MultimediaObject(sourceFile), destinationFile, attributes);
+					encoder.encode(new MultimediaObject(sourceFile), destinationFile, attributes, listener);
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 			
-			//TODO CREATE IN FUTURE
-			//			private float[] processFromWavFile() throws IOException , UnsupportedAudioFileException {
-			//				File trackFile = new File(trackToAnalyze.getFileFolder(), trackToAnalyze.getFileName());
-			//				return processAmplitudes(getWavAmplitudes(trackFile));
-			//			}
 		};
 	}
 	
@@ -311,6 +326,34 @@ public class WaveFormService extends Service<Boolean> {
 	
 	public int[] getWavAmplitudes() {
 		return wavAmplitudes;
+	}
+	
+	public float[] getResultingWaveform() {
+		return resultingWaveform;
+	}
+	
+	public void setResultingWaveform(float[] resultingWaveform) {
+		this.resultingWaveform = resultingWaveform;
+	}
+	
+	public class ConvertProgressListener implements EncoderProgressListener {
+		int current = 1;
+		
+		public ConvertProgressListener() {
+		}
+		
+		public void message(String m) {
+		}
+		
+		public void progress(int p) {
+			
+			double progress = p / 1000.00;
+			System.out.println(progress);
+			
+		}
+		
+		public void sourceInfo(MultimediaInfo m) {
+		}
 	}
 	
 }
