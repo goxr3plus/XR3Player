@@ -64,6 +64,7 @@ public class WaveVisualization extends WaveFormPane {
 		
 		//Tricky mouse events
 		setOnMouseMoved(m -> setMouseXPosition((int) m.getX()));
+		setOnMouseDragged(m -> this.setMouseXPosition((int) m.getX()));
 		setOnMouseExited(m -> setMouseXPosition(-1));
 	}
 	//--------------------------------------------------------------------------------------//
