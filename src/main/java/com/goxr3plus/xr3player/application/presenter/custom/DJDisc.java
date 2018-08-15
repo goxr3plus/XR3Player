@@ -294,8 +294,13 @@ public class DJDisc extends StackPane {
 		}
 		
 		//Font Icon
-		if (noAlbumImageFontIcon.isVisible())
-			noAlbumImageFontIcon.setIconSize((int) ( width / 1.05 ));
+		if (noAlbumImageFontIcon.isVisible()) {
+			int size = (int) ( width / 1.05 );
+			if (size > 0)
+				noAlbumImageFontIcon.setIconSize(size);
+			else
+				noAlbumImageFontIcon.setIconSize(1);
+		}
 		
 		//rotationTransformation
 		rotationTransf.setPivotX(discPerimeter / 2.00 - 2 * val);
