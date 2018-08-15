@@ -93,6 +93,7 @@ public class WaveFormService extends Service<Boolean> {
 			this.wavAmplitudes = null;
 		converterProgress.set(-1);
 		
+		
 		//Go
 		restart();
 	}
@@ -119,8 +120,8 @@ public class WaveFormService extends Service<Boolean> {
 	private void deleteTemporaryFiles() {
 		if (temp1 == null || temp2 == null)
 			return;
-		temp1.delete();
-		temp2.delete();
+		temp1.deleteOnExit();
+		temp2.deleteOnExit();
 	}
 	
 	@Override
