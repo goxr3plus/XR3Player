@@ -88,7 +88,7 @@ public class WaveFormService extends Service<Boolean> {
 		
 		//Variables
 		this.fileAbsolutePath = fileAbsolutePath;
-		this.resultingWaveform = null;
+		//this.resultingWaveform = null;
 		if (waveFormJob != WaveFormJob.WAVEFORM)
 			this.wavAmplitudes = null;
 		converterProgress.set(-1);
