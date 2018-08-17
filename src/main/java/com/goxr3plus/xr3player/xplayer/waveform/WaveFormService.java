@@ -231,9 +231,10 @@ public class WaveFormService extends Service<Boolean> {
 						byte[] buffer = new byte[BUFFER_SIZE];
 						
 						//Now get the average to a smaller array
-						int maximumArrayLength = 40000;
+						int maximumArrayLength = 100000;
 						int[] finalAmplitudes = new int[maximumArrayLength];
 						int samplesPerPixel = available / maximumArrayLength;
+						System.out.println(maximumArrayLength);
 						
 						//Variables to calculate finalAmplitudes array
 						int currentSampleCounter = 0;
