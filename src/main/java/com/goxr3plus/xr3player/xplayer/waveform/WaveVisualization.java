@@ -21,7 +21,7 @@ public class WaveVisualization extends WaveFormPane {
 	/*** This Service is creating the wave data for the painter */
 	private final WaveFormService waveService;
 	
-	private boolean recalculateWaveData;
+	private boolean recalculateWaveData = true;
 	
 	private XPlayerController xPlayerController;
 	
