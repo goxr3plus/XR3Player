@@ -1,8 +1,4 @@
-# Wave Spectrum Analyzers (++many more) added on Update V3.119 
-
-![screenshot_1](https://user-images.githubusercontent.com/20374208/44005992-1687e064-9e85-11e8-869b-489eb00d7cdf.jpg)
-
-# Latest Version V3.119 [Download](https://goxr3plus.github.io/xr3player.io/)
+# Latest Version V3.120 [Download](https://goxr3plus.github.io/xr3player.io/)
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 The most advanced JavaFX Media Player .... growing to be the best out there .
@@ -50,8 +46,9 @@ The most advanced JavaFX Media Player .... growing to be the best out there .
 
 ## Features
 - **App**
-  - Support fully .mp3
-  - Support almost all audio formats through smart converting
+  - Support almost all audio formats through smart converting to .mp3
+  - Amazing Audio Spectrum Visualizers
+  - Audio Amplitudes Waveform
   - Chromium Web Browser
   - Full Dropbox access
   - Multiple User Accounts
@@ -60,11 +57,15 @@ The most advanced JavaFX Media Player .... growing to be the best out there .
   - File Organizer and Explorer
   - Multiple Libraries/Playlists support
   - System monitor ( CPU , RAM )
-   - Audio Effects and Filters
-- _**Much more**_
+  - Audio Effects and Filters
+- _**TODO**_
   - _XR3Player is actively developed. More features will come!_
-  - Support all audio file formats
-  - Support all video file formats
+  - Support all audio file formats by default
+  - Support all video file formats by default
+  - Speech Recongition 
+  - Smart AI Assistant
+  - Online Subscription website
+  - Andorid and IOS applications
 
 ## Java Audio Tutorials and API's by GOXR3PLUS STUDIO
  - **Spectrum Analyzers**
