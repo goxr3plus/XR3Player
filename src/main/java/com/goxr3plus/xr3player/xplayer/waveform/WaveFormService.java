@@ -209,7 +209,6 @@ public class WaveFormService extends Service<Boolean> {
 			 * @throws IOException
 			 */
 			private int[] getWavAmplitudes(File file) throws UnsupportedAudioFileException , IOException {
-				System.out.println("Calculting WAV amplitudes");
 				
 				//Get Audio input stream
 				try (AudioInputStream input = AudioSystem.getAudioInputStream(file)) {
@@ -234,7 +233,6 @@ public class WaveFormService extends Service<Boolean> {
 						int maximumArrayLength = 100000;
 						int[] finalAmplitudes = new int[maximumArrayLength];
 						int samplesPerPixel = available / maximumArrayLength;
-						System.out.println(maximumArrayLength);
 						
 						//Variables to calculate finalAmplitudes array
 						int currentSampleCounter = 0;
@@ -242,17 +240,16 @@ public class WaveFormService extends Service<Boolean> {
 						float currentCellValue = 0.0f;
 						
 						//Variables for the loop
-						int counter = 0;
 						int arrayCellValue = 0;
 						
 						//Read all the available data on chunks
 						while (pcmDecodedInput.readNBytes(buffer, 0, BUFFER_SIZE) > 0)
-							for (int i = 0; i < buffer.length - 1; i += 2, counter += 2) {
+							for (int i = 0; i < buffer.length - 1; i += 2) {
 								
 								//Calculate the value
 								arrayCellValue = (int) ( ( ( ( ( buffer[i + 1] << 8 ) | buffer[i] & 0xff ) << 16 ) / 32767 ) * WAVEFORM_HEIGHT_COEFFICIENT );
 								
-								//Tricker
+								//Every time you him [currentSampleCounter=samplesPerPixel]
 								if (currentSampleCounter != samplesPerPixel) {
 									++currentSampleCounter;
 									currentCellValue += Math.abs(arrayCellValue);
@@ -288,7 +285,6 @@ public class WaveFormService extends Service<Boolean> {
 			 * @return An array with amplitudes
 			 */
 			private float[] processAmplitudes(int[] sourcePcmData) {
-				System.out.println("Processing WAV amplitudes");
 				
 				//The width of the resulting waveform panel
 				int width = xPlayerController.getWaveFormVisualization().width;
@@ -315,7 +311,6 @@ public class WaveFormService extends Service<Boolean> {
 					waveData[w] = nValue / samplesPerPixel;
 				}
 				
-				System.out.println("Finished Processing amplitudes");
 				return waveData;
 			}
 			
