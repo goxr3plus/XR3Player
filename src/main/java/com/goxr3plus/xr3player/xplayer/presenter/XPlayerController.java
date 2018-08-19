@@ -112,300 +112,299 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	//-----------------------------------------------
 	
-    @FXML
-    private StackPane xPlayerStackPane;
-
-    @FXML
-    private BorderPane rootBorderPane;
-
-    @FXML
-    private StackPane modesStackPane;
-
-    @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private SplitPane internalSplitPane;
-
-    @FXML
-    private BorderPane discBorderPane;
-
-    @FXML
-    private StackPane speedSliderStackPane;
-
-    @FXML
-    private Label speedControlLabel;
-
-    @FXML
-    private Slider speedSlider;
-
-    @FXML
-    private JFXButton speedControlButton;
-
-    @FXML
-    private StackPane diskStackPane;
-
-    @FXML
-    private StackPane diskStackPane1;
-
-    @FXML
-    private Button playPauseButton;
-
-    @FXML
-    private Button stopButton;
-
-    @FXML
-    private Button backwardButton;
-
-    @FXML
-    private Button replayButton;
-
-    @FXML
-    private Button forwardButton;
-
-    @FXML
-    private StackPane waveStackPane;
-
-    @FXML
-    private Label waveProgressLabel;
-
-    @FXML
-    private ProgressBar waveProgressBar;
-
-    @FXML
-    private StackPane visualizerStackTopParent;
-
-    @FXML
-    private StackPane visualizerStackPane;
-
-    @FXML
-    private Label visualizerLabel;
-
-    @FXML
-    private Label playerStatusLabel;
-
-    @FXML
-    private JFXButton visualizerVisibleLabel;
-
-    @FXML
-    private FontIcon visualizerEyeIcon3;
-
-    @FXML
-    private HBox visualizerSettingsHBox;
-
-    @FXML
-    private JFXButton visualizerSettings;
-
-    @FXML
-    private JFXButton showVisualizerButton;
-
-    @FXML
-    private FontIcon visualizerEyeIcon;
-
-    @FXML
-    private JFXButton maximizeVisualizer;
-
-    @FXML
-    private VBox visualizerMaximizedBox;
-
-    @FXML
-    private JFXButton visualizerMinimize;
-
-    @FXML
-    private JFXButton visualizerRequestFocus;
-
-    @FXML
-    private Label visualizationsDisabledLabel;
-
-    @FXML
-    private Button enableHighGraphics;
-
-    @FXML
-    private Tab equalizerTab;
-
-    @FXML
-    private HBox mediaNameHBox;
-
-    @FXML
-    private HBox timersBox;
-
-    @FXML
-    private Label elapsedTimeLabel;
-
-    @FXML
-    private Label remainingTimeLabel;
-
-    @FXML
-    private Label totalTimeLabel;
-
-    @FXML
-    private MenuButton copyButton;
-
-    @FXML
-    private MenuItem copyFileTitle;
-
-    @FXML
-    private MenuItem copyFileLocation;
-
-    @FXML
-    private MenuItem copyFile;
-
-    @FXML
-    private Button mediaTagImageButton;
-
-    @FXML
-    private FontIcon albumImageFontIcon;
-
-    @FXML
-    private ImageView mediaTagImageView;
-
-    @FXML
-    private Label advModeVolumeLabel;
-
-    @FXML
-    private BorderPane smBorderPane;
-
-    @FXML
-    private StackPane smModeCenterStackPane;
-
-    @FXML
-    private ImageView smImageView;
-
-    @FXML
-    private FontIcon smAlbumFontIcon;
-
-    @FXML
-    private Label smMediaTitle;
-
-    @FXML
-    private Button smReplayButton;
-
-    @FXML
-    private Button smBackwardButton;
-
-    @FXML
-    private Button smPlayPauseButton;
-
-    @FXML
-    private Button smStopButton;
-
-    @FXML
-    private Button smForwardButton;
-
-    @FXML
-    private ToggleButton showVisualizer;
-
-    @FXML
-    private ProgressBar smTimeSliderProgress;
-
-    @FXML
-    private Slider smTimeSlider;
-
-    @FXML
-    private Label smTimeSliderLabel;
-
-    @FXML
-    private Label smVolumeSliderLabel;
-
-    @FXML
-    private VBox volumeBarBox;
-
-    @FXML
-    private Button smMaximizeVolume;
-
-    @FXML
-    private ProgressBar volumeSliderProgBar;
-
-    @FXML
-    private Slider smVolumeSlider;
-
-    @FXML
-    private Button smMinimizeVolume;
-
-    @FXML
-    private VBox topVBox;
-
-    @FXML
-    private HBox topHBox;
-
-    @FXML
-    private HBox toolsHBox;
-
-    @FXML
-    private ToggleButton muteButton;
-
-    @FXML
-    private Button showMenu;
-
-    @FXML
-    private Button openFile;
-
-    @FXML
-    private Button settings;
-
-    @FXML
-    private MenuButton transferMedia;
-
-    @FXML
-    private Label topInfoLabel;
-
-    @FXML
-    private Button emotionsButton;
-
-    @FXML
-    private Button extendPlayer;
-
-    @FXML
-    private StackedFontIcon sizeStackedFontIcon;
-
-    @FXML
-    private ToggleButton modeToggle;
-
-    @FXML
-    private ToggleButton historyToggle;
-
-    @FXML
-    private StackPane microStackPane;
-
-    @FXML
-    private BorderPane microBorderPane;
-
-    @FXML
-    private StackPane diskStackPane11;
-
-    @FXML
-    private Button microPlayPauseButton;
-
-    @FXML
-    private Button microStopButton;
-
-    @FXML
-    private Button microReplayButton;
-
-    @FXML
-    private Label dragAndDropLabel;
-
-    @FXML
-    private StackPane regionStackPane;
-
-    @FXML
-    private Label playerLoadingLabel;
-
-    @FXML
-    private ProgressBar progressBar;
-
-    @FXML
-    private StackPane downloadStackPane;
-
-    @FXML
-    private Label downloadingLabel;
-
-    @FXML
-    private JFXButton restorePlayer;
-
-    @FXML
-    private JFXButton focusXPlayerWindow;
-
+	@FXML
+	private StackPane xPlayerStackPane;
+	
+	@FXML
+	private BorderPane rootBorderPane;
+	
+	@FXML
+	private StackPane modesStackPane;
+	
+	@FXML
+	private BorderPane borderPane;
+	
+	@FXML
+	private SplitPane internalSplitPane;
+	
+	@FXML
+	private BorderPane discBorderPane;
+	
+	@FXML
+	private StackPane speedSliderStackPane;
+	
+	@FXML
+	private Label speedControlLabel;
+	
+	@FXML
+	private Slider speedSlider;
+	
+	@FXML
+	private JFXButton speedControlButton;
+	
+	@FXML
+	private StackPane diskStackPane;
+	
+	@FXML
+	private StackPane diskStackPane1;
+	
+	@FXML
+	private Button playPauseButton;
+	
+	@FXML
+	private Button stopButton;
+	
+	@FXML
+	private Button backwardButton;
+	
+	@FXML
+	private Button replayButton;
+	
+	@FXML
+	private Button forwardButton;
+	
+	@FXML
+	private StackPane waveStackPane;
+	
+	@FXML
+	private Label waveProgressLabel;
+	
+	@FXML
+	private ProgressBar waveProgressBar;
+	
+	@FXML
+	private StackPane visualizerStackTopParent;
+	
+	@FXML
+	private StackPane visualizerStackPane;
+	
+	@FXML
+	private Label visualizerLabel;
+	
+	@FXML
+	private Label playerStatusLabel;
+	
+	@FXML
+	private JFXButton visualizerVisibleLabel;
+	
+	@FXML
+	private FontIcon visualizerEyeIcon3;
+	
+	@FXML
+	private HBox visualizerSettingsHBox;
+	
+	@FXML
+	private JFXButton visualizerSettings;
+	
+	@FXML
+	private JFXButton showVisualizerButton;
+	
+	@FXML
+	private FontIcon visualizerEyeIcon;
+	
+	@FXML
+	private JFXButton maximizeVisualizer;
+	
+	@FXML
+	private VBox visualizerMaximizedBox;
+	
+	@FXML
+	private JFXButton visualizerMinimize;
+	
+	@FXML
+	private JFXButton visualizerRequestFocus;
+	
+	@FXML
+	private Label visualizationsDisabledLabel;
+	
+	@FXML
+	private Button enableHighGraphics;
+	
+	@FXML
+	private Tab equalizerTab;
+	
+	@FXML
+	private HBox mediaNameHBox;
+	
+	@FXML
+	private HBox timersBox;
+	
+	@FXML
+	private Label elapsedTimeLabel;
+	
+	@FXML
+	private Label remainingTimeLabel;
+	
+	@FXML
+	private Label totalTimeLabel;
+	
+	@FXML
+	private MenuButton copyButton;
+	
+	@FXML
+	private MenuItem copyFileTitle;
+	
+	@FXML
+	private MenuItem copyFileLocation;
+	
+	@FXML
+	private MenuItem copyFile;
+	
+	@FXML
+	private Button mediaTagImageButton;
+	
+	@FXML
+	private FontIcon albumImageFontIcon;
+	
+	@FXML
+	private ImageView mediaTagImageView;
+	
+	@FXML
+	private Label advModeVolumeLabel;
+	
+	@FXML
+	private BorderPane smBorderPane;
+	
+	@FXML
+	private StackPane smModeCenterStackPane;
+	
+	@FXML
+	private ImageView smImageView;
+	
+	@FXML
+	private FontIcon smAlbumFontIcon;
+	
+	@FXML
+	private Label smMediaTitle;
+	
+	@FXML
+	private Button smReplayButton;
+	
+	@FXML
+	private Button smBackwardButton;
+	
+	@FXML
+	private Button smPlayPauseButton;
+	
+	@FXML
+	private Button smStopButton;
+	
+	@FXML
+	private Button smForwardButton;
+	
+	@FXML
+	private ToggleButton showVisualizer;
+	
+	@FXML
+	private ProgressBar smTimeSliderProgress;
+	
+	@FXML
+	private Slider smTimeSlider;
+	
+	@FXML
+	private Label smTimeSliderLabel;
+	
+	@FXML
+	private Label smVolumeSliderLabel;
+	
+	@FXML
+	private VBox volumeBarBox;
+	
+	@FXML
+	private Button smMaximizeVolume;
+	
+	@FXML
+	private ProgressBar volumeSliderProgBar;
+	
+	@FXML
+	private Slider smVolumeSlider;
+	
+	@FXML
+	private Button smMinimizeVolume;
+	
+	@FXML
+	private VBox topVBox;
+	
+	@FXML
+	private HBox topHBox;
+	
+	@FXML
+	private HBox toolsHBox;
+	
+	@FXML
+	private ToggleButton muteButton;
+	
+	@FXML
+	private Button showMenu;
+	
+	@FXML
+	private Button openFile;
+	
+	@FXML
+	private Button settings;
+	
+	@FXML
+	private MenuButton transferMedia;
+	
+	@FXML
+	private Label topInfoLabel;
+	
+	@FXML
+	private Button emotionsButton;
+	
+	@FXML
+	private Button extendPlayer;
+	
+	@FXML
+	private StackedFontIcon sizeStackedFontIcon;
+	
+	@FXML
+	private ToggleButton modeToggle;
+	
+	@FXML
+	private ToggleButton historyToggle;
+	
+	@FXML
+	private StackPane microStackPane;
+	
+	@FXML
+	private BorderPane microBorderPane;
+	
+	@FXML
+	private StackPane diskStackPane11;
+	
+	@FXML
+	private Button microPlayPauseButton;
+	
+	@FXML
+	private Button microStopButton;
+	
+	@FXML
+	private Button microReplayButton;
+	
+	@FXML
+	private Label dragAndDropLabel;
+	
+	@FXML
+	private StackPane regionStackPane;
+	
+	@FXML
+	private Label playerLoadingLabel;
+	
+	@FXML
+	private ProgressBar progressBar;
+	
+	@FXML
+	private StackPane downloadStackPane;
+	
+	@FXML
+	private Label downloadingLabel;
+	
+	@FXML
+	private JFXButton restorePlayer;
+	
+	@FXML
+	private JFXButton focusXPlayerWindow;
 	
 	// -----------------------------------------------------------------------------
 	
@@ -2077,8 +2076,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			Platform.runLater(() -> {
 				
 				//WaveForm
-				if (!seekService.isRunning())
-					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
+				//if (!seekService.isRunning())
+				//waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
 				
 				//Marquee Text
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
@@ -2094,6 +2093,18 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 						ActionTool.showNotification("Playing on deck " + ( getKey() + 1 ), InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
 								NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 				}
+			});
+			
+			//STATUS OPENING
+		} else if (status == Status.OPENING) {
+			
+			//Run on JavaFX Thread
+			Platform.runLater(() -> {
+				
+				//Wave Form Service
+				if (!seekService.isRunning())
+					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
+				
 			});
 			
 			// Status.RESUMED			

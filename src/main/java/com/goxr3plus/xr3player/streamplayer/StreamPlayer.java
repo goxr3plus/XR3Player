@@ -425,8 +425,8 @@ public class StreamPlayer implements Callable<Void> {
 	// private int frameSize
 	
 	/**
-	 * Change the Speed Rate of the Audio , this variable affects the Sample Rate , for example 1.0 is normal , 0.5 is half the speed and 2.0 is double
-	 * the speed Note that you have to restart the audio for this to take effect
+	 * Change the Speed Rate of the Audio , this variable affects the Sample Rate , for example 1.0 is normal , 0.5 is half the speed and 2.0 is
+	 * double the speed Note that you have to restart the audio for this to take effect
 	 * 
 	 * @param speedFactor
 	 * @throws LineUnavailableException
@@ -485,8 +485,8 @@ public class StreamPlayer implements Callable<Void> {
 	 * Inits a DateLine.<br>
 	 * 
 	 * From the AudioInputStream, i.e. from the sound file, we fetch information about the format of the audio data. These information include the
-	 * sampling frequency, the number of channels and the size of the samples. There information are needed to ask JavaSound for a suitable output line
-	 * for this audio file. Furthermore, we have to give JavaSound a hint about how big the internal buffer for the line should be. Here, we say
+	 * sampling frequency, the number of channels and the size of the samples. There information are needed to ask JavaSound for a suitable output
+	 * line for this audio file. Furthermore, we have to give JavaSound a hint about how big the internal buffer for the line should be. Here, we say
 	 * AudioSystem.NOT_SPECIFIED, signaling that we don't care about the exact size. JavaSound will use some default value for the buffer size.
 	 *
 	 * @throws LineUnavailableException
@@ -733,6 +733,71 @@ public class StreamPlayer implements Callable<Void> {
 	}
 	
 	/**
+	 * Skip bytes in the File input stream. It will skip N frames matching to bytes, so it will never skip given bytes length exactly.
+	 *
+	 * @param bytes
+	 *            the bytes
+	 * @return value bigger than 0 for File and value = 0 for URL and InputStream
+	 * @throws StreamPlayerException
+	 *             the stream player exception
+	 */
+	public long seek(long bytes) throws StreamPlayerException {
+		long totalSkipped = 0;
+		
+		//If it is File
+		if (dataSource instanceof File) {
+			
+			//Check if the requested bytes are more than totalBytes of Audio
+			long bytesLength = getTotalBytes();
+			System.out.println("Bytes: " + bytes + " BytesLength: " + bytesLength);
+			if ( ( bytesLength <= 0 ) || ( bytes >= bytesLength )) {
+				generateEvent(Status.EOM, getEncodedStreamPosition(), null);
+				return totalSkipped;
+			}
+			
+			logger.info(() -> "Bytes to skip : " + bytes);
+			Status previousStatus = status;
+			status = Status.SEEKING;
+			
+			try {
+				synchronized (audioLock) {
+					generateEvent(Status.SEEKING, AudioSystem.NOT_SPECIFIED, null);
+					initAudioInputStream();
+					if (audioInputStream != null) {
+						
+						long skipped;
+						// Loop until bytes are really skipped.
+						while (totalSkipped < bytes) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
+							//System.out.println("Running");
+							skipped = audioInputStream.skip(bytes - totalSkipped);
+							if (skipped == 0)
+								break;
+							totalSkipped += skipped;
+							logger.info("Skipped : " + totalSkipped + "/" + bytes);
+							if (totalSkipped == -1)
+								throw new StreamPlayerException(StreamPlayerException.PlayerException.SKIP_NOT_SUPPORTED);
+							
+							logger.info("Skeeping:" + totalSkipped);
+						}
+					}
+				}
+				generateEvent(Status.SEEKED, getEncodedStreamPosition(), null);
+				status = Status.OPENED;
+				if (previousStatus == Status.PLAYING)
+					play();
+				else if (previousStatus == Status.PAUSED) {
+					play();
+					pause();
+				}
+				
+			} catch (IOException ex) {
+				logger.log(Level.WARNING, ex.getMessage(), ex);
+			}
+		}
+		return totalSkipped;
+	}
+	
+	/**
 	 * Main loop.
 	 *
 	 * Player Status == STOPPED || SEEKING = End of Thread + Freeing Audio Resources.<br>
@@ -822,77 +887,6 @@ public class StreamPlayer implements Callable<Void> {
 					generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
 				}
 			}
-			//	    int readBytes = 1;
-			//		byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
-			//		// Lock stream while playing.
-			//		synchronized (audioLock) {
-			//		    // Main play/pause loop.
-			//		    while ((readBytes != -1)
-			//			    && !(status == Status.STOPPED || status == Status.SEEKING || status == Status.UNKNOWN)) {
-			//			if (status == Status.PLAYING) {
-			//			    try {
-			//				// System.out.println("Inside Stream Player Run method")
-			//
-			//				// Reads up a specified maximum number of bytes
-			//				// from audio stream ,putting them into the given
-			//				// byte array
-			//				if ((readBytes = audioInputStream.read(abData, 0, abData.length)) >= 0) {
-			//
-			//				    // Copy data from [ nBytesRead ] to [ PCM ] array
-			//				    byte[] pcm = new byte[readBytes];
-			//				    System.arraycopy(abData, 0, pcm, 0, readBytes);
-			//
-			//				    // Check for under run
-			//				    if (sourceDataLine.available() >= sourceDataLine.getBufferSize())
-			//					logger.info("Underrun :" + sourceDataLine.available() + "/"
-			//						+ sourceDataLine.getBufferSize());
-			//
-			//				    // Write data to mixer via the source data line
-			//				    // System.out.println("ReadBytes:" + readBytes + "
-			//				    // Line Level:" + sourceDataLine.getLevel()
-			//				    // + " Frame Size:" + frameSize)
-			//				    if (readBytes % frameSize == 0)
-			//					sourceDataLine.write(abData, 0, readBytes);
-			//
-			//				    // Compute position in bytes in encoded stream.
-			//				    int nEncodedBytes = getEncodedStreamPosition();
-			//
-			//				    // Notify all registered Listeners
-			//				    listeners.forEach(listener -> {
-			//					if (audioInputStream instanceof PropertiesContainer) {
-			//					    // Pass audio parameters such as instant
-			//					    // bit rate, ...
-			//					    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(), pcm,
-			//						    ((PropertiesContainer) audioInputStream).properties());
-			//					} else
-			//					    listener.progress(nEncodedBytes, sourceDataLine.getMicrosecondPosition(), pcm,
-			//						    emptyMap);
-			//				    });
-			//				}
-			//
-			//			    } catch (IOException e) {
-			//				logger.warning("Thread cannot run()\n" + e);
-			//				stop();
-			//				status = Status.STOPPED;
-			//				generateEvent(Status.STOPPED, getEncodedStreamPosition(), null);
-			//			    }
-			//
-			//			} else if (status == Status.PAUSED) { // Paused
-			//			    try {
-			//				while (status == Status.PAUSED) {
-			//				    //Thread.sleep(200)
-			//				    // Thread.sle
-			//				    Thread.sleep(50);
-			//				    //audioLock.
-			//				    //audioLock.wait(50)
-			//				}
-			//
-			//			    } catch (InterruptedException ex) {
-			//				thread.interrupt();
-			//				logger.warning("Thread cannot sleep.\n" + ex);
-			//			    }
-			//			}
-			//		    }
 			
 			// Free audio resources.
 			if (sourceDataLine != null) {
@@ -918,71 +912,6 @@ public class StreamPlayer implements Callable<Void> {
 		logger.info("Decoding thread completed");
 		
 		return null;
-	}
-	
-	/**
-	 * Skip bytes in the File input stream. It will skip N frames matching to bytes, so it will never skip given bytes length exactly.
-	 *
-	 * @param bytes
-	 *            the bytes
-	 * @return value bigger than 0 for File and value = 0 for URL and InputStream
-	 * @throws StreamPlayerException
-	 *             the stream player exception
-	 */
-	public long seek(long bytes) throws StreamPlayerException {
-		long totalSkipped = 0;
-		
-		//If it is File
-		if (dataSource instanceof File) {
-			
-			//Check if the requested bytes are more than totalBytes of Audio
-			long bytesLength = getTotalBytes();
-			System.out.println("Bytes: " + bytes + " BytesLength: " + bytesLength);
-			if ( ( bytesLength <= 0 ) || ( bytes >= bytesLength )) {
-				generateEvent(Status.EOM, getEncodedStreamPosition(), null);
-				return totalSkipped;
-			}
-			
-			logger.info(() -> "Bytes to skip : " + bytes);
-			Status previousStatus = status;
-			status = Status.SEEKING;
-			
-			try {
-				synchronized (audioLock) {
-					generateEvent(Status.SEEKING, AudioSystem.NOT_SPECIFIED, null);
-					initAudioInputStream();
-					if (audioInputStream != null) {
-						
-						long skipped;
-						// Loop until bytes are really skipped.
-						while (totalSkipped < ( bytes )) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
-							//System.out.println("Running");
-							skipped = audioInputStream.skip(bytes - totalSkipped);
-							if (skipped == 0)
-								break;
-							totalSkipped += skipped;
-							logger.info("Skipped : " + totalSkipped + "/" + bytes);
-							if (totalSkipped == -1)
-								throw new StreamPlayerException(StreamPlayerException.PlayerException.SKIP_NOT_SUPPORTED);
-							
-							logger.info("Skeeping:" + totalSkipped);
-						}
-					}
-				}
-				generateEvent(Status.SEEKED, getEncodedStreamPosition(), null);
-				status = Status.OPENED;
-				if (previousStatus == Status.PLAYING)
-					play();
-				else if (previousStatus == Status.PAUSED) {
-					play();
-					pause();
-				}
-				
-			} catch (IOException ex) {
-				logger.log(Level.WARNING, ex.getMessage(), ex);
-			}
-		}
-		return totalSkipped;
 	}
 	
 	/**
@@ -1231,8 +1160,8 @@ public class StreamPlayer implements Callable<Void> {
 	}
 	
 	/**
-	 * Set SourceDataLine buffer size. It affects audio latency. (the delay between line.write(data) and real sound). Minimum value should be over 10000
-	 * bytes.
+	 * Set SourceDataLine buffer size. It affects audio latency. (the delay between line.write(data) and real sound). Minimum value should be over
+	 * 10000 bytes.
 	 * 
 	 * @param size
 	 *            -1 means maximum buffer size available.
@@ -1280,8 +1209,8 @@ public class StreamPlayer implements Callable<Void> {
 	}
 	
 	/**
-	 * Represents a control for the relative balance of a stereo signal between two stereo speakers. The valid range of values is -1.0 (left channel only)
-	 * to 1.0 (right channel only). The default is 0.0 (centered).
+	 * Represents a control for the relative balance of a stereo signal between two stereo speakers. The valid range of values is -1.0 (left channel
+	 * only) to 1.0 (right channel only). The default is 0.0 (centered).
 	 *
 	 * @param fBalance
 	 *            the new balance
