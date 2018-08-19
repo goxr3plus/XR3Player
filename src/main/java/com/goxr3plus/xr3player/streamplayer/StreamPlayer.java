@@ -217,8 +217,7 @@ public class StreamPlayer implements Callable<Void> {
 	 */
 	private String generateEvent(Status status , int encodedStreamPosition , Object description) {
 		try {
-			return eventsExecutorService.submit(new StreamPlayerEventLauncher(this, status, encodedStreamPosition, description, listeners))
-					.get();
+			return eventsExecutorService.submit(new StreamPlayerEventLauncher(this, status, encodedStreamPosition, description, listeners)).get();
 		} catch (InterruptedException | ExecutionException ex) {
 			logger.log(Level.WARNING, "Problem in StreamPlayer generateEvent() method", ex);
 		}
@@ -284,7 +283,18 @@ public class StreamPlayer implements Callable<Void> {
 			generateEvent(Status.OPENING, getEncodedStreamPosition(), dataSource);
 			
 			// Audio resources from file||URL||inputStream.
-			initAudioInputStreamPart2();
+			if (dataSource instanceof URL) {
+				audioInputStream = AudioSystem.getAudioInputStream((URL) dataSource);
+				audioFileFormat = AudioSystem.getAudioFileFormat((URL) dataSource);
+				
+			} else if (dataSource instanceof File) {
+				audioInputStream = AudioSystem.getAudioInputStream((File) dataSource);
+				audioFileFormat = AudioSystem.getAudioFileFormat((File) dataSource);
+				
+			} else if (dataSource instanceof InputStream) {
+				audioInputStream = AudioSystem.getAudioInputStream((InputStream) dataSource);
+				audioFileFormat = AudioSystem.getAudioFileFormat((InputStream) dataSource);
+			}
 			
 			// Create the Line
 			createLine();
@@ -302,35 +312,6 @@ public class StreamPlayer implements Callable<Void> {
 		}
 		
 		logger.info("Exited initAudioInputStream\n");
-	}
-	
-	/**
-	 * Audio resources from File||URL||InputStream.
-	 *
-	 * @throws UnsupportedAudioFileException
-	 *             the unsupported audio file exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	private void initAudioInputStreamPart2() throws UnsupportedAudioFileException , IOException {
-		
-		logger.info("Entered initAudioInputStreamPart->2\n");
-		
-		if (dataSource instanceof URL) {
-			audioInputStream = AudioSystem.getAudioInputStream((URL) dataSource);
-			audioFileFormat = AudioSystem.getAudioFileFormat((URL) dataSource);
-			
-		} else if (dataSource instanceof File) {
-			audioInputStream = AudioSystem.getAudioInputStream((File) dataSource);
-			audioFileFormat = AudioSystem.getAudioFileFormat((File) dataSource);
-			
-		} else if (dataSource instanceof InputStream) {
-			audioInputStream = AudioSystem.getAudioInputStream((InputStream) dataSource);
-			audioFileFormat = AudioSystem.getAudioFileFormat((InputStream) dataSource);
-		}
-		
-		logger.info("Exited initAudioInputStreamPart->2\n");
-		
 	}
 	
 	/**
@@ -518,8 +499,7 @@ public class StreamPlayer implements Callable<Void> {
 		
 		if (sourceDataLine != null) {
 			AudioFormat audioFormat = audioInputStream.getFormat();
-			int bufferSize = ( bufferSize = lineBufferSize ) >= 0 ? bufferSize : sourceDataLine.getBufferSize();
-			currentLineBufferSize = bufferSize;
+			currentLineBufferSize = lineBufferSize >= 0 ? lineBufferSize : sourceDataLine.getBufferSize();
 			sourceDataLine.open(audioFormat, currentLineBufferSize);
 			
 			// opened?
@@ -855,15 +835,15 @@ public class StreamPlayer implements Callable<Void> {
 		synchronized (audioLock) {
 			// Main play/pause loop.
 			while ( ( nBytesRead != -1 ) && status != Status.STOPPED && status != Status.NOT_SPECIFIED && status != Status.SEEKING) {
-//				if (status == Status.SEEKING) {
-//					try {
-//						System.out.println("Audio Seeking ...");
-//						Thread.sleep(50);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//					continue;
-//				}
+				//				if (status == Status.SEEKING) {
+				//					try {
+				//						System.out.println("Audio Seeking ...");
+				//						Thread.sleep(50);
+				//					} catch (InterruptedException e) {
+				//						e.printStackTrace();
+				//					}
+				//					continue;
+				//				}
 				
 				try {
 					//Playing?

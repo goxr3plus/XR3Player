@@ -204,18 +204,13 @@ public class XPlayerPlayService extends Service<Boolean> {
 						xPlayerController.getxPlayer().seek((long) ( ( (float) secondsToSkip )
 								* ( xPlayerController.getxPlayer().getTotalBytes() / (float) xPlayerController.getxPlayerModel().getDuration() ) ));
 						
-						//Update the below bitches!!!!!!! Fuck dat flickiro a flickira e
-						// daaaaaaaaaaaaaaaaaaaaanb bitchg!!!!Fuck Fock Fock Fock i was crazy when writting this code here
+						//Update XPlayer Model
 						xPlayerController.getxPlayerModel().setCurrentTime(secondsToSkip);
 						xPlayerController.getxPlayerModel().setCurrentAngleTime(secondsToSkip);
+						
 						// Update the disc Angle
 						xPlayerController.getDisc().calculateAngleByValue(secondsToSkip, xPlayerController.getxPlayerModel().getDuration(), true);
 					}
-					// ----------------------- Configuration
-					//			updateMessage("Applying Settings ...")
-					//
-					//			// Configure Media Settings
-					//			configureMediaSettings(false)
 					
 					// ....well let's go
 				} catch (Exception ex) {
