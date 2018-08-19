@@ -213,11 +213,11 @@ public class StreamPlayer implements Callable<Void> {
 	 *            in the stream when the event occurs.
 	 * @param description
 	 *            the description
-	 * @return A String Describing if any problem occured
+	 * @return A String Describing if any problem occurred
 	 */
-	private String generateEvent(Status status1 , int encodedStreamPosition , Object description) {
+	private String generateEvent(Status status , int encodedStreamPosition , Object description) {
 		try {
-			return eventsExecutorService.submit(new StreamPlayerEventLauncher(this, status1, encodedStreamPosition, description, new ArrayList<StreamPlayerListener>(listeners)))
+			return eventsExecutorService.submit(new StreamPlayerEventLauncher(this, status, encodedStreamPosition, description, listeners))
 					.get();
 		} catch (InterruptedException | ExecutionException ex) {
 			logger.log(Level.WARNING, "Problem in StreamPlayer generateEvent() method", ex);
@@ -228,40 +228,40 @@ public class StreamPlayer implements Callable<Void> {
 	/**
 	 * Add a listener to be notified.
 	 *
-	 * @param l
+	 * @param streamPlayerListener
 	 *            the listener
 	 */
-	public void addStreamPlayerListener(StreamPlayerListener l) {
-		listeners.add(l);
+	public void addStreamPlayerListener(StreamPlayerListener streamPlayerListener) {
+		listeners.add(streamPlayerListener);
 	}
 	
 	/**
 	 * Remove registered listener.
 	 *
-	 * @param l
+	 * @param streamPlayerListener
 	 *            the listener
 	 */
-	public void removeStreamPlayerListener(StreamPlayerListener l) {
+	public void removeStreamPlayerListener(StreamPlayerListener streamPlayerListener) {
 		if (listeners != null)
-			listeners.remove(l);
+			listeners.remove(streamPlayerListener);
 		
 	}
 	
 	/**
 	 * Open the specific object which can be File,URL or InputStream.
 	 *
-	 * @param o
+	 * @param object
 	 *            the object [File or URL or InputStream ]
 	 * @throws StreamPlayerException
 	 *             the stream player exception
 	 */
-	public void open(Object o) throws StreamPlayerException {
+	public void open(Object object) throws StreamPlayerException {
 		
-		logger.info(() -> "open(" + o + ")\n");
-		if (o == null)
+		logger.info(() -> "open(" + object + ")\n");
+		if (object == null)
 			return;
 		
-		dataSource = o;
+		dataSource = object;
 		initAudioInputStream();
 	}
 	
@@ -292,12 +292,7 @@ public class StreamPlayer implements Callable<Void> {
 			// Determine Properties
 			determineProperties();
 			
-			// System out all properties
-			// System.out.println(properties.size())
-			// properties.keySet().forEach(key -> {
-			// System.out.println(key + ":" + properties.get(key));
-			// })
-			
+			//Generate Open Event
 			status = Status.OPENED;
 			generateEvent(Status.OPENED, getEncodedStreamPosition(), null);
 			
@@ -859,16 +854,16 @@ public class StreamPlayer implements Callable<Void> {
 		// Lock stream while playing.
 		synchronized (audioLock) {
 			// Main play/pause loop.
-			while ( ( nBytesRead != -1 ) && status != Status.STOPPED && status != Status.NOT_SPECIFIED) {
-				if (status == Status.SEEKING) {
-					try {
-						System.out.println("Audio Seeking ...");
-						Thread.sleep(50);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					continue;
-				}
+			while ( ( nBytesRead != -1 ) && status != Status.STOPPED && status != Status.NOT_SPECIFIED && status != Status.SEEKING) {
+//				if (status == Status.SEEKING) {
+//					try {
+//						System.out.println("Audio Seeking ...");
+//						Thread.sleep(50);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//					continue;
+//				}
 				
 				try {
 					//Playing?
