@@ -428,18 +428,15 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 					if (wSdp > 0)
 						processSamples(wSdp);
 					
+					// -- Calculate the frame rate ratio hint. This value
+					// can be used by animated DSP's to fast forward animation frames to
+					// make up for inconsistencies with the frame rate.
+					float wFrr = (float) fpsAsNS / (float) desiredFpsAsNS;
+					
 					// -- Dispatch sample data to digital signal processors.
 					for (int a = 0; a < dsps.size(); a++) {
-						
-						// -- Calculate the frame rate ratio hint. This value
-						// can be used by
-						// animated DSP's to fast forward animation frames to
-						// make up for
-						// inconsistencies with the frame rate.
-						float wFrr = (float) fpsAsNS / (float) desiredFpsAsNS;
-						
 						try {
-							dsps.get(a).process(left, right, wFrr);
+							dsps.get(a).process(left, right, stereoMerge(left, right), wFrr);
 						} catch (Exception ex) {
 							Logger.getLogger(getClass().getName()).log(Level.SEVERE, "- DSP Exception: ", ex);
 						}
@@ -479,11 +476,11 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 						fpsAsNS += -wDelay;
 						
 						// -- Keep thread from hogging CPU.
-//						try {
-//							Thread.sleep(10);
-//						} catch (InterruptedException ex) {
-//							Logger.getLogger(getClass().getName()).log(Level.WARNING, null, ex);
-//						}
+						//						try {
+						//							Thread.sleep(10);
+						//						} catch (InterruptedException ex) {
+						//							Logger.getLogger(getClass().getName()).log(Level.WARNING, null, ex);
+						//						}
 						
 					}
 					
@@ -495,6 +492,22 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 				
 			}
 			
+		}
+		
+		/**
+		 * Stereo merge.
+		 *
+		 * @param left
+		 *            the left
+		 * @param right
+		 *            the right
+		 * @return A float[] array from merging left and right speakers
+		 */
+		private float[] stereoMerge(float[] left , float[] right) {
+			for (int a = 0; a < left.length; a++)
+				left[a] = ( left[a] + right[a] ) / 2.0f;
+			
+			return left;
 		}
 		
 		/**

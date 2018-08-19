@@ -52,7 +52,9 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * @param array
 	 *            The samples array
 	 */
-	public void drawForegroundImage(float[] array) {
+	public void drawForegroundImage() {
+		
+		float[] array = returnBandsArray(stereoMerge, 1);
 		
 		//!null
 		if (foregroundImage != null) {
@@ -77,8 +79,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	 */
 	public void drawBackgroundImage() {
 		
-		float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
-		float[] array = returnBandsArray(pSample, 1);
+		float[] array = returnBandsArray(stereoMerge, 1);
 		
 		//!null
 		if (backgroundImage != null) {
@@ -197,84 +198,81 @@ public class VisualizerDrawer extends VisualizerModel {
 	public void drawCircleWithLines() {
 		gc.setLineWidth(2);
 		
-		float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
-		float[] array = returnBandsArray(pSample, 32);
+		//Background 
+		drawBackgroundImage();
 		
-//		//Background 
-//		drawBackgroundImage();
-//		
-//		//Calculate the radius
-//		int radius;
-//		if (canvasHeight > canvasWidth)
-//			radius = canvasWidth / 2;
-//		else
-//			radius = canvasHeight / 2;
-//		radius = (int) ( radius / 1.5 );
-//		
-//		gc.setLineWidth(2);
-//		
-//		//int previousX1 = -1
-//		//int previousY1 = -1
-//		int previousEndX = -1;
-//		int previousEndY = -1;
-//		
-//		double centerX = canvasWidth / 2.00;
-//		double centerY = canvasHeight / 2.00;
-//		
-//		//for loop
-//		for (float angle = 0; angle <= 360; angle++) {
-//			// Use HSB color model
-//			colorIndex = ( colorIndex == colorSize - 1 ) ? 0 : colorIndex + 1;
-//			gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
-//			//gc.setFill(Color.hsb(colorIndex, 1.0f, 1.0f))
-//			//System.out.println("Calculating")
-//			//gc.setStroke(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)))
-//			
-//			//Code before
-//			//int px1 = (int) (canvasWidth / 2 + Math.sin(Math.toRadians(angle)) * radius)
-//			//int py1 = (int) (canvasHeight / 2 + Math.cos(Math.toRadians(angle)) * radius)
-//			
-//			//int px2 = (int) (canvasWidth / 2 + Math.sin(Math.toRadians(angle)) * (radius + Math.abs(pSample[(int) angle]) * 100))
-//			//int py2 = (int) (canvasHeight / 2 + Math.cos(Math.toRadians(angle)) * (radius + Math.abs(pSample[(int) angle]) * 100))
-//			
-//			//Code after [ Runs faster ]
-//			double angleRadians = Math.toRadians(angle);
-//			double mathSin = Math.sin(angleRadians);
-//			double mathCos = Math.cos(angleRadians);
-//			
-//			int startX = (int) ( centerX + mathSin * radius ); //startX
-//			int startY = (int) ( centerY + mathCos * radius ); //startY
-//			
-//			double add = Math.abs(pSample[(int) angle]) * ( radius );
-//			
-//			int endX = (int) ( centerX + mathSin * ( radius + add ) ); //endX
-//			int endY = (int) ( centerY + mathCos * ( radius + add ) ); //endY
-//			
-//			//Join with the previous line
-//			if (previousEndX != -1) {
-//				gc.strokeLine(previousEndX, previousEndY, endX, endY); //connect with the previous line
-//				
-//				//gc.fillPolygon(new double[] { previousX1,previousX2, px2, px1 }, new double[] { previousY1,previousY2, py2, py1 }, 4)
-//			}
-//			
-//			//previousX1 = px1
-//			//previousY1 = py1
-//			previousEndX = endX;
-//			previousEndY = endY;
-//			
-//			gc.strokeLine(startX, startY, endX, endY); //draw the line
-//			
-//			int endX2 = (int) ( centerX + mathSin * ( radius - add ) ); //endX
-//			int endY2 = (int) ( centerY + mathCos * ( radius - add ) ); //endY
-//			gc.strokeLine(startX, startY, endX2, endY2); //draw the line
-//		}
-//		
-//		//Foreground
-//		drawForegroundImage(array);
-//		
-//		//Reset it so it doesn't affect the others
-//		gc.setLineWidth(1);
-//		
+		//Calculate the radius
+		int radius;
+		if (canvasHeight > canvasWidth)
+			radius = canvasWidth / 2;
+		else
+			radius = canvasHeight / 2;
+		radius = (int) ( radius / 1.5 );
+		
+		gc.setLineWidth(2);
+		
+		//int previousX1 = -1
+		//int previousY1 = -1
+		int previousEndX = -1;
+		int previousEndY = -1;
+		
+		double centerX = canvasWidth / 2.00;
+		double centerY = canvasHeight / 2.00;
+		
+		//for loop
+		for (float angle = 0; angle <= 360; angle++) {
+			// Use HSB color model
+			colorIndex = ( colorIndex == colorSize - 1 ) ? 0 : colorIndex + 1;
+			gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
+			//gc.setFill(Color.hsb(colorIndex, 1.0f, 1.0f))
+			//System.out.println("Calculating")
+			//gc.setStroke(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)))
+			
+			//Code before
+			//int px1 = (int) (canvasWidth / 2 + Math.sin(Math.toRadians(angle)) * radius)
+			//int py1 = (int) (canvasHeight / 2 + Math.cos(Math.toRadians(angle)) * radius)
+			
+			//int px2 = (int) (canvasWidth / 2 + Math.sin(Math.toRadians(angle)) * (radius + Math.abs(pSample[(int) angle]) * 100))
+			//int py2 = (int) (canvasHeight / 2 + Math.cos(Math.toRadians(angle)) * (radius + Math.abs(pSample[(int) angle]) * 100))
+			
+			//Code after [ Runs faster ]
+			double angleRadians = Math.toRadians(angle);
+			double mathSin = Math.sin(angleRadians);
+			double mathCos = Math.cos(angleRadians);
+			
+			int startX = (int) ( centerX + mathSin * radius ); //startX
+			int startY = (int) ( centerY + mathCos * radius ); //startY
+			
+			double add = Math.abs(stereoMerge[(int) angle]) * ( radius );
+			
+			int endX = (int) ( centerX + mathSin * ( radius + add ) ); //endX
+			int endY = (int) ( centerY + mathCos * ( radius + add ) ); //endY
+			
+			//Join with the previous line
+			if (previousEndX != -1) {
+				gc.strokeLine(previousEndX, previousEndY, endX, endY); //connect with the previous line
+				
+				//gc.fillPolygon(new double[] { previousX1,previousX2, px2, px1 }, new double[] { previousY1,previousY2, py2, py1 }, 4)
+			}
+			
+			//previousX1 = px1
+			//previousY1 = py1
+			previousEndX = endX;
+			previousEndY = endY;
+			
+			gc.strokeLine(startX, startY, endX, endY); //draw the line
+			
+			int endX2 = (int) ( centerX + mathSin * ( radius - add ) ); //endX
+			int endY2 = (int) ( centerY + mathCos * ( radius - add ) ); //endY
+			gc.strokeLine(startX, startY, endX2, endY2); //draw the line
+		}
+		
+		//Foreground
+		drawForegroundImage();
+		
+		//Reset it so it doesn't affect the others
+		gc.setLineWidth(1);
+		
 	}
 	
 	/*-----------------------------------------------------------------------
@@ -293,10 +291,9 @@ public class VisualizerDrawer extends VisualizerModel {
 	 * Draws a spectrum analyzer using rectangles.
 	 */
 	public void drawSpectrumBars() {
-		float[] pSample = stereoMerge(pLeftChannel, pRightChannel);
 		
 		float barWidth = (float) canvasWidth / (float) saBands;
-		float[] array = returnBandsArray(pSample, saBands);
+		float[] array = returnBandsArray(stereoMerge, saBands);
 		float c = 0;
 		
 		// Background

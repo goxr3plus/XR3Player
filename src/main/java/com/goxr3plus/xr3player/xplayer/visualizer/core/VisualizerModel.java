@@ -44,6 +44,9 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/** The right. */
 	public float[] pRightChannel = new float[1024];
 	
+	/** Merged Right and Left */
+	public float[] stereoMerge = new float[1024];
+	
 	/** The frame rate ratio hint. */
 	protected float frameRateRatioHint;
 	
@@ -206,19 +209,22 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * Called by the KJDigitalSignalProcessingAudioDataConsumer.
 	 * 
-	 * @param pLeftChannel
+	 * @param leftChannel
 	 *            Audio data for the left channel.
-	 * @param pRightChannel
+	 * @param rightChannel
 	 *            Audio data for the right channel.
-	 * @param pFrameRateRatioHint
-	 *            A float value representing the ratio of the current frame rate to the desired frame rate. It is used to keep DSP animation consistent if
-	 *            the frame rate drop below the desired frame rate.
+	 * @param stereoMerge
+	 *            Merged Audio data from left and right channel
+	 * @param frameRateRatioHint
+	 *            A float value representing the ratio of the current frame rate to the desired frame rate. It is used to keep DSP animation
+	 *            consistent if the frame rate drop below the desired frame rate.
 	 */
 	@Override
-	public synchronized void process(float[] pLeftChannel , float[] pRightChannel , float pFrameRateRatioHint) {
+	public synchronized void process(float[] leftChannel , float[] rightChannel , float[] stereoMerge , float pFrameRateRatioHint) {
 		
-		this.pLeftChannel = pLeftChannel;
-		this.pRightChannel = pRightChannel;
+		this.pLeftChannel = leftChannel;
+		this.pRightChannel = rightChannel;
+		this.stereoMerge = stereoMerge;
 		this.frameRateRatioHint = pFrameRateRatioHint;
 	}
 	
@@ -623,21 +629,21 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 		computeSAMultiplier();
 	}
 	
-	/**
-	 * Stereo merge.
-	 *
-	 * @param pLeft
-	 *            the left
-	 * @param pRight
-	 *            the right
-	 * @return A float[] array from merging left and right speakers
-	 */
-	public float[] stereoMerge(float[] pLeft , float[] pRight) {
-		for (int a = 0; a < pLeft.length; a++)
-			pLeft[a] = ( pLeft[a] + pRight[a] ) / 2.0f;
-		
-		return pLeft;
-	}
+	//	/**
+	//	 * Stereo merge.
+	//	 *
+	//	 * @param pLeft
+	//	 *            the left
+	//	 * @param pRight
+	//	 *            the right
+	//	 * @return A float[] array from merging left and right speakers
+	//	 */
+	//	public float[] stereoMerge(float[] pLeft , float[] pRight) {
+	//		for (int a = 0; a < pLeft.length; a++)
+	//			pLeft[a] = ( pLeft[a] + pRight[a] ) / 2.0f;
+	//		
+	//		return pLeft;
+	//	}
 	
 	/**
 	 * Returns an array which has length<array length> and contains frequencies in every cell which has a value from 0.00 to 1.00.

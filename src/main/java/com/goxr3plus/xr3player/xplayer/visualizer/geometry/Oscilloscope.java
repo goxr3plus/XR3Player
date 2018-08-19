@@ -89,7 +89,7 @@ public class Oscilloscope {
 	if (stereo)
 	    pSample1 = visualizerDrawer.pLeftChannel;
 	else // not?Then merge the array
-	    pSample1 = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
+	    pSample1 = visualizerDrawer.stereoMerge;
 
 	//Background
 	visualizerDrawer.drawBackgroundImage();

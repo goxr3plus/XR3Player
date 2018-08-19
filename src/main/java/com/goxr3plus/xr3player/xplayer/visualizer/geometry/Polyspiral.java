@@ -155,8 +155,7 @@ public class Polyspiral {
     public void drawPolySpiral() {
 
 	// Calculations
-	float[] pSample = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
-	float[] array = visualizerDrawer.returnBandsArray(pSample, 3);
+	float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
 
 	int length;
 	int total;
@@ -273,7 +272,7 @@ public class Polyspiral {
 	//	}
 
 	//Foreground
-	visualizerDrawer.drawForegroundImage(array);
+	visualizerDrawer.drawForegroundImage();
 
 	drawPolyspiral2();
 
@@ -409,8 +408,7 @@ public class Polyspiral {
      * Draws a polyspiral and 4 arcs
      */
     private void drawPolyspiral2() {
-	float[] pSample = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
-	float[] array = visualizerDrawer.returnBandsArray(pSample, 4);
+	float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 4);
 
 	//Background
 	//visualizerDrawer.drawBackgroundImage()

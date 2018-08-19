@@ -335,14 +335,13 @@ public class Sprites3D {
 	 * @param band the band
 	 */
 	public void draw() {
-		float[] pSample = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
-		float[] array = visualizerDrawer.returnBandsArray(pSample, 3);
+		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
 		
 		//gc.clearRect(0, 0, width, height);
 		//gc.setStroke(Color.WHITE);
 		//gc.drawImage(background, 0, 0, width, height);
 		visualizerDrawer.drawBackgroundImage();
-		visualizerDrawer.drawForegroundImage(array);
+		visualizerDrawer.drawForegroundImage();
 		
 		roll += rollInc;
 		pitch += pitchInc;

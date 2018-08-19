@@ -19,16 +19,18 @@ public interface KJDigitalSignalProcessor {
 	/**
 	 * Called by the KJDigitalSignalProcessingAudioDataConsumer.
 	 * 
-	 * @param pLeftChannel
+	 * @param leftChannel
 	 *        Audio data for the left channel.
-	 * @param pRightChannel
+	 * @param rightChannel
 	 *        Audio data for the right channel.
-	 * @param pFrameRateRatioHint
+	 * @param stereoMerge
+	 *        Merged Audio data from left and right channel
+	 * @param frameRateRatioHint
 	 *        A float value representing the ratio of the current frame rate
 	 *        to the desired frame rate. It is used to keep DSP animation
 	 *        consistent if the frame rate drop below the desired frame
 	 *        rate.
 	 */
-	void process(float[] pLeftChannel , float[] pRightChannel , float pFrameRateRatioHint);
+	void process(float[] leftChannel , float[] rightChannel , float[] stereoMerge, float frameRateRatioHint);
 	
 }

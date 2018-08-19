@@ -76,8 +76,7 @@ public class Sierpinski {
      */
     public void drawSierpinski() {
 	// Calculations
-	float[] pSample = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
-	float[] array = visualizerDrawer.returnBandsArray(pSample, 3);
+	float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
 	sierpinskiSmallest = array[1] * 100 < 10 ? 10 : array[1] * 100;
 	sierpinskiAcceleration = array[0] * 0.1;
 	// System.out.println(sierpinskiAcceleration)

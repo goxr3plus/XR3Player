@@ -76,8 +76,7 @@ public class JuliaSet {
 		bean.setConvergenceColor(Color.BLUEVIOLET);
 		
 		// Calculations
-		float[] pSample = visualizerDrawer.stereoMerge(visualizerDrawer.pLeftChannel, visualizerDrawer.pRightChannel);
-		float[] array = visualizerDrawer.returnBandsArray(pSample, 2);
+		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 2);
 		
 		// System.out.println(array[0] + " , " + array[1])
 		bean.setZ(-array[0] + array[0] < 0.5 ? -0.4 : -0.1);// bean.setZ(0.3)
