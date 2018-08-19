@@ -70,9 +70,6 @@ public class StreamPlayer implements Callable<Void> {
 	/** @SEE streamplayer.Status */
 	private volatile Status status = Status.NOT_SPECIFIED;
 	
-	/** The thread. */
-	//private Thread thread = null
-	
 	/** The data source. */
 	private Object dataSource;
 	
@@ -435,50 +432,6 @@ public class StreamPlayer implements Callable<Void> {
 	public void setSpeedFactor(double speedFactor) {
 		this.speedFactor = speedFactor;
 		
-		//		AudioFormat sourceFormat = audioInputStream.getFormat();
-		//		
-		//		logger.info(() -> "Create Line : Source format : " + sourceFormat + "\n");
-		//		
-		//		// Calculate the Sample Size in bits
-		//		int nSampleSizeInBits = sourceFormat.getSampleSizeInBits();
-		//		if (sourceFormat.getEncoding() == AudioFormat.Encoding.ULAW || sourceFormat.getEncoding() == AudioFormat.Encoding.ALAW || nSampleSizeInBits <= 0
-		//				|| nSampleSizeInBits != 8)
-		//			nSampleSizeInBits = 16;
-		//		
-		//		AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, (float) ( sourceFormat.getSampleRate() * speedFactor ), nSampleSizeInBits,
-		//				sourceFormat.getChannels(), nSampleSizeInBits / 8 * sourceFormat.getChannels(), sourceFormat.getSampleRate(), false);
-		//		
-		//		// int frameSize = sourceFormat.getChannels() * (nSampleSizeInBits / 8)
-		//		
-		//		logger.info(() -> "Sample Rate =" + targetFormat.getSampleRate() + ",Frame Rate=" + targetFormat.getFrameRate() + ",Bit Rate=" + targetFormat.getSampleSizeInBits()
-		//				+ "Target format: " + targetFormat + "\n");
-		//		
-		//		// Keep a reference on encoded stream to progress notification.
-		//		encodedAudioInputStream = audioInputStream;
-		//		
-		//		// Create decoded Stream
-		//		audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
-		//		DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioInputStream.getFormat(), AudioSystem.NOT_SPECIFIED);
-		//		if (!AudioSystem.isLineSupported(lineInfo))
-		//			throw new StreamPlayerException(PlayerException.LINE_NOT_SUPPORTED);
-		//		
-		//		//----------About the mixer
-		//		if (mixerName == null)
-		//			// Primary Sound Driver
-		//			mixerName = getMixers().get(0);
-		//		
-		//		//Continue
-		//		Mixer mixer = getMixer(mixerName);
-		//		if (mixer == null) {
-		//			sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
-		//			mixerName = null;
-		//		} else {
-		//			logger.info("Mixer: " + mixer.getMixerInfo());
-		//			sourceDataLine = (SourceDataLine) mixer.getLine(lineInfo);
-		//		}
-		//		
-		//		sourceDataLine = (SourceDataLine) AudioSystem.getLine(lineInfo);
-		
 	}
 	
 	/**
@@ -619,7 +572,6 @@ public class StreamPlayer implements Callable<Void> {
 		
 		//Shutdown previous Thread Running
 		awaitTermination();
-		//awaitTermination();
 		
 		// Open SourceDataLine.
 		try {
@@ -732,6 +684,8 @@ public class StreamPlayer implements Callable<Void> {
 		}
 	}
 	
+	
+	
 	/**
 	 * Skip bytes in the File input stream. It will skip N frames matching to bytes, so it will never skip given bytes length exactly.
 	 *
@@ -741,53 +695,82 @@ public class StreamPlayer implements Callable<Void> {
 	 * @throws StreamPlayerException
 	 *             the stream player exception
 	 */
-	public long seek(long bytes) throws StreamPlayerException {
+	public long seek(long bytes , boolean seekFromStart) throws StreamPlayerException {
 		long totalSkipped = 0;
 		
-		//If it is File
+		//FILE
 		if (dataSource instanceof File) {
 			
 			//Check if the requested bytes are more than totalBytes of Audio
 			long bytesLength = getTotalBytes();
-			System.out.println("Bytes: " + bytes + " BytesLength: " + bytesLength);
 			if ( ( bytesLength <= 0 ) || ( bytes >= bytesLength )) {
 				generateEvent(Status.EOM, getEncodedStreamPosition(), null);
 				return totalSkipped;
 			}
 			
 			logger.info(() -> "Bytes to skip : " + bytes);
+			
+			//Keep previous status
 			Status previousStatus = status;
 			status = Status.SEEKING;
 			
 			try {
-				synchronized (audioLock) {
-					generateEvent(Status.SEEKING, AudioSystem.NOT_SPECIFIED, null);
-					initAudioInputStream();
-					if (audioInputStream != null) {
+				
+				//Lock
+				//synchronized (audioLock) {
+				generateEvent(Status.SEEKING, AudioSystem.NOT_SPECIFIED, null);
+				
+				//initAudioInputStream();
+				if (audioInputStream != null) {
+					
+					long skipped = 0;
+					
+					System.out.println("Bytes :" + bytes);
+					// Loop until bytes are really skipped.
+					while (totalSkipped < bytes) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
+						System.out.println("Running...");
+						skipped = audioInputStream.skip(bytes / 4);
+						if (skipped == 0)
+							break;
+						totalSkipped += skipped;
+						logger.info("Skipped : " + totalSkipped + "/" + bytes);
+						if (totalSkipped == -1)
+							throw new StreamPlayerException(StreamPlayerException.PlayerException.SKIP_NOT_SUPPORTED);
 						
-						long skipped;
-						// Loop until bytes are really skipped.
-						while (totalSkipped < bytes) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
-							//System.out.println("Running");
-							skipped = audioInputStream.skip(bytes - totalSkipped);
-							if (skipped == 0)
-								break;
-							totalSkipped += skipped;
-							logger.info("Skipped : " + totalSkipped + "/" + bytes);
-							if (totalSkipped == -1)
-								throw new StreamPlayerException(StreamPlayerException.PlayerException.SKIP_NOT_SUPPORTED);
-							
-							logger.info("Skeeping:" + totalSkipped);
-						}
+						logger.info("Skeeping:" + totalSkipped);
 					}
+					
+					System.out.println("Skipped.... " + skipped);
+					
+					//					// Loop until bytes are really skipped.
+					//					while (totalSkipped < bytes) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE))) 
+					//						skipped = audioInputStream.skip(bytes - totalSkipped);
+					//						if (skipped == 0)
+					//							break;
+					//						totalSkipped += skipped;
+					//						logger.info("Skipped : " + totalSkipped + "/" + bytes);
+					//						if (totalSkipped == -1)
+					//							throw new StreamPlayerException(StreamPlayerException.PlayerException.SKIP_NOT_SUPPORTED);
+					//						
+					//						logger.info("Skeeping:" + totalSkipped);
+					//					}
 				}
-				generateEvent(Status.SEEKED, getEncodedStreamPosition(), null);
-				status = Status.OPENED;
-				if (previousStatus == Status.PLAYING)
-					play();
-				else if (previousStatus == Status.PAUSED) {
+				//}
+				//				generateEvent(Status.SEEKED, getEncodedStreamPosition(), null);
+				//				status = Status.OPENED;
+				
+				System.out.println("PREVIOUS STATUS :" + previousStatus);
+				if (previousStatus == Status.PLAYING) {
+					//sourceDataLine.start();
+					status = Status.PLAYING;
+					generateEvent(Status.PLAYING, getEncodedStreamPosition(), null);
+					//play();
+				} else if (previousStatus == Status.PAUSED) {
 					play();
 					pause();
+					status = Status.PAUSED;
+					logger.info("pausePlayback() completed");
+					generateEvent(Status.PAUSED, getEncodedStreamPosition(), null);
 				}
 				
 			} catch (IOException ex) {
@@ -816,7 +799,17 @@ public class StreamPlayer implements Callable<Void> {
 		// Lock stream while playing.
 		synchronized (audioLock) {
 			// Main play/pause loop.
-			while ( ( nBytesRead != -1 ) && status != Status.STOPPED && status != Status.SEEKING && status != Status.NOT_SPECIFIED) {
+			while ( ( nBytesRead != -1 ) && status != Status.STOPPED && status != Status.NOT_SPECIFIED) {
+				if (status == Status.SEEKING) {
+					try {
+						System.out.println("Audio Seeking ...");
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					continue;
+				}
+				
 				try {
 					//Playing?
 					if (status == Status.PLAYING) {
