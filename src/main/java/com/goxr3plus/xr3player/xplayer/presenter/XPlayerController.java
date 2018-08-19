@@ -1376,13 +1376,15 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
 			
 			//VisualizerStackController Label
-			visualizerStackController.replayLabelEffect("Vol: " + getVolume() + " %");
-			
-			//Advanced Mode Volume Label
-			if (modeToggle.isSelected()) {
-				advModeVolumeLabel.setText(getVolume() + " %");
-				fadeTransition.playFromStart();
-			}
+			Platform.runLater(() -> {
+				visualizerStackController.replayLabelEffect("Vol: " + getVolume() + " %");
+				
+				//Advanced Mode Volume Label
+				if (modeToggle.isSelected()) {
+					advModeVolumeLabel.setText(getVolume() + " %");
+					fadeTransition.playFromStart();
+				}
+			});
 		} catch (Exception ex) {
 			
 			logger.log(Level.INFO, "\n", ex);
