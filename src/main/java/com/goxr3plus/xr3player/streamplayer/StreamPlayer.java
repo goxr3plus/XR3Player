@@ -788,7 +788,7 @@ public class StreamPlayer implements Callable<Void> {
 						
 						long skipped;
 						// Loop until bytes are really skipped.                                                           
-						while (totalSkipped < ( bytes )) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE)))                
+						while (totalSkipped <  bytes ) { //totalSkipped < (bytes-SKIP_INACCURACY_SIZE)))                
 							skipped = audioInputStream.skip(bytes - totalSkipped);
 							if (skipped == 0)
 								break;
