@@ -202,7 +202,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 					//So the user wants to start from a position better than 0
 					if (secondsToSkip > 0) {
 						xPlayerController.getxPlayer().seek((long) ( ( (float) secondsToSkip )
-								* ( xPlayerController.getxPlayer().getTotalBytes() / (float) xPlayerController.getxPlayerModel().getDuration() ) ),true);
+								* ( xPlayerController.getxPlayer().getTotalBytes() / (float) xPlayerController.getxPlayerModel().getDuration() ) ));
 						
 						//Update the below bitches!!!!!!! Fuck dat flickiro a flickira e
 						// daaaaaaaaaaaaaaaaaaaaanb bitchg!!!!Fuck Fock Fock Fock i was crazy when writting this code here
