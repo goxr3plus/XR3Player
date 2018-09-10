@@ -1,2 +1,0 @@
-
-git commit -m "Updated New Release.html"
