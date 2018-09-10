@@ -83,12 +83,16 @@ public class WaveFormService extends Service<Boolean> {
 		//Stop the Serivce
 		xPlayerController.getWaveFormVisualization().stopPainterService();
 		
+		//Abort Encoding
+		if (encoder != null)
+			encoder.abortEncoding();
+		
 		//Check if boob job
 		this.waveFormJob = waveFormJob;
 		
 		//Variables
 		this.fileAbsolutePath = fileAbsolutePath;
-		//this.resultingWaveform = null;
+		//this.resultingWaveform = null
 		if (waveFormJob != WaveFormJob.WAVEFORM)
 			this.wavAmplitudes = null;
 		converterProgress.set(-1);
@@ -109,6 +113,10 @@ public class WaveFormService extends Service<Boolean> {
 	}
 	
 	private void failure() {
+		//Abort Encoding
+		if (encoder != null)
+			encoder.abortEncoding();
+		
 		xPlayerController.getWaveProgressLabel().setText("Wave Spectrum");
 		deleteTemporaryFiles();
 	}
@@ -334,6 +342,10 @@ public class WaveFormService extends Service<Boolean> {
 					EncodingAttributes attributes = new EncodingAttributes();
 					attributes.setFormat("wav");
 					attributes.setAudioAttributes(audio);
+					
+					//Abort Encoding
+					if (encoder != null)
+						encoder.abortEncoding();
 					
 					//Encode
 					encoder = encoder != null ? encoder : new Encoder();

@@ -64,6 +64,10 @@ public class ConverterService extends Service<Boolean> {
 		//Set the full fileAbsolutePath
 		this.fileAbsolutePath = fileAbsolutePath;
 		
+		//Try to abort
+		if (encoder != null)
+			encoder.abortEncoding();
+		
 		//Set Progress to 0
 		convertProgress.set(-1.0);
 		
@@ -123,7 +127,7 @@ public class ConverterService extends Service<Boolean> {
 					try {
 						
 						//Files
-						File source = new File(fileAbsolutePath);					
+						File source = new File(fileAbsolutePath);
 						File target = new File(newFileAsbolutePath);
 						
 						//Audio Attributes
@@ -138,7 +142,9 @@ public class ConverterService extends Service<Boolean> {
 						attrs.setFormat("mp3");
 						attrs.setAudioAttributes(audio);
 						
-						//Encode                                            
+						//Encode          
+						if (encoder != null)
+							encoder.abortEncoding();
 						encoder = encoder != null ? encoder : new Encoder();
 						encoder.encode(new MultimediaObject(source), target, attrs, listener);
 						
