@@ -224,8 +224,9 @@ public class UpdateWindow extends StackPane {
 			//Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8", "http://example.com/")
 			
 			int currentVersion = Main.APPLICATION_VERSION;
-			int lastArticleID = Integer.parseInt(doc.getElementsByTag("article").last().id());
+			int lastArticleID = doc.getElementsByTag("article").stream().mapToInt(element -> Integer.parseInt(element.id())).max().getAsInt();
 			int latestGithubReleaseTag = getLatestReleaseTag();
+			
 			
 			//Check the latest tag on github
 			if (latestGithubReleaseTag <= Main.APPLICATION_VERSION && !showTheWindow)
@@ -250,8 +251,8 @@ public class UpdateWindow extends StackPane {
 				knownBugsTextArea.clear();
 				
 				// --------------------------------------- whatsNewTextArea -----------------------------------			
-				doc.getElementsByTag("article").stream().collect(Collectors.toCollection(ArrayDeque::new)).descendingIterator()
-						.forEachRemaining(element -> analyzeUpdate(whatsNewTextArea, element));
+				doc.getElementsByTag("article").stream().sorted((o1 , o2) -> Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id())))
+						.collect(Collectors.toCollection(ArrayDeque::new)).descendingIterator().forEachRemaining(element -> analyzeUpdate(whatsNewTextArea, element));
 				
 				whatsNewTextArea.moveTo(0);
 				whatsNewTextArea.requestFollowCaret();
