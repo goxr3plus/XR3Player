@@ -196,9 +196,9 @@ public class WebBrowserController extends StackPane {
 	}
 	
 	/**
-	 * Disposing Browser instance in the incorrect thread in JavaFX may lead to a deadlock on the native side. The Browser instances must be disposed on
-	 * different threads depending on the operating system. In Linux and macOS the Browser.dispose() method must be called on the UI thread, While on
-	 * Windows Browser must be disposed on the non-UI thread
+	 * Disposing Browser instance in the incorrect thread in JavaFX may lead to a deadlock on the native side. The Browser instances must be disposed
+	 * on different threads depending on the operating system. In Linux and macOS the Browser.dispose() method must be called on the UI thread, While
+	 * on Windows Browser must be disposed on the non-UI thread
 	 * 
 	 * @param browser
 	 */
@@ -296,8 +296,8 @@ public class WebBrowserController extends StackPane {
 	}
 	
 	/**
-	 * Start the chromiumUpdaterService which is actually a background Thread responsible for looking if tabs have audio , are muted/umuted and generally
-	 * many other things
+	 * Start the chromiumUpdaterService which is actually a background Thread responsible for looking if tabs have audio , are muted/umuted and
+	 * generally many other things
 	 * 
 	 * @see ChromiumUpdaterService
 	 */

@@ -28,7 +28,6 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.ba;
 
 import javafx.animation.PauseTransition;
@@ -42,10 +41,8 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -71,8 +68,8 @@ import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSpli
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
-import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
+import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
@@ -565,9 +562,10 @@ public class Main extends Application {
 		root.setTop(topBar);
 		root.setLeft(sideBar);
 		root.setBottom(bottomBar);
+		root.setCenter(rootStackPane);
 		
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
-		rootStackPane.getChildren().addAll(libraryMode, movieModeController, userInfoMode);
+		rootStackPane.getChildren().addAll(movieModeController, userInfoMode, libraryMode);
 		
 		//Load some lol images from lol base
 		new Thread(() -> {
@@ -592,7 +590,6 @@ public class Main extends Application {
 				
 				//Chromium Web Browser
 				webBrowser = new WebBrowserController();
-				rootStackPane.getChildren().add(webBrowser);
 				
 				//Dropbox Viewer
 				dropBoxViewer = new DropboxViewer();
@@ -706,8 +703,6 @@ public class Main extends Application {
 		sideBar.prepareForLoginMode(false);
 		
 		//Set root visible
-		root.setCenter(rootStackPane);
-		topBar.goMode(WindowMode.MAINMODE);
 		root.setVisible(true);
 		
 		//Do a pause so the login mode disappears

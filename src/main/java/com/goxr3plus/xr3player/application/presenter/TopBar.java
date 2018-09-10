@@ -111,13 +111,13 @@ public class TopBar extends BorderPane {
 		//Window Mode Property
 		windowModeProperty.addListener((observable , oldValue , newValue) -> {
 			
-			if (newValue == null)
-				return;
+			//if (newValue == null)
+			//	return;
 			
 			//Hide all
 			Main.libraryMode.setVisible(false);
 			Main.userInfoMode.setVisible(false);
-			Main.webBrowser.setVisible(false);
+			Main.rootStackPane.getChildren().remove(Main.webBrowser);
 			Main.movieModeController.setVisible(false);
 			
 			//Now decide which one to show
@@ -128,13 +128,14 @@ public class TopBar extends BorderPane {
 				Main.libraryMode.setVisible(true);
 				
 			} else if (newValue == WindowMode.MOVIEMODE) {
+				
 				Main.movieModeController.setVisible(true);
 				
 			} else if (newValue == WindowMode.USERMODE) {
 				Main.userInfoMode.setVisible(true);
 				
 			} else if (newValue == WindowMode.WEBMODE) {
-				Main.webBrowser.setVisible(true);
+				Main.rootStackPane.getChildren().add(Main.webBrowser);
 				
 			}
 			

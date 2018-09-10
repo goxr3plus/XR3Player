@@ -73,7 +73,6 @@ import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
-import main.java.com.goxr3plus.xr3player.chromium.services.ChromiumUpdaterService;
 import net.sf.image4j.codec.ico.ICODecoder;
 
 /**
@@ -737,13 +736,6 @@ public class WebBrowserTabController extends StackPane {
 		return browser;
 	}
 	
-	/**
-	 * @param browser
-	 *            the browser to set
-	 */
-	public void setBrowser(Browser browser) {
-		this.browser = browser;
-	}
 	
 	/**
 	 * @return the audioButton
@@ -766,6 +758,10 @@ public class WebBrowserTabController extends StackPane {
 		return progressIndicatorStackPane;
 	}
 	
+	public BrowserView getBrowserView() {
+		return browserView;
+	}
+
 	/**
 	 * Right Click ContextMenuHandler
 	 * 
