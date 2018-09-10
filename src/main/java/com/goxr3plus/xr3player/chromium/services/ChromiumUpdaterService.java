@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
 import main.java.com.goxr3plus.xr3player.streamplayer.ThreadFactoryWithNamePrefix;
@@ -62,7 +63,7 @@ public class ChromiumUpdaterService {
 				
 				for (;; Thread.sleep(1000)) {
 					
-					if (Main.topBar.isTabSelected(Main.topBar.getWebModeTab())) {
+					if (Main.topBar.getWindowMode() == WindowMode.WEBMODE) {
 						checkTabsSound();
 						//System.out.println(threadName + " entered if statement")
 					}

@@ -26,6 +26,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
@@ -237,7 +238,7 @@ public class MediaContextMenu extends ContextMenu {
 	 */
 	private void openWebSite(String url) {
 		Main.webBrowser.createTabAndSelect(url);
-		Main.topBar.selectTab(Main.topBar.getWebModeTab());
+		Main.topBar.goMode(WindowMode.WEBMODE);
 	}
 	
 	/**

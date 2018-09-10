@@ -10,15 +10,13 @@ import java.util.logging.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTabPane;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
@@ -43,32 +41,12 @@ public class TopBar extends BorderPane {
 	@FXML
 	private TextField searchField;
 	
-	@FXML
-	private JFXTabPane jfxTabPane;
-	
-	@FXML
-	private Tab mainModeTab;
-	
-	@FXML
-	private Tab userModeTab;
-	
-	@FXML
-	private Tab webModeTab;
-	
-	@FXML
-	private Tab moviesModeTab;
-	
 	// ----------------------------------------------
 	
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	/**
-	 * The current Window Mode
-	 * 
-	 * @SEE WindowMode
-	 */
-	private WindowMode windowMode = WindowMode.MAINMODE;
+	private SimpleObjectProperty<WindowMode> windowModeProperty = new SimpleObjectProperty<>(WindowMode.MAINMODE);
 	
 	/**
 	 * WindowMode.
@@ -130,69 +108,43 @@ public class TopBar extends BorderPane {
 		//Root
 		this.setRight(new CloseAppBox());
 		
-		//----------------------------START: TABS---------------------------------
-		
-		//DummyStackPane technique to fix  Main Mode Disc Problems
-		StackPane dummyStackPane = new StackPane();
-		dummyStackPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		
-		mainModeTab.setOnSelectionChanged(l -> {
-			if (mainModeTab.isSelected()) {
+		//Window Mode Property
+		windowModeProperty.addListener((observable , oldValue , newValue) -> {
+			
+			if (newValue == null)
+				return;
+			
+			//Hide all
+			Main.libraryMode.setVisible(false);
+			Main.userInfoMode.setVisible(false);
+			Main.webBrowser.setVisible(false);
+			Main.movieModeController.setVisible(false);
+			
+			//Now decide which one to show
+			if (newValue == WindowMode.MAINMODE) {
+				Main.libraryMode.setVisible(true);
 				
-				if (windowMode != WindowMode.MAINMODE) {// && !Main.libraryMode.getTopSplitPane().getItems().contains(Main.playListModesSplitPane)) {
-					
-					// Update window Mode
-					windowMode = WindowMode.MAINMODE;
-					
-				}
-				Main.specialJFXTabPane.getSelectionModel().select(0);
+			} else if (newValue == WindowMode.DJMODE) {
+				Main.libraryMode.setVisible(true);
+				
+			} else if (newValue == WindowMode.MOVIEMODE) {
+				Main.movieModeController.setVisible(true);
+				
+			} else if (newValue == WindowMode.USERMODE) {
+				Main.userInfoMode.setVisible(true);
+				
+			} else if (newValue == WindowMode.WEBMODE) {
+				Main.webBrowser.setVisible(true);
+				
 			}
 			
-		});
-		
-		moviesModeTab.setOnSelectionChanged(l -> {
-			if (moviesModeTab.isSelected()) {
-				
-				Main.specialJFXTabPane.getSelectionModel().select(1);
-				Main.sideBar.getMoviesToggle().setSelected(true);
-				
-				// Update window Mode
-				windowMode = WindowMode.MOVIEMODE;
+			//Extra config
+			if (newValue == WindowMode.MOVIEMODE || newValue == WindowMode.USERMODE || newValue == WindowMode.WEBMODE) {
 				
 				//Hide the searchBox that is coming from LibraryMode
 				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
 			}
 		});
-		
-		userModeTab.setOnSelectionChanged(l -> {
-			if (userModeTab.isSelected()) {
-				
-				Main.specialJFXTabPane.getSelectionModel().select(2);
-				Main.sideBar.getUserInfoToggle().setSelected(true);
-				
-				// Update window Mode
-				windowMode = WindowMode.USERMODE;
-				
-				//Hide the searchBox that is coming from LibraryMode
-				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
-			}
-		});
-		
-		webModeTab.setOnSelectionChanged(l -> {
-			if (webModeTab.isSelected()) {
-				
-				Main.specialJFXTabPane.getSelectionModel().select(3);
-				Main.sideBar.getBrowserToggle().setSelected(true);
-				
-				// Update window Mode
-				windowMode = WindowMode.WEBMODE;
-				
-				//Hide the searchBox that is coming from LibraryMode
-				Main.libraryMode.librariesSearcher.getSearchBoxWindow().close();
-			}
-		});
-		
-		//----------------------------END: TABS---------------------------------
 		
 		//showHideSideBar
 		showHideSideBar.setOnAction(a -> {
@@ -201,22 +153,12 @@ public class TopBar extends BorderPane {
 	}
 	
 	/**
-	 * Selects the tab from JFXTabPane in position {index}
+	 * Go to that Mode
 	 * 
-	 * @param index
+	 * @param mode
 	 */
-	public void selectTab(Tab tab) {
-		jfxTabPane.getSelectionModel().select(tab);
-	}
-	
-	/**
-	 * Checks if the tab from JFXTabPane in position {index} is selected
-	 * 
-	 * @param index
-	 * @return True if the tab is selected or false if not
-	 */
-	public boolean isTabSelected(Tab tab) {
-		return tab.isSelected();
+	public void goMode(WindowMode mode) {
+		windowModeProperty.set(mode);
 	}
 	
 	/**
@@ -248,13 +190,6 @@ public class TopBar extends BorderPane {
 	}
 	
 	/**
-	 * @return the windowMode
-	 */
-	public WindowMode getWindowMode() {
-		return windowMode;
-	}
-	
-	/**
 	 * @return the highSpeed
 	 */
 	public FontIcon getHighGraphics() {
@@ -262,38 +197,18 @@ public class TopBar extends BorderPane {
 	}
 	
 	/**
-	 * @return the webModeTab
-	 */
-	public Tab getWebModeTab() {
-		return webModeTab;
-	}
-	
-	/**
-	 * @return the mainModeTab
-	 */
-	public Tab getMainModeTab() {
-		return mainModeTab;
-	}
-	
-	/**
-	 * @return the moviesModeTab
-	 */
-	public Tab getMoviesModeTab() {
-		return moviesModeTab;
-	}
-	
-	/**
-	 * @return the userModeTab
-	 */
-	public Tab getUserModeTab() {
-		return userModeTab;
-	}
-	
-	/**
 	 * @return the searchField
 	 */
 	public TextField getSearchField() {
 		return searchField;
+	}
+	
+	public SimpleObjectProperty<WindowMode> getWindowModeProperty() {
+		return windowModeProperty;
+	}
+	
+	public WindowMode getWindowMode() {
+		return getWindowModeProperty().get();
 	}
 	
 }

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
@@ -56,15 +54,10 @@
                   <TextField fx:id="searchField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="what are you looking for ?" styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
                   <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20" />
                </children>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
             </HBox>
-            <JFXTabPane fx:id="jfxTabPane" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
-               <tabs>
-                  <Tab fx:id="mainModeTab" />
-                  <Tab fx:id="userModeTab" />
-                  <Tab fx:id="webModeTab" />
-                  <Tab fx:id="moviesModeTab" />
-               </tabs>
-            </JFXTabPane>
          </children>
       </HBox>
    </left>

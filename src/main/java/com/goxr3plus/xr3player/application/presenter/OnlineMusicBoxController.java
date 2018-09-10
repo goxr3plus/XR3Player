@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 
@@ -97,7 +98,7 @@ public class OnlineMusicBoxController extends StackPane {
 		//Mouse Events
 		setOnMouseClicked(m -> {
 			Main.webBrowser.createTabAndSelect(url);
-			Main.topBar.selectTab(Main.topBar.getWebModeTab());
+			Main.topBar.goMode(WindowMode.WEBMODE);
 		});
 		
 		stackLabel.visibleProperty().bind(this.hoverProperty());

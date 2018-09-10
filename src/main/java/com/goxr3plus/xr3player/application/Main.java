@@ -72,6 +72,7 @@ import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabP
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
@@ -255,6 +256,8 @@ public class Main extends Application {
 	/** The root. */
 	public static final BorderPane root = new BorderPane();
 	
+	public static final StackPane rootStackPane = new StackPane();
+	
 	/** The can save data. */
 	public static boolean canSaveData = true;
 	
@@ -302,7 +305,9 @@ public class Main extends Application {
 	/**
 	 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
 	 */
-	public static JFXTabPane specialJFXTabPane;
+	//public static JFXTabPane specialJFXTabPane;
+	
+	public static MovieModeController movieModeController;
 	
 	// --------------END: The below have dependencies on others------------------------
 	
@@ -513,12 +518,14 @@ public class Main extends Application {
 		/**
 		 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
 		 */
-		specialJFXTabPane = new JFXTabPane();
+		//specialJFXTabPane = new JFXTabPane();
 		
 		mediaSearchWindow = new MediaSearchWindow();
 		
 		dragViewer = new DragViewer();
 		// --------------END: The below have dependencies on others------------w------------
+		
+		movieModeController = new MovieModeController();
 	}
 	
 	/**
@@ -560,9 +567,7 @@ public class Main extends Application {
 		root.setBottom(bottomBar);
 		
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
-		specialJFXTabPane.getTabs().add(new Tab("tab1", libraryMode));
-		specialJFXTabPane.getTabs().add(new Tab("tab2", new MovieModeController()));
-		specialJFXTabPane.getTabs().add(new Tab("tab3", userInfoMode));
+		rootStackPane.getChildren().addAll(libraryMode, movieModeController, userInfoMode);
 		
 		//Load some lol images from lol base
 		new Thread(() -> {
@@ -587,7 +592,7 @@ public class Main extends Application {
 				
 				//Chromium Web Browser
 				webBrowser = new WebBrowserController();
-				specialJFXTabPane.getTabs().add(new Tab("tab5", webBrowser));
+				rootStackPane.getChildren().add(webBrowser);
 				
 				//Dropbox Viewer
 				dropBoxViewer = new DropboxViewer();
@@ -599,22 +604,6 @@ public class Main extends Application {
 			
 			//System.out.println("Loller Thread exited...")
 		}).start();
-		
-		specialJFXTabPane.setTabMaxWidth(0);
-		specialJFXTabPane.setTabMaxHeight(0);
-		specialJFXTabPane.setFocusTraversable(false);
-		specialJFXTabPane.setOnKeyReleased(KeyEvent::consume);
-		
-		//Add listeners to each tab
-		final AtomicInteger counter = new AtomicInteger(-1);
-		specialJFXTabPane.getTabs().forEach(tab -> {
-			final int index = counter.addAndGet(1);
-			tab.selectedProperty().addListener((observable , oldValue , newValue) -> {
-				if (specialJFXTabPane.getTabs().get(index).isSelected() && !topBar.isTabSelected(tab))
-					topBar.selectTab(tab);
-			});
-		});
-		root.setCenter(specialJFXTabPane);
 		
 		//---------LibraryMode ------------	
 		
@@ -717,6 +706,8 @@ public class Main extends Application {
 		sideBar.prepareForLoginMode(false);
 		
 		//Set root visible
+		root.setCenter(rootStackPane);
+		topBar.goMode(WindowMode.MAINMODE);
 		root.setVisible(true);
 		
 		//Do a pause so the login mode disappears

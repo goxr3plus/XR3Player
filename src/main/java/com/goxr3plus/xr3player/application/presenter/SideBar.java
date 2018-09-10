@@ -26,6 +26,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.services.DatabaseExportService;
 import main.java.com.goxr3plus.xr3player.application.database.services.DatabaseImportService;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
@@ -352,23 +353,24 @@ public class SideBar extends StackPane {
 		//modeTeam
 		modeTeam.selectedToggleProperty().addListener((observable , oldToggle , newToggle) -> {
 			if (newToggle == this.mainModeToggle) {
-				Main.topBar.selectTab(Main.topBar.getMainModeTab());
+				Main.topBar.goMode(WindowMode.MAINMODE);
 				
 				//Fix things
 				Main.libraryMode.getDjModeStackPane().setVisible(false);
 				
 			} else if (newToggle == this.djModeToggle) {
-				Main.topBar.selectTab(Main.topBar.getMainModeTab());
+				Main.topBar.goMode(WindowMode.MAINMODE);
 				
 				//Fix things
 				Main.libraryMode.getDjModeStackPane().setVisible(true);
 				
-			} else if (newToggle == this.userInfoToggle)
-				Main.topBar.selectTab(Main.topBar.getUserModeTab());
-			else if (newToggle == this.browserToggle)
-				Main.topBar.selectTab(Main.topBar.getWebModeTab());
-			else if (newToggle == this.moviesToggle)
-				Main.topBar.selectTab(Main.topBar.getMoviesModeTab());
+			} else if (newToggle == this.userInfoToggle) {
+				Main.topBar.goMode(WindowMode.USERMODE);
+			} else if (newToggle == this.browserToggle) {
+				Main.topBar.goMode(WindowMode.WEBMODE);
+			} else if (newToggle == this.moviesToggle) {
+				Main.topBar.goMode(WindowMode.MOVIEMODE);
+			}
 		});
 		
 		// StackView

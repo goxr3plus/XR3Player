@@ -22,6 +22,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
@@ -83,7 +84,7 @@ public class MediaUpdaterService {
 		try {
 			
 			//Don't enter in case of 
-			if (Main.topBar.isTabSelected(Main.topBar.getMainModeTab()) || Main.libraryMode.getDjModeStackPane().isVisible()) {
+			if (Main.topBar.getWindowMode() == WindowMode.MAINMODE || Main.libraryMode.getDjModeStackPane().isVisible()) {
 				
 				//Selected + Opened Library
 				if (Main.playListModesTabPane.getOpenedLibrariesTab().isSelected())
@@ -134,7 +135,7 @@ public class MediaUpdaterService {
 						//Or else check more through
 						else {
 							//For player 0
-							if (xPlayerController.getKey() == 0 && Main.topBar.isTabSelected(Main.topBar.getMainModeTab()))
+							if (xPlayerController.getKey() == 0 && Main.topBar.getWindowMode() == WindowMode.MAINMODE)
 								return true;
 							//For other players
 							else if (xPlayerController.getKey() != 0 && Main.libraryMode.getDjModeStackPane().isVisible())
@@ -167,7 +168,7 @@ public class MediaUpdaterService {
 			//--
 			
 			//Don't enter in case of 
-			if ( ( Main.topBar.isTabSelected(Main.topBar.getMainModeTab()) || Main.libraryMode.getDjModeStackPane().isVisible() )
+			if ( ( Main.topBar.getWindowMode() == WindowMode.MAINMODE || Main.libraryMode.getDjModeStackPane().isVisible() )
 					&& Main.playListModesTabPane.getEmotionListsTab().isSelected())
 				//Filter Emotion Lists Normal Mode TableViews   
 				Main.emotionsTabPane.getTabPane().getTabs().stream().filter(Tab::isSelected).findFirst().ifPresent(tab -> {

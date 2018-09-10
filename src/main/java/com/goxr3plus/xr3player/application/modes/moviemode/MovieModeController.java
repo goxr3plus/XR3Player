@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 
 public class MovieModeController extends BorderPane {
@@ -54,7 +55,7 @@ public class MovieModeController extends BorderPane {
 		imageView1.fitHeightProperty().bind(this.heightProperty());
 		stack1.setOnMouseReleased(m -> {
 			Main.webBrowser.addNewTabOnTheEnd("https://www1.fmovies.se/movies");
-			Main.topBar.selectTab(Main.topBar.getWebModeTab());
+			Main.topBar.goMode(WindowMode.WEBMODE);
 			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
 		});
 	}

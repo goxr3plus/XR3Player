@@ -33,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
+import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
@@ -217,7 +218,7 @@ public abstract class Media {
 		searchButton.setOnMouseReleased(m -> {
 			try {
 				Main.webBrowser.createTabAndSelect("https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
-				Main.topBar.selectTab(Main.topBar.getWebModeTab());
+				Main.topBar.goMode(WindowMode.WEBMODE);
 			} catch (UnsupportedEncodingException ex) {
 				ex.printStackTrace();
 			}
@@ -234,7 +235,7 @@ public abstract class Media {
 		youtubeButton.setOnMouseReleased(m -> {
 			try {
 				Main.webBrowser.createTabAndSelect("https://www.youtube.com/results?search_query=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
-				Main.topBar.selectTab(Main.topBar.getWebModeTab());
+				Main.topBar.goMode(WindowMode.WEBMODE);
 			} catch (UnsupportedEncodingException ex) {
 				ex.printStackTrace();
 			}
