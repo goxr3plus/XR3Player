@@ -225,11 +225,9 @@ public class UpdateWindow extends StackPane {
 			
 			int currentVersion = Main.APPLICATION_VERSION;
 			int lastArticleID = doc.getElementsByTag("article").stream().mapToInt(element -> Integer.parseInt(element.id())).max().getAsInt();
-			int latestGithubReleaseTag = getLatestReleaseTag();
-			
 			
 			//Check the latest tag on github
-			if (latestGithubReleaseTag <= Main.APPLICATION_VERSION && !showTheWindow)
+			if (getLatestReleaseTag() <= Main.APPLICATION_VERSION && !showTheWindow)
 				return false;
 			
 			// Update is available or not?
