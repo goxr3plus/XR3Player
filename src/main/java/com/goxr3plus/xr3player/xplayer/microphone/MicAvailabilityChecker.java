@@ -14,10 +14,10 @@ public class MicAvailabilityChecker {
 			}
 			
 			mic.captureAudioToFile("damn.mp3");
-			if (mic.getState() != Microphone.CaptureState.PROCESSING_AUDIO || mic.getState() != Microphone.CaptureState.STARTING_CAPTURE) {
-				throw new MicUnaccessibleException("Mic is in use and can't be accessed");
-			}
-			mic.close();
+//			if (mic.getState() != Microphone.CaptureState.PROCESSING_AUDIO || mic.getState() != Microphone.CaptureState.STARTING_CAPTURE) {
+//				throw new MicUnaccessibleException("Mic is in use and can't be accessed");
+//			}
+//			mic.close();
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 		} finally {

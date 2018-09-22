@@ -305,7 +305,7 @@
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>FX-BorderlessScene</artifactId>
-			<version>V3.0.0</version>
+			<version>V3.1.0</version>
 		</dependency>
 		<!-- Locally Testing FX-BorderlessScene -->
 		<!-- <dependency> <groupId>com.FX-BorderlessScene</groupId> <artifactId>FX-BorderlessScene</artifactId> 
@@ -315,7 +315,7 @@
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
-			<version>3.0.8</version>
+			<version>3.0.9</version>
 		</dependency>
 		<!-- Plularizer -->
 		<dependency>
