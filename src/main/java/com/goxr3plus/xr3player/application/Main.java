@@ -68,7 +68,6 @@ import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesSpli
 import main.java.com.goxr3plus.xr3player.application.presenter.PlayListModesTabPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.SideBar;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar;
-import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.application.presenter.WelcomeScreen;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
@@ -108,8 +107,7 @@ import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * 
- * / //// ____ / //// /----\ / //// |----| / //// |----| / //// |----| HALLO MADAFUCKER / //// |----| / //// / | \ / //// | | | / //// \___|__/ The
- * Main class from which the application is starting.
+ * The Main JavaFX Application
  *
  * @author GOXR3PLUS STUDIO
  */
