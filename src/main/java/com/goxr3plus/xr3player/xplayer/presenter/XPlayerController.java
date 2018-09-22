@@ -1514,6 +1514,17 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			double percentage = m.getX() / waveFormVisualization.getWidth();
 			seekTo((int) ( percentage * this.getxPlayerModel().getDuration() ));
 		});
+		waveFormVisualization.addEventHandler(MouseEvent.MOUSE_MOVED, m -> {
+			double percentage = m.getX() / waveFormVisualization.getWidth();
+			int timeNow = (int) ( percentage * this.getxPlayerModel().getDuration() );
+			
+			//== RemainingTimeLabel
+			remainingTimeLabel.setText(InfoTool.getTimeEdited(xPlayerModel.getDuration() - timeNow));
+			
+			//== ElapsedTimeLabel
+			elapsedTimeLabel.setText(InfoTool.getTimeEdited(timeNow));
+			
+		});
 		
 		//waveProgressLabel
 		waveProgressLabel.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty().or(waveFormVisualization.getAnimationService().runningProperty().not()));
@@ -2004,7 +2015,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			// System.out.println(milliFormat)
 			
 			//Paint the Modes
-			if (!xPlayer.isStopped()) {
+			if (!xPlayer.isStopped() && !waveFormVisualization.isHover()) {
 				
 				//TotalTime and CurrentTime
 				int totalTime = xPlayerModel.getDuration();

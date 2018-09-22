@@ -47,7 +47,7 @@
 					<dependency>
 						<groupId>org.ow2.asm</groupId>
 						<artifactId>asm</artifactId>
-						<version>6.1.1</version> <!-- Use newer version of ASM -->
+						<version>6.2</version> <!-- Use newer version of ASM -->
 					</dependency>
 				</dependencies>
 			</plugin>
