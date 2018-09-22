@@ -29,10 +29,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.apache.commons.io.FilenameUtils;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3File;
-import org.jaudiotagger.tag.TagException;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
@@ -65,16 +62,18 @@ public final class InfoTool {
 	/** XR3Player Tutorials */
 	public static final String TUTORIALS = "https://www.youtube.com/playlist?list=PL-xqaiRUr_iRKDkpFWPfSRFmJvHSr1VJI";
 	
+	private static final String COMMON = "/main/resources/";
+	
 	/** The Constant images. */
-	public static final String IMAGES = "/image/";
+	public static final String IMAGES = COMMON + "/image/";
 	
 	/** The Constant videos. */
-	public static final String VIDEOS = "/video/";
+	public static final String VIDEOS = COMMON + "/video/";
 	
-	public static final String SOUNDS = "/sound/";
+	public static final String SOUNDS = COMMON + "/sound/";
 	
 	/** The Constant styLes. */
-	public static final String STYLES = "/style/";
+	public static final String STYLES = COMMON + "/style/";
 	
 	/** The Constant applicationCss. */
 	public static final String APPLICATIONCSS = "application.css";
@@ -83,30 +82,30 @@ public final class InfoTool {
 	//public static final String sounds = "/sound/"
 	
 	/** The Constant fxmls. */
-	public static final String FXMLS = "/fxml/";
+	public static final String FXMLS = COMMON + "/fxml/";
 	
 	/** The Constant fxmls. */
-	public static final String PLAYERS_FXMLS = "/fxml/players/";
+	public static final String PLAYERS_FXMLS = COMMON + "/fxml/players/";
 	
-	public static final String VISUALIZERS_FXMLS = "/fxml/visualizer/";
+	public static final String VISUALIZERS_FXMLS = COMMON + "/fxml/visualizer/";
 	
-	public static final String BROWSER_FXMLS = "/fxml/browser/";
+	public static final String BROWSER_FXMLS = COMMON + "/fxml/browser/";
 	
-	public static final String SETTINGS_FXMLS = "/fxml/settings/";
+	public static final String SETTINGS_FXMLS = COMMON + "/fxml/settings/";
 	
-	public static final String SMARTCONTROLLER_FXMLS = "/fxml/smartcontroller/";
+	public static final String SMARTCONTROLLER_FXMLS = COMMON + "/fxml/smartcontroller/";
 	
-	public static final String DROPBOX_FXMLS = "/fxml/dropbox/";
+	public static final String DROPBOX_FXMLS = COMMON + "/fxml/dropbox/";
 	
-	public static final String LIBRARIES_FXMLS = "/fxml/library/";
+	public static final String LIBRARIES_FXMLS = COMMON + "/fxml/library/";
 	
-	public static final String USER_FXMLS = "/fxml/user/";
+	public static final String USER_FXMLS = COMMON + "/fxml/user/";
 	
-	public static final String XR3CAPTURE_FXMLS = "/fxml/xr3capture/";
+	public static final String XR3CAPTURE_FXMLS = COMMON + "/fxml/xr3capture/";
 	
-	public static final String TAGS_FXMLS = "/fxml/tags/";
+	public static final String TAGS_FXMLS = COMMON + "/fxml/tags/";
 	
-	public static final String WINDOW_FXMLS = "/fxml/windows/";
+	public static final String WINDOW_FXMLS = COMMON + "/fxml/windows/";
 	
 	/** The Constant radioStationsTable. */
 	public static final String RADIO_STATIONS_DATABASE_TABLE_NAME = "RADIOSTATIONS";
@@ -137,7 +136,7 @@ public final class InfoTool {
 	public static final List<String> POPULAR_AUDIO_EXTENSIONS_LIST = Arrays.asList("mp3", "wav", "ogg", "opus", "aac", "flac", "aiff", "au", "speex", "webm", "wma", "amr", "ape",
 			"awb", "dct", "dss", "dvf", "aa", "aax", "act", "m4a", "m4b", "m4p", "mpc", "msv", "oga", "mogg", "raw", "tta", "aifc", "ac3", "spx");
 	public static final List<String> POPULAR_VIDEO_EXTENSIONS_LIST = Arrays.asList("mp4", "flv", "avi", "wmv", "mov", "3gp", "webm", "mkv", "vob", "yuv", "m4v", "svi", "3g2",
-			"f4v", "f4p", "f4a", "f4b","swf");
+			"f4v", "f4p", "f4a", "f4b", "swf");
 	
 	public static final Set<String> POPULAR_AUDIO_EXTENSIONS = new HashSet<>(POPULAR_AUDIO_EXTENSIONS_LIST);
 	private static final Set<String> POPULAR_VIDEO_EXTENSIONS = new HashSet<>(POPULAR_VIDEO_EXTENSIONS_LIST);
@@ -281,8 +280,8 @@ public final class InfoTool {
 	/**
 	 * Gets the visual screen height.
 	 *
-	 * @return The screen <b>Height</b> based on the <b>visual bounds</b> of the Screen.These bounds account for objects in the native windowing system
-	 *         such as task bars and menu bars. These bounds are contained by Screen.bounds.
+	 * @return The screen <b>Height</b> based on the <b>visual bounds</b> of the Screen.These bounds account for objects in the native windowing
+	 *         system such as task bars and menu bars. These bounds are contained by Screen.bounds.
 	 */
 	public static double getVisualScreenHeight() {
 		return Screen.getPrimary().getVisualBounds().getHeight();
@@ -368,8 +367,8 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Checks for Application Internet connection using Socket and InetSocketAddress I combine this method with reachableByPing to check if the Operating
-	 * System is connected to the Internet and this method to check if the application can be connected to Internet,
+	 * Checks for Application Internet connection using Socket and InetSocketAddress I combine this method with reachableByPing to check if the
+	 * Operating System is connected to the Internet and this method to check if the application can be connected to Internet,
 	 * 
 	 * Because the admin my have blocked internet connection for this Java application.
 	 * 
@@ -468,8 +467,8 @@ public final class InfoTool {
 	 *
 	 * <p>
 	 * If the file system implementation does not support a time stamp to indicate the time when the file was created then this method returns an
-	 * implementation specific default value, typically the {@link #lastModifiedTime() last-modified-time} or a {@code FileTime} representing the epoch
-	 * (1970-01-01T00:00:00Z).
+	 * implementation specific default value, typically the {@link #lastModifiedTime() last-modified-time} or a {@code FileTime} representing the
+	 * epoch (1970-01-01T00:00:00Z).
 	 *
 	 * @param absolutePath
 	 *            The File absolute path
@@ -845,7 +844,6 @@ public final class InfoTool {
 					//			milliseconds = tryWithMp3Agic(file);
 					//		    }
 					
-
 				} catch (Exception ex) {
 					System.err.println("Problem getting the time of-> " + file.getAbsolutePath());
 				}
