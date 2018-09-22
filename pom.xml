@@ -26,11 +26,11 @@
 	<build>
 		<finalName>XR3Player</finalName>
 		<sourceDirectory>src</sourceDirectory>
-		<resources>
+<!-- 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-		</resources>
+		</resources> -->
 		<!-- <testSourceDirectory>testing</testSourceDirectory> -->
 		<plugins>
 

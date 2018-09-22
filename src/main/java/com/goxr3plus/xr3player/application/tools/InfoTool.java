@@ -62,7 +62,7 @@ public final class InfoTool {
 	/** XR3Player Tutorials */
 	public static final String TUTORIALS = "https://www.youtube.com/playlist?list=PL-xqaiRUr_iRKDkpFWPfSRFmJvHSr1VJI";
 	
-	private static final String COMMON = "/main/resources/";
+	private static final String COMMON = "";
 	
 	/** The Constant images. */
 	public static final String IMAGES = COMMON + "/image/";
