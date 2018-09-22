@@ -564,6 +564,8 @@ public class Main extends Application {
 		
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		rootStackPane.getChildren().addAll(movieModeController, userInfoMode, libraryMode);
+		movieModeController.setVisible(false);
+		userInfoMode.setVisible(false);
 		
 		//Load some lol images from lol base
 		new Thread(() -> {
