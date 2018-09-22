@@ -1915,7 +1915,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		else
 			size = disc.getPrefWidth() / 1.15;
 		
-		//volumeDisc.resizeDisc(size, size);
+		//volumeDisc.resizeDisc(size, size)
 	}
 	
 	/**

@@ -76,6 +76,9 @@ public class WaveFormService extends Service<Boolean> {
 	 */
 	public void startService(String fileAbsolutePath , WaveFormJob waveFormJob) {
 		
+		if (this.fileAbsolutePath != null && fileAbsolutePath.equals(this.fileAbsolutePath)) //If it is the same file
+			return;
+		
 		//Check
 		if (waveFormJob == WaveFormJob.WAVEFORM)
 			cancel();
