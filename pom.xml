@@ -28,21 +28,11 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
-				<directory>resources</directory>
+				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
 		<!-- <testSourceDirectory>testing</testSourceDirectory> -->
 		<plugins>
-
-			<!-- Maven Source Plugin -->
-			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
-				<version>3.0.1</version> <executions> <execution> <id>attach-sources</id> 
-				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
-
-			<!-- Maven Javcadoc Plugin -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
-				<version>3.0.0-M1</version> <executions> <execution> <id>attach-javadocs</id> 
-				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
 
 			<!-- Maven Compiler Plugin -->
 			<plugin>
@@ -95,18 +85,6 @@
 				</executions>
 			</plugin>
 
-			<!-- duplicate-finder-maven-plugin -->
-			<!-- <plugin> <groupId>org.basepom.maven</groupId> <artifactId>duplicate-finder-maven-plugin</artifactId> 
-				<version>1.1.0</version> <executions> <execution> <id>default</id> <phase>verify</phase> 
-				<goals> <goal>check</goal> </goals> </execution> </executions> <configuration> 
-				<printEqualFiles>false</printEqualFiles> <failBuildInCaseOfDifferentContentConflict>false</failBuildInCaseOfDifferentContentConflict> 
-				<failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict> 
-				<failBuildInCaseOfConflict>false</failBuildInCaseOfConflict> <checkCompileClasspath>true</checkCompileClasspath> 
-				<checkRuntimeClasspath>true</checkRuntimeClasspath> <checkTestClasspath>true</checkTestClasspath> 
-				<skip>false</skip> <quiet>false</quiet> <preferLocal>true</preferLocal> <useResultFile>true</useResultFile> 
-				<resultFileMinClasspathCount>2</resultFileMinClasspathCount> <resultFile>${project.build.directory}/duplicate-finder-result.xml</resultFile> 
-				</configuration> </plugin> -->
-			<!-- code coverage -->
 			<plugin>
 				<groupId>org.eluder.coveralls</groupId>
 				<artifactId>coveralls-maven-plugin</artifactId>
