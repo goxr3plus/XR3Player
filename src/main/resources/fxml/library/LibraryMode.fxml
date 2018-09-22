@@ -172,7 +172,7 @@
                                                 <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                                    <children>
                                                       <Label fx:id="librariesInfoLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 14; -fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Text" HBox.hgrow="ALWAYS" />
-                                                      <CheckBox fx:id="multipleSelection" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #202020;" styleClass="small-check-box" textAlignment="CENTER" wrapText="true">
+                                                      <CheckBox fx:id="multipleSelection" alignment="CENTER" graphicTextGap="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" style="-fx-background-color: #202020;" styleClass="small-check-box" textAlignment="CENTER" wrapText="true">
                                                          <HBox.margin>
                                                             <Insets />
                                                          </HBox.margin>
