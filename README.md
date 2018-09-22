@@ -1,4 +1,4 @@
-# Latest Version V3.121 [Download](https://goxr3plus.github.io/xr3player.io/)
+# Latest Version V3.122 [Download](https://goxr3plus.github.io/xr3player.io/)
 
 ## I need maintainers for this project , if you want open an issue and let's discuss , in order to become big we need more people . Only me it's not enough . This project is intended to reach big , from mobile to web not only desktop . I need people here . Don't hesitate start slowly and you will get help . It's been 2 years .... i don't know for how much more i will be able to continue ... because modern society requires from us to get money in order to survive . But XR3Player will always be free . FREE AND AWESOME.
  
