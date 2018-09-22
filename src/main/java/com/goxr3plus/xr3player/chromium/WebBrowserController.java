@@ -389,7 +389,7 @@ public class WebBrowserController extends StackPane {
 	//			"https://www.farsnews.com", "https://www.fastcompany.com", "https://www.fatosdesconhecidos.com.br", "https://www.fb.com", "https://www.fb.me", "https://www.fbcdn.net",
 	//			"https://www.fbsbx.com", "https://www.fc2.com", "https://www.fda.gov", "https://www.fedex.com", "https://www.feedburner.com", "https://www.feedly.com",
 	//			"https://www.fidelity.com", "https://www.filehippo.com", "https://www.files.wordpress.com", "https://www.fiverr.com", "https://www.flickr.com",
-	//			"https://www.flipkart.com", "https://www.flirt4free.com", "https://www.fmovies.se", "https://www.focus.de", "https://www.food.tmall.com", "https://www.forbes.com",
+	//			"https://www.flipkart.com", "https://www.flirt4free.com", "https://www.fmovies.to", "https://www.focus.de", "https://www.food.tmall.com", "https://www.forbes.com",
 	//			"https://www.force.com", "https://www.fortune.com", "https://www.foursquare.com", "https://www.foxnews.com", "https://www.free.fr", "https://www.freejobalert.com",
 	//			"https://www.freepik.com", "https://www.friv.com", "https://www.fromdoctopdf.com", "https://www.frstlead.com", "https://www.ft.com", "https://www.ftc.gov",
 	//			"https://www.g2a.com", "https://www.gamefaqs.com", "https://www.gamepedia.com", "https://www.gamer.com.tw", "https://www.gamespot.com",

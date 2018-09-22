@@ -222,7 +222,7 @@ public class Top500WebSitesParser {
 			"http://www.elmundo.es", "http://www.bild.de", "http://www.tabelog.com", "http://www.hurriyet.com.tr", "http://www.pages.tmall.com", "http://www.thefreedictionary.com",
 			"http://www.sabq.org", "http://www.google.com.do", "http://www.ptt.cc", "http://www.wowhead.com", "http://www.olx.pl", "http://www.grid.id", "http://www.emol.com",
 			"http://www.nba.com", "http://www.drom.ru", "http://www.terraclicks.com", "http://www.hm.com", "http://www.bleacherreport.com", "http://www.inquirer.net",
-			"http://www.instructure.com", "http://www.re19fla.com", "http://www.npr.org", "http://www.chip.de", "http://www.fmovies.se", "http://www.cambridge.org",
+			"http://www.instructure.com", "http://www.re19fla.com", "http://www.npr.org", "http://www.chip.de", "http://www.fmovies.to", "http://www.cambridge.org",
 			"http://www.asana.com", "http://www.academia.edu", "http://www.my-hit.org", "http://www.att.com", "http://www.kijiji.ca", "http://www.hubspot.com", "http://www.as.com",
 			"http://www.avg.com", "http://www.4shared.com", "http://www.telewebion.com", "http://www.olx.com.br", "http://www.asus.com", "http://www.mirror.co.uk",
 			"http://www.17ok.com", "http://www.souq.com", "http://www.youjizz.com", "http://www.discogs.com", "http://www.mywatchseries.to", "http://www.hotels.com",
