@@ -1,11 +1,12 @@
 # Latest Version [22/09/2018] V3.123 [Download](https://goxr3plus.github.io/xr3player.io/)
-
-## I need maintainers for this project , if you want open an issue and let's discuss , in order to become big we need more people . Only me it's not enough . This project is intended to reach big , from mobile to web not only desktop . I need people here . Don't hesitate start slowly and you will get help . It's been 2 years .... i don't know for how much more i will be able to continue ... because modern society requires from us to get money in order to survive . But XR3Player will always be free . FREE AND AWESOME.
  
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 The most advanced JavaFX Media Player .... growing to be the best out there .
 
+## I need maintainers for this project , if you want open an issue and let's discuss , in order to become big we need more people . Only me it's not enough . This project is intended to reach big , from mobile to web not only desktop . I need people here . Don't hesitate start slowly and you will get help . It's been 2 years .... i don't know for how much more i will be able to continue ... because modern society requires from us to get money in order to survive . But XR3Player will always be free . FREE AND AWESOME.
+
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
+>Build with JDK 10.0.2+
 
 
 ## Platform Support ( 64 bit )
@@ -113,7 +114,7 @@ The most advanced JavaFX Media Player .... growing to be the best out there .
 To build XR3Player, you will need:
 
 * [JDK 10.0.2+]
-* [Maven](http://maven.apache.org/) - Version 3.5.3++ recommended
+* [Maven](http://maven.apache.org/) - Version 3.5.3++
 
 Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with Java 9
 
