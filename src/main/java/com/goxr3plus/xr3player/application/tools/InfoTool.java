@@ -789,7 +789,7 @@ public final class InfoTool {
 	}
 	
 	/**
-	 * Returns a String with a fixed number of letters.
+	 * Returns a String with a fixed number of letters without "..." at the end of String
 	 *
 	 * @param s
 	 *            the string
