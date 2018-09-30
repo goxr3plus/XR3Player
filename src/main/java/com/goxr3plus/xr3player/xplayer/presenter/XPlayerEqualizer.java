@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilter;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.DJFilterListener;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * The Class XPlayerEqualizer.

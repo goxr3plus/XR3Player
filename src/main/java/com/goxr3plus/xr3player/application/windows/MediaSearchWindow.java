@@ -18,7 +18,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * The Class LibrariesSearchWindow.

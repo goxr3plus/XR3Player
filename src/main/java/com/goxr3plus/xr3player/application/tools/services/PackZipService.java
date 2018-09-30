@@ -20,8 +20,8 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
 
 /**
  * This class is used as a Service which is exporting the applications database as a zip folder.

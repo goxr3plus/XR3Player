@@ -14,7 +14,7 @@ import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * The Class SettingsWindowController.

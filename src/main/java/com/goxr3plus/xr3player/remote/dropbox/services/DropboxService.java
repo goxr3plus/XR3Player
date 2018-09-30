@@ -24,10 +24,10 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFile;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 

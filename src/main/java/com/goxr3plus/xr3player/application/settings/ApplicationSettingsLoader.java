@@ -7,7 +7,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController.Type;
 
 public class ApplicationSettingsLoader {

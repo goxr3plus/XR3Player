@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.tools;
+package main.java.com.goxr3plus.xr3player.application.tools.fx;
 
 /**
  * The type of the notification to be shown.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.tools;
+package main.java.com.goxr3plus.xr3player.application.tools.fx;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.Media;
 

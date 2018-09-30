@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.tools;
+package main.java.com.goxr3plus.xr3player.application.tools.io;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 public class IOTool {
 	

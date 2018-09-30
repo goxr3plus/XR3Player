@@ -12,9 +12,9 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 

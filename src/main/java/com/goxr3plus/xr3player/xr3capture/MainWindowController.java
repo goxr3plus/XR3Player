@@ -12,7 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * The Scene of the primary window of the application.

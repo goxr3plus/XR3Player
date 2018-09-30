@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.tools;
+package main.java.com.goxr3plus.xr3player.application.tools.general;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -128,6 +128,7 @@ public final class InfoTool {
 	//	    .collect(Collectors.toCollection(HashSet::new))
 	//    private static final Set<String> ACCEPTED_IMAGE_EXTENSIONS = Stream.of("png", "jpg", "jpeg")
 	//	    .collect(Collectors.toCollection(HashSet::new))
+	
 	//Java 7 Way and back
 	private static final Set<String> ACCEPTED_AUDIO_EXTENSIONS = new HashSet<>(Arrays.asList("mp3"));
 	private static final Set<String> ACCEPTED_VIDEO_EXTENSIONS = new HashSet<>(Arrays.asList("mp4"));
@@ -143,6 +144,7 @@ public final class InfoTool {
 	private static final Set<String> POPULAR_IMAGE_EXTENSIONS = new HashSet<>(
 			Arrays.asList("png", "jpg", "jpeg", "gif", "bmp", "exif", "tiff", "webp", "heif", "bat", "bpg", "svg"));
 	private static final Set<String> POPULAR_ZIP_EXTENSIONS = new HashSet<>(Arrays.asList("zip", "7z", "rar", "zipx", "bz2", "gz"));
+	
 	// ------------------------------------Important-------------------------------------------------------------------
 	
 	/** The name of the application user [example:Alexander] */

@@ -1,6 +1,6 @@
 package main.java.com.goxr3plus.xr3player.application.speciallists;
 
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * Just to keep instances of Media for PlayedMediaList

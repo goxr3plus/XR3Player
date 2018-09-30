@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.presenter.OnlineMusicBoxController.OnlineMusicCategory;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * @author GOXR3PLUSSTUDIO

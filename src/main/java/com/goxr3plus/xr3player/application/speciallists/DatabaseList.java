@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * A special kind of list which is used to save the list to the database and also have it in RAM memory of the computer

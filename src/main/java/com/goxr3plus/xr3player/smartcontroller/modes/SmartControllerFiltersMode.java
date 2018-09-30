@@ -20,7 +20,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaTableViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FiltersModeService;

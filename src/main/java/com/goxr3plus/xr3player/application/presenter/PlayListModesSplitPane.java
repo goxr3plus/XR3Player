@@ -13,7 +13,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 /**
  * Xm i must think what description to add here This shows the opened libraries and the Media Information

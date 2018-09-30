@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.tools;
+package main.java.com.goxr3plus.xr3player.application.tools.io;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

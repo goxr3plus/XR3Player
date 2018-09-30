@@ -16,8 +16,8 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxClientTreeItem;
 import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
 

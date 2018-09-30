@@ -13,8 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 public class OnlineMusicBoxController extends StackPane {
 	

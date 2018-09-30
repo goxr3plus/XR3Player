@@ -6,7 +6,7 @@ package main.java.com.goxr3plus.xr3player.xplayer.visualizer.core;
 import javafx.geometry.Orientation;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.JuliaSet;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Oscilloscope;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Polyspiral;

@@ -21,8 +21,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.Util;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.Util;
 import main.java.com.goxr3plus.xr3player.chromium.services.ChromiumUpdaterService;
 
 /**

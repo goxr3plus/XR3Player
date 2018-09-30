@@ -20,7 +20,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.presenter.services.StoppableService;
 import main.java.com.goxr3plus.xr3player.application.presenter.services.StoppableService.StoppableServiceCategory;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController.ConsoleTab;
 
 /**

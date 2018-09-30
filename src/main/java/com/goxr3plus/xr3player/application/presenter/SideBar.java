@@ -30,9 +30,9 @@ import main.java.com.goxr3plus.xr3player.application.presenter.TopBar.WindowMode
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.SystemMonitor.Monitor;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.chromium.WebBrowserTabController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
 

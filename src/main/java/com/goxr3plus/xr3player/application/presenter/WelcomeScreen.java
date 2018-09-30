@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.Util;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.Util;
 
 /**
  * @author GOXR3PLUS

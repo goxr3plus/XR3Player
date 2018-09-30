@@ -42,11 +42,11 @@ import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox;
 import main.java.com.goxr3plus.xr3player.application.presenter.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.application.presenter.Viewer;
 import main.java.com.goxr3plus.xr3player.application.presenter.custom.flippane.FlipPanel;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 
 /**

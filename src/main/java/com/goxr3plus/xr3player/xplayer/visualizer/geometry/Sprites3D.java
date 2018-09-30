@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.scene.image.Image;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
 
 /**

@@ -35,7 +35,7 @@ import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 import main.java.com.goxr3plus.xr3player.smartcontroller.services.FoldersModeService;
 

@@ -23,7 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import net.sourceforge.javaflacencoder.FLACFileWriter;
 
 public class SpeechRecognition extends StackPane implements GSpeechResponseListener {

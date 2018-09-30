@@ -5,7 +5,7 @@ import org.controlsfx.control.PopOver;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 public class SpecialPopOver extends PopOver {
 	

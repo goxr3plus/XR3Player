@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import main.java.com.goxr3plus.xr3player.application.tools.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.MediaViewer;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 

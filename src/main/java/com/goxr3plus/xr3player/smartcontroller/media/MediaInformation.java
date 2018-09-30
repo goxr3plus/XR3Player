@@ -31,12 +31,12 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.tools.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.FileType;
-import main.java.com.goxr3plus.xr3player.application.tools.FileTypeAndAbsolutePath;
-import main.java.com.goxr3plus.xr3player.application.tools.IOTool;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.io.FileType;
+import main.java.com.goxr3plus.xr3player.application.tools.io.FileTypeAndAbsolutePath;
+import main.java.com.goxr3plus.xr3player.application.tools.io.IOTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.enums.Genre;
 import main.java.com.goxr3plus.xr3player.smartcontroller.tags.TagTabCategory;
 

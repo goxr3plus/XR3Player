@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.speciallists.EmotionListsController;
-import main.java.com.goxr3plus.xr3player.application.tools.InfoTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 
 public class EmotionsTabPane extends StackPane {
 	

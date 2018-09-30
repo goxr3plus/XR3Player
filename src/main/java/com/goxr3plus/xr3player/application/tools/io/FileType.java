@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.tools;
+package main.java.com.goxr3plus.xr3player.application.tools.io;
 
 /**
  * @author GOXR3PLUSSTUDIO
