@@ -1,5 +1,8 @@
 ### Latest Version Build with JDK 10.0.2 at [22/09/2018]  , V3.123 [Download](https://goxr3plus.github.io/xr3player.io/)
- 
+
+#### 
+> Currently learning React , SpringBoot , Node.js , SQL and many more ... will be back more powerful than ever to take this app on next level.
+
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 The most advanced JavaFX Media Player .... growing to be the best out there .
 
