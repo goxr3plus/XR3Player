@@ -18,10 +18,11 @@ public class Util {
 				os = OS.WINDOWS;
 			else if (OPERATING_SYSTEM.contains("nix") || OPERATING_SYSTEM.contains("nux") || OPERATING_SYSTEM.contains("aix")) {
 				os = OS.LINUX;
-			} else if (OPERATING_SYSTEM.contains("mac"))
+			} else if (OPERATING_SYSTEM.contains("mac")) {
 				os = OS.MAC;
-			else if (OPERATING_SYSTEM.contains("sunos"))
+			}else if (OPERATING_SYSTEM.contains("sunos")) {
 				os = OS.SOLARIS;
+			}
 		}
 		return os;
 	}
