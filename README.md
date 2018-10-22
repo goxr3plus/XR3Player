@@ -1,4 +1,4 @@
-### Latest Version Build with JDK 10.0.2 at [22/09/2018]  , V3.123 [Download](https://goxr3plus.github.io/xr3player.io/)
+### Latest Version Build with JDK 10.0.2 at [23/10/2018]  , V3.124 [Download](https://goxr3plus.github.io/xr3player.io/)
 
 #### 
 > Currently learning Java 11 , React + Native , SpringBoot , Node.js , SQL  , Android and many more ... will be back more powerful than ever to take this app on next level.
