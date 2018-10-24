@@ -36,7 +36,7 @@ The most advanced JavaFX Media Player .... growing to be the best out there .
 
 | Latest update presentation video|
 |:-:|
-| [![First](http://img.youtube.com/vi/a3K_bBV7Pos/0.jpg)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
+| [![First](https://user-images.githubusercontent.com/20374208/47316044-d12d4c00-d64e-11e8-85f3-421567e2088b.jpg)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
 
 # Screenshots
 
