@@ -53,8 +53,14 @@
                            </graphic>
                         </Button>
                      </left>
+                     <center>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="noAlbumViewsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="No album views" />
+                           </children>
+                        </StackPane>
+                     </center>
                   </BorderPane>
-                  <Label fx:id="noAlbumViewsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="No album views" visible="false" />
                   <VBox fx:id="mediaViewerVBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
                      <children>
                         <Label fx:id="mediaViewerLabel" alignment="CENTER" styleClass="white-black-label" text="Generating album views" />

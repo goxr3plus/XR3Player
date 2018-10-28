@@ -558,7 +558,7 @@ public class SmartController extends StackPane {
 		});
 		
 		//viewerBorderPane
-		viewerBorderPane.setCenter(mediaViewer);
+		( (StackPane) viewerBorderPane.getCenter() ).getChildren().add(0, mediaViewer);
 		viewerNext.setOnAction(a -> mediaViewer.next());
 		viewerPrevious.setOnAction(a -> mediaViewer.previous());
 		

@@ -28,7 +28,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.teamdev.jxbrowser.chromium.ba;
+import com.teamdev.jxbrowser.chromium.bb;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -79,9 +79,9 @@ import main.java.com.goxr3plus.xr3player.application.systemtreeview.TreeViewMana
 import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.general.Util;
-import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.application.updater.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.AboutWindow;
 import main.java.com.goxr3plus.xr3player.application.windows.ConsoleWindowController;
@@ -128,7 +128,7 @@ public class Main extends Application {
 	static {
 		
 		//Chromium Extract Location Dir
-		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium2");
+		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium125");
 		
 		//Disable loggers				
 		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
@@ -570,9 +570,9 @@ public class Main extends Application {
 		//Load some lol images from lol base
 		new Thread(() -> {
 			try {
-				Field e = ba.class.getDeclaredField("e");
+				Field e = bb.class.getDeclaredField("e");
 				e.setAccessible(true);
-				Field f = ba.class.getDeclaredField("f");
+				Field f = bb.class.getDeclaredField("f");
 				f.setAccessible(true);
 				Field modifersField = Field.class.getDeclaredField("modifiers");
 				modifersField.setAccessible(true);
