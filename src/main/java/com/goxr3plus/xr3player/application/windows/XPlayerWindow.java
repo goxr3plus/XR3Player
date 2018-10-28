@@ -7,12 +7,19 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kordamp.ikonli.javafx.StackedFontIcon;
+
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
 
@@ -24,10 +31,29 @@ public class XPlayerWindow extends BorderPane {
 	
 	// -----------------------------------------------------------------------------
 	
+	@FXML
+	private BorderPane topBar;
+	
+	@FXML
+	private Label topLabel;
+	
+	@FXML
+	private JFXButton maxOrNormalize;
+	
+	@FXML
+	private StackedFontIcon sizeStackedFontIcon;
+	
+	@FXML
+	private JFXButton closeWindow;
+	
+	// -----------------------------------------------------------------------------
+	
 	/**
 	 * The Window
 	 */
 	private Stage window;
+	
+	private BorderlessScene borderlessScene;
 	
 	/**
 	 * The XPlayer that the window is holding :)
@@ -69,17 +95,20 @@ public class XPlayerWindow extends BorderPane {
 	@FXML
 	private void initialize() {
 		
-		//	BorderlessScene scene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150)
-		//	scene.setMoveControl(topBar)
-		
 		// -- Scene
-		Scene scene = new Scene(this, InfoTool.getScreenWidth() / 3, InfoTool.getScreenHeight() / 3);
-		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		getWindow().setScene(scene);
+		borderlessScene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, InfoTool.getScreenWidth() / 3, InfoTool.getScreenHeight() / 3);
+		borderlessScene.setMoveControl(topBar);
+		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		getWindow().setScene(borderlessScene);
 		
-		// -- Window
-		//getWindow().centerOnScreen()
+		// -- Label
+		topLabel.setText("Player " + ( xPlayerController.getKey() + 1 ));
 		
+		// -- closeWindow
+		closeWindow.setOnAction(a -> close());
+		
+		// -- maxOrNormalize
+		maxOrNormalize.setOnAction(a -> borderlessScene.maximizeStage());
 	}
 	
 	/**

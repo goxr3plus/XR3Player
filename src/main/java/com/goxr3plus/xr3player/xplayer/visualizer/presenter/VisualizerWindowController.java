@@ -123,7 +123,7 @@ public class VisualizerWindowController extends StackPane {
 	
 	// ------------------------------------
 	
-	private BorderlessScene scene;
+	private BorderlessScene borderlessScene;
 	
 	/** The window. */
 	private Stage window;
@@ -177,10 +177,10 @@ public class VisualizerWindowController extends StackPane {
 	private void initialize() {
 		
 		// -- Scene
-		scene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150);
-		scene.setMoveControl(topBar);
-		scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue()));
-		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		borderlessScene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150);
+		borderlessScene.setMoveControl(topBar);
+		borderlessScene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue()));
+		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		
 		// width listener
 		window.widthProperty().addListener((observable , oldValue , newValue) -> {
@@ -197,7 +197,7 @@ public class VisualizerWindowController extends StackPane {
 		addEventHandler(MouseEvent.MOUSE_MOVED, m -> restartPauseTransition());
 		
 		// -- KeyListeners
-		scene.setOnKeyReleased(key -> {
+		borderlessScene.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE) {
 				if (!window.isFullScreen())
 					removeVisualizer();
@@ -208,9 +208,9 @@ public class VisualizerWindowController extends StackPane {
 		});
 		
 		// ----------Drag && Drop Listeners
-		scene.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
-		scene.setOnDragDropped(xPlayerController.audioDropEvent);
-		window.setScene(scene);
+		borderlessScene.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
+		borderlessScene.setOnDragDropped(xPlayerController.audioDropEvent);
+		window.setScene(borderlessScene);
 		
 		// -------------Top Bar Elements---------------
 		
@@ -229,11 +229,11 @@ public class VisualizerWindowController extends StackPane {
 		});
 		
 		// ----------------------------- Minimize
-		maxOrNormalize.setOnAction(a -> scene.maximizeStage());
+		maxOrNormalize.setOnAction(a -> borderlessScene.maximizeStage());
 		close.setOnAction(action -> removeVisualizer());
 		
 		//stage
-		scene.maximizedProperty().addListener((observable , oldValue , newValue) -> {
+		borderlessScene.maximizedProperty().addListener((observable , oldValue , newValue) -> {
 			if (newValue) {
 				sizeStackedFontIcon.getChildren().get(0).setVisible(true);
 				sizeStackedFontIcon.getChildren().get(1).setVisible(false);
@@ -245,7 +245,7 @@ public class VisualizerWindowController extends StackPane {
 		
 		// transparencySlider
 		//transparencySlider.disableProperty().bind(window.showingProperty().not());
-		transparencySlider.valueProperty().addListener(list -> scene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
+		transparencySlider.valueProperty().addListener(list -> borderlessScene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
 		
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> {

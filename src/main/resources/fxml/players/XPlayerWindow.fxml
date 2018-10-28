@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <fx:root prefHeight="304.0" prefWidth="546.0" style="-fx-background-color: rgb(0,0,0,0.9);" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
    </padding>
+   <top>
+      <BorderPane fx:id="topBar" maxHeight="-Infinity" minHeight="16.0" prefHeight="36.0" prefWidth="533.0" style="-fx-background-color: #202020; -fx-border-color: #202020; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+         <center>
+            <Label fx:id="topLabel" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: #202020; -fx-border-color: transparent firebrick; -fx-border-width: 2;" text="Player" BorderPane.alignment="CENTER">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+               <BorderPane.margin>
+                  <Insets right="5.0" />
+               </BorderPane.margin>
+            </Label>
+         </center>
+         <right>
+            <HBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <StackedFontIcon fx:id="sizeStackedFontIcon">
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                           </children>
+                        </StackedFontIcon>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="closeWindow" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-close" iconSize="20">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </FontIcon>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </right>
+      </BorderPane>
+   </top>
 </fx:root>
