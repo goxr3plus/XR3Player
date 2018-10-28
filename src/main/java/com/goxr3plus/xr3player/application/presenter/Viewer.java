@@ -131,7 +131,7 @@ public class Viewer extends Region {
 	
 	public Viewer(SmartController smartController) {
 		this.smartController = smartController;
-		duration = Duration.millis(150);
+		duration = Duration.millis(250);
 		interpolator = Interpolator.EASE_BOTH;
 		init();
 	}

@@ -32,8 +32,30 @@
          <items>
             <StackPane fx:id="viewerStackPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Label fx:id="noAlbumViewsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="No album views" />
-                  <VBox fx:id="mediaViewerVBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);">
+                  <BorderPane fx:id="viewerBorderPane" prefHeight="200.0" prefWidth="200.0">
+                     <right>
+                        <Button fx:id="viewerNext" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-radius: 0;" styleClass="jfx-button4" BorderPane.alignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="Next" />
+                           </tooltip>
+                           <graphic>
+                              <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-right" iconSize="32" />
+                           </graphic>
+                        </Button>
+                     </right>
+                     <left>
+                        <Button fx:id="viewerPrevious" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" styleClass="jfx-button4" BorderPane.alignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="Previous" />
+                           </tooltip>
+                           <graphic>
+                              <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-left" iconSize="32" />
+                           </graphic>
+                        </Button>
+                     </left>
+                  </BorderPane>
+                  <Label fx:id="noAlbumViewsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="No album views" visible="false" />
+                  <VBox fx:id="mediaViewerVBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
                      <children>
                         <Label fx:id="mediaViewerLabel" alignment="CENTER" styleClass="white-black-label" text="Generating album views" />
                         <ProgressBar fx:id="mediaViewerProgress" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" progress="0.0" styleClass="transparent-progress-bar" />

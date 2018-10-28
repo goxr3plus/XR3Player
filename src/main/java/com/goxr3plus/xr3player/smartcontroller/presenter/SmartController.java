@@ -80,6 +80,18 @@ public class SmartController extends StackPane {
 	private StackPane viewerStackPane;
 	
 	@FXML
+	private BorderPane viewerBorderPane;
+	
+	@FXML
+	private Button viewerNext;
+	
+	@FXML
+	private Button viewerPrevious;
+	
+	@FXML
+	private Label noAlbumViewsLabel;
+	
+	@FXML
 	private VBox mediaViewerVBox;
 	
 	@FXML
@@ -87,9 +99,6 @@ public class SmartController extends StackPane {
 	
 	@FXML
 	private ProgressBar mediaViewerProgress;
-	
-	@FXML
-	private Label noAlbumViewsLabel;
 	
 	@FXML
 	private JFXTabPane modesTabPane;
@@ -155,10 +164,10 @@ public class SmartController extends StackPane {
 	private MenuItem clearAll;
 	
 	@FXML
-	private Tab foldersModeTab;
+	private Tab filtersModeTab;
 	
 	@FXML
-	private Tab filtersModeTab;
+	private Tab foldersModeTab;
 	
 	@FXML
 	private VBox loadingVBox;
@@ -264,7 +273,7 @@ public class SmartController extends StackPane {
 	
 	//--------------------------------------------------
 	
-	private String previousCancelText = "";
+	//private String previousCancelText = "";
 	
 	//------------------------------------------------------------------------------------------------------------------------
 	
@@ -548,8 +557,10 @@ public class SmartController extends StackPane {
 			}
 		});
 		
-		//viewerStackPane
-		viewerStackPane.getChildren().add(0, new BorderPane(mediaViewer));
+		//viewerBorderPane
+		viewerBorderPane.setCenter(mediaViewer);
+		viewerNext.setOnAction(a -> mediaViewer.next());
+		viewerPrevious.setOnAction(a -> mediaViewer.previous());
 		
 		//mediaViewerVBox
 		mediaViewerVBox.visibleProperty().bind(mediaViewerService.runningProperty());
@@ -1425,47 +1436,5 @@ public class SmartController extends StackPane {
 	public Tab getSelectedModeTab() {
 		return modesTabPane.getSelectionModel().getSelectedItem();
 	}
-	
-	/*-----------------------------------------------------------------------
-	 * 
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * 
-	 * 							RUBBISH CODE
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * -----------------------------------------------------------------------
-	 * 
-	 * -----------------------------------------------------------------------
-	 */
-	
-	//	/**
-	//	 * Indicates that a capture event has been fired to this controller from the
-	//	 * CaptureWindow.
-	//	 *
-	//	 * @param array
-	//	 *        the array
-	//	 */
-	//	public void fireCaptureEvent(int[] array) {
-	//		// Bounds bounds
-	//		/*
-	//		 * for (ButtonBase song : bigList) { bounds =
-	//		 * song.localToScreen(song.getBoundsInLocal()); // button rectangle
-	//		 * overlaps capture rectangle ? if (bounds.getMinX() <= array[0] +
-	//		 * array[2] && bounds.getMaxX() >= array[0] && bounds.getMinY() <=
-	//		 * array[1] + array[3] && bounds.getMaxY() >= array[1]) ((Audio)
-	//		 * song).setMarked(true, false); else ((Audio) song).setMarked(false,
-	//		 * false); }
-	//		 */
-	//		
-	//		updateLabel();
-	//	}
 	
 }
