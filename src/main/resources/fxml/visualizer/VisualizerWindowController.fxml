@@ -19,6 +19,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
@@ -114,23 +115,30 @@
                         <Tooltip text="Keep top bar visible" />
                      </tooltip>
                   </JFXCheckBox>
-                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" styleClass="jfx-button4" text=" ">
-                     <tooltip>
-                        <Tooltip text="Maximize/Normalize" />
-                     </tooltip>
+                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="28.0" prefWidth="28.0" style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
                      <graphic>
-                        <StackedFontIcon fx:id="sizeStackedFontIcon">
+                        <StackedFontIcon fx:id="sizeStackedFontIcon1">
                            <children>
-                              <FontIcon iconColor="ORANGE" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0" selectionStart="0" visible="false" />
-                              <FontIcon iconColor="ORANGE" iconLiteral="typ-arrow-maximise" iconSize="24" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
                            </children>
                         </StackedFontIcon>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="close" focusTraversable="false" prefHeight="30.0" prefWidth="30.0" styleClass="jfx-button4" text="x">
-                     <tooltip>
-                        <Tooltip text="Close" />
-                     </tooltip>
+                  <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="28.0" prefWidth="28.0" style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-close" iconSize="20">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </FontIcon>
+                     </graphic>
                   </JFXButton>
                </children>
             </HBox>
