@@ -43,13 +43,6 @@
 					<executable>javac10</executable>
 					<encoding>UTF-8</encoding>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.ow2.asm</groupId>
-						<artifactId>asm</artifactId>
-						<version>6.2.1</version> <!-- Use newer version of ASM -->
-					</dependency>
-				</dependencies>
 			</plugin>
 
 			<!-- Make this jar executable -->
