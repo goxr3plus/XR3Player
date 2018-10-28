@@ -1,7 +1,10 @@
-### Latest Version Build with JDK 10.0.2 at [22/09/2018]  , V3.123 [Download](https://goxr3plus.github.io/xr3player.io/)
+### Latest Version Build with JDK 10.0.2 at [23/10/2018]  , V3.124 [Download](https://goxr3plus.github.io/xr3player.io/)
+| Video|
+|:-:|
+| [![First](https://user-images.githubusercontent.com/20374208/47316044-d12d4c00-d64e-11e8-85f3-421567e2088b.jpg)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
 
 #### 
-> Currently learning Java 11 , React + Native , SpringBoot , Node.js , SQL  , Android and many more ... will be back more powerful than ever to take this app on next level.
+> Currently learning Java 11 , React + Native , SpringBoot , Node.js , SQL  , Android , Elastic , Vue.js and many more ... will be back more powerful than ever to take this app on next level.
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 The most advanced JavaFX Media Player .... growing to be the best out there .
@@ -34,9 +37,7 @@ The most advanced JavaFX Media Player .... growing to be the best out there .
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
-| Latest update presentation video|
-|:-:|
-| [![First](http://img.youtube.com/vi/a3K_bBV7Pos/0.jpg)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
+
 
 # Screenshots
 
