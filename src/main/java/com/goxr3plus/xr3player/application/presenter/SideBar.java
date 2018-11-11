@@ -42,107 +42,105 @@ public class SideBar extends StackPane {
 	
 	//--------------------------------------------------------------
 	
-	@FXML
-	private StackedFontIcon stackedFontIcon;
-	
-	@FXML
-	private ImageView userImageView;
-	
-	@FXML
-	private StackedFontIcon noImageStackedFontIcon;
-	
-	@FXML
-	private FontIcon userFontIconImage;
-	
-	@FXML
-	private Label nameLabel;
-	
-	@FXML
-	private VBox modesBox;
-	
-	@FXML
-	private ToggleButton mainModeToggle;
-	
-	@FXML
-	private ToggleGroup modeTeam;
-	
-	@FXML
-	private JFXButton mainModeVolumeButton;
-	
-	@FXML
-	private StackedFontIcon mainModeStackedFont;
-	
-	@FXML
-	private ToggleButton djModeToggle;
-	
-	@FXML
-	private JFXButton djModeVolumeButton;
-	
-	@FXML
-	private StackedFontIcon djModeStackedFont;
-	
-	@FXML
-	private ToggleButton userInfoToggle;
-	
-	@FXML
-	private ToggleButton browserToggle;
-	
-	@FXML
-	private JFXButton browserVolumeButton;
-	
-	@FXML
-	private StackedFontIcon browserStackedFont;
-	
-	@FXML
-	private ToggleButton moviesToggle;
-	
-	@FXML
-	private HBox performanceHBox;
-	
-	@FXML
-	private JFXButton applicationUpdate;
-	
-	@FXML
-	private JFXButton applicationSettings;
-	
-	@FXML
-	private MenuButton applicationDatabase;
-	
-	@FXML
-	private MenuItem importDataBase;
-	
-	@FXML
-	private MenuItem exportDataBase;
-	
-	@FXML
-	private MenuItem deleteDataBase;
-	
-	@FXML
-	private MenuItem showApplicationInfo;
-	
-	@FXML
-	private MenuItem showManual;
-	
-	@FXML
-	private MenuItem donation;
-	
-	@FXML
-	private JFXButton snapshot;
-	
-	@FXML
-	private JFXButton applicationConsole;
-	
-	@FXML
-	private JFXButton openTaskManager;
-	
-	@FXML
-	private MenuItem downloadYoutubePlaylist;
-	
-	@FXML
-	private MenuItem socialMediaToMP3;
-	
-	@FXML
-	private MenuItem socialMediaToAnything;
+    @FXML
+    private StackedFontIcon stackedFontIcon;
+
+    @FXML
+    private ImageView userImageView;
+
+    @FXML
+    private StackedFontIcon noImageStackedFontIcon;
+
+    @FXML
+    private FontIcon userFontIconImage;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private VBox modesBox;
+
+    @FXML
+    private ToggleButton mainModeToggle;
+
+    @FXML
+    private ToggleGroup modeTeam;
+
+    @FXML
+    private JFXButton mainModeVolumeButton;
+
+    @FXML
+    private StackedFontIcon mainModeStackedFont;
+
+    @FXML
+    private ToggleButton djModeToggle;
+
+    @FXML
+    private JFXButton djModeVolumeButton;
+
+    @FXML
+    private StackedFontIcon djModeStackedFont;
+
+    @FXML
+    private ToggleButton userInfoToggle;
+
+    @FXML
+    private ToggleButton browserToggle;
+
+    @FXML
+    private JFXButton browserVolumeButton;
+
+    @FXML
+    private StackedFontIcon browserStackedFont;
+
+    @FXML
+    private HBox performanceHBox;
+
+    @FXML
+    private JFXButton applicationUpdate;
+
+    @FXML
+    private JFXButton applicationSettings;
+
+    @FXML
+    private MenuButton applicationDatabase;
+
+    @FXML
+    private MenuItem importDataBase;
+
+    @FXML
+    private MenuItem exportDataBase;
+
+    @FXML
+    private MenuItem deleteDataBase;
+
+    @FXML
+    private MenuItem showApplicationInfo;
+
+    @FXML
+    private MenuItem showManual;
+
+    @FXML
+    private MenuItem donation;
+
+    @FXML
+    private JFXButton snapshot;
+
+    @FXML
+    private JFXButton applicationConsole;
+
+    @FXML
+    private JFXButton openTaskManager;
+
+    @FXML
+    private MenuItem downloadYoutubePlaylist;
+
+    @FXML
+    private MenuItem socialMediaToMP3;
+
+    @FXML
+    private MenuItem socialMediaToAnything;
+
 	
 	// -------------------------------------------------------------
 	
@@ -373,8 +371,8 @@ public class SideBar extends StackPane {
 				Main.topBar.goMode(WindowMode.USERMODE);
 			} else if (newToggle == this.browserToggle) {
 				Main.topBar.goMode(WindowMode.WEBMODE);
-			} else if (newToggle == this.moviesToggle) {
-				Main.topBar.goMode(WindowMode.MOVIEMODE);
+//			} else if (newToggle == this.moviesToggle) {
+//				Main.topBar.goMode(WindowMode.MOVIEMODE);
 			}
 		});
 		
@@ -551,12 +549,12 @@ public class SideBar extends StackPane {
 		return browserToggle;
 	}
 	
-	/**
-	 * @return the moviesToggle
-	 */
-	public ToggleButton getMoviesToggle() {
-		return moviesToggle;
-	}
+//	/**
+//	 * @return the moviesToggle
+//	 */
+//	public ToggleButton getMoviesToggle() {
+//		return moviesToggle;
+//	}
 	
 	/**
 	 * @return the nameLabel

@@ -126,15 +126,6 @@
                         </JFXButton>
                      </children>
                   </StackPane>
-                  <StackPane layoutX="10.0" layoutY="341.0">
-                     <children>
-                        <ToggleButton fx:id="moviesToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toggle-button3" text="Movies" toggleGroup="$modeTeam">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-local-movies" iconSize="32" />
-                           </graphic>
-                        </ToggleButton>
-                     </children>
-                  </StackPane>
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
