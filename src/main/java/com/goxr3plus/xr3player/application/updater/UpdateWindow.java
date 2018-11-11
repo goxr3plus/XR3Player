@@ -134,6 +134,7 @@ public class UpdateWindow extends StackPane {
 		window.setTitle("Update Window");
 		window.initStyle(StageStyle.UTILITY);
 		window.setScene(new Scene(this));
+		window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		window.getScene().setOnKeyReleased(k -> {
 			if (k.getCode() == KeyCode.ESCAPE)
 				window.close();
@@ -580,9 +581,10 @@ public class UpdateWindow extends StackPane {
 	 */
 	public void show() {
 		Platform.runLater(() -> {
-			if (!window.isShowing())
+			if (!window.isShowing()) {
 				window.show();
-			else
+				whatsNewTextArea.scrollYBy(20);
+			}else
 				window.requestFocus();
 		});
 	}
