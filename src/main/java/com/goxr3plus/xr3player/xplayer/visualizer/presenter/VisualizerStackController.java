@@ -123,6 +123,7 @@ public class VisualizerStackController extends StackPane {
 		
 		// -- KeyListeners
 		setOnKeyReleased(key -> {
+			System.out.println("Key RELEASED");
 			if (key.getCode() == KeyCode.RIGHT)
 				nextSpectrumAnalyzer();
 			else if (key.getCode() == KeyCode.LEFT)

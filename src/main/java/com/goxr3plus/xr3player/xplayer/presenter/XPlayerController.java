@@ -52,6 +52,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -1438,6 +1439,14 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		// -----------visualizerTypeGroup
 		visualizerWindow.getVisualizerTypeGroup().getToggles()
 				.forEach(toggle -> ( (RadioMenuItem) toggle ).setOnAction(a -> visualizer.displayMode.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle))));
+		
+		// visualizerTabPane
+		visualizerTabPane.addEventFilter(KeyEvent.ANY, event -> {
+			if (event.getCode().isArrowKey()) {
+				//System.out.println("Is arrow key");
+				event.consume();
+			}
+		});
 		
 		// VisualizerStackController
 		visualizerStackController.getChildren().add(0, visualizer);
