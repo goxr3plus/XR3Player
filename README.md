@@ -5,7 +5,7 @@ installer.
 
 | Video|
 |:-:|
-| [![First](https://user-images.githubusercontent.com/20374208/47316044-d12d4c00-d64e-11e8-85f3-421567e2088b.jpg)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
+| [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
 
 #### 
 > Currently learning Java 11 , React + Native , SpringBoot , Node.js , SQL  , Android , Elastic , Vue.js and many more ... will be back more powerful than ever to take this app on next level.
@@ -47,7 +47,7 @@ The most advanced JavaFX Media Player .... growing to be the best out there .
 
 | DJ UI | Chromium Web Browser 
 |:-:|:-:|
-| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/dj_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/web_browser.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/web_browser.jpg) |
 
 | Multiple Users | Advanced UI 
 |:-:|:-:|
