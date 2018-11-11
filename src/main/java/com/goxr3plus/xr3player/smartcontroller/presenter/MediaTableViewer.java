@@ -418,7 +418,7 @@ public class MediaTableViewer extends StackPane {
 			dragAndDropLabel.setOnDragOver(dragOver -> {
 				
 				// The drag must come from source other than the owner
-				System.out.println(dragOver.getGestureSource());
+			//	System.out.println(dragOver.getGestureSource());
 				//if(dragOver.getGestureSource().toString().contains("MediaViewer") && dragOver.getGestureSource().)
 				
 				if (dragOver.getDragboard().hasFiles() && dragOver.getGestureSource() != tableView)

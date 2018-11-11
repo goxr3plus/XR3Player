@@ -127,8 +127,6 @@ public class LoadService extends Service<Void> {
 		//Call the all detailsService
 		smartController.getNormalModeMediaTableViewer().getAllDetailsService().restartService(smartController.getNormalModeMediaTableViewer());
 		
-		//No Album Views Label
-		smartController.getNoAlbumViewsLabel().setVisible(smartController.getTotalInDataBase() == 0);
 	}
 	
 	@Override

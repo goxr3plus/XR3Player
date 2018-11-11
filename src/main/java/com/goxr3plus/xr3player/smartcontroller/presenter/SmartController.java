@@ -907,7 +907,9 @@ public class SmartController extends StackPane {
 		//	normal_mode_mediaTableViewer.getTableView().sort();
 		
 		//Call MediaViewerService
-		mediaViewerService.startService();
+		noAlbumViewsLabel.setVisible(getTotalInDataBase() == 0);
+		if (getTotalInDataBase() != 0)
+			mediaViewerService.startService();
 	}
 	
 	/**
