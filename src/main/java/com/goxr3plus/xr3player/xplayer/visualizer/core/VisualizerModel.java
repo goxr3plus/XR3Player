@@ -236,7 +236,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 */
 	public void setupDSP(DataLine line) {
 		if (dsp == null)
-			dsp = new KJDSPAudioDataConsumer(2048, fps);
+			dsp = new KJDSPAudioDataConsumer(2048, fps, this);
 		
 		if (dsp != null) {
 			// Number of Channels
@@ -686,6 +686,27 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 		}
 		
 		return array;
+	}
+	
+	/**
+	 * Returns a boolean based on if the merged array is needed or not This method is being used by {@link KJDSPAudioDataConsumer} in order to
+	 * determine if it should or not calculate it ( avoid using cpu )
+	 * 
+	 * @return Returns a boolean based on if the merged array is needed or not This method is being used by {@link KJDSPAudioDataConsumer} in order to
+	 *         determine if it should or not calculate it ( avoid using cpu )
+	 */
+	//TODO
+	public boolean mergeArrayNeeded() {
+		
+		return true;
+		//		switch (getDisplayMode()) {
+		//			case 4:
+		//				
+		//				return f;
+		//			default:
+		//				return true;			
+		//		}
+		
 	}
 	
 	/*-----------------------------------------------------------------------

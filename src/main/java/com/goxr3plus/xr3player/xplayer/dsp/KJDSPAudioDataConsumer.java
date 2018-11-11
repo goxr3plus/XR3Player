@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 
 import javax.sound.sampled.DataLine;
 
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
+
 /**
  * The Class KJDSPAudioDataConsumer.
  *
@@ -65,6 +67,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 	/** The channel mode. */
 	private ChannelMode channelMode;
 	
+	private VisualizerModel visualizerModel;
+	
 	/**
 	 * Indicates the Mode of the channel.
 	 *
@@ -96,8 +100,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 	/**
 	 * Default constructor creates a DSPAC with DEFAULT_SAMPLE_SIZE and DEFAULT_FPS as parameters.
 	 */
-	public KJDSPAudioDataConsumer() {
-		this(DEFAULT_SAMPLE_SIZE, DEFAULT_FPS);
+	private KJDSPAudioDataConsumer() {
+		this(DEFAULT_SAMPLE_SIZE, DEFAULT_FPS,null);
 	}
 	
 	/**
@@ -108,7 +112,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 	 * @param pFramesPerSecond
 	 *            The desired refresh rate per second of registered DSP's.
 	 */
-	public KJDSPAudioDataConsumer(int pSampleSize, int pFramesPerSecond) {
+	public KJDSPAudioDataConsumer(int pSampleSize, int pFramesPerSecond,VisualizerModel visualizerModel) {
 		this(pSampleSize, pFramesPerSecond, SampleType.SIXTEEN_BIT, ChannelMode.STEREO);
 	}
 	
