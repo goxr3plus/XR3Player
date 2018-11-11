@@ -1,5 +1,5 @@
 language: java
-jdk: oraclejdk10
+jdk: openjdk10
 script: mvn clean package
 after_success:
 - mvn clean cobertura:cobertura coveralls:report
