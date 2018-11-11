@@ -76,7 +76,8 @@ public class WaveFormService extends Service<Boolean> {
 	 */
 	public void startService(String fileAbsolutePath , WaveFormJob waveFormJob) {
 		
-		if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM && this.fileAbsolutePath != null && fileAbsolutePath.equals(this.fileAbsolutePath)) //If it is the same file
+		// Security Check
+		if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM && this.fileAbsolutePath != null && fileAbsolutePath.equals(this.fileAbsolutePath) && wavAmplitudes != null) //If it is the same file
 			return;
 		
 		//Check
@@ -113,6 +114,7 @@ public class WaveFormService extends Service<Boolean> {
 		xPlayerController.getWaveFormVisualization().setWaveData(resultingWaveform);
 		xPlayerController.getWaveFormVisualization().startPainterService();
 		deleteTemporaryFiles();
+		
 	}
 	
 	private void failure() {
@@ -198,7 +200,8 @@ public class WaveFormService extends Service<Boolean> {
 				Files.copy(new File(fileAbsolutePath).toPath(), temporalCopiedFile.toPath(), options);
 				
 				//Transcode to .wav
-				transcodeToWav(temporalCopiedFile, temporalDecodedFile);
+				if (!transcodeToWav(temporalCopiedFile, temporalDecodedFile))
+					return null;
 				
 				//Avoid creating amplitudes again for the same file
 				if (wavAmplitudes == null)
@@ -332,7 +335,7 @@ public class WaveFormService extends Service<Boolean> {
 			 * @param destinationFile
 			 * @throws EncoderException
 			 */
-			private void transcodeToWav(File sourceFile , File destinationFile) throws EncoderException {
+			private boolean transcodeToWav(File sourceFile , File destinationFile) throws EncoderException {
 				try {
 					
 					//Set Audio Attributes
@@ -355,7 +358,10 @@ public class WaveFormService extends Service<Boolean> {
 					encoder.encode(new MultimediaObject(sourceFile), destinationFile, attributes, listener);
 				} catch (Exception ex) {
 					ex.printStackTrace();
+					return false;
 				}
+				
+				return true;
 			}
 			
 		};

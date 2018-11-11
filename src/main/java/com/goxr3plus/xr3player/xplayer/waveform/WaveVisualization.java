@@ -158,6 +158,13 @@ public class WaveVisualization extends WaveFormPane {
 				recalculateWaveData = false;
 				
 				return;
+			} else if (getWaveService().getWavAmplitudes() == null) {
+				
+				//Start the Service
+				getWaveService().startService(getWaveService().getFileAbsolutePath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
+				recalculateWaveData = false;
+				
+				return;
 			}
 			
 			//Draw wave
