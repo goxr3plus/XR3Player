@@ -177,7 +177,7 @@
                                           </StackPane>
                                        </top>
                                     </BorderPane>
-                                    <JFXTabPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
+                                    <JFXTabPane fx:id="visualizerTabPane" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" side="RIGHT" styleClass="specialJFXTabPane" SplitPane.resizableWithParent="false">
                                        <tabs>
                                         <Tab>
                                              <graphic>

@@ -16,6 +16,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -171,6 +172,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	
 	@FXML
 	private ProgressBar waveProgressBar;
+	
+	@FXML
+	private JFXTabPane visualizerTabPane;
 	
 	@FXML
 	private StackPane visualizerStackTopParent;

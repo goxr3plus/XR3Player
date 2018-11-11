@@ -153,9 +153,9 @@
                               <VBox alignment="CENTER" spacing="10.0">
                                  <children>
                                     <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="69.0" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Tools" />
-                                    <FlowPane alignment="CENTER">
+                                    <FlowPane alignment="CENTER" hgap="10.0">
                                        <children>
-                                          <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                                          <JFXButton fx:id="applicationUpdate" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="55.0" styleClass="jfx-button4" text=" ">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -166,7 +166,7 @@
                                                 <FontIcon iconColor="#91ff5a" iconLiteral="fas-cloud-download-alt" iconSize="32" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                                          <JFXButton fx:id="applicationSettings" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="55.0" styleClass="jfx-button4" text=" ">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -179,9 +179,9 @@
                                           </JFXButton>
                                        </children>
                                     </FlowPane>
-                                    <FlowPane alignment="CENTER" hgap="2.0" prefWrapLength="200.0" vgap="2.0">
+                                    <FlowPane alignment="CENTER" hgap="10.0" prefWrapLength="200.0" vgap="2.0">
                                        <children>
-                                          <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefWidth="52.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
+                                          <MenuButton fx:id="applicationDatabase" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
                                              <items>
                                                 <MenuItem fx:id="importDataBase" mnemonicParsing="false" text="Import DataBase">
                                                    <graphic>
@@ -213,10 +213,10 @@
                                                 </MenuItem>
                                              </items>
                                              <graphic>
-                                                <FontIcon iconColor="#9b9da8" iconLiteral="fas-database" iconSize="32" />
+                                                <FontIcon iconColor="WHITE" iconLiteral="fas-database" iconSize="32" />
                                              </graphic>
                                           </MenuButton>
-                                          <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
+                                          <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
                                              <items>
                                                 <MenuItem fx:id="showApplicationInfo" mnemonicParsing="false" text="Application Information" />
                                                 <MenuItem fx:id="showManual" mnemonicParsing="false" text="Application Manual" />
@@ -232,9 +232,9 @@
                               </VBox>
                               <VBox alignment="CENTER" spacing="10.0">
                                  <children>
-                                    <FlowPane alignment="CENTER">
+                                    <FlowPane alignment="CENTER" hgap="10.0">
                                        <children>
-                                          <JFXButton fx:id="snapshot" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                                          <JFXButton fx:id="snapshot" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="55.0" styleClass="jfx-button4" text=" ">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -245,7 +245,7 @@
                                                 <FontIcon iconColor="WHITE" iconLiteral="fas-camera" iconSize="32" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                                          <JFXButton fx:id="applicationConsole" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="55.0" styleClass="jfx-button4" text=" ">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -258,9 +258,9 @@
                                           </JFXButton>
                                        </children>
                                     </FlowPane>
-                                    <FlowPane alignment="CENTER" hgap="2.0" vgap="2.0">
+                                    <FlowPane alignment="CENTER" hgap="10.0" vgap="2.0">
                                        <children>
-                                          <JFXButton fx:id="openTaskManager" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                                          <JFXButton fx:id="openTaskManager" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="55.0" styleClass="jfx-button4" text=" ">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -271,7 +271,7 @@
                                                 <FontIcon iconColor="WHITE" iconLiteral="fa-tasks" iconSize="32" />
                                              </graphic>
                                           </JFXButton>
-                                          <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
+                                          <MenuButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="42.0" prefWidth="55.0" style="-fx-background-radius: 0;" styleClass="jfx-menu-button2">
                                              <items>
                                                 <MenuItem fx:id="downloadYoutubePlaylist" mnemonicParsing="false" text="Download Youtube Playlist">
                                                    <graphic>
