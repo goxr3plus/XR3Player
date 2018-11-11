@@ -55,7 +55,7 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox alignment="CENTER_LEFT">
+            <VBox fx:id="modesBox" alignment="CENTER_LEFT">
                <children>
                   <StackPane>
                      <children>

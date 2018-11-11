@@ -19,8 +19,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
@@ -41,9 +43,6 @@ public class SideBar extends StackPane {
 	//--------------------------------------------------------------
 	
 	@FXML
-	private Label nameLabel;
-	
-	@FXML
 	private StackedFontIcon stackedFontIcon;
 	
 	@FXML
@@ -54,6 +53,12 @@ public class SideBar extends StackPane {
 	
 	@FXML
 	private FontIcon userFontIconImage;
+	
+	@FXML
+	private Label nameLabel;
+	
+	@FXML
+	private VBox modesBox;
 	
 	@FXML
 	private ToggleButton mainModeToggle;
@@ -370,6 +375,13 @@ public class SideBar extends StackPane {
 				Main.topBar.goMode(WindowMode.WEBMODE);
 			} else if (newToggle == this.moviesToggle) {
 				Main.topBar.goMode(WindowMode.MOVIEMODE);
+			}
+		});
+		
+		// modesStackPane
+		modesBox.addEventFilter(KeyEvent.ANY, event -> {
+			if (event.getCode().isArrowKey()) {
+				event.consume();
 			}
 		});
 		
