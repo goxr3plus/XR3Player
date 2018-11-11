@@ -1,4 +1,8 @@
-### Latest Version Build with JDK 10.0.2 at [23/10/2018]  , V3.124 [Download](https://goxr3plus.github.io/xr3player.io/)
+### Latest Version Build with JDK 10.0.2 at [28/10/2018]  , V3.125 [Download](https://goxr3plus.github.io/xr3player.io/)
+
+To install the **XR3Player**, download and double-click the **[XR3Player_Installer.exe](https://goxr3plus.github.io/xr3player.io/)**
+installer.
+
 | Video|
 |:-:|
 | [![First](https://user-images.githubusercontent.com/20374208/47316044-d12d4c00-d64e-11e8-85f3-421567e2088b.jpg)](https://www.youtube.com/watch?v=a3K_bBV7Pos)  |
