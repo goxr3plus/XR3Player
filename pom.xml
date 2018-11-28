@@ -21,6 +21,7 @@
 		<maven.compiler.target>10</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<my.project.version>127</my.project.version>
+		<ikonli.version>2.4.0</ikonli.version>
 	</properties>
 
 	<build>
@@ -147,37 +148,37 @@
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-javafx</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-typicons-pack</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-fontawesome-pack</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-material-pack</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-fontawesome5-pack</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-runestroicons-pack</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-icomoon-pack</artifactId>
-			<version>2.3.0</version>
+			<version>${ikonli.version}</version>
 		</dependency>
 		<!-- Image4j -->
 		<dependency>
@@ -205,7 +206,7 @@
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
 			<artifactId>richtextfx</artifactId>
-			<version>0.9.1</version>
+			<version>0.9.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.1stleg</groupId>
