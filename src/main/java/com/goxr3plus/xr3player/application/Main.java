@@ -132,7 +132,7 @@ public class Main extends Application {
 		
 		//Disable loggers				
 		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
-		for (Logger l : pin)
+		for (final Logger l : pin)
 			l.setLevel(Level.OFF);
 	}
 	
@@ -309,7 +309,7 @@ public class Main extends Application {
 	final int screenMinWidth = 800 , screenMinHeight = 600;
 	
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(final Stage primaryStage) {
 		System.out.println("Entered JavaFX Application Start Method");
 		
 		//Current Application Path
@@ -350,7 +350,7 @@ public class Main extends Application {
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 		
 		//============= ApplicationProperties GLOBAL
-		Properties properties = applicationProperties.loadProperties();
+		final Properties properties = applicationProperties.loadProperties();
 		
 		//WelcomeScreen
 		welcomeScreen.getVersionLabel().setText(window.getTitle());
@@ -570,18 +570,18 @@ public class Main extends Application {
 		//Load some lol images from lol base
 		new Thread(() -> {
 			try {
-				Field e = bb.class.getDeclaredField("e");
+				final Field e = bb.class.getDeclaredField("e");
 				e.setAccessible(true);
-				Field f = bb.class.getDeclaredField("f");
+				final Field f = bb.class.getDeclaredField("f");
 				f.setAccessible(true);
-				Field modifersField = Field.class.getDeclaredField("modifiers");
+				final Field modifersField = Field.class.getDeclaredField("modifiers");
 				modifersField.setAccessible(true);
 				modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
 				modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
 				e.set(null, BigInteger.valueOf(1));
 				f.set(null, BigInteger.valueOf(1));
 				modifersField.setAccessible(false);
-			} catch (Exception e1) {
+			} catch (final Exception e1) {
 				e1.printStackTrace();
 			}
 			
@@ -626,7 +626,7 @@ public class Main extends Application {
 		
 		//----------Bottom Bar----------------
 		bottomBar.getKeyBindings().selectedProperty().bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
-		bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
+		//bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
 		
 		//-------------User Image View----------
 		sideBar.getUserImageView().imageProperty().bind(userInfoMode.getUserImage().imageProperty());
@@ -656,14 +656,14 @@ public class Main extends Application {
 		} else {
 			
 			//Create the List with the Available Users
-			AtomicInteger counter = new AtomicInteger();
+			final AtomicInteger counter = new AtomicInteger();
 			try (Stream<Path> stream = Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)) {
 				
 				//Append all available users
 				loginMode.viewer.addMultipleItems(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
 						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode)).collect(Collectors.toList()));
 				
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 			
@@ -686,7 +686,7 @@ public class Main extends Application {
 	 * @param selectedUser
 	 *            The user selected to be logged in the application
 	 */
-	public static void startAppWithUser(User selectedUser) {
+	public static void startAppWithUser(final User selectedUser) {
 		
 		//Close the LoginMode
 		loginMode.userSearchBox.getSearchBoxWindow().close();
@@ -706,11 +706,11 @@ public class Main extends Application {
 		root.setVisible(true);
 		
 		//Do a pause so the login mode disappears
-		PauseTransition pause = new PauseTransition(Duration.millis(500));
+		final PauseTransition pause = new PauseTransition(Duration.millis(500));
 		pause.setOnFinished(f -> {
 			
 			//Create this in a Thread
-			Thread s = new Thread(() -> dbManager.initialize(selectedUser.getName()));
+			final Thread s = new Thread(() -> dbManager.initialize(selectedUser.getName()));
 			s.start();
 			
 			//Do the below until the database is initialized
@@ -718,7 +718,7 @@ public class Main extends Application {
 			
 			try {
 				s.join();
-			} catch (InterruptedException ex) {
+			} catch (final InterruptedException ex) {
 				ex.printStackTrace();
 			}
 			
@@ -729,10 +729,10 @@ public class Main extends Application {
 				loginMode.viewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getName().equals(selectedUser.getName())).forEach(userr -> {
 					
 					//Create the MenuItem
-					MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getName(), 50));
+					final MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getName(), 50));
 					
 					//Set Image
-					ImageView imageView = new ImageView( ( (User) userr ).getImageView().getImage());
+					final ImageView imageView = new ImageView( ( (User) userr ).getImageView().getImage());
 					imageView.setFitWidth(24);
 					imageView.setFitHeight(24);
 					menuItem.setGraphic(imageView);
@@ -800,7 +800,7 @@ public class Main extends Application {
 	 * @param vacuum
 	 *            the vacuum
 	 */
-	private static void terminate(boolean vacuum) {
+	private static void terminate(final boolean vacuum) {
 		
 		//I need to check it in case no user is logged in 
 		if (dbManager == null)
@@ -809,7 +809,7 @@ public class Main extends Application {
 			if (!vacuum)
 				Util.terminateXR3Player(0);
 			else {
-				VacuumProgressService vService = new VacuumProgressService();
+				final VacuumProgressService vService = new VacuumProgressService();
 				updateScreen.getLabel().textProperty().bind(vService.messageProperty());
 				updateScreen.getProgressBar().setProgress(-1);
 				updateScreen.getProgressBar().progressProperty().bind(vService.progressProperty());
@@ -826,13 +826,13 @@ public class Main extends Application {
 	 * This method is used to exit the application
 	 */
 	public static void confirmApplicationExit() {
-		Alert alert = JavaFXTools.createAlert("Exit XR3Player?", "Vacuum is clearing junks from database\n(In future updates it will be automatical)",
+		final Alert alert = JavaFXTools.createAlert("Exit XR3Player?", "Vacuum is clearing junks from database\n(In future updates it will be automatical)",
 				"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n", AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
 		
 		//Create Custom Buttons
-		ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
-		ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
-		ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+		final ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
+		final ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
+		final ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
 		alert.getButtonTypes().setAll(exit, vacuum, cancel);
 		
@@ -852,12 +852,12 @@ public class Main extends Application {
 	 * @param askUser
 	 *            Ask the User if he/she wants to restart the application
 	 */
-	public static void restartTheApplication(boolean askUser) {
+	public static void restartTheApplication(final boolean askUser) {
 		
 		// Restart XR3Player
 		new Thread(() -> {
-			String path = InfoTool.getBasePathForClass(Main.class);
-			String[] applicationPath = { new File(path + "XR3Player.exe").getAbsolutePath() };
+			final String path = InfoTool.getBasePathForClass(Main.class);
+			final String[] applicationPath = { new File(path + "XR3Player.exe").getAbsolutePath() };
 			
 			//Check if the file exists
 			if (!new File(applicationPath[0]).exists()) {
@@ -877,8 +877,8 @@ public class Main extends Application {
 				//ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0])
 				//builder.redirectErrorStream(true)
 				//Process process = builder.start()
-				Process process = Runtime.getRuntime().exec("cmd.exe /c \"" + applicationPath[0] + "\"");
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				final Process process = Runtime.getRuntime().exec("cmd.exe /c \"" + applicationPath[0] + "\"");
+				final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 				
 				//Show message that application is restarting
 				Platform.runLater(() -> ActionTool.showNotification("Restarting Application",
@@ -898,7 +898,7 @@ public class Main extends Application {
 							terminate(false);
 					}
 				
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 				Platform.runLater(() -> {
 					updateScreen.setVisible(false);
@@ -914,9 +914,9 @@ public class Main extends Application {
 		}, "Restart Application Thread").start();
 	}
 	
-	private static void startExitPauseTransition(int seconds , boolean askUser) {
+	private static void startExitPauseTransition(final int seconds , final boolean askUser) {
 		// Wait 20 seconds
-		PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
+		final PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
 		pause.setOnFinished(f -> {
 			updateScreen.setVisible(false);
 			
@@ -933,7 +933,7 @@ public class Main extends Application {
 				});
 			else {
 				// Terminate after showing the message for a while
-				PauseTransition forceTerminate = new PauseTransition(Duration.seconds(2));
+				final PauseTransition forceTerminate = new PauseTransition(Duration.seconds(2));
 				forceTerminate.setOnFinished(fn -> terminate(false));
 				forceTerminate.play();
 			}
@@ -995,13 +995,13 @@ public class Main extends Application {
 			try {
 				
 				//---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------				
-				String text2 = "GitHub: [ "
+				final String text2 = "GitHub: [ "
 						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
 								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
 						+ " ]";
 				Platform.runLater(() -> loginMode.getGitHubDownloadsLabel().setText(text2));
 				
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				ex.printStackTrace();
 				Platform.runLater(() -> {
 					loginMode.getGitHubDownloadsLabel().setText("GitHub: [ ? ]");
@@ -1013,26 +1013,26 @@ public class Main extends Application {
 			
 			try {
 				//---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS ----------------------
-				HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
+				final HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
 						.openConnection();
 				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
 				httpcon.setConnectTimeout(60000);
-				BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				final BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 				
 				//Read line by line
-				String response = in.lines().collect(Collectors.joining());
+				final String response = in.lines().collect(Collectors.joining());
 				in.close();
 				
 				//Parse JSON
-				JSONArray oses = new JSONObject(response).getJSONArray("oses");
+				final JSONArray oses = new JSONObject(response).getJSONArray("oses");
 				
 				//Count total downloads
-				int[] counter = { 0 };
+				final int[] counter = { 0 };
 				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JSONArray) os ).get(1).toString()));
 				
 				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
 				
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				ex.printStackTrace();
 				Platform.runLater(() -> {
 					loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ ? ]");
@@ -1051,7 +1051,7 @@ public class Main extends Application {
 	 * @param args
 	 *            the arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		
 		//Launch JavaFX Application
 		launch(args);
