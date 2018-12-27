@@ -7,15 +7,9 @@ installer.
 |:-:|
 | [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=7Hai7cavmUY)  |
 
-#### 
-> Currently learning Java 11 , React + Native , SpringBoot , Node.js , SQL  , Android , Elastic , Vue.js and many more ... will be back more powerful than ever to take this app on next level.
 
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
-The most advanced JavaFX Media Player .... growing to be the best out there .
-
-> Visit  [website](https://goxr3plus.github.io/xr3player.io/)
->Build with JDK 10.0.2+
-
+Started as a media player .... it will finish as an AI ....
 
 ## Platform Support ( 64 bit )
 
