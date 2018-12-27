@@ -41,8 +41,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.core.VisualizerDrawer;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 

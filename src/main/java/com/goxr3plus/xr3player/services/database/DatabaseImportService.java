@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.database.services;
+package main.java.com.goxr3plus.xr3player.services.database;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -5,7 +5,7 @@ package main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.present
 
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * This class is updating the panel of the XPlayerUI.

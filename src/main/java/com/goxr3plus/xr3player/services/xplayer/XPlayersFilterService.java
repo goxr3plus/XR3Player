@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.xplayer.services;
+package main.java.com.goxr3plus.xr3player.services.xplayer;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

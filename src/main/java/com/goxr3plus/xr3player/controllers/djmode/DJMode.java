@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.MixTabInterface;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.MixTabInterface;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**

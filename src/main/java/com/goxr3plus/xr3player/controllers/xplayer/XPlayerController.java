@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.xplayer.presenter;
+package main.java.com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,10 +69,6 @@ import main.java.com.goxr3plus.xr3player.application.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.application.custom.flippane.FlipPanel;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
-import main.java.com.goxr3plus.xr3player.application.xplayer.model.XPlayer;
-import main.java.com.goxr3plus.xr3player.application.xplayer.model.XPlayerModel;
-import main.java.com.goxr3plus.xr3player.application.xplayer.services.XPlayerPlayService;
-import main.java.com.goxr3plus.xr3player.application.xplayer.services.XPlayerSeekService;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.core.VisualizerModel.VisualizerType;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.presenter.VisualizerStackController;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.presenter.VisualizerWindowController;
@@ -85,6 +81,10 @@ import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSetting
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.controllers.windows.XPlayerWindow;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
+import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayer;
+import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayerModel;
+import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerPlayService;
+import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerSeekService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileType;

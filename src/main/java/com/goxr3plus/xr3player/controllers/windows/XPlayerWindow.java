@@ -20,7 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**

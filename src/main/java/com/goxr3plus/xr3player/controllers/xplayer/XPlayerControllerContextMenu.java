@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.xplayer.presenter;
+package main.java.com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.io.File;
 import java.io.IOException;

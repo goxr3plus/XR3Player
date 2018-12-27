@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Orientation;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.core.VisualizerDrawer;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * The Class Visualizer.

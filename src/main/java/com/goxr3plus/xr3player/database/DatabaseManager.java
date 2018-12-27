@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.database;
+package main.java.com.goxr3plus.xr3player.database;
 
 import java.io.File;
 import java.sql.Connection;
@@ -26,11 +26,11 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
 import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsLoader;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;

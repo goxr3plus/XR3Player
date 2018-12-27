@@ -18,8 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.core.VisualizerModel;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**

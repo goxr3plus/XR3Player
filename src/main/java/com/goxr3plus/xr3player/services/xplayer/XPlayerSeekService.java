@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.xplayer.services;
+package main.java.com.goxr3plus.xr3player.services.xplayer;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -8,7 +8,7 @@ import javafx.concurrent.Task;
 import javafx.scene.Cursor;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
