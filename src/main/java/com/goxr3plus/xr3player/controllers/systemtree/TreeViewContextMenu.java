@@ -77,13 +77,13 @@ public class TreeViewContextMenu extends ContextMenu {
 	public TreeViewContextMenu() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TreeViewContextMenu.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TreeViewContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
 		
@@ -100,6 +100,7 @@ public class TreeViewContextMenu extends ContextMenu {
 		
 		//getInfoBuy
 		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
+		
 	}
 	
 	/**
@@ -109,15 +110,15 @@ public class TreeViewContextMenu extends ContextMenu {
 	 * @param y
 	 * @param absoluteFilePath
 	 */
-	public void show(FileTreeItem treeItem , double x , double y) {
+	public void show(final FileTreeItem treeItem , final double x , final double y) {
 		this.treeItem = treeItem;
 		
 		//Set all items visible
 		getItems().forEach(item -> item.setVisible(true));
 		
 		//Keep this variables
-		boolean isAudio = InfoTool.isAudio(treeItem.getAbsoluteFilePath());
-		boolean isVideo = InfoTool.isVideo(treeItem.getAbsoluteFilePath());
+		final boolean isAudio = InfoTool.isAudio(treeItem.getAbsoluteFilePath());
+		final boolean isVideo = InfoTool.isVideo(treeItem.getAbsoluteFilePath());
 		
 		//Fix The Menu
 		if (isVideo) {
@@ -131,6 +132,9 @@ public class TreeViewContextMenu extends ContextMenu {
 			getInfoBuy.setVisible(false);
 		}
 		
+		//Disable rename
+		rename.setVisible(false);
+		
 		//Update ShopContextMenu
 		shopContextMenu.setMediaTitle(InfoTool.getFileTitle(treeItem.getAbsoluteFilePath()));
 		
@@ -142,22 +146,22 @@ public class TreeViewContextMenu extends ContextMenu {
 		show(Main.window, x + 8, y - 1);
 		
 		//Y axis
-		double yIni = y - 50;
-		double yEnd = super.getY();
+		final double yIni = y - 50;
+		final double yEnd = super.getY();
 		super.setY(yIni);
 		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
 		yProperty.addListener((ob , n , n1) -> super.setY(n1.doubleValue()));
 		
 		//Timeline
-		Timeline timeIn = new Timeline();
+		final Timeline timeIn = new Timeline();
 		timeIn.getKeyFrames().addAll(new KeyFrame(Duration.seconds(0.35), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
 		//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
 		timeIn.play();
 	}
 	
 	@FXML
-	public void action(ActionEvent event) {
-		Object source = event.getSource();
+	public void action(final ActionEvent event) {
+		final Object source = event.getSource();
 		
 		//showFile
 		if (source == showFile)
@@ -181,7 +185,7 @@ public class TreeViewContextMenu extends ContextMenu {
 	 * @param absoluteFilePath
 	 *            the absoluteFilePath to set
 	 */
-	public void setAbsoluteFilePath(String absoluteFilePath) {
+	public void setAbsoluteFilePath(final String absoluteFilePath) {
 		treeItem.setAbsoluteFilePath(absoluteFilePath);
 	}
 	

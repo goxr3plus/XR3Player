@@ -87,13 +87,13 @@ public class TreeViewManager extends StackPane {
 	public TreeViewManager() {
 		
 		// FXMLLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TreeViewManager.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "TreeViewManager.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "TreeViewManager FXML can't be loaded!", ex);
 		}
 		
@@ -118,12 +118,14 @@ public class TreeViewManager extends StackPane {
 					treeView.scrollTo(treeView.getRow(item));
 				});
 				
-			} else if (key.getCode() == KeyCode.R) { //RENAME
-				
-				//Any selected TreeItem ?
-				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> ( (FileTreeItem) item ).rename(topLabel));
-				
-			} else if (key.getCode() == KeyCode.C) { //COPY
+			} 
+//			else if (key.getCode() == KeyCode.R) { //RENAME
+//				
+//				//Any selected TreeItem ?
+//				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> ( (FileTreeItem) item ).rename(topLabel));
+//				
+//			}
+			else if (key.getCode() == KeyCode.C) { //COPY
 				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem())
@@ -139,7 +141,7 @@ public class TreeViewManager extends StackPane {
 				
 				//Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> {
-					String absoluteFilePath = ( (FileTreeItem) item ).getAbsoluteFilePath();
+					final String absoluteFilePath = ( (FileTreeItem) item ).getAbsoluteFilePath();
 					
 					//If it is an audio file
 					if (InfoTool.isAudio(absoluteFilePath))
@@ -157,10 +159,10 @@ public class TreeViewManager extends StackPane {
 			if (!treeView.getSelectionModel().getSelectedItems().isEmpty()) {
 				
 				// Allow this transfer Mode
-				Dragboard board = startDragAndDrop(TransferMode.LINK);
+				final Dragboard board = startDragAndDrop(TransferMode.LINK);
 				
 				// Put a String on DragBoard
-				ClipboardContent content = new ClipboardContent();
+				final ClipboardContent content = new ClipboardContent();
 				content.putFiles(treeView.getSelectionModel().getSelectedItems().stream().map(treeItem -> new File( ( (FileTreeItem) treeItem ).getAbsoluteFilePath()))
 						.collect(Collectors.toList()));
 				
@@ -207,7 +209,7 @@ public class TreeViewManager extends StackPane {
 	 * 
 	 * @param item
 	 */
-	private void collapseTreeView(TreeItem<String> item , boolean expanded) {
+	private void collapseTreeView(final TreeItem<String> item , final boolean expanded) {
 		if (item == null || item.isLeaf())
 			return;
 		
@@ -221,9 +223,9 @@ public class TreeViewManager extends StackPane {
 	 * @param mouseEvent
 	 *            [[SuppressWarningsSpartan]]
 	 */
-	private void treeViewMouseClicked(MouseEvent mouseEvent) {
+	private void treeViewMouseClicked(final MouseEvent mouseEvent) {
 		//Get the selected item
-		FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
+		final FileTreeItem source = (FileTreeItem) treeView.getSelectionModel().getSelectedItem();
 		
 		// host is not on the game
 		if (source == null || source.getValue().equals(hostName)) {
@@ -240,7 +242,7 @@ public class TreeViewManager extends StackPane {
 				if (source.getChildren().isEmpty()) {
 					
 					//Main Path
-					Path mainPath = Paths.get(source.getAbsoluteFilePath());
+					final Path mainPath = Paths.get(source.getAbsoluteFilePath());
 					
 					// directory?				
 					if (mainPath.toFile().isDirectory())
@@ -251,7 +253,7 @@ public class TreeViewManager extends StackPane {
 								
 								// File or Directory is Hidden? + Directory or Accepted File
 								if (!path.toFile().isHidden()) {  //Future Filters ->>> && ( path.toFile().isDirectory() || InfoTool.isAudioSupported(path.toFile().getAbsolutePath()) )) {
-									FileTreeItem treeNode = new FileTreeItem(path.toString());
+									final FileTreeItem treeNode = new FileTreeItem(path.toString());
 									source.getChildren().add(treeNode);
 								}
 								
@@ -259,7 +261,7 @@ public class TreeViewManager extends StackPane {
 							
 							//Keep scroll position
 							Platform.runLater(() -> treeView.scrollTo(treeView.getRow(source)));
-						} catch (IOException x) {
+						} catch (final IOException x) {
 							x.printStackTrace();
 						}
 					

@@ -128,7 +128,7 @@ public class Main extends Application {
 	static {
 		
 		//Chromium Extract Location Dir
-		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium125");
+		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium127");
 		
 		//Disable loggers				
 		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
