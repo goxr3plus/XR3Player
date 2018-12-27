@@ -13,8 +13,6 @@ installer.
 # ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
 The most advanced JavaFX Media Player .... growing to be the best out there .
 
-## I need maintainers for this project , if you want open an issue and let's discuss , in order to become big we need more people . Only me it's not enough . This project is intended to reach big , from mobile to web not only desktop . I need people here . Don't hesitate start slowly and you will get help . It's been 2 years .... i don't know for how much more i will be able to continue ... because modern society requires from us to get money in order to survive . But XR3Player will always be free . FREE AND AWESOME.
-
 > Visit  [website](https://goxr3plus.github.io/xr3player.io/)
 >Build with JDK 10.0.2+
 
@@ -152,5 +150,4 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 - [**Java-Stream-Player**](https://github.com/goxr3plus/java-stream-player) Java Advanced Audio Controller Library (WAV, AU, AIFF, MP3, OGG VORBIS, FLAC, MONKEY's AUDIO and SPEEX audio formats ).
 - [**JavaFX-Web-Browser**](https://github.com/goxr3plus/JavaFX-Web-Browser) Embeddable or Standalone JavaFX Web Browser.
 - [**Mp3agic**](https://github.com/mpatric/mp3agic) A java library for reading mp3 files and reading / manipulating the ID3 tags (ID3v1 and ID3v2.2 through ID3v2.4).
-- [**JAVE2**](https://github.com/goxr3plus/jave2) The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project
-- [**TarsosTranscoder**](https://github.com/goxr3plus/TarsosTranscoder) A java wrapper for ffmpeg to transcode audio. 
+- [**JAVE2**](https://github.com/a-schild/jave2) The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project
