@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
+package main.java.com.goxr3plus.xr3player.dropbox.services;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -28,8 +28,8 @@ import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFile;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
+import main.java.com.goxr3plus.xr3player.dropbox.presenter.DropboxFile;
+import main.java.com.goxr3plus.xr3player.dropbox.presenter.DropboxViewer;
 
 public class DropboxService extends Service<Boolean> {
 	

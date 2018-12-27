@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.services;
+package main.java.com.goxr3plus.xr3player.dropbox.services;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,9 +18,9 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.io.ProgressOutputStream;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxFile;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.presenter.DropboxViewer;
+import main.java.com.goxr3plus.xr3player.dropbox.io.ProgressOutputStream;
+import main.java.com.goxr3plus.xr3player.dropbox.presenter.DropboxFile;
+import main.java.com.goxr3plus.xr3player.dropbox.presenter.DropboxViewer;
 
 public class DownloadService extends Service<Boolean> {
 	

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
+package main.java.com.goxr3plus.xr3player.dropbox.presenter;
 
 import javafx.scene.control.TreeItem;
 

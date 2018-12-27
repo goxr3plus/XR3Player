@@ -1,9 +1,7 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.downloads;
+package main.java.com.goxr3plus.xr3player.dropbox.presenter;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -12,23 +10,22 @@ import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -36,7 +33,6 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.systemtreeview.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.application.tools.fx.JavaFXTools;
-import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
 
@@ -45,25 +41,31 @@ import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartControll
  *
  * @author GOXR3PLUS
  */
-public class DropboxDownloadsTableViewer extends StackPane {
+public class DropboxFilesTableViewer extends StackPane {
 	
 	@FXML
-	private TableView<DropboxDownloadedFile> tableView;
+	private TableView<DropboxFile> tableView;
 	
 	@FXML
-	private TableColumn<DropboxDownloadedFile,String> fileThumbnail;
+	private TableColumn<DropboxFile,String> fileThumbnail;
 	
 	@FXML
-	private TableColumn<DropboxDownloadedFile,StackPane> progressBox;
+	private TableColumn<DropboxFile,Button> download;
 	
 	@FXML
-	private TableColumn<DropboxDownloadedFile,String> title;
+	private TableColumn<DropboxFile,String> title;
+	
+	@FXML
+	private TableColumn<DropboxFile,Button> actionColumn;
 	
 	@FXML
 	private InlineCssTextArea detailCssTextArea;
 	
 	@FXML
 	private Label quickSearchTextField;
+	
+	@FXML
+	private Label dragAndDropLabel;
 	
 	//-------------------------------------------------
 	private int previousSelectedCount = 0;
@@ -72,25 +74,13 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 	private final StringProperty searchWord = new SimpleStringProperty("");
 	
-	private final ObservableList<DropboxDownloadedFile> observableList = FXCollections.observableArrayList();
-	
-	/** The image. */
-	private WritableImage image = new WritableImage(100, 100);
-	
-	/** The canvas. */
-	private Canvas canvas = new Canvas();
-	
 	/**
 	 * Constructor.
 	 */
-	public DropboxDownloadsTableViewer() {
-		
-		//Canvas
-		canvas.setWidth(100);
-		canvas.setHeight(100);
+	public DropboxFilesTableViewer() {
 		
 		// FXMLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxDownloadsTableViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxFilesTableViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
@@ -109,9 +99,6 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	private void initialize() {
 		
 		//------------------------------TableViewer---------------------------
-		
-		//Set Items
-		tableView.setItems(observableList);
 		
 		//--Allow Multiple Selection
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -159,7 +146,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 		
 		// fileType
 		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("extension"));
-		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxDownloadedFile,String>() {
+		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxFile,String>() {
 			//Icon FontIcon
 			FontIcon icon = new FontIcon();
 			
@@ -182,7 +169,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 						setGraphic(icon);
 						
 						//It is directory?	
-						if ( ( (DropboxDownloadedFile) super.getTableRow().getItem() ).isDirectory()) { //DIRECTORY
+						if ( ( (DropboxFile) super.getTableRow().getItem() ).isDirectory()) { //DIRECTORY
 							JavaFXTools.setFontIcon(this, icon, "fas-folder", FileTreeItem.folderColor);
 						} else {
 							//Is it a music file?
@@ -206,10 +193,45 @@ public class DropboxDownloadsTableViewer extends StackPane {
 			
 		});
 		
+		// actionColumn
+		actionColumn.setCellValueFactory(new PropertyValueFactory<>("actionColumn"));
+		
 		// download
-		progressBox.setCellValueFactory(new PropertyValueFactory<>("progressBox"));
+		download.setCellValueFactory(new PropertyValueFactory<>("download"));
 		
 		//------------------------------------------------------------
+		
+		//--Row Factory
+		tableView.setRowFactory(rf -> {
+			TableRow<DropboxFile> row = new TableRow<>();
+			
+			//Mouse Listener
+			row.setFocusTraversable(true);
+			row.setOnMouseReleased(m -> {
+				//We don't need null rows (rows without items)
+				if (row.itemProperty().getValue() != null) {
+					
+					if (m.getButton() == MouseButton.SECONDARY && !row.isDisable())
+						tableView.getSelectionModel().select(row.getIndex());
+					
+					//Primary
+					if (m.getButton() == MouseButton.PRIMARY) {
+						if (m.getClickCount() == 2 && row.itemProperty().get().isDirectory())
+							Main.dropBoxViewer.recreateTableView(row.itemProperty().get().getMetadata().getPathLower());
+						if (m.getClickCount() == 2 && !row.itemProperty().get().isDirectory())
+							Main.dropBoxViewer.renameFile(row.itemProperty().get(), row);
+						
+						//Secondary
+					} else if (m.getButton() == MouseButton.SECONDARY && !tableView.getSelectionModel().getSelectedItems().isEmpty()) {
+						
+						//Show the contextMenu
+						Main.dropBoxViewer.getFileContextMenu().show(row.itemProperty().get(), m.getScreenX(), m.getScreenY(), row);
+					}
+				}
+			});
+			
+			return row;
+		});
 		
 		//--KeyListener
 		tableView.setOnKeyReleased(key -> {
@@ -217,6 +239,8 @@ public class DropboxDownloadsTableViewer extends StackPane {
 			//Find it
 			if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");
+			else if (key.getCode() == KeyCode.DELETE)
+				Main.dropBoxViewer.deleteSelectedFiles(false);
 			
 			//Local Search 
 			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
@@ -252,12 +276,10 @@ public class DropboxDownloadsTableViewer extends StackPane {
 				ClipboardContent content = new ClipboardContent();
 				
 				// PutFiles
-				content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getDownloadService().getLocalFileAbsolutePath()))
-						.collect(Collectors.toList()));
+				content.putString("#dropbox_item#");
 				
-				//Set Drag View
-				JavaFXTools.setPlainTextDragView(db,
-						content.getFiles().size() == 1 ? tableView.getSelectionModel().getSelectedItem().getTitle() : "(" + content.getFiles().size() + ")Items");
+				// DragView
+				JavaFXTools.setPlainTextDragView(db, tableView.getSelectionModel().getSelectedItem().getTitle());
 				
 				db.setContent(content);
 			}
@@ -325,11 +347,11 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	/**
 	 * @return the tableView
 	 */
-	public TableView<DropboxDownloadedFile> getTableView() {
+	public TableView<DropboxFile> getTableView() {
 		return tableView;
 	}
 	
-	public TableViewSelectionModel<DropboxDownloadedFile> getSelectionModel() {
+	public TableViewSelectionModel<DropboxFile> getSelectionModel() {
 		return tableView.getSelectionModel();
 	}
 	
@@ -338,13 +360,6 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	 */
 	public InlineCssTextArea getDetailCssTextArea() {
 		return detailCssTextArea;
-	}
-	
-	/**
-	 * @return the observableList
-	 */
-	public ObservableList<DropboxDownloadedFile> getObservableList() {
-		return observableList;
 	}
 	
 }

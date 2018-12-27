@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.downloads;
+package main.java.com.goxr3plus.xr3player.dropbox.downloads;
 
 import java.io.File;
 import java.io.IOException;

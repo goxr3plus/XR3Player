@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
+package main.java.com.goxr3plus.xr3player.dropbox.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;

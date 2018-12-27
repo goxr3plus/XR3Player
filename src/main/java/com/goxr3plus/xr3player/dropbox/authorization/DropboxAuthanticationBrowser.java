@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.authorization;
+package main.java.com.goxr3plus.xr3player.dropbox.authorization;
 
 import java.io.IOException;
 

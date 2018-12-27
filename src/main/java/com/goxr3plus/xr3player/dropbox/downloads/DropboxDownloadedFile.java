@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.remote.dropbox.downloads;
+package main.java.com.goxr3plus.xr3player.dropbox.downloads;
 
 import com.dropbox.core.v2.files.FolderMetadata;
 
@@ -10,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
+import main.java.com.goxr3plus.xr3player.dropbox.services.DownloadService;
 
 /**
  * This class is used as super class for Audio and Video classes.

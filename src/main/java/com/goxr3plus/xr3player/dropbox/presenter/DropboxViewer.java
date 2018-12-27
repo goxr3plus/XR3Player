@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.remote.dropbox.presenter;
+package main.java.com.goxr3plus.xr3player.dropbox.presenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,12 +44,12 @@ import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.authorization.DropboxAuthanticationBrowser;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.downloads.DropboxDownloadedFile;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.AccountsService;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DownloadService;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService;
-import main.java.com.goxr3plus.xr3player.remote.dropbox.services.DropboxService.DropBoxOperation;
+import main.java.com.goxr3plus.xr3player.dropbox.authorization.DropboxAuthanticationBrowser;
+import main.java.com.goxr3plus.xr3player.dropbox.downloads.DropboxDownloadedFile;
+import main.java.com.goxr3plus.xr3player.dropbox.services.AccountsService;
+import main.java.com.goxr3plus.xr3player.dropbox.services.DownloadService;
+import main.java.com.goxr3plus.xr3player.dropbox.services.DropboxService;
+import main.java.com.goxr3plus.xr3player.dropbox.services.DropboxService.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.smartcontroller.media.FileCategory;
 
 public class DropboxViewer extends StackPane {
