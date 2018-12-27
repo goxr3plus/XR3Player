@@ -144,6 +144,7 @@
 	<!-- Dependencies -->
 
 	<dependencies>
+	
 		<!-- ikonli -->
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
@@ -180,18 +181,21 @@
 			<artifactId>ikonli-icomoon-pack</artifactId>
 			<version>${ikonli.version}</version>
 		</dependency>
+		
 		<!-- Image4j -->
 		<dependency>
 			<groupId>com.github.imcdonagh</groupId>
 			<artifactId>image4j</artifactId>
 			<version>0.7.2</version>
 		</dependency>
+		
 		<!-- CHROMIUM BROWSER -->
 		<dependency>
 			<groupId>com.teamdev.jxbrowser</groupId>
 			<artifactId>jxbrowser-win64</artifactId>
-			<version>6.22</version>
+			<version>6.22.1</version>
 		</dependency>
+
 		<!-- JAVAFX GRAPHICS LIBRARIES -->
 		<dependency>
 			<groupId>org.controlsfx</groupId>
@@ -208,18 +212,22 @@
 			<artifactId>richtextfx</artifactId>
 			<version>0.9.2</version>
 		</dependency>
+
+		<!-- JNative Hook -->
 		<dependency>
 			<groupId>com.1stleg</groupId>
 			<artifactId>jnativehook</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-		<!-- DATABASE DRIVERS -->
+
+		<!-- SQLITE -->
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.25.2</version>
 		</dependency>
-		<!-- ETC LIBRARIES -->
+
+		<!-- Apache Commons -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -238,6 +246,8 @@
 		</dependency>
 		<!-- <dependency> <groupId>org.fxmisc.easybind</groupId> <artifactId>easybind</artifactId> 
 			<version>1.0.3</version> </dependency> -->
+
+		<!-- JSOUP -->
 		<dependency>
 			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
@@ -246,6 +256,7 @@
 		</dependency>
 		<!-- <dependency> <groupId>com.github.cliftonlabs</groupId> <artifactId>json-simple</artifactId> 
 			<version>3.0.2</version> </dependency> -->
+
 		<!-- JSON SUPPORT -->
 		<dependency>
 			<groupId>org.json</groupId>
@@ -254,12 +265,14 @@
 		</dependency>
 		<!-- <dependency> <groupId>com.github.vatbub</groupId> <artifactId>mslinks</artifactId> 
 			<version>1.0.4</version> </dependency> -->
+
 		<!-- JAVA-GOOGLE-SPEECH-API -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>java-google-speech-api</artifactId>
 			<version>V2.1</version>
 		</dependency>
+
 		<!-- AUDIO TAG READERS -->
 		<dependency>
 			<groupId>com.mpatric</groupId>
@@ -271,6 +284,7 @@
 			<artifactId>jaudiotagger</artifactId>
 			<version>V2.2.6</version>
 		</dependency>
+
 		<!-- AUDIO SUPPORT -->
 		<dependency>
 			<groupId>com.googlecode.soundlibs</groupId>
@@ -292,7 +306,6 @@
 			<artifactId>tritonus-share</artifactId>
 			<version>0.3.7.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/tritonus-all -->
 		<dependency>
 			<groupId>com.googlecode.soundlibs</groupId>
 			<artifactId>tritonus-all</artifactId>
@@ -309,12 +322,14 @@
 		<!-- <dependency> <groupId>com.FX-BorderlessScene</groupId> <artifactId>FX-BorderlessScene</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/FX-BorderlessScene-2.0.0.jar</systemPath> 
 			</dependency> -->
+
 		<!-- Dropbox -->
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
-			<version>3.0.10</version>
+			<version>3.0.11</version>
 		</dependency>
+
 		<!-- Plularizer -->
 		<dependency>
 			<groupId>org.atteo</groupId>
@@ -349,10 +364,7 @@
 		</dependency>
 
 		<!-- XR3Converter -->
-<!-- 		<dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>XR3Converter</artifactId>
-			<version>V3.1</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>XR3Converter</artifactId> 
+			<version>V3.1</version> </dependency> -->
 	</dependencies>
 </project>
