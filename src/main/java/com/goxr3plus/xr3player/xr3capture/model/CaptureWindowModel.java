@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.xr3capture.model;
+package main.java.com.goxr3plus.xr3player.xr3capture.model;
 
 import java.util.Random;
 

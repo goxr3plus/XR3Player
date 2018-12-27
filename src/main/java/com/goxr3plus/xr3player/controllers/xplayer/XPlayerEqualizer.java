@@ -20,8 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.custom.DJFilter;
-import main.java.com.goxr3plus.xr3player.application.custom.DJFilterListener;
+import main.java.com.goxr3plus.xr3player.controllers.custom.DJFilter;
+import main.java.com.goxr3plus.xr3player.controllers.custom.DJFilterListener;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**

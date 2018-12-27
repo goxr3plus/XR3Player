@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.application.xr3capture;
+package main.java.com.goxr3plus.xr3player.xr3capture;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -34,10 +34,10 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.xr3capture.model.CaptureWindowModel;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
+import main.java.com.goxr3plus.xr3player.xr3capture.model.CaptureWindowModel;
 
 /**
  * This is the Window which is used from the user to draw the rectangle representing an area on the screen to be captured.

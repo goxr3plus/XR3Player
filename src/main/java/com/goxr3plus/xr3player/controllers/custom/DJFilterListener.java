@@ -1,7 +1,7 @@
 /*
  * GOXR3PLUS STUDIO PROFESSIONAL COMP. R
  */
-package main.java.com.goxr3plus.xr3player.application.custom;
+package main.java.com.goxr3plus.xr3player.controllers.custom;
 
 /**
  * The listener interface for receiving DJFilter events.

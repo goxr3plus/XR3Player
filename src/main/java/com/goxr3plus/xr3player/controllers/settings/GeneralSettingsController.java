@@ -16,7 +16,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.custom.Marquee;
+import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 

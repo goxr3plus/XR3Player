@@ -67,7 +67,7 @@ public class DropboxService extends Service<Boolean> {
 	 * 
 	 * @param dropBoxViewer
 	 */
-	public DropboxService(DropboxViewer dropBoxViewer) {
+	public DropboxService(final DropboxViewer dropBoxViewer) {
 		this.dropBoxViewer = dropBoxViewer;
 		this.searchCacheService = new SearchCacheService(dropBoxViewer);
 		
@@ -95,7 +95,7 @@ public class DropboxService extends Service<Boolean> {
 	 * @param path
 	 *            The path to follow and open the Tree
 	 */
-	public void refresh(String path) {
+	public void refresh(final String path) {
 		this.currentPath = path;
 		this.operation = DropBoxOperation.REFRESH;
 		
@@ -117,7 +117,7 @@ public class DropboxService extends Service<Boolean> {
 	 * 
 	 * @param searchWord
 	 */
-	public void search(String searchWord) {
+	public void search(final String searchWord) {
 		this.searchWord = searchWord.toLowerCase();
 		this.operation = DropBoxOperation.SEARCH;
 		
@@ -134,7 +134,7 @@ public class DropboxService extends Service<Boolean> {
 	/**
 	 * After calling this method the Service will find the selected file or files and delete them from Dropbox Account
 	 */
-	public void delete(DropBoxOperation operation) {
+	public void delete(final DropBoxOperation operation) {
 		this.operation = operation;
 		
 		//RefreshLabel
@@ -150,7 +150,7 @@ public class DropboxService extends Service<Boolean> {
 	 * @param folderName
 	 *            The new folder name
 	 */
-	public void createFolder(String folderName) {
+	public void createFolder(final String folderName) {
 		this.folderName = folderName;
 		this.operation = DropBoxOperation.CREATE_FOLDER;
 		
@@ -170,7 +170,7 @@ public class DropboxService extends Service<Boolean> {
 	 *            newPath of file
 	 * 
 	 */
-	public void rename(DropboxFile dropboxFile , String newPath) {
+	public void rename(final DropboxFile dropboxFile , final String newPath) {
 		this.dropboxFile = dropboxFile;
 		this.newPath = newPath;
 		this.operation = DropBoxOperation.RENAME;
@@ -206,11 +206,11 @@ public class DropboxService extends Service<Boolean> {
 						}
 						
 						// Get current account info
-						FullAccount account = client.users().getCurrentAccount();
+						final FullAccount account = client.users().getCurrentAccount();
 						Platform.runLater(() -> dropBoxViewer.getTopMenuButton().setText(" " + account.getName().getDisplayName()));
 						
 						//List all the files brooooo!
-						ObservableList<DropboxFile> observableList = FXCollections.observableArrayList();
+						final ObservableList<DropboxFile> observableList = FXCollections.observableArrayList();
 						listAllFiles(currentPath, observableList, false, true);
 						
 						//Check if folder is empty
@@ -233,7 +233,7 @@ public class DropboxService extends Service<Boolean> {
 					} else if (operation == DropBoxOperation.DELETE) {
 						
 						//Delete all the selected files and folders
-						List<DropboxFile> list = dropBoxViewer.getDropboxFilesTableViewer().getSelectionModel().getSelectedItems().stream().collect(Collectors.toList());
+						final List<DropboxFile> list = dropBoxViewer.getDropboxFilesTableViewer().getSelectionModel().getSelectedItems().stream().collect(Collectors.toList());
 						
 						//Remove from the TreeView one by one
 						list.forEach(item -> {
@@ -268,8 +268,8 @@ public class DropboxService extends Service<Boolean> {
 						ObservableList<DropboxFile> observableList;
 						
 						//CountDown Latch
-						CountDownLatch countDown = new CountDownLatch(1);
-						boolean[] searchCacheServiceIsRunning = { false };
+						final CountDownLatch countDown = new CountDownLatch(1);
+						final boolean[] searchCacheServiceIsRunning = { false };
 						Platform.runLater(() -> {
 							searchCacheServiceIsRunning[0] = searchCacheService.isRunning();
 							countDown.countDown();
@@ -324,7 +324,7 @@ public class DropboxService extends Service<Boolean> {
 						});
 						
 					}
-				} catch (ListFolderErrorException ex) {
+				} catch (final ListFolderErrorException ex) {
 					ex.printStackTrace();
 					
 					//Show to user about the error
@@ -334,7 +334,7 @@ public class DropboxService extends Service<Boolean> {
 					//Check the Internet Connection
 					checkConnection();
 					
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					ex.printStackTrace();
 					
 					//Check the Internet Connection
@@ -376,16 +376,16 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
-			public void listAllFiles(String path , ObservableList<DropboxFile> children , boolean recursive , boolean appendToMap) throws DbxException {
+			public void listAllFiles(final String path , final ObservableList<DropboxFile> children , final boolean recursive , final boolean appendToMap) throws DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
 				while (true) {
-					for (Metadata metadata : result.getEntries()) {
+					for (final Metadata metadata : result.getEntries()) {
 						if (metadata instanceof DeletedMetadata) { // Deleted
 							//	children.remove(metadata.getPathLower())
 						} else if (metadata instanceof FolderMetadata) { // Folder
-							String folder = metadata.getPathLower();
+							final String folder = metadata.getPathLower();
 							//String parent = new File(metadata.getPathLower()).getParent().replace("\\", "/")
 							if (appendToMap)
 								children.add(new DropboxFile(metadata));
@@ -412,7 +412,7 @@ public class DropboxService extends Service<Boolean> {
 					try {
 						result = client.files().listFolderContinue(result.getCursor());
 						//System.out.println("Entered result next")
-					} catch (ListFolderContinueErrorException ex) {
+					} catch (final ListFolderContinueErrorException ex) {
 						ex.printStackTrace();
 					}
 				}
@@ -427,16 +427,16 @@ public class DropboxService extends Service<Boolean> {
 			 * @param children
 			 * @throws DbxException
 			 */
-			public void search(String path , ObservableList<DropboxFile> children) throws DbxException {
+			public void search(final String path , final ObservableList<DropboxFile> children) throws DbxException {
 				
 				ListFolderResult result = client.files().listFolder(path);
 				
 				while (true) {
-					for (Metadata metadata : result.getEntries()) {
+					for (final Metadata metadata : result.getEntries()) {
 						if (metadata instanceof DeletedMetadata) { // Deleted
 							//	children.remove(metadata.getPathLower())
 						} else if (metadata instanceof FolderMetadata) { // Folder
-							String folder = metadata.getPathLower();
+							final String folder = metadata.getPathLower();
 							if (metadata.getName().toLowerCase().contains(searchWord))
 								children.add(new DropboxFile(metadata));
 							
@@ -467,7 +467,7 @@ public class DropboxService extends Service<Boolean> {
 					try {
 						result = client.files().listFolderContinue(result.getCursor());
 						//System.out.println("Entered result next")
-					} catch (ListFolderContinueErrorException ex) {
+					} catch (final ListFolderContinueErrorException ex) {
 						ex.printStackTrace();
 					}
 				}
@@ -480,7 +480,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @return
 			 * 
 			 */
-			public ObservableList<DropboxFile> cachedSearch(List<Metadata> cachedList) {
+			public ObservableList<DropboxFile> cachedSearch(final List<Metadata> cachedList) {
 				
 				//Find matching patterns
 				return cachedList.stream().filter(metadata -> metadata.getName().toLowerCase().contains(searchWord)).map(DropboxFile::new)
@@ -494,7 +494,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @param path
 			 *            The path of the Dropbox File or Folder
 			 */
-			public boolean delete(String path) {
+			public boolean delete(final String path) {
 				try {
 					if (operation == DropBoxOperation.DELETE)
 						client.files().deleteV2(path);
@@ -506,7 +506,7 @@ public class DropboxService extends Service<Boolean> {
 							NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
 					
 					return true;
-				} catch (DbxException dbxe) {
+				} catch (final DbxException dbxe) {
 					dbxe.printStackTrace();
 					
 					//Show message to the User
@@ -523,9 +523,9 @@ public class DropboxService extends Service<Boolean> {
 			 * @param oldPath
 			 * @param newPath
 			 */
-			public boolean rename(String oldPath , String newPath) {
+			public boolean rename(final String oldPath , final String newPath) {
 				try {
-					RelocationResult result = client.files().moveV2(oldPath, newPath);
+					final RelocationResult result = client.files().moveV2(oldPath, newPath);
 					
 					//Run on JavaFX Thread
 					Platform.runLater(() -> {
@@ -533,7 +533,7 @@ public class DropboxService extends Service<Boolean> {
 						//Show message
 						ActionTool.showNotification("Rename Successful",
 								"Succesfully renamed file :\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ " + result.getMetadata().getName() + " ]",
-								Duration.millis(2500), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64));
+								Duration.millis(2500), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64));
 						
 						//Return the previous name
 						dropboxFile.setMetadata(result.getMetadata());
@@ -543,7 +543,7 @@ public class DropboxService extends Service<Boolean> {
 					});
 					
 					return true;
-				} catch (DbxException dbxe) {
+				} catch (final DbxException dbxe) {
 					dbxe.printStackTrace();
 					
 					//Run on JavaFX Thread
@@ -568,18 +568,18 @@ public class DropboxService extends Service<Boolean> {
 			 * @param path
 			 *            Folder name
 			 */
-			public boolean createFolder(String path) {
+			public boolean createFolder(final String path) {
 				try {
 					
 					//Create new folder
-					CreateFolderResult result = client.files().createFolderV2(path, true);
+					final CreateFolderResult result = client.files().createFolderV2(path, true);
 					
 					//Show message to the User
 					Platform.runLater(() -> ActionTool.showNotification("New folder created", "Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
-							Duration.millis(2000), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
+							Duration.millis(2000), NotificationType.SIMPLE, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64)));
 					
 					return true;
-				} catch (DbxException dbxe) {
+				} catch (final DbxException dbxe) {
 					dbxe.printStackTrace();
 					
 					//Show message to the User

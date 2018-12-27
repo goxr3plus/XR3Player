@@ -34,7 +34,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.custom.Marquee;
+import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;

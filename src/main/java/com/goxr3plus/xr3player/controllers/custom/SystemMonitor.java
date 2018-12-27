@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application.custom;
+package main.java.com.goxr3plus.xr3player.controllers.custom;
 
 import java.io.IOException;
 import java.util.logging.Level;

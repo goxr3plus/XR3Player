@@ -5,16 +5,11 @@ package main.java.com.goxr3plus.xr3player.models.smartcontroller;
 
 import java.io.File;
 
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.Dragboard;
-import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
@@ -69,7 +64,7 @@ public class Audio extends Media {
 	 * @param genre
 	 *            The genre of the Media <b> see the Genre class for more </b>
 	 */
-	public Audio(String path, double stars, int timesPlayed, String dateImported, String hourImported, Genre genre, int number) {
+	public Audio(final String path, final double stars, final int timesPlayed, final String dateImported, final String hourImported, final Genre genre, final int number) {
 		super(path, stars, timesPlayed, dateImported, hourImported, genre, number);
 	}
 	
@@ -81,7 +76,7 @@ public class Audio extends Media {
 	 * @param controller
 	 *            the controller
 	 */
-	public void playOnDeck(int deck , SmartController controller) {
+	public void playOnDeck(final int deck , final SmartController controller) {
 		// if (Main.xPlayersList.getXPlayer(deck).playSong(this))
 		// setTimesPlayed(getTimesPlayed() + 1, controller);
 		Main.xPlayersList.getXPlayerController(deck).playSong(getFilePath());
@@ -95,7 +90,7 @@ public class Audio extends Media {
 	 *            the new drag view
 	 */
 	@Override
-	public void setDragView(Dragboard db) {
+	public void setDragView(final Dragboard db) {
 		JavaFXTools.setDragView(db, this);
 	}
 	
@@ -106,7 +101,7 @@ public class Audio extends Media {
 	 *            the category
 	 * @return the category
 	 */
-	public int getCategory(int category) {
+	public int getCategory(final int category) {
 		switch (category) {
 			case 1:
 				return getTimesPlayed();
@@ -140,7 +135,7 @@ public class Audio extends Media {
 	 * @return the album image fit
 	 */
 	@Override
-	public Image getAlbumImageFit(int width , int height) {
+	public Image getAlbumImageFit(final int width , final int height) {
 		return !"mp3".equals(getFileType()) || !new File(getFilePath()).exists() ? null : InfoTool.getAudioAlbumImage(getFilePath(), width, height);
 	}
 	

@@ -50,8 +50,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
+import main.java.com.goxr3plus.xr3player.application.database.DatabaseManager;
+import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
-import main.java.com.goxr3plus.xr3player.application.xr3capture.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
 import main.java.com.goxr3plus.xr3player.controllers.djmode.DJMode;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadsTableViewer;
@@ -92,8 +93,6 @@ import main.java.com.goxr3plus.xr3player.controllers.windows.RenameWindow;
 import main.java.com.goxr3plus.xr3player.controllers.windows.StarWindow;
 import main.java.com.goxr3plus.xr3player.controllers.windows.UpdateWindow;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayersList;
-import main.java.com.goxr3plus.xr3player.database.DatabaseManager;
-import main.java.com.goxr3plus.xr3player.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.models.lists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.models.lists.PlayedMediaList;
 import main.java.com.goxr3plus.xr3player.models.lists.StarredMediaList;
@@ -104,6 +103,7 @@ import main.java.com.goxr3plus.xr3player.utils.general.Util;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
+import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * 
