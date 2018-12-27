@@ -25,18 +25,18 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.modes.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.application.modes.loginmode.User;
-import main.java.com.goxr3plus.xr3player.application.settings.ApplicationSettingsLoader;
-import main.java.com.goxr3plus.xr3player.application.tools.fx.NotificationType;
-import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.application.tools.general.Util;
-import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.smartcontroller.presenter.SmartController;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.MediaUpdaterService;
-import main.java.com.goxr3plus.xr3player.smartcontroller.services.Operation;
-import main.java.com.goxr3plus.xr3player.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.application.enums.Operation;
+import main.java.com.goxr3plus.xr3player.application.xplayer.presenter.XPlayerController;
+import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
+import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
+import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsLoader;
+import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
+import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.Util;
+import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
 
 /**
  * This class is managing the database of the application.

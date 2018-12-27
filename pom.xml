@@ -144,7 +144,7 @@
 	<!-- Dependencies -->
 
 	<dependencies>
-	
+
 		<!-- ikonli -->
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
@@ -181,14 +181,14 @@
 			<artifactId>ikonli-icomoon-pack</artifactId>
 			<version>${ikonli.version}</version>
 		</dependency>
-		
+
 		<!-- Image4j -->
 		<dependency>
 			<groupId>com.github.imcdonagh</groupId>
 			<artifactId>image4j</artifactId>
 			<version>0.7.2</version>
 		</dependency>
-		
+
 		<!-- CHROMIUM BROWSER -->
 		<dependency>
 			<groupId>com.teamdev.jxbrowser</groupId>
@@ -244,8 +244,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>org.fxmisc.easybind</groupId> <artifactId>easybind</artifactId> 
-			<version>1.0.3</version> </dependency> -->
 
 		<!-- JSOUP -->
 		<dependency>
@@ -263,8 +261,6 @@
 			<artifactId>json</artifactId>
 			<version>20180130</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.github.vatbub</groupId> <artifactId>mslinks</artifactId> 
-			<version>1.0.4</version> </dependency> -->
 
 		<!-- JAVA-GOOGLE-SPEECH-API -->
 		<dependency>
@@ -287,29 +283,9 @@
 
 		<!-- AUDIO SUPPORT -->
 		<dependency>
-			<groupId>com.googlecode.soundlibs</groupId>
-			<artifactId>mp3spi</artifactId>
-			<version>1.9.5.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jflac</groupId>
-			<artifactId>jflac-codec</artifactId>
-			<version>1.5.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.Trilarion</groupId>
-			<artifactId>java-vorbis-support</artifactId>
-			<version>v1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.soundlibs</groupId>
-			<artifactId>tritonus-share</artifactId>
-			<version>0.3.7.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.soundlibs</groupId>
-			<artifactId>tritonus-all</artifactId>
-			<version>0.3.7.2</version>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>java-stream-player</artifactId>
+			<version>V8.0.0</version>
 		</dependency>
 
 		<!-- FX-BorderlessScene -->

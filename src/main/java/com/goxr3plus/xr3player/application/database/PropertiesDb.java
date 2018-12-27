@@ -13,8 +13,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool;
-import main.java.com.goxr3plus.xr3player.application.tools.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**
  * This class is saving all the XR3Player Settings to a property file

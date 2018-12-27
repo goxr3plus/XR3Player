@@ -7,7 +7,7 @@ import java.io.File;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.application.tools.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * Get the progress of Vacuum Operation.
