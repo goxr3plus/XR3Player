@@ -279,6 +279,7 @@
 		</dependency>
 
 		<!-- AUDIO SUPPORT -->
+		<!-- https://github.com/goxr3plus/java-stream-player -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>java-stream-player</artifactId>
@@ -286,15 +287,12 @@
 		</dependency>
 
 		<!-- FX-BorderlessScene -->
+		<!-- https://github.com/goxr3plus/FX-BorderlessScene -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>FX-BorderlessScene</artifactId>
 			<version>V3.1.0</version>
 		</dependency>
-		<!-- Locally Testing FX-BorderlessScene -->
-		<!-- <dependency> <groupId>com.FX-BorderlessScene</groupId> <artifactId>FX-BorderlessScene</artifactId> 
-			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/libraries/FX-BorderlessScene-2.0.0.jar</systemPath> 
-			</dependency> -->
 
 		<!-- Dropbox -->
 		<dependency>
@@ -321,6 +319,7 @@
 			<artifactId>jave-core</artifactId>
 			<version>2.4.5</version>
 		</dependency>
+
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
