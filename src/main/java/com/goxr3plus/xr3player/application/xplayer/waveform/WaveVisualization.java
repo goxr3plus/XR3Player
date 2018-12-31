@@ -172,34 +172,6 @@ public class WaveVisualization extends WaveFormPane {
 
 		}
 
-		/**
-		 * Process the amplitudes
-		 * 
-		 * @param sourcePcmData
-		 * @return An array with amplitudes
-		 */
-		private float[] processAmplitudes(final int[] sourcePcmData) {
-			try {
-				final int width = WaveVisualization.this.width; // the width of the resulting waveform panel
-				final float[] waveData = new float[width];
-				final int samplesPerPixel = sourcePcmData.length / width;
-
-				for (int w = 0; w < width; w++) {
-					float nValue = 0.0f;
-
-					for (int s = 0; s < samplesPerPixel; s++) {
-						nValue += (Math.abs(sourcePcmData[w * samplesPerPixel + s]) / 65536.0f);
-					}
-					nValue /= samplesPerPixel;
-					waveData[w] = nValue;
-				}
-				return waveData;
-			} catch (final Exception ex) {
-				ex.printStackTrace();
-				return null;
-			}
-		}
-
 		@Override
 		public void stop() {
 			super.stop();
