@@ -16,26 +16,21 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.windows.FileAndFolderChooser;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
@@ -363,31 +358,6 @@ public final class JavaFXTool {
 			icon.setIconSize(size);
 
 		return icon;
-	}
-
-	/**
-	 * This method is used for the drag view of Media
-	 * 
-	 * @param dragBoard
-	 * @param media
-	 */
-	public static void setDragView(final Dragboard dragBoard, final Media media) {
-		final SnapshotParameters params = new SnapshotParameters();
-		params.setFill(Color.TRANSPARENT);
-		dragBoard.setDragView(Main.dragViewer.updateMedia(media).snapshot(params, new WritableImage(150, 150)), 50, 0);
-	}
-
-	/**
-	 * This view is used for plain text drag view
-	 * 
-	 * @param dragBoard
-	 * @param title
-	 */
-	public static void setPlainTextDragView(final Dragboard dragBoard, final String title) {
-		final SnapshotParameters params = new SnapshotParameters();
-		params.setFill(Color.TRANSPARENT);
-		dragBoard.setDragView(Main.dragViewer.updateDropboxMedia(title).snapshot(params, new WritableImage(150, 150)),
-				50, 0);
 	}
 
 	/**

@@ -50,6 +50,7 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.javafx.DragViewTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -396,10 +397,10 @@ public class MediaTableViewer extends StackPane {
 
 				// Single Drag and Drop ?
 				if (content.getFiles().size() == 1)
-					JavaFXTool.setDragView(db, tableView.getSelectionModel().getSelectedItem());
+					DragViewTool.setDragView(db, tableView.getSelectionModel().getSelectedItem());
 				// Multiple Drag and Drop ?
 				else {
-					JavaFXTool.setPlainTextDragView(db, "(" + content.getFiles().size() + ")Items");
+					DragViewTool.setPlainTextDragView(db, "(" + content.getFiles().size() + ")Items");
 				}
 
 				db.setContent(content);
