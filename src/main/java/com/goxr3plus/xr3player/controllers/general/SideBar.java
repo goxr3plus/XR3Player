@@ -160,20 +160,20 @@ public class SideBar extends StackPane {
 	public SideBar() {
 		
 		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "SideBar.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
 		
 	}
 	
 	//private TranslateTransition translateX = new TranslateTransition(Duration.millis(200), this)
-	private ScaleTransition scaleX = new ScaleTransition(Duration.millis(100), this);
+	private final ScaleTransition scaleX = new ScaleTransition(Duration.millis(100), this);
 	private double preferredWidth;
 	
 	/**
@@ -256,7 +256,7 @@ public class SideBar extends StackPane {
 	 * 
 	 * @param orientation
 	 */
-	public void changeSide(NodeOrientation orientation) {
+	public void changeSide(final NodeOrientation orientation) {
 		
 		Main.root.getChildren().remove(this);
 		
@@ -275,7 +275,7 @@ public class SideBar extends StackPane {
 	 * 
 	 * @param b
 	 */
-	public void prepareForLoginMode(boolean b) {
+	public void prepareForLoginMode(final boolean b) {
 		if (b) {
 			applicationSettings.setDisable(true);
 			applicationConsole.setDisable(true);
@@ -342,7 +342,7 @@ public class SideBar extends StackPane {
 			new Thread(() -> {
 				try {
 					Runtime.getRuntime().exec("cmd /c start taskmgr");
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					e.printStackTrace();
 					//Show Message to User
 					ActionTool.showNotification("Failed Opening Task Manager", "Failed Opening default Task Manager", Duration.millis(2000), NotificationType.ERROR);
@@ -393,7 +393,7 @@ public class SideBar extends StackPane {
 		userImageView.setOnMouseReleased(m -> Main.userInfoMode.getUser().changeUserImage());
 		
 		// Clip
-		Rectangle clip = new Rectangle();
+		final Rectangle clip = new Rectangle();
 		clip.widthProperty().bind(stackedFontIcon.heightProperty());
 		clip.heightProperty().bind(stackedFontIcon.heightProperty());
 		clip.setArcWidth(90);
@@ -424,7 +424,7 @@ public class SideBar extends StackPane {
 		
 		//MainModeVolumeButton
 		mainModeVolumeButton.setOnAction(a -> {
-			boolean mute = !mainModeStackedFont.getChildren().get(0).isVisible();
+			final boolean mute = !mainModeStackedFont.getChildren().get(0).isVisible();
 			Main.xPlayersList.getXPlayerController(0).getMuteButton().setSelected(mute);
 			mainModeStackedFont.getChildren().get(1).setVisible(!mute);
 		});
@@ -432,7 +432,7 @@ public class SideBar extends StackPane {
 		
 		//DjModeVolumeButton
 		djModeVolumeButton.setOnAction(a -> {
-			boolean mute = !djModeStackedFont.getChildren().get(0).isVisible();
+			final boolean mute = !djModeStackedFont.getChildren().get(0).isVisible();
 			Main.xPlayersList.getXPlayerController(1).getMuteButton().setSelected(mute);
 			Main.xPlayersList.getXPlayerController(2).getMuteButton().setSelected(mute);
 			djModeStackedFont.getChildren().get(1).setVisible(!mute);
@@ -441,7 +441,7 @@ public class SideBar extends StackPane {
 		
 		//BrowserVolumeButton
 		browserVolumeButton.setOnAction(a -> {
-			boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
+			final boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
 			//Mute or Unmute webrowser tabs
 			Main.webBrowser.getTabPane().getTabs().forEach(tab -> ( (WebBrowserTabController) tab.getContent() ).getBrowser().setAudioMuted(mute));
 			browserStackedFont.getChildren().get(1).setVisible(!mute);
@@ -459,7 +459,7 @@ public class SideBar extends StackPane {
 						"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
 						null, Main.window)) {
 			
-			File file = Main.specialChooser.selectDBFile(Main.window);
+			final File file = Main.specialChooser.selectDBFile(Main.window);
 			if (file != null) {
 				// Change the Scene View
 				Main.updateScreen.setVisible(true);
@@ -477,7 +477,7 @@ public class SideBar extends StackPane {
 	public void exportDatabase() {
 		if (!zipper.isRunning() && !unZipper.isRunning() && ( Main.libraryMode.openedLibrariesViewer == null || Main.libraryMode.openedLibrariesViewer.isFree(true) )) {
 			
-			File file = Main.specialChooser.exportDBFile(Main.window);
+			final File file = Main.specialChooser.exportDBFile(Main.window);
 			if (file != null) {
 				
 				// Change the Scene View

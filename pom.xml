@@ -320,6 +320,19 @@
 			<version>2.4.5</version>
 		</dependency>
 
+		<!-- XR3Capture -->
+		<dependency>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>XR3Capture</artifactId>
+			<version>V101</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- JAVA NATIVE CODE FOR CONTROLLING HARDWARE -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>

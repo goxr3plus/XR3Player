@@ -50,6 +50,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
+import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3player.application.database.DatabaseManager;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
@@ -98,12 +99,11 @@ import main.java.com.goxr3plus.xr3player.models.lists.PlayedMediaList;
 import main.java.com.goxr3plus.xr3player.models.lists.StarredMediaList;
 import main.java.com.goxr3plus.xr3player.services.database.VacuumProgressService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.Util;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
-import main.java.com.goxr3plus.xr3player.xr3capture.CaptureWindow;
 
 /**
  * 
