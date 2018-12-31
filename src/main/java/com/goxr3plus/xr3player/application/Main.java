@@ -331,8 +331,8 @@ public class Main extends Application {
 		// --------Window---------
 		window = primaryStage;
 		window.setTitle("XR3Player V." + APPLICATION_VERSION);
-		window.setWidth(InfoTool.getVisualScreenWidth() * 0.95);
-		window.setHeight(InfoTool.getVisualScreenHeight() * 0.95);
+		window.setWidth(JavaFXTools.getVisualScreenWidth() * 0.95);
+		window.setHeight(JavaFXTools.getVisualScreenHeight() * 0.95);
 		window.centerOnScreen();
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();

@@ -1221,7 +1221,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public void updateEmotion(final Node node) {
 
 		// Show the Window
-		Main.emotionsWindow.show(InfoTool.getFileName(xPlayerModel.getSongPath()), node);
+		Main.emotionsWindow.show(IOTool.getFileName(xPlayerModel.getSongPath()), node);
 
 		// Listener
 		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
@@ -2199,7 +2199,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				// WaveFormJob.AMPLITUDES_AND_WAVEFORM);
 
 				// Marquee Text
-				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
+				mediaFileMarquee.setText(IOTool.getFileName(xPlayerModel.songPathProperty().get()));
 
 				// Notification
 				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected()) {
@@ -2210,7 +2210,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					// Show Notification
 					if (!discIsDragging)
 						ActionTool.showNotification("Playing on deck " + (getKey() + 1),
-								InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+								IOTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
 								NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60)
 										: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 				}

@@ -26,6 +26,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContext
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
@@ -137,7 +138,7 @@ public class TreeViewContextMenu extends ContextMenu {
 		rename.setVisible(false);
 
 		// Update ShopContextMenu
-		shopContextMenu.setMediaTitle(InfoTool.getFileTitle(treeItem.getAbsoluteFilePath()));
+		shopContextMenu.setMediaTitle(IOTool.getFileTitle(treeItem.getAbsoluteFilePath()));
 
 		// Update PlayContextMenu
 		playContextMenu.setAbsoluteMediaPath(treeItem.getAbsoluteFilePath());

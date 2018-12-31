@@ -1,6 +1,6 @@
 package main.java.com.goxr3plus.xr3player.models.lists;
 
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * Just to keep instances of Media for PlayedMediaList
@@ -17,7 +17,7 @@ public class FakeMedia {
 
 	public FakeMedia(String path, double stars, int timesPlayed) {
 		setPath(path);
-		setFileName(InfoTool.getFileName(path));
+		setFileName(IOTool.getFileName(path));
 		setStars(stars);
 		setTimesPlayed(timesPlayed);
 	}

@@ -12,6 +12,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**
@@ -119,9 +120,9 @@ public class FileAndFolderChooser {
 	public File prepareToExportImage(Stage window, String imagePath) {
 		imageFileChooser.getExtensionFilters().clear();
 		imageFileChooser.setTitle("Type a File Name and press save");
-		imageFileChooser.setInitialFileName(InfoTool.getFileTitle(imagePath));
+		imageFileChooser.setInitialFileName(IOTool.getFileTitle(imagePath));
 		imageFileChooser.getExtensionFilters()
-				.add(new FileChooser.ExtensionFilter("Extension", "*." + InfoTool.getFileExtension(imagePath)));
+				.add(new FileChooser.ExtensionFilter("Extension", "*." + IOTool.getFileExtension(imagePath)));
 		File file = imageFileChooser.showSaveDialog(window);
 		if (file != null) {
 			// Set the property to the directory of the chosenFile so the

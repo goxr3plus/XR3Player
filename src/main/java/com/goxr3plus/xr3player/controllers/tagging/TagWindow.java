@@ -192,7 +192,7 @@ public class TagWindow extends StackPane {
 				if (empty) {
 					setText(null);
 				} else {
-					setText(InfoTool.getFileName(item));
+					setText(IOTool.getFileName(item));
 					setTooltip(new Tooltip(item));
 				}
 			}
@@ -319,7 +319,7 @@ public class TagWindow extends StackPane {
 		if (absolutePath != null) {
 
 			// Find file extension
-			String extension = InfoTool.getFileExtension(absolutePath);
+			String extension = IOTool.getFileExtension(absolutePath);
 
 			// Current Tab
 			int currentTabSelected = tabPane.getSelectionModel().getSelectedIndex();

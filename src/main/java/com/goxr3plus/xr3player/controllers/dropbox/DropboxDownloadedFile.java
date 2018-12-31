@@ -10,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.services.dropbox.DownloadService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -42,11 +42,11 @@ public class DropboxDownloadedFile {
 	 */
 	public DropboxDownloadedFile(DownloadService downloadService) {
 		this.downloadService = downloadService;
-		String value = InfoTool.getFileName(downloadService.getLocalFileAbsolutePath());
+		String value = IOTool.getFileName(downloadService.getLocalFileAbsolutePath());
 
 		// ---------------------Init properties------------------------------------
 		title = new SimpleStringProperty(value);
-		extension = new SimpleStringProperty(InfoTool.getFileExtension(value));
+		extension = new SimpleStringProperty(IOTool.getFileExtension(value));
 
 		// progressBox
 		DownloadsProgressBox progressBoxe = new DownloadsProgressBox(this);

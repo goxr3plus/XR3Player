@@ -34,7 +34,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartControllerFiltersMode;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 public class FiltersModeService extends Service<Void> {
 
@@ -356,7 +356,7 @@ public class FiltersModeService extends Service<Void> {
 				// Check file existence , length and extension
 				if (file.exists()
 						&& "mp3".equals(
-								media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath()))
+								media != null ? media.getFileType() : IOTool.getFileExtension(file.getAbsolutePath()))
 						&& file.length() != 0) {
 
 					// MP3File

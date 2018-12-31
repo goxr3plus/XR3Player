@@ -3,8 +3,6 @@ package main.java.com.goxr3plus.xr3player.utils.general;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,7 +26,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.apache.commons.io.FilenameUtils;
 import org.jaudiotagger.audio.mp3.MP3File;
 
 import com.mpatric.mp3agic.ID3v2;
@@ -36,9 +33,9 @@ import com.mpatric.mp3agic.Mp3File;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * Provides useful methods for retrieving informations.
@@ -263,48 +260,6 @@ public final class InfoTool {
 	}
 
 	/**
-	 * Gets the screen width.
-	 *
-	 * @return The screen <b>Width</b> based on the <b> bounds </b> of the Screen.
-	 */
-	public static double getScreenWidth() {
-		return Screen.getPrimary().getBounds().getWidth();
-	}
-
-	/**
-	 * Gets the screen height.
-	 *
-	 * @return The screen <b>Height</b> based on the <b> bounds </b> of the Screen.
-	 */
-	public static double getScreenHeight() {
-		return Screen.getPrimary().getBounds().getHeight();
-	}
-
-	/**
-	 * Gets the visual screen width.
-	 *
-	 * @return The screen <b>Width</b> based on the <b>visual bounds</b> of the
-	 *         Screen.These bounds account for objects in the native windowing
-	 *         system such as task bars and menu bars. These bounds are contained by
-	 *         Screen.bounds.
-	 */
-	public static double getVisualScreenWidth() {
-		return Screen.getPrimary().getVisualBounds().getWidth();
-	}
-
-	/**
-	 * Gets the visual screen height.
-	 *
-	 * @return The screen <b>Height</b> based on the <b>visual bounds</b> of the
-	 *         Screen.These bounds account for objects in the native windowing
-	 *         system such as task bars and menu bars. These bounds are contained by
-	 *         Screen.bounds.
-	 */
-	public static double getVisualScreenHeight() {
-		return Screen.getPrimary().getVisualBounds().getHeight();
-	}
-
-	/**
 	 * Returns the absolute path of the current directory in which the given class
 	 * file is.
 	 * 
@@ -388,32 +343,7 @@ public final class InfoTool {
 		}
 	}
 
-	/**
-	 * Checks for Application Internet connection using Socket and InetSocketAddress
-	 * I combine this method with reachableByPing to check if the Operating System
-	 * is connected to the Internet and this method to check if the application can
-	 * be connected to Internet,
-	 * 
-	 * Because the admin my have blocked internet connection for this Java
-	 * application.
-	 * 
-	 * @param host the host
-	 * @param port the port
-	 * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
-	 */
-	@Deprecated
-	public static boolean isReachableUsingSocket(final String host, final int port) {
-		final InetSocketAddress addr = new InetSocketAddress(host, port);
-
-		// Check if it can be connected
-		try (Socket sock = new Socket()) {
-			sock.connect(addr, 2000);
-			return true;
-		} catch (final IOException ex) {
-			Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
-			return false;
-		}
-	}
+	
 
 	// public Image getDragViewImage(Image image,int width,int height) {
 	// if(image!=null) {
@@ -464,7 +394,7 @@ public final class InfoTool {
 	public static ByteArrayInputStream getAudioAlbumImageRaw(final String absolutePath, final int width,
 			final int height) {
 		// Is it mp3?
-		if ("mp3".equals(getFileExtension(absolutePath)))
+		if ("mp3".equals(IOTool.getFileExtension(absolutePath)))
 			try {
 				final Mp3File song = new Mp3File(absolutePath);
 
@@ -481,106 +411,7 @@ public final class InfoTool {
 
 		return null;// fatal error here
 	}
-
-	/**
-	 * Returns the creation time. The creation time is the time that the file was
-	 * created.
-	 *
-	 * <p>
-	 * If the file system implementation does not support a time stamp to indicate
-	 * the time when the file was created then this method returns an implementation
-	 * specific default value, typically the {@link #lastModifiedTime()
-	 * last-modified-time} or a {@code FileTime} representing the epoch
-	 * (1970-01-01T00:00:00Z).
-	 *
-	 * @param absolutePath The File absolute path
-	 * @return The File Creation Date in String Format
-	 */
-	public static String getFileCreationDate(final String absolutePath) {
-		final File file = new File(absolutePath);
-		// exists?
-		if (!file.exists())
-			return "file missing";
-
-		BasicFileAttributes attr;
-		try {
-			attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-		} catch (final IOException ex) {
-			logger.log(Level.WARNING, ex.getMessage(), ex);
-			return "error";
-		}
-		return (attr.creationTime() + "").replaceAll("T|Z", " ");
-	}
-
-	/**
-	 * Returns the time of last modification.
-	 *
-	 * <p>
-	 * If the file system implementation does not support a time stamp to indicate
-	 * the time of last modification then this method returns an implementation
-	 * specific default value, typically a {@code FileTime} representing the epoch
-	 * (1970-01-01T00:00:00Z).
-	 *
-	 * @param absolutePath The File absolute path
-	 * @return The File Creation Date in String Format
-	 */
-	public static String getFileLastModifiedDate(final String absolutePath) {
-		final File file = new File(absolutePath);
-		// exists?
-		if (!file.exists())
-			return "file missing";
-
-		BasicFileAttributes attr;
-		try {
-			attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-		} catch (final IOException ex) {
-			logger.log(Level.WARNING, ex.getMessage(), ex);
-			return "error";
-		}
-		return (attr.lastModifiedTime() + "").replaceAll("T|Z", " ");
-	}
-
-	/**
-	 * Returns the title of the file for example if file name is <b>(club.mp3)</b>
-	 * it returns <b>(club)</b>
-	 *
-	 * @param absolutePath The File absolute path
-	 * @return the File title
-	 */
-	public static String getFileTitle(final String absolutePath) {
-		return FilenameUtils.getBaseName(absolutePath);
-	}
-
-	/**
-	 * Returns the name of the file for example if file path is <b>(C:/Give me
-	 * more/no no/media.ogg)</b> it returns <b>(media.ogg)</b>
-	 *
-	 * @param absolutePath the path
-	 * @return the File title+extension
-	 */
-	public static String getFileName(final String absolutePath) {
-		return FilenameUtils.getName(absolutePath);
-
-	}
-
-	/**
-	 * Returns the extension of file(without (.)) for example <b>(ai.mp3)->(mp3)</b>
-	 * and to lowercase (Mp3 -> mp3)
-	 *
-	 * @param absolutePath The File absolute path
-	 * @return the File extension
-	 */
-	public static String getFileExtension(final String absolutePath) {
-		return FilenameUtils.getExtension(absolutePath).toLowerCase();
-
-		// int i = path.lastIndexOf('.'); // characters contained before (.)
-		//
-		// if the name is not empty
-		// if (i > 0 && i < path.length() - 1)
-		// return path.substring(i + 1).toLowerCase()
-		//
-		// return null
-	}
+	
 
 	// ------------------------------------------------------------------------------------------------------
 
@@ -592,7 +423,7 @@ public final class InfoTool {
 	 * @return True if the type is supported or else False
 	 */
 	public static boolean isAudioSupported(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && ACCEPTED_AUDIO_EXTENSIONS.contains(extension);
 	}
 
@@ -604,7 +435,7 @@ public final class InfoTool {
 	 * @return True if the type is supported or else False
 	 */
 	public static boolean isVideoSupported(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && ACCEPTED_VIDEO_EXTENSIONS.contains(extension);
 	}
 
@@ -616,7 +447,7 @@ public final class InfoTool {
 	 * @return True if the type is supported or else False
 	 */
 	public static boolean isImageSupported(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && ACCEPTED_IMAGE_EXTENSIONS.contains(extension);
 	}
 
@@ -630,7 +461,7 @@ public final class InfoTool {
 	 * @return True if the file is an Audio else false
 	 */
 	public static boolean isAudio(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && POPULAR_AUDIO_EXTENSIONS.contains(extension);
 	}
 
@@ -653,7 +484,7 @@ public final class InfoTool {
 	 * @return True if the file is an Video else false
 	 */
 	public static boolean isVideo(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && POPULAR_VIDEO_EXTENSIONS.contains(extension);
 	}
 
@@ -675,7 +506,7 @@ public final class InfoTool {
 	 * @return True if the file is an Image else false
 	 */
 	public static boolean isImage(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && POPULAR_IMAGE_EXTENSIONS.contains(extension);
 	}
 
@@ -696,7 +527,7 @@ public final class InfoTool {
 	 * @return True if the file is an PDF else false
 	 */
 	public static boolean isPdf(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && "pdf".equals(extension);
 	}
 
@@ -717,7 +548,7 @@ public final class InfoTool {
 	 * @return True if the file is an ZIP else false
 	 */
 	public static boolean isZip(final String fileName) {
-		final String extension = getFileExtension(fileName);
+		final String extension = IOTool.getFileExtension(fileName);
 		return extension != null && POPULAR_ZIP_EXTENSIONS.contains(extension);
 	}
 
@@ -840,7 +671,7 @@ public final class InfoTool {
 		if (file.exists() && file.length() != 0) {
 
 			// extension?
-			final String extension = InfoTool.getFileExtension(file.getName());
+			final String extension = IOTool.getFileExtension(file.getName());
 
 			// MP3?
 			if ("mp3".equals(extension)) {

@@ -47,6 +47,7 @@ import main.java.com.goxr3plus.xr3player.services.dropbox.DropboxService;
 import main.java.com.goxr3plus.xr3player.services.dropbox.DropboxService.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
@@ -662,13 +663,13 @@ public class DropboxViewer extends StackPane {
 	public void renameFile(DropboxFile dropboxFile, Node node) {
 
 		// Show Rename Window
-		Main.renameWindow.show(InfoTool.getFileTitle(dropboxFile.getMetadata().getName()), node, "Media Renaming",
+		Main.renameWindow.show(IOTool.getFileTitle(dropboxFile.getMetadata().getName()), node, "Media Renaming",
 				FileCategory.FILE);
 		String oldName = dropboxFile.getMetadata().getName();
 
 		// Bind
 		dropboxFile.titleProperty().bind(Main.renameWindow.getInputField().textProperty().concat(
-				!dropboxFile.isFile() ? "" : "." + InfoTool.getFileExtension(dropboxFile.getMetadata().getName())));
+				!dropboxFile.isFile() ? "" : "." + IOTool.getFileExtension(dropboxFile.getMetadata().getName())));
 
 		// When the Rename Window is closed do the rename
 		Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
@@ -688,7 +689,7 @@ public class DropboxViewer extends StackPane {
 					dropboxFile.titleProperty().unbind();
 
 					String newName = Main.renameWindow.getInputField().getText() + (dropboxFile.isDirectory() ? ""
-							: "." + InfoTool.getFileExtension(dropboxFile.getMetadata().getName()));
+							: "." + IOTool.getFileExtension(dropboxFile.getMetadata().getName()));
 
 					// !XPressed && // Old name != New name
 					if (Main.renameWindow.wasAccepted() && !oldName.equals(newName)) {

@@ -28,6 +28,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -37,6 +38,7 @@ import main.java.com.goxr3plus.xr3player.controllers.windows.FileAndFolderChoose
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * This class has some functions that are not there by default in JavaFX 8
@@ -103,7 +105,7 @@ public final class JavaFXTools {
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			absolutePath = paths.filter(path -> {
 				File file = path.toFile();
-				return !file.isDirectory() && title.equals(InfoTool.getFileTitle(file.getAbsolutePath()))
+				return !file.isDirectory() && title.equals(IOTool.getFileTitle(file.getAbsolutePath()))
 						&& InfoTool.isImageSupported(file.getAbsolutePath());
 			}).findFirst().map(path -> path.toAbsolutePath().toString()).orElse(null);
 		} catch (IOException ex) {
@@ -145,7 +147,7 @@ public final class JavaFXTools {
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			paths.forEach(path -> {
 				File file = path.toFile();
-				if (!file.isDirectory() && InfoTool.getFileTitle(file.getAbsolutePath()).equals(title)
+				if (!file.isDirectory() && IOTool.getFileTitle(file.getAbsolutePath()).equals(title)
 						&& InfoTool.isImageSupported(file.getAbsolutePath()))
 					file.delete(); // -> to be fixed
 			});
@@ -205,7 +207,7 @@ public final class JavaFXTools {
 			deleteAnyImageWithTitle(title, folderForSaving);
 
 			if (!ActionTool.copy(imageFile.getAbsolutePath(), folderForSaving + File.separator + title + "."
-					+ InfoTool.getFileExtension(imageFile.getAbsolutePath())))
+					+ IOTool.getFileExtension(imageFile.getAbsolutePath())))
 				Platform.runLater(() -> ActionTool.showNotification("Failed saving image",
 						"Failed to change the image...", Duration.millis(2500), NotificationType.SIMPLE));
 
@@ -268,14 +270,14 @@ public final class JavaFXTools {
 			double alertScreenY = alert.getY();
 
 			// Check if Alert goes out of the Screen on X Axis
-			if (alertScreenX + alertWidth > InfoTool.getVisualScreenWidth())
-				alertScreenX = (int) (InfoTool.getVisualScreenWidth() - alertWidth);
+			if (alertScreenX + alertWidth > JavaFXTools.getVisualScreenWidth())
+				alertScreenX = (int) (JavaFXTools.getVisualScreenWidth() - alertWidth);
 			else if (alertScreenX < 0)
 				alertScreenX = 0;
 
 			// Check if Alert goes out of the Screen on Y AXIS
-			if (alertScreenY + alertHeight > InfoTool.getVisualScreenHeight())
-				alertScreenY = (int) (InfoTool.getVisualScreenHeight() - alertHeight);
+			if (alertScreenY + alertHeight > JavaFXTools.getVisualScreenHeight())
+				alertScreenY = (int) (JavaFXTools.getVisualScreenHeight() - alertHeight);
 			else if (alertScreenY < 0)
 				alertScreenY = 0;
 
@@ -404,6 +406,48 @@ public final class JavaFXTools {
 		ActionTool.showNotification("Copied to Clipboard",
 				"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 				Duration.seconds(3.5), NotificationType.INFORMATION);
+	}
+
+	/**
+	 * Gets the visual screen height.
+	 *
+	 * @return The screen <b>Height</b> based on the <b>visual bounds</b> of the
+	 *         Screen.These bounds account for objects in the native windowing
+	 *         system such as task bars and menu bars. These bounds are contained by
+	 *         Screen.bounds.
+	 */
+	public static double getVisualScreenHeight() {
+		return Screen.getPrimary().getVisualBounds().getHeight();
+	}
+
+	/**
+	 * Gets the visual screen width.
+	 *
+	 * @return The screen <b>Width</b> based on the <b>visual bounds</b> of the
+	 *         Screen.These bounds account for objects in the native windowing
+	 *         system such as task bars and menu bars. These bounds are contained by
+	 *         Screen.bounds.
+	 */
+	public static double getVisualScreenWidth() {
+		return Screen.getPrimary().getVisualBounds().getWidth();
+	}
+
+	/**
+	 * Gets the screen height.
+	 *
+	 * @return The screen <b>Height</b> based on the <b> bounds </b> of the Screen.
+	 */
+	public static double getScreenHeight() {
+		return Screen.getPrimary().getBounds().getHeight();
+	}
+
+	/**
+	 * Gets the screen width.
+	 *
+	 * @return The screen <b>Width</b> based on the <b> bounds </b> of the Screen.
+	 */
+	public static double getScreenWidth() {
+		return Screen.getPrimary().getBounds().getWidth();
 	}
 
 }

@@ -20,6 +20,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * This Service is used to start the Audio of XR3Player
@@ -191,7 +192,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 					// extension
 					xPlayerController.getxPlayerModel().songExtensionProperty()
-							.set(InfoTool.getFileExtension(audioFullPath));
+							.set(IOTool.getFileExtension(audioFullPath));
 
 					// == TotalTimeLabel
 					Platform.runLater(() -> xPlayerController.getTotalTimeLabel()

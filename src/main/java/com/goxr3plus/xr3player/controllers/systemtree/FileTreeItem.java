@@ -22,6 +22,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * A custom TreeItem which represents a File
@@ -112,8 +113,8 @@ public class FileTreeItem extends TreeItem<String> {
 	public void rename(Node node) {
 
 		// Open Window
-		String extension = "." + InfoTool.getFileExtension(getAbsoluteFilePath());
-		Main.renameWindow.show(InfoTool.getFileTitle(getAbsoluteFilePath()), node, "Media Renaming", FileCategory.FILE);
+		String extension = "." + IOTool.getFileExtension(getAbsoluteFilePath());
+		Main.renameWindow.show(IOTool.getFileTitle(getAbsoluteFilePath()), node, "Media Renaming", FileCategory.FILE);
 		String oldFilePath = getAbsoluteFilePath();
 
 		// Bind
@@ -201,7 +202,7 @@ public class FileTreeItem extends TreeItem<String> {
 									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 
 									// change the text of Marquee
-									xPlayerController.getMediaFileMarquee().setText(InfoTool.getFileName(newFilePath));
+									xPlayerController.getMediaFileMarquee().setText(IOTool.getFileName(newFilePath));
 
 								}
 							});
@@ -232,8 +233,8 @@ public class FileTreeItem extends TreeItem<String> {
 
 							// Show message to user
 							ActionTool.showNotification("Success Message",
-									"Successfully rename from :\n" + InfoTool.getFileName(oldFilePath) + " \nto\n"
-											+ InfoTool.getFileName(newFilePath),
+									"Successfully rename from :\n" + IOTool.getFileName(oldFilePath) + " \nto\n"
+											+ IOTool.getFileName(newFilePath),
 									Duration.millis(2000), NotificationType.SUCCESS);
 
 							// Exception occurred

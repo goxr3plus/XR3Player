@@ -32,6 +32,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
  * The Class RenameWindow.
@@ -207,13 +208,13 @@ public class EmotionsWindow extends BorderPane {
 		if (x <= -1 && y <= -1)
 			window.centerOnScreen();
 		else {
-			if (x + getWidth() > InfoTool.getScreenWidth())
-				x = InfoTool.getScreenWidth() - getWidth();
+			if (x + getWidth() > JavaFXTools.getScreenWidth())
+				x = JavaFXTools.getScreenWidth() - getWidth();
 			else if (x < 0)
 				x = 0;
 
-			if (y + getHeight() > InfoTool.getScreenHeight())
-				y = InfoTool.getScreenHeight() - getHeight();
+			if (y + getHeight() > JavaFXTools.getScreenHeight())
+				y = JavaFXTools.getScreenHeight() - getHeight();
 			else if (y < 0)
 				y = 0;
 

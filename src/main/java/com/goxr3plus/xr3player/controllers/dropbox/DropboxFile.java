@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -53,7 +53,7 @@ public class DropboxFile {
 
 		// ---------------------Init properties------------------------------------
 		title = new SimpleStringProperty(value);
-		extension = new SimpleStringProperty(InfoTool.getFileExtension(value));
+		extension = new SimpleStringProperty(IOTool.getFileExtension(value));
 
 		// ArtWork FontIcon
 		FontIcon menuFontIcon = new FontIcon("typ-th-small");

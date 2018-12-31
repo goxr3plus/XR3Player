@@ -30,6 +30,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContext
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
@@ -128,7 +129,7 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 		this.absoluteFilePath = absoluteFilePath;
 
 		// Update ShopContextMenu
-		shopContextMenu.setMediaTitle(InfoTool.getFileTitle(absoluteFilePath));
+		shopContextMenu.setMediaTitle(IOTool.getFileTitle(absoluteFilePath));
 
 		// Update PlayContextMenu
 		playContextMenu.setAbsoluteMediaPath(absoluteFilePath);

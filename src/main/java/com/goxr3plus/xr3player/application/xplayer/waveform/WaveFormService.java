@@ -23,7 +23,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderException;
@@ -190,7 +190,7 @@ public class WaveFormService extends Service<Boolean> {
 				int randomN = random.nextInt(99999);
 
 				// Create temporary files
-				String title = InfoTool.getFileTitle(fileAbsolutePath);
+				String title = IOTool.getFileTitle(fileAbsolutePath);
 				File temporalDecodedFile = File.createTempFile("decoded_" + title + randomN, ".wav");
 				File temporalCopiedFile = File.createTempFile("original_" + title + randomN, "." + fileFormat);
 				temp1 = temporalDecodedFile;

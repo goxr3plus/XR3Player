@@ -12,8 +12,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -36,6 +34,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.settings.GeneralSettingsController;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
@@ -46,7 +45,7 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 public final class ActionTool {
 
 	/** The logger for this class */
-	private static final Logger logger = Logger.getLogger(ActionTool.class.getName());
+	public static final Logger logger = Logger.getLogger(ActionTool.class.getName());
 
 	/** The random. */
 	private static Random random = new Random();
@@ -66,7 +65,7 @@ public final class ActionTool {
 
 		// Open the Default Browser
 		if (System.getProperty("os.name").toLowerCase().contains("win")) {
-			showNotification("Message", "Opening in File Explorer:\n" + InfoTool.getFileName(path),
+			showNotification("Message", "Opening in File Explorer:\n" + IOTool.getFileName(path),
 					Duration.millis(1500), NotificationType.INFORMATION);
 
 			// START: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
@@ -214,40 +213,6 @@ public final class ActionTool {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Calculates the creationTime of the File.
-	 *
-	 * @param path the path
-	 * @return A String in format <b> DD/MM/YYYY</b>
-	 */
-	public static String getFileDateCreated(String path) {
-
-		FileTime creationTime = getFileCreationTime(path);
-
-		// Be carefull for null pointer exception here
-		if (creationTime == null)
-			return "error occured";
-
-		String[] dateCreatedF = creationTime.toString().split("-");
-		return dateCreatedF[2].substring(0, 2) + "/" + dateCreatedF[1] + "/" + dateCreatedF[0];
-	}
-
-	/**
-	 * Calculates the creationTime of the File.
-	 *
-	 * @param path the path
-	 * @return FileTime
-	 */
-	public static FileTime getFileCreationTime(String path) {
-		try {
-			return Files.readAttributes(Paths.get(path), BasicFileAttributes.class).creationTime();
-		} catch (IOException ex) {
-			logger.log(Level.INFO, "", ex);
-		}
-
-		return null;
 	}
 
 	/**
@@ -435,14 +400,14 @@ public final class ActionTool {
 				int y = (int) (bounds.getMinY() + bounds.getHeight() / 2 - alertHeight / 2);
 
 				// Check if Alert goes out of the Screen on X Axis
-				if (x + alertWidth > InfoTool.getVisualScreenWidth())
-					x = (int) (InfoTool.getVisualScreenWidth() - alertWidth);
+				if (x + alertWidth > JavaFXTools.getVisualScreenWidth())
+					x = (int) (JavaFXTools.getVisualScreenWidth() - alertWidth);
 				else if (x < 0)
 					x = 0;
 
 				// Check if Alert goes out of the Screen on Y AXIS
-				if (y + alertHeight > InfoTool.getVisualScreenHeight())
-					y = (int) (InfoTool.getVisualScreenHeight() - alertHeight);
+				if (y + alertHeight > JavaFXTools.getVisualScreenHeight())
+					y = (int) (JavaFXTools.getVisualScreenHeight() - alertHeight);
 				else if (y < 0)
 					y = 0;
 

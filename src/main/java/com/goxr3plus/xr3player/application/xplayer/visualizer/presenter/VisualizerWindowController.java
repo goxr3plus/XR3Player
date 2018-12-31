@@ -147,8 +147,8 @@ public class VisualizerWindowController extends StackPane {
 		window = new Stage();
 		window.setTitle("XR3Player Visualizer");
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
-		window.setWidth(InfoTool.getScreenHeight() / 2);
-		window.setHeight(InfoTool.getScreenHeight() / 2);
+		window.setWidth(JavaFXTools.getScreenHeight() / 2);
+		window.setHeight(JavaFXTools.getScreenHeight() / 2);
 		window.centerOnScreen();
 		window.setFullScreenExitHint("");
 		window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);

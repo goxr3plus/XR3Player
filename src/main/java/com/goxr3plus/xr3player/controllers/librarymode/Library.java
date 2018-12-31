@@ -46,6 +46,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
@@ -218,7 +219,7 @@ public class Library extends StackPane {
 							// Rename the image of library
 							if (imageName != null)
 								updateImagePathInDB(InfoTool.getImagesFolderAbsolutePathWithSeparator() + newName + "."
-										+ InfoTool.getFileExtension(getAbsoluteImagePath()), true, false);
+										+ IOTool.getFileExtension(getAbsoluteImagePath()), true, false);
 
 							// Update the UserInformation properties file
 							if (isOpened())
@@ -658,7 +659,7 @@ public class Library extends StackPane {
 				success = new File(getAbsoluteImagePath()).renameTo(new File(absoluteFilePath));
 
 				// Change the image name
-				imageName = InfoTool.getFileName(absoluteFilePath);
+				imageName = IOTool.getFileName(absoluteFilePath);
 
 			} else { // Create new Image
 
@@ -669,10 +670,10 @@ public class Library extends StackPane {
 				//
 				// Create the new image
 				String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "."
-						+ InfoTool.getFileExtension(absoluteFilePath);
+						+ IOTool.getFileExtension(absoluteFilePath);
 
 				// Change the image name
-				imageName = InfoTool.getFileName(newImageName);
+				imageName = IOTool.getFileName(newImageName);
 
 				// // Do the copy procedure
 				// if (!ActionTool.copy(absolutePath, newImageName))

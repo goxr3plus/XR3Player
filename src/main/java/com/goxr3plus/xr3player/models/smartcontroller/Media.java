@@ -42,6 +42,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
@@ -267,11 +268,11 @@ public abstract class Media {
 		this.emotion = new SimpleIntegerProperty(0);
 		this.mediaType = new SimpleIntegerProperty(1);
 		this.playStatus = new SimpleIntegerProperty(-2);
-		this.title = new SimpleStringProperty(InfoTool.getFileTitle(path));
+		this.title = new SimpleStringProperty(IOTool.getFileTitle(path));
 		this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
 		this.filePath = new SimpleStringProperty(path);
-		this.fileName = new SimpleStringProperty(InfoTool.getFileName(path));
-		this.fileType = new SimpleStringProperty(InfoTool.getFileExtension(path));
+		this.fileName = new SimpleStringProperty(IOTool.getFileName(path));
+		this.fileType = new SimpleStringProperty(IOTool.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
 		this.artist = new SimpleStringProperty();
 		this.mood = new SimpleStringProperty();
@@ -353,10 +354,10 @@ public abstract class Media {
 		this.fileSize.set(InfoTool.getFileSizeEdited(new File(filePath.get())));
 
 		// dateFileCreated
-		dateFileCreated.set(InfoTool.getFileCreationDate(filePath.get()));
+		dateFileCreated.set(IOTool.getFileCreationDate(filePath.get()));
 
 		// dateFileModified
-		dateFileModified.set(InfoTool.getFileLastModifiedDate(filePath.get()));
+		dateFileModified.set(IOTool.getFileLastModifiedDate(filePath.get()));
 
 		// It is Audio?
 		if (!InfoTool.isAudioSupported(filePath.get()))
@@ -773,7 +774,7 @@ public abstract class Media {
 		// controller.renameWorking = true;
 
 		// Open Window
-		final String extension = "." + InfoTool.getFileExtension(getFilePath());
+		final String extension = "." + IOTool.getFileExtension(getFilePath());
 		Main.renameWindow.show(getTitle(), node, "Media Renaming", FileCategory.FILE);
 		final String oldFilePath = getFilePath();
 
@@ -863,7 +864,7 @@ public abstract class Media {
 									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 
 									// change the text of Marquee
-									xPlayerController.getMediaFileMarquee().setText(InfoTool.getFileName(newFilePath));
+									xPlayerController.getMediaFileMarquee().setText(IOTool.getFileName(newFilePath));
 
 								}
 							});
@@ -894,8 +895,8 @@ public abstract class Media {
 
 							// Show message to user
 							ActionTool.showNotification("Success Message",
-									"Successfully rename from :\n" + InfoTool.getFileName(oldFilePath) + " \nto\n"
-											+ InfoTool.getFileName(newFilePath),
+									"Successfully rename from :\n" + IOTool.getFileName(oldFilePath) + " \nto\n"
+											+ IOTool.getFileName(newFilePath),
 									Duration.millis(2000), NotificationType.SUCCESS);
 
 							// Exception occurred
@@ -1243,11 +1244,11 @@ public abstract class Media {
 	 * @param path the new file path
 	 */
 	public void setFilePath(final String path) {
-		this.title.set(InfoTool.getFileTitle(path));
+		this.title.set(IOTool.getFileTitle(path));
 		this.drive.set(path.substring(0, 1));
 		this.filePath.set(path);
-		this.fileName.set(InfoTool.getFileName(path));
-		this.fileType.set(InfoTool.getFileExtension(path));
+		this.fileName.set(IOTool.getFileName(path));
+		this.fileType.set(IOTool.getFileExtension(path));
 
 	}
 

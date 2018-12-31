@@ -25,6 +25,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
  * 
@@ -93,7 +94,7 @@ public class ArtWorkController extends StackPane {
 						// Show a Notification to User
 						ActionTool.showNotification("Exporting Album Image",
 								"From File: \n" + InfoTool.getMinString(
-										InfoTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100),
+										IOTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100),
 								Duration.seconds(2), NotificationType.SIMPLE);
 
 					});
