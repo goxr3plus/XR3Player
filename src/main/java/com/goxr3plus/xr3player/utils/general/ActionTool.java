@@ -35,7 +35,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.settings.GeneralSettingsController;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * A class which has a lot of useful methods.
@@ -341,22 +341,22 @@ public final class ActionTool {
 		// Show the notification
 		switch (notificationType) {
 		case CONFIRM:
-			notification1.graphic(JavaFXTools.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
+			notification1.graphic(JavaFXTool.getFontIcon("fas-question-circle", Color.web("#ad14e2"), 32)).show();
 			break;
 		case ERROR:
-			notification1.graphic(JavaFXTools.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
+			notification1.graphic(JavaFXTool.getFontIcon("fas-times", Color.web("#f83e3e"), 32)).show();
 			break;
 		case INFORMATION:
-			notification1.graphic(JavaFXTools.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
+			notification1.graphic(JavaFXTool.getFontIcon("fas-info-circle", Color.web("#1496e5"), 32)).show();
 			break;
 		case SIMPLE:
 			notification1.show();
 			break;
 		case WARNING:
-			notification1.graphic(JavaFXTools.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
+			notification1.graphic(JavaFXTool.getFontIcon("fa-warning", Color.web("#d74418"), 32)).show();
 			break;
 		case SUCCESS:
-			notification1.graphic(JavaFXTools.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
+			notification1.graphic(JavaFXTool.getFontIcon("fas-check", Color.web("#64ff41"), 32)).show();
 			break;
 		default:
 			break;
@@ -374,8 +374,8 @@ public final class ActionTool {
 		boolean[] questionAnswer = { false };
 
 		// Show Alert
-		Alert alert = JavaFXTools.createAlert(null, headerText, text, AlertType.CONFIRMATION, StageStyle.UTILITY,
-				window, JavaFXTools.getFontIcon("fas-question-circle", Color.WHITE, 24));
+		Alert alert = JavaFXTool.createAlert(null, headerText, text, AlertType.CONFIRMATION, StageStyle.UTILITY,
+				window, JavaFXTool.getFontIcon("fas-question-circle", Color.WHITE, 24));
 
 		// Make sure that JavaFX doesn't cut the text with ...
 		alert.getDialogPane().getChildren().stream().filter(item -> node instanceof Label)
@@ -400,14 +400,14 @@ public final class ActionTool {
 				int y = (int) (bounds.getMinY() + bounds.getHeight() / 2 - alertHeight / 2);
 
 				// Check if Alert goes out of the Screen on X Axis
-				if (x + alertWidth > JavaFXTools.getVisualScreenWidth())
-					x = (int) (JavaFXTools.getVisualScreenWidth() - alertWidth);
+				if (x + alertWidth > JavaFXTool.getVisualScreenWidth())
+					x = (int) (JavaFXTool.getVisualScreenWidth() - alertWidth);
 				else if (x < 0)
 					x = 0;
 
 				// Check if Alert goes out of the Screen on Y AXIS
-				if (y + alertHeight > JavaFXTools.getVisualScreenHeight())
-					y = (int) (JavaFXTools.getVisualScreenHeight() - alertHeight);
+				if (y + alertHeight > JavaFXTool.getVisualScreenHeight())
+					y = (int) (JavaFXTool.getVisualScreenHeight() - alertHeight);
 				else if (y < 0)
 					y = 0;
 

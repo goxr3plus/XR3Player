@@ -29,7 +29,8 @@ import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DropboxService extends Service<Boolean> {
 
@@ -361,7 +362,7 @@ public class DropboxService extends Service<Boolean> {
 			private boolean checkConnection() {
 
 				// Check if there is Internet Connection
-				if (!InfoTool.isReachableByPing("www.google.com")) {
+				if (!NetworkingTool.isReachableByPing("www.google.com")) {
 					Platform.runLater(() -> dropBoxViewer.getErrorVBox().setVisible(true));
 					return false;
 				}
@@ -514,7 +515,7 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> ActionTool.showNotification("Delete was successful",
 							"Successfully deleted selected files/folders", Duration.millis(2000),
 							NotificationType.SIMPLE,
-							JavaFXTools.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
+							JavaFXTool.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
 
 					return true;
 				} catch (final DbxException dbxe) {
@@ -546,7 +547,7 @@ public class DropboxService extends Service<Boolean> {
 								"Succesfully renamed file :\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ "
 										+ result.getMetadata().getName() + " ]",
 								Duration.millis(2500), NotificationType.SIMPLE,
-								JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64));
+								JavaFXTool.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64));
 
 						// Return the previous name
 						dropboxFile.setMetadata(result.getMetadata());
@@ -592,7 +593,7 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> ActionTool.showNotification("New folder created",
 							"Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
 							Duration.millis(2000), NotificationType.SIMPLE,
-							JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64)));
+							JavaFXTool.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64)));
 
 					return true;
 				} catch (final DbxException dbxe) {

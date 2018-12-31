@@ -36,6 +36,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.FoldersModeService;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class SmartControllerFoldersMode extends StackPane {
@@ -321,7 +322,7 @@ public class SmartControllerFoldersMode extends StackPane {
 
 								// File or Directory is Hidden? + Directory or Accepted File
 								if (!path.toFile().isHidden() && (path.toFile().isDirectory()
-										|| InfoTool.isAudioSupported(path.toFile().getAbsolutePath()))) {
+										|| ExtensionTool.isAudioSupported(path.toFile().getAbsolutePath()))) {
 
 									// We don't care about directories
 									if (!path.toFile().isDirectory()) {

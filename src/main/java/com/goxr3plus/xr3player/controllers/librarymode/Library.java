@@ -47,7 +47,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * A class which hold all the functionality of a digital library.
@@ -701,7 +701,7 @@ public class Library extends StackPane {
 	 *
 	 */
 	public void setNewImage() {
-		JavaFXTools.selectAndSaveImage(this.getLibraryName(), InfoTool.getImagesFolderAbsolutePathWithSeparator(),
+		JavaFXTool.selectAndSaveImage(this.getLibraryName(), InfoTool.getImagesFolderAbsolutePathWithSeparator(),
 				Main.specialChooser, Main.window).ifPresent(imageFile -> {
 					updateImagePathInDB(imageFile.getAbsolutePath(), false, true);
 					imageView.setImage(new Image(imageFile.toURI() + ""));

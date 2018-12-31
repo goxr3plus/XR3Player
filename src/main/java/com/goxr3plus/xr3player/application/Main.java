@@ -102,8 +102,8 @@ import main.java.com.goxr3plus.xr3player.services.database.VacuumProgressService
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.Util;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * 
@@ -331,8 +331,8 @@ public class Main extends Application {
 		// --------Window---------
 		window = primaryStage;
 		window.setTitle("XR3Player V." + APPLICATION_VERSION);
-		window.setWidth(JavaFXTools.getVisualScreenWidth() * 0.95);
-		window.setHeight(JavaFXTools.getVisualScreenHeight() * 0.95);
+		window.setWidth(JavaFXTool.getVisualScreenWidth() * 0.95);
+		window.setHeight(JavaFXTool.getVisualScreenHeight() * 0.95);
 		window.centerOnScreen();
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
 		window.centerOnScreen();
@@ -870,7 +870,7 @@ public class Main extends Application {
 	 * This method is used to exit the application
 	 */
 	public static void confirmApplicationExit() {
-		final Alert alert = JavaFXTools.createAlert("Exit XR3Player?",
+		final Alert alert = JavaFXTool.createAlert("Exit XR3Player?",
 				"Vacuum is clearing junks from database\n(In future updates it will be automatical)",
 				"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n",
 				AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
@@ -899,8 +899,8 @@ public class Main extends Application {
 	 */
 	public static void terminateXR3Player(final int code) {
 
-		System.out.println("Dis All->" + Util.getOS());
-		switch (Util.getOS()) {
+		System.out.println("Dis All->" + OSTool.getOS());
+		switch (OSTool.getOS()) {
 		case WINDOWS:
 			new Thread(() -> {
 				// Disposing all Browsers...
@@ -1035,7 +1035,7 @@ public class Main extends Application {
 	public static void changeBackgroundImage() {
 
 		// Check the response
-		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window)
+		JavaFXTool.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window)
 				.ifPresent(imageFile -> loginMode.getBackgroundImageView().setImage(new Image(imageFile.toURI() + "")));
 
 	}
@@ -1050,7 +1050,7 @@ public class Main extends Application {
 	private static void determineBackgroundImage() {
 
 		// Set the background image to the ImageView
-		Optional.ofNullable(JavaFXTools.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain())).
+		Optional.ofNullable(JavaFXTool.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain())).
 		// If the image exists
 				ifPresentOrElse(image -> loginMode.getBackgroundImageView().setImage(image),
 						// If it doesn't set the default
@@ -1065,7 +1065,7 @@ public class Main extends Application {
 	public static void resetBackgroundImage() {
 
 		// Delete the background image
-		JavaFXTools.deleteAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
+		JavaFXTool.deleteAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
 
 		// Set the default one
 		determineBackgroundImage();

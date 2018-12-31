@@ -44,7 +44,8 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.Util;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
 
 /**
  * @author GOXR3PLUS
@@ -209,7 +210,7 @@ public class UpdateWindow extends StackPane {
 						"Fetching informations from server...", Duration.millis(1000), NotificationType.INFORMATION));
 
 			// Check if we have internet connection
-			if (InfoTool.isReachableByPing("www.google.com"))
+			if (NetworkingTool.isReachableByPing("www.google.com"))
 				searchForUpdatesPart2(showTheWindow);
 			else
 				Platform.runLater(() -> ActionTool.showNotification("Can't Connect",

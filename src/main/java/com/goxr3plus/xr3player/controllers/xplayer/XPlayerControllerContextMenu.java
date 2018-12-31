@@ -31,7 +31,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContext
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The default context menu for song items of application.
@@ -190,7 +190,7 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 		Object source = e.getSource();
 
 		if (source == copy) {
-			JavaFXTools.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
+			JavaFXTool.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
 		} else if (source == showFile) {
 			ActionTool.openFileInExplorer(absoluteFilePath);
 		} else if (source == editFileInfo)

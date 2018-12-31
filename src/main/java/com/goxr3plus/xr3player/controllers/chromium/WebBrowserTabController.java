@@ -72,7 +72,8 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import net.sf.image4j.codec.ico.ICODecoder;
 
 /**
@@ -507,7 +508,7 @@ public class WebBrowserTabController extends StackPane {
 			movingTitleAnimation.setSelected(WebBrowserController.MOVING_TITLES_ENABLED);
 
 			// showVersion
-			about.setOnAction(a -> JavaFXTools.createAlert("Browser Information", null,
+			about.setOnAction(a -> JavaFXTool.createAlert("Browser Information", null,
 					"Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO",
 					AlertType.INFORMATION, StageStyle.UTILITY, Main.window, null).showAndWait());
 
@@ -694,7 +695,7 @@ public class WebBrowserTabController extends StackPane {
 
 		// Check for internet connection
 		Thread thread = new Thread(() -> {
-			boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
+			boolean hasInternet = NetworkingTool.isReachableByPing("www.google.com");
 			Platform.runLater(() -> {
 
 				// Visibility of error pane

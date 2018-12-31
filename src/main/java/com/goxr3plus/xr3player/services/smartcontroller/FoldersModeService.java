@@ -27,7 +27,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartControllerFoldersMode;
 import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 
 public class FoldersModeService extends Service<Void> {
 
@@ -253,7 +253,7 @@ public class FoldersModeService extends Service<Void> {
 
 											// System.out.println("It is symbolic link?"+Files.isSymbolicLink(file))
 
-											if (InfoTool.isAudioSupported(file + ""))
+											if (ExtensionTool.isAudioSupported(file + ""))
 												++count[0];
 											if (smartControllerFoldersMode.getSmartController()
 													.containsFile(file.toAbsolutePath().toString()))

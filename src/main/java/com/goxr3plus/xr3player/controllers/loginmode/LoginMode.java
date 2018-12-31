@@ -47,7 +47,7 @@ import main.java.com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -351,11 +351,11 @@ public class LoginMode extends StackPane {
 		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
 				+ defaultWebColor + " 87%);");
 		colorPicker.setOnAction(a -> Main.applicationProperties.updateProperty("Users-Background-Color",
-				JavaFXTools.colorToWebColor(colorPicker.getValue())));
+				JavaFXTool.colorToWebColor(colorPicker.getValue())));
 		colorPicker.valueProperty().addListener((observable, oldColor, newColor) -> {
 
 			// Format to WebColor
-			String webColor = JavaFXTools.colorToWebColor(newColor);
+			String webColor = JavaFXTool.colorToWebColor(newColor);
 
 			// Set the style
 			this.viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "

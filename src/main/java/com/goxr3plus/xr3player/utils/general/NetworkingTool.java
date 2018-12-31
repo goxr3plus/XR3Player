@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import main.java.com.goxr3plus.xr3player.application.Main;
 
-final class NetworkingTool {
+public final class NetworkingTool {
 
 	private NetworkingTool() {}
 
@@ -34,6 +34,31 @@ final class NetworkingTool {
 			sock.connect(addr, 2000);
 			return true;
 		} catch (final IOException ex) {
+			Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
+			return false;
+		}
+	}
+
+	/**
+	 * Checks if a web site is reachable using ping command.
+	 *
+	 * @param host the host
+	 * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
+	 */
+	public static boolean isReachableByPing(final String host) {
+		try {
+	
+			// Start a new Process
+			final Process process = Runtime.getRuntime().exec("ping -"
+					+ (System.getProperty("os.name").toLowerCase().startsWith("windows") ? "n" : "c") + " 1 " + host);
+	
+			// Wait for it to finish
+			process.waitFor();
+	
+			// Check the return value
+			return process.exitValue() == 0;
+	
+		} catch (final Exception ex) {
 			Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 			return false;
 		}

@@ -25,7 +25,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -116,7 +116,7 @@ public class KeyBindingsController extends BorderPane {
 		// xPlayerSelected
 		xPlayerSelected.selectedToggleProperty().addListener(listener -> {
 			// System.out.println(JavaFXTools.getIndexOfSelectedToggle(xPlayerSelected));
-			int selectedIndex = JavaFXTools.getIndexOfSelectedToggle(xPlayerSelected);
+			int selectedIndex = JavaFXTool.getIndexOfSelectedToggle(xPlayerSelected);
 			choosedPlayerMenuButton.setText("Choosed Player = { " + selectedIndex + " }");
 
 			// Update the properties file
@@ -187,7 +187,7 @@ public class KeyBindingsController extends BorderPane {
 
 	private void decideForKeyReleased(NativeKeyEvent e) {
 		XPlayerController xPlayer = Main.xPlayersList
-				.getXPlayerController(JavaFXTools.getIndexOfSelectedToggle(xPlayerSelected));
+				.getXPlayerController(JavaFXTool.getIndexOfSelectedToggle(xPlayerSelected));
 
 		int keyCode = e.getKeyCode();
 
@@ -223,7 +223,7 @@ public class KeyBindingsController extends BorderPane {
 
 	private void decideForKeyPressed(NativeKeyEvent e) {
 		XPlayerController xPlayer = Main.xPlayersList
-				.getXPlayerController(JavaFXTools.getIndexOfSelectedToggle(xPlayerSelected));
+				.getXPlayerController(JavaFXTool.getIndexOfSelectedToggle(xPlayerSelected));
 
 		int keyCode = e.getKeyCode();
 
@@ -257,7 +257,7 @@ public class KeyBindingsController extends BorderPane {
 		keyBindingsActive.setSelected(false);
 
 		// xPlayerSelected
-		JavaFXTools.selectToggleOnIndex(xPlayerSelected, 0);
+		JavaFXTool.selectToggleOnIndex(xPlayerSelected, 0);
 	}
 
 	/**

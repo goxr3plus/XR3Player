@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 
 public class StoppableService extends Service<Boolean> {
 
@@ -57,7 +57,7 @@ public class StoppableService extends Service<Boolean> {
 						while (!isCancelled()) {
 							// System.out.println(category + " Thread" + " Running...")
 
-							newStatus[0] = InfoTool.isReachableByPing("www.google.com");
+							newStatus[0] = NetworkingTool.isReachableByPing("www.google.com");
 
 							// Try to connect
 							if (newStatus[0] != internetPreviousStatus || firstHack)

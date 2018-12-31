@@ -91,7 +91,7 @@ import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import main.java.goxr3plus.javastreamplayer.stream.Status;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
@@ -104,12 +104,12 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
  */
 public class XPlayerController extends StackPane implements StreamPlayerListener {
 
-	private final FontIcon playIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 24);
-	private final FontIcon smPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 32);
-	private final FontIcon microPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 20);
-	private final FontIcon pauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 24);
-	private final FontIcon smPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 32);
-	private final FontIcon microPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 20);
+	private final FontIcon playIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 24);
+	private final FontIcon smPlayIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 32);
+	private final FontIcon microPlayIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 20);
+	private final FontIcon pauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 24);
+	private final FontIcon smPauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 32);
+	private final FontIcon microPauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 20);
 	private static final XPlayerControllerContextMenu contextMenu = new XPlayerControllerContextMenu();
 
 	// -----------------------------------------------
@@ -855,8 +855,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 					Duration.seconds(2), NotificationType.SIMPLE,
-					image != null ? JavaFXTools.getImageView(image, 60, 60)
-							: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					image != null ? JavaFXTool.getImageView(image, 60, 60)
+							: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
 
 		// copyFileLocation
@@ -886,8 +886,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media File Full Path copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 					Duration.seconds(2), NotificationType.SIMPLE,
-					image != null ? JavaFXTools.getImageView(image, 60, 60)
-							: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					image != null ? JavaFXTool.getImageView(image, 60, 60)
+							: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
 
 		// copyFile
@@ -917,8 +917,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 					Duration.seconds(2), NotificationType.SIMPLE,
-					image != null ? JavaFXTools.getImageView(image, 60, 60)
-							: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					image != null ? JavaFXTool.getImageView(image, 60, 60)
+							: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
 
 		// showMenu
@@ -2211,8 +2211,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					if (!discIsDragging)
 						ActionTool.showNotification("Playing on deck " + (getKey() + 1),
 								IOTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-								NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60)
-										: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+								NotificationType.SIMPLE, image != null ? JavaFXTool.getImageView(image, 60, 60)
+										: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
 				}
 			});
 

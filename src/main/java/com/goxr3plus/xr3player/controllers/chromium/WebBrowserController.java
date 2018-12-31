@@ -23,7 +23,7 @@ import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.services.chromium.ChromiumUpdaterService;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.Util;
+import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
 
 /**
  * @author GOXR3PLUS
@@ -210,7 +210,7 @@ public class WebBrowserController extends StackPane {
 	 * @param browser
 	 */
 	public void disposeBrowser(Browser browser) {
-		switch (Util.getOS()) {
+		switch (OSTool.getOS()) {
 		case WINDOWS:
 			new Thread(browser::dispose).start();
 			break;

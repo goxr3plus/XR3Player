@@ -38,7 +38,7 @@ import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Mechanism of showing the opened libraries each opened library is represented
@@ -249,7 +249,7 @@ public class OpenedLibrariesViewer extends StackPane {
 		stack.setVisible(false);
 
 		// ImageView
-		FontIcon fontIcon = JavaFXTools.getFontIcon("icm-radio-unchecked", Color.web("#d74418"), 20);
+		FontIcon fontIcon = JavaFXTool.getFontIcon("icm-radio-unchecked", Color.web("#d74418"), 20);
 		fontIcon.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
 		fontIcon.managedProperty().bind(fontIcon.visibleProperty());
 

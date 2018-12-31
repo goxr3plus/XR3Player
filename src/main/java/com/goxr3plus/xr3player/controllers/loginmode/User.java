@@ -29,7 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -215,7 +215,7 @@ public class User extends StackPane {
 		// this.setEffect(reflection);
 
 		// imageView
-		String absoluteImagePath = JavaFXTools.getAbsoluteImagePath("userImage",
+		String absoluteImagePath = JavaFXTool.getAbsoluteImagePath("userImage",
 				InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 		if (absoluteImagePath == null)
 			setDefaultImage();
@@ -411,7 +411,7 @@ public class User extends StackPane {
 	public void changeUserImage() {
 
 		// Check the response
-		JavaFXTools
+		JavaFXTool
 				.selectAndSaveImage("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName(),
 						Main.specialChooser, Main.window)
 				.ifPresent(imageFile -> imageView.setImage(new Image(imageFile.toURI() + "")));
@@ -447,7 +447,7 @@ public class User extends StackPane {
 	private boolean deleteUserImage() {
 
 		// Delete the User Image
-		JavaFXTools.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
+		JavaFXTool.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 
 		return true;
 	}
@@ -458,7 +458,7 @@ public class User extends StackPane {
 	 * @return
 	 */
 	public String getAbsoluteImagePath() {
-		return JavaFXTools.getAbsoluteImagePath("userImage",
+		return JavaFXTool.getAbsoluteImagePath("userImage",
 				InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 	}
 

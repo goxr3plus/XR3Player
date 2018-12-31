@@ -38,8 +38,9 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.services.systemtree.TreeViewService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class TreeViewManager.
@@ -128,7 +129,7 @@ public class TreeViewManager extends StackPane {
 			else if (key.getCode() == KeyCode.C) { // COPY
 
 				// Any selected TreeItem ?
-				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> JavaFXTools
+				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem()).ifPresent(item -> JavaFXTool
 						.setClipBoard(Arrays.asList(new File(((FileTreeItem) item).getAbsoluteFilePath()))));
 
 			} else if (key.getCode() == KeyCode.F) { // EXPLORER
@@ -144,7 +145,7 @@ public class TreeViewManager extends StackPane {
 					final String absoluteFilePath = ((FileTreeItem) item).getAbsoluteFilePath();
 
 					// If it is an audio file
-					if (InfoTool.isAudio(absoluteFilePath))
+					if (ExtensionTool.isAudio(absoluteFilePath))
 						Main.tagWindow.openAudio(absoluteFilePath, TagTabCategory.BASICINFO, true);
 				});
 			}

@@ -41,9 +41,10 @@ import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -197,7 +198,7 @@ public abstract class Media {
 			final String hourImported, final Genre smartControllerGenre, final int number) {
 
 		// ArtWork FontIcon
-		final FontIcon artWorkImage = JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 30);
+		final FontIcon artWorkImage = JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 30);
 
 		// ArtWork ImageView
 		final ImageView artWorkImageView = new ImageView();
@@ -213,7 +214,7 @@ public abstract class Media {
 		artwork = new SimpleObjectProperty<>(artWorkStack);
 
 		// search Button
-		final Button searchButton = new Button("", JavaFXTools.getFontIcon("fab-chrome", Color.WHITE, 18));
+		final Button searchButton = new Button("", JavaFXTool.getFontIcon("fab-chrome", Color.WHITE, 18));
 		searchButton.getStyleClass().add("jfx-button2");
 		searchButton.setPrefSize(28, 24);
 		searchButton.setMinSize(28, 24);
@@ -231,7 +232,7 @@ public abstract class Media {
 		});
 
 		// Youtube button
-		final Button youtubeButton = new Button("", JavaFXTools.getFontIcon("fab-youtube", Color.WHITE, 18));
+		final Button youtubeButton = new Button("", JavaFXTool.getFontIcon("fab-youtube", Color.WHITE, 18));
 		youtubeButton.getStyleClass().add("jfx-button2");
 		youtubeButton.setPrefSize(28, 24);
 		youtubeButton.setMinSize(28, 24);
@@ -249,7 +250,7 @@ public abstract class Media {
 		});
 
 		// Buy button
-		final Button buyButton = new Button("", JavaFXTools.getFontIcon("fas-shopping-cart", Color.WHITE, 18));
+		final Button buyButton = new Button("", JavaFXTool.getFontIcon("fas-shopping-cart", Color.WHITE, 18));
 		buyButton.getStyleClass().add("jfx-button2");
 		buyButton.setPrefSize(28, 24);
 		buyButton.setMinSize(28, 24);
@@ -360,7 +361,7 @@ public abstract class Media {
 		dateFileModified.set(IOTool.getFileLastModifiedDate(filePath.get()));
 
 		// It is Audio?
-		if (!InfoTool.isAudioSupported(filePath.get()))
+		if (!ExtensionTool.isAudioSupported(filePath.get()))
 			return;
 
 		// Duration

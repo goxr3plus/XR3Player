@@ -11,7 +11,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Representing an Audio File.
@@ -84,7 +84,7 @@ public class Audio extends Media {
 	 */
 	@Override
 	public void setDragView(final Dragboard db) {
-		JavaFXTools.setDragView(db, this);
+		JavaFXTool.setDragView(db, this);
 	}
 
 	/**

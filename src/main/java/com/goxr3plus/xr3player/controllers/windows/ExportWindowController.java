@@ -34,7 +34,7 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -290,7 +290,7 @@ public class ExportWindowController extends BorderPane {
 		// Disable or enable buttons
 		if (smartController.getFiltersModeTab().isSelected()) {
 			((Node) whatFilesToExportGroup.getToggles().get(2)).setDisable(true);
-			JavaFXTools.selectToggleOnIndex(whatFilesToExportGroup, 1);
+			JavaFXTool.selectToggleOnIndex(whatFilesToExportGroup, 1);
 		} else {
 			((Node) whatFilesToExportGroup.getToggles().get(2)).setDisable(false);
 		}

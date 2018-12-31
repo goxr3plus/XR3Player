@@ -19,6 +19,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
@@ -75,8 +76,8 @@ public class XPlayerPlayService extends Service<Boolean> {
 		// }
 
 		// Test if the audioFile needs to be converted
-		if (!InfoTool.isAudioSupported(fileAbsolutePath)) {
-			if (InfoTool.isAudio(fileAbsolutePath)) { // Check if we have Audio
+		if (!ExtensionTool.isAudioSupported(fileAbsolutePath)) {
+			if (ExtensionTool.isAudio(fileAbsolutePath)) { // Check if we have Audio
 
 				// Show information to the user
 				ActionTool.showNotification("File is converting",
@@ -88,7 +89,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 				return;
 
-			} else if (InfoTool.isVideo(fileAbsolutePath)) { // Check if we have Video
+			} else if (ExtensionTool.isVideo(fileAbsolutePath)) { // Check if we have Video
 				// Show information to the user
 				ActionTool.showNotification("File is converting",
 						"Current Video file format is not supported:\n so it will automatically be converted into .mp3.",

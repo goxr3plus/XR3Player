@@ -35,7 +35,7 @@ import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.Util;
+import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**

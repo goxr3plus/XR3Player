@@ -24,6 +24,7 @@ import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
@@ -85,7 +86,7 @@ public class InputService extends Service<Void> {
 				.map(file -> new File(IOTool.getRealPathFromFile(file.getAbsolutePath()).getFileAbsolutePath()))
 				// Filter only the files we want
 				.filter(file -> file.isDirectory()
-						|| (file.isFile() && InfoTool.isAudioSupported(file.getAbsolutePath())))
+						|| (file.isFile() && ExtensionTool.isAudioSupported(file.getAbsolutePath())))
 				// Collect everything to a list
 				.collect(Collectors.toList());
 		// Security Value
@@ -219,7 +220,7 @@ public class InputService extends Service<Void> {
 													// System.out.println("Adding...."+s.toString())
 
 													// supported?
-													if (InfoTool.isAudioSupported(filePath + ""))
+													if (ExtensionTool.isAudioSupported(filePath + ""))
 														insertMedia(filePath + "", 0, 0, date, time, preparedInsert);
 
 													// update progress
@@ -322,7 +323,7 @@ public class InputService extends Service<Void> {
 
 										// System.out.println("It is symbolic link?"+Files.isSymbolicLink(file));
 
-										if (InfoTool.isAudioSupported(filePath + ""))
+										if (ExtensionTool.isAudioSupported(filePath + ""))
 											++count[0];
 
 										return isCancelled() ? FileVisitResult.TERMINATE : FileVisitResult.CONTINUE;

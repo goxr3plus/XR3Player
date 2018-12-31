@@ -21,7 +21,7 @@ import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
@@ -72,15 +72,15 @@ public class FileTreeItem extends TreeItem<String> {
 
 			else {
 				// Is it a music file?
-				if (InfoTool.isAudio(absoluteFilePath))
+				if (ExtensionTool.isAudio(absoluteFilePath))
 					setFontIcon("fas-file-audio", audioColor);
-				else if (InfoTool.isVideo(absoluteFilePath))
+				else if (ExtensionTool.isVideo(absoluteFilePath))
 					setFontIcon("fas-file-video", Color.WHITE);
-				else if (InfoTool.isImage(absoluteFilePath))
+				else if (ExtensionTool.isImage(absoluteFilePath))
 					setFontIcon("fas-file-image", Color.WHITE);
-				else if (InfoTool.isPdf(absoluteFilePath))
+				else if (ExtensionTool.isPdf(absoluteFilePath))
 					setFontIcon("fas-file-pdf", pdfColor);
-				else if (InfoTool.isZip(absoluteFilePath))
+				else if (ExtensionTool.isZip(absoluteFilePath))
 					setFontIcon("fas-file-archive", Color.WHITE);
 				else
 					setFontIcon("fas-file", Color.WHITE);

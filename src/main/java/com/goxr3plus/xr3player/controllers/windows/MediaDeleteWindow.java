@@ -18,7 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * This class is an class FXML Prototype
@@ -84,10 +84,10 @@ public class MediaDeleteWindow extends BorderPane {
 	 */
 	public List<Boolean> doDeleteQuestion(boolean permanent, String text, int numberOfItems, Stage window) {
 		final List<Boolean> arrayList = Arrays.asList(false, false);
-		JavaFXTools.selectToggleOnIndex(group, permanent ? 1 : 0);
+		JavaFXTool.selectToggleOnIndex(group, permanent ? 1 : 0);
 
 		// Create the Alert
-		Alert alert = JavaFXTools.createAlert(null, "", "", AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
+		Alert alert = JavaFXTool.createAlert(null, "", "", AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
 		alert.getDialogPane().setContent(this);
 		mediaNameLabel.setText((numberOfItems <= 1 ? "[" + text : "Selected [" + text + " items") + "]");
 
@@ -97,7 +97,7 @@ public class MediaDeleteWindow extends BorderPane {
 		alert.showAndWait().ifPresent(answer -> {
 			if (answer == ButtonType.OK) {
 				arrayList.set(0, true);
-				arrayList.set(1, JavaFXTools.getIndexOfSelectedToggle(group) == 1);
+				arrayList.set(1, JavaFXTool.getIndexOfSelectedToggle(group) == 1);
 			}
 
 		});

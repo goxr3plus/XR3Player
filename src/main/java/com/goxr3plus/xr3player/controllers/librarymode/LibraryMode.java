@@ -53,7 +53,7 @@ import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.Library
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * This class contains everything needed going on LibraryMode.
@@ -451,11 +451,11 @@ public class LibraryMode extends BorderPane {
 		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
 				+ defaultWebColor + " 87%);");
 		colorPicker.setOnAction(λ -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-Background-Color",
-				JavaFXTools.colorToWebColor(colorPicker.getValue())));
+				JavaFXTool.colorToWebColor(colorPicker.getValue())));
 		colorPicker.valueProperty()
 				.addListener((observable, oldColor, newColor) -> viewer
 						.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
-								+ JavaFXTools.colorToWebColor(newColor) + "  87%);"));
+								+ JavaFXTool.colorToWebColor(newColor) + "  87%);"));
 
 		// bottomSplitPane
 		bottomSplitPane.visibleProperty().bind(djModeStackPane.visibleProperty().not());

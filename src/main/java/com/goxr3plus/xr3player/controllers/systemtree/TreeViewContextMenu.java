@@ -25,9 +25,10 @@ import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The default context menu for song items of application.
@@ -119,8 +120,8 @@ public class TreeViewContextMenu extends ContextMenu {
 		getItems().forEach(item -> item.setVisible(true));
 
 		// Keep this variables
-		final boolean isAudio = InfoTool.isAudio(treeItem.getAbsoluteFilePath());
-		final boolean isVideo = InfoTool.isVideo(treeItem.getAbsoluteFilePath());
+		final boolean isAudio = ExtensionTool.isAudio(treeItem.getAbsoluteFilePath());
+		final boolean isVideo = ExtensionTool.isVideo(treeItem.getAbsoluteFilePath());
 
 		// Fix The Menu
 		if (isVideo) {
@@ -171,7 +172,7 @@ public class TreeViewContextMenu extends ContextMenu {
 		if (source == showFile)
 			ActionTool.openFileInExplorer(treeItem.getAbsoluteFilePath());
 		else if (source == copy)
-			JavaFXTools.setClipBoard(Arrays.asList(new File(treeItem.getAbsoluteFilePath())));
+			JavaFXTool.setClipBoard(Arrays.asList(new File(treeItem.getAbsoluteFilePath())));
 		else if (source == editFileInfo)
 			Main.tagWindow.openAudio(treeItem.getAbsoluteFilePath(), TagTabCategory.BASICINFO, true);
 		else if (source == rename)

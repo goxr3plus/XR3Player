@@ -11,7 +11,7 @@ import java.util.Map;
  * @author GOXR3PLUSSTUDIO
  *
  */
-public class SetEnv {
+public class EnvVarsTool {
 
 	public static void setEnv(Map<String, String> newenv)
 			throws ClassNotFoundException, IllegalAccessException, NoSuchFieldException {

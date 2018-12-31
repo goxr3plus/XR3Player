@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -84,11 +84,11 @@ public class GeneralSettingsController extends BorderPane {
 
 			// Update the properties file
 			Main.dbManager.getPropertiesDb().updateProperty("General-SideBarSide",
-					Integer.toString(JavaFXTools.getIndexOfSelectedToggle(sideBarPositionGroup)));
+					Integer.toString(JavaFXTool.getIndexOfSelectedToggle(sideBarPositionGroup)));
 
 			// Fix the side bar position
 			Main.sideBar.changeSide(
-					JavaFXTools.getIndexOfSelectedToggle(sideBarPositionGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT
+					JavaFXTool.getIndexOfSelectedToggle(sideBarPositionGroup) == 0 ? NodeOrientation.LEFT_TO_RIGHT
 							: NodeOrientation.RIGHT_TO_LEFT);
 		});
 
@@ -211,16 +211,16 @@ public class GeneralSettingsController extends BorderPane {
 		highGraphicsToggle.setSelected(false);
 
 		// notificationsPosition
-		JavaFXTools.selectToogleWithText(notificationsPosition, "BOTTOM_LEFT");
+		JavaFXTool.selectToogleWithText(notificationsPosition, "BOTTOM_LEFT");
 
 		// sideBarSideGroup
-		JavaFXTools.selectToggleOnIndex(sideBarPositionGroup, 0);
+		JavaFXTool.selectToggleOnIndex(sideBarPositionGroup, 0);
 
 		// libraryModeUpsideDown
-		JavaFXTools.selectToggleOnIndex(libraryModeUpsideDown, 0);
+		JavaFXTool.selectToggleOnIndex(libraryModeUpsideDown, 0);
 
 		// djModeUpsideDown
-		JavaFXTools.selectToggleOnIndex(djModeUpsideDown, 0);
+		JavaFXTool.selectToggleOnIndex(djModeUpsideDown, 0);
 
 	}
 

@@ -39,7 +39,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class RenameWindow.
@@ -288,13 +288,13 @@ public class RenameWindow extends VBox {
 		if (x <= -1 && y <= -1)
 			window.centerOnScreen();
 		else {
-			if (x + getWidth() > JavaFXTools.getScreenWidth())
-				x = JavaFXTools.getScreenWidth() - getWidth();
+			if (x + getWidth() > JavaFXTool.getScreenWidth())
+				x = JavaFXTool.getScreenWidth() - getWidth();
 			else if (x < 0)
 				x = 0;
 
-			if (y + getHeight() > JavaFXTools.getScreenHeight())
-				y = JavaFXTools.getScreenHeight() - getHeight();
+			if (y + getHeight() > JavaFXTool.getScreenHeight())
+				y = JavaFXTool.getScreenHeight() - getHeight();
 			else if (y < 0)
 				y = 0;
 

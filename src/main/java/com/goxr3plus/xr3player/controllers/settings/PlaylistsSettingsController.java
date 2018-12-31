@@ -21,7 +21,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * 
@@ -106,7 +106,7 @@ public class PlaylistsSettingsController extends BorderPane {
 		playedFilesDetectionGroup.selectedToggleProperty()
 				.addListener(listener -> Main.dbManager.getPropertiesDb().updateProperty(
 						"PlayLists-General-PlayedFilesDetection",
-						Integer.toString(JavaFXTools.getIndexOfSelectedToggle(playedFilesDetectionGroup))));
+						Integer.toString(JavaFXTool.getIndexOfSelectedToggle(playedFilesDetectionGroup))));
 
 		// totalFilesShownGroup
 		totalFilesShownGroup.selectedToggleProperty().addListener(listener -> {
@@ -115,7 +115,7 @@ public class PlaylistsSettingsController extends BorderPane {
 
 				// Update the properties file
 				Main.dbManager.getPropertiesDb().updateProperty("PlayLists-General-TotalFilesShown",
-						Integer.toString(JavaFXTools.getIndexOfSelectedToggle(totalFilesShownGroup)));
+						Integer.toString(JavaFXTool.getIndexOfSelectedToggle(totalFilesShownGroup)));
 
 				int maximumPerPlaylist = getMaximumPerPlaylist();
 
@@ -192,7 +192,7 @@ public class PlaylistsSettingsController extends BorderPane {
 		// fileSearchGroup
 		fileSearchGroup.selectedToggleProperty().addListener(
 				listener -> Main.dbManager.getPropertiesDb().updateProperty("PlayLists-Search-FileSearchUsing",
-						Integer.toString(JavaFXTools.getIndexOfSelectedToggle(fileSearchGroup))));
+						Integer.toString(JavaFXTool.getIndexOfSelectedToggle(fileSearchGroup))));
 
 		// --------------------FOLDERS MODE---------------------------------
 
@@ -220,13 +220,13 @@ public class PlaylistsSettingsController extends BorderPane {
 		instantSearch.setSelected(true);
 
 		// fileSearchGroup
-		JavaFXTools.selectToggleOnIndex(fileSearchGroup, 1);
+		JavaFXTool.selectToggleOnIndex(fileSearchGroup, 1);
 
 		// totalFilesShownGroup
-		JavaFXTools.selectToggleOnIndex(totalFilesShownGroup, 0);
+		JavaFXTool.selectToggleOnIndex(totalFilesShownGroup, 0);
 
 		// playedFilesDetectionGroup
-		JavaFXTools.selectToggleOnIndex(playedFilesDetectionGroup, 1);
+		JavaFXTool.selectToggleOnIndex(playedFilesDetectionGroup, 1);
 	}
 
 	/**

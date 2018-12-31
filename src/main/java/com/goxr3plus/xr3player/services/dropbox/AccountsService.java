@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxClientTreeItem;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class AccountsService extends Service<Boolean> {
 
@@ -102,12 +102,12 @@ public class AccountsService extends Service<Boolean> {
 					if (!list.isEmpty()) {
 						// Parent represents the client and it contains the accesstokens as leafs
 						DropboxClientTreeItem parent = produceTreeItem(email + " [ " + list.size() + " ]", "no token",
-								email, JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32));
+								email, JavaFXTool.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 32));
 
 						// For each element on the list
 						list.forEach(accessToken -> parent.getChildren()
 								.add(produceTreeItem(InfoTool.getMinString(accessToken, 25), accessToken, email,
-										JavaFXTools.getFontIcon("fas-key", goldColor, 20))));
+										JavaFXTool.getFontIcon("fas-key", goldColor, 20))));
 
 						// Append to the treeview root item
 						dropBoxViewer.getTreeView().getRoot().getChildren().add(parent);

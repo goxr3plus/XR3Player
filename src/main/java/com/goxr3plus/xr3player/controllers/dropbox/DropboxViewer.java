@@ -47,9 +47,10 @@ import main.java.com.goxr3plus.xr3player.services.dropbox.DropboxService;
 import main.java.com.goxr3plus.xr3player.services.dropbox.DropboxService.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DropboxViewer extends StackPane {
 
@@ -289,7 +290,7 @@ public class DropboxViewer extends StackPane {
 				// Show message to the User
 				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account",
 						Duration.millis(2000), NotificationType.SIMPLE,
-						JavaFXTools.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 64));
+						JavaFXTool.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 64));
 
 				// Save on the database
 				PropertiesDb propertiesDb = Main.userInfoMode.getUser().getUserInformationDb();
@@ -811,7 +812,7 @@ public class DropboxViewer extends StackPane {
 
 		// Check for internet connection
 		Thread thread = new Thread(() -> {
-			boolean hasInternet = InfoTool.isReachableByPing("www.google.com");
+			boolean hasInternet = NetworkingTool.isReachableByPing("www.google.com");
 			Platform.runLater(() -> {
 				errorPane.setVisible(!hasInternet);
 				tryAgainIndicator.setVisible(false);

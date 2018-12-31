@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class OnlineMusicBoxController extends StackPane {
 
@@ -74,22 +74,22 @@ public class OnlineMusicBoxController extends StackPane {
 
 		switch (category) {
 		case RECOMMENDED:
-			JavaFXTools.setFontIcon(null, fontIcon, "far-hand-peace", Color.WHITE);
+			JavaFXTool.setFontIcon(null, fontIcon, "far-hand-peace", Color.WHITE);
 			break;
 		case GENRES:
-			JavaFXTools.setFontIcon(null, fontIcon, "far-user", Color.WHITE);
+			JavaFXTool.setFontIcon(null, fontIcon, "far-user", Color.WHITE);
 			break;
 		case ACTIVITIES:
-			JavaFXTools.setFontIcon(null, fontIcon, "icm-rocket", Color.WHITE);
+			JavaFXTool.setFontIcon(null, fontIcon, "icm-rocket", Color.WHITE);
 			break;
 		case MOOD:
-			JavaFXTools.setFontIcon(null, fontIcon, "far-smile", Color.WHITE);
+			JavaFXTool.setFontIcon(null, fontIcon, "far-smile", Color.WHITE);
 			break;
 		case EDITORSPICK:
-			JavaFXTools.setFontIcon(null, fontIcon, "far-gem", Color.WHITE);
+			JavaFXTool.setFontIcon(null, fontIcon, "far-gem", Color.WHITE);
 			break;
 		case CHARTS:
-			JavaFXTools.setFontIcon(null, fontIcon, "fas-chart-bar", Color.WHITE);
+			JavaFXTool.setFontIcon(null, fontIcon, "fas-chart-bar", Color.WHITE);
 			break;
 		}
 

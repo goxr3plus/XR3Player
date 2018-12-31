@@ -37,8 +37,9 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Representing the data of SmartController.
@@ -184,21 +185,21 @@ public class DropboxDownloadsTableViewer extends StackPane {
 
 						// It is directory?
 						if (((DropboxDownloadedFile) super.getTableRow().getItem()).isDirectory()) { // DIRECTORY
-							JavaFXTools.setFontIcon(this, icon, "fas-folder", FileTreeItem.folderColor);
+							JavaFXTool.setFontIcon(this, icon, "fas-folder", FileTreeItem.folderColor);
 						} else {
 							// Is it a music file?
-							if (InfoTool.isAudioCheckExtension(item)) { // AUDIO
-								JavaFXTools.setFontIcon(this, icon, "fas-file-audio", FileTreeItem.audioColor);
-							} else if (InfoTool.isVideoCheckExtension(item)) { // VIDEO
-								JavaFXTools.setFontIcon(this, icon, "fas-file-video", Color.WHITE);
-							} else if (InfoTool.isImageCheckExtension(item)) { // PICTURE
-								JavaFXTools.setFontIcon(this, icon, "fas-file-image", Color.WHITE);
-							} else if (InfoTool.isPdfCheckExtension(item)) { // PDF
-								JavaFXTools.setFontIcon(this, icon, "fas-file-pdf", FileTreeItem.pdfColor);
-							} else if (InfoTool.isZipCheckExtension(item)) { // ZIP
-								JavaFXTools.setFontIcon(this, icon, "fas-file-archive", Color.WHITE);
+							if (ExtensionTool.isAudioCheckExtension(item)) { // AUDIO
+								JavaFXTool.setFontIcon(this, icon, "fas-file-audio", FileTreeItem.audioColor);
+							} else if (ExtensionTool.isVideoCheckExtension(item)) { // VIDEO
+								JavaFXTool.setFontIcon(this, icon, "fas-file-video", Color.WHITE);
+							} else if (ExtensionTool.isImageCheckExtension(item)) { // PICTURE
+								JavaFXTool.setFontIcon(this, icon, "fas-file-image", Color.WHITE);
+							} else if (ExtensionTool.isPdfCheckExtension(item)) { // PDF
+								JavaFXTool.setFontIcon(this, icon, "fas-file-pdf", FileTreeItem.pdfColor);
+							} else if (ExtensionTool.isZipCheckExtension(item)) { // ZIP
+								JavaFXTool.setFontIcon(this, icon, "fas-file-archive", Color.WHITE);
 							} else { // FILE
-								JavaFXTools.setFontIcon(this, icon, "fas-file", Color.WHITE);
+								JavaFXTool.setFontIcon(this, icon, "fas-file", Color.WHITE);
 							}
 						}
 					}
@@ -260,7 +261,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 						.collect(Collectors.toList()));
 
 				// Set Drag View
-				JavaFXTools.setPlainTextDragView(db,
+				JavaFXTool.setPlainTextDragView(db,
 						content.getFiles().size() == 1 ? tableView.getSelectionModel().getSelectedItem().getTitle()
 								: "(" + content.getFiles().size() + ")Items");
 

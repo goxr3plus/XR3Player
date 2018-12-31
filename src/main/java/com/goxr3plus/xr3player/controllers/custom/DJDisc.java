@@ -31,7 +31,7 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.geometry.ResizableCanvas;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Represents a disc controller.
@@ -90,7 +90,7 @@ public class DJDisc extends StackPane {
 	/**
 	 * Default Font Icon
 	 */
-	private final FontIcon noAlbumImageFontIcon = JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 16);
+	private final FontIcon noAlbumImageFontIcon = JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 16);
 
 	/** The image view. */
 	private final ImageView imageView = new ImageView();

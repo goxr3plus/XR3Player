@@ -50,7 +50,7 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Representing the data of SmartController.
@@ -396,10 +396,10 @@ public class MediaTableViewer extends StackPane {
 
 				// Single Drag and Drop ?
 				if (content.getFiles().size() == 1)
-					JavaFXTools.setDragView(db, tableView.getSelectionModel().getSelectedItem());
+					JavaFXTool.setDragView(db, tableView.getSelectionModel().getSelectedItem());
 				// Multiple Drag and Drop ?
 				else {
-					JavaFXTools.setPlainTextDragView(db, "(" + content.getFiles().size() + ")Items");
+					JavaFXTool.setPlainTextDragView(db, "(" + content.getFiles().size() + ")Items");
 				}
 
 				db.setContent(content);
@@ -601,12 +601,12 @@ public class MediaTableViewer extends StackPane {
 						if (item == -2) // UNKNOWN
 							setGraphic(null);
 						else if (item == -1) { // Already played
-							setGraphic(JavaFXTools.getFontIcon("fas-play-circle", lightGreen, 24));
+							setGraphic(JavaFXTool.getFontIcon("fas-play-circle", lightGreen, 24));
 						} else { // BEING PLAYED BY SOME PLAYERS
 							//
 							// TO BE FIXES - PROBLEM IF IS PLAYING IN MANY PLAYERS IT MUST SHOW MANY PLAYERS
 							// NOT JUST ONE!!!
-							setGraphic(JavaFXTools.getFontIcon("gmi-filter-" + (item + 1), Color.WHITE, 24));
+							setGraphic(JavaFXTool.getFontIcon("gmi-filter-" + (item + 1), Color.WHITE, 24));
 
 							// String mediaPath = getTableRow().getItem().getFilePath();
 							// Main.xPlayersList.getList().stream().sorted((o1 , o2) ->
@@ -649,11 +649,11 @@ public class MediaTableViewer extends StackPane {
 					// set the image according to the play status
 					if (item != null)
 						if (item == -1) { // Missing
-							JavaFXTools.setFontIcon(this, icon, "fa-deaf", Color.WHITE);
+							JavaFXTool.setFontIcon(this, icon, "fa-deaf", Color.WHITE);
 						} else if (item == 0) { // Corrupted
-							JavaFXTools.setFontIcon(this, icon, "fas-bug", Color.WHITE);
+							JavaFXTool.setFontIcon(this, icon, "fas-bug", Color.WHITE);
 						} else if (item == 1) { // Okay
-							JavaFXTools.setFontIcon(this, icon, "gmi-audiotrack", Color.WHITE);
+							JavaFXTool.setFontIcon(this, icon, "gmi-audiotrack", Color.WHITE);
 						}
 				}
 			}
@@ -905,7 +905,7 @@ public class MediaTableViewer extends StackPane {
 	 * Copies all the selected media files to the Native System ClipBoard
 	 */
 	public void copySelectedMediaToClipBoard() {
-		JavaFXTools.setClipBoard(tableView.getSelectionModel().getSelectedItems().stream()
+		JavaFXTool.setClipBoard(tableView.getSelectionModel().getSelectedItems().stream()
 				.map(s -> new File(s.getFilePath())).collect(Collectors.toList()));
 	}
 

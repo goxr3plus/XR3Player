@@ -15,7 +15,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.MediaViewer;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class MediaViewerService extends Service<Void> {
 
@@ -119,7 +119,7 @@ public class MediaViewerService extends Service<Void> {
 							content.putFiles(Arrays.asList(new File(media.getFilePath())));
 
 							// Set DragView
-							JavaFXTools.setDragView(db, media);
+							JavaFXTool.setDragView(db, media);
 
 							// Set Content
 							db.setContent(content);

@@ -25,7 +25,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**
@@ -239,7 +239,7 @@ public class MediaUpdaterService {
 		if (controllerIsFree[0]) {
 
 			// Check the settings
-			final int mode = JavaFXTools.getIndexOfSelectedToggle(
+			final int mode = JavaFXTool.getIndexOfSelectedToggle(
 					Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup());
 
 			// For each media File of the Controller

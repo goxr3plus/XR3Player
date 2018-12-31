@@ -8,7 +8,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.presenter.VisualizerWindowController.Type;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class ApplicationSettingsLoader {
 
@@ -50,7 +50,7 @@ public class ApplicationSettingsLoader {
 					.getNativeKeyBindings().getKeyBindingsActive().setSelected(Boolean.parseBoolean(s)));
 
 			Optional.ofNullable(settings.getProperty("ShortCuts-SelectedPlayer"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(
+					.ifPresent(s -> JavaFXTool.selectToggleOnIndex(
 							Main.settingsWindow.getNativeKeyBindings().getxPlayerSelected(), Integer.valueOf(s)));
 
 			// ======================START OF General-Settings======================
@@ -64,13 +64,13 @@ public class ApplicationSettingsLoader {
 
 			// --SideBar side
 			Optional.ofNullable(settings.getProperty("General-SideBarSide"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(
+					.ifPresent(s -> JavaFXTool.selectToggleOnIndex(
 							Main.settingsWindow.getGeneralSettingsController().getSideBarSideGroup(),
 							Integer.valueOf(s)));
 
 			// --NotificationsPosition
 			Optional.ofNullable(settings.getProperty("General-NotificationsPosition"))
-					.ifPresent(s -> JavaFXTools.selectToogleWithText(
+					.ifPresent(s -> JavaFXTool.selectToogleWithText(
 							Main.settingsWindow.getGeneralSettingsController().getNotificationsPosition(), s));
 
 			// --LibraryMode
@@ -101,12 +101,12 @@ public class ApplicationSettingsLoader {
 			// --Media Mode SECTOR
 
 			Optional.ofNullable(settings.getProperty("PlayLists-General-PlayedFilesDetection"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(
+					.ifPresent(s -> JavaFXTool.selectToggleOnIndex(
 							Main.settingsWindow.getPlayListsSettingsController().getPlayedFilesDetectionGroup(),
 							Integer.valueOf(s)));
 
 			Optional.ofNullable(settings.getProperty("PlayLists-General-TotalFilesShown"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(
+					.ifPresent(s -> JavaFXTool.selectToggleOnIndex(
 							Main.settingsWindow.getPlayListsSettingsController().getTotalFilesShownGroup(),
 							Integer.valueOf(s)));
 
@@ -129,7 +129,7 @@ public class ApplicationSettingsLoader {
 							.setSelected(Boolean.parseBoolean(s)));
 
 			Optional.ofNullable(settings.getProperty("PlayLists-Search-FileSearchUsing"))
-					.ifPresent(s -> JavaFXTools.selectToggleOnIndex(
+					.ifPresent(s -> JavaFXTool.selectToggleOnIndex(
 							Main.settingsWindow.getPlayListsSettingsController().getFileSearchGroup(),
 							Integer.valueOf(s)));
 

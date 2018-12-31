@@ -20,7 +20,7 @@ import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.ProgressOutputStream;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DownloadService extends Service<Boolean> {
 
@@ -81,7 +81,7 @@ public class DownloadService extends Service<Boolean> {
 							"Completed downloading " + (!dropboxFile.isDirectory() ? "File" : FOLDER) + " :\n[ "
 									+ dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.SIMPLE,
-							JavaFXTools.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64)));
+							JavaFXTool.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64)));
 
 					// Update the progress
 					updateProgress(1, 1);

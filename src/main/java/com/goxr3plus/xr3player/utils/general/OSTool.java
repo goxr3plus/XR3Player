@@ -1,10 +1,8 @@
 package main.java.com.goxr3plus.xr3player.utils.general;
 
-import javafx.application.Platform;
-import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.OperatingSystem;
 
-public class Util {
+public class OSTool {
 
 	private static OperatingSystem os = null;
 	private static final String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();

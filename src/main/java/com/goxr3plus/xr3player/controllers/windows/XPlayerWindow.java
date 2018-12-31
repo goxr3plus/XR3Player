@@ -22,7 +22,7 @@ import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -97,8 +97,8 @@ public class XPlayerWindow extends BorderPane {
 	private void initialize() {
 
 		// -- Scene
-		borderlessScene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, JavaFXTools.getScreenWidth() / 3,
-				JavaFXTools.getScreenHeight() / 3);
+		borderlessScene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, JavaFXTool.getScreenWidth() / 3,
+				JavaFXTool.getScreenHeight() / 3);
 		borderlessScene.setMoveControl(topBar);
 		borderlessScene.getStylesheets()
 				.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());

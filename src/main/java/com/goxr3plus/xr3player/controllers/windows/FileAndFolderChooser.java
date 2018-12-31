@@ -11,9 +11,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 
 /**
  * An implementation which combines FileChooser and DirectoryChooser.
@@ -45,7 +45,7 @@ public class FileAndFolderChooser {
 
 		// Special Audio Files Filter
 		audioFilter = new FileChooser.ExtensionFilter("Audio Files",
-				Stream.of(InfoTool.POPULAR_AUDIO_EXTENSIONS_LIST, InfoTool.POPULAR_VIDEO_EXTENSIONS_LIST)
+				Stream.of(ExtensionTool.POPULAR_AUDIO_EXTENSIONS_LIST, ExtensionTool.POPULAR_VIDEO_EXTENSIONS_LIST)
 						.flatMap(List::stream).map(m -> "*." + m).collect(Collectors.toList()));
 	}
 

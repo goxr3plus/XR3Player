@@ -5,7 +5,7 @@ import org.controlsfx.control.PopOver;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class SpecialPopOver extends PopOver {
 
@@ -31,8 +31,8 @@ public class SpecialPopOver extends PopOver {
 		Bounds bounds = node.localToScreen(node.getBoundsInLocal());
 		boolean fitOnTop = bounds.getMinY() - popOverHeight > 0; // top?
 		boolean fitOnLeft = bounds.getMinX() - popOverWidth > 0; // left?
-		boolean fitOnRight = bounds.getMaxX() + popOverWidth < JavaFXTools.getVisualScreenWidth();// right?
-		boolean fitOnBottom = bounds.getMaxY() + popOverHeight < JavaFXTools.getVisualScreenHeight(); // bottom?
+		boolean fitOnRight = bounds.getMaxX() + popOverWidth < JavaFXTool.getVisualScreenWidth();// right?
+		boolean fitOnBottom = bounds.getMaxY() + popOverHeight < JavaFXTool.getVisualScreenHeight(); // bottom?
 
 		if (fitOnTop)
 			this.setArrowLocation(ArrowLocation.BOTTOM_CENTER);

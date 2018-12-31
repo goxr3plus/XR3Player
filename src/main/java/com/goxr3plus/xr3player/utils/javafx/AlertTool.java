@@ -1,7 +1,7 @@
 package main.java.com.goxr3plus.xr3player.utils.javafx;
 
-public final class AlertTools {
+public final class AlertTool {
 
-	private AlertTools() {}
+	private AlertTool() {}
 
 }

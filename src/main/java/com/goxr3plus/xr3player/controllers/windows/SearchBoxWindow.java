@@ -28,7 +28,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class LibrariesSearchWindow.
@@ -180,7 +180,7 @@ public class SearchBoxWindow extends BorderPane {
 		window.setX(bounds.getMinX());
 		// Check here so the window doesn't go below screen height
 		window.setY(
-				(window.getHeight() + bounds.getMaxY() + 10 < JavaFXTools.getVisualScreenHeight()) ? bounds.getMaxY() + 10
+				(window.getHeight() + bounds.getMaxY() + 10 < JavaFXTool.getVisualScreenHeight()) ? bounds.getMaxY() + 10
 						: bounds.getMinY() - window.getHeight() - 10);
 	}
 

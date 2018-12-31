@@ -44,7 +44,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.core.VisualizerDrawer;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
+import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class VisualizerWindow.
@@ -147,8 +147,8 @@ public class VisualizerWindowController extends StackPane {
 		window = new Stage();
 		window.setTitle("XR3Player Visualizer");
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
-		window.setWidth(JavaFXTools.getScreenHeight() / 2);
-		window.setHeight(JavaFXTools.getScreenHeight() / 2);
+		window.setWidth(JavaFXTool.getScreenHeight() / 2);
+		window.setHeight(JavaFXTool.getScreenHeight() / 2);
 		window.centerOnScreen();
 		window.setFullScreenExitHint("");
 		window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -310,7 +310,7 @@ public class VisualizerWindowController extends StackPane {
 	public void setNewImage(Type type) {
 
 		// Check the response
-		JavaFXTools
+		JavaFXTool
 				.selectAndSaveImage("XPlayer" + this.xPlayerController.getKey() + type,
 						InfoTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
 				.ifPresent(imageFile -> {
@@ -335,7 +335,7 @@ public class VisualizerWindowController extends StackPane {
 	public void resetToDefaultImage(Type type) {
 
 		// Delete the background image
-		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
+		JavaFXTool.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
 				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
 
 		// Manage Settings
@@ -355,7 +355,7 @@ public class VisualizerWindowController extends StackPane {
 	public void findAppropriateImage(Type type) {
 
 		// Check if it returns null
-		Image image = JavaFXTools.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
+		Image image = JavaFXTool.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
 				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
 
 		// System.out.println("image is null?" + type + " .... " + ( image == null ))
@@ -377,7 +377,7 @@ public class VisualizerWindowController extends StackPane {
 	public void clearImage(Type type) {
 
 		// Delete the background image
-		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
+		JavaFXTool.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
 				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
 
 		// Set the Image to null

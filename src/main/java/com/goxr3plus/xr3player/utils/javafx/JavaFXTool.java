@@ -37,6 +37,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
@@ -46,9 +47,9 @@ import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
  * @author GOXR3PLUS
  *
  */
-public final class JavaFXTools {
+public final class JavaFXTool {
 
-	private JavaFXTools() {
+	private JavaFXTool() {
 	}
 
 	/**
@@ -57,7 +58,7 @@ public final class JavaFXTools {
 	 * 
 	 * @param toggleGroup
 	 */
-	public static void selectToogleWithText(ToggleGroup toggleGroup, String text) {
+	public static void selectToogleWithText(final ToggleGroup toggleGroup, final String text) {
 		toggleGroup.getToggles().forEach(toggle -> {
 			if (((Labeled) toggle).getText().equals(text)) {
 				toggle.setSelected(true);
@@ -72,7 +73,7 @@ public final class JavaFXTools {
 	 * @param g
 	 * @return The index of the Selected Toggle
 	 */
-	public static int getIndexOfSelectedToggle(ToggleGroup g) {
+	public static int getIndexOfSelectedToggle(final ToggleGroup g) {
 		return g.getToggles().indexOf(g.getSelectedToggle());
 	}
 
@@ -83,7 +84,7 @@ public final class JavaFXTools {
 	 * @param g
 	 * @param index
 	 */
-	public static void selectToggleOnIndex(ToggleGroup g, int index) {
+	public static void selectToggleOnIndex(final ToggleGroup g, final int index) {
 		g.selectToggle(g.getToggles().get(index));
 	}
 
@@ -93,22 +94,22 @@ public final class JavaFXTools {
 	 * 
 	 * @return The absolute path of the image file or null if not exists
 	 */
-	public static String getAbsoluteImagePath(String title, String folderToSearch) {
+	public static String getAbsoluteImagePath(final String title, final String folderToSearch) {
 		String absolutePath = null;
 
 		// If Folder not exists return null
-		File searchingFolder = new File(folderToSearch);
+		final File searchingFolder = new File(folderToSearch);
 		if (!searchingFolder.exists())
 			return absolutePath;
 
 		// Try to find the image
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			absolutePath = paths.filter(path -> {
-				File file = path.toFile();
+				final File file = path.toFile();
 				return !file.isDirectory() && title.equals(IOTool.getFileTitle(file.getAbsolutePath()))
-						&& InfoTool.isImageSupported(file.getAbsolutePath());
+						&& ExtensionTool.isImageSupported(file.getAbsolutePath());
 			}).findFirst().map(path -> path.toAbsolutePath().toString()).orElse(null);
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
 
@@ -123,9 +124,9 @@ public final class JavaFXTools {
 	 * @param folderToSearch Absolute path of the Folder to Search
 	 * @return
 	 */
-	public static Image findAnyImageWithTitle(String title, String folderToSearch) {
+	public static Image findAnyImageWithTitle(final String title, final String folderToSearch) {
 		// Check if any Image with that Title exists inside the given folder
-		String imageAbsolutePath = getAbsoluteImagePath(title, folderToSearch);
+		final String imageAbsolutePath = getAbsoluteImagePath(title, folderToSearch);
 		return imageAbsolutePath == null ? null : new Image(new File(imageAbsolutePath).toURI() + "");
 	}
 
@@ -136,22 +137,22 @@ public final class JavaFXTools {
 	 * @param title
 	 * @param folderToSearch Absolute path of the Folder to Search
 	 */
-	public static void deleteAnyImageWithTitle(String title, String folderToSearch) {
+	public static void deleteAnyImageWithTitle(final String title, final String folderToSearch) {
 
 		// If Folder not exists return
-		File searchingFolder = new File(folderToSearch);
+		final File searchingFolder = new File(folderToSearch);
 		if (!searchingFolder.exists())
 			return;
 
 		// Find and delete it
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			paths.forEach(path -> {
-				File file = path.toFile();
+				final File file = path.toFile();
 				if (!file.isDirectory() && IOTool.getFileTitle(file.getAbsolutePath()).equals(title)
-						&& InfoTool.isImageSupported(file.getAbsolutePath()))
+						&& ExtensionTool.isImageSupported(file.getAbsolutePath()))
 					file.delete(); // -> to be fixed
 			});
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
 
@@ -179,15 +180,15 @@ public final class JavaFXTools {
 	 * @return The image file which of course can be null if the user doesn't
 	 *         selected anything
 	 */
-	public static Optional<File> selectAndSaveImage(String title, String folderForSaving,
-			FileAndFolderChooser specialChooser, Stage window) {
+	public static Optional<File> selectAndSaveImage(final String title, final String folderForSaving,
+			final FileAndFolderChooser specialChooser, final Stage window) {
 
-		File imageFile = specialChooser.prepareToSelectImage(window);
+		final File imageFile = specialChooser.prepareToSelectImage(window);
 		if (imageFile == null)
 			return Optional.ofNullable(null);
 
 		// Check the given image
-		Image image = new Image(imageFile.toURI() + "");
+		final Image image = new Image(imageFile.toURI() + "");
 
 		// Check width and height
 		if (image.getWidth() > maximumImageWidth || image.getHeight() > maximumImageHeight
@@ -222,7 +223,7 @@ public final class JavaFXTools {
 	 * @param color The given color
 	 * @return The hex web string from the given color for example (#302015)
 	 */
-	public static String colorToWebColor(Color color) {
+	public static String colorToWebColor(final Color color) {
 		return String.format("#%02X%02X%02X", (int) (color.getRed() * 255), (int) (color.getGreen() * 255),
 				(int) (color.getBlue() * 255));
 
@@ -242,11 +243,11 @@ public final class JavaFXTools {
 	 * @param graphic
 	 * @return The created Alert based on the given parameters
 	 */
-	public static Alert createAlert(String title, String headerText, String contentText, AlertType alertType,
-			StageStyle stageStyle, Stage owner, Node graphic) {
+	public static Alert createAlert(final String title, final String headerText, final String contentText, final AlertType alertType,
+			final StageStyle stageStyle, final Stage owner, final Node graphic) {
 
 		// Show Alert
-		Alert alert = new Alert(alertType);
+		final Alert alert = new Alert(alertType);
 		if (title != null)
 			alert.setTitle(title);
 		if (headerText != null)
@@ -264,20 +265,20 @@ public final class JavaFXTools {
 		alert.heightProperty().addListener(l -> {
 
 			// Width and Height of the Alert
-			double alertWidth = alert.getWidth();
-			double alertHeight = alert.getHeight();
+			final double alertWidth = alert.getWidth();
+			final double alertHeight = alert.getHeight();
 			double alertScreenX = alert.getX();
 			double alertScreenY = alert.getY();
 
 			// Check if Alert goes out of the Screen on X Axis
-			if (alertScreenX + alertWidth > JavaFXTools.getVisualScreenWidth())
-				alertScreenX = (int) (JavaFXTools.getVisualScreenWidth() - alertWidth);
+			if (alertScreenX + alertWidth > JavaFXTool.getVisualScreenWidth())
+				alertScreenX = (int) (JavaFXTool.getVisualScreenWidth() - alertWidth);
 			else if (alertScreenX < 0)
 				alertScreenX = 0;
 
 			// Check if Alert goes out of the Screen on Y AXIS
-			if (alertScreenY + alertHeight > JavaFXTools.getVisualScreenHeight())
-				alertScreenY = (int) (JavaFXTools.getVisualScreenHeight() - alertHeight);
+			if (alertScreenY + alertHeight > JavaFXTool.getVisualScreenHeight())
+				alertScreenY = (int) (JavaFXTool.getVisualScreenHeight() - alertHeight);
 			else if (alertScreenY < 0)
 				alertScreenY = 0;
 
@@ -299,8 +300,8 @@ public final class JavaFXTools {
 	 * @return Returns an ImageView using method getImageFromResourcesFolder(String
 	 *         imageName);
 	 */
-	public static ImageView getImageViewFromResourcesFolder(String imageName, double width, double height) {
-		ImageView imageView = new ImageView(InfoTool.getImageFromResourcesFolder(imageName));
+	public static ImageView getImageViewFromResourcesFolder(final String imageName, final double width, final double height) {
+		final ImageView imageView = new ImageView(InfoTool.getImageFromResourcesFolder(imageName));
 		if (width == -1 || height == -1 || width == 0 || height == 0)
 			return imageView;
 		imageView.setFitWidth(width);
@@ -316,8 +317,8 @@ public final class JavaFXTools {
 	 * @param height
 	 * @return
 	 */
-	public static ImageView getImageView(Image image, double width, double height) {
-		ImageView imageView = new ImageView(image);
+	public static ImageView getImageView(final Image image, final double width, final double height) {
+		final ImageView imageView = new ImageView(image);
 		if (width == -1 || height == -1 || width == 0 || height == 0)
 			return imageView;
 		imageView.setFitWidth(width);
@@ -332,7 +333,7 @@ public final class JavaFXTools {
 	 * @param iconLiteral
 	 * @param color
 	 */
-	public static void setFontIcon(Labeled node, FontIcon icon, String iconLiteral, Color color) {
+	public static void setFontIcon(final Labeled node, final FontIcon icon, final String iconLiteral, final Color color) {
 		icon.setIconLiteral(iconLiteral);
 		icon.setIconColor(color);
 		if (node != null)
@@ -347,10 +348,10 @@ public final class JavaFXTools {
 	 * @param size
 	 * @return
 	 */
-	public static FontIcon getFontIcon(String iconLiteral, Color color, int size) {
+	public static FontIcon getFontIcon(final String iconLiteral, final Color color, final int size) {
 
 		// Create the Icon
-		FontIcon icon = new FontIcon(iconLiteral);
+		final FontIcon icon = new FontIcon(iconLiteral);
 
 		// Set Icon Color
 		icon.setIconColor(color);
@@ -368,8 +369,8 @@ public final class JavaFXTools {
 	 * @param dragBoard
 	 * @param media
 	 */
-	public static void setDragView(Dragboard dragBoard, Media media) {
-		SnapshotParameters params = new SnapshotParameters();
+	public static void setDragView(final Dragboard dragBoard, final Media media) {
+		final SnapshotParameters params = new SnapshotParameters();
 		params.setFill(Color.TRANSPARENT);
 		dragBoard.setDragView(Main.dragViewer.updateMedia(media).snapshot(params, new WritableImage(150, 150)), 50, 0);
 	}
@@ -380,8 +381,8 @@ public final class JavaFXTools {
 	 * @param dragBoard
 	 * @param title
 	 */
-	public static void setPlainTextDragView(Dragboard dragBoard, String title) {
-		SnapshotParameters params = new SnapshotParameters();
+	public static void setPlainTextDragView(final Dragboard dragBoard, final String title) {
+		final SnapshotParameters params = new SnapshotParameters();
 		params.setFill(Color.TRANSPARENT);
 		dragBoard.setDragView(Main.dragViewer.updateDropboxMedia(title).snapshot(params, new WritableImage(150, 150)),
 				50, 0);
@@ -392,7 +393,7 @@ public final class JavaFXTools {
 	 * 
 	 * @param items
 	 */
-	public static void setClipBoard(List<File> items) {
+	public static void setClipBoard(final List<File> items) {
 		// Get Native System ClipBoard
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 		final ClipboardContent content = new ClipboardContent();
