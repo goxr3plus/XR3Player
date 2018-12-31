@@ -23,7 +23,7 @@ public class WaveVisualization extends WaveFormPane {
 
 	private boolean recalculateWaveData = true;
 
-	private XPlayerController xPlayerController;
+	private final XPlayerController xPlayerController;
 
 	/**
 	 * Constructor
@@ -31,7 +31,7 @@ public class WaveVisualization extends WaveFormPane {
 	 * @param width
 	 * @param height
 	 */
-	public WaveVisualization(XPlayerController xPlayerController, int width, int height) {
+	public WaveVisualization(final XPlayerController xPlayerController, final int width, final int height) {
 		super(width, height);
 		super.setWaveVisualization(this);
 		this.xPlayerController = xPlayerController;
@@ -40,7 +40,6 @@ public class WaveVisualization extends WaveFormPane {
 
 		// ----------
 		widthProperty().addListener((observable, oldValue, newValue) -> {
-			// System.out.println("New Visualizer Width is:" + newValue);
 
 			// Canvas Width
 			this.width = Math.round(newValue.floatValue());
@@ -52,7 +51,6 @@ public class WaveVisualization extends WaveFormPane {
 		});
 		// -------------
 		heightProperty().addListener((observable, oldValue, newValue) -> {
-			// System.out.println("New Visualizer Height is:" + newValue);
 
 			// Canvas Height
 			this.height = Math.round(newValue.floatValue());
@@ -135,7 +133,7 @@ public class WaveVisualization extends WaveFormPane {
 		}
 
 		@Override
-		public void handle(long nanos) {
+		public void handle(final long nanos) {
 
 			// Speed improvement
 			if (!xPlayerController.getModeToggle().isSelected() && xPlayerController.getModesStackPane().isVisible()) {
@@ -147,7 +145,7 @@ public class WaveVisualization extends WaveFormPane {
 				super.stop();
 
 			// Set Timer X Position
-			double percent = xPlayerController.getxPlayerModel().getCurrentTime()
+			final double percent = xPlayerController.getxPlayerModel().getCurrentTime()
 					/ (double) xPlayerController.getxPlayerModel().getDuration();
 			setTimerXPosition((int) (percent * width));
 
@@ -172,10 +170,6 @@ public class WaveVisualization extends WaveFormPane {
 			// Draw wave
 			paintWaveForm();
 
-			// Print
-			// System.out.println("Wave Data : " + WaveVisualization.this.getWaveData() + "
-			// ,Wave Visualization : " +
-			// WaveVisualization.this.getWaveService().getWavAmplitudes());
 		}
 
 		/**
@@ -184,11 +178,11 @@ public class WaveVisualization extends WaveFormPane {
 		 * @param sourcePcmData
 		 * @return An array with amplitudes
 		 */
-		private float[] processAmplitudes(int[] sourcePcmData) {
+		private float[] processAmplitudes(final int[] sourcePcmData) {
 			try {
-				int width = WaveVisualization.this.width; // the width of the resulting waveform panel
-				float[] waveData = new float[width];
-				int samplesPerPixel = sourcePcmData.length / width;
+				final int width = WaveVisualization.this.width; // the width of the resulting waveform panel
+				final float[] waveData = new float[width];
+				final int samplesPerPixel = sourcePcmData.length / width;
 
 				for (int w = 0; w < width; w++) {
 					float nValue = 0.0f;
@@ -200,7 +194,7 @@ public class WaveVisualization extends WaveFormPane {
 					waveData[w] = nValue;
 				}
 				return waveData;
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				ex.printStackTrace();
 				return null;
 			}

@@ -44,6 +44,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.database.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
@@ -51,7 +52,6 @@ import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBox
 import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;

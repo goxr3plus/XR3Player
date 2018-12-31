@@ -129,7 +129,7 @@ public class PropertiesDb {
 			try (InputStream inStream = new FileInputStream(fileAbsolutePath)) {
 
 				// load properties
-				// properties.clear();
+				// properties.clear()
 				properties.load(inStream);
 
 			} catch (final IOException ex) {

@@ -1,8 +1,9 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package main.java.com.goxr3plus.xr3player.application.database;
 
 import java.io.File;
 import java.util.Random;
 
+import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class DatabaseTool {
