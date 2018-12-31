@@ -11,8 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class CloseAppBox extends StackPane {
@@ -90,7 +90,7 @@ public class CloseAppBox extends StackPane {
 		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());
 
 		// donate
-		donate.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
+		donate.setOnAction(a -> NetworkingTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
 		// about
 		about.setOnAction(a -> Main.aboutWindow.show());

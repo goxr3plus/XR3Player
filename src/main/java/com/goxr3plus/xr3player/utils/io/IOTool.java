@@ -17,7 +17,6 @@ import org.apache.commons.io.FilenameUtils;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.FileLinkType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
@@ -72,7 +71,8 @@ public class IOTool {
 		try {
 			return Files.readAttributes(Paths.get(path), BasicFileAttributes.class).creationTime();
 		} catch (final IOException ex) {
-			ActionTool.logger.log(Level.INFO, "", ex);
+			ex.printStackTrace();
+			//ActionTool.logger.log(Level.INFO, "", ex);
 		}
 
 		return null;
@@ -287,7 +287,8 @@ public class IOTool {
 			try {
 				FileUtils.deleteDirectory(source);
 			} catch (final IOException ex) {
-				ActionTool.logger.log(Level.INFO, "", ex);
+				ex.printStackTrace();
+				//ActionTool.logger.log(Level.INFO, "", ex);
 			}
 		else if (source.isFile() && !source.delete()) { // File
 			AlertTool.showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.",

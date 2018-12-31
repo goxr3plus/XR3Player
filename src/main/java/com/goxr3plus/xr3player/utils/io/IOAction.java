@@ -8,11 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
-import java.util.logging.Level;
 
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public final class IOAction {
@@ -82,7 +80,8 @@ public final class IOAction {
 		try {
 			Files.move(Paths.get(source), Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
 		} catch (final IOException ex) {
-			ActionTool.logger.log(Level.WARNING, "", ex);
+			ex.printStackTrace();
+			//ActionTool.logger.log(Level.WARNING, "", ex);
 			succeess = false;
 		}
 
@@ -141,7 +140,8 @@ public final class IOAction {
 				// Open in Explorer and Highlight
 				new ProcessBuilder(list).start();
 			} catch (final IOException ex) {
-				ActionTool.logger.log(Level.WARNING, ex.getMessage(), ex);
+				ex.printStackTrace();
+				//ActionTool.logger.log(Level.WARNING, ex.getMessage(), ex);
 				AlertTool.showNotification("Folder Explorer Fail", "Failed to open file explorer.", Duration.millis(1500),
 						NotificationType.WARNING);
 			}
@@ -187,7 +187,8 @@ public final class IOAction {
 		} catch (final IOException ex) {
 			AlertTool.showNotification("Problem Occured", "Can't open default File at:\n[" + absolutePath + " ]",
 					Duration.millis(2500), NotificationType.INFORMATION);
-			ActionTool.logger.log(Level.INFO, "", ex);
+			ex.printStackTrace();
+			//ActionTool.logger.log(Level.INFO, "", ex);
 			return false;
 		}
 		return true;

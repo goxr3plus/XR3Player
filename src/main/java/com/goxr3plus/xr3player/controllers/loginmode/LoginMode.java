@@ -38,15 +38,15 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
+import main.java.com.goxr3plus.xr3player.application.enums.UserCategory;
 import main.java.com.goxr3plus.xr3player.controllers.custom.FlipPanel;
 import main.java.com.goxr3plus.xr3player.controllers.general.CloseAppBox;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
-import main.java.com.goxr3plus.xr3player.controllers.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
@@ -326,10 +326,10 @@ public class LoginMode extends StackPane {
 		viewer.toBack();
 
 		// visitCreatorHyperLink
-		visitCreatorHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE_URL));
+		visitCreatorHyperLink.setOnAction(a -> NetworkingTool.openWebSite(InfoTool.WEBSITE_URL));
 
 		// youtubeTutorialsHyperLink
-		youtubeTutorialsHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.TUTORIALS));
+		youtubeTutorialsHyperLink.setOnAction(a -> NetworkingTool.openWebSite(InfoTool.TUTORIALS));
 
 		// ----usersInfoLabel
 		usersInfoLabel.textProperty()

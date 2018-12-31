@@ -35,8 +35,8 @@ import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseExportService;
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
@@ -308,10 +308,10 @@ public class SideBar extends StackPane {
 
 		// showManual
 		showManual.setOnAction(a -> IOAction
-				.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+				.openFileInEditor(InfoTool.getBasePathForClass(SideBar.class) + "XR3Player Manual.pdf"));
 
 		// donation
-		donation.setOnAction(a -> ActionTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
+		donation.setOnAction(a -> NetworkingTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
 
 		// -----------------------------------------
 
@@ -319,14 +319,14 @@ public class SideBar extends StackPane {
 		applicationSettings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.GENERERAL));
 
 		// downloadYoutubePlaylist
-		downloadYoutubePlaylist.setOnAction(a -> ActionTool.openWebSite("http://www.youtubecomtomp3.com"));
+		downloadYoutubePlaylist.setOnAction(a -> NetworkingTool.openWebSite("http://www.youtubecomtomp3.com"));
 
 		// socialMediaToMP3
 		socialMediaToMP3.setOnAction(downloadYoutubePlaylist.getOnAction());
 
 		// socialMediaToAnything
 		socialMediaToAnything
-				.setOnAction(a -> ActionTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
+				.setOnAction(a -> NetworkingTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
 
 		// applicationConsole
 		applicationConsole.setOnAction(a -> Main.consoleWindow.show());

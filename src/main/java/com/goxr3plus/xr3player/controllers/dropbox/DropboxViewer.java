@@ -39,14 +39,13 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
+import main.java.com.goxr3plus.xr3player.application.enums.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.services.dropbox.AccountsService;
 import main.java.com.goxr3plus.xr3player.services.dropbox.DownloadService;
 import main.java.com.goxr3plus.xr3player.services.dropbox.DropboxService;
-import main.java.com.goxr3plus.xr3player.services.dropbox.DropboxService.DropBoxOperation;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
@@ -279,7 +278,7 @@ public class DropboxViewer extends StackPane {
 			authorizationCodeVBox.setVisible(true);
 
 			// Open the default external Browser
-			ActionTool.openWebSite(authenticationBrowser.getAuthonticationRequestURL());
+			NetworkingTool.openWebSite(authenticationBrowser.getAuthonticationRequestURL());
 		});
 
 		// Add binding to accessTokenProperty

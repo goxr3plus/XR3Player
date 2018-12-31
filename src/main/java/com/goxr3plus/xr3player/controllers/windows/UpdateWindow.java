@@ -42,7 +42,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
@@ -182,11 +181,11 @@ public class UpdateWindow extends StackPane {
 		knownBugsContainer.setCenter(knownBugsVirtualPane);
 
 		// -- GitHub
-		viewOnGithub.setOnAction(a -> ActionTool.openWebSite(InfoTool.GITHUB_URL));
+		viewOnGithub.setOnAction(a -> NetworkingTool.openWebSite(InfoTool.GITHUB_URL));
 
 		// -- automaticUpdate
 		automaticUpdate
-				.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/releases/latest"));
+				.setOnAction(a -> NetworkingTool.openWebSite("https://github.com/goxr3plus/XR3Player/releases/latest"));
 
 		// -- closeWindow
 		closeWindow.setOnAction(a -> window.close());

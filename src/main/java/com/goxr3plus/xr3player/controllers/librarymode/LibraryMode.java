@@ -51,7 +51,6 @@ import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBox
 import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
@@ -217,7 +216,7 @@ public class LibraryMode extends BorderPane {
 
 					// Until the randomName doesn't already exists
 					do {
-						tableName = ActionTool.returnRandomTableName();
+						tableName = InfoTool.returnRandomTableName();
 						validName = !Main.dbManager.doesTableExist(tableName);
 					} while (!validName);
 					final String dataBaseTableName = tableName; // add it to a final variable

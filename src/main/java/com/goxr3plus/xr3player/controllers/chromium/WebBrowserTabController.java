@@ -70,7 +70,6 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
@@ -521,7 +520,7 @@ public class WebBrowserTabController extends StackPane {
 			loadWebSite(firstWebSite);
 
 			// openInDefaultBrowser
-			openInDefaultBrowser.setOnAction(a -> ActionTool.openWebSite(browser.getURL()));
+			openInDefaultBrowser.setOnAction(a -> NetworkingTool.openWebSite(browser.getURL()));
 
 			// copyText
 			copyText.setOnAction(a -> {

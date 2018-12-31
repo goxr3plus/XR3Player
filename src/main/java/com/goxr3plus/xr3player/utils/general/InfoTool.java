@@ -26,7 +26,7 @@ import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 public final class InfoTool {
 
 	/** The random. */
-	public static final Random RANDOM = new Random();
+	public static final Random random = new Random();
 
 	/** Logger */
 	public static final Logger logger = Logger.getLogger(InfoTool.class.getName());
@@ -428,6 +428,26 @@ public final class InfoTool {
 	 */
 	public static String getNumberWithDots(final int number) {
 		return String.format(Locale.US, "%,d", number).replace(",", ".");
+	}
+
+	/**
+	 * Returns a Random Number from 0 to ...what i have choosen in method see the
+	 * doc
+	 *
+	 * @return A random integer
+	 */
+	public static int returnRandom() {
+		return random.nextInt(80000);
+	}
+
+	/**
+	 * Return random table name.
+	 *
+	 * @return Returns a RandomTableName for the database in format
+	 *         ("_"+randomNumber)
+	 */
+	public static String returnRandomTableName() {
+		return "_" + returnRandom();
 	}
 
 }

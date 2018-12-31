@@ -22,8 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 
 /**
  * @author GOXR3PLUS
@@ -207,13 +207,13 @@ public class AboutWindow extends BorderPane {
 		close.setOnAction(a -> window.close());
 
 		// --visitWebsite
-		visitWebsite.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE_URL));
+		visitWebsite.setOnAction(a -> NetworkingTool.openWebSite(InfoTool.WEBSITE_URL));
 
 		// --visitGithub
-		visitGithub.setOnAction(a -> ActionTool.openWebSite(InfoTool.GITHUB_URL));
+		visitGithub.setOnAction(a -> NetworkingTool.openWebSite(InfoTool.GITHUB_URL));
 
 		// --reportBug
-		reportBug.setOnAction(a -> ActionTool.openWebSite("https://github.com/goxr3plus/XR3Player/issues"));
+		reportBug.setOnAction(a -> NetworkingTool.openWebSite("https://github.com/goxr3plus/XR3Player/issues"));
 
 	}
 

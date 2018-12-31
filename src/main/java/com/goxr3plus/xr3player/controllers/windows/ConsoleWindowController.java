@@ -24,10 +24,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3capture.utils.ActionTool;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
@@ -141,7 +141,7 @@ public class ConsoleWindowController extends StackPane {
 
 		// help
 		help.setOnAction(a -> IOAction
-				.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
+				.openFileInEditor(InfoTool.getBasePathForClass(ConsoleWindowController.class) + "XR3Player Manual.pdf"));
 
 		// Add SpeechRecognition
 		// tabPane.getTabs().get(1).setContent(this.speechRecognition);
@@ -167,7 +167,7 @@ public class ConsoleWindowController extends StackPane {
 
 		// Check if it is null
 		if (command.isEmpty()) {
-			AlertTool.showNotification("Message", "You have to type something..", Duration.millis(1500),
+			AlertTool.showNotification("Message", "You have to type something...", Duration.millis(1500),
 					NotificationType.WARNING);
 			return;
 		}

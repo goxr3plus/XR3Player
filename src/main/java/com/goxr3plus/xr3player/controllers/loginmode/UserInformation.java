@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.enums.UserCategory;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
@@ -64,10 +65,6 @@ public class UserInformation extends StackPane {
 	private TextArea commentsArea;
 
 	// --------------------------------------------------------------------
-
-	public enum UserCategory {
-		LOGGED_IN, NO_LOGGED_IN;
-	}
 
 	private User user;
 

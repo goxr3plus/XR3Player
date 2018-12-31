@@ -84,7 +84,7 @@ public class ArtWorkController extends StackPane {
 		// Save
 		save.setOnAction(a -> {
 			Optional.ofNullable(Main.specialChooser
-					.prepareToExportImage(Main.window, "cover" + InfoTool.RANDOM.nextInt(50000) + ".png"))
+					.prepareToExportImage(Main.window, "cover" + InfoTool.random.nextInt(50000) + ".png"))
 					.ifPresent(file -> {
 						// System.out.println(file.getAbsolutePath())
 
