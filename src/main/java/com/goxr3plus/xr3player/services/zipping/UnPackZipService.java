@@ -19,7 +19,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
@@ -35,7 +35,7 @@ public class UnPackZipService extends Service<Boolean> {
 	private String inputZip;
 
 	/** The out put folder. */
-	private String outPutFolder = InfoTool.getAbsoluteDatabasePathPlain();
+	private String outPutFolder = DatabaseTool.getAbsoluteDatabasePathPlain();
 
 	/** The exception. */
 	private String exception;
@@ -118,7 +118,7 @@ public class UnPackZipService extends Service<Boolean> {
 				try (ZipFile zis = new ZipFile(inputZip)) {
 
 					// signature file
-					String signatureFile = InfoTool.getDatabaseSignatureFile().getName();
+					String signatureFile = DatabaseTool.getDatabaseSignatureFile().getName();
 					boolean found = zis.getEntry(signatureFile) != null;
 
 					// Found it?
@@ -141,7 +141,7 @@ public class UnPackZipService extends Service<Boolean> {
 					Main.dbManager.manageConnection(Operation.CLOSE);
 
 				// Delete the previous database
-				IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+				IOAction.deleteFile(new File(DatabaseTool.getAbsoluteDatabasePathPlain()));
 
 				// ---------------------Move on Importing the
 				// Database-----------------------------------------------

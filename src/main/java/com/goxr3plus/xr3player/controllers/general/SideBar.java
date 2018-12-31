@@ -35,9 +35,11 @@ import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseExportService;
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class SideBar extends StackPane {
@@ -307,7 +309,7 @@ public class SideBar extends StackPane {
 
 		// showManual
 		showManual.setOnAction(a -> IOAction
-				.openFileInEditor(InfoTool.getBasePathForClass(SideBar.class) + "XR3Player Manual.pdf"));
+				.openFileInEditor(IOInfo.getBasePathForClass(SideBar.class) + "XR3Player Manual.pdf"));
 
 		// donation
 		donation.setOnAction(a -> NetworkingTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));
@@ -500,7 +502,7 @@ public class SideBar extends StackPane {
 				Main.updateScreen.getProgressBar().progressProperty().bind(zipper.progressProperty());
 
 				// Export the database
-				zipper.exportDataBase(file.getAbsolutePath(), InfoTool.getAbsoluteDatabasePathPlain());
+				zipper.exportDataBase(file.getAbsolutePath(), DatabaseTool.getAbsoluteDatabasePathPlain());
 			}
 		}
 	}
@@ -521,7 +523,7 @@ public class SideBar extends StackPane {
 				Main.dbManager.manageConnection(Operation.CLOSE);
 
 			// Clear the Previous database manager
-			IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+			IOAction.deleteFile(new File(DatabaseTool.getAbsoluteDatabasePathPlain()));
 
 			// Show Update Screen
 			Main.updateScreen.setVisible(true);

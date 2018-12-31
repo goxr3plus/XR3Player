@@ -10,8 +10,8 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import ws.schild.jave.AudioAttributes;
@@ -115,8 +115,8 @@ public class ConverterService extends Service<Boolean> {
 				updateMessage("Converting ( " + IOInfo.getFileExtension(fileAbsolutePath) + " ) to ( mp3 )");
 
 				// Create the media folder if not existing
-				final String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
-				if (!TimeTool.createFileOrFolder(folderName, FileType.DIRECTORY)) {
+				final String folderName = DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
+				if (!IOAction.createFileOrFolder(folderName, FileType.DIRECTORY)) {
 					AlertTool.showNotification("Internal Error", "Can't create Media Folder for converted files",
 							Duration.seconds(4), NotificationType.WARNING);
 					succeeded = false;

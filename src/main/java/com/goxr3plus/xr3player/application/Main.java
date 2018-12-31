@@ -100,10 +100,11 @@ import main.java.com.goxr3plus.xr3player.models.lists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.models.lists.PlayedMediaList;
 import main.java.com.goxr3plus.xr3player.models.lists.StarredMediaList;
 import main.java.com.goxr3plus.xr3player.services.database.VacuumProgressService;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -121,7 +122,7 @@ public class Main extends Application {
 
 	/** Holds global application properties */
 	public static final PropertiesDb applicationProperties = new PropertiesDb(
-			InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
+			DatabaseTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 
 	// Internal Information
 	public static final int APPLICATION_VERSION = 128;
@@ -132,7 +133,7 @@ public class Main extends Application {
 
 		// Chromium Extract Location Dir
 		System.setProperty("jxbrowser.chromium.dir",
-				InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium127");
+				DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium127");
 
 		// Disable loggers
 		pin = new Logger[] { Logger.getLogger("org.jaudiotagger"), Logger.getLogger("it.sauronsoftware.jave") };
@@ -328,7 +329,7 @@ public class Main extends Application {
 		System.out.println("Entered JavaFX Application Start Method");
 
 		// Current Application Path
-		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
+		System.out.println("Path :-> " + IOInfo.getBasePathForClass(Main.class));
 
 		// --------Window---------
 		window = primaryStage;
@@ -365,7 +366,7 @@ public class Main extends Application {
 		countDownloads();
 
 		// Delete AutoUpdate if it exists
-		IOAction.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
+		IOAction.deleteFile(new File(IOInfo.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 
 		// ============= ApplicationProperties GLOBAL
 		final Properties properties = applicationProperties.loadProperties();
@@ -677,14 +678,14 @@ public class Main extends Application {
 		updateScreen.setVisible(true);
 
 		// Create Chromium Folder
-		if (!TimeTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium",
+		if (!IOAction.createFileOrFolder(DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium",
 				FileType.DIRECTORY)) {
 			System.err.println("Failed to create chromium folder");
 			terminateXR3Player(-1);
 		}
 
 		// Create Database folder if not exists
-		if (!TimeTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
+		if (!IOAction.createFileOrFolder(DatabaseTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
 			System.err.println(
 					"Failed to create database folder[lack of permissions],please change installation directory");
 			terminateXR3Player(-1);
@@ -692,12 +693,12 @@ public class Main extends Application {
 
 			// Create the List with the Available Users
 			final AtomicInteger counter = new AtomicInteger();
-			try (Stream<Path> stream = Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)) {
+			try (Stream<Path> stream = Files.walk(Paths.get(DatabaseTool.getAbsoluteDatabasePathPlain()), 1)) {
 
 				// Append all available users
 				loginMode.viewer.addMultipleItems(stream
 						.filter(path -> path.toFile().isDirectory()
-								&& !(path + "").equals(InfoTool.getAbsoluteDatabasePathPlain()))
+								&& !(path + "").equals(DatabaseTool.getAbsoluteDatabasePathPlain()))
 						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode))
 						.collect(Collectors.toList()));
 
@@ -712,7 +713,7 @@ public class Main extends Application {
 		}
 
 		// Create Original xr3database signature file
-		TimeTool.createFileOrFolder(InfoTool.getDatabaseSignatureFile().getAbsolutePath(), FileType.FILE);
+		IOAction.createFileOrFolder(DatabaseTool.getDatabaseSignatureFile().getAbsolutePath(), FileType.FILE);
 
 	}
 
@@ -788,18 +789,18 @@ public class Main extends Application {
 									new Thread(() -> {
 
 										// Delete the current settings from the User
-										IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+										IOAction.deleteFile(new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator()
 												+ selectedUser.getName() + File.separator + "settings" + File.separator
-												+ InfoTool.USER_SETTINGS_FILE_NAME));
+												+ DatabaseTool.USER_SETTINGS_FILE_NAME));
 
 										// Transfer the settings from the other user
 										IOAction.copy(
-												InfoTool.getAbsoluteDatabasePathWithSeparator()
+												DatabaseTool.getAbsoluteDatabasePathWithSeparator()
 														+ ((User) userr).getName() + File.separator + "settings"
-														+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME,
-												InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName()
+														+ File.separator + DatabaseTool.USER_SETTINGS_FILE_NAME,
+												DatabaseTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName()
 														+ File.separator + "settings" + File.separator
-														+ InfoTool.USER_SETTINGS_FILE_NAME);
+														+ DatabaseTool.USER_SETTINGS_FILE_NAME);
 
 										// Reload the application settings now...
 										Platform.runLater(ApplicationSettingsLoader::loadApplicationSettings);
@@ -808,8 +809,8 @@ public class Main extends Application {
 							});
 
 							// Disable if user has no settings defined
-							if (!new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + ((User) userr).getName()
-									+ File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
+							if (!new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + ((User) userr).getName()
+									+ File.separator + "settings" + File.separator + DatabaseTool.USER_SETTINGS_FILE_NAME)
 											.exists())
 								menuItem.setDisable(true);
 
@@ -861,8 +862,8 @@ public class Main extends Application {
 				updateScreen.getProgressBar().setProgress(-1);
 				updateScreen.getProgressBar().progressProperty().bind(vService.progressProperty());
 				updateScreen.setVisible(true);
-				vService.start(new File(InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db"),
-						new File(InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db-journal"));
+				vService.start(new File(DatabaseTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db"),
+						new File(DatabaseTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db-journal"));
 				dbManager.commitAndVacuum();
 			}
 		}
@@ -935,7 +936,7 @@ public class Main extends Application {
 
 		// Restart XR3Player
 		new Thread(() -> {
-			final String path = InfoTool.getBasePathForClass(Main.class);
+			final String path = IOInfo.getBasePathForClass(Main.class);
 			final String[] applicationPath = { new File(path + "XR3Player.exe").getAbsolutePath() };
 
 			// Check if the file exists
@@ -1038,7 +1039,7 @@ public class Main extends Application {
 	public static void changeBackgroundImage() {
 
 		// Check the response
-		JavaFXTool.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window)
+		JavaFXTool.selectAndSaveImage("background", DatabaseTool.getAbsoluteDatabasePathPlain(), specialChooser, window)
 				.ifPresent(imageFile -> loginMode.getBackgroundImageView().setImage(new Image(imageFile.toURI() + "")));
 
 	}
@@ -1053,7 +1054,7 @@ public class Main extends Application {
 	private static void determineBackgroundImage() {
 
 		// Set the background image to the ImageView
-		Optional.ofNullable(JavaFXTool.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain())).
+		Optional.ofNullable(JavaFXTool.findAnyImageWithTitle("background", DatabaseTool.getAbsoluteDatabasePathPlain())).
 		// If the image exists
 				ifPresentOrElse(image -> loginMode.getBackgroundImageView().setImage(image),
 						// If it doesn't set the default
@@ -1068,7 +1069,7 @@ public class Main extends Application {
 	public static void resetBackgroundImage() {
 
 		// Delete the background image
-		JavaFXTool.deleteAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
+		JavaFXTool.deleteAnyImageWithTitle("background", DatabaseTool.getAbsoluteDatabasePathPlain());
 
 		// Set the default one
 		determineBackgroundImage();

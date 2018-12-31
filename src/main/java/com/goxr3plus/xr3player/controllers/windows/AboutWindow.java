@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * @author GOXR3PLUS
@@ -199,7 +200,7 @@ public class AboutWindow extends BorderPane {
 		cssTextArea.appendText(text);
 		// cssTextArea.setStyle(cssTextArea.getLength() - text.length(),
 		// cssTextArea.getLength() - 1, style4);
-		cssTextArea.appendText(InfoTool.getBasePathForClass(Main.class) + "\n");
+		cssTextArea.appendText(IOInfo.getBasePathForClass(Main.class) + "\n");
 
 		cssTextArea.setStyle(0, cssTextArea.getLength() - 1, style);
 

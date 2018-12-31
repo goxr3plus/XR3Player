@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import org.apache.commons.io.FileUtils;
 
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
@@ -218,6 +219,40 @@ public final class IOAction {
 		}
 	
 		return true;
+	}
+
+	/**
+	 * Creates the given File or Folder if not exists and returns the result
+	 * 
+	 * @param absoluteFilePath The absolute path of the File|Folder
+	 * @param fileType         Create DIRECTORY OR FILE ?
+	 * @return True if exists or have been successfully created , otherwise false
+	 */
+	public static boolean createFileOrFolder(final File file, final FileType fileType) {
+		// Already exists?
+		if (file.exists())
+			return true;
+		// Directory?
+		if (fileType == FileType.DIRECTORY)
+			return file.mkdir();
+		// File?
+		try {
+			return file.createNewFile();
+		} catch (final IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Creates the given File or Folder if not exists and returns the result
+	 * 
+	 * @param absoluteFilePath The absolute path of the File|Folder
+	 * @param fileType         Create DIRECTORY OR FILE ?
+	 * @return True if exists or have been successfully created , otherwise false
+	 */
+	public static boolean createFileOrFolder(final String absoluteFilePath, final FileType fileType) {
+		return createFileOrFolder(new File(absoluteFilePath), fileType);
 	}
 
 }

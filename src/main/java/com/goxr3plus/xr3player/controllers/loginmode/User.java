@@ -27,6 +27,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
@@ -109,8 +110,8 @@ public class User extends StackPane {
 							.anyMatch(user -> user != User.this && ((User) user).getName().equalsIgnoreCase(newName))
 							|| newName.equalsIgnoreCase(oldName)) {
 
-						final File originalFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + oldName);
-						final File outputFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName);
+						final File originalFolder = new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + oldName);
+						final File outputFolder = new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + newName);
 
 						// Check if the Folder can be renamed
 						if (originalFolder.renameTo(outputFolder)) { // Success
@@ -120,8 +121,8 @@ public class User extends StackPane {
 
 							// Change the absolute path of the UserInformation.properties file
 							getUserInformationDb().setFileAbsolutePath(
-									InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator
-											+ "settings" + File.separator + InfoTool.USER_INFORMATION_FILE_NAME);
+									DatabaseTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator
+											+ "settings" + File.separator + DatabaseTool.USER_INFORMATION_FILE_NAME);
 
 							// Login Mode Sort Comparator
 							if (Main.loginMode.getSelectedSortToggleText().contains("Name"))
@@ -171,8 +172,8 @@ public class User extends StackPane {
 		this.loginMode = loginMode;
 
 		// Create the UserInformation DB
-		userInformationDb = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator
-				+ "settings" + File.separator + InfoTool.USER_INFORMATION_FILE_NAME, false);
+		userInformationDb = new PropertiesDb(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + userName + File.separator
+				+ "settings" + File.separator + DatabaseTool.USER_INFORMATION_FILE_NAME, false);
 
 		// ----------------------------------FXMLLoader-------------------------------------
 		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "User.fxml"));
@@ -218,7 +219,7 @@ public class User extends StackPane {
 
 		// imageView
 		final String absoluteImagePath = JavaFXTool.getAbsoluteImagePath("userImage",
-				InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
+				DatabaseTool.getAbsoluteDatabasePathWithSeparator() + getName());
 		if (absoluteImagePath == null)
 			setDefaultImage();
 		else
@@ -345,7 +346,7 @@ public class User extends StackPane {
 				+ ((User) Main.loginMode.viewer.getSelectedItem()).getName() + " ]", owner, Main.window)) {
 
 			// Try to delete it
-			if (IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
+			if (IOAction.deleteFile(new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
 
 				// Delete from the Model Viewer
 				Main.loginMode.viewer.deleteItem(this);
@@ -414,7 +415,7 @@ public class User extends StackPane {
 
 		// Check the response
 		JavaFXTool
-				.selectAndSaveImage("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName(),
+				.selectAndSaveImage("userImage", DatabaseTool.getAbsoluteDatabasePathWithSeparator() + getName(),
 						Main.specialChooser, Main.window)
 				.ifPresent(imageFile -> imageView.setImage(new Image(imageFile.toURI() + "")));
 	}
@@ -449,7 +450,7 @@ public class User extends StackPane {
 	private boolean deleteUserImage() {
 
 		// Delete the User Image
-		JavaFXTool.deleteAnyImageWithTitle("userImage", InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
+		JavaFXTool.deleteAnyImageWithTitle("userImage", DatabaseTool.getAbsoluteDatabasePathWithSeparator() + getName());
 
 		return true;
 	}
@@ -461,7 +462,7 @@ public class User extends StackPane {
 	 */
 	public String getAbsoluteImagePath() {
 		return JavaFXTool.getAbsoluteImagePath("userImage",
-				InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
+				DatabaseTool.getAbsoluteDatabasePathWithSeparator() + getName());
 	}
 
 	/**

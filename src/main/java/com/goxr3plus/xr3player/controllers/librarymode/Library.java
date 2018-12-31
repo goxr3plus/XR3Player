@@ -44,6 +44,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
@@ -219,7 +220,7 @@ public class Library extends StackPane {
 
 							// Rename the image of library
 							if (imageName != null)
-								updateImagePathInDB(InfoTool.getImagesFolderAbsolutePathWithSeparator() + newName + "."
+								updateImagePathInDB(DatabaseTool.getImagesFolderAbsolutePathWithSeparator() + newName + "."
 										+ IOInfo.getFileExtension(getAbsoluteImagePath()), true, false);
 
 							// Update the UserInformation properties file
@@ -672,7 +673,7 @@ public class Library extends StackPane {
 				// getLibraryName() + "]");
 				//
 				// Create the new image
-				final String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "."
+				final String newImageName = DatabaseTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "."
 						+ IOInfo.getFileExtension(absoluteFilePath);
 
 				// Change the image name
@@ -704,7 +705,7 @@ public class Library extends StackPane {
 	 *
 	 */
 	public void setNewImage() {
-		JavaFXTool.selectAndSaveImage(this.getLibraryName(), InfoTool.getImagesFolderAbsolutePathWithSeparator(),
+		JavaFXTool.selectAndSaveImage(this.getLibraryName(), DatabaseTool.getImagesFolderAbsolutePathWithSeparator(),
 				Main.specialChooser, Main.window).ifPresent(imageFile -> {
 					updateImagePathInDB(imageFile.getAbsolutePath(), false, true);
 					imageView.setImage(new Image(imageFile.toURI() + ""));
@@ -904,7 +905,7 @@ public class Library extends StackPane {
 						.executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");
 
 				// Delete the folder with library name in database
-				IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + getLibraryName()));
+				IOAction.deleteFile(new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + getLibraryName()));
 
 				// delete library image
 				if (imageName != null && !new File(getAbsoluteImagePath()).delete())
@@ -1242,7 +1243,7 @@ public class Library extends StackPane {
 	 * @return The absolute path of the Library Image in the operating system
 	 */
 	public String getAbsoluteImagePath() {
-		return imageName == null ? null : InfoTool.getImagesFolderAbsolutePathWithSeparator() + imageName;
+		return imageName == null ? null : DatabaseTool.getImagesFolderAbsolutePathWithSeparator() + imageName;
 	}
 
 	/**

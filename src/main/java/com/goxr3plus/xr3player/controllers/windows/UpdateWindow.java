@@ -45,6 +45,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -563,7 +564,7 @@ public class UpdateWindow extends StackPane {
 
 		// Start XR3Player Updater
 		new Thread(() -> {
-			final String path = InfoTool.getBasePathForClass(Main.class);
+			final String path = IOInfo.getBasePathForClass(Main.class);
 			final String[] applicationPath = { new File(path + applicationName + ".jar").getAbsolutePath() };
 
 			// Show message that application is restarting

@@ -17,8 +17,8 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -140,13 +140,13 @@ public class UsersLoaderService extends Service<Boolean> {
 
 							// Very well create the UsersInformationDb because it doesn't exist so on the
 							// next load it will exist
-							TimeTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+							IOAction.createFileOrFolder(new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator()
 									+ user.getName() + File.separator + "settings"), FileType.DIRECTORY);
-							TimeTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
+							IOAction.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
 									FileType.FILE);
 
 							// Check if the database of this user exists
-							final String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName()
+							final String dbFileAbsolutePath = DatabaseTool.getAbsoluteDatabasePathWithSeparator() + user.getName()
 									+ File.separator + "dbFile.db";
 							if (new File(dbFileAbsolutePath).exists()) {
 

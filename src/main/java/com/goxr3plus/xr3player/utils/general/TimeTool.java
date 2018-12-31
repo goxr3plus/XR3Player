@@ -11,7 +11,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.jaudiotagger.audio.mp3.MP3File;
 
 import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
-import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class TimeTool {
@@ -157,40 +156,6 @@ public final class TimeTool {
 
 		// System.out.println("Passed with error")
 		return milliseconds < 0 ? -1 : milliseconds;
-	}
-
-	/**
-	 * Creates the given File or Folder if not exists and returns the result
-	 * 
-	 * @param absoluteFilePath The absolute path of the File|Folder
-	 * @param fileType         Create DIRECTORY OR FILE ?
-	 * @return True if exists or have been successfully created , otherwise false
-	 */
-	public static boolean createFileOrFolder(final File file, final FileType fileType) {
-		// Already exists?
-		if (file.exists())
-			return true;
-		// Directory?
-		if (fileType == FileType.DIRECTORY)
-			return file.mkdir();
-		// File?
-		try {
-			return file.createNewFile();
-		} catch (final IOException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	/**
-	 * Creates the given File or Folder if not exists and returns the result
-	 * 
-	 * @param absoluteFilePath The absolute path of the File|Folder
-	 * @param fileType         Create DIRECTORY OR FILE ?
-	 * @return True if exists or have been successfully created , otherwise false
-	 */
-	public static boolean createFileOrFolder(final String absoluteFilePath, final FileType fileType) {
-		return createFileOrFolder(new File(absoluteFilePath), fileType);
 	}
 
 }

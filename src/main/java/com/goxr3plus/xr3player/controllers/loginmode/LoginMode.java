@@ -45,9 +45,10 @@ import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
 import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -213,7 +214,7 @@ public class LoginMode extends StackPane {
 				if (!viewer.getItemsObservableList().stream()
 						.anyMatch(user -> ((User) user).getName().equalsIgnoreCase(newName))) {
 
-					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
+					if (new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
 
 						// Create the new user and add it
 						final User user = new User(newName, viewer.getItemsObservableList().size(), LoginMode.this);
@@ -225,9 +226,9 @@ public class LoginMode extends StackPane {
 
 						// Very well create the UsersInformationDb because it doesn't exist so on the
 						// next load it will exist
-						TimeTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+						IOAction.createFileOrFolder(new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator()
 								+ user.getName() + File.separator + "settings"), FileType.DIRECTORY);
-						TimeTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
+						IOAction.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
 								FileType.FILE);
 
 					} else

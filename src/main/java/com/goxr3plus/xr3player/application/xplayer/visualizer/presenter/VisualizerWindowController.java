@@ -43,6 +43,7 @@ import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.core.VisualizerDrawer;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -312,7 +313,7 @@ public class VisualizerWindowController extends StackPane {
 		// Check the response
 		JavaFXTool
 				.selectAndSaveImage("XPlayer" + this.xPlayerController.getKey() + type,
-						InfoTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
+						DatabaseTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
 				.ifPresent(imageFile -> {
 					if (type == Type.BACKGROUND)
 						xPlayerController.getVisualizer().backgroundImage = new Image(imageFile.toURI() + "");
@@ -336,7 +337,7 @@ public class VisualizerWindowController extends StackPane {
 
 		// Delete the background image
 		JavaFXTool.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
-				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+				DatabaseTool.getXPlayersImageFolderAbsolutePathPlain());
 
 		// Manage Settings
 		Main.dbManager.getPropertiesDb()
@@ -356,7 +357,7 @@ public class VisualizerWindowController extends StackPane {
 
 		// Check if it returns null
 		Image image = JavaFXTool.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
-				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+				DatabaseTool.getXPlayersImageFolderAbsolutePathPlain());
 
 		// System.out.println("image is null?" + type + " .... " + ( image == null ))
 
@@ -378,7 +379,7 @@ public class VisualizerWindowController extends StackPane {
 
 		// Delete the background image
 		JavaFXTool.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
-				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+				DatabaseTool.getXPlayersImageFolderAbsolutePathPlain());
 
 		// Set the Image to null
 		if (type == Type.BACKGROUND)

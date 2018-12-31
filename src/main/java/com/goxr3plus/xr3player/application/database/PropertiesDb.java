@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 
 /**
  * This class is saving all the XR3Player Settings to a property file
@@ -67,7 +67,7 @@ public class PropertiesDb {
 		// Submit it to the executors Service
 		updateExecutorService.submit(() -> {
 			// Check if exists [ Create if Not ]
-			TimeTool.createFileOrFolder(fileAbsolutePath, FileType.FILE);
+			IOAction.createFileOrFolder(fileAbsolutePath, FileType.FILE);
 
 			try (InputStream inStream = new FileInputStream(fileAbsolutePath);
 					OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {

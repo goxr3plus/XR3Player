@@ -34,8 +34,8 @@ import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSetting
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -121,30 +121,30 @@ public class DatabaseManager {
 	public void initialize(final String userName) {
 
 		// Initialize
-		InfoTool.setUserName(userName);
+		DatabaseTool.setUserName(userName);
 
 		// Create the settingsFolder
-		final File settingsFolder = new File(InfoTool.getUserFolderAbsolutePathWithSeparator() + "settings");
-		TimeTool.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
+		final File settingsFolder = new File(DatabaseTool.getUserFolderAbsolutePathWithSeparator() + "settings");
+		IOAction.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
 
 		// Create the propertiesDb
-		userSettingsDb = new PropertiesDb(settingsFolder + File.separator + InfoTool.USER_SETTINGS_FILE_NAME, true);
+		userSettingsDb = new PropertiesDb(settingsFolder + File.separator + DatabaseTool.USER_SETTINGS_FILE_NAME, true);
 
 		// User Folder
-		final File userFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName);
-		TimeTool.createFileOrFolder(userFolder, FileType.DIRECTORY);
+		final File userFolder = new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + userName);
+		IOAction.createFileOrFolder(userFolder, FileType.DIRECTORY);
 
 		// Images Folder
-		final File imagesFolder = new File(InfoTool.getImagesFolderAbsolutePathPlain());
-		TimeTool.createFileOrFolder(imagesFolder, FileType.DIRECTORY);
+		final File imagesFolder = new File(DatabaseTool.getImagesFolderAbsolutePathPlain());
+		IOAction.createFileOrFolder(imagesFolder, FileType.DIRECTORY);
 
 		// XPlayer Images Folder
-		final File xPlayerImagesFolder = new File(InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		TimeTool.createFileOrFolder(xPlayerImagesFolder, FileType.DIRECTORY);
+		final File xPlayerImagesFolder = new File(DatabaseTool.getXPlayersImageFolderAbsolutePathPlain());
+		IOAction.createFileOrFolder(xPlayerImagesFolder, FileType.DIRECTORY);
 
 		// Attempt DataBase connection
 		try {
-			final String dbFileAbsolutePath = InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db";
+			final String dbFileAbsolutePath = DatabaseTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db";
 			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 			connection.setAutoCommit(false);
 
@@ -194,7 +194,7 @@ public class DatabaseManager {
 			// OPEN
 			if (action == Operation.OPEN && connection.isClosed())
 				connection = DriverManager.getConnection(
-						"jdbc:sqlite:" + InfoTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db");
+						"jdbc:sqlite:" + DatabaseTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db");
 			// CLOSE
 			else if (action == Operation.CLOSE && connection != null && !connection.isClosed())
 				connection.close();
@@ -299,7 +299,7 @@ public class DatabaseManager {
 	// -------------------------------------------------------------------
 	public Optional<User> getOpenedUser() {
 		return Main.loginMode.viewer.getItemsObservableList().stream()
-				.filter(user -> ((User) user).getName().equals(InfoTool.getUserName())).map(user -> (User) user)
+				.filter(user -> ((User) user).getName().equals(DatabaseTool.getUserName())).map(user -> (User) user)
 				.findFirst();
 	}
 
