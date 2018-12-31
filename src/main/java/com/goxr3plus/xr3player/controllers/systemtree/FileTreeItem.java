@@ -20,9 +20,9 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * A custom TreeItem which represents a File
@@ -148,7 +148,7 @@ public class FileTreeItem extends TreeItem<String> {
 							// Check if that file already exists
 							if (new File(newFilePath).exists()) {
 								setAbsoluteFilePath(oldFilePath);
-								ActionTool.showNotification("Rename Failed",
+								AlertTool.showNotification("Rename Failed",
 										"The action can not been completed:\nA file with that name already exists.",
 										Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
@@ -158,7 +158,7 @@ public class FileTreeItem extends TreeItem<String> {
 							// Check if it can be renamed
 							if (!new File(getAbsoluteFilePath()).renameTo(new File(newFilePath))) {
 								setAbsoluteFilePath(oldFilePath);
-								ActionTool.showNotification("Rename Failed",
+								AlertTool.showNotification("Rename Failed",
 										"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
 										Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
@@ -232,7 +232,7 @@ public class FileTreeItem extends TreeItem<String> {
 							Main.dbManager.commit();
 
 							// Show message to user
-							ActionTool.showNotification("Success Message",
+							AlertTool.showNotification("Success Message",
 									"Successfully rename from :\n" + IOTool.getFileName(oldFilePath) + " \nto\n"
 											+ IOTool.getFileName(newFilePath),
 									Duration.millis(2000), NotificationType.SUCCESS);
@@ -241,7 +241,7 @@ public class FileTreeItem extends TreeItem<String> {
 						} catch (Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
 							setAbsoluteFilePath(oldFilePath);
-							ActionTool.showNotification("Error Message",
+							AlertTool.showNotification("Error Message",
 									"Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
 									NotificationType.ERROR);
 						}

@@ -36,9 +36,9 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
@@ -193,7 +193,7 @@ public final class JavaFXTool {
 		// Check width and height
 		if (image.getWidth() > maximumImageWidth || image.getHeight() > maximumImageHeight
 				|| image.getWidth() < minimumImageWidth || image.getHeight() < minimumImageHeight) {
-			ActionTool.showNotification("Warning",
+			AlertTool.showNotification("Warning",
 					"Maximum Size Allowed " + maximumImageWidth + "*" + maximumImageHeight + "\nMinimum Size Allowed "
 							+ minimumImageWidth + "*" + minimumImageHeight + " \n\tCurrent is:" + image.getWidth() + "x"
 							+ image.getHeight(),
@@ -207,9 +207,9 @@ public final class JavaFXTool {
 			// Delete any previous image with that title
 			deleteAnyImageWithTitle(title, folderForSaving);
 
-			if (!ActionTool.copy(imageFile.getAbsolutePath(), folderForSaving + File.separator + title + "."
+			if (!IOAction.copy(imageFile.getAbsolutePath(), folderForSaving + File.separator + title + "."
 					+ IOTool.getFileExtension(imageFile.getAbsolutePath())))
-				Platform.runLater(() -> ActionTool.showNotification("Failed saving image",
+				Platform.runLater(() -> AlertTool.showNotification("Failed saving image",
 						"Failed to change the image...", Duration.millis(2500), NotificationType.SIMPLE));
 
 		}).start();
@@ -243,8 +243,8 @@ public final class JavaFXTool {
 	 * @param graphic
 	 * @return The created Alert based on the given parameters
 	 */
-	public static Alert createAlert(final String title, final String headerText, final String contentText, final AlertType alertType,
-			final StageStyle stageStyle, final Stage owner, final Node graphic) {
+	public static Alert createAlert(final String title, final String headerText, final String contentText,
+			final AlertType alertType, final StageStyle stageStyle, final Stage owner, final Node graphic) {
 
 		// Show Alert
 		final Alert alert = new Alert(alertType);
@@ -300,7 +300,8 @@ public final class JavaFXTool {
 	 * @return Returns an ImageView using method getImageFromResourcesFolder(String
 	 *         imageName);
 	 */
-	public static ImageView getImageViewFromResourcesFolder(final String imageName, final double width, final double height) {
+	public static ImageView getImageViewFromResourcesFolder(final String imageName, final double width,
+			final double height) {
 		final ImageView imageView = new ImageView(InfoTool.getImageFromResourcesFolder(imageName));
 		if (width == -1 || height == -1 || width == 0 || height == 0)
 			return imageView;
@@ -333,7 +334,8 @@ public final class JavaFXTool {
 	 * @param iconLiteral
 	 * @param color
 	 */
-	public static void setFontIcon(final Labeled node, final FontIcon icon, final String iconLiteral, final Color color) {
+	public static void setFontIcon(final Labeled node, final FontIcon icon, final String iconLiteral,
+			final Color color) {
 		icon.setIconLiteral(iconLiteral);
 		icon.setIconColor(color);
 		if (node != null)
@@ -404,7 +406,7 @@ public final class JavaFXTool {
 		// Set the Content
 		clipboard.setContent(content);
 
-		ActionTool.showNotification("Copied to Clipboard",
+		AlertTool.showNotification("Copied to Clipboard",
 				"Files copied to clipboard,you can paste them anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 				Duration.seconds(3.5), NotificationType.INFORMATION);
 	}

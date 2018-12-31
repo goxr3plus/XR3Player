@@ -27,9 +27,9 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DropboxService extends Service<Boolean> {
@@ -82,7 +82,7 @@ public class DropboxService extends Service<Boolean> {
 				dropBoxViewer.getLoginVBox().setVisible(true);
 
 				// Show message to the User
-				ActionTool.showNotification("Authantication Failed",
+				AlertTool.showNotification("Authantication Failed",
 						"Failed connecting in that Dropbox Account, try : \n1) Connect again with a new Dropbox Account \n2) Connect with another saved DropBox Account \n3) Delete this corrupted saved account",
 						Duration.millis(3000), NotificationType.ERROR);
 			}
@@ -331,7 +331,7 @@ public class DropboxService extends Service<Boolean> {
 					ex.printStackTrace();
 
 					// Show to user about the error
-					Platform.runLater(() -> ActionTool.showNotification("Missing Folder",
+					Platform.runLater(() -> AlertTool.showNotification("Missing Folder",
 							"Folder : [ " + currentPath + " ] doesn't exist.", Duration.seconds(2),
 							NotificationType.ERROR));
 
@@ -512,7 +512,7 @@ public class DropboxService extends Service<Boolean> {
 						client.files().permanentlyDelete(path); // SUPPORTED ONLY ON BUSINESS PLAN
 
 					// Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Delete was successful",
+					Platform.runLater(() -> AlertTool.showNotification("Delete was successful",
 							"Successfully deleted selected files/folders", Duration.millis(2000),
 							NotificationType.SIMPLE,
 							JavaFXTool.getFontIcon("fa-dropbox", dropBoxViewer.FONT_ICON_COLOR, 64)));
@@ -522,7 +522,7 @@ public class DropboxService extends Service<Boolean> {
 					dbxe.printStackTrace();
 
 					// Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Failed deleting files",
+					Platform.runLater(() -> AlertTool.showNotification("Failed deleting files",
 							"Failed to delete selected files/folders", Duration.millis(2000), NotificationType.ERROR));
 
 					return false;
@@ -543,7 +543,7 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> {
 
 						// Show message
-						ActionTool.showNotification("Rename Successful",
+						AlertTool.showNotification("Rename Successful",
 								"Succesfully renamed file :\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ "
 										+ result.getMetadata().getName() + " ]",
 								Duration.millis(2500), NotificationType.SIMPLE,
@@ -564,7 +564,7 @@ public class DropboxService extends Service<Boolean> {
 					Platform.runLater(() -> {
 
 						// Show message
-						ActionTool.showNotification("Error Message",
+						AlertTool.showNotification("Error Message",
 								"Failed to rename the File:\n [ " + dropboxFile.getMetadata().getName() + " ] to -> [ "
 										+ newPath + " ]",
 								Duration.millis(2500), NotificationType.ERROR);
@@ -590,7 +590,7 @@ public class DropboxService extends Service<Boolean> {
 					final CreateFolderResult result = client.files().createFolderV2(path, true);
 
 					// Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("New folder created",
+					Platform.runLater(() -> AlertTool.showNotification("New folder created",
 							"Folder created with name :\n [ " + result.getMetadata().getName() + " ]",
 							Duration.millis(2000), NotificationType.SIMPLE,
 							JavaFXTool.getFontIcon("fa-dropbox", DropboxViewer.FONT_ICON_COLOR, 64)));
@@ -600,7 +600,7 @@ public class DropboxService extends Service<Boolean> {
 					dbxe.printStackTrace();
 
 					// Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Failed creating folder",
+					Platform.runLater(() -> AlertTool.showNotification("Failed creating folder",
 							"Folder was not created", Duration.millis(2000), NotificationType.ERROR));
 
 					return false;

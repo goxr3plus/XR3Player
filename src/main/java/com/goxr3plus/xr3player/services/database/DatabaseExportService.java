@@ -18,7 +18,7 @@ import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * This class is used as a Service which is exporting the applications database
@@ -56,7 +56,7 @@ public class DatabaseExportService extends Service<Boolean> {
 
 			// Check the Value
 			if (getValue()) {
-				ActionTool.showNotification("Completed", "Successfully exported the database", Duration.seconds(3),
+				AlertTool.showNotification("Completed", "Successfully exported the database", Duration.seconds(3),
 						NotificationType.SUCCESS);
 			} else
 				showErrorNotification(exception);
@@ -95,7 +95,7 @@ public class DatabaseExportService extends Service<Boolean> {
 	}
 
 	private void showErrorNotification(String reason) {
-		ActionTool.showNotification("Failed",
+		AlertTool.showNotification("Failed",
 				"Failed to export database :\n Reason [ " + (reason.isEmpty() ? "Unknown" : reason) + "]",
 				Duration.seconds(3), NotificationType.ERROR);
 	}

@@ -40,11 +40,11 @@ import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -741,7 +741,7 @@ public abstract class Media {
 	private boolean removeItem(final boolean permanent, final SmartController controller) {
 
 		// Delete from storage medium?
-		if (permanent && !ActionTool.deleteFile(new File(getFilePath())))
+		if (permanent && !IOTool.deleteFile(new File(getFilePath())))
 			return false;
 
 		// --totalInDataBase
@@ -812,7 +812,7 @@ public abstract class Media {
 							// Check if that file already exists
 							if (new File(newFilePath).exists()) {
 								setFilePath(oldFilePath);
-								ActionTool.showNotification("Rename Failed",
+								AlertTool.showNotification("Rename Failed",
 										"The action can not been completed:\nA file with that name already exists.",
 										Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
@@ -822,7 +822,7 @@ public abstract class Media {
 							// Check if it can be renamed
 							if (!new File(getFilePath()).renameTo(new File(newFilePath))) {
 								setFilePath(oldFilePath);
-								ActionTool.showNotification("Rename Failed",
+								AlertTool.showNotification("Rename Failed",
 										"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
 										Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
@@ -896,7 +896,7 @@ public abstract class Media {
 							Main.dbManager.commit();
 
 							// Show message to user
-							ActionTool.showNotification("Success Message",
+							AlertTool.showNotification("Success Message",
 									"Successfully rename from :\n" + IOTool.getFileName(oldFilePath) + " \nto\n"
 											+ IOTool.getFileName(newFilePath),
 									Duration.millis(2000), NotificationType.SUCCESS);
@@ -905,7 +905,7 @@ public abstract class Media {
 						} catch (final Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
 							setFilePath(oldFilePath);
-							ActionTool.showNotification("Error Message",
+							AlertTool.showNotification("Error Message",
 									"Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
 									NotificationType.ERROR);
 						}

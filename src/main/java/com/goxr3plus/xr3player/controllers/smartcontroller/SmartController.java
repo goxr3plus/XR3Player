@@ -58,8 +58,8 @@ import main.java.com.goxr3plus.xr3player.services.smartcontroller.FilesExportSer
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.InputService;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.LoadService;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaViewerService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * Used to control big amounts of Media using a TableViewer mechanism
@@ -479,7 +479,7 @@ public class SmartController extends StackPane {
 
 		// clearAll
 		clearAll.setOnAction(ac -> {
-			if (ActionTool.doQuestion(null,
+			if (AlertTool.doQuestion(null,
 					"You want to remove all the Files from ->" + this
 							+ "\n\nThis of course doesn't mean that they will be deleted from your computer",
 					null, Main.window))
@@ -869,7 +869,7 @@ public class SmartController extends StackPane {
 	 * @param reason the reason
 	 */
 	private void showMessage(String reason) {
-		ActionTool.showNotification("Message",
+		AlertTool.showNotification("Message",
 				"[" + reason + "] is working on:\n " + toString() + "\n\t retry as soon as it finish.",
 				Duration.millis(2000), NotificationType.INFORMATION);
 	}

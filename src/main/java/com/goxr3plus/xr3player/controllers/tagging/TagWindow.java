@@ -34,10 +34,10 @@ import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * This window allows to modify Tags of various AudioFormats
@@ -145,7 +145,7 @@ public class TagWindow extends StackPane {
 
 					// Check if File exists
 					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
-						ActionTool.showNotification("File doesn't exist",
+						AlertTool.showNotification("File doesn't exist",
 								(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut")
 										+ " points to a file that doesn't exists anymore.",
 								Duration.millis(2000), NotificationType.INFORMATION);
@@ -365,7 +365,7 @@ public class TagWindow extends StackPane {
 
 			show();
 		} else
-			ActionTool.showNotification("No File", "No File has been selected ...", Duration.seconds(2),
+			AlertTool.showNotification("No File", "No File has been selected ...", Duration.seconds(2),
 					NotificationType.SIMPLE);
 	}
 

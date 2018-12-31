@@ -45,7 +45,8 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * @author GOXR3PLUS
@@ -100,7 +101,7 @@ public class UpdateWindow extends StackPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	/** Window **/
-	private Stage window = new Stage();
+	private final Stage window = new Stage();
 
 	private final InlineCssTextArea whatsNewTextArea = new InlineCssTextArea();
 	private final InlineCssTextArea upcomingFeaturesTextArea = new InlineCssTextArea();
@@ -126,13 +127,13 @@ public class UpdateWindow extends StackPane {
 
 		// ------------------------------------FXMLLOADER
 		// ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "UpdateWindow.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "UpdateWindow.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
 
@@ -198,7 +199,7 @@ public class UpdateWindow extends StackPane {
 	 * 
 	 * @param showTheWindow If not update is available then don't show the window
 	 */
-	public synchronized void searchForUpdates(boolean showTheWindow) {
+	public synchronized void searchForUpdates(final boolean showTheWindow) {
 
 		// Not already running
 		if (updaterThread != null && updaterThread.isAlive())
@@ -206,14 +207,14 @@ public class UpdateWindow extends StackPane {
 
 		updaterThread = new Thread(() -> {
 			if (showTheWindow)
-				Platform.runLater(() -> ActionTool.showNotification("Searching for Updates",
+				Platform.runLater(() -> AlertTool.showNotification("Searching for Updates",
 						"Fetching informations from server...", Duration.millis(1000), NotificationType.INFORMATION));
 
 			// Check if we have internet connection
 			if (NetworkingTool.isReachableByPing("www.google.com"))
 				searchForUpdatesPart2(showTheWindow);
 			else
-				Platform.runLater(() -> ActionTool.showNotification("Can't Connect",
+				Platform.runLater(() -> AlertTool.showNotification("Can't Connect",
 						"Can't connect to the update site :\n1) Maybe there is not internet connection\n2)GitHub is down for maintenance",
 						Duration.millis(2500), NotificationType.ERROR));
 
@@ -224,18 +225,18 @@ public class UpdateWindow extends StackPane {
 
 	}
 
-	private boolean searchForUpdatesPart2(boolean showTheWindow) {
+	private boolean searchForUpdatesPart2(final boolean showTheWindow) {
 		try {
 
-			Document doc = Jsoup
+			final Document doc = Jsoup
 					.connect("https://raw.githubusercontent.com/goxr3plus/XR3Player/master/XR3PlayerUpdatePage.html")
 					.get();
 
 			// Document doc = Jsoup.parse(new File("XR3PlayerUpdatePage.html"), "UTF-8",
 			// "http://example.com/")
 
-			int currentVersion = Main.APPLICATION_VERSION;
-			int lastArticleID = doc.getElementsByTag("article").stream()
+			final int currentVersion = Main.APPLICATION_VERSION;
+			final int lastArticleID = doc.getElementsByTag("article").stream()
 					.mapToInt(element -> Integer.parseInt(element.id())).max().getAsInt();
 
 			// Check the latest tag on github
@@ -286,7 +287,7 @@ public class UpdateWindow extends StackPane {
 							final AtomicInteger counter2 = new AtomicInteger(-1);
 							Arrays.asList(section.getElementById("most important").text().split("\\*")).forEach(el -> {
 								if (counter2.addAndGet(1) >= 1) {
-									String s = "\t" + counter2 + " ";
+									final String s = "\t" + counter2 + " ";
 									upcomingFeaturesTextArea.appendText(s);
 									upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - s.length(),
 											upcomingFeaturesTextArea.getLength() - 1, style2);
@@ -304,7 +305,7 @@ public class UpdateWindow extends StackPane {
 							final AtomicInteger counter = new AtomicInteger(-1);
 							Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
 								if (counter.addAndGet(1) >= 1) {
-									String s = "\t" + counter + " ";
+									final String s = "\t" + counter + " ";
 									upcomingFeaturesTextArea.appendText(s);
 									upcomingFeaturesTextArea.setStyle(upcomingFeaturesTextArea.getLength() - s.length(),
 											upcomingFeaturesTextArea.getLength() - 1, style2);
@@ -345,7 +346,7 @@ public class UpdateWindow extends StackPane {
 							final AtomicInteger counter = new AtomicInteger(-1);
 							Arrays.asList(section.getElementById("info").text().split("\\*")).forEach(el -> {
 								if (counter.addAndGet(1) >= 1) {
-									String s = "\t" + counter + " ";
+									final String s = "\t" + counter + " ";
 									knownBugsTextArea.appendText(s);
 									knownBugsTextArea.setStyle(knownBugsTextArea.getLength() - s.length(),
 											knownBugsTextArea.getLength() - 1, style2);
@@ -372,16 +373,16 @@ public class UpdateWindow extends StackPane {
 			});
 
 			// show?
-			int latestUpdate = lastArticleID;
+			final int latestUpdate = lastArticleID;
 			if (showTheWindow || latestUpdate > currentVersion) {
 				automaticUpdate.setDisable(latestUpdate <= currentVersion);
 				show();
 			}
 
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			// Show message to the user
 			Platform.runLater(
-					() -> ActionTool.showNotification("Error", "Trying to fetch update information a problem occured",
+					() -> AlertTool.showNotification("Error", "Trying to fetch update information a problem occured",
 							Duration.millis(2500), NotificationType.ERROR));
 			ex.printStackTrace();
 			return false;
@@ -414,11 +415,11 @@ public class UpdateWindow extends StackPane {
 	 * @param textArea
 	 * @param Element
 	 */
-	private void analyzeUpdate(InlineCssTextArea textArea, Element element) {
+	private void analyzeUpdate(final InlineCssTextArea textArea, final Element element) {
 		textArea.appendText("\n\n");
 
 		// Update Version
-		int id = Integer.parseInt(element.id());
+		final int id = Integer.parseInt(element.id());
 
 		// Update
 		String text = "\t\t\t\t\t\t\t\t\t\t Update  ~  " + id + " \n";
@@ -450,7 +451,7 @@ public class UpdateWindow extends StackPane {
 			final AtomicInteger counter = new AtomicInteger(-1);
 			Arrays.asList(element.getElementsByClass("changelog").text().split("\\*")).forEach(improvement -> {
 				if (counter.addAndGet(1) >= 1) {
-					String s = "\t" + counter + " ";
+					final String s = "\t" + counter + " ";
 					textArea.appendText(s);
 					textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1, style2);
 					textArea.appendText(improvement + "\n");
@@ -470,7 +471,7 @@ public class UpdateWindow extends StackPane {
 				final AtomicInteger counter = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("new").text().split("\\*")).forEach(improvement -> {
 					if (counter.addAndGet(1) >= 1) {
-						String s = "\t\t" + counter + " ";
+						final String s = "\t\t" + counter + " ";
 						textArea.appendText(s);
 						textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1,
 								sectionNewCounters);
@@ -491,7 +492,7 @@ public class UpdateWindow extends StackPane {
 				final AtomicInteger counter2 = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("improved").text().split("\\*")).forEach(improvement -> {
 					if (counter2.addAndGet(1) >= 1) {
-						String s = "\t\t" + counter2 + " ";
+						final String s = "\t\t" + counter2 + " ";
 						textArea.appendText(s);
 						textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1,
 								sectionImrpovedCounters);
@@ -512,7 +513,7 @@ public class UpdateWindow extends StackPane {
 				final AtomicInteger counter3 = new AtomicInteger(-1);
 				Arrays.asList(element.getElementsByClass("fixed").text().split("\\*")).forEach(improvement -> {
 					if (counter3.addAndGet(1) >= 1) {
-						String s = "\t\t" + counter3 + " ";
+						final String s = "\t\t" + counter3 + " ";
 						textArea.appendText(s);
 						textArea.setStyle(textArea.getLength() - s.length(), textArea.getLength() - 1,
 								sectionBugsFixedCounters);
@@ -532,21 +533,21 @@ public class UpdateWindow extends StackPane {
 		try {
 
 			// Check if really that release exists....
-			HttpURLConnection httpcon = (HttpURLConnection) new URL(
+			final HttpURLConnection httpcon = (HttpURLConnection) new URL(
 					"https://api.github.com/repos/goxr3plus/XR3Player/releases/latest").openConnection();
 			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+			final BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 
 			// Read line by line
-			String responseSB = in.lines().collect(Collectors.joining());
+			final String responseSB = in.lines().collect(Collectors.joining());
 			in.close();
 
 			// Parse JSon
-			String latestVersion = new JSONObject(responseSB).getString("tag_name");
+			final String latestVersion = new JSONObject(responseSB).getString("tag_name");
 
 			// Return the latest release tag
 			return Integer.parseInt(latestVersion.replaceAll("V3.", ""));
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			ex.printStackTrace();
 			return -1;
 		}
@@ -558,16 +559,16 @@ public class UpdateWindow extends StackPane {
 	 * 
 	 */
 	@Deprecated
-	private void startXR3PlayerUpdater(int update) {
-		String applicationName = "XR3PlayerUpdater";
+	private void startXR3PlayerUpdater(final int update) {
+		final String applicationName = "XR3PlayerUpdater";
 
 		// Start XR3Player Updater
 		new Thread(() -> {
-			String path = InfoTool.getBasePathForClass(Main.class);
-			String[] applicationPath = { new File(path + applicationName + ".jar").getAbsolutePath() };
+			final String path = InfoTool.getBasePathForClass(Main.class);
+			final String[] applicationPath = { new File(path + applicationName + ".jar").getAbsolutePath() };
 
 			// Show message that application is restarting
-			Platform.runLater(() -> ActionTool.showNotification("Starting " + applicationName, "Application Path:[ "
+			Platform.runLater(() -> AlertTool.showNotification("Starting " + applicationName, "Application Path:[ "
 					+ applicationPath[0]
 					+ " ]\n\tIf this takes more than 10 seconds either the computer is slow or it has failed....",
 					Duration.seconds(25), NotificationType.INFORMATION));
@@ -578,11 +579,11 @@ public class UpdateWindow extends StackPane {
 				Platform.runLater(() -> automaticUpdate.setDisable(true));
 
 				// ------------Export XR3PlayerUpdater
-				ActionTool.copy(UpdateWindow.class.getResourceAsStream("/updater/" + applicationName + ".jar"),
+				IOAction.copy(UpdateWindow.class.getResourceAsStream("/updater/" + applicationName + ".jar"),
 						applicationPath[0]);
 
 				// ------------Wait until XR3Player is created
-				File XR3Player = new File(applicationPath[0]);
+				final File XR3Player = new File(applicationPath[0]);
 				while (!XR3Player.exists()) {
 					Thread.sleep(50);
 					System.out.println("Waiting " + applicationName + " Jar to be created...");
@@ -591,15 +592,15 @@ public class UpdateWindow extends StackPane {
 				System.out.println(applicationName + " Path is : " + applicationPath[0]);
 
 				// Create a process builder
-				ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0], String.valueOf(update));
+				final ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0], String.valueOf(update));
 				builder.redirectErrorStream(true);
-				Process process = builder.start();
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				final Process process = builder.start();
+				final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
 				// Wait n seconds
-				PauseTransition pause = new PauseTransition(Duration.seconds(10));
+				final PauseTransition pause = new PauseTransition(Duration.seconds(10));
 				pause.setOnFinished(f -> Platform
-						.runLater(() -> ActionTool.showNotification("Starting " + applicationName + " failed",
+						.runLater(() -> AlertTool.showNotification("Starting " + applicationName + " failed",
 								"\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...",
 								Duration.seconds(10), NotificationType.ERROR)));
 				pause.play();
@@ -620,7 +621,7 @@ public class UpdateWindow extends StackPane {
 
 				// Show failed message
 				Platform.runLater(() -> Platform
-						.runLater(() -> ActionTool.showNotification("Starting " + applicationName + " failed",
+						.runLater(() -> AlertTool.showNotification("Starting " + applicationName + " failed",
 								"\nApplication Path: [ " + applicationPath[0] + " ]\n\tTry to do it manually...",
 								Duration.seconds(10), NotificationType.ERROR)));
 

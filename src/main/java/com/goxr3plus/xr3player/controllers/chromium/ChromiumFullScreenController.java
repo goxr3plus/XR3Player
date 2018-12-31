@@ -25,8 +25,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * The Class VisualizerWindow.
@@ -154,7 +154,7 @@ public class ChromiumFullScreenController extends StackPane {
 		window.setFullScreen(true);
 		window.show();
 
-		ActionTool.showNotification("Hint!", "Press F11 to exit full screen ", Duration.seconds(2),
+		AlertTool.showNotification("Hint!", "Press F11 to exit full screen ", Duration.seconds(2),
 				NotificationType.INFORMATION);
 	}
 

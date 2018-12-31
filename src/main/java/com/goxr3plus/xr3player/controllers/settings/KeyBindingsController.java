@@ -23,8 +23,8 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -106,7 +106,7 @@ public class KeyBindingsController extends BorderPane {
 						"\"Trying to register native hook for the operating system an error occured!\"", ex);
 
 				// Show a notification to the user
-				ActionTool.showNotification("Error with JNativeHook",
+				AlertTool.showNotification("Error with JNativeHook",
 						"Trying to register native hook for the operating \n system an error occured!",
 						Duration.seconds(2), NotificationType.ERROR);
 			}

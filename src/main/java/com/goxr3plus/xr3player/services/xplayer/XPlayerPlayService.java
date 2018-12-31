@@ -18,11 +18,11 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * This Service is used to start the Audio of XR3Player
@@ -81,7 +81,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 			if (ExtensionTool.isAudio(fileAbsolutePath)) { // Check if we have Audio
 
 				// Show information to the user
-				ActionTool.showNotification("File is converting",
+				AlertTool.showNotification("File is converting",
 						"Current audio file format is not supported:\n so it will automatically be converted into .mp3.",
 						Duration.seconds(4), NotificationType.INFORMATION);
 
@@ -92,7 +92,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 			} else if (ExtensionTool.isVideo(fileAbsolutePath)) { // Check if we have Video
 				// Show information to the user
-				ActionTool.showNotification("File is converting",
+				AlertTool.showNotification("File is converting",
 						"Current Video file format is not supported:\n so it will automatically be converted into .mp3.",
 						Duration.seconds(4), NotificationType.INFORMATION);
 
@@ -102,7 +102,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 				return;
 			} else {
 				// Show information to the user
-				ActionTool.showNotification("No Audio File", "Can't play this file format", Duration.seconds(4),
+				AlertTool.showNotification("No Audio File", "Can't play this file format", Duration.seconds(4),
 						NotificationType.INFORMATION);
 			}
 
@@ -235,19 +235,19 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 						// Media not existing any more?
 						if (audioType[0] != null && audioPath != null && !new File(audioPath).exists())
-							ActionTool.showNotification("Media doesn't exist",
+							AlertTool.showNotification("Media doesn't exist",
 									"Current Media File doesn't exist anymore...", Duration.seconds(2),
 									NotificationType.ERROR);
 
 						// Not available Audio Devices?
 						else if (xPlayerController.getxPlayer().getMixers().isEmpty())
-							ActionTool.showNotification("No Audio Devices",
+							AlertTool.showNotification("No Audio Devices",
 									"We can’t find an audio device.\nMake sure that headphones or speakers are connected.\n For more info, search your device for “Manage audio devices”",
 									Duration.millis(10000), NotificationType.ERROR);
 
 						// Audio Corrupted?
 						else
-							ActionTool.showNotification("Can't play current Audio",
+							AlertTool.showNotification("Can't play current Audio",
 									"Can't play \n["
 											+ InfoTool.getMinString(
 													xPlayerController.getxPlayerModel().songPathProperty().get(), 30,"...")

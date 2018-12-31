@@ -31,9 +31,9 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -129,7 +129,7 @@ public class ExportWindowController extends BorderPane {
 
 			// Check if folders List is empty
 			if (foldersList.isEmpty()) {
-				ActionTool.showNotification("Message", "You must select at least one folder to export the files",
+				AlertTool.showNotification("Message", "You must select at least one folder to export the files",
 						Duration.seconds(2), NotificationType.INFORMATION);
 				return;
 			}
@@ -227,7 +227,7 @@ public class ExportWindowController extends BorderPane {
 			if (exportFoldersVBox.getChildren().stream().map(box -> ((ExportWindowFolderHBox) box).getTextField())
 					.filter(field -> exportField != field)
 					.filter(field -> field.getText().equals(file.getAbsolutePath())).findAny().isPresent())
-				ActionTool.showNotification("Duplicate Selection", "This folder has already been selected",
+				AlertTool.showNotification("Duplicate Selection", "This folder has already been selected",
 						Duration.seconds(2), NotificationType.INFORMATION);
 			else
 				exportField.setText(file.getAbsolutePath());

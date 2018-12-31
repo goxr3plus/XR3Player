@@ -37,6 +37,8 @@ import main.java.com.goxr3plus.xr3player.services.database.DatabaseExportService
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class SideBar extends StackPane {
 
@@ -348,13 +350,13 @@ public class SideBar extends StackPane {
 				} catch (final IOException e) {
 					e.printStackTrace();
 					// Show Message to User
-					ActionTool.showNotification("Failed Opening Task Manager", "Failed Opening default Task Manager",
+					AlertTool.showNotification("Failed Opening Task Manager", "Failed Opening default Task Manager",
 							Duration.millis(2000), NotificationType.ERROR);
 				}
 			}).start();
 
 			// Show Message to User
-			ActionTool.showNotification("Opening Task Manager", "Opening default system Task Manager",
+			AlertTool.showNotification("Opening Task Manager", "Opening default system Task Manager",
 					Duration.millis(2000), NotificationType.INFORMATION);
 		});
 
@@ -467,7 +469,7 @@ public class SideBar extends StackPane {
 		if (!zipper.isRunning() && !unZipper.isRunning()
 				&& (Main.libraryMode.openedLibrariesViewer == null
 						|| Main.libraryMode.openedLibrariesViewer.isFree(true))
-				&& ActionTool.doQuestion(null,
+				&& AlertTool.doQuestion(null,
 						"Just to remind you : \n  After importing a new database to XR3Player \n  the old one will be permanently deleted \n  and you will continue with the fresh one :)\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish ...",
 						null, Main.window)) {
 
@@ -510,7 +512,7 @@ public class SideBar extends StackPane {
 		if (!zipper.isRunning() && !unZipper.isRunning()
 				&& (Main.libraryMode.openedLibrariesViewer == null
 						|| Main.libraryMode.openedLibrariesViewer.isFree(true))
-				&& ActionTool.doQuestion(null,
+				&& AlertTool.doQuestion(null,
 						"ARE you sure you want to PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
 						null, Main.window)) {
 
@@ -519,7 +521,7 @@ public class SideBar extends StackPane {
 				Main.dbManager.manageConnection(Operation.CLOSE);
 
 			// Clear the Previous database manager
-			ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+			IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
 
 			// Show Update Screen
 			Main.updateScreen.setVisible(true);

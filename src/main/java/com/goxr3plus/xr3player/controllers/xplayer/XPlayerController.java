@@ -92,6 +92,7 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import main.java.goxr3plus.javastreamplayer.stream.Status;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
@@ -531,7 +532,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 						// Check if File exists
 						if (!new File(ftaap.getFileAbsolutePath()).exists()) {
-							ActionTool.showNotification("File doesn't exist",
+							AlertTool.showNotification("File doesn't exist",
 									(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link"
 											: "Windows Shortcut") + " points to a file that doesn't exists anymore.",
 									Duration.millis(2000), NotificationType.INFORMATION);
@@ -541,7 +542,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 						// Check if XPlayer is already active
 						if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController()
 								.getAskSecurityQuestion().isSelected()) {
-							if (ActionTool.doQuestion("Abort Current Song",
+							if (AlertTool.doQuestion("Abort Current Song",
 									"A song is already playing on this deck.\n Are you sure you want to replace it?",
 									visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing()
 											? visualizerWindow
@@ -760,7 +761,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 							// Check if File exists
 							if (!new File(ftaap.getFileAbsolutePath()).exists()) {
-								ActionTool.showNotification("File doesn't exist",
+								AlertTool.showNotification("File doesn't exist",
 										(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link"
 												: "Windows Shortcut")
 												+ " points to a file that doesn't exists anymore.",
@@ -771,7 +772,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 							// Check if XPlayer is already active
 							if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController()
 									.getAskSecurityQuestion().isSelected()) {
-								if (ActionTool.doQuestion("Abort Current Song",
+								if (AlertTool.doQuestion("Abort Current Song",
 										"A song is already playing on this deck.\n Are you sure you want to replace it?",
 										visualizerWindow.getStage().isShowing()
 												&& !xPlayerWindow.getWindow().isShowing() ? visualizerWindow
@@ -834,7 +835,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+				AlertTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
 						NotificationType.INFORMATION);
 				return;
 			}
@@ -853,7 +854,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 			// Notification
-			ActionTool.showNotification("Copied to Clipboard",
+			AlertTool.showNotification("Copied to Clipboard",
 					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 					Duration.seconds(2), NotificationType.SIMPLE,
 					image != null ? JavaFXTool.getImageView(image, 60, 60)
@@ -865,7 +866,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+				AlertTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
 						NotificationType.INFORMATION);
 				return;
 			}
@@ -884,7 +885,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 			// Notification
-			ActionTool.showNotification("Copied to Clipboard",
+			AlertTool.showNotification("Copied to Clipboard",
 					"Media File Full Path copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 					Duration.seconds(2), NotificationType.SIMPLE,
 					image != null ? JavaFXTool.getImageView(image, 60, 60)
@@ -896,7 +897,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+				AlertTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
 						NotificationType.INFORMATION);
 				return;
 			}
@@ -915,7 +916,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 			// Notification
-			ActionTool.showNotification("Copied to Clipboard",
+			AlertTool.showNotification("Copied to Clipboard",
 					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 					Duration.seconds(2), NotificationType.SIMPLE,
 					image != null ? JavaFXTool.getImageView(image, 60, 60)
@@ -927,12 +928,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+				AlertTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
 						NotificationType.INFORMATION);
 				return;
 				// Check if Media exists
 			} else if (!new File(xPlayerModel.getSongPath()).exists()) {
-				ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...",
+				AlertTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...",
 						Duration.seconds(2), NotificationType.INFORMATION);
 				return;
 			}
@@ -2210,7 +2211,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 					// Show Notification
 					if (!discIsDragging)
-						ActionTool.showNotification("Playing on deck " + (getKey() + 1),
+						AlertTool.showNotification("Playing on deck " + (getKey() + 1),
 								IOTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
 								NotificationType.SIMPLE, image != null ? JavaFXTool.getImageView(image, 60, 60)
 										: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
@@ -2389,7 +2390,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		if (xPlayerModel.songExtensionProperty().get() != null)
 			playService.startPlayService(xPlayerModel.songPathProperty().get(), 0);
 		else
-			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.",
+			AlertTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.",
 					Duration.millis(1500), NotificationType.INFORMATION);
 
 		// if (thisSong instanceof URL)

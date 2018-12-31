@@ -10,9 +10,9 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 
 /**
@@ -65,7 +65,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 
 		// Check if the file exists
 		if (!new File(absoluteFilePath).exists()) {
-			ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...",
+			AlertTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...",
 					Duration.seconds(2), NotificationType.ERROR);
 			done();
 

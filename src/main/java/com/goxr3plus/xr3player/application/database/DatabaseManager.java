@@ -33,9 +33,10 @@ import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSetting
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**
@@ -79,7 +80,7 @@ public class DatabaseManager {
 			Main.logger.log(Level.WARNING, ex.getMessage(), ex);
 		} finally {
 			if (SHOWNOTIFICATIONS)
-				ActionTool.showNotification("Commited", "Changes saved successfully", Duration.millis(150),
+				AlertTool.showNotification("Commited", "Changes saved successfully", Duration.millis(150),
 						NotificationType.INFORMATION);
 		}
 
@@ -125,22 +126,22 @@ public class DatabaseManager {
 
 		// Create the settingsFolder
 		final File settingsFolder = new File(InfoTool.getUserFolderAbsolutePathWithSeparator() + "settings");
-		ActionTool.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
+		TimeTool.createFileOrFolder(settingsFolder, FileType.DIRECTORY);
 
 		// Create the propertiesDb
 		userSettingsDb = new PropertiesDb(settingsFolder + File.separator + InfoTool.USER_SETTINGS_FILE_NAME, true);
 
 		// User Folder
 		final File userFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + userName);
-		ActionTool.createFileOrFolder(userFolder, FileType.DIRECTORY);
+		TimeTool.createFileOrFolder(userFolder, FileType.DIRECTORY);
 
 		// Images Folder
 		final File imagesFolder = new File(InfoTool.getImagesFolderAbsolutePathPlain());
-		ActionTool.createFileOrFolder(imagesFolder, FileType.DIRECTORY);
+		TimeTool.createFileOrFolder(imagesFolder, FileType.DIRECTORY);
 
 		// XPlayer Images Folder
 		final File xPlayerImagesFolder = new File(InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		ActionTool.createFileOrFolder(xPlayerImagesFolder, FileType.DIRECTORY);
+		TimeTool.createFileOrFolder(xPlayerImagesFolder, FileType.DIRECTORY);
 
 		// Attempt DataBase connection
 		try {
@@ -345,7 +346,7 @@ public class DatabaseManager {
 			// ---------------------if failed
 			setOnFailed(fail -> {
 				Main.updateScreen.getProgressBar().progressProperty().unbind();
-				ActionTool.showNotification("Fatal Error!",
+				AlertTool.showNotification("Fatal Error!",
 						"DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500),
 						NotificationType.ERROR);
 				Main.terminateXR3Player(0);

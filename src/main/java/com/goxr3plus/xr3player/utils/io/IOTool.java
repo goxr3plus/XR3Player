@@ -5,17 +5,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
+import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class IOTool {
 
@@ -270,5 +275,30 @@ public class IOTool {
 	public static String getFileSizeEdited(final File file) {
 		return !file.exists() ? "file missing" : getFileSizeEdited(file.length());
 	}
+
+	/**
+	 * Deletes Directory of File.
+	 *
+	 * @param source The File to be deleted | either if it is directory or File
+	 * @return true, if successful
+	 */
+	public static boolean deleteFile(final File source) {
+	
+		if (source.isDirectory()) // Directory
+			try {
+				FileUtils.deleteDirectory(source);
+			} catch (final IOException ex) {
+				ActionTool.logger.log(Level.INFO, "", ex);
+			}
+		else if (source.isFile() && !source.delete()) { // File
+			AlertTool.showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.",
+					Duration.millis(2000), NotificationType.WARNING);
+			return false;
+		}
+	
+		return true;
+	}
+
+
 
 }

@@ -29,6 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * @author GOXR3PLUS
@@ -165,7 +166,7 @@ public class ConsoleWindowController extends StackPane {
 
 		// Check if it is null
 		if (command.isEmpty()) {
-			ActionTool.showNotification("Message", "You have to type something..", Duration.millis(1500),
+			AlertTool.showNotification("Message", "You have to type something..", Duration.millis(1500),
 					NotificationType.WARNING);
 			return;
 		}

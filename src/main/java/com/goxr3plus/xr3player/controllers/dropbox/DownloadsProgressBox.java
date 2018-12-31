@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 public class DownloadsProgressBox extends StackPane {
 
@@ -72,7 +73,7 @@ public class DownloadsProgressBox extends StackPane {
 			Main.dropboxDownloadsTableViewer.getObservableList().remove(dropBoxDownloadedFile);
 
 			// Delete from computer
-			ActionTool.deleteFile(new File(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
+			IOTool.deleteFile(new File(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
 		});
 
 		// deleteFile
@@ -89,7 +90,7 @@ public class DownloadsProgressBox extends StackPane {
 
 			// Check if the delete is permanent
 			if (permanent)
-				ActionTool.deleteFile(new File(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
+				IOTool.deleteFile(new File(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
 
 			Main.dropboxDownloadsTableViewer.getObservableList().remove(dropBoxDownloadedFile);
 

@@ -19,8 +19,8 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -144,12 +144,12 @@ public class PlaylistsSettingsController extends BorderPane {
 
 		// clearPlayedFilesHistory
 		clearPlayedFilesHistory.setOnAction(a -> {
-			if (ActionTool.doQuestion(null, "Are you sure ? ", clearPlayedFilesHistory, Main.window))
+			if (AlertTool.doQuestion(null, "Are you sure ? ", clearPlayedFilesHistory, Main.window))
 				if (Main.playedSongs.clearAll(true))
-					ActionTool.showNotification("Message", "Successfully cleared played files from database",
+					AlertTool.showNotification("Message", "Successfully cleared played files from database",
 							Duration.millis(1500), NotificationType.INFORMATION);
 				else
-					ActionTool.showNotification("Message", "Problem occured trying to clear played files from database",
+					AlertTool.showNotification("Message", "Problem occured trying to clear played files from database",
 							Duration.millis(1500), NotificationType.ERROR);
 		});
 

@@ -9,9 +9,10 @@ import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
@@ -115,8 +116,8 @@ public class ConverterService extends Service<Boolean> {
 
 				// Create the media folder if not existing
 				String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
-				if (!ActionTool.createFileOrFolder(folderName, FileType.DIRECTORY)) {
-					ActionTool.showNotification("Internal Error", "Can't create Media Folder for converted files",
+				if (!TimeTool.createFileOrFolder(folderName, FileType.DIRECTORY)) {
+					AlertTool.showNotification("Internal Error", "Can't create Media Folder for converted files",
 							Duration.seconds(4), NotificationType.WARNING);
 					succeeded = false;
 				}
@@ -167,7 +168,7 @@ public class ConverterService extends Service<Boolean> {
 				if (succeeded)
 					Platform.runLater(() -> xPlayerController.playSong(newFileAsbolutePath));
 				else
-					ActionTool.showNotification("Convert failed", "Couldn't convert given media to .mp3 ",
+					AlertTool.showNotification("Convert failed", "Couldn't convert given media to .mp3 ",
 							Duration.seconds(4), NotificationType.WARNING);
 
 				return true;

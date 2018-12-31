@@ -19,8 +19,9 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * This class is used to import an XR3Player database (as .zip folder)
@@ -50,11 +51,11 @@ public class UnPackZipService extends Service<Boolean> {
 
 			// Check the value
 			if (!getValue()) {
-				ActionTool.showNotification("Unpack Zip Service", exception, Duration.seconds(2),
+				AlertTool.showNotification("Unpack Zip Service", exception, Duration.seconds(2),
 						NotificationType.ERROR);
 				done();
 			} else {
-				ActionTool.showNotification("Database Import", "Successfully imported the database!",
+				AlertTool.showNotification("Database Import", "Successfully imported the database!",
 						Duration.seconds(2), NotificationType.INFORMATION);
 
 				// Restart XR3Player
@@ -68,12 +69,12 @@ public class UnPackZipService extends Service<Boolean> {
 
 		setOnFailed(failed -> {
 			done();
-			ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
+			AlertTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
 		});
 
 		setOnCancelled(c -> {
 			done();
-			ActionTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
+			AlertTool.showNotification("Database Import", exception, Duration.seconds(2), NotificationType.ERROR);
 
 		});
 	}
@@ -140,7 +141,7 @@ public class UnPackZipService extends Service<Boolean> {
 					Main.dbManager.manageConnection(Operation.CLOSE);
 
 				// Delete the previous database
-				ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+				IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
 
 				// ---------------------Move on Importing the
 				// Database-----------------------------------------------

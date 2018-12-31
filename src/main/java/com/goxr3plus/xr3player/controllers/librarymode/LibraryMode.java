@@ -53,6 +53,7 @@ import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.Library
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -289,12 +290,12 @@ public class LibraryMode extends BorderPane {
 
 					} catch (Exception ex) {
 						Main.logger.log(Level.WARNING, "", ex);
-						ActionTool.showNotification("Error Creating a Library",
+						AlertTool.showNotification("Error Creating a Library",
 								"Library can't be created cause of:" + ex.getMessage(), Duration.seconds(2),
 								NotificationType.WARNING);
 					}
 				} else {
-					ActionTool.showNotification("Dublicate Name",
+					AlertTool.showNotification("Dublicate Name",
 							"A Library or PlayList with this name already exists!", Duration.seconds(2),
 							NotificationType.INFORMATION);
 				}
@@ -527,7 +528,7 @@ public class LibraryMode extends BorderPane {
 					.collect(Collectors.toList());
 
 			// Ask madafucka user to confirm if he want to take the BIG D from DADDDY AW!
-			if (ActionTool.doQuestion("Confirm Delete",
+			if (AlertTool.doQuestion("Confirm Delete",
 					"Confirm that you want to DELETE " + list.size() + " libraries FOREVER", node, Main.window)) {
 
 				// Delete each selected library

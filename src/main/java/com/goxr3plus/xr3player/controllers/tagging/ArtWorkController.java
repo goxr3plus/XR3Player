@@ -23,9 +23,9 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * 
@@ -92,7 +92,7 @@ public class ArtWorkController extends StackPane {
 						new Thread(() -> saveToFile(pictureUpdaterService.getImage(), file)).start();
 
 						// Show a Notification to User
-						ActionTool.showNotification("Exporting Album Image",
+						AlertTool.showNotification("Exporting Album Image",
 								"From File: \n" + InfoTool.getMinString(
 										IOTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100, "..."),
 								Duration.seconds(2), NotificationType.SIMPLE);

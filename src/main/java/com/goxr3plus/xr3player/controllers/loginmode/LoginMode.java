@@ -46,7 +46,9 @@ import main.java.com.goxr3plus.xr3player.controllers.loginmode.UserInformation.U
 import main.java.com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -223,19 +225,19 @@ public class LoginMode extends StackPane {
 
 						// Very well create the UsersInformationDb because it doesn't exist so on the
 						// next load it will exist
-						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+						TimeTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
 								+ user.getName() + File.separator + "settings"), FileType.DIRECTORY);
-						ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
+						TimeTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
 								FileType.FILE);
 
 					} else
-						ActionTool.showNotification("Error", "An error occured trying to create a new user",
+						AlertTool.showNotification("Error", "An error occured trying to create a new user",
 								Duration.seconds(2), NotificationType.ERROR);
 
 					// update the positions
 					// updateUsersPosition()
 				} else
-					ActionTool.showNotification("Dublicate User",
+					AlertTool.showNotification("Dublicate User",
 							"Name->" + newName + " is already used from another User...", Duration.millis(2000),
 							NotificationType.INFORMATION);
 

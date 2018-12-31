@@ -27,9 +27,10 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -132,12 +133,12 @@ public class User extends StackPane {
 							// pieData.setXValue(InfoTool.getMinString(newName, 4));
 							// });
 						} else
-							ActionTool.showNotification("Error", "An error occured trying to rename the user",
+							AlertTool.showNotification("Error", "An error occured trying to rename the user",
 									Duration.seconds(2), NotificationType.ERROR);
 
 					} // This user already exists
 					else
-						ActionTool.showNotification("Dublicate User",
+						AlertTool.showNotification("Dublicate User",
 								"Name->" + newName + " is already used from another User...", Duration.millis(2000),
 								NotificationType.INFORMATION);
 				}
@@ -340,11 +341,11 @@ public class User extends StackPane {
 	 */
 	public void deleteUser(final Node owner) {
 		// Ask
-		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ "
+		if (AlertTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ "
 				+ ((User) Main.loginMode.viewer.getSelectedItem()).getName() + " ]", owner, Main.window)) {
 
 			// Try to delete it
-			if (ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
+			if (IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
 
 				// Delete from the Model Viewer
 				Main.loginMode.viewer.deleteItem(this);
@@ -358,7 +359,7 @@ public class User extends StackPane {
 				Main.loginMode.flipPane.flipToFront();
 
 			} else
-				ActionTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2),
+				AlertTool.showNotification("Error", "An error occured trying to delete the user", Duration.seconds(2),
 						NotificationType.ERROR);
 		}
 	}
@@ -434,8 +435,8 @@ public class User extends StackPane {
 		// Check if user selected a folder for the image to be exported
 		if (file != null)
 			new Thread(() -> {
-				if (!ActionTool.copy(absoluteImagePath, file.getAbsolutePath()))
-					Platform.runLater(() -> ActionTool.showNotification("Exporting User Image",
+				if (!IOAction.copy(absoluteImagePath, file.getAbsolutePath()))
+					Platform.runLater(() -> AlertTool.showNotification("Exporting User Image",
 							"Failed to export User image for \n User=[" + getName() + "]", Duration.millis(2500),
 							NotificationType.SIMPLE));
 			}).start();

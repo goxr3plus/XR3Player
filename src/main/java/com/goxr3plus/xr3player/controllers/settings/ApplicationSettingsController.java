@@ -20,8 +20,9 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * @author GOXR3PLUS
@@ -162,7 +163,7 @@ public class ApplicationSettingsController extends BorderPane {
 		restoreDefaults.setOnAction(a -> {
 
 			// Ask the madafacka user :)
-			if (ActionTool.doQuestion("Restore category settings",
+			if (AlertTool.doQuestion("Restore category settings",
 					"Soore you want to restore defaults for the selected category of settings", restoreDefaults,
 					Main.window)) {
 
@@ -187,7 +188,7 @@ public class ApplicationSettingsController extends BorderPane {
 		restoreAllSettings.setOnAction(a -> {
 
 			// Ask the user if wants to restore all the settings to default
-			if (ActionTool.doQuestion("Restore all settings", "Soore you want to restore <All The Settings> to default",
+			if (AlertTool.doQuestion("Restore all settings", "Soore you want to restore <All The Settings> to default",
 					restoreAllSettings, Main.window)) {
 
 				// Lock the update properties
@@ -197,14 +198,14 @@ public class ApplicationSettingsController extends BorderPane {
 				restoreAll();
 
 				// Delete the current settings from the User
-				ActionTool.deleteFile(
+				IOTool.deleteFile(
 						new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + Main.userInfoMode.getUser().getName()
 								+ File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
 
 				// Lock the update properties
 				Main.dbManager.getPropertiesDb().setUpdatePropertiesLocked(false);
 
-				ActionTool.showNotification("Settings Restored", "All the settings are restored to default",
+				AlertTool.showNotification("Settings Restored", "All the settings are restored to default",
 						Duration.seconds(2), NotificationType.INFORMATION);
 			}
 		});

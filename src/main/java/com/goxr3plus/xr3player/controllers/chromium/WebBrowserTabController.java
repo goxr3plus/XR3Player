@@ -73,6 +73,7 @@ import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import net.sf.image4j.codec.ico.ICODecoder;
 
@@ -535,7 +536,7 @@ public class WebBrowserTabController extends StackPane {
 				clipboard.setContent(content);
 
 				// Notification
-				ActionTool.showNotification("Copied to Clipboard",
+				AlertTool.showNotification("Copied to Clipboard",
 						"Search bar text copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 						Duration.seconds(2), NotificationType.INFORMATION);
 			});

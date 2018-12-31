@@ -29,8 +29,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * Opens a browser inside the application for DropBox Authentication Process
@@ -184,7 +184,7 @@ public class DropboxAuthanticationBrowser extends StackPane {
 			window.close();
 		} catch (DbxException ex) {
 			ex.printStackTrace();
-			ActionTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)",
+			AlertTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)",
 					Duration.millis(2000), NotificationType.ERROR);
 		}
 	}

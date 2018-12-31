@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class CloseAppBox extends StackPane {
 
@@ -74,7 +75,7 @@ public class CloseAppBox extends StackPane {
 
 		// restartButton
 		restartButton.setOnAction(a -> {
-			if (ActionTool.doQuestion("Restart", "Sure you want to restart the application?", restartButton,
+			if (AlertTool.doQuestion("Restart", "Sure you want to restart the application?", restartButton,
 					Main.window))
 				Main.restartTheApplication(true);
 		});

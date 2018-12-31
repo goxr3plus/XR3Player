@@ -99,10 +99,13 @@ import main.java.com.goxr3plus.xr3player.models.lists.EmotionListsController;
 import main.java.com.goxr3plus.xr3player.models.lists.PlayedMediaList;
 import main.java.com.goxr3plus.xr3player.models.lists.StarredMediaList;
 import main.java.com.goxr3plus.xr3player.services.database.VacuumProgressService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -363,7 +366,7 @@ public class Main extends Application {
 		countDownloads();
 
 		// Delete AutoUpdate if it exists
-		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
+		IOTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 
 		// ============= ApplicationProperties GLOBAL
 		final Properties properties = applicationProperties.loadProperties();
@@ -675,14 +678,14 @@ public class Main extends Application {
 		updateScreen.setVisible(true);
 
 		// Create Chromium Folder
-		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium",
+		if (!TimeTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium",
 				FileType.DIRECTORY)) {
 			System.err.println("Failed to create chromium folder");
 			terminateXR3Player(-1);
 		}
 
 		// Create Database folder if not exists
-		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
+		if (!TimeTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
 			System.err.println(
 					"Failed to create database folder[lack of permissions],please change installation directory");
 			terminateXR3Player(-1);
@@ -710,7 +713,7 @@ public class Main extends Application {
 		}
 
 		// Create Original xr3database signature file
-		ActionTool.createFileOrFolder(InfoTool.getDatabaseSignatureFile().getAbsolutePath(), FileType.FILE);
+		TimeTool.createFileOrFolder(InfoTool.getDatabaseSignatureFile().getAbsolutePath(), FileType.FILE);
 
 	}
 
@@ -765,7 +768,8 @@ public class Main extends Application {
 						.filter(userr -> !((User) userr).getName().equals(selectedUser.getName())).forEach(userr -> {
 
 							// Create the MenuItem
-							final MenuItem menuItem = new MenuItem(InfoTool.getMinString(((User) userr).getName(), 50,"..."));
+							final MenuItem menuItem = new MenuItem(
+									InfoTool.getMinString(((User) userr).getName(), 50, "..."));
 
 							// Set Image
 							final ImageView imageView = new ImageView(((User) userr).getImageView().getImage());
@@ -777,7 +781,7 @@ public class Main extends Application {
 							menuItem.setOnAction(a -> {
 
 								// Ask the user
-								if (ActionTool.doQuestion("Override Settings",
+								if (AlertTool.doQuestion("Override Settings",
 										"Soore you want to override your current user settings with the one that you selected from the menu ?",
 										settingsWindow.getCopySettingsMenuButton(), window))
 
@@ -785,12 +789,12 @@ public class Main extends Application {
 									new Thread(() -> {
 
 										// Delete the current settings from the User
-										ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+										IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
 												+ selectedUser.getName() + File.separator + "settings" + File.separator
 												+ InfoTool.USER_SETTINGS_FILE_NAME));
 
 										// Transfer the settings from the other user
-										ActionTool.copy(
+										IOAction.copy(
 												InfoTool.getAbsoluteDatabasePathWithSeparator()
 														+ ((User) userr).getName() + File.separator + "settings"
 														+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME,
@@ -938,7 +942,7 @@ public class Main extends Application {
 			// Check if the file exists
 			if (!new File(applicationPath[0]).exists()) {
 				// Show message that application is restarting
-				Platform.runLater(() -> ActionTool.showNotification("Application File can't be found",
+				Platform.runLater(() -> AlertTool.showNotification("Application File can't be found",
 						"XR3Player can't be restarted due to unexpected problem ", Duration.seconds(2),
 						NotificationType.ERROR));
 
@@ -961,7 +965,7 @@ public class Main extends Application {
 
 				// Show message that application is restarting
 				Platform.runLater(
-						() -> ActionTool.showNotification("Restarting Application",
+						() -> AlertTool.showNotification("Restarting Application",
 								"If restart takes a lot of time exit application and restart it manually.\n[ "
 										+ applicationPath[0] + " ]",
 								Duration.seconds(20), NotificationType.INFORMATION));
@@ -985,7 +989,7 @@ public class Main extends Application {
 					updateScreen.setVisible(false);
 
 					// Show failed message
-					Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed",
+					Platform.runLater(() -> AlertTool.showNotification("Restart seems to failed",
 							"Wait some more seconds before trying to restart/exit XR3Player manually",
 							Duration.seconds(20), NotificationType.ERROR));
 
@@ -1004,14 +1008,14 @@ public class Main extends Application {
 
 			// Show failed message
 			if (seconds != 0 && askUser)
-				Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed",
+				Platform.runLater(() -> AlertTool.showNotification("Restart seems to failed",
 						"Wait some more seconds before trying to restart/exit XR3Player manually", Duration.seconds(20),
 						NotificationType.ERROR));
 
 			// Ask the user
 			if (askUser)
 				Platform.runLater(() -> {
-					if (ActionTool.doQuestion(null, "Restart failed.... force shutdown?", null, Main.window))
+					if (AlertTool.doQuestion(null, "Restart failed.... force shutdown?", null, Main.window))
 						terminate(false);
 				});
 			else {

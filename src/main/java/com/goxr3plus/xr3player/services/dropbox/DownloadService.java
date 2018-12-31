@@ -19,7 +19,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.ProgressOutputStream;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DownloadService extends Service<Boolean> {
@@ -77,7 +77,7 @@ public class DownloadService extends Service<Boolean> {
 					downloadFile(client, dropboxFile, localFileAbsolutePath);
 
 					// Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Download completed",
+					Platform.runLater(() -> AlertTool.showNotification("Download completed",
 							"Completed downloading " + (!dropboxFile.isDirectory() ? "File" : FOLDER) + " :\n[ "
 									+ dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.SIMPLE,
@@ -91,7 +91,7 @@ public class DownloadService extends Service<Boolean> {
 					ex.printStackTrace();
 
 					// Show message to the User
-					Platform.runLater(() -> ActionTool.showNotification("Download Failed",
+					Platform.runLater(() -> AlertTool.showNotification("Download Failed",
 							"Failed to download " + (!dropboxFile.isDirectory() ? "File" : FOLDER) + ":\n[ "
 									+ dropboxFile.getMetadata().getName() + " ]",
 							Duration.millis(3000), NotificationType.ERROR));
@@ -181,7 +181,7 @@ public class DownloadService extends Service<Boolean> {
 		}
 
 		// Show message to the User
-		Platform.runLater(() -> ActionTool.showNotification(
+		Platform.runLater(() -> AlertTool.showNotification(
 				"Download Cancelled", "Download cancelled for" + (!dropboxFile.isDirectory() ? "File" : FOLDER)
 						+ ":\n[ " + dropboxFile.getMetadata().getName() + " ]",
 				Duration.millis(3000), NotificationType.WARNING));

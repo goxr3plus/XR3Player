@@ -50,6 +50,7 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DropboxViewer extends StackPane {
@@ -288,7 +289,7 @@ public class DropboxViewer extends StackPane {
 				accessToken = newValue;
 
 				// Show message to the User
-				ActionTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account",
+				AlertTool.showNotification("Authantication", "Successfully authenticated to your Dropbox Account",
 						Duration.millis(2000), NotificationType.SIMPLE,
 						JavaFXTool.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 64));
 
@@ -528,7 +529,7 @@ public class DropboxViewer extends StackPane {
 		// Clear the selected item
 		if (savedAccountsArray != null && treeView.getSelectionModel().getSelectedItem() != null) {
 
-			if (ActionTool.doQuestion("Deleting Dropbox Account",
+			if (AlertTool.doQuestion("Deleting Dropbox Account",
 					"Are you soore you want to delete selected Dropbox Account ?", treeView, Main.window)) {
 
 				// Remove the selected items
@@ -579,13 +580,13 @@ public class DropboxViewer extends StackPane {
 		int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
 
 		if (!permanent) {
-			if (ActionTool.doQuestion("Delete",
+			if (AlertTool.doQuestion("Delete",
 					"Are you sure you want to delete " + (selectedItems != 1 ? " [ " + selectedItems + " ] items"
 							: " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] ")
 							+ " from your Dropbox?",
 					deleteMenuButton, Main.window))
 				this.getDropBoxService().delete(DropBoxOperation.DELETE);
-		} else if (ActionTool.doQuestion("PERMANENT Delete",
+		} else if (AlertTool.doQuestion("PERMANENT Delete",
 				"Are you sure you want to delete " + (selectedItems != 1 ? " [ " + selectedItems + " ] items"
 						: " [ " + dropboxFilesTableViewer.getSelectionModel().getSelectedItem().getTitle() + " ] ")
 						+ " from your Dropbox PERMANENTLY?",
@@ -602,11 +603,11 @@ public class DropboxViewer extends StackPane {
 	public void deleteFile(DropboxFile dropboxFile, boolean permanent) {
 
 		if (!permanent) {
-			if (ActionTool.doQuestion("Delete",
+			if (AlertTool.doQuestion("Delete",
 					"Are you sure you want to delete [ " + dropboxFile.getTitle() + " ]  from your Dropbox?",
 					deleteMenuButton, Main.window))
 				this.getDropBoxService().delete(DropBoxOperation.DELETE);
-		} else if (ActionTool.doQuestion("PERMANENT Delete",
+		} else if (AlertTool.doQuestion("PERMANENT Delete",
 				"Are you sure you want to delete [" + dropboxFile.getTitle() + " ]  from your Dropbox PERMANENTLY?",
 				deleteMenuButton, Main.window))
 			this.getDropBoxService().delete(DropBoxOperation.PERMANENTLY_DELETE);

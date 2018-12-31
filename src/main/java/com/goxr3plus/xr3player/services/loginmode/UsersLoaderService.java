@@ -16,8 +16,9 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**
@@ -56,7 +57,7 @@ public class UsersLoaderService extends Service<Boolean> {
 	private void done() {
 
 		// Show Notification
-		ActionTool.showNotification("Welcome :)", null, Duration.seconds(4), NotificationType.SUCCESS);
+		AlertTool.showNotification("Welcome :)", null, Duration.seconds(4), NotificationType.SUCCESS);
 
 		// Bindings
 		Main.updateScreen.getProgressBar().progressProperty().unbind();
@@ -139,9 +140,9 @@ public class UsersLoaderService extends Service<Boolean> {
 
 							// Very well create the UsersInformationDb because it doesn't exist so on the
 							// next load it will exist
-							ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+							TimeTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
 									+ user.getName() + File.separator + "settings"), FileType.DIRECTORY);
-							ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
+							TimeTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
 									FileType.FILE);
 
 							// Check if the database of this user exists

@@ -37,8 +37,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -72,7 +72,7 @@ public class RenameWindow extends VBox {
 		if (!inputField.getText().trim().isEmpty())
 			close(true);
 		else
-			ActionTool.showNotification("Message", "You have to type something..", Duration.millis(1500),
+			AlertTool.showNotification("Message", "You have to type something..", Duration.millis(1500),
 					NotificationType.WARNING);
 
 	};

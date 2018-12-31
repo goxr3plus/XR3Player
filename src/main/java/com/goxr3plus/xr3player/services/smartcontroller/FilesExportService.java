@@ -12,6 +12,8 @@ import org.zeroturnaround.zip.ZipUtil;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.FilesMode;
@@ -21,11 +23,10 @@ import main.java.com.goxr3plus.xr3player.application.enums.Operation;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import javafx.event.EventHandler;
-import javafx.concurrent.WorkerStateEvent;
+import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * Copy or Move items
@@ -47,24 +48,24 @@ public class FilesExportService extends Service<Boolean> {
 	/**
 	 * Constructor
 	 */
-	public FilesExportService(SmartController smartController) {
+	public FilesExportService(final SmartController smartController) {
 		this.smartController = smartController;
 
-		EventHandler<WorkerStateEvent> e1 = s -> {
+		final EventHandler<WorkerStateEvent> e1 = s -> {
 			done();
-			ActionTool.showNotification("Success Message", operation + " successfully done for:\n\t" + smartController,
+			AlertTool.showNotification("Success Message", operation + " successfully done for:\n\t" + smartController,
 					Duration.millis(1500), NotificationType.SUCCESS);
 		};
 		setOnSucceeded(e1);
 		setOnFailed(f -> {
 			done();
-			ActionTool.showNotification("Error Message", operation + " failed for:\n\t" + smartController,
+			AlertTool.showNotification("Error Message", operation + " failed for:\n\t" + smartController,
 					Duration.millis(1500), NotificationType.ERROR);
 		});
 
 		setOnCancelled(c -> {
 			done();
-			ActionTool.showNotification("Information Message", operation + " cancelled for:\n\t" + smartController,
+			AlertTool.showNotification("Information Message", operation + " cancelled for:\n\t" + smartController,
 					Duration.millis(1500), NotificationType.INFORMATION);
 		});
 	}
@@ -75,8 +76,8 @@ public class FilesExportService extends Service<Boolean> {
 	 * @param targetDirectories
 	 * @param operation
 	 */
-	public void startOperation(List<File> targetDirectories, Operation operation, FilesMode filesToExport,
-			FileType fileType) {
+	public void startOperation(final List<File> targetDirectories, final Operation operation,
+			final FilesMode filesToExport, final FileType fileType) {
 		if (isRunning() || !smartController.isFree(true))
 			return;
 
@@ -148,7 +149,7 @@ public class FilesExportService extends Service<Boolean> {
 									.setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 
 							// Stream
-							Stream<String> stream =
+							final Stream<String> stream =
 									// Is Filter Mode Selected?
 									!smartController.getFiltersModeTab().isSelected()
 											? smartController.getItemsObservableList().stream().map(Media::getFilePath)
@@ -167,7 +168,7 @@ public class FilesExportService extends Service<Boolean> {
 									.setText("\n Exporting Media.... \n\t Total -> [ " + total + " ]\n"));
 
 							// Stream
-							Stream<String> stream =
+							final Stream<String> stream =
 									// Is Filter Mode Selected?
 									(!smartController.getFiltersModeTab().isSelected())
 											? smartController.getNormalModeMediaTableViewer().getSelectionModel()
@@ -192,7 +193,7 @@ public class FilesExportService extends Service<Boolean> {
 									.executeQuery("SELECT* FROM '" + smartController.getDataBaseTableName() + "'");) {
 
 								// Make a list of all the items
-								List<String> list = new ArrayList<>();
+								final List<String> list = new ArrayList<>();
 
 								// Fetch the items from the database
 								while (resultSet.next())
@@ -205,12 +206,12 @@ public class FilesExportService extends Service<Boolean> {
 								// Step 2
 								proceedStream(list.stream(), targetDirectory);
 
-							} catch (Exception ex) {
+							} catch (final Exception ex) {
 								Main.logger.log(Level.WARNING, "", ex);
 							}
 
 						}
-					} catch (Exception ex) {
+					} catch (final Exception ex) {
 						ex.printStackTrace();
 					}
 				});
@@ -227,7 +228,7 @@ public class FilesExportService extends Service<Boolean> {
 			 * 
 			 * @param stream
 			 */
-			private void proceedStream(Stream<String> stream, File targetDirectory) {
+			private void proceedStream(final Stream<String> stream, final File targetDirectory) {
 				// DIRECTORY?
 				if (fileType == FileType.DIRECTORY) {
 					// For each item on stream
@@ -256,11 +257,11 @@ public class FilesExportService extends Service<Boolean> {
 
 							return fileName;
 						});
-					} catch (Exception ex) {
+					} catch (final Exception ex) {
 						// Check if access is denied
 						if (ex.getMessage().contains(
 								"(The process cannot access the file because it is being used by another process)"))
-							ActionTool.showNotification("Error Message", "[ "
+							AlertTool.showNotification("Error Message", "[ "
 									+ IOTool.getFileName(targetDirectory.getAbsolutePath()) + " ]\n"
 									+ "The process cannot access the file because it is being used by another process",
 									Duration.seconds(4), NotificationType.ERROR);
@@ -274,22 +275,22 @@ public class FilesExportService extends Service<Boolean> {
 			 *
 			 * @param sourceFilePath [ The Source File Absolute Path]
 			 */
-			private void passItem(String sourceFilePath, File destinationFolder) {
+			private void passItem(final String sourceFilePath, final File destinationFolder) {
 				if (!new File(sourceFilePath).exists())
 					return;
 
 				// Useful
-				String fileName = IOTool.getFileName(sourceFilePath);
-				String destination = destinationFolder + File.separator + fileName;
+				final String fileName = IOTool.getFileName(sourceFilePath);
+				final String destination = destinationFolder + File.separator + fileName;
 
 				// Go
 				if (operation == Operation.COPY) {
 					Platform.runLater(
 							() -> smartController.getDescriptionArea().appendText("\n Copying ->" + fileName));
-					ActionTool.copy(sourceFilePath, destination);
+					IOAction.copy(sourceFilePath, destination);
 				} else {
 					Platform.runLater(() -> smartController.getDescriptionArea().appendText("\n Moving ->" + fileName));
-					ActionTool.move(sourceFilePath, destination);
+					IOAction.move(sourceFilePath, destination);
 				}
 			}
 		};
