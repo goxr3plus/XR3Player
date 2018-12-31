@@ -1,10 +1,11 @@
 package main.java.com.goxr3plus.xr3player.application.enums;
 
 /**
- * @author GOXR3PLUSSTUDIO
+ * The Type of File
+ * 
+ * @author GOXR3PLUS
  *
  */
 public enum FileType {
-
-	SYMBOLIC_LINK, HARD_LINK, SHORTCUT, ORIGINAL_FILE, UNKNOWN;
+	DIRECTORY, FILE, ZIP;
 }

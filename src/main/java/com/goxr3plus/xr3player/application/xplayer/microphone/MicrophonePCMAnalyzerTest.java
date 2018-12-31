@@ -2,14 +2,12 @@ package main.java.com.goxr3plus.xr3player.application.xplayer.microphone;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.sound.sampled.AudioFileFormat.Type;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.TargetDataLine;
 

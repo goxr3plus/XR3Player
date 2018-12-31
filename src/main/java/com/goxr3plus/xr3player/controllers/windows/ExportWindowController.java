@@ -26,13 +26,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.FilesMode;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -70,7 +70,7 @@ public class ExportWindowController extends BorderPane {
 	/**
 	 * The Window of the ExportWindowController
 	 */
-	private Stage window = new Stage();
+	private final Stage window = new Stage();
 
 	private SmartController oldSmartController;
 
@@ -92,14 +92,14 @@ public class ExportWindowController extends BorderPane {
 	public ExportWindowController() {
 
 		// -----------------------------------------FXMLLoader
-		FXMLLoader loader = new FXMLLoader(
+		final FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(InfoTool.WINDOW_FXMLS + "ExportWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
 
@@ -123,7 +123,7 @@ public class ExportWindowController extends BorderPane {
 
 		// okButton
 		okButton.setOnAction(a -> {
-			List<File> foldersList = exportFoldersVBox.getChildren().stream()
+			final List<File> foldersList = exportFoldersVBox.getChildren().stream()
 					.map(box -> ((ExportWindowFolderHBox) box).getTextField().getText()).filter(text -> !text.isEmpty())
 					.map(File::new).collect(Collectors.toList());
 
@@ -135,7 +135,7 @@ public class ExportWindowController extends BorderPane {
 			}
 
 			// Define the Operation
-			Operation operation = Operation.COPY;
+			final Operation operation = Operation.COPY;
 
 			// Nailed it!
 			smartController.getFilesExportService().startOperation(foldersList, operation, filesToExport,
@@ -195,7 +195,7 @@ public class ExportWindowController extends BorderPane {
 	 * Creates a new Box that allows user to pick another folder too
 	 */
 	private void createFolderPickerBox() {
-		ExportWindowFolderHBox box = new ExportWindowFolderHBox();
+		final ExportWindowFolderHBox box = new ExportWindowFolderHBox();
 
 		// Button
 		box.getPickFolderButton().setOnAction(a -> pickFolder(box.getTextField()));
@@ -216,8 +216,8 @@ public class ExportWindowController extends BorderPane {
 	 * 
 	 * @param exportField
 	 */
-	private void pickFolder(TextField exportField) {
-		File file = Main.specialChooser.showSaveDialog(smartController.getName(),
+	private void pickFolder(final TextField exportField) {
+		final File file = Main.specialChooser.showSaveDialog(smartController.getName(),
 				((Labeled) exportAsGroup.getSelectedToggle()).getText().equals("Folder") ? FileType.DIRECTORY
 						: FileType.ZIP);
 
@@ -243,7 +243,7 @@ public class ExportWindowController extends BorderPane {
 
 		// Window Title Property
 		window.titleProperty().unbind();
-		String common = "PlayList -> [ " + smartController.getName() + " ] , Total Media to export -> [ ";
+		final String common = "PlayList -> [ " + smartController.getName() + " ] , Total Media to export -> [ ";
 
 		// define the variable using this switch statement
 		switch (((Labeled) whatFilesToExportGroup.getSelectedToggle()).getText()) {
@@ -273,7 +273,7 @@ public class ExportWindowController extends BorderPane {
 	 * 
 	 * @param smartController
 	 */
-	public void show(SmartController smartController) {
+	public void show(final SmartController smartController) {
 		this.smartController = smartController;
 
 		// Super

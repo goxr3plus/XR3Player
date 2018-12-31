@@ -7,13 +7,13 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderProgressListener;
@@ -34,7 +34,7 @@ public class ConverterService extends Service<Boolean> {
 	 */
 	private String fileAbsolutePath;
 	private String newFileAsbolutePath;
-	private ConvertProgressListener listener = new ConvertProgressListener();
+	private final ConvertProgressListener listener = new ConvertProgressListener();
 	private final SimpleDoubleProperty convertProgress = new SimpleDoubleProperty();
 	private Encoder encoder;
 
@@ -46,7 +46,7 @@ public class ConverterService extends Service<Boolean> {
 	/**
 	 * Constructor
 	 */
-	public ConverterService(XPlayerController xPlayerController) {
+	public ConverterService(final XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
 
 		this.setOnSucceeded(s -> done());
@@ -61,7 +61,7 @@ public class ConverterService extends Service<Boolean> {
 	 * 
 	 * @param fileAbsolutePath
 	 */
-	public void convert(String fileAbsolutePath) {
+	public void convert(final String fileAbsolutePath) {
 
 		// Set the full fileAbsolutePath
 		this.fileAbsolutePath = fileAbsolutePath;
@@ -107,7 +107,7 @@ public class ConverterService extends Service<Boolean> {
 					updateMessage("Stop previous...");
 					xPlayerController.getxPlayer().stop();
 
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					ex.printStackTrace();
 				}
 
@@ -115,7 +115,7 @@ public class ConverterService extends Service<Boolean> {
 				updateMessage("Converting ( " + IOTool.getFileExtension(fileAbsolutePath) + " ) to ( mp3 )");
 
 				// Create the media folder if not existing
-				String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
+				final String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
 				if (!TimeTool.createFileOrFolder(folderName, FileType.DIRECTORY)) {
 					AlertTool.showNotification("Internal Error", "Can't create Media Folder for converted files",
 							Duration.seconds(4), NotificationType.WARNING);
@@ -124,25 +124,24 @@ public class ConverterService extends Service<Boolean> {
 
 				// Check if it is already .mp3
 				if (!"mp3".equals(IOTool.getFileExtension(fileAbsolutePath))) {
-					newFileAsbolutePath = folderName + File.separator + IOTool.getFileTitle(fileAbsolutePath)
-							+ ".mp3";
+					newFileAsbolutePath = folderName + File.separator + IOTool.getFileTitle(fileAbsolutePath) + ".mp3";
 
 					// Convert any audio format to .mp3
 					try {
 
 						// Files
-						File source = new File(fileAbsolutePath);
-						File target = new File(newFileAsbolutePath);
+						final File source = new File(fileAbsolutePath);
+						final File target = new File(newFileAsbolutePath);
 
 						// Audio Attributes
-						AudioAttributes audio = new AudioAttributes();
+						final AudioAttributes audio = new AudioAttributes();
 						audio.setCodec("libmp3lame");
 						audio.setBitRate(128000);
 						audio.setChannels(2);
 						audio.setSamplingRate(44100);
 
 						// Encoding attributes
-						EncodingAttributes attrs = new EncodingAttributes();
+						final EncodingAttributes attrs = new EncodingAttributes();
 						attrs.setFormat("mp3");
 						attrs.setAudioAttributes(audio);
 
@@ -152,7 +151,7 @@ public class ConverterService extends Service<Boolean> {
 						encoder = encoder != null ? encoder : new Encoder();
 						encoder.encode(new MultimediaObject(source), target, attrs, listener);
 
-					} catch (Exception ex) {
+					} catch (final Exception ex) {
 						ex.printStackTrace();
 						succeeded = false;
 					}
@@ -182,7 +181,7 @@ public class ConverterService extends Service<Boolean> {
 		public ConvertProgressListener() {
 		}
 
-		public void message(String m) {
+		public void message(final String m) {
 			// if ((ConverterFrame.this.inputfiles.length > 1) &&
 			// (this.current < ConverterFrame.this.inputfiles.length)) {
 			// ConverterFrame.this.encodingMessageLabel.setText(this.current + "/" +
@@ -190,9 +189,9 @@ public class ConverterService extends Service<Boolean> {
 			// }
 		}
 
-		public void progress(int p) {
+		public void progress(final int p) {
 
-			double progress = p / 1000.00;
+			final double progress = p / 1000.00;
 			// System.out.println(progress);
 
 			Platform.runLater(() -> convertProgress.set(progress));
@@ -219,7 +218,7 @@ public class ConverterService extends Service<Boolean> {
 			// }
 		}
 
-		public void sourceInfo(MultimediaInfo m) {
+		public void sourceInfo(final MultimediaInfo m) {
 		}
 	}
 

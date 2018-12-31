@@ -37,6 +37,7 @@ import main.java.com.goxr3plus.xr3player.services.database.DatabaseExportService
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
@@ -306,7 +307,7 @@ public class SideBar extends StackPane {
 		showApplicationInfo.setOnAction(a -> Main.aboutWindow.show());
 
 		// showManual
-		showManual.setOnAction(a -> ActionTool
+		showManual.setOnAction(a -> IOAction
 				.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 
 		// donation

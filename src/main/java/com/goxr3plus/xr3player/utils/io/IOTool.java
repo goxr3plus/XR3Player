@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.ParseException;
@@ -16,7 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.enums.FileType;
+import main.java.com.goxr3plus.xr3player.application.enums.FileLinkType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
@@ -43,7 +42,7 @@ public class IOTool {
 			try {
 				// If yes return the real file name
 				absoluteFilePath = Files.readSymbolicLink(path).toFile().getAbsolutePath();
-				return new FileTypeAndAbsolutePath(FileType.SYMBOLIC_LINK, absoluteFilePath);
+				return new FileTypeAndAbsolutePath(FileLinkType.SYMBOLIC_LINK, absoluteFilePath);
 			} catch (final IOException e1) {
 				e1.printStackTrace();
 			}
@@ -55,12 +54,12 @@ public class IOTool {
 				if ("lnk".equals(IOTool.getFileExtension(absoluteFilePath))
 						&& WindowsShortcut.isPotentialValidLink(file))
 					absoluteFilePath = new WindowsShortcut(file).getRealFilename();
-				return new FileTypeAndAbsolutePath(FileType.SHORTCUT, absoluteFilePath);
+				return new FileTypeAndAbsolutePath(FileLinkType.SHORTCUT, absoluteFilePath);
 			} catch (IOException | ParseException e) {
 				e.printStackTrace();
 			}
 
-		return new FileTypeAndAbsolutePath(FileType.ORIGINAL_FILE, absoluteFilePath);
+		return new FileTypeAndAbsolutePath(FileLinkType.ORIGINAL_FILE, absoluteFilePath);
 	}
 
 	/**

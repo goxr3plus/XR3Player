@@ -28,8 +28,8 @@ import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -192,7 +192,7 @@ public class XPlayerControllerContextMenu extends ContextMenu {
 		if (source == copy) {
 			JavaFXTool.setClipBoard(Arrays.asList(new File(absoluteFilePath)));
 		} else if (source == showFile) {
-			ActionTool.openFileInExplorer(absoluteFilePath);
+			IOAction.openFileInExplorer(absoluteFilePath);
 		} else if (source == editFileInfo)
 			Main.tagWindow.openAudio(absoluteFilePath, TagTabCategory.BASICINFO, true);
 

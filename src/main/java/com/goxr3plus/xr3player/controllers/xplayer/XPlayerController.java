@@ -64,7 +64,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.enums.FileType;
+import main.java.com.goxr3plus.xr3player.application.enums.FileLinkType;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
@@ -87,10 +87,10 @@ import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayer;
 import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerPlayService;
 import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerSeekService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
@@ -533,7 +533,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 						// Check if File exists
 						if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 							AlertTool.showNotification("File doesn't exist",
-									(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link"
+									(ftaap.getFileType() == FileLinkType.SYMBOLIC_LINK ? "Symbolic link"
 											: "Windows Shortcut") + " points to a file that doesn't exists anymore.",
 									Duration.millis(2000), NotificationType.INFORMATION);
 							return;
@@ -762,7 +762,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 							// Check if File exists
 							if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 								AlertTool.showNotification("File doesn't exist",
-										(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link"
+										(ftaap.getFileType() == FileLinkType.SYMBOLIC_LINK ? "Symbolic link"
 												: "Windows Shortcut")
 												+ " points to a file that doesn't exists anymore.",
 										Duration.millis(2000), NotificationType.INFORMATION);
@@ -1256,7 +1256,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	 */
 	public void openAudioInExplorer() {
 		if (xPlayerModel.songPathProperty().get() != null)
-			ActionTool.openFileInExplorer(xPlayerModel.songPathProperty().get());
+			IOAction.openFileInExplorer(xPlayerModel.songPathProperty().get());
 	}
 
 	/**

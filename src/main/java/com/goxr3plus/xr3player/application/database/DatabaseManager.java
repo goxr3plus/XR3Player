@@ -25,6 +25,7 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
@@ -34,10 +35,8 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**
  * This class is managing the database of the application.

@@ -30,8 +30,8 @@ import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 
 /**
  * The default context menu for song items of application.
@@ -274,7 +274,7 @@ public class MediaContextMenu extends ContextMenu {
 		else if (source == stars)
 			media.updateStars(node);
 		else if (source == showFile) // File path
-			ActionTool.openFileInExplorer(media.getFilePath());
+			IOAction.openFileInExplorer(media.getFilePath());
 		else if (source == editFileInfo) {
 			// More than 1 selected?
 			if (controller.getNormalModeMediaTableViewer().getSelectedCount() > 1)

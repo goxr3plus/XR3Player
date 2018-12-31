@@ -24,9 +24,9 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -170,7 +170,7 @@ public class TreeViewContextMenu extends ContextMenu {
 
 		// showFile
 		if (source == showFile)
-			ActionTool.openFileInExplorer(treeItem.getAbsoluteFilePath());
+			IOAction.openFileInExplorer(treeItem.getAbsoluteFilePath());
 		else if (source == copy)
 			JavaFXTool.setClipBoard(Arrays.asList(new File(treeItem.getAbsoluteFilePath())));
 		else if (source == editFileInfo)

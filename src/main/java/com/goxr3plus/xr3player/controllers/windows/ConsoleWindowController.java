@@ -29,6 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -139,7 +140,7 @@ public class ConsoleWindowController extends StackPane {
 		close.setOnAction(a -> window.close());
 
 		// help
-		help.setOnAction(a -> ActionTool
+		help.setOnAction(a -> IOAction
 				.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf"));
 
 		// Add SpeechRecognition
@@ -265,7 +266,7 @@ public class ConsoleWindowController extends StackPane {
 			cssTextArea.clear();
 			success = true;
 		} else if ("help".equals(command)) { // help
-			ActionTool.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
+			IOAction.openFileInEditor(InfoTool.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
 			success = true;
 		} else if ("exit".equals(command) || "close".equals(command)) // close console
 			window.close();

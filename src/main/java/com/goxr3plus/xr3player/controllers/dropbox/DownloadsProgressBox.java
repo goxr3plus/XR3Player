@@ -11,8 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 public class DownloadsProgressBox extends StackPane {
@@ -97,7 +97,7 @@ public class DownloadsProgressBox extends StackPane {
 		});
 
 		// openFileLocation
-		openFileLocation.setOnAction(a -> ActionTool
+		openFileLocation.setOnAction(a -> IOAction
 				.openFileInExplorer(dropBoxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()));
 	}
 

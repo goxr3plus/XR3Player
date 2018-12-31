@@ -1,6 +1,6 @@
 package main.java.com.goxr3plus.xr3player.utils.io;
 
-import main.java.com.goxr3plus.xr3player.application.enums.FileType;
+import main.java.com.goxr3plus.xr3player.application.enums.FileLinkType;
 
 /**
  * Holds FileType and AbsolutePath
@@ -9,10 +9,10 @@ import main.java.com.goxr3plus.xr3player.application.enums.FileType;
  *
  */
 public class FileTypeAndAbsolutePath {
-	private FileType fileType;
+	private FileLinkType fileType;
 	private String fileAbsolutePath;
 
-	public FileTypeAndAbsolutePath(FileType fileType, String fileAbsolutePath) {
+	public FileTypeAndAbsolutePath(FileLinkType fileType, String fileAbsolutePath) {
 		this.fileType = fileType;
 		this.fileAbsolutePath = fileAbsolutePath;
 	}
@@ -31,7 +31,7 @@ public class FileTypeAndAbsolutePath {
 	 * 
 	 * @return the fileType
 	 */
-	public FileType getFileType() {
+	public FileLinkType getFileType() {
 		return fileType;
 	}
 

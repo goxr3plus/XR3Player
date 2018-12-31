@@ -14,12 +14,12 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 
 /**
  * @author GOXR3PLUS
@@ -75,14 +75,14 @@ public class UsersLoaderService extends Service<Boolean> {
 			@Override
 			protected Boolean call() throws Exception {
 				// Variables
-				int[] counter = { 0 };
-				int totalUsers = Main.loginMode.viewer.getItemsObservableList().size();
+				final int[] counter = { 0 };
+				final int totalUsers = Main.loginMode.viewer.getItemsObservableList().size();
 
 				try {
 
 					// -- For every user
 					Main.loginMode.viewer.getItemsObservableList().forEach(userr -> {
-						User user = (User) userr;
+						final User user = (User) userr;
 
 						// Check if the UserInformation Properties File exist
 						if (new File(user.getUserInformationDb().getFileAbsolutePath()).exists()) {
@@ -90,7 +90,7 @@ public class UsersLoaderService extends Service<Boolean> {
 
 							// --------------------Now continue
 							// normally----------------------------------------------
-							Properties userInformationSettings = user.getUserInformationDb().loadProperties(); // Load
+							final Properties userInformationSettings = user.getUserInformationDb().loadProperties(); // Load
 																												// the
 																												// properties
 																												// from
@@ -99,7 +99,7 @@ public class UsersLoaderService extends Service<Boolean> {
 
 							// --Total Libraries
 							Optional.ofNullable(userInformationSettings.getProperty("Total-Libraries")).ifPresent(s -> {
-								int totalLibraries = Integer.parseInt(s);
+								final int totalLibraries = Integer.parseInt(s);
 
 								// Refresh the text
 								Platform.runLater(() -> {
@@ -146,7 +146,7 @@ public class UsersLoaderService extends Service<Boolean> {
 									FileType.FILE);
 
 							// Check if the database of this user exists
-							String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName()
+							final String dbFileAbsolutePath = InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName()
 									+ File.separator + "dbFile.db";
 							if (new File(dbFileAbsolutePath).exists()) {
 
@@ -156,7 +156,7 @@ public class UsersLoaderService extends Service<Boolean> {
 										ResultSet dbCounter = connection.createStatement()
 												.executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
 
-									int[] totalLibraries = { 0 };
+									final int[] totalLibraries = { 0 };
 									totalLibraries[0] += dbCounter.getInt(1);
 									Thread.sleep(500);
 
@@ -181,7 +181,7 @@ public class UsersLoaderService extends Service<Boolean> {
 									// totalLibraries + " Libraries"); //debugging
 
 									updateProgress(++counter[0], totalUsers);
-								} catch (Exception ex) {
+								} catch (final Exception ex) {
 									Main.logger.log(Level.SEVERE, "", ex);
 								}
 
@@ -197,7 +197,7 @@ public class UsersLoaderService extends Service<Boolean> {
 
 					});
 
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					ex.printStackTrace();
 				}
 

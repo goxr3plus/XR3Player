@@ -13,7 +13,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 
 /**
@@ -44,7 +44,7 @@ public class PropertiesDb {
 	 * 
 	 * @param localDbManager
 	 */
-	public PropertiesDb(String propertiesAbsolutePath, boolean updatePropertiesLocked) {
+	public PropertiesDb(final String propertiesAbsolutePath, final boolean updatePropertiesLocked) {
 		this.fileAbsolutePath = propertiesAbsolutePath;
 		this.updatePropertiesLocked = updatePropertiesLocked;
 		properties = new Properties();
@@ -58,7 +58,7 @@ public class PropertiesDb {
 	 * @param key
 	 * @param value
 	 */
-	public void updateProperty(String key, String value) {
+	public void updateProperty(final String key, final String value) {
 		if (updatePropertiesLocked)
 			return;
 
@@ -81,7 +81,7 @@ public class PropertiesDb {
 				// save properties
 				properties.store(outStream, null);
 
-			} catch (IOException ex) {
+			} catch (final IOException ex) {
 				ex.printStackTrace();
 			}
 		});
@@ -92,7 +92,7 @@ public class PropertiesDb {
 	 * 
 	 * @param key
 	 */
-	public void deleteProperty(String key) {
+	public void deleteProperty(final String key) {
 		// Check if exists
 		if (new File(fileAbsolutePath).exists())
 
@@ -110,7 +110,7 @@ public class PropertiesDb {
 					// save properties
 					properties.store(outStream, null);
 
-				} catch (IOException ex) {
+				} catch (final IOException ex) {
 					ex.printStackTrace();
 				}
 			});
@@ -132,7 +132,7 @@ public class PropertiesDb {
 				// properties.clear();
 				properties.load(inStream);
 
-			} catch (IOException ex) {
+			} catch (final IOException ex) {
 				ex.printStackTrace();
 			}
 
@@ -145,7 +145,7 @@ public class PropertiesDb {
 	 * @param key The property key
 	 * @return Returns the property with that key
 	 */
-	public String getProperty(String key) {
+	public String getProperty(final String key) {
 		return properties.getProperty(key);
 	}
 
@@ -172,14 +172,14 @@ public class PropertiesDb {
 	 * 
 	 * @param canUpdateProperty the canUpdateProperty to set
 	 */
-	public void setUpdatePropertiesLocked(boolean updatePropertiesLocked) {
+	public void setUpdatePropertiesLocked(final boolean updatePropertiesLocked) {
 		this.updatePropertiesLocked = updatePropertiesLocked;
 	}
 
 	/**
 	 * @param fileAbsolutePath The new absolute path of the properties file
 	 */
-	public void setFileAbsolutePath(String fileAbsolutePath) {
+	public void setFileAbsolutePath(final String fileAbsolutePath) {
 		this.fileAbsolutePath = fileAbsolutePath;
 	}
 

@@ -17,7 +17,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
 
 /**
  * @author GOXR3PLUS

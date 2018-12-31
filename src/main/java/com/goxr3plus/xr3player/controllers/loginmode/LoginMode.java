@@ -36,18 +36,18 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.custom.FlipPanel;
 import main.java.com.goxr3plus.xr3player.controllers.general.CloseAppBox;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
-import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
+import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.controllers.loginmode.UserInformation.UserCategory;
 import main.java.com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -196,7 +196,7 @@ public class LoginMode extends StackPane {
 	/** This InvalidationListener is used during the creation of a new user. */
 	private final InvalidationListener userCreationInvalidator = new InvalidationListener() {
 		@Override
-		public void invalidated(Observable observable) {
+		public void invalidated(final Observable observable) {
 
 			// Remove the Listener
 			Main.renameWindow.showingProperty().removeListener(this);
@@ -207,7 +207,7 @@ public class LoginMode extends StackPane {
 				Main.window.requestFocus();
 
 				// Check if this name already exists
-				String newName = Main.renameWindow.getUserInput();
+				final String newName = Main.renameWindow.getUserInput();
 
 				// if can pass
 				if (!viewer.getItemsObservableList().stream()
@@ -216,7 +216,7 @@ public class LoginMode extends StackPane {
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
 
 						// Create the new user and add it
-						User user = new User(newName, viewer.getItemsObservableList().size(), LoginMode.this);
+						final User user = new User(newName, viewer.getItemsObservableList().size(), LoginMode.this);
 						viewer.addItem(user, true);
 
 						// Add to PieChart
@@ -251,14 +251,14 @@ public class LoginMode extends StackPane {
 	public LoginMode() {
 
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "LoginMode.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "LoginMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		// -------------Load the FXML-------------------------------
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.WARNING, "", ex);
 		}
 
@@ -298,8 +298,8 @@ public class LoginMode extends StackPane {
 
 		// openUserContextMenu
 		openUserContextMenu.setOnAction(a -> {
-			User user = (User) viewer.getSelectedItem();
-			Bounds bounds = user.localToScreen(user.getBoundsInLocal());
+			final User user = (User) viewer.getSelectedItem();
+			final Bounds bounds = user.localToScreen(user.getBoundsInLocal());
 			userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
 					bounds.getMinY() + bounds.getHeight() / 4, user);
 		});
@@ -348,7 +348,7 @@ public class LoginMode extends StackPane {
 		deleteDatabase.setOnAction(a -> Main.sideBar.deleteDatabase());
 
 		// == color picker
-		String defaultWebColor = "#ef4949";
+		final String defaultWebColor = "#ef4949";
 		colorPicker.setValue(Color.web(defaultWebColor));
 		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
 				+ defaultWebColor + " 87%);");
@@ -357,7 +357,7 @@ public class LoginMode extends StackPane {
 		colorPicker.valueProperty().addListener((observable, oldColor, newColor) -> {
 
 			// Format to WebColor
-			String webColor = JavaFXTool.colorToWebColor(newColor);
+			final String webColor = JavaFXTool.colorToWebColor(newColor);
 
 			// Set the style
 			this.viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
@@ -388,7 +388,7 @@ public class LoginMode extends StackPane {
 	 * @return
 	 */
 	public Comparator<Node> getSortComparator() {
-		String text = ((RadioMenuItem) sortByGroup.getSelectedToggle()).getText();
+		final String text = ((RadioMenuItem) sortByGroup.getSelectedToggle()).getText();
 
 		if (text.equalsIgnoreCase("Name Ascendant")) {
 			return (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(((User) a).getName(), ((User) b).getName());
@@ -412,7 +412,7 @@ public class LoginMode extends StackPane {
 	 * 
 	 * @param owner
 	 */
-	public void createNewUser(Node owner, boolean... exactPositioning) {
+	public void createNewUser(final Node owner, final boolean... exactPositioning) {
 
 		// Open rename window
 		Main.renameWindow.show("", owner, "Creating new User", FileCategory.DIRECTORY, exactPositioning);

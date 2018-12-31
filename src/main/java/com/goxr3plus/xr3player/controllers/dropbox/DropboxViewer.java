@@ -40,6 +40,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.services.dropbox.AccountsService;
 import main.java.com.goxr3plus.xr3player.services.dropbox.DownloadService;
@@ -49,7 +50,6 @@ import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -202,13 +202,13 @@ public class DropboxViewer extends StackPane {
 
 		// ------------------------------------FXMLLOADER
 		// ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxViewer.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
 	}
@@ -294,7 +294,7 @@ public class DropboxViewer extends StackPane {
 						JavaFXTool.getFontIcon("fa-dropbox", FONT_ICON_COLOR, 64));
 
 				// Save on the database
-				PropertiesDb propertiesDb = Main.userInfoMode.getUser().getUserInformationDb();
+				final PropertiesDb propertiesDb = Main.userInfoMode.getUser().getUserInformationDb();
 				propertiesDb.updateProperty("DropBox-Access-Tokens",
 						(propertiesDb.getProperty("DropBox-Access-Tokens") == null ? ""
 								: propertiesDb.getProperty("DropBox-Access-Tokens"))
@@ -328,7 +328,7 @@ public class DropboxViewer extends StackPane {
 
 		// openFolder
 		openFolder.setOnAction(a -> {
-			DropboxFile selectedFile = dropboxFilesTableViewer.getTableView().getSelectionModel().getSelectedItem();
+			final DropboxFile selectedFile = dropboxFilesTableViewer.getTableView().getSelectionModel().getSelectedItem();
 			if (selectedFile != null)
 				recreateTableView(selectedFile.getMetadata().getPathLower());
 		});
@@ -373,7 +373,7 @@ public class DropboxViewer extends StackPane {
 		breadCrumbBar.setOnCrumbAction(event -> {
 
 			// Recreate Tree
-			String value = event.getSelectedCrumb().getValue();
+			final String value = event.getSelectedCrumb().getValue();
 			if ("DROPBOX ROOT".equals(value))
 				recreateTableView("");
 			else
@@ -441,7 +441,7 @@ public class DropboxViewer extends StackPane {
 			Main.renameWindow.showingProperty().addListener(new InvalidationListener() {
 
 				@Override
-				public void invalidated(Observable observable) {
+				public void invalidated(final Observable observable) {
 
 					// Remove the Listener
 					Main.renameWindow.showingProperty().removeListener(this);
@@ -559,7 +559,7 @@ public class DropboxViewer extends StackPane {
 	 * 
 	 * @param accessToken
 	 */
-	private void connect(String accessToken) {
+	private void connect(final String accessToken) {
 		this.accessToken = accessToken;
 
 		// Clear CachedService Search
@@ -576,8 +576,8 @@ public class DropboxViewer extends StackPane {
 	 * 
 	 * @param permanent True = permanently , false = not permanently
 	 */
-	public void deleteSelectedFiles(boolean permanent) {
-		int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
+	public void deleteSelectedFiles(final boolean permanent) {
+		final int selectedItems = dropboxFilesTableViewer.getSelectionModel().getSelectedIndices().size();
 
 		if (!permanent) {
 			if (AlertTool.doQuestion("Delete",
@@ -600,7 +600,7 @@ public class DropboxViewer extends StackPane {
 	 * 
 	 * @param permanent True = permanently , false = not permanently
 	 */
-	public void deleteFile(DropboxFile dropboxFile, boolean permanent) {
+	public void deleteFile(final DropboxFile dropboxFile, final boolean permanent) {
 
 		if (!permanent) {
 			if (AlertTool.doQuestion("Delete",
@@ -617,20 +617,20 @@ public class DropboxViewer extends StackPane {
 	/**
 	 * Prepare for downloading the selected file
 	 */
-	public DropboxDownloadedFile downloadFile(DropboxFile dropboxFile) {
+	public DropboxDownloadedFile downloadFile(final DropboxFile dropboxFile) {
 
 		// Simple File
 		if (!dropboxFile.isDirectory()) {
 
 			// Show save dialog
-			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle(), FileType.FILE);
+			final File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle(), FileType.FILE);
 			return downloadFilePart2(dropboxFile, file);
 
 			// Directory
 		} else {
 
 			// Show save dialog
-			File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle() + ".zip", FileType.DIRECTORY);
+			final File file = Main.specialChooser.showSaveDialog(dropboxFile.getTitle() + ".zip", FileType.DIRECTORY);
 			return downloadFilePart2(dropboxFile, file);
 
 		}
@@ -640,13 +640,13 @@ public class DropboxViewer extends StackPane {
 	 * This method is called automatically by downloadFile method , dunno touch :)
 	 * ATTENTION!!! FIRE !! hahah joking :)
 	 */
-	private DropboxDownloadedFile downloadFilePart2(DropboxFile dropboxFile, File file) {
+	private DropboxDownloadedFile downloadFilePart2(final DropboxFile dropboxFile, final File file) {
 		if (file == null)
 			return null;
 
 		// Create a new DropboxDownloadedFile
-		DownloadService downloadService = new DownloadService(this, dropboxFile, file.getAbsolutePath());
-		DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(downloadService);
+		final DownloadService downloadService = new DownloadService(this, dropboxFile, file.getAbsolutePath());
+		final DropboxDownloadedFile dropboxDownloadedFile = new DropboxDownloadedFile(downloadService);
 
 		// Append it to the TableViewer
 		Main.dropboxDownloadsTableViewer.getObservableList().add(dropboxDownloadedFile);
@@ -662,12 +662,12 @@ public class DropboxViewer extends StackPane {
 	 * 
 	 * @param dropboxFile
 	 */
-	public void renameFile(DropboxFile dropboxFile, Node node) {
+	public void renameFile(final DropboxFile dropboxFile, final Node node) {
 
 		// Show Rename Window
 		Main.renameWindow.show(IOTool.getFileTitle(dropboxFile.getMetadata().getName()), node, "Media Renaming",
 				FileCategory.FILE);
-		String oldName = dropboxFile.getMetadata().getName();
+		final String oldName = dropboxFile.getMetadata().getName();
 
 		// Bind
 		dropboxFile.titleProperty().bind(Main.renameWindow.getInputField().textProperty().concat(
@@ -679,7 +679,7 @@ public class DropboxViewer extends StackPane {
 			 * [[SuppressWarningsSpartan]]
 			 */
 			@Override
-			public void invalidated(Observable observable) {
+			public void invalidated(final Observable observable) {
 
 				// Remove the Listener
 				Main.renameWindow.showingProperty().removeListener(this);
@@ -690,12 +690,12 @@ public class DropboxViewer extends StackPane {
 					// Remove Binding
 					dropboxFile.titleProperty().unbind();
 
-					String newName = Main.renameWindow.getInputField().getText() + (dropboxFile.isDirectory() ? ""
+					final String newName = Main.renameWindow.getInputField().getText() + (dropboxFile.isDirectory() ? ""
 							: "." + IOTool.getFileExtension(dropboxFile.getMetadata().getName()));
 
 					// !XPressed && // Old name != New name
 					if (Main.renameWindow.wasAccepted() && !oldName.equals(newName)) {
-						String parent = new File(dropboxFile.getMetadata().getPathLower()).getParent();
+						final String parent = new File(dropboxFile.getMetadata().getPathLower()).getParent();
 
 						// Try to do it
 						getDropBoxService().rename(dropboxFile,
@@ -759,7 +759,7 @@ public class DropboxViewer extends StackPane {
 	 * 
 	 * @param searchWord
 	 */
-	public void search(String searchWord) {
+	public void search(final String searchWord) {
 
 		// Navigate back to root if searchWord is empty
 		if (searchWord.isEmpty())
@@ -771,7 +771,7 @@ public class DropboxViewer extends StackPane {
 	/**
 	 * Recreates the TableView
 	 */
-	public void recreateTableView(String path) {
+	public void recreateTableView(final String path) {
 
 		// BreadCrumbBar
 		if (path.isEmpty()) {
@@ -784,12 +784,12 @@ public class DropboxViewer extends StackPane {
 		} else {
 
 			// Build the ArrayList
-			ArrayList<String> arrayList = new ArrayList<>();
+			final ArrayList<String> arrayList = new ArrayList<>();
 			arrayList.add("DROPBOX ROOT");
 			arrayList.addAll(Arrays.asList(path.replaceFirst(Pattern.quote("/"), "").split("/")));
 
 			// Build the Model
-			TreeItem<String> model = BreadCrumbBar.buildTreeModel((String[]) arrayList.toArray(new String[0]));
+			final TreeItem<String> model = BreadCrumbBar.buildTreeModel(arrayList.toArray(new String[0]));
 
 			// Add all the items to the model
 			breadCrumbBar.setSelectedCrumb(model);
@@ -812,8 +812,8 @@ public class DropboxViewer extends StackPane {
 		tryAgainIndicator.setVisible(true);
 
 		// Check for internet connection
-		Thread thread = new Thread(() -> {
-			boolean hasInternet = NetworkingTool.isReachableByPing("www.google.com");
+		final Thread thread = new Thread(() -> {
+			final boolean hasInternet = NetworkingTool.isReachableByPing("www.google.com");
 			Platform.runLater(() -> {
 				errorPane.setVisible(!hasInternet);
 				tryAgainIndicator.setVisible(false);

@@ -37,9 +37,9 @@ import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.services.systemtree.TreeViewService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -136,7 +136,7 @@ public class TreeViewManager extends StackPane {
 
 				// Any selected TreeItem ?
 				Optional.ofNullable(treeView.getSelectionModel().getSelectedItem())
-						.ifPresent(item -> ActionTool.openFileInExplorer(((FileTreeItem) item).getAbsoluteFilePath()));
+						.ifPresent(item -> IOAction.openFileInExplorer(((FileTreeItem) item).getAbsoluteFilePath()));
 
 			} else if (key.getCode() == KeyCode.I) { // EXPLORER
 

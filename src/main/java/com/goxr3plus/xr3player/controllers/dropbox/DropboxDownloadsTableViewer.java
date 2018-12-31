@@ -36,7 +36,6 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;

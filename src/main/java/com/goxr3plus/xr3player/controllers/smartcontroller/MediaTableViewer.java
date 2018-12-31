@@ -48,8 +48,8 @@ import main.java.com.goxr3plus.xr3player.controllers.custom.StarBadge;
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
-import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -832,7 +832,7 @@ public class MediaTableViewer extends StackPane {
 					smartController.prepareDelete(key.isShiftDown());
 				else if (key.isControlDown()) { // Short Cuts
 					if (code == KeyCode.F)
-						ActionTool.openFileInExplorer(getSelectionModel().getSelectedItem().getFilePath());
+						IOAction.openFileInExplorer(getSelectionModel().getSelectedItem().getFilePath());
 					else if (code == KeyCode.Q)
 						getSelectionModel().getSelectedItem().updateStars(smartController.getSearchFieldStackPane());
 					else if (code == KeyCode.R)
