@@ -24,8 +24,8 @@ import javafx.concurrent.Task;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
+import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
@@ -147,7 +147,7 @@ public class InputService extends Service<Void> {
 
 				// Keep Important Variables here
 				totalFiles = progress = 0;
-				String date = InfoTool.getCurrentDate(), time = InfoTool.getLocalTime();
+				String date = DateTimeTool.getCurrentDate(), time = DateTimeTool.getLocalTime();
 
 				// Update informationTextArea
 				Platform.runLater(

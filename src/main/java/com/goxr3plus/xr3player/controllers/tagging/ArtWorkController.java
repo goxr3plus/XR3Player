@@ -23,6 +23,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
+import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
@@ -168,7 +169,7 @@ public class ArtWorkController extends StackPane {
 					// String fileName = InfoTool.getFileName(fileAbsolutePath)
 
 					// Try to find the album image for the given Audio File
-					image = InfoTool.getAudioAlbumImage(fileAbsolutePath, -1, -1);
+					image = AudioImageTool.getAudioAlbumImage(fileAbsolutePath, -1, -1);
 
 					// Run on JavaFX Thread
 					Platform.runLater(() -> {

@@ -45,6 +45,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
@@ -300,10 +301,10 @@ public class Library extends StackPane {
 		setStars(stars);
 
 		// Date Created
-		this.dateCreated = dateCreated != null ? dateCreated : InfoTool.getCurrentDate();
+		this.dateCreated = dateCreated != null ? dateCreated : DateTimeTool.getCurrentDate();
 
 		// Hour Created
-		this.timeCreated = timeCreated != null ? timeCreated : InfoTool.getLocalTime();
+		this.timeCreated = timeCreated != null ? timeCreated : DateTimeTool.getLocalTime();
 
 		// Description
 		this.description = new SimpleStringProperty(description == null ? "" : description);

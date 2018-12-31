@@ -119,6 +119,26 @@ public final class DatabaseTool {
 		return new File(getAbsoluteDatabasePathWithSeparator() + "xr3Original.sig");
 	}
 
+	/**
+	 * Return random table name.
+	 *
+	 * @return Returns a RandomTableName for the database in format
+	 *         ("_"+randomNumber)
+	 */
+	public static String returnRandomTableName() {
+		return "_" + DatabaseTool.returnRandom(80000);
+	}
+
+	/**
+	 * Returns a Random Number from 0 to ...what i have choosen in method see the
+	 * doc
+	 *
+	 * @return A random integer
+	 */
+	public static int returnRandom(final int max) {
+		return InfoTool.random.nextInt(max);
+	}
+
 	// ----
 
 }

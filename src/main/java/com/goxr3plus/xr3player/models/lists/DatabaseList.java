@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
 
 /**
  * A special kind of list which is used to save the list to the database and
@@ -130,8 +130,8 @@ public class DatabaseList {
 				insert.setString(1, path);
 				insert.setDouble(2, 0.0);
 				insert.setInt(3, 0);
-				insert.setString(4, InfoTool.getCurrentDate());
-				insert.setString(5, InfoTool.getLocalTime());
+				insert.setString(4, DateTimeTool.getCurrentDate());
+				insert.setString(5, DateTimeTool.getLocalTime());
 				insert.executeUpdate();
 
 				// Append

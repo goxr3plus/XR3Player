@@ -40,8 +40,8 @@ import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
@@ -315,10 +315,10 @@ public abstract class Media {
 		this.durationEdited = new SimpleStringProperty("");
 
 		// Hour Created|Imported
-		this.hourImported = new SimpleStringProperty(hourImported != null ? hourImported : InfoTool.getLocalTime());
+		this.hourImported = new SimpleStringProperty(hourImported != null ? hourImported : DateTimeTool.getLocalTime());
 
 		// Date Created|Imported
-		this.dateImported = new SimpleStringProperty(dateImported != null ? dateImported : InfoTool.getCurrentDate());
+		this.dateImported = new SimpleStringProperty(dateImported != null ? dateImported : DateTimeTool.getCurrentDate());
 
 		// Date File Created + Date File Modified
 		dateFileCreated = new SimpleStringProperty();

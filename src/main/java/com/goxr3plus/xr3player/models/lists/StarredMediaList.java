@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
 
 /**
  * The Class PlayedSongs.
@@ -46,8 +46,8 @@ public class StarredMediaList extends DatabaseList {
 				insert.setString(1, path);
 				insert.setDouble(2, stars);
 				insert.setInt(3, 0);
-				insert.setString(4, InfoTool.getCurrentDate());
-				insert.setString(5, InfoTool.getLocalTime());
+				insert.setString(4, DateTimeTool.getCurrentDate());
+				insert.setString(5, DateTimeTool.getLocalTime());
 				insert.executeUpdate();
 
 				// Append

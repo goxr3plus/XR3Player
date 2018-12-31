@@ -87,6 +87,7 @@ import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayer;
 import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayerModel;
 import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerPlayService;
 import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerSeekService;
+import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
@@ -851,7 +852,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			clipboard.setContent(content);
 
 			// Check if it has Album Image
-			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+			final Image image = AudioImageTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 			// Notification
 			AlertTool.showNotification("Copied to Clipboard",
@@ -882,7 +883,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			clipboard.setContent(content);
 
 			// Check if it has Album Image
-			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+			final Image image = AudioImageTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 			// Notification
 			AlertTool.showNotification("Copied to Clipboard",
@@ -913,7 +914,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			clipboard.setContent(content);
 
 			// Check if it has Album Image
-			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+			final Image image = AudioImageTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 			// Notification
 			AlertTool.showNotification("Copied to Clipboard",
@@ -2207,7 +2208,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected()) {
 
 					// Check if it has Album Image
-					final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
+					final Image image = AudioImageTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
 
 					// Show Notification
 					if (!discIsDragging)

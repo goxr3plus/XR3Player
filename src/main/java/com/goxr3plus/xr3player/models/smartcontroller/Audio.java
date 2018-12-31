@@ -10,7 +10,7 @@ import javafx.scene.input.Dragboard;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -113,7 +113,7 @@ public class Audio extends Media {
 	@Override
 	public Image getAlbumImage() {
 		if ("mp3".equals(getFileType()) && new File(getFilePath()).exists() && albumImage == null)
-			albumImage = InfoTool.getAudioAlbumImage(getFilePath(), -1, -1);
+			albumImage = AudioImageTool.getAudioAlbumImage(getFilePath(), -1, -1);
 		return albumImage;
 	}
 
@@ -127,7 +127,7 @@ public class Audio extends Media {
 	@Override
 	public Image getAlbumImageFit(final int width, final int height) {
 		return !"mp3".equals(getFileType()) || !new File(getFilePath()).exists() ? null
-				: InfoTool.getAudioAlbumImage(getFilePath(), width, height);
+				: AudioImageTool.getAudioAlbumImage(getFilePath(), width, height);
 	}
 
 }

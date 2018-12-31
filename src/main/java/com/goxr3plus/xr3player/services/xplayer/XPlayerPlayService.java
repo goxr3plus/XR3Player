@@ -18,6 +18,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
@@ -201,7 +202,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 							.setText(TimeTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
 
 					// ----------------------- Load the Album Image
-					image = InfoTool.getAudioAlbumImage(audioFullPath, -1, -1);
+					image = AudioImageTool.getAudioAlbumImage(audioFullPath, -1, -1);
 
 					// ---------------------- Open the Audio
 					updateMessage("Opening ...");
