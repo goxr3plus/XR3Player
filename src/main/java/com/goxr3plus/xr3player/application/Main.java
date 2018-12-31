@@ -765,7 +765,7 @@ public class Main extends Application {
 						.filter(userr -> !((User) userr).getName().equals(selectedUser.getName())).forEach(userr -> {
 
 							// Create the MenuItem
-							final MenuItem menuItem = new MenuItem(InfoTool.getMinString(((User) userr).getName(), 50));
+							final MenuItem menuItem = new MenuItem(InfoTool.getMinString(((User) userr).getName(), 50,"..."));
 
 							// Set Image
 							final ImageView imageView = new ImageView(((User) userr).getImageView().getImage());

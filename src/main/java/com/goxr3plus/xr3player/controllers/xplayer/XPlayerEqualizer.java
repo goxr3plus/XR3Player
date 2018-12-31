@@ -55,11 +55,11 @@ public class XPlayerEqualizer extends BorderPane {
 	private final XPlayerController xPlayerController;
 
 	// -----panFilter
-	private CustomDJFilter panFilter = new CustomDJFilter(42, 42, Color.GOLD, 0.5, -1.0, 1.0, 100,
+	private final CustomDJFilter panFilter = new CustomDJFilter(42, 42, Color.GOLD, 0.5, -1.0, 1.0, 100,
 			Equalizer_Filter_Category.PAN, "Left - Right Balance");
 
 	// -----balanceFilter
-	private CustomDJFilter balanceFilter = new CustomDJFilter(42, 42, Color.GOLD, 0.5, -1.0, 1.0, 100,
+	private final CustomDJFilter balanceFilter = new CustomDJFilter(42, 42, Color.GOLD, 0.5, -1.0, 1.0, 100,
 			Equalizer_Filter_Category.BALANCE, "Left - Right Balance");
 
 	//
@@ -85,7 +85,7 @@ public class XPlayerEqualizer extends BorderPane {
 
 	/** The filter buttons. */
 	// where 0.0 is equivalent to 0.50 for FilterButton
-	private FilterButton[] filterButtons = new FilterButton[] { new FilterButton("Normal", PRESET_NORMAL),
+	private final FilterButton[] filterButtons = new FilterButton[] { new FilterButton("Normal", PRESET_NORMAL),
 			new FilterButton("Classical", PRESET_CLASSICAL), new FilterButton("Club", PRESET_CLUB),
 			new FilterButton("Dance", PRESET_DANCE), new FilterButton("FullBass", PRESET_FULLBASS),
 			new FilterButton("FullBassTreble", PRESET_FULLBASSTREBLE),
@@ -106,18 +106,18 @@ public class XPlayerEqualizer extends BorderPane {
 	 *
 	 * @param xPlayerController The user Interface Controller of the Player
 	 */
-	public XPlayerEqualizer(XPlayerController xPlayerController) {
+	public XPlayerEqualizer(final XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
 
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerEqualizer.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerEqualizer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		// -------------Load the FXML-------------------------------
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.WARNING, "", ex);
 		}
 
@@ -132,10 +132,10 @@ public class XPlayerEqualizer extends BorderPane {
 		// Add all the DJFilters
 		for (int i = 0; i < 32; i++) {
 			// ---VBOX------
-			VBox vBox = new VBox();
+			final VBox vBox = new VBox();
 
 			// -----CustomDJFilter
-			CustomDJFilter generalFilter = new CustomDJFilter(42, 42, xPlayerController.getDiscArcColor(), 0.5, -1.0,
+			final CustomDJFilter generalFilter = new CustomDJFilter(42, 42, xPlayerController.getDiscArcColor(), 0.5, -1.0,
 					1.0, i, Equalizer_Filter_Category.GENERAL, "");
 
 			// Add the Children
@@ -159,7 +159,7 @@ public class XPlayerEqualizer extends BorderPane {
 
 		// --------------------Pan Filter---------------------------------
 		// ---VBOX------
-		VBox vBox = new VBox();
+		final VBox vBox = new VBox();
 		vBox.setAlignment(Pos.CENTER);
 
 		// Add the Children
@@ -168,7 +168,7 @@ public class XPlayerEqualizer extends BorderPane {
 		// --------------------Balance Filter---------------------------------
 
 		// ---VBOX------
-		VBox vBox2 = new VBox();
+		final VBox vBox2 = new VBox();
 		vBox2.setAlignment(Pos.CENTER);
 
 		// Add the Children
@@ -184,7 +184,7 @@ public class XPlayerEqualizer extends BorderPane {
 			// balanceFilter.setValue(0.5, true);
 
 			// Reset every filter to it's default value
-			for (DJFilter filter : djFilters)
+			for (final DJFilter filter : djFilters)
 				filter.setValue(0.5, true);
 		});
 
@@ -231,9 +231,9 @@ public class XPlayerEqualizer extends BorderPane {
 	 */
 	class CustomDJFilter extends DJFilter implements DJFilterListener {
 
-		private int position;
-		private Label filterLabel;
-		private Equalizer_Filter_Category filterCategory;
+		private final int position;
+		private final Label filterLabel;
+		private final Equalizer_Filter_Category filterCategory;
 		private String description;
 
 		/**
@@ -248,8 +248,8 @@ public class XPlayerEqualizer extends BorderPane {
 		 * @param position
 		 * @param filterCategory
 		 */
-		public CustomDJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue,
-				double maximumValue, int position, Equalizer_Filter_Category filterCategory, String description) {
+		public CustomDJFilter(final int width, final int height, final Color arcColor, final double currentValue, final double minimumValue,
+				final double maximumValue, final int position, final Equalizer_Filter_Category filterCategory, final String description) {
 			super(width, height, arcColor, currentValue, minimumValue, maximumValue, DJFilterCategory.EQUALIZER_FILTER);
 
 			// Descriptions
@@ -277,13 +277,13 @@ public class XPlayerEqualizer extends BorderPane {
 		}
 
 		@Override
-		public void valueChanged(double value) {
+		public void valueChanged(final double value) {
 
 			// Add the filter
-			double filterValue = getValueTransformed();
+			final double filterValue = getValueTransformed();
 
 			// Set the Text
-			filterLabel.setText(InfoTool.getMinString2(Double.toString(filterValue), filterValue > 0 ? 4 : 5));
+			filterLabel.setText(InfoTool.getMinString(Double.toString(filterValue), filterValue > 0 ? 4 : 5,""));
 
 			// GENERAL
 			if (filterCategory == Equalizer_Filter_Category.GENERAL) {
@@ -335,7 +335,7 @@ public class XPlayerEqualizer extends BorderPane {
 		/**
 		 * @param description the description to set
 		 */
-		public void setDescription(String description) {
+		public void setDescription(final String description) {
 			this.description = description;
 		}
 
@@ -355,7 +355,7 @@ public class XPlayerEqualizer extends BorderPane {
 		 * @param text      the text
 		 * @param variables the variables
 		 */
-		public FilterButton(String text, double[] variables) {
+		public FilterButton(final String text, final double[] variables) {
 			this.variables = variables;
 
 			// Continue
@@ -378,7 +378,7 @@ public class XPlayerEqualizer extends BorderPane {
 				for (int i = 0; i < 10; i++) {
 
 					// Transform the value in order to be compatible with the DJFilter -1.0 .... 1.0
-					double fakeValue = xPlayerController.getxPlayerModel().getEqualizerArray()[i];
+					final double fakeValue = xPlayerController.getxPlayerModel().getEqualizerArray()[i];
 					System.out.println(fakeValue);
 					double transformedValue = 0.0;
 

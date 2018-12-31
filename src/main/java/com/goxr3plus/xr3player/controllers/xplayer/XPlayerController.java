@@ -89,6 +89,7 @@ import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerPlayService;
 import main.java.com.goxr3plus.xr3player.services.xplayer.XPlayerSeekService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
@@ -1136,7 +1137,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 			// speedControlButton
 			speedControlLabel.setText((speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-")
-					+ InfoTool.getMinString2(String.valueOf(speedFactor), 4));
+					+ InfoTool.getMinString(String.valueOf(speedFactor), 4,""));
 
 			// Do it!
 			if (xPlayer.getSpeedFactor() != speedFactor) {
@@ -1595,10 +1596,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			final int timeNow = (int) (percentage * this.getxPlayerModel().getDuration());
 
 			// == RemainingTimeLabel
-			remainingTimeLabel.setText(InfoTool.getTimeEdited(xPlayerModel.getDuration() - timeNow));
+			remainingTimeLabel.setText(TimeTool.getTimeEdited(xPlayerModel.getDuration() - timeNow));
 
 			// == ElapsedTimeLabel
-			elapsedTimeLabel.setText(InfoTool.getTimeEdited(timeNow));
+			elapsedTimeLabel.setText(TimeTool.getTimeEdited(timeNow));
 
 		});
 
@@ -1686,12 +1687,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					disc.calculateAngleByMouse(m, currentTime, totalTime);
 
 					// == RemainingTimeLabel
-					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime)); // + "." + ( 9 -
+					remainingTimeLabel.setText(TimeTool.getTimeEdited(totalTime - currentTime)); // + "." + ( 9 -
 																									// Integer.parseInt(millisecondsFormatted.replace(".",
 																									// "")) ))
 
 					// == ElapsedTimeLabel
-					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime)); // + millisecondsFormatted + "")
+					elapsedTimeLabel.setText(TimeTool.getTimeEdited(currentTime)); // + millisecondsFormatted + "")
 
 				}
 		});
@@ -1792,7 +1793,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 					// smTimeSliderLabel
 					smTimeSliderLabel
-							.setText(InfoTool.getTimeEdited(currentTime) + "  / " + InfoTool.getTimeEdited(totalTime));
+							.setText(TimeTool.getTimeEdited(currentTime) + "  / " + TimeTool.getTimeEdited(totalTime));
 
 					// smTimeSliderProgress
 					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
@@ -2113,7 +2114,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			} else
 				xPlayerModel.setCurrentTime((int) (microSecondsPosition / 1000000));
 
-			final String millisecondsFormatted = InfoTool.millisecondsToTime(microSecondsPosition / 1000);
+			final String millisecondsFormatted = TimeTool.millisecondsToTime(microSecondsPosition / 1000);
 			// System.out.println(milliFormat)
 
 			// Paint the Modes
@@ -2134,9 +2135,9 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 						smTimeSlider.setValue(currentTime);
 
 						// smTimeSliderLabel
-						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "."
+						smTimeSliderLabel.setText(TimeTool.getTimeEdited(currentTime) + "."
 								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))) + "  / "
-								+ InfoTool.getTimeEdited(totalTime));
+								+ TimeTool.getTimeEdited(totalTime));
 
 						// smTimeSliderProgress
 						smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
@@ -2155,11 +2156,11 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					Platform.runLater(() -> {
 
 						// == RemainingTimeLabel
-						remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime) + "."
+						remainingTimeLabel.setText(TimeTool.getTimeEdited(totalTime - currentTime) + "."
 								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
 
 						// == ElapsedTimeLabel
-						elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted);
+						elapsedTimeLabel.setText(TimeTool.getTimeEdited(currentTime) + millisecondsFormatted);
 
 						// == Repaint the Disc
 						disc.repaint();
@@ -2372,7 +2373,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 		// smTimeSliderLabel
 		smTimeSliderLabel
-				.setText(InfoTool.getTimeEdited(0) + "  / " + InfoTool.getTimeEdited(xPlayerModel.getDuration()));
+				.setText(TimeTool.getTimeEdited(0) + "  / " + TimeTool.getTimeEdited(xPlayerModel.getDuration()));
 	}
 
 	// @Override

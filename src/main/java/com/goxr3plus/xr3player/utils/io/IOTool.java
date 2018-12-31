@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 
 import org.apache.commons.io.FilenameUtils;
@@ -25,8 +26,8 @@ public class IOTool {
 	 * @param absoluteFilePath
 	 */
 	public static FileTypeAndAbsolutePath getRealPathFromFile(String absoluteFilePath) {
-		Path path = Paths.get(absoluteFilePath);
-		File file = path.toFile();
+		final Path path = Paths.get(absoluteFilePath);
+		final File file = path.toFile();
 
 		// Check if file exists
 		// if (!file.exists())
@@ -38,7 +39,7 @@ public class IOTool {
 				// If yes return the real file name
 				absoluteFilePath = Files.readSymbolicLink(path).toFile().getAbsolutePath();
 				return new FileTypeAndAbsolutePath(FileType.SYMBOLIC_LINK, absoluteFilePath);
-			} catch (IOException e1) {
+			} catch (final IOException e1) {
 				e1.printStackTrace();
 			}
 
@@ -63,13 +64,13 @@ public class IOTool {
 	 * @param path the path
 	 * @return FileTime
 	 */
-	public static FileTime getFileCreationTime(String path) {
+	public static FileTime getFileCreationTime(final String path) {
 		try {
 			return Files.readAttributes(Paths.get(path), BasicFileAttributes.class).creationTime();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			ActionTool.logger.log(Level.INFO, "", ex);
 		}
-	
+
 		return null;
 	}
 
@@ -79,15 +80,15 @@ public class IOTool {
 	 * @param path the path
 	 * @return A String in format <b> DD/MM/YYYY</b>
 	 */
-	public static String getFileDateCreated(String path) {
-	
-		FileTime creationTime = getFileCreationTime(path);
-	
+	public static String getFileDateCreated(final String path) {
+
+		final FileTime creationTime = getFileCreationTime(path);
+
 		// Be carefull for null pointer exception here
 		if (creationTime == null)
 			return "error occured";
-	
-		String[] dateCreatedF = creationTime.toString().split("-");
+
+		final String[] dateCreatedF = creationTime.toString().split("-");
 		return dateCreatedF[2].substring(0, 2) + "/" + dateCreatedF[1] + "/" + dateCreatedF[0];
 	}
 
@@ -110,7 +111,7 @@ public class IOTool {
 		// exists?
 		if (!file.exists())
 			return "file missing";
-	
+
 		BasicFileAttributes attr;
 		try {
 			attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
@@ -119,6 +120,56 @@ public class IOTool {
 			return "error";
 		}
 		return (attr.creationTime() + "").replaceAll("T|Z", " ");
+	}
+
+	/**
+	 * Returns the Date the File Created in Format `dd/mm/yyyy`
+	 * 
+	 * @param file The File to be given
+	 * @return the Date the File Created in Format `dd/mm/yyyy`
+	 */
+	public static String getFileCreationDate(final File file) {
+		final Path path = Paths.get(file.getAbsolutePath());
+		BasicFileAttributes attr;
+
+		/* File not exists */
+		if (!file.exists())
+			return "file missing";
+
+		try {
+			attr = Files.readAttributes(path, BasicFileAttributes.class);
+
+			return new SimpleDateFormat("dd/MM/yyyy").format(attr.creationTime().toMillis());
+
+		} catch (final IOException e) {
+			e.printStackTrace();
+			return "oops error! ";
+		}
+	}
+
+	/**
+	 * Returns the Time the File Created in Format `h:mm a`
+	 * 
+	 * @param file The File to be given
+	 * @return the Time the File Created in Format `HH:mm:ss`
+	 */
+	public static String getFileCreationTime(final File file) {
+		final Path path = Paths.get(file.getAbsolutePath());
+		BasicFileAttributes attr;
+
+		/* File not exists */
+		if (!file.exists())
+			return "file missing";
+
+		try {
+			attr = Files.readAttributes(path, BasicFileAttributes.class);
+
+			return new SimpleDateFormat("h:mm a").format(attr.creationTime().toMillis());
+
+		} catch (final IOException e) {
+			e.printStackTrace();
+			return "oops error! ";
+		}
 	}
 
 	/**
@@ -138,7 +189,7 @@ public class IOTool {
 		// exists?
 		if (!file.exists())
 			return "file missing";
-	
+
 		BasicFileAttributes attr;
 		try {
 			attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
@@ -158,7 +209,7 @@ public class IOTool {
 	 */
 	public static String getFileExtension(final String absolutePath) {
 		return FilenameUtils.getExtension(absolutePath).toLowerCase();
-	
+
 		// int i = path.lastIndexOf('.'); // characters contained before (.)
 		//
 		// if the name is not empty
@@ -177,7 +228,7 @@ public class IOTool {
 	 */
 	public static String getFileName(final String absolutePath) {
 		return FilenameUtils.getName(absolutePath);
-	
+
 	}
 
 	/**
@@ -189,6 +240,35 @@ public class IOTool {
 	 */
 	public static String getFileTitle(final String absolutePath) {
 		return FilenameUtils.getBaseName(absolutePath);
+	}
+
+	/**
+	 * Gets the file size edited in format "x MiB , y KiB"
+	 *
+	 * @param bytes File size in bytes
+	 * @return <b> a String representing the file size in MB and kB </b>
+	 */
+	public static String getFileSizeEdited(final long bytes) {
+
+		// Find it
+		final int kilobytes = (int) (bytes / 1024), megabytes = kilobytes / 1024;
+		if (kilobytes < 1024)
+			return kilobytes + " KiB";
+		else if (kilobytes > 1024)
+			return megabytes + "." + (kilobytes - (megabytes * 1024)) + " MiB";
+
+		return "error";
+
+	}
+
+	/**
+	 * Gets the file size edited in format "x MiB , y KiB"
+	 *
+	 * @param file the file
+	 * @return <b> a String representing the file size in MB and kB </b>
+	 */
+	public static String getFileSizeEdited(final File file) {
+		return !file.exists() ? "file missing" : getFileSizeEdited(file.length());
 	}
 
 }

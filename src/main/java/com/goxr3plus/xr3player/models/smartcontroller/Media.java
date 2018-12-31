@@ -43,6 +43,7 @@ import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emot
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -352,7 +353,7 @@ public abstract class Media {
 		// I need to add code for video files etc
 
 		// Check the fileSize
-		this.fileSize.set(InfoTool.getFileSizeEdited(new File(filePath.get())));
+		this.fileSize.set(IOTool.getFileSizeEdited(new File(filePath.get())));
 
 		// dateFileCreated
 		dateFileCreated.set(IOTool.getFileCreationDate(filePath.get()));
@@ -365,13 +366,13 @@ public abstract class Media {
 			return;
 
 		// Duration
-		duration.set(InfoTool.durationInSeconds(filePath.get(), AudioType.FILE));
+		duration.set(TimeTool.durationInSeconds(filePath.get(), AudioType.FILE));
 
 		// DurationEdited
 		final int localDuration = this.duration.get();
 		durationEdited.set(!fileExists.get() ? "file missing"
 				: localDuration == -1 ? "corrupted"
-						: localDuration == 0 ? "error" : InfoTool.getTimeEditedOnHours(localDuration));
+						: localDuration == 0 ? "error" : TimeTool.getTimeEditedOnHours(localDuration));
 
 		// Image
 		if (!fileExists.get()) // File is missing ?

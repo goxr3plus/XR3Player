@@ -29,6 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -78,12 +79,12 @@ public class User extends StackPane {
 	 */
 	// private int position;
 	private String userName;
-	private LoginMode loginMode;
+	private final LoginMode loginMode;
 
 	/** This InvalidationListener is used during the rename of a user */
 	private final InvalidationListener renameInvalidator = new InvalidationListener() {
 		@Override
-		public void invalidated(Observable observable) {
+		public void invalidated(final Observable observable) {
 
 			// Remove the Listener
 			Main.renameWindow.showingProperty().removeListener(this);
@@ -92,8 +93,8 @@ public class User extends StackPane {
 			if (!Main.renameWindow.isShowing()) {
 
 				// old && new -> name
-				String oldName = getName();
-				String newName = Main.renameWindow.getUserInput();
+				final String oldName = getName();
+				final String newName = Main.renameWindow.getUserInput();
 				boolean success = false;
 
 				// Remove Bindings
@@ -107,8 +108,8 @@ public class User extends StackPane {
 							.anyMatch(user -> user != User.this && ((User) user).getName().equalsIgnoreCase(newName))
 							|| newName.equalsIgnoreCase(oldName)) {
 
-						File originalFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + oldName);
-						File outputFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName);
+						final File originalFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + oldName);
+						final File outputFolder = new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName);
 
 						// Check if the Folder can be renamed
 						if (originalFolder.renameTo(outputFolder)) { // Success
@@ -163,7 +164,7 @@ public class User extends StackPane {
 	 * @param position
 	 * @param loginMode
 	 */
-	public User(String userName, int position, LoginMode loginMode) {
+	public User(final String userName, final int position, final LoginMode loginMode) {
 		this.setUserName(userName);
 		// this.updatePosition(position);
 		this.loginMode = loginMode;
@@ -173,14 +174,14 @@ public class User extends StackPane {
 				+ "settings" + File.separator + InfoTool.USER_INFORMATION_FILE_NAME, false);
 
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "User.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "User.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		// -------------Load the FXML-------------------------------
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.WARNING, "", ex);
 		}
 	}
@@ -215,7 +216,7 @@ public class User extends StackPane {
 		// this.setEffect(reflection);
 
 		// imageView
-		String absoluteImagePath = JavaFXTool.getAbsoluteImagePath("userImage",
+		final String absoluteImagePath = JavaFXTool.getAbsoluteImagePath("userImage",
 				InfoTool.getAbsoluteDatabasePathWithSeparator() + getName());
 		if (absoluteImagePath == null)
 			setDefaultImage();
@@ -297,14 +298,14 @@ public class User extends StackPane {
 	/**
 	 * @param nameField the nameField to set
 	 */
-	public void setNameField(Label nameField) {
+	public void setNameField(final Label nameField) {
 		this.nameField = nameField;
 	}
 
 	/**
 	 * @param userName the userName to set
 	 */
-	public void setUserName(String userName) {
+	public void setUserName(final String userName) {
 		this.userName = userName;
 		if (nameField != null)
 			nameField.setText(userName);
@@ -323,7 +324,7 @@ public class User extends StackPane {
 	 * 
 	 * @param node The node based on which the Rename Window will be position
 	 */
-	public void renameUser(Node node) {
+	public void renameUser(final Node node) {
 
 		// Open the Window
 		Main.renameWindow.show(getName(), node, "User Renaming", FileCategory.DIRECTORY);
@@ -337,7 +338,7 @@ public class User extends StackPane {
 	/**
 	 * Used to delete a User
 	 */
-	public void deleteUser(Node owner) {
+	public void deleteUser(final Node owner) {
 		// Ask
 		if (ActionTool.doQuestion("Delete User", "Confirm that you want to 'delete' this user ,\n Name: [ "
 				+ ((User) Main.loginMode.viewer.getSelectedItem()).getName() + " ]", owner, Main.window)) {
@@ -368,14 +369,14 @@ public class User extends StackPane {
 	 * @param key An event which indicates that a keystroke occurred in a
 	 *            javafx.scene.Node.
 	 */
-	public void onKeyReleased(KeyEvent key) {
+	public void onKeyReleased(final KeyEvent key) {
 		if (!loginMode.viewer.isCenterItem(this))
 			return;
 
 		// Check if Control is down
 		if (key.isControlDown()) {
 
-			KeyCode code = key.getCode();
+			final KeyCode code = key.getCode();
 			if (code == KeyCode.R)
 				renameUser(this);
 			else if (code == KeyCode.DELETE || code == KeyCode.D)
@@ -422,13 +423,13 @@ public class User extends StackPane {
 	 */
 	public void exportImage() {
 
-		String absoluteImagePath = getAbsoluteImagePath();
+		final String absoluteImagePath = getAbsoluteImagePath();
 
 		// Check if image exists
 		if (absoluteImagePath == null)
 			return;
 
-		File file = Main.specialChooser.prepareToExportImage(Main.window, absoluteImagePath);
+		final File file = Main.specialChooser.prepareToExportImage(Main.window, absoluteImagePath);
 
 		// Check if user selected a folder for the image to be exported
 		if (file != null)
@@ -472,7 +473,7 @@ public class User extends StackPane {
 	/**
 	 * @param userInformationDb the userInformationDb to set
 	 */
-	public void setUserInformationDb(PropertiesDb userInformationDb) {
+	public void setUserInformationDb(final PropertiesDb userInformationDb) {
 		this.userInformationDb = userInformationDb;
 	}
 
@@ -480,14 +481,14 @@ public class User extends StackPane {
 	 * Returns the date this user created based on the folder creation date
 	 */
 	public String getDateCreated() {
-		return InfoTool.getFileCreationDate(new File(userInformationDb.getFileAbsolutePath()));
+		return IOTool.getFileCreationDate(new File(userInformationDb.getFileAbsolutePath()));
 	}
 
 	/**
 	 * Returns the Time this user created based on the folder creation date
 	 */
 	public String getTimeCreated() {
-		return InfoTool.getFileCreationTime(new File(userInformationDb.getFileAbsolutePath()));
+		return IOTool.getFileCreationTime(new File(userInformationDb.getFileAbsolutePath()));
 	}
 
 	/**

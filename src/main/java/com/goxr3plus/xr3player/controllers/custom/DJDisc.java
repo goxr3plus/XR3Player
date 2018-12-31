@@ -30,7 +30,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.geometry.ResizableCanvas;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
@@ -518,9 +518,9 @@ public class DJDisc extends StackPane {
 		if (current == 0 && total == 0)
 			time = "00:00";
 		else if (timeMode == TimeMode.NORMAL)
-			time = InfoTool.getTimeEdited(current);
+			time = TimeTool.getTimeEdited(current);
 		else
-			time = "-" + InfoTool.getTimeEdited(total - current);
+			time = "-" + TimeTool.getTimeEdited(total - current);
 	}
 
 	/**
@@ -538,7 +538,7 @@ public class DJDisc extends StackPane {
 			else
 				this.time = time + millisecondsFormatted;
 		} else
-			this.time = InfoTool.getTimeEdited(total);
+			this.time = TimeTool.getTimeEdited(total);
 
 		// Final
 		// this.time = time + "\n," + InfoTool.getTimeEdited(total)

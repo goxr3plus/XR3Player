@@ -12,6 +12,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 
 /**
@@ -40,7 +41,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 	/**
 	 * Constructor.
 	 */
-	public XPlayerSeekService(XPlayerController xPlayerController) {
+	public XPlayerSeekService(final XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
 		setOnSucceeded(s -> done());
 		setOnFailed(f -> done());
@@ -54,8 +55,8 @@ public class XPlayerSeekService extends Service<Boolean> {
 	 * @param bytesToSkip Bytes to skip
 	 * @param stopPlayer
 	 */
-	public void startSeekService(long bytesToSkip, boolean stopPlayer) {
-		String absoluteFilePath = xPlayerController.getxPlayerModel().songPathProperty().get();
+	public void startSeekService(final long bytesToSkip, final boolean stopPlayer) {
+		final String absoluteFilePath = xPlayerController.getxPlayerModel().songPathProperty().get();
 
 		// First security check
 		if (locked || isRunning() || absoluteFilePath == null) {
@@ -142,9 +143,9 @@ public class XPlayerSeekService extends Service<Boolean> {
 
 				// ----------------------- Seek the Media
 				updateMessage(!xPlayerController.speedIncreaseWorking ? "Going to : [ "
-						+ InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getCurrentAngleTime()) + " ]"
+						+ TimeTool.getTimeEdited(xPlayerController.getxPlayerModel().getCurrentAngleTime()) + " ]"
 						: "Speed Level : x" + InfoTool
-								.getMinString2(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 4));
+								.getMinString(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 4,""));
 
 				// Stop?
 				if (stopPlayer)
@@ -160,7 +161,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 
 				try {
 					xPlayerController.getxPlayer().seek(bytesToSkip);
-				} catch (StreamPlayerException ex) {
+				} catch (final StreamPlayerException ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					succeded = false;
 				}

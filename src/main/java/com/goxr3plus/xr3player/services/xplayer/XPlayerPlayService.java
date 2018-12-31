@@ -21,6 +21,7 @@ import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
@@ -49,7 +50,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * 
 	 * @param xPlayerController
 	 */
-	public XPlayerPlayService(XPlayerController xPlayerController) {
+	public XPlayerPlayService(final XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
 		this.converterService = new ConverterService(xPlayerController);
 	}
@@ -60,7 +61,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * @param fileAbsolutePath The path of the audio
 	 * @param secondsToSkip
 	 */
-	public void startPlayService(String fileAbsolutePath, int secondsToSkip) {
+	public void startPlayService(final String fileAbsolutePath, final int secondsToSkip) {
 
 		// First Security Check
 		if (locked || isRunning() || fileAbsolutePath == null)
@@ -173,7 +174,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 			@Override
 			protected Boolean call() throws Exception {
 
-				AudioType[] audioType = { null };
+				final AudioType[] audioType = { null };
 				String audioFullPath = null;
 
 				try {
@@ -189,7 +190,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 					audioFullPath = xPlayerController.getxPlayerModel().songPathProperty().get();
 					audioType[0] = checkAudioTypeAndUpdateXPlayerModel(audioFullPath);
 					xPlayerController.getxPlayerModel()
-							.setDuration(InfoTool.durationInSeconds(audioFullPath, audioType[0]));
+							.setDuration(TimeTool.durationInSeconds(audioFullPath, audioType[0]));
 
 					// extension
 					xPlayerController.getxPlayerModel().songExtensionProperty()
@@ -197,7 +198,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 					// == TotalTimeLabel
 					Platform.runLater(() -> xPlayerController.getTotalTimeLabel()
-							.setText(InfoTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
+							.setText(TimeTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
 
 					// ----------------------- Load the Album Image
 					image = InfoTool.getAudioAlbumImage(audioFullPath, -1, -1);
@@ -214,7 +215,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 					// So the user wants to start from a position better than 0
 					if (secondsToSkip > 0) {
 						xPlayerController.getxPlayer()
-								.seek((long) (((float) secondsToSkip) * (xPlayerController.getxPlayer().getTotalBytes()
+								.seek((long) ((secondsToSkip) * (xPlayerController.getxPlayer().getTotalBytes()
 										/ (float) xPlayerController.getxPlayerModel().getDuration())));
 
 						// Update XPlayer Model
@@ -227,10 +228,10 @@ public class XPlayerPlayService extends Service<Boolean> {
 					}
 
 					// ....well let's go
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					Platform.runLater(() -> {
-						String audioPath = xPlayerController.getxPlayerModel().songPathProperty().get();
+						final String audioPath = xPlayerController.getxPlayerModel().songPathProperty().get();
 
 						// Media not existing any more?
 						if (audioType[0] != null && audioPath != null && !new File(audioPath).exists())
@@ -249,7 +250,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 							ActionTool.showNotification("Can't play current Audio",
 									"Can't play \n["
 											+ InfoTool.getMinString(
-													xPlayerController.getxPlayerModel().songPathProperty().get(), 30)
+													xPlayerController.getxPlayerModel().songPathProperty().get(), 30,"...")
 											+ "]\nIt is corrupted or maybe unsupported",
 									Duration.millis(1500), NotificationType.ERROR);
 
@@ -276,13 +277,13 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 * @return returns
 	 * @see AudioType
 	 */
-	public AudioType checkAudioTypeAndUpdateXPlayerModel(String path) {
+	public AudioType checkAudioTypeAndUpdateXPlayerModel(final String path) {
 
 		// File?
 		try {
 			xPlayerController.getxPlayerModel().songObjectProperty().set(new File(path));
 			return AudioType.FILE;
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			xPlayerController.logger.log(Level.WARNING, "", ex);
 		}
 
@@ -290,7 +291,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		try {
 			xPlayerController.getxPlayerModel().songObjectProperty().set(new URL(path));
 			return AudioType.URL;
-		} catch (MalformedURLException ex) {
+		} catch (final MalformedURLException ex) {
 			xPlayerController.logger.log(Level.WARNING, "MalformedURLException", ex);
 		}
 
@@ -310,7 +311,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		xPlayerController.getMediaTagImageView().setImage(xPlayerController.getDisc().getImage());
 
 		// add to played songs...
-		String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
+		final String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
 
 		// Run this on new Thread for performance reasons
 		new Thread(() -> {
@@ -344,12 +345,12 @@ public class XPlayerPlayService extends Service<Boolean> {
 						Platform.runLater(() -> xPlayerController.getxPlayerPlayList().getSmartController()
 								.getInputService().start(Arrays.asList(new File(absolutePath))));
 
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					Main.logger.log(Level.WARNING, "", ex);
 				}
 
 				//
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				Main.logger.log(Level.WARNING, "", ex);
 			}
 

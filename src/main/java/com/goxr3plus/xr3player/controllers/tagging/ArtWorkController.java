@@ -54,7 +54,7 @@ public class ArtWorkController extends StackPane {
 	// --------------------------------------------------------
 
 	/** The logger. */
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	private final PictureUpdaterService pictureUpdaterService = new PictureUpdaterService();
 
@@ -64,13 +64,13 @@ public class ArtWorkController extends StackPane {
 	public ArtWorkController() {
 
 		// ------------------------------------FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ArtWorkController.fxml"));
+		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "ArtWorkController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
 		try {
 			loader.load();
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
 	}
@@ -94,7 +94,7 @@ public class ArtWorkController extends StackPane {
 						// Show a Notification to User
 						ActionTool.showNotification("Exporting Album Image",
 								"From File: \n" + InfoTool.getMinString(
-										IOTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100),
+										IOTool.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100, "..."),
 								Duration.seconds(2), NotificationType.SIMPLE);
 
 					});
@@ -108,11 +108,11 @@ public class ArtWorkController extends StackPane {
 	 * @param image
 	 * @param outputFile
 	 */
-	private static void saveToFile(Image image, File outputFile) {
-		BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+	private static void saveToFile(final Image image, final File outputFile) {
+		final BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
 		try {
 			ImageIO.write(bImage, "png", outputFile);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -122,7 +122,7 @@ public class ArtWorkController extends StackPane {
 	 * 
 	 * @param absolutePath
 	 */
-	public void showMediaFileImage(String absolutePath) {
+	public void showMediaFileImage(final String absolutePath) {
 		if (absolutePath != null)
 			pictureUpdaterService.startService(absolutePath);
 	}
@@ -149,7 +149,7 @@ public class ArtWorkController extends StackPane {
 		private String fileAbsolutePath;
 		private Image image;
 
-		public void startService(String fileAbsolutePath) {
+		public void startService(final String fileAbsolutePath) {
 			this.fileAbsolutePath = fileAbsolutePath;
 
 			// Restart the Service
